@@ -1,0 +1,886 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		06A1FB6431230E34B134069E /* libPods-Coin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 069160B7B0B5DDCD1B14B48A /* libPods-Coin.a */; };
+		2E394FED1FB0575A00BA0829 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E394FEB1FB0575A00BA0829 /* AppDelegate.m */; };
+		2E394FF41FB057B300BA0829 /* TLTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E394FEF1FB057B200BA0829 /* TLTabBarController.m */; };
+		2E394FF51FB057B300BA0829 /* TLNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E394FF01FB057B200BA0829 /* TLNavigationController.m */; };
+		2E394FF61FB057B300BA0829 /* UIColor+theme.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E394FF21FB057B200BA0829 /* UIColor+theme.m */; };
+		2E394FFC1FB059C100BA0829 /* TLBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E394FF91FB059C100BA0829 /* TLBaseModel.m */; };
+		2E394FFD1FB059C100BA0829 /* TLBaseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E394FFA1FB059C100BA0829 /* TLBaseVC.m */; };
+		2E3950001FB05ADB00BA0829 /* TLTransactionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E394FFF1FB05ADB00BA0829 /* TLTransactionVC.m */; };
+		2E3950031FB05AF200BA0829 /* TLOrderVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E3950021FB05AF200BA0829 /* TLOrderVC.m */; };
+		2EA584C11FA813C900C7106C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2EA584C01FA813C900C7106C /* Assets.xcassets */; };
+		2EA584C41FA813C900C7106C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2EA584C21FA813C900C7106C /* LaunchScreen.storyboard */; };
+		2EA584C71FA813C900C7106C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EA584C61FA813C900C7106C /* main.m */; };
+		2EE950C01FB05B2400429257 /* TLHangQingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE950BF1FB05B2400429257 /* TLHangQingVC.m */; };
+		2EE950C31FB05B4500429257 /* TLWalletVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE950C21FB05B4500429257 /* TLWalletVC.m */; };
+		2EE950C61FB05B5900429257 /* TLMineVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE950C51FB05B5900429257 /* TLMineVC.m */; };
+		2EE950C91FB05D9100429257 /* UIColor+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE950C71FB05D9100429257 /* UIColor+Extension.m */; };
+		2EE950CC1FB05E1300429257 /* UILable+convience.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE950CA1FB05E1300429257 /* UILable+convience.m */; };
+		2EE950CF1FB0646400429257 /* TLTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE950CD1FB0646300429257 /* TLTableView.m */; };
+		2EE950D21FB066EB00429257 /* CoinChangeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE950D11FB066EB00429257 /* CoinChangeView.m */; };
+		2EE950D91FB06AA900429257 /* TLBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE950D51FB06AA900429257 /* TLBannerView.m */; };
+		2EE950DA1FB06AA900429257 /* TLBannerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE950D61FB06AA900429257 /* TLBannerCell.m */; };
+		2EE950DD1FB06AFB00429257 /* NSTimer+tlNoCycle.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE950DC1FB06AFB00429257 /* NSTimer+tlNoCycle.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		069160B7B0B5DDCD1B14B48A /* libPods-Coin.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Coin.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2E394FEB1FB0575A00BA0829 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		2E394FEC1FB0575A00BA0829 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		2E394FEE1FB057B200BA0829 /* TLTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLTabBarController.h; sourceTree = "<group>"; };
+		2E394FEF1FB057B200BA0829 /* TLTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLTabBarController.m; sourceTree = "<group>"; };
+		2E394FF01FB057B200BA0829 /* TLNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLNavigationController.m; sourceTree = "<group>"; };
+		2E394FF11FB057B200BA0829 /* UIColor+theme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+theme.h"; sourceTree = "<group>"; };
+		2E394FF21FB057B200BA0829 /* UIColor+theme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+theme.m"; sourceTree = "<group>"; };
+		2E394FF31FB057B200BA0829 /* TLNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLNavigationController.h; sourceTree = "<group>"; };
+		2E394FF81FB059C100BA0829 /* TLBaseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLBaseModel.h; sourceTree = "<group>"; };
+		2E394FF91FB059C100BA0829 /* TLBaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLBaseModel.m; sourceTree = "<group>"; };
+		2E394FFA1FB059C100BA0829 /* TLBaseVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLBaseVC.m; sourceTree = "<group>"; };
+		2E394FFB1FB059C100BA0829 /* TLBaseVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLBaseVC.h; sourceTree = "<group>"; };
+		2E394FFE1FB05ADB00BA0829 /* TLTransactionVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLTransactionVC.h; sourceTree = "<group>"; };
+		2E394FFF1FB05ADB00BA0829 /* TLTransactionVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLTransactionVC.m; sourceTree = "<group>"; };
+		2E3950011FB05AF200BA0829 /* TLOrderVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLOrderVC.h; sourceTree = "<group>"; };
+		2E3950021FB05AF200BA0829 /* TLOrderVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLOrderVC.m; sourceTree = "<group>"; };
+		2EA584B41FA813C900C7106C /* Coin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Coin.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2EA584C01FA813C900C7106C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		2EA584C31FA813C900C7106C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		2EA584C51FA813C900C7106C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2EA584C61FA813C900C7106C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		2EE950BE1FB05B2400429257 /* TLHangQingVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLHangQingVC.h; sourceTree = "<group>"; };
+		2EE950BF1FB05B2400429257 /* TLHangQingVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLHangQingVC.m; sourceTree = "<group>"; };
+		2EE950C11FB05B4500429257 /* TLWalletVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLWalletVC.h; sourceTree = "<group>"; };
+		2EE950C21FB05B4500429257 /* TLWalletVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLWalletVC.m; sourceTree = "<group>"; };
+		2EE950C41FB05B5900429257 /* TLMineVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLMineVC.h; sourceTree = "<group>"; };
+		2EE950C51FB05B5900429257 /* TLMineVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLMineVC.m; sourceTree = "<group>"; };
+		2EE950C71FB05D9100429257 /* UIColor+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Extension.m"; sourceTree = "<group>"; };
+		2EE950C81FB05D9100429257 /* UIColor+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Extension.h"; sourceTree = "<group>"; };
+		2EE950CA1FB05E1300429257 /* UILable+convience.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILable+convience.m"; sourceTree = "<group>"; };
+		2EE950CB1FB05E1300429257 /* UILable+convience.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILable+convience.h"; sourceTree = "<group>"; };
+		2EE950CD1FB0646300429257 /* TLTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLTableView.m; sourceTree = "<group>"; };
+		2EE950CE1FB0646400429257 /* TLTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLTableView.h; sourceTree = "<group>"; };
+		2EE950D01FB066EB00429257 /* CoinChangeView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoinChangeView.h; sourceTree = "<group>"; };
+		2EE950D11FB066EB00429257 /* CoinChangeView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoinChangeView.m; sourceTree = "<group>"; };
+		2EE950D31FB0685300429257 /* TLUIHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLUIHeader.h; sourceTree = "<group>"; };
+		2EE950D51FB06AA900429257 /* TLBannerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLBannerView.m; sourceTree = "<group>"; };
+		2EE950D61FB06AA900429257 /* TLBannerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLBannerCell.m; sourceTree = "<group>"; };
+		2EE950D71FB06AA900429257 /* TLBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLBannerView.h; sourceTree = "<group>"; };
+		2EE950D81FB06AA900429257 /* TLBannerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLBannerCell.h; sourceTree = "<group>"; };
+		2EE950DB1FB06AFB00429257 /* NSTimer+tlNoCycle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTimer+tlNoCycle.h"; sourceTree = "<group>"; };
+		2EE950DC1FB06AFB00429257 /* NSTimer+tlNoCycle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTimer+tlNoCycle.m"; sourceTree = "<group>"; };
+		8863748C5281F9DC1DDF8EEA /* Pods-Coin.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Coin.release.xcconfig"; path = "Pods/Target Support Files/Pods-Coin/Pods-Coin.release.xcconfig"; sourceTree = "<group>"; };
+		AB34D27FC9725550E9092EC2 /* Pods-Coin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Coin.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Coin/Pods-Coin.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		2EA584B11FA813C900C7106C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				06A1FB6431230E34B134069E /* libPods-Coin.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2E394FA31FB0546E00BA0829 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				2E394FEC1FB0575A00BA0829 /* AppDelegate.h */,
+				2E394FEB1FB0575A00BA0829 /* AppDelegate.m */,
+				2E394FB01FB055DE00BA0829 /* 交易 */,
+				2E394FA81FB055DE00BA0829 /* 订单 */,
+				2E394FB41FB055DE00BA0829 /* 行情 */,
+				2E394FA41FB055DE00BA0829 /* 钱包 */,
+				2E394FAC1FB055DE00BA0829 /* 我的 */,
+				2E394FD11FB0568F00BA0829 /* Modules */,
+				2E394FEA1FB056A900BA0829 /* Other */,
+				2E394FF71FB0599D00BA0829 /* Expand */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		2E394FA41FB055DE00BA0829 /* 钱包 */ = {
+			isa = PBXGroup;
+			children = (
+				2E394FA51FB055DE00BA0829 /* Controller */,
+				2E394FA61FB055DE00BA0829 /* Model */,
+				2E394FA71FB055DE00BA0829 /* View */,
+			);
+			path = "钱包";
+			sourceTree = "<group>";
+		};
+		2E394FA51FB055DE00BA0829 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				2EE950C11FB05B4500429257 /* TLWalletVC.h */,
+				2EE950C21FB05B4500429257 /* TLWalletVC.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		2E394FA61FB055DE00BA0829 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		2E394FA71FB055DE00BA0829 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		2E394FA81FB055DE00BA0829 /* 订单 */ = {
+			isa = PBXGroup;
+			children = (
+				2E394FA91FB055DE00BA0829 /* Controller */,
+				2E394FAA1FB055DE00BA0829 /* Model */,
+				2E394FAB1FB055DE00BA0829 /* View */,
+			);
+			path = "订单";
+			sourceTree = "<group>";
+		};
+		2E394FA91FB055DE00BA0829 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				2E3950011FB05AF200BA0829 /* TLOrderVC.h */,
+				2E3950021FB05AF200BA0829 /* TLOrderVC.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		2E394FAA1FB055DE00BA0829 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		2E394FAB1FB055DE00BA0829 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		2E394FAC1FB055DE00BA0829 /* 我的 */ = {
+			isa = PBXGroup;
+			children = (
+				2E394FAD1FB055DE00BA0829 /* Controller */,
+				2E394FAE1FB055DE00BA0829 /* Model */,
+				2E394FAF1FB055DE00BA0829 /* View */,
+			);
+			path = "我的";
+			sourceTree = "<group>";
+		};
+		2E394FAD1FB055DE00BA0829 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				2EE950C41FB05B5900429257 /* TLMineVC.h */,
+				2EE950C51FB05B5900429257 /* TLMineVC.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		2E394FAE1FB055DE00BA0829 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		2E394FAF1FB055DE00BA0829 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		2E394FB01FB055DE00BA0829 /* 交易 */ = {
+			isa = PBXGroup;
+			children = (
+				2E394FB11FB055DE00BA0829 /* Controller */,
+				2E394FB21FB055DE00BA0829 /* Model */,
+				2E394FB31FB055DE00BA0829 /* View */,
+			);
+			path = "交易";
+			sourceTree = "<group>";
+		};
+		2E394FB11FB055DE00BA0829 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				2E394FFE1FB05ADB00BA0829 /* TLTransactionVC.h */,
+				2E394FFF1FB05ADB00BA0829 /* TLTransactionVC.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		2E394FB21FB055DE00BA0829 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		2E394FB31FB055DE00BA0829 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				2EE950D41FB06AA900429257 /* BannerBrowser */,
+				2EE950D01FB066EB00429257 /* CoinChangeView.h */,
+				2EE950D11FB066EB00429257 /* CoinChangeView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		2E394FB41FB055DE00BA0829 /* 行情 */ = {
+			isa = PBXGroup;
+			children = (
+				2E394FB51FB055DE00BA0829 /* Controller */,
+				2E394FB61FB055DE00BA0829 /* Model */,
+				2E394FB71FB055DE00BA0829 /* View */,
+			);
+			path = "行情";
+			sourceTree = "<group>";
+		};
+		2E394FB51FB055DE00BA0829 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				2EE950BE1FB05B2400429257 /* TLHangQingVC.h */,
+				2EE950BF1FB05B2400429257 /* TLHangQingVC.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		2E394FB61FB055DE00BA0829 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		2E394FB71FB055DE00BA0829 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		2E394FD11FB0568F00BA0829 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				2E394FD21FB0568F00BA0829 /* 钱包 */,
+				2E394FD61FB0568F00BA0829 /* 我的 */,
+				2E394FDA1FB0568F00BA0829 /* 交易 */,
+				2E394FDE1FB0568F00BA0829 /* 订单 */,
+				2E394FE21FB0568F00BA0829 /* 发布 */,
+				2E394FE61FB0568F00BA0829 /* 行情 */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		2E394FD21FB0568F00BA0829 /* 钱包 */ = {
+			isa = PBXGroup;
+			children = (
+				2E394FD31FB0568F00BA0829 /* Controller */,
+				2E394FD41FB0568F00BA0829 /* Model */,
+				2E394FD51FB0568F00BA0829 /* View */,
+			);
+			path = "钱包";
+			sourceTree = "<group>";
+		};
+		2E394FD31FB0568F00BA0829 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		2E394FD41FB0568F00BA0829 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		2E394FD51FB0568F00BA0829 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		2E394FD61FB0568F00BA0829 /* 我的 */ = {
+			isa = PBXGroup;
+			children = (
+				2E394FD71FB0568F00BA0829 /* Controller */,
+				2E394FD81FB0568F00BA0829 /* Model */,
+				2E394FD91FB0568F00BA0829 /* View */,
+			);
+			path = "我的";
+			sourceTree = "<group>";
+		};
+		2E394FD71FB0568F00BA0829 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		2E394FD81FB0568F00BA0829 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		2E394FD91FB0568F00BA0829 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		2E394FDA1FB0568F00BA0829 /* 交易 */ = {
+			isa = PBXGroup;
+			children = (
+				2E394FDB1FB0568F00BA0829 /* Controller */,
+				2E394FDC1FB0568F00BA0829 /* Model */,
+				2E394FDD1FB0568F00BA0829 /* View */,
+			);
+			path = "交易";
+			sourceTree = "<group>";
+		};
+		2E394FDB1FB0568F00BA0829 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		2E394FDC1FB0568F00BA0829 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		2E394FDD1FB0568F00BA0829 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		2E394FDE1FB0568F00BA0829 /* 订单 */ = {
+			isa = PBXGroup;
+			children = (
+				2E394FDF1FB0568F00BA0829 /* Controller */,
+				2E394FE01FB0568F00BA0829 /* Model */,
+				2E394FE11FB0568F00BA0829 /* View */,
+			);
+			path = "订单";
+			sourceTree = "<group>";
+		};
+		2E394FDF1FB0568F00BA0829 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		2E394FE01FB0568F00BA0829 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		2E394FE11FB0568F00BA0829 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		2E394FE21FB0568F00BA0829 /* 发布 */ = {
+			isa = PBXGroup;
+			children = (
+				2E394FE31FB0568F00BA0829 /* Controller */,
+				2E394FE41FB0568F00BA0829 /* Model */,
+				2E394FE51FB0568F00BA0829 /* View */,
+			);
+			path = "发布";
+			sourceTree = "<group>";
+		};
+		2E394FE31FB0568F00BA0829 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		2E394FE41FB0568F00BA0829 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		2E394FE51FB0568F00BA0829 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		2E394FE61FB0568F00BA0829 /* 行情 */ = {
+			isa = PBXGroup;
+			children = (
+				2E394FE71FB0568F00BA0829 /* Controller */,
+				2E394FE81FB0568F00BA0829 /* Model */,
+				2E394FE91FB0568F00BA0829 /* View */,
+			);
+			path = "行情";
+			sourceTree = "<group>";
+		};
+		2E394FE71FB0568F00BA0829 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		2E394FE81FB0568F00BA0829 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		2E394FE91FB0568F00BA0829 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		2E394FEA1FB056A900BA0829 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				2E394FF31FB057B200BA0829 /* TLNavigationController.h */,
+				2E394FF01FB057B200BA0829 /* TLNavigationController.m */,
+				2E394FEE1FB057B200BA0829 /* TLTabBarController.h */,
+				2E394FEF1FB057B200BA0829 /* TLTabBarController.m */,
+				2E394FF11FB057B200BA0829 /* UIColor+theme.h */,
+				2E394FF21FB057B200BA0829 /* UIColor+theme.m */,
+				2EE950D31FB0685300429257 /* TLUIHeader.h */,
+			);
+			path = Other;
+			sourceTree = "<group>";
+		};
+		2E394FF71FB0599D00BA0829 /* Expand */ = {
+			isa = PBXGroup;
+			children = (
+				2EE950DB1FB06AFB00429257 /* NSTimer+tlNoCycle.h */,
+				2EE950DC1FB06AFB00429257 /* NSTimer+tlNoCycle.m */,
+				2EE950CE1FB0646400429257 /* TLTableView.h */,
+				2EE950CD1FB0646300429257 /* TLTableView.m */,
+				2EE950CB1FB05E1300429257 /* UILable+convience.h */,
+				2EE950CA1FB05E1300429257 /* UILable+convience.m */,
+				2EE950C81FB05D9100429257 /* UIColor+Extension.h */,
+				2EE950C71FB05D9100429257 /* UIColor+Extension.m */,
+				2E394FF81FB059C100BA0829 /* TLBaseModel.h */,
+				2E394FF91FB059C100BA0829 /* TLBaseModel.m */,
+				2E394FFB1FB059C100BA0829 /* TLBaseVC.h */,
+				2E394FFA1FB059C100BA0829 /* TLBaseVC.m */,
+			);
+			path = Expand;
+			sourceTree = "<group>";
+		};
+		2EA584AB1FA813C900C7106C = {
+			isa = PBXGroup;
+			children = (
+				2EA584B61FA813C900C7106C /* Coin */,
+				2EA584B51FA813C900C7106C /* Products */,
+				EF4FEB83EB9F1C8BF55AE31B /* Pods */,
+				C678617F8B7C3B3F2F7DE44F /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		2EA584B51FA813C900C7106C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2EA584B41FA813C900C7106C /* Coin.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2EA584B61FA813C900C7106C /* Coin */ = {
+			isa = PBXGroup;
+			children = (
+				2E394FA31FB0546E00BA0829 /* Classes */,
+				2EA584C01FA813C900C7106C /* Assets.xcassets */,
+				2EA584C21FA813C900C7106C /* LaunchScreen.storyboard */,
+				2EA584C51FA813C900C7106C /* Info.plist */,
+				2EA584C61FA813C900C7106C /* main.m */,
+			);
+			path = Coin;
+			sourceTree = "<group>";
+		};
+		2EE950D41FB06AA900429257 /* BannerBrowser */ = {
+			isa = PBXGroup;
+			children = (
+				2EE950D51FB06AA900429257 /* TLBannerView.m */,
+				2EE950D61FB06AA900429257 /* TLBannerCell.m */,
+				2EE950D71FB06AA900429257 /* TLBannerView.h */,
+				2EE950D81FB06AA900429257 /* TLBannerCell.h */,
+			);
+			path = BannerBrowser;
+			sourceTree = "<group>";
+		};
+		C678617F8B7C3B3F2F7DE44F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				069160B7B0B5DDCD1B14B48A /* libPods-Coin.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		EF4FEB83EB9F1C8BF55AE31B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				AB34D27FC9725550E9092EC2 /* Pods-Coin.debug.xcconfig */,
+				8863748C5281F9DC1DDF8EEA /* Pods-Coin.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		2EA584B31FA813C900C7106C /* Coin */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2EA584CA1FA813C900C7106C /* Build configuration list for PBXNativeTarget "Coin" */;
+			buildPhases = (
+				DC1EF316622605A8AD2B2DED /* [CP] Check Pods Manifest.lock */,
+				2EA584B01FA813C900C7106C /* Sources */,
+				2EA584B11FA813C900C7106C /* Frameworks */,
+				2EA584B21FA813C900C7106C /* Resources */,
+				270771B0BEF923FE20698DFB /* [CP] Embed Pods Frameworks */,
+				B5188DADDA4FC85DCA5D496B /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Coin;
+			productName = Coin;
+			productReference = 2EA584B41FA813C900C7106C /* Coin.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		2EA584AC1FA813C900C7106C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0900;
+				ORGANIZATIONNAME = " tianlei";
+				TargetAttributes = {
+					2EA584B31FA813C900C7106C = {
+						CreatedOnToolsVersion = 9.0.1;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 2EA584AF1FA813C900C7106C /* Build configuration list for PBXProject "Coin" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 2EA584AB1FA813C900C7106C;
+			productRefGroup = 2EA584B51FA813C900C7106C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				2EA584B31FA813C900C7106C /* Coin */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		2EA584B21FA813C900C7106C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2EA584C41FA813C900C7106C /* LaunchScreen.storyboard in Resources */,
+				2EA584C11FA813C900C7106C /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		270771B0BEF923FE20698DFB /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Coin/Pods-Coin-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B5188DADDA4FC85DCA5D496B /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Coin/Pods-Coin-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DC1EF316622605A8AD2B2DED /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2EA584B01FA813C900C7106C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2E394FED1FB0575A00BA0829 /* AppDelegate.m in Sources */,
+				2E394FFD1FB059C100BA0829 /* TLBaseVC.m in Sources */,
+				2E394FF51FB057B300BA0829 /* TLNavigationController.m in Sources */,
+				2EE950CC1FB05E1300429257 /* UILable+convience.m in Sources */,
+				2EE950C61FB05B5900429257 /* TLMineVC.m in Sources */,
+				2EE950D21FB066EB00429257 /* CoinChangeView.m in Sources */,
+				2E3950001FB05ADB00BA0829 /* TLTransactionVC.m in Sources */,
+				2EE950DA1FB06AA900429257 /* TLBannerCell.m in Sources */,
+				2EE950C91FB05D9100429257 /* UIColor+Extension.m in Sources */,
+				2E394FFC1FB059C100BA0829 /* TLBaseModel.m in Sources */,
+				2EE950DD1FB06AFB00429257 /* NSTimer+tlNoCycle.m in Sources */,
+				2E394FF61FB057B300BA0829 /* UIColor+theme.m in Sources */,
+				2EA584C71FA813C900C7106C /* main.m in Sources */,
+				2EE950C31FB05B4500429257 /* TLWalletVC.m in Sources */,
+				2E394FF41FB057B300BA0829 /* TLTabBarController.m in Sources */,
+				2E3950031FB05AF200BA0829 /* TLOrderVC.m in Sources */,
+				2EE950CF1FB0646400429257 /* TLTableView.m in Sources */,
+				2EE950C01FB05B2400429257 /* TLHangQingVC.m in Sources */,
+				2EE950D91FB06AA900429257 /* TLBannerView.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		2EA584C21FA813C900C7106C /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2EA584C31FA813C900C7106C /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		2EA584C81FA813C900C7106C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		2EA584C91FA813C900C7106C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		2EA584CB1FA813C900C7106C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AB34D27FC9725550E9092EC2 /* Pods-Coin.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 7K7EFNFZWL;
+				INFOPLIST_FILE = Coin/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = tian.Coin;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		2EA584CC1FA813C900C7106C /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8863748C5281F9DC1DDF8EEA /* Pods-Coin.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 7K7EFNFZWL;
+				INFOPLIST_FILE = Coin/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = tian.Coin;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2EA584AF1FA813C900C7106C /* Build configuration list for PBXProject "Coin" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2EA584C81FA813C900C7106C /* Debug */,
+				2EA584C91FA813C900C7106C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2EA584CA1FA813C900C7106C /* Build configuration list for PBXNativeTarget "Coin" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2EA584CB1FA813C900C7106C /* Debug */,
+				2EA584CC1FA813C900C7106C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 2EA584AC1FA813C900C7106C /* Project object */;
+}
