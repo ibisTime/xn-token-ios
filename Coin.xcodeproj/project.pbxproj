@@ -19,6 +19,7 @@
 		2EA584C11FA813C900C7106C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2EA584C01FA813C900C7106C /* Assets.xcassets */; };
 		2EA584C41FA813C900C7106C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2EA584C21FA813C900C7106C /* LaunchScreen.storyboard */; };
 		2EA584C71FA813C900C7106C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EA584C61FA813C900C7106C /* main.m */; };
+		2ED1FD2B1FB18E1A00730F1A /* testContr.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ED1FD2A1FB18E1A00730F1A /* testContr.m */; };
 		2EE950C01FB05B2400429257 /* TLHangQingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE950BF1FB05B2400429257 /* TLHangQingVC.m */; };
 		2EE950C31FB05B4500429257 /* TLWalletVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE950C21FB05B4500429257 /* TLWalletVC.m */; };
 		2EE950C61FB05B5900429257 /* TLMineVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE950C51FB05B5900429257 /* TLMineVC.m */; };
@@ -54,6 +55,8 @@
 		2EA584C31FA813C900C7106C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2EA584C51FA813C900C7106C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2EA584C61FA813C900C7106C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		2ED1FD291FB18E1A00730F1A /* testContr.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = testContr.h; sourceTree = "<group>"; };
+		2ED1FD2A1FB18E1A00730F1A /* testContr.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = testContr.m; sourceTree = "<group>"; };
 		2EE950BE1FB05B2400429257 /* TLHangQingVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLHangQingVC.h; sourceTree = "<group>"; };
 		2EE950BF1FB05B2400429257 /* TLHangQingVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLHangQingVC.m; sourceTree = "<group>"; };
 		2EE950C11FB05B4500429257 /* TLWalletVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLWalletVC.h; sourceTree = "<group>"; };
@@ -302,6 +305,8 @@
 		2E394FD31FB0568F00BA0829 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				2ED1FD291FB18E1A00730F1A /* testContr.h */,
+				2ED1FD2A1FB18E1A00730F1A /* testContr.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -703,6 +708,7 @@
 				2EE950C31FB05B4500429257 /* TLWalletVC.m in Sources */,
 				2E394FF41FB057B300BA0829 /* TLTabBarController.m in Sources */,
 				2E3950031FB05AF200BA0829 /* TLOrderVC.m in Sources */,
+				2ED1FD2B1FB18E1A00730F1A /* testContr.m in Sources */,
 				2EE950CF1FB0646400429257 /* TLTableView.m in Sources */,
 				2EE950C01FB05B2400429257 /* TLHangQingVC.m in Sources */,
 				2EE950D91FB06AA900429257 /* TLBannerView.m in Sources */,
