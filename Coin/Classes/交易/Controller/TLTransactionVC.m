@@ -60,7 +60,7 @@
 
 - (void)setUpUI {
     
-    self.txTableView = [TLTableView tableViewWithframe:CGRectZero delegate:self dataSource:self];
+    self.txTableView = [TLTableView tableViewWithFrame:CGRectZero delegate:self dataSource:self];
     [self.view addSubview:self.txTableView];
     self.txTableView.backgroundColor = [UIColor orangeColor];
      

@@ -8,6 +8,8 @@
 
 #import "AppDelegate.h"
 #import "TLTabBarController.h"
+#import "AppConfig.h"
+#import "TLUser.h"
 
 @interface AppDelegate ()
 
@@ -18,15 +20,12 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
+    //服务器环境
+    [self configServiceAddress];
     
-    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    self.window.backgroundColor = [UIColor whiteColor];
-    [self.window makeKeyAndVisible];
-    //
-    TLTabBarController *tabBarCtrl = [[TLTabBarController alloc] init];
-    self.window.rootViewController = tabBarCtrl;
+    //配置根控制器
+    [self configRootViewController];
 
-    //
     return YES;
     
 }
@@ -58,5 +57,32 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+#pragma mark - Config
+- (void)configServiceAddress {
+    
+    //配置环境
+    [AppConfig config].runEnv = RunEnvDev;
+}
+
+- (void)configRootViewController {
+    
+    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    self.window.backgroundColor = [UIColor whiteColor];
+    [self.window makeKeyAndVisible];
+    //
+    TLTabBarController *tabBarCtrl = [[TLTabBarController alloc] init];
+    self.window.rootViewController = tabBarCtrl;
+    
+    //重新登录
+    if([TLUser user].isLogin) {
+        
+        //初始化用户信息
+        [[TLUser user] initUserData];
+        
+        [[TLUser user] reLogin];
+        
+    };
+    
+}
 
 @end

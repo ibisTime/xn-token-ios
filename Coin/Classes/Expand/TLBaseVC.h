@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CoinHeader.h"
 
 @interface TLBaseVC : UIViewController
 

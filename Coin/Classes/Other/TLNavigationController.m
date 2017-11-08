@@ -23,8 +23,8 @@
 //    [UINavigationBar appearance].backIndicatorTransitionMaskImage = [UIImage imageNamed:@"返回"];
     
     
-//    [self.navigationItem.backBarButtonItem setTitle:@""];
-    //
+    [self.navigationItem.backBarButtonItem setTitle:@""];
+    
     self.navigationBar.backIndicatorImage = [UIImage imageNamed:@"返回"];
     self.navigationBar.backIndicatorTransitionMaskImage = [UIImage imageNamed:@"返回"];
     

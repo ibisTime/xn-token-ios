@@ -7,10 +7,6 @@
 //
 
 #import "TLBaseVC.h"
-#import <CDCommon/UIView+Frame.h>
-#import "UIColor+Extension.h"
-#import "UIColor+theme.h"
-#import "UILable+convience.h"
 
 @interface TLBaseVC ()
 
@@ -38,8 +34,14 @@
     
     UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     self.navigationItem.backBarButtonItem = backItem;
+    
 }
 
+//隐藏底部横条
+- (BOOL)prefersHomeIndicatorAutoHidden {
+    
+    return YES;
+}
 
 - (void)removePlaceholderView {
 

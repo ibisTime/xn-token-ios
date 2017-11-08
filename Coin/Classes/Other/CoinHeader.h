@@ -11,6 +11,8 @@
 
 #import "TLUIHeader.h"
 #import "FoundationHeader.h"
+#import "CustomUIHeader.h"
+
 #import "AppColorMacro.h"
 
 #endif /* CoinHeader_h */

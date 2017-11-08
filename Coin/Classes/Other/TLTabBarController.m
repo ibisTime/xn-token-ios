@@ -7,10 +7,15 @@
 //
 
 #import "TLTabBarController.h"
+
 #import "TLNavigationController.h"
+#import "TLUserLoginVC.h"
+
 #import "UIColor+theme.h"
 
 @interface TLTabBarController ()<UITabBarControllerDelegate>
+
+@property (nonatomic, assign) NSInteger currentIndex;
 
 @end
 
@@ -106,4 +111,30 @@
     return [image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
 }
 
+#pragma mark 判断是否登录若没登录跳转到登录页面
+- (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(nonnull UIViewController *)viewController {
+    //赋值更改前的index
+    self.currentIndex = tabBarController.selectedIndex;
+    
+    return YES;
+}
+
+- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
+    
+    NSInteger idx = tabBarController.selectedIndex;
+    
+    //判断点击的Controller是不是需要登录，如果是，那就登录
+    if((idx == 1 || idx == 3 || idx == 4) && ![TLUser user].isLogin){
+        
+        TLUserLoginVC *loginVC = [TLUserLoginVC new];
+        
+        TLNavigationController *nav = [[TLNavigationController alloc] initWithRootViewController:loginVC];
+        
+        [self presentViewController:nav animated:YES completion:nil];
+        
+        self.selectedIndex = _currentIndex;
+        
+    }
+    
+}
 @end
