@@ -39,14 +39,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    //    [self.navigationController setNavigationBarHidden:NO animated:YES];
-    //    self.view.backgroundColor = [UIColor grayColor];
-    self.bgSV.backgroundColor = [UIColor groupTableViewBackgroundColor];
-    
-    
     [self setUpUI];
-    //    [self.navigationController.navigationBar setBackgroundColor:[UIColor themeColor]];
-    
     
     if ([TLUser user].mobile) {
         

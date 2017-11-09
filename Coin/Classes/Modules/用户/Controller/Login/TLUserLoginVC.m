@@ -33,6 +33,7 @@
 
 @property (nonatomic,strong) AccountTf *phoneTf;
 @property (nonatomic,strong) AccountTf *pwdTf;
+@property (nonatomic, strong) UIButton *checkBtn;
 
 @property (nonatomic, copy) NSString *verifyCode;
 
@@ -137,7 +138,9 @@
         
     }];
     //选择按钮
-    UIButton *checkBtn = [UIButton buttonWithImageName:@"打勾" selectedImageName:@"不打勾"];
+    UIButton *checkBtn = [UIButton buttonWithImageName:@"不打勾" selectedImageName:@"打勾"];
+    
+    checkBtn.selected = YES;
     
     [checkBtn addTarget:self action:@selector(clickSelect:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -147,6 +150,8 @@
         make.left.equalTo(loginBtn.mas_left).offset(5);
         make.top.equalTo(loginBtn.mas_bottom).offset(18);
     }];
+    
+    self.checkBtn = checkBtn;
     
     NSString *text = @"我已阅读并同意";
     
@@ -257,8 +262,6 @@
 
 - (void)goLogin {
     
-    [self.view endEditing:YES];
-    
     if (![self.phoneTf.text isPhoneNum]) {
         
         [TLAlert alertWithInfo:@"请输入正确的手机号"];
@@ -272,6 +275,14 @@
         return;
     }
     
+    if (!self.checkBtn.selected) {
+        
+        [TLAlert alertWithInfo:@"请同意《服务条款》"];
+        return ;
+    }
+    
+    [self.view endEditing:YES];
+
     TLNetworking *http = [TLNetworking new];
     http.showView = self.view;
     http.code = USER_LOGIN_CODE;

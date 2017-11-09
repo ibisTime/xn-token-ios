@@ -8,32 +8,69 @@
 
 #import "TLWalletVC.h"
 
+#import "CoinHeader.h"
+
+#import "WalletHeaderView.h"
+
 @interface TLWalletVC ()
+
+@property (nonatomic, strong) WalletHeaderView *headerView;
 
 @end
 
 @implementation TLWalletVC
 
+- (void)viewWillAppear:(BOOL)animated {
+    
+    [super viewWillAppear:animated];
+    
+    [self.navigationController setNavigationBarHidden:YES animated:animated];
+    
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    
+    [super viewDidAppear:animated];
+    
+    //修改状态栏颜色
+    NSString *version = [UIDevice currentDevice].systemVersion;
+    
+    if ([version compare:@"9.0"] != NSOrderedAscending) {
+        
+        [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+        
+    } else {
+        
+        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    }
+    
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"钱包";
-
     // Do any additional setup after loading the view.
+    
+    self.title = @"钱包";
+    
+    //tableView
+    [self initTableView];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+#pragma mark - Init
+
+- (WalletHeaderView *)headerView {
+    
+    if (!_headerView) {
+        
+        _headerView = [[WalletHeaderView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 150 + kStatusBarHeight)];
+
+    }
+    return _headerView;
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)initTableView {
+    
+    
 }
-*/
 
 @end

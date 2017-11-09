@@ -162,6 +162,8 @@
         
     }
     
+    [self.view endEditing:YES];
+
     TLNetworking *http = [TLNetworking new];
     http.showView = self.view;
     http.code = USER_FIND_PWD_CODE;

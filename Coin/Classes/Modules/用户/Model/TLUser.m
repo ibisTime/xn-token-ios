@@ -7,11 +7,12 @@
 //
 
 #import "TLUser.h"
-#import "TLUserExt.h"
+
 #import "UserDefaultsUtil.h"
 #import "CurrencyModel.h"
 #import "TLNetworking.h"
 #import "APICodeMacro.h"
+#import "TLUIHeader.h"
 
 //#import "ChatManager.h"
 //#import "IMAHost+HostAPIs.h"
@@ -119,7 +120,7 @@ NSString *const kUserInfoChange = @"kUserInfoChange";
 #pragma mark - 账户
 - (void)requestAccountNumber {
     
-    BaseWeakSelf;
+    CoinWeakSelf;
     
     //获取人民币和积分账户
     TLNetworking *http = [TLNetworking new];
@@ -158,11 +159,8 @@ NSString *const kUserInfoChange = @"kUserInfoChange";
 //    self.jfNum = nil;
     self.mobile = nil;
     self.nickname = nil;
-    self.userExt = nil;
     self.tradepwdFlag = nil;
     self.level = nil;
-    self.totalFansNum = nil;
-    self.totalFollowNum = nil;
     self.rmbAccountNumber = nil;
     self.jfAccountNumber = nil;
     self.unReadMsgCount = 0;
@@ -190,17 +188,6 @@ NSString *const kUserInfoChange = @"kUserInfoChange";
     //
     [[NSUserDefaults standardUserDefaults] synchronize];
     
-}
-
-
-- (TLUserExt *)userExt {
-
-    if (!_userExt) {
-        _userExt = [[TLUserExt alloc] init];
-        
-    }
-    return _userExt;
-
 }
 
 - (void)updateUserInfo {
@@ -236,18 +223,6 @@ NSString *const kUserInfoChange = @"kUserInfoChange";
     self.idNo = dict[@"idNo"];
     self.tradepwdFlag = [NSString stringWithFormat:@"%@", dict[@"tradepwdFlag"]];
     self.level = dict[@"level"];
-    self.photo = dict[@"photo"];
-    self.gender = dict[@"gender"];
-    self.email = dict[@"email"];
-    self.introduce = dict[@"introduce"];
-    self.birthday = dict[@"birthday"];
-    
-    self.totalFollowNum = dict[@"totalFollowNum"];
-    self.totalFansNum = dict[@"totalFansNum"];
-    
-    self.province = dict[@"province"];
-    self.city = dict[@"city"];
-    self.area = dict[@"area"];
 
     //腾讯云-设置昵称和头像
 //    [IMAPlatform sharedInstance].host.icon = [self.photo convertImageUrl];
@@ -265,15 +240,6 @@ NSString *const kUserInfoChange = @"kUserInfoChange";
     
     [UserDefaultsUtil setUserDefaultPassword:pwd];
     
-}
-
-- (NSString *)detailAddress {
-
-    if (!self.userExt.province) {
-        return @"未知";
-    }
-    return [NSString stringWithFormat:@"%@ %@ %@",self.userExt.province,self.userExt.city,self.userExt.area];
-
 }
 
 - (void)setUnReadMsgCount:(NSInteger)unReadMsgCount {

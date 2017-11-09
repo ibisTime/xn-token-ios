@@ -22,4 +22,6 @@
 #define SCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
 #define FONT(x)    [UIFont systemFontOfSize:x]
 
+#define CoinWeakSelf  __weak typeof(self) weakSelf = self;
+
 #endif /* TLUIHeader_h */

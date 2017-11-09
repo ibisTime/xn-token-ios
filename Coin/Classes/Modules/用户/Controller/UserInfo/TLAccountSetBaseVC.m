@@ -7,6 +7,8 @@
 //
 
 #import "TLAccountSetBaseVC.h"
+#import <CDCommon/UIScrollView+TLAdd.h>
+#import "AppColorMacro.h"
 
 @interface TLAccountSetBaseVC ()
 
@@ -18,12 +20,19 @@
     [super viewDidLoad];
     
     self.bgSV = [[UIScrollView alloc] initWithFrame:self.view.bounds];
+    
+    self.bgSV.backgroundColor = kBackgroundColor;
+    
     _bgSV.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
     self.bgSV.contentSize = CGSizeMake(kScreenWidth, kSuperViewHeight + 1);
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap)];
-    [self.bgSV addGestureRecognizer:tap];
-    [self.view addSubview:_bgSV];
     
+    [self.bgSV adjustsContentInsets];
+    
+    [self.view addSubview:_bgSV];
+
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap)];
+    
+    [self.bgSV addGestureRecognizer:tap];
     
 //    [self.navigationController.navigationBar setTitleTextAttributes:@{
 //                                     NSForegroundColorAttributeName : [UIColor whiteColor]

@@ -7,9 +7,14 @@
 //
 
 #import "TLChangeMobileVC.h"
+
 #import "TLPwdRelatedVC.h"
+
 #import "TLCaptchaView.h"
 #import "TLTextField.h"
+
+#import "TLUser.h"
+
 #import "NSString+Check.h"
 #import "APICodeMacro.h"
 
@@ -149,9 +154,10 @@
         
         [TLAlert alertWithSucces:@"修改成功"];
         [TLUser user].mobile = self.phoneTf.text;
-        if (self.changeMobileSuccess) {
-            self.changeMobileSuccess(self.phoneTf.text);
-        }
+        
+        //保存用户账号和密码
+        [[TLUser user] saveUserName:self.phoneTf.text pwd:[TLUser user].userPassward];
+        
         [self.navigationController popViewControllerAnimated:YES];
         
         

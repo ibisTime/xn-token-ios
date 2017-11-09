@@ -37,11 +37,36 @@
     
 }
 
-//隐藏底部横条
-- (BOOL)prefersHomeIndicatorAutoHidden {
+- (void)viewDidAppear:(BOOL)animated {
     
-    return YES;
+    [super viewDidAppear:animated];
+    
+    //修改状态栏颜色
+    NSString *version = [UIDevice currentDevice].systemVersion;
+    
+    if ([version compare:@"9.0"] != NSOrderedAscending) {
+        
+        [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
+        
+    } else {
+        
+        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+    }
 }
+
+// 如果tableview在视图最底层 默认会偏移电池栏的高度
+- (void)setViewEdgeInset {
+    
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+    self.extendedLayoutIncludesOpaqueBars = NO;
+    self.automaticallyAdjustsScrollViewInsets = NO;
+}
+
+////隐藏底部横条
+//- (BOOL)prefersHomeIndicatorAutoHidden {
+//
+//    return YES;
+//}
 
 - (void)removePlaceholderView {
 
