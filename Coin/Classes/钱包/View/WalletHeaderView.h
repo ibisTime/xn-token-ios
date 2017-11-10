@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void(^WalletHeaderBlock)();
+
 @interface WalletHeaderView : UIView
+
+@property (nonatomic, copy) WalletHeaderBlock headerBlock;
+//汇率
+@property (nonatomic, copy) NSString *rate;
 
 @end

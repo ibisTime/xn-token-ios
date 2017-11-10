@@ -7,6 +7,8 @@
 //
 
 #import "UIButton+Custom.h"
+#import "AppColorMacro.h"
+#import "UIColor+Extension.h"
 
 @implementation UIButton (Custom)
 
@@ -103,19 +105,6 @@
 - (void)setBackgroundColor:(UIColor *)color forState:(UIControlState)state{
     
     [self setBackgroundImage:[color convertToImage] forState:state];
-    
-}
-
-+ (UIButton *)zhBtnWithFrame:(CGRect) frame title:(NSString *)title {
-    
-    UIButton *btn = [[UIButton alloc] initWithFrame:frame];
-    
-    btn.titleLabel.font = [UIFont systemFontOfSize:15];
-    [btn setBackgroundColor:kAppCustomMainColor forState:UIControlStateNormal];
-    [btn setTitle:title forState:UIControlStateNormal];
-    btn.layer.cornerRadius = 5;
-    btn.clipsToBounds = YES;
-    return btn;
     
 }
 

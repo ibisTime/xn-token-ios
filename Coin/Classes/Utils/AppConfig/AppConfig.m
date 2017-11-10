@@ -29,8 +29,7 @@ void TLLog(NSString *format, ...) {
     dispatch_once(&onceToken, ^{
         
         config = [[AppConfig alloc] init];
-        //配置参数
-        [config configKey];
+        
     });
     
     return config;
@@ -40,8 +39,8 @@ void TLLog(NSString *format, ...) {
     
     _runEnv = runEnv;
     
-    self.companyCode = @"CD-WTW000016";
-    self.systemCode = @"CD-WTW000016";
+    self.companyCode = @"CD-COIN000017";
+    self.systemCode = @"CD-COIN000017";
     
     switch (_runEnv) {
             
@@ -49,15 +48,15 @@ void TLLog(NSString *format, ...) {
             
             self.qiniuDomain = @"http://ounm8iw2d.bkt.clouddn.com";
             self.addr = @"http://121.40.113.128:5301";
-            self.shareBaseUrl = @"http://cm.tour.hichengdai.com/?#/home/recommend?userReferee=";
+//            self.shareBaseUrl = @"http://cm.tour.hichengdai.com/?#/home/recommend?userReferee=";
 
         }break;
             
         case RunEnvDev: {
             
             self.qiniuDomain = @"http://ounm8iw2d.bkt.clouddn.com";
-            self.addr = @"http://121.43.101.148:3901";
-            self.shareBaseUrl = @"http://cm.tour.hichengdai.com/?#/home/recommend?userReferee=";
+            self.addr = @"http://47.52.77.214:4001";
+//            self.shareBaseUrl = @"http://cm.tour.hichengdai.com/?#/home/recommend?userReferee=";
 
         }break;
             
@@ -65,21 +64,12 @@ void TLLog(NSString *format, ...) {
             
             self.qiniuDomain = @"http://ounm8iw2d.bkt.clouddn.com";
             self.addr = @"http://118.178.124.16:3901";
-            self.shareBaseUrl = @"http://cm.tour.hichengdai.com/?#/home/recommend?userReferee=";
+//            self.shareBaseUrl = @"http://cm.tour.hichengdai.com/?#/home/recommend?userReferee=";
 
         }break;
             
     }
     
-}
-
-- (void)configKey {
-    
-    self.chatAppId = @"1400001533";
-    self.chatAccountType = @"792";
-//    self.pushKey = @"99ffbfdafbd8e791f3daa28a";
-//    self.aliMapKey = @"2c7fa174818670dd2eca0861d453a727";
-//    self.wxKey = @"wx9324d86fb16e8af0";
 }
 
 - (NSString *)getUrl {

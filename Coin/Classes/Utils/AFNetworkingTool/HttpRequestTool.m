@@ -9,7 +9,10 @@
 #import "HttpRequestTool.h"
 #import "HttpRequestService.h"
 #import "AFNetworking.h"
-#import "NSObject+Custom.h"
+
+#import "NSObject+Extension.h"
+#import "AppConfig.h"
+#import "AppColorMacro.h"
 
 #import <MBProgressHUD.h>
 

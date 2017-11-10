@@ -13,8 +13,18 @@
 @interface WalletHeaderView ()
 //背景
 @property (nonatomic, strong) UIImageView *bgIV;
-//总资产
-@property (nonatomic, strong) UILabel *amountLbl;
+//总资产(人民币)
+@property (nonatomic, strong) UILabel *cnyAmountLbl;
+//美元
+@property (nonatomic, strong) UILabel *usdAmountLbl;
+//港元
+@property (nonatomic, strong) UILabel *hkdAmountLbl;
+//汇率
+@property (nonatomic, strong) UILabel *rateAmountLbl;
+//左边国旗
+@property (nonatomic, strong) UIImageView *leftFlag;
+//右边国旗
+@property (nonatomic, strong) UIImageView *rightFlag;
 
 @end
 
@@ -27,6 +37,8 @@
         
         //
         [self initSubvies];
+        //汇率
+        [self initRateView];
         
     }
     return self;
@@ -46,7 +58,7 @@
     [bgIV mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.left.top.right.equalTo(@0);
-        make.height.equalTo(@(160 + kStatusBarHeight));
+        make.height.equalTo(@(150 + kStatusBarHeight));
         
     }];
     
@@ -76,20 +88,143 @@
         
         make.top.equalTo(textLbl.mas_bottom).offset(21);
         make.centerX.equalTo(self.mas_centerX);
+        make.width.greaterThanOrEqualTo(@115);
         
     }];
     
-    //总资产
-    self.amountLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kWhiteColor font:15.0];
+    [equivalentBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, 15, 0, 0)];
     
-    [self addSubview:self.amountLbl];
-    [self.amountLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+    //总资产
+    self.cnyAmountLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kWhiteColor font:15.0];
+    
+    [self addSubview:self.cnyAmountLbl];
+    [self.cnyAmountLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.top.equalTo(equivalentBtn.mas_bottom).offset(10);
         make.centerX.equalTo(self.mas_centerX);
         
     }];
     
+    //美元
+    self.usdAmountLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kWhiteColor font:15.0];
+    
+    self.usdAmountLbl.textAlignment = NSTextAlignmentCenter;
+
+    [self addSubview:self.usdAmountLbl];
+    [self.usdAmountLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.top.equalTo(self.cnyAmountLbl.mas_bottom).offset(12);
+        make.left.equalTo(@0);
+        make.width.equalTo(@(kScreenWidth/2.0));
+
+    }];
+    
+    //港元
+    self.hkdAmountLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kWhiteColor font:15.0];
+    
+    self.hkdAmountLbl.textAlignment = NSTextAlignmentCenter;
+    
+    [self addSubview:self.hkdAmountLbl];
+    [self.hkdAmountLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.top.equalTo(self.cnyAmountLbl.mas_bottom).offset(12);
+        make.left.equalTo(self.usdAmountLbl.mas_right);
+        make.width.equalTo(@(kScreenWidth/2.0));
+        
+    }];
+    
+}
+
+- (void)initRateView {
+    //白色背景
+    UIView *whiteView = [[UIView alloc] init];
+    
+    whiteView.backgroundColor = kWhiteColor;
+    
+    [self addSubview:whiteView];
+    [whiteView mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.left.right.equalTo(@0);
+        make.top.equalTo(self.bgIV.mas_bottom);
+        make.height.equalTo(@50);
+        
+    }];
+    
+    //点击手势
+    UITapGestureRecognizer *tapGR = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickRate:)];
+    
+    [whiteView addGestureRecognizer:tapGR];
+    
+    //左边国旗
+    self.leftFlag = [[UIImageView alloc] init];
+    
+    [whiteView addSubview:self.leftFlag];
+    [self.leftFlag mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.left.equalTo(@15);
+        make.centerY.equalTo(whiteView.mas_centerY);
+        
+    }];
+    
+    //汇率
+    self.rateAmountLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:15.0];
+    
+    [whiteView addSubview:self.rateAmountLbl];
+    [self.rateAmountLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.left.equalTo(self.leftFlag.mas_right).offset(10);
+        make.centerY.equalTo(whiteView.mas_centerY);
+        
+    }];
+    //右边国旗
+    self.rightFlag = [[UIImageView alloc] init];
+    
+    [whiteView addSubview:self.rightFlag];
+    [self.rightFlag mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.left.equalTo(self.rateAmountLbl.mas_right).offset(10);
+        make.centerY.equalTo(whiteView.mas_centerY);
+        
+    }];
+    
+    //右箭头
+    UIImageView *rightArrowIV = [[UIImageView alloc] initWithImage:kImage(@"更多-灰色")];
+    
+    [whiteView addSubview:rightArrowIV];
+    [rightArrowIV mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.right.equalTo(whiteView.mas_right).offset(-15);
+        make.centerY.equalTo(whiteView.mas_centerY);
+        
+    }];
+}
+
+#pragma mark - Setting
+- (void)setRate:(NSString *)rate {
+    
+    _rate = rate;
+    
+    self.leftFlag.image = kImage(@"美国国旗");
+    
+    self.rateAmountLbl.text = [NSString stringWithFormat:@"$1≈￥6.6079"];
+    
+    self.rightFlag.image = kImage(@"中国国旗");
+    
+    self.cnyAmountLbl.text = @"￥0.00";
+    
+    self.usdAmountLbl.text = @"0.00usd";
+    
+    self.hkdAmountLbl.text = @"0.00hkd";
+    
+}
+
+#pragma mark - Events
+- (void)clickRate:(UITapGestureRecognizer *)tapGR {
+    
+    if (_headerBlock) {
+        
+        _headerBlock();
+    }
 }
 
 @end

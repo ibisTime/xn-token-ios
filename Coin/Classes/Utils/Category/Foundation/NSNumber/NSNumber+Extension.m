@@ -37,31 +37,14 @@
         return nil;
         
     }
+    //保留8位小数,第九位舍去
+    NSDecimalNumberHandler *handler = [NSDecimalNumberHandler decimalNumberHandlerWithRoundingMode:NSRoundDown scale:8 raiseOnExactness:NO raiseOnOverflow:NO raiseOnUnderflow:NO raiseOnDivideByZero:YES];
     
-    long long m = [self longLongValue];
+    NSDecimalNumber *m = [NSDecimalNumber decimalNumberWithString:[self stringValue]];
+
+    NSDecimalNumber *n = [m decimalNumberByRoundingAccordingToBehavior:handler];
     
-    if (m%10 > 0) { //有厘
-        
-        double value = m/1000.0;
-        return [NSString stringWithFormat:@"%.2f",value];
-        
-    } else if (m%100 > 0) {//有分
-        
-        double value = m/1000.0;
-        return [NSString stringWithFormat:@"%.2f",value];
-        
-    } else if(m%1000 > 0) { //有角
-        
-        double value = m/1000.0;
-        return [NSString stringWithFormat:@"%.1f",value];
-        
-    } else {//元
-        
-        double value = m/1000.0;
-        return [NSString stringWithFormat:@"%.0f",value];
-    }
-    
-    
+    return [NSString stringWithFormat:@"%@",n];
 }
 
 //折扣

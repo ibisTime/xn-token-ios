@@ -72,7 +72,7 @@
 #define kNavigationBarHeight  (kDevice_Is_iPhoneX == YES ? 88: 64)
 #define kStatusBarHeight (kDevice_Is_iPhoneX == YES ? 44: 20)
 
-#define kTabBarHeight  49
+#define kTabBarHeight  (49 + kBottomInsetHeight)
 #define kBottomInsetHeight  (kDevice_Is_iPhoneX == YES ? 34: 0)
 #define kSuperViewHeight    kScreenHeight - kNavigationBarHeight
 

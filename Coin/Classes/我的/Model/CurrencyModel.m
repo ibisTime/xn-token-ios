@@ -8,18 +8,28 @@
 
 #import "CurrencyModel.h"
 
-NSString *const kJF  = @"JF";
 NSString *const kCNY = @"CNY";
-
+NSString *const kETH = @"ETH";
+NSString *const kBTC = @"BTC";
 
 @implementation CurrencyModel
 
 - (NSString *)getTypeName {
     
     NSDictionary *dict = @{
-                           kCNY : @"CNY",
-                           kJF : @"JF",
+                           kETH : @"以太币资产(ETH)",
                           
+                           };
+    
+    return dict[self.currency];
+    
+}
+
+- (NSString *)getImgName {
+    
+    NSDictionary *dict = @{
+                           kETH : @"以太币图标",
+                           kBTC : @"比特币图标",
                            };
     
     return dict[self.currency];

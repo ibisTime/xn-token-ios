@@ -26,8 +26,6 @@
                           title:(NSString *)title
                 backgroundColor:(UIColor *)color;
 
-+ (UIButton *)zhBtnWithFrame:(CGRect) frame title:(NSString *)title;
-
 - (void)setBackgroundColor:(UIColor *)color forState:(UIControlState)state;
 
 @end

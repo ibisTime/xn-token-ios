@@ -9,6 +9,7 @@
 
 #import "UIButton+EnLargeEdge.h"
 #import <objc/runtime.h>
+#import <CDCommon/UIView+Frame.h>
 
 @implementation UIButton (EnLargeEdge)
 

@@ -96,8 +96,6 @@
     advertisement.imgName = @"我的广告";
     advertisement.action = ^{
         
-        self.tabBarController.selectedIndex = 1;
-
         [TLAlert alertWithInfo:@"正在研发中, 敬请期待"];
 
     };
@@ -188,7 +186,7 @@
 
 - (void)initTableView {
     
-    self.tableView = [[MineTableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - 49) style:UITableViewStyleGrouped];
+    self.tableView = [[MineTableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - kTabBarHeight) style:UITableViewStyleGrouped];
     
     self.tableView.mineGroup = self.group;
     

@@ -11,10 +11,19 @@
 #import "CoinHeader.h"
 
 #import "WalletHeaderView.h"
+#import "WalletTableView.h"
 
-@interface TLWalletVC ()
+#import "CurrencyModel.h"
+
+#import "RechargeCoinVC.h"
+
+@interface TLWalletVC ()<RefreshDelegate>
 
 @property (nonatomic, strong) WalletHeaderView *headerView;
+
+@property (nonatomic, strong) WalletTableView *tableView;
+
+@property (nonatomic, strong) NSArray <CurrencyModel *>*currencys;
 
 @end
 
@@ -54,6 +63,11 @@
     
     //tableView
     [self initTableView];
+    
+    //列表查询我的币种
+    [self getMyCurrencyList];
+    
+    [self.tableView beginRefreshing];
 }
 
 #pragma mark - Init
@@ -62,15 +76,84 @@
     
     if (!_headerView) {
         
-        _headerView = [[WalletHeaderView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 150 + kStatusBarHeight)];
+        _headerView = [[WalletHeaderView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 150 + kStatusBarHeight + 50)];
 
+        _headerView.rate = @"1";
     }
     return _headerView;
 }
 
 - (void)initTableView {
     
+    self.tableView = [[WalletTableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - kTabBarHeight) style:UITableViewStyleGrouped];
     
+    self.tableView.tableHeaderView = self.headerView;
+    self.tableView.refreshDelegate = self;
+    
+    [self.view addSubview:self.tableView];
+}
+
+#pragma mark - Data
+- (void)getMyCurrencyList {
+    
+    CoinWeakSelf;
+    
+    TLPageDataHelper *helper = [[TLPageDataHelper alloc] init];
+    
+    helper.code = @"802503";
+    helper.parameters[@"userId"] = [TLUser user].userId;
+    helper.isList = YES;
+    helper.showView = self.view;
+    
+    helper.tableView = self.tableView;
+    
+    [helper modelClass:[CurrencyModel class]];
+    
+    [self.tableView addRefreshAction:^{
+        
+        [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
+            
+            weakSelf.currencys = objs;
+            
+            weakSelf.tableView.currencys = objs;
+            
+            [weakSelf.tableView reloadData_tl];
+            
+        } failure:^(NSError *error) {
+            
+            
+        }];
+    }];
+    
+}
+
+#pragma mark - RefreshDelegate
+- (void)refreshTableViewButtonClick:(TLTableView *)refreshTableview button:(UIButton *)sender selectRowAtIndex:(NSInteger)index {
+    
+    NSInteger tag = (sender.tag - 1200)%100;
+    
+    switch (tag) {
+        case 0:
+        {
+            RechargeCoinVC *coinVC = [RechargeCoinVC new];
+            
+            [self.navigationController pushViewController:coinVC animated:YES];
+            
+        }break;
+          
+        case 1:
+        {
+            
+        }break;
+            
+        case 2:
+        {
+            
+        }break;
+            
+        default:
+            break;
+    }
 }
 
 @end
