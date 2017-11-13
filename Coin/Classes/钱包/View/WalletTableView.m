@@ -51,9 +51,15 @@ static NSString *identifierCell = @"WalletCell";
     
     cell.tag = 1200 + 100*indexPath.section;
     
+    cell.rechargeBtn.tag = cell.tag + 0;
+    
     [cell.rechargeBtn addTarget:self action:@selector(clickRecharge:) forControlEvents:UIControlEventTouchUpInside];
     
+    cell.withdrawalsBtn.tag = cell.tag + 1;
+
     [cell.withdrawalsBtn addTarget:self action:@selector(clickWithdrawals:) forControlEvents:UIControlEventTouchUpInside];
+
+    cell.billBtn.tag = cell.tag + 2;
 
     [cell.billBtn addTarget:self action:@selector(clickBill:) forControlEvents:UIControlEventTouchUpInside];
 

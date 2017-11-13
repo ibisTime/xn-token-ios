@@ -49,7 +49,7 @@
             
             ckey = @"reg_protocol";
             
-            name = @"我淘网用户协议";
+            name = @"服务条款";
             
         } break;
             

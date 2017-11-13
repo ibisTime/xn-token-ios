@@ -8,6 +8,9 @@
 
 #import "TLBaseVC.h"
 
+#import "UIColor+theme.h"
+#import "AppColorMacro.h"
+
 @interface TLBaseVC ()
 
 @end
@@ -25,8 +28,7 @@
     //
     //
     [self.navigationController setNavigationBarHidden:NO animated:NO];
-    self.view.backgroundColor = [UIColor colorWithHexString:@"#f0f0f0"];
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = [UIColor colorWithHexString:@"#f8f8f8"];
     
 //    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStyleBordered target:nil action:nil];
 //    self.navigationItem.backBarButtonItem = backItem;
@@ -34,24 +36,8 @@
     
     UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     self.navigationItem.backBarButtonItem = backItem;
-    
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    
-    [super viewDidAppear:animated];
-    
-    //修改状态栏颜色
-    NSString *version = [UIDevice currentDevice].systemVersion;
-    
-    if ([version compare:@"9.0"] != NSOrderedAscending) {
-        
-        [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
-        
-    } else {
-        
-        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
-    }
+    //navigation底部分割线
+    self.navigationController.navigationBar.shadowImage = [kLineColor convertToImage];
 }
 
 // 如果tableview在视图最底层 默认会偏移电池栏的高度
@@ -132,9 +118,9 @@
 - (void)tl_placeholderOperation {
 
     if ([self isMemberOfClass:NSClassFromString(@"TLBaseVC")]) {
-        
+
         NSLog(@"子类请重写该方法");
-        
+
     }
 
 }

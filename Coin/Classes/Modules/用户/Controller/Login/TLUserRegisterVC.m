@@ -36,6 +36,8 @@
 @property (nonatomic,copy) NSString *province;
 @property (nonatomic,copy) NSString *city;
 @property (nonatomic,copy) NSString *area;
+//同意按钮
+@property (nonatomic, strong) UIButton *checkBtn;
 
 @end
 
@@ -125,6 +127,51 @@
         make.top.mas_equalTo(rePwdTf.mas_bottom).mas_equalTo(40);
         
     }];
+    
+    //选择按钮
+    UIButton *checkBtn = [UIButton buttonWithImageName:@"不打勾" selectedImageName:@"打勾"];
+    
+    checkBtn.selected = YES;
+    
+    [checkBtn addTarget:self action:@selector(clickSelect:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.view addSubview:checkBtn];
+    [checkBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.left.equalTo(confirmBtn.mas_left).offset(5);
+        make.top.equalTo(confirmBtn.mas_bottom).offset(18);
+    }];
+    
+    self.checkBtn = checkBtn;
+    
+    NSString *text = @"我已阅读并同意";
+    
+    //text
+    UILabel *textLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:12];
+    
+    textLbl.text = text;
+    
+    textLbl.userInteractionEnabled = YES;
+    
+    [self.view addSubview:textLbl];
+    [textLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.left.equalTo(checkBtn.mas_right).offset(5);
+        make.centerY.equalTo(checkBtn.mas_centerY);
+        
+    }];
+    
+    UIButton *protocolBtn = [UIButton buttonWithTitle:@"《服务条款》" titleColor:kAppCustomMainColor backgroundColor:kClearColor titleFont:12.0];
+    
+    [protocolBtn addTarget:self action:@selector(readProtocal) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.view addSubview:protocolBtn];
+    [protocolBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.left.equalTo(textLbl.mas_right);
+        make.centerY.equalTo(checkBtn.mas_centerY);
+        
+    }];
 }
 
 - (CLLocationManager *)sysLocationManager {
@@ -207,6 +254,12 @@
         
     }
     
+    if (!self.checkBtn.selected) {
+        
+        [TLAlert alertWithInfo:@"请同意《服务条款》"];
+        return ;
+    }
+    
     [self.view endEditing:YES];
 
     TLNetworking *http = [TLNetworking new];
@@ -264,4 +317,19 @@
     
 }
 
+- (void)clickSelect:(UIButton *)sender {
+    
+    sender.selected = !sender.selected;
+    
+}
+
+- (void)readProtocal {
+    
+    HTMLStrVC *htmlVC = [[HTMLStrVC alloc] init];
+    
+    htmlVC.type = HTMLTypeRegProtocol;
+    
+    [self.navigationController pushViewController:htmlVC animated:YES];
+    
+}
 @end

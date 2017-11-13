@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-typedef void(^WalletHeaderBlock)();
+typedef void(^WalletHeaderBlock)(void);
 
 @interface WalletHeaderView : UIView
 

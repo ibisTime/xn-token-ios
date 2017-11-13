@@ -15,4 +15,6 @@
 
 + (UIColor *)colorWithHexString:(NSString *)color;
 
++ (UIColor *)colorWithUIColor:(UIColor *)color alpha:(CGFloat)alpha;
+
 @end

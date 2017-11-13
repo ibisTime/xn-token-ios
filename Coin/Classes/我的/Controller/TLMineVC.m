@@ -40,22 +40,9 @@
     [self getUserInfo];
 }
 
-- (void)viewDidAppear:(BOOL)animated {
+- (UIStatusBarStyle)preferredStatusBarStyle {
     
-    [super viewDidAppear:animated];
-    
-    //修改状态栏颜色
-    NSString *version = [UIDevice currentDevice].systemVersion;
-    
-    if ([version compare:@"9.0"] != NSOrderedAscending) {
-        
-        [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
-        
-    } else {
-        
-        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-    }
-    
+    return UIStatusBarStyleLightContent;
 }
 
 - (void)viewDidLoad {

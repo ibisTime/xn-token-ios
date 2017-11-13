@@ -128,6 +128,12 @@
         
         TLUserLoginVC *loginVC = [TLUserLoginVC new];
         
+        loginVC.loginSuccess = ^{
+            
+            self.selectedIndex = idx;
+
+        };
+        
         TLNavigationController *nav = [[TLNavigationController alloc] initWithRootViewController:loginVC];
         
         [self presentViewController:nav animated:YES completion:nil];

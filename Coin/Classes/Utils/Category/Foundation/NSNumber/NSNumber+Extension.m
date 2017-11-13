@@ -29,7 +29,7 @@
     
 }
 
-- (NSString *)convertToSimpleRealMoney {
+- (NSString *)convertToSimpleRealCoin {
     
     if (!self) {
         
@@ -45,6 +45,42 @@
     NSDecimalNumber *n = [m decimalNumberByRoundingAccordingToBehavior:handler];
     
     return [NSString stringWithFormat:@"%@",n];
+}
+
+//能去掉小数点的尽量去掉小数点
+- (NSString *)convertToSimpleRealMoney {
+    
+    if (!self) {
+        
+        NSLog(@"金额不能为空");
+        return nil;
+        
+    }
+    
+    long long m = [self longLongValue];
+    
+    if (m%10 > 0) { //有厘
+        
+        double value = m/1000.0;
+        return [NSString stringWithFormat:@"%.2f",value];
+        
+    } else if (m%100 > 0) {//有分
+        
+        double value = m/1000.0;
+        return [NSString stringWithFormat:@"%.2f",value];
+        
+    } else if(m%1000 > 0) { //有角
+        
+        double value = m/1000.0;
+        return [NSString stringWithFormat:@"%.1f",value];
+        
+    } else {//元
+        
+        double value = m/1000.0;
+        return [NSString stringWithFormat:@"%.0f",value];
+    }
+    
+    
 }
 
 //折扣

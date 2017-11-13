@@ -14,7 +14,7 @@
 - (NSString *)convertToRealMoney;
 
 //能去掉小数点的尽量去掉小数点
-- (NSString *)convertToSimpleRealMoney;
+- (NSString *)convertToSimpleRealCoin;
 
 - (NSString *)convertToCountMoney;
 

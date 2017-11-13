@@ -11,7 +11,6 @@
 #import "BindMobileVC.h"
 #import "TLUserRegisterVC.h"
 #import "TLUserForgetPwdVC.h"
-#import "HTMLStrVC.h"
 
 #import "APICodeMacro.h"
 #import "AppMacro.h"
@@ -33,7 +32,6 @@
 
 @property (nonatomic,strong) AccountTf *phoneTf;
 @property (nonatomic,strong) AccountTf *pwdTf;
-@property (nonatomic, strong) UIButton *checkBtn;
 
 @property (nonatomic, copy) NSString *verifyCode;
 
@@ -137,50 +135,6 @@
         make.top.equalTo(bgView.mas_bottom).offset(28);
         
     }];
-    //选择按钮
-    UIButton *checkBtn = [UIButton buttonWithImageName:@"不打勾" selectedImageName:@"打勾"];
-    
-    checkBtn.selected = YES;
-    
-    [checkBtn addTarget:self action:@selector(clickSelect:) forControlEvents:UIControlEventTouchUpInside];
-    
-    [self.view addSubview:checkBtn];
-    [checkBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.left.equalTo(loginBtn.mas_left).offset(5);
-        make.top.equalTo(loginBtn.mas_bottom).offset(18);
-    }];
-    
-    self.checkBtn = checkBtn;
-    
-    NSString *text = @"我已阅读并同意";
-    
-    //text
-    UILabel *textLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:12];
-    
-    textLbl.text = text;
-    
-    textLbl.userInteractionEnabled = YES;
-    
-    [self.view addSubview:textLbl];
-    [textLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.left.equalTo(checkBtn.mas_right).offset(5);
-        make.centerY.equalTo(checkBtn.mas_centerY);
-        
-    }];
-    
-    UIButton *protocolBtn = [UIButton buttonWithTitle:@"《服务条款》" titleColor:kAppCustomMainColor backgroundColor:kClearColor titleFont:12.0];
-    
-    [protocolBtn addTarget:self action:@selector(readProtocal) forControlEvents:UIControlEventTouchUpInside];
-    
-    [self.view addSubview:protocolBtn];
-    [protocolBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.left.equalTo(textLbl.mas_right);
-        make.centerY.equalTo(checkBtn.mas_centerY);
-        
-    }];
     
     //找回密码
     UIButton *forgetPwdBtn = [UIButton buttonWithTitle:@"找回密码?" titleColor:kTextColor2 backgroundColor:kClearColor titleFont:14.0];
@@ -192,8 +146,8 @@
     [forgetPwdBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.right.equalTo(loginBtn.mas_right);
-        make.centerY.equalTo(checkBtn.mas_centerY);
-        
+        make.top.equalTo(loginBtn.mas_bottom).offset(18);
+
     }];
     
 }
@@ -212,12 +166,6 @@
     [self.view endEditing:YES];
     
     [self dismissViewControllerAnimated:YES completion:nil];
-}
-
-- (void)clickSelect:(UIButton *)sender {
-    
-    sender.selected = !sender.selected;
-    
 }
 
 //登录成功
@@ -242,16 +190,6 @@
     
 }
 
-- (void)readProtocal {
-    
-    HTMLStrVC *htmlVC = [[HTMLStrVC alloc] init];
-    
-    htmlVC.type = HTMLTypeRegProtocol;
-    
-    [self.navigationController pushViewController:htmlVC animated:YES];
-    
-}
-
 - (void)goReg {
     
     TLUserRegisterVC *registerVC = [[TLUserRegisterVC alloc] init];
@@ -273,12 +211,6 @@
         
         [TLAlert alertWithInfo:@"请输入6位以上密码"];
         return;
-    }
-    
-    if (!self.checkBtn.selected) {
-        
-        [TLAlert alertWithInfo:@"请同意《服务条款》"];
-        return ;
     }
     
     [self.view endEditing:YES];

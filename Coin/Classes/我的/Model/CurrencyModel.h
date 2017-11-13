@@ -22,6 +22,8 @@
 @property (nonatomic, strong) NSNumber *addAmount;
 //冻结金额
 @property (nonatomic,strong) NSNumber *frozenAmount;
+//充币地址
+@property (nonatomic, copy) NSString *coinAddress;
 
 @property (nonatomic,copy) NSString *createDatetime;
 //币种

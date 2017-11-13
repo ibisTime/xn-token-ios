@@ -16,6 +16,7 @@
 #import "CurrencyModel.h"
 
 #import "RechargeCoinVC.h"
+#import "BillVC.h"
 
 @interface TLWalletVC ()<RefreshDelegate>
 
@@ -37,22 +38,9 @@
     
 }
 
-- (void)viewDidAppear:(BOOL)animated {
+- (UIStatusBarStyle)preferredStatusBarStyle {
     
-    [super viewDidAppear:animated];
-    
-    //修改状态栏颜色
-    NSString *version = [UIDevice currentDevice].systemVersion;
-    
-    if ([version compare:@"9.0"] != NSOrderedAscending) {
-        
-        [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
-        
-    } else {
-        
-        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-    }
-    
+    return UIStatusBarStyleLightContent;
 }
 
 - (void)viewDidLoad {
@@ -77,7 +65,12 @@
     if (!_headerView) {
         
         _headerView = [[WalletHeaderView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 150 + kStatusBarHeight + 50)];
-
+        
+        _headerView.headerBlock = ^{
+            
+            [TLAlert alertWithInfo:@"正在研发中, 敬请期待"];
+        };
+        
         _headerView.rate = @"1";
     }
     return _headerView;
@@ -132,10 +125,14 @@
     
     NSInteger tag = (sender.tag - 1200)%100;
     
+    CurrencyModel *currencyModel = self.currencys[index];
+    
     switch (tag) {
         case 0:
         {
             RechargeCoinVC *coinVC = [RechargeCoinVC new];
+            
+            coinVC.coinAddress = currencyModel.coinAddress;
             
             [self.navigationController pushViewController:coinVC animated:YES];
             
@@ -148,6 +145,12 @@
             
         case 2:
         {
+            
+            BillVC *billVC = [BillVC new];
+            
+            billVC.accountNumber = currencyModel.accountNumber;
+            
+            [self.navigationController pushViewController:billVC animated:YES];
             
         }break;
             

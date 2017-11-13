@@ -30,6 +30,7 @@
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         
         [self initSubviews];
+    
     }
     
     return self;
@@ -129,8 +130,6 @@
         
         [btn setTitleEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 0)];
         
-        btn.tag = self.tag + idx;
-                
         [whiteView addSubview:btn];
         [btn mas_makeConstraints:^(MASConstraintMaker *make) {
             
@@ -183,9 +182,9 @@
     
     self.coinIV.image = kImage(_currency.getImgName);
     
-    self.amountLbl.text = [_currency.amount convertToSimpleRealMoney];
+    self.amountLbl.text = [_currency.amount convertToSimpleRealCoin];
     
-    self.freezingAmountLbl.text = [NSString stringWithFormat:@"冻结 %@", [_currency.frozenAmount convertToSimpleRealMoney]];
+    self.freezingAmountLbl.text = [NSString stringWithFormat:@"冻结 %@", [_currency.frozenAmount convertToSimpleRealCoin]];
     
 }
 
