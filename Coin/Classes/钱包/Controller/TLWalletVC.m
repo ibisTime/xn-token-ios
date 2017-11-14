@@ -98,7 +98,6 @@
     helper.code = @"802503";
     helper.parameters[@"userId"] = [TLUser user].userId;
     helper.isList = YES;
-    helper.showView = self.view;
     
     helper.tableView = self.tableView;
     

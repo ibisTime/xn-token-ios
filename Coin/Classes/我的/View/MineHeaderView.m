@@ -13,9 +13,6 @@
 
 //背景
 @property (nonatomic, strong) UIImageView *bgIV;
-//头像
-//@property (nonatomic, strong) UIImageView *userPhoto;
-@property (nonatomic, strong) UIButton *photoBtn;
 //昵称
 @property (nonatomic, strong) UILabel *nameLbl;
 //交易、好评跟信任
@@ -58,14 +55,12 @@
     
     self.bgIV = bgIV;
     
-    NSString *nickName = [TLUser user].nickname;
     
     CGFloat imgWidth = 68;
     
-    NSString *title = [nickName substringToIndex:1];
-//    NSString *title = @"";
-
-    self.photoBtn = [UIButton buttonWithTitle:title titleColor:kAppCustomMainColor backgroundColor:kWhiteColor titleFont:30 cornerRadius:imgWidth/2.0];
+    self.photoBtn = [UIButton buttonWithTitle:@"" titleColor:kAppCustomMainColor backgroundColor:kWhiteColor titleFont:30 cornerRadius:imgWidth/2.0];
+    
+    [self.photoBtn addTarget:self action:@selector(selectPhoto:) forControlEvents:UIControlEventTouchUpInside];
     
     [self addSubview:self.photoBtn];
     [self.photoBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -76,27 +71,8 @@
         
     }];
     
-    //    self.userPhoto = [[UIImageView alloc] initWithImage:USER_PLACEHOLDER_SMALL];
-    //
-    //    self.userPhoto.layer.cornerRadius = imgWidth/2.0;
-    //    self.userPhoto.layer.masksToBounds = YES;
-    //    self.userPhoto.contentMode = UIViewContentModeScaleAspectFill;
-    //
-    ////    self.userPhoto.userInteractionEnabled = YES;
-    //
-    //    [self addSubview:self.userPhoto];
-    //    [self.userPhoto mas_makeConstraints:^(MASConstraintMaker *make) {
-    //
-    //        make.top.equalTo(@(13 + kStatusBarHeight));
-    //        make.centerX.equalTo(self.mas_centerX);
-    //        make.width.height.equalTo(@(imgWidth));
-    //
-    //    }];
-    
-    //    UITapGestureRecognizer *tapGR = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(selectPhoto:)];
-    //
-    //    [self.userPhoto addGestureRecognizer:tapGR];
-    
+    NSString *nickName = [TLUser user].nickname;
+
     //昵称
     self.nameLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kWhiteColor font:15.0];
     
@@ -186,6 +162,15 @@
         
         [self.delegate didSelectedWithType:type];
         
+    }
+    
+}
+
+- (void)selectPhoto:(UITapGestureRecognizer *)tapGR {
+    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(didSelectedWithType:)]) {
+        
+        [self.delegate didSelectedWithType:MineHeaderSeletedTypePhoto];
     }
     
 }

@@ -12,6 +12,10 @@
 
 @interface TLUploadManager : NSObject
 
+@property (nonatomic, strong) NSData *imgData;
+
+@property (nonatomic, strong) UIImage *image;
+
 + (instancetype)manager;
 
 + (NSString *)imageNameByImage:(UIImage *)img;

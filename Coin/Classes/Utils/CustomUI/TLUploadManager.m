@@ -10,6 +10,7 @@
 //#import "QiniuSDK.h"
 #import "TLNetworking.h"
 #import "TLUser.h"
+#import "TLAlert.h"
 
 @interface TLUploadManager()
 
@@ -92,13 +93,37 @@
 {
 
     TLNetworking *getUploadToken = [TLNetworking new];
+    
     getUploadToken.showView = showView;
     getUploadToken.code = @"807900";
     getUploadToken.parameters[@"token"] = [TLUser user].token;
     [getUploadToken postWithSuccess:^(id responseObject) {
-        if (success) {
-            success(responseObject[@"data"][@"uploadToken"]);
-        }
+        
+        NSString *token = responseObject[@"data"][@"uploadToken"];
+        
+        QNConfiguration *config = [QNConfiguration build:^(QNConfigurationBuilder *builder) {
+            builder.zone = [QNZone zone2];
+        }];
+        
+        QNUploadManager *manager = [[QNUploadManager alloc] initWithConfiguration:config];
+        
+        [manager putData:self.imgData key:[TLUploadManager imageNameByImage:self.image] token:token complete:^(QNResponseInfo *info, NSString *key, NSDictionary *resp) {
+            
+            if (info.error) {
+                
+                [TLAlert alertWithError:@"修改头像失败"];
+                NSLog(@"info.error = %@", info.error);
+                
+                return ;
+            }
+            
+            if (success) {
+                
+                success(key);
+            }
+            
+        } option:nil];
+        
     } failure:^(NSError *error) {
         if (failure) {
             failure(error);

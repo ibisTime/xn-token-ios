@@ -63,9 +63,9 @@
 - (SGQRCodeScanningView *)scanningView {
     if (!_scanningView) {
         _scanningView = [[SGQRCodeScanningView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 0.9 * self.view.frame.size.height)];
-        //        _scanningView.scanningImageName = @"SGQRCode.bundle/QRCodeScanningLineGrid";
-        //        _scanningView.scanningAnimationStyle = ScanningAnimationStyleGrid;
-        //        _scanningView.cornerColor = [UIColor orangeColor];
+                _scanningView.scanningImageName = @"SGQRCode.bundle/QRCodeScanningLineGrid";
+                _scanningView.scanningAnimationStyle = ScanningAnimationStyleGrid;
+                _scanningView.cornerColor = [UIColor orangeColor];
     }
     return _scanningView;
 }
@@ -96,6 +96,7 @@
 
 #pragma mark - - - SGQRCodeAlbumManagerDelegate
 - (void)QRCodeAlbumManagerDidCancelWithImagePickerController:(SGQRCodeAlbumManager *)albumManager {
+    
     [self.view addSubview:self.scanningView];
 }
 - (void)QRCodeAlbumManager:(SGQRCodeAlbumManager *)albumManager didFinishPickingMediaWithResult:(NSString *)result {
@@ -133,6 +134,9 @@
         if (self.scanSuccess) {
             
             self.scanSuccess(obj.stringValue);
+            
+            [self.navigationController popViewControllerAnimated:YES];
+
         }
         
 //        ScanSuccessJumpVC *jumpVC = [[ScanSuccessJumpVC alloc] init];
@@ -143,10 +147,15 @@
     }
 }
 - (void)QRCodeScanManager:(SGQRCodeScanManager *)scanManager brightnessValue:(CGFloat)brightnessValue {
+    
     if (brightnessValue < - 1) {
+        
         [self.view addSubview:self.flashlightBtn];
+        
     } else {
+        
         if (self.isSelectedFlashlightBtn == NO) {
+            
             [self removeFlashlightBtn];
         }
     }

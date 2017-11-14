@@ -155,8 +155,7 @@ NSString *const kUserInfoChange = @"kUserInfoChange";
 
     self.userId = nil;
     self.token = nil;
-//    self.rmbNum = nil;
-//    self.jfNum = nil;
+    self.photo = nil;
     self.mobile = nil;
     self.nickname = nil;
     self.tradepwdFlag = nil;
@@ -223,7 +222,8 @@ NSString *const kUserInfoChange = @"kUserInfoChange";
     self.idNo = dict[@"idNo"];
     self.tradepwdFlag = [NSString stringWithFormat:@"%@", dict[@"tradepwdFlag"]];
     self.level = dict[@"level"];
-
+    self.photo = dict[@"photo"];
+    
     //腾讯云-设置昵称和头像
 //    [IMAPlatform sharedInstance].host.icon = [self.photo convertImageUrl];
 

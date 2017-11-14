@@ -9,6 +9,8 @@
 #import "TLMineVC.h"
 
 #import "CoinHeader.h"
+#import "APICodeMacro.h"
+#import <SDWebImage/UIButton+WebCache.h>
 
 #import "MineGroup.h"
 
@@ -16,6 +18,9 @@
 #import "MineHeaderView.h"
 
 #import "SettingVC.h"
+
+#import "TLImagePicker.h"
+#import "TLUploadManager.h"
 
 @interface TLMineVC ()<MineHeaderSeletedDelegate>
 
@@ -26,6 +31,8 @@
 @property (nonatomic, strong) MineGroup *group;
 //
 @property (nonatomic, strong) MineTableView *tableView;
+
+@property (nonatomic, strong) TLImagePicker *imagePicker;
 
 @end
 
@@ -66,8 +73,6 @@
     MineHeaderView *mineHeaderView = [[MineHeaderView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 160 + kStatusBarHeight + 55)];
     
     mineHeaderView.delegate = self;
-    
-//    [self.scrollView addSubview:mineHeaderView];
     
     self.headerView = mineHeaderView;
 }
@@ -187,6 +192,40 @@
     [self.view addSubview:self.tableView];
 }
 
+- (TLImagePicker *)imagePicker {
+    
+    if (!_imagePicker) {
+        
+        CoinWeakSelf;
+        
+        _imagePicker = [[TLImagePicker alloc] initWithVC:self];
+        
+        _imagePicker.allowsEditing = YES;
+        _imagePicker.pickFinish = ^(NSDictionary *info){
+            
+            UIImage *image = info[@"UIImagePickerControllerOriginalImage"];
+            NSData *imgData = UIImageJPEGRepresentation(image, 0.1);
+            
+            //进行上传
+            TLUploadManager *manager = [TLUploadManager manager];
+            
+            manager.imgData = imgData;
+            
+            manager.image = image;
+            
+            [manager getTokenShowView:weakSelf.view succes:^(NSString *key) {
+                
+                [weakSelf changeHeadIconWithKey:key imgData:imgData];
+                
+            } failure:^(NSError *error) {
+                
+            }];
+        };
+    }
+    
+    return _imagePicker;
+}
+
 - (void)addNotification {
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginOut) name:kUserLoginOutNotification object:nil];
@@ -200,9 +239,55 @@
     
 }
 
+- (void)changeHeadIcon {
+    
+    [self.imagePicker picker];
+}
+
 #pragma mark - Data
 - (void)getUserInfo {
     
+    if ([TLUser user].photo) {
+        
+        [self.headerView.photoBtn setTitle:@"" forState:UIControlStateNormal];
+        
+        [self.headerView.photoBtn sd_setImageWithURL:[NSURL URLWithString:[[TLUser user].photo convertImageUrl]] forState:UIControlStateNormal];
+        
+    } else {
+        
+        NSString *nickName = [TLUser user].nickname;
+        
+        NSString *title = [nickName substringToIndex:1];
+        
+        [self.headerView.photoBtn setTitle:title forState:UIControlStateNormal];
+        
+    }
+    
+}
+
+- (void)changeHeadIconWithKey:(NSString *)key imgData:(NSData *)imgData {
+    
+    TLNetworking *http = [TLNetworking new];
+    
+    http.showView = self.view;
+    http.code = USER_CHANGE_USER_PHOTO;
+    http.parameters[@"userId"] = [TLUser user].userId;
+    http.parameters[@"photo"] = key;
+    http.parameters[@"token"] = [TLUser user].token;
+    [http postWithSuccess:^(id responseObject) {
+
+        [TLAlert alertWithSucces:@"修改头像成功"];
+        
+        [TLUser user].photo = key;
+        
+        [self getUserInfo];
+        
+//        [[NSNotificationCenter defaultCenter] postNotificationName:kUserInfoChange object:nil];
+        
+    } failure:^(NSError *error) {
+        
+        
+    }];
 }
 
 #pragma mark - MineHeaderSeletedDelegate
@@ -210,11 +295,18 @@
 - (void)didSelectedWithType:(MineHeaderSeletedType)type {
     
     switch (type) {
+            
+        case MineHeaderSeletedTypePhoto:
+        {
+            [self changeHeadIcon];
+            
+        }break;
+            
         case MineHeaderSeletedTypeBuy:
         {
             [TLAlert alertWithInfo:@"正在研发中, 敬请期待"];
-        }
-            break;
+            
+        }break;
             
         case MineHeaderSeletedTypeSell:
         {

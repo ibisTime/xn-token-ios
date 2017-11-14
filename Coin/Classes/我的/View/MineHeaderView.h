@@ -10,6 +10,7 @@
 
 typedef NS_ENUM(NSUInteger, MineHeaderSeletedType) {
 
+    MineHeaderSeletedTypePhoto, //头像
     MineHeaderSeletedTypeBuy,   //购买
     MineHeaderSeletedTypeSell,  //出售
     
@@ -24,5 +25,7 @@ typedef NS_ENUM(NSUInteger, MineHeaderSeletedType) {
 @interface MineHeaderView : UIView
 
 @property (nonatomic, weak) id<MineHeaderSeletedDelegate> delegate;
+//头像
+@property (nonatomic, strong) UIButton *photoBtn;
 
 @end

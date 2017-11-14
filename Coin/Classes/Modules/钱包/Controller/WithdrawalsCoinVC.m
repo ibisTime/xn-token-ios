@@ -84,8 +84,10 @@
         
         make.right.equalTo(receiveView.mas_right).offset(-15);
         make.centerY.equalTo(receiveView.mas_centerY);
+        make.width.equalTo(@6.5);
         
     }];
+    
     //
     UILabel *receiveTextLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:15.0];
     

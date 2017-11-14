@@ -34,6 +34,8 @@
 @property (nonatomic, copy) NSString *createDatetime;
 //公司编号
 @property (nonatomic, copy) NSString *companyCode;
+//头像
+@property (nonatomic, copy) NSString *photo;
 
 //用户手机号
 @property (nonatomic, strong) NSString *userName;
