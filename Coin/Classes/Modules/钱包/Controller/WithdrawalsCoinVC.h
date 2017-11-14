@@ -7,7 +7,11 @@
 //
 
 #import "TLBaseVC.h"
+#import "CurrencyModel.h"
 
 @interface WithdrawalsCoinVC : TLBaseVC
+
+//账户
+@property (nonatomic, strong) CurrencyModel *currency;
 
 @end

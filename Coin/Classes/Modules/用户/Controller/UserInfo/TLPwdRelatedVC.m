@@ -271,7 +271,9 @@
         [[TLUser user] updateUserInfo];
         
         [self.navigationController popViewControllerAnimated:YES];
+        
         if (self.success) {
+            
             self.success();
         }
         

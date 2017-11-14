@@ -8,6 +8,7 @@
 
 #import "BillModel.h"
 #import "AppColorMacro.h"
+#import "NSString+CGSize.h"
 
 @implementation BillModel
 
@@ -44,13 +45,15 @@
     return dict[self.bizType];
 }
 
-- (CGFloat)dHeightValue {
-    
-    CGFloat width = kScreenWidth - 15 - 40 - 15 - 36 - 15 - 15;
-    
-    CGSize size = [self.bizNote calculateStringSize:CGSizeMake(width, MAXFLOAT) font:Font(14)];
-    return size.height - [Font(14) lineHeight] + 3;
-    
-}
+//- (CGFloat)dHeightValue {
+//    
+//    CGFloat width = kScreenWidth - 15 - 40 - 15 - 36 - 15 - 15;
+//
+////    CGSize size = [self.bizNote calculateStringSize:CGSizeMake(width, MAXFLOAT) font:Font(14)];
+//
+//    CGSize size = [self.bizNote ca];
+//    return size.height - [Font(14) lineHeight] + 3;
+//
+//}
 
 @end

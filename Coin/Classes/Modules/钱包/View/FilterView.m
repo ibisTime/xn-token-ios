@@ -85,8 +85,6 @@
     //text
     self.textLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:16.0];
     
-    self.textLbl.text = @"请选择交易类型";
-    
     [self.pickerView addSubview:self.textLbl];
     [self.textLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
@@ -124,6 +122,14 @@
         make.height.equalTo(@0.5);
         
     }];
+}
+
+- (void)setTitle:(NSString *)title {
+    
+    _title = title;
+    
+    self.textLbl.text = title;
+
 }
 
 - (void)setTagNames:(NSArray *)tagNames

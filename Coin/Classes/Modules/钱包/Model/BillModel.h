@@ -49,11 +49,12 @@
 
 @property (nonatomic, copy) NSString *status;
 
+@property (nonatomic, assign) CGFloat dHeightValue;
 
 - (NSString *)getBizName;
 
 - (NSString *)getImgName;
 
-- (CGFloat)dHeightValue;
+//- (CGFloat)dHeightValue;
 
 @end

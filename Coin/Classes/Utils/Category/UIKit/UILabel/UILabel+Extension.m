@@ -8,6 +8,7 @@
 
 #import "UILabel+Extension.h"
 #import "AppColorMacro.h"
+#import <CDCommon/UIView+Frame.h>
 
 @implementation UILabel (Extension)
 
@@ -44,7 +45,7 @@
     style.maximumLineHeight = 20;
     style.minimumLineHeight = 20;
     
-    CGRect rect = [self.text boundingRectWithSize:CGSizeMake(kScreenWidth - 2*15, MAXFLOAT) options: NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName:self.font,NSParagraphStyleAttributeName:style} context:nil];
+    CGRect rect = [self.text boundingRectWithSize:CGSizeMake(self.width, MAXFLOAT) options: NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName:self.font,NSParagraphStyleAttributeName:style} context:nil];
     
     CGFloat labelH = rect.size.height;
     

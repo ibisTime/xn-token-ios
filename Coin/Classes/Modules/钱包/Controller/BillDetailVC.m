@@ -64,7 +64,7 @@
     }
     
     //金额
-    UILabel *amountLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:32.0];
+    UILabel *amountLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kThemeColor font:32.0];
     
     amountLbl.text = moneyStr;
     

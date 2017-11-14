@@ -43,7 +43,8 @@
 #define kAuxiliaryTipColor      [UIColor colorWithHexString:@"#FF254C"]   //辅助提示颜色
 #define kBottomItemGrayColor    [UIColor colorWithHexString:@"#FAFAFA"]   //底栏灰色
 #define kCommentSecondColor     [UIColor colorWithHexString:@"#FAFAFA"]   //评论二级颜色
-
+#define kPlaceholderColor       [UIColor colorWithHexString:@"#CCCCCC"]
+    //占位颜色
 /****颜色列表***/
 
 

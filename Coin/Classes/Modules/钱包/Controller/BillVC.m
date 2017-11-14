@@ -8,8 +8,6 @@
 
 #import "BillVC.h"
 
-#import "CoinHeader.h"
-
 #import "BillTableView.h"
 #import "TLPlaceholderView.h"
 #import "FilterView.h"
@@ -68,9 +66,11 @@
         
         _filterPicker = [[FilterView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
         
+        _filterPicker.title = @"请选择交易类型";
+        
         _filterPicker.selectBlock = ^(NSInteger index) {
             
-            weakSelf.helper.parameters[@"bitType"] = typeArr[index];
+            weakSelf.helper.parameters[@"bizType"] = typeArr[index];
             
             [weakSelf.tableView beginRefreshing];
         };
@@ -138,6 +138,8 @@
                 [weakSelf removePlaceholderView];
             }
             
+            weakSelf.bills = objs;
+            
             weakSelf.tableView.bills = objs;
             [weakSelf.tableView reloadData_tl];
             
@@ -159,6 +161,8 @@
                 [weakSelf removePlaceholderView];
             }
             
+            weakSelf.bills = objs;
+
             weakSelf.tableView.bills = objs;
             [weakSelf.tableView reloadData_tl];
             

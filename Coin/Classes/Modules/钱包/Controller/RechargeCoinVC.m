@@ -13,7 +13,7 @@
 #import "NSString+CGSize.h"
 #import "UILabel+Extension.h"
 
-#import "SGQRCodeTool.h"
+#import <SGQRCodeGenerateManager.h>
 
 @interface RechargeCoinVC ()
 
@@ -105,7 +105,7 @@
     //二维码
     UIImageView *qrIV = [[UIImageView alloc] init];
     
-    qrIV.image = [SGQRCodeTool SG_generateWithDefaultQRCodeData:self.coinAddress imageViewWidth:140];
+    qrIV.image = [SGQRCodeGenerateManager generateWithDefaultQRCodeData:self.coinAddress imageViewWidth:140];
     
     [self.qrView addSubview:qrIV];
     [qrIV mas_makeConstraints:^(MASConstraintMaker *make) {

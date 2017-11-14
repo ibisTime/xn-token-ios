@@ -16,7 +16,9 @@
 #import "CurrencyModel.h"
 
 #import "RechargeCoinVC.h"
+#import "WithdrawalsCoinVC.h"
 #import "BillVC.h"
+#import "TLPwdRelatedVC.h"
 
 @interface TLWalletVC ()<RefreshDelegate>
 
@@ -140,6 +142,32 @@
           
         case 1:
         {
+            
+            if ([[TLUser user].tradepwdFlag isEqualToString:@"0"]) {
+                
+                TLPwdType pwdType = TLPwdTypeSetTrade;
+                
+                TLPwdRelatedVC *pwdRelatedVC = [[TLPwdRelatedVC alloc] initWithType:pwdType];
+                
+//                pwdRelatedVC.success = ^{
+//
+//                    WithdrawalsCoinVC *coinVC = [WithdrawalsCoinVC new];
+//
+//                    coinVC.currency = currencyModel;
+//
+//                    [weakSelf.navigationController pushViewController:coinVC animated:YES];
+//                };
+                
+                [self.navigationController pushViewController:pwdRelatedVC animated:YES];
+                
+                return ;
+            }
+    
+            WithdrawalsCoinVC *coinVC = [WithdrawalsCoinVC new];
+            
+            coinVC.currency = currencyModel;
+            
+            [self.navigationController pushViewController:coinVC animated:YES];
             
         }break;
             

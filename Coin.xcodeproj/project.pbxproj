@@ -63,7 +63,6 @@
 		211DE6C61FB58B4C002FCF3D /* HttpLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 211DE69E1FB58B4C002FCF3D /* HttpLogger.m */; };
 		211DE6C71FB58B4C002FCF3D /* HttpRequestObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 211DE69F1FB58B4C002FCF3D /* HttpRequestObject.m */; };
 		211DE6CA1FB5A586002FCF3D /* RechargeCoinVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 211DE6C91FB5A586002FCF3D /* RechargeCoinVC.m */; };
-		211DE6CE1FB5AE8C002FCF3D /* SGQRCodeTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 211DE6CC1FB5AE8C002FCF3D /* SGQRCodeTool.m */; };
 		2159795D1FB81C2B0029F177 /* BillVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2159795C1FB81C2B0029F177 /* BillVC.m */; };
 		215979601FB81CC40029F177 /* BillTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2159795F1FB81CC40029F177 /* BillTableView.m */; };
 		215979641FB81CED0029F177 /* BillModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 215979631FB81CED0029F177 /* BillModel.m */; };
@@ -89,6 +88,7 @@
 		21A7F3241FB2E2F900FAA0A2 /* CaptchaView.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A7F30C1FB2E2F900FAA0A2 /* CaptchaView.m */; };
 		21A7F35E1FB2EBAA00FAA0A2 /* CurrencyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A7F35C1FB2EBA900FAA0A2 /* CurrencyModel.m */; };
 		21A7F3631FB2F16C00FAA0A2 /* HTMLStrVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A7F3621FB2F16B00FAA0A2 /* HTMLStrVC.m */; };
+		21D216861FB9C5750040795E /* QRCodeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21D216851FB9C5750040795E /* QRCodeVC.m */; };
 		2E394FED1FB0575A00BA0829 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E394FEB1FB0575A00BA0829 /* AppDelegate.m */; };
 		2E394FF41FB057B300BA0829 /* TLTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E394FEF1FB057B200BA0829 /* TLTabBarController.m */; };
 		2E394FF51FB057B300BA0829 /* TLNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E394FF01FB057B200BA0829 /* TLNavigationController.m */; };
@@ -221,8 +221,6 @@
 		211DE69F1FB58B4C002FCF3D /* HttpRequestObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpRequestObject.m; sourceTree = "<group>"; };
 		211DE6C81FB5A586002FCF3D /* RechargeCoinVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RechargeCoinVC.h; sourceTree = "<group>"; };
 		211DE6C91FB5A586002FCF3D /* RechargeCoinVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RechargeCoinVC.m; sourceTree = "<group>"; };
-		211DE6CC1FB5AE8C002FCF3D /* SGQRCodeTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGQRCodeTool.m; sourceTree = "<group>"; };
-		211DE6CD1FB5AE8C002FCF3D /* SGQRCodeTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGQRCodeTool.h; sourceTree = "<group>"; };
 		2159795B1FB81C2B0029F177 /* BillVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BillVC.h; sourceTree = "<group>"; };
 		2159795C1FB81C2B0029F177 /* BillVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BillVC.m; sourceTree = "<group>"; };
 		2159795E1FB81CC40029F177 /* BillTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BillTableView.h; sourceTree = "<group>"; };
@@ -276,6 +274,8 @@
 		21A7F35D1FB2EBA900FAA0A2 /* CurrencyModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurrencyModel.h; sourceTree = "<group>"; };
 		21A7F3611FB2F16B00FAA0A2 /* HTMLStrVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTMLStrVC.h; sourceTree = "<group>"; };
 		21A7F3621FB2F16B00FAA0A2 /* HTMLStrVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTMLStrVC.m; sourceTree = "<group>"; };
+		21D216841FB9C5750040795E /* QRCodeVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QRCodeVC.h; sourceTree = "<group>"; };
+		21D216851FB9C5750040795E /* QRCodeVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QRCodeVC.m; sourceTree = "<group>"; };
 		2E394FEB1FB0575A00BA0829 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		2E394FEC1FB0575A00BA0829 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		2E394FEE1FB057B200BA0829 /* TLTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLTabBarController.h; sourceTree = "<group>"; };
@@ -482,7 +482,6 @@
 				211DE64B1FB58B4B002FCF3D /* TLPlaceholderView.m */,
 				215979681FB82BC10029F177 /* CustomPickerView.h */,
 				215979691FB82BC10029F177 /* CustomPickerView.m */,
-				211DE6CB1FB5AE78002FCF3D /* QRCodeTool */,
 			);
 			path = CustomUI;
 			sourceTree = "<group>";
@@ -668,15 +667,6 @@
 				211DE69C1FB58B4C002FCF3D /* HttpRequestService.m */,
 			);
 			path = AFNetworkingTool;
-			sourceTree = "<group>";
-		};
-		211DE6CB1FB5AE78002FCF3D /* QRCodeTool */ = {
-			isa = PBXGroup;
-			children = (
-				211DE6CD1FB5AE8C002FCF3D /* SGQRCodeTool.h */,
-				211DE6CC1FB5AE8C002FCF3D /* SGQRCodeTool.m */,
-			);
-			path = QRCodeTool;
 			sourceTree = "<group>";
 		};
 		215979611FB81CD10029F177 /* Model */ = {
@@ -978,6 +968,8 @@
 				211DE6C91FB5A586002FCF3D /* RechargeCoinVC.m */,
 				215979771FB947730029F177 /* WithdrawalsCoinVC.h */,
 				215979781FB947730029F177 /* WithdrawalsCoinVC.m */,
+				21D216841FB9C5750040795E /* QRCodeVC.h */,
+				21D216851FB9C5750040795E /* QRCodeVC.m */,
 				2159795B1FB81C2B0029F177 /* BillVC.h */,
 				2159795C1FB81C2B0029F177 /* BillVC.m */,
 				2159796E1FB84B8A0029F177 /* BillDetailVC.h */,
@@ -1289,6 +1281,7 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-Coin/Pods-Coin-resources.sh",
 				"${PODS_ROOT}/IQKeyboardManager/IQKeyboardManager/Resources/IQKeyboardManager.bundle",
 				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
+				"${PODS_ROOT}/SGQRCode/SGQRCode/SGQRCode.bundle",
 				"${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
@@ -1326,7 +1319,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				211A34F11FB430DB00FEB71F /* SettingModel.m in Sources */,
-				211DE6CE1FB5AE8C002FCF3D /* SGQRCodeTool.m in Sources */,
 				21A7F3181FB2E2F900FAA0A2 /* TLUserRegisterVC.m in Sources */,
 				215979761FB84CC70029F177 /* BillDetailCell.m in Sources */,
 				21A7F3171FB2E2F900FAA0A2 /* TLUserForgetPwdVC.m in Sources */,
@@ -1342,6 +1334,7 @@
 				211DE6C51FB58B4C002FCF3D /* HttpRequestService.m in Sources */,
 				211DE6A91FB58B4C002FCF3D /* TLPlaceholderView.m in Sources */,
 				2E394FED1FB0575A00BA0829 /* AppDelegate.m in Sources */,
+				21D216861FB9C5750040795E /* QRCodeVC.m in Sources */,
 				211DE6B51FB58B4C002FCF3D /* UIView+Responder.m in Sources */,
 				2E394FFD1FB059C100BA0829 /* TLBaseVC.m in Sources */,
 				215979641FB81CED0029F177 /* BillModel.m in Sources */,

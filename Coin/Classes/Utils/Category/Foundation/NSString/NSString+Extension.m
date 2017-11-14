@@ -209,6 +209,14 @@
     return [NSString stringWithFormat:@"%lld",money];
 }
 
+- (NSString *)convertToSysCoin {
+    
+    double v = [self doubleValue];
+    double t0 = v*1.0e+18;
+    long long money = (long long)t0;
+    return [NSString stringWithFormat:@"%lld",money];
+}
+
 + (NSString *)getWifiMacAddress {
     
     NSArray *ifs = CFBridgingRelease(CNCopySupportedInterfaces());

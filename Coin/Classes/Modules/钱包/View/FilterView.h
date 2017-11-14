@@ -16,7 +16,11 @@ typedef void(^DidSelectBlock)(NSInteger index);
 @property (nonatomic,copy) NSArray *tagNames;
 
 @property (nonatomic,copy) DidSelectBlock selectBlock;
+//title
+@property (nonatomic, strong) NSString *title;
 
 - (void)show;
+
+- (void)hide;
 
 @end

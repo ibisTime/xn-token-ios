@@ -11,6 +11,7 @@
 #import "TLUIHeader.h"
 #import "NSString+Date.h"
 #import "NSNumber+Extension.h"
+#import "UILabel+Extension.h"
 
 @interface BillCell ()
 
@@ -69,9 +70,9 @@
         [self addSubview:self.iconIV];
         [self.iconIV mas_makeConstraints:^(MASConstraintMaker *make) {
             
-            make.centerY.mas_equalTo(0);
-            make.width.height.mas_equalTo(36);
-            make.left.mas_equalTo(self.timeLbl.mas_right).mas_equalTo(15);
+            make.centerY.equalTo(@0);
+            make.width.height.equalTo(@36);
+            make.left.equalTo(self.timeLbl.mas_right).offset(15);
             
         }];
         
@@ -84,27 +85,9 @@
         [self addSubview:self.moneyLbl];
         [self.moneyLbl mas_makeConstraints:^(MASConstraintMaker *make) {
             
-            make.left.mas_equalTo(self.iconIV.mas_right).mas_equalTo(15);
-            make.right.mas_equalTo(-15);
-            make.centerY.mas_equalTo(-12.5);
-            
-        }];
-        
-        
-        //备注
-        self.detailLbl = [UILabel labelWithFrame:CGRectZero textAligment:NSTextAlignmentLeft
-                                 backgroundColor:[UIColor clearColor]
-                                            font:FONT(14)
-                                       textColor:kTextColor2];
-        self.detailLbl.numberOfLines = 0;
-        self.detailLbl.height = [FONT(14) lineHeight];
-        [self addSubview:self.detailLbl];
-        
-        [self.detailLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(self.mas_centerY).mas_equalTo(2.5);
-            make.left.mas_equalTo(self.iconIV.mas_right).mas_equalTo(15);
-            make.right.mas_equalTo(-15);
-            make.height.mas_lessThanOrEqualTo(60);
+            make.left.equalTo(self.iconIV.mas_right).offset(15);
+            make.right.equalTo(@(-15));
+            make.top.equalTo(@(12.5));
             
         }];
         
@@ -119,6 +102,22 @@
             
         }];
         
+        //备注
+        self.detailLbl = [UILabel labelWithFrame:CGRectZero textAligment:NSTextAlignmentLeft
+                                 backgroundColor:[UIColor clearColor]
+                                            font:Font(14)
+                                       textColor:kTextColor2];
+        self.detailLbl.numberOfLines = 0;
+        self.detailLbl.height = [FONT(14) lineHeight];
+        [self addSubview:self.detailLbl];
+        
+        [self.detailLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.bottom.equalTo(self.mas_bottom).offset(-12.5);
+            make.left.equalTo(self.iconIV.mas_right).offset(15);
+            make.right.equalTo(rightArrowIV.mas_left).offset(-15);
+            
+        }];
+        
         UIView *line = [[UIView alloc] init];
         
         line.backgroundColor = kLineColor;
@@ -127,7 +126,7 @@
         [line mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.mas_left);
             make.width.equalTo(self.mas_width);
-            make.height.mas_equalTo(@(0.5));
+            make.height.equalTo(@(0.5));
             make.bottom.equalTo(self.mas_bottom);
         }];
     }
@@ -162,6 +161,12 @@
     self.moneyLbl.text = moneyStr;
 
     self.detailLbl.text = _billModel.bizNote;
+    
+    [self layoutSubviews];
+    
+    NSInteger num = [self.detailLbl getLinesArrayOfStringInLabel];
+    
+    _billModel.dHeightValue = num == 1 ? 0: self.detailLbl.height - 10;
     
 }
 
