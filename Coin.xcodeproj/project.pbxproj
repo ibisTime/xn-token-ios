@@ -20,6 +20,10 @@
 		211A34F71FB4328800FEB71F /* SettingTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 211A34F61FB4328800FEB71F /* SettingTableView.m */; };
 		211A34FD1FB4507E00FEB71F /* IdAuthVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 211A34FC1FB4507E00FEB71F /* IdAuthVC.m */; };
 		211A35041FB45A6A00FEB71F /* WalletHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 211A35031FB45A6A00FEB71F /* WalletHeaderView.m */; };
+		211C88821FBDDADF00CF4FC8 /* QuotationListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 211C88811FBDDADF00CF4FC8 /* QuotationListVC.m */; };
+		211C88851FBDDD3A00CF4FC8 /* QuotationListTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 211C88841FBDDD3A00CF4FC8 /* QuotationListTableView.m */; };
+		211C88881FBDDE1000CF4FC8 /* QuotationListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 211C88871FBDDE1000CF4FC8 /* QuotationListCell.m */; };
+		211C888B1FBDDEC900CF4FC8 /* QuotationListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 211C888A1FBDDEC900CF4FC8 /* QuotationListModel.m */; };
 		211DE6141FB5465E002FCF3D /* WalletTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 211DE6131FB5465E002FCF3D /* WalletTableView.m */; };
 		211DE6171FB54685002FCF3D /* WalletCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 211DE6161FB54685002FCF3D /* WalletCell.m */; };
 		211DE6A01FB58B4C002FCF3D /* TLDatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 211DE63E1FB58B4B002FCF3D /* TLDatePicker.m */; };
@@ -62,6 +66,8 @@
 		211DE6C61FB58B4C002FCF3D /* HttpLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 211DE69E1FB58B4C002FCF3D /* HttpLogger.m */; };
 		211DE6C71FB58B4C002FCF3D /* HttpRequestObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 211DE69F1FB58B4C002FCF3D /* HttpRequestObject.m */; };
 		211DE6CA1FB5A586002FCF3D /* RechargeCoinVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 211DE6C91FB5A586002FCF3D /* RechargeCoinVC.m */; };
+		21223C731FBD8DB800057444 /* QuotationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 21223C721FBD8DB800057444 /* QuotationModel.m */; };
+		21223CB71FBDB2D200057444 /* WebVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21223CB61FBDB2D200057444 /* WebVC.m */; };
 		2159795D1FB81C2B0029F177 /* BillVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2159795C1FB81C2B0029F177 /* BillVC.m */; };
 		215979601FB81CC40029F177 /* BillTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2159795F1FB81CC40029F177 /* BillTableView.m */; };
 		215979641FB81CED0029F177 /* BillModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 215979631FB81CED0029F177 /* BillModel.m */; };
@@ -137,6 +143,14 @@
 		211A34FC1FB4507E00FEB71F /* IdAuthVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IdAuthVC.m; sourceTree = "<group>"; };
 		211A35021FB45A6A00FEB71F /* WalletHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WalletHeaderView.h; sourceTree = "<group>"; };
 		211A35031FB45A6A00FEB71F /* WalletHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WalletHeaderView.m; sourceTree = "<group>"; };
+		211C88801FBDDADF00CF4FC8 /* QuotationListVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QuotationListVC.h; sourceTree = "<group>"; };
+		211C88811FBDDADF00CF4FC8 /* QuotationListVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QuotationListVC.m; sourceTree = "<group>"; };
+		211C88831FBDDD3A00CF4FC8 /* QuotationListTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QuotationListTableView.h; sourceTree = "<group>"; };
+		211C88841FBDDD3A00CF4FC8 /* QuotationListTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QuotationListTableView.m; sourceTree = "<group>"; };
+		211C88861FBDDE1000CF4FC8 /* QuotationListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QuotationListCell.h; sourceTree = "<group>"; };
+		211C88871FBDDE1000CF4FC8 /* QuotationListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QuotationListCell.m; sourceTree = "<group>"; };
+		211C88891FBDDEC900CF4FC8 /* QuotationListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QuotationListModel.h; sourceTree = "<group>"; };
+		211C888A1FBDDEC900CF4FC8 /* QuotationListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QuotationListModel.m; sourceTree = "<group>"; };
 		211DE6121FB5465E002FCF3D /* WalletTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WalletTableView.h; sourceTree = "<group>"; };
 		211DE6131FB5465E002FCF3D /* WalletTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WalletTableView.m; sourceTree = "<group>"; };
 		211DE6151FB54685002FCF3D /* WalletCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WalletCell.h; sourceTree = "<group>"; };
@@ -223,6 +237,10 @@
 		211DE69F1FB58B4C002FCF3D /* HttpRequestObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpRequestObject.m; sourceTree = "<group>"; };
 		211DE6C81FB5A586002FCF3D /* RechargeCoinVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RechargeCoinVC.h; sourceTree = "<group>"; };
 		211DE6C91FB5A586002FCF3D /* RechargeCoinVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RechargeCoinVC.m; sourceTree = "<group>"; };
+		21223C711FBD8DB800057444 /* QuotationModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QuotationModel.h; sourceTree = "<group>"; };
+		21223C721FBD8DB800057444 /* QuotationModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QuotationModel.m; sourceTree = "<group>"; };
+		21223CB51FBDB2D200057444 /* WebVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WebVC.h; sourceTree = "<group>"; };
+		21223CB61FBDB2D200057444 /* WebVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WebVC.m; sourceTree = "<group>"; };
 		2159795B1FB81C2B0029F177 /* BillVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BillVC.h; sourceTree = "<group>"; };
 		2159795C1FB81C2B0029F177 /* BillVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BillVC.m; sourceTree = "<group>"; };
 		2159795E1FB81CC40029F177 /* BillTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BillTableView.h; sourceTree = "<group>"; };
@@ -815,6 +833,8 @@
 			children = (
 				21D216961FBA9C040040795E /* SystemNoticeVC.h */,
 				21D216971FBA9C040040795E /* SystemNoticeVC.m */,
+				211C88801FBDDADF00CF4FC8 /* QuotationListVC.h */,
+				211C88811FBDDADF00CF4FC8 /* QuotationListVC.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -822,6 +842,10 @@
 		21D2168B1FBA90B30040795E /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				21223C711FBD8DB800057444 /* QuotationModel.h */,
+				21223C721FBD8DB800057444 /* QuotationModel.m */,
+				211C88891FBDDEC900CF4FC8 /* QuotationListModel.h */,
+				211C888A1FBDDEC900CF4FC8 /* QuotationListModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -840,6 +864,10 @@
 			children = (
 				21D216A01FBAEDB10040795E /* QuotationView.h */,
 				21D216A11FBAEDB10040795E /* QuotationView.m */,
+				211C88831FBDDD3A00CF4FC8 /* QuotationListTableView.h */,
+				211C88841FBDDD3A00CF4FC8 /* QuotationListTableView.m */,
+				211C88861FBDDE1000CF4FC8 /* QuotationListCell.h */,
+				211C88871FBDDE1000CF4FC8 /* QuotationListCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1146,6 +1174,8 @@
 				2E394FFA1FB059C100BA0829 /* TLBaseVC.m */,
 				21A7F3611FB2F16B00FAA0A2 /* HTMLStrVC.h */,
 				21A7F3621FB2F16B00FAA0A2 /* HTMLStrVC.m */,
+				21223CB51FBDB2D200057444 /* WebVC.h */,
+				21223CB61FBDB2D200057444 /* WebVC.m */,
 			);
 			path = Expand;
 			sourceTree = "<group>";
@@ -1341,7 +1371,9 @@
 				211A34F11FB430DB00FEB71F /* SettingModel.m in Sources */,
 				21A7F3181FB2E2F900FAA0A2 /* TLUserRegisterVC.m in Sources */,
 				215979761FB84CC70029F177 /* BillDetailCell.m in Sources */,
+				211C88821FBDDADF00CF4FC8 /* QuotationListVC.m in Sources */,
 				21A7F3171FB2E2F900FAA0A2 /* TLUserForgetPwdVC.m in Sources */,
+				211C88851FBDDD3A00CF4FC8 /* QuotationListTableView.m in Sources */,
 				211DE6BF1FB58B4C002FCF3D /* NSTimer+tlNoCycle.m in Sources */,
 				211DE6BE1FB58B4C002FCF3D /* NSNumber+Extension.m in Sources */,
 				211DE6B31FB58B4C002FCF3D /* UIColor+theme.m in Sources */,
@@ -1356,6 +1388,7 @@
 				2E394FED1FB0575A00BA0829 /* AppDelegate.m in Sources */,
 				21D216861FB9C5750040795E /* QRCodeVC.m in Sources */,
 				211DE6B51FB58B4C002FCF3D /* UIView+Responder.m in Sources */,
+				21223CB71FBDB2D200057444 /* WebVC.m in Sources */,
 				2E394FFD1FB059C100BA0829 /* TLBaseVC.m in Sources */,
 				215979641FB81CED0029F177 /* BillModel.m in Sources */,
 				215979791FB947730029F177 /* WithdrawalsCoinVC.m in Sources */,
@@ -1370,6 +1403,7 @@
 				2159796A1FB82BC10029F177 /* CustomPickerView.m in Sources */,
 				211A34DE1FB4245D00FEB71F /* MineCell.m in Sources */,
 				211DE6AB1FB58B4C002FCF3D /* TLTableView.m in Sources */,
+				21223C731FBD8DB800057444 /* QuotationModel.m in Sources */,
 				2EE950D21FB066EB00429257 /* CoinChangeView.m in Sources */,
 				211DE6C21FB58B4C002FCF3D /* Foundation+Log.m in Sources */,
 				211DE6A11FB58B4C002FCF3D /* TLTimeButton.m in Sources */,
@@ -1379,6 +1413,7 @@
 				2159795D1FB81C2B0029F177 /* BillVC.m in Sources */,
 				211DE6B61FB58B4C002FCF3D /* UIView+Extension.m in Sources */,
 				21A7F3141FB2E2F900FAA0A2 /* TLPwdRelatedVC.m in Sources */,
+				211C888B1FBDDEC900CF4FC8 /* QuotationListModel.m in Sources */,
 				2EE950DA1FB06AA900429257 /* TLBannerCell.m in Sources */,
 				211DE6A01FB58B4C002FCF3D /* TLDatePicker.m in Sources */,
 				211DE6AA1FB58B4C002FCF3D /* TLImagePicker.m in Sources */,
@@ -1396,6 +1431,7 @@
 				211DE6B91FB58B4C002FCF3D /* NSDictionary+Extension.m in Sources */,
 				21A7F31E1FB2E2F900FAA0A2 /* TLUser.m in Sources */,
 				2E394FFC1FB059C100BA0829 /* TLBaseModel.m in Sources */,
+				211C88881FBDDE1000CF4FC8 /* QuotationListCell.m in Sources */,
 				2EA584C71FA813C900C7106C /* main.m in Sources */,
 				211DE6AF1FB58B4C002FCF3D /* UILabel+Extension.m in Sources */,
 				21A7F3131FB2E2F900FAA0A2 /* TLAccountSetBaseVC.m in Sources */,

@@ -27,5 +27,9 @@ typedef NS_ENUM(NSUInteger, MineHeaderSeletedType) {
 @property (nonatomic, weak) id<MineHeaderSeletedDelegate> delegate;
 //头像
 @property (nonatomic, strong) UIButton *photoBtn;
+//昵称
+@property (nonatomic, strong) UILabel *nameLbl;
+//交易、好评跟信任
+@property (nonatomic, strong) UILabel *dataLbl;
 
 @end

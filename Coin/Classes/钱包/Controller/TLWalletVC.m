@@ -57,7 +57,9 @@
     //列表查询我的币种
     [self getMyCurrencyList];
     
-    [self.tableView beginRefreshing];
+    //通知
+    [self addNotification];
+    
 }
 
 #pragma mark - Init
@@ -86,6 +88,21 @@
     self.tableView.refreshDelegate = self;
     
     [self.view addSubview:self.tableView];
+}
+
+- (void)addNotification {
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userlogin) name:kUserLoginNotification object:nil];
+    
+    
+}
+
+#pragma mark - Events
+
+- (void)userlogin {
+    
+    [self getMyCurrencyList];
+
 }
 
 #pragma mark - Data
@@ -119,6 +136,8 @@
         }];
     }];
     
+    [self.tableView beginRefreshing];
+
 }
 
 #pragma mark - RefreshDelegate

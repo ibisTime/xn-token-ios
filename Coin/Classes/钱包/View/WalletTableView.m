@@ -96,6 +96,11 @@ static NSString *identifierCell = @"WalletCell";
     return 0.1;
 }
 
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    
+    return [UIView new];
+}
+
 #pragma mark - Events
 - (void)clickRecharge:(UIButton *)sender {
     

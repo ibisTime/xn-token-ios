@@ -96,22 +96,22 @@
     [self.view addSubview:rePwdTf];
     self.rePwdTf = rePwdTf;
     
-    for (int i = 0; i < 2; i++) {
-        
-        UIView *line = [[UIView alloc] init];
-        
-        line.backgroundColor = [UIColor lineColor];
-        
-        [self.view addSubview:line];
-        [line mas_makeConstraints:^(MASConstraintMaker *make) {
-            
-            make.left.mas_equalTo(margin);
-            make.right.mas_equalTo(0);
-            make.height.mas_equalTo(0.5);
-            make.top.mas_equalTo(10 + h + i*(2*h + 10 + 1));
-            
-        }];
-    }
+//    for (int i = 0; i < 2; i++) {
+    
+//        UIView *line = [[UIView alloc] init];
+//
+//        line.backgroundColor = kLineColor;
+//
+//        [self.view addSubview:line];
+//        [line mas_makeConstraints:^(MASConstraintMaker *make) {
+//
+//            make.left.mas_equalTo(margin);
+//            make.right.mas_equalTo(0);
+//            make.height.mas_equalTo(0.5);
+//            make.top.mas_equalTo(10 + h + i*(2*h + 10 + 1));
+//
+//        }];
+//    }
     
     //
     UIButton *confirmBtn = [UIButton buttonWithTitle:@"确认注册" titleColor:kWhiteColor backgroundColor:kAppCustomMainColor titleFont:16.0 cornerRadius:5];
@@ -277,7 +277,7 @@
         [self.view endEditing:YES];
         
         [TLAlert alertWithSucces:@"注册成功"];
-        NSString *tokenId = responseObject[@"data"][@"token"];
+        NSString *token = responseObject[@"data"][@"token"];
         NSString *userId = responseObject[@"data"][@"userId"];
         
         //保存用户账号和密码
@@ -290,15 +290,14 @@
             http.showView = self.view;
             http.code = USER_INFO;
             http.parameters[@"userId"] = userId;
-            http.parameters[@"token"] = tokenId;
+            http.parameters[@"token"] = token;
             [http postWithSuccess:^(id responseObject) {
                 
                 NSDictionary *userInfo = responseObject[@"data"];
                 [TLUser user].userId = userId;
-                [TLUser user].token = tokenId;
+                [TLUser user].token = token;
                 
                 //保存信息
-                [[TLUser user] saveToken:tokenId];
                 [[TLUser user] saveUserInfo:userInfo];
                 [[TLUser user] setUserInfoWithDict:userInfo];
                 

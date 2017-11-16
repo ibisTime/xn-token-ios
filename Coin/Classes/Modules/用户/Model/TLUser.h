@@ -73,18 +73,13 @@
 //是否为需要登录，如果已登录，取出用户信息
 - (BOOL)isLogin;
 
-//重新登录
+//用户已登录状态，则重新登录
 - (void)reLogin;
 
 //保存登录账号和密码
 - (void)saveUserName:(NSString *)userName pwd:(NSString *)pwd;
 
-//用户已登录状态，从数据库中初始化用户信息
-- (void)initUserData;
-
 - (void)loginOut;
-
-- (void)saveToken:(NSString *)token;
 
 //存储用户信息
 - (void)saveUserInfo:(NSDictionary *)userInfo;
@@ -94,11 +89,6 @@
 
 //异步更新用户信息
 - (void)updateUserInfo;
-
-- (NSString *)detailAddress;
-
-//转换等级
-- (NSString *)userLevel:(NSString *)levelStr;
 
 @end
 

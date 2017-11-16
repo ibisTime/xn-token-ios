@@ -39,7 +39,7 @@
     //账单类型
     UILabel *textLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:15.0];
     
-    textLbl.text = _bill.getBizName;
+    textLbl.text = _bill.bizNote;
     
     [self.headerView addSubview:textLbl];
     [textLbl mas_makeConstraints:^(MASConstraintMaker *make) {

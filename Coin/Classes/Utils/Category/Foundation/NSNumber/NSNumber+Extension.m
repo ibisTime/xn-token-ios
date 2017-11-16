@@ -19,7 +19,7 @@
     }
     
     long long m = [self longLongValue];
-    double value = m/1000.0;
+    double value = m/1.0;
     
     NSString *tempStr =  [NSString stringWithFormat:@"%.3f",value];
     NSString *subStr = [tempStr substringWithRange:NSMakeRange(0, tempStr.length - 1)];
@@ -38,12 +38,14 @@
         
     }
     
+    //[self longLongValue]
+//    long long c = 1;
     long long c = [self longLongValue];
-    
+
     //保留8位小数,第九位舍去
-    NSDecimalNumberHandler *handler = [NSDecimalNumberHandler decimalNumberHandlerWithRoundingMode:NSRoundDown scale:8 raiseOnExactness:NO raiseOnOverflow:NO raiseOnUnderflow:NO raiseOnDivideByZero:YES];
+    NSDecimalNumberHandler *handler = [NSDecimalNumberHandler decimalNumberHandlerWithRoundingMode:NSRoundBankers scale:8 raiseOnExactness:NO raiseOnOverflow:NO raiseOnUnderflow:NO raiseOnDivideByZero:YES];
     
-    NSDecimalNumber *m = [NSDecimalNumber decimalNumberWithString:[@(c/(1.0e18)) stringValue]];
+    NSDecimalNumber *m = [NSDecimalNumber decimalNumberWithString:[@(c/(1.0e+18)) stringValue]];
 
     NSDecimalNumber *n = [m decimalNumberByRoundingAccordingToBehavior:handler];
     
@@ -64,7 +66,7 @@
     
     if (m%10 > 0) { //有厘
         
-        double value = m/1000.0;
+        double value = m/1.0;
         return [NSString stringWithFormat:@"%.2f",value];
         
     } else if (m%100 > 0) {//有分

@@ -29,7 +29,7 @@
 
 + (UIColor *)lineColor {
     
-    return [self colorWithHexString:@"#9f9f9f"];
+    return [self colorWithHexString:@"#eeeeee"];
     
 }
 

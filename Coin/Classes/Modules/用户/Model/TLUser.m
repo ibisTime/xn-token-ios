@@ -13,13 +13,14 @@
 #import "TLNetworking.h"
 #import "APICodeMacro.h"
 #import "TLUIHeader.h"
+#import "AppConfig.h"
 
 //#import "ChatManager.h"
 //#import "IMAHost+HostAPIs.h"
 //#import "IMAHost.h"
 //#import "TabbarViewController.h"
 
-//#define USER_ID_KEY @"user_id_key"
+#define USER_ID_KEY @"user_id_key"
 #define TOKEN_ID_KEY @"token_id_key"
 #define USER_INFO_DICT_KEY @"user_info_dict_key"
 
@@ -44,38 +45,28 @@ NSString *const kUserInfoChange = @"kUserInfoChange";
 
 }
 
-- (void)initUserData {
+#pragma mark - Setting
 
-    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
-//    NSString *userId = [userDefault objectForKey:USER_ID_KEY];
-    NSString *token = [userDefault objectForKey:TOKEN_ID_KEY];
-    self.token = token;
+- (void)setToken:(NSString *)token {
     
-    //--//
-    [self setUserInfoWithDict:[userDefault objectForKey:USER_INFO_DICT_KEY]];
-
-}
-
-
-- (void)saveToken:(NSString *)token {
-
-    [[NSUserDefaults standardUserDefaults] setObject:token forKey:TOKEN_ID_KEY];
+    _token = [token copy];
+    [[NSUserDefaults standardUserDefaults] setObject:_token forKey:TOKEN_ID_KEY];
     [[NSUserDefaults standardUserDefaults] synchronize];
-
+    
 }
-
 
 - (BOOL)isLogin {
 
     NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
-//    NSString *userId = [userDefault objectForKey:USER_ID_KEY];
+
     NSString *token = [userDefault objectForKey:TOKEN_ID_KEY];
+    
     if (token) {
         
         return YES;
+        
     } else {
-    
-    
+
         return NO;
     }
 
@@ -97,22 +88,35 @@ NSString *const kUserInfoChange = @"kUserInfoChange";
     
     [http postWithSuccess:^(id responseObject) {
         
-        NSString *token = responseObject[@"data"][@"token"];
+        self.token = responseObject[@"data"][@"token"];
         
-        self.token = token;
-        
-        [[TLUser user] saveToken:token];
-        
-        //异步跟新用户信息
-        [[TLUser user] updateUserInfo];
+        self.userId = responseObject[@"data"][@"userId"];
         
         [self requestAccountNumber];
         
+        [self requestQiniuDomain];
 //        //获取腾讯云IM签名、账号并登录
 //        [[ChatManager sharedManager] getTencentSign];
         
     } failure:^(NSError *error) {
         
+        
+    }];
+}
+
+- (void)requestQiniuDomain {
+    
+    TLNetworking *http = [TLNetworking new];
+    
+    http.code = USER_CKEY_CVALUE;
+    
+    http.parameters[@"key"] = @"qiniu_domain";
+    
+    [http postWithSuccess:^(id responseObject) {
+        
+        [AppConfig config].qiniuDomain = [NSString stringWithFormat:@"http://%@", responseObject[@"data"][@"cvalue"]];
+        
+    } failure:^(NSError *error) {
         
     }];
 }
@@ -167,6 +171,7 @@ NSString *const kUserInfoChange = @"kUserInfoChange";
 //    [[NSUserDefaults standardUserDefaults] removeObjectForKey:USER_ID_KEY];
     
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:TOKEN_ID_KEY];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:USER_ID_KEY];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:USER_INFO_DICT_KEY];
     
 //    [[NSNotificationCenter defaultCenter] postNotificationName:@"user_login_out_notification" object:nil];
@@ -192,17 +197,19 @@ NSString *const kUserInfoChange = @"kUserInfoChange";
 - (void)updateUserInfo {
 
     TLNetworking *http = [TLNetworking new];
+    
     http.isShowMsg = NO;
     http.code = USER_INFO;
-    http.parameters[@"userId"] = [TLUser user].userId;
-    http.parameters[@"token"] = [TLUser user].token;
+    http.parameters[@"userId"] = self.userId;
+    http.parameters[@"token"] = self.token;
+    
     [http postWithSuccess:^(id responseObject) {
         
         [self setUserInfoWithDict:responseObject[@"data"]];
         [self saveUserInfo:responseObject[@"data"]];
         
-        [[NSNotificationCenter defaultCenter] postNotificationName:kUserInfoChange object:nil];
-        
+        [[NSNotificationCenter defaultCenter] postNotificationName:kUserLoginNotification object:nil];
+
     } failure:^(NSError *error) {
         
         
@@ -211,11 +218,7 @@ NSString *const kUserInfoChange = @"kUserInfoChange";
 }
 
 - (void)setUserInfoWithDict:(NSDictionary *)dict {
-
-    self.userId = dict[@"userId"];
     
-    //token用户信息没有返回，不能再此处初始化
-//    self.token = dict[@"token"];
     self.mobile = dict[@"mobile"];
     self.nickname = dict[@"nickname"];
     self.realName = dict[@"realName"];

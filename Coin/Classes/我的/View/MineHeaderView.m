@@ -13,10 +13,6 @@
 
 //背景
 @property (nonatomic, strong) UIImageView *bgIV;
-//昵称
-@property (nonatomic, strong) UILabel *nameLbl;
-//交易、好评跟信任
-@property (nonatomic, strong) UILabel *dataLbl;
 
 @end
 
@@ -71,12 +67,8 @@
         
     }];
     
-    NSString *nickName = [TLUser user].nickname;
-
     //昵称
     self.nameLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kWhiteColor font:15.0];
-    
-    self.nameLbl.text = nickName;
     
     [self addSubview:self.nameLbl];
     [self.nameLbl mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -87,8 +79,6 @@
     }];
     //交易、好评跟信任
     self.dataLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kWhiteColor font:12.0];
-    
-    self.dataLbl.text = [NSString stringWithFormat:@"交易 2 · 好评 90%% · 信任 1"];
     
     [self addSubview:self.dataLbl];
     [self.dataLbl mas_makeConstraints:^(MASConstraintMaker *make) {

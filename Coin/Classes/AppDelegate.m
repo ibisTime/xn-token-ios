@@ -76,9 +76,6 @@
     //重新登录
     if([TLUser user].isLogin) {
         
-        //初始化用户信息
-        [[TLUser user] initUserData];
-        
         [[TLUser user] reLogin];
         
     };

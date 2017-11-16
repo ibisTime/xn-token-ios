@@ -39,7 +39,6 @@
         self.placeholder = placeholder;
         //    [tf addAction];
         self.font = [UIFont systemFontOfSize:15];
-        
 
     }
     return self;

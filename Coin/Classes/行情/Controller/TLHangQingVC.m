@@ -15,8 +15,11 @@
 
 #import "BannerModel.h"
 #import "NoticeModel.h"
+#import "QuotationModel.h"
 
 #import "SystemNoticeVC.h"
+#import "WebVC.h"
+#import "QuotationListVC.h"
 
 @interface TLHangQingVC ()
 //滚动视图
@@ -44,11 +47,12 @@
     self.title = @"行情";
 
     [self initScrollView];
-
-    //查询虚拟币行情
-    [self queryCoinQuotation];
+    //查询以太币行情
+    [self queryCoinQuotationWithCoinName:@"ETH"];
+    //查询比特币行情
+    [self queryCoinQuotationWithCoinName:@"BTC"];
     
-    //    [self getBanner];
+    [self getBanner];
 }
 
 #pragma mark - Init
@@ -73,8 +77,16 @@
     switch (type) {
         case QuotationEventTypeHTML:
         {
-            [TLAlert alertWithInfo:@"正在研发中, 敬请期待"];
-
+            if (!(self.bannerRoom[index].url && self.bannerRoom[index].url.length > 0)) {
+                return ;
+            }
+            
+            WebVC *webVC = [WebVC new];
+            
+            webVC.url = self.bannerRoom[index].url;
+            
+            [self.navigationController pushViewController:webVC animated:YES];
+           
         }break;
             
         case QuotationEventTypeNotice:
@@ -87,15 +99,14 @@
             
         case QuotationEventTypeCoinDetail:
         {
-            if (!(self.bannerRoom[index].url && self.bannerRoom[index].url.length > 0)) {
-                return ;
-            }
-            
-            //        TLWebVC *webVC = [TLWebVC new];
-            //
-            //        webVC.url = weakSelf.bannerRoom[index].url;
-            //
-            //        [weakSelf.navigationController pushViewController:webVC animated:YES];
+//            [TLAlert alertWithInfo:@"正在研发中, 敬请期待"];
+//            
+//            return ;
+            QuotationListVC *listVC = [QuotationListVC new];
+
+            listVC.quototationType = index == 0 ? QuotationListTypeETH: QuotationListTypeBTC;
+
+            [self.navigationController pushViewController:listVC animated:YES];
             
         }break;
             
@@ -205,16 +216,30 @@
     
 }
 
-- (void)queryCoinQuotation {
+- (void)queryCoinQuotationWithCoinName:(NSString *)coinName {
     
     TLNetworking *http = [TLNetworking new];
     
     http.code = @"625290";
     
-    http.parameters[@"coin"] = @"ETH";
+    http.parameters[@"coin"] = coinName;
     
     [http postWithSuccess:^(id responseObject) {
         
+        QuotationModel *quotation = [QuotationModel tl_objectWithDictionary:responseObject[@"data"]];
+        
+        if ([coinName isEqualToString:@"ETH"]) {
+            
+            self.quotationView.ethQuotation = quotation;
+
+        } else if ([coinName isEqualToString:@"BTC"]) {
+            
+            self.quotationView.btcQuotation = quotation;
+
+        } else {
+            
+            
+        }
         
     } failure:^(NSError *error) {
         

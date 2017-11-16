@@ -111,7 +111,7 @@
         
         UIView *line = [[UIView alloc] init];
         
-        line.backgroundColor = [UIColor lineColor];
+        line.backgroundColor = kLineColor;
         
         [bgView addSubview:line];
         [line mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -254,13 +254,11 @@
         
         [TLUser user].userId = userId;
         [TLUser user].token = token;
-        [[TLUser user] saveToken:token];
+        
         //保存用户信息
         [[TLUser user] saveUserInfo:userInfo];
-        
         //初始化用户信息
         [[TLUser user] setUserInfoWithDict:userInfo];
-        
         //获取人民币和积分账户
         [self requestAccountNumber];
         

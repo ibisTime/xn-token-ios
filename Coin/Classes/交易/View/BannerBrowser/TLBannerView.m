@@ -45,7 +45,7 @@ static NSString * const XNBannerCellID = @"XNBannerCellID ";
         
         //
         CGFloat innerWidth = ITEM_WIDTH;
-        CGFloat innerHeight = self.frame.size.height  - PAGE_CONTROL_HEIGHT;
+        CGFloat innerHeight = self.frame.size.height;
 
         //
         UICollectionViewFlowLayout *fl = [[UICollectionViewFlowLayout alloc] init];
@@ -62,8 +62,8 @@ static NSString * const XNBannerCellID = @"XNBannerCellID ";
         self.bannerCollectionView.dataSource = self;
         self.bannerCollectionView.showsHorizontalScrollIndicator = NO;
         [self.bannerCollectionView  setContentOffset:CGPointMake(ITEM_WIDTH, 0)];
-        self.bannerCollectionView.layer.cornerRadius = 10;
-        self.bannerCollectionView.layer.masksToBounds = YES;
+//        self.bannerCollectionView.layer.cornerRadius = 10;
+//        self.bannerCollectionView.layer.masksToBounds = YES;
         self.bannerCollectionView.clipsToBounds = YES;
         
         

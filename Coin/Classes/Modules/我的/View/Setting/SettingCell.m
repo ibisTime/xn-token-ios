@@ -87,7 +87,7 @@
         self.sw = sw;
         
         UIView *line = [[UIView alloc] init];
-        line.backgroundColor = [UIColor lineColor];
+        line.backgroundColor = kLineColor;
         [self addSubview:line];
         [line mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.mas_left).offset(0);

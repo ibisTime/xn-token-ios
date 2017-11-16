@@ -43,8 +43,7 @@
     [super viewWillAppear:animated];
     
     [self.navigationController setNavigationBarHidden:YES animated:animated];
-    //获取用户信息
-    [self getUserInfo];
+
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
@@ -62,6 +61,8 @@
     [self initGroup];
     //
     [self initTableView];
+    //初始化用户信息
+    [[TLUser user] updateUserInfo];
     //通知
     [self addNotification];
 }
@@ -228,7 +229,12 @@
 
 - (void)addNotification {
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeInfo) name:kUserLoginNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeInfo) name:kUserInfoChange object:nil];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginOut) name:kUserLoginOutNotification object:nil];
+
 
 }
 
@@ -239,13 +245,7 @@
     
 }
 
-- (void)changeHeadIcon {
-    
-    [self.imagePicker picker];
-}
-
-#pragma mark - Data
-- (void)getUserInfo {
+- (void)changeInfo {
     
     if ([TLUser user].photo) {
         
@@ -263,7 +263,18 @@
         
     }
     
+    self.headerView.nameLbl.text = [TLUser user].nickname;
+    
+    self.headerView.dataLbl.text = [NSString stringWithFormat:@"交易 2 · 好评 90%% · 信任 1"];
+
 }
+
+- (void)changeHeadIcon {
+    
+    [self.imagePicker picker];
+}
+
+#pragma mark - Data
 
 - (void)changeHeadIconWithKey:(NSString *)key imgData:(NSData *)imgData {
     
@@ -280,9 +291,7 @@
         
         [TLUser user].photo = key;
         
-        [self getUserInfo];
-        
-//        [[NSNotificationCenter defaultCenter] postNotificationName:kUserInfoChange object:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kUserInfoChange object:nil];
         
     } failure:^(NSError *error) {
         

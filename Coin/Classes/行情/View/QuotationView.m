@@ -12,6 +12,7 @@
 #import "AppColorMacro.h"
 #import <CDCommon/UIScrollView+TLAdd.h>
 #import "UIButton+EnLargeEdge.h"
+#import "NSNumber+Extension.h"
 
 @interface QuotationView ()
 
@@ -62,7 +63,7 @@
     CoinWeakSelf;
     
     //顶部轮播
-    TLBannerView *bannerView = [[TLBannerView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 180)];
+    TLBannerView *bannerView = [[TLBannerView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kCarouselHeight)];
     
     bannerView.selected = ^(NSInteger index) {
         
@@ -72,9 +73,7 @@
         }
         
     };
-    
-    bannerView.imgUrls = @[@"http://upload-images.jianshu.io/upload_images/632860-b921edc6f8fa62e8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240", @"http://upload-images.jianshu.io/upload_images/1665079-ce77173c5e763468.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"];
-    
+        
     [self addSubview:bannerView];
     
     self.bannerView = bannerView;
@@ -86,13 +85,92 @@
     
     [self addSubview:self.coinView];
     
+    NSArray *textArr = @[@"以太币价格", @"比特币价格"];
     
-    //虚拟币名称
+    [textArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        
+        CGFloat viewW = kScreenWidth/2.0;
+        
+        UIView *view = [[UIView alloc] init];
+        
+        view.backgroundColor = kWhiteColor;
     
-    //价格
-    //涨跌数量
-    //涨跌幅度
-    
+        view.tag = 1390 + idx;
+        
+        [self.coinView addSubview:view];
+        [view mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.left.equalTo(self.mas_left).offset(idx*viewW);
+            make.top.equalTo(self.bannerView.mas_bottom);
+            make.width.equalTo(@(viewW));
+            make.height.equalTo(@(90));
+            
+        }];
+        
+        UITapGestureRecognizer *tapGR = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(coinDetail:)];
+        
+        [view addGestureRecognizer:tapGR];
+        
+        //虚拟币名称
+        UILabel *textLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:13.0];
+        
+        textLbl.text = textArr[idx];
+        
+        [view addSubview:textLbl];
+        [textLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.centerX.equalTo(view.mas_centerX);
+            make.top.equalTo(view.mas_top).offset(13);
+
+        }];
+        
+        //价格
+        UILabel *priceLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kClearColor font:16.0];
+        
+        priceLbl.tag = 1400 + idx;
+        
+        [view addSubview:priceLbl];
+        [priceLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.top.equalTo(textLbl.mas_bottom).offset(10);
+            make.centerX.equalTo(view.mas_centerX);
+            
+        }];
+        
+        //涨跌数量
+        UILabel *diffPriceLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kClearColor font:11.0];
+        
+        diffPriceLbl.tag = 1410 + idx;
+        
+        diffPriceLbl.textAlignment = NSTextAlignmentCenter;
+        
+        [view addSubview:diffPriceLbl];
+        [diffPriceLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.left.equalTo(view.mas_left);
+            make.width.equalTo(@(viewW/2.0));
+            make.top.equalTo(priceLbl.mas_bottom).offset(10);
+            
+        }];
+        
+        //涨跌幅度
+        UILabel *diffPreLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kClearColor font:11.0];
+        
+        diffPreLbl.tag = 1420 + idx;
+        
+        diffPreLbl.textAlignment = NSTextAlignmentCenter;
+        
+        [view addSubview:diffPreLbl];
+        [diffPreLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.left.equalTo(diffPriceLbl.mas_right);
+            make.width.equalTo(@(viewW/2.0));
+            make.top.equalTo(priceLbl.mas_bottom).offset(10);
+            
+        }];
+        
+    }];
+
     //竖线
     UIView *vline = [[UIView alloc] init];
     
@@ -271,7 +349,57 @@
     
 }
 
+- (void)setEthQuotation:(QuotationModel *)ethQuotation {
+    
+    _ethQuotation = ethQuotation;
+    //以太坊
+    UILabel *priceLbl1 = [self viewWithTag:1400];
+    
+    priceLbl1.text = [NSString stringWithFormat:@"￥%@", [_ethQuotation.lastPrice convertToRealMoney]];
+    
+    priceLbl1.textColor = kRiseColor;
+    
+    UILabel *diffPriceLbl1 = [self viewWithTag:1410];
+    
+    diffPriceLbl1.textColor = kRiseColor;
+    
+    diffPriceLbl1.text = [NSString stringWithFormat:@"+%@", [@(3700) convertToRealMoney]];
+    
+    UILabel *diffPreLbl1 = [self viewWithTag:1420];
+    
+    diffPreLbl1.textColor = kRiseColor;
+    
+    diffPreLbl1.text = [NSString stringWithFormat:@"+%@%%", @"1.90"];
+    
+}
+
+- (void)setBtcQuotation:(QuotationModel *)btcQuotation {
+    
+    _btcQuotation = btcQuotation;
+    
+    //比特币
+    UILabel *priceLbl2 = [self viewWithTag:1401];
+    
+    priceLbl2.text = [NSString stringWithFormat:@"￥%@", [_btcQuotation.lastPrice convertToRealMoney]];
+    
+    priceLbl2.textColor = kThemeColor;
+    
+    UILabel *diffPriceLbl2 = [self viewWithTag:1411];
+    
+    diffPriceLbl2.textColor = kThemeColor;
+    
+    diffPriceLbl2.text = [NSString stringWithFormat:@"+%@", [@(3700) convertToRealMoney]];
+    
+    
+    UILabel *diffPreLbl2 = [self viewWithTag:1421];
+    
+    diffPreLbl2.textColor = kThemeColor;
+    
+    diffPreLbl2.text = [NSString stringWithFormat:@"+%@%%", @"1.90"];
+}
+
 #pragma mark - Events
+
 - (void)clickSystemNotice {
     
     if (_quotationBlock) {
@@ -288,6 +416,16 @@
     if (_quotationBlock) {
         
         _quotationBlock(QuotationEventTypeGuideDetail, index);
+    }
+}
+
+- (void)coinDetail:(UITapGestureRecognizer *)tapGR {
+    
+    NSInteger index = tapGR.view.tag - 1390;
+    
+    if (_quotationBlock) {
+        
+        _quotationBlock(QuotationEventTypeCoinDetail, index);
     }
 }
 
