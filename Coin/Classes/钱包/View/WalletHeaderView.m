@@ -200,13 +200,13 @@
 }
 
 #pragma mark - Setting
-- (void)setRate:(NSString *)rate {
+- (void)setUsdRate:(NSString *)usdRate {
     
-    _rate = rate;
+    _usdRate = usdRate;
     
     self.leftFlag.image = kImage(@"美国国旗");
     
-    self.rateAmountLbl.text = [NSString stringWithFormat:@"$1≈￥6.6079"];
+    self.rateAmountLbl.text = [NSString stringWithFormat:@"$1≈￥%@", usdRate];
     
     self.rightFlag.image = kImage(@"中国国旗");
     
@@ -215,6 +215,13 @@
     self.usdAmountLbl.text = @"0.00usd";
     
     self.hkdAmountLbl.text = @"0.00hkd";
+    
+}
+
+- (void)setHkdRate:(NSString *)hkdRate {
+    
+    _hkdRate = hkdRate;
+    
     
 }
 

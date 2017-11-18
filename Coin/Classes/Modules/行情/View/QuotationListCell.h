@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "QuotationListModel.h"
+#import "QuotationModel.h"
 
 @interface QuotationListCell : UITableViewCell
 
-@property (nonatomic, strong) QuotationListModel *quotation;
+@property (nonatomic, strong) QuotationModel *quotation;
 
 @end

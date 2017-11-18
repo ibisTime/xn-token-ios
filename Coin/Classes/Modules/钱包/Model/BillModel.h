@@ -11,7 +11,7 @@
 
 @interface BillModel : TLBaseModel
 
-@property (nonatomic, assign) NSInteger preAmount;
+@property (nonatomic, copy) NSString *preAmountString;
 
 @property (nonatomic, copy) NSString *realName;
 
@@ -25,11 +25,11 @@
 
 @property (nonatomic, copy) NSString *type;
 //账户余额
-@property (nonatomic, strong) NSNumber *postAmount;
+@property (nonatomic, copy) NSString *postAmountString;
 
 @property (nonatomic, copy) NSString *code;
 
-@property (nonatomic, strong) NSNumber *transAmount;
+@property (nonatomic, copy) NSString *transAmountString;
 
 @property (nonatomic, copy) NSString *userId;
 

@@ -132,6 +132,8 @@ static NSString *identifier = @"NoticeCellId";
     
     cell.notice = self.notices[indexPath.row];
     
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
     return cell;
     
 }

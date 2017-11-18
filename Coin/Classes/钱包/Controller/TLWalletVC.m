@@ -19,6 +19,7 @@
 #import "WithdrawalsCoinVC.h"
 #import "BillVC.h"
 #import "TLPwdRelatedVC.h"
+#import "RateDescVC.h"
 
 @interface TLWalletVC ()<RefreshDelegate>
 
@@ -53,7 +54,6 @@
     
     //tableView
     [self initTableView];
-    
     //列表查询我的币种
     [self getMyCurrencyList];
     
@@ -68,14 +68,17 @@
     
     if (!_headerView) {
         
+        CoinWeakSelf;
+        
         _headerView = [[WalletHeaderView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 150 + kStatusBarHeight + 50)];
         
         _headerView.headerBlock = ^{
             
-            [TLAlert alertWithInfo:@"正在研发中, 敬请期待"];
+            RateDescVC *descVC = [RateDescVC new];
+            
+            [weakSelf.navigationController pushViewController:descVC animated:YES];
         };
         
-        _headerView.rate = @"1";
     }
     return _headerView;
 }
@@ -134,10 +137,38 @@
             
             
         }];
+        
+        //查询美元汇率
+        [weakSelf searchRateWithCurrency:@"USD"];
+        //查询港元汇率
+        [weakSelf searchRateWithCurrency:@"HKD"];
+        
     }];
     
     [self.tableView beginRefreshing];
 
+}
+
+- (void)searchRateWithCurrency:(NSString *)currency {
+    
+    TLNetworking *http = [TLNetworking new];
+    
+    http.code = @"625280";
+    
+    http.parameters[@"currency"] = currency;
+    
+    [http postWithSuccess:^(id responseObject) {
+        
+        if ([currency isEqualToString:@"USD"]) {
+            
+            self.headerView.usdRate = responseObject[@"data"][@"rate"];
+
+        }
+        
+    } failure:^(NSError *error) {
+        
+        
+    }];
 }
 
 #pragma mark - RefreshDelegate

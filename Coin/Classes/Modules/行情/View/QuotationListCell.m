@@ -96,29 +96,27 @@
     [self addSubview:line];
     [line mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.left.right.equalTo(@0);
+        make.left.right.bottom.equalTo(@0);
         make.height.equalTo(@0.5);
-        make.bottom.equalTo(self.mas_bottom).offset(-40);
         
     }];
 }
 
-- (void)setQuotation:(QuotationListModel *)quotation {
+- (void)setQuotation:(QuotationModel *)quotation {
     
     _quotation = quotation;
     
-    self.siteNameLbl.text = @"BitFinex";
+    self.siteNameLbl.text = quotation.origin;
     
-    self.tradeNumLbl.text = [NSString stringWithFormat:@"交易量 %@", @"E34566"];
     
-    NSString *usd = @"7463.00 USD";
+    self.tradeNumLbl.text = [NSString stringWithFormat:@"交易量 %@",quotation.volume];
     
-    [self.usdNumLbl labelWithString:usd title:@"USD" font:Font(12.0) color:kTextColor];
-    
-    NSString *cny = @"3232455.98 CNY";
+    NSString *cny = [NSString stringWithFormat:@"%.4lf CNY", quotation.mid];
 
     [self.cnyNumLbl labelWithString:cny title:@"CNY" font:Font(12.0) color:kTextColor];
 
-
+    NSString *usd = @"7463.00 USD";
+    
+    [self.usdNumLbl labelWithString:usd title:@"USD" font:Font(12.0) color:kTextColor];
 }
 @end

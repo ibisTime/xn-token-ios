@@ -49,17 +49,17 @@
         
     }];
     
-    long long money = [_bill.transAmount longLongValue];
+    long long money = [_bill.transAmountString longLongValue];
 
     NSString *moneyStr = @"";
     
     if (money > 0) {
         
-        moneyStr = [NSString stringWithFormat:@"+%@", [_bill.transAmount convertToSimpleRealCoin]];
+        moneyStr = [NSString stringWithFormat:@"+%@", [_bill.transAmountString convertToSimpleRealCoin]];
         
     } else if (money <= 0) {
         
-        moneyStr = [NSString stringWithFormat:@"%@", [_bill.transAmount convertToSimpleRealCoin]];
+        moneyStr = [NSString stringWithFormat:@"%@", [_bill.transAmountString convertToSimpleRealCoin]];
         
     }
     

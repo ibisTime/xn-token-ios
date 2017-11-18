@@ -7,10 +7,10 @@
 //
 
 #import "TLTableView.h"
-#import "QuotationListModel.h"
+#import "QuotationModel.h"
 
 @interface QuotationListTableView : TLTableView
 
-@property (nonatomic, strong) NSArray <QuotationListModel *>*quotations;
+@property (nonatomic, strong) NSArray <QuotationModel *>*quotations;
 
 @end

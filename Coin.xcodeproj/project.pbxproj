@@ -20,10 +20,18 @@
 		211A34F71FB4328800FEB71F /* SettingTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 211A34F61FB4328800FEB71F /* SettingTableView.m */; };
 		211A34FD1FB4507E00FEB71F /* IdAuthVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 211A34FC1FB4507E00FEB71F /* IdAuthVC.m */; };
 		211A35041FB45A6A00FEB71F /* WalletHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 211A35031FB45A6A00FEB71F /* WalletHeaderView.m */; };
+		211A48A51FBE84220027E9FF /* PublishTipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 211A48A41FBE84220027E9FF /* PublishTipView.m */; };
+		211A53221FBFE3A100CC6294 /* RateDescVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 211A53211FBFE3A100CC6294 /* RateDescVC.m */; };
+		211A532F1FBFE4CF00CC6294 /* RateDescCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 211A532E1FBFE4CF00CC6294 /* RateDescCell.m */; };
+		211A53321FBFE4F100CC6294 /* RateDescTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 211A53311FBFE4F100CC6294 /* RateDescTableView.m */; };
+		211A53351FBFE53100CC6294 /* RateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 211A53341FBFE53100CC6294 /* RateModel.m */; };
+		211A533C1FC0261700CC6294 /* PublishBuyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 211A533B1FC0261700CC6294 /* PublishBuyVC.m */; };
+		211A53431FC028D000CC6294 /* PublishDraftModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 211A53421FC028D000CC6294 /* PublishDraftModel.m */; };
+		211A53461FC0320E00CC6294 /* PublishBuyTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 211A53451FC0320E00CC6294 /* PublishBuyTableView.m */; };
+		211A53491FC03C0600CC6294 /* PublishBuyCell1.m in Sources */ = {isa = PBXBuildFile; fileRef = 211A53481FC03C0600CC6294 /* PublishBuyCell1.m */; };
 		211C88821FBDDADF00CF4FC8 /* QuotationListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 211C88811FBDDADF00CF4FC8 /* QuotationListVC.m */; };
 		211C88851FBDDD3A00CF4FC8 /* QuotationListTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 211C88841FBDDD3A00CF4FC8 /* QuotationListTableView.m */; };
 		211C88881FBDDE1000CF4FC8 /* QuotationListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 211C88871FBDDE1000CF4FC8 /* QuotationListCell.m */; };
-		211C888B1FBDDEC900CF4FC8 /* QuotationListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 211C888A1FBDDEC900CF4FC8 /* QuotationListModel.m */; };
 		211DE6141FB5465E002FCF3D /* WalletTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 211DE6131FB5465E002FCF3D /* WalletTableView.m */; };
 		211DE6171FB54685002FCF3D /* WalletCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 211DE6161FB54685002FCF3D /* WalletCell.m */; };
 		211DE6A01FB58B4C002FCF3D /* TLDatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 211DE63E1FB58B4B002FCF3D /* TLDatePicker.m */; };
@@ -78,6 +86,8 @@
 		215979731FB84CB10029F177 /* BillDetailTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 215979721FB84CB10029F177 /* BillDetailTableView.m */; };
 		215979761FB84CC70029F177 /* BillDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 215979751FB84CC70029F177 /* BillDetailCell.m */; };
 		215979791FB947730029F177 /* WithdrawalsCoinVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 215979781FB947730029F177 /* WithdrawalsCoinVC.m */; };
+		21635DB61FBEB911003F48B4 /* PublishButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 21635DB51FBEB911003F48B4 /* PublishButton.m */; };
+		21635DB91FBECBDD003F48B4 /* TopLabelUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 21635DB81FBECBDD003F48B4 /* TopLabelUtil.m */; };
 		21A7F3121FB2E2F900FAA0A2 /* BindMobileVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A7F2E41FB2E2F900FAA0A2 /* BindMobileVC.m */; };
 		21A7F3131FB2E2F900FAA0A2 /* TLAccountSetBaseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A7F2E51FB2E2F900FAA0A2 /* TLAccountSetBaseVC.m */; };
 		21A7F3141FB2E2F900FAA0A2 /* TLPwdRelatedVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A7F2E61FB2E2F900FAA0A2 /* TLPwdRelatedVC.m */; };
@@ -143,14 +153,30 @@
 		211A34FC1FB4507E00FEB71F /* IdAuthVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IdAuthVC.m; sourceTree = "<group>"; };
 		211A35021FB45A6A00FEB71F /* WalletHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WalletHeaderView.h; sourceTree = "<group>"; };
 		211A35031FB45A6A00FEB71F /* WalletHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WalletHeaderView.m; sourceTree = "<group>"; };
+		211A48A31FBE84220027E9FF /* PublishTipView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PublishTipView.h; sourceTree = "<group>"; };
+		211A48A41FBE84220027E9FF /* PublishTipView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PublishTipView.m; sourceTree = "<group>"; };
+		211A53201FBFE3A100CC6294 /* RateDescVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RateDescVC.h; sourceTree = "<group>"; };
+		211A53211FBFE3A100CC6294 /* RateDescVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RateDescVC.m; sourceTree = "<group>"; };
+		211A532D1FBFE4CF00CC6294 /* RateDescCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RateDescCell.h; sourceTree = "<group>"; };
+		211A532E1FBFE4CF00CC6294 /* RateDescCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RateDescCell.m; sourceTree = "<group>"; };
+		211A53301FBFE4F100CC6294 /* RateDescTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RateDescTableView.h; sourceTree = "<group>"; };
+		211A53311FBFE4F100CC6294 /* RateDescTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RateDescTableView.m; sourceTree = "<group>"; };
+		211A53331FBFE53100CC6294 /* RateModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RateModel.h; sourceTree = "<group>"; };
+		211A53341FBFE53100CC6294 /* RateModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RateModel.m; sourceTree = "<group>"; };
+		211A533A1FC0261700CC6294 /* PublishBuyVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PublishBuyVC.h; sourceTree = "<group>"; };
+		211A533B1FC0261700CC6294 /* PublishBuyVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PublishBuyVC.m; sourceTree = "<group>"; };
+		211A53411FC028D000CC6294 /* PublishDraftModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PublishDraftModel.h; sourceTree = "<group>"; };
+		211A53421FC028D000CC6294 /* PublishDraftModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PublishDraftModel.m; sourceTree = "<group>"; };
+		211A53441FC0320E00CC6294 /* PublishBuyTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PublishBuyTableView.h; sourceTree = "<group>"; };
+		211A53451FC0320E00CC6294 /* PublishBuyTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PublishBuyTableView.m; sourceTree = "<group>"; };
+		211A53471FC03C0600CC6294 /* PublishBuyCell1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PublishBuyCell1.h; sourceTree = "<group>"; };
+		211A53481FC03C0600CC6294 /* PublishBuyCell1.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PublishBuyCell1.m; sourceTree = "<group>"; };
 		211C88801FBDDADF00CF4FC8 /* QuotationListVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QuotationListVC.h; sourceTree = "<group>"; };
 		211C88811FBDDADF00CF4FC8 /* QuotationListVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QuotationListVC.m; sourceTree = "<group>"; };
 		211C88831FBDDD3A00CF4FC8 /* QuotationListTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QuotationListTableView.h; sourceTree = "<group>"; };
 		211C88841FBDDD3A00CF4FC8 /* QuotationListTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QuotationListTableView.m; sourceTree = "<group>"; };
 		211C88861FBDDE1000CF4FC8 /* QuotationListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QuotationListCell.h; sourceTree = "<group>"; };
 		211C88871FBDDE1000CF4FC8 /* QuotationListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QuotationListCell.m; sourceTree = "<group>"; };
-		211C88891FBDDEC900CF4FC8 /* QuotationListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QuotationListModel.h; sourceTree = "<group>"; };
-		211C888A1FBDDEC900CF4FC8 /* QuotationListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QuotationListModel.m; sourceTree = "<group>"; };
 		211DE6121FB5465E002FCF3D /* WalletTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WalletTableView.h; sourceTree = "<group>"; };
 		211DE6131FB5465E002FCF3D /* WalletTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WalletTableView.m; sourceTree = "<group>"; };
 		211DE6151FB54685002FCF3D /* WalletCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WalletCell.h; sourceTree = "<group>"; };
@@ -261,6 +287,10 @@
 		215979751FB84CC70029F177 /* BillDetailCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BillDetailCell.m; sourceTree = "<group>"; };
 		215979771FB947730029F177 /* WithdrawalsCoinVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WithdrawalsCoinVC.h; sourceTree = "<group>"; };
 		215979781FB947730029F177 /* WithdrawalsCoinVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WithdrawalsCoinVC.m; sourceTree = "<group>"; };
+		21635DB41FBEB911003F48B4 /* PublishButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PublishButton.h; sourceTree = "<group>"; };
+		21635DB51FBEB911003F48B4 /* PublishButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PublishButton.m; sourceTree = "<group>"; };
+		21635DB71FBECBDD003F48B4 /* TopLabelUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopLabelUtil.h; sourceTree = "<group>"; };
+		21635DB81FBECBDD003F48B4 /* TopLabelUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopLabelUtil.m; sourceTree = "<group>"; };
 		21A7F2D21FB2D2D300FAA0A2 /* FoundationHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FoundationHeader.h; sourceTree = "<group>"; };
 		21A7F2D71FB2D62A00FAA0A2 /* CoinHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoinHeader.h; sourceTree = "<group>"; };
 		21A7F2E31FB2E2F900FAA0A2 /* TLChangeMobileVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLChangeMobileVC.h; sourceTree = "<group>"; };
@@ -437,16 +467,9 @@
 		211A35011FB45A5300FEB71F /* View */ = {
 			isa = PBXGroup;
 			children = (
-				2159795E1FB81CC40029F177 /* BillTableView.h */,
-				2159795F1FB81CC40029F177 /* BillTableView.m */,
-				215979651FB81D230029F177 /* BillCell.h */,
-				215979661FB81D230029F177 /* BillCell.m */,
-				215979711FB84CB10029F177 /* BillDetailTableView.h */,
-				215979721FB84CB10029F177 /* BillDetailTableView.m */,
-				215979741FB84CC70029F177 /* BillDetailCell.h */,
-				215979751FB84CC70029F177 /* BillDetailCell.m */,
-				2159796B1FB831B10029F177 /* FilterView.h */,
-				2159796C1FB831B10029F177 /* FilterView.m */,
+				211A53291FBFE49B00CC6294 /* Rate */,
+				211A53281FBFE47800CC6294 /* Filter */,
+				211A53231FBFE41B00CC6294 /* Bill */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -462,6 +485,120 @@
 				211DE6161FB54685002FCF3D /* WalletCell.m */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		211A53231FBFE41B00CC6294 /* Bill */ = {
+			isa = PBXGroup;
+			children = (
+				2159795E1FB81CC40029F177 /* BillTableView.h */,
+				2159795F1FB81CC40029F177 /* BillTableView.m */,
+				215979651FB81D230029F177 /* BillCell.h */,
+				215979661FB81D230029F177 /* BillCell.m */,
+				215979711FB84CB10029F177 /* BillDetailTableView.h */,
+				215979721FB84CB10029F177 /* BillDetailTableView.m */,
+				215979741FB84CC70029F177 /* BillDetailCell.h */,
+				215979751FB84CC70029F177 /* BillDetailCell.m */,
+			);
+			path = Bill;
+			sourceTree = "<group>";
+		};
+		211A53241FBFE42B00CC6294 /* BIll */ = {
+			isa = PBXGroup;
+			children = (
+				2159795B1FB81C2B0029F177 /* BillVC.h */,
+				2159795C1FB81C2B0029F177 /* BillVC.m */,
+				2159796E1FB84B8A0029F177 /* BillDetailVC.h */,
+				2159796F1FB84B8A0029F177 /* BillDetailVC.m */,
+			);
+			path = BIll;
+			sourceTree = "<group>";
+		};
+		211A53251FBFE43900CC6294 /* Rate */ = {
+			isa = PBXGroup;
+			children = (
+				211A53201FBFE3A100CC6294 /* RateDescVC.h */,
+				211A53211FBFE3A100CC6294 /* RateDescVC.m */,
+			);
+			path = Rate;
+			sourceTree = "<group>";
+		};
+		211A53261FBFE44C00CC6294 /* Recharge */ = {
+			isa = PBXGroup;
+			children = (
+				211DE6C81FB5A586002FCF3D /* RechargeCoinVC.h */,
+				211DE6C91FB5A586002FCF3D /* RechargeCoinVC.m */,
+				21D216841FB9C5750040795E /* QRCodeVC.h */,
+				21D216851FB9C5750040795E /* QRCodeVC.m */,
+			);
+			path = Recharge;
+			sourceTree = "<group>";
+		};
+		211A53271FBFE45F00CC6294 /* Withdrawals */ = {
+			isa = PBXGroup;
+			children = (
+				215979771FB947730029F177 /* WithdrawalsCoinVC.h */,
+				215979781FB947730029F177 /* WithdrawalsCoinVC.m */,
+			);
+			path = Withdrawals;
+			sourceTree = "<group>";
+		};
+		211A53281FBFE47800CC6294 /* Filter */ = {
+			isa = PBXGroup;
+			children = (
+				2159796B1FB831B10029F177 /* FilterView.h */,
+				2159796C1FB831B10029F177 /* FilterView.m */,
+			);
+			path = Filter;
+			sourceTree = "<group>";
+		};
+		211A53291FBFE49B00CC6294 /* Rate */ = {
+			isa = PBXGroup;
+			children = (
+				211A53301FBFE4F100CC6294 /* RateDescTableView.h */,
+				211A53311FBFE4F100CC6294 /* RateDescTableView.m */,
+				211A532D1FBFE4CF00CC6294 /* RateDescCell.h */,
+				211A532E1FBFE4CF00CC6294 /* RateDescCell.m */,
+			);
+			path = Rate;
+			sourceTree = "<group>";
+		};
+		211A53361FC021B400CC6294 /* 交易 */ = {
+			isa = PBXGroup;
+			children = (
+				211A53391FC021CF00CC6294 /* Model */,
+				211A53381FC021C700CC6294 /* View */,
+				211A53371FC021BD00CC6294 /* Controller */,
+			);
+			path = "交易";
+			sourceTree = "<group>";
+		};
+		211A53371FC021BD00CC6294 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				211A533A1FC0261700CC6294 /* PublishBuyVC.h */,
+				211A533B1FC0261700CC6294 /* PublishBuyVC.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		211A53381FC021C700CC6294 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				211A53441FC0320E00CC6294 /* PublishBuyTableView.h */,
+				211A53451FC0320E00CC6294 /* PublishBuyTableView.m */,
+				211A53471FC03C0600CC6294 /* PublishBuyCell1.h */,
+				211A53481FC03C0600CC6294 /* PublishBuyCell1.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		211A53391FC021CF00CC6294 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				211A53411FC028D000CC6294 /* PublishDraftModel.h */,
+				211A53421FC028D000CC6294 /* PublishDraftModel.m */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		211DE63B1FB58B4B002FCF3D /* Utils */ = {
@@ -510,6 +647,8 @@
 				211DE64B1FB58B4B002FCF3D /* TLPlaceholderView.m */,
 				215979681FB82BC10029F177 /* CustomPickerView.h */,
 				215979691FB82BC10029F177 /* CustomPickerView.m */,
+				21635DB71FBECBDD003F48B4 /* TopLabelUtil.h */,
+				21635DB81FBECBDD003F48B4 /* TopLabelUtil.m */,
 			);
 			path = CustomUI;
 			sourceTree = "<group>";
@@ -702,6 +841,8 @@
 			children = (
 				215979621FB81CED0029F177 /* BillModel.h */,
 				215979631FB81CED0029F177 /* BillModel.m */,
+				211A53331FBFE53100CC6294 /* RateModel.h */,
+				211A53341FBFE53100CC6294 /* RateModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -824,6 +965,10 @@
 			children = (
 				21D216991FBAD04B0040795E /* NoticeCell.h */,
 				21D2169A1FBAD04B0040795E /* NoticeCell.m */,
+				211C88831FBDDD3A00CF4FC8 /* QuotationListTableView.h */,
+				211C88841FBDDD3A00CF4FC8 /* QuotationListTableView.m */,
+				211C88861FBDDE1000CF4FC8 /* QuotationListCell.h */,
+				211C88871FBDDE1000CF4FC8 /* QuotationListCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -844,8 +989,6 @@
 			children = (
 				21223C711FBD8DB800057444 /* QuotationModel.h */,
 				21223C721FBD8DB800057444 /* QuotationModel.m */,
-				211C88891FBDDEC900CF4FC8 /* QuotationListModel.h */,
-				211C888A1FBDDEC900CF4FC8 /* QuotationListModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -864,10 +1007,6 @@
 			children = (
 				21D216A01FBAEDB10040795E /* QuotationView.h */,
 				21D216A11FBAEDB10040795E /* QuotationView.m */,
-				211C88831FBDDD3A00CF4FC8 /* QuotationListTableView.h */,
-				211C88841FBDDD3A00CF4FC8 /* QuotationListTableView.m */,
-				211C88861FBDDE1000CF4FC8 /* QuotationListCell.h */,
-				211C88871FBDDE1000CF4FC8 /* QuotationListCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -990,9 +1129,13 @@
 		2E394FB31FB055DE00BA0829 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				2EE950D41FB06AA900429257 /* BannerBrowser */,
 				2EE950D01FB066EB00429257 /* CoinChangeView.h */,
 				2EE950D11FB066EB00429257 /* CoinChangeView.m */,
+				211A48A31FBE84220027E9FF /* PublishTipView.h */,
+				211A48A41FBE84220027E9FF /* PublishTipView.m */,
+				21635DB41FBEB911003F48B4 /* PublishButton.h */,
+				21635DB51FBEB911003F48B4 /* PublishButton.m */,
+				2EE950D41FB06AA900429257 /* BannerBrowser */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1019,10 +1162,10 @@
 		2E394FD11FB0568F00BA0829 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				211A53361FC021B400CC6294 /* 交易 */,
 				21D216871FBA8F1F0040795E /* 行情 */,
 				211A34E51FB42F5000FEB71F /* 我的 */,
 				2E394FD21FB0568F00BA0829 /* 钱包 */,
-				2E394FDA1FB0568F00BA0829 /* 交易 */,
 				2E394FDE1FB0568F00BA0829 /* 订单 */,
 				2E394FE21FB0568F00BA0829 /* 发布 */,
 				21A7F2D81FB2E2F900FAA0A2 /* 用户 */,
@@ -1043,49 +1186,12 @@
 		2E394FD31FB0568F00BA0829 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				211DE6C81FB5A586002FCF3D /* RechargeCoinVC.h */,
-				211DE6C91FB5A586002FCF3D /* RechargeCoinVC.m */,
-				215979771FB947730029F177 /* WithdrawalsCoinVC.h */,
-				215979781FB947730029F177 /* WithdrawalsCoinVC.m */,
-				21D216841FB9C5750040795E /* QRCodeVC.h */,
-				21D216851FB9C5750040795E /* QRCodeVC.m */,
-				2159795B1FB81C2B0029F177 /* BillVC.h */,
-				2159795C1FB81C2B0029F177 /* BillVC.m */,
-				2159796E1FB84B8A0029F177 /* BillDetailVC.h */,
-				2159796F1FB84B8A0029F177 /* BillDetailVC.m */,
+				211A53271FBFE45F00CC6294 /* Withdrawals */,
+				211A53261FBFE44C00CC6294 /* Recharge */,
+				211A53251FBFE43900CC6294 /* Rate */,
+				211A53241FBFE42B00CC6294 /* BIll */,
 			);
 			path = Controller;
-			sourceTree = "<group>";
-		};
-		2E394FDA1FB0568F00BA0829 /* 交易 */ = {
-			isa = PBXGroup;
-			children = (
-				2E394FDB1FB0568F00BA0829 /* Controller */,
-				2E394FDC1FB0568F00BA0829 /* Model */,
-				2E394FDD1FB0568F00BA0829 /* View */,
-			);
-			path = "交易";
-			sourceTree = "<group>";
-		};
-		2E394FDB1FB0568F00BA0829 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
-		2E394FDC1FB0568F00BA0829 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		2E394FDD1FB0568F00BA0829 /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		2E394FDE1FB0568F00BA0829 /* 订单 */ = {
@@ -1375,7 +1481,9 @@
 				21A7F3171FB2E2F900FAA0A2 /* TLUserForgetPwdVC.m in Sources */,
 				211C88851FBDDD3A00CF4FC8 /* QuotationListTableView.m in Sources */,
 				211DE6BF1FB58B4C002FCF3D /* NSTimer+tlNoCycle.m in Sources */,
+				211A53221FBFE3A100CC6294 /* RateDescVC.m in Sources */,
 				211DE6BE1FB58B4C002FCF3D /* NSNumber+Extension.m in Sources */,
+				21635DB61FBEB911003F48B4 /* PublishButton.m in Sources */,
 				211DE6B31FB58B4C002FCF3D /* UIColor+theme.m in Sources */,
 				211DE6BA1FB58B4C002FCF3D /* NSString+Check.m in Sources */,
 				21A7F3151FB2E2F900FAA0A2 /* TLChangeMobileVC.m in Sources */,
@@ -1386,6 +1494,7 @@
 				211DE6C51FB58B4C002FCF3D /* HttpRequestService.m in Sources */,
 				211DE6A91FB58B4C002FCF3D /* TLPlaceholderView.m in Sources */,
 				2E394FED1FB0575A00BA0829 /* AppDelegate.m in Sources */,
+				211A48A51FBE84220027E9FF /* PublishTipView.m in Sources */,
 				21D216861FB9C5750040795E /* QRCodeVC.m in Sources */,
 				211DE6B51FB58B4C002FCF3D /* UIView+Responder.m in Sources */,
 				21223CB71FBDB2D200057444 /* WebVC.m in Sources */,
@@ -1397,11 +1506,13 @@
 				2E394FF51FB057B300BA0829 /* TLNavigationController.m in Sources */,
 				21A7F3241FB2E2F900FAA0A2 /* CaptchaView.m in Sources */,
 				2EE950C61FB05B5900429257 /* TLMineVC.m in Sources */,
+				211A53461FC0320E00CC6294 /* PublishBuyTableView.m in Sources */,
 				211DE6C61FB58B4C002FCF3D /* HttpLogger.m in Sources */,
 				21D216921FBA96060040795E /* NoticeModel.m in Sources */,
 				211DE6CA1FB5A586002FCF3D /* RechargeCoinVC.m in Sources */,
 				2159796A1FB82BC10029F177 /* CustomPickerView.m in Sources */,
 				211A34DE1FB4245D00FEB71F /* MineCell.m in Sources */,
+				211A53431FC028D000CC6294 /* PublishDraftModel.m in Sources */,
 				211DE6AB1FB58B4C002FCF3D /* TLTableView.m in Sources */,
 				21223C731FBD8DB800057444 /* QuotationModel.m in Sources */,
 				2EE950D21FB066EB00429257 /* CoinChangeView.m in Sources */,
@@ -1411,16 +1522,18 @@
 				2E3950001FB05ADB00BA0829 /* TLTransactionVC.m in Sources */,
 				211DE6B01FB58B4C002FCF3D /* UILable+convience.m in Sources */,
 				2159795D1FB81C2B0029F177 /* BillVC.m in Sources */,
+				211A53321FBFE4F100CC6294 /* RateDescTableView.m in Sources */,
 				211DE6B61FB58B4C002FCF3D /* UIView+Extension.m in Sources */,
 				21A7F3141FB2E2F900FAA0A2 /* TLPwdRelatedVC.m in Sources */,
-				211C888B1FBDDEC900CF4FC8 /* QuotationListModel.m in Sources */,
 				2EE950DA1FB06AA900429257 /* TLBannerCell.m in Sources */,
 				211DE6A01FB58B4C002FCF3D /* TLDatePicker.m in Sources */,
 				211DE6AA1FB58B4C002FCF3D /* TLImagePicker.m in Sources */,
 				21A7F3211FB2E2F900FAA0A2 /* AccountTf.m in Sources */,
+				211A53351FBFE53100CC6294 /* RateModel.m in Sources */,
 				215979671FB81D230029F177 /* BillCell.m in Sources */,
 				211DE6A81FB58B4C002FCF3D /* TLTextField.m in Sources */,
 				211A34D71FB3F51400FEB71F /* MineHeaderView.m in Sources */,
+				211A533C1FC0261700CC6294 /* PublishBuyVC.m in Sources */,
 				211DE6C11FB58B4C002FCF3D /* AppConfig.m in Sources */,
 				211DE6A41FB58B4C002FCF3D /* TLPickerTextField.m in Sources */,
 				211DE6AD1FB58B4C002FCF3D /* TLAlert.m in Sources */,
@@ -1432,6 +1545,7 @@
 				21A7F31E1FB2E2F900FAA0A2 /* TLUser.m in Sources */,
 				2E394FFC1FB059C100BA0829 /* TLBaseModel.m in Sources */,
 				211C88881FBDDE1000CF4FC8 /* QuotationListCell.m in Sources */,
+				21635DB91FBECBDD003F48B4 /* TopLabelUtil.m in Sources */,
 				2EA584C71FA813C900C7106C /* main.m in Sources */,
 				211DE6AF1FB58B4C002FCF3D /* UILabel+Extension.m in Sources */,
 				21A7F3131FB2E2F900FAA0A2 /* TLAccountSetBaseVC.m in Sources */,
@@ -1441,6 +1555,7 @@
 				211DE6BB1FB58B4C002FCF3D /* NSString+CGSize.m in Sources */,
 				211DE6B81FB58B4C002FCF3D /* UIControl+Block.m in Sources */,
 				211DE6C41FB58B4C002FCF3D /* HttpSign.m in Sources */,
+				211A53491FC03C0600CC6294 /* PublishBuyCell1.m in Sources */,
 				211A35041FB45A6A00FEB71F /* WalletHeaderView.m in Sources */,
 				21D216A21FBAEDB10040795E /* QuotationView.m in Sources */,
 				21D216981FBA9C040040795E /* SystemNoticeVC.m in Sources */,
@@ -1457,6 +1572,7 @@
 				211DE6A51FB58B4C002FCF3D /* TLProgressHUD.m in Sources */,
 				2159796D1FB831B10029F177 /* FilterView.m in Sources */,
 				21D2168E1FBA90CE0040795E /* BannerModel.m in Sources */,
+				211A532F1FBFE4CF00CC6294 /* RateDescCell.m in Sources */,
 				211DE6B11FB58B4C002FCF3D /* UIButton+EnLargeEdge.m in Sources */,
 				211DE6A21FB58B4C002FCF3D /* TLCaptchaView.m in Sources */,
 				211DE6B71FB58B4C002FCF3D /* UIBarButtonItem+convience.m in Sources */,

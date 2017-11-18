@@ -219,6 +219,26 @@
     return [NSString stringWithFormat:@"%lld",money];
 }
 
+- (NSString *)convertToSimpleRealCoin {
+    
+    if (!self) {
+        
+        NSLog(@"金额不能为空");
+        return nil;
+    }
+    
+    long long c = [self longLongValue];
+    
+    //保留8位小数,第九位舍去
+    NSDecimalNumberHandler *handler = [NSDecimalNumberHandler decimalNumberHandlerWithRoundingMode:NSRoundBankers scale:8 raiseOnExactness:NO raiseOnOverflow:NO raiseOnUnderflow:NO raiseOnDivideByZero:YES];
+    
+    NSDecimalNumber *m = [NSDecimalNumber decimalNumberWithString:[@(c/(1.0e+18)) stringValue]];
+    
+    NSDecimalNumber *n = [m decimalNumberByRoundingAccordingToBehavior:handler];
+    
+    return [NSString stringWithFormat:@"%@",n];
+}
+
 + (NSString *)getWifiMacAddress {
     
     NSArray *ifs = CFBridgingRelease(CNCopySupportedInterfaces());

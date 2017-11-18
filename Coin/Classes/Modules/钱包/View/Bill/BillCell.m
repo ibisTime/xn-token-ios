@@ -10,7 +10,7 @@
 #import "AppColorMacro.h"
 #import "TLUIHeader.h"
 #import "NSString+Date.h"
-#import "NSNumber+Extension.h"
+#import "NSString+Extension.h"
 #import "UILabel+Extension.h"
 
 @interface BillCell ()
@@ -139,21 +139,25 @@
     _billModel = billModel;
     
     //
-    long long money = [_billModel.transAmount longLongValue];
+    long long money = [_billModel.transAmountString longLongValue];
 
     NSString *moneyStr = @"";
 
     if (money > 0) {
         
-        moneyStr = [NSString stringWithFormat:@"+%@", [_billModel.transAmount convertToSimpleRealCoin]];
+        moneyStr = [NSString stringWithFormat:@"+%@", [_billModel.transAmountString convertToSimpleRealCoin]];
+
+        self.iconIV.image = kImage(@"账单-充币");
 
     } else if (money <= 0) {
 
-        moneyStr = [NSString stringWithFormat:@"%@", [_billModel.transAmount convertToSimpleRealCoin]];
+        moneyStr = [NSString stringWithFormat:@"%@", [_billModel.transAmountString convertToSimpleRealCoin]];
+
+        self.iconIV.image = kImage(@"账单-提币");
 
     }
 
-    self.iconIV.image = [UIImage imageNamed:_billModel.getImgName];
+//    self.iconIV.image = [UIImage imageNamed:_billModel.getImgName];
 
     self.dayLbl.text = [_billModel.createDatetime convertDateWithFormat:@"dd日"];
     self.timeLbl.text = [_billModel.createDatetime convertDateWithFormat:@"HH:mm"];

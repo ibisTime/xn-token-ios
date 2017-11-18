@@ -63,7 +63,8 @@ static NSString *identifierCell = @"WalletCell";
 
     [cell.billBtn addTarget:self action:@selector(clickBill:) forControlEvents:UIControlEventTouchUpInside];
 
-    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
     return cell;
 }
 

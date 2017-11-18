@@ -1,24 +1,24 @@
 //
-//  QuotationListTableView.m
+//  BillDetailTableView.m
 //  Coin
 //
-//  Created by 蔡卓越 on 2017/11/16.
+//  Created by 蔡卓越 on 2017/11/12.
 //  Copyright © 2017年  tianlei. All rights reserved.
 //
 
-#import "QuotationListTableView.h"
-#import "TLUIHeader.h"
-#import "AppColorMacro.h"
+#import "BillDetailTableView.h"
 
-#import "QuotationListCell.h"
+#import "BillDetailCell.h"
+#import "NSString+Date.h"
+#import "NSString+Extension.h"
 
-@interface QuotationListTableView ()<UITableViewDataSource, UITableViewDelegate>
+@interface BillDetailTableView ()<UITableViewDataSource, UITableViewDelegate>
 
 @end
 
-@implementation QuotationListTableView
+@implementation BillDetailTableView
 
-static NSString *identifierCell = @"QuotationListCell";
+static NSString *identifierCell = @"BillDetailCell";
 
 - (instancetype)initWithFrame:(CGRect)frame style:(UITableViewStyle)style {
     
@@ -27,29 +27,40 @@ static NSString *identifierCell = @"QuotationListCell";
         self.dataSource = self;
         self.delegate = self;
         
-        [self registerClass:[QuotationListCell class] forCellReuseIdentifier:identifierCell];
+        [self registerClass:[BillDetailCell class] forCellReuseIdentifier:identifierCell];
     }
     
     return self;
 }
 
-#pragma mark - UITableViewDataSource;
+#pragma mark - UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-//    return self.quotations.count;
-    return 6;
+    return 3;
+    
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    QuotationListCell *cell = [tableView dequeueReusableCellWithIdentifier:identifierCell forIndexPath:indexPath];
+    BillDetailCell *cell = [tableView dequeueReusableCellWithIdentifier:identifierCell];
     
-//    cell.quotation = self.quotations[indexPath.row];
+    NSArray *textArr = @[@"账单余额", @"账单时间", @"账单类型"];
     
-    cell.quotation = [QuotationListModel new];
+    NSString *dateStr = [_bill.createDatetime convertToDetailDate];
     
+    NSString *postAmount = [_bill.postAmountString convertToSimpleRealCoin];
+    
+    NSArray *rightArr = @[postAmount, dateStr, _bill.bizNote];
+    
+    cell.titleLbl.text = textArr[indexPath.row];
+    
+    cell.rightLabel.text = rightArr[indexPath.row];
+    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
     return cell;
+    
 }
 
 #pragma mark - UITableViewDelegate
@@ -58,17 +69,16 @@ static NSString *identifierCell = @"QuotationListCell";
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    return 70;
+    return 40;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     
-    return 10;
+    return 0.1;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {

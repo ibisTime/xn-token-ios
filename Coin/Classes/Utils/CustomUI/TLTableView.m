@@ -9,7 +9,6 @@
 #import "TLTableView.h"
 #import "MJRefresh.h"
 #import <UIScrollView+TLAdd.h>
-#import "CoinHeader.h"
 
 #define  adjustsContentInsets(scrollView)\
 do { \

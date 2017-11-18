@@ -30,7 +30,7 @@
 
 @property (nonatomic, copy) NSString *origin;
 //最新价格
-@property (nonatomic, strong) NSNumber *lastPrice;
+@property (nonatomic, assign) CGFloat lastPrice;
 //币种
 @property (nonatomic, copy) NSString *coin;
 

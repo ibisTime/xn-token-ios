@@ -30,6 +30,8 @@
 @property (nonatomic,strong) NSMutableArray *bannerPics;
 //系统消息
 @property (nonatomic,strong) NSMutableArray <NoticeModel *>*notices;
+//行情列表
+@property (nonatomic, strong) NSArray <QuotationModel *>*quotations;
 
 @end
 
@@ -47,10 +49,9 @@
     self.title = @"行情";
 
     [self initScrollView];
-    //查询以太币行情
-    [self queryCoinQuotationWithCoinName:@"ETH"];
-    //查询比特币行情
-    [self queryCoinQuotationWithCoinName:@"BTC"];
+    
+    //查询以太币和比特币行情
+    [self queryCoinQuotation];
     
     [self getBanner];
 }
@@ -99,9 +100,7 @@
             
         case QuotationEventTypeCoinDetail:
         {
-//            [TLAlert alertWithInfo:@"正在研发中, 敬请期待"];
-//            
-//            return ;
+
             QuotationListVC *listVC = [QuotationListVC new];
 
             listVC.quototationType = index == 0 ? QuotationListTypeETH: QuotationListTypeBTC;
@@ -216,30 +215,32 @@
     
 }
 
-- (void)queryCoinQuotationWithCoinName:(NSString *)coinName {
+- (void)queryCoinQuotation {
     
     TLNetworking *http = [TLNetworking new];
     
     http.code = @"625290";
     
-    http.parameters[@"coin"] = coinName;
-    
     [http postWithSuccess:^(id responseObject) {
         
-        QuotationModel *quotation = [QuotationModel tl_objectWithDictionary:responseObject[@"data"]];
+        self.quotations = [QuotationModel tl_objectArrayWithDictionaryArray:responseObject[@"data"]];
         
-        if ([coinName isEqualToString:@"ETH"]) {
+        [self.quotations enumerateObjectsUsingBlock:^(QuotationModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             
-            self.quotationView.ethQuotation = quotation;
-
-        } else if ([coinName isEqualToString:@"BTC"]) {
-            
-            self.quotationView.btcQuotation = quotation;
-
-        } else {
-            
-            
-        }
+            if ([obj.coin isEqualToString:@"ETH"]) {
+                
+                self.quotationView.ethQuotation = obj;
+                
+            } else if ([obj.coin isEqualToString:@"BTC"]) {
+                
+                self.quotationView.btcQuotation = obj;
+                
+            } else {
+                
+                
+            }
+        }];
+        
         
     } failure:^(NSError *error) {
         

@@ -47,6 +47,8 @@
 //转换 乘以10的18次方
 - (NSString *)convertToSysCoin;
 
+- (NSString *)convertToSimpleRealCoin;
+
 //获取WiFiMac物理地址
 + (NSString *)getWifiMacAddress;
 

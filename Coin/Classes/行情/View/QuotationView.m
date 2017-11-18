@@ -63,7 +63,7 @@
     CoinWeakSelf;
     
     //顶部轮播
-    TLBannerView *bannerView = [[TLBannerView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kCarouselHeight)];
+    TLBannerView *bannerView = [[TLBannerView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kHeight(175))];
     
     bannerView.selected = ^(NSInteger index) {
         
@@ -355,7 +355,7 @@
     //以太坊
     UILabel *priceLbl1 = [self viewWithTag:1400];
     
-    priceLbl1.text = [NSString stringWithFormat:@"￥%@", [_ethQuotation.lastPrice convertToRealMoney]];
+    priceLbl1.text = [NSString stringWithFormat:@"￥%.2lf", _ethQuotation.lastPrice];
     
     priceLbl1.textColor = kRiseColor;
     
@@ -380,7 +380,7 @@
     //比特币
     UILabel *priceLbl2 = [self viewWithTag:1401];
     
-    priceLbl2.text = [NSString stringWithFormat:@"￥%@", [_btcQuotation.lastPrice convertToRealMoney]];
+    priceLbl2.text = [NSString stringWithFormat:@"￥%.2lf", _btcQuotation.lastPrice];
     
     priceLbl2.textColor = kThemeColor;
     

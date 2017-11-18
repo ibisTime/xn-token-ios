@@ -13,7 +13,9 @@ typedef void(^WalletHeaderBlock)(void);
 @interface WalletHeaderView : UIView
 
 @property (nonatomic, copy) WalletHeaderBlock headerBlock;
-//汇率
-@property (nonatomic, copy) NSString *rate;
+//美元汇率
+@property (nonatomic, copy) NSString *usdRate;
+//港元汇率
+@property (nonatomic, copy) NSString *hkdRate;
 
 @end
