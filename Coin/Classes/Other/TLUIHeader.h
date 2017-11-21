@@ -24,4 +24,6 @@
 
 #define CoinWeakSelf  __weak typeof(self) weakSelf = self;
 
+#define kAdvertiseListRefresh @"kAdvertiseListRefresh"
+
 #endif /* TLUIHeader_h */

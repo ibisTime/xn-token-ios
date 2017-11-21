@@ -11,7 +11,7 @@
 #import "AppColorMacro.h"
 
 #import "TLAlert.h"
-#import <CDCommon/UIScrollView+TLAdd.h>
+#import <UIScrollView+TLAdd.h>
 
 #define myDotNumbers     @"-0123456789.\n"
 #define myNumbers          @"-0123456789\n"
@@ -275,11 +275,18 @@
                 
             case 6:
             {
+                CoinWeakSelf;
+                
                 TLPickerTextField *picker = [[TLPickerTextField alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 50) leftTitle:obj titleWidth:90 placeholder:placeHolderArr[idx]];
                 
                 picker.tag = 1200 + idx;
                 
-                picker.tagNames = @[@"银行转账", @"支付宝", @"微信"];
+                picker.tagNames = @[@"支付宝", @"微信", @"银行转账"];
+                
+                picker.didSelectBlock = ^(NSInteger index) {
+                    
+                    weakSelf.payTypeIndex = index;
+                };
                 
                 [self.scrollView addSubview:picker];
                 
@@ -389,7 +396,7 @@
     
     self.highSettingView = highSettingView;
     
-    NSArray *textArr = @[@"高级设置", @"开发时间", @"仅粉丝"];
+    NSArray *textArr = @[@"高级设置", @"开放时间", @"仅粉丝"];
     
     [textArr enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         

@@ -260,7 +260,7 @@
         //初始化用户信息
         [[TLUser user] setUserInfoWithDict:userInfo];
         //获取人民币和积分账户
-        [self requestAccountNumber];
+//        [self requestAccountNumber];
         
         [[NSNotificationCenter defaultCenter] postNotificationName:kUserLoginNotification object:nil];
         

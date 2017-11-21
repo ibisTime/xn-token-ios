@@ -1,13 +1,13 @@
 //
-//  PublishSellVC.m
+//  PublishBuyVC.m
 //  Coin
 //
-//  Created by 蔡卓越 on 2017/11/21.
+//  Created by 蔡卓越 on 2017/11/18.
 //  Copyright © 2017年  tianlei. All rights reserved.
 //
 
-#import "PublishSellVC.h"
-#import "PublishSellView.h"
+#import "PublishBuyVC.h"
+#import "PublishBuyView.h"
 
 #import "OverTimeModel.h"
 #import "QuotationModel.h"
@@ -17,9 +17,9 @@
 #import "UIBarButtonItem+convience.h"
 #import "NSString+Check.h"
 
-@interface PublishSellVC ()
-
-@property (nonatomic, strong) PublishSellView *publishView;
+@interface PublishBuyVC ()
+//
+@property (nonatomic, strong) PublishBuyView *publishView;
 //底部按钮
 @property (nonatomic, strong) UIView *bottomView;
 //data
@@ -27,24 +27,24 @@
 
 @end
 
-@implementation PublishSellVC
+@implementation PublishBuyVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.title = @"发布出售";
+    
+    self.title = @"发布购买";
     
     self.timeArr = [NSMutableArray array];
     
     //保留草稿
     [self addRightItem];
-    //发布出售
+    //发布购买
     [self initPublishView];
-    //获取收款期限
+    //获取付款期限
     [self requestOverTime];
     //查询以太币和比特币行情
     [self queryCoinQuotation];
-    
 }
 
 #pragma mark - Init
@@ -57,9 +57,9 @@
     
     CoinWeakSelf;
     
-    self.publishView = [[PublishSellView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight)];
+    self.publishView = [[PublishBuyView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight)];
     
-    self.publishView.sellBlock = ^(PublishDraftModel *draft) {
+    self.publishView.buyBlock = ^(PublishDraftModel *draft) {
         
         [weakSelf publishAdvertisementWithDraft:draft];
     };
@@ -74,7 +74,7 @@
     
     PublishDraftModel *draft = [PublishDraftModel new];
     
-    draft.protectPrice = self.publishView.lowNumTF.text;
+    draft.protectPrice = self.publishView.priceTF.text;
     
     draft.premiumRate = self.publishView.premiumRateTF.text;
     
@@ -118,7 +118,7 @@
         [data enumerateObjectsUsingBlock:^(OverTimeModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             
             [self.timeArr addObject:obj.dvalue];
-            
+
         }];
         
         self.publishView.timeArr = [self.timeArr copy];
@@ -146,12 +146,6 @@
             return ;
         }
         
-        if (![draft.protectPrice valid]) {
-            
-            [TLAlert alertWithInfo:@"请输入最低可成交的价格"];
-            return ;
-        }
-        
         if (![draft.minTrade valid]) {
             
             [TLAlert alertWithInfo:@"请输入交易的最小限额"];
@@ -166,19 +160,19 @@
         
         if (![draft.buyTotal valid]) {
             
-            [TLAlert alertWithInfo:@"请输入出售总量"];
+            [TLAlert alertWithInfo:@"请输入购买总量"];
             return ;
         }
         
         if (![draft.payType valid]) {
             
-            [TLAlert alertWithInfo:@"请选择收款方式"];
+            [TLAlert alertWithInfo:@"请选择付款方式"];
             return ;
         }
         
         if (![draft.payLimit valid]) {
             
-            [TLAlert alertWithInfo:@"请选择收款期限"];
+            [TLAlert alertWithInfo:@"请选择付款期限"];
             return ;
         }
         
@@ -187,7 +181,7 @@
             [TLAlert alertWithInfo:@"请填写广告留言"];
             return ;
         }
-        
+    
     }
     
     CGFloat rate = [draft.premiumRate doubleValue]/100.0;
@@ -208,11 +202,11 @@
     http.parameters[@"protectPrice"] = draft.protectPrice;
     //发布类型（0=存草稿，1=发布）
     http.parameters[@"publishType"] = draft.isPublish == YES ? @"1": @"0";
-    http.parameters[@"totalAmount"] = draft.buyTotal;
+    http.parameters[@"totalCount"] = draft.buyTotal;
     http.parameters[@"tradeCurrency"] = @"CNY";
     http.parameters[@"tradeCoin"] = @"ETH";
     //0=买币, 1=卖币
-    http.parameters[@"tradeType"] = @"1";
+    http.parameters[@"tradeType"] = @"0";
     
     [http postWithSuccess:^(id responseObject) {
         
@@ -223,8 +217,10 @@
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             
             [self.navigationController popViewControllerAnimated:YES];
-            
+
         });
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:kAdvertiseListRefresh object:nil];
         
     } failure:^(NSError *error) {
         
@@ -249,11 +245,11 @@
                 self.publishView.marketPrice = [NSString stringWithFormat:@"%.4lf", obj.mid];
                 
             }
-            //            else if ([obj.coin isEqualToString:@"BTC"]) {
-            //
-            //                self.quotationView.btcQuotation = obj;
-            //
-            //            }
+//            else if ([obj.coin isEqualToString:@"BTC"]) {
+//
+//                self.quotationView.btcQuotation = obj;
+//
+//            }
             else {
                 
                 
@@ -270,6 +266,5 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 
 @end

@@ -9,7 +9,7 @@
 #import "TLTransactionVC.h"
 #import "TLUIHeader.h"
 
-#import "TLTableView.h"
+#import "TradeTableView.h"
 #import "CoinChangeView.h"
 #import "TLBannerView.h"
 #import "PublishTipView.h"
@@ -20,22 +20,30 @@
 #import "WebVC.h"
 #import "PublishBuyVC.h"
 #import "PublishSellVC.h"
+#import "TradeBuyVC.h"
+#import "TradeSellVC.h"
 
-@interface TLTransactionVC ()<UITableViewDelegate, UITableViewDataSource, SegmentDelegate>
+@interface TLTransactionVC ()<SegmentDelegate, RefreshDelegate>
 
-@property (nonatomic, strong) TLTableView *txTableView;
+@property (nonatomic, strong) TLPageDataHelper *helper;
+//切换
+@property (nonatomic, strong) TopLabelUtil *labelUnil;
+//图片
+@property (nonatomic,strong) NSMutableArray *bannerPics;
+//tableview
+@property (nonatomic, strong) TradeTableView *tableView;
+//广告列表
+@property (nonatomic, strong) NSArray <AdvertiseModel *>*advertises;
 //发布
 @property (nonatomic, strong) UIButton *publishBtn;
 //发布界面
 @property (nonatomic, strong) PublishTipView *tipView;
 //banner
 @property (nonatomic, strong) TLBannerView *bannerView;
-
+//
 @property (nonatomic,strong) NSMutableArray <BannerModel *>*bannerRoom;
-//图片
-@property (nonatomic,strong) NSMutableArray *bannerPics;
-//切换
-@property (nonatomic, strong) TopLabelUtil *labelUnil;
+//交易方式(买币和卖币)
+@property (nonatomic, copy) NSString *tradeType;
 
 @end
 
@@ -47,9 +55,14 @@
     [self navBarUI];
     
     [self setUpUI];
+    
+    [self addNotification];
     //banner
     [self getBanner];
+    //获取广告
+    [self requestAdvetiseList];
     
+    [self.tableView beginRefreshing];
 }
 
 #pragma mark- 交易搜索
@@ -102,13 +115,23 @@
     
     CoinWeakSelf;
     
-    self.txTableView = [TLTableView tableViewWithFrame:CGRectZero delegate:self dataSource:self];
-    [self.view addSubview:self.txTableView];
-    self.txTableView.backgroundColor = [UIColor orangeColor];
-     
-    [self.txTableView mas_makeConstraints:^(MASConstraintMaker *make) {
+    self.tradeType = @"1";
+    //CGRectMake(0, 0, kScreenWidth, kSuperViewHeight - kTabBarHeight - kBottomInsetHeight)
+    self.tableView = [[TradeTableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+    
+    self.tableView.refreshDelegate = self;
+    
+    [self.view addSubview:self.tableView];
+//    self.tableView.backgroundColor = [UIColor orangeColor];
+    
+    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(UIEdgeInsetsZero);
     }];
+    
+    if (@available(iOS 11.0, *)) {
+        
+        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    }
     
    //1.banner
     TLBannerView *bannerView = [[TLBannerView alloc] initWithFrame:CGRectMake(0, 0,SCREEN_WIDTH, 140)];
@@ -129,7 +152,7 @@
     
     self.bannerView = bannerView;
     
-    self.txTableView.tableHeaderView = bannerView;
+    self.tableView.tableHeaderView = bannerView;
     
     
    //2.发布
@@ -164,6 +187,11 @@
     };
 }
 
+- (void)addNotification{
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshData) name:kAdvertiseListRefresh object:nil];
+}
+
 #pragma mark - Events
 - (void)clickPublish {
     
@@ -184,6 +212,11 @@
         
         [self.navigationController pushViewController:sellVC animated:YES];
     }
+}
+
+- (void)refreshData {
+    
+    [self.tableView beginRefreshing];
 }
 
 #pragma mark - Data
@@ -218,41 +251,101 @@
     
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+- (void)requestAdvetiseList {
     
-    return 0;
+    CoinWeakSelf;
     
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    TLPageDataHelper *helper = [TLPageDataHelper new];
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UITableViewCellId"];
-    if (!cell) {
+    helper.code = @"625228";
+    
+    helper.start = 1;
+    helper.limit = 20;
+    
+    helper.parameters[@"coin"] = @"ETH";
+    helper.parameters[@"tradeType"] = self.tradeType;
+    
+    helper.tableView = self.tableView;
+    
+    self.helper = helper;
+    
+    [helper modelClass:[AdvertiseModel class]];
+    
+    [self.tableView addRefreshAction:^{
         
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"UITableViewCellId"];
-        
-    }
-    
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
+            
+            weakSelf.advertises = objs;
+            
+            weakSelf.tableView.advertises = objs;
 
-    return cell;
+            [weakSelf.tableView reloadData_tl];
+
+        } failure:^(NSError *error) {
+            
+        }];
+    }];
+    
+    [self.tableView addLoadMoreAction:^{
+        
+        [helper loadMore:^(NSMutableArray *objs, BOOL stillHave) {
+            
+            weakSelf.advertises = objs;
+            
+            weakSelf.tableView.advertises = objs;
+            
+            [weakSelf.tableView reloadData_tl];
+            
+        } failure:^(NSError *error) {
+            
+        }];
+    }];
+    
+    [self.tableView endRefreshingWithNoMoreData_tl];
+    
 }
 
 #pragma mark - SegmentDelegate
 -(void)segment:(TopLabelUtil *)segment didSelectIndex:(NSInteger)index {
     
-    NSString *notiStr;
-    
     if (index == 1) {
         
-        notiStr = @"1";
+        self.tradeType = @"1";
         
     }else{
-        notiStr = @"2";
+        
+        self.tradeType = @"0";
+
     }
+    
+    self.helper.parameters[@"tradeType"] = self.tradeType;
+
+    [self.tableView beginRefreshing];
     
     [self.labelUnil dyDidScrollChangeTheTitleColorWithContentOfSet:(index-1)*kScreenWidth];
 
 }
 
+#pragma mark - RefreshDelegate
+
+- (void)refreshTableView:(TLTableView *)refreshTableview didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if ([self.tradeType isEqualToString:@"1"]) {
+        
+        TradeBuyVC *buyVC = [TradeBuyVC new];
+        
+        buyVC.advertise = self.advertises[indexPath.row];
+        
+        [self.navigationController pushViewController:buyVC animated:YES];
+    } else {
+        
+//        TradeSellVC *sellVC = [TradeSellVC new];
+        
+//        sellVC.advertise = self.advertises[indexPath.row];
+        
+//        [self.navigationController pushViewController:sellVC animated:YES];
+    }
+    
+    
+}
 @end
