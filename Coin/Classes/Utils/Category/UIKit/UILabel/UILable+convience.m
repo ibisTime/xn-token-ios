@@ -61,4 +61,16 @@
     
     return [UILabel labelWithFrame:CGRectZero textAligment:NSTextAlignmentLeft backgroundColor:color font:Font(font) textColor:textColor];
 }
+
++ (UILabel *)labelWithTitle:(NSString *)title frame:(CGRect)frame {
+    
+    UILabel *label = [[UILabel alloc] initWithFrame:frame];
+    label.text = title;
+    label.textColor = kTextColor;
+    label.textAlignment = NSTextAlignmentCenter;
+    label.font = Font(kWidth(18.0));
+    
+    return label;
+}
+
 @end

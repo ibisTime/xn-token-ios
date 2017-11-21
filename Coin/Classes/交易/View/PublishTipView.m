@@ -105,10 +105,14 @@
     
     [self hide];
     
-    if (_publishBlock) {
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         
-        _publishBlock(btn.tag - 1000);
-    }
+        if (_publishBlock) {
+            
+            _publishBlock(btn.tag - 1000);
+        }
+    });
+    
 }
 
 - (void)clickCancel {

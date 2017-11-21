@@ -12,17 +12,6 @@
 
 @interface PublishBuyCell1 ()
 
-//leftText
-@property (nonatomic, strong) UILabel *leftTextLbl;
-//rightText
-@property (nonatomic, strong) UILabel *rightTextLbl;
-//UITextField
-@property (nonatomic, strong) UITextField *textTF;
-//button
-@property (nonatomic, strong) UIButton *promptBtn;
-//arrow
-@property (nonatomic, strong) UIImageView *arrowIV;
-
 @end
 
 @implementation PublishBuyCell1
@@ -68,14 +57,36 @@
     //rightText
     self.rightTextLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:15.0];
     
+    self.rightTextLbl.textAlignment = NSTextAlignmentRight;
+    
     [self addSubview:self.rightTextLbl];
     [self.rightTextLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.right.equalTo(self.mas_left).offset(15);
+        make.right.equalTo(self.promptBtn.mas_left).offset(0);
         make.centerY.equalTo(self.mas_centerY);
         make.width.equalTo(@70);
         
     }];
+    
+    //arrowIV
+    self.arrowIV = [[UIImageView alloc] initWithImage:kImage(@"")];
+    
+    self.arrowIV.contentMode = UIViewContentModeScaleAspectFit;
+    
+    
+    [self addSubview:self.arrowIV];
+    [self.arrowIV mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.right.equalTo(self.promptBtn.mas_left).offset(0);
+        make.centerY.equalTo(self.mas_centerY);
+        make.width.height.equalTo(@15);
+    }];
+    
+    //textTF
+    self.textTF = [[UITextField alloc] init];
+    
+    [self addSubview:self.textTF];
+    
 }
 
 @end

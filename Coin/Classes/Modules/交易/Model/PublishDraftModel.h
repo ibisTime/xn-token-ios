@@ -17,6 +17,8 @@
 @property (nonatomic, strong) NSString *minTrade;
 //单笔最大交易额
 @property (nonatomic, strong) NSString *maxTrade;
+//购买总数
+@property (nonatomic, copy) NSString *buyTotal;
 //支付类型
 @property (nonatomic, copy) NSString *payType;
 //支付期限
@@ -30,5 +32,7 @@
 //高级设置
 //0=任何人都可以交易、1=只有受信任的人可以交易
 @property (nonatomic, assign) BOOL onlyTrust;
+//发布类型（0=存草稿，1=发布）
+@property (nonatomic, assign) BOOL isPublish;
 
 @end

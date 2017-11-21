@@ -25,4 +25,9 @@
 //设置Label的字体
 + (UILabel *)labelWithBackgroundColor:(UIColor *)color textColor:(UIColor *)textColor font:(CGFloat)font;
 
+/**
+ 黑色Label，带frame
+ */
++ (UILabel *)labelWithTitle:(NSString *)title frame:(CGRect)frame;
+
 @end

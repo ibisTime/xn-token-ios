@@ -18,6 +18,8 @@
 #import "BannerModel.h"
 
 #import "WebVC.h"
+#import "PublishBuyVC.h"
+#import "PublishSellVC.h"
 
 @interface TLTransactionVC ()<UITableViewDelegate, UITableViewDataSource, SegmentDelegate>
 
@@ -172,9 +174,15 @@
  
     if (index == 0) {
 
-    }
-    else if (index == 1) {
+        PublishBuyVC *buyVC = [PublishBuyVC new];
         
+        [self.navigationController pushViewController:buyVC animated:YES];
+        
+    } else if (index == 1) {
+        
+        PublishSellVC *sellVC = [PublishSellVC new];
+        
+        [self.navigationController pushViewController:sellVC animated:YES];
     }
 }
 

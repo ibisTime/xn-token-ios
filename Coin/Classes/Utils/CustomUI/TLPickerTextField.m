@@ -8,9 +8,13 @@
 
 #import "TLPickerTextField.h"
 
+#import "AppColorMacro.h"
+
 @interface TLPickerTextField ()<UIPickerViewDataSource,UIPickerViewDelegate,UITextFieldDelegate>
 
 @property (nonatomic,weak) UIPickerView *pickerInput;
+//
+@property (nonatomic, assign) NSInteger selectIndex;
 
 @end
 
@@ -65,12 +69,16 @@
         
         self.text = self.tagNames[row];
         
+        self.selectIndex = row;
+        
         if (self.didSelectBlock) {
+            
             self.didSelectBlock(row);
         }
         
     }
 }
+
 
 
 - (void)setTagNames:(NSArray *)tagNames
@@ -88,20 +96,28 @@
         self.inputView = _pickerInput;
         self.isSecurity = YES;
         self.delegate = self;
+        self.clearButtonMode = UITextFieldViewModeNever;
+        self.tintColor = kClearColor;
+
+        self.selectIndex = 0;
+        self.textColor = kTextColor;
+        
     }
     
     [self.pickerInput reloadAllComponents];
 }
 
+#pragma mark - UITextFieldDelegate
+
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField;
 {
     if (_tagNames.count) {
         
-      self.text = _tagNames[0];
+      self.text = _tagNames[self.selectIndex];
         
         if (self.didSelectBlock) {
             
-            self.didSelectBlock(0);
+            self.didSelectBlock(self.selectIndex);
         }
     }
     
