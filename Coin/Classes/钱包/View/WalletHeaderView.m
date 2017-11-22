@@ -13,12 +13,6 @@
 @interface WalletHeaderView ()
 //背景
 @property (nonatomic, strong) UIImageView *bgIV;
-//总资产(人民币)
-@property (nonatomic, strong) UILabel *cnyAmountLbl;
-//美元
-@property (nonatomic, strong) UILabel *usdAmountLbl;
-//港元
-@property (nonatomic, strong) UILabel *hkdAmountLbl;
 //汇率
 @property (nonatomic, strong) UILabel *rateAmountLbl;
 //左边国旗
@@ -210,18 +204,11 @@
     
     self.rightFlag.image = kImage(@"中国国旗");
     
-    self.cnyAmountLbl.text = @"￥0.00";
-    
-    self.usdAmountLbl.text = @"0.00usd";
-    
-    self.hkdAmountLbl.text = @"0.00hkd";
-    
 }
 
 - (void)setHkdRate:(NSString *)hkdRate {
     
     _hkdRate = hkdRate;
-    
     
 }
 

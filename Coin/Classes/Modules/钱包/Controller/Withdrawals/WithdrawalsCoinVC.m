@@ -66,7 +66,7 @@
     
     self.balanceTF.enabled = NO;
     
-    self.balanceTF.text = [NSString stringWithFormat:@"%@ %@", [self.currency.amount convertToSimpleRealCoin], self.currency.currency];
+    self.balanceTF.text = [NSString stringWithFormat:@"%@ %@", [self.currency.amountString convertToSimpleRealCoin], self.currency.currency];
     
     [self.view addSubview:self.balanceTF];
     

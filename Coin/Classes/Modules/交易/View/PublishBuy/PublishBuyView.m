@@ -339,6 +339,8 @@
     
     TLTextView *textView = [[TLTextView alloc] initWithFrame:leaveMsgView.bounds];
     
+    textView.font = Font(14.0);
+
     textView.placholder = @"请写下您的广告留言吧";
     
     [leaveMsgView addSubview:textView];

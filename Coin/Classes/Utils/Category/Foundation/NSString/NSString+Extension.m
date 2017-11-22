@@ -239,6 +239,44 @@
     return [NSString stringWithFormat:@"%@",n];
 }
 
+//能去掉小数点的尽量去掉小数点
+- (NSString *)convertToSimpleRealMoney {
+    
+    if (!self) {
+        
+        NSLog(@"金额不能为空");
+        return nil;
+        
+    }
+    
+    NSDecimalNumberHandler *handler = [NSDecimalNumberHandler decimalNumberHandlerWithRoundingMode:NSRoundDown scale:2 raiseOnExactness:NO raiseOnOverflow:NO raiseOnUnderflow:NO raiseOnDivideByZero:YES];
+    
+    NSDecimalNumber *price = [NSDecimalNumber decimalNumberWithString:self];
+    
+    NSDecimalNumber *result = [price decimalNumberByRoundingAccordingToBehavior:handler];
+    
+    return [result stringValue];
+    
+}
+
+- (NSString *)convertToRealMoneyWithNum:(NSInteger)num {
+    
+    if (!self) {
+        
+        NSLog(@"金额不能为空");
+        return nil;
+    }
+    
+    NSDecimalNumberHandler *handler = [NSDecimalNumberHandler decimalNumberHandlerWithRoundingMode:NSRoundDown scale:num raiseOnExactness:NO raiseOnOverflow:NO raiseOnUnderflow:NO raiseOnDivideByZero:YES];
+    
+    NSDecimalNumber *price = [NSDecimalNumber decimalNumberWithString:self];
+    
+    NSDecimalNumber *result = [price decimalNumberByRoundingAccordingToBehavior:handler];
+    
+    return [result stringValue];
+    
+}
+
 + (NSString *)getWifiMacAddress {
     
     NSArray *ifs = CFBridgingRelease(CNCopySupportedInterfaces());

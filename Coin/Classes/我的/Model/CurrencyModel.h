@@ -15,13 +15,13 @@
 //账户编号
 @property (nonatomic,copy) NSString *accountNumber;
 //总额
-@property (nonatomic,strong) NSNumber *amount;
+@property (nonatomic, copy) NSString *amountString;
 //入金
-@property (nonatomic, strong) NSNumber *inAmount;
+@property (nonatomic, copy) NSString *inAmountString;
 //累计增加金额
-@property (nonatomic, strong) NSNumber *addAmount;
+@property (nonatomic, copy) NSString *addAmountString;
 //冻结金额
-@property (nonatomic,strong) NSNumber *frozenAmount;
+@property (nonatomic, copy) NSString *frozenAmountString;
 //充币地址
 @property (nonatomic, copy) NSString *coinAddress;
 

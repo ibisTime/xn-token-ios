@@ -18,8 +18,10 @@
 @property (nonatomic,copy) NSString *code;
 @property (nonatomic,strong) UIView *showView; //hud展示superView
 @property (nonatomic,assign) BOOL isDeliverCompanyCode; //是否展示警告信息
-
+//列表查询
 @property (nonatomic, assign) BOOL isList;
+//账户
+@property (nonatomic, assign) BOOL isCurrency;
 
 //设置改值后外界只需要 调用reloadData
 @property (nonatomic,weak) TLTableView *tableView;

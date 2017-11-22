@@ -16,14 +16,14 @@
 + (void)alertWithInfo:(NSString *)msg {
     
     [SVProgressHUD showInfoWithStatus:msg];
-    [SVProgressHUD dismissWithDelay:3];
+    [SVProgressHUD dismissWithDelay:2];
 }
 
 //error
 + (void)alertWithError:(NSString *)msg {
     
     [SVProgressHUD showErrorWithStatus:msg];
-    [SVProgressHUD dismissWithDelay:3];
+    [SVProgressHUD dismissWithDelay:2];
     
 }
 

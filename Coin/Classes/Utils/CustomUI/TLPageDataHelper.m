@@ -64,7 +64,8 @@
             
         } else {
             
-            newObjs = responseObject[@"data"];
+            newObjs = _isCurrency == YES ? responseObject[@"data"][@"accountList"]: responseObject[@"data"];
+        
         }
         
         NSMutableArray *objs = [_className mj_objectArrayWithKeyValuesArray:newObjs];

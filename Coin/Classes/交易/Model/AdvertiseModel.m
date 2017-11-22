@@ -15,3 +15,21 @@
 @implementation TradeUserInfo
 
 @end
+
+@implementation UserStatistics
+
+
+- (NSString *)goodCommentRate {
+    
+    if (self.beiHaoPingCount == 0) {
+        
+        return @"0%";
+    }
+    
+    CGFloat rate = 100*self.beiHaoPingCount/(self.beiPingJiaCount*1.0);
+    
+    NSString *rateStr = [NSString stringWithFormat:@"%.0lf%%", rate];
+    
+    return rateStr;
+}
+@end

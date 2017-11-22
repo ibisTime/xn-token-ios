@@ -62,29 +62,31 @@
         
     }
     
-    long long m = [self longLongValue];
+    NSDecimalNumberHandler *handler = [NSDecimalNumberHandler decimalNumberHandlerWithRoundingMode:NSRoundDown scale:2 raiseOnExactness:NO raiseOnOverflow:NO raiseOnUnderflow:NO raiseOnDivideByZero:YES];
+
+    NSDecimalNumber *price = [NSDecimalNumber decimalNumberWithString:[self stringValue]];
     
-    if (m%10 > 0) { //有厘
+    NSDecimalNumber *result = [price decimalNumberByRoundingAccordingToBehavior:handler];
+
+    return [result stringValue];
+
+}
+
+- (NSString *)convertToRealMoneyWithNum:(NSInteger)num {
+    
+    if (!self) {
         
-        double value = m/1.0;
-        return [NSString stringWithFormat:@"%.2f",value];
-        
-    } else if (m%100 > 0) {//有分
-        
-        double value = m/1000.0;
-        return [NSString stringWithFormat:@"%.2f",value];
-        
-    } else if(m%1000 > 0) { //有角
-        
-        double value = m/1000.0;
-        return [NSString stringWithFormat:@"%.1f",value];
-        
-    } else {//元
-        
-        double value = m/1000.0;
-        return [NSString stringWithFormat:@"%.0f",value];
+        NSLog(@"金额不能为空");
+        return nil;
     }
     
+    NSDecimalNumberHandler *handler = [NSDecimalNumberHandler decimalNumberHandlerWithRoundingMode:NSRoundDown scale:num raiseOnExactness:NO raiseOnOverflow:NO raiseOnUnderflow:NO raiseOnDivideByZero:YES];
+    
+    NSDecimalNumber *price = [NSDecimalNumber decimalNumberWithString:[self stringValue]];
+    
+    NSDecimalNumber *result = [price decimalNumberByRoundingAccordingToBehavior:handler];
+    
+    return [result stringValue];
     
 }
 

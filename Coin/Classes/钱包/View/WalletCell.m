@@ -9,7 +9,7 @@
 #import "WalletCell.h"
 #import "TLUIHeader.h"
 #import "AppColorMacro.h"
-#import "NSNumber+Extension.h"
+#import "NSString+Extension.h"
 
 @interface WalletCell ()
 //币种图标
@@ -182,9 +182,9 @@
     
     self.coinIV.image = kImage(_currency.getImgName);
     
-    self.amountLbl.text = [_currency.amount convertToSimpleRealCoin];
+    self.amountLbl.text = [_currency.amountString convertToSimpleRealCoin];
     
-    self.freezingAmountLbl.text = [NSString stringWithFormat:@"冻结 %@", [_currency.frozenAmount convertToSimpleRealCoin]];
+    self.freezingAmountLbl.text = [NSString stringWithFormat:@"冻结 %@", [_currency.frozenAmountString convertToSimpleRealCoin]];
     
 }
 

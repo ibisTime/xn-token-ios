@@ -161,6 +161,8 @@
     
     TradeUserInfo *userInfo = advertise.user;
     
+    UserStatistics *userStatist = advertise.userStatistics;
+    
     //头像
     if (userInfo.photo) {
         
@@ -199,16 +201,18 @@
     self.payTypeLbl.layer.borderColor = payModel.color.CGColor;
     self.payTypeLbl.layer.borderWidth = 0.5;
     
+    
     //交易、好评跟信任
-    self.dataLbl.text = [NSString stringWithFormat:@"交易 2 · 好评 90%% · 信任 1"];
+    self.dataLbl.text = [NSString stringWithFormat:@"交易 %ld · 好评 %@ · 信任 %ld", userStatist.jiaoYiCount, userStatist.goodCommentRate, userStatist.beiXinRenCount];
     //限额
     self.limitAmountLbl.text = [NSString stringWithFormat:@"限额: %ld-%ld CNY",advertise.minTrade, advertise.maxTrade];
     //价格
-    self.priceLbl.text = [NSString stringWithFormat:@"%.2lf CNY", advertise.truePrice];
     
-    NSString *tradeText = [advertise.tradeType isEqualToString:@"0"] ? @"购买": @"出售";
+    self.priceLbl.text = [NSString stringWithFormat:@"%@ CNY", [advertise.truePrice convertToSimpleRealMoney]];
     
-    UIColor *tradeColor = [advertise.tradeType isEqualToString:@"0"] ? kBlueColor: kThemeColor;
+    NSString *tradeText = [advertise.tradeType isEqualToString:@"1"] ? @"购买": @"出售";
+    
+    UIColor *tradeColor = [advertise.tradeType isEqualToString:@"1"] ? kBlueColor: kThemeColor;
     
     //交易方式
     [self.tradeTypeBtn setTitleColor:tradeColor forState:UIControlStateNormal];

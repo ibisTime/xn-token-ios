@@ -8,7 +8,7 @@
 
 #import "TLBaseModel.h"
 
-@class TradeUserInfo;
+@class TradeUserInfo, UserStatistics;
 
 @interface AdvertiseModel : TLBaseModel
 
@@ -24,7 +24,7 @@
 
 @property (nonatomic, assign) CGFloat protectPrice;
 
-@property (nonatomic, assign) CGFloat truePrice;
+@property (nonatomic, strong) NSNumber *truePrice;
 
 @property (nonatomic, copy) NSString *tradeCoin;
 
@@ -43,6 +43,8 @@
 @property (nonatomic, assign) CGFloat marketPrice;
 
 @property (nonatomic, strong) TradeUserInfo *user;
+//交易信息
+@property (nonatomic, strong) UserStatistics *userStatistics;
 
 @property (nonatomic, assign) NSInteger minTrade;
 
@@ -86,3 +88,16 @@
 
 @end
 
+@interface UserStatistics: NSObject
+//交易次数
+@property (nonatomic, assign) NSInteger jiaoYiCount;
+//信任人数
+@property (nonatomic, assign) NSInteger beiXinRenCount;
+//评论次数
+@property (nonatomic, assign) NSInteger beiPingJiaCount;
+//好评次数
+@property (nonatomic, assign) NSInteger beiHaoPingCount;
+//好评率
+@property (nonatomic, copy) NSString *goodCommentRate;
+
+@end

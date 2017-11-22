@@ -14,11 +14,10 @@
 #import <UIScrollView+TLAdd.h>
 #import <UIButton+WebCache.h>
 #import "NSString+Extension.h"
+#import "NSNumber+Extension.h"
 #import "UILabel+Extension.h"
 #import "UIButton+EnLargeEdge.h"
-#import "NSNumber+Extension.h"
 
-#import "TLTextField.h"
 #import "TLTextView.h"
 
 #import "PayTypeModel.h"
@@ -27,8 +26,7 @@
 #define myNumbers          @"0123456789\n"
 
 @interface TradeBuyView ()<UITextFieldDelegate>
-//
-@property (nonatomic, strong) UIScrollView *scrollView;
+
 //用户资料
 @property (nonatomic, strong) UIView *topView;
 //头像
@@ -41,10 +39,6 @@
 @property (nonatomic, strong) UILabel *limitAmountLbl;
 //价格
 @property (nonatomic, strong) UILabel *priceLbl;
-//信任
-@property (nonatomic, strong) UIButton *trustBtn;
-//交易次数、信任次数、好评率和历史交易
-@property (nonatomic, strong) NSMutableArray <UILabel *>*lblArr;
 
 //留言
 @property (nonatomic, strong) UIView *leaveMsgView;
@@ -55,13 +49,7 @@
 @property (nonatomic, strong) UIView *buyView;
 //可用余额
 @property (nonatomic, strong) UILabel *leftAmountLbl;
-//CNY
-@property (nonatomic, strong) TLTextField *cnyTF;
-//ETH
-@property (nonatomic, strong) TLTextField *ethTF;
 
-//交易提醒
-@property (nonatomic, strong) UIView *tradePromptView;
 //底部
 @property (nonatomic, strong) UIView *bottomView;
 
@@ -196,14 +184,16 @@
     self.trustBtn.layer.borderWidth = 0.5;
     self.trustBtn.layer.borderColor = kThemeColor.CGColor;
     
-    [self.trustBtn addTarget:self action:@selector(trust) forControlEvents:UIControlEventTouchUpInside];
+    [self.trustBtn setTitle:@"取消信任" forState:UIControlStateSelected];
+
+    [self.trustBtn addTarget:self action:@selector(trust:) forControlEvents:UIControlEventTouchUpInside];
     
     [self.topView addSubview:self.trustBtn];
     [self.trustBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.right.equalTo(self.priceLbl.mas_right);
         make.top.equalTo(self.priceLbl.mas_bottom).offset(10);
-        make.width.equalTo(@60);
+        make.width.equalTo(@70);
         make.height.equalTo(@24);
         
     }];
@@ -266,7 +256,11 @@
     
     TLTextView *textView = [[TLTextView alloc] initWithFrame:leaveMsgView.bounds];
     
+    textView.font = Font(14.0);
+    
     textView.placholder = @"请写下您的广告留言吧";
+    
+    textView.editable = NO;
     
     [leaveMsgView addSubview:textView];
     [textView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -303,7 +297,7 @@
     [self.buyView addSubview:wantBuyBtn];
     [wantBuyBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.left.top.equalTo(@15);
+        make.left.top.equalTo(@13);
         make.width.equalTo(@190);
         
     }];
@@ -335,15 +329,21 @@
     
     CGFloat tfW = (kScreenWidth - 24 - 40)/2.0;
     //CNY
-    self.cnyTF = [[TLTextField alloc] initWithFrame:CGRectMake(0, 0, tfW, 44) leftTitle:@"CNY" titleWidth:55 placeholder:@"请输入数字"];
+    self.cnyTF = [[TLTextField alloc] initWithFrame:CGRectMake(0, 60, tfW, 44) leftTitle:@"CNY" titleWidth:55 placeholder:@"请输入数字"];
+    
+    self.cnyTF.delegate = self;
+    
+    self.cnyTF.keyboardType = UIKeyboardTypeDecimalPad;
+
+    [self.cnyTF addTarget:self action:@selector(ethDidChange:) forControlEvents:UIControlEventEditingChanged];
     
     [self.buyView addSubview:self.cnyTF];
     [self.cnyTF mas_makeConstraints:^(MASConstraintMaker *make) {
-        
+
         make.left.equalTo(@0);
         make.centerY.equalTo(iconIV.mas_centerY);
-        make.right.equalTo(iconIV.mas_left).offset(-20);
-        
+        make.width.equalTo(@(tfW));
+
     }];
     
     //leftLine
@@ -362,15 +362,21 @@
     }];
     
     //ETH
-    self.ethTF = [[TLTextField alloc] initWithFrame:CGRectMake(0, 0, tfW, 44) leftTitle:@"ETH" titleWidth:50 placeholder:@"请输入数值"];
+    self.ethTF = [[TLTextField alloc] initWithFrame:CGRectMake(kScreenWidth/2.0 + 5, 65, tfW, 44) leftTitle:@"ETH" titleWidth:50 placeholder:@"请输入数值"];
     
+    self.ethTF.delegate = self;
+
+    self.ethTF.keyboardType = UIKeyboardTypeDecimalPad;
+    
+    [self.ethTF addTarget:self action:@selector(cnyDidChange:) forControlEvents:UIControlEventEditingChanged];
+
     [self.buyView addSubview:self.ethTF];
     [self.ethTF mas_makeConstraints:^(MASConstraintMaker *make) {
-        
+
         make.left.equalTo(iconIV.mas_right).offset(5);
         make.centerY.equalTo(iconIV.mas_centerY);
-        make.right.equalTo(@(-20));
-        
+        make.width.equalTo(@(tfW));
+
     }];
     
     //rightLine
@@ -412,7 +418,7 @@
     [self.tradePromptView addSubview:promptBtn];
     [promptBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.top.left.equalTo(@15);
+        make.top.left.equalTo(@12);
         make.width.equalTo(@135);
         
     }];
@@ -486,7 +492,7 @@
     [line mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.left.right.equalTo(@0);
-        make.bottom.equalTo(linkBtn.mas_bottom).offset(-0.5);
+        make.bottom.equalTo(linkBtn.mas_bottom).offset(0);
         make.height.equalTo(@0.5);
         
     }];
@@ -501,6 +507,8 @@
     
     TradeUserInfo *userInfo = advertise.user;
     
+    UserStatistics *userStatist = advertise.userStatistics;
+
     //头像
     if (userInfo.photo) {
         
@@ -542,29 +550,93 @@
     //限额
     self.limitAmountLbl.text = [NSString stringWithFormat:@"限额: %ld-%ld CNY",advertise.minTrade, advertise.maxTrade];
     //价格
-    self.priceLbl.text = [NSString stringWithFormat:@"%.2lf CNY", advertise.truePrice];
     
-    NSArray *textArr = @[@"交易次数", @"信任次数", @"好评率", @"历史交易"];
+    self.priceLbl.text = [NSString stringWithFormat:@"%@ CNY", [advertise.truePrice convertToSimpleRealMoney]];
+    
+    NSArray *textArr = @[@"交易次数", @"信任次数", @"好评率"];
 
-    NSArray *numArr = @[@"67", @"25", @"100%", @"3000"];
+    NSArray *numArr = @[[NSString stringWithFormat:@"%ld", userStatist.jiaoYiCount], [NSString stringWithFormat:@"%ld", userStatist.beiXinRenCount], userStatist.goodCommentRate];
     
     [self.lblArr enumerateObjectsUsingBlock:^(UILabel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         
+        if (idx == 3) {
+            
+            return ;
+        }
+        
         [obj labelWithString:[NSString stringWithFormat:@"%@\n%@", numArr[idx], textArr[idx]] title:textArr[idx] font:Font(12.0) color:kTextColor2];
+        
     }];
     
     //留言
     self.leaveMsgTV.text = advertise.leaveMessage;
 }
 
-- (void)setLeftAmount:(NSNumber *)leftAmount {
+- (void)setLeftAmount:(NSString *)leftAmount {
     
     _leftAmount = leftAmount;
     
-    self.leftAmountLbl.text = [NSString stringWithFormat:@"可用余额: %@eth", [_leftAmount convertToSimpleRealCoin]];
+    self.leftAmountLbl.text = [NSString stringWithFormat:@"可用余额: %@ ETH", [_leftAmount convertToSimpleRealCoin]];
+}
+
+- (void)setTruePrice:(NSNumber *)truePrice {
+
+    _truePrice = truePrice;
+    
+    self.advertise.truePrice = truePrice;
+}
+
+- (void)setIsTrust:(BOOL)isTrust {
+    
+    _isTrust = isTrust;
+    
+    self.trustBtn.selected = isTrust;
 }
 
 #pragma mark - Events
+
+- (void)ethDidChange:(UITextField *)sender {
+    
+    if ([sender.text isEqualToString:@""]) {
+        
+        self.ethTF.text = @"";
+        return ;
+    }
+    
+    //ETH价格
+    NSDecimalNumber *ethPrice = [NSDecimalNumber decimalNumberWithString:[self.advertise.truePrice convertToRealMoneyWithNum:4]];
+
+    NSDecimalNumber *cny = [NSDecimalNumber decimalNumberWithString:sender.text];
+    
+    NSDecimalNumber *ethNum = [cny decimalNumberByDividingBy:ethPrice];
+    //保留8位小数,第九位舍去
+    self.ethTF.text = [[ethNum stringValue] convertToRealMoneyWithNum:8];
+    
+    self.tradeAmount = sender.text;
+    
+}
+
+- (void)cnyDidChange:(UITextField *)sender {
+    
+    if ([sender.text isEqualToString:@""]) {
+        
+        self.cnyTF.text = @"";
+        return ;
+    }
+    
+    //ETH价格
+    NSDecimalNumber *ethPrice = [NSDecimalNumber decimalNumberWithString:[self.advertise.truePrice convertToRealMoneyWithNum:4]];
+
+    NSDecimalNumber *ethNum = [NSDecimalNumber decimalNumberWithString:sender.text];
+
+    NSDecimalNumber *cny = [ethNum decimalNumberByMultiplyingBy:ethPrice];
+    
+    self.cnyTF.text = [[cny stringValue] convertToRealMoneyWithNum:2];
+    
+    self.tradeAmount = [[cny stringValue] convertToRealMoneyWithNum:3];
+    
+}
+
 - (void)buy {
     
     if (_tradeBlock) {
@@ -581,11 +653,86 @@
     }
 }
 
-- (void)trust {
+- (void)trust:(UIButton *)sender {
+    
+    TradeBuyType type = sender.selected == NO ? TradeBuyTypeTrust: TradeBuyTypeCancelTrust;
+    
+//    if (sender.selected == NO) {
+//
+//        [self.trustBtn setTitle:@"+ 信任" forState:UIControlStateHighlighted];
+//
+//    } else {
+//
+//        [self.trustBtn setTitle:@"取消信任" forState:UIControlStateHighlighted];
+//
+//    }
     
     if (_tradeBlock) {
         
-        _tradeBlock(TradeBuyTypeTrust);
+        _tradeBlock(type);
     }
 }
+
+#pragma mark - UITextFieldDelegate
+//- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
+//
+//    UILabel *placeHolderLbl = [textField valueForKeyPath:@"_placeholderLabel"];
+//
+//    CGFloat tfW = (kScreenWidth - 24 - 40)/2.0;
+//
+//    placeHolderLbl.width = tfW;
+//
+//    return YES;
+//}
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    
+    if ([string isEqualToString:@"\n"] || [string isEqualToString:@""]) {//按下return
+        return YES;
+    }
+    
+    NSCharacterSet *cs;
+    NSUInteger nDotLoc = [textField.text rangeOfString:@"."].location;
+    
+    NSInteger count = 0;
+    
+    if (NSNotFound == nDotLoc && 0 != range.location) {
+        cs = [[NSCharacterSet characterSetWithCharactersInString:myNumbers] invertedSet];
+        if ([string isEqualToString:@"."]) {
+            return YES;
+        }
+        
+    }
+    else {
+        
+        cs = [[NSCharacterSet characterSetWithCharactersInString:myDotNumbers] invertedSet];
+        if (textField.text.length >= 12) {
+            
+            return NO;
+        }
+    }
+    NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
+    BOOL basicTest = [string isEqualToString:filtered];
+    if (!basicTest) {
+        return NO;
+    }
+    
+    if (textField == self.cnyTF) {
+        
+        count = 2;
+
+    } else if (textField == self.ethTF) {
+        
+        count = 8;
+    }
+    
+    if (NSNotFound != nDotLoc && range.location > nDotLoc + count) {
+        
+        return NO;  //小数点后面两位
+    }
+    if (NSNotFound != nDotLoc && range.location > nDotLoc && [string isEqualToString:@"."]) {
+        return NO;  //控制只有一个小数点
+    }
+    return YES;
+}
+
 @end

@@ -141,6 +141,8 @@ static NSString *identifierCell2 = @"PublishBuyCell2";
         
         TLTextView *textView = [[TLTextView alloc] initWithFrame:headerView.bounds];
         
+        textView.font = Font(14.0);
+
         textView.placholder = @"请写下您的广告留言吧";
         
         [headerView addSubview:textView];

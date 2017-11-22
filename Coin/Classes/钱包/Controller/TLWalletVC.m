@@ -15,6 +15,8 @@
 
 #import "CurrencyModel.h"
 
+#import "NSString+Extension.h"
+
 #import "RechargeCoinVC.h"
 #import "WithdrawalsCoinVC.h"
 #import "BillVC.h"
@@ -56,7 +58,8 @@
     [self initTableView];
     //列表查询我的币种
     [self getMyCurrencyList];
-    
+    //查询总资产
+    [self queryTotalAmount];
     //通知
     [self addNotification];
     
@@ -109,6 +112,34 @@
 }
 
 #pragma mark - Data
+- (void)queryTotalAmount {
+    
+    TLNetworking *http = [TLNetworking new];
+    http.code = @"802503";
+    http.parameters[@"userId"] = [TLUser user].userId;
+    http.parameters[@"token"] = [TLUser user].token;
+    
+    [http postWithSuccess:^(id responseObject) {
+        
+        NSString *cnyStr = [responseObject[@"data"][@"totalAmountCNY"] convertToSimpleRealMoney];
+        
+        self.headerView.cnyAmountLbl.text = [NSString stringWithFormat:@"￥%@", cnyStr];
+        
+        NSString *usdStr = [responseObject[@"data"][@"totalAmountUSD"] convertToSimpleRealMoney];
+        
+        self.headerView.usdAmountLbl.text = [NSString stringWithFormat:@"%@usd", usdStr];
+
+        NSString *hkdStr = [responseObject[@"data"][@"totalAmountHKD"] convertToSimpleRealMoney];
+
+        self.headerView.hkdAmountLbl.text = [NSString stringWithFormat:@"%@hkd", hkdStr];
+
+        
+    } failure:^(NSError *error) {
+        
+        
+    }];
+}
+
 - (void)getMyCurrencyList {
     
     CoinWeakSelf;
@@ -118,6 +149,7 @@
     helper.code = @"802503";
     helper.parameters[@"userId"] = [TLUser user].userId;
     helper.isList = YES;
+    helper.isCurrency = YES;
     
     helper.tableView = self.tableView;
     
