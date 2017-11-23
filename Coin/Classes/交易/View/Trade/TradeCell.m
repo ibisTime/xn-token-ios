@@ -56,6 +56,8 @@
     
 //    [self.photoBtn addTarget:self action:@selector(selectPhoto:) forControlEvents:UIControlEventTouchUpInside];
     
+    self.photoBtn.imageView.contentMode = UIViewContentModeScaleAspectFill;
+
     [self addSubview:self.photoBtn];
     [self.photoBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         
@@ -178,6 +180,7 @@
         
         [self.photoBtn setTitle:title forState:UIControlStateNormal];
         
+        [self.photoBtn setImage:nil forState:UIControlStateNormal];
     }
 
     self.nameLbl.text = userInfo.nickname;

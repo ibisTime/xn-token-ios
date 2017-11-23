@@ -47,5 +47,7 @@ typedef void(^TradeBuyBlock)(TradeBuyType tradeType);
 @property (nonatomic, strong) NSNumber *truePrice;
 //是否信任它
 @property (nonatomic, assign) BOOL isTrust;
+//是否本人
+@property (nonatomic, copy) NSString *userId;
 
 @end

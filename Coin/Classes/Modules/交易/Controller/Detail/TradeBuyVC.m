@@ -14,6 +14,7 @@
 #import "CurrencyModel.h"
 #import "OrderPriceModel.h"
 #import "QuotationModel.h"
+#import "IMAUser.h"
 
 #import "NSNumber+Extension.h"
 #import "NSString+Check.h"
@@ -50,10 +51,14 @@
     if ([TLUser user].userId) {
         //获取余额
         [self getLeftAmount];
+        //查询信任关系
+        [self queryAdvertiseDetail];
+        
     }
 
-    //开启定时器,实时刷新
+    [self addNotification];
     
+    //开启定时器,实时刷新
     self.timer = [NSTimer timerWithTimeInterval:30 target:self selector:@selector(queryAdvertiseDetail) userInfo:nil repeats:YES];
     
     [[NSRunLoop mainRunLoop] addTimer:self.timer forMode:NSDefaultRunLoopMode];
@@ -71,6 +76,13 @@
     [self.timer invalidate];
     
     self.timer = nil;
+    
+}
+
+- (void)dealloc {
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kUserLoginNotification object:nil];
+
 }
 
 #pragma mark - Init
@@ -83,6 +95,11 @@
     
     self.tradeView.advertise = self.advertise;
     
+    if ([TLUser user].userId) {
+        
+        self.tradeView.userId = [TLUser user].userId;
+    }
+
     self.tradeView.tradeBlock = ^(TradeBuyType tradeType) {
         
         [weakSelf tradeEventsWithType:tradeType];
@@ -107,6 +124,12 @@
     }
     
     return _confirmView;
+}
+
+- (void)addNotification {
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userlogin) name:kUserLoginNotification object:nil];
+    
 }
 
 #pragma mark - Events
@@ -177,6 +200,29 @@
                 return;
             }
             
+            //对方
+            TradeUserInfo *friendUserInfo = self.advertise.user;
+            
+            IMAUser *user = [[IMAUser alloc] initWith:self.advertise.userId];
+            
+            user.nickName = friendUserInfo.nickname;
+            user.icon = [friendUserInfo.photo convertImageUrl];
+            user.remark = friendUserInfo.nickname;
+            user.userId = self.advertise.userId;
+            //我
+            ChatUserProfile *userInfo = [ChatUserProfile sharedUser];
+            
+            userInfo.minePhoto = [TLUser user].photo;
+            userInfo.mineNickName = [TLUser user].nickname;
+            userInfo.friendPhoto = [friendUserInfo.photo convertImageUrl];
+            userInfo.friendNickName = friendUserInfo.nickname;
+            
+            ChatViewController *chatVC = [[CustomChatUIViewController alloc] initWith:user];
+            
+            chatVC.userInfo = userInfo;
+            
+            [self.navigationController pushViewController:chatVC animated:YES];
+            
         }break;
           
         case TradeBuyTypeBuy:
@@ -236,9 +282,11 @@
         
         [TLAlert alertWithSucces:@"信任成功"];
         
-        self.tradeView.trustBtn.selected = YES;
+        [self queryAdvertiseDetail];
 
         [self.tradeView.trustBtn setTitle:@"取消信任" forState:UIControlStateHighlighted];
+
+        [[NSNotificationCenter defaultCenter] postNotificationName:kAdvertiseListRefresh object:nil];
 
     } failure:^(NSError *error) {
         
@@ -258,9 +306,11 @@
         
         [TLAlert alertWithSucces:@"取消成功"];
         
-        self.tradeView.trustBtn.selected = NO;
+        [self queryAdvertiseDetail];
         
         [self.tradeView.trustBtn setTitle:@"+ 信任" forState:UIControlStateHighlighted];
+
+        [[NSNotificationCenter defaultCenter] postNotificationName:kAdvertiseListRefresh object:nil];
 
     } failure:^(NSError *error) {
         
@@ -299,6 +349,21 @@
         
     }];
     
+}
+
+
+- (void)userlogin {
+    
+    self.tradeView.userId = [TLUser user].userId;
+    
+    //获取余额
+    [self getLeftAmount];
+    
+    if ([self.advertise.userId isEqualToString:[TLUser user].userId]) {
+        //查询信任关系
+        [self queryAdvertiseDetail];
+        
+    }
 }
 
 #pragma mark - Data
@@ -344,12 +409,36 @@
         
         NSString *text = @"历史交易";
         
-        NSString *num = [NSString stringWithFormat:@"%@", responseObject[@"data"][@"totalTradeCount"]];
+        NSString *numStr = [NSString stringWithFormat:@"%@", responseObject[@"data"][@"totalTradeCount"]];
+        
+        NSString *realNum = [numStr convertToSimpleRealCoin];
+
+        CGFloat historyNum = [[realNum convertToRealMoneyWithNum:8] doubleValue];
+
+        //判断个数
+        NSString *history = @"";
+        
+        if (historyNum == 0) {
+            
+            history = @"0";
+            
+        } else if (historyNum > 0 && historyNum < 0.5) {
+            
+            history = @"0-0.5";
+            
+        } else if (historyNum > 0.5 && historyNum < 1) {
+            
+            history = [NSString stringWithFormat:@"%@+", [realNum convertToRealMoneyWithNum:1]];
+            
+        } else if (historyNum >= 1) {
+            
+            history = [NSString stringWithFormat:@"%.0lf+", historyNum];
+        }
         
         //历史交易
         UILabel *lbl = self.tradeView.lblArr[3];
         
-        [lbl labelWithString:[NSString stringWithFormat:@"%@\n%@", num, text] title:text font:Font(12.0) color:kTextColor2];
+        [lbl labelWithString:[NSString stringWithFormat:@"%@\n%@", history, text] title:text font:Font(12.0) color:kTextColor2];
         
 
     } failure:^(NSError *error) {
@@ -367,11 +456,20 @@
     
     http.parameters[@"adsCode"] = self.advertise.code;
     
+    if ([TLUser user].isLogin) {
+        
+        http.parameters[@"userId"] = [TLUser user].userId;
+    }
+    
     [http postWithSuccess:^(id responseObject) {
         
         AdvertiseModel *advertise = [AdvertiseModel tl_objectWithDictionary:responseObject[@"data"]];
         
+        weakSelf.tradeView.advertise = advertise;
+
         weakSelf.tradeView.truePrice = advertise.truePrice;
+        
+        weakSelf.tradeView.isTrust = [advertise.isTrust integerValue] == 0 ? NO: YES;
         
     } failure:^(NSError *error) {
         

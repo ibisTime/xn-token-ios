@@ -26,4 +26,6 @@
 
 #define kAdvertiseListRefresh @"kAdvertiseListRefresh"
 
+#define kTrustNotification  @"kTrustNotification"
+
 #endif /* TLUIHeader_h */

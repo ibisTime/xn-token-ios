@@ -58,6 +58,8 @@
     
     [self.photoBtn addTarget:self action:@selector(selectPhoto:) forControlEvents:UIControlEventTouchUpInside];
     
+    self.photoBtn.imageView.contentMode = UIViewContentModeScaleAspectFill;
+    
     [self addSubview:self.photoBtn];
     [self.photoBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         

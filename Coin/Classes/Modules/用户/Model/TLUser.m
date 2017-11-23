@@ -15,9 +15,9 @@
 #import "TLUIHeader.h"
 #import "AppConfig.h"
 
-//#import "ChatManager.h"
-//#import "IMAHost+HostAPIs.h"
-//#import "IMAHost.h"
+#import "ChatManager.h"
+#import "IMAHost+HostAPIs.h"
+#import "IMAHost.h"
 //#import "TabbarViewController.h"
 
 #define USER_ID_KEY @"user_id_key"
@@ -92,11 +92,12 @@ NSString *const kUserInfoChange = @"kUserInfoChange";
         
         self.userId = responseObject[@"data"][@"userId"];
         
-        [self requestAccountNumber];
+//        [self requestAccountNumber];
+        [self updateUserInfo];
         
         [self requestQiniuDomain];
-//        //获取腾讯云IM签名、账号并登录
-//        [[ChatManager sharedManager] getTencentSign];
+        //获取腾讯云IM签名、账号并登录
+        [[ChatManager sharedManager] getTencentSign];
         
     } failure:^(NSError *error) {
         

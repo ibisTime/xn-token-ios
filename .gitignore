@@ -26,3 +26,6 @@ Pods
 !Podfile.lock
 ZHCustomer/Expand/Chat/HyphenateSDK/HyphenateLite_arm64
 ZHCustomer/Expand/Chat/HyphenateSDK/HyphenateLite_armv7
+Extension/
+FilterEngine.framework/
+opencv2.framework/

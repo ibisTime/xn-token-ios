@@ -7,11 +7,10 @@
 //
 
 #import "TLUploadManager.h"
-//#import "QiniuSDK.h"
 #import "TLNetworking.h"
 #import "TLUser.h"
 #import "TLAlert.h"
-
+#import "APICodeMacro.h"
 @interface TLUploadManager()
 
 
@@ -53,7 +52,7 @@
 - (void)uploadImage:(UIImage *)image success:(void(^)(void))success failure:(void(^)())failure{
 
     TLNetworking *getUploadToken = [TLNetworking new];
-    getUploadToken.code = @"807900";
+    getUploadToken.code = IMG_UPLOAD_CODE;
     getUploadToken.parameters[@"token"] = [TLUser user].token;
     [getUploadToken postWithSuccess:^(id responseObject) {
      //获取token
@@ -95,14 +94,14 @@
     TLNetworking *getUploadToken = [TLNetworking new];
     
     getUploadToken.showView = showView;
-    getUploadToken.code = @"807900";
+    getUploadToken.code = IMG_UPLOAD_CODE;
     getUploadToken.parameters[@"token"] = [TLUser user].token;
     [getUploadToken postWithSuccess:^(id responseObject) {
         
         NSString *token = responseObject[@"data"][@"uploadToken"];
         
         QNConfiguration *config = [QNConfiguration build:^(QNConfigurationBuilder *builder) {
-            builder.zone = [QNZone zone2];
+            builder.zone = [QNZone zone0];
         }];
         
         QNUploadManager *manager = [[QNUploadManager alloc] initWithConfiguration:config];

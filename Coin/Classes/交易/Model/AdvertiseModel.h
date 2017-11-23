@@ -55,6 +55,8 @@
 @property (nonatomic, copy) NSString *tradeCurrency;
 
 @property (nonatomic, copy) NSString *userId;
+//是否信任
+@property (nonatomic, strong) NSNumber *isTrust;
 
 @end
 

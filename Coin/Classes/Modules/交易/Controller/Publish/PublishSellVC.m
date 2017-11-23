@@ -207,7 +207,7 @@
     http.parameters[@"protectPrice"] = draft.protectPrice;
     //发布类型（0=存草稿，1=发布）
     http.parameters[@"publishType"] = draft.isPublish == YES ? @"1": @"0";
-    http.parameters[@"totalCount"] = draft.buyTotal;
+    http.parameters[@"totalCount"] = [draft.buyTotal convertToSysCoin];
     http.parameters[@"tradeCurrency"] = @"CNY";
     http.parameters[@"tradeCoin"] = @"ETH";
     //0=买币, 1=卖币
@@ -225,7 +225,7 @@
             
         });
         
-        [[NSNotificationCenter defaultCenter] postNotificationName:kAdvertiseListRefresh object:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kAdvertiseListRefresh object:@"0"];
 
     } failure:^(NSError *error) {
         

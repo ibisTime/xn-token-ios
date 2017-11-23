@@ -84,7 +84,7 @@
 
 - (void)initTableView {
     
-    self.tableView = [[BillTableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - 64) style:UITableViewStylePlain];
+    self.tableView = [[BillTableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight) style:UITableViewStylePlain];
     
     self.tableView.placeHolderView = [TLPlaceholderView placeholderViewWithText:@"暂无记录"];
     

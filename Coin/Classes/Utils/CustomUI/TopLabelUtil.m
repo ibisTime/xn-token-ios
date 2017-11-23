@@ -161,7 +161,7 @@
     for (int i = 0; i<_titleArray.count; i++) {
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
         btn.frame = CGRectMake(self.segmentWidth/4.0-BTN_LINE_WIDTH/2.0+self.segmentWidth/2.0*i, 0, BTN_LINE_WIDTH, self.segmentHeight-2);
-        btn.tag = i+1;
+        btn.tag = i+1000;
         [btn setTitle:_titleArray[i] forState:UIControlStateNormal];
         [btn setTitleColor:_titleNormalColor forState:UIControlStateNormal];
         [btn setTitleColor:_titleSelectColor forState:UIControlStateSelected];
@@ -186,11 +186,20 @@
 }
 
 //segment 点击按钮事件
--(void)btnIndexClick:(id)sender{
+-(void)btnIndexClick:(id)sender {
+    
     UIButton *btn = (UIButton *)sender;
     
+    [self selectSortBarWithIndex:btn.tag - 1000];
+    
+}
+
+- (void)selectSortBarWithIndex:(NSInteger)index {
+    
+    UIButton *btn = [self viewWithTag:1000 + index];
+    
     if (self.delegate && [self.delegate respondsToSelector:@selector(segment:didSelectIndex:)]) {
-        [self.delegate segment:self didSelectIndex:btn.tag];
+        [self.delegate segment:self didSelectIndex:index + 1];
     }
     
     if (btn.tag == self.defaultSelectIndex) {
@@ -202,6 +211,7 @@
         self.defaultSelectIndex = btn.tag;
     }
 }
+
 //滑动了，根据偏移的量还改变字体颜色
 -(void)dyDidScrollChangeTheTitleColorWithContentOfSet:(CGFloat)width{
     NSInteger leftIndex = width/kScreenWidth -1;

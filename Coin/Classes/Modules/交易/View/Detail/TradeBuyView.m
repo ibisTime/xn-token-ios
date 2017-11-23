@@ -19,6 +19,7 @@
 #import "UIButton+EnLargeEdge.h"
 
 #import "TLTextView.h"
+#import "TLUser.h"
 
 #import "PayTypeModel.h"
 
@@ -105,10 +106,11 @@
     
     self.topView.backgroundColor = kWhiteColor;
     
-    [self addSubview:self.topView];
+    [self.scrollView addSubview:self.topView];
     [self.topView mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.left.top.right.equalTo(@0);
+        make.left.top.equalTo(@0);
+        make.width.equalTo(@(kScreenWidth));
         make.height.equalTo(@125);
         
     }];
@@ -119,6 +121,8 @@
     self.photoBtn = [UIButton buttonWithTitle:@"" titleColor:kWhiteColor backgroundColor:kAppCustomMainColor titleFont:24 cornerRadius:imgWidth/2.0];
     
     //    [self.photoBtn addTarget:self action:@selector(selectPhoto:) forControlEvents:UIControlEventTouchUpInside];
+    
+    self.photoBtn.imageView.contentMode = UIViewContentModeScaleAspectFill;
     
     [self.topView addSubview:self.photoBtn];
     [self.photoBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -134,7 +138,7 @@
     [self.topView addSubview:self.nameLbl];
     [self.nameLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.top.equalTo(self.mas_top).offset(15);
+        make.top.equalTo(@15);
         make.left.equalTo(self.photoBtn.mas_right).offset(10);
         
     }];
@@ -184,8 +188,6 @@
     self.trustBtn.layer.borderWidth = 0.5;
     self.trustBtn.layer.borderColor = kThemeColor.CGColor;
     
-    [self.trustBtn setTitle:@"取消信任" forState:UIControlStateSelected];
-
     [self.trustBtn addTarget:self action:@selector(trust:) forControlEvents:UIControlEventTouchUpInside];
     
     [self.topView addSubview:self.trustBtn];
@@ -334,16 +336,16 @@
     self.cnyTF.delegate = self;
     
     self.cnyTF.keyboardType = UIKeyboardTypeDecimalPad;
-
+    
     [self.cnyTF addTarget:self action:@selector(ethDidChange:) forControlEvents:UIControlEventEditingChanged];
     
     [self.buyView addSubview:self.cnyTF];
     [self.cnyTF mas_makeConstraints:^(MASConstraintMaker *make) {
-
+        
         make.left.equalTo(@0);
         make.centerY.equalTo(iconIV.mas_centerY);
         make.width.equalTo(@(tfW));
-
+        
     }];
     
     //leftLine
@@ -365,18 +367,18 @@
     self.ethTF = [[TLTextField alloc] initWithFrame:CGRectMake(kScreenWidth/2.0 + 5, 65, tfW, 44) leftTitle:@"ETH" titleWidth:50 placeholder:@"请输入数值"];
     
     self.ethTF.delegate = self;
-
+    
     self.ethTF.keyboardType = UIKeyboardTypeDecimalPad;
     
     [self.ethTF addTarget:self action:@selector(cnyDidChange:) forControlEvents:UIControlEventEditingChanged];
-
+    
     [self.buyView addSubview:self.ethTF];
     [self.ethTF mas_makeConstraints:^(MASConstraintMaker *make) {
-
+        
         make.left.equalTo(iconIV.mas_right).offset(5);
         make.centerY.equalTo(iconIV.mas_centerY);
         make.width.equalTo(@(tfW));
-
+        
     }];
     
     //rightLine
@@ -445,7 +447,7 @@
 
 - (void)initBottomView {
     
-    self.bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, kSuperViewHeight - 60 - kBottomInsetHeight, kScreenWidth, 60 + kBottomInsetHeight)];
+    self.bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, kSuperViewHeight - 50 - kBottomInsetHeight, kScreenWidth, 50 + kBottomInsetHeight)];
     
     self.bottomView.backgroundColor = kWhiteColor;
     
@@ -508,7 +510,7 @@
     TradeUserInfo *userInfo = advertise.user;
     
     UserStatistics *userStatist = advertise.userStatistics;
-
+    
     //头像
     if (userInfo.photo) {
         
@@ -554,7 +556,7 @@
     self.priceLbl.text = [NSString stringWithFormat:@"%@ CNY", [advertise.truePrice convertToSimpleRealMoney]];
     
     NSArray *textArr = @[@"交易次数", @"信任次数", @"好评率"];
-
+    
     NSArray *numArr = @[[NSString stringWithFormat:@"%ld", userStatist.jiaoYiCount], [NSString stringWithFormat:@"%ld", userStatist.beiXinRenCount], userStatist.goodCommentRate];
     
     [self.lblArr enumerateObjectsUsingBlock:^(UILabel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -580,7 +582,7 @@
 }
 
 - (void)setTruePrice:(NSNumber *)truePrice {
-
+    
     _truePrice = truePrice;
     
     self.advertise.truePrice = truePrice;
@@ -590,7 +592,33 @@
     
     _isTrust = isTrust;
     
-    self.trustBtn.selected = isTrust;
+    if (isTrust) {
+        
+        [self.trustBtn setTitle:@"取消信任" forState:UIControlStateNormal];
+        
+    } else {
+        
+        [self.trustBtn setTitle:@"+ 信任" forState:UIControlStateNormal];
+        
+    }
+    
+}
+
+- (void)setUserId:(NSString *)userId {
+    
+    _userId = userId;
+    
+    CGFloat scrollheight = [self.advertise.userId isEqualToString:userId] ? kSuperViewHeight: kSuperViewHeight - 60 - kBottomInsetHeight;
+    
+    [self.scrollView mas_updateConstraints:^(MASConstraintMaker *make) {
+        
+        make.height.equalTo(@(scrollheight));
+    }];
+    
+    self.trustBtn.hidden = [self.advertise.userId isEqualToString:userId] ? YES: NO;
+    
+    self.bottomView.hidden = [self.advertise.userId isEqualToString:userId] ? YES: NO;
+    
 }
 
 #pragma mark - Events
@@ -605,7 +633,7 @@
     
     //ETH价格
     NSDecimalNumber *ethPrice = [NSDecimalNumber decimalNumberWithString:[self.advertise.truePrice convertToRealMoneyWithNum:4]];
-
+    
     NSDecimalNumber *cny = [NSDecimalNumber decimalNumberWithString:sender.text];
     
     NSDecimalNumber *ethNum = [cny decimalNumberByDividingBy:ethPrice];
@@ -626,9 +654,9 @@
     
     //ETH价格
     NSDecimalNumber *ethPrice = [NSDecimalNumber decimalNumberWithString:[self.advertise.truePrice convertToRealMoneyWithNum:4]];
-
+    
     NSDecimalNumber *ethNum = [NSDecimalNumber decimalNumberWithString:sender.text];
-
+    
     NSDecimalNumber *cny = [ethNum decimalNumberByMultiplyingBy:ethPrice];
     
     self.cnyTF.text = [[cny stringValue] convertToRealMoneyWithNum:2];
@@ -655,17 +683,7 @@
 
 - (void)trust:(UIButton *)sender {
     
-    TradeBuyType type = sender.selected == NO ? TradeBuyTypeTrust: TradeBuyTypeCancelTrust;
-    
-//    if (sender.selected == NO) {
-//
-//        [self.trustBtn setTitle:@"+ 信任" forState:UIControlStateHighlighted];
-//
-//    } else {
-//
-//        [self.trustBtn setTitle:@"取消信任" forState:UIControlStateHighlighted];
-//
-//    }
+    TradeBuyType type = self.isTrust == NO ? TradeBuyTypeTrust: TradeBuyTypeCancelTrust;
     
     if (_tradeBlock) {
         
@@ -719,7 +737,7 @@
     if (textField == self.cnyTF) {
         
         count = 2;
-
+        
     } else if (textField == self.ethTF) {
         
         count = 8;

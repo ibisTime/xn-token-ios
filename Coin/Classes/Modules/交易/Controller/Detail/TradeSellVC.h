@@ -7,7 +7,10 @@
 //
 
 #import "TLBaseVC.h"
+#import "AdvertiseModel.h"
 
 @interface TradeSellVC : TLBaseVC
+
+@property (nonatomic, strong) AdvertiseModel *advertise;
 
 @end

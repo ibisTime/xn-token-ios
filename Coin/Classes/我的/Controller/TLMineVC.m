@@ -291,6 +291,15 @@
         
         [TLUser user].photo = key;
         
+        //设置头像
+        [[IMAHost alloc] asyncSetHeadIconURL:key succ:^{
+            
+        } fail:^(int code, NSString *msg) {
+            
+        }];
+        
+        [IMAPlatform sharedInstance].host.icon = key;
+        
         [[NSNotificationCenter defaultCenter] postNotificationName:kUserInfoChange object:nil];
         
     } failure:^(NSError *error) {

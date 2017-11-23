@@ -29,7 +29,7 @@
 #define USER_CKEY_CVALUE    @"625917"
 
 //七牛图片上传
-#define IMG_UPLOAD_CODE @"805951"//
+#define IMG_UPLOAD_CODE @"805951"
 
 //用户信息
 #define USER_INFO @"805121"

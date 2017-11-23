@@ -25,6 +25,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.edgesForExtendedLayout = UIRectEdgeNone;
+    
     //
     //
     [self.navigationController setNavigationBarHidden:NO animated:NO];

@@ -188,8 +188,11 @@
 }
 
 - (void)addNotification{
+    //发布购买/出售
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshData:) name:kAdvertiseListRefresh object:nil];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshData) name:kAdvertiseListRefresh object:nil];
+    //信任/取消信任
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshData) name:kTrustNotification object:nil];
 }
 
 #pragma mark - Events
@@ -212,6 +215,14 @@
         
         [self.navigationController pushViewController:sellVC animated:YES];
     }
+}
+
+- (void)refreshData:(NSNotification *)notification {
+    
+    NSInteger index = [notification.object integerValue];
+    
+    [self.labelUnil selectSortBarWithIndex:index];
+    
 }
 
 - (void)refreshData {
@@ -312,7 +323,7 @@
         
         self.tradeType = @"1";
         
-    }else{
+    }else {
         
         self.tradeType = @"0";
 
@@ -339,11 +350,11 @@
         [self.navigationController pushViewController:buyVC animated:YES];
     } else {
         
-//        TradeSellVC *sellVC = [TradeSellVC new];
+        TradeSellVC *sellVC = [TradeSellVC new];
         
-//        sellVC.advertise = self.advertises[indexPath.row];
+        sellVC.advertise = self.advertises[indexPath.row];
         
-//        [self.navigationController pushViewController:sellVC animated:YES];
+        [self.navigationController pushViewController:sellVC animated:YES];
     }
     
     

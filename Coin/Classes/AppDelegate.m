@@ -23,6 +23,9 @@
     //服务器环境
     [self configServiceAddress];
     
+    //初始化IMAPlatform
+    [self initIMAPlatform];
+    
     //配置根控制器
     [self configRootViewController];
 
@@ -82,4 +85,16 @@
     
 }
 
+- (void)initIMAPlatform {
+    
+    [IMAPlatform configWith:nil];
+}
+
+- (void)pushToChatViewControllerWith:(IMAUser *)user
+{
+    
+    TLTabBarController *tab = (TLTabBarController *)self.window.rootViewController;
+    
+    [tab pushToChatViewControllerWith:user];
+}
 @end

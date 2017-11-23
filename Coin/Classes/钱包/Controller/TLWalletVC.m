@@ -100,7 +100,6 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userlogin) name:kUserLoginNotification object:nil];
     
-    
 }
 
 #pragma mark - Events

@@ -23,10 +23,10 @@
 #import "AccountTf.h"
 
 //腾讯云
-//#import "ChatManager.h"
-//#import "IMModel.h"
-//
-//#import <ImSDK/TIMManager.h>
+#import "ChatManager.h"
+#import "IMModel.h"
+
+#import <ImSDK/TIMManager.h>
 
 @interface TLUserLoginVC ()
 
@@ -171,11 +171,11 @@
 //登录成功
 - (void)login {
 
-//    //获取腾讯云IM签名、账号并登录
-//    [[ChatManager sharedManager] getTencentSign];
+    //获取腾讯云IM签名、账号并登录
+    [[ChatManager sharedManager] getTencentSign];
 
     [self dismissViewControllerAnimated:YES completion:nil];
-//
+
     if (self.loginSuccess) {
 
         self.loginSuccess();

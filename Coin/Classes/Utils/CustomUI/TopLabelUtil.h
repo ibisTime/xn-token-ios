@@ -34,19 +34,22 @@ typedef void (^ClickBtnBlock)(NSInteger index);
 
 @interface TopLabelUtil : UIScrollView
 //segment 文字数组
-@property(nonatomic,strong)NSArray *titleArray;
+@property(nonatomic,strong) NSArray *titleArray;
 //segment 文字颜色
-@property(nonatomic,strong)UIColor *titleNormalColor;
+@property(nonatomic,strong) UIColor *titleNormalColor;
 //segment 选中时文字颜色
-@property(nonatomic,strong)UIColor *titleSelectColor;
+@property(nonatomic,strong) UIColor *titleSelectColor;
 //segment 文字字体，默认15
-@property(nonatomic,strong)UIFont  *titleFont;
+@property(nonatomic,strong) UIFont  *titleFont;
 //segment 默认选中按钮/视图 1
-@property(nonatomic,assign)NSInteger defaultSelectIndex;
+@property(nonatomic,assign) NSInteger defaultSelectIndex;
 //segment 点击按钮触发事件代理
-@property(nonatomic,assign)id<SegmentDelegate> delegate;
+@property(nonatomic,assign) id<SegmentDelegate> delegate;
 //底部线条长度
 @property (nonatomic, assign) LineType lineType;
+
+//选择到哪个按钮
+- (void)selectSortBarWithIndex:(NSInteger)index;
 
 //视图偏移时，控件随着发生变化
 -(void)dyDidScrollChangeTheTitleColorWithContentOfSet:(CGFloat)width;
