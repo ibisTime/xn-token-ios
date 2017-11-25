@@ -25,6 +25,8 @@
 
 #import "ChatViewController.h"
 
+#import "OrderDetailVC.h"
+
 #import "IMAChatViewController.h"
 
 #import "RichChatViewController.h"

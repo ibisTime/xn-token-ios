@@ -215,7 +215,7 @@
     
     NSString *tradeText = [advertise.tradeType isEqualToString:@"1"] ? @"购买": @"出售";
     
-    UIColor *tradeColor = [advertise.tradeType isEqualToString:@"1"] ? kBlueColor: kThemeColor;
+    UIColor *tradeColor = [advertise.tradeType isEqualToString:@"1"] ? kPaleBlueColor: kThemeColor;
     
     //交易方式
     [self.tradeTypeBtn setTitleColor:tradeColor forState:UIControlStateNormal];

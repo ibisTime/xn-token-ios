@@ -392,6 +392,9 @@
         NSString *title = [nickName substringToIndex:1];
         
         [_icon setTitle:title forState:UIControlStateNormal];
+        
+        [_icon setImage:nil forState:UIControlStateNormal];
+        
     }
     
     if (_remarkTip)

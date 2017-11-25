@@ -54,6 +54,10 @@ static NSString *identifierCell = @"SettingCell";
     
     cell.textLabel.text = self.group.items[indexPath.row].text;
     
+    cell.textLabel.textColor = kTextColor;
+    
+    cell.textLabel.font = Font(15.0);
+    
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     if (indexPath.section == 1) {

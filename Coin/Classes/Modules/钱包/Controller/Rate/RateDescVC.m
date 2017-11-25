@@ -30,7 +30,6 @@
     //获取汇率列表
     [self requestRateList];
     
-    [self.tableView beginRefreshing];
 }
 
 #pragma mark - Init
@@ -72,6 +71,9 @@
             
         }];
     }];
+    
+    [self.tableView beginRefreshing];
+
 }
 
 - (void)didReceiveMemoryWarning {

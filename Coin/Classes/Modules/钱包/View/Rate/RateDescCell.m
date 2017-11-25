@@ -121,19 +121,19 @@
     
     _rateModel = rateModel;
     
-    if ([rateModel.referCurrency isEqualToString:@"CNY"]) {
-        
-        NSString *money = [rateModel.currency isEqualToString:@"USD"] ? @"$1": @"HK$1";
-
-        NSString *imgStr = [rateModel.currency isEqualToString:@"USD"] ? @"美国国旗": @"香港旗帜";
-
-        self.leftFlag.image = kImage(imgStr);
-        
-        self.rateLbl.text = [NSString stringWithFormat:@"%@≈￥%.4lf", money, rateModel.rate];
-        
-        self.rightFlag.image = kImage(@"中国国旗");
-
-    }
+//    if ([rateModel.referCurrency isEqualToString:@"CNY"]) {
+//
+//    }
+    
+    NSString *money = [rateModel.currency isEqualToString:@"USD"] ? @"$1": @"HK$1";
+    
+    NSString *imgStr = [rateModel.currency isEqualToString:@"USD"] ? @"美国国旗": @"香港旗帜";
+    
+    self.leftFlag.image = kImage(imgStr);
+    
+    self.rateLbl.text = [NSString stringWithFormat:@"%@≈￥%.4lf", money, rateModel.rate];
+    
+    self.rightFlag.image = kImage(@"中国国旗");
     
     [self layoutSubviews];
     

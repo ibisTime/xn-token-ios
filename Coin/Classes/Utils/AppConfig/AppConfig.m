@@ -54,7 +54,7 @@ void TLLog(NSString *format, ...) {
         case RunEnvDev: {
             
             self.qiniuDomain = @"http://ozfszueqz.bkt.clouddn.com";
-            self.addr = @"http://47.90.102.163:4001";
+            self.addr = @"http://apidev.bcoin.im:4001";
 //            self.shareBaseUrl = @"http://cm.tour.hichengdai.com/?#/home/recommend?userReferee=";
 
         }break;

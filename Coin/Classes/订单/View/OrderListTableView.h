@@ -8,6 +8,11 @@
 
 #import "TLTableView.h"
 
+#import "OrderModel.h"
+
 @interface OrderListTableView : TLTableView
+
+//订单
+@property (nonatomic, strong) NSArray <OrderModel *>*orders;
 
 @end

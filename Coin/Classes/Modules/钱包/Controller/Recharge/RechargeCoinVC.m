@@ -116,7 +116,7 @@
         
     }];
     
-    NSString *text = @"我的比特币收款地址（点击复制）";
+    NSString *text = @"我的货币收款地址（点击复制）";
     
     CGFloat btnW = [NSString getWidthWithString:text font:12.0];
     //复制
