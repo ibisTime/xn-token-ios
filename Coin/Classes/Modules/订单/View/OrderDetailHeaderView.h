@@ -28,7 +28,11 @@ typedef void(^OrderEventsBlock)(OrderEventsType orderType);
 @property (nonatomic, strong) UIView *centerView;
 //按钮
 @property (nonatomic, strong) UIButton *tradeBtn;
+//提示
+@property (nonatomic, strong) UILabel *promptLbl;
 
 @property (nonatomic, copy) OrderEventsBlock orderBlock;
+
+- (void)calculateInvalidTimeWithOrder:(OrderModel *)order;
 
 @end

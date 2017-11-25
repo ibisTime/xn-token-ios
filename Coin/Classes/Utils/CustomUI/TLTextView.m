@@ -23,7 +23,7 @@
         _placeholderLbl =  [UILabel 
                             
                             
-                            labelWithFrame:CGRectMake(5, 7, kScreenWidth - 30, 20)
+                            labelWithFrame:CGRectMake(5, 7, self.width - 30, 20)
                                              textAligment:NSTextAlignmentLeft
                                           backgroundColor:[UIColor clearColor]
                                                      font:self.font

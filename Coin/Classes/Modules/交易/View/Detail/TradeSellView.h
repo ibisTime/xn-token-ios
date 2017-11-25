@@ -41,13 +41,15 @@ typedef void(^TradeSellBlock)(TradeSellType tradeType);
 @property (nonatomic, copy) TradeSellBlock tradeBlock;
 //余额
 @property (nonatomic, copy) NSString *leftAmount;
-//交易总额
-@property (nonatomic, copy) NSString *tradeAmount;
 //真实行情价格
 @property (nonatomic, strong) NSNumber *truePrice;
 //是否信任它
 @property (nonatomic, assign) BOOL isTrust;
 //是否本人
 @property (nonatomic, copy) NSString *userId;
+//交易总额
+@property (nonatomic, copy) NSString *tradeAmount;
+//交易数量
+@property (nonatomic, copy) NSString *tradeNum;
 
 @end

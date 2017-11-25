@@ -8,8 +8,6 @@
 
 #import "SettingVC.h"
 
-#import "SettingGroup.h"
-
 #import "IdAuthVC.h"
 #import "TLChangeMobileVC.h"
 #import "TLPwdRelatedVC.h"
@@ -17,11 +15,14 @@
 #import "HTMLStrVC.h"
 #import "TLTabBarController.h"
 
+#import "SettingGroup.h"
 #import "SettingModel.h"
 
 #import "SettingTableView.h"
+#import "SettingCell.h"
 
 #import "AppMacro.h"
+#import "APICodeMacro.h"
 
 @interface SettingVC ()
 
@@ -41,6 +42,7 @@
     
     [self.tableView reloadData];
     
+    [self requestUserInfo];
 }
 
 - (void)viewDidLoad {
@@ -195,6 +197,36 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:kUserLoginOutNotification object:nil];
 }
 
+#pragma mark - Init
+- (void)requestUserInfo {
+    
+    //获取用户信息
+    TLNetworking *http = [TLNetworking new];
+    
+    http.code = USER_INFO;
+    http.parameters[@"userId"] = [TLUser user].userId;
+    [http postWithSuccess:^(id responseObject) {
+        
+        NSDictionary *userInfo = responseObject[@"data"];
+
+        //保存信息
+        [[TLUser user] saveUserInfo:userInfo];
+        [[TLUser user] setUserInfoWithDict:userInfo];
+        
+        if ([TLUser user].realName) {
+            
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:1];
+            SettingCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+            
+            cell.rightLabel.text = @"已认证";
+            
+            [self.tableView reloadData];
+        }
+        
+    } failure:^(NSError *error) {
+        
+    }];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

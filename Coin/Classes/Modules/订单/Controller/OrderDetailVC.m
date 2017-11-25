@@ -11,10 +11,21 @@
 #import "CoinHeader.h"
 
 #import "OrderDetailHeaderView.h"
+#import "OrderCommentView.h"
+#import "OrderArbitrationView.h"
+
+#import "NSString+Date.h"
+#import "UIBarButtonItem+convience.h"
 
 @interface OrderDetailVC ()
 
 @property (nonatomic, strong) OrderDetailHeaderView *headView;
+//评价
+@property (nonatomic, strong) OrderCommentView *commentView;
+//仲裁
+@property (nonatomic, strong) OrderArbitrationView *arbitrationView;
+//定时器
+@property (nonatomic, strong) NSTimer *timer;
 
 @end
 
@@ -31,6 +42,7 @@
     
     //查看详情
     [self lookOrderDetail];
+
 }
 
 - (void)viewDidLoad {
@@ -41,15 +53,14 @@
     
     [self initHeaderView];
     
+//    支付倒计时
+//    self.timer = [NSTimer timerWithTimeInterval:60 target:self selector:@selector(calculateInvalidTime) userInfo:nil repeats:YES];
+    
 }
 
 - (void)viewDidLayoutSubviews {
     
     [super viewDidLayoutSubviews];
-    
-    self.headView.centerView.height = self.headView.tradeBtn.yy + 18;
-    
-    self.headView.height = self.headView.centerView.yy;
     
 }
 
@@ -72,6 +83,48 @@
     self.tableView.tableHeaderView = self.headView;
 }
 
+- (void)addArbitrationItem {
+    
+    [UIBarButtonItem addRightItemWithTitle:@"申请仲裁" titleColor:kTextColor frame:CGRectMake(0, 0, 70, 44) vc:self action:@selector(applyArbitration)];
+}
+
+- (OrderCommentView *)commentView {
+    
+    if (!_commentView) {
+        
+        CoinWeakSelf;
+        
+        _commentView = [[OrderCommentView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
+        
+        _commentView.commentBlock = ^(NSString *result) {
+            
+            [weakSelf commentWithResult:result];
+        };
+        
+    }
+    
+    return _commentView;
+}
+
+- (OrderArbitrationView *)arbitrationView {
+    
+    if (!_arbitrationView) {
+        
+        CoinWeakSelf;
+        
+        _arbitrationView = [[OrderArbitrationView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
+        
+        _arbitrationView.arbitrationBlock = ^(NSString *reason) {
+            
+            [weakSelf arbitrationWithReason:reason];
+
+        };
+        
+    }
+    
+    return _arbitrationView;
+}
+
 #pragma mark - Events
 - (void)orderEventsWithType:(OrderEventsType)type {
     
@@ -80,7 +133,7 @@
     switch (type) {
         case OrderEventsTypeWillPay:
         {
-            [TLAlert alertWithTitle:@"" msg:@"" confirmMsg:@"确认" cancleMsg:@"取消" cancle:^(UIAlertAction *action) {
+            [TLAlert alertWithTitle:@"注意" msg:@"您确定要标记打款?" confirmMsg:@"确定" cancleMsg:@"取消" cancle:^(UIAlertAction *action) {
                 
             } confirm:^(UIAlertAction *action) {
                 
@@ -102,6 +155,7 @@
             
         case OrderEventsTypeWillComment:
         {
+            [self.commentView show];
             
         }break;
             
@@ -128,6 +182,11 @@
     }
 }
 
+- (void)applyArbitration {
+    
+    [self.arbitrationView show];
+}
+
 #pragma mark - Data
 //标记打款
 - (void)confirmPay {
@@ -146,7 +205,8 @@
         if ([isSuccess isEqualToString:@"1"]) {
             
             [TLAlert alertWithSucces:@"标记打款成功"];
-            
+
+            //刷新状态
             [self lookOrderDetail];
         }
         
@@ -188,7 +248,7 @@
     http.code = @"625245";
     http.parameters[@"code"] = self.order.code;
     http.parameters[@"userId"] = [TLUser user].userId;
-    http.parameters[@"comment"] = @"";
+    http.parameters[@"comment"] = result;
     
     [http postWithSuccess:^(id responseObject) {
         
@@ -196,7 +256,9 @@
         
         if ([isSuccess isEqualToString:@"1"]) {
             
-            [TLAlert alertWithSucces:@"释放成功"];
+            [TLAlert alertWithSucces:@"评价成功"];
+            
+            [self.commentView hide];
             
             [self lookOrderDetail];
         }
@@ -206,9 +268,38 @@
     }];
 }
 
+//申请仲裁
+- (void)arbitrationWithReason:(NSString *)reason {
+
+    TLNetworking *http = [TLNetworking new];
+    
+    http.code = @"625246";
+    http.parameters[@"code"] = self.order.code;
+    http.parameters[@"applyUser"] = [TLUser user].userId;
+    http.parameters[@"reason"] = reason;
+    
+    [http postWithSuccess:^(id responseObject) {
+        
+        NSString *isSuccess = [NSString stringWithFormat:@"%@", responseObject[@"data"][@"isSuccess"]];
+        
+        if ([isSuccess isEqualToString:@"1"]) {
+            
+            [TLAlert alertWithSucces:@"申请成功"];
+            
+            [self.arbitrationView hide];
+            
+            [self lookOrderDetail];
+        }
+        
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
+//详情查询交易订单
 - (void)lookOrderDetail {
     
-    //详情查询交易订单
+    
     TLNetworking *http = [TLNetworking new];
     
     http.code = @"625251";
@@ -220,10 +311,55 @@
         
         self.headView.order = self.order;
         
+        if ([self.order.status isEqualToString:@"1"]) {
+            
+            //仲裁
+            [self addArbitrationItem];
+            
+        } else {
+            
+            //移除仲裁
+            self.navigationItem.rightBarButtonItem = nil;
+        }
+    
     } failure:^(NSError *error) {
         
     }];
 }
+
+//支付倒计时
+//- (void)calculateInvalidTime {
+//
+//    if (![self.order.status isEqualToString:@"0"]) {
+//
+//        [self.timer invalidate];
+//
+//        self.timer = nil;
+//
+//        return ;
+//    }
+//
+//    NSDate *invalidDate = [NSString dateFromString:self.order.invalidDatetime formatter:@"MMM dd, yyyy hh:mm:ss aa"];
+//
+//    NSDate *localDate = [NSString getLoaclDateWithFormatter:@"MMM dd, yyyy hh:mm:ss aa"];
+//
+//    //转换时间格式
+//    //对比两个时间
+//
+//    NSTimeInterval seconds = [invalidDate timeIntervalSinceDate:localDate];
+//
+//    NSInteger minute = seconds/60;
+//
+//    if (seconds < 0) {
+//
+//        [self lookOrderDetail];
+//
+//        return ;
+//    }
+//
+//    self.headView.promptLbl.text = [NSString stringWithFormat:@"货币将在托管中保持%ld分钟, 逾期未支付交易将自动取消", minute];
+//
+//}
 
 //添加右上角按钮
 - (void)addChatSettingItem

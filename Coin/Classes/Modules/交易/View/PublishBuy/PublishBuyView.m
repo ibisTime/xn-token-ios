@@ -337,7 +337,7 @@
     
     self.leaveMsgView = leaveMsgView;
     
-    TLTextView *textView = [[TLTextView alloc] initWithFrame:leaveMsgView.bounds];
+    TLTextView *textView = [[TLTextView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 120)];
     
     textView.font = Font(14.0);
 

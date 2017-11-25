@@ -12,6 +12,8 @@
 #import "TLTextField.h"
 #import "NSString+Check.h"
 
+#import "AppMacro.h"
+
 @interface IdAuthVC ()
 //真实姓名
 @property (nonatomic, strong) TLTextField *realName;
@@ -41,14 +43,26 @@
     
     self.realName = [[TLTextField alloc] initWithFrame:CGRectMake(0, 10, kScreenWidth, 50) leftTitle:@"姓名" titleWidth:105 placeholder:@"请输入姓名"];
     
-    self.realName.returnKeyType = UIReturnKeyNext;
+    self.realName.enabled = [TLUser user].realName ? NO: YES;
     
+    STRING_NIL_NULL([TLUser user].realName);
+    
+    self.realName.text = [TLUser user].realName;
+    
+    self.realName.returnKeyType = UIReturnKeyNext;
+
     [self.realName addTarget:self action:@selector(next:) forControlEvents:UIControlEventEditingDidEndOnExit];
     
     [self.view addSubview:self.realName];
     
     self.idCard = [[TLTextField alloc] initWithFrame:CGRectMake(0, self.realName.yy, kScreenWidth, 50) leftTitle:@"身份证号码" titleWidth:105 placeholder:@"请输入身份证号码"];
     
+    self.idCard.enabled = [TLUser user].idNo ? NO: YES;
+
+    STRING_NIL_NULL([TLUser user].idNo);
+    
+    self.idCard.text = [TLUser user].idNo;
+
     [self.view addSubview:self.idCard];
     
     UIButton *confirmBtn = [UIButton buttonWithTitle:@"确认" titleColor:kWhiteColor backgroundColor:kAppCustomMainColor titleFont:15.0 cornerRadius:5];
@@ -58,7 +72,10 @@
     [confirmBtn addTarget:self action:@selector(confirmIDCard:) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view addSubview:confirmBtn];
-    
+ 
+    confirmBtn.enabled = [TLUser user].realName ? NO: YES;
+
+    confirmBtn.backgroundColor = [TLUser user].realName ? kPlaceholderColor: kAppCustomMainColor;
 }
 
 #pragma mark - Events
@@ -88,10 +105,9 @@
 
     TLNetworking *http = [TLNetworking new];
     
-    http.isShowMsg = NO;
     http.showView = self.view;
     
-    http.code = @"798001";
+    http.code = @"805191";
     http.parameters[@"idKind"] = @"1";
     http.parameters[@"idNo"] = self.idCard.text;
     http.parameters[@"realName"] = self.realName.text;

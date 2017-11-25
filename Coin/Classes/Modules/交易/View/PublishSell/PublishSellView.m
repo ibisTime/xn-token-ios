@@ -362,8 +362,8 @@
     
     self.leaveMsgView = leaveMsgView;
     
-    TLTextView *textView = [[TLTextView alloc] initWithFrame:leaveMsgView.bounds];
-    
+    TLTextView *textView = [[TLTextView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 120)];
+
     textView.font = Font(14.0);
 
     textView.placholder = @"请写下您的广告留言吧";

@@ -117,13 +117,10 @@
 
 - (NSString *)promptStr {
     
+    
     NSDictionary *dict = @{
-                           
-                           @"2": @"已释放货币, 请对交易做出评价",
                            @"3": @"交易成功, 已评价交易",
-                           @"4": @"交易已取消",
-                           @"5": @"仲裁中",
-                           
+                        
                            };
     
     return dict[self.status];

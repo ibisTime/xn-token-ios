@@ -12,8 +12,11 @@
 #import "UIButton+EnLargeEdge.h"
 #import "NSString+CGSize.h"
 #import "UILabel+Extension.h"
+#import "UIBarButtonItem+convience.h"
 
 #import <SGQRCodeGenerateManager.h>
+
+#import "BillVC.h"
 
 @interface RechargeCoinVC ()
 
@@ -38,6 +41,8 @@
     [self initQRView];
     //地址
     [self initAddressView];
+    //记录
+    [self addRecodeItem];
     
 }
 
@@ -105,7 +110,7 @@
     //二维码
     UIImageView *qrIV = [[UIImageView alloc] init];
     
-    qrIV.image = [SGQRCodeGenerateManager generateWithDefaultQRCodeData:self.coinAddress imageViewWidth:140];
+    qrIV.image = [SGQRCodeGenerateManager generateWithDefaultQRCodeData:self.currency.coinAddress imageViewWidth:140];
     
     [self.qrView addSubview:qrIV];
     [qrIV mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -185,7 +190,7 @@
     
     addressLbl.numberOfLines = 0;
     
-    addressLbl.text = [NSString stringWithFormat:@"%@", self.coinAddress];
+    addressLbl.text = [NSString stringWithFormat:@"%@", self.currency.coinAddress];
     
     [self.addressView addSubview:addressLbl];
     [addressLbl mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -195,6 +200,11 @@
         make.height.equalTo(@50);
         
     }];
+}
+
+- (void)addRecodeItem {
+    
+    [UIBarButtonItem addRightItemWithTitle:@"记录" titleColor:kTextColor frame:CGRectMake(0, 0, 40, 44) vc:self action:@selector(lookBillRecord)];
 }
 
 #pragma mark - Events
@@ -213,7 +223,7 @@
     
     UIPasteboard *pasteBoard = [UIPasteboard generalPasteboard];
     
-    pasteBoard.string = self.coinAddress;
+    pasteBoard.string = self.currency.coinAddress;
     
     if (pasteBoard == nil) {
         
@@ -223,6 +233,15 @@
         
         [TLAlert alertWithSucces:@"复制成功"];
     }
+}
+
+- (void)lookBillRecord {
+    
+    BillVC *billVC = [BillVC new];
+    
+    billVC.accountNumber = self.currency.accountNumber;
+    
+    [self.navigationController pushViewController:billVC animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

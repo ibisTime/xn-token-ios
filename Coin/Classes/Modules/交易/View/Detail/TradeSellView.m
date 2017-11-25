@@ -646,6 +646,8 @@
     
     self.tradeAmount = sender.text;
     
+    self.tradeNum = [[ethNum stringValue] convertToRealMoneyWithNum:9];
+
 }
 
 - (void)cnyDidChange:(UITextField *)sender {
@@ -667,6 +669,8 @@
     
     self.tradeAmount = [[cny stringValue] convertToRealMoneyWithNum:3];
     
+    self.tradeNum = sender.text;
+
 }
 
 - (void)sell {

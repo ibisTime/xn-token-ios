@@ -16,6 +16,9 @@
 // 根据指定格式将 NSString 转换为 NSDate
 + (NSDate *)dateFromString:(NSString *)dateString formatter:(NSString *)formatter;
 
+//获取当前时间
++ (NSDate *)getLoaclDateWithFormatter:(NSString *)formatter;
+
 // 根据时间戳得到时间字符串
 + (NSString*)stringFromTimeStamp:(NSString*)timeStampStr;
 

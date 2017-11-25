@@ -323,8 +323,8 @@
     
     CoinWeakSelf;
     
-    NSString *num = [self.tradeView.ethTF.text convertToSysCoin];
-    
+    NSString *num = [self.tradeView.tradeNum convertToSysCoin];
+
     NSString *price = [self.advertise.truePrice convertToRealMoneyWithNum:3];
     
     TLNetworking *http = [TLNetworking new];

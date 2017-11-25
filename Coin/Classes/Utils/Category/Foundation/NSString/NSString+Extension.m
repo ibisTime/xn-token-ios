@@ -213,10 +213,13 @@
 
 - (NSString *)convertToSysCoin {
     
-    double v = [self doubleValue];
-    double t0 = v*1.0e+18;
-    long long money = (long long)t0;
-    return [NSString stringWithFormat:@"%lld",money];
+    NSDecimalNumber *m = [NSDecimalNumber decimalNumberWithString:self];
+    
+    NSDecimalNumber *n = [NSDecimalNumber decimalNumberWithString:[@(1.0e+18) stringValue]];
+    
+    NSDecimalNumber *o = [m decimalNumberByMultiplyingBy:n];
+    
+    return [o stringValue];
 }
 
 - (NSString *)convertToSimpleRealCoin {

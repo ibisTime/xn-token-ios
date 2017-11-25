@@ -11,7 +11,9 @@
 typedef NS_ENUM(NSUInteger, HTMLType) {
     HTMLTypeAboutUs = 0,    //关于我们
     HTMLTypeRegProtocol,    //注册协议
-
+    HTMLTypeCommonProblem,  //常见问题
+    HTMLTypeLinkService,    //联系客服
+    
 };
 
 @interface HTMLStrVC : TLBaseVC

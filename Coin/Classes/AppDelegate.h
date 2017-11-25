@@ -10,8 +10,6 @@
 
 @interface AppDelegate : IMAAppDelegate <UIApplicationDelegate>
 
-@property (strong, nonatomic) UIWindow *window;
-
 - (void)pushToChatViewControllerWith:(IMAUser *)user;
 
 

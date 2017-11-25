@@ -58,8 +58,6 @@
     [self initTableView];
     //列表查询我的币种
     [self getMyCurrencyList];
-    //查询总资产
-    [self queryTotalAmount];
     //通知
     [self addNotification];
     
@@ -173,6 +171,8 @@
         [weakSelf searchRateWithCurrency:@"USD"];
         //查询港元汇率
         [weakSelf searchRateWithCurrency:@"HKD"];
+        //查询总资产
+        [weakSelf queryTotalAmount];
         
     }];
     
@@ -214,7 +214,7 @@
         {
             RechargeCoinVC *coinVC = [RechargeCoinVC new];
             
-            coinVC.coinAddress = currencyModel.coinAddress;
+            coinVC.currency = currencyModel;
             
             [self.navigationController pushViewController:coinVC animated:YES];
             

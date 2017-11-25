@@ -66,7 +66,7 @@
         _labelUnil.titleFont = Font(17.0);
         _labelUnil.lineType = LineTypeTitleLength;
         
-        _labelUnil.titleArray = @[@"进行中",@"已完成"];
+        _labelUnil.titleArray = @[@"进行中",@"已结束"];
     }
     
     return _labelUnil;

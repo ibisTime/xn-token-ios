@@ -56,10 +56,8 @@
         [self.contentView addSubview:self.rightLabel];
         [self.rightLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             
-            make.width.mas_lessThanOrEqualTo(150);
-            make.height.mas_equalTo(15.0);
-            make.right.mas_equalTo(-10);
-            make.centerY.mas_equalTo(0);
+            make.right.equalTo(self.accessoryImageView.mas_left).offset(-10);
+            make.centerY.equalTo(@0);
             
         }];
         
@@ -92,7 +90,7 @@
         [line mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.mas_left).offset(0);
             make.width.equalTo(self.mas_width);
-            make.height.mas_equalTo(@(kLineHeight));
+            make.height.equalTo(@(kLineHeight));
             make.bottom.equalTo(self.mas_bottom);
         }];
         

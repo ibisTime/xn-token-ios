@@ -168,6 +168,8 @@ NSString *const kUserInfoChange = @"kUserInfoChange";
     self.rmbAccountNumber = nil;
     self.jfAccountNumber = nil;
     self.unReadMsgCount = 0;
+    self.realName = nil;
+    self.idNo = nil;
     
 //    [[NSUserDefaults standardUserDefaults] removeObjectForKey:USER_ID_KEY];
     

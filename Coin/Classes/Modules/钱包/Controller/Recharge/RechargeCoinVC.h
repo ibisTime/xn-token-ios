@@ -8,8 +8,10 @@
 
 #import "TLBaseVC.h"
 
+#import "CurrencyModel.h"
+
 @interface RechargeCoinVC : TLBaseVC
 
-@property (nonatomic, copy) NSString *coinAddress;
+@property (nonatomic, strong) CurrencyModel *currency;
 
 @end

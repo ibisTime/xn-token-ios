@@ -26,6 +26,8 @@
 @interface TLTransactionVC ()<SegmentDelegate, RefreshDelegate>
 
 @property (nonatomic, strong) TLPageDataHelper *helper;
+//暂无交易
+@property (nonatomic, strong) UIView *placeHolderView;
 //切换
 @property (nonatomic, strong) TopLabelUtil *labelUnil;
 //图片
@@ -55,20 +57,21 @@
     [self navBarUI];
     
     [self setUpUI];
-    
-    [self addNotification];
     //banner
     [self getBanner];
     //获取广告
     [self requestAdvetiseList];
-    
-    [self.tableView beginRefreshing];
+    //添加通知
+    [self addNotification];
+
 }
 
 #pragma mark- 交易搜索
 - (void)search {
     
 }
+
+#pragma mark - Init
 
 -(TopLabelUtil *)labelUnil {
     
@@ -116,13 +119,16 @@
     CoinWeakSelf;
     
     self.tradeType = @"1";
-    //CGRectMake(0, 0, kScreenWidth, kSuperViewHeight - kTabBarHeight - kBottomInsetHeight)
+    
+    [self initPlaceHolderView];
+    
     self.tableView = [[TradeTableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+    
+    self.tableView.placeHolderView = self.placeHolderView;
     
     self.tableView.refreshDelegate = self;
     
     [self.view addSubview:self.tableView];
-//    self.tableView.backgroundColor = [UIColor orangeColor];
     
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(UIEdgeInsetsZero);
@@ -170,6 +176,29 @@
     
     [self initTipView];
     
+}
+
+- (void)initPlaceHolderView {
+    
+    self.placeHolderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight - 40)];
+    
+    UIImageView *couponIV = [[UIImageView alloc] initWithFrame:CGRectMake(0, 90, 80, 80)];
+    
+    couponIV.image = kImage(@"暂无订单");
+    
+    couponIV.centerX = kScreenWidth/2.0;
+    
+    [self.placeHolderView addSubview:couponIV];
+    
+    UILabel *textLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor2 font:14.0];
+    
+    textLbl.text = @"暂无交易";
+    
+    textLbl.frame = CGRectMake(0, couponIV.yy + 20, kScreenWidth, 15);
+    
+    textLbl.textAlignment = NSTextAlignmentCenter;
+    
+    [self.placeHolderView addSubview:textLbl];
 }
 
 - (void)initTipView {
@@ -297,6 +326,8 @@
         }];
     }];
     
+    [self.tableView beginRefreshing];
+
     [self.tableView addLoadMoreAction:^{
         
         [helper loadMore:^(NSMutableArray *objs, BOOL stillHave) {

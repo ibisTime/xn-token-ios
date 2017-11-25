@@ -38,6 +38,19 @@
     return [date dateByAddingTimeInterval:interval];
 }
 
++ (NSDate *)getLoaclDateWithFormatter:(NSString *)formatter {
+    
+    //国际时间
+    NSDate* localDate = [[NSDate alloc] init];
+    //获得的是计算机上的时间
+    NSTimeZone* zone = [NSTimeZone systemTimeZone];
+    //得到本地时间与国际时间的时间差
+    NSInteger interval = [zone secondsFromGMTForDate:localDate];
+    
+    return [localDate dateByAddingTimeInterval:interval];
+    
+}
+
 + (NSString*)stringFromTimeStamp:(NSString *)timeStampStr formatter:(NSString *)formatter {
     if (PASS_NULL_TO_NIL(timeStampStr) == nil) {
         return @"";

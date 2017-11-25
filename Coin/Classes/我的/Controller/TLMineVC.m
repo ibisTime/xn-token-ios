@@ -18,6 +18,8 @@
 #import "MineHeaderView.h"
 
 #import "SettingVC.h"
+#import "PublishBuyVC.h"
+#import "PublishSellVC.h"
 
 #import "TLImagePicker.h"
 #import "TLUploadManager.h"
@@ -138,17 +140,6 @@
         [weakSelf.navigationController pushViewController:settingVC animated:YES];
     };
     
-    //提醒设置
-    MineModel *remindSetting = [MineModel new];
-    
-    remindSetting.text = @"提醒设置";
-    remindSetting.imgName = @"提醒设置";
-    remindSetting.action = ^{
-      
-        [TLAlert alertWithInfo:@"正在研发中, 敬请期待"];
-
-    };
-    
     //常见问题
     MineModel *problem = [MineModel new];
     
@@ -156,8 +147,6 @@
     problem.imgName = @"常见问题";
     problem.action = ^{
         
-        [TLAlert alertWithInfo:@"正在研发中, 敬请期待"];
-
     };
     
     //联系客服
@@ -167,13 +156,20 @@
     linkService.imgName = @"联系客服";
     linkService.action = ^{
         
-        [TLAlert alertWithInfo:@"正在研发中, 敬请期待"];
-
+    };
+    
+    //关于我们
+    MineModel *abountUs = [MineModel new];
+    
+    abountUs.text = @"关于我们";
+    abountUs.imgName = @"关于我们";
+    abountUs.action = ^{
+        
     };
     
     self.group = [MineGroup new];
 
-    self.group.sections = @[@[advertisement, address, trust, inviteFriend], @[securityCenter, remindSetting, problem, linkService]];
+    self.group.sections = @[@[advertisement, address, trust, inviteFriend], @[securityCenter, problem, linkService, abountUs]];
     
 }
 
@@ -322,18 +318,23 @@
             
         case MineHeaderSeletedTypeBuy:
         {
-            [TLAlert alertWithInfo:@"正在研发中, 敬请期待"];
+            PublishBuyVC *buyVC = [PublishBuyVC new];
+            
+            [self.navigationController pushViewController:buyVC animated:YES];
             
         }break;
             
         case MineHeaderSeletedTypeSell:
         {
-            [TLAlert alertWithInfo:@"正在研发中, 敬请期待"];
-
+            PublishSellVC *sellVC = [PublishSellVC new];
+            
+            [self.navigationController pushViewController:sellVC animated:YES];
+            
         }break;
             
         default:
             break;
+            
     }
 }
 

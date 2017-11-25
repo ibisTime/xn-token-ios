@@ -8,11 +8,15 @@
 
 #import "OrderDetailHeaderView.h"
 
+#import <Foundation/Foundation.h>
+
 #import "TLUIHeader.h"
 #import "AppColorMacro.h"
 
 #import "NSString+Extension.h"
 #import "NSNumber+Extension.h"
+
+#import "NSString+Date.h"
 
 @interface OrderDetailHeaderView ()
 
@@ -33,8 +37,6 @@
 @property (nonatomic, strong) UILabel *sellerLbl;
 //留言
 @property (nonatomic, strong) UILabel *leaveMsgLbl;
-//提示
-@property (nonatomic, strong) UILabel *promptLbl;
 
 
 @end
@@ -307,14 +309,56 @@
     self.sellerLbl.text = [NSString stringWithFormat:@"卖家: %@", order.sellUserInfo.nickname];
     //留言
     self.leaveMsgLbl.text = [NSString stringWithFormat:@"广告留言: %@", order.leaveMessage];
+    
     //提示
-    self.promptLbl.text = order.promptStr;
+    if ([order.status isEqualToString:@"0"]) {
+        
+        [self calculateInvalidTimeWithOrder:order];
+        
+    } else if ([order.status isEqualToString:@"3"]) {
+        
+        self.promptLbl.text = order.promptStr;
+
+    } else {
+        
+        self.promptLbl.text = order.remark;
+
+    }
+    
     //按钮
     [self.tradeBtn setTitle:order.btnTitle forState:UIControlStateNormal];
     
     [self.tradeBtn setBackgroundColor:order.bgColor forState:UIControlStateNormal];
     
     self.tradeBtn.enabled = order.enable;
+    
+    //刷新高度
+    [self layoutSubviews];
+    
+    self.centerView.height = self.tradeBtn.yy + 18;
+
+    self.height = self.centerView.yy;
+}
+
+//计算时间
+
+- (void)calculateInvalidTimeWithOrder:(OrderModel *)order {
+    
+    NSDate *invalidDate = [NSString dateFromString:order.invalidDatetime formatter:@"MMM dd, yyyy hh:mm:ss aa"];
+    
+//    NSDate *localDate = [NSString getLoaclDateWithFormatter:@"MMM dd, yyyy hh:mm:ss aa"];
+    NSDate *createDate = [NSString dateFromString:order.createDatetime formatter:@"MMM dd, yyyy hh:mm:ss aa"];
+    //转换时间格式
+    //对比两个时间
+    
+    NSTimeInterval seconds = [invalidDate timeIntervalSinceDate:createDate];
+
+//    NSTimeInterval seconds = [invalidDate timeIntervalSinceDate:localDate];
+    
+    NSInteger minute = seconds/60;
+    
+    self.promptLbl.text = [NSString stringWithFormat:@"货币将在托管中保持%ld分钟, 逾期未支付交易将自动取消", minute];
+    
 }
 
 #pragma mark - Events

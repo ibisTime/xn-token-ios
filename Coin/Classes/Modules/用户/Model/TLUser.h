@@ -47,7 +47,9 @@
 
 //0 未设置交易密码 1已设置
 @property (nonatomic, copy) NSString *tradepwdFlag;
+//真实姓名
 @property (nonatomic, copy) NSString *realName;
+//身份证
 @property (nonatomic, copy) NSString *idNo;
 
 @property (nonatomic, copy) NSString *remark;
