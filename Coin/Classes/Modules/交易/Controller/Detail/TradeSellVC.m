@@ -223,6 +223,8 @@
             chatVC.userInfo = userInfo;
             
             [self.navigationController pushViewController:chatVC animated:YES];
+            //待下单
+            [self willCommitOrder];
             
         }break;
             
@@ -472,6 +474,25 @@
         
         weakSelf.tradeView.advertise = advertise;
 
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
+//我要购买开始聊天，提交交易订单(待下单状态)
+- (void)willCommitOrder {
+    
+    TLNetworking *http = [TLNetworking new];
+    
+    http.isShowMsg = NO;
+    
+    http.code = @"625248";
+    http.parameters[@"adsCode"] = self.advertise.code;
+    http.parameters[@"sellUser"] = [TLUser user].userId;
+    
+    [http postWithSuccess:^(id responseObject) {
+        
+        
     } failure:^(NSError *error) {
         
     }];

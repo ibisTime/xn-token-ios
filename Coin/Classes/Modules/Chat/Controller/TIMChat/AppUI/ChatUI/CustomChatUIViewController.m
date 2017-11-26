@@ -8,11 +8,29 @@
 
 #import "CustomChatUIViewController.h"
 
+#import <IQKeyboardManager.h>
+
 @interface CustomChatUIViewController ()
 
 @end
 
 @implementation CustomChatUIViewController
+
+- (void)viewDidDisappear:(BOOL)animated {
+    
+    [super viewDidDisappear:animated];
+    
+    [IQKeyboardManager sharedManager].enableAutoToolbar = YES;
+
+}
+
+- (void)viewDidLoad {
+    
+    [super viewDidLoad];
+    
+    [IQKeyboardManager sharedManager].enableAutoToolbar = NO;
+
+}
 
 //如果要使用自己的输入面板，可以重写这个函数
 //- (void)addInputPanel

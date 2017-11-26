@@ -373,6 +373,7 @@
 		211DE6C61FB58B4C002FCF3D /* HttpLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 211DE69E1FB58B4C002FCF3D /* HttpLogger.m */; };
 		211DE6C71FB58B4C002FCF3D /* HttpRequestObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 211DE69F1FB58B4C002FCF3D /* HttpRequestObject.m */; };
 		211DE6CA1FB5A586002FCF3D /* RechargeCoinVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 211DE6C91FB5A586002FCF3D /* RechargeCoinVC.m */; };
+		211F78141FCAFBCA0023F133 /* WaitingOrderVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 211F78131FCAFBCA0023F133 /* WaitingOrderVC.m */; };
 		211FAC4F1FC2742C00DC37B0 /* PublishBuyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 211FAC4E1FC2742C00DC37B0 /* PublishBuyView.m */; };
 		2121DCC21FC6F17C001FC2E3 /* TradeSellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2121DCC11FC6F17C001FC2E3 /* TradeSellView.m */; };
 		2121DCC51FC6F19E001FC2E3 /* SellConfirmView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2121DCC41FC6F19E001FC2E3 /* SellConfirmView.m */; };
@@ -1211,6 +1212,8 @@
 		211DE69F1FB58B4C002FCF3D /* HttpRequestObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpRequestObject.m; sourceTree = "<group>"; };
 		211DE6C81FB5A586002FCF3D /* RechargeCoinVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RechargeCoinVC.h; sourceTree = "<group>"; };
 		211DE6C91FB5A586002FCF3D /* RechargeCoinVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RechargeCoinVC.m; sourceTree = "<group>"; };
+		211F78121FCAFBCA0023F133 /* WaitingOrderVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WaitingOrderVC.h; sourceTree = "<group>"; };
+		211F78131FCAFBCA0023F133 /* WaitingOrderVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WaitingOrderVC.m; sourceTree = "<group>"; };
 		211FAC4D1FC2742C00DC37B0 /* PublishBuyView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PublishBuyView.h; sourceTree = "<group>"; };
 		211FAC4E1FC2742C00DC37B0 /* PublishBuyView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PublishBuyView.m; sourceTree = "<group>"; };
 		2121DCC01FC6F17C001FC2E3 /* TradeSellView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TradeSellView.h; sourceTree = "<group>"; };
@@ -3144,6 +3147,8 @@
 			children = (
 				2182D2F21FC8057D008EDCE4 /* OrderDetailVC.h */,
 				2182D2F31FC8057D008EDCE4 /* OrderDetailVC.m */,
+				211F78121FCAFBCA0023F133 /* WaitingOrderVC.h */,
+				211F78131FCAFBCA0023F133 /* WaitingOrderVC.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -4059,6 +4064,7 @@
 				211C04CF1FC6604900E51FCF /* SwipeDeleteTableView.m in Sources */,
 				211C043B1FC6604800E51FCF /* MenuItem.m in Sources */,
 				211C04DE1FC6604900E51FCF /* ChatRoomViewController.m in Sources */,
+				211F78141FCAFBCA0023F133 /* WaitingOrderVC.m in Sources */,
 				211C04151FC6604800E51FCF /* NSData+MKBase64.m in Sources */,
 				211C04EB1FC6604900E51FCF /* RichItemTableViewController.m in Sources */,
 				211A35041FB45A6A00FEB71F /* WalletHeaderView.m in Sources */,

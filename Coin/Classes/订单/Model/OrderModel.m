@@ -14,6 +14,7 @@
 - (NSString *)statusStr {
     
     NSDictionary *dict = @{
+                           @"-1": @"待下单",
                            @"0": @"待支付",
                            @"1": @"待释放",
                            @"2": @"待评价",

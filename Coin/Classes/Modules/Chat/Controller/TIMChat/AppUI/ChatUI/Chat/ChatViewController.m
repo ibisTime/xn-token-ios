@@ -25,7 +25,6 @@
 
 - (void)dealloc
 {
-    [IQKeyboardManager sharedManager].enableAutoToolbar = YES;
 
     _tableView.delegate = nil;
     _tableView.dataSource = nil;
@@ -120,9 +119,6 @@
 {
     [super viewDidLoad];
     [self configWithUser:_receiver];
-    
-    
-    [IQKeyboardManager sharedManager].enableAutoToolbar = NO;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdateInputStatus:) name:kUserInputStatus object:nil];
     

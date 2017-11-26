@@ -12,6 +12,7 @@
 #import "OrderListTableView.h"
 
 #import "OrderDetailVC.h"
+#import "WaitingOrderVC.h"
 
 @interface TLOrderVC ()<SegmentDelegate, RefreshDelegate>
 
@@ -73,8 +74,8 @@
 }
 
 - (void)initPlaceHolderView {
-    
-    self.statusList = @[@"0", @"1", @"2", @"5"];
+    //-1:待下单  0:待付款 1:待释放 2:待评价  5:仲裁中
+    self.statusList = @[@"-1", @"0", @"1", @"2", @"5"];
     
     self.placeHolderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight - 40)];
     
@@ -187,8 +188,8 @@
 -(void)segment:(TopLabelUtil *)segment didSelectIndex:(NSInteger)index {
     
     if (index == 1) {
-        
-        self.statusList = @[@"0", @"1", @"2", @"5"];
+        //-1:待下单  0:待付款 1:待释放 2:待评价  5:仲裁中
+        self.statusList = @[@"-1", @"0", @"1", @"2", @"5"];
         
     }else {
         
@@ -230,6 +231,19 @@
     userInfo.mineNickName = [TLUser user].nickname;
     userInfo.friendPhoto = [friendPhoto convertImageUrl];
     userInfo.friendNickName = friendNickName;
+    
+    if ([order.status isEqualToString:@"-1"]) {
+        
+        WaitingOrderVC *chatVC = [[WaitingOrderVC alloc] initWith:user];
+        
+        chatVC.userInfo = userInfo;
+        
+        chatVC.order = order;
+        
+        [self.navigationController pushViewController:chatVC animated:YES];
+        
+        return ;
+    }
     
     OrderDetailVC *chatVC = [[OrderDetailVC alloc] initWith:user];
     
