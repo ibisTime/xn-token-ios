@@ -109,6 +109,8 @@
         
         buyVC.advertise = self.advertise;
         
+        buyVC.type = TradeBuyPositionTypeTrade;
+        
         [self.navigationController pushViewController:buyVC animated:YES];
         
     } else {
@@ -117,6 +119,8 @@
         
         sellVC.advertise = self.advertise;
         
+        sellVC.type = TradeBuyPositionTypeTrade;
+
         [self.navigationController pushViewController:sellVC animated:YES];
     }
 }

@@ -9,8 +9,16 @@
 #import "TLBaseVC.h"
 #import "AdvertiseModel.h"
 
+typedef NS_ENUM(NSInteger, TradeSellPositionType) {
+    
+    TradeSellPositionTypeTrade = 0,  //交易区
+    TradeSellPositionTypeMyPublish,  //我发布的
+};
+
 @interface TradeSellVC : TLBaseVC
 
 @property (nonatomic, strong) AdvertiseModel *advertise;
+
+@property (nonatomic, assign) TradeSellPositionType type;
 
 @end

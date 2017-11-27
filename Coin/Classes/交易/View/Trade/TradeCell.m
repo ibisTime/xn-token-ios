@@ -207,8 +207,9 @@
     
     //交易、好评跟信任
     self.dataLbl.text = [NSString stringWithFormat:@"交易 %ld · 好评 %@ · 信任 %ld", userStatist.jiaoYiCount, userStatist.goodCommentRate, userStatist.beiXinRenCount];
+    
     //限额
-    self.limitAmountLbl.text = [NSString stringWithFormat:@"限额: %ld-%ld CNY",advertise.minTrade, advertise.maxTrade];
+    self.limitAmountLbl.text = [NSString stringWithFormat:@"限额: %@-%@ CNY",[advertise.minTrade convertToSimpleRealMoney], [advertise.maxTrade convertToSimpleRealMoney]];
     //价格
     
     self.priceLbl.text = [NSString stringWithFormat:@"%@ CNY", [advertise.truePrice convertToSimpleRealMoney]];

@@ -144,7 +144,7 @@
         
         case OrderEventsTypeWillRelease:
         {
-            [TLAlert alertWithTitle:@"" msg:@"" confirmMsg:@"确认" cancleMsg:@"取消" cancle:^(UIAlertAction *action) {
+            [TLAlert alertWithTitle:@"注意" msg:@"您确定要释放货币?" confirmMsg:@"确认" cancleMsg:@"取消" cancle:^(UIAlertAction *action) {
                 
             } confirm:^(UIAlertAction *action) {
                 
@@ -161,9 +161,10 @@
             
         case OrderEventsTypeDidComplete:
         {
+            
             self.tabBarController.selectedIndex = 3;
             
-            [self.navigationController popViewControllerAnimated:NO];
+            [self.navigationController popToRootViewControllerAnimated:NO];
             
         }break;
             

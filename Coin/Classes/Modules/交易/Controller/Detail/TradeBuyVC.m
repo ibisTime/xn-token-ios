@@ -19,6 +19,7 @@
 #import "NSNumber+Extension.h"
 #import "NSString+Check.h"
 #import "UILabel+Extension.h"
+#import "UIBarButtonItem+convience.h"
 
 #import "TLUserLoginVC.h"
 #import "TLNavigationController.h"
@@ -55,7 +56,13 @@
         [self queryAdvertiseDetail];
         
     }
-
+    //是我的广告，并且广告在交易区
+    if ([self.advertise.userId isEqualToString:[TLUser user].userId] && self.type == TradeBuyPositionTypeMyPublish) {
+        
+        //下架
+        [self addOffItem];
+    }
+    
     [self addNotification];
     
     //开启定时器,实时刷新
@@ -86,6 +93,15 @@
 }
 
 #pragma mark - Init
+
+- (void)addOffItem {
+    
+    if ([self.advertise.status isEqualToString:@"1"]) {
+        
+        [UIBarButtonItem addRightItemWithTitle:@"下架" titleColor:kTextColor frame:CGRectMake(0, 0, 40, 44) vc:self action:@selector(advertiseOff)];
+        
+    }
+}
 
 - (void)initTradeView {
     
@@ -288,7 +304,7 @@
 
         [self.tradeView.trustBtn setTitle:@"取消信任" forState:UIControlStateHighlighted];
 
-        [[NSNotificationCenter defaultCenter] postNotificationName:kAdvertiseListRefresh object:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kTrustNotification object:nil];
 
     } failure:^(NSError *error) {
         
@@ -312,7 +328,7 @@
         
         [self.tradeView.trustBtn setTitle:@"+ 信任" forState:UIControlStateHighlighted];
 
-        [[NSNotificationCenter defaultCenter] postNotificationName:kAdvertiseListRefresh object:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kTrustNotification object:nil];
 
     } failure:^(NSError *error) {
         
@@ -343,7 +359,9 @@
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             
-            [weakSelf.navigationController popViewControllerAnimated:YES];
+            weakSelf.tabBarController.selectedIndex = 1;
+            
+            [weakSelf.navigationController popToRootViewControllerAnimated:YES];
 
         });
         
@@ -366,6 +384,28 @@
         [self queryAdvertiseDetail];
         
     }
+}
+//下架广告
+- (void)advertiseOff {
+    
+    TLNetworking *http = [TLNetworking new];
+    
+    http.code = @"625224";
+    http.parameters[@"adsCode"] = self.advertise.code;
+    http.parameters[@"userId"] = [TLUser user].userId;
+    
+    [http postWithSuccess:^(id responseObject) {
+        
+        [TLAlert alertWithSucces:@"下架成功"];
+        
+        [self.navigationController popViewControllerAnimated:YES];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:kAdvertiseOff object:nil];
+        
+    } failure:^(NSError *error) {
+        
+    }];
+    
 }
 
 #pragma mark - Data

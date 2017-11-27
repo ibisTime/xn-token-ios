@@ -14,15 +14,15 @@
 
 @property (nonatomic, copy) NSString *onlyTrust;
 
-@property (nonatomic, assign) long long leftAmount;
+@property (nonatomic, copy) NSString *leftCountString;
 
-@property (nonatomic, assign) NSInteger maxTrade;
+@property (nonatomic, strong) NSNumber *maxTrade;
 
 @property (nonatomic, copy) NSString *status;
 
 @property (nonatomic, copy) NSString *code;
 
-@property (nonatomic, assign) CGFloat protectPrice;
+@property (nonatomic, strong) NSNumber *protectPrice;
 
 @property (nonatomic, strong) NSNumber *truePrice;
 
@@ -46,11 +46,11 @@
 //交易信息
 @property (nonatomic, strong) UserStatistics *userStatistics;
 
-@property (nonatomic, assign) NSInteger minTrade;
+@property (nonatomic, strong) NSNumber *minTrade;
 
-@property (nonatomic, assign) CGFloat premiumRate;
+@property (nonatomic, strong) NSNumber *premiumRate;
 
-@property (nonatomic, assign) long long totalAmount;
+@property (nonatomic, copy) NSString *totalCountString;
 
 @property (nonatomic, copy) NSString *tradeCurrency;
 

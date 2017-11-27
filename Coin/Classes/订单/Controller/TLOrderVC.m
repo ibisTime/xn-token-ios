@@ -10,12 +10,19 @@
 
 #import "TopLabelUtil.h"
 #import "OrderListTableView.h"
+#import "CoinChangeView.h"
+#import "FilterView.h"
 
 #import "OrderDetailVC.h"
 #import "WaitingOrderVC.h"
 
 @interface TLOrderVC ()<SegmentDelegate, RefreshDelegate>
 
+//货币切换
+@property (nonatomic, strong) CoinChangeView *changeView;
+//筛选
+@property (nonatomic, strong) FilterView *filterPicker;
+//
 @property (nonatomic, strong) TLPageDataHelper *helper;
 //切换
 @property (nonatomic, strong) TopLabelUtil *labelUnil;
@@ -45,6 +52,8 @@
     
     //中间切换
     self.navigationItem.titleView = self.labelUnil;
+    //货币切换
+    [self addCoinChangeView];
     //添加通知
     [self addNotification];
     //暂无订单
@@ -71,6 +80,50 @@
     }
     
     return _labelUnil;
+}
+
+- (void)addCoinChangeView {
+    
+    CoinChangeView *coinChangeView = [[CoinChangeView alloc] init];
+    
+    coinChangeView.title = @"ETH";
+    
+    [coinChangeView addTarget:self action:@selector(changeCoin) forControlEvents:UIControlEventTouchUpInside];
+    
+    self.changeView = coinChangeView;
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:coinChangeView];
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(20 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
+        coinChangeView.title = @"ETH";
+        
+    });
+}
+
+- (FilterView *)filterPicker {
+    
+    if (!_filterPicker) {
+        
+        CoinWeakSelf;
+        
+        NSArray *textArr = @[@"ETH"];
+        
+        _filterPicker = [[FilterView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
+        
+        _filterPicker.title = @"请选择货币类型";
+        
+        _filterPicker.selectBlock = ^(NSInteger index) {
+            
+            weakSelf.changeView.title = textArr[index];
+            
+        };
+        
+        _filterPicker.tagNames = textArr;
+        
+    }
+    
+    return _filterPicker;
 }
 
 - (void)initPlaceHolderView {
@@ -125,7 +178,13 @@
     
 }
 
-#pragma mark - Init
+#pragma mark - Events
+- (void)changeCoin {
+    
+    [self.filterPicker show];
+}
+
+#pragma mark - Data
 - (void)requestOrderList {
     
     CoinWeakSelf;

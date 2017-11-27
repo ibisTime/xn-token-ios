@@ -53,6 +53,9 @@
     self.photoBtn = [UIButton buttonWithTitle:@"" titleColor:kWhiteColor backgroundColor:kAppCustomMainColor titleFont:20 cornerRadius:imgWidth/2.0];
     
     self.photoBtn.imageView.contentMode = UIViewContentModeScaleAspectFill;
+
+    self.photoBtn.imageView.layer.cornerRadius = imgWidth/2.0;
+    self.photoBtn.imageView.clipsToBounds = YES;
     
     [self addSubview:self.photoBtn];
     [self.photoBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -85,7 +88,7 @@
     
     [self addSubview:self.tradeTypeLbl];
     [self.tradeTypeLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.nameLbl.mas_top);
+        make.centerY.equalTo(self.nameLbl.mas_centerY);
         make.width.equalTo(@32);
         make.height.equalTo(@18);
         make.left.equalTo(self.nameLbl.mas_right).offset(6);
@@ -110,8 +113,8 @@
     [self.statusLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.right.equalTo(self.mas_right).offset(-15);
-        make.top.equalTo(@(15));
-        
+        make.centerY.equalTo(self.nameLbl.mas_centerY);
+
     }];
     
     //编号
@@ -193,6 +196,29 @@
     NSString *code = [order.code substringFromIndex:count - 8];
     
     self.orderCodeLbl.text = [NSString stringWithFormat:@"编号: %@", code];
+    
+    if (!order.tradeAmount) {
+        
+        [self.nameLbl mas_remakeConstraints:^(MASConstraintMaker *make) {
+            
+            make.centerY.equalTo(@0);
+            make.left.equalTo(self.photoBtn.mas_right).offset(10);
+
+        }];
+        
+    } else {
+        
+        [self.nameLbl mas_remakeConstraints:^(MASConstraintMaker *make) {
+            
+            make.top.equalTo(self.mas_top).offset(15);
+            make.left.equalTo(self.photoBtn.mas_right).offset(10);
+            
+        }];
+    }
+    
+    self.amountLbl.hidden = order.tradeAmount != nil ? NO: YES;
+    
+    self.orderCodeLbl.hidden = order.tradeAmount != nil ? NO: YES;
 }
 
 @end

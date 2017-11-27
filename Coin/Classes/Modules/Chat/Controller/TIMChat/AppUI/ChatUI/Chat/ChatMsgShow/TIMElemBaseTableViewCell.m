@@ -104,11 +104,13 @@
 {
     _icon = [[UIButton alloc] init];
     _icon.layer.cornerRadius = 19;
-    _icon.layer.masksToBounds = YES;
+    _icon.clipsToBounds = YES;
+    
+    _icon.imageView.contentMode = UIViewContentModeScaleAspectFill;
+
     [_icon setBackgroundColor:kAppCustomMainColor];
     [_icon setTitleColor:kWhiteColor forState:UIControlStateNormal];
     
-    _icon.imageView.contentMode = UIViewContentModeScaleAspectFill;
 
     [self.contentView addSubview:_icon];
     
@@ -385,7 +387,8 @@
         
         [_icon setTitle:@"" forState:UIControlStateNormal];
 
-        [_icon sd_setBackgroundImageWithURL:[NSURL URLWithString:[photo convertImageUrl]] forState:UIControlStateNormal placeholderImage:kDefaultUserIcon];
+//        [_icon sd_setBackgroundImageWithURL:[NSURL URLWithString:[photo convertImageUrl]] forState:UIControlStateNormal placeholderImage:kDefaultUserIcon];
+        [_icon sd_setImageWithURL:[NSURL URLWithString:[photo convertImageUrl]] forState:UIControlStateNormal placeholderImage:kDefaultUserIcon];
 
     } else {
         

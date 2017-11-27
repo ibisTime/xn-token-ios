@@ -11,6 +11,7 @@
 
 #import "OverTimeModel.h"
 #import "QuotationModel.h"
+#import "KeyValueModel.h"
 
 #import "APICodeMacro.h"
 
@@ -24,6 +25,8 @@
 @property (nonatomic, strong) UIView *bottomView;
 //data
 @property (nonatomic, strong) NSMutableArray *timeArr;
+//key/value
+@property (nonatomic, strong) NSMutableArray <KeyValueModel *>*values;
 
 @end
 
@@ -45,12 +48,18 @@
     [self requestOverTime];
     //查询以太币和比特币行情
     [self queryCoinQuotation];
+    //获取提示
+    [self requestTradeRemind];
 }
 
 #pragma mark - Init
 - (void)addRightItem {
     
-    [UIBarButtonItem addRightItemWithTitle:@"保留草稿" titleColor:kTextColor frame:CGRectMake(0, 0, 70, 44) vc:self action:@selector(keepDraft)];
+    if (self.type == PublishBuyPositionTypePublish) {
+        
+        [UIBarButtonItem addRightItemWithTitle:@"保留草稿" titleColor:kTextColor frame:CGRectMake(0, 0, 70, 44) vc:self action:@selector(keepDraft)];
+
+    }
 }
 
 - (void)initPublishView {
@@ -64,6 +73,11 @@
         [weakSelf publishAdvertisementWithDraft:draft];
     };
     
+    if (self.advertise) {
+        
+        self.publishView.advertise = self.advertise;
+        
+    }
     self.publishView.backgroundColor = kBackgroundColor;
     
     [self.view addSubview:self.publishView];
@@ -74,8 +88,8 @@
     
     PublishDraftModel *draft = [PublishDraftModel new];
     
-    draft.protectPrice = self.publishView.priceTF.text;
-    
+    draft.protectPrice = self.publishView.highNumTF.text;
+
     draft.premiumRate = self.publishView.premiumRateTF.text;
     
     draft.minTrade = self.publishView.minNumTF.text;
@@ -132,56 +146,52 @@
 
 - (void)publishAdvertisementWithDraft:(PublishDraftModel *)draft {
     
+    if (![draft.premiumRate valid]) {
+        
+        [TLAlert alertWithInfo:@"请输入溢价比例"];
+        return ;
+    }
     
-    if (draft.isPublish) {
+    if (![draft.protectPrice valid]) {
         
-        if (![draft.protectPrice valid]) {
-            
-            return ;
-        }
-        
-        if (![draft.premiumRate valid]) {
-            
-            [TLAlert alertWithInfo:@"请输入溢价比例"];
-            return ;
-        }
-        
-        if (![draft.minTrade valid]) {
-            
-            [TLAlert alertWithInfo:@"请输入交易的最小限额"];
-            return ;
-        }
-        
-        if (![draft.maxTrade valid]) {
-            
-            [TLAlert alertWithInfo:@"请输入交易的最大限额"];
-            return ;
-        }
-        
-        if (![draft.buyTotal valid]) {
-            
-            [TLAlert alertWithInfo:@"请输入购买总量"];
-            return ;
-        }
-        
-        if (![draft.payType valid]) {
-            
-            [TLAlert alertWithInfo:@"请选择付款方式"];
-            return ;
-        }
-        
-        if (![draft.payLimit valid]) {
-            
-            [TLAlert alertWithInfo:@"请选择付款期限"];
-            return ;
-        }
-        
-        if (![draft.leaveMessage valid]) {
-            
-            [TLAlert alertWithInfo:@"请填写广告留言"];
-            return ;
-        }
+        [TLAlert alertWithInfo:@"请输入最高可成交的价格"];
+        return ;
+    }
     
+    if (![draft.minTrade valid]) {
+        
+        [TLAlert alertWithInfo:@"请输入交易的最小限额"];
+        return ;
+    }
+    
+    if (![draft.maxTrade valid]) {
+        
+        [TLAlert alertWithInfo:@"请输入交易的最大限额"];
+        return ;
+    }
+    
+    if (![draft.buyTotal valid]) {
+        
+        [TLAlert alertWithInfo:@"请输入购买总量"];
+        return ;
+    }
+    
+    if (![draft.payType valid]) {
+        
+        [TLAlert alertWithInfo:@"请选择付款方式"];
+        return ;
+    }
+    
+    if (![draft.payLimit valid]) {
+        
+        [TLAlert alertWithInfo:@"请选择付款期限"];
+        return ;
+    }
+    
+    if (![draft.leaveMessage valid]) {
+        
+        [TLAlert alertWithInfo:@"请填写广告留言"];
+        return ;
     }
     
     CGFloat rate = [draft.premiumRate doubleValue]/100.0;
@@ -190,7 +200,8 @@
     
     TLNetworking *http = [TLNetworking new];
     
-    http.code = @"625220";
+    
+    http.code = self.type == PublishBuyPositionTypePublish ? @"625220": @"625221";
     http.parameters[@"userId"] = [TLUser user].userId;
     http.parameters[@"leaveMessage"] = draft.leaveMessage;
     http.parameters[@"maxTrade"] = draft.maxTrade;
@@ -216,11 +227,17 @@
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             
-            [self.navigationController popViewControllerAnimated:YES];
+            self.tabBarController.selectedIndex = 0;
+            
+            [self.navigationController popToRootViewControllerAnimated:YES];
 
         });
         
-        [[NSNotificationCenter defaultCenter] postNotificationName:kAdvertiseListRefresh object:@"1"];
+        if (draft.isPublish == YES) {
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:kAdvertiseListRefresh object:@"1"];
+
+        }
         
     } failure:^(NSError *error) {
         
@@ -256,6 +273,28 @@
             }
         }];
         
+        
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
+- (void)requestTradeRemind {
+    
+    TLPageDataHelper *helper = [[TLPageDataHelper alloc] init];
+    
+    helper.code = @"625915";
+    
+    helper.start = 1;
+    helper.limit = 30;
+    
+    helper.parameters[@"type"] = @"buy_ads_hint";
+    
+    [helper modelClass:[KeyValueModel class]];
+    
+    [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
+        
+        self.publishView.values = objs;
         
     } failure:^(NSError *error) {
         

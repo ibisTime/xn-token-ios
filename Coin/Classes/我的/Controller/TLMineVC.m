@@ -20,6 +20,8 @@
 #import "SettingVC.h"
 #import "PublishBuyVC.h"
 #import "PublishSellVC.h"
+#import "HTMLStrVC.h"
+#import "MyAdvertiseVC.h"
 
 #import "TLImagePicker.h"
 #import "TLUploadManager.h"
@@ -91,8 +93,10 @@
     advertisement.imgName = @"我的广告";
     advertisement.action = ^{
         
-        [TLAlert alertWithInfo:@"正在研发中, 敬请期待"];
-
+        MyAdvertiseVC *advertiseVC = [MyAdvertiseVC new];
+        
+        [self.navigationController pushViewController:advertiseVC animated:YES];
+        
     };
     
     //我的地址
@@ -147,6 +151,12 @@
     problem.imgName = @"常见问题";
     problem.action = ^{
         
+        HTMLStrVC *htmlVC = [HTMLStrVC new];
+        
+        htmlVC.type = HTMLTypeCommonProblem;
+        
+        [self.navigationController pushViewController:htmlVC animated:YES];
+        
     };
     
     //联系客服
@@ -155,6 +165,12 @@
     linkService.text = @"联系客服";
     linkService.imgName = @"联系客服";
     linkService.action = ^{
+        
+        HTMLStrVC *htmlVC = [HTMLStrVC new];
+        
+        htmlVC.type = HTMLTypeLinkService;
+        
+        [self.navigationController pushViewController:htmlVC animated:YES];
         
     };
     
@@ -165,6 +181,11 @@
     abountUs.imgName = @"关于我们";
     abountUs.action = ^{
         
+        HTMLStrVC *htmlVC = [HTMLStrVC new];
+        
+        htmlVC.type = HTMLTypeAboutUs;
+        
+        [self.navigationController pushViewController:htmlVC animated:YES];
     };
     
     self.group = [MineGroup new];
@@ -320,6 +341,8 @@
         {
             PublishBuyVC *buyVC = [PublishBuyVC new];
             
+            buyVC.type = PublishBuyPositionTypePublish;
+
             [self.navigationController pushViewController:buyVC animated:YES];
             
         }break;
@@ -328,6 +351,8 @@
         {
             PublishSellVC *sellVC = [PublishSellVC new];
             
+            sellVC.type = PublishSellPositionTypePublish;
+
             [self.navigationController pushViewController:sellVC animated:YES];
             
         }break;

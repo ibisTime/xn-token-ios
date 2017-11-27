@@ -39,7 +39,7 @@
             
         case HTMLTypeAboutUs: {
             
-            ckey = @"aboutus";
+            ckey = @"about_us";
             
             name = @"关于我们";
             
@@ -53,6 +53,29 @@
             
         } break;
             
+        case HTMLTypeCommonProblem: {
+            
+            ckey = @"questions";
+            
+            name = @"常见问题";
+            
+        } break;
+            
+        case HTMLTypeLinkService: {
+            
+            ckey = @"service";
+            
+            name = @"联系客服";
+            
+        } break;
+            
+        case HTMLTypeTradeRemind: {
+            
+            ckey = @"trade_remind";
+            
+            name = @"交易提醒";
+            
+        } break;
     }
 
     self.title = name;

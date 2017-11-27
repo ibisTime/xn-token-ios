@@ -1,20 +1,24 @@
 //
-//  PublishSellView.h
+//  PublishBuyView.h
 //  Coin
 //
-//  Created by 蔡卓越 on 2017/11/21.
+//  Created by 蔡卓越 on 2017/11/20.
 //  Copyright © 2017年  tianlei. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
+
 #import "PublishDraftModel.h"
+#import "KeyValueModel.h"
+#import "AdvertiseModel.h"
+
 #import "TLTextField.h"
 #import "TLPickerTextField.h"
 #import "TLTextView.h"
 
-typedef void(^PublishSellBlock)(PublishDraftModel *draft);
+typedef void(^PublishBuyBlock)(PublishDraftModel *draft);
 
-@interface PublishSellView : UIView
+@interface PublishBuyView : UIView
 
 @property (nonatomic, strong) UIScrollView *scrollView;
 //价格
@@ -30,7 +34,7 @@ typedef void(^PublishSellBlock)(PublishDraftModel *draft);
 //溢价
 @property (nonatomic, strong) TLTextField *premiumRateTF;
 //最低价
-@property (nonatomic, strong) TLTextField *lowNumTF;
+@property (nonatomic, strong) TLTextField *highNumTF;
 //最小量
 @property (nonatomic, strong) TLTextField *minNumTF;
 //最大量
@@ -43,9 +47,14 @@ typedef void(^PublishSellBlock)(PublishDraftModel *draft);
 @property (nonatomic, strong) TLPickerTextField *payLimitPicker;
 //付款方式选择
 @property (nonatomic, assign) NSInteger payTypeIndex;
-
-@property (nonatomic, copy) PublishSellBlock sellBlock;
+//
+@property (nonatomic, copy) PublishBuyBlock buyBlock;
 //价格
 @property (nonatomic, copy) NSString *marketPrice;
+//提示
+@property (nonatomic, strong) NSMutableArray <KeyValueModel *>*values;
+
+//广告
+@property (nonatomic, strong) AdvertiseModel *advertise;
 
 @end

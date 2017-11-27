@@ -14,6 +14,7 @@
 #import "TLBannerView.h"
 #import "PublishTipView.h"
 #import "TopLabelUtil.h"
+#import "FilterView.h"
 
 #import "BannerModel.h"
 
@@ -22,9 +23,15 @@
 #import "PublishSellVC.h"
 #import "TradeBuyVC.h"
 #import "TradeSellVC.h"
+#import "SearchVC.h"
 
 @interface TLTransactionVC ()<SegmentDelegate, RefreshDelegate>
 
+//货币切换
+@property (nonatomic, strong) CoinChangeView *changeView;
+//筛选
+@property (nonatomic, strong) FilterView *filterPicker;
+//
 @property (nonatomic, strong) TLPageDataHelper *helper;
 //暂无交易
 @property (nonatomic, strong) UIView *placeHolderView;
@@ -52,6 +59,7 @@
 @implementation TLTransactionVC
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
     
     [self navBarUI];
@@ -64,11 +72,6 @@
     //添加通知
     [self addNotification];
 
-}
-
-#pragma mark- 交易搜索
-- (void)search {
-    
 }
 
 #pragma mark - Init
@@ -94,7 +97,13 @@
     
     //1.左边切换
     CoinChangeView *coinChangeView = [[CoinChangeView alloc] init];
+    
     coinChangeView.title = @"ETH";
+    
+    [coinChangeView addTarget:self action:@selector(changeCoin) forControlEvents:UIControlEventTouchUpInside];
+    
+    self.changeView = coinChangeView;
+    
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:coinChangeView];
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(20 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -216,6 +225,36 @@
     };
 }
 
+- (FilterView *)filterPicker {
+    
+    if (!_filterPicker) {
+        
+        CoinWeakSelf;
+        
+        NSArray *textArr = @[@"ETH"];
+        
+//        NSArray *typeArr = @[@"", @"charge", @"withdraw", @"buy", @"sell"];
+        
+        _filterPicker = [[FilterView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
+        
+        _filterPicker.title = @"请选择货币类型";
+        
+        _filterPicker.selectBlock = ^(NSInteger index) {
+            
+            weakSelf.changeView.title = textArr[index];
+            
+//            weakSelf.helper.parameters[@"bizType"] = typeArr[index];
+//
+//            [weakSelf.tableView beginRefreshing];
+        };
+        
+        _filterPicker.tagNames = textArr;
+        
+    }
+    
+    return _filterPicker;
+}
+
 - (void)addNotification{
     //发布购买/出售
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshData:) name:kAdvertiseListRefresh object:nil];
@@ -225,6 +264,18 @@
 }
 
 #pragma mark - Events
+- (void)changeCoin {
+    
+    [self.filterPicker show];
+}
+
+- (void)search {
+    
+    SearchVC *searchVC = [SearchVC new];
+    
+    [self.navigationController pushViewController:searchVC animated:YES];
+}
+
 - (void)clickPublish {
     
     [self.tipView show];
@@ -236,12 +287,16 @@
 
         PublishBuyVC *buyVC = [PublishBuyVC new];
         
+        buyVC.type = PublishBuyPositionTypePublish;
+        
         [self.navigationController pushViewController:buyVC animated:YES];
         
     } else if (index == 1) {
         
         PublishSellVC *sellVC = [PublishSellVC new];
         
+        sellVC.type = PublishSellPositionTypePublish;
+
         [self.navigationController pushViewController:sellVC animated:YES];
     }
 }
@@ -378,6 +433,8 @@
         
         buyVC.advertise = self.advertises[indexPath.row];
         
+        buyVC.type = TradeBuyPositionTypeTrade;
+        
         [self.navigationController pushViewController:buyVC animated:YES];
     } else {
         
@@ -385,6 +442,8 @@
         
         sellVC.advertise = self.advertises[indexPath.row];
         
+        sellVC.type = TradeBuyPositionTypeTrade;
+
         [self.navigationController pushViewController:sellVC animated:YES];
     }
     

@@ -13,5 +13,7 @@
 @property (nonatomic,copy) NSArray *tagNames;
 
 @property (nonatomic,copy)  void (^didSelectBlock)(NSInteger index);
+//当前选择
+@property (nonatomic, assign) NSInteger selectIndex;
 
 @end

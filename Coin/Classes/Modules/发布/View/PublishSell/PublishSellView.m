@@ -1,29 +1,35 @@
 //
-//  PublishBuyView.m
+//  PublishSellView.m
 //  Coin
 //
-//  Created by 蔡卓越 on 2017/11/20.
+//  Created by 蔡卓越 on 2017/11/21.
 //  Copyright © 2017年  tianlei. All rights reserved.
 //
 
-#import "PublishBuyView.h"
+#import "PublishSellView.h"
 #import "TLUIHeader.h"
 #import "AppColorMacro.h"
 
 #import "TLAlert.h"
-#import <CDCommon/UIScrollView+TLAdd.h>
+#import <UIScrollView+TLAdd.h>
+#import "NSNumber+Extension.h"
+#import "NSString+Extension.h"
 
 #define myDotNumbers     @"-0123456789.\n"
 #define myNumbers          @"-0123456789\n"
 
-@interface PublishBuyView ()<UITextFieldDelegate>
+@interface PublishSellView ()<UITextFieldDelegate>
 
 //留言
 @property (nonatomic, strong) UIView *leaveMsgView;
+//
+@property (nonatomic, strong) NSArray *textArr;
+//付款方式
+@property (nonatomic, strong) NSArray *payTypeArr;
 
 @end
 
-@implementation PublishBuyView
+@implementation PublishSellView
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
@@ -65,19 +71,24 @@
 
 - (void)initTopView {
     
-    NSArray *textArr = @[@"价        格", @"溢  价  率", @"最  小  量", @"最  大  量", @"购买总量", @"付款方式", @"付款期限"];
+    self.textArr = @[@"价        格", @"溢  价  率", @"最  低  价", @"最  小  量", @"最  大  量", @"出售总量", @"收款方式", @"收款期限"];
     
-    NSArray *rightArr = @[@"CNY", @"%", @"CNY", @"CNY", @"ETH", @"", @"分钟"];
+    NSArray *rightArr = @[@"CNY", @"%", @"CNY", @"CNY", @"CNY", @"ETH", @"", @"分钟"];
     
-    NSArray *placeHolderArr = @[@"", @"根据市场的溢价比例", @"每笔交易的最小限额", @"每笔交易的最大限额", @"请输入购买总量", @"请选择付款方式", @"请选择付款期限"];
+    NSArray *placeHolderArr = @[@"", @"根据市场的溢价比例", @"广告最低可成交的价格", @"每笔交易的最小限额", @"每笔交易的最大限额", @"请输入出售总量", @"请选择收款方式", @"请选择收款期限"];
+
+    self.payTypeArr = @[@"支付宝", @"微信", @"银行转账"];
     
-    
-    [textArr enumerateObjectsUsingBlock:^(NSString *  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+    [self.textArr enumerateObjectsUsingBlock:^(NSString *  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         
         //提示
         UIButton *promptBtn = [UIButton buttonWithImageName:@"问号"];
         
         promptBtn.backgroundColor = kWhiteColor;
+        
+        promptBtn.tag = 1500 + idx;
+
+        [promptBtn addTarget:self action:@selector(lookPrompt:) forControlEvents:UIControlEventTouchUpInside];
         
         [self.scrollView addSubview:promptBtn];
         [promptBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -128,7 +139,7 @@
         }
         
         //textField
-
+        
         switch (idx) {
             case 0:
             {
@@ -139,7 +150,7 @@
                 textField.tag = 1200 + idx;
                 
                 textField.enabled = NO;
-
+                
                 [self.scrollView addSubview:textField];
                 
                 [textField mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -198,7 +209,7 @@
                     make.top.equalTo(@(idx*50)); make.right.equalTo(rightTextLbl.mas_left).offset(0);
                 }];
                 
-                self.minNumTF = textField;
+                self.lowNumTF = textField;
                 
             }break;
                 
@@ -213,7 +224,30 @@
                 [self.scrollView addSubview:textField];
                 
                 textField.keyboardType = UIKeyboardTypeDecimalPad;
-
+                
+                [textField mas_makeConstraints:^(MASConstraintMaker *make) {
+                    
+                    make.left.equalTo(@0);
+                    make.height.equalTo(@50);
+                    make.top.equalTo(@(idx*50)); make.right.equalTo(rightTextLbl.mas_left).offset(0);
+                }];
+                
+                self.minNumTF = textField;
+                
+            }break;
+                
+            case 4:
+            {
+                TLTextField *textField = [[TLTextField alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 50) leftTitle:obj titleWidth:90 placeholder:placeHolderArr[idx]];
+                
+                textField.delegate = self;
+                
+                textField.tag = 1200 + idx;
+                
+                [self.scrollView addSubview:textField];
+                
+                textField.keyboardType = UIKeyboardTypeDecimalPad;
+                
                 [textField mas_makeConstraints:^(MASConstraintMaker *make) {
                     
                     make.left.equalTo(@0);
@@ -225,7 +259,7 @@
                 
             }break;
                 
-            case 4:
+            case 5:
             {
                 TLTextField *textField = [[TLTextField alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 50) leftTitle:obj titleWidth:90 placeholder:placeHolderArr[idx]];
                 
@@ -248,16 +282,16 @@
                 
             }break;
                 
-            case 5:
+            case 6:
             {
                 CoinWeakSelf;
                 
                 TLPickerTextField *picker = [[TLPickerTextField alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 50) leftTitle:obj titleWidth:90 placeholder:placeHolderArr[idx]];
                 
                 picker.tag = 1200 + idx;
-
-                picker.tagNames = @[@"支付宝", @"微信", @"银行转账"];
-
+                
+                picker.tagNames = self.payTypeArr;
+                
                 picker.didSelectBlock = ^(NSInteger index) {
                     
                     weakSelf.payTypeIndex = index;
@@ -278,11 +312,11 @@
                 
             }break;
                 
-            case 6:
+            case 7:
             {
                 
                 TLPickerTextField *picker = [[TLPickerTextField alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 50) leftTitle:obj titleWidth:90 placeholder:placeHolderArr[idx]];
-
+                
                 picker.tag = 1200 + idx;
                 
                 [self.scrollView addSubview:picker];
@@ -331,14 +365,14 @@
         
         make.left.equalTo(@0);
         make.width.equalTo(@(kScreenWidth));
-        make.top.equalTo(@(7*50 + 10));
+        make.top.equalTo(@(self.textArr.count*50 + 10));
         make.height.equalTo(@150);
     }];
     
     self.leaveMsgView = leaveMsgView;
     
     TLTextView *textView = [[TLTextView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 120)];
-    
+
     textView.font = Font(14.0);
 
     textView.placholder = @"请写下您的广告留言吧";
@@ -451,12 +485,40 @@
     
 }
 
+- (void)setAdvertise:(AdvertiseModel *)advertise {
+    
+    _advertise = advertise;
+    //最低价
+    self.lowNumTF.text = [self.advertise.protectPrice convertToSimpleRealMoney];
+    //溢价率
+    CGFloat rate = [[self.advertise.premiumRate convertToRealMoneyWithNum:4] doubleValue]*100;
+    
+    self.premiumRateTF.text = [NSString stringWithFormat:@"%lg", rate];
+    //最小量
+    self.minNumTF.text = [self.advertise.minTrade convertToSimpleRealMoney];
+    //最大量
+    self.maxNumTF.text = [self.advertise.maxTrade convertToSimpleRealMoney];
+    //购买数量
+    self.buyTotalTF.text = [self.advertise.totalCountString convertToSimpleRealCoin];
+    //付款方式
+    NSInteger index = [self.advertise.payType integerValue];
+    
+    self.payTypePicker.text = self.payTypeArr[index];
+    
+    //付款期限
+    self.payLimitPicker.text = [NSString stringWithFormat:@"%ld", self.advertise.payLimit];
+    
+    //留言
+    self.leaveMsgTV.text = self.advertise.leaveMessage;
+    
+}
+
 #pragma mark - Events
 - (void)publish {
     
     PublishDraftModel *draft = [PublishDraftModel new];
     
-    draft.protectPrice = self.priceTF.text;
+    draft.protectPrice = self.lowNumTF.text;
     
     draft.premiumRate = self.premiumRateTF.text;
     
@@ -474,9 +536,9 @@
     
     draft.isPublish = YES;
     
-    if (self.buyBlock) {
+    if (self.sellBlock) {
         
-        self.buyBlock(draft);
+        self.sellBlock(draft);
     }
 }
 
@@ -495,6 +557,29 @@
         [TLAlert alertWithInfo:@"溢价率应在-99.99~99.99之间"];
     }
     
+}
+
+- (void)lookPrompt:(UIButton *)sender {
+    
+    NSArray *keyArr = @[@"price", @"premiumRate", @"protectPrice", @"minTrade", @"maxTrade", @"totalCount", @"payType", @"payLimit"];
+    
+    NSInteger index = sender.tag - 1500;
+    
+    __block NSString *prompt = @"";
+    
+    [self.values enumerateObjectsUsingBlock:^(KeyValueModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        
+        if ([obj.ckey isEqualToString:keyArr[index]]) {
+            
+            
+            prompt = obj.cvalue;
+        }
+    }];
+    
+    [TLAlert alertWithTitle:@"提示" message:prompt confirmMsg:@"关闭" confirmAction:^{
+        
+        
+    }];
 }
 
 #pragma mark - UITextFieldDelegate
@@ -540,11 +625,11 @@
                 
             }break;
                 
-            case 4:
+            case 5:
             {
                 count = 8;
                 
-                promptStr = @"购买总量不能超过99999999哦";
+                promptStr = @"出售总量不能超过99999999哦";
                 
                 if (textField.text.length >= count) {  //小数点前面6位
                     
@@ -557,7 +642,7 @@
             default:
                 break;
         }
-  
+        
     }
     else {
         
@@ -583,12 +668,20 @@
             
         case 2:
         {
+            count = 2;
+            
+            promptStr = @"最低价的小数点位数不能超过2位哦";
+            
+        }break;
+            
+        case 3:
+        {
             count = 8;
             
             promptStr = @"最小量的小数点位数不能超过8位哦";
         }break;
             
-        case 3:
+        case 4:
         {
             count = 8;
             
@@ -602,7 +695,7 @@
     if (NSNotFound != nDotLoc && range.location > nDotLoc + count) {
         
         [TLAlert alertWithInfo:promptStr];
-
+        
         return NO;  //小数点后面两位
     }
     if (NSNotFound != nDotLoc && range.location > nDotLoc && [string isEqualToString:@"."]) {
@@ -610,4 +703,5 @@
     }
     return YES;
 }
+
 @end

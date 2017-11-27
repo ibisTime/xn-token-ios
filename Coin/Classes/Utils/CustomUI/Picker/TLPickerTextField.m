@@ -14,7 +14,6 @@
 
 @property (nonatomic,weak) UIPickerView *pickerInput;
 //
-@property (nonatomic, assign) NSInteger selectIndex;
 
 @end
 

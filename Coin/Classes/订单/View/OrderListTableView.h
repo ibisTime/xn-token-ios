@@ -13,6 +13,6 @@
 @interface OrderListTableView : TLTableView
 
 //订单
-@property (nonatomic, strong) NSArray <OrderModel *>*orders;
+@property (nonatomic, strong) NSMutableArray <OrderModel *>*orders;
 
 @end

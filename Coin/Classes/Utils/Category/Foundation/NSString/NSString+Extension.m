@@ -230,16 +230,18 @@
         return nil;
     }
     
-    long long c = [self longLongValue];
-    
     //保留8位小数,第九位舍去
     NSDecimalNumberHandler *handler = [NSDecimalNumberHandler decimalNumberHandlerWithRoundingMode:NSRoundBankers scale:8 raiseOnExactness:NO raiseOnOverflow:NO raiseOnUnderflow:NO raiseOnDivideByZero:YES];
     
-    NSDecimalNumber *m = [NSDecimalNumber decimalNumberWithString:[@(c/(1.0e+18)) stringValue]];
+    NSDecimalNumber *m = [NSDecimalNumber decimalNumberWithString:self];
+
+    NSDecimalNumber *n = [NSDecimalNumber decimalNumberWithString:[@(1.0e+18) stringValue]];
+
+    NSDecimalNumber *o = [m decimalNumberByDividingBy:n];
     
-    NSDecimalNumber *n = [m decimalNumberByRoundingAccordingToBehavior:handler];
+    NSDecimalNumber *p = [o decimalNumberByRoundingAccordingToBehavior:handler];
     
-    return [NSString stringWithFormat:@"%@",n];
+    return [NSString stringWithFormat:@"%@",p];
 }
 
 //能去掉小数点的尽量去掉小数点

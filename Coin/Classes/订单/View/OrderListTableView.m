@@ -9,6 +9,9 @@
 #import "OrderListTableView.h"
 
 #import "OrderListCell.h"
+#import "TLAlert.h"
+
+#import "TLNetworking.h"
 
 @interface OrderListTableView ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -88,6 +91,78 @@ static NSString *identifierCell = @"OrderListCell";
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     
     return 0.1;
+}
+
+#pragma mark 编辑模式
+
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    OrderModel *order = self.orders[indexPath.row];
+    
+    if ([order.status isEqualToString:@"-1"]) {
+        
+        return UITableViewCellEditingStyleDelete;
+
+    }
+    return UITableViewCellEditingStyleNone;
+}
+
+- (NSArray<UITableViewRowAction*> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    NSMutableArray *actionArr = @[].mutableCopy;
+    
+    UITableViewRowAction *deleteAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"删除" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
+        
+//        [TLAlert alertWithTitle:@"" msg:@"你真的要删除din？" confirmMsg:@"确定" cancleMsg:@"取消" cancle:^(UIAlertAction *action) {
+//
+//        } confirm:^(UIAlertAction *action) {
+//
+//        }];
+        
+        [self deleteArticleWithIndex:indexPath.row];
+        
+    }];
+    
+    deleteAction.backgroundColor = [UIColor themeColor];
+    
+    [actionArr addObject:deleteAction];
+    
+    return actionArr;
+}
+
+- (void)deleteArticleWithIndex:(NSInteger)index {
+    
+    OrderModel *order = self.orders[index];
+    
+    TLNetworking *http = [TLNetworking new];
+    
+    http.code = @"625249";
+
+    http.parameters[@"code"] = order.code;
+    
+    [http postWithSuccess:^(id responseObject) {
+        
+        [self.orders removeObjectAtIndex:index];
+        
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
+        [self deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        
+        if (self.orders.count == 0) {
+            
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                
+                [self reloadData_tl];
+                
+            });
+            
+        }
+        
+        
+    } failure:^(NSError *error) {
+        
+        
+    }];
+    
 }
 
 @end
