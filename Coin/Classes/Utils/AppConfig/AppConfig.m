@@ -76,4 +76,9 @@ void TLLog(NSString *format, ...) {
     return [self.addr stringByAppendingString:@"/forward-service/api"];
 }
 
+- (NSString *)wxKey {
+    
+    return @"wx8cb7c18fa507f630";
+}
+
 @end

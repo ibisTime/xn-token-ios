@@ -147,6 +147,8 @@ static NSString *identifierCell = @"OrderListCell";
         NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
         [self deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
         
+        [TLAlert alertWithSucces:@"删除成功"];
+
         if (self.orders.count == 0) {
             
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{

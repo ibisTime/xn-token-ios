@@ -37,13 +37,15 @@
 #pragma mark - Init
 - (void)initSubviews {
     
+    BOOL isRealNameExist = [[TLUser user].realName valid];
+    
     self.view.backgroundColor = kBackgroundColor;
     
     CGFloat leftMargin = 15;
     
     self.realName = [[TLTextField alloc] initWithFrame:CGRectMake(0, 10, kScreenWidth, 50) leftTitle:@"姓名" titleWidth:105 placeholder:@"请输入姓名"];
     
-    self.realName.enabled = [TLUser user].realName ? NO: YES;
+    self.realName.enabled = !isRealNameExist;
     
     STRING_NIL_NULL([TLUser user].realName);
     
@@ -57,7 +59,7 @@
     
     self.idCard = [[TLTextField alloc] initWithFrame:CGRectMake(0, self.realName.yy, kScreenWidth, 50) leftTitle:@"身份证号码" titleWidth:105 placeholder:@"请输入身份证号码"];
     
-    self.idCard.enabled = [TLUser user].idNo ? NO: YES;
+    self.idCard.enabled = !isRealNameExist;
 
     STRING_NIL_NULL([TLUser user].idNo);
     
@@ -73,9 +75,9 @@
     
     [self.view addSubview:confirmBtn];
  
-    confirmBtn.enabled = [TLUser user].realName ? NO: YES;
+    confirmBtn.enabled = !isRealNameExist;
 
-    confirmBtn.backgroundColor = [TLUser user].realName ? kPlaceholderColor: kAppCustomMainColor;
+    confirmBtn.backgroundColor = isRealNameExist ? kPlaceholderColor: kAppCustomMainColor;
 }
 
 #pragma mark - Events

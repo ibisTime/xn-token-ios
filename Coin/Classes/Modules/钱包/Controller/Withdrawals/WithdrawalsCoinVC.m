@@ -11,6 +11,7 @@
 #import "UIBarButtonItem+convience.h"
 #import "TLAlert.h"
 #import "NSString+Check.h"
+#import "APICodeMacro.h"
 
 #import "BillVC.h"
 
@@ -18,6 +19,7 @@
 #import "FilterView.h"
 
 #import "QRCodeVC.h"
+#import "CoinAddressListVC.h"
 
 @interface WithdrawalsCoinVC ()
 
@@ -33,6 +35,8 @@
 @property (nonatomic, strong) FilterView *coinAddressPicker;
 //开关
 @property (nonatomic, strong) UISwitch *sw;
+//手续费率
+@property (nonatomic, copy) NSString *withdrawFee;
 
 @end
 
@@ -45,8 +49,10 @@
     self.title = @"提币";
     //记录
     [self addRecordItem];
-    
+    //
     [self initSubviews];
+    //获取手续费费率
+    [self requestWithdrawFee];
 }
 
 #pragma mark - Init
@@ -152,7 +158,7 @@
     [self.view addSubview:self.tranAmountTF];
     
     //矿工费
-    self.minerFeeTF = [[TLTextField alloc] initWithFrame:CGRectMake(0, self.tranAmountTF.yy + 10, kScreenWidth, heightMargin) leftTitle:@"矿工费" titleWidth:90 placeholder:@""];
+    self.minerFeeTF = [[TLTextField alloc] initWithFrame:CGRectMake(0, self.tranAmountTF.yy + 10, kScreenWidth, heightMargin) leftTitle:@"手续费" titleWidth:90 placeholder:@""];
     
     self.minerFeeTF.enabled = NO;
     
@@ -185,7 +191,7 @@
     
     UILabel *minerPromptLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor3 font:11.0];
     
-    minerPromptLbl.text = @"矿工费将在可用余额中扣除, 余额不足将从转账金额中扣除";
+    minerPromptLbl.text = @"手续费将在可用余额中扣除, 余额不足将从转账金额中扣除";
     
     minerPromptLbl.numberOfLines = 0;
     
@@ -368,9 +374,13 @@
 
 - (void)textDidChange:(UITextField *)sender {
     
-    CGFloat tranAmount = [self.tranAmountTF.text doubleValue]*0.001;
-    
-    self.minerFeeTF.text = [NSString stringWithFormat:@"%.6lg %@", tranAmount, self.currency.currency];
+//    NSDecimalNumber *m = [NSDecimalNumber decimalNumberWithString:self.tranAmountTF.text];
+//
+//    NSDecimalNumber *n = [NSDecimalNumber decimalNumberWithString:self.withdrawFee];
+//
+//    NSDecimalNumber *o = [m decimalNumberByMultiplyingBy:n];
+//
+//    self.minerFeeTF.text = [NSString stringWithFormat:@"%@ %@", [o stringValue], self.currency.currency];
 }
 
 - (void)selectCoinAddress {
@@ -386,8 +396,19 @@
         //选择地址
         case 0:
         {
-//            [self.coinAddressPicker hide];
-            [TLAlert alertWithInfo:@"正在研发中, 敬请期待"];
+            [self.coinAddressPicker hide];
+            
+            CoinAddressListVC *addressVC = [CoinAddressListVC new];
+            
+            addressVC.addressBlock = ^(NSString *address) {
+                
+                weakSelf.receiveAddressLbl.text = address;
+                
+                weakSelf.receiveAddressLbl.textColor = kTextColor;
+
+            };
+            
+            [self.navigationController pushViewController:addressVC animated:YES];
             
         }break;
         //扫描二维码
@@ -473,6 +494,25 @@
         
     }];
     
+}
+
+- (void)requestWithdrawFee {
+    
+    TLNetworking *http = [TLNetworking new];
+    
+    http.code = USER_CKEY_CVALUE;
+    http.parameters[@"key"] = @"withdraw_fee";
+    
+    [http postWithSuccess:^(id responseObject) {
+        
+        self.withdrawFee = responseObject[@"data"][@"cvalue"];
+        
+        self.minerFeeTF.text = [NSString stringWithFormat:@"%@ %@", self.withdrawFee, self.currency.currency];
+
+    } failure:^(NSError *error) {
+        
+        
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

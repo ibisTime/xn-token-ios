@@ -22,6 +22,9 @@
 #import "PublishSellVC.h"
 #import "HTMLStrVC.h"
 #import "MyAdvertiseVC.h"
+#import "FansVC.h"
+#import "CoinAddressListVC.h"
+#import "InviteFriendVC.h"
 
 #import "TLImagePicker.h"
 #import "TLUploadManager.h"
@@ -106,8 +109,9 @@
     address.imgName = @"我的地址";
     address.action = ^{
         
-        [TLAlert alertWithInfo:@"正在研发中, 敬请期待"];
-
+        CoinAddressListVC *addressListVC = [CoinAddressListVC new];
+        
+        [self.navigationController pushViewController:addressListVC animated:YES];
     };
     
     //受信任的
@@ -117,8 +121,9 @@
     trust.imgName = @"受信任的";
     trust.action = ^{
         
-        [TLAlert alertWithInfo:@"正在研发中, 敬请期待"];
-
+        FansVC *fansVC = [FansVC new];
+        
+        [self.navigationController pushViewController:fansVC animated:YES];
     };
     
     //邀请好友
@@ -128,8 +133,10 @@
     inviteFriend.imgName = @"邀请";
     inviteFriend.action = ^{
         
-        [TLAlert alertWithInfo:@"正在研发中, 敬请期待"];
-
+        InviteFriendVC *inviteVC = [InviteFriendVC new];
+        
+        [self.navigationController pushViewController:inviteVC animated:YES];
+        
     };
     
     //安全中心

@@ -9,8 +9,9 @@
 #import "MyAdvertiseCell.h"
 
 #import "NSString+Extension.h"
-#import <SDWebImage/UIButton+WebCache.h>
+#import <UIButton+WebCache.h>
 #import "NSNumber+Extension.h"
+#import "NSString+CGSize.h"
 
 #import "PayTypeModel.h"
 
@@ -213,17 +214,23 @@
     
     self.priceLbl.text = [NSString stringWithFormat:@"%@ CNY", [advertise.truePrice convertToSimpleRealMoney]];
     
-    NSString *tradeText = [advertise.tradeType isEqualToString:@"0"] ? @"购买": @"出售";
-    
-    UIColor *tradeColor = [advertise.tradeType isEqualToString:@"0"] ? kPaleBlueColor: kThemeColor;
+    UIColor *tradeColor = kThemeColor;
     
     //交易方式
     [self.tradeTypeBtn setTitleColor:tradeColor forState:UIControlStateNormal];
     
-    [self.tradeTypeBtn setTitle:tradeText forState:UIControlStateNormal];
+    [self.tradeTypeBtn setTitle:advertise.statusTitle forState:UIControlStateNormal];
     
     self.tradeTypeBtn.layer.borderColor = tradeColor.CGColor;
     self.tradeTypeBtn.layer.borderWidth = 0.5;
+    
+    CGFloat btnW = [NSString getWidthWithString:advertise.statusTitle font:14.0] + 10;
+    
+    [self.tradeTypeBtn mas_updateConstraints:^(MASConstraintMaker *make) {
+        
+        make.width.equalTo(@(btnW));
+        
+    }];
     
 }
 

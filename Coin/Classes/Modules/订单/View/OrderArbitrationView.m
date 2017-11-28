@@ -12,6 +12,9 @@
 #import "AppColorMacro.h"
 
 #import "TLTextView.h"
+#import "TLAlert.h"
+
+#import "NSString+Check.h"
 
 @interface OrderArbitrationView ()
 //背景
@@ -142,6 +145,12 @@
 }
 
 - (void)confirm {
+    
+    if (![self.arbitrationTV.text valid]) {
+        
+        [TLAlert alertWithInfo:@"请填写申请仲裁的原因"];
+        return ;
+    }
     
     if (self.arbitrationBlock) {
         

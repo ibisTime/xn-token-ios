@@ -36,6 +36,8 @@
 @property (nonatomic, copy) NSString *companyCode;
 //头像
 @property (nonatomic, copy) NSString *photo;
+//邮箱
+@property (nonatomic, copy) NSString *email;
 
 //用户手机号
 @property (nonatomic, strong) NSString *userName;

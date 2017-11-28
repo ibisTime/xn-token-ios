@@ -14,6 +14,7 @@
 #import "TLUserForgetPwdVC.h"
 #import "HTMLStrVC.h"
 #import "TLTabBarController.h"
+#import "EditVC.h"
 
 #import "SettingGroup.h"
 #import "SettingModel.h"
@@ -23,6 +24,8 @@
 
 #import "AppMacro.h"
 #import "APICodeMacro.h"
+
+#import "NSString+Check.h"
 
 @interface SettingVC ()
 
@@ -114,8 +117,23 @@
     bindEmail.text = @"绑定邮箱";
     [bindEmail setAction:^{
         
-        [TLAlert alertWithInfo:@"正在研发中, 敬请期待"];
-
+        EditVC *editVC = [[EditVC alloc] init];
+        editVC.title = @"绑定邮箱";
+        editVC.text = [TLUser user].email;
+        editVC.type = UserEditTypeEmail;
+        [editVC setDone:^(NSString *content){
+            
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:1 inSection:1];
+            SettingCell *cell = [weakSelf.tableView cellForRowAtIndexPath:indexPath];
+            
+            cell.rightLabel.text = [[TLUser user].email valid] ? [TLUser user].email: @"";
+            
+            [weakSelf.tableView reloadData];
+            
+        }];
+        
+        //
+        [weakSelf.navigationController pushViewController:editVC animated:YES];
     }];
     
     //修改手机号
@@ -138,28 +156,17 @@
         
     }];
 
-    //谷歌验证
-    SettingModel *google = [SettingModel new];
-    google.text = @"谷歌验证";
-    [google setAction:^{
-        
-        
-    }];
+//    //谷歌验证
+//    SettingModel *google = [SettingModel new];
+//    google.text = @"谷歌验证";
+//    [google setAction:^{
 //
-//    SettingModel *aboutUs = [SettingModel new];
-//    aboutUs.text = @"关于我们";
-//    [aboutUs setAction:^{
 //
-//        HTMLStrVC *htmlVC = [HTMLStrVC new];
-//
-//        htmlVC.type = HTMLTypeAboutUs;
-//
-//        [self.navigationController pushViewController:htmlVC animated:YES];
 //    }];
     
     self.group = [SettingGroup new];
     
-    self.group.sections = @[@[changeTradePwd], @[idAuth, bindEmail, changeMobile, changeLoginPwd, google]];
+    self.group.sections = @[@[changeTradePwd], @[idAuth, bindEmail, changeMobile, changeLoginPwd]];
     
 }
 
@@ -213,19 +220,45 @@
         [[TLUser user] saveUserInfo:userInfo];
         [[TLUser user] setUserInfoWithDict:userInfo];
         
-        if ([TLUser user].realName) {
-            
-            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:1];
-            SettingCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
-            
-            cell.rightLabel.text = @"已认证";
-            
-            [self.tableView reloadData];
-        }
+        [self reloadUserInfo];
         
     } failure:^(NSError *error) {
         
     }];
+}
+
+- (void)reloadUserInfo {
+    
+    //认证状态
+    if ([TLUser user].realName) {
+        
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:1];
+        SettingCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+        
+        cell.rightLabel.text = @"已认证";
+        
+        [self.tableView reloadData];
+    }
+    //邮箱
+    if ([TLUser user].email) {
+        
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:1 inSection:1];
+        SettingCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+        
+        cell.rightLabel.text = [TLUser user].email;
+        
+        [self.tableView reloadData];
+    }
+    //手机号
+    if ([TLUser user].mobile) {
+        
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:2 inSection:1];
+        SettingCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+        
+        cell.rightLabel.text = [TLUser user].mobile;
+        
+        [self.tableView reloadData];
+    }
 }
 
 - (void)didReceiveMemoryWarning {

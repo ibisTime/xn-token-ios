@@ -7,9 +7,14 @@
 //
 
 #import "AppDelegate.h"
+
 #import "TLTabBarController.h"
-#import "AppConfig.h"
 #import "TLUser.h"
+
+#import "AppConfig.h"
+
+#import "WXApi.h"
+#import "TLWXManager.h"
 
 @interface AppDelegate ()
 
@@ -25,6 +30,9 @@
     
     //初始化IMAPlatform
     [self initIMAPlatform];
+    
+    //配置微信
+    [self configWeChat];
     
     //配置根控制器
     [self configRootViewController];
@@ -67,6 +75,11 @@
     [AppConfig config].runEnv = RunEnvDev;
 }
 
+- (void)configWeChat {
+    
+    [[TLWXManager manager] registerApp];
+}
+
 - (void)configRootViewController {
     
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
@@ -97,4 +110,20 @@
     
     [tab pushToChatViewControllerWith:user];
 }
+
+#pragma mark - 微信回调
+// iOS9 NS_AVAILABLE_IOS
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
+    
+    return [WXApi handleOpenURL:url delegate:[TLWXManager manager]];
+
+}
+
+// iOS9 NS_DEPRECATED_IOS
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+    
+    return [WXApi handleOpenURL:url delegate:[TLWXManager manager]];
+    
+}
+
 @end

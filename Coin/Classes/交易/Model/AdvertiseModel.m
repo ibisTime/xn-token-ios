@@ -10,6 +10,18 @@
 
 @implementation AdvertiseModel
 
+- (NSString *)statusTitle {
+    
+    NSDictionary *dict = @{
+                           @"0": @"发布",
+                           @"1": @"查看",
+                           @"2": @"查看",
+                           @"3": @"已下架",
+                           };
+    
+    return dict[self.status];
+}
+
 @end
 
 @implementation TradeUserInfo

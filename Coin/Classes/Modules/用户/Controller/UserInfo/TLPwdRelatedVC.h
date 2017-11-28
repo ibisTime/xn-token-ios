@@ -21,7 +21,7 @@ typedef  NS_ENUM(NSInteger,TLPwdType) {
 
 - (instancetype)initWithType:(TLPwdType)type;
 
-@property (nonatomic,copy) void(^success)();
+@property (nonatomic,copy) void(^success)(void);
 
 
 @end

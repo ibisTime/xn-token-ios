@@ -57,6 +57,8 @@
 @property (nonatomic, copy) NSString *userId;
 //是否信任
 @property (nonatomic, strong) NSNumber *isTrust;
+//状态
+@property (nonatomic, copy) NSString *statusTitle;
 
 @end
 

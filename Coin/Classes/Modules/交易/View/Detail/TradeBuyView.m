@@ -550,7 +550,7 @@
     self.payTypeLbl.layer.borderWidth = 0.5;
     
     //限额
-    self.limitAmountLbl.text = [NSString stringWithFormat:@"限额: %ld-%ld CNY",advertise.minTrade, advertise.maxTrade];
+    self.limitAmountLbl.text = [NSString stringWithFormat:@"限额: %@-%@ CNY",[advertise.minTrade convertToSimpleRealMoney], [advertise.maxTrade convertToSimpleRealMoney]];
     //价格
     
     self.priceLbl.text = [NSString stringWithFormat:@"%@ CNY", [advertise.truePrice convertToSimpleRealMoney]];

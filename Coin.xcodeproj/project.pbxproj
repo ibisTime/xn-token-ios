@@ -342,6 +342,7 @@
 		211CF99E1FC4278000E51FCF /* TradeBuyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 211CF99D1FC4278000E51FCF /* TradeBuyView.m */; };
 		211CF9A11FC5491A00E51FCF /* BuyConfirmView.m in Sources */ = {isa = PBXBuildFile; fileRef = 211CF9A01FC5491A00E51FCF /* BuyConfirmView.m */; };
 		211CF9A41FC55ADD00E51FCF /* OrderPriceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 211CF9A31FC55ADD00E51FCF /* OrderPriceModel.m */; };
+		211D4ED61FCD9B0C000E0D43 /* EditVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 211D4ED51FCD9B0C000E0D43 /* EditVC.m */; };
 		211DE6141FB5465E002FCF3D /* WalletTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 211DE6131FB5465E002FCF3D /* WalletTableView.m */; };
 		211DE6171FB54685002FCF3D /* WalletCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 211DE6161FB54685002FCF3D /* WalletCell.m */; };
 		211DE6A01FB58B4C002FCF3D /* TLDatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 211DE63E1FB58B4B002FCF3D /* TLDatePicker.m */; };
@@ -386,6 +387,25 @@
 		211DE6CA1FB5A586002FCF3D /* RechargeCoinVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 211DE6C91FB5A586002FCF3D /* RechargeCoinVC.m */; };
 		211F78141FCAFBCA0023F133 /* WaitingOrderVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 211F78131FCAFBCA0023F133 /* WaitingOrderVC.m */; };
 		211FAC4F1FC2742C00DC37B0 /* PublishBuyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 211FAC4E1FC2742C00DC37B0 /* PublishBuyView.m */; };
+		21205CCB1FCCFD24003C6C7C /* FansVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21205CCA1FCCFD24003C6C7C /* FansVC.m */; };
+		21205CCF1FCCFDCF003C6C7C /* FansTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 21205CCE1FCCFDCF003C6C7C /* FansTableView.m */; };
+		21205CD21FCCFE70003C6C7C /* FansCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 21205CD11FCCFE70003C6C7C /* FansCell.m */; };
+		21205CD61FCD0435003C6C7C /* FansModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 21205CD51FCD0435003C6C7C /* FansModel.m */; };
+		21205CDA1FCD2FC8003C6C7C /* CoinAddressListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21205CD91FCD2FC8003C6C7C /* CoinAddressListVC.m */; };
+		21205CDE1FCD3131003C6C7C /* CoinAddressTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 21205CDD1FCD3131003C6C7C /* CoinAddressTableView.m */; };
+		21205CE21FCD3163003C6C7C /* CoinAddressModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 21205CE11FCD3163003C6C7C /* CoinAddressModel.m */; };
+		21205CE51FCD31E0003C6C7C /* CoinAddressCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 21205CE41FCD31E0003C6C7C /* CoinAddressCell.m */; };
+		21205CE81FCD3F84003C6C7C /* CoinAddAddressVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21205CE71FCD3F84003C6C7C /* CoinAddAddressVC.m */; };
+		21205CEE1FCD5F5E003C6C7C /* HistoryInviteVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21205CEB1FCD5F5C003C6C7C /* HistoryInviteVC.m */; };
+		21205CEF1FCD5F5E003C6C7C /* InviteFriendVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21205CED1FCD5F5D003C6C7C /* InviteFriendVC.m */; };
+		21205CF31FCD5F98003C6C7C /* InviteModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 21205CF21FCD5F98003C6C7C /* InviteModel.m */; };
+		21205CF71FCD5FE0003C6C7C /* HistoryFriendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 21205CF61FCD5FDF003C6C7C /* HistoryFriendCell.m */; };
+		21205CFD1FCD61D6003C6C7C /* CustomShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 21205CFB1FCD61D5003C6C7C /* CustomShareView.m */; };
+		21205CFE1FCD61D6003C6C7C /* ShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 21205CFC1FCD61D6003C6C7C /* ShareView.m */; };
+		21205D061FCD6394003C6C7C /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 21205D001FCD6393003C6C7C /* libWeChatSDK.a */; };
+		21205D071FCD6394003C6C7C /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 21205D011FCD6393003C6C7C /* README.txt */; };
+		21205D081FCD6394003C6C7C /* read_me.txt in Resources */ = {isa = PBXBuildFile; fileRef = 21205D051FCD6394003C6C7C /* read_me.txt */; };
+		21205D0C1FCD6512003C6C7C /* TLWXManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 21205D0A1FCD6512003C6C7C /* TLWXManager.m */; };
 		2121DCC21FC6F17C001FC2E3 /* TradeSellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2121DCC11FC6F17C001FC2E3 /* TradeSellView.m */; };
 		2121DCC51FC6F19E001FC2E3 /* SellConfirmView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2121DCC41FC6F19E001FC2E3 /* SellConfirmView.m */; };
 		2121DCCE1FC7127C001FC2E3 /* OrderListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2121DCCD1FC7127C001FC2E3 /* OrderListCell.m */; };
@@ -1159,6 +1179,8 @@
 		211CF9A01FC5491A00E51FCF /* BuyConfirmView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BuyConfirmView.m; sourceTree = "<group>"; };
 		211CF9A21FC55ADD00E51FCF /* OrderPriceModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OrderPriceModel.h; sourceTree = "<group>"; };
 		211CF9A31FC55ADD00E51FCF /* OrderPriceModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OrderPriceModel.m; sourceTree = "<group>"; };
+		211D4ED41FCD9B0C000E0D43 /* EditVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditVC.h; sourceTree = "<group>"; };
+		211D4ED51FCD9B0C000E0D43 /* EditVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditVC.m; sourceTree = "<group>"; };
 		211DE6121FB5465E002FCF3D /* WalletTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WalletTableView.h; sourceTree = "<group>"; };
 		211DE6131FB5465E002FCF3D /* WalletTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WalletTableView.m; sourceTree = "<group>"; };
 		211DE6151FB54685002FCF3D /* WalletCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WalletCell.h; sourceTree = "<group>"; };
@@ -1249,6 +1271,44 @@
 		211F78131FCAFBCA0023F133 /* WaitingOrderVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WaitingOrderVC.m; sourceTree = "<group>"; };
 		211FAC4D1FC2742C00DC37B0 /* PublishBuyView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PublishBuyView.h; sourceTree = "<group>"; };
 		211FAC4E1FC2742C00DC37B0 /* PublishBuyView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PublishBuyView.m; sourceTree = "<group>"; };
+		21205CC91FCCFD24003C6C7C /* FansVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FansVC.h; sourceTree = "<group>"; };
+		21205CCA1FCCFD24003C6C7C /* FansVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FansVC.m; sourceTree = "<group>"; };
+		21205CCD1FCCFDCF003C6C7C /* FansTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FansTableView.h; sourceTree = "<group>"; };
+		21205CCE1FCCFDCF003C6C7C /* FansTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FansTableView.m; sourceTree = "<group>"; };
+		21205CD01FCCFE70003C6C7C /* FansCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FansCell.h; sourceTree = "<group>"; };
+		21205CD11FCCFE70003C6C7C /* FansCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FansCell.m; sourceTree = "<group>"; };
+		21205CD41FCD0435003C6C7C /* FansModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FansModel.h; sourceTree = "<group>"; };
+		21205CD51FCD0435003C6C7C /* FansModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FansModel.m; sourceTree = "<group>"; };
+		21205CD81FCD2FC8003C6C7C /* CoinAddressListVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoinAddressListVC.h; sourceTree = "<group>"; };
+		21205CD91FCD2FC8003C6C7C /* CoinAddressListVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoinAddressListVC.m; sourceTree = "<group>"; };
+		21205CDC1FCD3131003C6C7C /* CoinAddressTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoinAddressTableView.h; sourceTree = "<group>"; };
+		21205CDD1FCD3131003C6C7C /* CoinAddressTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoinAddressTableView.m; sourceTree = "<group>"; };
+		21205CE01FCD3163003C6C7C /* CoinAddressModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoinAddressModel.h; sourceTree = "<group>"; };
+		21205CE11FCD3163003C6C7C /* CoinAddressModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoinAddressModel.m; sourceTree = "<group>"; };
+		21205CE31FCD31E0003C6C7C /* CoinAddressCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoinAddressCell.h; sourceTree = "<group>"; };
+		21205CE41FCD31E0003C6C7C /* CoinAddressCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoinAddressCell.m; sourceTree = "<group>"; };
+		21205CE61FCD3F84003C6C7C /* CoinAddAddressVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoinAddAddressVC.h; sourceTree = "<group>"; };
+		21205CE71FCD3F84003C6C7C /* CoinAddAddressVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoinAddAddressVC.m; sourceTree = "<group>"; };
+		21205CEA1FCD5F5C003C6C7C /* InviteFriendVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteFriendVC.h; sourceTree = "<group>"; };
+		21205CEB1FCD5F5C003C6C7C /* HistoryInviteVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryInviteVC.m; sourceTree = "<group>"; };
+		21205CEC1FCD5F5D003C6C7C /* HistoryInviteVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryInviteVC.h; sourceTree = "<group>"; };
+		21205CED1FCD5F5D003C6C7C /* InviteFriendVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteFriendVC.m; sourceTree = "<group>"; };
+		21205CF11FCD5F98003C6C7C /* InviteModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteModel.h; sourceTree = "<group>"; };
+		21205CF21FCD5F98003C6C7C /* InviteModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteModel.m; sourceTree = "<group>"; };
+		21205CF51FCD5FDF003C6C7C /* HistoryFriendCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryFriendCell.h; sourceTree = "<group>"; };
+		21205CF61FCD5FDF003C6C7C /* HistoryFriendCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryFriendCell.m; sourceTree = "<group>"; };
+		21205CF91FCD61D4003C6C7C /* ShareView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareView.h; sourceTree = "<group>"; };
+		21205CFA1FCD61D4003C6C7C /* CustomShareView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomShareView.h; sourceTree = "<group>"; };
+		21205CFB1FCD61D5003C6C7C /* CustomShareView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomShareView.m; sourceTree = "<group>"; };
+		21205CFC1FCD61D6003C6C7C /* ShareView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareView.m; sourceTree = "<group>"; };
+		21205D001FCD6393003C6C7C /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
+		21205D011FCD6393003C6C7C /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
+		21205D021FCD6393003C6C7C /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
+		21205D031FCD6393003C6C7C /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
+		21205D041FCD6393003C6C7C /* WechatAuthSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WechatAuthSDK.h; sourceTree = "<group>"; };
+		21205D051FCD6394003C6C7C /* read_me.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = read_me.txt; sourceTree = "<group>"; };
+		21205D0A1FCD6512003C6C7C /* TLWXManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLWXManager.m; sourceTree = "<group>"; };
+		21205D0B1FCD6512003C6C7C /* TLWXManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLWXManager.h; sourceTree = "<group>"; };
 		2121DCC01FC6F17C001FC2E3 /* TradeSellView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TradeSellView.h; sourceTree = "<group>"; };
 		2121DCC11FC6F17C001FC2E3 /* TradeSellView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TradeSellView.m; sourceTree = "<group>"; };
 		2121DCC31FC6F19E001FC2E3 /* SellConfirmView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SellConfirmView.h; sourceTree = "<group>"; };
@@ -1381,6 +1441,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				21205D061FCD6394003C6C7C /* libWeChatSDK.a in Frameworks */,
 				211C05081FC6714500E51FCF /* libz.tbd in Frameworks */,
 				211C050A1FC6715000E51FCF /* libc++.tbd in Frameworks */,
 				211C050E1FC6716500E51FCF /* libresolv.tbd in Frameworks */,
@@ -1426,6 +1487,9 @@
 		211A34E61FB42F5900FEB71F /* View */ = {
 			isa = PBXGroup;
 			children = (
+				21205CF41FCD5FCB003C6C7C /* Invite */,
+				21205CDB1FCD30DF003C6C7C /* CoinAddress */,
+				21205CCC1FCCFDAA003C6C7C /* Fans */,
 				211CEF2E1FCC2F72000FB0C4 /* MyAdvertise */,
 				211A34FA1FB4504100FEB71F /* Setting */,
 			);
@@ -1435,6 +1499,9 @@
 		211A34E71FB42F5F00FEB71F /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				21205CF01FCD5F84003C6C7C /* Invite */,
+				21205CDF1FCD3142003C6C7C /* CoinAddress */,
+				21205CD31FCD0423003C6C7C /* Fans */,
 				211A34F91FB4502D00FEB71F /* Setting */,
 			);
 			path = Model;
@@ -1443,6 +1510,9 @@
 		211A34E81FB42F6500FEB71F /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				21205CE91FCD5F35003C6C7C /* Invite */,
+				21205CD71FCD2F9E003C6C7C /* CoinAddress */,
+				21205CC81FCCFCA1003C6C7C /* Fans */,
 				211CEF271FCC1892000FB0C4 /* MyAdvertise */,
 				211A34F81FB4502200FEB71F /* Setting */,
 			);
@@ -1456,6 +1526,8 @@
 				211A34EA1FB42F8100FEB71F /* SettingVC.m */,
 				211A34FB1FB4507E00FEB71F /* IdAuthVC.h */,
 				211A34FC1FB4507E00FEB71F /* IdAuthVC.m */,
+				211D4ED41FCD9B0C000E0D43 /* EditVC.h */,
+				211D4ED51FCD9B0C000E0D43 /* EditVC.m */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -1621,6 +1693,7 @@
 		211C013A1FC6600300E51FCF /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				21205CFF1FCD6383003C6C7C /* WeChat */,
 				211C013B1FC6600300E51FCF /* 腾讯云 */,
 			);
 			path = Extension;
@@ -3064,6 +3137,7 @@
 			isa = PBXGroup;
 			children = (
 				211DE6941FB58B4C002FCF3D /* Foundation+Log.m */,
+				21205D091FCD6506003C6C7C /* Manager */,
 				211DE63C1FB58B4B002FCF3D /* CustomUI */,
 				211DE65B1FB58B4B002FCF3D /* Category */,
 				211DE68D1FB58B4C002FCF3D /* AppConfig */,
@@ -3076,6 +3150,7 @@
 		211DE63C1FB58B4B002FCF3D /* CustomUI */ = {
 			isa = PBXGroup;
 			children = (
+				21205CF81FCD61C0003C6C7C /* ShareView */,
 				211CEF1A1FCBBFF3000FB0C4 /* Placeholder */,
 				211CEF191FCBBFE2000FB0C4 /* Progress */,
 				211CEF181FCBBFC5000FB0C4 /* CaptchaView */,
@@ -3289,6 +3364,128 @@
 				211CF9801FC3C10600E51FCF /* PublishSellView.m */,
 			);
 			path = PublishSell;
+			sourceTree = "<group>";
+		};
+		21205CC81FCCFCA1003C6C7C /* Fans */ = {
+			isa = PBXGroup;
+			children = (
+				21205CC91FCCFD24003C6C7C /* FansVC.h */,
+				21205CCA1FCCFD24003C6C7C /* FansVC.m */,
+			);
+			path = Fans;
+			sourceTree = "<group>";
+		};
+		21205CCC1FCCFDAA003C6C7C /* Fans */ = {
+			isa = PBXGroup;
+			children = (
+				21205CCD1FCCFDCF003C6C7C /* FansTableView.h */,
+				21205CCE1FCCFDCF003C6C7C /* FansTableView.m */,
+				21205CD01FCCFE70003C6C7C /* FansCell.h */,
+				21205CD11FCCFE70003C6C7C /* FansCell.m */,
+			);
+			path = Fans;
+			sourceTree = "<group>";
+		};
+		21205CD31FCD0423003C6C7C /* Fans */ = {
+			isa = PBXGroup;
+			children = (
+				21205CD41FCD0435003C6C7C /* FansModel.h */,
+				21205CD51FCD0435003C6C7C /* FansModel.m */,
+			);
+			path = Fans;
+			sourceTree = "<group>";
+		};
+		21205CD71FCD2F9E003C6C7C /* CoinAddress */ = {
+			isa = PBXGroup;
+			children = (
+				21205CD81FCD2FC8003C6C7C /* CoinAddressListVC.h */,
+				21205CD91FCD2FC8003C6C7C /* CoinAddressListVC.m */,
+				21205CE61FCD3F84003C6C7C /* CoinAddAddressVC.h */,
+				21205CE71FCD3F84003C6C7C /* CoinAddAddressVC.m */,
+			);
+			path = CoinAddress;
+			sourceTree = "<group>";
+		};
+		21205CDB1FCD30DF003C6C7C /* CoinAddress */ = {
+			isa = PBXGroup;
+			children = (
+				21205CDC1FCD3131003C6C7C /* CoinAddressTableView.h */,
+				21205CDD1FCD3131003C6C7C /* CoinAddressTableView.m */,
+				21205CE31FCD31E0003C6C7C /* CoinAddressCell.h */,
+				21205CE41FCD31E0003C6C7C /* CoinAddressCell.m */,
+			);
+			path = CoinAddress;
+			sourceTree = "<group>";
+		};
+		21205CDF1FCD3142003C6C7C /* CoinAddress */ = {
+			isa = PBXGroup;
+			children = (
+				21205CE01FCD3163003C6C7C /* CoinAddressModel.h */,
+				21205CE11FCD3163003C6C7C /* CoinAddressModel.m */,
+			);
+			path = CoinAddress;
+			sourceTree = "<group>";
+		};
+		21205CE91FCD5F35003C6C7C /* Invite */ = {
+			isa = PBXGroup;
+			children = (
+				21205CEC1FCD5F5D003C6C7C /* HistoryInviteVC.h */,
+				21205CEB1FCD5F5C003C6C7C /* HistoryInviteVC.m */,
+				21205CEA1FCD5F5C003C6C7C /* InviteFriendVC.h */,
+				21205CED1FCD5F5D003C6C7C /* InviteFriendVC.m */,
+			);
+			path = Invite;
+			sourceTree = "<group>";
+		};
+		21205CF01FCD5F84003C6C7C /* Invite */ = {
+			isa = PBXGroup;
+			children = (
+				21205CF11FCD5F98003C6C7C /* InviteModel.h */,
+				21205CF21FCD5F98003C6C7C /* InviteModel.m */,
+			);
+			path = Invite;
+			sourceTree = "<group>";
+		};
+		21205CF41FCD5FCB003C6C7C /* Invite */ = {
+			isa = PBXGroup;
+			children = (
+				21205CF51FCD5FDF003C6C7C /* HistoryFriendCell.h */,
+				21205CF61FCD5FDF003C6C7C /* HistoryFriendCell.m */,
+			);
+			path = Invite;
+			sourceTree = "<group>";
+		};
+		21205CF81FCD61C0003C6C7C /* ShareView */ = {
+			isa = PBXGroup;
+			children = (
+				21205CFA1FCD61D4003C6C7C /* CustomShareView.h */,
+				21205CFB1FCD61D5003C6C7C /* CustomShareView.m */,
+				21205CF91FCD61D4003C6C7C /* ShareView.h */,
+				21205CFC1FCD61D6003C6C7C /* ShareView.m */,
+			);
+			path = ShareView;
+			sourceTree = "<group>";
+		};
+		21205CFF1FCD6383003C6C7C /* WeChat */ = {
+			isa = PBXGroup;
+			children = (
+				21205D001FCD6393003C6C7C /* libWeChatSDK.a */,
+				21205D051FCD6394003C6C7C /* read_me.txt */,
+				21205D011FCD6393003C6C7C /* README.txt */,
+				21205D041FCD6393003C6C7C /* WechatAuthSDK.h */,
+				21205D021FCD6393003C6C7C /* WXApi.h */,
+				21205D031FCD6393003C6C7C /* WXApiObject.h */,
+			);
+			path = WeChat;
+			sourceTree = "<group>";
+		};
+		21205D091FCD6506003C6C7C /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				21205D0B1FCD6512003C6C7C /* TLWXManager.h */,
+				21205D0A1FCD6512003C6C7C /* TLWXManager.m */,
+			);
+			path = Manager;
 			sourceTree = "<group>";
 		};
 		2121DCC71FC71225001FC2E3 /* View */ = {
@@ -3860,6 +4057,7 @@
 				211C04BB1FC6604900E51FCF /* 9.gif in Resources */,
 				211C04B41FC6604900E51FCF /* 7.gif in Resources */,
 				211C04C61FC6604900E51FCF /* 10.gif in Resources */,
+				21205D081FCD6394003C6C7C /* read_me.txt in Resources */,
 				211C04C01FC6604900E51FCF /* 15.gif in Resources */,
 				211C04F71FC6604900E51FCF /* 11.caf in Resources */,
 				211C04BA1FC6604900E51FCF /* 8.gif in Resources */,
@@ -3870,6 +4068,7 @@
 				211C04B71FC6604900E51FCF /* 3.gif in Resources */,
 				211C04A31FC6604900E51FCF /* 21.gif in Resources */,
 				211C04A51FC6604900E51FCF /* 20.gif in Resources */,
+				21205D071FCD6394003C6C7C /* README.txt in Resources */,
 				211C04AF1FC6604900E51FCF /* 31.gif in Resources */,
 				211C04B61FC6604900E51FCF /* 2.gif in Resources */,
 				211C04AE1FC6604900E51FCF /* 30.gif in Resources */,
@@ -3975,6 +4174,7 @@
 				211C05131FC671F000E51FCF /* UserProfileViewController.m in Sources */,
 				211C04CD1FC6604900E51FCF /* EditInfoViewController.m in Sources */,
 				211C042F1FC6604800E51FCF /* LibraryNavigationPanel.m in Sources */,
+				21205D0C1FCD6512003C6C7C /* TLWXManager.m in Sources */,
 				211A34F11FB430DB00FEB71F /* SettingModel.m in Sources */,
 				211C046D1FC6604800E51FCF /* CommonInputToolBar.m in Sources */,
 				211C04251FC6604800E51FCF /* ADTransition.m in Sources */,
@@ -4033,6 +4233,7 @@
 				211CF97B1FC2F21E00E51FCF /* OverTimeModel.m in Sources */,
 				211A34EB1FB42F8100FEB71F /* SettingVC.m in Sources */,
 				211DE6C51FB58B4C002FCF3D /* HttpRequestService.m in Sources */,
+				21205CD21FCCFE70003C6C7C /* FansCell.m in Sources */,
 				211C043A1FC6604800E51FCF /* ScrollBaseViewController.m in Sources */,
 				211C046B1FC6604800E51FCF /* TipTextFieldTableViewCell.m in Sources */,
 				211C04EF1FC6604900E51FCF /* GroupMemberListViewController.m in Sources */,
@@ -4075,9 +4276,12 @@
 				211C049B1FC6604900E51FCF /* PhotoBrowserViewController.m in Sources */,
 				211C04431FC6604800E51FCF /* BaseCollectionViewController.m in Sources */,
 				2EE950C61FB05B5900429257 /* TLMineVC.m in Sources */,
+				21205CDA1FCD2FC8003C6C7C /* CoinAddressListVC.m in Sources */,
+				21205CD61FCD0435003C6C7C /* FansModel.m in Sources */,
 				2182D2F71FC814C6008EDCE4 /* OrderDetailHeaderView.m in Sources */,
 				211C040E1FC6604800E51FCF /* UIImage+Alpha.m in Sources */,
 				211C04681FC6604800E51FCF /* TextTableViewHeaderFooterView.m in Sources */,
+				21205CE21FCD3163003C6C7C /* CoinAddressModel.m in Sources */,
 				211C04FB1FC6604900E51FCF /* TIMTabBarController.m in Sources */,
 				211C03EE1FC6604800E51FCF /* FBKVOController.m in Sources */,
 				211DE6C61FB58B4C002FCF3D /* HttpLogger.m in Sources */,
@@ -4115,6 +4319,7 @@
 				211C04191FC6604800E51FCF /* NSAlert+MKNetworkKitAdditions.m in Sources */,
 				211C04161FC6604800E51FCF /* NSString+MKNetworkKitAdditions.m in Sources */,
 				2182D2ED1FC7E776008EDCE4 /* OrderModel.m in Sources */,
+				21205CEF1FCD5F5E003C6C7C /* InviteFriendVC.m in Sources */,
 				211C04C81FC6604900E51FCF /* ChatTextView.m in Sources */,
 				211C04231FC6604800E51FCF /* UICollectionViewController+ADScaleTransition.m in Sources */,
 				211DE6A11FB58B4C002FCF3D /* TLTimeButton.m in Sources */,
@@ -4139,6 +4344,7 @@
 				211C03FF1FC6604800E51FCF /* NSData+Common.m in Sources */,
 				211C04801FC6604800E51FCF /* MyEmojView.m in Sources */,
 				211C04601FC6604800E51FCF /* IMAContactManager+SubGroup.m in Sources */,
+				21205CFE1FCD61D6003C6C7C /* ShareView.m in Sources */,
 				2159795D1FB81C2B0029F177 /* BillVC.m in Sources */,
 				211C04FF1FC6604900E51FCF /* ChatUserProfile.m in Sources */,
 				211C04E51FC6604900E51FCF /* ChatRoomProfileViewController.m in Sources */,
@@ -4165,6 +4371,7 @@
 				215979671FB81D230029F177 /* BillCell.m in Sources */,
 				211C044D1FC6604800E51FCF /* IMAMsg.m in Sources */,
 				211DE6A81FB58B4C002FCF3D /* TLTextField.m in Sources */,
+				211D4ED61FCD9B0C000E0D43 /* EditVC.m in Sources */,
 				211C044C1FC6604800E51FCF /* IMAConnectConversation.m in Sources */,
 				211C049A1FC6604800E51FCF /* ChatHeadRefreshView.m in Sources */,
 				211C04201FC6604800E51FCF /* FTUtils+NSObject.m in Sources */,
@@ -4180,9 +4387,11 @@
 				211C041A1FC6604800E51FCF /* NSDate+RFC1123.m in Sources */,
 				211C03FE1FC6604800E51FCF /* NSData+CRC.m in Sources */,
 				211DE6AD1FB58B4C002FCF3D /* TLAlert.m in Sources */,
+				21205CFD1FCD61D6003C6C7C /* CustomShareView.m in Sources */,
 				211C03FB1FC6604800E51FCF /* NSString+RegexCheck.m in Sources */,
 				21A7F3201FB2E2F900FAA0A2 /* UserDefaultsUtil.m in Sources */,
 				211A34DB1FB4083300FEB71F /* MineTableView.m in Sources */,
+				21205CEE1FCD5F5E003C6C7C /* HistoryInviteVC.m in Sources */,
 				211C04541FC6604800E51FCF /* IMAGroup.m in Sources */,
 				211A34E11FB4247800FEB71F /* MineModel.m in Sources */,
 				21A7F3631FB2F16C00FAA0A2 /* HTMLStrVC.m in Sources */,
@@ -4261,6 +4470,8 @@
 				211C042E1FC6604800E51FCF /* BaseAppDelegate.m in Sources */,
 				211DE6C71FB58B4C002FCF3D /* HttpRequestObject.m in Sources */,
 				211DE6BD1FB58B4C002FCF3D /* NSString+Date.m in Sources */,
+				21205CCF1FCCFDCF003C6C7C /* FansTableView.m in Sources */,
+				21205CF71FCD5FE0003C6C7C /* HistoryFriendCell.m in Sources */,
 				211C03F41FC6604800E51FCF /* ImageTitleButton.m in Sources */,
 				211DE6C31FB58B4C002FCF3D /* HttpRequestTool.m in Sources */,
 				211C04CA1FC6604900E51FCF /* TIMElem+ChatAttachment.m in Sources */,
@@ -4274,6 +4485,7 @@
 				211C04881FC6604800E51FCF /* ChatTimeTipTableViewCell.m in Sources */,
 				211DE6A51FB58B4C002FCF3D /* TLProgressHUD.m in Sources */,
 				2159796D1FB831B10029F177 /* FilterView.m in Sources */,
+				21205CDE1FCD3131003C6C7C /* CoinAddressTableView.m in Sources */,
 				21D2168E1FBA90CE0040795E /* BannerModel.m in Sources */,
 				211FAC4F1FC2742C00DC37B0 /* PublishBuyView.m in Sources */,
 				211C046C1FC6604800E51FCF /* RichCellMenuItem.m in Sources */,
@@ -4290,6 +4502,7 @@
 				211C04951FC6604800E51FCF /* MicroVideoPlayView.m in Sources */,
 				211C04C91FC6604900E51FCF /* ChatInputTextView.m in Sources */,
 				211CEF141FCBBF90000FB0C4 /* SelectScrollView.m in Sources */,
+				21205CCB1FCCFD24003C6C7C /* FansVC.m in Sources */,
 				211CEF2A1FCC18BE000FB0C4 /* MyAdvertiseVC.m in Sources */,
 				211C049E1FC6604900E51FCF /* MsgSendingTip.m in Sources */,
 				211C04261FC6604800E51FCF /* ADFlipTransition.m in Sources */,
@@ -4303,6 +4516,7 @@
 				211C048C1FC6604800E51FCF /* ChatInputToolBar.m in Sources */,
 				211C04421FC6604800E51FCF /* NavigationViewController.m in Sources */,
 				211C042C1FC6604800E51FCF /* JSONKit.m in Sources */,
+				21205CE51FCD31E0003C6C7C /* CoinAddressCell.m in Sources */,
 				211DE6A21FB58B4C002FCF3D /* TLCaptchaView.m in Sources */,
 				211DE6B71FB58B4C002FCF3D /* UIBarButtonItem+convience.m in Sources */,
 				211C04341FC6604800E51FCF /* TableRefreshViewController.m in Sources */,
@@ -4332,6 +4546,7 @@
 				211C04D61FC6604900E51FCF /* GroupSystemMsgViewController.m in Sources */,
 				2EE950D91FB06AA900429257 /* TLBannerView.m in Sources */,
 				211CEF1D1FCBC106000FB0C4 /* SearchAdvertiseVC.m in Sources */,
+				21205CF31FCD5F98003C6C7C /* InviteModel.m in Sources */,
 				211C04D41FC6604900E51FCF /* SearchResultViewController.m in Sources */,
 				211C04A01FC6604900E51FCF /* ChatBaseTableViewCell.m in Sources */,
 				211DE6141FB5465E002FCF3D /* WalletTableView.m in Sources */,
@@ -4346,6 +4561,7 @@
 				211C05061FC66B5500E51FCF /* IMModel.m in Sources */,
 				211C03F01FC6604800E51FCF /* UIImageView+InitMethod.m in Sources */,
 				211C03F51FC6604800E51FCF /* KeyValueTableViewController.m in Sources */,
+				21205CE81FCD3F84003C6C7C /* CoinAddAddressVC.m in Sources */,
 				2121DCC21FC6F17C001FC2E3 /* TradeSellView.m in Sources */,
 				211C04E61FC6604900E51FCF /* ChatGroupMemberListViewController.m in Sources */,
 				211C04921FC6604800E51FCF /* RichChatTableViewCell.m in Sources */,
@@ -4489,6 +4705,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Coin/Classes/Modules/Chat/CommonLibrary/BlocksKit",
+					"$(PROJECT_DIR)/Coin/Extension/WeChat",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.cdkj.coin.dev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -4515,6 +4732,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Coin/Classes/Modules/Chat/CommonLibrary/BlocksKit",
+					"$(PROJECT_DIR)/Coin/Extension/WeChat",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.cdkj.coin.dev;
 				PRODUCT_NAME = "$(TARGET_NAME)";

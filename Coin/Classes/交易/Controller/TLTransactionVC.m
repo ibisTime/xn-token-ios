@@ -191,23 +191,31 @@
     
     self.placeHolderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight - 40)];
     
-    UIImageView *couponIV = [[UIImageView alloc] initWithFrame:CGRectMake(0, 90, 80, 80)];
+    UIImageView *couponIV = [[UIImageView alloc] init];
     
     couponIV.image = kImage(@"暂无订单");
     
-    couponIV.centerX = kScreenWidth/2.0;
-    
     [self.placeHolderView addSubview:couponIV];
+    [couponIV mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.centerX.equalTo(@0);
+        make.top.equalTo(@90);
+        
+    }];
     
     UILabel *textLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor2 font:14.0];
     
     textLbl.text = @"暂无交易";
     
-    textLbl.frame = CGRectMake(0, couponIV.yy + 20, kScreenWidth, 15);
-    
     textLbl.textAlignment = NSTextAlignmentCenter;
     
     [self.placeHolderView addSubview:textLbl];
+    [textLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.top.equalTo(couponIV.mas_bottom).offset(20);
+        make.centerX.equalTo(couponIV.mas_centerX);
+        
+    }];
 }
 
 - (void)initTipView {

@@ -144,7 +144,7 @@
         //价格
         self.priceLbl.text = [NSString stringWithFormat:@"报价: %@ CNY", [self.advertise.truePrice convertToSimpleRealMoney]];
         //限额
-        self.limitAmountLbl.text = [NSString stringWithFormat:@"限额: %ld-%ld CNY",self.advertise.minTrade, self.advertise.maxTrade];
+        self.limitAmountLbl.text = [NSString stringWithFormat:@"限额: %@-%@ CNY",[self.advertise.minTrade convertToSimpleRealMoney], [self.advertise.maxTrade convertToSimpleRealMoney]];
         
         NSString *btnTitle = [self.advertise.status isEqualToString:@"1"] ? (self.order.isBuy ? @"购买": @"出售"): @"已下架";
         

@@ -116,7 +116,7 @@
 
     } else if (self.type == MyAdvertiseTypeDidPublish) {
         
-        helper.parameters[@"statusList"] = @[@"1"];
+        helper.parameters[@"statusList"] = @[@"1", @"2", @"3"];
 
     }
     
