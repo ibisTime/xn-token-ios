@@ -189,7 +189,8 @@
         
         make.right.equalTo(whiteView.mas_right).offset(-15);
         make.centerY.equalTo(whiteView.mas_centerY);
-        
+        make.width.equalTo(@(6.5));
+
     }];
 }
 

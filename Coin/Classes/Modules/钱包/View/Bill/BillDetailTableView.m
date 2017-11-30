@@ -45,13 +45,15 @@ static NSString *identifierCell = @"BillDetailCell";
     
     BillDetailCell *cell = [tableView dequeueReusableCellWithIdentifier:identifierCell];
     
-    NSArray *textArr = @[@"账单余额", @"账单时间", @"账单类型"];
+    NSArray *textArr = @[@"变动前金额", @"变动后金额", @"变动时间", @"明细状态", @"明细摘要"];
     
     NSString *dateStr = [_bill.createDatetime convertToDetailDate];
     
     NSString *postAmount = [_bill.postAmountString convertToSimpleRealCoin];
     
-    NSArray *rightArr = @[postAmount, dateStr, _bill.bizNote];
+    NSString *preAmount = [_bill.preAmountString convertToSimpleRealCoin];
+    
+    NSArray *rightArr = @[preAmount, postAmount, dateStr, _bill.remark, _bill.bizNote];
     
     cell.titleLbl.text = textArr[indexPath.row];
     

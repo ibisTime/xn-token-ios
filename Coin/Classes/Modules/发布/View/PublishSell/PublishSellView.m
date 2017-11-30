@@ -223,7 +223,8 @@
                     
                     make.left.equalTo(@0);
                     make.height.equalTo(@50);
-                    make.top.equalTo(@(idx*50)); make.right.equalTo(promptBtn.mas_left).offset(0);
+                    make.top.equalTo(@(idx*50));
+                    make.right.equalTo(rightTextLbl.mas_left).offset(0);
                     
                 }];
                 
@@ -249,7 +250,8 @@
                     
                     make.left.equalTo(@0);
                     make.height.equalTo(@50);
-                    make.top.equalTo(@(idx*50)); make.right.equalTo(rightTextLbl.mas_left).offset(0);
+                    make.top.equalTo(@(idx*50));
+                    make.right.equalTo(rightTextLbl.mas_left).offset(0);
                 }];
                 
                 self.premiumRateTF = textField;
@@ -272,7 +274,8 @@
                     
                     make.left.equalTo(@0);
                     make.height.equalTo(@50);
-                    make.top.equalTo(@(idx*50)); make.right.equalTo(rightTextLbl.mas_left).offset(0);
+                    make.top.equalTo(@(idx*50));
+                    make.right.equalTo(rightTextLbl.mas_left).offset(0);
                 }];
                 
                 self.lowNumTF = textField;
@@ -295,7 +298,8 @@
                     
                     make.left.equalTo(@0);
                     make.height.equalTo(@50);
-                    make.top.equalTo(@(idx*50)); make.right.equalTo(rightTextLbl.mas_left).offset(0);
+                    make.top.equalTo(@(idx*50));
+                    make.right.equalTo(rightTextLbl.mas_left).offset(0);
                 }];
                 
                 self.minNumTF = textField;
@@ -318,7 +322,8 @@
                     
                     make.left.equalTo(@0);
                     make.height.equalTo(@50);
-                    make.top.equalTo(@(idx*50)); make.right.equalTo(rightTextLbl.mas_left).offset(0);
+                    make.top.equalTo(@(idx*50));
+                    make.right.equalTo(rightTextLbl.mas_left).offset(0);
                 }];
                 
                 self.maxNumTF = textField;
@@ -341,7 +346,8 @@
                     
                     make.left.equalTo(@0);
                     make.height.equalTo(@50);
-                    make.top.equalTo(@(idx*50)); make.right.equalTo(rightTextLbl.mas_left).offset(0);
+                    make.top.equalTo(@(idx*50));
+                    make.right.equalTo(rightTextLbl.mas_left).offset(0);
                 }];
                 
                 self.buyTotalTF = textField;
@@ -391,7 +397,8 @@
                     
                     make.left.equalTo(@0);
                     make.height.equalTo(@50);
-                    make.top.equalTo(@(idx*50)); make.right.equalTo(rightTextLbl.mas_left).offset(0);
+                    make.top.equalTo(@(idx*50));
+                    make.right.equalTo(rightTextLbl.mas_left).offset(0);
                 }];
                 
                 self.payLimitPicker = picker;

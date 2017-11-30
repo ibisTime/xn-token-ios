@@ -1,23 +1,25 @@
 //
-//  RateModel.h
+//  HistoryRateModel.h
 //  Coin
 //
-//  Created by 蔡卓越 on 2017/11/18.
+//  Created by 蔡卓越 on 2017/11/30.
 //  Copyright © 2017年  tianlei. All rights reserved.
 //
 
 #import "TLBaseModel.h"
 
-@interface RateModel : TLBaseModel
-//币种
+@interface HistoryRateModel : TLBaseModel
+
+@property (nonatomic, assign) NSInteger ID;
+
 @property (nonatomic, copy) NSString *currency;
-//参照货币
+
 @property (nonatomic, copy) NSString *referCurrency;
-//数据源
+
+@property (nonatomic, copy) NSString *updateDatetime;
+
 @property (nonatomic, copy) NSString *origin;
-//汇率
+
 @property (nonatomic, strong) NSNumber *rate;
-//cellHeight
-@property (nonatomic, assign) CGFloat cellHeight;
 
 @end

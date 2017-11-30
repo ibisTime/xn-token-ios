@@ -96,10 +96,8 @@
         [self.bgView addSubview:self.contentLbl];
         [self.contentLbl mas_makeConstraints:^(MASConstraintMaker *make) {
             
-            make.edges.mas_equalTo(UIEdgeInsetsMake(13, 0, 13, 0));
+            make.edges.mas_equalTo(UIEdgeInsetsMake(13, 12, 13, 12));
             
-            make.left.equalTo(self.bgView.mas_left).offset(12);
-            make.right.equalTo(self.bgView.mas_right).offset(-12);
             make.top.equalTo(self.bgView.mas_top).offset(13);
             
         }];

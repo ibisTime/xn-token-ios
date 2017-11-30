@@ -11,6 +11,8 @@
 #import "TLUIHeader.h"
 #import "AppColorMacro.h"
 
+#import "NSNumber+Extension.h"
+
 @interface RateDescCell ()
 //汇率
 @property (nonatomic, strong) UILabel *rateLbl;
@@ -131,7 +133,7 @@
     
     self.leftFlag.image = kImage(imgStr);
     
-    self.rateLbl.text = [NSString stringWithFormat:@"%@≈￥%.4lf", money, rateModel.rate];
+    self.rateLbl.text = [NSString stringWithFormat:@"%@≈￥%@", money, [rateModel.rate convertToRealMoneyWithNum:4]];
     
     self.rightFlag.image = kImage(@"中国国旗");
     

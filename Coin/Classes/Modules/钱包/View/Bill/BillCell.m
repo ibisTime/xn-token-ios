@@ -80,7 +80,7 @@
         self.moneyLbl = [UILabel labelWithFrame:CGRectMake(left, 15, kScreenWidth - left - timeW - 15, 20) textAligment:NSTextAlignmentLeft
                                 backgroundColor:[UIColor clearColor]
                                            font:Font(17.0)
-                                      textColor:kThemeColor];
+                                      textColor:kTextColor];
         self.moneyLbl.height = [Font(17.0) lineHeight];
         [self addSubview:self.moneyLbl];
         [self.moneyLbl mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -99,7 +99,7 @@
             
             make.right.equalTo(self.mas_right).offset(-15);
             make.centerY.equalTo(self.mas_centerY);
-            
+            make.width.equalTo(@(6.5));
         }];
         
         //备注
@@ -139,19 +139,19 @@
     _billModel = billModel;
     
     //
-    long long money = [_billModel.transAmountString longLongValue];
+    CGFloat money = [[_billModel.transAmountString convertToSimpleRealCoin] doubleValue];
 
     NSString *moneyStr = @"";
 
     if (money > 0) {
         
-        moneyStr = [NSString stringWithFormat:@"+%@", [_billModel.transAmountString convertToSimpleRealCoin]];
+        moneyStr = [NSString stringWithFormat:@"+%@ %@", [_billModel.transAmountString convertToSimpleRealCoin], billModel.currency];
 
         self.iconIV.image = kImage(@"账单-充币");
 
     } else if (money <= 0) {
 
-        moneyStr = [NSString stringWithFormat:@"%@", [_billModel.transAmountString convertToSimpleRealCoin]];
+        moneyStr = [NSString stringWithFormat:@"%@ %@", [_billModel.transAmountString convertToSimpleRealCoin], billModel.currency];
 
         self.iconIV.image = kImage(@"账单-提币");
 

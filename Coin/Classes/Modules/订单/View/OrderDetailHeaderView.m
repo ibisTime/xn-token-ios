@@ -344,20 +344,22 @@
 
 - (void)calculateInvalidTimeWithOrder:(OrderModel *)order {
     
-    NSDate *invalidDate = [NSString dateFromString:order.invalidDatetime formatter:@"MMM dd, yyyy hh:mm:ss aa"];
+//    NSDate *invalidDate = [NSString dateFromString:order.invalidDatetime formatter:@"MMM dd, yyyy hh:mm:ss aa"];
     
-//    NSDate *localDate = [NSString getLoaclDateWithFormatter:@"MMM dd, yyyy hh:mm:ss aa"];
-    NSDate *createDate = [NSString dateFromString:order.createDatetime formatter:@"MMM dd, yyyy hh:mm:ss aa"];
+//    NSDate *createDate = [NSString dateFromString:order.createDatetime formatter:@"MMM dd, yyyy hh:mm:ss aa"];
+    
+    //失效时间
+    NSString *inviteDateStr = [order.invalidDatetime convertDateWithFormat:@"hh:mm:ss"];
     //转换时间格式
     //对比两个时间
     
-    NSTimeInterval seconds = [invalidDate timeIntervalSinceDate:createDate];
+//    NSTimeInterval seconds = [invalidDate timeIntervalSinceDate:createDate];
 
 //    NSTimeInterval seconds = [invalidDate timeIntervalSinceDate:localDate];
     
-    NSInteger minute = seconds/60;
+//    NSInteger minute = seconds/60;
     
-    self.promptLbl.text = [NSString stringWithFormat:@"货币将在托管中保持%ld分钟, 逾期未支付交易将自动取消", minute];
+    self.promptLbl.text = [NSString stringWithFormat:@"货币将在托管中保持至%@, 逾期未支付交易将自动取消", inviteDateStr];
     
 }
 

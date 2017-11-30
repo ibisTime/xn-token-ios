@@ -8,8 +8,19 @@
 
 #import "TLBaseVC.h"
 
+typedef NS_ENUM(NSInteger, BillType) {
+    
+    BillTypeRecharge = 0,       //充值
+    BillTypeWithdraw,           //提币
+    BillTypeAll,                //全部
+    BillTypeFrozen,             //冻结
+    
+};
+
 @interface BillVC : TLBaseVC
 
 @property (nonatomic,copy) NSString *accountNumber;
+
+@property (nonatomic, assign) BillType billType;
 
 @end

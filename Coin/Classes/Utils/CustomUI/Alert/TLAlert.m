@@ -291,7 +291,10 @@
         
         textField.placeholder = placeHolder;
         
+        textField.secureTextEntry = YES;
+        
     }];
+    
     //rootViewController 展示
     UIViewController *rootViewController = [UIApplication sharedApplication].keyWindow.rootViewController;
     

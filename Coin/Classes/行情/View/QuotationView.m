@@ -10,9 +10,11 @@
 
 #import "TLUIHeader.h"
 #import "AppColorMacro.h"
+
 #import <CDCommon/UIScrollView+TLAdd.h>
 #import "UIButton+EnLargeEdge.h"
 #import "NSNumber+Extension.h"
+#import "NSString+Extension.h"
 
 @interface QuotationView ()
 
@@ -20,6 +22,8 @@
 @property (nonatomic, strong) UIView *coinView;
 //系统公告
 @property (nonatomic, strong) UIView *systemNoticeView;
+//新手指导
+@property (nonatomic, strong) UIView *guideView;
 
 @property (nonatomic, strong) UIButton *headBtn;
 
@@ -253,19 +257,14 @@
 
 - (void)initGuideView {
     
-    NSInteger count = 4;
-    
-    CGFloat h = kWidth(100);
-    
-    CGFloat w = (kScreenWidth - 40)/2.0;
-    
-    CGFloat guideH = 40 + (h + 10)*count/2 + 15;
-    
-    UIView *guideView = [[UIView alloc] initWithFrame:CGRectMake(0, self.systemNoticeView.yy + 10, kScreenWidth, guideH)];
+    UIView *guideView = [[UIView alloc] init];
     
     guideView.backgroundColor = kWhiteColor;
     
     [self addSubview:guideView];
+    
+    self.guideView = guideView;
+    
     //新手指导
     UILabel *textLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:15.0];
     
@@ -302,30 +301,6 @@
         make.centerY.equalTo(textLbl.mas_centerY);
     }];
     
-    NSArray *textArr = @[@"如何注册", @"认证与安全", @"如何充值", @"如何交易"];
-    
-    [textArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        
-        UIButton *btn = [UIButton buttonWithTitle:textArr[idx] titleColor:kWhiteColor backgroundColor:kClearColor titleFont:15.0];
-        
-        btn.tag = 1300 + idx;
-        
-        [btn setBackgroundImage:kImage(textArr[idx]) forState:UIControlStateNormal];
-        
-        [btn addTarget:self action:@selector(lookDetail:) forControlEvents:UIControlEventTouchUpInside];
-        
-        [guideView addSubview:btn];
-        [btn mas_makeConstraints:^(MASConstraintMaker *make) {
-            
-            make.left.equalTo(@(15 + (w+10)*(idx%2)));
-            make.width.equalTo(@(w));
-            make.height.equalTo(@(h));
-            make.top.equalTo(guideView.mas_top).offset(50 + (h+10)*(idx/2));
-        }];
-    }];
-    
-    self.contentSize = CGSizeMake(kScreenWidth, guideView.yy + 15);
-    
 }
 
 #pragma mark - Setting
@@ -349,53 +324,40 @@
     
 }
 
-- (void)setEthQuotation:(QuotationModel *)ethQuotation {
+- (void)setGuides:(NSMutableArray<GuideModel *> *)guides {
     
-    _ethQuotation = ethQuotation;
-    //以太坊
-    UILabel *priceLbl1 = [self viewWithTag:1400];
+    _guides = guides;
     
-    priceLbl1.text = [NSString stringWithFormat:@"￥%.2lf", _ethQuotation.lastPrice];
-    
-    priceLbl1.textColor = kRiseColor;
-    
-    UILabel *diffPriceLbl1 = [self viewWithTag:1410];
-    
-    diffPriceLbl1.textColor = kRiseColor;
-    
-    diffPriceLbl1.text = [NSString stringWithFormat:@"+%@", [@(3700) convertToRealMoney]];
-    
-    UILabel *diffPreLbl1 = [self viewWithTag:1420];
-    
-    diffPreLbl1.textColor = kRiseColor;
-    
-    diffPreLbl1.text = [NSString stringWithFormat:@"+%@%%", @"1.90"];
-    
-}
+    NSInteger count = guides.count;
 
-- (void)setBtcQuotation:(QuotationModel *)btcQuotation {
+    CGFloat h = kWidth(100);
     
-    _btcQuotation = btcQuotation;
+    CGFloat w = (kScreenWidth - 40)/2.0;
     
-    //比特币
-    UILabel *priceLbl2 = [self viewWithTag:1401];
+    CGFloat guideH = 40 + (h + 10)*(count+1)/2 + 15;
     
-    priceLbl2.text = [NSString stringWithFormat:@"￥%.2lf", _btcQuotation.lastPrice];
+    self.guideView.frame = CGRectMake(0, self.systemNoticeView.yy + 10, kScreenWidth, guideH);
     
-    priceLbl2.textColor = kThemeColor;
-    
-    UILabel *diffPriceLbl2 = [self viewWithTag:1411];
-    
-    diffPriceLbl2.textColor = kThemeColor;
-    
-    diffPriceLbl2.text = [NSString stringWithFormat:@"+%@", [@(3700) convertToRealMoney]];
-    
-    
-    UILabel *diffPreLbl2 = [self viewWithTag:1421];
-    
-    diffPreLbl2.textColor = kThemeColor;
-    
-    diffPreLbl2.text = [NSString stringWithFormat:@"+%@%%", @"1.90"];
+    [guides enumerateObjectsUsingBlock:^(GuideModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        
+        UIButton *btn = [UIButton buttonWithTitle:@"" titleColor:kWhiteColor backgroundColor:kClearColor titleFont:15.0];
+        
+        btn.tag = 1300 + idx;
+        
+        [btn addTarget:self action:@selector(lookDetail:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [btn sd_setImageWithURL:[NSURL URLWithString:[obj.advPic convertImageUrl]] forState:UIControlStateNormal placeholderImage:kImage(@"如何注册")];
+        [self.guideView addSubview:btn];
+        [btn mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.left.equalTo(@(15 + (w+10)*(idx%2)));
+            make.width.equalTo(@(w));
+            make.height.equalTo(@(h));
+            make.top.equalTo(self.guideView.mas_top).offset(50 + (h+10)*(idx/2));
+        }];
+    }];
+
+    self.contentSize = CGSizeMake(kScreenWidth, self.guideView.yy + 15);
 }
 
 #pragma mark - Events

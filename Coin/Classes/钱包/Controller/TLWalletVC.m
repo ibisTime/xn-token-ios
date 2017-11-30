@@ -16,12 +16,14 @@
 #import "CurrencyModel.h"
 
 #import "NSString+Extension.h"
+#import "NSString+Check.h"
 
 #import "RechargeCoinVC.h"
 #import "WithdrawalsCoinVC.h"
 #import "BillVC.h"
 #import "TLPwdRelatedVC.h"
 #import "RateDescVC.h"
+#import "IdAuthVC.h"
 
 @interface TLWalletVC ()<RefreshDelegate>
 
@@ -124,11 +126,11 @@
         
         NSString *usdStr = [responseObject[@"data"][@"totalAmountUSD"] convertToSimpleRealMoney];
         
-        self.headerView.usdAmountLbl.text = [NSString stringWithFormat:@"%@usd", usdStr];
+        self.headerView.usdAmountLbl.text = [NSString stringWithFormat:@"%@USD", usdStr];
 
         NSString *hkdStr = [responseObject[@"data"][@"totalAmountHKD"] convertToSimpleRealMoney];
 
-        self.headerView.hkdAmountLbl.text = [NSString stringWithFormat:@"%@hkd", hkdStr];
+        self.headerView.hkdAmountLbl.text = [NSString stringWithFormat:@"%@HKD", hkdStr];
 
         
     } failure:^(NSError *error) {
@@ -205,6 +207,8 @@
 #pragma mark - RefreshDelegate
 - (void)refreshTableViewButtonClick:(TLTableView *)refreshTableview button:(UIButton *)sender selectRowAtIndex:(NSInteger)index {
     
+    CoinWeakSelf;
+    
     NSInteger tag = (sender.tag - 1200)%100;
     
     CurrencyModel *currencyModel = self.currencys[index];
@@ -223,24 +227,48 @@
         case 1:
         {
             
-            if ([[TLUser user].tradepwdFlag isEqualToString:@"0"]) {
+            //判断是否认证身份
+            if (![[TLUser user].realName valid]) {
                 
-                TLPwdType pwdType = TLPwdTypeSetTrade;
+                IdAuthVC *idAuth = [IdAuthVC new];
                 
-                TLPwdRelatedVC *pwdRelatedVC = [[TLPwdRelatedVC alloc] initWithType:pwdType];
+                idAuth.success = ^{
+                    
+                    //身份认证成功后，判断是否设置资金密码
+                    if ([[TLUser user].tradepwdFlag isEqualToString:@"0"]) {
+                        
+                        [TLAlert alertWithInfo:@"身份认证成功, 请设置资金密码"];
+
+                        TLPwdType pwdType = TLPwdTypeSetTrade;
+                        
+                        TLPwdRelatedVC *pwdRelatedVC = [[TLPwdRelatedVC alloc] initWithType:pwdType];
+                        
+                        pwdRelatedVC.success = ^{
+                            
+                            WithdrawalsCoinVC *coinVC = [WithdrawalsCoinVC new];
+                            
+                            coinVC.currency = currencyModel;
+                            
+                            [weakSelf.navigationController pushViewController:coinVC animated:YES];
+                        };
+                        
+                        [self.navigationController pushViewController:pwdRelatedVC animated:YES];
+                        
+                        return ;
+                        
+                    } else {
+                        
+                        [TLAlert alertWithInfo:@"身份认证成功"];
+
+                        WithdrawalsCoinVC *coinVC = [WithdrawalsCoinVC new];
+                        
+                        coinVC.currency = currencyModel;
+                        
+                        [self.navigationController pushViewController:coinVC animated:YES];
+                    }
+                };
                 
-//                pwdRelatedVC.success = ^{
-//
-//                    WithdrawalsCoinVC *coinVC = [WithdrawalsCoinVC new];
-//
-//                    coinVC.currency = currencyModel;
-//
-//                    [weakSelf.navigationController pushViewController:coinVC animated:YES];
-//                };
-                
-                [self.navigationController pushViewController:pwdRelatedVC animated:YES];
-                
-                return ;
+                [self.navigationController pushViewController:idAuth animated:YES];
             }
     
             WithdrawalsCoinVC *coinVC = [WithdrawalsCoinVC new];
@@ -257,6 +285,21 @@
             BillVC *billVC = [BillVC new];
             
             billVC.accountNumber = currencyModel.accountNumber;
+            
+            billVC.billType = BillTypeAll;
+            
+            [self.navigationController pushViewController:billVC animated:YES];
+            
+        }break;
+            
+        case 3:
+        {
+            
+            BillVC *billVC = [BillVC new];
+            
+            billVC.accountNumber = currencyModel.accountNumber;
+            
+            billVC.billType = BillTypeFrozen;
             
             [self.navigationController pushViewController:billVC animated:YES];
             

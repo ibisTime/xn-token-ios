@@ -241,6 +241,8 @@
     
     billVC.accountNumber = self.currency.accountNumber;
     
+    billVC.billType = BillTypeRecharge;
+
     [self.navigationController pushViewController:billVC animated:YES];
 }
 

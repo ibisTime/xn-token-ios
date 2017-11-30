@@ -10,6 +10,7 @@
 #import "TLBannerView.h"
 #import "NoticeModel.h"
 #import "QuotationModel.h"
+#import "GuideModel.h"
 
 typedef NS_ENUM(NSInteger, QuotationEventType) {
     
@@ -29,9 +30,7 @@ typedef void(^QuototionBlock)(QuotationEventType quototionType, NSInteger index)
 @property (nonatomic,strong) TLBannerView *bannerView;
 //系统消息
 @property (nonatomic,strong) NSMutableArray <NoticeModel *>*notices;
-//ETH行情
-@property (nonatomic, strong) QuotationModel *ethQuotation;
-//BTC行情
-@property (nonatomic, strong) QuotationModel *btcQuotation;
+//新手指导
+@property (nonatomic, strong) NSMutableArray <GuideModel *>*guides;
 
 @end

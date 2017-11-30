@@ -52,7 +52,7 @@
     
     if ([TLUser user].userId) {
         //获取余额
-        [self getLeftAmount];
+//        [self getLeftAmount];
         //查询信任关系
         [self queryAdvertiseDetail];
 
@@ -465,19 +465,19 @@
         
         if (historyNum == 0) {
             
-            history = @"0";
+            history = @"0 ETH";
             
         } else if (historyNum > 0 && historyNum < 0.5) {
             
-            history = @"0-0.5";
+            history = @"0-0.5 ETH";
             
         } else if (historyNum > 0.5 && historyNum < 1) {
             
-            history = [NSString stringWithFormat:@"%@+", [realNum convertToRealMoneyWithNum:1]];
+            history = [NSString stringWithFormat:@"%@+ ETH", [realNum convertToRealMoneyWithNum:1]];
             
         } else if (historyNum >= 1) {
             
-            history = [NSString stringWithFormat:@"%.0lf+", historyNum];
+            history = [NSString stringWithFormat:@"%.0lf+ ETH", historyNum];
         }
         
         //历史交易
@@ -515,7 +515,9 @@
         weakSelf.tradeView.isTrust = [advertise.isTrust integerValue] == 0 ? NO: YES;
         
         weakSelf.tradeView.advertise = advertise;
-
+        //广告剩余可用余额
+        weakSelf.tradeView.leftAmount = advertise.leftCountString;
+        
     } failure:^(NSError *error) {
         
     }];

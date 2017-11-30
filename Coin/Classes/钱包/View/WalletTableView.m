@@ -63,6 +63,10 @@ static NSString *identifierCell = @"WalletCell";
 
     [cell.billBtn addTarget:self action:@selector(clickBill:) forControlEvents:UIControlEventTouchUpInside];
 
+    cell.freezingAmountBtn.tag = cell.tag + 3;
+    
+    [cell.freezingAmountBtn addTarget:self action:@selector(clickFrozen:) forControlEvents:UIControlEventTouchUpInside];
+    
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
 
     return cell;
@@ -127,6 +131,16 @@ static NSString *identifierCell = @"WalletCell";
     
     NSInteger index = (sender.tag - 1200)/100;
 
+    if ([self.refreshDelegate respondsToSelector:@selector(refreshTableViewButtonClick:button:selectRowAtIndex:)]) {
+        
+        [self.refreshDelegate refreshTableViewButtonClick:self button:sender selectRowAtIndex:index];
+    }
+}
+
+- (void)clickFrozen:(UIButton *)sender {
+    
+    NSInteger index = (sender.tag - 1200)/100;
+    
     if ([self.refreshDelegate respondsToSelector:@selector(refreshTableViewButtonClick:button:selectRowAtIndex:)]) {
         
         [self.refreshDelegate refreshTableViewButtonClick:self button:sender selectRowAtIndex:index];

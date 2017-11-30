@@ -331,7 +331,7 @@
     
     CGFloat tfW = (kScreenWidth - 24 - 40)/2.0;
     //CNY
-    self.cnyTF = [[TLTextField alloc] initWithFrame:CGRectMake(0, 60, tfW, 44) leftTitle:@"CNY" titleWidth:55 placeholder:@"请输入数字"];
+    self.cnyTF = [[TLTextField alloc] initWithFrame:CGRectMake(0, 60, tfW, 44) leftTitle:@"CNY" titleWidth:55 placeholder:@""];
     
     self.cnyTF.delegate = self;
     
@@ -551,6 +551,9 @@
     
     //限额
     self.limitAmountLbl.text = [NSString stringWithFormat:@"限额: %@-%@ CNY",[advertise.minTrade convertToSimpleRealMoney], [advertise.maxTrade convertToSimpleRealMoney]];
+    
+    self.cnyTF.placeholder = [NSString stringWithFormat:@"%@-%@ CNY",[advertise.minTrade convertToSimpleRealMoney], [advertise.maxTrade convertToSimpleRealMoney]];
+
     //价格
     
     self.priceLbl.text = [NSString stringWithFormat:@"%@ CNY", [advertise.truePrice convertToSimpleRealMoney]];
@@ -578,7 +581,7 @@
     
     _leftAmount = leftAmount;
     
-    self.leftAmountLbl.text = [NSString stringWithFormat:@"可用余额: %@ ETH", [_leftAmount convertToSimpleRealCoin]];
+    self.leftAmountLbl.text = [NSString stringWithFormat:@"广告剩余可交易量: %@ ETH", [_leftAmount convertToSimpleRealCoin]];
 }
 
 - (void)setTruePrice:(NSNumber *)truePrice {

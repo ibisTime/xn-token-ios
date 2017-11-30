@@ -170,7 +170,7 @@
     helper.code = @"625229";
     helper.isList = YES;
     
-    helper.parameters[@"nickName"] = self.minPrice;
+    helper.parameters[@"nickName"] = self.nickName;
     
     helper.tableView = self.tableView;
     

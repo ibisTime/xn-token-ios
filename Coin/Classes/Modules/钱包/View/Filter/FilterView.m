@@ -216,15 +216,16 @@
     UILabel* pickerLabel = (UILabel*)view;
     
     if (!pickerLabel){
-        pickerLabel = [[UILabel alloc] init];
+        pickerLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 40)];
         pickerLabel.textColor = [UIColor colorWithRed:51.0/255
                                                 green:51.0/255
                                                  blue:51.0/255
                                                 alpha:1.0];
-        pickerLabel.adjustsFontSizeToFitWidth = YES;
+        
+//        pickerLabel.adjustsFontSizeToFitWidth = YES;
         [pickerLabel setTextAlignment:NSTextAlignmentCenter];
         [pickerLabel setBackgroundColor:[UIColor clearColor]];
-        [pickerLabel setFont:Font(19.0)];
+        [pickerLabel setFont:Font(20.0)];
     }
     
     pickerLabel.text = [self pickerView:pickerView

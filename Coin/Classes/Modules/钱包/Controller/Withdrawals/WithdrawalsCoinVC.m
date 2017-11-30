@@ -72,7 +72,7 @@
     
     self.balanceTF.enabled = NO;
     
-    self.balanceTF.text = [NSString stringWithFormat:@"%@ %@", [self.currency.amountString convertToSimpleRealCoin], self.currency.currency];
+    self.balanceTF.text = [NSString stringWithFormat:@"%@ %@", [self.currency.amountString subNumber:self.currency.frozenAmountString], self.currency.currency];
     
     [self.view addSubview:self.balanceTF];
     
@@ -230,87 +230,87 @@
     }];
     
     //内部转账
-    UIView *interalTranView = [[UIView alloc] init];
-
-    interalTranView.backgroundColor = kWhiteColor;
-
-    [self.view addSubview:interalTranView];
-    [interalTranView mas_makeConstraints:^(MASConstraintMaker *make) {
-
-        make.left.right.equalTo(@(0));
-        make.top.equalTo(minerView.mas_bottom).offset(10);
-        make.height.equalTo(@50);
-
-    }];
-    //
-    UILabel *tranTextLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:15.0];
-    
-    tranTextLbl.text = @"内部转账";
-    
-    [interalTranView addSubview:tranTextLbl];
-    [tranTextLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.left.equalTo(@15);
-        make.centerY.equalTo(interalTranView.mas_centerY);
-        
-    }];
-    
-    //开关
-    UISwitch *sw = [[UISwitch alloc] init];
-    
-    sw.on = YES;
-    
-    [interalTranView addSubview:sw];
-    [sw mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.right.equalTo(@(-15));
-        make.centerY.equalTo(@0);
-        
-    }];
-    
-    self.sw = sw;
-    
-    //内部转账提示
-    UIView *tranPromptView = [[UIView alloc] init];
-
-    tranPromptView.backgroundColor = [UIColor colorWithHexString:@"#fdfdfd"];
-
-    [self.view addSubview:tranPromptView];
-    [tranPromptView mas_makeConstraints:^(MASConstraintMaker *make) {
-
-        make.left.right.equalTo(@0);
-        make.top.equalTo(interalTranView.mas_bottom).offset(0);
-
-    }];
-
-    UILabel *tranPromptLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor3 font:11.0];
-
-    tranPromptLbl.text = @"同意提币至bitbank进行托管, 0手续费0确认, 不走区块链接极速到账, bitbank.com";
-
-    tranPromptLbl.numberOfLines = 0;
-
-    [tranPromptView addSubview:tranPromptLbl];
-    [tranPromptLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-
-        make.edges.mas_equalTo(UIEdgeInsetsMake(10, 15, 10, 15));
-
-        make.left.equalTo(tranPromptView.mas_left).offset(15);
-        make.centerY.equalTo(tranPromptView.mas_centerY);
-        make.right.equalTo(tranPromptView.mas_right).offset(-15);
-
-    }];
-    
-    UIView *tranLine = [[UIView alloc] init];
-    
-    tranLine.backgroundColor = kLineColor;
-    
-    [tranPromptView addSubview:tranLine];
-    [tranLine mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.left.top.right.equalTo(@0);
-        make.height.equalTo(@0.5);
-        
-    }];
+//    UIView *interalTranView = [[UIView alloc] init];
+//
+//    interalTranView.backgroundColor = kWhiteColor;
+//
+//    [self.view addSubview:interalTranView];
+//    [interalTranView mas_makeConstraints:^(MASConstraintMaker *make) {
+//
+//        make.left.right.equalTo(@(0));
+//        make.top.equalTo(minerView.mas_bottom).offset(10);
+//        make.height.equalTo(@50);
+//
+//    }];
+//    //
+//    UILabel *tranTextLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:15.0];
+//
+//    tranTextLbl.text = @"内部转账";
+//
+//    [interalTranView addSubview:tranTextLbl];
+//    [tranTextLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+//
+//        make.left.equalTo(@15);
+//        make.centerY.equalTo(interalTranView.mas_centerY);
+//
+//    }];
+//
+//    //开关
+//    UISwitch *sw = [[UISwitch alloc] init];
+//
+//    sw.on = YES;
+//
+//    [interalTranView addSubview:sw];
+//    [sw mas_makeConstraints:^(MASConstraintMaker *make) {
+//
+//        make.right.equalTo(@(-15));
+//        make.centerY.equalTo(@0);
+//
+//    }];
+//
+//    self.sw = sw;
+//
+//    //内部转账提示
+//    UIView *tranPromptView = [[UIView alloc] init];
+//
+//    tranPromptView.backgroundColor = [UIColor colorWithHexString:@"#fdfdfd"];
+//
+//    [self.view addSubview:tranPromptView];
+//    [tranPromptView mas_makeConstraints:^(MASConstraintMaker *make) {
+//
+//        make.left.right.equalTo(@0);
+//        make.top.equalTo(interalTranView.mas_bottom).offset(0);
+//
+//    }];
+//
+//    UILabel *tranPromptLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor3 font:11.0];
+//
+//    tranPromptLbl.text = @"同意提币至bitbank进行托管, 0手续费0确认, 不走区块链接极速到账, bitbank.com";
+//
+//    tranPromptLbl.numberOfLines = 0;
+//
+//    [tranPromptView addSubview:tranPromptLbl];
+//    [tranPromptLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+//
+//        make.edges.mas_equalTo(UIEdgeInsetsMake(10, 15, 10, 15));
+//
+//        make.left.equalTo(tranPromptView.mas_left).offset(15);
+//        make.centerY.equalTo(tranPromptView.mas_centerY);
+//        make.right.equalTo(tranPromptView.mas_right).offset(-15);
+//
+//    }];
+//
+//    UIView *tranLine = [[UIView alloc] init];
+//
+//    tranLine.backgroundColor = kLineColor;
+//
+//    [tranPromptView addSubview:tranLine];
+//    [tranLine mas_makeConstraints:^(MASConstraintMaker *make) {
+//
+//        make.left.top.right.equalTo(@0);
+//        make.height.equalTo(@0.5);
+//
+//    }];
     
     //确认付币
     UIButton *confirmPayBtn = [UIButton buttonWithTitle:@"确认付币" titleColor:kWhiteColor backgroundColor:kThemeColor titleFont:16.0 cornerRadius:5];
@@ -320,7 +320,7 @@
     [confirmPayBtn mas_makeConstraints:^(MASConstraintMaker *make) {
 
         make.left.equalTo(@(15));
-        make.top.equalTo(tranPromptView.mas_bottom).offset(30);
+        make.top.equalTo(minerView.mas_bottom).offset(30);
         make.right.equalTo(@(-15));
         make.height.equalTo(@45);
 
@@ -358,6 +358,8 @@
     
     billVC.accountNumber = self.currency.accountNumber;
     
+    billVC.billType = BillTypeWithdraw;
+
     [self.navigationController pushViewController:billVC animated:YES];
 }
 
@@ -479,7 +481,8 @@
     http.showView = self.view;
     http.parameters[@"accountNumber"] = self.currency.accountNumber;
     http.parameters[@"amount"] = [self.tranAmountTF.text convertToSysCoin];
-    http.parameters[@"applyNote"] = [NSString stringWithFormat:@"%@提现", self.currency.currency];
+//    http.parameters[@"applyNote"] = [NSString stringWithFormat:@"%@提现", self.currency.currency];
+    http.parameters[@"applyNote"] = @"C端提现";
     http.parameters[@"applyUser"] = [TLUser user].userId;
     http.parameters[@"payCardInfo"] = self.currency.currency;
     http.parameters[@"payCardNo"] = self.receiveAddressLbl.text;

@@ -35,6 +35,8 @@
     
     self.headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 107)];
     
+    self.headerView.backgroundColor = kWhiteColor;
+    
     self.tableView.tableHeaderView = self.headerView;
     //账单类型
     UILabel *textLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:15.0];
@@ -49,17 +51,17 @@
         
     }];
     
-    long long money = [_bill.transAmountString longLongValue];
+    CGFloat money = [[_bill.transAmountString convertToSimpleRealCoin] doubleValue];
 
     NSString *moneyStr = @"";
     
     if (money > 0) {
         
-        moneyStr = [NSString stringWithFormat:@"+%@", [_bill.transAmountString convertToSimpleRealCoin]];
+        moneyStr = [NSString stringWithFormat:@"+%@ %@", [_bill.transAmountString convertToSimpleRealCoin], _bill.currency];
         
     } else if (money <= 0) {
         
-        moneyStr = [NSString stringWithFormat:@"%@", [_bill.transAmountString convertToSimpleRealCoin]];
+        moneyStr = [NSString stringWithFormat:@"%@ %@", [_bill.transAmountString convertToSimpleRealCoin], _bill.currency];
         
     }
     

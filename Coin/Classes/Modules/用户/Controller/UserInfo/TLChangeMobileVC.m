@@ -50,8 +50,8 @@
     self.captchaView = captchaView;
     [captchaView.captchaBtn addTarget:self action:@selector(sendCaptcha) forControlEvents:UIControlEventTouchUpInside];
     
-//    //支付密码按钮
-//    TLTextField *tradePwdTf = [[TLTextField alloc] initWithframe:CGRectMake(0, captchaView.yy  + 1, kScreenWidth, 50) leftTitle:@"支付密码" titleWidth:90 placeholder:@"请输入支付密码"];
+//    //资金密码按钮
+//    TLTextField *tradePwdTf = [[TLTextField alloc] initWithframe:CGRectMake(0, captchaView.yy  + 1, kScreenWidth, 50) leftTitle:@"资金密码" titleWidth:90 placeholder:@"请输入支付密码"];
 //    tradePwdTf.secureTextEntry = YES;
 //    tradePwdTf.isSecurity = YES;
 //    [self.view addSubview:tradePwdTf];
@@ -76,7 +76,7 @@
     [confirmBtn addTarget:self action:@selector(confirm) forControlEvents:UIControlEventTouchUpInside];
     
     //
-//    UIButton *setPwdBtn = [[UIButton alloc] initWithFrame:CGRectMake(15, confirmBtn.yy + 10, kScreenWidth - 30, 30) title:@"您还未设置支付密码,前往设置->" backgroundColor:[UIColor clearColor]];
+//    UIButton *setPwdBtn = [[UIButton alloc] initWithFrame:CGRectMake(15, confirmBtn.yy + 10, kScreenWidth - 30, 30) title:@"您还未设置资金密码,前往设置->" backgroundColor:[UIColor clearColor]];
 //    [self.view addSubview:setPwdBtn];
 //    [setPwdBtn setTitleColor:[UIColor textColor] forState:UIControlStateNormal];
 //    setPwdBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;

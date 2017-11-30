@@ -80,6 +80,8 @@
     
     SearchResultVC *resultVC = [SearchResultVC new];
     
+    resultVC.searchType = SearchTypeUser;
+    
     resultVC.nickName = self.nickNameTF.text;
     
     [self.navigationController pushViewController:resultVC animated:YES];

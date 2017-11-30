@@ -50,10 +50,10 @@
                                                 green:51.0/255
                                                  blue:51.0/255
                                                 alpha:1.0];
-        pickerLabel.adjustsFontSizeToFitWidth = YES;
+//        pickerLabel.adjustsFontSizeToFitWidth = YES;
         [pickerLabel setTextAlignment:NSTextAlignmentCenter];
         [pickerLabel setBackgroundColor:[UIColor clearColor]];
-        [pickerLabel setFont:[UIFont boldSystemFontOfSize:13]];
+        [pickerLabel setFont:Font(18.0)];
     }
     
     pickerLabel.text = [self pickerView:pickerView

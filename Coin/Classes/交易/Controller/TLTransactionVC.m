@@ -24,6 +24,8 @@
 #import "TradeBuyVC.h"
 #import "TradeSellVC.h"
 #import "SearchVC.h"
+#import "TLNavigationController.h"
+#import "TLUserLoginVC.h"
 
 @interface TLTransactionVC ()<SegmentDelegate, RefreshDelegate>
 
@@ -65,8 +67,6 @@
     [self navBarUI];
     
     [self setUpUI];
-    //banner
-    [self getBanner];
     //获取广告
     [self requestAdvetiseList];
     //添加通知
@@ -291,8 +291,26 @@
 
 - (void)publishEventsWithIndex:(NSInteger)index {
  
+    CoinWeakSelf;
+    
     if (index == 0) {
 
+        if (![TLUser user].isLogin) {
+            
+            TLUserLoginVC *loginVC = [[TLUserLoginVC alloc] init];
+            
+            TLNavigationController *nav = [[TLNavigationController alloc] initWithRootViewController:loginVC];
+            
+            loginVC.loginSuccess = ^(){
+                
+                [weakSelf publishEventsWithIndex:0];
+            };
+            
+            [self presentViewController:nav animated:YES completion:nil];
+            
+            return;
+        }
+        
         PublishBuyVC *buyVC = [PublishBuyVC new];
         
         buyVC.type = PublishBuyPositionTypePublish;
@@ -300,6 +318,22 @@
         [self.navigationController pushViewController:buyVC animated:YES];
         
     } else if (index == 1) {
+        
+        if (![TLUser user].isLogin) {
+            
+            TLUserLoginVC *loginVC = [[TLUserLoginVC alloc] init];
+            
+            TLNavigationController *nav = [[TLNavigationController alloc] initWithRootViewController:loginVC];
+            
+            loginVC.loginSuccess = ^(){
+                
+                [weakSelf publishEventsWithIndex:1];
+            };
+            
+            [self presentViewController:nav animated:YES completion:nil];
+            
+            return;
+        }
         
         PublishSellVC *sellVC = [PublishSellVC new];
         
@@ -376,6 +410,9 @@
     
     [self.tableView addRefreshAction:^{
         
+        //banner
+        [weakSelf getBanner];
+        
         [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
             
             weakSelf.advertises = objs;
@@ -385,6 +422,11 @@
             [weakSelf.tableView reloadData_tl];
 
         } failure:^(NSError *error) {
+            
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                
+                [weakSelf requestAdvetiseList];
+            });
             
         }];
     }];

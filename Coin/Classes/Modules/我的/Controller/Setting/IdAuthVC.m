@@ -118,7 +118,15 @@
     
     [http postWithSuccess:^(id responseObject) {
         
-        [TLAlert alertWithSucces:@"身份认证成功"];
+        if (self.success) {
+            
+            self.success()
+            
+        } else {
+            
+            [TLAlert alertWithSucces:@"身份认证成功"];
+
+        }
         
         [self.navigationController popViewControllerAnimated:YES];
         

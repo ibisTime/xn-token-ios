@@ -10,4 +10,6 @@
 
 @interface IdAuthVC : TLBaseVC
 
+@property (nonatomic,copy) void(^success)(void);
+
 @end

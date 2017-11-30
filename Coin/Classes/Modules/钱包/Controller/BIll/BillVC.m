@@ -24,9 +24,10 @@
 @property (nonatomic,strong) NSMutableArray <BillModel *>*bills;
 
 @property (nonatomic, strong) TLPageDataHelper *helper;
-
 //筛选
 @property (nonatomic, strong) FilterView *filterPicker;
+//暂无推荐历史
+@property (nonatomic, strong) UIView *placeHolderView;
 
 @end
 
@@ -36,10 +37,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.title = @"账单";
-    
     [self setPlaceholderViewTitle:@"加载失败" operationTitle:@"重新加载"];
-
+    //暂无明细
+    [self initPlaceHolderView];
+    
     [self initTableView];
     //筛选
     [self addFilterItem];
@@ -53,6 +54,29 @@
     [self.tableView beginRefreshing];
 }
 
+- (void)setBillType:(BillType)billType {
+    
+    _billType = billType;
+    
+    if (billType == BillTypeAll) {
+        
+        self.title = @"余额明细";
+        
+    } else if (billType == BillTypeRecharge) {
+        
+        self.title = @"充值明细";
+        
+    } else if (billType == BillTypeWithdraw) {
+        
+        self.title = @"提币明细";
+        
+    } else if (billType == BillTypeFrozen) {
+        
+        self.title = @"冻结明细";
+    }
+    
+}
+
 #pragma mark - Init
 - (FilterView *)filterPicker {
     
@@ -60,9 +84,9 @@
         
         CoinWeakSelf;
         
-        NSArray *textArr = @[@"全部", @"充币", @"提币", @"转入", @"转出"];
+        NSArray *textArr = @[@"全部", @"充币", @"提币",@"交易买入", @"交易卖出", @"交易手续费", @"取现手续费", @"邀请好友收入"];
 
-        NSArray *typeArr = @[@"", @"charge", @"withdraw", @"buy", @"sell"];
+        NSArray *typeArr = @[@"", @"charge", @"withdraw", @"buy", @"sell", @"tradefee", @"withdrawfee", @"invite"];
         
         _filterPicker = [[FilterView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
         
@@ -82,11 +106,42 @@
     return _filterPicker;
 }
 
+- (void)initPlaceHolderView {
+    
+    self.placeHolderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight - 40)];
+    
+    UIImageView *couponIV = [[UIImageView alloc] init];
+    
+    couponIV.image = kImage(@"暂无订单");
+    
+    [self.placeHolderView addSubview:couponIV];
+    [couponIV mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.centerX.equalTo(@0);
+        make.top.equalTo(@90);
+        
+    }];
+    
+    UILabel *textLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor2 font:14.0];
+    
+    textLbl.text = @"暂无明细";
+    
+    textLbl.textAlignment = NSTextAlignmentCenter;
+    
+    [self.placeHolderView addSubview:textLbl];
+    [textLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.top.equalTo(couponIV.mas_bottom).offset(20);
+        make.centerX.equalTo(couponIV.mas_centerX);
+        
+    }];
+}
+
 - (void)initTableView {
     
     self.tableView = [[BillTableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight) style:UITableViewStylePlain];
     
-    self.tableView.placeHolderView = [TLPlaceholderView placeholderViewWithText:@"暂无记录"];
+    self.tableView.placeHolderView = self.placeHolderView;
     
     self.tableView.refreshDelegate = self;
     
@@ -95,7 +150,11 @@
 
 - (void)addFilterItem {
     
-    [UIBarButtonItem addRightItemWithTitle:@"筛选" titleColor:kTextColor frame:CGRectMake(0, 0, 40, 30) vc:self action:@selector(clickFilter:)];
+    if (self.billType == BillTypeAll) {
+        
+        [UIBarButtonItem addRightItemWithTitle:@"筛选" titleColor:kTextColor frame:CGRectMake(0, 0, 40, 30) vc:self action:@selector(clickFilter:)];
+
+    }
 }
 
 #pragma mark - Events
@@ -110,6 +169,22 @@
     
     //--//
     __weak typeof(self) weakSelf = self;
+    
+    NSString *bizType = @"";
+    
+    if (self.billType == BillTypeRecharge) {
+        
+        bizType = @"charge";
+        
+    } else if (self.billType == BillTypeWithdraw) {
+        
+        bizType = @"withdraw";
+        
+    } else if (self.billType == BillTypeFrozen) {
+        
+        bizType = @"";
+    }
+    
     TLPageDataHelper *helper = [[TLPageDataHelper alloc] init];
     
     helper.tableView = self.tableView;
@@ -118,7 +193,10 @@
     helper.code = @"802524";
     helper.start = 1;
     helper.limit = 10;
-    helper.parameters[@"bizType"] = @"";
+    
+    helper.parameters[@"bizType"] = bizType;
+    helper.parameters[@"kind"] = self.billType == BillTypeFrozen ? @"1": @"0";
+    
     helper.parameters[@"accountNumber"] = self.accountNumber;
 
 //    helper.parameters[@"channelType"] = @"C";

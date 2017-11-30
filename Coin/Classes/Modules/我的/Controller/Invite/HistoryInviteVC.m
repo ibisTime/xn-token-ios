@@ -32,6 +32,8 @@ static NSString *identifierCell = @"HistoryFriendCellID";
     // Do any additional setup after loading the view.
     self.title = @"推荐历史";
     
+    [self initPlaceHolderView];
+    
     [self initTableView];
     
     [self requestFriendList];

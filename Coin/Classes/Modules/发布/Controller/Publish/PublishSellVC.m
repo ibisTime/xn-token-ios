@@ -39,7 +39,7 @@
     
     self.timeArr = [NSMutableArray array];
     
-    //保留草稿
+    //保存草稿
     [self addRightItem];
     //发布出售
     [self initPublishView];
@@ -58,7 +58,7 @@
     
     if (self.type == PublishSellPositionTypePublish) {
         
-        [UIBarButtonItem addRightItemWithTitle:@"保留草稿" titleColor:kTextColor frame:CGRectMake(0, 0, 70, 44) vc:self action:@selector(keepDraft)];
+        [UIBarButtonItem addRightItemWithTitle:@"保存草稿" titleColor:kTextColor frame:CGRectMake(0, 0, 70, 44) vc:self action:@selector(keepDraft)];
         
     }
     

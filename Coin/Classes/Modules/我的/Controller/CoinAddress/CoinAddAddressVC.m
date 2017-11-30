@@ -175,7 +175,7 @@
     //开关
     UISwitch *sw = [[UISwitch alloc] init];
     
-    sw.on = YES;
+    sw.on = NO;
     
     [authAccountView addSubview:sw];
     [sw mas_makeConstraints:^(MASConstraintMaker *make) {

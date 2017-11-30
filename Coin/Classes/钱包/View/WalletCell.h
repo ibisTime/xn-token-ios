@@ -18,5 +18,7 @@
 @property (nonatomic, strong) UIButton *withdrawalsBtn;
 //账单
 @property (nonatomic, strong) UIButton *billBtn;
+//冻结金额
+@property (nonatomic, strong) UIButton *freezingAmountBtn;
 
 @end

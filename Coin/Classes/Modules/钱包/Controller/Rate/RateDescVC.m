@@ -10,7 +10,9 @@
 
 #import "RateDescTableView.h"
 
-@interface RateDescVC ()
+#import "HistoryRateVC.h"
+
+@interface RateDescVC ()<RefreshDelegate>
 
 @property (nonatomic, strong) RateDescTableView *tableView;
 
@@ -36,6 +38,8 @@
 - (void)initTableView {
     
     self.tableView = [[RateDescTableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight)];
+    
+    self.tableView.refreshDelegate = self;
     
     [self.view addSubview:self.tableView];
     
@@ -75,6 +79,21 @@
     [self.tableView beginRefreshing];
 
 }
+
+#pragma mark - RefreshDelegate
+
+- (void)refreshTableView:(TLTableView *)refreshTableview didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    RateModel *rate = self.rates[indexPath.row];
+    
+    HistoryRateVC *rateVC = [HistoryRateVC new];
+    
+    rateVC.currency = rate.currency;
+    
+    [self.navigationController pushViewController:rateVC animated:YES];
+    
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -57,11 +57,11 @@
         
     } else if (self.type == TLPwdTypeTradeReset) {
         
-        self.title = @"修改支付密码";
+        self.title = @"修改资金密码";
     
     } else if (self.type == TLPwdTypeSetTrade) {
     
-        self.title = @"设置支付密码";
+        self.title = @"设置资金密码";
 
     }
     
@@ -158,7 +158,7 @@
         
         http.parameters[@"bizType"] = USER_FIND_PWD_CODE;
         
-    } else if (self.type == TLPwdTypeSetTrade) {//设置支付密码
+    } else if (self.type == TLPwdTypeSetTrade) {//设置资金密码
         
         http.parameters[@"bizType"] = USER_SET_TRADE_PWD;
         
@@ -218,7 +218,7 @@
     TLNetworking *http = [TLNetworking new];
     http.showView = self.view;
     
-    if (self.type == TLPwdTypeTradeReset) { //支付密码po
+    if (self.type == TLPwdTypeTradeReset) { //资金密码po
         
         http.code = USER_FIND_TRADE_PWD;
         

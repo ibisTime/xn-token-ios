@@ -21,6 +21,8 @@
 @property (nonatomic,strong) NSMutableArray <NoticeModel *> *notices;
 
 @property (nonatomic,strong) TLTableView *tableView;
+//暂无历史汇率
+@property (nonatomic, strong) UIView *placeHolderView;
 
 @end
 
@@ -32,6 +34,11 @@ static NSString *identifier = @"NoticeCellId";
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    self.title = @"系统公告";
+
+    //暂无公告
+    [self initPlaceHolderView];
+    
     [self initTableView];
     //获取消息列表
     [self requrstNoticeList];
@@ -40,23 +47,48 @@ static NSString *identifier = @"NoticeCellId";
 
 #pragma mark - Init
 
-- (void)initTableView {
+- (void)initPlaceHolderView {
     
-    self.title = @"系统公告";
+    self.placeHolderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight - 40)];
     
-    self.tableView = [TLTableView tableViewWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight)
-                                                       delegate:self
-                                                     dataSource:self];
+    UIImageView *couponIV = [[UIImageView alloc] init];
     
-    self.tableView.placeHolderView = [TLPlaceholderView placeholderViewWithText:@"暂无消息"];
+    couponIV.image = kImage(@"暂无订单");
     
-    [self.view addSubview:self.tableView];
+    [self.placeHolderView addSubview:couponIV];
+    [couponIV mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.centerX.equalTo(@0);
+        make.top.equalTo(@90);
+        
+    }];
+    
+    UILabel *textLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor2 font:14.0];
+    
+    textLbl.text = @"暂无公告";
+    
+    textLbl.textAlignment = NSTextAlignmentCenter;
+    
+    [self.placeHolderView addSubview:textLbl];
+    [textLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.top.equalTo(couponIV.mas_bottom).offset(20);
+        make.centerX.equalTo(couponIV.mas_centerX);
+        
+    }];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
+- (void)initTableView {
     
-    [super viewWillAppear:animated];
-    [self.tableView beginRefreshing];
+    self.tableView = [TLTableView tableViewWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight)
+                                            delegate:self
+                                          dataSource:self];
+    
+    self.tableView.placeHolderView = self.placeHolderView;
+    
+    [self.tableView registerClass:[NoticeCell class] forCellReuseIdentifier:identifier];
+    
+    [self.view addSubview:self.tableView];
 }
 
 #pragma mark - Data
@@ -73,11 +105,11 @@ static NSString *identifier = @"NoticeCellId";
     helper.parameters[@"channelType"] = @"4";
     
     helper.parameters[@"pushType"] = @"41";
-    helper.parameters[@"toKind"] = @"4";
+    helper.parameters[@"toKind"] = @"C";
     //    1 立即发 2 定时发
     //    pageDataHelper.parameters[@"smsType"] = @"1";
     helper.parameters[@"start"] = @"1";
-    helper.parameters[@"limit"] = @"10";
+    helper.parameters[@"limit"] = @"20";
     helper.parameters[@"status"] = @"1";
     helper.parameters[@"fromSystemCode"] = [AppConfig config].systemCode;
     
@@ -89,7 +121,7 @@ static NSString *identifier = @"NoticeCellId";
     
     [self.tableView addRefreshAction:^{
         
-        [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
+        [helper refresh:^(NSMutableArray <NoticeModel *>*objs, BOOL stillHave) {
             
             weakSelf.notices = objs;
             
@@ -102,10 +134,11 @@ static NSString *identifier = @"NoticeCellId";
         
     }];
     
-    
+    [self.tableView beginRefreshing];
+
     [self.tableView addLoadMoreAction:^{
         
-        [helper loadMore:^(NSMutableArray *objs, BOOL stillHave) {
+        [helper loadMore:^(NSMutableArray <NoticeModel *>*objs, BOOL stillHave) {
             
             weakSelf.notices = objs;
             [weakSelf.tableView reloadData_tl];

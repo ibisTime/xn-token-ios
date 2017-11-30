@@ -342,6 +342,12 @@
 		211CF99E1FC4278000E51FCF /* TradeBuyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 211CF99D1FC4278000E51FCF /* TradeBuyView.m */; };
 		211CF9A11FC5491A00E51FCF /* BuyConfirmView.m in Sources */ = {isa = PBXBuildFile; fileRef = 211CF9A01FC5491A00E51FCF /* BuyConfirmView.m */; };
 		211CF9A41FC55ADD00E51FCF /* OrderPriceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 211CF9A31FC55ADD00E51FCF /* OrderPriceModel.m */; };
+		211D3C0C1FCFCE2000B55F9F /* GuideModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 211D3C0B1FCFCE2000B55F9F /* GuideModel.m */; };
+		211D3C0F1FCFD50200B55F9F /* GuideDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 211D3C0E1FCFD50200B55F9F /* GuideDetailVC.m */; };
+		211D3C121FCFE35E00B55F9F /* HistoryRateVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 211D3C111FCFE35E00B55F9F /* HistoryRateVC.m */; };
+		211D3C151FCFE3AB00B55F9F /* HistoryRateTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 211D3C141FCFE3AB00B55F9F /* HistoryRateTableView.m */; };
+		211D3C181FCFE3C100B55F9F /* HistoryRateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 211D3C171FCFE3C100B55F9F /* HistoryRateCell.m */; };
+		211D3C1B1FCFE46C00B55F9F /* HistoryRateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 211D3C1A1FCFE46C00B55F9F /* HistoryRateModel.m */; };
 		211D4ED61FCD9B0C000E0D43 /* EditVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 211D4ED51FCD9B0C000E0D43 /* EditVC.m */; };
 		211DE6141FB5465E002FCF3D /* WalletTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 211DE6131FB5465E002FCF3D /* WalletTableView.m */; };
 		211DE6171FB54685002FCF3D /* WalletCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 211DE6161FB54685002FCF3D /* WalletCell.m */; };
@@ -1180,6 +1186,18 @@
 		211CF9A01FC5491A00E51FCF /* BuyConfirmView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BuyConfirmView.m; sourceTree = "<group>"; };
 		211CF9A21FC55ADD00E51FCF /* OrderPriceModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OrderPriceModel.h; sourceTree = "<group>"; };
 		211CF9A31FC55ADD00E51FCF /* OrderPriceModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OrderPriceModel.m; sourceTree = "<group>"; };
+		211D3C0A1FCFCE2000B55F9F /* GuideModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GuideModel.h; sourceTree = "<group>"; };
+		211D3C0B1FCFCE2000B55F9F /* GuideModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GuideModel.m; sourceTree = "<group>"; };
+		211D3C0D1FCFD50200B55F9F /* GuideDetailVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GuideDetailVC.h; sourceTree = "<group>"; };
+		211D3C0E1FCFD50200B55F9F /* GuideDetailVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GuideDetailVC.m; sourceTree = "<group>"; };
+		211D3C101FCFE35E00B55F9F /* HistoryRateVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HistoryRateVC.h; sourceTree = "<group>"; };
+		211D3C111FCFE35E00B55F9F /* HistoryRateVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HistoryRateVC.m; sourceTree = "<group>"; };
+		211D3C131FCFE3AB00B55F9F /* HistoryRateTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HistoryRateTableView.h; sourceTree = "<group>"; };
+		211D3C141FCFE3AB00B55F9F /* HistoryRateTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HistoryRateTableView.m; sourceTree = "<group>"; };
+		211D3C161FCFE3C100B55F9F /* HistoryRateCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HistoryRateCell.h; sourceTree = "<group>"; };
+		211D3C171FCFE3C100B55F9F /* HistoryRateCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HistoryRateCell.m; sourceTree = "<group>"; };
+		211D3C191FCFE46C00B55F9F /* HistoryRateModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HistoryRateModel.h; sourceTree = "<group>"; };
+		211D3C1A1FCFE46C00B55F9F /* HistoryRateModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HistoryRateModel.m; sourceTree = "<group>"; };
 		211D4ED41FCD9B0C000E0D43 /* EditVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditVC.h; sourceTree = "<group>"; };
 		211D4ED51FCD9B0C000E0D43 /* EditVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditVC.m; sourceTree = "<group>"; };
 		211DE6121FB5465E002FCF3D /* WalletTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WalletTableView.h; sourceTree = "<group>"; };
@@ -1611,6 +1629,8 @@
 			children = (
 				211A53201FBFE3A100CC6294 /* RateDescVC.h */,
 				211A53211FBFE3A100CC6294 /* RateDescVC.m */,
+				211D3C101FCFE35E00B55F9F /* HistoryRateVC.h */,
+				211D3C111FCFE35E00B55F9F /* HistoryRateVC.m */,
 			);
 			path = Rate;
 			sourceTree = "<group>";
@@ -1651,6 +1671,10 @@
 				211A53311FBFE4F100CC6294 /* RateDescTableView.m */,
 				211A532D1FBFE4CF00CC6294 /* RateDescCell.h */,
 				211A532E1FBFE4CF00CC6294 /* RateDescCell.m */,
+				211D3C131FCFE3AB00B55F9F /* HistoryRateTableView.h */,
+				211D3C141FCFE3AB00B55F9F /* HistoryRateTableView.m */,
+				211D3C161FCFE3C100B55F9F /* HistoryRateCell.h */,
+				211D3C171FCFE3C100B55F9F /* HistoryRateCell.m */,
 			);
 			path = Rate;
 			sourceTree = "<group>";
@@ -3520,6 +3544,8 @@
 				215979631FB81CED0029F177 /* BillModel.m */,
 				211A53331FBFE53100CC6294 /* RateModel.h */,
 				211A53341FBFE53100CC6294 /* RateModel.m */,
+				211D3C191FCFE46C00B55F9F /* HistoryRateModel.h */,
+				211D3C1A1FCFE46C00B55F9F /* HistoryRateModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -3707,6 +3733,8 @@
 			children = (
 				21223C711FBD8DB800057444 /* QuotationModel.h */,
 				21223C721FBD8DB800057444 /* QuotationModel.m */,
+				211D3C0A1FCFCE2000B55F9F /* GuideModel.h */,
+				211D3C0B1FCFCE2000B55F9F /* GuideModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -3861,6 +3889,8 @@
 			children = (
 				2EE950BE1FB05B2400429257 /* TLHangQingVC.h */,
 				2EE950BF1FB05B2400429257 /* TLHangQingVC.m */,
+				211D3C0D1FCFD50200B55F9F /* GuideDetailVC.h */,
+				211D3C0E1FCFD50200B55F9F /* GuideDetailVC.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -4251,6 +4281,7 @@
 				2E394FED1FB0575A00BA0829 /* AppDelegate.m in Sources */,
 				211C043D1FC6604800E51FCF /* KeyValue.m in Sources */,
 				211A48A51FBE84220027E9FF /* PublishTipView.m in Sources */,
+				211D3C1B1FCFE46C00B55F9F /* HistoryRateModel.m in Sources */,
 				21D216861FB9C5750040795E /* QRCodeVC.m in Sources */,
 				211C04651FC6604800E51FCF /* IMAContactManager+User.m in Sources */,
 				211C045D1FC6604800E51FCF /* IMAPlatform+Login.m in Sources */,
@@ -4298,6 +4329,7 @@
 				211C04721FC6604800E51FCF /* TextViewTableViewCell.m in Sources */,
 				211DE6CA1FB5A586002FCF3D /* RechargeCoinVC.m in Sources */,
 				2159796A1FB82BC10029F177 /* CustomPickerView.m in Sources */,
+				211D3C181FCFE3C100B55F9F /* HistoryRateCell.m in Sources */,
 				211C04CC1FC6604900E51FCF /* GroupMemberInfoCell.m in Sources */,
 				211A34DE1FB4245D00FEB71F /* MineCell.m in Sources */,
 				2121DCCE1FC7127C001FC2E3 /* OrderListCell.m in Sources */,
@@ -4339,6 +4371,7 @@
 				211C04ED1FC6604900E51FCF /* GroupMemberInfoViewController.m in Sources */,
 				211C04DD1FC6604900E51FCF /* NewGroupViewController.m in Sources */,
 				211C04831FC6604800E51FCF /* MyAudioManager.m in Sources */,
+				211D3C0F1FCFD50200B55F9F /* GuideDetailVC.m in Sources */,
 				211C04901FC6604800E51FCF /* ChatInputBaseView.m in Sources */,
 				211C04411FC6604800E51FCF /* UINavigationController+Transition.m in Sources */,
 				211C041F1FC6604800E51FCF /* FTAnimationManager.m in Sources */,
@@ -4382,6 +4415,7 @@
 				211C049A1FC6604800E51FCF /* ChatHeadRefreshView.m in Sources */,
 				211C04201FC6604800E51FCF /* FTUtils+NSObject.m in Sources */,
 				211A34D71FB3F51400FEB71F /* MineHeaderView.m in Sources */,
+				211D3C0C1FCFCE2000B55F9F /* GuideModel.m in Sources */,
 				211A533C1FC0261700CC6294 /* PublishBuyVC.m in Sources */,
 				211DE6C11FB58B4C002FCF3D /* AppConfig.m in Sources */,
 				211DE6A41FB58B4C002FCF3D /* TLPickerTextField.m in Sources */,
@@ -4435,6 +4469,7 @@
 				211C045C1FC6604800E51FCF /* IMAContactManager+Group.m in Sources */,
 				211CEF261FCC0451000FB0C4 /* KeyValueModel.m in Sources */,
 				211C044B1FC6604800E51FCF /* IMSDK+ShowAble.m in Sources */,
+				211D3C151FCFE3AB00B55F9F /* HistoryRateTableView.m in Sources */,
 				211C04531FC6604800E51FCF /* IMAGroup+MemberList.m in Sources */,
 				211CEF2D1FCC1994000FB0C4 /* MyAdvertiseListVC.m in Sources */,
 				21D2169B1FBAD04B0040795E /* NoticeCell.m in Sources */,
@@ -4545,6 +4580,7 @@
 				211A34F01FB430DB00FEB71F /* SettingGroup.m in Sources */,
 				2EE950C01FB05B2400429257 /* TLHangQingVC.m in Sources */,
 				211C03FC1FC6604800E51FCF /* UIViewController+ChildViewController.m in Sources */,
+				211D3C121FCFE35E00B55F9F /* HistoryRateVC.m in Sources */,
 				211C04371FC6604800E51FCF /* TableSearchViewController.m in Sources */,
 				211CEF311FCC2FD1000FB0C4 /* MyAdvertiseTableView.m in Sources */,
 				211C04291FC6604800E51FCF /* UICollectionViewController+ADFlipTransition.m in Sources */,

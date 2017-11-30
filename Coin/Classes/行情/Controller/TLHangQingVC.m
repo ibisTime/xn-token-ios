@@ -16,10 +16,12 @@
 #import "BannerModel.h"
 #import "NoticeModel.h"
 #import "QuotationModel.h"
+#import "GuideModel.h"
 
 #import "SystemNoticeVC.h"
 #import "WebVC.h"
 #import "QuotationListVC.h"
+#import "GuideDetailVC.h"
 
 @interface TLHangQingVC ()
 //滚动视图
@@ -32,6 +34,14 @@
 @property (nonatomic,strong) NSMutableArray <NoticeModel *>*notices;
 //行情列表
 @property (nonatomic, strong) NSArray <QuotationModel *>*quotations;
+//新手指导
+@property (nonatomic, strong) NSMutableArray <GuideModel *>*guides;
+//定时器
+@property (nonatomic, strong) NSTimer *timer;
+//上一个行情(ETH)
+@property (nonatomic, strong) QuotationModel *ethQuotation;
+//上一个行情(BTC)
+@property (nonatomic, strong) QuotationModel *btcQuotation;
 
 @end
 
@@ -49,11 +59,14 @@
     self.title = @"行情";
 
     [self initScrollView];
-    
     //查询以太币和比特币行情
     [self queryCoinQuotation];
-    
+    //获取banner图
     [self getBanner];
+    //获取新手指导
+    [self requestNoviceGuide];
+    //定时器刷起来
+    [self startTimer];
 }
 
 #pragma mark - Init
@@ -62,7 +75,7 @@
     
     CoinWeakSelf;
     
-    self.quotationView = [[QuotationView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight - kBottomInsetHeight - kTabBarHeight)];
+    self.quotationView = [[QuotationView alloc] init];
 
     self.quotationView.quotationBlock = ^(QuotationEventType quototionType, NSInteger index) {
         
@@ -70,6 +83,10 @@
     };
     
     [self.view addSubview:self.quotationView];
+    [self.quotationView mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.edges.mas_equalTo(UIEdgeInsetsZero);
+    }];
 }
 
 #pragma mark - Events
@@ -111,38 +128,26 @@
             
         case QuotationEventTypeGuideDetail:
         {
-            [TLAlert alertWithInfo:@"正在研发中, 敬请期待"];
             
-            switch (index) {
-                case 0:
-                {
-                    
-                }break;
-                    
-                case 1:
-                {
-                    
-                }break;
-                    
-                case 2:
-                {
-                    
-                }break;
-                    
-                case 3:
-                {
-                    
-                }break;
-                    
-                default:
-                    break;
-            }
+            GuideDetailVC *detailVC = [GuideDetailVC new];
+            
+            detailVC.guide = self.guides[index];
+            
+            [self.navigationController pushViewController:detailVC animated:YES];
             
         }break;
             
         default:
             break;
     }
+}
+
+- (void)startTimer {
+    
+    //开启定时器,实时刷新
+    self.timer = [NSTimer timerWithTimeInterval:20 target:self selector:@selector(queryCoinQuotation) userInfo:nil repeats:YES];
+    
+    [[NSRunLoop mainRunLoop] addTimer:self.timer forMode:NSDefaultRunLoopMode];
 }
 
 #pragma mark - Data
@@ -229,11 +234,27 @@
             
             if ([obj.coin isEqualToString:@"ETH"]) {
                 
-                self.quotationView.ethQuotation = obj;
+                UILabel *priceLbl = [self.quotationView viewWithTag:1400];
+
+                UILabel *diffPriceLbl = [self.quotationView viewWithTag:1410];
+                
+                UILabel *diffPreLbl = [self.quotationView viewWithTag:1420];
+                
+                [self calculationPriceDiffWithPriceLabel:priceLbl diffPriceLabel:diffPriceLbl riseLabel:diffPreLbl lastQuotation:self.ethQuotation nowQuotation:obj];
+                
+                self.ethQuotation = obj;
                 
             } else if ([obj.coin isEqualToString:@"BTC"]) {
                 
-                self.quotationView.btcQuotation = obj;
+                UILabel *priceLbl = [self.quotationView viewWithTag:1401];
+
+                UILabel *diffPriceLbl = [self.quotationView viewWithTag:1411];
+                
+                UILabel *diffPreLbl = [self.quotationView viewWithTag:1421];
+                
+                [self calculationPriceDiffWithPriceLabel:priceLbl diffPriceLabel:diffPriceLbl riseLabel:diffPreLbl lastQuotation:self.btcQuotation nowQuotation:obj];
+                
+                self.btcQuotation = obj;
                 
             } else {
                 
@@ -245,6 +266,83 @@
     } failure:^(NSError *error) {
         
     }];
+}
+
+- (void)calculationPriceDiffWithPriceLabel:(UILabel *)priceLabel diffPriceLabel:(UILabel *)diffPricelabel riseLabel:(UILabel *)riseLabel lastQuotation:(QuotationModel *)lastQuotation nowQuotation:(QuotationModel *)nowQuotation {
+    
+    priceLabel.text = [NSString stringWithFormat:@"￥%.2lf", nowQuotation.mid];
+
+    if (lastQuotation) {
+        
+        CGFloat diffPrice = nowQuotation.mid - lastQuotation.mid;
+        
+        CGFloat rate = 100*diffPrice/(lastQuotation.mid*1.0);
+        
+        //差价
+        if (diffPrice >= 0) {
+            
+            
+            priceLabel.textColor = kThemeColor;
+            
+            diffPricelabel.textColor = kThemeColor;
+            
+            diffPricelabel.text = [NSString stringWithFormat:@"+%.2lf", diffPrice];
+            
+            riseLabel.text = [NSString stringWithFormat:@"+%.2lf%%", rate];
+            
+            riseLabel.textColor = kThemeColor;
+            
+        } else {
+            
+            priceLabel.textColor = kRiseColor;
+
+            diffPricelabel.textColor = kRiseColor;
+            
+            diffPricelabel.text = [NSString stringWithFormat:@"%.2lf", diffPrice];
+            
+            riseLabel.text = [NSString stringWithFormat:@"%.2lf%%", rate];
+            
+            riseLabel.textColor = kRiseColor;
+        }
+    
+    } else {
+        
+        priceLabel.textColor = kThemeColor;
+
+        diffPricelabel.text = @"+0.00";
+        
+        diffPricelabel.textColor = kThemeColor;
+        
+        riseLabel.text = @"+0%";
+        riseLabel.textColor = kThemeColor;
+    }
+}
+
+- (void)requestNoviceGuide {
+    
+    TLPageDataHelper *helper = [[TLPageDataHelper alloc] init];
+    
+    helper.code = @"801005";
+//    helper.showView = self.view;
+    helper.start = 1;
+    helper.limit = 20;
+    
+    helper.parameters[@"status"] = @"1";
+    helper.parameters[@"orderColumn"] = @"order_no";
+    helper.parameters[@"orderDir"] = @"asc";
+    
+    [helper modelClass:[GuideModel class]];
+    
+    [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
+        
+        self.guides = objs;
+        
+        self.quotationView.guides = objs;
+        
+    } failure:^(NSError *error) {
+        
+    }];
+    
 }
 
 - (void)didReceiveMemoryWarning {

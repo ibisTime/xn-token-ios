@@ -7,9 +7,12 @@
 //
 
 #import "WalletCell.h"
+
 #import "TLUIHeader.h"
 #import "AppColorMacro.h"
+
 #import "NSString+Extension.h"
+#import "UIButton+EnLargeEdge.h"
 
 @interface WalletCell ()
 //币种图标
@@ -18,8 +21,7 @@
 @property (nonatomic, strong) UILabel *currencyNameLbl;
 //币种金额
 @property (nonatomic, strong) UILabel *amountLbl;
-//冻结金额
-@property (nonatomic, strong) UILabel *freezingAmountLbl;
+
 
 @end
 
@@ -91,13 +93,15 @@
     }];
     
     //冻结金额
-    self.freezingAmountLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor2 font:12.0];
+    self.freezingAmountBtn = [UIButton buttonWithTitle:@"" titleColor:kTextColor2 backgroundColor:kClearColor titleFont:12.0];
     
-    [whiteView addSubview:self.freezingAmountLbl];
-    [self.freezingAmountLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.freezingAmountBtn setEnlargeEdge:20];
+    
+    [whiteView addSubview:self.freezingAmountBtn];
+    [self.freezingAmountBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.left.equalTo(self.currencyNameLbl.mas_left);
-        make.top.equalTo(self.amountLbl.mas_bottom).offset(13);
+        make.top.equalTo(self.amountLbl.mas_bottom).offset(3);
         
     }];
     
@@ -182,9 +186,11 @@
     
     self.coinIV.image = kImage(_currency.getImgName);
     
-    self.amountLbl.text = [_currency.amountString convertToSimpleRealCoin];
     
-    self.freezingAmountLbl.text = [NSString stringWithFormat:@"冻结 %@", [_currency.frozenAmountString convertToSimpleRealCoin]];
+    self.amountLbl.text = [_currency.amountString subNumber:_currency.frozenAmountString];
+    
+    [self.freezingAmountBtn setTitle:[NSString stringWithFormat:@"冻结 %@", [_currency.frozenAmountString convertToSimpleRealCoin]] forState:UIControlStateNormal];
+    
     
 }
 
