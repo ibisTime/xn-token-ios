@@ -47,7 +47,15 @@ typedef void(^PublishSellBlock)(PublishDraftModel *draft);
 @property (nonatomic, strong) TLPickerTextField *payLimitPicker;
 //付款方式选择
 @property (nonatomic, assign) NSInteger payTypeIndex;
-
+//开始时间
+@property (nonatomic, strong) NSMutableArray *startHourArr;
+//结束时间
+@property (nonatomic, strong) NSMutableArray *endHourArr;
+//任何时间
+@property (nonatomic, strong) UIButton *anyTimeBtn;
+//仅受信任
+@property (nonatomic, strong) UIButton *onlyTrustBtn;
+//
 @property (nonatomic, copy) PublishSellBlock sellBlock;
 //价格
 @property (nonatomic, copy) NSString *marketPrice;

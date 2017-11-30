@@ -10,6 +10,11 @@
 
 @implementation AdvertiseModel
 
++ (NSDictionary *)objectClassInArray{
+    
+    return @{@"displayTime" : [Displaytime class]};
+}
+
 - (NSString *)statusTitle {
     
     NSDictionary *dict = @{
@@ -44,4 +49,8 @@
     
     return rateStr;
 }
+@end
+
+@implementation Displaytime
+
 @end

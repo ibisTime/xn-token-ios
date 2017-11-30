@@ -8,7 +8,7 @@
 
 #import "TLBaseModel.h"
 
-@class TradeUserInfo, UserStatistics;
+@class TradeUserInfo, UserStatistics, Displaytime;
 
 @interface AdvertiseModel : TLBaseModel
 
@@ -59,6 +59,8 @@
 @property (nonatomic, strong) NSNumber *isTrust;
 //状态
 @property (nonatomic, copy) NSString *statusTitle;
+//时间
+@property (nonatomic, strong) NSArray<Displaytime *> *displayTime;
 
 @end
 
@@ -103,5 +105,19 @@
 @property (nonatomic, assign) NSInteger beiHaoPingCount;
 //好评率
 @property (nonatomic, copy) NSString *goodCommentRate;
+
+@end
+
+@interface Displaytime : NSObject
+
+@property (nonatomic, copy) NSString *week;
+
+@property (nonatomic, assign) NSInteger ID;
+
+@property (nonatomic, assign) NSInteger startTime;
+
+@property (nonatomic, assign) NSInteger endTime;
+
+@property (nonatomic, copy) NSString *adsCode;
 
 @end

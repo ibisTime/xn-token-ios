@@ -44,7 +44,11 @@
     [super viewWillAppear:animated];
     
     //获取广告
-    [self requestOrderList];
+    if ([TLUser user].userId) {
+        
+        [self requestOrderList];
+
+    }
 }
 
 - (void)viewDidLoad {
@@ -64,7 +68,7 @@
 }
 
 #pragma mark - Init
--(TopLabelUtil *)labelUnil {
+- (TopLabelUtil *)labelUnil {
     
     if (!_labelUnil) {
         
@@ -199,6 +203,7 @@
     helper.parameters[@"tradeCoin"] = @"ETH";
     helper.parameters[@"statusList"] = self.statusList;
     helper.parameters[@"tradeCurrency"] = @"CNY";
+    
     helper.parameters[@"belongUser"] = [TLUser user].userId;
     
     helper.tableView = self.tableView;

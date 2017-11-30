@@ -31,8 +31,10 @@
 @property (nonatomic, copy) NSString *tradeCurrency;
 //高级设置
 //0=任何人都可以交易、1=只有受信任的人可以交易
-@property (nonatomic, assign) BOOL onlyTrust;
+@property (nonatomic, copy) NSString *onlyTrust;
 //发布类型（0=存草稿，1=发布）
 @property (nonatomic, assign) BOOL isPublish;
+//时间数组
+@property (nonatomic, strong) NSArray *timeArr;
 
 @end

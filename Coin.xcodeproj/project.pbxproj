@@ -406,6 +406,7 @@
 		21205D071FCD6394003C6C7C /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 21205D011FCD6393003C6C7C /* README.txt */; };
 		21205D081FCD6394003C6C7C /* read_me.txt in Resources */ = {isa = PBXBuildFile; fileRef = 21205D051FCD6394003C6C7C /* read_me.txt */; };
 		21205D0C1FCD6512003C6C7C /* TLWXManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 21205D0A1FCD6512003C6C7C /* TLWXManager.m */; };
+		2120D8A31FCEE1DE00712600 /* HourPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2120D8A21FCEE1DE00712600 /* HourPickerView.m */; };
 		2121DCC21FC6F17C001FC2E3 /* TradeSellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2121DCC11FC6F17C001FC2E3 /* TradeSellView.m */; };
 		2121DCC51FC6F19E001FC2E3 /* SellConfirmView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2121DCC41FC6F19E001FC2E3 /* SellConfirmView.m */; };
 		2121DCCE1FC7127C001FC2E3 /* OrderListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2121DCCD1FC7127C001FC2E3 /* OrderListCell.m */; };
@@ -1309,6 +1310,8 @@
 		21205D051FCD6394003C6C7C /* read_me.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = read_me.txt; sourceTree = "<group>"; };
 		21205D0A1FCD6512003C6C7C /* TLWXManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLWXManager.m; sourceTree = "<group>"; };
 		21205D0B1FCD6512003C6C7C /* TLWXManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLWXManager.h; sourceTree = "<group>"; };
+		2120D8A11FCEE1DE00712600 /* HourPickerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HourPickerView.h; sourceTree = "<group>"; };
+		2120D8A21FCEE1DE00712600 /* HourPickerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HourPickerView.m; sourceTree = "<group>"; };
 		2121DCC01FC6F17C001FC2E3 /* TradeSellView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TradeSellView.h; sourceTree = "<group>"; };
 		2121DCC11FC6F17C001FC2E3 /* TradeSellView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TradeSellView.m; sourceTree = "<group>"; };
 		2121DCC31FC6F19E001FC2E3 /* SellConfirmView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SellConfirmView.h; sourceTree = "<group>"; };
@@ -2960,6 +2963,8 @@
 			children = (
 				215979681FB82BC10029F177 /* CustomPickerView.h */,
 				215979691FB82BC10029F177 /* CustomPickerView.m */,
+				2120D8A11FCEE1DE00712600 /* HourPickerView.h */,
+				2120D8A21FCEE1DE00712600 /* HourPickerView.m */,
 				211DE64C1FB58B4B002FCF3D /* TLPickerTextField.h */,
 				211DE6421FB58B4B002FCF3D /* TLPickerTextField.m */,
 				211DE63D1FB58B4B002FCF3D /* TLImagePicker.h */,
@@ -4355,6 +4360,7 @@
 				211DE6B61FB58B4C002FCF3D /* UIView+Extension.m in Sources */,
 				21A7F3141FB2E2F900FAA0A2 /* TLPwdRelatedVC.m in Sources */,
 				2EE950DA1FB06AA900429257 /* TLBannerCell.m in Sources */,
+				2120D8A31FCEE1DE00712600 /* HourPickerView.m in Sources */,
 				211DE6A01FB58B4C002FCF3D /* TLDatePicker.m in Sources */,
 				211DE6AA1FB58B4C002FCF3D /* TLImagePicker.m in Sources */,
 				211C040D1FC6604800E51FCF /* MKMapView+ZoomLevel.m in Sources */,

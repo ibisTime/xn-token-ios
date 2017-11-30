@@ -50,6 +50,8 @@
     [self queryCoinQuotation];
     //获取提示
     [self requestTradeRemind];
+    //详情查广告
+    [self requestAdvertiseDetail];
 }
 
 #pragma mark - Init
@@ -73,11 +75,6 @@
         [weakSelf publishAdvertisementWithDraft:draft];
     };
     
-    if (self.advertise) {
-        
-        self.publishView.advertise = self.advertise;
-        
-    }
     self.publishView.backgroundColor = kBackgroundColor;
     
     [self.view addSubview:self.publishView];
@@ -106,6 +103,8 @@
     
     draft.isPublish = NO;
     
+    draft.onlyTrust = [NSString stringWithFormat:@"%d", self.publishView.onlyTrustBtn.selected];
+
     [self publishAdvertisementWithDraft:draft];
 }
 
@@ -113,7 +112,7 @@
     
     [super viewDidLayoutSubviews];
     
-    self.publishView.scrollView.contentSize = CGSizeMake(kScreenWidth, self.publishView.highSettingView.yy + 10);
+    self.publishView.scrollView.contentSize = CGSizeMake(kScreenWidth, self.publishView.highSettingView.yy);
 }
 
 #pragma mark - Data
@@ -145,6 +144,8 @@
 }
 
 - (void)publishAdvertisementWithDraft:(PublishDraftModel *)draft {
+    
+    CoinWeakSelf;
     
     if (![draft.premiumRate valid]) {
         
@@ -202,11 +203,17 @@
     
     
     http.code = self.type == PublishBuyPositionTypePublish ? @"625220": @"625221";
+    
+    if (self.type == PublishBuyPositionTypeDraft) {
+        
+        http.parameters[@"adsCode"] = self.advertise.code;
+    }
+    
     http.parameters[@"userId"] = [TLUser user].userId;
     http.parameters[@"leaveMessage"] = draft.leaveMessage;
     http.parameters[@"maxTrade"] = draft.maxTrade;
     http.parameters[@"minTrade"] = draft.minTrade;
-    http.parameters[@"onlyTrust"] = @"0";
+    http.parameters[@"onlyTrust"] = draft.onlyTrust;
     http.parameters[@"payLimit"] = draft.payLimit;
     http.parameters[@"payType"] = draft.payType;
     http.parameters[@"premiumRate"] = premiumRate;
@@ -218,6 +225,25 @@
     http.parameters[@"tradeCoin"] = @"ETH";
     //0=买币, 1=卖币
     http.parameters[@"tradeType"] = @"0";
+    
+    if (!self.publishView.anyTimeBtn.selected) {
+        
+        NSMutableArray *timeArr = [NSMutableArray array];
+        
+        [self.publishView.startHourArr enumerateObjectsUsingBlock:^(NSString *  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            
+            NSString *weekDay = [NSString stringWithFormat:@"%ld", idx+1];
+            
+            NSDictionary *temp = @{@"startTime": obj,
+                                   @"endTime": weakSelf.publishView.endHourArr[idx],
+                                   @"week": weekDay,
+                                   };
+            
+            [timeArr addObject:temp];
+        }];
+        
+        http.parameters[@"displayTime"] = timeArr;
+    }
     
     [http postWithSuccess:^(id responseObject) {
         
@@ -299,6 +325,33 @@
     } failure:^(NSError *error) {
         
     }];
+}
+
+- (void)requestAdvertiseDetail {
+    
+    if (self.type == PublishBuyPositionTypePublish) {
+        
+        return ;
+    }
+    
+    TLNetworking *http = [TLNetworking new];
+    
+    http.showView = self.view;
+    http.code = @"625226";
+    http.parameters[@"adsCode"] = self.advertise.code;
+    http.parameters[@"userId"] = [TLUser user].userId;
+    
+    [http postWithSuccess:^(id responseObject) {
+        
+        self.advertise = [AdvertiseModel tl_objectWithDictionary:responseObject[@"data"]];
+        
+        self.publishView.advertise = self.advertise;
+        
+    } failure:^(NSError *error) {
+        
+        
+    }];
+    
 }
 
 - (void)didReceiveMemoryWarning {
