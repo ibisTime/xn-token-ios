@@ -428,8 +428,6 @@
         
     }];
     
-    [promptBtn setTitleRight];
-    
     //text
     UILabel *textLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:13.0];
     
@@ -633,7 +631,7 @@
     
     _tradeRemind = tradeRemind;
     
-    self.tradeRemindLbl.text = tradeRemind;
+    [self.tradeRemindLbl labelWithTextString:tradeRemind lineSpace:5];
 }
 
 #pragma mark - Events

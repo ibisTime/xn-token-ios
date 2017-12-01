@@ -20,6 +20,7 @@
 #import "NSString+Check.h"
 #import "UILabel+Extension.h"
 #import "UIBarButtonItem+convience.h"
+#import "UIButton+EnLargeEdge.h"
 #import "APICodeMacro.h"
 
 #import "TLUserLoginVC.h"
@@ -426,6 +427,8 @@
         
         [self.tradeView.tradeRemindBtn setTitle:responseObject[@"data"][@"remark"] forState:UIControlStateNormal];
         
+        [self.tradeView.tradeRemindBtn setTitleRight];
+
     } failure:^(NSError *error) {
         
         

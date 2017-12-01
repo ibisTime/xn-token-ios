@@ -15,6 +15,8 @@
 #define kIconContactsNormal          [[UIImage imageNamed:@"contacts_normal"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]
 #define kIconContactsHover           [[UIImage imageNamed:@"contacts_hover"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]
 
+
+
 #define kIconSetupNormal             [[UIImage imageNamed:@"setup_normal"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]
 #define kIconSetupHover              [[UIImage imageNamed:@"setup_hover"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]
 

@@ -72,7 +72,7 @@
 - (void)configServiceAddress {
     
     //配置环境
-    [AppConfig config].runEnv = RunEnvTest;
+    [AppConfig config].runEnv = RunEnvDev;
 }
 
 - (void)configWeChat {
