@@ -80,6 +80,7 @@
         _loginParam.appidAt3rd = self.imModel.txAppCode;
     
     }
+    
     //初始化SDK
     [[IMAPlatform sharedInstance] configIMSDK:_loginParam.config];
     //另一台设备登录问题
@@ -87,21 +88,17 @@
     
     [[TIMManager sharedInstance] login:_loginParam succ:^{
         
-        //        [TLAlert alertWithSucces:@"登录成功"];
         //消息栏消息数
         NSInteger unReadCount = [[IMAPlatform sharedInstance].conversationMgr unReadMessageCount];
         
         [TLUser user].unReadMsgCount = unReadCount;
         
         //配置APNs
-        [self configAPNs];
-        
-        
+//        [self configAPNs];
     } fail:^(int code, NSString *msg) {
         
         NSLog(@"LoginFailureCode = %d, errorMsg = %@", code, msg);
         
-        //        [TLAlert alertWithError:@"登录失败"];
         
     }];
 
