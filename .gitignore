@@ -10,7 +10,7 @@
 *.perspectivev3
 !default.perspectivev3
 xcuserdata
-
+Podfile.lock
 *.moved-aside
 DerivedData
 .idea/

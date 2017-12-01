@@ -116,7 +116,7 @@
     helper.parameters[@"minPrice"] = self.minPrice;
     helper.parameters[@"maxPrice"] = self.maxPrice;
     helper.parameters[@"payType"] = self.payType;
-    helper.parameters[@"tradeType"] = @"1";
+//    helper.parameters[@"tradeType"] = @"1";
     
     helper.tableView = self.tableView;
     
