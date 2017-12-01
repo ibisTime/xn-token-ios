@@ -4209,7 +4209,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -4749,7 +4749,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = V9JFY59G9V;
+				DEVELOPMENT_TEAM = 6PF7VHZB5Z;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Coin/Extension/腾讯云",
@@ -4763,7 +4763,7 @@
 					"$(PROJECT_DIR)/Coin/Classes/Modules/Chat/CommonLibrary/BlocksKit",
 					"$(PROJECT_DIR)/Coin/Extension/WeChat",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.cdkj.coin.dev;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bcoin.coin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -4776,7 +4776,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = V9JFY59G9V;
+				DEVELOPMENT_TEAM = 6PF7VHZB5Z;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Coin/Extension/腾讯云",
@@ -4790,7 +4790,7 @@
 					"$(PROJECT_DIR)/Coin/Classes/Modules/Chat/CommonLibrary/BlocksKit",
 					"$(PROJECT_DIR)/Coin/Extension/WeChat",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.cdkj.coin.dev;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bcoin.coin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 			};

@@ -50,13 +50,13 @@
     
     [http postWithSuccess:^(id responseObject) {
         
-//        self.imModel = [IMModel mj_objectWithKeyValues:responseObject[@"data"]];
-//
-//        [AppConfig config].chatAppId = self.imModel.txAppCode;
-//
-//        [AppConfig config].chatAccountType = self.imModel.accountType;
-//        //登录
-//        [self configLoginParam];
+        self.imModel = [IMModel mj_objectWithKeyValues:responseObject[@"data"]];
+
+        [AppConfig config].chatAppId = self.imModel.txAppCode;
+
+        [AppConfig config].chatAccountType = self.imModel.accountType;
+        //登录
+        [self configLoginParam];
         
     } failure:^(NSError *error) {
         
@@ -68,8 +68,7 @@
 - (void)configLoginParam {
     
     BOOL isAutoLogin = [IMAPlatform isAutoLogin];
-    if (isAutoLogin)
-    {
+    if (isAutoLogin) {
         _loginParam = [IMALoginParam loadFromLocal];
     }
     else
@@ -86,7 +85,25 @@
     //另一台设备登录问题
     [[IMAPlatform sharedInstance] configOnLoginSucc:_loginParam];
     
-    [self loginIM];
+    [[TIMManager sharedInstance] login:_loginParam succ:^{
+        
+        //        [TLAlert alertWithSucces:@"登录成功"];
+        //消息栏消息数
+        NSInteger unReadCount = [[IMAPlatform sharedInstance].conversationMgr unReadMessageCount];
+        
+        [TLUser user].unReadMsgCount = unReadCount;
+        
+        //配置APNs
+        [self configAPNs];
+        
+        
+    } fail:^(int code, NSString *msg) {
+        
+        NSLog(@"LoginFailureCode = %d, errorMsg = %@", code, msg);
+        
+        //        [TLAlert alertWithError:@"登录失败"];
+        
+    }];
 
 //    if (isAutoLogin && [_loginParam isVailed])
 //    {
@@ -104,29 +121,29 @@
 }
 
 
-- (void)loginIM {
-    
-    [[TIMManager sharedInstance] login:_loginParam succ:^{
-        
-//        [TLAlert alertWithSucces:@"登录成功"];
-        //消息栏消息数
-        NSInteger unReadCount = [[IMAPlatform sharedInstance].conversationMgr unReadMessageCount];
-        
-        [TLUser user].unReadMsgCount = unReadCount;
-        
-        //配置APNs
-        [self configAPNs];
-        
-        
-    } fail:^(int code, NSString *msg) {
-        
-        NSLog(@"LoginFailureCode = %d, errorMsg = %@", code, msg);
-        
-//        [TLAlert alertWithError:@"登录失败"];
-        
-    }];
-    
-}
+//- (void)loginIM {
+//
+//    [[TIMManager sharedInstance] login:_loginParam succ:^{
+//
+////        [TLAlert alertWithSucces:@"登录成功"];
+//        //消息栏消息数
+//        NSInteger unReadCount = [[IMAPlatform sharedInstance].conversationMgr unReadMessageCount];
+//
+//        [TLUser user].unReadMsgCount = unReadCount;
+//
+//        //配置APNs
+//        [self configAPNs];
+//
+//
+//    } fail:^(int code, NSString *msg) {
+//
+//        NSLog(@"LoginFailureCode = %d, errorMsg = %@", code, msg);
+//
+////        [TLAlert alertWithError:@"登录失败"];
+//
+//    }];
+//
+//}
 
 - (void)configAPNs {
     
