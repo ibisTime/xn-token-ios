@@ -12,13 +12,33 @@
 
 @implementation BillModel
 
+- (NSString *)getStatusName {
+    
+    NSDictionary *dict = @{
+                           
+                           @"1" : @"待对账",
+                           @"3" : @"已对账且账已平",
+                           @"4": @"帐不平待调账审批",
+                           @"5" : @"已对账且账不平",
+                           @"6" : @"无需对账",
+                           
+                           };
+    
+    return dict[self.status];
+    
+}
+
 - (NSString *)getBizName {
     NSDictionary *dict = @{
                            
                            @"charge" : @"ETH充值",
                            @"withdraw" : @"ETH取现",
-                           @"buy": @"平台转入",
-                           @"sell" : @"平台转出",
+                           @"buy": @"交易买入",
+                           @"sell" : @"交易卖出",
+                           @"tradefrozen" : @"交易冻结",
+                           @"tradeunfrozen" : @"交易解冻",
+                           @"withdrawfrozen": @"取现冻结",
+                           @"withdrawunfrozen": @"取现解冻",
                            @"tradefee" : @"交易手续费",
                            @"withdrawfee" : @"提现手续费",
                            @"invite" : @"邀请好友送",
@@ -28,32 +48,5 @@
     return dict[self.bizType];
     
 }
-
-- (NSString *)getImgName {
-    
-    NSDictionary *dict = @{
-                           @"charge" : @"账单-充币",
-                           @"withdraw" : @"账单-提币",
-                           @"buy": @"账单-买入",
-                           @"sell" : @"账单-卖出",
-                           @"tradefee" : @"账单-手续费",
-                           @"withdrawfee" : @"账单-手续费",
-                           @"invite" : @"账单-活动奖励",
-                           
-                           };
-    
-    return dict[self.bizType];
-}
-
-//- (CGFloat)dHeightValue {
-//    
-//    CGFloat width = kScreenWidth - 15 - 40 - 15 - 36 - 15 - 15;
-//
-////    CGSize size = [self.bizNote calculateStringSize:CGSizeMake(width, MAXFLOAT) font:Font(14)];
-//
-//    CGSize size = [self.bizNote ca];
-//    return size.height - [Font(14) lineHeight] + 3;
-//
-//}
 
 @end

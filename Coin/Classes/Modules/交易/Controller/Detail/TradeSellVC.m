@@ -98,8 +98,8 @@
 
 - (void)addOffItem {
     
-    if ([self.advertise.status isEqualToString:@"1"]) {
-        
+    if ([self.advertise.status isEqualToString:@"1"] || [self.advertise.status isEqualToString:@"2"]) {
+
         [UIBarButtonItem addRightItemWithTitle:@"下架" titleColor:kTextColor frame:CGRectMake(0, 0, 40, 44) vc:self action:@selector(advertiseOff)];
         
     }

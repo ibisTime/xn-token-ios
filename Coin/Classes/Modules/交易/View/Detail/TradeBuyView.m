@@ -53,6 +53,9 @@
 
 //底部
 @property (nonatomic, strong) UIView *bottomView;
+//交易提醒
+@property (nonatomic, strong) UILabel *tradeRemindLbl;
+
 
 @end
 
@@ -413,7 +416,7 @@
     }];
     
     //交易提醒
-    UIButton *promptBtn = [UIButton buttonWithTitle:@"交易提醒" titleColor:kTextColor backgroundColor:kClearColor titleFont:15.0];
+    UIButton *promptBtn = [UIButton buttonWithTitle:@"" titleColor:kTextColor backgroundColor:kClearColor titleFont:15.0];
     
     [promptBtn setImage:kImage(@"交易提醒") forState:UIControlStateNormal];
     
@@ -421,13 +424,12 @@
     [promptBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.top.left.equalTo(@12);
-        make.width.equalTo(@135);
+//        make.width.equalTo(@135);
         
     }];
     
     [promptBtn setTitleRight];
     
-    NSString *text = @"1.交易前请详细了解卖家的交易信息;\n2.请通过平台进行沟通约定";
     //text
     UILabel *textLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:13.0];
     
@@ -442,7 +444,10 @@
         
     }];
     
-    [textLbl labelWithTextString:text lineSpace:5];
+//    [textLbl labelWithTextString:text lineSpace:5];
+
+    self.tradeRemindLbl = textLbl;
+    
 }
 
 - (void)initBottomView {
@@ -622,6 +627,13 @@
     
     self.bottomView.hidden = [self.advertise.userId isEqualToString:userId] ? YES: NO;
     
+}
+
+- (void)setTradeRemind:(NSString *)tradeRemind {
+    
+    _tradeRemind = tradeRemind;
+    
+    self.tradeRemindLbl.text = tradeRemind;
 }
 
 #pragma mark - Events

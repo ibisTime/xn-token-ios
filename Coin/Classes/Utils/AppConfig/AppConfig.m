@@ -46,24 +46,22 @@ void TLLog(NSString *format, ...) {
             
         case RunEnvRelease: {
             
+            self.qiniuDomain = @"http://ozfszueqz.bkt.clouddn.com";
             self.addr = @"http://121.40.113.128:5301";
-//            self.shareBaseUrl = @"http://cm.tour.hichengdai.com/?#/home/recommend?userReferee=";
 
         }break;
             
         case RunEnvDev: {
-            
+            //apidev.bcoin.im:4001
             self.qiniuDomain = @"http://ozfszueqz.bkt.clouddn.com";
-            self.addr = @"http://apidev.bcoin.im:4001";
-//            self.shareBaseUrl = @"http://cm.tour.hichengdai.com/?#/home/recommend?userReferee=";
-
+            self.addr = @"http://47.96.161.183:4001";
+            
         }break;
             
         case RunEnvTest: {
             
             self.qiniuDomain = @"http://ozfszueqz.bkt.clouddn.com";
             self.addr = @"http://47.52.77.214:4001";
-//            self.shareBaseUrl = @"http://cm.tour.hichengdai.com/?#/home/recommend?userReferee=";
 
         }break;
             

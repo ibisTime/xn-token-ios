@@ -19,6 +19,9 @@ typedef  NS_ENUM(NSInteger,TLPwdType) {
 
 @interface TLPwdRelatedVC : TLAccountSetBaseVC
 
+//是否从钱包模块进入
+@property (nonatomic, assign) BOOL isWallet;
+
 - (instancetype)initWithType:(TLPwdType)type;
 
 @property (nonatomic,copy) void(^success)(void);

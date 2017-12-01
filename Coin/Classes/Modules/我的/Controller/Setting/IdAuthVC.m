@@ -118,17 +118,22 @@
     
     [http postWithSuccess:^(id responseObject) {
         
+        [TLUser user].realName = self.realName.text;
+        
+        [TLUser user].idNo = self.idCard.text;
+        
         if (self.success) {
             
-            self.success()
+            self.success();
             
         } else {
             
             [TLAlert alertWithSucces:@"身份认证成功"];
 
+            [self.navigationController popViewControllerAnimated:YES];
+
         }
         
-        [self.navigationController popViewControllerAnimated:YES];
         
 //        RealNameAuthResultVC *resultVC = [RealNameAuthResultVC new];
 //

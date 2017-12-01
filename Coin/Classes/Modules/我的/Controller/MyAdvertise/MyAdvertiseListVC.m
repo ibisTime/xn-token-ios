@@ -107,7 +107,6 @@
     helper.start = 1;
     helper.limit = 10;
     helper.parameters[@"coin"] = @"ETH";
-    helper.parameters[@"tradeType"] = @"1";
     helper.parameters[@"userId"] = [TLUser user].userId;
     
     if (self.type == MyAdvertiseTypeDraft) {
@@ -194,7 +193,7 @@
         
     } else if (self.type == MyAdvertiseTypeDidPublish) {
         
-        if (index == 0) {
+        if (index == 1) {
             
             TradeBuyVC *buyVC = [TradeBuyVC new];
             
@@ -204,7 +203,7 @@
             
             [self.navigationController pushViewController:buyVC animated:YES];
             
-        } else if (index == 1) {
+        } else if (index == 0) {
             
             TradeSellVC *sellVC = [TradeSellVC new];
             

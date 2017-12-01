@@ -51,5 +51,9 @@ typedef void(^TradeBuyBlock)(TradeBuyType tradeType);
 @property (nonatomic, copy) NSString *tradeAmount;
 //交易数量
 @property (nonatomic, copy) NSString *tradeNum;
+//交易提醒
+@property (nonatomic, copy) NSString *tradeRemind;
+//
+@property (nonatomic, strong) UIButton *tradeRemindBtn;
 
 @end

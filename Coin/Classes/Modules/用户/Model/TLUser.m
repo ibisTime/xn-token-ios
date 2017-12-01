@@ -179,6 +179,14 @@ NSString *const kUserInfoChange = @"kUserInfoChange";
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:USER_INFO_DICT_KEY];
     
 //    [[NSNotificationCenter defaultCenter] postNotificationName:@"user_login_out_notification" object:nil];
+    
+    [[TIMManager sharedInstance] logout:^{
+        
+    } fail:^(int code, NSString *msg) {
+        
+        NSLog(@"logout fail: code=%d err=%@", code, msg);
+
+    }];
 }
 
 

@@ -11,6 +11,7 @@
 #import "UIBarButtonItem+convience.h"
 #import "TLAlert.h"
 #import "NSString+Check.h"
+#import "UIViewController+BackButtonHander.h"
 #import "APICodeMacro.h"
 
 #import "BillVC.h"
@@ -20,6 +21,13 @@
 
 #import "QRCodeVC.h"
 #import "CoinAddressListVC.h"
+
+typedef NS_ENUM(NSInteger, AddressType) {
+    
+    AddressTypeSelectAddress = 0,       //选择地址
+    AddressTypeScan,                    //扫码
+    AddressTypeCopy,                    //复制粘贴
+};
 
 @interface WithdrawalsCoinVC ()
 
@@ -37,6 +45,10 @@
 @property (nonatomic, strong) UISwitch *sw;
 //手续费率
 @property (nonatomic, copy) NSString *withdrawFee;
+//地址类型
+@property (nonatomic, assign) AddressType addressType;
+//地址
+@property (nonatomic, strong) CoinAddressModel *addressModel;
 
 @end
 
@@ -53,6 +65,13 @@
     [self initSubviews];
     //获取手续费费率
     [self requestWithdrawFee];
+}
+
+- (BOOL)navigationShouldPopOnBackButton {
+    
+    [self.navigationController popToRootViewControllerAnimated:YES];
+    
+    return NO;
 }
 
 #pragma mark - Init
@@ -72,7 +91,10 @@
     
     self.balanceTF.enabled = NO;
     
-    self.balanceTF.text = [NSString stringWithFormat:@"%@ %@", [self.currency.amountString subNumber:self.currency.frozenAmountString], self.currency.currency];
+    NSString *leftAmount = [self.currency.amountString subNumber:self.currency.frozenAmountString];
+
+    
+    self.balanceTF.text = [NSString stringWithFormat:@"%@ %@", [leftAmount convertToSimpleRealCoin], self.currency.currency];
     
     [self.view addSubview:self.balanceTF];
     
@@ -364,14 +386,25 @@
 }
 
 - (void)clickConfirm:(UIButton *)sender {
+
+    [self.view endEditing:YES];
     
-    [TLAlert alertWithTitle:@"请输入资金密码" msg:@"" confirmMsg:@"确定" cancleMsg:@"取消" placeHolder:@"请输入资金密码" maker:self cancle:^(UIAlertAction *action) {
+    if (self.addressType == AddressTypeSelectAddress && [self.addressModel.status isEqualToString:@"0"]) {
         
-    } confirm:^(UIAlertAction *action, UITextField *textField) {
+        [TLAlert alertWithTitle:@"请输入资金密码" msg:@"" confirmMsg:@"确定" cancleMsg:@"取消" placeHolder:@"请输入资金密码" maker:self cancle:^(UIAlertAction *action) {
+            
+        } confirm:^(UIAlertAction *action, UITextField *textField) {
+            
+            [self confirmWithdrawalsWithPwd:textField.text];
+            
+        }];
         
-        [self confirmWithdrawalsWithPwd:textField.text];
-        
-    }];
+        return ;
+
+    }
+    
+    [self confirmWithdrawalsWithPwd:nil];
+
 }
 
 - (void)textDidChange:(UITextField *)sender {
@@ -402,12 +435,15 @@
             
             CoinAddressListVC *addressVC = [CoinAddressListVC new];
             
-            addressVC.addressBlock = ^(NSString *address) {
+            addressVC.addressBlock = ^(CoinAddressModel *addressModel) {
                 
-                weakSelf.receiveAddressLbl.text = address;
+                weakSelf.receiveAddressLbl.text = addressModel.address;
                 
                 weakSelf.receiveAddressLbl.textColor = kTextColor;
 
+                weakSelf.addressType = AddressTypeSelectAddress;
+
+                weakSelf.addressModel = addressModel;
             };
             
             [self.navigationController pushViewController:addressVC animated:YES];
@@ -423,6 +459,9 @@
                 weakSelf.receiveAddressLbl.text = result;
                 
                 weakSelf.receiveAddressLbl.textColor = kTextColor;
+                
+                weakSelf.addressType = AddressTypeScan;
+
             };
             
             [self.navigationController pushViewController:qrCodeVC animated:YES];
@@ -439,11 +478,12 @@
                 
                 self.receiveAddressLbl.textColor = kTextColor;
                 
+                self.addressType = AddressTypeCopy;
+                
             } else {
                 
                 [TLAlert alertWithInfo:@"粘贴内容为空"];
             }
-            
             
         }break;
             
@@ -469,10 +509,13 @@
         return ;
     }
     
-    if (![pwd valid]) {
+    if (self.addressType == AddressTypeSelectAddress && [self.addressModel.status isEqualToString:@"0"]) {
         
-        [TLAlert alertWithInfo:@"请输入资金密码"];
-        return ;
+        if (![pwd valid]) {
+            
+            [TLAlert alertWithInfo:@"请输入资金密码"];
+            return ;
+        }
     }
     
     TLNetworking *http = [TLNetworking new];
@@ -491,6 +534,12 @@
     [http postWithSuccess:^(id responseObject) {
         
         [TLAlert alertWithSucces:@"提币申请提交成功"];
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            
+            [self.navigationController popToRootViewControllerAnimated:YES];
+            
+        });
         
     } failure:^(NSError *error) {
         

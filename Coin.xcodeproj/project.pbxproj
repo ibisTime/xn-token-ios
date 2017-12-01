@@ -391,6 +391,7 @@
 		211DE6C61FB58B4C002FCF3D /* HttpLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 211DE69E1FB58B4C002FCF3D /* HttpLogger.m */; };
 		211DE6C71FB58B4C002FCF3D /* HttpRequestObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 211DE69F1FB58B4C002FCF3D /* HttpRequestObject.m */; };
 		211DE6CA1FB5A586002FCF3D /* RechargeCoinVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 211DE6C91FB5A586002FCF3D /* RechargeCoinVC.m */; };
+		211EAD901FD0FC500037FBA8 /* UIViewController+BackButtonHander.m in Sources */ = {isa = PBXBuildFile; fileRef = 211EAD8F1FD0FC500037FBA8 /* UIViewController+BackButtonHander.m */; };
 		211F78141FCAFBCA0023F133 /* WaitingOrderVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 211F78131FCAFBCA0023F133 /* WaitingOrderVC.m */; };
 		211FAC4F1FC2742C00DC37B0 /* PublishBuyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 211FAC4E1FC2742C00DC37B0 /* PublishBuyView.m */; };
 		21205CCB1FCCFD24003C6C7C /* FansVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21205CCA1FCCFD24003C6C7C /* FansVC.m */; };
@@ -1286,6 +1287,8 @@
 		211DE69F1FB58B4C002FCF3D /* HttpRequestObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpRequestObject.m; sourceTree = "<group>"; };
 		211DE6C81FB5A586002FCF3D /* RechargeCoinVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RechargeCoinVC.h; sourceTree = "<group>"; };
 		211DE6C91FB5A586002FCF3D /* RechargeCoinVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RechargeCoinVC.m; sourceTree = "<group>"; };
+		211EAD8E1FD0FC500037FBA8 /* UIViewController+BackButtonHander.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIViewController+BackButtonHander.h"; sourceTree = "<group>"; };
+		211EAD8F1FD0FC500037FBA8 /* UIViewController+BackButtonHander.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+BackButtonHander.m"; sourceTree = "<group>"; };
 		211F78121FCAFBCA0023F133 /* WaitingOrderVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WaitingOrderVC.h; sourceTree = "<group>"; };
 		211F78131FCAFBCA0023F133 /* WaitingOrderVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WaitingOrderVC.m; sourceTree = "<group>"; };
 		211FAC4D1FC2742C00DC37B0 /* PublishBuyView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PublishBuyView.h; sourceTree = "<group>"; };
@@ -3206,6 +3209,7 @@
 		211DE65C1FB58B4B002FCF3D /* UIKit */ = {
 			isa = PBXGroup;
 			children = (
+				211EAD8D1FD0FC210037FBA8 /* UIViewController */,
 				211DE65D1FB58B4B002FCF3D /* UILabel */,
 				211DE6621FB58B4B002FCF3D /* UIButton */,
 				211DE6671FB58B4B002FCF3D /* UIColor */,
@@ -3375,6 +3379,15 @@
 				211DE69C1FB58B4C002FCF3D /* HttpRequestService.m */,
 			);
 			path = AFNetworkingTool;
+			sourceTree = "<group>";
+		};
+		211EAD8D1FD0FC210037FBA8 /* UIViewController */ = {
+			isa = PBXGroup;
+			children = (
+				211EAD8E1FD0FC500037FBA8 /* UIViewController+BackButtonHander.h */,
+				211EAD8F1FD0FC500037FBA8 /* UIViewController+BackButtonHander.m */,
+			);
+			path = UIViewController;
 			sourceTree = "<group>";
 		};
 		211FAC481FC26A6800DC37B0 /* PublishBuy */ = {
@@ -4293,6 +4306,7 @@
 				211C045E1FC6604800E51FCF /* IMALoginParam.m in Sources */,
 				2182D2F41FC8057D008EDCE4 /* OrderDetailVC.m in Sources */,
 				211C047D1FC6604800E51FCF /* MyEmojBoardView.m in Sources */,
+				211EAD901FD0FC500037FBA8 /* UIViewController+BackButtonHander.m in Sources */,
 				21223CB71FBDB2D200057444 /* WebVC.m in Sources */,
 				2E394FFD1FB059C100BA0829 /* TLBaseVC.m in Sources */,
 				215979641FB81CED0029F177 /* BillModel.m in Sources */,

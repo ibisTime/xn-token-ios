@@ -226,56 +226,7 @@
           
         case 1:
         {
-            
-            //判断是否认证身份
-            if (![[TLUser user].realName valid]) {
-                
-                IdAuthVC *idAuth = [IdAuthVC new];
-                
-                idAuth.success = ^{
-                    
-                    //身份认证成功后，判断是否设置资金密码
-                    if ([[TLUser user].tradepwdFlag isEqualToString:@"0"]) {
-                        
-                        [TLAlert alertWithInfo:@"身份认证成功, 请设置资金密码"];
-
-                        TLPwdType pwdType = TLPwdTypeSetTrade;
-                        
-                        TLPwdRelatedVC *pwdRelatedVC = [[TLPwdRelatedVC alloc] initWithType:pwdType];
-                        
-                        pwdRelatedVC.success = ^{
-                            
-                            WithdrawalsCoinVC *coinVC = [WithdrawalsCoinVC new];
-                            
-                            coinVC.currency = currencyModel;
-                            
-                            [weakSelf.navigationController pushViewController:coinVC animated:YES];
-                        };
-                        
-                        [self.navigationController pushViewController:pwdRelatedVC animated:YES];
-                        
-                        return ;
-                        
-                    } else {
-                        
-                        [TLAlert alertWithInfo:@"身份认证成功"];
-
-                        WithdrawalsCoinVC *coinVC = [WithdrawalsCoinVC new];
-                        
-                        coinVC.currency = currencyModel;
-                        
-                        [self.navigationController pushViewController:coinVC animated:YES];
-                    }
-                };
-                
-                [self.navigationController pushViewController:idAuth animated:YES];
-            }
-    
-            WithdrawalsCoinVC *coinVC = [WithdrawalsCoinVC new];
-            
-            coinVC.currency = currencyModel;
-            
-            [self.navigationController pushViewController:coinVC animated:YES];
+            [self clickWithdrawWithCurrency:currencyModel];
             
         }break;
             
@@ -308,6 +259,64 @@
         default:
             break;
     }
+}
+
+- (void)clickWithdrawWithCurrency:(CurrencyModel *)currencyModel {
+    
+    CoinWeakSelf;
+    
+    //判断是否认证身份
+    if (![[TLUser user].realName valid]) {
+        
+        IdAuthVC *idAuth = [IdAuthVC new];
+        
+        idAuth.success = ^{
+            
+            //身份认证成功后，判断是否设置资金密码
+            if ([[TLUser user].tradepwdFlag isEqualToString:@"0"]) {
+                
+                [TLAlert alertWithInfo:@"身份认证成功, 请设置资金密码"];
+                
+            } else {
+                
+                [TLAlert alertWithInfo:@"身份认证成功"];
+                
+            }
+            
+            [weakSelf clickWithdrawWithCurrency:currencyModel];
+
+        };
+        
+        [self.navigationController pushViewController:idAuth animated:YES];
+        
+        return ;
+    }
+    
+    //身份认证成功后，判断是否设置资金密码
+    if ([[TLUser user].tradepwdFlag isEqualToString:@"0"]) {
+        
+        TLPwdType pwdType = TLPwdTypeSetTrade;
+        
+        TLPwdRelatedVC *pwdRelatedVC = [[TLPwdRelatedVC alloc] initWithType:pwdType];
+        
+        pwdRelatedVC.isWallet = YES;
+        
+        pwdRelatedVC.success = ^{
+            
+            [weakSelf clickWithdrawWithCurrency:currencyModel];
+        };
+        
+        [self.navigationController pushViewController:pwdRelatedVC animated:YES];
+        
+        return ;
+        
+    }
+    
+    WithdrawalsCoinVC *coinVC = [WithdrawalsCoinVC new];
+    
+    coinVC.currency = currencyModel;
+    
+    [self.navigationController pushViewController:coinVC animated:YES];
 }
 
 @end

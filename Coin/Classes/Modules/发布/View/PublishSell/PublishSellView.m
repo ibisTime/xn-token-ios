@@ -340,8 +340,8 @@
                 
                 [self.scrollView addSubview:textField];
                 
-                textField.keyboardType = UIKeyboardTypeNumberPad;
-                
+                textField.keyboardType = UIKeyboardTypeDecimalPad;
+
                 [textField mas_makeConstraints:^(MASConstraintMaker *make) {
                     
                     make.left.equalTo(@0);
@@ -1245,16 +1245,24 @@
             
         case 3:
         {
-            count = 8;
+            count = 2;
             
-            promptStr = @"最小量的小数点位数不能超过8位哦";
+            promptStr = @"最小量的小数点位数不能超过2位哦";
         }break;
             
         case 4:
         {
+            count = 2;
+            
+            promptStr = @"最大量的小数点位数不能超过2位哦";
+        }break;
+            
+        case 5:
+        {
             count = 8;
             
-            promptStr = @"最大量的小数点位数不能超过8位哦";
+            promptStr = @"出售总量的小数点不能超过8位哦";
+            
         }break;
             
         default:

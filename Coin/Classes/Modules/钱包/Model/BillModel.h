@@ -51,10 +51,8 @@
 
 @property (nonatomic, assign) CGFloat dHeightValue;
 
+- (NSString *)getStatusName;
+
 - (NSString *)getBizName;
-
-- (NSString *)getImgName;
-
-//- (CGFloat)dHeightValue;
 
 @end

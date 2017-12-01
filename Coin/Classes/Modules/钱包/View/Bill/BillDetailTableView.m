@@ -37,7 +37,7 @@ static NSString *identifierCell = @"BillDetailCell";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return 3;
+    return 5;
     
 }
 
@@ -53,7 +53,7 @@ static NSString *identifierCell = @"BillDetailCell";
     
     NSString *preAmount = [_bill.preAmountString convertToSimpleRealCoin];
     
-    NSArray *rightArr = @[preAmount, postAmount, dateStr, _bill.remark, _bill.bizNote];
+    NSArray *rightArr = @[preAmount, postAmount, dateStr, _bill.getStatusName, _bill.getBizName];
     
     cell.titleLbl.text = textArr[indexPath.row];
     

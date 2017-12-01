@@ -68,18 +68,18 @@
     __weak typeof(self) ws = self;
     
     [TLAlert alertWithTitle:@"下线通知" message:@"您的帐号于另一台手机上登录。" confirmMsg:@"重新登录" confirmAction:^{
-        
+
         [ws offlineLogin];
         // 重新登录
         [ws login:param succ:^{
-            
+
             [TLAlert alertWithSucces:@"登录成功"];
-            
+
             [ws registNotification];
             succ ? succ() : nil;
-            
+
         } fail:fail];
-        
+
     }];
 }
 

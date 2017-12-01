@@ -8,7 +8,9 @@
 
 #import "TLBaseVC.h"
 
-typedef void(^CoinAddressBlock)(NSString *address);
+#import "CoinAddressModel.h"
+
+typedef void(^CoinAddressBlock)(CoinAddressModel *addressModel);
 
 @interface CoinAddressListVC : TLBaseVC
 

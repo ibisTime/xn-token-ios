@@ -50,13 +50,13 @@
     
     [http postWithSuccess:^(id responseObject) {
         
-        self.imModel = [IMModel mj_objectWithKeyValues:responseObject[@"data"]];
-        
-        [AppConfig config].chatAppId = self.imModel.txAppCode;
-        
-        [AppConfig config].chatAccountType = self.imModel.accountType;
-        //登录
-        [self configLoginParam];
+//        self.imModel = [IMModel mj_objectWithKeyValues:responseObject[@"data"]];
+//
+//        [AppConfig config].chatAppId = self.imModel.txAppCode;
+//
+//        [AppConfig config].chatAccountType = self.imModel.accountType;
+//        //登录
+//        [self configLoginParam];
         
     } failure:^(NSError *error) {
         

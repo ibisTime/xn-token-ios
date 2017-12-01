@@ -132,7 +132,7 @@
 
 - (void)initPlaceHolderView {
     //-1:待下单  0:待付款 1:待释放 2:待评价  5:仲裁中
-    self.statusList = @[@"-1", @"0", @"1", @"2", @"5"];
+    self.statusList = @[@"-1", @"0", @"1", @"5"];
     
     self.placeHolderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight - 40)];
     
@@ -253,11 +253,11 @@
     
     if (index == 1) {
         //-1:待下单  0:待付款 1:待释放 2:待评价  5:仲裁中
-        self.statusList = @[@"-1", @"0", @"1", @"2", @"5"];
+        self.statusList = @[@"-1", @"0", @"1", @"5"];
         
     }else {
         
-        self.statusList = @[@"3", @"4"];
+        self.statusList = @[@"2", @"3", @"4"];
         
     }
     

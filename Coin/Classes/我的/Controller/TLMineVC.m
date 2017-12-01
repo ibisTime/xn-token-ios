@@ -14,6 +14,8 @@
 
 #import "MineGroup.h"
 
+#import "AdvertiseModel.h"
+
 #import "MineTableView.h"
 #import "MineHeaderView.h"
 
@@ -51,6 +53,10 @@
     
     [self.navigationController setNavigationBarHidden:YES animated:animated];
 
+    if ([TLUser user].userId) {
+        
+        [self requestUserStatistInfo];
+    }
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
@@ -266,7 +272,8 @@
 - (void)loginOut {
     
     [[TLUser user] loginOut];
-    
+ 
+    [self changeInfo];
 }
 
 - (void)changeInfo {
@@ -289,8 +296,6 @@
     
     self.headerView.nameLbl.text = [TLUser user].nickname;
     
-    self.headerView.dataLbl.text = [NSString stringWithFormat:@"交易 2 · 好评 90%% · 信任 1"];
-
 }
 
 - (void)changeHeadIcon {
@@ -299,6 +304,28 @@
 }
 
 #pragma mark - Data
+
+//查询用户统计信息
+- (void)requestUserStatistInfo {
+    
+    TLNetworking *http = [TLNetworking new];
+    
+    http.code = @"625256";
+    
+    http.parameters[@"userId"] = [TLUser user].userId;
+    
+    [http postWithSuccess:^(id responseObject) {
+        
+        UserStatistics *userStatist = [UserStatistics mj_objectWithKeyValues:responseObject[@"data"]];
+        
+        self.headerView.dataLbl.text = [NSString stringWithFormat:@"交易 %ld · 好评 %@ · 信任 %ld", userStatist.jiaoYiCount, userStatist.goodCommentRate, userStatist.beiXinRenCount];
+
+        
+    } failure:^(NSError *error) {
+        
+        
+    }];
+}
 
 - (void)changeHeadIconWithKey:(NSString *)key imgData:(NSData *)imgData {
     

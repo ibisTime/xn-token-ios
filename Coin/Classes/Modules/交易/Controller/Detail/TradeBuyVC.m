@@ -20,6 +20,7 @@
 #import "NSString+Check.h"
 #import "UILabel+Extension.h"
 #import "UIBarButtonItem+convience.h"
+#import "APICodeMacro.h"
 
 #import "TLUserLoginVC.h"
 #import "TLNavigationController.h"
@@ -63,6 +64,9 @@
         [self addOffItem];
     }
     
+    //获取交易提醒
+    [self requestTradeRemind];
+    
     [self addNotification];
     
     //开启定时器,实时刷新
@@ -96,7 +100,7 @@
 
 - (void)addOffItem {
     
-    if ([self.advertise.status isEqualToString:@"1"]) {
+    if ([self.advertise.status isEqualToString:@"1"] || [self.advertise.status isEqualToString:@"2"]) {
         
         [UIBarButtonItem addRightItemWithTitle:@"下架" titleColor:kTextColor frame:CGRectMake(0, 0, 40, 44) vc:self action:@selector(advertiseOff)];
         
@@ -409,6 +413,26 @@
 }
 
 #pragma mark - Data
+- (void)requestTradeRemind {
+    
+    TLNetworking *http = [TLNetworking new];
+    
+    http.code = USER_CKEY_CVALUE;
+    http.parameters[@"key"] = @"trade_remind";
+    
+    [http postWithSuccess:^(id responseObject) {
+        
+        self.tradeView.tradeRemind = responseObject[@"data"][@"cvalue"];
+        
+        [self.tradeView.tradeRemindBtn setTitle:responseObject[@"data"][@"remark"] forState:UIControlStateNormal];
+        
+    } failure:^(NSError *error) {
+        
+        
+    }];
+}
+
+
 - (void)getLeftAmount {
     
     CoinWeakSelf;

@@ -315,8 +315,8 @@
         [self.headBtn setTitle:notice.smsTitle forState:UIControlStateNormal];
         
     } else {
-        
-        [self.headBtn setTitle:@"预见未来的自己, 我要上精选！" forState:UIControlStateNormal];
+        //预见未来的自己, 我要上精选！
+        [self.headBtn setTitle:@"" forState:UIControlStateNormal];
         
     }
     

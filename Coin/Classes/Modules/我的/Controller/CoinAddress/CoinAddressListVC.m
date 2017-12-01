@@ -8,8 +8,6 @@
 
 #import "CoinAddressListVC.h"
 
-#import "CoinAddressModel.h"
-
 #import "CoinAddressTableView.h"
 
 #import "CoinAddAddressVC.h"
@@ -211,7 +209,7 @@
     
     if (self.addressBlock) {
         
-        self.addressBlock(addressModel.address);
+        self.addressBlock(addressModel);
         
         [self.navigationController popViewControllerAnimated:YES];
 

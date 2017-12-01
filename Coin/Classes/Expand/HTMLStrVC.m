@@ -49,7 +49,7 @@
             
             ckey = @"reg_protocol";
             
-            name = @"服务条款";
+            name = @"注册协议";
             
         } break;
             

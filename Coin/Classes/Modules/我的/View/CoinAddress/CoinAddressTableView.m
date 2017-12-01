@@ -66,13 +66,13 @@ static NSString *identifierCell = @"CoinAddressCell";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-//    if ([self.refreshDelegate respondsToSelector:@selector(refreshTableView:didSelectRowAtIndexPath:)]) {
-//        [self.refreshDelegate refreshTableView:self didSelectRowAtIndexPath:indexPath];
-//    }
+    if ([self.refreshDelegate respondsToSelector:@selector(refreshTableView:didSelectRowAtIndexPath:)]) {
+        [self.refreshDelegate refreshTableView:self didSelectRowAtIndexPath:indexPath];
+    }
     
-    CoinAddressCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    
-    [cell setEditing:YES animated:YES];
+//    CoinAddressCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+//
+//    [cell setEditing:YES animated:YES];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {

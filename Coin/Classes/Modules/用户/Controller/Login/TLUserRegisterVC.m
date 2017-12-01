@@ -161,7 +161,7 @@
         
     }];
     
-    UIButton *protocolBtn = [UIButton buttonWithTitle:@"《服务条款》" titleColor:kAppCustomMainColor backgroundColor:kClearColor titleFont:12.0];
+    UIButton *protocolBtn = [UIButton buttonWithTitle:@"《注册协议》" titleColor:kAppCustomMainColor backgroundColor:kClearColor titleFont:12.0];
     
     [protocolBtn addTarget:self action:@selector(readProtocal) forControlEvents:UIControlEventTouchUpInside];
     
@@ -256,7 +256,7 @@
     
     if (!self.checkBtn.selected) {
         
-        [TLAlert alertWithInfo:@"请同意《服务条款》"];
+        [TLAlert alertWithInfo:@"请同意《注册协议》"];
         return ;
     }
     

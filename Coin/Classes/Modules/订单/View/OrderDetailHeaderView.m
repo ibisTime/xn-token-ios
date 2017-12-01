@@ -123,7 +123,7 @@
         
     }];
     
-    NSArray *textArr = @[@"交易金额", @"交易数量", @"交易价格"];
+    NSArray *textArr = @[@"交易价格", @"交易金额", @"交易数量"];
     
     __block UILabel *lastLbl = self.orderCodeLbl;
     
@@ -143,6 +143,19 @@
         lastLbl = textLbl;
     }];
     
+    //交易价格
+    self.priceLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:15.0];
+    
+    self.priceLbl.textAlignment = NSTextAlignmentRight;
+    
+    [self.topView addSubview:self.priceLbl];
+    [self.priceLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.right.equalTo(@(-15));
+        make.top.equalTo(self.orderCodeLbl.mas_bottom).offset(15);
+        
+    }];
+    
     //交易金额
     self.amountLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:15.0];
     
@@ -152,7 +165,7 @@
     [self.amountLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.right.equalTo(@(-15));
-        make.top.equalTo(self.orderCodeLbl.mas_bottom).offset(15);
+        make.top.equalTo(self.priceLbl.mas_bottom).offset(16);
         
     }];
     
@@ -169,19 +182,6 @@
         
     }];
     
-    //交易价格
-    self.priceLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:15.0];
-    
-    self.priceLbl.textAlignment = NSTextAlignmentRight;
-    
-    [self.topView addSubview:self.priceLbl];
-    [self.priceLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.right.equalTo(@(-15));
-        make.top.equalTo(self.numLbl.mas_bottom).offset(16);
-
-    }];
-    
 }
 
 - (void)initCenterView {
@@ -196,7 +196,7 @@
         make.left.equalTo(@0);
         make.top.equalTo(self.topView.mas_bottom).offset(10);
         make.width.equalTo(@(kScreenWidth));
-        make.height.equalTo(@155);
+//        make.height.equalTo(@155);
         
     }];
     
@@ -274,6 +274,7 @@
     [self.centerView addSubview:self.tradeBtn];
     [self.tradeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         
+        
         make.centerX.equalTo(@0);
         make.width.equalTo(@150);
         make.height.equalTo(@(btnH));
@@ -311,11 +312,11 @@
     self.leaveMsgLbl.text = [NSString stringWithFormat:@"广告留言: %@", order.leaveMessage];
     
     //提示
-    if ([order.status isEqualToString:@"0"]) {
+    if ([order.status isEqualToString:@"0"] || [order.status isEqualToString:@"1"]) {
         
         [self calculateInvalidTimeWithOrder:order];
         
-    } else if ([order.status isEqualToString:@"3"]) {
+    } else if ([order.status isEqualToString:@"2"] ||[order.status isEqualToString:@"3"]) {
         
         self.promptLbl.text = order.promptStr;
 
@@ -331,13 +332,15 @@
     [self.tradeBtn setBackgroundColor:order.bgColor forState:UIControlStateNormal];
     
     self.tradeBtn.enabled = order.enable;
-    
-    //刷新高度
-    [self layoutSubviews];
-    
-    self.centerView.height = self.tradeBtn.yy + 18;
 
-    self.height = self.centerView.yy;
+    [self layoutIfNeeded];
+    
+    [self.centerView mas_updateConstraints:^(MASConstraintMaker *make) {
+        
+        make.height.equalTo(@(self.tradeBtn.yy + 18));
+        
+    }];
+    
 }
 
 //计算时间

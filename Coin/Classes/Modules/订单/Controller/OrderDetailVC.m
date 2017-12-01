@@ -62,6 +62,10 @@
     
     [super viewDidLayoutSubviews];
     
+    self.headView.height = self.headView.centerView.yy;
+    
+    self.tableView.tableHeaderView = self.headView;
+
 }
 
 #pragma mark - Init
@@ -80,7 +84,6 @@
         [weakSelf orderEventsWithType:orderType];
     };
     
-    self.tableView.tableHeaderView = self.headView;
 }
 
 - (void)addArbitrationItem {

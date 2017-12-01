@@ -91,22 +91,22 @@ static BOOL kIsAlertingForceOffline = NO;
         __weak typeof(self) ws = self;
         
         [TLAlert alertWithTitle:@"下线通知" message:@"您的帐号于另一台手机上登录。" confirmMsg:@"重新登录" confirmAction:^{
-            
+
             [self offlineLogin];
             // 重新登录
             [self login:self.host.loginParm succ:^{
-                
+
                 [TLAlert alertWithSucces:@"登录成功"];
 
                 IMALoginParam *wp = [IMALoginParam loadFromLocal];
                 [[IMAPlatform sharedInstance] configOnLoginSucc:wp];
-                
+
                 [ws registNotification];
             } fail:^(int code, NSString *msg) {
                 //进入登录界面
                 [[IMAAppDelegate sharedAppDelegate] enterLoginUI];
             }];
-            
+
             kIsAlertingForceOffline = NO;
 
         }];
@@ -123,22 +123,22 @@ static BOOL kIsAlertingForceOffline = NO;
     
     __weak typeof(self) ws = self;
     [TLAlert alertWithTitle:@"下线通知" message:@"您的帐号于另一台手机上登录。" confirmMsg:@"重新登录" confirmAction:^{
-        
+
         [self offlineLogin];
         // 重新登录
         [self login:self.host.loginParm succ:^{
-            
+
             [TLAlert alertWithSucces:@"登录成功"];
 
             IMALoginParam *wp = [IMALoginParam loadFromLocal];
             [[IMAPlatform sharedInstance] configOnLoginSucc:wp];
-            
+
             [ws registNotification];
-            
+
         } fail:^(int code, NSString *msg) {
             [[IMAAppDelegate sharedAppDelegate] enterLoginUI];
         }];
-        
+
         kIsAlertingForceOffline = NO;
 
     }];

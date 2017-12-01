@@ -186,8 +186,9 @@
     
     self.coinIV.image = kImage(_currency.getImgName);
     
+    NSString *leftAmount = [_currency.amountString subNumber:_currency.frozenAmountString];
     
-    self.amountLbl.text = [_currency.amountString subNumber:_currency.frozenAmountString];
+    self.amountLbl.text = [leftAmount convertToSimpleRealCoin];
     
     [self.freezingAmountBtn setTitle:[NSString stringWithFormat:@"冻结 %@", [_currency.frozenAmountString convertToSimpleRealCoin]] forState:UIControlStateNormal];
     

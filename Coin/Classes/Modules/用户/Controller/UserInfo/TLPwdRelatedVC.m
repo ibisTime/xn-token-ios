@@ -264,14 +264,19 @@
             [TLUser user].tradepwdFlag = @"1";
             
             promptStr = @"设置成功";
+            
         }
         
         [TLAlert alertWithSucces:promptStr];
         
         [[TLUser user] updateUserInfo];
         
-        [self.navigationController popViewControllerAnimated:YES];
-        
+        if (!self.isWallet) {
+            
+            [self.navigationController popViewControllerAnimated:YES];
+
+        }
+
         if (self.success) {
             
             self.success();

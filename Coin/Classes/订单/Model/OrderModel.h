@@ -54,6 +54,10 @@
 @property (nonatomic, copy) NSString *tradeCurrency;
 
 @property (nonatomic, copy) NSString *remark;
+//买家评价内容(buy to sell)
+@property (nonatomic, copy) NSString *bsComment;
+//卖家评价内容(sell to buy)
+@property (nonatomic, copy) NSString *sbComment;
 //订单
 @property (nonatomic, copy) NSString *statusStr;
 //昵称

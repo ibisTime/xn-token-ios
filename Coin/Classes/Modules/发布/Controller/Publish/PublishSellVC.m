@@ -35,13 +35,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.title = @"发布出售";
+    self.title = @"发布卖出";
     
     self.timeArr = [NSMutableArray array];
     
     //保存草稿
     [self addRightItem];
-    //发布出售
+    //发布卖出
     [self initPublishView];
     //获取收款期限
     [self requestOverTime];
