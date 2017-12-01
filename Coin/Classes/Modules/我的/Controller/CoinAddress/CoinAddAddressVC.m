@@ -177,6 +177,8 @@
     
     sw.on = NO;
     
+    [sw addTarget:self action:@selector(onSwitchChange:) forControlEvents:UIControlEventValueChanged];
+    
     [authAccountView addSubview:sw];
     [sw mas_makeConstraints:^(MASConstraintMaker *make) {
         
@@ -184,6 +186,8 @@
         make.centerY.equalTo(@0);
         
     }];
+    
+    self.sw = sw;
     
     //分割线
     UIView *authLine = [[UIView alloc] init];
@@ -328,6 +332,11 @@
 
     }
 
+}
+
+- (void)onSwitchChange:(UISwitch *)sw {
+    
+    sw.on = !sw.on;
 }
 
 - (void)selectCoinAddress {

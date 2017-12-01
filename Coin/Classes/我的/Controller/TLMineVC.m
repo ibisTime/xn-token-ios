@@ -292,6 +292,8 @@
         
         [self.headerView.photoBtn setTitle:title forState:UIControlStateNormal];
         
+        [self.headerView.photoBtn setImage:nil forState:UIControlStateNormal];
+        
     }
     
     self.headerView.nameLbl.text = [TLUser user].nickname;

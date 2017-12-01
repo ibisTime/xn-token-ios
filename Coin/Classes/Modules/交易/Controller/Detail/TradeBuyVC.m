@@ -423,12 +423,12 @@
     
     [http postWithSuccess:^(id responseObject) {
         
-        self.tradeView.tradeRemind = responseObject[@"data"][@"cvalue"];
-        
         [self.tradeView.tradeRemindBtn setTitle:responseObject[@"data"][@"remark"] forState:UIControlStateNormal];
         
         [self.tradeView.tradeRemindBtn setTitleRight];
-
+        
+        self.tradeView.tradeRemind = responseObject[@"data"][@"cvalue"];
+        
     } failure:^(NSError *error) {
         
         
