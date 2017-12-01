@@ -97,7 +97,7 @@ NSString *const kUserInfoChange = @"kUserInfoChange";
         
         [self requestQiniuDomain];
         //获取腾讯云IM签名、账号并登录
-        [[ChatManager sharedManager] getTencentSign];
+//        [[ChatManager sharedManager] getTencentSign];
         
     } failure:^(NSError *error) {
         

@@ -173,6 +173,7 @@
 
     //获取腾讯云IM签名、账号并登录
     [[ChatManager sharedManager] getTencentSign];
+//    [[NSNotificationCenter defaultCenter] postNotificationName:kUserLoginNotification object:nil];
 
     [self dismissViewControllerAnimated:YES completion:nil];
 

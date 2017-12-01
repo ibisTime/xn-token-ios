@@ -29,6 +29,8 @@
 // 保存至本地
 - (void)saveToLocal;
 
++ (void)clearFromDB;
+
 // 是否过期
 - (BOOL)isExpired;
 

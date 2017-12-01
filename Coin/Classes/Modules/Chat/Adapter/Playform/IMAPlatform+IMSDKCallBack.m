@@ -7,7 +7,7 @@
 //
 
 #import "IMAPlatform+IMSDKCallBack.h"
-
+#import "TLUser.h"
 // 所有回调中的核心逻辑最终都放入到主线程中执行
 #import "TLAlert.h"
 
@@ -77,7 +77,6 @@
 /**
  *  踢下线通知
  */
-
 static BOOL kIsAlertingForceOffline = NO;
 - (void)onForceOffline
 {
@@ -90,26 +89,33 @@ static BOOL kIsAlertingForceOffline = NO;
         DebugLog(@"踢下线通知");
         __weak typeof(self) ws = self;
         
-        [TLAlert alertWithTitle:@"下线通知" message:@"您的帐号于另一台手机上登录。" confirmMsg:@"重新登录" confirmAction:^{
-
+        
+        [TLAlert alertWithTitle:@"下线通知" msg:@"您的帐号于另一台手机上登录。" confirmMsg:@"重新登录" cancleMsg:@"取消" cancle:^(UIAlertAction *action) {
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:kUserLoginOutNotification  object:nil];
+            
+        } confirm:^(UIAlertAction *action) {
+            
             [self offlineLogin];
             // 重新登录
             [self login:self.host.loginParm succ:^{
-
+                
                 [TLAlert alertWithSucces:@"登录成功"];
-
+                
                 IMALoginParam *wp = [IMALoginParam loadFromLocal];
                 [[IMAPlatform sharedInstance] configOnLoginSucc:wp];
-
+                
                 [ws registNotification];
             } fail:^(int code, NSString *msg) {
                 //进入登录界面
                 [[IMAAppDelegate sharedAppDelegate] enterLoginUI];
             }];
-
+            
             kIsAlertingForceOffline = NO;
-
+            
         }];
+        
+
         
     }
 }
