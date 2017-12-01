@@ -41,8 +41,17 @@
     return manager;
 }
 
+//获取签名，并登录
 - (void)getTencentSign {
     
+    BOOL isAutoLogin = [IMAPlatform isAutoLogin];
+    if (isAutoLogin) {
+        
+        [self configLoginParam];
+        return;
+        
+    }
+  
     TLNetworking *http = [TLNetworking new];
     
     http.code = @"625000";
@@ -53,7 +62,6 @@
         self.imModel = [IMModel mj_objectWithKeyValues:responseObject[@"data"]];
 
         [AppConfig config].chatAppId = self.imModel.txAppCode;
-
         [AppConfig config].chatAccountType = self.imModel.accountType;
         //登录
         [self configLoginParam];
@@ -66,26 +74,25 @@
 
 //获取签名后配置
 - (void)configLoginParam {
-    
+
     BOOL isAutoLogin = [IMAPlatform isAutoLogin];
     if (isAutoLogin) {
+    
         _loginParam = [IMALoginParam loadFromLocal];
-    }
-    else
-    {
-        _loginParam = [[IMALoginParam alloc] init];
         
+    } else {
+        
+        _loginParam = [[IMALoginParam alloc] init];
         _loginParam.identifier = [TLUser user].userId;
         _loginParam.userSig = self.imModel.sign;
         _loginParam.appidAt3rd = self.imModel.txAppCode;
-    
+
     }
     
     //初始化SDK
     [[IMAPlatform sharedInstance] configIMSDK:_loginParam.config];
-    //另一台设备登录问题
-    [[IMAPlatform sharedInstance] configOnLoginSucc:_loginParam];
-    
+   
+    //
     [[TIMManager sharedInstance] login:_loginParam succ:^{
         
         //消息栏消息数
@@ -93,6 +100,10 @@
         
         [TLUser user].unReadMsgCount = unReadCount;
         
+        [IMAPlatform setAutoLogin:YES];
+//        [_loginParam saveToLocal];
+        //另一台设备登录问题
+        [[IMAPlatform sharedInstance] configOnLoginSucc:_loginParam];
         //配置APNs
 //        [self configAPNs];
     } fail:^(int code, NSString *msg) {
@@ -102,19 +113,6 @@
         
     }];
 
-//    if (isAutoLogin && [_loginParam isVailed])
-//    {
-//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//            [self loginIM];
-//        });
-//    }
-//    else
-//    {
-//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 *  NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//            [self pullLoginUI];
-//        });
-//
-//    }
 }
 
 

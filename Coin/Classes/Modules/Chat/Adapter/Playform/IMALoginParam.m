@@ -46,11 +46,19 @@
         // 说明本地有存储
         IMALoginParam *param = [IMALoginParam loadInfo:[IMALoginParam class] withKey:userloginKey];
         return param;
-    }
-    else
-    {
+        
+    } else {
+        
         return [[IMALoginParam alloc] init];
+        
     }
+    
+}
+
++ (void)clearFromDB {
+    
+    [[NSUserDefaults standardUserDefaults] setObject:nil forKey:kIMALoginParamUserKey];
+    
 }
 
 - (void)saveToLocal

@@ -12,9 +12,10 @@
 #import "TLUser.h"
 
 #import "AppConfig.h"
-
+#import "IMALoginParam.h"
 #import "WXApi.h"
 #import "TLWXManager.h"
+#import "ChatManager.h"
 
 @interface AppDelegate ()
 
@@ -36,8 +37,26 @@
     
     //配置根控制器
     [self configRootViewController];
+    
+    //
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginOut) name:kUserLoginOutNotification object:nil];
 
     return YES;
+    
+}
+
+#pragma mark- 退出登录
+- (void)loginOut {
+    
+    [[TLUser user] loginOut];
+//    [self changeInfo];
+    [IMAPlatform setAutoLogin:NO];
+    UITabBarController *tabbarContrl = (UITabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
+    tabbarContrl.selectedIndex = 0;
+    
+    [IMALoginParam clearFromDB];
+
+//    [TIMManager sharedInstance];
     
 }
 
@@ -68,6 +87,8 @@
     if([TLUser user].isLogin) {
         
         [[TLUser user] reLogin];
+       [[ChatManager sharedManager] getTencentSign];
+
         
     };
     
