@@ -263,12 +263,18 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeInfo) name:kUserInfoChange object:nil];
     
-
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginOut) name:kUserLoginOutNotification object:nil];
 
 
 }
 
 #pragma mark - Events
+- (void)loginOut {
+    
+    [[TLUser user] loginOut];
+ 
+    [self changeInfo];
+}
 
 - (void)changeInfo {
     
@@ -285,6 +291,8 @@
         NSString *title = [nickName substringToIndex:1];
         
         [self.headerView.photoBtn setTitle:title forState:UIControlStateNormal];
+        
+        [self.headerView.photoBtn setImage:nil forState:UIControlStateNormal];
         
     }
     

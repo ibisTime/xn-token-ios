@@ -412,7 +412,7 @@
         make.left.equalTo(@0);
         make.width.equalTo(@(kScreenWidth));
         make.top.equalTo(self.buyView.mas_bottom).offset(10);
-        make.height.equalTo(@120);
+//        make.height.equalTo(@120);
     }];
     
     //交易提醒
@@ -436,10 +436,12 @@
     [self.tradePromptView addSubview:textLbl];
     [textLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.left.equalTo(@15);
-        make.right.equalTo(@(-15));
+//        make.left.equalTo(@15);
+//        make.right.equalTo(@(-15));
         make.top.equalTo(promptBtn.mas_bottom).offset(11);
         
+        make.edges.mas_equalTo(UIEdgeInsetsMake(40, 15, 15, 15));
+
     }];
     
 //    [textLbl labelWithTextString:text lineSpace:5];
@@ -632,6 +634,7 @@
     _tradeRemind = tradeRemind;
     
     [self.tradeRemindLbl labelWithTextString:tradeRemind lineSpace:5];
+
 }
 
 #pragma mark - Events
