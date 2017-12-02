@@ -29,11 +29,13 @@ static IMAPlatform *_sharedInstance = nil;
     
     dispatch_once(&predicate, ^{
         _sharedInstance = [[IMAPlatform alloc] init];
+        [_sharedInstance configIMSDK:cfg];
     });
     
     return _sharedInstance;
     
 }
+
 static Class kHostClass = Nil;
 + (void)configHostClass:(Class)hostcls
 {
@@ -121,8 +123,13 @@ static Class kHostClass = Nil;
     
     TIMSdkConfig *config = [[TIMSdkConfig alloc] init];
     
-    config.sdkAppId = [[AppConfig config].chatAppId intValue];
-    config.accountType = [AppConfig config].chatAccountType;
+    // 获取appid 和 accountType
+//    config.sdkAppId = [[AppConfig config].chatAppId intValue];
+//    config.accountType = [AppConfig config].chatAccountType;
+    
+    config.sdkAppId = 1400050575;
+    config.accountType = @"19287";
+    
     config.disableCrashReport = NO;
     config.connListener = self;
     [manager initSdk:config];

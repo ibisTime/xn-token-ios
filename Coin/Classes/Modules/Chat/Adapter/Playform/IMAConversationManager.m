@@ -201,9 +201,9 @@
         return nil;
     }
     
-    self.unReadMessageCount -= [conv getUnReadMessageNum];
+    int count = [conv getUnReadMessageNum];
+    self.unReadMessageCount -= count;
 
-//    [conv setReadMessage];
     [conv setReadMessage:nil succ:^{
         
     } fail:^(int code, NSString *msg) {

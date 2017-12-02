@@ -23,14 +23,10 @@
 
 @implementation AppDelegate
 
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     //服务器环境
     [self configServiceAddress];
-    
-    //初始化IMAPlatform
-    [self initIMAPlatform];
     
     //配置微信
     [self configWeChat];
@@ -38,8 +34,20 @@
     //配置根控制器
     [self configRootViewController];
     
+    //初始化 im
+    [IMAPlatform configWith:[[IMAPlatformConfig alloc] init]];
+    
+    //重新登录
+    if([TLUser user].isLogin) {
+        
+        [[TLUser user] reLogin];
+        [[ChatManager sharedManager] loginIM];
+        
+    };
+    
     //
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginOut) name:kUserLoginOutNotification object:nil];
+
 
     return YES;
     
@@ -48,15 +56,19 @@
 #pragma mark- 退出登录
 - (void)loginOut {
     
+    //user 退出
     [[TLUser user] loginOut];
-//    [self changeInfo];
-    [IMAPlatform setAutoLogin:NO];
+    
+    //im 退出
+    [[IMAPlatform sharedInstance] logout:^{
+        
+    } fail:^(int code, NSString *msg) {
+        
+        
+    }];
+    //
     UITabBarController *tabbarContrl = (UITabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
     tabbarContrl.selectedIndex = 0;
-    
-    [IMALoginParam clearFromDB];
-
-//    [TIMManager sharedInstance];
     
 }
 
@@ -67,6 +79,7 @@
     
     //配置环境
     [AppConfig config].runEnv = RunEnvDev;
+    
 }
 
 - (void)configWeChat {
@@ -79,32 +92,19 @@
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
-    //
     TLTabBarController *tabBarCtrl = [[TLTabBarController alloc] init];
     self.window.rootViewController = tabBarCtrl;
     
-    //重新登录
-    if([TLUser user].isLogin) {
-        
-        [[TLUser user] reLogin];
-       [[ChatManager sharedManager] getTencentSign];
-
-        
-    };
-    
 }
 
-- (void)initIMAPlatform {
-    
-    [IMAPlatform configWith:nil];
-}
+
 
 - (void)pushToChatViewControllerWith:(IMAUser *)user
 {
     
     TLTabBarController *tab = (TLTabBarController *)self.window.rootViewController;
-    
     [tab pushToChatViewControllerWith:user];
+    
 }
 
 #pragma mark - 微信回调

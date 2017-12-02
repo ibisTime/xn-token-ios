@@ -25,7 +25,7 @@
     //微信、QQ、游客登录现在Demo中不再支持，如有需要，请用户自行完成
     //    __weak id<WXApiDelegate>    _tlsuiwx;
     //    TencentOAuth                *_openQQ;
-    IMALoginParam               *_loginParam;
+//    IMALoginParam               *_loginParam;
 }
 
 + (ChatManager *)sharedManager {
@@ -42,29 +42,33 @@
 }
 
 //获取签名，并登录
-- (void)getTencentSign {
+- (void)loginIM {
     
-    BOOL isAutoLogin = [IMAPlatform isAutoLogin];
-    if (isAutoLogin) {
+    
+    if ([IMAPlatform isAutoLogin]) {
         
-        [self configLoginParam];
+        //自动登录，获取数据库的历史记录
+        [self loginWithParam:[IMALoginParam loadFromLocal]];
         return;
         
     }
   
+    //该用户第一次登录
     TLNetworking *http = [TLNetworking new];
-    
     http.code = @"625000";
     http.parameters[@"userId"] = [TLUser user].userId;
-    
     [http postWithSuccess:^(id responseObject) {
         
         self.imModel = [IMModel mj_objectWithKeyValues:responseObject[@"data"]];
-
         [AppConfig config].chatAppId = self.imModel.txAppCode;
         [AppConfig config].chatAccountType = self.imModel.accountType;
         //登录
-        [self configLoginParam];
+        
+        IMALoginParam *loginParam = [[IMALoginParam alloc] init];
+        loginParam.identifier = [TLUser user].userId;
+        loginParam.userSig = self.imModel.sign;
+        loginParam.appidAt3rd = self.imModel.txAppCode;
+        [self loginWithParam:loginParam];
         
     } failure:^(NSError *error) {
         
@@ -72,28 +76,12 @@
     }];
 }
 
-//获取签名后配置
-- (void)configLoginParam {
 
-    BOOL isAutoLogin = [IMAPlatform isAutoLogin];
-    if (isAutoLogin) {
-    
-        _loginParam = [IMALoginParam loadFromLocal];
-        
-    } else {
-        
-        _loginParam = [[IMALoginParam alloc] init];
-        _loginParam.identifier = [TLUser user].userId;
-        _loginParam.userSig = self.imModel.sign;
-        _loginParam.appidAt3rd = self.imModel.txAppCode;
 
-    }
+- (void)loginWithParam:(TIMLoginParam*)param {
     
-    //初始化SDK
-    [[IMAPlatform sharedInstance] configIMSDK:_loginParam.config];
-   
-    //
-    [[TIMManager sharedInstance] login:_loginParam succ:^{
+    
+    [[TIMManager sharedInstance] login:param succ:^{
         
         //消息栏消息数
         NSInteger unReadCount = [[IMAPlatform sharedInstance].conversationMgr unReadMessageCount];
@@ -101,44 +89,20 @@
         [TLUser user].unReadMsgCount = unReadCount;
         
         [IMAPlatform setAutoLogin:YES];
-//        [_loginParam saveToLocal];
-        //另一台设备登录问题
-        [[IMAPlatform sharedInstance] configOnLoginSucc:_loginParam];
+        //        [_loginParam saveToLocal];
+        
+        [[IMAPlatform sharedInstance] configOnLoginSucc:param];
         //配置APNs
-//        [self configAPNs];
+        //        [self configAPNs];
     } fail:^(int code, NSString *msg) {
         
         NSLog(@"LoginFailureCode = %d, errorMsg = %@", code, msg);
-        
-        
     }];
-
+    
 }
 
 
-//- (void)loginIM {
-//
-//    [[TIMManager sharedInstance] login:_loginParam succ:^{
-//
-////        [TLAlert alertWithSucces:@"登录成功"];
-//        //消息栏消息数
-//        NSInteger unReadCount = [[IMAPlatform sharedInstance].conversationMgr unReadMessageCount];
-//
-//        [TLUser user].unReadMsgCount = unReadCount;
-//
-//        //配置APNs
-//        [self configAPNs];
-//
-//
-//    } fail:^(int code, NSString *msg) {
-//
-//        NSLog(@"LoginFailureCode = %d, errorMsg = %@", code, msg);
-//
-////        [TLAlert alertWithError:@"登录失败"];
-//
-//    }];
-//
-//}
+
 
 - (void)configAPNs {
     

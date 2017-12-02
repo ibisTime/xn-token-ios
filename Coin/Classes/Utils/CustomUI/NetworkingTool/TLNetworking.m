@@ -157,7 +157,7 @@
               //token错误  4
               
               [TLAlert alertWithTitle:nil message:@"为了您的账户安全，请重新登录" confirmAction:^{
-//                  [[NSNotificationCenter defaultCenter] postNotificationName:kUserLoginOutNotification object:nil];
+                  [[NSNotificationCenter defaultCenter] postNotificationName:kUserLoginOutNotification object:nil];
               }];
               return;
               

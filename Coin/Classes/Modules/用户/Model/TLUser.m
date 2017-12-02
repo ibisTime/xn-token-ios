@@ -55,18 +55,27 @@ NSString *const kUserInfoChange = @"kUserInfoChange";
     
 }
 
+- (void)setUserId:(NSString *)userId {
+    _userId = [userId copy];
+    [[NSUserDefaults standardUserDefaults] setObject:_userId forKey:USER_ID_KEY];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
 - (BOOL)isLogin {
 
     NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
-
+    NSString *userId = [userDefault objectForKey:USER_ID_KEY];
     NSString *token = [userDefault objectForKey:TOKEN_ID_KEY];
-    
-    if (token) {
+    if (userId && token) {
+        
+        self.userId = userId;
+        self.token = token;
+        [self setUserInfoWithDict:[userDefault objectForKey:USER_INFO_DICT_KEY]];
         
         return YES;
-        
     } else {
-
+        
+        
         return NO;
     }
 
@@ -89,15 +98,10 @@ NSString *const kUserInfoChange = @"kUserInfoChange";
     [http postWithSuccess:^(id responseObject) {
         
         self.token = responseObject[@"data"][@"token"];
-        
         self.userId = responseObject[@"data"][@"userId"];
         
-//        [self requestAccountNumber];
         [self updateUserInfo];
-        
         [self requestQiniuDomain];
-        //获取腾讯云IM签名、账号并登录
-//        [[ChatManager sharedManager] getTencentSign];
         
     } failure:^(NSError *error) {
         
@@ -108,11 +112,8 @@ NSString *const kUserInfoChange = @"kUserInfoChange";
 - (void)requestQiniuDomain {
     
     TLNetworking *http = [TLNetworking new];
-    
     http.code = USER_CKEY_CVALUE;
-    
     http.parameters[@"key"] = @"qiniu_domain";
-    
     [http postWithSuccess:^(id responseObject) {
         
         [AppConfig config].qiniuDomain = [NSString stringWithFormat:@"http://%@", responseObject[@"data"][@"cvalue"]];
@@ -178,15 +179,8 @@ NSString *const kUserInfoChange = @"kUserInfoChange";
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:USER_ID_KEY];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:USER_INFO_DICT_KEY];
     
-//    [[NSNotificationCenter defaultCenter] postNotificationName:@"user_login_out_notification" object:nil];
     
-    [[TIMManager sharedInstance] logout:^{
-        
-    } fail:^(int code, NSString *msg) {
-        
-        NSLog(@"logout fail: code=%d err=%@", code, msg);
-
-    }];
+ 
 }
 
 

@@ -15,13 +15,13 @@
 //登录
 
 
-- (void)chatLoginOut;
+//- (void)chatLoginOut;
 //消息
-- (void)getAllConversionFromDB;
+//- (void)getAllConversionFromDB;
 
-- (NSInteger)unreadMsgCount;
+//- (NSInteger)unreadMsgCount;
 
 //获取腾讯云IM签名、账号并登录
-- (void)getTencentSign;
+- (void)loginIM;
 
 @end
