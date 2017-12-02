@@ -97,14 +97,25 @@
         
         _hourPicker.selectBlock = ^(NSInteger firstIndex, NSInteger secondIndex) {
             
-            [weakSelf.startHourArr replaceObjectAtIndex:weakSelf.weekDay withObject:[NSString stringWithFormat:@"%ld", firstIndex]];
-            
-            [weakSelf.endHourArr replaceObjectAtIndex:weakSelf.weekDay withObject:[NSString stringWithFormat:@"%ld", secondIndex]];
-            
             UILabel *textLbl = [weakSelf.timeView viewWithTag:1710 + weakSelf.weekDay];
             
-            textLbl.text = [NSString stringWithFormat:@"%02ld:00\n~\n%02ld:00", firstIndex, secondIndex];
-            
+            if (firstIndex < secondIndex ) {
+                
+                textLbl.text = [NSString stringWithFormat:@"%02ld:00\n~\n%02ld:00", firstIndex, secondIndex];
+                
+                [weakSelf.startHourArr replaceObjectAtIndex:weakSelf.weekDay withObject:[NSString stringWithFormat:@"%ld", firstIndex]];
+                
+                [weakSelf.endHourArr replaceObjectAtIndex:weakSelf.weekDay withObject:[NSString stringWithFormat:@"%ld", secondIndex]];
+                
+            } else if(firstIndex == secondIndex) {
+                
+                textLbl.text = [NSString stringWithFormat:@"关闭\n~\n关闭"];
+                
+                [weakSelf.startHourArr replaceObjectAtIndex:weakSelf.weekDay withObject:[NSString stringWithFormat:@"24"]];
+                
+                [weakSelf.endHourArr replaceObjectAtIndex:weakSelf.weekDay withObject:[NSString stringWithFormat:@"24"]];
+                
+            }
             
         };
         
@@ -918,8 +929,15 @@
             
             UILabel *timeLbl = [self.timeView viewWithTag:1710 + idx];
             
-            timeLbl.text = [NSString stringWithFormat:@"%02ld:00\n~\n%02ld:00", obj.startTime, obj.endTime];
-            
+            if (obj.startTime != 24) {
+                
+                timeLbl.text = [NSString stringWithFormat:@"%02ld:00\n~\n%02ld:00", obj.startTime, obj.endTime];
+                
+            } else {
+                
+                timeLbl.text = [NSString stringWithFormat:@"关闭\n~\n关闭"];
+                
+            }
         }];
         
         customTimeBtn.selected = YES;
@@ -1024,15 +1042,15 @@
     
     if (!self.isSelect) {
         
-        self.scrollView.contentSize = CGSizeMake(kScreenWidth, self.timeView.yy + 100);
-        
+        self.scrollView.contentSize = CGSizeMake(kScreenWidth, self.highSettingView.yy + 10 + 190);
+        //改变scrollView高度
+        self.scrollView.height += pointY;
+
         [self viewHiddenWithSelect:!self.isSelect];
         
         [UIView animateWithDuration:0.25 animations:^{
-            
-            
-            //            [self.scrollView setContentOffset:CGPointMake(0, pointY)];
-            [self.scrollView scrollRectToVisible:frame animated:NO];
+            //向上偏移
+            self.scrollView.transform = CGAffineTransformMakeTranslation(0, -pointY);
             
             self.rightArrowIV.transform = CGAffineTransformMakeRotation(M_PI_2);
             
@@ -1044,18 +1062,20 @@
         
     } else {
         
-        self.scrollView.contentSize = CGSizeMake(kScreenWidth, self.highSettingView.yy + 10);
+        self.scrollView.contentSize = CGSizeMake(kScreenWidth, self.highSettingView.yy);
         
         [UIView animateWithDuration:0.25 animations:^{
             
-            [self.scrollView setContentOffset:CGPointMake(0, 0)];
-            
+            self.scrollView.transform = CGAffineTransformIdentity;
+
             self.rightArrowIV.transform = CGAffineTransformIdentity;
             
         } completion:^(BOOL finished) {
             
             self.isSelect = NO;
             
+            self.scrollView.height -= pointY;
+
             [self viewHiddenWithSelect:self.isSelect];
             
         }];

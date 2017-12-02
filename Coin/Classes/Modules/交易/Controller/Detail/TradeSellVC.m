@@ -20,6 +20,7 @@
 #import "NSString+Check.h"
 #import "UILabel+Extension.h"
 #import "UIBarButtonItem+convience.h"
+#import "APICodeMacro.h"
 
 #import "TLUserLoginVC.h"
 #import "TLNavigationController.h"
@@ -65,6 +66,9 @@
         [self addOffItem];
     }
     
+    //获取交易提醒
+    [self requestTradeRemind];
+    //添加通知
     [self addNotification];
     
     //开启定时器,实时刷新
@@ -412,6 +416,28 @@
 }
 
 #pragma mark - Data
+
+- (void)requestTradeRemind {
+    
+    TLNetworking *http = [TLNetworking new];
+    
+    http.code = USER_CKEY_CVALUE;
+    http.parameters[@"key"] = @"trade_remind";
+    
+    [http postWithSuccess:^(id responseObject) {
+        
+        NSString *remark = responseObject[@"data"][@"remark"];
+        
+        self.tradeView.tradeTextLbl.text = remark;
+        
+        self.tradeView.tradeRemind = responseObject[@"data"][@"cvalue"];
+        
+    } failure:^(NSError *error) {
+        
+        
+    }];
+}
+
 - (void)getLeftAmount {
     
     CoinWeakSelf;

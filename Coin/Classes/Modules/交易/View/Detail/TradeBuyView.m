@@ -50,11 +50,11 @@
 @property (nonatomic, strong) UIView *buyView;
 //可用余额
 @property (nonatomic, strong) UILabel *leftAmountLbl;
-
-//底部
-@property (nonatomic, strong) UIView *bottomView;
 //交易提醒
 @property (nonatomic, strong) UILabel *tradeRemindLbl;
+//底部
+@property (nonatomic, strong) UIView *bottomView;
+
 
 
 @end
@@ -412,21 +412,32 @@
         make.left.equalTo(@0);
         make.width.equalTo(@(kScreenWidth));
         make.top.equalTo(self.buyView.mas_bottom).offset(10);
-//        make.height.equalTo(@120);
     }];
     
     //交易提醒
-    UIButton *promptBtn = [UIButton buttonWithTitle:@"" titleColor:kTextColor backgroundColor:kClearColor titleFont:15.0];
+    UIImageView *tradeIV = [[UIImageView alloc] init];
     
-    [promptBtn setImage:kImage(@"交易提醒") forState:UIControlStateNormal];
+    tradeIV.image = kImage(@"交易提醒");
     
-    [self.tradePromptView addSubview:promptBtn];
-    [promptBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.tradePromptView addSubview:tradeIV];
+    [tradeIV mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.top.left.equalTo(@12);
-//        make.width.equalTo(@135);
+        make.left.equalTo(@15);
+        make.top.equalTo(@10);
         
     }];
+    
+    UILabel *tradePromptLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:15.0];
+    
+    [self.tradePromptView addSubview:tradePromptLbl];
+    [tradePromptLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.left.equalTo(tradeIV.mas_right).offset(6);
+        make.centerY.equalTo(tradeIV.mas_centerY);
+        
+    }];
+    
+    self.tradeTextLbl = tradePromptLbl;
     
     //text
     UILabel *textLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:13.0];
@@ -436,16 +447,12 @@
     [self.tradePromptView addSubview:textLbl];
     [textLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
-//        make.left.equalTo(@15);
-//        make.right.equalTo(@(-15));
-        make.top.equalTo(promptBtn.mas_bottom).offset(11);
+        make.top.equalTo(tradePromptLbl.mas_bottom).offset(11);
         
         make.edges.mas_equalTo(UIEdgeInsetsMake(40, 15, 15, 15));
 
     }];
     
-//    [textLbl labelWithTextString:text lineSpace:5];
-
     self.tradeRemindLbl = textLbl;
     
 }
@@ -635,6 +642,9 @@
     
     [self.tradeRemindLbl labelWithTextString:tradeRemind lineSpace:5];
 
+    [self layoutIfNeeded];
+    
+    self.scrollView.contentSize = CGSizeMake(kScreenWidth, self.tradePromptView.yy);
 }
 
 #pragma mark - Events

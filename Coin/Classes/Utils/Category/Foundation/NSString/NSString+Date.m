@@ -256,7 +256,7 @@
     
     NSDate *date01 = [formatter dateFromString:self];
     formatter.dateFormat = format;
-    formatter.locale = [NSLocale currentLocale];
+//    formatter.locale = [NSLocale currentLocale];
     
     return [formatter stringFromDate:date01];
     

@@ -67,7 +67,7 @@
     
     //获取交易提醒
     [self requestTradeRemind];
-    
+    //添加通知
     [self addNotification];
     
     //开启定时器,实时刷新
@@ -423,9 +423,9 @@
     
     [http postWithSuccess:^(id responseObject) {
         
-        [self.tradeView.tradeRemindBtn setTitle:responseObject[@"data"][@"remark"] forState:UIControlStateNormal];
+        NSString *remark = responseObject[@"data"][@"remark"];
         
-        [self.tradeView.tradeRemindBtn setTitleRight];
+        self.tradeView.tradeTextLbl.text = remark;
         
         self.tradeView.tradeRemind = responseObject[@"data"][@"cvalue"];
         

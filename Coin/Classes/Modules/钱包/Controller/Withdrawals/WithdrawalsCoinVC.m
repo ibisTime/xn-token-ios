@@ -529,7 +529,12 @@ typedef NS_ENUM(NSInteger, AddressType) {
     http.parameters[@"applyUser"] = [TLUser user].userId;
     http.parameters[@"payCardInfo"] = self.currency.currency;
     http.parameters[@"payCardNo"] = self.receiveAddressLbl.text;
-    http.parameters[@"tradePwd"] = pwd;
+    
+    if (self.addressType == AddressTypeSelectAddress && [self.addressModel.status isEqualToString:@"0"]) {
+        
+        http.parameters[@"tradePwd"] = pwd;
+
+    }
     
     [http postWithSuccess:^(id responseObject) {
         

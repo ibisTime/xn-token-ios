@@ -352,7 +352,7 @@
 //    NSDate *createDate = [NSString dateFromString:order.createDatetime formatter:@"MMM dd, yyyy hh:mm:ss aa"];
     
     //失效时间
-    NSString *inviteDateStr = [order.invalidDatetime convertDateWithFormat:@"hh:mm:ss"];
+    NSString *inviteDateStr = [order.invalidDatetime convertDateWithFormat:@"HH:mm:ss"];
     //转换时间格式
     //对比两个时间
     

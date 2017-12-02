@@ -151,13 +151,11 @@
     self.addressView.backgroundColor = kWhiteColor;
     
     [self.view addSubview:self.addressView];
-//    [self.addressView mas_makeConstraints:^(MASConstraintMaker *make) {
-//
-//        make.top.equalTo(self.qrView.mas_bottom);
-//        make.left.right.equalTo(@0);
-//        make.height.equalTo(@50);
-//
-//    }];
+    
+    //点击复制
+    UITapGestureRecognizer *tapGR = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickCopy)];
+    
+    [self.addressView addGestureRecognizer:tapGR];
     
     //分割线
     UIView *line = [[UIView alloc] init];
@@ -227,7 +225,7 @@
     
     if (pasteBoard == nil) {
         
-        [TLAlert alertWithError:@"复制失败"];
+        [TLAlert alertWithError:@"复制失败, 请重新复制"];
         
     } else {
         
@@ -244,6 +242,22 @@
     billVC.billType = BillTypeRecharge;
 
     [self.navigationController pushViewController:billVC animated:YES];
+}
+
+- (void)clickCopy {
+    
+    UIPasteboard *pasteBoard = [UIPasteboard generalPasteboard];
+    
+    pasteBoard.string = self.currency.coinAddress;
+    
+    if (pasteBoard == nil) {
+        
+        [TLAlert alertWithError:@"复制失败, 请重新复制"];
+        
+    } else {
+        
+        [TLAlert alertWithSucces:@"复制成功"];
+    }
 }
 
 - (void)didReceiveMemoryWarning {

@@ -54,6 +54,6 @@ typedef void(^TradeBuyBlock)(TradeBuyType tradeType);
 //交易提醒
 @property (nonatomic, copy) NSString *tradeRemind;
 //
-@property (nonatomic, strong) UIButton *tradeRemindBtn;
+@property (nonatomic, strong) UILabel *tradeTextLbl;
 
 @end

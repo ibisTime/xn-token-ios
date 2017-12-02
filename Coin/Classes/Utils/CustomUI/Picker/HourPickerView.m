@@ -186,9 +186,9 @@
 
 - (void)confirm {
     
-    if (self.firstIndex >= self.secondIndex) {
+    if (self.firstIndex > self.secondIndex) {
         
-        [TLAlert alertWithInfo:@"开始时间不能大于等于结束时间"];
+        [TLAlert alertWithInfo:@"开始时间不能大于结束时间"];
         
         return ;
     }

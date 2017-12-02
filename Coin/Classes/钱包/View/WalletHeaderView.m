@@ -89,7 +89,7 @@
     [equivalentBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, 15, 0, 0)];
     
     //总资产
-    self.cnyAmountLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kWhiteColor font:15.0];
+    self.cnyAmountLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kWhiteColor font:25.0];
     
     [self addSubview:self.cnyAmountLbl];
     [self.cnyAmountLbl mas_makeConstraints:^(MASConstraintMaker *make) {
