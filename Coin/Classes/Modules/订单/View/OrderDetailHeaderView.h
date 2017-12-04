@@ -21,7 +21,7 @@ typedef NS_ENUM(NSInteger, OrderEventsType) {
 };
 
 typedef void(^OrderEventsBlock)(OrderEventsType orderType);
-@interface OrderDetailHeaderView : UIView
+@interface OrderDetailHeaderView : ChatHeadRefreshView
 
 @property (nonatomic, strong) OrderModel *order;
 //center

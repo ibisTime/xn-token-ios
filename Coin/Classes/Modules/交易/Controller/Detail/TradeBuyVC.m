@@ -393,22 +393,14 @@
 //下架广告
 - (void)advertiseOff {
     
-    TLNetworking *http = [TLNetworking new];
+    CoinWeakSelf;
     
-    http.code = @"625224";
-    http.parameters[@"adsCode"] = self.advertise.code;
-    http.parameters[@"userId"] = [TLUser user].userId;
-    
-    [http postWithSuccess:^(id responseObject) {
+    [TLAlert alertWithTitle:@"提示" msg:@"您确定要下架此广告?" confirmMsg:@"确认" cancleMsg:@"取消" cancle:^(UIAlertAction *action) {
         
-        [TLAlert alertWithSucces:@"下架成功"];
         
-        [self.navigationController popViewControllerAnimated:YES];
+    } confirm:^(UIAlertAction *action) {
         
-        [[NSNotificationCenter defaultCenter] postNotificationName:kAdvertiseOff object:nil];
-        
-    } failure:^(NSError *error) {
-        
+        [weakSelf requestAdvertiseOff];
     }];
     
 }
@@ -561,6 +553,28 @@
     
     [http postWithSuccess:^(id responseObject) {
         
+        
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
+//下架广告
+- (void)requestAdvertiseOff {
+    
+    TLNetworking *http = [TLNetworking new];
+    
+    http.code = @"625224";
+    http.parameters[@"adsCode"] = self.advertise.code;
+    http.parameters[@"userId"] = [TLUser user].userId;
+    
+    [http postWithSuccess:^(id responseObject) {
+        
+        [TLAlert alertWithSucces:@"下架成功"];
+        
+        [self.navigationController popViewControllerAnimated:YES];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:kAdvertiseOff object:nil];
         
     } failure:^(NSError *error) {
         

@@ -217,7 +217,7 @@
     
     UILabel *minerPromptLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor3 font:11.0];
     
-    minerPromptLbl.text = @"向认证账户提现将不再输入资金密码、短信验证码";
+    minerPromptLbl.text = @"向认证账户提现将不再输入资金密码";
     
     minerPromptLbl.numberOfLines = 0;
     

@@ -137,7 +137,7 @@
     [self.numLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.top.equalTo(personTextLbl.mas_bottom).offset(18);
-        make.centerX.equalTo(profitView.mas_centerX).offset(profitView.width/4.0);
+        make.centerX.equalTo(profitView.mas_centerX).offset(-profitView.width/4.0);
         
     }];
     
@@ -164,7 +164,7 @@
     [self.profitLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.top.equalTo(personTextLbl.mas_bottom).offset(18);
-        make.centerX.equalTo(profitView.mas_centerX).offset(-profitView.width/4.0);
+        make.centerX.equalTo(profitView.mas_centerX).offset(profitView.width/4.0);
         
     }];
     

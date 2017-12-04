@@ -589,7 +589,9 @@
     
     _leftAmount = leftAmount;
     
-    self.leftAmountLbl.text = [NSString stringWithFormat:@"广告剩余可交易量: %@ ETH", [_leftAmount convertToSimpleRealCoin]];
+//    self.leftAmountLbl.text = [NSString stringWithFormat:@"广告剩余可交易量: %@ ETH", [_leftAmount convertToSimpleRealCoin]];
+    self.leftAmountLbl.text = [NSString stringWithFormat:@"可用余额: %@ ETH", [_leftAmount convertToSimpleRealCoin]];
+
 }
 
 - (void)setTruePrice:(NSNumber *)truePrice {
