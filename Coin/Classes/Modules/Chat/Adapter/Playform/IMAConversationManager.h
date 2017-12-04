@@ -63,6 +63,9 @@ typedef void (^IMAConversationChangedCompletion)(IMAConversationChangedNotifyIte
 // 更新会话列表
 - (void)asyncConversationList;
 
+//获取列表的未读消息数据
+- (NSInteger)getUnReadCountWithConversationList:(NSArray *)conversationList;
+
 // 开始与user聊天，会产生新的conversationa或更新原conversation的位置
 - (IMAConversation *)chatWith:(IMAUser *)user;
 

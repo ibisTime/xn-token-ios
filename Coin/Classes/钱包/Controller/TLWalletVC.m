@@ -100,6 +100,7 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userlogin) name:kUserLoginNotification object:nil];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(withDrawCoinSuccess) name:kWithDrawCoinSuccess object:nil];
 }
 
 #pragma mark - Events
@@ -108,6 +109,12 @@
     
     [self getMyCurrencyList];
 
+}
+
+- (void)withDrawCoinSuccess {
+    
+    [self getMyCurrencyList];
+    
 }
 
 #pragma mark - Data

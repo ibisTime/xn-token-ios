@@ -83,6 +83,9 @@
     
     [[TIMManager sharedInstance] login:param succ:^{
         
+        //同步消息列表
+        [[IMAPlatform sharedInstance].conversationMgr asyncConversationList];
+        
         //消息栏消息数
         NSInteger unReadCount = [[IMAPlatform sharedInstance].conversationMgr unReadMessageCount];
         
@@ -94,6 +97,9 @@
         [[IMAPlatform sharedInstance] configOnLoginSucc:param];
         //配置APNs
         //        [self configAPNs];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:kIMLoginNotification object:nil];
+
     } fail:^(int code, NSString *msg) {
         
         NSLog(@"LoginFailureCode = %d, errorMsg = %@", code, msg);

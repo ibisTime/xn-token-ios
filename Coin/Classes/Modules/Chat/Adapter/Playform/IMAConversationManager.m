@@ -123,6 +123,53 @@
     DebugLog(@"==========>>>>>>>>>asyncUpdateConversationList Complete");
 }
 
+- (NSInteger)getUnReadCountWithConversationList:(NSArray *)conversationList {
+    
+    NSInteger unRead = 0;
+
+    for (TIMConversation *conversation in conversationList)
+    {
+        IMAConversation *conv = nil;
+        if ([conversation getType] == TIM_SYSTEM)
+        {
+#if kSupportCustomConversation
+            // 可能返回空
+            conv = [[IMACustomConversation alloc] initWith:conversation];
+#else
+            continue;
+#endif
+        }
+        else
+        {
+            conv = [[IMAConversation alloc] initWith:conversation];
+        }
+        
+        if (conv)
+        {
+            [_conversationList addObject:conv];
+        }
+        
+        if (_chattingConversation && [_chattingConversation isEqual:conv])
+        {
+            [conv copyConversationInfo:_chattingConversation];
+            // 防止因中途在聊天时，出现onrefresh回调
+            _chattingConversation = conv;
+        }
+        else
+        {
+            if (conv)
+            {
+                unRead += [conversation getUnReadMessageNum];
+            }
+        }
+    }
+    
+    [self asyncUpdateConversationListComplete];
+    
+    return unRead;
+    
+}
+
 - (void)asyncConversationList
 {
     DebugLog(@"==========>>>>>>>>>asyncConversationList");

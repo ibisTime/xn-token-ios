@@ -21,5 +21,7 @@
 - (NSString *)convertToSimpleRealCoin;
 
 - (NSString *)convertToCountMoney;
+//减法
+- (NSString *)subNumber:(NSNumber *)number;
 
 @end

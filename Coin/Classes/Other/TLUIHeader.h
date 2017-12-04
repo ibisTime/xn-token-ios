@@ -29,5 +29,9 @@
 #define kTrustNotification  @"kTrustNotification"
 //广告下架
 #define kAdvertiseOff       @"kAdvertiseOff"
+//提币成功
+#define kWithDrawCoinSuccess @"kWithDrawCoinSuccess"
+//聊天登录成功
+#define kIMLoginNotification @"kIMLoginNotification"
 
 #endif /* TLUIHeader_h */

@@ -16,6 +16,8 @@
 #import "OrderDetailVC.h"
 #import "WaitingOrderVC.h"
 
+#import "UITabBar+Badge.h"
+
 @interface TLOrderVC ()<SegmentDelegate, RefreshDelegate>
 
 //货币切换
@@ -34,6 +36,8 @@
 @property (nonatomic, strong) NSArray <OrderModel *>*orders;
 //订单状态方式(进行中和已完成)
 @property (nonatomic, copy) NSArray *statusList;
+//当前选择
+@property (nonatomic, assign) NSInteger currentIndex;
 
 @end
 
@@ -47,8 +51,8 @@
     if ([TLUser user].userId) {
         
         [self requestOrderList];
-
     }
+    
 }
 
 - (void)viewDidLoad {
@@ -64,6 +68,8 @@
     [self initPlaceHolderView];
     //订单列表
     [self initTableView];
+    //添加KVO
+    [self addKVO];
     
 }
 
@@ -71,6 +77,8 @@
 - (TopLabelUtil *)labelUnil {
     
     if (!_labelUnil) {
+        
+        self.currentIndex = 1;
         
         _labelUnil = [[TopLabelUtil alloc]initWithFrame:CGRectMake(kScreenWidth/2 - 120, 25, 240, 44)];
         _labelUnil.delegate = self;
@@ -178,14 +186,95 @@
 }
 
 - (void)addNotification {
+    //消息
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLogin) name:kUserLoginNotification object:nil];
+
+}
+
+- (void)addKVO {
     
+    CoinWeakSelf;
     
+    self.KVOController = [FBKVOController controllerWithObserver:self];
+    [self.KVOController observe:[IMAPlatform sharedInstance].conversationMgr keyPath:@"unReadMessageCount" options:NSKeyValueObservingOptionNew block:^(id observer, id object, NSDictionary *change) {
+        [weakSelf onUnReadMessage];
+    }];
+    
+}
+
+- (void)onUnReadMessage
+{
+    //同步消息列表
+    [[IMAPlatform sharedInstance].conversationMgr asyncConversationList];
+    
+    NSInteger unRead = [IMAPlatform sharedInstance].conversationMgr.unReadMessageCount;
+    
+    if (unRead == 0) {
+        
+        [self.tabBarController.tabBar hideBadgeOnItemIndex:1];
+        
+    }else if (unRead > 0)
+    {
+        [self.tabBarController.tabBar showBadgeOnItemIndex:1];
+
+    }
+    
+    if (self.currentIndex == 1) {
+        
+        NSMutableArray *conversationList = [NSMutableArray array];
+        
+        [self.orders enumerateObjectsUsingBlock:^(OrderModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            
+            NSString *userId = obj.isBuy ? obj.sellUserInfo.userId: obj.buyUserInfo.userId;
+            
+            TIMConversation *timConversation = [[TIMManager sharedInstance] getConversation:TIM_C2C receiver:userId];
+            
+            [conversationList addObject:timConversation];
+            
+        }];
+        
+        NSInteger unReadCount = [[IMAPlatform sharedInstance].conversationMgr getUnReadCountWithConversationList:[conversationList copy]];
+        
+        if (unReadCount == 0) {
+            
+            [self.labelUnil hideBadgeOnItemIndex:0];
+
+        }else if (unReadCount > 0)
+        {
+            [self.labelUnil showBadgeOnItemIndex:0];
+
+        }
+    }
+    
+    //刷新列表
+    [self.tableView reloadData_tl];
 }
 
 #pragma mark - Events
 - (void)changeCoin {
     
     [self.filterPicker show];
+}
+
+- (void)calculationUnReadCount {
+    
+    //同步消息列表
+    [[IMAPlatform sharedInstance].conversationMgr asyncConversationList];
+    
+    //消息栏消息数
+    NSInteger unReadCount = [[IMAPlatform sharedInstance].conversationMgr unReadMessageCount];
+    
+    if (unReadCount > 0) {
+        
+        [self.tabBarController.tabBar showBadgeOnItemIndex:1];
+        
+    } else {
+        
+        [self.tabBarController.tabBar hideBadgeOnItemIndex:1];
+        
+    }
+    
+    [self.tableView reloadData_tl];
 }
 
 #pragma mark - Data
@@ -220,8 +309,8 @@
             
             weakSelf.tableView.orders = objs;
             
-            [weakSelf.tableView reloadData_tl];
-            
+            [weakSelf onUnReadMessage];
+
         } failure:^(NSError *error) {
             
         }];
@@ -237,8 +326,8 @@
             
             weakSelf.tableView.orders = objs;
             
-            [weakSelf.tableView reloadData_tl];
-            
+            [weakSelf onUnReadMessage];
+
         } failure:^(NSError *error) {
             
         }];
@@ -260,6 +349,8 @@
         self.statusList = @[@"2", @"3", @"4"];
         
     }
+    
+    self.currentIndex = index;
     
     self.helper.parameters[@"statusList"] = self.statusList;
 

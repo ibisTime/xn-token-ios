@@ -12,7 +12,7 @@
 
 @property (nonatomic, assign) NSInteger ID;
 
-@property (nonatomic, assign) CGFloat mid;
+@property (nonatomic, strong) NSNumber *mid;
 
 @property (nonatomic, copy) NSString *volume;
 
@@ -30,7 +30,7 @@
 
 @property (nonatomic, copy) NSString *origin;
 //最新价格
-@property (nonatomic, assign) CGFloat lastPrice;
+@property (nonatomic, strong) NSNumber *lastPrice;
 //币种
 @property (nonatomic, copy) NSString *coin;
 

@@ -23,6 +23,8 @@
 #import "QuotationListVC.h"
 #import "GuideDetailVC.h"
 
+#import "NSNumber+Extension.h"
+
 @interface TLHangQingVC ()
 //滚动视图
 @property (nonatomic, strong) QuotationView *quotationView;
@@ -145,7 +147,7 @@
 - (void)startTimer {
     
     //开启定时器,实时刷新
-    self.timer = [NSTimer timerWithTimeInterval:20 target:self selector:@selector(queryCoinQuotation) userInfo:nil repeats:YES];
+    self.timer = [NSTimer timerWithTimeInterval:30 target:self selector:@selector(queryCoinQuotation) userInfo:nil repeats:YES];
     
     [[NSRunLoop mainRunLoop] addTimer:self.timer forMode:NSDefaultRunLoopMode];
 }
@@ -270,17 +272,16 @@
 
 - (void)calculationPriceDiffWithPriceLabel:(UILabel *)priceLabel diffPriceLabel:(UILabel *)diffPricelabel riseLabel:(UILabel *)riseLabel lastQuotation:(QuotationModel *)lastQuotation nowQuotation:(QuotationModel *)nowQuotation {
     
-    priceLabel.text = [NSString stringWithFormat:@"￥%.2lf", nowQuotation.mid];
+    priceLabel.text = [nowQuotation.mid convertToRealMoneyWithNum:4];
 
     if (lastQuotation) {
         
-        CGFloat diffPrice = nowQuotation.mid - lastQuotation.mid;
+        CGFloat diffPrice = [[nowQuotation.mid subNumber:lastQuotation.mid] doubleValue];
         
-        CGFloat rate = 100*diffPrice/(lastQuotation.mid*1.0);
+        CGFloat rate = 100*diffPrice/([lastQuotation.mid doubleValue]*1.0);
         
         //差价
         if (diffPrice >= 0) {
-            
             
             priceLabel.textColor = kThemeColor;
             

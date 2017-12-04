@@ -123,4 +123,21 @@
     
 }
 
+//减法
+- (NSString *)subNumber:(NSNumber *)number {
+    
+    //保留8位小数,第九位舍去
+    NSDecimalNumberHandler *handler = [NSDecimalNumberHandler decimalNumberHandlerWithRoundingMode:NSRoundBankers scale:8 raiseOnExactness:NO raiseOnOverflow:NO raiseOnUnderflow:NO raiseOnDivideByZero:YES];
+    
+    NSDecimalNumber *m = [NSDecimalNumber decimalNumberWithString:[self stringValue]];
+    
+    NSDecimalNumber *n = [NSDecimalNumber decimalNumberWithString:[number stringValue]];
+    
+    NSDecimalNumber *o = [m decimalNumberBySubtracting:n];
+    
+    NSDecimalNumber *p = [o decimalNumberByRoundingAccordingToBehavior:handler];
+    
+    return [NSString stringWithFormat:@"%@",p];
+}
+
 @end

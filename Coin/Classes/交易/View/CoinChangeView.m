@@ -28,7 +28,7 @@
         self.titleLbl = [UILabel labelWithFrame:CGRectZero
                                 textAligment:NSTextAlignmentLeft
                              backgroundColor:[UIColor whiteColor]
-                                        font:[UIFont systemFontOfSize:20]
+                                        font:[UIFont systemFontOfSize:16]
                                    textColor:[UIColor textColor]];
         [self addSubview:self.titleLbl];
         
@@ -40,6 +40,8 @@
         [self.titleLbl mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self);
             make.centerY.equalTo(self);
+            make.width.equalTo(@44);
+            
         }];
         
         [self.arrowImageView mas_makeConstraints:^(MASConstraintMaker *make) {

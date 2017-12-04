@@ -142,13 +142,25 @@ static NSString *identifierCell = @"OrderListCell";
     
     [http postWithSuccess:^(id responseObject) {
         
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
+
+        OrderModel *order = self.orders[index];
+
+        NSString *userId = order.isBuy ? order.sellUserInfo.userId: order.buyUserInfo.userId;
+
+        //获取会话列表
+        TIMConversation *timConversation = [[TIMManager sharedInstance] getConversation:TIM_C2C receiver:userId];
+        
+        IMAConversation *imaConversation = [[IMAConversation alloc] initWith:timConversation];
+        
+        [[IMAPlatform sharedInstance].conversationMgr deleteConversation:imaConversation needUIRefresh:NO];
+        //删除数据源中的数据
         [self.orders removeObjectAtIndex:index];
         
-        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
         [self deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
         
         [TLAlert alertWithSucces:@"删除成功"];
-
+        
         if (self.orders.count == 0) {
             
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -156,9 +168,7 @@ static NSString *identifierCell = @"OrderListCell";
                 [self reloadData_tl];
                 
             });
-            
         }
-        
         
     } failure:^(NSError *error) {
         

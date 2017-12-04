@@ -14,6 +14,8 @@
 #import <UIButton+WebCache.h>
 #import "NSNumber+Extension.h"
 
+#import "TLUser.h"
+
 @interface OrderListCell ()
 
 //头像
@@ -28,6 +30,8 @@
 @property (nonatomic, strong) UILabel *statusLbl;
 //编号
 @property (nonatomic, strong) UILabel *orderCodeLbl;
+//未读消息数
+@property (nonatomic, strong) UILabel *unReadLbl;
 
 @end
 
@@ -63,6 +67,29 @@
         make.left.equalTo(@(15));
         make.width.height.equalTo(@(imgWidth));
         make.centerY.equalTo(@0);
+        
+    }];
+    
+    _unReadLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kWhiteColor font:11.0];
+    
+    _unReadLbl.layer.cornerRadius = 9;
+    _unReadLbl.clipsToBounds = YES;
+    _unReadLbl.layer.borderColor = kWhiteColor.CGColor;
+    _unReadLbl.layer.borderWidth = 1;
+    
+    _unReadLbl.textAlignment = NSTextAlignmentCenter;
+    
+    _unReadLbl.backgroundColor = [UIColor colorWithHexString:@"#ff5000"];
+    
+    _unReadLbl.hidden = YES;
+    
+    [self addSubview:_unReadLbl];
+    [_unReadLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.centerX.equalTo(_photoBtn.mas_right).offset(-3);
+        make.centerY.equalTo(_photoBtn.mas_top).offset(3);
+        make.height.equalTo(@18);
+        make.width.greaterThanOrEqualTo(@18);
         
     }];
     
@@ -219,6 +246,18 @@
     self.amountLbl.hidden = order.tradeAmount != nil ? NO: YES;
     
     self.orderCodeLbl.hidden = order.tradeAmount != nil ? NO: YES;
+    
+    NSString *userId = order.isBuy ? order.sellUserInfo.userId: order.buyUserInfo.userId;
+    
+    //获取未读数量
+//    @property (nonatomic, assign) NSInteger unReadMessageCount;
+    TIMConversation * conversation = [[TIMManager sharedInstance] getConversation:TIM_C2C receiver:userId];
+    
+    NSInteger unReadCount = [conversation getUnReadMessageNum];
+    
+    self.unReadLbl.text = [NSString stringWithFormat:@"%ld", unReadCount];
+    
+    self.unReadLbl.hidden = unReadCount == 0 ? YES: NO;
 }
 
 @end

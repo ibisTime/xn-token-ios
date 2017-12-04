@@ -79,7 +79,7 @@
     
     [self insertSubview:_scrollView belowSubview:_headView];
     
-    _scrollView.contentOffset = CGPointMake(kScreenWidth*0, 0);
+    _scrollView.contentOffset = CGPointMake(0, 0);
     
     [self addSubview:_scrollView];
 }

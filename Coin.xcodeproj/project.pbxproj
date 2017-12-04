@@ -413,6 +413,8 @@
 		21205D071FCD6394003C6C7C /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 21205D011FCD6393003C6C7C /* README.txt */; };
 		21205D081FCD6394003C6C7C /* read_me.txt in Resources */ = {isa = PBXBuildFile; fileRef = 21205D051FCD6394003C6C7C /* read_me.txt */; };
 		21205D0C1FCD6512003C6C7C /* TLWXManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 21205D0A1FCD6512003C6C7C /* TLWXManager.m */; };
+		2120A8F81FD4EB5000B03DB0 /* UpdateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2120A8F61FD4EB4F00B03DB0 /* UpdateModel.m */; };
+		2120A8FC1FD51DF800B03DB0 /* UITabBar+Badge.m in Sources */ = {isa = PBXBuildFile; fileRef = 2120A8FB1FD51DF800B03DB0 /* UITabBar+Badge.m */; };
 		2120D8A31FCEE1DE00712600 /* HourPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2120D8A21FCEE1DE00712600 /* HourPickerView.m */; };
 		2121DCC21FC6F17C001FC2E3 /* TradeSellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2121DCC11FC6F17C001FC2E3 /* TradeSellView.m */; };
 		2121DCC51FC6F19E001FC2E3 /* SellConfirmView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2121DCC41FC6F19E001FC2E3 /* SellConfirmView.m */; };
@@ -1331,6 +1333,10 @@
 		21205D051FCD6394003C6C7C /* read_me.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = read_me.txt; sourceTree = "<group>"; };
 		21205D0A1FCD6512003C6C7C /* TLWXManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLWXManager.m; sourceTree = "<group>"; };
 		21205D0B1FCD6512003C6C7C /* TLWXManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLWXManager.h; sourceTree = "<group>"; };
+		2120A8F61FD4EB4F00B03DB0 /* UpdateModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateModel.m; sourceTree = "<group>"; };
+		2120A8F71FD4EB5000B03DB0 /* UpdateModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateModel.h; sourceTree = "<group>"; };
+		2120A8FA1FD51DF800B03DB0 /* UITabBar+Badge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UITabBar+Badge.h"; sourceTree = "<group>"; };
+		2120A8FB1FD51DF800B03DB0 /* UITabBar+Badge.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UITabBar+Badge.m"; sourceTree = "<group>"; };
 		2120D8A11FCEE1DE00712600 /* HourPickerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HourPickerView.h; sourceTree = "<group>"; };
 		2120D8A21FCEE1DE00712600 /* HourPickerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HourPickerView.m; sourceTree = "<group>"; };
 		2121DCC01FC6F17C001FC2E3 /* TradeSellView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TradeSellView.h; sourceTree = "<group>"; };
@@ -3209,6 +3215,7 @@
 		211DE65C1FB58B4B002FCF3D /* UIKit */ = {
 			isa = PBXGroup;
 			children = (
+				2120A8F91FD51DDA00B03DB0 /* UITabbar */,
 				211EAD8D1FD0FC210037FBA8 /* UIViewController */,
 				211DE65D1FB58B4B002FCF3D /* UILabel */,
 				211DE6621FB58B4B002FCF3D /* UIButton */,
@@ -3530,6 +3537,15 @@
 			path = Manager;
 			sourceTree = "<group>";
 		};
+		2120A8F91FD51DDA00B03DB0 /* UITabbar */ = {
+			isa = PBXGroup;
+			children = (
+				2120A8FA1FD51DF800B03DB0 /* UITabBar+Badge.h */,
+				2120A8FB1FD51DF800B03DB0 /* UITabBar+Badge.m */,
+			);
+			path = UITabbar;
+			sourceTree = "<group>";
+		};
 		2121DCC71FC71225001FC2E3 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -3761,6 +3777,8 @@
 				211CF98E1FC3F4AF00E51FCF /* AdvertiseModel.m */,
 				211CF9901FC4144700E51FCF /* PayTypeModel.h */,
 				211CF9911FC4144700E51FCF /* PayTypeModel.m */,
+				2120A8F71FD4EB5000B03DB0 /* UpdateModel.h */,
+				2120A8F61FD4EB4F00B03DB0 /* UpdateModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -4519,6 +4537,7 @@
 				21A7F31C1FB2E2F900FAA0A2 /* TLUserExt.m in Sources */,
 				211A34FD1FB4507E00FEB71F /* IdAuthVC.m in Sources */,
 				211C04101FC6604800E51FCF /* Reachability.m in Sources */,
+				2120A8F81FD4EB5000B03DB0 /* UpdateModel.m in Sources */,
 				211C042D1FC6604800E51FCF /* NSObject+Json.m in Sources */,
 				215979731FB84CB10029F177 /* BillDetailTableView.m in Sources */,
 				211DE6C01FB58B4C002FCF3D /* NSObject+Extension.m in Sources */,
@@ -4577,6 +4596,7 @@
 				211C04341FC6604800E51FCF /* TableRefreshViewController.m in Sources */,
 				211C04551FC6604800E51FCF /* IMAHost.m in Sources */,
 				211DE6B41FB58B4C002FCF3D /* UIColor+Extension.m in Sources */,
+				2120A8FC1FD51DF800B03DB0 /* UITabBar+Badge.m in Sources */,
 				211A34E41FB4255700FEB71F /* MineGroup.m in Sources */,
 				211C041D1FC6604800E51FCF /* FTUtils+UIGestureRecognizer.m in Sources */,
 				211C04CB1FC6604900E51FCF /* CustomChatUIViewController.m in Sources */,

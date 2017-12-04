@@ -285,7 +285,7 @@
             
             if ([obj.coin isEqualToString:@"ETH"]) {
                 
-                self.publishView.marketPrice = [NSString stringWithFormat:@"%.4lf", obj.mid];
+                self.publishView.marketPrice = [NSString stringWithFormat:@"%.4lf", [obj.mid doubleValue]];
                 
             }
 //            else if ([obj.coin isEqualToString:@"BTC"]) {

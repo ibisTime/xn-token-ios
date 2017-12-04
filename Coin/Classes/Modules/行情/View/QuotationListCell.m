@@ -111,7 +111,7 @@
     
     self.tradeNumLbl.text = [NSString stringWithFormat:@"交易量 %@",quotation.volume];
     
-    NSString *cny = [NSString stringWithFormat:@"%.4lf CNY", quotation.mid];
+    NSString *cny = [NSString stringWithFormat:@"%.4lf CNY", [quotation.mid doubleValue]];
 
     [self.cnyNumLbl labelWithString:cny title:@"CNY" font:Font(12.0) color:kTextColor];
 

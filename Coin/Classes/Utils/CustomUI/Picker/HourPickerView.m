@@ -148,7 +148,7 @@
     
     [self.filterPicker reloadAllComponents];
     
-    self.secondIndex = secondTagNames.count - 1;
+    self.secondIndex = secondTagNames.count - 2;
 }
 
 #pragma mark - Events
@@ -156,7 +156,7 @@
     
     [self.filterPicker selectRow:0 inComponent:0 animated:NO];
     
-    [self.filterPicker selectRow:self.secondTagNames.count - 1 inComponent:1 animated:NO];
+    [self.filterPicker selectRow:self.secondTagNames.count - 2 inComponent:1 animated:NO];
     
     [[UIApplication sharedApplication].keyWindow addSubview:self];
     
@@ -189,6 +189,20 @@
     if (self.firstIndex > self.secondIndex) {
         
         [TLAlert alertWithInfo:@"开始时间不能大于结束时间"];
+        
+        return ;
+    }
+    
+    if (self.firstIndex == 24 && self.secondIndex != 25) {
+        
+        [TLAlert alertWithInfo:@"请将结束时间选为关闭"];
+        
+        return ;
+    }
+    
+    if (self.firstIndex != 24 && self.secondIndex == 25) {
+        
+        [TLAlert alertWithInfo:@"请将开始时间选为关闭"];
         
         return ;
     }

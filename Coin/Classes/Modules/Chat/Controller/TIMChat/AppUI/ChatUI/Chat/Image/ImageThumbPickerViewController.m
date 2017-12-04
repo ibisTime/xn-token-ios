@@ -152,10 +152,14 @@
 - (UIButton *)createSendBtn
 {
     UIButton *sendBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [sendBtn setBackgroundColor:[UIColor flatWhiteColor]];
+    
+    [sendBtn setBackgroundColor:kThemeColor];
     sendBtn.enabled = YES;
     sendBtn.titleLabel.font = kAppMiddleTextFont;
     sendBtn.frame = CGRectMake(0, 0, 60, 30);
+    sendBtn.layer.cornerRadius = 4;
+    sendBtn.clipsToBounds = YES;
+    
     [sendBtn setTitle:@"发送" forState:UIControlStateNormal];
     [sendBtn addTarget:self action:@selector(onSendBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     

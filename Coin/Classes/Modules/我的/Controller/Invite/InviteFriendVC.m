@@ -14,10 +14,12 @@
 #import "APICodeMacro.h"
 
 #import "ShareView.h"
+#import "TLBannerView.h"
 
 #import "HistoryInviteVC.h"
 #import "TLUserLoginVC.h"
 #import "TLNavigationController.h"
+#import "WebVC.h"
 
 #import "NSString+CGSize.h"
 #import "UILabel+Extension.h"
@@ -30,6 +32,12 @@
 @interface InviteFriendVC ()
 
 @property (nonatomic, strong) UIView *centerView;
+//轮播图
+@property (nonatomic,strong) TLBannerView *bannerView;
+//
+@property (nonatomic,strong) NSMutableArray <BannerModel *>*bannerRoom;
+//图片
+@property (nonatomic,strong) NSMutableArray *bannerPics;
 //说明
 @property (nonatomic, copy) NSString *remark;
 //分享链接
@@ -38,8 +46,6 @@
 @property (nonatomic, strong) UILabel *activityRuleLbl;
 //滚动图
 @property (nonatomic, strong) UIScrollView *scrollView;
-//banner图
-@property (nonatomic,strong) NSMutableArray <BannerModel *>*bannerRoom;
 //邀请人数
 @property (nonatomic, strong) UILabel *numLbl;
 //收益
@@ -62,6 +68,8 @@
     [self initBannerView];
     //
     [self initSubviews];
+    //获取banner图
+    [self getBanner];
     //获取活动规则
     [self requestActivityRule];
     //获取邀请人数和收益
@@ -86,7 +94,28 @@
 
 - (void)initBannerView {
     
+    CoinWeakSelf;
     
+    //顶部轮播
+    TLBannerView *bannerView = [[TLBannerView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kHeight(170))];
+    
+    bannerView.selected = ^(NSInteger index) {
+        
+        if (!(weakSelf.bannerRoom[index].url && weakSelf.bannerRoom[index].url.length > 0)) {
+            return ;
+        }
+        
+        WebVC *webVC = [WebVC new];
+        
+        webVC.url = weakSelf.bannerRoom[index].url;
+        
+        [weakSelf.navigationController pushViewController:webVC animated:YES];
+        
+    };
+    
+    [self.scrollView addSubview:bannerView];
+    
+    self.bannerView = bannerView;
 }
 
 - (void)initSubviews {
@@ -325,6 +354,37 @@
 }
 
 #pragma mark - Data
+- (void)getBanner {
+    
+    //广告图
+    __weak typeof(self) weakSelf = self;
+    
+    TLNetworking *http = [TLNetworking new];
+    //806052
+    http.code = @"805806";
+    http.parameters[@"type"] = @"2";
+    http.parameters[@"location"] = @"activity";
+    
+    [http postWithSuccess:^(id responseObject) {
+        
+        weakSelf.bannerRoom = [BannerModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
+        //组装数据
+        weakSelf.bannerPics = [NSMutableArray arrayWithCapacity:weakSelf.bannerRoom.count];
+        
+        //取出图片
+        [weakSelf.bannerRoom enumerateObjectsUsingBlock:^(BannerModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            
+            [weakSelf.bannerPics addObject:[obj.pic convertImageUrl]];
+        }];
+        
+        weakSelf.bannerView.imgUrls = weakSelf.bannerPics;
+        
+    } failure:^(NSError *error) {
+        
+    }];
+    
+}
+
 - (void)requestInviteNumber {
     
     TLNetworking *http = [TLNetworking new];

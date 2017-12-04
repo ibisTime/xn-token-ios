@@ -389,21 +389,21 @@ typedef NS_ENUM(NSInteger, AddressType) {
 
     [self.view endEditing:YES];
     
-    if (self.addressType == AddressTypeSelectAddress && [self.addressModel.status isEqualToString:@"0"]) {
+    if (self.addressType == AddressTypeSelectAddress && [self.addressModel.status isEqualToString:@"1"]) {
         
-        [TLAlert alertWithTitle:@"请输入资金密码" msg:@"" confirmMsg:@"确定" cancleMsg:@"取消" placeHolder:@"请输入资金密码" maker:self cancle:^(UIAlertAction *action) {
-            
-        } confirm:^(UIAlertAction *action, UITextField *textField) {
-            
-            [self confirmWithdrawalsWithPwd:textField.text];
-            
-        }];
+        [self confirmWithdrawalsWithPwd:nil];
         
         return ;
 
     }
     
-    [self confirmWithdrawalsWithPwd:nil];
+    [TLAlert alertWithTitle:@"请输入资金密码" msg:@"" confirmMsg:@"确定" cancleMsg:@"取消" placeHolder:@"请输入资金密码" maker:self cancle:^(UIAlertAction *action) {
+        
+    } confirm:^(UIAlertAction *action, UITextField *textField) {
+        
+        [self confirmWithdrawalsWithPwd:textField.text];
+        
+    }];
 
 }
 
@@ -509,7 +509,7 @@ typedef NS_ENUM(NSInteger, AddressType) {
         return ;
     }
     
-    if (self.addressType == AddressTypeSelectAddress && [self.addressModel.status isEqualToString:@"0"]) {
+    if (!(self.addressType == AddressTypeSelectAddress && [self.addressModel.status isEqualToString:@"1"])) {
         
         if (![pwd valid]) {
             
@@ -530,7 +530,7 @@ typedef NS_ENUM(NSInteger, AddressType) {
     http.parameters[@"payCardInfo"] = self.currency.currency;
     http.parameters[@"payCardNo"] = self.receiveAddressLbl.text;
     
-    if (self.addressType == AddressTypeSelectAddress && [self.addressModel.status isEqualToString:@"0"]) {
+    if (!(self.addressType == AddressTypeSelectAddress && [self.addressModel.status isEqualToString:@"1"])) {
         
         http.parameters[@"tradePwd"] = pwd;
 
@@ -539,6 +539,8 @@ typedef NS_ENUM(NSInteger, AddressType) {
     [http postWithSuccess:^(id responseObject) {
         
         [TLAlert alertWithSucces:@"提币申请提交成功"];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:kWithDrawCoinSuccess object:nil];
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             

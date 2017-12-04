@@ -81,6 +81,8 @@
             
             btn.frame = CGRectMake(x, y, w, w);
             
+            btn.tag = 1000+i;
+
             [btn setTitleColor:kTextColor forState:UIControlStateNormal];
             
             btn.titleLabel.font = Font(15.0);
@@ -88,9 +90,9 @@
             btn.transform = CGAffineTransformMakeTranslation(0, self.bounds.size.height);
             
             [btn setImage:kImage(titles[i]) forState:UIControlStateNormal];
+            //取消高亮
+            btn.showsTouchWhenHighlighted = NO;
             
-            btn.tag = 1000+i;
-
             [btn addTarget:self action:@selector(buttonOnClicked:) forControlEvents:UIControlEventTouchUpInside];
 
             [self addSubview:btn];
@@ -101,11 +103,21 @@
     return self;
 }
 
+#pragma mark - Setting
+- (void)setTitleColor:(UIColor*)color index:(NSInteger)index {
+    
+    UIButton *btn = [_whiteBg viewWithTag:1000+index];
+    
+    [btn setTitleColor:color forState:UIControlStateNormal];
+}
+
+#pragma mark - Events
+
 - (void)buttonOnClicked:(UIButton*)btn {
     
     [self hide];
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.4 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         
         if (_publishBlock) {
             
@@ -118,13 +130,6 @@
 - (void)clickCancel {
     
     [self hide];
-}
-
-- (void)setTitleColor:(UIColor*)color index:(NSInteger)index {
-    
-    UIButton *btn = [_whiteBg viewWithTag:1000+index];
-    
-    [btn setTitleColor:color forState:UIControlStateNormal];
 }
 
 - (void)tapAction {
@@ -192,7 +197,7 @@
     
     self.timer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(returnUp) userInfo:nil repeats:YES];
 
-    [UIView animateWithDuration:1 animations:^{
+    [UIView animateWithDuration:0.8 animations:^{
         
         _effectView.alpha = 0.001;
         
@@ -231,7 +236,7 @@
 - (void)setDownOneBtnAnim:(UIButton *)btn
 {
     
-    [UIView animateWithDuration:0.4 animations:^{
+    [UIView animateWithDuration:0.2 animations:^{
         
         btn.transform = CGAffineTransformMakeTranslation(0, self.bounds.size.height);
         

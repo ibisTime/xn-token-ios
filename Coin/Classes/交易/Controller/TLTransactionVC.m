@@ -9,6 +9,8 @@
 #import "TLTransactionVC.h"
 #import "TLUIHeader.h"
 
+#import "UITabBar+Badge.h"
+
 #import "TradeTableView.h"
 #import "CoinChangeView.h"
 #import "TLBannerView.h"
@@ -17,6 +19,7 @@
 #import "FilterView.h"
 
 #import "BannerModel.h"
+#import "UpdateModel.h"
 
 #import "WebVC.h"
 #import "PublishBuyVC.h"
@@ -71,6 +74,8 @@
     [self requestAdvetiseList];
     //添加通知
     [self addNotification];
+    //强制更新
+    [self configUpdate];
 
 }
 
@@ -149,7 +154,7 @@
     }
     
    //1.banner
-    TLBannerView *bannerView = [[TLBannerView alloc] initWithFrame:CGRectMake(0, 0,SCREEN_WIDTH, 140)];
+    TLBannerView *bannerView = [[TLBannerView alloc] initWithFrame:CGRectMake(0, 0,SCREEN_WIDTH, kWidth(140))];
     
     bannerView.selected = ^(NSInteger index) {
         
@@ -269,6 +274,7 @@
     
     //信任/取消信任
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshData) name:kTrustNotification object:nil];
+
 }
 
 #pragma mark - Events
@@ -449,6 +455,55 @@
     }];
     
     [self.tableView endRefreshingWithNoMoreData_tl];
+    
+}
+
+#pragma mark - Config
+- (void)configUpdate {
+    
+    //1:iOS 2:安卓
+    TLNetworking *http = [[TLNetworking alloc] init];
+    
+    http.code = @"625918";
+    http.parameters[@"type"] = @"ios-c";
+    
+    [http postWithSuccess:^(id responseObject) {
+        
+        UpdateModel *update = [UpdateModel mj_objectWithKeyValues:responseObject[@"data"]];
+        
+        //获取当前版本号
+        NSString *currentVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+        
+        if (![currentVersion isEqualToString:update.version]) {
+            //1：强制，0：不强制
+            if ([update.forceUpdate isEqualToString:@"0"]) {
+                
+                [TLAlert alertWithTitle:@"更新提醒" msg:update.note confirmMsg:@"立即升级" cancleMsg:@"稍后提醒" cancle:^(UIAlertAction *action) {
+                    
+                } confirm:^(UIAlertAction *action) {
+                    
+                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[update.downloadUrl stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]]];
+                    
+                }];
+                
+            } else {
+                
+                [TLAlert alertWithTitle:@"更新提醒" message:update.note confirmMsg:@"立即升级" confirmAction:^{
+                    
+                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[update.downloadUrl stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]]];
+                    
+                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                        
+                        exit(0);
+                        
+                    });
+                }];
+            }
+        }
+        
+    } failure:^(NSError *error) {
+        
+    }];
     
 }
 

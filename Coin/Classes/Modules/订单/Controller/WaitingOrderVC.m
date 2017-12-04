@@ -15,6 +15,8 @@
 #import "TradeBuyVC.h"
 #import "TradeSellVC.h"
 
+#import <IQKeyboardManager.h>
+
 @interface WaitingOrderVC ()
 
 @property (nonatomic, strong) UIView *topView;
@@ -30,6 +32,22 @@
 @end
 
 @implementation WaitingOrderVC
+
+- (void)viewWillAppear:(BOOL)animated {
+    
+    [super viewWillAppear:animated];
+    
+    [IQKeyboardManager sharedManager].enableAutoToolbar = NO;
+    
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    
+    [super viewDidDisappear:animated];
+    
+    [IQKeyboardManager sharedManager].enableAutoToolbar = YES;
+
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];

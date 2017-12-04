@@ -223,28 +223,6 @@
                 return;
             }
             
-            //对方
-            TradeUserInfo *friendUserInfo = self.advertise.user;
-            
-            IMAUser *user = [[IMAUser alloc] initWith:self.advertise.userId];
-            
-            user.nickName = friendUserInfo.nickname;
-            user.icon = [friendUserInfo.photo convertImageUrl];
-            user.remark = friendUserInfo.nickname;
-            user.userId = self.advertise.userId;
-            //我
-            ChatUserProfile *userInfo = [ChatUserProfile sharedUser];
-            
-            userInfo.minePhoto = [TLUser user].photo;
-            userInfo.mineNickName = [TLUser user].nickname;
-            userInfo.friendPhoto = [friendUserInfo.photo convertImageUrl];
-            userInfo.friendNickName = friendUserInfo.nickname;
-            
-            ChatViewController *chatVC = [[CustomChatUIViewController alloc] initWith:user];
-            
-            chatVC.userInfo = userInfo;
-            
-            [self.navigationController pushViewController:chatVC animated:YES];
             //待下单
             [self willCommitOrder];
             
@@ -485,15 +463,15 @@
             
             history = @"0 ETH";
             
-        } else if (historyNum > 0 && historyNum < 0.5) {
+        } else if (historyNum > 0 && historyNum <= 0.5) {
             
             history = @"0-0.5 ETH";
             
-        } else if (historyNum > 0.5 && historyNum < 1) {
+        } else if (historyNum > 0.5 && historyNum <= 1) {
             
-            history = [NSString stringWithFormat:@"%@+ ETH", [realNum convertToRealMoneyWithNum:1]];
-            
-        } else if (historyNum >= 1) {
+            history = [NSString stringWithFormat:@"0.5-1 ETH"];
+
+        } else if (historyNum > 1) {
             
             history = [NSString stringWithFormat:@"%.0lf+ ETH", historyNum];
         }
@@ -545,15 +523,20 @@
 - (void)willCommitOrder {
     
     TLNetworking *http = [TLNetworking new];
-    
-    http.isShowMsg = NO;
-    
+        
     http.code = @"625248";
     http.parameters[@"adsCode"] = self.advertise.code;
     http.parameters[@"sellUser"] = [TLUser user].userId;
     
     [http postWithSuccess:^(id responseObject) {
         
+        NSString *errorCode = responseObject[@"errorCode"];
+        
+        if ([errorCode isEqualToString:@"0"]) {
+            
+            //联系对方
+            [self pushToChatVC];
+        }
         
     } failure:^(NSError *error) {
         
@@ -580,6 +563,32 @@
     } failure:^(NSError *error) {
         
     }];
+}
+
+- (void)pushToChatVC {
+    
+    //对方
+    TradeUserInfo *friendUserInfo = self.advertise.user;
+    
+    IMAUser *user = [[IMAUser alloc] initWith:self.advertise.userId];
+    
+    user.nickName = friendUserInfo.nickname;
+    user.icon = [friendUserInfo.photo convertImageUrl];
+    user.remark = friendUserInfo.nickname;
+    user.userId = self.advertise.userId;
+    //我
+    ChatUserProfile *userInfo = [ChatUserProfile sharedUser];
+    
+    userInfo.minePhoto = [TLUser user].photo;
+    userInfo.mineNickName = [TLUser user].nickname;
+    userInfo.friendPhoto = [friendUserInfo.photo convertImageUrl];
+    userInfo.friendNickName = friendUserInfo.nickname;
+    
+    ChatViewController *chatVC = [[CustomChatUIViewController alloc] initWith:user];
+    
+    chatVC.userInfo = userInfo;
+    
+    [self.navigationController pushViewController:chatVC animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

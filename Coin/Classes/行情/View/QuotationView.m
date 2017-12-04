@@ -257,7 +257,7 @@
 
 - (void)initGuideView {
     
-    UIView *guideView = [[UIView alloc] init];
+    UIView *guideView = [[UIView alloc] initWithFrame:CGRectMake(0, self.systemNoticeView.yy + 10, kScreenWidth, 200)];
     
     guideView.backgroundColor = kWhiteColor;
     
