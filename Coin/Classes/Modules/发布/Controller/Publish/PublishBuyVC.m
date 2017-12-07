@@ -28,6 +28,7 @@
 @property (nonatomic, strong) NSMutableArray *timeArr;
 //key/value
 @property (nonatomic, strong) NSMutableArray <KeyValueModel *>*values;
+@property (nonatomic, strong) AdvertiseModel *advertise;
 
 @end
 
@@ -41,6 +42,34 @@
     
     self.timeArr = [NSMutableArray array];
     
+    
+    if (self.publishType == PublishTypePublishOrSaveDraft) {
+        
+        [self loadInfo];
+        return ;
+    }
+    
+    TLNetworking *http = [TLNetworking new];
+    http.showView = self.view;
+    http.code = @"625226";
+    http.parameters[@"adsCode"] = self.adsCode;
+    http.parameters[@"userId"] = [TLUser user].userId;
+    
+    [http postWithSuccess:^(id responseObject) {
+        
+        [self loadInfo];
+        self.advertise = [AdvertiseModel tl_objectWithDictionary:responseObject[@"data"]];
+        self.publishView.advertise = self.advertise;
+        
+    } failure:^(NSError *error) {
+        
+        
+    }];
+  
+}
+
+- (void)loadInfo {
+    
     //保存草稿
     [self addRightItem];
     //发布购买
@@ -51,14 +80,12 @@
     [self queryCoinQuotation];
     //获取提示
     [self requestTradeRemind];
-    //详情查广告
-    [self requestAdvertiseDetail];
 }
 
 #pragma mark - Init
 - (void)addRightItem {
     
-    if (self.type == PublishBuyPositionTypePublish) {
+    if (self.publishType == PublishTypePublishOrSaveDraft) {
         
         [UIBarButtonItem addRightItemWithTitle:@"保存草稿" titleColor:kTextColor frame:CGRectMake(0, 0, 70, 44) vc:self action:@selector(keepDraft)];
 
@@ -203,17 +230,25 @@
     TLNetworking *http = [TLNetworking new];
     http.code = @"625220";
     http.showView = self.view;
-    if (self.type == PublishBuyPositionTypePublish) {
+   
+    if (self.publishType == PublishTypePublishDraft) {
         
-    } else if(self.type == PublishBuyPositionTypeDraft) {
-        
+        http.parameters[@"publishType"] = kPublishDraft;
         http.parameters[@"adsCode"] = self.advertise.code;
-
+        
+        //
+    } else if (self.publishType == PublishTypePublishRedit) {
+        
+        //
+        http.parameters[@"publishType"] = kPublishRedit;
+        http.parameters[@"adsCode"] = self.advertise.code;
+        
+    } else if (self.publishType == PublishTypePublishOrSaveDraft) {
+        
+        //发布或者存草稿
+        http.parameters[@"publishType"] = draft.isPublish == YES ? kPublish : kSaveDraft;
+        
     }
-    
-    //发布类型（0=存草稿，1=发布）
-    http.parameters[@"publishType"] = draft.isPublish == YES ? @"1": @"0";
-    
 
     //
     http.parameters[@"userId"] = [TLUser user].userId;
@@ -253,7 +288,7 @@
     
     [http postWithSuccess:^(id responseObject) {
         
-        NSString *str = draft.isPublish == YES ? @"发布成功": @"保留成功";
+        NSString *str = draft.isPublish == YES ? @"发布成功": @"保存成功";
         
         [TLAlert alertWithSucces:str];
         
@@ -281,29 +316,34 @@
     
     TLNetworking *http = [TLNetworking new];
     
-    http.code = @"625290";
+    http.code = @"625292";
+    http.parameters[@"coin"] = @"ETH";
     
     [http postWithSuccess:^(id responseObject) {
         
-        NSArray <QuotationModel *>*data = [QuotationModel tl_objectArrayWithDictionaryArray:responseObject[@"data"]];
+        QuotationModel *model = [QuotationModel tl_objectWithDictionary:responseObject[@"data"]];
+        self.publishView.marketPrice = [NSString stringWithFormat:@"%.4lf", [model.mid doubleValue]];
+
         
-        [data enumerateObjectsUsingBlock:^(QuotationModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            
-            if ([obj.coin isEqualToString:@"ETH"]) {
-                
-                self.publishView.marketPrice = [NSString stringWithFormat:@"%.4lf", [obj.mid doubleValue]];
-                
-            }
-//            else if ([obj.coin isEqualToString:@"BTC"]) {
+//        NSArray <QuotationModel *>*data = [QuotationModel tl_objectArrayWithDictionaryArray:responseObject[@"data"]];
 //
-//                self.quotationView.btcQuotation = obj;
+//        [data enumerateObjectsUsingBlock:^(QuotationModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+//
+//            if ([obj.coin isEqualToString:@"ETH"]) {
+//
+//                self.publishView.marketPrice = [NSString stringWithFormat:@"%.4lf", [obj.mid doubleValue]];
 //
 //            }
-            else {
-                
-                
-            }
-        }];
+////            else if ([obj.coin isEqualToString:@"BTC"]) {
+////
+////                self.quotationView.btcQuotation = obj;
+////
+////            }
+//            else {
+//
+//
+//            }
+//        }];
         
         
     } failure:^(NSError *error) {
@@ -333,32 +373,7 @@
     }];
 }
 
-- (void)requestAdvertiseDetail {
-    
-    if (self.type == PublishBuyPositionTypePublish) {
-        
-        return ;
-    }
-    
-    TLNetworking *http = [TLNetworking new];
-    
-    http.showView = self.view;
-    http.code = @"625226";
-    http.parameters[@"adsCode"] = self.advertise.code;
-    http.parameters[@"userId"] = [TLUser user].userId;
-    
-    [http postWithSuccess:^(id responseObject) {
-        
-        self.advertise = [AdvertiseModel tl_objectWithDictionary:responseObject[@"data"]];
-        
-        self.publishView.advertise = self.advertise;
-        
-    } failure:^(NSError *error) {
-        
-        
-    }];
-    
-}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

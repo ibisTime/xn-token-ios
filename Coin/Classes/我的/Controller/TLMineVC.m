@@ -11,9 +11,8 @@
 #import "CoinHeader.h"
 #import "APICodeMacro.h"
 #import <SDWebImage/UIButton+WebCache.h>
-
+#import "PublishService.h"
 #import "MineGroup.h"
-
 #import "AdvertiseModel.h"
 
 #import "MineTableView.h"
@@ -375,20 +374,18 @@
             
         case MineHeaderSeletedTypeBuy:
         {
-            PublishBuyVC *buyVC = [PublishBuyVC new];
             
-            buyVC.type = PublishBuyPositionTypePublish;
-
+            PublishBuyVC *buyVC = [PublishBuyVC new];
+            buyVC.publishType = PublishTypePublishOrSaveDraft;
             [self.navigationController pushViewController:buyVC animated:YES];
             
         }break;
             
         case MineHeaderSeletedTypeSell:
         {
-            PublishSellVC *sellVC = [PublishSellVC new];
             
-            sellVC.type = PublishSellPositionTypePublish;
-
+            PublishSellVC *sellVC = [PublishSellVC new];
+            sellVC.publishType = PublishTypePublishOrSaveDraft;
             [self.navigationController pushViewController:sellVC animated:YES];
             
         }break;

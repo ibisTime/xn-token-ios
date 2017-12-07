@@ -1716,9 +1716,9 @@
 		211A53361FC021B400CC6294 /* 交易 */ = {
 			isa = PBXGroup;
 			children = (
+				211A53371FC021BD00CC6294 /* Controller */,
 				211A53391FC021CF00CC6294 /* Model */,
 				211A53381FC021C700CC6294 /* View */,
-				211A53371FC021BD00CC6294 /* Controller */,
 			);
 			path = "交易";
 			sourceTree = "<group>";

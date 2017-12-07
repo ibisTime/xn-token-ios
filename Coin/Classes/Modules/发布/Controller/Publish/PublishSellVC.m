@@ -28,36 +28,69 @@
 //key/value
 @property (nonatomic, strong) NSMutableArray <KeyValueModel *>*values;
 
+@property (nonatomic, strong) AdvertiseModel *advertise;
+
 @end
 
 @implementation PublishSellVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
     self.title = @"发布卖出";
     
     self.timeArr = [NSMutableArray array];
     
-    //保存草稿
-    [self addRightItem];
-    //发布卖出
-    [self initPublishView];
-    //获取收款期限
-    [self requestOverTime];
-    //查询以太币和比特币行情
-    [self queryCoinQuotation];
-    //获取提示
-    [self requestTradeRemind];
-    //详情查广告
-    [self requestAdvertiseDetail];
+    if (self.publishType == PublishTypePublishOrSaveDraft) {
+        
+        //保存草稿
+        [self addRightItem];
+        //发布卖出
+        [self initPublishView];
+        //获取收款期限
+        [self requestOverTime];
+        //查询以太币和比特币行情
+        [self queryCoinQuotation];
+        //获取提示
+        [self requestTradeRemind];
+        
+    } else {
+        
+        //先查询详情
+        TLNetworking *http = [TLNetworking new];
+        http.showView = self.view;
+        http.code = @"625226";
+        http.parameters[@"adsCode"] = self.adsCode;
+        http.parameters[@"userId"] = [TLUser user].userId;
+        [http postWithSuccess:^(id responseObject) {
+            
+            //保存草稿
+            [self addRightItem];
+            //发布卖出
+            [self initPublishView];
+            //获取收款期限
+            [self requestOverTime];
+            //查询以太币和比特币行情
+            [self queryCoinQuotation];
+            //获取提示
+            [self requestTradeRemind];
+            
+            self.advertise = [AdvertiseModel tl_objectWithDictionary:responseObject[@"data"]];
+            self.publishView.advertise = self.advertise;
+            
+        } failure:^(NSError *error) {
+            
+            
+        }];
+        
+    }
+
 }
 
 #pragma mark - Init
 - (void)addRightItem {
     
-    if (self.type == PublishSellPositionTypePublish) {
-        
+    if (self.publishType == PublishTypePublishOrSaveDraft) {
+    
         [UIBarButtonItem addRightItemWithTitle:@"保存草稿" titleColor:kTextColor frame:CGRectMake(0, 0, 70, 44) vc:self action:@selector(keepDraft)];
         
     }
@@ -76,8 +109,8 @@
     };
     
     self.publishView.backgroundColor = kBackgroundColor;
-    //
     [self.view addSubview:self.publishView];
+    
 }
 
 #pragma mark - Events
@@ -202,11 +235,27 @@
     http.showView = self.view;
     http.code = @"625220";
     //发布类型（0=存草稿，1=发布）
-    http.parameters[@"publishType"] = draft.isPublish == YES ? kPublish : kSaveDraft;
-    if (self.type == PublishSellPositionTypeDraft) {
+    
+
+    if (self.publishType == PublishTypePublishDraft) {
         
+        http.parameters[@"publishType"] = kPublishDraft;
         http.parameters[@"adsCode"] = self.advertise.code;
+
+        //
+    } else if (self.publishType == PublishTypePublishRedit) {
+        
+        //
+        http.parameters[@"publishType"] = kPublishRedit;
+        http.parameters[@"adsCode"] = self.advertise.code;
+
+    } else if (self.publishType == PublishTypePublishOrSaveDraft) {
+        
+        //发布或者存草稿
+        http.parameters[@"publishType"] = draft.isPublish == YES ? kPublish : kSaveDraft;
+
     }
+
     
     http.parameters[@"userId"] = [TLUser user].userId;
     http.parameters[@"leaveMessage"] = draft.leaveMessage;
@@ -267,29 +316,33 @@
     
     TLNetworking *http = [TLNetworking new];
     
-    http.code = @"625290";
+    http.code = @"625292";
+    http.parameters[@"coin"] = @"ETH";
     
     [http postWithSuccess:^(id responseObject) {
         
-        NSArray <QuotationModel *>*data = [QuotationModel tl_objectArrayWithDictionaryArray:responseObject[@"data"]];
+        QuotationModel *model = [QuotationModel tl_objectWithDictionary:responseObject[@"data"]];
+        self.publishView.marketPrice = [NSString stringWithFormat:@"%.4lf", [model.mid doubleValue]];
         
-        [data enumerateObjectsUsingBlock:^(QuotationModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            
-            if ([obj.coin isEqualToString:@"ETH"]) {
-                
-                self.publishView.marketPrice = [NSString stringWithFormat:@"%.4lf", [obj.mid doubleValue]];
-                
-            }
-            //            else if ([obj.coin isEqualToString:@"BTC"]) {
-            //
-            //                self.quotationView.btcQuotation = obj;
-            //
-            //            }
-            else {
-                
-                
-            }
-        }];
+//        NSArray <QuotationModel *>*data = [QuotationModel tl_objectArrayWithDictionaryArray:responseObject[@"data"]];
+//
+//        [data enumerateObjectsUsingBlock:^(QuotationModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+//
+//            if ([obj.coin isEqualToString:@"ETH"]) {
+//
+//                self.publishView.marketPrice = [NSString stringWithFormat:@"%.4lf", [obj.mid doubleValue]];
+//
+//            }
+//            //            else if ([obj.coin isEqualToString:@"BTC"]) {
+//            //
+//            //                self.quotationView.btcQuotation = obj;
+//            //
+//            //            }
+//            else {
+//
+//
+//            }
+//        }];
         
         
     } failure:^(NSError *error) {
@@ -319,32 +372,7 @@
     }];
 }
 
-- (void)requestAdvertiseDetail {
-    
-    if (self.type == PublishSellPositionTypePublish) {
-        
-        return ;
-    }
-    
-    TLNetworking *http = [TLNetworking new];
-    
-    http.showView = self.view;
-    http.code = @"625226";
-    http.parameters[@"adsCode"] = self.advertise.code;
-    http.parameters[@"userId"] = [TLUser user].userId;
-    
-    [http postWithSuccess:^(id responseObject) {
-        
-        self.advertise = [AdvertiseModel tl_objectWithDictionary:responseObject[@"data"]];
-        
-        self.publishView.advertise = self.advertise;
-        
-    } failure:^(NSError *error) {
-        
-        
-    }];
-    
-}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

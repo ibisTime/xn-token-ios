@@ -7,19 +7,21 @@
 //
 
 #import "TLBaseVC.h"
+#import "PublishService.h"
 
 #import "AdvertiseModel.h"
 
-typedef NS_ENUM(NSInteger, PublishBuyPositionType) {
-    
-    PublishBuyPositionTypePublish = 0,  //发布
-    PublishBuyPositionTypeDraft,        //草稿
-};
+//typedef NS_ENUM(NSInteger, PublishBuyPositionType) {
+//
+//    PublishBuyPositionTypePublish = 0,  //发布
+//    PublishBuyPositionTypeDraft,        //草稿
+//
+//};
 
 @interface PublishBuyVC : TLBaseVC
 
-@property (nonatomic, strong) AdvertiseModel *advertise;
+@property (nonatomic, copy) NSString *adsCode;
 
-@property (nonatomic, assign) PublishBuyPositionType type;
+@property (nonatomic, assign) PublishType publishType;
 
 @end
