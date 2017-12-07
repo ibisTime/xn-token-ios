@@ -38,6 +38,24 @@
     
 }
 
+- (void)labelWithString:(NSString *)string title:(NSString *)title font:(UIFont *)font color:(UIColor *)color lineSpace:(CGFloat)lineSpace {
+    
+    NSMutableAttributedString *attributedStr = [[NSMutableAttributedString alloc] initWithString:string];
+    
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    [paragraphStyle setLineSpacing:lineSpace];
+    
+    [attributedStr addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [string length])];
+    
+    NSRange range = [string rangeOfString:title];
+    //字体
+    [attributedStr addAttribute:NSFontAttributeName value:font range:range];
+    //颜色
+    [attributedStr addAttribute:NSForegroundColorAttributeName value:color range:range];
+    
+    self.attributedText = attributedStr;
+}
+
 - (NSInteger)getLinesArrayOfStringInLabel {
     
     //计算label高度

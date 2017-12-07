@@ -426,6 +426,8 @@
 		2125B8BB1FD9201C00591812 /* QuotationTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2125B8BA1FD9201C00591812 /* QuotationTableView.m */; };
 		2125B8BE1FD9204200591812 /* QuotationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2125B8BD1FD9204200591812 /* QuotationCell.m */; };
 		2125B8C11FD92B3300591812 /* CoinQuotationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2125B8C01FD92B3300591812 /* CoinQuotationModel.m */; };
+		2125B8C71FD9493500591812 /* HomePageHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2125B8C61FD9493500591812 /* HomePageHeaderView.m */; };
+		2125B8CA1FD95FD900591812 /* HomePageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2125B8C91FD95FD900591812 /* HomePageVC.m */; };
 		2159795D1FB81C2B0029F177 /* BillVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2159795C1FB81C2B0029F177 /* BillVC.m */; };
 		215979601FB81CC40029F177 /* BillTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2159795F1FB81CC40029F177 /* BillTableView.m */; };
 		215979641FB81CED0029F177 /* BillModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 215979631FB81CED0029F177 /* BillModel.m */; };
@@ -1364,6 +1366,10 @@
 		2125B8BD1FD9204200591812 /* QuotationCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QuotationCell.m; sourceTree = "<group>"; };
 		2125B8BF1FD92B3300591812 /* CoinQuotationModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoinQuotationModel.h; sourceTree = "<group>"; };
 		2125B8C01FD92B3300591812 /* CoinQuotationModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoinQuotationModel.m; sourceTree = "<group>"; };
+		2125B8C51FD9493500591812 /* HomePageHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomePageHeaderView.h; sourceTree = "<group>"; };
+		2125B8C61FD9493500591812 /* HomePageHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomePageHeaderView.m; sourceTree = "<group>"; };
+		2125B8C81FD95FD900591812 /* HomePageVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomePageVC.h; sourceTree = "<group>"; };
+		2125B8C91FD95FD900591812 /* HomePageVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomePageVC.m; sourceTree = "<group>"; };
 		215421CF1FD708AC00FDD25C /* Coin.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Coin.entitlements; sourceTree = "<group>"; };
 		2159795B1FB81C2B0029F177 /* BillVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BillVC.h; sourceTree = "<group>"; };
 		2159795C1FB81C2B0029F177 /* BillVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BillVC.m; sourceTree = "<group>"; };
@@ -1533,6 +1539,7 @@
 		211A34E61FB42F5900FEB71F /* View */ = {
 			isa = PBXGroup;
 			children = (
+				2125B8C41FD948C200591812 /* HomePage */,
 				21205CF41FCD5FCB003C6C7C /* Invite */,
 				21205CDB1FCD30DF003C6C7C /* CoinAddress */,
 				21205CCC1FCCFDAA003C6C7C /* Fans */,
@@ -1545,6 +1552,7 @@
 		211A34E71FB42F5F00FEB71F /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				2125B8C31FD948BB00591812 /* HomePage */,
 				21205CF01FCD5F84003C6C7C /* Invite */,
 				21205CDF1FCD3142003C6C7C /* CoinAddress */,
 				21205CD31FCD0423003C6C7C /* Fans */,
@@ -1556,6 +1564,7 @@
 		211A34E81FB42F6500FEB71F /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				2125B8C21FD948A700591812 /* HomePage */,
 				21205CE91FCD5F35003C6C7C /* Invite */,
 				21205CD71FCD2F9E003C6C7C /* CoinAddress */,
 				21205CC81FCCFCA1003C6C7C /* Fans */,
@@ -3584,6 +3593,31 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		2125B8C21FD948A700591812 /* HomePage */ = {
+			isa = PBXGroup;
+			children = (
+				2125B8C81FD95FD900591812 /* HomePageVC.h */,
+				2125B8C91FD95FD900591812 /* HomePageVC.m */,
+			);
+			path = HomePage;
+			sourceTree = "<group>";
+		};
+		2125B8C31FD948BB00591812 /* HomePage */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = HomePage;
+			sourceTree = "<group>";
+		};
+		2125B8C41FD948C200591812 /* HomePage */ = {
+			isa = PBXGroup;
+			children = (
+				2125B8C51FD9493500591812 /* HomePageHeaderView.h */,
+				2125B8C61FD9493500591812 /* HomePageHeaderView.m */,
+			);
+			path = HomePage;
+			sourceTree = "<group>";
+		};
 		215979611FB81CD10029F177 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -4304,6 +4338,7 @@
 				211C04501FC6604800E51FCF /* IMAGroup+Admin.m in Sources */,
 				2121DCD41FC71377001FC2E3 /* OrderListTableView.m in Sources */,
 				211CF9891FC3F2D100E51FCF /* TradeTableView.m in Sources */,
+				2125B8CA1FD95FD900591812 /* HomePageVC.m in Sources */,
 				211C04821FC6604800E51FCF /* PYMethod.m in Sources */,
 				211DE6BF1FB58B4C002FCF3D /* NSTimer+tlNoCycle.m in Sources */,
 				211A53221FBFE3A100CC6294 /* RateDescVC.m in Sources */,
@@ -4477,6 +4512,7 @@
 				211C04861FC6604800E51FCF /* UIViewAdditions.m in Sources */,
 				211C04301FC6604800E51FCF /* ScrollViewController.m in Sources */,
 				211C04C71FC6604900E51FCF /* TIMElem+ShowAPIs.m in Sources */,
+				2125B8C71FD9493500591812 /* HomePageHeaderView.m in Sources */,
 				211C048E1FC6604800E51FCF /* ChatEmojView.m in Sources */,
 				215979671FB81D230029F177 /* BillCell.m in Sources */,
 				211C044D1FC6604800E51FCF /* IMAMsg.m in Sources */,

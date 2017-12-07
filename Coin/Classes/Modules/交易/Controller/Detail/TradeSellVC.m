@@ -24,6 +24,7 @@
 
 #import "TLUserLoginVC.h"
 #import "TLNavigationController.h"
+#import "HomePageVC.h"
 
 @interface TradeSellVC ()
 
@@ -265,6 +266,18 @@
             self.confirmView.priceModel = self.priceModel;
             
             [self.confirmView show];
+            
+        }break;
+            
+        case TradeSellTypeHomePage:
+        {
+            HomePageVC *homePageVC = [HomePageVC new];
+            
+            homePageVC.userId = self.advertise.userId;
+            
+            homePageVC.advCode = self.advertise.code;
+            
+            [self.navigationController pushViewController:homePageVC animated:YES];
             
         }break;
             

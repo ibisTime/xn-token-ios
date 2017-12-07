@@ -28,7 +28,6 @@
     
     //
     //
-    [self.navigationController setNavigationBarHidden:NO animated:NO];
     self.view.backgroundColor = [UIColor colorWithHexString:@"#f8f8f8"];
     
 //    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStyleBordered target:nil action:nil];
@@ -39,6 +38,14 @@
     self.navigationItem.backBarButtonItem = backItem;
     //navigation底部分割线
     self.navigationController.navigationBar.shadowImage = [kLineColor convertToImage];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    
+    [super viewWillAppear:animated];
+    
+    [self.navigationController setNavigationBarHidden:NO animated:animated];
+
 }
 
 // 如果tableview在视图最底层 默认会偏移电池栏的高度

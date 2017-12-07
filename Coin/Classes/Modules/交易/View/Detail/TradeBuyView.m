@@ -123,7 +123,7 @@
     
     self.photoBtn = [UIButton buttonWithTitle:@"" titleColor:kWhiteColor backgroundColor:kAppCustomMainColor titleFont:24 cornerRadius:imgWidth/2.0];
     
-    //    [self.photoBtn addTarget:self action:@selector(selectPhoto:) forControlEvents:UIControlEventTouchUpInside];
+    [self.photoBtn addTarget:self action:@selector(homePage) forControlEvents:UIControlEventTouchUpInside];
     
     self.photoBtn.imageView.contentMode = UIViewContentModeScaleAspectFill;
     
@@ -718,6 +718,14 @@
     if (_tradeBlock) {
         
         _tradeBlock(type);
+    }
+}
+
+- (void)homePage {
+    
+    if (_tradeBlock) {
+        
+        _tradeBlock(TradeBuyTypeHomePage);
     }
 }
 

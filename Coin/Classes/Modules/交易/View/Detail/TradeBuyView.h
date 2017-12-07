@@ -17,6 +17,7 @@ typedef NS_ENUM(NSInteger, TradeBuyType) {
     TradeBuyTypeCancelTrust,    //取消信任
     TradeBuyTypeLink,           //联系对方
     TradeBuyTypeBuy,            //购买
+    TradeBuyTypeHomePage,       //个人主页
 };
 
 typedef void(^TradeBuyBlock)(TradeBuyType tradeType);

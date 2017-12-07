@@ -57,6 +57,8 @@
 @property (nonatomic, copy) NSString *userId;
 //是否信任
 @property (nonatomic, strong) NSNumber *isTrust;
+//是否黑名单
+@property (nonatomic, strong) NSNumber *isBlackList;
 //状态
 @property (nonatomic, copy) NSString *statusTitle;
 //时间
