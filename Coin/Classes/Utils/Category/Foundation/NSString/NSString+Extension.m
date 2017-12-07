@@ -261,6 +261,23 @@
     return [NSString stringWithFormat:@"%@",p];
 }
 
+//除法
+- (NSString *)divNumber:(NSString *)number leaveNum:(NSInteger)num {
+    
+    //保留8位小数,第九位舍去
+    NSDecimalNumberHandler *handler = [NSDecimalNumberHandler decimalNumberHandlerWithRoundingMode:NSRoundBankers scale:num raiseOnExactness:NO raiseOnOverflow:NO raiseOnUnderflow:NO raiseOnDivideByZero:YES];
+    
+    NSDecimalNumber *m = [NSDecimalNumber decimalNumberWithString:self];
+    
+    NSDecimalNumber *n = [NSDecimalNumber decimalNumberWithString:number];
+    
+    NSDecimalNumber *o = [m decimalNumberByDividingBy:n];
+    
+    NSDecimalNumber *p = [o decimalNumberByRoundingAccordingToBehavior:handler];
+    
+    return [NSString stringWithFormat:@"%@",p];
+}
+
 //能去掉小数点的尽量去掉小数点
 - (NSString *)convertToSimpleRealMoney {
     

@@ -27,7 +27,7 @@
     self.delegate = self;
 
     NSArray *titles = @[@"交易",@"订单",@"行情",@"钱包",@"我的"];
-    NSArray *VCNames = @[@"TLTransactionVC",@"TLOrderVC",@"TLHangQingVC",@"TLWalletVC",@"TLMineVC"];
+    NSArray *VCNames = @[@"TLTransactionVC",@"TLOrderVC",@"QuotationVC",@"TLWalletVC",@"TLMineVC"];
     
     NSArray *imageNames = @[@"交易00",@"订单00",@"行情00",@"钱包00",@"我的00"];
     NSArray *selectedImageNames = @[@"交易01",@"订单01",@"行情01",@"钱包01",@"我的01"];

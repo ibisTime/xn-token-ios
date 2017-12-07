@@ -422,6 +422,10 @@
 		2121DCD41FC71377001FC2E3 /* OrderListTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2121DCD31FC71377001FC2E3 /* OrderListTableView.m */; };
 		21223C731FBD8DB800057444 /* QuotationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 21223C721FBD8DB800057444 /* QuotationModel.m */; };
 		21223CB71FBDB2D200057444 /* WebVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21223CB61FBDB2D200057444 /* WebVC.m */; };
+		2125B8B81FD91F9D00591812 /* QuotationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2125B8B71FD91F9D00591812 /* QuotationVC.m */; };
+		2125B8BB1FD9201C00591812 /* QuotationTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2125B8BA1FD9201C00591812 /* QuotationTableView.m */; };
+		2125B8BE1FD9204200591812 /* QuotationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2125B8BD1FD9204200591812 /* QuotationCell.m */; };
+		2125B8C11FD92B3300591812 /* CoinQuotationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2125B8C01FD92B3300591812 /* CoinQuotationModel.m */; };
 		2159795D1FB81C2B0029F177 /* BillVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2159795C1FB81C2B0029F177 /* BillVC.m */; };
 		215979601FB81CC40029F177 /* BillTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2159795F1FB81CC40029F177 /* BillTableView.m */; };
 		215979641FB81CED0029F177 /* BillModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 215979631FB81CED0029F177 /* BillModel.m */; };
@@ -1352,6 +1356,14 @@
 		21223C721FBD8DB800057444 /* QuotationModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QuotationModel.m; sourceTree = "<group>"; };
 		21223CB51FBDB2D200057444 /* WebVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WebVC.h; sourceTree = "<group>"; };
 		21223CB61FBDB2D200057444 /* WebVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WebVC.m; sourceTree = "<group>"; };
+		2125B8B61FD91F9D00591812 /* QuotationVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QuotationVC.h; sourceTree = "<group>"; };
+		2125B8B71FD91F9D00591812 /* QuotationVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QuotationVC.m; sourceTree = "<group>"; };
+		2125B8B91FD9201C00591812 /* QuotationTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QuotationTableView.h; sourceTree = "<group>"; };
+		2125B8BA1FD9201C00591812 /* QuotationTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QuotationTableView.m; sourceTree = "<group>"; };
+		2125B8BC1FD9204200591812 /* QuotationCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QuotationCell.h; sourceTree = "<group>"; };
+		2125B8BD1FD9204200591812 /* QuotationCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QuotationCell.m; sourceTree = "<group>"; };
+		2125B8BF1FD92B3300591812 /* CoinQuotationModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoinQuotationModel.h; sourceTree = "<group>"; };
+		2125B8C01FD92B3300591812 /* CoinQuotationModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoinQuotationModel.m; sourceTree = "<group>"; };
 		215421CF1FD708AC00FDD25C /* Coin.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Coin.entitlements; sourceTree = "<group>"; };
 		2159795B1FB81C2B0029F177 /* BillVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BillVC.h; sourceTree = "<group>"; };
 		2159795C1FB81C2B0029F177 /* BillVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BillVC.m; sourceTree = "<group>"; };
@@ -3770,6 +3782,8 @@
 				21223C721FBD8DB800057444 /* QuotationModel.m */,
 				211D3C0A1FCFCE2000B55F9F /* GuideModel.h */,
 				211D3C0B1FCFCE2000B55F9F /* GuideModel.m */,
+				2125B8BF1FD92B3300591812 /* CoinQuotationModel.h */,
+				2125B8C01FD92B3300591812 /* CoinQuotationModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -3794,6 +3808,10 @@
 			children = (
 				21D216A01FBAEDB10040795E /* QuotationView.h */,
 				21D216A11FBAEDB10040795E /* QuotationView.m */,
+				2125B8B91FD9201C00591812 /* QuotationTableView.h */,
+				2125B8BA1FD9201C00591812 /* QuotationTableView.m */,
+				2125B8BC1FD9204200591812 /* QuotationCell.h */,
+				2125B8BD1FD9204200591812 /* QuotationCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3928,6 +3946,8 @@
 				2EE950BF1FB05B2400429257 /* TLHangQingVC.m */,
 				211D3C0D1FCFD50200B55F9F /* GuideDetailVC.h */,
 				211D3C0E1FCFD50200B55F9F /* GuideDetailVC.m */,
+				2125B8B61FD91F9D00591812 /* QuotationVC.h */,
+				2125B8B71FD91F9D00591812 /* QuotationVC.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -4305,6 +4325,7 @@
 				211DE6BC1FB58B4C002FCF3D /* NSString+Extension.m in Sources */,
 				211C04D51FC6604900E51FCF /* ContactDrawerView.m in Sources */,
 				211C04DA1FC6604900E51FCF /* PublicGroupViewController.m in Sources */,
+				2125B8B81FD91F9D00591812 /* QuotationVC.m in Sources */,
 				211C04211FC6604800E51FCF /* UIViewController+ADScaleTransition.m in Sources */,
 				21A7F3161FB2E2F900FAA0A2 /* TLUserLoginVC.m in Sources */,
 				211CEF091FCBB790000FB0C4 /* SearchVC.m in Sources */,
@@ -4353,6 +4374,7 @@
 				211C04221FC6604800E51FCF /* UITableViewController+ADScaleTransititon.m in Sources */,
 				211C040C1FC6604800E51FCF /* NSObject+KVOCategory.m in Sources */,
 				211C03F21FC6604800E51FCF /* MenuTableViewController.m in Sources */,
+				2125B8BB1FD9201C00591812 /* QuotationTableView.m in Sources */,
 				2E394FF51FB057B300BA0829 /* TLNavigationController.m in Sources */,
 				21A7F3241FB2E2F900FAA0A2 /* CaptchaView.m in Sources */,
 				211C04E01FC6604900E51FCF /* ContactListViewController.m in Sources */,
@@ -4432,6 +4454,7 @@
 				211C04601FC6604800E51FCF /* IMAContactManager+SubGroup.m in Sources */,
 				21205CFE1FCD61D6003C6C7C /* ShareView.m in Sources */,
 				2159795D1FB81C2B0029F177 /* BillVC.m in Sources */,
+				2125B8BE1FD9204200591812 /* QuotationCell.m in Sources */,
 				211C04FF1FC6604900E51FCF /* ChatUserProfile.m in Sources */,
 				211C04E51FC6604900E51FCF /* ChatRoomProfileViewController.m in Sources */,
 				211C04791FC6604800E51FCF /* ChatImageBrowserView.m in Sources */,
@@ -4581,6 +4604,7 @@
 				211C046C1FC6604800E51FCF /* RichCellMenuItem.m in Sources */,
 				211C042A1FC6604800E51FCF /* UIViewController+ADTransition.m in Sources */,
 				211CF9921FC4144700E51FCF /* PayTypeModel.m in Sources */,
+				2125B8C11FD92B3300591812 /* CoinQuotationModel.m in Sources */,
 				211C03EF1FC6604800E51FCF /* UILabel+InitMethod.m in Sources */,
 				211C04D01FC6604900E51FCF /* ConnectStatusTableViewCell.m in Sources */,
 				211C04181FC6604800E51FCF /* NSDictionary+RequestEncoding.m in Sources */,
