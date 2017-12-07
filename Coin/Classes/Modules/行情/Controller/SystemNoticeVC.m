@@ -51,12 +51,12 @@ static NSString *identifier = @"NoticeCellId";
     
     self.placeHolderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight - 40)];
     
-    UIImageView *couponIV = [[UIImageView alloc] init];
+    UIImageView *noticeIV = [[UIImageView alloc] init];
     
-    couponIV.image = kImage(@"暂无订单");
+    noticeIV.image = kImage(@"暂无订单");
     
-    [self.placeHolderView addSubview:couponIV];
-    [couponIV mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.placeHolderView addSubview:noticeIV];
+    [noticeIV mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.centerX.equalTo(@0);
         make.top.equalTo(@90);
@@ -72,8 +72,8 @@ static NSString *identifier = @"NoticeCellId";
     [self.placeHolderView addSubview:textLbl];
     [textLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.top.equalTo(couponIV.mas_bottom).offset(20);
-        make.centerX.equalTo(couponIV.mas_centerX);
+        make.top.equalTo(noticeIV.mas_bottom).offset(20);
+        make.centerX.equalTo(noticeIV.mas_centerX);
         
     }];
 }

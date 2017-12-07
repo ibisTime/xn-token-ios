@@ -198,6 +198,7 @@
     TLNetworking *http = [TLNetworking new];
     
     http.code = @"625243";
+    http.showView = self.view;
     http.parameters[@"code"] = self.order.code;
     http.parameters[@"updater"] = [TLUser user].userId;
     http.parameters[@"remark"] = @"标记打款";
@@ -209,7 +210,8 @@
         if ([isSuccess isEqualToString:@"1"]) {
             
             [TLAlert alertWithSucces:@"标记打款成功"];
-
+            //刷新订单列表
+            [[NSNotificationCenter defaultCenter] postNotificationName:kOrderListRefresh object:nil];
             //刷新状态
             [self lookOrderDetail];
         }
@@ -225,6 +227,7 @@
     TLNetworking *http = [TLNetworking new];
     
     http.code = @"625244";
+    http.showView = self.view;
     http.parameters[@"code"] = self.order.code;
     http.parameters[@"updater"] = [TLUser user].userId;
     http.parameters[@"remark"] = @"释放货币";
@@ -236,7 +239,8 @@
         if ([isSuccess isEqualToString:@"1"]) {
             
             [TLAlert alertWithSucces:@"释放成功"];
-            
+            //刷新订单列表
+            [[NSNotificationCenter defaultCenter] postNotificationName:kOrderListRefresh object:nil];
             [self lookOrderDetail];
         }
         
@@ -250,6 +254,7 @@
     TLNetworking *http = [TLNetworking new];
     
     http.code = @"625245";
+    http.showView = self.view;
     http.parameters[@"code"] = self.order.code;
     http.parameters[@"userId"] = [TLUser user].userId;
     http.parameters[@"comment"] = result;
@@ -263,6 +268,8 @@
             [TLAlert alertWithSucces:@"评价成功"];
             
             [self.commentView hide];
+            //刷新订单列表
+            [[NSNotificationCenter defaultCenter] postNotificationName:kOrderListRefresh object:nil];
             
             [self lookOrderDetail];
         }
@@ -278,6 +285,7 @@
     TLNetworking *http = [TLNetworking new];
     
     http.code = @"625246";
+    http.showView = self.view;
     http.parameters[@"code"] = self.order.code;
     http.parameters[@"applyUser"] = [TLUser user].userId;
     http.parameters[@"reason"] = reason;
@@ -291,6 +299,8 @@
             [TLAlert alertWithSucces:@"申请成功"];
             
             [self.arbitrationView hide];
+            //刷新订单列表
+            [[NSNotificationCenter defaultCenter] postNotificationName:kOrderListRefresh object:nil];
             
             [self lookOrderDetail];
         }

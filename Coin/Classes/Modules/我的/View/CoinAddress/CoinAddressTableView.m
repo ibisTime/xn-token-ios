@@ -132,7 +132,7 @@ static NSString *identifierCell = @"CoinAddressCell";
     TLNetworking *http = [TLNetworking new];
     
     http.code = @"625202";
-    
+    http.showView = self;
     http.parameters[@"code"] = address.code;
     
     [http postWithSuccess:^(id responseObject) {

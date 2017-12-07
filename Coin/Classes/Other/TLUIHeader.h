@@ -33,5 +33,7 @@
 #define kWithDrawCoinSuccess @"kWithDrawCoinSuccess"
 //聊天登录成功
 #define kIMLoginNotification @"kIMLoginNotification"
+//刷新订单列表
+#define kOrderListRefresh   @"kOrderListRefresh"
 
 #endif /* TLUIHeader_h */

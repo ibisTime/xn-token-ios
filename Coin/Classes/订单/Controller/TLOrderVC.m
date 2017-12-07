@@ -144,23 +144,33 @@
     
     self.placeHolderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight - 40)];
     
-    UIImageView *couponIV = [[UIImageView alloc] initWithFrame:CGRectMake(0, 90, 80, 80)];
+    UIImageView *orderIV = [[UIImageView alloc] init];
     
-    couponIV.image = kImage(@"暂无订单");
+    orderIV.image = kImage(@"暂无订单");
     
-    couponIV.centerX = kScreenWidth/2.0;
+    orderIV.centerX = kScreenWidth/2.0;
     
-    [self.placeHolderView addSubview:couponIV];
+    [self.placeHolderView addSubview:orderIV];
+    [orderIV mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.centerX.equalTo(@0);
+        make.top.equalTo(@90);
+        
+    }];
     
     UILabel *textLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor2 font:14.0];
     
     textLbl.text = @"暂无订单";
     
-    textLbl.frame = CGRectMake(0, couponIV.yy + 20, kScreenWidth, 15);
-    
     textLbl.textAlignment = NSTextAlignmentCenter;
     
     [self.placeHolderView addSubview:textLbl];
+    [textLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.top.equalTo(orderIV.mas_bottom).offset(20);
+        make.centerX.equalTo(orderIV.mas_centerX);
+        
+    }];
 }
 
 - (void)initTableView {
@@ -188,6 +198,7 @@
 - (void)addNotification {
     //消息
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLogin) name:kUserLoginNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orderRefresh) name:kOrderListRefresh object:nil];
 
 }
 
@@ -275,6 +286,11 @@
     }
     
     [self.tableView reloadData_tl];
+}
+
+- (void)orderRefresh {
+    
+    [self.tableView beginRefreshing];
 }
 
 #pragma mark - Data

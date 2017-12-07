@@ -69,23 +69,34 @@
     
     self.placeHolderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight - 40)];
     
-    UIImageView *orderIV = [[UIImageView alloc] initWithFrame:CGRectMake(0, 90, 80, 80)];
+    UIImageView *advertiseIV = [[UIImageView alloc] init];
     
-    orderIV.image = kImage(@"暂无订单");
+    advertiseIV.image = kImage(@"暂无订单");
     
-    orderIV.centerX = kScreenWidth/2.0;
+    advertiseIV.centerX = kScreenWidth/2.0;
     
-    [self.placeHolderView addSubview:orderIV];
+    [self.placeHolderView addSubview:advertiseIV];
+    
+    [advertiseIV mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.centerX.equalTo(@0);
+        make.top.equalTo(@90);
+        
+    }];
     
     UILabel *textLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor2 font:14.0];
     
     textLbl.text = self.type == MyAdvertiseTypeDraft ? @"暂无草稿": @"暂无交易";
     
-    textLbl.frame = CGRectMake(0, orderIV.yy + 20, kScreenWidth, 15);
-    
     textLbl.textAlignment = NSTextAlignmentCenter;
     
     [self.placeHolderView addSubview:textLbl];
+    [textLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.top.equalTo(advertiseIV.mas_bottom).offset(20);
+        make.centerX.equalTo(advertiseIV.mas_centerX);
+        
+    }];
 }
 
 - (void)addNotification {

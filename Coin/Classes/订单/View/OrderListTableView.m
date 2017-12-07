@@ -137,7 +137,7 @@ static NSString *identifierCell = @"OrderListCell";
     TLNetworking *http = [TLNetworking new];
     
     http.code = @"625249";
-
+    http.showView = self;
     http.parameters[@"code"] = order.code;
     
     [http postWithSuccess:^(id responseObject) {

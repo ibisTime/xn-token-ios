@@ -110,12 +110,12 @@
     
     self.placeHolderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight - 40)];
     
-    UIImageView *couponIV = [[UIImageView alloc] init];
+    UIImageView *billIV = [[UIImageView alloc] init];
     
-    couponIV.image = kImage(@"暂无订单");
+    billIV.image = kImage(@"暂无订单");
     
-    [self.placeHolderView addSubview:couponIV];
-    [couponIV mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.placeHolderView addSubview:billIV];
+    [billIV mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.centerX.equalTo(@0);
         make.top.equalTo(@90);
@@ -131,8 +131,8 @@
     [self.placeHolderView addSubview:textLbl];
     [textLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.top.equalTo(couponIV.mas_bottom).offset(20);
-        make.centerX.equalTo(couponIV.mas_centerX);
+        make.top.equalTo(billIV.mas_bottom).offset(20);
+        make.centerX.equalTo(billIV.mas_centerX);
         
     }];
 }

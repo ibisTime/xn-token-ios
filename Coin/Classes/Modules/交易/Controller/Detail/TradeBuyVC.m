@@ -272,6 +272,7 @@
     TLNetworking *http = [TLNetworking new];
     
     http.code = @"805110";
+    http.showView = self.view;
     http.parameters[@"toUser"] = self.advertise.userId;
     http.parameters[@"userId"] = [TLUser user].userId;
     
@@ -296,6 +297,7 @@
     TLNetworking *http = [TLNetworking new];
     
     http.code = @"805111";
+    http.showView = self.view;
     http.parameters[@"toUser"] = self.advertise.userId;
     http.parameters[@"userId"] = [TLUser user].userId;
     
@@ -326,6 +328,7 @@
     TLNetworking *http = [TLNetworking new];
     
     http.code = @"625240";
+    http.showView = self.view;
     http.parameters[@"adsCode"] = self.advertise.code;
     http.parameters[@"buyUser"] = [TLUser user].userId;
     http.parameters[@"count"] = num;
@@ -341,6 +344,8 @@
             weakSelf.tabBarController.selectedIndex = 1;
             
             [weakSelf.navigationController popToRootViewControllerAnimated:YES];
+            //刷新订单列表
+            [[NSNotificationCenter defaultCenter] postNotificationName:kOrderListRefresh object:nil];
 
         });
         
@@ -531,6 +536,8 @@
             
             //联系对方
             [self pushToChatVC];
+            //刷新订单列表
+            [[NSNotificationCenter defaultCenter] postNotificationName:kOrderListRefresh object:nil];
         }
         
     } failure:^(NSError *error) {
@@ -544,6 +551,7 @@
     TLNetworking *http = [TLNetworking new];
     
     http.code = @"625224";
+    http.showView = self.view;
     http.parameters[@"adsCode"] = self.advertise.code;
     http.parameters[@"userId"] = [TLUser user].userId;
     
