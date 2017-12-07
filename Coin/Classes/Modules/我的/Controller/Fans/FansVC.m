@@ -88,8 +88,6 @@
     
     TLPageDataHelper *helper = [[TLPageDataHelper alloc] init];
     
-    helper.showView = self.view;
-    
     helper.code = @"805115";
     helper.start = 1;
     helper.limit = 20;

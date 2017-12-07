@@ -14,7 +14,7 @@
 #import "KeyValueModel.h"
 
 #import "APICodeMacro.h"
-
+#import "PublishService.h"
 #import "UIBarButtonItem+convience.h"
 #import "NSString+Check.h"
 
@@ -76,7 +76,7 @@
     };
     
     self.publishView.backgroundColor = kBackgroundColor;
-    
+    //
     [self.view addSubview:self.publishView];
 }
 
@@ -199,13 +199,15 @@
     NSString *premiumRate = [NSString stringWithFormat:@"%.4lf", rate];
     
     TLNetworking *http = [TLNetworking new];
-    
-    http.code = self.type == PublishSellPositionTypePublish ? @"625220": @"625221";
-    
+    http.showView = self.view;
+    http.code = @"625220";
+    //发布类型（0=存草稿，1=发布）
+    http.parameters[@"publishType"] = draft.isPublish == YES ? kPublish : kSaveDraft;
     if (self.type == PublishSellPositionTypeDraft) {
         
         http.parameters[@"adsCode"] = self.advertise.code;
     }
+    
     http.parameters[@"userId"] = [TLUser user].userId;
     http.parameters[@"leaveMessage"] = draft.leaveMessage;
     http.parameters[@"maxTrade"] = draft.maxTrade;
@@ -215,8 +217,6 @@
     http.parameters[@"payType"] = draft.payType;
     http.parameters[@"premiumRate"] = premiumRate;
     http.parameters[@"protectPrice"] = draft.protectPrice;
-    //发布类型（0=存草稿，1=发布）
-    http.parameters[@"publishType"] = draft.isPublish == YES ? @"1": @"0";
     http.parameters[@"totalCount"] = [draft.buyTotal convertToSysCoin];
     http.parameters[@"tradeCurrency"] = @"CNY";
     http.parameters[@"tradeCoin"] = @"ETH";
@@ -248,7 +248,7 @@
         
         [TLAlert alertWithSucces:str];
         
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             
             self.tabBarController.selectedIndex = 0;
             

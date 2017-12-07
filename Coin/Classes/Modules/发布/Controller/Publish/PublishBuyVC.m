@@ -17,6 +17,7 @@
 
 #import "UIBarButtonItem+convience.h"
 #import "NSString+Check.h"
+#import "PublishService.h"
 
 @interface PublishBuyVC ()
 //
@@ -200,15 +201,21 @@
     NSString *premiumRate = [NSString stringWithFormat:@"%.4lf", rate];
     
     TLNetworking *http = [TLNetworking new];
-    
-    
-    http.code = self.type == PublishBuyPositionTypePublish ? @"625220": @"625221";
-    
-    if (self.type == PublishBuyPositionTypeDraft) {
+    http.code = @"625220";
+    http.showView = self.view;
+    if (self.type == PublishBuyPositionTypePublish) {
+        
+    } else if(self.type == PublishBuyPositionTypeDraft) {
         
         http.parameters[@"adsCode"] = self.advertise.code;
+
     }
     
+    //发布类型（0=存草稿，1=发布）
+    http.parameters[@"publishType"] = draft.isPublish == YES ? @"1": @"0";
+    
+
+    //
     http.parameters[@"userId"] = [TLUser user].userId;
     http.parameters[@"leaveMessage"] = draft.leaveMessage;
     http.parameters[@"maxTrade"] = draft.maxTrade;
@@ -218,8 +225,7 @@
     http.parameters[@"payType"] = draft.payType;
     http.parameters[@"premiumRate"] = premiumRate;
     http.parameters[@"protectPrice"] = draft.protectPrice;
-    //发布类型（0=存草稿，1=发布）
-    http.parameters[@"publishType"] = draft.isPublish == YES ? @"1": @"0";
+    //
     http.parameters[@"totalCount"] = [draft.buyTotal convertToSysCoin];
     http.parameters[@"tradeCurrency"] = @"CNY";
     http.parameters[@"tradeCoin"] = @"ETH";

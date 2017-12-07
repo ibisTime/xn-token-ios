@@ -470,6 +470,7 @@
 		2EA584C11FA813C900C7106C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2EA584C01FA813C900C7106C /* Assets.xcassets */; };
 		2EA584C41FA813C900C7106C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2EA584C21FA813C900C7106C /* LaunchScreen.storyboard */; };
 		2EA584C71FA813C900C7106C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EA584C61FA813C900C7106C /* main.m */; };
+		2EBFBF231FD8E56C0066F7E4 /* PublishService.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EBFBF221FD8E56C0066F7E4 /* PublishService.m */; };
 		2EE950C01FB05B2400429257 /* TLHangQingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE950BF1FB05B2400429257 /* TLHangQingVC.m */; };
 		2EE950C31FB05B4500429257 /* TLWalletVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE950C21FB05B4500429257 /* TLWalletVC.m */; };
 		2EE950C61FB05B5900429257 /* TLMineVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE950C51FB05B5900429257 /* TLMineVC.m */; };
@@ -1449,6 +1450,8 @@
 		2EA584C31FA813C900C7106C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2EA584C51FA813C900C7106C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2EA584C61FA813C900C7106C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		2EBFBF211FD8E56C0066F7E4 /* PublishService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PublishService.h; sourceTree = "<group>"; };
+		2EBFBF221FD8E56C0066F7E4 /* PublishService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PublishService.m; sourceTree = "<group>"; };
 		2EE950BE1FB05B2400429257 /* TLHangQingVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLHangQingVC.h; sourceTree = "<group>"; };
 		2EE950BF1FB05B2400429257 /* TLHangQingVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLHangQingVC.m; sourceTree = "<group>"; };
 		2EE950C11FB05B4500429257 /* TLWalletVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLWalletVC.h; sourceTree = "<group>"; };
@@ -2935,6 +2938,8 @@
 				211CEF051FCBB735000FB0C4 /* Model */,
 				211CEF041FCBB72E000FB0C4 /* View */,
 				211CEF031FCBB720000FB0C4 /* Controller */,
+				2EBFBF211FD8E56C0066F7E4 /* PublishService.h */,
+				2EBFBF221FD8E56C0066F7E4 /* PublishService.m */,
 			);
 			path = "发布";
 			sourceTree = "<group>";
@@ -4250,6 +4255,7 @@
 				211CF98C1FC3F31900E51FCF /* TradeCell.m in Sources */,
 				211C04131FC6604800E51FCF /* MKNetworkEngine.m in Sources */,
 				211C04991FC6604800E51FCF /* IMAChatViewController.m in Sources */,
+				2EBFBF231FD8E56C0066F7E4 /* PublishService.m in Sources */,
 				215979761FB84CC70029F177 /* BillDetailCell.m in Sources */,
 				211CF9A41FC55ADD00E51FCF /* OrderPriceModel.m in Sources */,
 				211C04731FC6604800E51FCF /* AddGroupProfileViewController.m in Sources */,

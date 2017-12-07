@@ -314,7 +314,7 @@
     
     http.code = @"625256";
     
-    http.parameters[@"userId"] = [TLUser user].userId;
+    http.parameters[@"master"] = [TLUser user].userId;
     
     [http postWithSuccess:^(id responseObject) {
         
