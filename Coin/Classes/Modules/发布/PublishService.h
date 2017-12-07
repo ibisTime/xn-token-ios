@@ -8,7 +8,19 @@
 
 #import <Foundation/Foundation.h>
 
+typedef NS_ENUM(NSInteger, PublishType) {
+    
+    PublishTypeSaveDraft = 0,  //发布
+    PublishTypePublish = 1,
+    PublishTypePublishOrSaveDraft = 2, // 可能为直接发布，也可能是保存草稿
+    PublishTypePublishDraft = 3,
+    PublishTypePublishRedit = 4
+    
+};
+
 @interface PublishService : NSObject
+
++ (NSString *)publishCodeByType:(PublishType) type;
 
 @end
 

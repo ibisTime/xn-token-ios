@@ -7,12 +7,26 @@
 //
 
 #import "AdvertiseModel.h"
+#import "TLUser.h"
+
+//DRAFT("0", "草稿"), DAIJIAOYI("1", "待交易"), JIAOYIZHONG("2", "交易中"), XIAJIA(
+//                                                                         "3", "已下架");
+NSString *const kAdsStatusDraft =  @"0";
+NSString *const kAdsStatusDaiJiaoYi =  @"1";
+NSString *const kAdsStatusJiaoYiZhong =  @"2";
+NSString *const kAdsStatusXiaJia =  @"3";
 
 @implementation AdvertiseModel
 
 + (NSDictionary *)objectClassInArray{
     
     return @{@"displayTime" : [Displaytime class]};
+}
+
+- (AdsType)adsType {
+    
+    return [self.tradeType isEqualToString:@"1"] ? AdsTradeTypeSell : AdsTradeTypeBuy;
+    
 }
 
 - (NSString *)statusTitle {
@@ -25,6 +39,19 @@
                            };
     
     return dict[self.status];
+}
+
+
+- (BOOL)isMineAds {
+    
+    return [TLUser user].userId != nil && [TLUser user].userId.length != 0 && [self.userId isEqualToString:[TLUser user].userId];
+    
+}
+
+- (BOOL)isMineDaiJiaoYiAds {
+    
+    return [self isMineAds] && [self.status isEqualToString:kAdsStatusDaiJiaoYi];
+    
 }
 
 @end

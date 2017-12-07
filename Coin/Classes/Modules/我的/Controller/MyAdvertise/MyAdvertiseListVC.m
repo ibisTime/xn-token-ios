@@ -174,59 +174,67 @@
     
     AdvertiseModel *advertiseModel = self.advertises[indexPath.row];
     
-    NSInteger index = [advertiseModel.tradeType integerValue];
-    
     if (self.type == MyAdvertiseTypeDraft) {
+        // 草稿
         
-        if (index == 0) {
+        if ( advertiseModel.adsType == AdsTradeTypeBuy) {
             
             PublishBuyVC *buyVC = [PublishBuyVC new];
-            
-            buyVC.type = PublishBuyPositionTypeDraft;
-
-            buyVC.advertise = advertiseModel;
-            
+            buyVC.publishType = PublishTypePublishDraft;
+            buyVC.adsCode = advertiseModel.code;
             [self.navigationController pushViewController:buyVC animated:YES];
             
-        } else if (index == 1) {
+        } else if (advertiseModel.adsType == AdsTradeTypeSell) {
             
             PublishSellVC *sellVC = [PublishSellVC new];
-            
-            sellVC.type = PublishSellPositionTypeDraft;
-
-            sellVC.advertise = advertiseModel;
-            
+            sellVC.publishType = PublishTypePublishDraft;
+            sellVC.adsCode = advertiseModel.code;
             [self.navigationController pushViewController:sellVC animated:YES];
+            
         }
         
     } else if (self.type == MyAdvertiseTypeDidPublish) {
+        //已发布  和 交易中的
         
-        if (index == 1) {
+        if (advertiseModel.adsType == AdsTradeTypeBuy) {
             
+            //
+            if ([advertiseModel.status isEqualToString:kAdsStatusDaiJiaoYi]) {
+                //待交易, 可进行编辑
+                PublishBuyVC *publishBuyVC = [[PublishBuyVC alloc] init];
+                publishBuyVC.publishType = PublishTypePublishRedit;
+                publishBuyVC.adsCode = advertiseModel.code;
+                [self.navigationController pushViewController:publishBuyVC animated:YES];
+
+                return;
+            }
+        
             TradeBuyVC *buyVC = [TradeBuyVC new];
-            
             buyVC.advertise = advertiseModel;
-            
             buyVC.type = TradeBuyPositionTypeMyPublish;
-            
             [self.navigationController pushViewController:buyVC animated:YES];
             
-        } else if (index == 0) {
+        } else if (advertiseModel.adsType == AdsTradeTypeSell) {
             
-            TradeSellVC *sellVC = [TradeSellVC new];
-            
-            sellVC.advertise = advertiseModel;
-            
-            sellVC.type = TradeBuyPositionTypeMyPublish;
+            if ([advertiseModel.status isEqualToString:kAdsStatusDaiJiaoYi]) {
+                //待交易, 可进行编辑
+                PublishSellVC *publishSellVC = [[PublishSellVC alloc] init];
+                publishSellVC.publishType = PublishTypePublishRedit;
+                publishSellVC.adsCode = advertiseModel.code;
+                [self.navigationController pushViewController:publishSellVC animated:YES];
+                
+                return;
+            }
 
+            TradeSellVC *sellVC = [TradeSellVC new];
+            sellVC.advertise = advertiseModel;
+            sellVC.type = TradeBuyPositionTypeMyPublish;
             [self.navigationController pushViewController:sellVC animated:YES];
         }
+        
     }
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+
 
 @end

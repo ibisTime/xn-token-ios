@@ -15,6 +15,41 @@ NSString *const kPublishRedit = @"3";
 
 @implementation PublishService
 
++ (NSString *)publishCodeByType:(PublishType) type {
+    
+
+    switch (type) {
+        case PublishTypePublish: {
+            
+            return kPublish;
+            
+        }  break;
+            
+        case PublishTypeSaveDraft: {
+            
+            return kSaveDraft;
+            
+        }  break;
+            
+        case PublishTypePublishDraft: {
+            
+            return kPublishDraft;
+            
+        }  break;
+            
+        case PublishTypePublishRedit: {
+            
+            return   kPublishRedit;
+            
+        }  break;
+
+    }
+    
+    return nil;
+    
+}
+
+
 @end
 
 

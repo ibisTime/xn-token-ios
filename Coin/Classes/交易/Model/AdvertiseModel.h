@@ -10,6 +10,13 @@
 
 @class TradeUserInfo, UserStatistics, Displaytime;
 
+typedef NS_ENUM(NSUInteger, AdsType) {
+    
+    AdsTradeTypeSell,
+    AdsTradeTypeBuy
+    
+};
+
 @interface AdvertiseModel : TLBaseModel
 
 @property (nonatomic, copy) NSString *onlyTrust;
@@ -29,6 +36,8 @@
 @property (nonatomic, copy) NSString *tradeCoin;
 
 @property (nonatomic, copy) NSString *tradeType;
+@property (nonatomic, assign, readonly) AdsType adsType;
+
 //支付方式（0=支付宝、1=微信、2=银行卡转账)
 @property (nonatomic, copy) NSString *payType;
 
@@ -62,7 +71,23 @@
 //时间
 @property (nonatomic, strong) NSArray<Displaytime *> *displayTime;
 
+
+/**
+  是否为我的广告
+ */
+- (BOOL)isMineAds;
+
+/**
+ 是否为我的广告( 待交易状态)
+ */
+- (BOOL)isMineDaiJiaoYiAds;
+
 @end
+
+FOUNDATION_EXTERN NSString *const kAdsStatusDraft;
+FOUNDATION_EXTERN NSString *const kAdsStatusDaiJiaoYi;
+FOUNDATION_EXTERN NSString *const kAdsStatusJiaoYiZhong;
+FOUNDATION_EXTERN NSString *const kAdsStatusXiaJia;
 
 @interface TradeUserInfo : NSObject
 

@@ -318,9 +318,7 @@
         }
         
         PublishBuyVC *buyVC = [PublishBuyVC new];
-        
-        buyVC.type = PublishBuyPositionTypePublish;
-        
+        buyVC.publishType = PublishTypePublishOrSaveDraft;
         [self.navigationController pushViewController:buyVC animated:YES];
         
     } else if (index == 1) {
@@ -342,10 +340,9 @@
         }
         
         PublishSellVC *sellVC = [PublishSellVC new];
-        
-        sellVC.type = PublishSellPositionTypePublish;
-
+        sellVC.publishType = PublishTypePublishOrSaveDraft;
         [self.navigationController pushViewController:sellVC animated:YES];
+        
     }
 }
 
@@ -532,26 +529,42 @@
 
 - (void)refreshTableView:(TLTableView *)refreshTableview didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
+    AdvertiseModel *advertiseModel = self.advertises[indexPath.row];
+    
+    //
     if ([self.tradeType isEqualToString:@"1"]) {
         
+        if ([advertiseModel isMineDaiJiaoYiAds]) {
+            
+            PublishBuyVC *buyVC = [[PublishBuyVC alloc] init];
+            buyVC.adsCode = advertiseModel.code;
+            [self.navigationController pushViewController:buyVC animated:YES];
+            return;
+            
+        }
+        
         TradeBuyVC *buyVC = [TradeBuyVC new];
-        
-        buyVC.advertise = self.advertises[indexPath.row];
-        
+        buyVC.advertise = advertiseModel;
         buyVC.type = TradeBuyPositionTypeTrade;
-        
         [self.navigationController pushViewController:buyVC animated:YES];
+        
     } else {
         
+        if ([advertiseModel isMineDaiJiaoYiAds]) {
+            
+            PublishSellVC *sellVC = [[PublishSellVC alloc] init];
+            sellVC.adsCode = advertiseModel.code;
+            [self.navigationController pushViewController:sellVC animated:YES];
+            return;
+            
+        }
+        
         TradeSellVC *sellVC = [TradeSellVC new];
-        
-        sellVC.advertise = self.advertises[indexPath.row];
-        
+        sellVC.advertise = advertiseModel;
         sellVC.type = TradeBuyPositionTypeTrade;
-
         [self.navigationController pushViewController:sellVC animated:YES];
+        
     }
-    
     
 }
 @end

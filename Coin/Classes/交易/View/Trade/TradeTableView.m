@@ -48,7 +48,6 @@ static NSString *identifierCell = @"TradeCell";
     
     
     cell.advertise = self.advertises[indexPath.row];
-    
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     return cell;
