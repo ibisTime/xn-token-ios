@@ -60,21 +60,23 @@ static NSString *identifierCell = @"SettingCell";
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
-    if (indexPath.section == 1) {
-        
-        cell.arrowHidden = indexPath.row == 4 ? YES: NO;
-        
-        cell.switchHidden = indexPath.row == 4 ? NO: YES;
-        
-        cell.sw.on = YES;
-
-    } else {
-        
-        cell.switchHidden = YES;
-
-        cell.arrowHidden = NO;
-        
-    }
+    cell.switchHidden = YES;
+    
+//    if (indexPath.section == 1) {
+//
+//        cell.arrowHidden = indexPath.row == 4 ? YES: NO;
+//
+//        cell.switchHidden = indexPath.row == 4 ? NO: YES;
+//
+//        cell.sw.on = YES;
+//
+//    } else {
+//
+//        cell.switchHidden = YES;
+//
+//        cell.arrowHidden = NO;
+//
+//    }
     
     return cell;
     

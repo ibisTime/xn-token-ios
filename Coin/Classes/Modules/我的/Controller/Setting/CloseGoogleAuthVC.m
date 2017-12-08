@@ -1,12 +1,12 @@
 //
-//  GoogleAuthVC.m
+//  CloseGoogleAuthVC.m
 //  Coin
 //
 //  Created by 蔡卓越 on 2017/12/8.
 //  Copyright © 2017年  tianlei. All rights reserved.
 //
 
-#import "GoogleAuthVC.h"
+#import "CloseGoogleAuthVC.h"
 
 #import "TLTextField.h"
 #import "CaptchaView.h"
@@ -15,10 +15,8 @@
 
 #import "NSString+Check.h"
 
-@interface GoogleAuthVC ()<UITextFieldDelegate>
+@interface CloseGoogleAuthVC ()
 
-//密钥
-@property (nonatomic, strong) TLTextField *secretTF;
 //谷歌验证码
 @property (nonatomic, strong) TLTextField *googleAuthTF;
 //短信验证码
@@ -26,56 +24,31 @@
 
 @end
 
-@implementation GoogleAuthVC
+@implementation CloseGoogleAuthVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
     self.title = @"谷歌验证";
     
     [self initSubviews];
-    //获取密钥
-    [self getSecret];
+    
 }
 
 #pragma mark - Init
 - (void)initSubviews {
     
     CGFloat leftMargin = 0;
+    
     CGFloat leftW = 100;
+    
     CGFloat height = 45;
     
-    //密钥
-    self.secretTF = [[TLTextField alloc] initWithFrame:CGRectMake(leftMargin, 10, kScreenWidth - 2*leftMargin, height)
-                                                    leftTitle:@"密钥"
-                                                   titleWidth:leftW
-                                                  placeholder:@""];
-    
-    self.secretTF.delegate = self;
-    
-    [self.view addSubview:self.secretTF];
-    
-    //复制
-    UIView *secretView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 95, self.secretTF.height)];
-    
-    UIButton *copyBtn = [UIButton buttonWithTitle:@"复制" titleColor:kWhiteColor backgroundColor:kThemeColor titleFont:13.0 cornerRadius:5];
-    
-    copyBtn.frame = CGRectMake(0, 0, 85, self.secretTF.height - 15);
-    
-    copyBtn.centerY = secretView.height/2.0;
-
-    [copyBtn addTarget:self action:@selector(clickCopy) forControlEvents:UIControlEventTouchUpInside];
-    
-    [secretView addSubview:copyBtn];
-    
-    self.secretTF.rightView = secretView;
-    
     //谷歌验证码
-    self.googleAuthTF = [[TLTextField alloc] initWithFrame:CGRectMake(leftMargin, self.secretTF.yy, kScreenWidth - 2*leftMargin, height)
-                                             leftTitle:@"谷歌验证码"
-                                            titleWidth:leftW
-                                           placeholder:@"请输入谷歌验证码"];
+    self.googleAuthTF = [[TLTextField alloc] initWithFrame:CGRectMake(leftMargin, 10, kScreenWidth - 2*leftMargin, height)
+                                                 leftTitle:@"谷歌验证码"
+                                                titleWidth:leftW
+                                               placeholder:@"请输入谷歌验证码"];
     
     [self.view addSubview:self.googleAuthTF];
     
@@ -85,9 +58,9 @@
     UIButton *pasteBtn = [UIButton buttonWithTitle:@"粘贴" titleColor:kWhiteColor backgroundColor:kThemeColor titleFont:13.0 cornerRadius:5];
     
     pasteBtn.frame = CGRectMake(0, 0, 85, self.googleAuthTF.height - 15);
-
+    
     pasteBtn.centerY = authView.height/2.0;
-
+    
     [pasteBtn addTarget:self action:@selector(clickPaste) forControlEvents:UIControlEventTouchUpInside];
     
     [authView addSubview:pasteBtn];
@@ -100,14 +73,11 @@
     self.captchaView.captchaTf.leftLbl.text = @"短信验证码";
     
     [self.captchaView.captchaBtn addTarget:self action:@selector(sendCaptcha) forControlEvents:UIControlEventTouchUpInside];
-
+    
     [self.view addSubview:self.captchaView];
     
     //修改按钮
-    
-    NSString *title = [[TLUser user].googleAuthFlag isEqualToString:kGoogleAuthClose] ? @"开启谷歌验证": @"修改谷歌验证";
-
-    UIButton *confirmBtn = [UIButton buttonWithTitle:title titleColor:kWhiteColor backgroundColor:kThemeColor titleFont:16.0 cornerRadius:5];
+    UIButton *confirmBtn = [UIButton buttonWithTitle:@"关闭谷歌认证" titleColor:kWhiteColor backgroundColor:kThemeColor titleFont:16.0 cornerRadius:5];
     
     confirmBtn.frame = CGRectMake(15, self.captchaView.yy + 30, kScreenWidth - 2*15, 45);
     
@@ -126,21 +96,6 @@
 }
 
 #pragma mark - Events
-- (void)clickCopy {
-    
-    UIPasteboard *pasteBoard = [UIPasteboard generalPasteboard];
-    
-    pasteBoard.string = self.secretTF.text;
-    
-    if (pasteBoard == nil) {
-        
-        [TLAlert alertWithError:@"复制内容为空, 请重新复制"];
-        
-    } else {
-        
-        [TLAlert alertWithSucces:@"复制成功"];
-    }
-}
 
 - (void)clickPaste {
     
@@ -162,7 +117,7 @@
     TLNetworking *http = [TLNetworking new];
     http.showView = self.view;
     http.code = CAPTCHA_CODE;
-    http.parameters[@"bizType"] = @"805071";
+    http.parameters[@"bizType"] = @"805072";
     http.parameters[@"mobile"] = [TLUser user].mobile;
     
     [http postWithSuccess:^(id responseObject) {
@@ -180,12 +135,6 @@
 
 - (void)changeGoogleAuth {
     
-    if (![self.secretTF.text valid]) {
-        
-        [TLAlert alertWithInfo:@"密钥为空, 请重新获取"];
-        return ;
-    }
-    
     if (![self.googleAuthTF.text valid]) {
         
         [TLAlert alertWithInfo:@"请输入谷歌验证码"];
@@ -200,17 +149,16 @@
     
     TLNetworking *http = [TLNetworking new];
     
-    http.code = @"805071";
+    http.code = @"805072";
     http.showView = self.view;
     
     http.parameters[@"googleCaptcha"] = self.googleAuthTF.text;
-    http.parameters[@"secret"] = self.secretTF.text;
     http.parameters[@"smsCaptcha"] = self.captchaView.captchaTf.text;
     http.parameters[@"userId"] = [TLUser user].userId;
     
     [http postWithSuccess:^(id responseObject) {
         
-        [TLAlert alertWithSucces:@"修改成功"];
+        [TLAlert alertWithSucces:@"关闭成功"];
         
         [self.navigationController popViewControllerAnimated:YES];
         
@@ -218,34 +166,6 @@
         
         
     }];
-}
-
-#pragma mark - Data
-- (void)getSecret {
-    
-    TLNetworking *http = [TLNetworking new];
-    
-    http.code = @"805070";
-    http.showView = self.view;
-    
-    [http postWithSuccess:^(id responseObject) {
-        
-        self.secretTF.text = responseObject[@"data"][@"secret"];
-        
-    } failure:^(NSError *error) {
-        
-    }];
-    
-}
-
-#pragma mark - UITextFieldDelegate
-- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
-    
-    if (textField == self.secretTF) {
-        
-        return NO;
-    }
-    return YES;
 }
 
 - (void)didReceiveMemoryWarning {

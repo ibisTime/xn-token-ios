@@ -7,7 +7,7 @@
 //
 
 #import "TLPwdRelatedVC.h"
-#import "TLCaptchaView.h"
+#import "CaptchaView.h"
 #import "APICodeMacro.h"
 
 #import "NSString+Check.h"
@@ -16,7 +16,10 @@
 
 @property (nonatomic,assign) TLPwdType type;
 @property (nonatomic,strong) TLTextField *phoneTf;
-@property (nonatomic,strong) TLCaptchaView *captchaView;
+//谷歌验证码
+@property (nonatomic, strong) TLTextField *googleAuthTF;
+
+@property (nonatomic,strong) CaptchaView *captchaView;
 @property (nonatomic,strong) TLTextField *pwdTf;
 @property (nonatomic,strong) TLTextField *rePwdTf;
 
@@ -71,7 +74,7 @@
 
 - (void)setUpUI {
     
-    CGFloat leftW = 90;
+    CGFloat leftW = 100;
     
     //手机号
     TLTextField *phoneTf = [[TLTextField alloc] initWithFrame:CGRectMake(0, 10, kScreenWidth, 45)
@@ -81,9 +84,34 @@
     [self.bgSV addSubview:phoneTf];
     self.phoneTf = phoneTf;
     
+    //谷歌验证码
+    self.googleAuthTF = [[TLTextField alloc] initWithFrame:CGRectMake(0, phoneTf.yy, phoneTf.width, phoneTf.height)
+                                                 leftTitle:@"谷歌验证码"
+                                                titleWidth:leftW
+                                               placeholder:@"请输入谷歌验证码"];
+    
+    [self.view addSubview:self.googleAuthTF];
+    
+    //复制
+    UIView *authView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 95, self.googleAuthTF.height)];
+    
+    UIButton *pasteBtn = [UIButton buttonWithTitle:@"粘贴" titleColor:kWhiteColor backgroundColor:kThemeColor titleFont:13.0 cornerRadius:5];
+    
+    pasteBtn.frame = CGRectMake(0, 0, 85, self.googleAuthTF.height - 15);
+    
+    pasteBtn.centerY = authView.height/2.0;
+    
+    [pasteBtn addTarget:self action:@selector(clickPaste) forControlEvents:UIControlEventTouchUpInside];
+    
+    [authView addSubview:pasteBtn];
+    
+    self.googleAuthTF.rightView = authView;
     
     //验证码
-    TLCaptchaView *captchaView = [[TLCaptchaView alloc] initWithFrame:CGRectMake(phoneTf.x, phoneTf.yy + 1, phoneTf.width, phoneTf.height)];
+    CaptchaView *captchaView = [[CaptchaView alloc] initWithFrame:CGRectMake(phoneTf.x, self.googleAuthTF.yy + 1, phoneTf.width, phoneTf.height)];
+    
+    captchaView.captchaTf.leftLbl.text = @"短信验证码";
+    
     [self.bgSV addSubview:captchaView];
     _captchaView = captchaView;
     [captchaView.captchaBtn addTarget:self action:@selector(sendCaptcha) forControlEvents:UIControlEventTouchUpInside];
@@ -176,6 +204,20 @@
     
 }
 
+- (void)clickPaste {
+    
+    UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+    
+    if (pasteboard.string != nil) {
+        
+        self.googleAuthTF.text = pasteboard.string;
+        
+    } else {
+        
+        [TLAlert alertWithInfo:@"粘贴内容为空"];
+    }
+}
+
 - (void)next:(UIButton *)sender {
 
     [_rePwdTf becomeFirstResponder];
@@ -193,6 +235,12 @@
         
         [TLAlert alertWithInfo:@"请输入正确的手机号"];
         
+        return;
+    }
+    
+    if (![self.googleAuthTF.text valid]) {
+        
+        [TLAlert alertWithInfo:@"请输入谷歌验证码"];
         return;
     }
     
@@ -243,7 +291,8 @@
     }
     
     http.parameters[@"smsCaptcha"] = self.captchaView.captchaTf.text;
-    
+    http.parameters[@"googleCaptcha"] = self.googleAuthTF.text;
+
     
     [http postWithSuccess:^(id responseObject) {
         

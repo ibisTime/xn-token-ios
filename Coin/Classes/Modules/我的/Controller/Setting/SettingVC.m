@@ -16,6 +16,7 @@
 #import "TLTabBarController.h"
 #import "EditVC.h"
 #import "GoogleAuthVC.h"
+#import "CloseGoogleAuthVC.h"
 
 #import "SettingGroup.h"
 #import "SettingModel.h"
@@ -26,6 +27,7 @@
 #import "AppMacro.h"
 #import "APICodeMacro.h"
 
+#import "TLAlert.h"
 #import "NSString+Check.h"
 
 @interface SettingVC ()
@@ -161,11 +163,8 @@
     SettingModel *google = [SettingModel new];
     google.text = @"谷歌验证";
     [google setAction:^{
-
-        GoogleAuthVC *authVC = [GoogleAuthVC new];
         
-        [weakSelf.navigationController pushViewController:authVC animated:YES];
-        
+        [weakSelf setGoogleAuth];
     }];
     
     self.group = [SettingGroup new];
@@ -208,6 +207,40 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:kUserLoginOutNotification object:nil];
 }
 
+- (void)setGoogleAuth {
+    
+    NSString *title = [[TLUser user].googleAuthFlag isEqualToString:kGoogleAuthClose] ? @"开启谷歌验证": @"修改谷歌验证";
+    
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"谷歌验证" message:@"" preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    UIAlertAction *changeAction = [UIAlertAction actionWithTitle:title style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        GoogleAuthVC *authVC = [GoogleAuthVC new];
+        
+        [self.navigationController pushViewController:authVC animated:YES];
+    }];
+    
+    UIAlertAction *closeAction = [UIAlertAction actionWithTitle:@"关闭谷歌验证" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        CloseGoogleAuthVC *closeVC = [CloseGoogleAuthVC new];
+        
+        [self.navigationController pushViewController:closeVC animated:YES];
+    }];
+    
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        
+        
+    }];
+    
+    [alertController addAction:changeAction];
+    [alertController addAction:closeAction];
+    [alertController addAction:cancelAction];
+    
+    [self presentViewController:alertController animated:YES completion:nil];
+    
+    
+}
+
 #pragma mark - Init
 - (void)requestUserInfo {
     
@@ -237,6 +270,7 @@
     if ([TLUser user].realName) {
         
         NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:1];
+        
         SettingCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
         
         cell.rightLabel.text = @"已认证";
@@ -247,6 +281,7 @@
     if ([TLUser user].email) {
         
         NSIndexPath *indexPath = [NSIndexPath indexPathForRow:1 inSection:1];
+        
         SettingCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
         
         cell.rightLabel.text = [TLUser user].email;
@@ -260,6 +295,17 @@
         SettingCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
         
         cell.rightLabel.text = [TLUser user].mobile;
+        
+        [self.tableView reloadData];
+    }
+    
+    if ([TLUser user].googleAuthFlag) {
+        
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:4 inSection:1];
+        
+        SettingCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+        
+        cell.rightLabel.text = [[TLUser user].googleAuthFlag isEqualToString:kGoogleAuthClose] ? @"已关闭": @"已开启";
         
         [self.tableView reloadData];
     }

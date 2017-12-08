@@ -49,6 +49,8 @@
 
 //0 未设置交易密码 1已设置
 @property (nonatomic, copy) NSString *tradepwdFlag;
+//谷歌验证
+@property (nonatomic, copy) NSString *googleAuthFlag;
 //真实姓名
 @property (nonatomic, copy) NSString *realName;
 //身份证
@@ -103,3 +105,5 @@ FOUNDATION_EXTERN  NSString *const kUserInfoChange;
 FOUNDATION_EXTERN  NSString *const kLevelOrdinaryTraders;
 FOUNDATION_EXTERN  NSString *const kLevelAgent;
 
+FOUNDATION_EXTERN  NSString *const kGoogleAuthOpen;
+FOUNDATION_EXTERN  NSString *const kGoogleAuthClose;

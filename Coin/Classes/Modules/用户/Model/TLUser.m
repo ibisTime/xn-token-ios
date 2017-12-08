@@ -31,6 +31,9 @@ NSString *const kUserInfoChange = @"kUserInfoChange";
 // ONE("1", "普通交易者"), TWO("2", "代理人")
 NSString *const kLevelOrdinaryTraders = @"1";
 NSString *const kLevelAgent = @"2";
+//谷歌验证(0:关闭 1:开启)
+NSString *const kGoogleAuthOpen = @"1";
+NSString *const kGoogleAuthClose = @"0";
 
 @implementation TLUser
 
@@ -170,6 +173,7 @@ NSString *const kLevelAgent = @"2";
     self.nickname = nil;
     self.email = nil;
     self.tradepwdFlag = nil;
+    self.googleAuthFlag = nil;
     self.level = nil;
     self.rmbAccountNumber = nil;
     self.jfAccountNumber = nil;
@@ -234,6 +238,7 @@ NSString *const kLevelAgent = @"2";
     self.realName = dict[@"realName"];
     self.idNo = dict[@"idNo"];
     self.tradepwdFlag = [NSString stringWithFormat:@"%@", dict[@"tradepwdFlag"]];
+    self.googleAuthFlag = [NSString stringWithFormat:@"%@", dict[@"googleAuthFlag"]];
     self.level = dict[@"level"];
     self.photo = dict[@"photo"];
     self.email = dict[@"email"];
