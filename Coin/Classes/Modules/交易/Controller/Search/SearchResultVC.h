@@ -26,7 +26,8 @@ typedef NS_ENUM(NSInteger, SearchType) {
 @property (nonatomic, copy) NSString *maxPrice;
 //支付方式
 @property (nonatomic, copy) NSString *payType;
-
+//广告类型
+@property (nonatomic, copy) NSString *advertiseType;
 //搜用户
 @property (nonatomic, copy) NSString *nickName;
 

@@ -39,7 +39,7 @@
     
     [self addSubview:rightView];
 
-    TLTimeButton *captchaBtn = [[TLTimeButton alloc] initWithFrame:CGRectMake(0, 0, 80, frame.size.height - 15) totalTime:60.0];
+    TLTimeButton *captchaBtn = [[TLTimeButton alloc] initWithFrame:CGRectMake(0, 0, 85, frame.size.height - 15) totalTime:60.0];
     [captchaBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
 
     captchaBtn.titleLabel.font = Font(12);

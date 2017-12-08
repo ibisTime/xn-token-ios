@@ -10,6 +10,8 @@
 
 @interface TLTextField : UITextField
 
+@property (nonatomic, strong) UILabel *leftLbl;
+
 - (instancetype)initWithFrame:(CGRect)frame
                     leftTitle:(NSString *)leftTitle
                    titleWidth:(CGFloat)titleWidth

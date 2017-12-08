@@ -15,6 +15,7 @@
 #import "HTMLStrVC.h"
 #import "TLTabBarController.h"
 #import "EditVC.h"
+#import "GoogleAuthVC.h"
 
 #import "SettingGroup.h"
 #import "SettingModel.h"
@@ -161,7 +162,10 @@
     google.text = @"谷歌验证";
     [google setAction:^{
 
-
+        GoogleAuthVC *authVC = [GoogleAuthVC new];
+        
+        [weakSelf.navigationController pushViewController:authVC animated:YES];
+        
     }];
     
     self.group = [SettingGroup new];

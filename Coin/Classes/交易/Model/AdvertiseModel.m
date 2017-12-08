@@ -16,6 +16,9 @@ NSString *const kAdsStatusDaiJiaoYi =  @"1";
 NSString *const kAdsStatusJiaoYiZhong =  @"2";
 NSString *const kAdsStatusXiaJia =  @"3";
 
+NSString *const kTradeTypeBuy = @"0";
+NSString *const kTradeTypeSell = @"1";
+
 @implementation AdvertiseModel
 
 + (NSDictionary *)objectClassInArray{

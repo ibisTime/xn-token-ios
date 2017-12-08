@@ -9,6 +9,7 @@
 #import "SortBar.h"
 
 #import "NSString+CGSize.h"
+#import <UIScrollView+TLAdd.h>
 
 #import "TLUIHeader.h"
 #import "AppColorMacro.h"
@@ -39,12 +40,13 @@ static const float kAnimationdDuration = 0.3;
 - (instancetype)initWithFrame:(CGRect)frame sortNames:(NSArray*)sortNames sortBlock:(SortSelectBlock)sortBlock {
     if (self = [super initWithFrame:frame]) {
         
-        self.backgroundColor = [UIColor whiteColor];
         _sortBlock = [sortBlock copy];
         
         _sortNames = [NSArray arrayWithArray:sortNames];
         
+        self.backgroundColor = [UIColor whiteColor];
         self.showsHorizontalScrollIndicator = NO;
+        [self adjustsContentInsets];
         
         [self initSubViews];
     }

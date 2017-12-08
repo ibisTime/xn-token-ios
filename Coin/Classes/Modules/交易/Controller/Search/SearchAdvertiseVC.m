@@ -17,12 +17,20 @@
 
 #import "SearchResultVC.h"
 
+//0:买币  1:卖币
+#define kTradeBuy @"0"
+#define kTradeSell @"1"
+
 @interface SearchAdvertiseVC ()<UITextFieldDelegate>
 
 //最低价
 @property (nonatomic, strong) TLTextField *minPriceTF;
 //最高价
 @property (nonatomic, strong) TLTextField *maxPriceTF;
+//广告类型
+@property (nonatomic, strong) TLPickerTextField *advertiseTypePicker;
+//广告类型选择
+@property (nonatomic, assign) NSInteger advertiseTypeIndex;
 //付款方式
 @property (nonatomic, strong) TLPickerTextField *payTypePicker;
 //付款方式选择
@@ -50,6 +58,57 @@
     
     CGFloat leftMargin = 15;
     
+    //广告类型
+    self.advertiseTypePicker = [[TLPickerTextField alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 55) leftTitle:@"广告类型" titleWidth:90 placeholder:@"请选择广告类型"];
+    
+    self.advertiseTypePicker.tagNames = @[@"买币", @"卖币"];
+    
+    self.advertiseTypePicker.didSelectBlock = ^(NSInteger index) {
+        
+        weakSelf.advertiseTypeIndex = index;
+    };
+    
+    [self.view addSubview:self.advertiseTypePicker];
+    
+    [self.advertiseTypePicker mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.top.equalTo(@0);
+        make.left.equalTo(@5);
+        make.right.equalTo(@(-36));
+        make.height.equalTo(@55);
+        
+    }];
+    
+    //
+    UIImageView *advertiseArrowIV = [[UIImageView alloc] initWithImage:kImage(@"更多拷贝")];
+    
+    advertiseArrowIV.backgroundColor = kWhiteColor;
+    advertiseArrowIV.contentMode = UIViewContentModeScaleAspectFit;
+    
+    [self.view addSubview:advertiseArrowIV];
+    
+    [advertiseArrowIV mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.right.equalTo(@(-20));
+        make.centerY.equalTo(self.advertiseTypePicker.mas_centerY);
+        
+    }];
+    
+    //
+    UIView *line = [[UIView alloc] init];
+    
+    line.backgroundColor = kLineColor;
+    
+    [self.view addSubview:line];
+    [line mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.left.equalTo(@20);
+        make.right.equalTo(@(-20));
+        make.height.equalTo(@0.5);
+        make.top.equalTo(self.advertiseTypePicker.mas_bottom).offset(0);
+        
+    }];
+    
     //价格区间
     UILabel *textLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:14.0];
     
@@ -58,7 +117,7 @@
     [textLbl mas_updateConstraints:^(MASConstraintMaker *make) {
         
         make.left.equalTo(@20);
-        make.top.equalTo(@46);
+        make.top.equalTo(line.mas_bottom).offset(36);
         
     }];
     
@@ -237,6 +296,8 @@
     resultVC.maxPrice = self.maxPriceTF.text;
     
     resultVC.payType = payType;
+    
+    resultVC.advertiseType = self.advertiseTypeIndex == 0 ? kTradeBuy: kTradeSell;
     
     [self.navigationController pushViewController:resultVC animated:YES];
     
