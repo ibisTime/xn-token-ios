@@ -46,24 +46,19 @@
     NSString *jS = [NSString stringWithFormat:@"var meta = document.createElement('meta'); meta.setAttribute('name', 'viewport'); meta.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0'); meta.setAttribute('width', %lf); document.getElementsByTagName('head')[0].appendChild(meta);",kScreenWidth];
     
     WKUserScript *wkUserScript = [[WKUserScript alloc] initWithSource:jS injectionTime:WKUserScriptInjectionTimeAtDocumentEnd forMainFrameOnly:YES];
-    
     WKUserContentController *wkUCC = [WKUserContentController new];
-    
     [wkUCC addUserScript:wkUserScript];
     
+    //
     WKWebViewConfiguration *wkConfig = [WKWebViewConfiguration new];
-    
     wkConfig.userContentController = wkUCC;
-    
     _webView = [[WKWebView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight) configuration:wkConfig];
-    
     _webView.backgroundColor = kWhiteColor;
-    
     _webView.navigationDelegate = self;
-    
     _webView.allowsBackForwardNavigationGestures = YES;
-    
+
     [self.view addSubview:_webView];
+    
     
     [self loadWebWithString:self.htmlStr];
 }

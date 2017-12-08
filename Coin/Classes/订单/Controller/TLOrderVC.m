@@ -12,7 +12,7 @@
 #import "OrderListTableView.h"
 #import "CoinChangeView.h"
 #import "FilterView.h"
-
+#import "ChatManager.h"
 #import "OrderDetailVC.h"
 #import "WaitingOrderVC.h"
 
@@ -71,7 +71,10 @@
     //添加KVO
     [self addKVO];
     
+    // 如果切换账户 把订单清除掉
+    
 }
+
 
 #pragma mark - Init
 - (TopLabelUtil *)labelUnil {
@@ -94,6 +97,7 @@
     return _labelUnil;
 }
 
+
 - (void)addCoinChangeView {
     
     CoinChangeView *coinChangeView = [[CoinChangeView alloc] init];
@@ -111,6 +115,7 @@
         coinChangeView.title = @"ETH";
         
     });
+    
 }
 
 - (FilterView *)filterPicker {
@@ -339,11 +344,11 @@
         [helper loadMore:^(NSMutableArray *objs, BOOL stillHave) {
             
             weakSelf.orders = objs;
-            
             weakSelf.tableView.orders = objs;
             
             [weakSelf onUnReadMessage];
 
+            
         } failure:^(NSError *error) {
             
         }];
@@ -352,6 +357,7 @@
     [self.tableView endRefreshingWithNoMoreData_tl];
     
 }
+
 
 #pragma mark - SegmentDelegate
 -(void)segment:(TopLabelUtil *)segment didSelectIndex:(NSInteger)index {
@@ -366,70 +372,114 @@
         
     }
     
+    //
     self.currentIndex = index;
-    
     self.helper.parameters[@"statusList"] = self.statusList;
-
+    
+    //
     [self.tableView beginRefreshing];
     
     [self.labelUnil dyDidScrollChangeTheTitleColorWithContentOfSet:(index-1)*kScreenWidth];
     
 }
 
-#pragma mark - RefreshDelegate
-
+#pragma mark - RefreshDelegate, 处理点击事件
 - (void)refreshTableView:(TLTableView *)refreshTableview didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     OrderModel *order = self.orders[indexPath.row];
     
     NSString *friendUserId = order.isBuy ? order.sellUserInfo.userId: order.buyUserInfo.userId;
-    
     NSString *friendPhoto = order.isBuy ? order.sellUserInfo.photo: order.buyUserInfo.photo;
-    
     NSString *friendNickName = order.isBuy ? order.sellUserInfo.nickname: order.buyUserInfo.nickname;
+    
+    
+    __block IMAGroup *currentIMGroup = nil;
+    
+    // 1. method1  行不通
+    // user 通过 conversion 获取
+//   CLSafeMutableArray *conversationList = [IMAPlatform sharedInstance].conversationMgr.conversationList;
+//
+//
+//    [conversationList.safeArray enumerateObjectsUsingBlock:^(IMAConversation   *conv, NSUInteger idx, BOOL * _Nonnull stop) {
+//
+//        IMAUser *user = [[IMAPlatform sharedInstance] getReceiverOf:conv];
+//
+//        if ([user isKindOfClass:[IMAGroup class]]) {
+//            //群组
+//            IMAGroup *group = (IMAGroup *)user;
+//            if ([group.groupInfo.groupId isEqualToString:order.code]) {
+//                //找到了该会话
+//
+//                currentIMGroup = group;
+//                *stop = YES;
+//            }
+//
+//        }
+//
+//    }];
+    
+    
+    //2. 通过
+    CLSafeMutableArray *groupList = [IMAPlatform sharedInstance].contactMgr.groupList;
+    if (groupList.safeArray) {
+        [groupList.safeArray enumerateObjectsUsingBlock:^(IMAGroup *group, NSUInteger idx, BOOL * _Nonnull stop) {
+            
+            if ([group.groupInfo.groupId isEqualToString:order.code]) {
+                //找到了该会话
+                currentIMGroup = group;
+                *stop = YES;
+            }
+            
+        }];
+    }
+    
+    if (currentIMGroup == nil) {
+        
+        NSLog(@"未找到会话，异常");
+        return;
+        
+    }
+    
+//    IMAConversationManager *mgr = [IMAPlatform sharedInstance].conversationMgr;
+//    _conversationList = [mgr conversationList];
+    
+//    IMAConversation *conv = (IMAConversation *)convable;
+//    IMAUser *user = [[IMAPlatform sharedInstance] getReceiverOf:conv];
+    
     //对方
+//    IMAUser *user = [[IMAUser alloc] initWith:friendUserId];
+//    user.nickName = friendNickName;
+//    user.icon = [friendPhoto convertImageUrl];
+//    user.remark = friendNickName;
+//    user.userId = friendUserId;
     
-    IMAUser *user = [[IMAUser alloc] initWith:friendUserId];
+//    TIMGroupInfo *groupInfo = [[TIMGroupInfo alloc] init];
+//    groupInfo.groupId
+//    IMAGroup *group = [[IMAGroup alloc] initWithInfo:<#(TIMGroupInfo *)#>];
     
-    user.nickName = friendNickName;
-    user.icon = [friendPhoto convertImageUrl];
-    user.remark = friendNickName;
-    user.userId = friendUserId;
     //我
     ChatUserProfile *userInfo = [ChatUserProfile sharedUser];
-    
     userInfo.minePhoto = [TLUser user].photo;
     userInfo.mineNickName = [TLUser user].nickname;
     userInfo.friendPhoto = [friendPhoto convertImageUrl];
     userInfo.friendNickName = friendNickName;
     
+    //
     if ([order.status isEqualToString:@"-1"]) {
-        
-        WaitingOrderVC *chatVC = [[WaitingOrderVC alloc] initWith:user];
-        
+        // 传入user
+        WaitingOrderVC *chatVC = [[WaitingOrderVC alloc] initWith:currentIMGroup];
         chatVC.userInfo = userInfo;
-        
         chatVC.order = order;
-        
         [self.navigationController pushViewController:chatVC animated:YES];
-        
         return ;
     }
     
-    OrderDetailVC *chatVC = [[OrderDetailVC alloc] initWith:user];
-    
+    //
+    OrderDetailVC *chatVC = [[OrderDetailVC alloc] initWith:currentIMGroup];
     chatVC.userInfo = userInfo;
-    
     chatVC.order = order;
-    
     [self.navigationController pushViewController:chatVC animated:YES];
     
 }
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 
 @end

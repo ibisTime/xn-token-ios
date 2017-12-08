@@ -10,4 +10,6 @@
 
 @interface ChatSysMsgCell : UITableViewCell
 
+//@property (nonatomic, copy) NSString *text;
+
 @end

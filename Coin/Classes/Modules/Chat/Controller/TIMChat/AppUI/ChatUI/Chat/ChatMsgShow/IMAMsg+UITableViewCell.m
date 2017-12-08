@@ -163,6 +163,13 @@ static NSString *const kIMAMsgShowChatAttributedText = @"kIMAMsgShowChatAttribut
             case EIMAMSG_RevokedTip:
                 return [RevokedTipTableViewCell class];
                 break;
+                
+//            case EIMAMSG_GroupSystem: {
+//                //群系统消息
+//                // 返回指定的cell 即可
+//                return nil;
+//            } break;
+                
             default:
                 return [RichChatTableViewCell class];
                 break;
@@ -179,6 +186,21 @@ static NSString *const kIMAMsgShowChatAttributedText = @"kIMAMsgShowChatAttribut
 
 - (UITableViewCell<TIMElemAbleCell> *)tableView:(UITableView *)tableView style:(TIMElemCellStype)style
 {
+    
+    //根据消息类型判断不同的  cell, 比如文本，图片，系统消息
+//    NSString *reuseid = [self msgCellReuseIndentifier];
+//    TIMElemBaseTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseid];
+//    if (!cell) {
+//
+//      cell = [[[self showCellClass] alloc] initWithC2CReuseIdentifier:reuseid];
+//      cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//
+//    }
+//
+//    return cell;
+    
+   // 以下 为 原版，先注释掉
+    
     NSString *reuseid = [self msgCellReuseIndentifier];
     TIMElemBaseTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseid];
     if (!cell)
@@ -197,11 +219,11 @@ static NSString *const kIMAMsgShowChatAttributedText = @"kIMAMsgShowChatAttribut
             NSException *e = [NSException exceptionWithName:@"不支持该类型的Cell" reason:@"不支持该类型的Cell" userInfo:nil];
             @throw e;
         }
-        
+
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        
+
     }
-    
+
     if (cell == nil)
     {
         DebugLog(@"不支持该类型的Cell，请检查代码逻辑");
@@ -209,6 +231,7 @@ static NSString *const kIMAMsgShowChatAttributedText = @"kIMAMsgShowChatAttribut
         @throw e;
     }
     return cell;
+    
 }
 
 - (UIFont *)inputTextFont

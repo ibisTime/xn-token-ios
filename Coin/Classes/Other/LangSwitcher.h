@@ -10,4 +10,10 @@
 
 @interface LangSwitcher : NSObject
 
+
+/**
+ key 传nil
+ */
++ (NSString *)switchLang:(NSString *)content key:(NSString *)key;
+
 @end

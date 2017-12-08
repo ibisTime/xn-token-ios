@@ -48,7 +48,13 @@
     [self configRootViewController];
     
     //初始化 im
-    [IMAPlatform configWith:[[IMAPlatformConfig alloc] init]];
+    [[ChatManager sharedManager] initChat];
+   
+    
+    //1.思路  登进去首先拉去所有的群组会话列表
+    // [IMAPlatform sharedInstance].conversationMgr
+    //
+//    [[IMAPlatform sharedInstance].contactMgr publicGroups];
     
     //重新登录
     if([TLUser user].isLogin) {

@@ -51,7 +51,6 @@ typedef NS_ENUM(NSInteger, SendInputStatus)
 - (void)addChatSettingItem;
 - (void)onClickChatSetting;
 
-
 // 加载历史信息
 - (void)loadHistotyMessages;
 

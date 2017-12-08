@@ -8,7 +8,7 @@
 
 #import "ChatViewController.h"
 #import <MobileCoreServices/MobileCoreServices.h>
-
+#import "ChatSysMsgCell.h"
 #import "MyChatToolBarView.h"
 #import "MyUIDefine.h"
 #import "MyMoreView.h"
@@ -138,8 +138,10 @@
     
 }
 
+#pragma mark- 开启消息加载，和某个用户聊天
 - (void)configWithUser:(IMAUser *)user
 {
+    
     [_receiverKVO unobserveAll];
     
     _receiver = user;
@@ -161,32 +163,34 @@
     _conversation = [[IMAPlatform sharedInstance].conversationMgr chatWith:user];
 //    _conversation = [[TIMManager sharedInstance] getConversation:TIM_C2C receiver:user];
     
+    // 获取消息 列表
     _messageList = _conversation.msgList;
     
+    //加载聊天数据
     [_conversation asyncLoadRecentMessage:10 completion:^(NSArray *imamsgList, BOOL succ) {
         [ws onLoadRecentMessage:imamsgList complete:succ scrollToBottom:YES];
     }];
     
+    
+#pragma mark - ------------------ 以下为收听消息的监听方法   ------------
     _conversation.receiveMsg = ^(NSArray *imamsgList, BOOL succ) {
         
         [ws modifySendInputStatus:SendInputStatus_Send];
-        
         [ws onReceiveNewMsg:imamsgList succ:succ];
         [ws updateMessageList];
+        
     };
-    
-    
-    
+
     [self addChatSettingItem];
-    
-    
     [self setChatTitle];
     
     // 同步群资料
-    if ([user isGroupType])
-    {
+    if ([user isGroupType]) {
+        
         [((IMAGroup *)user) asyncUpdateGroupInfo:nil fail:nil];
+        
     }
+    
 }
 
 - (void)setChatTitle
@@ -310,6 +314,7 @@
     }
 }
 
+#pragma  发送信息
 - (void)sendMsg:(IMAMsg *)msg
 {
     if (msg)
@@ -320,6 +325,7 @@
         __weak ChatViewController *ws = self;
         DebugLog(@"will sendmessage");
 
+      //发送消息
       NSArray *newaddMsgs = [_conversation sendMessage:msg completion:^(NSArray *imamsglist, BOOL succ, int code) {
             
             DebugLog(@"sendmessage end");
@@ -337,10 +343,12 @@
             }
         }];
         
+        // 添加到 UI 上
         [self showMsgs:newaddMsgs];
     }
 }
 
+#pragma mar- 展示消息到UI
 - (void)showMsgs:(NSArray *)msgs
 {
     NSMutableArray *array = [NSMutableArray array];
@@ -351,14 +359,17 @@
         [array addObject:index];
     }
     
+    // 插入 row
     [_tableView insertRowsAtIndexPaths:array withRowAnimation:UITableViewRowAnimationBottom];
     [_tableView endUpdates];
     
+    //滚动tableView
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         
         NSIndexPath *index = [NSIndexPath indexPathForRow:_messageList.count - 1 inSection:0];
         [_tableView scrollToRowAtIndexPath:index atScrollPosition:UITableViewScrollPositionBottom animated:NO];
     });
+    
 }
 
 - (void)modifySendInputStatus:(SendInputStatus)status
@@ -717,7 +728,7 @@
         [[HUDHelper sharedInstance] tipMessage:@"发送的文件过大"];
     }
 }
-    
+
 - (void)touchUpDone:(NSString *)savePath
 {
         NSError *err = nil;
@@ -736,7 +747,17 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
     IMAMsg *msg = [_messageList objectAtIndex:indexPath.row];
+
+  
+//    UITableViewCell *cell =[tableView cellForRowAtIndexPath:indexPath];
+    if ([self isAdminMsg:msg]) {
+        
+        return 25;
+        
+    }
+    
     return [msg heightInWidth:tableView.bounds.size.width inStyle:_conversation.type == TIM_GROUP];
 }
 
@@ -745,6 +766,13 @@
     return [_messageList count];
 }
 
+- (BOOL)isAdminMsg:(IMAMsg *)msg {
+    
+    return msg && msg.msg && [msg.msg.sender isEqualToString:@"admin"];
+    
+}
+
+#pragma mark- 通过 model 配置展示的 cell
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSInteger testIndex = 0;
@@ -758,13 +786,62 @@
     
     IMAMsg *msg = [_messageList objectAtIndex:indexPath.row];
 
-    
     NSString *rail = [NSString stringWithFormat:@"-------------->cellForRowAtIndexPath crash font(%ld)", (long)testIndex];
     DebugLog(@"%@", rail);
     
-    UITableViewCell<TIMElemAbleCell> *cell = [msg tableView:tableView style:[_receiver isC2CType] ? TIMElemCell_C2C : TIMElemCell_Group];
-    [cell configWith:msg];
-    return cell;
+    if ([self isAdminMsg:msg]) {
+        
+        TIMTextElem *textElem = (TIMTextElem *)[msg.msg getElem:0];
+        ChatSysMsgCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ChatSysMsgCellId"];
+        if (!cell) {
+
+            cell = [[ChatSysMsgCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"ChatSysMsgCellId"];
+            cell.textLabel.font = [UIFont systemFontOfSize:12];
+            cell.textLabel.textAlignment = NSTextAlignmentCenter;
+            cell.textLabel.textColor = kLightGrayColor;
+            cell.contentView.backgroundColor = [UIColor clearColor];
+            
+        }
+        
+        cell.textLabel.text =  [textElem.text stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+
+//        ChatTimeTipTableViewCell *cell = [[ChatTimeTipTableViewCell alloc] initWithGroupReuseIdentifier:@"ChatSysMsgCellId"];
+        
+        return cell;
+        
+    } else {
+        
+        UITableViewCell<TIMElemAbleCell> *cell = [msg tableView:tableView style:[_receiver isC2CType] ? TIMElemCell_C2C : TIMElemCell_Group];
+        [cell configWith:msg];
+        
+        return cell;
+
+    }
+    
+ 
+    
+
+    // 辅助： 普通消息，返回的是该cell
+//    RichChatTableViewCell *testCell = nil;
+    
+    // 暂时都是
+    // 根据消息类型加载不同的cell
+    
+//    UITableViewCell *showCell = nil;
+//    if (0/* 系统消息 */) {
+//
+//
+//    } else {
+//
+//        //普通消息
+//        UITableViewCell<TIMElemAbleCell> *cell = [msg tableView:tableView style:TIMElemCell_C2C];
+//        [cell configWith:msg];
+//        showCell = cell;
+//
+//    }
+    
+    //
+//    return showCell;
 }
 
 #pragma mark- BaseCell deleteCell

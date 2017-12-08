@@ -77,6 +77,16 @@
     // do nothing
 }
 
+- (void)configWithText:(NSString *)text {
+    
+//    _msg = msg;
+//    TIMCustomElem *elem = (TIMCustomElem *)[msg.msg getElem:0];
+    self.textLabel.textAlignment = NSTextAlignmentCenter;
+    self.textLabel.font = [_msg tipFont];
+    self.textLabel.textColor = kLightGrayColor;
+    self.textLabel.text = text;
+}
+
 - (void)configWith:(IMAMsg *)msg
 {
     _msg = msg;

@@ -8,6 +8,7 @@
 
 #import "IMAChatViewController.h"
 
+// 包含表情
 @interface RichChatViewController : IMAChatViewController
 
 @end
