@@ -11,7 +11,10 @@
 #import "IMALoginParam.h"
 #import "CustomUIHeader.h"
 #import "AppConfig.h"
+#import "IMAPlatform.h"
+#import "IMAConversation.h"
 
+//
 #define IM_PWD @"123456"
 
 @interface ChatManager ()<TIMConnListener,TIMUserStatusListener,TIMRefreshListener,TIMFriendshipListener,TIMGroupListener,TIMMessageListener,TIMMessageUpdateListener>
@@ -26,6 +29,30 @@
     //    __weak id<WXApiDelegate>    _tlsuiwx;
     //    TencentOAuth                *_openQQ;
 //    IMALoginParam               *_loginParam;
+}
+
+- (void)initChat {
+    
+     [IMAPlatform configWith:[[IMAPlatformConfig alloc] init]];
+    
+}
+
+//
+- (void)play {
+    
+    // 获取所有的会话列表
+    // IMAConversation
+    // 获取列表
+    CLSafeMutableArray *conversionList = [IMAPlatform sharedInstance].conversationMgr.conversationList;
+    
+    //
+    //群组列表
+    //获取所有的群组列表
+    [IMAPlatform sharedInstance].contactMgr.groupList;
+    //
+    //先去获取订单列表，根据订单列表查询是否有会话
+    //
+    
 }
 
 + (ChatManager *)sharedManager {

@@ -68,6 +68,12 @@ typedef NS_ENUM(NSInteger, IMAMsgStatus)
 @property (nonatomic, assign)   BOOL isPicked;
 
 // 客户从UI界面主动调用的消息类簇
+
+/**
+ 构造文本消息
+ 调用  ———— TIMTextElem
+ 加入 TIMMessage 中
+ */
 + (instancetype)msgWithText:(NSString *)text;
 
 + (instancetype)msgWithImage:(UIImage *)image isOrignal:(BOOL)origal;

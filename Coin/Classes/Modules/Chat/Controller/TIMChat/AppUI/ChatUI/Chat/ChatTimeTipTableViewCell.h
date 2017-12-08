@@ -10,6 +10,8 @@
 
 @interface ChatTimeTipTableViewCell : ChatBaseTableViewCell
 
+- (void)configWithText:(NSString *)text;
+
 @end
 
 

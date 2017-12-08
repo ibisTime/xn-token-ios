@@ -37,6 +37,7 @@
     TIMMessage *msg = [[TIMMessage alloc] init];
     [msg addElem:elem];
     
+    //进行狗仔初始化
     return [[IMAMsg alloc] initWith:msg type:EIMAMSG_Text];
 }
 

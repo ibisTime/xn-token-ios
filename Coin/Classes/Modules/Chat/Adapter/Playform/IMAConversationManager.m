@@ -389,25 +389,47 @@
  *
  *  @param msgs 新消息列表，TIMMessage 类型数组
  */
+#pragma mark- 消息监听
 - (void)onNewMessage:(NSArray *)msgs
 {
     for (TIMMessage *msg in msgs)
     {
         IMAMsg *imamsg = [IMAMsg msgWith:msg];
         
+        // 获取消息对应的会话
+        // 通过判断消息， 会话类型，判断是系统消息、群消息、还是c2c
         TIMConversation *conv = [msg getConversation];
         
         BOOL isSystemMsg = [conv getType] == TIM_SYSTEM;
-        
         BOOL isAddGroupReq = NO;
         BOOL isAddFriendReq = NO;
         BOOL isContinue = YES;
-        if (isSystemMsg)
-        {
+        
+        // *********************** sys
+        if (isSystemMsg) {
+            // 以下为系统消息
             int elemCount = [msg elemCount];
             for (int i = 0; i < elemCount; i++)
             {
+                
                 TIMElem* elem = [msg getElem:i];
+                
+//                if ([elem isKindOfClass:[TIMGroupSystemElem class]]) {
+//
+//                    TIMGroupSystemElem *gse = (TIMGroupSystemElem *)elem;
+//
+//                    if (gse.type == TIM_GROUP_SYSTEM_CUSTOM_INFO) {
+//
+////                        TIMGroupSystemElem *obj = (TIMGroupSystemElem *)gse;
+//                        NSData *data = gse.userData;
+//                        NSString *content = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+//                        [content stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+//                        int a = 10;
+//                        NSLog(@"----- %@ -----",content);
+//                    }
+//
+//                }
+                
                 if ([elem isKindOfClass:[TIMGroupSystemElem class]])
                 {
                     TIMGroupSystemElem *gse = (TIMGroupSystemElem *)elem;
@@ -435,15 +457,25 @@
                 continue;
             }
         }
+        // *********************** sys
         
+        
+        // ******************************************
         BOOL updateSucc = NO;
         
-        for (int i = 0; i < [_conversationList count]; i++)
-        {
+        // 遍历会话列表
+        for (int i = 0; i < [_conversationList count]; i++) {
+            
             IMAConversation *imaconv = [_conversationList objectAtIndex:i];
-            NSString *imaconvReceiver = [imaconv receiver];
-            if (imaconv.type == [conv getType] && ([imaconvReceiver isEqualToString:[conv getReceiver]] || [imaconvReceiver isEqualToString:[IMACustomConversation getCustomConversationID:imamsg]]))
-            {
+            //
+            NSString  *imaconvReceiver = [imaconv receiver];
+            if (
+                imaconv.type == [conv getType]
+                      &&
+                ([imaconvReceiver isEqualToString:[conv getReceiver]] ||
+                 [imaconvReceiver isEqualToString:[IMACustomConversation getCustomConversationID:imamsg]]
+                 )
+                ) {
                 if (imaconv == _chattingConversation)
                 {
                     //如果是c2c会话，则更新“对方正在输入...”状态
@@ -531,15 +563,15 @@
                     [_conversationList insertObject:temp atIndex:[self insertPosition]];
                     [self updateOnNewConversation:temp];
                 }
-            }
-            else
-            {
+            } else {
+                
                 // 说明会话列表中没有该会话，新生建会话，并更新到
                 IMAConversation *temp = [[IMAConversation alloc] initWith:conv];
                 temp.lastMessage = imamsg;
                 [_conversationList insertObject:temp atIndex:[self insertPosition]];
                 self.unReadMessageCount++;
                 [self updateOnNewConversation:temp];
+                
             }
         }
     }

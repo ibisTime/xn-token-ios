@@ -81,6 +81,7 @@
     }];
 }
 
+#pragma mark- 重新发送信息
 - (void)onResendMsg:(NSNotification *)notify
 {
     IMAMsg *msg = (IMAMsg *)notify.object;

@@ -12,7 +12,11 @@
 
 + (ChatManager *)sharedManager;
 
-//登录
+/**
+   做一些初始化工作
+ */
+- (void)initChat;
+
 
 
 //- (void)chatLoginOut;

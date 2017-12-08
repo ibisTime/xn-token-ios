@@ -10,4 +10,15 @@
 
 @implementation LangSwitcher
 
++ (NSString *)switchLang:(NSString *)content key:(NSString *)key {
+    
+    return content;
+    
+}
+
+
++ (NSString *)switchLang:(NSString *)content {
+    return content;
+}
+
 @end

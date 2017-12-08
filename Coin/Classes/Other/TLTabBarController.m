@@ -10,7 +10,7 @@
 
 #import "TLNavigationController.h"
 #import "TLUserLoginVC.h"
-
+#import "LangSwitcher.h"
 #import "UIColor+theme.h"
 
 @interface TLTabBarController ()<UITabBarControllerDelegate>
@@ -26,7 +26,13 @@
     
     self.delegate = self;
 
-    NSArray *titles = @[@"行情",@"订单",@"交易",@"钱包",@"我的"];
+    NSArray *titles = @[
+                        [LangSwitcher switchLang:@"行情" key:nil],
+                        [LangSwitcher switchLang:@"订单" key:nil],
+                        [LangSwitcher switchLang:@"交易" key:nil],
+                        [LangSwitcher switchLang:@"钱包" key:nil],
+                        [LangSwitcher switchLang:@"我的" key:nil]
+                        ];
     NSArray *VCNames = @[@"QuotationVC",@"TLOrderVC",@"TLTransactionVC",@"TLWalletVC",@"TLMineVC"];
     
     NSArray *imageNames = @[@"行情00",@"订单00",@"交易00",@"钱包00",@"我的00"];
