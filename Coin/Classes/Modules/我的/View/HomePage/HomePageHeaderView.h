@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 #import "AdvertiseModel.h"
+#import "UserRelationModel.h"
 
 typedef NS_ENUM(NSInteger, HomePageType) {
     
@@ -24,7 +25,6 @@ typedef void(^HomePageBlock)(HomePageType type);
 @interface HomePageHeaderView : UIView
 
 @property (nonatomic, copy) HomePageBlock pageBlock;
-
 //背景
 @property (nonatomic, strong) UIImageView *bgIV;
 //信任
@@ -33,6 +33,8 @@ typedef void(^HomePageBlock)(HomePageType type);
 @property (nonatomic, strong) UIButton *blackListBtn;
 //广告
 @property (nonatomic, strong) AdvertiseModel *advertise;
+//用户关系
+@property (nonatomic, strong) UserRelationModel *relation;
 //是否信任它
 @property (nonatomic, assign) BOOL isTrust;
 //是否添加黑名单

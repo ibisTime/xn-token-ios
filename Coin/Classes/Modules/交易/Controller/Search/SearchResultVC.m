@@ -116,9 +116,7 @@
     CoinWeakSelf;
 
     TLPageDataHelper *helper = [[TLPageDataHelper alloc] init];
-    
-    helper.showView = self.view;
-    
+        
     helper.code = @"625228";
     helper.start = 1;
     helper.limit = 20;
@@ -174,8 +172,6 @@
     CoinWeakSelf;
     
     TLPageDataHelper *helper = [[TLPageDataHelper alloc] init];
-    
-    helper.showView = self.view;
     
     helper.code = @"625229";
     helper.isList = YES;

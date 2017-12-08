@@ -491,7 +491,7 @@
 
         } else if (historyNum > 1) {
             
-            history = [NSString stringWithFormat:@"%.0lf+ ETH", historyNum];
+            history = [NSString stringWithFormat:@"%@+ ETH", [realNum convertToRealMoneyWithNum:0]];
         }
         
         //历史交易

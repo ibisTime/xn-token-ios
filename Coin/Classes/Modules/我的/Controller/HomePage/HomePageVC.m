@@ -11,6 +11,7 @@
 #import "HomePageHeaderView.h"
 
 #import "AdvertiseModel.h"
+#import "UserRelationModel.h"
 
 #import "UILabel+Extension.h"
 
@@ -20,8 +21,10 @@
 @interface HomePageVC ()
 
 @property (nonatomic, strong) HomePageHeaderView *headerView;
-
+//广告
 @property (nonatomic, strong) AdvertiseModel *advertise;
+//用户关系
+@property (nonatomic, strong) UserRelationModel *relation;
 
 @end
 
@@ -41,10 +44,17 @@
     
     //头部
     [self initHeaderView];
-    //查询用户的交易量
-    [self queryTradeNum];
-    //查询信任关系
+    //获取用户信息
     [self queryAdvertiseDetail];
+    
+    if ([TLUser user].userId) {
+        
+        if (![self.userId isEqualToString:[TLUser user].userId]) {
+            
+            //查询用户关系
+            [self queryUserRelation];
+        }
+    }
 }
 
 #pragma mark - Init
@@ -58,6 +68,8 @@
         
         [weakSelf homePageEventsWithType:type];
     };
+    
+    self.headerView.userId = self.userId;
     
     [self.view addSubview:self.headerView];
 }
@@ -136,7 +148,7 @@
             }
             
             [self addBlackList];
-        };
+        }break;
             
         case HomePageTypeCancelBlackList:
         {
@@ -185,10 +197,8 @@
         
         [TLAlert alertWithSucces:@"信任成功"];
         
-        [self queryAdvertiseDetail];
-        
-        [self.headerView.trustBtn setTitle:@"取消信任" forState:UIControlStateHighlighted];
-        
+        [self queryUserRelation];
+
         [[NSNotificationCenter defaultCenter] postNotificationName:kTrustNotification object:nil];
         
     } failure:^(NSError *error) {
@@ -212,10 +222,8 @@
         
         [TLAlert alertWithSucces:@"取消信任成功"];
         
-        [self queryAdvertiseDetail];
-        
-        [self.headerView.trustBtn setTitle:@"+ 信任" forState:UIControlStateHighlighted];
-        
+        [self queryUserRelation];
+
         [[NSNotificationCenter defaultCenter] postNotificationName:kTrustNotification object:nil];
         
     } failure:^(NSError *error) {
@@ -239,7 +247,7 @@
         
         [TLAlert alertWithSucces:@"黑名单添加成功"];
         
-        [self queryAdvertiseDetail];
+        [self queryUserRelation];
         
     } failure:^(NSError *error) {
         
@@ -262,8 +270,8 @@
         
         [TLAlert alertWithSucces:@"取消黑名单成功"];
         
-        [self queryAdvertiseDetail];
-        
+        [self queryUserRelation];
+
     } failure:^(NSError *error) {
         
         
@@ -271,52 +279,6 @@
 }
 
 #pragma mark - Data
-- (void)queryTradeNum {
-    
-    TLNetworking *http = [TLNetworking new];
-    
-    http.code = @"625255";
-    http.parameters[@"userId"] = self.userId;
-    
-    [http postWithSuccess:^(id responseObject) {
-        
-        NSString *text = @"历史交易";
-        
-        NSString *numStr = [NSString stringWithFormat:@"%@", responseObject[@"data"][@"totalTradeCount"]];
-        
-        NSString *realNum = [numStr convertToSimpleRealCoin];
-        
-        CGFloat historyNum = [[realNum convertToRealMoneyWithNum:8] doubleValue];
-        
-        //判断个数
-        NSString *history = @"";
-        
-        if (historyNum == 0) {
-            
-            history = @"0 ETH";
-            
-        } else if (historyNum > 0 && historyNum <= 0.5) {
-            
-            history = @"0-0.5 ETH";
-            
-        } else if (historyNum > 0.5 && historyNum <= 1) {
-            
-            history = [NSString stringWithFormat:@"0.5-1 ETH"];
-            
-        } else if (historyNum > 1) {
-            
-            history = [NSString stringWithFormat:@"%.0lf+ ETH", historyNum];
-        }
-        
-        //历史交易
-        UILabel *lbl = [self.headerView viewWithTag:1403];
-        
-        [lbl labelWithString:[NSString stringWithFormat:@"%@\n%@", history, text] title:text font:Font(12.0) color:kTextColor2 lineSpace:5];
-        
-    } failure:^(NSError *error) {
-        
-    }];
-}
 
 - (void)queryAdvertiseDetail {
     
@@ -325,6 +287,7 @@
     TLNetworking *http = [TLNetworking new];
     
     http.code = @"625226";
+    http.showView = self.view;
     
     http.parameters[@"adsCode"] = self.advCode;
     
@@ -339,15 +302,29 @@
         
         weakSelf.headerView.advertise = self.advertise;
         
-        weakSelf.headerView.isTrust = [self.advertise.isTrust integerValue] == 0 ? NO: YES;
-        
-        weakSelf.headerView.isBlack = [self.advertise.isBlackList integerValue] == 0 ? NO: YES;
-        
     } failure:^(NSError *error) {
         
     }];
 }
 
+- (void)queryUserRelation {
+    
+    TLNetworking *http = [TLNetworking new];
+    
+    http.code = @"625256";
+    
+    http.parameters[@"master"] = self.userId;
+    http.parameters[@"visitor"] = [TLUser user].userId;
+    
+    [http postWithSuccess:^(id responseObject) {
+        
+        self.headerView.relation = [UserRelationModel tl_objectWithDictionary:responseObject[@"data"]];
+        
+    } failure:^(NSError *error) {
+        
+        
+    }];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

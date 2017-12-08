@@ -324,7 +324,6 @@
     TLPageDataHelper *helper = [[TLPageDataHelper alloc] init];
     
     helper.code = @"801005";
-//    helper.showView = self.view;
     helper.start = 1;
     helper.limit = 20;
     

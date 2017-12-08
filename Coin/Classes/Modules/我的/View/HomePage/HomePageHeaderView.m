@@ -15,6 +15,7 @@
 #import "UILabel+Extension.h"
 #import "NSString+Extension.h"
 #import "UIButton+EnLargeEdge.h"
+#import "TLUser.h"
 
 @interface HomePageHeaderView ()
 
@@ -238,8 +239,6 @@
     
     TradeUserInfo *userInfo = advertise.user;
     
-    UserStatistics *userStatist = advertise.userStatistics;
-    
     //头像
     if (userInfo.photo) {
         
@@ -258,10 +257,17 @@
     }
     
     self.nameLbl.text = userInfo.nickname;
+
+
+}
+
+- (void)setRelation:(UserRelationModel *)relation {
     
-    NSArray *textArr = @[@"交易次数", @"信任次数", @"好评率"];
+    _relation = relation;
     
-    NSArray *numArr = @[[NSString stringWithFormat:@"%ld", userStatist.jiaoYiCount], [NSString stringWithFormat:@"%ld", userStatist.beiXinRenCount], userStatist.goodCommentRate];
+    NSArray *textArr = @[@"交易次数", @"信任次数", @"好评率", @"历史交易"];
+    
+    NSArray *numArr = @[[NSString stringWithFormat:@"%ld", relation.jiaoYiCount], [NSString stringWithFormat:@"%ld", relation.beiXinRenCount], relation.goodCommentRate, relation.tradeAmount];
     
     [textArr enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         
@@ -270,9 +276,17 @@
         [lbl labelWithString:[NSString stringWithFormat:@"%@\n%@", numArr[idx], obj] title:obj font:Font(12.0) color:kTextColor2 lineSpace:5];
         
         lbl.textAlignment = NSTextAlignmentCenter;
-
+        
     }];
-
+    
+    NSString *betweenTradeTimes = [NSString stringWithFormat:@"和Ta交易过%@次", relation.betweenTradeTimes];
+    
+    [self.tradeNumLbl labelWithString:betweenTradeTimes title:relation.betweenTradeTimes font:Font(14.0) color:kThemeColor];
+    //是否信任
+    self.isTrust = [relation.isTrust integerValue] == 0 ? NO: YES;
+    //是否黑名单
+    self.isBlack = [relation.isAddBlackList integerValue] == 0 ? NO: YES;
+    
 }
 
 - (void)setIsTrust:(BOOL)isTrust {
@@ -318,7 +332,7 @@
 
 - (void)blackList:(UIButton *)sender {
     
-    HomePageType type = self.isBlack == NO ? HomePageTypeBlackList: HomePageTypeCancelTrust;
+    HomePageType type = self.isBlack == NO ? HomePageTypeBlackList: HomePageTypeCancelBlackList;
 
     if (self.pageBlock) {
         

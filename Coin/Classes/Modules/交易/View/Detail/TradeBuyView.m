@@ -203,6 +203,8 @@
         
     }];
     
+    self.trustBtn.hidden = YES;
+    
     NSArray *textArr = @[@"交易次数", @"信任次数", @"好评率", @"历史交易"];
     
     CGFloat width = kScreenWidth/(textArr.count*1.0);
@@ -630,7 +632,7 @@
         make.height.equalTo(@(scrollheight));
     }];
     
-    self.trustBtn.hidden = [self.advertise.userId isEqualToString:userId] ? YES: NO;
+//    self.trustBtn.hidden = [self.advertise.userId isEqualToString:userId] ? YES: NO;
     
     self.bottomView.hidden = [self.advertise.userId isEqualToString:userId] ? YES: NO;
     

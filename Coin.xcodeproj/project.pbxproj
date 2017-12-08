@@ -460,6 +460,7 @@
 		21A7F3241FB2E2F900FAA0A2 /* CaptchaView.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A7F30C1FB2E2F900FAA0A2 /* CaptchaView.m */; };
 		21A7F35E1FB2EBAA00FAA0A2 /* CurrencyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A7F35C1FB2EBA900FAA0A2 /* CurrencyModel.m */; };
 		21A7F3631FB2F16C00FAA0A2 /* HTMLStrVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A7F3621FB2F16B00FAA0A2 /* HTMLStrVC.m */; };
+		21A821141FDA3DAA00AE59F2 /* UserRelationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A821131FDA3DAA00AE59F2 /* UserRelationModel.m */; };
 		21D216861FB9C5750040795E /* QRCodeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21D216851FB9C5750040795E /* QRCodeVC.m */; };
 		21D2168E1FBA90CE0040795E /* BannerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 21D2168D1FBA90CE0040795E /* BannerModel.m */; };
 		21D216921FBA96060040795E /* NoticeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 21D216911FBA96060040795E /* NoticeModel.m */; };
@@ -1438,6 +1439,8 @@
 		21A7F35D1FB2EBA900FAA0A2 /* CurrencyModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurrencyModel.h; sourceTree = "<group>"; };
 		21A7F3611FB2F16B00FAA0A2 /* HTMLStrVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTMLStrVC.h; sourceTree = "<group>"; };
 		21A7F3621FB2F16B00FAA0A2 /* HTMLStrVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTMLStrVC.m; sourceTree = "<group>"; };
+		21A821121FDA3DAA00AE59F2 /* UserRelationModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserRelationModel.h; sourceTree = "<group>"; };
+		21A821131FDA3DAA00AE59F2 /* UserRelationModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserRelationModel.m; sourceTree = "<group>"; };
 		21D216841FB9C5750040795E /* QRCodeVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QRCodeVC.h; sourceTree = "<group>"; };
 		21D216851FB9C5750040795E /* QRCodeVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QRCodeVC.m; sourceTree = "<group>"; };
 		21D2168C1FBA90CE0040795E /* BannerModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BannerModel.h; sourceTree = "<group>"; };
@@ -3605,6 +3608,8 @@
 		2125B8C31FD948BB00591812 /* HomePage */ = {
 			isa = PBXGroup;
 			children = (
+				21A821121FDA3DAA00AE59F2 /* UserRelationModel.h */,
+				21A821131FDA3DAA00AE59F2 /* UserRelationModel.m */,
 			);
 			path = HomePage;
 			sourceTree = "<group>";
@@ -4622,6 +4627,7 @@
 				21205CCF1FCCFDCF003C6C7C /* FansTableView.m in Sources */,
 				21205CF71FCD5FE0003C6C7C /* HistoryFriendCell.m in Sources */,
 				211C03F41FC6604800E51FCF /* ImageTitleButton.m in Sources */,
+				21A821141FDA3DAA00AE59F2 /* UserRelationModel.m in Sources */,
 				211DE6C31FB58B4C002FCF3D /* HttpRequestTool.m in Sources */,
 				211C04CA1FC6604900E51FCF /* TIMElem+ChatAttachment.m in Sources */,
 				21A7F3121FB2E2F900FAA0A2 /* BindMobileVC.m in Sources */,
