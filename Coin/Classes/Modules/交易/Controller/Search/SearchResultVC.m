@@ -13,6 +13,7 @@
 #import "TradeTableView.h"
 
 #import "TradeBuyVC.h"
+#import "TradeSellVC.h"
 
 @interface SearchResultVC ()<RefreshDelegate>
 
@@ -124,7 +125,7 @@
     helper.parameters[@"minPrice"] = self.minPrice;
     helper.parameters[@"maxPrice"] = self.maxPrice;
     helper.parameters[@"payType"] = self.payType;
-//    helper.parameters[@"tradeType"] = @"1";
+    helper.parameters[@"tradeType"] = self.advertiseType;
     
     helper.tableView = self.tableView;
     
@@ -207,15 +208,30 @@
 
 - (void)refreshTableView:(TLTableView *)refreshTableview didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    TradeBuyVC *buyVC = [TradeBuyVC new];
-    
-    buyVC.advertise = self.advertises[indexPath.row];
-    
-    buyVC.type = TradeBuyPositionTypeTrade;
-
-    [self.navigationController pushViewController:buyVC animated:YES];
+    if ([self.advertiseType isEqualToString:kTradeTypeBuy]) {
+        
+        TradeSellVC *sellVC = [TradeSellVC new];
+        
+        sellVC.advertise = self.advertises[indexPath.row];
+        
+        sellVC.type = TradeSellPositionTypeTrade;
+        
+        [self.navigationController pushViewController:sellVC animated:YES];
+        
+    } else if ([self.advertiseType isEqualToString:kTradeTypeSell]) {
+        
+        TradeBuyVC *buyVC = [TradeBuyVC new];
+        
+        buyVC.advertise = self.advertises[indexPath.row];
+        
+        buyVC.type = TradeBuyPositionTypeTrade;
+        
+        [self.navigationController pushViewController:buyVC animated:YES];
+        
+    }
     
 }
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

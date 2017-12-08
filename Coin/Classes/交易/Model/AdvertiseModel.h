@@ -91,6 +91,9 @@ FOUNDATION_EXTERN NSString *const kAdsStatusDaiJiaoYi;
 FOUNDATION_EXTERN NSString *const kAdsStatusJiaoYiZhong;
 FOUNDATION_EXTERN NSString *const kAdsStatusXiaJia;
 
+FOUNDATION_EXTERN NSString *const kTradeTypeBuy;
+FOUNDATION_EXTERN NSString *const kTradeTypeSell;
+
 @interface TradeUserInfo : NSObject
 
 @property (nonatomic, copy) NSString *photo;

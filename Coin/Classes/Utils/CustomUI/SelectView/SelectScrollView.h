@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-typedef void(^SelectBlock)();
+typedef void(^SelectBlock)(void);
 
 @interface SelectScrollView : UIView
 

@@ -28,6 +28,10 @@ NSString *const kUserLoginNotification = @"kUserLoginNotification";
 NSString *const kUserLoginOutNotification = @"kUserLoginOutNotification";
 NSString *const kUserInfoChange = @"kUserInfoChange";
 
+// ONE("1", "普通交易者"), TWO("2", "代理人")
+NSString *const kLevelOrdinaryTraders = @"1";
+NSString *const kLevelAgent = @"2";
+
 @implementation TLUser
 
 + (instancetype)user {

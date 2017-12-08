@@ -28,6 +28,9 @@
         leftLbl.font = Font(15.0);
         leftLbl.textColor = [UIColor colorWithHexString:@"#484848"];
         [leftBgView addSubview:leftLbl];
+        
+        self.leftLbl = leftLbl;
+        
         self.leftView = leftBgView;
 
         
