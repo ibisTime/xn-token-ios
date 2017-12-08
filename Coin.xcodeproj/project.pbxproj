@@ -461,6 +461,7 @@
 		21A7F35E1FB2EBAA00FAA0A2 /* CurrencyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A7F35C1FB2EBA900FAA0A2 /* CurrencyModel.m */; };
 		21A7F3631FB2F16C00FAA0A2 /* HTMLStrVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A7F3621FB2F16B00FAA0A2 /* HTMLStrVC.m */; };
 		21A821141FDA3DAA00AE59F2 /* UserRelationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A821131FDA3DAA00AE59F2 /* UserRelationModel.m */; };
+		21A821171FDA690700AE59F2 /* GoogleAuthVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A821161FDA690700AE59F2 /* GoogleAuthVC.m */; };
 		21D216861FB9C5750040795E /* QRCodeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21D216851FB9C5750040795E /* QRCodeVC.m */; };
 		21D2168E1FBA90CE0040795E /* BannerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 21D2168D1FBA90CE0040795E /* BannerModel.m */; };
 		21D216921FBA96060040795E /* NoticeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 21D216911FBA96060040795E /* NoticeModel.m */; };
@@ -1442,6 +1443,8 @@
 		21A7F3621FB2F16B00FAA0A2 /* HTMLStrVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTMLStrVC.m; sourceTree = "<group>"; };
 		21A821121FDA3DAA00AE59F2 /* UserRelationModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserRelationModel.h; sourceTree = "<group>"; };
 		21A821131FDA3DAA00AE59F2 /* UserRelationModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserRelationModel.m; sourceTree = "<group>"; };
+		21A821151FDA690700AE59F2 /* GoogleAuthVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GoogleAuthVC.h; sourceTree = "<group>"; };
+		21A821161FDA690700AE59F2 /* GoogleAuthVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GoogleAuthVC.m; sourceTree = "<group>"; };
 		21D216841FB9C5750040795E /* QRCodeVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QRCodeVC.h; sourceTree = "<group>"; };
 		21D216851FB9C5750040795E /* QRCodeVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QRCodeVC.m; sourceTree = "<group>"; };
 		21D2168C1FBA90CE0040795E /* BannerModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BannerModel.h; sourceTree = "<group>"; };
@@ -1589,6 +1592,8 @@
 				211A34FC1FB4507E00FEB71F /* IdAuthVC.m */,
 				211D4ED41FCD9B0C000E0D43 /* EditVC.h */,
 				211D4ED51FCD9B0C000E0D43 /* EditVC.m */,
+				21A821151FDA690700AE59F2 /* GoogleAuthVC.h */,
+				21A821161FDA690700AE59F2 /* GoogleAuthVC.m */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -4331,6 +4336,7 @@
 				211C04991FC6604800E51FCF /* IMAChatViewController.m in Sources */,
 				2EBFBF231FD8E56C0066F7E4 /* PublishService.m in Sources */,
 				215979761FB84CC70029F177 /* BillDetailCell.m in Sources */,
+				21A821171FDA690700AE59F2 /* GoogleAuthVC.m in Sources */,
 				211CF9A41FC55ADD00E51FCF /* OrderPriceModel.m in Sources */,
 				211C04731FC6604800E51FCF /* AddGroupProfileViewController.m in Sources */,
 				211C04941FC6604800E51FCF /* ChatViewController.m in Sources */,

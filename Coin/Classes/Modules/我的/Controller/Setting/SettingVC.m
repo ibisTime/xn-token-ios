@@ -156,17 +156,17 @@
         
     }];
 
-//    //谷歌验证
-//    SettingModel *google = [SettingModel new];
-//    google.text = @"谷歌验证";
-//    [google setAction:^{
-//
-//
-//    }];
+    //谷歌验证
+    SettingModel *google = [SettingModel new];
+    google.text = @"谷歌验证";
+    [google setAction:^{
+
+
+    }];
     
     self.group = [SettingGroup new];
     
-    self.group.sections = @[@[changeTradePwd], @[idAuth, bindEmail, changeMobile, changeLoginPwd]];
+    self.group.sections = @[@[changeTradePwd], @[idAuth, bindEmail, changeMobile, changeLoginPwd, google]];
     
 }
 
