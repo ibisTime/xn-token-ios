@@ -475,6 +475,7 @@
 		2E3950001FB05ADB00BA0829 /* TLTransactionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E394FFF1FB05ADB00BA0829 /* TLTransactionVC.m */; };
 		2E3950031FB05AF200BA0829 /* TLOrderVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E3950021FB05AF200BA0829 /* TLOrderVC.m */; };
 		2E973FC91FDA279C005C2D5F /* LangSwitcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E973FC81FDA279C005C2D5F /* LangSwitcher.m */; };
+		2E973FCF1FDABA0F005C2D5F /* ChatSysMsgCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E973FCE1FDABA0F005C2D5F /* ChatSysMsgCell.m */; };
 		2EA584C11FA813C900C7106C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2EA584C01FA813C900C7106C /* Assets.xcassets */; };
 		2EA584C41FA813C900C7106C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2EA584C21FA813C900C7106C /* LaunchScreen.storyboard */; };
 		2EA584C71FA813C900C7106C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EA584C61FA813C900C7106C /* main.m */; };
@@ -1470,6 +1471,8 @@
 		2E3950021FB05AF200BA0829 /* TLOrderVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLOrderVC.m; sourceTree = "<group>"; };
 		2E973FC71FDA279C005C2D5F /* LangSwitcher.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LangSwitcher.h; sourceTree = "<group>"; };
 		2E973FC81FDA279C005C2D5F /* LangSwitcher.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LangSwitcher.m; sourceTree = "<group>"; };
+		2E973FCD1FDABA0F005C2D5F /* ChatSysMsgCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatSysMsgCell.h; sourceTree = "<group>"; };
+		2E973FCE1FDABA0F005C2D5F /* ChatSysMsgCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatSysMsgCell.m; sourceTree = "<group>"; };
 		2EA584B41FA813C900C7106C /* Coin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Coin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EA584C01FA813C900C7106C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2EA584C31FA813C900C7106C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -2956,6 +2959,8 @@
 				211C03EA1FC6604800E51FCF /* NoticeTableView.h */,
 				211C03EB1FC6604800E51FCF /* NoticeTableView.m */,
 				211C03EC1FC6604800E51FCF /* NoticeListCell.h */,
+				2E973FCD1FDABA0F005C2D5F /* ChatSysMsgCell.h */,
+				2E973FCE1FDABA0F005C2D5F /* ChatSysMsgCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -4453,6 +4458,7 @@
 				211DE6AB1FB58B4C002FCF3D /* TLTableView.m in Sources */,
 				211C04441FC6604800E51FCF /* ScrollRefreshViewController.m in Sources */,
 				21223C731FBD8DB800057444 /* QuotationModel.m in Sources */,
+				2E973FCF1FDABA0F005C2D5F /* ChatSysMsgCell.m in Sources */,
 				211C04891FC6604800E51FCF /* ChatFunctionPanel.m in Sources */,
 				211C047A1FC6604800E51FCF /* EmojHelper.m in Sources */,
 				211C04DF1FC6604900E51FCF /* FriendNotifyTableViewCell.m in Sources */,
