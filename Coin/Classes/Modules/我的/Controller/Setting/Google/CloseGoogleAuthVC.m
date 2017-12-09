@@ -160,6 +160,9 @@
         
         [TLAlert alertWithSucces:@"关闭成功"];
         
+        //谷歌验证设置为未开启
+        [TLUser user].googleAuthFlag = @"0";
+        
         [self.navigationController popViewControllerAnimated:YES];
         
     } failure:^(NSError *error) {

@@ -35,14 +35,20 @@ typedef NS_ENUM(NSInteger, AddressType) {
 @property (nonatomic, strong) TLTextField *balanceTF;
 //接收地址
 @property (nonatomic, strong) UILabel *receiveAddressLbl;
-//转账数量
-@property (nonatomic, strong) TLTextField *tranAmountTF;
-//矿工费
-@property (nonatomic, strong) TLTextField *minerFeeTF;
 //选择
 @property (nonatomic, strong) FilterView *coinAddressPicker;
+//转账数量
+@property (nonatomic, strong) TLTextField *tranAmountTF;
+//谷歌验证码
+@property (nonatomic, strong) TLTextField *googleAuthTF;
+//矿工费
+@property (nonatomic, strong) TLTextField *minerFeeTF;
 //开关
 @property (nonatomic, strong) UISwitch *sw;
+//提示
+@property (nonatomic, strong) UIView *minerView;
+//确认付币
+@property (nonatomic, strong) UIButton *confirmBtn;
 //手续费率
 @property (nonatomic, copy) NSString *withdrawFee;
 //地址类型
@@ -168,6 +174,42 @@ typedef NS_ENUM(NSInteger, AddressType) {
     
     [self.view addSubview:receiveBtn];
     
+    //谷歌验证码
+    self.googleAuthTF = [[TLTextField alloc] initWithFrame:CGRectMake(0, receiveView.yy, kScreenWidth, heightMargin)
+                                                 leftTitle:@"谷歌验证码"
+                                                titleWidth:100
+                                               placeholder:@"请输入谷歌验证码"];
+    
+    [self.view addSubview:self.googleAuthTF];
+    
+    //复制
+    UIView *authView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 95, self.googleAuthTF.height)];
+    
+    UIButton *pasteBtn = [UIButton buttonWithTitle:@"粘贴" titleColor:kWhiteColor backgroundColor:kThemeColor titleFont:13.0 cornerRadius:5];
+    
+    pasteBtn.frame = CGRectMake(0, 0, 85, self.googleAuthTF.height - 15);
+    
+    pasteBtn.centerY = authView.height/2.0;
+    
+    [pasteBtn addTarget:self action:@selector(clickPaste) forControlEvents:UIControlEventTouchUpInside];
+    
+    [authView addSubview:pasteBtn];
+    
+    self.googleAuthTF.rightView = authView;
+    
+    //分割线
+    UIView *googleLine = [[UIView alloc] init];
+    
+    googleLine.backgroundColor = kLineColor;
+    
+    [self.googleAuthTF addSubview:googleLine];
+    [googleLine mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.left.top.right.equalTo(@0);
+        make.height.equalTo(@0.5);
+        
+    }];
+    
     //转账数量
     self.tranAmountTF = [[TLTextField alloc] initWithFrame:CGRectMake(0, receiveView.yy, kScreenWidth, heightMargin) leftTitle:@"转账数量" titleWidth:90 placeholder:@"请输入付币数量"];
     
@@ -210,6 +252,8 @@ typedef NS_ENUM(NSInteger, AddressType) {
         make.top.equalTo(self.minerFeeTF.mas_bottom);
 
     }];
+    
+    self.minerView = minerView;
     
     UILabel *minerPromptLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor3 font:11.0];
     
@@ -347,6 +391,8 @@ typedef NS_ENUM(NSInteger, AddressType) {
         make.height.equalTo(@45);
 
     }];
+    
+    self.confirmBtn = confirmPayBtn;
 }
 
 - (FilterView *)coinAddressPicker {
@@ -407,6 +453,20 @@ typedef NS_ENUM(NSInteger, AddressType) {
 
 }
 
+- (void)clickPaste {
+    
+    UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+    
+    if (pasteboard.string != nil) {
+        
+        self.googleAuthTF.text = pasteboard.string;
+        
+    } else {
+        
+        [TLAlert alertWithInfo:@"粘贴内容为空"];
+    }
+}
+
 - (void)textDidChange:(UITextField *)sender {
     
 //    NSDecimalNumber *m = [NSDecimalNumber decimalNumberWithString:self.tranAmountTF.text];
@@ -436,14 +496,10 @@ typedef NS_ENUM(NSInteger, AddressType) {
             CoinAddressListVC *addressVC = [CoinAddressListVC new];
             
             addressVC.addressBlock = ^(CoinAddressModel *addressModel) {
-                
-                weakSelf.receiveAddressLbl.text = addressModel.address;
-                
-                weakSelf.receiveAddressLbl.textColor = kTextColor;
-
-                weakSelf.addressType = AddressTypeSelectAddress;
 
                 weakSelf.addressModel = addressModel;
+                
+                [weakSelf didSelectAddress];
             };
             
             [self.navigationController pushViewController:addressVC animated:YES];
@@ -492,6 +548,43 @@ typedef NS_ENUM(NSInteger, AddressType) {
     }
 }
 
+- (void)didSelectAddress {
+    
+    self.receiveAddressLbl.text = self.addressModel.address;
+    
+    self.receiveAddressLbl.textColor = kTextColor;
+    
+    self.addressType = AddressTypeSelectAddress;
+    
+    if ((self.addressType == AddressTypeSelectAddress && [self.addressModel.status isEqualToString:kAddressCertified])) {
+
+        [UIView animateWithDuration:0 animations:^{
+            
+            self.googleAuthTF.transform = CGAffineTransformIdentity;
+
+            self.minerFeeTF.transform = CGAffineTransformIdentity;
+            
+            self.minerView.transform = CGAffineTransformIdentity;
+            
+            self.confirmBtn.transform = CGAffineTransformIdentity;
+            
+        }];
+        
+    } else {
+        
+        [UIView animateWithDuration:0 animations:^{
+            
+            self.googleAuthTF.transform = CGAffineTransformMakeTranslation(0, 50);
+
+            self.minerFeeTF.transform = CGAffineTransformMakeTranslation(0, 50);
+            
+            self.minerView.transform = CGAffineTransformMakeTranslation(0, 50);
+            
+            self.confirmBtn.transform = CGAffineTransformMakeTranslation(0, 50);
+        }];
+    }
+}
+
 #pragma mark - Data
 - (void)confirmWithdrawalsWithPwd:(NSString *)pwd {
     
@@ -507,6 +600,15 @@ typedef NS_ENUM(NSInteger, AddressType) {
         
         [TLAlert alertWithInfo:@"提币金额需大于0"];
         return ;
+    }
+    
+    if (!(self.addressType == AddressTypeSelectAddress && [self.addressModel.status isEqualToString:@"1"])) {
+        
+        if (![self.googleAuthTF.text valid]) {
+            
+            [TLAlert alertWithInfo:@"请输入谷歌验证码"];
+            return ;
+        }
     }
     
     if (!(self.addressType == AddressTypeSelectAddress && [self.addressModel.status isEqualToString:@"1"])) {
@@ -529,6 +631,12 @@ typedef NS_ENUM(NSInteger, AddressType) {
     http.parameters[@"applyUser"] = [TLUser user].userId;
     http.parameters[@"payCardInfo"] = self.currency.currency;
     http.parameters[@"payCardNo"] = self.receiveAddressLbl.text;
+    
+    if (!(self.addressType == AddressTypeSelectAddress && [self.addressModel.status isEqualToString:@"1"])) {
+        
+        http.parameters[@"googleCaptcha"] = self.googleAuthTF.text;
+
+    }
     
     if (!(self.addressType == AddressTypeSelectAddress && [self.addressModel.status isEqualToString:@"1"])) {
         

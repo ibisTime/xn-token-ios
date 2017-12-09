@@ -164,7 +164,17 @@
     google.text = @"谷歌验证";
     [google setAction:^{
         
-        [weakSelf setGoogleAuth];
+        //未开启直接进入开启界面，已开启就弹出操作表
+        if ([TLUser user].isGoogleAuthOpen) {
+            
+            [weakSelf setGoogleAuth];
+
+        } else {
+            
+            GoogleAuthVC *authVC = [GoogleAuthVC new];
+            
+            [weakSelf.navigationController pushViewController:authVC animated:YES];
+        }
     }];
     
     self.group = [SettingGroup new];
@@ -208,8 +218,8 @@
 }
 
 - (void)setGoogleAuth {
-    
-    NSString *title = [[TLUser user].googleAuthFlag isEqualToString:kGoogleAuthClose] ? @"开启谷歌验证": @"修改谷歌验证";
+    //
+    NSString *title = @"修改谷歌验证";
     
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"谷歌验证" message:@"" preferredStyle:UIAlertControllerStyleActionSheet];
     
@@ -305,7 +315,7 @@
         
         SettingCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
         
-        cell.rightLabel.text = [[TLUser user].googleAuthFlag isEqualToString:kGoogleAuthClose] ? @"已关闭": @"已开启";
+        cell.rightLabel.text = [TLUser user].isGoogleAuthOpen ? @"已开启": @"未开启";
         
         [self.tableView reloadData];
     }

@@ -84,14 +84,17 @@
     [self.bgSV addSubview:phoneTf];
     self.phoneTf = phoneTf;
     
+    
     //谷歌验证码
-    self.googleAuthTF = [[TLTextField alloc] initWithFrame:CGRectMake(0, phoneTf.yy, phoneTf.width, phoneTf.height)
+    self.googleAuthTF = [[TLTextField alloc] initWithFrame:CGRectMake(0, phoneTf.yy + 1, phoneTf.width, phoneTf.height)
                                                  leftTitle:@"谷歌验证码"
                                                 titleWidth:leftW
                                                placeholder:@"请输入谷歌验证码"];
     
     [self.view addSubview:self.googleAuthTF];
     
+    self.googleAuthTF.hidden = ![TLUser user].isGoogleAuthOpen;
+
     //复制
     UIView *authView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 95, self.googleAuthTF.height)];
     
@@ -107,8 +110,9 @@
     
     self.googleAuthTF.rightView = authView;
     
+    CGFloat captchaViewY = [TLUser user].isGoogleAuthOpen ? self.googleAuthTF.yy + 1: phoneTf.y + 1;
     //验证码
-    CaptchaView *captchaView = [[CaptchaView alloc] initWithFrame:CGRectMake(phoneTf.x, self.googleAuthTF.yy + 1, phoneTf.width, phoneTf.height)];
+    CaptchaView *captchaView = [[CaptchaView alloc] initWithFrame:CGRectMake(phoneTf.x, captchaViewY, phoneTf.width, phoneTf.height)];
     
     captchaView.captchaTf.leftLbl.text = @"短信验证码";
     
@@ -238,10 +242,13 @@
         return;
     }
     
-    if (![self.googleAuthTF.text valid]) {
+    if ([TLUser user].isGoogleAuthOpen) {
         
-        [TLAlert alertWithInfo:@"请输入谷歌验证码"];
-        return;
+        if (![self.googleAuthTF.text valid]) {
+            
+            [TLAlert alertWithInfo:@"请输入谷歌验证码"];
+            return;
+        }
     }
     
     if (!(self.captchaView.captchaTf.text && self.captchaView.captchaTf.text.length > 3)) {
@@ -291,9 +298,13 @@
     }
     
     http.parameters[@"smsCaptcha"] = self.captchaView.captchaTf.text;
-    http.parameters[@"googleCaptcha"] = self.googleAuthTF.text;
-
     
+    if ([TLUser user].isGoogleAuthOpen) {
+        
+        http.parameters[@"googleCaptcha"] = self.googleAuthTF.text;
+
+    }
+
     [http postWithSuccess:^(id responseObject) {
         
         NSString *promptStr = @"";

@@ -8,6 +8,10 @@
 
 #import "CoinAddressModel.h"
 
+//0:未认证 1:已认证
+NSString *const kAddressCertified = @"1";
+NSString *const kAddressUnCertified = @"0";
+
 @implementation CoinAddressModel
 
 @end

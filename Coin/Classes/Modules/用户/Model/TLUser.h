@@ -51,6 +51,8 @@
 @property (nonatomic, copy) NSString *tradepwdFlag;
 //谷歌验证
 @property (nonatomic, copy) NSString *googleAuthFlag;
+//开启/关闭谷歌验证
+@property (nonatomic, assign) BOOL isGoogleAuthOpen;
 //真实姓名
 @property (nonatomic, copy) NSString *realName;
 //身份证
