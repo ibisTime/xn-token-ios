@@ -71,6 +71,60 @@
     return manager;
 }
 
+- (IMAGroup *)getGroupByGroupId:(NSString *)groupId {
+    
+    
+    if (!groupId) {
+        return nil;
+    }
+    [[IMAPlatform sharedInstance].contactMgr asyncGroupList];
+    // user 或者 group
+    __block IMAGroup *currentGroup = nil;
+    
+   currentGroup = (IMAGroup *)[[IMAPlatform sharedInstance].contactMgr getUserByGroupId:groupId];
+    
+//    CLSafeMutableArray *groupList = [IMAPlatform sharedInstance].contactMgr.groupList;
+//    if (groupList.safeArray) {
+//        [groupList.safeArray enumerateObjectsUsingBlock:^(IMAGroup *group, NSUInteger idx, BOOL * _Nonnull stop) {
+//
+//            if ([group.groupInfo.groupId isEqualToString:groupId]) {
+//                //找到了该会话
+//                currentGroup = group;
+//                *stop = YES;
+//            }
+//
+//        }];
+//    }
+    
+    return currentGroup;
+    
+}
+
+
+- (IMAUser *)getConversitionUserById:(NSString *)idStr {
+    
+    if (!idStr) {
+        return nil;
+    }
+    // user 或者 group
+    __block IMAUser *user = nil;
+    CLSafeMutableArray *groupList = [IMAPlatform sharedInstance].contactMgr.groupList;
+    if (groupList.safeArray) {
+        [groupList.safeArray enumerateObjectsUsingBlock:^(IMAGroup *group, NSUInteger idx, BOOL * _Nonnull stop) {
+            
+            if ([group.groupInfo.groupId isEqualToString:idStr]) {
+                //找到了该会话
+                user = group;
+                *stop = YES;
+            }
+            
+        }];
+    }
+    
+    return user;
+}
+
+
 //获取签名，并登录
 - (void)loginIM {
     

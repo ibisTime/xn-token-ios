@@ -242,7 +242,6 @@
         http.parameters[@"publishType"] = kPublishDraft;
         http.parameters[@"adsCode"] = self.advertise.code;
 
-        //
     } else if (self.publishType == PublishTypePublishRedit) {
         
         //
@@ -272,6 +271,7 @@
     //0=买币, 1=卖币
     http.parameters[@"tradeType"] = @"1";
     
+    //
     if (!self.publishView.anyTimeBtn.selected) {
         
         NSMutableArray *timeArr = [NSMutableArray array];
@@ -293,7 +293,7 @@
     
     [http postWithSuccess:^(id responseObject) {
         
-        NSString *str = draft.isPublish == YES ? @"发布成功": @"保留成功";
+        NSString *str = draft.isPublish == YES ? @"发布成功": @"保存成功";
         
         [TLAlert alertWithSucces:str];
         

@@ -8,7 +8,7 @@
 
 #import "TLBaseModel.h"
 #import "TLUserExt.h"
-
+#import "LangSwitcher.h"
 @class TLUserExt;
 
 @interface TLUser : TLBaseModel

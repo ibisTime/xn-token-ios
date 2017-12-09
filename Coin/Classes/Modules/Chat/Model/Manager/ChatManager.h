@@ -16,6 +16,19 @@
 @property (nonatomic, copy, readonly) NSString *accountType;
 
 
+
+/**
+ groupId 或者 userId
+ @return IMAUser 或者 IMAGroup
+ */
+- (IMAUser *)getConversitionUserById:(NSString *)idStr;
+
+/**
+ groupId
+ @return  或者 IMAGroup
+ */
+- (IMAGroup *)getGroupByGroupId:(NSString *)groupId;
+
 /**
    做一些初始化工作
  */

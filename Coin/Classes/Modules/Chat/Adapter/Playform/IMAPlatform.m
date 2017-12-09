@@ -167,6 +167,7 @@ static Class kHostClass = Nil;
     userConfig.friendshipListener = self;//关系链数据本地缓存监听器（加载好友扩展包、enableFriendshipProxy有效）
     userConfig.groupListener = self;//群组据本地缓存监听器（加载群组扩展包、enableGroupAssistant有效）
     [manager setUserConfig:userConfig];
+    
 }
 
 - (void)saveToLocal

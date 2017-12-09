@@ -61,7 +61,7 @@
     //text
     UILabel *textLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kWhiteColor font:18.0];
     
-    textLbl.text = @"我的资产";
+    textLbl.text = [LangSwitcher switchLang:@"我的资产" key:nil];
     
     [self addSubview:textLbl];
     [textLbl mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -72,7 +72,10 @@
     }];
     
     //总资产折合CNY
-    UIButton *equivalentBtn = [UIButton buttonWithTitle:@"总资产折合CNY" titleColor:kWhiteColor backgroundColor:kClearColor titleFont:12.0];
+    UIButton *equivalentBtn = [UIButton buttonWithTitle:
+                               [LangSwitcher switchLang:@"总资产折合CNY" key:nil]
+                            
+                                             titleColor:kWhiteColor backgroundColor:kClearColor titleFont:12.0];
     
     
     [equivalentBtn setImage:kImage(@"总资产") forState:UIControlStateNormal];

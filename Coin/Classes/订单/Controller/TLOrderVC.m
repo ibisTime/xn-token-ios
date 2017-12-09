@@ -91,7 +91,10 @@
         _labelUnil.titleFont = Font(17.0);
         _labelUnil.lineType = LineTypeTitleLength;
         
-        _labelUnil.titleArray = @[@"进行中",@"已结束"];
+        _labelUnil.titleArray = @[
+                                  [LangSwitcher switchLang: @"进行中" key:nil],
+                                  [LangSwitcher switchLang: @"已结束" key:nil]
+                                 ];
     }
     
     return _labelUnil;
@@ -392,44 +395,9 @@
     
     __block IMAGroup *currentIMGroup = nil;
     
-    // 1. method1  行不通
-    // user 通过 conversion 获取
-//   CLSafeMutableArray *conversationList = [IMAPlatform sharedInstance].conversationMgr.conversationList;
-//
-//
-//    [conversationList.safeArray enumerateObjectsUsingBlock:^(IMAConversation   *conv, NSUInteger idx, BOOL * _Nonnull stop) {
-//
-//        IMAUser *user = [[IMAPlatform sharedInstance] getReceiverOf:conv];
-//
-//        if ([user isKindOfClass:[IMAGroup class]]) {
-//            //群组
-//            IMAGroup *group = (IMAGroup *)user;
-//            if ([group.groupInfo.groupId isEqualToString:order.code]) {
-//                //找到了该会话
-//
-//                currentIMGroup = group;
-//                *stop = YES;
-//            }
-//
-//        }
-//
-//    }];
-    
-    
-    //2. 通过
-    CLSafeMutableArray *groupList = [IMAPlatform sharedInstance].contactMgr.groupList;
-    if (groupList.safeArray) {
-        [groupList.safeArray enumerateObjectsUsingBlock:^(IMAGroup *group, NSUInteger idx, BOOL * _Nonnull stop) {
-            
-            if ([group.groupInfo.groupId isEqualToString:order.code]) {
-                //找到了该会话
-                currentIMGroup = group;
-                *stop = YES;
-            }
-            
-        }];
-    }
-    
+    //2. 获取对应的group
+    currentIMGroup = [[IMAGroup alloc] initWith:order.code];
+//    [[ChatManager sharedManager] getGroupByGroupId:order.code];
     if (currentIMGroup == nil) {
         
         NSLog(@"未找到会话，异常");

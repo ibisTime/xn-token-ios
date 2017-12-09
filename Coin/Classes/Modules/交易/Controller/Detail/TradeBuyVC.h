@@ -6,9 +6,8 @@
 //  Copyright © 2017年  tianlei. All rights reserved.
 //
 
-#import "TLBaseVC.h"
-
 #import "AdvertiseModel.h"
+#import "AdsTradeDetailVC.h"
 
 typedef NS_ENUM(NSInteger, TradeBuyPositionType) {
     
@@ -17,7 +16,7 @@ typedef NS_ENUM(NSInteger, TradeBuyPositionType) {
 };
 
 // 我要购买， 广告为出售广告
-@interface TradeBuyVC : TLBaseVC
+@interface TradeBuyVC : AdsTradeDetailVC
 
 
 @property (nonatomic, copy) NSString *adsCode;

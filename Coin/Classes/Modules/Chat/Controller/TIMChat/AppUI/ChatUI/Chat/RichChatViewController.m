@@ -7,11 +7,15 @@
 //
 
 #import "RichChatViewController.h"
+#import <IQKeyboardManager/IQKeyboardManager.h>
 
 @implementation RichChatViewController
 
 - (void)dealloc
 {
+    
+    [IQKeyboardManager sharedManager].enableAutoToolbar = YES;
+
     IMAMsg *draft = [_inputView getMsgDraft];
     if (draft) {
         
@@ -55,9 +59,13 @@
     [self.view addSubview:_inputView];
 }
 
+
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [IQKeyboardManager sharedManager].enableAutoToolbar = NO;
     
     IMAMsg *draftMsg = [IMAMsg msgWithDraft:[_conversation getDraft]];
     

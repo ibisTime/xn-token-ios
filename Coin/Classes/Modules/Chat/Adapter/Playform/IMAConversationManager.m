@@ -237,9 +237,8 @@
     else if([user isGroupType])
     {
         conv = [[TIMManager sharedInstance] getConversation:TIM_GROUP receiver:[user userId]];
-    }
-    else if ([user isSystemType])
-    {
+        
+    } else if ([user isSystemType])  {
         // 暂不支持System消息
         return nil;
     }
@@ -247,29 +246,33 @@
     int count = [conv getUnReadMessageNum];
     self.unReadMessageCount -= count;
 
+    // 上报最新消息
     [conv setReadMessage:nil succ:^{
         
     } fail:^(int code, NSString *msg) {
         
     }];
     
-    if (conv)
-    {
+    if (conv) {
+        
         IMAConversation *temp = [[IMAConversation alloc] initWith:conv];
         
         NSInteger index = [_conversationList indexOfObject:temp];
-        if (index >= 0 && index < _conversationList.count)
-        {
+        //如果 会话列表中已经有会话，那就直接加载
+        if (index >= 0 && index < _conversationList.count) {
             IMAConversation *ret = [_conversationList objectAtIndex:index];
             _chattingConversation = ret;
             _chattingConversation.lastMessage = _chattingConversation.lastMessage;
             return ret;
         }
         
+        // 设置正在聊天的会话
         _chattingConversation = temp;
         return temp;
     }
+    
     return nil;
+    
 }
 
 // 主用要于自定义类型

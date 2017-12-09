@@ -472,8 +472,11 @@
         
         if ([errorCode isEqualToString:@"0"]) {
             
-            //联系对方
-            [self pushToChatVC];
+            NSString *orderCode = responseObject[@"data"][@"code"];
+            
+            //联系对方,
+            [self goChatWithGroupId:orderCode];
+            
             //刷新订单列表
             [[NSNotificationCenter defaultCenter] postNotificationName:kOrderListRefresh object:nil];
         }
@@ -492,7 +495,6 @@
     http.showView = self.view;
     http.parameters[@"adsCode"] = self.advertise.code;
     http.parameters[@"userId"] = [TLUser user].userId;
-    
     [http postWithSuccess:^(id responseObject) {
         
         [TLAlert alertWithSucces:@"下架成功"];
@@ -501,41 +503,41 @@
         
         [[NSNotificationCenter defaultCenter] postNotificationName:kAdvertiseOff object:nil];
         
+        //
     } failure:^(NSError *error) {
         
     }];
+    
+        //
 }
 
-- (void)pushToChatVC {
-    
-    //对方
-    TradeUserInfo *friendUserInfo = self.advertise.user;
-    
-    IMAUser *user = [[IMAUser alloc] initWith:self.advertise.userId];
-    
-    user.nickName = friendUserInfo.nickname;
-    user.icon = [friendUserInfo.photo convertImageUrl];
-    user.remark = friendUserInfo.nickname;
-    user.userId = self.advertise.userId;
-    //我
-    ChatUserProfile *userInfo = [ChatUserProfile sharedUser];
-    
-    userInfo.minePhoto = [TLUser user].photo;
-    userInfo.mineNickName = [TLUser user].nickname;
-    userInfo.friendPhoto = [friendUserInfo.photo convertImageUrl];
-    userInfo.friendNickName = friendUserInfo.nickname;
-    
-//    ChatViewController *chatVC = [[CustomChatUIViewController alloc] initWith:user];
-    ChatViewController *chatVC = [[ChatViewController alloc] initWith:user];
+//- (void)pushToChatVC {
+//
+//    //对方
+//    TradeUserInfo *friendUserInfo = self.advertise.user;
+//
+//    IMAUser *user = [[IMAUser alloc] initWith:self.advertise.userId];
+//
+//    user.nickName = friendUserInfo.nickname;
+//    user.icon = [friendUserInfo.photo convertImageUrl];
+//    user.remark = friendUserInfo.nickname;
+//    user.userId = self.advertise.userId;
+//    //我
+//    ChatUserProfile *userInfo = [ChatUserProfile sharedUser];
+//
+//    userInfo.minePhoto = [TLUser user].photo;
+//    userInfo.mineNickName = [TLUser user].nickname;
+//    userInfo.friendPhoto = [friendUserInfo.photo convertImageUrl];
+//    userInfo.friendNickName = friendUserInfo.nickname;
+//
+////    ChatViewController *chatVC = [[CustomChatUIViewController alloc] initWith:user];
+//    ChatViewController *chatVC = [[ChatViewController alloc] initWith:user];
+//
+//    chatVC.userInfo = userInfo;
+//
+//    [self.navigationController pushViewController:chatVC animated:YES];
+//}
 
-    chatVC.userInfo = userInfo;
-    
-    [self.navigationController pushViewController:chatVC animated:YES];
-}
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 @end

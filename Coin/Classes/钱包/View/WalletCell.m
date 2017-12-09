@@ -120,7 +120,12 @@
     }];
     
     //底部操作按钮
-    NSArray *textArr = @[@"充币", @"提币", @"账单"];
+    
+    NSArray *textArr = @[
+                         [LangSwitcher switchLang:@"充币" key:nil],
+                         [LangSwitcher switchLang:@"提币" key:nil],
+                         [LangSwitcher switchLang:@"账单" key:nil]
+                         ];
     
     NSArray *imgArr = @[@"充币", @"提币", @"账单"];
     

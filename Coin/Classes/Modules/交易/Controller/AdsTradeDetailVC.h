@@ -7,7 +7,10 @@
 //
 
 #import "TLBaseVC.h"
+#import "ChatManager.h"
 
 @interface AdsTradeDetailVC : TLBaseVC
+
+- (void)goChatWithGroupId:(NSString *)groupId;
 
 @end

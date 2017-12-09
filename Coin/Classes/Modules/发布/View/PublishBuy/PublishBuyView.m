@@ -188,13 +188,39 @@
 
 - (void)initTopView {
     
-    NSArray *textArr = @[@"价        格", @"溢        价", @"最  高  价", @"最  小  量", @"最  大  量", @"购买总量", @"付款方式", @"付款期限"];
+    NSArray *placeHolderArr = @[
+                                [LangSwitcher switchLang:@"" key:nil],
+                                [LangSwitcher switchLang:@"根据市场的溢价比例" key:nil],
+                                [LangSwitcher switchLang:@"广告最低可成交的价格" key:nil],
+                                [LangSwitcher switchLang:@"每笔交易的最小限额" key:nil],
+                                [LangSwitcher switchLang:@"每笔交易的最大限额" key:nil],
+                                [LangSwitcher switchLang:@"请输入出售总量" key:nil],
+                                [LangSwitcher switchLang:@"请选择收款方式" key:nil],
+                                [LangSwitcher switchLang:@"请选择收款期限" key:nil]
+                                ];
+    
+    self.payTypeArr = @[
+                        [LangSwitcher switchLang:@"支付宝" key:nil],
+                        [LangSwitcher switchLang:@"微信" key:nil],
+                        [LangSwitcher switchLang:@"银行转账" key:nil]
+                        ];
+    
+    
+     NSArray *textArr = @[
+                     [LangSwitcher switchLang: @"价        格" key:nil],
+                     [LangSwitcher switchLang: @"溢        价" key:nil],
+                     [LangSwitcher switchLang: @"最  高  价"  key:nil],
+                     [LangSwitcher switchLang: @"最  小  量" key:nil],
+                     [LangSwitcher switchLang: @"最  大  量" key:nil],
+                     [LangSwitcher switchLang: @"购买总量" key:nil],
+                     [LangSwitcher switchLang: @"收款方式" key:nil],
+                     [LangSwitcher switchLang: @"收款期限" key:nil]
+                     ];
+//    NSArray *textArr = @[@"价        格", @"溢        价", @"最  高  价", @"最  小  量", @"最  大  量", @"购买总量", @"付款方式", @"付款期限"];
     
     NSArray *rightArr = @[@"CNY", @"%", @"CNY", @"CNY", @"CNY", @"ETH", @"", @"分钟"];
     
-    NSArray *placeHolderArr = @[@"", @"根据市场的溢价比例", @"广告最高可成交的价格", @"每笔交易的最小限额", @"每笔交易的最大限额", @"请输入购买总量", @"请选择付款方式", @"请选择付款期限"];
     
-    self.payTypeArr = @[@"支付宝", @"微信", @"银行转账"];
     
     [textArr enumerateObjectsUsingBlock:^(NSString *  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         

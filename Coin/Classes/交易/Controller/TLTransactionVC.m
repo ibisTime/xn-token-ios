@@ -78,7 +78,9 @@
     [self configUpdate];
 
 }
+//--//
 
+//--//
 #pragma mark - Init
 
 -(TopLabelUtil *)labelUnil {
@@ -93,7 +95,10 @@
         _labelUnil.titleFont = Font(17.0);
         _labelUnil.lineType = LineTypeTitleLength;
 
-        _labelUnil.titleArray = @[@"买币",@"卖币"];
+        _labelUnil.titleArray = @[
+                                  [LangSwitcher switchLang:@"买币" key:nil],
+                                  [LangSwitcher switchLang:@"卖币" key:nil],
+                                 ];
     }
     return _labelUnil;
 }

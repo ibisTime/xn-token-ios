@@ -587,8 +587,7 @@
     
     //留言
     self.leaveMsgTV.text = advertise.leaveMessage;
-    
-    //
+    // - - //
 }
 
 - (void)setLeftAmount:(NSString *)leftAmount {

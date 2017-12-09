@@ -15,7 +15,7 @@
 #import "OrderPriceModel.h"
 #import "QuotationModel.h"
 #import "IMAUser.h"
-
+#import "ChatManager.h"
 #import "NSNumber+Extension.h"
 #import "NSString+Check.h"
 #import "UILabel+Extension.h"
@@ -379,8 +379,9 @@
         
         if ([errorCode isEqualToString:@"0"]) {
             
+            NSString *orderCode = responseObject[@"data"][@"code"];
             //联系对方
-            [self pushToChatVC];
+            [self goChatWithGroupId:orderCode];
             //刷新订单列表
             [[NSNotificationCenter defaultCenter] postNotificationName:kOrderListRefresh object:nil];
         }
@@ -414,40 +415,36 @@
 }
 
 
-#pragma mark- 和对方聊天
-- (void)pushToChatVC {
-    
-    //对方
-    TradeUserInfo *friendUserInfo = self.advertise.user;
-    
-    //
-    IMAUser *user = [[IMAUser alloc] initWith:self.advertise.userId];
-    user.nickName = friendUserInfo.nickname;
-    user.icon = [friendUserInfo.photo convertImageUrl];
-    user.remark = friendUserInfo.nickname;
-    user.userId = self.advertise.userId;
-    
-    //我
-    ChatUserProfile *userInfo = [ChatUserProfile sharedUser];
-    
-    userInfo.minePhoto = [TLUser user].photo;
-    userInfo.mineNickName = [TLUser user].nickname;
-    userInfo.friendPhoto = [friendUserInfo.photo convertImageUrl];
-    userInfo.friendNickName = friendUserInfo.nickname;
-    
-//    ChatViewController *chatVC = [[CustomChatUIViewController alloc] initWith:user];
+//#pragma mark- ads_联系对方
+//- (void)pushToChatVCWithGroupId:(NSString *)groupId {
 //
-    
-    // 此处应该拿到订单号，进行 群组查找
-    ChatViewController *chatVC = [[ChatViewController alloc] initWith:user];
-    chatVC.userInfo = userInfo;
+//    //对方
+//    TradeUserInfo *friendUserInfo = self.advertise.user;
+//
+//    //
+//    IMAUser *user = [[IMAUser alloc] initWith:self.advertise.userId];
+//    user.nickName = friendUserInfo.nickname;
+//    user.icon = [friendUserInfo.photo convertImageUrl];
+//    user.remark = friendUserInfo.nickname;
+//    user.userId = self.advertise.userId;
+//
+//    //我
+//    ChatUserProfile *userInfo = [ChatUserProfile sharedUser];
+//    userInfo.minePhoto = [TLUser user].photo;
+//    userInfo.mineNickName = [TLUser user].nickname;
+//    userInfo.friendPhoto = [friendUserInfo.photo convertImageUrl];
+//    userInfo.friendNickName = friendUserInfo.nickname;
+//
+////    ChatViewController *chatVC = [[CustomChatUIViewController alloc] initWith:user];
+////
+//
+//    // 此处应该拿到订单号，进行 群组查找
+//    IMAGroup *currentGroup = [[ChatManager sharedManager] getGroupByGroupId:<#(NSString *)#>];
+//    ChatViewController *chatVC = [[ChatViewController alloc] initWith:user];
+//    chatVC.userInfo = userInfo;
+//
+//    [self.navigationController pushViewController:chatVC animated:YES];
+//}
 
-    [self.navigationController pushViewController:chatVC animated:YES];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 @end

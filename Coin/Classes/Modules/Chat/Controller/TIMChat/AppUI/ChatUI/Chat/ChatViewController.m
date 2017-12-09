@@ -43,9 +43,10 @@
     return self;
 }
 
-- (void)addHeaderView
-{
+- (void)addHeaderView {
+    
     self.headerView = [[ChatHeadRefreshView alloc] init];
+    
 }
 
 - (void)onRefresh
@@ -172,7 +173,9 @@
     
     //加载聊天数据
     [_conversation asyncLoadRecentMessage:10 completion:^(NSArray *imamsgList, BOOL succ) {
+        
         [ws onLoadRecentMessage:imamsgList complete:succ scrollToBottom:YES];
+        
     }];
     
     
@@ -201,12 +204,12 @@
 {
     NSString *title = [ChatUserProfile sharedUser].friendNickName;
     
-    if (title.length > 13)
-    {
+    if (title.length > 13) {
         title = [NSString stringWithFormat:@"%@...", [title substringToIndex:13]];
     }
     
     self.title = title;
+    
 }
 
 - (void)onReceiveNewMsg:(NSArray *)imamsgList succ:(BOOL)succ
@@ -250,6 +253,7 @@
     {
         if (imamsgList.count > 0)
         {
+            //
             [_tableView beginUpdates];
             
             NSMutableArray *ar = [NSMutableArray array];
@@ -259,16 +263,16 @@
             }
             
             [_tableView insertRowsAtIndexPaths:ar withRowAnimation:UITableViewRowAnimationTop];
-            
+            //
             [_tableView endUpdates];
             
             if (scroll)
             {
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 
                     NSIndexPath *last = [NSIndexPath indexPathForRow:imamsgList.count-1 inSection:0];
                     [self.tableView scrollToRowAtIndexPath:last atScrollPosition:UITableViewScrollPositionBottom animated:YES];
-                });
+//                });
             }
         }
     }
