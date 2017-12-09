@@ -1691,7 +1691,6 @@
 				211C02251FC6604700E51FCF /* IOSDeviceSetting */,
 				211C02291FC6604700E51FCF /* Font */,
 				211C022C1FC6604700E51FCF /* BlocksKit */,
-				211C02571FC6604800E51FCF /* SDWebImage */,
 				211C02581FC6604800E51FCF /* CommonLibraryConfig.h */,
 			);
 			path = CommonLibrary;
@@ -2107,13 +2106,6 @@
 				211C02551FC6604800E51FCF /* NSMutableOrderedSet+BlocksKit.h */,
 			);
 			path = include;
-			sourceTree = "<group>";
-		};
-		211C02571FC6604800E51FCF /* SDWebImage */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = SDWebImage;
 			sourceTree = "<group>";
 		};
 		211C02591FC6604800E51FCF /* Adapter */ = {
