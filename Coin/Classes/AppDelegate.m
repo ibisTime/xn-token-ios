@@ -31,7 +31,6 @@
 
 @property (nonatomic, strong) FBKVOController *chatKVOCtrl;
 
-
 @end
 
 @implementation AppDelegate
@@ -52,9 +51,7 @@
     
     //初始化 im
     [self configIM];
-    [[ChatManager sharedManager] initChat];
 
-   
     //重新登录
     if([TLUser user].isLogin) {
         
@@ -75,7 +72,8 @@
 - (void)configIM {
     
     //配置
-    [[ChatManager sharedManager] loginIM];
+    [[ChatManager sharedManager] initChat];
+//    [[ChatManager sharedManager] loginIM];
     
     // 这里监听主要是为了，tabbar上的消息提示
     self.chatKVOCtrl = [FBKVOController controllerWithObserver:self];
