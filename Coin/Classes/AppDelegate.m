@@ -22,9 +22,9 @@
 #import "TLWXManager.h"
 #import "TLAlipayManager.h"
 #import "ChatManager.h"
-
+#import "ChatViewController.h"
 #import <IQKeyboardManager.h>
-
+#import "RichChatViewController.h"
 #import "OrderDetailVC.h"
 //#import "CustomChatUIViewController.h"
 #import "WaitingOrderVC.h"
@@ -160,7 +160,7 @@
     
     [[IQKeyboardManager sharedManager].disabledToolbarClasses addObject:[WaitingOrderVC class]];
 
-//    [[IQKeyboardManager sharedManager].disabledToolbarClasses addObject:[CustomChatUIViewController class]];
+    [[IQKeyboardManager sharedManager].disabledToolbarClasses addObject:[RichChatViewController class]];
 
 }
 

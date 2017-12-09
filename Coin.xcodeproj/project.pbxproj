@@ -443,6 +443,7 @@
 		2E973FD31FDBC5B0005C2D5F /* BaseLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E973FD21FDBC5B0005C2D5F /* BaseLabel.m */; };
 		2E973FD61FDBC5CC005C2D5F /* BaseButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E973FD51FDBC5CC005C2D5F /* BaseButton.m */; };
 		2E973FD91FDBE400005C2D5F /* TradeDisplayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E973FD81FDBE400005C2D5F /* TradeDisplayView.m */; };
+		2E973FDF1FDC0219005C2D5F /* AdsTradeDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E973FDE1FDC0219005C2D5F /* AdsTradeDetailVC.m */; };
 		2EA584C11FA813C900C7106C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2EA584C01FA813C900C7106C /* Assets.xcassets */; };
 		2EA584C41FA813C900C7106C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2EA584C21FA813C900C7106C /* LaunchScreen.storyboard */; };
 		2EA584C71FA813C900C7106C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EA584C61FA813C900C7106C /* main.m */; };
@@ -1368,6 +1369,8 @@
 		2E973FD51FDBC5CC005C2D5F /* BaseButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseButton.m; sourceTree = "<group>"; };
 		2E973FD71FDBE400005C2D5F /* TradeDisplayView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TradeDisplayView.h; sourceTree = "<group>"; };
 		2E973FD81FDBE400005C2D5F /* TradeDisplayView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TradeDisplayView.m; sourceTree = "<group>"; };
+		2E973FDD1FDC0219005C2D5F /* AdsTradeDetailVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AdsTradeDetailVC.h; sourceTree = "<group>"; };
+		2E973FDE1FDC0219005C2D5F /* AdsTradeDetailVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AdsTradeDetailVC.m; sourceTree = "<group>"; };
 		2EA584B41FA813C900C7106C /* Coin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Coin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EA584C01FA813C900C7106C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2EA584C31FA813C900C7106C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -1634,6 +1637,8 @@
 			children = (
 				211CEF061FCBB77D000FB0C4 /* Search */,
 				211CF9941FC426C900E51FCF /* Detail */,
+				2E973FDD1FDC0219005C2D5F /* AdsTradeDetailVC.h */,
+				2E973FDE1FDC0219005C2D5F /* AdsTradeDetailVC.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -4192,6 +4197,7 @@
 				2EE950C61FB05B5900429257 /* TLMineVC.m in Sources */,
 				21205CDA1FCD2FC8003C6C7C /* CoinAddressListVC.m in Sources */,
 				21205CD61FCD0435003C6C7C /* FansModel.m in Sources */,
+				2E973FDF1FDC0219005C2D5F /* AdsTradeDetailVC.m in Sources */,
 				2182D2F71FC814C6008EDCE4 /* OrderDetailHeaderView.m in Sources */,
 				211C040E1FC6604800E51FCF /* UIImage+Alpha.m in Sources */,
 				211C04681FC6604800E51FCF /* TextTableViewHeaderFooterView.m in Sources */,
