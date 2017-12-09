@@ -425,6 +425,8 @@
 		21C91D8C1FDBD64D006EDB16 /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 21C91D8A1FDBD64D006EDB16 /* AlipaySDK.bundle */; };
 		21C91D8D1FDBD64D006EDB16 /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21C91D8B1FDBD64D006EDB16 /* AlipaySDK.framework */; };
 		21C91D981FDBD7E4006EDB16 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21C91D971FDBD7DE006EDB16 /* CoreMotion.framework */; };
+		21CB94E21FDC0A0F00CAB090 /* PersonalitySettingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21CB94E11FDC0A0F00CAB090 /* PersonalitySettingVC.m */; };
+		21CB94E51FDC0AFC00CAB090 /* LanguageSettingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21CB94E41FDC0AFC00CAB090 /* LanguageSettingVC.m */; };
 		21D216861FB9C5750040795E /* QRCodeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21D216851FB9C5750040795E /* QRCodeVC.m */; };
 		21D2168E1FBA90CE0040795E /* BannerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 21D2168D1FBA90CE0040795E /* BannerModel.m */; };
 		21D216921FBA96060040795E /* NoticeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 21D216911FBA96060040795E /* NoticeModel.m */; };
@@ -1332,6 +1334,10 @@
 		21C91D941FDBD78E006EDB16 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		21C91D961FDBD7A3006EDB16 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		21C91D971FDBD7DE006EDB16 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		21CB94E01FDC0A0F00CAB090 /* PersonalitySettingVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PersonalitySettingVC.h; sourceTree = "<group>"; };
+		21CB94E11FDC0A0F00CAB090 /* PersonalitySettingVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PersonalitySettingVC.m; sourceTree = "<group>"; };
+		21CB94E31FDC0AFC00CAB090 /* LanguageSettingVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LanguageSettingVC.h; sourceTree = "<group>"; };
+		21CB94E41FDC0AFC00CAB090 /* LanguageSettingVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LanguageSettingVC.m; sourceTree = "<group>"; };
 		21D216841FB9C5750040795E /* QRCodeVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QRCodeVC.h; sourceTree = "<group>"; };
 		21D216851FB9C5750040795E /* QRCodeVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QRCodeVC.m; sourceTree = "<group>"; };
 		21D2168C1FBA90CE0040795E /* BannerModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BannerModel.h; sourceTree = "<group>"; };
@@ -1476,6 +1482,7 @@
 				21205CC81FCCFCA1003C6C7C /* Fans */,
 				211CEF271FCC1892000FB0C4 /* MyAdvertise */,
 				211A34F81FB4502200FEB71F /* Setting */,
+				21CB94DF1FDC09A600CAB090 /* PersonalitySetting */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -3530,6 +3537,17 @@
 			path = Alipay;
 			sourceTree = "<group>";
 		};
+		21CB94DF1FDC09A600CAB090 /* PersonalitySetting */ = {
+			isa = PBXGroup;
+			children = (
+				21CB94E01FDC0A0F00CAB090 /* PersonalitySettingVC.h */,
+				21CB94E11FDC0A0F00CAB090 /* PersonalitySettingVC.m */,
+				21CB94E31FDC0AFC00CAB090 /* LanguageSettingVC.h */,
+				21CB94E41FDC0AFC00CAB090 /* LanguageSettingVC.m */,
+			);
+			path = PersonalitySetting;
+			sourceTree = "<group>";
+		};
 		21D216871FBA8F1F0040795E /* 行情 */ = {
 			isa = PBXGroup;
 			children = (
@@ -4158,6 +4176,7 @@
 				211C04471FC6604800E51FCF /* FontHelper.m in Sources */,
 				2E394FED1FB0575A00BA0829 /* AppDelegate.m in Sources */,
 				211C043D1FC6604800E51FCF /* KeyValue.m in Sources */,
+				21CB94E21FDC0A0F00CAB090 /* PersonalitySettingVC.m in Sources */,
 				211A48A51FBE84220027E9FF /* PublishTipView.m in Sources */,
 				211D3C1B1FCFE46C00B55F9F /* HistoryRateModel.m in Sources */,
 				21D216861FB9C5750040795E /* QRCodeVC.m in Sources */,
@@ -4219,6 +4238,7 @@
 				211C047A1FC6604800E51FCF /* EmojHelper.m in Sources */,
 				211C04641FC6604800E51FCF /* IMAConversationManager.m in Sources */,
 				2EE950D21FB066EB00429257 /* CoinChangeView.m in Sources */,
+				21CB94E51FDC0AFC00CAB090 /* LanguageSettingVC.m in Sources */,
 				211C03ED1FC6604800E51FCF /* NSObject+FBKVOController.m in Sources */,
 				211C047C1FC6604800E51FCF /* MyAudioInputView.m in Sources */,
 				211C041B1FC6604800E51FCF /* UIColor+MLPFlatColors.m in Sources */,
