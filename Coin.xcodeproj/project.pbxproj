@@ -438,6 +438,7 @@
 		2E973FCF1FDABA0F005C2D5F /* ChatSysMsgCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E973FCE1FDABA0F005C2D5F /* ChatSysMsgCell.m */; };
 		2E973FD31FDBC5B0005C2D5F /* BaseLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E973FD21FDBC5B0005C2D5F /* BaseLabel.m */; };
 		2E973FD61FDBC5CC005C2D5F /* BaseButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E973FD51FDBC5CC005C2D5F /* BaseButton.m */; };
+		2E973FD91FDBE400005C2D5F /* TradeDisplayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E973FD81FDBE400005C2D5F /* TradeDisplayView.m */; };
 		2EA584C11FA813C900C7106C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2EA584C01FA813C900C7106C /* Assets.xcassets */; };
 		2EA584C41FA813C900C7106C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2EA584C21FA813C900C7106C /* LaunchScreen.storyboard */; };
 		2EA584C71FA813C900C7106C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EA584C61FA813C900C7106C /* main.m */; };
@@ -1351,6 +1352,8 @@
 		2E973FD21FDBC5B0005C2D5F /* BaseLabel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseLabel.m; sourceTree = "<group>"; };
 		2E973FD41FDBC5CC005C2D5F /* BaseButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseButton.h; sourceTree = "<group>"; };
 		2E973FD51FDBC5CC005C2D5F /* BaseButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseButton.m; sourceTree = "<group>"; };
+		2E973FD71FDBE400005C2D5F /* TradeDisplayView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TradeDisplayView.h; sourceTree = "<group>"; };
+		2E973FD81FDBE400005C2D5F /* TradeDisplayView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TradeDisplayView.m; sourceTree = "<group>"; };
 		2EA584B41FA813C900C7106C /* Coin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Coin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EA584C01FA813C900C7106C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2EA584C31FA813C900C7106C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -1623,6 +1626,8 @@
 			isa = PBXGroup;
 			children = (
 				211CF99B1FC4275400E51FCF /* Detail */,
+				2E973FD71FDBE400005C2D5F /* TradeDisplayView.h */,
+				2E973FD81FDBE400005C2D5F /* TradeDisplayView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -4172,6 +4177,7 @@
 				211A53431FC028D000CC6294 /* PublishDraftModel.m in Sources */,
 				211DE6AB1FB58B4C002FCF3D /* TLTableView.m in Sources */,
 				211C04441FC6604800E51FCF /* ScrollRefreshViewController.m in Sources */,
+				2E973FD91FDBE400005C2D5F /* TradeDisplayView.m in Sources */,
 				21223C731FBD8DB800057444 /* QuotationModel.m in Sources */,
 				2E973FCF1FDABA0F005C2D5F /* ChatSysMsgCell.m in Sources */,
 				211C04891FC6604800E51FCF /* ChatFunctionPanel.m in Sources */,
