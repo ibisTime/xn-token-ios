@@ -56,7 +56,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.title = @"安全设置";
+    self.title = [LangSwitcher switchLang:@"安全设置" key:nil];
     
     [self setGroup];
 
@@ -90,7 +90,7 @@
     //资金密码
     SettingModel *changeTradePwd = [SettingModel new];
     
-    changeTradePwd.text = @"资金密码";
+    changeTradePwd.text = [LangSwitcher switchLang:@"资金密码" key:nil];
     
     [changeTradePwd setAction:^{
         
@@ -106,7 +106,7 @@
     //身份认证
     SettingModel *idAuth = [SettingModel new];
     
-    idAuth.text = @"芝麻认证";
+    idAuth.text = [LangSwitcher switchLang:@"芝麻认证" key:nil];
     [idAuth setAction:^{
         
 //        IdAuthVC *idAuthVC = [IdAuthVC new];
@@ -115,7 +115,7 @@
         
         ZMAuthVC *authVC = [ZMAuthVC new];
         
-        authVC.title = @"芝麻认证";
+        authVC.title = [LangSwitcher switchLang:@"芝麻认证" key:nil];
 
         [weakSelf.navigationController pushViewController:authVC animated:YES];
         
@@ -124,11 +124,11 @@
     //绑定邮箱
     SettingModel *bindEmail = [SettingModel new];
     
-    bindEmail.text = @"绑定邮箱";
+    bindEmail.text = [LangSwitcher switchLang:@"绑定邮箱" key:nil];
     [bindEmail setAction:^{
         
         EditVC *editVC = [[EditVC alloc] init];
-        editVC.title = @"绑定邮箱";
+        editVC.title = [LangSwitcher switchLang:@"绑定邮箱" key:nil];
         editVC.text = [TLUser user].email;
         editVC.type = UserEditTypeEmail;
         [editVC setDone:^(NSString *content){
@@ -136,7 +136,7 @@
             NSIndexPath *indexPath = [NSIndexPath indexPathForRow:1 inSection:1];
             SettingCell *cell = [weakSelf.tableView cellForRowAtIndexPath:indexPath];
             
-            cell.rightLabel.text = [[TLUser user].email valid] ? [TLUser user].email: @"";
+            cell.rightLabel.text = [[TLUser user].email valid] ? [TLUser user].email: [LangSwitcher switchLang:@"" key:nil];
             
             [weakSelf.tableView reloadData];
             
@@ -148,7 +148,7 @@
     
     //修改手机号
     SettingModel *changeMobile = [SettingModel new];
-    changeMobile.text = @"修改手机号";
+    changeMobile.text = [LangSwitcher switchLang:@"修改手机号" key:nil];
     [changeMobile setAction:^{
         
         TLChangeMobileVC *changeMobileVC = [[TLChangeMobileVC alloc] init];
@@ -158,7 +158,7 @@
     
     //修改登录密码
     SettingModel *changeLoginPwd = [SettingModel new];
-    changeLoginPwd.text = @"修改登录密码";
+    changeLoginPwd.text = [LangSwitcher switchLang:@"修改登录密码" key:nil];
     [changeLoginPwd setAction:^{
         
         TLPwdRelatedVC *pwdAboutVC = [[TLPwdRelatedVC alloc] initWithType:TLPwdTypeReset];
@@ -168,7 +168,7 @@
 
     //谷歌验证
     SettingModel *google = [SettingModel new];
-    google.text = @"谷歌验证";
+    google.text = [LangSwitcher switchLang:@"谷歌验证" key:nil];
     [google setAction:^{
         
         //未开启直接进入开启界面，已开启就弹出操作表
@@ -198,7 +198,7 @@
         
         _loginOutBtn = [[UIButton alloc] initWithFrame:CGRectMake(15, 55, kScreenWidth - 30, 45)];
         _loginOutBtn.backgroundColor = kAppCustomMainColor;
-        [_loginOutBtn setTitle:@"退出登录" forState:UIControlStateNormal];
+        [_loginOutBtn setTitle:[LangSwitcher switchLang:@"退出登录" key:nil] forState:UIControlStateNormal];
         [_loginOutBtn setTitleColor:kWhiteColor forState:UIControlStateNormal];
         _loginOutBtn.layer.cornerRadius = 5;
         _loginOutBtn.clipsToBounds = YES;
@@ -226,9 +226,9 @@
 
 - (void)setGoogleAuth {
     //
-    NSString *title = @"修改谷歌验证";
+    NSString *title = [LangSwitcher switchLang:@"修改谷歌验证" key:nil];
     
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"谷歌验证" message:@"" preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:[LangSwitcher switchLang:@"谷歌验证" key:nil] message:@"" preferredStyle:UIAlertControllerStyleActionSheet];
     
     UIAlertAction *changeAction = [UIAlertAction actionWithTitle:title style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
@@ -237,14 +237,14 @@
         [self.navigationController pushViewController:authVC animated:YES];
     }];
     
-    UIAlertAction *closeAction = [UIAlertAction actionWithTitle:@"关闭谷歌验证" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction *closeAction = [UIAlertAction actionWithTitle:[LangSwitcher switchLang:@"关闭谷歌验证" key:nil] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
         CloseGoogleAuthVC *closeVC = [CloseGoogleAuthVC new];
         
         [self.navigationController pushViewController:closeVC animated:YES];
     }];
     
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:[LangSwitcher switchLang:@"取消" key:nil] style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
         
         
     }];
@@ -290,7 +290,7 @@
         
         SettingCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
         
-        cell.rightLabel.text = @"已认证";
+        cell.rightLabel.text = [LangSwitcher switchLang:@"已认证" key:nil];
         
         [self.tableView reloadData];
     }
@@ -322,7 +322,7 @@
         
         SettingCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
         
-        cell.rightLabel.text = [TLUser user].isGoogleAuthOpen ? @"已开启": @"未开启";
+        cell.rightLabel.text = [TLUser user].isGoogleAuthOpen ? [LangSwitcher switchLang:@"已开启" key:nil]: [LangSwitcher switchLang:@"未开启" key:nil];
         
         [self.tableView reloadData];
     }

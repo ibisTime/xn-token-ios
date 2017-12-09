@@ -28,7 +28,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.title = @"我发布的";
+    self.title = [LangSwitcher switchLang:@"我发布的" key:nil];
     
     [self initSelectScrollView];
     
@@ -38,7 +38,7 @@
 #pragma mark - Init
 - (void)initSelectScrollView {
     
-    self.titles = @[@"待发布", @"已发布"];
+    self.titles = @[[LangSwitcher switchLang:@"待发布" key:nil], [LangSwitcher switchLang:@"已发布" key:nil]];
     
     self.selectScrollView = [[SelectScrollView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight) itemTitles:self.titles];
     

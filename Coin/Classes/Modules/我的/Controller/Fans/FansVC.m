@@ -29,7 +29,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.title = @"受信任的";
+    self.title = [LangSwitcher switchLang:@"受信任的" key:nil];
     
     //暂无受信任的人
     [self initPlaceHolderView];
@@ -78,7 +78,7 @@
     
     UILabel *textLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor2 font:14.0];
     
-    textLbl.text = @"暂无信任的人";
+    textLbl.text = [LangSwitcher switchLang:@"暂无信任的人" key:nil];
     
     textLbl.textAlignment = NSTextAlignmentCenter;
     

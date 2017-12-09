@@ -91,25 +91,24 @@
     helper.tableView = self.tableView;
     [helper modelClass:[CoinQuotationModel class]];
     
-    [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
-        
-        weakSelf.quotations = objs;
-        
-        weakSelf.tableView.quotations = objs;
-        
-        [weakSelf.tableView reloadData_tl];
-        
-    } failure:^(NSError *error) {
-        
+    [self.tableView addRefreshAction:^{
+
+        [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
+            
+            weakSelf.quotations = objs;
+            
+            weakSelf.tableView.quotations = objs;
+            
+            [weakSelf.tableView reloadData_tl];
+            
+        } failure:^(NSError *error) {
+            
+            
+        }];
         
     }];
-    
-//    [self.tableView addRefreshAction:^{
-//
-//
-//    }];
-//
-//    [self.tableView beginRefreshing];
+
+    [self.tableView beginRefreshing];
 
 }
 

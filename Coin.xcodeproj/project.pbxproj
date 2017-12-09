@@ -425,6 +425,12 @@
 		21C91D8C1FDBD64D006EDB16 /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 21C91D8A1FDBD64D006EDB16 /* AlipaySDK.bundle */; };
 		21C91D8D1FDBD64D006EDB16 /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21C91D8B1FDBD64D006EDB16 /* AlipaySDK.framework */; };
 		21C91D981FDBD7E4006EDB16 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21C91D971FDBD7DE006EDB16 /* CoreMotion.framework */; };
+		21CB94E21FDC0A0F00CAB090 /* PersonalitySettingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21CB94E11FDC0A0F00CAB090 /* PersonalitySettingVC.m */; };
+		21CB94E51FDC0AFC00CAB090 /* LanguageSettingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21CB94E41FDC0AFC00CAB090 /* LanguageSettingVC.m */; };
+		21CB94EA1FDC0C2500CAB090 /* PersonalitySettingTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 21CB94E91FDC0C2500CAB090 /* PersonalitySettingTableView.m */; };
+		21CB94ED1FDC0C9100CAB090 /* LanguageSettingTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 21CB94EC1FDC0C9100CAB090 /* LanguageSettingTableView.m */; };
+		21CB94F01FDC0CAA00CAB090 /* LanguageSettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 21CB94EF1FDC0CAA00CAB090 /* LanguageSettingCell.m */; };
+		21CB94F51FDC179700CAB090 /* PersonalModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 21CB94F41FDC179700CAB090 /* PersonalModel.m */; };
 		21D216861FB9C5750040795E /* QRCodeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21D216851FB9C5750040795E /* QRCodeVC.m */; };
 		21D2168E1FBA90CE0040795E /* BannerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 21D2168D1FBA90CE0040795E /* BannerModel.m */; };
 		21D216921FBA96060040795E /* NoticeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 21D216911FBA96060040795E /* NoticeModel.m */; };
@@ -1333,6 +1339,18 @@
 		21C91D941FDBD78E006EDB16 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		21C91D961FDBD7A3006EDB16 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		21C91D971FDBD7DE006EDB16 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		21CB94E01FDC0A0F00CAB090 /* PersonalitySettingVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PersonalitySettingVC.h; sourceTree = "<group>"; };
+		21CB94E11FDC0A0F00CAB090 /* PersonalitySettingVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PersonalitySettingVC.m; sourceTree = "<group>"; };
+		21CB94E31FDC0AFC00CAB090 /* LanguageSettingVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LanguageSettingVC.h; sourceTree = "<group>"; };
+		21CB94E41FDC0AFC00CAB090 /* LanguageSettingVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LanguageSettingVC.m; sourceTree = "<group>"; };
+		21CB94E81FDC0C2500CAB090 /* PersonalitySettingTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PersonalitySettingTableView.h; sourceTree = "<group>"; };
+		21CB94E91FDC0C2500CAB090 /* PersonalitySettingTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PersonalitySettingTableView.m; sourceTree = "<group>"; };
+		21CB94EB1FDC0C9100CAB090 /* LanguageSettingTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LanguageSettingTableView.h; sourceTree = "<group>"; };
+		21CB94EC1FDC0C9100CAB090 /* LanguageSettingTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LanguageSettingTableView.m; sourceTree = "<group>"; };
+		21CB94EE1FDC0CAA00CAB090 /* LanguageSettingCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LanguageSettingCell.h; sourceTree = "<group>"; };
+		21CB94EF1FDC0CAA00CAB090 /* LanguageSettingCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LanguageSettingCell.m; sourceTree = "<group>"; };
+		21CB94F31FDC179700CAB090 /* PersonalModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PersonalModel.h; sourceTree = "<group>"; };
+		21CB94F41FDC179700CAB090 /* PersonalModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PersonalModel.m; sourceTree = "<group>"; };
 		21D216841FB9C5750040795E /* QRCodeVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QRCodeVC.h; sourceTree = "<group>"; };
 		21D216851FB9C5750040795E /* QRCodeVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QRCodeVC.m; sourceTree = "<group>"; };
 		21D2168C1FBA90CE0040795E /* BannerModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BannerModel.h; sourceTree = "<group>"; };
@@ -1448,6 +1466,7 @@
 		211A34E61FB42F5900FEB71F /* View */ = {
 			isa = PBXGroup;
 			children = (
+				21CB94E71FDC0BC100CAB090 /* PersonalitySetting */,
 				2125B8C41FD948C200591812 /* HomePage */,
 				21205CF41FCD5FCB003C6C7C /* Invite */,
 				21205CDB1FCD30DF003C6C7C /* CoinAddress */,
@@ -1461,6 +1480,7 @@
 		211A34E71FB42F5F00FEB71F /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				21CB94F21FDC176E00CAB090 /* PersonalitySeting */,
 				2125B8C31FD948BB00591812 /* HomePage */,
 				21205CF01FCD5F84003C6C7C /* Invite */,
 				21205CDF1FCD3142003C6C7C /* CoinAddress */,
@@ -1479,6 +1499,7 @@
 				21205CC81FCCFCA1003C6C7C /* Fans */,
 				211CEF271FCC1892000FB0C4 /* MyAdvertise */,
 				211A34F81FB4502200FEB71F /* Setting */,
+				21CB94DF1FDC09A600CAB090 /* PersonalitySetting */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -3470,8 +3491,8 @@
 			children = (
 				21A7F3021FB2E2F900FAA0A2 /* TLUser.h */,
 				21A7F2FD1FB2E2F900FAA0A2 /* TLUser.m */,
-				21A7F2F91FB2E2F900FAA0A2 /* TLUserExt.m */,
 				21A7F3011FB2E2F900FAA0A2 /* TLUserExt.h */,
+				21A7F2F91FB2E2F900FAA0A2 /* TLUserExt.m */,
 				21A7F2FB1FB2E2F900FAA0A2 /* UserDefaultsUtil.h */,
 				21A7F3041FB2E2F900FAA0A2 /* UserDefaultsUtil.m */,
 			);
@@ -3481,8 +3502,8 @@
 		21A7F3051FB2E2F900FAA0A2 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				21A7F3081FB2E2F900FAA0A2 /* AccountTf.m */,
 				21A7F30D1FB2E2F900FAA0A2 /* AccountTf.h */,
+				21A7F3081FB2E2F900FAA0A2 /* AccountTf.m */,
 				21A7F3091FB2E2F900FAA0A2 /* CaptchaView.h */,
 				21A7F30C1FB2E2F900FAA0A2 /* CaptchaView.m */,
 			);
@@ -3533,6 +3554,39 @@
 				21C91D8B1FDBD64D006EDB16 /* AlipaySDK.framework */,
 			);
 			path = Alipay;
+			sourceTree = "<group>";
+		};
+		21CB94DF1FDC09A600CAB090 /* PersonalitySetting */ = {
+			isa = PBXGroup;
+			children = (
+				21CB94E01FDC0A0F00CAB090 /* PersonalitySettingVC.h */,
+				21CB94E11FDC0A0F00CAB090 /* PersonalitySettingVC.m */,
+				21CB94E31FDC0AFC00CAB090 /* LanguageSettingVC.h */,
+				21CB94E41FDC0AFC00CAB090 /* LanguageSettingVC.m */,
+			);
+			path = PersonalitySetting;
+			sourceTree = "<group>";
+		};
+		21CB94E71FDC0BC100CAB090 /* PersonalitySetting */ = {
+			isa = PBXGroup;
+			children = (
+				21CB94E81FDC0C2500CAB090 /* PersonalitySettingTableView.h */,
+				21CB94E91FDC0C2500CAB090 /* PersonalitySettingTableView.m */,
+				21CB94EB1FDC0C9100CAB090 /* LanguageSettingTableView.h */,
+				21CB94EC1FDC0C9100CAB090 /* LanguageSettingTableView.m */,
+				21CB94EE1FDC0CAA00CAB090 /* LanguageSettingCell.h */,
+				21CB94EF1FDC0CAA00CAB090 /* LanguageSettingCell.m */,
+			);
+			path = PersonalitySetting;
+			sourceTree = "<group>";
+		};
+		21CB94F21FDC176E00CAB090 /* PersonalitySeting */ = {
+			isa = PBXGroup;
+			children = (
+				21CB94F31FDC179700CAB090 /* PersonalModel.h */,
+				21CB94F41FDC179700CAB090 /* PersonalModel.m */,
+			);
+			path = PersonalitySeting;
 			sourceTree = "<group>";
 		};
 		21D216871FBA8F1F0040795E /* 行情 */ = {
@@ -4140,6 +4194,7 @@
 				211C04671FC6604800E51FCF /* IMAPlatform+AppConfig.m in Sources */,
 				211DE6AC1FB58B4C002FCF3D /* TLPageDataHelper.m in Sources */,
 				211C05001FC6604900E51FCF /* ChatManager.m in Sources */,
+				21CB94ED1FDC0C9100CAB090 /* LanguageSettingTableView.m in Sources */,
 				211DE6BC1FB58B4C002FCF3D /* NSString+Extension.m in Sources */,
 				2125B8B81FD91F9D00591812 /* QuotationVC.m in Sources */,
 				21C91D7D1FDBCF9C006EDB16 /* ZMAuthVC.m in Sources */,
@@ -4163,6 +4218,7 @@
 				211C04471FC6604800E51FCF /* FontHelper.m in Sources */,
 				2E394FED1FB0575A00BA0829 /* AppDelegate.m in Sources */,
 				211C043D1FC6604800E51FCF /* KeyValue.m in Sources */,
+				21CB94E21FDC0A0F00CAB090 /* PersonalitySettingVC.m in Sources */,
 				211A48A51FBE84220027E9FF /* PublishTipView.m in Sources */,
 				211D3C1B1FCFE46C00B55F9F /* HistoryRateModel.m in Sources */,
 				21D216861FB9C5750040795E /* QRCodeVC.m in Sources */,
@@ -4225,6 +4281,7 @@
 				211C047A1FC6604800E51FCF /* EmojHelper.m in Sources */,
 				211C04641FC6604800E51FCF /* IMAConversationManager.m in Sources */,
 				2EE950D21FB066EB00429257 /* CoinChangeView.m in Sources */,
+				21CB94E51FDC0AFC00CAB090 /* LanguageSettingVC.m in Sources */,
 				211C03ED1FC6604800E51FCF /* NSObject+FBKVOController.m in Sources */,
 				211C047C1FC6604800E51FCF /* MyAudioInputView.m in Sources */,
 				211C041B1FC6604800E51FCF /* UIColor+MLPFlatColors.m in Sources */,
@@ -4414,6 +4471,7 @@
 				211C04591FC6604800E51FCF /* IMAConversation.m in Sources */,
 				211C048A1FC6604800E51FCF /* ChatInputPanel.m in Sources */,
 				211A532F1FBFE4CF00CC6294 /* RateDescCell.m in Sources */,
+				21CB94EA1FDC0C2500CAB090 /* PersonalitySettingTableView.m in Sources */,
 				211C049F1FC6604900E51FCF /* IMAMsg+UITableViewCell.m in Sources */,
 				211C04951FC6604800E51FCF /* MicroVideoPlayView.m in Sources */,
 				211C04C91FC6604900E51FCF /* ChatInputTextView.m in Sources */,
@@ -4422,6 +4480,7 @@
 				211CEF2A1FCC18BE000FB0C4 /* MyAdvertiseVC.m in Sources */,
 				211C049E1FC6604900E51FCF /* MsgSendingTip.m in Sources */,
 				211C04261FC6604800E51FCF /* ADFlipTransition.m in Sources */,
+				21CB94F01FDC0CAA00CAB090 /* LanguageSettingCell.m in Sources */,
 				211C04571FC6604800E51FCF /* IMAUser.m in Sources */,
 				211C049C1FC6604900E51FCF /* RichChatViewController.m in Sources */,
 				211C04701FC6604800E51FCF /* UIPlaceHolderTextView.m in Sources */,
@@ -4443,6 +4502,7 @@
 				211CF99A1FC4270600E51FCF /* TradeSellVC.m in Sources */,
 				2E3950031FB05AF200BA0829 /* TLOrderVC.m in Sources */,
 				21A7F3191FB2E2F900FAA0A2 /* TLAccountBaseVC.m in Sources */,
+				21CB94F51FDC179700CAB090 /* PersonalModel.m in Sources */,
 				211DE6B21FB58B4C002FCF3D /* UIButton+Custom.m in Sources */,
 				211DE6171FB54685002FCF3D /* WalletCell.m in Sources */,
 				211C04D31FC6604900E51FCF /* ConversationListViewController.m in Sources */,

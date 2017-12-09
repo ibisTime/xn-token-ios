@@ -28,7 +28,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = @"找回密码";
+    self.title = [LangSwitcher switchLang:@"找回密码" key:nil];
     
     self.view.backgroundColor = kWhiteColor;
     
@@ -47,7 +47,7 @@
     CGFloat btnMargin = 15;
     
     //账号
-    TLTextField *phoneTf = [[TLTextField alloc] initWithFrame:CGRectMake(margin, 10, w, h) leftTitle:@"手机号" titleWidth:100 placeholder:@"请输入手机号"];
+    TLTextField *phoneTf = [[TLTextField alloc] initWithFrame:CGRectMake(margin, 10, w, h) leftTitle:[LangSwitcher switchLang:@"手机号" key:nil] titleWidth:100 placeholder:[LangSwitcher switchLang:@"请输入手机号" key:nil]];
     phoneTf.keyboardType = UIKeyboardTypeNumberPad;
     [self.view addSubview:phoneTf];
     self.phoneTf = phoneTf;
@@ -60,14 +60,14 @@
     self.captchaView = captchaView;
     
     //密码
-    TLTextField *pwdTf = [[TLTextField alloc] initWithFrame:CGRectMake(margin, captchaView.yy + 10, w, h) leftTitle:@"新密码" titleWidth:100 placeholder:@"请输入密码"];
+    TLTextField *pwdTf = [[TLTextField alloc] initWithFrame:CGRectMake(margin, captchaView.yy + 10, w, h) leftTitle:[LangSwitcher switchLang:@"新密码" key:nil] titleWidth:100 placeholder:[LangSwitcher switchLang:@"请输入密码" key:nil]];
     pwdTf.secureTextEntry = YES;
     
     [self.view addSubview:pwdTf];
     self.pwdTf = pwdTf;
     
     //re密码
-    TLTextField *rePwdTf = [[TLTextField alloc] initWithFrame:CGRectMake(margin, pwdTf.yy + 1, w, h) leftTitle:@"确认密码" titleWidth:100 placeholder:@"确认密码"];
+    TLTextField *rePwdTf = [[TLTextField alloc] initWithFrame:CGRectMake(margin, pwdTf.yy + 1, w, h) leftTitle:[LangSwitcher switchLang:@"确认密码" key:nil] titleWidth:100 placeholder:[LangSwitcher switchLang:@"确认密码" key:nil]];
     rePwdTf.secureTextEntry = YES;
     [self.view addSubview:rePwdTf];
     self.rePwdTf = rePwdTf;
@@ -90,7 +90,7 @@
     }
     
     //
-    UIButton *confirmBtn = [UIButton buttonWithTitle:@"确认" titleColor:kWhiteColor backgroundColor:kAppCustomMainColor titleFont:16.0 cornerRadius:5];
+    UIButton *confirmBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"确认" key:nil] titleColor:kWhiteColor backgroundColor:kAppCustomMainColor titleFont:16.0 cornerRadius:5];
     
     [confirmBtn addTarget:self action:@selector(changePwd) forControlEvents:UIControlEventTouchUpInside];
     
@@ -110,7 +110,7 @@
     
     if (![self.phoneTf.text isPhoneNum]) {
         
-        [TLAlert alertWithInfo:@"请输入正确的手机号"];
+        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入正确的手机号" key:nil]];
         
         return;
     }
@@ -123,7 +123,7 @@
     
     [http postWithSuccess:^(id responseObject) {
         
-        [TLAlert alertWithSucces:@"验证码已发送,请注意查收"];
+        [TLAlert alertWithSucces:[LangSwitcher switchLang:@"验证码已发送,请注意查收" key:nil]];
         
         [self.captchaView.captchaBtn begin];
         
@@ -138,26 +138,26 @@
     
     if (![self.phoneTf.text isPhoneNum]) {
         
-        [TLAlert alertWithInfo:@"请输入正确的手机号"];
+        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入正确的手机号" key:nil]];
         
         return;
     }
     
     if (!(self.captchaView.captchaTf.text && self.captchaView.captchaTf.text.length > 3)) {
-        [TLAlert alertWithInfo:@"请输入正确的验证码"];
+        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入正确的验证码" key:nil]];
         
         return;
     }
     
     if (!(self.pwdTf.text &&self.pwdTf.text.length > 5)) {
         
-        [TLAlert alertWithInfo:@"请输入6位以上密码"];
+        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入6位以上密码" key:nil]];
         return;
     }
     
     if (![self.pwdTf.text isEqualToString:self.rePwdTf.text]) {
         
-        [TLAlert alertWithInfo:@"输入的密码不一致"];
+        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"输入的密码不一致" key:nil]];
         return;
         
     }
@@ -174,7 +174,7 @@
     
     [http postWithSuccess:^(id responseObject) {
         
-        [TLAlert alertWithSucces:@"找回成功"];
+        [TLAlert alertWithSucces:[LangSwitcher switchLang:@"找回成功" key:nil]];
         
         //保存用户账号和密码
         [[TLUser user] saveUserName:self.phoneTf.text pwd:self.pwdTf.text];

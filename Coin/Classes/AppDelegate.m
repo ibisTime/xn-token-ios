@@ -197,9 +197,10 @@
         //查询是否认证成功
         TLNetworking *http = [TLNetworking new];
         http.showView = [UIApplication sharedApplication].keyWindow;
-        http.code = @"623046";
+        http.code = @"805196";
         http.parameters[@"bizNo"] = [TLUser user].tempBizNo;
-        
+        http.parameters[@"userId"] = [TLUser user].userId;
+
         [http postWithSuccess:^(id responseObject) {
             
             NSString *str = [NSString stringWithFormat:@"%@", responseObject[@"data"][@"isSuccess"]];
@@ -233,9 +234,10 @@
         //查询是否认证成功
         TLNetworking *http = [TLNetworking new];
         http.showView = [UIApplication sharedApplication].keyWindow;
-        http.code = @"623046";
+        http.code = @"805196";
         http.parameters[@"bizNo"] = [TLUser user].tempBizNo;
-        
+        http.parameters[@"userId"] = [TLUser user].userId;
+
         [http postWithSuccess:^(id responseObject) {
             
             NSString *str = [NSString stringWithFormat:@"%@", responseObject[@"data"][@"isSuccess"]];

@@ -198,7 +198,7 @@ NSString *const kGoogleAuthClose = @"0";
     
     if (![[TLUser user].userId isEqualToString:userInfo[@"userId"]]) {
         
-        @throw [NSException exceptionWithName:@"用户信息错误" reason:@"后台原因" userInfo:nil];
+        @throw [NSException exceptionWithName:[LangSwitcher switchLang:@"用户信息错误" key:nil] reason:[LangSwitcher switchLang:@"后台原因" key:nil] userInfo:nil];
         
     }
     

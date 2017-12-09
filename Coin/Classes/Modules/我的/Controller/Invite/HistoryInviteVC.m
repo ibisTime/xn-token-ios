@@ -30,7 +30,7 @@ static NSString *identifierCell = @"HistoryFriendCellID";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.title = @"推荐历史";
+    self.title = [LangSwitcher switchLang:@"推荐历史" key:nil];
     
     [self initPlaceHolderView];
     
@@ -58,7 +58,7 @@ static NSString *identifierCell = @"HistoryFriendCellID";
     
     UILabel *textLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor2 font:14.0];
     
-    textLbl.text = @"暂无推荐历史";
+    textLbl.text = [LangSwitcher switchLang:@"暂无推荐历史" key:nil];
     
     textLbl.textAlignment = NSTextAlignmentCenter;
     

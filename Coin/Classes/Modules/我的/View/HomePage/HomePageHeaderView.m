@@ -78,7 +78,7 @@
     //个人主页
     UILabel *titleLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kWhiteColor font:18.0];
     
-    titleLbl.text = @"个人主页";
+    titleLbl.text = [LangSwitcher switchLang:@"个人主页" key:nil];
     
     titleLbl.textAlignment = NSTextAlignmentCenter;
     
@@ -113,7 +113,7 @@
     //头像
     CGFloat imgWidth = 66;
     
-    self.photoBtn = [UIButton buttonWithTitle:@"" titleColor:kWhiteColor backgroundColor:kAppCustomMainColor titleFont:imgWidth/2.0 cornerRadius:imgWidth/2.0];
+    self.photoBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"" key:nil] titleColor:kWhiteColor backgroundColor:kAppCustomMainColor titleFont:imgWidth/2.0 cornerRadius:imgWidth/2.0];
     
     self.photoBtn.imageView.contentMode = UIViewContentModeScaleAspectFill;
     
@@ -164,7 +164,7 @@
     }];
     
     //交易数据
-    NSArray *textArr = @[@"交易次数", @"信任次数", @"好评率", @"历史交易"];
+    NSArray *textArr = @[[LangSwitcher switchLang:@"交易次数" key:nil], [LangSwitcher switchLang:@"信任次数" key:nil], [LangSwitcher switchLang:@"好评率" key:nil], [LangSwitcher switchLang:@"历史交易" key:nil]];
     
     CGFloat width = (kScreenWidth - 30)/(textArr.count*1.0);
     
@@ -195,7 +195,7 @@
     }];
     
     //信任
-    self.trustBtn = [UIButton buttonWithTitle:@"+ 信任" titleColor:kThemeColor backgroundColor:kClearColor titleFont:16.0 cornerRadius:2.5];
+    self.trustBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"+ 信任" key:nil] titleColor:kThemeColor backgroundColor:kClearColor titleFont:16.0 cornerRadius:2.5];
     
     self.trustBtn.layer.borderWidth = 0.5;
     self.trustBtn.layer.borderColor = kThemeColor.CGColor;
@@ -213,7 +213,7 @@
     }];
     
     //黑名单
-    self.blackListBtn = [UIButton buttonWithTitle:@"+ 黑名单" titleColor:kThemeColor backgroundColor:kClearColor titleFont:16.0 cornerRadius:2.5];
+    self.blackListBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"+ 黑名单" key:nil] titleColor:kThemeColor backgroundColor:kClearColor titleFont:16.0 cornerRadius:2.5];
     
     self.blackListBtn.layer.borderWidth = 0.5;
     self.blackListBtn.layer.borderColor = kThemeColor.CGColor;
@@ -265,8 +265,8 @@
     
     _relation = relation;
     
-    NSArray *textArr = @[@"交易次数", @"信任次数", @"好评率", @"历史交易"];
-    
+    NSArray *textArr = @[[LangSwitcher switchLang:@"交易次数" key:nil], [LangSwitcher switchLang:@"信任次数" key:nil], [LangSwitcher switchLang:@"好评率" key:nil], [LangSwitcher switchLang:@"历史交易" key:nil]];
+
     NSArray *numArr = @[[NSString stringWithFormat:@"%ld", relation.jiaoYiCount], [NSString stringWithFormat:@"%ld", relation.beiXinRenCount], relation.goodCommentRate, relation.tradeAmount];
     
     [textArr enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -279,7 +279,7 @@
         
     }];
     
-    NSString *betweenTradeTimes = [NSString stringWithFormat:@"和Ta交易过%@次", relation.betweenTradeTimes];
+    NSString *betweenTradeTimes = [LangSwitcher switchLang:[NSString stringWithFormat:@"和Ta交易过%@次", relation.betweenTradeTimes] key:nil];
     
     [self.tradeNumLbl labelWithString:betweenTradeTimes title:relation.betweenTradeTimes font:Font(14.0) color:kThemeColor];
     //是否信任
@@ -293,7 +293,7 @@
     
     _isTrust = isTrust;
     
-    NSString *title = isTrust ? @"取消信任": @"+ 信任";
+    NSString *title = isTrust ? [LangSwitcher switchLang:@"取消信任" key:nil]: [LangSwitcher switchLang:@"+ 信任" key:nil];
     
     [self.trustBtn setTitle:title forState:UIControlStateNormal];
 
@@ -303,7 +303,7 @@
     
     _isBlack = isBlack;
     
-    NSString *title = isBlack ? @"取消黑名单": @"+ 黑名单";
+    NSString *title = isBlack ? [LangSwitcher switchLang:@"取消黑名单" key:nil]: [LangSwitcher switchLang:@"+ 黑名单" key:nil];
     
     [self.blackListBtn setTitle:title forState:UIControlStateNormal];
 

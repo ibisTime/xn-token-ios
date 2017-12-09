@@ -32,7 +32,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.title = @"谷歌验证";
+    self.title = [LangSwitcher switchLang:@"谷歌验证" key:nil];
     
     [self initSubviews];
     //获取密钥
@@ -48,7 +48,7 @@
     
     //密钥
     self.secretTF = [[TLTextField alloc] initWithFrame:CGRectMake(leftMargin, 10, kScreenWidth - 2*leftMargin, height)
-                                                    leftTitle:@"密钥"
+                                                    leftTitle:[LangSwitcher switchLang:@"密钥" key:nil]
                                                    titleWidth:leftW
                                                   placeholder:@""];
     
@@ -59,7 +59,7 @@
     //复制
     UIView *secretView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 95, self.secretTF.height)];
     
-    UIButton *copyBtn = [UIButton buttonWithTitle:@"复制" titleColor:kWhiteColor backgroundColor:kThemeColor titleFont:13.0 cornerRadius:5];
+    UIButton *copyBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"复制" key:nil] titleColor:kWhiteColor backgroundColor:kThemeColor titleFont:13.0 cornerRadius:5];
     
     copyBtn.frame = CGRectMake(0, 0, 85, self.secretTF.height - 15);
     
@@ -73,16 +73,16 @@
     
     //谷歌验证码
     self.googleAuthTF = [[TLTextField alloc] initWithFrame:CGRectMake(leftMargin, self.secretTF.yy, kScreenWidth - 2*leftMargin, height)
-                                             leftTitle:@"谷歌验证码"
+                                             leftTitle:[LangSwitcher switchLang:@"谷歌验证码" key:nil]
                                             titleWidth:leftW
-                                           placeholder:@"请输入谷歌验证码"];
+                                           placeholder:[LangSwitcher switchLang:@"请输入谷歌验证码" key:nil]];
     
     [self.view addSubview:self.googleAuthTF];
     
     //复制
     UIView *authView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 95, self.googleAuthTF.height)];
     
-    UIButton *pasteBtn = [UIButton buttonWithTitle:@"粘贴" titleColor:kWhiteColor backgroundColor:kThemeColor titleFont:13.0 cornerRadius:5];
+    UIButton *pasteBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"粘贴" key:nil] titleColor:kWhiteColor backgroundColor:kThemeColor titleFont:13.0 cornerRadius:5];
     
     pasteBtn.frame = CGRectMake(0, 0, 85, self.googleAuthTF.height - 15);
 
@@ -97,7 +97,7 @@
     //短信验证码
     self.captchaView = [[CaptchaView alloc] initWithFrame:CGRectMake(leftMargin, self.googleAuthTF.yy, kScreenWidth - 2*leftMargin, height)];
     
-    self.captchaView.captchaTf.leftLbl.text = @"短信验证码";
+    self.captchaView.captchaTf.leftLbl.text = [LangSwitcher switchLang:@"短信验证码" key:nil];
     
     [self.captchaView.captchaBtn addTarget:self action:@selector(sendCaptcha) forControlEvents:UIControlEventTouchUpInside];
 
@@ -105,7 +105,7 @@
     
     //修改按钮
     
-    NSString *title = [TLUser user].isGoogleAuthOpen ? @"修改谷歌验证": @"开启谷歌验证";
+    NSString *title = [TLUser user].isGoogleAuthOpen ? [LangSwitcher switchLang:@"修改谷歌验证" key:nil]: [LangSwitcher switchLang:@"开启谷歌验证" key:nil];
 
     UIButton *confirmBtn = [UIButton buttonWithTitle:title titleColor:kWhiteColor backgroundColor:kThemeColor titleFont:16.0 cornerRadius:5];
     
@@ -134,11 +134,11 @@
     
     if (pasteBoard == nil) {
         
-        [TLAlert alertWithError:@"复制内容为空, 请重新复制"];
+        [TLAlert alertWithError:[LangSwitcher switchLang:@"复制内容为空, 请重新复制" key:nil]];
         
     } else {
         
-        [TLAlert alertWithSucces:@"复制成功"];
+        [TLAlert alertWithSucces:[LangSwitcher switchLang:@"复制成功" key:nil]];
     }
 }
 
@@ -152,7 +152,7 @@
         
     } else {
         
-        [TLAlert alertWithInfo:@"粘贴内容为空"];
+        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"粘贴内容为空" key:nil]];
     }
 }
 
@@ -167,7 +167,7 @@
     
     [http postWithSuccess:^(id responseObject) {
         
-        [TLAlert alertWithSucces:@"验证码已发送,请注意查收"];
+        [TLAlert alertWithSucces:[LangSwitcher switchLang:@"验证码已发送,请注意查收" key:nil]];
         
         [self.captchaView.captchaBtn begin];
         
@@ -182,19 +182,19 @@
     
     if (![self.secretTF.text valid]) {
         
-        [TLAlert alertWithInfo:@"密钥为空, 请重新获取"];
+        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"密钥为空, 请重新获取" key:nil]];
         return ;
     }
     
     if (![self.googleAuthTF.text valid]) {
         
-        [TLAlert alertWithInfo:@"请输入谷歌验证码"];
+        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入谷歌验证码" key:nil]];
         return;
     }
     
     if (![self.captchaView.captchaTf.text valid]) {
         
-        [TLAlert alertWithInfo:@"请输入短信验证码"];
+        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入短信验证码" key:nil]];
         return ;
     }
     
@@ -210,7 +210,7 @@
     
     [http postWithSuccess:^(id responseObject) {
         
-        NSString *title = [TLUser user].isGoogleAuthOpen ? @"修改成功": @"开启成功";
+        NSString *title = [TLUser user].isGoogleAuthOpen ? [LangSwitcher switchLang:@"修改成功" key:nil]: [LangSwitcher switchLang:@"开启成功" key:nil];
         [TLAlert alertWithSucces:title];
         //谷歌验证设置为已开启
         [TLUser user].googleAuthFlag = @"1";

@@ -49,7 +49,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = @"登录";
+    self.title = [LangSwitcher switchLang:@"登录" key:nil];
     
     [self setBarButtonItem];
     
@@ -66,7 +66,7 @@
     //取消按钮
     [UIBarButtonItem addLeftItemWithImageName:kCancelIcon frame:CGRectMake(-30, 0, 80, 44) vc:self action:@selector(back)];
     //注册
-    [UIBarButtonItem addRightItemWithTitle:@"注册" titleColor:kTextColor frame:CGRectMake(0, 0, 60, 44) vc:self action:@selector(goReg)];
+    [UIBarButtonItem addRightItemWithTitle:[LangSwitcher switchLang:@"注册" key:nil] titleColor:kTextColor frame:CGRectMake(0, 0, 60, 44) vc:self action:@selector(goReg)];
 }
 
 - (void)setUpUI {
@@ -93,7 +93,7 @@
     //账号
     AccountTf *phoneTf = [[AccountTf alloc] initWithFrame:CGRectMake(0, 0, w, h)];
     phoneTf.leftIconView.image = [UIImage imageNamed:@"手机"];
-    phoneTf.placeHolder = @"请输入手机号码";
+    phoneTf.placeHolder = [LangSwitcher switchLang:@"请输入手机号码" key:nil];
     [bgView addSubview:phoneTf];
     self.phoneTf = phoneTf;
     phoneTf.keyboardType = UIKeyboardTypeNumberPad;
@@ -103,7 +103,7 @@
     AccountTf *pwdTf = [[AccountTf alloc] initWithFrame:CGRectMake(0, phoneTf.yy + 1, w, h)];
     pwdTf.secureTextEntry = YES;
     pwdTf.leftIconView.image = [UIImage imageNamed:@"密码"];
-    pwdTf.placeHolder = @"请输入密码";
+    pwdTf.placeHolder = [LangSwitcher switchLang:@"请输入密码" key:nil];
     [bgView addSubview:pwdTf];
     self.pwdTf = pwdTf;
     
@@ -124,7 +124,7 @@
         }];
     }
     //登录
-    UIButton *loginBtn = [UIButton buttonWithTitle:@"登录" titleColor:kWhiteColor backgroundColor:kAppCustomMainColor titleFont:17.0 cornerRadius:5];
+    UIButton *loginBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"登录" key:nil] titleColor:kWhiteColor backgroundColor:kAppCustomMainColor titleFont:17.0 cornerRadius:5];
     [loginBtn addTarget:self action:@selector(goLogin) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:loginBtn];
     [loginBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -137,7 +137,7 @@
     }];
     
     //找回密码
-    UIButton *forgetPwdBtn = [UIButton buttonWithTitle:@"找回密码?" titleColor:kTextColor2 backgroundColor:kClearColor titleFont:14.0];
+    UIButton *forgetPwdBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"找回密码?" key:nil] titleColor:kTextColor2 backgroundColor:kClearColor titleFont:14.0];
     
     forgetPwdBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
     [forgetPwdBtn addTarget:self action:@selector(findPwd) forControlEvents:UIControlEventTouchUpInside];
@@ -203,14 +203,14 @@
     
     if (![self.phoneTf.text isPhoneNum]) {
         
-        [TLAlert alertWithInfo:@"请输入正确的手机号"];
+        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入正确的手机号" key:nil]];
         
         return;
     }
     
     if (!(self.pwdTf.text &&self.pwdTf.text.length > 5)) {
         
-        [TLAlert alertWithInfo:@"请输入6位以上密码"];
+        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入6位以上密码" key:nil]];
         return;
     }
     

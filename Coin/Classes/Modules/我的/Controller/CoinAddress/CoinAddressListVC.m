@@ -30,7 +30,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.title = @"地址管理";
+    self.title = [LangSwitcher switchLang:@"地址管理" key:nil];
     
     //暂无地址
     [self initPlaceHolderView];
@@ -75,7 +75,7 @@
         
     }];
     
-    UIButton *addressBtn = [UIButton buttonWithTitle:@"添加新地址" titleColor:kWhiteColor backgroundColor:kThemeColor titleFont:16.0 cornerRadius:5];
+    UIButton *addressBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"添加新地址" key:nil] titleColor:kWhiteColor backgroundColor:kThemeColor titleFont:16.0 cornerRadius:5];
     
     [addressBtn addTarget:self action:@selector(addNewAddress) forControlEvents:UIControlEventTouchUpInside];
     
@@ -110,7 +110,7 @@
     
     UILabel *textLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor2 font:14.0];
     
-    textLbl.text = @"暂无地址";
+    textLbl.text = [LangSwitcher switchLang:@"暂无地址" key:nil];
     
     textLbl.textAlignment = NSTextAlignmentCenter;
     

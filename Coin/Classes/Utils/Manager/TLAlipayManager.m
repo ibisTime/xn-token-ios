@@ -26,7 +26,7 @@
 + (void)payWithOrderStr:(NSString *)orderStr {
 
     
-    [[AlipaySDK defaultService] payOrder:orderStr fromScheme:@"jiuzhoubao" callback:^(NSDictionary *resultDic) {
+    [[AlipaySDK defaultService] payOrder:orderStr fromScheme:@"Bcoin" callback:^(NSDictionary *resultDic) {
         NSLog(@"支付宝回调--%@",resultDic);
 
         [[TLAlipayManager manager] handleResult:resultDic];

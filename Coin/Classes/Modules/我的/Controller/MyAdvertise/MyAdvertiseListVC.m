@@ -86,7 +86,7 @@
     
     UILabel *textLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor2 font:14.0];
     
-    textLbl.text = self.type == MyAdvertiseTypeDraft ? @"暂无草稿": @"暂无交易";
+    textLbl.text = self.type == MyAdvertiseTypeDraft ? [LangSwitcher switchLang:@"暂无草稿" key:nil]: [LangSwitcher switchLang:@"暂无交易" key:nil];
     
     textLbl.textAlignment = NSTextAlignmentCenter;
     

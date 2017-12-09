@@ -30,6 +30,16 @@
 				<string>wx8cb7c18fa507f630</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>alipays</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>Bcoin</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1.1</string>
@@ -39,6 +49,8 @@
 	<array>
 		<string>wechat</string>
 		<string>weixin</string>
+		<string>alipay</string>
+		<string>alipays</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
