@@ -29,6 +29,9 @@
 
 @interface AppDelegate ()
 
+@property (nonatomic, copy) FBKVOController *chatKVOCtrl;
+
+
 @end
 
 @implementation AppDelegate
@@ -36,7 +39,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     //服务器环境
-    [self configServiceAddress];
+    [AppConfig config].runEnv = RunEnvDev;
     
     //配置微信
     [self configWeChat];
@@ -48,14 +51,10 @@
     [self configRootViewController];
     
     //初始化 im
+    [self configIM];
     [[ChatManager sharedManager] initChat];
+
    
-    
-    //1.思路  登进去首先拉去所有的群组会话列表
-    // [IMAPlatform sharedInstance].conversationMgr
-    //
-//    [[IMAPlatform sharedInstance].contactMgr publicGroups];
-    
     //重新登录
     if([TLUser user].isLogin) {
         
@@ -73,6 +72,36 @@
     
 }
 
+- (void)configIM {
+    
+    //配置
+    [[ChatManager sharedManager] loginIM];
+    
+    // 这里监听主要是为了，tabbar上的消息提示
+    self.chatKVOCtrl = [FBKVOController controllerWithObserver:self];
+    [self.KVOController observe:[IMAPlatform sharedInstance].conversationMgr
+                        keyPath:@"unReadMessageCount"
+                        options:NSKeyValueObservingOptionNew
+                          block:^(id observer, id object, NSDictionary *change) {
+                             
+                              NSInteger count =  [IMAPlatform sharedInstance].conversationMgr.unReadMessageCount;
+                              
+                              int location = 1;
+                              if (count > 0) {
+                                  
+                                  [[self rootTabBarController].tabBar showBadgeOnItemIndex:location];
+
+                              } else {
+                                  
+                                  [[self rootTabBarController].tabBar hideBadgeOnItemIndex:location];
+
+                              }
+                             
+                              
+                          }];
+    
+}
+
 #pragma mark- 退出登录
 - (void)loginOut {
     
@@ -84,13 +113,13 @@
         
     } fail:^(int code, NSString *msg) {
         
-        
     }];
     //
     UITabBarController *tabbarContrl = (UITabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
     tabbarContrl.selectedIndex = 0;
-    
     [tabbarContrl.tabBar hideBadgeOnItemIndex:1];
+//  [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+    
 }
 
 #pragma mark - 用户登录
@@ -99,7 +128,7 @@
     //获取消息总量
     NSInteger unReadMsgCount = [IMAPlatform sharedInstance].conversationMgr.unReadMessageCount;
     
-    UITabBarController *tabBarController = (UITabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
+    UITabBarController *tabBarController = [self rootTabBarController];
 
     if (unReadMsgCount > 0) {
         
@@ -113,13 +142,13 @@
     
 }
 
-#pragma mark - Config
-- (void)configServiceAddress {
+- (UITabBarController *)rootTabBarController {
     
-    //配置环境
-    [AppConfig config].runEnv = RunEnvDev;
+    UITabBarController *tabBarController = (UITabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
+    return tabBarController;
     
 }
+
 
 - (void)configWeChat {
     
@@ -146,8 +175,7 @@
     
 }
 
-- (void)pushToChatViewControllerWith:(IMAUser *)user
-{
+- (void)pushToChatViewControllerWith:(IMAUser *)user {
     
     TLTabBarController *tab = (TLTabBarController *)self.window.rootViewController;
     [tab pushToChatViewControllerWith:user];
