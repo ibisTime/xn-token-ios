@@ -105,7 +105,7 @@
     
     //修改按钮
     
-    NSString *title = [[TLUser user].googleAuthFlag isEqualToString:kGoogleAuthClose] ? @"开启谷歌验证": @"修改谷歌验证";
+    NSString *title = [TLUser user].isGoogleAuthOpen ? @"修改谷歌验证": @"开启谷歌验证";
 
     UIButton *confirmBtn = [UIButton buttonWithTitle:title titleColor:kWhiteColor backgroundColor:kThemeColor titleFont:16.0 cornerRadius:5];
     
@@ -210,7 +210,10 @@
     
     [http postWithSuccess:^(id responseObject) {
         
-        [TLAlert alertWithSucces:@"修改成功"];
+        NSString *title = [TLUser user].isGoogleAuthOpen ? @"修改成功": @"开启成功";
+        [TLAlert alertWithSucces:title];
+        //谷歌验证设置为已开启
+        [TLUser user].googleAuthFlag = @"1";
         
         [self.navigationController popViewControllerAnimated:YES];
         

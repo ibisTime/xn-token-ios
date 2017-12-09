@@ -67,3 +67,8 @@
 @property (nonatomic, copy) NSString *nickname;
 
 @end
+
+
+FOUNDATION_EXTERN NSString *const kAddressCertified;
+FOUNDATION_EXTERN NSString *const kAddressUnCertified;
+

@@ -268,4 +268,12 @@ NSString *const kGoogleAuthClose = @"0";
     [[NSNotificationCenter defaultCenter] postNotificationName:@"MessageDidRefresh" object:[NSString stringWithFormat:@"%ld", unReadMsgCount]];
 }
 
+- (void)setGoogleAuthFlag:(NSString *)googleAuthFlag {
+    
+    _googleAuthFlag = googleAuthFlag;
+    
+    _isGoogleAuthOpen = [googleAuthFlag isEqualToString:kGoogleAuthOpen] ? YES: NO;
+    
+}
+
 @end
