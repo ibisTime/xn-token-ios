@@ -106,13 +106,18 @@
     //身份认证
     SettingModel *idAuth = [SettingModel new];
     
-    idAuth.text = @"身份认证";
+    idAuth.text = @"芝麻认证";
     [idAuth setAction:^{
         
 //        IdAuthVC *idAuthVC = [IdAuthVC new];
 //
 //        [weakSelf.navigationController pushViewController:idAuthVC animated:YES];
         
+        ZMAuthVC *authVC = [ZMAuthVC new];
+        
+        authVC.title = @"芝麻认证";
+
+        [weakSelf.navigationController pushViewController:authVC animated:YES];
         
     }];
     

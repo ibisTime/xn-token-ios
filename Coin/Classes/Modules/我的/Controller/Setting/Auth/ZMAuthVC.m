@@ -73,7 +73,7 @@
     
     confirmBtn.frame = CGRectMake(leftMargin, self.idCard.yy + 40, kScreenWidth - 2*leftMargin, 45);
     
-    confirmBtn.enabled = !isRealNameExist;
+//    confirmBtn.enabled = !isRealNameExist;
 
     [confirmBtn addTarget:self action:@selector(confirmIDCard:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -145,7 +145,7 @@
     http.parameters[@"idNo"] = self.idCard.text;
     http.parameters[@"realName"] = self.realName.text;
     http.parameters[@"userId"] = [TLUser user].userId;
-    http.parameters[@"returnUrl"] = @"jiuzhoubao://certi.back";
+    http.parameters[@"returnUrl"] = @"Bcoin://certi.back";
     
     [http postWithSuccess:^(id responseObject) {
         

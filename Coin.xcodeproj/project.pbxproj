@@ -421,6 +421,10 @@
 		21A821171FDA690700AE59F2 /* GoogleAuthVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A821161FDA690700AE59F2 /* GoogleAuthVC.m */; };
 		21C91D7D1FDBCF9C006EDB16 /* ZMAuthVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21C91D7C1FDBCF9B006EDB16 /* ZMAuthVC.m */; };
 		21C91D801FDBCFB6006EDB16 /* ZMAuthResultVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21C91D7E1FDBCFB6006EDB16 /* ZMAuthResultVC.m */; };
+		21C91D881FDBD604006EDB16 /* TLAlipayManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 21C91D871FDBD604006EDB16 /* TLAlipayManager.m */; };
+		21C91D8C1FDBD64D006EDB16 /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 21C91D8A1FDBD64D006EDB16 /* AlipaySDK.bundle */; };
+		21C91D8D1FDBD64D006EDB16 /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21C91D8B1FDBD64D006EDB16 /* AlipaySDK.framework */; };
+		21C91D981FDBD7E4006EDB16 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21C91D971FDBD7DE006EDB16 /* CoreMotion.framework */; };
 		21D216861FB9C5750040795E /* QRCodeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21D216851FB9C5750040795E /* QRCodeVC.m */; };
 		21D2168E1FBA90CE0040795E /* BannerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 21D2168D1FBA90CE0040795E /* BannerModel.m */; };
 		21D216921FBA96060040795E /* NoticeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 21D216911FBA96060040795E /* NoticeModel.m */; };
@@ -1317,6 +1321,16 @@
 		21C91D7C1FDBCF9B006EDB16 /* ZMAuthVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZMAuthVC.m; sourceTree = "<group>"; };
 		21C91D7E1FDBCFB6006EDB16 /* ZMAuthResultVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZMAuthResultVC.m; sourceTree = "<group>"; };
 		21C91D7F1FDBCFB6006EDB16 /* ZMAuthResultVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZMAuthResultVC.h; sourceTree = "<group>"; };
+		21C91D861FDBD604006EDB16 /* TLAlipayManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLAlipayManager.h; sourceTree = "<group>"; };
+		21C91D871FDBD604006EDB16 /* TLAlipayManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLAlipayManager.m; sourceTree = "<group>"; };
+		21C91D8A1FDBD64D006EDB16 /* AlipaySDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AlipaySDK.bundle; sourceTree = "<group>"; };
+		21C91D8B1FDBD64D006EDB16 /* AlipaySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlipaySDK.framework; sourceTree = "<group>"; };
+		21C91D8E1FDBD74A006EDB16 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		21C91D901FDBD763006EDB16 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		21C91D921FDBD775006EDB16 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		21C91D941FDBD78E006EDB16 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		21C91D961FDBD7A3006EDB16 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		21C91D971FDBD7DE006EDB16 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		21D216841FB9C5750040795E /* QRCodeVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QRCodeVC.h; sourceTree = "<group>"; };
 		21D216851FB9C5750040795E /* QRCodeVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QRCodeVC.m; sourceTree = "<group>"; };
 		21D2168C1FBA90CE0040795E /* BannerModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BannerModel.h; sourceTree = "<group>"; };
@@ -1380,6 +1394,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				21C91D981FDBD7E4006EDB16 /* CoreMotion.framework in Frameworks */,
 				21205D061FCD6394003C6C7C /* libWeChatSDK.a in Frameworks */,
 				211C05081FC6714500E51FCF /* libz.tbd in Frameworks */,
 				211C050A1FC6715000E51FCF /* libc++.tbd in Frameworks */,
@@ -1391,6 +1406,7 @@
 				211C01431FC6600300E51FCF /* TLSSDK.framework in Frameworks */,
 				06A1FB6431230E34B134069E /* libPods-Coin.a in Frameworks */,
 				211C01421FC6600300E51FCF /* ImSDK.framework in Frameworks */,
+				21C91D8D1FDBD64D006EDB16 /* AlipaySDK.framework in Frameworks */,
 				211C01471FC6600300E51FCF /* IMMessageExt.framework in Frameworks */,
 				211C01461FC6600300E51FCF /* IMGroupExt.framework in Frameworks */,
 				211C01451FC6600300E51FCF /* IMFriendshipExt.framework in Frameworks */,
@@ -1641,6 +1657,7 @@
 		211C013A1FC6600300E51FCF /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				21C91D891FDBD64D006EDB16 /* Alipay */,
 				21205CFF1FCD6383003C6C7C /* WeChat */,
 				211C013B1FC6600300E51FCF /* 腾讯云 */,
 			);
@@ -3265,6 +3282,8 @@
 			children = (
 				21205D0B1FCD6512003C6C7C /* TLWXManager.h */,
 				21205D0A1FCD6512003C6C7C /* TLWXManager.m */,
+				21C91D861FDBD604006EDB16 /* TLAlipayManager.h */,
+				21C91D871FDBD604006EDB16 /* TLAlipayManager.m */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -3495,6 +3514,15 @@
 				2129A4F71FDACE86003C99C0 /* CloseGoogleAuthVC.m */,
 			);
 			path = Google;
+			sourceTree = "<group>";
+		};
+		21C91D891FDBD64D006EDB16 /* Alipay */ = {
+			isa = PBXGroup;
+			children = (
+				21C91D8A1FDBD64D006EDB16 /* AlipaySDK.bundle */,
+				21C91D8B1FDBD64D006EDB16 /* AlipaySDK.framework */,
+			);
+			path = Alipay;
 			sourceTree = "<group>";
 		};
 		21D216871FBA8F1F0040795E /* 行情 */ = {
@@ -3844,6 +3872,12 @@
 		C678617F8B7C3B3F2F7DE44F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				21C91D971FDBD7DE006EDB16 /* CoreMotion.framework */,
+				21C91D961FDBD7A3006EDB16 /* Accounts.framework */,
+				21C91D941FDBD78E006EDB16 /* MediaPlayer.framework */,
+				21C91D921FDBD775006EDB16 /* CoreMedia.framework */,
+				21C91D901FDBD763006EDB16 /* AVFoundation.framework */,
+				21C91D8E1FDBD74A006EDB16 /* AddressBook.framework */,
 				211C050F1FC6717300E51FCF /* libstdc++.6.0.9.tbd */,
 				211C05101FC6717300E51FCF /* libstdc++.6.tbd */,
 				211C050D1FC6716500E51FCF /* libresolv.tbd */,
@@ -3975,6 +4009,7 @@
 				211C04B91FC6604900E51FCF /* 0.gif in Resources */,
 				211C04C31FC6604900E51FCF /* 12.gif in Resources */,
 				211C04981FC6604800E51FCF /* youtubeauty.bundle in Resources */,
+				21C91D8C1FDBD64D006EDB16 /* AlipaySDK.bundle in Resources */,
 				211C04971FC6604800E51FCF /* MicroVideo.xcassets in Resources */,
 				211C04A11FC6604900E51FCF /* ChatSystemFaceConfig.plist in Resources */,
 				211C04AD1FC6604900E51FCF /* 24.gif in Resources */,
@@ -4183,6 +4218,7 @@
 				211C041B1FC6604800E51FCF /* UIColor+MLPFlatColors.m in Sources */,
 				211DE6C21FB58B4C002FCF3D /* Foundation+Log.m in Sources */,
 				211C040F1FC6604800E51FCF /* KeyChainHelper.m in Sources */,
+				21C91D881FDBD604006EDB16 /* TLAlipayManager.m in Sources */,
 				211CF97E1FC3C0DC00E51FCF /* PublishSellVC.m in Sources */,
 				211C04401FC6604800E51FCF /* RefreshView.m in Sources */,
 				211C04FE1FC6604900E51FCF /* NoticeVC.m in Sources */,
@@ -4563,6 +4599,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Coin/Extension/腾讯云",
 					"$(PROJECT_DIR)/Coin/Extension/芝麻认证",
+					"$(PROJECT_DIR)/Coin/Extension/Alipay",
 				);
 				GCC_PREFIX_HEADER = Coin/Classes/Other/CoinPrefixHeader.pch;
 				INFOPLIST_FILE = Coin/Info.plist;
@@ -4594,6 +4631,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Coin/Extension/腾讯云",
 					"$(PROJECT_DIR)/Coin/Extension/芝麻认证",
+					"$(PROJECT_DIR)/Coin/Extension/Alipay",
 				);
 				GCC_PREFIX_HEADER = Coin/Classes/Other/CoinPrefixHeader.pch;
 				INFOPLIST_FILE = Coin/Info.plist;

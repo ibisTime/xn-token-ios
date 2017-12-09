@@ -12,6 +12,7 @@
 
 #import "TLTabBarController.h"
 #import "TLUser.h"
+#import "TLNetworking.h"
 
 #import "UITabBar+Badge.h"
 
@@ -19,6 +20,7 @@
 #import "IMALoginParam.h"
 #import "WXApi.h"
 #import "TLWXManager.h"
+#import "TLAlipayManager.h"
 #import "ChatManager.h"
 
 #import <IQKeyboardManager.h>
@@ -188,19 +190,77 @@
 }
 
 
-#pragma mark - 微信回调
+#pragma mark - 微信和芝麻认证回调
 // iOS9 NS_AVAILABLE_IOS
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
     
-    return [WXApi handleOpenURL:url delegate:[TLWXManager manager]];
-
+    if ([url.host isEqualToString:@"certi.back"]) {
+        
+        //查询是否认证成功
+        TLNetworking *http = [TLNetworking new];
+        http.showView = [UIApplication sharedApplication].keyWindow;
+        http.code = @"623046";
+        http.parameters[@"bizNo"] = [TLUser user].tempBizNo;
+        
+        [http postWithSuccess:^(id responseObject) {
+            
+            NSString *str = [NSString stringWithFormat:@"%@", responseObject[@"data"][@"isSuccess"]];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"RealNameAuthResult" object:str];
+            
+        } failure:^(NSError *error) {
+            
+            
+        }];
+        
+        return YES;
+    }
+    
+    if ([url.host isEqualToString:@"safepay"]) {
+        
+        [TLAlipayManager hadleCallBackWithUrl:url];
+        return YES;
+        
+    } else {
+        
+        return [WXApi handleOpenURL:url delegate:[TLWXManager manager]];
+    }
 }
 
 // iOS9 NS_DEPRECATED_IOS
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
     
-    return [WXApi handleOpenURL:url delegate:[TLWXManager manager]];
+    if ([url.host isEqualToString:@"certi.back"]) {
+        
+        //查询是否认证成功
+        TLNetworking *http = [TLNetworking new];
+        http.showView = [UIApplication sharedApplication].keyWindow;
+        http.code = @"623046";
+        http.parameters[@"bizNo"] = [TLUser user].tempBizNo;
+        
+        [http postWithSuccess:^(id responseObject) {
+            
+            NSString *str = [NSString stringWithFormat:@"%@", responseObject[@"data"][@"isSuccess"]];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"RealNameAuthResult" object:str];
+            
+        } failure:^(NSError *error) {
+            
+            
+        }];
+        
+        return YES;
+    }
     
+    if ([url.host isEqualToString:@"safepay"]) {
+        
+        [TLAlipayManager hadleCallBackWithUrl:url];
+        return YES;
+        
+    } else {
+        
+        return [WXApi handleOpenURL:url delegate:[TLWXManager manager]];
+    }
 }
 
 @end
