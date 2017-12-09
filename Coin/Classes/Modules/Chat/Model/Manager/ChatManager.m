@@ -33,7 +33,10 @@
 
 - (void)initChat {
     
-     [IMAPlatform configWith:[[IMAPlatformConfig alloc] init]];
+    IMAPlatformConfig *config = [[IMAPlatformConfig alloc] init];
+    //不打印日志
+    [config chageEnableConsoleTo:NO];
+    [IMAPlatform configWith:config];
     
 }
 

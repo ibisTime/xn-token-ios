@@ -186,24 +186,24 @@
         
     }];
     
-    self.trustBtn = [UIButton buttonWithTitle:@"+ 信任" titleColor:kThemeColor backgroundColor:kClearColor titleFont:13.0 cornerRadius:3];
-    
-    self.trustBtn.layer.borderWidth = 0.5;
-    self.trustBtn.layer.borderColor = kThemeColor.CGColor;
-    
-    [self.trustBtn addTarget:self action:@selector(trust:) forControlEvents:UIControlEventTouchUpInside];
-    
-    [self.topView addSubview:self.trustBtn];
-    [self.trustBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.right.equalTo(self.priceLbl.mas_right);
-        make.top.equalTo(self.priceLbl.mas_bottom).offset(10);
-        make.width.equalTo(@70);
-        make.height.equalTo(@24);
-        
-    }];
-    
-    self.trustBtn.hidden = YES;
+//    self.trustBtn = [UIButton buttonWithTitle:@"+ 信任" titleColor:kThemeColor backgroundColor:kClearColor titleFont:13.0 cornerRadius:3];
+//    
+//    self.trustBtn.layer.borderWidth = 0.5;
+//    self.trustBtn.layer.borderColor = kThemeColor.CGColor;
+//    
+//    [self.trustBtn addTarget:self action:@selector(trust:) forControlEvents:UIControlEventTouchUpInside];
+//    
+//    [self.topView addSubview:self.trustBtn];
+//    [self.trustBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+//        
+//        make.right.equalTo(self.priceLbl.mas_right);
+//        make.top.equalTo(self.priceLbl.mas_bottom).offset(10);
+//        make.width.equalTo(@70);
+//        make.height.equalTo(@24);
+//        
+//    }];
+//    
+//    self.trustBtn.hidden = YES;
     
     NSArray *textArr = @[@"交易次数", @"信任次数", @"好评率", @"历史交易"];
     
@@ -418,7 +418,6 @@
     
     //交易提醒
     UIImageView *tradeIV = [[UIImageView alloc] init];
-    
     tradeIV.image = kImage(@"交易提醒");
     
     [self.tradePromptView addSubview:tradeIV];
@@ -564,13 +563,12 @@
     self.payTypeLbl.layer.borderWidth = 0.5;
     
     //限额
-    self.limitAmountLbl.text = [NSString stringWithFormat:@"限额: %@-%@ CNY",[advertise.minTrade convertToSimpleRealMoney], [advertise.maxTrade convertToSimpleRealMoney]];
+    self.limitAmountLbl.text = [NSString stringWithFormat:@"限额: %@-%@ ",[advertise.minTrade convertToSimpleRealMoney], [advertise.maxTrade convertToSimpleRealMoney]];
     
-    self.cnyTF.placeholder = [NSString stringWithFormat:@"%@-%@ CNY",[advertise.minTrade convertToSimpleRealMoney], [advertise.maxTrade convertToSimpleRealMoney]];
+    self.cnyTF.placeholder = [NSString stringWithFormat:@"%@-%@ ",[advertise.minTrade convertToSimpleRealMoney], [advertise.maxTrade convertToSimpleRealMoney]];
 
     //价格
-    
-    self.priceLbl.text = [NSString stringWithFormat:@"%@ CNY", [advertise.truePrice convertToSimpleRealMoney]];
+    self.priceLbl.text = [NSString stringWithFormat:@"%@ %@", [advertise.truePrice convertToSimpleRealMoney],self.advertise.tradeCurrency];
     
     NSArray *textArr = @[@"交易次数", @"信任次数", @"好评率"];
     
@@ -589,6 +587,8 @@
     
     //留言
     self.leaveMsgTV.text = advertise.leaveMessage;
+    
+    //
 }
 
 - (void)setLeftAmount:(NSString *)leftAmount {
@@ -605,21 +605,6 @@
     self.advertise.truePrice = truePrice;
 }
 
-- (void)setIsTrust:(BOOL)isTrust {
-    
-    _isTrust = isTrust;
-    
-    if (isTrust) {
-        
-        [self.trustBtn setTitle:@"取消信任" forState:UIControlStateNormal];
-        
-    } else {
-        
-        [self.trustBtn setTitle:@"+ 信任" forState:UIControlStateNormal];
-        
-    }
-    
-}
 
 - (void)setUserId:(NSString *)userId {
     
@@ -631,9 +616,7 @@
         
         make.height.equalTo(@(scrollheight));
     }];
-    
-//    self.trustBtn.hidden = [self.advertise.userId isEqualToString:userId] ? YES: NO;
-    
+        
     self.bottomView.hidden = [self.advertise.userId isEqualToString:userId] ? YES: NO;
     
 }
@@ -713,15 +696,15 @@
     }
 }
 
-- (void)trust:(UIButton *)sender {
-    
-    TradeBuyType type = self.isTrust == NO ? TradeBuyTypeTrust: TradeBuyTypeCancelTrust;
-    
-    if (_tradeBlock) {
-        
-        _tradeBlock(type);
-    }
-}
+//- (void)trust:(UIButton *)sender {
+//
+////    TradeBuyType type = self.isTrust == NO ? TradeBuyTypeTrust: TradeBuyTypeCancelTrust;
+//
+//    if (_tradeBlock) {
+//
+//        _tradeBlock(type);
+//    }
+//}
 
 - (void)homePage {
     

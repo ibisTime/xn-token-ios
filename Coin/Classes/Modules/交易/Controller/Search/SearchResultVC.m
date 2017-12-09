@@ -211,21 +211,15 @@
     if ([self.advertiseType isEqualToString:kTradeTypeBuy]) {
         
         TradeSellVC *sellVC = [TradeSellVC new];
-        
-        sellVC.advertise = self.advertises[indexPath.row];
-        
+        sellVC.adsCode = self.advertises[indexPath.row].code;
         sellVC.type = TradeSellPositionTypeTrade;
-        
         [self.navigationController pushViewController:sellVC animated:YES];
         
     } else if ([self.advertiseType isEqualToString:kTradeTypeSell]) {
         
         TradeBuyVC *buyVC = [TradeBuyVC new];
-        
-        buyVC.advertise = self.advertises[indexPath.row];
-        
+        buyVC.adsCode = self.advertises[indexPath.row].code;
         buyVC.type = TradeBuyPositionTypeTrade;
-        
         [self.navigationController pushViewController:buyVC animated:YES];
         
     }

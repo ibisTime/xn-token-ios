@@ -16,9 +16,11 @@ typedef NS_ENUM(NSInteger, TradeBuyPositionType) {
     TradeBuyPositionTypeMyPublish,  //我发布的
 };
 
+// 我要购买， 广告为出售广告
 @interface TradeBuyVC : TLBaseVC
 
-@property (nonatomic, strong) AdvertiseModel *advertise;
+
+@property (nonatomic, copy) NSString *adsCode;
 
 @property (nonatomic, assign) TradeBuyPositionType type;
 

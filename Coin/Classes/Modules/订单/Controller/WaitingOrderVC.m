@@ -124,19 +124,15 @@
     if (self.order.isBuy) {
         
         TradeBuyVC *buyVC = [TradeBuyVC new];
-        
-        buyVC.advertise = self.advertise;
-        
+        buyVC.adsCode = self.advertise.code;
         buyVC.type = TradeBuyPositionTypeTrade;
-        
         [self.navigationController pushViewController:buyVC animated:YES];
         
     } else {
         
         TradeSellVC *sellVC = [TradeSellVC new];
         
-        sellVC.advertise = self.advertise;
-        
+        sellVC.adsCode = self.advertise.code;
         sellVC.type = TradeBuyPositionTypeTrade;
 
         [self.navigationController pushViewController:sellVC animated:YES];

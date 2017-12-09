@@ -134,6 +134,8 @@ static Class kHostClass = Nil;
     config.connListener = self;
     [manager initSdk:config];
     
+    
+    //              **************************                        //
     TIMUserConfig *userConfig = [[TIMUserConfig alloc] init];
 //    userConfig.disableStorage = YES;//禁用本地存储（加载消息扩展包有效）
 //    userConfig.disableAutoReport = YES;//禁止自动上报（加载消息扩展包有效）

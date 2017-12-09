@@ -210,7 +210,7 @@
             }
         
             TradeBuyVC *buyVC = [TradeBuyVC new];
-            buyVC.advertise = advertiseModel;
+            buyVC.adsCode = advertiseModel.code;
             buyVC.type = TradeBuyPositionTypeMyPublish;
             [self.navigationController pushViewController:buyVC animated:YES];
             
@@ -227,7 +227,7 @@
             }
 
             TradeSellVC *sellVC = [TradeSellVC new];
-            sellVC.advertise = advertiseModel;
+            sellVC.adsCode = advertiseModel.code;
             sellVC.type = TradeBuyPositionTypeMyPublish;
             [self.navigationController pushViewController:sellVC animated:YES];
         }

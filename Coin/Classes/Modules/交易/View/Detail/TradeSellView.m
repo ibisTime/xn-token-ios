@@ -184,24 +184,24 @@
         
     }];
     
-    self.trustBtn = [UIButton buttonWithTitle:@"+ 信任" titleColor:kThemeColor backgroundColor:kClearColor titleFont:13.0 cornerRadius:3];
-    
-    self.trustBtn.layer.borderWidth = 0.5;
-    self.trustBtn.layer.borderColor = kThemeColor.CGColor;
-    
-    [self.trustBtn addTarget:self action:@selector(trust:) forControlEvents:UIControlEventTouchUpInside];
-    
-    [self.topView addSubview:self.trustBtn];
-    [self.trustBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.right.equalTo(self.priceLbl.mas_right);
-        make.top.equalTo(self.priceLbl.mas_bottom).offset(10);
-        make.width.equalTo(@70);
-        make.height.equalTo(@24);
-        
-    }];
-    
-    self.trustBtn.hidden = YES;
+//    self.trustBtn = [UIButton buttonWithTitle:@"+ 信任" titleColor:kThemeColor backgroundColor:kClearColor titleFont:13.0 cornerRadius:3];
+//    
+//    self.trustBtn.layer.borderWidth = 0.5;
+//    self.trustBtn.layer.borderColor = kThemeColor.CGColor;
+//    
+//    [self.trustBtn addTarget:self action:@selector(trust:) forControlEvents:UIControlEventTouchUpInside];
+//    
+//    [self.topView addSubview:self.trustBtn];
+//    [self.trustBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+//        
+//        make.right.equalTo(self.priceLbl.mas_right);
+//        make.top.equalTo(self.priceLbl.mas_bottom).offset(10);
+//        make.width.equalTo(@70);
+//        make.height.equalTo(@24);
+//        
+//    }];
+//    
+//    self.trustBtn.hidden = YES;
     
     NSArray *textArr = @[@"交易次数", @"信任次数", @"好评率", @"历史交易"];
     
@@ -603,25 +603,25 @@
     self.advertise.truePrice = truePrice;
 }
 
-- (void)setIsTrust:(BOOL)isTrust {
-    
-    _isTrust = isTrust;
-    
-    if (isTrust) {
-        
-        [self.trustBtn setTitle:@"取消信任" forState:UIControlStateNormal];
-        
-        [self.trustBtn setTitle:@"+ 信任" forState:UIControlStateSelected];
-        
-    } else {
-        
-        [self.trustBtn setTitle:@"+ 信任" forState:UIControlStateNormal];
-        
-        [self.trustBtn setTitle:@"取消信任" forState:UIControlStateSelected];
-        
-    }
-    
-}
+//- (void)setIsTrust:(BOOL)isTrust {
+//
+//    _isTrust = isTrust;
+//
+//    if (isTrust) {
+//
+//        [self.trustBtn setTitle:@"取消信任" forState:UIControlStateNormal];
+//
+//        [self.trustBtn setTitle:@"+ 信任" forState:UIControlStateSelected];
+//
+//    } else {
+//
+//        [self.trustBtn setTitle:@"+ 信任" forState:UIControlStateNormal];
+//
+//        [self.trustBtn setTitle:@"取消信任" forState:UIControlStateSelected];
+//
+//    }
+//
+//}
 
 - (void)setUserId:(NSString *)userId {
     
@@ -715,15 +715,15 @@
     }
 }
 
-- (void)trust:(UIButton *)sender {
-    
-    TradeSellType type = self.isTrust == NO ? TradeSellTypeTrust: TradeSellTypeCancelTrust;
-    
-    if (_tradeBlock) {
-        
-        _tradeBlock(type);
-    }
-}
+//- (void)trust:(UIButton *)sender {
+//    
+////    TradeSellType type = self.isTrust == NO ? TradeSellTypeTrust: TradeSellTypeCancelTrust;
+//    
+//    if (_tradeBlock) {
+//        
+//        _tradeBlock(type);
+//    }
+//}
 
 - (void)homePage {
     

@@ -136,6 +136,11 @@ FOUNDATION_EXTERN NSString *const kTradeTypeSell;
 //好评率
 @property (nonatomic, copy) NSString *goodCommentRate;
 
+@property (nonatomic, copy) NSString *totalTradeCount;
+
+
+- (NSString *)convertTotalTradeCount;
+
 @end
 
 @interface Displaytime : NSObject

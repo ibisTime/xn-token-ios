@@ -53,7 +53,7 @@
     }];
     
     //搜昵称
-    UIButton *searchBtn = [UIButton buttonWithTitle:@"搜昵称" titleColor:kWhiteColor backgroundColor:kThemeColor titleFont:16.0 cornerRadius:5];
+    UIButton *searchBtn = [UIButton buttonWithTitle:@"搜" titleColor:kWhiteColor backgroundColor:kThemeColor titleFont:16.0 cornerRadius:5];
     
     [searchBtn addTarget:self action:@selector(searchUser) forControlEvents:UIControlEventTouchUpInside];
     

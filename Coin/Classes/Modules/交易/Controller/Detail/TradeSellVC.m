@@ -36,8 +36,8 @@
 //定时器
 @property (nonatomic, strong) NSTimer *timer;
 //行情列表
-@property (nonatomic, strong) NSArray <QuotationModel *>*quotations;
-
+//@property (nonatomic, strong) NSArray <QuotationModel *>*quotations;
+@property (nonatomic, strong) AdvertiseModel *advertise;
 @end
 
 @implementation TradeSellVC
@@ -47,35 +47,50 @@
     // Do any additional setup after loading the view.
     
     self.title = @"出售";
-    [self initTradeView];
     
-    //查询用户的交易量
-    [self queryTradeNum];
-    
-    if ([TLUser user].userId) {
-        //获取余额
-        [self getLeftAmount];
-        //查询信任关系
-        [self queryAdvertiseDetail];
-
-    }
-    
-    //是我的广告，并且广告在交易区
-    if ([self.advertise.userId isEqualToString:[TLUser user].userId]  && self.type == TradeSellPositionTypeMyPublish) {
+    // ----------先获取广告详情
+    CoinWeakSelf;
+    TLNetworking *http = [TLNetworking new];
+    http.code = @"625226";
+    http.parameters[@"adsCode"] = self.adsCode;
+    if ([TLUser user].isLogin) {
         
-        //下架
-        [self addOffItem];
+        http.parameters[@"userId"] = [TLUser user].userId;
     }
+    [http postWithSuccess:^(id responseObject) {
+        
+        self.advertise = [AdvertiseModel tl_objectWithDictionary:responseObject[@"data"]];
+        
+        //
+        [self initTradeView];
+        
+        weakSelf.tradeView.advertise = self.advertise;
+        weakSelf.tradeView.truePrice = self.advertise.truePrice;
+        //广告剩余可用余额
+        weakSelf.tradeView.leftAmount = self.advertise.leftCountString;
+        NSString *text = @"历史交易";
+        NSString *history = [self.advertise.userStatistics convertTotalTradeCount];
+        //历史交易
+        UILabel *lbl = self.tradeView.lblArr[3];
+        [lbl labelWithString:[NSString stringWithFormat:@"%@\n%@", history, text] title:text font:Font(12.0) color:kTextColor2];
+        
+     
+        
+        //获取交易提醒
+        [self requestTradeRemind];
+        //添加通知
+        [self addNotification];
+        
+        //开启定时器,实时刷新
+        //        self.timer = [NSTimer timerWithTimeInterval:10 target:self selector:@selector(queryAdvertiseDetail) userInfo:nil repeats:YES];
+        //
+        //        [[NSRunLoop mainRunLoop] addTimer:self.timer forMode:NSDefaultRunLoopMode];
+        
+        
+    } failure:^(NSError *error) {
+        
+    }];
     
-    //获取交易提醒
-    [self requestTradeRemind];
-    //添加通知
-    [self addNotification];
-    
-    //开启定时器,实时刷新
-    self.timer = [NSTimer timerWithTimeInterval:30 target:self selector:@selector(queryAdvertiseDetail) userInfo:nil repeats:YES];
-    
-    [[NSRunLoop mainRunLoop] addTimer:self.timer forMode:NSDefaultRunLoopMode];
 }
 
 - (void)viewDidLayoutSubviews {
@@ -162,49 +177,49 @@
     CoinWeakSelf;
     
     switch (type) {
-        case TradeSellTypeTrust:
-        {
-            if (![TLUser user].isLogin) {
-                
-                TLUserLoginVC *loginVC = [[TLUserLoginVC alloc] init];
-                
-                TLNavigationController *nav = [[TLNavigationController alloc] initWithRootViewController:loginVC];
-                
-                loginVC.loginSuccess = ^(){
-                    
-                    [weakSelf tradeEventsWithType:TradeSellTypeTrust];
-                };
-                
-                [self presentViewController:nav animated:YES completion:nil];
-                
-                return;
-            }
+//        case TradeSellTypeTrust:
+//        {
+//            if (![TLUser user].isLogin) {
+//
+//                TLUserLoginVC *loginVC = [[TLUserLoginVC alloc] init];
+//
+//                TLNavigationController *nav = [[TLNavigationController alloc] initWithRootViewController:loginVC];
+//
+//                loginVC.loginSuccess = ^(){
+//
+//                    [weakSelf tradeEventsWithType:TradeSellTypeTrust];
+//                };
+//
+//                [self presentViewController:nav animated:YES completion:nil];
+//
+//                return;
+//            }
+//
+////            [self trustUser];
+//
+//        }break;
             
-            [self trustUser];
-            
-        }break;
-            
-        case TradeSellTypeCancelTrust:
-        {
-            if (![TLUser user].isLogin) {
-                
-                TLUserLoginVC *loginVC = [[TLUserLoginVC alloc] init];
-                
-                TLNavigationController *nav = [[TLNavigationController alloc] initWithRootViewController:loginVC];
-                
-                loginVC.loginSuccess = ^(){
-                    
-                    [weakSelf tradeEventsWithType:TradeSellTypeTrust];
-                };
-                
-                [self presentViewController:nav animated:YES completion:nil];
-                
-                return;
-            }
-            
-            [self cancelTrustUser];
-            
-        }break;
+//        case TradeSellTypeCancelTrust:
+//        {
+//            if (![TLUser user].isLogin) {
+//
+//                TLUserLoginVC *loginVC = [[TLUserLoginVC alloc] init];
+//
+//                TLNavigationController *nav = [[TLNavigationController alloc] initWithRootViewController:loginVC];
+//
+//                loginVC.loginSuccess = ^(){
+//
+//                    [weakSelf tradeEventsWithType:TradeSellTypeTrust];
+//                };
+//
+//                [self presentViewController:nav animated:YES completion:nil];
+//
+//                return;
+//            }
+//
+//            [self cancelTrustUser];
+//
+//        }break;
             
         case TradeSellTypeLink:
         {
@@ -286,55 +301,7 @@
     }
 }
 
-- (void)trustUser {
-    
-    TLNetworking *http = [TLNetworking new];
-    
-    http.code = @"805110";
-    http.showView = self.view;
-    http.parameters[@"toUser"] = self.advertise.userId;
-    http.parameters[@"userId"] = [TLUser user].userId;
-    
-    [http postWithSuccess:^(id responseObject) {
-        
-        [TLAlert alertWithSucces:@"信任成功"];
-        
-        [self queryAdvertiseDetail];
-        
-        [self.tradeView.trustBtn setTitle:@"取消信任" forState:UIControlStateHighlighted];
-        
-        [[NSNotificationCenter defaultCenter] postNotificationName:kTrustNotification object:nil];
 
-    } failure:^(NSError *error) {
-        
-        
-    }];
-}
-
-- (void)cancelTrustUser {
-    
-    TLNetworking *http = [TLNetworking new];
-    
-    http.code = @"805111";
-    http.showView = self.view;
-    http.parameters[@"toUser"] = self.advertise.userId;
-    http.parameters[@"userId"] = [TLUser user].userId;
-    
-    [http postWithSuccess:^(id responseObject) {
-        
-        [TLAlert alertWithSucces:@"取消成功"];
-        
-        [self queryAdvertiseDetail];
-
-        [self.tradeView.trustBtn setTitle:@"+ 信任" forState:UIControlStateHighlighted];
-        
-        [[NSNotificationCenter defaultCenter] postNotificationName:kTrustNotification object:nil];
-
-    } failure:^(NSError *error) {
-        
-        
-    }];
-}
 
 - (void)confirmOrder {
     
@@ -457,53 +424,6 @@
     
 }
 
-- (void)queryTradeNum {
-    
-    TLNetworking *http = [TLNetworking new];
-    
-    http.code = @"625255";
-    http.parameters[@"userId"] = self.advertise.userId;
-    
-    [http postWithSuccess:^(id responseObject) {
-        
-        NSString *text = @"历史交易";
-        
-        NSString *numStr = [NSString stringWithFormat:@"%@", responseObject[@"data"][@"totalTradeCount"]];
-        
-        NSString *realNum = [numStr convertToSimpleRealCoin];
-        
-        CGFloat historyNum = [[realNum convertToRealMoneyWithNum:8] doubleValue];
-        
-        //判断个数
-        NSString *history = @"";
-        
-        if (historyNum == 0) {
-            
-            history = @"0 ETH";
-            
-        } else if (historyNum > 0 && historyNum <= 0.5) {
-            
-            history = @"0-0.5 ETH";
-            
-        } else if (historyNum > 0.5 && historyNum <= 1) {
-            
-            history = [NSString stringWithFormat:@"0.5-1 ETH"];
-
-        } else if (historyNum > 1) {
-            
-            history = [NSString stringWithFormat:@"%@+ ETH", [realNum convertToRealMoneyWithNum:0]];
-        }
-        
-        //历史交易
-        UILabel *lbl = self.tradeView.lblArr[3];
-        
-        [lbl labelWithString:[NSString stringWithFormat:@"%@\n%@", history, text] title:text font:Font(12.0) color:kTextColor2];
-        
-        
-    } failure:^(NSError *error) {
-        
-    }];
-}
 
 - (void)queryAdvertiseDetail {
     
@@ -526,7 +446,7 @@
         
         weakSelf.tradeView.truePrice = advertise.truePrice;
         
-        weakSelf.tradeView.isTrust = [advertise.isTrust integerValue] == 0 ? NO: YES;
+//        weakSelf.tradeView.isTrust = [advertise.isTrust integerValue] == 0 ? NO: YES;
         
         weakSelf.tradeView.advertise = advertise;
         //广告剩余可用余额

@@ -526,7 +526,6 @@
 }
 
 #pragma mark - RefreshDelegate
-
 - (void)refreshTableView:(TLTableView *)refreshTableview didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     AdvertiseModel *advertiseModel = self.advertises[indexPath.row];
@@ -544,7 +543,7 @@
         }
         
         TradeBuyVC *buyVC = [TradeBuyVC new];
-        buyVC.advertise = advertiseModel;
+        buyVC.adsCode = advertiseModel.code;
         buyVC.type = TradeBuyPositionTypeTrade;
         [self.navigationController pushViewController:buyVC animated:YES];
         
@@ -560,7 +559,7 @@
         }
         
         TradeSellVC *sellVC = [TradeSellVC new];
-        sellVC.advertise = advertiseModel;
+        sellVC.adsCode = advertiseModel.code;
         sellVC.type = TradeBuyPositionTypeTrade;
         [self.navigationController pushViewController:sellVC animated:YES];
         

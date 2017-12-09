@@ -32,8 +32,8 @@ typedef void(^TradeBuyBlock)(TradeBuyType tradeType);
 @property (nonatomic, strong) TLTextField *cnyTF;
 //ETH
 @property (nonatomic, strong) TLTextField *ethTF;
-//信任
-@property (nonatomic, strong) UIButton *trustBtn;
+
+
 //交易次数、信任次数、好评率和历史交易
 @property (nonatomic, strong) NSMutableArray <UILabel *>*lblArr;
 
@@ -44,14 +44,16 @@ typedef void(^TradeBuyBlock)(TradeBuyType tradeType);
 @property (nonatomic, copy) NSString *leftAmount;
 //真实行情价格
 @property (nonatomic, strong) NSNumber *truePrice;
-//是否信任它
-@property (nonatomic, assign) BOOL isTrust;
+
 //是否本人
 @property (nonatomic, copy) NSString *userId;
+
 //交易总额
 @property (nonatomic, copy) NSString *tradeAmount;
+
 //交易数量
 @property (nonatomic, copy) NSString *tradeNum;
+
 //交易提醒
 @property (nonatomic, copy) NSString *tradeRemind;
 //

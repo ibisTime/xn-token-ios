@@ -12,6 +12,7 @@
 
 + (NSString *)switchLang:(NSString *)content key:(NSString *)key {
     
+//    [NSLocale currentLocale]
     return content;
     
 }
