@@ -421,8 +421,6 @@
 		21A821171FDA690700AE59F2 /* GoogleAuthVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A821161FDA690700AE59F2 /* GoogleAuthVC.m */; };
 		21C91D7D1FDBCF9C006EDB16 /* ZMAuthVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21C91D7C1FDBCF9B006EDB16 /* ZMAuthVC.m */; };
 		21C91D801FDBCFB6006EDB16 /* ZMAuthResultVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21C91D7E1FDBCFB6006EDB16 /* ZMAuthResultVC.m */; };
-		21C91D841FDBD1BB006EDB16 /* ZMCert.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21C91D821FDBD1BB006EDB16 /* ZMCert.framework */; };
-		21C91D851FDBD1BB006EDB16 /* ZMCert.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 21C91D831FDBD1BB006EDB16 /* ZMCert.bundle */; };
 		21D216861FB9C5750040795E /* QRCodeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21D216851FB9C5750040795E /* QRCodeVC.m */; };
 		21D2168E1FBA90CE0040795E /* BannerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 21D2168D1FBA90CE0040795E /* BannerModel.m */; };
 		21D216921FBA96060040795E /* NoticeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 21D216911FBA96060040795E /* NoticeModel.m */; };
@@ -1319,8 +1317,6 @@
 		21C91D7C1FDBCF9B006EDB16 /* ZMAuthVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZMAuthVC.m; sourceTree = "<group>"; };
 		21C91D7E1FDBCFB6006EDB16 /* ZMAuthResultVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZMAuthResultVC.m; sourceTree = "<group>"; };
 		21C91D7F1FDBCFB6006EDB16 /* ZMAuthResultVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZMAuthResultVC.h; sourceTree = "<group>"; };
-		21C91D821FDBD1BB006EDB16 /* ZMCert.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ZMCert.framework; sourceTree = "<group>"; };
-		21C91D831FDBD1BB006EDB16 /* ZMCert.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ZMCert.bundle; sourceTree = "<group>"; };
 		21D216841FB9C5750040795E /* QRCodeVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QRCodeVC.h; sourceTree = "<group>"; };
 		21D216851FB9C5750040795E /* QRCodeVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QRCodeVC.m; sourceTree = "<group>"; };
 		21D2168C1FBA90CE0040795E /* BannerModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BannerModel.h; sourceTree = "<group>"; };
@@ -1395,7 +1391,6 @@
 				211C01431FC6600300E51FCF /* TLSSDK.framework in Frameworks */,
 				06A1FB6431230E34B134069E /* libPods-Coin.a in Frameworks */,
 				211C01421FC6600300E51FCF /* ImSDK.framework in Frameworks */,
-				21C91D841FDBD1BB006EDB16 /* ZMCert.framework in Frameworks */,
 				211C01471FC6600300E51FCF /* IMMessageExt.framework in Frameworks */,
 				211C01461FC6600300E51FCF /* IMGroupExt.framework in Frameworks */,
 				211C01451FC6600300E51FCF /* IMFriendshipExt.framework in Frameworks */,
@@ -1646,7 +1641,6 @@
 		211C013A1FC6600300E51FCF /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				21C91D811FDBD1BB006EDB16 /* 芝麻认证 */,
 				21205CFF1FCD6383003C6C7C /* WeChat */,
 				211C013B1FC6600300E51FCF /* 腾讯云 */,
 			);
@@ -3511,15 +3505,6 @@
 			path = Google;
 			sourceTree = "<group>";
 		};
-		21C91D811FDBD1BB006EDB16 /* 芝麻认证 */ = {
-			isa = PBXGroup;
-			children = (
-				21C91D821FDBD1BB006EDB16 /* ZMCert.framework */,
-				21C91D831FDBD1BB006EDB16 /* ZMCert.bundle */,
-			);
-			path = "芝麻认证";
-			sourceTree = "<group>";
-		};
 		21D216871FBA8F1F0040795E /* 行情 */ = {
 			isa = PBXGroup;
 			children = (
@@ -3974,7 +3959,6 @@
 				21205D071FCD6394003C6C7C /* README.txt in Resources */,
 				211C04AF1FC6604900E51FCF /* 31.gif in Resources */,
 				211C04B61FC6604900E51FCF /* 2.gif in Resources */,
-				21C91D851FDBD1BB006EDB16 /* ZMCert.bundle in Resources */,
 				211C04AE1FC6604900E51FCF /* 30.gif in Resources */,
 				211C04BE1FC6604900E51FCF /* 28.gif in Resources */,
 				211C04811FC6604800E51FCF /* Assets.xcassets in Resources */,

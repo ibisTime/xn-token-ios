@@ -9,6 +9,7 @@
 #import "SettingVC.h"
 
 #import "IdAuthVC.h"
+#import "ZMAuthVC.h"
 #import "TLChangeMobileVC.h"
 #import "TLPwdRelatedVC.h"
 #import "TLUserForgetPwdVC.h"
@@ -108,9 +109,10 @@
     idAuth.text = @"身份认证";
     [idAuth setAction:^{
         
-        IdAuthVC *idAuthVC = [IdAuthVC new];
+//        IdAuthVC *idAuthVC = [IdAuthVC new];
+//
+//        [weakSelf.navigationController pushViewController:idAuthVC animated:YES];
         
-        [weakSelf.navigationController pushViewController:idAuthVC animated:YES];
         
     }];
     

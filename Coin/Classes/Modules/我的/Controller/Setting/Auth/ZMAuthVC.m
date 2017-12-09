@@ -7,7 +7,7 @@
 //
 
 #import "ZMAuthVC.h"
-#import <ZMCert/ZMCert.h>
+//#import <ZMCert/ZMCert.h>
 #import <AssetsLibrary/AssetsLibrary.h>
 
 #import "ZMAuthResultVC.h"
