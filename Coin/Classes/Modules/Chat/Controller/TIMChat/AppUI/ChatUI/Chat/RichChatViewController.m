@@ -13,12 +13,12 @@
 - (void)dealloc
 {
     IMAMsg *draft = [_inputView getMsgDraft];
-    if (draft)
-    {
+    if (draft) {
+        
         [_conversation setDraft:draft.msgDraft];
-    }
-    else
-    {
+        
+    } else {
+        
         [_conversation setDraft:nil];
 //        [self adapterConversation];
     }
@@ -26,6 +26,7 @@
     //这里必须先清空会话列表
     [[[IMAPlatform sharedInstance].conversationMgr conversationList] removeAllObjects];
 
+    //然后获取会话列表
     [[IMAPlatform sharedInstance].conversationMgr asyncConversationList];
     
     //退出时上报一次已读，以前是没收到一条消息都上报，会导致server接收到大量的已读上报消息

@@ -227,14 +227,14 @@
             IMAUser *user = [[IMAUser alloc] initWith:info.member];
             [users addObject:user];
         }
-        FriendPickerViewController *pvc = [[FriendPickerViewController alloc] initWithCompletion:^(FriendPickerViewController *selfPtr, BOOL isFinished) {
-            if (isFinished)
-            {
-                [ws inviteJoin:selfPtr.selectedFriends];
-            }
-        } existedMembers:users right:@"发送邀请"];
-        
-        [[AppDelegate sharedAppDelegate] presentViewController:pvc animated:YES completion:nil];
+//        FriendPickerViewController *pvc = [[FriendPickerViewController alloc] initWithCompletion:^(FriendPickerViewController *selfPtr, BOOL isFinished) {
+//            if (isFinished)
+//            {
+//                [ws inviteJoin:selfPtr.selectedFriends];
+//            }
+//        } existedMembers:users right:@"发送邀请"];
+//
+//        [[AppDelegate sharedAppDelegate] presentViewController:pvc animated:YES completion:nil];
     } fail:nil];
 }
 
@@ -242,8 +242,8 @@
 {
     [_group asyncInviteMembers:array succ:^(NSArray *members) {
         
-        [[NSNotificationCenter defaultCenter] postNotificationName:kGroup_InviteJoinedMemberNotification object:members];
-        [[HUDHelper sharedInstance] tipMessage:@"邀请成功"];
+//        [[NSNotificationCenter defaultCenter] postNotificationName:kGroup_InviteJoinedMemberNotification object:members];
+//        [[HUDHelper sharedInstance] tipMessage:@"邀请成功"];
     } fail:nil];
 }
 

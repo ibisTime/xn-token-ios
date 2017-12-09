@@ -69,10 +69,6 @@
 - (void)asyncUpdateConversationList
 {
     NSInteger unRead = 0;
-    
-//    NSMutableArray *conversationList = [NSMutableArray array];
-    
-    
 //2.0之前的版本不支持 getConversationList 接口
     NSArray *conversationList = [[TIMManager sharedInstance] getConversationList];
 

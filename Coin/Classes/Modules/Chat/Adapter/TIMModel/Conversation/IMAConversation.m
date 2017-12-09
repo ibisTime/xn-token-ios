@@ -93,10 +93,11 @@
     _receiveMsg = nil;
 }
 
-- (void)setReadAllMsg
-{
+- (void)setReadAllMsg {
+    
     [IMAPlatform sharedInstance].conversationMgr.unReadMessageCount -= [_conversation getUnReadMessageNum];
     [_conversation setReadMessage:nil succ:nil fail:nil];
+    
 }
 
 - (NSInteger)unReadCount
@@ -204,14 +205,15 @@
 
 
 // 用于顶部下拉加载更多历史消息
-- (void)asyncLoadRecentMessage:(NSInteger)count from:(IMAMsg *)msg completion:(HandleMsgBlock)block
-{
+- (void)asyncLoadRecentMessage:(NSInteger)count from:(IMAMsg *)msg completion:(HandleMsgBlock)block {
+    
+    // 注意是倒叙：  传入上次最后一条消息，然后根据数量拉去消息列表
+    // 应该先从本地加载，如果本地的为空，在考虑从服务端加载
     __weak IMAConversation *ws = self;
     [_conversation getMessage:(int)count last:msg.msg succ:^(NSArray *array) {
         
         NSArray *recentIMAMsg = [ws onLoadRecentMessageSucc:array];
-        if (block)
-        {
+        if (block) {
             block(recentIMAMsg, recentIMAMsg.count != 0);
         }
     } fail:^(int code, NSString *err) {

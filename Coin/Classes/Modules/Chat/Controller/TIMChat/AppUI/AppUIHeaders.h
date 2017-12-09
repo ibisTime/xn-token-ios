@@ -11,29 +11,29 @@
 
 
 
-#import "TIMTabBarController.h"
+//#import "TIMTabBarController.h"
 
 #import "ConversationHeaders.h"
 
-#import "ContactListHeaders.h"
+//#import "ContactListHeaders.h"
 
-#import "SettingHeaders.h"
+//#import "SettingHeaders.h"
 
-#import "SearchHeaders.h"
+//#import "SearchHeaders.h"
 
-#import "ProfileHeaders.h"
+//#import "ProfileHeaders.h"
 
 #import "ChatHeaders.h"
 
-#import "CustomChatUIViewController.h"
+//#import "CustomChatUIViewController.h"
 
-#import "SubGroupHeaders.h"
+//#import "SubGroupHeaders.h"
 
-#import "AddFriendHeaders.h"
+//#import "AddFriendHeaders.h"
 
-#import "AddGroupHeaders.h"
+//#import "AddGroupHeaders.h"
 
-#import "ChatSettingHeaders.h"
+//#import "ChatSettingHeaders.h"
 
 #import "AppColorMacro.h"
 

@@ -112,7 +112,7 @@
                                     textColor:kClearColor];
     self.tradeTypeLbl.layer.cornerRadius = 3;
     self.tradeTypeLbl.clipsToBounds = YES;
-    
+    self.tradeTypeLbl.layer.borderWidth = 0.5;
     [self addSubview:self.tradeTypeLbl];
     [self.tradeTypeLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.nameLbl.mas_centerY);
@@ -204,11 +204,8 @@
     UIColor *tradeColor = order.isBuy ? kPaleBlueColor: kThemeColor;
 
     self.tradeTypeLbl.text = tradeText;
-
     self.tradeTypeLbl.textColor = tradeColor;
-
     self.tradeTypeLbl.layer.borderColor = tradeColor.CGColor;
-    self.tradeTypeLbl.layer.borderWidth = 0.5;
     
     
     //交易金额
@@ -244,19 +241,15 @@
     }
     
     self.amountLbl.hidden = order.tradeAmount != nil ? NO: YES;
-    
     self.orderCodeLbl.hidden = order.tradeAmount != nil ? NO: YES;
-    
     NSString *userId = order.isBuy ? order.sellUserInfo.userId: order.buyUserInfo.userId;
+
     
-    //获取未读数量
-//    @property (nonatomic, assign) NSInteger unReadMessageCount;
-    TIMConversation * conversation = [[TIMManager sharedInstance] getConversation:TIM_C2C receiver:userId];
-    
-    NSInteger unReadCount = [conversation getUnReadMessageNum];
-    
+   TIMConversation *groupConversation = [[TIMManager sharedInstance] getConversation:TIM_GROUP receiver:_order.code];
+    //
+//    TIMConversation * conversation = [[TIMManager sharedInstance] getConversation:TIM_C2C receiver:userId];
+    NSInteger unReadCount = [groupConversation getUnReadMessageNum];
     self.unReadLbl.text = [NSString stringWithFormat:@"%ld", unReadCount];
-    
     self.unReadLbl.hidden = unReadCount == 0 ? YES: NO;
 }
 

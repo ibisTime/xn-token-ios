@@ -51,12 +51,12 @@
     
 }
 
-- (void)usrLoginOut {
-
-    self.tabBar.items[1].badgeValue =  nil;
-   [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
-    
-}
+//- (void)usrLoginOut {
+//
+//    self.tabBar.items[1].badgeValue =  nil;
+//   [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+//    
+//}
 
 
 - (UIImage *)changImageColorWithImage:(UIImage *)image  color:(UIColor *)targetColor blendModel:(CGBlendMode)mode
@@ -172,12 +172,12 @@
                 return;
             }
         }
-#if kTestChatAttachment
-        // 无则重新创建
-        ChatViewController *vc = [[CustomChatUIViewController alloc] initWith:user];
-#else
+//#if kTestChatAttachment
+//        // 无则重新创建
+//        ChatViewController *vc = [[CustomChatUIViewController alloc] initWith:user];
+//#else
         ChatViewController *vc = [[IMAChatViewController alloc] initWith:user];
-#endif
+//#endif
         
         if ([user isC2CType])
         {
@@ -195,12 +195,12 @@
     {
         NavigationViewController *chatNav = (NavigationViewController *)[[self viewControllers] objectAtIndex:0];
         
-#if kTestChatAttachment
-        // 无则重新创建
-        ChatViewController *vc = [[CustomChatUIViewController alloc] initWith:user];
-#else
+//#if kTestChatAttachment
+//        // 无则重新创建
+//        ChatViewController *vc = [[CustomChatUIViewController alloc] initWith:user];
+//#else
         ChatViewController *vc = [[IMAChatViewController alloc] initWith:user];
-#endif
+//#endif
         vc.hidesBottomBarWhenPushed = YES;
         [chatNav pushViewController:vc withBackTitle:@"返回" animated:YES];
         

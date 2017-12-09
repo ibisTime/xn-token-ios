@@ -19,8 +19,8 @@
 #import <CDCommon/UIView+Frame.h>
 #import "LangSwitcher.h"
 
-#define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
-#define SCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
+//#define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
+//#define SCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
 #define FONT(x)    [UIFont systemFontOfSize:x]
 
 #define CoinWeakSelf  __weak typeof(self) weakSelf = self;

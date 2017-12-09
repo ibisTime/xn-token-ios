@@ -181,13 +181,13 @@ static BOOL kIsAlertingForceOffline = NO;
         
         [[HUDHelper sharedInstance] syncStopLoading];
         
-        [[AppDelegate sharedAppDelegate] enterLoginUI];
+//        [[AppDelegate sharedAppDelegate] enterLoginUI];
         
     } fail:^(int code, NSString *err) {
         
         [[HUDHelper sharedInstance] syncStopLoading];
         
-        [[AppDelegate sharedAppDelegate] enterLoginUI];
+//        [[AppDelegate sharedAppDelegate] enterLoginUI];
         
     }];
 }
@@ -200,7 +200,8 @@ static BOOL kIsAlertingForceOffline = NO;
 #pragma mark -TIMRefreshListener
 
 - (void)onRefresh
-{
+{   // onRefresh 回调、腾讯sdk 的一级回调
+    // 这里需要刷新会话
     // TODO:重新刷新会话列列
     DebugLog(@"=========>>>>> 刷新会话列表");
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -208,7 +209,6 @@ static BOOL kIsAlertingForceOffline = NO;
         [self.conversationMgr asyncConversationList];
         [[TIMManager sharedInstance] addMessageListener:self.conversationMgr];
     });
-    
     
     [self.contactMgr asyncConfigGroup];
 }

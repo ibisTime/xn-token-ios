@@ -600,10 +600,13 @@
     userInfo.friendPhoto = [friendUserInfo.photo convertImageUrl];
     userInfo.friendNickName = friendUserInfo.nickname;
     
-    ChatViewController *chatVC = [[CustomChatUIViewController alloc] initWith:user];
+//    ChatViewController *chatVC = [[CustomChatUIViewController alloc] initWith:user];
+//
     
+    // 此处应该拿到订单号，进行 群组查找
+    ChatViewController *chatVC = [[ChatViewController alloc] initWith:user];
     chatVC.userInfo = userInfo;
-    
+
     [self.navigationController pushViewController:chatVC animated:YES];
 }
 

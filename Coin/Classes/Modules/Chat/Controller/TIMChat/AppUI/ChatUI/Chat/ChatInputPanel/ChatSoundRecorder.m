@@ -294,27 +294,27 @@ static ChatSoundRecorder *_sharedInstance = nil;
 
 - (void)showRecordView
 {
-    UIViewController *topViewController = [AppDelegate sharedAppDelegate].topViewController;
-    
-    if (!_recordTipView)
-    {
-        _recordTipView = [[ChatRecoredView alloc] init];
-        [_recordTipView kvoSoundRecorder:self];
-        
-        UIView *view = topViewController.view;
-        [view addSubview:_recordTipView];
-        
-        [_recordTipView layoutParentCenter];
-        [_recordTipView move:CGPointMake(0, -32)];
-    
-    }
-    
-    //禁用导航栏上右侧按钮
-    UIBarButtonItem *rightItem = topViewController.navigationItem.rightBarButtonItem;
-    rightItem.enabled = NO;
-    
-    [_recordTipView prepareForUse];
-    [_recordTipView fadeIn:0.2 delegate:nil];
+//    UIViewController *topViewController = [AppDelegate sharedAppDelegate].topViewController;
+//
+//    if (!_recordTipView)
+//    {
+//        _recordTipView = [[ChatRecoredView alloc] init];
+//        [_recordTipView kvoSoundRecorder:self];
+//
+//        UIView *view = topViewController.view;
+//        [view addSubview:_recordTipView];
+//
+//        [_recordTipView layoutParentCenter];
+//        [_recordTipView move:CGPointMake(0, -32)];
+//
+//    }
+//
+//    //禁用导航栏上右侧按钮
+//    UIBarButtonItem *rightItem = topViewController.navigationItem.rightBarButtonItem;
+//    rightItem.enabled = NO;
+//
+//    [_recordTipView prepareForUse];
+//    [_recordTipView fadeIn:0.2 delegate:nil];
 }
 
 - (void)startRecord
@@ -455,61 +455,61 @@ static ChatSoundRecorder *_sharedInstance = nil;
 - (void)stopRecord
 {
     //禁用导航栏上右侧按钮
-    UIBarButtonItem *rightItem = [AppDelegate sharedAppDelegate].topViewController.navigationItem.rightBarButtonItem;
-    rightItem.enabled = YES;
-    
-    [_recorderTimer invalidate];
-    _recorderTimer = nil;
-    
-    [_recorderPeakerTimer invalidate];
-    _recorderPeakerTimer = nil;
-    
-    NSTimeInterval duration = self.recorder.currentTime;
-    
-    
-    if (self.recordState == EChatRecorder_RelaseCancel)
-    {
-        // TODO:取消发送
-        self.recordState = EChatRecorder_Stoped;
-        if ([_recorderDelegate respondsToSelector:@selector(onChatInput:cancelSendMsg:)])
-        {
-            [_recorderDelegate onChatInput:nil cancelSendMsg:_recordingMsg];
-        }
-        return;
-    }
-    
-    if (duration < 0.5)
-    {
-        // 录音太短
-        self.recordState = EChatRecorder_TooShort;
-    }
-    else
-    {
-        [self.recorder stop];
-        NSData *audioData = [NSData dataWithContentsOfFile:self.recordSavePath];
-        NSInteger dur = (NSInteger)(duration + 0.5);
-        IMAMsg *smsg = [IMAMsg msgWithSound:audioData duration:dur];
-        // TODO:发送消息
-        if ([_recorderDelegate respondsToSelector:@selector(onChatInput:replaceWith:oldMsg:)])
-        {
-            [_recorderDelegate onChatInput:nil replaceWith:smsg oldMsg:_recordingMsg];
-        }
-    }
-    
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        self.recordState = EChatRecorder_Stoped;
-    });
-    
-    
-    [self.recorder stop];
-    
-    if ([[NSFileManager defaultManager] fileExistsAtPath:self.recorder.url.path])
-    {
-        if (!self.recorder.recording)
-        {
-            [self.recorder deleteRecording];
-        }
-    };
+//    UIBarButtonItem *rightItem = [AppDelegate sharedAppDelegate].topViewController.navigationItem.rightBarButtonItem;
+//    rightItem.enabled = YES;
+//    
+//    [_recorderTimer invalidate];
+//    _recorderTimer = nil;
+//    
+//    [_recorderPeakerTimer invalidate];
+//    _recorderPeakerTimer = nil;
+//    
+//    NSTimeInterval duration = self.recorder.currentTime;
+//    
+//    
+//    if (self.recordState == EChatRecorder_RelaseCancel)
+//    {
+//        // TODO:取消发送
+//        self.recordState = EChatRecorder_Stoped;
+//        if ([_recorderDelegate respondsToSelector:@selector(onChatInput:cancelSendMsg:)])
+//        {
+//            [_recorderDelegate onChatInput:nil cancelSendMsg:_recordingMsg];
+//        }
+//        return;
+//    }
+//    
+//    if (duration < 0.5)
+//    {
+//        // 录音太短
+//        self.recordState = EChatRecorder_TooShort;
+//    }
+//    else
+//    {
+//        [self.recorder stop];
+//        NSData *audioData = [NSData dataWithContentsOfFile:self.recordSavePath];
+//        NSInteger dur = (NSInteger)(duration + 0.5);
+//        IMAMsg *smsg = [IMAMsg msgWithSound:audioData duration:dur];
+//        // TODO:发送消息
+//        if ([_recorderDelegate respondsToSelector:@selector(onChatInput:replaceWith:oldMsg:)])
+//        {
+//            [_recorderDelegate onChatInput:nil replaceWith:smsg oldMsg:_recordingMsg];
+//        }
+//    }
+//    
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        self.recordState = EChatRecorder_Stoped;
+//    });
+//    
+//    
+//    [self.recorder stop];
+//    
+//    if ([[NSFileManager defaultManager] fileExistsAtPath:self.recorder.url.path])
+//    {
+//        if (!self.recorder.recording)
+//        {
+//            [self.recorder deleteRecording];
+//        }
+//    };
     
 }
 

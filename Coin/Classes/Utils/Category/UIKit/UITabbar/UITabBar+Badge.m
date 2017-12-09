@@ -45,14 +45,20 @@
 - (void)removeBadgeOnItemIndex:(int)index{
     
     //按照tag值进行移除
-    for (UIView *subView in self.subviews) {
-        
-        if (subView.tag == 888+index) {
-            
-            [subView removeFromSuperview];
-            
-        }
+    
+    UIView *badgeView = [self viewWithTag:888+index];
+    if (badgeView) {
+        [badgeView removeFromSuperview];
     }
+    
+//    for (UIView *subView in self.subviews) {
+//
+//        if (subView.tag == 888+index) {
+//
+//            [subView removeFromSuperview];
+//
+//        }
+//    }
 }
 
 @end

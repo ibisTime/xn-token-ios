@@ -31,15 +31,9 @@
 
 @implementation OrderDetailVC
 
-//如果要使用自己的输入面板，可以重写这个函数
-//- (void)addInputPanel
-//{
-//}
-
 - (void)viewDidAppear:(BOOL)animated {
     
     [super viewDidAppear:animated];
-    
     //查看详情
     [self lookOrderDetail];
 
@@ -76,9 +70,7 @@
     self.headView = [[OrderDetailHeaderView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 370)];
     
     self.headView.backgroundColor = kClearColor;
-    
     self.headView.order = self.order;
-    
     self.headView.orderBlock = ^(OrderEventsType orderType) {
         
         [weakSelf orderEventsWithType:orderType];
@@ -166,7 +158,6 @@
         {
             
             self.tabBarController.selectedIndex = 3;
-            
             [self.navigationController popToRootViewControllerAnimated:NO];
             
         }break;
@@ -270,8 +261,8 @@
             [self.commentView hide];
             //刷新订单列表
             [[NSNotificationCenter defaultCenter] postNotificationName:kOrderListRefresh object:nil];
-            
             [self lookOrderDetail];
+            
         }
         
     } failure:^(NSError *error) {
@@ -313,10 +304,10 @@
 //详情查询交易订单
 - (void)lookOrderDetail {
     
-    
     TLNetworking *http = [TLNetworking new];
     
     http.code = @"625251";
+    http.showView = self.view;
     http.parameters[@"code"] = self.order.code;
     
     [http postWithSuccess:^(id responseObject) {
@@ -376,73 +367,73 @@
 //}
 
 //添加右上角按钮
-- (void)addChatSettingItem
-{
-    //用户在这里自定义右上角按钮，不实现本函数则右上角没有按钮
-    BOOL isUser = [_receiver isC2CType];
-    
-    UIImage *norimage =  isUser ? [UIImage imageNamed:@"person"] :  [UIImage imageNamed:@"group"];
-    UIImage *higimage =  isUser ? [UIImage imageNamed:@"person_hover"] :  [UIImage imageNamed:@"group_hover"];
-    UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, norimage.size.width, norimage.size.height)];
-    [btn setImage:norimage forState:UIControlStateNormal];
-    [btn setImage:higimage forState:UIControlStateHighlighted];
-    [btn addTarget:self action:@selector(onClickChatSetting) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *bar = [[UIBarButtonItem alloc] initWithCustomView:btn];
-    self.navigationItem.rightBarButtonItem = bar;
-}
+//- (void)addChatSettingItem
+//{
+//    //用户在这里自定义右上角按钮，不实现本函数则右上角没有按钮
+//    BOOL isUser = [_receiver isC2CType];
+//
+//    UIImage *norimage =  isUser ? [UIImage imageNamed:@"person"] :  [UIImage imageNamed:@"group"];
+//    UIImage *higimage =  isUser ? [UIImage imageNamed:@"person_hover"] :  [UIImage imageNamed:@"group_hover"];
+//    UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, norimage.size.width, norimage.size.height)];
+//    [btn setImage:norimage forState:UIControlStateNormal];
+//    [btn setImage:higimage forState:UIControlStateHighlighted];
+//    [btn addTarget:self action:@selector(onClickChatSetting) forControlEvents:UIControlEventTouchUpInside];
+//    UIBarButtonItem *bar = [[UIBarButtonItem alloc] initWithCustomView:btn];
+//    self.navigationItem.rightBarButtonItem = bar;
+//}
 
 //右上角按钮
-- (void)onClickChatSetting
-{
-    //用户自己实现需要的操作，在demo中，这里是跳转到聊天对象的资料页
-    
-    //如果是创建群，直接进入聊天界面时，_receiver是临时创建的群，这里需要在ongroupAdd之后，重新获取一次详细群信息
-    IMAGroup *group = [[IMAGroup alloc] initWith:_receiver.userId];
-    NSInteger index = [[IMAPlatform sharedInstance].contactMgr.groupList indexOfObject:group];
-    if (index >= 0 && index < [IMAPlatform sharedInstance].contactMgr.groupList.count)
-    {
-        _receiver = [[IMAPlatform sharedInstance].contactMgr.groupList objectAtIndex:index];
-    }
-    
-    if ([_receiver isC2CType])
-    {
-        IMAUser *user = (IMAUser *)_receiver;
-        if ([[IMAPlatform sharedInstance].contactMgr isMyFriend:user])
-        {
-            FriendProfileViewController *vc = [[FriendProfileViewController alloc] initWith:user];
-            [[AppDelegate sharedAppDelegate] pushViewController:vc withBackTitle:@"返回"];
-        }
-        else
-        {
-            StrangerProfileViewController *vc = [[StrangerProfileViewController alloc] initWith:user];
-            [[AppDelegate sharedAppDelegate] pushViewController:vc withBackTitle:@"返回"];
-        }
-    }
-    else if ([_receiver isGroupType])
-    {
-        IMAGroup *user = (IMAGroup *)_receiver;
-        
-        if ([user isPublicGroup])
-        {
-            
-            GroupProfileViewController *vc = [[GroupProfileViewController alloc] initWith:user];
-            [[AppDelegate sharedAppDelegate] pushViewController:vc withBackTitle:@"返回"];
-        }
-        else if ([user isChatGroup])
-        {
-            ChatGroupProfileViewController *vc = [[ChatGroupProfileViewController alloc] initWith:user];
-            [[AppDelegate sharedAppDelegate] pushViewController:vc withBackTitle:@"返回"];
-        }
-        else if ([user isChatRoom])
-        {
-            ChatRoomProfileViewController *vc = [[ChatRoomProfileViewController alloc] initWith:user];
-            [[AppDelegate sharedAppDelegate] pushViewController:vc withBackTitle:@"返回"];
-        }
-        else
-        {
-            // do nothing
-        }
-    }
-}
+//- (void)onClickChatSetting
+//{
+//    //用户自己实现需要的操作，在demo中，这里是跳转到聊天对象的资料页
+//
+//    //如果是创建群，直接进入聊天界面时，_receiver是临时创建的群，这里需要在ongroupAdd之后，重新获取一次详细群信息
+//    IMAGroup *group = [[IMAGroup alloc] initWith:_receiver.userId];
+//    NSInteger index = [[IMAPlatform sharedInstance].contactMgr.groupList indexOfObject:group];
+//    if (index >= 0 && index < [IMAPlatform sharedInstance].contactMgr.groupList.count)
+//    {
+//        _receiver = [[IMAPlatform sharedInstance].contactMgr.groupList objectAtIndex:index];
+//    }
+//
+//    if ([_receiver isC2CType])
+//    {
+//        IMAUser *user = (IMAUser *)_receiver;
+//        if ([[IMAPlatform sharedInstance].contactMgr isMyFriend:user])
+//        {
+//            FriendProfileViewController *vc = [[FriendProfileViewController alloc] initWith:user];
+//            [[AppDelegate sharedAppDelegate] pushViewController:vc withBackTitle:@"返回"];
+//        }
+//        else
+//        {
+//            StrangerProfileViewController *vc = [[StrangerProfileViewController alloc] initWith:user];
+//            [[AppDelegate sharedAppDelegate] pushViewController:vc withBackTitle:@"返回"];
+//        }
+//    }
+//    else if ([_receiver isGroupType])
+//    {
+//        IMAGroup *user = (IMAGroup *)_receiver;
+//
+//        if ([user isPublicGroup])
+//        {
+//
+//            GroupProfileViewController *vc = [[GroupProfileViewController alloc] initWith:user];
+//            [[AppDelegate sharedAppDelegate] pushViewController:vc withBackTitle:@"返回"];
+//        }
+//        else if ([user isChatGroup])
+//        {
+//            ChatGroupProfileViewController *vc = [[ChatGroupProfileViewController alloc] initWith:user];
+//            [[AppDelegate sharedAppDelegate] pushViewController:vc withBackTitle:@"返回"];
+//        }
+//        else if ([user isChatRoom])
+//        {
+//            ChatRoomProfileViewController *vc = [[ChatRoomProfileViewController alloc] initWith:user];
+//            [[AppDelegate sharedAppDelegate] pushViewController:vc withBackTitle:@"返回"];
+//        }
+//        else
+//        {
+//            // do nothing
+//        }
+//    }
+//}
 
 @end

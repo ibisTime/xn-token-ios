@@ -166,10 +166,6 @@
 		211C04701FC6604800E51FCF /* UIPlaceHolderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 211C02C11FC6604800E51FCF /* UIPlaceHolderTextView.m */; };
 		211C04711FC6604800E51FCF /* JSCustomBadge.m in Sources */ = {isa = PBXBuildFile; fileRef = 211C02C21FC6604800E51FCF /* JSCustomBadge.m */; };
 		211C04721FC6604800E51FCF /* TextViewTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 211C02C31FC6604800E51FCF /* TextViewTableViewCell.m */; };
-		211C04731FC6604800E51FCF /* AddGroupProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 211C02CC1FC6604800E51FCF /* AddGroupProfileViewController.m */; };
-		211C04741FC6604800E51FCF /* SearchGroupResultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 211C02D01FC6604800E51FCF /* SearchGroupResultCell.m */; };
-		211C04751FC6604800E51FCF /* AddGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 211C02D11FC6604800E51FCF /* AddGroupViewController.m */; };
-		211C04761FC6604800E51FCF /* AddFriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 211C02D31FC6604800E51FCF /* AddFriendViewController.m */; };
 		211C04781FC6604800E51FCF /* ChatTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 211C02D91FC6604800E51FCF /* ChatTableViewCell.m */; };
 		211C04791FC6604800E51FCF /* ChatImageBrowserView.m in Sources */ = {isa = PBXBuildFile; fileRef = 211C02DD1FC6604800E51FCF /* ChatImageBrowserView.m */; };
 		211C047A1FC6604800E51FCF /* EmojHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 211C02DE1FC6604800E51FCF /* EmojHelper.m */; };
@@ -253,54 +249,15 @@
 		211C04C81FC6604900E51FCF /* ChatTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 211C03621FC6604800E51FCF /* ChatTextView.m */; };
 		211C04C91FC6604900E51FCF /* ChatInputTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 211C03631FC6604800E51FCF /* ChatInputTextView.m */; };
 		211C04CA1FC6604900E51FCF /* TIMElem+ChatAttachment.m in Sources */ = {isa = PBXBuildFile; fileRef = 211C03651FC6604800E51FCF /* TIMElem+ChatAttachment.m */; };
-		211C04CB1FC6604900E51FCF /* CustomChatUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 211C036D1FC6604800E51FCF /* CustomChatUIViewController.m */; };
-		211C04CC1FC6604900E51FCF /* GroupMemberInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 211C03711FC6604800E51FCF /* GroupMemberInfoCell.m */; };
-		211C04CD1FC6604900E51FCF /* EditInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 211C03721FC6604800E51FCF /* EditInfoViewController.m */; };
-		211C04CE1FC6604900E51FCF /* GroupMemberProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 211C03731FC6604800E51FCF /* GroupMemberProfileViewController.m */; };
 		211C04CF1FC6604900E51FCF /* SwipeDeleteTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 211C03771FC6604800E51FCF /* SwipeDeleteTableView.m */; };
 		211C04D01FC6604900E51FCF /* ConnectStatusTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 211C03781FC6604800E51FCF /* ConnectStatusTableViewCell.m */; };
 		211C04D11FC6604900E51FCF /* ConversationListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 211C03791FC6604800E51FCF /* ConversationListTableViewCell.m */; };
 		211C04D21FC6604900E51FCF /* IMAConversation+ShowAPIs.m in Sources */ = {isa = PBXBuildFile; fileRef = 211C03801FC6604800E51FCF /* IMAConversation+ShowAPIs.m */; };
 		211C04D31FC6604900E51FCF /* ConversationListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 211C03811FC6604800E51FCF /* ConversationListViewController.m */; };
-		211C04D41FC6604900E51FCF /* SearchResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 211C03841FC6604800E51FCF /* SearchResultViewController.m */; };
-		211C04D51FC6604900E51FCF /* ContactDrawerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 211C038A1FC6604800E51FCF /* ContactDrawerView.m */; };
-		211C04D61FC6604900E51FCF /* GroupSystemMsgViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 211C038D1FC6604800E51FCF /* GroupSystemMsgViewController.m */; };
-		211C04D71FC6604900E51FCF /* ContactPanelTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 211C038E1FC6604800E51FCF /* ContactPanelTableViewCell.m */; };
-		211C04D81FC6604900E51FCF /* GroupTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 211C03911FC6604800E51FCF /* GroupTableViewCell.m */; };
-		211C04D91FC6604900E51FCF /* FutureFriendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 211C03921FC6604800E51FCF /* FutureFriendsViewController.m */; };
-		211C04DA1FC6604900E51FCF /* PublicGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 211C03931FC6604800E51FCF /* PublicGroupViewController.m */; };
-		211C04DB1FC6604900E51FCF /* FriendListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 211C03941FC6604800E51FCF /* FriendListViewController.m */; };
-		211C04DC1FC6604900E51FCF /* ContactItemTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 211C03981FC6604800E51FCF /* ContactItemTableViewCell.m */; };
-		211C04DD1FC6604900E51FCF /* NewGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 211C03991FC6604800E51FCF /* NewGroupViewController.m */; };
-		211C04DE1FC6604900E51FCF /* ChatRoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 211C039B1FC6604800E51FCF /* ChatRoomViewController.m */; };
-		211C04DF1FC6604900E51FCF /* FriendNotifyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 211C039F1FC6604800E51FCF /* FriendNotifyTableViewCell.m */; };
-		211C04E01FC6604900E51FCF /* ContactListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 211C03A01FC6604800E51FCF /* ContactListViewController.m */; };
-		211C04E11FC6604900E51FCF /* StrangerApplyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 211C03A11FC6604800E51FCF /* StrangerApplyViewController.m */; };
-		211C04E21FC6604900E51FCF /* ChatGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 211C03A21FC6604800E51FCF /* ChatGroupViewController.m */; };
-		211C04E31FC6604900E51FCF /* ChatGroupProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 211C03AA1FC6604800E51FCF /* ChatGroupProfileViewController.m */; };
-		211C04E41FC6604900E51FCF /* UserProfileHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 211C03AE1FC6604800E51FCF /* UserProfileHeaderView.m */; };
-		211C04E51FC6604900E51FCF /* ChatRoomProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 211C03AF1FC6604800E51FCF /* ChatRoomProfileViewController.m */; };
-		211C04E61FC6604900E51FCF /* ChatGroupMemberListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 211C03B21FC6604800E51FCF /* ChatGroupMemberListViewController.m */; };
-		211C04E71FC6604900E51FCF /* StrangerProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 211C03B31FC6604800E51FCF /* StrangerProfileViewController.m */; };
-		211C04E81FC6604900E51FCF /* ChatRoomMemberListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 211C03B81FC6604800E51FCF /* ChatRoomMemberListViewController.m */; };
-		211C04E91FC6604900E51FCF /* UserProfileFooterPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 211C03B91FC6604800E51FCF /* UserProfileFooterPanel.m */; };
-		211C04EA1FC6604900E51FCF /* GroupProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 211C03BA1FC6604800E51FCF /* GroupProfileViewController.m */; };
-		211C04EB1FC6604900E51FCF /* RichItemTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 211C03BB1FC6604800E51FCF /* RichItemTableViewController.m */; };
-		211C04ED1FC6604900E51FCF /* GroupMemberInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 211C03BD1FC6604800E51FCF /* GroupMemberInfoViewController.m */; };
-		211C04EE1FC6604900E51FCF /* FriendProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 211C03C01FC6604800E51FCF /* FriendProfileViewController.m */; };
-		211C04EF1FC6604900E51FCF /* GroupMemberListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 211C03C11FC6604800E51FCF /* GroupMemberListViewController.m */; };
-		211C04F01FC6604900E51FCF /* MyProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 211C03C21FC6604800E51FCF /* MyProfileViewController.m */; };
-		211C04F11FC6604900E51FCF /* UserActionButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 211C03C51FC6604800E51FCF /* UserActionButton.m */; };
-		211C04F21FC6604900E51FCF /* NotifySetupController.m in Sources */ = {isa = PBXBuildFile; fileRef = 211C03C71FC6604800E51FCF /* NotifySetupController.m */; };
-		211C04F31FC6604900E51FCF /* BlackListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 211C03C81FC6604800E51FCF /* BlackListViewController.m */; };
-		211C04F41FC6604900E51FCF /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 211C03CD1FC6604800E51FCF /* SettingViewController.m */; };
-		211C04F51FC6604900E51FCF /* SubGroupPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 211C03D11FC6604800E51FCF /* SubGroupPickerViewController.m */; };
-		211C04F61FC6604900E51FCF /* SubGroupMgrViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 211C03D21FC6604800E51FCF /* SubGroupMgrViewController.m */; };
 		211C04F71FC6604900E51FCF /* 11.caf in Resources */ = {isa = PBXBuildFile; fileRef = 211C03D51FC6604800E51FCF /* 11.caf */; };
 		211C04F81FC6604900E51FCF /* 10.caf in Resources */ = {isa = PBXBuildFile; fileRef = 211C03D61FC6604800E51FCF /* 10.caf */; };
 		211C04F91FC6604900E51FCF /* 00.caf in Resources */ = {isa = PBXBuildFile; fileRef = 211C03D71FC6604800E51FCF /* 00.caf */; };
 		211C04FA1FC6604900E51FCF /* 01.caf in Resources */ = {isa = PBXBuildFile; fileRef = 211C03D81FC6604800E51FCF /* 01.caf */; };
-		211C04FB1FC6604900E51FCF /* TIMTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 211C03D91FC6604800E51FCF /* TIMTabBarController.m */; };
 		211C04FC1FC6604900E51FCF /* DailyBuild-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 211C03DE1FC6604800E51FCF /* DailyBuild-Info.plist */; };
 		211C04FD1FC6604900E51FCF /* IMAAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 211C03DF1FC6604800E51FCF /* IMAAppDelegate.m */; };
 		211C04FE1FC6604900E51FCF /* NoticeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 211C03E01FC6604800E51FCF /* NoticeVC.m */; };
@@ -315,7 +272,6 @@
 		211C050E1FC6716500E51FCF /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 211C050D1FC6716500E51FCF /* libresolv.tbd */; };
 		211C05111FC6717300E51FCF /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 211C050F1FC6717300E51FCF /* libstdc++.6.0.9.tbd */; };
 		211C05121FC6717300E51FCF /* libstdc++.6.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 211C05101FC6717300E51FCF /* libstdc++.6.tbd */; };
-		211C05131FC671F000E51FCF /* UserProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 211C03BC1FC6604800E51FCF /* UserProfileViewController.m */; };
 		211C88821FBDDADF00CF4FC8 /* QuotationListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 211C88811FBDDADF00CF4FC8 /* QuotationListVC.m */; };
 		211C88851FBDDD3A00CF4FC8 /* QuotationListTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 211C88841FBDDD3A00CF4FC8 /* QuotationListTableView.m */; };
 		211C88881FBDDE1000CF4FC8 /* QuotationListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 211C88871FBDDE1000CF4FC8 /* QuotationListCell.m */; };
@@ -478,6 +434,8 @@
 		2E3950031FB05AF200BA0829 /* TLOrderVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E3950021FB05AF200BA0829 /* TLOrderVC.m */; };
 		2E973FC91FDA279C005C2D5F /* LangSwitcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E973FC81FDA279C005C2D5F /* LangSwitcher.m */; };
 		2E973FCF1FDABA0F005C2D5F /* ChatSysMsgCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E973FCE1FDABA0F005C2D5F /* ChatSysMsgCell.m */; };
+		2E973FD31FDBC5B0005C2D5F /* BaseLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E973FD21FDBC5B0005C2D5F /* BaseLabel.m */; };
+		2E973FD61FDBC5CC005C2D5F /* BaseButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E973FD51FDBC5CC005C2D5F /* BaseButton.m */; };
 		2EA584C11FA813C900C7106C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2EA584C01FA813C900C7106C /* Assets.xcassets */; };
 		2EA584C41FA813C900C7106C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2EA584C21FA813C900C7106C /* LaunchScreen.storyboard */; };
 		2EA584C71FA813C900C7106C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EA584C61FA813C900C7106C /* main.m */; };
@@ -883,16 +841,6 @@
 		211C02C61FC6604800E51FCF /* RichMenuTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RichMenuTableViewCell.h; sourceTree = "<group>"; };
 		211C02C71FC6604800E51FCF /* TextFieldTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextFieldTableViewCell.h; sourceTree = "<group>"; };
 		211C02C81FC6604800E51FCF /* ImageHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageHeader.h; sourceTree = "<group>"; };
-		211C02CB1FC6604800E51FCF /* SearchGroupResultCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchGroupResultCell.h; sourceTree = "<group>"; };
-		211C02CC1FC6604800E51FCF /* AddGroupProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddGroupProfileViewController.m; sourceTree = "<group>"; };
-		211C02CD1FC6604800E51FCF /* AddGroupHeaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddGroupHeaders.h; sourceTree = "<group>"; };
-		211C02CE1FC6604800E51FCF /* AddGroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddGroupViewController.h; sourceTree = "<group>"; };
-		211C02CF1FC6604800E51FCF /* AddGroupProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddGroupProfileViewController.h; sourceTree = "<group>"; };
-		211C02D01FC6604800E51FCF /* SearchGroupResultCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchGroupResultCell.m; sourceTree = "<group>"; };
-		211C02D11FC6604800E51FCF /* AddGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddGroupViewController.m; sourceTree = "<group>"; };
-		211C02D31FC6604800E51FCF /* AddFriendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddFriendViewController.m; sourceTree = "<group>"; };
-		211C02D51FC6604800E51FCF /* AddFriendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddFriendViewController.h; sourceTree = "<group>"; };
-		211C02D61FC6604800E51FCF /* AddFriendHeaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddFriendHeaders.h; sourceTree = "<group>"; };
 		211C02D91FC6604800E51FCF /* ChatTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatTableViewCell.m; sourceTree = "<group>"; };
 		211C02DA1FC6604800E51FCF /* ChatHeadRefreshView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatHeadRefreshView.h; sourceTree = "<group>"; };
 		211C02DB1FC6604800E51FCF /* IMAChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMAChatViewController.h; sourceTree = "<group>"; };
@@ -1024,15 +972,6 @@
 		211C03691FC6604800E51FCF /* MicroVideoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MicroVideoView.h; sourceTree = "<group>"; };
 		211C036A1FC6604800E51FCF /* MicroVideoPlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MicroVideoPlayView.h; sourceTree = "<group>"; };
 		211C036B1FC6604800E51FCF /* ChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatViewController.h; sourceTree = "<group>"; };
-		211C036C1FC6604800E51FCF /* CustomChatUIViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomChatUIViewController.h; sourceTree = "<group>"; };
-		211C036D1FC6604800E51FCF /* CustomChatUIViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomChatUIViewController.m; sourceTree = "<group>"; };
-		211C036F1FC6604800E51FCF /* EditInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditInfoViewController.h; sourceTree = "<group>"; };
-		211C03701FC6604800E51FCF /* GroupMemberProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupMemberProfileViewController.h; sourceTree = "<group>"; };
-		211C03711FC6604800E51FCF /* GroupMemberInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupMemberInfoCell.m; sourceTree = "<group>"; };
-		211C03721FC6604800E51FCF /* EditInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditInfoViewController.m; sourceTree = "<group>"; };
-		211C03731FC6604800E51FCF /* GroupMemberProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupMemberProfileViewController.m; sourceTree = "<group>"; };
-		211C03741FC6604800E51FCF /* ChatSettingHeaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatSettingHeaders.h; sourceTree = "<group>"; };
-		211C03751FC6604800E51FCF /* GroupMemberInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupMemberInfoCell.h; sourceTree = "<group>"; };
 		211C03771FC6604800E51FCF /* SwipeDeleteTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwipeDeleteTableView.m; sourceTree = "<group>"; };
 		211C03781FC6604800E51FCF /* ConnectStatusTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConnectStatusTableViewCell.m; sourceTree = "<group>"; };
 		211C03791FC6604800E51FCF /* ConversationListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConversationListTableViewCell.m; sourceTree = "<group>"; };
@@ -1044,88 +983,11 @@
 		211C037F1FC6604800E51FCF /* ConversationListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConversationListTableViewCell.h; sourceTree = "<group>"; };
 		211C03801FC6604800E51FCF /* IMAConversation+ShowAPIs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "IMAConversation+ShowAPIs.m"; sourceTree = "<group>"; };
 		211C03811FC6604800E51FCF /* ConversationListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConversationListViewController.m; sourceTree = "<group>"; };
-		211C03821FC6604800E51FCF /* TIMTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TIMTabBarController.h; sourceTree = "<group>"; };
-		211C03841FC6604800E51FCF /* SearchResultViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchResultViewController.m; sourceTree = "<group>"; };
-		211C03851FC6604800E51FCF /* SearchHeaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchHeaders.h; sourceTree = "<group>"; };
-		211C03861FC6604800E51FCF /* SearchResultViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchResultViewController.h; sourceTree = "<group>"; };
 		211C03871FC6604800E51FCF /* AppUIHeaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppUIHeaders.h; sourceTree = "<group>"; };
-		211C03891FC6604800E51FCF /* ChatRoomViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatRoomViewController.h; sourceTree = "<group>"; };
-		211C038A1FC6604800E51FCF /* ContactDrawerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactDrawerView.m; sourceTree = "<group>"; };
-		211C038B1FC6604800E51FCF /* ContactItemTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactItemTableViewCell.h; sourceTree = "<group>"; };
-		211C038C1FC6604800E51FCF /* NewGroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewGroupViewController.h; sourceTree = "<group>"; };
-		211C038D1FC6604800E51FCF /* GroupSystemMsgViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupSystemMsgViewController.m; sourceTree = "<group>"; };
-		211C038E1FC6604800E51FCF /* ContactPanelTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactPanelTableViewCell.m; sourceTree = "<group>"; };
-		211C038F1FC6604800E51FCF /* ContactListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactListViewController.h; sourceTree = "<group>"; };
-		211C03901FC6604800E51FCF /* FriendNotifyTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendNotifyTableViewCell.h; sourceTree = "<group>"; };
-		211C03911FC6604800E51FCF /* GroupTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupTableViewCell.m; sourceTree = "<group>"; };
-		211C03921FC6604800E51FCF /* FutureFriendsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FutureFriendsViewController.m; sourceTree = "<group>"; };
-		211C03931FC6604800E51FCF /* PublicGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublicGroupViewController.m; sourceTree = "<group>"; };
-		211C03941FC6604800E51FCF /* FriendListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendListViewController.m; sourceTree = "<group>"; };
-		211C03951FC6604800E51FCF /* ChatGroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatGroupViewController.h; sourceTree = "<group>"; };
-		211C03961FC6604800E51FCF /* StrangerApplyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StrangerApplyViewController.h; sourceTree = "<group>"; };
-		211C03971FC6604800E51FCF /* GroupSystemMsgViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupSystemMsgViewController.h; sourceTree = "<group>"; };
-		211C03981FC6604800E51FCF /* ContactItemTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactItemTableViewCell.m; sourceTree = "<group>"; };
-		211C03991FC6604800E51FCF /* NewGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewGroupViewController.m; sourceTree = "<group>"; };
-		211C039A1FC6604800E51FCF /* ContactDrawerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactDrawerView.h; sourceTree = "<group>"; };
-		211C039B1FC6604800E51FCF /* ChatRoomViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatRoomViewController.m; sourceTree = "<group>"; };
-		211C039C1FC6604800E51FCF /* ContactPanelTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactPanelTableViewCell.h; sourceTree = "<group>"; };
-		211C039D1FC6604800E51FCF /* FutureFriendsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FutureFriendsViewController.h; sourceTree = "<group>"; };
-		211C039E1FC6604800E51FCF /* GroupTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupTableViewCell.h; sourceTree = "<group>"; };
-		211C039F1FC6604800E51FCF /* FriendNotifyTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendNotifyTableViewCell.m; sourceTree = "<group>"; };
-		211C03A01FC6604800E51FCF /* ContactListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactListViewController.m; sourceTree = "<group>"; };
-		211C03A11FC6604800E51FCF /* StrangerApplyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StrangerApplyViewController.m; sourceTree = "<group>"; };
-		211C03A21FC6604800E51FCF /* ChatGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatGroupViewController.m; sourceTree = "<group>"; };
-		211C03A31FC6604800E51FCF /* ContactListHeaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactListHeaders.h; sourceTree = "<group>"; };
-		211C03A41FC6604800E51FCF /* FriendListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendListViewController.h; sourceTree = "<group>"; };
-		211C03A51FC6604800E51FCF /* PublicGroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicGroupViewController.h; sourceTree = "<group>"; };
-		211C03A71FC6604800E51FCF /* GroupProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupProfileViewController.h; sourceTree = "<group>"; };
-		211C03A81FC6604800E51FCF /* UserProfileFooterPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserProfileFooterPanel.h; sourceTree = "<group>"; };
-		211C03A91FC6604800E51FCF /* ChatRoomMemberListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatRoomMemberListViewController.h; sourceTree = "<group>"; };
-		211C03AA1FC6604800E51FCF /* ChatGroupProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatGroupProfileViewController.m; sourceTree = "<group>"; };
-		211C03AB1FC6604800E51FCF /* UserProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserProfileViewController.h; sourceTree = "<group>"; };
-		211C03AC1FC6604800E51FCF /* ProfileHeaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileHeaders.h; sourceTree = "<group>"; };
-		211C03AD1FC6604800E51FCF /* RichItemTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RichItemTableViewController.h; sourceTree = "<group>"; };
-		211C03AE1FC6604800E51FCF /* UserProfileHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserProfileHeaderView.m; sourceTree = "<group>"; };
-		211C03AF1FC6604800E51FCF /* ChatRoomProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatRoomProfileViewController.m; sourceTree = "<group>"; };
-		211C03B01FC6604800E51FCF /* GroupMemberInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupMemberInfoViewController.h; sourceTree = "<group>"; };
-		211C03B11FC6604800E51FCF /* UserActionButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserActionButton.h; sourceTree = "<group>"; };
-		211C03B21FC6604800E51FCF /* ChatGroupMemberListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatGroupMemberListViewController.m; sourceTree = "<group>"; };
-		211C03B31FC6604800E51FCF /* StrangerProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StrangerProfileViewController.m; sourceTree = "<group>"; };
-		211C03B41FC6604800E51FCF /* MyProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyProfileViewController.h; sourceTree = "<group>"; };
-		211C03B51FC6604800E51FCF /* FriendProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendProfileViewController.h; sourceTree = "<group>"; };
-		211C03B61FC6604800E51FCF /* GroupMemberListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupMemberListViewController.h; sourceTree = "<group>"; };
-		211C03B71FC6604800E51FCF /* ChatGroupProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatGroupProfileViewController.h; sourceTree = "<group>"; };
-		211C03B81FC6604800E51FCF /* ChatRoomMemberListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatRoomMemberListViewController.m; sourceTree = "<group>"; };
-		211C03B91FC6604800E51FCF /* UserProfileFooterPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserProfileFooterPanel.m; sourceTree = "<group>"; };
-		211C03BA1FC6604800E51FCF /* GroupProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupProfileViewController.m; sourceTree = "<group>"; };
-		211C03BB1FC6604800E51FCF /* RichItemTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RichItemTableViewController.m; sourceTree = "<group>"; };
-		211C03BC1FC6604800E51FCF /* UserProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserProfileViewController.m; sourceTree = "<group>"; };
-		211C03BD1FC6604800E51FCF /* GroupMemberInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupMemberInfoViewController.m; sourceTree = "<group>"; };
-		211C03BE1FC6604800E51FCF /* ChatRoomProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatRoomProfileViewController.h; sourceTree = "<group>"; };
-		211C03BF1FC6604800E51FCF /* UserProfileHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserProfileHeaderView.h; sourceTree = "<group>"; };
-		211C03C01FC6604800E51FCF /* FriendProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendProfileViewController.m; sourceTree = "<group>"; };
-		211C03C11FC6604800E51FCF /* GroupMemberListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupMemberListViewController.m; sourceTree = "<group>"; };
-		211C03C21FC6604800E51FCF /* MyProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyProfileViewController.m; sourceTree = "<group>"; };
-		211C03C31FC6604800E51FCF /* StrangerProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StrangerProfileViewController.h; sourceTree = "<group>"; };
-		211C03C41FC6604800E51FCF /* ChatGroupMemberListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatGroupMemberListViewController.h; sourceTree = "<group>"; };
-		211C03C51FC6604800E51FCF /* UserActionButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserActionButton.m; sourceTree = "<group>"; };
-		211C03C71FC6604800E51FCF /* NotifySetupController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotifySetupController.m; sourceTree = "<group>"; };
-		211C03C81FC6604800E51FCF /* BlackListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlackListViewController.m; sourceTree = "<group>"; };
-		211C03C91FC6604800E51FCF /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
-		211C03CA1FC6604800E51FCF /* BlackListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlackListViewController.h; sourceTree = "<group>"; };
-		211C03CB1FC6604800E51FCF /* NotifySetupController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotifySetupController.h; sourceTree = "<group>"; };
-		211C03CC1FC6604800E51FCF /* SettingHeaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingHeaders.h; sourceTree = "<group>"; };
-		211C03CD1FC6604800E51FCF /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
-		211C03CF1FC6604800E51FCF /* SubGroupMgrViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubGroupMgrViewController.h; sourceTree = "<group>"; };
-		211C03D01FC6604800E51FCF /* SubGroupHeaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubGroupHeaders.h; sourceTree = "<group>"; };
-		211C03D11FC6604800E51FCF /* SubGroupPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubGroupPickerViewController.m; sourceTree = "<group>"; };
-		211C03D21FC6604800E51FCF /* SubGroupMgrViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubGroupMgrViewController.m; sourceTree = "<group>"; };
-		211C03D31FC6604800E51FCF /* SubGroupPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubGroupPickerViewController.h; sourceTree = "<group>"; };
 		211C03D51FC6604800E51FCF /* 11.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = 11.caf; sourceTree = "<group>"; };
 		211C03D61FC6604800E51FCF /* 10.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = 10.caf; sourceTree = "<group>"; };
 		211C03D71FC6604800E51FCF /* 00.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = 00.caf; sourceTree = "<group>"; };
 		211C03D81FC6604800E51FCF /* 01.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = 01.caf; sourceTree = "<group>"; };
-		211C03D91FC6604800E51FCF /* TIMTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TIMTabBarController.m; sourceTree = "<group>"; };
 		211C03DB1FC6604800E51FCF /* IMAAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMAAppDelegate.h; sourceTree = "<group>"; };
 		211C03DC1FC6604800E51FCF /* ConstHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConstHeader.h; sourceTree = "<group>"; };
 		211C03DD1FC6604800E51FCF /* TIMChat-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TIMChat-Prefix.pch"; sourceTree = "<group>"; };
@@ -1479,6 +1341,10 @@
 		2E973FC81FDA279C005C2D5F /* LangSwitcher.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LangSwitcher.m; sourceTree = "<group>"; };
 		2E973FCD1FDABA0F005C2D5F /* ChatSysMsgCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatSysMsgCell.h; sourceTree = "<group>"; };
 		2E973FCE1FDABA0F005C2D5F /* ChatSysMsgCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatSysMsgCell.m; sourceTree = "<group>"; };
+		2E973FD11FDBC5B0005C2D5F /* BaseLabel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseLabel.h; sourceTree = "<group>"; };
+		2E973FD21FDBC5B0005C2D5F /* BaseLabel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseLabel.m; sourceTree = "<group>"; };
+		2E973FD41FDBC5CC005C2D5F /* BaseButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseButton.h; sourceTree = "<group>"; };
+		2E973FD51FDBC5CC005C2D5F /* BaseButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseButton.m; sourceTree = "<group>"; };
 		2EA584B41FA813C900C7106C /* Coin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Coin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EA584C01FA813C900C7106C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2EA584C31FA813C900C7106C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -2255,7 +2121,6 @@
 			children = (
 				211C025A1FC6604800E51FCF /* TIMShow */,
 				211C02691FC6604800E51FCF /* TIMAdapter.h */,
-				211C026A1FC6604800E51FCF /* TIMModelInterface */,
 				211C026B1FC6604800E51FCF /* TIMModel */,
 				211C02911FC6604800E51FCF /* Playform */,
 			);
@@ -2281,13 +2146,6 @@
 				211C02681FC6604800E51FCF /* IMAShowAble.h */,
 			);
 			path = TIMShow;
-			sourceTree = "<group>";
-		};
-		211C026A1FC6604800E51FCF /* TIMModelInterface */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = TIMModelInterface;
 			sourceTree = "<group>";
 		};
 		211C026B1FC6604800E51FCF /* TIMModel */ = {
@@ -2454,55 +2312,18 @@
 		211C02C91FC6604800E51FCF /* AppUI */ = {
 			isa = PBXGroup;
 			children = (
-				211C02CA1FC6604800E51FCF /* AddGroup */,
-				211C02D21FC6604800E51FCF /* AddFriend */,
 				211C02D71FC6604800E51FCF /* ChatUI */,
-				211C036E1FC6604800E51FCF /* ChatSetting */,
 				211C03761FC6604800E51FCF /* ConversationList */,
-				211C03821FC6604800E51FCF /* TIMTabBarController.h */,
-				211C03831FC6604800E51FCF /* Search */,
 				211C03871FC6604800E51FCF /* AppUIHeaders.h */,
-				211C03881FC6604800E51FCF /* ContactList */,
-				211C03A61FC6604800E51FCF /* Profile */,
-				211C03C61FC6604800E51FCF /* Setting */,
-				211C03CE1FC6604800E51FCF /* SubGroup */,
 				211C03D41FC6604800E51FCF /* Sound */,
-				211C03D91FC6604800E51FCF /* TIMTabBarController.m */,
-				211C03DA1FC6604800E51FCF /* Login */,
 			);
 			path = AppUI;
-			sourceTree = "<group>";
-		};
-		211C02CA1FC6604800E51FCF /* AddGroup */ = {
-			isa = PBXGroup;
-			children = (
-				211C02CB1FC6604800E51FCF /* SearchGroupResultCell.h */,
-				211C02CC1FC6604800E51FCF /* AddGroupProfileViewController.m */,
-				211C02CD1FC6604800E51FCF /* AddGroupHeaders.h */,
-				211C02CE1FC6604800E51FCF /* AddGroupViewController.h */,
-				211C02CF1FC6604800E51FCF /* AddGroupProfileViewController.h */,
-				211C02D01FC6604800E51FCF /* SearchGroupResultCell.m */,
-				211C02D11FC6604800E51FCF /* AddGroupViewController.m */,
-			);
-			path = AddGroup;
-			sourceTree = "<group>";
-		};
-		211C02D21FC6604800E51FCF /* AddFriend */ = {
-			isa = PBXGroup;
-			children = (
-				211C02D31FC6604800E51FCF /* AddFriendViewController.m */,
-				211C02D51FC6604800E51FCF /* AddFriendViewController.h */,
-				211C02D61FC6604800E51FCF /* AddFriendHeaders.h */,
-			);
-			path = AddFriend;
 			sourceTree = "<group>";
 		};
 		211C02D71FC6604800E51FCF /* ChatUI */ = {
 			isa = PBXGroup;
 			children = (
 				211C02D81FC6604800E51FCF /* Chat */,
-				211C036C1FC6604800E51FCF /* CustomChatUIViewController.h */,
-				211C036D1FC6604800E51FCF /* CustomChatUIViewController.m */,
 			);
 			path = ChatUI;
 			sourceTree = "<group>";
@@ -2773,20 +2594,6 @@
 			path = GIF;
 			sourceTree = "<group>";
 		};
-		211C036E1FC6604800E51FCF /* ChatSetting */ = {
-			isa = PBXGroup;
-			children = (
-				211C036F1FC6604800E51FCF /* EditInfoViewController.h */,
-				211C03701FC6604800E51FCF /* GroupMemberProfileViewController.h */,
-				211C03711FC6604800E51FCF /* GroupMemberInfoCell.m */,
-				211C03721FC6604800E51FCF /* EditInfoViewController.m */,
-				211C03731FC6604800E51FCF /* GroupMemberProfileViewController.m */,
-				211C03741FC6604800E51FCF /* ChatSettingHeaders.h */,
-				211C03751FC6604800E51FCF /* GroupMemberInfoCell.h */,
-			);
-			path = ChatSetting;
-			sourceTree = "<group>";
-		};
 		211C03761FC6604800E51FCF /* ConversationList */ = {
 			isa = PBXGroup;
 			children = (
@@ -2805,116 +2612,6 @@
 			path = ConversationList;
 			sourceTree = "<group>";
 		};
-		211C03831FC6604800E51FCF /* Search */ = {
-			isa = PBXGroup;
-			children = (
-				211C03841FC6604800E51FCF /* SearchResultViewController.m */,
-				211C03851FC6604800E51FCF /* SearchHeaders.h */,
-				211C03861FC6604800E51FCF /* SearchResultViewController.h */,
-			);
-			path = Search;
-			sourceTree = "<group>";
-		};
-		211C03881FC6604800E51FCF /* ContactList */ = {
-			isa = PBXGroup;
-			children = (
-				211C03891FC6604800E51FCF /* ChatRoomViewController.h */,
-				211C038A1FC6604800E51FCF /* ContactDrawerView.m */,
-				211C038B1FC6604800E51FCF /* ContactItemTableViewCell.h */,
-				211C038C1FC6604800E51FCF /* NewGroupViewController.h */,
-				211C038D1FC6604800E51FCF /* GroupSystemMsgViewController.m */,
-				211C038E1FC6604800E51FCF /* ContactPanelTableViewCell.m */,
-				211C038F1FC6604800E51FCF /* ContactListViewController.h */,
-				211C03901FC6604800E51FCF /* FriendNotifyTableViewCell.h */,
-				211C03911FC6604800E51FCF /* GroupTableViewCell.m */,
-				211C03921FC6604800E51FCF /* FutureFriendsViewController.m */,
-				211C03931FC6604800E51FCF /* PublicGroupViewController.m */,
-				211C03941FC6604800E51FCF /* FriendListViewController.m */,
-				211C03951FC6604800E51FCF /* ChatGroupViewController.h */,
-				211C03961FC6604800E51FCF /* StrangerApplyViewController.h */,
-				211C03971FC6604800E51FCF /* GroupSystemMsgViewController.h */,
-				211C03981FC6604800E51FCF /* ContactItemTableViewCell.m */,
-				211C03991FC6604800E51FCF /* NewGroupViewController.m */,
-				211C039A1FC6604800E51FCF /* ContactDrawerView.h */,
-				211C039B1FC6604800E51FCF /* ChatRoomViewController.m */,
-				211C039C1FC6604800E51FCF /* ContactPanelTableViewCell.h */,
-				211C039D1FC6604800E51FCF /* FutureFriendsViewController.h */,
-				211C039E1FC6604800E51FCF /* GroupTableViewCell.h */,
-				211C039F1FC6604800E51FCF /* FriendNotifyTableViewCell.m */,
-				211C03A01FC6604800E51FCF /* ContactListViewController.m */,
-				211C03A11FC6604800E51FCF /* StrangerApplyViewController.m */,
-				211C03A21FC6604800E51FCF /* ChatGroupViewController.m */,
-				211C03A31FC6604800E51FCF /* ContactListHeaders.h */,
-				211C03A41FC6604800E51FCF /* FriendListViewController.h */,
-				211C03A51FC6604800E51FCF /* PublicGroupViewController.h */,
-			);
-			path = ContactList;
-			sourceTree = "<group>";
-		};
-		211C03A61FC6604800E51FCF /* Profile */ = {
-			isa = PBXGroup;
-			children = (
-				211C03A71FC6604800E51FCF /* GroupProfileViewController.h */,
-				211C03A81FC6604800E51FCF /* UserProfileFooterPanel.h */,
-				211C03A91FC6604800E51FCF /* ChatRoomMemberListViewController.h */,
-				211C03AA1FC6604800E51FCF /* ChatGroupProfileViewController.m */,
-				211C03AB1FC6604800E51FCF /* UserProfileViewController.h */,
-				211C03AC1FC6604800E51FCF /* ProfileHeaders.h */,
-				211C03AD1FC6604800E51FCF /* RichItemTableViewController.h */,
-				211C03AE1FC6604800E51FCF /* UserProfileHeaderView.m */,
-				211C03AF1FC6604800E51FCF /* ChatRoomProfileViewController.m */,
-				211C03B01FC6604800E51FCF /* GroupMemberInfoViewController.h */,
-				211C03B11FC6604800E51FCF /* UserActionButton.h */,
-				211C03B21FC6604800E51FCF /* ChatGroupMemberListViewController.m */,
-				211C03B31FC6604800E51FCF /* StrangerProfileViewController.m */,
-				211C03B41FC6604800E51FCF /* MyProfileViewController.h */,
-				211C03B51FC6604800E51FCF /* FriendProfileViewController.h */,
-				211C03B61FC6604800E51FCF /* GroupMemberListViewController.h */,
-				211C03B71FC6604800E51FCF /* ChatGroupProfileViewController.h */,
-				211C03B81FC6604800E51FCF /* ChatRoomMemberListViewController.m */,
-				211C03B91FC6604800E51FCF /* UserProfileFooterPanel.m */,
-				211C03BA1FC6604800E51FCF /* GroupProfileViewController.m */,
-				211C03BB1FC6604800E51FCF /* RichItemTableViewController.m */,
-				211C03BC1FC6604800E51FCF /* UserProfileViewController.m */,
-				211C03BD1FC6604800E51FCF /* GroupMemberInfoViewController.m */,
-				211C03BE1FC6604800E51FCF /* ChatRoomProfileViewController.h */,
-				211C03BF1FC6604800E51FCF /* UserProfileHeaderView.h */,
-				211C03C01FC6604800E51FCF /* FriendProfileViewController.m */,
-				211C03C11FC6604800E51FCF /* GroupMemberListViewController.m */,
-				211C03C21FC6604800E51FCF /* MyProfileViewController.m */,
-				211C03C31FC6604800E51FCF /* StrangerProfileViewController.h */,
-				211C03C41FC6604800E51FCF /* ChatGroupMemberListViewController.h */,
-				211C03C51FC6604800E51FCF /* UserActionButton.m */,
-			);
-			path = Profile;
-			sourceTree = "<group>";
-		};
-		211C03C61FC6604800E51FCF /* Setting */ = {
-			isa = PBXGroup;
-			children = (
-				211C03C71FC6604800E51FCF /* NotifySetupController.m */,
-				211C03C81FC6604800E51FCF /* BlackListViewController.m */,
-				211C03C91FC6604800E51FCF /* SettingViewController.h */,
-				211C03CA1FC6604800E51FCF /* BlackListViewController.h */,
-				211C03CB1FC6604800E51FCF /* NotifySetupController.h */,
-				211C03CC1FC6604800E51FCF /* SettingHeaders.h */,
-				211C03CD1FC6604800E51FCF /* SettingViewController.m */,
-			);
-			path = Setting;
-			sourceTree = "<group>";
-		};
-		211C03CE1FC6604800E51FCF /* SubGroup */ = {
-			isa = PBXGroup;
-			children = (
-				211C03CF1FC6604800E51FCF /* SubGroupMgrViewController.h */,
-				211C03D01FC6604800E51FCF /* SubGroupHeaders.h */,
-				211C03D11FC6604800E51FCF /* SubGroupPickerViewController.m */,
-				211C03D21FC6604800E51FCF /* SubGroupMgrViewController.m */,
-				211C03D31FC6604800E51FCF /* SubGroupPickerViewController.h */,
-			);
-			path = SubGroup;
-			sourceTree = "<group>";
-		};
 		211C03D41FC6604800E51FCF /* Sound */ = {
 			isa = PBXGroup;
 			children = (
@@ -2924,13 +2621,6 @@
 				211C03D81FC6604800E51FCF /* 01.caf */,
 			);
 			path = Sound;
-			sourceTree = "<group>";
-		};
-		211C03DA1FC6604800E51FCF /* Login */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Login;
 			sourceTree = "<group>";
 		};
 		211C03E11FC6604800E51FCF /* Model */ = {
@@ -4048,6 +3738,7 @@
 		2E394FEA1FB056A900BA0829 /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				2E973FD01FDBC57C005C2D5F /* View */,
 				2E394FF31FB057B200BA0829 /* TLNavigationController.h */,
 				2E394FF01FB057B200BA0829 /* TLNavigationController.m */,
 				2E394FEE1FB057B200BA0829 /* TLTabBarController.h */,
@@ -4076,6 +3767,17 @@
 				21223CB61FBDB2D200057444 /* WebVC.m */,
 			);
 			path = Expand;
+			sourceTree = "<group>";
+		};
+		2E973FD01FDBC57C005C2D5F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				2E973FD11FDBC5B0005C2D5F /* BaseLabel.h */,
+				2E973FD21FDBC5B0005C2D5F /* BaseLabel.m */,
+				2E973FD41FDBC5CC005C2D5F /* BaseButton.h */,
+				2E973FD51FDBC5CC005C2D5F /* BaseButton.m */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		2EA584AB1FA813C900C7106C = {
@@ -4331,8 +4033,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				211C05131FC671F000E51FCF /* UserProfileViewController.m in Sources */,
-				211C04CD1FC6604900E51FCF /* EditInfoViewController.m in Sources */,
 				211C042F1FC6604800E51FCF /* LibraryNavigationPanel.m in Sources */,
 				21205D0C1FCD6512003C6C7C /* TLWXManager.m in Sources */,
 				211A34F11FB430DB00FEB71F /* SettingModel.m in Sources */,
@@ -4348,13 +4048,9 @@
 				215979761FB84CC70029F177 /* BillDetailCell.m in Sources */,
 				21A821171FDA690700AE59F2 /* GoogleAuthVC.m in Sources */,
 				211CF9A41FC55ADD00E51FCF /* OrderPriceModel.m in Sources */,
-				211C04731FC6604800E51FCF /* AddGroupProfileViewController.m in Sources */,
 				211C04941FC6604800E51FCF /* ChatViewController.m in Sources */,
 				211C88821FBDDADF00CF4FC8 /* QuotationListVC.m in Sources */,
 				21A7F3171FB2E2F900FAA0A2 /* TLUserForgetPwdVC.m in Sources */,
-				211C04E41FC6604900E51FCF /* UserProfileHeaderView.m in Sources */,
-				211C04DB1FC6604900E51FCF /* FriendListViewController.m in Sources */,
-				211C04F61FC6604900E51FCF /* SubGroupMgrViewController.m in Sources */,
 				211C04021FC6604800E51FCF /* NSString+Common.m in Sources */,
 				211C04111FC6604800E51FCF /* NetworkUtility.m in Sources */,
 				211C045B1FC6604800E51FCF /* IMAPlatform+Friend.m in Sources */,
@@ -4372,20 +4068,16 @@
 				211DE6BE1FB58B4C002FCF3D /* NSNumber+Extension.m in Sources */,
 				211C04091FC6604800E51FCF /* UIView+RelativeCoordinate.m in Sources */,
 				211C046F1FC6604800E51FCF /* PopupMenuItem.m in Sources */,
-				211C04751FC6604800E51FCF /* AddGroupViewController.m in Sources */,
 				21635DB61FBEB911003F48B4 /* PublishButton.m in Sources */,
 				211C04351FC6604800E51FCF /* IMBaseViewController.m in Sources */,
 				2182D3001FC96C89008EDCE4 /* OrderArbitrationView.m in Sources */,
 				211DE6B31FB58B4C002FCF3D /* UIColor+theme.m in Sources */,
-				211C04F51FC6604900E51FCF /* SubGroupPickerViewController.m in Sources */,
 				211DE6BA1FB58B4C002FCF3D /* NSString+Check.m in Sources */,
 				21A7F3151FB2E2F900FAA0A2 /* TLChangeMobileVC.m in Sources */,
 				211C04671FC6604800E51FCF /* IMAPlatform+AppConfig.m in Sources */,
 				211DE6AC1FB58B4C002FCF3D /* TLPageDataHelper.m in Sources */,
 				211C05001FC6604900E51FCF /* ChatManager.m in Sources */,
 				211DE6BC1FB58B4C002FCF3D /* NSString+Extension.m in Sources */,
-				211C04D51FC6604900E51FCF /* ContactDrawerView.m in Sources */,
-				211C04DA1FC6604900E51FCF /* PublicGroupViewController.m in Sources */,
 				2125B8B81FD91F9D00591812 /* QuotationVC.m in Sources */,
 				211C04211FC6604800E51FCF /* UIViewController+ADScaleTransition.m in Sources */,
 				21A7F3161FB2E2F900FAA0A2 /* TLUserLoginVC.m in Sources */,
@@ -4400,8 +4092,6 @@
 				21205CD21FCCFE70003C6C7C /* FansCell.m in Sources */,
 				211C043A1FC6604800E51FCF /* ScrollBaseViewController.m in Sources */,
 				211C046B1FC6604800E51FCF /* TipTextFieldTableViewCell.m in Sources */,
-				211C04EF1FC6604900E51FCF /* GroupMemberListViewController.m in Sources */,
-				211C04761FC6604800E51FCF /* AddFriendViewController.m in Sources */,
 				211C041C1FC6604800E51FCF /* PathUtility.m in Sources */,
 				211C04711FC6604800E51FCF /* JSCustomBadge.m in Sources */,
 				211C04271FC6604800E51FCF /* UIViewController+ADFlipTransition.m in Sources */,
@@ -4430,7 +4120,6 @@
 				2121DCC51FC6F19E001FC2E3 /* SellConfirmView.m in Sources */,
 				215979791FB947730029F177 /* WithdrawalsCoinVC.m in Sources */,
 				211DE6AE1FB58B4C002FCF3D /* TLUploadManager.m in Sources */,
-				211C04E11FC6604900E51FCF /* StrangerApplyViewController.m in Sources */,
 				215979701FB84B8A0029F177 /* BillDetailVC.m in Sources */,
 				211C04221FC6604800E51FCF /* UITableViewController+ADScaleTransititon.m in Sources */,
 				211C040C1FC6604800E51FCF /* NSObject+KVOCategory.m in Sources */,
@@ -4438,7 +4127,6 @@
 				2125B8BB1FD9201C00591812 /* QuotationTableView.m in Sources */,
 				2E394FF51FB057B300BA0829 /* TLNavigationController.m in Sources */,
 				21A7F3241FB2E2F900FAA0A2 /* CaptchaView.m in Sources */,
-				211C04E01FC6604900E51FCF /* ContactListViewController.m in Sources */,
 				2182D2FD1FC938C7008EDCE4 /* OrderCommentView.m in Sources */,
 				211C049B1FC6604900E51FCF /* PhotoBrowserViewController.m in Sources */,
 				211C04431FC6604800E51FCF /* BaseCollectionViewController.m in Sources */,
@@ -4449,19 +4137,16 @@
 				211C040E1FC6604800E51FCF /* UIImage+Alpha.m in Sources */,
 				211C04681FC6604800E51FCF /* TextTableViewHeaderFooterView.m in Sources */,
 				21205CE21FCD3163003C6C7C /* CoinAddressModel.m in Sources */,
-				211C04FB1FC6604900E51FCF /* TIMTabBarController.m in Sources */,
 				211C03EE1FC6604800E51FCF /* FBKVOController.m in Sources */,
 				211DE6C61FB58B4C002FCF3D /* HttpLogger.m in Sources */,
 				211C04051FC6604800E51FCF /* UIImage+ImageEffect.m in Sources */,
 				21D216921FBA96060040795E /* NoticeModel.m in Sources */,
-				211C04D81FC6604900E51FCF /* GroupTableViewCell.m in Sources */,
 				211C04841FC6604800E51FCF /* MyChatToolBarView.m in Sources */,
 				211C044A1FC6604800E51FCF /* TIMElem+ShowDescription.m in Sources */,
 				211C04721FC6604800E51FCF /* TextViewTableViewCell.m in Sources */,
 				211DE6CA1FB5A586002FCF3D /* RechargeCoinVC.m in Sources */,
 				2159796A1FB82BC10029F177 /* CustomPickerView.m in Sources */,
 				211D3C181FCFE3C100B55F9F /* HistoryRateCell.m in Sources */,
-				211C04CC1FC6604900E51FCF /* GroupMemberInfoCell.m in Sources */,
 				211A34DE1FB4245D00FEB71F /* MineCell.m in Sources */,
 				2121DCCE1FC7127C001FC2E3 /* OrderListCell.m in Sources */,
 				211C043F1FC6604800E51FCF /* LibraryScrollView.m in Sources */,
@@ -4472,13 +4157,10 @@
 				2E973FCF1FDABA0F005C2D5F /* ChatSysMsgCell.m in Sources */,
 				211C04891FC6604800E51FCF /* ChatFunctionPanel.m in Sources */,
 				211C047A1FC6604800E51FCF /* EmojHelper.m in Sources */,
-				211C04DF1FC6604900E51FCF /* FriendNotifyTableViewCell.m in Sources */,
 				211C04641FC6604800E51FCF /* IMAConversationManager.m in Sources */,
-				211C04CE1FC6604900E51FCF /* GroupMemberProfileViewController.m in Sources */,
 				2EE950D21FB066EB00429257 /* CoinChangeView.m in Sources */,
 				211C03ED1FC6604800E51FCF /* NSObject+FBKVOController.m in Sources */,
 				211C047C1FC6604800E51FCF /* MyAudioInputView.m in Sources */,
-				211C04741FC6604800E51FCF /* SearchGroupResultCell.m in Sources */,
 				211C041B1FC6604800E51FCF /* UIColor+MLPFlatColors.m in Sources */,
 				211DE6C21FB58B4C002FCF3D /* Foundation+Log.m in Sources */,
 				211C040F1FC6604800E51FCF /* KeyChainHelper.m in Sources */,
@@ -4496,12 +4178,8 @@
 				211C03FD1FC6604800E51FCF /* NSObject+CommonBlock.m in Sources */,
 				2E3950001FB05ADB00BA0829 /* TLTransactionVC.m in Sources */,
 				211C046A1FC6604800E51FCF /* RichMenuTableViewCell.m in Sources */,
-				211C04F31FC6604900E51FCF /* BlackListViewController.m in Sources */,
-				211C04E31FC6604900E51FCF /* ChatGroupProfileViewController.m in Sources */,
 				211C04121FC6604800E51FCF /* MKNetworkOperation.m in Sources */,
 				211C04581FC6604800E51FCF /* IMAGroupMember.m in Sources */,
-				211C04ED1FC6604900E51FCF /* GroupMemberInfoViewController.m in Sources */,
-				211C04DD1FC6604900E51FCF /* NewGroupViewController.m in Sources */,
 				211C04831FC6604800E51FCF /* MyAudioManager.m in Sources */,
 				211D3C0F1FCFD50200B55F9F /* GuideDetailVC.m in Sources */,
 				211C04901FC6604800E51FCF /* ChatInputBaseView.m in Sources */,
@@ -4509,7 +4187,6 @@
 				211C041F1FC6604800E51FCF /* FTAnimationManager.m in Sources */,
 				211DE6B01FB58B4C002FCF3D /* UILable+convience.m in Sources */,
 				211CEF231FCBE5BA000FB0C4 /* SearchResultVC.m in Sources */,
-				211C04DC1FC6604900E51FCF /* ContactItemTableViewCell.m in Sources */,
 				211CEF341FCC3072000FB0C4 /* MyAdvertiseCell.m in Sources */,
 				211C03FF1FC6604800E51FCF /* NSData+Common.m in Sources */,
 				211C04801FC6604800E51FCF /* MyEmojView.m in Sources */,
@@ -4518,7 +4195,6 @@
 				2159795D1FB81C2B0029F177 /* BillVC.m in Sources */,
 				2125B8BE1FD9204200591812 /* QuotationCell.m in Sources */,
 				211C04FF1FC6604900E51FCF /* ChatUserProfile.m in Sources */,
-				211C04E51FC6604900E51FCF /* ChatRoomProfileViewController.m in Sources */,
 				211C04791FC6604800E51FCF /* ChatImageBrowserView.m in Sources */,
 				211A53321FBFE4F100CC6294 /* RateDescTableView.m in Sources */,
 				211C04321FC6604800E51FCF /* NSObject+loadPadClass.m in Sources */,
@@ -4571,8 +4247,6 @@
 				211A34E11FB4247800FEB71F /* MineModel.m in Sources */,
 				21A7F3631FB2F16C00FAA0A2 /* HTMLStrVC.m in Sources */,
 				211C05021FC6604900E51FCF /* NoticeTableView.m in Sources */,
-				211C04F21FC6604900E51FCF /* NotifySetupController.m in Sources */,
-				211C04E71FC6604900E51FCF /* StrangerProfileViewController.m in Sources */,
 				211DE6B91FB58B4C002FCF3D /* NSDictionary+Extension.m in Sources */,
 				211C043E1FC6604800E51FCF /* LibraryViewController.m in Sources */,
 				21A7F31E1FB2E2F900FAA0A2 /* TLUser.m in Sources */,
@@ -4586,7 +4260,6 @@
 				2EA584C71FA813C900C7106C /* main.m in Sources */,
 				211DE6AF1FB58B4C002FCF3D /* UILabel+Extension.m in Sources */,
 				211C04661FC6604800E51FCF /* IMAPlatform+FriendShip.m in Sources */,
-				211C04D71FC6604900E51FCF /* ContactPanelTableViewCell.m in Sources */,
 				211C04561FC6604800E51FCF /* IMAHost+HostAPIs.m in Sources */,
 				21A7F3131FB2E2F900FAA0A2 /* TLAccountSetBaseVC.m in Sources */,
 				211C05011FC6604900E51FCF /* NoticeListCell.m in Sources */,
@@ -4615,14 +4288,11 @@
 				211DE6C41FB58B4C002FCF3D /* HttpSign.m in Sources */,
 				211C04CF1FC6604900E51FCF /* SwipeDeleteTableView.m in Sources */,
 				211C043B1FC6604800E51FCF /* MenuItem.m in Sources */,
-				211C04DE1FC6604900E51FCF /* ChatRoomViewController.m in Sources */,
 				211F78141FCAFBCA0023F133 /* WaitingOrderVC.m in Sources */,
 				211C04151FC6604800E51FCF /* NSData+MKBase64.m in Sources */,
-				211C04EB1FC6604900E51FCF /* RichItemTableViewController.m in Sources */,
 				211A35041FB45A6A00FEB71F /* WalletHeaderView.m in Sources */,
 				21D216A21FBAEDB10040795E /* QuotationView.m in Sources */,
 				211C04061FC6604800E51FCF /* UIView+CustomAutoLayout.m in Sources */,
-				211C04EA1FC6604900E51FCF /* GroupProfileViewController.m in Sources */,
 				211C04171FC6604800E51FCF /* UIImageView+MKNetworkKitAdditions.m in Sources */,
 				211C045A1FC6604800E51FCF /* IMACustomConversation.m in Sources */,
 				211C041E1FC6604800E51FCF /* FTAnimation+UIView.m in Sources */,
@@ -4632,7 +4302,6 @@
 				211C04381FC6604800E51FCF /* PageMenuScrollView.m in Sources */,
 				211C046E1FC6604800E51FCF /* PopupMenu.m in Sources */,
 				211C04081FC6604800E51FCF /* GTMBase64.m in Sources */,
-				211C04F01FC6604900E51FCF /* MyProfileViewController.m in Sources */,
 				21D216981FBA9C040040795E /* SystemNoticeVC.m in Sources */,
 				211C04331FC6604800E51FCF /* CommonBaseViewController.m in Sources */,
 				211C040A1FC6604800E51FCF /* UIImage+Common.m in Sources */,
@@ -4678,7 +4347,6 @@
 				211C048A1FC6604800E51FCF /* ChatInputPanel.m in Sources */,
 				211A532F1FBFE4CF00CC6294 /* RateDescCell.m in Sources */,
 				211C049F1FC6604900E51FCF /* IMAMsg+UITableViewCell.m in Sources */,
-				211C04D91FC6604900E51FCF /* FutureFriendsViewController.m in Sources */,
 				211C04951FC6604800E51FCF /* MicroVideoPlayView.m in Sources */,
 				211C04C91FC6604900E51FCF /* ChatInputTextView.m in Sources */,
 				211CEF141FCBBF90000FB0C4 /* SelectScrollView.m in Sources */,
@@ -4687,9 +4355,7 @@
 				211C049E1FC6604900E51FCF /* MsgSendingTip.m in Sources */,
 				211C04261FC6604800E51FCF /* ADFlipTransition.m in Sources */,
 				211C04571FC6604800E51FCF /* IMAUser.m in Sources */,
-				211C04E81FC6604900E51FCF /* ChatRoomMemberListViewController.m in Sources */,
 				211C049C1FC6604900E51FCF /* RichChatViewController.m in Sources */,
-				211C04E21FC6604900E51FCF /* ChatGroupViewController.m in Sources */,
 				211C04701FC6604800E51FCF /* UIPlaceHolderTextView.m in Sources */,
 				211DE6B11FB58B4C002FCF3D /* UIButton+EnLargeEdge.m in Sources */,
 				211C04281FC6604800E51FCF /* UITableViewController+ADFlipTransition.m in Sources */,
@@ -4705,35 +4371,30 @@
 				2120A8FC1FD51DF800B03DB0 /* UITabBar+Badge.m in Sources */,
 				211A34E41FB4255700FEB71F /* MineGroup.m in Sources */,
 				211C041D1FC6604800E51FCF /* FTUtils+UIGestureRecognizer.m in Sources */,
-				211C04CB1FC6604900E51FCF /* CustomChatUIViewController.m in Sources */,
-				211C04E91FC6604900E51FCF /* UserProfileFooterPanel.m in Sources */,
 				2E394FF41FB057B300BA0829 /* TLTabBarController.m in Sources */,
 				211CF99A1FC4270600E51FCF /* TradeSellVC.m in Sources */,
 				2E3950031FB05AF200BA0829 /* TLOrderVC.m in Sources */,
 				21A7F3191FB2E2F900FAA0A2 /* TLAccountBaseVC.m in Sources */,
 				211DE6B21FB58B4C002FCF3D /* UIButton+Custom.m in Sources */,
 				211DE6171FB54685002FCF3D /* WalletCell.m in Sources */,
-				211C04F11FC6604900E51FCF /* UserActionButton.m in Sources */,
 				211C04D31FC6604900E51FCF /* ConversationListViewController.m in Sources */,
-				211C04EE1FC6604900E51FCF /* FriendProfileViewController.m in Sources */,
 				211C03F31FC6604800E51FCF /* MenuButton.m in Sources */,
+				2E973FD61FDBC5CC005C2D5F /* BaseButton.m in Sources */,
 				211A34F01FB430DB00FEB71F /* SettingGroup.m in Sources */,
 				2EE950C01FB05B2400429257 /* TLHangQingVC.m in Sources */,
 				211C03FC1FC6604800E51FCF /* UIViewController+ChildViewController.m in Sources */,
 				211D3C121FCFE35E00B55F9F /* HistoryRateVC.m in Sources */,
+				2E973FD31FDBC5B0005C2D5F /* BaseLabel.m in Sources */,
 				211C04371FC6604800E51FCF /* TableSearchViewController.m in Sources */,
 				211CEF311FCC2FD1000FB0C4 /* MyAdvertiseTableView.m in Sources */,
 				211C04291FC6604800E51FCF /* UICollectionViewController+ADFlipTransition.m in Sources */,
 				211C04A21FC6604900E51FCF /* ChatSystemFaceItem.m in Sources */,
-				211C04D61FC6604900E51FCF /* GroupSystemMsgViewController.m in Sources */,
 				2EE950D91FB06AA900429257 /* TLBannerView.m in Sources */,
 				211CEF1D1FCBC106000FB0C4 /* SearchAdvertiseVC.m in Sources */,
 				21205CF31FCD5F98003C6C7C /* InviteModel.m in Sources */,
-				211C04D41FC6604900E51FCF /* SearchResultViewController.m in Sources */,
 				211C04A01FC6604900E51FCF /* ChatBaseTableViewCell.m in Sources */,
 				211DE6141FB5465E002FCF3D /* WalletTableView.m in Sources */,
 				211C044F1FC6604800E51FCF /* CustomElemCmd.m in Sources */,
-				211C04F41FC6604900E51FCF /* SettingViewController.m in Sources */,
 				211C043C1FC6604800E51FCF /* PopupView.m in Sources */,
 				211C042B1FC6604800E51FCF /* NSMutableDictionary+Json.m in Sources */,
 				211DE6A31FB58B4C002FCF3D /* TLNetworking.m in Sources */,
@@ -4745,7 +4406,6 @@
 				211C03F51FC6604800E51FCF /* KeyValueTableViewController.m in Sources */,
 				21205CE81FCD3F84003C6C7C /* CoinAddAddressVC.m in Sources */,
 				2121DCC21FC6F17C001FC2E3 /* TradeSellView.m in Sources */,
-				211C04E61FC6604900E51FCF /* ChatGroupMemberListViewController.m in Sources */,
 				211C04921FC6604800E51FCF /* RichChatTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4874,6 +4534,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_OBJC_WEAK = NO;
+				CLANG_WARN_STRICT_PROTOTYPES = NO;
 				CODE_SIGN_ENTITLEMENTS = Coin/Coin.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6PF7VHZB5Z;
@@ -4903,6 +4564,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_OBJC_WEAK = NO;
+				CLANG_WARN_STRICT_PROTOTYPES = NO;
 				CODE_SIGN_ENTITLEMENTS = Coin/Coin.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6PF7VHZB5Z;

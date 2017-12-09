@@ -14,8 +14,13 @@
 #import "IMAPlatform.h"
 #import "IMAConversation.h"
 
-//
-#define IM_PWD @"123456"
+
+#define SDK_APP_ID @"CHAT_SDK_APP_ID"
+#define ACCOUNT_TYPE @"CHAT_ACCOUNT_TYPE"
+#define USER_SIGN @"CHAT_USER_SIGN"
+
+//config.sdkAppId = 1400050575;
+//config.accountType = @"19287";
 
 @interface ChatManager ()<TIMConnListener,TIMUserStatusListener,TIMRefreshListener,TIMFriendshipListener,TIMGroupListener,TIMMessageListener,TIMMessageUpdateListener>
 
@@ -24,12 +29,7 @@
 @end
 
 @implementation ChatManager
-{
-    //微信、QQ、游客登录现在Demo中不再支持，如有需要，请用户自行完成
-    //    __weak id<WXApiDelegate>    _tlsuiwx;
-    //    TencentOAuth                *_openQQ;
-//    IMALoginParam               *_loginParam;
-}
+
 
 - (void)initChat {
     
@@ -43,12 +43,12 @@
     // 获取所有的会话列表
     // IMAConversation
     // 获取列表
-    CLSafeMutableArray *conversionList = [IMAPlatform sharedInstance].conversationMgr.conversationList;
+//    CLSafeMutableArray *conversionList = [IMAPlatform sharedInstance].conversationMgr.conversationList;
     
     //
     //群组列表
     //获取所有的群组列表
-    [IMAPlatform sharedInstance].contactMgr.groupList;
+//    [IMAPlatform sharedInstance].contactMgr.groupList;
     //
     //先去获取订单列表，根据订单列表查询是否有会话
     //
@@ -87,9 +87,12 @@
     [http postWithSuccess:^(id responseObject) {
         
         self.imModel = [IMModel mj_objectWithKeyValues:responseObject[@"data"]];
-        [AppConfig config].chatAppId = self.imModel.txAppCode;
-        [AppConfig config].chatAccountType = self.imModel.accountType;
-        //登录
+        
+        //保存信息,导数据库
+        [self saveIMAppInfoToDBAppId: self.imModel.txAppCode
+                         accountType: self.imModel.accountType
+                            userSign: self.imModel.sign];
+        
         
         IMALoginParam *loginParam = [[IMALoginParam alloc] init];
         loginParam.identifier = [TLUser user].userId;
@@ -103,6 +106,27 @@
     }];
 }
 
+- (void)saveIMAppInfoToDBAppId:(NSString *)apppId accountType:(NSString *)accountType userSign:(NSString *)sign {
+    
+    [[NSUserDefaults standardUserDefaults] setObject:apppId forKey:SDK_APP_ID];
+    [[NSUserDefaults standardUserDefaults] setObject:accountType forKey:ACCOUNT_TYPE];
+    [[NSUserDefaults standardUserDefaults] setObject:sign forKey:USER_SIGN];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+}
+
+- (NSString *)appId {
+    
+    return [[NSUserDefaults standardUserDefaults] objectForKey:SDK_APP_ID];
+
+}
+
+- (NSString *)accountType {
+    
+    return [[NSUserDefaults standardUserDefaults] objectForKey:ACCOUNT_TYPE];
+    
+}
+
 
 
 - (void)loginWithParam:(TIMLoginParam*)param {
@@ -113,14 +137,15 @@
         //同步消息列表
         [[IMAPlatform sharedInstance].conversationMgr asyncConversationList];
         
+        // 同步群组列表
+        [[IMAPlatform sharedInstance].contactMgr asyncGroupList];
+        
         //消息栏消息数
         NSInteger unReadCount = [[IMAPlatform sharedInstance].conversationMgr unReadMessageCount];
         
         [TLUser user].unReadMsgCount = unReadCount;
         
-        [IMAPlatform setAutoLogin:YES];
-        //        [_loginParam saveToLocal];
-        
+        [IMAPlatform setAutoLogin:YES];        
         [[IMAPlatform sharedInstance] configOnLoginSucc:param];
         //配置APNs
         //        [self configAPNs];
@@ -164,82 +189,62 @@
     
 };
 
-- (void)loginWithUserName:(NSString *)userName {
-    
-  [self loginWithUserName:userName pwd:IM_PWD];
-    
-}
-
-- (void)loginWithUserName:(NSString *)userName pwd:(NSString *)password{
-    
-    TIMLoginParam * login_param = [[TIMLoginParam alloc ]init];
-    
-    // identifier为用户名，userSig 为用户登录凭证
-    // appidAt3rd 在私有帐号情况下，填写与sdkAppId 一样
-    login_param.identifier = @"iOS_001";
-    login_param.userSig = @"usersig";
-    login_param.appidAt3rd = @"123456";
-    
-    [[TIMManager sharedInstance] login: login_param succ:^(){
-
-        [TLAlert alertWithSucces:@"登录成功"];
-        
-    } fail:^(int code, NSString * err) {
-        NSLog(@"Login Failed: %d->%@", code, err);
-        
-        switch (code) {
-            case 0:
-            {
-                [TLAlert alertWithError:err];
-
-            }break;
-             
-            case 1:
-            {
-                [TLAlert alertWithError:err];
-                
-            }break;
-                
-            case 2:
-            {
-                [TLAlert alertWithError:err];
-                
-            }break;
-                
-            case 3:
-            {
-                [TLAlert alertWithError:err];
-                
-            }break;
-                
-            default:
-                break;
-        }
-
-    }];
-    
-}
-
-- (void)chatLoginOut{
-    
-//    self.conversationListVC = nil;
-//    self.currentConversionId = nil;
-//    self.isHaveKefuUnredMsg = NO;
-//    [[EMClient sharedClient] logout:YES];
-//    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
-    
-}
-
-
-//- (NSInteger)unreadMsgCount{
-
-//    NSArray *conversations = [[EMClient sharedClient].chatManager getAllConversations];
-//    NSInteger unreadCount = 0;
-//    for (EMConversation *conversation in conversations) {
-//        unreadCount += conversation.unreadMessagesCount;
+//- (void)loginWithUserName:(NSString *)userName {
 //
-//    }
-//    return unreadCount;
+//  [self loginWithUserName:userName pwd:IM_PWD];
+//
 //}
+//
+//- (void)loginWithUserName:(NSString *)userName pwd:(NSString *)password{
+//
+//    TIMLoginParam * login_param = [[TIMLoginParam alloc ]init];
+//
+//    // identifier为用户名，userSig 为用户登录凭证
+//    // appidAt3rd 在私有帐号情况下，填写与sdkAppId 一样
+//    login_param.identifier = @"iOS_001";
+//    login_param.userSig = @"usersig";
+//    login_param.appidAt3rd = @"123456";
+//
+//    [[TIMManager sharedInstance] login: login_param succ:^(){
+//
+//        [TLAlert alertWithSucces:@"登录成功"];
+//
+//    } fail:^(int code, NSString * err) {
+//        NSLog(@"Login Failed: %d->%@", code, err);
+//
+//        switch (code) {
+//            case 0:
+//            {
+//                [TLAlert alertWithError:err];
+//
+//            }break;
+//
+//            case 1:
+//            {
+//                [TLAlert alertWithError:err];
+//
+//            }break;
+//
+//            case 2:
+//            {
+//                [TLAlert alertWithError:err];
+//
+//            }break;
+//
+//            case 3:
+//            {
+//                [TLAlert alertWithError:err];
+//
+//            }break;
+//
+//            default:
+//                break;
+//        }
+//
+//    }];
+//
+//}
+
+
 
 @end

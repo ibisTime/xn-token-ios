@@ -120,6 +120,10 @@
     [super viewDidLoad];
     [self configWithUser:_receiver];
     
+    //配置键盘
+    
+    _tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdateInputStatus:) name:kUserInputStatus object:nil];
     
     UITapGestureRecognizer* tapAction = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hiddenKeyBoard)];
@@ -754,7 +758,7 @@
 //    UITableViewCell *cell =[tableView cellForRowAtIndexPath:indexPath];
     if ([self isAdminMsg:msg]) {
         
-        return 25;
+        return 35;
         
     }
     
@@ -796,11 +800,12 @@
         if (!cell) {
 
             cell = [[ChatSysMsgCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"ChatSysMsgCellId"];
-            cell.textLabel.font = [UIFont systemFontOfSize:12];
+            cell.textLabel.font = [UIFont systemFontOfSize:14];
             cell.textLabel.textAlignment = NSTextAlignmentCenter;
             cell.textLabel.textColor = kLightGrayColor;
             cell.contentView.backgroundColor = [UIColor clearColor];
-            
+            cell.backgroundColor = [UIColor clearColor];
+            cell.textLabel.backgroundColor = [UIColor clearColor];
         }
         
         cell.textLabel.text =  [textElem.text stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
@@ -819,7 +824,6 @@
     }
     
  
-    
 
     // 辅助： 普通消息，返回的是该cell
 //    RichChatTableViewCell *testCell = nil;

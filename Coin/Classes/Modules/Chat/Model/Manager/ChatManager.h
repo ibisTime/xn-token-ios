@@ -12,20 +12,16 @@
 
 + (ChatManager *)sharedManager;
 
+@property (nonatomic, copy, readonly) NSString *appId;
+@property (nonatomic, copy, readonly) NSString *accountType;
+
+
 /**
    做一些初始化工作
  */
 - (void)initChat;
 
 
-
-//- (void)chatLoginOut;
-//消息
-//- (void)getAllConversionFromDB;
-
-//- (NSInteger)unreadMsgCount;
-
-//获取腾讯云IM签名、账号并登录
 - (void)loginIM;
 
 @end

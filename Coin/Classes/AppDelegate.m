@@ -24,7 +24,7 @@
 #import <IQKeyboardManager.h>
 
 #import "OrderDetailVC.h"
-#import "CustomChatUIViewController.h"
+//#import "CustomChatUIViewController.h"
 #import "WaitingOrderVC.h"
 
 @interface AppDelegate ()
@@ -97,7 +97,6 @@
 
                               }
                              
-                              
                           }];
     
 }
@@ -161,7 +160,7 @@
     
     [[IQKeyboardManager sharedManager].disabledToolbarClasses addObject:[WaitingOrderVC class]];
 
-    [[IQKeyboardManager sharedManager].disabledToolbarClasses addObject:[CustomChatUIViewController class]];
+//    [[IQKeyboardManager sharedManager].disabledToolbarClasses addObject:[CustomChatUIViewController class]];
 
 }
 
@@ -181,6 +180,13 @@
     [tab pushToChatViewControllerWith:user];
     
 }
+
++ (id)sharedAppDelegate {
+    
+    return [UIApplication  sharedApplication ].delegate;
+    
+}
+
 
 #pragma mark - 微信回调
 // iOS9 NS_AVAILABLE_IOS

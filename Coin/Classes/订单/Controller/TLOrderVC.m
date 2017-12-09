@@ -69,9 +69,9 @@
     //订单列表
     [self initTableView];
     //添加KVO
-    [self addKVO];
+    [self addUnReadMsgKVO];
     
-    // 如果切换账户 把订单清除掉
+    //TODO 如果切换账户 把订单清除掉
     
 }
 
@@ -207,47 +207,43 @@
 
 }
 
-- (void)addKVO {
+#pragma mark- 添加未读消息 的 观察
+- (void)addUnReadMsgKVO {
     
     CoinWeakSelf;
-    
+    // 这里不负责tabbar 上的改变
     self.KVOController = [FBKVOController controllerWithObserver:self];
-    [self.KVOController observe:[IMAPlatform sharedInstance].conversationMgr keyPath:@"unReadMessageCount" options:NSKeyValueObservingOptionNew block:^(id observer, id object, NSDictionary *change) {
+    [self.KVOController observe:[IMAPlatform sharedInstance].conversationMgr
+                        keyPath:@"unReadMessageCount"
+                        options:NSKeyValueObservingOptionNew
+                          block:^(id observer, id object, NSDictionary *change) {
+                              
         [weakSelf onUnReadMessage];
+                              
     }];
     
 }
 
-- (void)onUnReadMessage
-{
+//
+- (void)onUnReadMessage {
     //同步消息列表
     [[IMAPlatform sharedInstance].conversationMgr asyncConversationList];
     
-    NSInteger unRead = [IMAPlatform sharedInstance].conversationMgr.unReadMessageCount;
-    
-    if (unRead == 0) {
-        
-        [self.tabBarController.tabBar hideBadgeOnItemIndex:1];
-        
-    }else if (unRead > 0)
-    {
-        [self.tabBarController.tabBar showBadgeOnItemIndex:1];
+//    NSInteger unRead = [IMAPlatform sharedInstance].conversationMgr.unReadMessageCount;
 
-    }
-    
     if (self.currentIndex == 1) {
         
         NSMutableArray *conversationList = [NSMutableArray array];
         
-        [self.orders enumerateObjectsUsingBlock:^(OrderModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            
-            NSString *userId = obj.isBuy ? obj.sellUserInfo.userId: obj.buyUserInfo.userId;
-            
-            TIMConversation *timConversation = [[TIMManager sharedInstance] getConversation:TIM_C2C receiver:userId];
-            
-            [conversationList addObject:timConversation];
-            
-        }];
+//        [self.orders enumerateObjectsUsingBlock:^(OrderModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+//
+//            NSString *userId = obj.isBuy ? obj.sellUserInfo.userId: obj.buyUserInfo.userId;
+//
+//            TIMConversation *timConversation = [[TIMManager sharedInstance] getConversation:TIM_C2C receiver:userId];
+//
+//            [conversationList addObject:timConversation];
+//
+//        }];
         
         NSInteger unReadCount = [[IMAPlatform sharedInstance].conversationMgr getUnReadCountWithConversationList:[conversationList copy]];
         
@@ -255,8 +251,8 @@
             
             [self.labelUnil hideBadgeOnItemIndex:0];
 
-        }else if (unReadCount > 0)
-        {
+        } else if (unReadCount > 0) {
+            
             [self.labelUnil showBadgeOnItemIndex:0];
 
         }

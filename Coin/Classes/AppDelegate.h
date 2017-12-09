@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AppDelegate : IMAAppDelegate <UIApplicationDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 - (void)pushToChatViewControllerWith:(IMAUser *)user;
 
++ (id)sharedAppDelegate;
 
 @end
 

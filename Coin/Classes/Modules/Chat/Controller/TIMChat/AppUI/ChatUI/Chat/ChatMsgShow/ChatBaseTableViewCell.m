@@ -91,13 +91,13 @@
     else
     {
         // 说明是陌生人
-        [[IMAPlatform sharedInstance] asyncGetStrangerInfo:[_msg.msg sender] succ:^(IMAUser *auser) {
-            StrangerProfileViewController *vc = [[StrangerProfileViewController alloc] initWith:auser];
-            [[AppDelegate sharedAppDelegate] pushViewController:vc withBackTitle:@"返回"];
-        } fail:^(int code, NSString *msg) {
-            DebugLog(@"Fail:--> code=%d,msg=%@,fun=%s", code, msg,__func__);
-            [[HUDHelper sharedInstance] tipMessage:IMALocalizedError(code, msg)];
-        }];
+//        [[IMAPlatform sharedInstance] asyncGetStrangerInfo:[_msg.msg sender] succ:^(IMAUser *auser) {
+//            StrangerProfileViewController *vc = [[StrangerProfileViewController alloc] initWith:auser];
+//            [[AppDelegate sharedAppDelegate] pushViewController:vc withBackTitle:@"返回"];
+//        } fail:^(int code, NSString *msg) {
+//            DebugLog(@"Fail:--> code=%d,msg=%@,fun=%s", code, msg,__func__);
+//            [[HUDHelper sharedInstance] tipMessage:IMALocalizedError(code, msg)];
+//        }];
     }
 }
 @end

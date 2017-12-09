@@ -605,8 +605,9 @@
     userInfo.friendPhoto = [friendUserInfo.photo convertImageUrl];
     userInfo.friendNickName = friendUserInfo.nickname;
     
-    ChatViewController *chatVC = [[CustomChatUIViewController alloc] initWith:user];
-    
+//    ChatViewController *chatVC = [[CustomChatUIViewController alloc] initWith:user];
+    ChatViewController *chatVC = [[ChatViewController alloc] initWith:user];
+
     chatVC.userInfo = userInfo;
     
     [self.navigationController pushViewController:chatVC animated:YES];

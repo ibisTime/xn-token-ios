@@ -304,26 +304,26 @@
         }
             break;
             
-        case IMA_Sys_NewFriend:
-        {
-            [conv setReadAllMsg];
-            [cell refreshCell];
-            [IMAPlatform sharedInstance].contactMgr.hasNewDependency = NO;
+//        case IMA_Sys_NewFriend:
+//        {
+//            [conv setReadAllMsg];
+//            [cell refreshCell];
+//            [IMAPlatform sharedInstance].contactMgr.hasNewDependency = NO;
+//
+//            FutureFriendsViewController *vc = [[FutureFriendsViewController alloc] init:YES];
+//            [[AppDelegate sharedAppDelegate] pushViewController:vc];
+//        }
+//            break;
             
-            FutureFriendsViewController *vc = [[FutureFriendsViewController alloc] init:YES];
-            [[AppDelegate sharedAppDelegate] pushViewController:vc];
-        }
-            break;
-            
-        case IMA_Sys_GroupTip:
-        {
-            [conv setReadAllMsg];
-            [cell refreshCell];
-            [IMAPlatform sharedInstance].contactMgr.hasNewDependency = NO;
-            GroupSystemMsgViewController *vc = [[GroupSystemMsgViewController alloc] init];
-            [[AppDelegate sharedAppDelegate] pushViewController:vc];
-        }
-            break;
+//        case IMA_Sys_GroupTip:
+//        {
+//            [conv setReadAllMsg];
+//            [cell refreshCell];
+//            [IMAPlatform sharedInstance].contactMgr.hasNewDependency = NO;
+//            GroupSystemMsgViewController *vc = [[GroupSystemMsgViewController alloc] init];
+//            [[AppDelegate sharedAppDelegate] pushViewController:vc];
+//        }
+//            break;
             
         case IMA_Connect:
         default:
