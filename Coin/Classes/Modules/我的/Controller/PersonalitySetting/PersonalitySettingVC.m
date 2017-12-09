@@ -8,7 +8,14 @@
 
 #import "PersonalitySettingVC.h"
 
+#import "SettingGroup.h"
+#import "SettingModel.h"
+
+#import "CoinHeader.h"
+
 @interface PersonalitySettingVC ()
+
+@property (nonatomic, strong) SettingGroup *group;
 
 @end
 
@@ -17,6 +24,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.title = [LangSwitcher switchLang:@"个性设置" key:nil];
+    
+    
 }
 
 - (void)didReceiveMemoryWarning {
