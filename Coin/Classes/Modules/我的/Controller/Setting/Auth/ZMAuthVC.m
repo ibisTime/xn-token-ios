@@ -73,7 +73,7 @@
     
     confirmBtn.frame = CGRectMake(leftMargin, self.idCard.yy + 40, kScreenWidth - 2*leftMargin, 45);
     
-//    confirmBtn.enabled = !isRealNameExist;
+    confirmBtn.enabled = !isRealNameExist;
 
     [confirmBtn addTarget:self action:@selector(confirmIDCard:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -141,11 +141,12 @@
     //芝麻认证
     TLNetworking *http = [TLNetworking new];
     
-    http.code = @"623045";
+    http.code = @"805195";
     http.parameters[@"idNo"] = self.idCard.text;
     http.parameters[@"realName"] = self.realName.text;
     http.parameters[@"userId"] = [TLUser user].userId;
     http.parameters[@"returnUrl"] = @"Bcoin://certi.back";
+    http.parameters[@"localCheck"] = @"1";
     
     [http postWithSuccess:^(id responseObject) {
         
@@ -162,7 +163,7 @@
 
             [TLUser user].tempBizNo = bizNo;
 
-            NSString *urlStr = [NSString stringWithFormat:@"http://116.62.193.233:8903/std-certi/zhima?bizNo=%@",bizNo];
+            NSString *urlStr = responseObject[@"data"][@"url"];
             
             [self doVerify:urlStr];
 
@@ -294,10 +295,10 @@
     
 //    NSString *urll = @"https://zmcustprod.zmxy.com.cn/certify/guide.htm?zhima_exterface_invoke_assign_target=0a6eed651503539484955299774875&zhima_exterface_invoke_assig_sign=HaUvFNg30SPE-AGj8cuS_HaKxBNbg8_3Fu6xZ2jTXZ8fhs_b7UbeHOYB1JXAvE75Kfm-3j2Cw0N1k5Q-G0qNO6ky5JcDL3JsfHlJ4CEBkFr_EtVroJ_PKSHTvC7_O-0y7ss1TLwlQ0QZmM3pKMLMX-bkHRzE_eyhttuxzqcty0E";
     
-    NSString *alipayUrl = [NSString stringWithFormat:@"alipayqr://platformapi/startapp?saId=10000007&qrcode=%@",url];
+//    NSString *alipayUrl = [NSString stringWithFormat:@"alipayqr://platformapi/startapp?saId=10000007&qrcode=%@",url];
     
-//    NSString *alipayUrl = [NSString stringWithFormat:@"alipays://platformapi/startapp?appId=20000067&url=%@",
-//                           [self URLEncodedStringWithUrl:url]];
+    NSString *alipayUrl = [NSString stringWithFormat:@"alipays://platformapi/startapp?appId=20000067&url=%@",
+                           [self URLEncodedStringWithUrl:url]];
     
     if ([self canOpenAlipay]) {
         
