@@ -7,7 +7,10 @@
 //
 
 #import "TLTableView.h"
+#import "SettingGroup.h"
 
 @interface PersonalitySettingTableView : TLTableView
+
+@property (nonatomic, strong) SettingGroup *group;
 
 @end

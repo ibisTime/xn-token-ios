@@ -19,6 +19,7 @@
 #import "MineHeaderView.h"
 
 #import "SettingVC.h"
+#import "PersonalitySettingVC.h"
 #import "PublishBuyVC.h"
 #import "PublishSellVC.h"
 #import "HTMLStrVC.h"
@@ -103,7 +104,7 @@
         
         MyAdvertiseVC *advertiseVC = [MyAdvertiseVC new];
         
-        [self.navigationController pushViewController:advertiseVC animated:YES];
+        [weakSelf.navigationController pushViewController:advertiseVC animated:YES];
         
     };
     
@@ -116,7 +117,7 @@
         
         CoinAddressListVC *addressListVC = [CoinAddressListVC new];
         
-        [self.navigationController pushViewController:addressListVC animated:YES];
+        [weakSelf.navigationController pushViewController:addressListVC animated:YES];
     };
     
     //受信任的
@@ -128,7 +129,7 @@
         
         FansVC *fansVC = [FansVC new];
         
-        [self.navigationController pushViewController:fansVC animated:YES];
+        [weakSelf.navigationController pushViewController:fansVC animated:YES];
     };
     
     //邀请好友
@@ -140,7 +141,7 @@
         
         InviteFriendVC *inviteVC = [InviteFriendVC new];
         
-        [self.navigationController pushViewController:inviteVC animated:YES];
+        [weakSelf.navigationController pushViewController:inviteVC animated:YES];
         
     };
     
@@ -156,6 +157,18 @@
         [weakSelf.navigationController pushViewController:settingVC animated:YES];
     };
     
+    //个性设置
+    MineModel *personalSetting = [MineModel new];
+    
+    personalSetting.text = [LangSwitcher switchLang:@"个性设置" key:nil];
+    personalSetting.imgName = @"提醒设置";
+    personalSetting.action = ^{
+        
+        PersonalitySettingVC *personalSettingVC = [PersonalitySettingVC new];
+        
+        [weakSelf.navigationController pushViewController:personalSettingVC animated:YES];
+    };
+    
     //常见问题
     MineModel *problem = [MineModel new];
     
@@ -167,7 +180,7 @@
         
         htmlVC.type = HTMLTypeCommonProblem;
         
-        [self.navigationController pushViewController:htmlVC animated:YES];
+        [weakSelf.navigationController pushViewController:htmlVC animated:YES];
         
     };
     
@@ -182,7 +195,7 @@
         
         htmlVC.type = HTMLTypeLinkService;
         
-        [self.navigationController pushViewController:htmlVC animated:YES];
+        [weakSelf.navigationController pushViewController:htmlVC animated:YES];
         
     };
     
@@ -197,12 +210,12 @@
         
         htmlVC.type = HTMLTypeAboutUs;
         
-        [self.navigationController pushViewController:htmlVC animated:YES];
+        [weakSelf.navigationController pushViewController:htmlVC animated:YES];
     };
     
     self.group = [MineGroup new];
 
-    self.group.sections = @[@[advertisement, address, trust, inviteFriend], @[securityCenter, problem, linkService, abountUs]];
+    self.group.sections = @[@[advertisement, address, trust, inviteFriend], @[securityCenter, personalSetting, problem, linkService, abountUs]];
     
 }
 

@@ -430,6 +430,7 @@
 		21CB94EA1FDC0C2500CAB090 /* PersonalitySettingTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 21CB94E91FDC0C2500CAB090 /* PersonalitySettingTableView.m */; };
 		21CB94ED1FDC0C9100CAB090 /* LanguageSettingTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 21CB94EC1FDC0C9100CAB090 /* LanguageSettingTableView.m */; };
 		21CB94F01FDC0CAA00CAB090 /* LanguageSettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 21CB94EF1FDC0CAA00CAB090 /* LanguageSettingCell.m */; };
+		21CB94F51FDC179700CAB090 /* PersonalModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 21CB94F41FDC179700CAB090 /* PersonalModel.m */; };
 		21D216861FB9C5750040795E /* QRCodeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21D216851FB9C5750040795E /* QRCodeVC.m */; };
 		21D2168E1FBA90CE0040795E /* BannerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 21D2168D1FBA90CE0040795E /* BannerModel.m */; };
 		21D216921FBA96060040795E /* NoticeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 21D216911FBA96060040795E /* NoticeModel.m */; };
@@ -1347,6 +1348,8 @@
 		21CB94EC1FDC0C9100CAB090 /* LanguageSettingTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LanguageSettingTableView.m; sourceTree = "<group>"; };
 		21CB94EE1FDC0CAA00CAB090 /* LanguageSettingCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LanguageSettingCell.h; sourceTree = "<group>"; };
 		21CB94EF1FDC0CAA00CAB090 /* LanguageSettingCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LanguageSettingCell.m; sourceTree = "<group>"; };
+		21CB94F31FDC179700CAB090 /* PersonalModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PersonalModel.h; sourceTree = "<group>"; };
+		21CB94F41FDC179700CAB090 /* PersonalModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PersonalModel.m; sourceTree = "<group>"; };
 		21D216841FB9C5750040795E /* QRCodeVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QRCodeVC.h; sourceTree = "<group>"; };
 		21D216851FB9C5750040795E /* QRCodeVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QRCodeVC.m; sourceTree = "<group>"; };
 		21D2168C1FBA90CE0040795E /* BannerModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BannerModel.h; sourceTree = "<group>"; };
@@ -1474,6 +1477,7 @@
 		211A34E71FB42F5F00FEB71F /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				21CB94F21FDC176E00CAB090 /* PersonalitySeting */,
 				2125B8C31FD948BB00591812 /* HomePage */,
 				21205CF01FCD5F84003C6C7C /* Invite */,
 				21205CDF1FCD3142003C6C7C /* CoinAddress */,
@@ -3571,6 +3575,15 @@
 			path = PersonalitySetting;
 			sourceTree = "<group>";
 		};
+		21CB94F21FDC176E00CAB090 /* PersonalitySeting */ = {
+			isa = PBXGroup;
+			children = (
+				21CB94F31FDC179700CAB090 /* PersonalModel.h */,
+				21CB94F41FDC179700CAB090 /* PersonalModel.m */,
+			);
+			path = PersonalitySeting;
+			sourceTree = "<group>";
+		};
 		21D216871FBA8F1F0040795E /* 行情 */ = {
 			isa = PBXGroup;
 			children = (
@@ -4483,6 +4496,7 @@
 				211CF99A1FC4270600E51FCF /* TradeSellVC.m in Sources */,
 				2E3950031FB05AF200BA0829 /* TLOrderVC.m in Sources */,
 				21A7F3191FB2E2F900FAA0A2 /* TLAccountBaseVC.m in Sources */,
+				21CB94F51FDC179700CAB090 /* PersonalModel.m in Sources */,
 				211DE6B21FB58B4C002FCF3D /* UIButton+Custom.m in Sources */,
 				211DE6171FB54685002FCF3D /* WalletCell.m in Sources */,
 				211C04D31FC6604900E51FCF /* ConversationListViewController.m in Sources */,
