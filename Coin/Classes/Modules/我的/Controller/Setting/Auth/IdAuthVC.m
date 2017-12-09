@@ -28,7 +28,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.title = @"身份认证";
+    self.title = [LangSwitcher switchLang:@"身份认证" key:nil];
     
     [self initSubviews];
 
@@ -43,7 +43,7 @@
     
     CGFloat leftMargin = 15;
     
-    self.realName = [[TLTextField alloc] initWithFrame:CGRectMake(0, 10, kScreenWidth, 50) leftTitle:@"姓名" titleWidth:105 placeholder:@"请输入姓名"];
+    self.realName = [[TLTextField alloc] initWithFrame:CGRectMake(0, 10, kScreenWidth, 50) leftTitle:[LangSwitcher switchLang:@"姓名" key:nil] titleWidth:105 placeholder:[LangSwitcher switchLang:@"请输入姓名" key:nil]];
     
     self.realName.enabled = !isRealNameExist;
     
@@ -57,7 +57,7 @@
     
     [self.view addSubview:self.realName];
     
-    self.idCard = [[TLTextField alloc] initWithFrame:CGRectMake(0, self.realName.yy + 1, kScreenWidth, 50) leftTitle:@"身份证号码" titleWidth:105 placeholder:@"请输入身份证号码"];
+    self.idCard = [[TLTextField alloc] initWithFrame:CGRectMake(0, self.realName.yy + 1, kScreenWidth, 50) leftTitle:[LangSwitcher switchLang:@"身份证号码" key:nil] titleWidth:105 placeholder:[LangSwitcher switchLang:@"请输入身份证号码" key:nil]];
     
     self.idCard.enabled = !isRealNameExist;
 
@@ -67,7 +67,7 @@
 
     [self.view addSubview:self.idCard];
     
-    UIButton *confirmBtn = [UIButton buttonWithTitle:@"确认" titleColor:kWhiteColor backgroundColor:kAppCustomMainColor titleFont:15.0 cornerRadius:5];
+    UIButton *confirmBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"确认" key:nil] titleColor:kWhiteColor backgroundColor:kAppCustomMainColor titleFont:15.0 cornerRadius:5];
     
     confirmBtn.frame = CGRectMake(leftMargin, self.idCard.yy + 40, kScreenWidth - 2*leftMargin, 45);
     
@@ -86,19 +86,19 @@
     
     if (![self.realName.text valid]) {
         
-        [TLAlert alertWithInfo:@"请输入姓名"];
+        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入姓名" key:nil]];
         return;
     }
     
     if (![self.idCard.text valid]) {
         
-        [TLAlert alertWithInfo:@"请输入身份证号码"];
+        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入身份证号码" key:nil]];
         return;
     }
     
     if (self.idCard.text.length != 18) {
         
-        [TLAlert alertWithInfo:@"请输入18位身份证号码"];
+        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入18位身份证号码" key:nil]];
         return;
         
     }
@@ -128,7 +128,7 @@
             
         } else {
             
-            [TLAlert alertWithSucces:@"身份认证成功"];
+            [TLAlert alertWithSucces:[LangSwitcher switchLang:@"身份认证成功" key:nil]];
 
             [self.navigationController popViewControllerAnimated:YES];
 

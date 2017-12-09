@@ -46,7 +46,7 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
-    self.title = @"注册";
+    self.title = [LangSwitcher switchLang:@"注册" key:nil];
     
     [self setUpUI];
 
@@ -65,13 +65,13 @@
     CGFloat btnMargin = 15;
     
     //昵称
-    TLTextField *nickNameTF = [[TLTextField alloc] initWithFrame:CGRectMake(margin, 10, w, h) leftTitle:@"昵称" titleWidth:100 placeholder:@"请设置你的昵称"];
+    TLTextField *nickNameTF = [[TLTextField alloc] initWithFrame:CGRectMake(margin, 10, w, h) leftTitle:[LangSwitcher switchLang:@"昵称" key:nil] titleWidth:100 placeholder:[LangSwitcher switchLang:@"请设置你的昵称" key:nil]];
     
     [self.view addSubview:nickNameTF];
     self.nickNameTF = nickNameTF;
     
     //账号
-    TLTextField *phoneTf = [[TLTextField alloc] initWithFrame:CGRectMake(margin, nickNameTF.yy + 1, w, h) leftTitle:@"手机号" titleWidth:100 placeholder:@"请输入手机号"];
+    TLTextField *phoneTf = [[TLTextField alloc] initWithFrame:CGRectMake(margin, nickNameTF.yy + 1, w, h) leftTitle:[LangSwitcher switchLang:@"手机号" key:nil] titleWidth:100 placeholder:[LangSwitcher switchLang:@"请输入手机号" key:nil]];
     phoneTf.keyboardType = UIKeyboardTypeNumberPad;
     [self.view addSubview:phoneTf];
     self.phoneTf = phoneTf;
@@ -84,14 +84,14 @@
     self.captchaView = captchaView;
     
     //密码
-    TLTextField *pwdTf = [[TLTextField alloc] initWithFrame:CGRectMake(margin, captchaView.yy + 10, w, h) leftTitle:@"新密码" titleWidth:100 placeholder:@"请输入密码(不少于6位)"];
+    TLTextField *pwdTf = [[TLTextField alloc] initWithFrame:CGRectMake(margin, captchaView.yy + 10, w, h) leftTitle:[LangSwitcher switchLang:@"新密码" key:nil] titleWidth:100 placeholder:[LangSwitcher switchLang:@"请输入密码(不少于6位)" key:nil]];
     pwdTf.secureTextEntry = YES;
     
     [self.view addSubview:pwdTf];
     self.pwdTf = pwdTf;
     
     //re密码
-    TLTextField *rePwdTf = [[TLTextField alloc] initWithFrame:CGRectMake(margin, pwdTf.yy + 1, w, h) leftTitle:@"确认密码" titleWidth:100 placeholder:@"确认密码"];
+    TLTextField *rePwdTf = [[TLTextField alloc] initWithFrame:CGRectMake(margin, pwdTf.yy + 1, w, h) leftTitle:[LangSwitcher switchLang:@"确认密码" key:nil] titleWidth:100 placeholder:[LangSwitcher switchLang:@"确认密码" key:nil]];
     rePwdTf.secureTextEntry = YES;
     [self.view addSubview:rePwdTf];
     self.rePwdTf = rePwdTf;
@@ -114,7 +114,7 @@
 //    }
     
     //
-    UIButton *confirmBtn = [UIButton buttonWithTitle:@"确认注册" titleColor:kWhiteColor backgroundColor:kAppCustomMainColor titleFont:16.0 cornerRadius:5];
+    UIButton *confirmBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"确认注册" key:nil] titleColor:kWhiteColor backgroundColor:kAppCustomMainColor titleFont:16.0 cornerRadius:5];
     
     [confirmBtn addTarget:self action:@selector(goReg) forControlEvents:UIControlEventTouchUpInside];
     
@@ -144,7 +144,7 @@
     
     self.checkBtn = checkBtn;
     
-    NSString *text = @"我已阅读并同意";
+    NSString *text = [LangSwitcher switchLang:@"我已阅读并同意" key:nil];
     
     //text
     UILabel *textLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:12];
@@ -161,7 +161,7 @@
         
     }];
     
-    UIButton *protocolBtn = [UIButton buttonWithTitle:@"《注册协议》" titleColor:kAppCustomMainColor backgroundColor:kClearColor titleFont:12.0];
+    UIButton *protocolBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"《注册协议》" key:nil] titleColor:kAppCustomMainColor backgroundColor:kClearColor titleFont:12.0];
     
     [protocolBtn addTarget:self action:@selector(readProtocal) forControlEvents:UIControlEventTouchUpInside];
     
@@ -194,7 +194,7 @@
     
     if (![self.phoneTf.text isPhoneNum]) {
         
-        [TLAlert alertWithInfo:@"请输入正确的手机号"];
+        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入正确的手机号" key:nil]];
         
         return;
     }
@@ -207,13 +207,13 @@
     
     [http postWithSuccess:^(id responseObject) {
         
-        [TLAlert alertWithSucces:@"验证码已发送,请注意查收"];
+        [TLAlert alertWithSucces:[LangSwitcher switchLang:@"验证码已发送,请注意查收" key:nil]];
         
         [self.captchaView.captchaBtn begin];
         
     } failure:^(NSError *error) {
         
-        [TLAlert alertWithError:@"发送失败,请检查手机号"];
+        [TLAlert alertWithError:[LangSwitcher switchLang:@"发送失败,请检查手机号" key:nil]];
         
     }];
     
@@ -223,40 +223,40 @@
     
     if (![self.nickNameTF.text valid]) {
         
-        [TLAlert alertWithInfo:@"请设置你的昵称"];
+        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请设置你的昵称" key:nil]];
         
         return ;
     }
     
     if (![self.phoneTf.text isPhoneNum]) {
         
-        [TLAlert alertWithInfo:@"请输入正确的手机号"];
+        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入正确的手机号" key:nil]];
         
         return;
     }
     
     if (!(self.captchaView.captchaTf.text && self.captchaView.captchaTf.text.length > 3)) {
-        [TLAlert alertWithInfo:@"请输入正确的验证码"];
+        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入正确的验证码" key:nil]];
         
         return;
     }
     
     if (!(self.pwdTf.text &&self.pwdTf.text.length > 5)) {
         
-        [TLAlert alertWithInfo:@"请输入6位以上密码"];
+        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入6位以上密码" key:nil]];
         return;
     }
     
     if (![self.pwdTf.text isEqualToString:self.rePwdTf.text]) {
         
-        [TLAlert alertWithInfo:@"输入的密码不一致"];
+        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"输入的密码不一致" key:nil]];
         return;
         
     }
     
     if (!self.checkBtn.selected) {
         
-        [TLAlert alertWithInfo:@"请同意《注册协议》"];
+        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请同意《注册协议》" key:nil]];
         return ;
     }
     
@@ -276,7 +276,7 @@
         
         [self.view endEditing:YES];
         
-        [TLAlert alertWithSucces:@"注册成功"];
+        [TLAlert alertWithSucces:[LangSwitcher switchLang:@"注册成功" key:nil]];
         NSString *token = responseObject[@"data"][@"token"];
         NSString *userId = responseObject[@"data"][@"userId"];
         

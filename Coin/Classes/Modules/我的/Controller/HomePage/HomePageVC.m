@@ -195,7 +195,7 @@
     
     [http postWithSuccess:^(id responseObject) {
         
-        [TLAlert alertWithSucces:@"信任成功"];
+        [TLAlert alertWithSucces:[LangSwitcher switchLang:@"信任成功" key:nil]];
         
         [self queryUserRelation];
 
@@ -220,7 +220,8 @@
 
     [http postWithSuccess:^(id responseObject) {
         
-        [TLAlert alertWithSucces:@"取消信任成功"];
+        
+        [TLAlert alertWithSucces:[LangSwitcher switchLang:@"取消信任成功" key:nil]];
         
         [self queryUserRelation];
 
@@ -245,7 +246,7 @@
     
     [http postWithSuccess:^(id responseObject) {
         
-        [TLAlert alertWithSucces:@"黑名单添加成功"];
+        [TLAlert alertWithSucces:[LangSwitcher switchLang:@"黑名单添加成功" key:nil]];
         
         [self queryUserRelation];
         
@@ -268,7 +269,7 @@
     
     [http postWithSuccess:^(id responseObject) {
         
-        [TLAlert alertWithSucces:@"取消黑名单成功"];
+        [TLAlert alertWithSucces:[LangSwitcher switchLang:@"取消黑名单成功" key:nil]];
         
         [self queryUserRelation];
 

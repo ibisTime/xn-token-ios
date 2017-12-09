@@ -80,7 +80,7 @@
     }];
     
     //用户等级
-    self.levelBtn = [UIButton buttonWithTitle:@"代理人" titleColor:kWhiteColor backgroundColor:kClearColor titleFont:10.0 cornerRadius:1.5];
+    self.levelBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"代理人" key:nil] titleColor:kWhiteColor backgroundColor:kClearColor titleFont:10.0 cornerRadius:1.5];
     
     self.levelBtn.layer.borderWidth = 0.5;
     self.levelBtn.layer.borderColor = kWhiteColor.CGColor;
@@ -114,7 +114,7 @@
 
 - (void)initBuyAndSell {
     
-    NSArray *textArr = @[@"我要购买", @"我要出售"];
+    NSArray *textArr = @[[LangSwitcher switchLang:@"我要购买" key:nil], [LangSwitcher switchLang:@"我要出售" key:nil]];
     
     NSArray *imgArr = @[@"我要购买", @"我要出售"];
     

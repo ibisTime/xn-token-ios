@@ -49,7 +49,7 @@
     //头像
     CGFloat imgWidth = 40;
     
-    self.photoBtn = [UIButton buttonWithTitle:@"" titleColor:kWhiteColor backgroundColor:kAppCustomMainColor titleFont:20 cornerRadius:imgWidth/2.0];
+    self.photoBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"" key:nil] titleColor:kWhiteColor backgroundColor:kAppCustomMainColor titleFont:20 cornerRadius:imgWidth/2.0];
     
     self.photoBtn.imageView.contentMode = UIViewContentModeScaleAspectFill;
     
@@ -141,7 +141,7 @@
     self.nameLbl.text = nickName;
 
     //
-    self.dataLbl.text = [NSString stringWithFormat:@"交易 %ld · 好评 %@ · 信任 %ld", userStatist.jiaoYiCount, userStatist.goodCommentRate, userStatist.beiXinRenCount];
+    self.dataLbl.text = [LangSwitcher switchLang:[NSString stringWithFormat:@"交易 %ld · 好评 %@ · 信任 %ld", userStatist.jiaoYiCount, userStatist.goodCommentRate, userStatist.beiXinRenCount] key:nil];
  
     //时间
     self.dateLbl.text = [userInfo.createDatetime convertDate];

@@ -8,6 +8,8 @@
 
 #import "CurrencyModel.h"
 
+#import "LangSwitcher.h"
+
 NSString *const kCNY = @"CNY";
 NSString *const kETH = @"ETH";
 NSString *const kBTC = @"BTC";
@@ -17,7 +19,7 @@ NSString *const kBTC = @"BTC";
 - (NSString *)getTypeName {
     
     NSDictionary *dict = @{
-                           kETH : @"以太币资产(ETH)",
+                           kETH : [LangSwitcher switchLang:@"以太币资产(ETH)" key:nil],
                           
                            };
     

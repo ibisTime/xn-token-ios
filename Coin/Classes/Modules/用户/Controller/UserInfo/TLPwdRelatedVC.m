@@ -52,19 +52,19 @@
     
     if(self.type == TLPwdTypeForget) {
         
-        self.title = @"忘记密码";
+        self.title = [LangSwitcher switchLang:@"忘记密码" key:nil];
         
     } else if (self.type == TLPwdTypeReset) {
         
-        self.title = @"修改登录密码";
+        self.title = [LangSwitcher switchLang:@"修改登录密码" key:nil];
         
     } else if (self.type == TLPwdTypeTradeReset) {
         
-        self.title = @"修改资金密码";
+        self.title = [LangSwitcher switchLang:@"修改资金密码" key:nil];
     
     } else if (self.type == TLPwdTypeSetTrade) {
     
-        self.title = @"设置资金密码";
+        self.title = [LangSwitcher switchLang:@"设置资金密码" key:nil];
 
     }
     
@@ -78,18 +78,18 @@
     
     //手机号
     TLTextField *phoneTf = [[TLTextField alloc] initWithFrame:CGRectMake(0, 10, kScreenWidth, 45)
-                                                    leftTitle:@"用户名"
+                                                    leftTitle:[LangSwitcher switchLang:@"用户名" key:nil]
                                                    titleWidth:leftW
-                                                  placeholder:@"请输入手机号"];
+                                                  placeholder:[LangSwitcher switchLang:@"请输入手机号" key:nil]];
     [self.bgSV addSubview:phoneTf];
     self.phoneTf = phoneTf;
     
     
     //谷歌验证码
     self.googleAuthTF = [[TLTextField alloc] initWithFrame:CGRectMake(0, phoneTf.yy + 1, phoneTf.width, phoneTf.height)
-                                                 leftTitle:@"谷歌验证码"
+                                                 leftTitle:[LangSwitcher switchLang:@"谷歌验证码" key:nil]
                                                 titleWidth:leftW
-                                               placeholder:@"请输入谷歌验证码"];
+                                               placeholder:[LangSwitcher switchLang:@"请输入谷歌验证码" key:nil]];
     
     [self.view addSubview:self.googleAuthTF];
     
@@ -98,7 +98,7 @@
     //复制
     UIView *authView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 95, self.googleAuthTF.height)];
     
-    UIButton *pasteBtn = [UIButton buttonWithTitle:@"粘贴" titleColor:kWhiteColor backgroundColor:kThemeColor titleFont:13.0 cornerRadius:5];
+    UIButton *pasteBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"粘贴" key:nil] titleColor:kWhiteColor backgroundColor:kThemeColor titleFont:13.0 cornerRadius:5];
     
     pasteBtn.frame = CGRectMake(0, 0, 85, self.googleAuthTF.height - 15);
     
@@ -114,7 +114,7 @@
     //验证码
     CaptchaView *captchaView = [[CaptchaView alloc] initWithFrame:CGRectMake(phoneTf.x, captchaViewY, phoneTf.width, phoneTf.height)];
     
-    captchaView.captchaTf.leftLbl.text = @"短信验证码";
+    captchaView.captchaTf.leftLbl.text = [LangSwitcher switchLang:@"短信验证码" key:nil];
     
     [self.bgSV addSubview:captchaView];
     _captchaView = captchaView;
@@ -122,9 +122,9 @@
     
     //新密码
     TLTextField *pwdTf = [[TLTextField alloc] initWithFrame:CGRectMake(phoneTf.x, captchaView.yy + 10, phoneTf.width, phoneTf.height)
-                                                  leftTitle:@"新密码"
+                                                  leftTitle:[LangSwitcher switchLang:@"新密码" key:nil]
                                                  titleWidth:leftW
-                                                placeholder:@"请输入密码(不少于6位)"];
+                                                placeholder:[LangSwitcher switchLang:@"请输入密码(不少于6位)" key:nil]];
     
     pwdTf.returnKeyType = UIReturnKeyNext;
     
@@ -136,9 +136,9 @@
     
     //重新输入
     TLTextField *rePwdTf = [[TLTextField alloc] initWithFrame:CGRectMake(phoneTf.x, pwdTf.yy + 1, phoneTf.width, phoneTf.height)
-                                                    leftTitle:@"确认密码"
+                                                    leftTitle:[LangSwitcher switchLang:@"确认密码" key:nil]
                                                    titleWidth:leftW
-                                                  placeholder:@"请确认密码"];
+                                                  placeholder:[LangSwitcher switchLang:@"请确认密码" key:nil]];
     
     rePwdTf.returnKeyType = UIReturnKeyDone;
 
@@ -153,15 +153,15 @@
     
     if(self.type == TLPwdTypeForget) {
         
-        btnStr = @"确认找回";
+        btnStr = [LangSwitcher switchLang:@"确认找回" key:nil];
         
     } else if (self.type == TLPwdTypeReset || self.type == TLPwdTypeTradeReset) {
         
-        btnStr= @"确认修改";
+        btnStr= [LangSwitcher switchLang:@"确认修改" key:nil];
         
     } else if (self.type == TLPwdTypeSetTrade) {
         
-        btnStr = @"确认设置";
+        btnStr = [LangSwitcher switchLang:@"确认设置" key:nil];
     }
     
     //确认按钮
@@ -199,7 +199,7 @@
     http.parameters[@"mobile"] = self.phoneTf.text;
     [http postWithSuccess:^(id responseObject) {
         
-        [TLAlert alertWithSucces:@"验证码已发送,请注意查收"];
+        [TLAlert alertWithSucces:[LangSwitcher switchLang:@"验证码已发送,请注意查收" key:nil]];
         [self.captchaView.captchaBtn begin];
         
     } failure:^(NSError *error) {
@@ -218,7 +218,7 @@
         
     } else {
         
-        [TLAlert alertWithInfo:@"粘贴内容为空"];
+        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"粘贴内容为空" key:nil]];
     }
 }
 
@@ -237,7 +237,7 @@
     
     if (![self.phoneTf.text isPhoneNum]) {
         
-        [TLAlert alertWithInfo:@"请输入正确的手机号"];
+        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入正确的手机号" key:nil]];
         
         return;
     }
@@ -246,26 +246,26 @@
         
         if (![self.googleAuthTF.text valid]) {
             
-            [TLAlert alertWithInfo:@"请输入谷歌验证码"];
+            [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入谷歌验证码" key:nil]];
             return;
         }
     }
     
     if (!(self.captchaView.captchaTf.text && self.captchaView.captchaTf.text.length > 3)) {
-        [TLAlert alertWithInfo:@"请输入正确的验证码"];
+        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入正确的验证码" key:nil]];
         
         return;
     }
     
     if (!(self.pwdTf.text &&self.pwdTf.text.length > 5)) {
         
-        [TLAlert alertWithInfo:@"请输入6位以上密码"];
+        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入6位以上密码" key:nil]];
         return;
     }
     
     if (![self.pwdTf.text isEqualToString:self.rePwdTf.text]) {
         
-        [TLAlert alertWithInfo:@"输入的密码不一致"];
+        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"输入的密码不一致" key:nil]];
         return;
         
     }
@@ -311,11 +311,11 @@
         
         if(self.type == TLPwdTypeForget) {
             
-            promptStr = @"找回成功";
+            promptStr = [LangSwitcher switchLang:@"找回成功" key:nil];
             
         } else if (self.type == TLPwdTypeReset || self.type == TLPwdTypeTradeReset) {
             
-            promptStr= @"修改成功";
+            promptStr= [LangSwitcher switchLang:@"修改成功" key:nil];
             //保存用户账号和密码
             [[TLUser user] saveUserName:self.phoneTf.text pwd:self.pwdTf.text];
             
@@ -323,7 +323,7 @@
             
             [TLUser user].tradepwdFlag = @"1";
             
-            promptStr = @"设置成功";
+            promptStr = [LangSwitcher switchLang:@"设置成功" key:nil];
             
         }
         

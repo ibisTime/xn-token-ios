@@ -41,11 +41,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    [UIBarButtonItem addRightItemWithTitle:@"完成" titleColor:kTextColor frame:CGRectMake(0, 0, 40, 20) vc:self action:@selector(hasDone)];
+    [UIBarButtonItem addRightItemWithTitle:[LangSwitcher switchLang:@"完成" key:nil] titleColor:kTextColor frame:CGRectMake(0, 0, 40, 20) vc:self action:@selector(hasDone)];
     
     if (self.type == UserEditTypeEmail) {
         
-        self.contentTf = [[TLTextField alloc] initWithFrame:CGRectMake(0, 10, kScreenWidth, 45) leftTitle:@"邮箱" titleWidth:80 placeholder:@"请输入您的邮箱"];
+        self.contentTf = [[TLTextField alloc] initWithFrame:CGRectMake(0, 10, kScreenWidth, 45) leftTitle:[LangSwitcher switchLang:@"邮箱" key:nil] titleWidth:80 placeholder:[LangSwitcher switchLang:@"请输入您的邮箱" key:nil]];
         
         self.contentTf.text = [self.text valid] ? self.text: @"";
         
@@ -54,7 +54,7 @@
         
     } else {
         
-        self.contentTf = [[TLTextField alloc] initWithFrame:CGRectMake(0, 10, kScreenWidth, 45) leftTitle:@"昵称" titleWidth:80 placeholder:@"请填写昵称"];
+        self.contentTf = [[TLTextField alloc] initWithFrame:CGRectMake(0, 10, kScreenWidth, 45) leftTitle:[LangSwitcher switchLang:@"昵称" key:nil] titleWidth:80 placeholder:[LangSwitcher switchLang:@"请填写昵称" key:nil]];
         
         self.contentTf.text = [self.text valid] ? self.text: @"";
 
@@ -69,7 +69,7 @@
         
         if (![self.contentTf.text valid]) {
             
-            [TLAlert alertWithInfo:@"请输入邮箱"];
+            [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入邮箱" key:nil]];
             return;
         }
         
@@ -80,7 +80,7 @@
         http.parameters[@"email"] = self.contentTf.text;
         [http postWithSuccess:^(id responseObject) {
             
-            [TLAlert alertWithSucces:@"绑定成功"];
+            [TLAlert alertWithSucces:[LangSwitcher switchLang:@"绑定成功" key:nil]];
             [TLUser user].nickname = self.contentTf.text;
             
             [[TLUser user] updateUserInfo];
@@ -99,7 +99,7 @@
     } else {
         
         if (![self.contentTf.text valid]) {
-            [TLAlert alertWithInfo:@"请输入昵称"];
+            [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入昵称" key:nil]];
             return;
         }
         
@@ -111,7 +111,7 @@
         http.parameters[@"nickname"] = self.contentTf.text;
         [http postWithSuccess:^(id responseObject) {
             
-            [TLAlert alertWithSucces:@"修改成功"];
+            [TLAlert alertWithSucces:[LangSwitcher switchLang:@"修改成功" key:nil]];
             [TLUser user].nickname = self.contentTf.text;
             
             [[TLUser user] updateUserInfo];

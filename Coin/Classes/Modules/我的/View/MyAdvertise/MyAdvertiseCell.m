@@ -53,7 +53,7 @@
     //头像
     CGFloat imgWidth = 40;
     
-    self.photoBtn = [UIButton buttonWithTitle:@"" titleColor:kWhiteColor backgroundColor:kAppCustomMainColor titleFont:20 cornerRadius:imgWidth/2.0];
+    self.photoBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"" key:nil] titleColor:kWhiteColor backgroundColor:kAppCustomMainColor titleFont:20 cornerRadius:imgWidth/2.0];
     
     //    [self.photoBtn addTarget:self action:@selector(selectPhoto:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -130,7 +130,7 @@
     }];
     
     //交易方式
-    self.tradeTypeBtn = [UIButton buttonWithTitle:@"" titleColor:kClearColor backgroundColor:kClearColor titleFont:14.0 cornerRadius:5];
+    self.tradeTypeBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"" key:nil] titleColor:kClearColor backgroundColor:kClearColor titleFont:14.0 cornerRadius:5];
     
     [self addSubview:self.tradeTypeBtn];
     [self.tradeTypeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -207,9 +207,9 @@
     
     
     //交易、好评跟信任
-    self.dataLbl.text = [NSString stringWithFormat:@"交易 %ld · 好评 %@ · 信任 %ld", userStatist.jiaoYiCount, userStatist.goodCommentRate, userStatist.beiXinRenCount];
+    self.dataLbl.text = [LangSwitcher switchLang:[NSString stringWithFormat:@"交易 %ld · 好评 %@ · 信任 %ld", userStatist.jiaoYiCount, userStatist.goodCommentRate, userStatist.beiXinRenCount] key:nil];
     //限额
-    self.limitAmountLbl.text = [NSString stringWithFormat:@"限额: %@-%@ CNY",[advertise.minTrade convertToSimpleRealMoney], [advertise.maxTrade convertToSimpleRealMoney]];
+    self.limitAmountLbl.text = [NSString stringWithFormat:@"%@: %@-%@ CNY", [LangSwitcher switchLang:@"限制" key:nil],[advertise.minTrade convertToSimpleRealMoney], [advertise.maxTrade convertToSimpleRealMoney]];
     //价格
     
     self.priceLbl.text = [NSString stringWithFormat:@"%@ CNY", [advertise.truePrice convertToSimpleRealMoney]];

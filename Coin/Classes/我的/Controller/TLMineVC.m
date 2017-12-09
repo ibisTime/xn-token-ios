@@ -65,7 +65,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"我的";
+    self.title = [LangSwitcher switchLang:@"我的" key:nil];
     
     //顶部视图
     [self initMineHeaderView];
@@ -97,7 +97,7 @@
     //我的广告
     MineModel *advertisement = [MineModel new];
     
-    advertisement.text = @"我的广告";
+    advertisement.text = [LangSwitcher switchLang:@"我的广告" key:nil];
     advertisement.imgName = @"我的广告";
     advertisement.action = ^{
         
@@ -110,7 +110,7 @@
     //我的地址
     MineModel *address = [MineModel new];
     
-    address.text = @"我的地址";
+    address.text = [LangSwitcher switchLang:@"我的地址" key:nil];
     address.imgName = @"我的地址";
     address.action = ^{
         
@@ -122,7 +122,7 @@
     //受信任的
     MineModel *trust = [MineModel new];
     
-    trust.text = @"受信任的";
+    trust.text = [LangSwitcher switchLang:@"受信任的" key:nil];
     trust.imgName = @"受信任的";
     trust.action = ^{
         
@@ -134,7 +134,7 @@
     //邀请好友
     MineModel *inviteFriend = [MineModel new];
     
-    inviteFriend.text = @"邀请好友";
+    inviteFriend.text = [LangSwitcher switchLang:@"邀请好友" key:nil];
     inviteFriend.imgName = @"邀请";
     inviteFriend.action = ^{
         
@@ -147,7 +147,7 @@
     //安全中心
     MineModel *securityCenter = [MineModel new];
     
-    securityCenter.text = @"安全中心";
+    securityCenter.text = [LangSwitcher switchLang:@"安全中心" key:nil];
     securityCenter.imgName = @"安全中心";
     securityCenter.action = ^{
         
@@ -159,7 +159,7 @@
     //常见问题
     MineModel *problem = [MineModel new];
     
-    problem.text = @"常见问题";
+    problem.text = [LangSwitcher switchLang:@"常见问题" key:nil];
     problem.imgName = @"常见问题";
     problem.action = ^{
         
@@ -174,7 +174,7 @@
     //联系客服
     MineModel *linkService = [MineModel new];
     
-    linkService.text = @"联系客服";
+    linkService.text = [LangSwitcher switchLang:@"联系客服" key:nil];
     linkService.imgName = @"联系客服";
     linkService.action = ^{
         
@@ -189,7 +189,7 @@
     //关于我们
     MineModel *abountUs = [MineModel new];
     
-    abountUs.text = @"关于我们";
+    abountUs.text = [LangSwitcher switchLang:@"关于我们" key:nil];
     abountUs.imgName = @"关于我们";
     abountUs.action = ^{
         
@@ -320,7 +320,9 @@
         
         UserStatistics *userStatist = [UserStatistics mj_objectWithKeyValues:responseObject[@"data"]];
         
-        self.headerView.dataLbl.text = [NSString stringWithFormat:@"交易 %ld · 好评 %@ · 信任 %ld", userStatist.jiaoYiCount, userStatist.goodCommentRate, userStatist.beiXinRenCount];
+        NSString *data = [NSString stringWithFormat:@"交易 %ld · 好评 %@ · 信任 %ld", userStatist.jiaoYiCount, userStatist.goodCommentRate, userStatist.beiXinRenCount];
+        
+        self.headerView.dataLbl.text = [LangSwitcher switchLang:data key:nil];
 
         
     } failure:^(NSError *error) {
@@ -340,7 +342,7 @@
     http.parameters[@"token"] = [TLUser user].token;
     [http postWithSuccess:^(id responseObject) {
 
-        [TLAlert alertWithSucces:@"修改头像成功"];
+        [TLAlert alertWithSucces:[LangSwitcher switchLang:@"修改头像成功" key:nil]];
         
         [TLUser user].photo = key;
         

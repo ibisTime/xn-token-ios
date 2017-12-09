@@ -3465,8 +3465,8 @@
 			children = (
 				21A7F3021FB2E2F900FAA0A2 /* TLUser.h */,
 				21A7F2FD1FB2E2F900FAA0A2 /* TLUser.m */,
-				21A7F2F91FB2E2F900FAA0A2 /* TLUserExt.m */,
 				21A7F3011FB2E2F900FAA0A2 /* TLUserExt.h */,
+				21A7F2F91FB2E2F900FAA0A2 /* TLUserExt.m */,
 				21A7F2FB1FB2E2F900FAA0A2 /* UserDefaultsUtil.h */,
 				21A7F3041FB2E2F900FAA0A2 /* UserDefaultsUtil.m */,
 			);
@@ -3476,8 +3476,8 @@
 		21A7F3051FB2E2F900FAA0A2 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				21A7F3081FB2E2F900FAA0A2 /* AccountTf.m */,
 				21A7F30D1FB2E2F900FAA0A2 /* AccountTf.h */,
+				21A7F3081FB2E2F900FAA0A2 /* AccountTf.m */,
 				21A7F3091FB2E2F900FAA0A2 /* CaptchaView.h */,
 				21A7F30C1FB2E2F900FAA0A2 /* CaptchaView.m */,
 			);

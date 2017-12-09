@@ -32,14 +32,14 @@
     [super viewDidLoad];
     
     CGFloat leftW = 90;
-    self.title = @"修改手机号";
+    self.title = [LangSwitcher switchLang:@"修改手机号" key:nil];
     CGFloat leftMargin = 0;
     
     //手机号
     TLTextField *phoneTf = [[TLTextField alloc] initWithFrame:CGRectMake(leftMargin, 10, kScreenWidth - 2*leftMargin, 45)
-                                                    leftTitle:@"新手机号"
+                                                    leftTitle:[LangSwitcher switchLang:@"新手机号" key:nil]
                                                    titleWidth:leftW
-                                                  placeholder:@"请输入新手机号"];
+                                                  placeholder:[LangSwitcher switchLang:@"请输入新手机号" key:nil]];
     phoneTf.keyboardType = UIKeyboardTypeNumberPad;
     [self.bgSV addSubview:phoneTf];
     self.phoneTf = phoneTf;
@@ -69,7 +69,7 @@
 //    [self.bgSV addSubview:newCaptchaView];
     
     //确认按钮
-    UIButton *confirmBtn = [UIButton buttonWithTitle:@"确认修改" titleColor:kWhiteColor backgroundColor:kAppCustomMainColor titleFont:16.0 cornerRadius:5];
+    UIButton *confirmBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"确认修改" key:nil] titleColor:kWhiteColor backgroundColor:kAppCustomMainColor titleFont:16.0 cornerRadius:5];
     
     confirmBtn.frame = CGRectMake(15, captchaView.yy + 30, kScreenWidth - 30, 44);
     [self.bgSV addSubview:confirmBtn];
@@ -105,7 +105,7 @@
 
     if (![self.phoneTf.text isPhoneNum]) {
         
-        [TLAlert alertWithInfo:@"请输入正确的手机号"];
+        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入正确的手机号" key:nil]];
         
         return;
     }
@@ -118,7 +118,7 @@
 
     [http postWithSuccess:^(id responseObject) {
         
-        [TLAlert alertWithSucces:@"验证码已发送,请注意查收"];
+        [TLAlert alertWithSucces:[LangSwitcher switchLang:@"验证码已发送,请注意查收" key:nil]];
 
         [self.captchaView.captchaBtn begin];
         
@@ -133,12 +133,12 @@
     
     if (![self.phoneTf.text isPhoneNum]) {
         
-        [TLAlert alertWithInfo:@"请输入正确的手机号"];
+        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入正确的手机号" key:nil]];
         return;
     }
     
     if (![self.captchaView.captchaTf.text valid] || self.captchaView.captchaTf.text.length < 4 ) {
-        [TLAlert alertWithInfo:@"请输入正确的验证码"];
+        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入正确的验证码" key:nil]];
         return;
     }
 
@@ -152,7 +152,7 @@
 
     [http postWithSuccess:^(id responseObject) {
         
-        [TLAlert alertWithSucces:@"修改成功"];
+        [TLAlert alertWithSucces:[LangSwitcher switchLang:@"修改成功" key:nil]];
         [TLUser user].mobile = self.phoneTf.text;
         
         //保存用户账号和密码

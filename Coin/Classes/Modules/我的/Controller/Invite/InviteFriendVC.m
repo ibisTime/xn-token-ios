@@ -58,9 +58,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.title = @"邀请好友";
+    self.title = [LangSwitcher switchLang:@"邀请好友" key:nil];
     
-    [UIBarButtonItem addRightItemWithTitle:@"推荐历史" titleColor:kTextColor frame:CGRectMake(0, 0, 70, 30) vc:self action:@selector(historyFriends)];
+    [UIBarButtonItem addRightItemWithTitle:[LangSwitcher switchLang:@"推荐历史" key:nil] titleColor:kTextColor frame:CGRectMake(0, 0, 70, 30) vc:self action:@selector(historyFriends)];
     
     //scrollview
     [self initScrollView];
@@ -146,7 +146,7 @@
     //邀请人数
     UILabel *personTextLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kThemeColor font:12.0];
     
-    personTextLbl.text = @"成功邀请（人）";
+    personTextLbl.text = [LangSwitcher switchLang:@"成功邀请（人）" key:nil];
     
     personTextLbl.textAlignment = NSTextAlignmentCenter;
     
@@ -173,7 +173,7 @@
     //收益
     UILabel *countTextLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kThemeColor font:12.0];
     
-    countTextLbl.text = @"提成收益（ETH）";
+    countTextLbl.text = [LangSwitcher switchLang:@"提出收益（ETH）" key:nil];
 
     countTextLbl.textAlignment = NSTextAlignmentCenter;
     
@@ -198,7 +198,7 @@
     }];
     
     //我要推荐
-    UIButton *recommendBtn = [UIButton buttonWithTitle:@"我要推荐" titleColor:kWhiteColor backgroundColor:kThemeColor titleFont:kWidth(18) cornerRadius:24];
+    UIButton *recommendBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"我要推荐" key:nil] titleColor:kWhiteColor backgroundColor:kThemeColor titleFont:kWidth(18) cornerRadius:24];
     
     [recommendBtn addTarget:self action:@selector(inviteFriend) forControlEvents:UIControlEventTouchUpInside];
     
@@ -218,7 +218,7 @@
     
     UILabel *textLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:kWidth(15)];
     
-    textLbl.text = @"活动规则";
+    textLbl.text = [LangSwitcher switchLang:@"活动规则" key:nil];
     
     textLbl.textAlignment = NSTextAlignmentCenter;
     
@@ -337,17 +337,17 @@
         
         if (isSuccess) {
             
-            [TLAlert alertWithSucces:@"分享成功"];
+            [TLAlert alertWithSucces:[LangSwitcher switchLang:@"分享成功" key:nil]];
             
         } else {
             
-            [TLAlert alertWithError:@"分享失败"];
+            [TLAlert alertWithError:[LangSwitcher switchLang:@"分享失败" key:nil]];
         }
         
     }];
     
-    shareView.shareTitle = @"邀请好友";
-    shareView.shareDesc = @"快邀请好友来玩吧";
+    shareView.shareTitle = [LangSwitcher switchLang:@"邀请好友" key:nil];
+    shareView.shareDesc = [LangSwitcher switchLang:@"快邀请好友来玩吧" key:nil];
     shareView.shareURL = self.shareUrl;
     
     [self.view addSubview:shareView];

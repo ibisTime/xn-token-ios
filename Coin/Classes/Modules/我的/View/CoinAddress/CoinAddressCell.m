@@ -151,7 +151,7 @@
     
     self.addressLbl.text = addressModel.address;
     
-    self.statusLbl.text = [addressModel.status isEqualToString:@"0"] ? @"未认证": @"已认证";
+    self.statusLbl.text = [addressModel.status isEqualToString:@"0"] ? [LangSwitcher switchLang:@"未认证" key:nil]: [LangSwitcher switchLang:@"已认证" key:nil];
     
 }
 

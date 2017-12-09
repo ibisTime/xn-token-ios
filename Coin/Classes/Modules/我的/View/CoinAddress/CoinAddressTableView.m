@@ -106,9 +106,9 @@ static NSString *identifierCell = @"CoinAddressCell";
     
     NSMutableArray *actionArr = @[].mutableCopy;
     
-    UITableViewRowAction *deleteAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"删除" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
+    UITableViewRowAction *deleteAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:[LangSwitcher switchLang:@"删除" key:nil] handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
         
-        [TLAlert alertWithTitle:@"" msg:@"你真的要删除地址？" confirmMsg:@"确定" cancleMsg:@"取消" cancle:^(UIAlertAction *action) {
+        [TLAlert alertWithTitle:[LangSwitcher switchLang:@"" key:nil] msg:[LangSwitcher switchLang:@"你真的要删除地址？" key:nil] confirmMsg:[LangSwitcher switchLang:@"确定" key:nil] cancleMsg:[LangSwitcher switchLang:@"取消" key:nil] cancle:^(UIAlertAction *action) {
             
         } confirm:^(UIAlertAction *action) {
             
@@ -142,7 +142,7 @@ static NSString *identifierCell = @"CoinAddressCell";
         NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
         [self deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
         
-        [TLAlert alertWithSucces:@"删除成功"];
+        [TLAlert alertWithSucces:[LangSwitcher switchLang:@"删除成功" key:nil]];
 
         if (self.addressArr.count == 0) {
             

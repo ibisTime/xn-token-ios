@@ -25,7 +25,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.title = @"绑定手机号";
+    self.title = [LangSwitcher switchLang:@"绑定手机号" key:nil];
     
     [self initSubviews];
 }
@@ -38,9 +38,9 @@
     
     //手机号
     TLTextField *phoneTf = [[TLTextField alloc] initWithFrame:CGRectMake(leftMargin, 20, kScreenWidth - 2*leftMargin, 45)
-                                                    leftTitle:@"手机号"
+                                                    leftTitle:[LangSwitcher switchLang:@"手机号" key:nil]
                                                    titleWidth:leftW
-                                                  placeholder:@"请输入手机号"];
+                                                  placeholder:[LangSwitcher switchLang:@"请输入手机号" key:nil]];
     phoneTf.keyboardType = UIKeyboardTypeNumberPad;
     
     [self.view addSubview:phoneTf];
@@ -53,7 +53,7 @@
     [captchaView.captchaBtn addTarget:self action:@selector(sendCaptcha) forControlEvents:UIControlEventTouchUpInside];
     
     //确认按钮
-    UIButton *confirmBtn = [UIButton buttonWithTitle:@"绑定" titleColor:kWhiteColor backgroundColor:kAppCustomMainColor titleFont:14.0];
+    UIButton *confirmBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"绑定" key:nil] titleColor:kWhiteColor backgroundColor:kAppCustomMainColor titleFont:14.0];
     
     confirmBtn.frame = CGRectMake(20, captchaView.yy + 30, kScreenWidth - 40, 44);
     
@@ -79,7 +79,7 @@
     
     if (![self.phoneTf.text isPhoneNum]) {
         
-        [TLAlert alertWithInfo:@"请输入正确的手机号"];
+        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入正确的手机号" key:nil]];
         
         return;
     }
@@ -92,7 +92,7 @@
     
     [http postWithSuccess:^(id responseObject) {
         
-        [TLAlert alertWithSucces:@"验证码已发送,请注意查收"];
+        [TLAlert alertWithSucces:[LangSwitcher switchLang:@"验证码已发送,请注意查收" key:nil]];
 
         [self.captchaView.captchaBtn begin];
         
@@ -107,12 +107,12 @@
     
     if (![self.phoneTf.text isPhoneNum]) {
         
-        [TLAlert alertWithInfo:@"请输入正确的手机号"];
+        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入正确的手机号" key:nil]];
         return;
     }
     
     if (![self.captchaView.captchaTf.text valid] || self.captchaView.captchaTf.text.length < 4 ) {
-        [TLAlert alertWithInfo:@"请输入正确的验证码"];
+        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入正确的验证码" key:nil]];
         return;
     }
     
