@@ -29,7 +29,7 @@
 
 @interface AppDelegate ()
 
-@property (nonatomic, copy) FBKVOController *chatKVOCtrl;
+@property (nonatomic, strong) FBKVOController *chatKVOCtrl;
 
 
 @end
