@@ -19,6 +19,8 @@
 @property (nonatomic, strong) NSMutableArray <CoinQuotationModel *>*quotations;
 //定时器
 @property (nonatomic, strong) NSTimer *timer;
+//
+@property (nonatomic, strong) TLPageDataHelper *helper;
 
 @end
 
@@ -70,7 +72,7 @@
 - (void)startTimer {
     
     //开启定时器,实时刷新
-    self.timer = [NSTimer timerWithTimeInterval:30 target:self selector:@selector(queryCoinQuotation) userInfo:nil repeats:YES];
+    self.timer = [NSTimer timerWithTimeInterval:30 target:self selector:@selector(refreshQuotation) userInfo:nil repeats:YES];
     
     [[NSRunLoop mainRunLoop] addTimer:self.timer forMode:NSDefaultRunLoopMode];
 }
@@ -78,8 +80,6 @@
 #pragma mark - Data
 - (void)queryCoinQuotation {
     
-    NSLog(@"定时器刷起来");
-
     CoinWeakSelf;
     
     TLPageDataHelper *helper = [[TLPageDataHelper alloc] init];
@@ -90,6 +90,8 @@
     
     helper.tableView = self.tableView;
     [helper modelClass:[CoinQuotationModel class]];
+    
+    self.helper = helper;
     
     [self.tableView addRefreshAction:^{
 
@@ -110,6 +112,24 @@
 
     [self.tableView beginRefreshing];
 
+}
+
+- (void)refreshQuotation {
+    
+    CoinWeakSelf;
+    
+    [self.helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
+        
+        weakSelf.quotations = objs;
+        
+        weakSelf.tableView.quotations = objs;
+        
+        [weakSelf.tableView reloadData_tl];
+        
+    } failure:^(NSError *error) {
+        
+        
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -299,7 +299,7 @@
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             
-            self.tabBarController.selectedIndex = 0;
+            self.tabBarController.selectedIndex = 2;
             
             [self.navigationController popToRootViewControllerAnimated:YES];
         });

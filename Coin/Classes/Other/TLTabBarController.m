@@ -47,7 +47,7 @@
                     selectedImage:selectedImageNames[i]];
     }
     
-    self.selectedIndex = 0;
+    self.selectedIndex = 2;
     
 }
 
