@@ -36,7 +36,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"发布卖出";
+    self.title =  [LangSwitcher switchLang:@"发布卖出" key:nil] ;
     
     self.timeArr = [NSMutableArray array];
     
@@ -161,7 +161,7 @@
         
         NSArray <OverTimeModel *>*data = [OverTimeModel tl_objectArrayWithDictionaryArray:responseObject[@"data"]];
         
-        [data enumerateObjectsUsingBlock:^(OverTimeModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [[data reversedArray]  enumerateObjectsUsingBlock:^(OverTimeModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             
             [self.timeArr addObject:obj.dvalue];
             

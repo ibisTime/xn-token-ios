@@ -53,8 +53,7 @@
 {
     __weak ChatViewController *ws = self;
     [_conversation asyncLoadRecentMessage:10 completion:^(NSArray *imamsgList, BOOL succ) {
-        if (succ)
-        {
+        if (succ) {
             [ws onLoadRecentMessage:imamsgList complete:YES scrollToBottom:YES];
         }
         
@@ -133,11 +132,11 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [[UIApplication sharedApplication] setStatusBarHidden:NO];
+//    [[UIApplication sharedApplication] setStatusBarHidden:NO];
     
     [self.navigationController setNavigationBarHidden:NO animated:animated];
     
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+//    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
     
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
     
@@ -270,8 +269,8 @@
             {
 //                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 
-                    NSIndexPath *last = [NSIndexPath indexPathForRow:imamsgList.count-1 inSection:0];
-                    [self.tableView scrollToRowAtIndexPath:last atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+//                    NSIndexPath *last = [NSIndexPath indexPathForRow:imamsgList.count-1 inSection:0];
+//                    [self.tableView scrollToRowAtIndexPath:last atScrollPosition:UITableViewScrollPositionBottom animated:YES];
 //                });
             }
         }
@@ -311,7 +310,6 @@
 
 ///==========================
 #pragma mark - MyChatToolBarViewDelegate
-
 - (void)updateOnSendMessage:(NSArray *)msglist succ:(BOOL)succ
 {
     if (msglist.count)

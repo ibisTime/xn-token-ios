@@ -71,8 +71,7 @@
     }];
     
     UILabel *confirmLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:18.0];
-    
-    confirmLbl.text = @"下单确定";
+    confirmLbl.text = [LangSwitcher switchLang:@"下单确定" key:nil];
     
     [self.bgView addSubview:confirmLbl];
     [confirmLbl mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -82,7 +81,11 @@
 
     }];
     
-    NSArray *textArr = @[@"购买价格", @"购买金额", @"购买数量"];
+    NSArray *textArr = @[
+                         [LangSwitcher switchLang:@"购买价格" key:nil],
+                          [LangSwitcher switchLang:@"购买金额" key:nil],
+                          [LangSwitcher switchLang:@"购买数量" key:nil]
+                         ];
     
     __block UILabel *lastLbl = confirmLbl;
     
@@ -144,10 +147,11 @@
     
     UILabel *promptLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kThemeColor font:11.0];
     
+    
     promptLbl.text = @"提醒: 请确认价格再下单, 下单后此交易的ETH将托管锁定, 请放心购买";
+    promptLbl.text = [LangSwitcher switchLang:promptLbl.text key:nil];
     
     promptLbl.numberOfLines = 0;
-    
     [self.bgView addSubview:promptLbl];
     [promptLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
@@ -168,7 +172,11 @@
     }];
     
     //确认购买
-    UIButton *confirmBtn = [UIButton buttonWithTitle:@"确认购买" titleColor:kWhiteColor backgroundColor:kThemeColor titleFont:14.0 cornerRadius:5];
+    UIButton *confirmBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"确认购买" key:nil]
+                                          titleColor:kWhiteColor
+                                     backgroundColor:kThemeColor
+                                           titleFont:14.0
+                                        cornerRadius:5];
     
     [confirmBtn addTarget:self action:@selector(confirm) forControlEvents:UIControlEventTouchUpInside];
     
@@ -182,7 +190,9 @@
     }];
     
     //放弃购买
-    UIButton *cancelBtn = [UIButton buttonWithTitle:@"放弃购买" titleColor:kWhiteColor backgroundColor:[UIColor colorWithHexString:@"#dedede"] titleFont:14.0 cornerRadius:5];
+    UIButton *cancelBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"放弃购买" key:nil]
+                                         titleColor:kWhiteColor
+                                    backgroundColor:[UIColor colorWithHexString:@"#dedede"] titleFont:14.0 cornerRadius:5];
     
     [cancelBtn addTarget:self action:@selector(cancel) forControlEvents:UIControlEventTouchUpInside];
     

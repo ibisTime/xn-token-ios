@@ -74,7 +74,7 @@
     //自动加好友
     SettingModel *autoAddFriend = [SettingModel new];
     
-    autoAddFriend.text = [LangSwitcher switchLang:@"自动加好友" key:nil];
+    autoAddFriend.text = [LangSwitcher switchLang:@"自动加信任" key:nil];
     [autoAddFriend setAction:^{
         
         [weakSelf setAutoAddFriend];
@@ -151,7 +151,9 @@
         
         cell.sw.on = _isAutoAddFriend;
         
-        NSString *title = _isAutoAddFriend ? @"自动加好友开启成功": @"自动加好友关闭成功";
+        NSString *title = _isAutoAddFriend ?
+        [LangSwitcher switchLang:@"自动加信任开启成功" key:nil] :
+        [LangSwitcher switchLang:@"自动加信任关闭成功" key:nil];
         
         [TLAlert alertWithSucces:[LangSwitcher switchLang:title key:nil]];
         

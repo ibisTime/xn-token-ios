@@ -114,7 +114,8 @@
 
 - (void)initBuyAndSell {
     
-    NSArray *textArr = @[[LangSwitcher switchLang:@"我要购买" key:nil], [LangSwitcher switchLang:@"我要出售" key:nil]];
+    NSArray *textArr = @[[LangSwitcher switchLang:@"我要购买" key:nil],
+                         [LangSwitcher switchLang:@"我要出售" key:nil]];
     
     NSArray *imgArr = @[@"我要购买", @"我要出售"];
     

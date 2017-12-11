@@ -114,7 +114,8 @@
     
     _order = order;
     
-    self.title = self.order.isBuy ? @"购买订单": @"出售订单";
+    self.title = self.order.isBuy ? [LangSwitcher switchLang:@"购买订单" key:nil] :
+                                    [LangSwitcher switchLang:@"出售订单" key:nil];
     
 }
 
@@ -157,12 +158,16 @@
         
         //价格
         self.priceLbl.text = [NSString stringWithFormat:@"报价: %@ CNY", [self.advertise.truePrice convertToSimpleRealMoney]];
+        self.priceLbl.text = [LangSwitcher switchLang:self.priceLbl.text key:nil];
         //限额
         self.limitAmountLbl.text = [NSString stringWithFormat:@"限额: %@-%@ CNY",[self.advertise.minTrade convertToSimpleRealMoney], [self.advertise.maxTrade convertToSimpleRealMoney]];
+        self.limitAmountLbl.text = [LangSwitcher switchLang:self.limitAmountLbl.text key:nil];
+
         
         NSString *btnTitle = [self.advertise.status isEqualToString:@"1"] ? (self.order.isBuy ? @"购买": @"出售"): @"已下架";
         
-        [self.orderBtn setTitle:btnTitle forState:UIControlStateNormal];
+        [self.orderBtn setTitle:[LangSwitcher switchLang:btnTitle key:nil] 
+                        forState:UIControlStateNormal];
         
         UIColor *bgColor = [self.advertise.status isEqualToString:@"1"] ? kThemeColor: kPlaceholderColor;
         

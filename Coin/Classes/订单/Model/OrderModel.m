@@ -18,17 +18,29 @@
     
     NSDictionary *dict = @{
                            
-                           @"-1": [LangSwitcher switchLang:@"待下单" key:nil] ,
-                           @"0": [LangSwitcher switchLang:@"待支付" key:nil] ,
-                           @"1": [LangSwitcher switchLang:@"待释放" key:nil]  ,
-                           @"2": [LangSwitcher switchLang:@"待评价" key:nil]  ,
-                           @"3": [LangSwitcher switchLang:@"已完成" key:nil]   ,
-                           @"4": [LangSwitcher switchLang:@"已取消" key:nil]  ,
-                           @"5": [LangSwitcher switchLang:@"仲裁中" key:nil]  ,
+                           @"-1":@"待下单" ,
+                           @"0": @"待支付" ,
+                           @"1": @"待释放",
+                           @"2": @"待评价",
+                           @"3": @"已完成",
+                           @"4": @"已取消",
+                           @"5": @"仲裁中"
                            
                            };
     
-    return dict[self.status];
+    return [LangSwitcher switchLang:dict[self.status] key:nil];
+}
+
++ (NSArray *)endStatusList {
+    
+    return @[@"2", @"3", @"4"];
+    
+}
+
++ (NSArray *)ingStatusList {
+    
+    return @[@"-1", @"0", @"1", @"5"];
+
 }
 
 - (BOOL)isBuy {

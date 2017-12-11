@@ -265,7 +265,7 @@
     
     textView.font = Font(14.0);
     
-    textView.placholder = @"请写下您的广告留言吧";
+    textView.placholder = [LangSwitcher switchLang:@"请写下您的广告留言吧" key:nil];
     
     textView.editable = NO;
     
@@ -297,7 +297,11 @@
     }];
     
     //想要购买多少
-    UIButton *wantBuyBtn = [UIButton buttonWithTitle:@"你想购买多少?" titleColor:kTextColor backgroundColor:kClearColor titleFont:15.0];
+    UIButton *wantBuyBtn = [UIButton buttonWithTitle:
+                            [LangSwitcher switchLang:@"你想购买多少?" key:nil]
+                                          titleColor:kTextColor
+                                     backgroundColor:kClearColor
+                                           titleFont:15.0];
     
     [wantBuyBtn setImage:kImage(@"想要多少") forState:UIControlStateNormal];
     
@@ -369,7 +373,10 @@
     }];
     
     //ETH
-    self.ethTF = [[TLTextField alloc] initWithFrame:CGRectMake(kScreenWidth/2.0 + 5, 65, tfW, 44) leftTitle:@"ETH" titleWidth:50 placeholder:@"请输入数值"];
+    self.ethTF = [[TLTextField alloc] initWithFrame:CGRectMake(kScreenWidth/2.0 + 5, 65, tfW, 44)
+                                          leftTitle:@"ETH"
+                                         titleWidth:50
+                                        placeholder: [LangSwitcher switchLang:@"请输入数值" key:nil]];
     
     self.ethTF.delegate = self;
     
@@ -465,9 +472,12 @@
     self.bottomView.backgroundColor = kWhiteColor;
     
     [self addSubview:self.bottomView];
-    
+   
     //联系对方
-    UIButton *linkBtn = [UIButton buttonWithTitle:@"联系对方" titleColor:kTextColor backgroundColor:kWhiteColor titleFont:16.0];
+    UIButton *linkBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"联系对方" key:nil]
+                                       titleColor:kTextColor
+                                  backgroundColor:kWhiteColor
+                                        titleFont:16.0];
     
     [linkBtn addTarget:self action:@selector(link) forControlEvents:UIControlEventTouchUpInside];
     
@@ -485,7 +495,10 @@
     [linkBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 0, -10)];
     
     //购买按钮
-    UIButton *buyBtn = [UIButton buttonWithTitle:@"购买" titleColor:kWhiteColor backgroundColor:kThemeColor titleFont:16.0];
+    UIButton *buyBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"购买" key:nil] 
+                                      titleColor:kWhiteColor
+                                 backgroundColor:kThemeColor
+                                       titleFont:16.0];
     
     [buyBtn addTarget:self action:@selector(buy) forControlEvents:UIControlEventTouchUpInside];
     
@@ -595,6 +608,7 @@
     _leftAmount = leftAmount;
     
     self.leftAmountLbl.text = [NSString stringWithFormat:@"广告剩余可交易量: %@ ETH", [_leftAmount convertToSimpleRealCoin]];
+    self.leftAmountLbl.text = [LangSwitcher switchLang:self.leftAmountLbl.text key:nil];
 }
 
 - (void)setTruePrice:(NSNumber *)truePrice {

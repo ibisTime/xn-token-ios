@@ -22,7 +22,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.title = @"账单详情";
+    self.title = [LangSwitcher switchLang: @"账单详情" key:nil];
     
     [self initTableView];
     //

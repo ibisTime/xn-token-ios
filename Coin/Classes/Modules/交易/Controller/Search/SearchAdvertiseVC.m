@@ -198,9 +198,22 @@
     
     //付款方式
     
-    self.payTypePicker = [[TLPickerTextField alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 55) leftTitle:@"付款方式" titleWidth:90 placeholder:@"请选择付款方式"];
+    self.payTypePicker = [[TLPickerTextField alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 55)
+                          
+                                                        leftTitle:
+                          [LangSwitcher switchLang:@"付款方式" key:nil]
+                          
+                                                       titleWidth:90
+                                                      placeholder:
+                          [LangSwitcher switchLang:@"请选择付款方式" key:nil]];
     
-    self.payTypePicker.tagNames = @[@"支付宝", @"微信", @"银行转账"];
+    
+
+     self.payTypePicker.tagNames = @[
+                                     [LangSwitcher switchLang:@"支付宝" key:nil],
+     [LangSwitcher switchLang:@"微信" key:nil],
+     [LangSwitcher switchLang:@"银行转账" key:nil]
+                                     ];
     
     self.payTypePicker.didSelectBlock = ^(NSInteger index) {
         

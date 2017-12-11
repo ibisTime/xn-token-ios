@@ -41,7 +41,7 @@
             
             ckey = @"about_us";
             
-            name = @"关于我们";
+            name = [LangSwitcher switchLang:@"关于我们" key:nil];
             
         } break;
             
@@ -49,7 +49,7 @@
             
             ckey = @"reg_protocol";
             
-            name = @"注册协议";
+            name = [LangSwitcher switchLang:@"注册协议" key:nil];
             
         } break;
             
@@ -57,7 +57,7 @@
             
             ckey = @"questions";
             
-            name = @"常见问题";
+            name = [LangSwitcher switchLang: @"常见问题" key:nil];
             
         } break;
             
@@ -65,7 +65,7 @@
             
             ckey = @"service";
             
-            name = @"联系客服";
+            name =  [LangSwitcher switchLang:@"联系客服" key:nil];
             
         } break;
             
@@ -73,7 +73,7 @@
             
             ckey = @"trade_remind";
             
-            name = @"交易提醒";
+            name = [LangSwitcher switchLang:@"交易提醒" key:nil];
             
         } break;
     }

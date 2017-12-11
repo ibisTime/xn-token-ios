@@ -65,7 +65,7 @@
         }];
         
         self.cancelBtn = cancelBtn;
-        
+        NSArray *imgName = @[@"发布卖出",@"发布购买"];
         for (NSInteger i = 0; i < titles.count; i++) {
             
             CGFloat w = 110;
@@ -89,7 +89,7 @@
             
             btn.transform = CGAffineTransformMakeTranslation(0, self.bounds.size.height);
             
-            [btn setImage:kImage(titles[i]) forState:UIControlStateNormal];
+            [btn setImage:kImage(imgName[i]) forState:UIControlStateNormal];
             //取消高亮
             btn.showsTouchWhenHighlighted = NO;
             

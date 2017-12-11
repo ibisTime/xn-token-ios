@@ -206,10 +206,21 @@
     
     
     //交易、好评跟信任
-    self.dataLbl.text = [NSString stringWithFormat:@"交易 %ld · 好评 %@ · 信任 %ld", userStatist.jiaoYiCount, userStatist.goodCommentRate, userStatist.beiXinRenCount];
+    self.dataLbl.text =
+    [LangSwitcher switchLang:[NSString stringWithFormat:@"交易 %ld · 好评 %@ · 信任 %ld",
+                              userStatist.jiaoYiCount,
+                              userStatist.goodCommentRate,
+                              userStatist.beiXinRenCount]
+                         key:nil];
+
+    
+    
     
     //限额
-    self.limitAmountLbl.text = [NSString stringWithFormat:@"限额: %@-%@ CNY",[advertise.minTrade convertToSimpleRealMoney], [advertise.maxTrade convertToSimpleRealMoney]];
+    NSString *limitAmountText = [NSString stringWithFormat:@"限额: %@-%@ CNY",[advertise.minTrade convertToSimpleRealMoney], [advertise.maxTrade convertToSimpleRealMoney]];
+    
+    self.limitAmountLbl.text = [LangSwitcher switchLang:limitAmountText
+                                                    key:nil];
     //价格
     
     self.priceLbl.text = [NSString stringWithFormat:@"%@ CNY", [advertise.truePrice convertToSimpleRealMoney]];
@@ -218,11 +229,12 @@
     
     if ([advertise isMineDaiJiaoYiAds]) {
   
-        tradeText = @"编辑";
+        tradeText = [LangSwitcher switchLang:@"编辑" key:nil];
         
     } else {
         
-        tradeText = [advertise.tradeType isEqualToString:@"1"] ? @"购买": @"出售";
+        tradeText = [advertise.tradeType isEqualToString:@"1"] ?
+        [LangSwitcher switchLang:@"购买" key:nil] : [LangSwitcher switchLang:@"出售" key:nil];
 
     }
     

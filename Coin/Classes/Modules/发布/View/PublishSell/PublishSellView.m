@@ -452,7 +452,8 @@
 
     textView.font = Font(14.0);
 
-    textView.placholder = @"请写下您的广告留言吧";
+    
+    textView.placholder = [LangSwitcher switchLang:@"请写下您的广告留言吧" key:nil];
     
     [leaveMsgView addSubview:textView];
     [textView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -505,7 +506,11 @@
         
     }];
     
-    [highLbl labelWithString:@"高级设置(选填)" title:@"(选填)" font:Font(15.0) color:kTextColor2];
+    [highLbl labelWithString:[LangSwitcher switchLang:@"高级设置(选填)" key:nil]
+     
+                       title:[LangSwitcher switchLang:@"(选填)" key:nil]
+                        font:Font(15.0)
+                       color:kTextColor2];
     
     //右边小箭头
     UIImageView *rightArrowIV = [[UIImageView alloc] initWithImage:kImage(@"更多-灰色")];

@@ -9,6 +9,7 @@
 #import "TLPlaceholderView.h"
 
 #import "CoinHeader.h"
+#import <CDCommon/DeviceUtil.h>
 
 @implementation TLPlaceholderView
 
@@ -45,5 +46,39 @@
     lbl.text = text;
     return _placholderView;
     
+}
+
++ (instancetype) placeholderViewWithImgAndText:(NSString *)text {
+
+    
+    TLPlaceholderView *placeholderView = [[TLPlaceholderView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - [DeviceUtil top64] - [DeviceUtil bottom49])];
+    
+        UIImageView *orderIV = [[UIImageView alloc] init];
+        orderIV.image = kImage(@"暂无订单");
+        orderIV.centerX = kScreenWidth/2.0;
+    
+        [placeholderView addSubview:orderIV];
+        [orderIV mas_makeConstraints:^(MASConstraintMaker *make) {
+    
+            make.centerX.equalTo(@0);
+            make.top.equalTo(@90);
+    
+        }];
+    
+        UILabel *textLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor2 font:14.0];
+    
+        textLbl.text = [LangSwitcher switchLang:text
+                                            key:nil];
+        textLbl.textAlignment = NSTextAlignmentCenter;
+    
+        [placeholderView addSubview:textLbl];
+        [textLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+    
+            make.top.equalTo(orderIV.mas_bottom).offset(20);
+            make.centerX.equalTo(orderIV.mas_centerX);
+    
+        }];
+    
+    return placeholderView;
 }
 @end

@@ -7,7 +7,7 @@
 //
 
 #import "PayTypeModel.h"
-
+#import "LangSwitcher.h"
 #import "UIColor+Extension.h"
 
 @implementation PayTypeModel
@@ -21,24 +21,21 @@
     switch (index) {
         case 0:
         {
-            self.text = @"支付宝";
-            
+            self.text = [LangSwitcher switchLang:@"支付宝" key:nil];
             self.color = [UIColor colorWithHexString:@"#48b0fb"];
             
         }break;
          
         case 1:
         {
-            self.text = @"微信";
-
+            self.text = [LangSwitcher switchLang:@"微信" key:nil];
             self.color = [UIColor colorWithHexString:@"#2ac64c"];
 
         }break;
             
         case 2:
         {
-            self.text = @"银行转账";
-
+            self.text = [LangSwitcher switchLang:@"银行转账" key:nil];
             self.color = [UIColor colorWithHexString:@"#f15353"];
 
         }break;

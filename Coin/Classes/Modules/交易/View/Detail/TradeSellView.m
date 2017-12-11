@@ -263,7 +263,7 @@
     
     textView.font = Font(14.0);
     
-    textView.placholder = @"请写下您的广告留言吧";
+    textView.placholder = [LangSwitcher switchLang:@"请写下您的广告留言吧" key:nil];
     
     textView.editable = NO;
     

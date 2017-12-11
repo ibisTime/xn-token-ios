@@ -33,7 +33,7 @@
                            
                            @"charge" : @"ETH充值",
                            @"withdraw" : @"ETH取现",
-                           @"buy": @"交易买入",
+                           @"buy":  @"交易买入",
                            @"sell" : @"交易卖出",
                            @"tradefrozen" : @"交易冻结",
                            @"tradeunfrozen" : @"交易解冻",

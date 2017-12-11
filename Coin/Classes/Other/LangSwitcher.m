@@ -7,13 +7,18 @@
 //
 
 #import "LangSwitcher.h"
+#import "ZMChineseConvert.h"
 
 @implementation LangSwitcher
 
 + (NSString *)switchLang:(NSString *)content key:(NSString *)key {
     
+    
+    
+   return [ZMChineseConvert convertSimplifiedToTraditional:content];
+
 //    [NSLocale currentLocale]
-    return content;
+//    return content;
     
 }
 

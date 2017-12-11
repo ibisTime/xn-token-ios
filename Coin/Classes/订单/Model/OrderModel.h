@@ -75,6 +75,9 @@
 //提示
 @property (nonatomic, strong) NSString *promptStr;
 
++ (NSArray *)endStatusList;
++ (NSArray *)ingStatusList;
+
 @end
 
 @interface SellUserInfo : NSObject

@@ -123,7 +123,13 @@
         
     }];
     
-    NSArray *textArr = @[@"交易价格", @"交易金额", @"交易数量"];
+   
+    
+    NSArray *textArr = @[
+                         [LangSwitcher switchLang:@"交易价格" key:nil],
+                         [LangSwitcher switchLang:@"交易金额" key:nil],
+                         [LangSwitcher switchLang:@"交易数量" key:nil]
+                         ];
     
     __block UILabel *lastLbl = self.orderCodeLbl;
     

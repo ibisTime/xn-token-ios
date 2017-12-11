@@ -7,17 +7,15 @@
 //
 
 #import "OrderListTableView.h"
-
 #import "OrderListCell.h"
 #import "TLAlert.h"
-
 #import "TLNetworking.h"
 
 @interface OrderListTableView ()<UITableViewDelegate, UITableViewDataSource>
 
-
 @end
 
+//
 @implementation OrderListTableView
 
 static NSString *identifierCell = @"OrderListCell";

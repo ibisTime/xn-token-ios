@@ -38,7 +38,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.title = @"发布购买";
+    
+    self.title = [LangSwitcher switchLang:@"发布购买" key:nil];
     
     self.timeArr = [NSMutableArray array];
     
@@ -87,7 +88,11 @@
     
     if (self.publishType == PublishTypePublishOrSaveDraft) {
         
-        [UIBarButtonItem addRightItemWithTitle:@"保存草稿" titleColor:kTextColor frame:CGRectMake(0, 0, 70, 44) vc:self action:@selector(keepDraft)];
+        [UIBarButtonItem addRightItemWithTitle:[LangSwitcher switchLang:@"保存草稿" key:nil]
+                                    titleColor:kTextColor
+                                         frame:CGRectMake(0, 0, 70, 44)
+                                            vc:self
+                                        action:@selector(keepDraft)];
 
     }
 }
@@ -156,7 +161,7 @@
         
         NSArray <OverTimeModel *>*data = [OverTimeModel tl_objectArrayWithDictionaryArray:responseObject[@"data"]];
         
-        [data enumerateObjectsUsingBlock:^(OverTimeModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [[data reversedArray] enumerateObjectsUsingBlock:^(OverTimeModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             
             [self.timeArr addObject:obj.dvalue];
 
@@ -177,49 +182,51 @@
     
     if (![draft.premiumRate valid]) {
         
-        [TLAlert alertWithInfo:@"请输入溢价比例"];
+        
+
+        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入溢价比例" key:nil]];
         return ;
     }
     
     if (![draft.protectPrice valid]) {
         
-        [TLAlert alertWithInfo:@"请输入最高可成交的价格"];
+        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入最高可成交的价格" key:nil]];
         return ;
     }
     
     if (![draft.minTrade valid]) {
         
-        [TLAlert alertWithInfo:@"请输入交易的最小限额"];
+        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入交易的最小限额" key:nil]];
         return ;
     }
     
     if (![draft.maxTrade valid]) {
         
-        [TLAlert alertWithInfo:@"请输入交易的最大限额"];
+        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入交易的最大限额" key:nil]];
         return ;
     }
     
     if (![draft.buyTotal valid]) {
         
-        [TLAlert alertWithInfo:@"请输入购买总量"];
+        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入购买总量" key:nil]];
         return ;
     }
     
     if (![draft.payType valid]) {
         
-        [TLAlert alertWithInfo:@"请选择付款方式"];
+        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请选择付款方式" key:nil]];
         return ;
     }
     
     if (![draft.payLimit valid]) {
         
-        [TLAlert alertWithInfo:@"请选择付款期限"];
+        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请选择付款期限" key:nil]];
         return ;
     }
     
     if (![draft.leaveMessage valid]) {
         
-        [TLAlert alertWithInfo:@"请填写广告留言"];
+        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请填写广告留言" key:nil]];
         return ;
     }
     

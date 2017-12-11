@@ -450,6 +450,10 @@
 		2E973FD61FDBC5CC005C2D5F /* BaseButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E973FD51FDBC5CC005C2D5F /* BaseButton.m */; };
 		2E973FD91FDBE400005C2D5F /* TradeDisplayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E973FD81FDBE400005C2D5F /* TradeDisplayView.m */; };
 		2E973FDF1FDC0219005C2D5F /* AdsTradeDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E973FDE1FDC0219005C2D5F /* AdsTradeDetailVC.m */; };
+		2E973FE51FDE1880005C2D5F /* ZMChineseConvert.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E973FE11FDE187E005C2D5F /* ZMChineseConvert.m */; };
+		2E973FE61FDE1880005C2D5F /* SimplifiedCode.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2E973FE21FDE187E005C2D5F /* SimplifiedCode.txt */; };
+		2E973FE71FDE1880005C2D5F /* TraditionalCode.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2E973FE41FDE187E005C2D5F /* TraditionalCode.txt */; };
+		2E973FEA1FDE31F7005C2D5F /* OrderListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E973FE91FDE31F7005C2D5F /* OrderListVC.m */; };
 		2EA584C11FA813C900C7106C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2EA584C01FA813C900C7106C /* Assets.xcassets */; };
 		2EA584C41FA813C900C7106C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2EA584C21FA813C900C7106C /* LaunchScreen.storyboard */; };
 		2EA584C71FA813C900C7106C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EA584C61FA813C900C7106C /* main.m */; };
@@ -1389,6 +1393,12 @@
 		2E973FD81FDBE400005C2D5F /* TradeDisplayView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TradeDisplayView.m; sourceTree = "<group>"; };
 		2E973FDD1FDC0219005C2D5F /* AdsTradeDetailVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AdsTradeDetailVC.h; sourceTree = "<group>"; };
 		2E973FDE1FDC0219005C2D5F /* AdsTradeDetailVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AdsTradeDetailVC.m; sourceTree = "<group>"; };
+		2E973FE11FDE187E005C2D5F /* ZMChineseConvert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZMChineseConvert.m; sourceTree = "<group>"; };
+		2E973FE21FDE187E005C2D5F /* SimplifiedCode.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SimplifiedCode.txt; sourceTree = "<group>"; };
+		2E973FE31FDE187E005C2D5F /* ZMChineseConvert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZMChineseConvert.h; sourceTree = "<group>"; };
+		2E973FE41FDE187E005C2D5F /* TraditionalCode.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TraditionalCode.txt; sourceTree = "<group>"; };
+		2E973FE81FDE31F7005C2D5F /* OrderListVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OrderListVC.h; sourceTree = "<group>"; };
+		2E973FE91FDE31F7005C2D5F /* OrderListVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OrderListVC.m; sourceTree = "<group>"; };
 		2EA584B41FA813C900C7106C /* Coin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Coin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EA584C01FA813C900C7106C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2EA584C31FA813C900C7106C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -1688,6 +1698,7 @@
 		211C013A1FC6600300E51FCF /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				2E973FE01FDE187E005C2D5F /* ChineseConvert */,
 				21C91D891FDBD64D006EDB16 /* Alipay */,
 				21205CFF1FCD6383003C6C7C /* WeChat */,
 				211C013B1FC6600300E51FCF /* 腾讯云 */,
@@ -3391,7 +3402,6 @@
 		2182D2EE1FC803AA008EDCE4 /* 订单 */ = {
 			isa = PBXGroup;
 			children = (
-				2182D2F11FC803C4008EDCE4 /* Model */,
 				2182D2F01FC803BE008EDCE4 /* View */,
 				2182D2EF1FC803B7008EDCE4 /* Controller */,
 			);
@@ -3405,6 +3415,8 @@
 				2182D2F31FC8057D008EDCE4 /* OrderDetailVC.m */,
 				211F78121FCAFBCA0023F133 /* WaitingOrderVC.h */,
 				211F78131FCAFBCA0023F133 /* WaitingOrderVC.m */,
+				2E973FE81FDE31F7005C2D5F /* OrderListVC.h */,
+				2E973FE91FDE31F7005C2D5F /* OrderListVC.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -3420,13 +3432,6 @@
 				2182D2FF1FC96C89008EDCE4 /* OrderArbitrationView.m */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		2182D2F11FC803C4008EDCE4 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		21A7F2D81FB2E2F900FAA0A2 /* 用户 */ = {
@@ -3720,9 +3725,9 @@
 		2E394FA81FB055DE00BA0829 /* 订单 */ = {
 			isa = PBXGroup;
 			children = (
+				2E394FA91FB055DE00BA0829 /* Controller */,
 				2121DCC81FC71230001FC2E3 /* Model */,
 				2121DCC71FC71225001FC2E3 /* View */,
-				2E394FA91FB055DE00BA0829 /* Controller */,
 			);
 			path = "订单";
 			sourceTree = "<group>";
@@ -3888,6 +3893,17 @@
 				2E973FD51FDBC5CC005C2D5F /* BaseButton.m */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		2E973FE01FDE187E005C2D5F /* ChineseConvert */ = {
+			isa = PBXGroup;
+			children = (
+				2E973FE11FDE187E005C2D5F /* ZMChineseConvert.m */,
+				2E973FE21FDE187E005C2D5F /* SimplifiedCode.txt */,
+				2E973FE31FDE187E005C2D5F /* ZMChineseConvert.h */,
+				2E973FE41FDE187E005C2D5F /* TraditionalCode.txt */,
+			);
+			path = ChineseConvert;
 			sourceTree = "<group>";
 		};
 		2EA584AB1FA813C900C7106C = {
@@ -4056,6 +4072,7 @@
 				211C04B51FC6604900E51FCF /* 6.gif in Resources */,
 				211C048B1FC6604800E51FCF /* Assets.xcassets in Resources */,
 				211C04B01FC6604900E51FCF /* 25.gif in Resources */,
+				2E973FE71FDE1880005C2D5F /* TraditionalCode.txt in Resources */,
 				211C04A81FC6604900E51FCF /* 33.gif in Resources */,
 				211C04BD1FC6604900E51FCF /* 0@2x.png in Resources */,
 				211C04C41FC6604900E51FCF /* 13.gif in Resources */,
@@ -4065,6 +4082,7 @@
 				211C04AB1FC6604900E51FCF /* 32.gif in Resources */,
 				211C04F81FC6604900E51FCF /* 10.caf in Resources */,
 				211C04C21FC6604900E51FCF /* 16.gif in Resources */,
+				2E973FE61FDE1880005C2D5F /* SimplifiedCode.txt in Resources */,
 				211C04FA1FC6604900E51FCF /* 01.caf in Resources */,
 				211C04B81FC6604900E51FCF /* 1.gif in Resources */,
 				211C04BC1FC6604900E51FCF /* 14.gif in Resources */,
@@ -4162,6 +4180,7 @@
 				211C04131FC6604800E51FCF /* MKNetworkEngine.m in Sources */,
 				211C04991FC6604800E51FCF /* IMAChatViewController.m in Sources */,
 				2EBFBF231FD8E56C0066F7E4 /* PublishService.m in Sources */,
+				2E973FE51FDE1880005C2D5F /* ZMChineseConvert.m in Sources */,
 				215979761FB84CC70029F177 /* BillDetailCell.m in Sources */,
 				21A821171FDA690700AE59F2 /* GoogleAuthVC.m in Sources */,
 				211CF9A41FC55ADD00E51FCF /* OrderPriceModel.m in Sources */,
@@ -4410,6 +4429,7 @@
 				211C04141FC6604800E51FCF /* UIAlertView+MKNetworkKitAdditions.m in Sources */,
 				211DE6BB1FB58B4C002FCF3D /* NSString+CGSize.m in Sources */,
 				211DE6B81FB58B4C002FCF3D /* UIControl+Block.m in Sources */,
+				2E973FEA1FDE31F7005C2D5F /* OrderListVC.m in Sources */,
 				211DE6C41FB58B4C002FCF3D /* HttpSign.m in Sources */,
 				211C04CF1FC6604900E51FCF /* SwipeDeleteTableView.m in Sources */,
 				211C043B1FC6604800E51FCF /* MenuItem.m in Sources */,

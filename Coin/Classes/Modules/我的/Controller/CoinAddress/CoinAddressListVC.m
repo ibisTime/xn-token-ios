@@ -50,7 +50,7 @@
     
     self.tableView.placeHolderView = self.placeHolderView;
     
-        self.tableView.refreshDelegate = self;
+    self.tableView.refreshDelegate = self;
     
     [self.view addSubview:self.tableView];
     
@@ -226,9 +226,5 @@
     
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 @end

@@ -9,6 +9,8 @@
 #import "TLTableView.h"
 #import "MJRefresh.h"
 #import <UIScrollView+TLAdd.h>
+#import <CDCommon/UIScrollView+TLAdd.h>
+
 
 #define  adjustsContentInsets(scrollView)\
 do { \
@@ -66,6 +68,8 @@ _Pragma("clang diagnostic pop") \
     return tableView;
 
 }
+
+
 
 
 + (instancetype)tableViewWithFrame:(CGRect)frame

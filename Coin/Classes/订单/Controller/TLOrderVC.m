@@ -15,8 +15,9 @@
 #import "ChatManager.h"
 #import "OrderDetailVC.h"
 #import "WaitingOrderVC.h"
-
-#import "UITabBar+Badge.h"
+#import "OrderModel.h"
+#import <CDCommon/DeviceUtil.h>
+#import "OrderListVC.h"
 
 @interface TLOrderVC ()<SegmentDelegate, RefreshDelegate>
 
@@ -24,189 +25,70 @@
 @property (nonatomic, strong) CoinChangeView *changeView;
 //筛选
 @property (nonatomic, strong) FilterView *filterPicker;
-//
-@property (nonatomic, strong) TLPageDataHelper *helper;
-//切换
 @property (nonatomic, strong) TopLabelUtil *labelUnil;
-//暂无订单
-@property (nonatomic, strong) UIView *placeHolderView;
-//
-@property (nonatomic, strong) OrderListTableView *tableView;
-//订单列表
-@property (nonatomic, strong) NSArray <OrderModel *>*orders;
-//订单状态方式(进行中和已完成)
-@property (nonatomic, copy) NSArray *statusList;
-//当前选择
-@property (nonatomic, assign) NSInteger currentIndex;
+@property (nonatomic, strong) UIScrollView *switchScrollView;
+@property (nonatomic, strong) OrderListVC *ingOrderListVC;
+@property (nonatomic, strong) OrderListVC *endOrderListVC;
 
 @end
 
 @implementation TLOrderVC
 
-- (void)viewWillAppear:(BOOL)animated {
-    
-    [super viewWillAppear:animated];
-    
-    //获取广告
-    if ([TLUser user].userId) {
-        
-        [self requestOrderList];
-    }
-    
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     //中间切换
     self.navigationItem.titleView = self.labelUnil;
+    
     //货币切换
     [self addCoinChangeView];
+    
     //添加通知
     [self addNotification];
-    //暂无订单
-    [self initPlaceHolderView];
-    //订单列表
-    [self initTableView];
+
     //添加KVO
     [self addUnReadMsgKVO];
     
     //TODO 如果切换账户 把订单清除掉
+    [self setUpUI];
     
+    [self setUpChildVC];
+
 }
 
-
-#pragma mark - Init
-- (TopLabelUtil *)labelUnil {
-    
-    if (!_labelUnil) {
-        
-        self.currentIndex = 1;
-        
-        _labelUnil = [[TopLabelUtil alloc]initWithFrame:CGRectMake(kScreenWidth/2 - 120, 25, 240, 44)];
-        _labelUnil.delegate = self;
-        _labelUnil.backgroundColor = [UIColor clearColor];
-        _labelUnil.titleNormalColor = kTextColor;
-        _labelUnil.titleSelectColor = kThemeColor;
-        _labelUnil.titleFont = Font(17.0);
-        _labelUnil.lineType = LineTypeTitleLength;
-        
-        _labelUnil.titleArray = @[
-                                  [LangSwitcher switchLang: @"进行中" key:nil],
-                                  [LangSwitcher switchLang: @"已结束" key:nil]
-                                 ];
-    }
-    
-    return _labelUnil;
-}
-
-
-- (void)addCoinChangeView {
-    
-    CoinChangeView *coinChangeView = [[CoinChangeView alloc] init];
-    
-    coinChangeView.title = @"ETH";
-    
-    [coinChangeView addTarget:self action:@selector(changeCoin) forControlEvents:UIControlEventTouchUpInside];
-    
-    self.changeView = coinChangeView;
-    
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:coinChangeView];
-    
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(20 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        
-        coinChangeView.title = @"ETH";
-        
-    });
-    
-}
-
-- (FilterView *)filterPicker {
-    
-    if (!_filterPicker) {
-        
-        CoinWeakSelf;
-        
-        NSArray *textArr = @[@"ETH"];
-        
-        _filterPicker = [[FilterView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
-        
-        _filterPicker.title = @"请选择货币类型";
-        
-        _filterPicker.selectBlock = ^(NSInteger index) {
-            
-            weakSelf.changeView.title = textArr[index];
-            
-        };
-        
-        _filterPicker.tagNames = textArr;
-        
-    }
-    
-    return _filterPicker;
-}
-
-- (void)initPlaceHolderView {
-    //-1:待下单  0:待付款 1:待释放 2:待评价  5:仲裁中
-    self.statusList = @[@"-1", @"0", @"1", @"5"];
-    
-    self.placeHolderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight - 40)];
-    
-    UIImageView *orderIV = [[UIImageView alloc] init];
-    
-    orderIV.image = kImage(@"暂无订单");
-    
-    orderIV.centerX = kScreenWidth/2.0;
-    
-    [self.placeHolderView addSubview:orderIV];
-    [orderIV mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.centerX.equalTo(@0);
-        make.top.equalTo(@90);
-        
-    }];
-    
-    UILabel *textLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor2 font:14.0];
-    
-    textLbl.text = @"暂无订单";
-    
-    textLbl.textAlignment = NSTextAlignmentCenter;
-    
-    [self.placeHolderView addSubview:textLbl];
-    [textLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.top.equalTo(orderIV.mas_bottom).offset(20);
-        make.centerX.equalTo(orderIV.mas_centerX);
-        
-    }];
-}
-
-- (void)initTableView {
-    
-    self.tableView = [[OrderListTableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
-    
-    self.tableView.refreshDelegate = self;
-    
-    self.tableView.placeHolderView = self.placeHolderView;
-
-    if (@available(iOS 11.0, *)) {
-        
-        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-    }
-    
-    [self.view addSubview:self.tableView];
-    
-    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.edges.mas_equalTo(UIEdgeInsetsZero);
-    }];
-    
-}
 
 - (void)addNotification {
     //消息
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLogin) name:kUserLoginNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orderRefresh) name:kOrderListRefresh object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLoginOut) name:kUserLoginOutNotification object:nil];
+    
+}
+
+// 用户登出，把订单数据清除掉
+- (void)userLoginOut {
+    
+    self.ingOrderListVC.orderGroups = [[NSMutableArray alloc] init];
+    self.endOrderListVC.orderGroups = [[NSMutableArray alloc] init];
+    
+    //
+    [self orderReloadData];
+
+}
+
+- (void)orderReloadData {
+    
+    [self.ingOrderListVC reloadData];
+    [self.endOrderListVC reloadData];
+    
+}
+
+
+- (void)orderRefresh {
+    
+    [self.ingOrderListVC refresh];
+    [self.endOrderListVC refresh];
 
 }
 
@@ -221,50 +103,13 @@
                         options:NSKeyValueObservingOptionNew
                           block:^(id observer, id object, NSDictionary *change) {
                               
-        [weakSelf onUnReadMessage];
+                              [weakSelf.ingOrderListVC reloadData];
+                              [weakSelf.endOrderListVC reloadData];
                               
     }];
     
 }
 
-//
-- (void)onUnReadMessage {
-    //
-    //同步消息列表
-    [[IMAPlatform sharedInstance].conversationMgr asyncConversationList];
-    
-//    NSInteger unRead = [IMAPlatform sharedInstance].conversationMgr.unReadMessageCount;
-
-    if (self.currentIndex == 1) {
-        
-        NSMutableArray *conversationList = [NSMutableArray array];
-        
-//        [self.orders enumerateObjectsUsingBlock:^(OrderModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-//
-//            NSString *userId = obj.isBuy ? obj.sellUserInfo.userId: obj.buyUserInfo.userId;
-//
-//            TIMConversation *timConversation = [[TIMManager sharedInstance] getConversation:TIM_C2C receiver:userId];
-//
-//            [conversationList addObject:timConversation];
-//
-//        }];
-        
-        NSInteger unReadCount = [[IMAPlatform sharedInstance].conversationMgr getUnReadCountWithConversationList:[conversationList copy]];
-        
-        if (unReadCount == 0) {
-            
-            [self.labelUnil hideBadgeOnItemIndex:0];
-
-        } else if (unReadCount > 0) {
-            
-            [self.labelUnil showBadgeOnItemIndex:0];
-
-        }
-    }
-    
-    //刷新列表
-    [self.tableView reloadData_tl];
-}
 
 #pragma mark - Events
 - (void)changeCoin {
@@ -272,179 +117,96 @@
     [self.filterPicker show];
 }
 
-- (void)calculationUnReadCount {
-    
-    //同步消息列表
-    [[IMAPlatform sharedInstance].conversationMgr asyncConversationList];
-    
-    //消息栏消息数
-    NSInteger unReadCount = [[IMAPlatform sharedInstance].conversationMgr unReadMessageCount];
-    
-    if (unReadCount > 0) {
-        
-        [self.tabBarController.tabBar showBadgeOnItemIndex:1];
-        
-    } else {
-        
-        [self.tabBarController.tabBar hideBadgeOnItemIndex:1];
-        
-    }
-    
-    [self.tableView reloadData_tl];
-}
-
-- (void)orderRefresh {
-    
-    [self.tableView beginRefreshing];
-}
-
-#pragma mark - Data
-- (void)requestOrderList {
-    
-    CoinWeakSelf;
-    
-    TLPageDataHelper *helper = [TLPageDataHelper new];
-    
-    helper.code = @"625250";
-    
-    helper.start = 1;
-    helper.limit = 20;
-    
-    helper.parameters[@"tradeCoin"] = @"ETH";
-    helper.parameters[@"statusList"] = self.statusList;
-    helper.parameters[@"tradeCurrency"] = @"CNY";
-    
-    helper.parameters[@"belongUser"] = [TLUser user].userId;
-    
-    helper.tableView = self.tableView;
-    
-    self.helper = helper;
-    
-    [helper modelClass:[OrderModel class]];
-    
-    [self.tableView addRefreshAction:^{
-        
-        [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
-            
-            weakSelf.orders = objs;
-            
-            weakSelf.tableView.orders = objs;
-            
-            [weakSelf onUnReadMessage];
-
-        } failure:^(NSError *error) {
-            
-        }];
-    }];
-    
-    [self.tableView beginRefreshing];
-
-    [self.tableView addLoadMoreAction:^{
-        
-        [helper loadMore:^(NSMutableArray *objs, BOOL stillHave) {
-            
-            weakSelf.orders = objs;
-            weakSelf.tableView.orders = objs;
-            
-            [weakSelf onUnReadMessage];
-
-            
-        } failure:^(NSError *error) {
-            
-        }];
-    }];
-    
-    [self.tableView endRefreshingWithNoMoreData_tl];
-    
-}
 
 
-#pragma mark - SegmentDelegate
+#pragma mark - SegmentDelegate, 顶部切换
 -(void)segment:(TopLabelUtil *)segment didSelectIndex:(NSInteger)index {
     
-    if (index == 1) {
-        //-1:待下单  0:待付款 1:待释放 2:待评价  5:仲裁中
-        self.statusList = @[@"-1", @"0", @"1", @"5"];
-        
-    }else {
-        
-        self.statusList = @[@"2", @"3", @"4"];
-        
-    }
-    
-    //
-    self.currentIndex = index;
-    self.helper.parameters[@"statusList"] = self.statusList;
-    
-    //
-    [self.tableView beginRefreshing];
-    
+    [self.switchScrollView setContentOffset:CGPointMake((index - 1) * self.switchScrollView.width, 0)];
     [self.labelUnil dyDidScrollChangeTheTitleColorWithContentOfSet:(index-1)*kScreenWidth];
     
 }
 
-#pragma mark - RefreshDelegate, 处理点击事件
-- (void)refreshTableView:(TLTableView *)refreshTableview didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+
+- (void)setUpChildVC {
     
-    OrderModel *order = self.orders[indexPath.row];
+    //1. 进行中
+    self.ingOrderListVC = [[OrderListVC alloc] init];
+    self.ingOrderListVC.statusList = [OrderModel ingStatusList];
+    self.ingOrderListVC.view.frame = CGRectMake(0,0,self.switchScrollView.width,self.switchScrollView.height);
+    [self addChildViewController:self.ingOrderListVC];
+    [self.switchScrollView addSubview:self.ingOrderListVC.view];
     
-    NSString *friendUserId = order.isBuy ? order.sellUserInfo.userId: order.buyUserInfo.userId;
-    NSString *friendPhoto = order.isBuy ? order.sellUserInfo.photo: order.buyUserInfo.photo;
-    NSString *friendNickName = order.isBuy ? order.sellUserInfo.nickname: order.buyUserInfo.nickname;
-    
-    
-    __block IMAGroup *currentIMGroup = nil;
-    
-    //2. 获取对应的group
-    currentIMGroup = [[IMAGroup alloc] initWith:order.code];
-//    [[ChatManager sharedManager] getGroupByGroupId:order.code];
-    if (currentIMGroup == nil) {
-        
-        NSLog(@"未找到会话，异常");
-        return;
-        
-    }
-    
-//    IMAConversationManager *mgr = [IMAPlatform sharedInstance].conversationMgr;
-//    _conversationList = [mgr conversationList];
-    
-//    IMAConversation *conv = (IMAConversation *)convable;
-//    IMAUser *user = [[IMAPlatform sharedInstance] getReceiverOf:conv];
-    
-    //对方
-//    IMAUser *user = [[IMAUser alloc] initWith:friendUserId];
-//    user.nickName = friendNickName;
-//    user.icon = [friendPhoto convertImageUrl];
-//    user.remark = friendNickName;
-//    user.userId = friendUserId;
-    
-//    TIMGroupInfo *groupInfo = [[TIMGroupInfo alloc] init];
-//    groupInfo.groupId
-//    IMAGroup *group = [[IMAGroup alloc] initWithInfo:<#(TIMGroupInfo *)#>];
-    
-    //我
-    ChatUserProfile *userInfo = [ChatUserProfile sharedUser];
-    userInfo.minePhoto = [TLUser user].photo;
-    userInfo.mineNickName = [TLUser user].nickname;
-    userInfo.friendPhoto = [friendPhoto convertImageUrl];
-    userInfo.friendNickName = friendNickName;
-    
-    //
-    if ([order.status isEqualToString:@"-1"]) {
-        // 传入user
-        WaitingOrderVC *chatVC = [[WaitingOrderVC alloc] initWith:currentIMGroup];
-        chatVC.userInfo = userInfo;
-        chatVC.order = order;
-        [self.navigationController pushViewController:chatVC animated:YES];
-        return ;
-    }
-    
-    //
-    OrderDetailVC *chatVC = [[OrderDetailVC alloc] initWith:currentIMGroup];
-    chatVC.userInfo = userInfo;
-    chatVC.order = order;
-    [self.navigationController pushViewController:chatVC animated:YES];
+    //2. 结束
+    self.endOrderListVC = [[OrderListVC alloc] init];
+    self.endOrderListVC.statusList = [OrderModel endStatusList];
+    self.endOrderListVC.view.frame = CGRectMake(self.switchScrollView.width,0,self.switchScrollView.width,self.switchScrollView.height);
+    [self addChildViewController:self.endOrderListVC];
+    [self.switchScrollView addSubview:self.endOrderListVC.view];
     
 }
+
+- (void)setUpUI {
+    
+    //0.顶部切换
+    self.labelUnil = [[TopLabelUtil alloc]initWithFrame:CGRectMake(kScreenWidth/2 - 120, 25, 240, 44)];
+    self.labelUnil.delegate = self;
+    self.labelUnil.backgroundColor = [UIColor clearColor];
+    self.labelUnil.titleNormalColor = kTextColor;
+    self.labelUnil.titleSelectColor = kThemeColor;
+    self.labelUnil.titleFont = Font(17.0);
+    self.labelUnil.lineType = LineTypeTitleLength;
+    self.labelUnil.titleArray = @[
+                                  [LangSwitcher switchLang: @"进行中" key:nil],
+                                  [LangSwitcher switchLang: @"已结束" key:nil]
+                                  ];
+    self.navigationItem.titleView = self.labelUnil;
+
+    
+    //1.切换背景
+    self.switchScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - [DeviceUtil top64] - [DeviceUtil bottom49])];
+    [self.view addSubview:self.switchScrollView];
+    [self.switchScrollView setContentSize:CGSizeMake(2*self.switchScrollView.width, self.switchScrollView.height)];
+    self.switchScrollView.scrollEnabled = NO;
+    
+}
+
+- (void)addCoinChangeView {
+    
+    CoinChangeView *coinChangeView = [[CoinChangeView alloc] init];
+    
+    coinChangeView.title = @"ETH";
+    [coinChangeView addTarget:self action:@selector(changeCoin) forControlEvents:UIControlEventTouchUpInside];
+    
+    self.changeView = coinChangeView;
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:coinChangeView];
+    
+}
+
+- (FilterView *)filterPicker {
+    
+    if (!_filterPicker) {
+        
+        CoinWeakSelf;
+        
+        NSArray *textArr = @[@"ETH"];
+        
+        _filterPicker = [[FilterView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
+        
+        _filterPicker.title = [LangSwitcher switchLang:@"请选择货币类型" key:nil] ;
+        _filterPicker.selectBlock = ^(NSInteger index) {
+            
+            weakSelf.changeView.title = textArr[index];
+            
+        };
+        
+        _filterPicker.tagNames = textArr;
+        
+    }
+    
+    return _filterPicker;
+}
+
+
 
 @end

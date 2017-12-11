@@ -14,4 +14,6 @@
 
 + (instancetype)placeholderViewWithText:(NSString *)text topMargin:(CGFloat)margin ;
 
++ (instancetype)placeholderViewWithImgAndText:(NSString *)text;
+
 @end

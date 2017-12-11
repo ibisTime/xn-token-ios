@@ -26,8 +26,8 @@
 #import <IQKeyboardManager.h>
 #import "RichChatViewController.h"
 #import "OrderDetailVC.h"
-//#import "CustomChatUIViewController.h"
 #import "WaitingOrderVC.h"
+#import "ZMChineseConvert.h"
 
 @interface AppDelegate ()
 
@@ -38,6 +38,7 @@
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
     
     //服务器环境
     [AppConfig config].runEnv = RunEnvDev;
@@ -77,9 +78,9 @@
     [[ChatManager sharedManager] initChat];
 //    [[ChatManager sharedManager] loginIM];
     
-    // 这里监听主要是为了，tabbar上的消息提示
+    //这里监听主要是为了，tabbar上的消息提示
     self.chatKVOCtrl = [FBKVOController controllerWithObserver:self];
-    [self.KVOController observe:[IMAPlatform sharedInstance].conversationMgr
+    [self.chatKVOCtrl observe:[IMAPlatform sharedInstance].conversationMgr
                         keyPath:@"unReadMessageCount"
                         options:NSKeyValueObservingOptionNew
                           block:^(id observer, id object, NSDictionary *change) {

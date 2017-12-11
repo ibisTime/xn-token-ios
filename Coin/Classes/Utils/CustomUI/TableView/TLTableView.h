@@ -37,6 +37,8 @@
 + (instancetype)groupTableViewWithFrame:(CGRect)frame
 
                           delegate:(id)delegate dataSource:(id)dataSource;
+
+//- (instancetype)initWithFrame:(CGRect)frame style:(UITableViewStyle)style;
 /**
  * 添加下拉事件
  */

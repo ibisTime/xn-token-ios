@@ -232,7 +232,10 @@
     
     CoinWeakSelf;
     
-    NSArray *titles = @[@"发布购买", @"发布卖出"];
+    NSArray *titles = @[
+                        [LangSwitcher switchLang:@"发布购买" key:nil],
+                        [LangSwitcher switchLang:@"发布卖出" key:nil]
+                        ];
     
     _tipView = [[PublishTipView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight) titles:titles];
     

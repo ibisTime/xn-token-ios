@@ -47,7 +47,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = @"购买";
+    self.title = [LangSwitcher switchLang:@"购买" key:nil]
+   ;
     
     // ----------先获取广告详情
     CoinWeakSelf;
@@ -71,7 +72,7 @@
         //广告剩余可用余额
         weakSelf.tradeView.leftAmount = self.advertise.leftCountString;
         //
-        NSString *text = @"历史交易";
+        NSString *text = [LangSwitcher switchLang:@"历史交易" key:nil];
         NSString *history = [self.advertise.userStatistics convertTotalTradeCount];
         //历史交易
         UILabel *lbl = self.tradeView.lblArr[3];

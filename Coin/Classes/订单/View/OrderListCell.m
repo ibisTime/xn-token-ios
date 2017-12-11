@@ -42,7 +42,7 @@
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         
         [self initSubviews];
-        
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     
     return self;
@@ -171,6 +171,10 @@
     }];
 }
 
++ (CGFloat)defaultCellHeight {
+    return 75;
+}
+
 - (void)setOrder:(OrderModel *)order {
     
     _order = order;
@@ -198,8 +202,9 @@
     self.nameLbl.text = nickName;
 
     //交易方式
-
-    NSString *tradeText = order.isBuy ? @"购买": @"出售";
+    NSString *tradeText = order.isBuy ?
+    [LangSwitcher switchLang:@"购买" key:nil]:
+    [LangSwitcher switchLang:@"出售" key:nil];
 
     UIColor *tradeColor = order.isBuy ? kPaleBlueColor: kThemeColor;
 
@@ -209,7 +214,10 @@
     
     
     //交易金额
-    self.amountLbl.text = [NSString stringWithFormat:@"交易金额: %@CNY", [order.tradeAmount convertToRealMoneyWithNum:2]];
+    NSString *amountText = [NSString stringWithFormat:@"%@: %@CNY",
+                            [LangSwitcher switchLang:@"交易金额" key:nil],
+                            [order.tradeAmount convertToRealMoneyWithNum:2]];
+    self.amountLbl.text = [LangSwitcher switchLang:amountText key:nil];
     
     //订单状态
     self.statusLbl.text = order.statusStr;
@@ -219,7 +227,9 @@
     
     NSString *code = [order.code substringFromIndex:count - 8];
     
-    self.orderCodeLbl.text = [NSString stringWithFormat:@"编号: %@", code];
+    self.orderCodeLbl.text = [NSString stringWithFormat:@"%@: %@",
+                               [LangSwitcher switchLang:@"编号" key:nil],
+                              code];
     
     if (!order.tradeAmount) {
         
@@ -242,15 +252,15 @@
     
     self.amountLbl.hidden = order.tradeAmount != nil ? NO: YES;
     self.orderCodeLbl.hidden = order.tradeAmount != nil ? NO: YES;
-    NSString *userId = order.isBuy ? order.sellUserInfo.userId: order.buyUserInfo.userId;
-
     
+    
+    // 获取未读消息
+//    NSString *userId = order.isBuy ? order.sellUserInfo.userId: order.buyUserInfo.userId;
    TIMConversation *groupConversation = [[TIMManager sharedInstance] getConversation:TIM_GROUP receiver:_order.code];
-    //
-//    TIMConversation * conversation = [[TIMManager sharedInstance] getConversation:TIM_C2C receiver:userId];
     NSInteger unReadCount = [groupConversation getUnReadMessageNum];
     self.unReadLbl.text = [NSString stringWithFormat:@"%ld", unReadCount];
     self.unReadLbl.hidden = unReadCount == 0 ? YES: NO;
+    
 }
 
 @end

@@ -45,7 +45,13 @@ static NSString *identifierCell = @"BillDetailCell";
     
     BillDetailCell *cell = [tableView dequeueReusableCellWithIdentifier:identifierCell];
     
-    NSArray *textArr = @[@"变动前金额", @"变动后金额", @"变动时间", @"明细状态", @"明细摘要"];
+    NSArray *textArr = @[
+                         [LangSwitcher switchLang:@"变动前金额" key:nil],
+                          [LangSwitcher switchLang:@"变动后金额" key:nil],
+                          [LangSwitcher switchLang:@"变动时间" key:nil],
+                          [LangSwitcher switchLang:@"明细状态" key:nil],
+                          [LangSwitcher switchLang:@"明细摘要" key:nil],
+                         ];
     
     NSString *dateStr = [_bill.createDatetime convertToDetailDate];
     
@@ -55,9 +61,9 @@ static NSString *identifierCell = @"BillDetailCell";
     
     NSArray *rightArr = @[preAmount, postAmount, dateStr, _bill.getStatusName, _bill.getBizName];
     
-    cell.titleLbl.text = textArr[indexPath.row];
+    cell.titleLbl.text =  [LangSwitcher switchLang:textArr[indexPath.row] key:nil];
     
-    cell.rightLabel.text = rightArr[indexPath.row];
+    cell.rightLabel.text = [LangSwitcher switchLang:rightArr[indexPath.row] key:nil] ;
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
 

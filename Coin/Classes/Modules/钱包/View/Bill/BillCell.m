@@ -164,7 +164,7 @@
 
     self.moneyLbl.text = moneyStr;
 
-    self.detailLbl.text = _billModel.bizNote;
+    self.detailLbl.text = [LangSwitcher switchLang:_billModel.bizNote key:nil]; ;
     
     [self layoutSubviews];
     

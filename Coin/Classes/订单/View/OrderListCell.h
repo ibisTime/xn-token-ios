@@ -14,4 +14,6 @@
 
 @property (nonatomic, strong) OrderModel *order;
 
++ (CGFloat)defaultCellHeight;
+
 @end

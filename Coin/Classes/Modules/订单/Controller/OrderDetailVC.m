@@ -31,13 +31,6 @@
 
 @implementation OrderDetailVC
 
-- (void)viewDidAppear:(BOOL)animated {
-    
-    [super viewDidAppear:animated];
-    //查看详情
-    [self lookOrderDetail];
-
-}
 
 - (void)viewDidLoad {
     
@@ -50,7 +43,10 @@
 //    支付倒计时
 //    self.timer = [NSTimer timerWithTimeInterval:60 target:self selector:@selector(calculateInvalidTime) userInfo:nil repeats:YES];
     
+    //查看详情
+    [self lookOrderDetail];
 }
+
 
 - (void)viewDidLayoutSubviews {
     
