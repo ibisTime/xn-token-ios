@@ -127,6 +127,8 @@
 
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
     
+    CoinWeakSelf;
+    
     NSInteger idx = tabBarController.selectedIndex;
     
     //判断点击的Controller是不是需要登录，如果是，那就登录
@@ -136,7 +138,7 @@
         
         loginVC.loginSuccess = ^{
             
-            self.selectedIndex = idx;
+            weakSelf.selectedIndex = idx;
 
         };
         
