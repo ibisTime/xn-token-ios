@@ -98,7 +98,7 @@
         
         TLPwdRelatedVC *pwdAboutVC = [[TLPwdRelatedVC alloc] initWithType:pwdType];
         
-        [self.navigationController pushViewController:pwdAboutVC animated:YES];
+        [weakSelf.navigationController pushViewController:pwdAboutVC animated:YES];
         
     }];
     
@@ -162,7 +162,7 @@
     [changeLoginPwd setAction:^{
         
         TLPwdRelatedVC *pwdAboutVC = [[TLPwdRelatedVC alloc] initWithType:TLPwdTypeReset];
-        [self.navigationController pushViewController:pwdAboutVC animated:YES];
+        [weakSelf.navigationController pushViewController:pwdAboutVC animated:YES];
         
     }];
 

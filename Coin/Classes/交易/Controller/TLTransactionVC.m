@@ -161,7 +161,7 @@
     
     bannerView.selected = ^(NSInteger index) {
         
-        if (!(self.bannerRoom[index].url && self.bannerRoom[index].url.length > 0)) {
+        if (!(weakSelf.bannerRoom[index].url && weakSelf.bannerRoom[index].url.length > 0)) {
             return ;
         }
         
