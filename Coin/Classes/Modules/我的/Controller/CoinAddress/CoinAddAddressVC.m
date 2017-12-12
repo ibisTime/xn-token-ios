@@ -354,6 +354,34 @@
 
 - (void)clickConfirm:(UIButton *)sender {
     
+    if (![self.remarkTF.text valid]) {
+        
+        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入标签" key:nil]];
+        return ;
+    }
+    
+    if ([self.receiveAddressLbl.text isEqualToString:[LangSwitcher switchLang:@"请选择提币地址或扫码录入" key:nil]]) {
+        
+        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请选择提币地址" key:nil]];
+        return ;
+    }
+    
+    if (!(self.captchaView.captchaTf.text && self.captchaView.captchaTf.text.length > 3)) {
+        
+        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入正确的验证码" key:nil]];
+        return;
+    }
+    
+    if ([TLUser user].isGoogleAuthOpen) {
+        
+        if (self.sw.on && ![self.googleAuthTF.text valid]) {
+            
+            [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入谷歌验证码" key:nil]];
+            
+            return ;
+        }
+    }
+    
     if (self.sw.on) {
         
         [TLAlert alertWithTitle:[LangSwitcher switchLang:@"请输入资金密码" key:nil] msg:[LangSwitcher switchLang:@"" key:nil] confirmMsg:[LangSwitcher switchLang:@"确定" key:nil] cancleMsg:[LangSwitcher switchLang:@"取消" key:nil] placeHolder:[LangSwitcher switchLang:@"请输入资金密码" key:nil] maker:self cancle:^(UIAlertAction *action) {
@@ -375,6 +403,11 @@
 - (void)onSwitchChange:(UISwitch *)sw {
     
     sw.on = !sw.on;
+    
+    if (![TLUser user].isGoogleAuthOpen) {
+        
+        return ;
+    }
     
     if (sw.on) {
         
@@ -468,31 +501,6 @@
 #pragma mark - Data
 //新增用户ETH地址
 - (void)confirmWithdrawalsWithPwd:(NSString *)pwd {
-    
-    if (![self.remarkTF.text valid]) {
-        
-        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入标签" key:nil]];
-        return ;
-    }
-    
-    if ([self.receiveAddressLbl.text isEqualToString:[LangSwitcher switchLang:@"请选择提币地址或扫码录入" key:nil]]) {
-        
-        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请选择提币地址" key:nil]];
-        return ;
-    }
-    
-    if (!(self.captchaView.captchaTf.text && self.captchaView.captchaTf.text.length > 3)) {
-        
-        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入正确的验证码" key:nil]];
-        return;
-    }
-    
-    if (self.sw.on && ![self.googleAuthTF.text valid]) {
-        
-        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入谷歌验证码" key:nil]];
-        
-        return ;
-    }
     
     if (![pwd valid] && self.sw.on) {
         

@@ -110,7 +110,7 @@
     
     self.googleAuthTF.rightView = authView;
     
-    CGFloat captchaViewY = [TLUser user].isGoogleAuthOpen ? self.googleAuthTF.yy + 1: phoneTf.y + 1;
+    CGFloat captchaViewY = [TLUser user].isGoogleAuthOpen ? self.googleAuthTF.yy + 1: phoneTf.yy + 1;
     //验证码
     CaptchaView *captchaView = [[CaptchaView alloc] initWithFrame:CGRectMake(phoneTf.x, captchaViewY, phoneTf.width, phoneTf.height)];
     
@@ -188,7 +188,7 @@
         
     } else if (self.type == TLPwdTypeForget || self.type == TLPwdTypeReset){ //找回密码||修改登录密码
         
-        http.parameters[@"bizType"] = USER_FIND_PWD_CODE;
+        http.parameters[@"bizType"] = USER_CHANGE_PWD_CODE;
         
     } else if (self.type == TLPwdTypeSetTrade) {//设置资金密码
         
@@ -283,7 +283,7 @@
         
     } else if (self.type == TLPwdTypeForget || self.type == TLPwdTypeReset){
         
-        http.code = USER_FIND_PWD_CODE;
+        http.code = USER_CHANGE_PWD_CODE;
         http.parameters[@"kind"] = @"C";
         http.parameters[@"mobile"] = self.phoneTf.text;
         http.parameters[@"newLoginPwd"] = self.pwdTf.text;

@@ -292,7 +292,6 @@
         
         cell.rightLabel.text = [LangSwitcher switchLang:@"已认证" key:nil];
         
-        [self.tableView reloadData];
     }
     //邮箱
     if ([TLUser user].email) {
@@ -303,7 +302,6 @@
         
         cell.rightLabel.text = [TLUser user].email;
         
-        [self.tableView reloadData];
     }
     //手机号
     if ([TLUser user].mobile) {
@@ -313,19 +311,16 @@
         
         cell.rightLabel.text = [TLUser user].mobile;
         
-        [self.tableView reloadData];
     }
     
-    if ([TLUser user].googleAuthFlag) {
-        
-        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:4 inSection:1];
-        
-        SettingCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
-        
-        cell.rightLabel.text = [TLUser user].isGoogleAuthOpen ? [LangSwitcher switchLang:@"已开启" key:nil]: [LangSwitcher switchLang:@"未开启" key:nil];
-        
-        [self.tableView reloadData];
-    }
+    //谷歌验证
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:4 inSection:1];
+    
+    SettingCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+    
+    cell.rightLabel.text = [TLUser user].isGoogleAuthOpen ? [LangSwitcher switchLang:@"已开启" key:nil]: [LangSwitcher switchLang:@"未开启" key:nil];
+    
+    [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {

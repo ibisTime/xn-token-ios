@@ -3935,9 +3935,9 @@
 		2EB949551FDF6B1A00CE4B94 /* ChineseConvert */ = {
 			isa = PBXGroup;
 			children = (
+				2EB949581FDF6B1A00CE4B94 /* ZMChineseConvert.h */,
 				2EB949561FDF6B1A00CE4B94 /* ZMChineseConvert.m */,
 				2EB949571FDF6B1A00CE4B94 /* SimplifiedCode.txt */,
-				2EB949581FDF6B1A00CE4B94 /* ZMChineseConvert.h */,
 				2EB949591FDF6B1A00CE4B94 /* TraditionalCode.txt */,
 			);
 			path = ChineseConvert;

@@ -435,6 +435,32 @@ typedef NS_ENUM(NSInteger, AddressType) {
 
     [self.view endEditing:YES];
     
+    if ([self.receiveAddressLbl.text isEqualToString:@"请选择付币地址或扫码录入"]) {
+        
+        [TLAlert alertWithInfo:@"请选择接收地址"];
+        return ;
+    }
+    
+    CGFloat amount = [self.tranAmountTF.text doubleValue];
+    
+    if (amount <= 0 || ![self.tranAmountTF.text valid]) {
+        
+        [TLAlert alertWithInfo:@"提币金额需大于0"];
+        return ;
+    }
+    
+    if ([TLUser user].isGoogleAuthOpen) {
+        
+        if (!(self.addressType == AddressTypeSelectAddress && [self.addressModel.status isEqualToString:@"1"])) {
+            
+            if (![self.googleAuthTF.text valid]) {
+                
+                [TLAlert alertWithInfo:@"请输入谷歌验证码"];
+                return ;
+            }
+        }
+    }
+    
     if (self.addressType == AddressTypeSelectAddress && [self.addressModel.status isEqualToString:@"1"]) {
         
         [self confirmWithdrawalsWithPwd:nil];
@@ -556,6 +582,11 @@ typedef NS_ENUM(NSInteger, AddressType) {
     
     self.addressType = AddressTypeSelectAddress;
     
+    if (![TLUser user].isGoogleAuthOpen) {
+        
+        return ;
+    }
+    
     if ((self.addressType == AddressTypeSelectAddress && [self.addressModel.status isEqualToString:kAddressCertified])) {
 
         [UIView animateWithDuration:0 animations:^{
@@ -588,29 +619,6 @@ typedef NS_ENUM(NSInteger, AddressType) {
 #pragma mark - Data
 - (void)confirmWithdrawalsWithPwd:(NSString *)pwd {
     
-    if ([self.receiveAddressLbl.text isEqualToString:@"请选择付币地址或扫码录入"]) {
-        
-        [TLAlert alertWithInfo:@"请选择接收地址"];
-        return ;
-    }
-    
-    CGFloat amount = [self.tranAmountTF.text doubleValue];
-    
-    if (amount <= 0 || ![self.tranAmountTF.text valid]) {
-        
-        [TLAlert alertWithInfo:@"提币金额需大于0"];
-        return ;
-    }
-    
-    if (!(self.addressType == AddressTypeSelectAddress && [self.addressModel.status isEqualToString:@"1"])) {
-        
-        if (![self.googleAuthTF.text valid]) {
-            
-            [TLAlert alertWithInfo:@"请输入谷歌验证码"];
-            return ;
-        }
-    }
-    
     if (!(self.addressType == AddressTypeSelectAddress && [self.addressModel.status isEqualToString:@"1"])) {
         
         if (![pwd valid]) {
@@ -632,10 +640,13 @@ typedef NS_ENUM(NSInteger, AddressType) {
     http.parameters[@"payCardInfo"] = self.currency.currency;
     http.parameters[@"payCardNo"] = self.receiveAddressLbl.text;
     
-    if (!(self.addressType == AddressTypeSelectAddress && [self.addressModel.status isEqualToString:@"1"])) {
+    if ([TLUser user].isGoogleAuthOpen) {
         
-        http.parameters[@"googleCaptcha"] = self.googleAuthTF.text;
-
+        if (!(self.addressType == AddressTypeSelectAddress && [self.addressModel.status isEqualToString:@"1"])) {
+            
+            http.parameters[@"googleCaptcha"] = self.googleAuthTF.text;
+            
+        }
     }
     
     if (!(self.addressType == AddressTypeSelectAddress && [self.addressModel.status isEqualToString:@"1"])) {
