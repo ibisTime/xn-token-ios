@@ -199,7 +199,6 @@
     }
     
     TLNetworking *http = [TLNetworking new];
-    
     http.code = @"805071";
     http.showView = self.view;
     
@@ -214,7 +213,6 @@
         [TLAlert alertWithSucces:title];
         //谷歌验证设置为已开启
         [TLUser user].googleAuthFlag = @"1";
-        
         [self.navigationController popViewControllerAnimated:YES];
         
     } failure:^(NSError *error) {

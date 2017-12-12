@@ -125,7 +125,7 @@
     self.currencyNameLbl.text = quotation.symbol;
     
     //一日交易量
-    CGFloat volume = [quotation.total_supply doubleValue];
+    CGFloat volume = [quotation.one_day_volume_cny doubleValue];
 
     NSString *volumeStr = @"";
     
@@ -135,7 +135,7 @@
         
     } else if (volume > 10000) {
         
-        volumeStr = [NSString stringWithFormat:@"%@万", [quotation.total_supply divNumber:@"10000" leaveNum:2]];
+        volumeStr = [NSString stringWithFormat:@"%@万", [quotation.one_day_volume_cny divNumber:@"10000" leaveNum:2]];
     }
     
     self.tradeVolumeLbl.text = [NSString stringWithFormat:@"量%@", volumeStr];
@@ -149,7 +149,6 @@
     
     //涨跌情况
     NSString *priceFluctStr = quotation.percent_change_1h;
-    
     CGFloat fluct = [priceFluctStr doubleValue];
     
     if (fluct >= 0) {
@@ -163,11 +162,9 @@
     }
     
     [self.priceFluctBtn setTitle:priceFluctStr forState:UIControlStateNormal];
-    
     [self.priceFluctBtn setBackgroundColor:quotation.bgColor forState:UIControlStateNormal];
     
     CGFloat btnW = [NSString getWidthWithString:priceFluctStr font:16.0] + 15;
-    
     [self.priceFluctBtn mas_updateConstraints:^(MASConstraintMaker *make) {
         
         make.width.equalTo(@(btnW > 75 ? btnW: 75));

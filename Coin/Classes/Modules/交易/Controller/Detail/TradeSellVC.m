@@ -289,9 +289,6 @@
             HomePageVC *homePageVC = [HomePageVC new];
             
             homePageVC.userId = self.advertise.userId;
-            
-            homePageVC.advCode = self.advertise.code;
-            
             [self.navigationController pushViewController:homePageVC animated:YES];
             
         }break;

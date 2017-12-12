@@ -10,8 +10,11 @@
 
 @interface HomePageVC : TLBaseVC
 
+
+/**
+ 查询谁的信息就传哪个人的userId
+ */
 @property (nonatomic, copy) NSString *userId;
-//广告id
-@property (nonatomic, copy) NSString *advCode;
+
 
 @end

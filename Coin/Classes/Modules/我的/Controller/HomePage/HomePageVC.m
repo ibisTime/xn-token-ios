@@ -21,8 +21,8 @@
 @interface HomePageVC ()
 
 @property (nonatomic, strong) HomePageHeaderView *headerView;
-//广告
-@property (nonatomic, strong) AdvertiseModel *advertise;
+////广告
+//@property (nonatomic, strong) AdvertiseModel *advertise;
 //用户关系
 @property (nonatomic, strong) UserRelationModel *relation;
 
@@ -44,8 +44,9 @@
     
     //头部
     [self initHeaderView];
-    //获取用户信息
-    [self queryAdvertiseDetail];
+    
+    // 获取用户信息
+//    [self queryAdvertiseDetail];
     
     if ([TLUser user].userId) {
         
@@ -189,7 +190,7 @@
     
     http.code = @"805110";
     http.showView = self.view;
-    http.parameters[@"toUser"] = self.advertise.userId;
+    http.parameters[@"toUser"] = self.userId;
     http.parameters[@"userId"] = [TLUser user].userId;
     http.parameters[@"type"] = @"1";
     
@@ -214,7 +215,7 @@
     
     http.code = @"805111";
     http.showView = self.view;
-    http.parameters[@"toUser"] = self.advertise.userId;
+    http.parameters[@"toUser"] = self.userId;
     http.parameters[@"userId"] = [TLUser user].userId;
     http.parameters[@"type"] = @"1";
 
@@ -240,7 +241,7 @@
     
     http.code = @"805110";
     http.showView = self.view;
-    http.parameters[@"toUser"] = self.advertise.userId;
+    http.parameters[@"toUser"] = self.userId;
     http.parameters[@"userId"] = [TLUser user].userId;
     http.parameters[@"type"] = @"0";
     
@@ -263,7 +264,7 @@
     
     http.code = @"805111";
     http.showView = self.view;
-    http.parameters[@"toUser"] = self.advertise.userId;
+    http.parameters[@"toUser"] = self.userId;
     http.parameters[@"userId"] = [TLUser user].userId;
     http.parameters[@"type"] = @"0";
     
@@ -281,39 +282,39 @@
 
 #pragma mark - Data
 
-- (void)queryAdvertiseDetail {
-    
-    CoinWeakSelf;
-    
-    TLNetworking *http = [TLNetworking new];
-    
-    http.code = @"625226";
-    http.showView = self.view;
-    
-    http.parameters[@"adsCode"] = self.advCode;
-    
-    if ([TLUser user].isLogin) {
-        
-        http.parameters[@"userId"] = [TLUser user].userId;
-    }
-    
-    [http postWithSuccess:^(id responseObject) {
-        
-        self.advertise = [AdvertiseModel tl_objectWithDictionary:responseObject[@"data"]];
-        
-        weakSelf.headerView.advertise = self.advertise;
-        
-    } failure:^(NSError *error) {
-        
-    }];
-}
+//- (void)queryAdvertiseDetail {
+//
+//    CoinWeakSelf;
+//
+//    TLNetworking *http = [TLNetworking new];
+//
+//    http.code = @"625226";
+//    http.showView = self.view;
+//
+//    http.parameters[@"adsCode"] = self.advCode;
+//
+//    if ([TLUser user].isLogin) {
+//
+//        http.parameters[@"userId"] = [TLUser user].userId;
+//    }
+//
+//    [http postWithSuccess:^(id responseObject) {
+//
+//        self.advertise = [AdvertiseModel tl_objectWithDictionary:responseObject[@"data"]];
+//
+//        weakSelf.headerView.advertise = self.advertise;
+//
+//    } failure:^(NSError *error) {
+//
+//    }];
+//}
 
 - (void)queryUserRelation {
     
     TLNetworking *http = [TLNetworking new];
     
     http.code = @"625256";
-    
+    http.showView = self.view;
     http.parameters[@"master"] = self.userId;
     http.parameters[@"visitor"] = [TLUser user].userId;
     

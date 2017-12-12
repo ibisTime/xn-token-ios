@@ -130,6 +130,8 @@
     NSInteger unReadMsgCount = [IMAPlatform sharedInstance].conversationMgr.unReadMessageCount;
     
     UITabBarController *tabBarController = [self rootTabBarController];
+    //
+    tabBarController.selectedIndex = 2;
 
     if (unReadMsgCount > 0) {
         

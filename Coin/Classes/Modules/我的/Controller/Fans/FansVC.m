@@ -11,8 +11,9 @@
 #import "FansModel.h"
 
 #import "FansTableView.h"
+#import "HomePageVC.h"
 
-@interface FansVC ()
+@interface FansVC ()< RefreshDelegate >
 
 //暂无交易
 @property (nonatomic, strong) UIView *placeHolderView;
@@ -40,11 +41,24 @@
     
 }
 
+
+#pragma mark - cell点击——事件
+- (void)refreshTableView:(TLTableView*)refreshTableview didSelectRowAtIndexPath:(NSIndexPath*)indexPath {
+    
+    FansModel *fan = self.fans[indexPath.row];
+    //
+    HomePageVC *homePageVC = [[HomePageVC alloc] init];
+    // 查询者的userId
+    homePageVC.userId = fan.toUser;
+    [self.navigationController pushViewController:homePageVC animated:YES];
+    
+}
+
 #pragma mark - Init
 - (void)initTableView {
     
     self.tableView = [[FansTableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
-    
+    self.tableView.refreshDelegate = self;
     self.tableView.placeHolderView = self.placeHolderView;
     
 //    self.tableView.refreshDelegate = self;

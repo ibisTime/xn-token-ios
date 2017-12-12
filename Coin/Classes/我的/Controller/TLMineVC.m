@@ -309,7 +309,8 @@
     
     self.headerView.nameLbl.text = [TLUser user].nickname;
     
-    self.headerView.levelBtn.hidden = [[TLUser user].level isEqualToString:kLevelOrdinaryTraders] ? NO: YES;
+    self.headerView.levelBtn.hidden = [[TLUser user].level isEqualToString:kLevelOrdinaryTraders] ? YES : NO;
+    
 }
 
 - (void)changeHeadIcon {

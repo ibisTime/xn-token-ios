@@ -80,15 +80,19 @@
     }];
     
     //用户等级
-    self.levelBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"代理人" key:nil] titleColor:kWhiteColor backgroundColor:kClearColor titleFont:10.0 cornerRadius:1.5];
+    self.levelBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"代理人" key:nil]
+                                   titleColor:kWhiteColor
+                              backgroundColor:kClearColor
+                                    titleFont:10.0
+                                 cornerRadius:1.5];
     
     self.levelBtn.layer.borderWidth = 0.5;
     self.levelBtn.layer.borderColor = kWhiteColor.CGColor;
     [self.levelBtn setImage:kImage(@"代理人") forState:UIControlStateNormal];
     [self.levelBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, 2, 0, 0)];
     [self.levelBtn setImageEdgeInsets:UIEdgeInsetsMake(0, -4, 0, 0)];
-    
     [self addSubview:self.levelBtn];
+    
     [self.levelBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.left.equalTo(self.nameLbl.mas_right).offset(5);
@@ -163,6 +167,7 @@
         make.centerY.equalTo(lastBtn.mas_centerY);
         
     }];
+    
 }
 
 #pragma mark - Events
