@@ -18,6 +18,7 @@
 #import "EditVC.h"
 #import "GoogleAuthVC.h"
 #import "CloseGoogleAuthVC.h"
+#import "ChangeLoginPwdVC.h"
 
 #import "SettingGroup.h"
 #import "SettingModel.h"
@@ -103,20 +104,27 @@
     }];
     
     
-    //身份认证
+    //实名认证
     SettingModel *idAuth = [SettingModel new];
     
-    idAuth.text = [LangSwitcher switchLang:@"芝麻认证" key:nil];
+    idAuth.text = [LangSwitcher switchLang:@"实名认证" key:nil];
     [idAuth setAction:^{
-        
-//        IdAuthVC *idAuthVC = [IdAuthVC new];
-//
-//        [weakSelf.navigationController pushViewController:idAuthVC animated:YES];
         
         ZMAuthVC *authVC = [ZMAuthVC new];
         
-        authVC.title = [LangSwitcher switchLang:@"芝麻认证" key:nil];
+        authVC.title = [LangSwitcher switchLang:@"实名认证" key:nil];
 
+        authVC.success = ^{
+            
+            [TLAlert alertWithSucces:[LangSwitcher switchLang:@"实名认证成功" key:nil]];
+            
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                
+                [weakSelf.navigationController popViewControllerAnimated:YES];
+                
+            });
+        };
+        
         [weakSelf.navigationController pushViewController:authVC animated:YES];
         
     }];
@@ -161,8 +169,18 @@
     changeLoginPwd.text = [LangSwitcher switchLang:@"修改登录密码" key:nil];
     [changeLoginPwd setAction:^{
         
-        TLPwdRelatedVC *pwdAboutVC = [[TLPwdRelatedVC alloc] initWithType:TLPwdTypeReset];
-        [weakSelf.navigationController pushViewController:pwdAboutVC animated:YES];
+        ChangeLoginPwdVC *changeLoginPwdVC = [ChangeLoginPwdVC new];
+        
+        changeLoginPwdVC.success = ^{
+        
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                
+                [weakSelf.navigationController popViewControllerAnimated:YES];
+                
+            });
+        };
+        
+        [weakSelf.navigationController pushViewController:changeLoginPwdVC animated:YES];
         
     }];
 
@@ -292,7 +310,6 @@
         
         cell.rightLabel.text = [LangSwitcher switchLang:@"已认证" key:nil];
         
-        [self.tableView reloadData];
     }
     //邮箱
     if ([TLUser user].email) {
@@ -303,7 +320,6 @@
         
         cell.rightLabel.text = [TLUser user].email;
         
-        [self.tableView reloadData];
     }
     //手机号
     if ([TLUser user].mobile) {
@@ -313,19 +329,16 @@
         
         cell.rightLabel.text = [TLUser user].mobile;
         
-        [self.tableView reloadData];
     }
     
-    if ([TLUser user].googleAuthFlag) {
-        
-        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:4 inSection:1];
-        
-        SettingCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
-        
-        cell.rightLabel.text = [TLUser user].isGoogleAuthOpen ? [LangSwitcher switchLang:@"已开启" key:nil]: [LangSwitcher switchLang:@"未开启" key:nil];
-        
-        [self.tableView reloadData];
-    }
+    //谷歌验证
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:4 inSection:1];
+    
+    SettingCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+    
+    cell.rightLabel.text = [TLUser user].isGoogleAuthOpen ? [LangSwitcher switchLang:@"已开启" key:nil]: [LangSwitcher switchLang:@"未开启" key:nil];
+    
+    [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {

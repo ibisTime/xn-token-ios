@@ -385,6 +385,7 @@
 		2125B8C71FD9493500591812 /* HomePageHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2125B8C61FD9493500591812 /* HomePageHeaderView.m */; };
 		2125B8CA1FD95FD900591812 /* HomePageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2125B8C91FD95FD900591812 /* HomePageVC.m */; };
 		2129A4F91FDACE87003C99C0 /* CloseGoogleAuthVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2129A4F71FDACE86003C99C0 /* CloseGoogleAuthVC.m */; };
+		2129FE6F1FDFBAA3009DA374 /* ChangeLoginPwdVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2129FE6E1FDFBAA3009DA374 /* ChangeLoginPwdVC.m */; };
 		2159795D1FB81C2B0029F177 /* BillVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2159795C1FB81C2B0029F177 /* BillVC.m */; };
 		215979601FB81CC40029F177 /* BillTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2159795F1FB81CC40029F177 /* BillTableView.m */; };
 		215979641FB81CED0029F177 /* BillModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 215979631FB81CED0029F177 /* BillModel.m */; };
@@ -1259,6 +1260,8 @@
 		2125B8C91FD95FD900591812 /* HomePageVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomePageVC.m; sourceTree = "<group>"; };
 		2129A4F71FDACE86003C99C0 /* CloseGoogleAuthVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CloseGoogleAuthVC.m; sourceTree = "<group>"; };
 		2129A4F81FDACE86003C99C0 /* CloseGoogleAuthVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CloseGoogleAuthVC.h; sourceTree = "<group>"; };
+		2129FE6D1FDFBAA3009DA374 /* ChangeLoginPwdVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChangeLoginPwdVC.h; sourceTree = "<group>"; };
+		2129FE6E1FDFBAA3009DA374 /* ChangeLoginPwdVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChangeLoginPwdVC.m; sourceTree = "<group>"; };
 		215421CF1FD708AC00FDD25C /* Coin.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Coin.entitlements; sourceTree = "<group>"; };
 		2159795B1FB81C2B0029F177 /* BillVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BillVC.h; sourceTree = "<group>"; };
 		2159795C1FB81C2B0029F177 /* BillVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BillVC.m; sourceTree = "<group>"; };
@@ -3473,6 +3476,8 @@
 				21A7F2E51FB2E2F900FAA0A2 /* TLAccountSetBaseVC.m */,
 				21A7F2EA1FB2E2F900FAA0A2 /* TLPwdRelatedVC.h */,
 				21A7F2E61FB2E2F900FAA0A2 /* TLPwdRelatedVC.m */,
+				2129FE6D1FDFBAA3009DA374 /* ChangeLoginPwdVC.h */,
+				2129FE6E1FDFBAA3009DA374 /* ChangeLoginPwdVC.m */,
 			);
 			path = UserInfo;
 			sourceTree = "<group>";
@@ -3940,9 +3945,9 @@
 		2EB949551FDF6B1A00CE4B94 /* ChineseConvert */ = {
 			isa = PBXGroup;
 			children = (
+				2EB949581FDF6B1A00CE4B94 /* ZMChineseConvert.h */,
 				2EB949561FDF6B1A00CE4B94 /* ZMChineseConvert.m */,
 				2EB949571FDF6B1A00CE4B94 /* SimplifiedCode.txt */,
-				2EB949581FDF6B1A00CE4B94 /* ZMChineseConvert.h */,
 				2EB949591FDF6B1A00CE4B94 /* TraditionalCode.txt */,
 			);
 			path = ChineseConvert;
@@ -4501,6 +4506,7 @@
 				211C04181FC6604800E51FCF /* NSDictionary+RequestEncoding.m in Sources */,
 				211C04591FC6604800E51FCF /* IMAConversation.m in Sources */,
 				211C048A1FC6604800E51FCF /* ChatInputPanel.m in Sources */,
+				2129FE6F1FDFBAA3009DA374 /* ChangeLoginPwdVC.m in Sources */,
 				211A532F1FBFE4CF00CC6294 /* RateDescCell.m in Sources */,
 				21CB94EA1FDC0C2500CAB090 /* PersonalitySettingTableView.m in Sources */,
 				211C049F1FC6604900E51FCF /* IMAMsg+UITableViewCell.m in Sources */,

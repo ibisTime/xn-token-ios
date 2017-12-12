@@ -7,7 +7,6 @@
 //
 
 #import "ZMAuthVC.h"
-//#import <ZMCert/ZMCert.h>
 #import <AssetsLibrary/AssetsLibrary.h>
 
 #import "ZMAuthResultVC.h"
@@ -86,22 +85,17 @@
 
 - (void)realNameAuth:(NSNotification *)notification {
     
-    [TLUser user].realName = self.realName.text;
-    
-    [TLUser user].idNo = self.idCard.text;
-    
-    [[TLUser user] updateUserInfo];
-    
     if ([notification.object isEqualToString:@"1"]) {
         
-        [TLAlert alertWithSucces:[LangSwitcher switchLang:@"认证成功" key:nil]];
+        [TLUser user].realName = self.realName.text;
         
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [TLUser user].idNo = self.idCard.text;
+        
+        if (self.success) {
             
-            [self.navigationController popViewControllerAnimated:YES];
-            
-        });
-
+            self.success();
+        }
+    
     } else {
     
         [TLAlert alertWithError:[LangSwitcher switchLang:@"认证失败, 请重新认证" key:nil]];
@@ -146,20 +140,13 @@
     http.parameters[@"realName"] = self.realName.text;
     http.parameters[@"userId"] = [TLUser user].userId;
     http.parameters[@"returnUrl"] = @"Bcoin://certi.back";
-    http.parameters[@"localCheck"] = @"1";
+    http.parameters[@"localCheck"] = @"0";
     
     [http postWithSuccess:^(id responseObject) {
         
         if ([responseObject[@"errorCode"] isEqual:@"0"]) {
             
             NSString *bizNo = responseObject[@"data"][@"bizNo"];
-            
-            //不跳支付宝
-//                        NSString *merchantID = responseObject[@"data"][@"merchantId"];
-//            
-//                        [self startAuthWithBizNo:bizNo merchantID:merchantID];
-            
-            //            [self doVerify:responseObject[@"data"][@"url"]];
 
             [TLUser user].tempBizNo = bizNo;
 
@@ -171,7 +158,7 @@
             
             ZMAuthResultVC *authResultVC = [ZMAuthResultVC new];
             
-            authResultVC.title = [LangSwitcher switchLang:@"芝麻认证结果" key:nil];
+            authResultVC.title = [LangSwitcher switchLang:@"实名认证结果" key:nil];
             
             authResultVC.result = NO;
             
@@ -191,112 +178,10 @@
     }];
 }
 
-#pragma mark - 不跳支付宝
-//- (void)startAuthWithBizNo:(NSString *)bizNo merchantID:(NSString *)merchantID {
-//
-//    ZMCertification *manager = [[ZMCertification alloc] init];
-//    BaseWeakSelf;
-//
-//#if IsZMCertVideo
-//    //  录制动作检测录像
-//    [manager startVideoWithBizNO:bizNo
-//                      merchantID:merchantID
-//                       extParams:@{@"RecordVideo" : [NSNumber numberWithBool:YES]}
-//                  viewController:self
-//                        onFinish:^(BOOL isCanceled, BOOL isPassed, ZMStatusErrorType errorCode, NSString * _Nullable videoPath) {
-//                            if (videoPath) {
-//                                ALAssetsLibrary *assetsLibrary = [[ALAssetsLibrary alloc]init];
-//                                [assetsLibrary writeVideoAtPathToSavedPhotosAlbum:[NSURL fileURLWithPath:videoPath]
-//                                                                  completionBlock:^(NSURL *assetURL, NSError *error) {
-//                                                                      if (error) {
-//                                                                          NSLog(@"Save video fail:%@",error);
-//                                                                      } else {
-//                                                                          NSLog(@"Save video succeed.");
-//                                                                      }
-//                                                                  }];
-//                            }
-//
-//                            ZMAuthResultVC *authResultVC = [ZMAuthResultVC new];
-//
-//                            authResultVC.title = @"芝麻认证结果";
-//
-//                            authResultVC.realName = self.realName.text;
-//
-//                            authResultVC.idCard = self.idCard.text;
-//
-//                            if (isCanceled) {
-//
-//                                authResultVC.result = NO;
-//
-//                                authResultVC.failureReason = @"用户取消了认证!";
-//
-//                            } else {
-//
-//                                if (isPassed) {
-//
-//                                    authResultVC.result = YES;
-//
-//                                } else {
-//
-//
-//                                    authResultVC.result = NO;
-//
-//                                    authResultVC.failureReason = [NSString stringWithFormat:@"认证中出现问题--%zi", errorCode];
-//                                }
-//                            }
-//
-//                            [self.navigationController pushViewController:authResultVC animated:YES];
-//
-//                        }];
-//#else
-//    //  不进行动作检测视频录制
-//    [manager startWithBizNO:bizNo
-//                 merchantID:merchantID
-//                  extParams:nil
-//             viewController:self
-//                   onFinish:^(BOOL isCanceled, BOOL isPassed, ZMStatusErrorType errorCode) {
-//                       ZMAuthResultVC *authResultVC = [ZMAuthResultVC new];
-//
-//                       authResultVC.title = @"芝麻认证结果";
-//
-//                       authResultVC.realName = self.realName.text;
-//
-//                       authResultVC.idCard = self.idCard.text;
-//
-//                       if (isCanceled) {
-//
-//                           authResultVC.result = NO;
-//
-//                           authResultVC.failureReason = @"用户取消了认证!";
-//
-//                       } else {
-//
-//                           if (isPassed) {
-//
-//                               authResultVC.result = YES;
-//
-//                           } else {
-//
-//
-//                               authResultVC.result = NO;
-//
-//                               authResultVC.failureReason = [NSString stringWithFormat:@"认证中出现问题--%zi", errorCode];
-//                           }
-//                       }
-//
-//                       [self.navigationController pushViewController:authResultVC animated:YES];
-//                   }];
-//#endif
-//}
-
 #pragma mark - 跳转到支付宝认证
 - (void)doVerify:(NSString *)url {
+    
     // 这里使用固定appid 20000067
-    
-//    NSString *urll = @"https://zmcustprod.zmxy.com.cn/certify/guide.htm?zhima_exterface_invoke_assign_target=0a6eed651503539484955299774875&zhima_exterface_invoke_assig_sign=HaUvFNg30SPE-AGj8cuS_HaKxBNbg8_3Fu6xZ2jTXZ8fhs_b7UbeHOYB1JXAvE75Kfm-3j2Cw0N1k5Q-G0qNO6ky5JcDL3JsfHlJ4CEBkFr_EtVroJ_PKSHTvC7_O-0y7ss1TLwlQ0QZmM3pKMLMX-bkHRzE_eyhttuxzqcty0E";
-    
-//    NSString *alipayUrl = [NSString stringWithFormat:@"alipayqr://platformapi/startapp?saId=10000007&qrcode=%@",url];
-    
     NSString *alipayUrl = [NSString stringWithFormat:@"alipays://platformapi/startapp?appId=20000067&url=%@",
                            [self URLEncodedStringWithUrl:url]];
     

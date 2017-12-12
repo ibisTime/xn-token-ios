@@ -130,6 +130,19 @@
     return (luhmTotal%10 ==0)?YES:NO;
 }
 
+//纯数字
++ (BOOL)isPureNumWithString:(NSString *)string {
+    
+    string = [string stringByTrimmingCharactersInSet:[NSCharacterSet decimalDigitCharacterSet]];
+    
+    if (string.length > 0) {
+        
+        return NO;
+    }
+    
+    return YES;
+}
+
 - (BOOL)isBlank
 {
     NSString *s = [self stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
