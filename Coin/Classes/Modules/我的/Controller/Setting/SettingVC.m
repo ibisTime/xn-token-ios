@@ -18,6 +18,7 @@
 #import "EditVC.h"
 #import "GoogleAuthVC.h"
 #import "CloseGoogleAuthVC.h"
+#import "ChangeLoginPwdVC.h"
 
 #import "SettingGroup.h"
 #import "SettingModel.h"
@@ -168,8 +169,18 @@
     changeLoginPwd.text = [LangSwitcher switchLang:@"修改登录密码" key:nil];
     [changeLoginPwd setAction:^{
         
-        TLPwdRelatedVC *pwdAboutVC = [[TLPwdRelatedVC alloc] initWithType:TLPwdTypeReset];
-        [weakSelf.navigationController pushViewController:pwdAboutVC animated:YES];
+        ChangeLoginPwdVC *changeLoginPwdVC = [ChangeLoginPwdVC new];
+        
+        changeLoginPwdVC.success = ^{
+        
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                
+                [weakSelf.navigationController popViewControllerAnimated:YES];
+                
+            });
+        };
+        
+        [weakSelf.navigationController pushViewController:changeLoginPwdVC animated:YES];
         
     }];
 

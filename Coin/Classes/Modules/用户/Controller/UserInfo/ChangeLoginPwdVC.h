@@ -10,4 +10,6 @@
 
 @interface ChangeLoginPwdVC : TLAccountSetBaseVC
 
+@property (nonatomic,copy) void(^success)(void);
+
 @end
