@@ -156,6 +156,8 @@
                                                 titleWidth:100
                                                placeholder:[LangSwitcher switchLang:@"请输入谷歌验证码" key:nil]];
     
+    self.googleAuthTF.keyboardType = UIKeyboardTypeNumberPad;
+
     [self.view addSubview:self.googleAuthTF];
     
     //复制
@@ -374,10 +376,29 @@
     
     if ([TLUser user].isGoogleAuthOpen) {
         
-        if (self.sw.on && ![self.googleAuthTF.text valid]) {
+        if (!self.sw.on) {
+            
+            return ;
+        }
+        
+        if (![self.googleAuthTF.text valid]) {
             
             [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入谷歌验证码" key:nil]];
             
+            return ;
+        }
+        
+        //判断谷歌验证码是否为纯数字
+        if (![NSString isPureNumWithString:self.googleAuthTF.text]) {
+            
+            [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入正确的谷歌验证码" key:nil]];
+            return ;
+        }
+        
+        //判断谷歌验证码是否为6位
+        if (self.googleAuthTF.text.length != 6) {
+            
+            [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入正确的谷歌验证码" key:nil]];
             return ;
         }
     }

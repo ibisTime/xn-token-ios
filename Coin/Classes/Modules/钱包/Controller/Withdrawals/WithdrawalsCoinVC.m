@@ -180,6 +180,8 @@ typedef NS_ENUM(NSInteger, AddressType) {
                                                 titleWidth:100
                                                placeholder:@"请输入谷歌验证码"];
     
+    self.googleAuthTF.keyboardType = UIKeyboardTypeNumberPad;
+
     [self.view addSubview:self.googleAuthTF];
     
     //复制
@@ -458,6 +460,21 @@ typedef NS_ENUM(NSInteger, AddressType) {
                 [TLAlert alertWithInfo:@"请输入谷歌验证码"];
                 return ;
             }
+            
+            //判断谷歌验证码是否为纯数字
+            if (![NSString isPureNumWithString:self.googleAuthTF.text]) {
+                
+                [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入正确的谷歌验证码" key:nil]];
+                return ;
+            }
+            
+            //判断谷歌验证码是否为6位
+            if (self.googleAuthTF.text.length != 6) {
+                
+                [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入正确的谷歌验证码" key:nil]];
+                return ;
+            }
+            
         }
     }
     
@@ -525,7 +542,13 @@ typedef NS_ENUM(NSInteger, AddressType) {
 
                 weakSelf.addressModel = addressModel;
                 
-                [weakSelf didSelectAddress];
+                weakSelf.receiveAddressLbl.text = weakSelf.addressModel.address;
+                
+                weakSelf.receiveAddressLbl.textColor = kTextColor;
+                
+                weakSelf.addressType = AddressTypeSelectAddress;
+                
+                [weakSelf setGoogleAuth];
             };
             
             [self.navigationController pushViewController:addressVC animated:YES];
@@ -543,6 +566,8 @@ typedef NS_ENUM(NSInteger, AddressType) {
                 weakSelf.receiveAddressLbl.textColor = kTextColor;
                 
                 weakSelf.addressType = AddressTypeScan;
+
+                [weakSelf setGoogleAuth];
 
             };
             
@@ -562,6 +587,8 @@ typedef NS_ENUM(NSInteger, AddressType) {
                 
                 self.addressType = AddressTypeCopy;
                 
+                [weakSelf setGoogleAuth];
+
             } else {
                 
                 [TLAlert alertWithInfo:@"粘贴内容为空"];
@@ -574,13 +601,7 @@ typedef NS_ENUM(NSInteger, AddressType) {
     }
 }
 
-- (void)didSelectAddress {
-    
-    self.receiveAddressLbl.text = self.addressModel.address;
-    
-    self.receiveAddressLbl.textColor = kTextColor;
-    
-    self.addressType = AddressTypeSelectAddress;
+- (void)setGoogleAuth {
     
     if (![TLUser user].isGoogleAuthOpen) {
         
