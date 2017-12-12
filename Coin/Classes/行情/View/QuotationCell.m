@@ -148,16 +148,16 @@
     self.rmbPriceLbl.text = [NSString stringWithFormat:@"￥%@", quotation.price_cny];
     
     //涨跌情况
-    NSString *priceFluctStr = quotation.percent_change_1h;
+    NSString *priceFluctStr = quotation.percent_change_24h;
     CGFloat fluct = [priceFluctStr doubleValue];
     
-    if (fluct >= 0) {
+    if (fluct > 0) {
         
-        priceFluctStr = [NSString stringWithFormat:@"+%@%%", quotation.percent_change_1h];
+        priceFluctStr = [NSString stringWithFormat:@"+%@%%", priceFluctStr];
         
-    } else {
+    } else  {
         
-        priceFluctStr = [NSString stringWithFormat:@"%@%%", quotation.percent_change_1h];
+        priceFluctStr = [NSString stringWithFormat:@"%@%%", priceFluctStr];
 
     }
     

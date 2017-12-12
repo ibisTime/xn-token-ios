@@ -10,8 +10,10 @@
 
 typedef NS_ENUM(NSInteger, PublishType) {
     
+    //以下 2 种方式，在 设置VC type时 应该不会单独出现
     PublishTypeSaveDraft = 0,  //发布
     PublishTypePublish = 1,
+    
     PublishTypePublishOrSaveDraft = 2, // 可能为直接发布，也可能是保存草稿
     PublishTypePublishDraft = 3,
     PublishTypePublishRedit = 4

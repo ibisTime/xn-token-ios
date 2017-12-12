@@ -471,9 +471,9 @@
             
             NSString *orderCode = responseObject[@"data"][@"code"];
             
-            //联系对方,
-            [self goChatWithGroupId:orderCode];
-            
+            //联系对方
+            [self goChatWithGroupId:orderCode toUser:self.advertise.user];
+
             //刷新订单列表
             [[NSNotificationCenter defaultCenter] postNotificationName:kOrderListRefresh object:nil];
         }

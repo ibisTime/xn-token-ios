@@ -47,8 +47,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = [LangSwitcher switchLang:@"购买" key:nil]
-   ;
+    self.title = [LangSwitcher switchLang:@"购买" key:nil];
     
     // ----------先获取广告详情
     CoinWeakSelf;
@@ -83,12 +82,12 @@
 
         
         //是我的广告，并且广告在交易区
-        if ([self.advertise.userId isEqualToString:[TLUser user].userId]
-            && self.type == TradeBuyPositionTypeMyPublish) {
-            
-            //下架
-            [self addOffItem];
-        }
+//        if ([self.advertise.userId isEqualToString:[TLUser user].userId]
+//            && self.type == TradeBuyPositionTypeMyPublish) {
+//            
+//            //下架
+//            [self addOffItem];
+//        }
         
         //获取交易提醒
         [self requestTradeRemind];
@@ -337,6 +336,29 @@
     
 }
 
+//下架广告
+- (void)requestAdvertiseOff {
+    
+    TLNetworking *http = [TLNetworking new];
+    
+    http.code = @"625224";
+    http.showView = self.view;
+    http.parameters[@"adsCode"] = self.advertise.code;
+    http.parameters[@"userId"] = [TLUser user].userId;
+    
+    [http postWithSuccess:^(id responseObject) {
+        
+        [TLAlert alertWithSucces:@"下架成功"];
+        
+        [self.navigationController popViewControllerAnimated:YES];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:kAdvertiseOff object:nil];
+        
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
 #pragma mark - 获取交易提醒
 - (void)requestTradeRemind {
     
@@ -379,7 +401,8 @@
             
             NSString *orderCode = responseObject[@"data"][@"code"];
             //联系对方
-            [self goChatWithGroupId:orderCode];
+            
+            [self goChatWithGroupId:orderCode toUser:self.advertise.user];
             //刷新订单列表
             [[NSNotificationCenter defaultCenter] postNotificationName:kOrderListRefresh object:nil];
         }
@@ -389,28 +412,7 @@
     }];
 }
 
-//下架广告
-- (void)requestAdvertiseOff {
-    
-    TLNetworking *http = [TLNetworking new];
-    
-    http.code = @"625224";
-    http.showView = self.view;
-    http.parameters[@"adsCode"] = self.advertise.code;
-    http.parameters[@"userId"] = [TLUser user].userId;
-    
-    [http postWithSuccess:^(id responseObject) {
-        
-        [TLAlert alertWithSucces:@"下架成功"];
-        
-        [self.navigationController popViewControllerAnimated:YES];
-        
-        [[NSNotificationCenter defaultCenter] postNotificationName:kAdvertiseOff object:nil];
-        
-    } failure:^(NSError *error) {
-        
-    }];
-}
+
 
 
 //#pragma mark- ads_联系对方

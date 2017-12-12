@@ -28,6 +28,8 @@
 @property (nonatomic, strong) NSMutableArray *timeArr;
 //key/value
 @property (nonatomic, strong) NSMutableArray <KeyValueModel *>*values;
+
+//穿进去的广告模型
 @property (nonatomic, strong) AdvertiseModel *advertise;
 
 @end
@@ -71,7 +73,7 @@
 
 - (void)loadInfo {
     
-    //保存草稿
+    
     [self addRightItem];
     //发布购买
     [self initPublishView];
@@ -94,7 +96,56 @@
                                             vc:self
                                         action:@selector(keepDraft)];
 
+    }else if (self.publishType == PublishTypePublishRedit) {
+        //重新编辑，为下架
+        [UIBarButtonItem addRightItemWithTitle:[LangSwitcher switchLang:@"下架" key:nil]
+                                    titleColor:kTextColor
+                                         frame:CGRectMake(0, 0, 70, 44)
+                                            vc:self
+                                        action:@selector(xiaJia)];
+        
     }
+    
+    
+}
+
+#pragma mark- 重新编辑时，右上角为下架
+//下架广告
+- (void)xiaJia {
+    
+    CoinWeakSelf;
+    
+    [TLAlert alertWithTitle:@"提示" msg:@"您确定要下架此广告?" confirmMsg:@"确认" cancleMsg:@"取消" cancle:^(UIAlertAction *action) {
+        
+        
+    } confirm:^(UIAlertAction *action) {
+        
+        [weakSelf requestAdvertiseOff];
+    }];
+    
+}
+
+//下架广告
+- (void)requestAdvertiseOff {
+    
+    TLNetworking *http = [TLNetworking new];
+    
+    http.code = @"625224";
+    http.showView = self.view;
+    http.parameters[@"adsCode"] = self.advertise.code;
+    http.parameters[@"userId"] = [TLUser user].userId;
+    
+    [http postWithSuccess:^(id responseObject) {
+        
+        [TLAlert alertWithSucces:@"下架成功"];
+        
+        [self.navigationController popViewControllerAnimated:YES];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:kAdvertiseOff object:nil];
+        
+    } failure:^(NSError *error) {
+        
+    }];
 }
 
 - (void)initPublishView {
@@ -151,12 +202,10 @@
 #pragma mark - Data
 - (void)requestOverTime {
     
+    
     TLNetworking *http = [TLNetworking new];
-    
     http.code = @"625907";
-    
     http.parameters[@"parentKey"] = @"trade_time_out";
-    
     [http postWithSuccess:^(id responseObject) {
         
         NSArray <OverTimeModel *>*data = [OverTimeModel tl_objectArrayWithDictionaryArray:responseObject[@"data"]];
@@ -232,7 +281,7 @@
     
     CGFloat rate = [draft.premiumRate doubleValue]/100.0;
     
-    NSString *premiumRate = [NSString stringWithFormat:@"%.4lf", rate];
+    NSString *premiumRate = [NSString stringWithFormat:@"%.2lf", rate];
     
     TLNetworking *http = [TLNetworking new];
     http.code = @"625220";
@@ -274,7 +323,9 @@
     //0=买币, 1=卖币
     http.parameters[@"tradeType"] = @"0";
     
-    if (!self.publishView.anyTimeBtn.selected) {
+    if (!self.publishView.anyTimeBtn.selected &&
+        !self.publishView.startHourArr &&
+        self.publishView.startHourArr.count > 0) {
         
         NSMutableArray *timeArr = [NSMutableArray array];
         
@@ -329,7 +380,7 @@
     [http postWithSuccess:^(id responseObject) {
         
         QuotationModel *model = [QuotationModel tl_objectWithDictionary:responseObject[@"data"]];
-        self.publishView.marketPrice = [NSString stringWithFormat:@"%.4lf", [model.mid doubleValue]];
+        self.publishView.marketPrice = [NSString stringWithFormat:@"%.2lf", [model.mid doubleValue]];
 
         
 //        NSArray <QuotationModel *>*data = [QuotationModel tl_objectArrayWithDictionaryArray:responseObject[@"data"]];

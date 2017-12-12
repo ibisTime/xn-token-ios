@@ -29,6 +29,7 @@
 #import "SearchVC.h"
 #import "TLNavigationController.h"
 #import "TLUserLoginVC.h"
+#import "AdsService.h"
 
 @interface TLTransactionVC ()<SegmentDelegate, RefreshDelegate>
 
@@ -135,7 +136,7 @@
     
     CoinWeakSelf;
     
-    self.tradeType = @"1";
+    self.tradeType = kAdsTradeTypeSell;
     
     [self initPlaceHolderView];
     
@@ -296,6 +297,7 @@
     [self.navigationController pushViewController:searchVC animated:YES];
 }
 
+#pragma mark- 点击发布按钮
 - (void)clickPublish {
     
     [self.tipView show];
@@ -425,17 +427,15 @@
         [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
             
             weakSelf.advertises = objs;
-            
             weakSelf.tableView.advertises = objs;
-
             [weakSelf.tableView reloadData_tl];
 
         } failure:^(NSError *error) {
             
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                
-                [weakSelf requestAdvetiseList];
-            });
+//            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//
+//                [weakSelf requestAdvetiseList];
+//            });
             
         }];
     }];
@@ -515,61 +515,107 @@
     
     if (index == 1) {
         
-        self.tradeType = @"1";
+        self.tradeType = kAdsTradeTypeSell;
         
-    }else {
+    } else if(index == 2) {
         
-        self.tradeType = @"0";
+        self.tradeType = kAdsTradeTypeBuy;
 
     }
     
     self.helper.parameters[@"tradeType"] = self.tradeType;
 
     [self.tableView beginRefreshing];
-    
     [self.labelUnil dyDidScrollChangeTheTitleColorWithContentOfSet:(index-1)*kScreenWidth];
 
 }
+
+//- (void)pushToAdsDetail:(AdvertiseModel *)advertiseModel currentVC:(UIViewController *)currentVC {
+//
+//
+//    //
+//    if ([advertiseModel.tradeType isEqualToString:kAdsTradeTypeSell]) {
+//
+//        //
+//        if ([advertiseModel isMineDaiJiaoYiAds]) {
+//
+//            PublishBuyVC *buyVC = [[PublishBuyVC alloc] init];
+//            buyVC.adsCode = advertiseModel.code;
+//            buyVC.publishType = PublishTypePublishRedit;
+//            [currentVC.navigationController pushViewController:buyVC animated:YES];
+//            return;
+//
+//        }
+//
+//        TradeBuyVC *buyVC = [TradeBuyVC new];
+//        buyVC.adsCode = advertiseModel.code;
+//        //        buyVC.type = TradeBuyPositionTypeTrade;
+//        [currentVC.navigationController pushViewController:buyVC animated:YES];
+//
+//    } else if([advertiseModel.tradeType isEqualToString:kAdsTradeTypeBuy]) {
+//
+//        if ([advertiseModel isMineDaiJiaoYiAds]) {
+//
+//            PublishSellVC *sellVC = [[PublishSellVC alloc] init];
+//            sellVC.adsCode = advertiseModel.code;
+//            sellVC.publishType = PublishTypePublishRedit;
+//            [currentVC.navigationController pushViewController:sellVC animated:YES];
+//            return;
+//
+//        }
+//
+//        TradeSellVC *sellVC = [TradeSellVC new];
+//        sellVC.adsCode = advertiseModel.code;
+//        //        sellVC.type = TradeBuyPositionTypeTrade;
+//        [currentVC.navigationController pushViewController:sellVC animated:YES];
+//
+//    }
+//
+//}
 
 #pragma mark - RefreshDelegate
 - (void)refreshTableView:(TLTableView *)refreshTableview didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     AdvertiseModel *advertiseModel = self.advertises[indexPath.row];
     
+    [AdsService pushToAdsDetail:advertiseModel currentVC:self];
     //
-    if ([self.tradeType isEqualToString:@"1"]) {
-        
-        if ([advertiseModel isMineDaiJiaoYiAds]) {
-            
-            PublishBuyVC *buyVC = [[PublishBuyVC alloc] init];
-            buyVC.adsCode = advertiseModel.code;
-            [self.navigationController pushViewController:buyVC animated:YES];
-            return;
-            
-        }
-        
-        TradeBuyVC *buyVC = [TradeBuyVC new];
-        buyVC.adsCode = advertiseModel.code;
-        buyVC.type = TradeBuyPositionTypeTrade;
-        [self.navigationController pushViewController:buyVC animated:YES];
-        
-    } else {
-        
-        if ([advertiseModel isMineDaiJiaoYiAds]) {
-            
-            PublishSellVC *sellVC = [[PublishSellVC alloc] init];
-            sellVC.adsCode = advertiseModel.code;
-            [self.navigationController pushViewController:sellVC animated:YES];
-            return;
-            
-        }
-        
-        TradeSellVC *sellVC = [TradeSellVC new];
-        sellVC.adsCode = advertiseModel.code;
-        sellVC.type = TradeBuyPositionTypeTrade;
-        [self.navigationController pushViewController:sellVC animated:YES];
-        
-    }
+//    if ([advertiseModel.tradeType isEqualToString:kAdsTradeTypeSell]) {
+//
+//        //
+//        if ([advertiseModel isMineDaiJiaoYiAds]) {
+//
+//            PublishBuyVC *buyVC = [[PublishBuyVC alloc] init];
+//            buyVC.adsCode = advertiseModel.code;
+//            buyVC.publishType = PublishTypePublishRedit;
+//            [self.navigationController pushViewController:buyVC animated:YES];
+//            return;
+//
+//        }
+//
+//        TradeBuyVC *buyVC = [TradeBuyVC new];
+//        buyVC.adsCode = advertiseModel.code;
+////        buyVC.type = TradeBuyPositionTypeTrade;
+//        [self.navigationController pushViewController:buyVC animated:YES];
+//
+//    } else if([advertiseModel.tradeType isEqualToString:kAdsTradeTypeBuy]) {
+//
+//        if ([advertiseModel isMineDaiJiaoYiAds]) {
+//
+//            PublishSellVC *sellVC = [[PublishSellVC alloc] init];
+//            sellVC.adsCode = advertiseModel.code;
+//            sellVC.publishType = PublishTypePublishRedit;
+//            [self.navigationController pushViewController:sellVC animated:YES];
+//            return;
+//
+//        }
+//
+//        TradeSellVC *sellVC = [TradeSellVC new];
+//        sellVC.adsCode = advertiseModel.code;
+////        sellVC.type = TradeBuyPositionTypeTrade;
+//        [self.navigationController pushViewController:sellVC animated:YES];
+//
+//    }
     
 }
 @end

@@ -30,6 +30,9 @@
     _tableView.dataSource = nil;
     [_receiverKVO unobserveAll];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    //释放当前会话
+    [[IMAPlatform sharedInstance].conversationMgr releaseChattingConversation];
+
 }
 
 - (instancetype)initWith:(IMAUser *)user
@@ -358,8 +361,7 @@
 - (void)showMsgs:(NSArray *)msgs
 {
     NSMutableArray *array = [NSMutableArray array];
-    for (IMAMsg *msg in msgs)
-    {
+    for (IMAMsg *msg in msgs){
         NSInteger idx = [_messageList indexOfObject:msg];
         NSIndexPath *index = [NSIndexPath indexPathForRow:idx inSection:0];
         [array addObject:index];

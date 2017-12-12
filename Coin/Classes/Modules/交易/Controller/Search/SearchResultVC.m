@@ -11,7 +11,7 @@
 #import "AdvertiseModel.h"
 
 #import "TradeTableView.h"
-
+#import "AdsService.h"
 #import "TradeBuyVC.h"
 #import "TradeSellVC.h"
 
@@ -208,27 +208,26 @@
 
 - (void)refreshTableView:(TLTableView *)refreshTableview didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    if ([self.advertiseType isEqualToString:kTradeTypeBuy]) {
-        
-        TradeSellVC *sellVC = [TradeSellVC new];
-        sellVC.adsCode = self.advertises[indexPath.row].code;
-        sellVC.type = TradeSellPositionTypeTrade;
-        [self.navigationController pushViewController:sellVC animated:YES];
-        
-    } else if ([self.advertiseType isEqualToString:kTradeTypeSell]) {
-        
-        TradeBuyVC *buyVC = [TradeBuyVC new];
-        buyVC.adsCode = self.advertises[indexPath.row].code;
-        buyVC.type = TradeBuyPositionTypeTrade;
-        [self.navigationController pushViewController:buyVC animated:YES];
-        
-    }
+    AdvertiseModel *model = self.self.advertises[indexPath.row];
     
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    //
+    [AdsService pushToAdsDetail:model currentVC:self];
+//    if ([self.advertiseType isEqualToString:kAdsTradeTypeBuy]) {
+//
+//        TradeSellVC *sellVC = [TradeSellVC new];
+//        sellVC.adsCode = self.advertises[indexPath.row].code;
+////        sellVC.type = TradeSellPositionTypeTrade;
+//        [self.navigationController pushViewController:sellVC animated:YES];
+//
+//    } else if ([self.advertiseType isEqualToString:kAdsTradeTypeSell]) {
+//
+//        TradeBuyVC *buyVC = [TradeBuyVC new];
+//        buyVC.adsCode = self.advertises[indexPath.row].code;
+////        buyVC.type = TradeBuyPositionTypeTrade;
+//        [self.navigationController pushViewController:buyVC animated:YES];
+//
+//    }
+    
 }
 
 

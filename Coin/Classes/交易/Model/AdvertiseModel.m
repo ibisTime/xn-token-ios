@@ -18,8 +18,8 @@ NSString *const kAdsStatusDaiJiaoYi =  @"1";
 NSString *const kAdsStatusJiaoYiZhong =  @"2";
 NSString *const kAdsStatusXiaJia =  @"3";
 
-NSString *const kTradeTypeBuy = @"0";
-NSString *const kTradeTypeSell = @"1";
+NSString *const kAdsTradeTypeBuy = @"0";
+NSString *const kAdsTradeTypeSell = @"1";
 
 @implementation AdvertiseModel
 
@@ -49,7 +49,10 @@ NSString *const kTradeTypeSell = @"1";
 
 - (BOOL)isMineAds {
     
-    return [TLUser user].userId != nil && [TLUser user].userId.length != 0 && [self.userId isEqualToString:[TLUser user].userId];
+    return
+    [TLUser user].userId != nil &&
+    [TLUser user].userId.length != 0 &&
+    [self.userId isEqualToString:[TLUser user].userId];
     
 }
 
@@ -61,9 +64,6 @@ NSString *const kTradeTypeSell = @"1";
 
 @end
 
-@implementation TradeUserInfo
-
-@end
 
 @implementation UserStatistics
 
@@ -76,7 +76,6 @@ NSString *const kTradeTypeSell = @"1";
     }
     
     CGFloat rate = 100*self.beiHaoPingCount/(self.beiPingJiaCount*1.0);
-    
     NSString *rateStr = [NSString stringWithFormat:@"%.0lf%%", rate];
     
     return rateStr;
@@ -89,7 +88,6 @@ NSString *const kTradeTypeSell = @"1";
     }
     
     NSString *realNum = [self.totalTradeCount convertToSimpleRealCoin];
-    
     CGFloat historyNum = [[realNum convertToRealMoneyWithNum:8] doubleValue];
     
     //判断个数

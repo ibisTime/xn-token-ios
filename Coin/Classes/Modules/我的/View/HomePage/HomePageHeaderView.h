@@ -10,6 +10,7 @@
 
 #import "AdvertiseModel.h"
 #import "UserRelationModel.h"
+#import "TLUser.h"
 
 typedef NS_ENUM(NSInteger, HomePageType) {
     
@@ -32,7 +33,9 @@ typedef void(^HomePageBlock)(HomePageType type);
 //黑名单
 @property (nonatomic, strong) UIButton *blackListBtn;
 //广告
-@property (nonatomic, strong) AdvertiseModel *advertise;
+//@property (nonatomic, strong) AdvertiseModel *advertise;
+@property (nonatomic, strong) TLUser *currentUser;
+
 //用户关系
 @property (nonatomic, strong) UserRelationModel *relation;
 //是否信任它

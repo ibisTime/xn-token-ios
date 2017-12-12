@@ -7,6 +7,7 @@
 //
 
 #import "TLBaseModel.h"
+#import "OrderModel.h"
 
 @class TradeUserInfo, UserStatistics, Displaytime;
 
@@ -51,7 +52,7 @@ typedef NS_ENUM(NSUInteger, AdsType) {
 
 @property (nonatomic, assign) CGFloat marketPrice;
 
-@property (nonatomic, strong) TradeUserInfo *user;
+@property (nonatomic, strong) UserInfo *user;
 //交易信息
 @property (nonatomic, strong) UserStatistics *userStatistics;
 
@@ -91,38 +92,38 @@ FOUNDATION_EXTERN NSString *const kAdsStatusDaiJiaoYi;
 FOUNDATION_EXTERN NSString *const kAdsStatusJiaoYiZhong;
 FOUNDATION_EXTERN NSString *const kAdsStatusXiaJia;
 
-FOUNDATION_EXTERN NSString *const kTradeTypeBuy;
-FOUNDATION_EXTERN NSString *const kTradeTypeSell;
+FOUNDATION_EXTERN NSString *const kAdsTradeTypeBuy;
+FOUNDATION_EXTERN NSString *const kAdsTradeTypeSell;
 
-@interface TradeUserInfo : NSObject
-
-@property (nonatomic, copy) NSString *photo;
-
-@property (nonatomic, copy) NSString *status;
-
-@property (nonatomic, copy) NSString *loginName;
-
-@property (nonatomic, copy) NSString *mobile;
-
-@property (nonatomic, copy) NSString *loginPwdStrength;
-
-@property (nonatomic, copy) NSString *userId;
-
-@property (nonatomic, copy) NSString *level;
-
-@property (nonatomic, copy) NSString *createDatetime;
-
-@property (nonatomic, assign) BOOL tradepwdFlag;
-
-@property (nonatomic, copy) NSString *companyCode;
-
-@property (nonatomic, copy) NSString *systemCode;
-
-@property (nonatomic, copy) NSString *nickname;
-
-@property (nonatomic, copy) NSString *kind;
-
-@end
+//@interface TradeUserInfo : NSObject
+//
+//@property (nonatomic, copy) NSString *photo;
+//
+//@property (nonatomic, copy) NSString *status;
+//
+//@property (nonatomic, copy) NSString *loginName;
+//
+//@property (nonatomic, copy) NSString *mobile;
+//
+//@property (nonatomic, copy) NSString *loginPwdStrength;
+//
+//@property (nonatomic, copy) NSString *userId;
+//
+//@property (nonatomic, copy) NSString *level;
+//
+//@property (nonatomic, copy) NSString *createDatetime;
+//
+//@property (nonatomic, assign) BOOL tradepwdFlag;
+//
+//@property (nonatomic, copy) NSString *companyCode;
+//
+//@property (nonatomic, copy) NSString *systemCode;
+//
+//@property (nonatomic, copy) NSString *nickname;
+//
+//@property (nonatomic, copy) NSString *kind;
+//
+//@end
 
 @interface UserStatistics: NSObject
 //交易次数

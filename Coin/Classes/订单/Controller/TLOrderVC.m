@@ -19,7 +19,7 @@
 #import <CDCommon/DeviceUtil.h>
 #import "OrderListVC.h"
 
-@interface TLOrderVC ()<SegmentDelegate, RefreshDelegate>
+@interface TLOrderVC ()<SegmentDelegate, RefreshDelegate, MsgDelegate>
 
 //货币切换
 @property (nonatomic, strong) CoinChangeView *changeView;
@@ -54,6 +54,9 @@
     [self setUpUI];
     
     [self setUpChildVC];
+    
+    //
+    [IMAPlatform sharedInstance].conversationMgr.msgDelegate = self;
 
 }
 
@@ -64,6 +67,44 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLoginOut) name:kUserLoginOutNotification object:nil];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLogin) name:kUserLoginOutNotification object:nil];
+
+}
+
+
+// 该方法只处理顶部红点逻辑
+- (void)handleGroupMsg:(NSString *)groupId msg:(TIMMessage *) msg {
+    
+    //
+    __block BOOL hasLook = NO;
+    if (self.ingOrderListVC.orderGroups) {
+        
+        [self.ingOrderListVC.orderGroups enumerateObjectsUsingBlock:^(OrderModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            
+            if ([obj.code isEqualToString:groupId]) {
+                
+                *stop = YES;
+                // 说明消息来自正在进行的订单
+                [self.labelUnil showBadgeOnItemIndex:0];
+                hasLook = YES;
+            }
+            
+        }];
+        
+    }
+
+    if (!hasLook) {
+        // 未找到，说明是左边的
+        [self.labelUnil showBadgeOnItemIndex:1];
+
+    }
+    
+}
+
+
+- (void)userLogin {
+    
+    [self orderRefresh];
 }
 
 // 用户登出，把订单数据清除掉
@@ -84,6 +125,12 @@
     
 }
 
+- (void)changeTopMsgRedHintToZero {
+    
+    [self.labelUnil hideBadgeOnItemIndex:0];
+    [self.labelUnil hideBadgeOnItemIndex:1];
+
+}
 
 - (void)orderRefresh {
     
@@ -103,8 +150,13 @@
                         options:NSKeyValueObservingOptionNew
                           block:^(id observer, id object, NSDictionary *change) {
                               
-                              [weakSelf.ingOrderListVC reloadData];
-                              [weakSelf.endOrderListVC reloadData];
+                              [weakSelf orderReloadData];
+                              if ([IMAPlatform sharedInstance].conversationMgr.unReadMessageCount <= 0) {
+                                  
+                                  //让顶部的取置0
+                                  [weakSelf changeTopMsgRedHintToZero];
+                                  
+                              }
                               
     }];
     

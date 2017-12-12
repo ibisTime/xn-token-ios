@@ -458,6 +458,7 @@
 		2EB9495A1FDF6B1A00CE4B94 /* ZMChineseConvert.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EB949561FDF6B1A00CE4B94 /* ZMChineseConvert.m */; };
 		2EB9495B1FDF6B1A00CE4B94 /* SimplifiedCode.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2EB949571FDF6B1A00CE4B94 /* SimplifiedCode.txt */; };
 		2EB9495C1FDF6B1A00CE4B94 /* TraditionalCode.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2EB949591FDF6B1A00CE4B94 /* TraditionalCode.txt */; };
+		2EB9495F1FE0075000CE4B94 /* AdsService.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EB9495E1FE0075000CE4B94 /* AdsService.m */; };
 		2EBFBF231FD8E56C0066F7E4 /* PublishService.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EBFBF221FD8E56C0066F7E4 /* PublishService.m */; };
 		2EE950C01FB05B2400429257 /* TLHangQingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE950BF1FB05B2400429257 /* TLHangQingVC.m */; };
 		2EE950C31FB05B4500429257 /* TLWalletVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE950C21FB05B4500429257 /* TLWalletVC.m */; };
@@ -1407,6 +1408,8 @@
 		2EB949571FDF6B1A00CE4B94 /* SimplifiedCode.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SimplifiedCode.txt; sourceTree = "<group>"; };
 		2EB949581FDF6B1A00CE4B94 /* ZMChineseConvert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZMChineseConvert.h; sourceTree = "<group>"; };
 		2EB949591FDF6B1A00CE4B94 /* TraditionalCode.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TraditionalCode.txt; sourceTree = "<group>"; };
+		2EB9495D1FE0075000CE4B94 /* AdsService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AdsService.h; sourceTree = "<group>"; };
+		2EB9495E1FE0075000CE4B94 /* AdsService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AdsService.m; sourceTree = "<group>"; };
 		2EBFBF211FD8E56C0066F7E4 /* PublishService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PublishService.h; sourceTree = "<group>"; };
 		2EBFBF221FD8E56C0066F7E4 /* PublishService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PublishService.m; sourceTree = "<group>"; };
 		2EE950BE1FB05B2400429257 /* TLHangQingVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLHangQingVC.h; sourceTree = "<group>"; };
@@ -1662,6 +1665,8 @@
 				211A53371FC021BD00CC6294 /* Controller */,
 				211A53391FC021CF00CC6294 /* Model */,
 				211A53381FC021C700CC6294 /* View */,
+				2EB9495D1FE0075000CE4B94 /* AdsService.h */,
+				2EB9495E1FE0075000CE4B94 /* AdsService.m */,
 			);
 			path = "交易";
 			sourceTree = "<group>";
@@ -4298,6 +4303,7 @@
 				211DE6AB1FB58B4C002FCF3D /* TLTableView.m in Sources */,
 				211C04441FC6604800E51FCF /* ScrollRefreshViewController.m in Sources */,
 				2E973FD91FDBE400005C2D5F /* TradeDisplayView.m in Sources */,
+				2EB9495F1FE0075000CE4B94 /* AdsService.m in Sources */,
 				21223C731FBD8DB800057444 /* QuotationModel.m in Sources */,
 				2E973FCF1FDABA0F005C2D5F /* ChatSysMsgCell.m in Sources */,
 				211C04891FC6604800E51FCF /* ChatFunctionPanel.m in Sources */,

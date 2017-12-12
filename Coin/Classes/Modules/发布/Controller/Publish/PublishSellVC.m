@@ -34,6 +34,9 @@
 
 @implementation PublishSellVC
 
+/**
+ sb
+ */
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title =  [LangSwitcher switchLang:@"发布卖出" key:nil] ;
@@ -42,7 +45,7 @@
     
     if (self.publishType == PublishTypePublishOrSaveDraft) {
         
-        //保存草稿
+        
         [self addRightItem];
         //发布卖出
         [self initPublishView];
@@ -63,7 +66,7 @@
         http.parameters[@"userId"] = [TLUser user].userId;
         [http postWithSuccess:^(id responseObject) {
             
-            //保存草稿
+        
             [self addRightItem];
             //发布卖出
             [self initPublishView];
@@ -91,14 +94,64 @@
     
     if (self.publishType == PublishTypePublishOrSaveDraft) {
     
+        
         [UIBarButtonItem addRightItemWithTitle:[LangSwitcher switchLang:@"保存草稿" key:nil]
                                     titleColor:kTextColor
                                          frame:CGRectMake(0, 0, 70, 44)
                                             vc:self
                                         action:@selector(keepDraft)];
         
+        
+    } else if (self.publishType == PublishTypePublishRedit) {
+        //重新编辑，为下架
+        [UIBarButtonItem addRightItemWithTitle:[LangSwitcher switchLang:@"下架" key:nil]
+                                    titleColor:kTextColor
+                                         frame:CGRectMake(0, 0, 70, 44)
+                                            vc:self
+                                        action:@selector(xiaJia)];
+        
     }
     
+    
+}
+
+#pragma mark- 重新编辑时，右上角为下架
+//下架广告
+- (void)xiaJia {
+    
+    CoinWeakSelf;
+    
+    [TLAlert alertWithTitle:@"提示" msg:@"您确定要下架此广告?" confirmMsg:@"确认" cancleMsg:@"取消" cancle:^(UIAlertAction *action) {
+        
+        
+    } confirm:^(UIAlertAction *action) {
+        
+        [weakSelf requestAdvertiseOff];
+    }];
+    
+}
+
+//下架广告
+- (void)requestAdvertiseOff {
+    
+    TLNetworking *http = [TLNetworking new];
+    
+    http.code = @"625224";
+    http.showView = self.view;
+    http.parameters[@"adsCode"] = self.advertise.code;
+    http.parameters[@"userId"] = [TLUser user].userId;
+    
+    [http postWithSuccess:^(id responseObject) {
+        
+        [TLAlert alertWithSucces:@"下架成功"];
+        
+        [self.navigationController popViewControllerAnimated:YES];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:kAdvertiseOff object:nil];
+        
+    } failure:^(NSError *error) {
+        
+    }];
 }
 
 - (void)initPublishView {
@@ -233,7 +286,7 @@
     
     CGFloat rate = [draft.premiumRate doubleValue]/100.0;
     
-    NSString *premiumRate = [NSString stringWithFormat:@"%.4lf", rate];
+    NSString *premiumRate = [NSString stringWithFormat:@"%.2lf", rate];
     
     TLNetworking *http = [TLNetworking new];
     http.showView = self.view;
@@ -324,7 +377,7 @@
     [http postWithSuccess:^(id responseObject) {
         
         QuotationModel *model = [QuotationModel tl_objectWithDictionary:responseObject[@"data"]];
-        self.publishView.marketPrice = [NSString stringWithFormat:@"%.4lf", [model.mid doubleValue]];
+        self.publishView.marketPrice = [NSString stringWithFormat:@"%.2lf", [model.mid doubleValue]];
         
 //        NSArray <QuotationModel *>*data = [QuotationModel tl_objectArrayWithDictionaryArray:responseObject[@"data"]];
 //

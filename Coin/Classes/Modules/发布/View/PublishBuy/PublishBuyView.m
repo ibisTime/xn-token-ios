@@ -194,7 +194,7 @@
                                 [LangSwitcher switchLang:@"广告最低可成交的价格" key:nil],
                                 [LangSwitcher switchLang:@"每笔交易的最小限额" key:nil],
                                 [LangSwitcher switchLang:@"每笔交易的最大限额" key:nil],
-                                [LangSwitcher switchLang:@"请输入出售总量" key:nil],
+                                [LangSwitcher switchLang:@"请输入购买总量" key:nil],
                                 [LangSwitcher switchLang:@"请选择收款方式" key:nil],
                                 [LangSwitcher switchLang:@"请选择收款期限" key:nil]
                                 ];
@@ -616,20 +616,14 @@
     [customTimeBtn setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
     
     //任何时候
-    UIButton *anyTimeBtn = [UIButton buttonWithTitle:@"任何时候" titleColor:kTextColor backgroundColor:kClearColor titleFont:13.0];
-    
-    anyTimeBtn.selected = YES;
-    
-    [anyTimeBtn setImage:kImage(@"未选中") forState:UIControlStateNormal];
-    
-    [anyTimeBtn setImage:kImage(@"选中") forState:UIControlStateSelected];
-    
-    [anyTimeBtn addTarget:self action:@selector(selectAnyTime:) forControlEvents:UIControlEventTouchUpInside];
-    
-    anyTimeBtn.tag = 1701;
-
-    [self.openTimeView addSubview:anyTimeBtn];
-    [anyTimeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+    self.anyTimeBtn = [UIButton buttonWithTitle:@"任何时候" titleColor:kTextColor backgroundColor:kClearColor titleFont:13.0];
+    self.anyTimeBtn.selected = YES;
+    [self.anyTimeBtn setImage:kImage(@"未选中") forState:UIControlStateNormal];
+    [self.anyTimeBtn setImage:kImage(@"选中") forState:UIControlStateSelected];
+    [self.anyTimeBtn addTarget:self action:@selector(selectAnyTime:) forControlEvents:UIControlEventTouchUpInside];
+    self.anyTimeBtn.tag = 1701;
+    [self.openTimeView addSubview:self.anyTimeBtn];
+    [self.anyTimeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.top.equalTo(@0);
         make.right.equalTo(customTimeBtn.mas_left).offset(0);
@@ -637,11 +631,10 @@
         make.width.equalTo(@80);
         
     }];
+    [self.anyTimeBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 0, -20)];
+    [self.anyTimeBtn setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
     
-    [anyTimeBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 0, -20)];
-    
-    [anyTimeBtn setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
-    
+    //
     //分割线
     UIView *line = [[UIView alloc] init];
     
@@ -895,6 +888,7 @@
     _timeArr = timeArr;
     
     self.payLimitPicker.tagNames = timeArr;
+    self.payLimitPicker.text = timeArr[0];
     
 }
 
@@ -934,16 +928,20 @@
     
     UIButton *anyTimeBtn = [self.openTimeView viewWithTag:1701];
     
-    if (advertise.displayTime) {
+    if (advertise.displayTime && advertise.displayTime.count > 0) {
         
         [advertise.displayTime enumerateObjectsUsingBlock:^(Displaytime * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             
+            //
             [self.startHourArr replaceObjectAtIndex:idx withObject:[NSString stringWithFormat:@"%ld", obj.startTime]];
             
+            //
             [self.endHourArr replaceObjectAtIndex:idx withObject:[NSString stringWithFormat:@"%ld", obj.endTime]];
             
+            //
             [self.endHourArr replaceObjectAtIndex:idx withObject:@"24"];
             
+            //
             UILabel *timeLbl = [self.timeView viewWithTag:1710 + idx];
             
             if (obj.startTime != 24 && obj.endTime != 24) {
@@ -973,7 +971,6 @@
     } else {
         
         customTimeBtn.selected = NO;
-        
         anyTimeBtn.selected = !customTimeBtn.selected;
     }
     
@@ -1020,7 +1017,7 @@
         
         CGFloat prePrice = [self.marketPrice doubleValue]*(preRate/100.0 + 1);
         
-        self.priceTF.text = [NSString stringWithFormat:@"%.4lf", prePrice];
+        self.priceTF.text = [NSString stringWithFormat:@"%.2lf", prePrice];
         
     } else {
         

@@ -6,6 +6,7 @@
 //  Copyright © 2016年 AlexiChen. All rights reserved.
 //
 
+@class TIMMessage;
 
 typedef NS_OPTIONS(NSUInteger, IMAConversationChangedNotifyType) {
     EIMAConversation_SyncLocalConversation =    0x01,               // 同步本地会话结束
@@ -36,6 +37,13 @@ typedef NS_OPTIONS(NSUInteger, IMAConversationChangedNotifyType) {
 - (NSNotification *)changedNotification;
 @end
 
+@protocol MsgDelegate<NSObject>
+
+- (void)handleGroupMsg:(NSString *)groupId msg:(TIMMessage *) msg;
+
+@end
+
+
 typedef void (^IMAConversationChangedCompletion)(IMAConversationChangedNotifyItem *item);
 
 @interface IMAConversationManager : NSObject<TIMMessageListener, TIMMessageRevokeListener>
@@ -49,6 +57,9 @@ typedef void (^IMAConversationChangedCompletion)(IMAConversationChangedNotifyIte
 @property (nonatomic, readonly) CLSafeMutableArray *conversationList;
 @property (nonatomic, assign) NSInteger unReadMessageCount;
 @property (nonatomic, copy) IMAConversationChangedCompletion  conversationChangedCompletion;
+
+@property (nonatomic, weak, nullable) id<MsgDelegate> msgDelegate;
+
 
 //- (void)addConversationChangedObserver:(id)observer handler:(SEL)selector forEvent:(NSUInteger)eventID;
 //

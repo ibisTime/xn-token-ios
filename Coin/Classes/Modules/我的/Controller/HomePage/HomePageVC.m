@@ -17,6 +17,7 @@
 
 #import "TLUserLoginVC.h"
 #import "TLNavigationController.h"
+#import "APICodeMacro.h"
 
 @interface HomePageVC ()
 
@@ -46,8 +47,8 @@
     [self initHeaderView];
     
     // 获取用户信息
-//    [self queryAdvertiseDetail];
-    
+    [self queryCurrentUserInfo];
+
     if ([TLUser user].userId) {
         
         if (![self.userId isEqualToString:[TLUser user].userId]) {
@@ -56,6 +57,23 @@
             [self queryUserRelation];
         }
     }
+}
+
+- (void)queryCurrentUserInfo {
+    
+    TLNetworking *http = [TLNetworking new];
+    http.code = USER_INFO;
+    http.parameters[@"userId"] = self.userId;
+    [http postWithSuccess:^(id responseObject) {
+        
+        TLUser *currentUser = [TLUser tl_objectWithDictionary:responseObject[@"data"]];
+        self.headerView.currentUser = currentUser;
+        
+    } failure:^(NSError *error) {
+        
+        
+    }];
+    
 }
 
 #pragma mark - Init

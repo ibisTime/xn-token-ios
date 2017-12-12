@@ -8,7 +8,7 @@
 
 #import "TLBaseModel.h"
 
-@class SellUserInfo,BuyUserInfo;
+@class UserInfo;
 @interface OrderModel : TLBaseModel
 
 @property (nonatomic, copy) NSString *updateDatatime;
@@ -33,7 +33,7 @@
 
 @property (nonatomic, copy) NSString *createDatetime;
 
-@property (nonatomic, strong) SellUserInfo *sellUserInfo;
+@property (nonatomic, strong) UserInfo *sellUserInfo;
 
 @property (nonatomic, copy) NSString *updater;
 
@@ -45,7 +45,7 @@
 
 @property (nonatomic, strong) NSNumber *tradePrice;
 
-@property (nonatomic, strong) BuyUserInfo *buyUserInfo;
+@property (nonatomic, strong) UserInfo *buyUserInfo;
 
 @property (nonatomic, copy) NSString *markDatetime;
 
@@ -80,7 +80,7 @@
 
 @end
 
-@interface SellUserInfo : NSObject
+@interface UserInfo : TLBaseModel
 
 @property (nonatomic, copy) NSString *photo;
 
@@ -110,34 +110,65 @@
 
 @end
 
-@interface BuyUserInfo : NSObject
+//@interface SellUserInfo : NSObject
+//
+//@property (nonatomic, copy) NSString *photo;
+//
+//@property (nonatomic, copy) NSString *status;
+//
+//@property (nonatomic, copy) NSString *loginName;
+//
+//@property (nonatomic, copy) NSString *mobile;
+//
+//@property (nonatomic, copy) NSString *loginPwdStrength;
+//
+//@property (nonatomic, copy) NSString *userId;
+//
+//@property (nonatomic, copy) NSString *level;
+//
+//@property (nonatomic, copy) NSString *createDatetime;
+//
+//@property (nonatomic, assign) BOOL tradepwdFlag;
+//
+//@property (nonatomic, copy) NSString *companyCode;
+//
+//@property (nonatomic, copy) NSString *systemCode;
+//
+//@property (nonatomic, copy) NSString *nickname;
+//
+//@property (nonatomic, copy) NSString *kind;
+//
+//@end
+//
+//@interface BuyUserInfo : NSObject
+//
+//@property (nonatomic, copy) NSString *photo;
+//
+//@property (nonatomic, copy) NSString *tradePwdStrength;
+//
+//@property (nonatomic, copy) NSString *status;
+//
+//@property (nonatomic, copy) NSString *loginName;
+//
+//@property (nonatomic, copy) NSString *mobile;
+//
+//@property (nonatomic, copy) NSString *loginPwdStrength;
+//
+//@property (nonatomic, copy) NSString *userId;
+//
+//@property (nonatomic, copy) NSString *level;
+//
+//@property (nonatomic, copy) NSString *createDatetime;
+//
+//@property (nonatomic, assign) BOOL tradepwdFlag;
+//
+//@property (nonatomic, copy) NSString *companyCode;
+//
+//@property (nonatomic, copy) NSString *systemCode;
+//
+//@property (nonatomic, copy) NSString *nickname;
+//
+//@property (nonatomic, copy) NSString *kind;
+//
+//@end
 
-@property (nonatomic, copy) NSString *photo;
-
-@property (nonatomic, copy) NSString *tradePwdStrength;
-
-@property (nonatomic, copy) NSString *status;
-
-@property (nonatomic, copy) NSString *loginName;
-
-@property (nonatomic, copy) NSString *mobile;
-
-@property (nonatomic, copy) NSString *loginPwdStrength;
-
-@property (nonatomic, copy) NSString *userId;
-
-@property (nonatomic, copy) NSString *level;
-
-@property (nonatomic, copy) NSString *createDatetime;
-
-@property (nonatomic, assign) BOOL tradepwdFlag;
-
-@property (nonatomic, copy) NSString *companyCode;
-
-@property (nonatomic, copy) NSString *systemCode;
-
-@property (nonatomic, copy) NSString *nickname;
-
-@property (nonatomic, copy) NSString *kind;
-
-@end

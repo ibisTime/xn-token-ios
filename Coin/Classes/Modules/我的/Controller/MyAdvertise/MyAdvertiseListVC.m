@@ -166,11 +166,9 @@
 }
 
 #pragma mark - RefreshDelegate
-
 - (void)refreshTableView:(TLTableView *)refreshTableview didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     AdvertiseModel *advertiseModel = self.advertises[indexPath.row];
-    
     if (self.type == MyAdvertiseTypeDraft) {
         // 草稿
         
@@ -208,7 +206,7 @@
         
             TradeBuyVC *buyVC = [TradeBuyVC new];
             buyVC.adsCode = advertiseModel.code;
-            buyVC.type = TradeBuyPositionTypeMyPublish;
+//            buyVC.type = TradeBuyPositionTypeMyPublish;
             [self.navigationController pushViewController:buyVC animated:YES];
             
         } else if (advertiseModel.adsType == AdsTradeTypeSell) {
@@ -225,7 +223,7 @@
 
             TradeSellVC *sellVC = [TradeSellVC new];
             sellVC.adsCode = advertiseModel.code;
-            sellVC.type = TradeBuyPositionTypeMyPublish;
+//            sellVC.type = TradeBuyPositionTypeMyPublish;
             [self.navigationController pushViewController:sellVC animated:YES];
         }
         

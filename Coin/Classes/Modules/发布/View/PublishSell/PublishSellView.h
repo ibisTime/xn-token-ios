@@ -65,4 +65,11 @@ typedef void(^PublishSellBlock)(PublishDraftModel *draft);
 //广告
 @property (nonatomic, strong) AdvertiseModel *advertise;
 
+
+
+/**
+ 用于显示可用余额
+ */
+@property (nonatomic, strong) UILabel *balanceLbl;
+
 @end

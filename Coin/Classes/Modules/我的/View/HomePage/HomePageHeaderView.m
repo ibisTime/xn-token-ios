@@ -233,22 +233,22 @@
 }
 
 #pragma mark - Setting
-- (void)setAdvertise:(AdvertiseModel *)advertise {
+
+- (void)setCurrentUser:(TLUser *)currentUser {
     
-    _advertise = advertise;
+    _currentUser = currentUser;
     
-    TradeUserInfo *userInfo = advertise.user;
     
     //头像
-    if (userInfo.photo) {
+    if (_currentUser.photo) {
         
         [self.photoBtn setTitle:@"" forState:UIControlStateNormal];
         
-        [self.photoBtn sd_setImageWithURL:[NSURL URLWithString:[userInfo.photo convertImageUrl]] forState:UIControlStateNormal];
+        [self.photoBtn sd_setImageWithURL:[NSURL URLWithString:[_currentUser.photo convertImageUrl]] forState:UIControlStateNormal];
         
     } else {
         
-        NSString *nickName = userInfo.nickname;
+        NSString *nickName = _currentUser.nickname;
         
         NSString *title = [nickName substringToIndex:1];
         
@@ -256,10 +256,39 @@
         
     }
     
-    self.nameLbl.text = userInfo.nickname;
-
-
+    self.nameLbl.text = _currentUser.nickname;
+    
+    
 }
+
+
+//- (void)setAdvertise:(AdvertiseModel *)advertise {
+//    
+//    _advertise = advertise;
+//    
+//    TradeUserInfo *userInfo = advertise.user;
+//    
+//    //头像
+//    if (userInfo.photo) {
+//        
+//        [self.photoBtn setTitle:@"" forState:UIControlStateNormal];
+//        
+//        [self.photoBtn sd_setImageWithURL:[NSURL URLWithString:[userInfo.photo convertImageUrl]] forState:UIControlStateNormal];
+//        
+//    } else {
+//        
+//        NSString *nickName = userInfo.nickname;
+//        
+//        NSString *title = [nickName substringToIndex:1];
+//        
+//        [self.photoBtn setTitle:title forState:UIControlStateNormal];
+//        
+//    }
+//    
+//    self.nameLbl.text = userInfo.nickname;
+//
+//
+//}
 
 - (void)setRelation:(UserRelationModel *)relation {
     
@@ -313,9 +342,8 @@
     
     _userId = userId;
     
-    self.trustBtn.hidden = [self.advertise.userId isEqualToString:userId] ? YES: NO;
-    
-    self.blackListBtn.hidden = [self.advertise.userId isEqualToString:userId] ? YES: NO;
+    self.trustBtn.hidden = [self.currentUser.userId isEqualToString:userId] ? YES: NO;
+    self.blackListBtn.hidden = [self.currentUser.userId isEqualToString:userId] ? YES: NO;
 
 }
 

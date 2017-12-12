@@ -187,12 +187,13 @@
 }
 
 @end
-
-@implementation SellUserInfo
-
-@end
-
-
-@implementation BuyUserInfo
+//
+@implementation UserInfo
 
 @end
+//
+//
+//@implementation BuyUserInfo
+//
+//@end
+

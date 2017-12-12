@@ -62,7 +62,7 @@ typedef void(^PublishBuyBlock)(PublishDraftModel *draft);
 //提示
 @property (nonatomic, strong) NSMutableArray <KeyValueModel *>*values;
 
-//广告
+//广告，设置展示时间在内部设置
 @property (nonatomic, strong) AdvertiseModel *advertise;
 
 @end

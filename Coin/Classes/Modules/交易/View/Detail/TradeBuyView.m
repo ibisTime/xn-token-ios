@@ -533,7 +533,7 @@
     
     _advertise = advertise;
     
-    TradeUserInfo *userInfo = advertise.user;
+    UserInfo *userInfo = advertise.user;
     
     UserStatistics *userStatist = advertise.userStatistics;
     

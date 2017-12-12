@@ -39,25 +39,25 @@
     [self setGroup];
     //
     [self initTableView];
+//    [self.tableView reloadData];
+    
     //查询用户设置
     [self queryUserSetting];
 
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    
-    [self.tableView reloadData];
-}
+//- (void)viewWillAppear:(BOOL)animated {
+//    [super viewWillAppear:animated];
+//
+//    [self.tableView reloadData];
+//}
 
 #pragma mark - Init
 
 - (void)initTableView {
     
     self.tableView = [[PersonalitySettingTableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight) style:UITableViewStyleGrouped];
-    
     self.tableView.group = self.group;
-    
     [self.view addSubview:self.tableView];
     
 }
@@ -175,9 +175,7 @@
     //type("1", "设置自动好评"), ("2",设置自动信任）
 
     TLPageDataHelper *helper = [[TLPageDataHelper alloc] init];
-    
     helper.isList = YES;
-    
     helper.code = @"625301";
     helper.parameters[@"userId"] = [TLUser user].userId;
     helper.showView = self.view;
@@ -210,6 +208,8 @@
             }
             
         }];
+        
+//        [self.tableView reloadData];
         
     } failure:^(NSError *error) {
         

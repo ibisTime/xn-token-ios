@@ -29,6 +29,11 @@
 //广告
 @property (nonatomic, strong) AdvertiseModel *advertise;
 
+/**
+ ——里面只用到了，订单的广告编号
+ */
+@property (nonatomic, strong) OrderModel *order;
+
 @end
 
 @implementation WaitingOrderVC
@@ -51,12 +56,134 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
     
+    if (!self.orderCode) {
+        [TLAlert alertWithInfo:@"请传入 orderCode"];
+        return;
+    }
+    
+    // 在该控制器中，只处理待交易的订单
     [self initSubviews];
     
-    [self queryAdvertiseDetail];
+    //首先查询订单详情
+    TLNetworking *http = [TLNetworking new];
+    http.showView = self.view;
+    http.code = @"625251";
+    http.parameters[@"code"] = self.orderCode;
+    [http postWithSuccess:^(id responseObject) {
+        
+        //
+        self.order = [OrderModel tl_objectWithDictionary:responseObject[@"data"]];
+        [self queryAdvertiseDetail];
+
+    } failure:^(NSError *error) {
+        
+    }];
+
     
+    
+}
+
+
+
+#pragma mark - Setting
+- (void)setOrder:(OrderModel *)order {
+    
+    _order = order;
+    
+//    self.title = self.order.isBuy ? [LangSwitcher switchLang:@"购买订单" key:nil] :
+//                                    [LangSwitcher switchLang:@"出售订单" key:nil];
+    
+    if ([order.sellUser equalsString:[TLUser user].userId]) {
+        // 出售订单
+        self.title = _order.buyUserInfo.nickname;
+        
+    } else {
+        
+        // 购买订单
+        self.title = _order.sellUserInfo.nickname;
+
+    }
+    
+}
+
+#pragma mark - 点击 购买 或者 出售按钮
+- (void)clickButton {
+    
+    if (self.order.isBuy) {
+        
+        TradeBuyVC *buyVC = [TradeBuyVC new];
+        buyVC.adsCode = self.advertise.code;
+//        buyVC.type = TradeBuyPositionTypeTrade;
+        [self.navigationController pushViewController:buyVC animated:YES];
+        
+    } else {
+        
+        TradeSellVC *sellVC = [TradeSellVC new];
+        sellVC.adsCode = self.advertise.code;
+//        sellVC.type = TradeSellPositionTypeTrade;
+        [self.navigationController pushViewController:sellVC animated:YES];
+    }
+    
+    //
+    
+    //
+}
+
+#pragma mark - Data
+- (void)queryAdvertiseDetail {
+    
+    //
+    CoinWeakSelf;
+    TLNetworking *http = [TLNetworking new];
+    http.code = @"625226";
+    http.showView = self.view;
+    http.parameters[@"adsCode"] = self.order.adsCode;
+    
+    [http postWithSuccess:^(id responseObject) {
+        
+        self.advertise = [AdvertiseModel tl_objectWithDictionary:responseObject[@"data"]];
+        
+        //价格
+        self.priceLbl.text = [NSString stringWithFormat:@"报价: %@ CNY", [self.advertise.truePrice convertToSimpleRealMoney]];
+        self.priceLbl.text = [LangSwitcher switchLang:self.priceLbl.text key:nil];
+        
+        //限额
+        self.limitAmountLbl.text = [NSString stringWithFormat:@"限额: %@-%@ CNY",[self.advertise.minTrade convertToSimpleRealMoney], [self.advertise.maxTrade convertToSimpleRealMoney]];
+        self.limitAmountLbl.text = [LangSwitcher switchLang:self.limitAmountLbl.text key:nil];
+
+        NSString *btnTitle = nil;
+        UIColor *bgColor = nil;
+        
+        //
+        if ([self.advertise.status isEqualToString:kAdsStatusDaiJiaoYi] ||[self.advertise.status isEqualToString:kAdsStatusJiaoYiZhong]) {
+            
+            
+            //
+            bgColor = kThemeColor;
+            self.orderBtn.enabled = YES;
+            btnTitle = self.order.isBuy ? @"购买": @"出售";
+            
+        } else {
+            
+            //
+            bgColor = kPlaceholderColor;
+            self.orderBtn.enabled = NO;
+            btnTitle = @"已下架";
+
+        }
+        
+
+        
+        [self.orderBtn setTitle:[LangSwitcher switchLang:btnTitle key:nil] 
+                        forState:UIControlStateNormal];
+        
+        //
+        [self.orderBtn setBackgroundColor:bgColor forState:UIControlStateNormal];
+        
+    } failure:^(NSError *error) {
+        
+    }];
 }
 
 #pragma mark - Init
@@ -106,83 +233,7 @@
     self.orderBtn = orderBtn;
     
     _tableView.tableHeaderView = self.topView;
-
-}
-
-#pragma mark - Setting
-- (void)setOrder:(OrderModel *)order {
     
-    _order = order;
-    
-    self.title = self.order.isBuy ? [LangSwitcher switchLang:@"购买订单" key:nil] :
-                                    [LangSwitcher switchLang:@"出售订单" key:nil];
-    
-}
-
-#pragma mark - Events
-- (void)clickButton {
-    
-    if (self.order.isBuy) {
-        
-        TradeBuyVC *buyVC = [TradeBuyVC new];
-        buyVC.adsCode = self.advertise.code;
-        buyVC.type = TradeBuyPositionTypeTrade;
-        [self.navigationController pushViewController:buyVC animated:YES];
-        
-    } else {
-        
-        TradeSellVC *sellVC = [TradeSellVC new];
-        
-        sellVC.adsCode = self.advertise.code;
-        sellVC.type = TradeBuyPositionTypeTrade;
-
-        [self.navigationController pushViewController:sellVC animated:YES];
-    }
-}
-
-#pragma mark - Data
-- (void)queryAdvertiseDetail {
-    
-    CoinWeakSelf;
-    
-    TLNetworking *http = [TLNetworking new];
-    
-    http.code = @"625226";
-    http.showView = self.view;
-    
-    http.parameters[@"adsCode"] = self.order.adsCode;
-    
-    [http postWithSuccess:^(id responseObject) {
-        
-        self.advertise = [AdvertiseModel tl_objectWithDictionary:responseObject[@"data"]];
-        
-        //价格
-        self.priceLbl.text = [NSString stringWithFormat:@"报价: %@ CNY", [self.advertise.truePrice convertToSimpleRealMoney]];
-        self.priceLbl.text = [LangSwitcher switchLang:self.priceLbl.text key:nil];
-        //限额
-        self.limitAmountLbl.text = [NSString stringWithFormat:@"限额: %@-%@ CNY",[self.advertise.minTrade convertToSimpleRealMoney], [self.advertise.maxTrade convertToSimpleRealMoney]];
-        self.limitAmountLbl.text = [LangSwitcher switchLang:self.limitAmountLbl.text key:nil];
-
-        
-        NSString *btnTitle = [self.advertise.status isEqualToString:@"1"] ? (self.order.isBuy ? @"购买": @"出售"): @"已下架";
-        
-        [self.orderBtn setTitle:[LangSwitcher switchLang:btnTitle key:nil] 
-                        forState:UIControlStateNormal];
-        
-        UIColor *bgColor = [self.advertise.status isEqualToString:@"1"] ? kThemeColor: kPlaceholderColor;
-        
-        [self.orderBtn setBackgroundColor:bgColor forState:UIControlStateNormal];
-        
-        self.orderBtn.enabled = [self.advertise.status isEqualToString:@"1"] ? YES: NO;
-        
-    } failure:^(NSError *error) {
-        
-    }];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 @end

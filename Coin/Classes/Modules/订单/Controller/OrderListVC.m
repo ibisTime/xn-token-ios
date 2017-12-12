@@ -87,7 +87,7 @@
     TLPageDataHelper *helper = [[TLPageDataHelper alloc] init];
     helper.code = @"625250";
     helper.start = 1;
-    helper.limit = 20;
+    helper.limit = 40;
     helper.parameters[@"tradeCoin"] = @"ETH";
     helper.parameters[@"statusList"] = self.statusList;
     helper.parameters[@"tradeCurrency"] = @"CNY";
@@ -166,7 +166,7 @@
         // 传入user
         WaitingOrderVC *chatVC = [[WaitingOrderVC alloc] initWith:currentIMGroup];
         chatVC.userInfo = userInfo;
-        chatVC.order = order;
+        chatVC.orderCode = order.code;
         [self.navigationController pushViewController:chatVC animated:YES];
         return ;
     }

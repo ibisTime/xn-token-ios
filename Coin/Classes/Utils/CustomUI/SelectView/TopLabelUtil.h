@@ -56,6 +56,11 @@ typedef void (^ClickBtnBlock)(NSInteger index);
 //视图偏移时，控件随着发生变化
 -(void)dyDidScrollChangeTheTitleColorWithContentOfSet:(CGFloat)width;
 
+
+
+/**
+ index 传 0，1，。。。
+ */
 - (void)showBadgeOnItemIndex:(int)index;   //显示小红点
 
 - (void)hideBadgeOnItemIndex:(int)index; //隐藏小红点

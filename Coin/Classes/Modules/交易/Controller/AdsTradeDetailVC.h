@@ -8,9 +8,14 @@
 
 #import "TLBaseVC.h"
 #import "ChatManager.h"
+@class UserInfo;
 
 @interface AdsTradeDetailVC : TLBaseVC
 
-- (void)goChatWithGroupId:(NSString *)groupId;
+
+/**
+ groupId 和 订单 id 相同
+ */
+- (void)goChatWithGroupId:(NSString *)groupId toUser:(UserInfo *)toUser;
 
 @end

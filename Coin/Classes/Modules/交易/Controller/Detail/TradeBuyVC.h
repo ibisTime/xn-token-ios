@@ -9,11 +9,12 @@
 #import "AdvertiseModel.h"
 #import "AdsTradeDetailVC.h"
 
-typedef NS_ENUM(NSInteger, TradeBuyPositionType) {
-    
-    TradeBuyPositionTypeTrade = 0,  //交易区
-    TradeBuyPositionTypeMyPublish,  //我发布的
-};
+//typedef NS_ENUM(NSInteger, TradeBuyPositionType) {
+//
+//    TradeBuyPositionTypeTrade = 0,  //交易区
+//    //标识从哪里 进入的广告详情
+//    TradeBuyPositionTypeMyPublish  //我发布的
+//};
 
 // 我要购买， 广告为出售广告
 @interface TradeBuyVC : AdsTradeDetailVC
@@ -21,6 +22,6 @@ typedef NS_ENUM(NSInteger, TradeBuyPositionType) {
 
 @property (nonatomic, copy) NSString *adsCode;
 
-@property (nonatomic, assign) TradeBuyPositionType type;
+//@property (nonatomic, assign) TradeBuyPositionType type;
 
 @end

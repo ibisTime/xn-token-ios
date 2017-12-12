@@ -310,7 +310,7 @@
     
     resultVC.payType = payType;
     
-    resultVC.advertiseType = self.advertiseTypeIndex == 0 ? kTradeBuy: kTradeSell;
+    resultVC.advertiseType = self.advertiseTypeIndex == 1 ? kTradeBuy: kTradeSell;
     
     [self.navigationController pushViewController:resultVC animated:YES];
     

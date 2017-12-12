@@ -11,13 +11,10 @@
 
 #import "AdvertiseModel.h"
 
-//typedef NS_ENUM(NSInteger, PublishBuyPositionType) {
-//
-//    PublishBuyPositionTypePublish = 0,  //发布
-//    PublishBuyPositionTypeDraft,        //草稿
-//
-//};
 
+/**
+ 发布购买广告
+ */
 @interface PublishBuyVC : TLBaseVC
 
 @property (nonatomic, copy) NSString *adsCode;

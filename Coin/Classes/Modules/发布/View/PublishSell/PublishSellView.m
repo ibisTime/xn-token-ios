@@ -51,6 +51,8 @@
 //结束时间
 @property (nonatomic, strong) NSMutableArray *endModelArr;
 
+@property (nonatomic, assign) CGFloat aboultBalanceHeight;
+
 @end
 
 @implementation PublishSellView
@@ -62,13 +64,25 @@
         
         [self initScrollView];
         
+        //
+        self.aboultBalanceHeight = 0;
+        
+        //
         [self initTopView];
+        
         //留言
+        // 注意这里有坑，留言的y 写的非常有问题
         [self initLeaveMsg];
+        
+        //
         //时间
         [self initTimeView];
+        
+        //
         //高级设置
         [self initHighSetting];
+        
+        //
         //发布按钮
         [self initBottomView];
         //
@@ -193,14 +207,14 @@
 - (void)initTopView {
     
     self.textArr = @[
-                     [LangSwitcher switchLang: @"价        格" key:nil],
-                     [LangSwitcher switchLang: @"溢        价" key:nil],
-                     [LangSwitcher switchLang: @"最  低  价"  key:nil],
-                     [LangSwitcher switchLang: @"最  小  量" key:nil],
-                     [LangSwitcher switchLang: @"最  大  量" key:nil],
-                     [LangSwitcher switchLang: @"出售总量" key:nil],
-                     [LangSwitcher switchLang: @"收款方式" key:nil],
-                     [LangSwitcher switchLang: @"收款期限" key:nil]
+                     @"价        格" ,
+                     @"溢        价",
+                     @"最  低  价",
+                     @"最  小  量",
+                     @"最  大  量",
+                     @"出售总量",
+                     @"收款方式",
+                     @"收款期限"
                      ];
     
     NSArray *rightArr = @[@"CNY", @"%", @"CNY", @"CNY", @"CNY", @"ETH", @"", @"分钟"];
@@ -222,81 +236,89 @@
                         [LangSwitcher switchLang:@"银行转账" key:nil]
                         ];
     
+    
     [self.textArr enumerateObjectsUsingBlock:^(NSString *  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         
         //提示
         UIButton *promptBtn = [UIButton buttonWithImageName:@"问号"];
-        
         promptBtn.backgroundColor = kWhiteColor;
-        
         promptBtn.tag = 1500 + idx;
-
         [promptBtn addTarget:self action:@selector(lookPrompt:) forControlEvents:UIControlEventTouchUpInside];
-        
         [self.scrollView addSubview:promptBtn];
-        [promptBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            
-            make.left.equalTo(self.scrollView.mas_left).offset(kScreenWidth - 45);
-            make.top.equalTo(self.scrollView.mas_top).offset(idx*50);
-            make.width.equalTo(@(45));
-            make.height.equalTo(@(50));
-            
-        }];
+        promptBtn.frame = CGRectMake(kScreenWidth - 45, 50*idx + self.aboultBalanceHeight, 45, 50);
         
+        //暂时注释掉
+//        [promptBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+//
+//            make.left.equalTo(self.scrollView.mas_left).offset(kScreenWidth - 45);
+//            make.top.equalTo(self.scrollView.mas_top).offset(idx*50);
+//            make.width.equalTo(@(45));
+//            make.height.equalTo(@(50));
+//
+//        }];
+        
+        //
         //rightText
+//        1231
+        CGFloat rightTextLblWidth = 40;
         UILabel *rightTextLbl = [UILabel labelWithBackgroundColor:kWhiteColor textColor:kTextColor font:15.0];
-        
-        rightTextLbl.text = rightArr[idx];
-        
+        rightTextLbl.text = [LangSwitcher switchLang:rightArr[idx] key:nil];
         rightTextLbl.textAlignment = NSTextAlignmentRight;
-        
         [self.scrollView addSubview:rightTextLbl];
-        [rightTextLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-            
-            make.right.equalTo(promptBtn.mas_left).offset(0);
-            make.top.equalTo(self.scrollView.mas_top).offset(idx*50);
-            make.width.equalTo(@40);
-            make.height.equalTo(@50);
-            
-        }];
+//        [rightTextLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+//            
+//            make.right.equalTo(promptBtn.mas_left).offset(0);
+//            make.top.equalTo(self.scrollView.mas_top).offset(idx*50);
+//            make.width.equalTo(@40);
+//            make.height.equalTo(@50);
+//            
+//        }];
+        
+        //
+        rightTextLbl.frame = CGRectMake(
+                                        kScreenWidth - promptBtn.width - rightTextLblWidth,
+                                        promptBtn.y,
+                                        rightTextLblWidth,
+                                        50
+                                        );
+
+        
         
         //arrowIV
         UIImageView *arrowIV = [[UIImageView alloc] initWithImage:kImage(@"更多拷贝")];
-        
         arrowIV.backgroundColor = kWhiteColor;
-        
         arrowIV.contentMode = UIViewContentModeScaleAspectFit;
         
         if (idx == rightArr.count - 2) {
             
             [self.scrollView addSubview:arrowIV];
-            
-            [arrowIV mas_makeConstraints:^(MASConstraintMaker *make) {
-                
-                make.right.equalTo(promptBtn.mas_left).offset(0);
-                make.top.equalTo(self.scrollView.mas_top).offset((rightArr.count - 2)*50 + 20);
-                make.width.equalTo(@6);
-                make.height.equalTo(@10);
-                
-            }];
+            arrowIV.frame = CGRectMake(kScreenWidth - promptBtn.width,
+                                       promptBtn.y - 20,
+                                       6, 10);
+//            [arrowIV mas_makeConstraints:^(MASConstraintMaker *make) {
+//
+//                make.right.equalTo(promptBtn.mas_left).offset(0);
+//                make.top.equalTo(self.scrollView.mas_top).offset((rightArr.count - 2)*50 + 20);
+//                make.width.equalTo(@6);
+//                make.height.equalTo(@10);
+//
+//            }];
         }
         
         //textField
-        
+        UIView *tempTfView = nil;
         switch (idx) {
             case 0:
             {
                 TLTextField *textField = [[TLTextField alloc] initWithFrame:CGRectMake(0, idx*50, kScreenWidth - 85, 50) leftTitle:obj titleWidth:90 placeholder:placeHolderArr[idx]];
                 
                 textField.delegate = self;
-                
                 textField.tag = 1200 + idx;
-                
                 textField.enabled = NO;
-                
                 [self.scrollView addSubview:textField];
-                
                 self.priceTF = textField;
+                
+                tempTfView = textField;
                 
             }break;
                 
@@ -306,30 +328,31 @@
                 TLTextField *textField = [[TLTextField alloc] initWithFrame:CGRectMake(0, idx*50, kScreenWidth - 85, 50) leftTitle:obj titleWidth:90 placeholder:placeHolderArr[idx]];
                 
                 textField.delegate = self;
-                
                 textField.tag = 1200 + idx;
-                
-                [textField addTarget:self action:@selector(textDidChange:) forControlEvents:UIControlEventEditingChanged];
+                [textField addTarget:self
+                              action:@selector(textDidChange:)
+                    forControlEvents:UIControlEventEditingChanged];
                 [self.scrollView addSubview:textField];
-                
                 textField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
-                
                 self.premiumRateTF = textField;
+                tempTfView = textField;
+
                 
             }break;
                 
-            case 2:
-            {
-                TLTextField *textField = [[TLTextField alloc] initWithFrame:CGRectMake(0, idx*50, kScreenWidth - 85, 50) leftTitle:obj titleWidth:90 placeholder:placeHolderArr[idx]];
+            case 2: {
+                TLTextField *textField = [[TLTextField alloc] initWithFrame:CGRectMake(0, idx*50, kScreenWidth - 85, 50)
+                                                                  leftTitle:obj
+                                                                 titleWidth:90
+                                                                placeholder:placeHolderArr[idx]];
                 
                 textField.delegate = self;
-                
                 textField.tag = 1200 + idx;
-                
                 [self.scrollView addSubview:textField];
                 
                 textField.keyboardType = UIKeyboardTypeDecimalPad;
-                
+                tempTfView = textField;
+
                 self.lowNumTF = textField;
                 
             }break;
@@ -347,27 +370,25 @@
                 textField.keyboardType = UIKeyboardTypeDecimalPad;
                 
                 self.minNumTF = textField;
+                tempTfView = textField;
+
                 
             }break;
                 
-            case 4:
-            {
+            case 4: {
+                
                 TLTextField *textField = [[TLTextField alloc] initWithFrame:CGRectMake(0, idx*50, kScreenWidth - 85, 50) leftTitle:obj titleWidth:90 placeholder:placeHolderArr[idx]];
-                
                 textField.delegate = self;
-                
                 textField.tag = 1200 + idx;
-                
                 [self.scrollView addSubview:textField];
-                
                 textField.keyboardType = UIKeyboardTypeDecimalPad;
-                
                 self.maxNumTF = textField;
+                tempTfView = textField;
+
                 
-            }break;
+            } break;
                 
-            case 5:
-            {
+            case 5: {
                 TLTextField *textField = [[TLTextField alloc] initWithFrame:CGRectMake(0, idx*50, kScreenWidth - 85, 50) leftTitle:obj titleWidth:90 placeholder:placeHolderArr[idx]];
                 
                 textField.delegate = self;
@@ -379,27 +400,27 @@
                 textField.keyboardType = UIKeyboardTypeDecimalPad;
                 
                 self.buyTotalTF = textField;
+                tempTfView = textField;
+
                 
-            }break;
+            } break;
                 
-            case 6:
-            {
+            case 6: {
                 CoinWeakSelf;
                 
                 TLPickerTextField *picker = [[TLPickerTextField alloc] initWithFrame:CGRectMake(0, idx*50, kScreenWidth - 56, 50) leftTitle:obj titleWidth:90 placeholder:placeHolderArr[idx]];
                 
                 picker.tag = 1200 + idx;
-                
                 picker.tagNames = self.payTypeArr;
-                
                 picker.didSelectBlock = ^(NSInteger index) {
                     
                     weakSelf.payTypeIndex = index;
+                    
                 };
-                
                 [self.scrollView addSubview:picker];
-                
                 self.payTypePicker = picker;
+                tempTfView = picker;
+
                 
             }break;
                 
@@ -409,10 +430,10 @@
                 TLPickerTextField *picker = [[TLPickerTextField alloc] initWithFrame:CGRectMake(0, idx*50, kScreenWidth - 85, 50) leftTitle:obj titleWidth:90 placeholder:placeHolderArr[idx]];
                 
                 picker.tag = 1200 + idx;
-                
                 [self.scrollView addSubview:picker];
-                
                 self.payLimitPicker = picker;
+                tempTfView = picker;
+
                 
             }break;
                 
@@ -420,11 +441,13 @@
                 break;
         }
         
+        // -- //
+        tempTfView.y = tempTfView.y + self.aboultBalanceHeight;
+        
+        
         //分割线
         UIView *line = [[UIView alloc] init];
-        
         line.backgroundColor = kLineColor;
-        
         [self.scrollView addSubview:line];
         [line mas_makeConstraints:^(MASConstraintMaker *make) {
             
@@ -437,10 +460,16 @@
         
     }];
 }
+// -- //
 
+
+// -- //
 - (void)initLeaveMsg {
     
-    UIView *leaveMsgView = [[UIView alloc] initWithFrame:CGRectMake(0, 8*50 + 10, kScreenWidth, 150)];
+    UIView *leaveMsgView = [[UIView alloc] initWithFrame:CGRectMake(0,
+                                                                    8*50 + 10 + self.aboultBalanceHeight, kScreenWidth,
+                                                                    150)
+                            ];
     
     leaveMsgView.backgroundColor = kWhiteColor;
     
@@ -449,10 +478,7 @@
     self.leaveMsgView = leaveMsgView;
     
     TLTextView *textView = [[TLTextView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 120)];
-
     textView.font = Font(14.0);
-
-    
     textView.placholder = [LangSwitcher switchLang:@"请写下您的广告留言吧" key:nil];
     
     [leaveMsgView addSubview:textView];
@@ -491,7 +517,9 @@
     
     [highSettingView addGestureRecognizer:tapGR];
     
-    UILabel *highLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:15.0];
+    UILabel *highLbl = [UILabel labelWithBackgroundColor:kClearColor
+                                               textColor:kTextColor
+                                                    font:15.0];
     
     //    highLbl.text = @"高级设置(选填)";
     
@@ -901,6 +929,8 @@
     _timeArr = timeArr;
     
     self.payLimitPicker.tagNames = timeArr;
+    self.payLimitPicker.text = timeArr[0];
+
     
 }
 
@@ -942,7 +972,7 @@
     
     UIButton *anyTimeBtn = [self.openTimeView viewWithTag:1701];
     
-    if (advertise.displayTime) {
+    if (advertise.displayTime && advertise.displayTime.count > 0) {
         
         [advertise.displayTime enumerateObjectsUsingBlock:^(Displaytime * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             
@@ -1027,7 +1057,7 @@
         
         CGFloat prePrice = [self.marketPrice doubleValue]*(preRate/100.0 + 1);
         
-        self.priceTF.text = [NSString stringWithFormat:@"%.4lf", prePrice];
+        self.priceTF.text = [NSString stringWithFormat:@"%.2lf", prePrice];
         
     } else {
         

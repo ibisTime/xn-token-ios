@@ -173,7 +173,7 @@
     //收益
     UILabel *countTextLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kThemeColor font:12.0];
     
-    countTextLbl.text = [LangSwitcher switchLang:@"提出收益（ETH）" key:nil];
+    countTextLbl.text = [LangSwitcher switchLang:@"提成收益（ETH）" key:nil];
 
     countTextLbl.textAlignment = NSTextAlignmentCenter;
     

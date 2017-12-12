@@ -11,6 +11,9 @@
 #import "AdvertiseModel.h"
 
 
+/**
+ 发布出售广告, 卖币广告
+ */
 @interface PublishSellVC : TLBaseVC
 
 @property (nonatomic, strong) NSString *adsCode;

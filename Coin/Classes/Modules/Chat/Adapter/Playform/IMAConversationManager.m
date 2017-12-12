@@ -69,10 +69,10 @@
 - (void)asyncUpdateConversationList
 {
     NSInteger unRead = 0;
-//2.0之前的版本不支持 getConversationList 接口
+    //2.0之前的版本不支持 getConversationList 接口
     NSArray *conversationList = [[TIMManager sharedInstance] getConversationList];
-
-
+    
+    
     for (TIMConversation *conversation in conversationList)
     {
         IMAConversation *conv = nil;
@@ -122,7 +122,7 @@
 - (NSInteger)getUnReadCountWithConversationList:(NSArray *)conversationList {
     
     NSInteger unRead = 0;
-
+    
     for (TIMConversation *conversation in conversationList)
     {
         IMAConversation *conv = nil;
@@ -245,7 +245,7 @@
     
     int count = [conv getUnReadMessageNum];
     self.unReadMessageCount -= count;
-
+    
     // 上报最新消息
     [conv setReadMessage:nil succ:^{
         
@@ -293,14 +293,14 @@
 {
     if (user)
     {
-    for (NSInteger i = 0; i < [_conversationList count]; i++)
-    {
-        IMAConversation *conv = [_conversationList objectAtIndex:i];
-        if ([conv isChatWith:user])
+        for (NSInteger i = 0; i < [_conversationList count]; i++)
         {
-            return conv;
+            IMAConversation *conv = [_conversationList objectAtIndex:i];
+            if ([conv isChatWith:user])
+            {
+                return conv;
+            }
         }
-    }
     }
     return nil;
 }
@@ -389,8 +389,7 @@
  *  @param msgs 新消息列表，TIMMessage 类型数组
  */
 #pragma mark- 消息监听
-- (void)onNewMessage:(NSArray *)msgs
-{
+- (void)onNewMessage:(NSArray *)msgs {
     for (TIMMessage *msg in msgs)
     {
         IMAMsg *imamsg = [IMAMsg msgWith:msg];
@@ -404,6 +403,23 @@
         BOOL isAddFriendReq = NO;
         BOOL isContinue = YES;
         
+        //****************** 此处为业务新加逻辑，
+        if (!isSystemMsg) {
+            //
+            TIMConversation *currentConversation = [msg getConversation];
+            if ([currentConversation getType] != TIM_GROUP) {
+                return;
+            }
+            NSString *groupId = [currentConversation getReceiver];
+         
+            if (self.msgDelegate && [self.msgDelegate respondsToSelector:@selector(handleGroupMsg:msg:)]) {
+                
+                [self.msgDelegate handleGroupMsg:groupId msg:msg];
+                
+            }
+            
+        }
+        
         // *********************** sys
         if (isSystemMsg) {
             // 以下为系统消息
@@ -413,21 +429,21 @@
                 
                 TIMElem* elem = [msg getElem:i];
                 
-//                if ([elem isKindOfClass:[TIMGroupSystemElem class]]) {
-//
-//                    TIMGroupSystemElem *gse = (TIMGroupSystemElem *)elem;
-//
-//                    if (gse.type == TIM_GROUP_SYSTEM_CUSTOM_INFO) {
-//
-////                        TIMGroupSystemElem *obj = (TIMGroupSystemElem *)gse;
-//                        NSData *data = gse.userData;
-//                        NSString *content = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-//                        [content stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-//                        int a = 10;
-//                        NSLog(@"----- %@ -----",content);
-//                    }
-//
-//                }
+                //                if ([elem isKindOfClass:[TIMGroupSystemElem class]]) {
+                //
+                //                    TIMGroupSystemElem *gse = (TIMGroupSystemElem *)elem;
+                //
+                //                    if (gse.type == TIM_GROUP_SYSTEM_CUSTOM_INFO) {
+                //
+                ////                        TIMGroupSystemElem *obj = (TIMGroupSystemElem *)gse;
+                //                        NSData *data = gse.userData;
+                //                        NSString *content = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                //                        [content stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+                //                        int a = 10;
+                //                        NSLog(@"----- %@ -----",content);
+                //                    }
+                //
+                //                }
                 
                 if ([elem isKindOfClass:[TIMGroupSystemElem class]])
                 {
@@ -460,9 +476,8 @@
         
         
         // ******************************************
+        // 遍历当前会话列表，查询是否存在当前会话，来更新 updateSucc
         BOOL updateSucc = NO;
-        
-        // 遍历会话列表
         for (int i = 0; i < [_conversationList count]; i++) {
             
             IMAConversation *imaconv = [_conversationList objectAtIndex:i];
@@ -470,20 +485,20 @@
             NSString  *imaconvReceiver = [imaconv receiver];
             if (
                 imaconv.type == [conv getType]
-                      &&
+                &&
                 ([imaconvReceiver isEqualToString:[conv getReceiver]] ||
                  [imaconvReceiver isEqualToString:[IMACustomConversation getCustomConversationID:imamsg]]
                  )
                 ) {
-                if (imaconv == _chattingConversation)
-                {
+                
+                //应该判断_chattingConversation 是否存在，，，，
+                if (_chattingConversation && imaconv == _chattingConversation) {
                     //如果是c2c会话，则更新“对方正在输入...”状态
                     BOOL isInputStatus = NO;
                     
-                    if (!msg.isSelf)
-                    {
-                        if ([_chattingConversation imaType] == TIM_C2C)
-                        {
+                    if (!msg.isSelf) {
+                        
+                        if ([_chattingConversation imaType] == TIM_C2C) {
                             int elemCount = [imamsg.msg elemCount];
                             for (int i = 0; i < elemCount; i++)
                             {
@@ -500,22 +515,25 @@
                         
                         if (!isInputStatus)
                         {
-//                            [conv setReadMessage];
+                            //                            [conv setReadMessage];
                             imaconv.lastMessage = imamsg;
-                            [_chattingConversation onReceiveNewMessage:imamsg];
+                            if (_chattingConversation) {
+                                
+                                [_chattingConversation onReceiveNewMessage:imamsg];
+
+                            }
                         }
                     }
-                }
-                else
-                {
+                    
+                } else {
                     TIMElem* elem = [msg getElem:0];
                     CustomElemCmd *elemCmd = [self isOnlineMsg:elem];
                     
-                    if (!elemCmd)
-                    {
+                    if (!elemCmd) {
+                        // 不是自定义消息
+                        // 开始
                         imaconv.lastMessage = imamsg;
-                        if (isSystemMsg)
-                        {
+                        if (isSystemMsg) {
                             __weak IMAConversationManager *ws = self;
                             // 系统消息
                             IMACustomConversation *customConv = (IMACustomConversation *)imaconv;
@@ -523,16 +541,17 @@
                                 ws.unReadMessageCount += newUnRead;
                                 [ws updateOnChat:imaconv moveFromIndex:i];
                             }];
-                        }
-                        else
-                        {
+                            
+                        } else  {
                             //如果是自己发出去的消息，一定是已读(这里判断主要是用在多终端登录的情况下)
-                            if (![imamsg isMineMsg])
-                            {
+                            if (![imamsg isMineMsg]) {
+                                //不是自己发送的消息，改变未读消息数量
                                 self.unReadMessageCount++;
+                                
                             }
                             [self updateOnChat:imaconv moveFromIndex:i];
                         }
+                        // 结束
                     }
                 }
                 updateSucc = YES;
@@ -540,6 +559,7 @@
             }
         }
         
+        // 更新不成功，说明是不存在该会话，就要新建会话
         if (!updateSucc && _refreshStyle == EIMARefresh_None)
         {
             if (isSystemMsg)
@@ -591,25 +611,25 @@
 //申请加群请求
 - (void)onAddGroupRequest:(TIMGroupSystemElem *)item
 {
-//    IMAGroup *tempGroup = [[IMAGroup alloc] initWith:item.group];
-//    IMAGroup *group = (IMAGroup *)[[IMAPlatform sharedInstance].contactMgr isContainUser:tempGroup];
-//    NSString *message = [NSString stringWithFormat:@"%@申请加入群:%@\n申请理由:%@", item.user, group.groupInfo.groupName, item.msg];
-//    
-//    UIAlertView *alert = [UIAlertView bk_showAlertViewWithTitle:@"加群申请" message:message cancelButtonTitle:@"忽略" otherButtonTitles:@[@"同意",@"拒绝"] handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
-//        if (buttonIndex == 1)//同意
-//        {
-//            [[IMAPlatform sharedInstance] asyncAcceptAddGroup:item succ:^{
-//                
-//            } fail:nil];
-//        }
-//        else if (buttonIndex == 2)//拒绝
-//        {
-//            [[IMAPlatform sharedInstance] asyncRefuseAddGroup:item succ:^{
-//                
-//            } fail:nil];
-//        }
-//    }];
-//    [alert show];
+    //    IMAGroup *tempGroup = [[IMAGroup alloc] initWith:item.group];
+    //    IMAGroup *group = (IMAGroup *)[[IMAPlatform sharedInstance].contactMgr isContainUser:tempGroup];
+    //    NSString *message = [NSString stringWithFormat:@"%@申请加入群:%@\n申请理由:%@", item.user, group.groupInfo.groupName, item.msg];
+    //
+    //    UIAlertView *alert = [UIAlertView bk_showAlertViewWithTitle:@"加群申请" message:message cancelButtonTitle:@"忽略" otherButtonTitles:@[@"同意",@"拒绝"] handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
+    //        if (buttonIndex == 1)//同意
+    //        {
+    //            [[IMAPlatform sharedInstance] asyncAcceptAddGroup:item succ:^{
+    //
+    //            } fail:nil];
+    //        }
+    //        else if (buttonIndex == 2)//拒绝
+    //        {
+    //            [[IMAPlatform sharedInstance] asyncRefuseAddGroup:item succ:^{
+    //
+    //            } fail:nil];
+    //        }
+    //    }];
+    //    [alert show];
 }
 
 - (void)onAddFreindRequest:(TIMSNSSystemElem *)elem
