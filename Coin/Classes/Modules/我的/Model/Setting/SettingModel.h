@@ -10,8 +10,12 @@
 
 @interface SettingModel : NSObject
 
-@property (nonatomic,strong) NSString *imgName;
-@property (nonatomic,strong) NSString *text;
-@property (nonatomic,strong) void(^action)();
+@property (nonatomic, copy) NSString *imgName;
+@property (nonatomic, copy) NSString *text;
+@property (nonatomic, copy) NSString *subText;
+
+@property (nonatomic, copy) void(^action)();
+
+@property (nonatomic, assign) BOOL isSelect;
 
 @end

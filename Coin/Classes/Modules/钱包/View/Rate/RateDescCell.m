@@ -105,7 +105,7 @@
     
     textLbl.numberOfLines = 0;
     textLbl.text = @"计算规则: 采用银行柜台汇率过去14天的平均值作为汇率参考值，在每一个交割结算日，若改平均值与系统当前汇率偏高超过0.2，则会采用新的14天平均值作为系统汇率。";
-    
+    textLbl.text = [LangSwitcher switchLang:textLbl.text key:nil];
     [self addSubview:textLbl];
     [textLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         

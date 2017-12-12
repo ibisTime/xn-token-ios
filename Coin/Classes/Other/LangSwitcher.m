@@ -9,9 +9,22 @@
 #import "LangSwitcher.h"
 #import "ZMChineseConvert.h"
 
+#define SIMPLE @"simple"
+#define TRADITIONAL @"Traditional"
+
+
+#define LANG @"Traditional"
+
+
 @implementation LangSwitcher
 
 + (NSString *)switchLang:(NSString *)content key:(NSString *)key {
+    
+    NSString *lang = [[NSUserDefaults standardUserDefaults] objectForKey:LANG];
+    if (!lang || [lang equalsString:SIMPLE]) {
+        return content;
+    }
+    
     
     
     
@@ -21,6 +34,64 @@
 //    return content;
     
 }
+
++ (LangType)currentLangType {
+    
+    NSString *lang = [[NSUserDefaults standardUserDefaults] objectForKey:LANG];
+    if (!lang) {
+        return LangTypeSimple;
+    }
+    
+    if ([lang equalsString:SIMPLE]) {
+        return LangTypeSimple;
+    }
+    
+    if ([lang equalsString:TRADITIONAL]) {
+        return LangTypeTraditional;
+    }
+
+    return LangTypeSimple;
+    
+}
+
+
+
++ (NSString *)currentLang {
+    
+    NSDictionary *dict = @{
+                           SIMPLE : @"简体中文",
+                           TRADITIONAL : @"繁体中文"
+                           };
+    
+    NSString *lang = [[NSUserDefaults standardUserDefaults] objectForKey:LANG];
+    if (!lang) {
+        return dict[SIMPLE];
+    }
+    
+    return dict[lang] ? : dict[SIMPLE];
+    
+}
+
++ (void)changLangType:(LangType)langType {
+    
+   NSUserDefaults *userDefaults =  [NSUserDefaults standardUserDefaults];
+    switch (langType) {
+        case LangTypeSimple: {
+            
+            [userDefaults setObject:SIMPLE forKey:LANG];
+            
+        } break;
+        case LangTypeTraditional: {
+            
+            [userDefaults setObject:TRADITIONAL forKey:LANG];
+
+        } break;
+
+    }
+    
+}
+
+
 
 
 + (NSString *)switchLang:(NSString *)content {

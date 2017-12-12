@@ -43,7 +43,7 @@ NSString *const kTradeTypeSell = @"1";
                            @"3": @"已下架",
                            };
     
-    return dict[self.status];
+    return [LangSwitcher switchLang:dict[self.status] key:nil];
 }
 
 

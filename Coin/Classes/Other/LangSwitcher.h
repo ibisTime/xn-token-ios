@@ -8,6 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
+typedef NS_ENUM(NSUInteger, LangType) {
+    LangTypeSimple,
+    LangTypeTraditional
+};
+
 @interface LangSwitcher : NSObject
 
 
@@ -15,5 +20,10 @@
  key 传nil
  */
 + (NSString *)switchLang:(NSString *)content key:(NSString *)key;
+
++ (NSString *)currentLang;
++ (LangType)currentLangType;
+
++ (void)changLangType:(LangType)langType;
 
 @end

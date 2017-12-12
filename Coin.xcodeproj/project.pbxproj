@@ -450,13 +450,14 @@
 		2E973FD61FDBC5CC005C2D5F /* BaseButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E973FD51FDBC5CC005C2D5F /* BaseButton.m */; };
 		2E973FD91FDBE400005C2D5F /* TradeDisplayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E973FD81FDBE400005C2D5F /* TradeDisplayView.m */; };
 		2E973FDF1FDC0219005C2D5F /* AdsTradeDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E973FDE1FDC0219005C2D5F /* AdsTradeDetailVC.m */; };
-		2E973FE51FDE1880005C2D5F /* ZMChineseConvert.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E973FE11FDE187E005C2D5F /* ZMChineseConvert.m */; };
-		2E973FE61FDE1880005C2D5F /* SimplifiedCode.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2E973FE21FDE187E005C2D5F /* SimplifiedCode.txt */; };
-		2E973FE71FDE1880005C2D5F /* TraditionalCode.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2E973FE41FDE187E005C2D5F /* TraditionalCode.txt */; };
 		2E973FEA1FDE31F7005C2D5F /* OrderListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E973FE91FDE31F7005C2D5F /* OrderListVC.m */; };
 		2EA584C11FA813C900C7106C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2EA584C01FA813C900C7106C /* Assets.xcassets */; };
 		2EA584C41FA813C900C7106C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2EA584C21FA813C900C7106C /* LaunchScreen.storyboard */; };
 		2EA584C71FA813C900C7106C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EA584C61FA813C900C7106C /* main.m */; };
+		2EB949541FDE6D6D00CE4B94 /* LangChooseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EB949531FDE6D6D00CE4B94 /* LangChooseVC.m */; };
+		2EB9495A1FDF6B1A00CE4B94 /* ZMChineseConvert.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EB949561FDF6B1A00CE4B94 /* ZMChineseConvert.m */; };
+		2EB9495B1FDF6B1A00CE4B94 /* SimplifiedCode.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2EB949571FDF6B1A00CE4B94 /* SimplifiedCode.txt */; };
+		2EB9495C1FDF6B1A00CE4B94 /* TraditionalCode.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2EB949591FDF6B1A00CE4B94 /* TraditionalCode.txt */; };
 		2EBFBF231FD8E56C0066F7E4 /* PublishService.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EBFBF221FD8E56C0066F7E4 /* PublishService.m */; };
 		2EE950C01FB05B2400429257 /* TLHangQingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE950BF1FB05B2400429257 /* TLHangQingVC.m */; };
 		2EE950C31FB05B4500429257 /* TLWalletVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE950C21FB05B4500429257 /* TLWalletVC.m */; };
@@ -1393,10 +1394,6 @@
 		2E973FD81FDBE400005C2D5F /* TradeDisplayView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TradeDisplayView.m; sourceTree = "<group>"; };
 		2E973FDD1FDC0219005C2D5F /* AdsTradeDetailVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AdsTradeDetailVC.h; sourceTree = "<group>"; };
 		2E973FDE1FDC0219005C2D5F /* AdsTradeDetailVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AdsTradeDetailVC.m; sourceTree = "<group>"; };
-		2E973FE11FDE187E005C2D5F /* ZMChineseConvert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZMChineseConvert.m; sourceTree = "<group>"; };
-		2E973FE21FDE187E005C2D5F /* SimplifiedCode.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SimplifiedCode.txt; sourceTree = "<group>"; };
-		2E973FE31FDE187E005C2D5F /* ZMChineseConvert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZMChineseConvert.h; sourceTree = "<group>"; };
-		2E973FE41FDE187E005C2D5F /* TraditionalCode.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TraditionalCode.txt; sourceTree = "<group>"; };
 		2E973FE81FDE31F7005C2D5F /* OrderListVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OrderListVC.h; sourceTree = "<group>"; };
 		2E973FE91FDE31F7005C2D5F /* OrderListVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OrderListVC.m; sourceTree = "<group>"; };
 		2EA584B41FA813C900C7106C /* Coin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Coin.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1404,6 +1401,12 @@
 		2EA584C31FA813C900C7106C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2EA584C51FA813C900C7106C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2EA584C61FA813C900C7106C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		2EB949521FDE6D6D00CE4B94 /* LangChooseVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LangChooseVC.h; sourceTree = "<group>"; };
+		2EB949531FDE6D6D00CE4B94 /* LangChooseVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LangChooseVC.m; sourceTree = "<group>"; };
+		2EB949561FDF6B1A00CE4B94 /* ZMChineseConvert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZMChineseConvert.m; sourceTree = "<group>"; };
+		2EB949571FDF6B1A00CE4B94 /* SimplifiedCode.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SimplifiedCode.txt; sourceTree = "<group>"; };
+		2EB949581FDF6B1A00CE4B94 /* ZMChineseConvert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZMChineseConvert.h; sourceTree = "<group>"; };
+		2EB949591FDF6B1A00CE4B94 /* TraditionalCode.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TraditionalCode.txt; sourceTree = "<group>"; };
 		2EBFBF211FD8E56C0066F7E4 /* PublishService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PublishService.h; sourceTree = "<group>"; };
 		2EBFBF221FD8E56C0066F7E4 /* PublishService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PublishService.m; sourceTree = "<group>"; };
 		2EE950BE1FB05B2400429257 /* TLHangQingVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLHangQingVC.h; sourceTree = "<group>"; };
@@ -1698,7 +1701,6 @@
 		211C013A1FC6600300E51FCF /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				2E973FE01FDE187E005C2D5F /* ChineseConvert */,
 				21C91D891FDBD64D006EDB16 /* Alipay */,
 				21205CFF1FCD6383003C6C7C /* WeChat */,
 				211C013B1FC6600300E51FCF /* 腾讯云 */,
@@ -2965,6 +2967,7 @@
 		211DE63B1FB58B4B002FCF3D /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				2EB949551FDF6B1A00CE4B94 /* ChineseConvert */,
 				211DE6941FB58B4C002FCF3D /* Foundation+Log.m */,
 				21205D091FCD6506003C6C7C /* Manager */,
 				211DE63C1FB58B4B002FCF3D /* CustomUI */,
@@ -3568,6 +3571,8 @@
 				21CB94E11FDC0A0F00CAB090 /* PersonalitySettingVC.m */,
 				21CB94E31FDC0AFC00CAB090 /* LanguageSettingVC.h */,
 				21CB94E41FDC0AFC00CAB090 /* LanguageSettingVC.m */,
+				2EB949521FDE6D6D00CE4B94 /* LangChooseVC.h */,
+				2EB949531FDE6D6D00CE4B94 /* LangChooseVC.m */,
 			);
 			path = PersonalitySetting;
 			sourceTree = "<group>";
@@ -3895,17 +3900,6 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		2E973FE01FDE187E005C2D5F /* ChineseConvert */ = {
-			isa = PBXGroup;
-			children = (
-				2E973FE11FDE187E005C2D5F /* ZMChineseConvert.m */,
-				2E973FE21FDE187E005C2D5F /* SimplifiedCode.txt */,
-				2E973FE31FDE187E005C2D5F /* ZMChineseConvert.h */,
-				2E973FE41FDE187E005C2D5F /* TraditionalCode.txt */,
-			);
-			path = ChineseConvert;
-			sourceTree = "<group>";
-		};
 		2EA584AB1FA813C900C7106C = {
 			isa = PBXGroup;
 			children = (
@@ -3936,6 +3930,17 @@
 				2EA584C61FA813C900C7106C /* main.m */,
 			);
 			path = Coin;
+			sourceTree = "<group>";
+		};
+		2EB949551FDF6B1A00CE4B94 /* ChineseConvert */ = {
+			isa = PBXGroup;
+			children = (
+				2EB949561FDF6B1A00CE4B94 /* ZMChineseConvert.m */,
+				2EB949571FDF6B1A00CE4B94 /* SimplifiedCode.txt */,
+				2EB949581FDF6B1A00CE4B94 /* ZMChineseConvert.h */,
+				2EB949591FDF6B1A00CE4B94 /* TraditionalCode.txt */,
+			);
+			path = ChineseConvert;
 			sourceTree = "<group>";
 		};
 		2EE950D41FB06AA900429257 /* BannerBrowser */ = {
@@ -4072,7 +4077,6 @@
 				211C04B51FC6604900E51FCF /* 6.gif in Resources */,
 				211C048B1FC6604800E51FCF /* Assets.xcassets in Resources */,
 				211C04B01FC6604900E51FCF /* 25.gif in Resources */,
-				2E973FE71FDE1880005C2D5F /* TraditionalCode.txt in Resources */,
 				211C04A81FC6604900E51FCF /* 33.gif in Resources */,
 				211C04BD1FC6604900E51FCF /* 0@2x.png in Resources */,
 				211C04C41FC6604900E51FCF /* 13.gif in Resources */,
@@ -4082,10 +4086,10 @@
 				211C04AB1FC6604900E51FCF /* 32.gif in Resources */,
 				211C04F81FC6604900E51FCF /* 10.caf in Resources */,
 				211C04C21FC6604900E51FCF /* 16.gif in Resources */,
-				2E973FE61FDE1880005C2D5F /* SimplifiedCode.txt in Resources */,
 				211C04FA1FC6604900E51FCF /* 01.caf in Resources */,
 				211C04B81FC6604900E51FCF /* 1.gif in Resources */,
 				211C04BC1FC6604900E51FCF /* 14.gif in Resources */,
+				2EB9495B1FDF6B1A00CE4B94 /* SimplifiedCode.txt in Resources */,
 				211C04A41FC6604900E51FCF /* 34.gif in Resources */,
 				211C04A91FC6604900E51FCF /* 27.gif in Resources */,
 				211C04B91FC6604900E51FCF /* 0.gif in Resources */,
@@ -4101,6 +4105,7 @@
 				211C04B21FC6604900E51FCF /* 4.gif in Resources */,
 				211C04931FC6604800E51FCF /* MicroVideoSource.xcassets in Resources */,
 				211C04AC1FC6604900E51FCF /* 18.gif in Resources */,
+				2EB9495C1FDF6B1A00CE4B94 /* TraditionalCode.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4180,7 +4185,6 @@
 				211C04131FC6604800E51FCF /* MKNetworkEngine.m in Sources */,
 				211C04991FC6604800E51FCF /* IMAChatViewController.m in Sources */,
 				2EBFBF231FD8E56C0066F7E4 /* PublishService.m in Sources */,
-				2E973FE51FDE1880005C2D5F /* ZMChineseConvert.m in Sources */,
 				215979761FB84CC70029F177 /* BillDetailCell.m in Sources */,
 				21A821171FDA690700AE59F2 /* GoogleAuthVC.m in Sources */,
 				211CF9A41FC55ADD00E51FCF /* OrderPriceModel.m in Sources */,
@@ -4410,6 +4414,7 @@
 				211C04FD1FC6604900E51FCF /* IMAAppDelegate.m in Sources */,
 				211C04851FC6604800E51FCF /* MyMoreView.m in Sources */,
 				211C047B1FC6604800E51FCF /* NSStringEx.m in Sources */,
+				2EB9495A1FDF6B1A00CE4B94 /* ZMChineseConvert.m in Sources */,
 				211C04451FC6604800E51FCF /* HUDHelper.m in Sources */,
 				211C048D1FC6604800E51FCF /* ChatSoundRecorder.m in Sources */,
 				211C04631FC6604800E51FCF /* IMAPlatform.m in Sources */,
@@ -4517,6 +4522,7 @@
 				211DE6B41FB58B4C002FCF3D /* UIColor+Extension.m in Sources */,
 				2120A8FC1FD51DF800B03DB0 /* UITabBar+Badge.m in Sources */,
 				211A34E41FB4255700FEB71F /* MineGroup.m in Sources */,
+				2EB949541FDE6D6D00CE4B94 /* LangChooseVC.m in Sources */,
 				211C041D1FC6604800E51FCF /* FTUtils+UIGestureRecognizer.m in Sources */,
 				2E394FF41FB057B300BA0829 /* TLTabBarController.m in Sources */,
 				211CF99A1FC4270600E51FCF /* TradeSellVC.m in Sources */,

@@ -7,7 +7,7 @@
 //
 
 #import "PersonalitySettingVC.h"
-
+#import "LangChooseVC.h"
 #import "CoinHeader.h"
 
 #import "SettingGroup.h"
@@ -42,6 +42,12 @@
     //查询用户设置
     [self queryUserSetting];
 
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [self.tableView reloadData];
 }
 
 #pragma mark - Init
@@ -83,10 +89,12 @@
     
     //语言设置
     SettingModel *languageSetting = [SettingModel new];
-    
     languageSetting.text = [LangSwitcher switchLang:@"语言设置" key:nil];
+    languageSetting.subText = [LangSwitcher currentLang];
     [languageSetting setAction:^{
         
+        LangChooseVC *vc = [[LangChooseVC alloc] init];
+        [weakSelf.navigationController pushViewController:vc animated:YES];
         
     }];
     
@@ -207,11 +215,6 @@
         
         
     }];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 

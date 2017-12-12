@@ -91,7 +91,11 @@
     
     if (self.publishType == PublishTypePublishOrSaveDraft) {
     
-        [UIBarButtonItem addRightItemWithTitle:@"保存草稿" titleColor:kTextColor frame:CGRectMake(0, 0, 70, 44) vc:self action:@selector(keepDraft)];
+        [UIBarButtonItem addRightItemWithTitle:[LangSwitcher switchLang:@"保存草稿" key:nil]
+                                    titleColor:kTextColor
+                                         frame:CGRectMake(0, 0, 70, 44)
+                                            vc:self
+                                        action:@selector(keepDraft)];
         
     }
     
@@ -234,9 +238,7 @@
     TLNetworking *http = [TLNetworking new];
     http.showView = self.view;
     http.code = @"625220";
-    //发布类型（0=存草稿，1=发布）
     
-
     if (self.publishType == PublishTypePublishDraft) {
         
         http.parameters[@"publishType"] = kPublishDraft;

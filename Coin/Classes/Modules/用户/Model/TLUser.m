@@ -116,6 +116,19 @@ NSString *const kGoogleAuthClose = @"0";
     }];
 }
 
+- (void)changLoginTime {
+    
+    TLNetworking *http = [TLNetworking new];
+    http.code = @"805083";
+    http.parameters[@"userId"] = [TLUser user].userId;
+    [http postWithSuccess:^(id responseObject) {
+        
+    } failure:^(NSError *error) {
+        
+    }];
+
+}
+
 - (void)requestQiniuDomain {
     
     TLNetworking *http = [TLNetworking new];

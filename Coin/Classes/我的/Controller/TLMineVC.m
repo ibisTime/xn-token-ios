@@ -186,7 +186,6 @@
     
     //联系客服
     MineModel *linkService = [MineModel new];
-    
     linkService.text = [LangSwitcher switchLang:@"联系客服" key:nil];
     linkService.imgName = @"联系客服";
     linkService.action = ^{
@@ -201,7 +200,6 @@
     
     //关于我们
     MineModel *abountUs = [MineModel new];
-    
     abountUs.text = [LangSwitcher switchLang:@"关于我们" key:nil];
     abountUs.imgName = @"关于我们";
     abountUs.action = ^{
@@ -253,7 +251,6 @@
             TLUploadManager *manager = [TLUploadManager manager];
             
             manager.imgData = imgData;
-            
             manager.image = image;
             
             [manager getTokenShowView:weakSelf.view succes:^(NSString *key) {
@@ -290,6 +287,8 @@
 
 - (void)changeInfo {
     
+    [[TLUser user] changLoginTime];
+    //
     if ([TLUser user].photo) {
         
         [self.headerView.photoBtn setTitle:@"" forState:UIControlStateNormal];
@@ -360,13 +359,13 @@
         [TLUser user].photo = key;
         
         //设置头像
-        [[IMAHost alloc] asyncSetHeadIconURL:key succ:^{
-            
-        } fail:^(int code, NSString *msg) {
-            
-        }];
-        
-        [IMAPlatform sharedInstance].host.icon = key;
+//        [[IMAHost alloc] asyncSetHeadIconURL:key succ:^{
+//
+//        } fail:^(int code, NSString *msg) {
+//
+//        }];
+//
+//        [IMAPlatform sharedInstance].host.icon = key;
         
         [[NSNotificationCenter defaultCenter] postNotificationName:kUserInfoChange object:nil];
         

@@ -26,7 +26,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.title = @"汇率概述";
+    self.title = [LangSwitcher switchLang:@"汇率概述" key:nil] ;
     
     [self initTableView];
     //获取汇率列表

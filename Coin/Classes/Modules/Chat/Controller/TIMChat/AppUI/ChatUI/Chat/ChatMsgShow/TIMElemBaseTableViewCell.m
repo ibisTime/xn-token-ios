@@ -353,6 +353,7 @@
     
 }
 
+#pragma mark - 配置 cell
 - (void)configWith:(IMAMsg *)msg
 {
     _msg = msg;
@@ -365,22 +366,18 @@
     
     NSString *nickName;
     
-    if ([_msg isMineMsg])
-    {
+    if ([_msg isMineMsg]) {
+        
         user = [IMAPlatform sharedInstance].host;
-    
         photo = [ChatUserProfile sharedUser].minePhoto;
-        
         nickName = [ChatUserProfile sharedUser].mineNickName;
-    }
-    else
-    {
+        
+    } else {
+        
         user = [_msg getSender];
-        
         photo = [ChatUserProfile sharedUser].friendPhoto;
-        
         nickName = [ChatUserProfile sharedUser].friendNickName;
-
+        
     }
     
     if (photo) {
@@ -400,8 +397,7 @@
         
     }
     
-    if (_remarkTip)
-    {
+    if (_remarkTip) {
         _remarkTip.hidden = !([_msg isGroupMsg] && ![_msg isMineMsg]);
         _remarkTip.font = [_msg tipFont];
         _remarkTip.textColor = [_msg tipTextColor];

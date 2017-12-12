@@ -98,6 +98,9 @@
 //异步更新用户信息
 - (void)updateUserInfo;
 
+//更新登录时间
+- (void)changLoginTime;
+
 @end
 
 FOUNDATION_EXTERN  NSString *const kUserLoginNotification;

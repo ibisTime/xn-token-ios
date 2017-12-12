@@ -52,13 +52,14 @@
     //配置根控制器
     [self configRootViewController];
     
-    //初始化 im
+    //初始化
     [self configIM];
 
     //重新登录
     if([TLUser user].isLogin) {
         
-        [[TLUser user] reLogin];
+        [[TLUser user] updateUserInfo];
+        [[TLUser user] changLoginTime];
         [[ChatManager sharedManager] loginIM];
         
     };

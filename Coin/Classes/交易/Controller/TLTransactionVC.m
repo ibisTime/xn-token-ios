@@ -127,9 +127,7 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:searchImg style:UIBarButtonItemStylePlain target:self action:@selector(search)];
     
     //3.中间切换
-    
     self.navigationItem.titleView = self.labelUnil;
-
 
 }
 

@@ -827,27 +827,7 @@
     
  
 
-    // 辅助： 普通消息，返回的是该cell
-//    RichChatTableViewCell *testCell = nil;
-    
-    // 暂时都是
-    // 根据消息类型加载不同的cell
-    
-//    UITableViewCell *showCell = nil;
-//    if (0/* 系统消息 */) {
-//
-//
-//    } else {
-//
-//        //普通消息
-//        UITableViewCell<TIMElemAbleCell> *cell = [msg tableView:tableView style:TIMElemCell_C2C];
-//        [cell configWith:msg];
-//        showCell = cell;
-//
-//    }
-    
-    //
-//    return showCell;
+
 }
 
 #pragma mark- BaseCell deleteCell

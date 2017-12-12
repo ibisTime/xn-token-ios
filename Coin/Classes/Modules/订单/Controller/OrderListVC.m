@@ -143,41 +143,17 @@
 #pragma mark- delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    
     //
     OrderModel *order = self.orderGroups[indexPath.row];
     
-    NSString *friendUserId = order.isBuy ? order.sellUserInfo.userId: order.buyUserInfo.userId;
+//    NSString *friendUserId = order.isBuy ? order.sellUserInfo.userId: order.buyUserInfo.userId;
     NSString *friendPhoto = order.isBuy ? order.sellUserInfo.photo: order.buyUserInfo.photo;
     NSString *friendNickName = order.isBuy ? order.sellUserInfo.nickname: order.buyUserInfo.nickname;
     
     IMAGroup *currentIMGroup = nil;
     //2. 获取对应的group
     currentIMGroup = [[IMAGroup alloc] initWith:order.code];
-    ////    [[ChatManager sharedManager] getGroupByGroupId:order.code];
-    //    if (currentIMGroup == nil) {
-    //
-    //        NSLog(@"未找到会话，异常");
-    //        return;
-    //
-    //    }
-    
-    //    IMAConversationManager *mgr = [IMAPlatform sharedInstance].conversationMgr;
-    //    _conversationList = [mgr conversationList];
-    
-    //    IMAConversation *conv = (IMAConversation *)convable;
-    //    IMAUser *user = [[IMAPlatform sharedInstance] getReceiverOf:conv];
-    
-    //对方
-    //    IMAUser *user = [[IMAUser alloc] initWith:friendUserId];
-    //    user.nickName = friendNickName;
-    //    user.icon = [friendPhoto convertImageUrl];
-    //    user.remark = friendNickName;
-    //    user.userId = friendUserId;
-    
-    //    TIMGroupInfo *groupInfo = [[TIMGroupInfo alloc] init];
-    //    groupInfo.groupId
-    //    IMAGroup *group = [[IMAGroup alloc] initWithInfo:<#(TIMGroupInfo *)#>];
+
     
     //我
     ChatUserProfile *userInfo = [ChatUserProfile sharedUser];
@@ -185,8 +161,7 @@
     userInfo.mineNickName = [TLUser user].nickname;
     userInfo.friendPhoto = [friendPhoto convertImageUrl];
     userInfo.friendNickName = friendNickName;
-    //
-    //    //
+  
     if ([order.status isEqualToString:@"-1"]) {
         // 传入user
         WaitingOrderVC *chatVC = [[WaitingOrderVC alloc] initWith:currentIMGroup];
