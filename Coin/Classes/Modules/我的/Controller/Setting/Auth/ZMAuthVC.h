@@ -10,4 +10,6 @@
 
 @interface ZMAuthVC : TLBaseVC
 
+@property (nonatomic,copy) void(^success)(void);
+
 @end

@@ -103,20 +103,27 @@
     }];
     
     
-    //身份认证
+    //实名认证
     SettingModel *idAuth = [SettingModel new];
     
-    idAuth.text = [LangSwitcher switchLang:@"芝麻认证" key:nil];
+    idAuth.text = [LangSwitcher switchLang:@"实名认证" key:nil];
     [idAuth setAction:^{
-        
-//        IdAuthVC *idAuthVC = [IdAuthVC new];
-//
-//        [weakSelf.navigationController pushViewController:idAuthVC animated:YES];
         
         ZMAuthVC *authVC = [ZMAuthVC new];
         
-        authVC.title = [LangSwitcher switchLang:@"芝麻认证" key:nil];
+        authVC.title = [LangSwitcher switchLang:@"实名认证" key:nil];
 
+        authVC.success = ^{
+            
+            [TLAlert alertWithSucces:[LangSwitcher switchLang:@"实名认证成功" key:nil]];
+            
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                
+                [weakSelf.navigationController popViewControllerAnimated:YES];
+                
+            });
+        };
+        
         [weakSelf.navigationController pushViewController:authVC animated:YES];
         
     }];

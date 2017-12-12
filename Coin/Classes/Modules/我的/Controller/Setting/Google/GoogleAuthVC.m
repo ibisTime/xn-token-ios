@@ -146,6 +146,13 @@
     
     UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
     
+    //判断粘贴内容是否为纯数字
+    if (![NSString isPureNumWithString:pasteboard.string]) {
+        
+        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入正确的谷歌验证码" key:nil]];
+        return ;
+    }
+    
     if (pasteboard.string != nil) {
         
         self.googleAuthTF.text = pasteboard.string;

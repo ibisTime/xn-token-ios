@@ -112,3 +112,4 @@ FOUNDATION_EXTERN  NSString *const kLevelAgent;
 
 FOUNDATION_EXTERN  NSString *const kGoogleAuthOpen;
 FOUNDATION_EXTERN  NSString *const kGoogleAuthClose;
+
