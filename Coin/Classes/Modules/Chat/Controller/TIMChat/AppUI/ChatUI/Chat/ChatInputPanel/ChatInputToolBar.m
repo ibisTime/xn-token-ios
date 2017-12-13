@@ -193,8 +193,7 @@
     
 }
 
-- (BOOL)isEditing
-{
+- (BOOL)isEditing {
     return [_textView isFirstResponder];
 }
 

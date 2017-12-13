@@ -187,12 +187,14 @@
                         options:NSKeyValueObservingOptionNew
                           block:^(id observer, id object, NSDictionary *change) {
                               
-                              [weakSelf orderRefresh];
                               if ([IMAPlatform sharedInstance].conversationMgr.unReadMessageCount <= 0) {
                                   
                                   //让顶部的取置0
                                   [weakSelf changeTopMsgRedHintToZero];
-                                  
+                                  [weakSelf orderReloadData];
+                              } else {
+                                  [weakSelf orderRefresh];
+
                               }
                               
     }];

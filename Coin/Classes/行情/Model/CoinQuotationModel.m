@@ -12,7 +12,7 @@
 
 - (UIColor *)bgColor {
     
-    CGFloat fluct = [self.percent_change_1h doubleValue];
+    CGFloat fluct = [self.percent_change_24h doubleValue];
     
     return fluct >= 0 ? kThemeColor: kRiseColor;
 }

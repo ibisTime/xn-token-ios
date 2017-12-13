@@ -283,8 +283,8 @@
         //保存用户账号和密码
         [[TLUser user] saveUserName:self.phoneTf.text pwd:self.pwdTf.text];
         
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            
+//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
             //获取用户信息
             TLNetworking *http = [TLNetworking new];
             http.showView = self.view;
@@ -300,14 +300,15 @@
                 //保存信息
                 [[TLUser user] saveUserInfo:userInfo];
                 [[TLUser user] setUserInfoWithDict:userInfo];
-                
+                //dismiss 掉
+                [self.navigationController dismissViewControllerAnimated:YES completion:nil];
                 [[NSNotificationCenter defaultCenter] postNotificationName:kUserLoginNotification object:nil];
                 
             } failure:^(NSError *error) {
                 
             }];
             
-        });
+//        });
         
         
     } failure:^(NSError *error) {

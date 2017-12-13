@@ -8,6 +8,7 @@
 
 #import "ChatInputPanel.h"
 #import <CDCommon/DeviceUtil.h>
+#import <CDCommon/UIView+Frame.h>
 
 @implementation ChatInputPanel
 
@@ -22,12 +23,143 @@
     if (self = [super init])
     {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onKeyboardDidShow:) name:UIKeyboardWillShowNotification object:nil];
+        
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onKeyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
+        
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onKeyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+        
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onKeyboardDidShow:) name:UIKeyboardDidChangeFrameNotification object:nil];
+        
+        //     --           //
+//        [[NSNotificationCenter defaultCenter]
+//         addObserver:self selector:@selector(keyboardWillAppear:) name:UIKeyboardWillChangeFrameNotification object:nil];
     }
     return self;
 }
+
+// -- //
+//- (void)keyboardWillAppear:(NSNotification *)notification {
+//
+//    //
+//   CGFloat duration =  [notification.userInfo[@"UIKeyboardAnimationDurationUserInfoKey"] floatValue];
+//   CGRect keyBoardFrame = [notification.userInfo[@"UIKeyboardFrameEndUserInfoKey"] CGRectValue];
+//
+//    // -- //
+//    if ([_toolBar isEditing]) {
+//       // 键盘要消失
+//
+//        [UIView animateWithDuration:duration animations:^{
+//
+//            _toolBar.y = SCREEN_HEIGHT - [DeviceUtil top64] - _toolBar.contentHeight;
+//            self.height = 0;
+//
+//        }];
+//
+//
+//       //
+//       return;
+//    }
+//
+//    [UIView animateWithDuration:duration delay:0 options: 458752 | UIViewAnimationOptionBeginFromCurrentState animations:^{
+//
+//        _toolBar.y = CGRectGetMinY(keyBoardFrame) - _toolBar.height - [DeviceUtil top64];
+//
+//    } completion:NULL];
+//
+//
+//}
+
+
+//- (void)keyboardWillAppear:(NSNotification *)notification {
+//
+//    //获取键盘高度
+////    CGFloat duration =  [notification.userInfo[@"UIKeyboardAnimationDurationUserInfoKey"] floatValue];
+////    CGRect keyBoardFrame = [notification.userInfo[@"UIKeyboardFrameEndUserInfoKey"] CGRectValue];
+////    int a = 10;
+//
+//    if ([_toolBar isEditing]) {
+//
+//        NSDictionary *userInfo = notification.userInfo;
+//        CGRect endFrame = [userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+//        CGFloat duration = [userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+//
+//        NSInteger contentHeight = endFrame.size.height + [_toolBar contentHeight];
+//
+//        if (contentHeight != _contentHeight) {
+//
+//            CGRect rect = self.frame;
+//            rect.origin.y = endFrame.origin.y - [_toolBar contentHeight] - [DeviceUtil top64];
+//            rect.size.height = contentHeight;
+//
+//            [UIView animateWithDuration:duration animations:^{
+//                self.frame = rect;
+//                self.contentHeight = contentHeight;
+//            }];
+//
+//        }
+//
+//    } else {
+//
+//
+//        NSDictionary* userInfo = [notification userInfo];
+//        CGFloat duration = [userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+//
+//        NSInteger contentHeight = [_toolBar contentHeight] + [_panel contentHeight];
+//
+//        if (_contentHeight != contentHeight)
+//        {
+//            CGRect rect = self.frame;
+//            rect.origin.y = kMainScreenHeight - [DeviceUtil top64] - [DeviceUtil bottomInsetHeight] - contentHeight;
+//            rect.size.height = contentHeight;
+//
+//            [UIView animateWithDuration:duration animations:^{
+//                self.frame = rect;
+//                self.contentHeight = contentHeight;
+//            }];
+//
+//        }
+//
+//    }
+
+    
+    //
+//    if ([_toolBar isEditing]) {
+//        //键盘要隐藏
+//        [UIView animateWithDuration:duration animations:^{
+//
+//            _toolBar.y = SCREEN_HEIGHT - [DeviceUtil top64] - _toolBar.contentHeight;
+//            self.height = 0;
+//        }];
+//        //
+//        return;
+//    }
+   
+//    [UIView animateWithDuration:duration animations:^{
+    
+//        self.frame = CGRectMake(0, keyBoardFrame.origin.y, self.frame.size.width, keyBoardFrame.size.height);
+//        self.contentHeight = self.frame.size.height;
+//        _toolBar.y = CGRectGetMinY(keyBoardFrame) - _toolBar.height - [DeviceUtil top64];
+    
+//    }];
+        
+        
+//    if (self.titleTextView.isFirstResponder) {
+//        [UIView animateWithDuration:0.25 animations:^{
+//
+//            self.toolBar.y = SCREEN_HEIGHT - TOOLBAR_EFFECTIVE_HEIGHT - 64;
+//
+//        }];
+//        return;
+//    }
+//
+//    [UIView animateWithDuration:duration delay:0 options: 458752 | UIViewAnimationOptionBeginFromCurrentState animations:^{
+//
+//        self.toolBar.y = CGRectGetMinY(keyBoardFrame) - TOOLBAR_EFFECTIVE_HEIGHT - 64;
+//
+//
+//    } completion:NULL];
+
+//}
 
 - (instancetype)initRichChatInputPanel
 {
@@ -42,8 +174,11 @@
         [self addSubview:_toolBar];
         
         __weak ChatInputPanel *ws = self;
-        [self.KVOController observe:_toolBar keyPath:@"contentHeight" options:NSKeyValueObservingOptionNew |NSKeyValueObservingOptionOld block:^(id observer, id object, NSDictionary *change) {
+        [self.KVOController observe:_toolBar keyPath:@"contentHeight" options:NSKeyValueObservingOptionNew |NSKeyValueObservingOptionOld
+                              block:^(id observer, id object, NSDictionary *change) {
+                                  
             [ws onToolBarContentHeightChanged:change];
+                                  
         }];
     }
     return self;
@@ -67,8 +202,8 @@
     
     NSInteger contentHeight = [_toolBar contentHeight] + [_panel contentHeight];
     
-    if (_contentHeight != contentHeight)
-    {
+    if (_contentHeight != contentHeight) {
+        
         CGRect rect = self.frame;
         rect.origin.y = kMainScreenHeight - [DeviceUtil top64] - [DeviceUtil bottomInsetHeight] - contentHeight;
         rect.size.height = contentHeight;
@@ -85,16 +220,15 @@
 
 - (void)onKeyboardDidShow:(NSNotification *)notification
 {
-    if ([_toolBar isEditing])
-    {
+    if ([_toolBar isEditing]) {
+        
         NSDictionary *userInfo = notification.userInfo;
         CGRect endFrame = [userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
         CGFloat duration = [userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
         
         NSInteger contentHeight = endFrame.size.height + [_toolBar contentHeight];
         
-        if (contentHeight != _contentHeight)
-        {
+        if (contentHeight != _contentHeight) {
             CGRect rect = self.frame;
             rect.origin.y = endFrame.origin.y - [_toolBar contentHeight] - [DeviceUtil top64];
             rect.size.height = contentHeight;

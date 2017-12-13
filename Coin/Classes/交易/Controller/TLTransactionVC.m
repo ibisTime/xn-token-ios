@@ -577,7 +577,6 @@
 - (void)refreshTableView:(TLTableView *)refreshTableview didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     AdvertiseModel *advertiseModel = self.advertises[indexPath.row];
-    
     [AdsService pushToAdsDetail:advertiseModel currentVC:self];
     //
 //    if ([advertiseModel.tradeType isEqualToString:kAdsTradeTypeSell]) {
