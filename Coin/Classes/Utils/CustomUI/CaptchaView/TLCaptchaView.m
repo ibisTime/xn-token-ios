@@ -28,9 +28,9 @@
     
     
     self.captchaTf = [[TLTextField alloc] initWithFrame:CGRectMake(0, 0,frame.size.width, frame.size.height)
-                                           leftTitle:@"验证码"
+                                           leftTitle:[LangSwitcher switchLang:@"验证码" key:nil]
                                           titleWidth:90
-                                         placeholder:@"请输入验证码"];
+                                         placeholder:[LangSwitcher switchLang:@"请输入验证码" key:nil]];
     [self addSubview:self.captchaTf];
     
     UIView *rightView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 95, frame.size.height)];

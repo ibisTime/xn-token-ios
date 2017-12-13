@@ -60,7 +60,7 @@
     //交易评价
     UILabel *commentLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:16.0];
     
-    commentLbl.text = @"交易评价";
+    commentLbl.text = [LangSwitcher switchLang:@"交易评价" key:nil];
     
     [self.bgView addSubview:commentLbl];
     [commentLbl mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -73,7 +73,7 @@
     //text
     UILabel *textLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:14.0];
     
-    textLbl.text = @"交易有何印象? 快来评价吧";
+    textLbl.text = [LangSwitcher switchLang:@"交易有何印象? 快来评价吧" key:nil];
     
     [self.bgView addSubview:textLbl];
     [textLbl mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -84,7 +84,10 @@
     }];
     
     //评价按钮
-    NSArray *textArr = @[@"好评", @"差评"];
+    NSArray *textArr = @[
+                         [LangSwitcher switchLang: @"好评" key:nil],
+                         [LangSwitcher switchLang: @"差评" key:nil]
+                         ];
     
     NSArray *imgArr = @[@"好评灰", @"差评灰"];
     

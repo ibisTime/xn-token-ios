@@ -234,7 +234,7 @@
 
 #pragma mark - Setting
 
-- (void)setCurrentUser:(TLUser *)currentUser {
+- (void)setCurrentUser:(UserInfo *)currentUser {
     
     _currentUser = currentUser;
     

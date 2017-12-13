@@ -13,6 +13,7 @@
 #import "MyUIDefine.h"
 #import "MyMoreView.h"
 #import "IQKeyboardManager.h"
+#import "LangSwitcher.h"
 
 @interface ChatViewController ()
 
@@ -812,7 +813,11 @@
             cell.textLabel.backgroundColor = [UIColor clearColor];
         }
         
-        cell.textLabel.text =  [textElem.text stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        //
+        NSString *text =  [textElem.text stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        
+        //
+        cell.textLabel.text = [LangSwitcher switchLang:text key:nil];
 
 //        ChatTimeTipTableViewCell *cell = [[ChatTimeTipTableViewCell alloc] initWithGroupReuseIdentifier:@"ChatSysMsgCellId"];
         

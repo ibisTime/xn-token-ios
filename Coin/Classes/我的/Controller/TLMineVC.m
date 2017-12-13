@@ -165,8 +165,8 @@
     personalSetting.action = ^{
         
         PersonalitySettingVC *personalSettingVC = [PersonalitySettingVC new];
-        
         [weakSelf.navigationController pushViewController:personalSettingVC animated:YES];
+        
     };
     
     //常见问题
@@ -272,18 +272,18 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeInfo) name:kUserInfoChange object:nil];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginOut) name:kUserLoginOutNotification object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginOut) name:kUserLoginOutNotification object:nil];
 
 
 }
 
-#pragma mark - Events
-- (void)loginOut {
-    
-    [[TLUser user] loginOut];
- 
-    [self changeInfo];
-}
+//#pragma mark - Events
+//- (void)loginOut {
+//
+//    [[TLUser user] loginOut];
+//
+//    [self changeInfo];
+//}
 
 - (void)changeInfo {
     

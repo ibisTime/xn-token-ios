@@ -67,7 +67,7 @@
     switch (status) {
         case 0:
         {
-            title = self.isBuy ? @"标记已打款":@"等待标记打款";
+            title = self.isBuy ? [LangSwitcher switchLang: @"标记已打款" key:nil] : [LangSwitcher switchLang: @"等待标记打款" key:nil];
             
             self.bgColor = self.isBuy ? kThemeColor: kPlaceholderColor;
             
@@ -77,7 +77,9 @@
            
         case 1:
         {
-            title = self.isBuy ? @"等待释放货币":@"释放货币";
+            title = self.isBuy ? [LangSwitcher switchLang:@"等待释放货币" key:nil] :
+                              [LangSwitcher switchLang:@"释放货币" key:nil]
+            ;
             
             self.bgColor = self.isBuy ? kPlaceholderColor: kThemeColor;
             
@@ -89,7 +91,7 @@
         {
             if (self.isBuy && [self.bsComment valid]){
                 
-                title = @"买家已评价";
+                title = [LangSwitcher switchLang:@"买家已评价" key:nil];
                 
                 self.enable = NO;
                 
@@ -100,7 +102,7 @@
             
             if (!self.isBuy && [self.sbComment valid]){
                 
-                title = @"卖家已评价";
+                title = [LangSwitcher switchLang:@"卖家已评价" key:nil] ;
                 
                 self.enable = NO;
                 
@@ -111,7 +113,7 @@
             
             if ((![self.bsComment valid] && self.isBuy) || (![self.sbComment valid] && !self.isBuy)) {
                 
-                title = @"交易评价";
+                title = [LangSwitcher switchLang:@"交易评价" key:nil];
 
                 self.bgColor = kThemeColor;
 
@@ -124,7 +126,7 @@
             
         case 3:
         {
-            title = @"查看钱包";
+            title = [LangSwitcher switchLang: @"查看钱包" key:nil];
             
             self.bgColor = kThemeColor;
 
@@ -134,7 +136,7 @@
           
         case 4:
         {
-            title = @"已取消";
+            title = [LangSwitcher switchLang:@"已取消" key:nil];
             
             self.bgColor = kPlaceholderColor;
 
@@ -144,7 +146,7 @@
             
         case 5:
         {
-            title = @"仲裁中";
+            title = [LangSwitcher switchLang:@"仲裁中" key:nil];
             
             self.bgColor = kPlaceholderColor;
 
@@ -165,21 +167,21 @@
     
      if (self.isBuy && [self.bsComment valid]){
         
-        title = @"买家已评价, 等待卖家评价";
+        title = [LangSwitcher switchLang:@"买家已评价, 等待卖家评价" key:nil];
         
     } else if (!self.isBuy && [self.sbComment valid]){
         
-        title = @"卖家已评价, 等待买家评价";
+        title = [LangSwitcher switchLang:@"卖家已评价, 等待买家评价" key:nil];
         
     } else if ((![self.bsComment valid] && self.isBuy) || (![self.sbComment valid] && !self.isBuy)) {
         
-        title = @"已释放货币, 请对交易做出评价";
+        title = [LangSwitcher switchLang:@"已释放货币, 请对交易做出评价" key:nil];
     
     }
 
     NSDictionary *dict = @{
                            @"2": title,
-                           @"3": @"交易成功, 已评价交易",
+                           @"3": [LangSwitcher switchLang: @"交易成功, 已评价交易" key:nil],
                         
                            };
     

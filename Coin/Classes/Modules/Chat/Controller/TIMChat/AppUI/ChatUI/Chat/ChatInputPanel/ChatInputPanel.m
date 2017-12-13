@@ -7,6 +7,7 @@
 //
 
 #import "ChatInputPanel.h"
+#import <CDCommon/DeviceUtil.h>
 
 @implementation ChatInputPanel
 
@@ -64,12 +65,12 @@
     NSDictionary* userInfo = [notification userInfo];
     CGFloat duration = [userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
     
-    NSInteger contentHeight = [_toolBar contentHeight] + kBottomInsetHeight + [_panel contentHeight];
+    NSInteger contentHeight = [_toolBar contentHeight] + [_panel contentHeight];
     
     if (_contentHeight != contentHeight)
     {
         CGRect rect = self.frame;
-        rect.origin.y = kSuperViewHeight - contentHeight;
+        rect.origin.y = kMainScreenHeight - [DeviceUtil top64] - [DeviceUtil bottomInsetHeight] - contentHeight;
         rect.size.height = contentHeight;
         
         [UIView animateWithDuration:duration animations:^{
@@ -95,7 +96,7 @@
         if (contentHeight != _contentHeight)
         {
             CGRect rect = self.frame;
-            rect.origin.y = endFrame.origin.y - [_toolBar contentHeight] - kNavigationBarHeight;
+            rect.origin.y = endFrame.origin.y - [_toolBar contentHeight] - [DeviceUtil top64];
             rect.size.height = contentHeight;
             
             [UIView animateWithDuration:duration animations:^{
@@ -244,7 +245,7 @@
     CGRect rect = self.frame;
     rect.origin.y -= offer;
     rect.size.height += offer;
-
+    
     [UIView animateWithDuration:0.25 animations:^{
         self.frame = rect;
         self.contentHeight += offer;
@@ -310,3 +311,4 @@
 }
 
 @end
+

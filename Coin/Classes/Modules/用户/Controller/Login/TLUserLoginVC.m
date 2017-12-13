@@ -55,7 +55,7 @@
     
     [self setUpUI];
     //腾讯云登录成功
-    [self setUpNotification];
+//    [self setUpNotification];
     
 }
 
@@ -152,12 +152,12 @@
     
 }
 
-- (void)setUpNotification {
-
-    //登录成功之后，给予回调
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(login) name:kUserLoginNotification object:nil];
-
-}
+//- (void)setUpNotification {
+//
+//    //登录成功之后，给予回调
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(login) name:kUserLoginNotification object:nil];
+//
+//}
 
 #pragma mark - Events
 
@@ -169,20 +169,21 @@
 }
 
 //登录成功
-- (void)login {
-
-    //获取腾讯云IM签名、账号并登录
-    [[ChatManager sharedManager] loginIM];
+//- (void)login {
+//
+//
+//    // apple delegate
+//
 //    [[NSNotificationCenter defaultCenter] postNotificationName:kUserLoginNotification object:nil];
-
-    [self dismissViewControllerAnimated:YES completion:nil];
-
-    if (self.loginSuccess) {
-
-        self.loginSuccess();
-    }
-
-}
+//
+//    [self dismissViewControllerAnimated:YES completion:nil];
+//
+//    if (self.loginSuccess) {
+//
+//        self.loginSuccess();
+//    }
+//
+//}
 
 - (void)findPwd {
     
@@ -262,6 +263,13 @@
         [[TLUser user] setUserInfoWithDict:userInfo];
         //获取人民币和积分账户
 //        [self requestAccountNumber];
+        
+        [self dismissViewControllerAnimated:YES completion:nil];
+        
+        if (self.loginSuccess) {
+            
+            self.loginSuccess();
+        }
         
         [[NSNotificationCenter defaultCenter] postNotificationName:kUserLoginNotification object:nil];
         

@@ -52,7 +52,7 @@
     // 由于 是创建的 IMAGroup 所以，type____自然为___group
     IMAGroup *group = [[IMAGroup alloc] initWith:groupId];
     
-    // 狗仔单例
+    // 单例
     ChatUserProfile *userInfo = [ChatUserProfile sharedUser];
     userInfo.minePhoto = [TLUser user].photo;
     userInfo.mineNickName = [TLUser user].nickname;

@@ -135,7 +135,7 @@
         
     } else if (volume > 10000) {
         
-        volumeStr = [NSString stringWithFormat:@"%@万", [quotation.one_day_volume_cny divNumber:@"10000" leaveNum:2]];
+        volumeStr = [NSString stringWithFormat:@"%@%@", [quotation.one_day_volume_cny divNumber:@"10000" leaveNum:2],[LangSwitcher switchLang:@"万" key:nil]];
     }
     
     self.tradeVolumeLbl.text = [NSString stringWithFormat:@"量%@", volumeStr];

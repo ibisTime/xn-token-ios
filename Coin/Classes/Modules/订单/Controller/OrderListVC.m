@@ -91,10 +91,11 @@
     helper.parameters[@"tradeCoin"] = @"ETH";
     helper.parameters[@"statusList"] = self.statusList;
     helper.parameters[@"tradeCurrency"] = @"CNY";
+    //切换用户时外部会去更新
     helper.parameters[@"belongUser"] = [TLUser user].userId;
     helper.tableView = self.orderTableView;
     [helper modelClass:[OrderModel class]];
-    
+    self.pageDataHelper = helper;
     //-----//
     __weak typeof(self) weakSelf = self;
     [self.orderTableView addRefreshAction:^{
@@ -161,6 +162,7 @@
     userInfo.mineNickName = [TLUser user].nickname;
     userInfo.friendPhoto = [friendPhoto convertImageUrl];
     userInfo.friendNickName = friendNickName;
+    userInfo.friendUserId = [order.sellUser equalsString:[TLUser user].userId] ? order.buyUser : order.sellUser;
   
     if ([order.status isEqualToString:@"-1"]) {
         // 传入user

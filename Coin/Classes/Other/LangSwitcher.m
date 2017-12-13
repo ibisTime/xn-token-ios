@@ -67,8 +67,8 @@
     if (!lang) {
         return dict[SIMPLE];
     }
-    
-    return dict[lang] ? : dict[SIMPLE];
+    //
+    return [self switchLang:dict[lang]? : dict[SIMPLE] key:nil];
     
 }
 

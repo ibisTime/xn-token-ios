@@ -76,7 +76,7 @@
     UILabel *promptLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kThemeColor font:12.0];
     
     promptLbl.text = @"ETH钱包地址禁止充值除ETH之外的其他资产, 任何ETH资产充值将不可找回";
-    
+    promptLbl.text = [LangSwitcher switchLang: promptLbl.text key:nil];
     promptLbl.frame = CGRectMake(0, 0, kScreenWidth, 50);
     
     promptLbl.numberOfLines = 0;
@@ -121,8 +121,7 @@
         
     }];
     
-    NSString *text = @"我的货币收款地址（点击复制）";
-    
+    NSString *text = [LangSwitcher switchLang:@"我的货币收款地址（点击复制) " key:nil];
     CGFloat btnW = [NSString getWidthWithString:text font:12.0];
     //复制
     UIButton *copyBtn = [UIButton buttonWithTitle:text titleColor:kTextColor backgroundColor:kClearColor titleFont:12.0];
@@ -140,7 +139,10 @@
         
     }];
     
-    [copyBtn.titleLabel labelWithString:text title:@"（点击复制）" font:Font(12.0) color:kThemeColor];
+    [copyBtn.titleLabel labelWithString:text
+                                  title:[LangSwitcher switchLang:@"（点击复制）" key:nil]
+                                   font:Font(12.0)
+                                  color:kThemeColor];
 
 }
 
@@ -202,7 +204,11 @@
 
 - (void)addRecodeItem {
     
-    [UIBarButtonItem addRightItemWithTitle:@"记录" titleColor:kTextColor frame:CGRectMake(0, 0, 40, 44) vc:self action:@selector(lookBillRecord)];
+    [UIBarButtonItem addRightItemWithTitle:[LangSwitcher switchLang:@"记录" key:nil]
+                                titleColor:kTextColor
+                                     frame:CGRectMake(0, 0, 40, 44)
+                                        vc:self
+                                    action:@selector(lookBillRecord)];
 }
 
 #pragma mark - Events

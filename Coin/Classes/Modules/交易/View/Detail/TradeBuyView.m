@@ -205,7 +205,12 @@
 //    
 //    self.trustBtn.hidden = YES;
     
-    NSArray *textArr = @[@"交易次数", @"信任次数", @"好评率", @"历史交易"];
+    NSArray *textArr = @[ [LangSwitcher switchLang:@"交易次数" key:nil],
+                         [LangSwitcher switchLang:@"信任次数" key:nil],
+                         [LangSwitcher switchLang:@"好评率" key:nil],
+                          [LangSwitcher switchLang:@"历史交易" key:nil],
+
+                        ];
     
     CGFloat width = kScreenWidth/(textArr.count*1.0);
     

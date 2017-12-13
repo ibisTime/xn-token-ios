@@ -195,7 +195,9 @@
     
     self.amountLbl.text = [leftAmount convertToSimpleRealCoin];
     
-    [self.freezingAmountBtn setTitle:[NSString stringWithFormat:@"冻结 %@", [_currency.frozenAmountString convertToSimpleRealCoin]] forState:UIControlStateNormal];
+    NSString *title = [NSString stringWithFormat:@"冻结 %@", [_currency.frozenAmountString convertToSimpleRealCoin]];
+    [self.freezingAmountBtn setTitle:[LangSwitcher switchLang:title key:nil]
+                            forState:UIControlStateNormal];
     
     
 }

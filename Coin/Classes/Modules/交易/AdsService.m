@@ -27,10 +27,10 @@
         //
         if ([advertiseModel isMineDaiJiaoYiAds]) {
             
-            PublishBuyVC *buyVC = [[PublishBuyVC alloc] init];
-            buyVC.adsCode = advertiseModel.code;
-            buyVC.publishType = PublishTypePublishRedit;
-            [currentVC.navigationController pushViewController:buyVC animated:YES];
+            PublishSellVC *sellVC = [[PublishSellVC alloc] init];
+            sellVC.adsCode = advertiseModel.code;
+            sellVC.publishType = PublishTypePublishRedit;
+            [currentVC.navigationController pushViewController:sellVC animated:YES];
             return;
             
         }
@@ -44,11 +44,13 @@
         
         if ([advertiseModel isMineDaiJiaoYiAds]) {
             
-            PublishSellVC *sellVC = [[PublishSellVC alloc] init];
-            sellVC.adsCode = advertiseModel.code;
-            sellVC.publishType = PublishTypePublishRedit;
-            [currentVC.navigationController pushViewController:sellVC animated:YES];
+            PublishBuyVC *buyVC = [[PublishBuyVC alloc] init];
+            buyVC.adsCode = advertiseModel.code;
+            buyVC.publishType = PublishTypePublishRedit;
+            [currentVC.navigationController pushViewController:buyVC animated:YES];
             return;
+            
+       
             
         }
         

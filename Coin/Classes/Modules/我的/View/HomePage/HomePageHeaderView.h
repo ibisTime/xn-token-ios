@@ -34,7 +34,7 @@ typedef void(^HomePageBlock)(HomePageType type);
 @property (nonatomic, strong) UIButton *blackListBtn;
 //广告
 //@property (nonatomic, strong) AdvertiseModel *advertise;
-@property (nonatomic, strong) TLUser *currentUser;
+@property (nonatomic, strong) UserInfo *currentUser;
 
 //用户关系
 @property (nonatomic, strong) UserRelationModel *relation;

@@ -190,7 +190,7 @@ NSString *const kGoogleAuthClose = @"0";
     self.level = nil;
     self.rmbAccountNumber = nil;
     self.jfAccountNumber = nil;
-    self.unReadMsgCount = 0;
+//    self.unReadMsgCount = 0;
     self.realName = nil;
     self.idNo = nil;
     
@@ -235,7 +235,7 @@ NSString *const kGoogleAuthClose = @"0";
         [self setUserInfoWithDict:responseObject[@"data"]];
         [self saveUserInfo:responseObject[@"data"]];
         
-        [[NSNotificationCenter defaultCenter] postNotificationName:kUserLoginNotification object:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kUserInfoChange object:nil];
 
     } failure:^(NSError *error) {
         
@@ -274,12 +274,12 @@ NSString *const kGoogleAuthClose = @"0";
     
 }
 
-- (void)setUnReadMsgCount:(NSInteger)unReadMsgCount {
-    
-    _unReadMsgCount = unReadMsgCount;
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"MessageDidRefresh" object:[NSString stringWithFormat:@"%ld", unReadMsgCount]];
-}
+//- (void)setUnReadMsgCount:(NSInteger)unReadMsgCount {
+//    
+//    _unReadMsgCount = unReadMsgCount;
+//    
+//    [[NSNotificationCenter defaultCenter] postNotificationName:@"MessageDidRefresh" object:[NSString stringWithFormat:@"%ld", unReadMsgCount]];
+//}
 
 - (void)setGoogleAuthFlag:(NSString *)googleAuthFlag {
     

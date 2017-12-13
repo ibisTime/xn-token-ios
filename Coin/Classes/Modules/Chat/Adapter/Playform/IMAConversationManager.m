@@ -84,14 +84,11 @@
 #else
             continue;
 #endif
-        }
-        else
-        {
+        } else {
             conv = [[IMAConversation alloc] initWith:conversation];
         }
         
-        if (conv)
-        {
+        if (conv) {
             [_conversationList addObject:conv];
         }
         
@@ -588,7 +585,7 @@
                 IMAConversation *temp = [[IMAConversation alloc] initWith:conv];
                 temp.lastMessage = imamsg;
                 [_conversationList insertObject:temp atIndex:[self insertPosition]];
-                self.unReadMessageCount++;
+                self.unReadMessageCount ++;
                 [self updateOnNewConversation:temp];
                 
             }

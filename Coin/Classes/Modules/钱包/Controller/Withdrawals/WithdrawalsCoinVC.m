@@ -64,7 +64,7 @@ typedef NS_ENUM(NSInteger, AddressType) {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.title = @"提币";
+    self.title = [LangSwitcher switchLang:@"提币" key:nil];
     //记录
     [self addRecordItem];
     //
@@ -83,7 +83,11 @@ typedef NS_ENUM(NSInteger, AddressType) {
 #pragma mark - Init
 - (void)addRecordItem {
     
-    [UIBarButtonItem addRightItemWithTitle:@"记录" titleColor:kTextColor frame:CGRectMake(0, 0, 40, 30) vc:self action:@selector(clickRecord:)];
+    [UIBarButtonItem addRightItemWithTitle:[LangSwitcher switchLang:@"记录" key:nil]
+                                titleColor:kTextColor
+                                     frame:CGRectMake(0, 0, 40, 30)
+                                        vc:self
+                                    action:@selector(clickRecord:)];
 
 }
 
@@ -91,7 +95,10 @@ typedef NS_ENUM(NSInteger, AddressType) {
     
     CGFloat heightMargin = 50;
     //余额
-    self.balanceTF = [[TLTextField alloc] initWithFrame:CGRectMake(0, 10, kScreenWidth, heightMargin) leftTitle:@"可用余额" titleWidth:90 placeholder:@""];
+    self.balanceTF = [[TLTextField alloc] initWithFrame:CGRectMake(0, 10, kScreenWidth, heightMargin)
+                                              leftTitle:[LangSwitcher switchLang:@"可用余额" key:nil]
+                                             titleWidth:90
+                                            placeholder:@""];
     
     self.balanceTF.textColor = kThemeColor;
     
@@ -125,7 +132,7 @@ typedef NS_ENUM(NSInteger, AddressType) {
     //
     UILabel *receiveTextLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:15.0];
     
-    receiveTextLbl.text = @"接收地址";
+    receiveTextLbl.text = [LangSwitcher switchLang:@"接收地址" key:nil];
     
     [receiveView addSubview:receiveTextLbl];
     [receiveTextLbl mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -152,7 +159,7 @@ typedef NS_ENUM(NSInteger, AddressType) {
     
     UILabel *receiveAddressLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kPlaceholderColor font:14.0];
     
-    receiveAddressLbl.text = @"请选择付币地址或扫码录入";
+    receiveAddressLbl.text = [LangSwitcher switchLang:@"请选择付币地址或扫码录入" key:nil];
     
     receiveAddressLbl.numberOfLines = 0;
     
@@ -176,9 +183,9 @@ typedef NS_ENUM(NSInteger, AddressType) {
     
     //谷歌验证码
     self.googleAuthTF = [[TLTextField alloc] initWithFrame:CGRectMake(0, receiveView.yy, kScreenWidth, heightMargin)
-                                                 leftTitle:@"谷歌验证码"
+                                                 leftTitle:[LangSwitcher switchLang:@"谷歌验证码" key:nil]
                                                 titleWidth:100
-                                               placeholder:@"请输入谷歌验证码"];
+                                               placeholder:[LangSwitcher switchLang:@"请输入谷歌验证码" key:nil] ];
     
     self.googleAuthTF.keyboardType = UIKeyboardTypeNumberPad;
 
@@ -187,7 +194,11 @@ typedef NS_ENUM(NSInteger, AddressType) {
     //复制
     UIView *authView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 95, self.googleAuthTF.height)];
     
-    UIButton *pasteBtn = [UIButton buttonWithTitle:@"粘贴" titleColor:kWhiteColor backgroundColor:kThemeColor titleFont:13.0 cornerRadius:5];
+    UIButton *pasteBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"粘贴" key:nil]
+                                        titleColor:kWhiteColor
+                                   backgroundColor:kThemeColor
+                                         titleFont:13.0
+                                      cornerRadius:5];
     
     pasteBtn.frame = CGRectMake(0, 0, 85, self.googleAuthTF.height - 15);
     
@@ -213,7 +224,11 @@ typedef NS_ENUM(NSInteger, AddressType) {
     }];
     
     //转账数量
-    self.tranAmountTF = [[TLTextField alloc] initWithFrame:CGRectMake(0, receiveView.yy, kScreenWidth, heightMargin) leftTitle:@"转账数量" titleWidth:90 placeholder:@"请输入付币数量"];
+    self.tranAmountTF = [[TLTextField alloc] initWithFrame:CGRectMake(0, receiveView.yy, kScreenWidth, heightMargin)
+                                                 leftTitle:[LangSwitcher switchLang:@"转账数量" key:nil]
+                                                titleWidth:90
+                                               placeholder:[LangSwitcher switchLang:@"请输入付币数量" key:nil]
+                         ];
     
     [self.tranAmountTF setValue:kPlaceholderColor forKeyPath:@"_placeholderLabel.textColor"];
     
@@ -224,7 +239,10 @@ typedef NS_ENUM(NSInteger, AddressType) {
     [self.view addSubview:self.tranAmountTF];
     
     //矿工费
-    self.minerFeeTF = [[TLTextField alloc] initWithFrame:CGRectMake(0, self.tranAmountTF.yy + 10, kScreenWidth, heightMargin) leftTitle:@"手续费" titleWidth:90 placeholder:@""];
+    self.minerFeeTF = [[TLTextField alloc] initWithFrame:CGRectMake(0, self.tranAmountTF.yy + 10, kScreenWidth, heightMargin)
+                                               leftTitle:[LangSwitcher switchLang:@"手续费" key:nil]
+                                              titleWidth:90
+                                             placeholder:@""];
     
     self.minerFeeTF.enabled = NO;
     
@@ -259,7 +277,7 @@ typedef NS_ENUM(NSInteger, AddressType) {
     
     UILabel *minerPromptLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor3 font:11.0];
     
-    minerPromptLbl.text = @"手续费将在提币金额中扣除";
+    minerPromptLbl.text = [LangSwitcher switchLang:@"手续费将在提币金额中扣除" key:nil];
     
     minerPromptLbl.numberOfLines = 0;
     
@@ -381,7 +399,11 @@ typedef NS_ENUM(NSInteger, AddressType) {
 //    }];
     
     //确认付币
-    UIButton *confirmPayBtn = [UIButton buttonWithTitle:@"确认付币" titleColor:kWhiteColor backgroundColor:kThemeColor titleFont:16.0 cornerRadius:5];
+    UIButton *confirmPayBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"确认付币" key:nil]
+                                             titleColor:kWhiteColor
+                                        backgroundColor:kThemeColor
+                                              titleFont:16.0
+                                           cornerRadius:5];
 
     [confirmPayBtn addTarget:self action:@selector(clickConfirm:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:confirmPayBtn];
@@ -403,11 +425,15 @@ typedef NS_ENUM(NSInteger, AddressType) {
         
         CoinWeakSelf;
         
-        NSArray *textArr = @[@"选择地址", @"扫描二维码", @"粘贴地址"];
+        NSArray *textArr = @[
+                              [LangSwitcher switchLang:@"选择地址" key:nil],
+                              [LangSwitcher switchLang:@"扫描二维码" key:nil],
+                              [LangSwitcher switchLang:@"粘贴地址" key:nil]
+                              ];
         
         _coinAddressPicker = [[FilterView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
         
-        _coinAddressPicker.title = @"付币地址";
+        _coinAddressPicker.title = [LangSwitcher switchLang:@"付币地址" key:nil];
         
         _coinAddressPicker.selectBlock = ^(NSInteger index) {
             
@@ -439,7 +465,7 @@ typedef NS_ENUM(NSInteger, AddressType) {
     
     if ([self.receiveAddressLbl.text isEqualToString:@"请选择付币地址或扫码录入"]) {
         
-        [TLAlert alertWithInfo:@"请选择接收地址"];
+        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请选择接收地址" key:nil] ];
         return ;
     }
     
@@ -457,8 +483,9 @@ typedef NS_ENUM(NSInteger, AddressType) {
             
             if (![self.googleAuthTF.text valid]) {
                 
-                [TLAlert alertWithInfo:@"请输入谷歌验证码"];
-                return ;
+                [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入谷歌验证码" key:nil]];
+                return;
+                
             }
             
             //判断谷歌验证码是否为纯数字
@@ -486,7 +513,12 @@ typedef NS_ENUM(NSInteger, AddressType) {
 
     }
     
-    [TLAlert alertWithTitle:@"请输入资金密码" msg:@"" confirmMsg:@"确定" cancleMsg:@"取消" placeHolder:@"请输入资金密码" maker:self cancle:^(UIAlertAction *action) {
+    [TLAlert alertWithTitle:[LangSwitcher switchLang:@"请输入资金密码" key:nil]
+                        msg:@""
+                 confirmMsg:[LangSwitcher switchLang:@"确定" key:nil]
+                  cancleMsg:[LangSwitcher switchLang:@"取消" key:nil]
+                placeHolder:[LangSwitcher switchLang:@"请输入资金密码" key:nil]
+                      maker:self cancle:^(UIAlertAction *action) {
         
     } confirm:^(UIAlertAction *action, UITextField *textField) {
         
@@ -678,7 +710,7 @@ typedef NS_ENUM(NSInteger, AddressType) {
     
     [http postWithSuccess:^(id responseObject) {
         
-        [TLAlert alertWithSucces:@"提币申请提交成功"];
+        [TLAlert alertWithSucces:[LangSwitcher switchLang:@"提币申请提交成功" key:nil]];
         
         [[NSNotificationCenter defaultCenter] postNotificationName:kWithDrawCoinSuccess object:nil];
         

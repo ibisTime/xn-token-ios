@@ -7,7 +7,7 @@
 //
 
 #import "ChatFunctionPanel.h"
-
+#import "LangSwitcher.h"
 @implementation ChatFunctionPanel
 
 - (instancetype)init
@@ -26,7 +26,7 @@
     _image.titleLabel.textAlignment = NSTextAlignmentCenter;
     _image.titleLabel.font = kAppMiddleTextFont;
     [_image setTitleColor:kGrayColor forState:UIControlStateNormal];
-    [_image setTitle:@"图片" forState:UIControlStateNormal];
+    [_image setTitle:[LangSwitcher switchLang:@"图片" key:nil] forState:UIControlStateNormal];
     [_image setImage:[UIImage imageNamed:@"input_image"] forState:UIControlStateNormal];
     [_image addTarget:self action:@selector(onClickImage:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_image];
@@ -37,7 +37,7 @@
     _photo.titleLabel.textAlignment = NSTextAlignmentCenter;
     _photo.titleLabel.font = kAppMiddleTextFont;
     [_photo setTitleColor:kGrayColor forState:UIControlStateNormal];
-    [_photo setTitle:@"拍摄" forState:UIControlStateNormal];
+    [_photo setTitle:[LangSwitcher switchLang:@"拍摄" key:nil] forState:UIControlStateNormal];
     
     [_photo setImage:[UIImage imageNamed:@"input_photo"] forState:UIControlStateNormal];
     [_photo addTarget:self action:@selector(onClickPhoto:) forControlEvents:UIControlEventTouchUpInside];

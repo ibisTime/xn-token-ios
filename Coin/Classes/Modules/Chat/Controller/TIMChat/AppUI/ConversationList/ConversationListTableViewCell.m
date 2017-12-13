@@ -170,7 +170,7 @@
     //消息栏消息数
     NSInteger unReadNum = [[IMAPlatform sharedInstance].conversationMgr unReadMessageCount];
 
-    [TLUser user].unReadMsgCount = unReadNum;
+//    [TLUser user].unReadMsgCount = unReadNum;
 }
 
 - (void)layoutSubviews

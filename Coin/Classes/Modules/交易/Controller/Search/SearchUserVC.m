@@ -33,7 +33,10 @@
 - (void)initSubciews {
     
     //昵称
-    self.nickNameTF = [[TLTextField alloc] initWithFrame:CGRectMake(5, 0, kScreenWidth - 5, 55) leftTitle:@"用户昵称" titleWidth:100 placeholder:@"请输入用户昵称"];
+    self.nickNameTF = [[TLTextField alloc] initWithFrame:CGRectMake(5, 0, kScreenWidth - 5, 55)
+                                               leftTitle:[LangSwitcher switchLang:@"用户昵称" key:nil]
+                                              titleWidth:100
+                                             placeholder:[LangSwitcher switchLang:@"请输入用户昵称" key:nil]];
     
     [self.view addSubview:self.nickNameTF];
 
@@ -53,7 +56,8 @@
     }];
     
     //搜昵称
-    UIButton *searchBtn = [UIButton buttonWithTitle:@"搜" titleColor:kWhiteColor backgroundColor:kThemeColor titleFont:16.0 cornerRadius:5];
+    UIButton *searchBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"搜用户" key:nil]
+                                         titleColor:kWhiteColor backgroundColor:kThemeColor titleFont:16.0 cornerRadius:5];
     
     [searchBtn addTarget:self action:@selector(searchUser) forControlEvents:UIControlEventTouchUpInside];
     
@@ -73,7 +77,7 @@
     
     if (![self.nickNameTF.text valid]) {
         
-        [TLAlert alertWithInfo:@"请输入用户昵称"];
+        [TLAlert alertWithInfo: [LangSwitcher switchLang:@"请输入用户昵称" key:nil]];
         
         return ;
     }

@@ -67,7 +67,8 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLoginOut) name:kUserLoginOutNotification object:nil];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLogin) name:kUserLoginOutNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLogin) name:kUserLoginNotification object:nil];
 
 }
 
@@ -75,43 +76,79 @@
 // 该方法只处理顶部红点逻辑
 - (void)handleGroupMsg:(NSString *)groupId msg:(TIMMessage *) msg {
     
-    //
-    __block BOOL hasLook = NO;
-    if (self.ingOrderListVC.orderGroups) {
+    //1. 获取订单详情
+    TLNetworking *http = [TLNetworking new];
+    http.code = @"625251";
+    http.parameters[@"code"] = groupId;
+    [http postWithSuccess:^(id responseObject) {
         
-        [self.ingOrderListVC.orderGroups enumerateObjectsUsingBlock:^(OrderModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+     OrderModel *orderModel =  [OrderModel tl_objectWithDictionary:responseObject[@"data"]];
+        
+        __block BOOL hasLook = NO;
+        [OrderModel.ingStatusList enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             
-            if ([obj.code isEqualToString:groupId]) {
+            if ([orderModel.status equalsString:obj]) {
                 
-                *stop = YES;
-                // 说明消息来自正在进行的订单
                 [self.labelUnil showBadgeOnItemIndex:0];
                 hasLook = YES;
+//                [self orderRefresh];
             }
-            
         }];
         
-    }
+        if (!hasLook) {
+            [self.labelUnil showBadgeOnItemIndex:1];
+        }
+       
+        
+    } failure:^(NSError *error) {
+        
+    }];
 
-    if (!hasLook) {
-        // 未找到，说明是左边的
-        [self.labelUnil showBadgeOnItemIndex:1];
-
-    }
+    
+//    __block BOOL hasLook = NO;
+//    if (self.ingOrderListVC.orderGroups) {
+//
+//        [self.ingOrderListVC.orderGroups enumerateObjectsUsingBlock:^(OrderModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+//
+//            if ([obj.code isEqualToString:groupId]) {
+//
+//                *stop = YES;
+//                // 说明消息来自正在进行的订单
+//                [self.labelUnil showBadgeOnItemIndex:0];
+//                hasLook = YES;
+//            }
+//
+//        }];
+//
+//    }
+//
+//    if (!hasLook && self.ingOrderListVC.orderGroups && self.ingOrderListVC.orderGroups.count) {
+//        // 未找到，说明是左边的
+//        [self.labelUnil showBadgeOnItemIndex:1];
+//
+//    }
     
 }
 
-
+//
 - (void)userLogin {
-    
+    //
+    [IMAPlatform sharedInstance].conversationMgr.msgDelegate = self;
+    self.ingOrderListVC.pageDataHelper.parameters[@"belongUser"] = [TLUser user].userId;
+    self.endOrderListVC.pageDataHelper.parameters[@"belongUser"] = [TLUser user].userId;
+    [self addUnReadMsgKVO];
     [self orderRefresh];
+    
 }
 
 // 用户登出，把订单数据清除掉
 - (void)userLoginOut {
     
+    
     self.ingOrderListVC.orderGroups = [[NSMutableArray alloc] init];
     self.endOrderListVC.orderGroups = [[NSMutableArray alloc] init];
+    
+    //
     
     //
     [self orderReloadData];
@@ -150,7 +187,7 @@
                         options:NSKeyValueObservingOptionNew
                           block:^(id observer, id object, NSDictionary *change) {
                               
-                              [weakSelf orderReloadData];
+                              [weakSelf orderRefresh];
                               if ([IMAPlatform sharedInstance].conversationMgr.unReadMessageCount <= 0) {
                                   
                                   //让顶部的取置0

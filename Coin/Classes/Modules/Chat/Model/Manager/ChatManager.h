@@ -17,24 +17,28 @@
 
 
 
-/**
- groupId 或者 userId
- @return IMAUser 或者 IMAGroup
- */
-- (IMAUser *)getConversitionUserById:(NSString *)idStr;
+///**
+// groupId 或者 userId
+// @return IMAUser 或者 IMAGroup
+// */
+//- (IMAUser *)getConversitionUserById:(NSString *)idStr;
+//
+///**
+// groupId
+// @return  或者 IMAGroup
+// */
+//- (IMAGroup *)getGroupByGroupId:(NSString *)groupId;
 
 /**
- groupId
- @return  或者 IMAGroup
- */
-- (IMAGroup *)getGroupByGroupId:(NSString *)groupId;
-
-/**
-   做一些初始化工作
+   应用启动一次，初始化一次即可
  */
 - (void)initChat;
 
 
+/**
+ 登录IM, 如果已经设置了自动登录，把参数取出进行登录
+ */
 - (void)loginIM;
+
 
 @end

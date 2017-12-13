@@ -66,7 +66,7 @@
     http.parameters[@"userId"] = self.userId;
     [http postWithSuccess:^(id responseObject) {
         
-        TLUser *currentUser = [TLUser tl_objectWithDictionary:responseObject[@"data"]];
+        UserInfo *currentUser = [UserInfo tl_objectWithDictionary:responseObject[@"data"]];
         self.headerView.currentUser = currentUser;
         
     } failure:^(NSError *error) {

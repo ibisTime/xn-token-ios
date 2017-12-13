@@ -8,6 +8,7 @@
 
 #import "TLTimeButton.h"
 #import "AppColorMacro.h"
+#import "LangSwitcher.h"
 
 @implementation TLTimeButton
 {
@@ -24,7 +25,7 @@
         
         _time = total;
         _totalTime = total;
-        [self setTitle:@"获取验证码" forState:UIControlStateNormal];
+        [self setTitle:[LangSwitcher switchLang:@"获取验证码" key:nil] forState:UIControlStateNormal];
         
         [self setTitleColor:kAppCustomMainColor forState:UIControlStateNormal];
 

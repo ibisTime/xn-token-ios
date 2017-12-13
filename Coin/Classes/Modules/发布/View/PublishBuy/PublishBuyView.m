@@ -218,7 +218,11 @@
                      ];
 //    NSArray *textArr = @[@"价        格", @"溢        价", @"最  高  价", @"最  小  量", @"最  大  量", @"购买总量", @"付款方式", @"付款期限"];
     
-    NSArray *rightArr = @[@"CNY", @"%", @"CNY", @"CNY", @"CNY", @"ETH", @"", @"分钟"];
+      NSArray *rightArr = @[
+                            @"CNY", @"%", @"CNY", @"CNY", @"CNY", @"ETH", @"",
+                            [LangSwitcher switchLang:@"分钟" key:nil]
+                            ];
+//    NSArray *rightArr = @[@"CNY", @"%", @"CNY", @"CNY", @"CNY", @"ETH", @"", @"分钟"];
     
     
     
@@ -246,7 +250,7 @@
         //rightText
         UILabel *rightTextLbl = [UILabel labelWithBackgroundColor:kWhiteColor textColor:kTextColor font:15.0];
         
-        rightTextLbl.text = rightArr[idx];
+        rightTextLbl.text = [LangSwitcher switchLang:rightArr[idx] key:nil];
         
         rightTextLbl.textAlignment = NSTextAlignmentRight;
         
@@ -505,7 +509,11 @@
         
     }];
     
-    [highLbl labelWithString:@"高级设置(选填)" title:@"(选填)" font:Font(15.0) color:kTextColor2];
+    
+    [highLbl labelWithString:[LangSwitcher switchLang:@"高级设置(选填)" key:nil]
+                       title:[LangSwitcher switchLang:@"(选填)" key:nil]
+                        font:Font(15.0)
+                       color:kTextColor2];
     
     //右边小箭头
     UIImageView *rightArrowIV = [[UIImageView alloc] initWithImage:kImage(@"更多-灰色")];
@@ -700,8 +708,8 @@
         
         UILabel *textLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:15.0];
         
-        textLbl.text = weekArr[idx];
-        
+        textLbl.text = [LangSwitcher switchLang:weekArr[idx] key:nil];
+
         textLbl.textAlignment = NSTextAlignmentCenter;
         
         [self.timeView addSubview:textLbl];
@@ -789,7 +797,7 @@
     
     UILabel *textLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:15.0];
     
-    textLbl.text = @"仅粉丝";
+    textLbl.text = [LangSwitcher switchLang:@"仅粉丝" key:nil];
     
     [self.onlyTrustView addSubview:textLbl];
     [textLbl mas_makeConstraints:^(MASConstraintMaker *make) {

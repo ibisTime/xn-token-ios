@@ -87,7 +87,7 @@
     //消息栏消息数
     NSInteger unReadCount = [[IMAPlatform sharedInstance].conversationMgr unReadMessageCount];
 
-    [TLUser user].unReadMsgCount = unReadCount;
+//    [TLUser user].unReadMsgCount = unReadCount;
     
     //清空通知栏消息
     [[UIApplication sharedApplication] setApplicationIconBadgeNumber: 1];

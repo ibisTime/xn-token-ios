@@ -357,7 +357,11 @@
     
     CoinWeakSelf;
     
-    [TLAlert alertWithTitle:@"提示" msg:@"您确定要下架此广告?" confirmMsg:@"确认" cancleMsg:@"取消" cancle:^(UIAlertAction *action) {
+    [TLAlert alertWithTitle:[LangSwitcher switchLang:@"提示" key:nil]
+                        msg:[LangSwitcher switchLang:@"您确定要下架此广告?" key:nil]
+                 confirmMsg:[LangSwitcher switchLang:@"确认" key:nil]
+                  cancleMsg:[LangSwitcher switchLang:@"取消" key:nil]
+                     cancle:^(UIAlertAction *action) {
         
         
     } confirm:^(UIAlertAction *action) {

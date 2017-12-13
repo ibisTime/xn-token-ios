@@ -131,9 +131,7 @@
         };
         
         _hourPicker = [[HourPickerView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
-        
-        _hourPicker.title = @"自定义";
-        
+        _hourPicker.title = [LangSwitcher switchLang:@"自定义" key:nil];
         _hourPicker.selectBlock = ^(NSInteger firstIndex, NSInteger secondIndex) {
             
             UILabel *textLbl = [weakSelf.timeView viewWithTag:1710 + weakSelf.weekDay];
@@ -217,7 +215,7 @@
                      @"收款期限"
                      ];
     
-    NSArray *rightArr = @[@"CNY", @"%", @"CNY", @"CNY", @"CNY", @"ETH", @"", @"分钟"];
+    NSArray *rightArr = @[@"CNY", @"%", @"CNY", @"CNY", @"CNY", @"ETH", @"",  [LangSwitcher switchLang:@"分钟" key:nil]];
     
     NSArray *placeHolderArr = @[
                                 [LangSwitcher switchLang:@"" key:nil],
@@ -293,7 +291,7 @@
             
             [self.scrollView addSubview:arrowIV];
             arrowIV.frame = CGRectMake(kScreenWidth - promptBtn.width,
-                                       promptBtn.y - 20,
+                                       (rightArr.count - 2)*50 + 20 + self.aboultBalanceHeight,
                                        6, 10);
 //            [arrowIV mas_makeConstraints:^(MASConstraintMaker *make) {
 //
@@ -373,7 +371,7 @@
                 tempTfView = textField;
 
                 
-            }break;
+            } break;
                 
             case 4: {
                 
@@ -444,6 +442,8 @@
         // -- //
         tempTfView.y = tempTfView.y + self.aboultBalanceHeight;
         
+     
+        
         
         //分割线
         UIView *line = [[UIView alloc] init];
@@ -454,9 +454,21 @@
             make.left.equalTo(@15);
             make.right.equalTo(@(-15));
             make.height.equalTo(@0.5);
-            make.top.equalTo(@((idx+1)*50 - 0.5));
+            make.top.equalTo(@((idx+1)*50 - 0.5 + self.aboultBalanceHeight));
             
         }];
+        
+        if (idx == 5) {
+            
+            //
+            self.aboultBalanceHeight = 30;
+            self.balanceLbl = [[UILabel alloc] initWithFrame:CGRectMake(0, tempTfView.yy + 1, kScreenWidth, 25)];
+            [self.scrollView addSubview:self.balanceLbl];
+            self.balanceLbl.textColor = [UIColor redColor];
+            self.balanceLbl.backgroundColor = [UIColor whiteColor];
+            self.balanceLbl.font = [UIFont systemFontOfSize:13];
+            
+        }
         
     }];
 }
@@ -741,7 +753,7 @@
         
         UILabel *textLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:15.0];
         
-        textLbl.text = weekArr[idx];
+        textLbl.text = [LangSwitcher switchLang:weekArr[idx] key:nil];
         
         textLbl.textAlignment = NSTextAlignmentCenter;
         
@@ -830,7 +842,7 @@
     
     UILabel *textLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:15.0];
     
-    textLbl.text = @"仅粉丝";
+    textLbl.text = [LangSwitcher switchLang:@"仅粉丝" key:nil];
     
     [self.onlyTrustView addSubview:textLbl];
     [textLbl mas_makeConstraints:^(MASConstraintMaker *make) {

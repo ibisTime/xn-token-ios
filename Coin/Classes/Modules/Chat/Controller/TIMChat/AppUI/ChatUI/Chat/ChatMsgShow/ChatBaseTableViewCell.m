@@ -67,13 +67,17 @@
 - (void)addC2CCellViews
 {
     [super addC2CCellViews];
-    [_icon addTarget:self action:@selector(onClickUserIcon) forControlEvents:UIControlEventTouchUpInside];
+//    [_icon addTarget:self action:@selector(onClickUserIcon) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)onClickUserIcon
 {
+    
+    
     IMAUser *sender = [[IMAUser alloc] initWith:[_msg.msg sender]];
     [[IMAPlatform sharedInstance].contactMgr isContainUser:sender];
+    
+ 
     
     if (sender)
     {

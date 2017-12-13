@@ -17,6 +17,8 @@
 #import "PublishService.h"
 #import "UIBarButtonItem+convience.h"
 #import "NSString+Check.h"
+#import "CurrencyModel.h"
+#import "NSString+Extension.h"
 
 @interface PublishSellVC ()
 
@@ -55,6 +57,8 @@
         [self queryCoinQuotation];
         //获取提示
         [self requestTradeRemind];
+        //
+        [self getLeftAmount];
         
     } else {
         
@@ -76,7 +80,9 @@
             [self queryCoinQuotation];
             //获取提示
             [self requestTradeRemind];
+            [self getLeftAmount];
             
+            //
             self.advertise = [AdvertiseModel tl_objectWithDictionary:responseObject[@"data"]];
             self.publishView.advertise = self.advertise;
             
@@ -87,6 +93,41 @@
         
     }
 
+}
+
+- (void)getLeftAmount {
+    
+    CoinWeakSelf;
+    
+    TLPageDataHelper *helper = [[TLPageDataHelper alloc] init];
+    
+    helper.code = @"802503";
+    helper.parameters[@"userId"] = [TLUser user].userId;
+    helper.isList = YES;
+    helper.isCurrency = YES;
+    [helper modelClass:[CurrencyModel class]];
+    
+    [helper refresh:^(NSMutableArray <CurrencyModel *>*objs, BOOL stillHave) {
+        
+        [objs enumerateObjectsUsingBlock:^(CurrencyModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            
+            if ([obj.currency isEqualToString:@"ETH"]) {
+                
+               
+//                NSString *str = [obj.amountString convertToSimpleRealCoin];
+                NSString *str = [obj.amountString subNumber:obj.frozenAmountString];
+                str = [str convertToSimpleRealCoin];
+                weakSelf.publishView.balanceLbl.text = [NSString stringWithFormat:@"    账户可用余额：%@",str];
+
+            }
+            
+        }];
+        
+    } failure:^(NSError *error) {
+        
+        
+    }];
+    
 }
 
 #pragma mark - Init
@@ -121,7 +162,11 @@
     
     CoinWeakSelf;
     
-    [TLAlert alertWithTitle:@"提示" msg:@"您确定要下架此广告?" confirmMsg:@"确认" cancleMsg:@"取消" cancle:^(UIAlertAction *action) {
+    [TLAlert alertWithTitle:[LangSwitcher switchLang:@"提示" key:nil]
+                        msg:[LangSwitcher switchLang:@"您确定要下架此广告?" key:nil]
+                 confirmMsg:[LangSwitcher switchLang:@"确认" key:nil]
+                  cancleMsg:[LangSwitcher switchLang:@"取消" key:nil]
+                     cancle:^(UIAlertAction *action) {
         
         
     } confirm:^(UIAlertAction *action) {

@@ -227,7 +227,7 @@
     NSString *tradeText = nil;
     
     if ([advertise isMineDaiJiaoYiAds]) {
-  
+       //只有待交易的广告才显示，编辑
         tradeText = [LangSwitcher switchLang:@"编辑" key:nil];
         
     } else {

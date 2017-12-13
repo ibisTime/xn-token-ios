@@ -41,6 +41,14 @@
     
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    //
+    [self.tableView beginRefreshing];
+    //
+}
+
 
 #pragma mark - cell点击——事件
 - (void)refreshTableView:(TLTableView*)refreshTableview didSelectRowAtIndexPath:(NSIndexPath*)indexPath {
@@ -117,7 +125,7 @@
     helper.start = 1;
     helper.limit = 20;
     helper.parameters[@"userId"] = [TLUser user].userId;
-    
+    helper.parameters[@"type"] = @"1";
     helper.tableView = self.tableView;
     
     [helper modelClass:[FansModel class]];

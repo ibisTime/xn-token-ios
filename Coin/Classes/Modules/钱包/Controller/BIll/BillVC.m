@@ -84,13 +84,21 @@
         
         CoinWeakSelf;
         
-        NSArray *textArr = @[@"全部", @"充币", @"提币",@"交易买入", @"交易卖出", @"交易手续费", @"取现手续费", @"邀请好友收入"];
+        NSArray *textArr = @[[LangSwitcher switchLang:@"全部" key:nil],
+                             [LangSwitcher switchLang:@"充币" key:nil],
+                             [LangSwitcher switchLang:@"提币" key:nil],
+                             [LangSwitcher switchLang:@"交易买入" key:nil],
+                             [LangSwitcher switchLang:@"交易卖出" key:nil],
+                             [LangSwitcher switchLang:@"交易手续费" key:nil],
+                             [LangSwitcher switchLang:@"取现手续费" key:nil],
+                             [LangSwitcher switchLang:@"邀请好友收入" key:nil],
+                             ];
 
         NSArray *typeArr = @[@"", @"charge", @"withdraw", @"buy", @"sell", @"tradefee", @"withdrawfee", @"invite"];
         
         _filterPicker = [[FilterView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
         
-        _filterPicker.title = @"请选择交易类型";
+        _filterPicker.title =  [LangSwitcher switchLang: @"请选择交易类型" key:nil];
         
         _filterPicker.selectBlock = ^(NSInteger index) {
             
@@ -124,7 +132,7 @@
     
     UILabel *textLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor2 font:14.0];
     
-    textLbl.text = @"暂无明细";
+    textLbl.text = [LangSwitcher switchLang:@"暂无明细" key:nil];
     
     textLbl.textAlignment = NSTextAlignmentCenter;
     

@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "ImageThumbPickerViewController.h"
-
+#import "LangSwitcher.h"
 
 @implementation ImageThumbPickerViewController
 
@@ -146,6 +146,7 @@
     }
     
     NSString *strSize = [[NSString alloc] initWithFormat:@"原图(%.2f%@)", length, imageUnit];
+    strSize = [LangSwitcher switchLang:strSize key:nil];
     return strSize;
 }
 
@@ -160,7 +161,7 @@
     sendBtn.layer.cornerRadius = 4;
     sendBtn.clipsToBounds = YES;
     
-    [sendBtn setTitle:@"发送" forState:UIControlStateNormal];
+    [sendBtn setTitle:[LangSwitcher switchLang:@"发送" key:nil] forState:UIControlStateNormal];
     [sendBtn addTarget:self action:@selector(onSendBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     
     return sendBtn;

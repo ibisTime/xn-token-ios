@@ -59,9 +59,13 @@
     CGFloat leftMargin = 15;
     
     //广告类型
-    self.advertiseTypePicker = [[TLPickerTextField alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 55) leftTitle:@"广告类型" titleWidth:90 placeholder:@"请选择广告类型"];
+    self.advertiseTypePicker = [[TLPickerTextField alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 55)
+                                                              leftTitle:[LangSwitcher switchLang:@"广告类型" key:nil]  titleWidth:90
+                                                            placeholder:[LangSwitcher switchLang:@"请选择广告类型" key:nil] ];
     
-    self.advertiseTypePicker.tagNames = @[@"买币", @"卖币"];
+    self.advertiseTypePicker.tagNames = @[[LangSwitcher switchLang:@"买币" key:nil],
+                                          [LangSwitcher switchLang: @"卖币" key:nil]
+                                         ];
     
     self.advertiseTypePicker.didSelectBlock = ^(NSInteger index) {
         
@@ -112,7 +116,7 @@
     //价格区间
     UILabel *textLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:14.0];
     
-    textLbl.text = @"价格区间";
+    textLbl.text = [LangSwitcher switchLang:@"价格区间" key:nil];
     [self.view addSubview:textLbl];
     [textLbl mas_updateConstraints:^(MASConstraintMaker *make) {
         
@@ -122,7 +126,10 @@
     }];
     
     //最低价
-    self.minPriceTF = [[TLTextField alloc] initWithFrame:CGRectZero leftTitle:@"" titleWidth:0 placeholder:@"最低价"];
+    self.minPriceTF = [[TLTextField alloc] initWithFrame:CGRectZero
+                                               leftTitle:@""
+                                              titleWidth:0
+                                             placeholder:[LangSwitcher switchLang:@"最低价" key:nil]];
     
     self.minPriceTF.textAlignment = NSTextAlignmentCenter;
     
@@ -159,7 +166,9 @@
     }];
     
     //最高价
-    self.maxPriceTF = [[TLTextField alloc] initWithFrame:CGRectZero leftTitle:@"" titleWidth:0 placeholder:@"最高价"];
+    self.maxPriceTF = [[TLTextField alloc] initWithFrame:CGRectZero leftTitle:@""
+                                              titleWidth:0
+                                             placeholder:[LangSwitcher switchLang:@"最高价" key:nil]];
     
     self.maxPriceTF.textAlignment = NSTextAlignmentCenter;
     self.maxPriceTF.keyboardType = UIKeyboardTypeNumberPad;
@@ -262,7 +271,11 @@
     }];
     
     //搜广告
-    UIButton *searchBtn = [UIButton buttonWithTitle:@"搜广告" titleColor:kWhiteColor backgroundColor:kThemeColor titleFont:16.0 cornerRadius:5];
+    UIButton *searchBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"搜广告" key:nil]
+                                         titleColor:kWhiteColor
+                                    backgroundColor:kThemeColor
+                                          titleFont:16.0
+                                       cornerRadius:5];
     
     [searchBtn addTarget:self action:@selector(searchAdvertise) forControlEvents:UIControlEventTouchUpInside];
     
@@ -282,21 +295,21 @@
     
     if (![self.minPriceTF.text valid]) {
         
-        [TLAlert alertWithInfo:@"请输入最低价"];
+        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入最低价" key:nil]];
         return ;
     }
     
     if (![self.maxPriceTF.text valid]) {
         
-        [TLAlert alertWithInfo:@"请输入最高价"];
+        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入最高价" key:nil]];
         return ;
     }
     
-    if (![self.payTypePicker.text valid]) {
-        
-        [TLAlert alertWithInfo:@"请选择付款方式"];
-        return ;
-    }
+//    if (![self.payTypePicker.text valid]) {
+//        
+//        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请选择付款方式" key:nil]];
+//        return ;
+//    }
     
     NSString *payType = [NSString stringWithFormat:@"%ld", _payTypeIndex];
 

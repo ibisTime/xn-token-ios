@@ -30,6 +30,7 @@ static IMAPlatform *_sharedInstance = nil;
     dispatch_once(&predicate, ^{
         _sharedInstance = [[IMAPlatform alloc] init];
         [_sharedInstance configIMSDK:cfg];
+
     });
     
     return _sharedInstance;
@@ -163,6 +164,8 @@ static Class kHostClass = Nil;
 //    userConfig.messageUpdateListener = self;//消息svr重写监听器（加载消息扩展包有效）
 //    userConfig.uploadProgressListener = self;//文件上传进度监听器
 //    userConfig.groupEventListener todo
+    
+    //conversationMgr 可能被销毁在，这里设置不科学
     userConfig.messgeRevokeListener = self.conversationMgr;
     userConfig.friendshipListener = self;//关系链数据本地缓存监听器（加载好友扩展包、enableFriendshipProxy有效）
     userConfig.groupListener = self;//群组据本地缓存监听器（加载群组扩展包、enableGroupAssistant有效）
@@ -204,6 +207,7 @@ static Class kHostClass = Nil;
     _conversationMgr = nil;
 }
 
+// 此方法 会调用 offlineLogin， 会把conversition Manager清除掉，消息监听清除掉
 - (void)logout:(TIMLoginSucc)succ fail:(TIMFail)fail
 {
     __weak IMAPlatform *ws = self;

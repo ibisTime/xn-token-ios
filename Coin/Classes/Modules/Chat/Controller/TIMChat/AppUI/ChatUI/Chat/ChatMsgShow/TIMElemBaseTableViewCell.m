@@ -7,7 +7,7 @@
 //
 
 #import "TIMElemBaseTableViewCell.h"
-
+#import "HomePageVC.h"
 #import "NSString+Extension.h"
 
 @implementation TIMElemBaseTableViewCell
@@ -69,6 +69,39 @@
     return self;
 }
 
+#pragma mark- 头像点击
+- (void)goUserDetail {
+    
+    //
+    HomePageVC *vc = [[HomePageVC alloc] init];
+    vc.userId = [ChatUserProfile sharedUser].friendUserId;
+    [[self nextNavController] pushViewController:vc animated:YES];
+    //
+    
+}
+
+- (UINavigationController *)nextNavController {
+    
+    if ([self isKindOfClass:[UINavigationController class]]) {
+        
+        return (UINavigationController *)self;
+    }
+    
+    UIResponder *responder = self;
+    do {
+        
+        responder = [responder nextResponder];
+        
+        //        if ([responder isKindOfClass:[UIWindow class]]) {
+        //            break;
+        //        }
+        
+    } while (![responder isKindOfClass:[UINavigationController class]]);
+    
+    return (UINavigationController *)responder;
+    
+}
+
 - (void)setEditing:(BOOL)editing animated:(BOOL)animated
 {
     _pickedViewRef.hidden = !editing;
@@ -110,10 +143,16 @@
 
     [_icon setBackgroundColor:kAppCustomMainColor];
     [_icon setTitleColor:kWhiteColor forState:UIControlStateNormal];
-    
-
     [self.contentView addSubview:_icon];
     
+    //icon
+    
+    //添加事件在 ChatBaseTableViewCell
+    
+    [_icon addTarget:self action:@selector(goUserDetail) forControlEvents:UIControlEventTouchUpInside];
+    
+    
+    //
     _contentBack = [[UIImageView alloc] init];
     _contentBack.userInteractionEnabled = YES;
     [self.contentView addSubview:_contentBack];
@@ -176,6 +215,8 @@
     NSInteger ver = kDefaultMargin/2;
     if ([_msg isMineMsg])
     {
+        
+        
         if (self.isEditing)
         {
             if (_pickedViewRef)
@@ -185,6 +226,9 @@
                 [_pickedViewRef relayoutFrameOfSubViews];
             }
         }
+        
+        //我的头像不可点击
+        _icon.userInteractionEnabled = NO;
         
         [_icon sizeWith:[_msg userIconSize]];
         [_icon alignParentRightWithMargin:15];
@@ -219,7 +263,9 @@
     else
     {
         // 对方的C2C消息
-        
+        _icon.userInteractionEnabled = YES;
+
+        //
         [_icon sizeWith:[_msg userIconSize]];
         [_icon alignParentTopWithMargin:ver];
         

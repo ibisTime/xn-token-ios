@@ -155,6 +155,12 @@
         NSString *btnTitle = nil;
         UIColor *bgColor = nil;
         
+        if ([[TLUser user].userId equalsString: self.advertise.userId]) {
+            //我发布的广告，代下单
+            self.orderBtn.hidden = YES;
+            return ;
+        }
+        
         //
         if ([self.advertise.status isEqualToString:kAdsStatusDaiJiaoYi] ||[self.advertise.status isEqualToString:kAdsStatusJiaoYiZhong]) {
             

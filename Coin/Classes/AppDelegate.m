@@ -52,34 +52,34 @@
     //配置根控制器
     [self configRootViewController];
     
-    //初始化
-    [self configIM];
+    //初始化, 连天
+    [[ChatManager sharedManager] initChat];
 
+    //
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginOut) name:kUserLoginOutNotification object:nil];
+    //消息
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLogin) name:kUserLoginNotification object:nil];
+    //
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(imLogin) name:kIMLoginNotification object:nil];
+    
+    //
     //重新登录
     if([TLUser user].isLogin) {
         
         [[TLUser user] updateUserInfo];
         [[TLUser user] changLoginTime];
-        [[ChatManager sharedManager] loginIM];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kUserLoginNotification object:nil];
         
     };
-    
-    //
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginOut) name:kUserLoginOutNotification object:nil];
-    //消息
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLogin) name:kIMLoginNotification object:nil];
-    
     return YES;
     
 }
 
-- (void)configIM {
-    
-    //配置
-    [[ChatManager sharedManager] initChat];
-//    [[ChatManager sharedManager] loginIM];
+// 用户重新登录需要重新，需要重新调用此方法监听
+- (void)kvoUnReadMsgToChangeTabbar {
     
     //这里监听主要是为了，tabbar上的消息提示
+    // 此处有坑， [IMAPlatform sharedInstance].conversationMgr 切换账户是会销毁
     self.chatKVOCtrl = [FBKVOController controllerWithObserver:self];
     [self.chatKVOCtrl observe:[IMAPlatform sharedInstance].conversationMgr
                         keyPath:@"unReadMessageCount"
@@ -103,6 +103,11 @@
     
 }
 
+- (void)imLogin {
+    
+    
+}
+
 #pragma mark- 退出登录
 - (void)loginOut {
     
@@ -111,7 +116,8 @@
     
     //im 退出
     [[IMAPlatform sharedInstance] logout:^{
-        
+       
+      //
     } fail:^(int code, NSString *msg) {
         
     }];
@@ -126,22 +132,9 @@
 #pragma mark - 用户登录
 - (void)userLogin {
     
-    //获取消息总量
-    NSInteger unReadMsgCount = [IMAPlatform sharedInstance].conversationMgr.unReadMessageCount;
-    
-    UITabBarController *tabBarController = [self rootTabBarController];
-    //
-    tabBarController.selectedIndex = 2;
-
-    if (unReadMsgCount > 0) {
-        
-        [tabBarController.tabBar showBadgeOnItemIndex:1];
-        
-    } else {
-        
-        [tabBarController.tabBar hideBadgeOnItemIndex:1];
-        
-    }
+    // 重新登录的时候要重新，配置一下
+    [self kvoUnReadMsgToChangeTabbar];
+    [[ChatManager sharedManager] loginIM];
     
 }
 

@@ -9,6 +9,7 @@
 #import "BillModel.h"
 #import "AppColorMacro.h"
 #import "NSString+CGSize.h"
+#import "LangSwitcher.h"
 
 @implementation BillModel
 
@@ -16,11 +17,11 @@
     
     NSDictionary *dict = @{
                            
-                           @"1" : @"待对账",
-                           @"3" : @"已对账且账已平",
-                           @"4": @"帐不平待调账审批",
-                           @"5" : @"已对账且账不平",
-                           @"6" : @"无需对账",
+                           @"1" : [LangSwitcher switchLang:@"待对账" key:nil],
+                           @"3" :[LangSwitcher switchLang:@"已对账且账已平" key:nil] ,
+                           @"4":[LangSwitcher switchLang:@"帐不平待调账审批" key:nil] ,
+                           @"5" :[LangSwitcher switchLang:@"已对账且账不平" key:nil] ,
+                           @"6" :[LangSwitcher switchLang:@"无需对账" key:nil] ,
                            
                            };
     
@@ -31,18 +32,17 @@
 - (NSString *)getBizName {
     NSDictionary *dict = @{
                            
-                           @"charge" : @"ETH充值",
-                           @"withdraw" : @"ETH取现",
-                           @"buy":  @"交易买入",
-                           @"sell" : @"交易卖出",
-                           @"tradefrozen" : @"交易冻结",
-                           @"tradeunfrozen" : @"交易解冻",
-                           @"withdrawfrozen": @"取现冻结",
-                           @"withdrawunfrozen": @"取现解冻",
-                           @"tradefee" : @"交易手续费",
-                           @"withdrawfee" : @"提现手续费",
-                           @"invite" : @"邀请好友送",
-                           
+                           @"charge" : [LangSwitcher switchLang:@"ETH充值" key:nil],
+                           @"withdraw" : [LangSwitcher switchLang:@"ETH取现" key:nil] ,
+                           @"buy": [LangSwitcher switchLang:@"交易买入" key:nil]  ,
+                           @"sell" : [LangSwitcher switchLang:@"交易卖出" key:nil],
+                           @"tradefrozen" :[LangSwitcher switchLang:@"交易冻结" key:nil],
+                           @"tradeunfrozen" :[LangSwitcher switchLang:@"交易解冻" key:nil],
+                           @"withdrawfrozen":[LangSwitcher switchLang:@"取现冻结" key:nil],
+                           @"withdrawunfrozen":[LangSwitcher switchLang:@"取现解冻" key:nil],
+                           @"tradefee" : [LangSwitcher switchLang:@"交易手续费" key:nil] ,
+                           @"withdrawfee" : [LangSwitcher switchLang:@"提现手续费" key:nil] ,
+                           @"invite" : [LangSwitcher switchLang:@"邀请好友送" key:nil]
                            };
     
     return dict[self.bizType];

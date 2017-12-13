@@ -147,7 +147,7 @@ static NSString *identifierCell = @"OrderListCell";
         NSString *userId = order.isBuy ? order.sellUserInfo.userId: order.buyUserInfo.userId;
 
         //获取会话列表
-        TIMConversation *timConversation = [[TIMManager sharedInstance] getConversation:TIM_C2C receiver:userId];
+        TIMConversation *timConversation = [[TIMManager sharedInstance] getConversation:TIM_GROUP receiver:order.code];
         
         IMAConversation *imaConversation = [[IMAConversation alloc] initWith:timConversation];
         
@@ -157,7 +157,7 @@ static NSString *identifierCell = @"OrderListCell";
         
         [self deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
         
-        [TLAlert alertWithSucces:@"删除成功"];
+        [TLAlert alertWithSucces: @"删除成功"];
         
         if (self.orders.count == 0) {
             

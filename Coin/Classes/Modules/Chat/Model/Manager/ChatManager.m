@@ -30,8 +30,11 @@
 
 @implementation ChatManager
 
-
+// loginWithParam 方法中有调用
 - (void)initChat {
+    
+    //log: [INFO][TIMManager.mm:137][-[TIMManager initSdk:]][ImSDK]Has InitSDK, skip
+    // 可多次初始化，
     
     IMAPlatformConfig *config = [[IMAPlatformConfig alloc] init];
     //不打印日志
@@ -40,23 +43,7 @@
     
 }
 
-//
-- (void)play {
-    
-    // 获取所有的会话列表
-    // IMAConversation
-    // 获取列表
-//    CLSafeMutableArray *conversionList = [IMAPlatform sharedInstance].conversationMgr.conversationList;
-    
-    //
-    //群组列表
-    //获取所有的群组列表
-//    [IMAPlatform sharedInstance].contactMgr.groupList;
-    //
-    //先去获取订单列表，根据订单列表查询是否有会话
-    //
-    
-}
+
 
 + (ChatManager *)sharedManager {
     
@@ -71,63 +58,8 @@
     return manager;
 }
 
-- (IMAGroup *)getGroupByGroupId:(NSString *)groupId {
-    
-    
-    if (!groupId) {
-        return nil;
-    }
-    [[IMAPlatform sharedInstance].contactMgr asyncGroupList];
-    // user 或者 group
-    __block IMAGroup *currentGroup = nil;
-    
-   currentGroup = (IMAGroup *)[[IMAPlatform sharedInstance].contactMgr getUserByGroupId:groupId];
-    
-//    CLSafeMutableArray *groupList = [IMAPlatform sharedInstance].contactMgr.groupList;
-//    if (groupList.safeArray) {
-//        [groupList.safeArray enumerateObjectsUsingBlock:^(IMAGroup *group, NSUInteger idx, BOOL * _Nonnull stop) {
-//
-//            if ([group.groupInfo.groupId isEqualToString:groupId]) {
-//                //找到了该会话
-//                currentGroup = group;
-//                *stop = YES;
-//            }
-//
-//        }];
-//    }
-    
-    return currentGroup;
-    
-}
-
-
-- (IMAUser *)getConversitionUserById:(NSString *)idStr {
-    
-    if (!idStr) {
-        return nil;
-    }
-    // user 或者 group
-    __block IMAUser *user = nil;
-    CLSafeMutableArray *groupList = [IMAPlatform sharedInstance].contactMgr.groupList;
-    if (groupList.safeArray) {
-        [groupList.safeArray enumerateObjectsUsingBlock:^(IMAGroup *group, NSUInteger idx, BOOL * _Nonnull stop) {
-            
-            if ([group.groupInfo.groupId isEqualToString:idStr]) {
-                //找到了该会话
-                user = group;
-                *stop = YES;
-            }
-            
-        }];
-    }
-    
-    return user;
-}
-
-
 //获取签名，并登录
 - (void)loginIM {
-    
     
     if ([IMAPlatform isAutoLogin]) {
         
@@ -136,6 +68,7 @@
         return;
         
     }
+    //
   
     //该用户第一次登录
     TLNetworking *http = [TLNetworking new];
@@ -172,10 +105,29 @@
     
 }
 
+
+- (void)loginWithParam:(IMALoginParam *)loginParam {
+
+    //重新登录需要 init 一下，切换账户时
+    [[IMAPlatform sharedInstance] login:loginParam succ:^{
+        
+//        [TIMManager sharedInstance].;
+        //登录成功
+        //保存登录信息
+        [loginParam saveToLocal];
+    
+    } fail:^(int code, NSString *msg) {
+        
+        
+    }];
+
+}
+
+
 - (NSString *)appId {
     
     return [[NSUserDefaults standardUserDefaults] objectForKey:SDK_APP_ID];
-
+    
 }
 
 - (NSString *)accountType {
@@ -186,35 +138,41 @@
 
 
 
-- (void)loginWithParam:(TIMLoginParam*)param {
-    
-    
-    [[TIMManager sharedInstance] login:param succ:^{
-        
-        //同步消息列表
-        [[IMAPlatform sharedInstance].conversationMgr asyncConversationList];
-        
-        // 同步群组列表
-        [[IMAPlatform sharedInstance].contactMgr asyncGroupList];
-        
-        //消息栏消息数
-        NSInteger unReadCount = [[IMAPlatform sharedInstance].conversationMgr unReadMessageCount];
-        
-        [TLUser user].unReadMsgCount = unReadCount;
-        
-        [IMAPlatform setAutoLogin:YES];        
-        [[IMAPlatform sharedInstance] configOnLoginSucc:param];
-        //配置APNs
-        //        [self configAPNs];
-        
-        [[NSNotificationCenter defaultCenter] postNotificationName:kIMLoginNotification object:nil];
 
-    } fail:^(int code, NSString *msg) {
+#pragma mark- 登录整理
+- (void)login2 {
+    
+    IMALoginParam *_loginParam = nil;
+    
+    BOOL isAutoLogin = [IMAPlatform isAutoLogin];
+    if (isAutoLogin) {
         
-        NSLog(@"LoginFailureCode = %d, errorMsg = %@", code, msg);
-    }];
+        _loginParam = [IMALoginParam loadFromLocal];
+        
+    }  else {
+        
+        _loginParam = [[IMALoginParam alloc] init];
+        
+    }
+    
+    //配置_IM_
+    [IMAPlatform configWith:_loginParam.config];
+    
+    if (isAutoLogin && [_loginParam isVailed])
+    {
+        //
+        [[IMAPlatform sharedInstance] login:_loginParam succ:^{
+            //登录成功
+            
+        } fail:^(int code, NSString *msg) {
+            
+
+        }];
+        
+    }
     
 }
+
 
 
 
@@ -229,11 +187,11 @@
     [[TIMManager sharedInstance] setAPNS:apnsConfig succ:^()
      {
          NSLog(@"APNs配置成功");
-//         [TLAlert alertWithSucces:@"APNs配置成功"];
+         //         [TLAlert alertWithSucces:@"APNs配置成功"];
          
      } fail:^(int code, NSString *err)
      {
-//         [TLAlert alertWithSucces:@"APNs配置失败"];
+         //         [TLAlert alertWithSucces:@"APNs配置失败"];
          
          NSLog(@"APNs配置失败,原因: %d %@",code , err);
          
@@ -241,16 +199,6 @@
     
 }
 
-- (void)pullLoginUI {
-    
-    
-};
-
-//- (void)loginWithUserName:(NSString *)userName {
-//
-//  [self loginWithUserName:userName pwd:IM_PWD];
-//
-//}
 //
 //- (void)loginWithUserName:(NSString *)userName pwd:(NSString *)password{
 //

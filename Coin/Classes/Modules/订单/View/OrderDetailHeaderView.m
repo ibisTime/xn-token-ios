@@ -300,8 +300,10 @@
     NSString *code = [order.code substringFromIndex:count - 8];
     
     self.orderCodeLbl.text = [NSString stringWithFormat:@"订单编号: %@", code];
+    self.orderCodeLbl.text = [LangSwitcher switchLang:self.orderCodeLbl.text key:nil];
     
     self.statusLbl.text = order.statusStr;
+
     
     self.amountLbl.text = [NSString stringWithFormat:@"%@ CNY", order.tradeAmount];
     
@@ -311,11 +313,11 @@
     
     self.priceLbl.text = [NSString stringWithFormat:@"%@ CNY", [order.tradePrice convertToRealMoneyWithNum:2]];
     //买家
-    self.buyersLbl.text = [NSString stringWithFormat:@"买家: %@", order.buyUserInfo.nickname];
+    self.buyersLbl.text = [NSString stringWithFormat:@"%@: %@",[LangSwitcher switchLang:@"买家" key:nil], order.buyUserInfo.nickname];
     //卖家
-    self.sellerLbl.text = [NSString stringWithFormat:@"卖家: %@", order.sellUserInfo.nickname];
+    self.sellerLbl.text = [NSString stringWithFormat:@"%@: %@",[LangSwitcher switchLang:@"卖家" key:nil], order.sellUserInfo.nickname];
     //留言
-    self.leaveMsgLbl.text = [NSString stringWithFormat:@"广告留言: %@", order.leaveMessage];
+    self.leaveMsgLbl.text = [NSString stringWithFormat:@"%@: %@",[LangSwitcher switchLang:@"广告留言" key:nil], order.leaveMessage];
     
     //提示
     if ([order.status isEqualToString:@"0"] || [order.status isEqualToString:@"1"]) {
@@ -369,7 +371,7 @@
 //    NSInteger minute = seconds/60;
     
     self.promptLbl.text = [NSString stringWithFormat:@"货币将在托管中保持至%@, 逾期未支付交易将自动取消", inviteDateStr];
-    
+    self.promptLbl.text = [LangSwitcher switchLang:self.promptLbl.text key:nil];
 }
 
 #pragma mark - Events

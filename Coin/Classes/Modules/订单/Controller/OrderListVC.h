@@ -12,6 +12,8 @@
 
 @property (nonatomic, copy) NSArray *statusList;
 @property (nonatomic,strong) NSMutableArray <OrderModel *>*orderGroups;
+//@property (nonatomic, copy) NSString *belongUser;
+@property (nonatomic, strong) TLPageDataHelper *pageDataHelper;
 
 - (void)refresh;
 - (void)reloadData;

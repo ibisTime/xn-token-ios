@@ -38,7 +38,10 @@
 #pragma mark - Init
 - (void)initSelectScrollView {
     
-    self.titles = @[@"搜广告", @"搜用户"];
+    self.titles = @[
+                    [LangSwitcher switchLang:@"搜广告" key:nil],
+                    [LangSwitcher switchLang:@"搜用户" key:nil]
+                    ];
     
     self.selectScrollView = [[SelectScrollView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight) itemTitles:self.titles];
     

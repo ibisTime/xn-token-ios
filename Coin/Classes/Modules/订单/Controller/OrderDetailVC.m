@@ -36,7 +36,7 @@
     
     [super viewDidLoad];
     
-    self.title = @"订单详情";
+    self.title = [LangSwitcher switchLang:@"订单详情" key:nil];
     
     [self initHeaderView];
     
@@ -135,7 +135,11 @@
         
         case OrderEventsTypeWillRelease:
         {
-            [TLAlert alertWithTitle:@"注意" msg:@"您确定要释放货币?" confirmMsg:@"确认" cancleMsg:@"取消" cancle:^(UIAlertAction *action) {
+            [TLAlert alertWithTitle:[LangSwitcher switchLang:@"注意" key:nil]
+                                msg:[LangSwitcher switchLang:@"您确定要释放货币?" key:nil]
+                         confirmMsg:[LangSwitcher switchLang:@"确认" key:nil]
+                          cancleMsg:[LangSwitcher switchLang:@"取消" key:nil]
+                             cancle:^(UIAlertAction *action) {
                 
             } confirm:^(UIAlertAction *action) {
                 
@@ -217,7 +221,7 @@
     http.showView = self.view;
     http.parameters[@"code"] = self.order.code;
     http.parameters[@"updater"] = [TLUser user].userId;
-    http.parameters[@"remark"] = @"释放货币";
+    http.parameters[@"remark"] = [LangSwitcher switchLang:@"释放货币" key:nil];
     
     [http postWithSuccess:^(id responseObject) {
         

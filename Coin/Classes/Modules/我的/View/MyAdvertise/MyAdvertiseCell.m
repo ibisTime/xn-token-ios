@@ -209,7 +209,7 @@
     //交易、好评跟信任
     self.dataLbl.text = [LangSwitcher switchLang:[NSString stringWithFormat:@"交易 %ld · 好评 %@ · 信任 %ld", userStatist.jiaoYiCount, userStatist.goodCommentRate, userStatist.beiXinRenCount] key:nil];
     //限额
-    self.limitAmountLbl.text = [NSString stringWithFormat:@"%@: %@-%@ CNY", [LangSwitcher switchLang:@"限制" key:nil],[advertise.minTrade convertToSimpleRealMoney], [advertise.maxTrade convertToSimpleRealMoney]];
+    self.limitAmountLbl.text = [NSString stringWithFormat:@"%@: %@-%@ CNY", [LangSwitcher switchLang:@"限额" key:nil],[advertise.minTrade convertToSimpleRealMoney], [advertise.maxTrade convertToSimpleRealMoney]];
     //价格
     
     self.priceLbl.text = [NSString stringWithFormat:@"%@ CNY", [advertise.truePrice convertToSimpleRealMoney]];

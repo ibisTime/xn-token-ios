@@ -75,8 +75,8 @@
 @property (nonatomic, copy) NSString *tempBizNo;
 @property (nonatomic, copy) NSString *tempRealName;
 @property (nonatomic, copy) NSString *tempIdNo;
-//未读消息数
-@property (nonatomic, assign) NSInteger unReadMsgCount;
+////未读消息数
+//@property (nonatomic, assign) NSInteger unReadMsgCount;
 
 //是否为需要登录，如果已登录，取出用户信息
 - (BOOL)isLogin;
