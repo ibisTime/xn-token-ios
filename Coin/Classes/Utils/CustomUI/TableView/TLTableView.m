@@ -60,10 +60,10 @@ _Pragma("clang diagnostic pop") \
     
     [tableView adjustsContentInsets];
     
-    if (@available(iOS 11.0, *)) {
-        
-        tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-    }
+//    if (@available(iOS 11.0, *)) {
+//
+//        tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+//    }
     
     return tableView;
 
@@ -88,11 +88,11 @@ _Pragma("clang diagnostic pop") \
     
     [tableView adjustsContentInsets];
 
-    if (@available(iOS 11.0, *)) {
-        
-        tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-    }
-    
+//    if (@available(iOS 11.0, *)) {
+//        
+//        tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+//    }
+//    
     return tableView;
 
 }
@@ -109,10 +109,10 @@ _Pragma("clang diagnostic pop") \
         
         [self adjustsContentInsets];
         
-        if (@available(iOS 11.0, *)) {
-            
-            self.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-        }
+//        if (@available(iOS 11.0, *)) {
+//
+//            self.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+//        }
     }
     
     return self;

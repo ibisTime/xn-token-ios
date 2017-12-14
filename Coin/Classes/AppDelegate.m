@@ -13,9 +13,7 @@
 #import "TLTabBarController.h"
 #import "TLUser.h"
 #import "TLNetworking.h"
-
 #import "UITabBar+Badge.h"
-
 #import "AppConfig.h"
 #import "IMALoginParam.h"
 #import "WXApi.h"
@@ -103,6 +101,7 @@
     
 }
 
+// - - //
 - (void)imLogin {
     
     

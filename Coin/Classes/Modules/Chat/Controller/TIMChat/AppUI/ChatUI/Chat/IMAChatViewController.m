@@ -200,7 +200,7 @@
 {
     [self sendMsg:text];
     NSMutableArray *elems = [NSMutableArray array];
-    for (int index =0 ; index<text.msg.elemCount; index++ )
+    for (int index =0 ; index < text.msg.elemCount; index++ )
     {
         [elems addObject:[text.msg getElem:index]];
     }
@@ -260,8 +260,7 @@
     {
         __weak IMAChatViewController *ws = self;
         [_conversation replaceWillSendMsg:msg with:newMsg completion:^(NSArray *imamsgList, BOOL succ) {
-            if (succ)
-            {
+            if (succ) {
                 [ws onReplaceDelete:imamsgList];
             }
         }];
@@ -287,9 +286,7 @@
 //    }
     
     [_tableView reloadRowsAtIndexPaths:indexArray withRowAnimation:UITableViewRowAnimationNone];
-    
 //    [_tableView deleteRowsAtIndexPaths:indexArray withRowAnimation:UITableViewRowAnimationNone];
-    
     [_tableView endUpdates];
 }
 
@@ -306,8 +303,7 @@
         [indexArray addObject:index];
     }
     
-    if (action)
-    {
+    if (action) {
         action();
     }
     
@@ -318,17 +314,19 @@
 
 - (void)onChatInput:(UIView<ChatInputAbleView> *)chatInput cancelSendMsg:(IMAMsg *)msg
 {
-    if (msg)
-    {
+    if (msg) {
+        
         __weak IMAChatViewController *ws = self;
         [_conversation removeMsg:msg completion:^(NSArray *imamsgList, BOOL succ, CommonVoidBlock removingAction) {
-            if (succ)
-            {
+            if (succ) {
+                
                 [ws onWillRemove:imamsgList withAction:removingAction];
+                
             }
         }];
         
     }
+    
 }
 
 

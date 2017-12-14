@@ -20,7 +20,7 @@
 
 #import "BannerModel.h"
 #import "UpdateModel.h"
-
+#import "TLUIHeader.h"
 #import "WebVC.h"
 #import "PublishBuyVC.h"
 #import "PublishSellVC.h"
@@ -35,12 +35,11 @@
 
 //货币切换
 @property (nonatomic, strong) CoinChangeView *changeView;
-//筛选
-@property (nonatomic, strong) FilterView *filterPicker;
+////筛选
+//@property (nonatomic, strong) FilterView *filterPicker;
 //
 @property (nonatomic, strong) TLPageDataHelper *helper;
-//暂无交易
-@property (nonatomic, strong) UIView *placeHolderView;
+
 //切换
 @property (nonatomic, strong) TopLabelUtil *labelUnil;
 //图片
@@ -111,17 +110,12 @@
     
     coinChangeView.title = @"ETH";
     
-    [coinChangeView addTarget:self action:@selector(changeCoin) forControlEvents:UIControlEventTouchUpInside];
+//    [coinChangeView addTarget:self action:@selector(changeCoin) forControlEvents:UIControlEventTouchUpInside];
     
     self.changeView = coinChangeView;
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:coinChangeView];
-    
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(20 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        
-        coinChangeView.title = @"ETH";
 
-    });
     
     //2.右边搜索
     UIImage *searchImg = [UIImage imageNamed:@"交易_搜索"];
@@ -137,17 +131,10 @@
     CoinWeakSelf;
     
     self.tradeType = kAdsTradeTypeSell;
-    
-    [self initPlaceHolderView];
-    
     self.tableView = [[TradeTableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
-    
-    self.tableView.placeHolderView = self.placeHolderView;
-    
+    self.tableView.placeHolderView = [TLPlaceholderView  placeholderViewWithImgAndText:@"暂无广告"];
     self.tableView.refreshDelegate = self;
-    
     [self.view addSubview:self.tableView];
-    
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(UIEdgeInsetsZero);
     }];
@@ -196,36 +183,6 @@
     
 }
 
-- (void)initPlaceHolderView {
-    
-    self.placeHolderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight - 40)];
-    
-    UIImageView *couponIV = [[UIImageView alloc] init];
-    
-    couponIV.image = kImage(@"暂无订单");
-    
-    [self.placeHolderView addSubview:couponIV];
-    [couponIV mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.centerX.equalTo(@0);
-        make.top.equalTo(@90);
-        
-    }];
-    
-    UILabel *textLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor2 font:14.0];
-    
-    textLbl.text = @"暂无交易";
-    
-    textLbl.textAlignment = NSTextAlignmentCenter;
-    
-    [self.placeHolderView addSubview:textLbl];
-    [textLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.top.equalTo(couponIV.mas_bottom).offset(20);
-        make.centerX.equalTo(couponIV.mas_centerX);
-        
-    }];
-}
 
 - (void)initTipView {
     
@@ -245,35 +202,36 @@
     };
 }
 
-- (FilterView *)filterPicker {
-    
-    if (!_filterPicker) {
-        
-        CoinWeakSelf;
-        
-        NSArray *textArr = @[@"ETH"];
-        
-//        NSArray *typeArr = @[@"", @"charge", @"withdraw", @"buy", @"sell"];
-        
-        _filterPicker = [[FilterView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
-        
-        _filterPicker.title = @"请选择货币类型";
-        
-        _filterPicker.selectBlock = ^(NSInteger index) {
-            
-            weakSelf.changeView.title = textArr[index];
-            
-//            weakSelf.helper.parameters[@"bizType"] = typeArr[index];
+//- (FilterView *)filterPicker {
 //
-//            [weakSelf.tableView beginRefreshing];
-        };
-        
-        _filterPicker.tagNames = textArr;
-        
-    }
-    
-    return _filterPicker;
-}
+//    if (!_filterPicker) {
+//
+//        CoinWeakSelf;
+//
+//        NSArray *textArr = @[@"ETH"];
+//
+////        NSArray *typeArr = @[@"", @"charge", @"withdraw", @"buy", @"sell"];
+//
+//        _filterPicker = [[FilterView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
+//
+//        _filterPicker.title = @"请选择货币类型";
+//
+//        _filterPicker.selectBlock = ^(NSInteger index) {
+//
+//            weakSelf.changeView.title = textArr[index];
+//
+////            weakSelf.helper.parameters[@"bizType"] = typeArr[index];
+////
+////            [weakSelf.tableView beginRefreshing];
+//        };
+//
+//        _filterPicker.tagNames = textArr;
+//
+//    }
+//
+//    return _filterPicker;
+//}
+
 
 - (void)addNotification{
     //发布购买/出售
@@ -284,11 +242,11 @@
 
 }
 
-#pragma mark - Events
-- (void)changeCoin {
-    
-    [self.filterPicker show];
-}
+//#pragma mark - Events
+//- (void)changeCoin {
+//    
+//    [self.filterPicker show];
+//}
 
 - (void)search {
     
@@ -530,91 +488,11 @@
 
 }
 
-//- (void)pushToAdsDetail:(AdvertiseModel *)advertiseModel currentVC:(UIViewController *)currentVC {
-//
-//
-//    //
-//    if ([advertiseModel.tradeType isEqualToString:kAdsTradeTypeSell]) {
-//
-//        //
-//        if ([advertiseModel isMineDaiJiaoYiAds]) {
-//
-//            PublishBuyVC *buyVC = [[PublishBuyVC alloc] init];
-//            buyVC.adsCode = advertiseModel.code;
-//            buyVC.publishType = PublishTypePublishRedit;
-//            [currentVC.navigationController pushViewController:buyVC animated:YES];
-//            return;
-//
-//        }
-//
-//        TradeBuyVC *buyVC = [TradeBuyVC new];
-//        buyVC.adsCode = advertiseModel.code;
-//        //        buyVC.type = TradeBuyPositionTypeTrade;
-//        [currentVC.navigationController pushViewController:buyVC animated:YES];
-//
-//    } else if([advertiseModel.tradeType isEqualToString:kAdsTradeTypeBuy]) {
-//
-//        if ([advertiseModel isMineDaiJiaoYiAds]) {
-//
-//            PublishSellVC *sellVC = [[PublishSellVC alloc] init];
-//            sellVC.adsCode = advertiseModel.code;
-//            sellVC.publishType = PublishTypePublishRedit;
-//            [currentVC.navigationController pushViewController:sellVC animated:YES];
-//            return;
-//
-//        }
-//
-//        TradeSellVC *sellVC = [TradeSellVC new];
-//        sellVC.adsCode = advertiseModel.code;
-//        //        sellVC.type = TradeBuyPositionTypeTrade;
-//        [currentVC.navigationController pushViewController:sellVC animated:YES];
-//
-//    }
-//
-//}
 
 #pragma mark - RefreshDelegate
 - (void)refreshTableView:(TLTableView *)refreshTableview didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     AdvertiseModel *advertiseModel = self.advertises[indexPath.row];
     [AdsService pushToAdsDetail:advertiseModel currentVC:self];
-    //
-//    if ([advertiseModel.tradeType isEqualToString:kAdsTradeTypeSell]) {
-//
-//        //
-//        if ([advertiseModel isMineDaiJiaoYiAds]) {
-//
-//            PublishBuyVC *buyVC = [[PublishBuyVC alloc] init];
-//            buyVC.adsCode = advertiseModel.code;
-//            buyVC.publishType = PublishTypePublishRedit;
-//            [self.navigationController pushViewController:buyVC animated:YES];
-//            return;
-//
-//        }
-//
-//        TradeBuyVC *buyVC = [TradeBuyVC new];
-//        buyVC.adsCode = advertiseModel.code;
-////        buyVC.type = TradeBuyPositionTypeTrade;
-//        [self.navigationController pushViewController:buyVC animated:YES];
-//
-//    } else if([advertiseModel.tradeType isEqualToString:kAdsTradeTypeBuy]) {
-//
-//        if ([advertiseModel isMineDaiJiaoYiAds]) {
-//
-//            PublishSellVC *sellVC = [[PublishSellVC alloc] init];
-//            sellVC.adsCode = advertiseModel.code;
-//            sellVC.publishType = PublishTypePublishRedit;
-//            [self.navigationController pushViewController:sellVC animated:YES];
-//            return;
-//
-//        }
-//
-//        TradeSellVC *sellVC = [TradeSellVC new];
-//        sellVC.adsCode = advertiseModel.code;
-////        sellVC.type = TradeBuyPositionTypeTrade;
-//        [self.navigationController pushViewController:sellVC animated:YES];
-//
-//    }
-    
 }
 @end

@@ -127,18 +127,18 @@
     //一日交易量
     CGFloat volume = [quotation.one_day_volume_cny doubleValue];
 
-    NSString *volumeStr = @"";
+    NSString *volumeStr = quotation.one_day_volume_usd;
     
-    if (volume <= 10000) {
-        
-        volumeStr = quotation.total_supply;
-        
-    } else if (volume > 10000) {
-        
-        volumeStr = [NSString stringWithFormat:@"%@%@", [quotation.one_day_volume_cny divNumber:@"10000" leaveNum:2],[LangSwitcher switchLang:@"万" key:nil]];
-    }
+//    if (volume <= 10000) {
+//
+//        volumeStr = quotation.total_supply;
+//
+//    } else if (volume > 10000) {
+//
+//        volumeStr = [NSString stringWithFormat:@"%@%@", [quotation.one_day_volume_cny divNumber:@"10000" leaveNum:2],[LangSwitcher switchLang:@"万" key:nil]];
+//    }
     
-    self.tradeVolumeLbl.text = [NSString stringWithFormat:@"量%@", volumeStr];
+    self.tradeVolumeLbl.text = [NSString stringWithFormat:@"量$%@", volumeStr];
     
     //美元价格
     self.usdPriceLbl.text = [NSString stringWithFormat:@"$%@", quotation.price_usd];

@@ -176,7 +176,7 @@
         __weak ChatInputPanel *ws = self;
         [self.KVOController observe:_toolBar keyPath:@"contentHeight" options:NSKeyValueObservingOptionNew |NSKeyValueObservingOptionOld
                               block:^(id observer, id object, NSDictionary *change) {
-                                  
+            //
             [ws onToolBarContentHeightChanged:change];
                                   
         }];

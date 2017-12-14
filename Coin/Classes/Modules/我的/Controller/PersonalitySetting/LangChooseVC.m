@@ -9,6 +9,7 @@
 #import "LangChooseVC.h"
 #import "SettingModel.h"
 #import "CoinHeader.h"
+#import <CDCommon/UIScrollView+TLAdd.h>
 
 @interface LangChooseVC ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -29,7 +30,7 @@
     self.langChooseTV.delegate = self;
     self.langChooseTV.dataSource = self;
     self.langChooseTV.separatorStyle = UITableViewCellSeparatorStyleNone;
-    
+    [self.langChooseTV adjustsContentInsets];
     __weak typeof(self) weakself = self;
     //
     SettingModel *simpleModel = [[SettingModel alloc] init];
@@ -84,7 +85,7 @@
         
         self.models[indexPath.row].action();
     }
-    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 
@@ -121,8 +122,9 @@
     if (settingModel.isSelect) {
         
         UIImageView *iv = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
-        iv.backgroundColor = [UIColor orangeColor];
+//        iv.backgroundColor = [UIColor orangeColor];
         [cell addSubview:iv];
+        iv.image = [UIImage imageNamed:@"语言选中"];
         [iv mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.equalTo(cell.mas_centerY);
             make.right.equalTo(cell.mas_right).offset(-20);

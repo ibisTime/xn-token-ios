@@ -32,13 +32,11 @@
     return [self canShowMenu];
 }
 
-- (BOOL)canShowMenu
-{
+- (BOOL)canShowMenu {
     return YES;
 }
 
-- (BOOL)canShowMenuOnTouchOf:(UIGestureRecognizer *)ges
-{
+- (BOOL)canShowMenuOnTouchOf:(UIGestureRecognizer *)ges {
     CGPoint p = [ges locationInView:_contentBack];
     BOOL contain = CGRectContainsPoint(_contentBack.bounds, p);
     return contain;
@@ -56,6 +54,7 @@
     }
     return self;
 }
+
 - (instancetype)initWithGroupReuseIdentifier:(NSString *)reuseIdentifier
 {
     if (self = [super init])
@@ -399,7 +398,7 @@
     
 }
 
-#pragma mark - 配置 cell
+#pragma mark - 配置 cell,  配置头像
 - (void)configWith:(IMAMsg *)msg
 {
     _msg = msg;
@@ -445,9 +444,12 @@
     
     if (_remarkTip) {
         _remarkTip.hidden = !([_msg isGroupMsg] && ![_msg isMineMsg]);
+//        _remarkTip.backgroundColor = [UIColor orangeColor];
         _remarkTip.font = [_msg tipFont];
         _remarkTip.textColor = [_msg tipTextColor];
-        _remarkTip.text = [user showTitle];
+//        _remarkTip.text = [user showTitle];
+        // 设置昵称
+        _remarkTip.text = [ChatUserProfile sharedUser].friendNickName;
     }
     
     [self configContent];

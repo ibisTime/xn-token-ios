@@ -18,6 +18,7 @@
 #import <MJRefresh/MJRefresh.h>
 #import "WaitingOrderVC.h"
 #import "OrderDetailVC.h"
+#import <CDCommon/UIScrollView+TLAdd.h>
 
 
 @interface OrderListVC ()<UITableViewDelegate,UITableViewDataSource>
@@ -78,11 +79,16 @@
     [self.view addSubview:tableView];
     tableView.backgroundColor = [UIColor whiteColor];
     
+    //
+    [self.orderTableView adjustsContentInsets];
+
+    //
+    tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    //
     
     
     self.orderTableView = tableView;
     tableView.placeHolderView = [TLPlaceholderView placeholderViewWithImgAndText:@"暂无订单"];
-    
     //--//
     TLPageDataHelper *helper = [[TLPageDataHelper alloc] init];
     helper.code = @"625250";

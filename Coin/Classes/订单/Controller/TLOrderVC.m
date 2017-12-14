@@ -23,8 +23,6 @@
 
 //货币切换
 @property (nonatomic, strong) CoinChangeView *changeView;
-//筛选
-@property (nonatomic, strong) FilterView *filterPicker;
 @property (nonatomic, strong) TopLabelUtil *labelUnil;
 @property (nonatomic, strong) UIScrollView *switchScrollView;
 @property (nonatomic, strong) OrderListVC *ingOrderListVC;
@@ -88,7 +86,7 @@
         [OrderModel.ingStatusList enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             
             if ([orderModel.status equalsString:obj]) {
-                
+                //正在进行的订单，左边
                 [self.labelUnil showBadgeOnItemIndex:0];
                 hasLook = YES;
 //                [self orderRefresh];
@@ -104,29 +102,6 @@
         
     }];
 
-    
-//    __block BOOL hasLook = NO;
-//    if (self.ingOrderListVC.orderGroups) {
-//
-//        [self.ingOrderListVC.orderGroups enumerateObjectsUsingBlock:^(OrderModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-//
-//            if ([obj.code isEqualToString:groupId]) {
-//
-//                *stop = YES;
-//                // 说明消息来自正在进行的订单
-//                [self.labelUnil showBadgeOnItemIndex:0];
-//                hasLook = YES;
-//            }
-//
-//        }];
-//
-//    }
-//
-//    if (!hasLook && self.ingOrderListVC.orderGroups && self.ingOrderListVC.orderGroups.count) {
-//        // 未找到，说明是左边的
-//        [self.labelUnil showBadgeOnItemIndex:1];
-//
-//    }
     
 }
 
@@ -147,9 +122,6 @@
     
     self.ingOrderListVC.orderGroups = [[NSMutableArray alloc] init];
     self.endOrderListVC.orderGroups = [[NSMutableArray alloc] init];
-    
-    //
-    
     //
     [self orderReloadData];
 
@@ -201,12 +173,6 @@
     
 }
 
-
-#pragma mark - Events
-- (void)changeCoin {
-    
-    [self.filterPicker show];
-}
 
 
 
@@ -265,39 +231,10 @@
 - (void)addCoinChangeView {
     
     CoinChangeView *coinChangeView = [[CoinChangeView alloc] init];
-    
     coinChangeView.title = @"ETH";
-    [coinChangeView addTarget:self action:@selector(changeCoin) forControlEvents:UIControlEventTouchUpInside];
-    
     self.changeView = coinChangeView;
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:coinChangeView];
     
 }
-
-- (FilterView *)filterPicker {
-    
-    if (!_filterPicker) {
-        
-        CoinWeakSelf;
-        
-        NSArray *textArr = @[@"ETH"];
-        
-        _filterPicker = [[FilterView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
-        
-        _filterPicker.title = [LangSwitcher switchLang:@"请选择货币类型" key:nil] ;
-        _filterPicker.selectBlock = ^(NSInteger index) {
-            
-            weakSelf.changeView.title = textArr[index];
-            
-        };
-        
-        _filterPicker.tagNames = textArr;
-        
-    }
-    
-    return _filterPicker;
-}
-
-
 
 @end
