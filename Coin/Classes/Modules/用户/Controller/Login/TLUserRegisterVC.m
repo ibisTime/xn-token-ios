@@ -276,7 +276,6 @@
         
         [self.view endEditing:YES];
         
-        [TLAlert alertWithSucces:[LangSwitcher switchLang:@"注册成功" key:nil]];
         NSString *token = responseObject[@"data"][@"token"];
         NSString *userId = responseObject[@"data"][@"userId"];
         
@@ -293,6 +292,7 @@
             http.parameters[@"token"] = token;
             [http postWithSuccess:^(id responseObject) {
                 
+                [TLAlert alertWithSucces:[LangSwitcher switchLang:@"注册成功" key:nil]];
                 NSDictionary *userInfo = responseObject[@"data"];
                 [TLUser user].userId = userId;
                 [TLUser user].token = token;

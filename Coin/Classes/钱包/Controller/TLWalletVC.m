@@ -24,6 +24,7 @@
 #import "TLPwdRelatedVC.h"
 #import "RateDescVC.h"
 #import "ZMAuthVC.h"
+#import <CDCommon/UIScrollView+TLAdd.h>
 
 @interface TLWalletVC ()<RefreshDelegate>
 
@@ -87,11 +88,12 @@
 
 - (void)initTableView {
     
-    self.tableView = [[WalletTableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - kTabBarHeight) style:UITableViewStyleGrouped];
+    self.tableView = [[WalletTableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - kTabBarHeight)
+                                                      style:UITableViewStyleGrouped];
     
     self.tableView.tableHeaderView = self.headerView;
     self.tableView.refreshDelegate = self;
-    
+    [self.tableView adjustsContentInsets];
     [self.view addSubview:self.tableView];
 }
 
@@ -107,7 +109,7 @@
 - (void)userlogin {
     
     [self getMyCurrencyList];
-
+    
 }
 
 - (void)withDrawCoinSuccess {
@@ -133,9 +135,9 @@
         NSString *usdStr = [responseObject[@"data"][@"totalAmountUSD"] convertToSimpleRealMoney];
         
         self.headerView.usdAmountLbl.text = [NSString stringWithFormat:@"%@USD", usdStr];
-
+        
         NSString *hkdStr = [responseObject[@"data"][@"totalAmountHKD"] convertToSimpleRealMoney];
-
+        
         self.headerView.hkdAmountLbl.text = [NSString stringWithFormat:@"%@HKD", hkdStr];
         
     } failure:^(NSError *error) {
@@ -184,7 +186,7 @@
     }];
     
     [self.tableView beginRefreshing];
-
+    
 }
 
 - (void)searchRateWithCurrency:(NSString *)currency {
@@ -200,7 +202,7 @@
         if ([currency isEqualToString:@"USD"]) {
             
             self.headerView.usdRate = responseObject[@"data"][@"rate"];
-
+            
         }
         
     } failure:^(NSError *error) {
@@ -228,7 +230,7 @@
             [self.navigationController pushViewController:coinVC animated:YES];
             
         }break;
-          
+            
         case 1:
         {
             [self clickWithdrawWithCurrency:currencyModel];
@@ -290,7 +292,7 @@
             }
             
             [weakSelf clickWithdrawWithCurrency:currencyModel];
-
+            
         };
         
         [self.navigationController pushViewController:zmAuthVC animated:YES];
@@ -302,26 +304,19 @@
     if ([[TLUser user].tradepwdFlag isEqualToString:@"0"]) {
         
         TLPwdType pwdType = TLPwdTypeSetTrade;
-        
         TLPwdRelatedVC *pwdRelatedVC = [[TLPwdRelatedVC alloc] initWithType:pwdType];
-        
         pwdRelatedVC.isWallet = YES;
-        
         pwdRelatedVC.success = ^{
             
             [weakSelf clickWithdrawWithCurrency:currencyModel];
         };
-        
         [self.navigationController pushViewController:pwdRelatedVC animated:YES];
-        
         return ;
         
     }
     
     WithdrawalsCoinVC *coinVC = [WithdrawalsCoinVC new];
-    
     coinVC.currency = currencyModel;
-    
     [self.navigationController pushViewController:coinVC animated:YES];
 }
 

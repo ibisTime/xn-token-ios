@@ -127,15 +127,21 @@
     
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:self.url]];
     
-    [HttpLogger logDebugInfoWithRequest:request apiName:self.code requestParams:self.parameters httpMethod:@"POST"];
+    if ([AppConfig config].runEnv != RunEnvRelease) {
+        
+        [HttpLogger logDebugInfoWithRequest:request apiName:self.code requestParams:self.parameters httpMethod:@"POST"];
+
+    }
     
   return [self.manager POST:self.url parameters:self.parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
       
-      [HttpLogger logDebugInfoWithResponse:task.response apiName:self.code resposeString:responseObject request:task.originalRequest error:nil];
-
-      //打印JSON字符串
-      [HttpLogger logJSONStringWithResponseObject:responseObject];
-      
+      if ([AppConfig config].runEnv != RunEnvRelease) {
+          
+          [HttpLogger logDebugInfoWithResponse:task.response apiName:self.code resposeString:responseObject request:task.originalRequest error:nil];
+          
+          //打印JSON字符串
+          [HttpLogger logJSONStringWithResponseObject:responseObject];
+      }
       if(self.showView){
           
           [TLProgressHUD dismiss];

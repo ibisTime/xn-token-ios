@@ -9,6 +9,7 @@
 #import "HTMLStrVC.h"
 #import <WebKit/WebKit.h>
 #import "APICodeMacro.h"
+#import <UIScrollView+TLAdd.h>
 
 @interface HTMLStrVC ()<WKNavigationDelegate>
 
@@ -22,7 +23,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+   
+    //
 
     [self requestContent];
 }
@@ -120,7 +122,7 @@
     _webView.navigationDelegate = self;
     
     _webView.allowsBackForwardNavigationGestures = YES;
-    
+    [_webView.scrollView adjustsContentInsets];
     [self.view addSubview:_webView];
     
     [self loadWebWithString:self.htmlStr];

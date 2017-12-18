@@ -9,7 +9,6 @@
 #import "TLOrderVC.h"
 
 #import "TopLabelUtil.h"
-#import "OrderListTableView.h"
 #import "CoinChangeView.h"
 #import "FilterView.h"
 #import "ChatManager.h"
@@ -74,6 +73,12 @@
 // 该方法只处理顶部红点逻辑
 - (void)handleGroupMsg:(NSString *)groupId msg:(TIMMessage *) msg {
     
+    /*
+     此处应该为，拿订单号去查询订单详情。先区分，左边 还是 右边
+     1.
+        如果订单列表，中有该数据，把这个数据移动到，第一位。否则把该数据插入到订单列表中。
+        并移动到第一位
+     */
     //1. 获取订单详情
     TLNetworking *http = [TLNetworking new];
     http.code = @"625251";

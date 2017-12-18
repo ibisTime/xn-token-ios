@@ -47,7 +47,7 @@ _Pragma("clang diagnostic pop") \
 + (instancetype)groupTableViewWithFrame:(CGRect)frame
 
                                delegate:(id)delegate dataSource:(id)dataSource {
-
+    
     
     TLTableView *tableView = [[TLTableView alloc] initWithFrame:frame style:UITableViewStyleGrouped];
     tableView.delegate = delegate;
@@ -60,13 +60,13 @@ _Pragma("clang diagnostic pop") \
     
     [tableView adjustsContentInsets];
     
-//    if (@available(iOS 11.0, *)) {
-//
-//        tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-//    }
+    //    if (@available(iOS 11.0, *)) {
+    //
+    //        tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    //    }
     
     return tableView;
-
+    
 }
 
 
@@ -74,9 +74,9 @@ _Pragma("clang diagnostic pop") \
 
 + (instancetype)tableViewWithFrame:(CGRect)frame
 
-                              delegate:(id)delegate dataSource:(id)dataSource
+                          delegate:(id)delegate dataSource:(id)dataSource
 {
-
+    
     TLTableView *tableView = [[TLTableView alloc] initWithFrame:frame style:UITableViewStylePlain];
     tableView.delegate = delegate;
     tableView.dataSource = dataSource;
@@ -86,15 +86,15 @@ _Pragma("clang diagnostic pop") \
     tableView.estimatedSectionHeaderHeight = 0;
     tableView.estimatedSectionFooterHeight = 0;
     
-    [tableView adjustsContentInsets];
-
-//    if (@available(iOS 11.0, *)) {
-//        
-//        tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-//    }
-//    
+//    [tableView adjustsContentInsets];
+    
+    //    if (@available(iOS 11.0, *)) {
+    //
+    //        tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    //    }
+    //
     return tableView;
-
+    
 }
 
 - (instancetype)initWithFrame:(CGRect)frame style:(UITableViewStyle)style {
@@ -107,12 +107,13 @@ _Pragma("clang diagnostic pop") \
         self.estimatedSectionHeaderHeight = 0;
         self.estimatedSectionFooterHeight = 0;
         
-        [self adjustsContentInsets];
+        //        [self adjustsContentInsets];
         
-//        if (@available(iOS 11.0, *)) {
-//
-//            self.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-//        }
+        if (@available(iOS 11.0, *)) {
+            
+            self.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+        }
+        
     }
     
     return self;
@@ -123,7 +124,7 @@ _Pragma("clang diagnostic pop") \
 {
     self.refresh = refresh;
     
-   
+    
     MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingBlock:self.refresh];
     self.mj_header = header;
 }
@@ -149,19 +150,19 @@ _Pragma("clang diagnostic pop") \
         return;
     }
     [self.mj_header beginRefreshing];
-
+    
 }
 
 - (void)endRefreshHeader
 {
-
+    
     if (self.mj_header == nil) {
-
+        
     }else{
         
         [self.mj_header endRefreshing];
     }
-   
+    
 }
 
 - (void)endRefreshFooter
@@ -185,17 +186,17 @@ _Pragma("clang diagnostic pop") \
     if (self.mj_footer) {
         [self.mj_footer resetNoMoreData];
     }
-
+    
 }
 
 - (void)setHiddenFooter:(BOOL)hiddenFooter
 {
     _hiddenFooter = hiddenFooter;
     if (self.mj_footer) {
-                self.mj_footer.hidden = hiddenFooter;
-            }else{
-                NSLog(@"footer不存在");
-            }
+        self.mj_footer.hidden = hiddenFooter;
+    }else{
+        NSLog(@"footer不存在");
+    }
 }
 
 - (void)setHiddenHeader:(BOOL)hiddenHeader
@@ -233,7 +234,7 @@ _Pragma("clang diagnostic pop") \
             
             numOfRow = [self.dataSource tableView:self numberOfRowsInSection:i];
         }
-
+        
         if (numOfRow > 0) { //只要有一组有数据就不为空
             isEmpty = NO;
         }
@@ -241,19 +242,19 @@ _Pragma("clang diagnostic pop") \
     }
     
     //没有实现方法抛出异常
-//    if (!self.placeholderView) {
-//        
-//        @throw [NSException exceptionWithName:@"this unException the ACTableView object" reason:@"please achieve createPlaceholderView: scrollEnabled: scrollWasEnabled:" userInfo:nil];
-//    }
+    //    if (!self.placeholderView) {
+    //
+    //        @throw [NSException exceptionWithName:@"this unException the ACTableView object" reason:@"please achieve createPlaceholderView: scrollEnabled: scrollWasEnabled:" userInfo:nil];
+    //    }
     
     if (isEmpty == YES) {
         
-//        [_placeholderV removeFromSuperview];
-//        _placeholderV = nil;
-//        [[_placeholderV subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
-//
-//        _placeholderV = _placeholderView();
-//        [self addSubview:_placeholderV];
+        //        [_placeholderV removeFromSuperview];
+        //        _placeholderV = nil;
+        //        [[_placeholderV subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
+        //
+        //        _placeholderV = _placeholderView();
+        //        [self addSubview:_placeholderV];
         
         if ( ABS((CGRectGetMinY(self.placeHolderView.frame) - CGRectGetHeight(self.tableHeaderView.frame))) > 1 ) {
             
@@ -262,14 +263,14 @@ _Pragma("clang diagnostic pop") \
             self.placeHolderView.frame = frame;
         }
         [self addSubview:self.placeHolderView];
-
+        
         
     }else{
         
         [self.placeHolderView removeFromSuperview];
-//        [_placeholderV removeFromSuperview];
-//        _placeholderV = nil;
-//        [[_placeholderV subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
+        //        [_placeholderV removeFromSuperview];
+        //        _placeholderV = nil;
+        //        [[_placeholderV subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
         
     }
     

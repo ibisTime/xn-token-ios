@@ -56,7 +56,7 @@
 
     self.enabled = NO;
     
-    [self setTitle:[NSString stringWithFormat:@"重新发送(%ld)",_totalTime] forState:UIControlStateDisabled];
+    [self setTitle:[NSString stringWithFormat:@"%@(%ld)",[LangSwitcher switchLang:@"重新发送" key:nil],_totalTime] forState:UIControlStateDisabled];
     
     self.backgroundColor = kTextColor2;
     
@@ -69,7 +69,7 @@
 {
     _time --;
 
-    NSString *str = [NSString stringWithFormat:@"重新发送(%ld)",_time];
+    NSString *str = [NSString stringWithFormat:@"%@(%ld)",[LangSwitcher switchLang:@"重新发送" key:nil],_time];
     
     [self setTitle:str forState:UIControlStateDisabled];
 

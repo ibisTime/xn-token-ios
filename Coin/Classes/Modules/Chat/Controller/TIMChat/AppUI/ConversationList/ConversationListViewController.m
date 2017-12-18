@@ -265,7 +265,7 @@
             
             if (user)
             {   
-                [[AppDelegate sharedAppDelegate] pushToChatViewControllerWith:user];
+//                [[AppDelegate sharedAppDelegate] pushToChatViewControllerWith:user];
                 
                 [conv setReadAllMsg];
                 
@@ -282,8 +282,8 @@
                         [ChatUserProfile sharedUser].friendPhoto = cell.iconUrl;
                         [ChatUserProfile sharedUser].friendNickName = cell.nickName;
                         
-                            [[AppDelegate sharedAppDelegate] pushToChatViewControllerWith:auser];
-                            
+//                            [[AppDelegate sharedAppDelegate] pushToChatViewControllerWith:auser];
+                        
                             [conv setReadAllMsg];
                             ConversationListTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
                             [cell refreshCell];

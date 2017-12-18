@@ -495,4 +495,5 @@
     AdvertiseModel *advertiseModel = self.advertises[indexPath.row];
     [AdsService pushToAdsDetail:advertiseModel currentVC:self];
 }
+
 @end

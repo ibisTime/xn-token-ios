@@ -236,7 +236,7 @@
 - (void)setDownOneBtnAnim:(UIButton *)btn
 {
     
-    [UIView animateWithDuration:0.2 animations:^{
+    [UIView animateWithDuration:0.15 animations:^{
         
         btn.transform = CGAffineTransformMakeTranslation(0, self.bounds.size.height);
         

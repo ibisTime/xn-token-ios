@@ -39,7 +39,7 @@
     
     
     //服务器环境
-    [AppConfig config].runEnv = RunEnvDev;
+    [AppConfig config].runEnv = RunEnvRelease;
     
     //配置微信
     [self configWeChat];
@@ -182,6 +182,39 @@
     return [UIApplication  sharedApplication ].delegate;
     
 }
+
+#pragma mark- 本地推送
+//- (void)configLocalPushNotification {
+//
+//    // 创建分类，注意使用可变子类
+//    UIMutableUserNotificationCategory *category = [UIMutableUserNotificationCategory new];
+//    // 设置标识符，注意与发送通知设置的category标识符一致~！
+//    category.identifier = @"category";
+//    // 设置按钮，注意使用可变子类UIMutableUserNotificationAction
+//    // 设置前台按钮，点击后能使程序回到前台的叫做前台按钮
+//    UIMutableUserNotificationAction *action1 = [UIMutableUserNotificationAction new];
+//    action1.identifier = @"qiantai";
+//    action1.activationMode = UIUserNotificationActivationModeForeground;
+//    // 设置按钮的标题，即按钮显示的文字
+//    action1.title = @"呵呵";
+//
+//    // 设置后台按钮，点击后程序还在后台执行，如QQ的消息
+//    UIMutableUserNotificationAction *action2 = [UIMutableUserNotificationAction new];
+//    action2.identifier = @"houtai";
+//    action2.activationMode = UIUserNotificationActivationModeBackground;
+//    // 设置按钮的标题，即按钮显示的文字
+//    action1.title = @"后台呵呵";
+//    // 给分类设置按钮
+//    [category setActions:@[action1,action2] forContext:UIUserNotificationActionContextDefault];
+//
+//    // 注册，请求授权的时候将分类设置给授权，注意是 NSSet 集合
+//    NSSet *categorySet = [NSSet setWithObject:category];
+//    UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert categories:categorySet];
+//    // 注册通知
+//    [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+//
+//
+//}
 
 
 #pragma mark - 微信和芝麻认证回调

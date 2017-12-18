@@ -390,7 +390,13 @@
     for (TIMMessage *msg in msgs)
     {
         IMAMsg *imamsg = [IMAMsg msgWith:msg];
-        
+        //
+        if ([msg getElem:0] && [[msg getElem:0] isKindOfClass:[TIMCustomElem class]]) {
+            return;
+        }
+//        if ([msg isKindOfClass:[TIMCustomElem class]]) {
+//            return;
+//        }
         // 获取消息对应的会话
         // 通过判断消息， 会话类型，判断是系统消息、群消息、还是c2c
         TIMConversation *conv = [msg getConversation];

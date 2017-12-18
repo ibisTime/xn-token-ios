@@ -13,7 +13,6 @@
 - (void)dealloc
 {
     [self.KVOController unobserveAll];
-    
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
@@ -120,6 +119,7 @@
     [self.view addSubview:_inputView];
 }
 
+#pragma mark - 添加第部工具栏
 - (void)addChatToolBar
 {
     [self addInputPanel];
@@ -127,12 +127,14 @@
     self.KVOController = [FBKVOController controllerWithObserver:self];
     __weak IMAChatViewController *ws = self;
     [self.KVOController observe:_inputView keyPath:@"contentHeight" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld block:^(id observer, id object, NSDictionary *change) {
+        
         [ws onInputViewContentHeightChanged:change];
+        
     }];
 }
 
-- (void)onInputViewContentHeightChanged:(NSDictionary *)change
-{
+- (void)onInputViewContentHeightChanged:(NSDictionary *)change {
+    
     NSInteger nv = [change[NSKeyValueChangeNewKey] integerValue];
     NSInteger ov = [change[NSKeyValueChangeOldKey] integerValue];
     if (nv != ov)

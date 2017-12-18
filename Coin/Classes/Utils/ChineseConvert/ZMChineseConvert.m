@@ -75,9 +75,9 @@
 - (NSString *)convertSimplifiedToTraditional:(NSString *)simpString
 {
     // 空值判断
-//    if (!simpString) {
-//        return nil;
-//    }
+    //    if (!simpString) {
+    //        return nil;
+    //    }
     
     // 存储转换结果
     NSMutableString *resultString = [NSMutableString string];
@@ -109,9 +109,9 @@
 - (NSString *)convertTraditionalToSimplified:(NSString *)tradString
 {
     // 空值判断
-//    if (IsNullString(tradString)) {
-//        return nil;
-//    }
+    //    if (IsNullString(tradString)) {
+    //        return nil;
+    //    }
     
     // 存储转换结果
     NSMutableString *resultString = [NSMutableString string];

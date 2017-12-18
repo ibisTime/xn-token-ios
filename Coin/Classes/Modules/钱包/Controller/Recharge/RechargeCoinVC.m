@@ -34,7 +34,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.title = @"充币";
+    self.title = [LangSwitcher switchLang:@"充币" key:nil];
     //提示框
     [self initTopView];
     //二维码

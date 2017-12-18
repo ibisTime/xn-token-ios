@@ -5,7 +5,7 @@
 //
 
 #import "ScrollRefreshViewController.h"
-
+#import <CDCommon/UIScrollView+TLAdd.h>
 #import "UIView+Layout.h"
 
 
@@ -32,6 +32,7 @@
     if (self = [super init])
     {
         [self initialize];
+        
     }
     return self;
 }

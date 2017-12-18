@@ -71,7 +71,6 @@ static NSString *identifierCell = @"SettingCell";
     [cell.sw addTarget:self action:@selector(switchDidChange:) forControlEvents:UIControlEventValueChanged];
     
     cell.switchHidden = indexPath.section == 0 ? NO: YES;
-    
     cell.arrowHidden = indexPath.section == 0 ? YES: NO;
     
     return cell;

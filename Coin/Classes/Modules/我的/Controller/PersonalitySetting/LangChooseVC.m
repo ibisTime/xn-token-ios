@@ -58,8 +58,8 @@
 
 - (void)langType:(LangType)type {
     
-        [TLAlert alertWithTitle:@""
-                            msg:[LangSwitcher switchLang:@"切换语言需要退出应用" key:nil]
+        [TLAlert alertWithTitle:[LangSwitcher switchLang:@"切换语言需要退出应用" key:nil]
+                            msg:nil
                      confirmMsg:[LangSwitcher switchLang:@"确定" key:nil]
                       cancleMsg:[LangSwitcher switchLang:@"取消" key:nil]
                          cancle:^(UIAlertAction *action) {
