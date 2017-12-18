@@ -8,6 +8,7 @@
 
 #import "TLBaseModel.h"
 #import "OrderModel.h"
+#import "UserStatistics.h"
 
 @class TradeUserInfo, UserStatistics, Displaytime;
 
@@ -85,6 +86,8 @@ typedef NS_ENUM(NSUInteger, AdsType) {
  */
 - (BOOL)isMineDaiJiaoYiAds;
 
+- (NSString *)tradeAmountLimit;
+
 @end
 
 FOUNDATION_EXTERN NSString *const kAdsStatusDraft;
@@ -94,55 +97,6 @@ FOUNDATION_EXTERN NSString *const kAdsStatusXiaJia;
 
 FOUNDATION_EXTERN NSString *const kAdsTradeTypeBuy;
 FOUNDATION_EXTERN NSString *const kAdsTradeTypeSell;
-
-//@interface TradeUserInfo : NSObject
-//
-//@property (nonatomic, copy) NSString *photo;
-//
-//@property (nonatomic, copy) NSString *status;
-//
-//@property (nonatomic, copy) NSString *loginName;
-//
-//@property (nonatomic, copy) NSString *mobile;
-//
-//@property (nonatomic, copy) NSString *loginPwdStrength;
-//
-//@property (nonatomic, copy) NSString *userId;
-//
-//@property (nonatomic, copy) NSString *level;
-//
-//@property (nonatomic, copy) NSString *createDatetime;
-//
-//@property (nonatomic, assign) BOOL tradepwdFlag;
-//
-//@property (nonatomic, copy) NSString *companyCode;
-//
-//@property (nonatomic, copy) NSString *systemCode;
-//
-//@property (nonatomic, copy) NSString *nickname;
-//
-//@property (nonatomic, copy) NSString *kind;
-//
-//@end
-
-@interface UserStatistics: NSObject
-//交易次数
-@property (nonatomic, assign) NSInteger jiaoYiCount;
-//信任人数
-@property (nonatomic, assign) NSInteger beiXinRenCount;
-//评论次数
-@property (nonatomic, assign) NSInteger beiPingJiaCount;
-//好评次数
-@property (nonatomic, assign) NSInteger beiHaoPingCount;
-//好评率
-@property (nonatomic, copy) NSString *goodCommentRate;
-
-@property (nonatomic, copy) NSString *totalTradeCount;
-
-
-- (NSString *)convertTotalTradeCount;
-
-@end
 
 @interface Displaytime : NSObject
 

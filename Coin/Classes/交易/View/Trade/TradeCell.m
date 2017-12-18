@@ -13,6 +13,7 @@
 #import "NSNumber+Extension.h"
 #import "TLUser.h"
 #import "PayTypeModel.h"
+#import "UserStatistics.h"
 
 @interface TradeCell ()
 

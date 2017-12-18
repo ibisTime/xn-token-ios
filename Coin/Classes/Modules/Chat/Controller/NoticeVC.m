@@ -45,20 +45,10 @@
 - (void)getNoticeList {
     
     IMAConversationManager *mgr = [IMAPlatform sharedInstance].conversationMgr;
-    
     _conversationList = [mgr conversationList];
-    
     self.tableView.conversationList = _conversationList;
-    
     [self.tableView reloadData];
     
 }
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-
 
 @end

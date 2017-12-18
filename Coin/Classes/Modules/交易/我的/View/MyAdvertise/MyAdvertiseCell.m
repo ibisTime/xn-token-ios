@@ -12,7 +12,7 @@
 #import <UIButton+WebCache.h>
 #import "NSNumber+Extension.h"
 #import "NSString+CGSize.h"
-
+#import "UserStatistics.h"
 #import "PayTypeModel.h"
 
 @interface MyAdvertiseCell ()

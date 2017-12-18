@@ -66,15 +66,9 @@
         
         weakSelf.tradeView.advertise = self.advertise;
         weakSelf.tradeView.truePrice = self.advertise.truePrice;
+        
         //广告剩余可用余额
         weakSelf.tradeView.leftAmount = self.advertise.leftCountString;
-        NSString *text = @"历史交易";
-        NSString *history = [self.advertise.userStatistics convertTotalTradeCount];
-        //历史交易
-        UILabel *lbl = self.tradeView.lblArr[3];
-        [lbl labelWithString:[NSString stringWithFormat:@"%@\n%@", history, text] title:text font:Font(12.0) color:kTextColor2];
-        
-     
         
         //获取交易提醒
         [self requestTradeRemind];
@@ -119,7 +113,7 @@
 - (void)addOffItem {
     
     if ([self.advertise.status isEqualToString:@"1"] || [self.advertise.status isEqualToString:@"2"]) {
-
+        
         [UIBarButtonItem addRightItemWithTitle:@"下架" titleColor:kTextColor frame:CGRectMake(0, 0, 40, 44) vc:self action:@selector(advertiseOff)];
         
     }
@@ -177,49 +171,6 @@
     CoinWeakSelf;
     
     switch (type) {
-//        case TradeSellTypeTrust:
-//        {
-//            if (![TLUser user].isLogin) {
-//
-//                TLUserLoginVC *loginVC = [[TLUserLoginVC alloc] init];
-//
-//                TLNavigationController *nav = [[TLNavigationController alloc] initWithRootViewController:loginVC];
-//
-//                loginVC.loginSuccess = ^(){
-//
-//                    [weakSelf tradeEventsWithType:TradeSellTypeTrust];
-//                };
-//
-//                [self presentViewController:nav animated:YES completion:nil];
-//
-//                return;
-//            }
-//
-////            [self trustUser];
-//
-//        }break;
-            
-//        case TradeSellTypeCancelTrust:
-//        {
-//            if (![TLUser user].isLogin) {
-//
-//                TLUserLoginVC *loginVC = [[TLUserLoginVC alloc] init];
-//
-//                TLNavigationController *nav = [[TLNavigationController alloc] initWithRootViewController:loginVC];
-//
-//                loginVC.loginSuccess = ^(){
-//
-//                    [weakSelf tradeEventsWithType:TradeSellTypeTrust];
-//                };
-//
-//                [self presentViewController:nav animated:YES completion:nil];
-//
-//                return;
-//            }
-//
-//            [self cancelTrustUser];
-//
-//        }break;
             
         case TradeSellTypeLink:
         {
@@ -229,10 +180,10 @@
                 
                 TLNavigationController *nav = [[TLNavigationController alloc] initWithRootViewController:loginVC];
                 
-                loginVC.loginSuccess = ^(){
-                    
-                    [weakSelf tradeEventsWithType:TradeSellTypeTrust];
-                };
+                //                loginVC.loginSuccess = ^(){
+                //
+                //                    [weakSelf tradeEventsWithType:TradeSellTypeTrust];
+                //                };
                 
                 [self presentViewController:nav animated:YES completion:nil];
                 
@@ -253,10 +204,10 @@
                 
                 TLNavigationController *nav = [[TLNavigationController alloc] initWithRootViewController:loginVC];
                 
-                loginVC.loginSuccess = ^(){
-                    
-                    [weakSelf tradeEventsWithType:TradeSellTypeTrust];
-                };
+                //                loginVC.loginSuccess = ^(){
+                //
+                //                    [weakSelf tradeEventsWithType:TradeSellTypeTrust];
+                //                };
                 
                 [self presentViewController:nav animated:YES completion:nil];
                 
@@ -305,7 +256,7 @@
     CoinWeakSelf;
     
     NSString *num = [self.tradeView.tradeNum convertToSysCoin];
-
+    
     NSString *price = [self.advertise.truePrice convertToRealMoneyWithNum:3];
     
     TLNetworking *http = [TLNetworking new];
@@ -362,12 +313,12 @@
                  confirmMsg:[LangSwitcher switchLang:@"确认" key:nil]
                   cancleMsg:[LangSwitcher switchLang:@"取消" key:nil]
                      cancle:^(UIAlertAction *action) {
-        
-        
-    } confirm:^(UIAlertAction *action) {
-        
-        [weakSelf requestAdvertiseOff];
-    }];
+                         
+                         
+                     } confirm:^(UIAlertAction *action) {
+                         
+                         [weakSelf requestAdvertiseOff];
+                     }];
     
 }
 
@@ -447,11 +398,11 @@
         
         weakSelf.tradeView.truePrice = advertise.truePrice;
         
-//        weakSelf.tradeView.isTrust = [advertise.isTrust integerValue] == 0 ? NO: YES;
+        //        weakSelf.tradeView.isTrust = [advertise.isTrust integerValue] == 0 ? NO: YES;
         
         weakSelf.tradeView.advertise = advertise;
         //广告剩余可用余额
-//        weakSelf.tradeView.leftAmount = advertise.leftCountString;
+        //        weakSelf.tradeView.leftAmount = advertise.leftCountString;
         
     } failure:^(NSError *error) {
         
@@ -462,7 +413,7 @@
 - (void)willCommitOrder {
     
     TLNetworking *http = [TLNetworking new];
-        
+    
     http.code = @"625248";
     http.parameters[@"adsCode"] = self.advertise.code;
     http.parameters[@"sellUser"] = [TLUser user].userId;
@@ -477,7 +428,7 @@
             
             //联系对方
             [self goChatWithGroupId:orderCode toUser:self.advertise.user];
-
+            
             //刷新订单列表
             [[NSNotificationCenter defaultCenter] postNotificationName:kOrderListRefresh object:nil];
         }
@@ -509,36 +460,7 @@
         
     }];
     
-        //
+    //
 }
-
-//- (void)pushToChatVC {
-//
-//    //对方
-//    TradeUserInfo *friendUserInfo = self.advertise.user;
-//
-//    IMAUser *user = [[IMAUser alloc] initWith:self.advertise.userId];
-//
-//    user.nickName = friendUserInfo.nickname;
-//    user.icon = [friendUserInfo.photo convertImageUrl];
-//    user.remark = friendUserInfo.nickname;
-//    user.userId = self.advertise.userId;
-//    //我
-//    ChatUserProfile *userInfo = [ChatUserProfile sharedUser];
-//
-//    userInfo.minePhoto = [TLUser user].photo;
-//    userInfo.mineNickName = [TLUser user].nickname;
-//    userInfo.friendPhoto = [friendUserInfo.photo convertImageUrl];
-//    userInfo.friendNickName = friendUserInfo.nickname;
-//
-////    ChatViewController *chatVC = [[CustomChatUIViewController alloc] initWith:user];
-//    ChatViewController *chatVC = [[ChatViewController alloc] initWith:user];
-//
-//    chatVC.userInfo = userInfo;
-//
-//    [self.navigationController pushViewController:chatVC animated:YES];
-//}
-
-
 
 @end

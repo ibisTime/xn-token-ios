@@ -17,11 +17,13 @@
 #import "NSNumber+Extension.h"
 #import "UILabel+Extension.h"
 #import "UIButton+EnLargeEdge.h"
-
+#import "UserStatistics.h"
 #import "TLTextView.h"
 #import "TLUser.h"
-
+#import "AdsDetailBottomOpView.h"
 #import "PayTypeModel.h"
+#import "AdsDetailUserView.h"
+
 
 #define myDotNumbers     @"0123456789.\n"
 #define myNumbers          @"0123456789\n"
@@ -29,17 +31,7 @@
 @interface TradeBuyView ()<UITextFieldDelegate>
 
 //用户资料
-@property (nonatomic, strong) UIView *topView;
-//头像
-@property (nonatomic, strong) UIButton *photoBtn;
-//昵称
-@property (nonatomic, strong) UILabel *nameLbl;
-//支付方式
-@property (nonatomic, strong) UILabel *payTypeLbl;
-//限额
-@property (nonatomic, strong) UILabel *limitAmountLbl;
-//价格
-@property (nonatomic, strong) UILabel *priceLbl;
+@property (nonatomic, strong) AdsDetailUserView *topUserView;
 
 //留言
 @property (nonatomic, strong) UIView *leaveMsgView;
@@ -53,7 +45,7 @@
 //交易提醒
 @property (nonatomic, strong) UILabel *tradeRemindLbl;
 //底部
-@property (nonatomic, strong) UIView *bottomView;
+@property (nonatomic, strong) AdsDetailBottomOpView *bottomView;
 
 
 
@@ -65,8 +57,6 @@
 {
     
     if (self = [super initWithFrame:frame]) {
-        
-        self.lblArr = [NSMutableArray array];
         
         [self initScrollView];
         
@@ -105,176 +95,29 @@
 
 - (void)initTopView {
     
-    self.topView = [[UIView alloc] init];
+    //--//
+    self.topUserView = [[AdsDetailUserView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 125)];
+    [self.scrollView addSubview:self.topUserView];
     
-    self.topView.backgroundColor = kWhiteColor;
+    self.topUserView.userInteractionEnabled = YES;
+    [self.topUserView addTarget:self action:@selector(goHomePage) forControlEvents:UIControlEventTouchUpInside];
     
-    [self.scrollView addSubview:self.topView];
-    [self.topView mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.left.top.equalTo(@0);
-        make.width.equalTo(@(kScreenWidth));
-        make.height.equalTo(@125);
-        
-    }];
-    
-    //头像
-    CGFloat imgWidth = 48;
-    
-    self.photoBtn = [UIButton buttonWithTitle:@"" titleColor:kWhiteColor backgroundColor:kAppCustomMainColor titleFont:24 cornerRadius:imgWidth/2.0];
-    
-    [self.photoBtn addTarget:self action:@selector(homePage) forControlEvents:UIControlEventTouchUpInside];
-    
-    self.photoBtn.imageView.contentMode = UIViewContentModeScaleAspectFill;
-    
-    [self.topView addSubview:self.photoBtn];
-    [self.photoBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.left.top.equalTo(@(15));
-        make.width.height.equalTo(@(imgWidth));
-        
-    }];
-    
-    //昵称
-    self.nameLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:15.0];
-    
-    [self.topView addSubview:self.nameLbl];
-    [self.nameLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.top.equalTo(@15);
-        make.left.equalTo(self.photoBtn.mas_right).offset(10);
-        
-    }];
-    
-    //支付方式
-    self.payTypeLbl = [UILabel labelWithFrame:CGRectZero
-                                 textAligment:NSTextAlignmentCenter
-                              backgroundColor:[UIColor clearColor]
-                                         font:Font(11)
-                                    textColor:kClearColor];
-    self.payTypeLbl.layer.cornerRadius = 3;
-    self.payTypeLbl.clipsToBounds = YES;
-    
-    [self.topView addSubview:self.payTypeLbl];
-    [self.payTypeLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.nameLbl.mas_top);
-        make.width.equalTo(@32);
-        make.height.equalTo(@18);
-        make.left.equalTo(self.nameLbl.mas_right).offset(6);
-        
-    }];
-    
-    //限额
-    self.limitAmountLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor2 font:12.0];
-    
-    [self.topView addSubview:self.limitAmountLbl];
-    [self.limitAmountLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.left.equalTo(self.nameLbl.mas_left);
-        make.top.equalTo(self.nameLbl.mas_bottom).offset(10);
-        
-    }];
-    
-    //价格
-    self.priceLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kRiseColor font:15.0];
-    
-    [self.topView addSubview:self.priceLbl];
-    [self.priceLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.right.equalTo(self.mas_right).offset(-15);
-        make.top.equalTo(@(15));
-        
-    }];
-    
-//    self.trustBtn = [UIButton buttonWithTitle:@"+ 信任" titleColor:kThemeColor backgroundColor:kClearColor titleFont:13.0 cornerRadius:3];
-//    
-//    self.trustBtn.layer.borderWidth = 0.5;
-//    self.trustBtn.layer.borderColor = kThemeColor.CGColor;
-//    
-//    [self.trustBtn addTarget:self action:@selector(trust:) forControlEvents:UIControlEventTouchUpInside];
-//    
-//    [self.topView addSubview:self.trustBtn];
-//    [self.trustBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-//        
-//        make.right.equalTo(self.priceLbl.mas_right);
-//        make.top.equalTo(self.priceLbl.mas_bottom).offset(10);
-//        make.width.equalTo(@70);
-//        make.height.equalTo(@24);
-//        
-//    }];
-//    
-//    self.trustBtn.hidden = YES;
-    
-    NSArray *textArr = @[ [LangSwitcher switchLang:@"交易次数" key:nil],
-                         [LangSwitcher switchLang:@"信任次数" key:nil],
-                         [LangSwitcher switchLang:@"好评率" key:nil],
-                          [LangSwitcher switchLang:@"历史交易" key:nil],
-
-                        ];
-    
-    CGFloat width = kScreenWidth/(textArr.count*1.0);
-    
-    [textArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        
-        UILabel *textLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:17.0];
-        
-        textLbl.numberOfLines = 0;
-        
-        textLbl.textAlignment = NSTextAlignmentCenter;
-        
-        [self.topView addSubview:textLbl];
-        [textLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-            
-            make.left.equalTo(@(idx*width));
-            make.width.equalTo(@(width));
-            make.height.equalTo(@50);
-            make.bottom.equalTo(@(-0.5));
-        }];
-        
-        [self.lblArr addObject:textLbl];
-    }];
-    
-    //分割线
-    UIView *line = [[UIView alloc] init];
-    
-    line.backgroundColor = kLineColor;
-    
-    [self.topView addSubview:line];
-    [line mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.left.right.equalTo(@0);
-        make.bottom.equalTo(@(-0.5));
-        make.height.equalTo(@0.5);
-        
-    }];
 }
 
+#pragma mark- 这里有问题
 - (void)initLeaveMsg {
     
-    UIView *leaveMsgView = [[UIView alloc] init];
-    
+    UIView *leaveMsgView = [[UIView alloc] initWithFrame:CGRectMake(0, 125, SCREEN_WIDTH, 150)];
     leaveMsgView.backgroundColor = kWhiteColor;
-    
-    [self.scrollView addSubview:leaveMsgView];
-    [leaveMsgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.left.equalTo(@0);
-        make.width.equalTo(@(kScreenWidth));
-        make.top.equalTo(self.topView.mas_bottom);
-        make.height.equalTo(@150);
-    }];
-    
     self.leaveMsgView = leaveMsgView;
+    [self.scrollView addSubview:leaveMsgView];
     
     TLTextView *textView = [[TLTextView alloc] initWithFrame:leaveMsgView.bounds];
-    
     textView.font = Font(14.0);
-    
     textView.placholder = [LangSwitcher switchLang:@"请写下您的广告留言吧" key:nil];
-    
     textView.editable = NO;
-    
     [leaveMsgView addSubview:textView];
+    self.leaveMsgTV = textView;
     [textView mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.left.top.equalTo(@10);
@@ -283,7 +126,6 @@
         
     }];
     
-    self.leaveMsgTV = textView;
 }
 
 - (void)initBuyView {
@@ -472,140 +314,31 @@
 
 - (void)initBottomView {
     
-    self.bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, kSuperViewHeight - 50 - kBottomInsetHeight, kScreenWidth, 50 + kBottomInsetHeight)];
-    
-    self.bottomView.backgroundColor = kWhiteColor;
-    
+    self.bottomView = [[AdsDetailBottomOpView alloc] initWithFrame:CGRectMake(0, kSuperViewHeight - 50 - kBottomInsetHeight, kScreenWidth, 50 + kBottomInsetHeight)];
     [self addSubview:self.bottomView];
+    self.bottomView.opType = AdsDetailBottomOpTypeBuy;
+    
+    //事件
+    [self.bottomView.chatBtn addTarget:self action:@selector(link) forControlEvents:UIControlEventTouchUpInside];
+    //
+    [self.bottomView.opBtn addTarget:self action:@selector(buy) forControlEvents:UIControlEventTouchUpInside];
    
-    //联系对方
-    UIButton *linkBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"联系对方" key:nil]
-                                       titleColor:kTextColor
-                                  backgroundColor:kWhiteColor
-                                        titleFont:16.0];
-    
-    [linkBtn addTarget:self action:@selector(link) forControlEvents:UIControlEventTouchUpInside];
-    
-    [linkBtn setImage:kImage(@"聊天") forState:UIControlStateNormal];
-    
-    [self.bottomView addSubview:linkBtn];
-    [linkBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.left.top.equalTo(@0);
-        make.width.equalTo(@(kScreenWidth/2.0));
-        make.height.equalTo(@50);
-        
-    }];
-    
-    [linkBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 0, -10)];
-    
-    //购买按钮
-    UIButton *buyBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"购买" key:nil] 
-                                      titleColor:kWhiteColor
-                                 backgroundColor:kThemeColor
-                                       titleFont:16.0];
-    
-    [buyBtn addTarget:self action:@selector(buy) forControlEvents:UIControlEventTouchUpInside];
-    
-    [self.bottomView addSubview:buyBtn];
-    [buyBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.right.top.equalTo(@0);
-        make.width.equalTo(@(kScreenWidth/2.0));
-        make.height.equalTo(@50);
-        
-    }];
-    
-    //分割线
-    UIView *line = [[UIView alloc] init];
-    
-    line.backgroundColor = kLineColor;
-    
-    [self.bottomView addSubview:line];
-    [line mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.left.right.equalTo(@0);
-        make.bottom.equalTo(linkBtn.mas_bottom).offset(0);
-        make.height.equalTo(@0.5);
-        
-    }];
-    
 }
 
 #pragma mark - Setting
-
 - (void)setAdvertise:(AdvertiseModel *)advertise {
     
     _advertise = advertise;
     
     UserInfo *userInfo = advertise.user;
-    
     UserStatistics *userStatist = advertise.userStatistics;
     
-    //头像
-    if (userInfo.photo) {
-        
-        [self.photoBtn setTitle:@"" forState:UIControlStateNormal];
-        
-        [self.photoBtn sd_setImageWithURL:[NSURL URLWithString:[userInfo.photo convertImageUrl]] forState:UIControlStateNormal];
-        
-    } else {
-        
-        NSString *nickName = userInfo.nickname;
-        
-        NSString *title = [nickName substringToIndex:1];
-        
-        [self.photoBtn setTitle:title forState:UIControlStateNormal];
-        
-    }
-    
-    self.nameLbl.text = userInfo.nickname;
-    
-    //支付方式
-    PayTypeModel *payModel = [PayTypeModel new];
-    
-    payModel.payType = advertise.payType;
-    
-    self.payTypeLbl.text = payModel.text;
-    
-    CGFloat payW = self.payTypeLbl.text.length*11 + 10;
-    
-    [self.payTypeLbl mas_updateConstraints:^(MASConstraintMaker *make) {
-        
-        make.width.equalTo(@(payW));
-    }];
-    
-    self.payTypeLbl.textColor = payModel.color;
-    
-    self.payTypeLbl.layer.borderColor = payModel.color.CGColor;
-    self.payTypeLbl.layer.borderWidth = 0.5;
-    
-    //限额
-    self.limitAmountLbl.text = [NSString stringWithFormat:@"限额: %@-%@ ",[advertise.minTrade convertToSimpleRealMoney], [advertise.maxTrade convertToSimpleRealMoney]];
-    
-    self.cnyTF.placeholder = [NSString stringWithFormat:@"%@-%@ ",[advertise.minTrade convertToSimpleRealMoney], [advertise.maxTrade convertToSimpleRealMoney]];
+    //--//
+    self.topUserView.ads = advertise;
 
-    //价格
-    self.priceLbl.text = [NSString stringWithFormat:@"%@ %@", [advertise.truePrice convertToSimpleRealMoney],self.advertise.tradeCurrency];
-    
-    NSArray *textArr = @[@"交易次数", @"信任次数", @"好评率"];
-    
-    NSArray *numArr = @[[NSString stringWithFormat:@"%ld", userStatist.jiaoYiCount], [NSString stringWithFormat:@"%ld", userStatist.beiXinRenCount], userStatist.goodCommentRate];
-    
-    [self.lblArr enumerateObjectsUsingBlock:^(UILabel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        
-        if (idx == 3) {
-            
-            return ;
-        }
-        
-        [obj labelWithString:[NSString stringWithFormat:@"%@\n%@", numArr[idx], textArr[idx]] title:textArr[idx] font:Font(12.0) color:kTextColor2];
-        
-    }];
-    
+    self.cnyTF.placeholder = [NSString stringWithFormat:@"%@-%@ ",[advertise.minTrade convertToSimpleRealMoney], [advertise.maxTrade convertToSimpleRealMoney]];
     //留言
     self.leaveMsgTV.text = advertise.leaveMessage;
-    // - - //
 }
 
 - (void)setLeftAmount:(NSString *)leftAmount {
@@ -714,17 +447,9 @@
     }
 }
 
-//- (void)trust:(UIButton *)sender {
-//
-////    TradeBuyType type = self.isTrust == NO ? TradeBuyTypeTrust: TradeBuyTypeCancelTrust;
-//
-//    if (_tradeBlock) {
-//
-//        _tradeBlock(type);
-//    }
-//}
 
-- (void)homePage {
+
+- (void)goHomePage {
     
     if (_tradeBlock) {
         

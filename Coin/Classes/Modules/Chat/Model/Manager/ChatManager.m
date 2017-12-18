@@ -85,7 +85,9 @@
         
         
         IMALoginParam *loginParam = [[IMALoginParam alloc] init];
-        loginParam.identifier = [TLUser user].userId;
+        
+        //转成小写，登录
+        loginParam.identifier = [[TLUser user].userId lowercaseString];
         loginParam.userSig = self.imModel.sign;
         loginParam.appidAt3rd = self.imModel.txAppCode;
         [self loginWithParam:loginParam];

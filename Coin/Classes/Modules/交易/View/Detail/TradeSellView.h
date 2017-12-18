@@ -13,8 +13,8 @@
 
 typedef NS_ENUM(NSInteger, TradeSellType) {
     
-    TradeSellTypeTrust = 0,      //信任
-    TradeSellTypeCancelTrust,    //取消信任
+//    TradeSellTypeTrust = 0,      //信任
+//    TradeSellTypeCancelTrust,    //取消信任
     TradeSellTypeLink,           //联系对方
     TradeSellTypeSell,           //卖出
     TradeSellTypeHomePage,       //个人主页
@@ -34,7 +34,7 @@ typedef void(^TradeSellBlock)(TradeSellType tradeType);
 @property (nonatomic, strong) TLTextField *ethTF;
 
 //交易次数、信任次数、好评率和历史交易
-@property (nonatomic, strong) NSMutableArray <UILabel *>*lblArr;
+//@property (nonatomic, strong) NSMutableArray <UILabel *>*lblArr;
 
 @property (nonatomic, strong) AdvertiseModel *advertise;
 

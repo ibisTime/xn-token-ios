@@ -31,6 +31,9 @@ FOUNDATION_EXPORT void TLLog(NSString *format, ...);
 @property (nonatomic, copy) NSString *qiniuDomain;
 @property (nonatomic,strong) NSString *shareBaseUrl;
 
+- (NSString *)apiUrl;
+- (NSString *)ipUrl;
+
 ////腾讯云
 //@property (nonatomic, copy) NSString *chatAppId;
 //@property (nonatomic, copy) NSString *chatAccountType;

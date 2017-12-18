@@ -14,10 +14,7 @@
 #import "TLUser.h"
 #import "TLAlert.h"
 
-//121.43.101.148:5703/cd-qlqq-front
-
 @implementation TLNetworking
-
 
 + (AFHTTPSessionManager *)HTTPSessionManager
 {
@@ -38,21 +35,16 @@
 
 + (NSString *)serveUrl {
     
-    return [[self baseUrl] stringByAppendingString:@"/forward-service/api"];
+    return [[AppConfig config] apiUrl];
+    
 }
 
 + (NSString *)ipUrl {
 
-    return [[self baseUrl] stringByAppendingString:@"/forward-service/ip"];
-
-}
-
-
-+ (NSString *)baseUrl {
-
-    return [AppConfig config].addr;
+    return [[AppConfig config] ipUrl];
     
 }
+
 
 
 + (NSString *)systemCode {
@@ -175,11 +167,7 @@
 
           }
       
-      
       }
-      
-      
-    
       
    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
        
@@ -199,6 +187,7 @@
        
    }];
 
+    
 }
 
 - (void)hundleSuccess:(id)responseObj {

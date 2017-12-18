@@ -69,6 +69,17 @@ void TLLog(NSString *format, ...) {
     
 }
 
+- (NSString *)apiUrl {
+    
+    return [self.addr stringByAppendingString:@"/forward-service/api"];
+}
+
+- (NSString *)ipUrl {
+    
+    return [self.addr stringByAppendingString:@"/forward-service/ip"];
+
+}
+
 - (NSString *)getUrl {
 
     return [self.addr stringByAppendingString:@"/forward-service/api"];

@@ -37,7 +37,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-    
     //服务器环境
     [AppConfig config].runEnv = RunEnvRelease;
     

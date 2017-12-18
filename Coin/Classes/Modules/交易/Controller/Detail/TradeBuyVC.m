@@ -22,7 +22,7 @@
 #import "UIBarButtonItem+convience.h"
 #import "UIButton+EnLargeEdge.h"
 #import "APICodeMacro.h"
-
+#import "UserStatistics.h"
 #import "TLUserLoginVC.h"
 #import "TLNavigationController.h"
 #import "HomePageVC.h"
@@ -70,24 +70,6 @@
         weakSelf.tradeView.truePrice = self.advertise.truePrice;
         //广告剩余可用余额
         weakSelf.tradeView.leftAmount = self.advertise.leftCountString;
-        //
-        NSString *text = [LangSwitcher switchLang:@"历史交易" key:nil];
-        NSString *history = [self.advertise.userStatistics convertTotalTradeCount];
-        //历史交易
-        UILabel *lbl = self.tradeView.lblArr[3];
-        [lbl labelWithString:[NSString stringWithFormat:@"%@\n%@", history, text] title:text font:Font(12.0) color:kTextColor2];
-        
-        // ----------------- //
-
-
-        
-        //是我的广告，并且广告在交易区
-//        if ([self.advertise.userId isEqualToString:[TLUser user].userId]
-//            && self.type == TradeBuyPositionTypeMyPublish) {
-//            
-//            //下架
-//            [self addOffItem];
-//        }
         
         //获取交易提醒
         [self requestTradeRemind];
@@ -191,28 +173,28 @@
 #pragma mark - Events
 - (void)tradeEventsWithType:(TradeBuyType)type {
     
-    CoinWeakSelf;
+//    CoinWeakSelf;
     
     switch (type) {
 
         case TradeBuyTypeLink:
         {
             if (![TLUser user].isLogin) {
-                
+
                 TLUserLoginVC *loginVC = [[TLUserLoginVC alloc] init];
-                
+
                 TLNavigationController *nav = [[TLNavigationController alloc] initWithRootViewController:loginVC];
-                
-                loginVC.loginSuccess = ^(){
-                    
-                    [weakSelf tradeEventsWithType:TradeBuyTypeTrust];
-                };
-                
+
+//                loginVC.loginSuccess = ^(){
+//
+//                    [weakSelf tradeEventsWithType:TradeBuyTypeTrust];
+//                };
+
                 [self presentViewController:nav animated:YES completion:nil];
-                
+
                 return;
             }
-            
+
             //待下单
             [self willCommitOrder];
             
@@ -225,12 +207,6 @@
                 TLUserLoginVC *loginVC = [[TLUserLoginVC alloc] init];
                 
                 TLNavigationController *nav = [[TLNavigationController alloc] initWithRootViewController:loginVC];
-                
-                loginVC.loginSuccess = ^(){
-                    
-                    [weakSelf tradeEventsWithType:TradeBuyTypeTrust];
-                    
-                };
                 
                 [self presentViewController:nav animated:YES completion:nil];
                 
@@ -415,40 +391,5 @@
         
     }];
 }
-
-
-
-
-//#pragma mark- ads_联系对方
-//- (void)pushToChatVCWithGroupId:(NSString *)groupId {
-//
-//    //对方
-//    TradeUserInfo *friendUserInfo = self.advertise.user;
-//
-//    //
-//    IMAUser *user = [[IMAUser alloc] initWith:self.advertise.userId];
-//    user.nickName = friendUserInfo.nickname;
-//    user.icon = [friendUserInfo.photo convertImageUrl];
-//    user.remark = friendUserInfo.nickname;
-//    user.userId = self.advertise.userId;
-//
-//    //我
-//    ChatUserProfile *userInfo = [ChatUserProfile sharedUser];
-//    userInfo.minePhoto = [TLUser user].photo;
-//    userInfo.mineNickName = [TLUser user].nickname;
-//    userInfo.friendPhoto = [friendUserInfo.photo convertImageUrl];
-//    userInfo.friendNickName = friendUserInfo.nickname;
-//
-////    ChatViewController *chatVC = [[CustomChatUIViewController alloc] initWith:user];
-////
-//
-//    // 此处应该拿到订单号，进行 群组查找
-//    IMAGroup *currentGroup = [[ChatManager sharedManager] getGroupByGroupId:<#(NSString *)#>];
-//    ChatViewController *chatVC = [[ChatViewController alloc] initWith:user];
-//    chatVC.userInfo = userInfo;
-//
-//    [self.navigationController pushViewController:chatVC animated:YES];
-//}
-
 
 @end

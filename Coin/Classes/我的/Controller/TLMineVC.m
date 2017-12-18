@@ -27,7 +27,7 @@
 #import "FansVC.h"
 #import "CoinAddressListVC.h"
 #import "InviteFriendVC.h"
-
+#import "UserStatistics.h"
 #import "TLImagePicker.h"
 #import "TLUploadManager.h"
 
@@ -85,10 +85,9 @@
 - (void)initMineHeaderView {
     
     MineHeaderView *mineHeaderView = [[MineHeaderView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 160 + kStatusBarHeight + 55)];
-    
     mineHeaderView.delegate = self;
-    
     self.headerView = mineHeaderView;
+    
 }
 
 - (void)initGroup {
@@ -110,14 +109,13 @@
     
     //我的地址
     MineModel *address = [MineModel new];
-    
     address.text = [LangSwitcher switchLang:@"我的地址" key:nil];
     address.imgName = @"我的地址";
     address.action = ^{
         
         CoinAddressListVC *addressListVC = [CoinAddressListVC new];
-        
         [weakSelf.navigationController pushViewController:addressListVC animated:YES];
+        
     };
     
     //受信任的
@@ -140,14 +138,12 @@
     inviteFriend.action = ^{
         
         InviteFriendVC *inviteVC = [InviteFriendVC new];
-        
         [weakSelf.navigationController pushViewController:inviteVC animated:YES];
         
     };
     
     //安全中心
     MineModel *securityCenter = [MineModel new];
-    
     securityCenter.text = [LangSwitcher switchLang:@"安全中心" key:nil];
     securityCenter.imgName = @"安全中心";
     securityCenter.action = ^{
@@ -191,9 +187,7 @@
     linkService.action = ^{
         
         HTMLStrVC *htmlVC = [HTMLStrVC new];
-        
         htmlVC.type = HTMLTypeLinkService;
-        
         [weakSelf.navigationController pushViewController:htmlVC animated:YES];
         
     };
@@ -205,10 +199,9 @@
     abountUs.action = ^{
         
         HTMLStrVC *htmlVC = [HTMLStrVC new];
-        
         htmlVC.type = HTMLTypeAboutUs;
-        
         [weakSelf.navigationController pushViewController:htmlVC animated:YES];
+        
     };
     
     self.group = [MineGroup new];
@@ -252,7 +245,6 @@
             
             manager.imgData = imgData;
             manager.image = image;
-            
             [manager getTokenShowView:weakSelf.view succes:^(NSString *key) {
                 
                 [weakSelf changeHeadIconWithKey:key imgData:imgData];
