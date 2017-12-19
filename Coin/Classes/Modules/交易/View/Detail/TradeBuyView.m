@@ -329,11 +329,6 @@
 - (void)setAdvertise:(AdvertiseModel *)advertise {
     
     _advertise = advertise;
-    
-    UserInfo *userInfo = advertise.user;
-    UserStatistics *userStatist = advertise.userStatistics;
-    
-    //--//
     self.topUserView.ads = advertise;
 
     self.cnyTF.placeholder = [NSString stringWithFormat:@"%@-%@ ",[advertise.minTrade convertToSimpleRealMoney], [advertise.maxTrade convertToSimpleRealMoney]];
@@ -344,7 +339,6 @@
 - (void)setLeftAmount:(NSString *)leftAmount {
     
     _leftAmount = leftAmount;
-    
     self.leftAmountLbl.text = [NSString stringWithFormat:@"广告剩余可交易量: %@ ETH", [_leftAmount convertToSimpleRealCoin]];
     self.leftAmountLbl.text = [LangSwitcher switchLang:self.leftAmountLbl.text key:nil];
 }
@@ -352,7 +346,6 @@
 - (void)setTruePrice:(NSNumber *)truePrice {
     
     _truePrice = truePrice;
-    
     self.advertise.truePrice = truePrice;
 }
 
@@ -360,31 +353,27 @@
 - (void)setUserId:(NSString *)userId {
     
     _userId = userId;
-    
     CGFloat scrollheight = [self.advertise.userId isEqualToString:userId] ? kSuperViewHeight: kSuperViewHeight - 60 - kBottomInsetHeight;
-    
     [self.scrollView mas_updateConstraints:^(MASConstraintMaker *make) {
         
         make.height.equalTo(@(scrollheight));
     }];
-        
     self.bottomView.hidden = [self.advertise.userId isEqualToString:userId] ? YES: NO;
     
 }
 
+// 交易提醒
 - (void)setTradeRemind:(NSString *)tradeRemind {
     
     _tradeRemind = tradeRemind;
     
     [self.tradeRemindLbl labelWithTextString:tradeRemind lineSpace:5];
-
     [self layoutIfNeeded];
-    
     self.scrollView.contentSize = CGSizeMake(kScreenWidth, self.tradePromptView.yy);
+    
 }
 
 #pragma mark - Events
-
 - (void)ethDidChange:(UITextField *)sender {
     
     if ([sender.text isEqualToString:@""]) {
@@ -431,6 +420,57 @@
     
 }
 
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    
+    if ([string isEqualToString:@"\n"] || [string isEqualToString:@""]) {//按下return
+        return YES;
+    }
+    
+    NSCharacterSet *cs;
+    NSUInteger nDotLoc = [textField.text rangeOfString:@"."].location;
+    
+    NSInteger count = 0;
+    
+    if (NSNotFound == nDotLoc && 0 != range.location) {
+        cs = [[NSCharacterSet characterSetWithCharactersInString:myNumbers] invertedSet];
+        if ([string isEqualToString:@"."]) {
+            return YES;
+        }
+        
+    } else {
+        
+        cs = [[NSCharacterSet characterSetWithCharactersInString:myDotNumbers] invertedSet];
+        if (textField.text.length >= 12) {
+            
+            return NO;
+        }
+    }
+    NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
+    BOOL basicTest = [string isEqualToString:filtered];
+    if (!basicTest) {
+        return NO;
+    }
+    
+    if (textField == self.cnyTF) {
+        
+        count = 2;
+        
+    } else if (textField == self.ethTF) {
+        
+        count = 8;
+    }
+    
+    if (NSNotFound != nDotLoc && range.location > nDotLoc + count) {
+        
+        return NO;  //小数点后面两位
+    }
+    if (NSNotFound != nDotLoc && range.location > nDotLoc && [string isEqualToString:@"."]) {
+        return NO;  //控制只有一个小数点
+    }
+    return YES;
+}
+
+#pragma mark- 事件
 - (void)buy {
     
     if (_tradeBlock) {
@@ -468,55 +508,6 @@
 //
 //    return YES;
 //}
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-    
-    if ([string isEqualToString:@"\n"] || [string isEqualToString:@""]) {//按下return
-        return YES;
-    }
-    
-    NSCharacterSet *cs;
-    NSUInteger nDotLoc = [textField.text rangeOfString:@"."].location;
-    
-    NSInteger count = 0;
-    
-    if (NSNotFound == nDotLoc && 0 != range.location) {
-        cs = [[NSCharacterSet characterSetWithCharactersInString:myNumbers] invertedSet];
-        if ([string isEqualToString:@"."]) {
-            return YES;
-        }
-        
-    }
-    else {
-        
-        cs = [[NSCharacterSet characterSetWithCharactersInString:myDotNumbers] invertedSet];
-        if (textField.text.length >= 12) {
-            
-            return NO;
-        }
-    }
-    NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
-    BOOL basicTest = [string isEqualToString:filtered];
-    if (!basicTest) {
-        return NO;
-    }
-    
-    if (textField == self.cnyTF) {
-        
-        count = 2;
-        
-    } else if (textField == self.ethTF) {
-        
-        count = 8;
-    }
-    
-    if (NSNotFound != nDotLoc && range.location > nDotLoc + count) {
-        
-        return NO;  //小数点后面两位
-    }
-    if (NSNotFound != nDotLoc && range.location > nDotLoc && [string isEqualToString:@"."]) {
-        return NO;  //控制只有一个小数点
-    }
-    return YES;
-}
+
 
 @end

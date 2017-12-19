@@ -59,7 +59,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"行情";
-
+    
     [self initScrollView];
     //查询以太币和比特币行情
     [self queryCoinQuotation];
@@ -78,7 +78,7 @@
     CoinWeakSelf;
     
     self.quotationView = [[QuotationView alloc] init];
-
+    
     self.quotationView.quotationBlock = ^(QuotationEventType quototionType, NSInteger index) {
         
         [weakSelf quotationEventWithType:quototionType index:index];
@@ -106,7 +106,7 @@
             webVC.url = self.bannerRoom[index].url;
             
             [self.navigationController pushViewController:webVC animated:YES];
-           
+            
         }break;
             
         case QuotationEventTypeNotice:
@@ -119,11 +119,11 @@
             
         case QuotationEventTypeCoinDetail:
         {
-
+            
             QuotationListVC *listVC = [QuotationListVC new];
-
+            
             listVC.quototationType = index == 0 ? QuotationListTypeETH: QuotationListTypeBTC;
-
+            
             [self.navigationController pushViewController:listVC animated:YES];
             
         }break;
@@ -237,7 +237,7 @@
             if ([obj.coin isEqualToString:@"ETH"]) {
                 
                 UILabel *priceLbl = [self.quotationView viewWithTag:1400];
-
+                
                 UILabel *diffPriceLbl = [self.quotationView viewWithTag:1410];
                 
                 UILabel *diffPreLbl = [self.quotationView viewWithTag:1420];
@@ -249,7 +249,7 @@
             } else if ([obj.coin isEqualToString:@"BTC"]) {
                 
                 UILabel *priceLbl = [self.quotationView viewWithTag:1401];
-
+                
                 UILabel *diffPriceLbl = [self.quotationView viewWithTag:1411];
                 
                 UILabel *diffPreLbl = [self.quotationView viewWithTag:1421];
@@ -273,7 +273,7 @@
 - (void)calculationPriceDiffWithPriceLabel:(UILabel *)priceLabel diffPriceLabel:(UILabel *)diffPricelabel riseLabel:(UILabel *)riseLabel lastQuotation:(QuotationModel *)lastQuotation nowQuotation:(QuotationModel *)nowQuotation {
     
     priceLabel.text = [nowQuotation.mid convertToRealMoneyWithNum:4];
-
+    
     if (lastQuotation) {
         
         CGFloat diffPrice = [[nowQuotation.mid subNumber:lastQuotation.mid] doubleValue];
@@ -296,7 +296,7 @@
         } else {
             
             priceLabel.textColor = kRiseColor;
-
+            
             diffPricelabel.textColor = kRiseColor;
             
             diffPricelabel.text = [NSString stringWithFormat:@"%.2lf", diffPrice];
@@ -305,11 +305,11 @@
             
             riseLabel.textColor = kRiseColor;
         }
-    
+        
     } else {
         
         priceLabel.textColor = kThemeColor;
-
+        
         diffPricelabel.text = @"+0.00";
         
         diffPricelabel.textColor = kThemeColor;

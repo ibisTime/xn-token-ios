@@ -45,7 +45,11 @@
     
     if (self.type == UserEditTypeEmail) {
         
-        self.contentTf = [[TLTextField alloc] initWithFrame:CGRectMake(0, 10, kScreenWidth, 45) leftTitle:[LangSwitcher switchLang:@"邮箱" key:nil] titleWidth:80 placeholder:[LangSwitcher switchLang:@"请输入您的邮箱" key:nil]];
+        self.contentTf = [[TLTextField alloc] initWithFrame:CGRectMake(0, 10, kScreenWidth, 45)
+                                                  leftTitle:[LangSwitcher switchLang:@"邮箱" key:nil]
+                                                 titleWidth:80
+                                                placeholder:[LangSwitcher switchLang:@"请输入您的邮箱" 
+                                                            key:nil]];
         
         self.contentTf.text = [self.text valid] ? self.text: @"";
         

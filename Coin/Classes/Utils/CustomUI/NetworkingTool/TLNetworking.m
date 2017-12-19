@@ -111,9 +111,9 @@
     
     if (!self.url || !self.url.length) {
         NSLog(@"url 不存在啊");
-//        if (hud || self.showView) {
-//            [hud hideAnimated:YES];
-//        }
+        if ( self.showView) {
+            [TLProgressHUD dismiss];
+        }
         return nil;
     }
     

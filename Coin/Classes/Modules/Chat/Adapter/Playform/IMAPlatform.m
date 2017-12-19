@@ -123,7 +123,7 @@ static Class kHostClass = Nil;
     [manager setEnv:cfg.environment];
     
     TIMSdkConfig *config = [[TIMSdkConfig alloc] init];
-    
+    config.disableLogPrint = !cfg.enableConsoleLog;
     // 获取appid 和 accountType
 //    config.sdkAppId = [[AppConfig config].chatAppId intValue];
 //    config.accountType = [AppConfig config].chatAccountType;

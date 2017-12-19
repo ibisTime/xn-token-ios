@@ -161,9 +161,7 @@
             return ;
         }
         
-        //
-        if ([self.advertise.status isEqualToString:kAdsStatusDaiJiaoYi] ||[self.advertise.status isEqualToString:kAdsStatusJiaoYiZhong]) {
-            
+        if ([self.advertise.status isEqualToString:kAdsStatusShangJia]) {
             
             //
             bgColor = kThemeColor;

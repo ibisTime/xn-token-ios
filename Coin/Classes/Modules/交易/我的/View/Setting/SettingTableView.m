@@ -51,16 +51,17 @@ static NSString *identifierCell = @"SettingCell";
     SettingCell *cell = [tableView dequeueReusableCellWithIdentifier:identifierCell];
     
     self.group.items = self.group.sections[indexPath.section];
-    
-    cell.textLabel.text = self.group.items[indexPath.row].text;
-    
+    SettingModel *settingModel = self.group.items[indexPath.row];
+    cell.textLabel.text = settingModel.text;
     cell.textLabel.textColor = kTextColor;
-    
     cell.textLabel.font = Font(15.0);
-    
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
     cell.switchHidden = YES;
+    if (settingModel.subText) {
+        
+        cell.rightLabel.text = settingModel.subText;
+
+    }
     
 //    if (indexPath.section == 1) {
 //

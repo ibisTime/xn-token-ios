@@ -77,7 +77,7 @@
                               delegate:self
                               dataSource:self];
     [self.view addSubview:tableView];
-    tableView.backgroundColor = [UIColor whiteColor];
+//    tableView.backgroundColor = [UIColor whiteColor];
     
     //
     [self.orderTableView adjustsContentInsets];

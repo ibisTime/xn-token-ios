@@ -51,7 +51,13 @@
 - (NSString *)convertToTimelineDate;
 
 - (NSString *)convertDate;
+
+
+
+- (NSDate *)convertToSysDate;
 //转为指定格式
 - (NSString *)convertDateWithFormat:(NSString *)format;
 
 @end
+
+FOUNDATION_EXTERN NSString  * const kCDSysTimeFormat;

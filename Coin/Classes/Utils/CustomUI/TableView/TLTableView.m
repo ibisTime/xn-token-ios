@@ -52,7 +52,7 @@ _Pragma("clang diagnostic pop") \
     TLTableView *tableView = [[TLTableView alloc] initWithFrame:frame style:UITableViewStyleGrouped];
     tableView.delegate = delegate;
     tableView.dataSource = dataSource;
-    tableView.backgroundColor = [UIColor clearColor];
+//    tableView.backgroundColor = [UIColor clearColor];
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     tableView.estimatedRowHeight = 0;
     tableView.estimatedSectionHeaderHeight = 0;
@@ -80,7 +80,7 @@ _Pragma("clang diagnostic pop") \
     TLTableView *tableView = [[TLTableView alloc] initWithFrame:frame style:UITableViewStylePlain];
     tableView.delegate = delegate;
     tableView.dataSource = dataSource;
-    tableView.backgroundColor = [UIColor clearColor];
+//    tableView.backgroundColor = [UIColor clearColor];
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     tableView.estimatedRowHeight = 0;
     tableView.estimatedSectionHeaderHeight = 0;

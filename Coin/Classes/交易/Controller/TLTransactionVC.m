@@ -31,7 +31,7 @@
 #import "TLUserLoginVC.h"
 #import "AdsService.h"
 
-@interface TLTransactionVC ()<SegmentDelegate, RefreshDelegate>
+@interface TLTransactionVC ()<SegmentDelegate, RefreshDelegate, UIScrollViewDelegate>
 
 //货币切换
 @property (nonatomic, strong) CoinChangeView *changeView;
@@ -59,9 +59,24 @@
 //交易方式(买币和卖币)
 @property (nonatomic, copy) NSString *tradeType;
 
+//todo 开定时器去刷
+@property (nonatomic, strong) NSTimer *timer;
+
 @end
 
 @implementation TLTransactionVC
+
+-(void)viewWillAppear:(BOOL)animated {
+    
+    [super viewWillAppear:animated];
+    //
+    if (self.advertises && self.advertises.count > 0) {
+        
+        [self.tableView reloadData_tl];
+        
+    }
+    
+}
 
 - (void)viewDidLoad {
     
@@ -76,13 +91,25 @@
     [self addNotification];
     //强制更新
     [self configUpdate];
+    
+//    self.timer = [NSTimer scheduledTimerWithTimeInterval:1
+//                                                  target:self
+//                                                selector:@selector(refreshAds)
+//                                                userInfo:nil
+//                                                 repeats:YES];
+    
+    //
+//    self.tableView.
 
 }
-//--//
 
-//--//
+//- (void)refreshAds {
+//
+//    [self.tableView beginRefreshing];
+//
+//}
+
 #pragma mark - Init
-
 -(TopLabelUtil *)labelUnil {
     
     if (!_labelUnil) {

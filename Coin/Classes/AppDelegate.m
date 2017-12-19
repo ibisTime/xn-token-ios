@@ -26,10 +26,12 @@
 #import "OrderDetailVC.h"
 #import "WaitingOrderVC.h"
 #import "ZMChineseConvert.h"
+#import "SettingModel.h"
 
 @interface AppDelegate ()
 
 @property (nonatomic, strong) FBKVOController *chatKVOCtrl;
+@property (nonatomic, copy) NSArray *cpArr;
 
 @end
 
@@ -37,8 +39,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
+
     //服务器环境
-    [AppConfig config].runEnv = RunEnvRelease;
+    [AppConfig config].runEnv = RunEnvDev;
     
     //配置微信
     [self configWeChat];
@@ -64,7 +67,7 @@
     if([TLUser user].isLogin) {
         
         [[TLUser user] updateUserInfo];
-        [[TLUser user] changLoginTime];
+        // 登录时间变更到，didBecomeActive中
         [[NSNotificationCenter defaultCenter] postNotificationName:kUserLoginNotification object:nil];
         
     };
@@ -252,6 +255,17 @@
         
         return [WXApi handleOpenURL:url delegate:[TLWXManager manager]];
     }
+}
+
+#pragma mark- 应用进入前台，改变登录时间
+- (void)applicationDidBecomeActive:(UIApplication *)application {
+    
+    if([TLUser user].isLogin) {
+
+      [[TLUser user] changLoginTime];
+        
+    };
+    
 }
 
 // iOS9 NS_DEPRECATED_IOS

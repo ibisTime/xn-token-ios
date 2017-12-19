@@ -32,23 +32,25 @@
     [super viewDidLoad];
     
     CGFloat leftW = 90;
-    self.title = [LangSwitcher switchLang:@"修改手机号" key:nil];
+    self.title = [LangSwitcher switchLang:@"手机号" key:nil];
     CGFloat leftMargin = 0;
     
     //手机号
     TLTextField *phoneTf = [[TLTextField alloc] initWithFrame:CGRectMake(leftMargin, 10, kScreenWidth - 2*leftMargin, 45)
-                                                    leftTitle:[LangSwitcher switchLang:@"新手机号" key:nil]
+                                                    leftTitle:[LangSwitcher switchLang:@"手机号" key:nil]
                                                    titleWidth:leftW
                                                   placeholder:[LangSwitcher switchLang:@"请输入新手机号" key:nil]];
     phoneTf.keyboardType = UIKeyboardTypeNumberPad;
     [self.bgSV addSubview:phoneTf];
     self.phoneTf = phoneTf;
     
+    phoneTf.text = [TLUser user].mobile;
+    phoneTf.userInteractionEnabled = NO;
     //验证码
-    TLCaptchaView *captchaView = [[TLCaptchaView alloc] initWithFrame:CGRectMake(phoneTf.x, phoneTf.yy + 1, phoneTf.width, phoneTf.height)];
-    [self.bgSV addSubview:captchaView];
-    self.captchaView = captchaView;
-    [captchaView.captchaBtn addTarget:self action:@selector(sendCaptcha) forControlEvents:UIControlEventTouchUpInside];
+//    TLCaptchaView *captchaView = [[TLCaptchaView alloc] initWithFrame:CGRectMake(phoneTf.x, phoneTf.yy + 1, phoneTf.width, phoneTf.height)];
+//    [self.bgSV addSubview:captchaView];
+//    self.captchaView = captchaView;
+//    [captchaView.captchaBtn addTarget:self action:@selector(sendCaptcha) forControlEvents:UIControlEventTouchUpInside];
     
 //    //资金密码按钮
 //    TLTextField *tradePwdTf = [[TLTextField alloc] initWithframe:CGRectMake(0, captchaView.yy  + 1, kScreenWidth, 50) leftTitle:@"资金密码" titleWidth:90 placeholder:@"请输入支付密码"];
@@ -69,11 +71,11 @@
 //    [self.bgSV addSubview:newCaptchaView];
     
     //确认按钮
-    UIButton *confirmBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"确认修改" key:nil] titleColor:kWhiteColor backgroundColor:kAppCustomMainColor titleFont:16.0 cornerRadius:5];
-    
-    confirmBtn.frame = CGRectMake(15, captchaView.yy + 30, kScreenWidth - 30, 44);
-    [self.bgSV addSubview:confirmBtn];
-    [confirmBtn addTarget:self action:@selector(confirm) forControlEvents:UIControlEventTouchUpInside];
+//    UIButton *confirmBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"确认修改" key:nil] titleColor:kWhiteColor backgroundColor:kAppCustomMainColor titleFont:16.0 cornerRadius:5];
+//    
+//    confirmBtn.frame = CGRectMake(15, captchaView.yy + 30, kScreenWidth - 30, 44);
+//    [self.bgSV addSubview:confirmBtn];
+//    [confirmBtn addTarget:self action:@selector(confirm) forControlEvents:UIControlEventTouchUpInside];
     
     //
 //    UIButton *setPwdBtn = [[UIButton alloc] initWithFrame:CGRectMake(15, confirmBtn.yy + 10, kScreenWidth - 30, 30) title:@"您还未设置资金密码,前往设置->" backgroundColor:[UIColor clearColor]];

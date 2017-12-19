@@ -17,24 +17,19 @@
 @interface MyAdvertiseVC ()
 
 @property (nonatomic, strong) SelectScrollView *selectScrollView;
-
 @property (nonatomic, strong) NSArray *titles;
 
 @end
 
 @implementation MyAdvertiseVC
 
-// 列表——在下一级——控制器中  MyAdvertiseListVC
 //
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
     
     self.title = [LangSwitcher switchLang:@"我发布的" key:nil];
     [self initSelectScrollView];
     [self addSubViewController];
-    
-    
     
 }
 
@@ -47,8 +42,8 @@
                     ];
     
     self.selectScrollView = [[SelectScrollView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight) itemTitles:self.titles];
-    
     [self.view addSubview:self.selectScrollView];
+    
 }
 
 - (void)addSubViewController {
@@ -57,7 +52,21 @@
         
         MyAdvertiseListVC *childVC = [MyAdvertiseListVC new];
         
-        childVC.type = i;
+        switch (i) {
+                
+            case 0: {
+                
+                childVC.type = MyAdvertiseTypeDraft;
+
+            }  break;
+                
+            case 1: {
+                
+                childVC.type = MyAdvertiseTypeDidPublish;
+                
+            }  break;
+                
+        }
         
         childVC.view.frame = CGRectMake(kScreenWidth*i, 1, kScreenWidth, kSuperViewHeight - 45);
         
@@ -67,11 +76,5 @@
         
     }
 }
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 
 @end

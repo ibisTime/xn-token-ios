@@ -15,6 +15,7 @@
 
 + (instancetype)user;
 //用户ID
+
 @property (nonatomic, copy) NSString *userId;
 //Token
 @property (nonatomic, copy) NSString *token;

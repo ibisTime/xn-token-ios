@@ -19,26 +19,26 @@
 #import "GoogleAuthVC.h"
 #import "CloseGoogleAuthVC.h"
 #import "ChangeLoginPwdVC.h"
-
 #import "SettingGroup.h"
 #import "SettingModel.h"
-
 #import "SettingTableView.h"
 #import "SettingCell.h"
-
 #import "AppMacro.h"
 #import "APICodeMacro.h"
-
+#import "EditEmailVC.h"
 #import "TLAlert.h"
 #import "NSString+Check.h"
 
 @interface SettingVC ()
 
 @property (nonatomic, strong) SettingGroup *group;
-
 @property (nonatomic, strong) UIButton *loginOutBtn;
-
 @property (nonatomic, strong) SettingTableView *tableView;
+
+//
+@property (nonatomic, strong) SettingModel *realNameSettingModel;
+@property (nonatomic, strong) SettingModel *emailSettingModel;
+@property (nonatomic, strong) SettingModel *googleAuthSettingModel;
 
 @end
 
@@ -55,12 +55,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
     
     self.title = [LangSwitcher switchLang:@"安全设置" key:nil];
-    
     [self setGroup];
-
     [self initTableView];
     
 }
@@ -70,18 +67,18 @@
 - (void)initTableView {
     
     self.tableView = [[SettingTableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight) style:UITableViewStyleGrouped];
-
+    
     self.tableView.group = self.group;
     
     [self.view addSubview:self.tableView];
-
+    
     UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 150)];
     
     [footerView addSubview:self.loginOutBtn];
     
     self.tableView.tableFooterView = footerView;
     
-
+    
 }
 
 - (void)setGroup {
@@ -90,9 +87,7 @@
     
     //资金密码
     SettingModel *changeTradePwd = [SettingModel new];
-    
     changeTradePwd.text = [LangSwitcher switchLang:@"资金密码" key:nil];
-    
     [changeTradePwd setAction:^{
         
         TLPwdType pwdType = [[TLUser user].tradepwdFlag isEqualToString:@"0"] ? TLPwdTypeSetTrade: TLPwdTypeTradeReset;
@@ -106,18 +101,15 @@
     
     //实名认证
     SettingModel *idAuth = [SettingModel new];
-    
     idAuth.text = [LangSwitcher switchLang:@"实名认证" key:nil];
+    self.realNameSettingModel = idAuth;
     [idAuth setAction:^{
         
         ZMAuthVC *authVC = [ZMAuthVC new];
-        
         authVC.title = [LangSwitcher switchLang:@"实名认证" key:nil];
-
         authVC.success = ^{
             
             [TLAlert alertWithSucces:[LangSwitcher switchLang:@"实名认证成功" key:nil]];
-            
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 
                 [weakSelf.navigationController popViewControllerAnimated:YES];
@@ -131,14 +123,11 @@
     
     //绑定邮箱
     SettingModel *bindEmail = [SettingModel new];
-    
     bindEmail.text = [LangSwitcher switchLang:@"绑定邮箱" key:nil];
+    self.emailSettingModel = bindEmail;
     [bindEmail setAction:^{
         
-        EditVC *editVC = [[EditVC alloc] init];
-        editVC.title = [LangSwitcher switchLang:@"绑定邮箱" key:nil];
-        editVC.text = [TLUser user].email;
-        editVC.type = UserEditTypeEmail;
+        EditEmailVC *editVC = [[EditEmailVC alloc] init];
         [editVC setDone:^(NSString *content){
             
             NSIndexPath *indexPath = [NSIndexPath indexPathForRow:1 inSection:1];
@@ -149,14 +138,14 @@
             [weakSelf.tableView reloadData];
             
         }];
-        
         //
         [weakSelf.navigationController pushViewController:editVC animated:YES];
     }];
     
     //修改手机号
     SettingModel *changeMobile = [SettingModel new];
-    changeMobile.text = [LangSwitcher switchLang:@"修改手机号" key:nil];
+    changeMobile.text = [LangSwitcher switchLang:@"手机号" key:nil];
+    changeMobile.subText = [TLUser user].mobile;
     [changeMobile setAction:^{
         
         TLChangeMobileVC *changeMobileVC = [[TLChangeMobileVC alloc] init];
@@ -172,7 +161,7 @@
         ChangeLoginPwdVC *changeLoginPwdVC = [ChangeLoginPwdVC new];
         
         changeLoginPwdVC.success = ^{
-        
+            
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 
                 [weakSelf.navigationController popViewControllerAnimated:YES];
@@ -183,28 +172,27 @@
         [weakSelf.navigationController pushViewController:changeLoginPwdVC animated:YES];
         
     }];
-
+    
     //谷歌验证
     SettingModel *google = [SettingModel new];
     google.text = [LangSwitcher switchLang:@"谷歌验证" key:nil];
+    self.googleAuthSettingModel = google;
     [google setAction:^{
         
         //未开启直接进入开启界面，已开启就弹出操作表
         if ([TLUser user].isGoogleAuthOpen) {
             
             [weakSelf setGoogleAuth];
-
+            
         } else {
             
             GoogleAuthVC *authVC = [GoogleAuthVC new];
-            
             [weakSelf.navigationController pushViewController:authVC animated:YES];
         }
     }];
     
     self.group = [SettingGroup new];
-    
-    self.group.sections = @[@[changeTradePwd], @[idAuth, bindEmail, changeMobile, changeLoginPwd, google]];
+    self.group.sections = @[@[changeTradePwd], @[idAuth, bindEmail, changeLoginPwd,changeMobile, google]];
     
 }
 
@@ -236,7 +224,7 @@
         tabbarVC.selectedIndex = 2;
         
         [self.navigationController popViewControllerAnimated:NO];
-
+        
     });
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kUserLoginOutNotification object:nil];
@@ -287,7 +275,7 @@
     [http postWithSuccess:^(id responseObject) {
         
         NSDictionary *userInfo = responseObject[@"data"];
-
+        
         //保存信息
         [[TLUser user] saveUserInfo:userInfo];
         [[TLUser user] setUserInfoWithDict:userInfo];
@@ -299,51 +287,29 @@
     }];
 }
 
+#pragma mark- 更新设置状态
 - (void)reloadUserInfo {
     
-    //认证状态
     if ([TLUser user].realName) {
-        
-        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:1];
-        
-        SettingCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
-        
-        cell.rightLabel.text = [LangSwitcher switchLang:@"已认证" key:nil];
+        //认证状态
+        self.realNameSettingModel.subText = [LangSwitcher switchLang:@"已认证" key:nil];
         
     }
+    
     //邮箱
     if ([TLUser user].email) {
         
-        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:1 inSection:1];
-        
-        SettingCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
-        
-        cell.rightLabel.text = [TLUser user].email;
-        
-    }
-    //手机号
-    if ([TLUser user].mobile) {
-        
-        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:2 inSection:1];
-        SettingCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
-        
-        cell.rightLabel.text = [TLUser user].mobile;
+        self.emailSettingModel.subText = [TLUser user].email;
         
     }
     
-    //谷歌验证
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:4 inSection:1];
-    
-    SettingCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
-    
-    cell.rightLabel.text = [TLUser user].isGoogleAuthOpen ? [LangSwitcher switchLang:@"已开启" key:nil]: [LangSwitcher switchLang:@"未开启" key:nil];
-    
+    //
+    self.googleAuthSettingModel.subText = [TLUser user].isGoogleAuthOpen ? [LangSwitcher switchLang:@"已开启" key:nil]: [LangSwitcher switchLang:@"未开启" key:nil];
+
+    // 只保留数据刷新
     [self.tableView reloadData];
+    
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 @end

@@ -116,16 +116,15 @@
     
     if (self.type == MyAdvertiseTypeDraft) {
         
-        helper.parameters[@"statusList"] = @[@"0"];
+        helper.parameters[@"statusList"] = @[kAdsStatusDraft];
 
     } else if (self.type == MyAdvertiseTypeDidPublish) {
         
-        helper.parameters[@"statusList"] = @[@"1", @"2", @"3"];
+        helper.parameters[@"statusList"] = @[kAdsStatusXiaJia,kAdsStatusShangJia];
 
     }
     
     helper.tableView = self.tableView;
-    
     [helper modelClass:[AdvertiseModel class]];
     
     [self.tableView addRefreshAction:^{
@@ -133,9 +132,7 @@
         [helper refresh:^(NSMutableArray <AdvertiseModel *>*objs, BOOL stillHave) {
             
             weakSelf.advertises = objs;
-            
             weakSelf.tableView.advertises = objs;
-            
             [weakSelf.tableView reloadData_tl];
             
         } failure:^(NSError *error) {
@@ -151,9 +148,7 @@
         [helper loadMore:^(NSMutableArray *objs, BOOL stillHave) {
             
             weakSelf.advertises = objs;
-            
             weakSelf.tableView.advertises = objs;
-            
             [weakSelf.tableView reloadData_tl];
             
         } failure:^(NSError *error) {
@@ -163,6 +158,7 @@
     }];
     
     [self.tableView endRefreshingWithNoMoreData_tl];
+    
 }
 
 #pragma mark - RefreshDelegate
@@ -189,21 +185,20 @@
         }
         
     } else if (self.type == MyAdvertiseTypeDidPublish) {
-        //已发布  和 交易中的
+        //已发布 和 交易中的
         
         if (advertiseModel.adsType == AdsTradeTypeBuy) {
             
             //
-            if ([advertiseModel.status isEqualToString:kAdsStatusDaiJiaoYi]) {
-                //待交易, 可进行编辑
+            if ([advertiseModel.status isEqualToString:kAdsStatusShangJia]) {
+                //上架的，都可进行编辑
                 PublishBuyVC *publishBuyVC = [[PublishBuyVC alloc] init];
                 publishBuyVC.publishType = PublishTypePublishRedit;
                 publishBuyVC.adsCode = advertiseModel.code;
                 [self.navigationController pushViewController:publishBuyVC animated:YES];
-
                 return;
             }
-        
+            
             TradeBuyVC *buyVC = [TradeBuyVC new];
             buyVC.adsCode = advertiseModel.code;
 //            buyVC.type = TradeBuyPositionTypeMyPublish;
@@ -211,13 +206,12 @@
             
         } else if (advertiseModel.adsType == AdsTradeTypeSell) {
             
-            if ([advertiseModel.status isEqualToString:kAdsStatusDaiJiaoYi]) {
-                //待交易, 可进行编辑
+            if ([advertiseModel.status isEqualToString:kAdsStatusShangJia]) {
+                //上架都可进行编辑
                 PublishSellVC *publishSellVC = [[PublishSellVC alloc] init];
                 publishSellVC.publishType = PublishTypePublishRedit;
                 publishSellVC.adsCode = advertiseModel.code;
                 [self.navigationController pushViewController:publishSellVC animated:YES];
-                
                 return;
             }
 

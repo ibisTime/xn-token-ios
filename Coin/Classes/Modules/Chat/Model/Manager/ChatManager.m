@@ -39,6 +39,7 @@
     IMAPlatformConfig *config = [[IMAPlatformConfig alloc] init];
     //不打印日志
     [config chageEnableConsoleTo:NO];
+    //设置环境类型
     [IMAPlatform configWith:config];
     
 }

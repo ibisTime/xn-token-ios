@@ -13,11 +13,13 @@
 #import "NSNumber+Extension.h"
 #import "TopBottomView.h"
 #import "PayTypeView.h"
+#import "UserPhotoView.h"
 
 #define IMG_WIDTH 48
 @interface AdsDetailUserView()
 
-@property (nonatomic, strong) UIButton *photoBtn;
+//@property (nonatomic, strong) UIButton *photoBtn;
+@property (nonatomic, strong) UserPhotoView *userPhotoView;
 @property (nonatomic, strong) UILabel  *nameLbl;
 @property (nonatomic, strong) UILabel  *limitAmountLbl;
 @property (nonatomic, strong) UILabel  *priceLbl;
@@ -59,22 +61,23 @@
 
     UserInfo *userInfo = _ads.user;
     
+    self.userPhotoView.userInfo = userInfo;
     //头像
-    if (userInfo.photo) {
-        
-        [self.photoBtn setTitle:@"" forState:UIControlStateNormal];
-        
-        [self.photoBtn sd_setImageWithURL:[NSURL URLWithString:[userInfo.photo convertImageUrl]] forState:UIControlStateNormal];
-        
-    } else {
-        
-        NSString *nickName = userInfo.nickname;
-        
-        NSString *title = [nickName substringToIndex:1];
-        
-        [self.photoBtn setTitle:title forState:UIControlStateNormal];
-        
-    }
+//    if (userInfo.photo) {
+//
+//        [self.photoBtn setTitle:@"" forState:UIControlStateNormal];
+//
+//        [self.photoBtn sd_setImageWithURL:[NSURL URLWithString:[userInfo.photo convertImageUrl]] forState:UIControlStateNormal];
+//
+//    } else {
+//
+//        NSString *nickName = userInfo.nickname;
+//
+//        NSString *title = [nickName substringToIndex:1];
+//
+//        [self.photoBtn setTitle:title forState:UIControlStateNormal];
+//
+//    }
     
     self.nameLbl.text = userInfo.nickname;
     
@@ -162,37 +165,38 @@
 
 - (void)topUILayout {
     
-    CGFloat imgWidth = IMG_WIDTH;
-    [self.photoBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+//    CGFloat imgWidth = IMG_WIDTH;
+    [self.userPhotoView mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.left.equalTo(self.mas_left).offset(15);
         make.top.equalTo(self.mas_top).offset(15);
-        make.width.height.mas_equalTo(imgWidth);
         
     }];
     
     [self.nameLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.top.equalTo(@15);
-        make.left.equalTo(self.photoBtn.mas_right).offset(10);
+        make.bottom.equalTo(self.userPhotoView.mas_centerY).offset(-2);
+        make.left.equalTo(self.userPhotoView.mas_right).offset(10);
         
     }];
     
     [self.limitAmountLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.left.equalTo(self.nameLbl);
-        make.top.equalTo(self.photoBtn.mas_centerY);
+        make.top.equalTo(self.userPhotoView.mas_centerY).offset(5);
     }];
     
     [self.payTypeView mas_makeConstraints:^(MASConstraintMaker *make) {
+        
         make.left.equalTo(self.nameLbl.mas_right).offset(5);
         make.centerY.equalTo(self.nameLbl.mas_centerY);
+        
     }];
     
     [self.priceLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.right.equalTo(self.mas_right).offset(-15);
-        make.top.equalTo(@(15));
+        make.centerY.equalTo(self.userPhotoView.mas_centerY);
         
     }];
     
@@ -201,14 +205,16 @@
 - (void)topUI {
     
     //头像
-    CGFloat imgWidth = IMG_WIDTH;
-    self.photoBtn = [UIButton buttonWithTitle:@""
-                                   titleColor:kWhiteColor
-                              backgroundColor:kAppCustomMainColor
-                                    titleFont:24
-                                 cornerRadius:imgWidth/2.0];
-    self.photoBtn.imageView.contentMode = UIViewContentModeScaleAspectFill;
-    [self addSubview:self.photoBtn];
+//    CGFloat imgWidth = IMG_WIDTH;
+//    self.photoBtn = [UIButton buttonWithTitle:@""
+//                                   titleColor:kWhiteColor
+//                              backgroundColor:kAppCustomMainColor
+//                                    titleFont:24
+//                                 cornerRadius:imgWidth/2.0];
+//    self.photoBtn.imageView.contentMode = UIViewContentModeScaleAspectFill;
+//    [self addSubview:self.photoBtn];
+    self.userPhotoView = [UserPhotoView photoView];
+    [self addSubview:self.userPhotoView];
     
     //昵称
     self.nameLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:15.0];

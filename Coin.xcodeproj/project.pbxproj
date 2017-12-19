@@ -460,6 +460,9 @@
 		2EB0399E1FE7A63900589D8E /* UserStatistics.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EB0399D1FE7A63900589D8E /* UserStatistics.m */; };
 		2EB039A11FE7A7E600589D8E /* TopBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EB039A01FE7A7E600589D8E /* TopBottomView.m */; };
 		2EB039A41FE7C31500589D8E /* PayTypeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EB039A31FE7C31500589D8E /* PayTypeView.m */; };
+		2EB039A71FE8B23300589D8E /* EditEmailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EB039A61FE8B23300589D8E /* EditEmailVC.m */; };
+		2EB039AA1FE8EA3C00589D8E /* UserPhotoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EB039A91FE8EA3C00589D8E /* UserPhotoView.m */; };
+		2EB039AD1FE8EDE300589D8E /* UserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EB039AC1FE8EDE300589D8E /* UserInfo.m */; };
 		2EB949541FDE6D6D00CE4B94 /* LangChooseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EB949531FDE6D6D00CE4B94 /* LangChooseVC.m */; };
 		2EB9495A1FDF6B1A00CE4B94 /* ZMChineseConvert.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EB949561FDF6B1A00CE4B94 /* ZMChineseConvert.m */; };
 		2EB9495B1FDF6B1A00CE4B94 /* SimplifiedCode.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2EB949571FDF6B1A00CE4B94 /* SimplifiedCode.txt */; };
@@ -1419,6 +1422,12 @@
 		2EB039A01FE7A7E600589D8E /* TopBottomView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TopBottomView.m; sourceTree = "<group>"; };
 		2EB039A21FE7C31500589D8E /* PayTypeView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PayTypeView.h; sourceTree = "<group>"; };
 		2EB039A31FE7C31500589D8E /* PayTypeView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PayTypeView.m; sourceTree = "<group>"; };
+		2EB039A51FE8B23300589D8E /* EditEmailVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EditEmailVC.h; sourceTree = "<group>"; };
+		2EB039A61FE8B23300589D8E /* EditEmailVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EditEmailVC.m; sourceTree = "<group>"; };
+		2EB039A81FE8EA3C00589D8E /* UserPhotoView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserPhotoView.h; sourceTree = "<group>"; };
+		2EB039A91FE8EA3C00589D8E /* UserPhotoView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserPhotoView.m; sourceTree = "<group>"; };
+		2EB039AB1FE8EDE300589D8E /* UserInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserInfo.h; sourceTree = "<group>"; };
+		2EB039AC1FE8EDE300589D8E /* UserInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserInfo.m; sourceTree = "<group>"; };
 		2EB949521FDE6D6D00CE4B94 /* LangChooseVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LangChooseVC.h; sourceTree = "<group>"; };
 		2EB949531FDE6D6D00CE4B94 /* LangChooseVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LangChooseVC.m; sourceTree = "<group>"; };
 		2EB949561FDF6B1A00CE4B94 /* ZMChineseConvert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZMChineseConvert.m; sourceTree = "<group>"; };
@@ -1703,6 +1712,7 @@
 		211A53381FC021C700CC6294 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				2EB039AE1FE8F41400589D8E /* Cell */,
 				211CF99B1FC4275400E51FCF /* Detail */,
 				2EB039931FE759FD00589D8E /* AdsDetailBottomOpView.h */,
 				2EB039941FE759FD00589D8E /* AdsDetailBottomOpView.m */,
@@ -1712,6 +1722,8 @@
 				2EB039A01FE7A7E600589D8E /* TopBottomView.m */,
 				2EB039A21FE7C31500589D8E /* PayTypeView.h */,
 				2EB039A31FE7C31500589D8E /* PayTypeView.m */,
+				2EB039A81FE8EA3C00589D8E /* UserPhotoView.h */,
+				2EB039A91FE8EA3C00589D8E /* UserPhotoView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2955,8 +2967,6 @@
 			children = (
 				211CF9871FC3F2D100E51FCF /* TradeTableView.h */,
 				211CF9881FC3F2D100E51FCF /* TradeTableView.m */,
-				211CF98A1FC3F31900E51FCF /* TradeCell.h */,
-				211CF98B1FC3F31900E51FCF /* TradeCell.m */,
 			);
 			path = Trade;
 			sourceTree = "<group>";
@@ -3536,6 +3546,8 @@
 				21A7F2F91FB2E2F900FAA0A2 /* TLUserExt.m */,
 				21A7F2FB1FB2E2F900FAA0A2 /* UserDefaultsUtil.h */,
 				21A7F3041FB2E2F900FAA0A2 /* UserDefaultsUtil.m */,
+				2EB039AB1FE8EDE300589D8E /* UserInfo.h */,
+				2EB039AC1FE8EDE300589D8E /* UserInfo.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -3792,6 +3804,8 @@
 			children = (
 				2EE950C41FB05B5900429257 /* TLMineVC.h */,
 				2EE950C51FB05B5900429257 /* TLMineVC.m */,
+				2EB039A51FE8B23300589D8E /* EditEmailVC.h */,
+				2EB039A61FE8B23300589D8E /* EditEmailVC.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -3962,6 +3976,15 @@
 				2EA584C61FA813C900C7106C /* main.m */,
 			);
 			path = Coin;
+			sourceTree = "<group>";
+		};
+		2EB039AE1FE8F41400589D8E /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				211CF98A1FC3F31900E51FCF /* TradeCell.h */,
+				211CF98B1FC3F31900E51FCF /* TradeCell.m */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		2EB949551FDF6B1A00CE4B94 /* ChineseConvert */ = {
@@ -4258,6 +4281,7 @@
 				21A7F3151FB2E2F900FAA0A2 /* TLChangeMobileVC.m in Sources */,
 				211C04671FC6604800E51FCF /* IMAPlatform+AppConfig.m in Sources */,
 				211DE6AC1FB58B4C002FCF3D /* TLPageDataHelper.m in Sources */,
+				2EB039A71FE8B23300589D8E /* EditEmailVC.m in Sources */,
 				211C05001FC6604900E51FCF /* ChatManager.m in Sources */,
 				21CB94ED1FDC0C9100CAB090 /* LanguageSettingTableView.m in Sources */,
 				211DE6BC1FB58B4C002FCF3D /* NSString+Extension.m in Sources */,
@@ -4400,6 +4424,7 @@
 				211C04391FC6604800E51FCF /* UIViewController+Layout.m in Sources */,
 				211CF98F1FC3F4AF00E51FCF /* AdvertiseModel.m in Sources */,
 				211C04361FC6604800E51FCF /* UIView+Layout.m in Sources */,
+				2EB039AD1FE8EDE300589D8E /* UserInfo.m in Sources */,
 				211A53351FBFE53100CC6294 /* RateModel.m in Sources */,
 				211C04D21FC6604900E51FCF /* IMAConversation+ShowAPIs.m in Sources */,
 				2EB039951FE759FD00589D8E /* AdsDetailBottomOpView.m in Sources */,
@@ -4588,6 +4613,7 @@
 				2E973FD31FDBC5B0005C2D5F /* BaseLabel.m in Sources */,
 				211C04371FC6604800E51FCF /* TableSearchViewController.m in Sources */,
 				211CEF311FCC2FD1000FB0C4 /* MyAdvertiseTableView.m in Sources */,
+				2EB039AA1FE8EA3C00589D8E /* UserPhotoView.m in Sources */,
 				211C04291FC6604800E51FCF /* UICollectionViewController+ADFlipTransition.m in Sources */,
 				211C04A21FC6604900E51FCF /* ChatSystemFaceItem.m in Sources */,
 				2EE950D91FB06AA900429257 /* TLBannerView.m in Sources */,

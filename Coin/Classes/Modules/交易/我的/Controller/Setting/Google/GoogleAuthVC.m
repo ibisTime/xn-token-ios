@@ -62,13 +62,9 @@
     UIButton *copyBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"复制" key:nil] titleColor:kWhiteColor backgroundColor:kThemeColor titleFont:13.0 cornerRadius:5];
     
     copyBtn.frame = CGRectMake(0, 0, 85, self.secretTF.height - 15);
-    
     copyBtn.centerY = secretView.height/2.0;
-
     [copyBtn addTarget:self action:@selector(clickCopy) forControlEvents:UIControlEventTouchUpInside];
-    
     [secretView addSubview:copyBtn];
-    
     self.secretTF.rightView = secretView;
     
     //谷歌验证码
@@ -87,22 +83,15 @@
     UIButton *pasteBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"粘贴" key:nil] titleColor:kWhiteColor backgroundColor:kThemeColor titleFont:13.0 cornerRadius:5];
     
     pasteBtn.frame = CGRectMake(0, 0, 85, self.googleAuthTF.height - 15);
-
     pasteBtn.centerY = authView.height/2.0;
-
     [pasteBtn addTarget:self action:@selector(clickPaste) forControlEvents:UIControlEventTouchUpInside];
-    
     [authView addSubview:pasteBtn];
-    
     self.googleAuthTF.rightView = authView;
     
     //短信验证码
-    self.captchaView = [[CaptchaView alloc] initWithFrame:CGRectMake(leftMargin, self.googleAuthTF.yy, kScreenWidth - 2*leftMargin, height)];
-    
+    self.captchaView = [[CaptchaView alloc] initWithFrame:CGRectMake(leftMargin, self.googleAuthTF.yy, kScreenWidth - 2*leftMargin, height) leftTitleWidth:100];
     self.captchaView.captchaTf.leftLbl.text = [LangSwitcher switchLang:@"短信验证码" key:nil];
-    
     [self.captchaView.captchaBtn addTarget:self action:@selector(sendCaptcha) forControlEvents:UIControlEventTouchUpInside];
-
     [self.view addSubview:self.captchaView];
     
     //修改按钮

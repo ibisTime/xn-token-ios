@@ -82,18 +82,31 @@ typedef NS_ENUM(NSUInteger, AdsType) {
 - (BOOL)isMineAds;
 
 /**
- 是否为我的广告( 待交易状态)
+ 是否为我的广告(上架状态)
  */
-- (BOOL)isMineDaiJiaoYiAds;
+- (BOOL)isMineShangJiaAds;
+
+///**
+// 是否为我的广告( 待交易状态)
+// */
+//- (BOOL)isMineDaiJiaoYiAds;
+//
+//
+///**
+// 是否为我的广告( 交易中状态 )
+// */
+//- (BOOL)isMineJiaoYiZhong;
 
 - (NSString *)tradeAmountLimit;
 
 @end
 
 FOUNDATION_EXTERN NSString *const kAdsStatusDraft;
-FOUNDATION_EXTERN NSString *const kAdsStatusDaiJiaoYi;
-FOUNDATION_EXTERN NSString *const kAdsStatusJiaoYiZhong;
 FOUNDATION_EXTERN NSString *const kAdsStatusXiaJia;
+FOUNDATION_EXTERN NSString *const kAdsStatusShangJia;
+
+//FOUNDATION_EXTERN NSString *const kAdsStatusDaiJiaoYi;
+//FOUNDATION_EXTERN NSString *const kAdsStatusJiaoYiZhong;
 
 FOUNDATION_EXTERN NSString *const kAdsTradeTypeBuy;
 FOUNDATION_EXTERN NSString *const kAdsTradeTypeSell;

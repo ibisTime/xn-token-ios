@@ -21,6 +21,7 @@
 @property (nonatomic, strong) NSTimer *timer;
 //
 @property (nonatomic, strong) TLPageDataHelper *helper;
+@property (nonatomic, strong) UIView *footerHintView;
 
 @end
 
@@ -98,10 +99,11 @@
         [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
             
             weakSelf.quotations = objs;
-            
             weakSelf.tableView.quotations = objs;
-            
             [weakSelf.tableView reloadData_tl];
+            
+            //
+            weakSelf.tableView.tableFooterView = weakSelf.footerHintView;
             
         } failure:^(NSError *error) {
             
@@ -113,6 +115,29 @@
     [self.tableView beginRefreshing];
 
 }
+
+#pragma mark- 底部提醒
+- (UIView *)footerHintView {
+    
+    if (!_footerHintView) {
+        
+        _footerHintView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 50)];
+        UILabel *lbl = [UILabel labelWithFrame:CGRectZero
+                                  textAligment:NSTextAlignmentCenter
+                               backgroundColor:kBackgroundColor
+                                          font:[UIFont systemFontOfSize:15]
+                                     textColor:[UIColor textColor]];
+        [_footerHintView addSubview:lbl];
+        lbl.text = [LangSwitcher switchLang:@"更多行情，敬请期待..." key:nil];
+        [lbl mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.mas_equalTo(UIEdgeInsetsZero);
+        }];
+    }
+    
+    return _footerHintView;
+    
+}
+
 
 - (void)refreshQuotation {
     

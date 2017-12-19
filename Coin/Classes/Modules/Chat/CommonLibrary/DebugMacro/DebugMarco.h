@@ -10,6 +10,7 @@
 #define CommonLibrary_DebugMarco_h
 
 // 日志
+//#define DebugLog
 
 #ifdef DEBUG
 

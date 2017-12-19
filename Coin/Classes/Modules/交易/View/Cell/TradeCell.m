@@ -14,17 +14,19 @@
 #import "TLUser.h"
 #import "PayTypeModel.h"
 #import "UserStatistics.h"
+#import "UserPhotoView.h"
+#import "PayTypeView.h"
 
 @interface TradeCell ()
 
 //头像
-@property (nonatomic, strong) UIButton *photoBtn;
+@property (nonatomic, strong) UserPhotoView *userPhotoView;
 //昵称
 @property (nonatomic, strong) UILabel *nameLbl;
 //交易、好评跟信任
 @property (nonatomic, strong) UILabel *dataLbl;
 //支付方式
-@property (nonatomic, strong) UILabel *payTypeLbl;
+@property (nonatomic, strong) PayTypeView *payTypeView;
 //限额
 @property (nonatomic, strong) UILabel *limitAmountLbl;
 //价格
@@ -52,19 +54,13 @@
     
     //头像
     CGFloat imgWidth = 40;
-    
-    self.photoBtn = [UIButton buttonWithTitle:@"" titleColor:kWhiteColor backgroundColor:kAppCustomMainColor titleFont:20 cornerRadius:imgWidth/2.0];
-    
-//    [self.photoBtn addTarget:self action:@selector(selectPhoto:) forControlEvents:UIControlEventTouchUpInside];
-    
-    self.photoBtn.imageView.contentMode = UIViewContentModeScaleAspectFill;
+    self.userPhotoView = [UserPhotoView photoView];
+    [self addSubview:self.userPhotoView];
+    [self.userPhotoView mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.left.equalTo(self.contentView.mas_left).offset(15);
+        make.top.equalTo(self.contentView.mas_top).offset(15);
 
-    [self addSubview:self.photoBtn];
-    [self.photoBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.left.top.equalTo(@(15));
-        make.width.height.equalTo(@(imgWidth));
-        
     }];
     
     //昵称
@@ -74,26 +70,16 @@
     [self.nameLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.top.equalTo(self.mas_top).offset(15);
-        make.left.equalTo(self.photoBtn.mas_right).offset(10);
+        make.left.equalTo(self.userPhotoView.mas_right).offset(10);
         
     }];
     
     //支付方式
-    self.payTypeLbl = [UILabel labelWithFrame:CGRectZero
-                               textAligment:NSTextAlignmentCenter
-                            backgroundColor:[UIColor clearColor]
-                                       font:Font(11)
-                                  textColor:kClearColor];
-    self.payTypeLbl.layer.cornerRadius = 3;
-    self.payTypeLbl.clipsToBounds = YES;
-    
-    [self addSubview:self.payTypeLbl];
-    [self.payTypeLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.nameLbl.mas_top);
-        make.width.equalTo(@32);
-        make.height.equalTo(@18);
-        make.left.equalTo(self.nameLbl.mas_right).offset(6);
-        
+    self.payTypeView = [[PayTypeView alloc] initWithFrame:CGRectZero];
+    [self.contentView addSubview:self.payTypeView];
+    [self.payTypeView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.nameLbl.mas_right).offset(5);
+        make.centerY.equalTo(self.nameLbl.mas_centerY);
     }];
     
     //交易、好评跟信任
@@ -166,45 +152,14 @@
     UserStatistics *userStatist = advertise.userStatistics;
     
     //头像
-    if (userInfo.photo) {
-        
-        [self.photoBtn setTitle:@"" forState:UIControlStateNormal];
-        
-        [self.photoBtn sd_setImageWithURL:[NSURL URLWithString:[userInfo.photo convertImageUrl]] forState:UIControlStateNormal];
-        
-    } else {
-        
-        NSString *nickName = userInfo.nickname;
-        
-        NSString *title = [nickName substringToIndex:1];
-        
-        [self.photoBtn setTitle:title forState:UIControlStateNormal];
-        
-        [self.photoBtn setImage:nil forState:UIControlStateNormal];
-    }
-
+    self.userPhotoView.userInfo = userInfo;
     self.nameLbl.text = userInfo.nickname;
     
     //支付方式
     PayTypeModel *payModel = [PayTypeModel new];
-    
     payModel.payType = advertise.payType;
-    
-    self.payTypeLbl.text = payModel.text;
-    
-    CGFloat payW = self.payTypeLbl.text.length*11 + 10;
+    self.payTypeView.payType = payModel;
 
-    [self.payTypeLbl mas_updateConstraints:^(MASConstraintMaker *make) {
-
-        make.width.equalTo(@(payW));
-    }];
-    
-    self.payTypeLbl.textColor = payModel.color;
-    
-    self.payTypeLbl.layer.borderColor = payModel.color.CGColor;
-    self.payTypeLbl.layer.borderWidth = 0.5;
-    
-    
     //交易、好评跟信任
     self.dataLbl.text =
     [LangSwitcher switchLang:[NSString stringWithFormat:@"交易 %ld · 好评 %@ · 信任 %ld",
@@ -227,13 +182,13 @@
     
     NSString *tradeText = nil;
     
-    if ([advertise isMineDaiJiaoYiAds]) {
+    if ([advertise isMineShangJiaAds]) {
        //只有待交易的广告才显示，编辑
         tradeText = [LangSwitcher switchLang:@"编辑" key:nil];
         
     } else {
         
-        tradeText = [advertise.tradeType isEqualToString:@"1"] ?
+        tradeText = [advertise.tradeType isEqualToString:kAdsTradeTypeSell] ?
         [LangSwitcher switchLang:@"购买" key:nil] : [LangSwitcher switchLang:@"出售" key:nil];
 
     }

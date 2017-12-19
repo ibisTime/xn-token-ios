@@ -190,9 +190,9 @@
 
 @end
 //
-@implementation UserInfo
-
-@end
+//@implementation UserInfo
+//
+//@end
 //
 //
 //@implementation BuyUserInfo

@@ -12,24 +12,35 @@
 
 @implementation CaptchaView
 
-- (instancetype)initWithFrame:(CGRect)frame
-{
+- (instancetype)initWithFrame:(CGRect)frame leftTitleWidth:(CGFloat)width {
+    
     self = [super initWithFrame:frame];
     if (self) {
-        [self setUpUIWith:frame];
+        
+        [self setUpUIWith:frame leftTitleWidth:width];
         
     }
     return self;
 }
 
-- (void)setUpUIWith:(CGRect)frame
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        [self setUpUIWith:frame leftTitleWidth:100];
+        
+    }
+    return self;
+}
+
+- (void)setUpUIWith:(CGRect)frame leftTitleWidth:(CGFloat)leftTitleWidth
 {
     
     CGFloat btnWidth = 95;
     
     self.captchaTf = [[TLTextField alloc] initWithFrame:CGRectMake(0, 0, frame.size.width - btnWidth, frame.size.height)
-                                              leftTitle:[LangSwitcher switchLang:@"手机验证码" key:nil]
-                                             titleWidth:100
+                                              leftTitle:[LangSwitcher switchLang:@"验证码" key:nil]
+                                             titleWidth:leftTitleWidth
                                             placeholder:[LangSwitcher switchLang:@"请输入验证码" key:nil]];
     self.captchaTf.rightViewMode = UITextFieldViewModeAlways;
     self.captchaTf.keyboardType = UIKeyboardTypeNumberPad;

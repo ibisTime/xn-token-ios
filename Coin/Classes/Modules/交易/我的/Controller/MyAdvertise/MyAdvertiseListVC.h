@@ -11,7 +11,7 @@
 typedef NS_ENUM(NSInteger, MyAdvertiseType) {
     
     MyAdvertiseTypeDraft = 0,   //草稿
-    MyAdvertiseTypeDidPublish,  //已发布
+    MyAdvertiseTypeDidPublish = 1,  //已发布
 };
 
 @interface MyAdvertiseListVC : TLBaseVC

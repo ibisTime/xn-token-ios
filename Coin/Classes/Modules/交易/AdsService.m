@@ -21,18 +21,19 @@
 + (void)pushToAdsDetail:(AdvertiseModel *)advertiseModel currentVC:(UIViewController *)currentVC {
     
     
-    //
+    
     if ([advertiseModel.tradeType isEqualToString:kAdsTradeTypeSell]) {
+        //卖币广高， 我要购买
         
-        //
-        if ([advertiseModel isMineDaiJiaoYiAds]) {
-            
+        //1.1.1 待交易也可以下架
+        if ([advertiseModel isMineAds]) {
+
             PublishSellVC *sellVC = [[PublishSellVC alloc] init];
             sellVC.adsCode = advertiseModel.code;
             sellVC.publishType = PublishTypePublishRedit;
             [currentVC.navigationController pushViewController:sellVC animated:YES];
             return;
-            
+
         }
         
         TradeBuyVC *buyVC = [TradeBuyVC new];
@@ -41,17 +42,17 @@
         [currentVC.navigationController pushViewController:buyVC animated:YES];
         
     } else if([advertiseModel.tradeType isEqualToString:kAdsTradeTypeBuy]) {
-        
-        if ([advertiseModel isMineDaiJiaoYiAds]) {
+        //买币广高， 我要出售
+
+        //1.1.1 待交易也可以下架
+        if ([advertiseModel isMineAds]) {
             
             PublishBuyVC *buyVC = [[PublishBuyVC alloc] init];
             buyVC.adsCode = advertiseModel.code;
             buyVC.publishType = PublishTypePublishRedit;
             [currentVC.navigationController pushViewController:buyVC animated:YES];
             return;
-            
-       
-            
+ 
         }
         
         TradeSellVC *sellVC = [TradeSellVC new];

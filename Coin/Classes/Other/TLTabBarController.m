@@ -49,6 +49,11 @@
     
     self.selectedIndex = 2;
     
+    //
+    UIView *tabBarBgView = [[UIView alloc] initWithFrame:self.tabBar.bounds];
+    tabBarBgView.backgroundColor = [UIColor whiteColor];
+    [self.tabBar insertSubview:tabBarBgView atIndex:0];
+//    self.tabBar.backgroundColor = [UIColor whiteColor];
 }
 
 //- (void)usrLoginOut {
@@ -143,9 +148,7 @@
         };
         
         TLNavigationController *nav = [[TLNavigationController alloc] initWithRootViewController:loginVC];
-        
         [self presentViewController:nav animated:YES completion:nil];
-        
         self.selectedIndex = _currentIndex;
         
     }

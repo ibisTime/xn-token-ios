@@ -13,6 +13,8 @@
 
 @interface CaptchaView : UIView
 
+- (instancetype)initWithFrame:(CGRect)frame leftTitleWidth:(CGFloat)width;
+
 @property (nonatomic,strong) TLTextField *captchaTf;
 
 @property (nonatomic,strong) TLTimeButton *captchaBtn;

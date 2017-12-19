@@ -10,6 +10,8 @@
 #import "CoinHeader.h"
 #import "AppMacro.h"
 
+NSString  * const kCDSysTimeFormat = @"MMM dd, yyyy hh:mm:ss aa";
+
 @implementation NSString (Date)
 
 + (NSString *)stringFromDate:(NSDate *)date formatter:(NSString *)formatter {
@@ -234,6 +236,23 @@
     return [formatter stringFromDate:date01];
     
 }
+
+
+
+- (NSDate *)convertToSysDate {
+    
+    if (!self) {
+        return nil;
+    }
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    formatter.dateFormat = kCDSysTimeFormat;
+    formatter.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
+    NSDate *date01 = [formatter dateFromString:self];
+    return date01;
+    
+}
+
 
 - (NSString *)convertDate
 {
