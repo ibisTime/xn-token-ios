@@ -28,6 +28,9 @@
 #import "ZMChineseConvert.h"
 #import "SettingModel.h"
 #import "TLUpdateVC.h"
+#import <ZendeskSDK/ZendeskSDK.h>
+//#import "ZDKConfig.h"
+#import "LangSwitcher.h"
 
 @interface AppDelegate ()
 
@@ -40,9 +43,11 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-
     //服务器环境
     [AppConfig config].runEnv = RunEnvDev;
+    
+    //环境
+    [LangSwitcher changLangType:LangTypeTraditional];
     
     //配置微信
     [self configWeChat];
@@ -55,6 +60,9 @@
     
     //初始化, 连天
     [[ChatManager sharedManager] initChat];
+    
+    //
+    [self configZendesk];
 
     //
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginOut) name:kUserLoginOutNotification object:nil];
@@ -130,8 +138,28 @@
     
 }
 
+- (void)configZendesk {
+    
+    [[ZDKConfig instance] initializeWithAppId:@"77b4d76dd3cfa4334b719ee32a6b92e16a1d9929263d9b8b"
+     
+                                   zendeskUrl: @"https://tianleitest.zendesk.com"
+                                     clientId: @"mobile_sdk_client_8999a059a94c912a1483"];
+    
+
+}
+
 #pragma mark - 用户登录
 - (void)userLogin {
+    
+    //客服
+    [ZDCChat initializeWithAccountKey:@"zxRQZo9tGhawzBtqes4ttBHSbVGryyj6"];
+    
+    //zendesk
+    ZDKAnonymousIdentity *identity = [ZDKAnonymousIdentity new];
+    identity.name = @"tianlei";
+    identity.email = @"johnbob@example.com";
+    [ZDKConfig instance].userIdentity = identity;
+    
     
     // 重新登录的时候要重新，配置一下
     [self kvoUnReadMsgToChangeTabbar];
@@ -170,7 +198,7 @@
 
     //
     //先配置到，检查更新的VC
-    if (1) {
+    if (0) {
         
         TLUpdateVC *updateVC = [[TLUpdateVC alloc] init];
         self.window.rootViewController = updateVC;

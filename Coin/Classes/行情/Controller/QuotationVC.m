@@ -74,7 +74,6 @@
     
     //开启定时器,实时刷新
     self.timer = [NSTimer timerWithTimeInterval:30 target:self selector:@selector(refreshQuotation) userInfo:nil repeats:YES];
-    
     [[NSRunLoop mainRunLoop] addTimer:self.timer forMode:NSDefaultRunLoopMode];
 }
 

@@ -69,7 +69,6 @@
         return;
         
     }
-    //
   
     //该用户第一次登录
     TLNetworking *http = [TLNetworking new];
@@ -88,7 +87,7 @@
         IMALoginParam *loginParam = [[IMALoginParam alloc] init];
         
         //转成小写，登录
-        loginParam.identifier = [[TLUser user].userId lowercaseString];
+        loginParam.identifier = [TLUser user].userId;
         loginParam.userSig = self.imModel.sign;
         loginParam.appidAt3rd = self.imModel.txAppCode;
         [self loginWithParam:loginParam];

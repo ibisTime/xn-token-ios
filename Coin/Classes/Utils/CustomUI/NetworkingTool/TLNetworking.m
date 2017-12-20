@@ -127,7 +127,7 @@
     
   return [self.manager POST:self.url parameters:self.parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
       
-      if ([AppConfig config].runEnv != RunEnvRelease) {
+      if (!self.disableLog && [AppConfig config].runEnv != RunEnvRelease) {
           
           [HttpLogger logDebugInfoWithResponse:task.response apiName:self.code resposeString:responseObject request:task.originalRequest error:nil];
           

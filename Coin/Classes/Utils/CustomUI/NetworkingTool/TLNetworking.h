@@ -21,6 +21,7 @@
 @property (nonatomic,assign) BOOL isShowMsg; //是否展示警告信息
 @property (nonatomic,copy) NSString *url;
 @property (nonatomic, copy) NSString *isShow;
+@property (nonatomic, assign) BOOL disableLog;
 
 
 - (NSURLSessionDataTask *)postWithSuccess:(void (^)(id responseObject))success failure:(void (^)(NSError *error))failure;

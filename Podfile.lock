@@ -38,6 +38,12 @@ PODS:
   - SGQRCode (2.1.8)
   - SVProgressHUD (2.2)
   - UIDeviceIdentifier (1.1.1)
+  - ZendeskSDK (1.11.0.1):
+    - ZendeskSDK/Providers (= 1.11.0.1)
+    - ZendeskSDK/UI (= 1.11.0.1)
+  - ZendeskSDK/Providers (1.11.0.1)
+  - ZendeskSDK/UI (1.11.0.1):
+    - ZendeskSDK/Providers
 
 DEPENDENCIES:
   - AFNetworking (= 3.1.0)
@@ -53,6 +59,7 @@ DEPENDENCIES:
   - SGQRCode (= 2.1.8)
   - SVProgressHUD (= 2.2)
   - UIDeviceIdentifier (from `https://github.com/squarefrog/UIDeviceIdentifier.git`)
+  - ZendeskSDK
 
 EXTERNAL SOURCES:
   UIDeviceIdentifier:
@@ -78,7 +85,8 @@ SPEC CHECKSUMS:
   SGQRCode: 989df341fb231fc7bf7e82316de2fc8de2961e10
   SVProgressHUD: 3f37f3409ddb15f35c99315ae7dc33c474aa3256
   UIDeviceIdentifier: 9281343882e24460235f00a0d7d2fc04a65688c6
+  ZendeskSDK: 4e075d7610e74755c576188886a073cfc5810145
 
-PODFILE CHECKSUM: 99b4e23de0be28b6918365e75ed59404bc3c6aeb
+PODFILE CHECKSUM: b4bcd02b11f7e911a1b39148890e190ea717e9ee
 
 COCOAPODS: 1.2.1

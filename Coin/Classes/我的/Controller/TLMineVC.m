@@ -31,8 +31,10 @@
 #import "TLImagePicker.h"
 #import "TLUploadManager.h"
 #import "AppConfig.h"
+#import <ZendeskSDK/ZendeskSDK.h>
+#import <ZDCChat/ZDCChat.h>
 
-@interface TLMineVC ()<MineHeaderSeletedDelegate>
+@interface TLMineVC ()<MineHeaderSeletedDelegate,UINavigationControllerDelegate>
 
 @property (nonatomic, strong) UIScrollView *scrollView;
 //头部
@@ -48,11 +50,16 @@
 
 @implementation TLMineVC
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+//    [self.navigationController setNavigationBarHidden:NO animated:YES];
+}
+
 - (void)viewWillAppear:(BOOL)animated {
     
     [super viewWillAppear:animated];
-    
-    [self.navigationController setNavigationBarHidden:YES animated:animated];
+//    [self.navigationController setNavigationBarHidden:YES animated:animated];
 
     if ([TLUser user].userId) {
         
@@ -65,10 +72,19 @@
     return UIStatusBarStyleLightContent;
 }
 
+#pragma mark - UINavigationControllerDelegate
+- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
+    // 判断要显示的控制器是否是自己
+    BOOL isShowHomePage = [viewController isKindOfClass:[self class]];
+    [self.navigationController setNavigationBarHidden:isShowHomePage animated:YES];
+    
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = [LangSwitcher switchLang:@"我的" key:nil];
     
+    self.navigationController.delegate = self;
     //顶部视图
     [self initMineHeaderView];
     //模型
@@ -187,9 +203,44 @@
     linkService.imgName = @"联系客服";
     linkService.action = ^{
         
-        HTMLStrVC *htmlVC = [HTMLStrVC new];
-        htmlVC.type = HTMLTypeLinkService;
-        [weakSelf.navigationController pushViewController:htmlVC animated:YES];
+//        HTMLStrVC *htmlVC = [HTMLStrVC new];
+//        htmlVC.type = HTMLTypeLinkService;
+//        [weakSelf.navigationController pushViewController:htmlVC animated:YES];
+        [ZDCChat startChatIn:self.navigationController withConfig:nil];
+        
+//        [ZDCChat updateVisitor:^(ZDCVisitorInfo *user) {
+//            user.phone = @"0123456789";
+//            user.name = @"Jane Doe";
+//            user.email = @"jdoe@example.com";
+//        }];
+        
+    };
+    
+//    //工单
+    MineModel *gongDanModel = [MineModel new];
+    gongDanModel.text = [LangSwitcher switchLang:@"帮助中心" key:nil];
+    gongDanModel.imgName = @"联系客服";
+    gongDanModel.action = ^{
+        
+//        HTMLStrVC *htmlVC = [HTMLStrVC new];
+//        htmlVC.type = HTMLTypeLinkService;
+//        [weakSelf.navigationController pushViewController:htmlVC animated:YES];
+        
+        //注册用户的身份,管理端可以看到这些信息
+//   [ZDKRequests pushRequestListWithNavigationController:self.navigationController];
+        
+        //跳转
+         ZDKHelpCenterOverviewContentModel *contentModel = [ZDKHelpCenterOverviewContentModel defaultContent];
+//        contentModel.groupType = ZDKHelpCenterOverviewGroupTypeDefault;
+        
+        // 设置界面的代理
+//        [ZDKHelpCenter setUIDelegate:<#(id<ZDKHelpCenterConversationsUIDelegate>)#>];
+//        contentModel.labels = @[@"tag"];
+//        contentModel.groupType = ZDKHelpCenterOverviewGroupTypeSection;
+//        contentModel.groupIds = @[@"sections2"];
+
+        [ZDKHelpCenter pushHelpCenterOverview:self.navigationController
+                             withContentModel:contentModel];
         
     };
     
@@ -212,7 +263,7 @@
         
         self.group.sections = @[
                                 @[advertisement, address, trust],
-                                @[securityCenter, personalSetting, problem, linkService, abountUs]
+                                @[securityCenter, personalSetting, problem,gongDanModel, linkService, abountUs]
                                 ];
 
     } else {
@@ -220,7 +271,7 @@
         
         self.group.sections = @[
                                 @[advertisement, address, trust, inviteFriend],
-                                @[securityCenter, personalSetting, problem, linkService, abountUs]
+                                @[securityCenter, personalSetting, problem, gongDanModel, linkService, abountUs]
                                 ];
         
     }

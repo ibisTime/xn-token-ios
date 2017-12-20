@@ -87,9 +87,21 @@
 #pragma mark- 发送验证码
 - (void)sendCaptcha {
     
+    if (![self.contentTf.text valid]) {
+        
+        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入邮箱" key:nil]];
+        return;
+    }
+    
+    
     TLNetworking *http = [TLNetworking new];
     http.showView = self.view;
-    http.code = @"";
+    http.code = @"805952";
+//    http.parameters[@"companyCode"] = @"";
+    http.parameters[@"email"] = self.contentTf.text;
+    http.parameters[@"bizType"] = @"805081";
+//    http.parameters[@"systemCode"] = [];
+
     [http postWithSuccess:^(id responseObject) {
         //
         [self.captchaView.captchaBtn begin];
