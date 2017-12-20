@@ -170,7 +170,7 @@
 
     //
     //先配置到，检查更新的VC
-    if (0) {
+    if (1) {
         
         TLUpdateVC *updateVC = [[TLUpdateVC alloc] init];
         self.window.rootViewController = updateVC;

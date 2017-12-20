@@ -30,6 +30,7 @@
 #import "UserStatistics.h"
 #import "TLImagePicker.h"
 #import "TLUploadManager.h"
+#import "AppConfig.h"
 
 @interface TLMineVC ()<MineHeaderSeletedDelegate>
 
@@ -206,7 +207,24 @@
     
     self.group = [MineGroup new];
 
-    self.group.sections = @[@[advertisement, address, trust, inviteFriend], @[securityCenter, personalSetting, problem, linkService, abountUs]];
+    if ([AppConfig config].isChecking) {
+        
+        
+        self.group.sections = @[
+                                @[advertisement, address, trust],
+                                @[securityCenter, personalSetting, problem, linkService, abountUs]
+                                ];
+
+    } else {
+      
+        
+        self.group.sections = @[
+                                @[advertisement, address, trust, inviteFriend],
+                                @[securityCenter, personalSetting, problem, linkService, abountUs]
+                                ];
+        
+    }
+ 
     
 }
 
