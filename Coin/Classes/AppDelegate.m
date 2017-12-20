@@ -27,6 +27,7 @@
 #import "WaitingOrderVC.h"
 #import "ZMChineseConvert.h"
 #import "SettingModel.h"
+#import "TLUpdateVC.h"
 
 @interface AppDelegate ()
 
@@ -62,7 +63,6 @@
     //
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(imLogin) name:kIMLoginNotification object:nil];
     
-    //
     //重新登录
     if([TLUser user].isLogin) {
         
@@ -167,8 +167,21 @@
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
-    TLTabBarController *tabBarCtrl = [[TLTabBarController alloc] init];
-    self.window.rootViewController = tabBarCtrl;
+
+    //
+    //先配置到，检查更新的VC
+    if (0) {
+        
+        TLUpdateVC *updateVC = [[TLUpdateVC alloc] init];
+        self.window.rootViewController = updateVC;
+
+    } else {
+        
+        //检查更新过后再
+        TLTabBarController *tabBarCtrl = [[TLTabBarController alloc] init];
+        self.window.rootViewController = tabBarCtrl;
+        
+    }
     
 }
 

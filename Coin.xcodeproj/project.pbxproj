@@ -463,6 +463,8 @@
 		2EB039A71FE8B23300589D8E /* EditEmailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EB039A61FE8B23300589D8E /* EditEmailVC.m */; };
 		2EB039AA1FE8EA3C00589D8E /* UserPhotoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EB039A91FE8EA3C00589D8E /* UserPhotoView.m */; };
 		2EB039AD1FE8EDE300589D8E /* UserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EB039AC1FE8EDE300589D8E /* UserInfo.m */; };
+		2EB039B21FE940D300589D8E /* manifest.xml in Resources */ = {isa = PBXBuildFile; fileRef = 2EB039B11FE940D300589D8E /* manifest.xml */; };
+		2EB039B51FEA0B4500589D8E /* TLUpdateVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EB039B31FEA0B4500589D8E /* TLUpdateVC.m */; };
 		2EB949541FDE6D6D00CE4B94 /* LangChooseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EB949531FDE6D6D00CE4B94 /* LangChooseVC.m */; };
 		2EB9495A1FDF6B1A00CE4B94 /* ZMChineseConvert.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EB949561FDF6B1A00CE4B94 /* ZMChineseConvert.m */; };
 		2EB9495B1FDF6B1A00CE4B94 /* SimplifiedCode.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2EB949571FDF6B1A00CE4B94 /* SimplifiedCode.txt */; };
@@ -1428,6 +1430,9 @@
 		2EB039A91FE8EA3C00589D8E /* UserPhotoView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserPhotoView.m; sourceTree = "<group>"; };
 		2EB039AB1FE8EDE300589D8E /* UserInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserInfo.h; sourceTree = "<group>"; };
 		2EB039AC1FE8EDE300589D8E /* UserInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserInfo.m; sourceTree = "<group>"; };
+		2EB039B11FE940D300589D8E /* manifest.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = manifest.xml; sourceTree = "<group>"; };
+		2EB039B31FEA0B4500589D8E /* TLUpdateVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLUpdateVC.m; sourceTree = "<group>"; };
+		2EB039B41FEA0B4500589D8E /* TLUpdateVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLUpdateVC.h; sourceTree = "<group>"; };
 		2EB949521FDE6D6D00CE4B94 /* LangChooseVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LangChooseVC.h; sourceTree = "<group>"; };
 		2EB949531FDE6D6D00CE4B94 /* LangChooseVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LangChooseVC.m; sourceTree = "<group>"; };
 		2EB949561FDF6B1A00CE4B94 /* ZMChineseConvert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZMChineseConvert.m; sourceTree = "<group>"; };
@@ -3731,6 +3736,8 @@
 			children = (
 				2E394FEC1FB0575A00BA0829 /* AppDelegate.h */,
 				2E394FEB1FB0575A00BA0829 /* AppDelegate.m */,
+				2EB039B41FEA0B4500589D8E /* TLUpdateVC.h */,
+				2EB039B31FEA0B4500589D8E /* TLUpdateVC.m */,
 				2E394FB01FB055DE00BA0829 /* 交易 */,
 				2E394FA81FB055DE00BA0829 /* 订单 */,
 				2E394FB41FB055DE00BA0829 /* 行情 */,
@@ -3971,6 +3978,7 @@
 				2E394FA31FB0546E00BA0829 /* Classes */,
 				211C013A1FC6600300E51FCF /* Extension */,
 				2EA584C01FA813C900C7106C /* Assets.xcassets */,
+				2EB039B11FE940D300589D8E /* manifest.xml */,
 				2EA584C21FA813C900C7106C /* LaunchScreen.storyboard */,
 				2EA584C51FA813C900C7106C /* Info.plist */,
 				2EA584C61FA813C900C7106C /* main.m */,
@@ -4131,6 +4139,7 @@
 				211C04FC1FC6604900E51FCF /* DailyBuild-Info.plist in Resources */,
 				211C04B71FC6604900E51FCF /* 3.gif in Resources */,
 				211C04A31FC6604900E51FCF /* 21.gif in Resources */,
+				2EB039B21FE940D300589D8E /* manifest.xml in Resources */,
 				211C04A51FC6604900E51FCF /* 20.gif in Resources */,
 				21205D071FCD6394003C6C7C /* README.txt in Resources */,
 				211C04AF1FC6604900E51FCF /* 31.gif in Resources */,
@@ -4553,6 +4562,7 @@
 				211C03F91FC6604800E51FCF /* UIView+CaptureImage.m in Sources */,
 				211C04881FC6604800E51FCF /* ChatTimeTipTableViewCell.m in Sources */,
 				211DE6A51FB58B4C002FCF3D /* TLProgressHUD.m in Sources */,
+				2EB039B51FEA0B4500589D8E /* TLUpdateVC.m in Sources */,
 				2159796D1FB831B10029F177 /* FilterView.m in Sources */,
 				21205CDE1FCD3131003C6C7C /* CoinAddressTableView.m in Sources */,
 				21D2168E1FBA90CE0040795E /* BannerModel.m in Sources */,

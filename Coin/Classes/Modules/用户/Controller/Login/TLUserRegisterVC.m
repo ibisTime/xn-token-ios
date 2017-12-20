@@ -84,7 +84,7 @@
     self.captchaView = captchaView;
     
     //密码
-    TLTextField *pwdTf = [[TLTextField alloc] initWithFrame:CGRectMake(margin, captchaView.yy + 10, w, h) leftTitle:[LangSwitcher switchLang:@"新密码" key:nil] titleWidth:100 placeholder:[LangSwitcher switchLang:@"请输入密码(不少于6位)" key:nil]];
+    TLTextField *pwdTf = [[TLTextField alloc] initWithFrame:CGRectMake(margin, captchaView.yy + 10, w, h) leftTitle:[LangSwitcher switchLang:@"密码" key:nil] titleWidth:100 placeholder:[LangSwitcher switchLang:@"请输入密码(不少于6位)" key:nil]];
     pwdTf.secureTextEntry = YES;
     
     [self.view addSubview:pwdTf];
