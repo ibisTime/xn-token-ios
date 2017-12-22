@@ -35,6 +35,17 @@
     
     //log: [INFO][TIMManager.mm:137][-[TIMManager initSdk:]][ImSDK]Has InitSDK, skip
     // 可多次初始化，
+//    NSLog(@"%ld",[TIMManager sharedInstance].);
+   __block int count = 0;
+     NSArray <TIMConversation *> *conversationList = [TIMManager sharedInstance].getConversationList;
+    [conversationList enumerateObjectsUsingBlock:^(TIMConversation * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        
+        count += obj.getUnReadMessageNum;
+        
+    }];
+    
+    NSLog(@"%ld",count);
+
     
     IMAPlatformConfig *config = [[IMAPlatformConfig alloc] init];
     //不打印日志
@@ -117,6 +128,10 @@
         //登录成功
         //保存登录信息
         [loginParam saveToLocal];
+        //注册通知
+        //腾讯云需要在登录成功之后，才能上报token
+        // app delegate 中 didRegisterForRemoteNotification 会回调
+        [[UIApplication sharedApplication] registerForRemoteNotifications];
     
     } fail:^(int code, NSString *msg) {
         

@@ -22,7 +22,10 @@ PODS:
   - CDCommon/Frame (1.0.3)
   - CDCommon/ImageTool (1.0.3)
   - HappyDNS (0.3.12)
-  - IQKeyboardManager (4.0.13)
+  - IQKeyboardManager (5.0.2)
+  - JCore (1.1.5)
+  - JPush (3.0.6):
+    - JCore (~> 1.1.1)
   - Masonry (1.0.2)
   - MBProgressHUD (0.9.2)
   - MJExtension (3.0.13)
@@ -48,7 +51,8 @@ PODS:
 DEPENDENCIES:
   - AFNetworking (= 3.1.0)
   - CDCommon
-  - IQKeyboardManager (= 4.0.13)
+  - IQKeyboardManager (= 5.0.2)
+  - JPush
   - Masonry (= 1.0.2)
   - MBProgressHUD (= 0.9.2)
   - MJExtension (= 3.0.13)
@@ -74,7 +78,9 @@ SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
   CDCommon: 3551a469e0787c1c7ffdb8d2e2ba912747b903a1
   HappyDNS: 691a3041128055d09866f86e6e9ca90f24da1f18
-  IQKeyboardManager: 8eab4d8111418414619d1df8e4779ce5d0f8d7e2
+  IQKeyboardManager: 5ab84749f20f682f784160c2c63bef4f19d10d26
+  JCore: 9bd9c770c877c583d98b90a68792b8361974c231
+  JPush: c41be50eb1a574a66aeb68d237f00a4ec6ec3a82
   Masonry: 7c429b56da9d4ee0bbb3ed77a5ea710d6a5df39e
   MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
   MJExtension: 5932755f451458eefa24239358817f8d291240c7
@@ -87,6 +93,6 @@ SPEC CHECKSUMS:
   UIDeviceIdentifier: 9281343882e24460235f00a0d7d2fc04a65688c6
   ZendeskSDK: 4e075d7610e74755c576188886a073cfc5810145
 
-PODFILE CHECKSUM: b4bcd02b11f7e911a1b39148890e190ea717e9ee
+PODFILE CHECKSUM: 30b400ba4b85dbbaa3a662f5bceb6ef41f5225d4
 
 COCOAPODS: 1.2.1

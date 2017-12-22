@@ -16,16 +16,17 @@ pod 'MJExtension' ,         '3.0.13'
 pod 'Masonry',              '1.0.2'
 pod 'AFNetworking',         '3.1.0'
 pod 'SDWebImage',           '4.0.0'
-pod 'IQKeyboardManager',    '4.0.13'
+pod 'IQKeyboardManager',    '5.0.2'
 pod 'MBProgressHUD',        '0.9.2’
 pod 'SGQRCode',             '2.1.8'
 #pod 'pop',                  '1.0.10'
 #七牛云
+pod 'JPush'
 #    MGSwipeTableCell
 pod 'Qiniu',                '7.1.5'
 pod 'SVProgressHUD',        '2.2'
 pod 'ZendeskSDK'
-pod 'ZDCChat'
+#pod 'ZDCChat'
 #设备
 pod 'UIDeviceIdentifier', :git => 'https://github.com/squarefrog/UIDeviceIdentifier.git'
 

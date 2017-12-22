@@ -191,7 +191,7 @@
     NSArray *placeHolderArr = @[
                                 [LangSwitcher switchLang:@"" key:nil],
                                 [LangSwitcher switchLang:@"根据市场的溢价比例" key:nil],
-                                [LangSwitcher switchLang:@"广告最低可成交的价格" key:nil],
+                                [LangSwitcher switchLang:@"广告最高可成交的价格" key:nil],
                                 [LangSwitcher switchLang:@"每笔交易的最小限额" key:nil],
                                 [LangSwitcher switchLang:@"每笔交易的最大限额" key:nil],
                                 [LangSwitcher switchLang:@"请输入购买总量" key:nil],

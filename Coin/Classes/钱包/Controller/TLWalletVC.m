@@ -41,9 +41,15 @@
 - (void)viewWillAppear:(BOOL)animated {
     
     [super viewWillAppear:animated];
-    
     [self.navigationController setNavigationBarHidden:YES animated:animated];
     
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    
+    [super viewWillDisappear:animated];
+    [self.navigationController setNavigationBarHidden:NO animated:animated];
+
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
@@ -93,7 +99,7 @@
     
     self.tableView.tableHeaderView = self.headerView;
     self.tableView.refreshDelegate = self;
-    [self.tableView adjustsContentInsets];
+//    [self.tableView adjustsContentInsets];
     [self.view addSubview:self.tableView];
 }
 
@@ -156,11 +162,8 @@
     helper.parameters[@"userId"] = [TLUser user].userId;
     helper.isList = YES;
     helper.isCurrency = YES;
-    
     helper.tableView = self.tableView;
-    
     [helper modelClass:[CurrencyModel class]];
-    
     [self.tableView addRefreshAction:^{
         
         [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
@@ -224,9 +227,7 @@
         case 0:
         {
             RechargeCoinVC *coinVC = [RechargeCoinVC new];
-            
             coinVC.currency = currencyModel;
-            
             [self.navigationController pushViewController:coinVC animated:YES];
             
         }break;
@@ -241,11 +242,8 @@
         {
             
             BillVC *billVC = [BillVC new];
-            
             billVC.accountNumber = currencyModel.accountNumber;
-            
             billVC.billType = BillTypeAll;
-            
             [self.navigationController pushViewController:billVC animated:YES];
             
         }break;
@@ -254,11 +252,8 @@
         {
             
             BillVC *billVC = [BillVC new];
-            
             billVC.accountNumber = currencyModel.accountNumber;
-            
             billVC.billType = BillTypeFrozen;
-            
             [self.navigationController pushViewController:billVC animated:YES];
             
         }break;

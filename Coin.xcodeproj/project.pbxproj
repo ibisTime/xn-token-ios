@@ -465,6 +465,10 @@
 		2EB039AD1FE8EDE300589D8E /* UserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EB039AC1FE8EDE300589D8E /* UserInfo.m */; };
 		2EB039B21FE940D300589D8E /* manifest.xml in Resources */ = {isa = PBXBuildFile; fileRef = 2EB039B11FE940D300589D8E /* manifest.xml */; };
 		2EB039B51FEA0B4500589D8E /* TLUpdateVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EB039B31FEA0B4500589D8E /* TLUpdateVC.m */; };
+		2EB039BD1FEA9C1100589D8E /* ZDCChat.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2EB039BB1FEA9C1000589D8E /* ZDCChat.bundle */; };
+		2EB039BE1FEA9C1100589D8E /* ZDCChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EB039BC1FEA9C1000589D8E /* ZDCChat.framework */; };
+		2EB039C11FEA9C1F00589D8E /* ZDCChatStrings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2EB039BF1FEA9C1F00589D8E /* ZDCChatStrings.bundle */; };
+		2EB039C21FEA9C1F00589D8E /* ZDCChatAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EB039C01FEA9C1F00589D8E /* ZDCChatAPI.framework */; };
 		2EB949541FDE6D6D00CE4B94 /* LangChooseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EB949531FDE6D6D00CE4B94 /* LangChooseVC.m */; };
 		2EB9495A1FDF6B1A00CE4B94 /* ZMChineseConvert.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EB949561FDF6B1A00CE4B94 /* ZMChineseConvert.m */; };
 		2EB9495B1FDF6B1A00CE4B94 /* SimplifiedCode.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2EB949571FDF6B1A00CE4B94 /* SimplifiedCode.txt */; };
@@ -1394,6 +1398,13 @@
 		2E394FFF1FB05ADB00BA0829 /* TLTransactionVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLTransactionVC.m; sourceTree = "<group>"; };
 		2E3950011FB05AF200BA0829 /* TLOrderVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLOrderVC.h; sourceTree = "<group>"; };
 		2E3950021FB05AF200BA0829 /* TLOrderVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLOrderVC.m; sourceTree = "<group>"; };
+		2E5F191E1FED0CA900100420 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		2E5F191F1FED0CAE00100420 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		2E5F19201FED0CB600100420 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		2E5F19211FED0CC100100420 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		2E5F19221FED0CC900100420 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		2E5F19231FED0CD500100420 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		2E5F19241FED0CDD00100420 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		2E67CD9B1FE253850030C827 /* in.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = in.caf; sourceTree = "<group>"; };
 		2E973FC71FDA279C005C2D5F /* LangSwitcher.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LangSwitcher.h; sourceTree = "<group>"; };
 		2E973FC81FDA279C005C2D5F /* LangSwitcher.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LangSwitcher.m; sourceTree = "<group>"; };
@@ -1433,6 +1444,10 @@
 		2EB039B11FE940D300589D8E /* manifest.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = manifest.xml; sourceTree = "<group>"; };
 		2EB039B31FEA0B4500589D8E /* TLUpdateVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLUpdateVC.m; sourceTree = "<group>"; };
 		2EB039B41FEA0B4500589D8E /* TLUpdateVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLUpdateVC.h; sourceTree = "<group>"; };
+		2EB039BB1FEA9C1000589D8E /* ZDCChat.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ZDCChat.bundle; sourceTree = "<group>"; };
+		2EB039BC1FEA9C1000589D8E /* ZDCChat.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ZDCChat.framework; sourceTree = "<group>"; };
+		2EB039BF1FEA9C1F00589D8E /* ZDCChatStrings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ZDCChatStrings.bundle; sourceTree = "<group>"; };
+		2EB039C01FEA9C1F00589D8E /* ZDCChatAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ZDCChatAPI.framework; sourceTree = "<group>"; };
 		2EB949521FDE6D6D00CE4B94 /* LangChooseVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LangChooseVC.h; sourceTree = "<group>"; };
 		2EB949531FDE6D6D00CE4B94 /* LangChooseVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LangChooseVC.m; sourceTree = "<group>"; };
 		2EB949561FDF6B1A00CE4B94 /* ZMChineseConvert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZMChineseConvert.m; sourceTree = "<group>"; };
@@ -1468,6 +1483,7 @@
 				21C91D981FDBD7E4006EDB16 /* CoreMotion.framework in Frameworks */,
 				21205D061FCD6394003C6C7C /* libWeChatSDK.a in Frameworks */,
 				211C05081FC6714500E51FCF /* libz.tbd in Frameworks */,
+				2EB039BE1FEA9C1100589D8E /* ZDCChat.framework in Frameworks */,
 				211C050A1FC6715000E51FCF /* libc++.tbd in Frameworks */,
 				211C050E1FC6716500E51FCF /* libresolv.tbd in Frameworks */,
 				211C050C1FC6715B00E51FCF /* libsqlite3.tbd in Frameworks */,
@@ -1477,6 +1493,7 @@
 				211C01431FC6600300E51FCF /* TLSSDK.framework in Frameworks */,
 				06A1FB6431230E34B134069E /* libPods-Coin.a in Frameworks */,
 				211C01421FC6600300E51FCF /* ImSDK.framework in Frameworks */,
+				2EB039C21FEA9C1F00589D8E /* ZDCChatAPI.framework in Frameworks */,
 				21C91D8D1FDBD64D006EDB16 /* AlipaySDK.framework in Frameworks */,
 				211C01471FC6600300E51FCF /* IMMessageExt.framework in Frameworks */,
 				211C01461FC6600300E51FCF /* IMGroupExt.framework in Frameworks */,
@@ -1751,6 +1768,8 @@
 		211C013A1FC6600300E51FCF /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				2EB039BA1FEA9BC600589D8E /* ZDSupport */,
+				2EB039B91FEA9BB400589D8E /* ZDChat */,
 				21C91D891FDBD64D006EDB16 /* Alipay */,
 				21205CFF1FCD6383003C6C7C /* WeChat */,
 				211C013B1FC6600300E51FCF /* 腾讯云 */,
@@ -3995,6 +4014,24 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		2EB039B91FEA9BB400589D8E /* ZDChat */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ZDChat;
+			sourceTree = "<group>";
+		};
+		2EB039BA1FEA9BC600589D8E /* ZDSupport */ = {
+			isa = PBXGroup;
+			children = (
+				2EB039C01FEA9C1F00589D8E /* ZDCChatAPI.framework */,
+				2EB039BF1FEA9C1F00589D8E /* ZDCChatStrings.bundle */,
+				2EB039BB1FEA9C1000589D8E /* ZDCChat.bundle */,
+				2EB039BC1FEA9C1000589D8E /* ZDCChat.framework */,
+			);
+			path = ZDSupport;
+			sourceTree = "<group>";
+		};
 		2EB949551FDF6B1A00CE4B94 /* ChineseConvert */ = {
 			isa = PBXGroup;
 			children = (
@@ -4029,6 +4066,13 @@
 		C678617F8B7C3B3F2F7DE44F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2E5F19241FED0CDD00100420 /* UserNotifications.framework */,
+				2E5F19231FED0CD500100420 /* AdSupport.framework */,
+				2E5F19221FED0CC900100420 /* CoreGraphics.framework */,
+				2E5F19211FED0CC100100420 /* SystemConfiguration.framework */,
+				2E5F19201FED0CB600100420 /* CoreTelephony.framework */,
+				2E5F191F1FED0CAE00100420 /* CoreFoundation.framework */,
+				2E5F191E1FED0CA900100420 /* CFNetwork.framework */,
 				21C91D971FDBD7DE006EDB16 /* CoreMotion.framework */,
 				21C91D961FDBD7A3006EDB16 /* Accounts.framework */,
 				21C91D941FDBD78E006EDB16 /* MediaPlayer.framework */,
@@ -4095,7 +4139,7 @@
 								enabled = 1;
 							};
 							com.apple.Push = {
-								enabled = 0;
+								enabled = 1;
 							};
 						};
 					};
@@ -4155,8 +4199,10 @@
 				211C04BD1FC6604900E51FCF /* 0@2x.png in Resources */,
 				211C04C41FC6604900E51FCF /* 13.gif in Resources */,
 				2EA584C11FA813C900C7106C /* Assets.xcassets in Resources */,
+				2EB039BD1FEA9C1100589D8E /* ZDCChat.bundle in Resources */,
 				211C04A61FC6604900E51FCF /* 22.gif in Resources */,
 				211C04C51FC6604900E51FCF /* 11.gif in Resources */,
+				2EB039C11FEA9C1F00589D8E /* ZDCChatStrings.bundle in Resources */,
 				211C04AB1FC6604900E51FCF /* 32.gif in Resources */,
 				211C04F81FC6604900E51FCF /* 10.caf in Resources */,
 				211C04C21FC6604900E51FCF /* 16.gif in Resources */,
@@ -4773,6 +4819,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CLANG_WARN_STRICT_PROTOTYPES = NO;
+				CODE_SIGN_ENTITLEMENTS = Coin/Coin.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6PF7VHZB5Z;
@@ -4782,15 +4829,17 @@
 					"$(PROJECT_DIR)/Coin/Extension/腾讯云",
 					"$(PROJECT_DIR)/Coin/Extension/芝麻认证",
 					"$(PROJECT_DIR)/Coin/Extension/Alipay",
+					"$(PROJECT_DIR)/Coin/Extension/ZDSupport",
 				);
 				GCC_PREFIX_HEADER = Coin/Classes/Other/CoinPrefixHeader.pch;
 				INFOPLIST_FILE = Coin/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Coin/Classes/Modules/Chat/CommonLibrary/BlocksKit",
 					"$(PROJECT_DIR)/Coin/Extension/WeChat",
+					"$(PROJECT_DIR)/Coin/Extension/Lib",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.bcoin.coin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -4806,6 +4855,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CLANG_WARN_STRICT_PROTOTYPES = NO;
+				CODE_SIGN_ENTITLEMENTS = Coin/Coin.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6PF7VHZB5Z;
@@ -4815,15 +4865,17 @@
 					"$(PROJECT_DIR)/Coin/Extension/腾讯云",
 					"$(PROJECT_DIR)/Coin/Extension/芝麻认证",
 					"$(PROJECT_DIR)/Coin/Extension/Alipay",
+					"$(PROJECT_DIR)/Coin/Extension/ZDSupport",
 				);
 				GCC_PREFIX_HEADER = Coin/Classes/Other/CoinPrefixHeader.pch;
 				INFOPLIST_FILE = Coin/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Coin/Classes/Modules/Chat/CommonLibrary/BlocksKit",
 					"$(PROJECT_DIR)/Coin/Extension/WeChat",
+					"$(PROJECT_DIR)/Coin/Extension/Lib",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.bcoin.coin;
 				PRODUCT_NAME = "$(TARGET_NAME)";

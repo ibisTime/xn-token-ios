@@ -39,8 +39,15 @@ typedef void(^TradeSellBlock)(TradeSellType tradeType);
 @property (nonatomic, strong) AdvertiseModel *advertise;
 
 @property (nonatomic, copy) TradeSellBlock tradeBlock;
-//余额
-@property (nonatomic, copy) NSString *leftAmount;
+
+/**
+  已登录的是，可用余额。未登录的是，广告剩余可交易
+ */
+@property (nonatomic, strong) NSString *leftInfo;
+//@property (nonatomic, copy) NSString *leftAmount;
+//@property (nonatomic, copy) NSString *leftAmount;
+
+
 //真实行情价格
 @property (nonatomic, strong) NSNumber *truePrice;
 

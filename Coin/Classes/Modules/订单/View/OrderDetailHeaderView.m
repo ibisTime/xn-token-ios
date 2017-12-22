@@ -99,7 +99,6 @@
     
     //订单状态
     self.statusLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kThemeColor font:16.0];
-    
     [self.topView addSubview:self.statusLbl];
     [self.statusLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
@@ -111,9 +110,7 @@
     
     //分割线
     UIView *line = [[UIView alloc] init];
-    
     line.backgroundColor = kLineColor;
-    
     [self.topView addSubview:line];
     [line mas_makeConstraints:^(MASConstraintMaker *make) {
         
@@ -123,8 +120,6 @@
         
     }];
     
-   
-    
     NSArray *textArr = @[
                          [LangSwitcher switchLang:@"交易价格" key:nil],
                          [LangSwitcher switchLang:@"交易金额" key:nil],
@@ -132,7 +127,6 @@
                          ];
     
     __block UILabel *lastLbl = self.orderCodeLbl;
-    
     [textArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         
         UILabel *textLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:15.0];
@@ -145,7 +139,6 @@
             make.top.equalTo(lastLbl.mas_bottom).offset(15);
             
         }];
-        
         lastLbl = textLbl;
     }];
     
@@ -163,7 +156,9 @@
     }];
     
     //交易金额
-    self.amountLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:15.0];
+    self.amountLbl = [UILabel labelWithBackgroundColor:kClearColor
+                                             textColor:kTextColor
+                                                  font:15.0];
     
     self.amountLbl.textAlignment = NSTextAlignmentRight;
     
@@ -231,9 +226,7 @@
     
     //留言
     self.leaveMsgLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:14.0];
-    
     self.leaveMsgLbl.numberOfLines = 0;
-    
     [self.centerView addSubview:self.leaveMsgLbl];
     [self.leaveMsgLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
@@ -245,9 +238,7 @@
     
     //分割线
     UIView *line = [[UIView alloc] init];
-    
     line.backgroundColor = kLineColor;
-    
     [self.centerView addSubview:line];
     [line mas_makeConstraints:^(MASConstraintMaker *make) {
         
@@ -259,9 +250,7 @@
     
     //提示
     self.promptLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor2 font:12.0];
-    
     self.promptLbl.textAlignment = NSTextAlignmentCenter;
-    
     [self.centerView addSubview:self.promptLbl];
     [self.promptLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
@@ -273,13 +262,14 @@
     CGFloat btnH = 44;
     
     //按钮
-    self.tradeBtn = [UIButton buttonWithTitle:@"" titleColor:kWhiteColor backgroundColor:kClearColor titleFont:16.0 cornerRadius:btnH/2.0];
-    
+    self.tradeBtn = [UIButton buttonWithTitle:@""
+                                   titleColor:kWhiteColor
+                              backgroundColor:kClearColor
+                                    titleFont:16.0
+                                 cornerRadius:btnH/2.0];
     [self.tradeBtn addTarget:self action:@selector(orderStatusDidChange:) forControlEvents:UIControlEventTouchUpInside];
-    
     [self.centerView addSubview:self.tradeBtn];
     [self.tradeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        
         
         make.centerX.equalTo(@0);
         make.width.equalTo(@150);
@@ -319,12 +309,19 @@
     //留言
     self.leaveMsgLbl.text = [NSString stringWithFormat:@"%@: %@",[LangSwitcher switchLang:@"广告留言" key:nil], order.leaveMessage];
     
-    //提示
-    if ([order.status isEqualToString:@"0"] || [order.status isEqualToString:@"1"]) {
-        
+    //确定按钮上面的那就话
+    if (
+        [order.status isEqualToString:kTradeOrderStatusToPay]
+        ) {
+        //待支付
         [self calculateInvalidTimeWithOrder:order];
         
-    } else if ([order.status isEqualToString:@"2"] ||[order.status isEqualToString:@"3"]) {
+    } else if ([order.status isEqualToString:kTradeOrderStatusPayed]) {
+        //已支付
+        self.promptLbl.text = @"买家已支付，等待卖家释放";
+        
+    } else if ([order.status isEqualToString:kTradeOrderStatusReleased] ||
+               [order.status isEqualToString:kTradeOrderStatusComplete]) {
         
         self.promptLbl.text = order.promptStr;
 
@@ -336,13 +333,9 @@
     
     //按钮
     [self.tradeBtn setTitle:order.btnTitle forState:UIControlStateNormal];
-    
     [self.tradeBtn setBackgroundColor:order.bgColor forState:UIControlStateNormal];
-    
     self.tradeBtn.enabled = order.enable;
-
     [self layoutIfNeeded];
-    
     [self.centerView mas_updateConstraints:^(MASConstraintMaker *make) {
         
         make.height.equalTo(@(self.tradeBtn.yy + 18));
@@ -352,7 +345,6 @@
 }
 
 //计算时间
-
 - (void)calculateInvalidTimeWithOrder:(OrderModel *)order {
     
 //    NSDate *invalidDate = [NSString dateFromString:order.invalidDatetime formatter:@"MMM dd, yyyy hh:mm:ss aa"];
@@ -365,9 +357,7 @@
     //对比两个时间
     
 //    NSTimeInterval seconds = [invalidDate timeIntervalSinceDate:createDate];
-
 //    NSTimeInterval seconds = [invalidDate timeIntervalSinceDate:localDate];
-    
 //    NSInteger minute = seconds/60;
     
     self.promptLbl.text = [NSString stringWithFormat:@"货币将在托管中保持至%@, 逾期未支付交易将自动取消", inviteDateStr];

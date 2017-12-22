@@ -334,14 +334,21 @@
     self.leaveMsgTV.text = advertise.leaveMessage;
 }
 
-- (void)setLeftAmount:(NSString *)leftAmount {
+- (void)setLeftInfo:(NSString *)leftInfo {
     
-    _leftAmount = leftAmount;
+    _leftInfo = [leftInfo copy];
     
-//    self.leftAmountLbl.text = [NSString stringWithFormat:@"广告剩余可交易量: %@ ETH", [_leftAmount convertToSimpleRealCoin]];
-    self.leftAmountLbl.text = [NSString stringWithFormat:@"可用余额: %@ ETH", [_leftAmount convertToSimpleRealCoin]];
-
+    self.leftAmountLbl.text = leftInfo;
+    
 }
+
+//- (void)setLeftAmount:(NSString *)leftAmount {
+//    
+//    _leftAmount = leftAmount;
+//    
+// 
+//    
+//}
 
 - (void)setTruePrice:(NSNumber *)truePrice {
     

@@ -181,14 +181,14 @@
         
     }];
     
-    
+    __weak typeof(self) weakSelf = self;
 #pragma mark - ------------------ 以下为收听消息的监听方法   ------------
     _conversation.receiveMsg = ^(NSArray *imamsgList, BOOL succ) {
         
         [ws modifySendInputStatus:SendInputStatus_Send];
         [ws onReceiveNewMsg:imamsgList succ:succ];
         [ws updateMessageList];
-        
+        [weakSelf hasReceiverMsg:imamsgList];
     };
 
     [self addChatSettingItem];
@@ -200,6 +200,23 @@
         [((IMAGroup *)user) asyncUpdateGroupInfo:nil fail:nil];
         
     }
+    
+}
+
+- (void)hasReceiverMsg:(NSArray <IMAMsg *> *)msgList {
+    
+    if (msgList && msgList.count == 1 ) {
+      
+        [msgList enumerateObjectsUsingBlock:^(IMAMsg * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            if ([self isAdminMsg:obj]) {
+                [self receiverSysMsg];
+            }
+        }];
+    }
+}
+
+#pragma mark 子类需要复写
+- (void)receiverSysMsg {
     
 }
 

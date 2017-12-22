@@ -177,7 +177,7 @@
         [TLAlert alertWithSucces:[LangSwitcher switchLang:@"找回成功" key:nil]];
         
         //保存用户账号和密码
-        [[TLUser user] saveUserName:self.phoneTf.text pwd:self.pwdTf.text];
+//        [[TLUser user] saveUserName:self.phoneTf.text pwd:self.pwdTf.text];
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             

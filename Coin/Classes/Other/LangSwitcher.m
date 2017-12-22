@@ -24,14 +24,8 @@
     if (!lang || [lang equalsString:SIMPLE]) {
         return content;
     }
-    
-    
-    
-    
-   return [ZMChineseConvert convertSimplifiedToTraditional:content];
 
-//    [NSLocale currentLocale]
-//    return content;
+   return [ZMChineseConvert convertSimplifiedToTraditional:content];
     
 }
 
@@ -91,11 +85,18 @@
     
 }
 
-
-
-
-+ (NSString *)switchLang:(NSString *)content {
-    return content;
++ (void)startWithTraditional {
+    
+    NSString *lang = [[NSUserDefaults standardUserDefaults] objectForKey:LANG];
+    if (!lang || lang.length <= 0) {
+        
+        [self changLangType:LangTypeTraditional];
+    }
+    
 }
+
+
+
+
 
 @end

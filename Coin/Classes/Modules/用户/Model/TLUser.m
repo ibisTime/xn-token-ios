@@ -72,23 +72,50 @@ NSString *const kGoogleAuthClose = @"0";
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
-- (BOOL)isLogin {
-
+- (BOOL)checkLogin {
+    
     NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
     NSString *userId = [userDefault objectForKey:USER_ID_KEY];
     NSString *token = [userDefault objectForKey:TOKEN_ID_KEY];
     if (userId && token) {
-        
-        self.userId = userId;
-        self.token = token;
-        [self setUserInfoWithDict:[userDefault objectForKey:USER_INFO_DICT_KEY]];
-        
+    
         return YES;
+        
     } else {
         
         
         return NO;
     }
+    
+}
+
+// 登录状态才调用
+- (void)loadUserInfoFromDB {
+    
+    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+    NSString *userId = [userDefault objectForKey:USER_ID_KEY];
+    NSString *token = [userDefault objectForKey:TOKEN_ID_KEY];
+    //
+    self.userId = userId;
+    self.token = token;
+    //
+    NSDictionary *dict = [userDefault objectForKey:USER_INFO_DICT_KEY];
+    [self setUserInfoWithDict:dict];
+    
+}
+
+- (BOOL)isLogin {
+    
+    if ([self checkLogin]) {
+        
+        [self loadUserInfoFromDB];
+        return YES;
+        
+    } else {
+        
+        return NO;
+    }
+
 
 }
 
@@ -278,17 +305,23 @@ NSString *const kGoogleAuthClose = @"0";
     
 }
 
-- (void)saveUserName:(NSString *)userName pwd:(NSString *)pwd {
+- (void)setMobile:(NSString *)mobile {
     
-    self.userName = userName;
-    
-    self.userPassward = pwd;
-    
-    [UserDefaultsUtil setUserDefaultName:userName];
-    
-    [UserDefaultsUtil setUserDefaultPassword:pwd];
+    _mobile = [mobile copy];
     
 }
+
+//- (void)saveUserName:(NSString *)userName pwd:(NSString *)pwd {
+//    
+//    self.userName = userName;
+//    
+//    self.userPassward = pwd;
+//    
+//    [UserDefaultsUtil setUserDefaultName:userName];
+//    
+//    [UserDefaultsUtil setUserDefaultPassword:pwd];
+//    
+//}
 
 //- (void)setUnReadMsgCount:(NSInteger)unReadMsgCount {
 //    

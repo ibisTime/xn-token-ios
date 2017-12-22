@@ -58,6 +58,14 @@
 
 }
 
+- (void)receiverSysMsg {
+    [super receiverSysMsg];
+    
+    // 系统消息来时订单状态已经改变，刷新订单
+    [self lookOrderDetail];
+    //
+}
+
 #pragma mark - Init
 - (void)initHeaderView {
     
@@ -154,13 +162,12 @@
             
         }break;
             
-        case OrderEventsTypeDidComplete:
-        {
+        case OrderEventsTypeDidComplete: {
             
             self.tabBarController.selectedIndex = 3;
             [self.navigationController popToRootViewControllerAnimated:NO];
             
-        }break;
+        } break;
             
 //        case OrderEventsTypeDidCancel:
 //        {
@@ -239,11 +246,11 @@
         
     }];
 }
+
 //交易评价
 - (void)commentWithResult:(NSString *)result {
     
     TLNetworking *http = [TLNetworking new];
-    
     http.code = @"625245";
     http.showView = self.view;
     http.parameters[@"code"] = self.order.code;
@@ -257,7 +264,6 @@
         if ([isSuccess isEqualToString:@"1"]) {
             
             [TLAlert alertWithSucces:@"评价成功"];
-            
             [self.commentView hide];
             //刷新订单列表
             [[NSNotificationCenter defaultCenter] postNotificationName:kOrderListRefresh object:nil];
@@ -288,7 +294,6 @@
         if ([isSuccess isEqualToString:@"1"]) {
             
             [TLAlert alertWithSucces:@"申请成功"];
-            
             [self.arbitrationView hide];
             //刷新订单列表
             [[NSNotificationCenter defaultCenter] postNotificationName:kOrderListRefresh object:nil];
@@ -305,7 +310,6 @@
 - (void)lookOrderDetail {
     
     TLNetworking *http = [TLNetworking new];
-    
     http.code = @"625251";
     http.showView = self.view;
     http.parameters[@"code"] = self.order.code;
@@ -313,9 +317,7 @@
     [http postWithSuccess:^(id responseObject) {
         
         self.order = [OrderModel tl_objectWithDictionary:responseObject[@"data"]];
-        
         self.headView.order = self.order;
-        
         if ([self.order.status isEqualToString:@"1"]) {
             
             //仲裁

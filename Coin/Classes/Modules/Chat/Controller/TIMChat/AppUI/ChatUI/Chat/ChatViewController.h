@@ -61,4 +61,10 @@ typedef NS_ENUM(NSInteger, SendInputStatus)
 
 - (void)updateOnSendMessage:(NSArray *)msglist succ:(BOOL)succ;
 
+
+/**
+   收到系统消息，子类需要复写
+ */
+- (void)receiverSysMsg;
+
 @end

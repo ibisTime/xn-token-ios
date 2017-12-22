@@ -33,6 +33,8 @@
 #import "AppConfig.h"
 #import <ZendeskSDK/ZendeskSDK.h>
 #import <ZDCChat/ZDCChat.h>
+#import <IQKeyboardManager/IQKeyboardManager.h>
+#import <CDCommon/UIScrollView+TLAdd.h>
 
 @interface TLMineVC ()<MineHeaderSeletedDelegate,UINavigationControllerDelegate>
 
@@ -53,18 +55,38 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     
-//    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
+
+//- (void)viewDidAppear:(BOOL)animated {
+//    
+//    [super viewDidAppear:animated];
+//    [self.navigationController setNavigationBarHidden:YES animated:NO];
+//
+//}
+
+//- (void)viewDidDisappear:(BOOL)animated {
+//    [super viewDidDisappear:animated];
+//
+//    [self.navigationController setNavigationBarHidden:NO animated:NO];
+//
+//}
 
 - (void)viewWillAppear:(BOOL)animated {
     
     [super viewWillAppear:animated];
-//    [self.navigationController setNavigationBarHidden:YES animated:animated];
+    
+    [self.navigationController setNavigationBarHidden:YES animated:NO];
 
+    //解决聊天
+    [IQKeyboardManager sharedManager].enableAutoToolbar = YES;
+    [[IQKeyboardManager sharedManager] setEnable:YES];
+
+    //
     if ([TLUser user].userId) {
-        
         [self requestUserStatistInfo];
     }
+    
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
@@ -75,9 +97,17 @@
 #pragma mark - UINavigationControllerDelegate
 - (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
     // 判断要显示的控制器是否是自己
-    BOOL isShowHomePage = [viewController isKindOfClass:[self class]];
-    [self.navigationController setNavigationBarHidden:isShowHomePage animated:YES];
-    
+    if ([viewController isKindOfClass:[ZDCChatViewController class]]) {
+        
+        [[IQKeyboardManager sharedManager] setEnable:NO];
+        ZDCChatViewController *chatVC = (ZDCChatViewController *)viewController;
+        ZDCChatUI *chatUI = chatVC.chatUI;
+        ZDCChatView *chatView = chatUI.chatView;
+        [chatView.table adjustsContentInsets];
+        [[ZDCChat instance].overlay setEnabled:NO];
+        
+    }
+
 }
 
 - (void)viewDidLoad {
@@ -95,7 +125,24 @@
     [[TLUser user] updateUserInfo];
     //通知
     [self addNotification];
+    
+    // viewDidLoad __ todo
+//    FBKVOController *kvoController = [[FBKVOController alloc] initWithObserver:self];
+//    [kvoController observe:[ZDCChat instance]
+//                   keyPath:@"unreadMessagesCount"
+//                   options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
+//                     block:^(id observer, id object, NSDictionary *change) {
+//
+//                         [[UIApplication sharedApplication] ]
+//
+//                     }];
+    
+    
 }
+
+
+
+#pragma mark- overly-delegate
 
 #pragma mark - Init
 
@@ -143,8 +190,8 @@
     trust.action = ^{
         
         FansVC *fansVC = [FansVC new];
-        
         [weakSelf.navigationController pushViewController:fansVC animated:YES];
+        
     };
     
     //邀请好友
@@ -183,44 +230,51 @@
     };
     
     //常见问题
-    MineModel *problem = [MineModel new];
-    
-    problem.text = [LangSwitcher switchLang:@"常见问题" key:nil];
-    problem.imgName = @"常见问题";
-    problem.action = ^{
-        
-        HTMLStrVC *htmlVC = [HTMLStrVC new];
-        
-        htmlVC.type = HTMLTypeCommonProblem;
-        
-        [weakSelf.navigationController pushViewController:htmlVC animated:YES];
-        
-    };
+//    MineModel *problem = [MineModel new];
+//
+//    problem.text = [LangSwitcher switchLang:@"常见问题" key:nil];
+//    problem.imgName = @"常见问题";
+//    problem.action = ^{
+//
+//        HTMLStrVC *htmlVC = [HTMLStrVC new];
+//
+//        htmlVC.type = HTMLTypeCommonProblem;
+//
+//        [weakSelf.navigationController pushViewController:htmlVC animated:YES];
+//
+//    };
     
     //联系客服
     MineModel *linkService = [MineModel new];
     linkService.text = [LangSwitcher switchLang:@"联系客服" key:nil];
     linkService.imgName = @"联系客服";
     linkService.action = ^{
-        
+
 //        HTMLStrVC *htmlVC = [HTMLStrVC new];
 //        htmlVC.type = HTMLTypeLinkService;
 //        [weakSelf.navigationController pushViewController:htmlVC animated:YES];
-        [ZDCChat startChatIn:self.navigationController withConfig:nil];
-        
-//        [ZDCChat updateVisitor:^(ZDCVisitorInfo *user) {
-//            user.phone = @"0123456789";
-//            user.name = @"Jane Doe";
-//            user.email = @"jdoe@example.com";
+//
+        [IQKeyboardManager sharedManager].enableAutoToolbar = NO;
+        [ZDCChat updateVisitor:^(ZDCVisitorInfo *visitor) {
+
+            visitor.name = [TLUser user].nickname;
+            visitor.phone = [TLUser user].mobile;
+            visitor.email = [TLUser user].email;
+            
+        }];
+        //
+//        [ZDCChat startChat:^(ZDCConfig *config) {
+//
 //        }];
-        
+        [ZDCChat startChatIn:self.navigationController withConfig:nil];
+
     };
     
 //    //工单
-    MineModel *gongDanModel = [MineModel new];
-    gongDanModel.text = [LangSwitcher switchLang:@"帮助中心" key:nil];
-    gongDanModel.imgName = @"联系客服";
-    gongDanModel.action = ^{
+    MineModel *helpModel = [MineModel new];
+    helpModel.text = [LangSwitcher switchLang:@"帮助中心" key:nil];
+    helpModel.imgName = @"常见问题";
+    helpModel.action = ^{
         
 //        HTMLStrVC *htmlVC = [HTMLStrVC new];
 //        htmlVC.type = HTMLTypeLinkService;
@@ -238,7 +292,7 @@
 //        contentModel.labels = @[@"tag"];
 //        contentModel.groupType = ZDKHelpCenterOverviewGroupTypeSection;
 //        contentModel.groupIds = @[@"sections2"];
-
+        
         [ZDKHelpCenter pushHelpCenterOverview:self.navigationController
                              withContentModel:contentModel];
         
@@ -263,7 +317,7 @@
         
         self.group.sections = @[
                                 @[advertisement, address, trust],
-                                @[securityCenter, personalSetting, problem,gongDanModel, linkService, abountUs]
+                                @[securityCenter, personalSetting,helpModel, linkService, abountUs]
                                 ];
 
     } else {
@@ -271,12 +325,11 @@
         
         self.group.sections = @[
                                 @[advertisement, address, trust, inviteFriend],
-                                @[securityCenter, personalSetting, problem, gongDanModel, linkService, abountUs]
+                                @[securityCenter, personalSetting,helpModel, linkService, abountUs]
                                 ];
         
     }
  
-    
 }
 
 - (void)initTableView {
@@ -473,9 +526,5 @@
     }
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 @end

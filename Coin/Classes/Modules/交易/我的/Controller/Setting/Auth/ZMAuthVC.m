@@ -21,7 +21,7 @@
 
 @property (nonatomic, strong) TLTextField *realName;    //真实姓名
 @property (nonatomic, strong) TLTextField *idCard;      //身份证
-
+@property (nonatomic, strong) UIButton *confirmBtn;
 @end
 
 @implementation ZMAuthVC
@@ -33,6 +33,14 @@
     [self initSubviews];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(realNameAuth:) name:@"RealNameAuthResult" object:nil];
+    
+    NSString *realName = [TLUser user].realName;
+    if (realName && realName.length) {
+        
+        self.realName.enabled = NO;
+        self.idCard.enabled = NO;
+        self.confirmBtn.hidden = YES;
+    }
     
 }
 
@@ -71,12 +79,13 @@
     UIButton *confirmBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"确定" key:nil] titleColor:kWhiteColor backgroundColor:bgColor titleFont:15.0 cornerRadius:45/2.0];
     
     confirmBtn.frame = CGRectMake(leftMargin, self.idCard.yy + 40, kScreenWidth - 2*leftMargin, 45);
-    
     confirmBtn.enabled = !isRealNameExist;
+    self.confirmBtn = confirmBtn;
+    [self.view addSubview:confirmBtn];
 
+    
     [confirmBtn addTarget:self action:@selector(confirmIDCard:) forControlEvents:UIControlEventTouchUpInside];
     
-    [self.view addSubview:confirmBtn];
     
     
 }
@@ -147,27 +156,18 @@
         if ([responseObject[@"errorCode"] isEqual:@"0"]) {
             
             NSString *bizNo = responseObject[@"data"][@"bizNo"];
-
             [TLUser user].tempBizNo = bizNo;
-
             NSString *urlStr = responseObject[@"data"][@"url"];
-            
             [self doVerify:urlStr];
 
         } else {
             
             ZMAuthResultVC *authResultVC = [ZMAuthResultVC new];
-            
             authResultVC.title = [LangSwitcher switchLang:@"实名认证结果" key:nil];
-            
             authResultVC.result = NO;
-            
             authResultVC.realName = self.realName.text;
-            
             authResultVC.idCard = self.idCard.text;
-            
             authResultVC.failureReason = responseObject[@"errorInfo"];
-            
             [self.navigationController pushViewController:authResultVC animated:YES];
             
         }

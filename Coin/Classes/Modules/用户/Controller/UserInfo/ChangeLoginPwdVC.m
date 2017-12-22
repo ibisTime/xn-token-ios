@@ -211,7 +211,7 @@
         
         NSString *promptStr = [LangSwitcher switchLang:@"修改成功" key:nil];
         //保存用户账号和密码
-        [[TLUser user] saveUserName:[TLUser user].mobile pwd:self.rePwdTf.text];
+//        [[TLUser user] saveUserName:[TLUser user].mobile pwd:self.rePwdTf.text];
         
         [TLAlert alertWithSucces:promptStr];
         

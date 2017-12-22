@@ -67,13 +67,33 @@
         weakSelf.tradeView.advertise = self.advertise;
         weakSelf.tradeView.truePrice = self.advertise.truePrice;
         
+        
+//        if ([[TLUser user] checkLogin]) {
+//            //已登录
+//            self.leftAmountLbl.text = [NSString stringWithFormat:@"可用余额: %@ ETH", [_leftAmount convertToSimpleRealCoin]];
+//
+//        } else {
+//            //未登录
+//            self.leftAmountLbl.text = [NSString stringWithFormat:@"广告剩余可交易量: %@ ETH", [_leftAmount convertToSimpleRealCoin]];
+//
+//        }
         //广告剩余可用余额
-        weakSelf.tradeView.leftAmount = self.advertise.leftCountString;
+        weakSelf.tradeView.leftInfo = @"--";
         
         //获取交易提醒
         [self requestTradeRemind];
         //添加通知
         [self addNotification];
+        
+        if ([[TLUser user] checkLogin]) {
+            
+            [self getLeftAmount];
+            
+        } else {
+            
+            weakSelf.tradeView.leftInfo = [NSString stringWithFormat:@"广告剩余可交易量: %@ ETH", [self.advertise.leftCountString convertToSimpleRealCoin]];
+            
+        }
         
         //开启定时器,实时刷新
         //        self.timer = [NSTimer timerWithTimeInterval:10 target:self selector:@selector(queryAdvertiseDetail) userInfo:nil repeats:YES];
@@ -112,7 +132,8 @@
 
 - (void)addOffItem {
     
-    if ([self.advertise.status isEqualToString:@"1"] || [self.advertise.status isEqualToString:@"2"]) {
+    if ([self.advertise.status isEqualToString:kTradeOrderStatusPayed] ||
+        [self.advertise.status isEqualToString:kTradeOrderStatusReleased]) {
         
         [UIBarButtonItem addRightItemWithTitle:@"下架" titleColor:kTextColor frame:CGRectMake(0, 0, 40, 44) vc:self action:@selector(advertiseOff)];
         
@@ -347,26 +368,23 @@
 
 - (void)getLeftAmount {
     
-    CoinWeakSelf;
-    
     TLPageDataHelper *helper = [[TLPageDataHelper alloc] init];
     
     helper.code = @"802503";
     helper.parameters[@"userId"] = [TLUser user].userId;
     helper.isList = YES;
     helper.isCurrency = YES;
-    
     [helper modelClass:[CurrencyModel class]];
-    
     [helper refresh:^(NSMutableArray <CurrencyModel *>*objs, BOOL stillHave) {
         
         [objs enumerateObjectsUsingBlock:^(CurrencyModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             
             
-            if ([obj.currency isEqualToString:@"ETH"]) {
+            if ([obj.currency isEqualToString:kETH]) {
                 
-                weakSelf.tradeView.leftAmount = [obj.amountString subNumber:obj.frozenAmountString];
+                self.tradeView.leftInfo =  [NSString stringWithFormat:@"可用余额: %@ ETH", [[obj.amountString subNumber:obj.frozenAmountString] convertToSimpleRealCoin]];
             }
+            
         }];
         
     } failure:^(NSError *error) {

@@ -26,4 +26,9 @@ typedef NS_ENUM(NSUInteger, LangType) {
 
 + (void)changLangType:(LangType)langType;
 
+/**
+ 进行繁体初始化
+ */
++ (void)startWithTraditional;
+
 @end

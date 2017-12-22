@@ -47,10 +47,9 @@
 - (void)viewWillAppear:(BOOL)animated {
     
     [super viewWillAppear:animated];
-    
     [self.tableView reloadData];
-    
     [self requestUserInfo];
+    
 }
 
 - (void)viewDidLoad {
@@ -290,7 +289,7 @@
 #pragma mark- 更新设置状态
 - (void)reloadUserInfo {
     
-    if ([TLUser user].realName) {
+    if ([TLUser user].realName && [TLUser user].realName.length) {
         //认证状态
         self.realNameSettingModel.subText = [LangSwitcher switchLang:@"已认证" key:nil];
         

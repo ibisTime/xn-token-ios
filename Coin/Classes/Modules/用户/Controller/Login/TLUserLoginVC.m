@@ -242,7 +242,7 @@
     NSString *userId = responseObject[@"data"][@"userId"];
     
     //保存用户账号和密码
-    [[TLUser user] saveUserName:self.phoneTf.text pwd:self.pwdTf.text];
+//    [[TLUser user] saveUserName:self.phoneTf.text pwd:self.pwdTf.text];
     
     //1.获取用户信息
     TLNetworking *http = [TLNetworking new];

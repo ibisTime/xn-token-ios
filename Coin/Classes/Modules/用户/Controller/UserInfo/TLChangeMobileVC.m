@@ -158,7 +158,7 @@
         [TLUser user].mobile = self.phoneTf.text;
         
         //保存用户账号和密码
-        [[TLUser user] saveUserName:self.phoneTf.text pwd:[TLUser user].userPassward];
+//        [[TLUser user] saveUserName:self.phoneTf.text pwd:[TLUser user].userPassward];
         
         [self.navigationController popViewControllerAnimated:YES];
         

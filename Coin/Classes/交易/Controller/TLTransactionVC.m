@@ -92,22 +92,20 @@
     //强制更新
 //    [self configUpdate];
     
-//    self.timer = [NSTimer scheduledTimerWithTimeInterval:1
-//                                                  target:self
-//                                                selector:@selector(refreshAds)
-//                                                userInfo:nil
-//                                                 repeats:YES];
-    
-    //
-//    self.tableView.
+    // 定时器去刷新广告列表
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:2*60
+                                                  target:self
+                                                selector:@selector(refreshAds)
+                                                userInfo:nil
+                                                 repeats:YES];
 
 }
 
-//- (void)refreshAds {
-//
-//    [self.tableView beginRefreshing];
-//
-//}
+- (void)refreshAds {
+
+    [self.tableView beginRefreshing];
+
+}
 
 #pragma mark - Init
 -(TopLabelUtil *)labelUnil {

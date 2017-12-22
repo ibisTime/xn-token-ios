@@ -7,9 +7,7 @@
 //
 
 #import "AppDelegate.h"
-
 #import "TLUIHeader.h"
-
 #import "TLTabBarController.h"
 #import "TLUser.h"
 #import "TLNetworking.h"
@@ -31,6 +29,16 @@
 #import <ZendeskSDK/ZendeskSDK.h>
 //#import "ZDKConfig.h"
 #import "LangSwitcher.h"
+#import <ZDCChat/ZDCChat.h>
+
+//// 引入JPush功能所需头文件
+//#import "JPUSHService.h"
+//// iOS10注册APNs所需头文件
+//#ifdef NSFoundationVersionNumber_iOS_9_x_Max
+//#import <UserNotifications/UserNotifications.h>
+//#endif
+//// 如果需要使用idfa功能所需要引入的头文件（可选）
+//#import <AdSupport/AdSupport.h>
 
 @interface AppDelegate ()
 
@@ -46,9 +54,6 @@
     //服务器环境
     [AppConfig config].runEnv = RunEnvDev;
     
-    //环境
-    [LangSwitcher changLangType:LangTypeTraditional];
-    
     //配置微信
     [self configWeChat];
     
@@ -62,7 +67,13 @@
     [[ChatManager sharedManager] initChat];
     
     //
+    [[IMAPlatform sharedInstance] configOnAppLaunchWithOptions:launchOptions];
+    
+    //
     [self configZendesk];
+    
+    //初始化为繁体
+    [LangSwitcher startWithTraditional];
 
     //
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginOut) name:kUserLoginOutNotification object:nil];
@@ -76,17 +87,62 @@
         
         [[TLUser user] updateUserInfo];
         // 登录时间变更到，didBecomeActive中
-        [[NSNotificationCenter defaultCenter] postNotificationName:kUserLoginNotification object:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kUserLoginNotification
+                                                            object:nil];
         
     };
+    
+    //
+//    JPUSHRegisterEntity * entity = [[JPUSHRegisterEntity alloc] init];
+//    entity.types = JPAuthorizationOptionAlert|JPAuthorizationOptionBadge|JPAuthorizationOptionSound;
+//    if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
+//        // 可以添加自定义categories
+//        // NSSet<UNNotificationCategory *> *categories for iOS10 or later
+//        // NSSet<UIUserNotificationCategory *> *categories for iOS8 and iOS9
+//    }
+//    [JPUSHService registerForRemoteNotificationConfig:entity delegate:self];
+//    //
+//    [JPUSHService setupWithOption:launchOptions
+//                           appKey:@"d3824383346cd157a8976eb6"
+//                          channel:@"ios"
+//                 apsForProduction:NO
+//            advertisingIdentifier:nil];
     return YES;
+    
+}
+
+// iOS 10 Support
+//- (void)jpushNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(NSInteger))completionHandler {
+//    // Required
+//    NSDictionary * userInfo = notification.request.content.userInfo;
+//    if([notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
+//        [JPUSHService handleRemoteNotification:userInfo];
+//    }
+//    completionHandler(UNNotificationPresentationOptionAlert); // 需要执行这个方法，选择是否提醒用户，有Badge、Sound、Alert三种类型可以选择设置
+//}
+
+// iOS 10 Support
+//- (void)jpushNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)())completionHandler {
+//    // Required
+//    NSDictionary * userInfo = response.notification.request.content.userInfo;
+//    if([response.notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
+//        [JPUSHService handleRemoteNotification:userInfo];
+//    }
+//    completionHandler();  // 系统要求执行这个方法
+//}
+
+#pragma mark- 上传推送 token
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    
+//    [JPUSHService registerDeviceToken:deviceToken];
+    [[IMAPlatform sharedInstance] configOnAppRegistAPNSWithDeviceToken:deviceToken];
     
 }
 
 // 用户重新登录需要重新，需要重新调用此方法监听
 - (void)kvoUnReadMsgToChangeTabbar {
     
-    //这里监听主要是为了，tabbar上的消息提示
+    //这里监听主要是为了，tabbar上的消息提示, 和icon上的图标
     // 此处有坑， [IMAPlatform sharedInstance].conversationMgr 切换账户是会销毁
     self.chatKVOCtrl = [FBKVOController controllerWithObserver:self];
     [self.chatKVOCtrl observe:[IMAPlatform sharedInstance].conversationMgr
@@ -100,9 +156,11 @@
                               if (count > 0) {
                                   
                                   [[self rootTabBarController].tabBar showBadgeOnItemIndex:location];
-
+                                  [UIApplication sharedApplication].applicationIconBadgeNumber = count;
+                                  
                               } else {
                                   
+                                  [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
                                   [[self rootTabBarController].tabBar hideBadgeOnItemIndex:location];
 
                               }
@@ -111,11 +169,7 @@
     
 }
 
-// - - //
-- (void)imLogin {
-    
-    
-}
+
 
 #pragma mark- 退出登录
 - (void)loginOut {
@@ -140,26 +194,25 @@
 
 - (void)configZendesk {
     
-    [[ZDKConfig instance] initializeWithAppId:@"77b4d76dd3cfa4334b719ee32a6b92e16a1d9929263d9b8b"
-     
-                                   zendeskUrl: @"https://tianleitest.zendesk.com"
-                                     clientId: @"mobile_sdk_client_8999a059a94c912a1483"];
+    // supprot
+    [[ZDKConfig instance] initializeWithAppId:@"f9ab448e1dfdb93e3b4ff1f2c2d4fb3a72140cbfd6ee10e0"
+                 zendeskUrl:@"https://beicoin.zendesk.com"
+                   clientId:@"mobile_sdk_client_b388fa777945f99314b7"];
     
+    // 客服
+    [ZDCChat initializeWithAccountKey:@"MvxwoT6827HylJtr6360QQQ5yve4Z2Ny"];
 
 }
 
 #pragma mark - 用户登录
 - (void)userLogin {
     
-    //客服
-    [ZDCChat initializeWithAccountKey:@"zxRQZo9tGhawzBtqes4ttBHSbVGryyj6"];
     
     //zendesk
     ZDKAnonymousIdentity *identity = [ZDKAnonymousIdentity new];
-    identity.name = @"tianlei";
-    identity.email = @"johnbob@example.com";
+    identity.name = [TLUser user].nickname;
+    identity.email = [NSString stringWithFormat:@"%@",[TLUser user].email];
     [ZDKConfig instance].userIdentity = identity;
-    
     
     // 重新登录的时候要重新，配置一下
     [self kvoUnReadMsgToChangeTabbar];
@@ -272,11 +325,9 @@
         http.code = @"805196";
         http.parameters[@"bizNo"] = [TLUser user].tempBizNo;
         http.parameters[@"userId"] = [TLUser user].userId;
-
         [http postWithSuccess:^(id responseObject) {
             
             NSString *str = [NSString stringWithFormat:@"%@", responseObject[@"data"][@"isSuccess"]];
-            
             [[NSNotificationCenter defaultCenter] postNotificationName:@"RealNameAuthResult" object:str];
             
         } failure:^(NSError *error) {
@@ -304,10 +355,47 @@
     if([TLUser user].isLogin) {
 
       [[TLUser user] changLoginTime];
-        
+      [[IMAPlatform sharedInstance] configOnAppDidBecomeActive];
+
     };
     
+
+    
 }
+
+#pragma mark- 应用切后台
+- (void)applicationDidEnterBackground:(UIApplication *)application  {
+    
+    __block UIBackgroundTaskIdentifier bgTaskID;
+    bgTaskID = [application beginBackgroundTaskWithExpirationHandler:^ {
+        
+        //不管有没有完成，结束background_task任务
+        [application endBackgroundTask: bgTaskID];
+        bgTaskID = UIBackgroundTaskInvalid;
+    }];
+    
+//    [[IMAPlatform sharedInstance] configOnAppEnterBackground];
+    
+    if([[TLUser user] checkLogin]) {
+        
+        [[IMAPlatform sharedInstance] configOnAppEnterBackground];
+        
+    }
+}
+
+#pragma mark- 应用切前台
+- (void)applicationWillEnterForeground:(UIApplication *)application
+{
+    
+    if([[TLUser user] checkLogin]) {
+
+        [[IMAPlatform sharedInstance] configOnAppEnterForeground];
+        
+    }
+    
+}
+
+
 
 // iOS9 NS_DEPRECATED_IOS
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {

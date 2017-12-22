@@ -11,7 +11,7 @@
 #import "LangSwitcher.h"
 @class TLUserExt;
 
-@interface TLUser : TLBaseModel
+@interface TLUser : NSObject
 
 + (instancetype)user;
 //用户ID
@@ -82,11 +82,18 @@
 //是否为需要登录，如果已登录，取出用户信息
 - (BOOL)isLogin;
 
+
+
+/**
+ yes 已经登录， no未登录
+ */
+- (BOOL)checkLogin;
+
 //用户已登录状态，则重新登录
 - (void)reLogin;
 
 //保存登录账号和密码
-- (void)saveUserName:(NSString *)userName pwd:(NSString *)pwd;
+//- (void)saveUserName:(NSString *)userName pwd:(NSString *)pwd;
 
 - (void)loginOut;
 

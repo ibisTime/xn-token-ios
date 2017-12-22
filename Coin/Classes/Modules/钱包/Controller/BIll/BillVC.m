@@ -133,7 +133,6 @@
     UILabel *textLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor2 font:14.0];
     
     textLbl.text = [LangSwitcher switchLang:@"暂无明细" key:nil];
-    
     textLbl.textAlignment = NSTextAlignmentCenter;
     
     [self.placeHolderView addSubview:textLbl];
@@ -147,13 +146,14 @@
 
 - (void)initTableView {
     
-    self.tableView = [[BillTableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight) style:UITableViewStylePlain];
+    self.tableView = [[BillTableView alloc]
+                      initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight)
+                              style:UITableViewStylePlain];
     
     self.tableView.placeHolderView = self.placeHolderView;
-    
     self.tableView.refreshDelegate = self;
-    
     [self.view addSubview:self.tableView];
+    
 }
 
 - (void)addFilterItem {

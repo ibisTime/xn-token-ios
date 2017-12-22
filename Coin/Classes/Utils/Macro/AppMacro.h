@@ -22,11 +22,11 @@ if(x == nil || [x isKindOfClass:[NSNull class] ]) \
 {x = @[];}
 
 // 统一处理打印日志
-#ifdef DEBUG
-#define NSLog(...) printf("%s\n\n", [[NSString stringWithFormat:__VA_ARGS__] UTF8String]);
-#else
-#define NSLog(...)
-#endif
+//#ifdef DEBUG
+//#define NSLog(...) printf("%s\n\n", [[NSString stringWithFormat:__VA_ARGS__] UTF8String]);
+//#else
+//#define NSLog(...)
+//#endif
 
 #define ArtDEPRECATED(instead) NS_DEPRECATED(2_0, 2_0, 2_0, 2_0, instead)
 
