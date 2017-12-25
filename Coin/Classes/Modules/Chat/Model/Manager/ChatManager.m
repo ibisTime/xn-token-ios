@@ -36,15 +36,7 @@
     //log: [INFO][TIMManager.mm:137][-[TIMManager initSdk:]][ImSDK]Has InitSDK, skip
     // 可多次初始化，
 //    NSLog(@"%ld",[TIMManager sharedInstance].);
-   __block int count = 0;
-     NSArray <TIMConversation *> *conversationList = [TIMManager sharedInstance].getConversationList;
-    [conversationList enumerateObjectsUsingBlock:^(TIMConversation * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        
-        count += obj.getUnReadMessageNum;
-        
-    }];
-    
-    NSLog(@"%ld",count);
+
 
     
     IMAPlatformConfig *config = [[IMAPlatformConfig alloc] init];
@@ -97,7 +89,7 @@
         
         IMALoginParam *loginParam = [[IMALoginParam alloc] init];
         
-        //转成小写，登录
+        //
         loginParam.identifier = [TLUser user].userId;
         loginParam.userSig = self.imModel.sign;
         loginParam.appidAt3rd = self.imModel.txAppCode;
@@ -120,11 +112,15 @@
 
 
 - (void)loginWithParam:(IMALoginParam *)loginParam {
+    
+    //没有网络的时候应该首先尝试调用此方法，
+    //    [[TIMManager sharedInstance] initStorage:<#(TIMLoginParam *)#> succ:<#^(void)succ#> fail:<#^(int code, NSString *msg)fail#>];
+
 
     //重新登录需要 init 一下，切换账户时
     [[IMAPlatform sharedInstance] login:loginParam succ:^{
         
-//        [TIMManager sharedInstance].;
+//      [TIMManager sharedInstance].;
         //登录成功
         //保存登录信息
         [loginParam saveToLocal];
@@ -132,6 +128,18 @@
         //腾讯云需要在登录成功之后，才能上报token
         // app delegate 中 didRegisterForRemoteNotification 会回调
         [[UIApplication sharedApplication] registerForRemoteNotifications];
+        
+        
+        __block int count = 0;
+        NSArray <TIMConversation *> *conversationList = [TIMManager sharedInstance].getConversationList;
+        [conversationList enumerateObjectsUsingBlock:^(TIMConversation * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            
+            count += obj.getUnReadMessageNum;
+            
+        }];
+        
+        NSLog(@"%ld",count);
+//        [IMAConversationManager ].getun
     
     } fail:^(int code, NSString *msg) {
         
@@ -213,6 +221,17 @@
          NSLog(@"APNs配置失败,原因: %d %@",code , err);
          
      }];
+    
+}
+
+- (void)testCount {
+    
+    __block int testCount = 0;
+    NSArray *conversationList = [[TIMManager sharedInstance] getConversationList];
+    [conversationList enumerateObjectsUsingBlock:^(TIMConversation *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        testCount += obj.getUnReadMessageNum;
+    }];
+    NSLog(@"%d",testCount);
     
 }
 

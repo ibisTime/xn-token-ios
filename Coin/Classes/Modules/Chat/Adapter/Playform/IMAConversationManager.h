@@ -93,6 +93,7 @@ typedef void (^IMAConversationChangedCompletion)(IMAConversationChangedNotifyIte
 
 // 更新与user的会话
 - (void)updateConversationWith:(IMAUser *)user;
+- (void)asyncUpdateConversationList;
 
 @end
 

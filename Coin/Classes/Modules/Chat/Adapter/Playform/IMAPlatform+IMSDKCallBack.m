@@ -108,7 +108,7 @@ static BOOL kIsAlertingForceOffline = NO;
                 [ws registNotification];
             } fail:^(int code, NSString *msg) {
                 //进入登录界面
-                [[IMAAppDelegate sharedAppDelegate] enterLoginUI];
+//                [[IMAAppDelegate sharedAppDelegate] enterLoginUI];
             }];
             
             kIsAlertingForceOffline = NO;
@@ -203,14 +203,16 @@ static BOOL kIsAlertingForceOffline = NO;
 {   // onRefresh 回调、腾讯sdk 的一级回调
     // 这里需要刷新会话
     // TODO:重新刷新会话列列
+    [[TIMManager sharedInstance] addMessageListener:self.conversationMgr];
+
     DebugLog(@"=========>>>>> 刷新会话列表");
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self.contactMgr asyncConfigContact];//从以前的OnProxyStatusChange里面移动过来的
-        [self.conversationMgr asyncConversationList];
-        [[TIMManager sharedInstance] addMessageListener:self.conversationMgr];
+//        [self.contactMgr asyncConfigContact];//从以前的OnProxyStatusChange里面移动过来的
+//        [self.conversationMgr asyncConversationList];
+        [self.conversationMgr asyncUpdateConversationList];
     });
     
-    [self.contactMgr asyncConfigGroup];
+//    [self.contactMgr asyncConfigGroup];
 }
 
 - (void)onRefreshConversations:(NSArray*)conversations
@@ -250,9 +252,10 @@ static BOOL kIsAlertingForceOffline = NO;
     [[TIMManager sharedInstance] log:TIM_LOG_DEBUG tag:@"111" msg:info];
     dispatch_async(dispatch_get_main_queue(), ^{
         
-        if (!self.contactMgr.hasNewDependency)
-        {
+        if (!self.contactMgr.hasNewDependency) {
+            
             self.contactMgr.hasNewDependency = YES;
+            
         }
         
         DebugLog(@"%@", users);
@@ -438,7 +441,6 @@ static BOOL kIsAlertingForceOffline = NO;
         {
             IMAGroup *gr = [[IMAGroup alloc] initWithInfo:groupInfo];
             [self.contactMgr onAddGroup:gr];
-            
             
             //注:刚加入群时需要刷新一下会话列表，不然会话列表上显示的是群id，而不是群名称
             IMAConversation *gc = [self.conversationMgr queryConversationWith:gr];

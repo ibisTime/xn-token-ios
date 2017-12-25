@@ -40,5 +40,6 @@
  */
 - (void)loginIM;
 
+- (void)testCount;
 
 @end

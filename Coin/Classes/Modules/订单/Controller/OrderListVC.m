@@ -106,6 +106,16 @@
     __weak typeof(self) weakSelf = self;
     [self.orderTableView addRefreshAction:^{
         
+        __block int count = 0;
+        NSArray <TIMConversation *> *conversationList = [TIMManager sharedInstance].getConversationList;
+        [conversationList enumerateObjectsUsingBlock:^(TIMConversation * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            
+            count += obj.getUnReadMessageNum;
+            
+        }];
+        
+        NSLog(@"%ld",count);
+        
         [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
             
             [weakSelf removePlaceholderView];
@@ -268,7 +278,7 @@
         NSString *userId = order.isBuy ? order.sellUserInfo.userId: order.buyUserInfo.userId;
         
         //获取会话列表
-        TIMConversation *timConversation = [[TIMManager sharedInstance] getConversation:TIM_C2C receiver:userId];
+        TIMConversation *timConversation = [[TIMManager sharedInstance] getConversation:TIM_GROUP receiver:order.code];
         
         IMAConversation *imaConversation = [[IMAConversation alloc] initWith:timConversation];
         

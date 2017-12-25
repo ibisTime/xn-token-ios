@@ -7,7 +7,7 @@
 //
 
 #import "IMAConversationManager.h"
-
+#import "ChatManager.h"
 @implementation IMAConversationChangedNotifyItem
 
 - (instancetype)initWith:(IMAConversationChangedNotifyType)type
@@ -51,16 +51,13 @@
 
 - (void)asyncUpdateConversationListComplete
 {
-    if (_refreshStyle == EIMARefresh_Wait)
-    {
+    if (_refreshStyle == EIMARefresh_Wait) {
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             // 说明有更新过来，再更新一次
             [self asyncConversationList];
             _refreshStyle = EIMARefresh_None;
         });
-    }
-    else
-    {
+    } else {
         _refreshStyle = EIMARefresh_None;
         [self updateOnLocalMsgComplete];
     }
@@ -70,14 +67,17 @@
 {
     NSInteger unRead = 0;
     //2.0之前的版本不支持 getConversationList 接口
+    __block int testCount = 0;
     NSArray *conversationList = [[TIMManager sharedInstance] getConversationList];
+    [conversationList enumerateObjectsUsingBlock:^(TIMConversation *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        testCount += obj.getUnReadMessageNum;
+    }];
+    NSLog(@"%d",testCount);
     
-    
-    for (TIMConversation *conversation in conversationList)
-    {
+    for (TIMConversation *conversation in conversationList) {
+        
         IMAConversation *conv = nil;
-        if ([conversation getType] == TIM_SYSTEM)
-        {
+        if ([conversation getType] == TIM_SYSTEM) {
 #if kSupportCustomConversation
             // 可能返回空
             conv = [[IMACustomConversation alloc] initWith:conversation];
@@ -85,6 +85,7 @@
             continue;
 #endif
         } else {
+            
             conv = [[IMAConversation alloc] initWith:conversation];
         }
         
@@ -97,20 +98,19 @@
             [conv copyConversationInfo:_chattingConversation];
             // 防止因中途在聊天时，出现onrefresh回调
             _chattingConversation = conv;
-        }
-        else
-        {
-            if (conv)
-            {
+        } else {
+            
+            if (conv) {
                 unRead += [conversation getUnReadMessageNum];
             }
+            
         }
+        
     }
     
     [self asyncUpdateConversationListComplete];
-    
-    if (unRead != _unReadMessageCount)
-    {
+    NSLog(@"%ld",unRead);
+    if (unRead != _unReadMessageCount) {
         self.unReadMessageCount = unRead;
     }
     DebugLog(@"==========>>>>>>>>>asyncUpdateConversationList Complete");
@@ -698,6 +698,8 @@
 
 - (void)updateOnDelete:(IMAConversation *)conv atIndex:(NSUInteger)index
 {
+    [[ChatManager sharedManager] testCount];
+
     // 更新界面
     IMAConversationChangedNotifyItem *item = [[IMAConversationChangedNotifyItem alloc] initWith:EIMAConversation_DeleteConversation];
     item.conversation = conv;
@@ -708,6 +710,9 @@
     }
     
     [[NSNotificationQueue defaultQueue] enqueueNotification:[item changedNotification] postingStyle:NSPostWhenIdle];
+    
+#pragma mark- 测试代码
+    [[ChatManager sharedManager] testCount];
 }
 
 - (void)updateOnAsyncLoadContactComplete

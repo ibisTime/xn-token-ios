@@ -96,7 +96,7 @@
     }];
     
     //消息栏消息数
-    NSInteger unReadCount = [[IMAPlatform sharedInstance].conversationMgr unReadMessageCount];
+//    NSInteger unReadCount = [[IMAPlatform sharedInstance].conversationMgr unReadMessageCount];
 
 //    [TLUser user].unReadMsgCount = unReadCount;
     
