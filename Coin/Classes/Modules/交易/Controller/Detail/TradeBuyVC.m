@@ -7,10 +7,8 @@
 //
 
 #import "TradeBuyVC.h"
-
 #import "TradeBuyView.h"
 #import "BuyConfirmView.h"
-
 #import "CurrencyModel.h"
 #import "OrderPriceModel.h"
 #import "QuotationModel.h"
@@ -116,8 +114,8 @@
 
 - (void)addOffItem {
     
-    if ([self.advertise.status isEqualToString:@"1"] ||
-        [self.advertise.status isEqualToString:@"2"]) {
+    if ([self.advertise.status isEqualToString:kTradeOrderStatusPayed] ||
+        [self.advertise.status isEqualToString:kTradeOrderStatusReleased]) {
         
         [UIBarButtonItem addRightItemWithTitle:@"下架" titleColor:kTextColor frame:CGRectMake(0, 0, 40, 44) vc:self action:@selector(advertiseOff)];
         
@@ -263,10 +261,12 @@
     http.code = @"625240";
     http.showView = self.view;
     http.parameters[@"adsCode"] = self.advertise.code;
-    http.parameters[@"buyUser"] = [TLUser user].userId;
+//    http.parameters[@"buyUser"] = [TLUser user].userId;
     http.parameters[@"count"] = num;
     http.parameters[@"tradeAmount"] = self.tradeView.tradeAmount;
     http.parameters[@"tradePrice"] = price;
+    http.parameters[@"token"] = [TLUser user].token;
+
     
     [http postWithSuccess:^(id responseObject) {
         
@@ -366,7 +366,9 @@
     
     http.code = @"625247";
     http.parameters[@"adsCode"] = self.advertise.code;
-    http.parameters[@"buyUser"] = [TLUser user].userId;
+//    http.parameters[@"buyUser"] = [TLUser user].userId;
+    http.parameters[@"token"] = [TLUser user].token;
+
     
     [http postWithSuccess:^(id responseObject) {
         

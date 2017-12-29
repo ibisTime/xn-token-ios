@@ -7,12 +7,13 @@
 //
 
 #import "CurrencyModel.h"
-
+#import "CoinUtil.h"
 #import "LangSwitcher.h"
 
 NSString *const kCNY = @"CNY";
-NSString *const kETH = @"ETH";
-NSString *const kBTC = @"BTC";
+
+
+
 
 @implementation CurrencyModel
 

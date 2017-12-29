@@ -39,11 +39,11 @@
     
 }
 
-+ (NSString *)ipUrl {
-
-    return [[AppConfig config] ipUrl];
-    
-}
+//+ (NSString *)ipUrl {
+//
+//    return [[AppConfig config] ipUrl];
+//    
+//}
 
 
 

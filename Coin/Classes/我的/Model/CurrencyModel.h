@@ -43,7 +43,6 @@
 
 @end
 
-FOUNDATION_EXTERN NSString *const kETH;
+
 FOUNDATION_EXTERN NSString *const kCNY;
-FOUNDATION_EXTERN NSString *const kBTC;
 

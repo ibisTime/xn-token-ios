@@ -47,8 +47,8 @@ void TLLog(NSString *format, ...) {
         case RunEnvRelease: {
             
             self.qiniuDomain = @"http://ozfszueqz.bkt.clouddn.com";
-            self.addr = @"http://47.52.77.214:4001";
-
+            self.addr = @"https://www.bcoin.im/api";
+            
         }break;
             
         case RunEnvDev: {
@@ -71,14 +71,20 @@ void TLLog(NSString *format, ...) {
 
 - (NSString *)apiUrl {
     
+    if ([self.addr hasSuffix:@"api"]) {
+        
+        return self.addr;
+        
+    }
+    
     return [self.addr stringByAppendingString:@"/forward-service/api"];
 }
 
-- (NSString *)ipUrl {
-    
-    return [self.addr stringByAppendingString:@"/forward-service/ip"];
-
-}
+//- (NSString *)ipUrl {
+//
+//    return [self.addr stringByAppendingString:@"/forward-service/ip"];
+//
+//}
 
 - (NSString *)getUrl {
 

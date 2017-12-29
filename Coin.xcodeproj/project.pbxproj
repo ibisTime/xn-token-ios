@@ -451,6 +451,7 @@
 		2E973FD61FDBC5CC005C2D5F /* BaseButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E973FD51FDBC5CC005C2D5F /* BaseButton.m */; };
 		2E973FDF1FDC0219005C2D5F /* AdsTradeDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E973FDE1FDC0219005C2D5F /* AdsTradeDetailVC.m */; };
 		2E973FEA1FDE31F7005C2D5F /* OrderListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E973FE91FDE31F7005C2D5F /* OrderListVC.m */; };
+		2EA2526E1FF09B52007FF9A2 /* CoinUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EA2526D1FF09B52007FF9A2 /* CoinUtil.m */; };
 		2EA584C11FA813C900C7106C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2EA584C01FA813C900C7106C /* Assets.xcassets */; };
 		2EA584C41FA813C900C7106C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2EA584C21FA813C900C7106C /* LaunchScreen.storyboard */; };
 		2EA584C71FA813C900C7106C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EA584C61FA813C900C7106C /* main.m */; };
@@ -465,10 +466,6 @@
 		2EB039AD1FE8EDE300589D8E /* UserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EB039AC1FE8EDE300589D8E /* UserInfo.m */; };
 		2EB039B21FE940D300589D8E /* manifest.xml in Resources */ = {isa = PBXBuildFile; fileRef = 2EB039B11FE940D300589D8E /* manifest.xml */; };
 		2EB039B51FEA0B4500589D8E /* TLUpdateVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EB039B31FEA0B4500589D8E /* TLUpdateVC.m */; };
-		2EB039BD1FEA9C1100589D8E /* ZDCChat.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2EB039BB1FEA9C1000589D8E /* ZDCChat.bundle */; };
-		2EB039BE1FEA9C1100589D8E /* ZDCChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EB039BC1FEA9C1000589D8E /* ZDCChat.framework */; };
-		2EB039C11FEA9C1F00589D8E /* ZDCChatStrings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2EB039BF1FEA9C1F00589D8E /* ZDCChatStrings.bundle */; };
-		2EB039C21FEA9C1F00589D8E /* ZDCChatAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EB039C01FEA9C1F00589D8E /* ZDCChatAPI.framework */; };
 		2EB949541FDE6D6D00CE4B94 /* LangChooseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EB949531FDE6D6D00CE4B94 /* LangChooseVC.m */; };
 		2EB9495A1FDF6B1A00CE4B94 /* ZMChineseConvert.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EB949561FDF6B1A00CE4B94 /* ZMChineseConvert.m */; };
 		2EB9495B1FDF6B1A00CE4B94 /* SimplifiedCode.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2EB949571FDF6B1A00CE4B94 /* SimplifiedCode.txt */; };
@@ -481,6 +478,11 @@
 		2EE950D21FB066EB00429257 /* CoinChangeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE950D11FB066EB00429257 /* CoinChangeView.m */; };
 		2EE950D91FB06AA900429257 /* TLBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE950D51FB06AA900429257 /* TLBannerView.m */; };
 		2EE950DA1FB06AA900429257 /* TLBannerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE950D61FB06AA900429257 /* TLBannerCell.m */; };
+		2EFFE6A21FF3A22700BFCC40 /* ZDCChatAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EFFE69E1FF3A22700BFCC40 /* ZDCChatAPI.framework */; };
+		2EFFE6A31FF3A22700BFCC40 /* ZDCChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EFFE69F1FF3A22700BFCC40 /* ZDCChat.framework */; };
+		2EFFE6A41FF3A22700BFCC40 /* ZDCChatStrings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2EFFE6A01FF3A22700BFCC40 /* ZDCChatStrings.bundle */; };
+		2EFFE6A51FF3A22700BFCC40 /* ZDCChat.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2EFFE6A11FF3A22700BFCC40 /* ZDCChat.bundle */; };
+		2EFFE6AA1FF4829100BFCC40 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2EFFE6AC1FF4829100BFCC40 /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -1418,6 +1420,8 @@
 		2E973FDE1FDC0219005C2D5F /* AdsTradeDetailVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AdsTradeDetailVC.m; sourceTree = "<group>"; };
 		2E973FE81FDE31F7005C2D5F /* OrderListVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OrderListVC.h; sourceTree = "<group>"; };
 		2E973FE91FDE31F7005C2D5F /* OrderListVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OrderListVC.m; sourceTree = "<group>"; };
+		2EA2526C1FF09B52007FF9A2 /* CoinUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoinUtil.h; sourceTree = "<group>"; };
+		2EA2526D1FF09B52007FF9A2 /* CoinUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoinUtil.m; sourceTree = "<group>"; };
 		2EA584B41FA813C900C7106C /* Coin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Coin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EA584C01FA813C900C7106C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2EA584C31FA813C900C7106C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -1444,10 +1448,6 @@
 		2EB039B11FE940D300589D8E /* manifest.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = manifest.xml; sourceTree = "<group>"; };
 		2EB039B31FEA0B4500589D8E /* TLUpdateVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLUpdateVC.m; sourceTree = "<group>"; };
 		2EB039B41FEA0B4500589D8E /* TLUpdateVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLUpdateVC.h; sourceTree = "<group>"; };
-		2EB039BB1FEA9C1000589D8E /* ZDCChat.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ZDCChat.bundle; sourceTree = "<group>"; };
-		2EB039BC1FEA9C1000589D8E /* ZDCChat.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ZDCChat.framework; sourceTree = "<group>"; };
-		2EB039BF1FEA9C1F00589D8E /* ZDCChatStrings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ZDCChatStrings.bundle; sourceTree = "<group>"; };
-		2EB039C01FEA9C1F00589D8E /* ZDCChatAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ZDCChatAPI.framework; sourceTree = "<group>"; };
 		2EB949521FDE6D6D00CE4B94 /* LangChooseVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LangChooseVC.h; sourceTree = "<group>"; };
 		2EB949531FDE6D6D00CE4B94 /* LangChooseVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LangChooseVC.m; sourceTree = "<group>"; };
 		2EB949561FDF6B1A00CE4B94 /* ZMChineseConvert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZMChineseConvert.m; sourceTree = "<group>"; };
@@ -1471,6 +1471,16 @@
 		2EE950D61FB06AA900429257 /* TLBannerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLBannerCell.m; sourceTree = "<group>"; };
 		2EE950D71FB06AA900429257 /* TLBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLBannerView.h; sourceTree = "<group>"; };
 		2EE950D81FB06AA900429257 /* TLBannerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLBannerCell.h; sourceTree = "<group>"; };
+		2EFFE69E1FF3A22700BFCC40 /* ZDCChatAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ZDCChatAPI.framework; sourceTree = "<group>"; };
+		2EFFE69F1FF3A22700BFCC40 /* ZDCChat.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ZDCChat.framework; sourceTree = "<group>"; };
+		2EFFE6A01FF3A22700BFCC40 /* ZDCChatStrings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ZDCChatStrings.bundle; sourceTree = "<group>"; };
+		2EFFE6A11FF3A22700BFCC40 /* ZDCChat.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ZDCChat.bundle; sourceTree = "<group>"; };
+		2EFFE6AB1FF4829100BFCC40 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		2EFFE6AD1FF483E000BFCC40 /* Base */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		2EFFE6AE1FF4866700BFCC40 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		2EFFE6AF1FF4866700BFCC40 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		2EFFE6B01FF4868300BFCC40 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		2EFFE6B11FF4868400BFCC40 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		8863748C5281F9DC1DDF8EEA /* Pods-Coin.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Coin.release.xcconfig"; path = "Pods/Target Support Files/Pods-Coin/Pods-Coin.release.xcconfig"; sourceTree = "<group>"; };
 		AB34D27FC9725550E9092EC2 /* Pods-Coin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Coin.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Coin/Pods-Coin.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1483,7 +1493,6 @@
 				21C91D981FDBD7E4006EDB16 /* CoreMotion.framework in Frameworks */,
 				21205D061FCD6394003C6C7C /* libWeChatSDK.a in Frameworks */,
 				211C05081FC6714500E51FCF /* libz.tbd in Frameworks */,
-				2EB039BE1FEA9C1100589D8E /* ZDCChat.framework in Frameworks */,
 				211C050A1FC6715000E51FCF /* libc++.tbd in Frameworks */,
 				211C050E1FC6716500E51FCF /* libresolv.tbd in Frameworks */,
 				211C050C1FC6715B00E51FCF /* libsqlite3.tbd in Frameworks */,
@@ -1491,9 +1500,10 @@
 				211C05111FC6717300E51FCF /* libstdc++.6.0.9.tbd in Frameworks */,
 				211C01441FC6600300E51FCF /* QALSDK.framework in Frameworks */,
 				211C01431FC6600300E51FCF /* TLSSDK.framework in Frameworks */,
+				2EFFE6A31FF3A22700BFCC40 /* ZDCChat.framework in Frameworks */,
 				06A1FB6431230E34B134069E /* libPods-Coin.a in Frameworks */,
+				2EFFE6A21FF3A22700BFCC40 /* ZDCChatAPI.framework in Frameworks */,
 				211C01421FC6600300E51FCF /* ImSDK.framework in Frameworks */,
-				2EB039C21FEA9C1F00589D8E /* ZDCChatAPI.framework in Frameworks */,
 				21C91D8D1FDBD64D006EDB16 /* AlipaySDK.framework in Frameworks */,
 				211C01471FC6600300E51FCF /* IMMessageExt.framework in Frameworks */,
 				211C01461FC6600300E51FCF /* IMGroupExt.framework in Frameworks */,
@@ -1768,8 +1778,7 @@
 		211C013A1FC6600300E51FCF /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				2EB039BA1FEA9BC600589D8E /* ZDSupport */,
-				2EB039B91FEA9BB400589D8E /* ZDChat */,
+				2EFFE69D1FF3A22700BFCC40 /* ZDCChat */,
 				21C91D891FDBD64D006EDB16 /* Alipay */,
 				21205CFF1FCD6383003C6C7C /* WeChat */,
 				211C013B1FC6600300E51FCF /* 腾讯云 */,
@@ -3043,6 +3052,8 @@
 				211DE68D1FB58B4C002FCF3D /* AppConfig */,
 				211DE6901FB58B4C002FCF3D /* Macro */,
 				211DE6951FB58B4C002FCF3D /* AFNetworkingTool */,
+				2EA2526C1FF09B52007FF9A2 /* CoinUtil.h */,
+				2EA2526D1FF09B52007FF9A2 /* CoinUtil.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -4001,6 +4012,7 @@
 				2EA584C21FA813C900C7106C /* LaunchScreen.storyboard */,
 				2EA584C51FA813C900C7106C /* Info.plist */,
 				2EA584C61FA813C900C7106C /* main.m */,
+				2EFFE6AC1FF4829100BFCC40 /* Localizable.strings */,
 			);
 			path = Coin;
 			sourceTree = "<group>";
@@ -4012,24 +4024,6 @@
 				211CF98B1FC3F31900E51FCF /* TradeCell.m */,
 			);
 			path = Cell;
-			sourceTree = "<group>";
-		};
-		2EB039B91FEA9BB400589D8E /* ZDChat */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ZDChat;
-			sourceTree = "<group>";
-		};
-		2EB039BA1FEA9BC600589D8E /* ZDSupport */ = {
-			isa = PBXGroup;
-			children = (
-				2EB039C01FEA9C1F00589D8E /* ZDCChatAPI.framework */,
-				2EB039BF1FEA9C1F00589D8E /* ZDCChatStrings.bundle */,
-				2EB039BB1FEA9C1000589D8E /* ZDCChat.bundle */,
-				2EB039BC1FEA9C1000589D8E /* ZDCChat.framework */,
-			);
-			path = ZDSupport;
 			sourceTree = "<group>";
 		};
 		2EB949551FDF6B1A00CE4B94 /* ChineseConvert */ = {
@@ -4061,6 +4055,17 @@
 				2EE950D61FB06AA900429257 /* TLBannerCell.m */,
 			);
 			path = BannerBrowser;
+			sourceTree = "<group>";
+		};
+		2EFFE69D1FF3A22700BFCC40 /* ZDCChat */ = {
+			isa = PBXGroup;
+			children = (
+				2EFFE69E1FF3A22700BFCC40 /* ZDCChatAPI.framework */,
+				2EFFE69F1FF3A22700BFCC40 /* ZDCChat.framework */,
+				2EFFE6A01FF3A22700BFCC40 /* ZDCChatStrings.bundle */,
+				2EFFE6A11FF3A22700BFCC40 /* ZDCChat.bundle */,
+			);
+			path = ZDCChat;
 			sourceTree = "<group>";
 		};
 		C678617F8B7C3B3F2F7DE44F /* Frameworks */ = {
@@ -4152,6 +4157,8 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
+				"zh-Hant",
 			);
 			mainGroup = 2EA584AB1FA813C900C7106C;
 			productRefGroup = 2EA584B51FA813C900C7106C /* Products */;
@@ -4183,6 +4190,7 @@
 				211C04FC1FC6604900E51FCF /* DailyBuild-Info.plist in Resources */,
 				211C04B71FC6604900E51FCF /* 3.gif in Resources */,
 				211C04A31FC6604900E51FCF /* 21.gif in Resources */,
+				2EFFE6AA1FF4829100BFCC40 /* Localizable.strings in Resources */,
 				2EB039B21FE940D300589D8E /* manifest.xml in Resources */,
 				211C04A51FC6604900E51FCF /* 20.gif in Resources */,
 				21205D071FCD6394003C6C7C /* README.txt in Resources */,
@@ -4191,6 +4199,7 @@
 				211C04AE1FC6604900E51FCF /* 30.gif in Resources */,
 				211C04BE1FC6604900E51FCF /* 28.gif in Resources */,
 				211C04811FC6604800E51FCF /* Assets.xcassets in Resources */,
+				2EFFE6A51FF3A22700BFCC40 /* ZDCChat.bundle in Resources */,
 				211C04BF1FC6604900E51FCF /* 29.gif in Resources */,
 				211C04B51FC6604900E51FCF /* 6.gif in Resources */,
 				211C048B1FC6604800E51FCF /* Assets.xcassets in Resources */,
@@ -4199,10 +4208,8 @@
 				211C04BD1FC6604900E51FCF /* 0@2x.png in Resources */,
 				211C04C41FC6604900E51FCF /* 13.gif in Resources */,
 				2EA584C11FA813C900C7106C /* Assets.xcassets in Resources */,
-				2EB039BD1FEA9C1100589D8E /* ZDCChat.bundle in Resources */,
 				211C04A61FC6604900E51FCF /* 22.gif in Resources */,
 				211C04C51FC6604900E51FCF /* 11.gif in Resources */,
-				2EB039C11FEA9C1F00589D8E /* ZDCChatStrings.bundle in Resources */,
 				211C04AB1FC6604900E51FCF /* 32.gif in Resources */,
 				211C04F81FC6604900E51FCF /* 10.caf in Resources */,
 				211C04C21FC6604900E51FCF /* 16.gif in Resources */,
@@ -4215,6 +4222,7 @@
 				211C04B91FC6604900E51FCF /* 0.gif in Resources */,
 				211C04C31FC6604900E51FCF /* 12.gif in Resources */,
 				211C04981FC6604800E51FCF /* youtubeauty.bundle in Resources */,
+				2EFFE6A41FF3A22700BFCC40 /* ZDCChatStrings.bundle in Resources */,
 				21C91D8C1FDBD64D006EDB16 /* AlipaySDK.bundle in Resources */,
 				211C04971FC6604800E51FCF /* MicroVideo.xcassets in Resources */,
 				211C04A11FC6604900E51FCF /* ChatSystemFaceConfig.plist in Resources */,
@@ -4685,6 +4693,7 @@
 				211A34F41FB430F900FEB71F /* SettingCell.m in Sources */,
 				211C04781FC6604800E51FCF /* ChatTableViewCell.m in Sources */,
 				211C04961FC6604800E51FCF /* ImageThumbPickerViewController.m in Sources */,
+				2EA2526E1FF09B52007FF9A2 /* CoinUtil.m in Sources */,
 				211C05061FC66B5500E51FCF /* IMModel.m in Sources */,
 				211C03F01FC6604800E51FCF /* UIImageView+InitMethod.m in Sources */,
 				211C03F51FC6604800E51FCF /* KeyValueTableViewController.m in Sources */,
@@ -4701,8 +4710,21 @@
 			isa = PBXVariantGroup;
 			children = (
 				2EA584C31FA813C900C7106C /* Base */,
+				2EFFE6AE1FF4866700BFCC40 /* zh-Hans */,
+				2EFFE6B01FF4868300BFCC40 /* zh-Hant */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		2EFFE6AC1FF4829100BFCC40 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2EFFE6AB1FF4829100BFCC40 /* en */,
+				2EFFE6AD1FF483E000BFCC40 /* Base */,
+				2EFFE6AF1FF4866700BFCC40 /* zh-Hans */,
+				2EFFE6B11FF4868400BFCC40 /* zh-Hant */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -4712,6 +4734,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -4767,6 +4790,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -4830,6 +4854,7 @@
 					"$(PROJECT_DIR)/Coin/Extension/芝麻认证",
 					"$(PROJECT_DIR)/Coin/Extension/Alipay",
 					"$(PROJECT_DIR)/Coin/Extension/ZDSupport",
+					"$(PROJECT_DIR)/Coin/Extension/ZDCChat",
 				);
 				GCC_PREFIX_HEADER = Coin/Classes/Other/CoinPrefixHeader.pch;
 				INFOPLIST_FILE = Coin/Info.plist;
@@ -4866,6 +4891,7 @@
 					"$(PROJECT_DIR)/Coin/Extension/芝麻认证",
 					"$(PROJECT_DIR)/Coin/Extension/Alipay",
 					"$(PROJECT_DIR)/Coin/Extension/ZDSupport",
+					"$(PROJECT_DIR)/Coin/Extension/ZDCChat",
 				);
 				GCC_PREFIX_HEADER = Coin/Classes/Other/CoinPrefixHeader.pch;
 				INFOPLIST_FILE = Coin/Info.plist;

@@ -12,10 +12,6 @@
 
 @interface WaitingOrderVC : RichChatViewController
 
-
 @property (nonatomic, copy) NSString *orderCode;
-
-
-
 
 @end

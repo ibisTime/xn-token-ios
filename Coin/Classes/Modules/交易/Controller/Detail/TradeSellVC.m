@@ -15,7 +15,7 @@
 #import "OrderPriceModel.h"
 #import "QuotationModel.h"
 #import "IMAUser.h"
-
+#import "CoinUtil.h"
 #import "NSNumber+Extension.h"
 #import "NSString+Check.h"
 #import "UILabel+Extension.h"
@@ -285,10 +285,12 @@
     http.code = @"625241";
     http.showView = self.view;
     http.parameters[@"adsCode"] = self.advertise.code;
-    http.parameters[@"sellUser"] = [TLUser user].userId;
+//    http.parameters[@"sellUser"] = [TLUser user].userId;
+    http.parameters[@"token"] = [TLUser user].token;
     http.parameters[@"count"] = num;
     http.parameters[@"tradeAmount"] = self.tradeView.tradeAmount;
     http.parameters[@"tradePrice"] = price;
+
     
     [http postWithSuccess:^(id responseObject) {
         
@@ -400,11 +402,8 @@
     CoinWeakSelf;
     
     TLNetworking *http = [TLNetworking new];
-    
     http.code = @"625226";
-    
     http.parameters[@"adsCode"] = self.advertise.code;
-    
     if ([TLUser user].isLogin) {
         
         http.parameters[@"userId"] = [TLUser user].userId;
@@ -434,7 +433,9 @@
     
     http.code = @"625248";
     http.parameters[@"adsCode"] = self.advertise.code;
-    http.parameters[@"sellUser"] = [TLUser user].userId;
+//    http.parameters[@"sellUser"] = [TLUser user].userId;
+    http.parameters[@"token"] = [TLUser user].token;
+
     
     [http postWithSuccess:^(id responseObject) {
         

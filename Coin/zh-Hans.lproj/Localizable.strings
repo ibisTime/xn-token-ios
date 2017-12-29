@@ -1,0 +1,24 @@
+/* 
+  Localizable.strings
+  Coin
+
+  Created by  tianlei on 2017/12/28.
+  Copyright © 2017年  tianlei. All rights reserved.
+*/
+//"ios.ZDKHelpCenter.support.title" = "简体";
+//"ios.ZDKHelpCenter.support.title" = "";
+//"ios.ZDKHelpCenter.helpCenterOverview.title" = "简体";
+//"ios.ZDKHelpCenter.support.contactSupport.title" = "简体";
+"ios.ZDKRequests.rightBarButton.title.contact" = "提交工单";
+
+
+// 以下为国际化的key
+//"ios.ZDKRequests.createRequest.error.request" = "Falha ao enviar a solicitação";
+//"ios.ZDKRequests.createRequest.requestSubject" = "Solicitação do aplicativo";
+//"ios.ZDKRequests.requestList.empty" = "Nenhuma solicitação aberta no momento";
+//"ios.ZDKRequests.requestList.error" = "Falha ao obter as solicitações";
+//"ios.ZDKRequests.requestList.title" = "Minhas Solicitações";
+//"ios.ZDKRequests.rightBarButton.title.new" = "Nova";
+//"ios.ZDKRequests.rightBarButton.title.contact" = "Nova Solicitação";
+//"ios.ZDKHelpCenter.support.contactSupport" = "Nova Solicitação";
+

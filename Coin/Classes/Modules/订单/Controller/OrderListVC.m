@@ -106,15 +106,15 @@
     __weak typeof(self) weakSelf = self;
     [self.orderTableView addRefreshAction:^{
         
-        __block int count = 0;
-        NSArray <TIMConversation *> *conversationList = [TIMManager sharedInstance].getConversationList;
-        [conversationList enumerateObjectsUsingBlock:^(TIMConversation * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            
-            count += obj.getUnReadMessageNum;
-            
-        }];
-        
-        NSLog(@"%ld",count);
+//        __block int count = 0;
+//        NSArray <TIMConversation *> *conversationList = [TIMManager sharedInstance].getConversationList;
+//        [conversationList enumerateObjectsUsingBlock:^(TIMConversation * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+//
+//            count += obj.getUnReadMessageNum;
+//
+//        }];
+//
+//        NSLog(@"%ld",count);
         
         [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
             

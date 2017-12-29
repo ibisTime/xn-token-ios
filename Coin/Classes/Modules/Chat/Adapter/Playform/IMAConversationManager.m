@@ -120,8 +120,8 @@
     
     NSInteger unRead = 0;
     
-    for (TIMConversation *conversation in conversationList)
-    {
+    for (TIMConversation *conversation in conversationList) {
+        
         IMAConversation *conv = nil;
         if ([conversation getType] == TIM_SYSTEM)
         {

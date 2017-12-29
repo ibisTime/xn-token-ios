@@ -98,7 +98,6 @@
     //--//
     self.topUserView = [[AdsDetailUserView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 125)];
     [self.scrollView addSubview:self.topUserView];
-    
     self.topUserView.userInteractionEnabled = YES;
     [self.topUserView addTarget:self action:@selector(goHomePage) forControlEvents:UIControlEventTouchUpInside];
     
@@ -131,9 +130,7 @@
 - (void)initBuyView {
     
     self.buyView = [[UIView alloc] init];
-    
     self.buyView.backgroundColor = kWhiteColor;
-    
     [self.scrollView addSubview:self.buyView];
     [self.buyView mas_makeConstraints:^(MASConstraintMaker *make) {
         
@@ -188,14 +185,12 @@
     CGFloat tfW = (kScreenWidth - 24 - 40)/2.0;
     //CNY
     self.cnyTF = [[TLTextField alloc] initWithFrame:CGRectMake(0, 60, tfW, 44) leftTitle:@"CNY" titleWidth:55 placeholder:@""];
-    
     self.cnyTF.delegate = self;
-    
     self.cnyTF.keyboardType = UIKeyboardTypeDecimalPad;
+    [self.buyView addSubview:self.cnyTF];
     
     [self.cnyTF addTarget:self action:@selector(ethDidChange:) forControlEvents:UIControlEventEditingChanged];
-    
-    [self.buyView addSubview:self.cnyTF];
+
     [self.cnyTF mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.left.equalTo(@0);
@@ -206,9 +201,7 @@
     
     //leftLine
     UIView *leftLine = [[UIView alloc] init];
-    
     leftLine.backgroundColor = kLineColor;
-    
     [self.buyView addSubview:leftLine];
     [leftLine mas_makeConstraints:^(MASConstraintMaker *make) {
         
@@ -226,11 +219,8 @@
                                         placeholder: [LangSwitcher switchLang:@"请输入数值" key:nil]];
     
     self.ethTF.delegate = self;
-    
     self.ethTF.keyboardType = UIKeyboardTypeDecimalPad;
-    
     [self.ethTF addTarget:self action:@selector(cnyDidChange:) forControlEvents:UIControlEventEditingChanged];
-    
     [self.buyView addSubview:self.ethTF];
     [self.ethTF mas_makeConstraints:^(MASConstraintMaker *make) {
         
@@ -242,9 +232,7 @@
     
     //rightLine
     UIView *rightLine = [[UIView alloc] init];
-    
     rightLine.backgroundColor = kLineColor;
-    
     [self.buyView addSubview:rightLine];
     [rightLine mas_makeConstraints:^(MASConstraintMaker *make) {
         
@@ -331,7 +319,9 @@
     _advertise = advertise;
     self.topUserView.ads = advertise;
 
-    self.cnyTF.placeholder = [NSString stringWithFormat:@"%@-%@ ",[advertise.minTrade convertToSimpleRealMoney], [advertise.maxTrade convertToSimpleRealMoney]];
+    self.cnyTF.placeholder = [NSString stringWithFormat:@"%@-%@ ",
+                              [advertise.minTrade convertToSimpleRealMoney],
+                              [advertise.maxTrade convertToSimpleRealMoney]];
     //留言
     self.leaveMsgTV.text = advertise.leaveMessage;
 }
@@ -341,6 +331,7 @@
     _leftAmount = leftAmount;
     self.leftAmountLbl.text = [NSString stringWithFormat:@"广告剩余可交易量: %@ ETH", [_leftAmount convertToSimpleRealCoin]];
     self.leftAmountLbl.text = [LangSwitcher switchLang:self.leftAmountLbl.text key:nil];
+    
 }
 
 - (void)setTruePrice:(NSNumber *)truePrice {
@@ -366,7 +357,7 @@
 - (void)setTradeRemind:(NSString *)tradeRemind {
     
     _tradeRemind = tradeRemind;
-    
+    //
     [self.tradeRemindLbl labelWithTextString:tradeRemind lineSpace:5];
     [self layoutIfNeeded];
     self.scrollView.contentSize = CGSizeMake(kScreenWidth, self.tradePromptView.yy);
@@ -390,13 +381,12 @@
     NSDecimalNumber *ethNum = [cny decimalNumberByDividingBy:ethPrice];
     //保留8位小数,第九位舍去
     self.ethTF.text = [[ethNum stringValue] convertToRealMoneyWithNum:8];
-    
     self.tradeAmount = sender.text;
-    
     self.tradeNum = [[ethNum stringValue] convertToRealMoneyWithNum:9];
 
 }
 
+#pragma mark- 金额输入
 - (void)cnyDidChange:(UITextField *)sender {
     
     if ([sender.text isEqualToString:@""]) {
@@ -407,15 +397,12 @@
     
     //ETH价格
     NSDecimalNumber *ethPrice = [NSDecimalNumber decimalNumberWithString:[self.advertise.truePrice convertToRealMoneyWithNum:4]];
-    
     NSDecimalNumber *ethNum = [NSDecimalNumber decimalNumberWithString:sender.text];
     
+    //
     NSDecimalNumber *cny = [ethNum decimalNumberByMultiplyingBy:ethPrice];
-    
     self.cnyTF.text = [[cny stringValue] convertToRealMoneyWithNum:2];
-    
     self.tradeAmount = [[cny stringValue] convertToRealMoneyWithNum:3];
-    
     self.tradeNum = sender.text;
     
 }
@@ -464,6 +451,7 @@
         
         return NO;  //小数点后面两位
     }
+    
     if (NSNotFound != nDotLoc && range.location > nDotLoc && [string isEqualToString:@"."]) {
         return NO;  //控制只有一个小数点
     }

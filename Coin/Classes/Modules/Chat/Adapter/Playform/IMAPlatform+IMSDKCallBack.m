@@ -83,7 +83,7 @@ static BOOL kIsAlertingForceOffline = NO;
     
     if (!kIsAlertingForceOffline)
     {
-        [[IMAAppDelegate sharedAppDelegate] popToRootViewController];
+//        [[IMAAppDelegate sharedAppDelegate] popToRootViewController];
         
         kIsAlertingForceOffline = YES;
         DebugLog(@"踢下线通知");

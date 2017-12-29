@@ -26,10 +26,13 @@ typedef void(^TradeBuyBlock)(TradeBuyType tradeType);
 @property (nonatomic, strong) UIScrollView *scrollView;
 //交易提醒
 @property (nonatomic, strong) UIView *tradePromptView;
-//CNY
+
+
+//暴露出  2  两种金额
 @property (nonatomic, strong) TLTextField *cnyTF;
-//ETH
 @property (nonatomic, strong) TLTextField *ethTF;
+
+
 
 @property (nonatomic, strong) AdvertiseModel *advertise;
 

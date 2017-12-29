@@ -36,7 +36,7 @@
 #import <IQKeyboardManager/IQKeyboardManager.h>
 #import <CDCommon/UIScrollView+TLAdd.h>
 
-@interface TLMineVC ()<MineHeaderSeletedDelegate,UINavigationControllerDelegate>
+@interface TLMineVC ()<MineHeaderSeletedDelegate, UINavigationControllerDelegate>
 
 @property (nonatomic, strong) UIScrollView *scrollView;
 //头部
@@ -288,7 +288,8 @@
 //        contentModel.groupType = ZDKHelpCenterOverviewGroupTypeDefault;
         
         // 设置界面的代理
-//        [ZDKHelpCenter setUIDelegate:<#(id<ZDKHelpCenterConversationsUIDelegate>)#>];
+//        [ZDKHelpCenter setUIDelegate:weakSelf];
+        //
 //        contentModel.labels = @[@"tag"];
 //        contentModel.groupType = ZDKHelpCenterOverviewGroupTypeSection;
 //        contentModel.groupIds = @[@"sections2"];
@@ -438,11 +439,8 @@
 - (void)requestUserStatistInfo {
     
     TLNetworking *http = [TLNetworking new];
-    
     http.code = @"625256";
-    
     http.parameters[@"master"] = [TLUser user].userId;
-    
     [http postWithSuccess:^(id responseObject) {
         
         UserStatistics *userStatist = [UserStatistics mj_objectWithKeyValues:responseObject[@"data"]];

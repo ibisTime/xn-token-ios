@@ -214,12 +214,10 @@
 - (NSString *)convertToSysCoin {
     
     NSDecimalNumber *m = [NSDecimalNumber decimalNumberWithString:self];
-    
     NSDecimalNumber *n = [NSDecimalNumber decimalNumberWithString:[@(1.0e+18) stringValue]];
-    
     NSDecimalNumber *o = [m decimalNumberByMultiplyingBy:n];
-    
     return [o stringValue];
+    
 }
 
 - (NSString *)convertToSimpleRealCoin {
@@ -231,14 +229,13 @@
     }
     
     //保留8位小数,第九位舍去
-    NSDecimalNumberHandler *handler = [NSDecimalNumberHandler decimalNumberHandlerWithRoundingMode:NSRoundBankers scale:8 raiseOnExactness:NO raiseOnOverflow:NO raiseOnUnderflow:NO raiseOnDivideByZero:YES];
+    NSDecimalNumberHandler *handler = [NSDecimalNumberHandler decimalNumberHandlerWithRoundingMode:NSRoundBankers
+                                                                                             scale:8
+raiseOnExactness:NO raiseOnOverflow:NO raiseOnUnderflow:NO raiseOnDivideByZero:YES];
     
     NSDecimalNumber *m = [NSDecimalNumber decimalNumberWithString:self];
-
     NSDecimalNumber *n = [NSDecimalNumber decimalNumberWithString:[@(1.0e+18) stringValue]];
-
     NSDecimalNumber *o = [m decimalNumberByDividingBy:n];
-    
     NSDecimalNumber *p = [o decimalNumberByRoundingAccordingToBehavior:handler];
     
     return [NSString stringWithFormat:@"%@",p];
@@ -288,12 +285,12 @@
         
     }
     
-    NSDecimalNumberHandler *handler = [NSDecimalNumberHandler decimalNumberHandlerWithRoundingMode:NSRoundDown scale:2 raiseOnExactness:NO raiseOnOverflow:NO raiseOnUnderflow:NO raiseOnDivideByZero:YES];
+    NSDecimalNumberHandler *handler = [NSDecimalNumberHandler decimalNumberHandlerWithRoundingMode:NSRoundDown
+                                                                                             scale:2
+                                                                                  raiseOnExactness:NO raiseOnOverflow:NO raiseOnUnderflow:NO raiseOnDivideByZero:YES];
     
     NSDecimalNumber *price = [NSDecimalNumber decimalNumberWithString:self];
-    
     NSDecimalNumber *result = [price decimalNumberByRoundingAccordingToBehavior:handler];
-    
     return [result stringValue];
     
 }

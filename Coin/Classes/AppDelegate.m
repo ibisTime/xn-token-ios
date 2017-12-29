@@ -30,7 +30,7 @@
 //#import "ZDKConfig.h"
 #import "LangSwitcher.h"
 #import <ZDCChat/ZDCChat.h>
-
+#import "CoinUtil.h"
 //// 引入JPush功能所需头文件
 //#import "JPUSHService.h"
 //// iOS10注册APNs所需头文件
@@ -51,6 +51,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
+//    [CoinUtil conv]
     //服务器环境
     [AppConfig config].runEnv = RunEnvDev;
     
@@ -80,7 +81,7 @@
     //消息
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLogin) name:kUserLoginNotification object:nil];
     //
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(imLogin) name:kIMLoginNotification object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(imLogin) name:kIMLoginNotification object:nil];
     
     //重新登录
     if([TLUser user].isLogin) {
@@ -107,6 +108,7 @@
 //                          channel:@"ios"
 //                 apsForProduction:NO
 //            advertisingIdentifier:nil];
+    
     return YES;
     
 }

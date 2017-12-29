@@ -33,7 +33,7 @@ FOUNDATION_EXPORT void TLLog(NSString *format, ...);
 @property (nonatomic, assign) BOOL isChecking;
 
 - (NSString *)apiUrl;
-- (NSString *)ipUrl;
+//- (NSString *)ipUrl;
 
 ////腾讯云
 //@property (nonatomic, copy) NSString *chatAppId;
