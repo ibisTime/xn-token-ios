@@ -45,25 +45,23 @@
         
 #endif
         
-    } else if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0) {
-        //
-        [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
-        [[UIApplication sharedApplication] registerForRemoteNotifications];
-        
-    } else {
-        //
-        [[UIApplication sharedApplication] registerForRemoteNotificationTypes: (UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert)];
-        
     }
     
-
-
-    
+//    else if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0) {
+//        //
+//        [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
+//        [[UIApplication sharedApplication] registerForRemoteNotifications];
+//
+//    } else {
+//        //
+//        [[UIApplication sharedApplication] registerForRemoteNotificationTypes: (UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert)];
+//
+//    }
+  
 }
 
 // app 进入后台时配置
-- (void)configOnAppEnterBackground
-{
+- (void)configOnAppEnterBackground {
     
     // 将相关的配置缓存至本地
     [[IMAPlatform sharedInstance] saveToLocal];
@@ -71,10 +69,9 @@
     NSUInteger unReadCount = [[IMAPlatform sharedInstance].conversationMgr unReadMessageCount];
     [UIApplication sharedApplication].applicationIconBadgeNumber = unReadCount;
     
+    //
     TIMBackgroundParam  *param = [[TIMBackgroundParam alloc] init];
-//    [param setC2cUnread:(int)unReadCount];
     [param setGroupUnread:(int)unReadCount];
-    
     [[TIMManager sharedInstance] doBackground:param succ:^() {
         DebugLog(@"doBackgroud Succ");
     } fail:^(int code, NSString * err) {
@@ -85,15 +82,15 @@
 // app 进前台时配置
 - (void)configOnAppEnterForeground
 {
-    [UIApplication.sharedApplication.windows enumerateObjectsWithOptions:NSEnumerationReverse usingBlock:^(UIWindow *w, NSUInteger idx, BOOL *stop) {
-        if (!w.opaque && [NSStringFromClass(w.class) hasPrefix:@"UIText"]) {
-            // The keyboard sometimes disables interaction. This brings it back to normal.
-            BOOL wasHidden = w.hidden;
-            w.hidden = YES;
-            w.hidden = wasHidden;
-            *stop = YES;
-        }
-    }];
+//    [UIApplication.sharedApplication.windows enumerateObjectsWithOptions:NSEnumerationReverse usingBlock:^(UIWindow *w, NSUInteger idx, BOOL *stop) {
+//        if (!w.opaque && [NSStringFromClass(w.class) hasPrefix:@"UIText"]) {
+//            // The keyboard sometimes disables interaction. This brings it back to normal.
+//            BOOL wasHidden = w.hidden;
+//            w.hidden = YES;
+//            w.hidden = wasHidden;
+//            *stop = YES;
+//        }
+//    }];
     
     //消息栏消息数
 //    NSInteger unReadCount = [[IMAPlatform sharedInstance].conversationMgr unReadMessageCount];
@@ -123,41 +120,44 @@
 {
     DebugLog(@"didRegisterForRemoteNotificationsWithDeviceToken:%ld", (unsigned long)deviceToken.length);
     NSString *token = [NSString stringWithFormat:@"%@", deviceToken];
-    [[TIMManager sharedInstance] log:TIM_LOG_INFO tag:@"SetToken" msg:[NSString stringWithFormat:@"My Token is :%@", token]];
+    [[TIMManager sharedInstance] log:TIM_LOG_INFO
+                                 tag:@"SetToken"
+                                 msg:[NSString stringWithFormat:@"My Token is :%@", token]];
     TIMTokenParam *param = [[TIMTokenParam alloc] init];
 
-    if ( [AppConfig config].runEnv == RunEnvDev ||
+    if ([AppConfig config].runEnv == RunEnvDev ||
          [AppConfig config].runEnv == RunEnvTest ) {
         
-        param.busiId = 6890;
+        param.busiId = 7015;
 
     } else {
         
-        param.busiId =  6898;
+        param.busiId = 6898;
 
     }
 
-    
-    [param setToken:deviceToken];
-    
+    param.token = deviceToken;
     //需要在登录之后，在进行token设置
     [[TIMManager sharedInstance] setToken:param succ:^{
        
 //        NSLog(@"-----> 上传token成功 ");
-    } fail:^(int code, NSString *msg) {
-//        NSLog(@"-----> 上传token失败 ");
-    }];
-    
-    TIMAPNSConfig *config = [[TIMAPNSConfig alloc] init];
-    [config setOpenPush:1];
-    [[TIMManager sharedInstance] setAPNS:config succ:^{
-        
         
     } fail:^(int code, NSString *msg) {
         
+//     NSLog(@"-----> 上传token失败 ");
+        
     }];
     
-    //
+//    TIMAPNSConfig *config = [[TIMAPNSConfig alloc] init];
+//    [config setOpenPush:1];
+//    [[TIMManager sharedInstance] setAPNS:config succ:^{
+//
+//
+//    } fail:^(int code, NSString *msg) {
+//
+//    }];
+    
+    
 //    [[TIMManager sharedInstance] getAPNSConfig:^(TIMAPNSConfig *config) {
 //
 //
@@ -174,7 +174,7 @@
        willPresentNotification:(UNNotification *)notification
          withCompletionHandler:(void (^)(UNNotificationPresentationOptions options))completionHandler{
     
-    NSDictionary * userInfo = notification.request.content.userInfo;
+    NSDictionary *userInfo = notification.request.content.userInfo;
     UNNotificationRequest *request = notification.request; // 收到推送的请求
     UNNotificationContent *content = request.content; // 收到推送的消息内容
     NSNumber *badge = content.badge;  // 推送消息的角标
@@ -191,7 +191,12 @@
         // 判断为本地通知
         NSLog(@"iOS10 前台收到本地通知:{\\\\nbody:%@，\\\\ntitle:%@,\\\\nsubtitle:%@,\\\\nbadge：%@，\\\\nsound：%@，\\\\nuserInfo：%@\\\\n}",body,title,subtitle,badge,sound,userInfo);
     }
-    completionHandler(UNNotificationPresentationOptionBadge|UNNotificationPresentationOptionSound|UNNotificationPresentationOptionAlert); // 需要执行这个方法，选择是否提醒用户，有Badge、Sound、Alert三种类型可以设置
+    
+    // 需要执行这个方法，选择是否提醒用户，有Badge、Sound、Alert三种类型可以设置
+    completionHandler(UNNotificationPresentationOptionBadge|
+                      UNNotificationPresentationOptionSound|
+                      UNNotificationPresentationOptionAlert);
+    
 }
 
 // 通知的点击事件

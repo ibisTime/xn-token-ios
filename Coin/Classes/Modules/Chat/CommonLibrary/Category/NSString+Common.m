@@ -9,10 +9,12 @@
 #import "NSString+Common.h"
 #import <CommonCrypto/CommonDigest.h>
 //#import "pinyin.h"
-
+//#import <UIKit/UIKit.h>
 #import "NSData+Common.h"
-
+#import "CommonLibraryConfig.h"
+#import <objc/runtime.h>
 #import "GTMBase64.h"
+#import "ARCCompile.h"
 
 
 #define HANZI_START 19968
@@ -326,6 +328,7 @@ char pinyinFirstLetter(unsigned short hanzi)
 	NSString *url = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(NULL,  (CFStringRef)self,  NULL,  (CFStringRef)@"!*'();:@&=+$,/?%#[]",  kCFStringEncodingUTF8));
 
     return CommonReturnAutoReleased(url);
+//    return url;
 }
 
 - (NSString *)capitalize

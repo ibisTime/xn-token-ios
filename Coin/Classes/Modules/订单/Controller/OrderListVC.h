@@ -7,6 +7,7 @@
 //
 
 #import "TLBaseVC.h"
+#import "OrderModel.h"
 
 @interface OrderListVC : TLBaseVC
 

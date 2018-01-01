@@ -387,17 +387,13 @@
     CoinWeakSelf;
     
     TLPageDataHelper *helper = [TLPageDataHelper new];
-    
     helper.code = @"625228";
-    
     helper.start = 1;
     helper.limit = 20;
-    
     helper.parameters[@"coin"] = @"ETH";
     helper.parameters[@"tradeType"] = self.tradeType;
     
     helper.tableView = self.tableView;
-    
     self.helper = helper;
     
     [helper modelClass:[AdvertiseModel class]];

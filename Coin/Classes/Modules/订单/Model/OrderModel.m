@@ -9,6 +9,7 @@
 #import "OrderModel.h"
 #import "TLUser.h"
 #import "NSString+Check.h"
+#import "AppColorMacro.h"
 
 
 //TO_SUBMIT("-1", "代下单"), TO_PAY("0", "待支付"), PAYED("1", "已支付待释放"), RELEASED(

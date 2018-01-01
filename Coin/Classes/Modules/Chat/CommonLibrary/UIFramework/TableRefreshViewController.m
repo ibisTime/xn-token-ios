@@ -10,7 +10,7 @@
 
 
 #import "RefreshView.h"
-
+#import "AppColorMacro.h"
 #import "ImageTitleButton.h"
 
 #import "TLUIHeader.h"

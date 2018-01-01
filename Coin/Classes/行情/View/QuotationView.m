@@ -15,6 +15,7 @@
 #import "UIButton+EnLargeEdge.h"
 #import "NSNumber+Extension.h"
 #import "NSString+Extension.h"
+#import <SDWebImage/UIButton+WebCache.h>
 
 @interface QuotationView ()
 

@@ -26,7 +26,7 @@
 #define kDefaultMargin     8
 
 // 默认的字体颜色
-#define kMainTextColor                kBlackColor
+#define kMainTextColor                RGB(0, 0, 0)
 
 #define kDetailTextColor              RGB(145, 145, 145)
 

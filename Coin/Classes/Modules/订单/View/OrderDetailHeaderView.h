@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 #import "OrderModel.h"
+#import "ChatHeadRefreshView.h"
 
 typedef NS_ENUM(NSInteger, OrderEventsType) {
     

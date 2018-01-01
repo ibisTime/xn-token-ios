@@ -7,6 +7,7 @@
 //
 
 #import "CoinQuotationModel.h"
+#import "AppColorMacro.h"
 
 @implementation CoinQuotationModel
 

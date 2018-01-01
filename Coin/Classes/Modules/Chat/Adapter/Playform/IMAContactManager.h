@@ -5,6 +5,8 @@
 //  Created by AlexiChen on 16/2/18.
 //  Copyright © 2016年 AlexiChen. All rights reserved.
 //
+#import <Foundation/Foundation.h>
+#import <ImSDK/ImSDK.h>
 
 typedef NS_OPTIONS(NSUInteger, IMAContactChangedNotifyType) {
     // 联系人列表事件

@@ -8,6 +8,7 @@
 
 #import "TopBottomView.h"
 #import "TLUIHeader.h"
+#import "AppColorMacro.h"
 
 @implementation TopBottomView
 

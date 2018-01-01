@@ -10,6 +10,7 @@
 #import "UILabel+Extension.h"
 #import "UILable+convience.h"
 #import "TLUIHeader.h"
+#import "AppColorMacro.h"
 
 @interface PayTypeView()
 
@@ -32,7 +33,7 @@
         self.payTypeLbl = [UILabel labelWithFrame:CGRectZero
                                      textAligment:NSTextAlignmentCenter
                                   backgroundColor:[UIColor whiteColor]
-                                             font:Font(11)
+                                             font:[UIFont systemFontOfSize:11]
                                         textColor:kClearColor];
         [self addSubview:self.payTypeLbl];
         [self.payTypeLbl mas_makeConstraints:^(MASConstraintMaker *make) {

@@ -7,6 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "IMAUserShowAble.h"
+#import "IMAContactItemShowAble.h"
 
 
 @interface IMAUser : NSObject<IMAUserShowAble, IMAContactItemShowAble>

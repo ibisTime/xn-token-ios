@@ -10,6 +10,7 @@
 
 #import "CoinHeader.h"
 #import <CDCommon/DeviceUtil.h>
+#import "MyUIDefine.h"
 
 @implementation TLPlaceholderView
 

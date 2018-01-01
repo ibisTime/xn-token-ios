@@ -14,6 +14,7 @@
 #import "TopBottomView.h"
 #import "PayTypeView.h"
 #import "UserPhotoView.h"
+#import "AppColorMacro.h"
 
 #define IMG_WIDTH 48
 @interface AdsDetailUserView()

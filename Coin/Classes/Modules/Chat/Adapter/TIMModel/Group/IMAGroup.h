@@ -7,6 +7,8 @@
 //
 
 #import "IMASubGroup.h"
+#import <ImSDK/ImSDK.h>
+#import "IMAUserShowAble.h"
 
 @interface IMAGroup : IMAUser<IMAGroupShowAble>
 {

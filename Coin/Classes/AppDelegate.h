@@ -10,7 +10,7 @@
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
-- (void)pushToChatViewControllerWith:(IMAUser *)user;
+//- (void)pushToChatViewControllerWith:(IMAUser *)user;
 
 //+ (id)sharedAppDelegate;
 @property (strong, nonatomic) UIWindow *window;

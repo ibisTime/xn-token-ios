@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "IMAShowAble.h"
 
 
 @protocol IMAUserShowAble <IMAShowAble>

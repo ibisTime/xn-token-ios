@@ -5,7 +5,9 @@
 //  Created by AlexiChen on 16/1/29.
 //  Copyright © 2016年 AlexiChen. All rights reserved.
 //
-
+#import <Foundation/Foundation.h>
+#import <ImSDK/ImSDK.h>
+#import "IMAUser.h"
 
 typedef NS_ENUM(NSInteger, IMAMSGType) {
     EIMAMSG_Unknown,            // 未知消息类型

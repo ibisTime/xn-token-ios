@@ -11,8 +11,7 @@
 
 #import "UILabel+InitMethod.h"
 #import "UILabel+Common.h"
-
-
+#import "CommonLibraryConfig.h"
 #import "MenuButton.h"
 
 @implementation UITextField (UITextField_Tip)

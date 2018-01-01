@@ -10,6 +10,8 @@
 #import "TLUIHeader.h"
 #import "NSString+Extension.h"
 #import "NSString+Date.h"
+#import "AppColorMacro.h"
+#import <SDWebImage/UIButton+WebCache.h>
 
 @interface UserPhotoView()
 

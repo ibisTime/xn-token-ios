@@ -31,6 +31,8 @@
 #import "LangSwitcher.h"
 #import <ZDCChat/ZDCChat.h>
 #import "CoinUtil.h"
+#import "XGPush.h"
+#import "XGPushHandler.h"
 //// 引入JPush功能所需头文件
 //#import "JPUSHService.h"
 //// iOS10注册APNs所需头文件
@@ -40,7 +42,7 @@
 //// 如果需要使用idfa功能所需要引入的头文件（可选）
 //#import <AdSupport/AdSupport.h>
 
-@interface AppDelegate ()
+@interface AppDelegate ()<XGPushDelegate,XGPushTokenManagerDelegate>
 
 @property (nonatomic, strong) FBKVOController *chatKVOCtrl;
 @property (nonatomic, copy) NSArray *cpArr;
@@ -50,8 +52,8 @@
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    
-//    [CoinUtil conv]
+
+
     //服务器环境
     [AppConfig config].runEnv = RunEnvDev;
     
@@ -68,9 +70,6 @@
     [[ChatManager sharedManager] initChat];
     
     //
-    [[IMAPlatform sharedInstance] configOnAppLaunchWithOptions:launchOptions];
-    
-    //
     [self configZendesk];
     
     //初始化为繁体
@@ -80,8 +79,6 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginOut) name:kUserLoginOutNotification object:nil];
     //消息
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLogin) name:kUserLoginNotification object:nil];
-    //
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(imLogin) name:kIMLoginNotification object:nil];
     
     //重新登录
     if([TLUser user].isLogin) {
@@ -109,7 +106,75 @@
 //                 apsForProduction:NO
 //            advertisingIdentifier:nil];
     
+    //信鸽推送测试
+    XGPush *xgPush = [XGPush defaultManager];
+    [xgPush setEnableDebug:YES ];
+    [xgPush startXGWithAppID:2200274297
+                      appKey:@"I87LJLXV417N"
+                    delegate:nil];
+    
+    [[IMAPlatform sharedInstance] configOnAppLaunchWithOptions:launchOptions];
+    
+//    [[UIApplication sharedApplication] registerForRemoteNotifications];
+    //
+//    [XGPushTokenManager defaultTokenManager].delegatge = self;
+
+//    NSLog(@"%@",[XGPushTokenManager defaultTokenManager].delegatge);
     return YES;
+    
+    
+}
+
+- (void)xgPushDidBindWithIdentifier:(nullable NSString *)identifier type:(XGPushTokenBindType)type error:(nullable NSError *)error {
+  
+    NSLog(@"已经绑定");
+    
+}
+
+//
+- (void)xgPushDidUnbindWithIdentifier:(nullable NSString *)identifier type:(XGPushTokenBindType)type error:(nullable NSError *)error {
+    
+    NSLog(@"已经解绑");
+
+    
+}
+
+
+- (void)xgPushDidFinishStart:(BOOL)isSuccess error:(nullable NSError *)error {
+    
+    
+}
+
+
+- (void)xgPushDidFinishStop:(BOOL)isSuccess error:(nullable NSError *)error {
+    
+}
+
+- (void)xgPushDidReportNotification:(BOOL)isSuccess error:(nullable NSError *)error {
+    
+    
+}
+
+- (void)xgPushUserNotificationCenter:(nonnull UNUserNotificationCenter *)center
+             willPresentNotification:(nullable UNNotification *)notification
+               withCompletionHandler:(nonnull void (^)(UNNotificationPresentationOptions options))completionHandler {
+    
+    [[XGPush defaultManager] reportXGNotificationInfo:notification.request.content.userInfo];
+    
+    completionHandler(UNNotificationPresentationOptionBadge | UNNotificationPresentationOptionSound | UNNotificationPresentationOptionAlert);
+    NSLog(@"收到通知");
+    
+}
+
+//- (void)xgPushUserNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler {
+//
+//}
+
+- (void)xgPushUserNotificationCenter:(nonnull UNUserNotificationCenter *)center
+      didReceiveNotificationResponse:(nullable UNNotificationResponse *)response
+               withCompletionHandler:(nonnull void (^)(void))completionHandler {
+    
+    completionHandler();
     
 }
 
@@ -135,10 +200,12 @@
 
 #pragma mark- 上传推送 token
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
-    
-//    [JPUSHService registerDeviceToken:deviceToken];
+
+
     [[IMAPlatform sharedInstance] configOnAppRegistAPNSWithDeviceToken:deviceToken];
-    
+//    [[XGPushTokenManager defaultTokenManager] registerDeviceToken:deviceToken];
+//    NSString *str = [XGPushTokenManager defaultTokenManager].deviceTokenString;
+
 }
 
 // 用户重新登录需要重新，需要重新调用此方法监听
@@ -268,12 +335,12 @@
     
 }
 
-- (void)pushToChatViewControllerWith:(IMAUser *)user {
-    
-    TLTabBarController *tab = (TLTabBarController *)self.window.rootViewController;
-    [tab pushToChatViewControllerWith:user];
-    
-}
+//- (void)pushToChatViewControllerWith:(IMAUser *)user {
+//    
+//    TLTabBarController *tab = (TLTabBarController *)self.window.rootViewController;
+//    [tab pushToChatViewControllerWith:user];
+//    
+//}
 
 + (id)sharedAppDelegate {
     
@@ -361,8 +428,6 @@
 
     };
     
-
-    
 }
 
 #pragma mark- 应用切后台
@@ -376,18 +441,17 @@
         bgTaskID = UIBackgroundTaskInvalid;
     }];
     
-//    [[IMAPlatform sharedInstance] configOnAppEnterBackground];
     
     if([[TLUser user] checkLogin]) {
         
         [[IMAPlatform sharedInstance] configOnAppEnterBackground];
         
     }
+    
 }
 
 #pragma mark- 应用切前台
-- (void)applicationWillEnterForeground:(UIApplication *)application
-{
+- (void)applicationWillEnterForeground:(UIApplication *)application {
     
     if([[TLUser user] checkLogin]) {
 
@@ -397,9 +461,7 @@
     
 }
 
-
-
-// iOS9 NS_DEPRECATED_IOS
+// iOS9//
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
     
     if ([url.host isEqualToString:@"certi.back"]) {

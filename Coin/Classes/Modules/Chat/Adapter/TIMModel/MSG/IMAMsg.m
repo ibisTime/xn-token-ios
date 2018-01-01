@@ -7,7 +7,7 @@
 //
 
 #import "IMAMsg.h"
-
+#import <AVFoundation/AVFoundation.h>
 #import "CustomElemCmd.h"
 
 @interface IMAMsg ()

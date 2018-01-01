@@ -116,5 +116,5 @@ typedef NS_ENUM(NSInteger, IMAConType)
 
 #import "IMAPlatformHeaders.h"
 
-#import "IMAAppDelegate.h"
+//#import "IMAAppDelegate.h"
 

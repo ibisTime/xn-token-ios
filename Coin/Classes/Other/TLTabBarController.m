@@ -157,66 +157,66 @@
 
 #pragma mark - IM
 
-- (void)pushToChatViewControllerWith:(IMAUser *)user
-{
-    NavigationViewController *curNav = (NavigationViewController *)[[self viewControllers] objectAtIndex:self.selectedIndex];
-    if (self.selectedIndex == 2)
-    {
-        // 选的中会话tab
-        // 先检查当前栈中是否聊天界面
-        NSArray *array = [curNav viewControllers];
-        for (UIViewController *vc in array)
-        {
-            if ([vc isKindOfClass:[IMAChatViewController class]])
-            {
-                // 有则返回到该界面
-                IMAChatViewController *chat = (IMAChatViewController *)vc;
-                [chat configWithUser:user];
-                //                chat.hidesBottomBarWhenPushed = YES;
-                [curNav popToViewController:chat animated:YES];
-                return;
-            }
-        }
-//#if kTestChatAttachment
-//        // 无则重新创建
-//        ChatViewController *vc = [[CustomChatUIViewController alloc] initWith:user];
-//#else
-        ChatViewController *vc = [[IMAChatViewController alloc] initWith:user];
-//#endif
-        
-        if ([user isC2CType])
-        {
-            TIMConversation *imconv = [[TIMManager sharedInstance] getConversation:TIM_C2C receiver:user.userId];
-            if ([imconv getUnReadMessageNum] > 0)
-            {
-                [vc modifySendInputStatus:SendInputStatus_Send];
-            }
-        }
-        
-        vc.hidesBottomBarWhenPushed = YES;
-        [curNav pushViewController:vc withBackTitle:@"返回" animated:YES];
-    }
-    else
-    {
-        NavigationViewController *chatNav = (NavigationViewController *)[[self viewControllers] objectAtIndex:0];
-        
-//#if kTestChatAttachment
-//        // 无则重新创建
-//        ChatViewController *vc = [[CustomChatUIViewController alloc] initWith:user];
-//#else
-        ChatViewController *vc = [[IMAChatViewController alloc] initWith:user];
-//#endif
-        vc.hidesBottomBarWhenPushed = YES;
-        [chatNav pushViewController:vc withBackTitle:@"返回" animated:YES];
-        
-        [self setSelectedIndex:2];
-        self.currentIndex = 2;
-        
-        if (curNav.viewControllers.count != 2)
-        {
-            [curNav popToRootViewControllerAnimated:YES];
-        }
-        
-    }
-}
+//- (void)pushToChatViewControllerWith:(IMAUser *)user
+//{
+//    NavigationViewController *curNav = (NavigationViewController *)[[self viewControllers] objectAtIndex:self.selectedIndex];
+//    if (self.selectedIndex == 2)
+//    {
+//        // 选的中会话tab
+//        // 先检查当前栈中是否聊天界面
+//        NSArray *array = [curNav viewControllers];
+//        for (UIViewController *vc in array)
+//        {
+//            if ([vc isKindOfClass:[IMAChatViewController class]])
+//            {
+//                // 有则返回到该界面
+//                IMAChatViewController *chat = (IMAChatViewController *)vc;
+//                [chat configWithUser:user];
+//                //                chat.hidesBottomBarWhenPushed = YES;
+//                [curNav popToViewController:chat animated:YES];
+//                return;
+//            }
+//        }
+////#if kTestChatAttachment
+////        // 无则重新创建
+////        ChatViewController *vc = [[CustomChatUIViewController alloc] initWith:user];
+////#else
+//        ChatViewController *vc = [[IMAChatViewController alloc] initWith:user];
+////#endif
+//        
+//        if ([user isC2CType])
+//        {
+//            TIMConversation *imconv = [[TIMManager sharedInstance] getConversation:TIM_C2C receiver:user.userId];
+//            if ([imconv getUnReadMessageNum] > 0)
+//            {
+//                [vc modifySendInputStatus:SendInputStatus_Send];
+//            }
+//        }
+//        
+//        vc.hidesBottomBarWhenPushed = YES;
+//        [curNav pushViewController:vc withBackTitle:@"返回" animated:YES];
+//    }
+//    else
+//    {
+//        NavigationViewController *chatNav = (NavigationViewController *)[[self viewControllers] objectAtIndex:0];
+//        
+////#if kTestChatAttachment
+////        // 无则重新创建
+////        ChatViewController *vc = [[CustomChatUIViewController alloc] initWith:user];
+////#else
+//        ChatViewController *vc = [[IMAChatViewController alloc] initWith:user];
+////#endif
+//        vc.hidesBottomBarWhenPushed = YES;
+//        [chatNav pushViewController:vc withBackTitle:@"返回" animated:YES];
+//        
+//        [self setSelectedIndex:2];
+//        self.currentIndex = 2;
+//        
+//        if (curNav.viewControllers.count != 2)
+//        {
+//            [curNav popToRootViewControllerAnimated:YES];
+//        }
+//        
+//    }
+//}
 @end

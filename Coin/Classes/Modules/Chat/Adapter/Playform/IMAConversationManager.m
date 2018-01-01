@@ -8,6 +8,10 @@
 
 #import "IMAConversationManager.h"
 #import "ChatManager.h"
+#import "ConstHeader.h"
+#import "ChatHeaders.h"
+
+
 @implementation IMAConversationChangedNotifyItem
 
 - (instancetype)initWith:(IMAConversationChangedNotifyType)type
@@ -312,7 +316,7 @@
             if (conv == _chattingConversation)
             {
                 // TODO:通知界面
-                [[IMAAppDelegate sharedAppDelegate] popToRootViewController];
+//                [[IMAAppDelegate sharedAppDelegate] popToRootViewController];
             }
             [_conversationList removeObjectAtIndex:i];
             self.unReadMessageCount -= [conv unReadCount];
