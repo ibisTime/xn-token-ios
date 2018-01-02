@@ -268,11 +268,13 @@
         
         [msg changeTo:EIMAMsg_Sending needRefresh:NO];
         [_conversation sendMessage:msg.msg succ:^{
+            
             [msg changeTo:EIMAMsg_SendSucc needRefresh:YES];
             if (block)
             {
                 block(array, YES, 0);
             }
+            
         } fail:^(int code, NSString *err) {
             [msg changeTo:EIMAMsg_SendFail needRefresh:YES];
             DebugLog(@"发送消息失败");

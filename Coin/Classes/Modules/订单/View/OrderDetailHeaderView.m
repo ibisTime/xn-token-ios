@@ -298,9 +298,7 @@
     self.amountLbl.text = [NSString stringWithFormat:@"%@ CNY", order.tradeAmount];
     
     NSString *realNum = [order.countString convertToSimpleRealCoin];
-    
     self.numLbl.text = [NSString stringWithFormat:@"%@ ETH", [realNum convertToRealMoneyWithNum:8]];
-    
     self.priceLbl.text = [NSString stringWithFormat:@"%@ CNY", [order.tradePrice convertToRealMoneyWithNum:2]];
     //买家
     self.buyersLbl.text = [NSString stringWithFormat:@"%@: %@",[LangSwitcher switchLang:@"买家" key:nil], order.buyUserInfo.nickname];

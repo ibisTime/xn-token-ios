@@ -13,7 +13,9 @@
 #import "AppConfig.h"
 #import "IMAPlatform.h"
 #import "IMAConversation.h"
-
+#import <TLSUI/TLSUI.h>
+#import "TestVC.h"
+#import <IMGroupExt/IMGroupExt.h>
 
 #define SDK_APP_ID @"CHAT_SDK_APP_ID"
 #define ACCOUNT_TYPE @"CHAT_ACCOUNT_TYPE"
@@ -28,7 +30,9 @@
 
 @end
 
-@implementation ChatManager
+@implementation ChatManager {
+    TestVC *_testVC;
+}
 
 // loginWithParam 方法中有调用
 - (void)initChat {
@@ -36,8 +40,6 @@
     //log: [INFO][TIMManager.mm:137][-[TIMManager initSdk:]][ImSDK]Has InitSDK, skip
     // 可多次初始化，
 //    NSLog(@"%ld",[TIMManager sharedInstance].);
-
-
     
     IMAPlatformConfig *config = [[IMAPlatformConfig alloc] init];
     //不打印日志
@@ -62,8 +64,23 @@
     return manager;
 }
 
+- (void)testPlayGround {
+    
+    TLSUILoginSetting *setting = [[TLSUILoginSetting alloc] init];
+    TestVC *testVC = [[TestVC alloc] init];
+    TLSUILogin(testVC,setting);
+    _testVC = testVC;
+    
+}
+
+
+
 //获取签名，并登录
 - (void)loginIM {
+    
+    
+//    [self testPlayGround];
+//    return;
     
     if ([IMAPlatform isAutoLogin]) {
         
@@ -77,14 +94,15 @@
     TLNetworking *http = [TLNetworking new];
     http.code = @"625000";
     http.parameters[@"userId"] = [TLUser user].userId;
+    http.parameters[@"token"] = [TLUser user].token;
     [http postWithSuccess:^(id responseObject) {
         
         self.imModel = [IMModel mj_objectWithKeyValues:responseObject[@"data"]];
         
         //保存信息,导数据库
-        [self saveIMAppInfoToDBAppId: self.imModel.txAppCode
-                         accountType: self.imModel.accountType
-                            userSign: self.imModel.sign];
+//        [self saveIMAppInfoToDBAppId: self.imModel.txAppCode
+//                         accountType: self.imModel.accountType
+//                            userSign: self.imModel.sign];
         
         
         IMALoginParam *loginParam = [[IMALoginParam alloc] init];
@@ -92,7 +110,8 @@
         //
         loginParam.identifier = [TLUser user].userId;
         loginParam.userSig = self.imModel.sign;
-        loginParam.appidAt3rd = self.imModel.txAppCode;
+        loginParam.tokenTime = [[NSDate date] timeIntervalSince1970];
+//        loginParam.appidAt3rd = self.imModel.txAppCode;
         [self loginWithParam:loginParam];
         
     } failure:^(NSError *error) {
@@ -101,7 +120,9 @@
     }];
 }
 
-- (void)saveIMAppInfoToDBAppId:(NSString *)apppId accountType:(NSString *)accountType userSign:(NSString *)sign {
+- (void)saveIMAppInfoToDBAppId:(NSString *)apppId
+                   accountType:(NSString *)accountType
+                      userSign:(NSString *)sign {
     
     [[NSUserDefaults standardUserDefaults] setObject:apppId forKey:SDK_APP_ID];
     [[NSUserDefaults standardUserDefaults] setObject:accountType forKey:ACCOUNT_TYPE];
@@ -115,6 +136,7 @@
     
     //没有网络的时候应该首先尝试调用此方法，
     //    [[TIMManager sharedInstance] initStorage:<#(TIMLoginParam *)#> succ:<#^(void)succ#> fail:<#^(int code, NSString *msg)fail#>];
+    // 有网络的时候调用下面的方法
 
 
     //重新登录需要 init 一下，切换账户时
@@ -129,17 +151,11 @@
         // app delegate 中 didRegisterForRemoteNotification 会回调
         [[UIApplication sharedApplication] registerForRemoteNotifications];
         
-        
-        __block int count = 0;
-        NSArray <TIMConversation *> *conversationList = [TIMManager sharedInstance].getConversationList;
-        [conversationList enumerateObjectsUsingBlock:^(TIMConversation * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            
-            count += obj.getUnReadMessageNum;
-            
-        }];
-        
-        NSLog(@"%ld",count);
+//        NSLog(@"%ld",count);
 //        [IMAConversationManager ].getun
+        
+        [self setPushConfig];
+//        [self test];
     
     } fail:^(int code, NSString *msg) {
         
@@ -148,6 +164,79 @@
 
 }
 
+- (void)test {
+    
+    //
+//    TIMConversation *conversition = [[TIMManager sharedInstance] getConversation:TIM_C2C receiver:@"tianlei02"];
+//    
+//    TIMTextElem *elem = [[TIMTextElem alloc] init];
+//    elem.text = @"测试";
+//    TIMMessage *msg = [[TIMMessage alloc] init];
+//    [msg addElem:elem];
+//    [conversition sendMessage:msg succ:^{
+//        
+//        NSLog(@"发送成功");
+//        
+//    } fail:^(int code, NSString *msg) {
+//        
+//        
+//    }];
+    
+//    [self test1];
+//    [self test2];
+    
+//    [[TIMGroupManager sharedInstance] modifyReciveMessageOpt:<#(NSString *)#> opt:<#(TIMGroupReceiveMessageOpt)#> succ:^{
+//
+//    } fail:^(int code, NSString *msg) {
+//
+//    }];
+    
+}
+
+
+//- (void)test2 {
+//
+////    IMAGroup *group = [[IMAGroup alloc] initWith:@"@TGS#2BULOHAFB"];
+//    IMAGroup *group = [[IMAGroup alloc] initWith:@"JY201801181901305368479"];
+//    IMAConversation *newConversation = [[IMAPlatform sharedInstance].conversationMgr chatWith:group];
+//
+//    IMAMsg *msg = [IMAMsg msgWithText:@"群组——测试2"];
+//    [newConversation sendMessage:msg completion:^(NSArray *imamsgList, BOOL succ, int code) {
+//
+//        if (succ) {
+//
+//            [TLAlert alertWithMsg:@"测试2-发送成功"];
+//
+//        }
+//
+//    }];
+//
+//}
+
+/**
+ 登录成功调用
+ */
+- (void)setPushConfig {
+    
+    TIMAPNSConfig *config = [[TIMAPNSConfig alloc] init];
+    [config setOpenPush:1];
+    config.c2cSound = nil;
+    config.groupSound = nil;
+    config.videoSound = nil;
+    [[TIMManager sharedInstance] setAPNS:config succ:^{
+        
+        [[TIMManager sharedInstance] getAPNSConfig:^(TIMAPNSConfig *config) {
+            
+            
+        } fail:^(int code, NSString *msg) {
+            
+        }];
+        
+    } fail:^(int code, NSString *msg) {
+        
+    }];
+    
+}
 
 - (NSString *)appId {
     
@@ -202,27 +291,7 @@
 
 
 
-- (void)configAPNs {
-    
-    TIMAPNSConfig * apnsConfig = [[TIMAPNSConfig alloc] init];
-    apnsConfig.openPush = 1;
-    
-    apnsConfig.c2cSound = nil;
-    
-    [[TIMManager sharedInstance] setAPNS:apnsConfig succ:^()
-     {
-         NSLog(@"APNs配置成功");
-         //         [TLAlert alertWithSucces:@"APNs配置成功"];
-         
-     } fail:^(int code, NSString *err)
-     {
-         //         [TLAlert alertWithSucces:@"APNs配置失败"];
-         
-         NSLog(@"APNs配置失败,原因: %d %@",code , err);
-         
-     }];
-    
-}
+
 
 - (void)testCount {
     
@@ -235,7 +304,7 @@
     
 }
 
-//
+
 //- (void)loginWithUserName:(NSString *)userName pwd:(NSString *)password{
 //
 //    TIMLoginParam * login_param = [[TIMLoginParam alloc ]init];

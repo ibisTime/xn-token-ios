@@ -285,7 +285,7 @@
     http.code = @"625241";
     http.showView = self.view;
     http.parameters[@"adsCode"] = self.advertise.code;
-//    http.parameters[@"sellUser"] = [TLUser user].userId;
+    http.parameters[@"sellUser"] = [TLUser user].userId;
     http.parameters[@"token"] = [TLUser user].token;
     http.parameters[@"count"] = num;
     http.parameters[@"tradeAmount"] = self.tradeView.tradeAmount;
@@ -433,7 +433,7 @@
     
     http.code = @"625248";
     http.parameters[@"adsCode"] = self.advertise.code;
-//    http.parameters[@"sellUser"] = [TLUser user].userId;
+    http.parameters[@"sellUser"] = [TLUser user].userId;
     http.parameters[@"token"] = [TLUser user].token;
 
     

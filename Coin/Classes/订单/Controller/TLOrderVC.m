@@ -57,6 +57,13 @@
 
 }
 
+- (void)test {
+    
+//    IMAUser *user
+//    [[IMAPlatform sharedInstance].conversationMgr chatWith:<#(IMAUser *)#>]
+    
+}
+
 
 - (void)addNotification {
     //消息

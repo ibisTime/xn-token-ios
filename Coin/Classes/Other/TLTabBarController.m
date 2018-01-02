@@ -56,12 +56,7 @@
 //    self.tabBar.backgroundColor = [UIColor whiteColor];
 }
 
-//- (void)usrLoginOut {
-//
-//    self.tabBar.items[1].badgeValue =  nil;
-//   [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
-//    
-//}
+
 
 
 - (UIImage *)changImageColorWithImage:(UIImage *)image  color:(UIColor *)targetColor blendModel:(CGBlendMode)mode

@@ -37,6 +37,13 @@
     TIMMessage *msg = [[TIMMessage alloc] init];
     [msg addElem:elem];
     
+    //
+    TIMOfflinePushInfo *info = [[TIMOfflinePushInfo alloc] init];
+    info.desc = @"描述测试";
+    info.ext = @"EXT 扩展";
+    [msg setOfflinePushInfo:info];
+    
+    //
     //进行狗仔初始化
     return [[IMAMsg alloc] initWith:msg type:EIMAMSG_Text];
 }

@@ -7,6 +7,7 @@
 //
 
 #import "IMAPlatform.h"
+#import "ChatManager.h"
 
 #import "AppConfig.h"
 
@@ -120,7 +121,7 @@ static Class kHostClass = Nil;
 {
     TIMManager *manager = [TIMManager sharedInstance];
     
-    [manager setEnv:cfg.environment];
+//    [manager setEnv:cfg.environment];
     
     TIMSdkConfig *config = [[TIMSdkConfig alloc] init];
     config.disableLogPrint = !cfg.enableConsoleLog;
@@ -128,8 +129,9 @@ static Class kHostClass = Nil;
 //    config.sdkAppId = [[AppConfig config].chatAppId intValue];
 //    config.accountType = [AppConfig config].chatAccountType;
     
-    config.sdkAppId = 1400050575;
-    config.accountType = @"19287";
+   
+    config.sdkAppId = CHAT_APP_ID  ;
+    config.accountType = CHAT_ACCOUNT_TYPE;
     
     config.disableCrashReport = NO;
     config.connListener = self;

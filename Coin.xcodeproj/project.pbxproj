@@ -450,6 +450,10 @@
 		2EE361271FFA09A800A5C3EB /* ChatInputTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE360CD1FFA09A800A5C3EB /* ChatInputTextView.m */; };
 		2EE361281FFA09A800A5C3EB /* TIMElem+ChatAttachment.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE360CF1FFA09A800A5C3EB /* TIMElem+ChatAttachment.m */; };
 		2EE3612D1FFA1B2F00A5C3EB /* ChatInputToolBarDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE3612C1FFA1B2F00A5C3EB /* ChatInputToolBarDelegate.m */; };
+		2EE361301FFA6CF000A5C3EB /* TLSUI.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2EE3612E1FFA6CEE00A5C3EB /* TLSUI.bundle */; };
+		2EE361311FFA6CF000A5C3EB /* TLSUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EE3612F1FFA6CEF00A5C3EB /* TLSUI.framework */; };
+		2EE361341FFA6EB800A5C3EB /* TestVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE361331FFA6EB800A5C3EB /* TestVC.m */; };
+		2EE361361FFB7D4500A5C3EB /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 2EE361351FFB7D4500A5C3EB /* README.md */; };
 		2EE950C01FB05B2400429257 /* TLHangQingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE950BF1FB05B2400429257 /* TLHangQingVC.m */; };
 		2EE950C31FB05B4500429257 /* TLWalletVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE950C21FB05B4500429257 /* TLWalletVC.m */; };
 		2EE950C61FB05B5900429257 /* TLMineVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE950C51FB05B5900429257 /* TLMineVC.m */; };
@@ -1401,6 +1405,11 @@
 		2EE3612A1FFA167100A5C3EB /* ImageHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageHeader.h; sourceTree = "<group>"; };
 		2EE3612B1FFA1B2F00A5C3EB /* ChatInputToolBarDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatInputToolBarDelegate.h; sourceTree = "<group>"; };
 		2EE3612C1FFA1B2F00A5C3EB /* ChatInputToolBarDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatInputToolBarDelegate.m; sourceTree = "<group>"; };
+		2EE3612E1FFA6CEE00A5C3EB /* TLSUI.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TLSUI.bundle; sourceTree = "<group>"; };
+		2EE3612F1FFA6CEF00A5C3EB /* TLSUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TLSUI.framework; sourceTree = "<group>"; };
+		2EE361321FFA6EB800A5C3EB /* TestVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestVC.h; sourceTree = "<group>"; };
+		2EE361331FFA6EB800A5C3EB /* TestVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestVC.m; sourceTree = "<group>"; };
+		2EE361351FFB7D4500A5C3EB /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		2EE950BE1FB05B2400429257 /* TLHangQingVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLHangQingVC.h; sourceTree = "<group>"; };
 		2EE950BF1FB05B2400429257 /* TLHangQingVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLHangQingVC.m; sourceTree = "<group>"; };
 		2EE950C11FB05B4500429257 /* TLWalletVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLWalletVC.h; sourceTree = "<group>"; };
@@ -1460,6 +1469,7 @@
 				211C01421FC6600300E51FCF /* ImSDK.framework in Frameworks */,
 				21C91D8D1FDBD64D006EDB16 /* AlipaySDK.framework in Frameworks */,
 				211C01471FC6600300E51FCF /* IMMessageExt.framework in Frameworks */,
+				2EE361311FFA6CF000A5C3EB /* TLSUI.framework in Frameworks */,
 				211C01461FC6600300E51FCF /* IMGroupExt.framework in Frameworks */,
 				211C01451FC6600300E51FCF /* IMFriendshipExt.framework in Frameworks */,
 				2EFFE6B51FF6289600BFCC40 /* libsqlite3.0.tbd in Frameworks */,
@@ -1745,6 +1755,8 @@
 		211C013B1FC6600300E51FCF /* 腾讯云 */ = {
 			isa = PBXGroup;
 			children = (
+				2EE3612E1FFA6CEE00A5C3EB /* TLSUI.bundle */,
+				2EE3612F1FFA6CEF00A5C3EB /* TLSUI.framework */,
 				211C013C1FC6600300E51FCF /* ImSDK.framework */,
 				211C013D1FC6600300E51FCF /* TLSSDK.framework */,
 				211C013E1FC6600300E51FCF /* QALSDK.framework */,
@@ -3356,6 +3368,7 @@
 				2E394FEB1FB0575A00BA0829 /* AppDelegate.m */,
 				2EB039B41FEA0B4500589D8E /* TLUpdateVC.h */,
 				2EB039B31FEA0B4500589D8E /* TLUpdateVC.m */,
+				2EE361351FFB7D4500A5C3EB /* README.md */,
 				2E394FB01FB055DE00BA0829 /* 交易 */,
 				2E394FA81FB055DE00BA0829 /* 订单 */,
 				2E394FB41FB055DE00BA0829 /* 行情 */,
@@ -3367,6 +3380,8 @@
 				211DE63B1FB58B4B002FCF3D /* Utils */,
 				2EFFE6BF1FF62DE800BFCC40 /* XGPushHandler.h */,
 				2EFFE6C01FF62DE800BFCC40 /* XGPushHandler.m */,
+				2EE361321FFA6EB800A5C3EB /* TestVC.h */,
+				2EE361331FFA6EB800A5C3EB /* TestVC.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -4082,8 +4097,10 @@
 				2EE361111FFA09A800A5C3EB /* 5.gif in Resources */,
 				2EE361091FFA09A800A5C3EB /* 32.gif in Resources */,
 				2EE361081FFA09A800A5C3EB /* 26.gif in Resources */,
+				2EE361361FFB7D4500A5C3EB /* README.md in Resources */,
 				21C91D8C1FDBD64D006EDB16 /* AlipaySDK.bundle in Resources */,
 				2EB9495C1FDF6B1A00CE4B94 /* TraditionalCode.txt in Resources */,
+				2EE361301FFA6CF000A5C3EB /* TLSUI.bundle in Resources */,
 				2EE361051FFA09A800A5C3EB /* 23.gif in Resources */,
 				2EE361181FFA09A800A5C3EB /* 8.gif in Resources */,
 			);
@@ -4501,6 +4518,7 @@
 				2E3950031FB05AF200BA0829 /* TLOrderVC.m in Sources */,
 				21A7F3191FB2E2F900FAA0A2 /* TLAccountBaseVC.m in Sources */,
 				21CB94F51FDC179700CAB090 /* PersonalModel.m in Sources */,
+				2EE361341FFA6EB800A5C3EB /* TestVC.m in Sources */,
 				211DE6B21FB58B4C002FCF3D /* UIButton+Custom.m in Sources */,
 				211DE6171FB54685002FCF3D /* WalletCell.m in Sources */,
 				211C03F31FC6604800E51FCF /* MenuButton.m in Sources */,

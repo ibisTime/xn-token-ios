@@ -198,7 +198,7 @@
     http.code = @"625243";
     http.showView = self.view;
     http.parameters[@"code"] = self.order.code;
-//    http.parameters[@"updater"] = [TLUser user].userId;
+    http.parameters[@"updater"] = [TLUser user].userId;
     http.parameters[@"remark"] = @"标记打款";
     http.parameters[@"token"] = [TLUser user].token;
 
@@ -229,7 +229,7 @@
     http.code = @"625244";
     http.showView = self.view;
     http.parameters[@"code"] = self.order.code;
-//    http.parameters[@"updater"] = [TLUser user].userId;
+    http.parameters[@"updater"] = [TLUser user].userId;
     http.parameters[@"remark"] = [LangSwitcher switchLang:@"释放货币" key:nil];
     http.parameters[@"token"] = [TLUser user].token;
 
@@ -258,7 +258,7 @@
     http.code = @"625245";
     http.showView = self.view;
     http.parameters[@"code"] = self.order.code;
-//    http.parameters[@"userId"] = [TLUser user].userId;
+    http.parameters[@"userId"] = [TLUser user].userId;
     http.parameters[@"comment"] = result;
     http.parameters[@"token"] = [TLUser user].token;
 
@@ -290,7 +290,7 @@
     http.code = @"625246";
     http.showView = self.view;
     http.parameters[@"code"] = self.order.code;
-//    http.parameters[@"applyUser"] = [TLUser user].userId;
+    http.parameters[@"applyUser"] = [TLUser user].userId;
     http.parameters[@"reason"] = reason;
     http.parameters[@"token"] = [TLUser user].token;
 

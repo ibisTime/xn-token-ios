@@ -10,6 +10,7 @@
 #import <UserNotifications/UserNotifications.h>
 #import "AppConfig.h"
 #import "TLUser.h"
+#import "ChatManager.h"
 
 @implementation IMAPlatform (AppConfig)
 
@@ -116,6 +117,7 @@
 }
 
 // app 注册APNS成功后
+// 并且IM登录成功之后
 - (void)configOnAppRegistAPNSWithDeviceToken:(NSData *)deviceToken
 {
     DebugLog(@"didRegisterForRemoteNotificationsWithDeviceToken:%ld", (unsigned long)deviceToken.length);
@@ -128,34 +130,29 @@
     if ([AppConfig config].runEnv == RunEnvDev ||
          [AppConfig config].runEnv == RunEnvTest ) {
         
-        param.busiId = 7015;
+//        param.busiId = 7015;
+        param.busiId = PUSH_DEV_BUSI_ID;
 
     } else {
         
         param.busiId = 6898;
 
     }
-
+    NSLog(@"%d",param.busiId);
     param.token = deviceToken;
+   
     //需要在登录之后，在进行token设置
     [[TIMManager sharedInstance] setToken:param succ:^{
        
-//        NSLog(@"-----> 上传token成功 ");
+        NSLog(@"-----> 上传token成功 ");
         
     } fail:^(int code, NSString *msg) {
         
-//     NSLog(@"-----> 上传token失败 ");
+     NSLog(@"-----> 上传token失败 ");
         
     }];
     
-//    TIMAPNSConfig *config = [[TIMAPNSConfig alloc] init];
-//    [config setOpenPush:1];
-//    [[TIMManager sharedInstance] setAPNS:config succ:^{
-//
-//
-//    } fail:^(int code, NSString *msg) {
-//
-//    }];
+ 
     
     
 //    [[TIMManager sharedInstance] getAPNSConfig:^(TIMAPNSConfig *config) {
@@ -181,7 +178,9 @@
     NSString *body = content.body;    // 推送消息体
     UNNotificationSound *sound = content.sound;  // 推送消息的声音
     NSString *subtitle = content.subtitle;  // 推送消息的副标题
-    NSString *title = content.title;  // 推送消息的标题
+    
+    //content.title
+    NSString *title = @"我的妈啊" ;  // 推送消息的标题
     
     if([notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
         
@@ -204,21 +203,33 @@
 didReceiveNotificationResponse:(UNNotificationResponse *)response
          withCompletionHandler:(void(^)())completionHandler{
     
-    NSDictionary * userInfo = response.notification.request.content.userInfo;
     UNNotificationRequest *request = response.notification.request; // 收到推送的请求
     UNNotificationContent *content = request.content; // 收到推送的消息内容
+    
+    NSDictionary * userInfo = content.userInfo;
     NSNumber *badge = content.badge;  // 推送消息的角标
     NSString *body = content.body;    // 推送消息体
     UNNotificationSound *sound = content.sound;  // 推送消息的声音
     NSString *subtitle = content.subtitle;  // 推送消息的副标题
     NSString *title = content.title;  // 推送消息的标题
-    if([response.notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
-        NSLog(@"iOS10 收到远程通知:%@", [self logDic:userInfo]);
+    
+    //
+    NSString *ext = userInfo[@"ext"];
+    if (userInfo && ext) {
         
-    } else {
-        // 判断为本地通知
-        NSLog(@"iOS10 收到本地通知:{\\\\nbody:%@，\\\\ntitle:%@,\\\\nsubtitle:%@,\\\\nbadge：%@，\\\\nsound：%@，\\\\nuserInfo：%@\\\\n}",body,title,subtitle,badge,sound,userInfo);
+        NSLog(@"%@",ext);
+        
     }
+//    if([response.notification.request.trigger
+//        isKindOfClass:[UNPushNotificationTrigger class]]) {
+//
+//        NSLog(@"iOS10 收到远程通知:%@", [self logDic:userInfo]);
+//
+//    } else {
+        // 判断为本地通知
+        NSLog(@"++++0-----%@",userInfo);
+        NSLog(@"iOS10 收到本地通知:{\\\\nbody:%@，\\\\ntitle:%@,\\\\nsubtitle:%@,\\\\nbadge：%@，\\\\nsound：%@，\\\\nuserInfo：%@\\\\n}",body,title,subtitle,badge,sound,userInfo);
+//    }
     
     // Warning: UNUserNotificationCenter delegate received call to -userNotificationCenter:didReceiveNotificationResponse:withCompletionHandler: but the completion handler was never called.
     completionHandler();  // 系统要求执行这个方法

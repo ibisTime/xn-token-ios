@@ -13,12 +13,29 @@
 
 
 // 以下为国际化的key
-//"ios.ZDKRequests.createRequest.error.request" = "Falha ao enviar a solicitação";
-//"ios.ZDKRequests.createRequest.requestSubject" = "Solicitação do aplicativo";
-//"ios.ZDKRequests.requestList.empty" = "Nenhuma solicitação aberta no momento";
-//"ios.ZDKRequests.requestList.error" = "Falha ao obter as solicitações";
-//"ios.ZDKRequests.requestList.title" = "Minhas Solicitações";
-//"ios.ZDKRequests.rightBarButton.title.new" = "Nova";
+//"ios.ZDKRequests.createRequest.error.request" = "7";
+//"ios.ZDKRequests.createRequest.requestSubject" = "6";
+
+//"ios.ZDKRequests.requestList.empty" = "5";
+//"ios.ZDKRequests.requestList.error" = "4";
+//"ios.ZDKRequests.requestList.title" = "3";
+
+
+//"ios.ZDKRequests.rightBarButton.title.new" = "1";
 //"ios.ZDKRequests.rightBarButton.title.contact" = "Nova Solicitação";
-//"ios.ZDKHelpCenter.support.contactSupport" = "Nova Solicitação";
+
+
+//"ios.ZDKHelpCenter.support.contactSupport" = "2";
+
+// 请求
+"ios.ZDKRequests.createRequest.title" = "提交工单";
+//"ios.ZDKRequests.requestList.empty" = "No tickets currently open";
+//"ios.ZDKRequests.createRequest.cancel.button" = "Cancel"
+//"ios.ZDKRequests.createRequest.submit.button" = "Send"
+//"ios.ZDKRequests.createRequest.title" = "Contact us"
+//"ios.ZDKRequests.createRequest.description.placeholder" = "Description"
+//"ios.ZDKRequests.createRequest.email.placeholder" = "Your email address";
+//"ios.ZDKRequests.createRequest.requestSubject" = "App ticket"
+
+
 

@@ -19,6 +19,7 @@
 #import "ChatHeadRefreshView.h"
 #import "IMAMsg+UITableViewCell.h"
 #import "ChatHeaders.h"
+#import "TLUser.h"
 
 @interface ChatViewController ()
 
@@ -342,7 +343,9 @@
     {
         
         NSInteger index = [_messageList indexOfObject:msglist.lastObject];
-        [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:NO];
+        [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]
+                          atScrollPosition:UITableViewScrollPositionBottom
+                                  animated:NO];
     }
 }
 
@@ -354,6 +357,25 @@
 //        _isSendMsg = YES;
         [_tableView beginUpdates];
         
+        //
+        TIMElem *el = [msg.msg getElem:0];
+        if ([el isKindOfClass:[TIMTextElem class]]) {
+            
+            TIMTextElem *textElem = (TIMTextElem *)el;
+            TIMOfflinePushInfo *info = [[TIMOfflinePushInfo alloc] init];
+            //设置
+            info.desc = [NSString stringWithFormat:@"订单（%@）:%@",
+                         [TLUser user].nickname,
+                         textElem.text];
+            //设置订单号
+//            info.ext = _conversation.receiver;
+            info.ext = @"扩展";
+            [msg.msg setOfflinePushInfo:info];
+            
+        } else {
+            //其它消息，暂不进行设置
+            
+        }
         __weak ChatViewController *ws = self;
         DebugLog(@"will sendmessage");
 
@@ -836,7 +858,21 @@
         }
         
         //
-        NSString *text =  [textElem.text stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        NSString *text = nil;
+        
+        //
+       NSString *shouldRes = [textElem.text stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        if (!shouldRes || shouldRes.length <= 0) {
+            
+            text  = textElem.text;
+
+            
+        } else {
+            
+            text = shouldRes;
+
+            
+        }
         
         //
         cell.textLabel.text = [LangSwitcher switchLang:text key:nil];

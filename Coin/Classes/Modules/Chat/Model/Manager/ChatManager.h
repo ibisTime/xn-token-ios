@@ -7,6 +7,23 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "IMAPlatform+AppConfig.h"
+
+#define CHAT_APP_ID 1400050575
+#define CHAT_ACCOUNT_TYPE @"19287"
+#define PUSH_DEV_BUSI_ID 7017
+
+
+//托管模式
+//#define CHAT_APP_ID 1400056456
+//#define CHAT_ACCOUNT_TYPE @"21025"
+//#define PUSH_DEV_BUSI_ID 7016
+
+
+
+// MAPlatform+AppConfig.h 中设置了推送
+// IMAPlatform( AppConfig )
+
 
 @interface ChatManager : NSObject
 
@@ -28,6 +45,8 @@
 // @return  或者 IMAGroup
 // */
 //- (IMAGroup *)getGroupByGroupId:(NSString *)groupId;
+
+- (void)loginWithParam:(IMALoginParam *)loginParam;
 
 /**
    应用启动一次，初始化一次即可

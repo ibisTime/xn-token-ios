@@ -31,8 +31,8 @@
 #import "LangSwitcher.h"
 #import <ZDCChat/ZDCChat.h>
 #import "CoinUtil.h"
-#import "XGPush.h"
-#import "XGPushHandler.h"
+//#import "XGPush.h"
+//#import "XGPushHandler.h"
 //// 引入JPush功能所需头文件
 //#import "JPUSHService.h"
 //// iOS10注册APNs所需头文件
@@ -42,7 +42,7 @@
 //// 如果需要使用idfa功能所需要引入的头文件（可选）
 //#import <AdSupport/AdSupport.h>
 
-@interface AppDelegate ()<XGPushDelegate,XGPushTokenManagerDelegate>
+@interface AppDelegate ()
 
 @property (nonatomic, strong) FBKVOController *chatKVOCtrl;
 @property (nonatomic, copy) NSArray *cpArr;
@@ -55,7 +55,7 @@
 
 
     //服务器环境
-    [AppConfig config].runEnv = RunEnvDev;
+    [AppConfig config].runEnv = RunEnvTest;
     
     //配置微信
     [self configWeChat];
@@ -107,11 +107,11 @@
 //            advertisingIdentifier:nil];
     
     //信鸽推送测试
-    XGPush *xgPush = [XGPush defaultManager];
-    [xgPush setEnableDebug:YES ];
-    [xgPush startXGWithAppID:2200274297
-                      appKey:@"I87LJLXV417N"
-                    delegate:nil];
+//    XGPush *xgPush = [XGPush defaultManager];
+//    [xgPush setEnableDebug:YES ];
+//    [xgPush startXGWithAppID:2200274297
+//                      appKey:@"I87LJLXV417N"
+//                    delegate:nil];
     
     [[IMAPlatform sharedInstance] configOnAppLaunchWithOptions:launchOptions];
     
@@ -125,19 +125,19 @@
     
 }
 
-- (void)xgPushDidBindWithIdentifier:(nullable NSString *)identifier type:(XGPushTokenBindType)type error:(nullable NSError *)error {
-  
-    NSLog(@"已经绑定");
-    
-}
+//- (void)xgPushDidBindWithIdentifier:(nullable NSString *)identifier type:(XGPushTokenBindType)type error:(nullable NSError *)error {
+//
+//    NSLog(@"已经绑定");
+//
+//}
 
 //
-- (void)xgPushDidUnbindWithIdentifier:(nullable NSString *)identifier type:(XGPushTokenBindType)type error:(nullable NSError *)error {
-    
-    NSLog(@"已经解绑");
-
-    
-}
+//- (void)xgPushDidUnbindWithIdentifier:(nullable NSString *)identifier type:(XGPushTokenBindType)type error:(nullable NSError *)error {
+//
+//    NSLog(@"已经解绑");
+//
+//
+//}
 
 
 - (void)xgPushDidFinishStart:(BOOL)isSuccess error:(nullable NSError *)error {
@@ -146,37 +146,37 @@
 }
 
 
-- (void)xgPushDidFinishStop:(BOOL)isSuccess error:(nullable NSError *)error {
-    
-}
+//- (void)xgPushDidFinishStop:(BOOL)isSuccess error:(nullable NSError *)error {
+//
+//}
+//
+//- (void)xgPushDidReportNotification:(BOOL)isSuccess error:(nullable NSError *)error {
+//
+//
+//}
 
-- (void)xgPushDidReportNotification:(BOOL)isSuccess error:(nullable NSError *)error {
-    
-    
-}
-
-- (void)xgPushUserNotificationCenter:(nonnull UNUserNotificationCenter *)center
-             willPresentNotification:(nullable UNNotification *)notification
-               withCompletionHandler:(nonnull void (^)(UNNotificationPresentationOptions options))completionHandler {
-    
-    [[XGPush defaultManager] reportXGNotificationInfo:notification.request.content.userInfo];
-    
-    completionHandler(UNNotificationPresentationOptionBadge | UNNotificationPresentationOptionSound | UNNotificationPresentationOptionAlert);
-    NSLog(@"收到通知");
-    
-}
+//- (void)xgPushUserNotificationCenter:(nonnull UNUserNotificationCenter *)center
+//             willPresentNotification:(nullable UNNotification *)notification
+//               withCompletionHandler:(nonnull void (^)(UNNotificationPresentationOptions options))completionHandler {
+//
+//    [[XGPush defaultManager] reportXGNotificationInfo:notification.request.content.userInfo];
+//
+//    completionHandler(UNNotificationPresentationOptionBadge | UNNotificationPresentationOptionSound | UNNotificationPresentationOptionAlert);
+//    NSLog(@"收到通知");
+//
+//}
 
 //- (void)xgPushUserNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler {
 //
 //}
 
-- (void)xgPushUserNotificationCenter:(nonnull UNUserNotificationCenter *)center
-      didReceiveNotificationResponse:(nullable UNNotificationResponse *)response
-               withCompletionHandler:(nonnull void (^)(void))completionHandler {
-    
-    completionHandler();
-    
-}
+//- (void)xgPushUserNotificationCenter:(nonnull UNUserNotificationCenter *)center
+//      didReceiveNotificationResponse:(nullable UNNotificationResponse *)response
+//               withCompletionHandler:(nonnull void (^)(void))completionHandler {
+//    
+//    completionHandler();
+//    
+//}
 
 // iOS 10 Support
 //- (void)jpushNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(NSInteger))completionHandler {
@@ -257,7 +257,8 @@
     UITabBarController *tabbarContrl = (UITabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
     tabbarContrl.selectedIndex = 0;
     [tabbarContrl.tabBar hideBadgeOnItemIndex:1];
-//  [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+    //应用外数量为0
+    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
     
 }
 

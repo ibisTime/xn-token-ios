@@ -5,5 +5,5 @@
   Created by  tianlei on 2017/12/28.
   Copyright © 2017年  tianlei. All rights reserved.
 */
-//"ios.ZDKRequests.rightBarButton.title.contact" = "提交工單";
-
+"ios.ZDKRequests.rightBarButton.title.contact" = "提交工單";
+"ios.ZDKRequests.createRequest.title" = "提交工單";

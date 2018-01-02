@@ -201,11 +201,15 @@
 
 - (void)onChatInput:(UIView<ChatInputAbleView> *)chatInput sendMsg:(IMAMsg *)text
 {
+
+    //
+    NSLog(@"%d",text.msg.getOfflinePushInfo.pushFlag);
     [self sendMsg:text];
     NSMutableArray *elems = [NSMutableArray array];
-    for (int index =0 ; index < text.msg.elemCount; index++ )
-    {
+    for (int index =0 ; index < text.msg.elemCount; index++ ) {
+        
         [elems addObject:[text.msg getElem:index]];
+        
     }
     NSLog(@"%d",text.msg.elemCount);
 }
