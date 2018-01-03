@@ -46,9 +46,6 @@
 
 }
 
-
-
-
 - (void)updateApp {
     
     NSString *appId = @"1264435742"; //test

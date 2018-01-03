@@ -83,7 +83,7 @@
     [[IQKeyboardManager sharedManager] setEnable:YES];
 
     //
-    if ([TLUser user].userId) {
+    if ([[TLUser user] checkLogin]) {
         [self requestUserStatistInfo];
     }
     

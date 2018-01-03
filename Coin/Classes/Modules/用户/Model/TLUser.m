@@ -224,6 +224,8 @@ NSString *const kGoogleAuthClose = @"0";
 
     self.userId = nil;
     self.token = nil;
+    //
+    //
     self.photo = nil;
     self.mobile = nil;
     self.nickname = nil;
@@ -250,13 +252,13 @@ NSString *const kGoogleAuthClose = @"0";
 
 - (void)saveUserInfo:(NSDictionary *)userInfo {
 
-    NSLog(@"原%@--现%@",[TLUser user].userId,userInfo[@"userId"]);
+//    NSLog(@"原%@--现%@",[TLUser user].userId,userInfo[@"userId"]);
     
-    if (![[TLUser user].userId isEqualToString:userInfo[@"userId"]]) {
-        
-        @throw [NSException exceptionWithName:[LangSwitcher switchLang:@"用户信息错误" key:nil] reason:[LangSwitcher switchLang:@"后台原因" key:nil] userInfo:nil];
-        
-    }
+//    if (![[TLUser user].userId isEqualToString:userInfo[@"userId"]]) {
+//        
+//        @throw [NSException exceptionWithName:[LangSwitcher switchLang:@"用户信息错误" key:nil] reason:[LangSwitcher switchLang:@"后台原因" key:nil] userInfo:nil];
+//        
+//    }
     
     [[NSUserDefaults standardUserDefaults] setObject:userInfo forKey:USER_INFO_DICT_KEY];
     //
@@ -333,7 +335,6 @@ NSString *const kGoogleAuthClose = @"0";
 - (void)setGoogleAuthFlag:(NSString *)googleAuthFlag {
     
     _googleAuthFlag = googleAuthFlag;
-    
     _isGoogleAuthOpen = [googleAuthFlag isEqualToString:kGoogleAuthOpen] ? YES: NO;
     
 }

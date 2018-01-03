@@ -55,7 +55,7 @@
 
 
     //服务器环境
-    [AppConfig config].runEnv = RunEnvTest;
+    [AppConfig config].runEnv = RunEnvRelease;
     
     //配置微信
     [self configWeChat];
@@ -120,6 +120,9 @@
 //    [XGPushTokenManager defaultTokenManager].delegatge = self;
 
 //    NSLog(@"%@",[XGPushTokenManager defaultTokenManager].delegatge);
+    
+    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+    //
     return YES;
     
     

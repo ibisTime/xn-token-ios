@@ -126,11 +126,8 @@
     helper.parameters[@"maxPrice"] = self.maxPrice;
     helper.parameters[@"payType"] = self.payType;
     helper.parameters[@"tradeType"] = self.advertiseType;
-    
     helper.tableView = self.tableView;
-    
     [helper modelClass:[AdvertiseModel class]];
-    
     [self.tableView addRefreshAction:^{
         
         [helper refresh:^(NSMutableArray <AdvertiseModel *>*objs, BOOL stillHave) {

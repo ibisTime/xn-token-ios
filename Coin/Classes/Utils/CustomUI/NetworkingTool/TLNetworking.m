@@ -94,11 +94,13 @@
 
         }
         
-        if ([TLUser user].token) {
-            
-            self.parameters[@"token"] = [TLUser user].token;
-            
-        }
+        
+        // 此处真实巨坑
+//        if ([TLUser user].token && [TLUser user].token.length > 0) {
+//
+//            self.parameters[@"token"] = [TLUser user].token;
+//
+//        }
         
         self.parameters[@"companyCode"] = [[self class] companyCode];
         
