@@ -62,7 +62,6 @@
     CoinWeakSelf;
     
     self.alpha = 0;
-    
     self.backgroundColor = [UIColor colorWithUIColor:kBlackColor alpha:0.4];
     
     //背景
@@ -210,7 +209,6 @@
     [UIView animateWithDuration:0.3 animations:^{
         
         self.alpha = 0;
-        
         self.pickerView.transform = CGAffineTransformIdentity;
         
     } completion:^(BOOL finished) {

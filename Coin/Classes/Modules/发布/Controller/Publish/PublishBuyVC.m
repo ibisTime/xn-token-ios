@@ -421,11 +421,8 @@
     
     helper.start = 1;
     helper.limit = 30;
-    
     helper.parameters[@"type"] = @"buy_ads_hint";
-    
     [helper modelClass:[KeyValueModel class]];
-    
     [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
         
         self.publishView.values = objs;

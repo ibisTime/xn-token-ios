@@ -31,6 +31,7 @@
 #import "LangSwitcher.h"
 #import <ZDCChat/ZDCChat.h>
 #import "CoinUtil.h"
+#import "TLPublishSellVC.h"
 //#import "XGPush.h"
 //#import "XGPushHandler.h"
 //// 引入JPush功能所需头文件
@@ -41,6 +42,7 @@
 //#endif
 //// 如果需要使用idfa功能所需要引入的头文件（可选）
 //#import <AdSupport/AdSupport.h>
+#import "TLPublishInputView.h"
 
 @interface AppDelegate ()
 
@@ -52,7 +54,6 @@
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-
 
     //服务器环境
     [AppConfig config].runEnv = RunEnvRelease;
@@ -121,10 +122,17 @@
 
 //    NSLog(@"%@",[XGPushTokenManager defaultTokenManager].delegatge);
     
+    [self test];
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
     //
     return YES;
     
+    
+}
+
+- (void)test {
+    
+  
     
 }
 

@@ -454,6 +454,13 @@
 		2EE361311FFA6CF000A5C3EB /* TLSUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EE3612F1FFA6CEF00A5C3EB /* TLSUI.framework */; };
 		2EE361341FFA6EB800A5C3EB /* TestVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE361331FFA6EB800A5C3EB /* TestVC.m */; };
 		2EE361361FFB7D4500A5C3EB /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 2EE361351FFB7D4500A5C3EB /* README.md */; };
+		2EE361391FFC727900A5C3EB /* TLPublishInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE361381FFC727900A5C3EB /* TLPublishInputView.m */; };
+		2EE3613F1FFC738700A5C3EB /* TLBaseLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE3613E1FFC738700A5C3EB /* TLBaseLabel.m */; };
+		2EE361421FFC7A3500A5C3EB /* TLPublishSellVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE361411FFC7A3500A5C3EB /* TLPublishSellVC.m */; };
+		2EE361481FFCA49700A5C3EB /* TLAdpaterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE361471FFCA49700A5C3EB /* TLAdpaterView.m */; };
+		2EE3614B1FFCAF3B00A5C3EB /* TLHighLevelSettingsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE3614A1FFCAF3B00A5C3EB /* TLHighLevelSettingsView.m */; };
+		2EE3614F1FFD1AF400A5C3EB /* TLSingleTimeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE3614E1FFD1AF400A5C3EB /* TLSingleTimeView.m */; };
+		2EE361521FFD1CB200A5C3EB /* TLPublishTimeChooseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE361511FFD1CB200A5C3EB /* TLPublishTimeChooseView.m */; };
 		2EE950C01FB05B2400429257 /* TLHangQingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE950BF1FB05B2400429257 /* TLHangQingVC.m */; };
 		2EE950C31FB05B4500429257 /* TLWalletVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE950C21FB05B4500429257 /* TLWalletVC.m */; };
 		2EE950C61FB05B5900429257 /* TLMineVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE950C51FB05B5900429257 /* TLMineVC.m */; };
@@ -1410,6 +1417,20 @@
 		2EE361321FFA6EB800A5C3EB /* TestVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestVC.h; sourceTree = "<group>"; };
 		2EE361331FFA6EB800A5C3EB /* TestVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestVC.m; sourceTree = "<group>"; };
 		2EE361351FFB7D4500A5C3EB /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		2EE361371FFC727900A5C3EB /* TLPublishInputView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLPublishInputView.h; sourceTree = "<group>"; };
+		2EE361381FFC727900A5C3EB /* TLPublishInputView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLPublishInputView.m; sourceTree = "<group>"; };
+		2EE3613D1FFC738700A5C3EB /* TLBaseLabel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLBaseLabel.h; sourceTree = "<group>"; };
+		2EE3613E1FFC738700A5C3EB /* TLBaseLabel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLBaseLabel.m; sourceTree = "<group>"; };
+		2EE361401FFC7A3500A5C3EB /* TLPublishSellVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLPublishSellVC.h; sourceTree = "<group>"; };
+		2EE361411FFC7A3500A5C3EB /* TLPublishSellVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLPublishSellVC.m; sourceTree = "<group>"; };
+		2EE361461FFCA49700A5C3EB /* TLAdpaterView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLAdpaterView.h; sourceTree = "<group>"; };
+		2EE361471FFCA49700A5C3EB /* TLAdpaterView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLAdpaterView.m; sourceTree = "<group>"; };
+		2EE361491FFCAF3B00A5C3EB /* TLHighLevelSettingsView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLHighLevelSettingsView.h; sourceTree = "<group>"; };
+		2EE3614A1FFCAF3B00A5C3EB /* TLHighLevelSettingsView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLHighLevelSettingsView.m; sourceTree = "<group>"; };
+		2EE3614D1FFD1AF400A5C3EB /* TLSingleTimeView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLSingleTimeView.h; sourceTree = "<group>"; };
+		2EE3614E1FFD1AF400A5C3EB /* TLSingleTimeView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLSingleTimeView.m; sourceTree = "<group>"; };
+		2EE361501FFD1CB200A5C3EB /* TLPublishTimeChooseView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLPublishTimeChooseView.h; sourceTree = "<group>"; };
+		2EE361511FFD1CB200A5C3EB /* TLPublishTimeChooseView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLPublishTimeChooseView.m; sourceTree = "<group>"; };
 		2EE950BE1FB05B2400429257 /* TLHangQingVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLHangQingVC.h; sourceTree = "<group>"; };
 		2EE950BF1FB05B2400429257 /* TLHangQingVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLHangQingVC.m; sourceTree = "<group>"; };
 		2EE950C11FB05B4500429257 /* TLWalletVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLWalletVC.h; sourceTree = "<group>"; };
@@ -2415,6 +2436,8 @@
 			isa = PBXGroup;
 			children = (
 				211CF9931FC426BB00E51FCF /* Publish */,
+				2EE361401FFC7A3500A5C3EB /* TLPublishSellVC.h */,
+				2EE361411FFC7A3500A5C3EB /* TLPublishSellVC.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2422,8 +2445,15 @@
 		211CEF041FCBB72E000FB0C4 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				2EE3614C1FFD1AB600A5C3EB /* TimeChoose */,
 				211FAC491FC26A7900DC37B0 /* PublishSell */,
 				211FAC481FC26A6800DC37B0 /* PublishBuy */,
+				2EE361371FFC727900A5C3EB /* TLPublishInputView.h */,
+				2EE361381FFC727900A5C3EB /* TLPublishInputView.m */,
+				2EE361461FFCA49700A5C3EB /* TLAdpaterView.h */,
+				2EE361471FFCA49700A5C3EB /* TLAdpaterView.m */,
+				2EE361491FFCAF3B00A5C3EB /* TLHighLevelSettingsView.h */,
+				2EE3614A1FFCAF3B00A5C3EB /* TLHighLevelSettingsView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3584,6 +3614,8 @@
 				2E973FD21FDBC5B0005C2D5F /* BaseLabel.m */,
 				2E973FD41FDBC5CC005C2D5F /* BaseButton.h */,
 				2E973FD51FDBC5CC005C2D5F /* BaseButton.m */,
+				2EE3613D1FFC738700A5C3EB /* TLBaseLabel.h */,
+				2EE3613E1FFC738700A5C3EB /* TLBaseLabel.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3897,6 +3929,17 @@
 			path = GIF;
 			sourceTree = "<group>";
 		};
+		2EE3614C1FFD1AB600A5C3EB /* TimeChoose */ = {
+			isa = PBXGroup;
+			children = (
+				2EE3614D1FFD1AF400A5C3EB /* TLSingleTimeView.h */,
+				2EE3614E1FFD1AF400A5C3EB /* TLSingleTimeView.m */,
+				2EE361501FFD1CB200A5C3EB /* TLPublishTimeChooseView.h */,
+				2EE361511FFD1CB200A5C3EB /* TLPublishTimeChooseView.m */,
+			);
+			path = TimeChoose;
+			sourceTree = "<group>";
+		};
 		2EE950D41FB06AA900429257 /* BannerBrowser */ = {
 			isa = PBXGroup;
 			children = (
@@ -4196,6 +4239,7 @@
 				211C04241FC6604800E51FCF /* ADScaleTransition.m in Sources */,
 				211C04501FC6604800E51FCF /* IMAGroup+Admin.m in Sources */,
 				211CF9891FC3F2D100E51FCF /* TradeTableView.m in Sources */,
+				2EE361421FFC7A3500A5C3EB /* TLPublishSellVC.m in Sources */,
 				2125B8CA1FD95FD900591812 /* HomePageVC.m in Sources */,
 				211DE6BF1FB58B4C002FCF3D /* NSTimer+tlNoCycle.m in Sources */,
 				211A53221FBFE3A100CC6294 /* RateDescVC.m in Sources */,
@@ -4249,6 +4293,7 @@
 				2EE3612D1FFA1B2F00A5C3EB /* ChatInputToolBarDelegate.m in Sources */,
 				2182D2F41FC8057D008EDCE4 /* OrderDetailVC.m in Sources */,
 				2EB039981FE79ADF00589D8E /* UIColor+theme.m in Sources */,
+				2EE3613F1FFC738700A5C3EB /* TLBaseLabel.m in Sources */,
 				211EAD901FD0FC500037FBA8 /* UIViewController+BackButtonHander.m in Sources */,
 				21223CB71FBDB2D200057444 /* WebVC.m in Sources */,
 				2E394FFD1FB059C100BA0829 /* TLBaseVC.m in Sources */,
@@ -4380,6 +4425,7 @@
 				211CF9A11FC5491A00E51FCF /* BuyConfirmView.m in Sources */,
 				211C04611FC6604800E51FCF /* IMAContactManager.m in Sources */,
 				211C041A1FC6604800E51FCF /* NSDate+RFC1123.m in Sources */,
+				2EE361481FFCA49700A5C3EB /* TLAdpaterView.m in Sources */,
 				211C03FE1FC6604800E51FCF /* NSData+CRC.m in Sources */,
 				211DE6AD1FB58B4C002FCF3D /* TLAlert.m in Sources */,
 				21205CFD1FCD61D6003C6C7C /* CustomShareView.m in Sources */,
@@ -4391,6 +4437,7 @@
 				21205CEE1FCD5F5E003C6C7C /* HistoryInviteVC.m in Sources */,
 				211C04541FC6604800E51FCF /* IMAGroup.m in Sources */,
 				211A34E11FB4247800FEB71F /* MineModel.m in Sources */,
+				2EE3614F1FFD1AF400A5C3EB /* TLSingleTimeView.m in Sources */,
 				21A7F3631FB2F16C00FAA0A2 /* HTMLStrVC.m in Sources */,
 				211C05021FC6604900E51FCF /* NoticeTableView.m in Sources */,
 				211DE6B91FB58B4C002FCF3D /* NSDictionary+Extension.m in Sources */,
@@ -4420,6 +4467,7 @@
 				211C044E1FC6604800E51FCF /* IMAMsg+Draft.m in Sources */,
 				211C03F81FC6604800E51FCF /* UIView+Glow.m in Sources */,
 				2EE360ED1FFA09A800A5C3EB /* ChatSystemFacePageView.m in Sources */,
+				2EE3614B1FFCAF3B00A5C3EB /* TLHighLevelSettingsView.m in Sources */,
 				211C045C1FC6604800E51FCF /* IMAContactManager+Group.m in Sources */,
 				211CEF261FCC0451000FB0C4 /* KeyValueModel.m in Sources */,
 				211C044B1FC6604800E51FCF /* IMSDK+ShowAble.m in Sources */,
@@ -4528,7 +4576,9 @@
 				2EE360FA1FFA09A800A5C3EB /* RichChatViewController.m in Sources */,
 				2EE950C01FB05B2400429257 /* TLHangQingVC.m in Sources */,
 				211C03FC1FC6604800E51FCF /* UIViewController+ChildViewController.m in Sources */,
+				2EE361391FFC727900A5C3EB /* TLPublishInputView.m in Sources */,
 				211D3C121FCFE35E00B55F9F /* HistoryRateVC.m in Sources */,
+				2EE361521FFD1CB200A5C3EB /* TLPublishTimeChooseView.m in Sources */,
 				2EE361001FFA09A800A5C3EB /* ChatSystemFaceItem.m in Sources */,
 				2E973FD31FDBC5B0005C2D5F /* BaseLabel.m in Sources */,
 				2EE360F41FFA09A800A5C3EB /* ImageThumbPickerViewController.m in Sources */,

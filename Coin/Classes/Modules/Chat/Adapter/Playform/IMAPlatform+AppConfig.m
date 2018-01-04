@@ -130,25 +130,24 @@
     if ([AppConfig config].runEnv == RunEnvDev ||
          [AppConfig config].runEnv == RunEnvTest ) {
         
-//        param.busiId = 7015;
         param.busiId = PUSH_DEV_BUSI_ID;
 
     } else {
         
-        param.busiId = 6898;
+        param.busiId = PUSH_DIS_BUSI_ID;
 
     }
-    NSLog(@"%d",param.busiId);
+    //
     param.token = deviceToken;
    
     //需要在登录之后，在进行token设置
     [[TIMManager sharedInstance] setToken:param succ:^{
        
-        NSLog(@"-----> 上传token成功 ");
+//        NSLog(@"-----> 上传token成功 ");
         
     } fail:^(int code, NSString *msg) {
         
-     NSLog(@"-----> 上传token失败 ");
+//        NSLog(@"-----> 上传token失败 ");
         
     }];
     

@@ -26,6 +26,9 @@ typedef NS_ENUM(NSInteger, PublishType) {
 
 @end
 
+FOUNDATION_EXTERN NSString *const kPublishTradeTypeSell;
+FOUNDATION_EXTERN NSString *const kPublishTradeTypeBuy;
+
 FOUNDATION_EXTERN NSString *const kSaveDraft;
 FOUNDATION_EXTERN NSString *const kPublish;
 FOUNDATION_EXTERN NSString *const kPublishDraft;

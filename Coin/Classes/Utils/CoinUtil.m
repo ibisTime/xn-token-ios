@@ -11,23 +11,23 @@
 NSString *const kETH = @"ETH";
 NSString *const kBTC = @"BTC";
 
+NSString *const kCNY = @"CNY";
+
 #define NUM_10_18 @(1.0e+18)
 #define NUM_10_8 @(1.0e+8)
 #define SCALE 8
 
 @implementation CoinUtil
 
-
 + (NSString *)convertToRealCoin:(NSString *)count coin:(NSString *)coin {
     
     return [self convertCount:count scale:SCALE cardinality:[self getCardinality:coin]];
-
+    
 }
 
 + (NSString *)convertToSysCoin:(NSString *)count coin:(NSString *)coin {
     
     return [self mult1:count mult2:[[self getCardinality:coin] stringValue]];
-
     
 }
 
@@ -72,7 +72,7 @@ NSString *const kBTC = @"BTC";
     //保留8位小数,第九位舍去
     NSDecimalNumberHandler *handler = [NSDecimalNumberHandler decimalNumberHandlerWithRoundingMode:NSRoundBankers
                                                                                              scale:scale
-                                                                                  raiseOnExactness:NO raiseOnOverflow:NO raiseOnUnderflow:NO raiseOnDivideByZero:YES];
+                                                                                raiseOnExactness:NO raiseOnOverflow:NO raiseOnUnderflow:NO raiseOnDivideByZero:YES];
     
     NSDecimalNumber *m = [NSDecimalNumber decimalNumberWithString:count];
     NSDecimalNumber *n = [NSDecimalNumber decimalNumberWithString:[num stringValue]];

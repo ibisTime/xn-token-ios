@@ -10,7 +10,7 @@
 #import "CoinUtil.h"
 #import "LangSwitcher.h"
 
-NSString *const kCNY = @"CNY";
+//NSString *const kCNY = @"CNY";
 
 
 

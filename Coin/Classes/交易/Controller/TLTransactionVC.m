@@ -30,13 +30,14 @@
 #import "TLNavigationController.h"
 #import "TLUserLoginVC.h"
 #import "AdsService.h"
+#import "TLPublishSellVC.h"
 
 @interface TLTransactionVC ()<SegmentDelegate, RefreshDelegate, UIScrollViewDelegate>
 
 //货币切换
 @property (nonatomic, strong) CoinChangeView *changeView;
 ////筛选
-//@property (nonatomic, strong) FilterView *filterPicker;
+@property (nonatomic, strong) FilterView *filterPicker;
 //
 @property (nonatomic, strong) TLPageDataHelper *helper;
 
@@ -78,6 +79,13 @@
     
 }
 
+- (void)test {
+    
+    [self.navigationController pushViewController:[[TLPublishSellVC alloc] init] animated:YES];
+    
+//      [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:[[TLPublishSellVC alloc] init] animated:YES completion:nil];
+}
+
 - (void)viewDidLoad {
     
     [super viewDidLoad];
@@ -98,7 +106,7 @@
                                                 selector:@selector(refreshAds)
                                                 userInfo:nil
                                                  repeats:YES];
-
+    
 }
 
 - (void)refreshAds {
@@ -135,7 +143,7 @@
     
     coinChangeView.title = @"ETH";
     
-//    [coinChangeView addTarget:self action:@selector(changeCoin) forControlEvents:UIControlEventTouchUpInside];
+    [coinChangeView addTarget:self action:@selector(changeCoin) forControlEvents:UIControlEventTouchUpInside];
     
     self.changeView = coinChangeView;
     
@@ -227,35 +235,35 @@
     };
 }
 
-//- (FilterView *)filterPicker {
+- (FilterView *)filterPicker {
+
+    if (!_filterPicker) {
+
+        CoinWeakSelf;
+
+        NSArray *textArr = @[@"ETH"];
+
+//        NSArray *typeArr = @[@"", @"charge", @"withdraw", @"buy", @"sell"];
+
+        _filterPicker = [[FilterView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
+
+        _filterPicker.title = @"请选择货币类型";
+
+        _filterPicker.selectBlock = ^(NSInteger index) {
+
+            weakSelf.changeView.title = textArr[index];
+
+//            weakSelf.helper.parameters[@"bizType"] = typeArr[index];
 //
-//    if (!_filterPicker) {
-//
-//        CoinWeakSelf;
-//
-//        NSArray *textArr = @[@"ETH"];
-//
-////        NSArray *typeArr = @[@"", @"charge", @"withdraw", @"buy", @"sell"];
-//
-//        _filterPicker = [[FilterView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
-//
-//        _filterPicker.title = @"请选择货币类型";
-//
-//        _filterPicker.selectBlock = ^(NSInteger index) {
-//
-//            weakSelf.changeView.title = textArr[index];
-//
-////            weakSelf.helper.parameters[@"bizType"] = typeArr[index];
-////
-////            [weakSelf.tableView beginRefreshing];
-//        };
-//
-//        _filterPicker.tagNames = textArr;
-//
-//    }
-//
-//    return _filterPicker;
-//}
+//            [weakSelf.tableView beginRefreshing];
+        };
+
+        _filterPicker.tagNames = textArr;
+
+    }
+
+    return _filterPicker;
+}
 
 
 - (void)addNotification{
@@ -267,11 +275,11 @@
 
 }
 
-//#pragma mark - Events
-//- (void)changeCoin {
-//    
-//    [self.filterPicker show];
-//}
+#pragma mark - Events
+- (void)changeCoin {
+    
+    [self.filterPicker show];
+}
 
 - (void)search {
     
@@ -491,6 +499,10 @@
 
 #pragma mark - SegmentDelegate
 -(void)segment:(TopLabelUtil *)segment didSelectIndex:(NSInteger)index {
+    
+    [self test];
+    return;
+    
     
     if (index == 1) {
         

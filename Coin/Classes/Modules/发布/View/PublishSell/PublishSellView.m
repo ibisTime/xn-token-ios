@@ -390,16 +390,11 @@
                 TLTextField *textField = [[TLTextField alloc] initWithFrame:CGRectMake(0, idx*50, kScreenWidth - 85, 50) leftTitle:obj titleWidth:90 placeholder:placeHolderArr[idx]];
                 
                 textField.delegate = self;
-                
                 textField.tag = 1200 + idx;
-                
                 [self.scrollView addSubview:textField];
-                
                 textField.keyboardType = UIKeyboardTypeDecimalPad;
-                
                 self.buyTotalTF = textField;
                 tempTfView = textField;
-
                 
             } break;
                 
@@ -492,7 +487,6 @@
     TLTextView *textView = [[TLTextView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 120)];
     textView.font = Font(14.0);
     textView.placholder = [LangSwitcher switchLang:@"请写下您的广告留言吧" key:nil];
-    
     [leaveMsgView addSubview:textView];
     [textView mas_makeConstraints:^(MASConstraintMaker *make) {
         
@@ -981,9 +975,9 @@
     self.leaveMsgTV.text = advertise.leaveMessage;
     
     UIButton *customTimeBtn = [self.openTimeView viewWithTag:1700];
-    
     UIButton *anyTimeBtn = [self.openTimeView viewWithTag:1701];
     
+    //
     if (advertise.displayTime && advertise.displayTime.count > 0) {
         
         [advertise.displayTime enumerateObjectsUsingBlock:^(Displaytime * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -1009,10 +1003,10 @@
                 timeLbl.text = [NSString stringWithFormat:@"关闭\n~\n关闭"];
                 
             }
+            
         }];
         
         customTimeBtn.selected = YES;
-        
         anyTimeBtn.selected = !customTimeBtn.selected;
         
         self.scrollView.contentSize = CGSizeMake(kScreenWidth, self.highSettingView.yy + 10 + 190);
@@ -1022,7 +1016,6 @@
     } else {
         
         customTimeBtn.selected = NO;
-        
         anyTimeBtn.selected = !customTimeBtn.selected;
     }
     

@@ -123,4 +123,5 @@ FOUNDATION_EXTERN NSString *const kAdsTradeTypeSell;
 
 @property (nonatomic, copy) NSString *adsCode;
 
+
 @end

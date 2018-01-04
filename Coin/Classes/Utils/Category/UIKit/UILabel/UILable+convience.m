@@ -42,7 +42,7 @@
 //}
 
 
-+ (UILabel *)labelWithFrame:(CGRect)frame
++ (instancetype)labelWithFrame:(CGRect)frame
                textAligment:(NSTextAlignment)aligment
             backgroundColor:(UIColor *)color
                        font:(UIFont *)font

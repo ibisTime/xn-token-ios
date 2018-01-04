@@ -602,13 +602,9 @@
     UIButton *customTimeBtn = [UIButton buttonWithTitle:@"自定义" titleColor:kTextColor backgroundColor:kClearColor titleFont:13.0];
     
     [customTimeBtn addTarget:self action:@selector(selectCustomTime:) forControlEvents:UIControlEventTouchUpInside];
-    
     [customTimeBtn setImage:kImage(@"未选中") forState:UIControlStateNormal];
-    
     [customTimeBtn setImage:kImage(@"选中") forState:UIControlStateSelected];
-
     customTimeBtn.tag = 1700;
-    
     [self.openTimeView addSubview:customTimeBtn];
     [customTimeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         
@@ -620,7 +616,6 @@
     }];
     
     [customTimeBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 0, -20)];
-    
     [customTimeBtn setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
     
     //任何时候
@@ -706,7 +701,9 @@
     
     [weekArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         
-        UILabel *textLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:15.0];
+        UILabel *textLbl = [UILabel labelWithBackgroundColor:kClearColor
+                                                   textColor:kTextColor
+                                                        font:15.0];
         
         textLbl.text = [LangSwitcher switchLang:weekArr[idx] key:nil];
 
@@ -721,16 +718,13 @@
             
         }];
         
-        UILabel *timeLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor2 font:12.0];
-        
+        UILabel *timeLbl = [UILabel labelWithBackgroundColor:kClearColor
+                                                   textColor:kTextColor2
+                                                        font:12.0];
         timeLbl.frame = CGRectMake(btnW*idx, 35, btnW, 50);
-        
         timeLbl.numberOfLines = 0;
-        
         timeLbl.textAlignment = NSTextAlignmentCenter;
-        
         timeLbl.tag = 1710 + idx;
-        
         timeLbl.text = [NSString stringWithFormat:@"%@\n~\n%@", self.startModelArr[idx], self.endModelArr[idx]];
         
         [self.timeView addSubview:timeLbl];
@@ -744,11 +738,8 @@
         
         //按钮
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-        
         btn.tag = 1720 + idx;
-        
         [btn addTarget:self action:@selector(clickSelectTime:) forControlEvents:UIControlEventTouchUpInside];
-        
         [self.timeView addSubview:btn];
         [btn mas_makeConstraints:^(MASConstraintMaker *make) {
             
@@ -992,7 +983,6 @@
     PublishDraftModel *draft = [PublishDraftModel new];
     
     draft.protectPrice = self.highNumTF.text;
-    
     draft.premiumRate = self.premiumRateTF.text;
     
     draft.minTrade = self.minNumTF.text;
@@ -1162,8 +1152,8 @@
 - (void)clickSelectTime:(UIButton *)sender {
     
     self.weekDay = sender.tag - 1720;
-    
     [self.hourPicker show];
+    
 }
 
 - (void)selectOnlyTrust:(UIButton *)sender {
@@ -1175,7 +1165,6 @@
 - (void)viewHiddenWithSelect:(BOOL)selected {
     
     self.openTimeView.hidden = !selected;
-
     self.timeView.hidden = !selected;
     
 }
@@ -1267,15 +1256,15 @@
         case 2:
         {
             count = 2;
-            
             promptStr = @"最高价的小数点位数不能超过2位哦";
+            
         }break;
             
         case 3:
         {
             count = 2;
-            
             promptStr = @"最小量的小数点位数不能超过2位哦";
+            
         }break;
             
         case 4:

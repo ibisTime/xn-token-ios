@@ -19,6 +19,11 @@
 #import <CDCommon/UIView+Frame.h>
 #import "LangSwitcher.h"
 #import "TLPlaceholderView.h"
+
+//基类
+#import "TLBaseLabel.h"
+
+//
 #define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
 #define SCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
 #define FONT(x)    [UIFont systemFontOfSize:x]

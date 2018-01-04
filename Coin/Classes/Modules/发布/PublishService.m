@@ -13,6 +13,10 @@ NSString *const kPublish = @"1";
 NSString *const kPublishDraft = @"2";
 NSString *const kPublishRedit = @"3";
 
+
+NSString *const kPublishTradeTypeSell = @"1";
+NSString *const kPublishTradeTypeBuy = @"0";
+
 @implementation PublishService
 
 + (NSString *)publishCodeByType:(PublishType) type {

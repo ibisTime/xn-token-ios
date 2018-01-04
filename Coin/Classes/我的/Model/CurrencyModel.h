@@ -44,5 +44,4 @@
 @end
 
 
-FOUNDATION_EXTERN NSString *const kCNY;
 

@@ -12,6 +12,7 @@
 #define CHAT_APP_ID 1400050575
 #define CHAT_ACCOUNT_TYPE @"19287"
 #define PUSH_DEV_BUSI_ID 7017
+#define PUSH_DIS_BUSI_ID 7038
 
 
 //托管模式
