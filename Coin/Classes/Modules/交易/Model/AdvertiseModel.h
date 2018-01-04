@@ -99,7 +99,12 @@ typedef NS_ENUM(NSUInteger, AdsType) {
 
 - (NSString *)tradeAmountLimit;
 
+
+
 @end
+
+FOUNDATION_EXTERN NSString *const kOnlyTrustYes;
+FOUNDATION_EXTERN NSString *const kOnlyTrustNO;
 
 FOUNDATION_EXTERN NSString *const kAdsStatusDraft;
 FOUNDATION_EXTERN NSString *const kAdsStatusXiaJia;
@@ -123,5 +128,8 @@ FOUNDATION_EXTERN NSString *const kAdsTradeTypeSell;
 
 @property (nonatomic, copy) NSString *adsCode;
 
++ (instancetype)defaultTime;
+
+- (NSDictionary *)toDict;
 
 @end

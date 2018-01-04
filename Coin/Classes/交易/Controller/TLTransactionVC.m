@@ -81,7 +81,11 @@
 
 - (void)test {
     
-    [self.navigationController pushViewController:[[TLPublishSellVC alloc] init] animated:YES];
+    TLPublishSellVC *sellVC =  [[TLPublishSellVC alloc] init];
+    sellVC.publishType = PublishTypePublishOrSaveDraft;
+    [self.navigationController pushViewController:sellVC animated:YES];
+    
+    
     
 //      [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:[[TLPublishSellVC alloc] init] animated:YES completion:nil];
 }

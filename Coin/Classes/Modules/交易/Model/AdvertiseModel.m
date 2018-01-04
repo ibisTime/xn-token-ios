@@ -20,6 +20,10 @@
 
 //
 
+ NSString *const kOnlyTrustYes = @"1";
+ NSString *const kOnlyTrustNO = @"0";
+
+//
 NSString *const kAdsStatusDraft =  @"0";
 NSString *const kAdsStatusXiaJia =  @"2";
 
@@ -99,5 +103,28 @@ NSString *const kAdsTradeTypeSell = @"1";
 
 
 @implementation Displaytime
+
++ (instancetype)defaultTime {
+    
+    Displaytime *time = [[Displaytime alloc] init];
+    time.startTime = 0;
+    time.endTime = 24;
+    return time;
+    
+}
+
+- (NSDictionary *)toDict {
+    
+    NSDictionary *dict = @{
+                           @"week" : self.week,
+                           @"startTime" : [NSString stringWithFormat:@"%ld",self.startTime],
+                           @"endTime" : [NSString stringWithFormat:@"%ld",self.endTime],
+                           };
+    
+    return dict;
+    
+}
+
+
 
 @end

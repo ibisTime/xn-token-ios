@@ -15,6 +15,10 @@
 @property (nonatomic, strong) UILabel *beginTimeLbl;
 @property (nonatomic, strong) UILabel *endTimeLbl;
 
+
+/**
+ 2次编辑应该从外面传入，
+ */
 @property (nonatomic, strong) Displaytime *displayTime;
 
 @end

@@ -59,8 +59,6 @@
                                                font:[UIFont systemFontOfSize:14]
                                           textColor:[UIColor textColor]];
         [self addSubview:self.endTimeLbl];
-        
-        
         [self.weekLbl mas_makeConstraints:^(MASConstraintMaker *make) {
             
             make.top.equalTo(self.mas_top).offset(8);
@@ -127,10 +125,23 @@
 
 //- (void)setDisplayTime:(Displaytime *)displayTime {
 //
-//    _displayTime = displayTime;
 //
-//    self.weekLbl.text =
+//
 //}
+
+
+
+- (void)setDisplayTime:(Displaytime *)displayTime {
+    
+    _displayTime = displayTime;
+    
+    self.beginTimeLbl.text = [self beginHourStringByIndex:displayTime.startTime];
+    self.endTimeLbl.text = [self endHourStringByIndex:displayTime.endTime];
+
+    
+}
+
+
 
 - (void)chooseTime {
     
@@ -175,6 +186,22 @@
 
     return str;
 }
+
+//- (Displaytime *)displayTime {
+//    return nil;
+//}
+
+//- (Displaytime *)displayTime {
+//
+//    if (!_displayTime) {
+//
+//        _displayTime = [Displaytime new];
+//
+//    }
+//
+//    return _displayTime;
+//
+//}
 
 - (HourPickerView *)hourPicker {
     

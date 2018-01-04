@@ -32,6 +32,9 @@
 #import <ZDCChat/ZDCChat.h>
 #import "CoinUtil.h"
 #import "TLPublishSellVC.h"
+#import "RespHandler.h"
+#import <NBHTTP/NBNetwork.h>
+
 //#import "XGPush.h"
 //#import "XGPushHandler.h"
 //// 引入JPush功能所需头文件
@@ -49,6 +52,8 @@
 @property (nonatomic, strong) FBKVOController *chatKVOCtrl;
 @property (nonatomic, copy) NSArray *cpArr;
 
+@property (nonatomic, strong) RespHandler *respHandler;
+
 @end
 
 @implementation AppDelegate
@@ -57,6 +62,11 @@
 
     //服务器环境
     [AppConfig config].runEnv = RunEnvRelease;
+    self.respHandler = [[RespHandler alloc] init];
+    
+    [NBNetworkConfig config].respDelegate = self.respHandler;
+    //2.新版本请求
+    [NBNetworkConfig config].baseUrl = [AppConfig config].apiUrl;
     
     //配置微信
     [self configWeChat];

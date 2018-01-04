@@ -461,6 +461,7 @@
 		2EE3614B1FFCAF3B00A5C3EB /* TLHighLevelSettingsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE3614A1FFCAF3B00A5C3EB /* TLHighLevelSettingsView.m */; };
 		2EE3614F1FFD1AF400A5C3EB /* TLSingleTimeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE3614E1FFD1AF400A5C3EB /* TLSingleTimeView.m */; };
 		2EE361521FFD1CB200A5C3EB /* TLPublishTimeChooseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE361511FFD1CB200A5C3EB /* TLPublishTimeChooseView.m */; };
+		2EE361551FFE182800A5C3EB /* RespHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE361541FFE182700A5C3EB /* RespHandler.m */; };
 		2EE950C01FB05B2400429257 /* TLHangQingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE950BF1FB05B2400429257 /* TLHangQingVC.m */; };
 		2EE950C31FB05B4500429257 /* TLWalletVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE950C21FB05B4500429257 /* TLWalletVC.m */; };
 		2EE950C61FB05B5900429257 /* TLMineVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE950C51FB05B5900429257 /* TLMineVC.m */; };
@@ -1431,6 +1432,8 @@
 		2EE3614E1FFD1AF400A5C3EB /* TLSingleTimeView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLSingleTimeView.m; sourceTree = "<group>"; };
 		2EE361501FFD1CB200A5C3EB /* TLPublishTimeChooseView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLPublishTimeChooseView.h; sourceTree = "<group>"; };
 		2EE361511FFD1CB200A5C3EB /* TLPublishTimeChooseView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLPublishTimeChooseView.m; sourceTree = "<group>"; };
+		2EE361531FFE182500A5C3EB /* RespHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RespHandler.h; sourceTree = "<group>"; };
+		2EE361541FFE182700A5C3EB /* RespHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RespHandler.m; sourceTree = "<group>"; };
 		2EE950BE1FB05B2400429257 /* TLHangQingVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLHangQingVC.h; sourceTree = "<group>"; };
 		2EE950BF1FB05B2400429257 /* TLHangQingVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLHangQingVC.m; sourceTree = "<group>"; };
 		2EE950C11FB05B4500429257 /* TLWalletVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLWalletVC.h; sourceTree = "<group>"; };
@@ -3398,6 +3401,8 @@
 				2E394FEB1FB0575A00BA0829 /* AppDelegate.m */,
 				2EB039B41FEA0B4500589D8E /* TLUpdateVC.h */,
 				2EB039B31FEA0B4500589D8E /* TLUpdateVC.m */,
+				2EE361531FFE182500A5C3EB /* RespHandler.h */,
+				2EE361541FFE182700A5C3EB /* RespHandler.m */,
 				2EE361351FFB7D4500A5C3EB /* README.md */,
 				2E394FB01FB055DE00BA0829 /* 交易 */,
 				2E394FA81FB055DE00BA0829 /* 订单 */,
@@ -4549,6 +4554,7 @@
 				211C04571FC6604800E51FCF /* IMAUser.m in Sources */,
 				211DE6B11FB58B4C002FCF3D /* UIButton+EnLargeEdge.m in Sources */,
 				211C04281FC6604800E51FCF /* UITableViewController+ADFlipTransition.m in Sources */,
+				2EE361551FFE182800A5C3EB /* RespHandler.m in Sources */,
 				211C04421FC6604800E51FCF /* NavigationViewController.m in Sources */,
 				211C042C1FC6604800E51FCF /* JSONKit.m in Sources */,
 				21205CE51FCD31E0003C6C7C /* CoinAddressCell.m in Sources */,

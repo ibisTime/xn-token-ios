@@ -12,4 +12,6 @@
 
 - (instancetype)initWithFrame:(CGRect)frame;
 
+- (NSArray <NSDictionary *> *)obtainTimes;
+
 @end

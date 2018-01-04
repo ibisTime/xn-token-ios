@@ -8,6 +8,7 @@
 
 #import "TLPublishTimeChooseView.h"
 #import "TLSingleTimeView.h"
+#import "TLUIHeader.h"
 
 @interface TLPublishTimeChooseView()
 
@@ -23,6 +24,8 @@
     if (self) {
         
         self.backgroundColor = [UIColor whiteColor];
+        self.clipsToBounds = YES;
+        
         
         int count = 7;
         self.timeViews = [[NSMutableArray alloc] initWithCapacity:count];
@@ -33,16 +36,46 @@
         for (int i = 0; i < 7; i ++) {
             
             TLSingleTimeView *timeView = [[TLSingleTimeView alloc] initWithFrame:CGRectMake(i*singleW, 0, singleW, height)];
+//            timeView.backgroundColor = [UIColor orangeColor];
             timeView.weekLbl.text = [self getWeek:i+1];
             [self addSubview:timeView];
-            timeView.beginTimeLbl.text = @"00:00";
-            timeView.endTimeLbl.text   = @"11:59";
+            [self.timeViews addObject:timeView];
+            Displaytime *displaytime = [Displaytime defaultTime];
+            displaytime.week = [NSString stringWithFormat:@"%d",i + 1];
+            timeView.displayTime = displaytime;
             
         }
+        
+        
+        
+        UIView *line = [[UIView alloc] init];
+        line.backgroundColor = [UIColor lineColor];
+        [self addSubview:line];
+        [line mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.mas_left);
+            make.width.equalTo(self.mas_width);
+            make.height.mas_equalTo(0.7);
+            make.bottom.equalTo(self.mas_bottom);
+        }];
         
     }
     return self;
 }
+
+- (NSArray <NSDictionary *> *)obtainTimes {
+    
+    NSMutableArray *arrays = [[NSMutableArray alloc] init];
+    
+    [self.timeViews enumerateObjectsUsingBlock:^(TLSingleTimeView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        
+        [arrays addObject:[obj.displayTime toDict]];
+        
+    }];
+    
+    return arrays;
+    
+}
+
 
 - (NSString *)getWeek:(int)c {
     

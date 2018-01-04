@@ -10,6 +10,8 @@
 #import "TLUIHeader.h"
 #import "TLPublishInputView.h"
 #import "TLPublishTimeChooseView.h"
+#import "UIButton+Custom.h"
+#import "AppColorMacro.h"
 
 @interface TLHighLevelSettingsView()
 
@@ -26,6 +28,7 @@
 @implementation TLHighLevelSettingsView
 
 #define HEGHT 45
+#define TIME_CHOOSE_VIEW_HEIGHT 100
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
@@ -61,18 +64,62 @@
         [self addSubview:self.timeView];
 //        self.timeView.textField.userInteractionEnabled = NO;
         self.timeView.leftLbl.text = [LangSwitcher switchLang:@"开放时间" key:nil];
-//        self.timeView.enabled = NO;
+        
+        //自定义
+        self.customTimeBtn = [self btnWithTitle:@"自定义"];
+        [self.timeView addSubview:self.customTimeBtn];
+        [self.customTimeBtn addTarget:self action:@selector(selectCustomTime:) forControlEvents:UIControlEventTouchUpInside];
+        
+        //任何时候
+        self.anyTimeBtn = [self btnWithTitle:@"任何时候"];
+        [self.timeView addSubview:self.anyTimeBtn];
+        self.anyTimeBtn.selected = YES;
+        [self.anyTimeBtn addTarget:self action:@selector(selectCustomTime:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [self.customTimeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.bottom.top.equalTo(self.timeView);
+            make.width.mas_equalTo(80);
+            make.right.equalTo(self.timeView.introduceBtn.mas_left);
+            
+        }];
+        
+        [self.anyTimeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.bottom.top.equalTo(self.timeView);
+            make.width.mas_equalTo(80);
+            make.right.equalTo(self.customTimeBtn.mas_left);
+            
+        }];
+   
         
         //时间选择
-        self.publishTimeChooseView = [[TLPublishTimeChooseView alloc] initWithFrame:CGRectMake(0, self.timeView.yy, self.width, 120)];
+        self.publishTimeChooseView = [[TLPublishTimeChooseView alloc] initWithFrame:CGRectMake(0, self.timeView.yy, self.width, TIME_CHOOSE_VIEW_HEIGHT)];
         [self addSubview:self.publishTimeChooseView];
+        self.publishTimeChooseView.height = 0;
+        
         
         //仅粉丝
         self.onlyTrustView = [[TLPublishInputView alloc] initWithFrame:CGRectMake(0, self.publishTimeChooseView.yy, SCREEN_WIDTH, 45)];
         [self addSubview:self.onlyTrustView];
 //        self.onlyTrustView.textField.userInteractionEnabled = NO;
         self.onlyTrustView.leftLbl.text = [LangSwitcher switchLang:@"仅粉丝" key:nil];
-//        self.onlyTrustView.enabled = NO;
+//        [self.onlyTrustView adddMaskBtn];
+        
+        //
+        self.onlyTrustBtn = [[UIButton alloc] init];
+        [self.onlyTrustView addSubview:self.onlyTrustBtn];
+        [self.onlyTrustBtn setImage:kImage(@"未选中") forState:UIControlStateNormal];
+        [self.onlyTrustBtn setImage:kImage(@"选择") forState:UIControlStateSelected];
+        [self.onlyTrustBtn addTarget:self action:@selector(selectCustomTime:) forControlEvents:UIControlEventTouchUpInside];
+        self.onlyTrustBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+        [self.onlyTrustBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.bottom.top.equalTo(self.onlyTrustView);
+            make.right.equalTo(self.onlyTrustView.introduceBtn.mas_left);
+            make.width.mas_equalTo(80);
+            
+        }];
         
         
         [self.onlyTrustView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -81,15 +128,100 @@
             make.height.mas_equalTo(HEGHT);
         }];
         
-        [self layoutIfNeeded];
         
         
     }
     return self;
 }
 
+- (void)beginWithCustomTime {
+    
+    self.customTimeBtn.selected = YES;
+    self.anyTimeBtn.selected = !self.customTimeBtn.selected;
+    self.publishTimeChooseView.height = TIME_CHOOSE_VIEW_HEIGHT;
+    
+}
+
+- (void)beginWithAnyime {
+    
+    self.customTimeBtn.selected = NO;
+    self.anyTimeBtn.selected = !self.customTimeBtn.selected;
+    self.publishTimeChooseView.height = 0;
+
+}
+
+- (BOOL)isCustomTime {
+    
+    return self.customTimeBtn.isSelected;
+    
+}
+
+- (BOOL)isOnlyTrust {
+    
+    return self.onlyTrustBtn.isSelected;
+    
+}
+
+- (NSArray <NSDictionary *>*)obtainDisplayTimes;
+ {
+    
+    return [self.publishTimeChooseView obtainTimes];
+    
+}
+
+- (void)selectCustomTime:(UIButton *)btn {
+    
+    if ([btn isEqual:self.onlyTrustBtn]) {
+        
+        btn.selected = !btn.selected;
+        
+        return;
+    }
+    
+    //其它事件
+    btn.selected = !btn.selected;
+    if ([btn isEqual:self.anyTimeBtn]) {
+        
+        self.customTimeBtn.selected = !self.anyTimeBtn.selected;
+        
+    } else if ([btn isEqual:self.customTimeBtn]) {
+        
+        self.anyTimeBtn.selected = !self.customTimeBtn.selected;
+    
+    }
+    
+    if (self.customTimeBtn.selected) {
+        
+        self.publishTimeChooseView.height = TIME_CHOOSE_VIEW_HEIGHT;
+        
+    } else {
+        
+        self.publishTimeChooseView.height = 0;
+        
+    }
+    
+}
+
 - (void)change {
     
+    
+}
+
+- (UIButton *)btnWithTitle:(NSString *)title {
+    
+    UIButton *btn = [UIButton buttonWithTitle:title
+                                   titleColor:kTextColor
+                              backgroundColor:kClearColor
+                                    titleFont:13.0];
+    
+    [btn setImage:kImage(@"未选中") forState:UIControlStateNormal];
+    [btn setImage:kImage(@"选中") forState:UIControlStateSelected];
+    [btn setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 0, -20)];
+    [btn setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
+    
+    return btn;
+    
+
     
 }
 

@@ -32,7 +32,18 @@
         
     }
     
+    self.userInteractionEnabled = YES;
+    UITapGestureRecognizer *tap  = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(removeFromWindow)];
+    [self addGestureRecognizer:tap];
+    
     return self;
+    
+}
+
+- (void)removeFromWindow {
+    
+    [self hide];
+    
 }
 
 #pragma mark - Init
@@ -154,6 +165,13 @@
         self.alpha = 1;
 
         self.pickerView.transform = CGAffineTransformMakeTranslation(0, -250);
+        
+    } completion:^(BOOL finished) {
+        //默认选中第一个
+        if (_selectBlock) {
+            
+            _selectBlock(0);
+        }
         
     }];
 }

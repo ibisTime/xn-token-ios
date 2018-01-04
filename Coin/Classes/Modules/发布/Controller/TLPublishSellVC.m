@@ -21,8 +21,13 @@
 #import "NSString+Check.h"
 #import "PublishService.h"
 #import "AdvertiseModel.h"
-//#import "CustomPickerView.h"
 #import "FilterView.h"
+#import "PayTypeModel.h"
+#import <NBHTTP/NBNetwork.h>
+#import "TLProgressHUD.h"
+#import "AppConfig.h"
+#import "OverTimeModel.h"
+#import "CoinUtil.h"
 
 @interface TLPublishSellVC ()<UITextFieldDelegate>
 
@@ -60,6 +65,8 @@
 @property (nonatomic, strong) QuotationModel *quotationModel;
 @property (nonatomic, strong) AdvertiseModel *advertise;
 
+@property (nonatomic, copy) NSString *payType;
+
 @end
 
 @implementation TLPublishSellVC
@@ -78,90 +85,167 @@
 
 -(void)tl_placeholderOperation {
     
-    //行情
-    [self hangQing];
-    
-    
-    //交易提示
-    
-    //支付方式
+    // 行情
+    NBCDRequest *hangQingReq = [NBCDRequest alloc] ;
+    hangQingReq.code = @"625292";
+    hangQingReq.parameters[@"coin"] = kETH;
     
     //时间选择
+    NBCDRequest *timeChooseReq = [NBCDRequest alloc] ;
+    timeChooseReq.code = @"625907";
+    timeChooseReq.parameters[@"parentKey"] = @"trade_time_out";
+    timeChooseReq.parameters[@"systemCode"] = [AppConfig config].systemCode;
+    timeChooseReq.parameters[@"companyCode"] = [AppConfig config].companyCode;
+    
+//    //获取广告详情
+//    NBCDRequest *adsDetailReq = [NBCDRequest alloc] ;
+//    adsDetailReq.code = @"625907";
+//    adsDetailReq.parameters[@"parentKey"] = @"trade_time_out";
+//    adsDetailReq.parameters[@"userId"] = [AppConfig config].systemCode;
+//    adsDetailReq.parameters[@"token"] = [AppConfig config].systemCode;
 
     
-    
-    //可选 广告详情
 
-}
-
-- (void)hangQing {
-    
-    TLNetworking *http = [TLNetworking new];
-    http.code = @"625292";
-    http.parameters[@"coin"] = kETH;
-    http.showView = self.view;
-    //
-    [http postWithSuccess:^(id responseObject) {
+    [TLProgressHUD showWithStatus:nil];
+    NBBatchReqest *batchReq = [[NBBatchReqest alloc] initWithReqArray:@[hangQingReq,timeChooseReq]];
+    [batchReq startWithSuccess:^(NBBatchReqest *batchRequest) {
         
+        [TLProgressHUD dismiss];
+        
+        //
         [self removePlaceholderView];
         
+        //处理数据
+        PublishService *publishService = [PublishService shareInstance];
+        
+        // 行情
+        NBCDRequest *hangQingReqCopy = (NBCDRequest *)batchRequest.reqArray[0];
+        
+        //时间选择
+        NBCDRequest *timeChooseReqCopy = (NBCDRequest *)batchRequest.reqArray[1];
+        [publishService handleOutLimitTime:timeChooseReqCopy.responseObject[@"data"]];
+        
         [self setUpUI];
+        
         //
         [self addLayout];
-        //
-        [self data];
+      
         //
         [self addEvent];
         
         //
-//        self.pa
+        [self data];
         
-        self.quotationModel = [QuotationModel tl_objectWithDictionary:responseObject[@"data"]];
-        self.priceView.textField.text = [NSString stringWithFormat:@"%.2lf", [self.quotationModel.mid doubleValue]];
+
+        // 控件在 setUpUI中初始化
+        self.payTypePickerView.tagNames = [PayTypeModel payTypeNames];
+        self.payTimeLimitPickerView.tagNames = [publishService obtainLimitTimes];
         
-   
+        [self handleHangQingWithRes:hangQingReqCopy.responseObject];
         
         
+    } failure:^(NBBatchReqest *batchRequest) {
+        
+        [TLProgressHUD dismiss];
+        [self addPlaceholderView];
+
+    }];
+    
+}
+
+- (void)handleHangQingWithRes:(id)res {
+    
+    
+    self.quotationModel = [QuotationModel tl_objectWithDictionary:res[@"data"]];
+    self.priceView.textField.text = [NSString stringWithFormat:@"%.2lf", [self.quotationModel.mid doubleValue]];
+    
+}
+
+- (void)getLeftAmount {
+    
+    CoinWeakSelf;
+    
+    TLPageDataHelper *helper = [[TLPageDataHelper alloc] init];
+    
+    helper.code = @"802503";
+    helper.parameters[@"userId"] = [TLUser user].userId;
+    helper.isList = YES;
+    helper.isCurrency = YES;
+    [helper modelClass:[CurrencyModel class]];
+    
+    [helper refresh:^(NSMutableArray <CurrencyModel *>*objs, BOOL stillHave) {
+        
+        [objs enumerateObjectsUsingBlock:^(CurrencyModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            
+            if ([obj.currency isEqualToString:@"ETH"]) {
+                
+                NSString *str = [obj.amountString subNumber:obj.frozenAmountString];
+                str = [str convertToSimpleRealCoin];
+                weakSelf.balanceView.contentLbl.text = [NSString stringWithFormat:@"    账户可用余额：%@",str];
+                
+            }
+            
+        }];
         
     } failure:^(NSError *error) {
         
-        [self addPlaceholderView];
         
     }];
     
 }
 
-#pragma mark- 组装数据
-- (void)submit {
-    
-    
-//    PublishDraftModel *draft = [PublishDraftModel new];
+//- (void)hangQing {
 //
-//    draft.protectPrice = self.protectPriceView.textField.text;
-//    draft.premiumRate = self.premiumView.textField.text;
+//    __weak typeof(self) weakself = self;
+//    //
+//    TLNetworking *http = [TLNetworking new];
+//    http.code = @"625292";
+//    http.parameters[@"coin"] = kETH;
+//    http.showView = self.view;
+//    //
+//    [http postWithSuccess:^(id responseObject) {
 //
-//    draft.minTrade = self.minTradeAmountView.textField.text;
-//    draft.maxTrade = self.maxTradeAmountView.textField.text;
-//    draft.buyTotal = self.buyTotalTF.text;
+//        [self removePlaceholderView];
 //
-//    //支付方式
-//    draft.payType = [NSString stringWithFormat:@"%ld", _payTypeIndex];
+//        [self setUpUI];
+//        //
+//        [self addLayout];
+//        //
+//        [self data];
+//        //
+//        [self addEvent];
 //
-//    draft.payLimit = self.payLimitPicker.text;
-//    draft.leaveMessage = self.leaveMsgTV.text;
+//        //
+////        self.pa
 //
-//    //发布或者草稿
-//    draft.isPublish = YES;
 //
-//    //仅限受信任的人
-//    draft.onlyTrust = [NSString stringWithFormat:@"%d", self.onlyTrustBtn.selected];
-    
-    
-}
-
+//        self.payTypePickerView.tagNames = [PayTypeModel payTypeNames];
+//        [self.payTypePickerView setSelectBlock:^(NSInteger index) {
+//
+//            weakself.payTypeView.textField.text = [PayTypeModel payTypeNames][index];
+//            weakself.payType = [NSString stringWithFormat:@"%ld",index];
+//
+//        }];
+//
+//        //
+//        self.payTimeLimitPickerView.tagNames = [PublishService];
+//        self.quotationModel = [QuotationModel tl_objectWithDictionary:responseObject[@"data"]];
+//        self.priceView.textField.text = [NSString stringWithFormat:@"%.2lf", [self.quotationModel.mid doubleValue]];
+//
+//
+//
+//
+//
+//    } failure:^(NSError *error) {
+//
+//        [self addPlaceholderView];
+//
+//    }];
+//
+//}
 
 #pragma mark -提交事件
-- (void)publishAdvertisementWithDraft {
+- (void)publish {
     
     NSString *premium = self.premiumView.textField.text;
     NSString *protectPrice = self.protectPriceView.textField.text;
@@ -170,12 +254,10 @@
     NSString *payTimeLimit = self.payTimeLimitView.textField.text;
     NSString *leaveMsg = self.leaveMsgTextView.text;
     NSString *totalCount = self.totalTradeCountView.textField.text;
-
-    NSString *payType = nil;
-    NSString *onlyTrust = nil;
+    NSString *payType = self.payType;
     
-    NSString *tradeType = nil;
-//    NSString *publishType = nil;
+    NSString *onlyTrust = [self.highLevelSettingsView isOnlyTrust] ? @"1" : @"0";
+    NSString *tradeType = kPublishTradeTypeSell;
 
     
 //    CGFloat rate = [draft.premiumRate doubleValue]/100.0;
@@ -232,7 +314,6 @@
     }
     
 
-    
     //
     TLNetworking *http = [TLNetworking new];
     http.showView = self.view;
@@ -252,7 +333,7 @@
     } else if (self.publishType == PublishTypePublishOrSaveDraft) {
         
         //发布或者存草稿
-//        http.parameters[@"publishType"] = draft.isPublish == YES ? kPublish : kSaveDraft;
+        http.parameters[@"publishType"] = kPublish;
         
     }
     
@@ -264,32 +345,19 @@
     http.parameters[@"onlyTrust"] = onlyTrust;
     http.parameters[@"payLimit"] = payTimeLimit;
     http.parameters[@"payType"] = payType;
-    http.parameters[@"premiumRate"] = premium;
+    http.parameters[@"premiumRate"] = [NSString stringWithFormat:@"%f",[premium doubleValue]/100.0];
     http.parameters[@"protectPrice"] = protectPrice;
-    http.parameters[@"totalCount"] = totalCount;
+    http.parameters[@"totalCount"] = [CoinUtil convertToSysCoin:totalCount coin:kETH];
     http.parameters[@"tradeCurrency"] = @"CNY";
     http.parameters[@"tradeCoin"] = kETH;
     http.parameters[@"tradeType"] = tradeType;
     
-    //   提交时间
-//    if (!self.publishView.anyTimeBtn.selected) {
-//
-//        NSMutableArray *timeArr = [NSMutableArray array];
-//
-//        [self.publishView.startHourArr enumerateObjectsUsingBlock:^(NSString *  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-//
-//            NSString *weekDay = [NSString stringWithFormat:@"%ld", idx+1];
-//
-//            NSDictionary *temp = @{@"startTime": obj,
-//                                   @"endTime": weakSelf.publishView.endHourArr[idx],
-//                                   @"week": weekDay,
-//                                   };
-//
-//            [timeArr addObject:temp];
-//        }];
-//
-//        http.parameters[@"displayTime"] = timeArr;
-//    }
+    if ([self.highLevelSettingsView isCustomTime]) {
+        
+        http.parameters[@"displayTime"] = [self.highLevelSettingsView obtainDisplayTimes];
+        
+    }
+
     
     [http postWithSuccess:^(id responseObject) {
         
@@ -314,17 +382,20 @@
 #pragma mark- 选择支付方式
 - (void)choosePayType {
     
+    [self.payTypePickerView show];
     
 }
 
 #pragma mark- 选择付款期限
 - (void)choosePayLimit {
     
+    [self.payTimeLimitPickerView show];
     
 }
 
 #pragma mark- 添加事件
 - (void)addEvent {
+    __weak typeof(self) weakself = self;
     
     [self.highLevelSettingsView.topBtn addTarget:self
                                           action:@selector(change)
@@ -336,6 +407,21 @@
     //
     [self.payTypeView.maskBtn addTarget:self action:@selector(choosePayType) forControlEvents:UIControlEventTouchUpInside];
     [self.payTimeLimitView.maskBtn addTarget:self action:@selector(choosePayLimit) forControlEvents:UIControlEventTouchUpInside];
+    
+    //
+    [self.payTypePickerView setSelectBlock:^(NSInteger index) {
+        
+        weakself.payTypeView.textField.text = [PayTypeModel payTypeNames][index];
+        weakself.payType = [NSString stringWithFormat:@"%ld",index];
+        
+    }];
+    
+    //设置时间
+    [self.payTimeLimitPickerView setSelectBlock:^(NSInteger index) {
+        
+        weakself.payTimeLimitView.textField.text = [[PublishService shareInstance] obtainLimitTimes][index];
+        
+    }];
 
 }
 
@@ -409,15 +495,88 @@
 
 - (void)data {
     
-    self.balanceView.contentLbl.text = [NSString stringWithFormat:@"账户可用余额：%@",@"10.2"];
+    //    self.balanceView.contentLbl.text = [NSString stringWithFormat:@"账户可用余额：%@",@"10.2"];
+    
+    if (!self.advertise) {
+        return;
+    }
+    
+    //数据
+    //支付方式
+    self.payType = self.advertise.payType;
+    self.payTypeView.textField.text = [PayTypeModel payNameByType:self.advertise.payType];
+    
+    //付款时间
+    self.payTimeLimitView.textField.text = [NSString stringWithFormat:@"%ld",self.advertise.payLimit];
+    
+    self.highLevelSettingsView.onlyTrustBtn.selected = [self.advertise.isTrust isEqual:kOnlyTrustYes];
+    
+    //
+    if (self.advertise.displayTime && self.advertise.displayTime.count > 0) {
+        
+        //自定义时间
+        [self.highLevelSettingsView beginWithCustomTime];
+        
+//        self.advertise.displayTime
+//        self.highLevelSettingsView.displayTimes
+        
+    } else {
+        
+        
+        //全部可见
+        [self.highLevelSettingsView beginWithAnyime];
+        
+    }
     
 }
 
 
+//- (void)addRightItem {
+//
+//    if (self.publishType == PublishTypePublishOrSaveDraft) {
+//
+//
+//        [UIBarButtonItem addRightItemWithTitle:[LangSwitcher switchLang:@"保存草稿" key:nil]
+//                                    titleColor:kTextColor
+//                                         frame:CGRectMake(0, 0, 70, 44)
+//                                            vc:self
+//                                        action:@selector(keepDraft)];
+//
+//
+//    } else if (self.publishType == PublishTypePublishRedit) {
+//        //重新编辑，为下架
+//        [UIBarButtonItem addRightItemWithTitle:[LangSwitcher switchLang:@"下架" key:nil]
+//                                    titleColor:kTextColor
+//                                         frame:CGRectMake(0, 0, 70, 44)
+//                                            vc:self
+//                                        action:@selector(xiaJia)];
+//
+//    }
+//
+//
+//}
+
 - (void)setUpUI {
     
-    self.bgScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - [DeviceUtil top64] - 50)];
+    self.bgScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - [DeviceUtil top64] - 65)];
     [self.view addSubview:self.bgScrollView];
+    
+    //底部提交按钮
+    //发布按钮
+    UIButton *publishBtn = [UIButton buttonWithTitle:@"直接发布" titleColor:kWhiteColor backgroundColor:kThemeColor titleFont:16.0 cornerRadius:5];
+    [publishBtn addTarget:self action:@selector(publish) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:publishBtn];
+    [publishBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.top.equalTo(self.bgScrollView.mas_bottom).offset(10);
+        make.left.equalTo(self.bgScrollView.mas_left).offset(20);
+        make.right.equalTo(self.bgScrollView.mas_right).offset(-20);
+        make.height.equalTo(@(45));
+        
+    }];
+    
+    //
+//    self
     
     //
     self.contentView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.bgScrollView.width, 0)];
@@ -473,11 +632,11 @@
     //账户可用·余额
     self.balanceView = [[TLAdpaterView alloc] initWithFrame:CGRectMake(0,self.totalTradeCountView.yy , width, 25)];
     [self.contentView addSubview:self.balanceView];
+    self.balanceView.contentLbl.text = @"--";
     
     //收款方式
     self.payTypeView = [[TLPublishInputView alloc] initWithFrame:CGRectMake(0, self.balanceView.yy, width, height)];
     [self.contentView addSubview:self.payTypeView];
-//    self.payTypeView.textField.userInteractionEnabled = NO;
     self.payTypeView.textField.enabled = NO;
     self.payTypeView.leftLbl.userInteractionEnabled = YES;
     self.payTypeView.leftLbl.text = [LangSwitcher switchLang:@"收款方式" key:nil];
@@ -494,7 +653,6 @@
     self.payTimeLimitView.textField.enabled = NO;
     [self.payTimeLimitView adddMaskBtn];
 
-    
     //留言
     self.leaveMsgTextView = [[TLTextView alloc] initWithFrame:CGRectMake(0, self.payTimeLimitView.yy, width, 120)];
     [self.contentView addSubview:self.leaveMsgTextView];
@@ -508,8 +666,13 @@
     [self.contentView addSubview:self.highLevelSettingsView];
     
     
-    //
+    //支付方式选择
+    self.payTypePickerView = [[FilterView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    self.payTypePickerView.title = [LangSwitcher switchLang:@"请选择支付方式" key:nil];
     
+    //超时时间
+    self.payTimeLimitPickerView = [[FilterView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+
     
     
 }

@@ -24,6 +24,15 @@ typedef NS_ENUM(NSInteger, PublishType) {
 
 + (NSString *)publishCodeByType:(PublishType) type;
 
++ (instancetype)shareInstance;
+
+/**
+ 根据请求返回结果，获取超时时间
+ */
+- (void)handleOutLimitTime:(NSArray *)arr;
+- (NSArray <NSString *> *)obtainLimitTimes;
+//+ (NSArray <NSString *> *)timesArrayByRes:(NSArray *)arr;
+
 @end
 
 FOUNDATION_EXTERN NSString *const kPublishTradeTypeSell;
