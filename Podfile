@@ -19,7 +19,7 @@ pod 'SDWebImage',           '4.0.0'
 pod 'IQKeyboardManager',    '5.0.2'
 pod 'MBProgressHUD',        '0.9.2’
 pod 'SGQRCode',             '2.1.8'
-#pod 'pop',                  '1.0.10'
+#pod 'pop',                 '1.0.10'
 #七牛云
 pod 'JPush'
 #    MGSwipeTableCell

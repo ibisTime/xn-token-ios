@@ -163,7 +163,6 @@
 		211C05081FC6714500E51FCF /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 211C05071FC6714400E51FCF /* libz.tbd */; };
 		211C050A1FC6715000E51FCF /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 211C05091FC6714F00E51FCF /* libc++.tbd */; };
 		211C050C1FC6715B00E51FCF /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 211C050B1FC6715B00E51FCF /* libsqlite3.tbd */; };
-		211C050E1FC6716500E51FCF /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 211C050D1FC6716500E51FCF /* libresolv.tbd */; };
 		211C05111FC6717300E51FCF /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 211C050F1FC6717300E51FCF /* libstdc++.6.0.9.tbd */; };
 		211C05121FC6717300E51FCF /* libstdc++.6.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 211C05101FC6717300E51FCF /* libstdc++.6.tbd */; };
 		211C88821FBDDADF00CF4FC8 /* QuotationListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 211C88811FBDDADF00CF4FC8 /* QuotationListVC.m */; };
@@ -358,7 +357,6 @@
 		2EB039A71FE8B23300589D8E /* EditEmailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EB039A61FE8B23300589D8E /* EditEmailVC.m */; };
 		2EB039AA1FE8EA3C00589D8E /* UserPhotoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EB039A91FE8EA3C00589D8E /* UserPhotoView.m */; };
 		2EB039AD1FE8EDE300589D8E /* UserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EB039AC1FE8EDE300589D8E /* UserInfo.m */; };
-		2EB039B21FE940D300589D8E /* manifest.xml in Resources */ = {isa = PBXBuildFile; fileRef = 2EB039B11FE940D300589D8E /* manifest.xml */; };
 		2EB039B51FEA0B4500589D8E /* TLUpdateVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EB039B31FEA0B4500589D8E /* TLUpdateVC.m */; };
 		2EB949541FDE6D6D00CE4B94 /* LangChooseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EB949531FDE6D6D00CE4B94 /* LangChooseVC.m */; };
 		2EB9495A1FDF6B1A00CE4B94 /* ZMChineseConvert.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EB949561FDF6B1A00CE4B94 /* ZMChineseConvert.m */; };
@@ -476,10 +474,6 @@
 		2EFFE6B21FF6286600BFCC40 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E5F19201FED0CB600100420 /* CoreTelephony.framework */; };
 		2EFFE6B31FF6287D00BFCC40 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E5F19241FED0CDD00100420 /* UserNotifications.framework */; };
 		2EFFE6B51FF6289600BFCC40 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EFFE6B41FF6289600BFCC40 /* libsqlite3.0.tbd */; };
-		2EFFE6BC1FF628EA00BFCC40 /* ReleaseNotes.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2EFFE6B81FF628E900BFCC40 /* ReleaseNotes.txt */; };
-		2EFFE6BD1FF628EA00BFCC40 /* libXG-SDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EFFE6B91FF628E900BFCC40 /* libXG-SDK.a */; };
-		2EFFE6BE1FF628EA00BFCC40 /* libxgidfa.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EFFE6BB1FF628E900BFCC40 /* libxgidfa.a */; };
-		2EFFE6C11FF62DE800BFCC40 /* XGPushHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EFFE6C01FF62DE800BFCC40 /* XGPushHandler.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -1264,7 +1258,6 @@
 		2EB039A91FE8EA3C00589D8E /* UserPhotoView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserPhotoView.m; sourceTree = "<group>"; };
 		2EB039AB1FE8EDE300589D8E /* UserInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserInfo.h; sourceTree = "<group>"; };
 		2EB039AC1FE8EDE300589D8E /* UserInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserInfo.m; sourceTree = "<group>"; };
-		2EB039B11FE940D300589D8E /* manifest.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = manifest.xml; sourceTree = "<group>"; };
 		2EB039B31FEA0B4500589D8E /* TLUpdateVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLUpdateVC.m; sourceTree = "<group>"; };
 		2EB039B41FEA0B4500589D8E /* TLUpdateVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLUpdateVC.h; sourceTree = "<group>"; };
 		2EB949521FDE6D6D00CE4B94 /* LangChooseVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LangChooseVC.h; sourceTree = "<group>"; };
@@ -1462,8 +1455,6 @@
 		2EFFE6B81FF628E900BFCC40 /* ReleaseNotes.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ReleaseNotes.txt; sourceTree = "<group>"; };
 		2EFFE6B91FF628E900BFCC40 /* libXG-SDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libXG-SDK.a"; sourceTree = "<group>"; };
 		2EFFE6BB1FF628E900BFCC40 /* libxgidfa.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libxgidfa.a; sourceTree = "<group>"; };
-		2EFFE6BF1FF62DE800BFCC40 /* XGPushHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGPushHandler.h; sourceTree = "<group>"; };
-		2EFFE6C01FF62DE800BFCC40 /* XGPushHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGPushHandler.m; sourceTree = "<group>"; };
 		8863748C5281F9DC1DDF8EEA /* Pods-Coin.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Coin.release.xcconfig"; path = "Pods/Target Support Files/Pods-Coin/Pods-Coin.release.xcconfig"; sourceTree = "<group>"; };
 		AB34D27FC9725550E9092EC2 /* Pods-Coin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Coin.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Coin/Pods-Coin.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1479,9 +1470,6 @@
 				21205D061FCD6394003C6C7C /* libWeChatSDK.a in Frameworks */,
 				211C05081FC6714500E51FCF /* libz.tbd in Frameworks */,
 				211C050A1FC6715000E51FCF /* libc++.tbd in Frameworks */,
-				2EFFE6BE1FF628EA00BFCC40 /* libxgidfa.a in Frameworks */,
-				211C050E1FC6716500E51FCF /* libresolv.tbd in Frameworks */,
-				2EFFE6BD1FF628EA00BFCC40 /* libXG-SDK.a in Frameworks */,
 				211C050C1FC6715B00E51FCF /* libsqlite3.tbd in Frameworks */,
 				211C05121FC6717300E51FCF /* libstdc++.6.tbd in Frameworks */,
 				211C05111FC6717300E51FCF /* libstdc++.6.0.9.tbd in Frameworks */,
@@ -3413,8 +3401,6 @@
 				2E394FEA1FB056A900BA0829 /* Other */,
 				2E394FF71FB0599D00BA0829 /* Expand */,
 				211DE63B1FB58B4B002FCF3D /* Utils */,
-				2EFFE6BF1FF62DE800BFCC40 /* XGPushHandler.h */,
-				2EFFE6C01FF62DE800BFCC40 /* XGPushHandler.m */,
 				2EE361321FFA6EB800A5C3EB /* TestVC.h */,
 				2EE361331FFA6EB800A5C3EB /* TestVC.m */,
 			);
@@ -3650,7 +3636,6 @@
 				2E394FA31FB0546E00BA0829 /* Classes */,
 				211C013A1FC6600300E51FCF /* Extension */,
 				2EA584C01FA813C900C7106C /* Assets.xcassets */,
-				2EB039B11FE940D300589D8E /* manifest.xml */,
 				2EA584C21FA813C900C7106C /* LaunchScreen.storyboard */,
 				2EA584C51FA813C900C7106C /* Info.plist */,
 				2EA584C61FA813C900C7106C /* main.m */,
@@ -4110,7 +4095,6 @@
 				2EE361211FFA09A800A5C3EB /* 12.gif in Resources */,
 				2EE360F51FFA09A800A5C3EB /* MicroVideo.xcassets in Resources */,
 				2EE361011FFA09A800A5C3EB /* 21.gif in Resources */,
-				2EFFE6BC1FF628EA00BFCC40 /* ReleaseNotes.txt in Resources */,
 				2EE361221FFA09A800A5C3EB /* 13.gif in Resources */,
 				2EE3610E1FFA09A800A5C3EB /* 25.gif in Resources */,
 				2EE361161FFA09A800A5C3EB /* 1.gif in Resources */,
@@ -4128,7 +4112,6 @@
 				2EE361071FFA09A800A5C3EB /* 27.gif in Resources */,
 				2EE360F11FFA09A800A5C3EB /* MicroVideoSource.xcassets in Resources */,
 				2EE361121FFA09A800A5C3EB /* 7.gif in Resources */,
-				2EB039B21FE940D300589D8E /* manifest.xml in Resources */,
 				21205D071FCD6394003C6C7C /* README.txt in Resources */,
 				2EFFE6A51FF3A22700BFCC40 /* ZDCChat.bundle in Resources */,
 				2EE360F61FFA09A800A5C3EB /* youtubeauty.bundle in Resources */,
@@ -4364,7 +4347,6 @@
 				211C04231FC6604800E51FCF /* UICollectionViewController+ADScaleTransition.m in Sources */,
 				211DE6A11FB58B4C002FCF3D /* TLTimeButton.m in Sources */,
 				211A34F71FB4328800FEB71F /* SettingTableView.m in Sources */,
-				2EFFE6C11FF62DE800BFCC40 /* XGPushHandler.m in Sources */,
 				211C03FD1FC6604800E51FCF /* NSObject+CommonBlock.m in Sources */,
 				2E3950001FB05ADB00BA0829 /* TLTransactionVC.m in Sources */,
 				2EE360E01FFA09A800A5C3EB /* PYMethod.m in Sources */,
