@@ -28,11 +28,16 @@
 #import "AppConfig.h"
 #import "OverTimeModel.h"
 #import "CoinUtil.h"
+#import "UIBarButtonItem+convience.h"
 
 @interface TLPublishSellVC ()<UITextFieldDelegate>
 
 @property (nonatomic, strong) UIScrollView *bgScrollView;
 @property (nonatomic, strong) UIView *contentView;
+
+//交易币种
+@property (nonatomic, strong) TLPublishInputView *tradeCoinView;
+
 //价格
 @property (nonatomic, strong) TLPublishInputView *priceView;
 //溢价
@@ -60,6 +65,7 @@
 //
 @property (nonatomic, strong) FilterView *payTypePickerView;
 @property (nonatomic, strong) FilterView *payTimeLimitPickerView;
+@property (nonatomic, strong) FilterView *coinPickerView;
 
 //
 @property (nonatomic, strong) QuotationModel *quotationModel;
@@ -77,7 +83,10 @@
    
 //     [[IQKeyboardManager sharedManager] considerToolbarPreviousNextInViewClass:[BMEnableIQKeyboardView class]];
     
-    self.title = [LangSwitcher switchLang:@"发布卖出" key:nil];
+    self.title = self.publishType == TLPublishVCTypeSell ?
+    [LangSwitcher switchLang:@"发布卖出" key:nil] :
+    [LangSwitcher switchLang:@"发布购买" key:nil];
+    
     [self setPlaceholderViewTitle:@"加载失败" operationTitle:@"重新加载"];
     [self tl_placeholderOperation];
     
@@ -85,7 +94,7 @@
 
 -(void)tl_placeholderOperation {
     
-    // 行情
+    //行情
     NBCDRequest *hangQingReq = [NBCDRequest alloc] ;
     hangQingReq.code = @"625292";
     hangQingReq.parameters[@"coin"] = kETH;
@@ -126,6 +135,7 @@
         [publishService handleOutLimitTime:timeChooseReqCopy.responseObject[@"data"]];
         
         [self setUpUI];
+        [self addRightItem];
         
         //
         [self addLayout];
@@ -136,13 +146,15 @@
         //
         [self data];
         
-
         // 控件在 setUpUI中初始化
         self.payTypePickerView.tagNames = [PayTypeModel payTypeNames];
         self.payTimeLimitPickerView.tagNames = [publishService obtainLimitTimes];
         
         [self handleHangQingWithRes:hangQingReqCopy.responseObject];
         
+        
+        //获取余额
+        [self getLeftAmount];
         
     } failure:^(NBBatchReqest *batchRequest) {
         
@@ -154,7 +166,6 @@
 }
 
 - (void)handleHangQingWithRes:(id)res {
-    
     
     self.quotationModel = [QuotationModel tl_objectWithDictionary:res[@"data"]];
     self.priceView.textField.text = [NSString stringWithFormat:@"%.2lf", [self.quotationModel.mid doubleValue]];
@@ -245,7 +256,7 @@
 //}
 
 #pragma mark -提交事件
-- (void)publish {
+- (void)publishWithType:(NSString *)publishOrSaveDraft {
     
     NSString *premium = self.premiumView.textField.text;
     NSString *protectPrice = self.protectPriceView.textField.text;
@@ -255,9 +266,19 @@
     NSString *leaveMsg = self.leaveMsgTextView.text;
     NSString *totalCount = self.totalTradeCountView.textField.text;
     NSString *payType = self.payType;
+    NSString *tradeCoin = kETH;
+    NSString *onlyTrust = [self.highLevelSettingsView isOnlyTrust] ? kOnlyTrustYes : kOnlyTrustNO;
     
-    NSString *onlyTrust = [self.highLevelSettingsView isOnlyTrust] ? @"1" : @"0";
-    NSString *tradeType = kPublishTradeTypeSell;
+    NSString *tradeType = nil;
+    if (self.VCType == TLPublishVCTypeSell) {
+        
+        tradeType = kPublishTradeTypeSell;
+
+    } else if (self.VCType == TLPublishVCTypeBuy) {
+        
+        tradeType = kPublishTradeTypeBuy;
+        
+    }
 
     
 //    CGFloat rate = [draft.premiumRate doubleValue]/100.0;
@@ -333,7 +354,7 @@
     } else if (self.publishType == PublishTypePublishOrSaveDraft) {
         
         //发布或者存草稿
-        http.parameters[@"publishType"] = kPublish;
+        http.parameters[@"publishType"] = publishOrSaveDraft;
         
     }
     
@@ -349,9 +370,10 @@
     http.parameters[@"protectPrice"] = protectPrice;
     http.parameters[@"totalCount"] = [CoinUtil convertToSysCoin:totalCount coin:kETH];
     http.parameters[@"tradeCurrency"] = @"CNY";
-    http.parameters[@"tradeCoin"] = kETH;
+    http.parameters[@"tradeCoin"] = tradeCoin;
     http.parameters[@"tradeType"] = tradeType;
-    
+
+ 
     if ([self.highLevelSettingsView isCustomTime]) {
         
         http.parameters[@"displayTime"] = [self.highLevelSettingsView obtainDisplayTimes];
@@ -379,6 +401,22 @@
     }];
 }
 
+#pragma 选择币种
+- (void)chooseCoin {
+    
+    [self.coinPickerView show];
+    [self.coinPickerView setSelectBlock:^(NSInteger index) {
+        
+        //切换币种
+        
+        // 余额切换
+        // 出售总量，标志要切换
+        // 价格要切换
+        
+    }];
+    
+}
+
 #pragma mark- 选择支付方式
 - (void)choosePayType {
     
@@ -404,6 +442,9 @@
                                    action:@selector(textDidChange:)
                          forControlEvents:UIControlEventEditingChanged];
     
+    //币种
+    [self.tradeCoinView.maskBtn addTarget:self action:@selector(chooseCoin) forControlEvents:UIControlEventTouchUpInside];
+    
     //
     [self.payTypeView.maskBtn addTarget:self action:@selector(choosePayType) forControlEvents:UIControlEventTouchUpInside];
     [self.payTimeLimitView.maskBtn addTarget:self action:@selector(choosePayLimit) forControlEvents:UIControlEventTouchUpInside];
@@ -423,6 +464,14 @@
         
     }];
 
+}
+
+//保存草稿
+- (void)saveDraft {
+    
+    [self publishWithType:kSaveDraft];
+    
+    
 }
 
 #pragma 溢价率的输入事件处理
@@ -457,12 +506,6 @@
         [self.bgScrollView scrollRectToVisible:frame animated:YES];
         
     }];
-//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//
-//        CGRect frame = CGRectMake(0, self.bgScrollView.contentSize.height, self.bgScrollView.width, 0);
-//        [self.bgScrollView scrollRectToVisible:frame animated:YES];
-//
-//    });
  
 }
 
@@ -471,31 +514,14 @@
     
     self.contentView.height = self.highLevelSettingsView.yy;
     self.bgScrollView.contentSize = CGSizeMake(self.bgScrollView.width, self.contentView.height);
-    //
-//    [self.highLevelSettingsView mas_makeConstraints:^(MASConstraintMaker *make) {
-//
-//        make.top.equalTo(self.leaveMsgTextView.mas_bottom);
-//        make.left.right.equalTo(self.contentView);
-//        make.height.mas_equalTo([TLHighLevelSettingsView normalHeight]);
-//
-//    }];
-//    //
-//    [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
-//
-//        make.width.equalTo(self.bgScrollView.mas_width);
-//        make.edges.mas_equalTo(UIEdgeInsetsZero);
-//        make.top.equalTo(self.priceView.mas_top);
-//        make.bottom.equalTo(self.highLevelSettingsView.mas_bottom);
-//
-//    }];
-    
-    
-    
+  
 }
 
 - (void)data {
     
     //    self.balanceView.contentLbl.text = [NSString stringWithFormat:@"账户可用余额：%@",@"10.2"];
+    //先预设币种
+    self.tradeCoinView.textField.text = kETH;
     
     if (!self.advertise) {
         return;
@@ -516,10 +542,7 @@
         
         //自定义时间
         [self.highLevelSettingsView beginWithCustomTime];
-        
-//        self.advertise.displayTime
-//        self.highLevelSettingsView.displayTimes
-        
+  
     } else {
         
         
@@ -531,30 +554,75 @@
 }
 
 
-//- (void)addRightItem {
-//
-//    if (self.publishType == PublishTypePublishOrSaveDraft) {
-//
-//
-//        [UIBarButtonItem addRightItemWithTitle:[LangSwitcher switchLang:@"保存草稿" key:nil]
-//                                    titleColor:kTextColor
-//                                         frame:CGRectMake(0, 0, 70, 44)
-//                                            vc:self
-//                                        action:@selector(keepDraft)];
-//
-//
-//    } else if (self.publishType == PublishTypePublishRedit) {
-//        //重新编辑，为下架
-//        [UIBarButtonItem addRightItemWithTitle:[LangSwitcher switchLang:@"下架" key:nil]
-//                                    titleColor:kTextColor
-//                                         frame:CGRectMake(0, 0, 70, 44)
-//                                            vc:self
-//                                        action:@selector(xiaJia)];
-//
-//    }
-//
-//
-//}
+- (void)addRightItem {
+
+    if (self.publishType == PublishTypePublishOrSaveDraft) {
+
+
+        [UIBarButtonItem addRightItemWithTitle:[LangSwitcher switchLang:@"保存草稿" key:nil]
+                                    titleColor:kTextColor
+                                         frame:CGRectMake(0, 0, 70, 44)
+                                            vc:self
+                                        action:@selector(saveDraft)];
+
+
+    } else if (self.publishType == PublishTypePublishRedit) {
+        //重新编辑，为下架
+        [UIBarButtonItem addRightItemWithTitle:[LangSwitcher switchLang:@"下架" key:nil]
+                                    titleColor:kTextColor
+                                         frame:CGRectMake(0, 0, 70, 44)
+                                            vc:self
+                                        action:@selector(xiaJia)];
+
+    }
+
+
+}
+
+
+#pragma mark- 重新编辑时，右上角为下架
+//下架广告
+- (void)xiaJia {
+    
+    CoinWeakSelf;
+    
+    [TLAlert alertWithTitle:[LangSwitcher switchLang:@"提示" key:nil]
+                        msg:[LangSwitcher switchLang:@"您确定要下架此广告?" key:nil]
+                 confirmMsg:[LangSwitcher switchLang:@"确认" key:nil]
+                  cancleMsg:[LangSwitcher switchLang:@"取消" key:nil]
+                     cancle:^(UIAlertAction *action) {
+                         
+                         
+                     } confirm:^(UIAlertAction *action) {
+                         
+                         [weakSelf requestAdvertiseOff];
+                     }];
+    
+}
+
+//下架广告
+- (void)requestAdvertiseOff {
+    
+    TLNetworking *http = [TLNetworking new];
+    
+    http.code = @"625224";
+    http.showView = self.view;
+    http.parameters[@"adsCode"] = self.advertise.code;
+    http.parameters[@"userId"] = [TLUser user].userId;
+    
+    [http postWithSuccess:^(id responseObject) {
+        
+        [TLAlert alertWithSucces:@"下架成功"];
+        
+        [self.navigationController popViewControllerAnimated:YES];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:kAdvertiseOff object:nil];
+        
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
 
 - (void)setUpUI {
     
@@ -585,8 +653,17 @@
     CGFloat height = 45;
     CGFloat width = SCREEN_WIDTH;
     
+    //
+    self.tradeCoinView = [[TLPublishInputView alloc] initWithFrame:CGRectMake(0, 0, width, height)];
+    [self.contentView addSubview:self.tradeCoinView];
+    self.tradeCoinView.leftLbl.text = [LangSwitcher switchLang:@"币        种" key:nil];
+    self.tradeCoinView.markLbl.text = kETH;
+    self.tradeCoinView.textField.placeholder = [LangSwitcher switchLang:@"请选择交易币种" key:nil];
+    self.tradeCoinView.textField.userInteractionEnabled = NO;
+    [self.tradeCoinView adddMaskBtn];
+    
     //价格
-    self.priceView = [[TLPublishInputView alloc] initWithFrame:CGRectMake(0, 0, width, height)];
+    self.priceView = [[TLPublishInputView alloc] initWithFrame:CGRectMake(0, self.tradeCoinView.yy, width, height)];
     [self.contentView addSubview:self.priceView];
     self.priceView.leftLbl.text = [LangSwitcher switchLang:@"价        格" key:nil];
     self.priceView.textField.placeholder = [LangSwitcher switchLang:@"" key:nil];
@@ -633,6 +710,9 @@
     self.balanceView = [[TLAdpaterView alloc] initWithFrame:CGRectMake(0,self.totalTradeCountView.yy , width, 25)];
     [self.contentView addSubview:self.balanceView];
     self.balanceView.contentLbl.text = @"--";
+    if (self.VCType == TLPublishVCTypeBuy) {
+        self.balanceView.height = 0;
+    }
     
     //收款方式
     self.payTypeView = [[TLPublishInputView alloc] initWithFrame:CGRectMake(0, self.balanceView.yy, width, height)];
@@ -672,8 +752,10 @@
     
     //超时时间
     self.payTimeLimitPickerView = [[FilterView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
-
     
+   //币种选择
+   self.coinPickerView = [[FilterView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+
     
 }
 
