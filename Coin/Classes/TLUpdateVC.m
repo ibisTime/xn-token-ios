@@ -10,7 +10,7 @@
 #import "TLNetworking.h"
 #import "TLProgressHUD.h"
 #import "AppConfig.h"
-#import "UpdateModel.h"
+#import "GengXinModel.h"
 #import "TLTabBarController.h"
 #import "AppConfig.h"
 
@@ -54,7 +54,9 @@
     //
     [TLProgressHUD showWithStatus:nil];
     //获取版本
-    [TLNetworking GET:[NSString stringWithFormat:@"http://itunes.apple.com/lookup?id=%@",appId] parameters:nil success:^(NSString *msg, id data) {
+    [TLNetworking GET:[NSString stringWithFormat:@"http://itunes.apple.com/lookup?id=%@",appId]
+           parameters:nil
+              success:^(NSString *msg, id data) {
         
         [TLProgressHUD dismiss];
         [self removePlaceholderView];
@@ -103,8 +105,6 @@
     }];
     
     
-    
-  
 
 }
 
@@ -123,50 +123,50 @@
 }
 
 //#pragma mark - Config
-//- (void)configUpdate {
-//
-//    //1:iOS 2:安卓
-//    TLNetworking *http = [[TLNetworking alloc] init];
-//
-//    http.code = @"625918";
-//    http.parameters[@"type"] = @"ios-c";
-//
-//    [http postWithSuccess:^(id responseObject) {
-//
-//        UpdateModel *update = [UpdateModel mj_objectWithKeyValues:responseObject[@"data"]];
-//
-//        //获取当前版本号
-//        NSString *currentVersion = [self buildVersion];
-//
-//        if (![currentVersion isEqualToString:update.version]) {
-//
-//            if ([update.forceUpdate isEqualToString:@"0"]) {
-//
-//                //不强制
-//                [TLAlert alertWithTitle:@"更新提醒" msg:update.note confirmMsg:@"立即升级" cancleMsg:@"稍后提醒" cancle:^(UIAlertAction *action) {
-//
-//                } confirm:^(UIAlertAction *action) {
-//
-//                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[update.downloadUrl stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]]];
-//
-//                }];
-//
-//            } else {
-//
-//                //强制
-//                [TLAlert alertWithTitle:@"更新提醒" message:update.note confirmMsg:@"立即升级" confirmAction:^{
-//
-//                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[update.downloadUrl stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]]];
-//
-//                }];
-//            }
-//        }
-//
-//    } failure:^(NSError *error) {
-//
-//    }];
-//
-//}
+- (void)configUpdate {
+
+    //1:iOS 2:安卓
+    TLNetworking *http = [[TLNetworking alloc] init];
+
+    http.code = @"625918";
+    http.parameters[@"type"] = @"ios-c";
+
+    [http postWithSuccess:^(id responseObject) {
+
+        GengXinModel *update = [GengXinModel mj_objectWithKeyValues:responseObject[@"data"]];
+
+        //获取当前版本号
+        NSString *currentVersion = [self buildVersion];
+
+        if (![currentVersion isEqualToString:update.version]) {
+
+            if ([update.forceUpdate isEqualToString:@"0"]) {
+
+                //不强制
+                [TLAlert alertWithTitle:@"更新提醒" msg:update.note confirmMsg:@"立即升级" cancleMsg:@"稍后提醒" cancle:^(UIAlertAction *action) {
+
+                } confirm:^(UIAlertAction *action) {
+
+                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[update.xiaZaiUrl stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]]];
+
+                }];
+
+            } else {
+
+                //强制
+                [TLAlert alertWithTitle:@"更新提醒" message:update.note confirmMsg:@"立即升级" confirmAction:^{
+
+                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[update.xiaZaiUrl stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]]];
+
+                }];
+            }
+        }
+
+    } failure:^(NSError *error) {
+
+    }];
+
+}
 
 - (void)setRootVC {
     

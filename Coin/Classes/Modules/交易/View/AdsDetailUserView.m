@@ -216,6 +216,7 @@
 //    [self addSubview:self.photoBtn];
     self.userPhotoView = [UserPhotoView photoView];
     [self addSubview:self.userPhotoView];
+    self.userPhotoView.userInteractionEnabled = NO;
     
     //昵称
     self.nameLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:15.0];

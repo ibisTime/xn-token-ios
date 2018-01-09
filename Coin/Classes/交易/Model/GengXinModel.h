@@ -8,13 +8,13 @@
 
 #import "TLBaseModel.h"
 
-@interface UpdateModel : TLBaseModel
+@interface GengXinModel : TLBaseModel
 
 @property (nonatomic, copy) NSString *version;
 
 @property (nonatomic, copy) NSString *note;
 
-@property (nonatomic, copy) NSString *downloadUrl;
+@property (nonatomic, copy) NSString *xiaZaiUrl;
 
 @property (nonatomic, copy) NSString *forceUpdate;
 

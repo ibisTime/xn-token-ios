@@ -262,7 +262,7 @@
 		21205D071FCD6394003C6C7C /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 21205D011FCD6393003C6C7C /* README.txt */; };
 		21205D081FCD6394003C6C7C /* read_me.txt in Resources */ = {isa = PBXBuildFile; fileRef = 21205D051FCD6394003C6C7C /* read_me.txt */; };
 		21205D0C1FCD6512003C6C7C /* TLWXManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 21205D0A1FCD6512003C6C7C /* TLWXManager.m */; };
-		2120A8F81FD4EB5000B03DB0 /* UpdateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2120A8F61FD4EB4F00B03DB0 /* UpdateModel.m */; };
+		2120A8F81FD4EB5000B03DB0 /* GengXinModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2120A8F61FD4EB4F00B03DB0 /* GengXinModel.m */; };
 		2120A8FC1FD51DF800B03DB0 /* UITabBar+Badge.m in Sources */ = {isa = PBXBuildFile; fileRef = 2120A8FB1FD51DF800B03DB0 /* UITabBar+Badge.m */; };
 		2120D8A31FCEE1DE00712600 /* HourPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2120D8A21FCEE1DE00712600 /* HourPickerView.m */; };
 		2121DCC21FC6F17C001FC2E3 /* TradeSellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2121DCC11FC6F17C001FC2E3 /* TradeSellView.m */; };
@@ -448,9 +448,6 @@
 		2EE361271FFA09A800A5C3EB /* ChatInputTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE360CD1FFA09A800A5C3EB /* ChatInputTextView.m */; };
 		2EE361281FFA09A800A5C3EB /* TIMElem+ChatAttachment.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE360CF1FFA09A800A5C3EB /* TIMElem+ChatAttachment.m */; };
 		2EE3612D1FFA1B2F00A5C3EB /* ChatInputToolBarDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE3612C1FFA1B2F00A5C3EB /* ChatInputToolBarDelegate.m */; };
-		2EE361301FFA6CF000A5C3EB /* TLSUI.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2EE3612E1FFA6CEE00A5C3EB /* TLSUI.bundle */; };
-		2EE361311FFA6CF000A5C3EB /* TLSUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EE3612F1FFA6CEF00A5C3EB /* TLSUI.framework */; };
-		2EE361341FFA6EB800A5C3EB /* TestVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE361331FFA6EB800A5C3EB /* TestVC.m */; };
 		2EE361361FFB7D4500A5C3EB /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 2EE361351FFB7D4500A5C3EB /* README.md */; };
 		2EE361391FFC727900A5C3EB /* TLPublishInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE361381FFC727900A5C3EB /* TLPublishInputView.m */; };
 		2EE3613F1FFC738700A5C3EB /* TLBaseLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE3613E1FFC738700A5C3EB /* TLBaseLabel.m */; };
@@ -1057,8 +1054,8 @@
 		21205D051FCD6394003C6C7C /* read_me.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = read_me.txt; sourceTree = "<group>"; };
 		21205D0A1FCD6512003C6C7C /* TLWXManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLWXManager.m; sourceTree = "<group>"; };
 		21205D0B1FCD6512003C6C7C /* TLWXManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLWXManager.h; sourceTree = "<group>"; };
-		2120A8F61FD4EB4F00B03DB0 /* UpdateModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateModel.m; sourceTree = "<group>"; };
-		2120A8F71FD4EB5000B03DB0 /* UpdateModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateModel.h; sourceTree = "<group>"; };
+		2120A8F61FD4EB4F00B03DB0 /* GengXinModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GengXinModel.m; sourceTree = "<group>"; };
+		2120A8F71FD4EB5000B03DB0 /* GengXinModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GengXinModel.h; sourceTree = "<group>"; };
 		2120A8FA1FD51DF800B03DB0 /* UITabBar+Badge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UITabBar+Badge.h"; sourceTree = "<group>"; };
 		2120A8FB1FD51DF800B03DB0 /* UITabBar+Badge.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UITabBar+Badge.m"; sourceTree = "<group>"; };
 		2120D8A11FCEE1DE00712600 /* HourPickerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HourPickerView.h; sourceTree = "<group>"; };
@@ -1406,10 +1403,6 @@
 		2EE3612A1FFA167100A5C3EB /* ImageHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageHeader.h; sourceTree = "<group>"; };
 		2EE3612B1FFA1B2F00A5C3EB /* ChatInputToolBarDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatInputToolBarDelegate.h; sourceTree = "<group>"; };
 		2EE3612C1FFA1B2F00A5C3EB /* ChatInputToolBarDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatInputToolBarDelegate.m; sourceTree = "<group>"; };
-		2EE3612E1FFA6CEE00A5C3EB /* TLSUI.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TLSUI.bundle; sourceTree = "<group>"; };
-		2EE3612F1FFA6CEF00A5C3EB /* TLSUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TLSUI.framework; sourceTree = "<group>"; };
-		2EE361321FFA6EB800A5C3EB /* TestVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestVC.h; sourceTree = "<group>"; };
-		2EE361331FFA6EB800A5C3EB /* TestVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestVC.m; sourceTree = "<group>"; };
 		2EE361351FFB7D4500A5C3EB /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		2EE361371FFC727900A5C3EB /* TLPublishInputView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLPublishInputView.h; sourceTree = "<group>"; };
 		2EE361381FFC727900A5C3EB /* TLPublishInputView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLPublishInputView.m; sourceTree = "<group>"; };
@@ -1451,10 +1444,6 @@
 		2EFFE6B01FF4868300BFCC40 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		2EFFE6B11FF4868400BFCC40 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		2EFFE6B41FF6289600BFCC40 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
-		2EFFE6B71FF628E900BFCC40 /* XGPush.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XGPush.h; sourceTree = "<group>"; };
-		2EFFE6B81FF628E900BFCC40 /* ReleaseNotes.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ReleaseNotes.txt; sourceTree = "<group>"; };
-		2EFFE6B91FF628E900BFCC40 /* libXG-SDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libXG-SDK.a"; sourceTree = "<group>"; };
-		2EFFE6BB1FF628E900BFCC40 /* libxgidfa.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libxgidfa.a; sourceTree = "<group>"; };
 		8863748C5281F9DC1DDF8EEA /* Pods-Coin.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Coin.release.xcconfig"; path = "Pods/Target Support Files/Pods-Coin/Pods-Coin.release.xcconfig"; sourceTree = "<group>"; };
 		AB34D27FC9725550E9092EC2 /* Pods-Coin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Coin.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Coin/Pods-Coin.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1481,7 +1470,6 @@
 				211C01421FC6600300E51FCF /* ImSDK.framework in Frameworks */,
 				21C91D8D1FDBD64D006EDB16 /* AlipaySDK.framework in Frameworks */,
 				211C01471FC6600300E51FCF /* IMMessageExt.framework in Frameworks */,
-				2EE361311FFA6CF000A5C3EB /* TLSUI.framework in Frameworks */,
 				211C01461FC6600300E51FCF /* IMGroupExt.framework in Frameworks */,
 				211C01451FC6600300E51FCF /* IMFriendshipExt.framework in Frameworks */,
 				2EFFE6B51FF6289600BFCC40 /* libsqlite3.0.tbd in Frameworks */,
@@ -1755,7 +1743,6 @@
 		211C013A1FC6600300E51FCF /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				2EFFE6B61FF628E900BFCC40 /* sdk */,
 				2EFFE69D1FF3A22700BFCC40 /* ZDCChat */,
 				21C91D891FDBD64D006EDB16 /* Alipay */,
 				21205CFF1FCD6383003C6C7C /* WeChat */,
@@ -1767,8 +1754,6 @@
 		211C013B1FC6600300E51FCF /* 腾讯云 */ = {
 			isa = PBXGroup;
 			children = (
-				2EE3612E1FFA6CEE00A5C3EB /* TLSUI.bundle */,
-				2EE3612F1FFA6CEF00A5C3EB /* TLSUI.framework */,
 				211C013C1FC6600300E51FCF /* ImSDK.framework */,
 				211C013D1FC6600300E51FCF /* TLSSDK.framework */,
 				211C013E1FC6600300E51FCF /* QALSDK.framework */,
@@ -3363,8 +3348,8 @@
 				21D2168D1FBA90CE0040795E /* BannerModel.m */,
 				211CF9901FC4144700E51FCF /* PayTypeModel.h */,
 				211CF9911FC4144700E51FCF /* PayTypeModel.m */,
-				2120A8F71FD4EB5000B03DB0 /* UpdateModel.h */,
-				2120A8F61FD4EB4F00B03DB0 /* UpdateModel.m */,
+				2120A8F71FD4EB5000B03DB0 /* GengXinModel.h */,
+				2120A8F61FD4EB4F00B03DB0 /* GengXinModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -3401,8 +3386,6 @@
 				2E394FEA1FB056A900BA0829 /* Other */,
 				2E394FF71FB0599D00BA0829 /* Expand */,
 				211DE63B1FB58B4B002FCF3D /* Utils */,
-				2EE361321FFA6EB800A5C3EB /* TestVC.h */,
-				2EE361331FFA6EB800A5C3EB /* TestVC.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -3952,25 +3935,6 @@
 			path = ZDCChat;
 			sourceTree = "<group>";
 		};
-		2EFFE6B61FF628E900BFCC40 /* sdk */ = {
-			isa = PBXGroup;
-			children = (
-				2EFFE6B71FF628E900BFCC40 /* XGPush.h */,
-				2EFFE6B81FF628E900BFCC40 /* ReleaseNotes.txt */,
-				2EFFE6B91FF628E900BFCC40 /* libXG-SDK.a */,
-				2EFFE6BA1FF628E900BFCC40 /* idfa */,
-			);
-			path = sdk;
-			sourceTree = "<group>";
-		};
-		2EFFE6BA1FF628E900BFCC40 /* idfa */ = {
-			isa = PBXGroup;
-			children = (
-				2EFFE6BB1FF628E900BFCC40 /* libxgidfa.a */,
-			);
-			path = idfa;
-			sourceTree = "<group>";
-		};
 		C678617F8B7C3B3F2F7DE44F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -4131,7 +4095,6 @@
 				2EE361361FFB7D4500A5C3EB /* README.md in Resources */,
 				21C91D8C1FDBD64D006EDB16 /* AlipaySDK.bundle in Resources */,
 				2EB9495C1FDF6B1A00CE4B94 /* TraditionalCode.txt in Resources */,
-				2EE361301FFA6CF000A5C3EB /* TLSUI.bundle in Resources */,
 				2EE361051FFA09A800A5C3EB /* 23.gif in Resources */,
 				2EE361181FFA09A800A5C3EB /* 8.gif in Resources */,
 			);
@@ -4493,7 +4456,7 @@
 				21A7F31C1FB2E2F900FAA0A2 /* TLUserExt.m in Sources */,
 				211A34FD1FB4507E00FEB71F /* IdAuthVC.m in Sources */,
 				211C04101FC6604800E51FCF /* Reachability.m in Sources */,
-				2120A8F81FD4EB5000B03DB0 /* UpdateModel.m in Sources */,
+				2120A8F81FD4EB5000B03DB0 /* GengXinModel.m in Sources */,
 				211C042D1FC6604800E51FCF /* NSObject+Json.m in Sources */,
 				215979731FB84CB10029F177 /* BillDetailTableView.m in Sources */,
 				2EE361261FFA09A800A5C3EB /* ChatTextView.m in Sources */,
@@ -4554,7 +4517,6 @@
 				2E3950031FB05AF200BA0829 /* TLOrderVC.m in Sources */,
 				21A7F3191FB2E2F900FAA0A2 /* TLAccountBaseVC.m in Sources */,
 				21CB94F51FDC179700CAB090 /* PersonalModel.m in Sources */,
-				2EE361341FFA6EB800A5C3EB /* TestVC.m in Sources */,
 				211DE6B21FB58B4C002FCF3D /* UIButton+Custom.m in Sources */,
 				211DE6171FB54685002FCF3D /* WalletCell.m in Sources */,
 				211C03F31FC6604800E51FCF /* MenuButton.m in Sources */,

@@ -6,8 +6,8 @@
 //  Copyright © 2017年 caizhuoyue. All rights reserved.
 //
 
-#import "UpdateModel.h"
+#import "GengXinModel.h"
 
-@implementation UpdateModel
+@implementation GengXinModel
 
 @end

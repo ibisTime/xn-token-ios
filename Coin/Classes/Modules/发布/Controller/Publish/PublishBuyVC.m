@@ -14,10 +14,10 @@
 #import "KeyValueModel.h"
 
 #import "APICodeMacro.h"
-
 #import "UIBarButtonItem+convience.h"
 #import "NSString+Check.h"
 #import "PublishService.h"
+#import "ZMAuthVC.h"
 
 @interface PublishBuyVC ()
 //
@@ -40,8 +40,38 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    
     self.title = [LangSwitcher switchLang:@"发布购买" key:nil];
+    
+    //判断是否已经实名
+    if (![[TLUser user].realName valid]) {
+        // 进行实名认证
+        [self setPlaceholderViewTitle:@"您还未进行实名认证" operationTitle:@"前往认证"];
+        [self addPlaceholderView];
+        [self tl_placeholderOperation];
+        
+    } else {
+        
+        [self realNameAuthAfter];
+        
+    }
+    
+}
+
+- (void)tl_placeholderOperation {
+    
+    ZMAuthVC *vc = [[ZMAuthVC alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+    [vc setSuccess:^{
+        
+        [self removePlaceholderView];
+        [self realNameAuthAfter];
+        [self.navigationController popViewControllerAnimated:YES];
+        
+    }];
+    
+}
+
+- (void)realNameAuthAfter {
     
     self.timeArr = [NSMutableArray array];
     
@@ -68,7 +98,6 @@
         
         
     }];
-  
 }
 
 - (void)loadInfo {
@@ -377,14 +406,24 @@
 - (void)queryCoinQuotation {
     
     TLNetworking *http = [TLNetworking new];
-    
     http.code = @"625292";
     http.parameters[@"coin"] = @"ETH";
-    
     [http postWithSuccess:^(id responseObject) {
         
+        
         QuotationModel *model = [QuotationModel tl_objectWithDictionary:responseObject[@"data"]];
-        self.publishView.marketPrice = [NSString stringWithFormat:@"%.2lf", [model.mid doubleValue]];
+        
+        if (self.advertise) {
+            
+            self.publishView.marketPrice = [AdvertiseModel calculateTruePriceByPreYiJia:[self.advertise.premiumRate floatValue]
+                                                                            marketPrice:[model.mid floatValue]];
+            
+        } else {
+            
+            self.publishView.marketPrice = [NSString stringWithFormat:@"%.2lf", [model.mid doubleValue]];
+        }
+            
+     
 
         
 //        NSArray <QuotationModel *>*data = [QuotationModel tl_objectArrayWithDictionaryArray:responseObject[@"data"]];

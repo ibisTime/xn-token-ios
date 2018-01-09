@@ -261,9 +261,7 @@
         [[TLUser user] saveUserInfo:userInfo];
         //初始化用户信息
         [[TLUser user] setUserInfoWithDict:userInfo];
-        //获取人民币和积分账户
-//        [self requestAccountNumber];
-        
+        //
         [self dismissViewControllerAnimated:YES completion:nil];
         
         if (self.loginSuccess) {
@@ -280,38 +278,7 @@
     
 }
 
-#pragma mark - 账户
-- (void)requestAccountNumber {
-    
-    //获取人民币和积分账户
-    TLNetworking *http = [TLNetworking new];
-    http.code = @"802503";
-    http.parameters[@"userId"] = [TLUser user].userId;
-    http.parameters[@"token"] = [TLUser user].token;
-    
-    [http postWithSuccess:^(id responseObject) {
-        
-        NSArray <CurrencyModel *> *arr = [CurrencyModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
-        
-        [arr enumerateObjectsUsingBlock:^(CurrencyModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            
-            if ([obj.currency isEqualToString:@"JF"]) {
-                
-                [TLUser user].jfAccountNumber = obj.accountNumber;
-                
-            } else if ([obj.currency isEqualToString:@"CNY"]) {
-                
-                [TLUser user].rmbAccountNumber = obj.accountNumber;
-            }
-            
-        }];
-        
-    } failure:^(NSError *error) {
-        
-        
-    }];
-}
-
+//
 - (void)tagsAliasCallback:(int)iResCode
                      tags:(NSSet *)tags
                     alias:(NSString *)alias {

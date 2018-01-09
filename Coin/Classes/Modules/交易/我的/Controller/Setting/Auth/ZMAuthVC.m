@@ -29,7 +29,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
+    self.title = @"实名认证";
     [self initSubviews];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(realNameAuth:) name:@"RealNameAuthResult" object:nil];
@@ -95,19 +95,26 @@
 - (void)realNameAuth:(NSNotification *)notification {
     
     if ([notification.object isEqualToString:@"1"]) {
-        
-        [TLUser user].realName = self.realName.text;
-        
-        [TLUser user].idNo = self.idCard.text;
-        
-        if (self.success) {
-            
-            self.success();
-        }
+    
+        [self realNameAuthAfter];
     
     } else {
     
         [TLAlert alertWithError:[LangSwitcher switchLang:@"认证失败, 请重新认证" key:nil]];
+    }
+    
+}
+
+- (void)realNameAuthAfter {
+    
+    
+    [TLUser user].realName = self.realName.text;
+    [TLUser user].idNo = self.idCard.text;
+    [[TLUser user] updateUserInfo];
+    if (self.success) {
+        
+        self.success();
+        
     }
     
 }
@@ -153,25 +160,34 @@
     
     [http postWithSuccess:^(id responseObject) {
         
-        if ([responseObject[@"errorCode"] isEqual:@"0"]) {
+        NSNumber *isSuccess = responseObject[@"isSuccess"];
+        if (isSuccess && [isSuccess isEqual:@1]) {
             
+            //有认证记录
+            [self realNameAuthAfter];
+            
+        } else {
+            
+            //无认证记录
             NSString *bizNo = responseObject[@"data"][@"bizNo"];
             [TLUser user].tempBizNo = bizNo;
             NSString *urlStr = responseObject[@"data"][@"url"];
             [self doVerify:urlStr];
-
-        } else {
-            
-            ZMAuthResultVC *authResultVC = [ZMAuthResultVC new];
-            authResultVC.title = [LangSwitcher switchLang:@"实名认证结果" key:nil];
-            authResultVC.result = NO;
-            authResultVC.realName = self.realName.text;
-            authResultVC.idCard = self.idCard.text;
-            authResultVC.failureReason = responseObject[@"errorInfo"];
-            [self.navigationController pushViewController:authResultVC animated:YES];
             
         }
-        
+  
+            
+     
+            
+//          [self.navigationController popViewControllerAnimated:YES];
+            //
+//            ZMAuthResultVC *authResultVC = [ZMAuthResultVC new];
+//            authResultVC.title = [LangSwitcher switchLang:@"实名认证结果" key:nil];
+//            authResultVC.result = NO;
+//            authResultVC.realName = self.realName.text;
+//            authResultVC.idCard = self.idCard.text;
+//            authResultVC.failureReason = responseObject[@"errorInfo"];
+//            [self.navigationController pushViewController:authResultVC animated:YES];
         
     } failure:^(NSError *error) {
         

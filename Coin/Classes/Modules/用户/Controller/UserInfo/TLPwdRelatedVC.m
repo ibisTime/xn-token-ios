@@ -78,7 +78,7 @@
     
     //手机号
     TLTextField *phoneTf = [[TLTextField alloc] initWithFrame:CGRectMake(0, 10, kScreenWidth, 45)
-                                                    leftTitle:[LangSwitcher switchLang:@"用户名" key:nil]
+                                                    leftTitle:[LangSwitcher switchLang:@"手机号" key:nil]
                                                    titleWidth:leftW
                                                   placeholder:[LangSwitcher switchLang:@"请输入手机号" key:nil]];
     [self.bgSV addSubview:phoneTf];

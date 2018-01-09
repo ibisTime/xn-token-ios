@@ -47,9 +47,7 @@
     _shareView.alpha = 0;
     
     [_shareView setShareAry:shareAry delegate:self];
-    
     [[UIApplication sharedApplication].keyWindow addSubview:_shareView];
-    
     [_shareView mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.left.mas_equalTo(0);
@@ -59,7 +57,7 @@
         
     }];
     
-    [UIView animateWithDuration:0.5 animations:^{
+    [UIView animateWithDuration:0.25 animations:^{
         
         _shareView.alpha = 1;
         
@@ -103,19 +101,12 @@
     WXWebpageObject *webObject = [WXWebpageObject object];
     
     webObject.webpageUrl = _shareURL;
-    
     message.mediaObject = webObject;
-    
     SendMessageToWXReq *req = [[SendMessageToWXReq alloc] init];
-    
     req.bText = NO;
-    
     req.message = message;
-    
     req.scene = [title isEqualToString:@"微信"] ? WXSceneSession: WXSceneTimeline;
-    
     [WXApi sendReq:req];
-    
     [TLWXManager manager].wxShare = self.shareBlock;
     
 }

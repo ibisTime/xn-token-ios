@@ -748,13 +748,18 @@
     
     //支付方式选择
     self.payTypePickerView = [[FilterView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    self.payTypePickerView.autoSelectOne = YES;
     self.payTypePickerView.title = [LangSwitcher switchLang:@"请选择支付方式" key:nil];
     
     //超时时间
     self.payTimeLimitPickerView = [[FilterView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    self.payTimeLimitPickerView.autoSelectOne = YES;
+
     
    //币种选择
    self.coinPickerView = [[FilterView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    self.coinPickerView.autoSelectOne = YES;
+
 
     
 }

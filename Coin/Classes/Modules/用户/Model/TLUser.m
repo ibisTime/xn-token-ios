@@ -187,38 +187,6 @@ NSString *const kGoogleAuthClose = @"0";
 }
 
 #pragma mark - 账户
-- (void)requestAccountNumber {
-    
-    CoinWeakSelf;
-    
-    //获取人民币和积分账户
-    TLNetworking *http = [TLNetworking new];
-    http.code = @"802503";
-    http.parameters[@"userId"] = [TLUser user].userId;
-    http.parameters[@"token"] = [TLUser user].token;
-    
-    [http postWithSuccess:^(id responseObject) {
-        
-        NSArray <CurrencyModel *> *arr = [CurrencyModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
-        
-        [arr enumerateObjectsUsingBlock:^(CurrencyModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            
-            if ([obj.currency isEqualToString:@"JF"]) {
-                
-                weakSelf.jfAccountNumber = obj.accountNumber;
-                
-            } else if ([obj.currency isEqualToString:@"CNY"]) {
-                
-                weakSelf.rmbAccountNumber = obj.accountNumber;
-            }
-            
-        }];
-        
-    } failure:^(NSError *error) {
-        
-        
-    }];
-}
 
 - (void)loginOut {
 

@@ -27,7 +27,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        [self setUpUIWith:frame leftTitleWidth:100];
+        [self setUpUIWith:frame leftTitleWidth:110];
         
     }
     return self;

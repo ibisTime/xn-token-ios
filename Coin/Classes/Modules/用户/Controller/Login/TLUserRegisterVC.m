@@ -24,6 +24,8 @@
 @property (nonatomic,strong) CaptchaView *captchaView;
 //昵称
 @property (nonatomic, strong) TLTextField *nickNameTF;
+@property (nonatomic, strong) TLTextField *referTF;
+
 
 @property (nonatomic,strong) TLTextField *phoneTf;
 
@@ -31,7 +33,7 @@
 
 @property (nonatomic,strong) TLTextField *rePwdTf;
 
-@property (nonatomic,strong) CLLocationManager *sysLocationManager;
+//@property (nonatomic,strong) CLLocationManager *sysLocationManager;
 //
 @property (nonatomic,copy) NSString *province;
 @property (nonatomic,copy) NSString *city;
@@ -61,17 +63,18 @@
     CGFloat margin = ACCOUNT_MARGIN;
     CGFloat w = kScreenWidth - 2*margin;
     CGFloat h = ACCOUNT_HEIGHT;
+    CGFloat titleWidth = 110;
     
     CGFloat btnMargin = 15;
     
     //昵称
-    TLTextField *nickNameTF = [[TLTextField alloc] initWithFrame:CGRectMake(margin, 10, w, h) leftTitle:[LangSwitcher switchLang:@"昵称" key:nil] titleWidth:100 placeholder:[LangSwitcher switchLang:@"请设置你的昵称" key:nil]];
+    TLTextField *nickNameTF = [[TLTextField alloc] initWithFrame:CGRectMake(margin, 10, w, h) leftTitle:[LangSwitcher switchLang:@"昵称" key:nil] titleWidth:titleWidth placeholder:[LangSwitcher switchLang:@"请设置你的昵称" key:nil]];
     
     [self.view addSubview:nickNameTF];
     self.nickNameTF = nickNameTF;
     
     //账号
-    TLTextField *phoneTf = [[TLTextField alloc] initWithFrame:CGRectMake(margin, nickNameTF.yy + 1, w, h) leftTitle:[LangSwitcher switchLang:@"手机号" key:nil] titleWidth:100 placeholder:[LangSwitcher switchLang:@"请输入手机号" key:nil]];
+    TLTextField *phoneTf = [[TLTextField alloc] initWithFrame:CGRectMake(margin, nickNameTF.yy + 1, w, h) leftTitle:[LangSwitcher switchLang:@"手机号" key:nil] titleWidth:titleWidth placeholder:[LangSwitcher switchLang:@"请输入手机号" key:nil]];
     phoneTf.keyboardType = UIKeyboardTypeNumberPad;
     [self.view addSubview:phoneTf];
     self.phoneTf = phoneTf;
@@ -83,15 +86,20 @@
 
     self.captchaView = captchaView;
     
+    //推荐人
+    self.referTF = [[TLTextField alloc] initWithFrame:CGRectMake(margin, captchaView.yy + 1 , w, h) leftTitle:[LangSwitcher switchLang:@"推荐人(选填)" key:nil] titleWidth:titleWidth placeholder:[LangSwitcher switchLang:@"请输入推荐人手机号码" key:nil]];
+    [self.view addSubview:self.referTF];
+    self.referTF.keyboardType = UIKeyboardTypeNumberPad;
+    
     //密码
-    TLTextField *pwdTf = [[TLTextField alloc] initWithFrame:CGRectMake(margin, captchaView.yy + 10, w, h) leftTitle:[LangSwitcher switchLang:@"密码" key:nil] titleWidth:100 placeholder:[LangSwitcher switchLang:@"请输入密码(不少于6位)" key:nil]];
+    TLTextField *pwdTf = [[TLTextField alloc] initWithFrame:CGRectMake(margin, self.referTF.yy + 10, w, h) leftTitle:[LangSwitcher switchLang:@"密码" key:nil] titleWidth:titleWidth placeholder:[LangSwitcher switchLang:@"请输入密码(不少于6位)" key:nil]];
     pwdTf.secureTextEntry = YES;
     
     [self.view addSubview:pwdTf];
     self.pwdTf = pwdTf;
     
     //re密码
-    TLTextField *rePwdTf = [[TLTextField alloc] initWithFrame:CGRectMake(margin, pwdTf.yy + 1, w, h) leftTitle:[LangSwitcher switchLang:@"确认密码" key:nil] titleWidth:100 placeholder:[LangSwitcher switchLang:@"确认密码" key:nil]];
+    TLTextField *rePwdTf = [[TLTextField alloc] initWithFrame:CGRectMake(margin, pwdTf.yy + 1, w, h) leftTitle:[LangSwitcher switchLang:@"确认密码" key:nil] titleWidth:titleWidth placeholder:[LangSwitcher switchLang:@"确认密码" key:nil]];
     rePwdTf.secureTextEntry = YES;
     [self.view addSubview:rePwdTf];
     self.rePwdTf = rePwdTf;
@@ -174,22 +182,9 @@
     }];
 }
 
-- (CLLocationManager *)sysLocationManager {
-    
-    if (!_sysLocationManager) {
-        
-        _sysLocationManager = [[CLLocationManager alloc] init];
-        _sysLocationManager.delegate = self;
-        _sysLocationManager.distanceFilter = 50.0;
-        
-    }
-    return _sysLocationManager;
-    
-}
+
 
 #pragma mark - Events
-
-//--//
 - (void)sendCaptcha {
     
     if (![self.phoneTf.text isPhoneNum]) {
@@ -271,6 +266,12 @@
     http.parameters[@"smsCaptcha"] = self.captchaView.captchaTf.text;
     http.parameters[@"kind"] = APP_KIND;
     http.parameters[@"nickname"] = self.nickNameTF.text;
+    if ([self.referTF.text valid]) {
+        
+        http.parameters[@"userReferee"] = self.referTF.text;
+        http.parameters[@"userRefereeKind"] = APP_KIND;
+       
+    }
     
     [http postWithSuccess:^(id responseObject) {
         

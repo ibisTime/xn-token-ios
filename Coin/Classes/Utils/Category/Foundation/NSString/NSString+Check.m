@@ -163,11 +163,13 @@
 
 - (BOOL)isPhoneNum {
     
-    NSString *str = [self stringByReplacingOccurrencesOfString:@" " withString:@""];
-    //    NSRegularExpression *reg = [[NSRegularExpression alloc] initWithPattern:@"^1[3,4,5,7,8]\\d{9}$" options:NSRegularExpressionCaseInsensitive error:nil];
-    NSString *regStr = @"^1[3,4,5,7,8]\\d{9}$";
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regStr];
-    return [predicate evaluateWithObject:str];
+//    NSString *str = [self stringByReplacingOccurrencesOfString:@" " withString:@""];
+//    //    NSRegularExpression *reg = [[NSRegularExpression alloc] initWithPattern:@"^1[3,4,5,7,8]\\d{9}$" options:NSRegularExpressionCaseInsensitive error:nil];
+//    NSString *regStr = @"^1[3,4,5,7,8]\\d{9}$";
+//    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regStr];
+//    return [predicate evaluateWithObject:str];
+    
+    return self != nil && self.length > 0;
     
 }
 

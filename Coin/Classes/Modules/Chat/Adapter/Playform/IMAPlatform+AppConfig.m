@@ -11,6 +11,7 @@
 #import "AppConfig.h"
 #import "TLUser.h"
 #import "ChatManager.h"
+#import "TLAlert.h"
 
 @implementation IMAPlatform (AppConfig)
 
@@ -68,15 +69,19 @@
     [[IMAPlatform sharedInstance] saveToLocal];
     
     NSUInteger unReadCount = [[IMAPlatform sharedInstance].conversationMgr unReadMessageCount];
-    [UIApplication sharedApplication].applicationIconBadgeNumber = unReadCount;
+//    [UIApplication sharedApplication].applicationIconBadgeNumber = unReadCount;
     
     //
     TIMBackgroundParam  *param = [[TIMBackgroundParam alloc] init];
     [param setGroupUnread:(int)unReadCount];
     [[TIMManager sharedInstance] doBackground:param succ:^() {
+        
         DebugLog(@"doBackgroud Succ");
+        
     } fail:^(int code, NSString * err) {
+        
         DebugLog(@"Fail: %d->%@", code, err);
+        
     }];
 }
 
@@ -127,27 +132,44 @@
                                  msg:[NSString stringWithFormat:@"My Token is :%@", token]];
     TIMTokenParam *param = [[TIMTokenParam alloc] init];
 
-    if ([AppConfig config].runEnv == RunEnvDev ||
-         [AppConfig config].runEnv == RunEnvTest ) {
+    // 注释的代码用来测试 推送证书
+    if (1) {
+    
+        if ([AppConfig config].runEnv == RunEnvDev ||
+ [AppConfig config].runEnv == RunEnvTest ) {
+            
+            param.busiId = PUSH_DEV_BUSI_ID;
+            
+        } else {
+            
+            param.busiId = PUSH_DIS_BUSI_ID;
+            
+        }
         
-        param.busiId = PUSH_DEV_BUSI_ID;
-
     } else {
-        
+
         param.busiId = PUSH_DIS_BUSI_ID;
 
     }
+
+ 
     //
     param.token = deviceToken;
    
     //需要在登录之后，在进行token设置
     [[TIMManager sharedInstance] setToken:param succ:^{
        
+        if ([AppConfig config].runEnv == RunEnvDev) {
+            [TLAlert alertWithInfo:@"上传成功"];
+        }
 //        NSLog(@"-----> 上传token成功 ");
         
     } fail:^(int code, NSString *msg) {
         
 //        NSLog(@"-----> 上传token失败 ");
+        if ([AppConfig config].runEnv == RunEnvDev) {
+            [TLAlert alertWithInfo:@"上传失败"];
+        }
         
     }];
     

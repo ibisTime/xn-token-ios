@@ -902,6 +902,7 @@
 - (void)setAdvertise:(AdvertiseModel *)advertise {
     
     _advertise = advertise;
+//    self.priceTF.text = [NSString stringWithFormat:@"%.2f",[advertise.truePrice floatValue]];
     //最高价
     self.highNumTF.text = [self.advertise.protectPrice convertToSimpleRealMoney];
     //溢价率

@@ -101,65 +101,17 @@
         
     };
     
-    //
-//    JPUSHRegisterEntity * entity = [[JPUSHRegisterEntity alloc] init];
-//    entity.types = JPAuthorizationOptionAlert|JPAuthorizationOptionBadge|JPAuthorizationOptionSound;
-//    if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
-//        // 可以添加自定义categories
-//        // NSSet<UNNotificationCategory *> *categories for iOS10 or later
-//        // NSSet<UIUserNotificationCategory *> *categories for iOS8 and iOS9
-//    }
-//    [JPUSHService registerForRemoteNotificationConfig:entity delegate:self];
-//    //
-//    [JPUSHService setupWithOption:launchOptions
-//                           appKey:@"d3824383346cd157a8976eb6"
-//                          channel:@"ios"
-//                 apsForProduction:NO
-//            advertisingIdentifier:nil];
-    
-    //信鸽推送测试
-//    XGPush *xgPush = [XGPush defaultManager];
-//    [xgPush setEnableDebug:YES ];
-//    [xgPush startXGWithAppID:2200274297
-//                      appKey:@"I87LJLXV417N"
-//                    delegate:nil];
+   
     
     [[IMAPlatform sharedInstance] configOnAppLaunchWithOptions:launchOptions];
     
-//    [[UIApplication sharedApplication] registerForRemoteNotifications];
-    //
-//    [XGPushTokenManager defaultTokenManager].delegatge = self;
-
-//    NSLog(@"%@",[XGPushTokenManager defaultTokenManager].delegatge);
     
-    [self test];
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
     //
     return YES;
     
     
 }
-
-- (void)test {
-    
-  
-    
-}
-
-//- (void)xgPushDidBindWithIdentifier:(nullable NSString *)identifier type:(XGPushTokenBindType)type error:(nullable NSError *)error {
-//
-//    NSLog(@"已经绑定");
-//
-//}
-
-//
-//- (void)xgPushDidUnbindWithIdentifier:(nullable NSString *)identifier type:(XGPushTokenBindType)type error:(nullable NSError *)error {
-//
-//    NSLog(@"已经解绑");
-//
-//
-//}
-
 
 - (void)xgPushDidFinishStart:(BOOL)isSuccess error:(nullable NSError *)error {
     
@@ -246,7 +198,7 @@
                               if (count > 0) {
                                   
                                   [[self rootTabBarController].tabBar showBadgeOnItemIndex:location];
-                                  [UIApplication sharedApplication].applicationIconBadgeNumber = count;
+//                                  [UIApplication sharedApplication].applicationIconBadgeNumber = count;
                                   
                               } else {
                                   
@@ -339,8 +291,7 @@
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
-
-    //
+     
     //先配置到，检查更新的VC
     if (0) {
         

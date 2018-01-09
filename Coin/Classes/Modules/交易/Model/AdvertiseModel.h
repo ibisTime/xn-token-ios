@@ -100,6 +100,12 @@ typedef NS_ENUM(NSUInteger, AdsType) {
 - (NSString *)tradeAmountLimit;
 
 
+/**
+ yiJiaRate -0.99 - 0.99
+
+ */
++ (NSString *)calculateTruePriceByPreYiJia:(float)yiJiaRate marketPrice:(float)marketPrice;
+
 
 @end
 

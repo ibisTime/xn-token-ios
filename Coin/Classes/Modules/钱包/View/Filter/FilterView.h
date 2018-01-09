@@ -12,6 +12,10 @@ typedef void(^DidSelectBlock)(NSInteger index);
 
 @interface FilterView : UIView
 
+
+// default is NO
+@property (nonatomic, assign) BOOL autoSelectOne;
+
 //数据
 @property (nonatomic,copy) NSArray *tagNames;
 

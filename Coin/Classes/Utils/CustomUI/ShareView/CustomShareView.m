@@ -119,18 +119,21 @@ typedef NS_ENUM(NSInteger, ShareType) {
 
 - (void)countAppNum {
     
-    _count = 0;
+//    _count = 0;
+//
+//    BOOL hadInstalledWeixin = [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"weixin://"]] || [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"wechat://"]];
+//    BOOL hadInstalledQQ = [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"mqq://"]];
+//    BOOL hadInstalledWeibo = [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"sinaweibo://"]];
+//    BOOL hadInstalledWeibohd = [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"sinaweibohd://"]];
+//
+//    //计算安装客户端的数量
+//    if (hadInstalledWeixin) {
+//
+//        _count = 2;
+//    }
     
-    BOOL hadInstalledWeixin = [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"weixin://"]] || [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"wechat://"]];
-    BOOL hadInstalledQQ = [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"mqq://"]];
-    BOOL hadInstalledWeibo = [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"sinaweibo://"]];
-    BOOL hadInstalledWeibohd = [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"sinaweibohd://"]];
-    
-    //计算安装客户端的数量
-    if (hadInstalledWeixin) {
-        
-        _count = 2;
-    }
+    BOOL hadInstalledWeixin  = 2;
+    _count = 2;
     
     _secondCount = 0;
     

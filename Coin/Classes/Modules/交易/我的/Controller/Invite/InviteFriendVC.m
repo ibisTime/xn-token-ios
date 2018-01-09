@@ -20,13 +20,12 @@
 #import "TLUserLoginVC.h"
 #import "TLNavigationController.h"
 #import "WebVC.h"
-
+#import "SGQRCodeGenerateManager.h"
 #import "NSString+CGSize.h"
 #import "UILabel+Extension.h"
 #import "UIBarButtonItem+convience.h"
 #import <UIScrollView+TLAdd.h>
 #import "NSString+Extension.h"
-
 #import "AppConfig.h"
 
 @interface InviteFriendVC ()
@@ -50,6 +49,9 @@
 @property (nonatomic, strong) UILabel *numLbl;
 //收益
 @property (nonatomic, strong) UILabel *profitLbl;
+
+@property (nonatomic, copy) NSString *shareBaseUrl;
+
 
 @end
 
@@ -76,6 +78,46 @@
     [self requestInviteNumber];
     //获取分享链接
     [self getShareUrl];
+}
+
+#pragma mark- 分享二维码
+- (void)shareQRCode {
+    
+//        http://h5域名手机号
+    WebVC *vc = [[WebVC alloc] init];
+    if (self.shareBaseUrl) {
+        
+        vc.url = [NSString stringWithFormat:@"%@/user/qrcode.html?m=%@",self.shareBaseUrl,[TLUser user].mobile];
+
+    }
+    [self.navigationController pushViewController:vc animated:YES];
+    return;
+    
+    //背景
+    UIButton *maskView = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    maskView.backgroundColor = [UIColor colorWithWhite:0.2 alpha:0.5];
+    [[UIApplication sharedApplication].keyWindow addSubview:maskView];
+    [maskView addTarget:self
+                 action:@selector(removeFromWindow:)
+       forControlEvents:UIControlEventTouchUpInside];
+    //
+    UIImageView *imageView = [[UIImageView alloc] init];
+    imageView.image = [SGQRCodeGenerateManager generateWithDefaultQRCodeData:self.shareUrl
+                                                              imageViewWidth:140];
+    [maskView addSubview:imageView];
+    [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.centerX.equalTo(maskView.mas_centerX);
+        make.centerY.equalTo(maskView.mas_centerY).offset(-20);
+        
+    }];
+    
+    
+}
+
+- (void)removeFromWindow:(UIButton *)btn {
+    [btn removeFromSuperview];
+    
 }
 
 #pragma mark - Init
@@ -197,35 +239,45 @@
         
     }];
     
-    //我要推荐
-    UIButton *recommendBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"我要推荐" key:nil] titleColor:kWhiteColor backgroundColor:kThemeColor titleFont:kWidth(18) cornerRadius:24];
+    //推荐按钮
+    CGFloat btnMargin = 40;
+    CGFloat btnWidth = (SCREEN_WIDTH - 3*btnMargin)/2.0;
+    CGFloat btnHeight = 40;
+    CGFloat font = 16;
     
-    [recommendBtn addTarget:self action:@selector(inviteFriend) forControlEvents:UIControlEventTouchUpInside];
+    //左边按钮
+   UIButton *leftBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"分享链接" key:nil] titleColor:kWhiteColor backgroundColor:kThemeColor titleFont:font cornerRadius:btnHeight/2.0];
+    [self.scrollView addSubview:leftBtn];
+    [leftBtn addTarget:self action:@selector(inviteFriend) forControlEvents:UIControlEventTouchUpInside];
+    leftBtn.frame = CGRectMake(btnMargin,  profitView.yy + 20, btnWidth, btnHeight);
     
-    recommendBtn.frame = CGRectMake(40, profitView.yy + 20, kScreenWidth - 80, 48);
+   //右边按钮
+   UIButton *rightBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"分享二维码" key:nil] titleColor:kWhiteColor backgroundColor:kThemeColor titleFont:font cornerRadius:btnHeight/2.0];
+    [self.scrollView addSubview:rightBtn];
+    [rightBtn addTarget:self action:@selector(shareQRCode) forControlEvents:UIControlEventTouchUpInside];
+    rightBtn.frame = CGRectMake(leftBtn.xx + btnMargin,  leftBtn.top, btnWidth, btnHeight);
+
+
     
-    [self.scrollView addSubview:recommendBtn];
+//    //我要推荐
+//    UIButton *recommendBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"我要推荐" key:nil] titleColor:kWhiteColor backgroundColor:kThemeColor titleFont:kWidth(18) cornerRadius:24];
+//    [recommendBtn addTarget:self action:@selector(inviteFriend) forControlEvents:UIControlEventTouchUpInside];
+//    recommendBtn.frame = CGRectMake(40, profitView.yy + 20, kScreenWidth - 80, 48);
+//    [self.scrollView addSubview:recommendBtn];
     
+    CGFloat iconTopCommon = leftBtn.yy;
+    //活动规则
     [self.scrollView addSubview:self.centerView];
-    
     UIImageView *iconIV = [[UIImageView alloc] initWithImage:kImage(@"活动规则")];
-    
-    iconIV.frame = CGRectMake(0, recommendBtn.yy + kHeight(36), 105, 12);
-    
+    iconIV.frame = CGRectMake(0, iconTopCommon + kHeight(36), 105, 12);
     iconIV.centerX = self.view.centerX;
-    
     [self.scrollView addSubview:iconIV];
-    
     UILabel *textLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:kWidth(15)];
     
     textLbl.text = [LangSwitcher switchLang:@"活动规则" key:nil];
-    
     textLbl.textAlignment = NSTextAlignmentCenter;
-    
-    textLbl.frame = CGRectMake(0, recommendBtn.yy + kHeight(35), 100, kWidth(15));
-    
+    textLbl.frame = CGRectMake(0, iconTopCommon + kHeight(35), 100, kWidth(15));
     textLbl.centerX = self.view.centerX;
-
     [self.scrollView addSubview:textLbl];
     
     UIView *blueView = [[UIView alloc] initWithFrame:CGRectMake(0, textLbl.yy + kHeight(24), kScreenWidth, 100)];
@@ -333,7 +385,8 @@
         return;
     }
     
-    ShareView *shareView = [[ShareView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight) shareBlock:^(BOOL isSuccess, int errorCode) {
+    ShareView *shareView = [[ShareView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)
+                                                 shareBlock:^(BOOL isSuccess, int errorCode) {
         
         if (isSuccess) {
             
@@ -345,12 +398,11 @@
         }
         
     }];
-    
     shareView.shareTitle = [LangSwitcher switchLang:@"邀请好友" key:nil];
     shareView.shareDesc = [LangSwitcher switchLang:@"快邀请好友来玩吧" key:nil];
     shareView.shareURL = self.shareUrl;
-    
     [self.view addSubview:shareView];
+    
 }
 
 #pragma mark - Data
@@ -427,7 +479,7 @@
 }
 
 - (void)getShareUrl {
-    
+
     NSString *shareStr = [NSString stringWithFormat:@"%@%@", [AppConfig config].shareBaseUrl, [TLUser user].userId];
 
     self.shareUrl = shareStr;
@@ -440,7 +492,7 @@
     [http postWithSuccess:^(id responseObject) {
 
         NSString *url = responseObject[@"data"][@"cvalue"];
-
+        self.shareBaseUrl = url;
         NSString *shareStr = [NSString stringWithFormat:@"%@/?mobile=%@&kind=C", url, [TLUser user].mobile];
         //
         self.shareUrl = shareStr;

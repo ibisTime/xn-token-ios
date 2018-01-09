@@ -24,6 +24,7 @@
 #import "TLUserLoginVC.h"
 #import "TLNavigationController.h"
 #import "HomePageVC.h"
+#import "ZMAuthVC.h"
 
 @interface TradeBuyVC ()
 
@@ -211,6 +212,11 @@
                 return;
             }
             
+            if (![self checkRealNameAuthAndHandle]) {
+                
+                return;
+            }
+            
             if (![self.tradeView.ethTF.text valid]) {
                 
                 [TLAlert alertWithInfo:@"请输入购买金额"];
@@ -359,17 +365,42 @@
 }
 
 
+// yes 已实名
+- (BOOL)checkRealNameAuthAndHandle{
+    
+    if (![[TLUser user].realName valid]) {
+        
+        ZMAuthVC *vc = [[ZMAuthVC alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+        [vc setSuccess:^{
+            
+            [self willCommitOrder];
+            [self.navigationController popViewControllerAnimated:YES];
+            
+        }];
+        return NO;
+    }
+    
+    return YES;
+}
+
+
+
 //我要购买开始聊天，提交交易订单(待下单状态)
 - (void)willCommitOrder {
     
-    TLNetworking *http = [TLNetworking new];
+    if (![self checkRealNameAuthAndHandle]) {
+        
+        return;
+    }
     
+    TLNetworking *http = [TLNetworking new];
+    http.showView = self.view;
     http.code = @"625247";
     http.parameters[@"adsCode"] = self.advertise.code;
     http.parameters[@"buyUser"] = [TLUser user].userId;
     http.parameters[@"token"] = [TLUser user].token;
 
-    
     [http postWithSuccess:^(id responseObject) {
         
         NSString *errorCode = responseObject[@"errorCode"];

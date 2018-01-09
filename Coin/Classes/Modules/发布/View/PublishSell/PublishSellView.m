@@ -951,6 +951,10 @@
 - (void)setAdvertise:(AdvertiseModel *)advertise {
     
     _advertise = advertise;
+    
+    //几个
+//    self.priceTF.text = [NSString stringWithFormat:@"%.2f",[advertise.truePrice floatValue]];
+    
     //最低价
     self.lowNumTF.text = [advertise.protectPrice convertToSimpleRealMoney];
     //溢价率

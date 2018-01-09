@@ -170,7 +170,13 @@
         //默认选中第一个
         if (_selectBlock) {
             
-            _selectBlock(0);
+            
+            if (self.autoSelectOne) {
+                
+                _selectBlock( 0);
+
+            }
+            
         }
         
     }];

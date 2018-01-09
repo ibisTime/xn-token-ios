@@ -52,6 +52,7 @@
     CoinWeakSelf;
     TLNetworking *http = [TLNetworking new];
     http.code = @"625226";
+    http.showView = self.view;
     http.parameters[@"adsCode"] = self.adsCode;
     if ([TLUser user].isLogin) {
         
@@ -102,6 +103,8 @@
         
         
     } failure:^(NSError *error) {
+        
+        
         
     }];
     
@@ -403,10 +406,12 @@
     
     TLNetworking *http = [TLNetworking new];
     http.code = @"625226";
+//    http.showView = self.view;
     http.parameters[@"adsCode"] = self.advertise.code;
     if ([TLUser user].isLogin) {
         
         http.parameters[@"userId"] = [TLUser user].userId;
+        
     }
     
     [http postWithSuccess:^(id responseObject) {
@@ -432,6 +437,7 @@
     TLNetworking *http = [TLNetworking new];
     
     http.code = @"625248";
+    http.showView = self.view;
     http.parameters[@"adsCode"] = self.advertise.code;
     http.parameters[@"sellUser"] = [TLUser user].userId;
     http.parameters[@"token"] = [TLUser user].token;

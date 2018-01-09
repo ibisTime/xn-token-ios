@@ -180,7 +180,12 @@
 - (void)setUpOneBtnAnim:(UIButton *)btn
 {
     
-    [UIView animateWithDuration:0.8 delay:0 usingSpringWithDamping:0.7 initialSpringVelocity:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+    [UIView animateWithDuration:0.5
+                          delay:0
+         usingSpringWithDamping:0.7
+          initialSpringVelocity:0
+                        options:UIViewAnimationOptionCurveEaseIn animations:^{
+                            
         btn.transform = CGAffineTransformIdentity;
         
     } completion:^(BOOL finished){
@@ -197,10 +202,9 @@
     
     self.timer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(returnUp) userInfo:nil repeats:YES];
 
-    [UIView animateWithDuration:0.8 animations:^{
+    [UIView animateWithDuration:0.5 animations:^{
         
         _effectView.alpha = 0.001;
-        
         _cancelBtn.alpha = 0.001;
         
     } completion:^(BOOL finished) {

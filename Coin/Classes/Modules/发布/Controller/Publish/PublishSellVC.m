@@ -418,11 +418,26 @@
     
     http.code = @"625292";
     http.parameters[@"coin"] = @"ETH";
-    
     [http postWithSuccess:^(id responseObject) {
         
         QuotationModel *model = [QuotationModel tl_objectWithDictionary:responseObject[@"data"]];
-        self.publishView.marketPrice = [NSString stringWithFormat:@"%.2lf", [model.mid doubleValue]];
+        
+        if (self.advertise) {
+            
+            self.publishView.marketPrice = [AdvertiseModel calculateTruePriceByPreYiJia:[self.advertise.premiumRate floatValue]
+                                     marketPrice:[model.mid floatValue]];
+            
+        } else {
+            
+            self.publishView.marketPrice = [NSString stringWithFormat:@"%.2lf", [model.mid doubleValue]];
+        }
+        
+       
+     
+        
+            
+//        QuotationModel *model = [QuotationModel tl_objectWithDictionary:responseObject[@"data"]];
+//        self.publishView.marketPrice = [NSString stringWithFormat:@"%.2lf", [model.mid doubleValue]];
         
 //        NSArray <QuotationModel *>*data = [QuotationModel tl_objectArrayWithDictionaryArray:responseObject[@"data"]];
 //

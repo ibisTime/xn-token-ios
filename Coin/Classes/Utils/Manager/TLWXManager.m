@@ -42,15 +42,18 @@
 #pragma mark- 收到微信的回应
 -(void) onResp:(BaseResp*)resp {
     
-    if ([resp isKindOfClass:[PayResp class]]) { //支付
+//    if ([resp isKindOfClass:[PayResp class]]) { //支付
+//        
+//        if (self.wxPay) {
+//
+//            self.wxPay(resp.errCode == 0,resp.errCode);
+//            
+//        }
+//        
+//    } else
         
-        if (self.wxPay) {
-
-            self.wxPay(resp.errCode == 0,resp.errCode);
-            
-        }
         
-    } else if([resp isKindOfClass:[SendMessageToWXResp class]]) { //分享回调
+        if([resp isKindOfClass:[SendMessageToWXResp class]]) { //分享回调
         
         if (self.wxShare) {
             
