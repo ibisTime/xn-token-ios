@@ -49,7 +49,7 @@
     self.tableView = [[CoinAddressTableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
     
     self.tableView.placeHolderView = self.placeHolderView;
-    
+    self.tableView.estimatedRowHeight = 60;
     self.tableView.refreshDelegate = self;
     
     [self.view addSubview:self.tableView];

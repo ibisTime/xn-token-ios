@@ -12,6 +12,8 @@
 #import "TLTableView.h"
 #import "TLPlaceholderView.h"
 #import "InviteModel.h"
+#import "HomePageVC.h"
+#import "TLProgressHUD.h"
 
 @interface HistoryInviteVC ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -87,19 +89,17 @@ static NSString *identifierCell = @"HistoryFriendCellID";
 
     CoinWeakSelf;
     
+    [TLProgressHUD showWithStatus:nil];
     TLPageDataHelper *helper = [[TLPageDataHelper alloc] init];
-    
     helper.code = @"805120";
     helper.parameters[@"userReferee"] = [TLUser user].userId;
-
     helper.tableView = self.tableView;
-
     [helper modelClass:[InviteModel class]];
-    
     [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
         
+        [TLProgressHUD dismiss];
+
         weakSelf.friends = objs;
-        
         [weakSelf.tableView reloadData_tl];
         
     } failure:^(NSError *error) {
@@ -120,6 +120,22 @@ static NSString *identifierCell = @"HistoryFriendCellID";
     }];
     
     [self.tableView endRefreshingWithNoMoreData_tl];
+}
+
+#pragma mark- delegate
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    //
+    HomePageVC *vc = [[HomePageVC alloc] init];
+    
+    //传入userId
+    vc.userId = self.friends[indexPath.row].userId;
+    
+    //
+    [self.navigationController pushViewController:vc animated:YES];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+
+    
 }
 
 #pragma mark - UITableViewDataSource
@@ -147,10 +163,7 @@ static NSString *identifierCell = @"HistoryFriendCellID";
     return 75;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-}
+
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     

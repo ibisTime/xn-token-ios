@@ -23,4 +23,12 @@
 @property (nonatomic, copy) void(^wxPay)(BOOL isSuccess,int errorCode);
 @property (nonatomic, copy) void(^wxShare)(BOOL isSuccess,int errorCode);
 
+
+
+/**
+ 分享图片到微信
+ */
++ (void)wxShareImgWith:(NSString *)title scene:(int)scene desc:(NSString *)desc image:(UIImage *)img;
+
+
 @end

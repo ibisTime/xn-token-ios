@@ -331,7 +331,7 @@
     
     CGFloat rate = [draft.premiumRate doubleValue]/100.0;
     
-    NSString *premiumRate = [NSString stringWithFormat:@"%.2lf", rate];
+    NSString *premiumRate = [NSString stringWithFormat:@"%.4lf", rate];
     
     TLNetworking *http = [TLNetworking new];
     http.showView = self.view;

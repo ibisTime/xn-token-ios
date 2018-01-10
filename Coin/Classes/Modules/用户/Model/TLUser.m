@@ -161,6 +161,9 @@ NSString *const kGoogleAuthClose = @"0";
 
 - (void)refreshLoginTime {
     
+    if (![[TLUser user] checkLogin]) {
+        return;
+    }
     TLNetworking *http = [TLNetworking new];
     http.code = @"805083";
     http.parameters[@"userId"] = [TLUser user].userId;
@@ -194,6 +197,7 @@ NSString *const kGoogleAuthClose = @"0";
     self.token = nil;
     //
     //
+    self.secretUserId = nil;
     self.photo = nil;
     self.mobile = nil;
     self.nickname = nil;
@@ -268,6 +272,7 @@ NSString *const kGoogleAuthClose = @"0";
     self.level = dict[@"level"];
     self.photo = dict[@"photo"];
     self.email = dict[@"email"];
+    self.secretUserId =  dict[@"secretUserId"];
     
     //腾讯云-设置昵称和头像
 //    [IMAPlatform sharedInstance].host.icon = [self.photo convertImageUrl];

@@ -94,6 +94,7 @@
         
         NSString *nickName = _userInfo.nickname;
         NSString *title = [nickName substringToIndex:1];
+        [self.photoBtn setImage:nil forState:UIControlStateNormal];
         [self.photoBtn setTitle:title forState:UIControlStateNormal];
         
     }

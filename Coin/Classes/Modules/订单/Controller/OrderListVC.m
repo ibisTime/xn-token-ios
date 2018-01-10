@@ -180,7 +180,7 @@
     userInfo.friendNickName = friendNickName;
     userInfo.friendUserId = [order.sellUser equalsString:[TLUser user].userId] ? order.buyUser : order.sellUser;
   
-    if ([order.status isEqualToString:@"-1"]) {
+    if ([order.status isEqualToString:kTradeOrderStatusToSubmit]) {
         // 传入user
         WaitingOrderVC *chatVC = [[WaitingOrderVC alloc] initWith:currentIMGroup];
         chatVC.userInfo = userInfo;

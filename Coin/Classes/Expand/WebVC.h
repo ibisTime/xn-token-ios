@@ -12,4 +12,10 @@
 
 @property (nonatomic,copy) NSString *url;
 
+
+/**
+ default is no
+ */
+@property (nonatomic, assign) BOOL canSendWX;
+
 @end

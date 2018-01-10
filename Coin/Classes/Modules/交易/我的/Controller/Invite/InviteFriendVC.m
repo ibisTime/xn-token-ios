@@ -80,37 +80,41 @@
     [self getShareUrl];
 }
 
-#pragma mark- 分享二维码
+#pragma mark- 分享二维码, 注意分享链接的改变
 - (void)shareQRCode {
     
-//        http://h5域名手机号
+//  http://h5域名手机号
     WebVC *vc = [[WebVC alloc] init];
     if (self.shareBaseUrl) {
         
-        vc.url = [NSString stringWithFormat:@"%@/user/qrcode.html?m=%@",self.shareBaseUrl,[TLUser user].mobile];
+//        vc.url = [NSString stringWithFormat:@"%@/user/qrcode.html?m=%@",self.shareBaseUrl,[TLUser user].secretUserId];
+        
+        vc.url = [NSString stringWithFormat:@"%@/user/qrcode.html?inviteCode=%@",self.shareBaseUrl,[TLUser user].secretUserId];
+        vc.title = @"点击分享";
+        vc.canSendWX = YES;
 
     }
     [self.navigationController pushViewController:vc animated:YES];
-    return;
-    
-    //背景
-    UIButton *maskView = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
-    maskView.backgroundColor = [UIColor colorWithWhite:0.2 alpha:0.5];
-    [[UIApplication sharedApplication].keyWindow addSubview:maskView];
-    [maskView addTarget:self
-                 action:@selector(removeFromWindow:)
-       forControlEvents:UIControlEventTouchUpInside];
-    //
-    UIImageView *imageView = [[UIImageView alloc] init];
-    imageView.image = [SGQRCodeGenerateManager generateWithDefaultQRCodeData:self.shareUrl
-                                                              imageViewWidth:140];
-    [maskView addSubview:imageView];
-    [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.centerX.equalTo(maskView.mas_centerX);
-        make.centerY.equalTo(maskView.mas_centerY).offset(-20);
-        
-    }];
+//    return;
+//    
+//    //背景
+//    UIButton *maskView = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+//    maskView.backgroundColor = [UIColor colorWithWhite:0.2 alpha:0.5];
+//    [[UIApplication sharedApplication].keyWindow addSubview:maskView];
+//    [maskView addTarget:self
+//                 action:@selector(removeFromWindow:)
+//       forControlEvents:UIControlEventTouchUpInside];
+//    //
+//    UIImageView *imageView = [[UIImageView alloc] init];
+//    imageView.image = [SGQRCodeGenerateManager generateWithDefaultQRCodeData:self.shareUrl
+//                                                              imageViewWidth:140];
+//    [maskView addSubview:imageView];
+//    [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        
+//        make.centerX.equalTo(maskView.mas_centerX);
+//        make.centerY.equalTo(maskView.mas_centerY).offset(-20);
+//        
+//    }];
     
     
 }
@@ -139,7 +143,7 @@
     CoinWeakSelf;
     
     //顶部轮播
-    TLBannerView *bannerView = [[TLBannerView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kHeight(170))];
+    TLBannerView *bannerView = [[TLBannerView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, (340.0/750)*SCREEN_WIDTH)];
     
     bannerView.selected = ^(NSInteger index) {
         
@@ -166,24 +170,30 @@
     
     CGFloat leftMargin = 15;
     
-    UIImageView *inviteIV = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 170)];
-    
-    inviteIV.image = kImage(@"邀请好友图片");
-    
-    [self.scrollView addSubview:inviteIV];
+    // 此处巨坑
+//    UIImageView *inviteIV = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 170)];
+//    inviteIV.image = kImage(@"邀请好友图片");
+//    [self.scrollView addSubview:inviteIV];
     
     //提成收益
-    UIView *profitView = [[UIView alloc] initWithFrame:CGRectMake(leftMargin, inviteIV.yy + 15, kScreenWidth - 2*leftMargin, 100)];
-    
+    UIView *profitView = [[UIView alloc] initWithFrame:CGRectMake(leftMargin, self.bannerView.yy + 15, kScreenWidth - 2*leftMargin, 100)];
+    [self.scrollView addSubview:profitView];
     profitView.backgroundColor = [UIColor colorWithHexString:@"#fff9eb"];
-    
     profitView.layer.shadowOffset = CGSizeMake(4, 4);
-    
     profitView.layer.shadowOpacity = 1.0f;
-    
     profitView.layer.shadowColor = kBackgroundColor.CGColor;
     
-    [self.scrollView addSubview:profitView];
+    //
+    UIButton *profitViewLeftBtn = [[UIButton alloc] init];
+    [profitView addSubview:profitViewLeftBtn];
+    [profitViewLeftBtn addTarget:self action:@selector(historyFriends) forControlEvents:UIControlEventTouchUpInside];
+    [profitViewLeftBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.left.top.bottom.equalTo(profitView);
+        make.width.equalTo(profitView.mas_width).dividedBy(2);
+        
+    }];
+
     
     //邀请人数
     UILabel *personTextLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kThemeColor font:12.0];
@@ -341,6 +351,8 @@
 
 #pragma mark - Events
 - (void)historyFriends {
+    
+   
 
     CoinWeakSelf;
     
@@ -399,7 +411,7 @@
         
     }];
     shareView.shareTitle = [LangSwitcher switchLang:@"邀请好友" key:nil];
-    shareView.shareDesc = [LangSwitcher switchLang:@"快邀请好友来玩吧" key:nil];
+    shareView.shareDesc = [LangSwitcher switchLang:@"即将开启新币种push交易" key:nil];
     shareView.shareURL = self.shareUrl;
     [self.view addSubview:shareView];
     
@@ -459,6 +471,7 @@
         
         
     }];
+    
 }
 
 - (void)requestActivityRule {
@@ -493,7 +506,11 @@
 
         NSString *url = responseObject[@"data"][@"cvalue"];
         self.shareBaseUrl = url;
-        NSString *shareStr = [NSString stringWithFormat:@"%@/?mobile=%@&kind=C", url, [TLUser user].mobile];
+//        NSString *shareStr = [NSString stringWithFormat:@"%@/?mobile=%@&kind=C", url, [TLUser user].secretUserId];
+        
+        //
+        NSString *shareStr = [NSString stringWithFormat:@"%@/?inviteCode=%@", url, [TLUser user].secretUserId];
+
         //
         self.shareUrl = shareStr;
 

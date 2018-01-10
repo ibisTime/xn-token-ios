@@ -216,17 +216,17 @@
 
 - (void)logout {
     
-    TLTabBarController *tabbarVC = (TLTabBarController *)self.tabBarController;
+    [[NSNotificationCenter defaultCenter] postNotificationName:kUserLoginOutNotification object:nil];
+
     
+    TLTabBarController *tabbarVC = (TLTabBarController *)self.tabBarController;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         
         tabbarVC.selectedIndex = 2;
-        
         [self.navigationController popViewControllerAnimated:NO];
         
     });
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:kUserLoginOutNotification object:nil];
 }
 
 - (void)setGoogleAuth {

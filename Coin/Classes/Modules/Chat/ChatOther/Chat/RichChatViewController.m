@@ -14,8 +14,7 @@
 - (void)dealloc
 {
     
-    [IQKeyboardManager sharedManager].enableAutoToolbar = YES;
-
+    [self addIQKeyboardManager];
     IMAMsg *draft = [_inputView getMsgDraft];
     if (draft) {
         
@@ -59,17 +58,28 @@
     [self.view addSubview:_inputView];
 }
 
+- (void)addIQKeyboardManager {
+    
+    [IQKeyboardManager sharedManager].enable = YES;
+    [IQKeyboardManager sharedManager].enableAutoToolbar = YES;
 
+}
+
+- (void)removeIQKeyboardManager {
+    
+    [IQKeyboardManager sharedManager].enable = NO;
+    [IQKeyboardManager sharedManager].enableAutoToolbar = NO;
+    
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    [IQKeyboardManager sharedManager].enableAutoToolbar = NO;
-    
+    //
+    [self removeIQKeyboardManager];
     IMAMsg *draftMsg = [IMAMsg msgWithDraft:[_conversation getDraft]];
-    
     [_inputView setMsgDraft:draftMsg];
+    
 }
 
 @end

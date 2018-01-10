@@ -194,8 +194,12 @@
 - (void)initSubviews {
     
     self.topView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 70)];
-    
     self.topView.backgroundColor = kWhiteColor;
+    self.topView.userInteractionEnabled = YES;
+    
+    //
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickButton)];
+    [self.topView addGestureRecognizer:tap];
     
     //报价
     self.priceLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:15.0];

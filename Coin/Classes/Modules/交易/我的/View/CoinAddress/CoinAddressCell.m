@@ -45,26 +45,24 @@
     
     //图标
     UIView *iconView = [[UIView alloc] init];
-    
     iconView.layer.borderWidth = 0.5;
     iconView.layer.borderColor = [UIColor colorWithHexString:@"#dedede"].CGColor;
-    
-    [self addSubview:iconView];
+    [self.contentView addSubview:iconView];
     [iconView mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.centerY.equalTo(@0);
+        make.centerY.equalTo(self.contentView.mas_centerY);
         make.left.equalTo(@15);
         make.width.equalTo(@40);
         make.height.equalTo(@40);
+        
     }];
     
     //address
-    UILabel *addressTextLbl = [UILabel labelWithBackgroundColor:kThemeColor textColor:kWhiteColor font:9.0];
-    
+    UILabel *addressTextLbl = [UILabel labelWithBackgroundColor:kThemeColor
+                                                      textColor:kWhiteColor
+                                                           font:9.0];
     addressTextLbl.text = @"Address";
-    
     addressTextLbl.textAlignment = NSTextAlignmentCenter;
-
     [iconView addSubview:addressTextLbl];
     [addressTextLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
@@ -74,12 +72,11 @@
     }];
     
     //Coin
-    UILabel *coinTextLbl = [UILabel labelWithBackgroundColor:kWhiteColor textColor:kTextColor font:11.0];
-    
+    UILabel *coinTextLbl = [UILabel labelWithBackgroundColor:kWhiteColor
+                                                   textColor:kTextColor
+                                                        font:11.0];
     coinTextLbl.text = @"ETH";
-    
     coinTextLbl.textAlignment = NSTextAlignmentCenter;
-    
     [iconView addSubview:coinTextLbl];
     [coinTextLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
@@ -90,26 +87,26 @@
     }];
     
     //地址状态
-    self.statusLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:15.0];
-    
+    self.statusLbl = [UILabel labelWithBackgroundColor:kClearColor
+                                             textColor:kTextColor
+                                                  font:15.0];
     self.statusLbl.textAlignment = NSTextAlignmentRight;
-    
-    [self addSubview:self.statusLbl];
+    [self.contentView addSubview:self.statusLbl];
     [self.statusLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.right.equalTo(self.mas_right).offset(-15);
-        make.top.equalTo(self.mas_top).offset(15);
+        make.right.equalTo(self.contentView.mas_right).offset(-15);
+        make.top.equalTo(self.contentView.mas_top).offset(15);
         make.width.equalTo(@50);
         
     }];
     
     //标签
     self.textLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:16.0];
-    
-    [self addSubview:self.textLbl];
+    self.textLbl.numberOfLines = 0;
+    [self.contentView addSubview:self.textLbl];
     [self.textLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.top.equalTo(self.mas_top).offset(15);
+        make.top.equalTo(self.contentView.mas_top).offset(15);
         make.left.equalTo(iconView.mas_right).offset(10);
         make.right.equalTo(self.statusLbl.mas_left).offset(-10);
         
@@ -117,23 +114,22 @@
     
     //地址
     self.addressLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor2 font:12.0];
-    
     self.addressLbl.numberOfLines = 0;
-    
-    [self addSubview:self.addressLbl];
+    [self.contentView addSubview:self.addressLbl];
     [self.addressLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.top.equalTo(self.textLbl.mas_bottom).offset(10);
         make.left.equalTo(self.textLbl.mas_left);
         
+        make.right.equalTo(self.contentView.mas_right).offset(-10);
+        make.bottom.equalTo(self.contentView.mas_bottom).offset(-10);
+        
     }];
     
     //分割线
     UIView *line = [[UIView alloc] init];
-    
     line.backgroundColor = kLineColor;
-    
-    [self addSubview:line];
+    [self.contentView addSubview:line];
     [line mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.left.right.equalTo(@0);
