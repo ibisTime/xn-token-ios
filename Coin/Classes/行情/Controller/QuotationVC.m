@@ -20,7 +20,8 @@
 //定时器
 @property (nonatomic, strong) NSTimer *timer;
 //
-@property (nonatomic, strong) TLPageDataHelper *helper;
+//@property (nonatomic, strong) TLPageDataHelper *helper;
+
 @property (nonatomic, strong) UIView *footerHintView;
 
 @end
@@ -91,7 +92,7 @@
     helper.tableView = self.tableView;
     [helper modelClass:[CoinQuotationModel class]];
     
-    self.helper = helper;
+//    self.helper = helper;
     
     [self.tableView addRefreshAction:^{
 
@@ -140,20 +141,21 @@
 
 - (void)refreshQuotation {
     
-    CoinWeakSelf;
-    
-    [self.helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
-        
-        weakSelf.quotations = objs;
-        
-        weakSelf.tableView.quotations = objs;
-        
-        [weakSelf.tableView reloadData_tl];
-        
-    } failure:^(NSError *error) {
-        
-        
-    }];
+    [self.tableView beginRefreshing];
+//    CoinWeakSelf;
+//
+//    [self.helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
+//
+//        weakSelf.quotations = objs;
+//
+//        weakSelf.tableView.quotations = objs;
+//
+//        [weakSelf.tableView reloadData_tl];
+//
+//    } failure:^(NSError *error) {
+//
+//
+//    }];
 }
 
 - (void)didReceiveMemoryWarning {

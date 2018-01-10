@@ -276,6 +276,14 @@
     //信任/取消信任
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshData) name:kTrustNotification object:nil];
 
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLoginOut) name:kUserLoginOutNotification object:nil];
+
+}
+
+- (void)userLoginOut {
+    
+    self.helper.parameters[@"token"] = nil;
+    
 }
 
 #pragma mark - Events
