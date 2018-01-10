@@ -35,23 +35,20 @@
 #import "RespHandler.h"
 #import <NBHTTP/NBNetwork.h>
 
-//#import "XGPush.h"
-//#import "XGPushHandler.h"
-//// 引入JPush功能所需头文件
-//#import "JPUSHService.h"
-//// iOS10注册APNs所需头文件
-//#ifdef NSFoundationVersionNumber_iOS_9_x_Max
-//#import <UserNotifications/UserNotifications.h>
-//#endif
-//// 如果需要使用idfa功能所需要引入的头文件（可选）
-//#import <AdSupport/AdSupport.h>
+// 引入JPush功能所需头文件
+#import "JPUSHService.h"
+// iOS10注册APNs所需头文件
+#ifdef NSFoundationVersionNumber_iOS_9_x_Max
+#import <UserNotifications/UserNotifications.h>
+#endif
+// 如果需要使用idfa功能所需要引入的头文件（可选）
+#import <AdSupport/AdSupport.h>
+
 #import "TLPublishInputView.h"
 
-@interface AppDelegate ()
+@interface AppDelegate ()<JPUSHRegisterDelegate>
 
 @property (nonatomic, strong) FBKVOController *chatKVOCtrl;
-@property (nonatomic, copy) NSArray *cpArr;
-
 @property (nonatomic, strong) RespHandler *respHandler;
 
 @end
@@ -107,77 +104,62 @@
     
     
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+    
     //
     return YES;
     
     
 }
 
-- (void)xgPushDidFinishStart:(BOOL)isSuccess error:(nullable NSError *)error {
-    
-    
+//- (void)jpushTest:(NSDictionary *)launchOptions {
+//
+//
+//    //Required
+//    //notice: 3.0.0及以后版本注册可以这样写，也可以继续用之前的注册方式
+//    JPUSHRegisterEntity * entity = [[JPUSHRegisterEntity alloc] init];
+//    entity.types = JPAuthorizationOptionAlert|JPAuthorizationOptionBadge|JPAuthorizationOptionSound;
+//    [JPUSHService registerForRemoteNotificationConfig:entity delegate:self];
+//
+//    //
+//    [JPUSHService setupWithOption:launchOptions
+//                           appKey:@"d3824383346cd157a8976eb6"
+//                          channel:@"iOS"
+//                 apsForProduction:YES
+//            advertisingIdentifier:nil];
+//
+//
+//}
+
+
+
+
+// iOS 10 Support
+- (void)jpushNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(NSInteger))completionHandler {
+    // Required
+    NSDictionary * userInfo = notification.request.content.userInfo;
+    if([notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
+        [JPUSHService handleRemoteNotification:userInfo];
+    }
+    completionHandler(UNNotificationPresentationOptionAlert); // 需要执行这个方法，选择是否提醒用户，有Badge、Sound、Alert三种类型可以选择设置
 }
 
-
-//- (void)xgPushDidFinishStop:(BOOL)isSuccess error:(nullable NSError *)error {
-//
-//}
-//
-//- (void)xgPushDidReportNotification:(BOOL)isSuccess error:(nullable NSError *)error {
-//
-//
-//}
-
-//- (void)xgPushUserNotificationCenter:(nonnull UNUserNotificationCenter *)center
-//             willPresentNotification:(nullable UNNotification *)notification
-//               withCompletionHandler:(nonnull void (^)(UNNotificationPresentationOptions options))completionHandler {
-//
-//    [[XGPush defaultManager] reportXGNotificationInfo:notification.request.content.userInfo];
-//
-//    completionHandler(UNNotificationPresentationOptionBadge | UNNotificationPresentationOptionSound | UNNotificationPresentationOptionAlert);
-//    NSLog(@"收到通知");
-//
-//}
-
-//- (void)xgPushUserNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler {
-//
-//}
-
-//- (void)xgPushUserNotificationCenter:(nonnull UNUserNotificationCenter *)center
-//      didReceiveNotificationResponse:(nullable UNNotificationResponse *)response
-//               withCompletionHandler:(nonnull void (^)(void))completionHandler {
-//    
-//    completionHandler();
-//    
-//}
-
 // iOS 10 Support
-//- (void)jpushNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(NSInteger))completionHandler {
-//    // Required
-//    NSDictionary * userInfo = notification.request.content.userInfo;
-//    if([notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
-//        [JPUSHService handleRemoteNotification:userInfo];
-//    }
-//    completionHandler(UNNotificationPresentationOptionAlert); // 需要执行这个方法，选择是否提醒用户，有Badge、Sound、Alert三种类型可以选择设置
-//}
-
-// iOS 10 Support
-//- (void)jpushNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)())completionHandler {
-//    // Required
-//    NSDictionary * userInfo = response.notification.request.content.userInfo;
-//    if([response.notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
-//        [JPUSHService handleRemoteNotification:userInfo];
-//    }
-//    completionHandler();  // 系统要求执行这个方法
-//}
+- (void)jpushNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)())completionHandler {
+    // Required
+    NSDictionary * userInfo = response.notification.request.content.userInfo;
+    if([response.notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
+        [JPUSHService handleRemoteNotification:userInfo];
+    }
+    completionHandler();  // 系统要求执行这个方法
+}
 
 #pragma mark- 上传推送 token
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
 
 
     [[IMAPlatform sharedInstance] configOnAppRegistAPNSWithDeviceToken:deviceToken];
-//    [[XGPushTokenManager defaultTokenManager] registerDeviceToken:deviceToken];
-//    NSString *str = [XGPushTokenManager defaultTokenManager].deviceTokenString;
+
+//    [JPUSHService registerDeviceToken:deviceToken];
 
 }
 

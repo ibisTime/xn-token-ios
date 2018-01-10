@@ -133,26 +133,18 @@
     TIMTokenParam *param = [[TIMTokenParam alloc] init];
 
     // 注释的代码用来测试 推送证书
-    if (1) {
     
-        if ([AppConfig config].runEnv == RunEnvDev ||
- [AppConfig config].runEnv == RunEnvTest ) {
-            
-            param.busiId = PUSH_DEV_BUSI_ID;
-            
-        } else {
-            
-            param.busiId = PUSH_DIS_BUSI_ID;
-            
-        }
+    if ([AppConfig config].runEnv == RunEnvDev ||
+        [AppConfig config].runEnv == RunEnvTest ) {
+        
+        param.busiId = PUSH_DEV_BUSI_ID;
         
     } else {
-
+        
         param.busiId = PUSH_DIS_BUSI_ID;
-
+        
     }
-
- 
+    
     //
     param.token = deviceToken;
    
