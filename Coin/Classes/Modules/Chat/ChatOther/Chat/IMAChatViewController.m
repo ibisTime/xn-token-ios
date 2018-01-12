@@ -193,8 +193,7 @@
 }
 
 
--(void)hiddenKeyBoard
-{
+-(void)hiddenKeyBoard {
 //    [[UIApplication sharedApplication] sendAction:@selector(resignFirstResponder) to:nil from:nil forEvent:nil];
     [_inputView resignFirstResponder];
 }

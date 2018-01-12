@@ -18,11 +18,14 @@
 #import <CDCommon/DeviceUtil.h>
 #import "OrderListVC.h"
 
+#define SHOW_BADGE_LEFT_INDEX 0
+#define SHOW_BADGE_RIGHT_INDEX 1
+
 @interface TLOrderVC ()<SegmentDelegate, RefreshDelegate, MsgDelegate>
 
 //货币切换
 @property (nonatomic, strong) CoinChangeView *changeView;
-@property (nonatomic, strong) TopLabelUtil *labelUnil;
+@property (nonatomic, strong) TopLabelUtil *labelUtil;
 @property (nonatomic, strong) UIScrollView *switchScrollView;
 @property (nonatomic, strong) OrderListVC *ingOrderListVC;
 @property (nonatomic, strong) OrderListVC *endOrderListVC;
@@ -36,7 +39,7 @@
     [super viewDidLoad];
     
     //中间切换
-    self.navigationItem.titleView = self.labelUnil;
+    self.navigationItem.titleView = self.labelUtil;
     
     //货币切换
     [self addCoinChangeView];
@@ -55,13 +58,6 @@
     //
     [IMAPlatform sharedInstance].conversationMgr.msgDelegate = self;
 
-}
-
-- (void)test {
-    
-//    IMAUser *user
-//    [[IMAPlatform sharedInstance].conversationMgr chatWith:<#(IMAUser *)#>]
-    
 }
 
 
@@ -99,17 +95,17 @@
             
             if ([orderModel.status equalsString:obj]) {
                 //正在进行的订单，左边
-                [self.labelUnil showBadgeOnItemIndex:0];
+                [self.labelUtil showBadgeOnItemIndex:SHOW_BADGE_LEFT_INDEX];
                 hasLook = YES;
 //                [self orderRefresh];
             }
+            
         }];
         
         if (!hasLook) {
-            [self.labelUnil showBadgeOnItemIndex:1];
+            [self.labelUtil showBadgeOnItemIndex:SHOW_BADGE_RIGHT_INDEX];
         }
        
-        
     } failure:^(NSError *error) {
         
     }];
@@ -125,6 +121,7 @@
     self.endOrderListVC.pageDataHelper.parameters[@"belongUser"] = [TLUser user].userId;
     [self addUnReadMsgKVO];
     [self orderRefresh];
+    [self changeTopMsgRedHintToZero];
     
 }
 
@@ -146,11 +143,24 @@
     
 }
 
+
+#pragma mark- 顶部红点消失相关方法
 - (void)changeTopMsgRedHintToZero {
     
-    [self.labelUnil hideBadgeOnItemIndex:0];
-    [self.labelUnil hideBadgeOnItemIndex:1];
+    [self changeLeftTopMsgRedHintToZero];
+    [self changeRightTopMsgRedHintToZero];
+}
 
+- (void)changeLeftTopMsgRedHintToZero {
+    
+    [self.labelUtil hideBadgeOnItemIndex:SHOW_BADGE_LEFT_INDEX];
+    
+}
+
+- (void)changeRightTopMsgRedHintToZero {
+    
+    [self.labelUtil hideBadgeOnItemIndex:SHOW_BADGE_RIGHT_INDEX];
+    
 }
 
 - (void)orderRefresh {
@@ -176,10 +186,54 @@
                                   //让顶部的取置0
                                   [weakSelf changeTopMsgRedHintToZero];
                                   [weakSelf orderReloadData];
+                                  
                               } else {
+                                  
                                   [weakSelf orderRefresh];
+                                  dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+                                      
+                                      __block int leftUnReadCount = 0;
+                                      __block int rightUnReadCount = 0;
 
+                                      [self.ingOrderListVC.orderGroups enumerateObjectsUsingBlock:^(OrderModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                                          
+                                          TIMConversation *conversation =  [[TIMManager sharedInstance] getConversation:TIM_GROUP receiver:obj.code];
+                                          leftUnReadCount += conversation.getUnReadMessageNum;
+                                          
+                                      }];
+                                      
+                                      [self.endOrderListVC.orderGroups enumerateObjectsUsingBlock:^(OrderModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                                          
+                                          TIMConversation *conversation =  [[TIMManager sharedInstance] getConversation:TIM_GROUP receiver:obj.code];
+                                          rightUnReadCount += conversation.getUnReadMessageNum;
+                                          
+                                      }];
+                                      
+                                      //
+                                      if(leftUnReadCount <= 0) {
+                                          
+                                          dispatch_async(dispatch_get_main_queue() , ^{
+                                              
+                                              [self changeLeftTopMsgRedHintToZero];
+                                              
+                                          });
+                                      }
+                                      
+                                      //
+                                      if(rightUnReadCount <= 0) {
+                                          
+                                          dispatch_async(dispatch_get_main_queue() , ^{
+                                              
+                                              [self changeRightTopMsgRedHintToZero];
+                                              
+                                          });
+                                          
+                                      }
+                                      
+                                  });
+                                  
                               }
+                              
                               
     }];
     
@@ -192,7 +246,7 @@
 -(void)segment:(TopLabelUtil *)segment didSelectIndex:(NSInteger)index {
     
     [self.switchScrollView setContentOffset:CGPointMake((index - 1) * self.switchScrollView.width, 0)];
-    [self.labelUnil dyDidScrollChangeTheTitleColorWithContentOfSet:(index-1)*kScreenWidth];
+    [self.labelUtil dyDidScrollChangeTheTitleColorWithContentOfSet:(index-1)*kScreenWidth];
     
 }
 
@@ -218,18 +272,18 @@
 - (void)setUpUI {
     
     //0.顶部切换
-    self.labelUnil = [[TopLabelUtil alloc]initWithFrame:CGRectMake(kScreenWidth/2 - 120, 25, 240, 44)];
-    self.labelUnil.delegate = self;
-    self.labelUnil.backgroundColor = [UIColor clearColor];
-    self.labelUnil.titleNormalColor = kTextColor;
-    self.labelUnil.titleSelectColor = kThemeColor;
-    self.labelUnil.titleFont = Font(17.0);
-    self.labelUnil.lineType = LineTypeTitleLength;
-    self.labelUnil.titleArray = @[
+    self.labelUtil = [[TopLabelUtil alloc]initWithFrame:CGRectMake(kScreenWidth/2 - 120, 25, 240, 44)];
+    self.labelUtil.delegate = self;
+    self.labelUtil.backgroundColor = [UIColor clearColor];
+    self.labelUtil.titleNormalColor = kTextColor;
+    self.labelUtil.titleSelectColor = kThemeColor;
+    self.labelUtil.titleFont = Font(17.0);
+    self.labelUtil.lineType = LineTypeTitleLength;
+    self.labelUtil.titleArray = @[
                                   [LangSwitcher switchLang: @"进行中" key:nil],
                                   [LangSwitcher switchLang: @"已结束" key:nil]
                                   ];
-    self.navigationItem.titleView = self.labelUnil;
+    self.navigationItem.titleView = self.labelUtil;
 
     
     //1.切换背景

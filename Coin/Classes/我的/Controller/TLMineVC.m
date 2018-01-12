@@ -196,7 +196,6 @@
     
     //邀请好友
     MineModel *inviteFriend = [MineModel new];
-    
     inviteFriend.text = [LangSwitcher switchLang:@"邀请好友" key:nil];
     inviteFriend.imgName = @"邀请";
     inviteFriend.action = ^{
@@ -313,6 +312,9 @@
     
     self.group = [MineGroup new];
 
+    
+#warning 为了规避审核，先去掉微信sdk
+    [AppConfig config].isChecking = YES;
     if ([AppConfig config].isChecking) {
         
         

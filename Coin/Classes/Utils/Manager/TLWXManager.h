@@ -7,10 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "WXApi.h"
-//#import "WXApiObject.h"
 
-@interface TLWXManager : NSObject<WXApiDelegate>
+@interface TLWXManager : NSObject
 
 + (instancetype)manager;
 + (BOOL)judgeAndHintInstalllWX;

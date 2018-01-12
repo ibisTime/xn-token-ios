@@ -18,13 +18,14 @@
 #define DebugLog(fmt, ...) NSLog((@"[%s Line %d] \n" fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__)
 #endif
 
+
 #else
 
 #ifndef DebugLog
 #define DebugLog(fmt, ...) // NSLog((@"[%s Line %d] \n" fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__)
 #endif
 
-#define NSLog // NSLog
+//#define NSLog // NSLog
 
 
 #endif

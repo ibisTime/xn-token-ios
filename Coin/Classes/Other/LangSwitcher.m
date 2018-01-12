@@ -13,7 +13,7 @@
 #define TRADITIONAL @"Traditional"
 
 
-#define LANG @"Traditional"
+#define LANG @"LANG"
 
 
 @implementation LangSwitcher

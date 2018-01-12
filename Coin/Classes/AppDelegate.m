@@ -14,7 +14,7 @@
 #import "UITabBar+Badge.h"
 #import "AppConfig.h"
 #import "IMALoginParam.h"
-#import "WXApi.h"
+//#import "WXApi.h"
 #import "TLWXManager.h"
 #import "TLAlipayManager.h"
 #import "ChatManager.h"
@@ -369,7 +369,9 @@
         
     } else {
         
-        return [WXApi handleOpenURL:url delegate:[TLWXManager manager]];
+#pragma mark- 为了审核暂时注释掉
+//        return [WXApi handleOpenURL:url delegate:[TLWXManager manager]];
+        return YES;
     }
 }
 
@@ -416,41 +418,6 @@
     
 }
 
-// iOS9//
-- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
-    
-    if ([url.host isEqualToString:@"certi.back"]) {
-        
-        //查询是否认证成功
-        TLNetworking *http = [TLNetworking new];
-        http.showView = [UIApplication sharedApplication].keyWindow;
-        http.code = @"805196";
-        http.parameters[@"bizNo"] = [TLUser user].tempBizNo;
-        http.parameters[@"userId"] = [TLUser user].userId;
 
-        [http postWithSuccess:^(id responseObject) {
-            
-            NSString *str = [NSString stringWithFormat:@"%@", responseObject[@"data"][@"isSuccess"]];
-            
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"RealNameAuthResult" object:str];
-            
-        } failure:^(NSError *error) {
-            
-            
-        }];
-        
-        return YES;
-    }
-    
-    if ([url.host isEqualToString:@"safepay"]) {
-        
-        [TLAlipayManager hadleCallBackWithUrl:url];
-        return YES;
-        
-    } else {
-        
-        return [WXApi handleOpenURL:url delegate:[TLWXManager manager]];
-    }
-}
 
 @end

@@ -72,8 +72,7 @@
     
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
     //
     [self removeIQKeyboardManager];

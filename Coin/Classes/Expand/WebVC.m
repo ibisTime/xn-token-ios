@@ -106,7 +106,7 @@
                              style:UIAlertActionStyleDefault
                            handler:^(UIAlertAction * _Nonnull action) {
                                
-                               [TLWXManager wxShareImgWith:@"图片" scene:WXSceneSession desc:@"图片" image:image];
+                               [TLWXManager wxShareImgWith:@"图片" scene:0 desc:@"图片" image:image];
 
                            }];
 
@@ -116,7 +116,7 @@
                                                             style:UIAlertActionStyleDefault
                                                           handler:^(UIAlertAction * _Nonnull action) {
                                                               
-                                                              [TLWXManager wxShareImgWith:@"图片" scene:WXSceneTimeline desc:@"图片" image:image];
+                                                              [TLWXManager wxShareImgWith:@"图片" scene:1 desc:@"图片" image:image];
                                                               
                                                           }];
     

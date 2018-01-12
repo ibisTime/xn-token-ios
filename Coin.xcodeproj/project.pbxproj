@@ -258,9 +258,6 @@
 		21205CF71FCD5FE0003C6C7C /* HistoryFriendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 21205CF61FCD5FDF003C6C7C /* HistoryFriendCell.m */; };
 		21205CFD1FCD61D6003C6C7C /* CustomShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 21205CFB1FCD61D5003C6C7C /* CustomShareView.m */; };
 		21205CFE1FCD61D6003C6C7C /* ShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 21205CFC1FCD61D6003C6C7C /* ShareView.m */; };
-		21205D061FCD6394003C6C7C /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 21205D001FCD6393003C6C7C /* libWeChatSDK.a */; };
-		21205D071FCD6394003C6C7C /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 21205D011FCD6393003C6C7C /* README.txt */; };
-		21205D081FCD6394003C6C7C /* read_me.txt in Resources */ = {isa = PBXBuildFile; fileRef = 21205D051FCD6394003C6C7C /* read_me.txt */; };
 		21205D0C1FCD6512003C6C7C /* TLWXManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 21205D0A1FCD6512003C6C7C /* TLWXManager.m */; };
 		2120A8F81FD4EB5000B03DB0 /* GengXinModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2120A8F61FD4EB4F00B03DB0 /* GengXinModel.m */; };
 		2120A8FC1FD51DF800B03DB0 /* UITabBar+Badge.m in Sources */ = {isa = PBXBuildFile; fileRef = 2120A8FB1FD51DF800B03DB0 /* UITabBar+Badge.m */; };
@@ -1456,7 +1453,6 @@
 				2EFFE6B31FF6287D00BFCC40 /* UserNotifications.framework in Frameworks */,
 				2EFFE6B21FF6286600BFCC40 /* CoreTelephony.framework in Frameworks */,
 				21C91D981FDBD7E4006EDB16 /* CoreMotion.framework in Frameworks */,
-				21205D061FCD6394003C6C7C /* libWeChatSDK.a in Frameworks */,
 				211C05081FC6714500E51FCF /* libz.tbd in Frameworks */,
 				211C050A1FC6715000E51FCF /* libc++.tbd in Frameworks */,
 				211C050C1FC6715B00E51FCF /* libsqlite3.tbd in Frameworks */,
@@ -3027,13 +3023,6 @@
 			path = UITabbar;
 			sourceTree = "<group>";
 		};
-		2121DCC71FC71225001FC2E3 /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
 		2121DCC81FC71230001FC2E3 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -3421,7 +3410,6 @@
 			children = (
 				2E394FA91FB055DE00BA0829 /* Controller */,
 				2121DCC81FC71230001FC2E3 /* Model */,
-				2121DCC71FC71225001FC2E3 /* View */,
 			);
 			path = "订单";
 			sourceTree = "<group>";
@@ -4048,7 +4036,6 @@
 				2E67CD9C1FE253850030C827 /* in.caf in Resources */,
 				2EE3611C1FFA09A800A5C3EB /* 28.gif in Resources */,
 				2EE3610F1FFA09A800A5C3EB /* 19.gif in Resources */,
-				21205D081FCD6394003C6C7C /* read_me.txt in Resources */,
 				2EE3611D1FFA09A800A5C3EB /* 29.gif in Resources */,
 				2EE361151FFA09A800A5C3EB /* 3.gif in Resources */,
 				2EE361031FFA09A800A5C3EB /* 20.gif in Resources */,
@@ -4076,7 +4063,6 @@
 				2EE361071FFA09A800A5C3EB /* 27.gif in Resources */,
 				2EE360F11FFA09A800A5C3EB /* MicroVideoSource.xcassets in Resources */,
 				2EE361121FFA09A800A5C3EB /* 7.gif in Resources */,
-				21205D071FCD6394003C6C7C /* README.txt in Resources */,
 				2EFFE6A51FF3A22700BFCC40 /* ZDCChat.bundle in Resources */,
 				2EE360F61FFA09A800A5C3EB /* youtubeauty.bundle in Resources */,
 				2EE3611A1FFA09A800A5C3EB /* 14.gif in Resources */,

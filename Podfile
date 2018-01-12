@@ -26,6 +26,7 @@ pod 'JPush'
 pod 'Qiniu',                '7.1.5'
 pod 'SVProgressHUD',        '2.2'
 pod 'ZendeskSDK'
+#pod 'WechatOpenSDK'
 #pod 'ZDCChat'
 #设备
 pod 'UIDeviceIdentifier', :git => 'https://github.com/squarefrog/UIDeviceIdentifier.git'

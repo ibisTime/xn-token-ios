@@ -352,30 +352,13 @@
 #pragma  发送信息
 - (void)sendMsg:(IMAMsg *)msg
 {
-    if (msg)
-    {
+    if (msg) {
 //        _isSendMsg = YES;
         [_tableView beginUpdates];
         
+        //添加推送信息
+        [self handleMsgAddPushOffLineInfo:msg];
         //
-        TIMElem *el = [msg.msg getElem:0];
-        if ([el isKindOfClass:[TIMTextElem class]]) {
-            
-            TIMTextElem *textElem = (TIMTextElem *)el;
-            TIMOfflinePushInfo *info = [[TIMOfflinePushInfo alloc] init];
-            //设置
-            info.desc = [NSString stringWithFormat:@"订单（%@）:%@",
-                         [TLUser user].nickname,
-                         textElem.text];
-            //设置订单号
-//            info.ext = _conversation.receiver;
-            info.ext = @"扩展";
-            [msg.msg setOfflinePushInfo:info];
-            
-        } else {
-            //其它消息，暂不进行设置
-            
-        }
         __weak ChatViewController *ws = self;
         DebugLog(@"will sendmessage");
 
@@ -402,6 +385,62 @@
     }
 }
 
+
+//
+- (void)handleMsgAddPushOffLineInfo:(IMAMsg *)msg {
+    //
+    TIMMessage *timMsg = msg.msg;
+    
+    TIMOfflinePushInfo *info = [[TIMOfflinePushInfo alloc] init];
+    //设置订单号
+    info.ext = _conversation.receiver;
+    
+    NSString  *fullString = [self fullStr:timMsg];
+    //设置
+    info.desc = [NSString stringWithFormat:@"订单（%@）:%@",
+                 [TLUser user].nickname,
+                 fullString];
+    [timMsg setOfflinePushInfo:info];
+    
+    
+}
+
+- (NSString *)fullStr:(TIMMessage *)timMsg {
+    
+    NSString *fullStr = @"";
+    int elemCount = timMsg.elemCount;
+    
+    for(int i = 0 ; i < elemCount ; i++) {
+        
+        TIMElem *el =  [timMsg getElem:i];
+        if ([el isKindOfClass:[TIMTextElem class]]) {
+            //文本消息
+            
+            TIMTextElem *textElem = (TIMTextElem *)el;
+            fullStr = [fullStr stringByAppendingString:textElem.text];
+            
+        } else if([el isKindOfClass:[TIMImageElem class]]) {
+            
+            //图片-类型
+            fullStr =  [fullStr stringByAppendingString:@"[图片]"];
+            
+        } else if ([el isKindOfClass:[TIMFaceElem class]]) {
+            //表情-类型
+//            TIMFaceElem *faceElem = (TIMFaceElem *)el;
+//            NSData *data =  faceElem.data;
+//            NSString *str = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+//            fullStr =  [fullStr stringByAppendingString:str];
+            
+            fullStr =  [fullStr stringByAppendingString:@"[表情]"];
+
+        }
+        
+    }
+    
+    return fullStr;
+    
+}
+
 #pragma mar- 展示消息到UI
 - (void)showMsgs:(NSArray *)msgs
 {
@@ -420,7 +459,9 @@
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         
         NSIndexPath *index = [NSIndexPath indexPathForRow:_messageList.count - 1 inSection:0];
-        [_tableView scrollToRowAtIndexPath:index atScrollPosition:UITableViewScrollPositionBottom animated:NO];
+        [_tableView scrollToRowAtIndexPath:index
+                          atScrollPosition:UITableViewScrollPositionBottom
+                                  animated:NO];
     });
     
 }
@@ -461,8 +502,8 @@
     [self setChatTitle];
 }
 
-- (void)sendInputStatus
-{
+- (void)sendInputStatus {
+    
     DebugLog(@"chatviewcontroller sendInputStatus");
     if (_sendInputStatus == SendInputStatus_Send && ![_receiver isGroupType])
     {
@@ -486,14 +527,15 @@
     }
 }
 
-- (void)sendText:(NSString *)text
-{
+- (void)sendText:(NSString *)text {
+    
     if (text && text.length > 0)
     {
         IMAMsg *msg = [IMAMsg msgWithText:text];
         [self sendMsg:msg];
     }
 }
+
 - (void)didChangeToolBarHight:(CGFloat)toHeight
 {
     __weak ChatViewController* weakself = self;
@@ -613,8 +655,7 @@
                 IMAMsg *msg = [IMAMsg msgWithFilePath:saceUrl];
                 [self sendMsg:msg];
             }
-            else
-            {
+            else {
                 [[HUDHelper sharedInstance] tipMessage:@"发送的文件过大"];
             }
         }
@@ -832,15 +873,15 @@
     
     DebugLog(@"-------------->_messageList.count = %ld", (long)_messageList .count);
     
-    NSString *font = [NSString stringWithFormat:@"-------------->cellForRowAtIndexPath crash font(%ld)", (long)testIndex];
-    DebugLog(@"%@", font);
+//    NSString *font = [NSString stringWithFormat:@"-------------->cellForRowAtIndexPath crash font(%ld)", (long)testIndex];
+//    DebugLog(@"%@", font);
     
-    NSLog(@"indexPath.row == %lu",indexPath.row);
+//    NSLog(@"indexPath.row == %lu",indexPath.row);
     
     IMAMsg *msg = [_messageList objectAtIndex:indexPath.row];
 
-    NSString *rail = [NSString stringWithFormat:@"-------------->cellForRowAtIndexPath crash font(%ld)", (long)testIndex];
-    DebugLog(@"%@", rail);
+//    NSString *rail = [NSString stringWithFormat:@"-------------->cellForRowAtIndexPath crash font(%ld)", (long)testIndex];
+//    DebugLog(@"%@", rail);
     
     if ([self isAdminMsg:msg]) {
         

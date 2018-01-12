@@ -65,7 +65,7 @@
         }];
         
         self.cancelBtn = cancelBtn;
-        NSArray *imgName = @[@"发布卖出",@"发布购买"];
+        NSArray *imgName = @[@"发布购买",@"发布卖出"];
         for (NSInteger i = 0; i < titles.count; i++) {
             
             CGFloat w = 110;
@@ -84,9 +84,7 @@
             btn.tag = 1000+i;
 
             [btn setTitleColor:kTextColor forState:UIControlStateNormal];
-            
             btn.titleLabel.font = Font(15.0);
-            
             btn.transform = CGAffineTransformMakeTranslation(0, self.bounds.size.height);
             
             [btn setImage:kImage(imgName[i]) forState:UIControlStateNormal];

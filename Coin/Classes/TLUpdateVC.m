@@ -28,7 +28,6 @@
 
 }
 
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     UIImageView *bgIV = [[UIImageView alloc] initWithFrame:self.view.bounds];
@@ -95,7 +94,7 @@
 //        }
         
         //2.2 用户正常使用
-//        [self configUpdate];
+//      [self configUpdate];
  
     } abnormality:nil failure:^(NSError *error) {
         

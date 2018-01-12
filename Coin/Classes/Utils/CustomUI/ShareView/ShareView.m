@@ -10,9 +10,8 @@
 
 #import "UIView+Responder.h"
 #import "AppMacro.h"
-
 #import "TLBaseVC.h"
-#import "WXApi.h"
+//#import "WXApi.h"
 #import "TLWXManager.h"
 
 @interface ShareView ()
@@ -83,33 +82,34 @@
 - (void)shareWithTitle:(NSString*)title
 {
  
-    CoinWeakSelf;
-    
-    NSString *shareTitle = PASS_NULL_TO_NIL(_shareTitle).length > 0 ? _shareTitle : @"九州宝";
-    NSString *shareDesc = PASS_NULL_TO_NIL(_shareDesc).length > 0 ? _shareDesc : @"欢迎使用九州宝";
-    UIImage *shareImage =  [_shareImgStr isEqualToString:@""] || _shareImgStr == nil? [UIImage imageNamed:@"icon"] : [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[_shareImgStr convertImageUrl]]]];
-    
-    WXMediaMessage *message = [WXMediaMessage message];
-    
-    message.title = shareTitle;
-    message.description = shareDesc;
-    
-    UIImage *img = [UIImage imageWithData:[self imageWithImage:shareImage scaledToSize:CGSizeMake(300, 300)]];
-    
-    [message setThumbImage:img];
-    
-    WXWebpageObject *webObject = [WXWebpageObject object];
-    
-    webObject.webpageUrl = _shareURL;
-    message.mediaObject = webObject;
-    SendMessageToWXReq *req = [[SendMessageToWXReq alloc] init];
-    req.bText = NO;
-    req.message = message;
-    req.scene = [title isEqualToString:@"微信"] ? WXSceneSession: WXSceneTimeline;
-    [WXApi sendReq:req];
-    [TLWXManager manager].wxShare = self.shareBlock;
+//    CoinWeakSelf;
+//    
+//    NSString *shareTitle = PASS_NULL_TO_NIL(_shareTitle).length > 0 ? _shareTitle : @"九州宝";
+//    NSString *shareDesc = PASS_NULL_TO_NIL(_shareDesc).length > 0 ? _shareDesc : @"欢迎使用九州宝";
+//    UIImage *shareImage =  [_shareImgStr isEqualToString:@""] || _shareImgStr == nil? [UIImage imageNamed:@"icon"] : [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[_shareImgStr convertImageUrl]]]];
+//    
+//    WXMediaMessage *message = [WXMediaMessage message];
+//    
+//    message.title = shareTitle;
+//    message.description = shareDesc;
+//    
+//    UIImage *img = [UIImage imageWithData:[self imageWithImage:shareImage scaledToSize:CGSizeMake(300, 300)]];
+//    
+//    [message setThumbImage:img];
+//    WXWebpageObject *webObject = [WXWebpageObject object];
+//    webObject.webpageUrl = _shareURL;
+//    message.mediaObject = webObject;
+//    SendMessageToWXReq *req = [[SendMessageToWXReq alloc] init];
+//    req.bText = NO;
+//    req.message = message;
+//    req.scene = [title isEqualToString:@"微信"] ? WXSceneSession: WXSceneTimeline;
+//    [WXApi sendReq:req];
+//    
+//    [TLWXManager manager].wxShare = self.shareBlock;
     
 }
+
+
 
 - (NSData *)imageWithImage:(UIImage*)image scaledToSize:(CGSize)newSize;
 {

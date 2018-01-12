@@ -90,7 +90,7 @@
 //        vc.url = [NSString stringWithFormat:@"%@/user/qrcode.html?m=%@",self.shareBaseUrl,[TLUser user].secretUserId];
         
         vc.url = [NSString stringWithFormat:@"%@/user/qrcode.html?inviteCode=%@",self.shareBaseUrl,[TLUser user].secretUserId];
-        vc.title = @"点击分享";
+        vc.title = [LangSwitcher switchLang:@"点击分享" key:nil];
         vc.canSendWX = YES;
 
     }

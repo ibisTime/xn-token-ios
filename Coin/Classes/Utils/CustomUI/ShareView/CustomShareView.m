@@ -12,7 +12,7 @@
 #import "AppColorMacro.h"
 
 //客户端
-#import "WXApi.h"
+//#import "WXApi.h"
 
 typedef NS_ENUM(NSInteger, ShareType) {
     
