@@ -6,7 +6,7 @@
 //  Copyright © 2018年  tianlei. All rights reserved.
 //
 
-#import "TLPublishSellVC.h"
+#import "TLPublishVC.h"
 #import <CDCommon/DeviceUtil.h>
 #import "TLPublishInputView.h"
 #import <CDCommon/UIView+Frame.h>
@@ -30,7 +30,7 @@
 #import "CoinUtil.h"
 #import "UIBarButtonItem+convience.h"
 
-@interface TLPublishSellVC ()<UITextFieldDelegate>
+@interface TLPublishVC ()<UITextFieldDelegate>
 
 @property (nonatomic, strong) UIScrollView *bgScrollView;
 @property (nonatomic, strong) UIView *contentView;
@@ -75,7 +75,7 @@
 
 @end
 
-@implementation TLPublishSellVC
+@implementation TLPublishVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];

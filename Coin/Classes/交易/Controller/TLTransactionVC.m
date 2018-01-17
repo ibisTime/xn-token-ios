@@ -29,7 +29,8 @@
 #import "TLNavigationController.h"
 #import "TLUserLoginVC.h"
 #import "AdsService.h"
-#import "TLPublishSellVC.h"
+#import "TLPublishVC.h"
+#import "AppConfig.h"
 
 @interface TLTransactionVC ()<SegmentDelegate, RefreshDelegate, UIScrollViewDelegate>
 
@@ -80,7 +81,7 @@
 
 - (void)test {
     
-    TLPublishSellVC *sellVC =  [[TLPublishSellVC alloc] init];
+    TLPublishVC *sellVC =  [[TLPublishVC alloc] init];
     sellVC.publishType = PublishTypePublishOrSaveDraft;
     [self.navigationController pushViewController:sellVC animated:YES];
     
@@ -295,7 +296,6 @@
 - (void)search {
     
     SearchVC *searchVC = [SearchVC new];
-    
     [self.navigationController pushViewController:searchVC animated:YES];
 }
 
@@ -464,11 +464,14 @@
 #pragma mark - SegmentDelegate
 -(void)segment:(TopLabelUtil *)segment didSelectIndex:(NSInteger)index {
     
-    // 用于发布广告测试
-//    [self test];
-//    return;
-    
-    
+//    if([AppConfig config].runEnv == RunEnvDev) {
+//        
+//        //用于研发测试
+//        [self test];
+//        return;
+//        
+//    }
+
     if (index == 1) {
         
         self.tradeType = kAdsTradeTypeSell;

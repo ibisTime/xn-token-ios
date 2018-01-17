@@ -187,6 +187,7 @@
     }];
     
     CGFloat tfW = (kScreenWidth - 24 - 40)/2.0;
+    CGFloat tfHeight = 44;
     //CNY
     self.cnyTF = [[TLTextField alloc] initWithFrame:CGRectMake(0, 60, tfW, 44) leftTitle:@"CNY" titleWidth:55 placeholder:@""];
     
@@ -202,6 +203,8 @@
         make.left.equalTo(@0);
         make.centerY.equalTo(iconIV.mas_centerY);
         make.width.equalTo(@(tfW));
+        make.height.mas_equalTo(tfHeight);
+
         
     }];
     
@@ -224,17 +227,16 @@
     self.ethTF = [[TLTextField alloc] initWithFrame:CGRectMake(kScreenWidth/2.0 + 5, 65, tfW, 44) leftTitle:@"ETH" titleWidth:50 placeholder:@"请输入数值"];
     
     self.ethTF.delegate = self;
-    
     self.ethTF.keyboardType = UIKeyboardTypeDecimalPad;
-    
     [self.ethTF addTarget:self action:@selector(cnyDidChange:) forControlEvents:UIControlEventEditingChanged];
-    
+
     [self.sellView addSubview:self.ethTF];
     [self.ethTF mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.left.equalTo(iconIV.mas_right).offset(5);
         make.centerY.equalTo(iconIV.mas_centerY);
         make.width.equalTo(@(tfW));
+        make.height.mas_equalTo(tfHeight);
         
     }];
     

@@ -183,6 +183,7 @@
     }];
     
     CGFloat tfW = (kScreenWidth - 24 - 40)/2.0;
+    CGFloat tfHeight = 44;
     //CNY
     self.cnyTF = [[TLTextField alloc] initWithFrame:CGRectMake(0, 60, tfW, 44) leftTitle:@"CNY" titleWidth:55 placeholder:@""];
     self.cnyTF.delegate = self;
@@ -196,6 +197,7 @@
         make.left.equalTo(@0);
         make.centerY.equalTo(iconIV.mas_centerY);
         make.width.equalTo(@(tfW));
+        make.height.mas_equalTo(tfHeight);
         
     }];
     
@@ -209,6 +211,7 @@
         make.right.equalTo(self.cnyTF.mas_right);
         make.bottom.equalTo(@(-15));
         make.height.equalTo(@0.5);
+
         
     }];
     
@@ -227,6 +230,8 @@
         make.left.equalTo(iconIV.mas_right).offset(5);
         make.centerY.equalTo(iconIV.mas_centerY);
         make.width.equalTo(@(tfW));
+        make.height.mas_equalTo(tfHeight);
+
         
     }];
     

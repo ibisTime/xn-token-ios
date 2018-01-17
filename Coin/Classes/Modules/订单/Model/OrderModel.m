@@ -169,6 +169,18 @@
     return dict[self.status];
 }
 
+- (BOOL)isMineBuyOrder {
+    
+    return [self.buyUser isEqualToString:[TLUser user].userId];
+    
+}
+
+- (BOOL)isMineSellOrder {
+    
+    return [self.sellUser isEqualToString:[TLUser user].userId];
+    
+}
+
 @end
 
 

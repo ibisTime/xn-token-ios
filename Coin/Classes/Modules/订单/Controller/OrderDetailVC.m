@@ -38,6 +38,7 @@
     
     self.title = [LangSwitcher switchLang:@"订单详情" key:nil];
     
+    //添加头部
     [self initHeaderView];
     
 //    支付倒计时
@@ -141,8 +142,7 @@
             
         }break;
         
-        case OrderEventsTypeWillRelease:
-        {
+        case OrderEventsTypeWillRelease: {
             [TLAlert alertWithTitle:[LangSwitcher switchLang:@"注意" key:nil]
                                 msg:[LangSwitcher switchLang:@"您确定要释放货币?" key:nil]
                          confirmMsg:[LangSwitcher switchLang:@"确认" key:nil]
@@ -169,10 +169,20 @@
             
         } break;
             
-//        case OrderEventsTypeDidCancel:
-//        {
-//
-//        }break;
+        case OrderEventsTypeBuyerCancel: {
+            
+            [TLAlert alertWithTitle:[LangSwitcher switchLang:@"注意" key:nil]
+                                msg:[LangSwitcher switchLang:@"您确认要取消并关闭交易吗？如果已经向卖家付款，请不要取消交易" key:nil]
+                         confirmMsg:[LangSwitcher switchLang:@"确认取消" key:nil]
+                          cancleMsg:[LangSwitcher switchLang:@"我再想想" key:nil]
+                             cancle:^(UIAlertAction *action) {
+                                 
+                             } confirm:^(UIAlertAction *action) {
+                                 
+                                 [weakSelf buyerCancelOrder];
+                             }];
+
+        }break;
 //
 //        case OrderEventsTypeArbitration:
 //        {
@@ -187,6 +197,26 @@
 - (void)applyArbitration {
     
     [self.arbitrationView show];
+}
+
+- (void)buyerCancelOrder {
+    
+    TLNetworking *http = [TLNetworking new];
+    http.showView = self.view;
+    http.code = @"625242";
+    http.parameters[@"token"] = [TLUser user].token;
+    http.parameters[@"updater"] = [TLUser user].userId;
+    http.parameters[@"code"] = self.order.code;
+//    http.parameters[@"remark"] = @"iOS 取消";
+    [http postWithSuccess:^(id responseObject) {
+        
+        //重新获取状态
+        [self lookOrderDetail];
+
+    } failure:^(NSError *error) {
+        
+    }];
+
 }
 
 #pragma mark - Data

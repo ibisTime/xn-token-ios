@@ -15,7 +15,7 @@ typedef NS_ENUM(NSUInteger, TLPublishVCType) {
 };
 // 卖币 还是 买币
 
-@interface TLPublishSellVC : TLBaseVC
+@interface TLPublishVC : TLBaseVC
 
 @property (nonatomic, strong) NSString *adsCode;
 

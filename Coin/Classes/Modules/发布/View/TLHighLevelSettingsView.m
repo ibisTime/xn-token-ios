@@ -22,6 +22,7 @@
 
 @property (nonatomic, strong) TLPublishInputView *onlyTrustView;
 @property (nonatomic, strong) TLPublishTimeChooseView *publishTimeChooseView;
+@property (nonatomic, strong) UIImageView *topIndicateArrowImgView;
 
 @end
 
@@ -58,6 +59,12 @@
             make.centerY.equalTo(topBtn.mas_centerY);
             
         }];
+        
+        //顶部箭头
+        self.topIndicateArrowImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 6, 10)];
+        
+//        @"更多拷贝"
+        
         
         //开放时间
         self.timeView = [[TLPublishInputView alloc] initWithFrame:CGRectMake(0, topBtn.yy + 5, SCREEN_WIDTH, 45)];

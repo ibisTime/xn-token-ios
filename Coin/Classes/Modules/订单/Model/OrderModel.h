@@ -78,6 +78,17 @@
 + (NSArray *)endStatusList;
 + (NSArray *)ingStatusList;
 
+
+/**
+ 是否为我的购买订单
+ */
+- (BOOL)isMineBuyOrder;
+
+/**
+ 是否为我的出售订单
+ */
+- (BOOL)isMineSellOrder;
+
 @end
 
 FOUNDATION_EXTERN NSString * const kTradeOrderStatusToSubmit;

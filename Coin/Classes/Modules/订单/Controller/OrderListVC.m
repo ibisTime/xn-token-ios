@@ -234,15 +234,29 @@
     
     OrderModel *order = self.orderGroups[indexPath.row];
     
-    if ([order.status isEqualToString:@"-1"]) {
-        
-        return UITableViewCellEditingStyleDelete;
-        
-    }
-    return UITableViewCellEditingStyleNone;
+    
+    return UITableViewCellEditingStyleDelete;
+
+//    if ([order.status isEqualToString:@"-1"]) {
+//
+//        return UITableViewCellEditingStyleDelete;
+//
+//    }
+//
+//    return UITableViewCellEditingStyleNone;
+    
 }
 
 - (NSArray<UITableViewRowAction*> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    
+    //
+//    OrderModel *order = self.orderGroups[indexPath.row];
+//    if ([order.status isEqualToString:@"-1"]) {
+//        
+//        
+//        return nil;
+//    }
     
     NSMutableArray *actionArr = @[].mutableCopy;
     

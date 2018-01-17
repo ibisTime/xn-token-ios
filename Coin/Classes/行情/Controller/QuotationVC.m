@@ -52,9 +52,18 @@
     
     self.title = @"行情";
     
+    [self setPlaceholderViewTitle:@"加载失败" operationTitle:@"重新加载"];
     [self initTableView];
+    
+    [self tl_placeholderOperation];
+    [self startTimer];
+    
+}
+
+- (void)tl_placeholderOperation {
+    
     //查询各个币种情况
-    [self queryCoinQuotation];
+    [self queryCoinQuotation:YES];
     
 }
 
@@ -62,58 +71,56 @@
 - (void)initTableView {
     
     self.tableView = [[QuotationTableView alloc] init];
-    
     [self.view addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.edges.mas_equalTo(UIEdgeInsetsZero);
         
     }];
+    
 }
 
 - (void)startTimer {
     
     //开启定时器,实时刷新
-    self.timer = [NSTimer timerWithTimeInterval:30 target:self selector:@selector(refreshQuotation) userInfo:nil repeats:YES];
-    [[NSRunLoop mainRunLoop] addTimer:self.timer forMode:NSDefaultRunLoopMode];
+    self.timer = [NSTimer timerWithTimeInterval:30
+                                         target:self
+                                       selector:@selector(timeRefresh)
+                                       userInfo:nil
+                                        repeats:YES];
+    [[NSRunLoop mainRunLoop] addTimer:self.timer
+                              forMode:NSDefaultRunLoopMode];
+    
+}
+
+- (void)timeRefresh {
+    
+    [self queryCoinQuotation:NO];
 }
 
 #pragma mark - Data
-- (void)queryCoinQuotation {
+- (void)queryCoinQuotation:(BOOL)showProgress {
     
-    CoinWeakSelf;
-    
-    TLPageDataHelper *helper = [[TLPageDataHelper alloc] init];
-    
-    helper.isList = YES;
-    
-    helper.code = @"625293";
-    
-    helper.tableView = self.tableView;
-    [helper modelClass:[CoinQuotationModel class]];
-    
-//    self.helper = helper;
-    
-    [self.tableView addRefreshAction:^{
-
-        [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
-            
-            weakSelf.quotations = objs;
-            weakSelf.tableView.quotations = objs;
-            [weakSelf.tableView reloadData_tl];
-            
-            //
-            weakSelf.tableView.tableFooterView = weakSelf.footerHintView;
-            
-        } failure:^(NSError *error) {
-            
-            
-        }];
+    TLNetworking *http = [TLNetworking new];
+    http.code = @"625293";
+    if(showProgress) {
+        http.showView = self.view;
+    }
+    [http postWithSuccess:^(id responseObject) {
+        
+        [self removePlaceholderView];
+        self.quotations = [CoinQuotationModel tl_objectArrayWithDictionaryArray:responseObject[@"data"]];
+        self.tableView.quotations = self.quotations;
+        [self.tableView reloadData];
+        self.tableView.tableFooterView = self.footerHintView;
+        
+    } failure:^(NSError *error) {
+        
+        [self addPlaceholderView];
         
     }];
-
-    [self.tableView beginRefreshing];
-
+    
+    
 }
 
 #pragma mark- 底部提醒
@@ -139,28 +146,5 @@
 }
 
 
-- (void)refreshQuotation {
-    
-    [self.tableView beginRefreshing];
-//    CoinWeakSelf;
-//
-//    [self.helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
-//
-//        weakSelf.quotations = objs;
-//
-//        weakSelf.tableView.quotations = objs;
-//
-//        [weakSelf.tableView reloadData_tl];
-//
-//    } failure:^(NSError *error) {
-//
-//
-//    }];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 @end

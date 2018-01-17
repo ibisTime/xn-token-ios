@@ -179,7 +179,7 @@
        
        if (self.isShowMsg) {
            
-           [TLAlert alertWithInfo:@"网络异常"];
+           [TLAlert alertWithInfo:@"当前网络不给力，请稍后再试或切换网络"];
 
        }
        
@@ -192,13 +192,13 @@
     
 }
 
-- (void)hundleSuccess:(id)responseObj {
-
-    if([responseObj[@"success"] isEqual:@1]){
-    
-        
-    }
-}
+//- (void)hundleSuccess:(id)responseObj {
+//
+//    if([responseObj[@"success"] isEqual:@1]){
+//
+//
+//    }
+//}
 
 
 + (NSURLSessionDataTask *)POST:(NSString *)URLString

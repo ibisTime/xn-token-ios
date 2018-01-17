@@ -23,7 +23,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.title = [LangSwitcher switchLang: @"账单详情" key:nil];
+    self.title = [LangSwitcher switchLang:@"账单详情" key:nil];
     
     [self initTableView];
     //
@@ -34,7 +34,7 @@
 #pragma mark - Init
 - (void)initHeaderView {
     
-    self.headerView = [[UIView alloc] initWithFrame:CGRectZero];
+    self.headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 0)];
     self.headerView.backgroundColor = kWhiteColor;
 //    self.tableView.tableHeaderView = self.headerView;
 
@@ -43,9 +43,10 @@
                                                textColor:kTextColor
                                                     font:15.0];
     textLbl.textAlignment = NSTextAlignmentCenter;
-    textLbl.text = _bill.bizNote;
     textLbl.numberOfLines = 0;
     [self.headerView addSubview:textLbl];
+    textLbl.text = _bill.bizNote;
+
 
     CGFloat money = [[_bill.transAmountString convertToSimpleRealCoin] doubleValue];
     NSString *moneyStr = @"";
@@ -89,7 +90,6 @@
         
     }];
     
-//    //
     [line mas_makeConstraints:^(MASConstraintMaker *make) {
 
         make.top.equalTo(amountLbl.mas_bottom).offset(10);
@@ -98,7 +98,10 @@
 
     }];
     
-    //
+//    [self.headerView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.width.mas_equalTo(SCREEN_WIDTH);
+//    }];
+    
     [self.headerView layoutIfNeeded];
     self.headerView.frame = CGRectMake(0, 0, SCREEN_WIDTH, line.bottom);
     self.tableView.tableHeaderView = self.headerView;

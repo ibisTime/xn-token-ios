@@ -313,8 +313,6 @@
     self.group = [MineGroup new];
 
     
-#warning 为了规避审核，先去掉微信sdk
-    [AppConfig config].isChecking = YES;
     if ([AppConfig config].isChecking) {
         
         

@@ -14,7 +14,7 @@
 #import "UITabBar+Badge.h"
 #import "AppConfig.h"
 #import "IMALoginParam.h"
-//#import "WXApi.h"
+#import "WXApi.h"
 #import "TLWXManager.h"
 #import "TLAlipayManager.h"
 #import "ChatManager.h"
@@ -31,7 +31,7 @@
 #import "LangSwitcher.h"
 #import <ZDCChat/ZDCChat.h>
 #import "CoinUtil.h"
-#import "TLPublishSellVC.h"
+#import "TLPublishVC.h"
 #import "RespHandler.h"
 #import <NBHTTP/NBNetwork.h>
 
@@ -369,9 +369,7 @@
         
     } else {
         
-#pragma mark- 为了审核暂时注释掉
-//        return [WXApi handleOpenURL:url delegate:[TLWXManager manager]];
-        return YES;
+        return [WXApi handleOpenURL:url delegate:[TLWXManager manager]];
     }
 }
 

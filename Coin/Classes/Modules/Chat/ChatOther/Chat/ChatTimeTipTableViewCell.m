@@ -8,6 +8,7 @@
 
 #import "ChatTimeTipTableViewCell.h"
 #import "IMAMsg+UITableViewCell.h"
+#import "ChatUserProfile.h"
 
 @implementation ChatTimeTipTableViewCell
 
@@ -181,12 +182,14 @@
     TIMCustomElem *elem = (TIMCustomElem *)[_msg.msg getElem:0];
     NSDictionary *info = [NSJSONSerialization JSONObjectWithData:elem.data options:NSJSONReadingMutableLeaves error:nil];
     NSString *msgSender = [info objectForKey:@"sender"];
+    
+    TIMUserProfile *userProfile = [_msg.msg getSenderProfile];
+    
     if ([selfId isEqualToString:msgSender]) {
         self.textLabel.text = [NSString stringWithFormat:@"你撤回了一条消息"];
-    }
-    else
-    {
-        self.textLabel.text = [NSString stringWithFormat:@"\"%@\" 撤回了一条消息",msgSender];
+    } else {
+        
+        self.textLabel.text = [NSString stringWithFormat:@"\"%@\" 撤回了一条消息",[ChatUserProfile sharedUser].friendNickName];
     }
 }
 

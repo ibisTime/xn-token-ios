@@ -15,10 +15,9 @@
 #import "APICodeMacro.h"
 
 #import "BillVC.h"
-
+#import "TLCoinWithdrawOrderVC.h"
 #import "TLTextField.h"
 #import "FilterView.h"
-
 #import "QRCodeVC.h"
 #import "CoinAddressListVC.h"
 
@@ -80,7 +79,7 @@ typedef NS_ENUM(NSInteger, AddressType) {
     return NO;
 }
 
-#pragma mark - Init
+#pragma mark -
 - (void)addRecordItem {
     
     [UIBarButtonItem addRightItemWithTitle:[LangSwitcher switchLang:@"记录" key:nil]
@@ -447,16 +446,18 @@ typedef NS_ENUM(NSInteger, AddressType) {
     return _coinAddressPicker;
 }
 
-#pragma mark - Events
+#pragma mark - 查看提现订单
 - (void)clickRecord:(UIButton *)sender {
     
-    BillVC *billVC = [BillVC new];
+//    BillVC *billVC = [BillVC new];
+//    billVC.accountNumber = self.currency.accountNumber;
+//    billVC.billType = BillTypeWithdraw;
+//    [self.navigationController pushViewController:billVC animated:YES];
     
-    billVC.accountNumber = self.currency.accountNumber;
+    //
+    TLCoinWithdrawOrderVC *withdrawOrderVC = [[TLCoinWithdrawOrderVC alloc] init];
+    [self.navigationController pushViewController:withdrawOrderVC animated:YES];
     
-    billVC.billType = BillTypeWithdraw;
-
-    [self.navigationController pushViewController:billVC animated:YES];
 }
 
 - (void)clickConfirm:(UIButton *)sender {

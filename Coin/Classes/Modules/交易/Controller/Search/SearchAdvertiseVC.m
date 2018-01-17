@@ -133,7 +133,7 @@
     
     self.minPriceTF.textAlignment = NSTextAlignmentCenter;
     
-    self.minPriceTF.keyboardType = UIKeyboardTypeNumberPad;
+    self.minPriceTF.keyboardType = UIKeyboardTypeDecimalPad;
     
     self.minPriceTF.layer.cornerRadius = 2.5;
     self.minPriceTF.clipsToBounds = YES;
@@ -171,13 +171,10 @@
                                              placeholder:[LangSwitcher switchLang:@"最高价" key:nil]];
     
     self.maxPriceTF.textAlignment = NSTextAlignmentCenter;
-    self.maxPriceTF.keyboardType = UIKeyboardTypeNumberPad;
-    
+    self.maxPriceTF.keyboardType = UIKeyboardTypeDecimalPad;
     self.maxPriceTF.backgroundColor = kBackgroundColor;
-
     self.maxPriceTF.layer.cornerRadius = 2.5;
     self.maxPriceTF.clipsToBounds = YES;
-    
     self.maxPriceTF.delegate = self;
     
     [self.view addSubview:self.maxPriceTF];

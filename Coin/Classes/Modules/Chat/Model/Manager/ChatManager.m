@@ -138,10 +138,12 @@
         //注册通知
         //腾讯云需要在登录成功之后，才能上报token
         // app delegate 中 didRegisterForRemoteNotification 会回调
-        [[UIApplication sharedApplication] registerForRemoteNotifications];
         
-//        NSLog(@"%ld",count);
-//        [IMAConversationManager ].getun
+        //
+        //
+        [[UIApplication sharedApplication] registerForRemoteNotifications];
+        [[IMAPlatform  sharedInstance] configOnLoginSucc:loginParam];
+
         
         [self setPushConfig];
 //        [self test];

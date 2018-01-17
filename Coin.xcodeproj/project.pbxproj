@@ -361,6 +361,12 @@
 		2EB9495C1FDF6B1A00CE4B94 /* TraditionalCode.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2EB949591FDF6B1A00CE4B94 /* TraditionalCode.txt */; };
 		2EB9495F1FE0075000CE4B94 /* AdsService.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EB9495E1FE0075000CE4B94 /* AdsService.m */; };
 		2EBFBF231FD8E56C0066F7E4 /* PublishService.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EBFBF221FD8E56C0066F7E4 /* PublishService.m */; };
+		2ED651C1200871AB0065A1B0 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2ED651BD200871AB0065A1B0 /* README.txt */; };
+		2ED651C2200871AB0065A1B0 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2ED651BF200871AB0065A1B0 /* libWeChatSDK.a */; };
+		2ED651C3200871AB0065A1B0 /* read_me.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2ED651C0200871AB0065A1B0 /* read_me.txt */; };
+		2ED651C9200F2F6F0065A1B0 /* TLCoinWithdrawOrderVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ED651C8200F2F6F0065A1B0 /* TLCoinWithdrawOrderVC.m */; };
+		2ED651CC200F32BC0065A1B0 /* TLCoinWithdrawModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ED651CB200F32BC0065A1B0 /* TLCoinWithdrawModel.m */; };
+		2ED651CF200F34280065A1B0 /* TLCoinWithdrawOrderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ED651CE200F34280065A1B0 /* TLCoinWithdrawOrderCell.m */; };
 		2EE360D61FFA09A800A5C3EB /* ChatTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE360471FFA09A800A5C3EB /* ChatTableViewCell.m */; };
 		2EE360D71FFA09A800A5C3EB /* ChatImageBrowserView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE3604B1FFA09A800A5C3EB /* ChatImageBrowserView.m */; };
 		2EE360D81FFA09A800A5C3EB /* EmojHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE3604C1FFA09A800A5C3EB /* EmojHelper.m */; };
@@ -448,7 +454,7 @@
 		2EE361361FFB7D4500A5C3EB /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 2EE361351FFB7D4500A5C3EB /* README.md */; };
 		2EE361391FFC727900A5C3EB /* TLPublishInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE361381FFC727900A5C3EB /* TLPublishInputView.m */; };
 		2EE3613F1FFC738700A5C3EB /* TLBaseLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE3613E1FFC738700A5C3EB /* TLBaseLabel.m */; };
-		2EE361421FFC7A3500A5C3EB /* TLPublishSellVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE361411FFC7A3500A5C3EB /* TLPublishSellVC.m */; };
+		2EE361421FFC7A3500A5C3EB /* TLPublishVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE361411FFC7A3500A5C3EB /* TLPublishVC.m */; };
 		2EE361481FFCA49700A5C3EB /* TLAdpaterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE361471FFCA49700A5C3EB /* TLAdpaterView.m */; };
 		2EE3614B1FFCAF3B00A5C3EB /* TLHighLevelSettingsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE3614A1FFCAF3B00A5C3EB /* TLHighLevelSettingsView.m */; };
 		2EE3614F1FFD1AF400A5C3EB /* TLSingleTimeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE3614E1FFD1AF400A5C3EB /* TLSingleTimeView.m */; };
@@ -1043,12 +1049,6 @@
 		21205CFA1FCD61D4003C6C7C /* CustomShareView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomShareView.h; sourceTree = "<group>"; };
 		21205CFB1FCD61D5003C6C7C /* CustomShareView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomShareView.m; sourceTree = "<group>"; };
 		21205CFC1FCD61D6003C6C7C /* ShareView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareView.m; sourceTree = "<group>"; };
-		21205D001FCD6393003C6C7C /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
-		21205D011FCD6393003C6C7C /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
-		21205D021FCD6393003C6C7C /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
-		21205D031FCD6393003C6C7C /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
-		21205D041FCD6393003C6C7C /* WechatAuthSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WechatAuthSDK.h; sourceTree = "<group>"; };
-		21205D051FCD6394003C6C7C /* read_me.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = read_me.txt; sourceTree = "<group>"; };
 		21205D0A1FCD6512003C6C7C /* TLWXManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLWXManager.m; sourceTree = "<group>"; };
 		21205D0B1FCD6512003C6C7C /* TLWXManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLWXManager.h; sourceTree = "<group>"; };
 		2120A8F61FD4EB4F00B03DB0 /* GengXinModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GengXinModel.m; sourceTree = "<group>"; };
@@ -1264,6 +1264,18 @@
 		2EB9495E1FE0075000CE4B94 /* AdsService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AdsService.m; sourceTree = "<group>"; };
 		2EBFBF211FD8E56C0066F7E4 /* PublishService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PublishService.h; sourceTree = "<group>"; };
 		2EBFBF221FD8E56C0066F7E4 /* PublishService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PublishService.m; sourceTree = "<group>"; };
+		2ED651BB200871AB0065A1B0 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
+		2ED651BC200871AB0065A1B0 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
+		2ED651BD200871AB0065A1B0 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
+		2ED651BE200871AB0065A1B0 /* WechatAuthSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WechatAuthSDK.h; sourceTree = "<group>"; };
+		2ED651BF200871AB0065A1B0 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
+		2ED651C0200871AB0065A1B0 /* read_me.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = read_me.txt; sourceTree = "<group>"; };
+		2ED651C7200F2F6F0065A1B0 /* TLCoinWithdrawOrderVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLCoinWithdrawOrderVC.h; sourceTree = "<group>"; };
+		2ED651C8200F2F6F0065A1B0 /* TLCoinWithdrawOrderVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLCoinWithdrawOrderVC.m; sourceTree = "<group>"; };
+		2ED651CA200F32BC0065A1B0 /* TLCoinWithdrawModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLCoinWithdrawModel.h; sourceTree = "<group>"; };
+		2ED651CB200F32BC0065A1B0 /* TLCoinWithdrawModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLCoinWithdrawModel.m; sourceTree = "<group>"; };
+		2ED651CD200F34280065A1B0 /* TLCoinWithdrawOrderCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLCoinWithdrawOrderCell.h; sourceTree = "<group>"; };
+		2ED651CE200F34280065A1B0 /* TLCoinWithdrawOrderCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLCoinWithdrawOrderCell.m; sourceTree = "<group>"; };
 		2EE360441FFA089E00A5C3EB /* ChatHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatHeader.h; sourceTree = "<group>"; };
 		2EE360471FFA09A800A5C3EB /* ChatTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatTableViewCell.m; sourceTree = "<group>"; };
 		2EE360481FFA09A800A5C3EB /* ChatHeadRefreshView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatHeadRefreshView.h; sourceTree = "<group>"; };
@@ -1405,8 +1417,8 @@
 		2EE361381FFC727900A5C3EB /* TLPublishInputView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLPublishInputView.m; sourceTree = "<group>"; };
 		2EE3613D1FFC738700A5C3EB /* TLBaseLabel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLBaseLabel.h; sourceTree = "<group>"; };
 		2EE3613E1FFC738700A5C3EB /* TLBaseLabel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLBaseLabel.m; sourceTree = "<group>"; };
-		2EE361401FFC7A3500A5C3EB /* TLPublishSellVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLPublishSellVC.h; sourceTree = "<group>"; };
-		2EE361411FFC7A3500A5C3EB /* TLPublishSellVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLPublishSellVC.m; sourceTree = "<group>"; };
+		2EE361401FFC7A3500A5C3EB /* TLPublishVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLPublishVC.h; sourceTree = "<group>"; };
+		2EE361411FFC7A3500A5C3EB /* TLPublishVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLPublishVC.m; sourceTree = "<group>"; };
 		2EE361461FFCA49700A5C3EB /* TLAdpaterView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLAdpaterView.h; sourceTree = "<group>"; };
 		2EE361471FFCA49700A5C3EB /* TLAdpaterView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLAdpaterView.m; sourceTree = "<group>"; };
 		2EE361491FFCAF3B00A5C3EB /* TLHighLevelSettingsView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLHighLevelSettingsView.h; sourceTree = "<group>"; };
@@ -1464,6 +1476,7 @@
 				06A1FB6431230E34B134069E /* libPods-Coin.a in Frameworks */,
 				2EFFE6A21FF3A22700BFCC40 /* ZDCChatAPI.framework in Frameworks */,
 				211C01421FC6600300E51FCF /* ImSDK.framework in Frameworks */,
+				2ED651C2200871AB0065A1B0 /* libWeChatSDK.a in Frameworks */,
 				21C91D8D1FDBD64D006EDB16 /* AlipaySDK.framework in Frameworks */,
 				211C01471FC6600300E51FCF /* IMMessageExt.framework in Frameworks */,
 				211C01461FC6600300E51FCF /* IMGroupExt.framework in Frameworks */,
@@ -1580,6 +1593,8 @@
 				211A53291FBFE49B00CC6294 /* Rate */,
 				211A53281FBFE47800CC6294 /* Filter */,
 				211A53231FBFE41B00CC6294 /* Bill */,
+				2ED651CD200F34280065A1B0 /* TLCoinWithdrawOrderCell.h */,
+				2ED651CE200F34280065A1B0 /* TLCoinWithdrawOrderCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1739,9 +1754,9 @@
 		211C013A1FC6600300E51FCF /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				2ED651BA200871AB0065A1B0 /* WeChat */,
 				2EFFE69D1FF3A22700BFCC40 /* ZDCChat */,
 				21C91D891FDBD64D006EDB16 /* Alipay */,
-				21205CFF1FCD6383003C6C7C /* WeChat */,
 				211C013B1FC6600300E51FCF /* 腾讯云 */,
 			);
 			path = Extension;
@@ -2408,8 +2423,8 @@
 			isa = PBXGroup;
 			children = (
 				211CF9931FC426BB00E51FCF /* Publish */,
-				2EE361401FFC7A3500A5C3EB /* TLPublishSellVC.h */,
-				2EE361411FFC7A3500A5C3EB /* TLPublishSellVC.m */,
+				2EE361401FFC7A3500A5C3EB /* TLPublishVC.h */,
+				2EE361411FFC7A3500A5C3EB /* TLPublishVC.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2990,19 +3005,6 @@
 			path = ShareView;
 			sourceTree = "<group>";
 		};
-		21205CFF1FCD6383003C6C7C /* WeChat */ = {
-			isa = PBXGroup;
-			children = (
-				21205D001FCD6393003C6C7C /* libWeChatSDK.a */,
-				21205D051FCD6394003C6C7C /* read_me.txt */,
-				21205D011FCD6393003C6C7C /* README.txt */,
-				21205D041FCD6393003C6C7C /* WechatAuthSDK.h */,
-				21205D021FCD6393003C6C7C /* WXApi.h */,
-				21205D031FCD6393003C6C7C /* WXApiObject.h */,
-			);
-			path = WeChat;
-			sourceTree = "<group>";
-		};
 		21205D091FCD6506003C6C7C /* Manager */ = {
 			isa = PBXGroup;
 			children = (
@@ -3066,6 +3068,8 @@
 				211A53341FBFE53100CC6294 /* RateModel.m */,
 				211D3C191FCFE46C00B55F9F /* HistoryRateModel.h */,
 				211D3C1A1FCFE46C00B55F9F /* HistoryRateModel.m */,
+				2ED651CA200F32BC0065A1B0 /* TLCoinWithdrawModel.h */,
+				2ED651CB200F32BC0065A1B0 /* TLCoinWithdrawModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -3529,6 +3533,8 @@
 				211A53261FBFE44C00CC6294 /* Recharge */,
 				211A53251FBFE43900CC6294 /* Rate */,
 				211A53241FBFE42B00CC6294 /* BIll */,
+				2ED651C7200F2F6F0065A1B0 /* TLCoinWithdrawOrderVC.h */,
+				2ED651C8200F2F6F0065A1B0 /* TLCoinWithdrawOrderVC.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -3642,6 +3648,19 @@
 				2182D2EC1FC7E776008EDCE4 /* OrderModel.m */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		2ED651BA200871AB0065A1B0 /* WeChat */ = {
+			isa = PBXGroup;
+			children = (
+				2ED651BB200871AB0065A1B0 /* WXApi.h */,
+				2ED651BC200871AB0065A1B0 /* WXApiObject.h */,
+				2ED651BD200871AB0065A1B0 /* README.txt */,
+				2ED651BE200871AB0065A1B0 /* WechatAuthSDK.h */,
+				2ED651BF200871AB0065A1B0 /* libWeChatSDK.a */,
+				2ED651C0200871AB0065A1B0 /* read_me.txt */,
+			);
+			path = WeChat;
 			sourceTree = "<group>";
 		};
 		2EE360451FFA094800A5C3EB /* ChatOther */ = {
@@ -4031,6 +4050,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2ED651C1200871AB0065A1B0 /* README.txt in Resources */,
 				2EE3611F1FFA09A800A5C3EB /* 17.gif in Resources */,
 				2EE361061FFA09A800A5C3EB /* 33.gif in Resources */,
 				2E67CD9C1FE253850030C827 /* in.caf in Resources */,
@@ -4082,6 +4102,7 @@
 				21C91D8C1FDBD64D006EDB16 /* AlipaySDK.bundle in Resources */,
 				2EB9495C1FDF6B1A00CE4B94 /* TraditionalCode.txt in Resources */,
 				2EE361051FFA09A800A5C3EB /* 23.gif in Resources */,
+				2ED651C3200871AB0065A1B0 /* read_me.txt in Resources */,
 				2EE361181FFA09A800A5C3EB /* 8.gif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4176,7 +4197,7 @@
 				211C04241FC6604800E51FCF /* ADScaleTransition.m in Sources */,
 				211C04501FC6604800E51FCF /* IMAGroup+Admin.m in Sources */,
 				211CF9891FC3F2D100E51FCF /* TradeTableView.m in Sources */,
-				2EE361421FFC7A3500A5C3EB /* TLPublishSellVC.m in Sources */,
+				2EE361421FFC7A3500A5C3EB /* TLPublishVC.m in Sources */,
 				2125B8CA1FD95FD900591812 /* HomePageVC.m in Sources */,
 				211DE6BF1FB58B4C002FCF3D /* NSTimer+tlNoCycle.m in Sources */,
 				211A53221FBFE3A100CC6294 /* RateDescVC.m in Sources */,
@@ -4254,6 +4275,7 @@
 				2E973FDF1FDC0219005C2D5F /* AdsTradeDetailVC.m in Sources */,
 				2182D2F71FC814C6008EDCE4 /* OrderDetailHeaderView.m in Sources */,
 				211C040E1FC6604800E51FCF /* UIImage+Alpha.m in Sources */,
+				2ED651CC200F32BC0065A1B0 /* TLCoinWithdrawModel.m in Sources */,
 				21205CE21FCD3163003C6C7C /* CoinAddressModel.m in Sources */,
 				211C03EE1FC6604800E51FCF /* FBKVOController.m in Sources */,
 				211DE6C61FB58B4C002FCF3D /* HttpLogger.m in Sources */,
@@ -4437,6 +4459,7 @@
 				211C04081FC6604800E51FCF /* GTMBase64.m in Sources */,
 				21D216981FBA9C040040795E /* SystemNoticeVC.m in Sources */,
 				211C04331FC6604800E51FCF /* CommonBaseViewController.m in Sources */,
+				2ED651CF200F34280065A1B0 /* TLCoinWithdrawOrderCell.m in Sources */,
 				211C040A1FC6604800E51FCF /* UIImage+Common.m in Sources */,
 				215979601FB81CC40029F177 /* BillTableView.m in Sources */,
 				21A7F31C1FB2E2F900FAA0A2 /* TLUserExt.m in Sources */,
@@ -4503,6 +4526,7 @@
 				2E3950031FB05AF200BA0829 /* TLOrderVC.m in Sources */,
 				21A7F3191FB2E2F900FAA0A2 /* TLAccountBaseVC.m in Sources */,
 				21CB94F51FDC179700CAB090 /* PersonalModel.m in Sources */,
+				2ED651C9200F2F6F0065A1B0 /* TLCoinWithdrawOrderVC.m in Sources */,
 				211DE6B21FB58B4C002FCF3D /* UIButton+Custom.m in Sources */,
 				211DE6171FB54685002FCF3D /* WalletCell.m in Sources */,
 				211C03F31FC6604800E51FCF /* MenuButton.m in Sources */,
