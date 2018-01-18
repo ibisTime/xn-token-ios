@@ -141,6 +141,20 @@
     return self;
 }
 
+- (void)setDisplyTimeHint:(NSString *)displyTimeHint {
+    
+    _displyTimeHint = [displyTimeHint copy];
+    self.timeView.hintMsg = _displyTimeHint;
+    
+}
+
+- (void)setOnlyTrustHint:(NSString *)onlyTrustHint {
+    
+    _onlyTrustHint = onlyTrustHint;
+    self.onlyTrustView.hintMsg = _onlyTrustHint;
+    
+}
+
 - (void)beginWithCustomTime {
     
     self.customTimeBtn.selected = YES;

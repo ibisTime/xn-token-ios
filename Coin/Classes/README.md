@@ -5,3 +5,6 @@
 `- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath`,
 `ChatSysMsgCell`
 
+### 3.todo
+1.正在聊天时如果有
+

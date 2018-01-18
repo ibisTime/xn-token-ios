@@ -21,7 +21,7 @@
 #import <CDCommon/UIScrollView+TLAdd.h>
 
 
-@interface OrderListVC ()<UITableViewDelegate,UITableViewDataSource>
+@interface OrderListVC ()<UITableViewDelegate,UITableViewDataSource,OrderListVCLoadDelegate>
 
 @property (nonatomic,strong) TLTableView *orderTableView;
 @property (nonatomic,assign) BOOL isFirst;
@@ -102,25 +102,21 @@
     helper.tableView = self.orderTableView;
     [helper modelClass:[OrderModel class]];
     self.pageDataHelper = helper;
-    //-----//
     __weak typeof(self) weakSelf = self;
     [self.orderTableView addRefreshAction:^{
         
-//        __block int count = 0;
-//        NSArray <TIMConversation *> *conversationList = [TIMManager sharedInstance].getConversationList;
-//        [conversationList enumerateObjectsUsingBlock:^(TIMConversation * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-//
-//            count += obj.getUnReadMessageNum;
-//
-//        }];
-//
-//        NSLog(@"%ld",count);
         
         [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
             
             [weakSelf removePlaceholderView];
             weakSelf.orderGroups = objs;
             [weakSelf.orderTableView reloadData_tl];
+            
+            if(self.delegate && [self.delegate respondsToSelector:@selector(loadFinsh:orderGroups:)]) {
+                
+                [weakSelf.delegate loadFinsh:weakSelf orderGroups:weakSelf.orderGroups];
+                
+            }
             
         } failure:^(NSError *error) {
             

@@ -344,7 +344,6 @@
 
     } else if (self.publishType == PublishTypePublishRedit) {
         
-        //
         http.parameters[@"publishType"] = kPublishRedit;
         http.parameters[@"adsCode"] = self.advertise.code;
 
@@ -360,7 +359,7 @@
     http.parameters[@"leaveMessage"] = draft.leaveMessage;
     http.parameters[@"maxTrade"] = draft.maxTrade;
     http.parameters[@"minTrade"] = draft.minTrade;
-    http.parameters[@"onlyTrust"] = @"0";
+    http.parameters[@"onlyTrust"] = draft.onlyTrust;
     http.parameters[@"payLimit"] = draft.payLimit;
     http.parameters[@"payType"] = draft.payType;
     http.parameters[@"premiumRate"] = premiumRate;
@@ -422,43 +421,8 @@
         
         QuotationModel *model = [QuotationModel tl_objectWithDictionary:responseObject[@"data"]];
         
-        if (self.advertise) {
-            
-            self.publishView.marketPrice = [AdvertiseModel calculateTruePriceByPreYiJia:[self.advertise.premiumRate floatValue]
-                                     marketPrice:[model.mid floatValue]];
-            
-        } else {
-            
-            self.publishView.marketPrice = [NSString stringWithFormat:@"%.2lf", [model.mid doubleValue]];
-        }
-        
-       
-     
-        
-            
-//        QuotationModel *model = [QuotationModel tl_objectWithDictionary:responseObject[@"data"]];
-//        self.publishView.marketPrice = [NSString stringWithFormat:@"%.2lf", [model.mid doubleValue]];
-        
-//        NSArray <QuotationModel *>*data = [QuotationModel tl_objectArrayWithDictionaryArray:responseObject[@"data"]];
-//
-//        [data enumerateObjectsUsingBlock:^(QuotationModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-//
-//            if ([obj.coin isEqualToString:@"ETH"]) {
-//
-//                self.publishView.marketPrice = [NSString stringWithFormat:@"%.4lf", [obj.mid doubleValue]];
-//
-//            }
-//            //            else if ([obj.coin isEqualToString:@"BTC"]) {
-//            //
-//            //                self.quotationView.btcQuotation = obj;
-//            //
-//            //            }
-//            else {
-//
-//
-//            }
-//        }];
-        
+        self.publishView.marketPrice = [NSString stringWithFormat:@"%.2lf", [model.mid doubleValue]];
+
         
     } failure:^(NSError *error) {
         

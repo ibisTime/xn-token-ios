@@ -18,6 +18,8 @@
 // lbl 和 imageView 处在同一位置，为了解决有的是文字，有的是箭头
 @property (nonatomic, strong) UIImageView *markImageView;
 @property (nonatomic, strong) TLBaseLabel *markLbl;
+@property (nonatomic, copy) NSString *hintMsg;
+
 
 @property (nonatomic, strong) UIButton *introduceBtn;
 

@@ -140,7 +140,6 @@
         // app delegate 中 didRegisterForRemoteNotification 会回调
         
         //
-        //
         [[UIApplication sharedApplication] registerForRemoteNotifications];
         [[IMAPlatform  sharedInstance] configOnLoginSucc:loginParam];
 
@@ -154,55 +153,6 @@
     }];
 
 }
-
-- (void)test {
-    
-    //
-//    TIMConversation *conversition = [[TIMManager sharedInstance] getConversation:TIM_C2C receiver:@"tianlei02"];
-//    
-//    TIMTextElem *elem = [[TIMTextElem alloc] init];
-//    elem.text = @"测试";
-//    TIMMessage *msg = [[TIMMessage alloc] init];
-//    [msg addElem:elem];
-//    [conversition sendMessage:msg succ:^{
-//        
-//        NSLog(@"发送成功");
-//        
-//    } fail:^(int code, NSString *msg) {
-//        
-//        
-//    }];
-    
-//    [self test1];
-//    [self test2];
-    
-//    [[TIMGroupManager sharedInstance] modifyReciveMessageOpt:<#(NSString *)#> opt:<#(TIMGroupReceiveMessageOpt)#> succ:^{
-//
-//    } fail:^(int code, NSString *msg) {
-//
-//    }];
-    
-}
-
-
-//- (void)test2 {
-//
-////    IMAGroup *group = [[IMAGroup alloc] initWith:@"@TGS#2BULOHAFB"];
-//    IMAGroup *group = [[IMAGroup alloc] initWith:@"JY201801181901305368479"];
-//    IMAConversation *newConversation = [[IMAPlatform sharedInstance].conversationMgr chatWith:group];
-//
-//    IMAMsg *msg = [IMAMsg msgWithText:@"群组——测试2"];
-//    [newConversation sendMessage:msg completion:^(NSArray *imamsgList, BOOL succ, int code) {
-//
-//        if (succ) {
-//
-//            [TLAlert alertWithMsg:@"测试2-发送成功"];
-//
-//        }
-//
-//    }];
-//
-//}
 
 /**
  登录成功调用
@@ -240,9 +190,6 @@
     return [[NSUserDefaults standardUserDefaults] objectForKey:ACCOUNT_TYPE];
     
 }
-
-
-
 
 #pragma mark- 登录整理
 - (void)login2 {

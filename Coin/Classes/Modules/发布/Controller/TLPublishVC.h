@@ -19,7 +19,6 @@ typedef NS_ENUM(NSUInteger, TLPublishVCType) {
 
 @property (nonatomic, strong) NSString *adsCode;
 
-
 //以下必须同时设置
 @property (nonatomic, assign) TLPublishVCType VCType;
 @property (nonatomic, assign) PublishType publishType;

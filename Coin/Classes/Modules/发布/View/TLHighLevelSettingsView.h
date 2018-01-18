@@ -24,6 +24,12 @@
 //仅信任的人
 @property (nonatomic, strong) UIButton *onlyTrustBtn;
 
+//提醒
+@property (nonatomic, copy) NSString *onlyTrustHint;
+@property (nonatomic, copy) NSString *displyTimeHint;
+
+
+
 - (void)beginWithCustomTime;
 - (void)beginWithAnyime;
 

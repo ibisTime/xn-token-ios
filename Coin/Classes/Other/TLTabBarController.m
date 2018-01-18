@@ -53,10 +53,8 @@
     UIView *tabBarBgView = [[UIView alloc] initWithFrame:self.tabBar.bounds];
     tabBarBgView.backgroundColor = [UIColor whiteColor];
     [self.tabBar insertSubview:tabBarBgView atIndex:0];
-//    self.tabBar.backgroundColor = [UIColor whiteColor];
+//  self.tabBar.backgroundColor = [UIColor whiteColor];
 }
-
-
 
 
 - (UIImage *)changImageColorWithImage:(UIImage *)image  color:(UIColor *)targetColor blendModel:(CGBlendMode)mode
@@ -104,25 +102,26 @@
     [tabBarItem setTitleTextAttributes:@{
                                          NSForegroundColorAttributeName : [UIColor textColor]
                                          } forState:UIControlStateNormal];
-    vc.tabBarItem =tabBarItem;
+    vc.tabBarItem = tabBarItem;
     TLNavigationController *navigationController = [[TLNavigationController alloc] initWithRootViewController:vc];
     
     [self addChildViewController:navigationController];
     
 }
 
-- (UIImage *)getOrgImage:(UIImage *)image
-{
-//    return image;
+- (UIImage *)getOrgImage:(UIImage *)image {
+    
     return [image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    
 }
 
 #pragma mark 判断是否登录若没登录跳转到登录页面
 - (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(nonnull UIViewController *)viewController {
+    
     //赋值更改前的index
     self.currentIndex = tabBarController.selectedIndex;
-    
     return YES;
+    
 }
 
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
@@ -132,7 +131,7 @@
     NSInteger idx = tabBarController.selectedIndex;
     
     //判断点击的Controller是不是需要登录，如果是，那就登录
-    if((idx == 1 || idx == 3 || idx == 4) && ![TLUser user].isLogin){
+    if((idx == 1 || idx == 3 || idx == 4) && ![TLUser user].isLogin) {
         
         TLUserLoginVC *loginVC = [TLUserLoginVC new];
         
@@ -151,7 +150,6 @@
 }
 
 #pragma mark - IM
-
 //- (void)pushToChatViewControllerWith:(IMAUser *)user
 //{
 //    NavigationViewController *curNav = (NavigationViewController *)[[self viewControllers] objectAtIndex:self.selectedIndex];

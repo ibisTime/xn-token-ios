@@ -9,12 +9,19 @@
 #import "TLBaseVC.h"
 #import "OrderModel.h"
 
+@protocol OrderListVCLoadDelegate<NSObject>
+
+- (void)loadFinsh:(UIViewController *)vc orderGroups:(NSMutableArray <OrderModel *>* )orderGroups;
+
+@end
+
 @interface OrderListVC : TLBaseVC
 
-@property (nonatomic, copy) NSArray *statusList;
+@property (nonatomic, copy) NSArray <NSString *> *statusList;
 @property (nonatomic,strong) NSMutableArray <OrderModel *>*orderGroups;
 //@property (nonatomic, copy) NSString *belongUser;
 @property (nonatomic, strong) TLPageDataHelper *pageDataHelper;
+@property (nonatomic, weak) id<OrderListVCLoadDelegate> delegate;
 
 - (void)refresh;
 - (void)reloadData;

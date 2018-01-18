@@ -55,6 +55,7 @@
     //头像
     CGFloat imgWidth = 40;
     self.userPhotoView = [UserPhotoView photoView];
+    self.userPhotoView.userInteractionEnabled = NO;
     [self addSubview:self.userPhotoView];
     [self.userPhotoView mas_makeConstraints:^(MASConstraintMaker *make) {
         
@@ -116,7 +117,9 @@
     }];
     
     //交易方式
-    self.tradeTypeBtn = [UIButton buttonWithTitle:@"" titleColor:kClearColor backgroundColor:kClearColor titleFont:14.0 cornerRadius:5];
+    self.tradeTypeBtn = [UIButton buttonWithTitle:@"" titleColor:kClearColor
+                                  backgroundColor:kClearColor titleFont:14.0 cornerRadius:5];
+    self.tradeTypeBtn.userInteractionEnabled = NO;
     [self addSubview:self.tradeTypeBtn];
     self.tradeTypeBtn.layer.borderWidth = 0.5;
     [self.tradeTypeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -177,7 +180,6 @@
     self.limitAmountLbl.text = [LangSwitcher switchLang:limitAmountText
                                                     key:nil];
     //价格
-    
     self.priceLbl.text = [NSString stringWithFormat:@"%@ CNY", [advertise.truePrice convertToSimpleRealMoney]];
     
     NSString *tradeText = nil;

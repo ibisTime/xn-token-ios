@@ -28,6 +28,7 @@
 #import "EditEmailVC.h"
 #import "TLAlert.h"
 #import "NSString+Check.h"
+#import "TLProgressHUD.h"
 
 @interface SettingVC ()
 
@@ -216,17 +217,28 @@
 
 - (void)logout {
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:kUserLoginOutNotification object:nil];
-
-    
-    TLTabBarController *tabbarVC = (TLTabBarController *)self.tabBarController;
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    //先退出腾讯云，才算退出成功
+    //im 退出
+    [TLProgressHUD showWithStatus:nil];
+    [[IMAPlatform sharedInstance] logout:^{
+        [TLProgressHUD dismiss];
         
-        tabbarVC.selectedIndex = 2;
-        [self.navigationController popViewControllerAnimated:NO];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kUserLoginOutNotification object:nil];
         
-    });
-    
+        TLTabBarController *tabbarVC = (TLTabBarController *)self.tabBarController;
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            
+            tabbarVC.selectedIndex = 2;
+            [self.navigationController popViewControllerAnimated:NO];
+            
+        });
+        //
+    } fail:^(int code, NSString *msg) {
+        
+        [TLAlert alertWithInfo:@"退出登录失败"];
+        
+    }];
+        
 }
 
 - (void)setGoogleAuth {

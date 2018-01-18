@@ -65,4 +65,6 @@
 //获取IP
 + (NSString *)getIPAddress:(BOOL)preferIPv4;
 
++ (NSString *)appVersionString;
+
 @end

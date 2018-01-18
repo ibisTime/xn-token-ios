@@ -87,7 +87,7 @@
     
     
     
-//      [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:[[TLPublishSellVC alloc] init] animated:YES completion:nil];
+    //      [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:[[TLPublishSellVC alloc] init] animated:YES completion:nil];
 }
 
 - (void)viewDidLoad {
@@ -101,11 +101,9 @@
     [self requestAdvetiseList];
     //添加通知
     [self addNotification];
-    //强制更新
-//    [self configUpdate];
     
     // 定时器去刷新广告列表
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:2*60
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:5*60
                                                   target:self
                                                 selector:@selector(refreshAds)
                                                 userInfo:nil
@@ -114,13 +112,13 @@
 }
 
 - (void)refreshAds {
-
+    
     [self.tableView beginRefreshing];
-
+    
 }
 
 #pragma mark - Init
--(TopLabelUtil *)labelUnil {
+- (TopLabelUtil *)labelUnil {
     
     if (!_labelUnil) {
         
@@ -131,11 +129,12 @@
         _labelUnil.titleSelectColor = kThemeColor;
         _labelUnil.titleFont = Font(17.0);
         _labelUnil.lineType = LineTypeTitleLength;
-
         _labelUnil.titleArray = @[
-                                  [LangSwitcher switchLang:@"买币" key:nil],
-                                  [LangSwitcher switchLang:@"卖币" key:nil],
-                                 ];
+                                  [LangSwitcher switchLang:@"买币"
+                                                       key:nil],
+                                  [LangSwitcher switchLang:@"卖币"
+                                                       key:nil]
+                                  ];
     }
     return _labelUnil;
 }
@@ -152,7 +151,7 @@
     self.changeView = coinChangeView;
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:coinChangeView];
-
+    
     
     //2.右边搜索
     UIImage *searchImg = [UIImage imageNamed:@"交易_搜索"];
@@ -160,7 +159,7 @@
     
     //3.中间切换
     self.navigationItem.titleView = self.labelUnil;
-
+    
 }
 
 - (void)setUpUI {
@@ -181,7 +180,7 @@
         self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     }
     
-   //1.banner
+    //1.banner
     TLBannerView *bannerView = [[TLBannerView alloc] initWithFrame:CGRectMake(0, 0,SCREEN_WIDTH, kWidth(140))];
     
     bannerView.selected = ^(NSInteger index) {
@@ -203,7 +202,7 @@
     self.tableView.tableHeaderView = bannerView;
     
     
-   //2.发布
+    //2.发布
     self.publishBtn = [UIButton buttonWithImageName:@"发布"];
     
     [self.publishBtn addTarget:self action:@selector(clickPublish) forControlEvents:UIControlEventTouchUpInside];
@@ -235,37 +234,37 @@
     _tipView.publishBlock = ^(NSInteger index) {
         
         [weakSelf publishEventsWithIndex:index];
-
+        
     };
 }
 
 - (FilterView *)filterPicker {
-
+    
     if (!_filterPicker) {
-
+        
         CoinWeakSelf;
-
+        
         NSArray *textArr = @[@"ETH"];
-
-//        NSArray *typeArr = @[@"", @"charge", @"withdraw", @"buy", @"sell"];
-
+        
+        //        NSArray *typeArr = @[@"", @"charge", @"withdraw", @"buy", @"sell"];
+        
         _filterPicker = [[FilterView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
-
+        
         _filterPicker.title = @"请选择货币类型";
-
+        
         _filterPicker.selectBlock = ^(NSInteger index) {
-
+            
             weakSelf.changeView.title = textArr[index];
-
-//            weakSelf.helper.parameters[@"bizType"] = typeArr[index];
-//
-//            [weakSelf.tableView beginRefreshing];
+            
+            //            weakSelf.helper.parameters[@"bizType"] = typeArr[index];
+            //
+            //            [weakSelf.tableView beginRefreshing];
         };
-
+        
         _filterPicker.tagNames = textArr;
-
+        
     }
-
+    
     return _filterPicker;
 }
 
@@ -276,9 +275,9 @@
     
     //信任/取消信任
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshData) name:kTrustNotification object:nil];
-
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLoginOut) name:kUserLoginOutNotification object:nil];
-
+    
 }
 
 - (void)userLoginOut {
@@ -306,11 +305,11 @@
 }
 
 - (void)publishEventsWithIndex:(NSInteger)index {
- 
+    
     CoinWeakSelf;
     
     if (index == 0) {
-
+        
         if (![TLUser user].isLogin) {
             
             TLUserLoginVC *loginVC = [[TLUserLoginVC alloc] init];
@@ -359,7 +358,6 @@
 - (void)refreshData:(NSNotification *)notification {
     
     NSInteger index = [notification.object integerValue];
-    
     [self.labelUnil selectSortBarWithIndex:index];
     
 }
@@ -367,6 +365,7 @@
 - (void)refreshData {
     
     [self.tableView beginRefreshing];
+    
 }
 
 #pragma mark - Data
@@ -427,19 +426,19 @@
             weakSelf.advertises = objs;
             weakSelf.tableView.advertises = objs;
             [weakSelf.tableView reloadData_tl];
-
+            
         } failure:^(NSError *error) {
             
-//            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//
-//                [weakSelf requestAdvetiseList];
-//            });
+            //            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            //
+            //                [weakSelf requestAdvetiseList];
+            //            });
             
         }];
     }];
     
     [self.tableView beginRefreshing];
-
+    
     [self.tableView addLoadMoreAction:^{
         
         [helper loadMore:^(NSMutableArray *objs, BOOL stillHave) {
@@ -464,14 +463,14 @@
 #pragma mark - SegmentDelegate
 -(void)segment:(TopLabelUtil *)segment didSelectIndex:(NSInteger)index {
     
-//    if([AppConfig config].runEnv == RunEnvDev) {
-//        
-//        //用于研发测试
-//        [self test];
-//        return;
-//        
-//    }
-
+        if([AppConfig config].runEnv == RunEnvDev) {
+    
+            //用于研发测试
+            [self test];
+            return;
+    
+        }
+    
     if (index == 1) {
         
         self.tradeType = kAdsTradeTypeSell;
@@ -479,14 +478,14 @@
     } else if(index == 2) {
         
         self.tradeType = kAdsTradeTypeBuy;
-
+        
     }
     
     self.helper.parameters[@"tradeType"] = self.tradeType;
-
+    
     [self.tableView beginRefreshing];
     [self.labelUnil dyDidScrollChangeTheTitleColorWithContentOfSet:(index-1)*kScreenWidth];
-
+    
 }
 
 

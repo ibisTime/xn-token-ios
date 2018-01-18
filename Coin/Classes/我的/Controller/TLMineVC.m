@@ -17,7 +17,7 @@
 
 #import "MineTableView.h"
 #import "MineHeaderView.h"
-
+#import "TLAboutUsVC.h"
 #import "SettingVC.h"
 #import "PersonalitySettingVC.h"
 #import "PublishBuyVC.h"
@@ -252,7 +252,7 @@
 //        HTMLStrVC *htmlVC = [HTMLStrVC new];
 //        htmlVC.type = HTMLTypeLinkService;
 //        [weakSelf.navigationController pushViewController:htmlVC animated:YES];
-//
+        
         [IQKeyboardManager sharedManager].enableAutoToolbar = NO;
         [ZDCChat updateVisitor:^(ZDCVisitorInfo *visitor) {
 
@@ -304,9 +304,13 @@
     abountUs.imgName = @"关于我们";
     abountUs.action = ^{
         
-        HTMLStrVC *htmlVC = [HTMLStrVC new];
-        htmlVC.type = HTMLTypeAboutUs;
-        [weakSelf.navigationController pushViewController:htmlVC animated:YES];
+//        HTMLStrVC *htmlVC = [HTMLStrVC new];
+//        htmlVC.type = HTMLTypeAboutUs;
+//        [weakSelf.navigationController pushViewController:htmlVC animated:YES];
+        
+        TLAboutUsVC *vc = [[TLAboutUsVC alloc] init];
+        [weakSelf.navigationController pushViewController:vc animated:YES];
+        
         
     };
     

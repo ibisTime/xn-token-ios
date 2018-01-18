@@ -33,6 +33,49 @@ typedef NS_ENUM(NSInteger, PublishType) {
 - (NSArray <NSString *> *)obtainLimitTimes;
 //+ (NSArray <NSString *> *)timesArrayByRes:(NSArray *)arr;
 
+- (void)handleHint:(id)res;
+
+/**
+ 必须调用这个方法进行配置，才能区分买 卖
+ */
+- (void)configWith:(NSString *)tradeType;
+
+//read-only
+@property (nonatomic, copy) NSString *tradeType;
+@property (nonatomic, copy) NSString *publishTitle;
+//
+@property (nonatomic, copy) NSString *ads_hint_key;
+
+// 余额高度
+@property (nonatomic, assign) CGFloat balanceHeight;
+
+
+//获取的交易提醒
+@property (nonatomic, copy) NSString *trust;
+@property (nonatomic, copy) NSString *displayTime;
+@property (nonatomic, copy) NSString *protectPrice;
+@property (nonatomic, copy) NSString *totalCount;
+@property (nonatomic, copy) NSString *maxTrade;
+@property (nonatomic, copy) NSString *minTrade;
+@property (nonatomic, copy) NSString *payType;
+@property (nonatomic, copy) NSString *premiumRate;
+@property (nonatomic, copy) NSString *price;
+@property (nonatomic, copy) NSString *payLimit;
+
+
+
+
+//        @"trust"
+//        @"displayTime"
+//        @"protectPrice"
+//        @"totalCount"
+//        @"maxTrade"
+//        @"minTrade"
+//        @"payType"
+//        @"premiumRate"
+//        @"price"
+
+
 @end
 
 FOUNDATION_EXTERN NSString *const kPublishTradeTypeSell;

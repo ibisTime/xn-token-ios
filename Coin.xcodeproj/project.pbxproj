@@ -218,7 +218,6 @@
 		211DE6B01FB58B4C002FCF3D /* UILable+convience.m in Sources */ = {isa = PBXBuildFile; fileRef = 211DE6611FB58B4B002FCF3D /* UILable+convience.m */; };
 		211DE6B11FB58B4C002FCF3D /* UIButton+EnLargeEdge.m in Sources */ = {isa = PBXBuildFile; fileRef = 211DE6651FB58B4B002FCF3D /* UIButton+EnLargeEdge.m */; };
 		211DE6B21FB58B4C002FCF3D /* UIButton+Custom.m in Sources */ = {isa = PBXBuildFile; fileRef = 211DE6661FB58B4B002FCF3D /* UIButton+Custom.m */; };
-		211DE6B31FB58B4C002FCF3D /* UIColor+theme.m in Sources */ = {isa = PBXBuildFile; fileRef = 211DE6691FB58B4B002FCF3D /* UIColor+theme.m */; };
 		211DE6B41FB58B4C002FCF3D /* UIColor+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 211DE66A1FB58B4B002FCF3D /* UIColor+Extension.m */; };
 		211DE6B51FB58B4C002FCF3D /* UIView+Responder.m in Sources */ = {isa = PBXBuildFile; fileRef = 211DE66F1FB58B4B002FCF3D /* UIView+Responder.m */; };
 		211DE6B61FB58B4C002FCF3D /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 211DE6701FB58B4B002FCF3D /* UIView+Extension.m */; };
@@ -367,6 +366,7 @@
 		2ED651C9200F2F6F0065A1B0 /* TLCoinWithdrawOrderVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ED651C8200F2F6F0065A1B0 /* TLCoinWithdrawOrderVC.m */; };
 		2ED651CC200F32BC0065A1B0 /* TLCoinWithdrawModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ED651CB200F32BC0065A1B0 /* TLCoinWithdrawModel.m */; };
 		2ED651CF200F34280065A1B0 /* TLCoinWithdrawOrderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ED651CE200F34280065A1B0 /* TLCoinWithdrawOrderCell.m */; };
+		2ED651D22010443D0065A1B0 /* TLAboutUsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ED651D12010443C0065A1B0 /* TLAboutUsVC.m */; };
 		2EE360D61FFA09A800A5C3EB /* ChatTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE360471FFA09A800A5C3EB /* ChatTableViewCell.m */; };
 		2EE360D71FFA09A800A5C3EB /* ChatImageBrowserView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE3604B1FFA09A800A5C3EB /* ChatImageBrowserView.m */; };
 		2EE360D81FFA09A800A5C3EB /* EmojHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE3604C1FFA09A800A5C3EB /* EmojHelper.m */; };
@@ -968,9 +968,7 @@
 		211DE6651FB58B4B002FCF3D /* UIButton+EnLargeEdge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+EnLargeEdge.m"; sourceTree = "<group>"; };
 		211DE6661FB58B4B002FCF3D /* UIButton+Custom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+Custom.m"; sourceTree = "<group>"; };
 		211DE6681FB58B4B002FCF3D /* UIColor+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Extension.h"; sourceTree = "<group>"; };
-		211DE6691FB58B4B002FCF3D /* UIColor+theme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+theme.m"; sourceTree = "<group>"; };
 		211DE66A1FB58B4B002FCF3D /* UIColor+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Extension.m"; sourceTree = "<group>"; };
-		211DE66B1FB58B4B002FCF3D /* UIColor+theme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+theme.h"; sourceTree = "<group>"; };
 		211DE66D1FB58B4B002FCF3D /* UIView+Responder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Responder.h"; sourceTree = "<group>"; };
 		211DE66E1FB58B4B002FCF3D /* UIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
 		211DE66F1FB58B4B002FCF3D /* UIView+Responder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Responder.m"; sourceTree = "<group>"; };
@@ -1276,6 +1274,8 @@
 		2ED651CB200F32BC0065A1B0 /* TLCoinWithdrawModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLCoinWithdrawModel.m; sourceTree = "<group>"; };
 		2ED651CD200F34280065A1B0 /* TLCoinWithdrawOrderCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLCoinWithdrawOrderCell.h; sourceTree = "<group>"; };
 		2ED651CE200F34280065A1B0 /* TLCoinWithdrawOrderCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLCoinWithdrawOrderCell.m; sourceTree = "<group>"; };
+		2ED651D02010443C0065A1B0 /* TLAboutUsVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLAboutUsVC.h; sourceTree = "<group>"; };
+		2ED651D12010443C0065A1B0 /* TLAboutUsVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLAboutUsVC.m; sourceTree = "<group>"; };
 		2EE360441FFA089E00A5C3EB /* ChatHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatHeader.h; sourceTree = "<group>"; };
 		2EE360471FFA09A800A5C3EB /* ChatTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatTableViewCell.m; sourceTree = "<group>"; };
 		2EE360481FFA09A800A5C3EB /* ChatHeadRefreshView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatHeadRefreshView.h; sourceTree = "<group>"; };
@@ -2744,8 +2744,6 @@
 			children = (
 				211DE6681FB58B4B002FCF3D /* UIColor+Extension.h */,
 				211DE66A1FB58B4B002FCF3D /* UIColor+Extension.m */,
-				211DE66B1FB58B4B002FCF3D /* UIColor+theme.h */,
-				211DE6691FB58B4B002FCF3D /* UIColor+theme.m */,
 			);
 			path = UIColor;
 			sourceTree = "<group>";
@@ -3444,6 +3442,8 @@
 				2EE950C51FB05B5900429257 /* TLMineVC.m */,
 				2EB039A51FE8B23300589D8E /* EditEmailVC.h */,
 				2EB039A61FE8B23300589D8E /* EditEmailVC.m */,
+				2ED651D02010443C0065A1B0 /* TLAboutUsVC.h */,
+				2ED651D12010443C0065A1B0 /* TLAboutUsVC.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -4207,7 +4207,6 @@
 				21635DB61FBEB911003F48B4 /* PublishButton.m in Sources */,
 				211C04351FC6604800E51FCF /* IMBaseViewController.m in Sources */,
 				2182D3001FC96C89008EDCE4 /* OrderArbitrationView.m in Sources */,
-				211DE6B31FB58B4C002FCF3D /* UIColor+theme.m in Sources */,
 				2EE360E51FFA09A800A5C3EB /* MyUIDefine.m in Sources */,
 				211DE6BA1FB58B4C002FCF3D /* NSString+Check.m in Sources */,
 				21A7F3151FB2E2F900FAA0A2 /* TLChangeMobileVC.m in Sources */,
@@ -4549,6 +4548,7 @@
 				2EE360DB1FFA09A800A5C3EB /* MyEmojBoardView.m in Sources */,
 				2EE950D91FB06AA900429257 /* TLBannerView.m in Sources */,
 				211CEF1D1FCBC106000FB0C4 /* SearchAdvertiseVC.m in Sources */,
+				2ED651D22010443D0065A1B0 /* TLAboutUsVC.m in Sources */,
 				21205CF31FCD5F98003C6C7C /* InviteModel.m in Sources */,
 				211DE6141FB5465E002FCF3D /* WalletTableView.m in Sources */,
 				2EB0399E1FE7A63900589D8E /* UserStatistics.m in Sources */,

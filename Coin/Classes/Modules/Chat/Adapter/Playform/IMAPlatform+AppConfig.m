@@ -151,9 +151,6 @@
     //需要在登录之后，在进行token设置
     [[TIMManager sharedInstance] setToken:param succ:^{
        
-        if ([AppConfig config].runEnv == RunEnvDev) {
-            [TLAlert alertWithInfo:@"上传成功"];
-        }
 //        NSLog(@"-----> 上传token成功 ");
         
     } fail:^(int code, NSString *msg) {

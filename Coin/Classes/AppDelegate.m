@@ -58,7 +58,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     //服务器环境
-    [AppConfig config].runEnv = RunEnvRelease;
+    [AppConfig config].runEnv = RunEnvDev;
     self.respHandler = [[RespHandler alloc] init];
     
     [NBNetworkConfig config].respDelegate = self.respHandler;
@@ -201,13 +201,15 @@
     //user 退出
     [[TLUser user] loginOut];
     
-    //im 退出
+    //退出登录
     [[IMAPlatform sharedInstance] logout:^{
-       
-      //
+        
+        
     } fail:^(int code, NSString *msg) {
         
+        
     }];
+
     //
     UITabBarController *tabbarContrl = (UITabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
     tabbarContrl.selectedIndex = 0;

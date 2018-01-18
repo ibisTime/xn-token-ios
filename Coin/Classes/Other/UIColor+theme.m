@@ -26,7 +26,7 @@
 
 + (UIColor *)textColor2 {
 
-    return [self colorWithHexString:@""];
+    return kTextColor2;
 }
 
 + (UIColor *)lineColor {

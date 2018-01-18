@@ -77,7 +77,7 @@
     
     
     if (self.publishType == PublishTypePublishOrSaveDraft) {
-        
+        //还没有广告
         [self loadInfo];
         return ;
     }
@@ -87,7 +87,7 @@
     http.code = @"625226";
     http.parameters[@"adsCode"] = self.adsCode;
     http.parameters[@"userId"] = [TLUser user].userId;
-    
+    http.parameters[@"token"] = [TLUser user].token;
     [http postWithSuccess:^(id responseObject) {
         
         [self loadInfo];
@@ -412,41 +412,8 @@
         
         
         QuotationModel *model = [QuotationModel tl_objectWithDictionary:responseObject[@"data"]];
-        
-        if (self.advertise) {
-            
-            self.publishView.marketPrice = [AdvertiseModel calculateTruePriceByPreYiJia:[self.advertise.premiumRate floatValue]
-                                                                            marketPrice:[model.mid floatValue]];
-            
-        } else {
-            
-            self.publishView.marketPrice = [NSString stringWithFormat:@"%.2lf", [model.mid doubleValue]];
-        }
-            
-     
-
-        
-//        NSArray <QuotationModel *>*data = [QuotationModel tl_objectArrayWithDictionaryArray:responseObject[@"data"]];
-//
-//        [data enumerateObjectsUsingBlock:^(QuotationModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-//
-//            if ([obj.coin isEqualToString:@"ETH"]) {
-//
-//                self.publishView.marketPrice = [NSString stringWithFormat:@"%.4lf", [obj.mid doubleValue]];
-//
-//            }
-////            else if ([obj.coin isEqualToString:@"BTC"]) {
-////
-////                self.quotationView.btcQuotation = obj;
-////
-////            }
-//            else {
-//
-//
-//            }
-//        }];
-        
-        
+        self.publishView.marketPrice = [NSString stringWithFormat:@"%.2lf", [model.mid doubleValue]];
+  
     } failure:^(NSError *error) {
         
     }];

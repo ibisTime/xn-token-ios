@@ -21,6 +21,7 @@
 
 #define myDotNumbers     @"-0123456789.\n"
 #define myNumbers          @"-0123456789\n"
+#define MARKET_PRICE_HEIGHT 30
 
 @interface PublishSellView ()<UITextFieldDelegate>
 
@@ -52,6 +53,7 @@
 @property (nonatomic, strong) NSMutableArray *endModelArr;
 
 @property (nonatomic, assign) CGFloat aboultBalanceHeight;
+@property (nonatomic, strong) UILabel *marketPricelbl;
 
 @end
 
@@ -202,7 +204,41 @@
     
 }
 
+
+- (void)initTopMarketLbl {
+    
+    //加入市场价格提示
+    self.marketPricelbl = [UILabel labelWithFrame:CGRectZero
+                                     textAligment:NSTextAlignmentLeft
+                                  backgroundColor:[UIColor whiteColor]
+                                             font:FONT(12)
+                                        textColor:[UIColor textColor]];
+    [self.scrollView addSubview:self.marketPricelbl];
+    [self.marketPricelbl mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.left.right.top.equalTo(self.scrollView);
+        make.height.mas_equalTo(MARKET_PRICE_HEIGHT);
+        
+    }];
+    
+    self.marketPricelbl.text = [NSString stringWithFormat:@"     市场价格：%@",@"--"];
+    UIView *line = [[UIView alloc] init];
+    line.backgroundColor = [UIColor lineColor];
+    [self.scrollView addSubview:line];
+    [line mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.marketPricelbl);
+        make.width.equalTo(self.marketPricelbl);
+        make.height.mas_equalTo(0.5);
+        make.bottom.equalTo(self.marketPricelbl);
+    }];
+    
+    
+}
+
+
 - (void)initTopView {
+    
+    [self initTopMarketLbl];
     
     self.textArr = @[
                      @"价        格" ,
@@ -243,7 +279,7 @@
         promptBtn.tag = 1500 + idx;
         [promptBtn addTarget:self action:@selector(lookPrompt:) forControlEvents:UIControlEventTouchUpInside];
         [self.scrollView addSubview:promptBtn];
-        promptBtn.frame = CGRectMake(kScreenWidth - 45, 50*idx + self.aboultBalanceHeight, 45, 50);
+        promptBtn.frame = CGRectMake(kScreenWidth - 45, MARKET_PRICE_HEIGHT + 50*idx + self.aboultBalanceHeight, 45, 50);
         
         //暂时注释掉
 //        [promptBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -291,7 +327,7 @@
             
             [self.scrollView addSubview:arrowIV];
             arrowIV.frame = CGRectMake(kScreenWidth - promptBtn.width,
-                                       (rightArr.count - 2)*50 + 20 + self.aboultBalanceHeight,
+                                       MARKET_PRICE_HEIGHT + (rightArr.count - 2)*50 + 20 + self.aboultBalanceHeight,
                                        6, 10);
 //            [arrowIV mas_makeConstraints:^(MASConstraintMaker *make) {
 //
@@ -308,7 +344,7 @@
         switch (idx) {
             case 0:
             {
-                TLTextField *textField = [[TLTextField alloc] initWithFrame:CGRectMake(0, idx*50, kScreenWidth - 85, 50) leftTitle:obj titleWidth:90 placeholder:placeHolderArr[idx]];
+                TLTextField *textField = [[TLTextField alloc] initWithFrame:CGRectMake(0, MARKET_PRICE_HEIGHT + idx*50, kScreenWidth - 85, 50) leftTitle:obj titleWidth:90 placeholder:placeHolderArr[idx]];
                 
                 textField.delegate = self;
                 textField.tag = 1200 + idx;
@@ -323,7 +359,7 @@
             case 1:
             {
                 
-                TLTextField *textField = [[TLTextField alloc] initWithFrame:CGRectMake(0, idx*50, kScreenWidth - 85, 50) leftTitle:obj titleWidth:90 placeholder:placeHolderArr[idx]];
+                TLTextField *textField = [[TLTextField alloc] initWithFrame:CGRectMake(0, MARKET_PRICE_HEIGHT + idx*50, kScreenWidth - 85, 50) leftTitle:obj titleWidth:90 placeholder:placeHolderArr[idx]];
                 
                 textField.delegate = self;
                 textField.tag = 1200 + idx;
@@ -339,7 +375,7 @@
             }break;
                 
             case 2: {
-                TLTextField *textField = [[TLTextField alloc] initWithFrame:CGRectMake(0, idx*50, kScreenWidth - 85, 50)
+                TLTextField *textField = [[TLTextField alloc] initWithFrame:CGRectMake(0, MARKET_PRICE_HEIGHT + idx*50, kScreenWidth - 85, 50)
                                                                   leftTitle:obj
                                                                  titleWidth:90
                                                                 placeholder:placeHolderArr[idx]];
@@ -357,7 +393,7 @@
                 
             case 3:
             {
-                TLTextField *textField = [[TLTextField alloc] initWithFrame:CGRectMake(0, idx*50, kScreenWidth - 85, 50) leftTitle:obj titleWidth:90 placeholder:placeHolderArr[idx]];
+                TLTextField *textField = [[TLTextField alloc] initWithFrame:CGRectMake(0, MARKET_PRICE_HEIGHT + idx*50, kScreenWidth - 85, 50) leftTitle:obj titleWidth:90 placeholder:placeHolderArr[idx]];
                 
                 textField.delegate = self;
                 
@@ -375,7 +411,7 @@
                 
             case 4: {
                 
-                TLTextField *textField = [[TLTextField alloc] initWithFrame:CGRectMake(0, idx*50, kScreenWidth - 85, 50) leftTitle:obj titleWidth:90 placeholder:placeHolderArr[idx]];
+                TLTextField *textField = [[TLTextField alloc] initWithFrame:CGRectMake(0, MARKET_PRICE_HEIGHT + idx*50, kScreenWidth - 85, 50) leftTitle:obj titleWidth:90 placeholder:placeHolderArr[idx]];
                 textField.delegate = self;
                 textField.tag = 1200 + idx;
                 [self.scrollView addSubview:textField];
@@ -387,7 +423,7 @@
             } break;
                 
             case 5: {
-                TLTextField *textField = [[TLTextField alloc] initWithFrame:CGRectMake(0, idx*50, kScreenWidth - 85, 50) leftTitle:obj titleWidth:90 placeholder:placeHolderArr[idx]];
+                TLTextField *textField = [[TLTextField alloc] initWithFrame:CGRectMake(0, MARKET_PRICE_HEIGHT + idx*50, kScreenWidth - 85, 50) leftTitle:obj titleWidth:90 placeholder:placeHolderArr[idx]];
                 
                 textField.delegate = self;
                 textField.tag = 1200 + idx;
@@ -401,7 +437,7 @@
             case 6: {
                 CoinWeakSelf;
                 
-                TLPickerTextField *picker = [[TLPickerTextField alloc] initWithFrame:CGRectMake(0, idx*50, kScreenWidth - 56, 50) leftTitle:obj titleWidth:90 placeholder:placeHolderArr[idx]];
+                TLPickerTextField *picker = [[TLPickerTextField alloc] initWithFrame:CGRectMake(0, MARKET_PRICE_HEIGHT + idx*50, kScreenWidth - 56, 50) leftTitle:obj titleWidth:90 placeholder:placeHolderArr[idx]];
                 
                 picker.tag = 1200 + idx;
                 picker.tagNames = self.payTypeArr;
@@ -420,7 +456,7 @@
             case 7:
             {
                 
-                TLPickerTextField *picker = [[TLPickerTextField alloc] initWithFrame:CGRectMake(0, idx*50, kScreenWidth - 85, 50) leftTitle:obj titleWidth:90 placeholder:placeHolderArr[idx]];
+                TLPickerTextField *picker = [[TLPickerTextField alloc] initWithFrame:CGRectMake(0, MARKET_PRICE_HEIGHT + idx*50, kScreenWidth - 85, 50) leftTitle:obj titleWidth:90 placeholder:placeHolderArr[idx]];
                 
                 picker.tag = 1200 + idx;
                 [self.scrollView addSubview:picker];
@@ -449,7 +485,7 @@
             make.left.equalTo(@15);
             make.right.equalTo(@(-15));
             make.height.equalTo(@0.5);
-            make.top.equalTo(@((idx+1)*50 - 0.5 + self.aboultBalanceHeight));
+            make.top.equalTo(@( MARKET_PRICE_HEIGHT + (idx+1)*50 - 0.5 + self.aboultBalanceHeight));
             
         }];
         
@@ -474,7 +510,7 @@
 - (void)initLeaveMsg {
     
     UIView *leaveMsgView = [[UIView alloc] initWithFrame:CGRectMake(0,
-                                                                    8*50 + 10 + self.aboultBalanceHeight, kScreenWidth,
+                                                                   MARKET_PRICE_HEIGHT + 8*50 + 10 + self.aboultBalanceHeight, kScreenWidth,
                                                                     150)
                             ];
     
@@ -943,15 +979,32 @@
 - (void)setMarketPrice:(NSString *)marketPrice {
     
     _marketPrice = marketPrice;
-    
+        self.marketPricelbl.text = [NSString stringWithFormat:@"     市场价格：%@",_marketPrice];
     self.priceTF.text = marketPrice;
+    [self calculateTurePriceWhenCan];
     
+}
+
+- (void)calculateTurePriceWhenCan {
+    
+    //
+    if(!self.priceTF.text || self.priceTF.text.length <= 0 ||
+       !self.advertise
+       ) {
+        return;
+    }
+    
+    //
+    self.priceTF.text = [AdvertiseModel calculateTruePriceByPreYiJia:[self.advertise.premiumRate floatValue]
+                                                         marketPrice:[self.priceTF.text floatValue]];
 }
 
 - (void)setAdvertise:(AdvertiseModel *)advertise {
     
     _advertise = advertise;
     
+    [self calculateTurePriceWhenCan];
+
     //几个
 //    self.priceTF.text = [NSString stringWithFormat:@"%.2f",[advertise.truePrice floatValue]];
     

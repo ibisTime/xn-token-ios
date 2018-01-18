@@ -7,7 +7,7 @@
 //
 
 #import "TLPublishInputView.h"
-
+#import "TLAlert.h"
 #define INTRODUCE_WIDTH 50
 #define MARK_WIDTH 50
 #define LEFT_LBL_WIDTH 90
@@ -100,10 +100,23 @@
             make.height.mas_equalTo(0.7);
             make.bottom.equalTo(self.mas_bottom);
         }];
+        
+        [self addEvent];
    
     }
     
     return self;
+    
+}
+
+- (void)addEvent {
+    
+    [self.introduceBtn addTarget:self action:@selector(displayHint) forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (void)displayHint {
+    
+    [TLAlert alertWithTitle:@"" message:self.hintMsg];
     
 }
 
