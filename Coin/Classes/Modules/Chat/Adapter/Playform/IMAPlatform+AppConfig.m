@@ -12,6 +12,10 @@
 #import "TLUser.h"
 #import "ChatManager.h"
 #import "TLAlert.h"
+#import "OrderDetailVC.h"
+#import "TLNetworking.h"
+#import "WaitingOrderVC.h"
+#import "NSString+Extension.h"
 
 @implementation IMAPlatform (AppConfig)
 
@@ -27,7 +31,6 @@
         // 必须写代理，不然无法监听通知的接收与点击
         center.delegate = self;
         [center requestAuthorizationWithOptions:(  UNAuthorizationOptionAlert
-                                                 | UNAuthorizationOptionBadge
                                                  | UNAuthorizationOptionSound)
                               completionHandler:^(BOOL granted, NSError * _Nullable error) {
             if (granted) {
@@ -190,7 +193,7 @@
     NSString *subtitle = content.subtitle;  // 推送消息的副标题
     
     //content.title
-    NSString *title = @"我的妈啊" ;  // 推送消息的标题
+    NSString *title = content.title;  // 推送消息的标题
     
     if([notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
         
@@ -226,8 +229,66 @@ didReceiveNotificationResponse:(UNNotificationResponse *)response
     //
     NSString *ext = userInfo[@"ext"];
     if (userInfo && ext) {
+       //跳转到交易界面
         
-        NSLog(@"%@",ext);
+    
+        
+        
+        
+        TLNetworking *http = [TLNetworking new];
+        http.code = @"625251";
+        http.showView = [UIApplication sharedApplication].keyWindow;
+        http.parameters[@"code"] = ext;
+        [http postWithSuccess:^(id responseObject) {
+            
+            IMAGroup *currentIMGroup = [[IMAGroup alloc] initWith:ext];
+  
+            
+            // -- ///
+            OrderModel *model = [OrderModel tl_objectWithDictionary:responseObject[@"data"]];
+            
+            OrderModel *order = model;
+            //    NSString *friendUserId = order.isBuy ? order.sellUserInfo.userId: order.buyUserInfo.userId;
+            NSString *friendPhoto = order.isBuy ? order.sellUserInfo.photo: order.buyUserInfo.photo;
+            NSString *friendNickName = order.isBuy ? order.sellUserInfo.nickname: order.buyUserInfo.nickname;
+            
+            //2. 获取对应的group
+            currentIMGroup = [[IMAGroup alloc] initWith:order.code];
+            
+            
+            //我
+            ChatUserProfile *userInfo = [ChatUserProfile sharedUser];
+            userInfo.minePhoto = [TLUser user].photo;
+            userInfo.mineNickName = [TLUser user].nickname;
+            userInfo.friendPhoto = [friendPhoto convertImageUrl];
+            userInfo.friendNickName = friendNickName;
+            userInfo.friendUserId = [order.sellUser equalsString:[TLUser user].userId] ? order.buyUser : order.sellUser;
+            
+            // -- //
+            UITabBarController *tabbatCtrl = (UITabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
+            UIViewController *vc = tabbatCtrl.childViewControllers[1];
+            tabbatCtrl.selectedIndex = 1;
+            UINavigationController *navCtrl = (UINavigationController *)vc;
+            
+            
+            if([model.status isEqualToString:kTradeOrderStatusToSubmit]) {
+                
+                WaitingOrderVC *detailVC = [[WaitingOrderVC alloc] initWith:currentIMGroup];
+                detailVC.orderCode = ext;
+                [navCtrl pushViewController:detailVC animated:YES];
+                
+            } else {
+                
+                OrderDetailVC *detailVC = [[OrderDetailVC alloc] initWith:currentIMGroup];
+                detailVC.orderCode = ext;
+                [navCtrl pushViewController:detailVC animated:YES];
+
+            }
+            
+        } failure:^(NSError *error) {
+            
+        }];
+        
         
     }
 //    if([response.notification.request.trigger

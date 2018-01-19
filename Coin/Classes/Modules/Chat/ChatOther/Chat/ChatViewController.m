@@ -128,23 +128,31 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self configWithUser:_receiver];
+ 
     
+}
+
+- (void)lazyLoadChatData {
+    
+    [self configWithUser:_receiver];
     //配置键盘
     
     _tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdateInputStatus:) name:kUserInputStatus object:nil];
     
-    UITapGestureRecognizer* tapAction = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hiddenKeyBoard)];
+    UITapGestureRecognizer* tapAction = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                                action:@selector(hiddenKeyBoard)];
     [self.tableView addGestureRecognizer:tapAction];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
 //    [[UIApplication sharedApplication] setStatusBarHidden:NO];
     
-    [self.navigationController setNavigationBarHidden:NO animated:animated];
+    [self.navigationController setNavigationBarHidden:NO
+                                             animated:animated];
     
 //    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
     

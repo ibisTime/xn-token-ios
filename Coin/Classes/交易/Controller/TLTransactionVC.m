@@ -53,6 +53,8 @@
 @property (nonatomic, strong) UIButton *publishBtn;
 //发布界面
 @property (nonatomic, strong) PublishTipView *tipView;
+@property (nonatomic, assign) BOOL isFirst;
+
 //banner
 @property (nonatomic, strong) TLBannerView *bannerView;
 //
@@ -77,6 +79,14 @@
         
     }
     
+    //
+    if (self.isFirst) {
+        
+        self.isFirst = NO;
+        [self.tableView beginRefreshing];
+        
+    }
+    
 }
 
 - (void)test {
@@ -93,6 +103,7 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+    self.isFirst = YES;
     
     [self navBarUI];
     
@@ -463,13 +474,13 @@
 #pragma mark - SegmentDelegate
 -(void)segment:(TopLabelUtil *)segment didSelectIndex:(NSInteger)index {
     
-        if([AppConfig config].runEnv == RunEnvDev) {
-    
-            //用于研发测试
-            [self test];
-            return;
-    
-        }
+//        if([AppConfig config].runEnv == RunEnvDev) {
+//    
+//            //用于研发测试
+//            [self test];
+//            return;
+//    
+//        }
     
     if (index == 1) {
         

@@ -50,6 +50,12 @@
 {
     
     if (self = [super initWithFrame:frame]) {
+        
+        //暂放这里
+        self.centerView = [[UIView alloc] init];
+        self.centerView.backgroundColor = kWhiteColor;
+        [self addSubview:self.centerView];
+        
         //
         [self initTopView];
         //
@@ -74,11 +80,11 @@
     
     self.statusLbl.text = order.statusStr;
 
-    
+    //
     self.amountLbl.text = [NSString stringWithFormat:@"%@ CNY", order.tradeAmount];
-    
     NSString *realNum = [order.countString convertToSimpleRealCoin];
-    self.numLbl.text = [NSString stringWithFormat:@"%@ ETH", [realNum convertToRealMoneyWithNum:8]];
+    self.numLbl.text = [NSString stringWithFormat:@"%@ ETH", realNum];
+
     self.priceLbl.text = [NSString stringWithFormat:@"%@ CNY", [order.tradePrice convertToRealMoneyWithNum:2]];
     //买家
     self.buyersLbl.text = [NSString stringWithFormat:@"%@: %@",[LangSwitcher switchLang:@"买家" key:nil], order.buyUserInfo.nickname];
@@ -109,6 +115,7 @@
                 make.width.mas_equalTo(tempBtnWidth);
                 make.height.equalTo(@(tempBtnHeight));
                 make.top.equalTo(self.promptLbl.mas_bottom).offset(15);
+                make.bottom.equalTo(self.centerView.mas_bottom);
                 
             }];
             
@@ -136,7 +143,8 @@
 
         if ([order.status isEqualToString:kTradeOrderStatusPayed]) {
             //已支付
-            self.promptLbl.text = @"买家已支付，等待卖家释放";
+            self.promptLbl.text = [LangSwitcher switchLang:@"买家已支付，等待卖家释放"
+                                                       key:nil];
             
         } else if ([order.status isEqualToString:kTradeOrderStatusReleased] ||
                    [order.status isEqualToString:kTradeOrderStatusComplete]) {
@@ -155,14 +163,10 @@
     
     //按钮
     [self.tradeBtn setTitle:order.btnTitle forState:UIControlStateNormal];
-    [self.tradeBtn setBackgroundColor:order.bgColor forState:UIControlStateNormal];
+    [self.tradeBtn setBackgroundColor:order.bgColor
+                             forState:UIControlStateNormal];
     self.tradeBtn.enabled = order.enable;
     [self layoutIfNeeded];
-    [self.centerView mas_updateConstraints:^(MASConstraintMaker *make) {
-        
-        make.height.equalTo(@(self.tradeBtn.yy + 18));
-        
-    }];
     
 }
 
@@ -226,14 +230,14 @@
     
 }
 
+
 #pragma mark - Init
 - (void)initTopView {
     
     self.topView = [[UIView alloc] init];
-    
     self.topView.backgroundColor = kWhiteColor;
-    
     [self addSubview:self.topView];
+    
     [self.topView mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.left.top.equalTo(@0);
@@ -241,12 +245,12 @@
         make.height.equalTo(@155);
         
     }];
+
     
     UIImageView *iconIV = [[UIImageView alloc] initWithImage:kImage(@"订单编号")];
-    
     iconIV.contentMode = UIViewContentModeScaleAspectFit;
-    
     [self.topView addSubview:iconIV];
+    
     [iconIV mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.top.equalTo(@0);
@@ -254,12 +258,14 @@
         make.left.equalTo(@15);
         
     }];
+
+
     
     //订单编号
-    self.orderCodeLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:15.0];
-    
+    self.orderCodeLbl = [UILabel labelWithBackgroundColor:kClearColor
+                                                textColor:kTextColor
+                                                     font:15.0];
     [self.topView addSubview:self.orderCodeLbl];
-    
     [self.orderCodeLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.left.equalTo(iconIV.mas_right).offset(5);
@@ -268,8 +274,11 @@
         
     }];
     
+    
     //订单状态
-    self.statusLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kThemeColor font:16.0];
+    self.statusLbl = [UILabel labelWithBackgroundColor:kClearColor
+                                             textColor:kThemeColor
+                                                  font:16.0];
     [self.topView addSubview:self.statusLbl];
     [self.statusLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
@@ -292,6 +301,7 @@
     }];
     
     NSArray *textArr = @[
+                         
                          [LangSwitcher switchLang:@"交易金额" key:nil],
                          [LangSwitcher switchLang:@"交易数量" key:nil],
                          [LangSwitcher switchLang:@"交易价格" key:nil]
@@ -330,9 +340,7 @@
     
     //交易数量
     self.numLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:15.0];
-    
     self.numLbl.textAlignment = NSTextAlignmentRight;
-    
     [self.topView addSubview:self.numLbl];
     [self.numLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
@@ -352,44 +360,55 @@
         
     }];
     
-
-    
-
-    
 }
 
 - (void)initCenterView {
     
-    self.centerView = [[UIView alloc] init];
+ 
     
-    self.centerView.backgroundColor = kWhiteColor;
+    //买家
+    self.buyersLbl = [UILabel labelWithBackgroundColor:kClearColor
+                                             textColor:kTextColor
+                                                  font:15.0];
+    [self.centerView addSubview:self.buyersLbl];
     
-    [self addSubview:self.centerView];
+    //卖家
+    self.sellerLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:15.0];
+    self.sellerLbl.textAlignment = NSTextAlignmentRight;
+    [self.centerView addSubview:self.sellerLbl];
+    
+    //留言
+    self.leaveMsgLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:14.0];
+    self.leaveMsgLbl.numberOfLines = 0;
+    [self.centerView addSubview:self.leaveMsgLbl];
+    
+    //分割线
+    UIView *line = [[UIView alloc] init];
+    line.backgroundColor = kLineColor;
+    [self.centerView addSubview:line];
+    
+    //提示
+    self.promptLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor2 font:12.0];
+    self.promptLbl.textAlignment = NSTextAlignmentCenter;
+    [self.centerView addSubview:self.promptLbl];
+    
+    //--//
     [self.centerView mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.left.equalTo(@0);
-        make.top.equalTo(self.topView.mas_bottom).offset(10);
         make.width.equalTo(@(kScreenWidth));
-        //        make.height.equalTo(@155);
+        make.top.equalTo(self.topView.mas_bottom).offset(10);
+        make.bottom.equalTo(self.mas_bottom).offset(-10);
+        //make.height.equalTo(@155);
         
     }];
     
-    //买家
-    self.buyersLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:15.0];
-    
-    [self.centerView addSubview:self.buyersLbl];
     [self.buyersLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.left.top.equalTo(@15);
         
     }];
     
-    //卖家
-    self.sellerLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:15.0];
-    
-    self.sellerLbl.textAlignment = NSTextAlignmentRight;
-    
-    [self.centerView addSubview:self.sellerLbl];
     [self.sellerLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.top.equalTo(@15);
@@ -397,10 +416,7 @@
         
     }];
     
-    //留言
-    self.leaveMsgLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:14.0];
-    self.leaveMsgLbl.numberOfLines = 0;
-    [self.centerView addSubview:self.leaveMsgLbl];
+
     [self.leaveMsgLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.left.equalTo(@15);
@@ -409,10 +425,6 @@
         
     }];
     
-    //分割线
-    UIView *line = [[UIView alloc] init];
-    line.backgroundColor = kLineColor;
-    [self.centerView addSubview:line];
     [line mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.left.right.equalTo(@0);
@@ -421,10 +433,7 @@
         
     }];
     
-    //提示
-    self.promptLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor2 font:12.0];
-    self.promptLbl.textAlignment = NSTextAlignmentCenter;
-    [self.centerView addSubview:self.promptLbl];
+    //按钮上面的文字
     [self.promptLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.top.equalTo(line.mas_bottom).offset(8);
@@ -441,10 +450,12 @@
                                     titleFont:16.0
                                  cornerRadius:btnH/2.0];
     [self.centerView addSubview:self.tradeBtn];
-    [self.tradeBtn addTarget:self action:@selector(orderStatusDidChange:) forControlEvents:UIControlEventTouchUpInside];
+    [self.tradeBtn addTarget:self
+                      action:@selector(orderStatusDidChange:)
+            forControlEvents:UIControlEventTouchUpInside];
     [self reAddTradeBtnLayout];
   
-    
+
     //取消按钮
     self.cancleBtn = [UIButton buttonWithTitle:@"取消交易"
                                     titleColor:kWhiteColor
@@ -452,7 +463,9 @@
                                      titleFont:16.0
                                   cornerRadius:btnH/2.0];
     [self.centerView addSubview:self.cancleBtn];
-    [self.cancleBtn addTarget:self action:@selector(buyCancel) forControlEvents:UIControlEventTouchUpInside];
+    [self.cancleBtn addTarget:self
+                       action:@selector(buyCancel)
+             forControlEvents:UIControlEventTouchUpInside];
  
     
 }

@@ -65,6 +65,9 @@ typedef NS_ENUM(NSInteger, SendInputStatus)
 - (void)updateOnSendMessage:(NSArray *)msglist succ:(BOOL)succ;
 
 
+//为了适应，先查询订单在加载数据
+- (void)lazyLoadChatData;
+
 /**
    收到系统消息，子类需要复写
  */

@@ -8,12 +8,14 @@
 
 #import "RichChatViewController.h"
 #import <IQKeyboardManager/IQKeyboardManager.h>
+#import "TLUser.h"
 
 @implementation RichChatViewController
 
 - (void)dealloc
 {
     
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     [self addIQKeyboardManager];
     IMAMsg *draft = [_inputView getMsgDraft];
     if (draft) {
@@ -74,10 +76,28 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+}
+
+- (void)lazyLoadChatData {
+    [super lazyLoadChatData];
     //
     [self removeIQKeyboardManager];
     IMAMsg *draftMsg = [IMAMsg msgWithDraft:[_conversation getDraft]];
     [_inputView setMsgDraft:draftMsg];
+    
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(loginOut)
+                                                 name:kUserLoginOutNotification
+                                               object:nil];
+    //
+    
+}
+
+- (void)loginOut {
+    
+    [self.navigationController popViewControllerAnimated:YES];
     
 }
 

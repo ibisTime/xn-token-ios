@@ -145,13 +145,35 @@
 
         
         [self setPushConfig];
-//        [self test];
+        [self handleOldUnreadMsg];
     
     } fail:^(int code, NSString *msg) {
         
         
     }];
 
+}
+
+//
+- (void)handleOldUnreadMsg {
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+        //异步处理
+        
+        NSArray <TIMConversation *>* converstionList = [[TIMManager sharedInstance] getConversationList];
+        [converstionList enumerateObjectsUsingBlock:^(TIMConversation * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            
+            //1.1.5加入
+            if ([obj getType] == TIM_C2C) {
+                //设置所有消息为已读
+                [obj setReadMessage:nil succ:nil fail:nil];
+            }
+            
+        }];
+        
+        
+    });
+    
 }
 
 /**

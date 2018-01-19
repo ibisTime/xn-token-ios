@@ -73,6 +73,7 @@
     [http postWithSuccess:^(id responseObject) {
         
         //
+        [self lazyLoadChatData];
         self.order = [OrderModel tl_objectWithDictionary:responseObject[@"data"]];
         [self queryAdvertiseDetail];
 

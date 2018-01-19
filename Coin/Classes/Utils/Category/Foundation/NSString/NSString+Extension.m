@@ -229,13 +229,15 @@
     }
     
     //保留8位小数,第九位舍去
-    NSDecimalNumberHandler *handler = [NSDecimalNumberHandler decimalNumberHandlerWithRoundingMode:NSRoundBankers
-                                                                                             scale:8
-raiseOnExactness:NO raiseOnOverflow:NO raiseOnUnderflow:NO raiseOnDivideByZero:YES];
+    NSDecimalNumberHandler *handler = [NSDecimalNumberHandler decimalNumberHandlerWithRoundingMode:NSRoundDown
+                                                                                             scale:8                   raiseOnExactness:NO
+raiseOnOverflow:NO raiseOnUnderflow:NO raiseOnDivideByZero:YES];
     
     NSDecimalNumber *m = [NSDecimalNumber decimalNumberWithString:self];
     NSDecimalNumber *n = [NSDecimalNumber decimalNumberWithString:[@(1.0e+18) stringValue]];
     NSDecimalNumber *o = [m decimalNumberByDividingBy:n];
+    
+    //最终结果
     NSDecimalNumber *p = [o decimalNumberByRoundingAccordingToBehavior:handler];
     
     return [NSString stringWithFormat:@"%@",p];
@@ -245,7 +247,9 @@ raiseOnExactness:NO raiseOnOverflow:NO raiseOnUnderflow:NO raiseOnDivideByZero:Y
 - (NSString *)subNumber:(NSString *)number {
     
     //保留8位小数,第九位舍去
-    NSDecimalNumberHandler *handler = [NSDecimalNumberHandler decimalNumberHandlerWithRoundingMode:NSRoundBankers scale:8 raiseOnExactness:NO raiseOnOverflow:NO raiseOnUnderflow:NO raiseOnDivideByZero:YES];
+    NSDecimalNumberHandler *handler = [NSDecimalNumberHandler decimalNumberHandlerWithRoundingMode:NSRoundDown
+                                                                                             scale:8
+                                                                                  raiseOnExactness:NO raiseOnOverflow:NO raiseOnUnderflow:NO raiseOnDivideByZero:YES];
     
     NSDecimalNumber *m = [NSDecimalNumber decimalNumberWithString:self];
     
@@ -262,7 +266,11 @@ raiseOnExactness:NO raiseOnOverflow:NO raiseOnUnderflow:NO raiseOnDivideByZero:Y
 - (NSString *)divNumber:(NSString *)number leaveNum:(NSInteger)num {
     
     //保留8位小数,第九位舍去
-    NSDecimalNumberHandler *handler = [NSDecimalNumberHandler decimalNumberHandlerWithRoundingMode:NSRoundBankers scale:num raiseOnExactness:NO raiseOnOverflow:NO raiseOnUnderflow:NO raiseOnDivideByZero:YES];
+    NSDecimalNumberHandler *handler = [NSDecimalNumberHandler decimalNumberHandlerWithRoundingMode:NSRoundDown
+
+                                                                                             scale:num
+                                                  raiseOnExactness:NO
+                   raiseOnOverflow:NO raiseOnUnderflow:NO raiseOnDivideByZero:YES];
     
     NSDecimalNumber *m = [NSDecimalNumber decimalNumberWithString:self];
     

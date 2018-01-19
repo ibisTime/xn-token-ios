@@ -27,6 +27,8 @@
 //定时器
 @property (nonatomic, strong) NSTimer *timer;
 
+@property (nonatomic, strong) OrderModel *order;
+
 @end
 
 @implementation OrderDetailVC
@@ -38,8 +40,7 @@
     
     self.title = [LangSwitcher switchLang:@"订单详情" key:nil];
     
-    //添加头部
-    [self initHeaderView];
+
     
 //    支付倒计时
 //    self.timer = [NSTimer timerWithTimeInterval:60 target:self selector:@selector(calculateInvalidTime) userInfo:nil repeats:YES];
@@ -53,9 +54,7 @@
     
     [super viewDidLayoutSubviews];
     
-    self.headView.height = self.headView.centerView.yy;
-    
-    self.tableView.tableHeaderView = self.headView;
+
 
 }
 
@@ -80,6 +79,9 @@
         
         [weakSelf orderEventsWithType:orderType];
     };
+    
+    
+
     
 }
 
@@ -350,12 +352,21 @@
     TLNetworking *http = [TLNetworking new];
     http.code = @"625251";
     http.showView = self.view;
-    http.parameters[@"code"] = self.order.code;
+    http.parameters[@"code"] = self.orderCode;
     
     [http postWithSuccess:^(id responseObject) {
         
+        //添加头部
+        [self lazyLoadChatData];
+        [self initHeaderView];
+        
         self.order = [OrderModel tl_objectWithDictionary:responseObject[@"data"]];
+        
+        //头部设置数据
         self.headView.order = self.order;
+        
+        self.headView.height = self.headView.centerView.yy;
+        self.tableView.tableHeaderView = self.headView;
         if ([self.order.status isEqualToString:@"1"]) {
             
             //仲裁

@@ -21,6 +21,13 @@
 {
     [super viewDidLoad];
     
+
+    
+}
+
+- (void)lazyLoadChatData {
+    
+    [super lazyLoadChatData];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onRevokeMsg:) name:kIMAMSG_RevokeNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onDeleteMsg:) name:kIMAMSG_DeleteNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onResendMsg:) name:kIMAMSG_ResendNotification object:nil];

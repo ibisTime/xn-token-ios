@@ -77,7 +77,9 @@
     
     //
     HomePageVC *vc = [[HomePageVC alloc] init];
-    vc.userId = [ChatUserProfile sharedUser].friendUserId;
+//    NSString *otherUserId = _msg.msg.sender;
+ NSString * otherUserId =  [ChatUserProfile sharedUser].friendUserId;
+    vc.userId = otherUserId;
     [[self nextNavController] pushViewController:vc animated:YES];
     //
     
@@ -401,51 +403,116 @@
     
     
 }
+//
+//- (void)configWith:(IMAMsg *)msg
+//{
+//    _msg = msg;
+//
+//    [self configKVO];
+//
+//    IMAUser *user = nil;
+//    if ([_msg isMineMsg]) {
+//
+//        user = [IMAPlatform sharedInstance].host;
+//
+//    } else {
+//
+//        user = [_msg getSender];
+//
+//    }
+//
+//    NSString *photo = [user icon];
+//    if (photo && photo.length > 0) {
+//
+//        [_icon setTitle:@"" forState:UIControlStateNormal];
+//        [_icon sd_setImageWithURL:photo
+//                         forState:UIControlStateNormal
+//                 placeholderImage:kDefaultUserIcon];
+//
+//    } else {
+//
+//
+//        NSString *title = [user.nickName substringToIndex:1];
+//        [_icon setTitle:title forState:UIControlStateNormal];
+//        [_icon setImage:nil forState:UIControlStateNormal];
+//
+//
+//    }
+//
+//
+//
+//
+//    if (_remarkTip)
+//    {
+//        _remarkTip.hidden = !([_msg isGroupMsg] && ![_msg isMineMsg]);
+//        _remarkTip.font = [_msg tipFont];
+//        _remarkTip.textColor = [_msg tipTextColor];
+//        _remarkTip.text = [user showTitle];
+//    }
+//
+//    [self configContent];
+//
+//    if (_pickedViewRef)
+//    {
+//        [_pickedViewRef setSelected:_msg.isPicked];
+//    }
+//    if (_elemContentRef)
+//    {
+//        [self configElemContent];
+//    }
+//
+//    if (_sendingTipRef)
+//    {
+//        [self configSendingTips];
+//    }
+//
+//}
 
 #pragma mark - 配置 cell,  配置头像
 - (void)configWith:(IMAMsg *)msg
 {
     _msg = msg;
-    
+
     [self configKVO];
-    
+
     IMAUser *user = nil;
-    
+
     NSString *photo;
-    
+
     NSString *nickName;
-    
+
     if ([_msg isMineMsg]) {
-        
+
         user = [IMAPlatform sharedInstance].host;
         photo = [ChatUserProfile sharedUser].minePhoto;
         nickName = [ChatUserProfile sharedUser].mineNickName;
-        
+
     } else {
-        
+
         user = [_msg getSender];
         photo = [ChatUserProfile sharedUser].friendPhoto;
         nickName = [ChatUserProfile sharedUser].friendNickName;
-        
+
     }
-    
+
     if (photo) {
-        
+
         [_icon setTitle:@"" forState:UIControlStateNormal];
 
 //        [_icon sd_setBackgroundImageWithURL:[NSURL URLWithString:[photo convertImageUrl]] forState:UIControlStateNormal placeholderImage:kDefaultUserIcon];
-        [_icon sd_setImageWithURL:[NSURL URLWithString:[photo convertImageUrl]] forState:UIControlStateNormal placeholderImage:kDefaultUserIcon];
+        [_icon sd_setImageWithURL:[NSURL URLWithString:[photo convertImageUrl]] forState:UIControlStateNormal
+                 placeholderImage:kDefaultUserIcon];
 
     } else {
-        
+
         NSString *title = [nickName substringToIndex:1];
-        
+
         [_icon setTitle:title forState:UIControlStateNormal];
-        
+
         [_icon setImage:nil forState:UIControlStateNormal];
-        
+
     }
-    
+
     if (_remarkTip) {
         _remarkTip.hidden = !([_msg isGroupMsg] && ![_msg isMineMsg]);
 //        _remarkTip.backgroundColor = [UIColor orangeColor];
@@ -455,23 +522,22 @@
         // 设置昵称
         _remarkTip.text = [ChatUserProfile sharedUser].friendNickName;
     }
-    
+
     [self configContent];
-    
-    if (_pickedViewRef)
-    {
+
+    if (_pickedViewRef) {
         [_pickedViewRef setSelected:_msg.isPicked];
     }
-    if (_elemContentRef)
-    {
+
+    if (_elemContentRef) {
+
         [self configElemContent];
     }
-    
-    if (_sendingTipRef)
-    {
+
+    if (_sendingTipRef) {
         [self configSendingTips];
     }
-    
+
 }
 
 - (void)configContent

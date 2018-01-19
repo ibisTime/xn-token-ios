@@ -188,7 +188,7 @@
     //
     OrderDetailVC *chatVC = [[OrderDetailVC alloc] initWith:currentIMGroup];
     chatVC.userInfo = userInfo;
-    chatVC.order = order;
+    chatVC.orderCode = order.code;
     [self.navigationController pushViewController:chatVC animated:YES];
     
     

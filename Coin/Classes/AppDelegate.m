@@ -34,6 +34,7 @@
 #import "TLPublishVC.h"
 #import "RespHandler.h"
 #import <NBHTTP/NBNetwork.h>
+#import "TIMElemBaseTableViewCell.h"
 
 // 引入JPush功能所需头文件
 #import "JPUSHService.h"
@@ -84,9 +85,14 @@
     [LangSwitcher startWithTraditional];
 
     //
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginOut) name:kUserLoginOutNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(loginOut)
+                                                 name:kUserLoginOutNotification
+                                               object:nil];
     //消息
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLogin) name:kUserLoginNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(userLogin) name:kUserLoginNotification
+                                               object:nil];
     
     //重新登录
     if([TLUser user].isLogin) {
@@ -103,13 +109,19 @@
     [[IMAPlatform sharedInstance] configOnAppLaunchWithOptions:launchOptions];
     
     
-    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
+        [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+        
+    });
     
     //
     return YES;
     
     
 }
+
+
 
 //- (void)jpushTest:(NSDictionary *)launchOptions {
 //
@@ -134,32 +146,30 @@
 
 
 // iOS 10 Support
-- (void)jpushNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(NSInteger))completionHandler {
-    // Required
-    NSDictionary * userInfo = notification.request.content.userInfo;
-    if([notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
-        [JPUSHService handleRemoteNotification:userInfo];
-    }
-    completionHandler(UNNotificationPresentationOptionAlert); // 需要执行这个方法，选择是否提醒用户，有Badge、Sound、Alert三种类型可以选择设置
-}
+//- (void)jpushNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(NSInteger))completionHandler {
+//    // Required
+//    NSDictionary * userInfo = notification.request.content.userInfo;
+//    if([notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
+//        [JPUSHService handleRemoteNotification:userInfo];
+//    }
+//    completionHandler(UNNotificationPresentationOptionAlert); // 需要执行这个方法，选择是否提醒用户，有Badge、Sound、Alert三种类型可以选择设置
+//}
 
 // iOS 10 Support
-- (void)jpushNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)())completionHandler {
-    // Required
-    NSDictionary * userInfo = response.notification.request.content.userInfo;
-    if([response.notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
-        [JPUSHService handleRemoteNotification:userInfo];
-    }
-    completionHandler();  // 系统要求执行这个方法
-}
+//- (void)jpushNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)())completionHandler {
+//    // Required
+//    NSDictionary * userInfo = response.notification.request.content.userInfo;
+//    if([response.notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
+//        [JPUSHService handleRemoteNotification:userInfo];
+//    }
+//    completionHandler();  // 系统要求执行这个方法
+//}
 
 #pragma mark- 上传推送 token
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
 
 
     [[IMAPlatform sharedInstance] configOnAppRegistAPNSWithDeviceToken:deviceToken];
-
-//    [JPUSHService registerDeviceToken:deviceToken];
 
 }
 
@@ -378,6 +388,7 @@
 #pragma mark- 应用进入前台，改变登录时间
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     
+    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
     if([TLUser user].isLogin) {
 
       [[TLUser user] changLoginTime];

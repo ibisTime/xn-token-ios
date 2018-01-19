@@ -49,7 +49,6 @@
     
     NSString *appId = @"1264435742"; //test
 //    NSString *appId = @"1321457016";
-    
     //
     [TLProgressHUD showWithStatus:nil];
     //获取版本
@@ -75,7 +74,6 @@
         [AppConfig config].isChecking = false;
         [self setRootVC];
 
-        
         // CFBundleVersion 构建版本号
         // CFBundleShortVersionString
         // CFBundleDisplayName

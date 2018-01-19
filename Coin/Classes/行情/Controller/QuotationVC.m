@@ -103,6 +103,7 @@
     
     TLNetworking *http = [TLNetworking new];
     http.code = @"625293";
+    http.isUploadToken = NO;
     if(showProgress) {
         http.showView = self.view;
     }

@@ -63,7 +63,7 @@
     
     [super viewDidLoad];
     self.isFirst  = YES;
-    self.title = [LangSwitcher switchLang:@"提币订单" key:nil];
+    self.title = [LangSwitcher switchLang:@"提币记录" key:nil];
     
     TLTableView *tableView = [TLTableView tableViewWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 0)
                                                     delegate:self dataSource:self];
@@ -76,8 +76,7 @@
     //
     TLPageDataHelper *helper = [[TLPageDataHelper alloc] init];
     helper.code = @"802755";
-    helper.parameters[@"accountName"] = [TLUser user].mobile;
-    helper.parameters[@"userId"] = [TLUser user].userId;
+    helper.parameters[@"applyUser"] = [TLUser user].userId;
     helper.parameters[@"token"] = [TLUser user].token;
     helper.tableView = self.orderTableView;
     [helper modelClass:[TLCoinWithdrawModel class]];

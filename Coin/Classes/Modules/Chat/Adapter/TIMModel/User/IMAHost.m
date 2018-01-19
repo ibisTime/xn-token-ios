@@ -41,7 +41,7 @@
 
 - (NSString *)icon
 {
-    return ![NSString isEmpty:_profile.faceURL] ? _profile.faceURL: @"我的";
+    return ![NSString isEmpty:_profile.faceURL] ? _profile.faceURL: nil;
 }
 
 - (NSString *)remark

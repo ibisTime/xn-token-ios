@@ -18,9 +18,9 @@
 //位数
 - (NSString *)convertToRealMoneyWithNum:(NSInteger)num;
 
-- (NSString *)convertToSimpleRealCoin;
+//- (NSString *)convertToSimpleRealCoin;
 
-- (NSString *)convertToCountMoney;
+//- (NSString *)convertToCountMoney;
 //减法
 - (NSString *)subNumber:(NSNumber *)number;
 

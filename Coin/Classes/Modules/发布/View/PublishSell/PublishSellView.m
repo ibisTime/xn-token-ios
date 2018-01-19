@@ -212,7 +212,7 @@
                                      textAligment:NSTextAlignmentLeft
                                   backgroundColor:[UIColor whiteColor]
                                              font:FONT(12)
-                                        textColor:[UIColor textColor]];
+                                        textColor:[UIColor themeColor]];
     [self.scrollView addSubview:self.marketPricelbl];
     [self.marketPricelbl mas_makeConstraints:^(MASConstraintMaker *make) {
         

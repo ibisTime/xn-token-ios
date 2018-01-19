@@ -8,3 +8,5 @@
 ### 3.todo
 1.正在聊天时如果有
 
+### 4.TIMBaseTableViewCell 中设置头像和昵称
+

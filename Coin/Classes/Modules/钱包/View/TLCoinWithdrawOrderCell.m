@@ -151,7 +151,7 @@
     
     //
     self.statusLbl.text = [_withdrawModel statusName];
-    self.applyTimeLbl.text = [NSString stringWithFormat:@"%@",[_withdrawModel.applyDatetime convertDate]];
+    self.applyTimeLbl.text = [NSString stringWithFormat:@"%@",[_withdrawModel.applyDatetime convertToDetailDate]];
     
 }
 

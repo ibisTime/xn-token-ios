@@ -65,6 +65,7 @@
        _manager = [[self class] HTTPSessionManager];
         _isShowMsg = YES;
         self.parameters = [NSMutableDictionary dictionary];
+        self.isUploadToken = YES;
         
     }
     return self;
@@ -96,7 +97,7 @@
         
         
         // 此处 巨坑
-        if ([TLUser user].token && [TLUser user].token.length > 0) {
+        if (self.isUploadToken && [TLUser user].token && [TLUser user].token.length > 0 ) {
 
             self.parameters[@"token"] = [TLUser user].token;
 
@@ -154,9 +155,11 @@
           }
           
           if ([responseObject[@"errorCode"] isEqual:@"4"]) {
-              //token错误  4
               
-              [TLAlert alertWithTitle:nil message:@"为了您的账户安全，请重新登录" confirmAction:^{
+              //token错误  4
+              [TLAlert alertWithTitle:nil
+                              message:@"为了您的账户安全，请重新登录"
+                        confirmAction:^{
                   [[NSNotificationCenter defaultCenter] postNotificationName:kUserLoginOutNotification object:nil];
               }];
               return;
