@@ -470,26 +470,19 @@
     http.parameters[@"photo"] = key;
     http.parameters[@"token"] = [TLUser user].token;
     [http postWithSuccess:^(id responseObject) {
-
+        
         [TLAlert alertWithSucces:[LangSwitcher switchLang:@"修改头像成功" key:nil]];
         
         [TLUser user].photo = key;
         
-        //设置头像
-//        [[IMAHost alloc] asyncSetHeadIconURL:key succ:^{
-//
-//        } fail:^(int code, NSString *msg) {
-//
-//        }];
-//
-//        [IMAPlatform sharedInstance].host.icon = key;
-        
+        [[TLUser user] updateUserInfoWithNotification:NO];
         [[NSNotificationCenter defaultCenter] postNotificationName:kUserInfoChange object:nil];
         
     } failure:^(NSError *error) {
         
         
     }];
+    
 }
 
 #pragma mark - MineHeaderSeletedDelegate

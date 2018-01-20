@@ -43,7 +43,7 @@ typedef NS_ENUM(NSInteger, SendInputStatus)
 //    BOOL   _isSendMsg;//判断是否发送过消息。当从联系人列表进入聊天界面时，如果没有发送消息，则不生成新的会话（将生产的新会话删除）
 }
 
-@property (nonatomic, strong) ChatUserProfile *userInfo;
+//@property (nonatomic, strong) ChatUserProfile *userInfo;
 
 - (instancetype)initWith:(IMAUser *)user;
 

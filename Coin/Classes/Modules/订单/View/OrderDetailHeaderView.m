@@ -115,7 +115,7 @@
                 make.width.mas_equalTo(tempBtnWidth);
                 make.height.equalTo(@(tempBtnHeight));
                 make.top.equalTo(self.promptLbl.mas_bottom).offset(15);
-                make.bottom.equalTo(self.centerView.mas_bottom);
+                make.bottom.equalTo(self.centerView.mas_bottom).offset(-15);
                 
             }];
             
@@ -225,6 +225,7 @@
         make.width.equalTo(@150);
         make.height.equalTo(@(BTN_HEIGHT));
         make.top.equalTo(self.promptLbl.mas_bottom).offset(15);
+        make.bottom.equalTo(self.centerView.mas_bottom).offset(-15);;
         
     }];
     
@@ -237,7 +238,6 @@
     self.topView = [[UIView alloc] init];
     self.topView.backgroundColor = kWhiteColor;
     [self addSubview:self.topView];
-    
     [self.topView mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.left.top.equalTo(@0);
@@ -246,11 +246,10 @@
         
     }];
 
-    
+    //
     UIImageView *iconIV = [[UIImageView alloc] initWithImage:kImage(@"订单编号")];
     iconIV.contentMode = UIViewContentModeScaleAspectFit;
     [self.topView addSubview:iconIV];
-    
     [iconIV mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.top.equalTo(@0);
@@ -388,7 +387,9 @@
     [self.centerView addSubview:line];
     
     //提示
-    self.promptLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor2 font:12.0];
+    self.promptLbl = [UILabel labelWithBackgroundColor:kClearColor
+                                             textColor:kTextColor2
+                                                  font:12.0];
     self.promptLbl.textAlignment = NSTextAlignmentCenter;
     [self.centerView addSubview:self.promptLbl];
     
@@ -419,9 +420,10 @@
 
     [self.leaveMsgLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.left.equalTo(@15);
+        make.left.equalTo(self.centerView.mas_left).offset(15);
+        make.right.equalTo(self.centerView.mas_right).offset(-15);
+        //
         make.top.equalTo(self.buyersLbl.mas_bottom).offset(10);
-        make.right.equalTo(@(-15));
         
     }];
     
@@ -437,6 +439,8 @@
     [self.promptLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.top.equalTo(line.mas_bottom).offset(8);
+        make.left.equalTo(self.centerView.mas_left).offset(15);
+        make.right.equalTo(self.centerView.mas_right).offset(-15);
         make.centerX.equalTo(@0);
         
     }];

@@ -82,7 +82,7 @@ NSString *const kAdsTradeTypeSell = @"1";
 + (NSString *)calculateTruePriceByPreYiJia:(float)yiJiaRate marketPrice:(float)marketPrice {
     
     float prePrice = marketPrice*(yiJiaRate + 1);
-    return  [NSString stringWithFormat:@"%.2lf", prePrice];
+    return  [NSString stringWithFormat:@"%.2lf", prePrice - 0.005];
     
     
 }

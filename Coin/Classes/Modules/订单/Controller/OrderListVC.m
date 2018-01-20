@@ -170,7 +170,7 @@
     
     //我
     ChatUserProfile *userInfo = [ChatUserProfile sharedUser];
-    userInfo.minePhoto = [TLUser user].photo;
+    userInfo.minePhoto = [[TLUser user].photo convertImageUrl];
     userInfo.mineNickName = [TLUser user].nickname;
     userInfo.friendPhoto = [friendPhoto convertImageUrl];
     userInfo.friendNickName = friendNickName;
@@ -179,7 +179,7 @@
     if ([order.status isEqualToString:kTradeOrderStatusToSubmit]) {
         // 传入user
         WaitingOrderVC *chatVC = [[WaitingOrderVC alloc] initWith:currentIMGroup];
-        chatVC.userInfo = userInfo;
+//        chatVC.userInfo = userInfo;
         chatVC.orderCode = order.code;
         [self.navigationController pushViewController:chatVC animated:YES];
         return ;
@@ -187,7 +187,7 @@
     
     //
     OrderDetailVC *chatVC = [[OrderDetailVC alloc] initWith:currentIMGroup];
-    chatVC.userInfo = userInfo;
+//    chatVC.userInfo = userInfo;
     chatVC.orderCode = order.code;
     [self.navigationController pushViewController:chatVC animated:YES];
     

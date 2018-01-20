@@ -238,8 +238,8 @@ NSString *const kGoogleAuthClose = @"0";
     
 }
 
-- (void)updateUserInfo {
-
+- (void)updateUserInfoWithNotification:(BOOL)isPostNotification {
+    
     TLNetworking *http = [TLNetworking new];
     
     http.isShowMsg = NO;
@@ -252,13 +252,22 @@ NSString *const kGoogleAuthClose = @"0";
         [self setUserInfoWithDict:responseObject[@"data"]];
         [self saveUserInfo:responseObject[@"data"]];
         
-        [[NSNotificationCenter defaultCenter] postNotificationName:kUserInfoChange object:nil];
-
+        if (isPostNotification) {
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:kUserInfoChange object:nil];
+        }
+        
     } failure:^(NSError *error) {
         
         
     }];
+    
+}
 
+- (void)updateUserInfo {
+    
+    [self updateUserInfoWithNotification:YES];
+    
 }
 
 - (void)setUserInfoWithDict:(NSDictionary *)dict {
@@ -275,14 +284,19 @@ NSString *const kGoogleAuthClose = @"0";
     self.secretUserId =  dict[@"secretUserId"];
     
     //腾讯云-设置昵称和头像
-//    [IMAPlatform sharedInstance].host.icon = [self.photo convertImageUrl];
+//  [IMAPlatform sharedInstance].host.icon = [self.photo convertImageUrl];
 
-    
 }
 
 - (void)setMobile:(NSString *)mobile {
     
     _mobile = [mobile copy];
+    
+}
+
+- (void)setPhoto:(NSString *)photo {
+    
+    _photo = [photo copy];
     
 }
 

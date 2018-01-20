@@ -403,6 +403,11 @@
     //设置订单号
     info.ext = _conversation.receiver;
     
+    //安卓设置
+    TIMAndroidOfflinePushConfig *androidOfflinePushConfig  = [[TIMAndroidOfflinePushConfig alloc] init];
+    androidOfflinePushConfig.title = @"Bcoin";
+    info.androidConfig = androidOfflinePushConfig;
+    
     NSString  *fullString = [self fullStr:timMsg];
     //设置
     info.desc = [NSString stringWithFormat:@"订单（%@）:%@",

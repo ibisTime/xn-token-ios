@@ -110,6 +110,11 @@
 //异步更新用户信息
 - (void)updateUserInfo;
 
+/**
+ isPostNotification 是否发送用户信息更新的通知
+ */
+- (void)updateUserInfoWithNotification:(BOOL)isPostNotification;
+
 //更新登录时间
 - (void)changLoginTime;
 

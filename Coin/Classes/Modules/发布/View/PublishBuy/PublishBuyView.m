@@ -203,7 +203,7 @@
         
     }];
     
-    self.marketPricelbl.text = [NSString stringWithFormat:@"     市场价格：%@",@"--"];
+    self.marketPricelbl.text = [NSString stringWithFormat:@"     行情价格：%@",@"--"];
     
     
     UIView *line = [[UIView alloc] init];
@@ -909,7 +909,7 @@
     _marketPrice = marketPrice;
     //
     self.priceTF.text = marketPrice;
-    self.marketPricelbl.text = [NSString stringWithFormat:@"     市场价格：%@",_marketPrice];
+    self.marketPricelbl.text = [NSString stringWithFormat:@"     行情价格：%@",_marketPrice];
     [self calculateTurePriceWhenCan];
     
 }
@@ -1048,7 +1048,7 @@
         
         CGFloat prePrice = [self.marketPrice doubleValue]*(preRate/100.0 + 1);
         
-        self.priceTF.text = [NSString stringWithFormat:@"%.2lf", prePrice];
+        self.priceTF.text = [NSString stringWithFormat:@"%.2lf", prePrice - 0.005];
         
     } else {
         

@@ -228,8 +228,10 @@
         return nil;
     }
     
+    NSRoundingMode mode = [self hasPrefix:@"-"] ? NSRoundUp : NSRoundDown;
+    
     //保留8位小数,第九位舍去
-    NSDecimalNumberHandler *handler = [NSDecimalNumberHandler decimalNumberHandlerWithRoundingMode:NSRoundDown
+    NSDecimalNumberHandler *handler = [NSDecimalNumberHandler decimalNumberHandlerWithRoundingMode:mode
                                                                                              scale:8                   raiseOnExactness:NO
 raiseOnOverflow:NO raiseOnUnderflow:NO raiseOnDivideByZero:YES];
     

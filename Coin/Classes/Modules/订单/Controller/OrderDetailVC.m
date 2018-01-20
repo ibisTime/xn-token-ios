@@ -71,7 +71,12 @@
     
     CoinWeakSelf;
     
-    self.headView = [[OrderDetailHeaderView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 370)];
+    self.headView = [[OrderDetailHeaderView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 0)];
+    [self.headView mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.width.mas_equalTo(SCREEN_WIDTH);
+        
+    }];
     
     self.headView.backgroundColor = kClearColor;
     self.headView.order = self.order;

@@ -77,8 +77,8 @@
     
     //
     HomePageVC *vc = [[HomePageVC alloc] init];
-//    NSString *otherUserId = _msg.msg.sender;
- NSString * otherUserId =  [ChatUserProfile sharedUser].friendUserId;
+    //    NSString *otherUserId = _msg.msg.sender;
+    NSString * otherUserId =  [ChatUserProfile sharedUser].friendUserId;
     vc.userId = otherUserId;
     [[self nextNavController] pushViewController:vc animated:YES];
     //
