@@ -41,6 +41,12 @@
  */
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    
+    @throw [NSException exceptionWithName:@"请使用 TLPublishSellVC" reason:@"*******" userInfo:nil];
+    return;
+    
+    
     self.title =  [LangSwitcher switchLang:@"发布卖出" key:nil] ;
     
     self.timeArr = [NSMutableArray array];
@@ -117,7 +123,7 @@
 //                NSString *str = [obj.amountString convertToSimpleRealCoin];
                 NSString *str = [obj.amountString subNumber:obj.frozenAmountString];
                 str = [str convertToSimpleRealCoin];
-                weakSelf.publishView.balanceLbl.text = [NSString stringWithFormat:@"    账户可用余额：%@",str];
+                weakSelf.publishView.balanceLbl.text = [NSString stringWithFormat:@"账户可用余额：%@",str];
 
             }
             

@@ -333,6 +333,7 @@
 		2E394FFD1FB059C100BA0829 /* TLBaseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E394FFA1FB059C100BA0829 /* TLBaseVC.m */; };
 		2E3950001FB05ADB00BA0829 /* TLTransactionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E394FFF1FB05ADB00BA0829 /* TLTransactionVC.m */; };
 		2E3950031FB05AF200BA0829 /* TLOrderVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E3950021FB05AF200BA0829 /* TLOrderVC.m */; };
+		2E42616420258B4300913DCF /* CoinService.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E42616320258B4300913DCF /* CoinService.m */; };
 		2E67CD9C1FE253850030C827 /* in.caf in Resources */ = {isa = PBXBuildFile; fileRef = 2E67CD9B1FE253850030C827 /* in.caf */; };
 		2E973FC91FDA279C005C2D5F /* LangSwitcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E973FC81FDA279C005C2D5F /* LangSwitcher.m */; };
 		2E973FCF1FDABA0F005C2D5F /* ChatSysMsgCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E973FCE1FDABA0F005C2D5F /* ChatSysMsgCell.m */; };
@@ -1205,6 +1206,8 @@
 		2E394FFF1FB05ADB00BA0829 /* TLTransactionVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLTransactionVC.m; sourceTree = "<group>"; };
 		2E3950011FB05AF200BA0829 /* TLOrderVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLOrderVC.h; sourceTree = "<group>"; };
 		2E3950021FB05AF200BA0829 /* TLOrderVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLOrderVC.m; sourceTree = "<group>"; };
+		2E42616220258B4300913DCF /* CoinService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoinService.h; sourceTree = "<group>"; };
+		2E42616320258B4300913DCF /* CoinService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoinService.m; sourceTree = "<group>"; };
 		2E5F191E1FED0CA900100420 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		2E5F191F1FED0CAE00100420 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		2E5F19201FED0CB600100420 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
@@ -3505,6 +3508,7 @@
 		2E394FD11FB0568F00BA0829 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				2E42616120258B2500913DCF /* Service */,
 				211CEF021FCBB718000FB0C4 /* 发布 */,
 				2182D2EE1FC803AA008EDCE4 /* 订单 */,
 				211C01481FC6604700E51FCF /* Chat */,
@@ -3573,6 +3577,15 @@
 				21223CB61FBDB2D200057444 /* WebVC.m */,
 			);
 			path = Expand;
+			sourceTree = "<group>";
+		};
+		2E42616120258B2500913DCF /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				2E42616220258B4300913DCF /* CoinService.h */,
+				2E42616320258B4300913DCF /* CoinService.m */,
+			);
+			path = Service;
 			sourceTree = "<group>";
 		};
 		2E973FD01FDBC57C005C2D5F /* View */ = {
@@ -4209,6 +4222,7 @@
 				2182D3001FC96C89008EDCE4 /* OrderArbitrationView.m in Sources */,
 				2EE360E51FFA09A800A5C3EB /* MyUIDefine.m in Sources */,
 				211DE6BA1FB58B4C002FCF3D /* NSString+Check.m in Sources */,
+				2E42616420258B4300913DCF /* CoinService.m in Sources */,
 				21A7F3151FB2E2F900FAA0A2 /* TLChangeMobileVC.m in Sources */,
 				211C04671FC6604800E51FCF /* IMAPlatform+AppConfig.m in Sources */,
 				211DE6AC1FB58B4C002FCF3D /* TLPageDataHelper.m in Sources */,

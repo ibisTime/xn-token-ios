@@ -31,6 +31,8 @@
 #import "AdsService.h"
 #import "TLPublishVC.h"
 #import "AppConfig.h"
+#import "PublishService.h"
+#import "CoinUtil.h"
 
 @interface TLTransactionVC ()<SegmentDelegate, RefreshDelegate, UIScrollViewDelegate>
 
@@ -249,30 +251,27 @@
     };
 }
 
+#pragma mark- 币种切换事件
 - (FilterView *)filterPicker {
     
     if (!_filterPicker) {
         
         CoinWeakSelf;
         
-        NSArray *textArr = @[@"ETH"];
+        NSArray *textArr = [CoinUtil shouldDisplayCoinArray];
         
         //        NSArray *typeArr = @[@"", @"charge", @"withdraw", @"buy", @"sell"];
         
         _filterPicker = [[FilterView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
-        
         _filterPicker.title = @"请选择货币类型";
-        
+        _filterPicker.tagNames = textArr;
         _filterPicker.selectBlock = ^(NSInteger index) {
             
             weakSelf.changeView.title = textArr[index];
+            [weakSelf changePageHelperCoin:textArr[index] pageHelper:weakSelf.helper];
+            [weakSelf.tableView beginRefreshing];
             
-            //            weakSelf.helper.parameters[@"bizType"] = typeArr[index];
-            //
-            //            [weakSelf.tableView beginRefreshing];
         };
-        
-        _filterPicker.tagNames = textArr;
         
     }
     
@@ -315,6 +314,7 @@
     [self.tipView show];
 }
 
+#pragma mark- 发布界面
 - (void)publishEventsWithIndex:(NSInteger)index {
     
     CoinWeakSelf;
@@ -324,9 +324,7 @@
         if (![TLUser user].isLogin) {
             
             TLUserLoginVC *loginVC = [[TLUserLoginVC alloc] init];
-            
             TLNavigationController *nav = [[TLNavigationController alloc] initWithRootViewController:loginVC];
-            
             loginVC.loginSuccess = ^(){
                 
                 [weakSelf publishEventsWithIndex:0];
@@ -337,9 +335,20 @@
             return;
         }
         
-        PublishBuyVC *buyVC = [PublishBuyVC new];
-        buyVC.publishType = PublishTypePublishOrSaveDraft;
-        [self.navigationController pushViewController:buyVC animated:YES];
+        if ([PublishService isDevPublish]) {
+            
+            [[PublishService shareInstance] publishBuy:self.navigationController];
+            
+
+
+        } else {
+            
+            PublishBuyVC *buyVC = [PublishBuyVC new];
+            buyVC.publishType = PublishTypePublishOrSaveDraft;
+            [self.navigationController pushViewController:buyVC animated:YES];
+        }
+        
+
         
     } else if (index == 1) {
         
@@ -359,9 +368,23 @@
             return;
         }
         
+        
+        if ([PublishService isDevPublish]) {
+            
+            [[PublishService shareInstance] publishSell:self.navigationController];
+            
+//            TLPublishVC *sellVC = [[TLPublishVC alloc] init];
+//            sellVC.VCType = TLPublishVCTypeSell;
+//            sellVC.publishType = PublishTypePublishOrSaveDraft;
+//            [self.navigationController pushViewController:sellVC animated:YES];
+            
+        } else {
+            
         PublishSellVC *sellVC = [PublishSellVC new];
         sellVC.publishType = PublishTypePublishOrSaveDraft;
         [self.navigationController pushViewController:sellVC animated:YES];
+            
+        }
         
     }
 }
@@ -411,6 +434,12 @@
     
 }
 
+- (void)changePageHelperCoin:(NSString *)coin pageHelper:(TLPageDataHelper *)helper; {
+    
+    helper.parameters[@"coin"] = coin;
+    
+}
+
 - (void)requestAdvetiseList {
     
     CoinWeakSelf;
@@ -419,9 +448,8 @@
     helper.code = @"625228";
     helper.start = 1;
     helper.limit = 20;
-    helper.parameters[@"coin"] = @"ETH";
+    [self changePageHelperCoin:kETH pageHelper:helper];
     helper.parameters[@"tradeType"] = self.tradeType;
-    
     helper.tableView = self.tableView;
     self.helper = helper;
     
@@ -473,14 +501,7 @@
 
 #pragma mark - SegmentDelegate
 -(void)segment:(TopLabelUtil *)segment didSelectIndex:(NSInteger)index {
-    
-//        if([AppConfig config].runEnv == RunEnvDev) {
-//    
-//            //用于研发测试
-//            [self test];
-//            return;
-//    
-//        }
+
     
     if (index == 1) {
         

@@ -179,7 +179,7 @@ NSString *const kGoogleAuthClose = @"0";
     
     TLNetworking *http = [TLNetworking new];
     http.code = USER_CKEY_CVALUE;
-    http.parameters[@"key"] = @"qiniu_domain";
+    http.parameters[SYS_KEY] = @"qiniu_domain";
     [http postWithSuccess:^(id responseObject) {
         
         [AppConfig config].qiniuDomain = [NSString stringWithFormat:@"http://%@", responseObject[@"data"][@"cvalue"]];

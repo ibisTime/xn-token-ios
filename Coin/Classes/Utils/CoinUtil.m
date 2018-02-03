@@ -9,12 +9,13 @@
 #import "CoinUtil.h"
 
 NSString *const kETH = @"ETH";
+NSString *const kSC = @"SC";
 NSString *const kBTC = @"BTC";
 
 NSString *const kCNY = @"CNY";
 
-#define NUM_10_18 @(1.0e+18)
-#define NUM_10_8 @(1.0e+8)
+//#define NUM_10_18 @(1.0e+18)
+//#define NUM_10_8 @(1.0e+8)
 #define SCALE 8
 
 @implementation CoinUtil
@@ -33,6 +34,7 @@ NSString *const kCNY = @"CNY";
 
 + (NSNumber *)getCardinality:(NSString *)coin {
     
+    
     if ([coin isEqualToString:kETH]) {
         
         return @(1.0e+18);
@@ -41,10 +43,12 @@ NSString *const kCNY = @"CNY";
         
         return @(1.0e+8);
         
-    } else {
+    } else if([coin isEqualToString:kSC]) {
         
-        return nil;
+        return @(1.0e+24);
     }
+    
+    return nil;
 }
 
 + (NSString *)mult1:(NSString *)mult1 mult2:(NSString *)mult2 {
@@ -81,6 +85,23 @@ NSString *const kCNY = @"CNY";
     return [NSString stringWithFormat:@"%@",p];
     
 }
+
++ (NSString *)chineseName:(NSString *)coin {
+    
+    NSDictionary *dict = @{
+                           kETH : @"以太币",
+                           kSC : @"云储币"
+                           };
+    
+    return dict[coin];
+}
+
+
++ (NSArray *)shouldDisplayCoinArray {
+    
+    return @[kETH,kSC];
+}
+
 
 
 @end

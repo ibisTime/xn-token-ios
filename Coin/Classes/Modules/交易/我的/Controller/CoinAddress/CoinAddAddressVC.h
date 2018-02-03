@@ -13,5 +13,6 @@ typedef void(^CoinAddressAddSuccess)(void);
 @interface CoinAddAddressVC : TLBaseVC
 
 @property (nonatomic, copy) CoinAddressAddSuccess success;
+@property (nonatomic, copy) NSString *coin;
 
 @end

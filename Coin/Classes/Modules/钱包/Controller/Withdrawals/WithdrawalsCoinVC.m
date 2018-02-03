@@ -20,6 +20,7 @@
 #import "FilterView.h"
 #import "QRCodeVC.h"
 #import "CoinAddressListVC.h"
+#import "CoinUtil.h"
 
 typedef NS_ENUM(NSInteger, AddressType) {
     
@@ -100,13 +101,13 @@ typedef NS_ENUM(NSInteger, AddressType) {
                                             placeholder:@""];
     
     self.balanceTF.textColor = kThemeColor;
-    
     self.balanceTF.enabled = NO;
-    
     NSString *leftAmount = [self.currency.amountString subNumber:self.currency.frozenAmountString];
-
     
-    self.balanceTF.text = [NSString stringWithFormat:@"%@ %@", [leftAmount convertToSimpleRealCoin], self.currency.currency];
+    NSString *currentCurrency = self.currency.currency;
+    self.balanceTF.text = [NSString stringWithFormat:@"%@ %@",[CoinUtil convertToRealCoin:leftAmount coin:currentCurrency],currentCurrency];
+    
+    
     
     [self.view addSubview:self.balanceTF];
     
@@ -233,7 +234,7 @@ typedef NS_ENUM(NSInteger, AddressType) {
     
     self.tranAmountTF.keyboardType = UIKeyboardTypeDecimalPad;
     
-    [self.tranAmountTF addTarget:self action:@selector(textDidChange:) forControlEvents:UIControlEventEditingChanged];
+//    [self.tranAmountTF addTarget:self action:@selector(textDidChange:) forControlEvents:UIControlEventEditingChanged];
     
     [self.view addSubview:self.tranAmountTF];
     
@@ -543,8 +544,8 @@ typedef NS_ENUM(NSInteger, AddressType) {
     }
 }
 
-- (void)textDidChange:(UITextField *)sender {
-    
+//- (void)textDidChange:(UITextField *)sender {
+
 //    NSDecimalNumber *m = [NSDecimalNumber decimalNumberWithString:self.tranAmountTF.text];
 //
 //    NSDecimalNumber *n = [NSDecimalNumber decimalNumberWithString:self.withdrawFee];
@@ -552,7 +553,7 @@ typedef NS_ENUM(NSInteger, AddressType) {
 //    NSDecimalNumber *o = [m decimalNumberByMultiplyingBy:n];
 //
 //    self.minerFeeTF.text = [NSString stringWithFormat:@"%@ %@", [o stringValue], self.currency.currency];
-}
+//}
 
 - (void)selectCoinAddress {
     
@@ -570,7 +571,7 @@ typedef NS_ENUM(NSInteger, AddressType) {
             [self.coinAddressPicker hide];
             
             CoinAddressListVC *addressVC = [CoinAddressListVC new];
-            
+            addressVC.coin = self.currency.currency;
             addressVC.addressBlock = ^(CoinAddressModel *addressModel) {
 
                 weakSelf.addressModel = addressModel;
@@ -595,11 +596,8 @@ typedef NS_ENUM(NSInteger, AddressType) {
             qrCodeVC.scanSuccess = ^(NSString *result) {
                 
                 weakSelf.receiveAddressLbl.text = result;
-                
                 weakSelf.receiveAddressLbl.textColor = kTextColor;
-                
                 weakSelf.addressType = AddressTypeScan;
-
                 [weakSelf setGoogleAuth];
 
             };
@@ -646,11 +644,8 @@ typedef NS_ENUM(NSInteger, AddressType) {
         [UIView animateWithDuration:0 animations:^{
             
             self.googleAuthTF.transform = CGAffineTransformIdentity;
-
             self.minerFeeTF.transform = CGAffineTransformIdentity;
-            
             self.minerView.transform = CGAffineTransformIdentity;
-            
             self.confirmBtn.transform = CGAffineTransformIdentity;
             
         }];
@@ -660,12 +655,10 @@ typedef NS_ENUM(NSInteger, AddressType) {
         [UIView animateWithDuration:0 animations:^{
             
             self.googleAuthTF.transform = CGAffineTransformMakeTranslation(0, 50);
-
             self.minerFeeTF.transform = CGAffineTransformMakeTranslation(0, 50);
-            
             self.minerView.transform = CGAffineTransformMakeTranslation(0, 50);
-            
             self.confirmBtn.transform = CGAffineTransformMakeTranslation(0, 50);
+            
         }];
     }
 }
@@ -689,7 +682,7 @@ typedef NS_ENUM(NSInteger, AddressType) {
     http.parameters[@"accountNumber"] = self.currency.accountNumber;
     http.parameters[@"amount"] = [self.tranAmountTF.text convertToSysCoin];
 //    http.parameters[@"applyNote"] = [NSString stringWithFormat:@"%@提现", self.currency.currency];
-    http.parameters[@"applyNote"] = @"C端提现";
+    http.parameters[@"applyNote"] = @"ios-提现";
     http.parameters[@"applyUser"] = [TLUser user].userId;
     http.parameters[@"payCardInfo"] = self.currency.currency;
     http.parameters[@"payCardNo"] = self.receiveAddressLbl.text;
@@ -733,7 +726,7 @@ typedef NS_ENUM(NSInteger, AddressType) {
     TLNetworking *http = [TLNetworking new];
     
     http.code = USER_CKEY_CVALUE;
-    http.parameters[@"key"] = @"withdraw_fee";
+    http.parameters[SYS_KEY] = @"withdraw_fee";
     
     [http postWithSuccess:^(id responseObject) {
         

@@ -11,6 +11,7 @@
 #import "LangSwitcher.h"
 #import "TLNetworking.h"
 #import "KeyValueModel.h"
+#import "TLPublishVC.h"
 
 NSString *const kSaveDraft = @"0";
 NSString *const kPublish = @"1";
@@ -54,7 +55,7 @@ NSString *const kPublishTradeTypeBuy = @"0";
             
         case PublishTypePublishRedit: {
             
-            return   kPublishRedit;
+            return  kPublishRedit;
             
         }  break;
 
@@ -88,12 +89,16 @@ NSString *const kPublishTradeTypeBuy = @"0";
         self.balanceHeight = 0;
         self.publishTitle = [LangSwitcher switchLang:@"发布购买" key:nil];
         self.ads_hint_key = @"buy_ads_hint";
+        self.protectPricePlaceholder = @"广告最高可成交价格";
+        self.protectPriceDisplay = @"最  高  价";
         
     } else if([tradeType isEqualToString:kPublishTradeTypeSell]) {
         //卖
         self.balanceHeight = 25;
         self.publishTitle = [LangSwitcher switchLang:@"发布卖出" key:nil];
         self.ads_hint_key = @"sell_ads_hint";
+        self.protectPricePlaceholder = @"广告最低可成交价格";
+        self.protectPriceDisplay = @"最  低  价";
         
     } else {
         
@@ -148,6 +153,37 @@ NSString *const kPublishTradeTypeBuy = @"0";
 }
 
 
++ (BOOL)isDevPublish {
+    return YES;
+}
+
+- (NSString *)convertHangQing:(NSString *)hangQing {
+    
+   return [NSString stringWithFormat:@"行情价格：%@",hangQing];
+
+}
+
+
+- (void)publishSell:(UINavigationController *)navCtrl {
+    
+    if (navCtrl == nil) {
+        return;
+    }
+    TLPublishVC *sellVC = [[TLPublishVC alloc] init];
+    sellVC.VCType = TLPublishVCTypeSell;
+    sellVC.publishType = PublishTypePublishOrSaveDraft;
+    [navCtrl pushViewController:sellVC animated:YES];
+    
+}
+
+- (void)publishBuy:(UINavigationController *)navCtrl {
+    
+    TLPublishVC *buyVC = [[TLPublishVC alloc] init];
+    buyVC.VCType = TLPublishVCTypeBuy;
+    buyVC.publishType = PublishTypePublishOrSaveDraft;
+    [navCtrl pushViewController:buyVC animated:YES];
+
+}
 
 //errorInfo" : "成功",
 //"data" : {

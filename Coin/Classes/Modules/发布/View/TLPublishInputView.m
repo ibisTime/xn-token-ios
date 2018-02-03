@@ -42,7 +42,7 @@
         //右边标志
         self.markLbl = [TLBaseLabel labelWithFrame:CGRectZero
                                       textAligment:NSTextAlignmentRight
-                                   backgroundColor:[UIColor orangeColor]
+                                   backgroundColor:[UIColor whiteColor]
                                               font:[UIFont systemFontOfSize:14]
                                          textColor:[UIColor textColor]];
         [self addSubview:self.markLbl];

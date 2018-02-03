@@ -17,9 +17,9 @@
 #import "TLTextField.h"
 #import "CaptchaView.h"
 #import "FilterView.h"
-
 #import "QRCodeVC.h"
 
+#define ADDRESS_ADD_API_CODE @"802170"
 @interface CoinAddAddressVC ()
 //标签
 @property (nonatomic, strong) TLTextField *remarkTF;
@@ -45,10 +45,17 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    if (!self.coin) {
+        
+        NSLog(@"请传入币种");
+        return;
+    }
     // Do any additional setup after loading the view.
-    self.title = [LangSwitcher switchLang:@"添加地址" key:nil];
+    self.title = [LangSwitcher switchLang:[NSString stringWithFormat:@"添加%@地址",self.coin]  key:nil];
     
     [self initSubviews];
+    
 }
 
 #pragma mark - Init
@@ -337,7 +344,7 @@
     TLNetworking *http = [TLNetworking new];
     http.showView = self.view;
     http.code = CAPTCHA_CODE;
-    http.parameters[@"bizType"] = @"625203";
+    http.parameters[@"bizType"] = ADDRESS_ADD_API_CODE;
     http.parameters[@"mobile"] = [TLUser user].mobile;
     
     [http postWithSuccess:^(id responseObject) {
@@ -531,7 +538,7 @@
     
     TLNetworking *http = [TLNetworking new];
     
-    http.code = @"625203";
+    http.code = ADDRESS_ADD_API_CODE;
     http.showView = self.view;
     http.parameters[@"address"] = self.receiveAddressLbl.text;
     http.parameters[@"isCerti"] = self.sw.on ? @"1": @"0";
@@ -540,6 +547,7 @@
     http.parameters[@"smsCaptcha"] = self.captchaView.captchaTf.text;
     http.parameters[@"payCardNo"] = self.receiveAddressLbl.text;
     http.parameters[@"tradePwd"] = pwd;
+    http.parameters[@"currency"] = self.coin;
     if (self.sw.on) {
         
         http.parameters[@"googleCaptcha"] = self.googleAuthTF.text;

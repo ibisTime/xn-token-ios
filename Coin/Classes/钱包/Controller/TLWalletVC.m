@@ -25,6 +25,7 @@
 #import "RateDescVC.h"
 #import "ZMAuthVC.h"
 #import <CDCommon/UIScrollView+TLAdd.h>
+#import "CoinUtil.h"
 
 @interface TLWalletVC ()<RefreshDelegate>
 
@@ -160,6 +161,7 @@
     
     helper.code = @"802503";
     helper.parameters[@"userId"] = [TLUser user].userId;
+    helper.parameters[@"token"] = [TLUser user].token;
     helper.isList = YES;
     helper.isCurrency = YES;
     helper.tableView = self.tableView;
@@ -168,10 +170,22 @@
         
         [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
             
-            weakSelf.currencys = objs;
+            //去除没有的币种
             
-            weakSelf.tableView.currencys = objs;
+            NSMutableArray <CurrencyModel *> *shouldDisplayCoins = [[NSMutableArray alloc] init];
+            [objs enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                
+                CurrencyModel *currencyModel = (CurrencyModel *)obj;
+                if ([[CoinUtil shouldDisplayCoinArray] indexOfObject:currencyModel.currency ] != NSNotFound ) {
+                    
+                    [shouldDisplayCoins addObject:currencyModel];
+                }
+                
+            }];
             
+            //
+            weakSelf.currencys = shouldDisplayCoins;
+            weakSelf.tableView.currencys = shouldDisplayCoins;
             [weakSelf.tableView reloadData_tl];
             
         } failure:^(NSError *error) {

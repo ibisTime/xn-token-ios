@@ -14,9 +14,11 @@ typedef NS_ENUM(NSInteger, PublishType) {
     PublishTypeSaveDraft = 0,  //发布
     PublishTypePublish = 1,
     
-    PublishTypePublishOrSaveDraft = 2, // 可能为直接发布，也可能是保存草稿
-    PublishTypePublishDraft = 3,
-    PublishTypePublishRedit = 4
+    // 以上两种在实际场景中未应用
+    PublishTypePublishOrSaveDraft = 2, // 首次编辑， 可能为直接发布，也可能是保存草稿
+    
+    PublishTypePublishDraft = 3, //草稿发布
+    PublishTypePublishRedit = 4  //重新编辑发布
     
 };
 
@@ -48,6 +50,8 @@ typedef NS_ENUM(NSInteger, PublishType) {
 
 // 余额高度
 @property (nonatomic, assign) CGFloat balanceHeight;
+@property (nonatomic, copy) NSString *protectPricePlaceholder;
+@property (nonatomic, copy) NSString *protectPriceDisplay;
 
 
 //获取的交易提醒
@@ -75,6 +79,13 @@ typedef NS_ENUM(NSInteger, PublishType) {
 //        @"premiumRate"
 //        @"price"
 
+- (void)publishSell:(UINavigationController *)navCtrl;
+- (void)publishBuy:(UINavigationController *)navCtrl;
+
+
+- (NSString *)convertHangQing:(NSString *)hangQing;
+
++ (BOOL)isDevPublish;
 
 @end
 

@@ -36,7 +36,6 @@
         self.arrowImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"交易_下拉"]];
         [self addSubview:self.arrowImageView];
         
-        self.arrowImageView.hidden = YES;
         //
         [self.titleLbl mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self);

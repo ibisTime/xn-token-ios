@@ -279,8 +279,8 @@
     
     CoinWeakSelf;
     
-    NSString *num = [self.tradeView.tradeNum convertToSysCoin];
-    
+    NSString *num = [CoinUtil convertToSysCoin:self.tradeView.tradeNum
+                                          coin:self.advertise.tradeCoin];
     NSString *price = [self.advertise.truePrice convertToRealMoneyWithNum:3];
     
     TLNetworking *http = [TLNetworking new];
@@ -355,7 +355,7 @@
     TLNetworking *http = [TLNetworking new];
     
     http.code = USER_CKEY_CVALUE;
-    http.parameters[@"key"] = @"trade_remind";
+    http.parameters[SYS_KEY] = @"trade_remind";
     
     [http postWithSuccess:^(id responseObject) {
         
@@ -385,9 +385,9 @@
         [objs enumerateObjectsUsingBlock:^(CurrencyModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             
             
-            if ([obj.currency isEqualToString:kETH]) {
+            if ([obj.currency isEqualToString:self.advertise.tradeCoin]) {
                 
-                self.tradeView.leftInfo =  [NSString stringWithFormat:@"可用余额: %@ ETH", [[obj.amountString subNumber:obj.frozenAmountString] convertToSimpleRealCoin]];
+                self.tradeView.leftInfo =  [NSString stringWithFormat:@"可用余额: %@ %@", [[obj.amountString subNumber:obj.frozenAmountString] convertToSimpleRealCoin],self.advertise.tradeCoin];
             }
             
         }];

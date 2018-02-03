@@ -16,6 +16,9 @@
     self = [super initWithFrame:frame];
     if (self) {
         
+        self.clipsToBounds = YES;
+        self.layer.masksToBounds = YES;
+        
         self.backgroundColor = [UIColor whiteColor];
         self.contentLbl = [TLBaseLabel labelWithFrame:CGRectZero
                                          textAligment:NSTextAlignmentLeft

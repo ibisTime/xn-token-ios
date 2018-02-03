@@ -25,6 +25,7 @@
 #import "TLNavigationController.h"
 #import "HomePageVC.h"
 #import "ZMAuthVC.h"
+#import "CoinUtil.h"
 
 @interface TradeBuyVC ()
 
@@ -258,7 +259,8 @@
     
     CoinWeakSelf;
     
-    NSString *num = [self.tradeView.tradeNum convertToSysCoin];
+    NSString *num = [CoinUtil convertToSysCoin:self.tradeView.tradeNum  coin:self.advertise.tradeCoin];
+    
     
     NSString *price = [self.advertise.truePrice convertToRealMoneyWithNum:3];
     
@@ -350,7 +352,7 @@
     
     TLNetworking *http = [TLNetworking new];
     http.code = USER_CKEY_CVALUE;
-    http.parameters[@"key"] = @"trade_remind";
+    http.parameters[SYS_KEY] = @"trade_remind";
     
     [http postWithSuccess:^(id responseObject) {
         
@@ -366,7 +368,7 @@
 
 
 // yes 已实名
-- (BOOL)checkRealNameAuthAndHandle{
+- (BOOL)checkRealNameAuthAndHandle {
     
     if (![[TLUser user].realName valid]) {
         

@@ -125,7 +125,7 @@
     //1:iOS 2:安卓
     TLNetworking *http = [[TLNetworking alloc] init];
 
-    http.code = @"625918";
+    http.code = @"660918";
     http.parameters[@"type"] = @"ios-c";
 
     [http postWithSuccess:^(id responseObject) {

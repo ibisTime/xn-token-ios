@@ -27,6 +27,7 @@
 #import "OverTimeModel.h"
 #import "CoinUtil.h"
 #import "UIBarButtonItem+convience.h"
+#import "ZMAuthVC.h"
 
 @interface TLPublishVC ()<UITextFieldDelegate>
 
@@ -34,7 +35,8 @@
 @property (nonatomic, strong) UIView *contentView;
 //交易币种
 @property (nonatomic, strong) TLPublishInputView *tradeCoinView;
-
+//@property (nonatomic, strong) UILabel *marketPriceLbl;
+@property (nonatomic, strong) TLAdpaterView *marketPriceView;
 //价格
 @property (nonatomic, strong) TLPublishInputView *priceView;
 //溢价
@@ -68,6 +70,9 @@
 
 @property (nonatomic, copy) NSString *payType;
 
+@property (nonatomic, copy) NSString *currentCurrency;
+
+
 @end
 
 @implementation TLPublishVC
@@ -75,23 +80,76 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    
+    self.currentCurrency = kETH;
     //     [[IQKeyboardManager sharedManager] considerToolbarPreviousNextInViewClass:[BMEnableIQKeyboardView class]];
-    NSString *tradeType = self.publishType == TLPublishVCTypeSell ? kPublishTradeTypeSell : kPublishTradeTypeBuy;
+    NSString *tradeType = self.VCType == TLPublishVCTypeSell ? kPublishTradeTypeSell : kPublishTradeTypeBuy;
     //必须先进行配置
     [[PublishService shareInstance] configWith:tradeType];
     self.title = [PublishService shareInstance].publishTitle;
     
-    [self setPlaceholderViewTitle:@"加载失败" operationTitle:@"重新加载"];
-    [self tl_placeholderOperation];
+    //买币需要进行实名认证
+    //判断是否已经实名
+    if (tradeType == kPublishTradeTypeBuy) {
+        
+        if (![[TLUser user].realName valid]) {
+            // 进行实名认证
+            [self setPlaceholderViewTitle:@"您还未进行实名认证" operationTitle:@"前往认证"];
+            [self addPlaceholderView];
+            [self goReanNameAuth];
+            
+        } else {
+            
+            [self realNameAuthAfter];
+            [self setPlaceholderViewTitle:@"加载失败" operationTitle:@"重新加载"];
+        }
+        
+    } else {
+        
+        [self setPlaceholderViewTitle:@"加载失败" operationTitle:@"重新加载"];
+        [self tl_placeholderOperation];
+        
+    }
+   
+}
+
+- (void)goReanNameAuth {
     
+    ZMAuthVC *vc = [[ZMAuthVC alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+    [vc setSuccess:^{
+        
+        [self setPlaceholderViewTitle:@"加载失败" operationTitle:@"重新加载"];
+        [self removePlaceholderView];
+        [self realNameAuthAfter];
+        [self.navigationController popViewControllerAnimated:YES];
+        
+        
+    }];
+    
+}
+
+- (void)realNameAuthAfter {
+    
+    [self tl_placeholderOperation];
+
 }
 
 -(void)tl_placeholderOperation {
     
+    if ([PublishService shareInstance].tradeType == kPublishTradeTypeBuy) {
+        
+        if (![[TLUser user].realName valid]) {
+            // 进行实名认证
+            [self setPlaceholderViewTitle:@"您还未进行实名认证" operationTitle:@"前往认证"];
+            [self goReanNameAuth];
+            return;
+        }
+        
+    }
+    
     //行情
-    NBCDRequest *hangQingReq = [[NBCDRequest alloc] init];
-    hangQingReq.code = @"625292";
-    hangQingReq.parameters[@"coin"] = kETH;
+    NBCDRequest *hangQingReq = [self hangQingReq];
     
     //时间选择
     NBCDRequest *timeChooseReq = [[NBCDRequest alloc] init];
@@ -102,7 +160,7 @@
     
     //右边的交易提醒
     NBCDRequest *hintReq = [[NBCDRequest alloc] init];
-    hintReq.code = @"625915";
+    hintReq.code = @"660915";
     hintReq.parameters[@"start"] = @"1";
     hintReq.parameters[@"limit"] = @"30";
     hintReq.parameters[@"parent"] = [PublishService shareInstance].ads_hint_key;
@@ -114,18 +172,23 @@
     adsDetailReq.code = @"625226";
     adsDetailReq.parameters[@"adsCode"] = self.adsCode;
     adsDetailReq.parameters[@"userId"] = [AppConfig config].systemCode;
-    adsDetailReq.parameters[@"token"] = [AppConfig config].systemCode;
+    adsDetailReq.parameters[@"token"] = [TLUser user].token;
     
     [TLProgressHUD showWithStatus:nil];
     NSArray *reqArr = nil;
     if(self.adsCode) {
         
-        reqArr = @[hangQingReq,timeChooseReq,hintReq];
+        reqArr = @[hangQingReq,timeChooseReq,hintReq,adsDetailReq];
+//        reqArr = @[hangQingReq,timeChooseReq,adsDetailReq];
+
         
     } else {
         
-        reqArr = @[hangQingReq,timeChooseReq,hintReq,adsDetailReq];
+        reqArr = @[hangQingReq,timeChooseReq,hintReq];
+//        reqArr = @[hangQingReq,timeChooseReq];
+
         
+
     }
     //
     NBBatchReqest *batchReq = [[NBBatchReqest alloc] initWithReqArray:reqArr];
@@ -147,9 +210,12 @@
         [publishService handleOutLimitTime:timeChooseReqCopy.responseObject[@"data"]];
         
         //交易提醒
-        NBCDRequest *hintReqCopy = (NBCDRequest *)batchRequest.reqArray[2];
-        [publishService handleHint:hintReqCopy.responseObject];
-        
+        if (batchRequest.reqArray.count > 2) {
+            
+            NBCDRequest *hintReqCopy = (NBCDRequest *)batchRequest.reqArray[2];
+            [publishService handleHint:hintReqCopy.responseObject];
+        }
+ 
         if(batchRequest.reqArray.count > 3) {
             //广告详情可能没有
             NBCDRequest *adsDetailReqCopy = (NBCDRequest *)batchRequest.reqArray[3];
@@ -191,6 +257,7 @@
 - (void)handleHangQingWithRes:(id)res {
     
     self.quotationModel = [QuotationModel tl_objectWithDictionary:res[@"data"]];
+    self.marketPriceView.contentLbl.text = [[PublishService shareInstance] convertHangQing:[self.quotationModel.mid stringValue]];
     self.priceView.textField.text = [NSString stringWithFormat:@"%.2lf", [self.quotationModel.mid doubleValue]];
     
 }
@@ -200,7 +267,6 @@
     CoinWeakSelf;
     
     TLPageDataHelper *helper = [[TLPageDataHelper alloc] init];
-    
     helper.code = @"802503";
     helper.parameters[@"userId"] = [TLUser user].userId;
     helper.isList = YES;
@@ -211,11 +277,11 @@
         
         [objs enumerateObjectsUsingBlock:^(CurrencyModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             
-            if ([obj.currency isEqualToString:@"ETH"]) {
+            if ([obj.currency isEqualToString:self.currentCurrency]) {
                 
                 NSString *str = [obj.amountString subNumber:obj.frozenAmountString];
-                str = [str convertToSimpleRealCoin];
-                weakSelf.balanceView.contentLbl.text = [NSString stringWithFormat:@"    账户可用余额：%@",str];
+                str = [CoinUtil convertToRealCoin:str coin:self.currentCurrency];
+                weakSelf.balanceView.contentLbl.text = [NSString stringWithFormat:@"账户可用余额：%@",str];
                 
             }
             
@@ -228,10 +294,25 @@
     
 }
 
+//
+- (void)publish {
+    
+    
+    [self publishWithType:kPublish];
+
+//    if (self.publishType == PublishTypePublishDraft) {
+//
+//    } else {
+//
+//
+//    }
+    
+}
 
 #pragma mark -提交事件
 - (void)publishWithType:(NSString *)publishOrSaveDraft {
-    
+//- (void)publish {
+
     NSString *premium = self.premiumView.textField.text;
     NSString *protectPrice = self.protectPriceView.textField.text;
     NSString *min = self.minTradeAmountView.textField.text;
@@ -245,11 +326,7 @@
     
     NSString *tradeType = [PublishService shareInstance].tradeType;
     
-    
-    //    CGFloat rate = [draft.premiumRate doubleValue]/100.0;
-    //    NSString *premiumRate = [NSString stringWithFormat:@"%.2lf", rate];
-    //    http.parameters[@"totalCount"] = [draft.buyTotal convertToSysCoin];
-    //    CoinWeakSelf;
+
     
     if (![premium valid]) {
         
@@ -306,18 +383,19 @@
     http.code = @"625220";
     
     if (self.publishType == PublishTypePublishDraft) {
+        //草稿发布
         
         http.parameters[@"publishType"] = kPublishDraft;
         http.parameters[@"adsCode"] = self.advertise.code;
         
     } else if (self.publishType == PublishTypePublishRedit) {
         
-        //
+        //重新编辑发布，原广告下架
         http.parameters[@"publishType"] = kPublishRedit;
         http.parameters[@"adsCode"] = self.advertise.code;
         
     } else if (self.publishType == PublishTypePublishOrSaveDraft) {
-        
+        //首次编辑
         //发布或者存草稿
         http.parameters[@"publishType"] = publishOrSaveDraft;
         
@@ -331,9 +409,9 @@
     http.parameters[@"onlyTrust"] = onlyTrust;
     http.parameters[@"payLimit"] = payTimeLimit;
     http.parameters[@"payType"] = payType;
-    http.parameters[@"premiumRate"] = [NSString stringWithFormat:@"%f",[premium doubleValue]/100.0];
+    http.parameters[@"premiumRate"] = [NSString stringWithFormat:@"%.4f",[premium doubleValue]/100.0];
     http.parameters[@"protectPrice"] = protectPrice;
-    http.parameters[@"totalCount"] = [CoinUtil convertToSysCoin:totalCount coin:kETH];
+    http.parameters[@"totalCount"] = [CoinUtil convertToSysCoin:totalCount coin:self.currentCurrency];
     http.parameters[@"tradeCurrency"] = @"CNY";
     http.parameters[@"tradeCoin"] = tradeCoin;
     http.parameters[@"tradeType"] = tradeType;
@@ -345,7 +423,7 @@
         
     }
     
-    
+//    return;
     [http postWithSuccess:^(id responseObject) {
         
         //        NSString *str = draft.isPublish == YES ? @"发布成功": @"保存成功";
@@ -369,14 +447,31 @@
 #pragma 选择币种
 - (void)chooseCoin {
     
+    __weak typeof(self) weakself = self;
     [self.coinPickerView show];
-    [self.coinPickerView setSelectBlock:^(NSInteger index) {
+    [self.coinPickerView setSelectBlock2:^(NSInteger index, NSString *tagName) {
         
-        //切换币种
+ 
+        //0.改变当前币种
+        weakself.currentCurrency = tagName;
         
-        // 余额切换
-        // 出售总量，标志要切换
-        // 价格要切换
+        //1.
+        weakself.tradeCoinView.textField.text = tagName;
+        weakself.tradeCoinView.markLbl.text = tagName;
+        
+        
+        //2. 行情价格和价格要改变
+        [[weakself hangQingReq] startWithSuccess:^(__kindof NBBaseRequest *request) {
+            
+            [weakself handleHangQingWithRes:request.responseObject];
+
+        } failure:^(__kindof NBBaseRequest *request) {
+            
+        }];
+        
+        //3.更新可用余额
+        [weakself getLeftAmount];
+        
         
     }];
     
@@ -394,6 +489,14 @@
     
     [self.payTimeLimitPickerView show];
     
+}
+
+- (NBCDRequest *)hangQingReq {
+    
+    NBCDRequest *hangQingReq = [[NBCDRequest alloc] init];
+    hangQingReq.code = @"625292";
+    hangQingReq.parameters[@"coin"] = self.currentCurrency;
+    return hangQingReq;
 }
 
 #pragma mark- 添加事件
@@ -485,16 +588,35 @@
     
     //    self.balanceView.contentLbl.text = [NSString stringWithFormat:@"账户可用余额：%@",@"10.2"];
     //先预设币种
-    self.tradeCoinView.textField.text = kETH;
+//    self.tradeCoinView.textField.text = kETH;
     
     if (!self.advertise) {
         return;
     }
     
+    //币种
+    self.currentCurrency = self.advertise.tradeCoin;
+    self.tradeCoinView.textField.text = self.currentCurrency;
+    
     //
+    self.premiumView.textField.text = [NSString stringWithFormat:@"%.2f",[self.advertise.premiumRate floatValue] *100];
+    
+    //最大最小
+    self.protectPriceView.textField.text = [self.advertise.protectPrice stringValue];
+    self.minTradeAmountView.textField.text = [self.advertise.minTrade stringValue];
+    self.maxTradeAmountView.textField.text = [self.advertise.maxTrade stringValue];
+    self.totalTradeCountView.textField.text = [CoinUtil convertToRealCoin:self.advertise.totalCountString
+                                                                     coin:self.advertise.tradeCoin];
+
+    
+    //价格
     self.priceView.textField.text = [AdvertiseModel calculateTruePriceByPreYiJia:
                                      [self.advertise.premiumRate floatValue]
                                                                      marketPrice:[self.quotationModel.mid floatValue]];
+    
+    //广告留言
+    self.leaveMsgTextView.text = self.advertise.leaveMessage;
+    
     //数据
     //支付方式
     self.payType = self.advertise.payType;
@@ -522,8 +644,9 @@
 
 - (void)addRightItem {
     
-    if (self.publishType == PublishTypePublishOrSaveDraft) {
-        
+    if (!self.adsCode || self.adsCode.length == 0 ) {
+        //没有传广告编号，肯定是第一次编辑
+//        self.publishType == PublishTypePublishOrSaveDraft
         
         [UIBarButtonItem addRightItemWithTitle:[LangSwitcher switchLang:@"保存草稿" key:nil]
                                     titleColor:kTextColor
@@ -623,8 +746,13 @@
     self.tradeCoinView.textField.userInteractionEnabled = NO;
     [self.tradeCoinView adddMaskBtn];
     
+    //把市场价格显示出来
+    self.marketPriceView = [[TLAdpaterView alloc] initWithFrame:CGRectMake(0, self.tradeCoinView.yy, width, 30)];
+    [self.contentView addSubview:self.marketPriceView];
+    self.marketPriceView.contentLbl.text = [[PublishService shareInstance] convertHangQing:@"--"];
+
     //价格
-    self.priceView = [[TLPublishInputView alloc] initWithFrame:CGRectMake(0, self.tradeCoinView.yy, width, height)];
+    self.priceView = [[TLPublishInputView alloc] initWithFrame:CGRectMake(0, self.marketPriceView.yy, width, height)];
     [self.contentView addSubview:self.priceView];
     self.priceView.leftLbl.text = [LangSwitcher switchLang:@"价        格" key:nil];
     self.priceView.textField.placeholder = [LangSwitcher switchLang:@"" key:nil];
@@ -644,8 +772,8 @@
     //保护价
     self.protectPriceView = [[TLPublishInputView alloc] initWithFrame:CGRectMake(0, self.premiumView.yy, width, height)];
     [self.contentView addSubview:self.protectPriceView];
-    self.protectPriceView.leftLbl.text = [LangSwitcher switchLang:@"最  低  价" key:nil];
-    self.protectPriceView.textField.placeholder = [LangSwitcher switchLang:@"广告最低可成交的价格" key:nil];
+    self.protectPriceView.leftLbl.text = [PublishService  shareInstance].protectPriceDisplay;
+    self.protectPriceView.textField.placeholder = [PublishService  shareInstance].protectPricePlaceholder;
     self.protectPriceView.markLbl.text = kCNY;
     self.protectPriceView.hintMsg = publishService.protectPrice;
     
@@ -728,6 +856,7 @@
     //币种选择
     self.coinPickerView = [[FilterView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
     self.coinPickerView.autoSelectOne = YES;
+    self.coinPickerView.tagNames = @[kETH,kSC];
     
 }
 

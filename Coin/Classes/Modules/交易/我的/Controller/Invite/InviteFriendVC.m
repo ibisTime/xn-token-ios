@@ -479,7 +479,7 @@
     TLNetworking *http = [TLNetworking new];
     
     http.code = USER_CKEY_CVALUE;
-    http.parameters[@"key"] = @"activity_rule";
+    http.parameters[SYS_KEY] = @"activity_rule";
     
     [http postWithSuccess:^(id responseObject) {
         
@@ -499,8 +499,8 @@
     
     TLNetworking *http = [TLNetworking new];
 
-    http.code = @"625917";
-    http.parameters[@"key"] = @"reg_url";
+    http.code = USER_CKEY_CVALUE;
+    http.parameters[SYS_KEY] = @"reg_url";
 
     [http postWithSuccess:^(id responseObject) {
 

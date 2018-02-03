@@ -19,13 +19,11 @@
 
 - (NSString *)getTypeName {
     
-    NSDictionary *dict = @{
-                           kETH : [LangSwitcher switchLang:@"以太币资产(ETH)" key:nil],
-                          
-                           };
+    NSString *name =  [CoinUtil chineseName:self.currency];
     
-    return dict[self.currency];
-    
+    NSString *fullName = [NSString stringWithFormat:@"%@资产(%@)",name,self.currency];
+    return [LangSwitcher switchLang:fullName key:nil];
+
 }
 
 - (NSString *)getImgName {

@@ -156,7 +156,7 @@
     http.parameters[@"realName"] = self.realName.text;
     http.parameters[@"userId"] = [TLUser user].userId;
     http.parameters[@"returnUrl"] = @"Bcoin://certi.back";
-    http.parameters[@"localCheck"] = @"0";
+    http.parameters[@"localCheck"] = @"1";
     
     [http postWithSuccess:^(id responseObject) {
         

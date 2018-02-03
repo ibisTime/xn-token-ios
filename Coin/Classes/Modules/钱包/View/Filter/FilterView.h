@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 typedef void(^DidSelectBlock)(NSInteger index);
+typedef void(^DidSelectBlock2)(NSInteger index,NSString *tagName);
 
 @interface FilterView : UIView
 
@@ -19,7 +20,10 @@ typedef void(^DidSelectBlock)(NSInteger index);
 //数据
 @property (nonatomic,copy) NSArray *tagNames;
 
+//以下2个不要同时实现，y应为都会调用
 @property (nonatomic,copy) DidSelectBlock selectBlock;
+@property (nonatomic, copy) DidSelectBlock2 selectBlock2;
+
 //title
 @property (nonatomic, strong) NSString *title;
 

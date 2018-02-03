@@ -27,12 +27,16 @@ typedef NS_ENUM(NSUInteger, CoinType) {
  */
 + (NSString *)convertToSysCoin:(NSString *)count coin:(NSString *)coin;
 
++ (NSArray *)shouldDisplayCoinArray;
+
++ (NSString *)chineseName:(NSString *)coin;
 
 @end
 
 
 FOUNDATION_EXTERN NSString *const kBTC;
 FOUNDATION_EXTERN NSString *const kETH;
+FOUNDATION_EXTERN NSString *const kSC;
 
 FOUNDATION_EXTERN NSString *const kCNY;
 

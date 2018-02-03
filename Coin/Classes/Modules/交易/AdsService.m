@@ -10,7 +10,7 @@
 #import "AdvertiseModel.h"
 #import "PublishBuyVC.h"
 #import "TradeSellVC.h"
-
+#import "TLPublishVC.h"
 //
 #import "TradeBuyVC.h"
 //
@@ -22,16 +22,25 @@
     
     
     
+
+    
+    
     if ([advertiseModel.tradeType isEqualToString:kAdsTradeTypeSell]) {
         //卖币广高， 我要购买
         
         //1.1.1 待交易也可以下架
         if ([advertiseModel isMineAds]) {
 
-            PublishSellVC *sellVC = [[PublishSellVC alloc] init];
+            TLPublishVC *sellVC = [[TLPublishVC alloc] init];
             sellVC.adsCode = advertiseModel.code;
             sellVC.publishType = PublishTypePublishRedit;
+            sellVC.VCType = TLPublishVCTypeSell;
             [currentVC.navigationController pushViewController:sellVC animated:YES];
+
+//            PublishSellVC *sellVC = [[PublishSellVC alloc] init];
+//            sellVC.adsCode = advertiseModel.code;
+//            sellVC.publishType = PublishTypePublishRedit;
+//            [currentVC.navigationController pushViewController:sellVC animated:YES];
             return;
 
         }
@@ -47,10 +56,16 @@
         //1.1.1 待交易也可以下架
         if ([advertiseModel isMineAds]) {
             
-            PublishBuyVC *buyVC = [[PublishBuyVC alloc] init];
+            TLPublishVC *buyVC = [[TLPublishVC alloc] init];
             buyVC.adsCode = advertiseModel.code;
             buyVC.publishType = PublishTypePublishRedit;
+            buyVC.VCType = TLPublishVCTypeBuy;
             [currentVC.navigationController pushViewController:buyVC animated:YES];
+            
+//            PublishBuyVC *buyVC = [[PublishBuyVC alloc] init];
+//            buyVC.adsCode = advertiseModel.code;
+//            buyVC.publishType = PublishTypePublishRedit;
+//            [currentVC.navigationController pushViewController:buyVC animated:YES];
             return;
  
         }

@@ -41,8 +41,8 @@
     //中间切换
     self.navigationItem.titleView = self.labelUtil;
     
-    //货币切换
-    [self addCoinChangeView];
+    //货币切换,暂时去掉
+//    [self addCoinChangeView];
     
     //添加通知
     [self addNotification];

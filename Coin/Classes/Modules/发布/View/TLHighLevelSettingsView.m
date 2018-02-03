@@ -62,9 +62,11 @@
         
         //顶部箭头
         self.topIndicateArrowImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 6, 10)];
-        
-//        @"更多拷贝"
-        
+        self.topIndicateArrowImgView.backgroundColor = [UIColor whiteColor];
+        self.topIndicateArrowImgView.centerY = HEGHT/2.0;
+        self.topIndicateArrowImgView.right = SCREEN_WIDTH - 25;
+        self.topIndicateArrowImgView.image = [UIImage imageNamed:@"更多拷贝"];
+        [topBtn addSubview:self.topIndicateArrowImgView];
         
         //开放时间
         self.timeView = [[TLPublishInputView alloc] initWithFrame:CGRectMake(0, topBtn.yy + 5, SCREEN_WIDTH, 45)];
@@ -259,6 +261,28 @@
     
 }
 
+- (void)setFrame:(CGRect)frame {
+    
+    [super setFrame:frame];
+    
+    CGAffineTransform nextTransform;
+    
+    if (frame.size.height > [TLHighLevelSettingsView normalHeight]) {
+        
+        nextTransform = CGAffineTransformMakeRotation(M_PI_2);
+        
+    } else {
+        
+        nextTransform = CGAffineTransformIdentity;
+        
+    }
+    
+    [UIView animateWithDuration:0.25
+                     animations:^{
+                         self.topIndicateArrowImgView.transform = nextTransform;
+                     }];
+    
+}
 
 //
 - (void)show {

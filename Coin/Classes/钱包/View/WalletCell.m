@@ -13,6 +13,7 @@
 
 #import "NSString+Extension.h"
 #import "UIButton+EnLargeEdge.h"
+#import "CoinUtil.h"
 
 @interface WalletCell ()
 //币种图标
@@ -191,10 +192,12 @@
     
     self.coinIV.image = kImage(_currency.getImgName);
     
+    
     NSString *leftAmount = [_currency.amountString subNumber:_currency.frozenAmountString];
     
-    self.amountLbl.text = [leftAmount convertToSimpleRealCoin];
-    
+    //
+    self.amountLbl.text = [CoinUtil convertToRealCoin:leftAmount
+                                                 coin:currency.currency];
     NSString *title = [NSString stringWithFormat:@"冻结 %@", [_currency.frozenAmountString convertToSimpleRealCoin]];
     [self.freezingAmountBtn setTitle:[LangSwitcher switchLang:title key:nil]
                             forState:UIControlStateNormal];

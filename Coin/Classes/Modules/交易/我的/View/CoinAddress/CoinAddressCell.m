@@ -24,6 +24,8 @@
 @property (nonatomic, strong) UILabel *statusLbl;
 //地址
 @property (nonatomic, strong) UILabel *addressLbl;
+@property (nonatomic, strong) UILabel *coinTextLbl;
+
 
 @end
 
@@ -75,7 +77,7 @@
     UILabel *coinTextLbl = [UILabel labelWithBackgroundColor:kWhiteColor
                                                    textColor:kTextColor
                                                         font:11.0];
-    coinTextLbl.text = @"ETH";
+    self.coinTextLbl = coinTextLbl;
     coinTextLbl.textAlignment = NSTextAlignmentCenter;
     [iconView addSubview:coinTextLbl];
     [coinTextLbl mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -146,7 +148,7 @@
     self.textLbl.text = addressModel.label;
     
     self.addressLbl.text = addressModel.address;
-    
+    self.coinTextLbl.text = _addressModel.currency;
     self.statusLbl.text = [addressModel.status isEqualToString:@"0"] ? [LangSwitcher switchLang:@"未认证" key:nil]: [LangSwitcher switchLang:@"已认证" key:nil];
     
 }

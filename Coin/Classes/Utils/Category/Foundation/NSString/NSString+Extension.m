@@ -254,11 +254,8 @@ raiseOnOverflow:NO raiseOnUnderflow:NO raiseOnDivideByZero:YES];
                                                                                   raiseOnExactness:NO raiseOnOverflow:NO raiseOnUnderflow:NO raiseOnDivideByZero:YES];
     
     NSDecimalNumber *m = [NSDecimalNumber decimalNumberWithString:self];
-    
     NSDecimalNumber *n = [NSDecimalNumber decimalNumberWithString:number];
-    
     NSDecimalNumber *o = [m decimalNumberBySubtracting:n];
-    
     NSDecimalNumber *p = [o decimalNumberByRoundingAccordingToBehavior:handler];
     
     return [NSString stringWithFormat:@"%@",p];

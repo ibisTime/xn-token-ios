@@ -59,9 +59,9 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     //服务器环境
-    [AppConfig config].runEnv = RunEnvRelease;
+    [AppConfig config].runEnv = RunEnvDev;
     self.respHandler = [[RespHandler alloc] init];
-    
+     
     [NBNetworkConfig config].respDelegate = self.respHandler;
     //2.新版本请求
     [NBNetworkConfig config].baseUrl = [AppConfig config].apiUrl;

@@ -32,6 +32,8 @@
 //提现时间
 @property (nonatomic, strong) UILabel *applyTimeLbl;
 
+@property (nonatomic, strong) UILabel *toAddressLbl;
+
 @end
 
 @implementation TLCoinWithdrawOrderCell
@@ -79,6 +81,16 @@
                                        textColor:[UIColor textColor]];
         [self.contentView addSubview:self.applyTimeLbl];
         
+        //提币到哪个地址
+        self.toAddressLbl = [UILabel labelWithFrame:CGRectZero
+                                       textAligment:NSTextAlignmentLeft
+                                    backgroundColor:[UIColor whiteColor]
+                                               font:[UIFont systemFontOfSize:14]
+                                          textColor:[UIColor textColor]];
+        [self.contentView addSubview:self.toAddressLbl];
+        self.toAddressLbl.numberOfLines = 0;
+        self.toAddressLbl.lineBreakMode = NSLineBreakByCharWrapping;
+        
         //
         
         UIView *line = [[UIView alloc] init];
@@ -125,9 +137,16 @@
         
         make.right.equalTo(self.statusLbl.mas_right);
         make.top.equalTo(self.statusLbl.mas_bottom).offset(10);
-        make.bottom.equalTo(self.contentView.mas_bottom).offset(-10);
     }];
     
+    [self.toAddressLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.left.equalTo(self.feelbl.mas_left);
+        make.right.equalTo(self.statusLbl.mas_right);
+        make.top.equalTo(self.applyTimeLbl.mas_bottom).offset(10);
+        make.bottom.equalTo(self.contentView.mas_bottom).offset(-10);
+
+    }];
 
 }
 
@@ -148,6 +167,10 @@
     
     NSString *feeNormalStr =  [NSString stringWithFormat:@"手续费：%@ %@",feeStr,_withdrawModel.channelType];
     self.feelbl.attributedText = [self attrStrLeftLen:4 str:feeNormalStr];
+    
+    //
+    NSString *toAddressStr = [NSString stringWithFormat:@"付币地址：%@",_withdrawModel.payCardNo];
+    self.toAddressLbl.attributedText = [self attrStrLeftLen:5 str:toAddressStr];;
     
     //
     self.statusLbl.text = [_withdrawModel statusName];

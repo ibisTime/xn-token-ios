@@ -500,18 +500,22 @@
         case MineHeaderSeletedTypeBuy:
         {
             
-            PublishBuyVC *buyVC = [PublishBuyVC new];
-            buyVC.publishType = PublishTypePublishOrSaveDraft;
-            [self.navigationController pushViewController:buyVC animated:YES];
+            [[PublishService shareInstance] publishBuy:self.navigationController];
+            
+//            PublishBuyVC *buyVC = [PublishBuyVC new];
+//            buyVC.publishType = PublishTypePublishOrSaveDraft;
+//            [self.navigationController pushViewController:buyVC animated:YES];
             
         }break;
             
         case MineHeaderSeletedTypeSell:
         {
             
-            PublishSellVC *sellVC = [PublishSellVC new];
-            sellVC.publishType = PublishTypePublishOrSaveDraft;
-            [self.navigationController pushViewController:sellVC animated:YES];
+            [[PublishService shareInstance] publishSell:self.navigationController];
+
+//            PublishSellVC *sellVC = [PublishSellVC new];
+//            sellVC.publishType = PublishTypePublishOrSaveDraft;
+//            [self.navigationController pushViewController:sellVC animated:YES];
             
         }break;
             

@@ -86,7 +86,7 @@
     http.showView = self.view;
     http.code = USER_CKEY_CVALUE;
     
-    http.parameters[@"key"] = ckey;
+    http.parameters[SYS_KEY] = ckey;
     
     [http postWithSuccess:^(id responseObject) {
         

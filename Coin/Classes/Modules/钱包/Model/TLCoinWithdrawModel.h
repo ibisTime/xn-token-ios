@@ -15,11 +15,19 @@
 @property (nonatomic, copy) NSString *status;
 @property (nonatomic, copy) NSString *feeString;//手续费
 @property (nonatomic, copy) NSString *applyDatetime; //申请时间
+@property (nonatomic, copy) NSString *payCardNo; //提币到哪个账户
 
 - (NSString *)statusName;
 
 @end
 
+
+//channelType = ETH;
+//code = QX201802031008541015603;
+//companyCode = "CD-COIN000017";
+//feeString = 10000000000000000;
+//payCardInfo = ETH;
+//payCardNo = 0xed73FeF7246F408617aC7b0f4Db0188352Df7818;
 
 //accountName
 //:

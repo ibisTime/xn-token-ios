@@ -32,6 +32,13 @@
     
     self.title = [LangSwitcher switchLang:@"地址管理" key:nil];
     
+    if (!self.coin) {
+    
+        NSLog(@"请传入提现地址");
+        return;
+        
+    }
+    
     //暂无地址
     [self initPlaceHolderView];
     //tableview
@@ -95,11 +102,8 @@
     self.placeHolderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight - 40)];
     
     UIImageView *addressIV = [[UIImageView alloc] init];
-    
     addressIV.image = kImage(@"暂无订单");
-    
     addressIV.centerX = kScreenWidth/2.0;
-    
     [self.placeHolderView addSubview:addressIV];
     [addressIV mas_makeConstraints:^(MASConstraintMaker *make) {
         
@@ -141,12 +145,11 @@
         };
         
         [self.navigationController pushViewController:pwdRelatedVC animated:YES];
-        
         return ;
     }
     
     CoinAddAddressVC *addVC = [CoinAddAddressVC new];
-    
+    addVC.coin = self.coin;
     addVC.success = ^{
         
         [weakSelf.tableView beginRefreshing];
@@ -162,18 +165,16 @@
     
     TLPageDataHelper *helper = [[TLPageDataHelper alloc] init];
         
-    helper.code = @"625205";
+    helper.code = @"802175";
     helper.start = 1;
     helper.limit = 20;
     helper.parameters[@"userId"] = [TLUser user].userId;
     helper.parameters[@"type"] = @"Y";
+    helper.parameters[@"currency"] = self.coin;
     //0: 未认证 1: 已认证  2:已弃用
     helper.parameters[@"statusList"] = @[@"0", @"1"];
-    
     helper.tableView = self.tableView;
-    
     [helper modelClass:[CoinAddressModel class]];
-    
     [self.tableView addRefreshAction:^{
         
         [helper refresh:^(NSMutableArray <CoinAddressModel *>*objs, BOOL stillHave) {

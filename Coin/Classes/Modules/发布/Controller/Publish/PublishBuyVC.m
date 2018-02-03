@@ -40,6 +40,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    
+    @throw [NSException exceptionWithName:@"请使用 TLPublishSellVC" reason:@"*******" userInfo:nil];
+    return;
+    
     self.title = [LangSwitcher switchLang:@"发布购买" key:nil];
     
     //判断是否已经实名

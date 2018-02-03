@@ -170,7 +170,6 @@
         //默认选中第一个
         if (_selectBlock) {
             
-            
             if (self.autoSelectOne) {
                 
                 _selectBlock( 0);
@@ -178,6 +177,18 @@
             }
             
         }
+        
+        if (_selectBlock2) {
+            
+            if (self.autoSelectOne) {
+                
+                _selectBlock2( 0,self.tagNames[0]);
+                
+            }
+            
+        }
+        
+        
         
     }];
 }
@@ -213,6 +224,14 @@
             
             _selectBlock(_selectIndex);
         }
+        
+        if (_selectBlock2) {
+            
+            
+                _selectBlock2( _selectIndex,self.tagNames[_selectIndex]);
+            
+        }
+        
     }];
 }
 

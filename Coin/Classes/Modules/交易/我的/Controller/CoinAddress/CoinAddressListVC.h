@@ -15,5 +15,6 @@ typedef void(^CoinAddressBlock)(CoinAddressModel *addressModel);
 @interface CoinAddressListVC : TLBaseVC
 
 @property (nonatomic, copy) CoinAddressBlock addressBlock;
+@property (nonatomic, copy) NSString *coin;
 
 @end
