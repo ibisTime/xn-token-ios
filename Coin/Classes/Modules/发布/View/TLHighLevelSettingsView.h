@@ -40,7 +40,7 @@
 - (NSArray <NSDictionary *>*)obtainDisplayTimes;
 
 //初始化的时候加上
-//@property (nonatomic, strong) NSArray<Displaytime *> *displayTime;
+@property (nonatomic, strong) NSArray<Displaytime *> *displayTime;
 
 
 + (CGFloat)normalHeight;

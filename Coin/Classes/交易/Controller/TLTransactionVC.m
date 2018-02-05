@@ -33,6 +33,7 @@
 #import "AppConfig.h"
 #import "PublishService.h"
 #import "CoinUtil.h"
+#import "TestViewController.h"
 
 @interface TLTransactionVC ()<SegmentDelegate, RefreshDelegate, UIScrollViewDelegate>
 
@@ -335,18 +336,18 @@
             return;
         }
         
-        if ([PublishService isDevPublish]) {
-            
+//        if ([PublishService isDevPublish]) {
+        
             [[PublishService shareInstance] publishBuy:self.navigationController];
             
 
 
-        } else {
-            
-            PublishBuyVC *buyVC = [PublishBuyVC new];
-            buyVC.publishType = PublishTypePublishOrSaveDraft;
-            [self.navigationController pushViewController:buyVC animated:YES];
-        }
+//        } else {
+//
+//            PublishBuyVC *buyVC = [PublishBuyVC new];
+//            buyVC.publishType = PublishTypePublishOrSaveDraft;
+//            [self.navigationController pushViewController:buyVC animated:YES];
+//        }
         
 
         
@@ -369,8 +370,8 @@
         }
         
         
-        if ([PublishService isDevPublish]) {
-            
+//        if ([PublishService isDevPublish]) {
+        
             [[PublishService shareInstance] publishSell:self.navigationController];
             
 //            TLPublishVC *sellVC = [[TLPublishVC alloc] init];
@@ -378,13 +379,13 @@
 //            sellVC.publishType = PublishTypePublishOrSaveDraft;
 //            [self.navigationController pushViewController:sellVC animated:YES];
             
-        } else {
-            
-        PublishSellVC *sellVC = [PublishSellVC new];
-        sellVC.publishType = PublishTypePublishOrSaveDraft;
-        [self.navigationController pushViewController:sellVC animated:YES];
-            
-        }
+//        } else {
+//
+//        PublishSellVC *sellVC = [PublishSellVC new];
+//        sellVC.publishType = PublishTypePublishOrSaveDraft;
+//        [self.navigationController pushViewController:sellVC animated:YES];
+//
+//        }
         
     }
 }
@@ -502,6 +503,12 @@
 #pragma mark - SegmentDelegate
 -(void)segment:(TopLabelUtil *)segment didSelectIndex:(NSInteger)index {
 
+//    if ([AppConfig config].runEnv == RunEnvDev) {
+//        
+//        TestViewController *testVC = [[TestViewController alloc] init];
+//        [self.navigationController pushViewController:testVC animated:YES];
+//        return;
+//    }
     
     if (index == 1) {
         

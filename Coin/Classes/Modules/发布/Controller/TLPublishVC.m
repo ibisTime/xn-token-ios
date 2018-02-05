@@ -80,8 +80,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
-    self.currentCurrency = kETH;
+    //预设一个
+    self.firstCoin =  self.firstCoin ? : kETH;
+    self.currentCurrency = self.firstCoin;
     //     [[IQKeyboardManager sharedManager] considerToolbarPreviousNextInViewClass:[BMEnableIQKeyboardView class]];
     NSString *tradeType = self.VCType == TLPublishVCTypeSell ? kPublishTradeTypeSell : kPublishTradeTypeBuy;
     //必须先进行配置
@@ -153,11 +154,12 @@
     
     //时间选择
     NBCDRequest *timeChooseReq = [[NBCDRequest alloc] init];
-    timeChooseReq.code = @"625907";
+//    timeChooseReq.code = @"625907";
+    timeChooseReq.code = @"660906";
     timeChooseReq.parameters[@"parentKey"] = @"trade_time_out";
     timeChooseReq.parameters[@"systemCode"] = [AppConfig config].systemCode;
     timeChooseReq.parameters[@"companyCode"] = [AppConfig config].companyCode;
-    
+
     //右边的交易提醒
     NBCDRequest *hintReq = [[NBCDRequest alloc] init];
     hintReq.code = @"660915";
@@ -258,7 +260,21 @@
     
     self.quotationModel = [QuotationModel tl_objectWithDictionary:res[@"data"]];
     self.marketPriceView.contentLbl.text = [[PublishService shareInstance] convertHangQing:[self.quotationModel.mid stringValue]];
-    self.priceView.textField.text = [NSString stringWithFormat:@"%.2lf", [self.quotationModel.mid doubleValue]];
+    
+    //如果有溢价应该 x 溢价率
+    
+    NSString *premiumStr = self.premiumView.textField.text;
+    if ([premiumStr valid]) {
+        
+        self.priceView.textField.text = [AdvertiseModel calculateTruePriceByPreYiJia:[premiumStr floatValue]
+                                                                         marketPrice:[self.quotationModel.mid floatValue]];
+        
+    } else {
+        
+        self.priceView.textField.text = [NSString stringWithFormat:@"%.2lf", [self.quotationModel.mid doubleValue]];
+        
+    }
+
     
 }
 
@@ -294,12 +310,18 @@
     
 }
 
+- (void)changeMarketLblCoin:(NSString *)coin {
+    
+    self.tradeCoinView.markLbl.text = coin;
+    self.totalTradeCountView.markLbl.text = coin;
+
+}
+
 //
 - (void)publish {
     
     
     [self publishWithType:kPublish];
-
 //    if (self.publishType == PublishTypePublishDraft) {
 //
 //    } else {
@@ -321,7 +343,7 @@
     NSString *leaveMsg = self.leaveMsgTextView.text;
     NSString *totalCount = self.totalTradeCountView.textField.text;
     NSString *payType = self.payType;
-    NSString *tradeCoin = kETH;
+    NSString *tradeCoin = self.tradeCoinView.textField.text;
     NSString *onlyTrust = [self.highLevelSettingsView isOnlyTrust] ? kOnlyTrustYes : kOnlyTrustNO;
     
     NSString *tradeType = [PublishService shareInstance].tradeType;
@@ -458,7 +480,7 @@
         //1.
         weakself.tradeCoinView.textField.text = tagName;
         weakself.tradeCoinView.markLbl.text = tagName;
-        
+        weakself.totalTradeCountView.markLbl.text = tagName;
         
         //2. 行情价格和价格要改变
         [[weakself hangQingReq] startWithSuccess:^(__kindof NBBaseRequest *request) {
@@ -562,10 +584,19 @@
 
 - (void)change {
     
+    [self changeWithScrollToBottom:YES];
+    
+}
+- (void)changeWithScrollToBottom:(BOOL)isToBottom {
+    
     
     self.highLevelSettingsView.height = [self.highLevelSettingsView nextShouldHeight];
     self.contentView.height = self.highLevelSettingsView.bottom;
     self.bgScrollView.contentSize = CGSizeMake(self.bgScrollView.width, self.contentView.height);
+    
+    if (!isToBottom) {
+        return;
+    }
     
     [UIView animateWithDuration:0.2 animations:^{
         
@@ -586,14 +617,15 @@
 
 - (void)data {
     
-    //    self.balanceView.contentLbl.text = [NSString stringWithFormat:@"账户可用余额：%@",@"10.2"];
-    //先预设币种
-//    self.tradeCoinView.textField.text = kETH;
-    
+
+    self.tradeCoinView.textField.text = self.currentCurrency;
+    [self changeMarketLblCoin:kETH];
     if (!self.advertise) {
         return;
     }
     
+    [self changeMarketLblCoin:self.advertise.tradeCurrency];
+
     //币种
     self.currentCurrency = self.advertise.tradeCoin;
     self.tradeCoinView.textField.text = self.currentCurrency;
@@ -625,18 +657,28 @@
     //付款时间
     self.payTimeLimitView.textField.text = [NSString stringWithFormat:@"%ld",self.advertise.payLimit];
     
-    self.highLevelSettingsView.onlyTrustBtn.selected = [self.advertise.isTrust isEqual:kOnlyTrustYes];
     
     //
-    if (self.advertise.displayTime && self.advertise.displayTime.count > 0) {
+    BOOL shouldDisplayCustomTime = self.advertise.displayTime && self.advertise.displayTime.count > 0;
+    BOOL shouldDisplayOnlyTrust = [self.advertise.onlyTrust isEqual:kOnlyTrustYes];
+    self.highLevelSettingsView.onlyTrustBtn.selected = shouldDisplayOnlyTrust;
+    
+    if (shouldDisplayCustomTime) {
         
         //自定义时间
         [self.highLevelSettingsView beginWithCustomTime];
+        self.highLevelSettingsView.displayTime = self.advertise.displayTime;
         
     } else {
         
         //全部可见
         [self.highLevelSettingsView beginWithAnyime];
+        
+    }
+    
+    if (shouldDisplayOnlyTrust || shouldDisplayCustomTime) {
+        
+        [self changeWithScrollToBottom:NO];
         
     }
     
@@ -741,7 +783,6 @@
     self.tradeCoinView = [[TLPublishInputView alloc] initWithFrame:CGRectMake(0, 0, width, height)];
     [self.contentView addSubview:self.tradeCoinView];
     self.tradeCoinView.leftLbl.text = [LangSwitcher switchLang:@"币        种" key:nil];
-    self.tradeCoinView.markLbl.text = kETH;
     self.tradeCoinView.textField.placeholder = [LangSwitcher switchLang:@"请选择交易币种" key:nil];
     self.tradeCoinView.textField.userInteractionEnabled = NO;
     [self.tradeCoinView adddMaskBtn];
@@ -796,9 +837,8 @@
     //出售总量
     self.totalTradeCountView = [[TLPublishInputView alloc] initWithFrame:CGRectMake(0, self.maxTradeAmountView.yy, width, height)];
     [self.contentView addSubview:self.totalTradeCountView];
-    self.totalTradeCountView.leftLbl.text = [LangSwitcher switchLang:@"出售总量" key:nil];
-    self.totalTradeCountView.textField.placeholder = [LangSwitcher switchLang:@"请输入出售总量" key:nil];
-    self.totalTradeCountView.markLbl.text = kETH;
+    self.totalTradeCountView.leftLbl.text = [PublishService shareInstance].totalCountHintText;
+    self.totalTradeCountView.textField.placeholder = [PublishService shareInstance].totalCountHintPlaceholder;
     self.totalTradeCountView.hintMsg = publishService.totalCount;
     
     //账户可用·余额
@@ -856,7 +896,7 @@
     //币种选择
     self.coinPickerView = [[FilterView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
     self.coinPickerView.autoSelectOne = YES;
-    self.coinPickerView.tagNames = @[kETH,kSC];
+    self.coinPickerView.tagNames = [CoinUtil shouldDisplayCoinArray];
     
 }
 

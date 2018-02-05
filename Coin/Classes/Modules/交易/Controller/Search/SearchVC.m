@@ -65,22 +65,16 @@
         } else {
             
             SearchUserVC *childVC = [SearchUserVC new];
-            
             childVC.view.frame = CGRectMake(kScreenWidth*i, 1, kScreenWidth, kSuperViewHeight - 45);
-            
             [self addChildViewController:childVC];
-            
             [_selectScrollView.scrollView addSubview:childVC.view];
+            
         }
         
         
     }
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 
 @end

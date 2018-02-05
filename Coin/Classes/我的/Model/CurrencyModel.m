@@ -33,7 +33,8 @@
                            kBTC : @"比特币图标",
                            };
     
-    return dict[self.currency];
+    
+    return dict[self.currency] ? : @"以太币图标";
     
 }
 

@@ -686,6 +686,8 @@ typedef NS_ENUM(NSInteger, AddressType) {
     http.parameters[@"applyUser"] = [TLUser user].userId;
     http.parameters[@"payCardInfo"] = self.currency.currency;
     http.parameters[@"payCardNo"] = self.receiveAddressLbl.text;
+    http.parameters[@"token"] = [TLUser user].token;
+
     
     if ([TLUser user].isGoogleAuthOpen) {
         

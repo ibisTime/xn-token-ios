@@ -7,11 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AdvertiseModel.h"
 
 @interface TLPublishTimeChooseView : UIView
 
 - (instancetype)initWithFrame:(CGRect)frame;
 
 - (NSArray <NSDictionary *> *)obtainTimes;
+
+@property (nonatomic, strong) NSArray<Displaytime *> *displayTime;
 
 @end

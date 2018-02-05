@@ -92,6 +92,10 @@ NSString *const kPublishTradeTypeBuy = @"0";
         self.protectPricePlaceholder = @"广告最高可成交价格";
         self.protectPriceDisplay = @"最  高  价";
         
+        //
+        self.totalCountHintText = @"购买总量";
+        self.totalCountHintPlaceholder = @"请输入购买总量";
+        
     } else if([tradeType isEqualToString:kPublishTradeTypeSell]) {
         //卖
         self.balanceHeight = 25;
@@ -99,6 +103,10 @@ NSString *const kPublishTradeTypeBuy = @"0";
         self.ads_hint_key = @"sell_ads_hint";
         self.protectPricePlaceholder = @"广告最低可成交价格";
         self.protectPriceDisplay = @"最  低  价";
+        
+        //
+        self.totalCountHintText = @"出售总量";
+        self.totalCountHintPlaceholder = @"请输入出售总量";
         
     } else {
         

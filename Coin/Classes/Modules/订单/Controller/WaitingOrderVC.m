@@ -240,7 +240,6 @@
     }];
     
     self.orderBtn = orderBtn;
-    
     _tableView.tableHeaderView = self.topView;
     
 }

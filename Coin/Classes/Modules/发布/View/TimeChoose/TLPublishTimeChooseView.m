@@ -62,6 +62,17 @@
     return self;
 }
 
+- (void)setDisplayTime:(NSArray *)displayTime {
+    
+    _displayTime = [displayTime copy];
+    [self.timeViews enumerateObjectsUsingBlock:^(TLSingleTimeView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        
+        obj.displayTime = _displayTime[idx];
+        
+    }];
+    
+}
+
 - (NSArray <NSDictionary *> *)obtainTimes {
     
     NSMutableArray *arrays = [[NSMutableArray alloc] init];

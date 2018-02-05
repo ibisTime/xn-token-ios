@@ -170,6 +170,7 @@
         
         TLPublishVC *publishVC = [[TLPublishVC alloc] init];
         publishVC.adsCode = advertiseModel.code;
+        publishVC.firstCoin = advertiseModel.tradeCoin;
         publishVC.publishType = PublishTypePublishDraft;
         if ( advertiseModel.adsType == AdsTradeTypeBuy) {
             
@@ -209,6 +210,7 @@
                 //上架的，都可进行编辑
                 TLPublishVC *publishVC = [[TLPublishVC alloc] init];
                 publishVC.adsCode = advertiseModel.code;
+                publishVC.firstCoin = advertiseModel.tradeCoin;
                 publishVC.VCType = TLPublishVCTypeBuy;
                 publishVC.publishType = PublishTypePublishRedit;
                 [self.navigationController pushViewController:publishVC animated:YES];
@@ -230,6 +232,7 @@
                 
                 TLPublishVC *publishVC = [[TLPublishVC alloc] init];
                 publishVC.adsCode = advertiseModel.code;
+                publishVC.firstCoin = advertiseModel.tradeCoin;
                 publishVC.VCType = TLPublishVCTypeSell;
                 publishVC.publishType = PublishTypePublishRedit;
                 [self.navigationController pushViewController:publishVC animated:YES];

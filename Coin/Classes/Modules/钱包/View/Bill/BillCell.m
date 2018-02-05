@@ -12,6 +12,7 @@
 #import "NSString+Date.h"
 #import "NSString+Extension.h"
 #import "UILabel+Extension.h"
+#import "CoinUtil.h"
 
 @interface BillCell ()
 
@@ -143,15 +144,18 @@
 
     NSString *moneyStr = @"";
 
+    NSString *countStr = [CoinUtil convertToRealCoin:_billModel.transAmountString
+                                                coin:billModel.currency];
+//    [_billModel.transAmountString convertToSimpleRealCoin];
     if (money > 0) {
         
-        moneyStr = [NSString stringWithFormat:@"+%@ %@", [_billModel.transAmountString convertToSimpleRealCoin], billModel.currency];
+        moneyStr = [NSString stringWithFormat:@"+%@ %@",countStr , billModel.currency];
 
         self.iconIV.image = kImage(@"账单-充币");
 
     } else if (money <= 0) {
 
-        moneyStr = [NSString stringWithFormat:@"%@ %@", [_billModel.transAmountString convertToSimpleRealCoin], billModel.currency];
+        moneyStr = [NSString stringWithFormat:@"%@ %@", countStr, billModel.currency];
 
         self.iconIV.image = kImage(@"账单-提币");
 

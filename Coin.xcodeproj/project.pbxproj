@@ -334,6 +334,10 @@
 		2E3950001FB05ADB00BA0829 /* TLTransactionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E394FFF1FB05ADB00BA0829 /* TLTransactionVC.m */; };
 		2E3950031FB05AF200BA0829 /* TLOrderVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E3950021FB05AF200BA0829 /* TLOrderVC.m */; };
 		2E42616420258B4300913DCF /* CoinService.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E42616320258B4300913DCF /* CoinService.m */; };
+		2E4261672027FFCB00913DCF /* TLSearchParamChooseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E4261662027FFCB00913DCF /* TLSearchParamChooseView.m */; };
+		2E42616B2028431200913DCF /* TLSwitchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E42616A2028431200913DCF /* TLSwitchView.m */; };
+		2E42616E20284BEC00913DCF /* TestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E42616D20284BEC00913DCF /* TestViewController.m */; };
+		2E42617120284CA600913DCF /* TestContentVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E42617020284CA600913DCF /* TestContentVC.m */; };
 		2E67CD9C1FE253850030C827 /* in.caf in Resources */ = {isa = PBXBuildFile; fileRef = 2E67CD9B1FE253850030C827 /* in.caf */; };
 		2E973FC91FDA279C005C2D5F /* LangSwitcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E973FC81FDA279C005C2D5F /* LangSwitcher.m */; };
 		2E973FCF1FDABA0F005C2D5F /* ChatSysMsgCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E973FCE1FDABA0F005C2D5F /* ChatSysMsgCell.m */; };
@@ -1208,6 +1212,14 @@
 		2E3950021FB05AF200BA0829 /* TLOrderVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLOrderVC.m; sourceTree = "<group>"; };
 		2E42616220258B4300913DCF /* CoinService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoinService.h; sourceTree = "<group>"; };
 		2E42616320258B4300913DCF /* CoinService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoinService.m; sourceTree = "<group>"; };
+		2E4261652027FFCB00913DCF /* TLSearchParamChooseView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLSearchParamChooseView.h; sourceTree = "<group>"; };
+		2E4261662027FFCB00913DCF /* TLSearchParamChooseView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLSearchParamChooseView.m; sourceTree = "<group>"; };
+		2E4261692028431200913DCF /* TLSwitchView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLSwitchView.h; sourceTree = "<group>"; };
+		2E42616A2028431200913DCF /* TLSwitchView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLSwitchView.m; sourceTree = "<group>"; };
+		2E42616C20284BEC00913DCF /* TestViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestViewController.h; sourceTree = "<group>"; };
+		2E42616D20284BEC00913DCF /* TestViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestViewController.m; sourceTree = "<group>"; };
+		2E42616F20284CA600913DCF /* TestContentVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestContentVC.h; sourceTree = "<group>"; };
+		2E42617020284CA600913DCF /* TestContentVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestContentVC.m; sourceTree = "<group>"; };
 		2E5F191E1FED0CA900100420 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		2E5F191F1FED0CAE00100420 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		2E5F19201FED0CB600100420 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
@@ -1735,6 +1747,8 @@
 				2EB039A31FE7C31500589D8E /* PayTypeView.m */,
 				2EB039A81FE8EA3C00589D8E /* UserPhotoView.h */,
 				2EB039A91FE8EA3C00589D8E /* UserPhotoView.m */,
+				2E4261652027FFCB00913DCF /* TLSearchParamChooseView.h */,
+				2E4261662027FFCB00913DCF /* TLSearchParamChooseView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3546,6 +3560,7 @@
 		2E394FEA1FB056A900BA0829 /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				2E426168202842EC00913DCF /* test */,
 				2EB039971FE79ADF00589D8E /* UIColor+theme.h */,
 				2EB039961FE79ADF00589D8E /* UIColor+theme.m */,
 				2E973FD01FDBC57C005C2D5F /* View */,
@@ -3586,6 +3601,19 @@
 				2E42616320258B4300913DCF /* CoinService.m */,
 			);
 			path = Service;
+			sourceTree = "<group>";
+		};
+		2E426168202842EC00913DCF /* test */ = {
+			isa = PBXGroup;
+			children = (
+				2E4261692028431200913DCF /* TLSwitchView.h */,
+				2E42616A2028431200913DCF /* TLSwitchView.m */,
+				2E42616C20284BEC00913DCF /* TestViewController.h */,
+				2E42616D20284BEC00913DCF /* TestViewController.m */,
+				2E42616F20284CA600913DCF /* TestContentVC.h */,
+				2E42617020284CA600913DCF /* TestContentVC.m */,
+			);
+			path = test;
 			sourceTree = "<group>";
 		};
 		2E973FD01FDBC57C005C2D5F /* View */ = {
@@ -4277,6 +4305,7 @@
 				211C04221FC6604800E51FCF /* UITableViewController+ADScaleTransititon.m in Sources */,
 				211C040C1FC6604800E51FCF /* NSObject+KVOCategory.m in Sources */,
 				211C03F21FC6604800E51FCF /* MenuTableViewController.m in Sources */,
+				2E42616E20284BEC00913DCF /* TestViewController.m in Sources */,
 				2125B8BB1FD9201C00591812 /* QuotationTableView.m in Sources */,
 				2E394FF51FB057B300BA0829 /* TLNavigationController.m in Sources */,
 				21A7F3241FB2E2F900FAA0A2 /* CaptchaView.m in Sources */,
@@ -4458,6 +4487,7 @@
 				211DE6C41FB58B4C002FCF3D /* HttpSign.m in Sources */,
 				211C043B1FC6604800E51FCF /* MenuItem.m in Sources */,
 				211F78141FCAFBCA0023F133 /* WaitingOrderVC.m in Sources */,
+				2E42616B2028431200913DCF /* TLSwitchView.m in Sources */,
 				211C04151FC6604800E51FCF /* NSData+MKBase64.m in Sources */,
 				211A35041FB45A6A00FEB71F /* WalletHeaderView.m in Sources */,
 				21D216A21FBAEDB10040795E /* QuotationView.m in Sources */,
@@ -4506,6 +4536,7 @@
 				211C042A1FC6604800E51FCF /* UIViewController+ADTransition.m in Sources */,
 				211CF9921FC4144700E51FCF /* PayTypeModel.m in Sources */,
 				2125B8C11FD92B3300591812 /* CoinQuotationModel.m in Sources */,
+				2E42617120284CA600913DCF /* TestContentVC.m in Sources */,
 				211C03EF1FC6604800E51FCF /* UILabel+InitMethod.m in Sources */,
 				211C04181FC6604800E51FCF /* NSDictionary+RequestEncoding.m in Sources */,
 				211C04591FC6604800E51FCF /* IMAConversation.m in Sources */,
@@ -4540,6 +4571,7 @@
 				21A7F3191FB2E2F900FAA0A2 /* TLAccountBaseVC.m in Sources */,
 				21CB94F51FDC179700CAB090 /* PersonalModel.m in Sources */,
 				2ED651C9200F2F6F0065A1B0 /* TLCoinWithdrawOrderVC.m in Sources */,
+				2E4261672027FFCB00913DCF /* TLSearchParamChooseView.m in Sources */,
 				211DE6B21FB58B4C002FCF3D /* UIButton+Custom.m in Sources */,
 				211DE6171FB54685002FCF3D /* WalletCell.m in Sources */,
 				211C03F31FC6604800E51FCF /* MenuButton.m in Sources */,

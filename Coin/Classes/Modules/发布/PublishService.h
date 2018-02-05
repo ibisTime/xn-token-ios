@@ -47,6 +47,10 @@ typedef NS_ENUM(NSInteger, PublishType) {
 @property (nonatomic, copy) NSString *publishTitle;
 //
 @property (nonatomic, copy) NSString *ads_hint_key;
+@property (nonatomic, copy) NSString *totalCountHintText;
+@property (nonatomic, copy) NSString *totalCountHintPlaceholder;
+
+
 
 // 余额高度
 @property (nonatomic, assign) CGFloat balanceHeight;

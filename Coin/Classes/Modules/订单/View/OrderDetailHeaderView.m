@@ -15,6 +15,7 @@
 #import "NSString+Extension.h"
 #import "NSNumber+Extension.h"
 #import "NSString+Date.h"
+#import "CoinUtil.h"
 
 #define BTN_HEIGHT 44
 
@@ -82,8 +83,9 @@
 
     //
     self.amountLbl.text = [NSString stringWithFormat:@"%@ CNY", order.tradeAmount];
-    NSString *realNum = [order.countString convertToSimpleRealCoin];
-    self.numLbl.text = [NSString stringWithFormat:@"%@ ETH", realNum];
+    NSString *realNum = [CoinUtil convertToRealCoin:order.countString
+                                               coin:_order.tradeCoin];
+    self.numLbl.text = [NSString stringWithFormat:@"%@ %@", realNum,_order.tradeCurrency];
 
     self.priceLbl.text = [NSString stringWithFormat:@"%@ CNY", [order.tradePrice convertToRealMoneyWithNum:2]];
     //买家

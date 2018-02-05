@@ -30,5 +30,7 @@ typedef NS_ENUM(NSInteger, SearchType) {
 @property (nonatomic, copy) NSString *advertiseType;
 //搜用户
 @property (nonatomic, copy) NSString *nickName;
+@property (nonatomic, copy) NSString *coin;
+
 
 @end

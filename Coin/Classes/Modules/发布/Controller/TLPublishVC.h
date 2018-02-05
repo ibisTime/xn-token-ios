@@ -21,6 +21,13 @@ typedef NS_ENUM(NSUInteger, TLPublishVCType) {
 
 @property (nonatomic, strong) NSString *adsCode;
 
+
+/**
+ 如果已经知道出事化是哪个币种，那就需要传进来币种，如果不穿初始化为ETH
+ */
+@property (nonatomic, copy) NSString *firstCoin;
+
+
 //以下必须同时设置 
 @property (nonatomic, assign) TLPublishVCType VCType;
 @property (nonatomic, assign) PublishType publishType;

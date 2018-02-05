@@ -150,7 +150,6 @@
     
     //芝麻认证
     TLNetworking *http = [TLNetworking new];
-    
     http.code = @"805195";
     http.parameters[@"idNo"] = self.idCard.text;
     http.parameters[@"realName"] = self.realName.text;
@@ -160,7 +159,7 @@
     
     [http postWithSuccess:^(id responseObject) {
         
-        NSNumber *isSuccess = responseObject[@"isSuccess"];
+        NSNumber *isSuccess = responseObject[@"data"][@"isSuccess"];
         if (isSuccess && [isSuccess isEqual:@1]) {
             
             //有认证记录

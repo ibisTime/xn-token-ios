@@ -33,6 +33,7 @@
 
             TLPublishVC *sellVC = [[TLPublishVC alloc] init];
             sellVC.adsCode = advertiseModel.code;
+            sellVC.firstCoin = advertiseModel.tradeCoin;
             sellVC.publishType = PublishTypePublishRedit;
             sellVC.VCType = TLPublishVCTypeSell;
             [currentVC.navigationController pushViewController:sellVC animated:YES];
@@ -58,6 +59,7 @@
             
             TLPublishVC *buyVC = [[TLPublishVC alloc] init];
             buyVC.adsCode = advertiseModel.code;
+            buyVC.firstCoin = advertiseModel.tradeCoin;
             buyVC.publishType = PublishTypePublishRedit;
             buyVC.VCType = TLPublishVCTypeBuy;
             [currentVC.navigationController pushViewController:buyVC animated:YES];

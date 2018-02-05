@@ -225,6 +225,12 @@
     
 }
 
+- (void)setDisplayTime:(NSArray<Displaytime *> *)displayTime {
+    
+    self.publishTimeChooseView.displayTime = displayTime;
+    
+}
+
 - (void)change {
     
     
