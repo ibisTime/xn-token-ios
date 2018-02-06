@@ -11,6 +11,7 @@
 #import "BillDetailCell.h"
 #import "NSString+Date.h"
 #import "NSString+Extension.h"
+#import "CoinUtil.h"
 
 @interface BillDetailTableView ()<UITableViewDataSource, UITableViewDelegate>
 
@@ -19,7 +20,6 @@
 @implementation BillDetailTableView
 
 static NSString *identifierCell = @"BillDetailCell";
-
 - (instancetype)initWithFrame:(CGRect)frame style:(UITableViewStyle)style {
     
     if (self = [super initWithFrame:frame style:style]) {
@@ -44,7 +44,6 @@ static NSString *identifierCell = @"BillDetailCell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     BillDetailCell *cell = [tableView dequeueReusableCellWithIdentifier:identifierCell];
-    
     NSArray *textArr = @[
                          [LangSwitcher switchLang:@"变动前金额" key:nil],
                           [LangSwitcher switchLang:@"变动后金额" key:nil],
@@ -55,18 +54,18 @@ static NSString *identifierCell = @"BillDetailCell";
     
     NSString *dateStr = [_bill.createDatetime convertToDetailDate];
     
-    NSString *postAmount = [_bill.postAmountString convertToSimpleRealCoin];
+    NSString *postAmount = [CoinUtil convertToRealCoin:_bill.postAmountString coin:_bill.currency];
     
-    NSString *preAmount = [_bill.preAmountString convertToSimpleRealCoin];
+    NSString *preAmount = [CoinUtil convertToRealCoin:_bill.preAmountString coin:_bill.currency];
     
     NSArray *rightArr = @[preAmount, postAmount, dateStr, _bill.getStatusName, _bill.getBizName];
     
-    cell.titleLbl.text =  [LangSwitcher switchLang:textArr[indexPath.row] key:nil];
+    cell.titleLbl.text = textArr[indexPath.row];
+//    [LangSwitcher switchLang:textArr[indexPath.row] key:nil];
     
-    cell.rightLabel.text = [LangSwitcher switchLang:rightArr[indexPath.row] key:nil] ;
-    
+    cell.rightLabel.text = rightArr[indexPath.row];
+//    [LangSwitcher switchLang:rightArr[indexPath.row] key:nil] ;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-
     return cell;
     
 }

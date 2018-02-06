@@ -150,18 +150,18 @@
     if (money > 0) {
         
         moneyStr = [NSString stringWithFormat:@"+%@ %@",countStr , billModel.currency];
-
-        self.iconIV.image = kImage(@"账单-充币");
+        
+        
+        self.iconIV.image = [UIImage imageNamed:[NSString stringWithFormat:@"账单-充币-%@",billModel.currency]];
 
     } else if (money <= 0) {
 
         moneyStr = [NSString stringWithFormat:@"%@ %@", countStr, billModel.currency];
 
-        self.iconIV.image = kImage(@"账单-提币");
+        self.iconIV.image = [UIImage imageNamed:[NSString stringWithFormat:@"账单-提币-%@",billModel.currency]];
 
     }
 
-//    self.iconIV.image = [UIImage imageNamed:_billModel.getImgName];
 
     self.dayLbl.text = [_billModel.createDatetime convertDateWithFormat:@"dd日"];
     self.timeLbl.text = [_billModel.createDatetime convertDateWithFormat:@"HH:mm"];

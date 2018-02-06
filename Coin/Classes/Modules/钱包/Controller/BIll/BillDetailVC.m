@@ -9,6 +9,7 @@
 #import "BillDetailVC.h"
 #import "BillDetailTableView.h"
 #import "TLUIHeader.h"
+#import "CoinUtil.h"
 
 @interface BillDetailVC ()
 
@@ -48,15 +49,17 @@
     textLbl.text = _bill.bizNote;
 
 
-    CGFloat money = [[_bill.transAmountString convertToSimpleRealCoin] doubleValue];
+    NSString *onlyCountStr = [CoinUtil convertToRealCoin:_bill.transAmountString coin:_bill.currency];
+    CGFloat money = [onlyCountStr doubleValue];
     NSString *moneyStr = @"";
+    //
     if (money > 0) {
         
-        moneyStr = [NSString stringWithFormat:@"+%@ %@", [_bill.transAmountString convertToSimpleRealCoin], _bill.currency];
+        moneyStr = [NSString stringWithFormat:@"+%@ %@", onlyCountStr, _bill.currency];
         
     } else if (money <= 0) {
         
-        moneyStr = [NSString stringWithFormat:@"%@ %@", [_bill.transAmountString convertToSimpleRealCoin], _bill.currency];
+        moneyStr = [NSString stringWithFormat:@"%@ %@", onlyCountStr, _bill.currency];
         
     }
     

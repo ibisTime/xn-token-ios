@@ -1204,7 +1204,9 @@
 
 #pragma mark - UITextFieldDelegate
 
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+- (BOOL)textField:(UITextField *)textField
+shouldChangeCharactersInRange:(NSRange)range
+replacementString:(NSString *)string {
     
     if ([string isEqualToString:@"\n"] || [string isEqualToString:@""]) {//按下return
         return YES;

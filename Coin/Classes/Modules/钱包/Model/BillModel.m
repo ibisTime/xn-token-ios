@@ -32,8 +32,9 @@
 - (NSString *)getBizName {
     NSDictionary *dict = @{
                            
-                           @"charge" : [LangSwitcher switchLang:@"ETH充值" key:nil],
-                           @"withdraw" : [LangSwitcher switchLang:@"ETH取现" key:nil] ,
+                          
+                           @"charge" : [LangSwitcher switchLang: [NSString stringWithFormat:@"%@充值",self.currency] key:nil],
+                           @"withdraw" : [LangSwitcher switchLang: [NSString stringWithFormat:@"%@取现",self.currency] key:nil] ,
                            @"buy": [LangSwitcher switchLang:@"交易买入" key:nil]  ,
                            @"sell" : [LangSwitcher switchLang:@"交易卖出" key:nil],
                            @"tradefrozen" :[LangSwitcher switchLang:@"交易冻结" key:nil],

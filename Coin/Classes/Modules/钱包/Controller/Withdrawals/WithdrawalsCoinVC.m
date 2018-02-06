@@ -680,13 +680,16 @@ typedef NS_ENUM(NSInteger, AddressType) {
     http.code = @"802750";
     http.showView = self.view;
     http.parameters[@"accountNumber"] = self.currency.accountNumber;
-    http.parameters[@"amount"] = [self.tranAmountTF.text convertToSysCoin];
-//    http.parameters[@"applyNote"] = [NSString stringWithFormat:@"%@提现", self.currency.currency];
-    http.parameters[@"applyNote"] = @"ios-提现";
+    http.parameters[@"amount"] = [CoinUtil convertToSysCoin:self.tranAmountTF.text
+                                                       coin:self.currency.currency];
+    http.parameters[@"applyNote"] = [NSString stringWithFormat:@"%@提现", self.currency.currency];
+//    http.parameters[@"applyNote"] = @"ios-提现";
     http.parameters[@"applyUser"] = [TLUser user].userId;
     http.parameters[@"payCardInfo"] = self.currency.currency;
     http.parameters[@"payCardNo"] = self.receiveAddressLbl.text;
     http.parameters[@"token"] = [TLUser user].token;
+//    http.parameters[@"fee"] = @"-0.1";
+    http.parameters[@"fee"] = @"-10";
 
     
     if ([TLUser user].isGoogleAuthOpen) {
@@ -723,6 +726,7 @@ typedef NS_ENUM(NSInteger, AddressType) {
     
 }
 
+#pragma mark- 获取手续费
 - (void)requestWithdrawFee {
     
     TLNetworking *http = [TLNetworking new];
