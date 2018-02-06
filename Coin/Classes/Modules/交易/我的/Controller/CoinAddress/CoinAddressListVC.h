@@ -17,4 +17,11 @@ typedef void(^CoinAddressBlock)(CoinAddressModel *addressModel);
 @property (nonatomic, copy) CoinAddressBlock addressBlock;
 @property (nonatomic, copy) NSString *coin;
 
+
+/**
+ 是否可以查看多个coin, 默认no
+ */
+@property (nonatomic, assign) BOOL isCanLookManyCoin;
+
+
 @end

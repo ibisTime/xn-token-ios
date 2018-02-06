@@ -20,9 +20,12 @@
 //好评率
 @property (nonatomic, copy) NSString *goodCommentRate;
 
-@property (nonatomic, copy) NSString *totalTradeCount;
+//@property (nonatomic, copy) NSString *totalTradeCount;
+@property (nonatomic, copy) NSString *totalTradeCountEth;
+@property (nonatomic, copy) NSString *totalTradeCountSc;
 
 
-- (NSString *)convertTotalTradeCount;
 
+
+- (NSString *)convertTotalTradeCountWithCoin:(NSString *)coin;
 @end

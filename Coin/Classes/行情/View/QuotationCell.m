@@ -151,15 +151,23 @@
     NSString *priceFluctStr = quotation.percent_change_24h;
     CGFloat fluct = [priceFluctStr doubleValue];
     
-    if (fluct > 0) {
+    if (!priceFluctStr) {
         
-        priceFluctStr = [NSString stringWithFormat:@"+%@%%", priceFluctStr];
+        priceFluctStr = @"0.00%";
         
-    } else  {
+    } else {
         
-        priceFluctStr = [NSString stringWithFormat:@"%@%%", priceFluctStr];
-
+        if (fluct > 0) {
+            
+            priceFluctStr = [NSString stringWithFormat:@"+%@%%", priceFluctStr];
+            
+        } else  {
+            
+            priceFluctStr = [NSString stringWithFormat:@"%@%%", priceFluctStr];
+            
+        }
     }
+  
     
     [self.priceFluctBtn setTitle:priceFluctStr forState:UIControlStateNormal];
     [self.priceFluctBtn setBackgroundColor:quotation.bgColor forState:UIControlStateNormal];

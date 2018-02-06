@@ -27,6 +27,7 @@
 #import <UIScrollView+TLAdd.h>
 #import "NSString+Extension.h"
 #import "AppConfig.h"
+#import "CoinUtil.h"
 
 @interface InviteFriendVC ()
 
@@ -461,7 +462,8 @@
         //收益
         NSString *profit = responseObject[@"data"][@"inviteProfit"];
         
-        self.profitLbl.text = [profit convertToSimpleRealCoin];
+        self.profitLbl.text = [CoinUtil convertToRealCoin:profit coin:kETH];
+//        [ profit convertToSimpleRealCoin];
         //邀请人数
         NSNumber *inviteNum = responseObject[@"data"][@"inviteCount"];
         

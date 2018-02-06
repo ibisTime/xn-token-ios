@@ -18,7 +18,13 @@
 //被好评次数
 @property (nonatomic, assign) NSInteger beiHaoPingCount;
 //master的交易量
-@property (nonatomic, copy) NSString *totalTradeCount;
+//@property (nonatomic, copy) NSString *totalTradeCount;
+
+@property (nonatomic, copy) NSString *totalTradeCountEth;
+@property (nonatomic, copy) NSString *totalTradeCountSc;
+
+
+
 //被评价次数
 @property (nonatomic, assign) NSInteger beiPingJiaCount;
 //master交易次数
@@ -29,4 +35,5 @@
 @property (nonatomic, copy) NSString *goodCommentRate;
 //交易总量
 @property (nonatomic, copy) NSString *tradeAmount;
+
 @end

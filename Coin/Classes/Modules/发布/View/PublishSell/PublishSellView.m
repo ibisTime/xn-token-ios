@@ -1019,7 +1019,7 @@
     //最大量
     self.maxNumTF.text = [advertise.maxTrade convertToSimpleRealMoney];
     //购买数量
-    self.buyTotalTF.text = [advertise.totalCountString convertToSimpleRealCoin];
+//    self.buyTotalTF.text = [advertise.totalCountString convertToSimpleRealCoin];
     //付款方式
     NSInteger index = [advertise.payType integerValue];
     

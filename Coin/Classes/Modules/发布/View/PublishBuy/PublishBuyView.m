@@ -946,7 +946,7 @@
     //最大量
     self.maxNumTF.text = [self.advertise.maxTrade convertToSimpleRealMoney];
     //购买数量
-    self.buyTotalTF.text = [self.advertise.totalCountString convertToSimpleRealCoin];
+//    self.buyTotalTF.text = [self.advertise.totalCountString convertToSimpleRealCoin];
     //付款方式
     NSInteger index = [self.advertise.payType integerValue];
     
@@ -1213,7 +1213,11 @@ replacementString:(NSString *)string {
     }
     
     NSCharacterSet *cs;
+    
+    //查看小数点的位置
     NSUInteger nDotLoc = [textField.text rangeOfString:@"."].location;
+    
+    
     
     NSInteger index = textField.tag - 1200;
     
@@ -1265,15 +1269,17 @@ replacementString:(NSString *)string {
                 break;
         }
   
-    }
-    else {
+    } else {
         
         cs = [[NSCharacterSet characterSetWithCharactersInString:myDotNumbers] invertedSet];
         if (textField.text.length >= 12) {
             
             return NO;
         }
+        
     }
+    
+    
     NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
     BOOL basicTest = [string isEqualToString:filtered];
     if (!basicTest) {

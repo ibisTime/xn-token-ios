@@ -40,7 +40,7 @@
         [self.titleLbl mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self);
             make.centerY.equalTo(self);
-            make.width.equalTo(@44);
+//            make.width.equalTo(@44);
             
         }];
         

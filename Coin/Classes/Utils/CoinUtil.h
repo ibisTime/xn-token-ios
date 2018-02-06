@@ -23,6 +23,11 @@ typedef NS_ENUM(NSUInteger, CoinType) {
 + (NSString *)convertToRealCoin:(NSString *)count coin:(NSString *)coin;
 
 /**
+ 100000.....转化为1.00000这种格式，可以指定小数位数
+ */
++ (NSString *)convertToRealCoin:(NSString *)count coin:(NSString *)coin scale:(NSUInteger)scale;
+
+/**
  把1.000 转换为最基本单位 100000000000.....
  */
 + (NSString *)convertToSysCoin:(NSString *)count coin:(NSString *)coin;

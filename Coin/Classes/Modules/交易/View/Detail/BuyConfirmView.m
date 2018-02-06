@@ -21,6 +21,8 @@
 //购买数量
 @property (nonatomic, strong) UILabel *numLbl;
 
+@property (nonatomic, strong) UILabel *promptLbl;
+
 @end
 
 @implementation BuyConfirmView
@@ -147,8 +149,7 @@
     
     UILabel *promptLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kThemeColor font:11.0];
     
-    
-    promptLbl.text = @"提醒: 请确认价格再下单, 下单后此交易的ETH将托管锁定, 请放心购买";
+    self.promptLbl = promptLbl;
     promptLbl.text = [LangSwitcher switchLang:promptLbl.text key:nil];
     
     promptLbl.numberOfLines = 0;
@@ -215,7 +216,8 @@
     
     self.amountLbl.text = [NSString stringWithFormat:@"%@ CNY", priceModel.amount];
 
-    self.numLbl.text = [NSString stringWithFormat:@"%@ ETH", priceModel.num];
+    self.numLbl.text = [NSString stringWithFormat:@"%@ %@", priceModel.num,priceModel.coin];
+    self.promptLbl.text = [NSString stringWithFormat:@"提醒: 请确认价格再下单, 下单后此交易的%@将托管锁定, 请放心购买",priceModel.coin];
 
 }
 

@@ -18,4 +18,8 @@ typedef NS_ENUM(NSInteger, MyAdvertiseType) {
 //广告类型
 @property (nonatomic, assign) MyAdvertiseType type;
 
+- (void)refresh;
+@property (nonatomic, copy) NSString *coin;
+
+
 @end

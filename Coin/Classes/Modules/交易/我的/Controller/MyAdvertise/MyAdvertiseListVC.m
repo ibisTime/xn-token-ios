@@ -24,7 +24,7 @@
 @property (nonatomic, strong) NSArray <AdvertiseModel *>*advertises;
 //暂无交易
 @property (nonatomic, strong) UIView *placeHolderView;
-
+@property (nonatomic, strong) TLPageDataHelper *pageDataHelper;
 @end
 
 @implementation MyAdvertiseListVC
@@ -102,6 +102,19 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(requestAdvertiseList) name:kAdvertiseOff object:nil];
 }
 
+- (void)setCoin:(NSString *)coin {
+    
+    _coin = [coin copy];
+    [self changePageCoin:_coin helper:self.pageDataHelper];
+    
+}
+
+- (void)changePageCoin:(NSString *)coin helper:(TLPageDataHelper *)helper {
+    
+    helper.parameters[@"coin"] = coin;
+    
+}
+
 #pragma mark - Data
 - (void)requestAdvertiseList {
     
@@ -111,9 +124,8 @@
     helper.code = @"625227";
     helper.start = 1;
     helper.limit = 10;
-    helper.parameters[@"coin"] = @"ETH";
     helper.parameters[@"userId"] = [TLUser user].userId;
-    
+    self.pageDataHelper = helper;
     if (self.type == MyAdvertiseTypeDraft) {
         
         helper.parameters[@"statusList"] = @[kAdsStatusDraft];
@@ -158,6 +170,12 @@
     }];
     
     [self.tableView endRefreshingWithNoMoreData_tl];
+    
+}
+
+- (void)refresh {
+    
+    [self.tableView beginRefreshing];
     
 }
 

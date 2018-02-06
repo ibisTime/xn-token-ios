@@ -10,4 +10,6 @@
 
 @interface TLCoinWithdrawOrderVC : TLBaseVC
 
+@property (nonatomic, copy) NSString *coin;
+
 @end

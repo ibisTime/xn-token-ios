@@ -23,7 +23,7 @@
 #import "AdsDetailBottomOpView.h"
 #import "PayTypeModel.h"
 #import "AdsDetailUserView.h"
-
+#import "CoinUtil.h"
 
 #define myDotNumbers     @"0123456789.\n"
 #define myNumbers          @"0123456789\n"
@@ -217,7 +217,7 @@
     
     //ETH
     self.ethTF = [[TLTextField alloc] initWithFrame:CGRectMake(kScreenWidth/2.0 + 5, 65, tfW, 44)
-                                          leftTitle:@"ETH"
+                                          leftTitle:@""
                                          titleWidth:50
                                         placeholder: [LangSwitcher switchLang:@"请输入数值" key:nil]];
     
@@ -323,6 +323,7 @@
     
     _advertise = advertise;
     self.topUserView.ads = advertise;
+    self.ethTF.leftLbl.text = _advertise.tradeCoin;
 
     self.cnyTF.placeholder = [NSString stringWithFormat:@"%@-%@ ",
                               [advertise.minTrade convertToSimpleRealMoney],
@@ -334,7 +335,8 @@
 - (void)setLeftAmount:(NSString *)leftAmount {
     
     _leftAmount = leftAmount;
-    self.leftAmountLbl.text = [NSString stringWithFormat:@"广告剩余可交易量: %@ ETH", [_leftAmount convertToSimpleRealCoin]];
+    
+    self.leftAmountLbl.text = [NSString stringWithFormat:@"广告剩余可交易量: %@ %@", [CoinUtil convertToRealCoin:_leftAmount coin:self.advertise.tradeCoin],self.advertise.tradeCoin];
     self.leftAmountLbl.text = [LangSwitcher switchLang:self.leftAmountLbl.text key:nil];
     
 }

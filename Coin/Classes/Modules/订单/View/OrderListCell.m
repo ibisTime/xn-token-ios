@@ -33,6 +33,7 @@
 //未读消息数
 @property (nonatomic, strong) UILabel *unReadLbl;
 
+@property (nonatomic, strong) UIView *typeBgView;
 @end
 
 @implementation OrderListCell
@@ -105,21 +106,35 @@
     }];
     
     //交易方式
+    UIView *typeBgView = [[UIView alloc] init];
+    [self.contentView addSubview:typeBgView];
+    [typeBgView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(self.nameLbl.mas_centerY);
+        make.left.equalTo(self.nameLbl.mas_right).offset(6);
+        
+    }];
+    self.typeBgView = typeBgView;
+    typeBgView.layer.cornerRadius = 3;
+    //    self.tradeTypeLbl.cont
+    typeBgView.clipsToBounds = YES;
+    typeBgView.layer.borderWidth = 0.5;
+    
     self.tradeTypeLbl = [UILabel labelWithFrame:CGRectZero
                                  textAligment:NSTextAlignmentCenter
                               backgroundColor:[UIColor clearColor]
                                          font:Font(11)
                                     textColor:kClearColor];
-    self.tradeTypeLbl.layer.cornerRadius = 3;
-    self.tradeTypeLbl.clipsToBounds = YES;
-    self.tradeTypeLbl.layer.borderWidth = 0.5;
-    [self addSubview:self.tradeTypeLbl];
+    [typeBgView addSubview:self.tradeTypeLbl];
     [self.tradeTypeLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(self.nameLbl.mas_centerY);
-        make.width.equalTo(@32);
-        make.height.equalTo(@18);
-        make.left.equalTo(self.nameLbl.mas_right).offset(6);
         
+        make.centerY.equalTo(typeBgView);
+        make.left.equalTo(typeBgView.mas_left).offset(3);
+        make.right.equalTo(typeBgView.mas_right).offset(-3);
+        make.top.equalTo(typeBgView.mas_top).offset(2);
+        make.bottom.equalTo(typeBgView.mas_bottom).offset(-2);
+        make.width.greaterThanOrEqualTo(@32);
+        make.height.equalTo(@14);
+       
     }];
     
     //交易金额
@@ -208,9 +223,9 @@
 
     UIColor *tradeColor = order.isBuy ? kPaleBlueColor: kThemeColor;
 
-    self.tradeTypeLbl.text = tradeText;
+    self.tradeTypeLbl.text = [NSString stringWithFormat:@"%@%@",tradeText,_order.tradeCoin];
     self.tradeTypeLbl.textColor = tradeColor;
-    self.tradeTypeLbl.layer.borderColor = tradeColor.CGColor;
+    self.typeBgView.layer.borderColor = tradeColor.CGColor;
     
     
     //交易金额

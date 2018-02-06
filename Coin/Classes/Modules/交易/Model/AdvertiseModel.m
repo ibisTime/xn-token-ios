@@ -103,7 +103,7 @@ NSString *const kAdsTradeTypeSell = @"1";
 
 - (NSString *)tradeAmountLimit {
     
-    return [NSString stringWithFormat:@"限额: %@-%@ ",
+    return [NSString stringWithFormat:@"限额: %@-%@ CNY",
             [self.minTrade convertToSimpleRealMoney],
             [self.maxTrade convertToSimpleRealMoney]];
 }

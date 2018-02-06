@@ -228,7 +228,7 @@
             self.priceModel = [OrderPriceModel new];
             self.priceModel.price = [self.advertise.truePrice convertToSimpleRealMoney];
             self.priceModel.amount = self.tradeView.cnyTF.text;
-            
+            self.priceModel.coin = self.advertise.tradeCoin;
             self.priceModel.num = self.tradeView.ethTF.text;
             
             self.confirmView.priceModel = self.priceModel;

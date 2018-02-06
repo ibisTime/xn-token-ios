@@ -92,7 +92,8 @@
             
         } else {
             
-            weakSelf.tradeView.leftInfo = [NSString stringWithFormat:@"广告剩余可交易量: %@ ETH", [self.advertise.leftCountString convertToSimpleRealCoin]];
+            weakSelf.tradeView.leftInfo = [NSString stringWithFormat:@"广告剩余可交易量: %@ ETH", [CoinUtil convertToRealCoin:self.advertise.leftCountString coin:_advertise.tradeCoin]];
+//            [CoinUtil convertToRealCoin:self.advertise.leftCountString coin:_advertise.tradeCoin]
             
         }
         
@@ -246,13 +247,10 @@
             }
             
             self.priceModel = [OrderPriceModel new];
-            
             self.priceModel.price = [self.advertise.truePrice convertToSimpleRealMoney];
-            
             self.priceModel.amount = self.tradeView.cnyTF.text;
-            
             self.priceModel.num = self.tradeView.ethTF.text;
-            
+            self.priceModel.coin = self.advertise.tradeCoin;
             self.confirmView.priceModel = self.priceModel;
             
             [self.confirmView show];
@@ -387,7 +385,8 @@
             
             if ([obj.currency isEqualToString:self.advertise.tradeCoin]) {
                 
-                self.tradeView.leftInfo =  [NSString stringWithFormat:@"可用余额: %@ %@", [[obj.amountString subNumber:obj.frozenAmountString] convertToSimpleRealCoin],self.advertise.tradeCoin];
+                NSString *leftStr = [CoinUtil convertToRealCoin:[obj.amountString subNumber:obj.frozenAmountString] coin:self.advertise.tradeCoin];
+                self.tradeView.leftInfo = [NSString stringWithFormat:@"可用余额: %@ %@",leftStr,self.advertise.tradeCoin];
             }
             
         }];

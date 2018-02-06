@@ -79,7 +79,7 @@
     }];
     
     self.headView.backgroundColor = kClearColor;
-    self.headView.order = self.order;
+//    self.headView.order = self.order;
     self.headView.orderBlock = ^(OrderEventsType orderType) {
         
         [weakSelf orderEventsWithType:orderType];
@@ -361,11 +361,12 @@
     
     [http postWithSuccess:^(id responseObject) {
         
+        self.order = [OrderModel tl_objectWithDictionary:responseObject[@"data"]];
+
         //添加头部
         [self lazyLoadChatData];
         [self initHeaderView];
         
-        self.order = [OrderModel tl_objectWithDictionary:responseObject[@"data"]];
         
         //头部设置数据
         self.headView.order = self.order;

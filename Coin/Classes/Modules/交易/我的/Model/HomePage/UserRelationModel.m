@@ -7,7 +7,7 @@
 //
 
 #import "UserRelationModel.h"
-
+#import "CoinUtil.h"
 #import "NSString+Extension.h"
 
 @implementation UserRelationModel
@@ -28,10 +28,8 @@
 
 - (NSString *)tradeAmount {
     
-    NSString *numStr = [NSString stringWithFormat:@"%@", self.totalTradeCount];
-    
-    NSString *realNum = [numStr convertToSimpleRealCoin];
-    
+    NSString *numStr = [NSString stringWithFormat:@"%@", self.totalTradeCountEth];
+    NSString *realNum = [CoinUtil convertToRealCoin:numStr coin:kETH];
     CGFloat historyNum = [[realNum convertToRealMoneyWithNum:8] doubleValue];
     
     //判断个数

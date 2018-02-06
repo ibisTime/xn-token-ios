@@ -35,6 +35,7 @@
 #import <ZDCChat/ZDCChat.h>
 #import <IQKeyboardManager/IQKeyboardManager.h>
 #import <CDCommon/UIScrollView+TLAdd.h>
+#import "CoinService.h"
 
 @interface TLMineVC ()<MineHeaderSeletedDelegate, UINavigationControllerDelegate>
 
@@ -166,7 +167,6 @@
     advertisement.action = ^{
         
         MyAdvertiseVC *advertiseVC = [MyAdvertiseVC new];
-        
         [weakSelf.navigationController pushViewController:advertiseVC animated:YES];
         
     };
@@ -178,6 +178,8 @@
     address.action = ^{
         
         CoinAddressListVC *addressListVC = [CoinAddressListVC new];
+        addressListVC.isCanLookManyCoin = YES;
+        addressListVC.coin = [CoinService shareService].currentCoin;
         [weakSelf.navigationController pushViewController:addressListVC animated:YES];
         
     };

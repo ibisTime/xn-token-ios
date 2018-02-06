@@ -225,7 +225,7 @@ typedef NS_ENUM(NSInteger, AddressType) {
     
     //转账数量
     self.tranAmountTF = [[TLTextField alloc] initWithFrame:CGRectMake(0, receiveView.yy, kScreenWidth, heightMargin)
-                                                 leftTitle:[LangSwitcher switchLang:@"转账数量" key:nil]
+                                                 leftTitle:[LangSwitcher switchLang:@"付币数量" key:nil]
                                                 titleWidth:90
                                                placeholder:[LangSwitcher switchLang:@"请输入付币数量" key:nil]
                          ];
@@ -248,7 +248,7 @@ typedef NS_ENUM(NSInteger, AddressType) {
     
     self.minerFeeTF.font = Font(14.0);
     
-    self.minerFeeTF.text = [NSString stringWithFormat:@"0 %@", self.currency.currency];
+    self.minerFeeTF.text = [NSString stringWithFormat:@"-- %@", self.currency.currency];
     
     [self.view addSubview:self.minerFeeTF];
     [self.minerFeeTF mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -457,6 +457,7 @@ typedef NS_ENUM(NSInteger, AddressType) {
     
     //
     TLCoinWithdrawOrderVC *withdrawOrderVC = [[TLCoinWithdrawOrderVC alloc] init];
+    withdrawOrderVC.coin = self.currency.currency;
     [self.navigationController pushViewController:withdrawOrderVC animated:YES];
     
 }
@@ -689,7 +690,7 @@ typedef NS_ENUM(NSInteger, AddressType) {
     http.parameters[@"payCardNo"] = self.receiveAddressLbl.text;
     http.parameters[@"token"] = [TLUser user].token;
 //    http.parameters[@"fee"] = @"-0.1";
-    http.parameters[@"fee"] = @"-10";
+//    http.parameters[@"fee"] = @"-10";
 
     
     if ([TLUser user].isGoogleAuthOpen) {
@@ -732,7 +733,7 @@ typedef NS_ENUM(NSInteger, AddressType) {
     TLNetworking *http = [TLNetworking new];
     
     http.code = USER_CKEY_CVALUE;
-    http.parameters[SYS_KEY] = @"withdraw_fee";
+    http.parameters[SYS_KEY] = [NSString stringWithFormat:@"withdraw_fee_%@",[self.currency.currency lowercaseString]];
     
     [http postWithSuccess:^(id responseObject) {
         

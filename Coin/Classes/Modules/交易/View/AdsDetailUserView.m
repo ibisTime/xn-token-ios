@@ -107,7 +107,7 @@
     self.goodCommentRateView.topLbl.text = userStatist.goodCommentRate;
     
     self.historyTradeCountView.bottomLbl.text =  [LangSwitcher switchLang:@"历史交易" key:nil];
-    self.historyTradeCountView.topLbl.text = [userStatist convertTotalTradeCount];
+    self.historyTradeCountView.topLbl.text = [userStatist convertTotalTradeCountWithCoin:_ads.tradeCoin];
     
 }
 

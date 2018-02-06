@@ -7,6 +7,7 @@
 //
 
 #import "CoinService.h"
+#import "CoinUtil.h"
 
 @implementation CoinService
 
@@ -17,6 +18,8 @@
     dispatch_once(&onceToken, ^{
         
         coinService = [[[self class] alloc] init];
+        coinService.currentCoin = kETH;
+        
     });
     
     return coinService;

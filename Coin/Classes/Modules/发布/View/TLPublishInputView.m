@@ -13,7 +13,7 @@
 #define LEFT_LBL_WIDTH 90
 
 
-@interface TLPublishInputView()
+@interface TLPublishInputView()<UITextFieldDelegate>
 
 
 
@@ -28,6 +28,7 @@
         
         self.backgroundColor = [UIColor whiteColor];
         
+        [self initData];
         CGFloat selfH = frame.size.height;
         CGFloat selfW = frame.size.width;
 
@@ -62,6 +63,7 @@
         [self addSubview:self.textField];
         self.textField.font = [UIFont systemFontOfSize:14];
         self.textField.keyboardType = UIKeyboardTypeDecimalPad;
+        self.textField.delegate = self;
 
         
         //底线
@@ -107,6 +109,36 @@
     
     return self;
     
+}
+
+- (void)initData {
+    
+    //
+    self.minDotAfterLong = 2;
+    
+}
+
+- (BOOL)textField:(UITextField *)textField
+shouldChangeCharactersInRange:(NSRange)range
+replacementString:(NSString *)string {
+    
+    if ([string isEqualToString:@"\n"] || [string isEqualToString:@""]) {//按下return
+        return YES;
+    }
+    
+    //查看小数点的位置
+    NSString *textFieldText = textField.text;
+    NSUInteger nDotLoc = [textFieldText rangeOfString:@"."].location;
+    if (nDotLoc != NSNotFound && nDotLoc != 0) {
+        //查看 . 后的位数
+        
+        if (textFieldText.length - nDotLoc > self.minDotAfterLong) {
+            return NO;
+        }
+        
+    }
+    
+    return YES;
 }
 
 - (void)addEvent {

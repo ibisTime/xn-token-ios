@@ -122,7 +122,7 @@
                
 //                NSString *str = [obj.amountString convertToSimpleRealCoin];
                 NSString *str = [obj.amountString subNumber:obj.frozenAmountString];
-                str = [str convertToSimpleRealCoin];
+//                str = [str convertToSimpleRealCoin];
                 weakSelf.publishView.balanceLbl.text = [NSString stringWithFormat:@"账户可用余额：%@",str];
 
             }
@@ -370,8 +370,8 @@
     http.parameters[@"payType"] = draft.payType;
     http.parameters[@"premiumRate"] = premiumRate;
     http.parameters[@"protectPrice"] = draft.protectPrice;
-    http.parameters[@"totalCount"] = [draft.buyTotal convertToSysCoin];
-    http.parameters[@"tradeCurrency"] = @"CNY";
+//    http.parameters[@"totalCount"] = [draft.buyTotal convertToSysCoin];
+//    http.parameters[@"tradeCurrency"] = @"CNY";
     http.parameters[@"tradeCoin"] = @"ETH";
     //0=买币, 1=卖币
     http.parameters[@"tradeType"] = @"1";

@@ -354,7 +354,7 @@
     http.parameters[@"premiumRate"] = premiumRate;
     http.parameters[@"protectPrice"] = draft.protectPrice;
     //
-    http.parameters[@"totalCount"] = [draft.buyTotal convertToSysCoin];
+//    http.parameters[@"totalCount"] = [draft.buyTotal convertToSysCoin];
     http.parameters[@"tradeCurrency"] = @"CNY";
     http.parameters[@"tradeCoin"] = @"ETH";
     //0=买币, 1=卖币

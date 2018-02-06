@@ -78,6 +78,7 @@
     helper.code = @"802755";
     helper.parameters[@"applyUser"] = [TLUser user].userId;
     helper.parameters[@"token"] = [TLUser user].token;
+    helper.parameters[@"currency"] = self.coin;
     helper.tableView = self.orderTableView;
     [helper modelClass:[TLCoinWithdrawModel class]];
     

@@ -169,7 +169,7 @@
     self.feelbl.attributedText = [self attrStrLeftLen:4 str:feeNormalStr];
     
     //
-    NSString *toAddressStr = [NSString stringWithFormat:@"提现地址：%@",_withdrawModel.payCardNo];
+    NSString *toAddressStr = [NSString stringWithFormat:@"提币地址：%@",_withdrawModel.payCardNo];
     self.toAddressLbl.attributedText = [self attrStrLeftLen:5 str:toAddressStr];;
     
     //

@@ -244,7 +244,6 @@
     if (_currentUser.photo) {
         
         [self.photoBtn setTitle:@"" forState:UIControlStateNormal];
-        
         [self.photoBtn sd_setImageWithURL:[NSURL URLWithString:[_currentUser.photo convertImageUrl]] forState:UIControlStateNormal];
         
     } else {

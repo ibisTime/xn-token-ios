@@ -21,6 +21,12 @@
 @property (nonatomic, copy) NSString *hintMsg;
 
 
+/**
+ 小数点后几位，默认为2
+ */
+@property (nonatomic, assign) NSUInteger minDotAfterLong;
+
+
 @property (nonatomic, strong) UIButton *introduceBtn;
 
 /**

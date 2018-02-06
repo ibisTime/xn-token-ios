@@ -140,13 +140,14 @@
     _billModel = billModel;
     
     //
-    CGFloat money = [[_billModel.transAmountString convertToSimpleRealCoin] doubleValue];
 
     NSString *moneyStr = @"";
 
     NSString *countStr = [CoinUtil convertToRealCoin:_billModel.transAmountString
                                                 coin:billModel.currency];
 //    [_billModel.transAmountString convertToSimpleRealCoin];
+    CGFloat money = [countStr doubleValue];
+
     if (money > 0) {
         
         moneyStr = [NSString stringWithFormat:@"+%@ %@",countStr , billModel.currency];

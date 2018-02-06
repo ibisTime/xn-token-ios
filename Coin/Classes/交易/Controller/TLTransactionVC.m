@@ -34,6 +34,7 @@
 #import "PublishService.h"
 #import "CoinUtil.h"
 #import "TestViewController.h"
+#import "CoinService.h"
 
 @interface TLTransactionVC ()<SegmentDelegate, RefreshDelegate, UIScrollViewDelegate>
 
@@ -268,6 +269,7 @@
         _filterPicker.tagNames = textArr;
         _filterPicker.selectBlock = ^(NSInteger index) {
             
+            [CoinService shareService].currentCoin = textArr[index];
             weakSelf.changeView.title = textArr[index];
             [weakSelf changePageHelperCoin:textArr[index] pageHelper:weakSelf.helper];
             [weakSelf.tableView beginRefreshing];

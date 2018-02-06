@@ -45,9 +45,9 @@
 //122.89元  转换为  122890厘
 - (NSString *)convertToSysMoney;
 //转换 乘以10的18次方
-- (NSString *)convertToSysCoin;
+//- (NSString *)convertToSysCoin;
 
-- (NSString *)convertToSimpleRealCoin;
+//- (NSString *)convertToSimpleRealCoin;
 //减法
 - (NSString *)subNumber:(NSString *)number;
 //除法

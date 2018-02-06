@@ -130,6 +130,7 @@
     
 }
 
+
 - (void)realNameAuthAfter {
     
     [self tl_placeholderOperation];
@@ -242,7 +243,7 @@
         
         
         //注意顺序
-        [self data];
+        [self dataAndRule];
         
         //获取余额
         [self getLeftAmount];
@@ -473,6 +474,19 @@
     [self.coinPickerView show];
     [self.coinPickerView setSelectBlock2:^(NSInteger index, NSString *tagName) {
         
+        if ([tagName isEqualToString:weakself.currentCurrency]) {
+            //和上次币种相同，那就不进行信息变更
+            return ;
+        }
+        
+        //清楚一些信息
+        weakself.premiumView.textField.text = nil;
+        weakself.protectPriceView.textField.text = nil;
+        weakself.minTradeAmountView.textField.text = nil;
+        weakself.maxTradeAmountView.textField.text = nil;
+        weakself.totalTradeCountView.textField.text = nil;
+
+
  
         //0.改变当前币种
         weakself.currentCurrency = tagName;
@@ -615,16 +629,23 @@
     
 }
 
-- (void)data {
+- (void)dataAndRule {
     
 
     self.tradeCoinView.textField.text = self.currentCurrency;
     [self changeMarketLblCoin:kETH];
+    //
+    if (self.publishType == PublishTypePublishRedit) {
+        
+        self.tradeCoinView.maskBtn.userInteractionEnabled = NO;
+        
+    }
+    //
     if (!self.advertise) {
         return;
     }
     
-    [self changeMarketLblCoin:self.advertise.tradeCurrency];
+    [self changeMarketLblCoin:self.advertise.tradeCoin];
 
     //币种
     self.currentCurrency = self.advertise.tradeCoin;
@@ -840,6 +861,7 @@
     self.totalTradeCountView.leftLbl.text = [PublishService shareInstance].totalCountHintText;
     self.totalTradeCountView.textField.placeholder = [PublishService shareInstance].totalCountHintPlaceholder;
     self.totalTradeCountView.hintMsg = publishService.totalCount;
+    self.totalTradeCountView.minDotAfterLong = 8;
     
     //账户可用·余额
     self.balanceView = [[TLAdpaterView alloc] initWithFrame:CGRectMake(0,self.totalTradeCountView.yy , width, 0)];

@@ -18,6 +18,7 @@
 #import "SearchResultVC.h"
 #import "TLSearchParamChooseView.h"
 #import "CoinUtil.h"
+#import "CoinService.h"
 
 //0:买币  1:卖币
 #define kTradeBuy @"0"
@@ -112,6 +113,9 @@
                                                    [LangSwitcher switchLang:@"银行转账" key:nil]
                                                    ];
     
+    self.coinTypeView.pickerTextField.text = [CoinService shareService].currentCoin;
+    self.searchCoin = self.coinTypeView.pickerTextField.text;
+    
     
     
 }
@@ -120,16 +124,18 @@
     
     CGFloat paramChooseHeight = 55;
     
-    self.adsTypeView = [[TLSearchParamChooseView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, paramChooseHeight)
+    //
+    self.coinTypeView = [[TLSearchParamChooseView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, paramChooseHeight)
+                                                             paramName:@"交易币种"
+                                                           placeholder:@"请选择交易币种"];
+    [self.view addSubview:self.coinTypeView];
+    
+    self.adsTypeView = [[TLSearchParamChooseView alloc] initWithFrame:CGRectMake(0, self.coinTypeView.yy, SCREEN_WIDTH, paramChooseHeight)
                                                             paramName:@"广告类型"
                                                           placeholder:@"请选择广告类型"];
     [self.view addSubview:self.adsTypeView];
     
-    //
-    self.coinTypeView = [[TLSearchParamChooseView alloc] initWithFrame:CGRectMake(0, self.adsTypeView.bottom, SCREEN_WIDTH, paramChooseHeight)
-                                                            paramName:@"交易币种"
-                                                          placeholder:@"请选择交易币种"];
-    [self.view addSubview:self.coinTypeView];
+
     
     //价格区间
     UIView *priceZoneView = [self priceZoneView:CGRectMake(0, self.coinTypeView.yy, SCREEN_WIDTH, 80)];

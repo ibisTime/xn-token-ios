@@ -17,4 +17,7 @@
 //数量
 @property (nonatomic, copy) NSString *num;
 
+@property (nonatomic, copy) NSString *coin;
+
+
 @end

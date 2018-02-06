@@ -330,7 +330,7 @@
     
     _advertise = advertise;
     self.topUserView.ads = advertise;
-    
+    self.ethTF.leftLbl.text = advertise.tradeCoin;
     self.cnyTF.placeholder = [NSString stringWithFormat:@"%@-%@ ",[advertise.minTrade convertToSimpleRealMoney], [advertise.maxTrade convertToSimpleRealMoney]];
     //留言
     self.leaveMsgTV.text = advertise.leaveMessage;
