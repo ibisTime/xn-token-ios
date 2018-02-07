@@ -70,6 +70,8 @@
     //通知
     [self addNotification];
     
+//    self.tableView.backgroundColor = [UIColor themeColor];
+    
 }
 
 #pragma mark - Init

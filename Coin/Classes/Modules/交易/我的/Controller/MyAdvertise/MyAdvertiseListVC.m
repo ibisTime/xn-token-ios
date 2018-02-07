@@ -7,11 +7,7 @@
 //
 
 #import "MyAdvertiseListVC.h"
-
 #import "MyAdvertiseTableView.h"
-
-#import "PublishBuyVC.h"
-#import "PublishSellVC.h"
 #import "TLPublishVC.h"
 #import "TradeBuyVC.h"
 #import "TradeSellVC.h"
@@ -200,23 +196,7 @@
             
         }
         [self.navigationController pushViewController:publishVC animated:YES];
-        
-        
-//        if ( advertiseModel.adsType == AdsTradeTypeBuy) {
-//
-//            PublishBuyVC *buyVC = [PublishBuyVC new];
-//            buyVC.publishType = PublishTypePublishDraft;
-//            buyVC.adsCode = advertiseModel.code;
-//            [self.navigationController pushViewController:buyVC animated:YES];
-//
-//        } else if (advertiseModel.adsType == AdsTradeTypeSell) {
-//
-//            PublishSellVC *sellVC = [PublishSellVC new];
-//            sellVC.publishType = PublishTypePublishDraft;
-//            sellVC.adsCode = advertiseModel.code;
-//            [self.navigationController pushViewController:sellVC animated:YES];
-//
-//        }
+
         
     } else if (self.type == MyAdvertiseTypeDidPublish) {
         //已发布 和 交易中的
@@ -233,10 +213,6 @@
                 publishVC.publishType = PublishTypePublishRedit;
                 [self.navigationController pushViewController:publishVC animated:YES];
 
-//                PublishBuyVC *publishBuyVC = [[PublishBuyVC alloc] init];
-//                publishBuyVC.publishType = PublishTypePublishRedit;
-//                publishBuyVC.adsCode = advertiseModel.code;
-//                [self.navigationController pushViewController:publishBuyVC animated:YES];
                 return;
             }
             
@@ -254,12 +230,7 @@
                 publishVC.VCType = TLPublishVCTypeSell;
                 publishVC.publishType = PublishTypePublishRedit;
                 [self.navigationController pushViewController:publishVC animated:YES];
-                
-                //上架都可进行编辑
-//                PublishSellVC *publishSellVC = [[PublishSellVC alloc] init];
-//                publishSellVC.publishType = PublishTypePublishRedit;
-//                publishSellVC.adsCode = advertiseModel.code;
-//                [self.navigationController pushViewController:publishSellVC animated:YES];
+
                 return;
             }
 

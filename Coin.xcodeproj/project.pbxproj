@@ -365,6 +365,7 @@
 		2EB9495C1FDF6B1A00CE4B94 /* TraditionalCode.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2EB949591FDF6B1A00CE4B94 /* TraditionalCode.txt */; };
 		2EB9495F1FE0075000CE4B94 /* AdsService.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EB9495E1FE0075000CE4B94 /* AdsService.m */; };
 		2EBFBF231FD8E56C0066F7E4 /* PublishService.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EBFBF221FD8E56C0066F7E4 /* PublishService.m */; };
+		2EC75837202AAB09008C6C18 /* TLNotficationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EC75836202AAB09008C6C18 /* TLNotficationService.m */; };
 		2ED651C1200871AB0065A1B0 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2ED651BD200871AB0065A1B0 /* README.txt */; };
 		2ED651C2200871AB0065A1B0 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2ED651BF200871AB0065A1B0 /* libWeChatSDK.a */; };
 		2ED651C3200871AB0065A1B0 /* read_me.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2ED651C0200871AB0065A1B0 /* read_me.txt */; };
@@ -1277,6 +1278,8 @@
 		2EB9495E1FE0075000CE4B94 /* AdsService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AdsService.m; sourceTree = "<group>"; };
 		2EBFBF211FD8E56C0066F7E4 /* PublishService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PublishService.h; sourceTree = "<group>"; };
 		2EBFBF221FD8E56C0066F7E4 /* PublishService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PublishService.m; sourceTree = "<group>"; };
+		2EC75835202AAB09008C6C18 /* TLNotficationService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLNotficationService.h; sourceTree = "<group>"; };
+		2EC75836202AAB09008C6C18 /* TLNotficationService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLNotficationService.m; sourceTree = "<group>"; };
 		2ED651BB200871AB0065A1B0 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
 		2ED651BC200871AB0065A1B0 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
 		2ED651BD200871AB0065A1B0 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
@@ -3599,6 +3602,8 @@
 			children = (
 				2E42616220258B4300913DCF /* CoinService.h */,
 				2E42616320258B4300913DCF /* CoinService.m */,
+				2EC75835202AAB09008C6C18 /* TLNotficationService.h */,
+				2EC75836202AAB09008C6C18 /* TLNotficationService.m */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -4345,6 +4350,7 @@
 				211C03ED1FC6604800E51FCF /* NSObject+FBKVOController.m in Sources */,
 				211C041B1FC6604800E51FCF /* UIColor+MLPFlatColors.m in Sources */,
 				211DE6C21FB58B4C002FCF3D /* Foundation+Log.m in Sources */,
+				2EC75837202AAB09008C6C18 /* TLNotficationService.m in Sources */,
 				211C040F1FC6604800E51FCF /* KeyChainHelper.m in Sources */,
 				21C91D881FDBD604006EDB16 /* TLAlipayManager.m in Sources */,
 				2EE360D81FFA09A800A5C3EB /* EmojHelper.m in Sources */,
@@ -4758,7 +4764,7 @@
 				CODE_SIGN_ENTITLEMENTS = Coin/Coin.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 6PF7VHZB5Z;
+				DEVELOPMENT_TEAM = 7AF79WNB7Z;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4780,7 +4786,7 @@
 					"$(PROJECT_DIR)/Coin/Extension/sdk",
 					"$(PROJECT_DIR)/Coin/Extension/sdk/idfa",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.bcoin.coin;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bcoin.im;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -4798,7 +4804,7 @@
 				CODE_SIGN_ENTITLEMENTS = Coin/Coin.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 6PF7VHZB5Z;
+				DEVELOPMENT_TEAM = 7AF79WNB7Z;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4820,7 +4826,7 @@
 					"$(PROJECT_DIR)/Coin/Extension/sdk",
 					"$(PROJECT_DIR)/Coin/Extension/sdk/idfa",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.bcoin.coin;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bcoin.im;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;

@@ -21,7 +21,7 @@
     
     CGFloat rate = 100*self.beiHaoPingCount/(self.beiPingJiaCount*1.0);
     
-    NSString *rateStr = [NSString stringWithFormat:@"%.0lf%%", rate];
+    NSString *rateStr = [NSString stringWithFormat:@"%.0lf%%", rate - 0.4];
     
     return rateStr;
 }

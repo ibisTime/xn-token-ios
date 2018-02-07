@@ -18,14 +18,13 @@
 //好评次数
 @property (nonatomic, assign) NSInteger beiHaoPingCount;
 //好评率
-@property (nonatomic, copy) NSString *goodCommentRate;
+
+- (NSString *)goodCommentRate;
 
 //@property (nonatomic, copy) NSString *totalTradeCount;
 @property (nonatomic, copy) NSString *totalTradeCountEth;
 @property (nonatomic, copy) NSString *totalTradeCountSc;
 
-
-
-
 - (NSString *)convertTotalTradeCountWithCoin:(NSString *)coin;
+
 @end

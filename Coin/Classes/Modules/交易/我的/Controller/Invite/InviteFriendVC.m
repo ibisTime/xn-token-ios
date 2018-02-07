@@ -212,9 +212,7 @@
     }];
     
     self.numLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:16.0];
-    
     self.numLbl.textAlignment = NSTextAlignmentCenter;
-
     [profitView addSubview:self.numLbl];
     [self.numLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
@@ -459,8 +457,11 @@
     
     [http postWithSuccess:^(id responseObject) {
         
+//        inviteCount    邀请人数    number    @mock=0
+//        inviteProfitEth    邀请已获得的ETH收益    string    @mock=0.00
+//        inviteProfitSc
         //收益
-        NSString *profit = responseObject[@"data"][@"inviteProfit"];
+        NSString *profit = responseObject[@"data"][@"inviteProfitEth"];
         
         self.profitLbl.text = [CoinUtil convertToRealCoin:profit coin:kETH];
 //        [ profit convertToSimpleRealCoin];

@@ -39,7 +39,7 @@
     if (self.isCanLookManyCoin) {
         
         self.chooseCoin = self.coin;
-        CoinChangeView *topTitleView = [[CoinChangeView alloc] init];
+        CoinChangeView *topTitleView = [[CoinChangeView alloc] initWithFrame:CGRectMake(0, 0, 140, 40)];
         topTitleView.title = [self titleWithCoin:[CoinService shareService].currentCoin];
         self.navigationItem.titleView = topTitleView;
         self.topTitleView = topTitleView;

@@ -13,6 +13,7 @@
 
 @interface CoinChangeView()
 
+@property (nonatomic, strong) UIView *adapterView;
 @property (nonatomic, strong) UILabel *titleLbl;
 @property (nonatomic, strong) UIImageView *arrowImageView;
 
@@ -20,38 +21,57 @@
 
 @implementation CoinChangeView
 
-- (instancetype)init
+- (instancetype)initWithFrame:(CGRect)frame
 {
-    self = [super init];
+    self = [super initWithFrame:frame];
     if (self) {
         
-        self.titleLbl = [UILabel labelWithFrame:CGRectZero
-                                textAligment:NSTextAlignmentLeft
-                             backgroundColor:[UIColor whiteColor]
-                                        font:[UIFont systemFontOfSize:16]
-                                   textColor:[UIColor textColor]];
-        [self addSubview:self.titleLbl];
-        
-        //
-        self.arrowImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"交易_下拉"]];
-        [self addSubview:self.arrowImageView];
-        
-        //
-        [self.titleLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self);
-            make.centerY.equalTo(self);
-//            make.width.equalTo(@44);
-            
-        }];
-        
-        [self.arrowImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self.titleLbl.mas_right).offset(5);
-            make.centerY.equalTo(self);
-            make.right.equalTo(self.mas_right);
-        }];
+        [self setUpUI];
         
     }
     return self;
+}
+
+- (void)setUpUI {
+    
+    //
+    //背景
+    self.adapterView = [[UIView alloc] init];
+    [self addSubview:self.adapterView];
+    
+    
+    //
+    self.titleLbl = [UILabel labelWithFrame:CGRectZero
+                               textAligment:NSTextAlignmentLeft
+                            backgroundColor:[UIColor whiteColor]
+                                       font:[UIFont systemFontOfSize:16]
+                                  textColor:[UIColor textColor]];
+    [self.adapterView addSubview:self.titleLbl];
+    
+    [self.adapterView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.center.equalTo(self);
+    }];
+    
+    //
+    self.arrowImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"交易_下拉"]];
+    [self.adapterView addSubview:self.arrowImageView];
+    
+    //
+    [self.titleLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.left.top.bottom.equalTo(self.adapterView);
+        make.centerY.equalTo(self.adapterView);
+
+    }];
+    
+    [self.arrowImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.titleLbl.mas_right).offset(5);
+        make.centerY.equalTo(self.adapterView);
+        make.right.equalTo(self.adapterView.mas_right);
+    }];
+    
+    
+    
 }
 
 - (void)setTitle:(NSString *)title {

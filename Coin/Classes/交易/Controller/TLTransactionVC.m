@@ -8,9 +8,7 @@
 
 #import "TLTransactionVC.h"
 #import "TLUIHeader.h"
-
 #import "UITabBar+Badge.h"
-
 #import "TradeTableView.h"
 #import "CoinChangeView.h"
 #import "TLBannerView.h"
@@ -21,8 +19,6 @@
 #import "GengXinModel.h"
 #import "TLUIHeader.h"
 #import "WebVC.h"
-#import "PublishBuyVC.h"
-#import "PublishSellVC.h"
 #import "TradeBuyVC.h"
 #import "TradeSellVC.h"
 #import "SearchVC.h"
@@ -35,6 +31,7 @@
 #import "CoinUtil.h"
 #import "TestViewController.h"
 #import "CoinService.h"
+#import "TLNotficationService.h"
 
 @interface TLTransactionVC ()<SegmentDelegate, RefreshDelegate, UIScrollViewDelegate>
 
@@ -157,7 +154,7 @@
 - (void)navBarUI {
     
     //1.左边切换
-    CoinChangeView *coinChangeView = [[CoinChangeView alloc] init];
+    CoinChangeView *coinChangeView = [[CoinChangeView alloc] initWithFrame:CGRectMake(0, 0, 55, 40)];
     
     coinChangeView.title = @"ETH";
     
@@ -287,7 +284,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshData:) name:kAdvertiseListRefresh object:nil];
     
     //信任/取消信任
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshData) name:kTrustNotification object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshData) name:kTrustNotification object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLoginOut) name:kUserLoginOutNotification object:nil];
     
@@ -338,20 +335,8 @@
             return;
         }
         
-//        if ([PublishService isDevPublish]) {
         
-            [[PublishService shareInstance] publishBuy:self.navigationController];
-            
-
-
-//        } else {
-//
-//            PublishBuyVC *buyVC = [PublishBuyVC new];
-//            buyVC.publishType = PublishTypePublishOrSaveDraft;
-//            [self.navigationController pushViewController:buyVC animated:YES];
-//        }
-        
-
+        [[PublishService shareInstance] publishBuy:self.navigationController];
         
     } else if (index == 1) {
         
@@ -372,30 +357,30 @@
         }
         
         
-//        if ([PublishService isDevPublish]) {
-        
-            [[PublishService shareInstance] publishSell:self.navigationController];
-            
-//            TLPublishVC *sellVC = [[TLPublishVC alloc] init];
-//            sellVC.VCType = TLPublishVCTypeSell;
-//            sellVC.publishType = PublishTypePublishOrSaveDraft;
-//            [self.navigationController pushViewController:sellVC animated:YES];
-            
-//        } else {
-//
-//        PublishSellVC *sellVC = [PublishSellVC new];
-//        sellVC.publishType = PublishTypePublishOrSaveDraft;
-//        [self.navigationController pushViewController:sellVC animated:YES];
-//
-//        }
+        [[PublishService shareInstance] publishSell:self.navigationController];
         
     }
+    
 }
 
 - (void)refreshData:(NSNotification *)notification {
     
-    NSInteger index = [notification.object integerValue];
-    [self.labelUnil selectSortBarWithIndex:index];
+    id obj = notification.object;
+    if ([obj isKindOfClass:[TLNotificationObj class]]) {
+        
+        TLNotificationObj *notiObj = (TLNotificationObj *)obj;
+        
+        //币种改变
+        [CoinService shareService].currentCoin = notiObj.content;
+         [self changePageHelperCoin:[CoinService shareService].currentCoin
+                         pageHelper:self.helper];
+        self.changeView.title = [CoinService shareService].currentCoin;
+        //左右切换
+        NSInteger index = [notiObj.subContent integerValue];
+        [self.labelUnil selectSortBarWithIndex:index];
+        
+        
+    }
     
 }
 

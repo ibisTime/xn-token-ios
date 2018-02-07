@@ -7,11 +7,8 @@
 //
 
 #import "SearchVC.h"
-
 #import "CoinHeader.h"
-
 #import "SelectScrollView.h"
-
 #import "SearchUserVC.h"
 #import "SearchAdvertiseVC.h"
 

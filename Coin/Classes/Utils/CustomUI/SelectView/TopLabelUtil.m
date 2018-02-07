@@ -195,6 +195,10 @@
     
 }
 
+
+/**
+ 0左，右
+ */
 - (void)selectSortBarWithIndex:(NSInteger)index {
     
     UIButton *btn = [self viewWithTag:1000 + index];

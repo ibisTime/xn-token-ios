@@ -20,6 +20,6 @@
 @property (nonatomic, copy) NSString *currentCoin;
 
 
-- (NSString *)pageAddressApiCode:(NSString *)coin;
+//- (NSString *)pageAddressApiCode:(NSString *)coin;
 
 @end

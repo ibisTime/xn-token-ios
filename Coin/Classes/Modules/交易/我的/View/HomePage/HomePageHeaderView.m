@@ -7,10 +7,8 @@
 //
 
 #import "HomePageHeaderView.h"
-
 #import "TLUIHeader.h"
 #import "AppColorMacro.h"
-
 #import <UIButton+WebCache.h>
 #import "UILabel+Extension.h"
 #import "NSString+Extension.h"
@@ -174,13 +172,9 @@
     [textArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         
         UILabel *textLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:17.0];
-        
         textLbl.tag = 1400 + idx;
-        
         textLbl.numberOfLines = 0;
-        
         textLbl.textAlignment = NSTextAlignmentCenter;
-        
         [whiteView addSubview:textLbl];
         [textLbl mas_makeConstraints:^(MASConstraintMaker *make) {
             

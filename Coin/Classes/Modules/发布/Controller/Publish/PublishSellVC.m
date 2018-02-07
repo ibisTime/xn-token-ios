@@ -409,7 +409,7 @@
             [self.navigationController popToRootViewControllerAnimated:YES];
         });
         
-        [[NSNotificationCenter defaultCenter] postNotificationName:kAdvertiseListRefresh object:@"0"];
+//        [[NSNotificationCenter defaultCenter] postNotificationName:kAdvertiseListRefresh object:@"0"];
 
     } failure:^(NSError *error) {
         

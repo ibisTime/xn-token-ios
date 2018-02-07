@@ -20,8 +20,6 @@
 #import "TLAboutUsVC.h"
 #import "SettingVC.h"
 #import "PersonalitySettingVC.h"
-#import "PublishBuyVC.h"
-#import "PublishSellVC.h"
 #import "HTMLStrVC.h"
 #import "MyAdvertiseVC.h"
 #import "FansVC.h"
@@ -503,11 +501,7 @@
         {
             
             [[PublishService shareInstance] publishBuy:self.navigationController];
-            
-//            PublishBuyVC *buyVC = [PublishBuyVC new];
-//            buyVC.publishType = PublishTypePublishOrSaveDraft;
-//            [self.navigationController pushViewController:buyVC animated:YES];
-            
+
         }break;
             
         case MineHeaderSeletedTypeSell:
@@ -515,10 +509,6 @@
             
             [[PublishService shareInstance] publishSell:self.navigationController];
 
-//            PublishSellVC *sellVC = [PublishSellVC new];
-//            sellVC.publishType = PublishTypePublishOrSaveDraft;
-//            [self.navigationController pushViewController:sellVC animated:YES];
-            
         }break;
             
         default:

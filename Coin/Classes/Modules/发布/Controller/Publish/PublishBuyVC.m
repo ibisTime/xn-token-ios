@@ -8,11 +8,9 @@
 
 #import "PublishBuyVC.h"
 #import "PublishBuyView.h"
-
 #import "OverTimeModel.h"
 #import "QuotationModel.h"
 #import "KeyValueModel.h"
-
 #import "APICodeMacro.h"
 #import "UIBarButtonItem+convience.h"
 #import "NSString+Check.h"
@@ -397,7 +395,7 @@
         
         if (draft.isPublish == YES) {
             
-            [[NSNotificationCenter defaultCenter] postNotificationName:kAdvertiseListRefresh object:@"1"];
+//            [[NSNotificationCenter defaultCenter] postNotificationName:kAdvertiseListRefresh object:@"1"];
 
         }
         

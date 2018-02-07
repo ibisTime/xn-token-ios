@@ -10,7 +10,10 @@
 
 @interface CoinChangeView : UIButton
 
-- (instancetype)init;
+/**
+ ios11 下 frame 可已为CGRectZero
+ */
+- (instancetype)initWithFrame:(CGRect)frame;
 
 @property (nonatomic, copy) NSString *title;
 

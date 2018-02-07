@@ -456,7 +456,9 @@
                         block(array, YES, nil);
                     } fail:^(int code, NSString *msg) {
                         NSLog(@"revoke fail");
-                        NSString *info = [NSString stringWithFormat:@"消息撤回失败,code=%d,msg=%@",code,msg];
+//                        NSString *info = [NSString stringWithFormat:@"消息撤回失败,code=%d,msg=%@",code,msg];
+                        
+                         NSString *info = [NSString stringWithFormat:@"消息撤回失败"];
                         [[HUDHelper sharedInstance] tipMessage:info delay:3];
                         block(array, NO, nil);
                     }];

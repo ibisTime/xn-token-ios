@@ -28,6 +28,7 @@
 #import "CoinUtil.h"
 #import "UIBarButtonItem+convience.h"
 #import "ZMAuthVC.h"
+#import "TLNotficationService.h"
 
 @interface TLPublishVC ()<UITextFieldDelegate>
 
@@ -69,9 +70,7 @@
 @property (nonatomic, strong) AdvertiseModel *advertise;
 
 @property (nonatomic, copy) NSString *payType;
-
 @property (nonatomic, copy) NSString *currentCurrency;
-
 
 @end
 
@@ -124,8 +123,7 @@
         [self removePlaceholderView];
         [self realNameAuthAfter];
         [self.navigationController popViewControllerAnimated:YES];
-        
-        
+
     }];
     
 }
@@ -184,14 +182,10 @@
         reqArr = @[hangQingReq,timeChooseReq,hintReq,adsDetailReq];
 //        reqArr = @[hangQingReq,timeChooseReq,adsDetailReq];
 
-        
     } else {
         
         reqArr = @[hangQingReq,timeChooseReq,hintReq];
 //        reqArr = @[hangQingReq,timeChooseReq];
-
-        
-
     }
     //
     NBBatchReqest *batchReq = [[NBBatchReqest alloc] initWithReqArray:reqArr];
@@ -238,6 +232,7 @@
         // 控件在 setUpUI中初始化
         self.payTypePickerView.tagNames = [PayTypeModel payTypeNames];
         self.payTimeLimitPickerView.tagNames = [publishService obtainLimitTimes];
+        self.payTimeLimitView.textField.text = [[publishService obtainLimitTimes] objectAtIndex:0];
         
         [self handleHangQingWithRes:hangQingReqCopy.responseObject];
         
@@ -263,7 +258,6 @@
     self.marketPriceView.contentLbl.text = [[PublishService shareInstance] convertHangQing:[self.quotationModel.mid stringValue]];
     
     //如果有溢价应该 x 溢价率
-    
     NSString *premiumStr = self.premiumView.textField.text;
     if ([premiumStr valid]) {
         
@@ -318,24 +312,14 @@
 
 }
 
-//
 - (void)publish {
     
-    
     [self publishWithType:kPublish];
-//    if (self.publishType == PublishTypePublishDraft) {
-//
-//    } else {
-//
-//
-//    }
     
 }
 
 #pragma mark -提交事件
 - (void)publishWithType:(NSString *)publishOrSaveDraft {
-//- (void)publish {
-
     NSString *premium = self.premiumView.textField.text;
     NSString *protectPrice = self.protectPriceView.textField.text;
     NSString *min = self.minTradeAmountView.textField.text;
@@ -451,15 +435,21 @@
         
         //        NSString *str = draft.isPublish == YES ? @"发布成功": @"保存成功";
         //        [TLAlert alertWithSucces:str];
-        
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             
             self.tabBarController.selectedIndex = 2;
-            
             [self.navigationController popToRootViewControllerAnimated:YES];
+            
         });
         
-        [[NSNotificationCenter defaultCenter] postNotificationName:kAdvertiseListRefresh object:@"0"];
+        TLNotificationObj *notificationObj = [[TLNotificationObj alloc] init];
+        notificationObj.name = kAdvertiseListRefresh;
+        notificationObj.type = TLNotificationTypeRefreshAdsList;
+        notificationObj.content = tradeCoin;
+        notificationObj.subContent = tradeType;
+        notificationObj.contentIntroduce = @"content 为币种，subContent 为交易类型 ";
+        [[NSNotificationCenter defaultCenter] postNotificationName:notificationObj.name
+                          object:notificationObj];
         
     } failure:^(NSError *error) {
         

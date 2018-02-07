@@ -138,7 +138,7 @@
 
     
     //价格区间
-    UIView *priceZoneView = [self priceZoneView:CGRectMake(0, self.coinTypeView.yy, SCREEN_WIDTH, 80)];
+    UIView *priceZoneView = [self priceZoneView:CGRectMake(0, self.adsTypeView.yy, SCREEN_WIDTH, 80)];
     [self.view addSubview:priceZoneView];
     
     

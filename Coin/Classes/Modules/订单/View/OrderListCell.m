@@ -223,7 +223,7 @@
 
     UIColor *tradeColor = order.isBuy ? kPaleBlueColor: kThemeColor;
 
-    self.tradeTypeLbl.text = [NSString stringWithFormat:@"%@%@",tradeText,_order.tradeCoin];
+    self.tradeTypeLbl.text = [NSString stringWithFormat:@"%@ %@",tradeText,_order.tradeCoin];
     self.tradeTypeLbl.textColor = tradeColor;
     self.typeBgView.layer.borderColor = tradeColor.CGColor;
     

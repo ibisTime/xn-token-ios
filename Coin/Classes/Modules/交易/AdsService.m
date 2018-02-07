@@ -8,13 +8,10 @@
 
 #import "AdsService.h"
 #import "AdvertiseModel.h"
-#import "PublishBuyVC.h"
 #import "TradeSellVC.h"
 #import "TLPublishVC.h"
 //
 #import "TradeBuyVC.h"
-//
-#import "PublishSellVC.h"
 
 @implementation AdsService
 
@@ -37,11 +34,6 @@
             sellVC.publishType = PublishTypePublishRedit;
             sellVC.VCType = TLPublishVCTypeSell;
             [currentVC.navigationController pushViewController:sellVC animated:YES];
-
-//            PublishSellVC *sellVC = [[PublishSellVC alloc] init];
-//            sellVC.adsCode = advertiseModel.code;
-//            sellVC.publishType = PublishTypePublishRedit;
-//            [currentVC.navigationController pushViewController:sellVC animated:YES];
             return;
 
         }
@@ -64,17 +56,12 @@
             buyVC.VCType = TLPublishVCTypeBuy;
             [currentVC.navigationController pushViewController:buyVC animated:YES];
             
-//            PublishBuyVC *buyVC = [[PublishBuyVC alloc] init];
-//            buyVC.adsCode = advertiseModel.code;
-//            buyVC.publishType = PublishTypePublishRedit;
-//            [currentVC.navigationController pushViewController:buyVC animated:YES];
             return;
  
         }
         
         TradeSellVC *sellVC = [TradeSellVC new];
         sellVC.adsCode = advertiseModel.code;
-        //        sellVC.type = TradeBuyPositionTypeTrade;
         [currentVC.navigationController pushViewController:sellVC animated:YES];
         
     }

@@ -29,8 +29,7 @@
 #define FONT(x)    [UIFont systemFontOfSize:x]
 
 #define CoinWeakSelf  __weak typeof(self) weakSelf = self;
-//刷新广告列表
-#define kAdvertiseListRefresh @"kAdvertiseListRefresh"
+
 //信任
 #define kTrustNotification  @"kTrustNotification"
 //广告下架

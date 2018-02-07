@@ -26,17 +26,7 @@
     
 }
 
-- (NSString *)pageAddressApiCode:(NSString *)coin {
-    
-    NSDictionary *dict = @{
-                           kETH : @"625205",
-                           kSC : @"802155",
-                           kBTC : @""
-                           };
-    
-    return dict[coin];
-    
-}
+
 
 
 @end
