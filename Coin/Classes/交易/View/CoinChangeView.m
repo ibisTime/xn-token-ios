@@ -38,6 +38,7 @@
     //背景
     self.adapterView = [[UIView alloc] init];
     [self addSubview:self.adapterView];
+    self.adapterView.userInteractionEnabled = NO;
     
     
     //
@@ -50,6 +51,9 @@
     
     [self.adapterView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.equalTo(self);
+        make.left.equalTo(self);
+        make.right.equalTo(self);
+
     }];
     
     //

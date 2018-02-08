@@ -83,33 +83,36 @@
      并移动到第一位
      */
     //1. 获取订单详情
-    TLNetworking *http = [TLNetworking new];
-    http.code = @"625251";
-    http.parameters[@"code"] = groupId;
-    [http postWithSuccess:^(id responseObject) {
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         
-        OrderModel *orderModel =  [OrderModel tl_objectWithDictionary:responseObject[@"data"]];
-        
-        __block BOOL hasLook = NO;
-        [OrderModel.ingStatusList enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        TLNetworking *http = [TLNetworking new];
+        http.code = @"625251";
+        http.parameters[@"code"] = groupId;
+        [http postWithSuccess:^(id responseObject) {
             
-            if ([orderModel.status equalsString:obj]) {
-                //正在进行的订单，左边
-                [self changeLeftTopMsgRedHintToHave];
-                hasLook = YES;
+            OrderModel *orderModel =  [OrderModel tl_objectWithDictionary:responseObject[@"data"]];
+            
+            __block BOOL hasLook = NO;
+            [OrderModel.ingStatusList enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                
+                if ([orderModel.status equalsString:obj]) {
+                    //正在进行的订单，左边
+                    [self changeLeftTopMsgRedHintToHave];
+                    hasLook = YES;
+                }
+                
+            }];
+            
+            if (!hasLook) {
+                [self changeRightTopMsgRedHintToHave];
             }
+            
+        } failure:^(NSError *error) {
             
         }];
         
-        if (!hasLook) {
-            [self changeRightTopMsgRedHintToHave];
-        }
-        
-    } failure:^(NSError *error) {
-        
-    }];
-    
-    
+    });
+  
 }
 
 //

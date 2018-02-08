@@ -18,7 +18,7 @@
 /**
  上面类型
  */
-@property (nonatomic, strong) UIScrollView *typeSwitchView;
+//@property (nonatomic, strong) UIScrollView *typeSwitchView;
 
 /**
  下部内容切换
@@ -36,15 +36,15 @@
     self = [super initWithFrame:frame];
     if (self) {
         
-        CGFloat topHeight = 50;
+        CGFloat topHeight = 0;
         
         //
-        self.typeSwitchView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, topHeight)];
-        [self addSubview:self.typeSwitchView];
-        self.typeSwitchView.backgroundColor = [UIColor redColor];
+//        self.typeSwitchView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, topHeight)];
+//        [self addSubview:self.typeSwitchView];
+//        self.typeSwitchView.backgroundColor = [UIColor redColor];
         
         //
-        self.contentSwitchView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, self.typeSwitchView.yy, frame.size.width, frame.size.height - topHeight )];
+        self.contentSwitchView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, topHeight, frame.size.width, frame.size.height - topHeight )];
         [self addSubview:self.contentSwitchView];
         self.contentSwitchView.delegate = self;
         self.contentSwitchView.pagingEnabled = YES;
@@ -98,6 +98,13 @@
     }
     
 }
+
+- (void)scrollToIndex:(NSInteger)idx {
+    
+    [self.contentSwitchView setContentOffset:CGPointMake(idx*self.contentSwitchView.width, 0) animated:YES];
+    
+}
+
 
 //#pragma mark- 操作上面
 - (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset {
@@ -188,6 +195,7 @@
     
     //
     [vcs enumerateObjectsUsingBlock:^(UIViewController * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        
         
         
     }];

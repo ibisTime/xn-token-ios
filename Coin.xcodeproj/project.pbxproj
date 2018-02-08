@@ -338,6 +338,7 @@
 		2E42616B2028431200913DCF /* TLSwitchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E42616A2028431200913DCF /* TLSwitchView.m */; };
 		2E42616E20284BEC00913DCF /* TestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E42616D20284BEC00913DCF /* TestViewController.m */; };
 		2E42617120284CA600913DCF /* TestContentVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E42617020284CA600913DCF /* TestContentVC.m */; };
+		2E5F33A9202BF25F00B2F263 /* TLLeftRightView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E5F33A8202BF25F00B2F263 /* TLLeftRightView.m */; };
 		2E67CD9C1FE253850030C827 /* in.caf in Resources */ = {isa = PBXBuildFile; fileRef = 2E67CD9B1FE253850030C827 /* in.caf */; };
 		2E973FC91FDA279C005C2D5F /* LangSwitcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E973FC81FDA279C005C2D5F /* LangSwitcher.m */; };
 		2E973FCF1FDABA0F005C2D5F /* ChatSysMsgCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E973FCE1FDABA0F005C2D5F /* ChatSysMsgCell.m */; };
@@ -1228,6 +1229,8 @@
 		2E5F19221FED0CC900100420 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		2E5F19231FED0CD500100420 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		2E5F19241FED0CDD00100420 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
+		2E5F33A7202BF25F00B2F263 /* TLLeftRightView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLLeftRightView.h; sourceTree = "<group>"; };
+		2E5F33A8202BF25F00B2F263 /* TLLeftRightView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLLeftRightView.m; sourceTree = "<group>"; };
 		2E67CD9B1FE253850030C827 /* in.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = in.caf; sourceTree = "<group>"; };
 		2E973FC71FDA279C005C2D5F /* LangSwitcher.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LangSwitcher.h; sourceTree = "<group>"; };
 		2E973FC81FDA279C005C2D5F /* LangSwitcher.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LangSwitcher.m; sourceTree = "<group>"; };
@@ -1515,6 +1518,8 @@
 				211A34DA1FB4083300FEB71F /* MineTableView.m */,
 				211A34DC1FB4245D00FEB71F /* MineCell.h */,
 				211A34DD1FB4245D00FEB71F /* MineCell.m */,
+				2E5F33A7202BF25F00B2F263 /* TLLeftRightView.h */,
+				2E5F33A8202BF25F00B2F263 /* TLLeftRightView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -4489,6 +4494,7 @@
 				211DE6BB1FB58B4C002FCF3D /* NSString+CGSize.m in Sources */,
 				211DE6B81FB58B4C002FCF3D /* UIControl+Block.m in Sources */,
 				2E973FEA1FDE31F7005C2D5F /* OrderListVC.m in Sources */,
+				2E5F33A9202BF25F00B2F263 /* TLLeftRightView.m in Sources */,
 				2EE360FD1FFA09A800A5C3EB /* IMAMsg+UITableViewCell.m in Sources */,
 				211DE6C41FB58B4C002FCF3D /* HttpSign.m in Sources */,
 				211C043B1FC6604800E51FCF /* MenuItem.m in Sources */,

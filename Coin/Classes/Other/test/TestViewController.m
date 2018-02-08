@@ -39,9 +39,7 @@
 // delegate
 - (UIView *)currentIndex:(NSInteger)index alreadyAdd:(BOOL)already{
     
-    
     NSLog(@"%ld",index);
-    
     if (already) {
         //已经添加不进处理
         return nil;

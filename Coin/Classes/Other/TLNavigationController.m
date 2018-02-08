@@ -55,16 +55,16 @@
     [super pushViewController:viewController animated:YES];
     
     // 修正push控制器tabbar上移问题
-    if (@available(iOS 11.0, *)){
-
-        // 修改tabBra的frame
-        CGRect frame = self.tabBarController.tabBar.frame;
-
-        frame.origin.y = [UIScreen mainScreen].bounds.size.height - frame.size.height;
-
-        self.tabBarController.tabBar.frame = frame;
-
-    }
+//    if (@available(iOS 11.0, *)){
+//
+//        // 修改tabBra的frame
+//        CGRect frame = self.tabBarController.tabBar.frame;
+//
+//        frame.origin.y = [UIScreen mainScreen].bounds.size.height - frame.size.height;
+//
+//        self.tabBarController.tabBar.frame = frame;
+//
+//    }
 }
 
 @end

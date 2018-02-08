@@ -187,10 +187,10 @@
         make.edges.mas_equalTo(UIEdgeInsetsZero);
     }];
     
-    if (@available(iOS 11.0, *)) {
-        
-        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-    }
+//    if (@available(iOS 11.0, *)) {
+//        
+//        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+//    }
     
     //1.banner
     TLBannerView *bannerView = [[TLBannerView alloc] initWithFrame:CGRectMake(0, 0,SCREEN_WIDTH, kWidth(140))];

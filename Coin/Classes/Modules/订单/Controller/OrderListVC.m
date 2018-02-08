@@ -94,7 +94,7 @@
     helper.code = @"625250";
     helper.start = 1;
     helper.limit = 40;
-    helper.parameters[@"tradeCoin"] = @"ETH";
+//    helper.parameters[@"tradeCoin"] = @"ETH";
     helper.parameters[@"statusList"] = self.statusList;
     helper.parameters[@"tradeCurrency"] = @"CNY";
     //切换用户时外部会去更新

@@ -28,9 +28,9 @@
 #import "NSString+Extension.h"
 #import "AppConfig.h"
 #import "CoinUtil.h"
+#import "TLLeftRightView.h"
 
 @interface InviteFriendVC ()
-
 @property (nonatomic, strong) UIView *centerView;
 //轮播图
 @property (nonatomic,strong) TLBannerView *bannerView;
@@ -46,12 +46,17 @@
 @property (nonatomic, strong) UILabel *activityRuleLbl;
 //滚动图
 @property (nonatomic, strong) UIScrollView *scrollView;
-//邀请人数
-@property (nonatomic, strong) UILabel *numLbl;
-//收益
-@property (nonatomic, strong) UILabel *profitLbl;
+////邀请人数
+//@property (nonatomic, strong) UILabel *numLbl;
+////收益
+//@property (nonatomic, strong) UILabel *profitLbl;
 
 @property (nonatomic, copy) NSString *shareBaseUrl;
+
+@property (nonatomic, strong) TLLeftRightView *peopleCountView;
+@property (nonatomic, strong) TLLeftRightView *ethProfitView;
+@property (nonatomic, strong) TLLeftRightView *scProfitView;
+
 
 
 @end
@@ -87,8 +92,7 @@
 //  http://h5域名手机号
     WebVC *vc = [[WebVC alloc] init];
     if (self.shareBaseUrl) {
-        
-//        vc.url = [NSString stringWithFormat:@"%@/user/qrcode.html?m=%@",self.shareBaseUrl,[TLUser user].secretUserId];
+
         
         vc.url = [NSString stringWithFormat:@"%@/user/qrcode.html?inviteCode=%@",self.shareBaseUrl,[TLUser user].secretUserId];
         vc.title = [LangSwitcher switchLang:@"点击分享" key:nil];
@@ -168,112 +172,97 @@
 - (void)initSubviews {
 
     self.view.backgroundColor = kWhiteColor;
-    
     CGFloat leftMargin = 15;
-    
-    // 此处巨坑
-//    UIImageView *inviteIV = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 170)];
-//    inviteIV.image = kImage(@"邀请好友图片");
-//    [self.scrollView addSubview:inviteIV];
-    
-    //提成收益
+
+    //提成收益, 背景
     UIView *profitView = [[UIView alloc] initWithFrame:CGRectMake(leftMargin, self.bannerView.yy + 15, kScreenWidth - 2*leftMargin, 100)];
     [self.scrollView addSubview:profitView];
     profitView.backgroundColor = [UIColor colorWithHexString:@"#fff9eb"];
     profitView.layer.shadowOffset = CGSizeMake(4, 4);
     profitView.layer.shadowOpacity = 1.0f;
     profitView.layer.shadowColor = kBackgroundColor.CGColor;
-    
-    //
-    UIButton *profitViewLeftBtn = [[UIButton alloc] init];
-    [profitView addSubview:profitViewLeftBtn];
-    [profitViewLeftBtn addTarget:self action:@selector(historyFriends) forControlEvents:UIControlEventTouchUpInside];
-    [profitViewLeftBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.left.top.bottom.equalTo(profitView);
-        make.width.equalTo(profitView.mas_width).dividedBy(2);
-        
-    }];
 
-    
     //邀请人数
-    UILabel *personTextLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kThemeColor font:12.0];
+    self.peopleCountView = [[TLLeftRightView alloc] initWithFrame:CGRectMake(0, 5, profitView.width, 30)];
+    [profitView addSubview:self.peopleCountView];
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(historyFriends)];
+    [self.peopleCountView addGestureRecognizer:tapGestureRecognizer];
     
-    personTextLbl.text = [LangSwitcher switchLang:@"成功邀请（人）" key:nil];
+    self.ethProfitView = [[TLLeftRightView alloc] initWithFrame:CGRectMake(0,  self.peopleCountView.yy, profitView.width, 30)];
+    [profitView addSubview:self.ethProfitView];
     
-    personTextLbl.textAlignment = NSTextAlignmentCenter;
+    self.scProfitView = [[TLLeftRightView alloc] initWithFrame:CGRectMake(0, self.ethProfitView.yy, profitView.width, 30)];
+    [profitView addSubview:self.scProfitView];
     
-    [profitView addSubview:personTextLbl];
-    [personTextLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.centerX.equalTo(profitView.mas_centerX).offset(-profitView.width/4.0);
-        make.top.equalTo(@25);
-        
-    }];
-    
-    self.numLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:16.0];
-    self.numLbl.textAlignment = NSTextAlignmentCenter;
-    [profitView addSubview:self.numLbl];
-    [self.numLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.top.equalTo(personTextLbl.mas_bottom).offset(18);
-        make.centerX.equalTo(profitView.mas_centerX).offset(-profitView.width/4.0);
-        
-    }];
-    
-    //收益
-    UILabel *countTextLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kThemeColor font:12.0];
-    
-    countTextLbl.text = [LangSwitcher switchLang:@"提成收益（ETH）" key:nil];
+//    UILabel *personTextLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kThemeColor font:12.0];
+//    personTextLbl.text = [LangSwitcher switchLang:@"成功邀请（人）" key:nil];
+//    personTextLbl.textAlignment = NSTextAlignmentCenter;
+//    [profitView addSubview:personTextLbl];
+//    [personTextLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+//
+//        make.centerX.equalTo(profitView.mas_centerX).offset(-profitView.width/4.0);
+//        make.top.equalTo(@25);
+//
+//    }];
+//
+//    self.numLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:16.0];
+//    self.numLbl.textAlignment = NSTextAlignmentCenter;
+//    [profitView addSubview:self.numLbl];
+//    [self.numLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+//
+//        make.top.equalTo(personTextLbl.mas_bottom).offset(18);
+//        make.centerX.equalTo(profitView.mas_centerX).offset(-profitView.width/4.0);
+//
+//    }];
+//
+//    //收益
+//    UILabel *countTextLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kThemeColor font:12.0];
+//    countTextLbl.text = [LangSwitcher switchLang:@"提成收益（ETH）" key:nil];
+//    countTextLbl.textAlignment = NSTextAlignmentCenter;
+//    [profitView addSubview:countTextLbl];
+//    [countTextLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+//
+//        make.centerX.equalTo(profitView.mas_centerX).offset(profitView.width/4.0);
+//        make.top.equalTo(@25);
+//
+//    }];
+//
+//    self.profitLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:16.0];
+//    self.profitLbl.textAlignment = NSTextAlignmentCenter;
+//    [profitView addSubview:self.profitLbl];
+//    [self.profitLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+//
+//        make.top.equalTo(personTextLbl.mas_bottom).offset(18);
+//        make.centerX.equalTo(profitView.mas_centerX).offset(profitView.width/4.0);
+//
+//    }];
 
-    countTextLbl.textAlignment = NSTextAlignmentCenter;
-    
-    [profitView addSubview:countTextLbl];
-    [countTextLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.centerX.equalTo(profitView.mas_centerX).offset(profitView.width/4.0);
-        make.top.equalTo(@25);
-        
-    }];
-    
-    self.profitLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:16.0];
-    
-    self.profitLbl.textAlignment = NSTextAlignmentCenter;
-    
-    [profitView addSubview:self.profitLbl];
-    [self.profitLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.top.equalTo(personTextLbl.mas_bottom).offset(18);
-        make.centerX.equalTo(profitView.mas_centerX).offset(profitView.width/4.0);
-        
-    }];
-    
     //推荐按钮
     CGFloat btnMargin = 40;
     CGFloat btnWidth = (SCREEN_WIDTH - 3*btnMargin)/2.0;
     CGFloat btnHeight = 40;
     CGFloat font = 16;
-    
+
     //左边按钮
-   UIButton *leftBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"分享链接" key:nil] titleColor:kWhiteColor backgroundColor:kThemeColor titleFont:font cornerRadius:btnHeight/2.0];
+   UIButton *leftBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"分享链接" key:nil]
+                                      titleColor:kWhiteColor
+                                 backgroundColor:kThemeColor
+                                       titleFont:font
+                                    cornerRadius:btnHeight/2.0];
     [self.scrollView addSubview:leftBtn];
     [leftBtn addTarget:self action:@selector(inviteFriend) forControlEvents:UIControlEventTouchUpInside];
     leftBtn.frame = CGRectMake(btnMargin,  profitView.yy + 20, btnWidth, btnHeight);
-    
+
    //右边按钮
-   UIButton *rightBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"分享二维码" key:nil] titleColor:kWhiteColor backgroundColor:kThemeColor titleFont:font cornerRadius:btnHeight/2.0];
+   UIButton *rightBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"分享二维码" key:nil]
+                                       titleColor:kWhiteColor
+                                  backgroundColor:kThemeColor
+                                        titleFont:font
+                                     cornerRadius:btnHeight/2.0];
     [self.scrollView addSubview:rightBtn];
     [rightBtn addTarget:self action:@selector(shareQRCode) forControlEvents:UIControlEventTouchUpInside];
     rightBtn.frame = CGRectMake(leftBtn.xx + btnMargin,  leftBtn.top, btnWidth, btnHeight);
 
-
-    
-//    //我要推荐
-//    UIButton *recommendBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"我要推荐" key:nil] titleColor:kWhiteColor backgroundColor:kThemeColor titleFont:kWidth(18) cornerRadius:24];
-//    [recommendBtn addTarget:self action:@selector(inviteFriend) forControlEvents:UIControlEventTouchUpInside];
-//    recommendBtn.frame = CGRectMake(40, profitView.yy + 20, kScreenWidth - 80, 48);
-//    [self.scrollView addSubview:recommendBtn];
-    
     CGFloat iconTopCommon = leftBtn.yy;
     //活动规则
     [self.scrollView addSubview:self.centerView];
@@ -297,29 +286,17 @@
     
     //活动规则
     UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(leftMargin, 0, kScreenWidth - 2*leftMargin, 100)];
-    
     bgView.tag = 1200;
-    
     bgView.backgroundColor = [UIColor colorWithHexString:@"#fff9eb"];
-    
     bgView.layer.shadowOffset = CGSizeMake(4, 4);
-    
     bgView.layer.shadowOpacity = 1.0f;
-    
     bgView.layer.shadowColor = kBackgroundColor.CGColor;
-    
     [blueView addSubview:bgView];
-    
     UILabel *promptLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kThemeColor font:13.0];
-    
     promptLbl.backgroundColor = kClearColor;
-    
     promptLbl.numberOfLines = 0;
-    
     promptLbl.frame = CGRectMake(leftMargin + 3, 10, bgView.width - 2*leftMargin, 70);
-    
     [bgView addSubview:promptLbl];
-    
     self.activityRuleLbl = promptLbl;
     
 }
@@ -427,7 +404,6 @@
     http.code = @"805806";
     http.parameters[@"type"] = @"2";
     http.parameters[@"location"] = @"activity";
-    
     [http postWithSuccess:^(id responseObject) {
         
         weakSelf.bannerRoom = [BannerModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
@@ -461,14 +437,18 @@
 //        inviteProfitEth    邀请已获得的ETH收益    string    @mock=0.00
 //        inviteProfitSc
         //收益
-        NSString *profit = responseObject[@"data"][@"inviteProfitEth"];
+        NSString *profitEth = responseObject[@"data"][@"inviteProfitEth"];
+        self.ethProfitView.rightLbl.text = [CoinUtil convertToRealCoin:profitEth coin:kETH];
+        self.ethProfitView.leftLbl.text = [LangSwitcher switchLang:@"提成收益（ETH）" key:nil];
         
-        self.profitLbl.text = [CoinUtil convertToRealCoin:profit coin:kETH];
-//        [ profit convertToSimpleRealCoin];
+        NSString *profitSc = responseObject[@"data"][@"inviteProfitSc"];
+        self.scProfitView.rightLbl.text = [CoinUtil convertToRealCoin:profitSc coin:kSC];
+        self.scProfitView.leftLbl.text = [LangSwitcher switchLang:@"提成收益（SC）" key:nil];
+
         //邀请人数
         NSNumber *inviteNum = responseObject[@"data"][@"inviteCount"];
-        
-        self.numLbl.text = [inviteNum stringValue];
+        self.peopleCountView.rightLbl.text = [inviteNum stringValue];
+        self.peopleCountView.leftLbl.text = @"成功邀请人数（人）";
         
     } failure:^(NSError *error) {
         
@@ -501,20 +481,13 @@
     self.shareUrl = shareStr;
     
     TLNetworking *http = [TLNetworking new];
-
     http.code = USER_CKEY_CVALUE;
     http.parameters[SYS_KEY] = @"reg_url";
-
     [http postWithSuccess:^(id responseObject) {
 
         NSString *url = responseObject[@"data"][@"cvalue"];
         self.shareBaseUrl = url;
-//        NSString *shareStr = [NSString stringWithFormat:@"%@/?mobile=%@&kind=C", url, [TLUser user].secretUserId];
-        
-        //
         NSString *shareStr = [NSString stringWithFormat:@"%@/?inviteCode=%@", url, [TLUser user].secretUserId];
-
-        //
         self.shareUrl = shareStr;
 
     } failure:^(NSError *error) {
@@ -522,12 +495,6 @@
 
     }];
 }
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 
 
 @end

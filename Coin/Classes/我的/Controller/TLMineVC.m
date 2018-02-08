@@ -345,10 +345,10 @@
     
     self.tableView.tableHeaderView = self.headerView;
     
-    if (@available(iOS 11.0, *)) {
-        
-        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-    }
+//    if (@available(iOS 11.0, *)) {
+//        
+//        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+//    }
     
     [self.view addSubview:self.tableView];
 }

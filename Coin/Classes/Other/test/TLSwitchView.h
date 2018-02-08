@@ -24,4 +24,11 @@
 
 @property (nonatomic, assign) NSInteger count;
 
+
+/**
+ 滚动到第几页
+ @param idx 页数, 0 开始
+ */
+- (void)scrollToIndex:(NSInteger)idx;
+
 @end
