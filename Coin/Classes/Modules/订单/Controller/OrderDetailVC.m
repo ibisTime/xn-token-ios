@@ -7,13 +7,10 @@
 //
 
 #import "OrderDetailVC.h"
-
 #import "CoinHeader.h"
-
 #import "OrderDetailHeaderView.h"
 #import "OrderCommentView.h"
 #import "OrderArbitrationView.h"
-
 #import "NSString+Date.h"
 #import "UIBarButtonItem+convience.h"
 

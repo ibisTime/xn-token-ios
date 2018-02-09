@@ -137,7 +137,6 @@
                               if (count > 0) {
                                   
                                   [[self rootTabBarController].tabBar showBadgeOnItemIndex:location];
-//                                  [UIApplication sharedApplication].applicationIconBadgeNumber = count;
                                   
                               } else {
                                   
@@ -206,9 +205,17 @@
 
 - (UITabBarController *)rootTabBarController {
     
-    UITabBarController *tabBarController = (UITabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
-    return tabBarController;
-    
+    id obj = [UIApplication sharedApplication].keyWindow.rootViewController;
+    if ([obj isKindOfClass:[UITabBarController class]]) {
+        
+        UITabBarController *tabBarController = (UITabBarController *)obj;
+        return tabBarController;
+        
+    } else {
+        
+        return nil;
+    }
+
 }
 
 
@@ -232,10 +239,10 @@
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
-     
-    //先配置到，检查更新的VC
-    if (0) {
-        
+    [AppConfig config].isUploadCheck = NO;
+    
+    if (1) {
+        //先配置到，检查更新的VC,开启更新检查
         TLUpdateVC *updateVC = [[TLUpdateVC alloc] init];
         self.window.rootViewController = updateVC;
 

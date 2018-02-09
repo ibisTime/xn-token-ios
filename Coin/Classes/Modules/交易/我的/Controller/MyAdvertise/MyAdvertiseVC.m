@@ -9,11 +9,11 @@
 #import "MyAdvertiseVC.h"
 
 #import "CoinHeader.h"
-#import "CoinService.h"
 #import "SelectScrollView.h"
 #import "CoinChangeView.h"
 #import "MyAdvertiseListVC.h"
 #import "FilterView.h"
+#import "CoinUtil.h"
 
 @interface MyAdvertiseVC ()
 
@@ -36,7 +36,7 @@
     [super viewDidLoad];
     
     CoinChangeView *topTitleView = [[CoinChangeView alloc] initWithFrame:CGRectMake(0, 0, 140, 40)];
-    topTitleView.title = [self titleWithCoin:[CoinService shareService].currentCoin];
+    topTitleView.title = [self titleWithCoin:kETH];
     self.navigationItem.titleView = topTitleView;
     self.topTitleView = topTitleView;
     [self initSelectScrollView];

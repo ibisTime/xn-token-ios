@@ -76,7 +76,7 @@
     UILabel *promptLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kThemeColor font:12.0];
     
     NSString *currency = self.currency.currency;
-    promptLbl.text = [NSString stringWithFormat:@"%@钱包地址禁止充值除ETH之外的其他资产, 任何%@资产充值将不可找回",currency,currency];
+    promptLbl.text = [NSString stringWithFormat:@"%@钱包地址禁止充值除%@之外的其他资产, 任何%@资产充值将不可找回",currency,currency,currency];
     promptLbl.text = [LangSwitcher switchLang: promptLbl.text key:nil];
     promptLbl.frame = CGRectMake(0, 0, kScreenWidth, 50);
     

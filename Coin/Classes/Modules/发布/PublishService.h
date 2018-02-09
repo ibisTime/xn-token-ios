@@ -69,6 +69,8 @@ typedef NS_ENUM(NSInteger, PublishType) {
 @property (nonatomic, copy) NSString *premiumRate;
 @property (nonatomic, copy) NSString *price;
 @property (nonatomic, copy) NSString *payLimit;
+@property (nonatomic, copy) NSString *tradeCoin;
+
 
 
 

@@ -29,6 +29,7 @@ void TLLog(NSString *format, ...) {
     dispatch_once(&onceToken, ^{
         
         config = [[AppConfig alloc] init];
+        config.isUploadCheck = NO;
         
     });
     

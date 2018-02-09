@@ -281,12 +281,17 @@
 
 - (void)addNotification{
     //发布购买/出售
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshData:) name:kAdvertiseListRefresh object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(refreshData:)
+                                                 name:kAdvertiseListRefresh
+                                               object:nil];
     
     //信任/取消信任
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshData) name:kTrustNotification object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLoginOut) name:kUserLoginOutNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(userLoginOut)
+                                                 name:kUserLoginOutNotification
+                                               object:nil];
     
 }
 
@@ -377,6 +382,7 @@
         self.changeView.title = [CoinService shareService].currentCoin;
         //左右切换
         NSInteger index = [notiObj.subContent integerValue];
+        index = index == 1 ? 0 : 1;
         [self.labelUnil selectSortBarWithIndex:index];
         
         

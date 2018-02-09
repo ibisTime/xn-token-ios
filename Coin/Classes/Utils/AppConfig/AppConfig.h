@@ -32,6 +32,10 @@ FOUNDATION_EXPORT void TLLog(NSString *format, ...);
 @property (nonatomic,strong) NSString *shareBaseUrl;
 @property (nonatomic, assign) BOOL isChecking;
 
+
+@property (nonatomic, assign) BOOL isUploadCheck;
+
+
 - (NSString *)apiUrl;
 //- (NSString *)ipUrl;
 

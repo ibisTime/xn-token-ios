@@ -96,7 +96,8 @@ NSString *const kCNY = @"CNY";
     
     NSDictionary *dict = @{
                            kETH : @"以太币",
-                           kSC : @"云储币"
+                           kSC : @"云储币",
+                           kBTC : @"比特币"
                            };
     
     return dict[coin];

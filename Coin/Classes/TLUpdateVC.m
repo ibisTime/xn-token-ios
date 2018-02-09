@@ -24,7 +24,7 @@
 - (void)viewWillAppear:(BOOL)animated {
 
     [super viewWillAppear:animated];
-    [self updateApp];
+//    [self updateApp];
 
 }
 
@@ -36,12 +36,17 @@
     
     bgIV.image = [UIImage imageNamed:@"Launch"];
     [self setPlaceholderViewTitle:@"加载失败" operationTitle:@"重新加载"];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillEnterForeground) name:UIApplicationWillEnterForegroundNotification object:nil];
+    
+    // 由于无法通过，审核。如果为强制更新
+    [self configUpdate];
 }
 
 - (void)applicationWillEnterForeground {
 
-    [self updateApp];
+//    [self updateApp];
+    [self configUpdate];
 
 }
 
@@ -109,7 +114,8 @@
 
 - (void)tl_placeholderOperation {
 
-    [self updateApp];
+//    [self updateApp];
+    [self configUpdate];
 
 }
 
@@ -131,7 +137,7 @@
     [http postWithSuccess:^(id responseObject) {
 
         GengXinModel *update = [GengXinModel mj_objectWithKeyValues:responseObject[@"data"]];
-
+        [self removePlaceholderView];
         //获取当前版本号
         NSString *currentVersion = [self buildVersion];
 
@@ -142,9 +148,12 @@
                 //不强制
                 [TLAlert alertWithTitle:@"更新提醒" msg:update.note confirmMsg:@"立即升级" cancleMsg:@"稍后提醒" cancle:^(UIAlertAction *action) {
 
+                    [self setRootVC];
+
                 } confirm:^(UIAlertAction *action) {
 
-                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[update.xiaZaiUrl stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]]];
+//                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[update.xiaZaiUrl stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]]];
+                    [self goBcoinWeb];
 
                 }];
 
@@ -153,16 +162,30 @@
                 //强制
                 [TLAlert alertWithTitle:@"更新提醒" message:update.note confirmMsg:@"立即升级" confirmAction:^{
 
-                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[update.xiaZaiUrl stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]]];
+//                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[update.xiaZaiUrl stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]]];
+                    [self goBcoinWeb];
+
 
                 }];
             }
+        } else {
+            
+            [self setRootVC];
+            
         }
 
     } failure:^(NSError *error) {
 
+        [self addPlaceholderView];
     }];
 
+}
+
+- (void)goBcoinWeb {
+    
+    NSString *urlStr = [@"https://www.bcoin.im" stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+    NSURL *url = [NSURL URLWithString:urlStr];
+      [[UIApplication sharedApplication] openURL:url];
 }
 
 - (void)setRootVC {

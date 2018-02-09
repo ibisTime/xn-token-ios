@@ -317,7 +317,7 @@
     self.group = [MineGroup new];
 
     
-    if ([AppConfig config].isChecking) {
+    if ([AppConfig config].isUploadCheck) {
         
         
         self.group.sections = @[

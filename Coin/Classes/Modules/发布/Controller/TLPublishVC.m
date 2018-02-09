@@ -212,7 +212,7 @@
             NBCDRequest *hintReqCopy = (NBCDRequest *)batchRequest.reqArray[2];
             [publishService handleHint:hintReqCopy.responseObject];
         }
- 
+        
         if(batchRequest.reqArray.count > 3) {
             //广告详情可能没有
             NBCDRequest *adsDetailReqCopy = (NBCDRequest *)batchRequest.reqArray[3];
@@ -795,6 +795,7 @@
     [self.contentView addSubview:self.tradeCoinView];
     self.tradeCoinView.leftLbl.text = [LangSwitcher switchLang:@"币        种" key:nil];
     self.tradeCoinView.textField.placeholder = [LangSwitcher switchLang:@"请选择交易币种" key:nil];
+    self.tradeCoinView.hintMsg = publishService.tradeCoin;
     self.tradeCoinView.textField.userInteractionEnabled = NO;
     [self.tradeCoinView adddMaskBtn];
     
