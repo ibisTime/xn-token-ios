@@ -50,7 +50,7 @@
     
     
     //服务器环境
-    [AppConfig config].runEnv = RunEnvDev;
+    [AppConfig config].runEnv = RunEnvRelease;
     self.respHandler = [[RespHandler alloc] init];
      
     [NBNetworkConfig config].respDelegate = self.respHandler;
