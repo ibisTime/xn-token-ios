@@ -265,25 +265,31 @@ didReceiveNotificationResponse:(UNNotificationResponse *)response
             userInfo.friendUserId = [order.sellUser equalsString:[TLUser user].userId] ? order.buyUser : order.sellUser;
             
             // -- //
-            UITabBarController *tabbatCtrl = (UITabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
-            UIViewController *vc = tabbatCtrl.childViewControllers[1];
-            tabbatCtrl.selectedIndex = 1;
-            UINavigationController *navCtrl = (UINavigationController *)vc;
-            
-            
-            if([model.status isEqualToString:kTradeOrderStatusToSubmit]) {
+            id obj = [UIApplication sharedApplication].keyWindow.rootViewController;
+            if ([obj isKindOfClass:[UITabBarController class]]) {
                 
-                WaitingOrderVC *detailVC = [[WaitingOrderVC alloc] initWith:currentIMGroup];
-                detailVC.orderCode = ext;
-                [navCtrl pushViewController:detailVC animated:YES];
+                UITabBarController *tabbatCtrl = (UITabBarController *)obj;
+                UIViewController *vc = tabbatCtrl.childViewControllers[1];
+                tabbatCtrl.selectedIndex = 1;
+                UINavigationController *navCtrl = (UINavigationController *)vc;
                 
-            } else {
                 
-                OrderDetailVC *detailVC = [[OrderDetailVC alloc] initWith:currentIMGroup];
-                detailVC.orderCode = ext;
-                [navCtrl pushViewController:detailVC animated:YES];
-
+                if([model.status isEqualToString:kTradeOrderStatusToSubmit]) {
+                    
+                    WaitingOrderVC *detailVC = [[WaitingOrderVC alloc] initWith:currentIMGroup];
+                    detailVC.orderCode = ext;
+                    [navCtrl pushViewController:detailVC animated:YES];
+                    
+                } else {
+                    
+                    OrderDetailVC *detailVC = [[OrderDetailVC alloc] initWith:currentIMGroup];
+                    detailVC.orderCode = ext;
+                    [navCtrl pushViewController:detailVC animated:YES];
+                    
+                }
+                
             }
+         
             
         } failure:^(NSError *error) {
             

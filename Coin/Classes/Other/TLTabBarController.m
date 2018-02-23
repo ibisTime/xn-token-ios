@@ -53,7 +53,7 @@
                     selectedImage:selectedImageNames[i]];
     }
     
-    self.selectedIndex = 2;
+    self.selectedIndex =[AppConfig config].isUploadCheck ? 1 : 2;
     
     //
     UIView *tabBarBgView = [[UIView alloc] initWithFrame:self.tabBar.bounds];

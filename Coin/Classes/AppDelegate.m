@@ -50,7 +50,8 @@
     
     
     //服务器环境
-    [AppConfig config].runEnv = RunEnvRelease;
+    [AppConfig config].runEnv = RunEnvDev;
+//    [AppConfig config].isUploadCheck = YES;
     self.respHandler = [[RespHandler alloc] init];
      
     [NBNetworkConfig config].respDelegate = self.respHandler;
@@ -239,9 +240,8 @@
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
-    [AppConfig config].isUploadCheck = NO;
     
-    if (1) {
+    if (0) {
         //先配置到，检查更新的VC,开启更新检查
         TLUpdateVC *updateVC = [[TLUpdateVC alloc] init];
         self.window.rootViewController = updateVC;

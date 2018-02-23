@@ -106,7 +106,7 @@ NSString *const kCNY = @"CNY";
 
 + (NSArray *)shouldDisplayCoinArray {
     
-    return @[kETH,kSC];
+    return @[kETH,kSC,kBTC];
 }
 
 

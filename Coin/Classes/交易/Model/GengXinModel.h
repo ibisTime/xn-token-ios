@@ -13,7 +13,9 @@
 
 @property (nonatomic, copy) NSString *note;
 
-@property (nonatomic, copy) NSString *xiaZaiUrl;
+//@property (nonatomic, copy) NSString *xiaZaiUrl;
+@property (nonatomic, copy) NSString *downloadUrl;
+
 
 @property (nonatomic, copy) NSString *forceUpdate;
 

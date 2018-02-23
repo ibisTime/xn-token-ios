@@ -153,8 +153,7 @@
                 } confirm:^(UIAlertAction *action) {
 
 //                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[update.xiaZaiUrl stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]]];
-                    [self goBcoinWeb];
-
+                      [self goBcoinWeb:update.downloadUrl];
                 }];
 
             } else {
@@ -163,7 +162,7 @@
                 [TLAlert alertWithTitle:@"更新提醒" message:update.note confirmMsg:@"立即升级" confirmAction:^{
 
 //                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[update.xiaZaiUrl stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]]];
-                    [self goBcoinWeb];
+                    [self goBcoinWeb:update.downloadUrl];
 
 
                 }];
@@ -181,9 +180,9 @@
 
 }
 
-- (void)goBcoinWeb {
+- (void)goBcoinWeb:(NSString *)var {
     
-    NSString *urlStr = [@"https://www.bcoin.im" stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+    NSString *urlStr = [var stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
     NSURL *url = [NSURL URLWithString:urlStr];
       [[UIApplication sharedApplication] openURL:url];
 }
