@@ -11,6 +11,7 @@
 #import "TLPublishVC.h"
 #import "TradeBuyVC.h"
 #import "TradeSellVC.h"
+#import "CoinUtil.h"
 
 @interface MyAdvertiseListVC ()<RefreshDelegate>
 
@@ -121,6 +122,7 @@
     helper.start = 1;
     helper.limit = 10;
     helper.parameters[@"userId"] = [TLUser user].userId;
+    [self changePageCoin:kETH helper:helper];
     self.pageDataHelper = helper;
     if (self.type == MyAdvertiseTypeDraft) {
         

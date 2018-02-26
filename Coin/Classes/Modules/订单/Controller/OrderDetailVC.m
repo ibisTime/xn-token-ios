@@ -35,7 +35,6 @@
     
     [super viewDidLoad];
     
-    self.title = [LangSwitcher switchLang:@"订单详情" key:nil];
     
 
     
@@ -44,8 +43,17 @@
     
     //查看详情
     [self lookOrderDetail];
+    
+    self.title = [LangSwitcher switchLang:@"订单详情" key:nil];
+
 }
 
+- (void)setTitle:(NSString *)title {
+    
+    [super setTitle:@"订单详情"];
+//    self.title = @"订单详情";
+    
+}
 
 - (void)viewDidLayoutSubviews {
     

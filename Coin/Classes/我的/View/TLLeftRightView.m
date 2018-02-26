@@ -38,7 +38,7 @@
         [self.leftLbl mas_makeConstraints:^(MASConstraintMaker *make) {
             
             make.centerY.equalTo(self);
-            make.left.equalTo(self).offset(15);
+            make.left.equalTo(self);
             make.width.mas_greaterThanOrEqualTo(200);
         }];
         
@@ -52,7 +52,7 @@
         [self.rightLbl mas_makeConstraints:^(MASConstraintMaker *make) {
             
             make.centerY.equalTo(self);
-            make.left.equalTo(self.leftLbl.mas_right).offset(20);
+            make.right.equalTo(self.mas_right);
             
         }];
         

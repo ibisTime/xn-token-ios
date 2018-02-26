@@ -1,3 +1,5 @@
+### 0.如果想添加币种 在 `CoinUtil` 中  `+ (NSArray *)shouldDisplayCoinArray` 添加对应的币种即可，并设置相应的单位
+
 ### 1.定制推送消息内容，主要是推送内容的定制
 `ChatViewController 中， - (void)sendMsg:(IMAMsg *)msg`
 

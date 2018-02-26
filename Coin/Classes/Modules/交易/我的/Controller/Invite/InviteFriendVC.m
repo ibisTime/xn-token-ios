@@ -30,6 +30,8 @@
 #import "CoinUtil.h"
 #import "TLLeftRightView.h"
 
+#define CONTENT_LEFT_MARGIN 20
+
 @interface InviteFriendVC ()
 @property (nonatomic, strong) UIView *centerView;
 //轮播图
@@ -51,11 +53,15 @@
 ////收益
 //@property (nonatomic, strong) UILabel *profitLbl;
 
+@property (nonatomic, strong) UIView *profitBgView;
 @property (nonatomic, copy) NSString *shareBaseUrl;
 
 @property (nonatomic, strong) TLLeftRightView *peopleCountView;
-@property (nonatomic, strong) TLLeftRightView *ethProfitView;
-@property (nonatomic, strong) TLLeftRightView *scProfitView;
+@property (nonatomic, strong) TLLeftRightView *profitTitleView;
+
+
+//@property (nonatomic, strong) TLLeftRightView *ethProfitView;
+//@property (nonatomic, strong) TLLeftRightView *scProfitView;
 
 
 
@@ -175,24 +181,34 @@
     CGFloat leftMargin = 15;
 
     //提成收益, 背景
-    UIView *profitView = [[UIView alloc] initWithFrame:CGRectMake(leftMargin, self.bannerView.yy + 15, kScreenWidth - 2*leftMargin, 100)];
+    UIView *profitView = [[UIView alloc] initWithFrame:CGRectMake(leftMargin, self.bannerView.yy + 15, kScreenWidth - 2*leftMargin, 120)];
     [self.scrollView addSubview:profitView];
+    self.profitBgView = profitView;
     profitView.backgroundColor = [UIColor colorWithHexString:@"#fff9eb"];
     profitView.layer.shadowOffset = CGSizeMake(4, 4);
     profitView.layer.shadowOpacity = 1.0f;
     profitView.layer.shadowColor = kBackgroundColor.CGColor;
 
     //邀请人数
-    self.peopleCountView = [[TLLeftRightView alloc] initWithFrame:CGRectMake(0, 5, profitView.width, 30)];
+    self.peopleCountView = [[TLLeftRightView alloc] initWithFrame:CGRectMake(CONTENT_LEFT_MARGIN, 5, profitView.width - 2*CONTENT_LEFT_MARGIN, 30)];
     [profitView addSubview:self.peopleCountView];
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(historyFriends)];
     [self.peopleCountView addGestureRecognizer:tapGestureRecognizer];
     
-    self.ethProfitView = [[TLLeftRightView alloc] initWithFrame:CGRectMake(0,  self.peopleCountView.yy, profitView.width, 30)];
-    [profitView addSubview:self.ethProfitView];
+    //提成收益
+    self.profitTitleView = [[TLLeftRightView alloc] initWithFrame:CGRectMake(self.peopleCountView.left, self.peopleCountView.yy + 5, self.peopleCountView.width, 30)];
+    [profitView addSubview:self.profitTitleView];
+    self.profitTitleView.leftLbl.text = @"提成收益";
+    self.profitTitleView.rightLbl.text = @"";
+
     
-    self.scProfitView = [[TLLeftRightView alloc] initWithFrame:CGRectMake(0, self.ethProfitView.yy, profitView.width, 30)];
-    [profitView addSubview:self.scProfitView];
+    
+    
+//    self.ethProfitView = [[TLLeftRightView alloc] initWithFrame:CGRectMake(0,  self.peopleCountView.yy, profitView.width, 30)];
+//    [profitView addSubview:self.ethProfitView];
+//
+//    self.scProfitView = [[TLLeftRightView alloc] initWithFrame:CGRectMake(0, self.ethProfitView.yy, profitView.width, 30)];
+//    [profitView addSubview:self.scProfitView];
     
 //    UILabel *personTextLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kThemeColor font:12.0];
 //    personTextLbl.text = [LangSwitcher switchLang:@"成功邀请（人）" key:nil];
@@ -328,7 +344,6 @@
 #pragma mark - Events
 - (void)historyFriends {
     
-   
 
     CoinWeakSelf;
     
@@ -438,22 +453,68 @@
 //        inviteProfitSc
         //收益
         NSString *profitEth = responseObject[@"data"][@"inviteProfitEth"];
-        self.ethProfitView.rightLbl.text = [CoinUtil convertToRealCoin:profitEth coin:kETH];
-        self.ethProfitView.leftLbl.text = [LangSwitcher switchLang:@"提成收益（ETH）" key:nil];
-        
         NSString *profitSc = responseObject[@"data"][@"inviteProfitSc"];
-        self.scProfitView.rightLbl.text = [CoinUtil convertToRealCoin:profitSc coin:kSC];
-        self.scProfitView.leftLbl.text = [LangSwitcher switchLang:@"提成收益（SC）" key:nil];
-
+        NSString *profitBtc = responseObject[@"data"][@"inviteProfitBtc"];
+        NSMutableDictionary *profitCoinDict  = [[NSMutableDictionary alloc] init];
+        profitCoinDict[kETH] = profitEth;
+        profitCoinDict[kSC] = profitSc;
+        profitCoinDict[kBTC] = profitBtc;
+        
+        __block int i = 0;
+        [profitCoinDict enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+            
+            CGRect frame;
+            NSTextAlignment textAligment;
+            NSString *text = [NSString stringWithFormat:@"%@ %@",[CoinUtil convertToRealCoin:obj coin:key],key];
+            
+            CGFloat w = (self.profitBgView.width - CONTENT_LEFT_MARGIN *2)/2.0;
+            CGFloat y =  (i/2)*24 + self.profitTitleView.yy;
+            if (i%2 == 0) {
+                
+                frame = CGRectMake(CONTENT_LEFT_MARGIN, y , w, 25);
+                textAligment = NSTextAlignmentLeft;
+                
+            } else {
+                
+                frame = CGRectMake(self.profitBgView.width/2.0, y, w, 25);
+                textAligment = NSTextAlignmentRight;
+                
+            }
+            
+            UILabel *lbl = [self labelWithFrame:frame
+                                      alignment:textAligment
+                                           text:text];
+            [self.profitBgView addSubview:lbl];
+            i ++;
+        }];
+        
+//        self.ethProfitView.rightLbl.text = [CoinUtil convertToRealCoin:profitEth coin:kETH];
+//        self.ethProfitView.leftLbl.text = [LangSwitcher switchLang:@"提成收益（ETH）" key:nil];
+//
+//        self.scProfitView.rightLbl.text = [CoinUtil convertToRealCoin:profitSc coin:kSC];
+//        self.scProfitView.leftLbl.text = [LangSwitcher switchLang:@"提成收益（SC）" key:nil];
+       
         //邀请人数
         NSNumber *inviteNum = responseObject[@"data"][@"inviteCount"];
-        self.peopleCountView.rightLbl.text = [inviteNum stringValue];
-        self.peopleCountView.leftLbl.text = @"成功邀请人数（人）";
+        self.peopleCountView.rightLbl.text = [NSString stringWithFormat:@"%@ 人",[inviteNum stringValue]];
+        self.peopleCountView.leftLbl.text = @"成功邀请";
         
     } failure:^(NSError *error) {
         
         
     }];
+    
+}
+
+- (UILabel *)labelWithFrame:(CGRect)frame alignment:(NSTextAlignment)alignment text:(NSString *)text {
+    
+    UILabel *lbl = [UILabel labelWithFrame:frame
+                              textAligment:alignment
+                           backgroundColor:[UIColor clearColor]
+                                      font:[UIFont systemFontOfSize:12]
+                                 textColor:[UIColor textColor]];
+    lbl.text = text;
+    return lbl;
     
 }
 

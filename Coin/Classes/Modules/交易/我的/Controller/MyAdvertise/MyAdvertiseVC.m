@@ -127,6 +127,7 @@
                 
         }
         
+        childVC.coin = kETH;
         childVC.view.frame = CGRectMake(kScreenWidth*i, 1, kScreenWidth, kSuperViewHeight - 45);
         
         [self addChildViewController:childVC];

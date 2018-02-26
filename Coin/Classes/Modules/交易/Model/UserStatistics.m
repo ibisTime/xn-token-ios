@@ -42,6 +42,10 @@
         
         totalTradeCount = self.totalTradeCountSc;
 
+    } else if ([coin isEqualToString:kBTC]) {
+        
+        totalTradeCount = self.totalTradeCountBtc;
+
     }
     
     //

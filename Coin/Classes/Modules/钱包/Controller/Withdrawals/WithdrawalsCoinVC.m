@@ -747,9 +747,5 @@ typedef NS_ENUM(NSInteger, AddressType) {
     }];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 @end

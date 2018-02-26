@@ -71,7 +71,6 @@
     self.orderTableView = tableView;
     self.orderTableView.allowsSelection = NO;
     self.orderTableView.placeHolderView = [TLPlaceholderView placeholderViewWithImgAndText:@"暂无订单"];
-                                           
     
     //
     TLPageDataHelper *helper = [[TLPageDataHelper alloc] init];
