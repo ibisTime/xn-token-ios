@@ -120,7 +120,7 @@
         
     helper.code = @"625228";
     helper.start = 1;
-    helper.limit = 20;
+    helper.limit = 50;
     if (self.coin && self.coin.length > 0) {
         helper.parameters[@"coin"] = self.coin;
     }

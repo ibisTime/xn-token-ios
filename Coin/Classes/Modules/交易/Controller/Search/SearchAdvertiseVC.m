@@ -33,7 +33,10 @@
 //广告类型
 //@property (nonatomic, strong) TLPickerTextField *advertiseTypePicker;
 //广告类型选择
-@property (nonatomic, assign) NSInteger advertiseTypeIndex;
+@property (nonatomic, assign) NSString *adsType;
+
+@property (nonatomic, assign) BOOL isChoosePayType; //default is no
+
 @property (nonatomic, assign) NSInteger payTypeIndex;
 //@property (nonatomic, assign) NSInteger coinTypeIndex;
 @property (nonatomic, copy) NSString *searchCoin;
@@ -71,7 +74,7 @@
     __weak typeof(self) weakSelf = self;
     self.adsTypeView.pickerTextField.didSelectBlock = ^(NSInteger index) {
         
-        weakSelf.advertiseTypeIndex = index;
+        weakSelf.adsType = index == 1 ? kTradeBuy: kTradeSell;
         
     };
     
@@ -79,6 +82,7 @@
     self.payTypeView.pickerTextField.didSelectBlock = ^(NSInteger index) {
         
         weakSelf.payTypeIndex = index;
+        weakSelf.isChoosePayType = YES;
         
     };
     
@@ -504,15 +508,21 @@
 //        return ;
 //    }
     
-    NSString *payType = [NSString stringWithFormat:@"%ld", _payTypeIndex];
 
     SearchResultVC *resultVC = [SearchResultVC new];
     resultVC.searchType = SearchTypeAdvertise;
     resultVC.minPrice = self.minPriceTF.text;
     resultVC.maxPrice = self.maxPriceTF.text;
-    resultVC.payType = payType;
+    
+    if (self.isChoosePayType) {
+        
+        NSString *payType = [NSString stringWithFormat:@"%ld", _payTypeIndex];
+        resultVC.payType = payType;
+        
+    }
+  
     resultVC.coin = self.searchCoin;
-    resultVC.advertiseType = self.advertiseTypeIndex == 1 ? kTradeBuy: kTradeSell;
+    resultVC.advertiseType = self.adsType;
     
     [self.navigationController pushViewController:resultVC animated:YES];
     
