@@ -72,7 +72,7 @@
         make.left.equalTo(self.titleLbl.mas_right).offset(5);
         make.centerY.equalTo(self.adapterView);
         make.right.equalTo(self.adapterView.mas_right);
-        make.width.mas_equalTo(15);
+        make.width.mas_equalTo(10);
 
     }];
     
