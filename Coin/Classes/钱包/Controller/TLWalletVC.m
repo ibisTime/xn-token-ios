@@ -65,8 +65,12 @@
     
     //tableView
     [self initTableView];
-    //列表查询我的币种
-    [self getMyCurrencyList];
+    
+    if ([[TLUser user] checkLogin]) {
+        //列表查询我的币种
+        [self getMyCurrencyList];
+    }
+    
     //通知
     [self addNotification];
     

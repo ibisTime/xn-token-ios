@@ -128,7 +128,7 @@
     
     UILabel *receiveAddressLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kPlaceholderColor font:14.0];
     
-    receiveAddressLbl.text = [LangSwitcher switchLang:@"请选择提币地址或扫码录入" key:nil];
+    receiveAddressLbl.text = [LangSwitcher switchLang:@"请粘贴付币地址或扫码录入" key:nil];
     
     receiveAddressLbl.numberOfLines = 0;
     

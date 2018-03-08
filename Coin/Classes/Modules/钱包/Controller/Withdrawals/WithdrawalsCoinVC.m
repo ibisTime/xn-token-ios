@@ -70,7 +70,7 @@ typedef NS_ENUM(NSInteger, AddressType) {
     //
     [self initSubviews];
     //获取手续费费率
-    [self requestWithdrawFee];
+//    [self requestWithdrawFee];
 }
 
 - (BOOL)navigationShouldPopOnBackButton {
@@ -159,7 +159,7 @@ typedef NS_ENUM(NSInteger, AddressType) {
     
     UILabel *receiveAddressLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kPlaceholderColor font:14.0];
     
-    receiveAddressLbl.text = [LangSwitcher switchLang:@"请选择付币地址或扫码录入" key:nil];
+    receiveAddressLbl.text = [LangSwitcher switchLang:@"请粘贴付币地址或扫码录入" key:nil];
     
     receiveAddressLbl.numberOfLines = 0;
     
@@ -224,10 +224,12 @@ typedef NS_ENUM(NSInteger, AddressType) {
     }];
     
     //转账数量
+    NSString *coinBalance = [CoinUtil convertToRealCoin:self.currency.coinBalance coin:currentCurrency];
+    
     self.tranAmountTF = [[TLTextField alloc] initWithFrame:CGRectMake(0, receiveView.yy, kScreenWidth, heightMargin)
-                                                 leftTitle:[LangSwitcher switchLang:@"付币数量" key:nil]
+                                                 leftTitle:[LangSwitcher switchLang:@"提币数量" key:nil]
                                                 titleWidth:90
-                                               placeholder:[LangSwitcher switchLang:@"请输入付币数量" key:nil]
+                                               placeholder:[LangSwitcher switchLang:[NSString stringWithFormat:@"您最多可以提现%@",coinBalance] key:nil]
                          ];
     
     [self.tranAmountTF setValue:kPlaceholderColor forKeyPath:@"_placeholderLabel.textColor"];
@@ -245,6 +247,8 @@ typedef NS_ENUM(NSInteger, AddressType) {
                                              placeholder:@""];
     
     self.minerFeeTF.enabled = NO;
+    
+    self.minerFeeTF.hidden = YES;
     
     self.minerFeeTF.font = Font(14.0);
     
@@ -269,7 +273,7 @@ typedef NS_ENUM(NSInteger, AddressType) {
     [minerView mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.left.right.equalTo(@0);
-        make.top.equalTo(self.minerFeeTF.mas_bottom);
+        make.top.equalTo(self.tranAmountTF.mas_bottom);
 
     }];
     
@@ -277,7 +281,7 @@ typedef NS_ENUM(NSInteger, AddressType) {
     
     UILabel *minerPromptLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor3 font:11.0];
     
-    minerPromptLbl.text = [LangSwitcher switchLang:@"手续费将在提币金额中扣除" key:nil];
+    minerPromptLbl.text = [LangSwitcher switchLang:@"温馨提示：部分OGC不可提现，用来支付提现所需矿工费" key:nil];
     
     minerPromptLbl.numberOfLines = 0;
     
@@ -399,7 +403,7 @@ typedef NS_ENUM(NSInteger, AddressType) {
 //    }];
     
     //确认付币
-    UIButton *confirmPayBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"确认付币" key:nil]
+    UIButton *confirmPayBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"确认提币" key:nil]
                                              titleColor:kWhiteColor
                                         backgroundColor:kThemeColor
                                               titleFont:16.0
@@ -426,7 +430,7 @@ typedef NS_ENUM(NSInteger, AddressType) {
         CoinWeakSelf;
         
         NSArray *textArr = @[
-                              [LangSwitcher switchLang:@"选择地址" key:nil],
+//                              [LangSwitcher switchLang:@"选择地址" key:nil],
                               [LangSwitcher switchLang:@"扫描二维码" key:nil],
                               [LangSwitcher switchLang:@"粘贴地址" key:nil]
                               ];
@@ -466,7 +470,7 @@ typedef NS_ENUM(NSInteger, AddressType) {
 
     [self.view endEditing:YES];
     
-    if ([self.receiveAddressLbl.text isEqualToString:@"请选择付币地址或扫码录入"]) {
+    if ([self.receiveAddressLbl.text isEqualToString:@"请粘贴付币地址或扫码录入"]) {
         
         [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请选择接收地址" key:nil] ];
         return ;
@@ -567,30 +571,30 @@ typedef NS_ENUM(NSInteger, AddressType) {
     
     switch (index) {
         //选择地址
-        case 0:
-        {
-            [self.coinAddressPicker hide];
-            
-            CoinAddressListVC *addressVC = [CoinAddressListVC new];
-            addressVC.coin = self.currency.currency;
-            addressVC.addressBlock = ^(CoinAddressModel *addressModel) {
-
-                weakSelf.addressModel = addressModel;
-                
-                weakSelf.receiveAddressLbl.text = weakSelf.addressModel.address;
-                
-                weakSelf.receiveAddressLbl.textColor = kTextColor;
-                
-                weakSelf.addressType = AddressTypeSelectAddress;
-                
-                [weakSelf setGoogleAuth];
-            };
-            
-            [self.navigationController pushViewController:addressVC animated:YES];
-            
-        }break;
+//        case 0:
+//        {
+//            [self.coinAddressPicker hide];
+//
+//            CoinAddressListVC *addressVC = [CoinAddressListVC new];
+//            addressVC.coin = self.currency.currency;
+//            addressVC.addressBlock = ^(CoinAddressModel *addressModel) {
+//
+//                weakSelf.addressModel = addressModel;
+//
+//                weakSelf.receiveAddressLbl.text = weakSelf.addressModel.address;
+//
+//                weakSelf.receiveAddressLbl.textColor = kTextColor;
+//
+//                weakSelf.addressType = AddressTypeSelectAddress;
+//
+//                [weakSelf setGoogleAuth];
+//            };
+//
+//            [self.navigationController pushViewController:addressVC animated:YES];
+//
+//        }break;
         //扫描二维码
-        case 1:
+        case 0:
         {
             QRCodeVC *qrCodeVC = [QRCodeVC new];
             
@@ -607,7 +611,7 @@ typedef NS_ENUM(NSInteger, AddressType) {
             
         }break;
         //粘贴地址
-        case 2:
+        case 1:
         {
             UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
             

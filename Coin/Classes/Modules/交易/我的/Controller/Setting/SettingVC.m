@@ -29,6 +29,8 @@
 #import "TLAlert.h"
 #import "NSString+Check.h"
 #import "TLProgressHUD.h"
+#import "TLNavigationController.h"
+#import "TLUserLoginVC.h"
 
 @interface SettingVC ()
 
@@ -143,15 +145,15 @@
     }];
     
     //修改手机号
-    SettingModel *changeMobile = [SettingModel new];
-    changeMobile.text = [LangSwitcher switchLang:@"手机号" key:nil];
-    changeMobile.subText = [TLUser user].mobile;
-    [changeMobile setAction:^{
-        
-        TLChangeMobileVC *changeMobileVC = [[TLChangeMobileVC alloc] init];
-        [weakSelf.navigationController pushViewController:changeMobileVC animated:YES];
-        
-    }];
+//    SettingModel *changeMobile = [SettingModel new];
+//    changeMobile.text = [LangSwitcher switchLang:@"手机号" key:nil];
+//    changeMobile.subText = [TLUser user].mobile;
+//    [changeMobile setAction:^{
+//        
+//        TLChangeMobileVC *changeMobileVC = [[TLChangeMobileVC alloc] init];
+//        [weakSelf.navigationController pushViewController:changeMobileVC animated:YES];
+//        
+//    }];
     
     //修改登录密码
     SettingModel *changeLoginPwd = [SettingModel new];
@@ -192,7 +194,7 @@
     }];
     
     self.group = [SettingGroup new];
-    self.group.sections = @[@[changeTradePwd], @[idAuth, bindEmail, changeLoginPwd,changeMobile, google]];
+    self.group.sections = @[@[changeTradePwd], @[idAuth, bindEmail, changeLoginPwd, google]];
     
 }
 
@@ -219,26 +221,39 @@
     
     //先退出腾讯云，才算退出成功
     //im 退出
-    [TLProgressHUD showWithStatus:nil];
-    [[IMAPlatform sharedInstance] logout:^{
-        [TLProgressHUD dismiss];
-        
-        [[NSNotificationCenter defaultCenter] postNotificationName:kUserLoginOutNotification object:nil];
-        
-        TLTabBarController *tabbarVC = (TLTabBarController *)self.tabBarController;
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            
-            tabbarVC.selectedIndex = 2;
-            [self.navigationController popViewControllerAnimated:NO];
-            
-        });
-        //
-    } fail:^(int code, NSString *msg) {
-        
-        [TLAlert alertWithInfo:@"退出登录失败"];
-        
+//    [TLProgressHUD showWithStatus:nil];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:kUserLoginOutNotification object:nil];
+    
+   
+    
+    TLUserLoginVC *loginVC = [TLUserLoginVC new];
+    
+    TLNavigationController *nav = [[TLNavigationController alloc] initWithRootViewController:loginVC];
+    
+    [self.navigationController presentViewController:nav animated:YES completion:^{
+         [self.navigationController popViewControllerAnimated:NO];
     }];
-        
+    
+//    [[IMAPlatform sharedInstance] logout:^{
+//        [TLProgressHUD dismiss];
+//
+//        [[NSNotificationCenter defaultCenter] postNotificationName:kUserLoginOutNotification object:nil];
+//
+//        TLTabBarController *tabbarVC = (TLTabBarController *)self.tabBarController;
+//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//
+//            tabbarVC.selectedIndex = 2;
+//            [self.navigationController popViewControllerAnimated:NO];
+//
+//        });
+//        //
+//    } fail:^(int code, NSString *msg) {
+//
+//        [TLAlert alertWithInfo:@"退出登录失败"];
+//
+//    }];
+    
 }
 
 - (void)setGoogleAuth {

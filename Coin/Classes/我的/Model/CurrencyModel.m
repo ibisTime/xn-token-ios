@@ -31,7 +31,8 @@
     NSDictionary *dict = @{
                            kETH : @"以太币图标",
                            kBTC : @"比特币图标",
-                           kSC : @"云储币图标"
+                           kSC : @"云储币图标",
+                           kOGC : @"橙币图标"
                            };
     
     

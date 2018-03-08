@@ -32,6 +32,8 @@
 #import <ZDCChat/ZDCChat.h>
 #import "CoinUtil.h"
 #import "RespHandler.h"
+#import "TLNavigationController.h"
+#import "TLUserLoginVC.h"
 #import <NBHTTP/NBNetwork.h>
 
 
@@ -59,7 +61,7 @@
     [NBNetworkConfig config].baseUrl = [AppConfig config].apiUrl;
     
     //配置微信
-    [self configWeChat];
+//    [self configWeChat];
     
     //配置键盘
     [self configIQKeyboard];
@@ -68,14 +70,14 @@
     [self configRootViewController];
     
     //初始化, 连天
-    [[ChatManager sharedManager] initChat];
+    //    [[ChatManager sharedManager] initChat];
     
     //
-    [self configZendesk];
+    //    [self configZendesk];
     
     //初始化为繁体
     [LangSwitcher startWithTraditional];
-
+    
     //
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(loginOut)
@@ -94,18 +96,31 @@
         [[NSNotificationCenter defaultCenter] postNotificationName:kUserLoginNotification
                                                             object:nil];
         
+    } else {
+        TLUserLoginVC *loginVC = [TLUserLoginVC new];
+        
+        TLNavigationController *nav = [[TLNavigationController alloc] initWithRootViewController:loginVC];
+        
+        [self.window.rootViewController presentViewController:nav animated:YES completion:nil];
     };
+    
+
+    
+    
+
     
    
     
-    [[IMAPlatform sharedInstance] configOnAppLaunchWithOptions:launchOptions];
+   
     
-    
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        
-        [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
-        
-    });
+//    [[IMAPlatform sharedInstance] configOnAppLaunchWithOptions:launchOptions];
+//
+//
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//
+//        [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+//
+//    });
     
     //
     return YES;

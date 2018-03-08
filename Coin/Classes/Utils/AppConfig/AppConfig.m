@@ -40,8 +40,8 @@ void TLLog(NSString *format, ...) {
     
     _runEnv = runEnv;
     
-    self.companyCode = @"CD-COIN000017";
-    self.systemCode = @"CD-COIN000017";
+    self.companyCode = @"CD-TOKEN00018";
+    self.systemCode = @"CD-TOKEN00018";
     
     switch (_runEnv) {
             

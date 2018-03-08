@@ -26,7 +26,7 @@
         //
         [self initSubvies];
         //购买跟出售
-        [self initBuyAndSell];
+//        [self initBuyAndSell];
     }
     return self;
 }
@@ -62,9 +62,9 @@
     [self addSubview:self.photoBtn];
     [self.photoBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.top.equalTo(@(13 + kStatusBarHeight));
-        make.centerX.equalTo(self.mas_centerX);
         make.width.height.equalTo(@(imgWidth));
+        make.centerY.equalTo(self.mas_centerY);
+        make.left.equalTo(@(30));
         
     }];
     
@@ -74,8 +74,19 @@
     [self addSubview:self.nameLbl];
     [self.nameLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.top.equalTo(self.photoBtn.mas_bottom).offset(10);
-        make.centerX.equalTo(self.photoBtn.mas_centerX);
+        make.top.equalTo(self.photoBtn.mas_top).offset(10);
+        make.left.equalTo(self.photoBtn.mas_right).offset(15);
+        
+    }];
+    
+    //手机号
+    self.mobileLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kWhiteColor font:15.0];
+    
+    [self addSubview:self.mobileLbl];
+    [self.mobileLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.left.equalTo(self.nameLbl.mas_left);
+        make.bottom.equalTo(self.photoBtn.mas_bottom).offset(-10);
         
     }];
     
@@ -105,15 +116,15 @@
     self.levelBtn.hidden = YES;
 
     //交易、好评跟信任
-    self.dataLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kWhiteColor font:12.0];
-    
-    [self addSubview:self.dataLbl];
-    [self.dataLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.centerX.equalTo(self.photoBtn.mas_centerX);
-        make.top.equalTo(self.nameLbl.mas_bottom).offset(15);
-        
-    }];
+//    self.dataLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kWhiteColor font:12.0];
+//
+//    [self addSubview:self.dataLbl];
+//    [self.dataLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+//
+//        make.centerX.equalTo(self.photoBtn.mas_centerX);
+//        make.top.equalTo(self.nameLbl.mas_bottom).offset(15);
+//
+//    }];
 }
 
 - (void)initBuyAndSell {

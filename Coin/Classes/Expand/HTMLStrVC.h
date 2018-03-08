@@ -14,7 +14,6 @@ typedef NS_ENUM(NSUInteger, HTMLType) {
     HTMLTypeCommonProblem,  //常见问题
     HTMLTypeLinkService,    //联系客服
     HTMLTypeTradeRemind,    //交易提醒
-    
 };
 
 @interface HTMLStrVC : TLBaseVC

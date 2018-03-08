@@ -28,16 +28,13 @@
     self.delegate = self;
 
     NSArray *titles = @[
-                        [LangSwitcher switchLang:@"行情" key:nil],
-                        [LangSwitcher switchLang:@"订单" key:nil],
-                        [LangSwitcher switchLang:@"交易" key:nil],
                         [LangSwitcher switchLang:@"钱包" key:nil],
                         [LangSwitcher switchLang:@"我的" key:nil]
                         ];
-    NSArray *VCNames = @[@"QuotationVC",@"TLOrderVC",@"TLTransactionVC",@"TLWalletVC",@"TLMineVC"];
+    NSArray *VCNames = @[@"TLWalletVC",@"TLMineVC"];
     
-    NSArray *imageNames = @[@"行情00",@"订单00",@"交易00",@"钱包00",@"我的00"];
-    NSArray *selectedImageNames = @[@"行情01",@"订单01",@"交易01",@"钱包01",@"我的01"];
+    NSArray *imageNames = @[@"钱包00",@"我的00"];
+    NSArray *selectedImageNames = @[@"钱包01",@"我的01"];
     
     
     for (int i = 0; i < imageNames.count; i++) {
@@ -53,13 +50,14 @@
                     selectedImage:selectedImageNames[i]];
     }
     
-    self.selectedIndex =[AppConfig config].isUploadCheck ? 1 : 2;
+    self.selectedIndex =[AppConfig config].isUploadCheck ? 0 : 0;
     
     //
     UIView *tabBarBgView = [[UIView alloc] initWithFrame:self.tabBar.bounds];
     tabBarBgView.backgroundColor = [UIColor whiteColor];
     [self.tabBar insertSubview:tabBarBgView atIndex:0];
 //  self.tabBar.backgroundColor = [UIColor whiteColor];
+    
 }
 
 
@@ -139,7 +137,7 @@
     if ([AppConfig config].isUploadCheck) {
         
         //判断点击的Controller是不是需要登录，如果是，那就登录
-        if((idx == 0 || idx == 2 || idx == 3) && ![TLUser user].isLogin) {
+        if((idx == 0 || idx == 1) && ![TLUser user].isLogin) {
             
             TLUserLoginVC *loginVC = [TLUserLoginVC new];
             
@@ -158,7 +156,7 @@
     } else {
         
         //判断点击的Controller是不是需要登录，如果是，那就登录
-        if((idx == 1 || idx == 3 || idx == 4) && ![TLUser user].isLogin) {
+        if((idx == 0 || idx == 1) && ![TLUser user].isLogin) {
             
             TLUserLoginVC *loginVC = [TLUserLoginVC new];
             

@@ -24,6 +24,8 @@
 @property (nonatomic, copy) NSString *frozenAmountString;
 //充币地址
 @property (nonatomic, copy) NSString *coinAddress;
+//地址真实余额
+@property (nonatomic, copy) NSString *coinBalance;
 
 @property (nonatomic,copy) NSString *createDatetime;
 //币种

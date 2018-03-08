@@ -34,6 +34,7 @@
 #import <IQKeyboardManager/IQKeyboardManager.h>
 #import <CDCommon/UIScrollView+TLAdd.h>
 #import "CoinService.h"
+#import "LangChooseVC.h"
 
 @interface TLMineVC ()<MineHeaderSeletedDelegate, UINavigationControllerDelegate>
 
@@ -82,9 +83,9 @@
     [[IQKeyboardManager sharedManager] setEnable:YES];
 
     //
-    if ([[TLUser user] checkLogin]) {
-        [self requestUserStatistInfo];
-    }
+//    if ([[TLUser user] checkLogin]) {
+//        [self requestUserStatistInfo];
+//    }
     
 }
 
@@ -147,7 +148,7 @@
 
 - (void)initMineHeaderView {
     
-    MineHeaderView *mineHeaderView = [[MineHeaderView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 160 + kStatusBarHeight + 55)];
+    MineHeaderView *mineHeaderView = [[MineHeaderView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 160 + kStatusBarHeight)];
     mineHeaderView.delegate = self;
     self.headerView = mineHeaderView;
     
@@ -216,6 +217,18 @@
         [weakSelf.navigationController pushViewController:settingVC animated:YES];
     };
     
+    //语言设置
+    MineModel *languageSetting = [MineModel new];
+    
+    languageSetting.text = [LangSwitcher switchLang:@"语言设置" key:nil];
+    languageSetting.imgName = @"语言设置";
+    languageSetting.action = ^{
+        
+        LangChooseVC *vc = [[LangChooseVC alloc] init];
+        [weakSelf.navigationController pushViewController:vc animated:YES];
+        
+    };
+    
     //个性设置
     MineModel *personalSetting = [MineModel new];
     
@@ -243,31 +256,31 @@
 //
 //    };
     
-    //联系客服
-    MineModel *linkService = [MineModel new];
-    linkService.text = [LangSwitcher switchLang:@"联系客服" key:nil];
-    linkService.imgName = @"联系客服";
-    linkService.action = ^{
-
-//        HTMLStrVC *htmlVC = [HTMLStrVC new];
-//        htmlVC.type = HTMLTypeLinkService;
-//        [weakSelf.navigationController pushViewController:htmlVC animated:YES];
-        
-        [IQKeyboardManager sharedManager].enableAutoToolbar = NO;
-        [ZDCChat updateVisitor:^(ZDCVisitorInfo *visitor) {
-
-            visitor.name = [TLUser user].nickname;
-            visitor.phone = [TLUser user].mobile;
-            visitor.email = [TLUser user].email;
-            
-        }];
-        //
-//        [ZDCChat startChat:^(ZDCConfig *config) {
+//    //联系客服
+//    MineModel *linkService = [MineModel new];
+//    linkService.text = [LangSwitcher switchLang:@"联系客服" key:nil];
+//    linkService.imgName = @"联系客服";
+//    linkService.action = ^{
+//
+////        HTMLStrVC *htmlVC = [HTMLStrVC new];
+////        htmlVC.type = HTMLTypeLinkService;
+////        [weakSelf.navigationController pushViewController:htmlVC animated:YES];
+//
+//        [IQKeyboardManager sharedManager].enableAutoToolbar = NO;
+//        [ZDCChat updateVisitor:^(ZDCVisitorInfo *visitor) {
+//
+//            visitor.name = [TLUser user].nickname;
+//            visitor.phone = [TLUser user].mobile;
+//            visitor.email = [TLUser user].email;
 //
 //        }];
-        [ZDCChat startChatIn:self.navigationController withConfig:nil];
-
-    };
+//        //
+////        [ZDCChat startChat:^(ZDCConfig *config) {
+////
+////        }];
+//        [ZDCChat startChatIn:self.navigationController withConfig:nil];
+//
+//    };
     
 //    //工单
     MineModel *helpModel = [MineModel new];
@@ -275,15 +288,15 @@
     helpModel.imgName = @"常见问题";
     helpModel.action = ^{
         
-//        HTMLStrVC *htmlVC = [HTMLStrVC new];
-//        htmlVC.type = HTMLTypeLinkService;
-//        [weakSelf.navigationController pushViewController:htmlVC animated:YES];
+        HTMLStrVC *htmlVC = [HTMLStrVC new];
+        htmlVC.type = HTMLTypeCommonProblem;
+        [weakSelf.navigationController pushViewController:htmlVC animated:YES];
         
         //注册用户的身份,管理端可以看到这些信息
 //   [ZDKRequests pushRequestListWithNavigationController:self.navigationController];
         
         //跳转
-         ZDKHelpCenterOverviewContentModel *contentModel = [ZDKHelpCenterOverviewContentModel defaultContent];
+//         ZDKHelpCenterOverviewContentModel *contentModel = [ZDKHelpCenterOverviewContentModel defaultContent];
 //        contentModel.groupType = ZDKHelpCenterOverviewGroupTypeDefault;
         
         // 设置界面的代理
@@ -293,8 +306,8 @@
 //        contentModel.groupType = ZDKHelpCenterOverviewGroupTypeSection;
 //        contentModel.groupIds = @[@"sections2"];
         
-        [ZDKHelpCenter pushHelpCenterOverview:self.navigationController
-                             withContentModel:contentModel];
+//        [ZDKHelpCenter pushHelpCenterOverview:self.navigationController
+//                             withContentModel:contentModel];
         
     };
     
@@ -321,16 +334,16 @@
         
         
         self.group.sections = @[
-                                @[advertisement, address, trust],
-                                @[securityCenter, personalSetting,helpModel, linkService, abountUs]
+//                                @[advertisement, address, trust],
+//                                @[securityCenter, personalSetting,helpModel, linkService, abountUs]
                                 ];
 
     } else {
       
         
         self.group.sections = @[
-                                @[advertisement, address, trust, inviteFriend],
-                                @[securityCenter, personalSetting,helpModel, linkService, abountUs]
+                                @[securityCenter, languageSetting],
+                                @[helpModel, abountUs]
                                 ];
         
     }
@@ -428,7 +441,9 @@
     
     self.headerView.nameLbl.text = [TLUser user].nickname;
     
-    self.headerView.levelBtn.hidden = [[TLUser user].level isEqualToString:kLevelOrdinaryTraders] ? YES : NO;
+    self.headerView.mobileLbl.text = [TLUser user].mobile;
+    
+//    self.headerView.levelBtn.hidden = [[TLUser user].level isEqualToString:kLevelOrdinaryTraders] ? YES : NO;
     
 }
 

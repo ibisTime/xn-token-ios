@@ -59,7 +59,7 @@
             
             ckey = @"questions";
             
-            name = [LangSwitcher switchLang: @"常见问题" key:nil];
+            name = [LangSwitcher switchLang: @"帮助中心" key:nil];
             
         } break;
             
@@ -78,6 +78,7 @@
             name = [LangSwitcher switchLang:@"交易提醒" key:nil];
             
         } break;
+            
     }
 
     self.title = name;

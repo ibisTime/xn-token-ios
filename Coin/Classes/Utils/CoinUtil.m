@@ -11,6 +11,7 @@
 NSString *const kETH = @"ETH";
 NSString *const kSC = @"SC";
 NSString *const kBTC = @"BTC";
+NSString *const kOGC = @"OGC";
 
 NSString *const kCNY = @"CNY";
 
@@ -52,6 +53,10 @@ NSString *const kCNY = @"CNY";
     } else if([coin isEqualToString:kSC]) {
         
         return @(1.0e+24);
+        
+    } else if([coin isEqualToString:kOGC]) {
+        
+        return @(1.0e+8);
     }
     
     return nil;
@@ -97,7 +102,8 @@ NSString *const kCNY = @"CNY";
     NSDictionary *dict = @{
                            kETH : @"以太币",
                            kSC : @"云储币",
-                           kBTC : @"比特币"
+                           kBTC : @"比特币",
+                           kOGC : @"橙币"
                            };
     
     return dict[coin];
@@ -106,7 +112,7 @@ NSString *const kCNY = @"CNY";
 
 + (NSArray *)shouldDisplayCoinArray {
     
-    return @[kETH,kSC,kBTC];
+    return @[kOGC];
 }
 
 

@@ -42,6 +42,7 @@ typedef NS_ENUM(NSUInteger, CoinType) {
 FOUNDATION_EXTERN NSString *const kBTC;
 FOUNDATION_EXTERN NSString *const kETH;
 FOUNDATION_EXTERN NSString *const kSC;
+FOUNDATION_EXTERN NSString *const kOGC;
 
 FOUNDATION_EXTERN NSString *const kCNY;
 
