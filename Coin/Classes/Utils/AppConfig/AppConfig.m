@@ -55,7 +55,7 @@ void TLLog(NSString *format, ...) {
         case RunEnvDev: {
             //apidev.bcoin.im:4001
             self.qiniuDomain = @"http://ozfszueqz.bkt.clouddn.com";
-            self.addr = @"http://121.43.101.148:4001";
+            self.addr = @"http://121.43.101.148:2101";
             
         }break;
             
