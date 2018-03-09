@@ -9,6 +9,8 @@
 #import "RichChatViewController.h"
 #import <IQKeyboardManager/IQKeyboardManager.h>
 #import "TLUser.h"
+#import "TLNavigationController.h"
+#import "TLUserLoginVC.h"
 
 @implementation RichChatViewController
 
@@ -97,7 +99,12 @@
 
 - (void)loginOut {
     
-    [self.navigationController popViewControllerAnimated:YES];
+    
+    TLUserLoginVC *loginVC = [TLUserLoginVC new];
+    
+    TLNavigationController *nav = [[TLNavigationController alloc] initWithRootViewController:loginVC];
+    
+    [self.navigationController presentViewController:nav animated:YES completion:nil];
     
 }
 

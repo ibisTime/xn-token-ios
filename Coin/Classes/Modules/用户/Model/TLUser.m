@@ -18,6 +18,8 @@
 #import "ChatManager.h"
 #import "IMAHost+HostAPIs.h"
 #import "IMAHost.h"
+#import "TLNavigationController.h"
+#import "TLUserLoginVC.h"
 //#import "TabbarViewController.h"
 
 #define USER_ID_KEY @"user_id_key"
@@ -217,7 +219,7 @@ NSString *const kGoogleAuthClose = @"0";
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:USER_ID_KEY];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:USER_INFO_DICT_KEY];
     
-    
+
  
 }
 

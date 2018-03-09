@@ -339,8 +339,6 @@
 		2E973FDF1FDC0219005C2D5F /* AdsTradeDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E973FDE1FDC0219005C2D5F /* AdsTradeDetailVC.m */; };
 		2E973FEA1FDE31F7005C2D5F /* OrderListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E973FE91FDE31F7005C2D5F /* OrderListVC.m */; };
 		2EA2526E1FF09B52007FF9A2 /* CoinUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EA2526D1FF09B52007FF9A2 /* CoinUtil.m */; };
-		2EA584C11FA813C900C7106C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2EA584C01FA813C900C7106C /* Assets.xcassets */; };
-		2EA584C41FA813C900C7106C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2EA584C21FA813C900C7106C /* LaunchScreen.storyboard */; };
 		2EA584C71FA813C900C7106C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EA584C61FA813C900C7106C /* main.m */; };
 		2EB039951FE759FD00589D8E /* AdsDetailBottomOpView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EB039941FE759FD00589D8E /* AdsDetailBottomOpView.m */; };
 		2EB039981FE79ADF00589D8E /* UIColor+theme.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EB039961FE79ADF00589D8E /* UIColor+theme.m */; };
@@ -466,6 +464,8 @@
 		2EFFE6B21FF6286600BFCC40 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E5F19201FED0CB600100420 /* CoreTelephony.framework */; };
 		2EFFE6B31FF6287D00BFCC40 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E5F19241FED0CDD00100420 /* UserNotifications.framework */; };
 		2EFFE6B51FF6289600BFCC40 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EFFE6B41FF6289600BFCC40 /* libsqlite3.0.tbd */; };
+		4C4B67A120517C2C00A4F1CE /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C4B67A020517C2C00A4F1CE /* Launch Screen.storyboard */; };
+		4CAA48F420518B2900940987 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4CAA48F320518B2900940987 /* Assets.xcassets */; };
 		4CFA30B32048E38E00302493 /* ImSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CFA309E2048E38E00302493 /* ImSDK.framework */; };
 		4CFA30B42048E38E00302493 /* TLSSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CFA309F2048E38E00302493 /* TLSSDK.framework */; };
 		4CFA30B52048E38E00302493 /* QALSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CFA30A02048E38E00302493 /* QALSDK.framework */; };
@@ -1239,8 +1239,6 @@
 		2EA2526C1FF09B52007FF9A2 /* CoinUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoinUtil.h; sourceTree = "<group>"; };
 		2EA2526D1FF09B52007FF9A2 /* CoinUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoinUtil.m; sourceTree = "<group>"; };
 		2EA584B41FA813C900C7106C /* Coin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Coin.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		2EA584C01FA813C900C7106C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		2EA584C31FA813C900C7106C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2EA584C51FA813C900C7106C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2EA584C61FA813C900C7106C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		2EB039931FE759FD00589D8E /* AdsDetailBottomOpView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AdsDetailBottomOpView.h; sourceTree = "<group>"; };
@@ -1451,11 +1449,11 @@
 		2EE950D81FB06AA900429257 /* TLBannerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLBannerCell.h; sourceTree = "<group>"; };
 		2EFFE6AB1FF4829100BFCC40 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		2EFFE6AD1FF483E000BFCC40 /* Base */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
-		2EFFE6AE1FF4866700BFCC40 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		2EFFE6AF1FF4866700BFCC40 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
-		2EFFE6B01FF4868300BFCC40 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		2EFFE6B11FF4868400BFCC40 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		2EFFE6B41FF6289600BFCC40 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+		4C4B67A020517C2C00A4F1CE /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		4CAA48F320518B2900940987 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4CFA309E2048E38E00302493 /* ImSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ImSDK.framework; sourceTree = "<group>"; };
 		4CFA309F2048E38E00302493 /* TLSSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TLSSDK.framework; sourceTree = "<group>"; };
 		4CFA30A02048E38E00302493 /* QALSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = QALSDK.framework; sourceTree = "<group>"; };
@@ -3630,8 +3628,8 @@
 				215421CF1FD708AC00FDD25C /* Coin.entitlements */,
 				2E394FA31FB0546E00BA0829 /* Classes */,
 				4CFA309B2048E38E00302493 /* Extension */,
-				2EA584C01FA813C900C7106C /* Assets.xcassets */,
-				2EA584C21FA813C900C7106C /* LaunchScreen.storyboard */,
+				4CAA48F320518B2900940987 /* Assets.xcassets */,
+				4C4B67A020517C2C00A4F1CE /* Launch Screen.storyboard */,
 				2EA584C51FA813C900C7106C /* Info.plist */,
 				2EA584C61FA813C900C7106C /* main.m */,
 				2EFFE6AC1FF4829100BFCC40 /* Localizable.strings */,
@@ -4121,7 +4119,6 @@
 				2EE360FF1FFA09A800A5C3EB /* ChatSystemFaceConfig.plist in Resources */,
 				2EE361201FFA09A800A5C3EB /* 16.gif in Resources */,
 				2EE3611E1FFA09A800A5C3EB /* 15.gif in Resources */,
-				2EA584C41FA813C900C7106C /* LaunchScreen.storyboard in Resources */,
 				2EE361211FFA09A800A5C3EB /* 12.gif in Resources */,
 				2EE360F51FFA09A800A5C3EB /* MicroVideo.xcassets in Resources */,
 				2EE361011FFA09A800A5C3EB /* 21.gif in Resources */,
@@ -4140,12 +4137,12 @@
 				2EE3610D1FFA09A800A5C3EB /* 31.gif in Resources */,
 				2EE361191FFA09A800A5C3EB /* 9.gif in Resources */,
 				2EE361071FFA09A800A5C3EB /* 27.gif in Resources */,
+				4C4B67A120517C2C00A4F1CE /* Launch Screen.storyboard in Resources */,
 				4CFA30BB2048E38E00302493 /* ZDCChatStrings.bundle in Resources */,
 				2EE360F11FFA09A800A5C3EB /* MicroVideoSource.xcassets in Resources */,
 				2EE361121FFA09A800A5C3EB /* 7.gif in Resources */,
 				2EE360F61FFA09A800A5C3EB /* youtubeauty.bundle in Resources */,
 				2EE3611A1FFA09A800A5C3EB /* 14.gif in Resources */,
-				2EA584C11FA813C900C7106C /* Assets.xcassets in Resources */,
 				2EB9495B1FDF6B1A00CE4B94 /* SimplifiedCode.txt in Resources */,
 				4CFA30BC2048E38E00302493 /* ZDCChat.bundle in Resources */,
 				2EE361021FFA09A800A5C3EB /* 34.gif in Resources */,
@@ -4162,6 +4159,7 @@
 				2EB9495C1FDF6B1A00CE4B94 /* TraditionalCode.txt in Resources */,
 				2EE361051FFA09A800A5C3EB /* 23.gif in Resources */,
 				4CFA30C12048E38E00302493 /* read_me.txt in Resources */,
+				4CAA48F420518B2900940987 /* Assets.xcassets in Resources */,
 				2EE361181FFA09A800A5C3EB /* 8.gif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4643,16 +4641,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		2EA584C21FA813C900C7106C /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				2EA584C31FA813C900C7106C /* Base */,
-				2EFFE6AE1FF4866700BFCC40 /* zh-Hans */,
-				2EFFE6B01FF4868300BFCC40 /* zh-Hant */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
 		2EFFE6AC1FF4829100BFCC40 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (

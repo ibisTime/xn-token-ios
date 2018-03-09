@@ -181,13 +181,19 @@
         
         
     }];
+    
+    TLUserLoginVC *loginVC = [TLUserLoginVC new];
+    
+    TLNavigationController *nav = [[TLNavigationController alloc] initWithRootViewController:loginVC];
+    
+    [self.window.rootViewController presentViewController:nav animated:YES completion:nil];
 
     //
-    UITabBarController *tabbarContrl = (UITabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
-    tabbarContrl.selectedIndex = 0;
-    [tabbarContrl.tabBar hideBadgeOnItemIndex:1];
-    //应用外数量为0
-    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+//    UITabBarController *tabbarContrl = (UITabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
+//    tabbarContrl.selectedIndex = 0;
+//    [tabbarContrl.tabBar hideBadgeOnItemIndex:1];
+//    //应用外数量为0
+//    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
     
 }
 
@@ -208,14 +214,14 @@
     
     
     //zendesk
-    ZDKAnonymousIdentity *identity = [ZDKAnonymousIdentity new];
-    identity.name = [TLUser user].nickname;
-    identity.email = [NSString stringWithFormat:@"%@",[TLUser user].email];
-    [ZDKConfig instance].userIdentity = identity;
+//    ZDKAnonymousIdentity *identity = [ZDKAnonymousIdentity new];
+//    identity.name = [TLUser user].nickname;
+//    identity.email = [NSString stringWithFormat:@"%@",[TLUser user].email];
+//    [ZDKConfig instance].userIdentity = identity;
     
     // 重新登录的时候要重新，配置一下
-    [self kvoUnReadMsgToChangeTabbar];
-    [[ChatManager sharedManager] loginIM];
+//    [self kvoUnReadMsgToChangeTabbar];
+//    [[ChatManager sharedManager] loginIM];
     
 }
 
