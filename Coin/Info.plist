@@ -37,7 +37,7 @@
 			<string>alipays</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>Bcoin</string>
+				<string>orangecoin</string>
 			</array>
 		</dict>
 	</array>
