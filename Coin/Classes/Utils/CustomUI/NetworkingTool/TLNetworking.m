@@ -21,7 +21,7 @@
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     
     [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
-    manager.requestSerializer.timeoutInterval = 15.0;
+    manager.requestSerializer.timeoutInterval = 60.0;
     NSSet *set = manager.responseSerializer.acceptableContentTypes;
     
     set = [set setByAddingObject:@"text/plain"];

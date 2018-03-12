@@ -12,6 +12,7 @@ typedef NS_ENUM(NSInteger, BillType) {
     
     BillTypeRecharge = 0,       //充值
     BillTypeWithdraw,           //提币
+    BillTypeAutofill,           //自动补给
     BillTypeAll,                //全部
     BillTypeFrozen,             //冻结
     

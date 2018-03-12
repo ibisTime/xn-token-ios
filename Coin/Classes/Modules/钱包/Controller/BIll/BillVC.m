@@ -70,6 +70,10 @@
         
         self.title = [LangSwitcher switchLang:@"提币明细" key:nil];
         
+    } else if (billType == BillTypeAutofill) {
+        
+        self.title = [LangSwitcher switchLang:@"自动补给明细" key:nil];
+        
     } else if (billType == BillTypeFrozen) {
         
         self.title = [LangSwitcher switchLang:@"冻结明细" key:nil];
@@ -87,6 +91,7 @@
         NSArray *textArr = @[[LangSwitcher switchLang:@"全部" key:nil],
                              [LangSwitcher switchLang:@"充币" key:nil],
                              [LangSwitcher switchLang:@"提币" key:nil],
+                             [LangSwitcher switchLang:@"自动补给" key:nil],
 //                             [LangSwitcher switchLang:@"交易买入" key:nil],
 //                             [LangSwitcher switchLang:@"交易卖出" key:nil],
 //                             [LangSwitcher switchLang:@"交易手续费" key:nil],
@@ -94,7 +99,7 @@
 //                             [LangSwitcher switchLang:@"邀请好友收入" key:nil],
                              ];
 
-        NSArray *typeArr = @[@"", @"charge", @"withdraw"];
+        NSArray *typeArr = @[@"", @"charge", @"withdraw", @"autofill"];
         
         _filterPicker = [[FilterView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
         
@@ -191,6 +196,10 @@
     } else if (self.billType == BillTypeWithdraw) {
         
         bizType = @"withdraw";
+        
+    } else if (self.billType == BillTypeAutofill) {
+        
+        bizType = @"autofill";
         
     } else if (self.billType == BillTypeFrozen) {
         

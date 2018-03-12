@@ -52,7 +52,7 @@
     
     
     //服务器环境
-    [AppConfig config].runEnv = RunEnvDev;
+    [AppConfig config].runEnv = RunEnvRelease;
 //    [AppConfig config].isUploadCheck = YES;
     self.respHandler = [[RespHandler alloc] init];
      

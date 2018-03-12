@@ -35,6 +35,7 @@
                           
                            @"charge" : [LangSwitcher switchLang: [NSString stringWithFormat:@"%@充值",self.currency] key:nil],
                            @"withdraw" : [LangSwitcher switchLang: [NSString stringWithFormat:@"%@取现",self.currency] key:nil] ,
+                           @"autofill": [LangSwitcher switchLang:@"自动补给" key:nil]  ,
                            @"buy": [LangSwitcher switchLang:@"交易买入" key:nil]  ,
                            @"sell" : [LangSwitcher switchLang:@"交易卖出" key:nil],
                            @"tradefrozen" :[LangSwitcher switchLang:@"交易冻结" key:nil],
