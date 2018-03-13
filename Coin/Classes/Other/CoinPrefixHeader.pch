@@ -1,0 +1,40 @@
+//
+//  CoinPrefixHeader.pch
+//  Coin
+//
+//  Created by 蔡卓越 on 2017/11/23.
+//  Copyright © 2017年  tianlei. All rights reserved.
+//
+
+#ifdef __OBJC__
+
+#ifndef CoinPrefixHeader_h
+#define CoinPrefixHeader_h
+
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+
+//IM
+// 是否支持富文本显示
+#define kTestChatAttachment 1
+
+
+#import "CommonLibrary.h"
+
+#import "TIMAdapter.h"
+
+#import "ImageHeader.h"
+
+#import "ConstHeader.h"
+
+//#import "IMCustomUIHeader.h"
+
+//#import "AppDelegate.h"
+
+//#import "AppUIHeaders.h"
+
+#import <AVFoundation/AVAsset.h>
+
+#endif /* CoinPrefixHeader_h */
+
+#endif
