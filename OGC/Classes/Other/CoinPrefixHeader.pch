@@ -1,0 +1,21 @@
+//
+//  CoinPrefixHeader.pch
+//  Coin
+//
+//  Created by 蔡卓越 on 2017/11/23.
+//  Copyright © 2017年  tianlei. All rights reserved.
+//
+
+#ifdef __OBJC__
+
+#ifndef CoinPrefixHeader_h
+#define CoinPrefixHeader_h
+
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+
+#import <AVFoundation/AVAsset.h>
+
+#endif /* CoinPrefixHeader_h */
+
+#endif

@@ -4,7 +4,7 @@ platform :ios, '9.0'
 source 'https://github.com/tianleios/CDSpecs.git'
 source 'https://github.com/CocoaPods/Specs.git'
 
-target 'Coin' do
+target 'OGC' do
 
 #私有
 pod 'NBHTTP',               '3.0.1'
