@@ -121,6 +121,14 @@
 		215979761FB84CC70029F177 /* BillDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 215979751FB84CC70029F177 /* BillDetailCell.m */; };
 		215979791FB947730029F177 /* WithdrawalsCoinVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 215979781FB947730029F177 /* WithdrawalsCoinVC.m */; };
 		21635DB91FBECBDD003F48B4 /* TopLabelUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 21635DB81FBECBDD003F48B4 /* TopLabelUtil.m */; };
+		2163E12E2057C5310027D1D5 /* HomeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2163E12D2057C5310027D1D5 /* HomeVC.m */; };
+		2163E1352057C6640027D1D5 /* HomeHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2163E1342057C6640027D1D5 /* HomeHeaderView.m */; };
+		2163E1382057C6F30027D1D5 /* BannerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2163E1362057C6F30027D1D5 /* BannerModel.m */; };
+		2163E13E2057C7580027D1D5 /* TLBannerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2163E13B2057C7570027D1D5 /* TLBannerCell.m */; };
+		2163E13F2057C7580027D1D5 /* TLBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2163E13C2057C7570027D1D5 /* TLBannerView.m */; };
+		2163E1452057D0290027D1D5 /* StoreTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2163E1442057D0290027D1D5 /* StoreTableView.m */; };
+		2163E1482057D04D0027D1D5 /* StoreCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2163E1472057D04D0027D1D5 /* StoreCell.m */; };
+		2163E14C2057D0A90027D1D5 /* StoreModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2163E14B2057D0A90027D1D5 /* StoreModel.m */; };
 		21A7F3121FB2E2F900FAA0A2 /* BindMobileVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A7F2E41FB2E2F900FAA0A2 /* BindMobileVC.m */; };
 		21A7F3131FB2E2F900FAA0A2 /* TLAccountSetBaseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A7F2E51FB2E2F900FAA0A2 /* TLAccountSetBaseVC.m */; };
 		21A7F3141FB2E2F900FAA0A2 /* TLPwdRelatedVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A7F2E61FB2E2F900FAA0A2 /* TLPwdRelatedVC.m */; };
@@ -409,6 +417,22 @@
 		215979781FB947730029F177 /* WithdrawalsCoinVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WithdrawalsCoinVC.m; sourceTree = "<group>"; };
 		21635DB71FBECBDD003F48B4 /* TopLabelUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopLabelUtil.h; sourceTree = "<group>"; };
 		21635DB81FBECBDD003F48B4 /* TopLabelUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopLabelUtil.m; sourceTree = "<group>"; };
+		2163E12C2057C5310027D1D5 /* HomeVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeVC.h; sourceTree = "<group>"; };
+		2163E12D2057C5310027D1D5 /* HomeVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeVC.m; sourceTree = "<group>"; };
+		2163E1332057C6640027D1D5 /* HomeHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeHeaderView.h; sourceTree = "<group>"; };
+		2163E1342057C6640027D1D5 /* HomeHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeHeaderView.m; sourceTree = "<group>"; };
+		2163E1362057C6F30027D1D5 /* BannerModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BannerModel.m; sourceTree = "<group>"; };
+		2163E1372057C6F30027D1D5 /* BannerModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BannerModel.h; sourceTree = "<group>"; };
+		2163E13A2057C7570027D1D5 /* TLBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLBannerView.h; sourceTree = "<group>"; };
+		2163E13B2057C7570027D1D5 /* TLBannerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLBannerCell.m; sourceTree = "<group>"; };
+		2163E13C2057C7570027D1D5 /* TLBannerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLBannerView.m; sourceTree = "<group>"; };
+		2163E13D2057C7570027D1D5 /* TLBannerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLBannerCell.h; sourceTree = "<group>"; };
+		2163E1432057D0290027D1D5 /* StoreTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StoreTableView.h; sourceTree = "<group>"; };
+		2163E1442057D0290027D1D5 /* StoreTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StoreTableView.m; sourceTree = "<group>"; };
+		2163E1462057D04D0027D1D5 /* StoreCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StoreCell.h; sourceTree = "<group>"; };
+		2163E1472057D04D0027D1D5 /* StoreCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StoreCell.m; sourceTree = "<group>"; };
+		2163E14A2057D0A90027D1D5 /* StoreModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StoreModel.h; sourceTree = "<group>"; };
+		2163E14B2057D0A90027D1D5 /* StoreModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StoreModel.m; sourceTree = "<group>"; };
 		21A7F2D21FB2D2D300FAA0A2 /* FoundationHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FoundationHeader.h; sourceTree = "<group>"; };
 		21A7F2D71FB2D62A00FAA0A2 /* CoinHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoinHeader.h; sourceTree = "<group>"; };
 		21A7F2E31FB2E2F900FAA0A2 /* TLChangeMobileVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLChangeMobileVC.h; sourceTree = "<group>"; };
@@ -895,8 +919,8 @@
 		211DE63B1FB58B4B002FCF3D /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				2EB949551FDF6B1A00CE4B94 /* ChineseConvert */,
 				211DE6941FB58B4C002FCF3D /* Foundation+Log.m */,
+				2EB949551FDF6B1A00CE4B94 /* ChineseConvert */,
 				21205D091FCD6506003C6C7C /* Manager */,
 				211DE63C1FB58B4B002FCF3D /* CustomUI */,
 				211DE65B1FB58B4B002FCF3D /* Category */,
@@ -976,6 +1000,8 @@
 		211DE6671FB58B4B002FCF3D /* UIColor */ = {
 			isa = PBXGroup;
 			children = (
+				2EB039971FE79ADF00589D8E /* UIColor+theme.h */,
+				2EB039961FE79ADF00589D8E /* UIColor+theme.m */,
 				211DE6681FB58B4B002FCF3D /* UIColor+Extension.h */,
 				211DE66A1FB58B4B002FCF3D /* UIColor+Extension.m */,
 			);
@@ -1260,6 +1286,49 @@
 			path = CoinAddress;
 			sourceTree = "<group>";
 		};
+		212882D62057C24400A57A5A /* Update */ = {
+			isa = PBXGroup;
+			children = (
+				2EB039B41FEA0B4500589D8E /* TLUpdateVC.h */,
+				2EB039B31FEA0B4500589D8E /* TLUpdateVC.m */,
+				212882D02057BCE300A57A5A /* GengXinModel.h */,
+				212882D12057BCE400A57A5A /* GengXinModel.m */,
+			);
+			path = Update;
+			sourceTree = "<group>";
+		};
+		212882D72057C2F900A57A5A /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				2EE361351FFB7D4500A5C3EB /* README.md */,
+				215421CF1FD708AC00FDD25C /* OGC.entitlements */,
+				4CAA48F320518B2900940987 /* Assets.xcassets */,
+				4C4B67A020517C2C00A4F1CE /* Launch Screen.storyboard */,
+				2EA584C51FA813C900C7106C /* Info.plist */,
+				2EA584C61FA813C900C7106C /* main.m */,
+				2EFFE6AC1FF4829100BFCC40 /* Localizable.strings */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		212882D92057C36100A57A5A /* AppDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				2E394FEC1FB0575A00BA0829 /* AppDelegate.h */,
+				2E394FEB1FB0575A00BA0829 /* AppDelegate.m */,
+			);
+			path = AppDelegate;
+			sourceTree = "<group>";
+		};
+		212882DA2057C37E00A57A5A /* Resp */ = {
+			isa = PBXGroup;
+			children = (
+				2EE361531FFE182500A5C3EB /* RespHandler.h */,
+				2EE361541FFE182700A5C3EB /* RespHandler.m */,
+			);
+			path = Resp;
+			sourceTree = "<group>";
+		};
 		215979611FB81CD10029F177 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -1273,6 +1342,124 @@
 				2ED651CB200F32BC0065A1B0 /* TLCoinWithdrawModel.m */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		2163E1282057C44F0027D1D5 /* 首页 */ = {
+			isa = PBXGroup;
+			children = (
+				2163E12B2057C4790027D1D5 /* Model */,
+				2163E12A2057C4700027D1D5 /* View */,
+				2163E1292057C4630027D1D5 /* Controller */,
+			);
+			path = "首页";
+			sourceTree = "<group>";
+		};
+		2163E1292057C4630027D1D5 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				2163E12C2057C5310027D1D5 /* HomeVC.h */,
+				2163E12D2057C5310027D1D5 /* HomeVC.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		2163E12A2057C4700027D1D5 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				2163E1422057CFEC0027D1D5 /* Stores */,
+				2163E1402057C75F0027D1D5 /* Header */,
+				2163E1392057C7390027D1D5 /* Banner */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		2163E12B2057C4790027D1D5 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				2163E1492057D08D0027D1D5 /* Stores */,
+				2163E1412057C76A0027D1D5 /* Banner */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		2163E12F2057C5540027D1D5 /* 首页 */ = {
+			isa = PBXGroup;
+			children = (
+				2163E1322057C56F0027D1D5 /* Model */,
+				2163E1312057C5680027D1D5 /* View */,
+				2163E1302057C5610027D1D5 /* Controller */,
+			);
+			path = "首页";
+			sourceTree = "<group>";
+		};
+		2163E1302057C5610027D1D5 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		2163E1312057C5680027D1D5 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		2163E1322057C56F0027D1D5 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		2163E1392057C7390027D1D5 /* Banner */ = {
+			isa = PBXGroup;
+			children = (
+				2163E13D2057C7570027D1D5 /* TLBannerCell.h */,
+				2163E13B2057C7570027D1D5 /* TLBannerCell.m */,
+				2163E13A2057C7570027D1D5 /* TLBannerView.h */,
+				2163E13C2057C7570027D1D5 /* TLBannerView.m */,
+			);
+			path = Banner;
+			sourceTree = "<group>";
+		};
+		2163E1402057C75F0027D1D5 /* Header */ = {
+			isa = PBXGroup;
+			children = (
+				2163E1332057C6640027D1D5 /* HomeHeaderView.h */,
+				2163E1342057C6640027D1D5 /* HomeHeaderView.m */,
+			);
+			path = Header;
+			sourceTree = "<group>";
+		};
+		2163E1412057C76A0027D1D5 /* Banner */ = {
+			isa = PBXGroup;
+			children = (
+				2163E1372057C6F30027D1D5 /* BannerModel.h */,
+				2163E1362057C6F30027D1D5 /* BannerModel.m */,
+			);
+			path = Banner;
+			sourceTree = "<group>";
+		};
+		2163E1422057CFEC0027D1D5 /* Stores */ = {
+			isa = PBXGroup;
+			children = (
+				2163E1432057D0290027D1D5 /* StoreTableView.h */,
+				2163E1442057D0290027D1D5 /* StoreTableView.m */,
+				2163E1462057D04D0027D1D5 /* StoreCell.h */,
+				2163E1472057D04D0027D1D5 /* StoreCell.m */,
+			);
+			path = Stores;
+			sourceTree = "<group>";
+		};
+		2163E1492057D08D0027D1D5 /* Stores */ = {
+			isa = PBXGroup;
+			children = (
+				2163E14A2057D0A90027D1D5 /* StoreModel.h */,
+				2163E14B2057D0A90027D1D5 /* StoreModel.m */,
+			);
+			path = Stores;
 			sourceTree = "<group>";
 		};
 		21A7F2D81FB2E2F900FAA0A2 /* 用户 */ = {
@@ -1435,15 +1622,10 @@
 		2E394FA31FB0546E00BA0829 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				2E394FEC1FB0575A00BA0829 /* AppDelegate.h */,
-				2E394FEB1FB0575A00BA0829 /* AppDelegate.m */,
-				2EB039B41FEA0B4500589D8E /* TLUpdateVC.h */,
-				2EB039B31FEA0B4500589D8E /* TLUpdateVC.m */,
-				212882D02057BCE300A57A5A /* GengXinModel.h */,
-				212882D12057BCE400A57A5A /* GengXinModel.m */,
-				2EE361531FFE182500A5C3EB /* RespHandler.h */,
-				2EE361541FFE182700A5C3EB /* RespHandler.m */,
-				2EE361351FFB7D4500A5C3EB /* README.md */,
+				212882D92057C36100A57A5A /* AppDelegate */,
+				212882DA2057C37E00A57A5A /* Resp */,
+				212882D62057C24400A57A5A /* Update */,
+				2163E1282057C44F0027D1D5 /* 首页 */,
 				2E394FA41FB055DE00BA0829 /* 钱包 */,
 				2E394FAC1FB055DE00BA0829 /* 我的 */,
 				2E394FD11FB0568F00BA0829 /* Modules */,
@@ -1506,6 +1688,7 @@
 		2E394FD11FB0568F00BA0829 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				2163E12F2057C5540027D1D5 /* 首页 */,
 				211A34E51FB42F5000FEB71F /* 我的 */,
 				2E42616120258B2500913DCF /* Service */,
 				2E394FD21FB0568F00BA0829 /* 钱包 */,
@@ -1541,8 +1724,6 @@
 			isa = PBXGroup;
 			children = (
 				2E426168202842EC00913DCF /* test */,
-				2EB039971FE79ADF00589D8E /* UIColor+theme.h */,
-				2EB039961FE79ADF00589D8E /* UIColor+theme.m */,
 				2E973FD01FDBC57C005C2D5F /* View */,
 				2E394FF31FB057B200BA0829 /* TLNavigationController.h */,
 				2E394FF01FB057B200BA0829 /* TLNavigationController.m */,
@@ -1632,14 +1813,9 @@
 		2EA584B61FA813C900C7106C /* OGC */ = {
 			isa = PBXGroup;
 			children = (
-				215421CF1FD708AC00FDD25C /* OGC.entitlements */,
 				2E394FA31FB0546E00BA0829 /* Classes */,
 				212882972057B41200A57A5A /* Extension */,
-				4CAA48F320518B2900940987 /* Assets.xcassets */,
-				4C4B67A020517C2C00A4F1CE /* Launch Screen.storyboard */,
-				2EA584C51FA813C900C7106C /* Info.plist */,
-				2EA584C61FA813C900C7106C /* main.m */,
-				2EFFE6AC1FF4829100BFCC40 /* Localizable.strings */,
+				212882D72057C2F900A57A5A /* Resource */,
 			);
 			path = OGC;
 			sourceTree = "<group>";
@@ -1862,6 +2038,7 @@
 				211A53221FBFE3A100CC6294 /* RateDescVC.m in Sources */,
 				211DE6BE1FB58B4C002FCF3D /* NSNumber+Extension.m in Sources */,
 				211DE6BA1FB58B4C002FCF3D /* NSString+Check.m in Sources */,
+				2163E1452057D0290027D1D5 /* StoreTableView.m in Sources */,
 				2E42616420258B4300913DCF /* CoinService.m in Sources */,
 				21A7F3151FB2E2F900FAA0A2 /* TLChangeMobileVC.m in Sources */,
 				211DE6AC1FB58B4C002FCF3D /* TLPageDataHelper.m in Sources */,
@@ -1917,6 +2094,7 @@
 				211DE6A01FB58B4C002FCF3D /* TLDatePicker.m in Sources */,
 				211DE6AA1FB58B4C002FCF3D /* TLImagePicker.m in Sources */,
 				21A7F3211FB2E2F900FAA0A2 /* AccountTf.m in Sources */,
+				2163E13F2057C7580027D1D5 /* TLBannerView.m in Sources */,
 				2EB039AD1FE8EDE300589D8E /* UserInfo.m in Sources */,
 				211A53351FBFE53100CC6294 /* RateModel.m in Sources */,
 				215979671FB81D230029F177 /* BillCell.m in Sources */,
@@ -1947,6 +2125,8 @@
 				211D3C151FCFE3AB00B55F9F /* HistoryRateTableView.m in Sources */,
 				211DE6BB1FB58B4C002FCF3D /* NSString+CGSize.m in Sources */,
 				211DE6B81FB58B4C002FCF3D /* UIControl+Block.m in Sources */,
+				2163E1352057C6640027D1D5 /* HomeHeaderView.m in Sources */,
+				2163E1482057D04D0027D1D5 /* StoreCell.m in Sources */,
 				2E5F33A9202BF25F00B2F263 /* TLLeftRightView.m in Sources */,
 				211DE6C41FB58B4C002FCF3D /* HttpSign.m in Sources */,
 				2E42616B2028431200913DCF /* TLSwitchView.m in Sources */,
@@ -1956,14 +2136,18 @@
 				21A7F31C1FB2E2F900FAA0A2 /* TLUserExt.m in Sources */,
 				211A34FD1FB4507E00FEB71F /* IdAuthVC.m in Sources */,
 				215979731FB84CB10029F177 /* BillDetailTableView.m in Sources */,
+				2163E12E2057C5310027D1D5 /* HomeVC.m in Sources */,
 				211DE6C01FB58B4C002FCF3D /* NSObject+Extension.m in Sources */,
 				211DE6C71FB58B4C002FCF3D /* HttpRequestObject.m in Sources */,
+				2163E13E2057C7580027D1D5 /* TLBannerCell.m in Sources */,
+				2163E14C2057D0A90027D1D5 /* StoreModel.m in Sources */,
 				212882D52057BD3500A57A5A /* CoinChangeView.m in Sources */,
 				212882CE2057B94400A57A5A /* CoinAddAddressVC.m in Sources */,
 				211DE6BD1FB58B4C002FCF3D /* NSString+Date.m in Sources */,
 				21205CCF1FCCFDCF003C6C7C /* FansTableView.m in Sources */,
 				211DE6C31FB58B4C002FCF3D /* HttpRequestTool.m in Sources */,
 				21A7F3121FB2E2F900FAA0A2 /* BindMobileVC.m in Sources */,
+				2163E1382057C6F30027D1D5 /* BannerModel.m in Sources */,
 				2EE950C31FB05B4500429257 /* TLWalletVC.m in Sources */,
 				212882C12057B92600A57A5A /* CoinAddressModel.m in Sources */,
 				212882D22057BCE400A57A5A /* GengXinModel.m in Sources */,
@@ -2138,7 +2322,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CLANG_WARN_STRICT_PROTOTYPES = NO;
-				CODE_SIGN_ENTITLEMENTS = OGC/OGC.entitlements;
+				CODE_SIGN_ENTITLEMENTS = OGC/Resource/OGC.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 6PF7VHZB5Z;
@@ -2152,7 +2336,7 @@
 					"$(PROJECT_DIR)/OGC/Extension/ZDCChat",
 				);
 				GCC_PREFIX_HEADER = "/Users/caizhuoyue/橙袋/OGC钱包/xn-token-ios/OGC/Classes/Other/CoinPrefixHeader.pch";
-				INFOPLIST_FILE = OGC/Info.plist;
+				INFOPLIST_FILE = OGC/Resource/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
@@ -2178,7 +2362,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CLANG_WARN_STRICT_PROTOTYPES = NO;
-				CODE_SIGN_ENTITLEMENTS = OGC/OGC.entitlements;
+				CODE_SIGN_ENTITLEMENTS = OGC/Resource/OGC.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 6PF7VHZB5Z;
@@ -2192,7 +2376,7 @@
 					"$(PROJECT_DIR)/OGC/Extension/ZDCChat",
 				);
 				GCC_PREFIX_HEADER = "/Users/caizhuoyue/橙袋/OGC钱包/xn-token-ios/OGC/Classes/Other/CoinPrefixHeader.pch";
-				INFOPLIST_FILE = OGC/Info.plist;
+				INFOPLIST_FILE = OGC/Resource/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (

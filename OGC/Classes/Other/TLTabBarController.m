@@ -28,13 +28,14 @@
     self.delegate = self;
 
     NSArray *titles = @[
+                        [LangSwitcher switchLang:@"首页" key:nil],
                         [LangSwitcher switchLang:@"钱包" key:nil],
                         [LangSwitcher switchLang:@"我的" key:nil]
                         ];
-    NSArray *VCNames = @[@"TLWalletVC",@"TLMineVC"];
+    NSArray *VCNames = @[@"HomeVC", @"TLWalletVC", @"TLMineVC"];
     
-    NSArray *imageNames = @[@"钱包00",@"我的00"];
-    NSArray *selectedImageNames = @[@"钱包01",@"我的01"];
+    NSArray *imageNames = @[@"home", @"钱包00", @"我的00"];
+    NSArray *selectedImageNames = @[@"home_select", @"钱包01", @"我的01"];
     
     
     for (int i = 0; i < imageNames.count; i++) {
@@ -137,7 +138,7 @@
     if ([AppConfig config].isUploadCheck) {
         
         //判断点击的Controller是不是需要登录，如果是，那就登录
-        if((idx == 0 || idx == 1) && ![TLUser user].isLogin) {
+        if((idx == 1 || idx == 2) && ![TLUser user].isLogin) {
             
             TLUserLoginVC *loginVC = [TLUserLoginVC new];
             
@@ -156,7 +157,7 @@
     } else {
         
         //判断点击的Controller是不是需要登录，如果是，那就登录
-        if((idx == 0 || idx == 1) && ![TLUser user].isLogin) {
+        if((idx == 1 || idx == 2) && ![TLUser user].isLogin) {
             
             TLUserLoginVC *loginVC = [TLUserLoginVC new];
             
