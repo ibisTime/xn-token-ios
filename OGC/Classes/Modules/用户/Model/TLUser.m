@@ -250,7 +250,7 @@ NSString *const kGoogleAuthClose = @"0";
         
         [self setUserInfoWithDict:responseObject[@"data"]];
         [self saveUserInfo:responseObject[@"data"]];
-        
+
         if (isPostNotification) {
             
             [[NSNotificationCenter defaultCenter] postNotificationName:kUserInfoChange object:nil];

@@ -15,10 +15,11 @@ pod 'MJRefresh' ,           '3.1.12'
 pod 'MJExtension' ,         '3.0.13'
 pod 'Masonry',              '1.0.2'
 pod 'AFNetworking',         '3.1.0'
-pod 'SDWebImage',           '4.0.0'
+pod 'SDWebImage',           '3.8.1'
 pod 'IQKeyboardManager',    '5.0.2'
 pod 'MBProgressHUD',        '0.9.2’
 pod 'SGQRCode',             '2.1.8'
+pod 'PYPhotoBrowser',           '1.1.5'
 #pod 'pop',                 '1.0.10'
 #七牛云
 pod 'JPush'

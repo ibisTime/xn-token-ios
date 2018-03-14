@@ -112,14 +112,10 @@ static NSString * const XNBannerCellID = @"XNBannerCellID ";
         } else {
             
             _urls = [NSMutableArray arrayWithArray:imgUrls];
-
-        
         }
-        
         
         if (_isAuto) {
             
-      
             //移除指示
             [self.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                 

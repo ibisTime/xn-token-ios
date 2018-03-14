@@ -117,6 +117,8 @@
 
 //更新登录时间
 - (void)changLoginTime;
+//获取七牛云域名
+- (void)requestQiniuDomain;
 
 @end
 

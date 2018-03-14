@@ -8,18 +8,18 @@
 
 #import "HomeVC.h"
 
-//Macro
-//Framework
-//Category
-//Extension
 //M
 #import "StoreModel.h"
+#import "CountInfoModel.h"
 //V
 #import "StoreTableView.h"
 #import "HomeHeaderView.h"
+#import "TLProgressHUD.h"
 //C
+#import "StoreDetailVC.h"
+#import "TradeFlowListVC.h"
 
-@interface HomeVC ()
+@interface HomeVC ()<RefreshDelegate>
 //头部
 @property (nonatomic, strong) HomeHeaderView *headerView;
 //店铺
@@ -38,18 +38,54 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.title = @"首页";
+    self.title = [LangSwitcher switchLang:@"首页" key:nil];
     //
     [self initPlaceHolderView];
-    //
-    [self initTableView];
+    //获取banner列表
+    [self requestBannerList];
+    //获取官方钱包总量，已空投量
+    [self requestCountInfo];
     //获取店铺列表
     [self requestStoreList];
-    //
-//    [self.tableView beginRefreshing];
+
 }
 
 #pragma mark - Init
+- (StoreTableView *)tableView {
+    
+    if (!_tableView) {
+        
+        _tableView = [[StoreTableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+        
+        _tableView.placeHolderView = self.placeHolderView;
+        _tableView.refreshDelegate = self;
+        
+        [self.view addSubview:_tableView];
+        [_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.edges.mas_equalTo(0);
+        }];
+        
+    }
+    return _tableView;
+}
+
+- (HomeHeaderView *)headerView {
+    
+    if (!_headerView) {
+        
+        CoinWeakSelf;
+        //头部
+        _headerView = [[HomeHeaderView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kWidth(185) + 120)];
+        
+        _headerView.headerBlock = ^(HomeEventsType type, NSInteger index) {
+            
+            [weakSelf headerViewEventsWithType:type index:index];
+        };
+    }
+    return _headerView;
+}
+
 - (void)initPlaceHolderView {
     
     self.placeHolderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight - 40)];
@@ -81,38 +117,21 @@
     
 }
 
-- (void)initTableView {
+#pragma mark - HeaderEvents
+- (void)headerViewEventsWithType:(HomeEventsType)type index:(NSInteger)index {
     
-    self.tableView = [[StoreTableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
-    
-    self.tableView.placeHolderView = self.placeHolderView;
-    
-    [self.view addSubview:self.tableView];
-    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.edges.mas_equalTo(0);
-    }];
-    //头部
-    self.headerView = [[HomeHeaderView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kWidth(185) + 100)];
-    
-    self.tableView.tableHeaderView = self.headerView;
-    
-    NSMutableArray <StoreModel *>*arr = [NSMutableArray array];
-    
-    for (int i = 0; i < 10; i++) {
-        
-        StoreModel *model = [StoreModel new];
-        
-        model.name = @"三眼蛤蟆";
-        model.slogan = @"但也仅仅事关你艺术造诣上的突破，艺考这点事，犯不上每个人都得动用自己的天赋。艺考这东西已经体制化，僵硬化了用自己的天赋。艺考这东用自己的天赋。";
-        model.address = @"余姚金街853-11号";
-        
-        [arr addObject:model];
+    switch (type) {
+        case HomeEventsTypeStatistics:
+        {
+            TradeFlowListVC *flowVC = [TradeFlowListVC new];
+            
+            [self.navigationController pushViewController:flowVC animated:YES];
+            
+        }break;
+            
+        default:
+            break;
     }
-    
-    self.tableView.stores = arr;
-    
-    [self.tableView reloadData];
 }
 
 #pragma mark - Data
@@ -122,12 +141,29 @@
     
     TLPageDataHelper *helper = [[TLPageDataHelper alloc] init];
     
-    helper.code = @"";
-    helper.parameters[@""] = [TLUser user].userId;
+    helper.code = @"625327";
+//    helper.isList = YES;
+    helper.parameters[@"orderColumn"] = @"ui_order";
+    helper.parameters[@"orderDir"] = @"desc";
     
     helper.tableView = self.tableView;
     
     [helper modelClass:[StoreModel class]];
+    
+    [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
+        
+        weakSelf.stores = objs;
+        
+        weakSelf.tableView.stores = objs;
+        
+        weakSelf.tableView.tableHeaderView = weakSelf.headerView;
+        
+        [weakSelf.tableView reloadData_tl];
+        
+    } failure:^(NSError *error) {
+        
+        [TLProgressHUD dismiss];
+    }];
     
     [self.tableView addRefreshAction:^{
         
@@ -137,13 +173,13 @@
             
             weakSelf.tableView.stores = objs;
             
+            weakSelf.tableView.tableHeaderView = weakSelf.headerView;
+            
             [weakSelf.tableView reloadData_tl];
-            //获取banner列表
-            [weakSelf requestBannerList];
             
         } failure:^(NSError *error) {
             
-            
+            [TLProgressHUD dismiss];
         }];
     }];
     
@@ -167,29 +203,57 @@
 
 - (void)requestBannerList {
     
-    CoinWeakSelf;
+    [TLProgressHUD show];
+
+    TLNetworking *http = [TLNetworking new];
     
-    TLPageDataHelper *helper = [[TLPageDataHelper alloc] init];
-    
-    helper.code = @"805806";
-    helper.isList = YES;
-    helper.parameters[@"location"] = @"index_banner";
-    helper.parameters[@"type"] = @"2";
-    helper.parameters[@"orderColumn"] = @"order_no";
-    helper.parameters[@"orderDir"] = @"asc";
-    
-    [helper modelClass:[BannerModel class]];
-    
-    //店铺数据
-    [helper refresh:^(NSMutableArray <BannerModel *>*objs, BOOL stillHave) {
+    http.code = @"805806";
+    http.parameters[@"loaction"] = @"app_home";
+
+    [http postWithSuccess:^(id responseObject) {
         
-        weakSelf.bannerRoom = objs;
-        weakSelf.headerView.banners = objs;
-        weakSelf.tableView.tableHeaderView = weakSelf.headerView;
+        self.bannerRoom = [BannerModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
+        
+        self.headerView.banners = self.bannerRoom;
         
     } failure:^(NSError *error) {
         
     }];
+    
+}
+
+/**
+ 获取官方钱包总量，已空投量
+ */
+- (void)requestCountInfo {
+    
+    TLNetworking *http = [TLNetworking new];
+    
+    http.code = @"802108";
+    
+    [http postWithSuccess:^(id responseObject) {
+        
+        CountInfoModel *countInfo = [CountInfoModel mj_objectWithKeyValues:responseObject[@"data"]];
+        
+        self.headerView.countInfo = countInfo;
+        
+        [TLProgressHUD dismiss];
+
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
+#pragma mark - RefreshDelegate
+- (void)refreshTableView:(TLTableView *)refreshTableview didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    StoreModel *store = self.stores[indexPath.row];
+    
+    StoreDetailVC *detailVC = [StoreDetailVC new];
+    
+    detailVC.code = store.code;
+    
+    [self.navigationController pushViewController:detailVC animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

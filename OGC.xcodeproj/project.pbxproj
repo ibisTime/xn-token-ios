@@ -110,6 +110,15 @@
 		212882D52057BD3500A57A5A /* CoinChangeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 212882D32057BD3400A57A5A /* CoinChangeView.m */; };
 		2129A4F91FDACE87003C99C0 /* CloseGoogleAuthVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2129A4F71FDACE86003C99C0 /* CloseGoogleAuthVC.m */; };
 		2129FE6F1FDFBAA3009DA374 /* ChangeLoginPwdVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2129FE6E1FDFBAA3009DA374 /* ChangeLoginPwdVC.m */; };
+		212B50902058B55600235235 /* StoreDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 212B508F2058B55600235235 /* StoreDetailVC.m */; };
+		212B50932058B64A00235235 /* StoreDetailHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 212B50922058B64A00235235 /* StoreDetailHeaderView.m */; };
+		212B509A2058BED500235235 /* DetailWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 212B50982058BED400235235 /* DetailWebView.m */; };
+		212B509E2058C8ED00235235 /* TradeFlowListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 212B509D2058C8EC00235235 /* TradeFlowListVC.m */; };
+		212B50A22058C91800235235 /* TradeFlowModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 212B50A12058C91800235235 /* TradeFlowModel.m */; };
+		212B50A52058C92C00235235 /* TradeFlowTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 212B50A42058C92C00235235 /* TradeFlowTableView.m */; };
+		212B50A82058C97400235235 /* TradeFlowCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 212B50A72058C97400235235 /* TradeFlowCell.m */; };
+		212B50AC2059015000235235 /* CountInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 212B50AB2059015000235235 /* CountInfoModel.m */; };
+		212B50B02059280D00235235 /* StorePayVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 212B50AF2059280D00235235 /* StorePayVC.m */; };
 		2159795D1FB81C2B0029F177 /* BillVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2159795C1FB81C2B0029F177 /* BillVC.m */; };
 		215979601FB81CC40029F177 /* BillTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2159795F1FB81CC40029F177 /* BillTableView.m */; };
 		215979641FB81CED0029F177 /* BillModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 215979631FB81CED0029F177 /* BillModel.m */; };
@@ -394,6 +403,24 @@
 		2129A4F81FDACE86003C99C0 /* CloseGoogleAuthVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CloseGoogleAuthVC.h; sourceTree = "<group>"; };
 		2129FE6D1FDFBAA3009DA374 /* ChangeLoginPwdVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChangeLoginPwdVC.h; sourceTree = "<group>"; };
 		2129FE6E1FDFBAA3009DA374 /* ChangeLoginPwdVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChangeLoginPwdVC.m; sourceTree = "<group>"; };
+		212B508E2058B55600235235 /* StoreDetailVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StoreDetailVC.h; sourceTree = "<group>"; };
+		212B508F2058B55600235235 /* StoreDetailVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StoreDetailVC.m; sourceTree = "<group>"; };
+		212B50912058B64A00235235 /* StoreDetailHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StoreDetailHeaderView.h; sourceTree = "<group>"; };
+		212B50922058B64A00235235 /* StoreDetailHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StoreDetailHeaderView.m; sourceTree = "<group>"; };
+		212B50982058BED400235235 /* DetailWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailWebView.m; sourceTree = "<group>"; };
+		212B50992058BED500235235 /* DetailWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailWebView.h; sourceTree = "<group>"; };
+		212B509C2058C8EC00235235 /* TradeFlowListVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TradeFlowListVC.h; sourceTree = "<group>"; };
+		212B509D2058C8EC00235235 /* TradeFlowListVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TradeFlowListVC.m; sourceTree = "<group>"; };
+		212B50A02058C91800235235 /* TradeFlowModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TradeFlowModel.h; sourceTree = "<group>"; };
+		212B50A12058C91800235235 /* TradeFlowModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TradeFlowModel.m; sourceTree = "<group>"; };
+		212B50A32058C92C00235235 /* TradeFlowTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TradeFlowTableView.h; sourceTree = "<group>"; };
+		212B50A42058C92C00235235 /* TradeFlowTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TradeFlowTableView.m; sourceTree = "<group>"; };
+		212B50A62058C97400235235 /* TradeFlowCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TradeFlowCell.h; sourceTree = "<group>"; };
+		212B50A72058C97400235235 /* TradeFlowCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TradeFlowCell.m; sourceTree = "<group>"; };
+		212B50AA2059015000235235 /* CountInfoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CountInfoModel.h; sourceTree = "<group>"; };
+		212B50AB2059015000235235 /* CountInfoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CountInfoModel.m; sourceTree = "<group>"; };
+		212B50AE2059280D00235235 /* StorePayVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StorePayVC.h; sourceTree = "<group>"; };
+		212B50AF2059280D00235235 /* StorePayVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StorePayVC.m; sourceTree = "<group>"; };
 		215421CF1FD708AC00FDD25C /* OGC.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OGC.entitlements; sourceTree = "<group>"; };
 		2159795B1FB81C2B0029F177 /* BillVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BillVC.h; sourceTree = "<group>"; };
 		2159795C1FB81C2B0029F177 /* BillVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BillVC.m; sourceTree = "<group>"; };
@@ -936,6 +963,7 @@
 		211DE63C1FB58B4B002FCF3D /* CustomUI */ = {
 			isa = PBXGroup;
 			children = (
+				212B50972058BEC200235235 /* Web */,
 				21205CF81FCD61C0003C6C7C /* ShareView */,
 				211CEF1A1FCBBFF3000FB0C4 /* Placeholder */,
 				211CEF191FCBBFE2000FB0C4 /* Progress */,
@@ -1329,6 +1357,84 @@
 			path = Resp;
 			sourceTree = "<group>";
 		};
+		212B50942058BDDA00235235 /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				212B508E2058B55600235235 /* StoreDetailVC.h */,
+				212B508F2058B55600235235 /* StoreDetailVC.m */,
+			);
+			path = Detail;
+			sourceTree = "<group>";
+		};
+		212B50952058BDF000235235 /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				212B50912058B64A00235235 /* StoreDetailHeaderView.h */,
+				212B50922058B64A00235235 /* StoreDetailHeaderView.m */,
+			);
+			path = Detail;
+			sourceTree = "<group>";
+		};
+		212B50962058BE0800235235 /* TradeFlow */ = {
+			isa = PBXGroup;
+			children = (
+				212B50A02058C91800235235 /* TradeFlowModel.h */,
+				212B50A12058C91800235235 /* TradeFlowModel.m */,
+			);
+			path = TradeFlow;
+			sourceTree = "<group>";
+		};
+		212B50972058BEC200235235 /* Web */ = {
+			isa = PBXGroup;
+			children = (
+				212B50992058BED500235235 /* DetailWebView.h */,
+				212B50982058BED400235235 /* DetailWebView.m */,
+				21A7F3611FB2F16B00FAA0A2 /* HTMLStrVC.h */,
+				21A7F3621FB2F16B00FAA0A2 /* HTMLStrVC.m */,
+				21223CB51FBDB2D200057444 /* WebVC.h */,
+				21223CB61FBDB2D200057444 /* WebVC.m */,
+			);
+			path = Web;
+			sourceTree = "<group>";
+		};
+		212B509B2058C8C900235235 /* TradeFlow */ = {
+			isa = PBXGroup;
+			children = (
+				212B509C2058C8EC00235235 /* TradeFlowListVC.h */,
+				212B509D2058C8EC00235235 /* TradeFlowListVC.m */,
+			);
+			path = TradeFlow;
+			sourceTree = "<group>";
+		};
+		212B509F2058C8FD00235235 /* TradeFlow */ = {
+			isa = PBXGroup;
+			children = (
+				212B50A32058C92C00235235 /* TradeFlowTableView.h */,
+				212B50A42058C92C00235235 /* TradeFlowTableView.m */,
+				212B50A62058C97400235235 /* TradeFlowCell.h */,
+				212B50A72058C97400235235 /* TradeFlowCell.m */,
+			);
+			path = TradeFlow;
+			sourceTree = "<group>";
+		};
+		212B50A92059013000235235 /* Count */ = {
+			isa = PBXGroup;
+			children = (
+				212B50AA2059015000235235 /* CountInfoModel.h */,
+				212B50AB2059015000235235 /* CountInfoModel.m */,
+			);
+			path = Count;
+			sourceTree = "<group>";
+		};
+		212B50AD205927F300235235 /* Pay */ = {
+			isa = PBXGroup;
+			children = (
+				212B50AE2059280D00235235 /* StorePayVC.h */,
+				212B50AF2059280D00235235 /* StorePayVC.m */,
+			);
+			path = Pay;
+			sourceTree = "<group>";
+		};
 		215979611FB81CD10029F177 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -1376,6 +1482,7 @@
 		2163E12B2057C4790027D1D5 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				212B50A92059013000235235 /* Count */,
 				2163E1492057D08D0027D1D5 /* Stores */,
 				2163E1412057C76A0027D1D5 /* Banner */,
 			);
@@ -1395,6 +1502,9 @@
 		2163E1302057C5610027D1D5 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				212B50AD205927F300235235 /* Pay */,
+				212B509B2058C8C900235235 /* TradeFlow */,
+				212B50942058BDDA00235235 /* Detail */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1402,6 +1512,8 @@
 		2163E1312057C5680027D1D5 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				212B509F2058C8FD00235235 /* TradeFlow */,
+				212B50952058BDF000235235 /* Detail */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1409,6 +1521,7 @@
 		2163E1322057C56F0027D1D5 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				212B50962058BE0800235235 /* TradeFlow */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1747,10 +1860,6 @@
 				2E394FF91FB059C100BA0829 /* TLBaseModel.m */,
 				2E394FFB1FB059C100BA0829 /* TLBaseVC.h */,
 				2E394FFA1FB059C100BA0829 /* TLBaseVC.m */,
-				21A7F3611FB2F16B00FAA0A2 /* HTMLStrVC.h */,
-				21A7F3621FB2F16B00FAA0A2 /* HTMLStrVC.m */,
-				21223CB51FBDB2D200057444 /* WebVC.h */,
-				21223CB61FBDB2D200057444 /* WebVC.m */,
 			);
 			path = Expand;
 			sourceTree = "<group>";
@@ -1905,7 +2014,7 @@
 				TargetAttributes = {
 					2EA584B31FA813C900C7106C = {
 						CreatedOnToolsVersion = 9.0.1;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -1983,6 +2092,7 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-OGC/Pods-OGC-resources.sh",
 				"${PODS_ROOT}/IQKeyboardManager/IQKeyboardManager/Resources/IQKeyboardManager.bundle",
 				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
+				"${PODS_ROOT}/PYPhotoBrowser/PYPhotoBrowser/PYPhotosView.bundle",
 				"${PODS_ROOT}/SGQRCode/SGQRCode/SGQRCode.bundle",
 				"${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle",
 				"${PODS_ROOT}/ZendeskSDK/ZendeskSDK.bundle",
@@ -1992,6 +2102,7 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/IQKeyboardManager.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MJRefresh.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/PYPhotosView.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SGQRCode.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SVProgressHUD.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ZendeskSDK.bundle",
@@ -2077,11 +2188,13 @@
 				211D3C181FCFE3C100B55F9F /* HistoryRateCell.m in Sources */,
 				211A34DE1FB4245D00FEB71F /* MineCell.m in Sources */,
 				211DE6AB1FB58B4C002FCF3D /* TLTableView.m in Sources */,
+				212B50A52058C92C00235235 /* TradeFlowTableView.m in Sources */,
 				21CB94E51FDC0AFC00CAB090 /* LanguageSettingVC.m in Sources */,
 				211DE6C21FB58B4C002FCF3D /* Foundation+Log.m in Sources */,
 				2EC75837202AAB09008C6C18 /* TLNotficationService.m in Sources */,
 				21C91D881FDBD604006EDB16 /* TLAlipayManager.m in Sources */,
 				211DE6A11FB58B4C002FCF3D /* TLTimeButton.m in Sources */,
+				212B509E2058C8ED00235235 /* TradeFlowListVC.m in Sources */,
 				211A34F71FB4328800FEB71F /* SettingTableView.m in Sources */,
 				211DE6B01FB58B4C002FCF3D /* UILable+convience.m in Sources */,
 				21205CFE1FCD61D6003C6C7C /* ShareView.m in Sources */,
@@ -2118,8 +2231,10 @@
 				2EA584C71FA813C900C7106C /* main.m in Sources */,
 				211DE6AF1FB58B4C002FCF3D /* UILabel+Extension.m in Sources */,
 				21A7F3131FB2E2F900FAA0A2 /* TLAccountSetBaseVC.m in Sources */,
+				212B50B02059280D00235235 /* StorePayVC.m in Sources */,
 				2EB9495A1FDF6B1A00CE4B94 /* ZMChineseConvert.m in Sources */,
 				21A7F35E1FB2EBAA00FAA0A2 /* CurrencyModel.m in Sources */,
+				212B50AC2059015000235235 /* CountInfoModel.m in Sources */,
 				211DE6A61FB58B4C002FCF3D /* TLTextView.m in Sources */,
 				2129A4F91FDACE87003C99C0 /* CloseGoogleAuthVC.m in Sources */,
 				211D3C151FCFE3AB00B55F9F /* HistoryRateTableView.m in Sources */,
@@ -2130,6 +2245,7 @@
 				2E5F33A9202BF25F00B2F263 /* TLLeftRightView.m in Sources */,
 				211DE6C41FB58B4C002FCF3D /* HttpSign.m in Sources */,
 				2E42616B2028431200913DCF /* TLSwitchView.m in Sources */,
+				212B50902058B55600235235 /* StoreDetailVC.m in Sources */,
 				211A35041FB45A6A00FEB71F /* WalletHeaderView.m in Sources */,
 				2ED651CF200F34280065A1B0 /* TLCoinWithdrawOrderCell.m in Sources */,
 				215979601FB81CC40029F177 /* BillTableView.m in Sources */,
@@ -2161,6 +2277,7 @@
 				211CEF141FCBBF90000FB0C4 /* SelectScrollView.m in Sources */,
 				21CB94F01FDC0CAA00CAB090 /* LanguageSettingCell.m in Sources */,
 				211DE6B11FB58B4C002FCF3D /* UIButton+EnLargeEdge.m in Sources */,
+				212B50A82058C97400235235 /* TradeFlowCell.m in Sources */,
 				2EE361551FFE182800A5C3EB /* RespHandler.m in Sources */,
 				211DE6A21FB58B4C002FCF3D /* TLCaptchaView.m in Sources */,
 				211DE6B71FB58B4C002FCF3D /* UIBarButtonItem+convience.m in Sources */,
@@ -2169,6 +2286,7 @@
 				211A34E41FB4255700FEB71F /* MineGroup.m in Sources */,
 				2EB949541FDE6D6D00CE4B94 /* LangChooseVC.m in Sources */,
 				2E394FF41FB057B300BA0829 /* TLTabBarController.m in Sources */,
+				212B509A2058BED500235235 /* DetailWebView.m in Sources */,
 				21A7F3191FB2E2F900FAA0A2 /* TLAccountBaseVC.m in Sources */,
 				21CB94F51FDC179700CAB090 /* PersonalModel.m in Sources */,
 				2ED651C9200F2F6F0065A1B0 /* TLCoinWithdrawOrderVC.m in Sources */,
@@ -2176,7 +2294,9 @@
 				211DE6171FB54685002FCF3D /* WalletCell.m in Sources */,
 				2E973FD61FDBC5CC005C2D5F /* BaseButton.m in Sources */,
 				211A34F01FB430DB00FEB71F /* SettingGroup.m in Sources */,
+				212B50932058B64A00235235 /* StoreDetailHeaderView.m in Sources */,
 				212882CF2057B94400A57A5A /* CoinAddressListVC.m in Sources */,
+				212B50A22058C91800235235 /* TradeFlowModel.m in Sources */,
 				211D3C121FCFE35E00B55F9F /* HistoryRateVC.m in Sources */,
 				2E973FD31FDBC5B0005C2D5F /* BaseLabel.m in Sources */,
 				2ED651D22010443D0065A1B0 /* TLAboutUsVC.m in Sources */,
@@ -2324,7 +2444,7 @@
 				CLANG_WARN_STRICT_PROTOTYPES = NO;
 				CODE_SIGN_ENTITLEMENTS = OGC/Resource/OGC.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6PF7VHZB5Z;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2348,8 +2468,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.cdkj.wallet;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "f8758513-fe5e-46ba-9fea-ac75ed5afba5";
-				PROVISIONING_PROFILE_SPECIFIER = devogcwallet;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				WARNING_CFLAGS = "";
 			};
@@ -2363,8 +2483,8 @@
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CLANG_WARN_STRICT_PROTOTYPES = NO;
 				CODE_SIGN_ENTITLEMENTS = OGC/Resource/OGC.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6PF7VHZB5Z;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2388,8 +2508,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.cdkj.wallet;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "e88eb669-3fd4-4748-ae34-c3929cc29f6e";
-				PROVISIONING_PROFILE_SPECIFIER = ogcwallet;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				WARNING_CFLAGS = "";
 			};

@@ -7,7 +7,14 @@
 //
 
 #import "BannerModel.h"
+//Category
+#import "NSString+Extension.h"
 
 @implementation BannerModel
+
+- (NSString *)pic {
+    
+    return [_pic convertImageUrl];
+}
 
 @end

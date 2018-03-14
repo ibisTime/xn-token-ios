@@ -42,7 +42,7 @@
     
     
     //服务器环境
-    [AppConfig config].runEnv = RunEnvTest;
+    [AppConfig config].runEnv = RunEnvDev;
 //    [AppConfig config].isUploadCheck = YES;
     self.respHandler = [[RespHandler alloc] init];
      
@@ -88,24 +88,6 @@
         [self.window.rootViewController presentViewController:nav animated:YES completion:nil];
     };
     
-
-    
-    
-
-    
-   
-    
-   
-    
-//    [[IMAPlatform sharedInstance] configOnAppLaunchWithOptions:launchOptions];
-//
-//
-//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//
-//        [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
-//
-//    });
-    
     //
     return YES;
     
@@ -141,8 +123,8 @@
 
 #pragma mark - 用户登录
 - (void)userLogin {
-    
-    
+    //获取七牛云域名
+    [[TLUser user] requestQiniuDomain];
     //zendesk
 //    ZDKAnonymousIdentity *identity = [ZDKAnonymousIdentity new];
 //    identity.name = [TLUser user].nickname;
@@ -202,17 +184,9 @@
     
 }
 
-//- (void)pushToChatViewControllerWith:(IMAUser *)user {
-//    
-//    TLTabBarController *tab = (TLTabBarController *)self.window.rootViewController;
-//    [tab pushToChatViewControllerWith:user];
-//    
-//}
-
 + (id)sharedAppDelegate {
     
     return [UIApplication  sharedApplication ].delegate;
-    
 }
 
 #pragma mark- 本地推送
@@ -294,7 +268,6 @@
       [[TLUser user] changLoginTime];
 
     };
-    
 }
 
 #pragma mark- 应用切后台

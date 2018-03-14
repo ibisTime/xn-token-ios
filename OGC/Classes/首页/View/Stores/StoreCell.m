@@ -132,11 +132,12 @@
     
     _store = store;
     
-    [_storeIV sd_setImageWithURL:[NSURL URLWithString:[store.pic convertImageUrl]] placeholderImage:GOOD_PLACEHOLDER_SMALL];
+    [_storeIV sd_setImageWithURL:[NSURL URLWithString:[store.advPic convertImageUrl]] placeholderImage:GOOD_PLACEHOLDER_SMALL];
     
-    _nameLbl.text = store.name;
-    _descLbl.text = store.slogan;
-    _addressLbl.text = [NSString stringWithFormat:@"地址: %@", store.address];
+    _nameLbl.text = [LangSwitcher switchLang:store.name key:nil];
+    _descLbl.text = [LangSwitcher switchLang:store.slogan key:nil];
+    NSString *address = [NSString stringWithFormat:@"地址: %@%@%@%@", store.province, store.city, store.area, store.address];
+    _addressLbl.text = [LangSwitcher switchLang:address key:nil];
     
 }
 
