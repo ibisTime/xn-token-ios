@@ -97,7 +97,7 @@
     [self addItemWithDirection:@"左边" title:nil titleColor:nil imageName:imageName frame:frame vc:vc action:action];
 }
 
-+ (void)addRightItemWithView:(UIView*)view vc:(UIViewController *)vc{
++ (void)addRightItemWithView:(UIView*)view vc:(UIViewController *)vc {
     
     UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:view];
     vc.navigationItem.rightBarButtonItem = item;
@@ -112,7 +112,6 @@
         UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:btn];
         
         [itemArray addObject:item];
-        
     }
     
     vc.navigationItem.rightBarButtonItems = itemArray;

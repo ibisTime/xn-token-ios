@@ -41,13 +41,10 @@
     self.title = [LangSwitcher switchLang:@"首页" key:nil];
     //
     [self initPlaceHolderView];
-    //获取banner列表
-    [self requestBannerList];
-    //获取官方钱包总量，已空投量
-    [self requestCountInfo];
     //获取店铺列表
     [self requestStoreList];
-
+    //
+    [self.tableView beginRefreshing];
 }
 
 #pragma mark - Init
@@ -144,26 +141,11 @@
     helper.code = @"625327";
 //    helper.isList = YES;
     helper.parameters[@"orderColumn"] = @"ui_order";
-    helper.parameters[@"orderDir"] = @"desc";
+    helper.parameters[@"orderDir"] = @"asc";
     
     helper.tableView = self.tableView;
     
     [helper modelClass:[StoreModel class]];
-    
-    [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
-        
-        weakSelf.stores = objs;
-        
-        weakSelf.tableView.stores = objs;
-        
-        weakSelf.tableView.tableHeaderView = weakSelf.headerView;
-        
-        [weakSelf.tableView reloadData_tl];
-        
-    } failure:^(NSError *error) {
-        
-        [TLProgressHUD dismiss];
-    }];
     
     [self.tableView addRefreshAction:^{
         
@@ -172,10 +154,10 @@
             weakSelf.stores = objs;
             
             weakSelf.tableView.stores = objs;
-            
-            weakSelf.tableView.tableHeaderView = weakSelf.headerView;
-            
-            [weakSelf.tableView reloadData_tl];
+            //获取banner列表
+            [weakSelf requestBannerList];
+            //获取官方钱包总量，已空投量
+            [weakSelf requestCountInfo];
             
         } failure:^(NSError *error) {
             
@@ -207,15 +189,18 @@
 
     TLNetworking *http = [TLNetworking new];
     
+    http.isUploadToken = NO;
     http.code = @"805806";
-    http.parameters[@"loaction"] = @"app_home";
-
+    http.parameters[@"location"] = @"app_home";
+    
     [http postWithSuccess:^(id responseObject) {
         
         self.bannerRoom = [BannerModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
         
         self.headerView.banners = self.bannerRoom;
         
+        self.tableView.tableHeaderView = self.headerView;
+
     } failure:^(NSError *error) {
         
     }];
@@ -237,6 +222,10 @@
         
         self.headerView.countInfo = countInfo;
         
+        self.tableView.tableHeaderView = self.headerView;
+
+        [self.tableView reloadData_tl];
+
         [TLProgressHUD dismiss];
 
     } failure:^(NSError *error) {

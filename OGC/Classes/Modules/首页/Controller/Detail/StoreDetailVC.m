@@ -7,7 +7,8 @@
 //
 
 #import "StoreDetailVC.h"
-
+//
+#import <AssetsLibrary/ALAssetsLibrary.h>
 //Category
 #import "UIControl+Block.h"
 #import "NSString+Check.h"
@@ -20,6 +21,8 @@
 //C
 #import "StorePayVC.h"
 #import "TLPwdRelatedVC.h"
+#import "TLUserLoginVC.h"
+#import "TLNavigationController.h"
 
 #define kBtnHeight   40
 #define kBottomViewHeight 60
@@ -89,7 +92,7 @@
     self.headerView = [[StoreDetailHeaderView alloc] initWithFrame:CGRectZero];
     
     self.headerView.store = self.store;
-
+    
     [self.scrollView addSubview:self.headerView];
     
     [self.detailWebView loadWebWithString:self.store.desc];
@@ -135,7 +138,7 @@
         NSString *mobile = [NSString stringWithFormat:@"telprompt://%@", self.store.bookMobile];
         NSURL *url = [NSURL URLWithString:mobile];
         [[UIApplication sharedApplication] openURL:url];
-
+        
     } forControlEvents:UIControlEventTouchUpInside];
     
     [self.bottomView addSubview:lineBtn];
@@ -183,6 +186,29 @@
 - (void)clickPay {
     
     CoinWeakSelf;
+    
+    if (![TLUser user].isLogin) {
+        
+        TLUserLoginVC *loginVC = [[TLUserLoginVC alloc] init];
+        
+        loginVC.loginSuccess = ^{
+            
+            [weakSelf checkTradePwd];
+        };
+        
+        TLNavigationController *nav = [[TLNavigationController alloc] initWithRootViewController:loginVC];
+        
+        [self presentViewController:nav animated:YES completion:nil];
+        
+        return;
+    }
+    
+    [self checkTradePwd];
+}
+
+- (void)checkTradePwd {
+    
+    CoinWeakSelf;
     //判断是否设置资金密码
     if ([[TLUser user].tradepwdFlag isEqualToString:@"0"]) {
         
@@ -191,7 +217,7 @@
         pwdRelatedVC.isWallet = YES;
         pwdRelatedVC.success = ^{
             
-            [weakSelf clickPay];
+            [weakSelf checkTradePwd];
         };
         [self.navigationController pushViewController:pwdRelatedVC animated:YES];
         return ;
@@ -201,7 +227,7 @@
     
     payVC.code = weakSelf.code;
     
-    [weakSelf.navigationController pushViewController:payVC animated:YES];
+    [self.navigationController pushViewController:payVC animated:YES];
 }
 
 #pragma mark - Data

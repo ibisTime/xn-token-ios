@@ -98,9 +98,11 @@ typedef NS_ENUM(NSInteger, AddressType) {
     self.balanceTF.textColor = kThemeColor;
     self.balanceTF.enabled = NO;
     
-    NSString *coinBalance = [CoinUtil convertToRealCoin:self.currency.coinBalance coin:self.currency.currency];
+//    NSString *coinBalance = [CoinUtil convertToRealCoin:self.currency.coinBalance coin:self.currency.currency];
+    NSString *leftAmount = [_currency.amountString subNumber:_currency.frozenAmountString];
 
-    self.balanceTF.text = [NSString stringWithFormat:@"%@ %@",coinBalance ,self.currency.currency];
+    
+    self.balanceTF.text = [NSString stringWithFormat:@"%@ %@",[CoinUtil convertToRealCoin:leftAmount coin:self.currency.currency] ,self.currency.currency];
     
     [self.view addSubview:self.balanceTF];
     

@@ -73,6 +73,11 @@ static NSString *identifierCell = @"StoreCell";
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     
+    if (self.stores.count == 0) {
+        
+        return [UIView new];
+    }
+    
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 40)];
     
     headerView.backgroundColor = kWhiteColor;

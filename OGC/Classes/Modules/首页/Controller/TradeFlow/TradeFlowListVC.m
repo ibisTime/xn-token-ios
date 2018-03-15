@@ -18,6 +18,8 @@
 @property (nonatomic, strong) TradeFlowTableView *tableView;
 //流水列表
 @property (nonatomic, strong) NSArray <TradeFlowModel *>*flows;
+//暂无流水
+@property (nonatomic, strong) UIView *placeHolderView;
 
 @end
 
@@ -28,6 +30,8 @@
     // Do any additional setup after loading the view.
     self.title = [LangSwitcher switchLang:@"交易流水" key:nil];
     //
+    [self initPlaceHolderView];
+    //
     [self initTableView];
     //获取流水列表
     [self requestFlowList];
@@ -36,9 +40,42 @@
 }
 
 #pragma mark - Init
+- (void)initPlaceHolderView {
+    
+    self.placeHolderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight - 40)];
+    
+    UIImageView *addressIV = [[UIImageView alloc] init];
+    addressIV.image = kImage(@"暂无订单");
+    addressIV.centerX = kScreenWidth/2.0;
+    [self.placeHolderView addSubview:addressIV];
+    [addressIV mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.centerX.equalTo(@0);
+        make.top.equalTo(@90);
+        
+    }];
+    
+    UILabel *textLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor2 font:14.0];
+    
+    textLbl.text = [LangSwitcher switchLang:@"暂无流水" key:nil];
+    
+    textLbl.textAlignment = NSTextAlignmentCenter;
+    
+    [self.placeHolderView addSubview:textLbl];
+    [textLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.top.equalTo(addressIV.mas_bottom).offset(20);
+        make.centerX.equalTo(addressIV.mas_centerX);
+        
+    }];
+    
+}
+
 - (void)initTableView {
     
     self.tableView = [[TradeFlowTableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+    
+    self.tableView.placeHolderView = self.placeHolderView;
     
     [self.view addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {

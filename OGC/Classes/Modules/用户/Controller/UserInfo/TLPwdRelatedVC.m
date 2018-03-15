@@ -320,7 +320,7 @@
         http.parameters[@"googleCaptcha"] = self.googleAuthTF.text;
 
     }
-
+    
     [http postWithSuccess:^(id responseObject) {
         
         NSString *promptStr = @"";
@@ -350,7 +350,6 @@
         if (!self.isWallet) {
             
             [self.navigationController popViewControllerAnimated:YES];
-
         }
 
         if (self.success) {

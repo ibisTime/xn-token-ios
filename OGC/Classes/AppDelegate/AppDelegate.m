@@ -7,28 +7,34 @@
 //
 
 #import "AppDelegate.h"
-#import "TLUIHeader.h"
-#import "TLTabBarController.h"
+//Manager
 #import "TLUser.h"
-#import "TLNetworking.h"
-#import "UITabBar+Badge.h"
-#import "AppConfig.h"
-#import "WXApi.h"
 #import "TLWXManager.h"
 #import "TLAlipayManager.h"
-#import <IQKeyboardManager.h>
-#import "ZMChineseConvert.h"
-#import "SettingModel.h"
-#import "TLUpdateVC.h"
-#import <ZendeskSDK/ZendeskSDK.h>
-//#import "ZDKConfig.h"
-#import "LangSwitcher.h"
-#import <ZDCChat/ZDCChat.h>
 #import "CoinUtil.h"
+#import "AppConfig.h"
+#import "LangSwitcher.h"
+#import "TLNetworking.h"
 #import "RespHandler.h"
+//#import "ZDKConfig.h"
+//Macro
+#import "TLUIHeader.h"
+//Category
+#import "UITabBar+Badge.h"
+//Extension
+#import "WXApi.h"
+#import <IQKeyboardManager.h>
+#import <NBHTTP/NBNetwork.h>
+#import <ZendeskSDK/ZendeskSDK.h>
+#import <ZDCChat/ZDCChat.h>
+//M
+#import "SettingModel.h"
+#import "ZMChineseConvert.h"
+//C
+#import "TLTabBarController.h"
 #import "TLNavigationController.h"
 #import "TLUserLoginVC.h"
-#import <NBHTTP/NBNetwork.h>
+#import "TLUpdateVC.h"
 
 @interface AppDelegate ()
 
@@ -42,7 +48,7 @@
     
     
     //服务器环境
-    [AppConfig config].runEnv = RunEnvDev;
+    [AppConfig config].runEnv = RunEnvTest;
 //    [AppConfig config].isUploadCheck = YES;
     self.respHandler = [[RespHandler alloc] init];
      
@@ -80,18 +86,10 @@
         [[NSNotificationCenter defaultCenter] postNotificationName:kUserLoginNotification
                                                             object:nil];
         
-    } else {
-        TLUserLoginVC *loginVC = [TLUserLoginVC new];
-        
-        TLNavigationController *nav = [[TLNavigationController alloc] initWithRootViewController:loginVC];
-        
-        [self.window.rootViewController presentViewController:nav animated:YES completion:nil];
-    };
+    }
     
     //
     return YES;
-    
-    
 }
 
 #pragma mark- 上传推送 token
@@ -169,7 +167,7 @@
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     
-    if (0) {
+    if (1) {
         //先配置到，检查更新的VC,开启更新检查
         TLUpdateVC *updateVC = [[TLUpdateVC alloc] init];
         self.window.rootViewController = updateVC;

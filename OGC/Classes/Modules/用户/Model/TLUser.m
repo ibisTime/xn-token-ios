@@ -114,8 +114,6 @@ NSString *const kGoogleAuthClose = @"0";
         
         return NO;
     }
-
-
 }
 
 - (void)reLogin {
@@ -194,7 +192,6 @@ NSString *const kGoogleAuthClose = @"0";
 
     self.userId = nil;
     self.token = nil;
-    //
     //
     self.secretUserId = nil;
     self.photo = nil;
@@ -290,13 +287,16 @@ NSString *const kGoogleAuthClose = @"0";
 - (void)setMobile:(NSString *)mobile {
     
     _mobile = [mobile copy];
-    
 }
 
 - (void)setPhoto:(NSString *)photo {
     
     _photo = [photo copy];
+}
+
+- (void)setTradepwdFlag:(NSString *)tradepwdFlag {
     
+    _tradepwdFlag = [tradepwdFlag copy];
 }
 
 //- (void)saveUserName:(NSString *)userName pwd:(NSString *)pwd {
