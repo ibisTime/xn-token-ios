@@ -119,6 +119,7 @@
 		212B50A82058C97400235235 /* TradeFlowCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 212B50A72058C97400235235 /* TradeFlowCell.m */; };
 		212B50AC2059015000235235 /* CountInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 212B50AB2059015000235235 /* CountInfoModel.m */; };
 		212B50B02059280D00235235 /* StorePayVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 212B50AF2059280D00235235 /* StorePayVC.m */; };
+		213C68C4205B6D0200115CC8 /* UIScrollView+SnapShot.m in Sources */ = {isa = PBXBuildFile; fileRef = 213C68C3205B6D0200115CC8 /* UIScrollView+SnapShot.m */; };
 		2159795D1FB81C2B0029F177 /* BillVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2159795C1FB81C2B0029F177 /* BillVC.m */; };
 		215979601FB81CC40029F177 /* BillTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2159795F1FB81CC40029F177 /* BillTableView.m */; };
 		215979641FB81CED0029F177 /* BillModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 215979631FB81CED0029F177 /* BillModel.m */; };
@@ -421,6 +422,8 @@
 		212B50AB2059015000235235 /* CountInfoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CountInfoModel.m; sourceTree = "<group>"; };
 		212B50AE2059280D00235235 /* StorePayVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StorePayVC.h; sourceTree = "<group>"; };
 		212B50AF2059280D00235235 /* StorePayVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StorePayVC.m; sourceTree = "<group>"; };
+		213C68C2205B6D0200115CC8 /* UIScrollView+SnapShot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+SnapShot.h"; sourceTree = "<group>"; };
+		213C68C3205B6D0200115CC8 /* UIScrollView+SnapShot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+SnapShot.m"; sourceTree = "<group>"; };
 		215421CF1FD708AC00FDD25C /* OGC.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OGC.entitlements; sourceTree = "<group>"; };
 		2159795B1FB81C2B0029F177 /* BillVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BillVC.h; sourceTree = "<group>"; };
 		2159795C1FB81C2B0029F177 /* BillVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BillVC.m; sourceTree = "<group>"; };
@@ -991,6 +994,7 @@
 		211DE65C1FB58B4B002FCF3D /* UIKit */ = {
 			isa = PBXGroup;
 			children = (
+				213C68C1205B6D0200115CC8 /* UIScrollView */,
 				2120A8F91FD51DDA00B03DB0 /* UITabbar */,
 				211EAD8D1FD0FC210037FBA8 /* UIViewController */,
 				211DE65D1FB58B4B002FCF3D /* UILabel */,
@@ -1433,6 +1437,15 @@
 				212B50AF2059280D00235235 /* StorePayVC.m */,
 			);
 			path = Pay;
+			sourceTree = "<group>";
+		};
+		213C68C1205B6D0200115CC8 /* UIScrollView */ = {
+			isa = PBXGroup;
+			children = (
+				213C68C2205B6D0200115CC8 /* UIScrollView+SnapShot.h */,
+				213C68C3205B6D0200115CC8 /* UIScrollView+SnapShot.m */,
+			);
+			path = UIScrollView;
 			sourceTree = "<group>";
 		};
 		215979611FB81CD10029F177 /* Model */ = {
@@ -2239,6 +2252,7 @@
 				2129A4F91FDACE87003C99C0 /* CloseGoogleAuthVC.m in Sources */,
 				211D3C151FCFE3AB00B55F9F /* HistoryRateTableView.m in Sources */,
 				211DE6BB1FB58B4C002FCF3D /* NSString+CGSize.m in Sources */,
+				213C68C4205B6D0200115CC8 /* UIScrollView+SnapShot.m in Sources */,
 				211DE6B81FB58B4C002FCF3D /* UIControl+Block.m in Sources */,
 				2163E1352057C6640027D1D5 /* HomeHeaderView.m in Sources */,
 				2163E1482057D04D0027D1D5 /* StoreCell.m in Sources */,

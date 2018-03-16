@@ -8,6 +8,7 @@
 
 #import "BillDetailTableView.h"
 
+#import "AppMacro.h"
 #import "BillDetailCell.h"
 #import "NSString+Date.h"
 #import "NSString+Extension.h"
@@ -53,12 +54,17 @@ static NSString *identifierCell = @"BillDetailCell";
                          ];
     
     NSString *dateStr = [_bill.createDatetime convertToDetailDate];
-    
+    STRING_NIL_NULL(dateStr);
     NSString *postAmount = [CoinUtil convertToRealCoin:_bill.postAmountString coin:_bill.currency];
-    
+    STRING_NIL_NULL(postAmount);
     NSString *preAmount = [CoinUtil convertToRealCoin:_bill.preAmountString coin:_bill.currency];
+    STRING_NIL_NULL(preAmount);
+    NSString *statusName = [_bill getStatusName];
+    STRING_NIL_NULL(statusName);
+    NSString *bizName = [_bill getBizName];
+    STRING_NIL_NULL(bizName);
     
-    NSArray *rightArr = @[preAmount, postAmount, dateStr, _bill.getStatusName, _bill.getBizName];
+    NSArray *rightArr = @[preAmount, postAmount, dateStr, statusName, bizName];
     
     cell.titleLbl.text = textArr[indexPath.row];
 //    [LangSwitcher switchLang:textArr[indexPath.row] key:nil];

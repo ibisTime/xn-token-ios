@@ -94,7 +94,7 @@
     [addressIV mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.centerX.equalTo(@0);
-        make.top.equalTo(@90);
+        make.top.equalTo(@(kHeight(70)));
         
     }];
     

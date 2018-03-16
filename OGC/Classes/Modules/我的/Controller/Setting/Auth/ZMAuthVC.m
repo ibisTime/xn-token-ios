@@ -235,7 +235,6 @@
     return [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"alipays://"]];
 }
 
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

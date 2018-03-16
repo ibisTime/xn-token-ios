@@ -215,9 +215,10 @@
     
     scaleView.frame = CGRectMake(0, 0, lineW, scaleH);
 
-    CGFloat rate = [countInfo.useRate doubleValue]*100;
+    NSString *rate = [CoinUtil mult1:countInfo.useRate mult2:@"100" scale:20];
+//    CGFloat rate = [countInfo.useRate doubleValue]*100;
     
-    NSString *data = [NSString stringWithFormat:@"总量: %@   已投: %@   占比: %g%%", initialBalance, useBalance, rate];
+    NSString *data = [NSString stringWithFormat:@"总量: %@   已投: %@   占比: %@%%", initialBalance, useBalance, rate];
     
     self.dataLbl.text = [LangSwitcher switchLang:data key:nil];;
 

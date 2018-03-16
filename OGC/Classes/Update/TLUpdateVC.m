@@ -184,7 +184,7 @@
     
     NSString *urlStr = [var stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
     NSURL *url = [NSURL URLWithString:urlStr];
-      [[UIApplication sharedApplication] openURL:url];
+    [[UIApplication sharedApplication] openURL:url];
 }
 
 - (void)setRootVC {

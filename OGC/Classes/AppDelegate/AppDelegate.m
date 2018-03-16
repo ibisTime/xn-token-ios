@@ -58,7 +58,8 @@
     
     //配置微信
 //    [self configWeChat];
-    
+    //获取七牛云域名
+    [[TLUser user] requestQiniuDomain];
     //配置键盘
     [self configIQKeyboard];
     
@@ -121,8 +122,7 @@
 
 #pragma mark - 用户登录
 - (void)userLogin {
-    //获取七牛云域名
-    [[TLUser user] requestQiniuDomain];
+    
     //zendesk
 //    ZDKAnonymousIdentity *identity = [ZDKAnonymousIdentity new];
 //    identity.name = [TLUser user].nickname;

@@ -34,17 +34,18 @@
                            
                           
                            @"charge" : [LangSwitcher switchLang: [NSString stringWithFormat:@"%@充值",self.currency] key:nil],
-                           @"withdraw" : [LangSwitcher switchLang: [NSString stringWithFormat:@"%@取现",self.currency] key:nil] ,
-                           @"autofill": [LangSwitcher switchLang:@"自动补给" key:nil]  ,
-                           @"buy": [LangSwitcher switchLang:@"交易买入" key:nil]  ,
+                           @"withdraw" : [LangSwitcher switchLang: [NSString stringWithFormat:@"%@取现",self.currency] key:nil],
+                           @"autofill": [LangSwitcher switchLang:@"自动补给" key:nil],
+                           @"buy": [LangSwitcher switchLang:@"交易买入" key:nil],
                            @"sell" : [LangSwitcher switchLang:@"交易卖出" key:nil],
                            @"tradefrozen" :[LangSwitcher switchLang:@"交易冻结" key:nil],
                            @"tradeunfrozen" :[LangSwitcher switchLang:@"交易解冻" key:nil],
                            @"withdrawfrozen":[LangSwitcher switchLang:@"取现冻结" key:nil],
                            @"withdrawunfrozen":[LangSwitcher switchLang:@"取现解冻" key:nil],
-                           @"tradefee" : [LangSwitcher switchLang:@"交易手续费" key:nil] ,
-                           @"withdrawfee" : [LangSwitcher switchLang:@"提现手续费" key:nil] ,
-                           @"invite" : [LangSwitcher switchLang:@"邀请好友送" key:nil]
+                           @"tradefee" : [LangSwitcher switchLang:@"交易手续费" key:nil],
+                           @"withdrawfee" : [LangSwitcher switchLang:@"提现手续费" key:nil],
+                           @"invite" : [LangSwitcher switchLang:@"邀请好友送" key:nil],
+                           @"trans" : [LangSwitcher switchLang:@"划转" key:nil],
                            };
     
     return dict[self.bizType];

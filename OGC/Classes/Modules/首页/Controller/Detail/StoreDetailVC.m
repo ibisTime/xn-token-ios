@@ -129,13 +129,13 @@
     
     [lineBtn bk_addEventHandler:^(id sender) {
         //获取店主手机号
-        if (![self.store.bookMobile valid]) {
+        if (![weakSelf.store.bookMobile valid]) {
             
             [TLAlert alertWithInfo:[LangSwitcher switchLang:@"暂无店主手机号" key:nil]];
             return ;
         }
         //
-        NSString *mobile = [NSString stringWithFormat:@"telprompt://%@", self.store.bookMobile];
+        NSString *mobile = [NSString stringWithFormat:@"telprompt://%@", weakSelf.store.bookMobile];
         NSURL *url = [NSURL URLWithString:mobile];
         [[UIApplication sharedApplication] openURL:url];
         

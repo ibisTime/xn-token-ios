@@ -35,7 +35,7 @@ NSString *const kCNY = @"CNY";
 
 + (NSString *)convertToSysCoin:(NSString *)count coin:(NSString *)coin {
     
-    return [self mult1:count mult2:[[self getCardinality:coin] stringValue]];
+    return [self mult1:count mult2:[[self getCardinality:coin] stringValue] scale:0];
     
 }
 
@@ -62,14 +62,14 @@ NSString *const kCNY = @"CNY";
     return nil;
 }
 
-+ (NSString *)mult1:(NSString *)mult1 mult2:(NSString *)mult2 {
++ (NSString *)mult1:(NSString *)mult1 mult2:(NSString *)mult2 scale:(NSUInteger)scale {
     
     NSDecimalNumber *mult1Num = [[NSDecimalNumber alloc] initWithString:mult1];
     NSDecimalNumber *mult2Num = [[NSDecimalNumber alloc] initWithString:mult2];
     NSDecimalNumber *result = [mult1Num decimalNumberByMultiplyingBy:mult2Num];
     NSDecimalNumberHandler *roundUp = [NSDecimalNumberHandler
                                        decimalNumberHandlerWithRoundingMode:NSRoundDown
-                                       scale:0
+                                       scale:scale
                                        raiseOnExactness:NO
                                        raiseOnOverflow:NO
                                        raiseOnUnderflow:NO
