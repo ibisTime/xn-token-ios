@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "CoinUtil.h"
+#import "CoinModel.h"
 
 @interface CoinService : NSObject
 
@@ -17,7 +18,7 @@
 /**
  记录交易切换的当前coin,默认为 eth
  */
-@property (nonatomic, copy) NSString *currentCoin;
+@property (nonatomic, strong) CoinModel *currentCoin;
 
 
 //- (NSString *)pageAddressApiCode:(NSString *)coin;

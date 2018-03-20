@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "CoinModel.h"
 
 typedef NS_ENUM(NSUInteger, CoinType) {
     
@@ -32,7 +33,7 @@ typedef NS_ENUM(NSUInteger, CoinType) {
  */
 + (NSString *)convertToSysCoin:(NSString *)count coin:(NSString *)coin;
 
-+ (NSArray *)shouldDisplayCoinArray;
++ (NSMutableArray<CoinModel *> *)shouldDisplayCoinArray;
 
 + (NSString *)chineseName:(NSString *)coin;
 

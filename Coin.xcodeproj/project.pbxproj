@@ -481,6 +481,7 @@
 		2EFFE6B21FF6286600BFCC40 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E5F19201FED0CB600100420 /* CoreTelephony.framework */; };
 		2EFFE6B31FF6287D00BFCC40 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E5F19241FED0CDD00100420 /* UserNotifications.framework */; };
 		2EFFE6B51FF6289600BFCC40 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EFFE6B41FF6289600BFCC40 /* libsqlite3.0.tbd */; };
+		4CC7F0ED205FBC5400BBEC4D /* CoinModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CC7F0EC205FBC5400BBEC4D /* CoinModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -1474,6 +1475,8 @@
 		2EFFE6B01FF4868300BFCC40 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		2EFFE6B11FF4868400BFCC40 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		2EFFE6B41FF6289600BFCC40 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+		4CC7F0EB205FBC5400BBEC4D /* CoinModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoinModel.h; sourceTree = "<group>"; };
+		4CC7F0EC205FBC5400BBEC4D /* CoinModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoinModel.m; sourceTree = "<group>"; };
 		8863748C5281F9DC1DDF8EEA /* Pods-Coin.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Coin.release.xcconfig"; path = "Pods/Target Support Files/Pods-Coin/Pods-Coin.release.xcconfig"; sourceTree = "<group>"; };
 		AB34D27FC9725550E9092EC2 /* Pods-Coin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Coin.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Coin/Pods-Coin.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -3093,6 +3096,8 @@
 				211D3C1A1FCFE46C00B55F9F /* HistoryRateModel.m */,
 				2ED651CA200F32BC0065A1B0 /* TLCoinWithdrawModel.h */,
 				2ED651CB200F32BC0065A1B0 /* TLCoinWithdrawModel.m */,
+				4CC7F0EB205FBC5400BBEC4D /* CoinModel.h */,
+				4CC7F0EC205FBC5400BBEC4D /* CoinModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -4060,7 +4065,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0900;
-				ORGANIZATIONNAME = " tianlei";
+				ORGANIZATIONNAME = chengdai;
 				TargetAttributes = {
 					2EA584B31FA813C900C7106C = {
 						CreatedOnToolsVersion = 9.0.1;
@@ -4568,6 +4573,7 @@
 				211CEF2A1FCC18BE000FB0C4 /* MyAdvertiseVC.m in Sources */,
 				211C04261FC6604800E51FCF /* ADFlipTransition.m in Sources */,
 				21CB94F01FDC0CAA00CAB090 /* LanguageSettingCell.m in Sources */,
+				4CC7F0ED205FBC5400BBEC4D /* CoinModel.m in Sources */,
 				211C04571FC6604800E51FCF /* IMAUser.m in Sources */,
 				211DE6B11FB58B4C002FCF3D /* UIButton+EnLargeEdge.m in Sources */,
 				211C04281FC6604800E51FCF /* UITableViewController+ADFlipTransition.m in Sources */,

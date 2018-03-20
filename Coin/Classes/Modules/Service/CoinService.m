@@ -18,7 +18,7 @@
     dispatch_once(&onceToken, ^{
         
         coinService = [[[self class] alloc] init];
-        coinService.currentCoin = kETH;
+        coinService.currentCoin = [[CoinUtil shouldDisplayCoinArray] objectAtIndex:0];
         
     });
     

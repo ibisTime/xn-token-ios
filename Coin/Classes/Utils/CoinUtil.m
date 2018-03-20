@@ -104,9 +104,10 @@ NSString *const kCNY = @"CNY";
 }
 
 
-+ (NSArray *)shouldDisplayCoinArray {
++ (NSMutableArray<CoinModel *> *)shouldDisplayCoinArray {
     
-    return @[kETH,kSC,kBTC];
+    return [[CoinModel coin] getOpenCoinList];
+
 }
 
 

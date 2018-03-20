@@ -33,6 +33,7 @@
 #import "CoinUtil.h"
 #import "RespHandler.h"
 #import <NBHTTP/NBNetwork.h>
+#import "CoinModel.h"
 
 
 #import "TLPublishInputView.h"
@@ -50,7 +51,7 @@
     
     
     //服务器环境
-    [AppConfig config].runEnv = RunEnvRelease;
+    [AppConfig config].runEnv = RunEnvDev;
 //    [AppConfig config].isUploadCheck = YES;
     self.respHandler = [[RespHandler alloc] init];
      
@@ -67,21 +68,23 @@
     //配置根控制器
     [self configRootViewController];
     
-    //初始化, 连天
+    //初始化, 聊天
     [[ChatManager sharedManager] initChat];
     
-    //
+    // 配置zendesk
     [self configZendesk];
     
     //初始化为繁体
     [LangSwitcher startWithTraditional];
+    
+   
 
-    //
+    //退出登录消息通知
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(loginOut)
                                                  name:kUserLoginOutNotification
                                                object:nil];
-    //消息
+    //用户登录消息通知
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(userLogin) name:kUserLoginNotification
                                                object:nil];
@@ -120,6 +123,8 @@
     [[IMAPlatform sharedInstance] configOnAppRegistAPNSWithDeviceToken:deviceToken];
 
 }
+
+
 
 // 用户重新登录需要重新，需要重新调用此方法监听
 - (void)kvoUnReadMsgToChangeTabbar {

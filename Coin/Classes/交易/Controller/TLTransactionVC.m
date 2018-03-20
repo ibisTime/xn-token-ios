@@ -32,9 +32,12 @@
 #import "TestViewController.h"
 #import "CoinService.h"
 #import "TLNotficationService.h"
+#import "CoinModel.h"
+#import "SelectScrollView.h"
 
 @interface TLTransactionVC ()<SegmentDelegate, RefreshDelegate, UIScrollViewDelegate>
 
+@property (nonatomic, strong) NSMutableArray <CoinModel *>*coins;
 //货币切换
 @property (nonatomic, strong) CoinChangeView *changeView;
 ////筛选
@@ -42,8 +45,12 @@
 //
 @property (nonatomic, strong) TLPageDataHelper *helper;
 
-//切换
+//顶部切换
 @property (nonatomic, strong) TopLabelUtil *labelUnil;
+
+//币种切换
+@property (nonatomic, strong) SelectScrollView *selectScrollView;
+
 //图片
 @property (nonatomic,strong) NSMutableArray *bannerPics;
 //tableview
@@ -104,24 +111,50 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
-    self.isFirst = YES;
     
-    [self navBarUI];
+    TLNetworking *http = [TLNetworking new];
+    http.code = @"802267";
     
-    [self setUpUI];
-    //获取广告
-    [self requestAdvetiseList];
-    //添加通知
-    [self addNotification];
+    http.parameters[@"status"] = @"0";
     
-    // 定时器去刷新广告列表
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:5*60
-                                                  target:self
-                                                selector:@selector(refreshAds)
-                                                userInfo:nil
-                                                 repeats:YES];
+    [http postWithSuccess:^(id responseObject) {
+        
+        NSMutableArray *coinList = responseObject[@"data"];
+        
+        [[CoinModel coin] saveOpenCoinList:coinList];
+        
+        self.isFirst = YES;
+        
+        [self navBarUI];
+        
+        [self setUpUI];
+        //获取广告
+        [self requestAdvetiseList];
+        //添加通知
+        [self addNotification];
+        
+        // 定时器去刷新广告列表
+        self.timer = [NSTimer scheduledTimerWithTimeInterval:5*60
+                                                      target:self
+                                                    selector:@selector(refreshAds)
+                                                    userInfo:nil
+                                                     repeats:YES];
+        
+        
+        
+        
+    } failure:^(NSError *error) {
+        NSLog(@"787878");
+        
+    }];
     
 }
+
+
+    
+
+    
+
 
 - (void)refreshAds {
     
@@ -142,27 +175,57 @@
         _labelUnil.titleFont = Font(17.0);
         _labelUnil.lineType = LineTypeTitleLength;
         _labelUnil.titleArray = @[
-                                  [LangSwitcher switchLang:@"买币"
-                                                       key:nil],
-                                  [LangSwitcher switchLang:@"卖币"
-                                                       key:nil]
-                                  ];
+                                      [LangSwitcher switchLang:@"买币"
+                                                           key:nil],
+                                      [LangSwitcher switchLang:@"卖币"
+                                                           key:nil]
+                                      ];
     }
     return _labelUnil;
+}
+
+#pragma mark - Init
+- (SelectScrollView *)selectScrollView {
+    
+    CoinWeakSelf;
+    
+    if (!_selectScrollView) {
+        _coins = [[CoinModel coin] getOpenCoinList];
+        NSMutableArray *titleArray = [[NSMutableArray alloc] init];
+        for (CoinModel *coin in _coins) {
+            if ([@"0" isEqualToString:coin.type]) {
+                NSString *title = [LangSwitcher switchLang:coin.symbol key:nil];
+                [titleArray addObject:title];
+            }
+        }
+        
+        _selectScrollView = [[SelectScrollView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight) itemTitles:titleArray];
+        
+        NSMutableArray<CoinModel *> *coins = [CoinUtil shouldDisplayCoinArray];
+        
+        [_selectScrollView setSelectBlock:^(NSInteger index) {
+            CoinModel *currentCoin = coins[index];
+            [CoinService shareService].currentCoin = currentCoin;
+            weakSelf.changeView.title = currentCoin.symbol;
+            [weakSelf changePageHelperCoin:currentCoin.symbol pageHelper:weakSelf.helper];
+            [weakSelf.tableView beginRefreshing];
+        }];
+    }
+    return _selectScrollView;
 }
 
 - (void)navBarUI {
     
     //1.左边切换
-    CoinChangeView *coinChangeView = [[CoinChangeView alloc] initWithFrame:CGRectMake(0, 0, 55, 40)];
-    
-    coinChangeView.title = @"ETH";
-    
-    [coinChangeView addTarget:self action:@selector(changeCoin) forControlEvents:UIControlEventTouchUpInside];
-    
-    self.changeView = coinChangeView;
-    
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:coinChangeView];
+//    CoinChangeView *coinChangeView = [[CoinChangeView alloc] initWithFrame:CGRectMake(0, 0, 55, 40)];
+//    
+//    coinChangeView.title = @"ETH";
+//    
+//    [coinChangeView addTarget:self action:@selector(changeCoin) forControlEvents:UIControlEventTouchUpInside];
+//    
+//    self.changeView = coinChangeView;
+//    
+//    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:coinChangeView];
     
     
     //2.右边搜索
@@ -211,7 +274,21 @@
     
     self.bannerView = bannerView;
     
-    self.tableView.tableHeaderView = bannerView;
+    //banner+币种选择
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, bannerView.height + 54)];
+    [headerView setBackgroundColor:[UIColor clearColor]];
+    
+    [headerView addSubview:bannerView];
+    [headerView addSubview:self.selectScrollView];
+
+    [self.selectScrollView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(bannerView.mas_bottom);
+        make.width.equalTo(@(SCREEN_WIDTH));
+        make.height.equalTo(@(44));
+        make.left.equalTo(@(0));
+    }];
+    
+    self.tableView.tableHeaderView = headerView;
     
     
     //2.发布
@@ -442,7 +519,8 @@
     helper.code = @"625228";
     helper.start = 1;
     helper.limit = 20;
-    [self changePageHelperCoin:kETH pageHelper:helper];
+    
+    [self changePageHelperCoin:[CoinService shareService].currentCoin.symbol pageHelper:helper];
     helper.parameters[@"tradeType"] = self.tradeType;
     helper.tableView = self.tableView;
     self.helper = helper;
@@ -495,13 +573,6 @@
 
 #pragma mark - SegmentDelegate
 -(void)segment:(TopLabelUtil *)segment didSelectIndex:(NSInteger)index {
-
-//    if ([AppConfig config].runEnv == RunEnvDev) {
-//        
-//        TestViewController *testVC = [[TestViewController alloc] init];
-//        [self.navigationController pushViewController:testVC animated:YES];
-//        return;
-//    }
     
     if (index == 1) {
         
@@ -517,6 +588,15 @@
     
     [self.tableView beginRefreshing];
     [self.labelUnil dyDidScrollChangeTheTitleColorWithContentOfSet:(index-1)*kScreenWidth];
+
+//    if ([AppConfig config].runEnv == RunEnvDev) {
+//        
+//        TestViewController *testVC = [[TestViewController alloc] init];
+//        [self.navigationController pushViewController:testVC animated:YES];
+//        return;
+//    }
+    
+    
     
 }
 
