@@ -17,6 +17,10 @@
 #import "OrderModel.h"
 #import <CDCommon/DeviceUtil.h>
 #import "OrderListVC.h"
+#import "SelectScrollView.h"
+#import "CoinModel.h"
+#import "CoinUtil.h"
+#import "CoinService.h"
 
 #define SHOW_BADGE_LEFT_INDEX 0
 #define SHOW_BADGE_RIGHT_INDEX 1
@@ -29,6 +33,10 @@
 @property (nonatomic, strong) UIScrollView *switchScrollView;
 @property (nonatomic, strong) OrderListVC *ingOrderListVC;
 @property (nonatomic, strong) OrderListVC *endOrderListVC;
+
+//币种切换
+@property (nonatomic, strong) SelectScrollView *selectScrollView;
+@property (nonatomic, strong) NSMutableArray <CoinModel *>*coins;
 
 @end
 
@@ -282,6 +290,7 @@
     self.ingOrderListVC = [[OrderListVC alloc] init];
     self.ingOrderListVC.delegate = self;
     self.ingOrderListVC.statusList = [OrderModel ingStatusList];
+    self.ingOrderListVC.tradeCoin = _coins[0].symbol;
     self.ingOrderListVC.view.frame = CGRectMake(0,0,self.switchScrollView.width,self.switchScrollView.height);
     [self addChildViewController:self.ingOrderListVC];
     [self.switchScrollView addSubview:self.ingOrderListVC.view];
@@ -290,9 +299,11 @@
     self.endOrderListVC = [[OrderListVC alloc] init];
     self.endOrderListVC.delegate = self;
     self.endOrderListVC.statusList = [OrderModel endStatusList];
+    self.endOrderListVC.tradeCoin = _coins[0].symbol;
     self.endOrderListVC.view.frame = CGRectMake(self.switchScrollView.width,0,self.switchScrollView.width,self.switchScrollView.height);
     [self addChildViewController:self.endOrderListVC];
     [self.switchScrollView addSubview:self.endOrderListVC.view];
+    
     
 }
 
@@ -313,11 +324,16 @@
     self.navigationItem.titleView = self.labelUtil;
     
     
+    [self.view addSubview:self.selectScrollView];
+    
     //1.切换背景
-    self.switchScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - [DeviceUtil top64] - [DeviceUtil bottom49])];
+    self.switchScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, self.selectScrollView.bottom + 10, SCREEN_WIDTH, SCREEN_HEIGHT - [DeviceUtil top64] - [DeviceUtil bottom49] - self.selectScrollView.height)];
     [self.view addSubview:self.switchScrollView];
     [self.switchScrollView setContentSize:CGSizeMake(2*self.switchScrollView.width, self.switchScrollView.height)];
     self.switchScrollView.scrollEnabled = NO;
+    
+    
+    
     
 }
 
@@ -328,6 +344,33 @@
     self.changeView = coinChangeView;
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:coinChangeView];
     
+}
+
+#pragma mark - Init
+- (SelectScrollView *)selectScrollView {
+    
+    CoinWeakSelf;
+    
+    if (!_selectScrollView) {
+        
+         NSArray *titleArray = [CoinUtil shouldDisplayCoinArray];
+        
+        _selectScrollView = [[SelectScrollView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 45) itemTitles:titleArray];
+        
+        weakSelf.coins = [CoinUtil shouldDisplayCoinModelArray];
+        
+        [_selectScrollView setSelectBlock:^(NSInteger index) {
+            
+            CoinModel *currentCoin = weakSelf.coins[index];
+            
+            weakSelf.ingOrderListVC.pageDataHelper.parameters[@"tradeCoin"] = currentCoin.symbol;
+            weakSelf.endOrderListVC.pageDataHelper.parameters[@"tradeCoin"] = currentCoin.symbol;
+            
+            [weakSelf orderRefresh];
+            [weakSelf asyncHandleTopUnreadMsgHint];
+        }];
+    }
+    return _selectScrollView;
 }
 
 @end

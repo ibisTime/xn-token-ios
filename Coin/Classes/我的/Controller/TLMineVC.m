@@ -55,7 +55,7 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    [self.navigationController setNavigationBarHidden:NO animated:animated];
 }
 
 //- (void)viewDidAppear:(BOOL)animated {
@@ -76,7 +76,7 @@
     
     [super viewWillAppear:animated];
     
-    [self.navigationController setNavigationBarHidden:YES animated:NO];
+    [self.navigationController setNavigationBarHidden:YES animated:animated];
 
     //解决聊天
     [IQKeyboardManager sharedManager].enableAutoToolbar = YES;
@@ -352,11 +352,12 @@
 
 - (void)initTableView {
     
-    self.tableView = [[MineTableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - kTabBarHeight) style:UITableViewStyleGrouped];
+    self.tableView = [[MineTableView alloc] initWithFrame:CGRectMake(0, self.headerView.height, kScreenWidth, kScreenHeight - kTabBarHeight - self.headerView.height) style:UITableViewStyleGrouped];
     
     self.tableView.mineGroup = self.group;
     
-    self.tableView.tableHeaderView = self.headerView;
+//    self.tableView.tableHeaderView = self.headerView;
+    [self.view addSubview:self.headerView];
     
 //    if (@available(iOS 11.0, *)) {
 //        

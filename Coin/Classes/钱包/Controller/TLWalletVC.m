@@ -97,13 +97,19 @@
 
 - (void)initTableView {
     
-    self.tableView = [[WalletTableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - kTabBarHeight)
+
+    [self.view addSubview:self.headerView];
+    
+    self.tableView = [[WalletTableView alloc] initWithFrame:CGRectMake(0, self.headerView.height, kScreenWidth, kScreenHeight - kTabBarHeight - self.headerView.height)
                                                       style:UITableViewStyleGrouped];
     
-    self.tableView.tableHeaderView = self.headerView;
+    //    self.tableView.tableHeaderView = self.headerView;
     self.tableView.refreshDelegate = self;
 //    [self.tableView adjustsContentInsets];
     [self.view addSubview:self.tableView];
+//    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(self.headerView.mas_bottom);
+//    }];
 }
 
 - (void)addNotification {

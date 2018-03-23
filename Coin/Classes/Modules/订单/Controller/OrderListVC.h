@@ -18,6 +18,7 @@
 @interface OrderListVC : TLBaseVC
 
 @property (nonatomic, copy) NSArray <NSString *> *statusList;
+@property (nonatomic, copy) NSString *tradeCoin;
 @property (nonatomic,strong) NSMutableArray <OrderModel *>*orderGroups;
 //@property (nonatomic, copy) NSString *belongUser;
 @property (nonatomic, strong) TLPageDataHelper *pageDataHelper;
