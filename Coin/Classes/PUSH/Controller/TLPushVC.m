@@ -34,6 +34,7 @@
 #import "PushSelectScrollView.h"
 #import "MyAdvertiseVC.h"
 #import "TLOrderVC.h"
+#import "LastestPriceModel.h"
 
 @interface TLPushVC ()<SegmentDelegate, RefreshDelegate, UIScrollViewDelegate>
 
@@ -47,6 +48,9 @@
 
 //顶部切换
 @property (nonatomic, strong) TopLabelUtil *labelUnil;
+
+//最新成交价格
+@property (nonatomic, strong) TLBaseLabel *lastestPrice;
 
 //币种切换
 @property (nonatomic, strong) PushSelectScrollView *selectScrollView;
@@ -172,7 +176,7 @@
                                 [LangSwitcher switchLang:@"订单" key:nil]
                                 ];
         
-        _selectScrollView = [[PushSelectScrollView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight) itemTitles:titleArray];
+        _selectScrollView = [[PushSelectScrollView alloc] initWithFrame:CGRectMake(0, 10, kScreenWidth, 47) itemTitles:titleArray];
         
 //        NSMutableArray<CoinModel *> *coins = [CoinUtil shouldDisplayCoinModelArray];
         
@@ -195,6 +199,7 @@
             } else if(index == 2) {
                 
                 MyAdvertiseVC *advertiseVC = [MyAdvertiseVC new];
+                advertiseVC.defaultCoin = [CoinService shareService].currentToken.symbol;
                 [weakSelf.navigationController pushViewController:advertiseVC animated:YES];
                 
                 
@@ -244,7 +249,7 @@
 //    [topView mas_makeConstraints:^(MASConstraintMaker *make) {
 //        make.centerX.mas_equalTo(self.view.centerX);
 //    }];
-    [self.view addSubview:topView];
+//    [self.view addSubview:topView];
     
     //币种切换
     CoinChangeView *coinChangeView = [[CoinChangeView alloc] initWithFrame:CGRectMake(15, 0, 95, topView.height)];
@@ -284,7 +289,7 @@
     
     //最新成交价格
     CGFloat newPriceWidth = SCREEN_WIDTH - coinChangeView.width - moreLabel.width - newPriceT.width - 60;
-    TLBaseLabel *newPrice = [TLBaseLabel labelWithFrame:CGRectMake(coinChangeView.width + moreLabel.width + 35,
+    self.lastestPrice = [TLBaseLabel labelWithFrame:CGRectMake(coinChangeView.width + moreLabel.width + 35,
                                                                    0,
                                                                    newPriceWidth,
                                                                    coinChangeView.height)
@@ -292,8 +297,10 @@
                                         backgroundColor:[UIColor whiteColor]
                                                    font:[UIFont systemFontOfSize:18]
                                               textColor:[UIColor themeColor]];
-    newPrice.text = [LangSwitcher switchLang:@"￥60176.98" key:nil];
-    [topView addSubview:newPrice];
+    self.lastestPrice.text = [LangSwitcher switchLang:@"￥0.00" key:nil];
+    [topView addSubview:self.lastestPrice];
+    
+    [self.view addSubview:topView];
     
     //交易列表
     self.tradeType = kAdsTradeTypeSell;
@@ -302,10 +309,11 @@
     self.tableView.refreshDelegate = self;
     [self.view addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(topView.bottom);
-        make.bottom.mas_equalTo(self.view.bottom);
+        make.top.mas_equalTo(topView.mas_bottom);
+        make.bottom.mas_equalTo(self.view.mas_bottom);
         make.left.mas_equalTo(self.view.mas_left);
         make.right.mas_equalTo(self.view.mas_right);
+//        make.edges.mas_equalTo(UIEdgeInsetsZero);
     }];
     
     //    if (@available(iOS 11.0, *)) {
@@ -315,17 +323,20 @@
     
 
     //table表头tab切换
-    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 56)];
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 47 + 10)];
     [headerView setBackgroundColor:[UIColor clearColor]];
+    
     
     [headerView addSubview:self.selectScrollView];
     
-    [self.selectScrollView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(headerView.mas_bottom).offset(-2);
-        make.width.equalTo(@(SCREEN_WIDTH));
-        make.height.equalTo(@(44));
-        make.left.equalTo(@(0));
-    }];
+//    [self.selectScrollView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.bottom.equalTo(headerView.mas_bottom);
+//        make.width.equalTo(@(SCREEN_WIDTH));
+//        make.height.equalTo(@(44));
+//        make.left.equalTo(@(0));
+//    }];
+    
+    
     
     self.tableView.tableHeaderView = headerView;
     
@@ -376,7 +387,7 @@
         NSMutableArray<CoinModel *> *tokens = [CoinUtil shouldDisplayTokenCoinModelArray];
         NSMutableArray *textArr = [[NSMutableArray alloc] init];
         for (CoinModel *coinModel in tokens) {
-            [textArr addObject:[NSString stringWithFormat:@"%@/CNY", coinModel.symbol]];
+            [textArr addObject:coinModel.symbol];
         }
         
         _filterPicker = [[FilterView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
@@ -385,7 +396,7 @@
         _filterPicker.selectBlock = ^(NSInteger index) {
             
             [CoinService shareService].currentToken = tokens[index];
-            weakSelf.changeView.title = textArr[index];
+            weakSelf.changeView.title = [NSString stringWithFormat:@"%@/CNY", textArr[index]];
             [weakSelf changePageHelperCoin:textArr[index] pageHelper:weakSelf.helper];
             [weakSelf.tableView beginRefreshing];
             
@@ -401,7 +412,7 @@
     //发布购买/出售
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(refreshData:)
-                                                 name:kAdvertiseListRefresh
+                                                 name:kPushAdvertiseListRefresh
                                                object:nil];
     
     //信任/取消信任
@@ -494,10 +505,12 @@
         TLNotificationObj *notiObj = (TLNotificationObj *)obj;
         
         //币种改变
-        [CoinService shareService].currentToken = notiObj.content;
-        [self changePageHelperCoin:[CoinService shareService].currentToken
+        CoinModel *coin = [CoinUtil getCoinModel:notiObj.content];
+        [CoinService shareService].currentToken = coin;
+        [self changePageHelperCoin:[CoinService shareService].currentToken.symbol
                         pageHelper:self.helper];
-        self.changeView.title = [CoinService shareService].currentToken;
+        self.changeView.title = [NSString stringWithFormat:@"%@/CNY", [CoinService shareService].currentToken.symbol];
+        
         //左右切换
         NSInteger index = [notiObj.subContent integerValue];
         index = index == 1 ? 0 : 1;
@@ -521,6 +534,27 @@
     
 }
 
+- (void)getLastestPrice {
+    
+    //最新成交价
+    __weak typeof(self) weakSelf = self;
+    
+    TLNetworking *http = [TLNetworking new];
+    //806052
+    http.code = @"625283";
+    http.parameters[@"tradeCoin"] = [CoinService shareService].currentToken.symbol;
+    
+    [http postWithSuccess:^(id responseObject) {
+        
+        LastestPriceModel *price = [LastestPriceModel mj_objectWithKeyValues:responseObject[@"data"]];
+        weakSelf.lastestPrice.text = [NSString stringWithFormat:@"￥%.2f", price.lastestPrice.doubleValue];
+        
+    } failure:^(NSError *error) {
+        
+    }];
+    
+}
+
 - (void)requestAdvetiseList {
     
     CoinWeakSelf;
@@ -538,6 +572,8 @@
     [helper modelClass:[AdvertiseModel class]];
     
     [self.tableView addRefreshAction:^{
+        
+        [weakSelf getLastestPrice];
         
         [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
             

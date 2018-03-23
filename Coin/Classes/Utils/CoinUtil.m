@@ -183,6 +183,19 @@ NSString *const kCNY = @"CNY";
     
 }
 
++ (CoinModel *)getCoinModel:(NSString *)symbol {
+    CoinModel *coinModel;
+    
+    for (CoinModel *coin in [self shouldDisplayCoinModelArray]) {
+        if ([symbol isEqualToString:coin.symbol]) {
+            coinModel = coin;
+            break;
+        }
+    }
+    
+    return coinModel;
+}
+
 
 
 @end

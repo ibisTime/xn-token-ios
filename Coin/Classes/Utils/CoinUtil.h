@@ -45,6 +45,8 @@ typedef NS_ENUM(NSUInteger, CoinType) {
 
 + (NSMutableArray<CoinModel *> *)shouldDisplayTokenCoinModelArray;
 
++ (CoinModel *)getCoinModel:(NSString *)symbol;
+
 + (NSString *)chineseName:(NSString *)coin;
 
 @end

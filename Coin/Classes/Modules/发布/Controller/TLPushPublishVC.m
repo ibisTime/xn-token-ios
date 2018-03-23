@@ -438,7 +438,7 @@
         });
         
         TLNotificationObj *notificationObj = [[TLNotificationObj alloc] init];
-        notificationObj.name = kAdvertiseListRefresh;
+        notificationObj.name = kPushAdvertiseListRefresh;
         notificationObj.type = TLNotificationTypeRefreshAdsList;
         notificationObj.content = tradeCoin;
         notificationObj.subContent = tradeType;

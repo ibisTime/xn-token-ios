@@ -453,10 +453,11 @@
         TLNotificationObj *notiObj = (TLNotificationObj *)obj;
         
         //币种改变
-        [CoinService shareService].currentCoin = notiObj.content;
-         [self changePageHelperCoin:[CoinService shareService].currentCoin
+        CoinModel *coin = [CoinUtil getCoinModel:notiObj.content];
+        [CoinService shareService].currentCoin = coin;
+         [self changePageHelperCoin:[CoinService shareService].currentCoin.symbol
                          pageHelper:self.helper];
-        self.changeView.title = [CoinService shareService].currentCoin;
+        self.changeView.title = [CoinService shareService].currentCoin.symbol;
         //左右切换
         NSInteger index = [notiObj.subContent integerValue];
         index = index == 1 ? 0 : 1;

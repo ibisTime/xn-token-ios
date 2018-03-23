@@ -10,4 +10,6 @@
 
 @interface MyAdvertiseVC : TLBaseVC
 
+@property (nonatomic, copy) NSString *defaultCoin;
+
 @end

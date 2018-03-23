@@ -27,6 +27,8 @@
 @property (nonatomic, strong) CoinChangeView *topTitleView;
 
 
+
+
 @end
 
 @implementation MyAdvertiseVC
@@ -35,8 +37,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    if (!_defaultCoin) {
+        _defaultCoin = kETH;
+    }
+    
     CoinChangeView *topTitleView = [[CoinChangeView alloc] initWithFrame:CGRectMake(0, 0, 140, 40)];
-    topTitleView.title = [self titleWithCoin:kETH];
+    topTitleView.title = [self titleWithCoin:_defaultCoin];
     self.navigationItem.titleView = topTitleView;
     self.topTitleView = topTitleView;
     [self initSelectScrollView];
@@ -127,7 +133,7 @@
                 
         }
         
-        childVC.coin = kETH;
+        childVC.coin = _defaultCoin;
         childVC.view.frame = CGRectMake(kScreenWidth*i, 1, kScreenWidth, kSuperViewHeight - 45);
         
         [self addChildViewController:childVC];

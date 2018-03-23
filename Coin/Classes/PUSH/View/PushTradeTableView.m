@@ -37,9 +37,13 @@ static NSString *identifierCell = @"TradeCell";
 
 #pragma mark - UITableViewDataSource
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return self.advertises.count;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return self.advertises.count;
+    return 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -47,7 +51,7 @@ static NSString *identifierCell = @"TradeCell";
     PushTradeCell *cell = [tableView dequeueReusableCellWithIdentifier:identifierCell forIndexPath:indexPath];
     
     
-    cell.advertise = self.advertises[indexPath.row];
+    cell.advertise = self.advertises[indexPath.section];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     return cell;
@@ -69,8 +73,10 @@ static NSString *identifierCell = @"TradeCell";
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    
-    return 0.5;
+    if (section == 0) {
+        return 0.5;
+    }
+    return 5;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
@@ -85,7 +91,7 @@ static NSString *identifierCell = @"TradeCell";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     
-    return 10;
+    return 5;
 }
 
 @end

@@ -10,6 +10,7 @@
 
 //刷新广告列表
 #define kAdvertiseListRefresh @"kAdvertiseListRefresh"
+#define kPushAdvertiseListRefresh @"kPushAdvertiseListRefresh"
 
 @interface TLNotficationService : NSObject
 

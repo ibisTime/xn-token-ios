@@ -487,6 +487,7 @@
 		4C5D31722064DB1E001CE102 /* PushAdsService.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5D31702064DB1E001CE102 /* PushAdsService.m */; };
 		4C5D317520650240001CE102 /* PushSortBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5D31732065023F001CE102 /* PushSortBar.m */; };
 		4C5D3178206502F5001CE102 /* PushSelectScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5D3177206502F5001CE102 /* PushSelectScrollView.m */; };
+		4C5D317B206530F0001CE102 /* LastestPriceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5D317A206530F0001CE102 /* LastestPriceModel.m */; };
 		4CC7F0ED205FBC5400BBEC4D /* CoinModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CC7F0EC205FBC5400BBEC4D /* CoinModel.m */; };
 		4CE791F8206351E6004E3C77 /* TLPushVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CE791F7206351E6004E3C77 /* TLPushVC.m */; };
 		4CF1EDEC2063D90C00747744 /* PushPublishService.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CF1EDEA2063D90B00747744 /* PushPublishService.m */; };
@@ -1496,6 +1497,8 @@
 		4C5D317420650240001CE102 /* PushSortBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PushSortBar.h; sourceTree = "<group>"; };
 		4C5D3176206502F5001CE102 /* PushSelectScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PushSelectScrollView.h; sourceTree = "<group>"; };
 		4C5D3177206502F5001CE102 /* PushSelectScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PushSelectScrollView.m; sourceTree = "<group>"; };
+		4C5D3179206530F0001CE102 /* LastestPriceModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LastestPriceModel.h; sourceTree = "<group>"; };
+		4C5D317A206530F0001CE102 /* LastestPriceModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LastestPriceModel.m; sourceTree = "<group>"; };
 		4CC7F0EB205FBC5400BBEC4D /* CoinModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoinModel.h; sourceTree = "<group>"; };
 		4CC7F0EC205FBC5400BBEC4D /* CoinModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoinModel.m; sourceTree = "<group>"; };
 		4CE791F6206351E6004E3C77 /* TLPushVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLPushVC.h; sourceTree = "<group>"; };
@@ -4095,6 +4098,8 @@
 		4CE791F52063514D004E3C77 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				4C5D3179206530F0001CE102 /* LastestPriceModel.h */,
+				4C5D317A206530F0001CE102 /* LastestPriceModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -4588,6 +4593,7 @@
 				21A7F3131FB2E2F900FAA0A2 /* TLAccountSetBaseVC.m in Sources */,
 				211C05011FC6604900E51FCF /* NoticeListCell.m in Sources */,
 				2EB9495A1FDF6B1A00CE4B94 /* ZMChineseConvert.m in Sources */,
+				4C5D317B206530F0001CE102 /* LastestPriceModel.m in Sources */,
 				211C04451FC6604800E51FCF /* HUDHelper.m in Sources */,
 				211C04631FC6604800E51FCF /* IMAPlatform.m in Sources */,
 				21A7F35E1FB2EBAA00FAA0A2 /* CurrencyModel.m in Sources */,
