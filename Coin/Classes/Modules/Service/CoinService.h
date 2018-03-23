@@ -20,6 +20,11 @@
  */
 @property (nonatomic, strong) CoinModel *currentCoin;
 
+/**
+ 记录交易切换的当前token,默认为 eth
+ */
+@property (nonatomic, strong) CoinModel *currentToken;
+
 
 //- (NSString *)pageAddressApiCode:(NSString *)coin;
 

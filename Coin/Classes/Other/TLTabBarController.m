@@ -29,15 +29,15 @@
 
     NSArray *titles = @[
                         [LangSwitcher switchLang:@"行情" key:nil],
-                        [LangSwitcher switchLang:@"订单" key:nil],
                         [LangSwitcher switchLang:@"交易" key:nil],
+                        [LangSwitcher switchLang:@"PUSH" key:nil],
                         [LangSwitcher switchLang:@"钱包" key:nil],
                         [LangSwitcher switchLang:@"我的" key:nil]
                         ];
-    NSArray *VCNames = @[@"QuotationVC",@"TLOrderVC",@"TLTransactionVC",@"TLWalletVC",@"TLMineVC"];
+    NSArray *VCNames = @[@"QuotationVC",@"TLTransactionVC",@"TLPushVC",@"TLWalletVC",@"TLMineVC"];
     
-    NSArray *imageNames = @[@"行情00",@"订单00",@"交易00",@"钱包00",@"我的00"];
-    NSArray *selectedImageNames = @[@"行情01",@"订单01",@"交易01",@"钱包01",@"我的01"];
+    NSArray *imageNames = @[@"行情00",@"交易00",@"PUSH00",@"钱包00",@"我的00"];
+    NSArray *selectedImageNames = @[@"行情01",@"交易01",@"PUSH01",@"钱包01",@"我的01"];
     
     
     for (int i = 0; i < imageNames.count; i++) {
@@ -158,7 +158,7 @@
     } else {
         
         //判断点击的Controller是不是需要登录，如果是，那就登录
-        if((idx == 1 || idx == 3 || idx == 4) && ![TLUser user].isLogin) {
+        if((idx == 3 || idx == 4) && ![TLUser user].isLogin) {
             
             TLUserLoginVC *loginVC = [TLUserLoginVC new];
             

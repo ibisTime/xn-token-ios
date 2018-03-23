@@ -108,7 +108,7 @@
                                                    [LangSwitcher switchLang: @"卖币" key:nil]
                                                    ];
     //
-    self.coinTypeView.pickerTextField.tagNames = [CoinUtil shouldDisplayCoinArray];
+    self.coinTypeView.pickerTextField.tagNames = [CoinUtil shouldDisplayOriginalCoinArray];
     
     //
     self.payTypeView.pickerTextField.tagNames  = @[
@@ -117,7 +117,7 @@
                                                    [LangSwitcher switchLang:@"银行转账" key:nil]
                                                    ];
     
-    self.coinTypeView.pickerTextField.text = [CoinService shareService].currentCoin;
+    self.coinTypeView.pickerTextField.text = [[CoinService shareService].currentCoin symbol];
     self.searchCoin = self.coinTypeView.pickerTextField.text;
     
     

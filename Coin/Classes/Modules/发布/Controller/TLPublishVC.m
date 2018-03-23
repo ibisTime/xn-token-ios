@@ -79,9 +79,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    NSArray *coins = [CoinUtil shouldDisplayOriginalCoinArray];
+    
     //预设一个
-    self.firstCoin =  self.firstCoin ? : kETH;
-    self.currentCurrency = self.firstCoin;
+    //    self.firstCoin =  self.firstCoin ? : kETH;
+    self.currentCurrency = coins[0];
     //     [[IQKeyboardManager sharedManager] considerToolbarPreviousNextInViewClass:[BMEnableIQKeyboardView class]];
     NSString *tradeType = self.VCType == TLPublishVCTypeSell ? kPublishTradeTypeSell : kPublishTradeTypeBuy;
     //必须先进行配置
@@ -623,7 +625,7 @@
     
 
     self.tradeCoinView.textField.text = self.currentCurrency;
-    [self changeMarketLblCoin:kETH];
+    [self changeMarketLblCoin:self.currentCurrency];
     //
     if (self.publishType == PublishTypePublishRedit) {
         
@@ -909,7 +911,7 @@
     //币种选择
     self.coinPickerView = [[FilterView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
     self.coinPickerView.autoSelectOne = YES;
-    self.coinPickerView.tagNames = [CoinUtil shouldDisplayCoinArray];
+    self.coinPickerView.tagNames = [CoinUtil shouldDisplayOriginalCoinArray];
     
 }
 

@@ -49,6 +49,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
+//    [NSThread sleepForTimeInterval:2];
     
     //服务器环境
     [AppConfig config].runEnv = RunEnvDev;

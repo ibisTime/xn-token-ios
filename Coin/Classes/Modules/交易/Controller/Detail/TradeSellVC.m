@@ -92,7 +92,7 @@
             
         } else {
             
-            weakSelf.tradeView.leftInfo = [NSString stringWithFormat:@"广告剩余可交易量: %@ ETH", [CoinUtil convertToRealCoin:self.advertise.leftCountString coin:_advertise.tradeCoin]];
+            weakSelf.tradeView.leftInfo = [NSString stringWithFormat:@"广告剩余可交易量: %@ %@", [CoinUtil convertToRealCoin:self.advertise.leftCountString coin:_advertise.tradeCoin], self.advertise.tradeCoin];
 //            [CoinUtil convertToRealCoin:self.advertise.leftCountString coin:_advertise.tradeCoin]
             
         }

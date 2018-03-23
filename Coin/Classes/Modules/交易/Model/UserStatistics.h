@@ -21,7 +21,7 @@
 
 - (NSString *)goodCommentRate;
 
-//@property (nonatomic, copy) NSString *totalTradeCount;
+@property (nonatomic, copy) NSString *totalTradeCount;
 @property (nonatomic, copy) NSString *totalTradeCountEth;
 @property (nonatomic, copy) NSString *totalTradeCountSc;
 @property (nonatomic, copy) NSString *totalTradeCountBtc;

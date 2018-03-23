@@ -40,19 +40,26 @@ NSString *const kCNY = @"CNY";
 
 + (NSNumber *)getCardinality:(NSString *)coin {
     
+    NSMutableArray<CoinModel *> *coins = [[CoinModel coin] getOpenCoinList];
     
-    if ([coin isEqualToString:kETH]) {
-        
-        return @(1.0e+18);
-        
-    } else if ([coin isEqualToString:kBTC]) {
-        
-        return @(1.0e+8);
-        
-    } else if([coin isEqualToString:kSC]) {
-        
-        return @(1.0e+24);
+    for (CoinModel *coinModel in coins) {
+        if ([coin isEqualToString:coinModel.symbol]) {
+            return [[NSNumber alloc] initWithDouble:pow(10, coinModel.unit.doubleValue)];
+        }
     }
+    
+//    if ([coin isEqualToString:kETH]) {
+//        
+//        return @(1.0e+18);
+//        
+//    } else if ([coin isEqualToString:kBTC]) {
+//        
+//        return @(1.0e+8);
+//        
+//    } else if([coin isEqualToString:kSC]) {
+//        
+//        return @(1.0e+24);
+//    }
     
     return nil;
 }
@@ -94,20 +101,86 @@ NSString *const kCNY = @"CNY";
 
 + (NSString *)chineseName:(NSString *)coin {
     
-    NSDictionary *dict = @{
-                           kETH : @"以太币",
-                           kSC : @"云储币",
-                           kBTC : @"比特币"
-                           };
+    NSMutableArray<CoinModel *> *coins = [[CoinModel coin] getOpenCoinList];
     
-    return dict[coin];
+    for (CoinModel *coinModel in coins) {
+        if ([coin isEqualToString:coinModel.symbol]) {
+            return coinModel.cname;
+        }
+    }
+    
+    return nil;
 }
 
++ (NSArray *)shouldDisplayCoinArray {
+    
+    NSMutableArray<CoinModel *> *coinList = [[CoinModel coin] getOpenCoinList];
+    
+    NSMutableArray *coins = [[NSMutableArray alloc] init];
+    for (CoinModel *coinModel in coinList) {
+        [coins addObject:coinModel.symbol];
+    }
+    return coins;
+}
 
-+ (NSMutableArray<CoinModel *> *)shouldDisplayCoinArray {
++ (NSArray *)shouldDisplayOriginalCoinArray {
+    
+    NSMutableArray<CoinModel *> *coinList = [[CoinModel coin] getOpenCoinList];
+    
+    NSMutableArray *coins = [[NSMutableArray alloc] init];
+    for (CoinModel *coinModel in coinList) {
+        if ([@"0" isEqualToString:coinModel.type]) {
+            [coins addObject:coinModel.symbol];
+        }
+    }
+    return coins;
+}
+
++ (NSArray *)shouldDisplayTokenCoinArray {
+    
+    NSMutableArray<CoinModel *> *coinList = [[CoinModel coin] getOpenCoinList];
+    
+    NSMutableArray *coins = [[NSMutableArray alloc] init];
+    for (CoinModel *coinModel in coinList) {
+        if ([@"1" isEqualToString:coinModel.type]) {
+            [coins addObject:coinModel.symbol];
+        }
+    }
+    return coins;
+}
+
++ (NSMutableArray<CoinModel *> *)shouldDisplayCoinModelArray {
     
     return [[CoinModel coin] getOpenCoinList];
 
+}
+
++ (NSMutableArray<CoinModel *> *)shouldDisplayOriginalCoinModelArray {
+    
+    NSMutableArray<CoinModel *> *coinList = [[CoinModel coin] getOpenCoinList];
+    
+    NSMutableArray *coins = [[NSMutableArray alloc] init];
+    for (CoinModel *coinModel in coinList) {
+        if ([@"0" isEqualToString:coinModel.type]) {
+            [coins addObject:coinModel];
+        }
+    }
+    return coins;
+    
+}
+
++ (NSMutableArray<CoinModel *> *)shouldDisplayTokenCoinModelArray {
+    
+    NSMutableArray<CoinModel *> *coinList = [[CoinModel coin] getOpenCoinList];
+    
+    NSMutableArray *coins = [[NSMutableArray alloc] init];
+    for (CoinModel *coinModel in coinList) {
+        if ([@"1" isEqualToString:coinModel.type]) {
+            [coins addObject:coinModel];
+        }
+    }
+    return coins;
+    
 }
 
 

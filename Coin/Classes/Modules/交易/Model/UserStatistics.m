@@ -33,20 +33,7 @@
 //        return nil;
 //    }
     
-    NSString *totalTradeCount = nil;
-    if ([coin isEqualToString:kETH]) {
-        
-        totalTradeCount = self.totalTradeCountEth;
-        
-    } else if ([coin isEqualToString:kSC]) {
-        
-        totalTradeCount = self.totalTradeCountSc;
-
-    } else if ([coin isEqualToString:kBTC]) {
-        
-        totalTradeCount = self.totalTradeCountBtc;
-
-    }
+    NSString *totalTradeCount = self.totalTradeCount;
     
     //
     NSString *realNum = [CoinUtil convertToRealCoin:totalTradeCount

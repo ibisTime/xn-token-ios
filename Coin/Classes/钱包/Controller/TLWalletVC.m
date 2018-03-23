@@ -178,10 +178,10 @@
             [objs enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                 
                 CurrencyModel *currencyModel = (CurrencyModel *)obj;
-                if ([[CoinUtil shouldDisplayCoinArray] indexOfObject:currencyModel.currency ] != NSNotFound ) {
-                    
+//                if ([[CoinUtil shouldDisplayCoinArray] indexOfObject:currencyModel.currency ] != NSNotFound ) {
+                
                     [shouldDisplayCoins addObject:currencyModel];
-                }
+//                }
                 
             }];
             

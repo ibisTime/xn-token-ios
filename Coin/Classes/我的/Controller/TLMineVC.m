@@ -34,6 +34,7 @@
 #import <IQKeyboardManager/IQKeyboardManager.h>
 #import <CDCommon/UIScrollView+TLAdd.h>
 #import "CoinService.h"
+#import "TLOrderVC.h"
 
 @interface TLMineVC ()<MineHeaderSeletedDelegate, UINavigationControllerDelegate>
 
@@ -169,6 +170,18 @@
         
     };
     
+    //我的订单
+    MineModel *order = [MineModel new];
+    
+    order.text = [LangSwitcher switchLang:@"我的订单" key:nil];
+    order.imgName = @"我的订单";
+    order.action = ^{
+        
+        TLOrderVC *orderVC = [TLOrderVC new];
+        [weakSelf.navigationController pushViewController:orderVC animated:YES];
+        
+    };
+    
     //我的地址
     MineModel *address = [MineModel new];
     address.text = [LangSwitcher switchLang:@"我的地址" key:nil];
@@ -177,7 +190,7 @@
         
         CoinAddressListVC *addressListVC = [CoinAddressListVC new];
         addressListVC.isCanLookManyCoin = YES;
-        addressListVC.coin = [CoinService shareService].currentCoin;
+        addressListVC.coin = [[CoinService shareService].currentCoin symbol];
         [weakSelf.navigationController pushViewController:addressListVC animated:YES];
         
     };
@@ -321,7 +334,7 @@
         
         
         self.group.sections = @[
-                                @[advertisement, address, trust],
+                                @[advertisement, order, address, trust],
                                 @[securityCenter, personalSetting,helpModel, linkService, abountUs]
                                 ];
 
@@ -329,7 +342,7 @@
       
         
         self.group.sections = @[
-                                @[advertisement, address, trust, inviteFriend],
+                                @[advertisement, order, address, trust, inviteFriend],
                                 @[securityCenter, personalSetting,helpModel, linkService, abountUs]
                                 ];
         

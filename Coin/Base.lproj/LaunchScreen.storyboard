@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -21,25 +22,36 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" insetsLayoutMarginsFromSafeArea="NO" image="Launch" translatesAutoresizingMaskIntoConstraints="NO" id="haQ-ur-cRM">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LaunchIcon" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dlJ-MF-ZkO">
+                                <rect key="frame" x="117" y="134" width="141" height="131"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="131" id="EMe-7A-5qC"/>
+                                    <constraint firstAttribute="width" constant="141" id="yNE-TI-vZ6"/>
+                                </constraints>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="全球首家PUSH交易所" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RFD-Hv-HjN">
+                                <rect key="frame" x="104" y="589" width="166" height="18"/>
+                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="15"/>
+                                <color key="textColor" red="0.75686274509803919" green="0.25882352941176467" blue="0.23137254901960785" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="haQ-ur-cRM" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="0vw-Re-1qz"/>
-                            <constraint firstAttribute="trailing" secondItem="haQ-ur-cRM" secondAttribute="trailing" id="1KR-4e-luu"/>
-                            <constraint firstItem="l0q-38-al4" firstAttribute="top" secondItem="haQ-ur-cRM" secondAttribute="bottom" id="ac3-og-Uwd"/>
-                            <constraint firstItem="haQ-ur-cRM" firstAttribute="top" secondItem="lEs-MU-Wam" secondAttribute="bottom" constant="-20" id="anq-Yf-Wmd"/>
+                            <constraint firstItem="RFD-Hv-HjN" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" constant="88" id="6lz-12-L4Y"/>
+                            <constraint firstItem="RFD-Hv-HjN" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="Afm-XC-Nbg"/>
+                            <constraint firstItem="l0q-38-al4" firstAttribute="top" secondItem="RFD-Hv-HjN" secondAttribute="bottom" constant="60" id="JHu-Q6-Bn0"/>
+                            <constraint firstItem="dlJ-MF-ZkO" firstAttribute="top" secondItem="lEs-MU-Wam" secondAttribute="bottom" constant="114" id="PCh-hY-F3M"/>
+                            <constraint firstItem="dlJ-MF-ZkO" firstAttribute="centerX" secondItem="RFD-Hv-HjN" secondAttribute="centerX" id="o4Q-25-Hil"/>
                         </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="53" y="375"/>
+            <point key="canvasLocation" x="52" y="374.66266866566718"/>
         </scene>
     </scenes>
     <resources>
-        <image name="Launch" width="360" height="640"/>
+        <image name="LaunchIcon" width="200" height="261"/>
     </resources>
 </document>

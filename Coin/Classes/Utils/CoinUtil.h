@@ -33,7 +33,17 @@ typedef NS_ENUM(NSUInteger, CoinType) {
  */
 + (NSString *)convertToSysCoin:(NSString *)count coin:(NSString *)coin;
 
-+ (NSMutableArray<CoinModel *> *)shouldDisplayCoinArray;
++ (NSArray *)shouldDisplayCoinArray;
+
++ (NSArray *)shouldDisplayOriginalCoinArray;
+
++ (NSArray *)shouldDisplayTokenCoinArray;
+
++ (NSMutableArray<CoinModel *> *)shouldDisplayCoinModelArray;
+
++ (NSMutableArray<CoinModel *> *)shouldDisplayOriginalCoinModelArray;
+
++ (NSMutableArray<CoinModel *> *)shouldDisplayTokenCoinModelArray;
 
 + (NSString *)chineseName:(NSString *)coin;
 

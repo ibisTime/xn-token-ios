@@ -481,7 +481,16 @@
 		2EFFE6B21FF6286600BFCC40 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E5F19201FED0CB600100420 /* CoreTelephony.framework */; };
 		2EFFE6B31FF6287D00BFCC40 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E5F19241FED0CDD00100420 /* UserNotifications.framework */; };
 		2EFFE6B51FF6289600BFCC40 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EFFE6B41FF6289600BFCC40 /* libsqlite3.0.tbd */; };
+		4C5D31692064C7B2001CE102 /* PushTradeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5D31682064C7B2001CE102 /* PushTradeCell.m */; };
+		4C5D316C2064C7BD001CE102 /* PushTradeTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5D316A2064C7BD001CE102 /* PushTradeTableView.m */; };
+		4C5D316F2064C97B001CE102 /* PushUserPhotoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5D316D2064C97A001CE102 /* PushUserPhotoView.m */; };
+		4C5D31722064DB1E001CE102 /* PushAdsService.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5D31702064DB1E001CE102 /* PushAdsService.m */; };
+		4C5D317520650240001CE102 /* PushSortBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5D31732065023F001CE102 /* PushSortBar.m */; };
+		4C5D3178206502F5001CE102 /* PushSelectScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5D3177206502F5001CE102 /* PushSelectScrollView.m */; };
 		4CC7F0ED205FBC5400BBEC4D /* CoinModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CC7F0EC205FBC5400BBEC4D /* CoinModel.m */; };
+		4CE791F8206351E6004E3C77 /* TLPushVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CE791F7206351E6004E3C77 /* TLPushVC.m */; };
+		4CF1EDEC2063D90C00747744 /* PushPublishService.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CF1EDEA2063D90B00747744 /* PushPublishService.m */; };
+		4CF1EDEF2063D9FB00747744 /* TLPushPublishVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CF1EDED2063D9FB00747744 /* TLPushPublishVC.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -1475,8 +1484,26 @@
 		2EFFE6B01FF4868300BFCC40 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		2EFFE6B11FF4868400BFCC40 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		2EFFE6B41FF6289600BFCC40 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+		4C5D31672064C7B1001CE102 /* PushTradeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PushTradeCell.h; sourceTree = "<group>"; };
+		4C5D31682064C7B2001CE102 /* PushTradeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PushTradeCell.m; sourceTree = "<group>"; };
+		4C5D316A2064C7BD001CE102 /* PushTradeTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PushTradeTableView.m; sourceTree = "<group>"; };
+		4C5D316B2064C7BD001CE102 /* PushTradeTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PushTradeTableView.h; sourceTree = "<group>"; };
+		4C5D316D2064C97A001CE102 /* PushUserPhotoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PushUserPhotoView.m; sourceTree = "<group>"; };
+		4C5D316E2064C97B001CE102 /* PushUserPhotoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PushUserPhotoView.h; sourceTree = "<group>"; };
+		4C5D31702064DB1E001CE102 /* PushAdsService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PushAdsService.m; sourceTree = "<group>"; };
+		4C5D31712064DB1E001CE102 /* PushAdsService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PushAdsService.h; sourceTree = "<group>"; };
+		4C5D31732065023F001CE102 /* PushSortBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PushSortBar.m; sourceTree = "<group>"; };
+		4C5D317420650240001CE102 /* PushSortBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PushSortBar.h; sourceTree = "<group>"; };
+		4C5D3176206502F5001CE102 /* PushSelectScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PushSelectScrollView.h; sourceTree = "<group>"; };
+		4C5D3177206502F5001CE102 /* PushSelectScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PushSelectScrollView.m; sourceTree = "<group>"; };
 		4CC7F0EB205FBC5400BBEC4D /* CoinModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoinModel.h; sourceTree = "<group>"; };
 		4CC7F0EC205FBC5400BBEC4D /* CoinModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoinModel.m; sourceTree = "<group>"; };
+		4CE791F6206351E6004E3C77 /* TLPushVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLPushVC.h; sourceTree = "<group>"; };
+		4CE791F7206351E6004E3C77 /* TLPushVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLPushVC.m; sourceTree = "<group>"; };
+		4CF1EDEA2063D90B00747744 /* PushPublishService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PushPublishService.m; path = "Coin/Classes/Modules/发布/PushPublishService.m"; sourceTree = SOURCE_ROOT; };
+		4CF1EDEB2063D90B00747744 /* PushPublishService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PushPublishService.h; path = "Coin/Classes/Modules/发布/PushPublishService.h"; sourceTree = SOURCE_ROOT; };
+		4CF1EDED2063D9FB00747744 /* TLPushPublishVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLPushPublishVC.m; sourceTree = "<group>"; };
+		4CF1EDEE2063D9FB00747744 /* TLPushPublishVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLPushPublishVC.h; sourceTree = "<group>"; };
 		8863748C5281F9DC1DDF8EEA /* Pods-Coin.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Coin.release.xcconfig"; path = "Pods/Target Support Files/Pods-Coin/Pods-Coin.release.xcconfig"; sourceTree = "<group>"; };
 		AB34D27FC9725550E9092EC2 /* Pods-Coin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Coin.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Coin/Pods-Coin.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -2443,6 +2470,8 @@
 				211CEF031FCBB720000FB0C4 /* Controller */,
 				2EBFBF211FD8E56C0066F7E4 /* PublishService.h */,
 				2EBFBF221FD8E56C0066F7E4 /* PublishService.m */,
+				4CF1EDEB2063D90B00747744 /* PushPublishService.h */,
+				4CF1EDEA2063D90B00747744 /* PushPublishService.m */,
 			);
 			path = "发布";
 			sourceTree = "<group>";
@@ -2453,6 +2482,8 @@
 				211CF9931FC426BB00E51FCF /* Publish */,
 				2EE361401FFC7A3500A5C3EB /* TLPublishVC.h */,
 				2EE361411FFC7A3500A5C3EB /* TLPublishVC.m */,
+				4CF1EDEE2063D9FB00747744 /* TLPushPublishVC.h */,
+				4CF1EDED2063D9FB00747744 /* TLPushPublishVC.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2550,6 +2581,10 @@
 		211CEF0F1FCBBF74000FB0C4 /* SelectView */ = {
 			isa = PBXGroup;
 			children = (
+				4C5D3176206502F5001CE102 /* PushSelectScrollView.h */,
+				4C5D3177206502F5001CE102 /* PushSelectScrollView.m */,
+				4C5D317420650240001CE102 /* PushSortBar.h */,
+				4C5D31732065023F001CE102 /* PushSortBar.m */,
 				21635DB71FBECBDD003F48B4 /* TopLabelUtil.h */,
 				21635DB81FBECBDD003F48B4 /* TopLabelUtil.m */,
 				211CEF111FCBBF8F000FB0C4 /* SelectScrollView.h */,
@@ -3398,11 +3433,12 @@
 				2EE361531FFE182500A5C3EB /* RespHandler.h */,
 				2EE361541FFE182700A5C3EB /* RespHandler.m */,
 				2EE361351FFB7D4500A5C3EB /* README.md */,
-				2E394FB01FB055DE00BA0829 /* 交易 */,
-				2E394FA81FB055DE00BA0829 /* 订单 */,
 				2E394FB41FB055DE00BA0829 /* 行情 */,
+				2E394FB01FB055DE00BA0829 /* 交易 */,
+				4CE791F2206350EC004E3C77 /* PUSH */,
 				2E394FA41FB055DE00BA0829 /* 钱包 */,
 				2E394FAC1FB055DE00BA0829 /* 我的 */,
+				2E394FA81FB055DE00BA0829 /* 订单 */,
 				2E394FD11FB0568F00BA0829 /* Modules */,
 				2E394FEA1FB056A900BA0829 /* Other */,
 				2E394FF71FB0599D00BA0829 /* Expand */,
@@ -3535,6 +3571,7 @@
 		2E394FD11FB0568F00BA0829 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				4C5D31642064C755001CE102 /* PUSH */,
 				2E42616120258B2500913DCF /* Service */,
 				211CEF021FCBB718000FB0C4 /* 发布 */,
 				2182D2EE1FC803AA008EDCE4 /* 订单 */,
@@ -3998,6 +4035,70 @@
 			path = ZDCChat;
 			sourceTree = "<group>";
 		};
+		4C5D31642064C755001CE102 /* PUSH */ = {
+			isa = PBXGroup;
+			children = (
+				4C5D31712064DB1E001CE102 /* PushAdsService.h */,
+				4C5D31702064DB1E001CE102 /* PushAdsService.m */,
+				4C5D31652064C765001CE102 /* View */,
+			);
+			path = PUSH;
+			sourceTree = "<group>";
+		};
+		4C5D31652064C765001CE102 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				4C5D316E2064C97B001CE102 /* PushUserPhotoView.h */,
+				4C5D316D2064C97A001CE102 /* PushUserPhotoView.m */,
+				4C5D31662064C774001CE102 /* Cell */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		4C5D31662064C774001CE102 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				4C5D31672064C7B1001CE102 /* PushTradeCell.h */,
+				4C5D31682064C7B2001CE102 /* PushTradeCell.m */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		4CE791F2206350EC004E3C77 /* PUSH */ = {
+			isa = PBXGroup;
+			children = (
+				4CE791F32063512F004E3C77 /* Controller */,
+				4CE791F420635136004E3C77 /* View */,
+				4CE791F52063514D004E3C77 /* Model */,
+			);
+			path = PUSH;
+			sourceTree = "<group>";
+		};
+		4CE791F32063512F004E3C77 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				4CE791F6206351E6004E3C77 /* TLPushVC.h */,
+				4CE791F7206351E6004E3C77 /* TLPushVC.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		4CE791F420635136004E3C77 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				4C5D316B2064C7BD001CE102 /* PushTradeTableView.h */,
+				4C5D316A2064C7BD001CE102 /* PushTradeTableView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		4CE791F52063514D004E3C77 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		C678617F8B7C3B3F2F7DE44F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -4264,6 +4365,7 @@
 				2125B8CA1FD95FD900591812 /* HomePageVC.m in Sources */,
 				211DE6BF1FB58B4C002FCF3D /* NSTimer+tlNoCycle.m in Sources */,
 				211A53221FBFE3A100CC6294 /* RateDescVC.m in Sources */,
+				4C5D317520650240001CE102 /* PushSortBar.m in Sources */,
 				211C04621FC6604800E51FCF /* IMAPlatform+IMSDKCallBack.m in Sources */,
 				211DE6BE1FB58B4C002FCF3D /* NSNumber+Extension.m in Sources */,
 				211C04091FC6604800E51FCF /* UIView+RelativeCoordinate.m in Sources */,
@@ -4324,6 +4426,7 @@
 				215979791FB947730029F177 /* WithdrawalsCoinVC.m in Sources */,
 				211DE6AE1FB58B4C002FCF3D /* TLUploadManager.m in Sources */,
 				215979701FB84B8A0029F177 /* BillDetailVC.m in Sources */,
+				4C5D3178206502F5001CE102 /* PushSelectScrollView.m in Sources */,
 				211C04221FC6604800E51FCF /* UITableViewController+ADScaleTransititon.m in Sources */,
 				211C040C1FC6604800E51FCF /* NSObject+KVOCategory.m in Sources */,
 				211C03F21FC6604800E51FCF /* MenuTableViewController.m in Sources */,
@@ -4339,7 +4442,9 @@
 				2E973FDF1FDC0219005C2D5F /* AdsTradeDetailVC.m in Sources */,
 				2182D2F71FC814C6008EDCE4 /* OrderDetailHeaderView.m in Sources */,
 				211C040E1FC6604800E51FCF /* UIImage+Alpha.m in Sources */,
+				4C5D31692064C7B2001CE102 /* PushTradeCell.m in Sources */,
 				2ED651CC200F32BC0065A1B0 /* TLCoinWithdrawModel.m in Sources */,
+				4C5D316F2064C97B001CE102 /* PushUserPhotoView.m in Sources */,
 				21205CE21FCD3163003C6C7C /* CoinAddressModel.m in Sources */,
 				211C03EE1FC6604800E51FCF /* FBKVOController.m in Sources */,
 				211DE6C61FB58B4C002FCF3D /* HttpLogger.m in Sources */,
@@ -4390,6 +4495,7 @@
 				211C04581FC6604800E51FCF /* IMAGroupMember.m in Sources */,
 				211D3C0F1FCFD50200B55F9F /* GuideDetailVC.m in Sources */,
 				211C04411FC6604800E51FCF /* UINavigationController+Transition.m in Sources */,
+				4CF1EDEF2063D9FB00747744 /* TLPushPublishVC.m in Sources */,
 				211C041F1FC6604800E51FCF /* FTAnimationManager.m in Sources */,
 				211DE6B01FB58B4C002FCF3D /* UILable+convience.m in Sources */,
 				211CEF231FCBE5BA000FB0C4 /* SearchResultVC.m in Sources */,
@@ -4410,6 +4516,7 @@
 				2EE950DA1FB06AA900429257 /* TLBannerCell.m in Sources */,
 				2120D8A31FCEE1DE00712600 /* HourPickerView.m in Sources */,
 				211DE6A01FB58B4C002FCF3D /* TLDatePicker.m in Sources */,
+				4CE791F8206351E6004E3C77 /* TLPushVC.m in Sources */,
 				211DE6AA1FB58B4C002FCF3D /* TLImagePicker.m in Sources */,
 				2EE361251FFA09A800A5C3EB /* TIMElem+ShowAPIs.m in Sources */,
 				211C040D1FC6604800E51FCF /* MKMapView+ZoomLevel.m in Sources */,
@@ -4461,6 +4568,7 @@
 				211C04541FC6604800E51FCF /* IMAGroup.m in Sources */,
 				211A34E11FB4247800FEB71F /* MineModel.m in Sources */,
 				2EE3614F1FFD1AF400A5C3EB /* TLSingleTimeView.m in Sources */,
+				4C5D316C2064C7BD001CE102 /* PushTradeTableView.m in Sources */,
 				21A7F3631FB2F16C00FAA0A2 /* HTMLStrVC.m in Sources */,
 				211C05021FC6604900E51FCF /* NoticeTableView.m in Sources */,
 				211DE6B91FB58B4C002FCF3D /* NSDictionary+Extension.m in Sources */,
@@ -4542,6 +4650,7 @@
 				211DE6BD1FB58B4C002FCF3D /* NSString+Date.m in Sources */,
 				21205CCF1FCCFDCF003C6C7C /* FansTableView.m in Sources */,
 				21205CF71FCD5FE0003C6C7C /* HistoryFriendCell.m in Sources */,
+				4CF1EDEC2063D90C00747744 /* PushPublishService.m in Sources */,
 				211C03F41FC6604800E51FCF /* ImageTitleButton.m in Sources */,
 				2EB0399B1FE7A02E00589D8E /* AdsDetailUserView.m in Sources */,
 				21A821141FDA3DAA00AE59F2 /* UserRelationModel.m in Sources */,
@@ -4568,6 +4677,7 @@
 				2EE360F21FFA09A800A5C3EB /* ChatViewController.m in Sources */,
 				211A532F1FBFE4CF00CC6294 /* RateDescCell.m in Sources */,
 				21CB94EA1FDC0C2500CAB090 /* PersonalitySettingTableView.m in Sources */,
+				4C5D31722064DB1E001CE102 /* PushAdsService.m in Sources */,
 				211CEF141FCBBF90000FB0C4 /* SelectScrollView.m in Sources */,
 				21205CCB1FCCFD24003C6C7C /* FansVC.m in Sources */,
 				211CEF2A1FCC18BE000FB0C4 /* MyAdvertiseVC.m in Sources */,

@@ -130,7 +130,7 @@
 
     } else if (self.type == MyAdvertiseTypeDidPublish) {
         
-        helper.parameters[@"statusList"] = @[kAdsStatusXiaJia,kAdsStatusShangJia];
+        helper.parameters[@"statusList"] = @[kAdsStatusShangJia];
 
     }
     

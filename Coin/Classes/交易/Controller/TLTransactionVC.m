@@ -201,7 +201,7 @@
         
         _selectScrollView = [[SelectScrollView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight) itemTitles:titleArray];
         
-        NSMutableArray<CoinModel *> *coins = [CoinUtil shouldDisplayCoinArray];
+        NSMutableArray<CoinModel *> *coins = [CoinUtil shouldDisplayCoinModelArray];
         
         [_selectScrollView setSelectBlock:^(NSInteger index) {
             CoinModel *currentCoin = coins[index];
@@ -299,8 +299,8 @@
     [self.view addSubview:self.publishBtn];
     [self.publishBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.centerX.equalTo(self.view.mas_centerX);
-        make.bottom.equalTo(self.view.mas_bottom).offset(-12);
+        make.right.equalTo(self.view.mas_right).offset(-15);
+        make.bottom.equalTo(self.view.mas_bottom).offset(-20);
         
     }];
     
@@ -334,7 +334,7 @@
         
         CoinWeakSelf;
         
-        NSArray *textArr = [CoinUtil shouldDisplayCoinArray];
+        NSArray *textArr = [CoinUtil shouldDisplayOriginalCoinArray];
         
         //        NSArray *typeArr = @[@"", @"charge", @"withdraw", @"buy", @"sell"];
         

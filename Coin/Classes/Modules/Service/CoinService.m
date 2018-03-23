@@ -18,7 +18,8 @@
     dispatch_once(&onceToken, ^{
         
         coinService = [[[self class] alloc] init];
-        coinService.currentCoin = [[CoinUtil shouldDisplayCoinArray] objectAtIndex:0];
+        coinService.currentCoin = [[CoinUtil shouldDisplayOriginalCoinModelArray] objectAtIndex:0];
+        coinService.currentToken = [[CoinUtil shouldDisplayTokenCoinModelArray] objectAtIndex:0];
         
     });
     
