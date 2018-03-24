@@ -29,8 +29,9 @@
 #import "AppConfig.h"
 #import "CoinUtil.h"
 #import "TLLeftRightView.h"
+#import "MoreProfitVC.h"
 
-#define CONTENT_LEFT_MARGIN 20
+#define CONTENT_LEFT_MARGIN 16
 
 @interface InviteFriendVC ()
 @property (nonatomic, strong) UIView *centerView;
@@ -181,7 +182,7 @@
     CGFloat leftMargin = 15;
 
     //提成收益, 背景
-    UIView *profitView = [[UIView alloc] initWithFrame:CGRectMake(leftMargin, self.bannerView.yy + 15, kScreenWidth - 2*leftMargin, 120)];
+    UIView *profitView = [[UIView alloc] initWithFrame:CGRectMake(leftMargin, self.bannerView.yy + 15, kScreenWidth - 2*leftMargin, 100)];
     [self.scrollView addSubview:profitView];
     self.profitBgView = profitView;
     profitView.backgroundColor = [UIColor colorWithHexString:@"#fff9eb"];
@@ -190,16 +191,53 @@
     profitView.layer.shadowColor = kBackgroundColor.CGColor;
 
     //邀请人数
-    self.peopleCountView = [[TLLeftRightView alloc] initWithFrame:CGRectMake(CONTENT_LEFT_MARGIN, 5, profitView.width - 2*CONTENT_LEFT_MARGIN, 30)];
+    CGFloat peopleheight = 60;
+    self.peopleCountView = [[TLLeftRightView alloc] initWithFrame:CGRectMake(0,
+                                                                             (profitView.height - peopleheight)/2,
+                                                                             profitView.width/3,
+                                                                             peopleheight)];
     [profitView addSubview:self.peopleCountView];
-    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(historyFriends)];
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc]
+                                                    initWithTarget:self
+                                                    action:@selector(historyFriends)];
     [self.peopleCountView addGestureRecognizer:tapGestureRecognizer];
     
     //提成收益
-    self.profitTitleView = [[TLLeftRightView alloc] initWithFrame:CGRectMake(self.peopleCountView.left, self.peopleCountView.yy + 5, self.peopleCountView.width, 30)];
+    self.profitTitleView = [[TLLeftRightView alloc] initWithFrame:CGRectMake(self.peopleCountView.right,
+                                                                             self.peopleCountView.y,
+                                                                             self.peopleCountView.width,
+                                                                             30)];
     [profitView addSubview:self.profitTitleView];
-    self.profitTitleView.leftLbl.text = @"提成收益";
-    self.profitTitleView.rightLbl.text = @"";
+    UITapGestureRecognizer *tapGestureRecognizer1 = [[UITapGestureRecognizer alloc]
+                                                    initWithTarget:self
+                                                    action:@selector(moreProfit)];
+    [profitView addGestureRecognizer:tapGestureRecognizer1];
+    
+    UILabel *moreLbl = [UILabel labelWithBackgroundColor:kClearColor
+                                               textColor:[UIColor themeColor]
+                                                    font:12.0];
+    moreLbl.textAlignment = NSTextAlignmentCenter;
+    moreLbl.text = [LangSwitcher switchLang:@"更多" key:nil];
+    CGFloat lineW = [NSString getWidthWithString:@"更多" font:12.0];
+    [profitView addSubview:moreLbl];
+    [moreLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(profitView.mas_centerY);
+        make.right.equalTo(profitView.mas_right).offset(-6.5-16-8);
+        make.width.equalTo(@(lineW));
+        make.height.equalTo(@(10));
+    }];
+    
+    //右箭头
+    UIImageView *rightArrowIV = [[UIImageView alloc] initWithImage:kImage(@"更多红色")];
+    
+    [profitView addSubview:rightArrowIV];
+    [rightArrowIV mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.right.equalTo(profitView.mas_right).offset(-16);
+        make.width.equalTo(@6.5);
+        make.centerY.equalTo(profitView.mas_centerY);
+        
+    }];
 
     
     
@@ -368,6 +406,32 @@
     [self.navigationController pushViewController:inviteVC animated:YES];
 }
 
+- (void)moreProfit {
+    
+    
+    CoinWeakSelf;
+    
+    if (![TLUser user].isLogin) {
+        
+        TLUserLoginVC *loginVC = [[TLUserLoginVC alloc] init];
+        
+        loginVC.loginSuccess = ^{
+            
+            [weakSelf historyFriends];
+        };
+        
+        TLNavigationController *nav = [[TLNavigationController alloc] initWithRootViewController:loginVC];
+        
+        [self presentViewController:nav animated:YES completion:nil];
+        
+        return;
+    }
+    
+    MoreProfitVC *moreProfitVC = [MoreProfitVC new];
+    
+    [self.navigationController pushViewController:moreProfitVC animated:YES];
+}
+
 - (void)inviteFriend {
 
     CoinWeakSelf;
@@ -452,52 +516,52 @@
 //        inviteProfitEth    邀请已获得的ETH收益    string    @mock=0.00
 //        inviteProfitSc
         //收益
-        NSString *profitEth = responseObject[@"data"][@"inviteProfitEth"];
-        NSString *profitSc = responseObject[@"data"][@"inviteProfitSc"];
+//        NSString *profitEth = responseObject[@"data"][@"inviteProfitEth"];
+//        NSString *profitSc = responseObject[@"data"][@"inviteProfitSc"];
         NSString *profitBtc = responseObject[@"data"][@"inviteProfitBtc"];
-        NSMutableDictionary *profitCoinDict  = [[NSMutableDictionary alloc] init];
-        profitCoinDict[kETH] = profitEth;
-        profitCoinDict[kSC] = profitSc;
-        profitCoinDict[kBTC] = profitBtc;
-        
-        __block int i = 0;
-        [profitCoinDict enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
-            
-            CGRect frame;
-            NSTextAlignment textAligment;
-            NSString *text = [NSString stringWithFormat:@"%@ %@",[CoinUtil convertToRealCoin:obj coin:key],key];
-            
-            CGFloat w = (self.profitBgView.width - CONTENT_LEFT_MARGIN *2)/2.0;
-            CGFloat y =  (i/2)*24 + self.profitTitleView.yy;
-            if (i%2 == 0) {
-                
-                frame = CGRectMake(CONTENT_LEFT_MARGIN, y , w, 25);
-                textAligment = NSTextAlignmentLeft;
-                
-            } else {
-                
-                frame = CGRectMake(self.profitBgView.width/2.0, y, w, 25);
-                textAligment = NSTextAlignmentRight;
-                
-            }
-            
-            UILabel *lbl = [self labelWithFrame:frame
-                                      alignment:textAligment
-                                           text:text];
-            [self.profitBgView addSubview:lbl];
-            i ++;
-        }];
+//        NSMutableDictionary *profitCoinDict  = [[NSMutableDictionary alloc] init];
+//        profitCoinDict[kETH] = profitEth;
+//        profitCoinDict[kSC] = profitSc;
+//        profitCoinDict[kBTC] = profitBtc;
+//
+//        __block int i = 0;
+//        [profitCoinDict enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+//
+//            CGRect frame;
+//            NSTextAlignment textAligment;
+//            NSString *text = [NSString stringWithFormat:@"%@ %@",[CoinUtil convertToRealCoin:obj coin:key],key];
+//
+//            CGFloat w = (self.profitBgView.width - CONTENT_LEFT_MARGIN *2)/2.0;
+//            CGFloat y =  (i/2)*24 + self.profitTitleView.yy;
+//            if (i%2 == 0) {
+//
+//                frame = CGRectMake(CONTENT_LEFT_MARGIN, y , w, 25);
+//                textAligment = NSTextAlignmentLeft;
+//
+//            } else {
+//
+//                frame = CGRectMake(self.profitBgView.width/2.0, y, w, 25);
+//                textAligment = NSTextAlignmentRight;
+//
+//            }
+//
+//            UILabel *lbl = [self labelWithFrame:frame
+//                                      alignment:textAligment
+//                                           text:text];
+//            [self.profitBgView addSubview:lbl];
+//            i ++;
+//        }];
         
 //        self.ethProfitView.rightLbl.text = [CoinUtil convertToRealCoin:profitEth coin:kETH];
 //        self.ethProfitView.leftLbl.text = [LangSwitcher switchLang:@"提成收益（ETH）" key:nil];
 //
-//        self.scProfitView.rightLbl.text = [CoinUtil convertToRealCoin:profitSc coin:kSC];
-//        self.scProfitView.leftLbl.text = [LangSwitcher switchLang:@"提成收益（SC）" key:nil];
+        self.profitTitleView.rightLbl.text = [CoinUtil convertToRealCoin:profitBtc coin:kBTC];
+        self.profitTitleView.leftLbl.text = [LangSwitcher switchLang:@"提成收益（BTC）" key:nil];
        
         //邀请人数
         NSNumber *inviteNum = responseObject[@"data"][@"inviteCount"];
-        self.peopleCountView.rightLbl.text = [NSString stringWithFormat:@"%@ 人",[inviteNum stringValue]];
-        self.peopleCountView.leftLbl.text = @"成功邀请";
+        self.peopleCountView.rightLbl.text = [NSString stringWithFormat:@"%@",[inviteNum stringValue]];
+        self.peopleCountView.leftLbl.text = [LangSwitcher switchLang:@"成功邀请（人）" key:nil];
         
     } failure:^(NSError *error) {
         

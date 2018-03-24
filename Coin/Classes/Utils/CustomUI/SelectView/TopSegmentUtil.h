@@ -18,28 +18,34 @@ typedef NS_ENUM(NSInteger, LineType) {
     
     LineTypeTitleLength,         //字体长度
     LineTypeButtonLength,       //按钮长度
-
+    LineTypeNone,       //不显示
 };
 
 typedef void (^ClickBtnBlock)(NSInteger index);
 
-@class TopLabelUtil;
+@class TopSegmentUtil;
 
 @protocol SegmentDelegate;
 
 @protocol SegmentDelegate <NSObject>
 
 @required
--(void)segment:(TopLabelUtil *)segment didSelectIndex:(NSInteger)index;
+-(void)segment:(TopSegmentUtil *)segment didSelectIndex:(NSInteger)index;
 @end
 
-@interface TopLabelUtil : UIScrollView
+@interface TopSegmentUtil : UIScrollView
 //segment 文字数组
 @property(nonatomic,strong) NSArray *titleArray;
 //segment 文字颜色
 @property(nonatomic,strong) UIColor *titleNormalColor;
 //segment 选中时文字颜色
 @property(nonatomic,strong) UIColor *titleSelectColor;
+
+//segment 背景颜色
+@property(nonatomic,strong) UIColor *bgNormalColor;
+//segment 选中时背景颜色
+@property(nonatomic,strong) UIColor *bgSelectColor;
+
 //segment 文字字体，默认15
 @property(nonatomic,strong) UIFont  *titleFont;
 //segment 默认选中按钮/视图 1

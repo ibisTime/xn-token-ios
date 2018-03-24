@@ -182,6 +182,34 @@
         
         [_selectScrollView setSelectBlock:^(NSInteger index) {
             
+            //判断点击的Controller是不是需要登录，如果是，那就登录
+            if((index == 2 || index == 3 ) && ![TLUser user].isLogin) {
+                
+                TLUserLoginVC *loginVC = [TLUserLoginVC new];
+                
+                loginVC.loginSuccess = ^{
+                    
+                    if(index == 2) {
+                        
+                        MyAdvertiseVC *advertiseVC = [MyAdvertiseVC new];
+                        advertiseVC.defaultCoin = [CoinService shareService].currentToken.symbol;
+                        [weakSelf.navigationController pushViewController:advertiseVC animated:YES];
+                        
+                        
+                    } else if(index == 3) {
+                        
+                        TLOrderVC *orderVC = [TLOrderVC new];
+                        [weakSelf.navigationController pushViewController:orderVC animated:YES];
+                        
+                    }
+                    
+                };
+                
+                TLNavigationController *nav = [[TLNavigationController alloc] initWithRootViewController:loginVC];
+                [weakSelf.navigationController presentViewController:nav animated:YES completion:nil];
+                
+            }
+            
             if (index == 0) {
                 
                 weakSelf.tradeType = kAdsTradeTypeSell;

@@ -32,6 +32,8 @@
 @property (nonatomic, copy) NSString *pic3;
 //UI序号
 @property (nonatomic, copy) NSString *orderNo;
+//取现手续费
+@property (nonatomic, copy) NSString *withdrawFeeString;
 //状态 PUBLISHED("0", "已发布"), REVOKE("1", "已撤下");
 @property (nonatomic, copy) NSString *status;
 

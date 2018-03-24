@@ -13,6 +13,7 @@
 #import "NSString+Extension.h"
 #import "UILabel+Extension.h"
 #import "CoinUtil.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface BillCell ()
 
@@ -67,7 +68,7 @@
         }];
         
         self.iconIV = [[UIImageView alloc] init];
-        
+        self.iconIV.contentMode = UIViewContentModeScaleAspectFill;
         [self addSubview:self.iconIV];
         [self.iconIV mas_makeConstraints:^(MASConstraintMaker *make) {
             
@@ -147,19 +148,34 @@
                                                 coin:billModel.currency];
 //    [_billModel.transAmountString convertToSimpleRealCoin];
     CGFloat money = [countStr doubleValue];
+    
+//    if (money > 0) {
+//
+//        moneyStr = [NSString stringWithFormat:@"+%@ %@",countStr , billModel.currency];
+//
+//
+//        self.iconIV.image = [UIImage imageNamed:[NSString stringWithFormat:@"账单-充币-%@",billModel.currency]];
+//
+//    } else if (money <= 0) {
+//
+//        moneyStr = [NSString stringWithFormat:@"%@ %@", countStr, billModel.currency];
+//
+//        self.iconIV.image = [UIImage imageNamed:[NSString stringWithFormat:@"账单-提币-%@",billModel.currency]];
+//
+//    }
 
+    CoinModel *coin = [CoinUtil getCoinModel:billModel.currency];
     if (money > 0) {
         
         moneyStr = [NSString stringWithFormat:@"+%@ %@",countStr , billModel.currency];
-        
-        
-        self.iconIV.image = [UIImage imageNamed:[NSString stringWithFormat:@"账单-充币-%@",billModel.currency]];
+
+        [self.iconIV sd_setImageWithURL:[NSURL URLWithString:[coin.pic2 convertImageUrl]]];
 
     } else if (money <= 0) {
-
+        
         moneyStr = [NSString stringWithFormat:@"%@ %@", countStr, billModel.currency];
 
-        self.iconIV.image = [UIImage imageNamed:[NSString stringWithFormat:@"账单-提币-%@",billModel.currency]];
+        [self.iconIV sd_setImageWithURL:[NSURL URLWithString:[coin.pic3 convertImageUrl]]];
 
     }
 

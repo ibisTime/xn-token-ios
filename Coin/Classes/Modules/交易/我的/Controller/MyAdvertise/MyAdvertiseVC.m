@@ -38,7 +38,7 @@
     [super viewDidLoad];
     
     if (!_defaultCoin) {
-        _defaultCoin = kETH;
+        _defaultCoin = [CoinUtil shouldDisplayCoinArray][0];
     }
     
     CoinChangeView *topTitleView = [[CoinChangeView alloc] initWithFrame:CGRectMake(0, 0, 140, 40)];

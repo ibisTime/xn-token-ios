@@ -8,7 +8,7 @@
 
 #import "TLOrderVC.h"
 
-#import "TopLabelUtil.h"
+#import "TopSegmentUtil.h"
 #import "CoinChangeView.h"
 #import "FilterView.h"
 #import "ChatManager.h"
@@ -29,7 +29,7 @@
 
 //货币切换
 @property (nonatomic, strong) CoinChangeView *changeView;
-@property (nonatomic, strong) TopLabelUtil *labelUtil;
+@property (nonatomic, strong) TopSegmentUtil *segmentUtil;
 @property (nonatomic, strong) UIScrollView *switchScrollView;
 @property (nonatomic, strong) OrderListVC *ingOrderListVC;
 @property (nonatomic, strong) OrderListVC *endOrderListVC;
@@ -47,10 +47,7 @@
     [super viewDidLoad];
     
     //中间切换
-    self.navigationItem.titleView = self.labelUtil;
-    
-    //货币切换,暂时去掉
-//    [self addCoinChangeView];
+    self.navigationItem.titleView = self.segmentUtil;
     
     //添加通知
     [self addNotification];
@@ -163,25 +160,25 @@
 
 - (void)changeLeftTopMsgRedHintToZero {
     
-    [self.labelUtil hideBadgeOnItemIndex:SHOW_BADGE_LEFT_INDEX];
+    [self.segmentUtil hideBadgeOnItemIndex:SHOW_BADGE_LEFT_INDEX];
     
 }
 
 - (void)changeRightTopMsgRedHintToZero {
     
-    [self.labelUtil hideBadgeOnItemIndex:SHOW_BADGE_RIGHT_INDEX];
+    [self.segmentUtil hideBadgeOnItemIndex:SHOW_BADGE_RIGHT_INDEX];
     
 }
 
 - (void)changeLeftTopMsgRedHintToHave {
     
-    [self.labelUtil showBadgeOnItemIndex:SHOW_BADGE_LEFT_INDEX];
+    [self.segmentUtil showBadgeOnItemIndex:SHOW_BADGE_LEFT_INDEX];
     
 }
 
 - (void)changeRightTopMsgRedHintToHave {
     
-    [self.labelUtil showBadgeOnItemIndex:SHOW_BADGE_RIGHT_INDEX];
+    [self.segmentUtil showBadgeOnItemIndex:SHOW_BADGE_RIGHT_INDEX];
     
 }
 
@@ -276,10 +273,10 @@
 
 
 #pragma mark - SegmentDelegate, 顶部切换
--(void)segment:(TopLabelUtil *)segment didSelectIndex:(NSInteger)index {
+-(void)segment:(TopSegmentUtil *)segment didSelectIndex:(NSInteger)index {
     
     [self.switchScrollView setContentOffset:CGPointMake((index - 1) * self.switchScrollView.width, 0)];
-    [self.labelUtil dyDidScrollChangeTheTitleColorWithContentOfSet:(index-1)*kScreenWidth];
+    [self.segmentUtil dyDidScrollChangeTheTitleColorWithContentOfSet:(index-1)*kScreenWidth];
     
 }
 
@@ -310,20 +307,25 @@
 - (void)setUpUI {
     
     //0.顶部切换
-    self.labelUtil = [[TopLabelUtil alloc]initWithFrame:CGRectMake(kScreenWidth/2 - 120, 25, 240, 44)];
-    self.labelUtil.delegate = self;
-    self.labelUtil.backgroundColor = [UIColor clearColor];
-    self.labelUtil.titleNormalColor = kTextColor;
-    self.labelUtil.titleSelectColor = kThemeColor;
-    self.labelUtil.titleFont = Font(17.0);
-    self.labelUtil.lineType = LineTypeTitleLength;
-    self.labelUtil.titleArray = @[
+    self.segmentUtil = [[TopSegmentUtil alloc]initWithFrame:CGRectMake(kScreenWidth/2 - 145, 25, 145, 30)];
+    self.segmentUtil.layer.cornerRadius = 5;
+    self.segmentUtil.delegate = self;
+    self.segmentUtil.backgroundColor = [UIColor whiteColor];
+    self.segmentUtil.layer.borderWidth = 1;
+    self.segmentUtil.layer.borderColor = kThemeColor.CGColor;
+    self.segmentUtil.titleNormalColor = kThemeColor;
+    self.segmentUtil.titleSelectColor = kWhiteColor;
+    self.segmentUtil.bgNormalColor = kWhiteColor;
+    self.segmentUtil.bgSelectColor = kThemeColor;
+    self.segmentUtil.titleFont = Font(13.0);
+    self.segmentUtil.titleArray = @[
                                   [LangSwitcher switchLang: @"进行中" key:nil],
                                   [LangSwitcher switchLang: @"已结束" key:nil]
                                   ];
-    self.navigationItem.titleView = self.labelUtil;
+    self.navigationItem.titleView = self.segmentUtil;
     
     
+    //币种选择
     [self.view addSubview:self.selectScrollView];
     
     //1.切换背景
@@ -334,15 +336,6 @@
     
     
     
-    
-}
-
-- (void)addCoinChangeView {
-    
-    CoinChangeView *coinChangeView = [[CoinChangeView alloc] init];
-    coinChangeView.title = @"ETH";
-    self.changeView = coinChangeView;
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:coinChangeView];
     
 }
 

@@ -31,28 +31,29 @@
         UILabel *leftLbl = [UILabel labelWithBackgroundColor:kClearColor
                                                    textColor:[UIColor themeColor]
                                                         font:12.0];
-        leftLbl.textAlignment = NSTextAlignmentLeft;
+        leftLbl.textAlignment = NSTextAlignmentCenter;
         [self addSubview:leftLbl];
         self.leftLbl = leftLbl;
         self.leftLbl.text = @"--";
         [self.leftLbl mas_makeConstraints:^(MASConstraintMaker *make) {
             
-            make.centerY.equalTo(self);
-            make.left.equalTo(self);
-            make.width.mas_greaterThanOrEqualTo(200);
+            make.centerX.equalTo(self);
+            make.top.equalTo(self);
+            make.width.equalTo(self);
         }];
         
         //
         self.rightLbl = [UILabel labelWithBackgroundColor:kClearColor
                                              textColor:[UIColor textColor]
-                                                  font:13.0];
-        self.rightLbl.textAlignment = NSTextAlignmentLeft;
+                                                  font:16.0];
+        self.rightLbl.textAlignment = NSTextAlignmentCenter;
         [self addSubview:self.rightLbl];
         self.rightLbl.text = @"--";
         [self.rightLbl mas_makeConstraints:^(MASConstraintMaker *make) {
             
-            make.centerY.equalTo(self);
-            make.right.equalTo(self.mas_right);
+            make.top.mas_equalTo(self.leftLbl.mas_bottom).offset(22);
+            make.centerX.equalTo(self.leftLbl.mas_centerX);
+            make.width.equalTo(self);
             
         }];
         

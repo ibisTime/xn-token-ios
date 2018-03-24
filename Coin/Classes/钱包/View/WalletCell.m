@@ -14,6 +14,7 @@
 #import "NSString+Extension.h"
 #import "UIButton+EnLargeEdge.h"
 #import "CoinUtil.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface WalletCell ()
 //币种图标
@@ -62,12 +63,14 @@
     
     //币种图标
     self.coinIV = [[UIImageView alloc] init];
-    
+    self.coinIV.contentMode = UIViewContentModeScaleAspectFit;
     [whiteView addSubview:self.coinIV];
     [self.coinIV mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.right.equalTo(@(-leftMargin));
         make.top.equalTo(@10);
+        make.width.equalTo(@(62));
+        make.height.equalTo(@(62));
         
     }];
     
@@ -190,8 +193,11 @@
     
     self.currencyNameLbl.text = _currency.getTypeName;
     
-    self.coinIV.image = kImage(_currency.getImgName);
+//    self.coinIV.image = kImage(_currency.getImgName);
     
+    CoinModel *coin = [CoinUtil getCoinModel:currency.currency];
+    
+    [self.coinIV sd_setImageWithURL:[NSURL URLWithString:[coin.pic1 convertImageUrl]]];
     
     NSString *leftAmount = [_currency.amountString subNumber:_currency.frozenAmountString];
     

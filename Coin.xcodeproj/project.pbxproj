@@ -481,6 +481,10 @@
 		2EFFE6B21FF6286600BFCC40 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E5F19201FED0CB600100420 /* CoreTelephony.framework */; };
 		2EFFE6B31FF6287D00BFCC40 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E5F19241FED0CDD00100420 /* UserNotifications.framework */; };
 		2EFFE6B51FF6289600BFCC40 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EFFE6B41FF6289600BFCC40 /* libsqlite3.0.tbd */; };
+		4C24381C2065710C003B35F3 /* MoreProfitVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C24381B2065710C003B35F3 /* MoreProfitVC.m */; };
+		4C24381F20657535003B35F3 /* MoreProfitCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C24381E20657535003B35F3 /* MoreProfitCell.m */; };
+		4C24382220657589003B35F3 /* ProfitModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C24382120657589003B35F3 /* ProfitModel.m */; };
+		4C2438252066C2F1003B35F3 /* TopSegmentUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C2438232066C2F0003B35F3 /* TopSegmentUtil.m */; };
 		4C5D31692064C7B2001CE102 /* PushTradeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5D31682064C7B2001CE102 /* PushTradeCell.m */; };
 		4C5D316C2064C7BD001CE102 /* PushTradeTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5D316A2064C7BD001CE102 /* PushTradeTableView.m */; };
 		4C5D316F2064C97B001CE102 /* PushUserPhotoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5D316D2064C97A001CE102 /* PushUserPhotoView.m */; };
@@ -1485,6 +1489,14 @@
 		2EFFE6B01FF4868300BFCC40 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		2EFFE6B11FF4868400BFCC40 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		2EFFE6B41FF6289600BFCC40 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+		4C24381A2065710C003B35F3 /* MoreProfitVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MoreProfitVC.h; sourceTree = "<group>"; };
+		4C24381B2065710C003B35F3 /* MoreProfitVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MoreProfitVC.m; sourceTree = "<group>"; };
+		4C24381D20657535003B35F3 /* MoreProfitCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MoreProfitCell.h; sourceTree = "<group>"; };
+		4C24381E20657535003B35F3 /* MoreProfitCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MoreProfitCell.m; sourceTree = "<group>"; };
+		4C24382020657589003B35F3 /* ProfitModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProfitModel.h; sourceTree = "<group>"; };
+		4C24382120657589003B35F3 /* ProfitModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProfitModel.m; sourceTree = "<group>"; };
+		4C2438232066C2F0003B35F3 /* TopSegmentUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopSegmentUtil.m; sourceTree = "<group>"; };
+		4C2438242066C2F1003B35F3 /* TopSegmentUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopSegmentUtil.h; sourceTree = "<group>"; };
 		4C5D31672064C7B1001CE102 /* PushTradeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PushTradeCell.h; sourceTree = "<group>"; };
 		4C5D31682064C7B2001CE102 /* PushTradeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PushTradeCell.m; sourceTree = "<group>"; };
 		4C5D316A2064C7BD001CE102 /* PushTradeTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PushTradeTableView.m; sourceTree = "<group>"; };
@@ -2584,6 +2596,8 @@
 		211CEF0F1FCBBF74000FB0C4 /* SelectView */ = {
 			isa = PBXGroup;
 			children = (
+				4C2438242066C2F1003B35F3 /* TopSegmentUtil.h */,
+				4C2438232066C2F0003B35F3 /* TopSegmentUtil.m */,
 				4C5D3176206502F5001CE102 /* PushSelectScrollView.h */,
 				4C5D3177206502F5001CE102 /* PushSelectScrollView.m */,
 				4C5D317420650240001CE102 /* PushSortBar.h */,
@@ -3036,6 +3050,8 @@
 				21205CEB1FCD5F5C003C6C7C /* HistoryInviteVC.m */,
 				21205CEA1FCD5F5C003C6C7C /* InviteFriendVC.h */,
 				21205CED1FCD5F5D003C6C7C /* InviteFriendVC.m */,
+				4C24381A2065710C003B35F3 /* MoreProfitVC.h */,
+				4C24381B2065710C003B35F3 /* MoreProfitVC.m */,
 			);
 			path = Invite;
 			sourceTree = "<group>";
@@ -3045,6 +3061,8 @@
 			children = (
 				21205CF11FCD5F98003C6C7C /* InviteModel.h */,
 				21205CF21FCD5F98003C6C7C /* InviteModel.m */,
+				4C24382020657589003B35F3 /* ProfitModel.h */,
+				4C24382120657589003B35F3 /* ProfitModel.m */,
 			);
 			path = Invite;
 			sourceTree = "<group>";
@@ -3054,6 +3072,8 @@
 			children = (
 				21205CF51FCD5FDF003C6C7C /* HistoryFriendCell.h */,
 				21205CF61FCD5FDF003C6C7C /* HistoryFriendCell.m */,
+				4C24381D20657535003B35F3 /* MoreProfitCell.h */,
+				4C24381E20657535003B35F3 /* MoreProfitCell.m */,
 			);
 			path = Invite;
 			sourceTree = "<group>";
@@ -4385,6 +4405,7 @@
 				211DE6AC1FB58B4C002FCF3D /* TLPageDataHelper.m in Sources */,
 				2EB039A71FE8B23300589D8E /* EditEmailVC.m in Sources */,
 				211C05001FC6604900E51FCF /* ChatManager.m in Sources */,
+				4C24382220657589003B35F3 /* ProfitModel.m in Sources */,
 				21CB94ED1FDC0C9100CAB090 /* LanguageSettingTableView.m in Sources */,
 				211DE6BC1FB58B4C002FCF3D /* NSString+Extension.m in Sources */,
 				2125B8B81FD91F9D00591812 /* QuotationVC.m in Sources */,
@@ -4685,6 +4706,7 @@
 				21CB94EA1FDC0C2500CAB090 /* PersonalitySettingTableView.m in Sources */,
 				4C5D31722064DB1E001CE102 /* PushAdsService.m in Sources */,
 				211CEF141FCBBF90000FB0C4 /* SelectScrollView.m in Sources */,
+				4C24381F20657535003B35F3 /* MoreProfitCell.m in Sources */,
 				21205CCB1FCCFD24003C6C7C /* FansVC.m in Sources */,
 				211CEF2A1FCC18BE000FB0C4 /* MyAdvertiseVC.m in Sources */,
 				211C04261FC6604800E51FCF /* ADFlipTransition.m in Sources */,
@@ -4693,6 +4715,7 @@
 				211C04571FC6604800E51FCF /* IMAUser.m in Sources */,
 				211DE6B11FB58B4C002FCF3D /* UIButton+EnLargeEdge.m in Sources */,
 				211C04281FC6604800E51FCF /* UITableViewController+ADFlipTransition.m in Sources */,
+				4C24381C2065710C003B35F3 /* MoreProfitVC.m in Sources */,
 				2EE361551FFE182800A5C3EB /* RespHandler.m in Sources */,
 				211C04421FC6604800E51FCF /* NavigationViewController.m in Sources */,
 				211C042C1FC6604800E51FCF /* JSONKit.m in Sources */,
@@ -4725,6 +4748,7 @@
 				2EE361391FFC727900A5C3EB /* TLPublishInputView.m in Sources */,
 				211D3C121FCFE35E00B55F9F /* HistoryRateVC.m in Sources */,
 				2EE361521FFD1CB200A5C3EB /* TLPublishTimeChooseView.m in Sources */,
+				4C2438252066C2F1003B35F3 /* TopSegmentUtil.m in Sources */,
 				2EE361001FFA09A800A5C3EB /* ChatSystemFaceItem.m in Sources */,
 				2E973FD31FDBC5B0005C2D5F /* BaseLabel.m in Sources */,
 				2EE360F41FFA09A800A5C3EB /* ImageThumbPickerViewController.m in Sources */,
