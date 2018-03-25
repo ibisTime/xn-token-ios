@@ -7,6 +7,7 @@
 //
 
 #import "TLBaseModel.h"
+#import "CoinModel.h"
 
 @interface UserRelationModel : TLBaseModel
 //被信任次数
@@ -18,10 +19,11 @@
 //被好评次数
 @property (nonatomic, assign) NSInteger beiHaoPingCount;
 //master的交易量
-//@property (nonatomic, copy) NSString *totalTradeCount;
+@property (nonatomic, copy) NSString *totalTradeCount;
 
-@property (nonatomic, copy) NSString *totalTradeCountEth;
-@property (nonatomic, copy) NSString *totalTradeCountSc;
+
+//@property (nonatomic, copy) NSString *totalTradeCountEth;
+//@property (nonatomic, copy) NSString *totalTradeCountSc;
 
 
 
@@ -35,5 +37,7 @@
 @property (nonatomic, copy) NSString *goodCommentRate;
 //交易总量
 @property (nonatomic, copy) NSString *tradeAmount;
+
+@property (nonatomic, strong) CoinModel *coinModel;
 
 @end

@@ -420,6 +420,7 @@
     http.parameters[@"payType"] = payType;
     http.parameters[@"premiumRate"] = [NSString stringWithFormat:@"%.4f",[premium doubleValue]/100.0];
     http.parameters[@"protectPrice"] = protectPrice;
+    http.parameters[@"truePrice"] = @"0";
     http.parameters[@"totalCount"] = [CoinUtil convertToSysCoin:totalCount coin:self.currentCurrency];
     http.parameters[@"tradeCurrency"] = @"CNY";
     http.parameters[@"tradeCoin"] = tradeCoin;

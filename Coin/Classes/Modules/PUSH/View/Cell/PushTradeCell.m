@@ -193,7 +193,7 @@
                          key:nil];
     
     //单价
-    self.priceLbl.text = [NSString stringWithFormat:@"%@", [advertise.truePrice convertToSimpleRealMoney]];
+    self.priceLbl.text = [NSString stringWithFormat:@"%.2f%@", [advertise.truePrice doubleValue], advertise.tradeCurrency];
     
     //数量
     NSString *quantity = [CoinUtil convertToRealCoin:advertise.leftCountString
@@ -201,7 +201,7 @@
     self.quantityLbl.text = [NSString stringWithFormat:@"%@", quantity];
     //金额
     double totalAmount = advertise.truePrice.doubleValue * quantity.doubleValue;
-    self.amountLbl.text = [[NSString stringWithFormat:@"%.2f", totalAmount] convertToSimpleRealMoney];
+    self.amountLbl.text = [NSString stringWithFormat:@"%.2f%@", totalAmount, advertise.tradeCurrency];
     
     NSString *tradeText = nil;
     

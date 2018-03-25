@@ -35,6 +35,7 @@
 #import "MyAdvertiseVC.h"
 #import "TLOrderVC.h"
 #import "LastestPriceModel.h"
+#import "NSString+CGSize.h"
 
 @interface TLPushVC ()<SegmentDelegate, RefreshDelegate, UIScrollViewDelegate>
 
@@ -199,6 +200,7 @@
                     } else if(index == 3) {
                         
                         TLOrderVC *orderVC = [TLOrderVC new];
+                        orderVC.currentCoin = [CoinService shareService].currentToken.symbol;
                         [weakSelf.navigationController pushViewController:orderVC animated:YES];
                         
                     }
@@ -207,7 +209,7 @@
                 
                 TLNavigationController *nav = [[TLNavigationController alloc] initWithRootViewController:loginVC];
                 [weakSelf.navigationController presentViewController:nav animated:YES completion:nil];
-                
+                return;
             }
             
             if (index == 0) {
@@ -234,6 +236,7 @@
             } else if(index == 3) {
                 
                 TLOrderVC *orderVC = [TLOrderVC new];
+                orderVC.currentCoin = [CoinService shareService].currentToken.symbol;
                 [weakSelf.navigationController pushViewController:orderVC animated:YES];
                 
             }
@@ -252,7 +255,7 @@
     
         NSArray *textArr = [CoinUtil shouldDisplayTokenCoinArray];
     
-        coinChangeView.title = [NSString stringWithFormat:@"%@/CNY", textArr[0]];
+        coinChangeView.title = textArr[0];
     
         [coinChangeView addTarget:self action:@selector(changeCoin) forControlEvents:UIControlEventTouchUpInside];
     
@@ -280,11 +283,11 @@
 //    [self.view addSubview:topView];
     
     //币种切换
-    CoinChangeView *coinChangeView = [[CoinChangeView alloc] initWithFrame:CGRectMake(15, 0, 95, topView.height)];
+    CoinChangeView *coinChangeView = [[CoinChangeView alloc] initWithFrame:CGRectMake(15, 0, 68, topView.height)];
     
     NSArray *textArr = [CoinUtil shouldDisplayTokenCoinArray];
     
-    coinChangeView.title = [NSString stringWithFormat:@"%@/CNY", textArr[0]];
+    coinChangeView.title = textArr[0];
     
     [coinChangeView addTarget:self action:@selector(changeCoin) forControlEvents:UIControlEventTouchUpInside];
     
@@ -333,7 +336,7 @@
     //交易列表
     self.tradeType = kAdsTradeTypeSell;
     self.tableView = [[PushTradeTableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
-    self.tableView.placeHolderView = [TLPlaceholderView  placeholderViewWithImgAndText:@"暂无广告"];
+    self.tableView.placeHolderView = [TLPlaceholderView  placeholderViewWithImgAndText:@"暂无交易"];
     self.tableView.refreshDelegate = self;
     [self.view addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -424,7 +427,7 @@
         _filterPicker.selectBlock = ^(NSInteger index) {
             
             [CoinService shareService].currentToken = tokens[index];
-            weakSelf.changeView.title = [NSString stringWithFormat:@"%@/CNY", textArr[index]];
+            weakSelf.changeView.title = textArr[index];
             [weakSelf changePageHelperCoin:textArr[index] pageHelper:weakSelf.helper];
             [weakSelf.tableView beginRefreshing];
             
@@ -537,7 +540,7 @@
         [CoinService shareService].currentToken = coin;
         [self changePageHelperCoin:[CoinService shareService].currentToken.symbol
                         pageHelper:self.helper];
-        self.changeView.title = [NSString stringWithFormat:@"%@/CNY", [CoinService shareService].currentToken.symbol];
+        self.changeView.title = [CoinService shareService].currentToken.symbol;
         
         //左右切换
         NSInteger index = [notiObj.subContent integerValue];

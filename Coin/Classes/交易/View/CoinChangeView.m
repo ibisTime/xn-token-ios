@@ -43,7 +43,7 @@
     
     //
     self.titleLbl = [UILabel labelWithFrame:CGRectZero
-                               textAligment:NSTextAlignmentLeft
+                               textAligment:NSTextAlignmentCenter
                             backgroundColor:[UIColor whiteColor]
                                        font:[UIFont systemFontOfSize:16]
                                   textColor:[UIColor textColor]];

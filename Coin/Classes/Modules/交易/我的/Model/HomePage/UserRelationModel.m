@@ -28,8 +28,8 @@
 
 - (NSString *)tradeAmount {
     
-    NSString *numStr = [NSString stringWithFormat:@"%@", self.totalTradeCountEth];
-    NSString *realNum = [CoinUtil convertToRealCoin:numStr coin:kETH];
+    NSString *numStr = [NSString stringWithFormat:@"%@", self.totalTradeCount];
+    NSString *realNum = [CoinUtil convertToRealCoin:numStr coin:_coinModel.symbol];
     CGFloat historyNum = [[realNum convertToRealMoneyWithNum:8] doubleValue];
     
     //判断个数
@@ -37,21 +37,23 @@
     
     if (historyNum == 0) {
         
-        history = @"0 ETH";
+        history = @"0";
         
     } else if (historyNum > 0 && historyNum <= 0.5) {
         
-        history = @"0-0.5 ETH";
+        history = @"0-0.5";
         
     } else if (historyNum > 0.5 && historyNum <= 1) {
         
-        history = [NSString stringWithFormat:@"0.5-1 ETH"];
+        history = [NSString stringWithFormat:@"0.5-1"];
         
     } else if (historyNum > 1) {
         
         
-        history = [NSString stringWithFormat:@"%@+ ETH", [realNum convertToRealMoneyWithNum:0]];
+        history = [NSString stringWithFormat:@"%@+", [realNum convertToRealMoneyWithNum:0]];
     }
+    
+    history = [NSString stringWithFormat:@"%@ %@", history, _coinModel.symbol];
     
     return history;
 }

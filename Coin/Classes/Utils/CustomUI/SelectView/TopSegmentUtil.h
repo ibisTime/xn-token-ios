@@ -46,6 +46,11 @@ typedef void (^ClickBtnBlock)(NSInteger index);
 //segment 选中时背景颜色
 @property(nonatomic,strong) UIColor *bgSelectColor;
 
+//segment 消息提醒颜色
+@property(nonatomic,strong) UIColor *msgNormalColor;
+//segment 选中时消息提醒颜色
+@property(nonatomic,strong) UIColor *msgSelectColor;
+
 //segment 文字字体，默认15
 @property(nonatomic,strong) UIFont  *titleFont;
 //segment 默认选中按钮/视图 1

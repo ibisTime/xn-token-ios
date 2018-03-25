@@ -18,6 +18,7 @@
 #import "TLUserLoginVC.h"
 #import "TLNavigationController.h"
 #import "APICodeMacro.h"
+#import "CoinUtil.h"
 
 @interface HomePageVC ()
 
@@ -46,6 +47,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    if (!_coinModel) {
+        _coinModel = [CoinUtil shouldDisplayCoinModelArray][0];
+    }
     // Do any additional setup after loading the view.
     
     //头部
@@ -340,10 +345,12 @@
     http.showView = self.view;
     http.parameters[@"master"] = self.userId;
     http.parameters[@"visitor"] = [TLUser user].userId;
+    http.parameters[@"currency"] = _coinModel.symbol;
     
     [http postWithSuccess:^(id responseObject) {
-        
-        self.headerView.relation = [UserRelationModel tl_objectWithDictionary:responseObject[@"data"]];
+        UserRelationModel *userRelationModel = [UserRelationModel tl_objectWithDictionary:responseObject[@"data"]];
+        [userRelationModel setCoinModel:_coinModel];
+        self.headerView.relation = userRelationModel;
         
     } failure:^(NSError *error) {
         

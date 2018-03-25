@@ -56,8 +56,9 @@
         self.segmentWidth   = frame.size.width;
         self.titleFont      = [UIFont systemFontOfSize:15];
         self.btnArray       = [[NSMutableArray alloc]init];
-        self.titleNormalColor   = [UIColor whiteColor];
-        self.bgNormalColor   = [UIColor themeColor];
+        self.titleNormalColor   = kWhiteColor;
+        self.bgNormalColor   = kThemeColor;
+        self.msgNormalColor = kWhiteColor;
         self.defaultSelectIndex = 1;
         
         [self addSubview:self.bgScrollView];
@@ -107,13 +108,16 @@
         [self updateSegmentViewUI:^(UIButton *btn) {
             [btn setTitleColor:self.titleNormalColor forState:UIControlStateNormal];
         }];
+        [self.redView setBackgroundColor:self.msgNormalColor];
     }else if ([keyPath isEqualToString:@"titleSelectColor"]){
         [self updateSegmentViewUI:^(UIButton *btn) {
             [btn setTitleColor:self.titleSelectColor forState:UIControlStateSelected];
         }];
+        [self.redView setBackgroundColor:self.msgSelectColor];
     }else if ([keyPath isEqualToString:@"bgNormalColor"]) {
         [self updateSegmentViewUI:^(UIButton *btn) {
             [btn setBackgroundColor:self.bgNormalColor forState:UIControlStateNormal];
+            
         }];
     }else if ([keyPath isEqualToString:@"bgSelectColor"]){
         [self updateSegmentViewUI:^(UIButton *btn) {
@@ -179,6 +183,7 @@
         [btn setTitleColor:_titleSelectColor forState:UIControlStateSelected];
         [btn setBackgroundColor:_bgNormalColor forState:UIControlStateNormal];
         [btn setBackgroundColor:_bgSelectColor forState:UIControlStateSelected];
+        self.redView.backgroundColor = _msgSelectColor;
         [btn addTarget:self action:@selector(btnIndexClick:) forControlEvents:UIControlEventTouchUpInside];
         btn.backgroundColor = [UIColor clearColor];
         btn.titleLabel.font = self.titleFont;
@@ -269,6 +274,10 @@
     [self.bgNormalColor getRed:&normalRed green:&normalGreen blue:&normalBlue alpha:&normalAlpha];
     [self.bgSelectColor getRed:&selectRed green:&selectGreen blue:&selectBlue alpha:&selectAlpha];
     
+    //获取正常设置颜色
+    [self.msgNormalColor getRed:&normalRed green:&normalGreen blue:&normalBlue alpha:&normalAlpha];
+    [self.msgSelectColor getRed:&selectRed green:&selectGreen blue:&selectBlue alpha:&selectAlpha];
+    
     //选中和未选中的色差
     CGFloat redDif      = selectRed - normalRed;
     CGFloat greenDif    = selectGreen - normalGreen;
@@ -307,18 +316,19 @@
     CGFloat badgeW = 8;
     
     //新建小红点
-    UIView *badgeView = [[UIView alloc]init];
-    badgeView.tag = 888 + index;
-    badgeView.layer.cornerRadius = badgeW/2.0;
-    badgeView.backgroundColor = [UIColor redColor];
+    UIView *bageView = [[UIView alloc]init];
+    bageView.tag = 888 + index;
+    bageView.layer.cornerRadius = badgeW/2.0;
+    bageView.backgroundColor = kWhiteColor;
     CGRect tabFrame = self.frame;
     
     //确定小红点的位置
-    float percentX = (index +0.7) / ItemNums;
+    float percentX = (index + 0.8) / ItemNums;
     CGFloat x = ceilf(percentX * tabFrame.size.width);
     CGFloat y = ceilf(0.2 * tabFrame.size.height);
-    badgeView.frame = CGRectMake(x, y, badgeW, badgeW);
-    [self addSubview:badgeView];
+    bageView.frame = CGRectMake(x, y, badgeW, badgeW);
+   
+    [self addSubview:bageView];
     
 }
 

@@ -70,7 +70,7 @@ typedef NS_ENUM(NSInteger, AddressType) {
     //
     [self initSubviews];
     //获取手续费费率
-    [self requestWithdrawFee];
+    [self setWithdrawFee];
 }
 
 - (BOOL)navigationShouldPopOnBackButton {
@@ -728,23 +728,14 @@ typedef NS_ENUM(NSInteger, AddressType) {
 }
 
 #pragma mark- 获取手续费
-- (void)requestWithdrawFee {
+- (void)setWithdrawFee {
     
-    TLNetworking *http = [TLNetworking new];
+    CoinModel *currentCoin = [CoinUtil getCoinModel:self.currency.currency];
     
-    http.code = USER_CKEY_CVALUE;
-    http.parameters[SYS_KEY] = [NSString stringWithFormat:@"withdraw_fee_%@",[self.currency.currency lowercaseString]];
+    self.withdrawFee = currentCoin.withdrawFeeString;
     
-    [http postWithSuccess:^(id responseObject) {
-        
-        self.withdrawFee = responseObject[@"data"][@"cvalue"];
-        
-        self.minerFeeTF.text = [NSString stringWithFormat:@"%@ %@", self.withdrawFee, self.currency.currency];
-
-    } failure:^(NSError *error) {
-        
-        
-    }];
+    self.minerFeeTF.text = [NSString stringWithFormat:@"%@ %@", [CoinUtil convertToRealCoin:self.withdrawFee coin:self.currency.currency], self.currency.currency];
+    
 }
 
 

@@ -177,7 +177,7 @@
     //
     UITabBarController *tabbarContrl = (UITabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
     tabbarContrl.selectedIndex = 0;
-    [tabbarContrl.tabBar hideBadgeOnItemIndex:1];
+    [tabbarContrl.tabBar hideBadgeOnItemIndex:4];
     //应用外数量为0
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
     

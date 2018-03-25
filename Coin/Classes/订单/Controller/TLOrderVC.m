@@ -38,6 +38,7 @@
 @property (nonatomic, strong) SelectScrollView *selectScrollView;
 @property (nonatomic, strong) NSMutableArray <CoinModel *>*coins;
 
+
 @end
 
 @implementation TLOrderVC
@@ -45,6 +46,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    if (!_currentCoin) {
+        _currentCoin = [CoinUtil shouldDisplayCoinArray][0];
+    }
     
     //中间切换
     self.navigationItem.titleView = self.segmentUtil;
@@ -287,7 +292,7 @@
     self.ingOrderListVC = [[OrderListVC alloc] init];
     self.ingOrderListVC.delegate = self;
     self.ingOrderListVC.statusList = [OrderModel ingStatusList];
-    self.ingOrderListVC.tradeCoin = _coins[0].symbol;
+    self.ingOrderListVC.tradeCoin = _currentCoin;
     self.ingOrderListVC.view.frame = CGRectMake(0,0,self.switchScrollView.width,self.switchScrollView.height);
     [self addChildViewController:self.ingOrderListVC];
     [self.switchScrollView addSubview:self.ingOrderListVC.view];
@@ -296,7 +301,7 @@
     self.endOrderListVC = [[OrderListVC alloc] init];
     self.endOrderListVC.delegate = self;
     self.endOrderListVC.statusList = [OrderModel endStatusList];
-    self.endOrderListVC.tradeCoin = _coins[0].symbol;
+    self.endOrderListVC.tradeCoin = _currentCoin;
     self.endOrderListVC.view.frame = CGRectMake(self.switchScrollView.width,0,self.switchScrollView.width,self.switchScrollView.height);
     [self addChildViewController:self.endOrderListVC];
     [self.switchScrollView addSubview:self.endOrderListVC.view];
@@ -317,6 +322,8 @@
     self.segmentUtil.titleSelectColor = kWhiteColor;
     self.segmentUtil.bgNormalColor = kWhiteColor;
     self.segmentUtil.bgSelectColor = kThemeColor;
+    self.segmentUtil.msgNormalColor = kThemeColor;
+    self.segmentUtil.msgSelectColor = kWhiteColor;
     self.segmentUtil.titleFont = Font(13.0);
     self.segmentUtil.titleArray = @[
                                   [LangSwitcher switchLang: @"进行中" key:nil],
@@ -324,9 +331,14 @@
                                   ];
     self.navigationItem.titleView = self.segmentUtil;
     
-    
     //币种选择
     [self.view addSubview:self.selectScrollView];
+    for (int index = 0; index < _coins.count; index++) {
+        if ([_currentCoin isEqualToString:_coins[index].symbol]) {
+            [self.selectScrollView setCurrentIndex:index];
+            break;
+        }
+    }
     
     //1.切换背景
     self.switchScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, self.selectScrollView.bottom + 10, SCREEN_WIDTH, SCREEN_HEIGHT - [DeviceUtil top64] - [DeviceUtil bottom49] - self.selectScrollView.height)];
@@ -349,7 +361,7 @@
          NSArray *titleArray = [CoinUtil shouldDisplayCoinArray];
         
         _selectScrollView = [[SelectScrollView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 45) itemTitles:titleArray];
-        
+ 
         weakSelf.coins = [CoinUtil shouldDisplayCoinModelArray];
         
         [_selectScrollView setSelectBlock:^(NSInteger index) {
@@ -362,6 +374,7 @@
             [weakSelf orderRefresh];
             [weakSelf asyncHandleTopUnreadMsgHint];
         }];
+        
     }
     return _selectScrollView;
 }

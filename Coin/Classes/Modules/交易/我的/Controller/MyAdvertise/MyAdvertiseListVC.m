@@ -11,6 +11,7 @@
 #import "TLPublishVC.h"
 #import "TradeBuyVC.h"
 #import "TradeSellVC.h"
+#import "TLPushPublishVC.h"
 #import "CoinUtil.h"
 
 @interface MyAdvertiseListVC ()<RefreshDelegate>
@@ -122,7 +123,7 @@
     helper.start = 1;
     helper.limit = 10;
     helper.parameters[@"userId"] = [TLUser user].userId;
-    [self changePageCoin:kETH helper:helper];
+    [self changePageCoin:self.coin helper:helper];
     self.pageDataHelper = helper;
     if (self.type == MyAdvertiseTypeDraft) {
         
@@ -181,67 +182,136 @@
 - (void)refreshTableView:(TLTableView *)refreshTableview didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     AdvertiseModel *advertiseModel = self.advertises[indexPath.row];
-    if (self.type == MyAdvertiseTypeDraft) {
-        // 草稿
-        
-        TLPublishVC *publishVC = [[TLPublishVC alloc] init];
-        publishVC.adsCode = advertiseModel.code;
-        publishVC.firstCoin = advertiseModel.tradeCoin;
-        publishVC.publishType = PublishTypePublishDraft;
-        if ( advertiseModel.adsType == AdsTradeTypeBuy) {
+    
+    CoinModel *coinModel = [CoinUtil getCoinModel:advertiseModel.tradeCoin];
+    
+    if ([@"0" isEqualToString:coinModel.type]) {
+        if (self.type == MyAdvertiseTypeDraft) {
+            // 草稿
             
-            publishVC.VCType = TLPublishVCTypeBuy;
-            
-        } else if (advertiseModel.adsType == AdsTradeTypeSell) {
-            
-            publishVC.VCType = TLPublishVCTypeSell;
-            
-        }
-        [self.navigationController pushViewController:publishVC animated:YES];
-
-        
-    } else if (self.type == MyAdvertiseTypeDidPublish) {
-        //已发布 和 交易中的
-        
-        if (advertiseModel.adsType == AdsTradeTypeBuy) {
-            
-            //
-            if ([advertiseModel.status isEqualToString:kAdsStatusShangJia]) {
-                //上架的，都可进行编辑
-                TLPublishVC *publishVC = [[TLPublishVC alloc] init];
-                publishVC.adsCode = advertiseModel.code;
-                publishVC.firstCoin = advertiseModel.tradeCoin;
-                publishVC.VCType = TLPublishVCTypeBuy;
-                publishVC.publishType = PublishTypePublishRedit;
-                [self.navigationController pushViewController:publishVC animated:YES];
-
-                return;
-            }
-            
-            TradeBuyVC *buyVC = [TradeBuyVC new];
-            buyVC.adsCode = advertiseModel.code;
-            [self.navigationController pushViewController:buyVC animated:YES];
-            
-        } else if (advertiseModel.adsType == AdsTradeTypeSell) {
-            
-            if ([advertiseModel.status isEqualToString:kAdsStatusShangJia]) {
+            TLPublishVC *publishVC = [[TLPublishVC alloc] init];
+            publishVC.adsCode = advertiseModel.code;
+            publishVC.firstCoin = advertiseModel.tradeCoin;
+            publishVC.publishType = PublishTypePublishDraft;
+            if ( advertiseModel.adsType == AdsTradeTypeBuy) {
                 
-                TLPublishVC *publishVC = [[TLPublishVC alloc] init];
-                publishVC.adsCode = advertiseModel.code;
-                publishVC.firstCoin = advertiseModel.tradeCoin;
+                publishVC.VCType = TLPublishVCTypeBuy;
+                
+            } else if (advertiseModel.adsType == AdsTradeTypeSell) {
+                
                 publishVC.VCType = TLPublishVCTypeSell;
-                publishVC.publishType = PublishTypePublishRedit;
-                [self.navigationController pushViewController:publishVC animated:YES];
-
-                return;
+                
             }
-
-            TradeSellVC *sellVC = [TradeSellVC new];
-            sellVC.adsCode = advertiseModel.code;
-            [self.navigationController pushViewController:sellVC animated:YES];
+            [self.navigationController pushViewController:publishVC animated:YES];
+            
+            
+        } else if (self.type == MyAdvertiseTypeDidPublish) {
+            //已发布 和 交易中的
+            
+            if (advertiseModel.adsType == AdsTradeTypeBuy) {
+                
+                //
+                if ([advertiseModel.status isEqualToString:kAdsStatusShangJia]) {
+                    //上架的，都可进行编辑
+                    TLPublishVC *publishVC = [[TLPublishVC alloc] init];
+                    publishVC.adsCode = advertiseModel.code;
+                    publishVC.firstCoin = advertiseModel.tradeCoin;
+                    publishVC.VCType = TLPublishVCTypeBuy;
+                    publishVC.publishType = PublishTypePublishRedit;
+                    [self.navigationController pushViewController:publishVC animated:YES];
+                    
+                    return;
+                }
+                
+                TradeBuyVC *buyVC = [TradeBuyVC new];
+                buyVC.adsCode = advertiseModel.code;
+                [self.navigationController pushViewController:buyVC animated:YES];
+                
+            } else if (advertiseModel.adsType == AdsTradeTypeSell) {
+                
+                if ([advertiseModel.status isEqualToString:kAdsStatusShangJia]) {
+                    
+                    TLPublishVC *publishVC = [[TLPublishVC alloc] init];
+                    publishVC.adsCode = advertiseModel.code;
+                    publishVC.firstCoin = advertiseModel.tradeCoin;
+                    publishVC.VCType = TLPublishVCTypeSell;
+                    publishVC.publishType = PublishTypePublishRedit;
+                    [self.navigationController pushViewController:publishVC animated:YES];
+                    
+                    return;
+                }
+                
+                TradeSellVC *sellVC = [TradeSellVC new];
+                sellVC.adsCode = advertiseModel.code;
+                [self.navigationController pushViewController:sellVC animated:YES];
+            }
+            
         }
-        
+    } else if ([@"1" isEqualToString:coinModel.type]) {
+        if (self.type == MyAdvertiseTypeDraft) {
+            // 草稿
+            
+            TLPushPublishVC *publishVC = [[TLPushPublishVC alloc] init];
+            publishVC.adsCode = advertiseModel.code;
+            publishVC.firstCoin = advertiseModel.tradeCoin;
+            publishVC.publishType = PublishTypePublishDraft;
+            if ( advertiseModel.adsType == AdsTradeTypeBuy) {
+                
+                publishVC.VCType = TLPublishVCTypeBuy;
+                
+            } else if (advertiseModel.adsType == AdsTradeTypeSell) {
+                
+                publishVC.VCType = TLPublishVCTypeSell;
+                
+            }
+            [self.navigationController pushViewController:publishVC animated:YES];
+            
+            
+        } else if (self.type == MyAdvertiseTypeDidPublish) {
+            //已发布 和 交易中的
+            
+            if (advertiseModel.adsType == AdsTradeTypeBuy) {
+                
+                //
+                if ([advertiseModel.status isEqualToString:kAdsStatusShangJia]) {
+                    //上架的，都可进行编辑
+                    TLPushPublishVC *publishVC = [[TLPushPublishVC alloc] init];
+                    publishVC.adsCode = advertiseModel.code;
+                    publishVC.firstCoin = advertiseModel.tradeCoin;
+                    publishVC.VCType = TLPublishVCTypeBuy;
+                    publishVC.publishType = PublishTypePublishRedit;
+                    [self.navigationController pushViewController:publishVC animated:YES];
+                    
+                    return;
+                }
+                
+                TradeBuyVC *buyVC = [TradeBuyVC new];
+                buyVC.adsCode = advertiseModel.code;
+                [self.navigationController pushViewController:buyVC animated:YES];
+                
+            } else if (advertiseModel.adsType == AdsTradeTypeSell) {
+                
+                if ([advertiseModel.status isEqualToString:kAdsStatusShangJia]) {
+                    
+                    TLPushPublishVC *publishVC = [[TLPushPublishVC alloc] init];
+                    publishVC.adsCode = advertiseModel.code;
+                    publishVC.firstCoin = advertiseModel.tradeCoin;
+                    publishVC.VCType = TLPublishVCTypeSell;
+                    publishVC.publishType = PublishTypePublishRedit;
+                    [self.navigationController pushViewController:publishVC animated:YES];
+                    
+                    return;
+                }
+                
+                TradeSellVC *sellVC = [TradeSellVC new];
+                sellVC.adsCode = advertiseModel.code;
+                [self.navigationController pushViewController:sellVC animated:YES];
+            }
+            
+        }
     }
+    
+    
 }
 
 

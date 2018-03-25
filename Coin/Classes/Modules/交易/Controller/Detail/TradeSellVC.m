@@ -262,6 +262,7 @@
             HomePageVC *homePageVC = [HomePageVC new];
             
             homePageVC.userId = self.advertise.userId;
+            homePageVC.coinModel = [CoinUtil getCoinModel:self.advertise.tradeCoin];
             [self.navigationController pushViewController:homePageVC animated:YES];
             
         }break;

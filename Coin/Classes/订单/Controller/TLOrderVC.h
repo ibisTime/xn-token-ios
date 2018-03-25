@@ -10,4 +10,6 @@
 
 @interface TLOrderVC : TLBaseVC
 
+@property (nonatomic, strong) NSString *currentCoin;
+
 @end

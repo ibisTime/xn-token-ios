@@ -190,7 +190,7 @@
         
         CoinAddressListVC *addressListVC = [CoinAddressListVC new];
         addressListVC.isCanLookManyCoin = YES;
-        addressListVC.coin = [[CoinService shareService].currentCoin symbol];
+        addressListVC.coin = [CoinUtil shouldDisplayCoinArray][0];
         [weakSelf.navigationController pushViewController:addressListVC animated:YES];
         
     };

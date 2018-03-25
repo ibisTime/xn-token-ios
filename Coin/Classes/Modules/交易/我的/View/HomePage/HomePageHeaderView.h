@@ -11,6 +11,7 @@
 #import "AdvertiseModel.h"
 #import "UserRelationModel.h"
 #import "TLUser.h"
+#import "CoinModel.h"
 
 typedef NS_ENUM(NSInteger, HomePageType) {
     

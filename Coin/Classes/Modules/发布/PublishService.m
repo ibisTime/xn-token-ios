@@ -12,6 +12,7 @@
 #import "TLNetworking.h"
 #import "KeyValueModel.h"
 #import "TLPublishVC.h"
+#import "NSString+Extension.h"
 
 NSString *const kSaveDraft = @"0";
 NSString *const kPublish = @"1";
@@ -167,7 +168,7 @@ NSString *const kPublishTradeTypeBuy = @"0";
 
 - (NSString *)convertHangQing:(NSString *)hangQing {
     
-   return [NSString stringWithFormat:@"行情价格：%@",hangQing];
+    return [NSString stringWithFormat:@"行情价格：%@", [hangQing convertToSimpleRealMoney]];
 
 }
 
