@@ -99,4 +99,45 @@
     
 }
 
+#pragma mark - 消息小红点
+- (void)showBadge {
+    
+    //移除之前的小红点
+    [self removeBadge];
+    
+    CGFloat badgeW = 8;
+    
+    //新建小红点
+    UIView *badgeView = [[UIView alloc]init];
+    badgeView.tag = 888;
+    badgeView.layer.cornerRadius = badgeW/2.0;
+    badgeView.backgroundColor = [UIColor redColor];
+    
+    //确定小红点的位置
+    
+    badgeView.frame = CGRectMake(30, 10, badgeW, badgeW);
+    [self addSubview:badgeView];
+    
+}
+
+- (void)hideBadge{
+    
+    //移除小红点
+    [self removeBadge];
+    
+}
+
+- (void)removeBadge{
+    
+    //按照tag值进行移除
+    for (UIView *subView in self.subviews) {
+        
+        if (subView.tag == 888) {
+            
+            [subView removeFromSuperview];
+            
+        }
+    }
+}
+
 @end

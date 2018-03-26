@@ -22,7 +22,7 @@
         
         UIView *leftBgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, titleWidth, frame.size.height)];
         
-        UILabel *leftLbl = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, titleWidth - 20, frame.size.height)];
+        UILabel *leftLbl = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, titleWidth - 18, frame.size.height)];
         leftLbl.text = leftTitle;
         leftLbl.textAlignment = NSTextAlignmentLeft;
         leftLbl.font = Font(15.0);

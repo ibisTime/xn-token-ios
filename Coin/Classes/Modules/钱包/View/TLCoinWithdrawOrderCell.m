@@ -156,16 +156,16 @@
    
     
     NSString *countStr = [CoinUtil convertToRealCoin: _withdrawModel.amountString
-                                                coin:_withdrawModel.channelType];
+                                                coin:_withdrawModel.currency];
     
-    NSString *normalCountStr = [NSString stringWithFormat:@"提币金额：%@ %@",countStr,_withdrawModel.channelType];
+    NSString *normalCountStr = [NSString stringWithFormat:@"提币金额：%@ %@",countStr,_withdrawModel.currency];
     self.coinCountLbl.attributedText = [self attrStrLeftLen:5 str:normalCountStr];
     
     //
     NSString *feeStr = [CoinUtil convertToRealCoin: _withdrawModel.feeString
-                                             coin:_withdrawModel.channelType];
+                                             coin:_withdrawModel.currency];
     
-    NSString *feeNormalStr =  [NSString stringWithFormat:@"手续费：%@ %@",feeStr,_withdrawModel.channelType];
+    NSString *feeNormalStr =  [NSString stringWithFormat:@"手续费：%@ %@",feeStr,_withdrawModel.currency];
     self.feelbl.attributedText = [self attrStrLeftLen:4 str:feeNormalStr];
     
     //

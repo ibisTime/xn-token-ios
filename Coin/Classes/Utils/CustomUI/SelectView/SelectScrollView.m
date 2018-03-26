@@ -11,7 +11,7 @@
 #import "UIView+Responder.h"
 #import <UIScrollView+TLAdd.h>
 
-#import "SortBar.h"
+
 
 #import "TLUIHeader.h"
 #import "AppColorMacro.h"
@@ -22,7 +22,7 @@
 
 @property (nonatomic, strong) NSArray *itemTitles;
 
-@property (nonatomic, strong) SortBar *headView;
+
 
 @property (nonatomic, strong) NSMutableArray *btnArray;
 

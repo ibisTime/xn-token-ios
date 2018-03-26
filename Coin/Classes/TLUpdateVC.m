@@ -34,7 +34,7 @@
     [self.view addSubview:bgIV];
     bgIV.contentMode = UIViewContentModeScaleAspectFill;
     
-    bgIV.image = [UIImage imageNamed:@"Launch"];
+    bgIV.image = [UIImage imageWithColor:kWhiteColor];
     [self setPlaceholderViewTitle:@"加载失败" operationTitle:@"重新加载"];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillEnterForeground) name:UIApplicationWillEnterForegroundNotification object:nil];

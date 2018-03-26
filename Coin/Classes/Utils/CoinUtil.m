@@ -7,6 +7,7 @@
 //
 
 #import "CoinUtil.h"
+#import "TLNetworking.h"
 
 NSString *const kETH = @"ETH";
 NSString *const kSC = @"SC";
@@ -40,11 +41,13 @@ NSString *const kCNY = @"CNY";
 
 + (NSNumber *)getCardinality:(NSString *)coin {
     
+    NSNumber *result = [NSNumber numberWithInteger:1];
+    
     NSMutableArray<CoinModel *> *coins = [[CoinModel coin] getOpenCoinList];
     
     for (CoinModel *coinModel in coins) {
         if ([coin isEqualToString:coinModel.symbol]) {
-            return [[NSNumber alloc] initWithDouble:pow(10, coinModel.unit.doubleValue)];
+            result = [[NSNumber alloc] initWithDouble:pow(10, coinModel.unit.doubleValue)];
         }
     }
     
@@ -61,7 +64,7 @@ NSString *const kCNY = @"CNY";
 //        return @(1.0e+24);
 //    }
     
-    return nil;
+    return result;
 }
 
 + (NSString *)mult1:(NSString *)mult1 mult2:(NSString *)mult2 {
@@ -194,6 +197,29 @@ NSString *const kCNY = @"CNY";
     }
     
     return coinModel;
+}
+
++ (void)refreshOpenCoinList:(RefreshOpenCoinListBlock)block {
+    TLNetworking *http = [TLNetworking new];
+    http.code = @"802267";
+    
+    http.parameters[@"status"] = @"0";
+    
+    http.isUploadToken = NO;
+    
+    [http postWithSuccess:^(id responseObject) {
+        
+        NSMutableArray *coinList = responseObject[@"data"];
+        
+        [[CoinModel coin] saveOpenCoinList:coinList];
+        
+        if (block) {
+            block();
+        }
+        
+    } failure:^(NSError *error) {
+        
+    }];
 }
 
 

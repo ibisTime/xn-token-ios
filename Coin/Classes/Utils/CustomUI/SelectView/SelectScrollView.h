@@ -7,10 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SortBar.h"
 
 typedef void(^SelectBlock)(NSInteger index);
 
 @interface SelectScrollView : UIView
+
+@property (nonatomic, strong) SortBar *headView;
 
 @property (nonatomic, strong) UIScrollView *scrollView;
 //当前索引

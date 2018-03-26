@@ -15,4 +15,11 @@
 
 @property (nonatomic, strong) UILabel *rightLabel;
 
+/**
+ index 传 0，1，。。。
+ */
+- (void)showBadge;   //显示小红点
+
+- (void)hideBadge; //隐藏小红点
+
 @end

@@ -14,6 +14,8 @@
 @property (nonatomic,assign) NSInteger start;
 @property (nonatomic,assign) NSInteger limit;
 
+@property (nonatomic, assign) BOOL isUploadToken; // default is yes
+
 //网络请求的code
 @property (nonatomic,copy) NSString *code;
 @property (nonatomic,strong) UIView *showView; //hud展示superView

@@ -40,6 +40,10 @@
 @property (nonatomic, strong) NSMutableArray <CoinModel *>*coins;
 //货币切换
 @property (nonatomic, strong) CoinChangeView *changeView;
+
+@property (nonatomic, strong) UIView *headerView;
+
+@property (nonatomic, strong) TLBannerView *bannerView;
 ////筛选
 @property (nonatomic, strong) FilterView *filterPicker;
 //
@@ -63,8 +67,6 @@
 @property (nonatomic, strong) PublishTipView *tipView;
 @property (nonatomic, assign) BOOL isFirst;
 
-//banner
-@property (nonatomic, strong) TLBannerView *bannerView;
 //
 @property (nonatomic,strong) NSMutableArray <BannerModel *>*bannerRoom;
 //交易方式(买币和卖币)
@@ -81,11 +83,11 @@
     
     [super viewWillAppear:animated];
     //
-    if (self.advertises && self.advertises.count > 0) {
-        
-        [self.tableView reloadData_tl];
-        
-    }
+//    if (self.advertises && self.advertises.count > 0) {
+//        
+//        [self.tableView reloadData_tl];
+//        
+//    }
     
     //
     if (self.isFirst) {
@@ -94,6 +96,8 @@
         [self.tableView beginRefreshing];
         
     }
+    
+//     [self refreshOpenCoinList];
     
 }
 
@@ -112,48 +116,24 @@
     
     [super viewDidLoad];
     
-    TLNetworking *http = [TLNetworking new];
-    http.code = @"802267";
+    self.isFirst = YES;
     
-    http.parameters[@"status"] = @"0";
+    [self navBarUI];
     
-    [http postWithSuccess:^(id responseObject) {
-        
-        NSMutableArray *coinList = responseObject[@"data"];
-        
-        [[CoinModel coin] saveOpenCoinList:coinList];
-        
-        self.isFirst = YES;
-        
-        [self navBarUI];
-        
-        [self setUpUI];
-        //获取广告
-        [self requestAdvetiseList];
-        //添加通知
-        [self addNotification];
-        
-        // 定时器去刷新广告列表
-        self.timer = [NSTimer scheduledTimerWithTimeInterval:5*60
-                                                      target:self
-                                                    selector:@selector(refreshAds)
-                                                    userInfo:nil
-                                                     repeats:YES];
-        
-        
-        
-        
-    } failure:^(NSError *error) {
-        NSLog(@"787878");
-        
-    }];
+    [self setUpUI];
+    //获取广告
+    [self requestAdvetiseList];
+    //添加通知
+    [self addNotification];
+    
+    // 定时器去刷新广告列表
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:5*60
+                                                  target:self
+                                                selector:@selector(refreshAds)
+                                                userInfo:nil
+                                                 repeats:YES];
     
 }
-
-
-    
-
-    
 
 
 - (void)refreshAds {
@@ -190,21 +170,16 @@
     CoinWeakSelf;
     
     if (!_selectScrollView) {
-        _coins = [[CoinModel coin] getOpenCoinList];
-        NSMutableArray *titleArray = [[NSMutableArray alloc] init];
-        for (CoinModel *coin in _coins) {
-            if ([@"0" isEqualToString:coin.type]) {
-                NSString *title = [LangSwitcher switchLang:coin.symbol key:nil];
-                [titleArray addObject:title];
-            }
-        }
+        
+        NSArray *titleArray = [CoinUtil shouldDisplayOriginalCoinArray];
         
         _selectScrollView = [[SelectScrollView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight) itemTitles:titleArray];
         
-        NSMutableArray<CoinModel *> *coins = [CoinUtil shouldDisplayCoinModelArray];
+        weakSelf.coins = [CoinUtil shouldDisplayOriginalCoinModelArray];
         
         [_selectScrollView setSelectBlock:^(NSInteger index) {
-            CoinModel *currentCoin = coins[index];
+//            [weakSelf.selectScrollView setCurrentIndex:index];
+            CoinModel *currentCoin = weakSelf.coins[index];
             [CoinService shareService].currentCoin = currentCoin;
             weakSelf.changeView.title = currentCoin.symbol;
             [weakSelf changePageHelperCoin:currentCoin.symbol pageHelper:weakSelf.helper];
@@ -256,9 +231,9 @@
 //    }
     
     //1.banner
-    TLBannerView *bannerView = [[TLBannerView alloc] initWithFrame:CGRectMake(0, 0,SCREEN_WIDTH, kWidth(140))];
+    _bannerView = [[TLBannerView alloc] initWithFrame:CGRectMake(0, 0,SCREEN_WIDTH, kWidth(140))];
     
-    bannerView.selected = ^(NSInteger index) {
+    _bannerView.selected = ^(NSInteger index) {
         
         if (!(weakSelf.bannerRoom[index].url && weakSelf.bannerRoom[index].url.length > 0)) {
             return ;
@@ -272,23 +247,23 @@
         
     };
     
-    self.bannerView = bannerView;
+    self.bannerView = _bannerView;
     
     //banner+币种选择
-    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, bannerView.height + 54)];
-    [headerView setBackgroundColor:[UIColor clearColor]];
+    _headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, _bannerView.height + 54)];
+    [_headerView setBackgroundColor:[UIColor clearColor]];
     
-    [headerView addSubview:bannerView];
-    [headerView addSubview:self.selectScrollView];
+    [_headerView addSubview:_bannerView];
+    [_headerView addSubview:self.selectScrollView];
 
     [self.selectScrollView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(bannerView.mas_bottom);
+        make.top.equalTo(_bannerView.mas_bottom);
         make.width.equalTo(@(SCREEN_WIDTH));
         make.height.equalTo(@(44));
         make.left.equalTo(@(0));
     }];
     
-    self.tableView.tableHeaderView = headerView;
+    self.tableView.tableHeaderView = _headerView;
     
     
     //2.发布
@@ -452,12 +427,24 @@
         
         TLNotificationObj *notiObj = (TLNotificationObj *)obj;
         
+        NSString *symbol = notiObj.content;
+        
         //币种改变
-        CoinModel *coin = [CoinUtil getCoinModel:notiObj.content];
+        CoinModel *coin = [CoinUtil getCoinModel:symbol];
         [CoinService shareService].currentCoin = coin;
-         [self changePageHelperCoin:[CoinService shareService].currentCoin.symbol
+        [self changePageHelperCoin:[CoinService shareService].currentCoin.symbol
                          pageHelper:self.helper];
-        self.changeView.title = [CoinService shareService].currentCoin.symbol;
+//        self.changeView.title = [CoinService shareService].currentCoin.symbol;
+        NSInteger sIndex = 0;
+        for (int i = 0; i < _coins.count; i++) {
+            if ([symbol isEqualToString:[_coins[i] symbol]]) {
+                sIndex = i;
+            }
+        }
+        self.selectScrollView.currentIndex = sIndex;
+        
+        [self.selectScrollView.headView selectSortBarWithIndex:sIndex];
+        
         //左右切换
         NSInteger index = [notiObj.subContent integerValue];
         index = index == 1 ? 0 : 1;
@@ -520,6 +507,7 @@
     helper.code = @"625228";
     helper.start = 1;
     helper.limit = 20;
+    helper.isUploadToken = NO;
     
     [self changePageHelperCoin:[CoinService shareService].currentCoin.symbol pageHelper:helper];
     helper.parameters[@"tradeType"] = self.tradeType;
@@ -530,23 +518,41 @@
     
     [self.tableView addRefreshAction:^{
         
-        //banner
-        [weakSelf getBanner];
-        
-        [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
+        [CoinUtil refreshOpenCoinList:^{
             
-            weakSelf.advertises = objs;
-            weakSelf.tableView.advertises = objs;
-            [weakSelf.tableView reloadData_tl];
+            //动态显示币种选择，默认保留上次选择的币种
+            NSInteger oldIndex = weakSelf.selectScrollView.headView.selectIndex;
+            if (oldIndex >= [CoinUtil shouldDisplayOriginalCoinArray].count) {
+                oldIndex = 0;
+            }
+            [weakSelf.selectScrollView.headView resetSortBarWithNames:[CoinUtil shouldDisplayOriginalCoinArray] selectIndex:oldIndex];
+            //更改当前选择的币种
+            [CoinService shareService].currentCoin = [[CoinUtil shouldDisplayOriginalCoinModelArray] objectAtIndex:oldIndex];
+            //更改请求中币种的入参
+            [weakSelf changePageHelperCoin:[CoinService shareService].currentCoin.symbol pageHelper:helper];
             
-        } failure:^(NSError *error) {
+            //banner
+            [weakSelf getBanner];
             
-            //            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            //
-            //                [weakSelf requestAdvetiseList];
-            //            });
+            [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
+                
+                weakSelf.advertises = objs;
+                weakSelf.tableView.advertises = objs;
+                [weakSelf.tableView reloadData_tl];
+                
+            } failure:^(NSError *error) {
+                
+                //            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                //
+                //                [weakSelf requestAdvetiseList];
+                //            });
+                
+            }];
             
+            //        }
         }];
+        
+        
     }];
     
     [self.tableView beginRefreshing];

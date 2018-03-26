@@ -14,6 +14,8 @@ typedef void (^SortSelectBlock) (NSInteger index);
 
 @property (nonatomic, assign) NSInteger curruntIndex;
 
+@property (nonatomic, assign) NSInteger selectIndex;
+
 /**
  * 数组元素个数必须和初始化数组元素个数相同
  */

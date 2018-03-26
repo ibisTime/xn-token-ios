@@ -18,7 +18,7 @@
 //text
 @property (nonatomic, strong) UILabel *textLbl;
 
-@property (nonatomic, assign) NSInteger selectIndex;
+
 
 @end
 

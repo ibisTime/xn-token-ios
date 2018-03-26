@@ -33,6 +33,7 @@
         self.refreshed = NO;
         self.objs = [[NSMutableArray alloc] init];
         self.parameters = [NSMutableDictionary dictionary];
+        self.isUploadToken = YES;
         
     }
     return self;
@@ -53,6 +54,7 @@
     http.parameters = self.parameters;
     http.parameters[@"start"] = [NSString stringWithFormat:@"%ld",self.start];
     http.parameters[@"limit"] = [NSString stringWithFormat:@"%ld",self.limit];
+    http.isUploadToken = self.isUploadToken;
     
     [http postWithSuccess:^(id responseObject) {
         
@@ -170,7 +172,8 @@
     http.code = self.code;
     http.parameters = self.parameters;
     http.parameters[@"start"] = [NSString stringWithFormat:@"%ld",self.start];
-    http.parameters[@"limit"] = [NSString stringWithFormat:@"%ld",self.limit];;
+    http.parameters[@"limit"] = [NSString stringWithFormat:@"%ld",self.limit];
+    http.isUploadToken = self.isUploadToken;
     [http postWithSuccess:^(id responseObject) {
         
         if (self.tableView) {

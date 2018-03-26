@@ -50,7 +50,7 @@
 
 - (void)setTitle:(NSString *)title {
     
-    [super setTitle:@"订单详情"];
+    [super setTitle:[LangSwitcher switchLang:@"订单详情" key:nil]];
 //    self.title = @"订单详情";
     
 }

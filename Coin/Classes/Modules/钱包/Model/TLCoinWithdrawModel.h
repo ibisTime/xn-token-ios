@@ -11,7 +11,7 @@
 @interface TLCoinWithdrawModel : TLBaseModel
 
 @property (nonatomic, copy) NSString *amountString;
-@property (nonatomic, copy) NSString *channelType; //币种
+@property (nonatomic, copy) NSString *currency; //币种
 @property (nonatomic, copy) NSString *status;
 @property (nonatomic, copy) NSString *feeString;//手续费
 @property (nonatomic, copy) NSString *applyDatetime; //申请时间

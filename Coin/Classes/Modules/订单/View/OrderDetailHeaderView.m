@@ -82,7 +82,7 @@
     self.statusLbl.text = order.statusStr;
 
     //
-    self.amountLbl.text = [NSString stringWithFormat:@"%@ CNY", order.tradeAmount];
+    self.amountLbl.text = [NSString stringWithFormat:@"%@ CNY", [order.tradeAmount convertToSimpleRealMoney]];
     NSString *realNum = [CoinUtil convertToRealCoin:order.countString
                                                coin:_order.tradeCoin];
     self.numLbl.text = [NSString stringWithFormat:@"%@ %@", realNum,_order.tradeCoin];

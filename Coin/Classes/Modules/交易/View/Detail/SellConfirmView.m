@@ -22,6 +22,8 @@
 //出售数量
 @property (nonatomic, strong) UILabel *numLbl;
 
+@property (nonatomic, strong) UILabel *promptLbl;
+
 @end
 
 @implementation SellConfirmView
@@ -143,14 +145,14 @@
     
     //提示
     
-    UILabel *promptLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kThemeColor font:11.0];
+    self.promptLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kThemeColor font:11.0];
     
-    promptLbl.text = @"提醒: 请确认价格再下单, 下单后此交易的ETH将托管锁定, 请放心出售";
+    self.promptLbl.text = @"提醒: 请确认价格再下单, 下单后此交易的ETH将托管锁定, 请放心出售";
     
-    promptLbl.numberOfLines = 0;
+    self.promptLbl.numberOfLines = 0;
     
-    [self.bgView addSubview:promptLbl];
-    [promptLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.bgView addSubview:self.promptLbl];
+    [self.promptLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.top.equalTo(lastLbl.mas_bottom).offset(27);
         make.left.equalTo(@50);
@@ -163,7 +165,7 @@
     [self.bgView addSubview:promptIV];
     [promptIV mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.centerY.equalTo(promptLbl.mas_centerY);
+        make.centerY.equalTo(self.promptLbl.mas_centerY);
         make.left.equalTo(@(kWidth(30)));
         
     }];
@@ -177,7 +179,7 @@
     [confirmBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.right.equalTo(@(-kWidth(30)));
-        make.top.equalTo(promptLbl.mas_bottom).offset(35);
+        make.top.equalTo(self.promptLbl.mas_bottom).offset(35);
         make.width.equalTo(@(kWidth(110)));
         make.height.equalTo(@35);
     }];
@@ -191,7 +193,7 @@
     [cancelBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.left.equalTo(@(kWidth(30)));
-        make.top.equalTo(promptLbl.mas_bottom).offset(35);
+        make.top.equalTo(self.promptLbl.mas_bottom).offset(35);
         make.width.equalTo(@(kWidth(110)));
         make.height.equalTo(@35);
     }];
@@ -206,7 +208,9 @@
     
     self.amountLbl.text = [NSString stringWithFormat:@"%@ CNY", priceModel.amount];
     
-    self.numLbl.text = [NSString stringWithFormat:@"%@ ETH", priceModel.num];
+    self.numLbl.text = [NSString stringWithFormat:@"%@ %@", priceModel.num, priceModel.coin];
+    
+    self.promptLbl.text = [NSString stringWithFormat:@"提醒: 请确认价格再下单, 下单后此交易的%@将托管锁定, 请放心购买",priceModel.coin];
     
 }
 

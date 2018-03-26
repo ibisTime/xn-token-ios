@@ -35,8 +35,11 @@
 #import <CDCommon/UIScrollView+TLAdd.h>
 #import "CoinService.h"
 #import "TLOrderVC.h"
+#import "MineCell.h"
 
 @interface TLMineVC ()<MineHeaderSeletedDelegate, UINavigationControllerDelegate>
+
+@property (nonatomic, strong) FBKVOController *chatKVOCtrl;
 
 @property (nonatomic, strong) UIScrollView *scrollView;
 //头部
@@ -56,14 +59,19 @@
     [super viewWillDisappear:animated];
     
     [self.navigationController setNavigationBarHidden:NO animated:animated];
+    
+    
+    
 }
 
-//- (void)viewDidAppear:(BOOL)animated {
-//    
-//    [super viewDidAppear:animated];
-//    [self.navigationController setNavigationBarHidden:YES animated:NO];
-//
-//}
+
+
+- (void)viewDidAppear:(BOOL)animated {
+    
+    [super viewDidAppear:animated];
+    [self checkBage];
+
+}
 
 //- (void)viewDidDisappear:(BOOL)animated {
 //    [super viewDidDisappear:animated];
@@ -87,6 +95,25 @@
         [self requestUserStatistInfo];
     }
     
+    [self checkBage];
+    
+}
+
+- (void)checkBage {
+    UIView *bage = nil;
+    for (UIView *subView in [self.tabBarController.tabBar subviews]) {
+        
+        if (subView.tag == 888+4) {
+            bage = subView;
+            break;
+        }
+    }
+    MineCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
+    if (bage) {
+        [cell showBadge];
+    }else {
+        [cell hideBadge];
+    }
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
@@ -125,6 +152,9 @@
     [[TLUser user] updateUserInfo];
     //通知
     [self addNotification];
+    
+    [self kvoUnReadMsgToChangeTabbar];
+    [self checkBage];
     
     // viewDidLoad __ todo
 //    FBKVOController *kvoController = [[FBKVOController alloc] initWithObserver:self];
@@ -529,6 +559,35 @@
             break;
             
     }
+}
+
+// 用户重新登录需要重新，需要重新调用此方法监听
+- (void)kvoUnReadMsgToChangeTabbar {
+    
+    //这里监听主要是为了，tabbar上的消息提示, 和icon上的图标
+    // 此处有坑， [IMAPlatform sharedInstance].conversationMgr 切换账户是会销毁
+    self.chatKVOCtrl = [FBKVOController controllerWithObserver:self];
+    [self.chatKVOCtrl observe:[IMAPlatform sharedInstance].conversationMgr
+                      keyPath:@"unReadMessageCount"
+                      options:NSKeyValueObservingOptionNew
+                        block:^(id observer, id object, NSDictionary *change) {
+                            
+                            NSInteger count =  [IMAPlatform sharedInstance].conversationMgr.unReadMessageCount;
+                            
+                            MineCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
+                            
+                            if (count > 0) {
+                                
+                                [cell showBadge];
+                                
+                            } else {
+                                
+                                [cell hideBadge];
+                                
+                            }
+                            
+                        }];
+    
 }
 
 

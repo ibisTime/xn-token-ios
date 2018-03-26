@@ -82,8 +82,8 @@
     NSArray *coins = [CoinUtil shouldDisplayOriginalCoinArray];
     
     //预设一个
-    //    self.firstCoin =  self.firstCoin ? : kETH;
-    self.currentCurrency = coins[0];
+//    self.firstCoin =  self.firstCoin ? : coins[0];
+    self.currentCurrency = self.firstCoin ? : coins[0];
     //     [[IQKeyboardManager sharedManager] considerToolbarPreviousNextInViewClass:[BMEnableIQKeyboardView class]];
     NSString *tradeType = self.VCType == TLPublishVCTypeSell ? kPublishTradeTypeSell : kPublishTradeTypeBuy;
     //必须先进行配置

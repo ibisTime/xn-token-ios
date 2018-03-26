@@ -151,7 +151,7 @@
     
     UILabel *textLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:15.0];
     
-    textLbl.text = @"暂无消息哦";
+    textLbl.text = @"";
     
     textLbl.frame = CGRectMake(0, noticeIV.yy + 20, kScreenWidth, 15);
     

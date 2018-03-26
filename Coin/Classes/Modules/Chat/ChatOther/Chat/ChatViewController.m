@@ -202,7 +202,7 @@
         [ws modifySendInputStatus:SendInputStatus_Send];
         [ws onReceiveNewMsg:imamsgList succ:succ];
         [ws updateMessageList];
-        [weakSelf hasReceiverMsg:imamsgList];
+//        [weakSelf hasReceiverMsg:imamsgList];
     };
 
     [self addChatSettingItem];

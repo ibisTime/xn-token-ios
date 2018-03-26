@@ -24,6 +24,8 @@ typedef void(^DidSelectBlock2)(NSInteger index,NSString *tagName);
 @property (nonatomic,copy) DidSelectBlock selectBlock;
 @property (nonatomic, copy) DidSelectBlock2 selectBlock2;
 
+@property (nonatomic, assign) NSInteger selectIndex;
+
 //title
 @property (nonatomic, strong) NSString *title;
 

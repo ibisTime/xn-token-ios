@@ -40,8 +40,10 @@
 @interface TLPushVC ()<SegmentDelegate, RefreshDelegate, UIScrollViewDelegate>
 
 @property (nonatomic, strong) NSMutableArray <CoinModel *>*coins;
+
+@property (nonatomic, strong) UIView *topView;
 //货币切换
-@property (nonatomic, strong) CoinChangeView *changeView;
+@property (nonatomic, strong) CoinChangeView *coinChangeView;
 ////筛选
 @property (nonatomic, strong) FilterView *filterPicker;
 //
@@ -66,6 +68,8 @@
 @property (nonatomic, strong) PublishTipView *tipView;
 @property (nonatomic, assign) BOOL isFirst;
 
+@property (nonatomic, assign) NSInteger curSelectIndex;
+
 //交易方式(买币和卖币)
 @property (nonatomic, copy) NSString *tradeType;
 
@@ -80,11 +84,11 @@
     
     [super viewWillAppear:animated];
     //
-    if (self.advertises && self.advertises.count > 0) {
-        
-        [self.tableView reloadData_tl];
-        
-    }
+//    if (self.advertises && self.advertises.count > 0) {
+//        
+//        [self.tableView reloadData_tl];
+//        
+//    }
     
     //
     if (self.isFirst) {
@@ -113,49 +117,27 @@
     
     self.title = @"PUSH";
     
-    TLNetworking *http = [TLNetworking new];
-    http.code = @"802267";
+    self.curSelectIndex = 0;
     
-    http.parameters[@"status"] = @"0";
+    self.isFirst = YES;
     
-    [http postWithSuccess:^(id responseObject) {
-        
-        NSMutableArray *coinList = responseObject[@"data"];
-        
-        [[CoinModel coin] saveOpenCoinList:coinList];
-        
-        self.isFirst = YES;
-        
-//        [self navBarUI];
-        
-        [self setUpUI];
-        //获取广告
-        [self requestAdvetiseList];
-        //添加通知
-        [self addNotification];
-        
-        // 定时器去刷新广告列表
-        self.timer = [NSTimer scheduledTimerWithTimeInterval:5*60
-                                                      target:self
-                                                    selector:@selector(refreshAds)
-                                                    userInfo:nil
-                                                     repeats:YES];
-        
-        
-        
-        
-    } failure:^(NSError *error) {
-        NSLog(@"787878");
-        
-    }];
+    //        [self navBarUI];
     
+    [self setUpUI];
+    //获取广告
+    [self requestAdvetiseList];
+    //添加通知
+    [self addNotification];
+    
+    // 定时器去刷新广告列表
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:5*60
+                                                  target:self
+                                                selector:@selector(refreshAds)
+                                                userInfo:nil
+                                                 repeats:YES];
+
+
 }
-
-
-
-
-
-
 
 - (void)refreshAds {
     
@@ -259,7 +241,7 @@
     
         [coinChangeView addTarget:self action:@selector(changeCoin) forControlEvents:UIControlEventTouchUpInside];
     
-        self.changeView = coinChangeView;
+        self.coinChangeView = coinChangeView;
     
         self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:coinChangeView];
     
@@ -275,63 +257,65 @@
 
 - (void)setUpUI {
     
-    UIView *topView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 45)];
-    topView.backgroundColor = [UIColor whiteColor];
+    _topView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 45)];
+    _topView.backgroundColor = [UIColor whiteColor];
 //    [topView mas_makeConstraints:^(MASConstraintMaker *make) {
 //        make.centerX.mas_equalTo(self.view.centerX);
 //    }];
 //    [self.view addSubview:topView];
     
     //币种切换
-    CoinChangeView *coinChangeView = [[CoinChangeView alloc] initWithFrame:CGRectMake(15, 0, 68, topView.height)];
+    _coinChangeView = [[CoinChangeView alloc] initWithFrame:CGRectMake(15, 0, 68, _topView.height)];
     
     NSArray *textArr = [CoinUtil shouldDisplayTokenCoinArray];
     
-    coinChangeView.title = textArr[0];
+    if (textArr.count > 0) {
+        _coinChangeView.title = textArr[0];
+    }
     
-    [coinChangeView addTarget:self action:@selector(changeCoin) forControlEvents:UIControlEventTouchUpInside];
+    [_coinChangeView addTarget:self action:@selector(changeCoin) forControlEvents:UIControlEventTouchUpInside];
     
-    self.changeView = coinChangeView;
+    self.coinChangeView = _coinChangeView;
     
-    [topView addSubview:coinChangeView];
+    [_topView addSubview:_coinChangeView];
     
     //更多币种label
     CGFloat moreLabelWidth = 46;
-    TLBaseLabel *moreLabel = [TLBaseLabel labelWithFrame:CGRectMake(coinChangeView.right + 10, 0, moreLabelWidth, coinChangeView.height)
+    TLBaseLabel *moreLabel = [TLBaseLabel labelWithFrame:CGRectMake(_coinChangeView.right + 10, 0, moreLabelWidth, _coinChangeView.height)
                                             textAligment:NSTextAlignmentCenter
                                          backgroundColor:[UIColor whiteColor]
                                                     font:[UIFont systemFontOfSize:11]
                                                textColor:[UIColor textColor2]];
     moreLabel.text = [LangSwitcher switchLang:@"更多币种" key:nil];
-    [topView addSubview:moreLabel];
+    [_topView addSubview:moreLabel];
     
     //最新成交价文字
     CGFloat newPriceTWidth = 58;
     TLBaseLabel *newPriceT = [TLBaseLabel labelWithFrame:CGRectMake(SCREEN_WIDTH - newPriceTWidth - 15,
                                                                     0,
                                                                     newPriceTWidth,
-                                                                    coinChangeView.height)
+                                                                    _coinChangeView.height)
                                             textAligment:NSTextAlignmentRight
                                          backgroundColor:[UIColor whiteColor]
                                                     font:[UIFont systemFontOfSize:11]
                                                textColor:[UIColor themeColor]];
     newPriceT.text = [LangSwitcher switchLang:@"最新成交价" key:nil];
-    [topView addSubview:newPriceT];
+    [_topView addSubview:newPriceT];
     
     //最新成交价格
-    CGFloat newPriceWidth = SCREEN_WIDTH - coinChangeView.width - moreLabel.width - newPriceT.width - 60;
-    self.lastestPrice = [TLBaseLabel labelWithFrame:CGRectMake(coinChangeView.width + moreLabel.width + 35,
+    CGFloat newPriceWidth = SCREEN_WIDTH - _coinChangeView.width - moreLabel.width - newPriceT.width - 60;
+    self.lastestPrice = [TLBaseLabel labelWithFrame:CGRectMake(_coinChangeView.width + moreLabel.width + 35,
                                                                    0,
                                                                    newPriceWidth,
-                                                                   coinChangeView.height)
+                                                                   _coinChangeView.height)
                                            textAligment:NSTextAlignmentRight
                                         backgroundColor:[UIColor whiteColor]
                                                    font:[UIFont systemFontOfSize:18]
                                               textColor:[UIColor themeColor]];
     self.lastestPrice.text = [LangSwitcher switchLang:@"￥0.00" key:nil];
-    [topView addSubview:self.lastestPrice];
+    [_topView addSubview:self.lastestPrice];
     
-    [self.view addSubview:topView];
+    [self.view addSubview:_topView];
     
     //交易列表
     self.tradeType = kAdsTradeTypeSell;
@@ -340,7 +324,7 @@
     self.tableView.refreshDelegate = self;
     [self.view addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(topView.mas_bottom);
+        make.top.mas_equalTo(_topView.mas_bottom);
         make.bottom.mas_equalTo(self.view.mas_bottom);
         make.left.mas_equalTo(self.view.mas_left);
         make.right.mas_equalTo(self.view.mas_right);
@@ -415,20 +399,15 @@
         
         CoinWeakSelf;
         
-        NSMutableArray<CoinModel *> *tokens = [CoinUtil shouldDisplayTokenCoinModelArray];
-        NSMutableArray *textArr = [[NSMutableArray alloc] init];
-        for (CoinModel *coinModel in tokens) {
-            [textArr addObject:coinModel.symbol];
-        }
-        
+        NSArray *textArr = [CoinUtil shouldDisplayTokenCoinArray];
         _filterPicker = [[FilterView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
         _filterPicker.title = @"请选择货币类型";
         _filterPicker.tagNames = textArr;
         _filterPicker.selectBlock = ^(NSInteger index) {
             
-            [CoinService shareService].currentToken = tokens[index];
-            weakSelf.changeView.title = textArr[index];
-            [weakSelf changePageHelperCoin:textArr[index] pageHelper:weakSelf.helper];
+            weakSelf.curSelectIndex = index;
+            weakSelf.coinChangeView.title = textArr[index];
+//            [weakSelf changePageHelperCoin:textArr[index] pageHelper:weakSelf.helper];
             [weakSelf.tableView beginRefreshing];
             
         };
@@ -447,7 +426,7 @@
                                                object:nil];
     
     //信任/取消信任
-    //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshData) name:kTrustNotification object:nil];
+//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshData) name:kTrustNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(userLoginOut)
                                                  name:kUserLoginOutNotification
@@ -540,14 +519,14 @@
         [CoinService shareService].currentToken = coin;
         [self changePageHelperCoin:[CoinService shareService].currentToken.symbol
                         pageHelper:self.helper];
-        self.changeView.title = [CoinService shareService].currentToken.symbol;
+        self.coinChangeView.title = [CoinService shareService].currentToken.symbol;
         
         //左右切换
         NSInteger index = [notiObj.subContent integerValue];
         index = index == 1 ? 0 : 1;
         [self.labelUnil selectSortBarWithIndex:index];
         
-        
+        [self refreshData];
     }
     
 }
@@ -565,7 +544,7 @@
     
 }
 
-- (void)getLastestPrice {
+- (void)getLastestPrice:(NSString *)symbol{
     
     //最新成交价
     __weak typeof(self) weakSelf = self;
@@ -573,7 +552,8 @@
     TLNetworking *http = [TLNetworking new];
     //806052
     http.code = @"625283";
-    http.parameters[@"tradeCoin"] = [CoinService shareService].currentToken.symbol;
+    http.parameters[@"tradeCoin"] = symbol;
+    http.isUploadToken = NO;
     
     [http postWithSuccess:^(id responseObject) {
         
@@ -594,8 +574,9 @@
     helper.code = @"625228";
     helper.start = 1;
     helper.limit = 20;
+    helper.isUploadToken = NO;
     
-    [self changePageHelperCoin:[CoinService shareService].currentToken.symbol pageHelper:helper];
+    [self changePageHelperCoin:[CoinUtil shouldDisplayTokenCoinArray][self.curSelectIndex] pageHelper:helper];
     helper.parameters[@"tradeType"] = self.tradeType;
     helper.tableView = self.tableView;
     self.helper = helper;
@@ -604,22 +585,41 @@
     
     [self.tableView addRefreshAction:^{
         
-        [weakSelf getLastestPrice];
-        
-        [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
+       
+        [CoinUtil refreshOpenCoinList:^{
             
-            weakSelf.advertises = objs;
-            weakSelf.tableView.advertises = objs;
-            [weakSelf.tableView reloadData_tl];
+            weakSelf.coins = [CoinUtil shouldDisplayTokenCoinModelArray];
+            [weakSelf.filterPicker setTagNames:[CoinUtil shouldDisplayTokenCoinArray]];
+            if (weakSelf.curSelectIndex >= self.coins.count) {
+                weakSelf.curSelectIndex = 0;
+            }
+            CoinModel *defaultCoin = [CoinUtil shouldDisplayTokenCoinModelArray][weakSelf.curSelectIndex];
+            weakSelf.filterPicker.title = defaultCoin.symbol;
+            weakSelf.coinChangeView.title = defaultCoin.symbol;
+            //        [self refreshData];
             
-        } failure:^(NSError *error) {
+            [weakSelf getLastestPrice:defaultCoin.symbol];
             
-            //            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            //
-            //                [weakSelf requestAdvetiseList];
-            //            });
+            [weakSelf changePageHelperCoin:[CoinUtil shouldDisplayTokenCoinArray][weakSelf.curSelectIndex] pageHelper:helper];
+            
+            [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
+                
+                weakSelf.advertises = objs;
+                weakSelf.tableView.advertises = objs;
+                [weakSelf.tableView reloadData_tl];
+                
+            } failure:^(NSError *error) {
+                
+                //            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                //
+                //                [weakSelf requestAdvetiseList];
+                //            });
+                
+            }];
             
         }];
+        
+       
     }];
     
     [self.tableView beginRefreshing];
@@ -678,7 +678,7 @@
 #pragma mark - RefreshDelegate
 - (void)refreshTableView:(TLTableView *)refreshTableview didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    AdvertiseModel *advertiseModel = self.advertises[indexPath.row];
+    AdvertiseModel *advertiseModel = self.advertises[indexPath.section];
     [PushAdsService pushToAdsDetail:advertiseModel currentVC:self];
 }
 

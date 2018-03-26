@@ -74,6 +74,12 @@
     
 }
 
+- (void)refreshOpenCoinList {
+    [CoinUtil refreshOpenCoinList:^{
+       
+    }];
+}
+
 #pragma mark - Init
 
 - (WalletHeaderView *)headerView {
@@ -176,19 +182,22 @@
     [helper modelClass:[CurrencyModel class]];
     [self.tableView addRefreshAction:^{
         
+        [weakSelf refreshOpenCoinList];
+        
         [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
             
             //去除没有的币种
             
+            
             NSMutableArray <CurrencyModel *> *shouldDisplayCoins = [[NSMutableArray alloc] init];
             [objs enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                
+
                 CurrencyModel *currencyModel = (CurrencyModel *)obj;
 //                if ([[CoinUtil shouldDisplayCoinArray] indexOfObject:currencyModel.currency ] != NSNotFound ) {
-                
+
                     [shouldDisplayCoins addObject:currencyModel];
 //                }
-                
+
             }];
             
             //
