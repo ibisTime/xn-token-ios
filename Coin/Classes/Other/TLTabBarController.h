@@ -10,6 +10,6 @@
 
 @interface TLTabBarController : UITabBarController
 
-- (void)pushToChatViewControllerWith:(IMAUser *)user;
+//- (void)pushToChatViewControllerWith:(IMAUser *)user;
 
 @end
