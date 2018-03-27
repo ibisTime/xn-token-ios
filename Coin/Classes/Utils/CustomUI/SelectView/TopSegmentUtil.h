@@ -55,6 +55,9 @@ typedef void (^ClickBtnBlock)(NSInteger index);
 @property(nonatomic,strong) UIFont  *titleFont;
 //segment 默认选中按钮/视图 1
 @property(nonatomic,assign) NSInteger defaultSelectIndex;
+
+@property(nonatomic,assign) NSInteger selectIndex;
+
 //segment 点击按钮触发事件代理
 @property(nonatomic, assign) id<SegmentDelegate> delegate;
 //底部线条长度

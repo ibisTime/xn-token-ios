@@ -485,6 +485,7 @@
 		4C24381F20657535003B35F3 /* MoreProfitCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C24381E20657535003B35F3 /* MoreProfitCell.m */; };
 		4C24382220657589003B35F3 /* ProfitModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C24382120657589003B35F3 /* ProfitModel.m */; };
 		4C2438252066C2F1003B35F3 /* TopSegmentUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C2438232066C2F0003B35F3 /* TopSegmentUtil.m */; };
+		4C53C7692069F30400DC5A5B /* UnReadModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C53C7682069F30400DC5A5B /* UnReadModel.m */; };
 		4C5D31692064C7B2001CE102 /* PushTradeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5D31682064C7B2001CE102 /* PushTradeCell.m */; };
 		4C5D316C2064C7BD001CE102 /* PushTradeTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5D316A2064C7BD001CE102 /* PushTradeTableView.m */; };
 		4C5D316F2064C97B001CE102 /* PushUserPhotoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5D316D2064C97A001CE102 /* PushUserPhotoView.m */; };
@@ -1497,6 +1498,8 @@
 		4C24382120657589003B35F3 /* ProfitModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProfitModel.m; sourceTree = "<group>"; };
 		4C2438232066C2F0003B35F3 /* TopSegmentUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopSegmentUtil.m; sourceTree = "<group>"; };
 		4C2438242066C2F1003B35F3 /* TopSegmentUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopSegmentUtil.h; sourceTree = "<group>"; };
+		4C53C7672069F30400DC5A5B /* UnReadModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UnReadModel.h; sourceTree = "<group>"; };
+		4C53C7682069F30400DC5A5B /* UnReadModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UnReadModel.m; sourceTree = "<group>"; };
 		4C5D31672064C7B1001CE102 /* PushTradeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PushTradeCell.h; sourceTree = "<group>"; };
 		4C5D31682064C7B2001CE102 /* PushTradeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PushTradeCell.m; sourceTree = "<group>"; };
 		4C5D316A2064C7BD001CE102 /* PushTradeTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PushTradeTableView.m; sourceTree = "<group>"; };
@@ -3762,6 +3765,8 @@
 			children = (
 				2182D2EB1FC7E776008EDCE4 /* OrderModel.h */,
 				2182D2EC1FC7E776008EDCE4 /* OrderModel.m */,
+				4C53C7672069F30400DC5A5B /* UnReadModel.h */,
+				4C53C7682069F30400DC5A5B /* UnReadModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -4512,6 +4517,7 @@
 				2EE360E21FFA09A800A5C3EB /* MyChatToolBarView.m in Sources */,
 				21205CEF1FCD5F5E003C6C7C /* InviteFriendVC.m in Sources */,
 				211C04231FC6604800E51FCF /* UICollectionViewController+ADScaleTransition.m in Sources */,
+				4C53C7692069F30400DC5A5B /* UnReadModel.m in Sources */,
 				211DE6A11FB58B4C002FCF3D /* TLTimeButton.m in Sources */,
 				211A34F71FB4328800FEB71F /* SettingTableView.m in Sources */,
 				211C03FD1FC6604800E51FCF /* NSObject+CommonBlock.m in Sources */,

@@ -33,6 +33,10 @@ typedef void (^SortSelectBlock) (NSInteger index);
 
 - (instancetype)initWithFrame:(CGRect)frame sortNames:(NSArray*)sortNames sortBlock:(SortSelectBlock)sortBlock;
 
+- (void)showBadgeOnItemIndex:(NSInteger)index;   //显示小红点
 
+- (void)hideBadgeOnItemIndex:(NSInteger)index; //隐藏小红点
+
+- (void)showBadgeOn:(NSArray<NSString *> *)titleArray;
 
 @end

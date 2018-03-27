@@ -21,6 +21,8 @@
 #import "CoinModel.h"
 #import "CoinUtil.h"
 #import "CoinService.h"
+#import "UnReadModel.h"
+#import "TLPageDataHelper.h"
 
 #define SHOW_BADGE_LEFT_INDEX 0
 #define SHOW_BADGE_RIGHT_INDEX 1
@@ -38,6 +40,10 @@
 @property (nonatomic, strong) SelectScrollView *selectScrollView;
 @property (nonatomic, strong) NSMutableArray <CoinModel *>*coins;
 
+//未读消息标识
+@property (nonatomic, strong) UnReadModel *ingUnReadModel;
+@property (nonatomic, strong) UnReadModel *endUnReadModel;
+
 
 @end
 
@@ -49,6 +55,18 @@
     
     if (!_currentCoin) {
         _currentCoin = [CoinUtil shouldDisplayCoinArray][0];
+    }
+    
+    if (!_ingUnReadModel) {
+        _ingUnReadModel = [[UnReadModel alloc] init];
+        _ingUnReadModel.unReadFlag = NO;
+        _ingUnReadModel.unReadCurrencyList = [[NSMutableArray alloc] init];
+    }
+    
+    if (!_endUnReadModel) {
+        _endUnReadModel = [[UnReadModel alloc] init];
+        _endUnReadModel.unReadFlag = NO;
+        _endUnReadModel.unReadCurrencyList = [[NSMutableArray alloc] init];
     }
     
     //中间切换
@@ -175,6 +193,12 @@
     
 }
 
+- (void)changeSelectScrollViewMsgRedHintToZero {
+    
+//    [self.selectScrollView show];
+    
+}
+
 - (void)changeLeftTopMsgRedHintToHave {
     
     [self.segmentUtil showBadgeOnItemIndex:SHOW_BADGE_LEFT_INDEX];
@@ -186,6 +210,14 @@
     [self.segmentUtil showBadgeOnItemIndex:SHOW_BADGE_RIGHT_INDEX];
     
 }
+
+- (void)changeSelectScrollViewMsgRedHintToHave {
+    
+//    [self.selectScrollView ];
+    
+}
+
+
 
 - (void)orderRefresh {
     
@@ -222,50 +254,172 @@
     
 }
 
+//- (void)asyncHandleTopUnreadMsgHint {
+//
+//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+//
+//        __block int leftUnReadCount = 0;
+//        __block int rightUnReadCount = 0;
+//
+//        [self.ingOrderListVC.orderGroups enumerateObjectsUsingBlock:^(OrderModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+//
+//            TIMConversation *conversation =  [[TIMManager sharedInstance] getConversation:TIM_GROUP receiver:obj.code];
+//            leftUnReadCount += conversation.getUnReadMessageNum;
+//
+//        }];
+//
+//        [self.endOrderListVC.orderGroups enumerateObjectsUsingBlock:^(OrderModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+//
+//            TIMConversation *conversation =  [[TIMManager sharedInstance] getConversation:TIM_GROUP receiver:obj.code];
+//            rightUnReadCount += conversation.getUnReadMessageNum;
+//
+//        }];
+//
+//        //
+//        dispatch_async(dispatch_get_main_queue() , ^{
+//
+//            if(leftUnReadCount <= 0) {
+//
+//                [self changeLeftTopMsgRedHintToZero];
+//            } else {
+//                [self changeLeftTopMsgRedHintToHave];
+//
+//            }
+//
+//            if(rightUnReadCount <= 0) {
+//
+//                [self changeRightTopMsgRedHintToZero];
+//
+//            } else {
+//
+//                [self changeRightTopMsgRedHintToHave];
+//            }
+//
+//        });
+//
+//    });
+//
+//}
+
 - (void)asyncHandleTopUnreadMsgHint {
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
         
-        __block int leftUnReadCount = 0;
-        __block int rightUnReadCount = 0;
+        //查询用户所有订单并遍历是否未读消息
+
+        TLPageDataHelper *helper = [[TLPageDataHelper alloc] init];
+        helper.code = @"625250";
+        helper.start = 1;
+        helper.limit = 999999999; //为了列表查
+        helper.parameters[@"tradeCurrency"] = @"CNY";
+        [helper modelClass:[OrderModel class]];
+        //切换用户时外部会去更新
+        helper.parameters[@"belongUser"] = [TLUser user].userId;
         
-        [self.ingOrderListVC.orderGroups enumerateObjectsUsingBlock:^(OrderModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
             
-            TIMConversation *conversation =  [[TIMManager sharedInstance] getConversation:TIM_GROUP receiver:obj.code];
-            leftUnReadCount += conversation.getUnReadMessageNum;
+            //遍历订单列表
+            //1、计算进行中订单的未读消息总数，状态是进行中，币种不传 leftUnReadCount
+            //2、计算结束订单的未读消息总数，状态是已结束，币种不传 rightUnReadCount
+            //3、计算单个币种进行中订单的未读消息总数，状态是进行中，对应币种 leftUnReadCount_ETH leftUnReadCount_SC ...更多币种
+            //4、计算单个币种已结束订单的未读消息总数，状态是已结束，对应币种 rightUnReadCount_ETH rightUnReadCount_SC ...更多币种
+            
+            __block int ingUnReadCount = 0;
+            __block int endUnReadCount = 0;
+            
+            self.ingUnReadModel.unReadFlag = NO;
+            self.endUnReadModel.unReadFlag = NO;
+            [self.ingUnReadModel.unReadCurrencyList removeAllObjects];
+            [self.endUnReadModel.unReadCurrencyList removeAllObjects];
+            
+            [objs enumerateObjectsUsingBlock:^(OrderModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                
+                if ([[OrderModel ingStatusList] indexOfObject:obj.status] != NSNotFound) {
+                    
+                    TIMConversation *conversation =  [[TIMManager sharedInstance] getConversation:TIM_GROUP receiver:obj.code];
+                    
+                    int unReadMessageNum = conversation.getUnReadMessageNum;
+                    if (unReadMessageNum > 0) {
+                        ingUnReadCount += unReadMessageNum;
+                        [self.ingUnReadModel.unReadCurrencyList addObject:obj.tradeCoin];
+                    }
+                    
+                }
+                
+                if ([[OrderModel endStatusList] indexOfObject:obj.status] != NSNotFound) {
+                    
+                    TIMConversation *conversation =  [[TIMManager sharedInstance] getConversation:TIM_GROUP receiver:obj.code];
+                    
+                    int unReadMessageNum = conversation.getUnReadMessageNum;
+                    if (unReadMessageNum > 0) {
+                        endUnReadCount += unReadMessageNum;
+                        [self.endUnReadModel.unReadCurrencyList addObject:obj.tradeCoin];
+                    }
+                    
+                }
+                
+            }];
+            
+            if (ingUnReadCount > 0) {
+                self.ingUnReadModel.unReadFlag = YES;
+            }
+            
+            if (endUnReadCount > 0) {
+                self.endUnReadModel.unReadFlag = YES;
+            }
+            
+            dispatch_async(dispatch_get_main_queue() , ^{
+                
+                if(self.ingUnReadModel.unReadFlag) {
+                    
+                    [self changeLeftTopMsgRedHintToHave];
+                    
+                    
+                } else {
+                    
+                    [self changeLeftTopMsgRedHintToZero];
+                    
+                }
+                
+                if(self.endUnReadModel.unReadFlag) {
+                    
+                    [self changeRightTopMsgRedHintToHave];
+                    
+                } else {
+                    
+                    [self changeRightTopMsgRedHintToZero];
+                    
+                }
+                
+                if (self.segmentUtil.selectIndex == 1) {
+                    
+                    [self.selectScrollView.headView showBadgeOn:self.ingUnReadModel.unReadCurrencyList];
+                    
+                } else {
+                    
+                    [self.selectScrollView.headView showBadgeOn:self.endUnReadModel.unReadCurrencyList];
+                    
+                }
+
+                
+            });
+            
+        } failure:^(NSError *error) {
             
         }];
         
-        [self.endOrderListVC.orderGroups enumerateObjectsUsingBlock:^(OrderModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            
-            TIMConversation *conversation =  [[TIMManager sharedInstance] getConversation:TIM_GROUP receiver:obj.code];
-            rightUnReadCount += conversation.getUnReadMessageNum;
-            
-        }];
         
-        //
-        dispatch_async(dispatch_get_main_queue() , ^{
-            
-            if(leftUnReadCount <= 0) {
-                
-                [self changeLeftTopMsgRedHintToZero];
-            } else {
-                [self changeLeftTopMsgRedHintToHave];
-                
-            }
-            
-            if(rightUnReadCount <= 0) {
-                
-                [self changeRightTopMsgRedHintToZero];
-                
-            } else {
-                
-                [self changeRightTopMsgRedHintToHave];
-            }
-            
-        });
         
     });
+    
+}
+
+
+
+#pragma mark- 获取用户所有的订单列表，计算消息红点
+- (void)queryOrderList {
+    
+   
     
 }
 
@@ -280,9 +434,20 @@
 #pragma mark - SegmentDelegate, 顶部切换
 -(void)segment:(TopSegmentUtil *)segment didSelectIndex:(NSInteger)index {
     
+    segment.selectIndex = index;
+    
     [self.switchScrollView setContentOffset:CGPointMake((index - 1) * self.switchScrollView.width, 0)];
     [self.segmentUtil dyDidScrollChangeTheTitleColorWithContentOfSet:(index-1)*kScreenWidth];
     
+    if (index == 1) {
+        
+        [self.selectScrollView.headView showBadgeOn:self.ingUnReadModel.unReadCurrencyList];
+        
+    } else {
+        
+        [self.selectScrollView.headView showBadgeOn:self.endUnReadModel.unReadCurrencyList];
+        
+    }
 }
 
 
@@ -292,7 +457,7 @@
     self.ingOrderListVC = [[OrderListVC alloc] init];
     self.ingOrderListVC.delegate = self;
     self.ingOrderListVC.statusList = [OrderModel ingStatusList];
-    self.ingOrderListVC.tradeCoin = _currentCoin;
+    self.ingOrderListVC.tradeCoin = self.currentCoin;
     self.ingOrderListVC.view.frame = CGRectMake(0,0,self.switchScrollView.width,self.switchScrollView.height);
     [self addChildViewController:self.ingOrderListVC];
     [self.switchScrollView addSubview:self.ingOrderListVC.view];
@@ -301,7 +466,7 @@
     self.endOrderListVC = [[OrderListVC alloc] init];
     self.endOrderListVC.delegate = self;
     self.endOrderListVC.statusList = [OrderModel endStatusList];
-    self.endOrderListVC.tradeCoin = _currentCoin;
+    self.endOrderListVC.tradeCoin = self.currentCoin;
     self.endOrderListVC.view.frame = CGRectMake(self.switchScrollView.width,0,self.switchScrollView.width,self.switchScrollView.height);
     [self addChildViewController:self.endOrderListVC];
     [self.switchScrollView addSubview:self.endOrderListVC.view];
@@ -325,6 +490,8 @@
     self.segmentUtil.msgNormalColor = kThemeColor;
     self.segmentUtil.msgSelectColor = kWhiteColor;
     self.segmentUtil.titleFont = Font(13.0);
+    self.segmentUtil.defaultSelectIndex = 1;
+    self.segmentUtil.selectIndex = 1;
     self.segmentUtil.titleArray = @[
                                   [LangSwitcher switchLang: @"进行中" key:nil],
                                   [LangSwitcher switchLang: @"已结束" key:nil]
@@ -372,7 +539,7 @@
             weakSelf.endOrderListVC.pageDataHelper.parameters[@"tradeCoin"] = currentCoin.symbol;
             
             [weakSelf orderRefresh];
-            [weakSelf asyncHandleTopUnreadMsgHint];
+//            [weakSelf asyncHandleTopUnreadMsgHint];
         }];
         
     }

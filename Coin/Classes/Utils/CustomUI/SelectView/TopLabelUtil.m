@@ -204,7 +204,7 @@
     UIButton *btn = [self viewWithTag:1000 + index];
     
     if (self.delegate && [self.delegate respondsToSelector:@selector(segment:didSelectIndex:)]) {
-        [self.delegate segment:self didSelectIndex:index + 1];
+        [self.delegate segment:self didSelectIndex:index+1];
     }
     
     if (btn.tag == self.defaultSelectIndex) {

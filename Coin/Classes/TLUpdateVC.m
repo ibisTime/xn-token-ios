@@ -84,7 +84,7 @@
         // CFBundleDisplayName
         
         // 本地版本
-        NSString *currentBuildVersion = [self buildVersion];
+        NSString *currentBuildVersion = [self version];
 
         //线上版本
         NSString *onlineBuildVersion = resutltDict[@"results"][0][@"version"];
@@ -119,9 +119,9 @@
 
 }
 
-- (NSString *)buildVersion {
+- (NSString *)version {
     
-   return [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
+   return [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
     
 }
 
@@ -139,7 +139,7 @@
         GengXinModel *update = [GengXinModel mj_objectWithKeyValues:responseObject[@"data"]];
         [self removePlaceholderView];
         //获取当前版本号
-        NSString *currentVersion = [self buildVersion];
+        NSString *currentVersion = [self version];
 
         if (![currentVersion isEqualToString:update.version]) {
 

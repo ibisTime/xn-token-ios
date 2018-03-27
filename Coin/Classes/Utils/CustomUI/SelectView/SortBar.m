@@ -82,7 +82,7 @@ static const float kAnimationdDuration = 0.3;
     
     for (NSInteger i = 0; i < _sortNames.count; i++) {
         
-        NSString *title = _sortNames[i];
+//        NSString *title = _sortNames[i];
         
 //        CGFloat btnW = title.length*btnFont + 30;
         
@@ -284,6 +284,60 @@ static const float kAnimationdDuration = 0.3;
     _sortBlock(curruntIndex);
     
     [self selectSortBarWithIndex:curruntIndex];
+}
+
+- (void)showBadgeOn:(NSArray<NSString *> *)titleArray{
+    
+    for (int i = 0; i < self.sortNames.count; i++) {
+        [self removeBadgeOnItemIndex:i];
+    }
+    
+    for (NSString *title in titleArray) {
+        if ([self.sortNames indexOfObject:title] != NSNotFound) {
+            [self showBadgeOnItemIndex:[self.sortNames indexOfObject:title]];
+        }
+    }
+}
+    
+- (void)showBadgeOnItemIndex:(NSInteger)index {
+    
+    //移除之前的小红点
+    [self removeBadgeOnItemIndex:index];
+    
+    CGFloat badgeW = 8;
+    
+    //新建小红点
+    UIView *badgeView = [[UIView alloc]init];
+    badgeView.tag = 888 + index;
+    badgeView.layer.cornerRadius = badgeW/2.0;
+    badgeView.backgroundColor = [UIColor redColor];
+    CGRect tabFrame = self.frame;
+    
+    //确定小红点的位置
+    float percentX = (index +0.65) / self.sortNames.count;
+    CGFloat x = ceilf(percentX * tabFrame.size.width);
+    CGFloat y = ceilf(0.1 * tabFrame.size.height);
+    badgeView.frame = CGRectMake(x, y, badgeW, badgeW);
+    [self addSubview:badgeView];
+    
+}
+
+- (void)hideBadgeOnItemIndex:(NSInteger)index{
+    
+    //移除小红点
+    [self removeBadgeOnItemIndex:index];
+    
+}
+
+- (void)removeBadgeOnItemIndex:(NSInteger)index{
+    
+    //按照tag值进行移除
+    
+    UIView *badgeView = [self viewWithTag:888+index];
+    if (badgeView) {
+        [badgeView removeFromSuperview];
+    }
+    
 }
 
 @end

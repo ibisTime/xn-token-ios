@@ -60,6 +60,7 @@
         self.bgNormalColor   = kThemeColor;
         self.msgNormalColor = kWhiteColor;
         self.defaultSelectIndex = 1;
+        self.selectIndex = 1;
         
         [self addSubview:self.bgScrollView];
         [self registerKVOPaths];
@@ -219,6 +220,8 @@
  */
 - (void)selectSortBarWithIndex:(NSInteger)index {
     
+    self.selectIndex = index;
+    
     UIButton *btn = [self viewWithTag:1000 + index];
     
     if (self.delegate && [self.delegate respondsToSelector:@selector(segment:didSelectIndex:)]) {
@@ -232,6 +235,28 @@
         btn.selected    = YES;
         self.selectBtn  = btn;
         self.defaultSelectIndex = btn.tag;
+        
+        //按照tag值进行移除
+        for (UIView *subView in self.subviews) {
+            
+            for (int i = 0; i < self.titleArray.count; i++) {
+                
+                if (subView.tag == 888+i) {
+                    
+                    if (i == index) {
+                        subView.backgroundColor = self.msgSelectColor;
+                    } else {
+                        subView.backgroundColor = self.msgNormalColor;
+                    }
+                    
+                    
+                }
+                
+            }
+            
+            
+        }
+        
     }
 }
 
@@ -319,7 +344,13 @@
     UIView *bageView = [[UIView alloc]init];
     bageView.tag = 888 + index;
     bageView.layer.cornerRadius = badgeW/2.0;
-    bageView.backgroundColor = kWhiteColor;
+    
+    if (self.selectIndex - 1  == index) {
+        bageView.backgroundColor = self.msgSelectColor;
+    } else {
+        bageView.backgroundColor = self.msgNormalColor;
+    }
+    
     CGRect tabFrame = self.frame;
     
     //确定小红点的位置
