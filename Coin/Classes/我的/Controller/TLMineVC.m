@@ -154,6 +154,8 @@
     [self addNotification];
     
     [self addUnReadMsgKVO];
+    
+    [self asyncHandleTopUnreadMsgHint];
 //    [self checkBage];
     
     // viewDidLoad __ todo
@@ -474,6 +476,8 @@
     
     self.headerView.levelBtn.hidden = [[TLUser user].level isEqualToString:kLevelOrdinaryTraders] ? YES : NO;
     
+    [self addUnReadMsgKVO];
+    
 }
 
 - (void)changeHeadIcon {
@@ -601,21 +605,36 @@
                         options:NSKeyValueObservingOptionNew
                           block:^(id observer, id object, NSDictionary *change) {
                               
-                              NSInteger count =  [IMAPlatform sharedInstance].conversationMgr.unReadMessageCount;
-                              
-                              MineCell *cell = [weakSelf.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
-                              
-                              if (count > 0) {
-                                  
-                                  [cell showBadge];
-                                  
-                              } else {
-                                  
-                                  [cell hideBadge];
-                                  
-                              }
+                              [weakSelf asyncHandleTopUnreadMsgHint];
                               
                           }];
+    
+}
+
+- (void)asyncHandleTopUnreadMsgHint {
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+        
+        NSInteger count =  [IMAPlatform sharedInstance].conversationMgr.unReadMessageCount;
+        
+        //
+        dispatch_async(dispatch_get_main_queue() , ^{
+            
+             MineCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
+            
+            if (count > 0) {
+                
+                [cell showBadge];
+                
+            } else {
+                
+                [cell hideBadge];
+                
+            }
+            
+        });
+        
+    });
     
 }
 

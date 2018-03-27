@@ -124,8 +124,13 @@
     //        [self navBarUI];
     
     [self setUpUI];
-    //获取广告
-    [self requestAdvetiseList];
+    
+    [CoinUtil refreshOpenCoinList:^{
+        //获取广告
+        [self requestAdvetiseList];
+    }];
+    
+    
     //添加通知
     [self addNotification];
     
@@ -211,14 +216,14 @@
             } else if(index == 2) {
                 
                 MyAdvertiseVC *advertiseVC = [MyAdvertiseVC new];
-                advertiseVC.defaultCoin = [CoinService shareService].currentToken.symbol;
+                advertiseVC.defaultCoin = [[CoinUtil shouldDisplayTokenCoinArray] objectAtIndex:weakSelf.curSelectIndex];
                 [weakSelf.navigationController pushViewController:advertiseVC animated:YES];
                 
                 
             } else if(index == 3) {
                 
                 TLOrderVC *orderVC = [TLOrderVC new];
-                orderVC.currentCoin = [CoinService shareService].currentToken.symbol;
+                orderVC.currentCoin = [[CoinUtil shouldDisplayTokenCoinArray] objectAtIndex:weakSelf.curSelectIndex];
                 [weakSelf.navigationController pushViewController:orderVC animated:YES];
                 
             }
