@@ -59,8 +59,8 @@
         self.titleNormalColor   = kWhiteColor;
         self.bgNormalColor   = kThemeColor;
         self.msgNormalColor = kWhiteColor;
-        self.defaultSelectIndex = 1;
-        self.selectIndex = 1;
+        self.defaultSelectIndex = 0;
+        self.selectIndex = 0;
         
         [self addSubview:self.bgScrollView];
         [self registerKVOPaths];
@@ -191,7 +191,7 @@
         [self.bgScrollView addSubview:btn];
         
         [self.btnArray addObject:btn];
-        if (self.defaultSelectIndex - 1 == i) {
+        if (self.defaultSelectIndex == i) {
             self.selectBtn  = btn;
             btn.selected    = YES;
 //            btn.transform   = CGAffineTransformMakeScale(1*BTN_BASE_SCALE+1, 1*BTN_BASE_SCALE+1);
@@ -225,7 +225,7 @@
     UIButton *btn = [self viewWithTag:1000 + index];
     
     if (self.delegate && [self.delegate respondsToSelector:@selector(segment:didSelectIndex:)]) {
-        [self.delegate segment:self didSelectIndex:index + 1];
+        [self.delegate segment:self didSelectIndex:index];
     }
     
     if (btn.tag == self.defaultSelectIndex) {
@@ -235,6 +235,7 @@
         btn.selected    = YES;
         self.selectBtn  = btn;
         self.defaultSelectIndex = btn.tag;
+        self.selectIndex = index;
         
         //按照tag值进行移除
         for (UIView *subView in self.subviews) {
@@ -345,7 +346,7 @@
     bageView.tag = 888 + index;
     bageView.layer.cornerRadius = badgeW/2.0;
     
-    if (self.selectIndex - 1  == index) {
+    if (self.selectIndex == index) {
         bageView.backgroundColor = self.msgSelectColor;
     } else {
         bageView.backgroundColor = self.msgNormalColor;

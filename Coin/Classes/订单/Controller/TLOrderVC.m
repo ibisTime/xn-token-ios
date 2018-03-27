@@ -391,7 +391,7 @@
                     
                 }
                 
-                if (self.segmentUtil.selectIndex == 1) {
+                if (self.segmentUtil.selectIndex == 0) {
                     
                     [self.selectScrollView.headView showBadgeOn:self.ingUnReadModel.unReadCurrencyList];
                     
@@ -434,12 +434,10 @@
 #pragma mark - SegmentDelegate, 顶部切换
 -(void)segment:(TopSegmentUtil *)segment didSelectIndex:(NSInteger)index {
     
-    segment.selectIndex = index;
-    
-    [self.switchScrollView setContentOffset:CGPointMake((index - 1) * self.switchScrollView.width, 0)];
+    [self.switchScrollView setContentOffset:CGPointMake((index) * self.switchScrollView.width, 0)];
     [self.segmentUtil dyDidScrollChangeTheTitleColorWithContentOfSet:(index-1)*kScreenWidth];
     
-    if (index == 1) {
+    if (index == 0) {
         
         [self.selectScrollView.headView showBadgeOn:self.ingUnReadModel.unReadCurrencyList];
         
@@ -490,8 +488,6 @@
     self.segmentUtil.msgNormalColor = kThemeColor;
     self.segmentUtil.msgSelectColor = kWhiteColor;
     self.segmentUtil.titleFont = Font(13.0);
-    self.segmentUtil.defaultSelectIndex = 1;
-    self.segmentUtil.selectIndex = 1;
     self.segmentUtil.titleArray = @[
                                   [LangSwitcher switchLang: @"进行中" key:nil],
                                   [LangSwitcher switchLang: @"已结束" key:nil]
