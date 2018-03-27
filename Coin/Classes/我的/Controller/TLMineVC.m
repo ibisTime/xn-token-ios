@@ -437,18 +437,20 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeInfo) name:kUserInfoChange object:nil];
     
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginOut) name:kUserLoginOutNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginOut) name:kUserLoginOutNotification object:nil];
 
 
 }
 
 //#pragma mark - Events
-//- (void)loginOut {
-//
+- (void)loginOut {
+
 //    [[TLUser user] loginOut];
-//
-//    [self changeInfo];
-//}
+
+    MineCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
+    [cell hideBadge];
+    
+}
 
 - (void)changeInfo {
     
