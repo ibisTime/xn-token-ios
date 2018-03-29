@@ -19,13 +19,13 @@
 #define kTestChatAttachment 1
 
 
-#import "CommonLibrary.h"
-
-#import "TIMAdapter.h"
-
-#import "ImageHeader.h"
-
-#import "ConstHeader.h"
+//#import "CommonLibrary.h"     czy
+//
+//#import "TIMAdapter.h"        czy
+//
+//#import "ImageHeader.h"       czy
+//
+//#import "ConstHeader.h"       czy
 
 //#import "IMCustomUIHeader.h"
 

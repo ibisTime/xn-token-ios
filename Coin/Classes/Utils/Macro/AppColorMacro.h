@@ -26,7 +26,7 @@
 
 #define kTabbarMainColor   [UIColor appTabbarMainColor]
 #define kTabbarBgColor     [UIColor appTabbarBgColor]
-
+#define kHexColor(color) [UIColor colorWithHexString:color]
 
 // 界面背景颜色
 #define RGB(r, g, b) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:1]

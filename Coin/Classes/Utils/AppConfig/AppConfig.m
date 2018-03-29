@@ -48,21 +48,20 @@ void TLLog(NSString *format, ...) {
         case RunEnvRelease: {
             
             self.qiniuDomain = @"http://ozfszueqz.bkt.clouddn.com";
-            self.addr = @"https://www.bcoin.im/api";
-            
+            self.addr = @"http://139.196.162.23:2101";
+
         }break;
             
         case RunEnvDev: {
-            //apidev.bcoin.im:4001
             self.qiniuDomain = @"http://ozfszueqz.bkt.clouddn.com";
-            self.addr = @"http://121.43.101.148:4001";
-            
+            self.addr = @"http://120.26.6.213:2101";
+
         }break;
             
         case RunEnvTest: {
             
             self.qiniuDomain = @"http://ozfszueqz.bkt.clouddn.com";
-            self.addr = @"http://47.96.161.183:4001";
+            self.addr = @"http://47.96.161.183:2101";
 
         } break;
             

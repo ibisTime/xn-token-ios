@@ -10,7 +10,7 @@
 
 #import "CoinHeader.h"
 #import <CDCommon/DeviceUtil.h>
-#import "MyUIDefine.h"
+//#import "MyUIDefine.h"    czy
 
 @implementation TLPlaceholderView
 
@@ -50,36 +50,41 @@
 }
 
 + (instancetype) placeholderViewWithImgAndText:(NSString *)text {
+    
+    return [self placeholderViewWithImage:@"暂无订单" text:text textColor:kTextColor2];
+}
 
++ (instancetype)placeholderViewWithImage:(NSString *)image text:(NSString *)text textColor:(UIColor *)textColor {
     
     TLPlaceholderView *placeholderView = [[TLPlaceholderView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - [DeviceUtil top64] - [DeviceUtil bottom49])];
     
-        UIImageView *orderIV = [[UIImageView alloc] init];
-        orderIV.image = kImage(@"暂无订单");
-        orderIV.centerX = kScreenWidth/2.0;
+    UIImageView *orderIV = [[UIImageView alloc] init];
+    orderIV.image = kImage(image);
+    orderIV.centerX = kScreenWidth/2.0;
     
-        [placeholderView addSubview:orderIV];
-        [orderIV mas_makeConstraints:^(MASConstraintMaker *make) {
+    [placeholderView addSubview:orderIV];
+    [orderIV mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.centerX.equalTo(@0);
+        make.top.equalTo(@90);
+        
+    }];
     
-            make.centerX.equalTo(@0);
-            make.top.equalTo(@90);
+    UILabel *textLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:textColor font:18.0];
     
-        }];
+    textLbl.text = [LangSwitcher switchLang:text
+                                        key:nil];
+    textLbl.textAlignment = NSTextAlignmentCenter;
     
-        UILabel *textLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor2 font:14.0];
-    
-        textLbl.text = [LangSwitcher switchLang:text
-                                            key:nil];
-        textLbl.textAlignment = NSTextAlignmentCenter;
-    
-        [placeholderView addSubview:textLbl];
-        [textLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-    
-            make.top.equalTo(orderIV.mas_bottom).offset(20);
-            make.centerX.equalTo(orderIV.mas_centerX);
-    
-        }];
+    [placeholderView addSubview:textLbl];
+    [textLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.top.equalTo(orderIV.mas_bottom).offset(25);
+        make.centerX.equalTo(orderIV.mas_centerX);
+        
+    }];
     
     return placeholderView;
 }
+
 @end

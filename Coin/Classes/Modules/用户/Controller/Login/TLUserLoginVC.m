@@ -23,10 +23,10 @@
 #import "AccountTf.h"
 
 //腾讯云
-#import "ChatManager.h"
-#import "IMModel.h"
-
-#import <ImSDK/TIMManager.h>
+//#import "ChatManager.h"   czy
+//#import "IMModel.h"
+//
+//#import <ImSDK/TIMManager.h>
 
 @interface TLUserLoginVC ()
 

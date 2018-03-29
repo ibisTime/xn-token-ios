@@ -12,6 +12,7 @@
 NSString *const kETH = @"ETH";
 NSString *const kSC = @"SC";
 NSString *const kBTC = @"BTC";
+NSString *const kOGC = @"OGC";
 
 NSString *const kCNY = @"CNY";
 
@@ -113,6 +114,23 @@ NSString *const kCNY = @"CNY";
     }
     
     return nil;
+}
+
++ (NSString *)mult1:(NSString *)mult1 mult2:(NSString *)mult2 scale:(NSUInteger)scale {
+    
+    NSDecimalNumber *mult1Num = [[NSDecimalNumber alloc] initWithString:mult1];
+    NSDecimalNumber *mult2Num = [[NSDecimalNumber alloc] initWithString:mult2];
+    NSDecimalNumber *result = [mult1Num decimalNumberByMultiplyingBy:mult2Num];
+    NSDecimalNumberHandler *roundUp = [NSDecimalNumberHandler
+                                       decimalNumberHandlerWithRoundingMode:NSRoundDown
+                                       scale:scale
+                                       raiseOnExactness:NO
+                                       raiseOnOverflow:NO
+                                       raiseOnUnderflow:NO
+                                       raiseOnDivideByZero:YES];
+    
+    return [[result decimalNumberByRoundingAccordingToBehavior:roundUp] stringValue];
+    
 }
 
 + (NSArray *)shouldDisplayCoinArray {

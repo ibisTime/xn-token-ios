@@ -16,4 +16,6 @@
 
 + (instancetype)placeholderViewWithImgAndText:(NSString *)text;
 
++ (instancetype)placeholderViewWithImage:(NSString *)image text:(NSString *)text textColor:(UIColor *)textColor;
+
 @end

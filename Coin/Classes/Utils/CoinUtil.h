@@ -35,6 +35,11 @@ typedef void (^RefreshOpenCoinListBlock)();
  */
 + (NSString *)convertToSysCoin:(NSString *)count coin:(NSString *)coin;
 
+/**
+ 两个数相乘，可以指定小数位数
+ */
++ (NSString *)mult1:(NSString *)mult1 mult2:(NSString *)mult2 scale:(NSUInteger)scale;
+
 + (NSArray *)shouldDisplayCoinArray;
 
 + (NSArray *)shouldDisplayOriginalCoinArray;
@@ -59,6 +64,7 @@ typedef void (^RefreshOpenCoinListBlock)();
 FOUNDATION_EXTERN NSString *const kBTC;
 FOUNDATION_EXTERN NSString *const kETH;
 FOUNDATION_EXTERN NSString *const kSC;
+FOUNDATION_EXTERN NSString *const kOGC;
 
 FOUNDATION_EXTERN NSString *const kCNY;
 

@@ -27,6 +27,8 @@ typedef UIButton* (^EdgeBlock) (CGFloat size);
 - (void)setTitleRight;
 //图片在右，文字在左
 - (void)setTitleLeft;
+//图片在上，文字在下
+- (void)setTitleBottom;
 //设置button的label宽度
 - (CGSize)boundingRectWithText:(NSString*)text Font:(UIFont*)font size:(CGSize)size;
 

@@ -15,9 +15,9 @@
 #import "TLUIHeader.h"
 #import "AppConfig.h"
 
-#import "ChatManager.h"
-#import "IMAHost+HostAPIs.h"
-#import "IMAHost.h"
+//#import "ChatManager.h"       czy
+//#import "IMAHost+HostAPIs.h"  czy
+//#import "IMAHost.h"           czy
 //#import "TabbarViewController.h"
 
 #define USER_ID_KEY @"user_id_key"

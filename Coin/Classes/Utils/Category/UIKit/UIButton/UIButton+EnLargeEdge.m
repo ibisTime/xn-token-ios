@@ -118,6 +118,12 @@ static char leftNameKey;
                                               width - self.imageView.width, 0, 0)];
 }
 
+- (void)setTitleBottom {
+    
+    [self setTitleEdgeInsets:UIEdgeInsetsMake(0, -self.imageView.frame.size.width, -self.imageView.frame.size.height - 20, 0)];
+    [self setImageEdgeInsets:UIEdgeInsetsMake(-self.titleLabel.intrinsicContentSize.height, 0, 0, -self.titleLabel.intrinsicContentSize.width)];
+}
+
 - (CGSize)boundingRectWithText:(NSString*)text Font:(UIFont*)font size:(CGSize)size {
     
     CGSize _size;

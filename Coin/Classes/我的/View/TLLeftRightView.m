@@ -8,10 +8,11 @@
 
 #import "TLLeftRightView.h"
 #import "UILabel+Extension.h"
-#import "UILabel+InitMethod.h"
+//#import "UILabel+InitMethod.h"    czy
 #import "UILable+convience.h"
 #import "UIColor+theme.h"
 #import "TLUIHeader.h"
+#import "AppColorMacro.h"
 
 @interface TLLeftRightView()
 

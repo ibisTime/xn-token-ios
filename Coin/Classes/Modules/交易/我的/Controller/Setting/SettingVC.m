@@ -219,26 +219,34 @@
     
     //先退出腾讯云，才算退出成功
     //im 退出
-    [TLProgressHUD showWithStatus:nil];
-    [[IMAPlatform sharedInstance] logout:^{
-        [TLProgressHUD dismiss];
+//    [TLProgressHUD showWithStatus:nil];
+//    [[IMAPlatform sharedInstance] logout:^{
+//        [TLProgressHUD dismiss];
+//
+//        [[NSNotificationCenter defaultCenter] postNotificationName:kUserLoginOutNotification object:nil];
+//
+//        TLTabBarController *tabbarVC = (TLTabBarController *)self.tabBarController;
+//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//
+//            tabbarVC.selectedIndex = 2;
+//            [self.navigationController popViewControllerAnimated:NO];
+//
+//        });
+//        //
+//    } fail:^(int code, NSString *msg) {
+//
+//        [TLAlert alertWithInfo:@"退出登录失败"];
+//
+//    }];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kUserLoginOutNotification object:nil];
+    
+    TLTabBarController *tabbarVC = (TLTabBarController *)self.tabBarController;
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         
-        [[NSNotificationCenter defaultCenter] postNotificationName:kUserLoginOutNotification object:nil];
+        tabbarVC.selectedIndex = 0;
+        [self.navigationController popViewControllerAnimated:NO];
         
-        TLTabBarController *tabbarVC = (TLTabBarController *)self.tabBarController;
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            
-            tabbarVC.selectedIndex = 2;
-            [self.navigationController popViewControllerAnimated:NO];
-            
-        });
-        //
-    } fail:^(int code, NSString *msg) {
-        
-        [TLAlert alertWithInfo:@"退出登录失败"];
-        
-    }];
-        
+    });
 }
 
 - (void)setGoogleAuth {

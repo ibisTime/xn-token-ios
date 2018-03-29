@@ -21,7 +21,7 @@
 + (NSString *)switchLang:(NSString *)content key:(NSString *)key {
     
     NSString *lang = [[NSUserDefaults standardUserDefaults] objectForKey:LANG];
-    if (!lang || [lang equalsString:SIMPLE]) {
+    if (!lang || [lang isEqualToString:SIMPLE]) {
         return content;
     }
 
@@ -36,11 +36,11 @@
         return LangTypeSimple;
     }
     
-    if ([lang equalsString:SIMPLE]) {
+    if ([lang isEqualToString:SIMPLE]) {
         return LangTypeSimple;
     }
     
-    if ([lang equalsString:TRADITIONAL]) {
+    if ([lang isEqualToString:TRADITIONAL]) {
         return LangTypeTraditional;
     }
 

@@ -28,17 +28,14 @@
     self.delegate = self;
 
     NSArray *titles = @[
-                        [LangSwitcher switchLang:@"行情" key:nil],
-                        [LangSwitcher switchLang:@"交易" key:nil],
-                        [LangSwitcher switchLang:@"PUSH" key:nil],
+                        [LangSwitcher switchLang:@"应用" key:nil],
                         [LangSwitcher switchLang:@"钱包" key:nil],
                         [LangSwitcher switchLang:@"我的" key:nil]
                         ];
-    NSArray *VCNames = @[@"QuotationVC",@"TLTransactionVC",@"TLPushVC",@"TLWalletVC",@"TLMineVC"];
+    NSArray *VCNames = @[@"HomeVC", @"TLWalletVC", @"TLMineVC"];
     
-    NSArray *imageNames = @[@"行情00",@"交易00",@"PUSH00",@"钱包00",@"我的00"];
-    NSArray *selectedImageNames = @[@"行情01",@"交易01",@"PUSH01",@"钱包01",@"我的01"];
-    
+    NSArray *imageNames = @[@"home", @"钱包00", @"我的00"];
+    NSArray *selectedImageNames = @[@"home_select", @"钱包01", @"我的01"];
     
     for (int i = 0; i < imageNames.count; i++) {
         
@@ -53,7 +50,7 @@
                     selectedImage:selectedImageNames[i]];
     }
     
-    self.selectedIndex =[AppConfig config].isUploadCheck ? 1 : 2;
+//    self.selectedIndex =[AppConfig config].isUploadCheck ? 1 : 2;
     
     //
     UIView *tabBarBgView = [[UIView alloc] initWithFrame:self.tabBar.bounds];
@@ -139,7 +136,7 @@
     if ([AppConfig config].isUploadCheck) {
         
         //判断点击的Controller是不是需要登录，如果是，那就登录
-        if((idx == 0 || idx == 2 || idx == 3) && ![TLUser user].isLogin) {
+        if((idx == 1 || idx == 2) && ![TLUser user].isLogin) {
             
             TLUserLoginVC *loginVC = [TLUserLoginVC new];
             
@@ -158,7 +155,7 @@
     } else {
         
         //判断点击的Controller是不是需要登录，如果是，那就登录
-        if((idx == 3 || idx == 4) && ![TLUser user].isLogin) {
+        if((idx == 1 || idx == 2) && ![TLUser user].isLogin) {
             
             TLUserLoginVC *loginVC = [TLUserLoginVC new];
             
@@ -175,7 +172,6 @@
         }
         
     }
- 
     
 }
 
