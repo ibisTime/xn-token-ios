@@ -21,6 +21,8 @@
 #import "GoodMallVC.h"
 #import "PosMiningVC.h"
 
+#import "CoinUtil.h"
+
 @interface HomeVC ()
 //头部
 @property (nonatomic, strong) HomeHeaderView *headerView;
@@ -35,9 +37,12 @@
     [super viewDidLoad];
     //
     self.title = [LangSwitcher switchLang:@"首页" key:nil];
-    //获取banner列表
-    [self requestBannerList];
     
+    [CoinUtil refreshOpenCoinList:^{
+        //获取banner列表
+        [self requestBannerList];
+    }];
+   
 }
 
 #pragma mark - Init
