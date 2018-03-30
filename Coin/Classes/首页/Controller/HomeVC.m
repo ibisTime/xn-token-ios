@@ -139,21 +139,32 @@
  */
 - (void)requestCountInfo {
     
-    TLNetworking *http = [TLNetworking new];
+//    TLNetworking *http = [TLNetworking new];
+//
+//    http.code = @"802108";
+//
+//    [http postWithSuccess:^(id responseObject) {
+//
+//        CountInfoModel *countInfo = [CountInfoModel mj_objectWithKeyValues:responseObject[@"data"]];
+//
+//        self.headerView.countInfo = countInfo;
+//
+//        [TLProgressHUD dismiss];
+//
+//    } failure:^(NSError *error) {
+//
+//    }];
     
-    http.code = @"802108";
+    /*未完成功能，模拟数据*/
+    CountInfoModel *countInfo = [[CountInfoModel alloc] init];
+    countInfo.initialBalance = @"1000";
+    countInfo.useBalance = @"100";
+    countInfo.useRate = @"0.1";
     
-    [http postWithSuccess:^(id responseObject) {
-        
-        CountInfoModel *countInfo = [CountInfoModel mj_objectWithKeyValues:responseObject[@"data"]];
-        
-        self.headerView.countInfo = countInfo;
-        
-        [TLProgressHUD dismiss];
-
-    } failure:^(NSError *error) {
-        
-    }];
+    self.headerView.countInfo = countInfo;
+    
+    [TLProgressHUD dismiss];
+    
 }
 
 - (void)didReceiveMemoryWarning {
