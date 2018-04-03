@@ -91,13 +91,19 @@
     
     CoinWeakSelf;
     
+    NSString *symbol = @"";
+    NSArray *tokens = [CoinUtil shouldDisplayTokenCoinArray];
+    if (tokens.count > 0) {
+        symbol = [[CoinUtil shouldDisplayTokenCoinArray] objectAtIndex:0];
+    }
+    
     TLPageDataHelper *helper = [[TLPageDataHelper alloc] init];
     
     helper.code = @"802307";
     
     helper.tableView = self.tableView;
 
-    helper.parameters[@"symbol"] = kOGC;
+    helper.parameters[@"symbol"] = symbol;
     
     [helper modelClass:[TradeFlowModel class]];
     

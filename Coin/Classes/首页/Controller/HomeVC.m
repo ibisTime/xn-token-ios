@@ -189,10 +189,16 @@
  */
 - (void)requestCountInfo {
     
+    NSString *symbol = @"";
+    NSArray *tokens = [CoinUtil shouldDisplayTokenCoinArray];
+    if (tokens.count > 0) {
+        symbol = [[CoinUtil shouldDisplayTokenCoinArray] objectAtIndex:0];
+    }
+    
     TLNetworking *http = [TLNetworking new];
 
     http.code = @"802906";
-    http.parameters[@"currency"] = kOGC;
+    http.parameters[@"currency"] = symbol;
 
     [http postWithSuccess:^(id responseObject) {
 
