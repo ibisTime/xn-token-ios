@@ -463,6 +463,7 @@ typedef NS_ENUM(NSInteger, AddressType) {
     http.code = @"625340";
     http.showView = self.view;
     http.parameters[@"toStore"] = self.code;
+    http.parameters[@"currency"] = self.currency.currency;
     http.parameters[@"transAmount"] = [CoinUtil convertToSysCoin:self.tranAmountTF.text
                                                        coin:self.currency.currency];
     http.parameters[@"tradePwd"] = pwd;

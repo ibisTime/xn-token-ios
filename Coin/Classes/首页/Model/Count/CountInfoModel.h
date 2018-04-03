@@ -10,9 +10,9 @@
 
 @interface CountInfoModel : TLBaseModel
 //总量
-@property (nonatomic, copy) NSString *initialBalance;
+@property (nonatomic, copy) NSString *totalCount;
 //使用量
-@property (nonatomic, copy) NSString *useBalance;
+@property (nonatomic, copy) NSString *useCount;
 //使用占有率
 @property (nonatomic, copy) NSString *useRate;
 

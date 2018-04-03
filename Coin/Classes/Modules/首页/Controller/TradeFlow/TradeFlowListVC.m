@@ -13,6 +13,8 @@
 //V
 #import "TradeFlowTableView.h"
 
+#import "CoinUtil.h"
+
 @interface TradeFlowListVC ()
 //
 @property (nonatomic, strong) TradeFlowTableView *tableView;
@@ -91,9 +93,11 @@
     
     TLPageDataHelper *helper = [[TLPageDataHelper alloc] init];
     
-    helper.code = @"802107";
+    helper.code = @"802307";
     
     helper.tableView = self.tableView;
+
+    helper.parameters[@"symbol"] = kOGC;
     
     [helper modelClass:[TradeFlowModel class]];
     

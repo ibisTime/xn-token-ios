@@ -20,6 +20,8 @@ typedef NS_ENUM(NSUInteger, CoinType) {
 
 typedef void (^RefreshOpenCoinListBlock)();
 
+typedef void (^RefreshOpenCoinListFailureBlock)();
+
 /**
  把最小单位的数字货币字符串，100000.....转化为1.00000这种格式
  */
@@ -56,7 +58,8 @@ typedef void (^RefreshOpenCoinListBlock)();
 
 + (NSString *)chineseName:(NSString *)coin;
 
-+ (void)refreshOpenCoinList:(RefreshOpenCoinListBlock)block;
++ (void)refreshOpenCoinList:(RefreshOpenCoinListBlock)block
+                    failure:(RefreshOpenCoinListFailureBlock)failure;
 
 @end
 

@@ -23,7 +23,12 @@
 
 #import "CoinUtil.h"
 
+#import "HomeTableView.h"
+
 @interface HomeVC ()
+
+@property (nonatomic, strong) HomeTableView *tableView;
+
 //头部
 @property (nonatomic, strong) HomeHeaderView *headerView;
 //
@@ -38,11 +43,48 @@
     //
     self.title = [LangSwitcher switchLang:@"首页" key:nil];
     
+    [self initTableView];
+    
     [CoinUtil refreshOpenCoinList:^{
+        
         //获取banner列表
         [self requestBannerList];
+        
+    } failure:^{
+        
+        [self.tableView endRefreshHeader];
+        
     }];
    
+}
+
+- (void)initTableView {
+    
+    CoinWeakSelf;
+    
+    [self.view addSubview:self.headerView];
+    
+    self.tableView = [[HomeTableView alloc] initWithFrame:CGRectZero
+                                                    style:UITableViewStyleGrouped];
+    
+        self.tableView.tableHeaderView = self.headerView;
+//    self.tableView.refreshDelegate = self;
+//        [self.tableView adjustsContentInsets];
+    [self.view addSubview:self.tableView];
+        [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.mas_equalTo(UIEdgeInsetsZero);
+        }];
+    
+    [self.tableView addRefreshAction:^{
+        
+        [CoinUtil refreshOpenCoinList:^{
+            //获取banner列表
+            [weakSelf requestBannerList];
+        } failure:^{
+            [weakSelf.tableView endRefreshHeader];
+        }];
+    }];
+    
 }
 
 #pragma mark - Init
@@ -61,7 +103,7 @@
             [weakSelf headerViewEventsWithType:type index:index];
         };
         
-        [self.view addSubview:_headerView];
+        self.tableView.tableHeaderView = _headerView;
     }
     return _headerView;
 }
@@ -113,9 +155,10 @@
 
 #pragma mark - Data
 
+
 - (void)requestBannerList {
     
-    [TLProgressHUD show];
+//    [TLProgressHUD show];
 
     TLNetworking *http = [TLNetworking new];
     
@@ -134,7 +177,9 @@
         
     } failure:^(NSError *error) {
         
-        [TLProgressHUD dismiss];
+        [self.tableView endRefreshHeader];
+//        [TLProgressHUD dismiss];
+        
     }];
     
 }
@@ -144,29 +189,29 @@
  */
 - (void)requestCountInfo {
     
-//    TLNetworking *http = [TLNetworking new];
-//
-//    http.code = @"802108";
-//
-//    [http postWithSuccess:^(id responseObject) {
-//
-//        CountInfoModel *countInfo = [CountInfoModel mj_objectWithKeyValues:responseObject[@"data"]];
-//
-//        self.headerView.countInfo = countInfo;
-//
-//        [TLProgressHUD dismiss];
-//
-//    } failure:^(NSError *error) {
-//
-//    }];
+    TLNetworking *http = [TLNetworking new];
+
+    http.code = @"802906";
+    http.parameters[@"currency"] = kOGC;
+
+    [http postWithSuccess:^(id responseObject) {
+
+        CountInfoModel *countInfo = [CountInfoModel mj_objectWithKeyValues:responseObject[@"data"]];
+
+        self.headerView.countInfo = countInfo;
+        [self.tableView endRefreshHeader];
+
+    } failure:^(NSError *error) {
+        [self.tableView endRefreshHeader];
+    }];
     
     /*未完成功能，模拟数据*/
-    CountInfoModel *countInfo = [[CountInfoModel alloc] init];
-    countInfo.initialBalance = @"1000";
-    countInfo.useBalance = @"100";
-    countInfo.useRate = @"0.1";
+//    CountInfoModel *countInfo = [[CountInfoModel alloc] init];
+//    countInfo.initialBalance = @"100000000000000";
+//    countInfo.useBalance = @"60000000000000";
+//    countInfo.useRate = @"0.6";
     
-    self.headerView.countInfo = countInfo;
+//    self.headerView.countInfo = countInfo;
     
     [TLProgressHUD dismiss];
     

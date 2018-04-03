@@ -332,21 +332,26 @@
     
     UIView *scaleBgView = [self viewWithTag:1301];
 
-    NSString *initialBalance = [CoinUtil convertToRealCoin:countInfo.initialBalance coin:kOGC];
+    NSString *initialBalance = [CoinUtil convertToRealCoin:countInfo.totalCount coin:kOGC];
     
-    NSString *useBalance = [CoinUtil convertToRealCoin:countInfo.useBalance coin:kOGC];
+    NSString *useBalance = [CoinUtil convertToRealCoin:countInfo.useCount coin:kOGC];
 
     CGFloat scaleH = 7;
-    CGFloat lineW = [useBalance doubleValue]/[initialBalance doubleValue]*scaleBgView.width;
+    CGFloat lineW = 0;
+    if ([initialBalance doubleValue] != 0) {
+        lineW = [useBalance doubleValue]/[initialBalance doubleValue]*scaleBgView.width;
+    }
+    
+    
+//    CGFloat lineW = [useBalance doubleValue]/[initialBalance doubleValue]*SCREEN_WIDTH - 30;
     
     UIView *scaleView = [self viewWithTag:1300];
     
     scaleView.frame = CGRectMake(0, 0, lineW, scaleH);
 
-    NSString *rate = [CoinUtil mult1:countInfo.useRate mult2:@"100" scale:20];
 //    CGFloat rate = [countInfo.useRate doubleValue]*100;
     
-    NSString *data = [NSString stringWithFormat:@"总量: %@   已投: %@   占比: %@%%", initialBalance, useBalance, rate];
+    NSString *data = [NSString stringWithFormat:@"总量: %@   已投: %@   占比: %@%%", initialBalance, useBalance, countInfo.useRate];
     
     self.dataLbl.text = [LangSwitcher switchLang:data key:nil];;
 

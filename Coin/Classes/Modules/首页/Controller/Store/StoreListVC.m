@@ -114,6 +114,7 @@
             
             weakSelf.tableView.stores = objs;
             
+            [weakSelf.tableView reloadData_tl];
             
         } failure:^(NSError *error) {
             

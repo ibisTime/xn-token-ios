@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -22,27 +21,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LaunchIcon" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dlJ-MF-ZkO">
-                                <rect key="frame" x="117" y="134" width="141" height="131"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="131" id="EMe-7A-5qC"/>
-                                    <constraint firstAttribute="width" constant="141" id="yNE-TI-vZ6"/>
-                                </constraints>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Launch" translatesAutoresizingMaskIntoConstraints="NO" id="sM9-xD-Gtd">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="全球首家PUSH交易所" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RFD-Hv-HjN">
-                                <rect key="frame" x="104" y="589" width="166" height="18"/>
-                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="15"/>
-                                <color key="textColor" red="0.75686274509803919" green="0.25882352941176467" blue="0.23137254901960785" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="RFD-Hv-HjN" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" constant="88" id="6lz-12-L4Y"/>
-                            <constraint firstItem="RFD-Hv-HjN" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="Afm-XC-Nbg"/>
-                            <constraint firstItem="l0q-38-al4" firstAttribute="top" secondItem="RFD-Hv-HjN" secondAttribute="bottom" constant="60" id="JHu-Q6-Bn0"/>
-                            <constraint firstItem="dlJ-MF-ZkO" firstAttribute="top" secondItem="lEs-MU-Wam" secondAttribute="bottom" constant="114" id="PCh-hY-F3M"/>
-                            <constraint firstItem="dlJ-MF-ZkO" firstAttribute="centerX" secondItem="RFD-Hv-HjN" secondAttribute="centerX" id="o4Q-25-Hil"/>
+                            <constraint firstAttribute="trailing" secondItem="sM9-xD-Gtd" secondAttribute="trailing" id="RVl-0v-P0Q"/>
+                            <constraint firstItem="sM9-xD-Gtd" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="fRc-fa-vm9"/>
+                            <constraint firstItem="sM9-xD-Gtd" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="mfl-OH-nxh"/>
+                            <constraint firstItem="sM9-xD-Gtd" firstAttribute="bottom" secondItem="l0q-38-al4" secondAttribute="top" id="z4k-WE-s7p"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -52,6 +40,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="LaunchIcon" width="200" height="261"/>
+        <image name="Launch" width="540" height="960"/>
     </resources>
 </document>

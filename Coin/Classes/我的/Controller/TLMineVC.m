@@ -134,7 +134,7 @@
 
 - (void)initMineHeaderView {
     
-    MineHeaderView *mineHeaderView = [[MineHeaderView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 160 + kStatusBarHeight + 55)];
+    MineHeaderView *mineHeaderView = [[MineHeaderView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 160 + kStatusBarHeight)];
     mineHeaderView.delegate = self;
     self.headerView = mineHeaderView;
     
@@ -381,6 +381,8 @@
     }
     
     self.headerView.nameLbl.text = [TLUser user].nickname;
+    
+    self.headerView.mobileLbl.text = [TLUser user].mobile;
     
     self.headerView.levelBtn.hidden = [[TLUser user].level isEqualToString:kLevelOrdinaryTraders] ? YES : NO;
     

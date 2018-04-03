@@ -163,9 +163,10 @@
     _fromLbl.text = flow.tokenFrom;
     _toLbl.text = flow.tokenTo;
     _timeLbl.text = flow.creates;
+    
     NSString *amount = [CoinUtil convertToRealCoin:flow.tokenValue
-                                              coin:kOGC];
-    _amountLbl.text = [NSString stringWithFormat:@"%@ %@", amount, kOGC];
+                                              coin:flow.symbol];
+    _amountLbl.text = [NSString stringWithFormat:@"%@ %@", amount, flow.symbol];
     [self layoutSubviews];
     //
     flow.cellHeight = self.amountLbl.yy + 13;

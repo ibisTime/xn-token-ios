@@ -19,6 +19,8 @@
 @property (nonatomic, copy) NSString *tokenValue;
 //哈希
 @property (nonatomic, copy) NSString *code;
+//符号
+@property (nonatomic, copy) NSString *symbol;
 //
 @property (nonatomic, assign) CGFloat cellHeight;
 

@@ -21,7 +21,7 @@
     
     NSString *name =  [CoinUtil chineseName:self.currency];
     
-    NSString *fullName = [NSString stringWithFormat:@"%@资产(%@)",name,self.currency];
+    NSString *fullName = [NSString stringWithFormat:@"%@(%@)",name,self.currency];
     return [LangSwitcher switchLang:fullName key:nil];
 
 }

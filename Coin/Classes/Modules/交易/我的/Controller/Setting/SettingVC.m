@@ -143,15 +143,15 @@
     }];
     
     //修改手机号
-    SettingModel *changeMobile = [SettingModel new];
-    changeMobile.text = [LangSwitcher switchLang:@"手机号" key:nil];
-    changeMobile.subText = [TLUser user].mobile;
-    [changeMobile setAction:^{
-        
-        TLChangeMobileVC *changeMobileVC = [[TLChangeMobileVC alloc] init];
-        [weakSelf.navigationController pushViewController:changeMobileVC animated:YES];
-        
-    }];
+//    SettingModel *changeMobile = [SettingModel new];
+//    changeMobile.text = [LangSwitcher switchLang:@"手机号" key:nil];
+//    changeMobile.subText = [TLUser user].mobile;
+//    [changeMobile setAction:^{
+//
+//        TLChangeMobileVC *changeMobileVC = [[TLChangeMobileVC alloc] init];
+//        [weakSelf.navigationController pushViewController:changeMobileVC animated:YES];
+//
+//    }];
     
     //修改登录密码
     SettingModel *changeLoginPwd = [SettingModel new];
@@ -192,7 +192,7 @@
     }];
     
     self.group = [SettingGroup new];
-    self.group.sections = @[@[changeTradePwd], @[idAuth, bindEmail, changeLoginPwd,changeMobile, google]];
+    self.group.sections = @[@[changeTradePwd], @[idAuth, bindEmail, changeLoginPwd, google]];
     
 }
 

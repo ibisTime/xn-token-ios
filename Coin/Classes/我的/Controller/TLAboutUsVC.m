@@ -40,11 +40,11 @@
     
     
     self.iconImageView.image = [UIImage imageNamed:@"icon"];
-    self.nameLbl.text = [LangSwitcher switchLang:@"倍可盈" key:nil];
+    self.nameLbl.text = [LangSwitcher switchLang:@"OGC钱包" key:nil];
     self.versionLbl.text = [NSString stringWithFormat:@"v%@",[NSString appVersionString]];
     //
     NSString *at = @"@";
-    self.banQuanLbl.text = [NSString stringWithFormat:@"www.bcoin.im\n%@%@BCOIN版权所有",at,[self currentYear]];
+    self.banQuanLbl.text = [NSString stringWithFormat:@"www.orangecoin.io\n%@%@OGC版权所有",at,[self currentYear]];
     
     
     

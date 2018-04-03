@@ -209,8 +209,8 @@
 		2EFFE6B31FF6287D00BFCC40 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E5F19241FED0CDD00100420 /* UserNotifications.framework */; };
 		2EFFE6B51FF6289600BFCC40 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EFFE6B41FF6289600BFCC40 /* libsqlite3.0.tbd */; };
 		4C2438252066C2F1003B35F3 /* TopSegmentUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C2438232066C2F0003B35F3 /* TopSegmentUtil.m */; };
-		4C5D317520650240001CE102 /* PushSortBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5D31732065023F001CE102 /* PushSortBar.m */; };
-		4C5D3178206502F5001CE102 /* PushSelectScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5D3177206502F5001CE102 /* PushSelectScrollView.m */; };
+		4C41F84620723CF000BBA366 /* HomeTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C41F84520723CF000BBA366 /* HomeTableView.m */; };
+		4C41F84920723D6600BBA366 /* HomeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C41F84820723D6600BBA366 /* HomeCell.m */; };
 		4CC7F0ED205FBC5400BBEC4D /* CoinModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CC7F0EC205FBC5400BBEC4D /* CoinModel.m */; };
 /* End PBXBuildFile section */
 
@@ -616,10 +616,10 @@
 		2EFFE6B41FF6289600BFCC40 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		4C2438232066C2F0003B35F3 /* TopSegmentUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopSegmentUtil.m; sourceTree = "<group>"; };
 		4C2438242066C2F1003B35F3 /* TopSegmentUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopSegmentUtil.h; sourceTree = "<group>"; };
-		4C5D31732065023F001CE102 /* PushSortBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PushSortBar.m; sourceTree = "<group>"; };
-		4C5D317420650240001CE102 /* PushSortBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PushSortBar.h; sourceTree = "<group>"; };
-		4C5D3176206502F5001CE102 /* PushSelectScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PushSelectScrollView.h; sourceTree = "<group>"; };
-		4C5D3177206502F5001CE102 /* PushSelectScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PushSelectScrollView.m; sourceTree = "<group>"; };
+		4C41F84420723CF000BBA366 /* HomeTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeTableView.h; sourceTree = "<group>"; };
+		4C41F84520723CF000BBA366 /* HomeTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeTableView.m; sourceTree = "<group>"; };
+		4C41F84720723D6600BBA366 /* HomeCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeCell.h; sourceTree = "<group>"; };
+		4C41F84820723D6600BBA366 /* HomeCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeCell.m; sourceTree = "<group>"; };
 		4CC7F0EB205FBC5400BBEC4D /* CoinModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoinModel.h; sourceTree = "<group>"; };
 		4CC7F0EC205FBC5400BBEC4D /* CoinModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoinModel.m; sourceTree = "<group>"; };
 		8863748C5281F9DC1DDF8EEA /* Pods-Coin.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Coin.release.xcconfig"; path = "Pods/Target Support Files/Pods-Coin/Pods-Coin.release.xcconfig"; sourceTree = "<group>"; };
@@ -933,10 +933,6 @@
 			children = (
 				4C2438242066C2F1003B35F3 /* TopSegmentUtil.h */,
 				4C2438232066C2F0003B35F3 /* TopSegmentUtil.m */,
-				4C5D3176206502F5001CE102 /* PushSelectScrollView.h */,
-				4C5D3177206502F5001CE102 /* PushSelectScrollView.m */,
-				4C5D317420650240001CE102 /* PushSortBar.h */,
-				4C5D31732065023F001CE102 /* PushSortBar.m */,
 				21635DB71FBECBDD003F48B4 /* TopLabelUtil.h */,
 				21635DB81FBECBDD003F48B4 /* TopLabelUtil.m */,
 				211CEF111FCBBF8F000FB0C4 /* SelectScrollView.h */,
@@ -1532,6 +1528,10 @@
 				216F5B2C206CD9DA00F2C832 /* Stores */,
 				216F5B31206CD9DA00F2C832 /* Header */,
 				216F5B34206CD9DA00F2C832 /* Banner */,
+				4C41F84420723CF000BBA366 /* HomeTableView.h */,
+				4C41F84520723CF000BBA366 /* HomeTableView.m */,
+				4C41F84720723D6600BBA366 /* HomeCell.h */,
+				4C41F84820723D6600BBA366 /* HomeCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2192,6 +2192,7 @@
 				216F5AF7206CCED300F2C832 /* CoinService.m in Sources */,
 				21A7F3181FB2E2F900FAA0A2 /* TLUserRegisterVC.m in Sources */,
 				216F5B3A206CD9DA00F2C832 /* CountInfoModel.m in Sources */,
+				4C41F84920723D6600BBA366 /* HomeCell.m in Sources */,
 				211CEF151FCBBF90000FB0C4 /* SortBar.m in Sources */,
 				215979761FB84CC70029F177 /* BillDetailCell.m in Sources */,
 				21A821171FDA690700AE59F2 /* GoogleAuthVC.m in Sources */,
@@ -2200,7 +2201,6 @@
 				216F5B18206CD9C900F2C832 /* StoreDetailVC.m in Sources */,
 				216F5B3D206CD9DA00F2C832 /* StoreCell.m in Sources */,
 				211A53221FBFE3A100CC6294 /* RateDescVC.m in Sources */,
-				4C5D317520650240001CE102 /* PushSortBar.m in Sources */,
 				211DE6BE1FB58B4C002FCF3D /* NSNumber+Extension.m in Sources */,
 				211DE6BA1FB58B4C002FCF3D /* NSString+Check.m in Sources */,
 				216F5B3E206CD9DA00F2C832 /* StoreTableView.m in Sources */,
@@ -2231,7 +2231,6 @@
 				215979791FB947730029F177 /* WithdrawalsCoinVC.m in Sources */,
 				211DE6AE1FB58B4C002FCF3D /* TLUploadManager.m in Sources */,
 				215979701FB84B8A0029F177 /* BillDetailVC.m in Sources */,
-				4C5D3178206502F5001CE102 /* PushSelectScrollView.m in Sources */,
 				2E42616E20284BEC00913DCF /* TestViewController.m in Sources */,
 				2E394FF51FB057B300BA0829 /* TLNavigationController.m in Sources */,
 				21A7F3241FB2E2F900FAA0A2 /* CaptchaView.m in Sources */,
@@ -2295,6 +2294,7 @@
 				2EA584C71FA813C900C7106C /* main.m in Sources */,
 				211DE6AF1FB58B4C002FCF3D /* UILabel+Extension.m in Sources */,
 				21A7F3131FB2E2F900FAA0A2 /* TLAccountSetBaseVC.m in Sources */,
+				4C41F84620723CF000BBA366 /* HomeTableView.m in Sources */,
 				2EB9495A1FDF6B1A00CE4B94 /* ZMChineseConvert.m in Sources */,
 				21A7F35E1FB2EBAA00FAA0A2 /* CurrencyModel.m in Sources */,
 				211DE6A61FB58B4C002FCF3D /* TLTextView.m in Sources */,
@@ -2506,6 +2506,7 @@
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CLANG_WARN_STRICT_PROTOTYPES = NO;
 				CODE_SIGN_ENTITLEMENTS = Coin/Coin.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 6PF7VHZB5Z;
@@ -2548,7 +2549,8 @@
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CLANG_WARN_STRICT_PROTOTYPES = NO;
 				CODE_SIGN_ENTITLEMENTS = Coin/Coin.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 6PF7VHZB5Z;
 				ENABLE_BITCODE = NO;
@@ -2575,8 +2577,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.cdkj.wallet;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "e88eb669-3fd4-4748-ae34-c3929cc29f6e";
-				PROVISIONING_PROFILE_SPECIFIER = ogcwallet;
+				PROVISIONING_PROFILE = "f8758513-fe5e-46ba-9fea-ac75ed5afba5";
+				PROVISIONING_PROFILE_SPECIFIER = devogcwallet;
 				TARGETED_DEVICE_FAMILY = 1;
 				WARNING_CFLAGS = "";
 			};

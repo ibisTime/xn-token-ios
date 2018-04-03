@@ -217,7 +217,8 @@ NSString *const kCNY = @"CNY";
     return coinModel;
 }
 
-+ (void)refreshOpenCoinList:(RefreshOpenCoinListBlock)block {
++ (void)refreshOpenCoinList:(RefreshOpenCoinListBlock)block
+                    failure:(RefreshOpenCoinListFailureBlock)failure{
     TLNetworking *http = [TLNetworking new];
     http.code = @"802267";
     
@@ -236,6 +237,10 @@ NSString *const kCNY = @"CNY";
         }
         
     } failure:^(NSError *error) {
+        
+        if (failure) {
+            failure();
+        }
         
     }];
 }

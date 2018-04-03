@@ -159,7 +159,7 @@ typedef NS_ENUM(NSInteger, AddressType) {
     
     UILabel *receiveAddressLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kPlaceholderColor font:14.0];
     
-    receiveAddressLbl.text = [LangSwitcher switchLang:@"请选择付币地址或扫码录入" key:nil];
+    receiveAddressLbl.text = [LangSwitcher switchLang:@"请粘贴地址或扫码录入" key:nil];
     
     receiveAddressLbl.numberOfLines = 0;
     
@@ -225,9 +225,9 @@ typedef NS_ENUM(NSInteger, AddressType) {
     
     //转账数量
     self.tranAmountTF = [[TLTextField alloc] initWithFrame:CGRectMake(0, receiveView.yy, kScreenWidth, heightMargin)
-                                                 leftTitle:[LangSwitcher switchLang:@"付币数量" key:nil]
+                                                 leftTitle:[LangSwitcher switchLang:@"提币数量" key:nil]
                                                 titleWidth:90
-                                               placeholder:[LangSwitcher switchLang:@"请输入付币数量" key:nil]
+                                               placeholder:[LangSwitcher switchLang:@"请填写数量" key:nil]
                          ];
     
     [self.tranAmountTF setValue:kPlaceholderColor forKeyPath:@"_placeholderLabel.textColor"];
@@ -399,7 +399,7 @@ typedef NS_ENUM(NSInteger, AddressType) {
 //    }];
     
     //确认付币
-    UIButton *confirmPayBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"确认付币" key:nil]
+    UIButton *confirmPayBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"确认提币" key:nil]
                                              titleColor:kWhiteColor
                                         backgroundColor:kThemeColor
                                               titleFont:16.0
@@ -426,7 +426,7 @@ typedef NS_ENUM(NSInteger, AddressType) {
         CoinWeakSelf;
         
         NSArray *textArr = @[
-                              [LangSwitcher switchLang:@"选择地址" key:nil],
+//                              [LangSwitcher switchLang:@"选择地址" key:nil],
                               [LangSwitcher switchLang:@"扫描二维码" key:nil],
                               [LangSwitcher switchLang:@"粘贴地址" key:nil]
                               ];
@@ -567,30 +567,30 @@ typedef NS_ENUM(NSInteger, AddressType) {
     
     switch (index) {
         //选择地址
-        case 0:
-        {
-            [self.coinAddressPicker hide];
-            
-            CoinAddressListVC *addressVC = [CoinAddressListVC new];
-            addressVC.coin = self.currency.currency;
-            addressVC.addressBlock = ^(CoinAddressModel *addressModel) {
-
-                weakSelf.addressModel = addressModel;
-                
-                weakSelf.receiveAddressLbl.text = weakSelf.addressModel.address;
-                
-                weakSelf.receiveAddressLbl.textColor = kTextColor;
-                
-                weakSelf.addressType = AddressTypeSelectAddress;
-                
-                [weakSelf setGoogleAuth];
-            };
-            
-            [self.navigationController pushViewController:addressVC animated:YES];
-            
-        }break;
+//        case 0:
+//        {
+//            [self.coinAddressPicker hide];
+//
+//            CoinAddressListVC *addressVC = [CoinAddressListVC new];
+//            addressVC.coin = self.currency.currency;
+//            addressVC.addressBlock = ^(CoinAddressModel *addressModel) {
+//
+//                weakSelf.addressModel = addressModel;
+//
+//                weakSelf.receiveAddressLbl.text = weakSelf.addressModel.address;
+//
+//                weakSelf.receiveAddressLbl.textColor = kTextColor;
+//
+//                weakSelf.addressType = AddressTypeSelectAddress;
+//
+//                [weakSelf setGoogleAuth];
+//            };
+//
+//            [self.navigationController pushViewController:addressVC animated:YES];
+//
+//        }break;
         //扫描二维码
-        case 1:
+        case 0:
         {
             QRCodeVC *qrCodeVC = [QRCodeVC new];
             
@@ -607,7 +607,7 @@ typedef NS_ENUM(NSInteger, AddressType) {
             
         }break;
         //粘贴地址
-        case 2:
+        case 1:
         {
             UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
             

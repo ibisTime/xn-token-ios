@@ -76,7 +76,9 @@
 
 - (void)refreshOpenCoinList {
     [CoinUtil refreshOpenCoinList:^{
-       
+        
+    } failure:^{
+        
     }];
 }
 
