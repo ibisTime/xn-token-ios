@@ -25,6 +25,8 @@
 
 #import "HomeTableView.h"
 
+#import "WebVC.h"
+
 @interface HomeVC ()
 
 @property (nonatomic, strong) HomeTableView *tableView;
@@ -116,6 +118,13 @@
         case HomeEventsTypeBanner:
         {
             
+            NSString *url = [[self.bannerRoom objectAtIndex:index] url];
+            if (url && url.length > 0) {
+                WebVC *webVC = [[WebVC alloc] init];
+                webVC.url = url;
+                [self.navigationController pushViewController:webVC animated:YES];
+            }
+            
         }break;
             
         case HomeEventsTypeStatistics:
@@ -189,7 +198,7 @@
  */
 - (void)requestCountInfo {
     
-    NSString *symbol = @"";
+    NSString *symbol = @"OGC";
     NSArray *tokens = [CoinUtil shouldDisplayTokenCoinArray];
     if (tokens.count > 0) {
         symbol = [[CoinUtil shouldDisplayTokenCoinArray] objectAtIndex:0];

@@ -39,7 +39,9 @@
                            @"withdrawunfrozen":[LangSwitcher switchLang:@"取现解冻" key:nil],
                            @"withdrawfee" : [LangSwitcher switchLang:@"提现手续费" key:nil] ,
                            @"o2o_in" : [LangSwitcher switchLang:@"o2o店铺消费收入" key:nil],
-                           @"o2o_out" : [LangSwitcher switchLang:@"o2o店铺消费支出" key:nil]
+                           @"o2o_out" : [LangSwitcher switchLang:@"o2o店铺消费支出" key:nil],
+                           @"transfer_in" : [LangSwitcher switchLang:@"转账收入" key:nil],
+                           @"transfer_out" : [LangSwitcher switchLang:@"转账支出" key:nil]
                            };
     
     return dict[self.bizType];

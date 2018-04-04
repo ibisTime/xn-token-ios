@@ -89,7 +89,7 @@
                              [LangSwitcher switchLang:@"提币" key:nil],
                              [LangSwitcher switchLang:@"取现手续费" key:nil],
                              [LangSwitcher switchLang:@"o2o店铺消费收入" key:nil],
-                             [LangSwitcher switchLang:@"o2o店铺消费支出" key:nil],
+                             [LangSwitcher switchLang:@"o2o店铺消费支出" key:nil]
                              ];
 
         NSArray *typeArr = @[@"",

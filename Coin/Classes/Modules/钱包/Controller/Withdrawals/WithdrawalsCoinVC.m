@@ -344,7 +344,7 @@ typedef NS_ENUM(NSInteger, AddressType) {
 //    //开关
 //    UISwitch *sw = [[UISwitch alloc] init];
 //
-//    sw.on = YES;
+//    sw.on = NO;
 //
 //    [interalTranView addSubview:sw];
 //    [sw mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -676,6 +676,22 @@ typedef NS_ENUM(NSInteger, AddressType) {
         }
     }
     
+    if (self.sw.on) {
+        
+        [self doTransfer:pwd];
+        
+    } else {
+        
+        [self doWithdraw:pwd];
+        
+    }
+    
+    
+    
+}
+
+- (void)doWithdraw:(NSString *)pwd {
+    
     TLNetworking *http = [TLNetworking new];
     
     http.code = @"802750";
@@ -684,14 +700,14 @@ typedef NS_ENUM(NSInteger, AddressType) {
     http.parameters[@"amount"] = [CoinUtil convertToSysCoin:self.tranAmountTF.text
                                                        coin:self.currency.currency];
     http.parameters[@"applyNote"] = [NSString stringWithFormat:@"%@提现", self.currency.currency];
-//    http.parameters[@"applyNote"] = @"ios-提现";
+    //    http.parameters[@"applyNote"] = @"ios-提现";
     http.parameters[@"applyUser"] = [TLUser user].userId;
     http.parameters[@"payCardInfo"] = self.currency.currency;
     http.parameters[@"payCardNo"] = self.receiveAddressLbl.text;
     http.parameters[@"token"] = [TLUser user].token;
-//    http.parameters[@"fee"] = @"-0.1";
-//    http.parameters[@"fee"] = @"-10";
-
+    //    http.parameters[@"fee"] = @"-0.1";
+    //    http.parameters[@"fee"] = @"-10";
+    
     
     if ([TLUser user].isGoogleAuthOpen) {
         
@@ -705,12 +721,63 @@ typedef NS_ENUM(NSInteger, AddressType) {
     if (!(self.addressType == AddressTypeSelectAddress && [self.addressModel.status isEqualToString:@"1"])) {
         
         http.parameters[@"tradePwd"] = pwd;
-
+        
     }
     
     [http postWithSuccess:^(id responseObject) {
         
         [TLAlert alertWithSucces:[LangSwitcher switchLang:@"提币申请提交成功" key:nil]];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:kWithDrawCoinSuccess object:nil];
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            
+            [self.navigationController popToRootViewControllerAnimated:YES];
+            
+        });
+        
+    } failure:^(NSError *error) {
+        
+        
+    }];
+    
+}
+
+- (void)doTransfer:(NSString *)pwd {
+    
+    TLNetworking *http = [TLNetworking new];
+    
+    http.code = @"802004";
+    http.showView = self.view;
+    http.parameters[@"fromUserId"] = [TLUser user].userId;
+    http.parameters[@"fromAddress"] = self.currency.coinAddress;
+    http.parameters[@"toAddress"] = self.receiveAddressLbl.text;
+    http.parameters[@"transAmount"] = [CoinUtil convertToSysCoin:self.tranAmountTF.text
+                                                       coin:self.currency.currency];
+    http.parameters[@"currency"] = self.currency.currency;
+    http.parameters[@"token"] = [TLUser user].token;
+    //    http.parameters[@"fee"] = @"-0.1";
+    //    http.parameters[@"fee"] = @"-10";
+    
+    
+    if ([TLUser user].isGoogleAuthOpen) {
+        
+        if (!(self.addressType == AddressTypeSelectAddress && [self.addressModel.status isEqualToString:@"1"])) {
+            
+            http.parameters[@"googleCaptcha"] = self.googleAuthTF.text;
+            
+        }
+    }
+    
+    if (!(self.addressType == AddressTypeSelectAddress && [self.addressModel.status isEqualToString:@"1"])) {
+        
+        http.parameters[@"tradePwd"] = pwd;
+        
+    }
+    
+    [http postWithSuccess:^(id responseObject) {
+        
+        [TLAlert alertWithSucces:[LangSwitcher switchLang:@"内部转账成功" key:nil]];
         
         [[NSNotificationCenter defaultCenter] postNotificationName:kWithDrawCoinSuccess object:nil];
         

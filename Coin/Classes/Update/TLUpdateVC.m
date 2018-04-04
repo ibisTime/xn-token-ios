@@ -65,39 +65,39 @@
         [self removePlaceholderView];
         
         NSDictionary *resutltDict = data;
-#warning 这种判断只适用于，第一次审核。审核通过之后，第二次提交审核这种判断要改掉
-//        // !!!!! 这种判断
-//        //1.1在审核中
-        if ([resutltDict[@"resultCount"] isEqual:@0]) {
-
-          [AppConfig config].isChecking = true;
-          [self setRootVC];
-           return;
-        }
-
-        //审核通过
-        [AppConfig config].isChecking = false;
-        [self setRootVC];
+//#warning 这种判断只适用于，第一次审核。审核通过之后，第二次提交审核这种判断要改掉
+////        // !!!!! 这种判断
+////        //1.1在审核中
+//        if ([resutltDict[@"resultCount"] isEqual:@0]) {
+//
+//          [AppConfig config].isChecking = true;
+//          [self setRootVC];
+//           return;
+//        }
+//
+//        //审核通过
+//        [AppConfig config].isChecking = false;
+//        [self setRootVC];
 
         // CFBundleVersion 构建版本号
         // CFBundleShortVersionString
         // CFBundleDisplayName
         
         // 本地版本
-//        NSString *currentBuildVersion = [self version];
-//
-//        //线上版本
-//        NSString *onlineBuildVersion = resutltDict[@"results"][0][@"version"];
-//
-//        //1.2在审核中
-//        if ([currentBuildVersion floatValue] > [onlineBuildVersion floatValue]) {
-//
-//            [self setRootVC];
-//            return;
-//        }
-//
-//        //2.2 用户正常使用
-//      [self configUpdate];
+        NSString *currentBuildVersion = [self version];
+
+        //线上版本
+        NSString *onlineBuildVersion = resutltDict[@"results"][0][@"version"];
+
+        //1.2在审核中
+        if ([currentBuildVersion floatValue] > [onlineBuildVersion floatValue]) {
+
+            [self setRootVC];
+            return;
+        }
+
+        //2.2 用户正常使用
+      [self configUpdate];
  
     } abnormality:nil failure:^(NSError *error) {
         

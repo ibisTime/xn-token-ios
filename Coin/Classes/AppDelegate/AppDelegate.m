@@ -53,7 +53,7 @@
     
     //服务器环境
     [AppConfig config].runEnv = RunEnvDev;
-    [AppConfig config].isChecking = YES;
+    [AppConfig config].isChecking = NO;
 //    [AppConfig config].isUploadCheck = YES;
     self.respHandler = [[RespHandler alloc] init];
      
@@ -61,20 +61,11 @@
     //2.新版本请求
     [NBNetworkConfig config].baseUrl = [AppConfig config].apiUrl;
     
-    //配置微信
-//czy    [self configWeChat];
-    
     //配置键盘
     [self configIQKeyboard];
     
     //配置根控制器
     [self configRootViewController];
-    
-    //初始化, 聊天
-//czy    [[ChatManager sharedManager] initChat];
-//
-//    // 配置zendesk
-//czy   [self configZendesk];
     
     //初始化为繁体
     [LangSwitcher startWithTraditional];
@@ -183,17 +174,6 @@
     
 }
 
-//- (void)configZendesk {czy
-//
-//    // supprot
-//    [[ZDKConfig instance] initializeWithAppId:@"f9ab448e1dfdb93e3b4ff1f2c2d4fb3a72140cbfd6ee10e0"
-//                 zendeskUrl:@"https://beicoin.zendesk.com"
-//                   clientId:@"mobile_sdk_client_b388fa777945f99314b7"];
-//
-//    // 客服
-//    [ZDCChat initializeWithAccountKey:@"MvxwoT6827HylJtr6360QQQ5yve4Z2Ny"];
-//
-//}
 
 #pragma mark - 用户登录
 - (void)userLogin {
