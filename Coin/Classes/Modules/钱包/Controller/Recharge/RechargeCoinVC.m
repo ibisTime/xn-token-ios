@@ -14,7 +14,7 @@
 #import "UILabel+Extension.h"
 #import "UIBarButtonItem+convience.h"
 
-#import <SGQRCodeGenerateManager.h>
+#import "SGQRCodeGenerateManager.h"
 
 #import "BillVC.h"
 

@@ -9,7 +9,7 @@
 #import "SortBar.h"
 
 #import "NSString+CGSize.h"
-#import <UIScrollView+TLAdd.h>
+#import "UIScrollView+TLAdd.h"
 
 #import "TLUIHeader.h"
 #import "AppColorMacro.h"

@@ -9,7 +9,7 @@
 #import "HTMLStrVC.h"
 #import <WebKit/WebKit.h>
 #import "APICodeMacro.h"
-#import <UIScrollView+TLAdd.h>
+#import "UIScrollView+TLAdd.h"
 
 @interface HTMLStrVC ()<WKNavigationDelegate>
 

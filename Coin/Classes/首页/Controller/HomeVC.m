@@ -27,6 +27,8 @@
 
 #import "WebVC.h"
 
+#import "MnemonicUtil.h"
+
 @interface HomeVC ()
 
 @property (nonatomic, strong) HomeTableView *tableView;
@@ -41,6 +43,24 @@
 @implementation HomeVC
 
 - (void)viewDidLoad {
+    
+    [MnemonicUtil test];
+
+//    BTCMnemonic *mnemonic =  [MnemonicUtil generateNewMnemonic];
+//    NSLog(@"Seed=%@", BTCHexFromData(mnemonic.seed));
+//    NSLog(@"Mnemonic=%@", mnemonic.words);
+//    NSLog(@"btc_privateKey=%@", [MnemonicUtil getBtcPrivateKey:mnemonic]);
+//    NSLog(@"btc_publicKey=%@", [MnemonicUtil getBtcAddress:mnemonic]);
+//    NSLog(@"eth_privateKey=%@", [MnemonicUtil getEthPrivateKey:mnemonic]);
+//    NSLog(@"eth_publicKey=%@", [MnemonicUtil getEthAddress:mnemonic]);
+    
+//    mnemonic =  [MnemonicUtil importMnemonic:mnemonic.words];
+//    NSLog(@"Seed=%@", BTCHexFromData(mnemonic.seed));
+//    NSLog(@"Mnemonic=%@", mnemonic.words);
+//    NSLog(@"privateKey=%@", [MnemonicUtil getBtcPrivateKey:mnemonic]);
+//    NSLog(@"publicKey=%@", [MnemonicUtil getBtcAddress:mnemonic]);
+    
+    
     [super viewDidLoad];
     //
     self.title = [LangSwitcher switchLang:@"首页" key:nil];

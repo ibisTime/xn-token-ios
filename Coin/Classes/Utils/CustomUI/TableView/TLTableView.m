@@ -8,7 +8,7 @@
 
 #import "TLTableView.h"
 #import "MJRefresh.h"
-#import <UIScrollView+TLAdd.h>
+#import "UIScrollView+TLAdd.h"
 #import <CDCommon/UIScrollView+TLAdd.h>
 
 

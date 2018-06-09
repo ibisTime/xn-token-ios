@@ -11,9 +11,9 @@
 #import "TLUIHeader.h"
 #import "AppColorMacro.h"
 
-#import <PYPhotoBrowseView.h>
-#import <PYPhotoView.h>
-#import <PYPhoto.h>
+#import "PYPhotoBrowseView.h"
+#import "PYPhotoView.h"
+#import "PYPhoto.h"
 
 #import <objc/runtime.h>
 

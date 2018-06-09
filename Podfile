@@ -33,4 +33,13 @@ pod 'ZendeskSDK'
 #设备
 pod 'UIDeviceIdentifier', :git => 'https://github.com/squarefrog/UIDeviceIdentifier.git'
 
+pod 'CoreBitcoin', :podspec => 'https://raw.github.com/oleganza/CoreBitcoin/master/CoreBitcoin.podspec'
+
+#pod 'Geth', '1.8.10'
+
+#use_modular_headers!
+#pod 'web3swift', '~> 0.8.0'
+use_frameworks!
+pod 'web3swift', '~> 0.8.0'
+
 end

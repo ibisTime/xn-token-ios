@@ -19,7 +19,7 @@
 #import "TLAlipayManager.h"
 //#import "ChatManager.h"           czy
 //#import "ChatViewController.h"    czy
-#import <IQKeyboardManager.h>
+#import "IQKeyboardManager.h"
 //#import "RichChatViewController.h"czy
 //#import "OrderDetailVC.h"         czy
 //#import "WaitingOrderVC.h"        czy
@@ -52,7 +52,7 @@
 //    [NSThread sleepForTimeInterval:2];
     
     //服务器环境
-    [AppConfig config].runEnv = RunEnvRelease;
+    [AppConfig config].runEnv = RunEnvDev;
     [AppConfig config].isChecking = NO;
 //    [AppConfig config].isUploadCheck = YES;
     self.respHandler = [[RespHandler alloc] init];
