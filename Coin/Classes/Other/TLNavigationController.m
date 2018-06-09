@@ -9,7 +9,7 @@
 #import "TLNavigationController.h"
 //#import "TLUIHeader.h"
 #import "UIColor+theme.h"
-
+#import "AppColorMacro.h"
 @interface TLNavigationController ()
 
 @end
@@ -22,17 +22,18 @@
 //    [UINavigationBar appearance].backIndicatorImage = [UIImage imageNamed:@"返回"];
 //    [UINavigationBar appearance].backIndicatorTransitionMaskImage = [UIImage imageNamed:@"返回"];
     
-    
-    [self.navigationItem.backBarButtonItem setTitle:@""];
-    
-    self.navigationBar.backIndicatorImage = [UIImage imageNamed:@"返回"];
-    self.navigationBar.backIndicatorTransitionMaskImage = [UIImage imageNamed:@"返回"];
+   
     
     //
     UINavigationBar *navBar = [UINavigationBar appearance];
+    
+    [self.navigationItem.backBarButtonItem setTitle:@"返回"];
+    
+    navBar.backIndicatorImage = [UIImage imageNamed:@"返回"];
+    navBar.backIndicatorTransitionMaskImage = [UIImage imageNamed:@"返回"];
     navBar.barTintColor = [UIColor whiteColor];
     navBar.translucent = NO;
-    navBar.tintColor = [UIColor textColor];
+    navBar.tintColor = kAppCustomMainColor;
     [navBar setTitleTextAttributes:@{
                                      NSForegroundColorAttributeName : [UIColor textColor]
                                      }];

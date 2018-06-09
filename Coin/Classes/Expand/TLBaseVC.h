@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "CoinHeader.h"
-
+#import "TLUser.h"
+#import "TLNavigationController.h"
 @interface TLBaseVC : UIViewController
 
 @property (nonatomic,strong) UIView *tl_placeholderView;

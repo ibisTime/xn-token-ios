@@ -8,7 +8,7 @@
 
 #import "BillTableView.h"
 #import "CoinHeader.h"
-
+#import "AppColorMacro.h"
 #import "BillCell.h"
 
 @interface BillTableView ()<UITableViewDelegate, UITableViewDataSource>
@@ -38,6 +38,10 @@ static NSString *identifierCell = @"BillListCell";
 
 #pragma mark - UITableViewDataSource
 
+-(NSInteger)numberOfRowsInSection:(NSInteger)section
+{
+    return 0;
+}
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
     return self.bills.count;
@@ -70,12 +74,24 @@ static NSString *identifierCell = @"BillListCell";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     
-    return 0.1;
+    return 10;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     
-    return 0.1;
+    UILabel *lab = [[UILabel alloc] initWithFrame:CGRectMake(15, 20, kScreenWidth, 22)];
+    lab.textColor = kTextColor;
+    lab.font = [UIFont systemFontOfSize:12];
+    
+    lab.text = @"    交易记录";
+    return lab;
 }
 
+
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    
+    return [UIView new];
+}
 @end

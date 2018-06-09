@@ -9,10 +9,13 @@
 #import <UIKit/UIKit.h>
 
 typedef void(^WalletHeaderBlock)(void);
+typedef void(^WalletAddBlock)(void);
 
 @interface WalletHeaderView : UIView
 
 @property (nonatomic, copy) WalletHeaderBlock headerBlock;
+@property (nonatomic, copy) WalletAddBlock addBlock;
+
 //总资产(人民币)
 @property (nonatomic, strong) UILabel *cnyAmountLbl;
 //美元

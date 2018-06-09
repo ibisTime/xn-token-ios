@@ -22,15 +22,23 @@ pod 'SGQRCode',             '2.1.8'
 pod 'PYPhotoBrowser',       '1.1.5'
 
 #pod 'pop',                 '1.0.10'
+
 #七牛云
 pod 'JPush'
+
 #    MGSwipeTableCell
 pod 'Qiniu',                '7.1.5'
 pod 'SVProgressHUD',        '2.2'
 pod 'ZendeskSDK'
 #pod 'WechatOpenSDK'
 #pod 'ZDCChat'
+
 #设备
 pod 'UIDeviceIdentifier', :git => 'https://github.com/squarefrog/UIDeviceIdentifier.git'
 
+#bip39
+pod 'CoreBitcoin', :podspec => 'https://raw.github.com/oleganza/CoreBitcoin/master/CoreBitcoin.podspec'
+
+
 end
+

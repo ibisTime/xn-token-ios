@@ -9,8 +9,19 @@
 #import "TLBaseModel.h"
 
 @interface RateModel : TLBaseModel
+
+@property (nonatomic, copy) NSString *title;
+
+@property (nonatomic, copy) NSString *time;
+
+@property (nonatomic, copy) NSString *soure;
+
+@property (nonatomic, copy) NSString *imageName;
+
+
 //币种
 @property (nonatomic, copy) NSString *currency;
+
 //参照货币
 @property (nonatomic, copy) NSString *referCurrency;
 //数据源

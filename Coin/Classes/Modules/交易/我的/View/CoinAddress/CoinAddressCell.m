@@ -60,7 +60,7 @@
     }];
     
     //address
-    UILabel *addressTextLbl = [UILabel labelWithBackgroundColor:kThemeColor
+    UILabel *addressTextLbl = [UILabel labelWithBackgroundColor:kAppCustomMainColor
                                                       textColor:kWhiteColor
                                                            font:9.0];
     addressTextLbl.text = @"Address";

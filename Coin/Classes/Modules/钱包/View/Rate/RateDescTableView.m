@@ -9,7 +9,7 @@
 #import "RateDescTableView.h"
 
 #import "RateDescCell.h"
-
+#import "AppColorMacro.h"
 @interface RateDescTableView ()<UITableViewDelegate, UITableViewDataSource>
 
 @end
@@ -23,12 +23,12 @@ static NSString *identifierCell = @"RateDescCell";
         
         self.dataSource = self;
         self.delegate = self;
-        
-        self.backgroundColor = kWhiteColor;
+
+        self.backgroundColor = kHexColor(@"#f8f8f8");
         
         [self registerClass:[RateDescCell class] forCellReuseIdentifier:identifierCell];
         
-        self.separatorStyle = UITableViewCellSeparatorStyleNone;
+        self.separatorStyle = UITableViewStylePlain;
     }
     
     return self;
@@ -56,7 +56,7 @@ static NSString *identifierCell = @"RateDescCell";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    return self.rates[indexPath.row].cellHeight;
+    return 100;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -68,12 +68,23 @@ static NSString *identifierCell = @"RateDescCell";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     
-    return 0.1;
+    return 2;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     
-    return 0.1;
+    return 2;
 }
 
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    return [UIView new];
+    
+}
+-(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+    return [UIView new];
+
+    
+}
 @end

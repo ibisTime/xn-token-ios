@@ -59,7 +59,7 @@
     //复制
     UIView *secretView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 95, self.secretTF.height)];
     
-    UIButton *copyBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"复制" key:nil] titleColor:kWhiteColor backgroundColor:kThemeColor titleFont:13.0 cornerRadius:5];
+    UIButton *copyBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"复制" key:nil] titleColor:kWhiteColor backgroundColor:kAppCustomMainColor titleFont:13.0 cornerRadius:5];
     
     copyBtn.frame = CGRectMake(0, 0, 85, self.secretTF.height - 15);
     copyBtn.centerY = secretView.height/2.0;
@@ -80,7 +80,7 @@
     //复制
     UIView *authView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 95, self.googleAuthTF.height)];
     
-    UIButton *pasteBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"粘贴" key:nil] titleColor:kWhiteColor backgroundColor:kThemeColor titleFont:13.0 cornerRadius:5];
+    UIButton *pasteBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"粘贴" key:nil] titleColor:kWhiteColor backgroundColor:kAppCustomMainColor titleFont:13.0 cornerRadius:5];
     
     pasteBtn.frame = CGRectMake(0, 0, 85, self.googleAuthTF.height - 15);
     pasteBtn.centerY = authView.height/2.0;
@@ -98,7 +98,7 @@
     
     NSString *title = [TLUser user].isGoogleAuthOpen ? [LangSwitcher switchLang:@"修改谷歌验证" key:nil]: [LangSwitcher switchLang:@"开启谷歌验证" key:nil];
 
-    UIButton *confirmBtn = [UIButton buttonWithTitle:title titleColor:kWhiteColor backgroundColor:kThemeColor titleFont:16.0 cornerRadius:5];
+    UIButton *confirmBtn = [UIButton buttonWithTitle:title titleColor:kWhiteColor backgroundColor:kAppCustomMainColor titleFont:16.0 cornerRadius:5];
     
     confirmBtn.frame = CGRectMake(15, self.captchaView.yy + 30, kScreenWidth - 2*15, 45);
     

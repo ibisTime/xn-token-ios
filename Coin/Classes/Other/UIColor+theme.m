@@ -14,7 +14,7 @@
 
 + (UIColor *)themeColor {
     
-    return kThemeColor;
+    return kAppCustomMainColor;
     
 }
 

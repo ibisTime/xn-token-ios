@@ -65,7 +65,7 @@
     
     //金额
     UILabel *amountLbl = [UILabel labelWithBackgroundColor:kClearColor
-                                                 textColor:kThemeColor
+                                                 textColor:kAppCustomMainColor
                                                       font:32.0];
     amountLbl.text = moneyStr;
     [self.headerView addSubview:amountLbl];

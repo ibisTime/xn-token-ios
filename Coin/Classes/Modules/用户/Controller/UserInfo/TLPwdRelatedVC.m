@@ -100,7 +100,7 @@
     //复制
     UIView *authView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 95, self.googleAuthTF.height)];
     
-    UIButton *pasteBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"粘贴" key:nil] titleColor:kWhiteColor backgroundColor:kThemeColor titleFont:13.0 cornerRadius:5];
+    UIButton *pasteBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"粘贴" key:nil] titleColor:kWhiteColor backgroundColor:kAppCustomMainColor titleFont:13.0 cornerRadius:5];
     
     pasteBtn.frame = CGRectMake(0, 0, 85, self.googleAuthTF.height - 15);
     

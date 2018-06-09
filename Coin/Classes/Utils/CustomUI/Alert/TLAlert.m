@@ -9,6 +9,7 @@
 #import "TLAlert.h"
 #import "MBProgressHUD.h"
 #import <SVProgressHUD/SVProgressHUD.h>
+#import "AppColorMacro.h"
 
 @implementation TLAlert
 
@@ -114,14 +115,21 @@
 {
     
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+    
+    
+    NSMutableAttributedString *messageStr = [[NSMutableAttributedString alloc] initWithString:message];
+    [messageStr addAttribute:NSForegroundColorAttributeName value:kTextColor range:NSMakeRange(0, messageStr.length)];
+    [messageStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14] range:NSMakeRange(0, messageStr.length)];
+    [alertController setValue:messageStr forKey:@"attributedMessage"];
     //取消行为
+    
     UIAlertAction *action2 = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
         
         if (confirmAction) {
             confirmAction();
         }
     }];
-    
+    [action2 setValue:kAppCustomMainColor forKey:@"_titleTextColor"];
     
     [alertController addAction:action2];
     //rootViewController 展示

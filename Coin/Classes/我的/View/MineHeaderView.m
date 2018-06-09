@@ -38,7 +38,7 @@
     
     UIImageView *bgIV = [[UIImageView alloc] init];
     
-    bgIV.image = kImage(@"我的-背景");
+    bgIV.image = kImage(@"我的背景");
     bgIV.contentMode = UIViewContentModeScaleToFill;
     
     [self addSubview:bgIV];
@@ -53,8 +53,9 @@
     
     CGFloat imgWidth = 68;
     
-    self.photoBtn = [UIButton buttonWithTitle:@"" titleColor:kAppCustomMainColor backgroundColor:kWhiteColor titleFont:30 cornerRadius:imgWidth/2.0];
-    
+//    self.photoBtn = [UIButton buttonWithTitle:nil titleColor:kAppCustomMainColor backgroundColor:kWhiteColor titleFont:30 cornerRadius:imgWidth/2.0];
+    self.photoBtn = [UIButton buttonWithImageName:@"头像" cornerRadius:imgWidth/2.0];
+    [self.photoBtn setBackgroundImage:kImage(@"头像") forState:UIControlStateNormal];
     [self.photoBtn addTarget:self action:@selector(selectPhoto:) forControlEvents:UIControlEventTouchUpInside];
     
     self.photoBtn.imageView.contentMode = UIViewContentModeScaleAspectFill;

@@ -11,12 +11,12 @@
 #import "RateDescTableView.h"
 
 #import "HistoryRateVC.h"
-
+#import "NSString+Date.h"
 @interface RateDescVC ()<RefreshDelegate>
 
 @property (nonatomic, strong) RateDescTableView *tableView;
 
-@property (nonatomic, strong) NSArray <RateModel *>*rates;
+@property (nonatomic, strong) NSMutableArray <RateModel *>*rates;
 
 @end
 
@@ -26,7 +26,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.title = [LangSwitcher switchLang:@"汇率概述" key:nil] ;
+    self.title = [LangSwitcher switchLang:@"系统公告" key:nil] ;
     
     [self initTableView];
     //获取汇率列表
@@ -49,6 +49,26 @@
 - (void)requestRateList {
     
     CoinWeakSelf;
+    RateModel *model = [RateModel new];
+    model.title = @"THA钱包上线";
+    model.time = @"2018/06/07/21/04";
+    model.soure = @"THA官方";
+    model.imageName = @"如何充值";
+    
+    RateModel *model1 = [RateModel new];
+    model1.title = @"区块链区块链区块链区块链区块链区块链区块链区块链区块链区块链区块链区块链区块链";
+    model1.time = @"2018/06/07/20/04";
+    model1.soure = @"THA";
+    model1.imageName = @"如何注册";
+    
+    self.rates = [NSMutableArray array];
+    [self.rates addObject:model];
+    [self.rates addObject:model1];
+    self.tableView.rates = self.rates;
+    [self.tableView reloadData_tl];
+
+    
+    return;
     
     TLPageDataHelper *helper = [[TLPageDataHelper alloc] init];
     

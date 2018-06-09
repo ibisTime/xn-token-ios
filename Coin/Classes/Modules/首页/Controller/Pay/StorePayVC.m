@@ -95,7 +95,7 @@ typedef NS_ENUM(NSInteger, AddressType) {
                                              titleWidth:90
                                             placeholder:@""];
     
-    self.balanceTF.textColor = kThemeColor;
+    self.balanceTF.textColor = kAppCustomMainColor;
     self.balanceTF.enabled = NO;
     
 //    NSString *coinBalance = [CoinUtil convertToRealCoin:self.currency.coinBalance coin:self.currency.currency];
@@ -180,7 +180,7 @@ typedef NS_ENUM(NSInteger, AddressType) {
     //确认付币
     UIButton *confirmPayBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"确认支付" key:nil]
                                              titleColor:kWhiteColor
-                                        backgroundColor:kThemeColor
+                                        backgroundColor:kAppCustomMainColor
                                               titleFont:16.0
                                            cornerRadius:5];
     
