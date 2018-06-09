@@ -13,7 +13,7 @@
 #import "GengXinModel.h"
 #import "TLTabBarController.h"
 #import "AppConfig.h"
-
+#import "BuildWalletMineVC.h"
 @interface TLUpdateVC ()
 
 @end
@@ -190,7 +190,11 @@
 - (void)setRootVC {
     
     //检查更新过后再
+//    BuildWalletMineVC * mineVC = [[BuildWalletMineVC alloc] init];
+    
     TLTabBarController *tabBarCtrl = [[TLTabBarController alloc] init];
+//    TLNavigationController *na = [[TLNavigationController alloc] initWithRootViewController:mineVC];
+    
     [UIApplication sharedApplication].keyWindow.rootViewController = tabBarCtrl;
 
 

@@ -73,7 +73,7 @@
         
     }];
     
-    UILabel *promptLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kThemeColor font:12.0];
+    UILabel *promptLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kAppCustomMainColor font:12.0];
     
     NSString *currency = self.currency.currency;
     promptLbl.text = [NSString stringWithFormat:@"%@钱包地址禁止充值除%@之外的其他资产, 任何%@资产充值将不可找回",currency,currency,currency];
@@ -143,7 +143,7 @@
     [copyBtn.titleLabel labelWithString:text
                                   title:[LangSwitcher switchLang:@"（点击复制）" key:nil]
                                    font:Font(12.0)
-                                  color:kThemeColor];
+                                  color:kAppCustomMainColor];
 
 }
 
@@ -206,11 +206,13 @@
 
 - (void)addRecodeItem {
     
-    [UIBarButtonItem addRightItemWithTitle:[LangSwitcher switchLang:@"记录" key:nil]
-                                titleColor:kTextColor
-                                     frame:CGRectMake(0, 0, 40, 44)
-                                        vc:self
-                                    action:@selector(lookBillRecord)];
+//    [UIBarButtonItem addRightItemWithTitle:[LangSwitcher switchLang:@"记录" key:nil]
+//                                titleColor:kTextColor
+//                                     frame:CGRectMake(0, 0, 40, 44)
+//                                        vc:self
+//                                    action:@selector(lookBillRecord)];
+//    [UIBarButtonItem adRightItemWithImageName:@"记录" frame:CGRectMake(0, 0, 40, 44) vc:self action:@selector(lookBillRecord)];
+    [UIBarButtonItem addRightItemWithImageName:@"记录" frame:CGRectMake(0, 0, 40, 44) vc:self action:@selector(lookBillRecord)];
 }
 
 #pragma mark - Events

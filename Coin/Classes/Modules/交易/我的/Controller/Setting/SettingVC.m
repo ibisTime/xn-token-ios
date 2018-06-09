@@ -29,7 +29,7 @@
 #import "TLAlert.h"
 #import "NSString+Check.h"
 #import "TLProgressHUD.h"
-
+#import "LangChooseVC.h"
 @interface SettingVC ()
 
 @property (nonatomic, strong) SettingGroup *group;
@@ -191,8 +191,20 @@
         }
     }];
     
+    
+    //语言设置
+    SettingModel *languageSetting = [SettingModel new];
+    languageSetting.text = [LangSwitcher switchLang:@"语言设置" key:nil];
+    languageSetting.subText = [LangSwitcher currentLang];
+    [languageSetting setAction:^{
+        
+        LangChooseVC *vc = [[LangChooseVC alloc] init];
+        [weakSelf.navigationController pushViewController:vc animated:YES];
+        
+    }];
+    
     self.group = [SettingGroup new];
-    self.group.sections = @[@[changeTradePwd], @[idAuth, bindEmail, changeLoginPwd, google]];
+    self.group.sections = @[@[changeTradePwd], @[idAuth, bindEmail, changeLoginPwd, google,languageSetting]];
     
 }
 

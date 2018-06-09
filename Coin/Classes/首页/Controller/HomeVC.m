@@ -63,7 +63,7 @@
     
     [super viewDidLoad];
     //
-    self.title = [LangSwitcher switchLang:@"首页" key:nil];
+    self.title = [LangSwitcher switchLang:@"发现" key:nil];
     
     [self initTableView];
     

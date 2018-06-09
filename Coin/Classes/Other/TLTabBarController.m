@@ -13,7 +13,7 @@
 #import "LangSwitcher.h"
 #import "UIColor+theme.h"
 #import "AppConfig.h"
-
+#import "AppColorMacro.h"
 @interface TLTabBarController ()<UITabBarControllerDelegate>
 
 @property (nonatomic, assign) NSInteger currentIndex;
@@ -28,14 +28,14 @@
     self.delegate = self;
 
     NSArray *titles = @[
-                        [LangSwitcher switchLang:@"应用" key:nil],
                         [LangSwitcher switchLang:@"钱包" key:nil],
+                        [LangSwitcher switchLang:@"发现" key:nil],
                         [LangSwitcher switchLang:@"我的" key:nil]
                         ];
-    NSArray *VCNames = @[@"HomeVC", @"TLWalletVC", @"TLMineVC"];
+    NSArray *VCNames = @[@"TLWalletVC", @"HomeVC", @"TLMineVC"];
     
-    NSArray *imageNames = @[@"home", @"钱包00", @"我的00"];
-    NSArray *selectedImageNames = @[@"home_select", @"钱包01", @"我的01"];
+    NSArray *imageNames = @[@"icon_wallet_48", @"fen-lei", @"我的"];
+    NSArray *selectedImageNames = @[@"icon_wallet_filled_48", @"fen-lei-full", @"我的点击"];
     
     for (int i = 0; i < imageNames.count; i++) {
         
@@ -100,7 +100,7 @@
     
     //title颜色
     [tabBarItem setTitleTextAttributes:@{
-                                         NSForegroundColorAttributeName : [UIColor themeColor]
+                                         NSForegroundColorAttributeName : kAppCustomMainColor
                                          } forState:UIControlStateSelected];
     [tabBarItem setTitleTextAttributes:@{
                                          NSForegroundColorAttributeName : [UIColor textColor]

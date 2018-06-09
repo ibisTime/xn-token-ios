@@ -26,12 +26,19 @@
 #import "ZMAuthVC.h"
 #import <CDCommon/UIScrollView+TLAdd.h>
 #import "CoinUtil.h"
-
+#import "PlatformTableView.h"
+#import "WallAccountVC.h"
+#import "AddAccoutMoneyVc.h"
+//#import <CoreBitcoin.h>
+//#import <CoreBitcoin/CoreBitcoin.h>
+//#import "BTCMnemonic+Tests.h"
 @interface TLWalletVC ()<RefreshDelegate>
 
 @property (nonatomic, strong) WalletHeaderView *headerView;
 
 @property (nonatomic, strong) WalletTableView *tableView;
+
+@property (nonatomic, strong) PlatformTableView *currentTableView;
 
 @property (nonatomic, strong) NSArray <CurrencyModel *>*currencys;
 
@@ -62,6 +69,10 @@
     [super viewDidLoad];
     
     self.title = @"钱包";
+//    [BTCMnemonic runAllTests];
+//
+//    BTCMnemonic *m = [[BTCMnemonic alloc] init];
+//    NSLog(@"%@",m.words);
     
     //tableView
     [self initTableView];
@@ -99,6 +110,13 @@
             [weakSelf.navigationController pushViewController:descVC animated:YES];
         };
         
+        _headerView.addBlock = ^{
+            AddAccoutMoneyVc *monyVc = [[AddAccoutMoneyVc alloc] init];
+            [weakSelf.navigationController pushViewController:monyVc animated:YES];
+
+            NSLog(@"点击添加");
+        };
+        
     }
     return _headerView;
 }
@@ -108,16 +126,26 @@
 
     [self.view addSubview:self.headerView];
     
-    self.tableView = [[WalletTableView alloc] initWithFrame:CGRectMake(0, self.headerView.height, kScreenWidth, kScreenHeight - kTabBarHeight - self.headerView.height)
+    self.currentTableView = [[PlatformTableView alloc] initWithFrame:CGRectMake(0, self.headerView.height, kScreenWidth, kScreenHeight - kTabBarHeight - self.headerView.height)
                                                       style:UITableViewStyleGrouped];
     
     //    self.tableView.tableHeaderView = self.headerView;
-    self.tableView.refreshDelegate = self;
+    self.currentTableView.refreshDelegate = self;
 //    [self.tableView adjustsContentInsets];
-    [self.view addSubview:self.tableView];
+    [self.view addSubview:self.currentTableView];
 //    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
 //        make.top.equalTo(self.headerView.mas_bottom);
 //    }];
+    CoinWeakSelf;
+    self.currentTableView.selectBlock = ^(NSInteger inter) {
+        NSLog(@"%ld",inter);
+        WallAccountVC *accountVC= [[WallAccountVC alloc] init];
+        accountVC.currency = weakSelf.currencys[inter];
+        accountVC.billType = CurrentTypeAll;
+        [weakSelf.navigationController pushViewController:accountVC animated:YES];
+        
+        
+    };
 }
 
 - (void)addNotification {
@@ -153,15 +181,15 @@
         
         NSString *cnyStr = [responseObject[@"data"][@"totalAmountCNY"] convertToSimpleRealMoney];
         
-        self.headerView.cnyAmountLbl.text = [NSString stringWithFormat:@"￥%@", cnyStr];
+        self.headerView.cnyAmountLbl.text = [NSString stringWithFormat:@"%.2f", [cnyStr doubleValue]];
         
         NSString *usdStr = [responseObject[@"data"][@"totalAmountUSD"] convertToSimpleRealMoney];
         
-        self.headerView.usdAmountLbl.text = [NSString stringWithFormat:@"%@USD", usdStr];
-        
+//        self.headerView.usdAmountLbl.text = [NSString stringWithFormat:@"%@USD", usdStr];
+//
         NSString *hkdStr = [responseObject[@"data"][@"totalAmountHKD"] convertToSimpleRealMoney];
         
-        self.headerView.hkdAmountLbl.text = [NSString stringWithFormat:@"%@HKD", hkdStr];
+//        self.headerView.hkdAmountLbl.text = [NSString stringWithFormat:@"%@HKD", hkdStr];
         
     } failure:^(NSError *error) {
         
@@ -180,9 +208,9 @@
     helper.parameters[@"token"] = [TLUser user].token;
     helper.isList = YES;
     helper.isCurrency = YES;
-    helper.tableView = self.tableView;
+    helper.tableView = self.currentTableView;
     [helper modelClass:[CurrencyModel class]];
-    [self.tableView addRefreshAction:^{
+    [self.currentTableView addRefreshAction:^{
         
         [weakSelf refreshOpenCoinList];
         
@@ -204,8 +232,8 @@
             
             //
             weakSelf.currencys = shouldDisplayCoins;
-            weakSelf.tableView.currencys = shouldDisplayCoins;
-            [weakSelf.tableView reloadData_tl];
+            weakSelf.currentTableView.platforms = shouldDisplayCoins;
+            [weakSelf.currentTableView reloadData_tl];
             
         } failure:^(NSError *error) {
             
@@ -221,7 +249,7 @@
         
     }];
     
-    [self.tableView beginRefreshing];
+    [self.currentTableView beginRefreshing];
     
 }
 
@@ -294,6 +322,15 @@
         default:
             break;
     }
+}
+
+-(void)refreshTableView:(TLTableView *)refreshTableview didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+   
+    
+    
+
 }
 
 - (void)clickWithdrawWithCurrency:(CurrencyModel *)currencyModel {

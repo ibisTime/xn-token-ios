@@ -30,14 +30,15 @@
 #import "TLUploadManager.h"
 #import "AppConfig.h"
 #import <ZendeskSDK/ZendeskSDK.h>
-#import <ZDCChat/ZDCChat.h>
+//#import <ZDCChat/ZDCChat.h>
 #import <IQKeyboardManager/IQKeyboardManager.h>
 #import <CDCommon/UIScrollView+TLAdd.h>
 #import "CoinService.h"
 //#import "TLOrderVC.h"         czy
 #import "MineCell.h"
 #import "LangChooseVC.h"
-
+#import "JoinMineVc.h"
+#import "WalletSettingVC.h"
 @interface TLMineVC ()<MineHeaderSeletedDelegate, UINavigationControllerDelegate>
 
 //@property (nonatomic, strong) FBKVOController *chatKVOCtrl;   czy
@@ -78,16 +79,16 @@
 #pragma mark - UINavigationControllerDelegate
 - (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
     // 判断要显示的控制器是否是自己
-    if ([viewController isKindOfClass:[ZDCChatViewController class]]) {
-        
-        [[IQKeyboardManager sharedManager] setEnable:NO];
-        ZDCChatViewController *chatVC = (ZDCChatViewController *)viewController;
-        ZDCChatUI *chatUI = chatVC.chatUI;
-        ZDCChatView *chatView = chatUI.chatView;
-        [chatView.table adjustsContentInsets];
-        [[ZDCChat instance].overlay setEnabled:NO];
-        
-    }
+//    if ([viewController isKindOfClass:[ZDCChatViewController class]]) {
+//
+//        [[IQKeyboardManager sharedManager] setEnable:NO];
+//        ZDCChatViewController *chatVC = (ZDCChatViewController *)viewController;
+//        ZDCChatUI *chatUI = chatVC.chatUI;
+//        ZDCChatView *chatView = chatUI.chatView;
+//        [chatView.table adjustsContentInsets];
+//        [[ZDCChat instance].overlay setEnabled:NO];
+//
+//    }
 
 }
 
@@ -144,9 +145,19 @@
     
     CoinWeakSelf;
     
+    MineModel *settingModel = [MineModel new];
+    settingModel.text = [LangSwitcher switchLang:@"钱包设置" key:nil];
+    settingModel.imgName = @"钱包设置";
+    settingModel.action = ^{
+        
+        WalletSettingVC *settingVC = [WalletSettingVC new];
+        
+        [weakSelf.navigationController pushViewController:settingVC animated:YES];
+    };
+    
     //安全中心
     MineModel *securityCenter = [MineModel new];
-    securityCenter.text = [LangSwitcher switchLang:@"安全中心" key:nil];
+    securityCenter.text = [LangSwitcher switchLang:@"系统设置" key:nil];
     securityCenter.imgName = @"安全中心";
     securityCenter.action = ^{
         
@@ -158,11 +169,11 @@
     //语言设置
     MineModel *languageSetting = [MineModel new];
     
-    languageSetting.text = [LangSwitcher switchLang:@"语言设置" key:nil];
-    languageSetting.imgName = @"语言设置";
+    languageSetting.text = [LangSwitcher switchLang:@"加入社群" key:nil];
+    languageSetting.imgName = @"加入社群";
     languageSetting.action = ^{
         
-        LangChooseVC *vc = [[LangChooseVC alloc] init];
+        JoinMineVc *vc = [[JoinMineVc alloc] init];
         [weakSelf.navigationController pushViewController:vc animated:YES];
         
     };
@@ -280,7 +291,7 @@
         
         
         self.group.sections = @[
-                                @[securityCenter, languageSetting],
+                                @[settingModel,securityCenter, languageSetting],
                                 @[helpModel, abountUs]
                                 ];
         
@@ -364,7 +375,7 @@
     //
     if ([TLUser user].photo) {
         
-        [self.headerView.photoBtn setTitle:@"" forState:UIControlStateNormal];
+//        [self.headerView.photoBtn setTitle:nil forState:UIControlStateNormal];
         
         [self.headerView.photoBtn sd_setImageWithURL:[NSURL URLWithString:[[TLUser user].photo convertImageUrl]] forState:UIControlStateNormal];
         
@@ -374,7 +385,7 @@
         
         NSString *title = [nickName substringToIndex:1];
         
-        [self.headerView.photoBtn setTitle:title forState:UIControlStateNormal];
+//        [self.headerView.photoBtn setTitle:title forState:UIControlStateNormal];
         
         [self.headerView.photoBtn setImage:nil forState:UIControlStateNormal];
         

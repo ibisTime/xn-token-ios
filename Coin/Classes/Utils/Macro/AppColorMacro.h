@@ -17,7 +17,7 @@
 #define RGB(r, g, b) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:1]
 
 // 主色
-#define kAppCustomMainColor [UIColor colorWithHexString:@"#ff7d0e"]
+#define kAppCustomMainColor [UIColor colorWithHexString:@"#108ee9"]
 
 // 颜色配置
 #define kNavBarMainColor  [UIColor appNavBarMainColor]
@@ -33,7 +33,7 @@
 //151, 215, 76 RGB(195, 207, 72)
 #define kNavBarBackgroundColor  RGB(241, 241, 241)
 
-#define kBackgroundColor        [UIColor colorWithHexString:@"#F7F7F7"]   //背景色
+#define kBackgroundColor        [UIColor colorWithHexString:@"#f8f8f8"]   //背景色
 #define kLineColor              [UIColor colorWithHexString:@"#EEEEEE"]   //分割线
 #define kTextColor              [UIColor colorWithHexString:@"#484848"]   //一级文字
 #define kTextColor2             [UIColor colorWithHexString:@"#999999"]   //二级文字
@@ -97,6 +97,10 @@
 #define GOOD_PLACEHOLDER_SMALL [UIImage imageNamed:@"icon"]
 
 #define kDateFormmatter @"MMM dd, yyyy hh:mm:ss aa"
+#define KUserPwd @"userPwd"
+#define KWalletWord @"walletWord"
+
+
 
 #pragma mark - 轮播图
 

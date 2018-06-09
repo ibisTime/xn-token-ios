@@ -37,6 +37,8 @@
 //最后一次流水
 @property (nonatomic, copy) NSString *lastOrder;
 
+@property (nonatomic, copy) NSString *ID;
+
 - (NSString *)getTypeName;
 
 - (NSString *)getImgName;

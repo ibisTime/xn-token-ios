@@ -100,12 +100,12 @@ typedef NS_ENUM(NSInteger, AddressType) {
                                              titleWidth:90
                                             placeholder:@""];
     
-    self.balanceTF.textColor = kThemeColor;
+    self.balanceTF.textColor = kHexColor(@"#109ee9");
     self.balanceTF.enabled = NO;
     NSString *leftAmount = [self.currency.amountString subNumber:self.currency.frozenAmountString];
     
     NSString *currentCurrency = self.currency.currency;
-    self.balanceTF.text = [NSString stringWithFormat:@"%@ %@",[CoinUtil convertToRealCoin:leftAmount coin:currentCurrency],currentCurrency];
+    self.balanceTF.text = [NSString stringWithFormat:@"%.2f %@",[[CoinUtil convertToRealCoin:leftAmount coin:currentCurrency] doubleValue],currentCurrency];
     
     
     
@@ -196,7 +196,7 @@ typedef NS_ENUM(NSInteger, AddressType) {
     
     UIButton *pasteBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"粘贴" key:nil]
                                         titleColor:kWhiteColor
-                                   backgroundColor:kThemeColor
+                                   backgroundColor:kAppCustomMainColor
                                          titleFont:13.0
                                       cornerRadius:5];
     
@@ -401,7 +401,7 @@ typedef NS_ENUM(NSInteger, AddressType) {
     //确认付币
     UIButton *confirmPayBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"确认提币" key:nil]
                                              titleColor:kWhiteColor
-                                        backgroundColor:kThemeColor
+                                        backgroundColor:kHexColor(@"#108ee9")
                                               titleFont:16.0
                                            cornerRadius:5];
 

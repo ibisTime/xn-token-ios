@@ -57,7 +57,7 @@
         self.titleFont      = [UIFont systemFontOfSize:15];
         self.btnArray       = [[NSMutableArray alloc]init];
         self.titleNormalColor   = kWhiteColor;
-        self.bgNormalColor   = kThemeColor;
+        self.bgNormalColor   = kAppCustomMainColor;
         self.msgNormalColor = kWhiteColor;
         self.defaultSelectIndex = 0;
         self.selectIndex = 0;

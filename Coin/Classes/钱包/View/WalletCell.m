@@ -75,7 +75,7 @@
     }];
     
     //币种名称
-    self.currencyNameLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kThemeColor font:14.0];
+    self.currencyNameLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kAppCustomMainColor font:14.0];
     
     [whiteView addSubview:self.currencyNameLbl];
     [self.currencyNameLbl mas_makeConstraints:^(MASConstraintMaker *make) {

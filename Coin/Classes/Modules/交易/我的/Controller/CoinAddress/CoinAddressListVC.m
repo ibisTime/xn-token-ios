@@ -146,7 +146,7 @@
         
     }];
     
-    UIButton *addressBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"添加新地址" key:nil] titleColor:kWhiteColor backgroundColor:kThemeColor titleFont:16.0 cornerRadius:5];
+    UIButton *addressBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"添加新地址" key:nil] titleColor:kWhiteColor backgroundColor:kAppCustomMainColor titleFont:16.0 cornerRadius:5];
     
     [addressBtn addTarget:self action:@selector(addNewAddress) forControlEvents:UIControlEventTouchUpInside];
     

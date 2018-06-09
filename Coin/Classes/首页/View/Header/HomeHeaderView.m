@@ -42,7 +42,7 @@
         //轮播图
         [self initBannerView];
         //统计
-        [self initStatisticsView];
+//        [self initStatisticsView];
         //应用
         [self initApplicationView];
     }
@@ -215,7 +215,7 @@
 
 - (void)initApplicationView {
     
-    self.applicationView = [[UIView alloc] initWithFrame:CGRectMake(0, self.statisticsView.yy, kScreenWidth, 145)];
+    self.applicationView = [[UIView alloc] initWithFrame:CGRectMake(0, self.bannerView.yy, kScreenWidth, 145)];
     self.applicationView.backgroundColor = kWhiteColor;
     
     [self addSubview:self.applicationView];
