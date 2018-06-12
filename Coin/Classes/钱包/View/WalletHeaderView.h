@@ -27,4 +27,7 @@ typedef void(^WalletAddBlock)(void);
 //港元汇率
 @property (nonatomic, copy) NSString *hkdRate;
 
+@property (nonatomic, strong) UIButton *addButton;
+
+@property (nonatomic, strong)  UIView *whiteView;
 @end

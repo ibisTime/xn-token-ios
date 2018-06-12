@@ -13,6 +13,7 @@
 #import "AddSearchCell.h"
 #import "TLTabBarController.h"
 #import "TLUpdateVC.h"
+#import "MnemonicUtil.h"
 @interface BuildCheckVC ()<addCollectionViewDelegate>
 @property (nonatomic ,strong) UILabel *nameLable;
 
@@ -136,13 +137,14 @@
     
         CustomLayoutWallet *layout = [[CustomLayoutWallet alloc] init];
         layout.minimumLineSpacing = 10.0; // 竖
+    layout.minimumInteritemSpacing = 10.f;
 
         UIImage *image1 = [UIImage imageNamed:@"bch"];
         UIImage *image2 = [UIImage imageNamed:@"eth"];
         UIImage *image3 = [UIImage imageNamed:@"ltc"];
         NSArray *array = @[image2, image2, image3, image2, image3, image1, image3, image1, image1];
 
-        QHCollectionViewNine *nineView = [[QHCollectionViewNine alloc] initWithFrame:CGRectMake(15, 115, kScreenWidth, 170) collectionViewLayout:layout withImage:array];
+        QHCollectionViewNine *nineView = [[QHCollectionViewNine alloc] initWithFrame:CGRectMake(15, 115, kScreenWidth-30, 170) collectionViewLayout:layout withImage:array];
         self.nineView = nineView;
         self.nineView.type = SearchTypeTop;
         nineView.refreshDelegate = self;
@@ -155,7 +157,8 @@
 - (void)initColllention
 {
     CustomLayoutWallet *layout = [[CustomLayoutWallet alloc] init];
-    layout.minimumLineSpacing = 10.f;
+//    layout.minimumLineSpacing = 10.f;
+//    layout.minimumInteritemSpacing = 10.f;
     layout.scrollDirection         = UICollectionViewScrollDirectionVertical;
     UIImage *image1 = [UIImage imageNamed:@"bch"];
     UIImage *image2 = [UIImage imageNamed:@"eth"];
@@ -197,7 +200,9 @@
         [self.titles removeObjectAtIndex:indexPath.row];
         [self.topNames removeObjectAtIndex:indexPath.row];
         self.nineView.titles = self.titles;
-        
+        if (self.titles.count < 12) {
+            self.sureButton.selected = NO;
+        }
         [self.nineView reloadData];
 //        [self.bottomView reloadItemsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:indexPath.row inSection:0], nil]];
 //        [self.bottomtitles removeObjectAtIndex:temp];
@@ -246,7 +251,7 @@
         
         self.bottomView.bottomtitles = self.bottomtitles.mutableCopy;
         [self.nineView reloadData];
-        if (self.titles.count == 13) {
+        if (self.titles.count == 12) {
             self.sureButton.enabled = YES;
         }
 //        self.bottomView.IsNeedRefash = NO;
@@ -273,13 +278,30 @@
 {
     
     //验证助记词
-    if ([self.titles isEqualToArray:self.bottomtitles]) {
+    if ([self.titles isEqualToArray:self.userTitles]) {
+        
+        NSString *word =  [[NSUserDefaults standardUserDefaults] objectForKey:KWalletWord];
+    
+        NSString *prikey   =[MnemonicUtil getPrivateKeyWithMnemonics:word];
+
+        NSString *address = [MnemonicUtil getAddressWithPrivateKey:prikey];
         
         
+        [[NSUserDefaults standardUserDefaults] setObject:prikey forKey:KWalletPrivateKey];
+        [[NSUserDefaults standardUserDefaults] setObject:address forKey:KWalletAddress];
+        [[NSUserDefaults standardUserDefaults] synchronize];
         NSString *text = [LangSwitcher switchLang:@"助记词顺序验证通过,请妥善保管助记词" key:nil];
         
         [TLAlert alertWithMsg:text];
         //验证通过
+        
+        if (self.isCopy == YES) {
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [self.navigationController popToRootViewControllerAnimated:YES];
+                return ;
+            });
+        }
+        
         TLUpdateVC *up = [[TLUpdateVC alloc] init];
         
         TLTabBarController *tabBarCtrl = [[TLTabBarController alloc] init];

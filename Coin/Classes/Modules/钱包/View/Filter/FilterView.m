@@ -52,7 +52,7 @@
     
     if (!_filterPicker) {
         
-        _filterPicker = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 50, kScreenWidth, 200)];
+        _filterPicker = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 100, kScreenWidth, 200)];
         
         _filterPicker.delegate = self;
         _filterPicker.dataSource = self;
@@ -94,14 +94,22 @@
     }];
     
     //text
-    self.textLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:16.0];
+    self.textLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:14.0];
     
     [self.pickerView addSubview:self.textLbl];
+    self.textLbl.numberOfLines = 0;
+    self.textLbl.textAlignment = NSTextAlignmentCenter;
+    [self.textLbl sizeToFit];
+
     [self.textLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.top.equalTo(@0);
-        make.centerX.equalTo(self.pickerView.mas_centerX);
-        make.height.equalTo(@50);
+        make.top.equalTo(@45);
+//        make.left.equalTo(@)
+//        make.centerX.equalTo(self.pickerView.mas_centerX);
+        make.left.equalTo(@15);
+        make.right.equalTo(@-15);
+
+        make.height.equalTo(@64);
         
     }];
     
@@ -128,7 +136,7 @@
     [self.pickerView addSubview:line];
     [line mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.top.equalTo(cancelBtn.mas_bottom);
+        make.top.equalTo(_textLbl.mas_bottom);
         make.left.equalTo(@0);
         make.width.equalTo(@(kScreenWidth));
         make.height.equalTo(@0.5);
@@ -282,7 +290,7 @@
 {
     if (_tagNames.count) {
         
-        self.textLbl.text = _tagNames[row];
+//        self.textLbl.text = _tagNames[row];
         
         self.selectIndex = row;
         

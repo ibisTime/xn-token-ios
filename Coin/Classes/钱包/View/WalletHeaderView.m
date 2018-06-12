@@ -13,7 +13,6 @@
 @interface WalletHeaderView ()
 //背景
 @property (nonatomic, strong) UIImageView *bgIV;
-@property (nonatomic, strong) UIButton *addButton;
 
 //汇率
 @property (nonatomic, strong) UILabel *rateAmountLbl;
@@ -164,7 +163,7 @@
     UIView *whiteView = [[UIView alloc] init];
     
     whiteView.backgroundColor = kWhiteColor;
-    
+    self.whiteView = whiteView;
     [self addSubview:whiteView];
     [whiteView mas_makeConstraints:^(MASConstraintMaker *make) {
         

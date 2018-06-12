@@ -46,11 +46,12 @@
 
 - (void)viewDidLoad {
     
-    self.title = @"账单";
-    [super viewDidLoad];
-    [self initHeadView];
+//    self.title = @"账单";
+  
 //    [self setPlaceholderViewTitle:@"加载失败" operationTitle:@"重新加载"];
     //暂无明细
+    [super viewDidLoad];
+    [self initHeadView];
     [self initPlaceHolderView];
     [self initTableView];
     [self initBottonView];

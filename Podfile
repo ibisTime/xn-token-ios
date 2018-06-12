@@ -22,6 +22,7 @@ pod 'SGQRCode',             '2.1.8'
 pod 'PYPhotoBrowser',       '1.1.5'
 
 #pod 'pop',                 '1.0.10'
+pod 'FMDB'
 
 #七牛云
 pod 'JPush'
@@ -40,7 +41,7 @@ pod 'UIDeviceIdentifier', :git => 'https://github.com/squarefrog/UIDeviceIdentif
 
 #pod 'Geth', '1.8.10'
 
-#use_modular_headers!
+use_modular_headers!
 #pod 'web3swift', '~> 0.8.0'
 use_frameworks!
 pod 'web3swift', '~> 0.8.0'

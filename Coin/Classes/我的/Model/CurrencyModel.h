@@ -35,9 +35,22 @@
 @property (nonatomic,copy) NSString *type;
 @property (nonatomic,copy) NSString *userId;
 //最后一次流水
+
+@property (nonatomic,copy) NSString *symbol;
+@property (nonatomic,copy) NSString *address;
+@property (nonatomic,copy) NSString *priceCNY;
+@property (nonatomic,copy) NSString *priceUSD;
+@property (nonatomic,copy) NSString *amountCNY;
+@property (nonatomic,copy) NSString *priceHKD;
+@property (nonatomic,copy) NSString *amountUSD;
+@property (nonatomic,copy) NSString *amountHKD;
+@property (nonatomic,copy) NSString *balance;
+
 @property (nonatomic, copy) NSString *lastOrder;
 
 @property (nonatomic, copy) NSString *ID;
+
+@property (nonatomic, assign) BOOL IsSelected;
 
 - (NSString *)getTypeName;
 

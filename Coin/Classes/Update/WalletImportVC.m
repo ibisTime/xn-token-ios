@@ -13,6 +13,7 @@
 #import "TLTextView.h"
 #import "TLAlert.h"
 #import "RevisePassWordVC.h"
+#import "MnemonicUtil.h"
 @interface WalletImportVC ()<UITextViewDelegate>
 @property (nonatomic ,strong) UILabel *nameLable;
 
@@ -22,6 +23,10 @@
 @property (nonatomic ,strong) NSMutableArray *tempArray;
 @property (nonatomic ,strong) NSMutableArray *UserWordArray;
 
+@property (nonatomic ,strong) NSMutableArray *wordTempArray;
+@property (nonatomic ,strong) NSArray *userTempArray;
+
+
 @end
 
 @implementation WalletImportVC
@@ -29,6 +34,22 @@
 - (void)viewDidLoad {
     self.title = [LangSwitcher switchLang:@"导入钱包" key:nil];
     self.view.backgroundColor = kBackgroundColor;
+    NSString *word = [[NSUserDefaults standardUserDefaults] objectForKey:KWalletWord];
+    
+    //验证
+    self.userTempArray = [word componentsSeparatedByString:@" "];
+    self.wordTempArray = [NSMutableArray array];
+    
+    for (NSString *str in self.userTempArray) {
+        if ([str  isEqual: @""]) {
+            //
+        }else{
+            
+            [self.wordTempArray addObject:str];
+        }
+    }
+    NSLog(@"%@",self.tempArray);
+    self.UserWordArray = self.wordTempArray;
     [self initSub];
     [super viewDidLoad];
 
@@ -115,23 +136,49 @@
         }
     }
     NSLog(@"%@",self.tempArray);
-    if ([self.UserWordArray isEqualToArray:self.tempArray]) {
+    if (self.tempArray.count >= 12) {
+      BOOL  is  =  [MnemonicUtil getMnemonicsISRight:self.textView.text];
+        NSLog(@"MnemonicUtil===%d",is);
+    }
+    
+    if ([MnemonicUtil getMnemonicsISRight:self.textView.text] == YES) {
+        NSString *word = self.textView.text;
         
+        NSString *prikey   =[MnemonicUtil getPrivateKeyWithMnemonics:word];
+        
+        NSString *address = [MnemonicUtil getAddressWithPrivateKey:prikey];
+        
+        [[NSUserDefaults standardUserDefaults] setObject:word forKey:KWalletWord];
+        
+        
+        [[NSUserDefaults standardUserDefaults] setObject:prikey forKey:KWalletPrivateKey];
+        [[NSUserDefaults standardUserDefaults] setObject:address forKey:KWalletAddress];
+        [[NSUserDefaults standardUserDefaults] synchronize];
         //验证正确
-//        [TLAlert alertWithMsg:@"导入成功"];
         RevisePassWordVC *vc = [[RevisePassWordVC alloc] init];
         vc.IsImport = YES;
         [self.navigationController pushViewController:vc animated:YES];
+        [TLAlert alertWithMsg:@"导入成功"];
+
         //设置交易密码
     }else{
         
+//        NSString *str = [MnemonicUtil getPrivateKeyWithMnemonics:self.textView.text];
+
+       
         //验证失败
 //        [self.navigationController pushViewController:vc animated:YES];
-
+//
+//       NSString *str = [MnemonicUtil getPrivateKeyWithMnemonics:self.textView.text];
+//        NSLog(@"%@",str);
 //        [TLAlert alertWithMsg:@"助记词验证成功"];
-        RevisePassWordVC *vc = [[RevisePassWordVC alloc] init];
-        vc.IsImport = YES;
-        [self.navigationController pushViewController:vc animated:YES];
+        [TLAlert alertWithMsg:@"助记词不存在,请检测备份"];
+        self.importButton.selected = NO;
+        return;
+
+//        RevisePassWordVC *vc = [[RevisePassWordVC alloc] init];
+//        vc.IsImport = YES;
+//        [self.navigationController pushViewController:vc animated:YES];
     }
     
     //

@@ -29,6 +29,9 @@
 #import "PlatformTableView.h"
 #import "WallAccountVC.h"
 #import "AddAccoutMoneyVc.h"
+#import "TLAccountTableView.h"
+#import <MJExtension/MJExtension.h>
+#import "WalletLocalVc.h"
 //#import <CoreBitcoin.h>
 //#import <CoreBitcoin/CoreBitcoin.h>
 //#import "BTCMnemonic+Tests.h"
@@ -38,9 +41,12 @@
 
 @property (nonatomic, strong) WalletTableView *tableView;
 
-@property (nonatomic, strong) PlatformTableView *currentTableView;
+@property (nonatomic, strong) TLAccountTableView *currentTableView;
 
-@property (nonatomic, strong) NSArray <CurrencyModel *>*currencys;
+@property (nonatomic, strong) NSMutableArray <CurrencyModel *>*currencys;
+
+@property (nonatomic, strong) NSMutableArray <CurrencyModel *>*tempcurrencys;
+
 
 @end
 
@@ -77,11 +83,28 @@
     //tableView
     [self initTableView];
     //列表查询我的币种
-    [self getMyCurrencyList];
+    [self getLocalWalletMessage];
     //通知
     [self addNotification];
     
 //    self.tableView.backgroundColor = [UIColor themeColor];
+    
+}
+
+
+- (void)getLocalWalletMessage
+{
+    //获取本地去中心化币种
+    
+    
+    
+    
+    //获取我的资产
+    [self queryTotalAmount];
+    
+    //本地读取数据
+
+    
     
 }
 
@@ -101,8 +124,8 @@
         
         CoinWeakSelf;
         
-        _headerView = [[WalletHeaderView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 150 + kStatusBarHeight + 50)];
-        
+        _headerView = [[WalletHeaderView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 150 + kStatusBarHeight )];
+        _headerView.whiteView.hidden = YES;
         _headerView.headerBlock = ^{
             
             RateDescVC *descVC = [RateDescVC new];
@@ -112,8 +135,22 @@
         
         _headerView.addBlock = ^{
             AddAccoutMoneyVc *monyVc = [[AddAccoutMoneyVc alloc] init];
+//            monyVc.currencys = weakSelf.currencys;
             [weakSelf.navigationController pushViewController:monyVc animated:YES];
-
+            weakSelf.tempcurrencys = [NSMutableArray array];
+            monyVc.select = ^(NSMutableArray *model) {
+//                weakSelf.currencys = model;
+                weakSelf.currencys = [NSMutableArray array];
+                for (CurrencyModel *m in model) {
+                    if (m.IsSelected == YES) {
+                        [weakSelf.currencys addObject:m];
+                    }
+                }
+                weakSelf.currentTableView.platforms = weakSelf.currencys;
+                [weakSelf.currentTableView reloadData];
+                NSLog(@"%@",model);
+            };
+            
             NSLog(@"点击添加");
         };
         
@@ -126,7 +163,7 @@
 
     [self.view addSubview:self.headerView];
     
-    self.currentTableView = [[PlatformTableView alloc] initWithFrame:CGRectMake(0, self.headerView.height, kScreenWidth, kScreenHeight - kTabBarHeight - self.headerView.height)
+    self.currentTableView = [[TLAccountTableView alloc] initWithFrame:CGRectMake(0, self.headerView.height, kScreenWidth, kScreenHeight - kTabBarHeight - self.headerView.height)
                                                       style:UITableViewStyleGrouped];
     
     //    self.tableView.tableHeaderView = self.headerView;
@@ -139,9 +176,9 @@
     CoinWeakSelf;
     self.currentTableView.selectBlock = ^(NSInteger inter) {
         NSLog(@"%ld",inter);
-        WallAccountVC *accountVC= [[WallAccountVC alloc] init];
+        WalletLocalVc *accountVC= [[WalletLocalVc alloc] init];
         accountVC.currency = weakSelf.currencys[inter];
-        accountVC.billType = CurrentTypeAll;
+        accountVC.billType = LocalTypeAll;
         [weakSelf.navigationController pushViewController:accountVC animated:YES];
         
         
@@ -159,23 +196,48 @@
 
 - (void)userlogin {
     
-    [self getMyCurrencyList];
+//    [self getMyCurrencyList];
     
 }
 
 - (void)withDrawCoinSuccess {
     
-    [self getMyCurrencyList];
+//    [self getMyCurrencyList];
     
 }
 
 #pragma mark - Data
 - (void)queryTotalAmount {
-    
+    [self.currentTableView beginRefreshing];
     TLNetworking *http = [TLNetworking new];
-    http.code = @"802503";
-    http.parameters[@"userId"] = [TLUser user].userId;
-    http.parameters[@"token"] = [TLUser user].token;
+    http.code = @"802270";
+    
+    NSArray *a = [[NSUserDefaults standardUserDefaults] objectForKey:@"localArray"];
+    if (a.count > 0) {
+        http.ISparametArray = YES;
+
+        http.parameters[@"accountList"] = a;
+    }
+    else{
+    
+    NSString *address  =  [[NSUserDefaults standardUserDefaults] objectForKey:KWalletAddress];
+
+    http.ISparametArray = YES;
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    NSMutableDictionary *dicWan = [NSMutableDictionary dictionary];
+
+    [dic setObject:@"ETH" forKey:@"symbol"];
+    [dic setObject:address forKey:@"address"];
+    [dicWan setObject:@"WAN" forKey:@"symbol"];
+    [dicWan setObject:address forKey:@"address"];
+    NSArray *arr = @[dic,dicWan];
+    http.parameters[@"accountList"] = arr;
+    }
+
+//    http.parametArray = @[ dic];
+
+    
+    CoinWeakSelf;
     
     [http postWithSuccess:^(id responseObject) {
         
@@ -183,17 +245,25 @@
         
         self.headerView.cnyAmountLbl.text = [NSString stringWithFormat:@"%.2f", [cnyStr doubleValue]];
         
-        NSString *usdStr = [responseObject[@"data"][@"totalAmountUSD"] convertToSimpleRealMoney];
+        NSArray *usdStr = responseObject[@"data"][@"accountList"];
         
+        weakSelf.currencys   =  [CurrencyModel mj_objectArrayWithKeyValuesArray:usdStr];
+        
+        NSLog(@"%@",self.currencys);
+        
+        weakSelf.currentTableView.platforms = weakSelf.currencys;
+        [weakSelf.currentTableView reloadData_tl];
 //        self.headerView.usdAmountLbl.text = [NSString stringWithFormat:@"%@USD", usdStr];
 //
-        NSString *hkdStr = [responseObject[@"data"][@"totalAmountHKD"] convertToSimpleRealMoney];
+//        NSString *hkdStr = [responseObject[@"data"][@"totalAmountHKD"] convertToSimpleRealMoney];
         
 //        self.headerView.hkdAmountLbl.text = [NSString stringWithFormat:@"%@HKD", hkdStr];
+        [self.currentTableView endRefreshingWithNoMoreData_tl];
         
     } failure:^(NSError *error) {
         
-        
+        [self.currentTableView endRefreshingWithNoMoreData_tl];
+
     }];
 }
 
@@ -245,7 +315,6 @@
         //查询港元汇率
         [weakSelf searchRateWithCurrency:@"HKD"];
         //查询总资产
-        [weakSelf queryTotalAmount];
         
     }];
     

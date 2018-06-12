@@ -8,6 +8,7 @@
 
 #import "BuildSucessVC.h"
 #import "BuildBackUpVC.h"
+#import "MnemonicUtil.h"
 @interface BuildSucessVC ()
 
 @property (nonatomic ,strong) UIImageView *iconImage;
@@ -23,6 +24,9 @@
 @property (nonatomic ,strong) UIButton *importButton;
 
 @property (nonatomic ,strong) UIButton *introduceButton;
+
+@property (nonatomic ,copy) NSString *mnemonics;
+
 @end
 
 @implementation BuildSucessVC
@@ -30,6 +34,7 @@
 - (void)viewDidLoad {
     self.title = [LangSwitcher switchLang:@"钱包备份" key:nil];
     [self initViews];
+//    self.mnemonics =  [MnemonicUtil getGenerateMnemonics];
 
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -141,6 +146,49 @@
 {
     //点击备份钱包 生成助记词
     BuildBackUpVC *backUpVC = [BuildBackUpVC new];
+    NSString *word  =[[NSUserDefaults standardUserDefaults] objectForKey:KWalletWord];
+    if (word.length > 0) {
+        self.mnemonics = word;
+    }else{
+    self.mnemonics = [MnemonicUtil getGenerateMnemonics];
+    }
+    NSArray *words = [self.mnemonics componentsSeparatedByString:@" "];
+    NSMutableArray *categoryArray = [[NSMutableArray alloc] init];
+    
+    for (unsigned i = 0; i < [words count]; i++){
+        
+        if ([categoryArray containsObject:[words objectAtIndex:i]] == NO){
+            
+            [categoryArray addObject:[words objectAtIndex:i]];
+            
+        }
+        
+        
+        
+    }
+    if (categoryArray.count < 12) {
+        self.mnemonics = [MnemonicUtil getGenerateMnemonics];
+        NSArray *words = [self.mnemonics componentsSeparatedByString:@" "];
+        NSMutableArray *categoryArray = [[NSMutableArray alloc] init];
+        
+        for (unsigned i = 0; i < [words count]; i++){
+            
+            if ([categoryArray containsObject:[words objectAtIndex:i]] == NO){
+                
+                [categoryArray addObject:[words objectAtIndex:i]];
+                
+            }
+            
+            
+            
+        }
+    }
+    if (categoryArray.count < 12) {
+        [self buildBackUpWallet];
+    }
+    backUpVC.mnemonics = [categoryArray componentsJoinedByString:@" "];
+//    self.bottomNames = [NSMutableArray array];
+    backUpVC.isCopy = self.isCopy;
     [self.navigationController pushViewController:backUpVC animated:YES];
     
 //    TLNavigationController *na = [[TLNavigationController alloc] initWithRootViewController:backUpVC];

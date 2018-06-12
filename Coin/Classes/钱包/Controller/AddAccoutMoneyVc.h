@@ -7,7 +7,11 @@
 //
 
 #import "TLBaseVC.h"
+#import "CurrencyModel.h"
+typedef void(^currenSelect)(NSMutableArray * model) ;
 
 @interface AddAccoutMoneyVc : TLBaseVC
+@property (nonatomic ,copy) currenSelect select;
+@property (nonatomic, strong) NSMutableArray <CurrencyModel *>*currencys;
 
 @end

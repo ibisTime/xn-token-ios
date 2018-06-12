@@ -14,16 +14,43 @@
 + (void)test{
     
     NSString *mnenomic = [EthCrypto generateMnemonics];
-    mnenomic = @"cube oil need license stove style act drive kit ship claw rapid";
+//    mnenomic = @"cube oil need license stove style act drive kit ship claw rapid";
     
     NSString *privateKey = [EthCrypto getPrivateKey:mnenomic];
     
     NSString *address = [EthCrypto getAddressWithPrivateKey:privateKey];
-    
+    BOOL is = [EthCrypto getISRightKey:mnenomic];
+    NSLog(@"%d",is);
     NSLog(@"mnenomic=%@", mnenomic);
     NSLog(@"privateKey=%@", privateKey);
     NSLog(@"address=%@", address);
     
+}
+
++(BOOL)getMnemonicsISRight:(NSString *)mnemon
+{
+    return [EthCrypto getISRightKey:mnemon];
+    
+    
+}
+
++(NSString *)getGenerateMnemonics
+{
+    
+    return [EthCrypto generateMnemonics];
+}
+
++(NSString *)getPrivateKeyWithMnemonics:(NSString *)mnemonics
+{
+    
+    return [EthCrypto getPrivateKey:mnemonics];
+    
+}
+
++(NSString *)getAddressWithPrivateKey:(NSString *)privateKey
+{
+    
+    return [EthCrypto getAddressWithPrivateKey:privateKey];
 }
 
 //+ (BTCMnemonic *)generateNewMnemonic {

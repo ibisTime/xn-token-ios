@@ -11,6 +11,9 @@
 #import "QHCollectionViewNine.h"
 #import "CurrencyTitleModel.h"
 #import "BuildCheckVC.h"
+#import "CustomLayoutWallet.h"
+#import "MnemonicUtil.h"
+#import "CurrencyTitleModel.h"
 @interface BuildBackUpVC ()<addCollectionViewDelegate>
 @property (nonatomic ,strong) UILabel *nameLable;
 
@@ -26,7 +29,8 @@
 
 @property (nonatomic, strong) NSMutableArray <CurrencyTitleModel *> *bottomNames;
 
-@property (nonatomic, strong) NSMutableArray  *walletWords;
+@property (nonatomic, strong) NSMutableArray <CurrencyTitleModel *> *tempNames;
+
 
 @end
 
@@ -45,84 +49,37 @@
 
 - (void)inititem
 {
+    NSArray *words = [self.mnemonics componentsSeparatedByString:@" "];
     
+    NSArray *tempArr = words.mutableCopy;
+
     self.bottomNames = [NSMutableArray array];
     
-        CurrencyTitleModel *titleMode = [CurrencyTitleModel new];
-        CurrencyTitleModel *titleMode1 = [CurrencyTitleModel new];
-        CurrencyTitleModel *titleMode2 = [CurrencyTitleModel new];
-        CurrencyTitleModel *titleMode3 = [CurrencyTitleModel new];
-        CurrencyTitleModel *titleMode4 = [CurrencyTitleModel new];
-        CurrencyTitleModel *titleMode5 = [CurrencyTitleModel new];
-        CurrencyTitleModel *titleMode6 = [CurrencyTitleModel new];
-        CurrencyTitleModel *titleMode7 = [CurrencyTitleModel new];
-        CurrencyTitleModel *titleMode8 = [CurrencyTitleModel new];
-        CurrencyTitleModel *titleMode9 = [CurrencyTitleModel new];
-        CurrencyTitleModel *titleMode10 = [CurrencyTitleModel new];
-        CurrencyTitleModel *titleMode11 = [CurrencyTitleModel new];
-        CurrencyTitleModel *titleMode12 = [CurrencyTitleModel new];
+    for (int i = 0; i < tempArr.count; i++) {
+     CurrencyTitleModel *title =  [[CurrencyTitleModel alloc] init];
+        title.symbol = words[i];
+        title.IsSelect = YES;
 
-        titleMode.symbol = @"terrstes";
-        titleMode1.symbol = @"testww";
-        titleMode2.symbol = @"testetes";
-        titleMode3.symbol = @"teste";
-        titleMode4.symbol = @"testw";
-        titleMode5.symbol = @"testeee";
-        titleMode6.symbol = @"teswwt";
-        titleMode7.symbol = @"testeteste";
-        titleMode8.symbol = @"tereer";
-        titleMode9.symbol = @"tesw";
-        titleMode10.symbol = @"teseeet";
-        titleMode11.symbol = @"teeestw";
-        titleMode12.symbol = @"tesr";
-
+        [self.bottomNames addObject:title];
+    }
     
-
-        titleMode.IsSelect = NO;
-        titleMode1.IsSelect = NO;
-        titleMode2.IsSelect = NO;
-        titleMode3.IsSelect = NO;
-        titleMode4.IsSelect = NO;
-        titleMode5.IsSelect = NO;
-        titleMode6.IsSelect = NO;
-        titleMode7.IsSelect = NO;
-        titleMode8.IsSelect = NO;
-        titleMode9.IsSelect = NO;
-        titleMode10.IsSelect = NO;
-        titleMode11.IsSelect = NO;
-        titleMode12.IsSelect = NO;
-        [self.bottomNames addObject:titleMode];
-        [self.bottomNames addObject:titleMode1];
-        [self.bottomNames addObject:titleMode2];
-        [self.bottomNames addObject:titleMode3];
-        [self.bottomNames addObject:titleMode4];
-        [self.bottomNames addObject:titleMode5];
-        [self.bottomNames addObject:titleMode6];
-        [self.bottomNames addObject:titleMode7];
-        [self.bottomNames addObject:titleMode8];
-        [self.bottomNames addObject:titleMode9];
-        [self.bottomNames addObject:titleMode10];
-        [self.bottomNames addObject:titleMode11];
-        [self.bottomNames addObject:titleMode12];
-    
-    self.bottomView.bottomtitles = self.bottomNames;
+    self.bottomView.titles = self.bottomNames;
+    NSMutableArray *tpArray = [NSMutableArray array];
+    for (int i = 0; i < self.bottomNames.count; i++) {
+        [tpArray addObject:self.bottomNames[i].symbol];
+    }
     
     
-    
-    NSString *text = [self.bottomNames componentsJoinedByString:@""];
-    
-    [[NSUserDefaults standardUserDefaults] setObject:text forKey:KWalletWord];
-    [[NSUserDefaults standardUserDefaults] synchronize];
     [self.bottomView reloadData];
     
 }
 - (void)initColllention
 {
-    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+    CustomLayoutWallet *layout = [[CustomLayoutWallet alloc] init];
 //    layout.itemSize = CGSizeMake(80, 30);
-    layout.minimumLineSpacing = 15.0; // 竖
-    layout.minimumInteritemSpacing = 5.0; // 横
-    layout.sectionInset = UIEdgeInsetsMake(10, 10, 10, 10);
+    layout.minimumLineSpacing = 10.0; // 竖
+//    layout.minimumInteritemSpacing = 10.0; // 横
+//    layout.sectionInset = UIEdgeInsetsMake(10, 10, , 10);
     UIImage *image1 = [UIImage imageNamed:@"bch"];
     UIImage *image2 = [UIImage imageNamed:@"eth"];
     UIImage *image3 = [UIImage imageNamed:@"ltc"];
@@ -130,7 +87,7 @@
     QHCollectionViewNine *bottomView = [[QHCollectionViewNine alloc] initWithFrame:CGRectMake(15, 150, kScreenWidth-30, 173) collectionViewLayout:layout withImage:array];
     self.bottomView = bottomView;
     bottomView.refreshDelegate = self;
-    self.bottomView.type = SearchTypeBottom;
+    self.bottomView.type = SearchTypeTop;
     [self.view addSubview:bottomView];
     
     bottomView.layer.cornerRadius = 6;
@@ -188,10 +145,103 @@
 -(void)buildBackUpWallet
 {
     
+    
+    
+    NSArray *tempArr = self.bottomNames;
+    
+    self.tempNames = [NSMutableArray array];
+    
+    for (int i = 0; i < self.bottomNames.count; i++) {
+        CurrencyTitleModel *title = tempArr[i];
+        title.IsSelect = NO;
+        
+        [self.tempNames addObject:title];
+    }
+    
+//    self.bottomView.titles = self.bottomNames;
     //验证助记词
     BuildCheckVC *checkVC= [[BuildCheckVC alloc] init];
     
+    checkVC.isCopy = self.isCopy;
+//    self.mnemonics =  [MnemonicUtil getGenerateMnemonics];
+    NSArray *words = [self.mnemonics componentsSeparatedByString:@" "];
+    
+    NSArray *tmpArr = words.mutableCopy;
+    
+    self.bottomNames = [NSMutableArray array];
+    
+    for (int i = 0; i < tmpArr.count; i++) {
+        CurrencyTitleModel *title =  [[CurrencyTitleModel alloc] init];
+        title.symbol = words[i];
+        title.IsSelect = NO;
+        
+        [self.bottomNames addObject:title];
+    }
+    
+    self.bottomView.titles = self.bottomNames;
+    NSMutableArray *tpArray = [NSMutableArray array];
+    for (int i = 0; i < self.bottomNames.count; i++) {
+        [tpArray addObject:self.bottomNames[i].symbol];
+    }
+    
+    NSMutableArray *categoryArray = [[NSMutableArray alloc] init];
+    
+    for (unsigned i = 0; i < [self.bottomNames count]; i++){
+        
+        if ([tpArray containsObject:[self.bottomNames objectAtIndex:i].symbol] == NO){
+            
+            [categoryArray addObject:[self.bottomNames objectAtIndex:i]];
+            
+        }
+        
+        
+        
+    }
+    if (categoryArray.count == 11) {
+        self.mnemonics = [MnemonicUtil getGenerateMnemonics];
+        NSArray *words = [self.mnemonics componentsSeparatedByString:@" "];
+        
+        NSArray *tmpArr = words.mutableCopy;
+        
+        self.bottomNames = [NSMutableArray array];
+        
+        for (int i = 0; i < tmpArr.count; i++) {
+            CurrencyTitleModel *title =  [[CurrencyTitleModel alloc] init];
+            title.symbol = words[i];
+            title.IsSelect = NO;
+            
+            [self.bottomNames addObject:title];
+        }
+    }
+    checkVC.userTitles = self.bottomNames.mutableCopy;
+    NSArray *result = [self.bottomNames sortedArrayUsingComparator:^NSComparisonResult( CurrencyTitleModel* obj1,  CurrencyTitleModel* obj2) {
+        
+        NSLog(@"%@~%@",obj1,obj2);
+        
+        //乱序
+        
+        if (arc4random_uniform(2) == 0) {
+            
+            return [obj2.symbol compare:obj1.symbol]; //降序
+            
+        }
+        
+        else{
+            
+            return [obj1.symbol compare:obj2.symbol]; //升序
+            
+        }
+        
+    }];
+    
+    
+    NSLog(@"result=%@",result);
+    self.bottomNames = [NSMutableArray arrayWithArray:result];
+    
     checkVC.bottomtitles = self.bottomNames;
+    
+    
+    checkVC.titleWord = self.mnemonics;
     
     [self.navigationController pushViewController:checkVC animated:YES];
     

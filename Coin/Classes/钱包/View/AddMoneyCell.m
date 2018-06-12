@@ -84,7 +84,7 @@
     }];
     
     self.selectButton = [UIButton buttonWithImageName:@"未选中" selectedImageName:@"选中资产"];
-    
+    self.selectButton.selected = YES;
     [whiteView addSubview:self.selectButton];
     [self.selectButton addTarget:self action:@selector(ChoseClick:) forControlEvents:UIControlEventTouchUpInside];
     [self.selectButton mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -110,6 +110,8 @@
 {
     
     btn.selected =! btn.selected;
+    _currency.IsSelected = btn.selected;
+
 }
 
 - (void)setCurrency:(CurrencyModel *)currency {
@@ -119,10 +121,17 @@
     
     //    self.coinIV.image = kImage(_currency.getImgName);
     
-    CoinModel *coin = [CoinUtil getCoinModel:currency.currency];
-    self.currencyNameLbl.text = [NSString stringWithFormat:@"%@ - %@",coin.symbol,[coin.ename capitalizedString]];
+//    CoinModel *coin = [CoinUtil getCoinModel:currency.currency];
+    self.currencyNameLbl.text = [NSString stringWithFormat:@"%@",currency.symbol];
+    if ([currency.symbol isEqualToString:@"WAN"]) {
+        self.coinIV.image = [UIImage imageNamed:@"wan"];
+    }else if ([currency.symbol isEqualToString:@"ETH"])
+    {
+        self.coinIV.image = [UIImage imageNamed:@"eth"];
+    }
+    self.selectButton.selected = currency.IsSelected;
 
-    [self.coinIV sd_setImageWithURL:[NSURL URLWithString:[coin.pic1 convertImageUrl]]];
+//    [self.coinIV sd_setImageWithURL:[NSURL URLWithString:[coin.pic1 convertImageUrl]]];
     
 //    NSString *leftAmount = [_currency.amountString subNumber:_currency.frozenAmountString];
     

@@ -10,5 +10,6 @@
 #import "CurrencyModel.h"
 @interface WallAccountHeadView : UIView
 @property (nonatomic , strong) CurrencyModel *currency;
+@property (nonatomic , assign) BOOL ISLocal;
 
 @end

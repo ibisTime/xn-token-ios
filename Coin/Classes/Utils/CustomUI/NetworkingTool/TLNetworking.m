@@ -103,12 +103,23 @@
 
         }
         
-        self.parameters[@"companyCode"] = [[self class] companyCode];
-        
-        NSData *data = [NSJSONSerialization dataWithJSONObject:self.parameters options:NSJSONWritingPrettyPrinted error:nil];
-        self.parameters = [NSMutableDictionary dictionaryWithCapacity:2];
-        self.parameters[@"code"] = self.code;
-        self.parameters[@"json"] = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        if (self.ISparametArray == YES) {
+            self.parameters[@"systemCode"] = nil;
+
+              NSData *data = [NSJSONSerialization dataWithJSONObject:self.parameters options:NSJSONWritingPrettyPrinted error:nil];
+            self.parameters = [NSMutableDictionary dictionaryWithCapacity:2];
+            self.parameters[@"code"] = self.code;
+            self.parameters[@"json"] = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        }else{
+            
+            self.parameters[@"companyCode"] = [[self class] companyCode];
+            
+            NSData *data = [NSJSONSerialization dataWithJSONObject:self.parameters options:NSJSONWritingPrettyPrinted error:nil];
+            self.parameters = [NSMutableDictionary dictionaryWithCapacity:2];
+            self.parameters[@"code"] = self.code;
+            self.parameters[@"json"] = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            
+        }
         
     }
     
@@ -128,7 +139,7 @@
 
     }
     
-  return [self.manager POST:self.url parameters:self.parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    return [self.manager POST:self.url parameters:self.parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
       
       [HttpLogger logDebugInfoWithResponse:task.response apiName:self.code resposeString:responseObject request:task.originalRequest error:nil];
       

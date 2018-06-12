@@ -95,7 +95,7 @@ static NSString *bottomIdentifierCell = @"AddSearchBottomCell";
     CurrencyTitleModel *titleModel = self.bottomtitles[indexPath.row];
     CGSize labSize = [titleModel.symbol boundingRectWithSize:CGSizeMake(kScreenWidth, __FLT_MAX__) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSDocumentTypeDocumentAttribute : NSHTMLTextDocumentType,NSFontAttributeName :[UIFont systemFontOfSize:18]} context:nil].size;
     NSLog(@"%@",NSStringFromCGSize(labSize));
-    return CGSizeMake(labSize.width +15, 40);
+    return CGSizeMake(labSize.width +10, 40);
     }
     
 }

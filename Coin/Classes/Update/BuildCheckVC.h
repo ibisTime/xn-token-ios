@@ -12,4 +12,12 @@
 @property (nonatomic, strong) NSMutableArray <CurrencyTitleModel *> *bottomtitles;
 @property (nonatomic, strong) NSMutableArray <CurrencyTitleModel *>*titles;
 @property (nonatomic, strong) NSMutableArray <CurrencyTitleModel *>*tempTitles;
+
+@property (nonatomic, strong) NSMutableArray <CurrencyTitleModel *>*userTitles;
+
+@property (nonatomic, copy) NSString *titleWord;
+
+@property (nonatomic, assign) BOOL isCopy;
+
+
 @end

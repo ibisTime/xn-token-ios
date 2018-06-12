@@ -51,6 +51,15 @@
 
 @property (nonatomic, assign) CGFloat dHeightValue;
 
+@property (nonatomic, copy) NSString *priceCNY;
+
+@property (nonatomic, copy) NSString *priceUSD;
+
+@property (nonatomic, copy) NSString *priceHKD;
+
+
+
+
 - (NSString *)getStatusName;
 
 - (NSString *)getBizName;

@@ -7,11 +7,19 @@
 //
 
 #import <Foundation/Foundation.h>
-//#import <CoreBitcoin/CoreBitcoin.h>
 
 @interface MnemonicUtil : NSObject
 
 + (void)test ;
+
++ (NSString *)getGenerateMnemonics;
+
++ (NSString *)getPrivateKeyWithMnemonics: (NSString*)mnemonics;
+
++ (NSString *)getAddressWithPrivateKey: (NSString*)privateKey;
+
++ (BOOL )getMnemonicsISRight:(NSString *)mnemon;
+
 
 ////生成随机的助记词
 //+ (BTCMnemonic *)generateNewMnemonic;

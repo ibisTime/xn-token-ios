@@ -10,4 +10,8 @@
 
 @interface BuildBackUpVC : TLBaseVC
 
+@property (nonatomic ,copy) NSString *mnemonics;
+
+@property (nonatomic ,assign) BOOL isCopy;
+
 @end

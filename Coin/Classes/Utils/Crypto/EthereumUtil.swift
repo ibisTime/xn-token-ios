@@ -19,13 +19,35 @@ public class EthCrypto: NSObject
         catch {}
         return str
     }
+//    static public var paths: [String:EthereumAddress] = [String:EthereumAddress]()
     
+    static public func getISRightKey(_ mnemonics: String) -> Data? {
+        var _ : String!
+        var seed : Data!
+        seed = BIP39.mnemonicsToEntropy(mnemonics)
+//        seed = BIP39.mnemonicsToEntropy(mnemonics)
+//        guard let prefixNode = HDNode(seed: seed)?.derive(path: HDNode.defaultPathMetamaskPrefix, derivePrivateKey: true) else {return nil}
+//
+//        var newIndex = UInt32(0)
+//        for (p, _) in paths {
+//            guard let idx = UInt32(p.components(separatedBy: "/").last!) else {continue}
+//            if idx >= newIndex {
+//                newIndex = idx + 1
+//            }
+//        }
+//
+//        let newNode = prefixNode.derive(index: newIndex, derivePrivateKey: true, hardened: false)
+//        privateKeyStr = newNode?.privateKey?.toHexString();
+        
+        return seed;
+    }
     static public var paths: [String:EthereumAddress] = [String:EthereumAddress]()
     
     static public func getPrivateKey(_ mnemonics: String) -> String? {
         var privateKeyStr : String!
         var seed : Data!
         seed = BIP39.seedFromMmemonics(mnemonics);
+        seed = BIP39.mnemonicsToEntropy(mnemonics)
         guard let prefixNode = HDNode(seed: seed)?.derive(path: HDNode.defaultPathMetamaskPrefix, derivePrivateKey: true) else {return nil}
         
         var newIndex = UInt32(0)

@@ -77,7 +77,7 @@
     _title = title;
     [self.selectedBtn setTitle:title.symbol forState:UIControlStateNormal];
     if (title.IsSelect == YES) {
-        [self.selectedBtn setBackgroundColor:kWhiteColor];
+        [self.selectedBtn setBackgroundColor:kClearColor];
         [self.selectedBtn setTitleColor:kAppCustomMainColor forState:UIControlStateNormal];
         
         //        self.photoImageView.hidden = NO;

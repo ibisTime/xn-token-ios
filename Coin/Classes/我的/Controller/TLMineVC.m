@@ -39,6 +39,7 @@
 #import "LangChooseVC.h"
 #import "JoinMineVc.h"
 #import "WalletSettingVC.h"
+#import "TLAccountMoneyVC.h"
 @interface TLMineVC ()<MineHeaderSeletedDelegate, UINavigationControllerDelegate>
 
 //@property (nonatomic, strong) FBKVOController *chatKVOCtrl;   czy
@@ -144,6 +145,15 @@
 - (void)initGroup {
     
     CoinWeakSelf;
+    MineModel *accounrModel = [MineModel new];
+    accounrModel.text = [LangSwitcher switchLang:@"托管账户" key:nil];
+    accounrModel.imgName = @"钱包设置";
+    accounrModel.action = ^{
+        
+        TLAccountMoneyVC *moneyVC= [[TLAccountMoneyVC alloc] init];
+
+        [weakSelf.navigationController pushViewController:moneyVC animated:YES];
+    };
     
     MineModel *settingModel = [MineModel new];
     settingModel.text = [LangSwitcher switchLang:@"钱包设置" key:nil];
@@ -291,7 +301,8 @@
         
         
         self.group.sections = @[
-                                @[settingModel,securityCenter, languageSetting],
+                                
+                                @[accounrModel,settingModel,securityCenter, languageSetting],
                                 @[helpModel, abountUs]
                                 ];
         

@@ -104,19 +104,43 @@
 -(void)setCurrency:(CurrencyModel *)currency
 {
     _currency = currency;
+    if (self.ISLocal == YES) {
+        //去中心化货币
+        if ([currency.symbol isEqualToString:@"ETH"]) {
+            self.bgIV.image = kImage(@"eth");
+        }else if ([currency.symbol isEqualToString:@"WAN"])
+        {
+            self.bgIV.image = kImage(@"wan");
+
+        }
+        self.currentLbl.text = currency.symbol;
+        //    NSString *leftAmount = [platform.amountString subNumber:platform.frozenAmountString];
+        
+        self.textLbl.text = [NSString stringWithFormat:@"%.2f ",[currency.amountString doubleValue]];
+        //    NSString *rightAmount = [platform.inAmountString subNumber:platform.addAmountString];
+        
+        //对应币种价格
+        self.amountLbl.text = [NSString stringWithFormat:@"≈%.2f CNY", [currency.amountCNY doubleValue]];
+        
+        //人民币价格
+//        self.amountLbl.text = [NSString stringWithFormat:@"%.2f CNY",[currency.amountCNY doubleValue]];
+        
+    }else{
+        
+       
     CoinModel *coin = [CoinUtil getCoinModel:currency.currency];
-    
+
     [self.bgIV sd_setImageWithURL:[NSURL URLWithString:[coin.icon convertImageUrl]]];
     self.currentLbl.text = currency.currency;
     NSString *leftAmount = [currency.amountString subNumber:currency.frozenAmountString];
-    
+
     self.textLbl.text = [NSString stringWithFormat:@"%.4f CNY",[[CoinUtil convertToRealCoin:leftAmount coin:currency.currency] doubleValue]];
     NSString *rightAmount = [currency.inAmountString subNumber:currency.addAmountString];
     
     //对应币种价格
     self.amountLbl.text = [NSString stringWithFormat:@"≈%.2fCNY", [[CoinUtil convertToRealCoin:rightAmount coin:currency.currency] doubleValue]];
-    
-    //人民币价格
+    }
+//    人民币价格
 //    self.rmbPriceLbl.text = [NSString stringWithFormat:@"≈%.2f CNY",[[CoinUtil convertToRealCoin:leftAmount coin:platform.currency] doubleValue]];
 }
 @end

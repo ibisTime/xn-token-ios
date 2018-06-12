@@ -9,5 +9,5 @@
 #import "TLBaseVC.h"
 
 @interface BuildSucessVC : TLBaseVC
-
+@property (nonatomic , assign) BOOL isCopy;
 @end

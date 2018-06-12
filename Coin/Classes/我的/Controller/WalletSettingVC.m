@@ -7,10 +7,11 @@
 //
 
 #import "WalletSettingVC.h"
-#import "RevisePassWordVC.h"
+#import "CheckForwordVC.h"
 #import "SettingGroup.h"
 #import "SettingTableView.h"
 #import "EditEmailVC.h"
+#import "WalletDelectVC.h"
 @interface WalletSettingVC ()
 @property (nonatomic, strong) SettingGroup *group;
 @property (nonatomic, strong) SettingTableView *tableView;
@@ -48,8 +49,10 @@
     [changeTradePwd setAction:^{
         
         
-        RevisePassWordVC *pwdAboutVC = [[RevisePassWordVC alloc] init];
+        CheckForwordVC *pwdAboutVC = [[CheckForwordVC alloc] init];
+        
         pwdAboutVC.Type = PassWprdTypeFirst;
+        pwdAboutVC.WalletType = WalletWordTypeFirst;
         [weakSelf.navigationController pushViewController:pwdAboutVC animated:YES];
         
     }];
@@ -60,7 +63,8 @@
     idAuth.text = [LangSwitcher switchLang:@"钱包备份" key:nil];
     [idAuth setAction:^{
         
-        EditEmailVC *authVC = [EditEmailVC new];
+        CheckForwordVC *authVC = [CheckForwordVC new];
+        authVC.WalletType = WalletWordTypeSecond;
         authVC.title = [LangSwitcher switchLang:@"钱包备份" key:nil];
         
         [weakSelf.navigationController pushViewController:authVC animated:YES];
@@ -72,9 +76,13 @@
     bindEmail.text = [LangSwitcher switchLang:@"导出私钥" key:nil];
     [bindEmail setAction:^{
         
-        EditEmailVC *editVC = [[EditEmailVC alloc] init];
-        [editVC setDone:^(NSString *content){
-            
+        CheckForwordVC *editVC = [[CheckForwordVC alloc] init];
+        editVC.WalletType = WalletWordTypeThree;
+
+        editVC.title = [LangSwitcher switchLang:@"导出私钥" key:nil];
+
+//        [editVC setDone:^(NSString *content){
+        
 //            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:1 inSection:1];
 //            SettingCell *cell = [weakSelf.tableView cellForRowAtIndexPath:indexPath];
 //
@@ -82,7 +90,7 @@
 //
 //            [weakSelf.tableView reloadData];
             
-        }];
+//        }];
         //
         [weakSelf.navigationController pushViewController:editVC animated:YES];
     }];
@@ -103,7 +111,7 @@
     changeLoginPwd.text = [LangSwitcher switchLang:@"删除钱包" key:nil];
     [changeLoginPwd setAction:^{
         
-        EditEmailVC *changeLoginPwdVC = [EditEmailVC new];
+        WalletDelectVC *changeLoginPwdVC = [WalletDelectVC new];
         
 //        changeLoginPwdVC.success = ^{
 //

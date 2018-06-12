@@ -36,13 +36,14 @@
 #import "CoinModel.h"
 #import "BuildWalletMineVC.h"
 #import "TLTabBarController.h"
+#import <FMDB/FMDB.h>
 //#import "TLPublishInputView.h"      czy
 
 @interface AppDelegate ()
 
 //@property (nonatomic, strong) FBKVOController *chatKVOCtrl;   czy
 @property (nonatomic, strong) RespHandler *respHandler;
-
+@property (nonatomic ,copy) NSString *dataStr;
 @end
 
 @implementation AppDelegate
@@ -70,7 +71,11 @@
     //初始化为繁体
     [LangSwitcher startWithTraditional];
     
-   
+    self.dataStr = [self dataFilePath];
+//    [self createTable];
+//    if (dataFilePath) {
+//        KDataBase = dataFilePath;
+//    }
 
     //退出登录消息通知
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -152,8 +157,10 @@
 
 #pragma mark- 退出登录
 - (void)loginOut {
-    
     //user 退出
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:KWalletWord];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:KWalletPrivateKey];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:KWalletAddress];
     [[TLUser user] loginOut];
     
     //退出登录
@@ -166,6 +173,7 @@
 //    }];
 
     //
+    
     UITabBarController *tabbarContrl = (UITabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
     if ([tabbarContrl isKindOfClass:[TLUpdateVC class]]) {
         return;
@@ -235,8 +243,14 @@
         //先配置到，检查更新的VC,开启更新检查
         BuildWalletMineVC *MineVC = [[BuildWalletMineVC alloc] init];
         TLNavigationController *na = [[TLNavigationController alloc] initWithRootViewController:MineVC];
+        NSString *word = [[NSUserDefaults standardUserDefaults] objectForKey:KWalletWord];
+        if (word.length > 0) {
+            TLUpdateVC *updateVC = [[TLUpdateVC alloc] init];
+            self.window.rootViewController = updateVC;
+        }else{
         TLUpdateVC *updateVC = [[TLUpdateVC alloc] init];
         self.window.rootViewController = na;
+        }
 
     } else {
         
@@ -375,7 +389,29 @@
 //    }
 // czy
 //}
+- (NSString *) dataFilePath//应用程序的沙盒路径
+{
+    NSArray *path = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *document = [path objectAtIndex:0];
+    return[document stringByAppendingPathComponent:@"THAWallet.sqlite"];
+}
 
-
+- (void)createTable
+{
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    FMDatabase *db = [FMDatabase databaseWithPath:_dataStr];
+    if(![fileManager fileExistsAtPath:_dataStr]) {
+        NSLog(@"还未创建数据库，现在正在创建数据库");
+        if([db open]) {
+            
+            [db executeUpdate:@"create table if not exists THAWallet.sqlite (name text, address text, id text)"];
+            
+            [db close];
+        }else{
+            NSLog(@"database open error");
+        }
+    }
+    NSLog(@"FMDatabase:---------%@",db);
+}
 
 @end

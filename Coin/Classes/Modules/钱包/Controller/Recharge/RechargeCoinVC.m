@@ -34,7 +34,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.title = [LangSwitcher switchLang:@"充币" key:nil];
+    self.title = [LangSwitcher switchLang:@"收款" key:nil];
     //提示框
     [self initTopView];
     //二维码
@@ -74,8 +74,16 @@
     }];
     
     UILabel *promptLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kAppCustomMainColor font:12.0];
-    
-    NSString *currency = self.currency.currency;
+    NSString *address;
+    if (self.currency.symbol) {
+        address = self.currency.symbol;
+    }else{
+        address = self.currency.currency;
+        
+        
+    }
+    NSString *currency = address;
+
     promptLbl.text = [NSString stringWithFormat:@"%@钱包地址禁止充值除%@之外的其他资产, 任何%@资产充值将不可找回",currency,currency,currency];
     promptLbl.text = [LangSwitcher switchLang: promptLbl.text key:nil];
     promptLbl.frame = CGRectMake(0, 0, kScreenWidth, 50);
@@ -110,8 +118,16 @@
     
     //二维码
     UIImageView *qrIV = [[UIImageView alloc] init];
+    NSString *address ;
+    if (self.currency.symbol) {
+        address = self.currency.address;
+    }else{
+        address = self.currency.coinAddress;
+
+        
+    }
     
-    qrIV.image = [SGQRCodeGenerateManager generateWithDefaultQRCodeData:self.currency.coinAddress imageViewWidth:140];
+    qrIV.image = [SGQRCodeGenerateManager generateWithDefaultQRCodeData:address imageViewWidth:140];
     
     [self.qrView addSubview:qrIV];
     [qrIV mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -122,10 +138,10 @@
         
     }];
     
-    NSString *text = [LangSwitcher switchLang:@"我的货币收款地址（点击复制) " key:nil];
+    NSString *text = [LangSwitcher switchLang:@"（点击复制地址) " key:nil];
     CGFloat btnW = [NSString getWidthWithString:text font:12.0];
     //复制
-    UIButton *copyBtn = [UIButton buttonWithTitle:text titleColor:kTextColor backgroundColor:kClearColor titleFont:12.0];
+    UIButton *copyBtn = [UIButton buttonWithTitle:text titleColor:kAppCustomMainColor backgroundColor:kClearColor titleFont:12.0];
     
     [copyBtn setEnlargeEdge:10];
     
@@ -141,7 +157,7 @@
     }];
     
     [copyBtn.titleLabel labelWithString:text
-                                  title:[LangSwitcher switchLang:@"（点击复制）" key:nil]
+                                  title:[LangSwitcher switchLang:@" " key:nil]
                                    font:Font(12.0)
                                   color:kAppCustomMainColor];
 
@@ -189,7 +205,15 @@
     
     UILabel *addressLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:15.0];
     addressLbl.numberOfLines = 0;
-    addressLbl.text = [NSString stringWithFormat:@"%@", self.currency.coinAddress];
+    NSString *address ;
+    if (self.currency.symbol) {
+        address = self.currency.address;
+    }else{
+        address = self.currency.coinAddress;
+        
+        
+    }
+    addressLbl.text = [NSString stringWithFormat:@"%@", address];
     [self.addressView addSubview:addressLbl];
     [addressLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
@@ -212,7 +236,7 @@
 //                                        vc:self
 //                                    action:@selector(lookBillRecord)];
 //    [UIBarButtonItem adRightItemWithImageName:@"记录" frame:CGRectMake(0, 0, 40, 44) vc:self action:@selector(lookBillRecord)];
-    [UIBarButtonItem addRightItemWithImageName:@"记录" frame:CGRectMake(0, 0, 40, 44) vc:self action:@selector(lookBillRecord)];
+//    [UIBarButtonItem addRightItemWithImageName:@"记录" frame:CGRectMake(0, 0, 40, 44) vc:self action:@selector(lookBillRecord)];
 }
 
 #pragma mark - Events
@@ -230,8 +254,15 @@
 - (void)clickCopyAddress {
     
     UIPasteboard *pasteBoard = [UIPasteboard generalPasteboard];
-    
-    pasteBoard.string = self.currency.coinAddress;
+    NSString *address ;
+    if (self.currency.symbol) {
+        address = self.currency.address;
+    }else{
+        address = self.currency.coinAddress;
+        
+        
+    }
+    pasteBoard.string = address;
     
     if (pasteBoard == nil) {
         
@@ -257,8 +288,15 @@
 - (void)clickCopy {
     
     UIPasteboard *pasteBoard = [UIPasteboard generalPasteboard];
-    
-    pasteBoard.string = self.currency.coinAddress;
+    NSString *address ;
+    if (self.currency.symbol) {
+        address = self.currency.address;
+    }else{
+        address = self.currency.coinAddress;
+        
+        
+    }
+    pasteBoard.string = address;
     
     if (pasteBoard == nil) {
         
