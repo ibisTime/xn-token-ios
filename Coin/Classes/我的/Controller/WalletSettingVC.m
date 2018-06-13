@@ -50,7 +50,8 @@
         
         
         CheckForwordVC *pwdAboutVC = [[CheckForwordVC alloc] init];
-        
+        pwdAboutVC.title = [LangSwitcher switchLang:@"修改交易密码" key:nil];
+
         pwdAboutVC.Type = PassWprdTypeFirst;
         pwdAboutVC.WalletType = WalletWordTypeFirst;
         [weakSelf.navigationController pushViewController:pwdAboutVC animated:YES];

@@ -10,6 +10,7 @@
 //#import "TLUIHeader.h"
 #import "UIColor+theme.h"
 #import "AppColorMacro.h"
+#import "LangSwitcher.h"
 @interface TLNavigationController ()
 
 @end
@@ -26,8 +27,8 @@
     
     //
     UINavigationBar *navBar = [UINavigationBar appearance];
-    
-    [self.navigationItem.backBarButtonItem setTitle:@"返回"];
+    NSString *text = [LangSwitcher switchLang:@"返回" key:nil];
+    [self.navigationItem.backBarButtonItem setTitle:text];
     
     navBar.backIndicatorImage = [UIImage imageNamed:@"返回"];
     navBar.backIndicatorTransitionMaskImage = [UIImage imageNamed:@"返回"];

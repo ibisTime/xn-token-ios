@@ -32,6 +32,7 @@
 #import "TLAccountTableView.h"
 #import <MJExtension/MJExtension.h>
 #import "WalletLocalVc.h"
+#import "WalletLocalModel.h"
 //#import <CoreBitcoin.h>
 //#import <CoreBitcoin/CoreBitcoin.h>
 //#import "BTCMnemonic+Tests.h"
@@ -53,7 +54,7 @@
 @implementation TLWalletVC
 
 - (void)viewWillAppear:(BOOL)animated {
-    
+    [self.currentTableView beginRefreshing];
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES animated:animated];
     
@@ -100,6 +101,7 @@
     
     
     //获取我的资产
+    [self queryMyAmount];
     [self queryTotalAmount];
     
     //本地读取数据
@@ -124,8 +126,10 @@
         
         CoinWeakSelf;
         
-        _headerView = [[WalletHeaderView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 150 + kStatusBarHeight )];
-        _headerView.whiteView.hidden = YES;
+        _headerView = [[WalletHeaderView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 150 + kStatusBarHeight+50 )];
+        _headerView.usdRate = @"test";
+
+//        _headerView.whiteView.hidden = YES;
         _headerView.headerBlock = ^{
             
             RateDescVC *descVC = [RateDescVC new];
@@ -135,8 +139,9 @@
         
         _headerView.addBlock = ^{
             AddAccoutMoneyVc *monyVc = [[AddAccoutMoneyVc alloc] init];
-//            monyVc.currencys = weakSelf.currencys;
+            monyVc.currentModels = weakSelf.currencys;
             [weakSelf.navigationController pushViewController:monyVc animated:YES];
+            
             weakSelf.tempcurrencys = [NSMutableArray array];
             monyVc.select = ^(NSMutableArray *model) {
 //                weakSelf.currencys = model;
@@ -146,7 +151,11 @@
                         [weakSelf.currencys addObject:m];
                     }
                 }
+                weakSelf.currentTableView.platforms = nil;
+                [weakSelf.currentTableView reloadData];
+
                 weakSelf.currentTableView.platforms = weakSelf.currencys;
+//                [weakSelf.currentTableView beginRefreshing];
                 [weakSelf.currentTableView reloadData];
                 NSLog(@"%@",model);
             };
@@ -166,8 +175,14 @@
     self.currentTableView = [[TLAccountTableView alloc] initWithFrame:CGRectMake(0, self.headerView.height, kScreenWidth, kScreenHeight - kTabBarHeight - self.headerView.height)
                                                       style:UITableViewStyleGrouped];
     
-    //    self.tableView.tableHeaderView = self.headerView;
+//    self.currentTableView.tableHeaderView = [UIView new];
+//    self.currentTableView.tableFooterView = [UIView new];
+
     self.currentTableView.refreshDelegate = self;
+//    self.currentTableView.mj_header = [MJRefreshHeader headerWithRefreshingTarget:self refreshingAction:@selector (loadMore)];
+//    self.currentTableView.mj_footer = [MJRefreshFooter footerWithRefreshingTarget:self refreshingAction:@selector (loadBottom)];;
+
+//    self.currentTableView.mj_header = [MJRefreshHeader]
 //    [self.tableView adjustsContentInsets];
     [self.view addSubview:self.currentTableView];
 //    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -183,6 +198,26 @@
         
         
     };
+}
+
+- (void)loadNotiction
+{
+    TLPageDataHelper *http = [TLPageDataHelper new];
+    http.code = @"804040";
+    http.parameters[@"channelType"] = @4;
+    http.parameters[@"status"] = @1;
+    http.parameters[@"start"] = @"1";
+    http.parameters[@"limit"] = @"10";
+    http.isList = YES;
+
+  
+
+    
+}
+- (void)loadBottom
+{
+    
+    
 }
 
 - (void)addNotification {
@@ -206,15 +241,74 @@
     
 }
 
+- (void)queryMyAmount
+{
+    TLNetworking *http = [TLNetworking new];
+    http.code = @"802270";
+
+    NSArray *a = [[NSUserDefaults standardUserDefaults] objectForKey:@"localArray"];
+    if (a.count > 0) {
+                http.ISparametArray = YES;
+        
+        http.parameters[@"accountList"] = a;
+    }
+    else{
+        
+        NSString *address  =  [[NSUserDefaults standardUserDefaults] objectForKey:KWalletAddress];
+        
+        //    http.ISparametArray = YES;
+        NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+        NSMutableDictionary *dicWan = [NSMutableDictionary dictionary];
+        
+        [dic setObject:@"ETH" forKey:@"symbol"];
+        [dic setObject:address forKey:@"address"];
+        [dicWan setObject:@"WAN" forKey:@"symbol"];
+        [dicWan setObject:address forKey:@"address"];
+        NSArray *arr = @[dic,dicWan];
+        http.parameters[@"accountList"] = arr;
+    }
+    
+    //    http.parametArray = @[ dic];
+    
+    CoinWeakSelf;
+        [http postWithSuccess:^(id responseObject) {
+    
+            NSString *cnyStr = [responseObject[@"data"][@"totalAmountCNY"] convertToSimpleRealMoney];
+    
+            self.headerView.cnyAmountLbl.text = [NSString stringWithFormat:@"%.2f", [cnyStr doubleValue]];
+    
+            NSArray *usdStr = responseObject[@"data"][@"accountList"];
+    
+//            weakSelf.currencys   =  [CurrencyModel mj_objectArrayWithKeyValuesArray:usdStr];
+    
+            NSLog(@"%@",self.currencys);
+    
+//            weakSelf.currentTableView.platforms = weakSelf.currencys;
+//            [weakSelf.currentTableView reloadData_tl];
+            self.headerView.usdAmountLbl.text = [NSString stringWithFormat:@"%@USD", usdStr];
+    
+            NSString *hkdStr = [responseObject[@"data"][@"totalAmountHKD"] convertToSimpleRealMoney];
+    
+            self.headerView.hkdAmountLbl.text = [NSString stringWithFormat:@"%@HKD", hkdStr];
+    
+        } failure:^(NSError *error) {
+    
+            [self.currentTableView endRefreshingWithNoMoreData_tl];
+    
+        }];
+    
+}
+
 #pragma mark - Data
 - (void)queryTotalAmount {
+    
     [self.currentTableView beginRefreshing];
-    TLNetworking *http = [TLNetworking new];
+    TLPageDataHelper *http = [TLPageDataHelper new];
     http.code = @"802270";
     
     NSArray *a = [[NSUserDefaults standardUserDefaults] objectForKey:@"localArray"];
     if (a.count > 0) {
-        http.ISparametArray = YES;
+//        http.ISparametArray = YES;
 
         http.parameters[@"accountList"] = a;
     }
@@ -222,7 +316,7 @@
     
     NSString *address  =  [[NSUserDefaults standardUserDefaults] objectForKey:KWalletAddress];
 
-    http.ISparametArray = YES;
+//    http.ISparametArray = YES;
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
     NSMutableDictionary *dicWan = [NSMutableDictionary dictionary];
 
@@ -236,35 +330,53 @@
 
 //    http.parametArray = @[ dic];
 
-    
     CoinWeakSelf;
+    http.isList = YES;
+    http.isCurrency = YES;
+    http.tableView = self.currentTableView;
+    [http modelClass:[CurrencyModel class]];
+
+    [self.currentTableView addRefreshAction:^{
+        [http refresh:^(NSMutableArray *objs, BOOL stillHave) {
+            weakSelf.currencys = objs;
+            weakSelf.currentTableView.platforms = weakSelf.currencys;
+            [weakSelf.currentTableView reloadData_tl];
+            NSLog(@"%@",objs);
+            [weakSelf.currentTableView endRefreshingWithNoMoreData_tl];
+            [weakSelf loadNotiction];
+            
+        } failure:^(NSError *error) {
+            
+        }];
+    }];
     
-    [http postWithSuccess:^(id responseObject) {
-        
-        NSString *cnyStr = [responseObject[@"data"][@"totalAmountCNY"] convertToSimpleRealMoney];
-        
-        self.headerView.cnyAmountLbl.text = [NSString stringWithFormat:@"%.2f", [cnyStr doubleValue]];
-        
-        NSArray *usdStr = responseObject[@"data"][@"accountList"];
-        
-        weakSelf.currencys   =  [CurrencyModel mj_objectArrayWithKeyValuesArray:usdStr];
-        
-        NSLog(@"%@",self.currencys);
-        
-        weakSelf.currentTableView.platforms = weakSelf.currencys;
-        [weakSelf.currentTableView reloadData_tl];
+    [self.currentTableView beginRefreshing];
+    
+//    [http postWithSuccess:^(id responseObject) {
+//
+//        NSString *cnyStr = [responseObject[@"data"][@"totalAmountCNY"] convertToSimpleRealMoney];
+//
+//        self.headerView.cnyAmountLbl.text = [NSString stringWithFormat:@"%.2f", [cnyStr doubleValue]];
+//
+//        NSArray *usdStr = responseObject[@"data"][@"accountList"];
+//
+//        weakSelf.currencys   =  [CurrencyModel mj_objectArrayWithKeyValuesArray:usdStr];
+//
+//        NSLog(@"%@",self.currencys);
+//
+//        weakSelf.currentTableView.platforms = weakSelf.currencys;
+//        [weakSelf.currentTableView reloadData_tl];
 //        self.headerView.usdAmountLbl.text = [NSString stringWithFormat:@"%@USD", usdStr];
 //
 //        NSString *hkdStr = [responseObject[@"data"][@"totalAmountHKD"] convertToSimpleRealMoney];
-        
-//        self.headerView.hkdAmountLbl.text = [NSString stringWithFormat:@"%@HKD", hkdStr];
-        [self.currentTableView endRefreshingWithNoMoreData_tl];
-        
-    } failure:^(NSError *error) {
-        
-        [self.currentTableView endRefreshingWithNoMoreData_tl];
 
-    }];
+//        self.headerView.hkdAmountLbl.text = [NSString stringWithFormat:@"%@HKD", hkdStr];
+//
+//    } failure:^(NSError *error) {
+//
+//        [self.currentTableView endRefreshingWithNoMoreData_tl];
+//
+//    }];
 }
 
 - (void)getMyCurrencyList {
@@ -310,6 +422,7 @@
             
         }];
         
+        
         //查询美元汇率
         [weakSelf searchRateWithCurrency:@"USD"];
         //查询港元汇率
@@ -319,6 +432,28 @@
     }];
     
     [self.currentTableView beginRefreshing];
+    
+    [self.currentTableView addLoadMoreAction:^{
+        
+        [helper loadMore:^(NSMutableArray *objs, BOOL stillHave) {
+            
+            if (weakSelf.tl_placeholderView.superview != nil) {
+                
+                [weakSelf removePlaceholderView];
+            }
+            [weakSelf queryMyAmount];
+            weakSelf.currencys = objs;
+            
+            weakSelf.currentTableView.platforms = objs;
+            [weakSelf.currentTableView reloadData_tl];
+            
+        } failure:^(NSError *error) {
+            
+            [weakSelf addPlaceholderView];
+            
+        }];
+        
+    }];
     
 }
 
@@ -334,7 +469,7 @@
         
         if ([currency isEqualToString:@"USD"]) {
             
-            self.headerView.usdRate = responseObject[@"data"][@"rate"];
+            self.headerView.usdRate = @"test";
             
         }
         

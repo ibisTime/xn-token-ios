@@ -141,9 +141,12 @@
         NSLog(@"MnemonicUtil===%d",is);
     }
     
-    if ([MnemonicUtil getMnemonicsISRight:self.textView.text] == YES) {
+    if ([MnemonicUtil getMnemonicsISRight:self.textView.text] != NO) {
         NSString *word = self.textView.text;
-        
+//        NSString *word = @"ef3274ded22bc98d372e816613d9544aab4caaa181e0ba1df7643d1552d35c51";
+        NSArray *wordsArray = [self.textView.text componentsSeparatedByString:@" "];
+        word = [wordsArray componentsJoinedByString:@" "];
+
         NSString *prikey   =[MnemonicUtil getPrivateKeyWithMnemonics:word];
         
         NSString *address = [MnemonicUtil getAddressWithPrivateKey:prikey];

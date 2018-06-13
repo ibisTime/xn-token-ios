@@ -10,14 +10,14 @@
 
 #import "TLUIHeader.h"
 #import "AppColorMacro.h"
-
+#import "NSString+Date.h"
 #import "NSNumber+Extension.h"
 
 @interface RateDescCell ()
 //汇率
-@property (nonatomic, strong) UILabel *rateLbl;
+@property (nonatomic, strong) UIButton *rateLbl;
 //左边国旗
-@property (nonatomic, strong) UIImageView *leftFlag;
+@property (nonatomic, strong) UILabel *leftFlag;
 //右边国旗
 @property (nonatomic, strong) UIImageView *rightFlag;
 //
@@ -42,14 +42,21 @@
 - (void)initSubviews {
     
     //汇率
-    self.rateLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:16.0];
+    self.rateLbl = [UIButton buttonWithTitle:@"" titleColor:kWhiteColor backgroundColor:kAppCustomMainColor titleFont:16];
     
-    self.rateLbl.textAlignment = NSTextAlignmentLeft;
-    self.rateLbl.numberOfLines = 2;
+//    self.rateLbl.textAlignment = NSTextAlignmentLeft;
+//    self.rateLbl.backgroundColor = kAppCustomMainColor;
+//    self.rateLbl.numberOfLines = 2;
     [self addSubview:self.rateLbl];
+    self.rateLbl.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    self.rateLbl.titleEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 0);
+//    self.rateLbl.titleLabel.textAlignment = NSTextAlignmentLeft;
+    self.rateLbl.layer.cornerRadius = 5;
+    self.rateLbl.clipsToBounds = YES;
     [self.rateLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(@15);
-        make.right.equalTo(@-130);
+        make.right.equalTo(@-15);
+        make.height.equalTo(@49);
 
         make.top.equalTo(@(20));
         
@@ -57,31 +64,43 @@
     }];
     
     //左边国旗
-    self.leftFlag = [[UIImageView alloc] init];
-    self.leftFlag.contentMode = UIViewContentModeScaleToFill;
+    self.leftFlag = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:14.0];
+    self.leftFlag.numberOfLines = 0;
     [self addSubview:self.leftFlag];
     [self.leftFlag mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.right.equalTo(self.mas_right).offset(-10);
-        make.top.equalTo(self.mas_top).offset(10);
-        make.width.equalTo(@115);
-        make.height.equalTo(@70);
+        make.left.equalTo(@20);
+        make.top.equalTo(self.rateLbl.mas_bottom).offset(10);
+        make.width.equalTo(@(kScreenWidth-40));
 
         
     }];
     
-
-    //计算规则
-    UILabel *textLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor2 font:12.0];
+    self.rightFlag = [[UIImageView alloc] init];
     
+    [self addSubview:self.rightFlag];
+    self.rightFlag.contentMode = UIViewContentModeScaleToFill;
+    self.rightFlag.image = kImage(@"已报名时间");
+    [self.rightFlag mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.left.equalTo(@20);
+        make.top.equalTo(self.leftFlag.mas_bottom).offset(15);
+        make.width.height.equalTo(@12);
+        
+        
+    }];
+    //计算规则
+    UILabel *textLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor2 font:13.0];
+    self.textLbl = textLbl;
+
     textLbl.numberOfLines = 0;
    
 //    textLbl.text = [LangSwitcher switchLang:textLbl.text key:nil];
     [self addSubview:textLbl];
     [textLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.left.equalTo(self.rateLbl.mas_left);
-        make.bottom.equalTo(self.mas_bottom).offset(-20);
+        make.left.equalTo(self.rightFlag.mas_right).offset(10);
+        make.centerY.equalTo(self.rightFlag.mas_centerY).offset(0);
 
     }];
     
@@ -95,7 +114,6 @@
     }];
     
     line.backgroundColor = kHexColor(@"#f8f8f8");
-    self.textLbl = textLbl;
     
 }
 
@@ -106,15 +124,16 @@
 //    if ([rateModel.referCurrency isEqualToString:@"CNY"]) {
 //
 //    }
-    self.rateLbl.text = rateModel.title;
-    self.textLbl.text = [NSString stringWithFormat:@"%@ · %@",rateModel.time,rateModel.soure];
-    self.leftFlag.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@",rateModel.imageName]];
+    [self.rateLbl setTitle:rateModel.smsTitle forState:UIControlStateNormal];
+    self.rateLbl.enabled = NO;
+    self.leftFlag.text = [NSString stringWithFormat:@"%@",rateModel.smsContent];
+//    self.leftFlag.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@",rateModel.imageName]];
     
-
+    self.textLbl.text = [rateModel.pushedDatetime convertDate];
     
-//    [self layoutSubviews];
+    [self layoutSubviews];
     
-//    rateModel.cellHeight = self.textLbl.yy;
+    rateModel.cellHeight = self.textLbl.yy+15;
     
 }
 

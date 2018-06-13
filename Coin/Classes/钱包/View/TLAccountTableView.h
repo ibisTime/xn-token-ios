@@ -8,6 +8,7 @@
 
 #import "TLTableView.h"
 #import "CurrencyModel.h"
+
 typedef void(^selectCurrent)(NSInteger );
 
 @interface TLAccountTableView : TLTableView

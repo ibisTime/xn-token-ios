@@ -184,7 +184,7 @@
     NSLog(@"%@",self.currencys);
     
     WalletAddressDetailVC *detail = [[WalletAddressDetailVC alloc] init];
-    detail.currentModel = self.currencys[indexPath.row];
+    detail.currentModel = self.currencys[indexPath.section];
     [self.navigationController pushViewController:detail animated:YES];
     
 }

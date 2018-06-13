@@ -98,11 +98,21 @@
         NSMutableArray <CurrencyModel *> *shouldDisplayCoins = [[NSMutableArray alloc] init];
         [weakSelf.currencys enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             
+            {
             CurrencyModel *currencyModel = (CurrencyModel *)obj;
-            currencyModel.IsSelected = YES;
+            if ([weakSelf.currentModels containsObject:currencyModel] != NSNotFound)
+            {
+                    currencyModel.IsSelected = YES;
+
+                }else{
+                    
+                     currencyModel.IsSelected = NO;
+                }
+                [shouldDisplayCoins addObject:currencyModel];
+
+            }
             //                if ([[CoinUtil shouldDisplayCoinArray] indexOfObject:currencyModel.currency ] != NSNotFound ) {
             
-            [shouldDisplayCoins addObject:currencyModel];
             //                }
             
         }];

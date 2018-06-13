@@ -14,6 +14,7 @@
 #import "TLAlert.h"
 #import "RevisePassWordVC.h"
 #import "MnemonicUtil.h"
+#import "BuildWalletMineVC.h"
 @interface WalletDelectVC ()<UITextViewDelegate>
 @property (nonatomic ,strong) UILabel *nameLable;
 
@@ -139,7 +140,7 @@
         NSLog(@"MnemonicUtil===%d",is);
     }
     
-    if ([MnemonicUtil getMnemonicsISRight:self.textView.text] == YES) {
+    if ([MnemonicUtil getMnemonicsISRight:self.textView.text] !=NO) {
         
         NSString *word = [[NSUserDefaults standardUserDefaults] objectForKey:KWalletWord];
         if (!word) {
@@ -153,8 +154,12 @@
 
             [TLAlert alertWithMsg:@"删除成功"];
             
+            
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                [self.navigationController popToRootViewControllerAnimated:YES];
+
+                BuildWalletMineVC *MineVC = [[BuildWalletMineVC alloc] init];
+                TLNavigationController *na = [[TLNavigationController alloc] initWithRootViewController:MineVC];
+                [UIApplication sharedApplication].keyWindow.rootViewController = na;
             });
 
             //验证通过

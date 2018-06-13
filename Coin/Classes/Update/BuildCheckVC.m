@@ -280,13 +280,16 @@
     //验证助记词
     if ([self.titles isEqualToArray:self.userTitles]) {
         
-        NSString *word =  [[NSUserDefaults standardUserDefaults] objectForKey:KWalletWord];
+        NSLog(@"%@",self.titleWord);
+        
+//        NSString *word =  [[NSUserDefaults standardUserDefaults] objectForKey:self.titleWord];
     
-        NSString *prikey   =[MnemonicUtil getPrivateKeyWithMnemonics:word];
+        NSString *prikey   =[MnemonicUtil getPrivateKeyWithMnemonics:self.titleWord];
 
         NSString *address = [MnemonicUtil getAddressWithPrivateKey:prikey];
         
-        
+        [[NSUserDefaults standardUserDefaults] setObject:self.titleWord forKey:KWalletWord];
+
         [[NSUserDefaults standardUserDefaults] setObject:prikey forKey:KWalletPrivateKey];
         [[NSUserDefaults standardUserDefaults] setObject:address forKey:KWalletAddress];
         [[NSUserDefaults standardUserDefaults] synchronize];

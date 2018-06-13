@@ -13,5 +13,8 @@ typedef void(^currenSelect)(NSMutableArray * model) ;
 @interface AddAccoutMoneyVc : TLBaseVC
 @property (nonatomic ,copy) currenSelect select;
 @property (nonatomic, strong) NSMutableArray <CurrencyModel *>*currencys;
+@property (nonatomic, strong) NSMutableArray <CurrencyModel *>*currentModels;
+
+@property (nonatomic, strong) CurrencyModel *currentModel;
 
 @end

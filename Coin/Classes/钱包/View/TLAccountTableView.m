@@ -46,10 +46,10 @@ static NSString *platformCell = @"AccountMoneyCellTableViewCell";
     
     
     
-    PlatformCell *cell = [tableView dequeueReusableCellWithIdentifier:platformCell forIndexPath:indexPath];
+    AccountMoneyCellTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:platformCell forIndexPath:indexPath];
     
     cell.platform = platform;
-    cell.backgroundColor = indexPath.row%2 == 0 ? kBackgroundColor: kWhiteColor;
+//    cell.backgroundColor = indexPath.row%2 == 0 ? kBackgroundColor: kWhiteColor;
     
     return cell;
 }

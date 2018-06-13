@@ -19,6 +19,8 @@
 #import "NSString+Check.h"
 #import "FilterView.h"
 #import "UIBarButtonItem+convience.h"
+#import "BillVC.h"
+#import "BillDetailVC.h"
 @interface WallAccountVC ()<RefreshDelegate>
 @property (nonatomic, strong) BillTableView *tableView;
 
@@ -435,6 +437,16 @@
 -(void)refreshTableView:(TLTableView *)refreshTableview didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
+    CoinWeakSelf;
+    
+    //    NSInteger tag = (sender.tag - 1200)%100;
+    
+//    BillModel *currencyModel = self.bills[indexPath.row];
+    BillDetailVC *billVC = [BillDetailVC new];
+    billVC.bill =  self.bills[indexPath.row];
+//    billVC.accountNumber = currencyModel.accountNumber;
+//    billVC.billType = BillTypeAll;
+    [self.navigationController pushViewController:billVC animated:YES];
     
     
 }

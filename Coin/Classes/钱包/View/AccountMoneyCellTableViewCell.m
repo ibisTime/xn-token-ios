@@ -164,10 +164,12 @@
 //    NSString *leftAmount = [platform.amountString subNumber:platform.frozenAmountString];
     
     self.tradeVolumeLbl.text = [NSString stringWithFormat:@"≈%.2f CNY",[platform.priceCNY doubleValue]];
-//    NSString *rightAmount = [platform.inAmountString subNumber:platform.addAmountString];
+//    NSString *rightAmount = [platform.balance subNumber:platform.balance];
     
     //对应币种价格
-    self.opppsitePriceLbl.text = [NSString stringWithFormat:@"%.2f", [platform.amountString doubleValue]];
+    CGFloat t = [platform.balance doubleValue];
+    t = t / 1000000000000000000;
+    self.opppsitePriceLbl.text = [NSString stringWithFormat:@"%.6f", t];
     
     //人民币价格
     self.rmbPriceLbl.text = [NSString stringWithFormat:@"%.2f CNY",[platform.amountCNY doubleValue]];

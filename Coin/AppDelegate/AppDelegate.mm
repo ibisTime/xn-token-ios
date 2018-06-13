@@ -158,9 +158,9 @@
 #pragma mark- 退出登录
 - (void)loginOut {
     //user 退出
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:KWalletWord];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:KWalletPrivateKey];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:KWalletAddress];
+//    [[NSUserDefaults standardUserDefaults] removeObjectForKey:KWalletWord];
+//    [[NSUserDefaults standardUserDefaults] removeObjectForKey:KWalletPrivateKey];
+//    [[NSUserDefaults standardUserDefaults] removeObjectForKey:KWalletAddress];
     [[TLUser user] loginOut];
     
     //退出登录
@@ -176,6 +176,12 @@
     
     UITabBarController *tabbarContrl = (UITabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
     if ([tabbarContrl isKindOfClass:[TLUpdateVC class]]) {
+        return;
+    }
+    if ([tabbarContrl isKindOfClass:[TLNavigationController class]]) {
+        return;
+    }
+    if ([tabbarContrl isKindOfClass:[BuildWalletMineVC class]]) {
         return;
     }
     tabbarContrl.selectedIndex = 0;

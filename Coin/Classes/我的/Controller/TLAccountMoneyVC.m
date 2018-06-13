@@ -274,50 +274,7 @@
 #pragma mark - RefreshDelegate
 - (void)refreshTableViewButtonClick:(TLTableView *)refreshTableview button:(UIButton *)sender selectRowAtIndex:(NSInteger)index {
     
-    CoinWeakSelf;
-    
-    NSInteger tag = (sender.tag - 1200)%100;
-    
-    CurrencyModel *currencyModel = self.currencys[index];
-    
-    switch (tag) {
-        case 0:
-        {
-            RechargeCoinVC *coinVC = [RechargeCoinVC new];
-            coinVC.currency = currencyModel;
-            [self.navigationController pushViewController:coinVC animated:YES];
-            
-        }break;
-            
-        case 1:
-        {
-            [self clickWithdrawWithCurrency:currencyModel];
-            
-        }break;
-            
-        case 2:
-        {
-            
-            BillVC *billVC = [BillVC new];
-            billVC.accountNumber = currencyModel.accountNumber;
-            billVC.billType = BillTypeAll;
-            [self.navigationController pushViewController:billVC animated:YES];
-            
-        }break;
-            
-        case 3:
-        {
-            
-            BillVC *billVC = [BillVC new];
-            billVC.accountNumber = currencyModel.accountNumber;
-            billVC.billType = BillTypeFrozen;
-            [self.navigationController pushViewController:billVC animated:YES];
-            
-        }break;
-            
-        default:
-            break;
-    }
+   
 }
 
 -(void)refreshTableView:(TLTableView *)refreshTableview didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -325,8 +282,8 @@
     
     
     
-    
-    
+   
+   
 }
 
 - (void)clickWithdrawWithCurrency:(CurrencyModel *)currencyModel {

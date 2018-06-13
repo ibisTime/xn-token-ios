@@ -99,7 +99,7 @@
     [self addSubview:equivalentBtn];
     [equivalentBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.top.equalTo(textLbl.mas_bottom).offset(28);
+        make.top.equalTo(textLbl.mas_bottom).offset(15);
         make.centerX.equalTo(self.mas_centerX);
         make.width.greaterThanOrEqualTo(@115);
         
@@ -113,7 +113,7 @@
     [self addSubview:self.cnyAmountLbl];
     [self.cnyAmountLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.top.equalTo(equivalentBtn.mas_bottom).offset(16);
+        make.top.equalTo(equivalentBtn.mas_bottom).offset(10);
         make.centerX.equalTo(self.mas_centerX);
         
     }];

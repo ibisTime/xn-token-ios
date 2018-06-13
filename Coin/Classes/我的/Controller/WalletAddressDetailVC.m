@@ -116,6 +116,10 @@
     
     self.privateButton = [UIButton buttonWithTitle:@"" titleColor:kTextColor backgroundColor:kClearColor titleFont:12];
     NSString *privates = [[NSUserDefaults standardUserDefaults] objectForKey:KWalletPrivateKey];
+    NSString *word = [[NSUserDefaults standardUserDefaults] objectForKey:KWalletWord];
+    NSString *adress = [[NSUserDefaults standardUserDefaults] objectForKey:KWalletAddress];
+
+
     self.privates = privates;
     [self.privateButton setTitle:privates forState:UIControlStateNormal];
     self.privateButton.titleLabel.lineBreakMode = 0;

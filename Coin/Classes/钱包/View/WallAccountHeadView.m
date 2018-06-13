@@ -85,7 +85,7 @@
     [amountLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.centerX.equalTo(self.mas_centerX);
-        make.top.equalTo(self.textLbl.mas_bottom).offset(18);
+        make.top.equalTo(self.textLbl.mas_bottom).offset(10);
         
     }];
     
@@ -116,7 +116,8 @@
         self.currentLbl.text = currency.symbol;
         //    NSString *leftAmount = [platform.amountString subNumber:platform.frozenAmountString];
         
-        self.textLbl.text = [NSString stringWithFormat:@"%.2f ",[currency.amountString doubleValue]];
+        CGFloat t = [currency.balance doubleValue]/1000000000000000000;
+        self.textLbl.text = [NSString stringWithFormat:@"%.6f ",t];
         //    NSString *rightAmount = [platform.inAmountString subNumber:platform.addAmountString];
         
         //对应币种价格
@@ -138,7 +139,7 @@
     NSString *rightAmount = [currency.inAmountString subNumber:currency.addAmountString];
     
     //对应币种价格
-    self.amountLbl.text = [NSString stringWithFormat:@"≈%.2fCNY", [[CoinUtil convertToRealCoin:rightAmount coin:currency.currency] doubleValue]];
+    self.amountLbl.text = [NSString stringWithFormat:@"≈%.2fCNY", [currency.amountCNY doubleValue]];
     }
 //    人民币价格
 //    self.rmbPriceLbl.text = [NSString stringWithFormat:@"≈%.2f CNY",[[CoinUtil convertToRealCoin:leftAmount coin:platform.currency] doubleValue]];

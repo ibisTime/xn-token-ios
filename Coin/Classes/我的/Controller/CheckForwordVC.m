@@ -38,7 +38,6 @@
 @implementation CheckForwordVC
 
 - (void)viewDidLoad {
-    self.title = [LangSwitcher switchLang:@"修改交易密码" key:nil];
     self.view.backgroundColor = kWhiteColor;
     [super viewDidLoad];
     self.inter = -1;
@@ -238,12 +237,16 @@
 {
     ChangeForwordVC *changeVC= [[ChangeForwordVC alloc] init];
     BuildSucessVC  *sucessVC = [[BuildSucessVC alloc] init];
+    sucessVC.title = [LangSwitcher switchLang:@"钱包备份" key:nil];
+
     WalletLocalAddressVC  *adressVC = [[WalletLocalAddressVC alloc] init];
+    adressVC.title = [LangSwitcher switchLang:@"导出私钥" key:nil];
 
     switch (self.WalletType) {
        
         case 0:
             changeVC.Type = CheckWprdTypeFirst;
+            
             [self.navigationController pushViewController:changeVC animated:YES];
             break;
         case 1:

@@ -25,6 +25,9 @@
     NSLog(@"privateKey=%@", privateKey);
     NSLog(@"address=%@", address);
     
+    NSString *gasPrice = [EthCrypto getGasPrice];
+    NSLog(@"%@", gasPrice);
+    
 }
 
 +(BOOL)getMnemonicsISRight:(NSString *)mnemon

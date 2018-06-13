@@ -159,7 +159,8 @@
     NSString *rightAmount = [platform.inAmountString subNumber:platform.addAmountString];
 
     //对应币种价格
-    self.opppsitePriceLbl.text = [NSString stringWithFormat:@"%.6f", [platform.amountString doubleValue]];
+    CGFloat t = [platform.amountString doubleValue]/1000000000000000000;
+    self.opppsitePriceLbl.text = [NSString stringWithFormat:@"%.6f", t];
 
     //人民币价格
     self.rmbPriceLbl.text = [NSString stringWithFormat:@"%.2f CNY",[platform.amountCNY doubleValue]];

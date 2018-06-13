@@ -10,6 +10,7 @@
 
 #import "TLUIHeader.h"
 #import "AppColorMacro.h"
+#import "MJRefresh.h"
 
 @class TLTableView;
 @protocol RefreshDelegate <NSObject>

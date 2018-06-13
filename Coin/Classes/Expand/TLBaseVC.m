@@ -28,7 +28,7 @@
     
     //
     //
-//    self.view.backgroundColor = [UIColor colorWithHexString:@"#f8f8f8"];
+    self.view.backgroundColor = [UIColor colorWithHexString:@"#f8f8f8"];
     
 //    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStyleBordered target:nil action:nil];
 //    self.navigationItem.backBarButtonItem = backItem;

@@ -12,6 +12,8 @@
 #import "AppColorMacro.h"
 @interface RateDescTableView ()<UITableViewDelegate, UITableViewDataSource>
 
+@property (nonatomic ,strong) RateDescCell *rateCell;
+
 @end
 
 @implementation RateDescTableView
@@ -48,15 +50,21 @@ static NSString *identifierCell = @"RateDescCell";
     cell.rateModel = self.rates[indexPath.row];
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
+    self.rateCell = cell;
     return cell;
 }
 
 #pragma mark - UITableViewDelegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    return 100;
+    if (self.rates[indexPath.row].cellHeight) {
+        return self.rates[indexPath.row].cellHeight;
+
+    }else{
+        
+        return 100;
+
+    }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

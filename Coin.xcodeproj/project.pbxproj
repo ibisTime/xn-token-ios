@@ -233,6 +233,7 @@
 		B8C2057620CF9FFD00952765 /* WalletAdressTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = B8C2057520CF9FFD00952765 /* WalletAdressTableView.m */; };
 		B8C2057920CFA0B300952765 /* WalletAddressCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B8C2057820CFA0B300952765 /* WalletAddressCell.m */; };
 		B8C2057C20CFA3FC00952765 /* WalletAddressDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B8C2057B20CFA3FC00952765 /* WalletAddressDetailVC.m */; };
+		B8C2057F20CFFE1C00952765 /* WalletLocalModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B8C2057E20CFFE1C00952765 /* WalletLocalModel.m */; };
 		B8CA7D4920CBA22800A0E93C /* WalletImportVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B8CA7D4820CBA22800A0E93C /* WalletImportVC.m */; };
 		B8CA7D5120CBD3F800A0E93C /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = B8CA7D4D20CBD3F800A0E93C /* README.txt */; };
 		B8CA7D5220CBD3F800A0E93C /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B8CA7D4F20CBD3F800A0E93C /* libWeChatSDK.a */; };
@@ -240,6 +241,8 @@
 		B8D5F15020CE08790005CF96 /* TLAccountMoneyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B8D5F14F20CE08790005CF96 /* TLAccountMoneyVC.m */; };
 		B8D5F15320CE0E4C0005CF96 /* TLAccountTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = B8D5F15220CE0E4C0005CF96 /* TLAccountTableView.m */; };
 		B8D5F15620CE0F530005CF96 /* AccountMoneyCellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B8D5F15520CE0F530005CF96 /* AccountMoneyCellTableViewCell.m */; };
+		B8D7E38220D140BC00453860 /* BilllistVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B8D7E38120D140BC00453860 /* BilllistVC.m */; };
+		B8D7E38520D14B8200453860 /* SystemWallModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B8D7E38420D14B8200453860 /* SystemWallModel.m */; };
 		FB49ABC88B6B7FFBB19DF11D /* Pods_Coin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 524739678D50CF78B722738E /* Pods_Coin.framework */; };
 /* End PBXBuildFile section */
 
@@ -702,6 +705,8 @@
 		B8C2057820CFA0B300952765 /* WalletAddressCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WalletAddressCell.m; sourceTree = "<group>"; };
 		B8C2057A20CFA3FC00952765 /* WalletAddressDetailVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WalletAddressDetailVC.h; sourceTree = "<group>"; };
 		B8C2057B20CFA3FC00952765 /* WalletAddressDetailVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WalletAddressDetailVC.m; sourceTree = "<group>"; };
+		B8C2057D20CFFE1C00952765 /* WalletLocalModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WalletLocalModel.h; sourceTree = "<group>"; };
+		B8C2057E20CFFE1C00952765 /* WalletLocalModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WalletLocalModel.m; sourceTree = "<group>"; };
 		B8CA7D4720CBA22800A0E93C /* WalletImportVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WalletImportVC.h; sourceTree = "<group>"; };
 		B8CA7D4820CBA22800A0E93C /* WalletImportVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WalletImportVC.m; sourceTree = "<group>"; };
 		B8CA7D4B20CBD3F800A0E93C /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
@@ -716,6 +721,10 @@
 		B8D5F15220CE0E4C0005CF96 /* TLAccountTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLAccountTableView.m; sourceTree = "<group>"; };
 		B8D5F15420CE0F530005CF96 /* AccountMoneyCellTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AccountMoneyCellTableViewCell.h; sourceTree = "<group>"; };
 		B8D5F15520CE0F530005CF96 /* AccountMoneyCellTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AccountMoneyCellTableViewCell.m; sourceTree = "<group>"; };
+		B8D7E38020D140BC00453860 /* BilllistVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BilllistVC.h; sourceTree = "<group>"; };
+		B8D7E38120D140BC00453860 /* BilllistVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BilllistVC.m; sourceTree = "<group>"; };
+		B8D7E38320D14B8200453860 /* SystemWallModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SystemWallModel.h; sourceTree = "<group>"; };
+		B8D7E38420D14B8200453860 /* SystemWallModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SystemWallModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -871,6 +880,10 @@
 				B8D5F15220CE0E4C0005CF96 /* TLAccountTableView.m */,
 				B8D5F15420CE0F530005CF96 /* AccountMoneyCellTableViewCell.h */,
 				B8D5F15520CE0F530005CF96 /* AccountMoneyCellTableViewCell.m */,
+				B8C2057D20CFFE1C00952765 /* WalletLocalModel.h */,
+				B8C2057E20CFFE1C00952765 /* WalletLocalModel.m */,
+				B8D7E38320D14B8200453860 /* SystemWallModel.h */,
+				B8D7E38420D14B8200453860 /* SystemWallModel.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -886,6 +899,8 @@
 				215979721FB84CB10029F177 /* BillDetailTableView.m */,
 				215979741FB84CC70029F177 /* BillDetailCell.h */,
 				215979751FB84CC70029F177 /* BillDetailCell.m */,
+				B8D7E38020D140BC00453860 /* BilllistVC.h */,
+				B8D7E38120D140BC00453860 /* BilllistVC.m */,
 			);
 			path = Bill;
 			sourceTree = "<group>";
@@ -1858,7 +1873,6 @@
 		2E394FA31FB0546E00BA0829 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				216F5AEE206CC6F600F2C832 /* AppDelegate */,
 				216F5AF0206CC73D00F2C832 /* Update */,
 				216F5AEF206CC70500F2C832 /* Resp */,
 				216F5B1D206CD9D900F2C832 /* 首页 */,
@@ -2072,6 +2086,7 @@
 			children = (
 				B819BA9820C6B80200CEEC5E /* Extension */,
 				215421CF1FD708AC00FDD25C /* Coin.entitlements */,
+				216F5AEE206CC6F600F2C832 /* AppDelegate */,
 				2E394FA31FB0546E00BA0829 /* Classes */,
 				2EA584C01FA813C900C7106C /* Assets.xcassets */,
 				2EA584C51FA813C900C7106C /* Info.plist */,
@@ -2214,7 +2229,7 @@
 					2EA584B31FA813C900C7106C = {
 						CreatedOnToolsVersion = 9.0.1;
 						LastSwiftMigration = 0940;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -2492,6 +2507,7 @@
 				211DE6C11FB58B4C002FCF3D /* AppConfig.m in Sources */,
 				21C91D801FDBCFB6006EDB16 /* ZMAuthResultVC.m in Sources */,
 				211DE6A41FB58B4C002FCF3D /* TLPickerTextField.m in Sources */,
+				B8D7E38520D14B8200453860 /* SystemWallModel.m in Sources */,
 				B88B092420C8E34F005C2D2F /* JoinMineTableView.m in Sources */,
 				B88B093020C9072B005C2D2F /* RevisePassWordVC.m in Sources */,
 				216F5B1B206CD9C900F2C832 /* TradeFlowCell.m in Sources */,
@@ -2518,6 +2534,7 @@
 				2EB9495A1FDF6B1A00CE4B94 /* ZMChineseConvert.m in Sources */,
 				B83D1E0C20CE63A2007835DB /* WalletLocalVc.m in Sources */,
 				21A7F35E1FB2EBAA00FAA0A2 /* CurrencyModel.m in Sources */,
+				B8C2057F20CFFE1C00952765 /* WalletLocalModel.m in Sources */,
 				211DE6A61FB58B4C002FCF3D /* TLTextView.m in Sources */,
 				B8B15C0820CA5B1800F13220 /* BuildBackUpVC.m in Sources */,
 				B8BBA64320C843F800DC4D5F /* AddAccoutMoneyVc.m in Sources */,
@@ -2565,6 +2582,7 @@
 				211DE6B71FB58B4C002FCF3D /* UIBarButtonItem+convience.m in Sources */,
 				211DE6B41FB58B4C002FCF3D /* UIColor+Extension.m in Sources */,
 				2120A8FC1FD51DF800B03DB0 /* UITabBar+Badge.m in Sources */,
+				B8D7E38220D140BC00453860 /* BilllistVC.m in Sources */,
 				211A34E41FB4255700FEB71F /* MineGroup.m in Sources */,
 				2EB949541FDE6D6D00CE4B94 /* LangChooseVC.m in Sources */,
 				2E394FF41FB057B300BA0829 /* TLTabBarController.m in Sources */,
@@ -2731,9 +2749,9 @@
 				CODE_SIGN_ENTITLEMENTS = Coin/Coin.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 6PF7VHZB5Z;
+				DEVELOPMENT_TEAM = ZKTVZ75A59;
 				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = NO;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2758,10 +2776,10 @@
 					"$(PROJECT_DIR)/Coin/Extension/sdk/idfa",
 					"$(PROJECT_DIR)/Coin/Extension/WechatSDK1.8.2",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.cdkj.wallet;
+				PRODUCT_BUNDLE_IDENTIFIER = com.xs.ljclubhq;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "f8758513-fe5e-46ba-9fea-ac75ed5afba5";
-				PROVISIONING_PROFILE_SPECIFIER = devogcwallet;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -2780,11 +2798,11 @@
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CLANG_WARN_STRICT_PROTOTYPES = NO;
 				CODE_SIGN_ENTITLEMENTS = Coin/Coin.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 6PF7VHZB5Z;
+				DEVELOPMENT_TEAM = ZKTVZ75A59;
 				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = NO;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2809,10 +2827,10 @@
 					"$(PROJECT_DIR)/Coin/Extension/sdk/idfa",
 					"$(PROJECT_DIR)/Coin/Extension/WechatSDK1.8.2",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.cdkj.wallet;
+				PRODUCT_BUNDLE_IDENTIFIER = com.xs.ljclubhq;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "f8758513-fe5e-46ba-9fea-ac75ed5afba5";
-				PROVISIONING_PROFILE_SPECIFIER = devogcwallet;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;

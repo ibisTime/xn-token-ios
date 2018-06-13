@@ -31,4 +31,23 @@
 //cellHeight
 @property (nonatomic, assign) CGFloat cellHeight;
 
+@property (nonatomic, copy) NSString *createDatetime;
+@property (nonatomic, copy) NSString *pushedDatetime;
+@property (nonatomic, copy) NSString *remark;
+@property (nonatomic, copy) NSString *smsContent;
+@property (nonatomic, copy) NSString *smsTitle;
+@property (nonatomic, copy) NSString *topushDatetime;
+@property (nonatomic, copy) NSString *updateDatetime;
+@property (nonatomic, copy) NSString *updater;
+@property (nonatomic, strong) NSNumber *channelType;
+@property (nonatomic, strong) NSNumber *id;
+@property (nonatomic, strong) NSNumber *isRead;
+@property (nonatomic, strong) NSNumber *pushType;
+@property (nonatomic, strong) NSNumber *smsType;
+@property (nonatomic, strong) NSNumber *status;
+
+
+
+
+
 @end
