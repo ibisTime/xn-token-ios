@@ -32,7 +32,7 @@
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         
         [self initSubviews];
-        self.backgroundColor = kWhiteColor;
+        self.backgroundColor = kBackgroundColor;
     }
     
     return self;
@@ -56,9 +56,9 @@
     [self.rateLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(@15);
         make.right.equalTo(@-15);
-        make.height.equalTo(@49);
+        make.height.equalTo(@40);
 
-        make.top.equalTo(@(20));
+        make.top.equalTo(@(10));
         
         
     }];

@@ -12,6 +12,7 @@
 #import "TLTabBarController.h"
 #import "AppColorMacro.h"
 #import "TLUpdateVC.h"
+#import "WalletNewFeaturesVC.h"
 @interface RevisePassWordVC ()<UITextFieldDelegate,UITextViewDelegate>
 //金钱数量显示
 @property (nonatomic, strong) UILabel *numLabel;
@@ -232,12 +233,10 @@
             NSString *pwd = [self.FirstPSWArray componentsJoinedByString:@""];
             [[NSUserDefaults standardUserDefaults] setObject:pwd forKey:KUserPwd];
             [[NSUserDefaults standardUserDefaults] synchronize];
-            
-            //导入钱包 设置的交易密码
-            TLUpdateVC *up = [[TLUpdateVC alloc] init];
-            TLTabBarController *tabBarCtrl = [[TLTabBarController alloc] init];
+            WalletNewFeaturesVC *newVC = [WalletNewFeaturesVC new];
+            [UIApplication sharedApplication].keyWindow.rootViewController = newVC;
 
-            [UIApplication sharedApplication].keyWindow.rootViewController = up;
+          
             
         }else{
             //创建

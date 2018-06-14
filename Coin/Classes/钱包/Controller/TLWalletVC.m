@@ -54,7 +54,7 @@
 @implementation TLWalletVC
 
 - (void)viewWillAppear:(BOOL)animated {
-    [self.currentTableView beginRefreshing];
+    [self queryTotalAmount];
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES animated:animated];
     
@@ -157,6 +157,7 @@
                 weakSelf.currentTableView.platforms = weakSelf.currencys;
 //                [weakSelf.currentTableView beginRefreshing];
                 [weakSelf.currentTableView reloadData];
+//                [weakSelf ]
                 NSLog(@"%@",model);
             };
             
@@ -172,7 +173,7 @@
 
     [self.view addSubview:self.headerView];
     
-    self.currentTableView = [[TLAccountTableView alloc] initWithFrame:CGRectMake(0, self.headerView.height, kScreenWidth, kScreenHeight - kTabBarHeight - self.headerView.height)
+    self.currentTableView = [[TLAccountTableView alloc] initWithFrame:CGRectMake(0, self.headerView.height+8, kScreenWidth, kScreenHeight - kTabBarHeight - self.headerView.height)
                                                       style:UITableViewStyleGrouped];
     
 //    self.currentTableView.tableHeaderView = [UIView new];
@@ -302,7 +303,7 @@
 #pragma mark - Data
 - (void)queryTotalAmount {
     
-    [self.currentTableView beginRefreshing];
+//    [self.currentTableView beginRefreshing];
     TLPageDataHelper *http = [TLPageDataHelper new];
     http.code = @"802270";
     
@@ -343,7 +344,7 @@
             [weakSelf.currentTableView reloadData_tl];
             NSLog(@"%@",objs);
             [weakSelf.currentTableView endRefreshingWithNoMoreData_tl];
-            [weakSelf loadNotiction];
+            [weakSelf queryMyAmount];
             
         } failure:^(NSError *error) {
             
@@ -351,6 +352,27 @@
     }];
     
     [self.currentTableView beginRefreshing];
+    [self.currentTableView addLoadMoreAction:^{
+        
+        [http loadMore:^(NSMutableArray *objs, BOOL stillHave) {
+            
+            if (weakSelf.tl_placeholderView.superview != nil) {
+                
+                [weakSelf removePlaceholderView];
+            }
+            [weakSelf queryMyAmount];
+            weakSelf.currencys = objs;
+            
+            weakSelf.currentTableView.platforms = objs;
+            [weakSelf.currentTableView reloadData_tl];
+            
+        } failure:^(NSError *error) {
+            
+            [weakSelf addPlaceholderView];
+            
+        }];
+        
+    }];
     
 //    [http postWithSuccess:^(id responseObject) {
 //
@@ -433,27 +455,7 @@
     
     [self.currentTableView beginRefreshing];
     
-    [self.currentTableView addLoadMoreAction:^{
-        
-        [helper loadMore:^(NSMutableArray *objs, BOOL stillHave) {
-            
-            if (weakSelf.tl_placeholderView.superview != nil) {
-                
-                [weakSelf removePlaceholderView];
-            }
-            [weakSelf queryMyAmount];
-            weakSelf.currencys = objs;
-            
-            weakSelf.currentTableView.platforms = objs;
-            [weakSelf.currentTableView reloadData_tl];
-            
-        } failure:^(NSError *error) {
-            
-            [weakSelf addPlaceholderView];
-            
-        }];
-        
-    }];
+    
     
 }
 

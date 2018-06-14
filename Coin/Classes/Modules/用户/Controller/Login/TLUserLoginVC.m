@@ -166,6 +166,7 @@
     [self.view endEditing:YES];
     
     [self dismissViewControllerAnimated:YES completion:nil];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 //登录成功
@@ -270,6 +271,7 @@
         }
         
         [[NSNotificationCenter defaultCenter] postNotificationName:kUserLoginNotification object:nil];
+        [self.navigationController popToRootViewControllerAnimated:YES];
         
     } failure:^(NSError *error) {
         

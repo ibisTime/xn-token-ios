@@ -55,7 +55,7 @@
     //筛选
     [self addFilterItem];
     //获取账单
-//    [self requestBillList];
+    [self requestBillList];
     // Do any additional setup after loading the view.
 }
 #pragma mark - Init
@@ -185,15 +185,16 @@
     helper.tableView = self.tableView;
     self.helper = helper;
     
-    helper.code = @"802524";
+    helper.code = @"802271";
     helper.start = 1;
     helper.limit = 10;
     
-    helper.parameters[@"bizType"] = bizType;
-    helper.parameters[@"kind"] = self.billType == LocalTypeFrozen ? @"1": @"0";
+//    helper.parameters[@"bizType"] = bizType;
+//    helper.parameters[@"kind"] = self.billType == LocalTypeFrozen ? @"1": @"0";
     
-    helper.parameters[@"accountNumber"] = self.currency.accountNumber;
-    
+    helper.parameters[@"symbol"] = self.currency.symbol;
+    helper.parameters[@"address"] = self.currency.address;
+
     //    helper.parameters[@"channelType"] = @"C";
     //    helper.parameters[@"status"] = @"";
     
@@ -206,11 +207,14 @@
         
         [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
             
-            if (weakSelf.tl_placeholderView.superview != nil) {
-                
-                [weakSelf removePlaceholderView];
+//            if (weakSelf.tl_placeholderView.superview != nil) {
+//                
+//                [weakSelf removePlaceholderView];
+//            }
+            if (objs.count == 0) {
+                [weakSelf addPlaceholderView];
+
             }
-            
             weakSelf.bills = objs;
             
             weakSelf.tableView.bills = objs;

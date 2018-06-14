@@ -202,6 +202,7 @@
 		B819BAAA20C6DD7800CEEC5E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B819BAA920C6DD7700CEEC5E /* LaunchScreen.storyboard */; };
 		B83D1E0C20CE63A2007835DB /* WalletLocalVc.m in Sources */ = {isa = PBXBuildFile; fileRef = B83D1E0B20CE63A2007835DB /* WalletLocalVc.m */; };
 		B83D1E0F20CE7076007835DB /* WalletForwordVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B83D1E0E20CE7076007835DB /* WalletForwordVC.m */; };
+		B87B1BCA20D2509E00EF7B8E /* WalletNewFeaturesVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B87B1BC920D2509E00EF7B8E /* WalletNewFeaturesVC.m */; };
 		B88B092120C8E29D005C2D2F /* JoinMineVc.m in Sources */ = {isa = PBXBuildFile; fileRef = B88B092020C8E29D005C2D2F /* JoinMineVc.m */; };
 		B88B092420C8E34F005C2D2F /* JoinMineTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = B88B092320C8E34F005C2D2F /* JoinMineTableView.m */; };
 		B88B092720C8E371005C2D2F /* JoinMineCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B88B092620C8E371005C2D2F /* JoinMineCell.m */; };
@@ -643,6 +644,8 @@
 		B83D1E0B20CE63A2007835DB /* WalletLocalVc.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WalletLocalVc.m; sourceTree = "<group>"; };
 		B83D1E0D20CE7076007835DB /* WalletForwordVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WalletForwordVC.h; sourceTree = "<group>"; };
 		B83D1E0E20CE7076007835DB /* WalletForwordVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WalletForwordVC.m; sourceTree = "<group>"; };
+		B87B1BC820D2509E00EF7B8E /* WalletNewFeaturesVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WalletNewFeaturesVC.h; sourceTree = "<group>"; };
+		B87B1BC920D2509E00EF7B8E /* WalletNewFeaturesVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WalletNewFeaturesVC.m; sourceTree = "<group>"; };
 		B88B091F20C8E29D005C2D2F /* JoinMineVc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JoinMineVc.h; sourceTree = "<group>"; };
 		B88B092020C8E29D005C2D2F /* JoinMineVc.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JoinMineVc.m; sourceTree = "<group>"; };
 		B88B092220C8E34F005C2D2F /* JoinMineTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JoinMineTableView.h; sourceTree = "<group>"; };
@@ -1461,6 +1464,8 @@
 				B8C2056F20CF984900952765 /* WalletDelectVC.m */,
 				B8CA7D4720CBA22800A0E93C /* WalletImportVC.h */,
 				B8CA7D4820CBA22800A0E93C /* WalletImportVC.m */,
+				B87B1BC820D2509E00EF7B8E /* WalletNewFeaturesVC.h */,
+				B87B1BC920D2509E00EF7B8E /* WalletNewFeaturesVC.m */,
 			);
 			path = Update;
 			sourceTree = "<group>";
@@ -2532,6 +2537,7 @@
 				4C41F84620723CF000BBA366 /* HomeTableView.m in Sources */,
 				B8C2056D20CF876600952765 /* CheckForwordVC.m in Sources */,
 				2EB9495A1FDF6B1A00CE4B94 /* ZMChineseConvert.m in Sources */,
+				B87B1BCA20D2509E00EF7B8E /* WalletNewFeaturesVC.m in Sources */,
 				B83D1E0C20CE63A2007835DB /* WalletLocalVc.m in Sources */,
 				21A7F35E1FB2EBAA00FAA0A2 /* CurrencyModel.m in Sources */,
 				B8C2057F20CFFE1C00952765 /* WalletLocalModel.m in Sources */,

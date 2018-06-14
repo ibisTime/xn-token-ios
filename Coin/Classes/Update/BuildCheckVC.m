@@ -14,6 +14,7 @@
 #import "TLTabBarController.h"
 #import "TLUpdateVC.h"
 #import "MnemonicUtil.h"
+#import "WalletNewFeaturesVC.h"
 @interface BuildCheckVC ()<addCollectionViewDelegate>
 @property (nonatomic ,strong) UILabel *nameLable;
 
@@ -305,11 +306,10 @@
             });
         }
         
-        TLUpdateVC *up = [[TLUpdateVC alloc] init];
-        
-        TLTabBarController *tabBarCtrl = [[TLTabBarController alloc] init];
-        
-        [UIApplication sharedApplication].keyWindow.rootViewController = up;
+        WalletNewFeaturesVC * newVC = [WalletNewFeaturesVC new];
+//        [self.navigationController pushViewController:newVC animated:YES];
+        [UIApplication sharedApplication].keyWindow.rootViewController = newVC;
+       
     }else{
         //验证失败
         NSString *text = [LangSwitcher switchLang:@"助记词验证失败,请检查备份" key:nil];

@@ -40,6 +40,7 @@
 #import "JoinMineVc.h"
 #import "WalletSettingVC.h"
 #import "TLAccountMoneyVC.h"
+#import "TLUserLoginVC.h"
 @interface TLMineVC ()<MineHeaderSeletedDelegate, UINavigationControllerDelegate>
 
 //@property (nonatomic, strong) FBKVOController *chatKVOCtrl;   czy
@@ -149,10 +150,19 @@
     accounrModel.text = [LangSwitcher switchLang:@"托管账户" key:nil];
     accounrModel.imgName = @"钱包设置";
     accounrModel.action = ^{
-        
+        if (![TLUser user].isLogin) {
+            TLUserLoginVC *loginVC= [TLUserLoginVC new];
+            [weakSelf.navigationController pushViewController:loginVC animated:YES];
+            loginVC.loginSuccess = ^{
+                
+            };
+            return ;
+        }
         TLAccountMoneyVC *moneyVC= [[TLAccountMoneyVC alloc] init];
-
         [weakSelf.navigationController pushViewController:moneyVC animated:YES];
+
+        
+
     };
     
     MineModel *settingModel = [MineModel new];
@@ -170,7 +180,14 @@
     securityCenter.text = [LangSwitcher switchLang:@"系统设置" key:nil];
     securityCenter.imgName = @"安全中心";
     securityCenter.action = ^{
-        
+        if (![TLUser user].isLogin) {
+            TLUserLoginVC *loginVC= [TLUserLoginVC new];
+            [weakSelf.navigationController pushViewController:loginVC animated:YES];
+            loginVC.loginSuccess = ^{
+                
+            };
+            return ;
+        }
         SettingVC *settingVC = [SettingVC new];
         
         [weakSelf.navigationController pushViewController:settingVC animated:YES];
@@ -182,7 +199,14 @@
     languageSetting.text = [LangSwitcher switchLang:@"加入社群" key:nil];
     languageSetting.imgName = @"加入社群";
     languageSetting.action = ^{
-        
+        if (![TLUser user].isLogin) {
+            TLUserLoginVC *loginVC= [TLUserLoginVC new];
+            [weakSelf.navigationController pushViewController:loginVC animated:YES];
+            loginVC.loginSuccess = ^{
+                
+            };
+            return ;
+        }
         JoinMineVc *vc = [[JoinMineVc alloc] init];
         [weakSelf.navigationController pushViewController:vc animated:YES];
         
@@ -194,7 +218,14 @@
     personalSetting.text = [LangSwitcher switchLang:@"个性设置" key:nil];
     personalSetting.imgName = @"提醒设置";
     personalSetting.action = ^{
-        
+        if (![TLUser user].isLogin) {
+            TLUserLoginVC *loginVC= [TLUserLoginVC new];
+            [weakSelf.navigationController pushViewController:loginVC animated:YES];
+            loginVC.loginSuccess = ^{
+                
+            };
+            return ;
+        }
         PersonalitySettingVC *personalSettingVC = [PersonalitySettingVC new];
         [weakSelf.navigationController pushViewController:personalSettingVC animated:YES];
         
@@ -246,7 +277,14 @@
     helpModel.text = [LangSwitcher switchLang:@"帮助中心" key:nil];
     helpModel.imgName = @"常见问题";
     helpModel.action = ^{
-        
+        if (![TLUser user].isLogin) {
+            TLUserLoginVC *loginVC= [TLUserLoginVC new];
+            [weakSelf.navigationController pushViewController:loginVC animated:YES];
+            loginVC.loginSuccess = ^{
+                
+            };
+            return ;
+        }
         HTMLStrVC *htmlVC = [HTMLStrVC new];
         htmlVC.type = HTMLTypeCommonProblem;
         [weakSelf.navigationController pushViewController:htmlVC animated:YES];
@@ -365,20 +403,26 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeInfo) name:kUserInfoChange object:nil];
     
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginOut) name:kUserLoginOutNotification object:nil];   czy
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginOut) name:kUserLoginOutNotification object:nil];
 
 
 }
 
 //#pragma mark - Events
-//- (void)loginOut {    czy
+- (void)loginOut {    
 
-//    [[TLUser user] loginOut];
-
+    [[TLUser user] loginOut];
+//    self.headerView.photoBtn = [UIButton buttonWithImageName:@"头像" cornerRadius:imgWidth/2.0];
+    [self.headerView.photoBtn setImage:kImage(@"头像") forState:UIControlStateNormal];
+    self.headerView.nameLbl.text = nil;
+    
+    self.headerView.mobileLbl.text = nil;
+    
+//    self.headerView.levelBtn.hidden = [[TLUser user].level isEqualToString:kLevelOrdinaryTraders] ? YES : NO;
 //    MineCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
 //    [cell hideBadge];
-//
-//}
+
+}
 
 - (void)changeInfo {
     

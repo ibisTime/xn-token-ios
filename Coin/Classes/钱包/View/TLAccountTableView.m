@@ -47,7 +47,9 @@ static NSString *platformCell = @"AccountMoneyCellTableViewCell";
     
     
     AccountMoneyCellTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:platformCell forIndexPath:indexPath];
-    
+    cell.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0);
+
+//    tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     cell.platform = platform;
 //    cell.backgroundColor = indexPath.row%2 == 0 ? kBackgroundColor: kWhiteColor;
     
@@ -71,7 +73,7 @@ static NSString *platformCell = @"AccountMoneyCellTableViewCell";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     
-    return 0.1;
+    return 2;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
@@ -81,7 +83,7 @@ static NSString *platformCell = @"AccountMoneyCellTableViewCell";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     
-    return 0.1;
+    return 2;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {

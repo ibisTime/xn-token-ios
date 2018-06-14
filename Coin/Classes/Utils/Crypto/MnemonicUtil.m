@@ -30,6 +30,13 @@
     
 }
 
++(NSString *)getGasPrice
+{
+    return [EthCrypto getGasPrice];
+    
+    
+}
+
 +(BOOL)getMnemonicsISRight:(NSString *)mnemon
 {
     return [EthCrypto getISRightKey:mnemon];

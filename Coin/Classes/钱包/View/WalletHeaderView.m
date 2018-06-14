@@ -89,7 +89,7 @@
     }];
     //总资产折合CNY
     UIButton *equivalentBtn = [UIButton buttonWithTitle:
-                               [LangSwitcher switchLang:@"我的资产(CNY)" key:nil]
+                               [LangSwitcher switchLang:@"总资产(CNY)" key:nil]
                             
                                              titleColor:kWhiteColor backgroundColor:kClearColor titleFont:12.0];
     

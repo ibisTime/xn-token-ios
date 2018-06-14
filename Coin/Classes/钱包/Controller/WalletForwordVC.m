@@ -20,6 +20,8 @@
 #import "QRCodeVC.h"
 #import "CoinAddressListVC.h"
 #import "CoinUtil.h"
+#import "MnemonicUtil.h"
+#import <MBProgressHUD/MBProgressHUD.h>
 typedef NS_ENUM(NSInteger, WalletAddressType) {
     
     WalletAddressTypeSelectAddress = 0,       //选择地址
@@ -58,6 +60,10 @@ typedef NS_ENUM(NSInteger, WalletAddressType) {
 @property (nonatomic, strong) CoinAddressModel *addressModel;
 
 @property (nonatomic, strong) UILabel *choseLab;
+//矿工费
+@property (nonatomic, assign) CGFloat gamPrice;
+
+
 @end
 
 @implementation WalletForwordVC
@@ -69,6 +75,8 @@ typedef NS_ENUM(NSInteger, WalletAddressType) {
     [self addRecordItem];
     //
     [self initSubviews];
+    
+    //矿工费
     //获取手续费费率
 //    [self setWithdrawFee];
     // Do any additional setup after loading the view.
@@ -80,6 +88,23 @@ typedef NS_ENUM(NSInteger, WalletAddressType) {
     return NO;
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [self getgamProce];
+
+    [super viewDidAppear:animated];
+}
+- (void)getgamProce
+{
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    NSString *pricr = [MnemonicUtil getGasPrice];
+    CGFloat p = [pricr doubleValue]/1000000000000000000;
+    p = p *21000;
+    NSLog(@"%.8f",p);
+    self.gamPrice = p;
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
+    [self WorkpickerEventWithIndex:1];
+}
 #pragma mark -
 - (void)addRecordItem {
     
@@ -276,6 +301,9 @@ typedef NS_ENUM(NSInteger, WalletAddressType) {
     UILabel *lable = [[UILabel alloc] init];
     [self.view addSubview:lable];
     lable.textColor = kTextColor;
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickImage)];
+    [lable addGestureRecognizer:tap];
+    lable.userInteractionEnabled = YES;
     self.choseLab = lable;
     lable.font = [UIFont systemFontOfSize:12];
     lable.text = [LangSwitcher switchLang:@"更多" key:nil];
@@ -509,18 +537,18 @@ typedef NS_ENUM(NSInteger, WalletAddressType) {
     switch (index) {
         case 2:
             //优先
-            self.minerFeeTF.text = [NSString stringWithFormat:@"0.00001050 %@",self.currency.symbol];
+            self.minerFeeTF.text = [NSString stringWithFormat:@"%.8f %@",self.gamPrice/2,self.currency.symbol];
             self.choseLab.text = @"经济";
             break;
         case 1:
             //普通
-            self.minerFeeTF.text = [NSString stringWithFormat:@"0.00002100 %@",self.currency.symbol];
+            self.minerFeeTF.text = [NSString stringWithFormat:@"%.8f %@",self.gamPrice,self.currency.symbol];
             self.choseLab.text = @"普通";
 
             break;
         case 0:
             //经济
-            self.minerFeeTF.text = [NSString stringWithFormat:@"0.00004200 %@",self.currency.symbol];
+            self.minerFeeTF.text = [NSString stringWithFormat:@"%.8f %@",self.gamPrice*2,self.currency.symbol];
             self.choseLab.text = @"优先";
 
             break;

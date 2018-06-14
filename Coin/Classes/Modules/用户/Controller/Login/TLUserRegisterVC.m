@@ -304,7 +304,8 @@
                 //dismiss 掉
                 [self.navigationController dismissViewControllerAnimated:YES completion:nil];
                 [[NSNotificationCenter defaultCenter] postNotificationName:kUserLoginNotification object:nil];
-                
+                [self.navigationController popToRootViewControllerAnimated:YES];
+
             } failure:^(NSError *error) {
                 
             }];

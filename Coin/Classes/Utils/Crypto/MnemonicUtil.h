@@ -18,8 +18,9 @@
 
 + (NSString *)getAddressWithPrivateKey: (NSString*)privateKey;
 
-+ (BOOL )getMnemonicsISRight:(NSString *)mnemon;
++ (NSString * )getGasPrice;
 
++(BOOL)getMnemonicsISRight:(NSString *)mnemon;
 
 ////生成随机的助记词
 //+ (BTCMnemonic *)generateNewMnemonic;
