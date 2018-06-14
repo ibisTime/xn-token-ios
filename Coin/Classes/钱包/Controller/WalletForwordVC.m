@@ -22,6 +22,8 @@
 #import "CoinUtil.h"
 #import "MnemonicUtil.h"
 #import <MBProgressHUD/MBProgressHUD.h>
+#import "MnemonicUtil.h"
+#import "CoinUtil.h"
 typedef NS_ENUM(NSInteger, WalletAddressType) {
     
     WalletAddressTypeSelectAddress = 0,       //选择地址
@@ -63,6 +65,7 @@ typedef NS_ENUM(NSInteger, WalletAddressType) {
 //矿工费
 @property (nonatomic, assign) CGFloat gamPrice;
 
+@property (nonatomic, copy) NSString *pricr;
 
 @end
 
@@ -98,6 +101,7 @@ typedef NS_ENUM(NSInteger, WalletAddressType) {
 {
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     NSString *pricr = [MnemonicUtil getGasPrice];
+    self.pricr = pricr;
     CGFloat p = [pricr doubleValue]/1000000000000000000;
     p = p *21000;
     NSLog(@"%.8f",p);
@@ -130,7 +134,7 @@ typedef NS_ENUM(NSInteger, WalletAddressType) {
 //    NSString *leftAmount = [self.currency.amountString subNumber:self.currency.frozenAmountString];
 //
 //    NSString *currentCurrency = self.currency.currency;
-    self.balanceTF.text = [NSString stringWithFormat:@"%.2f %@",[self.currency.amountCNY doubleValue],self.currency.symbol];
+    self.balanceTF.text = [NSString stringWithFormat:@"%.8f %@",[self.currency.balance doubleValue]/1000000000000000000,self.currency.symbol];
     
     
     
@@ -591,55 +595,76 @@ typedef NS_ENUM(NSInteger, WalletAddressType) {
         [TLAlert alertWithInfo:@"提币金额需大于0"];
         return ;
     }
-    
-    if ([TLUser user].isGoogleAuthOpen) {
-        
-        if (!(self.addressType == WalletAddressTypeSelectAddress && [self.addressModel.status isEqualToString:@"1"])) {
-            
-            if (![self.googleAuthTF.text valid]) {
-                
-                [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入谷歌验证码" key:nil]];
-                return;
-                
-            }
-            
-            //判断谷歌验证码是否为纯数字
-            if (![NSString isPureNumWithString:self.googleAuthTF.text]) {
-                
-                [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入正确的谷歌验证码" key:nil]];
-                return ;
-            }
-            
-            //判断谷歌验证码是否为6位
-            if (self.googleAuthTF.text.length != 6) {
-                
-                [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入正确的谷歌验证码" key:nil]];
-                return ;
-            }
-            
-        }
-    }
-    
-    if (self.addressType == WalletAddressTypeSelectAddress && [self.addressModel.status isEqualToString:@"1"]) {
-        
-        [self confirmWithdrawalsWithPwd:nil];
-        
-        return ;
+   NSString *word =  [[NSUserDefaults standardUserDefaults] objectForKey:KWalletWord];
+    //
+    CGFloat f =  [self.tranAmountTF.text floatValue];
+    f = f *1000000000000000000;
+   NSString *gaspic =  [CoinUtil convertToSysCoin:self.tranAmountTF.text coin:self.currency.symbol];
+//    NSNumber *gaspic = [NSNumber numberWithFloat:[self.tranAmountTF.text floatValue] *1000000000000000000] ;
+    NSString *result =[MnemonicUtil sendTransactionWithMnemonicWallet:word address:self.receiveAddressLbl.text amount:gaspic gaspic:self.pricr gasLimt:@"21000"];
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+
+    if ([result isEqualToString:@"1"]) {
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        [TLAlert alertWithInfo:@"转账成功"];
+
+    }else
+    {
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+
+        [TLAlert alertWithInfo:@"转账失败"];
+
         
     }
     
-    [TLAlert alertWithTitle:[LangSwitcher switchLang:@"请输入资金密码" key:nil]
-                        msg:@""
-                 confirmMsg:[LangSwitcher switchLang:@"确定" key:nil]
-                  cancleMsg:[LangSwitcher switchLang:@"取消" key:nil]
-                placeHolder:[LangSwitcher switchLang:@"请输入资金密码" key:nil]
-                      maker:self cancle:^(UIAlertAction *action) {
-                          
-                      } confirm:^(UIAlertAction *action, UITextField *textField) {
-                          
-                          [self confirmWithdrawalsWithPwd:textField.text];
-                          
-                      }];
+//    if ([TLUser user].isGoogleAuthOpen) {
+//
+//        if (!(self.addressType == WalletAddressTypeSelectAddress && [self.addressModel.status isEqualToString:@"1"])) {
+//
+//            if (![self.googleAuthTF.text valid]) {
+//
+//                [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入谷歌验证码" key:nil]];
+//                return;
+//
+//            }
+//
+//            //判断谷歌验证码是否为纯数字
+//            if (![NSString isPureNumWithString:self.googleAuthTF.text]) {
+//
+//                [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入正确的谷歌验证码" key:nil]];
+//                return ;
+//            }
+//
+//            //判断谷歌验证码是否为6位
+//            if (self.googleAuthTF.text.length != 6) {
+//
+//                [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入正确的谷歌验证码" key:nil]];
+//                return ;
+//            }
+//
+//        }
+//    }
+    
+//    if (self.addressType == WalletAddressTypeSelectAddress && [self.addressModel.status isEqualToString:@"1"]) {
+//
+//        [self confirmWithdrawalsWithPwd:nil];
+//
+//        return ;
+//
+//    }
+    
+//    [TLAlert alertWithTitle:[LangSwitcher switchLang:@"请输入资金密码" key:nil]
+//                        msg:@""
+//                 confirmMsg:[LangSwitcher switchLang:@"确定" key:nil]
+//                  cancleMsg:[LangSwitcher switchLang:@"取消" key:nil]
+//                placeHolder:[LangSwitcher switchLang:@"请输入资金密码" key:nil]
+//                      maker:self cancle:^(UIAlertAction *action) {
+//
+//                      } confirm:^(UIAlertAction *action, UITextField *textField) {
+//
+//                          [self confirmWithdrawalsWithPwd:textField.text];
+//
+//                      }];
     
 }
 
@@ -717,7 +742,7 @@ typedef NS_ENUM(NSInteger, WalletAddressType) {
                 weakSelf.receiveAddressLbl.text = result;
                 weakSelf.receiveAddressLbl.textColor = kTextColor;
                 weakSelf.addressType = WalletAddressTypeScan;
-                [weakSelf setGoogleAuth];
+//                [weakSelf setGoogleAuth];
                 
             };
             

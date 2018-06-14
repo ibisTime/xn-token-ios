@@ -136,11 +136,11 @@
     }
     NSLog(@"%@",self.tempArray);
     if (self.tempArray.count >= 12) {
-        BOOL  is  =  [MnemonicUtil getMnemonicsISRight:self.textView.text];
-        NSLog(@"MnemonicUtil===%d",is);
+//        BOOL  is  =  [MnemonicUtil getMnemonicsISRight:self.textView.text];
+//        NSLog(@"MnemonicUtil===%d",is);
     }
     
-    if ([MnemonicUtil getMnemonicsISRight:self.textView.text] !=NO) {
+    if ([[MnemonicUtil getMnemonicsISRight:self.textView.text] isEqualToString:@"1"]) {
         
         NSString *word = [[NSUserDefaults standardUserDefaults] objectForKey:KWalletWord];
         if (!word) {

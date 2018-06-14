@@ -38,7 +38,7 @@
     [self.view addSubview:self.iconImage];
     self.iconImage.image = kImage(@"logoTHA");
     [self.iconImage mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(@145);
+        make.top.equalTo(@72.5);
         make.centerX.equalTo(self.view.mas_centerX);
         make.width.height.equalTo(@75);
         

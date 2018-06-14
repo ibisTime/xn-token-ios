@@ -161,7 +161,7 @@
 //    self.bottomView.titles = self.bottomNames;
     //验证助记词
     BuildCheckVC *checkVC= [[BuildCheckVC alloc] init];
-    
+//    checkVC.view.backgroundColor = kClearColor;
     checkVC.isCopy = self.isCopy;
 //    self.mnemonics =  [MnemonicUtil getGenerateMnemonics];
     NSArray *words = [self.mnemonics componentsSeparatedByString:@" "];
@@ -179,40 +179,40 @@
     }
     
     self.bottomView.titles = self.bottomNames;
-    NSMutableArray *tpArray = [NSMutableArray array];
-    for (int i = 0; i < self.bottomNames.count; i++) {
-        [tpArray addObject:self.bottomNames[i].symbol];
-    }
-    
-    NSMutableArray *categoryArray = [[NSMutableArray alloc] init];
-    
-    for (unsigned i = 0; i < [self.bottomNames count]; i++){
-        
-        if ([tpArray containsObject:[self.bottomNames objectAtIndex:i].symbol] == NO){
-            
-            [categoryArray addObject:[self.bottomNames objectAtIndex:i]];
-            
-        }
-        
-        
-        
-    }
-    if (categoryArray.count == 11) {
-        self.mnemonics = [MnemonicUtil getGenerateMnemonics];
-        NSArray *words = [self.mnemonics componentsSeparatedByString:@" "];
-        
-        NSArray *tmpArr = words.mutableCopy;
-        
-        self.bottomNames = [NSMutableArray array];
-        
-        for (int i = 0; i < tmpArr.count; i++) {
-            CurrencyTitleModel *title =  [[CurrencyTitleModel alloc] init];
-            title.symbol = words[i];
-            title.IsSelect = NO;
-            
-            [self.bottomNames addObject:title];
-        }
-    }
+//    NSMutableArray *tpArray = [NSMutableArray array];
+//    for (int i = 0; i < self.bottomNames.count; i++) {
+//        [tpArray addObject:self.bottomNames[i].symbol];
+//    }
+//
+//    NSMutableArray *categoryArray = [[NSMutableArray alloc] init];
+//
+//    for (unsigned i = 0; i < [self.bottomNames count]; i++){
+//
+//        if ([tpArray containsObject:[self.bottomNames objectAtIndex:i].symbol] == NO){
+//
+//            [categoryArray addObject:[self.bottomNames objectAtIndex:i]];
+//
+//        }
+//
+//
+//
+//    }
+//    if (categoryArray.count == 11) {
+//        self.mnemonics = [MnemonicUtil getGenerateMnemonics];
+//        NSArray *words = [self.mnemonics componentsSeparatedByString:@" "];
+//
+//        NSArray *tmpArr = words.mutableCopy;
+//
+//        self.bottomNames = [NSMutableArray array];
+//
+//        for (int i = 0; i < tmpArr.count; i++) {
+//            CurrencyTitleModel *title =  [[CurrencyTitleModel alloc] init];
+//            title.symbol = words[i];
+//            title.IsSelect = NO;
+//
+//            [self.bottomNames addObject:title];
+//        }
+//    }
     checkVC.userTitles = self.bottomNames.mutableCopy;
     NSArray *result = [self.bottomNames sortedArrayUsingComparator:^NSComparisonResult( CurrencyTitleModel* obj1,  CurrencyTitleModel* obj2) {
         

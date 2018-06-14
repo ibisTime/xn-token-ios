@@ -20,7 +20,10 @@
 
 + (NSString * )getGasPrice;
 
-+(BOOL)getMnemonicsISRight:(NSString *)mnemon;
++ (NSString * )sendTransactionWithMnemonicWallet: (NSString *)wallet address:(NSString *)address amount:(NSString *)amount gaspic:(NSString*)gasPric gasLimt:(NSString *)gasLimt;
+
+
++(NSString *)getMnemonicsISRight:(NSString *)mnemon;
 
 ////生成随机的助记词
 //+ (BTCMnemonic *)generateNewMnemonic;

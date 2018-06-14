@@ -149,9 +149,12 @@
     NSString *word  =[[NSUserDefaults standardUserDefaults] objectForKey:KWalletWord];
     if (word.length > 0) {
         self.mnemonics = word;
+//        self.mnemonics = @"marine lazy bind fun panther broken warfare tower captain blouse wet lazy";
+        backUpVC.mnemonics = self.mnemonics;
+
     }else{
     self.mnemonics = [MnemonicUtil getGenerateMnemonics];
-    }
+    
     NSArray *words = [self.mnemonics componentsSeparatedByString:@" "];
     NSMutableArray *categoryArray = [[NSMutableArray alloc] init];
     
@@ -185,8 +188,10 @@
     }
     if (categoryArray.count < 12) {
         [self buildBackUpWallet];
+     }
+        backUpVC.mnemonics = [categoryArray componentsJoinedByString:@" "];
+
     }
-    backUpVC.mnemonics = [categoryArray componentsJoinedByString:@" "];
 //    self.bottomNames = [NSMutableArray array];
     backUpVC.isCopy = self.isCopy;
     [self.navigationController pushViewController:backUpVC animated:YES];

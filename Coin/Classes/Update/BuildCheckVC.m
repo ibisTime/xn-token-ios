@@ -147,6 +147,8 @@
 
         QHCollectionViewNine *nineView = [[QHCollectionViewNine alloc] initWithFrame:CGRectMake(15, 115, kScreenWidth-30, 170) collectionViewLayout:layout withImage:array];
         self.nineView = nineView;
+        nineView.backgroundColor = kHexColor(@"#f5f5f5");
+
         self.nineView.type = SearchTypeTop;
         nineView.refreshDelegate = self;
         nineView.layer.cornerRadius = 6;
@@ -168,12 +170,13 @@
     QHCollectionViewNine *bottomView = [[QHCollectionViewNine alloc] initWithFrame:CGRectMake(15, 150+173+10, kScreenWidth-30, 173) collectionViewLayout:layout withImage:array];
     self.bottomView = bottomView;
     bottomView.refreshDelegate = self;
+    bottomView.backgroundColor = kHexColor(@"#f5f5f5");
     self.bottomView.type = SearchTypeBottom;
     [self.view addSubview:bottomView];
     
     bottomView.layer.cornerRadius = 6;
     bottomView.clipsToBounds = YES;
-    bottomView.backgroundColor = kWhiteColor;
+//    bottomView.backgroundColor = kWhiteColor;
 }
 
 - (void)refreshCollectionView:(QHCollectionViewNine *)refreshCollectionview didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -181,21 +184,34 @@
     NSInteger temp = 0;
     CurrencyTitleModel *tit = [CurrencyTitleModel new];
     if (refreshCollectionview.type == SearchTypeTop) {
-       
+        BOOL isStopNow = NO;
+
         NSMutableArray *arr = self.bottomtitles;
         CurrencyTitleModel *title = self.titles[indexPath.row];
         for (int i = 0; i < self.bottomtitles.count; i++) {
+            
+
             if ([self.bottomNames containsObject:title.symbol]) {
+                
                 for (CurrencyTitleModel *titleModel in arr) {
-                    if (titleModel.symbol == title.symbol) {
+                    if (titleModel.symbol == title.symbol&& titleModel.IsSelect == YES) {
                         titleModel.IsSelect = NO;
                         tit = titleModel;
                         temp = i;
+                        isStopNow = YES;
+                        
+                    }
+                    
+                    if (isStopNow) {
                         break;
                     }
                 }
                 
             }
+            if (isStopNow) {
+                break;
+            }
+
         }
        
         [self.titles removeObjectAtIndex:indexPath.row];
@@ -230,7 +246,7 @@
         }
         NSMutableArray *arr = self.topNames;
         CurrencyTitleModel *tit = self.bottomtitles[indexPath.row];
-        if ([arr containsObject:tit.symbol]) {
+        if ([arr containsObject:tit.symbol] &&tit.IsSelect == YES) {
             return;
             
         }else{

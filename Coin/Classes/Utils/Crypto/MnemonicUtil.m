@@ -8,7 +8,7 @@
 
 #import "MnemonicUtil.h"
 #import "Coin-Swift.h"
-
+#import "AppColorMacro.h"
 @implementation MnemonicUtil
 
 + (void)test{
@@ -24,9 +24,17 @@
     NSLog(@"mnenomic=%@", mnenomic);
     NSLog(@"privateKey=%@", privateKey);
     NSLog(@"address=%@", address);
-    
+//    NSString *gasP = [EthCrypto mn];
+
     NSString *gasPrice = [EthCrypto getGasPrice];
     NSLog(@"%@", gasPrice);
+    NSString *word = [[NSUserDefaults standardUserDefaults] objectForKey:KWalletWord];
+    NSString *toAddress = [[NSUserDefaults standardUserDefaults] objectForKey:KWalletAddress];
+    long inter  = 3*100000000000000000;
+    NSString *gprice = [NSString stringWithFormat:@"%ld",inter];
+    
+    NSString * result = [EthCrypto sendTransactionWithMnemonic:word to:toAddress amount:@"3" gasPrice:gprice gasLimit:@"21000"];
+    NSLog(@"%@",result);
     
 }
 
@@ -37,12 +45,22 @@
     
 }
 
-+(BOOL)getMnemonicsISRight:(NSString *)mnemon
++(NSString*)getMnemonicsISRight:(NSString *)mnemon
 {
-//    return [EthCrypto getISRightKey:mnemon];
-    return true;
     
+    return [EthCrypto isValidMnemonice:mnemon];
+
 }
++(NSString *)sendTransactionWithMnemonicWallet:(NSString *)wallet address:(NSString *)address amount:(NSString *)amount gaspic:(NSString *)gasPric gasLimt:(NSString *)gasLimt
+{
+    
+    NSString *str = [EthCrypto sendTransactionWithMnemonic:wallet to:address amount:amount gasPrice:gasPric gasLimit:gasLimt];
+    
+    return str;
+}
+
+   
+
 
 +(NSString *)getGenerateMnemonics
 {

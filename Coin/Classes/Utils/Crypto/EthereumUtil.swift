@@ -110,7 +110,7 @@ public class EthCrypto: NSObject
     static public func sendTransaction(mnemonic: String, to: String, amount: String, gasPrice: String, gasLimit: String) -> String? {
         
         var txHash : String!
-        txHash = "";
+//        txHash = "";
         do{
            
             let keystore = try! BIP32Keystore(mnemonics: mnemonic, password: "BANKEXFOUNDATION", mnemonicsPassword: "")
@@ -131,10 +131,16 @@ public class EthCrypto: NSObject
             let sendResult = intermediateSend.send(password: "BANKEXFOUNDATION")
             switch sendResult {
             case .success(let r):
-                print("Sucess",r)
+                print("Sucess",r.values.first as Any)
+                txHash=r.values.first as Any as! String
                 //todo 返回交易hash
             case .failure(let err):
                 print("Eroor",err)
+            }
+            if txHash != nil {
+               txHash =  "1"
+            } else {
+              txHash = "0"
             }
             
         }

@@ -55,7 +55,7 @@
     //筛选
     [self addFilterItem];
     //获取账单
-    [self requestBillList];
+//    [self requestBillList];
     // Do any additional setup after loading the view.
 }
 #pragma mark - Init

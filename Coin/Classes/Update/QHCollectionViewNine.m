@@ -31,7 +31,7 @@ static NSString *bottomIdentifierCell = @"AddSearchBottomCell";
         self.allowsSelection = YES;
         self.allowsMultipleSelection = YES;
 //        self.bounces = NO;
-        self.backgroundColor = [UIColor whiteColor];
+//        self.backgroundColor = [UIColor whiteColor];
         self.delegate = self;
         self.dataSource = self;
         [self registerClass:[AddSearchCell class] forCellWithReuseIdentifier:identifierCell];
