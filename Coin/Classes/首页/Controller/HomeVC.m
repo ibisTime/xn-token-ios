@@ -20,7 +20,7 @@
 #import "StoreListVC.h"
 #import "GoodMallVC.h"
 #import "PosMiningVC.h"
-
+#import "RateDescVC.h"
 #import "CoinUtil.h"
 
 #import "HomeTableView.h"
@@ -44,7 +44,7 @@
 
 - (void)viewDidLoad {
     
-    [MnemonicUtil test];
+//    [MnemonicUtil test];
 
 //    BTCMnemonic *mnemonic =  [MnemonicUtil generateNewMnemonic];
 //    NSLog(@"Seed=%@", BTCHexFromData(mnemonic.seed));
@@ -83,7 +83,9 @@
 - (void)initTableView {
     
     CoinWeakSelf;
+    UIBarButtonItem *rightBarItem = [[UIBarButtonItem alloc] initWithImage:kImage(@"消息1") style:UIBarButtonItemStyleDone target:self action:@selector(OpenMessage)];
     
+    self.navigationItem.rightBarButtonItem = rightBarItem;
     [self.view addSubview:self.headerView];
     
     self.tableView = [[HomeTableView alloc] initWithFrame:CGRectZero
@@ -110,7 +112,20 @@
 }
 
 #pragma mark - Init
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    
+    
+}
 
+- (void)OpenMessage
+{
+    RateDescVC *vc = [RateDescVC new];
+    [self.navigationController pushViewController:vc animated:YES];
+    
+}
 
 - (HomeHeaderView *)headerView {
     

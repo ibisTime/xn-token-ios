@@ -40,6 +40,7 @@
     self.tableView = [[RateDescTableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight)];
     
     self.tableView.refreshDelegate = self;
+    self.tableView.backgroundColor = kBackgroundColor;
     
     [self.view addSubview:self.tableView];
     

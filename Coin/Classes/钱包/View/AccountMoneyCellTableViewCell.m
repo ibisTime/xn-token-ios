@@ -33,6 +33,9 @@
 @property (nonatomic, strong) UIButton *priceFluctBtn;
 @property (nonatomic, strong) UIImageView *presentImage;
 
+@property (nonatomic, strong) UIView *lineView;
+
+
 @end
 @implementation AccountMoneyCellTableViewCell
 
@@ -85,6 +88,11 @@
                                                     font:12.0];
     
     [self addSubview:self.rmbPriceLbl];
+    
+    self.lineView = [UIView new];
+    
+    [self addSubview:self.lineView];
+    
     //布局
     [self setSubviewLayout];
 }
@@ -134,6 +142,16 @@
         make.top.equalTo(self.currencyNameLbl.mas_top);
     }];
     
+    [self.lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(self.mas_bottom);
+        make.left.equalTo(@0);
+
+        make.right.equalTo(@-1);
+
+        make.height.equalTo(@1);
+
+    }];
+    self.lineView.backgroundColor = kHexColor(@"#eeeeee");
 }
 
 #pragma mark - Setting

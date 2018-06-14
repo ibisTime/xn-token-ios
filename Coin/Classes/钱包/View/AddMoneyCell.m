@@ -109,6 +109,8 @@
 - (void)ChoseClick: (UIButton *)btn
 {
     
+   
+    
     btn.selected =! btn.selected;
     _currency.IsSelected = btn.selected;
 
@@ -129,7 +131,51 @@
     {
         self.coinIV.image = [UIImage imageNamed:@"eth"];
     }
-    self.selectButton.selected = currency.IsSelected;
+    NSArray *a = [[NSUserDefaults standardUserDefaults] objectForKey:@"localArray"];
+    if (a.count == 1) {
+        for (NSMutableDictionary*Dictionary in a) {
+            
+            NSString *symbol = [Dictionary objectForKey:@"symbol"];
+            if (symbol == currency.symbol) {
+                self.selectButton.selected = YES;
+
+            }else
+            {
+                self.selectButton.selected = NO;
+
+                
+            }
+            
+        }
+        
+    }else if(a.count == 2)
+    {
+        {
+            for (NSMutableDictionary*Dictionary in a) {
+                
+                NSString *symbol = [Dictionary objectForKey:@"symbol"];
+                if (symbol == currency.symbol) {
+                    self.selectButton.selected = YES;
+                    
+                }else
+                {
+                    self.selectButton.selected = YES;
+                    
+                    
+                }
+                
+            }
+            
+        }
+        
+    }else
+    {
+        self.selectButton.selected = currency.IsSelected;
+
+        
+    }
+   
+   
 
 //    [self.coinIV sd_setImageWithURL:[NSURL URLWithString:[coin.pic1 convertImageUrl]]];
     

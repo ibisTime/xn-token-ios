@@ -96,19 +96,21 @@
         
         weakSelf.currencys   =  [CurrencyModel mj_objectArrayWithKeyValuesArray:usdStr];
         NSMutableArray <CurrencyModel *> *shouldDisplayCoins = [[NSMutableArray alloc] init];
-        [weakSelf.currencys enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [weakSelf.currentModels enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             
             {
-            CurrencyModel *currencyModel = (CurrencyModel *)obj;
-            if ([weakSelf.currentModels containsObject:currencyModel] != NSNotFound)
+            CurrencyModel *currencyModel = weakSelf.currencys[idx];
+            if ([weakSelf.currencys containsObject:currencyModel] != NSNotFound)
             {
                     currencyModel.IsSelected = YES;
+//                [shouldDisplayCoins addObject:currencyModel];
 
                 }else{
                     
                      currencyModel.IsSelected = NO;
+//                    [shouldDisplayCoins addObject:currencyModel];
+
                 }
-                [shouldDisplayCoins addObject:currencyModel];
 
             }
             //                if ([[CoinUtil shouldDisplayCoinArray] indexOfObject:currencyModel.currency ] != NSNotFound ) {
@@ -118,7 +120,7 @@
         }];
         
         NSLog(@"%@",self.currencys);
-        weakSelf.currencys = shouldDisplayCoins;
+//        weakSelf.currencys = shouldDisplayCoins;
         
         weakSelf.tableView.currencys = weakSelf.currencys;
         [weakSelf.tableView reloadData_tl];
@@ -200,7 +202,10 @@
     
     NSUserDefaults *defaules = [NSUserDefaults standardUserDefaults];
     NSMutableArray *arr = [NSMutableArray array];
-
+    if (a.count == 0) {
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"localArray"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }else{
     for (int i = 0; i < a.count; i++) {
         CurrencyModel *model = a[i];
         
@@ -211,7 +216,7 @@
     }
     [defaules setObject:arr forKey:@"localArray"];
     [defaules synchronize];
-
+  }
     
     [super viewWillDisappear:animated];
     CoinWeakSelf;
