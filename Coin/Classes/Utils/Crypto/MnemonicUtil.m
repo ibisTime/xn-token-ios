@@ -19,8 +19,8 @@
     NSString *privateKey = [EthCrypto getPrivateKey:mnenomic];
     
     NSString *address = [EthCrypto getAddressWithPrivateKey:privateKey];
-    BOOL is = [EthCrypto getISRightKey:mnenomic];
-    NSLog(@"%d",is);
+//    BOOL is = [EthCrypto is:mnenomic];
+//    NSLog(@"%d",is);
     NSLog(@"mnenomic=%@", mnenomic);
     NSLog(@"privateKey=%@", privateKey);
     NSLog(@"address=%@", address);
@@ -32,8 +32,8 @@
 
 +(BOOL)getMnemonicsISRight:(NSString *)mnemon
 {
-    return [EthCrypto getISRightKey:mnemon];
-    
+//    return [EthCrypto getISRightKey:mnemon];
+    return true;
     
 }
 

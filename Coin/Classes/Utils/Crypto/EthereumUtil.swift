@@ -22,10 +22,16 @@ public class EthCrypto: NSObject
     }
 //    static public var paths: [String:EthereumAddress] = [String:EthereumAddress]()
     
-    static public func getISRightKey(_ mnemonics: String) -> Data? {
+    static public func isValidMnemonice(_ mnemonics: String) -> String? {
         var _ : String!
         var seed : Data!
         seed = BIP39.mnemonicsToEntropy(mnemonics)
+        
+        if seed != nil {
+            return "1"
+        } else {
+            return "0"
+        }
 //        seed = BIP39.mnemonicsToEntropy(mnemonics)
 //        guard let prefixNode = HDNode(seed: seed)?.derive(path: HDNode.defaultPathMetamaskPrefix, derivePrivateKey: true) else {return nil}
 //
@@ -40,7 +46,7 @@ public class EthCrypto: NSObject
 //        let newNode = prefixNode.derive(index: newIndex, derivePrivateKey: true, hardened: false)
 //        privateKeyStr = newNode?.privateKey?.toHexString();
         
-        return seed;
+//        return seed;
     }
     static public var paths: [String:EthereumAddress] = [String:EthereumAddress]()
     
@@ -101,14 +107,41 @@ public class EthCrypto: NSObject
     }
     
     //发送ETH交易（签名并广播）
-//    static public func sendTransaction(from: String, to: String, amount: String, ) -> String? {
-//
-//        //rinkey测试环境，上线需要修改
-//        let web3 = Web3.InfuraRinkebyWeb3();
-//        web3.eth.sendETH(from: EthereumAddress, to: <#T##EthereumAddress#>, amount: <#T##String#>, units: <#T##Web3.Utils.Units#>, extraData: <#T##Data#>, options: <#T##Web3Options?#>)
-//
-//        return nil;
-//    }
+    static public func sendTransaction(from: String, mnemonic: String, to: String, amount: String, gasPrice: String, gasLimit: String) -> String? {
+        
+        do{
+           
+            let keystore = try! BIP32Keystore(mnemonics: mnemonic, password: "BANKEXFOUNDATION", mnemonicsPassword: "")
+            
+            let web3Rinkeby = Web3.InfuraRinkebyWeb3()
+            let keystoreManager = KeystoreManager.init([keystore!])
+            web3Rinkeby.addKeystoreManager(keystoreManager)
+            var options = Web3Options.defaultOptions()
+            options.gasLimit = BigUInt(21000)
+            options.from = keystore?.addresses?.first!
+            let am = BigUInt.init(amount)
+            options.value = am
+            let toaddress = EthereumAddress(to)
+           
+           
+            let intermediateSend = web3Rinkeby.contract(Web3.Utils.coldWalletABI, at: toaddress, abiVersion: 2)!.method(options: options)!
+            let sendResult = intermediateSend.send(password: "BANKEXFOUNDATION")
+            switch sendResult {
+            case .success(let r):
+                print("Sucess",r)
+            case .failure(let err):
+                print("Eroor",err)
+//            case .none:
+//                print("sendResultBip32",sendResult)
+//            }
+            
+            }
+            
+        }
+        
+        return nil;
+    
+    }
     
 //    public struct Web3s {
 //
@@ -143,4 +176,5 @@ public class EthCrypto: NSObject
 
     
     
+
 }
