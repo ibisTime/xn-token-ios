@@ -107,8 +107,10 @@ public class EthCrypto: NSObject
     }
     
     //发送ETH交易（签名并广播）
-    static public func sendTransaction(from: String, mnemonic: String, to: String, amount: String, gasPrice: String, gasLimit: String) -> String? {
+    static public func sendTransaction(mnemonic: String, to: String, amount: String, gasPrice: String, gasLimit: String) -> String? {
         
+        var txHash : String!
+        txHash = "";
         do{
            
             let keystore = try! BIP32Keystore(mnemonics: mnemonic, password: "BANKEXFOUNDATION", mnemonicsPassword: "")
@@ -116,6 +118,7 @@ public class EthCrypto: NSObject
             let web3Rinkeby = Web3.InfuraRinkebyWeb3()
             let keystoreManager = KeystoreManager.init([keystore!])
             web3Rinkeby.addKeystoreManager(keystoreManager)
+            
             var options = Web3Options.defaultOptions()
             options.gasLimit = BigUInt(21000)
             options.from = keystore?.addresses?.first!
@@ -129,17 +132,14 @@ public class EthCrypto: NSObject
             switch sendResult {
             case .success(let r):
                 print("Sucess",r)
+                //todo 返回交易hash
             case .failure(let err):
                 print("Eroor",err)
-//            case .none:
-//                print("sendResultBip32",sendResult)
-//            }
-            
             }
             
         }
         
-        return nil;
+        return txHash;
     
     }
     
