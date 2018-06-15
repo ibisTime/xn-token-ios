@@ -20,17 +20,7 @@
     
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         
-        self.rightLabel = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:14.0];
-        
-        self.rightLabel.textAlignment = NSTextAlignmentRight;
-        [self.contentView addSubview:self.rightLabel];
-        [self.rightLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            
-            make.right.equalTo(self.mas_right).offset(-15);
-            make.centerY.equalTo(self.mas_centerY);
-            
-        }];
-        
+       
         //
         self.titleLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:14.0];
         
@@ -38,11 +28,35 @@
         [self.titleLbl mas_makeConstraints:^(MASConstraintMaker *make) {
             
             make.left.equalTo(self.mas_left).offset(15);
+            make.width.equalTo(@60);
             make.centerY.equalTo(self.contentView.mas_centerY);
             
         }];
         
+        self.rightLabel = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:14.0];
+        
+        self.rightLabel.textAlignment = NSTextAlignmentLeft;
+        self.rightLabel.numberOfLines = 0;
+        [self.contentView addSubview:self.rightLabel];
+        [self.rightLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.left.equalTo(self.titleLbl.mas_right).offset(15);
+            make.right.equalTo(self.mas_right).offset(-15);
+            make.top.equalTo(self.titleLbl.mas_top);
+            
+        }];
+        
     }
+    UIView *lineView = [UIView new];
+    [self.contentView addSubview:lineView];
+    lineView.backgroundColor = kBackgroundColor;
+    [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.mas_left).offset(15);
+        make.right.equalTo(self.mas_right).offset(-15);
+        make.height.equalTo(@2);
+
+        
+    }];
     
     return self;
 }

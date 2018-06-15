@@ -15,15 +15,18 @@
 #import "StoreTableView.h"
 //C
 #import "StoreDetailVC.h"
-
+#import "TLPlaceholderView.h"
 @interface StoreListVC ()<RefreshDelegate>
 
 //店铺
 @property (nonatomic, strong) StoreTableView *tableView;
 //暂无店铺
-@property (nonatomic, strong) UIView *placeHolderView;
+//@property (nonatomic, strong) UIView *placeHolderView;
 //
 @property (nonatomic, strong) NSArray <StoreModel *>*stores;
+
+@property (nonatomic, strong) TLPlaceholderView *placeholderView;
+
 
 @end
 
@@ -31,13 +34,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = [LangSwitcher switchLang:@"在线商家" key:nil];
+    self.title = [LangSwitcher switchLang:@"币生币" key:nil];
     //
     [self initPlaceHolderView];
     //获取店铺列表
-    [self requestStoreList];
+//    [self requestStoreList];
     //
-    [self.tableView beginRefreshing];
+//    [self.tableView beginRefreshing];
 }
 
 #pragma mark - Init
@@ -47,7 +50,7 @@
         
         _tableView = [[StoreTableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         
-        _tableView.placeHolderView = self.placeHolderView;
+//        _tableView.placeHolderView = self.placeHolderView;
         _tableView.refreshDelegate = self;
         
         [self.view addSubview:_tableView];
@@ -62,32 +65,36 @@
 
 - (void)initPlaceHolderView {
     
-    self.placeHolderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight - 40)];
+    self.placeholderView = [TLPlaceholderView placeholderViewWithImage:nil text:[LangSwitcher switchLang:@"暂未开放, 敬请期待!" key:nil] textColor:kHexColor(@"#fe8472")];
     
-    UIImageView *addressIV = [[UIImageView alloc] init];
-    addressIV.image = kImage(@"暂无订单");
-    addressIV.centerX = kScreenWidth/2.0;
-    [self.placeHolderView addSubview:addressIV];
-    [addressIV mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.centerX.equalTo(@0);
-        make.top.equalTo(@(kHeight(70)));
-        
-    }];
+    [self.view addSubview:self.placeholderView];
     
-    UILabel *textLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor2 font:14.0];
-    
-    textLbl.text = [LangSwitcher switchLang:@"暂无店铺" key:nil];
-    
-    textLbl.textAlignment = NSTextAlignmentCenter;
-    
-    [self.placeHolderView addSubview:textLbl];
-    [textLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.top.equalTo(addressIV.mas_bottom).offset(20);
-        make.centerX.equalTo(addressIV.mas_centerX);
-        
-    }];
+//    self.placeHolderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight - 40)];
+//
+//    UIImageView *addressIV = [[UIImageView alloc] init];
+//    addressIV.image = kImage(@"暂无订单");
+//    addressIV.centerX = kScreenWidth/2.0;
+//    [self.placeHolderView addSubview:addressIV];
+//    [addressIV mas_makeConstraints:^(MASConstraintMaker *make) {
+//
+//        make.centerX.equalTo(@0);
+//        make.top.equalTo(@(kHeight(70)));
+//
+//    }];
+//
+//    UILabel *textLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor2 font:14.0];
+//
+//    textLbl.text = [LangSwitcher switchLang:@"暂无店铺" key:nil];
+//
+//    textLbl.textAlignment = NSTextAlignmentCenter;
+//
+//    [self.placeHolderView addSubview:textLbl];
+//    [textLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+//
+//        make.top.equalTo(addressIV.mas_bottom).offset(20);
+//        make.centerX.equalTo(addressIV.mas_centerX);
+//
+//    }];
     
 }
 

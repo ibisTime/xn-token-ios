@@ -491,7 +491,7 @@ typedef NS_ENUM(NSInteger, WalletAddressType) {
         
         _coinAddressPicker = [[FilterView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
         
-        _coinAddressPicker.title = [LangSwitcher switchLang:@"付币地址" key:nil];
+        _coinAddressPicker.title = [LangSwitcher switchLang:@"接受地址" key:nil];
         
         _coinAddressPicker.selectBlock = ^(NSInteger index) {
             
@@ -582,7 +582,7 @@ typedef NS_ENUM(NSInteger, WalletAddressType) {
     
     [self.view endEditing:YES];
     
-    if ([self.receiveAddressLbl.text isEqualToString:@"请选择付币地址或扫码录入"]) {
+    if ([self.receiveAddressLbl.text isEqualToString:@"请选择接受地址或扫码录入"]) {
         
         [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请选择接收地址" key:nil] ];
         return ;
@@ -599,10 +599,11 @@ typedef NS_ENUM(NSInteger, WalletAddressType) {
     //
     CGFloat f =  [self.tranAmountTF.text floatValue];
     f = f *1000000000000000000;
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+
    NSString *gaspic =  [CoinUtil convertToSysCoin:self.tranAmountTF.text coin:self.currency.symbol];
 //    NSNumber *gaspic = [NSNumber numberWithFloat:[self.tranAmountTF.text floatValue] *1000000000000000000] ;
     NSString *result =[MnemonicUtil sendTransactionWithMnemonicWallet:word address:self.receiveAddressLbl.text amount:gaspic gaspic:self.pricr gasLimt:@"21000"];
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
 
     if ([result isEqualToString:@"1"]) {
         [MBProgressHUD hideHUDForView:self.view animated:YES];

@@ -45,11 +45,11 @@
     
     self.iconImageView.image = [UIImage imageNamed:@"logoTHA"];
     self.nameLbl.text = [LangSwitcher switchLang:[NSString stringWithFormat:@"THA钱包V%@",[NSString appVersionString]] key:nil];
-    self.versionLbl.text = [NSString stringWithFormat:@"钱包是一款全新的数字货币钱包"];
-    self.versionLbl2.text = [NSString stringWithFormat:@"为你提高安全丶便捷的一站式管理方案"];
-    self.versionLbl3.text = [NSString stringWithFormat:@"服务时间:  9:00 - 18:00 "];
-    self.banQuanLbl.text = @"联系电话";
-    self.phoneNumber.text = @"0571-8765650";
+    self.versionLbl.text = [LangSwitcher switchLang:@"钱包是一款全新的数字货币钱包" key:nil];
+    self.versionLbl2.text = [LangSwitcher switchLang:@"为你提高安全丶便捷的一站式管理方案" key:nil];
+    self.versionLbl3.text = [LangSwitcher switchLang:@"服务时间:  9:00 - 18:00 " key:nil];
+    self.banQuanLbl.text = [LangSwitcher switchLang:@"联系电话" key:nil];
+    self.phoneNumber.text = [LangSwitcher switchLang:@"0571-8765650" key:nil];
 
     //
     NSString *at = @"@";

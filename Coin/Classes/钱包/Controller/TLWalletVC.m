@@ -102,6 +102,7 @@
     
     //获取我的资产
     [self queryMyAmount];
+    [self refreshOpenCoinList];
     [self queryTotalAmount];
     
     //本地读取数据
@@ -178,7 +179,7 @@
     
 //    self.currentTableView.tableHeaderView = [UIView new];
 //    self.currentTableView.tableFooterView = [UIView new];
-
+ 
     self.currentTableView.refreshDelegate = self;
 //    self.currentTableView.mj_header = [MJRefreshHeader headerWithRefreshingTarget:self refreshingAction:@selector (loadMore)];
 //    self.currentTableView.mj_footer = [MJRefreshFooter footerWithRefreshingTarget:self refreshingAction:@selector (loadBottom)];;
@@ -302,7 +303,9 @@
 
 #pragma mark - Data
 - (void)queryTotalAmount {
-    
+    NSString *audioFile = [[NSBundle mainBundle] pathForResource:@"QSount.caf" ofType:nil];
+
+    NSLog(@"%@",audioFile);
 //    [self.currentTableView beginRefreshing];
     TLPageDataHelper *http = [TLPageDataHelper new];
     http.code = @"802270";

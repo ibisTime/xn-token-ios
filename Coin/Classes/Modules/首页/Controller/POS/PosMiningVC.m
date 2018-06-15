@@ -20,7 +20,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = [LangSwitcher switchLang:@"POS挖矿" key:nil];
+    self.title = [LangSwitcher switchLang:@"余币宝" key:nil];
     //敬请期待
     [self initPlaceHolderView];
 }
@@ -28,7 +28,10 @@
 #pragma mark - Init
 - (void)initPlaceHolderView {
     
-    self.placeholderView = [TLPlaceholderView placeholderViewWithImage:@"挖矿敬请期待" text:[LangSwitcher switchLang:@"暂未开放, 敬请期待!" key:nil] textColor:kHexColor(@"#ffb115")];
+//    self.placeholderView = [TLPlaceholderView placeholderViewWithImage:nil text:[LangSwitcher switchLang:@"暂未开放, 敬请期待!" key:nil] textColor:kHexColor(@"#fe8472")];
+    
+    [self.view addSubview:self.placeholderView];
+    self.placeholderView = [TLPlaceholderView placeholderViewWithImage:nil text:[LangSwitcher switchLang:@"暂未开放, 敬请期待!" key:nil] textColor:kHexColor(@"#fe8472")];
     
     [self.view addSubview:self.placeholderView];
 }

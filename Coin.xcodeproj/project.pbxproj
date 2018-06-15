@@ -244,6 +244,12 @@
 		B8D5F15620CE0F530005CF96 /* AccountMoneyCellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B8D5F15520CE0F530005CF96 /* AccountMoneyCellTableViewCell.m */; };
 		B8D7E38220D140BC00453860 /* BilllistVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B8D7E38120D140BC00453860 /* BilllistVC.m */; };
 		B8D7E38520D14B8200453860 /* SystemWallModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B8D7E38420D14B8200453860 /* SystemWallModel.m */; };
+		B8F63ED720D362DA00556150 /* WalletLocalBillTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = B8F63ED620D362DA00556150 /* WalletLocalBillTableView.m */; };
+		B8F63EDA20D3639900556150 /* LocalBillCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B8F63ED920D3639900556150 /* LocalBillCell.m */; };
+		B8F63EDD20D37FE700556150 /* LocalBillDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B8F63EDC20D37FE700556150 /* LocalBillDetailVC.m */; };
+		B8F63EE020D3809700556150 /* LocalBillDetailTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = B8F63EDF20D3809700556150 /* LocalBillDetailTableView.m */; };
+		B8F63EE320D397B000556150 /* WalletLocalWebVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B8F63EE220D397B000556150 /* WalletLocalWebVC.m */; };
+		B8F63EE620D3DC9600556150 /* QSount.caf in Resources */ = {isa = PBXBuildFile; fileRef = B8F63EE520D3DC5E00556150 /* QSount.caf */; };
 		FB49ABC88B6B7FFBB19DF11D /* Pods_Coin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 524739678D50CF78B722738E /* Pods_Coin.framework */; };
 /* End PBXBuildFile section */
 
@@ -728,6 +734,17 @@
 		B8D7E38120D140BC00453860 /* BilllistVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BilllistVC.m; sourceTree = "<group>"; };
 		B8D7E38320D14B8200453860 /* SystemWallModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SystemWallModel.h; sourceTree = "<group>"; };
 		B8D7E38420D14B8200453860 /* SystemWallModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SystemWallModel.m; sourceTree = "<group>"; };
+		B8F63ED520D362DA00556150 /* WalletLocalBillTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WalletLocalBillTableView.h; sourceTree = "<group>"; };
+		B8F63ED620D362DA00556150 /* WalletLocalBillTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WalletLocalBillTableView.m; sourceTree = "<group>"; };
+		B8F63ED820D3639900556150 /* LocalBillCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocalBillCell.h; sourceTree = "<group>"; };
+		B8F63ED920D3639900556150 /* LocalBillCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocalBillCell.m; sourceTree = "<group>"; };
+		B8F63EDB20D37FE700556150 /* LocalBillDetailVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocalBillDetailVC.h; sourceTree = "<group>"; };
+		B8F63EDC20D37FE700556150 /* LocalBillDetailVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocalBillDetailVC.m; sourceTree = "<group>"; };
+		B8F63EDE20D3809700556150 /* LocalBillDetailTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocalBillDetailTableView.h; sourceTree = "<group>"; };
+		B8F63EDF20D3809700556150 /* LocalBillDetailTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocalBillDetailTableView.m; sourceTree = "<group>"; };
+		B8F63EE120D397B000556150 /* WalletLocalWebVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WalletLocalWebVC.h; sourceTree = "<group>"; };
+		B8F63EE220D397B000556150 /* WalletLocalWebVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WalletLocalWebVC.m; sourceTree = "<group>"; };
+		B8F63EE520D3DC5E00556150 /* QSount.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = QSount.caf; path = Coin/QSount.caf; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -887,6 +904,12 @@
 				B8C2057E20CFFE1C00952765 /* WalletLocalModel.m */,
 				B8D7E38320D14B8200453860 /* SystemWallModel.h */,
 				B8D7E38420D14B8200453860 /* SystemWallModel.m */,
+				B8F63ED520D362DA00556150 /* WalletLocalBillTableView.h */,
+				B8F63ED620D362DA00556150 /* WalletLocalBillTableView.m */,
+				B8F63ED820D3639900556150 /* LocalBillCell.h */,
+				B8F63ED920D3639900556150 /* LocalBillCell.m */,
+				B8F63EDE20D3809700556150 /* LocalBillDetailTableView.h */,
+				B8F63EDF20D3809700556150 /* LocalBillDetailTableView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1914,6 +1937,10 @@
 				B83D1E0B20CE63A2007835DB /* WalletLocalVc.m */,
 				B83D1E0D20CE7076007835DB /* WalletForwordVC.h */,
 				B83D1E0E20CE7076007835DB /* WalletForwordVC.m */,
+				B8F63EDB20D37FE700556150 /* LocalBillDetailVC.h */,
+				B8F63EDC20D37FE700556150 /* LocalBillDetailVC.m */,
+				B8F63EE120D397B000556150 /* WalletLocalWebVC.h */,
+				B8F63EE220D397B000556150 /* WalletLocalWebVC.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2025,6 +2052,7 @@
 				21A7F3251FB2E4DF00FAA0A2 /* CustomUIHeader.h */,
 				21A7F2D71FB2D62A00FAA0A2 /* CoinHeader.h */,
 				211C01381FC65ED600E51FCF /* CoinPrefixHeader.pch */,
+				B8F63EE520D3DC5E00556150 /* QSount.caf */,
 				2E973FC71FDA279C005C2D5F /* LangSwitcher.h */,
 				2E973FC81FDA279C005C2D5F /* LangSwitcher.m */,
 			);
@@ -2234,7 +2262,7 @@
 					2EA584B31FA813C900C7106C = {
 						CreatedOnToolsVersion = 9.0.1;
 						LastSwiftMigration = 0940;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -2270,6 +2298,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B8F63EE620D3DC9600556150 /* QSount.caf in Resources */,
 				B819BAAA20C6DD7800CEEC5E /* LaunchScreen.storyboard in Resources */,
 				B819BAA620C6B80300CEEC5E /* AlipaySDK.bundle in Resources */,
 				2EFFE6AA1FF4829100BFCC40 /* Localizable.strings in Resources */,
@@ -2434,6 +2463,7 @@
 				211DE6C51FB58B4C002FCF3D /* HttpRequestService.m in Sources */,
 				B88B092A20C8ED77005C2D2F /* JoinModel.m in Sources */,
 				21205CD21FCCFE70003C6C7C /* FansCell.m in Sources */,
+				B8F63EDD20D37FE700556150 /* LocalBillDetailVC.m in Sources */,
 				B8B15C0220CA312100F13220 /* BuildWalletMineVC.m in Sources */,
 				211DE6A91FB58B4C002FCF3D /* TLPlaceholderView.m in Sources */,
 				2E394FED1FB0575A00BA0829 /* AppDelegate.mm in Sources */,
@@ -2462,6 +2492,7 @@
 				2EE950C61FB05B5900429257 /* TLMineVC.m in Sources */,
 				B8BBA64920C849BB00DC4D5F /* AddMoneyCell.m in Sources */,
 				21205CDA1FCD2FC8003C6C7C /* CoinAddressListVC.m in Sources */,
+				B8F63EE020D3809700556150 /* LocalBillDetailTableView.m in Sources */,
 				21205CD61FCD0435003C6C7C /* FansModel.m in Sources */,
 				216F5B1A206CD9C900F2C832 /* TradeFlowTableView.m in Sources */,
 				B8B15C1F20CA752900F13220 /* QHCollectionViewNine.m in Sources */,
@@ -2529,6 +2560,7 @@
 				211DE6B91FB58B4C002FCF3D /* NSDictionary+Extension.m in Sources */,
 				21A7F31E1FB2E2F900FAA0A2 /* TLUser.m in Sources */,
 				2E394FFC1FB059C100BA0829 /* TLBaseModel.m in Sources */,
+				B8F63ED720D362DA00556150 /* WalletLocalBillTableView.m in Sources */,
 				21635DB91FBECBDD003F48B4 /* TopLabelUtil.m in Sources */,
 				B8B15C0520CA55D600F13220 /* BuildSucessVC.m in Sources */,
 				2EA584C71FA813C900C7106C /* main.m in Sources */,
@@ -2573,6 +2605,7 @@
 				2159796D1FB831B10029F177 /* FilterView.m in Sources */,
 				21205CDE1FCD3131003C6C7C /* CoinAddressTableView.m in Sources */,
 				2E42617120284CA600913DCF /* TestContentVC.m in Sources */,
+				B8F63EE320D397B000556150 /* WalletLocalWebVC.m in Sources */,
 				2129FE6F1FDFBAA3009DA374 /* ChangeLoginPwdVC.m in Sources */,
 				211A532F1FBFE4CF00CC6294 /* RateDescCell.m in Sources */,
 				21CB94EA1FDC0C2500CAB090 /* PersonalitySettingTableView.m in Sources */,
@@ -2595,6 +2628,7 @@
 				21A7F3191FB2E2F900FAA0A2 /* TLAccountBaseVC.m in Sources */,
 				216F5AFD206CD3A800F2C832 /* GengXinModel.m in Sources */,
 				21CB94F51FDC179700CAB090 /* PersonalModel.m in Sources */,
+				B8F63EDA20D3639900556150 /* LocalBillCell.m in Sources */,
 				2ED651C9200F2F6F0065A1B0 /* TLCoinWithdrawOrderVC.m in Sources */,
 				211DE6B21FB58B4C002FCF3D /* UIButton+Custom.m in Sources */,
 				211DE6171FB54685002FCF3D /* WalletCell.m in Sources */,
@@ -2755,9 +2789,9 @@
 				CODE_SIGN_ENTITLEMENTS = Coin/Coin.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 6PF7VHZB5Z;
+				DEVELOPMENT_TEAM = ZKTVZ75A59;
 				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = NO;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2784,8 +2818,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.cdkj.wallet;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "f8758513-fe5e-46ba-9fea-ac75ed5afba5";
-				PROVISIONING_PROFILE_SPECIFIER = devogcwallet;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -2806,9 +2840,9 @@
 				CODE_SIGN_ENTITLEMENTS = Coin/Coin.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 6PF7VHZB5Z;
+				DEVELOPMENT_TEAM = ZKTVZ75A59;
 				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = NO;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2835,8 +2869,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.cdkj.wallet;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "f8758513-fe5e-46ba-9fea-ac75ed5afba5";
-				PROVISIONING_PROFILE_SPECIFIER = devogcwallet;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;

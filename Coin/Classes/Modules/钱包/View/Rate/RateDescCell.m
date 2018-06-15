@@ -42,7 +42,7 @@
 - (void)initSubviews {
     
     //汇率
-    self.rateLbl = [UIButton buttonWithTitle:@"" titleColor:kWhiteColor backgroundColor:kAppCustomMainColor titleFont:16];
+    self.rateLbl = [UIButton buttonWithTitle:@"" titleColor:kWhiteColor backgroundColor:kAppCustomMainColor titleFont:14];
     
 //    self.rateLbl.textAlignment = NSTextAlignmentLeft;
 //    self.rateLbl.backgroundColor = kAppCustomMainColor;

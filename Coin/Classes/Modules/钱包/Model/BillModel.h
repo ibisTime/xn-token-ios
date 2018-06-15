@@ -57,6 +57,28 @@
 
 @property (nonatomic, copy) NSString *priceHKD;
 
+@property (nonatomic, copy) NSString *value;
+
+@property (nonatomic, copy) NSString *from;
+
+@property (nonatomic, copy) NSString *to;
+
+@property (nonatomic, copy) NSString *direction;
+
+@property (nonatomic, copy) NSString *txFee;
+
+@property (nonatomic, copy) NSString *transDatetime;
+
+@property (nonatomic, copy) NSString *height;
+
+@property (nonatomic, copy) NSString *txHash;
+
+
+
+
+
+
+
 
 
 

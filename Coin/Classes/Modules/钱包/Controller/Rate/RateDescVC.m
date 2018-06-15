@@ -12,6 +12,7 @@
 
 #import "HistoryRateVC.h"
 #import "NSString+Date.h"
+#import "AppConfig.h"
 @interface RateDescVC ()<RefreshDelegate>
 
 @property (nonatomic, strong) RateDescTableView *tableView;
@@ -82,11 +83,16 @@
 //    return;
     CoinWeakSelf;
     TLPageDataHelper *help = [[TLPageDataHelper alloc] init];
-    
 //    help.isList = YES;
+    
+//    help.parameters[@"channelType"] = @4;
     help.parameters[@"channelType"] = @4;
-    help.parameters[@"status"] = @1;
+    help.parameters[@"toSystemCode"] = [AppConfig config].systemCode;
+    help.parameters[@"fromSystemCode"] = [AppConfig config].systemCode;
+
     help.parameters[@"start"] = @"1";
+    help.parameters[@"start"] = @"1";
+
     help.parameters[@"limit"] = @"10";
     help.code = @"804040";
 //    helper.parameters[@"coin"] = self.coinName;
@@ -118,13 +124,13 @@
 
 - (void)refreshTableView:(TLTableView *)refreshTableview didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    RateModel *rate = self.rates[indexPath.row];
-    
-    HistoryRateVC *rateVC = [HistoryRateVC new];
-    
-    rateVC.currency = rate.currency;
-    
-    [self.navigationController pushViewController:rateVC animated:YES];
+//    RateModel *rate = self.rates[indexPath.row];
+//
+//    HistoryRateVC *rateVC = [HistoryRateVC new];
+//
+//    rateVC.currency = rate.currency;
+//
+//    [self.navigationController pushViewController:rateVC animated:YES];
     
 }
 

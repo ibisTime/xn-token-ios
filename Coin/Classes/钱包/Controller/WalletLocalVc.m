@@ -1,4 +1,4 @@
-//
+
 //  WalletLocalVc.m
 //  Coin
 //
@@ -20,8 +20,10 @@
 #import "FilterView.h"
 #import "UIBarButtonItem+convience.h"
 #import "WalletForwordVC.h"
+#import "WalletLocalBillTableView.h"
+#import "LocalBillDetailVC.h"
 @interface WalletLocalVc ()<RefreshDelegate>
-@property (nonatomic, strong) BillTableView *tableView;
+@property (nonatomic, strong) WalletLocalBillTableView *tableView;
 
 @property (nonatomic,strong) NSMutableArray <BillModel *>*bills;
 
@@ -55,8 +57,14 @@
     //筛选
     [self addFilterItem];
     //获取账单
-//    [self requestBillList];
+    [self requestBillList];
     // Do any additional setup after loading the view.
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.title = [LangSwitcher switchLang: [NSString stringWithFormat:@"%@",self.currency.symbol] key:nil];;
 }
 #pragma mark - Init
 - (FilterView *)filterPicker {
@@ -126,7 +134,7 @@
 
 - (void)initTableView {
     
-    self.tableView = [[BillTableView alloc]
+    self.tableView = [[WalletLocalBillTableView alloc]
                       initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight)
                       style:UITableViewStyleGrouped];
     
@@ -134,6 +142,7 @@
     self.tableView.tableHeaderView = self.headView;
     self.tableView.backgroundColor = kWhiteColor;
     self.tableView.refreshDelegate = self;
+    self.tableView.billModel = self.currency;
     self.tableView.sectionHeaderHeight = 22;
     [self.view addSubview:self.tableView];
     
@@ -141,15 +150,15 @@
 
 - (void)addFilterItem {
     
-    if (self.billType == LocalTypeAll) {
-        
-        [UIBarButtonItem addRightItemWithTitle:[LangSwitcher switchLang:@"筛选" key:nil]
-                                    titleColor:kTextColor
-                                         frame:CGRectMake(0, 0, 40, 30)
-                                            vc:self
-                                        action:@selector(clickFilter:)];
-        
-    }
+//    if (self.billType == LocalTypeAll) {
+//
+//        [UIBarButtonItem addRightItemWithTitle:[LangSwitcher switchLang:@"筛选" key:nil]
+//                                    titleColor:kTextColor
+//                                         frame:CGRectMake(0, 0, 40, 30)
+//                                            vc:self
+//                                        action:@selector(clickFilter:)];
+//
+//    }
 }
 
 #pragma mark - Events
@@ -216,7 +225,8 @@
 
             }
             weakSelf.bills = objs;
-            
+            weakSelf.tableView.billModel = weakSelf.currency;
+
             weakSelf.tableView.bills = objs;
             [weakSelf.tableView reloadData_tl];
             
@@ -239,7 +249,7 @@
             }
             
             weakSelf.bills = objs;
-            
+            weakSelf.tableView.billModel = weakSelf.currency;
             weakSelf.tableView.bills = objs;
             [weakSelf.tableView reloadData_tl];
             
@@ -312,7 +322,8 @@
         
         if (idx != 1) {
             [btn setTitleColor:kHexColor(@"#108ee9") forState:UIControlStateNormal];
-            
+            [btn setBackgroundColor:kWhiteColor forState:UIControlStateNormal];
+
             UIView *vLine = [[UIView alloc] init];
             
             vLine.backgroundColor = kLineColor;
@@ -418,23 +429,14 @@
     [self.navigationController pushViewController:coinVC animated:YES];
 }
 
--(void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    
-    //    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] init];
-    //    backItem.title = @"返回";//字符串可随便定义或为nil
-    //    backItem.target = self;
-    //    backItem.image = kImage(@"返回");
-    //
-    //    self.navigationItem.backBarButtonItem = backItem;
-    
-}
 
 -(void)refreshTableView:(TLTableView *)refreshTableview didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    
+    LocalBillDetailVC *detailVc  =  [LocalBillDetailVC new];
+    detailVc.bill = self.bills[indexPath.row];
+    detailVc.currentModel = self.currency;
+    [self.navigationController pushViewController:detailVc animated:YES];
     
 }
 - (void)didReceiveMemoryWarning {

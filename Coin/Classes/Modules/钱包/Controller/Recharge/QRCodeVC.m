@@ -125,7 +125,11 @@
 - (void)QRCodeScanManager:(SGQRCodeScanManager *)scanManager didOutputMetadataObjects:(NSArray *)metadataObjects {
     NSLog(@"metadataObjects - - %@", metadataObjects);
     if (metadataObjects != nil && metadataObjects.count > 0) {
-        [scanManager palySoundName:@"SGQRCode.bundle/sound.caf"];
+        NSString *audioFile = [[NSBundle mainBundle] pathForResource:@"QSount.caf" ofType:nil];
+        if (audioFile) {
+            [scanManager palySoundName:@"QSount.caf"];
+
+        }
         [scanManager stopRunning];
         [scanManager videoPreviewLayerRemoveFromSuperlayer];
         

@@ -258,7 +258,9 @@
         make.height.equalTo(@0.5);
     }];
     
-    NSArray *textArr = @[@"币生币", @"THA星球", @"余币宝"];
+    NSArray *textArr = @[@"币生币",
+                         @"THA星球",
+                         @"余币宝"];
     
     [textArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         

@@ -373,48 +373,48 @@
     
     CoinWeakSelf;
     
-    //判断是否认证身份
-//    if (![[TLUser user].realName valid]) {
-//        
-//        ZMAuthVC *zmAuthVC = [ZMAuthVC new];
-//        
-//        zmAuthVC.title = [LangSwitcher switchLang:@"实名认证" key:nil];
-//        
-//        zmAuthVC.success = ^{
-//            
-//            //实名认证成功后，判断是否设置资金密码
-//            if ([[TLUser user].tradepwdFlag isEqualToString:@"0"]) {
-//                
-//                [TLAlert alertWithInfo:[LangSwitcher switchLang:@"实名认证成功, 请设置资金密码" key:nil]];
-//                
-//            } else {
-//                
-//                [TLAlert alertWithInfo:[LangSwitcher switchLang:@"实名认证成功" key:nil]];
-//            }
-//            
-//            [weakSelf clickWithdrawWithCurrency:currencyModel];
-//            
-//        };
-//        
-//        [self.navigationController pushViewController:zmAuthVC animated:YES];
-//        
-//        return ;
-//    }
+//    判断是否认证身份
+    if (![[TLUser user].realName valid]) {
+        
+        ZMAuthVC *zmAuthVC = [ZMAuthVC new];
+        
+        zmAuthVC.title = [LangSwitcher switchLang:@"实名认证" key:nil];
+        
+        zmAuthVC.success = ^{
+            
+            //实名认证成功后，判断是否设置资金密码
+            if ([[TLUser user].tradepwdFlag isEqualToString:@"0"]) {
+                
+                [TLAlert alertWithInfo:[LangSwitcher switchLang:@"实名认证成功, 请设置资金密码" key:nil]];
+                
+            } else {
+                
+                [TLAlert alertWithInfo:[LangSwitcher switchLang:@"实名认证成功" key:nil]];
+            }
+            
+            [weakSelf clickWithdrawWithCurrency:currencyModel];
+            
+        };
+        
+        [self.navigationController pushViewController:zmAuthVC animated:YES];
+        
+        return ;
+    }
     
-    //实名认证成功后，判断是否设置资金密码
-//    if ([[TLUser user].tradepwdFlag isEqualToString:@"0"]) {
-//
-//        TLPwdType pwdType = TLPwdTypeSetTrade;
-//        TLPwdRelatedVC *pwdRelatedVC = [[TLPwdRelatedVC alloc] initWithType:pwdType];
-//        pwdRelatedVC.isWallet = YES;
-//        pwdRelatedVC.success = ^{
-//
-//            [weakSelf clickWithdrawWithCurrency:currencyModel];
-//        };
-//        [self.navigationController pushViewController:pwdRelatedVC animated:YES];
-//        return ;
-//
-//    }
+//    实名认证成功后，判断是否设置资金密码
+    if ([[TLUser user].tradepwdFlag isEqualToString:@"0"]) {
+
+        TLPwdType pwdType = TLPwdTypeSetTrade;
+        TLPwdRelatedVC *pwdRelatedVC = [[TLPwdRelatedVC alloc] initWithType:pwdType];
+        pwdRelatedVC.isWallet = YES;
+        pwdRelatedVC.success = ^{
+
+            [weakSelf clickWithdrawWithCurrency:currencyModel];
+        };
+        [self.navigationController pushViewController:pwdRelatedVC animated:YES];
+        return ;
+
+    }
     
     WithdrawalsCoinVC *coinVC = [WithdrawalsCoinVC new];
     coinVC.currency = currencyModel;
