@@ -121,7 +121,14 @@
         //    NSString *rightAmount = [platform.inAmountString subNumber:platform.addAmountString];
         
         //对应币种价格
-        self.amountLbl.text = [NSString stringWithFormat:@"≈%.2f CNY", [currency.amountCNY doubleValue]];
+        if ([[TLUser user].localMoney isEqualToString:@"美元"]) {
+            self.amountLbl.text = [NSString stringWithFormat:@"≈%.2f USD", [currency.amountUSD doubleValue]];
+
+        }else{
+            
+            self.amountLbl.text = [NSString stringWithFormat:@"≈%.2f CNY", [currency.amountCNY doubleValue]];
+
+        }
         
         //人民币价格
 //        self.amountLbl.text = [NSString stringWithFormat:@"%.2f CNY",[currency.amountCNY doubleValue]];
@@ -137,9 +144,15 @@
 
     self.textLbl.text = [NSString stringWithFormat:@"%.4f %@",[[CoinUtil convertToRealCoin:leftAmount coin:currency.currency] doubleValue],currency.currency];
     NSString *rightAmount = [currency.inAmountString subNumber:currency.addAmountString];
-    
+        if ([[TLUser user].localMoney isEqualToString:@"美元"]) {
+            self.amountLbl.text = [NSString stringWithFormat:@"≈%.2fUSD", [currency.amountUSD doubleValue]];
+
+        }else{
+            
+            self.amountLbl.text = [NSString stringWithFormat:@"≈%.2fCNY", [currency.amountCNY doubleValue]];
+
+        }
     //对应币种价格
-    self.amountLbl.text = [NSString stringWithFormat:@"≈%.2fCNY", [currency.amountCNY doubleValue]];
     }
 //    人民币价格
 //    self.rmbPriceLbl.text = [NSString stringWithFormat:@"≈%.2f CNY",[[CoinUtil convertToRealCoin:leftAmount coin:platform.currency] doubleValue]];

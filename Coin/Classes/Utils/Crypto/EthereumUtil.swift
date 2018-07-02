@@ -125,6 +125,35 @@ public class EthCrypto: NSObject
         //默认矿工费用=21000*gasPrice
         
     }
+    
+    //获取矿工燃料费用单价
+    static public func getETHTokenPrice() -> String? {
+        
+//        //rinkey测试环境，上线需要修改
+//        let web3 = Web3.InfuraMainnetWeb3();
+                let web3 = Web3.InfuraRinkebyWeb3();
+
+//
+//        let gasPriceResult = web3.eth.getGasPrice();
+//        if case .failure(_) = gasPriceResult {
+//            return (nil)
+//        }
+//        return String.init(gasPriceResult.value!);
+        
+        //gasPrice
+        //gasLimit默认21000
+        //默认矿工费用=21000*gasPrice
+        let contractAddress = EthereumAddress("0x45245bc59219eeaaf6cd3f382e078a461ff9de7b")! // BKX token on Ethereum mainnet
+        let contract = web3.contract(Web3.Utils.erc20ABI, at: contractAddress, abiVersion: 2)! // utilize precompiled ERC20 ABI for your concenience
+        let options = web3.options
+
+        guard let bkxBalanceResult = contract.method("balanceOf", parameters: [contractAddress] as [AnyObject], options: options)?.call(options: nil) else {return nil} // encode parameters for transaction
+        guard case .success(let bkxBalance) = bkxBalanceResult, let bal = bkxBalance["0"] as? BigUInt else {return nil} // bkxBalance is [String: Any], and parameters are enumerated as "0", "1", etc in order of being returned. If returned parameter has a name in ABI, it is also duplicated
+        print("BKX token balance = " + String(bal))
+        return ""
+        
+    }
+    
     //发送ETH交易（签名并广播）
     static public func sendTransaction(mnemonic: String, to: String, amount: String, gasPrice: String, gasLimit: String) -> String? {
         

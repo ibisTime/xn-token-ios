@@ -7,6 +7,7 @@
 //
 
 #import "PlatformCell.h"
+#import "TLUser.h"
 //Category
 #import "UILabel+Extension.h"
 #import "NSString+CGSize.h"
@@ -156,16 +157,23 @@
     
      NSString *leftAmount = [CoinUtil convertToRealCoin:platform.amountString coin:coin.symbol];
     NSString *rightAmount = [CoinUtil convertToRealCoin:platform.frozenAmountString coin:coin.symbol];
-
-    self.tradeVolumeLbl.text = [NSString stringWithFormat:@"≈%.2f CNY",[platform.priceCNY doubleValue]];
     NSString *ritAmount = [leftAmount subNumber:rightAmount];
+
+    if ([[TLUser user].localMoney isEqualToString:@"美元"]) {
+        self.tradeVolumeLbl.text = [NSString stringWithFormat:@"≈%.2f USD",[platform.priceUSD doubleValue]];
+        self.rmbPriceLbl.text = [NSString stringWithFormat:@"%.2f USD",[platform.amountUSD doubleValue]];
+
+    }else{
+        self.tradeVolumeLbl.text = [NSString stringWithFormat:@"≈%.2f CNY",[platform.priceCNY doubleValue]];
+        self.rmbPriceLbl.text = [NSString stringWithFormat:@"%.2f CNY",[platform.amountCNY doubleValue]];
+
+    }
     
     //对应币种价格
 //    CGFloat t = [platform.amountString doubleValue]/1000000000000000000;
     self.opppsitePriceLbl.text = [NSString stringWithFormat:@"%.8f",[ritAmount doubleValue]];;
 
     //人民币价格
-    self.rmbPriceLbl.text = [NSString stringWithFormat:@"%.2f CNY",[platform.amountCNY doubleValue]];
    
 
   

@@ -83,14 +83,17 @@
 - (void)viewWillAppear:(BOOL)animated {
 //    [self queryTotalAmount];
     if (self.switchTager == 0 ) {
-        [self switchWithTager:1];
 
 //      NSString *file =  [[NSBundle mainBundle] pathForResource:@"country.plist" ofType:nil];
 //        NSDictionary *arr = [NSDictionary dictionaryWithContentsOfFile: file];
 //        NSLog(@"%@",arr);
        
-    }else if (self.switchTager == 1){
+    }else if (self.switchTager == 1&&[TLUser user].isLogin == YES){
         [self switchWithTager:0];
+
+    }else{
+        
+        [self switchWithTager:1];
 
     }
     [super viewWillAppear:animated];
@@ -99,6 +102,7 @@
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
+    
     
     [super viewWillDisappear:animated];
     [self.navigationController setNavigationBarHidden:NO animated:animated];
@@ -193,8 +197,8 @@
                 make.height.equalTo(@(kHeight(50)));
                 
             }];
-              weakSelf.currentTableView.frame = CGRectMake(0, kHeight(318)+kStatusBarHeight, kScreenWidth, kScreenHeight - kTabBarHeight - kHeight(354));
-              weakSelf.tableView.frame = CGRectMake(0, kHeight(318)+kStatusBarHeight, kScreenWidth, kScreenHeight - kTabBarHeight - kHeight(354));
+              weakSelf.currentTableView.frame = CGRectMake(0, kHeight(318)+kStatusBarHeight, kScreenWidth, kScreenHeight - kTabBarHeight - kHeight(334));
+              weakSelf.tableView.frame = CGRectMake(0, kHeight(318)+kStatusBarHeight, kScreenWidth, kScreenHeight - kTabBarHeight - kHeight(334));
             [weakSelf.view setNeedsLayout];
         };
         //切换钱包事件
@@ -246,7 +250,6 @@
 ////                [weakSelf.currentTableView beginRefreshing];
 //                [weakSelf.currentTableView reloadData];
 //                [weakSelf ]
-                weakSelf.switchTager = 1;
 
 //                [weakSelf switchWithTager:0];
                 NSLog(@"%@",model);
@@ -332,6 +335,7 @@
     CoinWeakSelf;
     self.tableView.selectBlock = ^(NSInteger inter) {
         NSLog(@"%ld",inter);
+        weakSelf.switchTager = 0;
         WallAccountVC *accountVC= [[WallAccountVC alloc] init];
         accountVC.currency = weakSelf.currencys[inter];
         accountVC.billType = CurrentTypeAll;
@@ -421,9 +425,9 @@
     [self.currencys removeAllObjects];
     [self.tableView reloadData];
     [self.tableView removeFromSuperview];
-    self.headerView.cnyAmountLbl.text = [NSString stringWithFormat:@"¥ %.2f", 0.00];
-    self.headerView.privateMoney.text = [NSString stringWithFormat:@"¥ %.2f", 0.00];
-    self.headerView.LocalMoney.text = [NSString stringWithFormat:@"¥ %.2f", 0.00];
+    self.headerView.cnyAmountLbl.text = [NSString stringWithFormat:@" %.2f", 0.00];
+    self.headerView.privateMoney.text = [NSString stringWithFormat:@" %.2f", 0.00];
+    self.headerView.LocalMoney.text = [NSString stringWithFormat:@" %.2f", 0.00];
 //    TLNavigationController *na = [[TLNavigationController alloc] initWithRootViewController:MineVC];
 //    [UIApplication sharedApplication].keyWindow.rootViewController = na;
 //    [TLAlert alertWithTitle:[LangSwitcher switchLang:@"创建私钥钱包" key:nil]
@@ -669,10 +673,27 @@
     
     [http postWithSuccess:^(id responseObject) {
         
-        //        NSString *cnyStr = [responseObject[@"data"][@"totalAmountCNY"] convertToSimpleRealMoney];
-        
-        self.headerView.cnyAmountLbl.text = [NSString stringWithFormat:@"¥ %.2f", [responseObject[@"data"][@"totalAmountCNY"] doubleValue]];
-        self.headerView.privateMoney.text = [NSString stringWithFormat:@"¥ %.2f", [responseObject[@"data"][@"totalAmountCNY"] doubleValue]];
+        if ([[TLUser user].localMoney isEqualToString:@"美元"]) {
+            NSString *cnyStr = [responseObject[@"data"][@"totalAmountUSD"] convertToSimpleRealMoney];
+
+            self.headerView.cnyAmountLbl.text = [NSString stringWithFormat:@"$ %.2f", [cnyStr doubleValue]];
+            self.headerView.privateMoney.text = [NSString stringWithFormat:@"$ %.2f", [cnyStr doubleValue]];
+            self.headerView.equivalentBtn.text = @"总资产(USD)";
+            self.headerView.localLbl.text = @"私钥钱包(USD)";
+            self.headerView.textLbl.text = @"个人钱包(USD)";
+            [self.headerView setNeedsDisplay];
+        }else{
+            NSString *cnyStr = [responseObject[@"data"][@"totalAmountCNY"] convertToSimpleRealMoney];
+
+            self.headerView.cnyAmountLbl.text = [NSString stringWithFormat:@"¥ %.2f", [cnyStr doubleValue]];
+            self.headerView.privateMoney.text = [NSString stringWithFormat:@"¥ %.2f", [cnyStr doubleValue]];
+            self.headerView.equivalentBtn.text = @"总资产(CNY)";
+            self.headerView.localLbl.text = @"私钥钱包(CNY)";
+            self.headerView.textLbl.text = @"个人钱包(CNY)";
+            [self.headerView setNeedsDisplay];
+
+        }
+      
         
         
         //        NSString *usdStr = [responseObject[@"data"][@"totalAmountUSD"] convertToSimpleRealMoney];
@@ -740,23 +761,55 @@
         [http postWithSuccess:^(id responseObject) {
     
             NSString *cnyStr = [responseObject[@"data"][@"totalAmountCNY"] convertToSimpleRealMoney];
-    
-            self.headerView.cnyAmountLbl.text = [NSString stringWithFormat:@"¥ %.2f", [cnyStr doubleValue]];
-             self.headerView.LocalMoney.text = [NSString stringWithFormat:@"¥ %.2f", [cnyStr doubleValue]];
-            
-            NSArray *usdStr = responseObject[@"data"][@"accountList"];
-    
-//            weakSelf.currencys   =  [CurrencyModel mj_objectArrayWithKeyValuesArray:usdStr];
-    
-            NSLog(@"%@",self.currencys);
-    
-//            weakSelf.currentTableView.platforms = weakSelf.currencys;
-//            [weakSelf.currentTableView reloadData_tl];
-            self.headerView.usdAmountLbl.text = [NSString stringWithFormat:@"%@USD", usdStr];
-    
-            NSString *hkdStr = [responseObject[@"data"][@"totalAmountHKD"] convertToSimpleRealMoney];
-    
-            self.headerView.hkdAmountLbl.text = [NSString stringWithFormat:@"%@HKD", hkdStr];
+            if ([[TLUser user].localMoney isEqualToString:@"美元"]) {
+                cnyStr = [responseObject[@"data"][@"totalAmountUSD"] convertToSimpleRealMoney];
+
+                self.headerView.cnyAmountLbl.text = [NSString stringWithFormat:@"$ %.2f", [cnyStr doubleValue]];
+                self.headerView.LocalMoney.text = [NSString stringWithFormat:@"$ %.2f", [cnyStr doubleValue]];
+                self.headerView.localLbl.text = @"私钥钱包(USD)";
+                self.headerView.textLbl.text = @"个人钱包(USD)";
+
+                NSArray *usdStr = responseObject[@"data"][@"accountList"];
+                
+                //            weakSelf.currencys   =  [CurrencyModel mj_objectArrayWithKeyValuesArray:usdStr];
+                
+                NSLog(@"%@",self.currencys);
+                
+                //            weakSelf.currentTableView.platforms = weakSelf.currencys;
+                //            [weakSelf.currentTableView reloadData_tl];
+                self.headerView.usdAmountLbl.text = [NSString stringWithFormat:@"%@USD", usdStr];
+                self.headerView.equivalentBtn.text = @"总资产(USD)";
+
+                NSString *hkdStr = [responseObject[@"data"][@"totalAmountHKD"] convertToSimpleRealMoney];
+                
+                self.headerView.hkdAmountLbl.text = [NSString stringWithFormat:@"%@HKD", hkdStr];
+                [self.headerView setNeedsDisplay];
+
+            }else
+            {
+                self.headerView.cnyAmountLbl.text = [NSString stringWithFormat:@"¥ %.2f", [cnyStr doubleValue]];
+                self.headerView.LocalMoney.text = [NSString stringWithFormat:@"¥ %.2f", [cnyStr doubleValue]];
+                self.headerView.equivalentBtn.text = @"总资产(CNY)";
+
+                NSArray *usdStr = responseObject[@"data"][@"accountList"];
+                self.headerView.localLbl.text = @"私钥钱包(CNY)";
+                self.headerView.textLbl.text = @"个人钱包(CNY)";
+                //            weakSelf.currencys   =  [CurrencyModel mj_objectArrayWithKeyValuesArray:usdStr];
+                
+                NSLog(@"%@",self.currencys);
+                
+                //            weakSelf.currentTableView.platforms = weakSelf.currencys;
+                //            [weakSelf.currentTableView reloadData_tl];
+                self.headerView.usdAmountLbl.text = [NSString stringWithFormat:@"%@USD", usdStr];
+                
+                NSString *hkdStr = [responseObject[@"data"][@"totalAmountHKD"] convertToSimpleRealMoney];
+                
+                self.headerView.hkdAmountLbl.text = [NSString stringWithFormat:@"%@HKD", hkdStr];
+                [self.headerView setNeedsDisplay];
+
+                
+            }
+        
     
         } failure:^(NSError *error) {
     
@@ -941,62 +994,62 @@
     
 }
 #pragma mark - RefreshDelegate
-- (void)refreshTableViewButtonClick:(TLTableView *)refreshTableview button:(UIButton *)sender selectRowAtIndex:(NSInteger)index {
-    
-    CoinWeakSelf;
-    
-    NSInteger tag = (sender.tag - 1200)%100;
-    
-    CurrencyModel *currencyModel = self.currencys[index];
-    
-    switch (tag) {
-        case 0:
-        {
-            RechargeCoinVC *coinVC = [RechargeCoinVC new];
-            coinVC.currency = currencyModel;
-            [self.navigationController pushViewController:coinVC animated:YES];
-            
-        }break;
-            
-        case 1:
-        {
-            [self clickWithdrawWithCurrency:currencyModel];
-            
-        }break;
-            
-        case 2:
-        {
-            
-            BillVC *billVC = [BillVC new];
-            billVC.accountNumber = currencyModel.accountNumber;
-            billVC.billType = BillTypeAll;
-            [self.navigationController pushViewController:billVC animated:YES];
-            
-        }break;
-            
-        case 3:
-        {
-            
-            BillVC *billVC = [BillVC new];
-            billVC.accountNumber = currencyModel.accountNumber;
-            billVC.billType = BillTypeFrozen;
-            [self.navigationController pushViewController:billVC animated:YES];
-            
-        }break;
-            
-        default:
-            break;
-    }
-}
+//- (void)refreshTableViewButtonClick:(TLTableView *)refreshTableview button:(UIButton *)sender selectRowAtIndex:(NSInteger)index {
+//
+//    CoinWeakSelf;
+//
+//    NSInteger tag = (sender.tag - 1200)%100;
+//
+//    CurrencyModel *currencyModel = self.currencys[index];
+//
+//    switch (tag) {
+//        case 0:
+//        {
+//            RechargeCoinVC *coinVC = [RechargeCoinVC new];
+//            coinVC.currency = currencyModel;
+//            [self.navigationController pushViewController:coinVC animated:YES];
+//
+//        }break;
+//
+//        case 1:
+//        {
+//            [self clickWithdrawWithCurrency:currencyModel];
+//
+//        }break;
+//
+//        case 2:
+//        {
+//
+//            BillVC *billVC = [BillVC new];
+//            billVC.accountNumber = currencyModel.accountNumber;
+//            billVC.billType = BillTypeAll;
+//            [self.navigationController pushViewController:billVC animated:YES];
+//
+//        }break;
+//
+//        case 3:
+//        {
+//
+//            BillVC *billVC = [BillVC new];
+//            billVC.accountNumber = currencyModel.accountNumber;
+//            billVC.billType = BillTypeFrozen;
+//            [self.navigationController pushViewController:billVC animated:YES];
+//
+//        }break;
+//
+//        default:
+//            break;
+//    }
+//}
 
--(void)refreshTableView:(TLTableView *)refreshTableview didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    
-   
-    
-    
-
-}
+//-(void)refreshTableView:(TLTableView *)refreshTableview didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//
+//
+//
+//
+//
+//}
 
 - (void)clickWithdrawWithCurrency:(CurrencyModel *)currencyModel {
     

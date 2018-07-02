@@ -96,13 +96,12 @@
 #define PLACEHOLDER_SMALL @"banner"
 #define kCancelIcon @"cancel"
 #define GOOD_PLACEHOLDER_SMALL [UIImage imageNamed:@"banner"]
-
+#define KLocalMoney @"KLocalMoney"
 #define kDateFormmatter @"MMM dd, yyyy hh:mm:ss aa"
 #define KUserPwd @"userPwd"
 #define KWalletWord @"walletWord"
 #define KWalletAddress @"walletAddress"
 #define KWalletPrivateKey @"walletPrivateKey"
-extern NSString *dataStr;
 
 
 #pragma mark - 轮播图

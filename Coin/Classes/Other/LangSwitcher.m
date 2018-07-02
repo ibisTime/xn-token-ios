@@ -55,12 +55,12 @@
     if ([lang isEqualToString:ENGLISH]) {
         return LangTypeEnglish;
     }
-    if ([lang isEqualToString:KOREAN]) {
-        return LangTypeKorean;
-        
-    }if ([lang isEqualToString:Japanese]) {
-        return LangTypeJapanese;
-    }
+//    if ([lang isEqualToString:KOREAN]) {
+//        return LangTypeKorean;
+//
+//    }if ([lang isEqualToString:Japanese]) {
+//        return LangTypeJapanese;
+//    }
 
     return LangTypeSimple;
     
@@ -73,9 +73,7 @@
     NSDictionary *dict = @{
                            SIMPLE : @"简体中文",
                            TRADITIONAL : @"繁体中文",
-                           ENGLISH : @"英文",
-                           KOREAN : @"韩文",
-                           Japanese : @"日文"
+                           ENGLISH : @"英文"
                            };
     
     NSString *lang = [[NSUserDefaults standardUserDefaults] objectForKey:LANG];
@@ -107,16 +105,19 @@
 
             break;
         }
-        case LangTypeKorean: {
-            [userDefaults setObject:KOREAN forKey:LANG];
-
+            
+            default:
             break;
-        }
-        case LangTypeJapanese: {
-            [userDefaults setObject:Japanese forKey:LANG];
-
-            break;
-        }
+//        case LangTypeKorean: {
+//            [userDefaults setObject:KOREAN forKey:LANG];
+//
+//            break;
+//        }
+//        case LangTypeJapanese: {
+//            [userDefaults setObject:Japanese forKey:LANG];
+//
+//            break;
+//        }
     }
     
 }
@@ -132,17 +133,18 @@
             [self changLangType:LangTypeEnglish];
 
             //英文
-        }else if ([currentLanguage isEqualToString:@"ko-US"])
-        {//韩文
-            [self changLangType:LangTypeKorean];
-
-            
-        }else if ([currentLanguage isEqualToString:@"ja-US"])
-        {//日文
-            [self changLangType:LangTypeJapanese];
-
-            
         }
+//        else if ([currentLanguage isEqualToString:@"ko-US"])
+//        {//韩文
+//            [self changLangType:LangTypeKorean];
+//
+//
+//        }else if ([currentLanguage isEqualToString:@"ja-US"])
+//        {//日文
+//            [self changLangType:LangTypeJapanese];
+//
+//
+//        }
         else if ([currentLanguage isEqualToString:@"zh-Hant-US"]||[currentLanguage isEqualToString:@"zh-Hant-HK"])
         {//繁体
             [self changLangType:LangTypeTraditional];

@@ -250,6 +250,7 @@
 		B8D9290620E9BDF10026A3DF /* country.plist in Resources */ = {isa = PBXBuildFile; fileRef = B8D9290520E9BDF00026A3DF /* country.plist */; };
 		B8D9290920E9BF600026A3DF /* CountryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B8D9290820E9BF600026A3DF /* CountryModel.m */; };
 		B8D9290C20E9C1EC0026A3DF /* countrGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = B8D9290B20E9C1EC0026A3DF /* countrGroup.m */; };
+		B8D9290F20EA58290026A3DF /* ChangeLocalMoneyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B8D9290E20EA58290026A3DF /* ChangeLocalMoneyVC.m */; };
 		B8DAD14720E2208B00AF4CD4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B8DAD14920E2208B00AF4CD4 /* InfoPlist.strings */; };
 		B8F63ED720D362DA00556150 /* WalletLocalBillTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = B8F63ED620D362DA00556150 /* WalletLocalBillTableView.m */; };
 		B8F63EDA20D3639900556150 /* LocalBillCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B8F63ED920D3639900556150 /* LocalBillCell.m */; };
@@ -751,14 +752,12 @@
 		B8D9290820E9BF600026A3DF /* CountryModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CountryModel.m; sourceTree = "<group>"; };
 		B8D9290A20E9C1EC0026A3DF /* countrGroup.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = countrGroup.h; sourceTree = "<group>"; };
 		B8D9290B20E9C1EC0026A3DF /* countrGroup.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = countrGroup.m; sourceTree = "<group>"; };
+		B8D9290D20EA58290026A3DF /* ChangeLocalMoneyVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChangeLocalMoneyVC.h; sourceTree = "<group>"; };
+		B8D9290E20EA58290026A3DF /* ChangeLocalMoneyVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChangeLocalMoneyVC.m; sourceTree = "<group>"; };
 		B8DAD14820E2208B00AF4CD4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		B8DAD14A20E2208F00AF4CD4 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		B8DAD14B20E2209200AF4CD4 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
-		B8DAD14C20E220AB00AF4CD4 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		B8DAD14D20E220B500AF4CD4 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		B8DAD14E20E220B500AF4CD4 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B8DAD14F20E220D100AF4CD4 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
-		B8DAD15120E220DA00AF4CD4 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B8DAD15220E220EE00AF4CD4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B8F63ED520D362DA00556150 /* WalletLocalBillTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WalletLocalBillTableView.h; sourceTree = "<group>"; };
 		B8F63ED620D362DA00556150 /* WalletLocalBillTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WalletLocalBillTableView.m; sourceTree = "<group>"; };
@@ -2027,6 +2026,8 @@
 				B8C2057820CFA0B300952765 /* WalletAddressCell.m */,
 				B8C2057A20CFA3FC00952765 /* WalletAddressDetailVC.h */,
 				B8C2057B20CFA3FC00952765 /* WalletAddressDetailVC.m */,
+				B8D9290D20EA58290026A3DF /* ChangeLocalMoneyVC.h */,
+				B8D9290E20EA58290026A3DF /* ChangeLocalMoneyVC.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2321,8 +2322,6 @@
 				"zh-Hans",
 				"zh-Hant",
 				en,
-				ko,
-				ja,
 			);
 			mainGroup = 2EA584AB1FA813C900C7106C;
 			productRefGroup = 2EA584B51FA813C900C7106C /* Products */;
@@ -2627,6 +2626,7 @@
 				211DE6C41FB58B4C002FCF3D /* HttpSign.m in Sources */,
 				2E42616B2028431200913DCF /* TLSwitchView.m in Sources */,
 				216F5AF6206CCED300F2C832 /* TLNotficationService.m in Sources */,
+				B8D9290F20EA58290026A3DF /* ChangeLocalMoneyVC.m in Sources */,
 				211A35041FB45A6A00FEB71F /* WalletHeaderView.m in Sources */,
 				2ED651CF200F34280065A1B0 /* TLCoinWithdrawOrderCell.m in Sources */,
 				215979601FB81CC40029F177 /* BillTableView.m in Sources */,
@@ -2707,9 +2707,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				2EFFE6AF1FF4866700BFCC40 /* zh-Hans */,
-				B8DAD14E20E220B500AF4CD4 /* ja */,
 				B8DAD14F20E220D100AF4CD4 /* zh-Hant */,
-				B8DAD15120E220DA00AF4CD4 /* ko */,
 				B8DAD15220E220EE00AF4CD4 /* en */,
 			);
 			name = Localizable.strings;
@@ -2721,8 +2719,6 @@
 				B8DAD14820E2208B00AF4CD4 /* en */,
 				B8DAD14A20E2208F00AF4CD4 /* zh-Hans */,
 				B8DAD14B20E2209200AF4CD4 /* zh-Hant */,
-				B8DAD14C20E220AB00AF4CD4 /* ko */,
-				B8DAD14D20E220B500AF4CD4 /* ja */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";

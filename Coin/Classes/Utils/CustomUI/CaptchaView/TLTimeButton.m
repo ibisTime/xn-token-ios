@@ -78,7 +78,7 @@
         [_timer invalidate];
         _timer = nil;
         _time = _totalTime;
-        self.backgroundColor = kAppCustomMainColor;
+        self.backgroundColor = kClearColor;
         self.enabled = YES;
     }
     

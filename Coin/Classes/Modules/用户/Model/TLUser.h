@@ -80,6 +80,12 @@
 @property (nonatomic, copy) NSString *tempBizNo;
 @property (nonatomic, copy) NSString *tempRealName;
 @property (nonatomic, copy) NSString *tempIdNo;
+
+@property (nonatomic, copy) NSString *localMoney;
+
+@property (nonatomic, copy) NSString *interCode;
+
+
 ////未读消息数
 //@property (nonatomic, assign) NSInteger unReadMsgCount;
 

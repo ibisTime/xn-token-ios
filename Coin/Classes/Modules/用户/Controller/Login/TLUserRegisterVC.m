@@ -18,7 +18,7 @@
 
 #import "APICodeMacro.h"
 #import "NSString+Check.h"
-
+#import "ChooseCountryVc.h"
 @interface TLUserRegisterVC ()<CLLocationManagerDelegate>
 
 @property (nonatomic,strong) CaptchaView *captchaView;
@@ -43,6 +43,10 @@
 
 @property (nonatomic, strong) UIScrollView *contentScrollView;
 
+@property (nonatomic ,strong) UILabel *titlePhpne;
+@property (nonatomic ,strong) UILabel *PhoneCode;
+@property (nonatomic ,strong) UIButton *accessoryImageView;
+
 @end
 
 @implementation TLUserRegisterVC
@@ -50,8 +54,7 @@
 {
     
     [super viewWillAppear:animated];
-    self.navigationController.navigationBar.hidden = NO;
-    self.title = [LangSwitcher switchLang:@"注册" key:nil];
+    
 
 }
 - (void)viewDidLoad {
@@ -59,7 +62,8 @@
     [super viewDidLoad];
     //取消按钮
     [UIBarButtonItem addLeftItemWithImageName:kCancelIcon frame:CGRectMake(0, 0, 80, 44) vc:self action:@selector(back)];
-   
+    self.navigationController.navigationBar.hidden = NO;
+    self.title = [LangSwitcher switchLang:@"注册" key:nil];
 
     [self setUpUI];
 
@@ -92,39 +96,40 @@
     lab.text = @"注册!";
     [self.contentScrollView addSubview:lab];
     [lab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(@40);
+        make.top.equalTo(@20);
         make.left.equalTo(@30);
 
         
     }];
-    
-    UILabel *titlename = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:14];
-    [self.contentScrollView addSubview:titlename];
-    titlename.text = [LangSwitcher switchLang:@"昵称" key:nil];
-    [titlename mas_makeConstraints:^(MASConstraintMaker *make) {
+    //账号
+    UILabel *titlePhone = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:14];
+    [self.contentScrollView addSubview:titlePhone];
+    titlePhone.text = [LangSwitcher switchLang:@"中国" key:nil];
+    self.titlePhpne = titlePhone;
+    [titlePhone mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.top.equalTo(lab.mas_bottom).offset(50);
+        make.top.equalTo(lab.mas_bottom).offset(40);
         make.left.mas_equalTo(20);
     }];
-    //昵称
-    TLTextField *nickNameTF = [[TLTextField alloc] initWithFrame:CGRectMake(margin, kHeight(144), w, h) leftTitle:[LangSwitcher switchLang:@"" key:nil] titleWidth:titleWidth placeholder:[LangSwitcher switchLang:@"请设置你的昵称" key:nil]];
+   
+  
 
-    [self.contentScrollView addSubview:nickNameTF];
-    self.nickNameTF = nickNameTF;
-    
-    
-    UIView *name = [[UIView alloc] init];
-    [self.contentScrollView addSubview:name];
-    name.backgroundColor = kLineColor;
-    name.frame = CGRectMake(btnMargin, nickNameTF.yy, w-30, 2);
-    
     UILabel *titlePhpne = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:14];
     [self.contentScrollView addSubview:titlePhpne];
     titlePhpne.text = [LangSwitcher switchLang:@"手机号" key:nil];
-    titlePhpne.frame = CGRectMake(btnMargin, nickNameTF.yy+5, w-30, 22);
+    titlePhpne.frame = CGRectMake(btnMargin, kHeight(144)+5, w-30, 22);
 
+    UILabel *PhoneCode = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:14];
+    [self.contentScrollView addSubview:PhoneCode];
+    PhoneCode.text = [LangSwitcher switchLang:@"+86" key:nil];
+    self.PhoneCode = PhoneCode;
+    [PhoneCode mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.top.equalTo(@(titlePhpne.yy+15));
+        make.left.mas_equalTo(20);
+    }];
     //账号
-    TLTextField *phoneTf = [[TLTextField alloc] initWithFrame:CGRectMake(margin, titlePhpne.yy, w, h) leftTitle:[LangSwitcher switchLang:@"" key:nil] titleWidth:titleWidth placeholder:[LangSwitcher switchLang:@"请输入手机号" key:nil]];
+    TLTextField *phoneTf = [[TLTextField alloc] initWithFrame:CGRectMake(60, titlePhpne.yy, w, h) leftTitle:[LangSwitcher switchLang:@"" key:nil] titleWidth:titleWidth placeholder:[LangSwitcher switchLang:@"请输入手机号" key:nil]];
     phoneTf.keyboardType = UIKeyboardTypeNumberPad;
     [self.contentScrollView addSubview:phoneTf];
     self.phoneTf = phoneTf;
@@ -220,56 +225,82 @@
     }];
     
     //选择按钮
-    UIButton *checkBtn = [UIButton buttonWithImageName:@"不打勾" selectedImageName:@"打勾"];
+//    UIButton *checkBtn = [UIButton buttonWithImageName:@"不打勾" selectedImageName:@"打勾"];
+//    
+//    checkBtn.selected = YES;
+//    
+//    [checkBtn addTarget:self action:@selector(clickSelect:) forControlEvents:UIControlEventTouchUpInside];
+//    
+//    [self.contentScrollView addSubview:checkBtn];
+//    [checkBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+//        
+//        make.left.equalTo(confirmBtn.mas_left).offset(5);
+//        make.top.equalTo(confirmBtn.mas_bottom).offset(18);
+//    }];
+//    
+//    self.checkBtn = checkBtn;
+//    
+//    NSString *text = [LangSwitcher switchLang:@"我已阅读并同意" key:nil];
+//
+//    //text
+//    UILabel *textLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:12];
+//
+//    textLbl.text = text;
+//
+//    textLbl.userInteractionEnabled = YES;
+//
+//    [self.contentScrollView addSubview:textLbl];
+//    [textLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+//
+//        make.left.equalTo(checkBtn.mas_right).offset(5);
+//        make.centerY.equalTo(checkBtn.mas_centerY);
+//
+//    }];
+//
     
-    checkBtn.selected = YES;
+    self.accessoryImageView = [[UIButton alloc] init];
+    self.accessoryImageView.frame = CGRectMake(kScreenWidth - 40-40, 90, 40, 40);
+    [self.contentScrollView addSubview:self.accessoryImageView];
+    [self.accessoryImageView setImage:kImage(@"更多-灰色") forState:UIControlStateNormal];
+    [self.accessoryImageView addTarget:self action:@selector(chooseCountry) forControlEvents:UIControlEventTouchUpInside];
+//    [self.accessoryImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+//
+//        make.centerY.equalTo(titlePhone.mas_centerY).offset(0);
+//        make.right.mas_equalTo(-20);
+//        make.width.height.equalTo(@40);
+//    }];
     
-    [checkBtn addTarget:self action:@selector(clickSelect:) forControlEvents:UIControlEventTouchUpInside];
     
-    [self.contentScrollView addSubview:checkBtn];
-    [checkBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.left.equalTo(confirmBtn.mas_left).offset(5);
-        make.top.equalTo(confirmBtn.mas_bottom).offset(18);
-    }];
+//    UIButton *protocolBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"《注册协议》" key:nil] titleColor:kAppCustomMainColor backgroundColor:kClearColor titleFont:12.0];
+//
+//    [protocolBtn addTarget:self action:@selector(readProtocal) forControlEvents:UIControlEventTouchUpInside];
+//
+//    [self.contentScrollView addSubview:protocolBtn];
+//    [protocolBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+//
+//        make.left.equalTo(textLbl.mas_right);
+//        make.centerY.equalTo(checkBtn.mas_centerY);
+//
+//    }];
     
-    self.checkBtn = checkBtn;
-    
-    NSString *text = [LangSwitcher switchLang:@"我已阅读并同意" key:nil];
-    
-    //text
-    UILabel *textLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:12];
-    
-    textLbl.text = text;
-    
-    textLbl.userInteractionEnabled = YES;
-    
-    [self.contentScrollView addSubview:textLbl];
-    [textLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.left.equalTo(checkBtn.mas_right).offset(5);
-        make.centerY.equalTo(checkBtn.mas_centerY);
-        
-    }];
-    
-    UIButton *protocolBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"《注册协议》" key:nil] titleColor:kAppCustomMainColor backgroundColor:kClearColor titleFont:12.0];
-    
-    [protocolBtn addTarget:self action:@selector(readProtocal) forControlEvents:UIControlEventTouchUpInside];
-    
-    [self.contentScrollView addSubview:protocolBtn];
-    [protocolBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.left.equalTo(textLbl.mas_right);
-        make.centerY.equalTo(checkBtn.mas_centerY);
-        
-    }];
-    
-    self.contentScrollView.contentSize = CGSizeMake(0, self.rePwdTf.yy+200 );
+    self.contentScrollView.contentSize = CGSizeMake(0, self.rePwdTf.yy+300 );
     self.contentScrollView.scrollEnabled = YES;
 }
 
 
-
+- (void)chooseCountry
+{
+    
+    //选择国家 设置区号
+    CoinWeakSelf;
+    ChooseCountryVc *countryVc = [ChooseCountryVc new];
+    countryVc.selectCountry = ^(CountryModel *model) {
+        //更新国家 区号
+        weakSelf.titlePhpne.text = model.chineseName;
+        weakSelf.PhoneCode.text = [NSString stringWithFormat:@"+%@",[model.interCode substringFromIndex:2]];
+    } ;
+    [self presentViewController:countryVc animated:YES completion:nil];
+}
 #pragma mark - Events
 - (void)sendCaptcha {
     
@@ -285,7 +316,8 @@
     http.code = CAPTCHA_CODE;
     http.parameters[@"bizType"] = USER_REG_CODE;
     http.parameters[@"mobile"] = self.phoneTf.text;
-    
+    http.parameters[@"interCode"] = [NSString stringWithFormat:@"00%@",[self.PhoneCode.text substringFromIndex:1]];
+
     [http postWithSuccess:^(id responseObject) {
         
         [TLAlert alertWithSucces:[LangSwitcher switchLang:@"验证码已发送,请注意查收" key:nil]];
@@ -300,14 +332,15 @@
     
 }
 
+
 - (void)goReg {
     
-    if (![self.nickNameTF.text valid]) {
-
-        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请设置你的昵称" key:nil]];
-
-        return ;
-    }
+//    if (![self.nickNameTF.text valid]) {
+//
+//        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请设置你的昵称" key:nil]];
+//
+//        return ;
+//    }
     
     if (![self.phoneTf.text isPhoneNum]) {
         
@@ -335,11 +368,11 @@
         
     }
     
-    if (!self.checkBtn.selected) {
-        
-        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请同意《注册协议》" key:nil]];
-        return ;
-    }
+//    if (!self.checkBtn.selected) {
+//
+//        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请同意《注册协议》" key:nil]];
+//        return ;
+//    }
     
     [self.view endEditing:YES];
 
@@ -347,11 +380,12 @@
     http.showView = self.view;
     http.code = USER_REG_CODE;
     http.parameters[@"mobile"] = self.phoneTf.text;
+    http.parameters[@"interCode"] = [NSString stringWithFormat:@"00%@",[self.PhoneCode.text substringFromIndex:1]];
+
     http.parameters[@"loginPwd"] = self.pwdTf.text;
 //    http.parameters[@"isRegHx"] = @"0";
     http.parameters[@"smsCaptcha"] = self.captchaView.captchaTf.text;
     http.parameters[@"kind"] = APP_KIND;
-    http.parameters[@"nickname"] = self.nickNameTF.text;
     if ([self.referTF.text valid]) {
         
         http.parameters[@"userReferee"] = self.referTF.text;
