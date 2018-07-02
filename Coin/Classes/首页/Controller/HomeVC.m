@@ -22,6 +22,7 @@
 #import "PosMiningVC.h"
 #import "RateDescVC.h"
 #import "CoinUtil.h"
+#import "RedEnvelopeVC.h"
 
 #import "HomeTableView.h"
 
@@ -191,10 +192,17 @@
             
             [self.navigationController pushViewController:posMiningVC animated:YES];
         }break;
+        case HomeEventsTypeRedEnvelope:
+        {
+            RedEnvelopeVC *redEnvelopeVC = [RedEnvelopeVC new];
+
+            [self presentViewController:redEnvelopeVC animated:YES completion:nil];
+        }break;
             
         default:
             break;
     }
+
 }
 
 #pragma mark - Data

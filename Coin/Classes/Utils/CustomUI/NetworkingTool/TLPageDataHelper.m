@@ -60,7 +60,7 @@
     http.isUploadToken = self.isUploadToken;
     
     [http postWithSuccess:^(id responseObject) {
-        
+        NSLog(@"==========%@",responseObject);
         NSArray *newObjs;
         
         if (!_isList) {
@@ -74,7 +74,7 @@
         }
         
         NSMutableArray *objs = [_className mj_objectArrayWithKeyValuesArray:newObjs];
-        
+        NSLog(@"======%@",objs);
         if (self.dealWithPerModel) {
             
             NSMutableArray *newModels = [[NSMutableArray alloc] initWithCapacity:newObjs.count];

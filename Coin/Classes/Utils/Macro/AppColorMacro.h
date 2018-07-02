@@ -39,10 +39,16 @@
 #define kTextColor2             [UIColor colorWithHexString:@"#999999"]   //二级文字
 #define kTextColor3             [UIColor colorWithHexString:@"#666666"]   //三级文字
 #define kTextColor4             [UIColor colorWithHexString:@"#b3b3b3"]   //四级文字
+#define kTextColor5             [UIColor colorWithHexString:@"#FBDDA9"]
+#define kTextColor6             [UIColor colorWithHexString:@"#BD7E2E"]
+#define kTextColor7             [UIColor colorWithHexString:@"#FFB968"]
 #define kThemeColor             [UIColor colorWithHexString:@"#ff7d0e"]  //红色文字
 #define kPaleBlueColor          [UIColor colorWithHexString:@"#48b0fb"]    //蓝色文字
 #define kRiseColor              [UIColor colorWithHexString:@"#2ac64c"]  //涨
 #define kTextBlack              [UIColor colorWithHexString:@"#333333"]   //黑文字
+#define SugarPacketsBack        [UIColor colorWithHexString:@"#FFB25B"]   //糖包背景
+#define HeadBackColor           [UIColor colorWithHexString:@"#F66253"]
+
 
 #define kAuxiliaryTipColor      [UIColor colorWithHexString:@"#FF254C"]   //辅助提示颜色
 #define kBottomItemGrayColor    [UIColor colorWithHexString:@"#FAFAFA"]   //底栏灰色

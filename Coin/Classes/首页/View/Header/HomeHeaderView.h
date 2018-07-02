@@ -18,6 +18,7 @@ typedef NS_ENUM(NSInteger, HomeEventsType) {
     HomeEventsTypeStore = 2,        //商家
     HomeEventsTypeGoodMall = 3,     //在线商城
     HomeEventsTypePosMining = 4,    //Pos挖矿
+    HomeEventsTypeRedEnvelope = 5,    //红包
 };
 
 typedef void(^HomeHeaderEventsBlock)(HomeEventsType type, NSInteger index);

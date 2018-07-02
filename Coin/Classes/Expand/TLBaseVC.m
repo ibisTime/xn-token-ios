@@ -37,7 +37,7 @@
 //    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
 //    self.navigationItem.backBarButtonItem = backItem;
     //navigation底部分割线
-    self.navigationController.navigationBar.shadowImage = [kLineColor convertToImage];
+//    self.navigationController.navigationBar.shadowImage = [kLineColor convertToImage];
 }
 
 - (void)viewWillAppear:(BOOL)animated {

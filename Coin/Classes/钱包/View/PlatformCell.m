@@ -139,7 +139,7 @@
 - (void)setPlatform:(CurrencyModel *)platform {
     _platform = platform;
     
-    
+    NSLog(@"---------%@",platform);
     //    self.coinIV.image = kImage(_currency.getImgName);
     
     CoinModel *coin = [CoinUtil getCoinModel:platform.currency];

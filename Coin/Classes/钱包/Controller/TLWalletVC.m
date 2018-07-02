@@ -221,7 +221,6 @@
         _headerView.headerBlock = ^{
             
             RateDescVC *descVC = [RateDescVC new];
-            
             [weakSelf.navigationController pushViewController:descVC animated:YES];
         };
         
@@ -530,7 +529,7 @@
             
             NSMutableArray <CurrencyModel *> *shouldDisplayCoins = [[NSMutableArray alloc] init];
             [objs enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                
+
                 CurrencyModel *currencyModel = (CurrencyModel *)obj;
                 //                if ([[CoinUtil shouldDisplayCoinArray] indexOfObject:currencyModel.currency ] != NSNotFound ) {
                 
@@ -991,10 +990,6 @@
 
 -(void)refreshTableView:(TLTableView *)refreshTableview didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-   
-    
-    
 
 }
 

@@ -26,9 +26,6 @@ static NSString *platformCell = @"PlatformCell";
         
         self.dataSource = self;
         self.delegate = self;
-        //全部平台
-        
-        //具体平台
         [self registerClass:[PlatformCell class] forCellReuseIdentifier:platformCell];
     }
     
@@ -43,15 +40,13 @@ static NSString *platformCell = @"PlatformCell";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+
+
     CurrencyModel *platform = self.platforms[indexPath.row];
-    
    
     
     PlatformCell *cell = [tableView dequeueReusableCellWithIdentifier:platformCell forIndexPath:indexPath];
-    
     cell.platform = platform;
-
     return cell;
 }
 

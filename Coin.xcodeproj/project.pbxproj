@@ -195,13 +195,31 @@
 		4C41F84620723CF000BBA366 /* HomeTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C41F84520723CF000BBA366 /* HomeTableView.m */; };
 		4C41F84920723D6600BBA366 /* HomeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C41F84820723D6600BBA366 /* HomeCell.m */; };
 		4C8DE98520C983D100EC183C /* EthereumUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C8DE98420C983D100EC183C /* EthereumUtil.swift */; };
-		4CA3385D20D2027B006ACE4A /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4CA3385920D2027B006ACE4A /* README.txt */; };
-		4CA3385E20D2027B006ACE4A /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CA3385B20D2027B006ACE4A /* libWeChatSDK.a */; };
-		4CA3385F20D2027B006ACE4A /* read_me.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4CA3385C20D2027B006ACE4A /* read_me.txt */; };
 		4CC7F0ED205FBC5400BBEC4D /* CoinModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CC7F0EC205FBC5400BBEC4D /* CoinModel.m */; };
 		4CE70FE120C82EDD00F0C803 /* MnemonicUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CE70FE020C82EDD00F0C803 /* MnemonicUtil.m */; };
-		B819BAA620C6B80300CEEC5E /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B819BAA120C6B80200CEEC5E /* AlipaySDK.bundle */; };
-		B819BAA720C6B80300CEEC5E /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B819BAA220C6B80200CEEC5E /* AlipaySDK.framework */; };
+		7A3821BA20EAA54700D6B636 /* ZJAnimationPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A3821B820EAA54600D6B636 /* ZJAnimationPopView.m */; };
+		7A3821BD20EABD1300D6B636 /* GetTheTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A3821BC20EABD1300D6B636 /* GetTheTableView.m */; };
+		7A3821C020EACD8B00D6B636 /* SendTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A3821BF20EACD8B00D6B636 /* SendTableView.m */; };
+		7A3821C320EACDA100D6B636 /* SendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A3821C220EACDA100D6B636 /* SendCell.m */; };
+		7A3821C620EAD4EA00D6B636 /* SendModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A3821C520EAD4EA00D6B636 /* SendModel.m */; };
+		7A8A5D0920E9F361002D9A48 /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7A8A5D0020E9F361002D9A48 /* AlipaySDK.bundle */; };
+		7A8A5D0A20E9F361002D9A48 /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A8A5D0120E9F361002D9A48 /* AlipaySDK.framework */; };
+		7A8A5D0B20E9F361002D9A48 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A8A5D0320E9F361002D9A48 /* libWeChatSDK.a */; };
+		7A8A5D0C20E9F361002D9A48 /* read_me.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7A8A5D0420E9F361002D9A48 /* read_me.txt */; };
+		7A8A5D0D20E9F361002D9A48 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7A8A5D0520E9F361002D9A48 /* README.txt */; };
+		7A8A5D1520EA076C002D9A48 /* RedEnvelopeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A8A5D1420EA076C002D9A48 /* RedEnvelopeVC.m */; };
+		7A8A5D1820EA0A23002D9A48 /* RedEnvelopeHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A8A5D1720EA0A23002D9A48 /* RedEnvelopeHeadView.m */; };
+		7A8A5D1B20EA131A002D9A48 /* SendRedEnvelopeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A8A5D1A20EA131A002D9A48 /* SendRedEnvelopeView.m */; };
+		7A8A5D2520EA301E002D9A48 /* RedEnvelopeShoreVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A8A5D2420EA301E002D9A48 /* RedEnvelopeShoreVC.m */; };
+		7A8A5D2820EA3124002D9A48 /* RedEnvelopeShoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A8A5D2720EA3124002D9A48 /* RedEnvelopeShoreView.m */; };
+		7A8A5D2F20EA3C09002D9A48 /* MySugarPacketsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A8A5D2E20EA3C09002D9A48 /* MySugarPacketsVC.m */; };
+		7A8A5D3220EA3E0E002D9A48 /* GetTheVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A8A5D3120EA3E0E002D9A48 /* GetTheVC.m */; };
+		7A8A5D3520EA3E5A002D9A48 /* SendVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A8A5D3420EA3E5A002D9A48 /* SendVC.m */; };
+		7A8A5DC020EA6977002D9A48 /* CustomActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A8A5DBF20EA6977002D9A48 /* CustomActionSheet.m */; };
+		7A8A5DC620EA6FE7002D9A48 /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A8A5DC420EA6FE6002D9A48 /* UIView+Extension.m */; };
+		7A8A5DCB20EA7EB8002D9A48 /* GetTheCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A8A5DCA20EA7EB8002D9A48 /* GetTheCell.m */; };
+		7A8A5DCE20EA9CD5002D9A48 /* GetTheModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A8A5DCD20EA9CD5002D9A48 /* GetTheModel.m */; };
+		7A8A5DD120EAA2DE002D9A48 /* InvitationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A8A5DCF20EAA2DB002D9A48 /* InvitationView.m */; };
 		B819BAAA20C6DD7800CEEC5E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B819BAA920C6DD7700CEEC5E /* LaunchScreen.storyboard */; };
 		B83D1E0C20CE63A2007835DB /* WalletLocalVc.m in Sources */ = {isa = PBXBuildFile; fileRef = B83D1E0B20CE63A2007835DB /* WalletLocalVc.m */; };
 		B83D1E0F20CE7076007835DB /* WalletForwordVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B83D1E0E20CE7076007835DB /* WalletForwordVC.m */; };
@@ -642,21 +660,57 @@
 		4C41F84720723D6600BBA366 /* HomeCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeCell.h; sourceTree = "<group>"; };
 		4C41F84820723D6600BBA366 /* HomeCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeCell.m; sourceTree = "<group>"; };
 		4C8DE98420C983D100EC183C /* EthereumUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EthereumUtil.swift; sourceTree = "<group>"; };
-		4CA3385720D2027B006ACE4A /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
-		4CA3385820D2027B006ACE4A /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
-		4CA3385920D2027B006ACE4A /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
-		4CA3385A20D2027B006ACE4A /* WechatAuthSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WechatAuthSDK.h; sourceTree = "<group>"; };
-		4CA3385B20D2027B006ACE4A /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
-		4CA3385C20D2027B006ACE4A /* read_me.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = read_me.txt; sourceTree = "<group>"; };
 		4CC7F0EB205FBC5400BBEC4D /* CoinModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoinModel.h; sourceTree = "<group>"; };
 		4CC7F0EC205FBC5400BBEC4D /* CoinModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoinModel.m; sourceTree = "<group>"; };
 		4CE70FDF20C82EDD00F0C803 /* MnemonicUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MnemonicUtil.h; sourceTree = "<group>"; };
 		4CE70FE020C82EDD00F0C803 /* MnemonicUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MnemonicUtil.m; sourceTree = "<group>"; };
 		524739678D50CF78B722738E /* Pods_Coin.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Coin.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7A3821B820EAA54600D6B636 /* ZJAnimationPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZJAnimationPopView.m; sourceTree = "<group>"; };
+		7A3821B920EAA54600D6B636 /* ZJAnimationPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZJAnimationPopView.h; sourceTree = "<group>"; };
+		7A3821BB20EABD1300D6B636 /* GetTheTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GetTheTableView.h; sourceTree = "<group>"; };
+		7A3821BC20EABD1300D6B636 /* GetTheTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GetTheTableView.m; sourceTree = "<group>"; };
+		7A3821BE20EACD8B00D6B636 /* SendTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SendTableView.h; sourceTree = "<group>"; };
+		7A3821BF20EACD8B00D6B636 /* SendTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SendTableView.m; sourceTree = "<group>"; };
+		7A3821C120EACDA100D6B636 /* SendCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SendCell.h; sourceTree = "<group>"; };
+		7A3821C220EACDA100D6B636 /* SendCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SendCell.m; sourceTree = "<group>"; };
+		7A3821C420EAD4EA00D6B636 /* SendModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SendModel.h; sourceTree = "<group>"; };
+		7A3821C520EAD4EA00D6B636 /* SendModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SendModel.m; sourceTree = "<group>"; };
+		7A8A5D0020E9F361002D9A48 /* AlipaySDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AlipaySDK.bundle; sourceTree = "<group>"; };
+		7A8A5D0120E9F361002D9A48 /* AlipaySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlipaySDK.framework; sourceTree = "<group>"; };
+		7A8A5D0320E9F361002D9A48 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
+		7A8A5D0420E9F361002D9A48 /* read_me.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = read_me.txt; sourceTree = "<group>"; };
+		7A8A5D0520E9F361002D9A48 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
+		7A8A5D0620E9F361002D9A48 /* WechatAuthSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WechatAuthSDK.h; sourceTree = "<group>"; };
+		7A8A5D0720E9F361002D9A48 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
+		7A8A5D0820E9F361002D9A48 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
+		7A8A5D1320EA076C002D9A48 /* RedEnvelopeVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RedEnvelopeVC.h; sourceTree = "<group>"; };
+		7A8A5D1420EA076C002D9A48 /* RedEnvelopeVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RedEnvelopeVC.m; sourceTree = "<group>"; };
+		7A8A5D1620EA0A23002D9A48 /* RedEnvelopeHeadView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RedEnvelopeHeadView.h; sourceTree = "<group>"; };
+		7A8A5D1720EA0A23002D9A48 /* RedEnvelopeHeadView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RedEnvelopeHeadView.m; sourceTree = "<group>"; };
+		7A8A5D1920EA131A002D9A48 /* SendRedEnvelopeView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SendRedEnvelopeView.h; sourceTree = "<group>"; };
+		7A8A5D1A20EA131A002D9A48 /* SendRedEnvelopeView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SendRedEnvelopeView.m; sourceTree = "<group>"; };
+		7A8A5D2320EA301E002D9A48 /* RedEnvelopeShoreVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RedEnvelopeShoreVC.h; sourceTree = "<group>"; };
+		7A8A5D2420EA301E002D9A48 /* RedEnvelopeShoreVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RedEnvelopeShoreVC.m; sourceTree = "<group>"; };
+		7A8A5D2620EA3124002D9A48 /* RedEnvelopeShoreView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RedEnvelopeShoreView.h; sourceTree = "<group>"; };
+		7A8A5D2720EA3124002D9A48 /* RedEnvelopeShoreView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RedEnvelopeShoreView.m; sourceTree = "<group>"; };
+		7A8A5D2D20EA3C09002D9A48 /* MySugarPacketsVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MySugarPacketsVC.h; sourceTree = "<group>"; };
+		7A8A5D2E20EA3C09002D9A48 /* MySugarPacketsVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MySugarPacketsVC.m; sourceTree = "<group>"; };
+		7A8A5D3020EA3E0E002D9A48 /* GetTheVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GetTheVC.h; sourceTree = "<group>"; };
+		7A8A5D3120EA3E0E002D9A48 /* GetTheVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GetTheVC.m; sourceTree = "<group>"; };
+		7A8A5D3320EA3E5A002D9A48 /* SendVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SendVC.h; sourceTree = "<group>"; };
+		7A8A5D3420EA3E5A002D9A48 /* SendVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SendVC.m; sourceTree = "<group>"; };
+		7A8A5DBE20EA6977002D9A48 /* CustomActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomActionSheet.h; sourceTree = "<group>"; };
+		7A8A5DBF20EA6977002D9A48 /* CustomActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomActionSheet.m; sourceTree = "<group>"; };
+		7A8A5DC220EA6FE5002D9A48 /* UIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
+		7A8A5DC420EA6FE6002D9A48 /* UIView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extension.m"; sourceTree = "<group>"; };
+		7A8A5DC920EA7EB8002D9A48 /* GetTheCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GetTheCell.h; sourceTree = "<group>"; };
+		7A8A5DCA20EA7EB8002D9A48 /* GetTheCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GetTheCell.m; sourceTree = "<group>"; };
+		7A8A5DCC20EA9CD5002D9A48 /* GetTheModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GetTheModel.h; sourceTree = "<group>"; };
+		7A8A5DCD20EA9CD5002D9A48 /* GetTheModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GetTheModel.m; sourceTree = "<group>"; };
+		7A8A5DCF20EAA2DB002D9A48 /* InvitationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InvitationView.m; sourceTree = "<group>"; };
+		7A8A5DD020EAA2DD002D9A48 /* InvitationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InvitationView.h; sourceTree = "<group>"; };
 		8863748C5281F9DC1DDF8EEA /* Pods-Coin.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Coin.release.xcconfig"; path = "Pods/Target Support Files/Pods-Coin/Pods-Coin.release.xcconfig"; sourceTree = "<group>"; };
 		AB34D27FC9725550E9092EC2 /* Pods-Coin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Coin.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Coin/Pods-Coin.debug.xcconfig"; sourceTree = "<group>"; };
-		B819BAA120C6B80200CEEC5E /* AlipaySDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AlipaySDK.bundle; sourceTree = "<group>"; };
-		B819BAA220C6B80200CEEC5E /* AlipaySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlipaySDK.framework; sourceTree = "<group>"; };
 		B819BAA920C6DD7700CEEC5E /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B83D1E0A20CE63A2007835DB /* WalletLocalVc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WalletLocalVc.h; sourceTree = "<group>"; };
 		B83D1E0B20CE63A2007835DB /* WalletLocalVc.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WalletLocalVc.m; sourceTree = "<group>"; };
@@ -780,12 +834,12 @@
 			files = (
 				2EFFE6B31FF6287D00BFCC40 /* UserNotifications.framework in Frameworks */,
 				2EFFE6B21FF6286600BFCC40 /* CoreTelephony.framework in Frameworks */,
-				4CA3385E20D2027B006ACE4A /* libWeChatSDK.a in Frameworks */,
+				7A8A5D0B20E9F361002D9A48 /* libWeChatSDK.a in Frameworks */,
 				21C91D981FDBD7E4006EDB16 /* CoreMotion.framework in Frameworks */,
 				211C05081FC6714500E51FCF /* libz.tbd in Frameworks */,
 				211C050A1FC6715000E51FCF /* libc++.tbd in Frameworks */,
-				B819BAA720C6B80300CEEC5E /* AlipaySDK.framework in Frameworks */,
 				211C050C1FC6715B00E51FCF /* libsqlite3.tbd in Frameworks */,
+				7A8A5D0A20E9F361002D9A48 /* AlipaySDK.framework in Frameworks */,
 				211C05121FC6717300E51FCF /* libstdc++.6.tbd in Frameworks */,
 				211C05111FC6717300E51FCF /* libstdc++.6.0.9.tbd in Frameworks */,
 				2EFFE6B51FF6289600BFCC40 /* libsqlite3.0.tbd in Frameworks */,
@@ -1545,6 +1599,7 @@
 		216F5AFF206CD9C900F2C832 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				7A8A5D0E20EA0677002D9A48 /* RedEnvelope */,
 				216F5B54206D005200F2C832 /* POS */,
 				216F5B50206D002400F2C832 /* Mall */,
 				216F5B4C206CE77B00F2C832 /* Store */,
@@ -2152,7 +2207,7 @@
 		2EA584B61FA813C900C7106C /* Coin */ = {
 			isa = PBXGroup;
 			children = (
-				B819BA9820C6B80200CEEC5E /* Extension */,
+				7A8A5CFE20E9F361002D9A48 /* Extension */,
 				215421CF1FD708AC00FDD25C /* Coin.entitlements */,
 				216F5AEE206CC6F600F2C832 /* AppDelegate */,
 				2E394FA31FB0546E00BA0829 /* Classes */,
@@ -2178,19 +2233,6 @@
 			path = ChineseConvert;
 			sourceTree = "<group>";
 		};
-		4CA3385620D2027B006ACE4A /* WechatSDK1.8.2 */ = {
-			isa = PBXGroup;
-			children = (
-				4CA3385720D2027B006ACE4A /* WXApi.h */,
-				4CA3385820D2027B006ACE4A /* WXApiObject.h */,
-				4CA3385920D2027B006ACE4A /* README.txt */,
-				4CA3385A20D2027B006ACE4A /* WechatAuthSDK.h */,
-				4CA3385B20D2027B006ACE4A /* libWeChatSDK.a */,
-				4CA3385C20D2027B006ACE4A /* read_me.txt */,
-			);
-			path = WechatSDK1.8.2;
-			sourceTree = "<group>";
-		};
 		4CE70FD920C82B8A00F0C803 /* Crypto */ = {
 			isa = PBXGroup;
 			children = (
@@ -2201,22 +2243,166 @@
 			path = Crypto;
 			sourceTree = "<group>";
 		};
-		B819BA9820C6B80200CEEC5E /* Extension */ = {
+		7A8A5CFE20E9F361002D9A48 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				4CA3385620D2027B006ACE4A /* WechatSDK1.8.2 */,
-				B819BAA020C6B80200CEEC5E /* Alipay */,
+				7A8A5CFF20E9F361002D9A48 /* Alipay */,
+				7A8A5D0220E9F361002D9A48 /* WechatSDK1.8.2 */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
 		};
-		B819BAA020C6B80200CEEC5E /* Alipay */ = {
+		7A8A5CFF20E9F361002D9A48 /* Alipay */ = {
 			isa = PBXGroup;
 			children = (
-				B819BAA120C6B80200CEEC5E /* AlipaySDK.bundle */,
-				B819BAA220C6B80200CEEC5E /* AlipaySDK.framework */,
+				7A8A5D0020E9F361002D9A48 /* AlipaySDK.bundle */,
+				7A8A5D0120E9F361002D9A48 /* AlipaySDK.framework */,
 			);
 			path = Alipay;
+			sourceTree = "<group>";
+		};
+		7A8A5D0220E9F361002D9A48 /* WechatSDK1.8.2 */ = {
+			isa = PBXGroup;
+			children = (
+				7A8A5D0320E9F361002D9A48 /* libWeChatSDK.a */,
+				7A8A5D0420E9F361002D9A48 /* read_me.txt */,
+				7A8A5D0520E9F361002D9A48 /* README.txt */,
+				7A8A5D0620E9F361002D9A48 /* WechatAuthSDK.h */,
+				7A8A5D0720E9F361002D9A48 /* WXApi.h */,
+				7A8A5D0820E9F361002D9A48 /* WXApiObject.h */,
+			);
+			path = WechatSDK1.8.2;
+			sourceTree = "<group>";
+		};
+		7A8A5D0E20EA0677002D9A48 /* RedEnvelope */ = {
+			isa = PBXGroup;
+			children = (
+				7A8A5D2920EA3BCA002D9A48 /* MySugarPackets */,
+				7A8A5D1C20EA2F44002D9A48 /* Share */,
+				7A8A5D1220EA06AA002D9A48 /* Controller */,
+				7A8A5D1120EA06A4002D9A48 /* Model */,
+				7A8A5D1020EA06A1002D9A48 /* View */,
+			);
+			path = RedEnvelope;
+			sourceTree = "<group>";
+		};
+		7A8A5D1020EA06A1002D9A48 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7A8A5D1620EA0A23002D9A48 /* RedEnvelopeHeadView.h */,
+				7A8A5D1720EA0A23002D9A48 /* RedEnvelopeHeadView.m */,
+				7A8A5D1920EA131A002D9A48 /* SendRedEnvelopeView.h */,
+				7A8A5D1A20EA131A002D9A48 /* SendRedEnvelopeView.m */,
+				7A8A5DBE20EA6977002D9A48 /* CustomActionSheet.h */,
+				7A8A5DBF20EA6977002D9A48 /* CustomActionSheet.m */,
+				7A8A5DC220EA6FE5002D9A48 /* UIView+Extension.h */,
+				7A8A5DC420EA6FE6002D9A48 /* UIView+Extension.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		7A8A5D1120EA06A4002D9A48 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		7A8A5D1220EA06AA002D9A48 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				7A8A5D1320EA076C002D9A48 /* RedEnvelopeVC.h */,
+				7A8A5D1420EA076C002D9A48 /* RedEnvelopeVC.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		7A8A5D1C20EA2F44002D9A48 /* Share */ = {
+			isa = PBXGroup;
+			children = (
+				7A8A5D1F20EA2FC7002D9A48 /* Controller */,
+				7A8A5D1E20EA2FC4002D9A48 /* Model */,
+				7A8A5D1D20EA2FC2002D9A48 /* View */,
+			);
+			path = Share;
+			sourceTree = "<group>";
+		};
+		7A8A5D1D20EA2FC2002D9A48 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7A3821B920EAA54600D6B636 /* ZJAnimationPopView.h */,
+				7A3821B820EAA54600D6B636 /* ZJAnimationPopView.m */,
+				7A8A5D2620EA3124002D9A48 /* RedEnvelopeShoreView.h */,
+				7A8A5D2720EA3124002D9A48 /* RedEnvelopeShoreView.m */,
+				7A8A5DD020EAA2DD002D9A48 /* InvitationView.h */,
+				7A8A5DCF20EAA2DB002D9A48 /* InvitationView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		7A8A5D1E20EA2FC4002D9A48 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		7A8A5D1F20EA2FC7002D9A48 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				7A8A5D2320EA301E002D9A48 /* RedEnvelopeShoreVC.h */,
+				7A8A5D2420EA301E002D9A48 /* RedEnvelopeShoreVC.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		7A8A5D2920EA3BCA002D9A48 /* MySugarPackets */ = {
+			isa = PBXGroup;
+			children = (
+				7A8A5D2C20EA3BEB002D9A48 /* Controller */,
+				7A8A5D2B20EA3BE9002D9A48 /* Model */,
+				7A8A5D2A20EA3BE7002D9A48 /* View */,
+			);
+			path = MySugarPackets;
+			sourceTree = "<group>";
+		};
+		7A8A5D2A20EA3BE7002D9A48 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7A3821BB20EABD1300D6B636 /* GetTheTableView.h */,
+				7A3821BC20EABD1300D6B636 /* GetTheTableView.m */,
+				7A8A5DC920EA7EB8002D9A48 /* GetTheCell.h */,
+				7A8A5DCA20EA7EB8002D9A48 /* GetTheCell.m */,
+				7A3821BE20EACD8B00D6B636 /* SendTableView.h */,
+				7A3821BF20EACD8B00D6B636 /* SendTableView.m */,
+				7A3821C120EACDA100D6B636 /* SendCell.h */,
+				7A3821C220EACDA100D6B636 /* SendCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		7A8A5D2B20EA3BE9002D9A48 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				7A8A5DCC20EA9CD5002D9A48 /* GetTheModel.h */,
+				7A8A5DCD20EA9CD5002D9A48 /* GetTheModel.m */,
+				7A3821C420EAD4EA00D6B636 /* SendModel.h */,
+				7A3821C520EAD4EA00D6B636 /* SendModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		7A8A5D2C20EA3BEB002D9A48 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				7A8A5D2D20EA3C09002D9A48 /* MySugarPacketsVC.h */,
+				7A8A5D2E20EA3C09002D9A48 /* MySugarPacketsVC.m */,
+				7A8A5D3020EA3E0E002D9A48 /* GetTheVC.h */,
+				7A8A5D3120EA3E0E002D9A48 /* GetTheVC.m */,
+				7A8A5D3320EA3E5A002D9A48 /* SendVC.h */,
+				7A8A5D3420EA3E5A002D9A48 /* SendVC.m */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 		B860C8AE20CE194700BD29F8 /* DataBase */ = {
@@ -2300,7 +2486,7 @@
 					2EA584B31FA813C900C7106C = {
 						CreatedOnToolsVersion = 9.0.1;
 						LastSwiftMigration = 0940;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -2339,17 +2525,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7A8A5D0920E9F361002D9A48 /* AlipaySDK.bundle in Resources */,
 				B8F63EE620D3DC9600556150 /* QSount.caf in Resources */,
 				B819BAAA20C6DD7800CEEC5E /* LaunchScreen.storyboard in Resources */,
-				B819BAA620C6B80300CEEC5E /* AlipaySDK.bundle in Resources */,
 				B8D9290620E9BDF10026A3DF /* country.plist in Resources */,
 				2EFFE6AA1FF4829100BFCC40 /* Localizable.strings in Resources */,
 				2EA584C11FA813C900C7106C /* Assets.xcassets in Resources */,
 				2EB9495B1FDF6B1A00CE4B94 /* SimplifiedCode.txt in Resources */,
 				2EE361361FFB7D4500A5C3EB /* README.md in Resources */,
-				4CA3385D20D2027B006ACE4A /* README.txt in Resources */,
-				4CA3385F20D2027B006ACE4A /* read_me.txt in Resources */,
+				7A8A5D0C20E9F361002D9A48 /* read_me.txt in Resources */,
 				B8DAD14720E2208B00AF4CD4 /* InfoPlist.strings in Resources */,
+				7A8A5D0D20E9F361002D9A48 /* README.txt in Resources */,
 				2EB9495C1FDF6B1A00CE4B94 /* TraditionalCode.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2387,6 +2573,9 @@
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SipHash/SipHash.framework",
 				"${BUILT_PRODUCTS_DIR}/UIDeviceIdentifier/UIDeviceIdentifier.framework",
+				"${PODS_ROOT}/ZendeskSDK/ZendeskSDK/4.1/ZendeskCoreSDK.framework",
+				"${PODS_ROOT}/ZendeskSDK/ZendeskSDK/4.1/ZendeskProviderSDK.framework",
+				"${PODS_ROOT}/ZendeskSDK/ZendeskSDK/4.1/ZendeskSDK.framework",
 				"${BUILT_PRODUCTS_DIR}/libsodium/libsodium.framework",
 				"${BUILT_PRODUCTS_DIR}/secp256k1_ios/secp256k1_ios.framework",
 				"${BUILT_PRODUCTS_DIR}/web3swift/web3swift.framework",
@@ -2416,6 +2605,9 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SipHash.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UIDeviceIdentifier.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ZendeskCoreSDK.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ZendeskProviderSDK.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ZendeskSDK.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/libsodium.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/secp256k1_ios.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/web3swift.framework",
@@ -2432,12 +2624,10 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Coin/Pods-Coin-resources.sh",
-				"${PODS_ROOT}/ZendeskSDK/ZendeskSDK.bundle",
-				"${PODS_ROOT}/ZendeskSDK/ZendeskSDKStrings.bundle",
+				"${PODS_ROOT}/ZendeskSDK/ZendeskSDK/4.1/ZendeskSDKStrings.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ZendeskSDK.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ZendeskSDKStrings.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2492,10 +2682,12 @@
 				B8D5F15020CE08790005CF96 /* TLAccountMoneyVC.m in Sources */,
 				211DE6BA1FB58B4C002FCF3D /* NSString+Check.m in Sources */,
 				216F5B3E206CD9DA00F2C832 /* StoreTableView.m in Sources */,
+				7A8A5D2820EA3124002D9A48 /* RedEnvelopeShoreView.m in Sources */,
 				21A7F3151FB2E2F900FAA0A2 /* TLChangeMobileVC.m in Sources */,
 				211DE6AC1FB58B4C002FCF3D /* TLPageDataHelper.m in Sources */,
 				2EB039A71FE8B23300589D8E /* EditEmailVC.m in Sources */,
 				4C8DE98520C983D100EC183C /* EthereumUtil.swift in Sources */,
+				7A8A5D2520EA301E002D9A48 /* RedEnvelopeShoreVC.m in Sources */,
 				21CB94ED1FDC0C9100CAB090 /* LanguageSettingTableView.m in Sources */,
 				216F5B1C206CD9C900F2C832 /* StoreDetailHeaderView.m in Sources */,
 				B8C2057620CF9FFD00952765 /* WalletAdressTableView.m in Sources */,
@@ -2518,6 +2710,8 @@
 				2EE3613F1FFC738700A5C3EB /* TLBaseLabel.m in Sources */,
 				211EAD901FD0FC500037FBA8 /* UIViewController+BackButtonHander.m in Sources */,
 				B88B093320C908DC005C2D2F /* ResiseTextFiled.m in Sources */,
+				7A8A5D1820EA0A23002D9A48 /* RedEnvelopeHeadView.m in Sources */,
+				7A3821C320EACDA100D6B636 /* SendCell.m in Sources */,
 				21223CB71FBDB2D200057444 /* WebVC.m in Sources */,
 				2E394FFD1FB059C100BA0829 /* TLBaseVC.m in Sources */,
 				215979641FB81CED0029F177 /* BillModel.m in Sources */,
@@ -2533,6 +2727,7 @@
 				21A7F3241FB2E2F900FAA0A2 /* CaptchaView.m in Sources */,
 				B8BBA5FA20C780FA00DC4D5F /* PlatformTableView.m in Sources */,
 				2EE950C61FB05B5900429257 /* TLMineVC.m in Sources */,
+				7A3821C020EACD8B00D6B636 /* SendTableView.m in Sources */,
 				B8BBA64920C849BB00DC4D5F /* AddMoneyCell.m in Sources */,
 				21205CDA1FCD2FC8003C6C7C /* CoinAddressListVC.m in Sources */,
 				B8F63EE020D3809700556150 /* LocalBillDetailTableView.m in Sources */,
@@ -2541,6 +2736,7 @@
 				B8B15C1F20CA752900F13220 /* QHCollectionViewNine.m in Sources */,
 				216F5B3C206CD9DA00F2C832 /* BannerModel.m in Sources */,
 				216F5B4F206CE7A600F2C832 /* StoreListVC.m in Sources */,
+				7A8A5D2F20EA3C09002D9A48 /* MySugarPacketsVC.m in Sources */,
 				2ED651CC200F32BC0065A1B0 /* TLCoinWithdrawModel.m in Sources */,
 				21205CE21FCD3163003C6C7C /* CoinAddressModel.m in Sources */,
 				211DE6C61FB58B4C002FCF3D /* HttpLogger.m in Sources */,
@@ -2564,6 +2760,7 @@
 				2159795D1FB81C2B0029F177 /* BillVC.m in Sources */,
 				211A53321FBFE4F100CC6294 /* RateDescTableView.m in Sources */,
 				216F5B17206CD9C900F2C832 /* StorePayVC.m in Sources */,
+				7A3821BA20EAA54700D6B636 /* ZJAnimationPopView.m in Sources */,
 				B83D1E0F20CE7076007835DB /* WalletForwordVC.m in Sources */,
 				211DE6B61FB58B4C002FCF3D /* UIView+Extension.m in Sources */,
 				21A7F3141FB2E2F900FAA0A2 /* TLPwdRelatedVC.m in Sources */,
@@ -2573,6 +2770,7 @@
 				211DE6AA1FB58B4C002FCF3D /* TLImagePicker.m in Sources */,
 				21A7F3211FB2E2F900FAA0A2 /* AccountTf.m in Sources */,
 				2EB039AD1FE8EDE300589D8E /* UserInfo.m in Sources */,
+				7A8A5DD120EAA2DE002D9A48 /* InvitationView.m in Sources */,
 				B8CA7D4920CBA22800A0E93C /* WalletImportVC.m in Sources */,
 				216F5B39206CD9DA00F2C832 /* HomeVC.m in Sources */,
 				216F5B3F206CD9DA00F2C832 /* HomeHeaderView.m in Sources */,
@@ -2581,6 +2779,7 @@
 				B8B15C2820CA75CC00F13220 /* AddSearchCell.m in Sources */,
 				215979671FB81D230029F177 /* BillCell.m in Sources */,
 				211DE6A81FB58B4C002FCF3D /* TLTextField.m in Sources */,
+				7A3821C620EAD4EA00D6B636 /* SendModel.m in Sources */,
 				211D4ED61FCD9B0C000E0D43 /* EditVC.m in Sources */,
 				211A34D71FB3F51400FEB71F /* MineHeaderView.m in Sources */,
 				211DE6C11FB58B4C002FCF3D /* AppConfig.m in Sources */,
@@ -2591,6 +2790,7 @@
 				B88B093020C9072B005C2D2F /* RevisePassWordVC.m in Sources */,
 				216F5B1B206CD9C900F2C832 /* TradeFlowCell.m in Sources */,
 				216F5B53206D004600F2C832 /* GoodMallVC.m in Sources */,
+				7A8A5D1B20EA131A002D9A48 /* SendRedEnvelopeView.m in Sources */,
 				B8C2057020CF984900952765 /* WalletDelectVC.m in Sources */,
 				2E973FC91FDA279C005C2D5F /* LangSwitcher.m in Sources */,
 				211DE6AD1FB58B4C002FCF3D /* TLAlert.m in Sources */,
@@ -2601,6 +2801,7 @@
 				211A34E11FB4247800FEB71F /* MineModel.m in Sources */,
 				21A7F3631FB2F16C00FAA0A2 /* HTMLStrVC.m in Sources */,
 				211DE6B91FB58B4C002FCF3D /* NSDictionary+Extension.m in Sources */,
+				7A8A5DCE20EA9CD5002D9A48 /* GetTheModel.m in Sources */,
 				21A7F31E1FB2E2F900FAA0A2 /* TLUser.m in Sources */,
 				2E394FFC1FB059C100BA0829 /* TLBaseModel.m in Sources */,
 				B8F63ED720D362DA00556150 /* WalletLocalBillTableView.m in Sources */,
@@ -2614,6 +2815,7 @@
 				2EB9495A1FDF6B1A00CE4B94 /* ZMChineseConvert.m in Sources */,
 				B87B1BCA20D2509E00EF7B8E /* WalletNewFeaturesVC.m in Sources */,
 				B83D1E0C20CE63A2007835DB /* WalletLocalVc.m in Sources */,
+				7A8A5D1520EA076C002D9A48 /* RedEnvelopeVC.m in Sources */,
 				21A7F35E1FB2EBAA00FAA0A2 /* CurrencyModel.m in Sources */,
 				B8C2057F20CFFE1C00952765 /* WalletLocalModel.m in Sources */,
 				211DE6A61FB58B4C002FCF3D /* TLTextView.m in Sources */,
@@ -2628,6 +2830,7 @@
 				2E42616B2028431200913DCF /* TLSwitchView.m in Sources */,
 				216F5AF6206CCED300F2C832 /* TLNotficationService.m in Sources */,
 				211A35041FB45A6A00FEB71F /* WalletHeaderView.m in Sources */,
+				7A8A5DC020EA6977002D9A48 /* CustomActionSheet.m in Sources */,
 				2ED651CF200F34280065A1B0 /* TLCoinWithdrawOrderCell.m in Sources */,
 				215979601FB81CC40029F177 /* BillTableView.m in Sources */,
 				21A7F31C1FB2E2F900FAA0A2 /* TLUserExt.m in Sources */,
@@ -2654,6 +2857,9 @@
 				2129FE6F1FDFBAA3009DA374 /* ChangeLoginPwdVC.m in Sources */,
 				211A532F1FBFE4CF00CC6294 /* RateDescCell.m in Sources */,
 				21CB94EA1FDC0C2500CAB090 /* PersonalitySettingTableView.m in Sources */,
+				7A8A5DC620EA6FE7002D9A48 /* UIView+Extension.m in Sources */,
+				7A8A5DCB20EA7EB8002D9A48 /* GetTheCell.m in Sources */,
+				7A3821BD20EABD1300D6B636 /* GetTheTableView.m in Sources */,
 				211CEF141FCBBF90000FB0C4 /* SelectScrollView.m in Sources */,
 				21CB94F01FDC0CAA00CAB090 /* LanguageSettingCell.m in Sources */,
 				B8BBA63D20C7F6FC00DC4D5F /* WallAccountVC.m in Sources */,
@@ -2662,6 +2868,7 @@
 				211DE6B11FB58B4C002FCF3D /* UIButton+EnLargeEdge.m in Sources */,
 				B8A2436520E5E0F20074DF8F /* TLDataBase.m in Sources */,
 				2EE361551FFE182800A5C3EB /* RespHandler.m in Sources */,
+				7A8A5D3520EA3E5A002D9A48 /* SendVC.m in Sources */,
 				21205CE51FCD31E0003C6C7C /* CoinAddressCell.m in Sources */,
 				B8B15C2720CA75CC00F13220 /* AddSearchBottomCell.m in Sources */,
 				211DE6A21FB58B4C002FCF3D /* TLCaptchaView.m in Sources */,
@@ -2697,6 +2904,7 @@
 				211A34F41FB430F900FEB71F /* SettingCell.m in Sources */,
 				2EA2526E1FF09B52007FF9A2 /* CoinUtil.m in Sources */,
 				21205CE81FCD3F84003C6C7C /* CoinAddAddressVC.m in Sources */,
+				7A8A5D3220EA3E0E002D9A48 /* GetTheVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2852,9 +3060,9 @@
 				CODE_SIGN_ENTITLEMENTS = Coin/Coin.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 6PF7VHZB5Z;
+				DEVELOPMENT_TEAM = "";
 				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = NO;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2881,8 +3089,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.cdkj.wallet;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "df0528b3-24f8-4721-b514-c83e857f3a3f";
-				PROVISIONING_PROFILE_SPECIFIER = devogcwallet;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -2903,9 +3111,9 @@
 				CODE_SIGN_ENTITLEMENTS = Coin/Coin.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 6PF7VHZB5Z;
+				DEVELOPMENT_TEAM = "";
 				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = NO;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2932,8 +3140,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.cdkj.wallet;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "df0528b3-24f8-4721-b514-c83e857f3a3f";
-				PROVISIONING_PROFILE_SPECIFIER = devogcwallet;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;

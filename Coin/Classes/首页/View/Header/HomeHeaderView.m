@@ -215,9 +215,8 @@
 
 - (void)initApplicationView {
     
-    self.applicationView = [[UIView alloc] initWithFrame:CGRectMake(0, self.bannerView.yy, kScreenWidth, 145)];
+    self.applicationView = [[UIView alloc] initWithFrame:CGRectMake(0, self.bannerView.yy, kScreenWidth, 145 + 125)];
     self.applicationView.backgroundColor = kWhiteColor;
-    
     [self addSubview:self.applicationView];
     
     UIImageView *iconIV = [[UIImageView alloc] init];
@@ -260,10 +259,11 @@
     
     NSArray *textArr = @[@"首创玩法",
                          @"余币宝",
-                         @"量化理财"];
+                         @"量化理财",
+                         @"红包"];
     
     [textArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        
+        NSLog(@"==========%ld",idx);
         CGFloat width = (kScreenWidth-60)/3;
         
         UIButton *btn = [UIButton buttonWithTitle:[LangSwitcher switchLang:obj key:nil]
@@ -275,6 +275,7 @@
         [btn setBackgroundImage:kImage(obj) forState:UIControlStateNormal];
         btn.contentMode = UIViewContentModeScaleAspectFit;
         btn.tag = 1500 + idx;
+//        btn.backgroundColor = [UIColor redColor];
         [btn addTarget:self action:@selector(clickButton:) forControlEvents:UIControlEventTouchUpInside];
         UILabel *textLab = [UILabel labelWithBackgroundColor:kClearColor textColor:kWhiteColor font:15];
         [btn addSubview:textLab];
@@ -284,9 +285,14 @@
         }];
         [self.applicationView addSubview:btn];
         [btn mas_makeConstraints:^(MASConstraintMaker *make) {
-            
-            make.top.equalTo(textLbl.mas_bottom).offset(15);
-            make.left.equalTo(@(idx*width+(idx+1)*15));
+            if (idx == 3) {
+                make.top.equalTo(textLbl.mas_bottom).offset(140);
+                make.left.equalTo(@(15));
+            }else
+            {
+                make.top.equalTo(textLbl.mas_bottom).offset(15);
+                make.left.equalTo(@(idx*width+(idx+1)*15));
+            }
             make.width.equalTo(@(width));
             make.height.equalTo(@110);
         }];
