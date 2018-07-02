@@ -9,7 +9,7 @@
 #import "TLPwdRelatedVC.h"
 #import "CaptchaView.h"
 #import "APICodeMacro.h"
-
+#import "ChooseCountryVc.h"
 #import "NSString+Check.h"
 
 @interface TLPwdRelatedVC ()
@@ -22,7 +22,9 @@
 @property (nonatomic,strong) CaptchaView *captchaView;
 @property (nonatomic,strong) TLTextField *pwdTf;
 @property (nonatomic,strong) TLTextField *rePwdTf;
-
+@property (nonatomic ,strong) UILabel *titlePhpne;
+@property (nonatomic ,strong) UILabel *PhoneCode;
+@property (nonatomic ,strong) UIButton *accessoryImageView;
 
 @end
 
@@ -41,7 +43,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.view.backgroundColor = kWhiteColor;
     [self setUpUI];
     
     if ([TLUser user].mobile) {
@@ -76,8 +78,50 @@
     
     CGFloat leftW = 100;
     
+    //账号
+    
+    UIView *view = [[UIView alloc] init];
+    
+    [self.view addSubview:view];
+    view.backgroundColor = kWhiteColor;
+    view.frame = CGRectMake(0, 0, kScreenWidth, 60);
+    
+    UILabel *titlePhone = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:14];
+    [view addSubview:titlePhone];
+    titlePhone.text = [LangSwitcher switchLang:@"中国" key:nil];
+    self.titlePhpne = titlePhone;
+    titlePhone.backgroundColor = kWhiteColor;
+    [titlePhone mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.top.equalTo(@20);
+        make.left.mas_equalTo(20);
+    }];
+    UILabel *PhoneCode = [UILabel labelWithBackgroundColor:kWhiteColor textColor:kTextColor font:16];
+    [view addSubview:PhoneCode];
+    PhoneCode.text = [LangSwitcher switchLang:@"+86" key:nil];
+    self.PhoneCode = PhoneCode;
+    PhoneCode.backgroundColor = kWhiteColor;
+
+    [PhoneCode mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.top.equalTo(titlePhone.mas_bottom).offset(10);
+        make.left.mas_equalTo(20);
+    }];
+    
+    self.accessoryImageView = [[UIButton alloc] init];
+    //    self.accessoryImageView.frame = CGRectMake(kScreenWidth - 40-40, 90, 40, 40);
+    [view addSubview:self.accessoryImageView];
+    [self.accessoryImageView setImage:kImage(@"更多-灰色") forState:UIControlStateNormal];
+    [self.accessoryImageView addTarget:self action:@selector(chooseCountry) forControlEvents:UIControlEventTouchUpInside];
+    [self.accessoryImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.centerY.equalTo(titlePhone.mas_centerY).offset(0);
+        make.right.mas_equalTo(-20);
+        make.width.height.equalTo(@40);
+    }];
+    
     //手机号
-    TLTextField *phoneTf = [[TLTextField alloc] initWithFrame:CGRectMake(0, 10, kScreenWidth, 45)
+    TLTextField *phoneTf = [[TLTextField alloc] initWithFrame:CGRectMake(0, view.yy, kScreenWidth, 45)
                                                     leftTitle:[LangSwitcher switchLang:@"手机号" key:nil]
                                                    titleWidth:leftW
                                                   placeholder:[LangSwitcher switchLang:@"请输入手机号" key:nil]];
@@ -114,7 +158,7 @@
     
     CGFloat captchaViewY = [TLUser user].isGoogleAuthOpen ? self.googleAuthTF.yy + 1: phoneTf.yy + 1;
     //验证码
-    CaptchaView *captchaView = [[CaptchaView alloc] initWithFrame:CGRectMake(phoneTf.x, captchaViewY, phoneTf.width, phoneTf.height) leftTitleWidth:100];
+    CaptchaView *captchaView = [[CaptchaView alloc] initWithFrame:CGRectMake(0, captchaViewY, phoneTf.width, phoneTf.height) leftTitleWidth:100];
     
     captchaView.captchaTf.leftLbl.text = [LangSwitcher switchLang:@"短信验证码" key:nil];
     
@@ -123,7 +167,7 @@
     [captchaView.captchaBtn addTarget:self action:@selector(sendCaptcha) forControlEvents:UIControlEventTouchUpInside];
     
     //新密码
-    TLTextField *pwdTf = [[TLTextField alloc] initWithFrame:CGRectMake(phoneTf.x, captchaView.yy + 10, phoneTf.width, phoneTf.height)
+    TLTextField *pwdTf = [[TLTextField alloc] initWithFrame:CGRectMake(0, captchaView.yy + 10, phoneTf.width, phoneTf.height)
                                                   leftTitle:[LangSwitcher switchLang:@"新密码" key:nil]
                                                  titleWidth:leftW
                                                 placeholder:[LangSwitcher switchLang:@"请输入密码(不少于6位)" key:nil]];
@@ -137,7 +181,7 @@
     self.pwdTf = pwdTf;
     
     //重新输入
-    TLTextField *rePwdTf = [[TLTextField alloc] initWithFrame:CGRectMake(phoneTf.x, pwdTf.yy + 1, phoneTf.width, phoneTf.height)
+    TLTextField *rePwdTf = [[TLTextField alloc] initWithFrame:CGRectMake(0, pwdTf.yy + 1, phoneTf.width, phoneTf.height)
                                                     leftTitle:[LangSwitcher switchLang:@"确认密码" key:nil]
                                                    titleWidth:leftW
                                                   placeholder:[LangSwitcher switchLang:@"请确认密码" key:nil]];
@@ -178,6 +222,19 @@
 
 
 #pragma mark - Events
+- (void)chooseCountry
+{
+    
+    //选择国家 设置区号
+    CoinWeakSelf;
+    ChooseCountryVc *countryVc = [ChooseCountryVc new];
+    countryVc.selectCountry = ^(CountryModel *model) {
+        //更新国家 区号
+        weakSelf.titlePhpne.text = model.chineseName;
+        weakSelf.PhoneCode.text = [NSString stringWithFormat:@"+%@",[model.interCode substringFromIndex:2]];
+    } ;
+    [self presentViewController:countryVc animated:YES completion:nil];
+}
 
 - (void)sendCaptcha {
     
@@ -197,8 +254,9 @@
         http.parameters[@"bizType"] = USER_SET_TRADE_PWD;
         
     }
-    
     http.parameters[@"mobile"] = self.phoneTf.text;
+
+    http.parameters[@"interCode"] = [NSString stringWithFormat:@"00%@",[self.PhoneCode.text substringFromIndex:1]];
     [http postWithSuccess:^(id responseObject) {
         
         [TLAlert alertWithSucces:[LangSwitcher switchLang:@"验证码已发送,请注意查收" key:nil]];
@@ -320,6 +378,7 @@
         http.parameters[@"googleCaptcha"] = self.googleAuthTF.text;
 
     }
+    http.parameters[@"interCode"] = [NSString stringWithFormat:@"00%@",[self.PhoneCode.text substringFromIndex:1]];
 
     [http postWithSuccess:^(id responseObject) {
         

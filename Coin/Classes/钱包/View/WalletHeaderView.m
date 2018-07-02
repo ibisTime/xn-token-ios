@@ -20,8 +20,7 @@
 @property (nonatomic, strong) UIImageView *leftFlag;
 //右边国旗
 @property (nonatomic, strong) UIImageView *rightFlag;
-@property (nonatomic, strong) UILabel *textLbl;
-@property (nonatomic, strong) UILabel *localLbl;
+
 
 @property (nonatomic, strong) UIImageView *rightArrowIV;
 
@@ -86,10 +85,11 @@
     }];
     
     UILabel *equivalentBtn = [UILabel labelWithBackgroundColor:kClearColor textColor:kHexColor(@"#333333") font:10];
-    equivalentBtn.text = [LangSwitcher switchLang:@"总资产(CNY)" key:nil];
+//    equivalentBtn.text = [LangSwitcher switchLang:@"总资产(CNY" key:nil];
     
 //    [equivalentBtn setImage:kImage(@"总资产") forState:UIControlStateNormal];
     
+    self.equivalentBtn = equivalentBtn;
     [self addSubview:equivalentBtn];
     [equivalentBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         
@@ -135,7 +135,7 @@
     self.bottomIV = bottomIV;
     UILabel *localLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kWhiteColor font:12.0];
     
-    localLbl.text = [LangSwitcher switchLang:@"私钥钱包 (CNY)" key:nil];
+    localLbl.text = [LangSwitcher switchLang:@"私钥钱包" key:nil];
     self.localLbl = localLbl;
     [self.bottomIV addSubview:localLbl];
     UIImageView *imageView  = [[UIImageView alloc] init];
@@ -191,7 +191,7 @@
     self.bgIV = bgIV;
     UILabel *textLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kHexColor(@"#D3FFFF") font:12.0];
     
-    textLbl.text = [LangSwitcher switchLang:@"个人钱包 (CNY)" key:nil];
+    textLbl.text = [LangSwitcher switchLang:@"个人钱包" key:nil];
     self.textLbl = textLbl;
     [self.bgIV addSubview:textLbl];
     [textLbl mas_makeConstraints:^(MASConstraintMaker *make) {

@@ -121,7 +121,8 @@
     http.code = CAPTCHA_CODE;
     http.parameters[@"bizType"] = @"805072";
     http.parameters[@"mobile"] = [TLUser user].mobile;
-    
+    http.parameters[@"interCode"] = [TLUser user].interCode;
+
     [http postWithSuccess:^(id responseObject) {
         
         [TLAlert alertWithSucces:[LangSwitcher switchLang:@"验证码已发送,请注意查收" key:nil]];
@@ -171,7 +172,8 @@
     http.parameters[@"googleCaptcha"] = self.googleAuthTF.text;
     http.parameters[@"smsCaptcha"] = self.captchaView.captchaTf.text;
     http.parameters[@"userId"] = [TLUser user].userId;
-    
+    http.parameters[@"interCode"] = [TLUser user].interCode;
+
     [http postWithSuccess:^(id responseObject) {
         
         [TLAlert alertWithSucces:[LangSwitcher switchLang:@"关闭成功" key:nil]];

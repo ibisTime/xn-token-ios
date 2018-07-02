@@ -91,6 +91,13 @@
     return [EthCrypto getAddressWithPrivateKey:privateKey];
 }
 
++ (NSString * )getEthTokenGasPrice
+{
+    
+    return [EthCrypto getETHTokenPrice];
+    
+}
+
 //+ (BTCMnemonic *)generateNewMnemonic {
 //    BTCMnemonic *mnemonic =  [[BTCMnemonic alloc] initWithEntropy:BTCRandomDataWithLength(16) password:nil wordListType:BTCMnemonicWordListTypeEnglish];
 //    return mnemonic;

@@ -38,7 +38,8 @@
 @property (nonatomic, copy) NSString *mobile;
 
 @property (nonatomic ,strong) UIButton *accessoryImageView;
-
+@property (nonatomic ,strong) UILabel *titlePhpne;
+@property (nonatomic ,strong) UILabel *PhoneCode;
 @end
 
 @implementation TLUserLoginVC
@@ -150,13 +151,22 @@
     UILabel *titlePhpne = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:14];
     [bgView addSubview:titlePhpne];
     titlePhpne.text = [LangSwitcher switchLang:@"中国" key:nil];
+    self.titlePhpne = titlePhpne;
     [titlePhpne mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.top.equalTo(titleLab.mas_bottom).offset(40);
         make.left.mas_equalTo(20);
     }];
-    
-    TLTextField *phone = [[TLTextField alloc] initWithFrame:CGRectMake(20, kHeight(134), w, h) leftTitle:[LangSwitcher switchLang:@"+86" key:nil] titleWidth:50 placeholder:[LangSwitcher switchLang:@"请输入手机号" key:nil]];
+    UILabel *PhoneCode = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:14];
+    [bgView addSubview:PhoneCode];
+    PhoneCode.text = [LangSwitcher switchLang:@"+86" key:nil];
+    self.PhoneCode = PhoneCode;
+    [PhoneCode mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.top.equalTo(titlePhpne.mas_bottom).offset(40);
+        make.left.mas_equalTo(20);
+    }];
+    TLTextField *phone = [[TLTextField alloc] initWithFrame:CGRectMake(60, kHeight(134), w, h) leftTitle:[LangSwitcher switchLang:@"" key:nil] titleWidth:0 placeholder:[LangSwitcher switchLang:@"请输入手机号" key:nil]];
     phone.keyboardType = UIKeyboardTypeNumberPad;
     AccountTf *phoneTf = [[AccountTf alloc] initWithFrame:CGRectMake(0, kHeight(134), w-40, h)];
 //    phoneTf.leftIconView.image = [UIImage imageNamed:@"手机"];
@@ -185,7 +195,7 @@
     
     
     //密码
-    AccountTf *pwdTf = [[AccountTf alloc] initWithFrame:CGRectMake(0, phoneTf.yy + 3, w-40, h)];
+    AccountTf *pwdTf = [[AccountTf alloc] initWithFrame:CGRectMake(40, phoneTf.yy + 3, w-40, h)];
     pwdTf.secureTextEntry = YES;
 //    pwdTf.leftIconView.image = [UIImage imageNamed:@"密码"];
     pwdTf.placeHolder = [LangSwitcher switchLang:@"请输入密码" key:nil];
@@ -254,8 +264,13 @@
 {
     
     //选择国家 设置区号
-    
+    CoinWeakSelf;
     ChooseCountryVc *countryVc = [ChooseCountryVc new];
+    countryVc.selectCountry = ^(CountryModel *model) {
+        //更新国家 区号
+        weakSelf.titlePhpne.text = model.chineseName;
+        weakSelf.PhoneCode.text = [NSString stringWithFormat:@"+%@",[model.interCode substringFromIndex:2]];
+    } ;
     [self presentViewController:countryVc animated:YES completion:nil];
 }
 
@@ -298,7 +313,8 @@
 - (void)goReg {
     
     TLUserRegisterVC *registerVC = [[TLUserRegisterVC alloc] init];
-    
+    self.title = [LangSwitcher switchLang:@"注册" key:nil];
+
     [self.navigationController pushViewController:registerVC animated:YES];
     
 }
@@ -317,7 +333,11 @@
         [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入6位以上密码" key:nil]];
         return;
     }
-    
+    if (!self.titlePhpne.text || !self.PhoneCode.text) {
+        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请选择国家" key:nil]];
+
+        return;
+    }
     [self.view endEditing:YES];
 
     TLNetworking *http = [TLNetworking new];

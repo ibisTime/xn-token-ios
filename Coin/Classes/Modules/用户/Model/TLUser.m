@@ -14,7 +14,8 @@
 #import "APICodeMacro.h"
 #import "TLUIHeader.h"
 #import "AppConfig.h"
-
+#import "TLDataBase.h"
+#import "AppColorMacro.h"
 //#import "ChatManager.h"       czy
 //#import "IMAHost+HostAPIs.h"  czy
 //#import "IMAHost.h"           czy
@@ -95,9 +96,14 @@ NSString *const kGoogleAuthClose = @"0";
     NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
     NSString *userId = [userDefault objectForKey:USER_ID_KEY];
     NSString *token = [userDefault objectForKey:TOKEN_ID_KEY];
+    
     //
     self.userId = userId;
     self.token = token;
+    self.localMoney = [[NSUserDefaults standardUserDefaults] objectForKey:KLocalMoney];
+    
+   
+    
     //
     NSDictionary *dict = [userDefault objectForKey:USER_INFO_DICT_KEY];
     [self setUserInfoWithDict:dict];
@@ -197,6 +203,7 @@ NSString *const kGoogleAuthClose = @"0";
     self.token = nil;
     //
     //
+    self.localMoney = nil;
     self.secretUserId = nil;
     self.photo = nil;
     self.mobile = nil;
@@ -281,6 +288,7 @@ NSString *const kGoogleAuthClose = @"0";
     self.level = dict[@"level"];
     self.photo = dict[@"photo"];
     self.email = dict[@"email"];
+    self.interCode = dict[@"interCode"];
     self.secretUserId =  dict[@"secretUserId"];
     
     //腾讯云-设置昵称和头像

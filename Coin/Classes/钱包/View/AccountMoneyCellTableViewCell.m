@@ -18,6 +18,7 @@
 #import "Masonry.h"
 #import "CoinUtil.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import "TLUser.h"
 
 @interface AccountMoneyCellTableViewCell()
 
@@ -173,7 +174,17 @@
     self.currencyNameLbl.text = platform.symbol;
 //    NSString *leftAmount = [platform.amountString subNumber:platform.frozenAmountString];
     
-    self.tradeVolumeLbl.text = [NSString stringWithFormat:@"≈%.2f CNY",[platform.priceCNY doubleValue]];
+    if ([[TLUser user].localMoney isEqualToString:@"美元"]) {
+        self.tradeVolumeLbl.text = [NSString stringWithFormat:@"≈%.2f USD",[platform.priceUSD doubleValue]];
+        self.rmbPriceLbl.text = [NSString stringWithFormat:@"%.2f USD",[platform.amountUSD doubleValue]];
+
+    }else{
+        
+        self.tradeVolumeLbl.text = [NSString stringWithFormat:@"≈%.2f CNY",[platform.priceCNY doubleValue]];
+        self.rmbPriceLbl.text = [NSString stringWithFormat:@"%.2f CNY",[platform.amountCNY doubleValue]];
+
+        
+    }
 //    NSString *rightAmount = [platform.balance subNumber:platform.balance];
     
     //对应币种价格
@@ -182,7 +193,6 @@
     self.opppsitePriceLbl.text = [NSString stringWithFormat:@"%.6f", t];
     
     //人民币价格
-    self.rmbPriceLbl.text = [NSString stringWithFormat:@"%.2f CNY",[platform.amountCNY doubleValue]];
     
     
     

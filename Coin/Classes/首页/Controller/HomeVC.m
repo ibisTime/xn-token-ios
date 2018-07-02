@@ -59,8 +59,8 @@
 //    NSLog(@"Seed=%@", BTCHexFromData(mnemonic.seed));
 //    NSLog(@"Mnemonic=%@", mnemonic.words);
 //    NSLog(@"privateKey=%@", [MnemonicUtil getBtcPrivateKey:mnemonic]);
-//    NSLog(@"publicKey=%@", [MnemonicUtil getBtcAddress:mnemonic]);
-    
+//    NSLog(@"getEthTokenGasPrice=%@", [MnemonicUtil getEthTokenGasPrice]);
+//    return;
     
     [super viewDidLoad];
     //

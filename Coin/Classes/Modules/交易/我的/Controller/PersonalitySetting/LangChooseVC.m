@@ -64,27 +64,27 @@
         [weakself langType:LangTypeEnglish];
         
     }];
-    SettingModel *KorenModel = [[SettingModel alloc] init];
-    KorenModel.text = @"한국어.";
-//    KorenModel.text = [LangSwitcher switchLang:@"韩文" key:nil];
-
-    KorenModel.isSelect = [LangSwitcher currentLangType] == LangTypeKorean;
-    [KorenModel setAction:^{
-        
-        [weakself langType:LangTypeKorean];
-        
-    }];
-    SettingModel *JapanseModel = [[SettingModel alloc] init];
-    JapanseModel.text = [LangSwitcher switchLang:@"日文" key:nil];
-    JapanseModel.isSelect = [LangSwitcher currentLangType] == LangTypeJapanese;
-    [JapanseModel setAction:^{
-        
-        [weakself langType:LangTypeJapanese];
-        
-    }];
+//    SettingModel *KorenModel = [[SettingModel alloc] init];
+//    KorenModel.text = @"한국어.";
+////    KorenModel.text = [LangSwitcher switchLang:@"韩文" key:nil];
+//
+//    KorenModel.isSelect = [LangSwitcher currentLangType] == LangTypeKorean;
+//    [KorenModel setAction:^{
+//
+//        [weakself langType:LangTypeKorean];
+//
+//    }];
+//    SettingModel *JapanseModel = [[SettingModel alloc] init];
+//    JapanseModel.text = [LangSwitcher switchLang:@"日文" key:nil];
+//    JapanseModel.isSelect = [LangSwitcher currentLangType] == LangTypeJapanese;
+//    [JapanseModel setAction:^{
+//
+//        [weakself langType:LangTypeJapanese];,KorenModel,JapanseModel
+//
+//    }];
     
     //
-    [self.models addObjectsFromArray:@[simpleModel,tridationModel,EnglishModel,KorenModel,JapanseModel]];
+    [self.models addObjectsFromArray:@[simpleModel,tridationModel,EnglishModel]];
     
     
 }

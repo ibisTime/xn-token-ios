@@ -42,6 +42,7 @@
 #import "TLAccountMoneyVC.h"
 #import "TLUserLoginVC.h"
 #import "ChooseCountryVc.h"
+#import "ChangeLocalMoneyVC.h"
 @interface TLMineVC ()<MineHeaderSeletedDelegate, UINavigationControllerDelegate>
 
 //@property (nonatomic, strong) FBKVOController *chatKVOCtrl;   czy
@@ -159,11 +160,11 @@
             };
             return ;
         }
-        ChooseCountryVc *moneyVC= [[ChooseCountryVc alloc] init];
+        ChangeLocalMoneyVC *moneyVC= [[ChangeLocalMoneyVC alloc] init];
 //        moneyVC.cancelBtn.hidden = YES;
-//        [weakSelf.navigationController pushViewController:moneyVC animated:YES];
+        [weakSelf.navigationController pushViewController:moneyVC animated:YES];
 
-        [weakSelf presentViewController:moneyVC animated:YES completion:nil];
+//        [weakSelf presentViewController:moneyVC animated:YES completion:nil];
 
     };
     
@@ -197,7 +198,14 @@
     securityCenter.text = [LangSwitcher switchLang:@"钱包工具" key:nil];
     securityCenter.imgName = @"钱包工具";
     securityCenter.action = ^{
-        
+        if (![TLUser user].isLogin) {
+            TLUserLoginVC *loginVC= [TLUserLoginVC new];
+            [weakSelf.navigationController pushViewController:loginVC animated:YES];
+            loginVC.loginSuccess = ^{
+                
+            };
+            return ;
+        }
         WalletSettingVC *settingVC = [WalletSettingVC new];
 
         [weakSelf.navigationController pushViewController:settingVC animated:YES];

@@ -42,5 +42,10 @@ typedef void(^WalletclearBlock)(void);
 @property (nonatomic, strong) UILabel *LocalMoney;
 
 @property (nonatomic, strong) UIButton *codeButton;
+
+@property (nonatomic, strong) UILabel *equivalentBtn;
+@property (nonatomic, strong) UILabel *textLbl;
+@property (nonatomic, strong) UILabel *localLbl;
+
 -(void)swipeBottomClick:(UISwipeGestureRecognizer *)swpie;
 @end

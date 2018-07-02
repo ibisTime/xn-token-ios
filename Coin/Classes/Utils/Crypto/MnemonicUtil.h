@@ -20,6 +20,7 @@
 
 + (NSString * )getGasPrice;
 + (NSString * )getWanGasPrice;
++ (NSString * )getEthTokenGasPrice;
 
 + (NSString * )sendTransactionWithMnemonicWallet: (NSString *)wallet address:(NSString *)address amount:(NSString *)amount gaspic:(NSString*)gasPric gasLimt:(NSString *)gasLimt;
 

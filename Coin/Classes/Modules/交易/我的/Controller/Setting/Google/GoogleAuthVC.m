@@ -155,7 +155,8 @@
     http.code = CAPTCHA_CODE;
     http.parameters[@"bizType"] = @"805071";
     http.parameters[@"mobile"] = [TLUser user].mobile;
-    
+    http.parameters[@"interCode"] = [TLUser user].interCode;
+
     [http postWithSuccess:^(id responseObject) {
         
         [TLAlert alertWithSucces:[LangSwitcher switchLang:@"验证码已发送,请注意查收" key:nil]];
@@ -211,7 +212,8 @@
     http.parameters[@"secret"] = self.secretTF.text;
     http.parameters[@"smsCaptcha"] = self.captchaView.captchaTf.text;
     http.parameters[@"userId"] = [TLUser user].userId;
-    
+    http.parameters[@"interCode"] = [TLUser user].interCode;
+
     [http postWithSuccess:^(id responseObject) {
         
         NSString *title = [TLUser user].isGoogleAuthOpen ? [LangSwitcher switchLang:@"修改成功" key:nil]: [LangSwitcher switchLang:@"开启成功" key:nil];
