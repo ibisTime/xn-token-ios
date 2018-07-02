@@ -153,14 +153,16 @@
 //    self.currencyNameLbl.text = [platform.symbol uppercaseString];
 //    self.presentImage.hidden = [platform.isWarn isEqualToString:@"0"];
    self.currencyNameLbl.text = platform.currency;
-     NSString *leftAmount = [platform.amountString subNumber:platform.frozenAmountString];
     
-    self.tradeVolumeLbl.text = [NSString stringWithFormat:@"≈%.2f CNY",[platform.priceCNY doubleValue]];
-    NSString *rightAmount = [platform.inAmountString subNumber:platform.addAmountString];
+     NSString *leftAmount = [CoinUtil convertToRealCoin:platform.amountString coin:coin.symbol];
+    NSString *rightAmount = [CoinUtil convertToRealCoin:platform.frozenAmountString coin:coin.symbol];
 
+    self.tradeVolumeLbl.text = [NSString stringWithFormat:@"≈%.2f CNY",[platform.priceCNY doubleValue]];
+    NSString *ritAmount = [leftAmount subNumber:rightAmount];
+    
     //对应币种价格
-    CGFloat t = [platform.amountString doubleValue]/1000000000000000000;
-    self.opppsitePriceLbl.text = [NSString stringWithFormat:@"%.6f", t];
+//    CGFloat t = [platform.amountString doubleValue]/1000000000000000000;
+    self.opppsitePriceLbl.text = [NSString stringWithFormat:@"%.8f",[ritAmount doubleValue]];;
 
     //人民币价格
     self.rmbPriceLbl.text = [NSString stringWithFormat:@"%.2f CNY",[platform.amountCNY doubleValue]];

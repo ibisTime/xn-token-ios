@@ -7,7 +7,9 @@
 //
 
 #import "TLBaseVC.h"
-
+#import "CurrencyModel.h"
 @interface WalletLocalWebVC : TLBaseVC
 @property (nonatomic ,copy) NSString *urlString;
+@property (nonatomic ,strong) CurrencyModel *currentModel;
+
 @end

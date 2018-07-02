@@ -20,7 +20,7 @@ typedef void(^selectCurrent)(NSInteger );
 
 @interface PlatformTableView : TLTableView
 //
-@property (nonatomic, strong) NSArray <CurrencyModel *>*platforms;
+@property (nonatomic, strong) NSMutableArray <CurrencyModel *>*platforms;
 //类型
 @property (nonatomic, assign) PlatformType type;
 

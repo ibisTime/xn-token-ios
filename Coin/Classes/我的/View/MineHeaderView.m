@@ -34,25 +34,44 @@
 #pragma mark - Init
 - (void)initSubvies {
     
-    self.backgroundColor = [UIColor whiteColor];
+    self.backgroundColor = kBackgroundColor;
     
     UIImageView *bgIV = [[UIImageView alloc] init];
     
-    bgIV.image = kImage(@"我的背景");
+    bgIV.image = kImage(@"背景");
     bgIV.contentMode = UIViewContentModeScaleToFill;
     
     [self addSubview:bgIV];
     [bgIV mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.left.top.right.equalTo(@0);
-        make.height.equalTo(@(160 + kStatusBarHeight));
+        make.height.equalTo(@((kHeight(156))));
         
     }];
     
     self.bgIV = bgIV;
     
-    CGFloat imgWidth = 68;
+    UILabel *titleLab  = [UILabel labelWithBackgroundColor:kClearColor textColor:kWhiteColor font:18.0];
+    [self.bgIV addSubview:titleLab];
+    titleLab.text = [LangSwitcher switchLang:@"我的" key:nil];
+    [titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.bgIV.mas_centerX);
+        make.top.equalTo(self.bgIV.mas_top).offset(kStatusBarHeight+9);
+    }];
     
+    UIView *titleView = [[UIView alloc] init];
+    titleView.backgroundColor = kWhiteColor;
+    titleView.layer.cornerRadius = 4.0;
+    titleView.clipsToBounds = YES;
+    [self addSubview:titleView];
+    [titleView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(@15);
+        make.top.equalTo(self.mas_top).offset(kStatusBarHeight+44);
+        make.right.equalTo(@-15);
+        make.height.equalTo(@(kHeight(140)));
+    }];
+    CGFloat imgWidth = 66;
+
 //    self.photoBtn = [UIButton buttonWithTitle:nil titleColor:kAppCustomMainColor backgroundColor:kWhiteColor titleFont:30 cornerRadius:imgWidth/2.0];
     self.photoBtn = [UIButton buttonWithImageName:@"头像" cornerRadius:imgWidth/2.0];
     [self.photoBtn setBackgroundImage:kImage(@"头像") forState:UIControlStateNormal];
@@ -60,35 +79,46 @@
     
     self.photoBtn.imageView.contentMode = UIViewContentModeScaleAspectFill;
     
-    [self addSubview:self.photoBtn];
+    [titleView addSubview:self.photoBtn];
     [self.photoBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.width.height.equalTo(@(imgWidth));
-        make.centerY.equalTo(self.mas_centerY);
-        make.left.equalTo(@(30));
-        
+        make.width.equalTo(@(imgWidth));
+        make.height.equalTo(@64);
+
+        make.right.equalTo(@(-20));
+        make.top.equalTo(@(27));
+
     }];
     
     //昵称
-    self.nameLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kWhiteColor font:15.0];
+    self.nameLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextBlack font:30.0];
     
-    [self addSubview:self.nameLbl];
+    [titleView addSubview:self.nameLbl];
     [self.nameLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.top.equalTo(self.photoBtn.mas_top).offset(10);
-        make.left.equalTo(self.photoBtn.mas_right).offset(15);
+        make.top.equalTo(titleView.mas_top).offset(25);
+        make.left.equalTo(titleView.mas_left).offset(20);
         
     }];
-    
+    UIImageView *phone = [[UIImageView alloc] init];
+    phone.image = kImage(@"手机");
+    [titleView addSubview:phone];
+    [phone mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.nameLbl.mas_left);
+        make.top.equalTo(@(kHeight(75)));
+        make.width.equalTo(@10);
+        make.height.equalTo(@14);
+
+    }];
     //手机号
-    self.mobileLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kWhiteColor font:15.0];
+    self.mobileLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kHexColor(@"#666666") font:14.0];
     
-    [self addSubview:self.mobileLbl];
+    [titleView addSubview:self.mobileLbl];
     [self.mobileLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.left.equalTo(self.nameLbl.mas_left);
-        make.bottom.equalTo(self.photoBtn.mas_bottom).offset(-10);
-        
+        make.left.equalTo(phone.mas_right).offset(5);
+        make.top.equalTo(@(kHeight(75)));
+
     }];
     
     //用户等级

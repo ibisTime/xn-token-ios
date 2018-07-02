@@ -36,7 +36,7 @@
     
     self.title = [LangSwitcher switchLang:@"收款" key:nil];
     //提示框
-    [self initTopView];
+//    [self initTopView];
     //二维码
     [self initQRView];
     //地址
@@ -84,21 +84,21 @@
     }
     NSString *currency = address;
 
-    promptLbl.text = [NSString stringWithFormat:@"%@钱包地址禁止充值除%@之外的其他资产, 任何%@资产充值将不可找回",currency,currency,currency];
-    promptLbl.text = [LangSwitcher switchLang: promptLbl.text key:nil];
+//    promptLbl.text = [NSString stringWithFormat:@"%@钱包地址禁止充值除%@之外的其他资产, 任何%@资产充值将不可找回",currency,currency,currency];
+//    promptLbl.text = [LangSwitcher switchLang: promptLbl.text key:nil];
     promptLbl.frame = CGRectMake(0, 0, kScreenWidth, 50);
     
     promptLbl.numberOfLines = 0;
     
-    [self.topView addSubview:promptLbl];
-    [promptLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.left.equalTo(@15);
-        make.right.equalTo(cancelBtn.mas_left).offset(-10);
-        make.height.equalTo(@50);
-        make.top.equalTo(@0);
-        
-    }];
+//    [self.topView addSubview:promptLbl];
+//    [promptLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+//
+//        make.left.equalTo(@15);
+//        make.right.equalTo(cancelBtn.mas_left).offset(-10);
+//        make.height.equalTo(@50);
+//        make.top.equalTo(@0);
+//
+//    }];
 }
 
 - (void)initQRView {
@@ -138,7 +138,7 @@
         
     }];
     
-    NSString *text = [LangSwitcher switchLang:@"（点击复制地址) " key:nil];
+    NSString *text = [LangSwitcher switchLang:@"点击复制地址" key:nil];
     CGFloat btnW = [NSString getWidthWithString:text font:12.0];
     //复制
     UIButton *copyBtn = [UIButton buttonWithTitle:text titleColor:kAppCustomMainColor backgroundColor:kClearColor titleFont:12.0];
@@ -192,7 +192,7 @@
     }];
     
     UILabel *textlbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:15.0];
-    textlbl.text = @"地址";
+    textlbl.text = [LangSwitcher switchLang:@"地址" key:nil];
     [self.addressView addSubview:textlbl];
     [textlbl mas_makeConstraints:^(MASConstraintMaker *make) {
         

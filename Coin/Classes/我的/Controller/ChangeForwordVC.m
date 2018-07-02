@@ -238,8 +238,17 @@
         }else{
             //创建
             NSString *pwd = [self.FirstPSWArray componentsJoinedByString:@""];
-            [[NSUserDefaults standardUserDefaults] setObject:pwd forKey:KUserPwd];
+//            [[NSUserDefaults standardUserDefaults] setObject:pwd forKey:KUserPwd];
+            //
             [[NSUserDefaults standardUserDefaults] synchronize];
+            TLDataBase *db = [TLDataBase sharedManager];
+            if ([db.dataBase open]) {
+                NSString *sql = [NSString stringWithFormat:@"UPDATE THAWallet SET PwdKey = '%@' WHERE userId = '%@'",pwd,[TLUser user].userId];
+                BOOL sucess = [db.dataBase executeUpdate:sql];
+                
+                NSLog(@"导入钱包交易密码%d",sucess);
+            }
+            [db.dataBase close];
             [TLAlert alertWithMsg:[LangSwitcher switchLang:@"交易密码修改成功" key:nil]];
             
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{

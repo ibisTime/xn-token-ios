@@ -79,7 +79,7 @@
 - (CGRect)newRect:(CGRect)oldRect {
     
     CGRect newRect = oldRect;
-    newRect.origin.x = newRect.origin.x + 64;
+    newRect.origin.x = newRect.origin.x+20;
     return newRect;
 }
 

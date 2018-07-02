@@ -39,7 +39,7 @@
     TLTextField *phoneTf = [[TLTextField alloc] initWithFrame:CGRectMake(leftMargin, 10, kScreenWidth - 2*leftMargin, 45)
                                                     leftTitle:[LangSwitcher switchLang:@"手机号" key:nil]
                                                    titleWidth:leftW
-                                                  placeholder:[LangSwitcher switchLang:@"请输入新手机号" key:nil]];
+                                                  placeholder:[LangSwitcher switchLang:@"请填写手机号码" key:nil]];
     phoneTf.keyboardType = UIKeyboardTypeNumberPad;
     [self.bgSV addSubview:phoneTf];
     self.phoneTf = phoneTf;
@@ -135,7 +135,7 @@
     
     if (![self.phoneTf.text isPhoneNum]) {
         
-        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入正确的手机号" key:nil]];
+        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"手机号码格式不正确" key:nil]];
         return;
     }
     

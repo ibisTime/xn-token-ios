@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "CoinHeader.h"
 #import "TLUser.h"
+#import "TLDataBase.h"
 #import "TLNavigationController.h"
 @interface TLBaseVC : UIViewController
 

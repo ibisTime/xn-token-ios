@@ -89,23 +89,28 @@
             self.url = [[self class] serveUrl];
         }
         
-        if (![_isShow isEqualToString:@"100"]) {
+       
+        
+        if (self.isLocal == YES) {
             
-            self.parameters[@"systemCode"] = [[self class] systemCode];
-
+        }else{
+            if (self.isUploadToken && [TLUser user].token && [TLUser user].token.length > 0 ) {
+                
+                self.parameters[@"token"] = [TLUser user].token;
+                
+            }
+            if (![_isShow isEqualToString:@"100"]) {
+                
+                self.parameters[@"systemCode"] = [[self class] systemCode];
+                
+            }
         }
-        
-        
         // 此处 巨坑
-        if (self.isUploadToken && [TLUser user].token && [TLUser user].token.length > 0 ) {
-
-            self.parameters[@"token"] = [TLUser user].token;
-
-        }
+       
         
         if (self.ISparametArray == YES) {
             self.parameters[@"systemCode"] = nil;
-
+            self.parameters[@"companyCode"] = nil;
               NSData *data = [NSJSONSerialization dataWithJSONObject:self.parameters options:NSJSONWritingPrettyPrinted error:nil];
             self.parameters = [NSMutableDictionary dictionaryWithCapacity:2];
             self.parameters[@"code"] = self.code;
@@ -173,7 +178,7 @@
               
               //token错误  4
               [TLAlert alertWithTitle:nil
-                              message:@"为了您的账户安全，请重新登录"
+                              message:[LangSwitcher switchLang:@"您的账号已在其他终端登录,重新登录" key:nil]
                         confirmAction:^{
                   [[NSNotificationCenter defaultCenter] postNotificationName:kUserLoginOutNotification object:nil];
               }];

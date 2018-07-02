@@ -54,6 +54,9 @@
     http.parameters = self.parameters;
     http.parameters[@"start"] = [NSString stringWithFormat:@"%ld",self.start];
     http.parameters[@"limit"] = [NSString stringWithFormat:@"%ld",self.limit];
+//    if (self) {
+//        <#statements#>
+//    }
     http.isUploadToken = self.isUploadToken;
     
     [http postWithSuccess:^(id responseObject) {
@@ -170,9 +173,14 @@
     
     TLNetworking *http = [TLNetworking new];
     http.code = self.code;
+    
     http.parameters = self.parameters;
     http.parameters[@"start"] = [NSString stringWithFormat:@"%ld",self.start];
     http.parameters[@"limit"] = [NSString stringWithFormat:@"%ld",self.limit];
+    if (self.isLocal == YES) {
+        http.parameters[@"token"]= nil;
+        
+    }
     http.isUploadToken = self.isUploadToken;
     [http postWithSuccess:^(id responseObject) {
         

@@ -32,7 +32,8 @@
 @implementation BuildSucessVC
 
 - (void)viewDidLoad {
-    self.title = [LangSwitcher switchLang:@"钱包备份" key:nil];
+    self.title = NSLocalizedString(@"钱包备份", nil);
+    
     [self initViews];
 //    self.mnemonics =  [MnemonicUtil getGenerateMnemonics];
 
@@ -64,7 +65,9 @@
     self.nameLable = [UILabel labelWithBackgroundColor:kClearColor textColor:kBlackColor font:14];
     //    self.title = [LangSwitcher switchLang:@"我的" key:nil];
     [self.view addSubview:self.nameLable];
-    self.nameLable.text = [LangSwitcher switchLang:@"重要提示" key:nil];
+    self.nameLable.text = NSLocalizedString(@"重要提示", nil);
+
+//    self.nameLable.text = [LangSwitcher switchLang:@"重要提示" key:nil];
     [self.nameLable mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.view.mas_top).offset(50);
         make.left.equalTo(self.view.mas_left).offset(48);
@@ -76,7 +79,9 @@
     self.messageLable.numberOfLines = 0;
     self.messageLable.backgroundColor = kClearColor;
     self.messageLable.textColor = kHexColor(@"#999999");
-    self.messageLable.text = [LangSwitcher switchLang:@"拥有钱包私钥就能完全控制钱包资产,  因此强烈建议在使用钱包前做好备份,  将钱包私钥保存到安全的地方。"key:nil];
+//    self.messageLable.text = [LangSwitcher switchLang:@"拥有钱包私钥就能完全控制钱包资产,  因此强烈建议在使用钱包前做好备份,  将钱包私钥保存到安全的地方。"key:nil];
+   self.messageLable.text = NSLocalizedString(@"拥有钱包私钥就能完全控制钱包资产,  因此强烈建议在使用钱包前做好备份,  将钱包私钥保存到安全的地方。", nil);
+
     
     [self.messageLable mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.nameLable.mas_bottom).offset(25);
@@ -87,7 +92,9 @@
 
     
     self.buildButton = [UIButton buttonWithImageName:nil cornerRadius:6];
-    NSString *text = [LangSwitcher switchLang:@"立即备份" key:nil];
+//    NSString *text = [LangSwitcher switchLang:@"立即备份" key:nil];
+    NSString *text = NSLocalizedString(@"立即备份", nil);
+
     [self.buildButton setTitle:text forState:UIControlStateNormal];
     self.buildButton.titleLabel.font = [UIFont systemFontOfSize:16];
     
@@ -146,7 +153,21 @@
 {
     //点击备份钱包 生成助记词
     BuildBackUpVC *backUpVC = [BuildBackUpVC new];
-    NSString *word  =[[NSUserDefaults standardUserDefaults] objectForKey:KWalletWord];
+//    NSString *word  =[[NSUserDefaults standardUserDefaults] objectForKey:KWalletWord];
+    TLDataBase *dataBase = [TLDataBase sharedManager];
+    NSString *word;
+    if ([dataBase.dataBase open]) {
+        NSString *sql = [NSString stringWithFormat:@"SELECT Mnemonics from THAWallet where userId = '%@'",[TLUser user].userId];
+        //        [sql appendString:[TLUser user].userId];
+        FMResultSet *set = [dataBase.dataBase executeQuery:sql];
+        while ([set next])
+        {
+            word = [set stringForColumn:@"Mnemonics"];
+            
+        }
+        [set close];
+    }
+    [dataBase.dataBase close];
     if (word.length > 0) {
         self.mnemonics = word;
 //        self.mnemonics = @"marine lazy bind fun panther broken warfare tower captain blouse wet lazy";

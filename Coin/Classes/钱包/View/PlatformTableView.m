@@ -51,7 +51,6 @@ static NSString *platformCell = @"PlatformCell";
     PlatformCell *cell = [tableView dequeueReusableCellWithIdentifier:platformCell forIndexPath:indexPath];
     
     cell.platform = platform;
-    cell.backgroundColor = indexPath.row%2 == 0 ? kBackgroundColor: kWhiteColor;
 
     return cell;
 }

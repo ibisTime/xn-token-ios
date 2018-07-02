@@ -195,8 +195,22 @@
                 self.warnLabel.hidden = YES;
                 NSString *newPwd = [self.oldPSWArray componentsJoinedByString:@""];
 
-                NSString *pwd = [[NSUserDefaults standardUserDefaults] objectForKey:KUserPwd
-                                 ];
+//                NSString *pwd = [[NSUserDefaults standardUserDefaults] objectForKey:KUserPwd];
+                 TLDataBase *dataBase = [TLDataBase sharedManager];
+                 NSString *pwd;
+                 if ([dataBase.dataBase open]) {
+                     NSString *sql = [NSString stringWithFormat:@"SELECT PwdKey from THAWallet where userId = '%@'",[TLUser user].userId];
+                     //        [sql appendString:[TLUser user].userId];
+                     FMResultSet *set = [dataBase.dataBase executeQuery:sql];
+                     while ([set next])
+                     {
+                         pwd = [set stringForColumn:@"PwdKey"];
+                         
+                     }
+                     [set close];
+                 }
+                 [dataBase.dataBase close];
+                                
                 if ([newPwd isEqualToString:pwd]) {
                     //原密码校验正确
                     self.textFiled.text = nil;
@@ -290,8 +304,17 @@
         if (self.IsImport == YES) {
             //导入
             NSString *pwd = [self.FirstPSWArray componentsJoinedByString:@""];
-            [[NSUserDefaults standardUserDefaults] setObject:pwd forKey:KUserPwd];
-            [[NSUserDefaults standardUserDefaults] synchronize];
+//            [[NSUserDefaults standardUserDefaults] setObject:pwd forKey:KUserPwd];
+//            [[NSUserDefaults standardUserDefaults] synchronize];
+//            //
+            TLDataBase *db = [TLDataBase sharedManager];
+            if ([db.dataBase open]) {
+                NSString *sql = [NSString stringWithFormat:@"UPDATE THAWallet SET PwdKey = '%@' WHERE userId = '%@'",pwd,[TLUser user].userId];
+                BOOL sucess = [db.dataBase executeUpdate:sql];
+                
+                NSLog(@"导入钱包交易密码%d",sucess);
+            }
+            [db.dataBase close];
             
             //导入钱包 设置的交易密码
             TLUpdateVC *up = [[TLUpdateVC alloc] init];
@@ -302,8 +325,16 @@
         }else{
             //创建
             NSString *pwd = [self.FirstPSWArray componentsJoinedByString:@""];
-            [[NSUserDefaults standardUserDefaults] setObject:pwd forKey:KUserPwd];
-            [[NSUserDefaults standardUserDefaults] synchronize];
+//            [[NSUserDefaults standardUserDefaults] setObject:pwd forKey:KUserPwd];
+//            [[NSUserDefaults standardUserDefaults] synchronize];
+            TLDataBase *db = [TLDataBase sharedManager];
+            if ([db.dataBase open]) {
+                NSString *sql = [NSString stringWithFormat:@"UPDATE THAWallet SET PwdKey = '%@' WHERE userId = '%@'",pwd,[TLUser user].userId];
+                BOOL sucess = [db.dataBase executeUpdate:sql];
+                
+                NSLog(@"导入钱包交易密码%d",sucess);
+            }
+            [db.dataBase close];
             BuildSucessVC *sucessVC = [BuildSucessVC new];
             TLNavigationController *na = [[TLNavigationController alloc] initWithRootViewController:sucessVC];
             

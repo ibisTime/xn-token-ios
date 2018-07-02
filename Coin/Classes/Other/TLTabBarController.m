@@ -24,7 +24,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    CoinWeakSelf;
+   
     self.delegate = self;
 
     NSArray *titles = @[
@@ -43,7 +44,7 @@
             
             continue;
         }
-        
+       
         [self addChildVCWithTitle:titles[i]
                        controller:VCNames[i]
                       normalImage:imageNames[i]
@@ -55,8 +56,9 @@
     //
     UIView *tabBarBgView = [[UIView alloc] initWithFrame:self.tabBar.bounds];
     tabBarBgView.backgroundColor = [UIColor whiteColor];
-    [self.tabBar insertSubview:tabBarBgView atIndex:0];
-//  self.tabBar.backgroundColor = [UIColor whiteColor];
+    //        //判断点击的Controller是不是需要登录，如果是，那就登录
+    
+    self.tabBar.backgroundColor = [UIColor whiteColor];
 }
 
 
@@ -136,21 +138,21 @@
     if ([AppConfig config].isUploadCheck) {
         
 //        //判断点击的Controller是不是需要登录，如果是，那就登录
-//        if((idx == 1 || idx == 2) && ![TLUser user].isLogin) {
-//
-//            TLUserLoginVC *loginVC = [TLUserLoginVC new];
-//
-//            loginVC.loginSuccess = ^{
-//
-//                weakSelf.selectedIndex = idx;
-//
-//            };
-//
-//            TLNavigationController *nav = [[TLNavigationController alloc] initWithRootViewController:loginVC];
-//            [self presentViewController:nav animated:YES completion:nil];
+        if((idx == 0) && ![TLUser user].isLogin) {
+
+            TLUserLoginVC *loginVC = [TLUserLoginVC new];
+
+            loginVC.loginSuccess = ^{
+
+                weakSelf.selectedIndex = idx;
+
+            };
+
+            TLNavigationController *nav = [[TLNavigationController alloc] initWithRootViewController:loginVC];
+            [self presentViewController:nav animated:YES completion:nil];
             self.selectedIndex = idx;
             
-//        }
+        }
         
     } else {
         
@@ -167,7 +169,22 @@
 //
 //            TLNavigationController *nav = [[TLNavigationController alloc] initWithRootViewController:loginVC];
 //            [self presentViewController:nav animated:YES completion:nil];
+        
+        if((idx == 0) && ![TLUser user].isLogin) {
+            
+            TLUserLoginVC *loginVC = [TLUserLoginVC new];
+            
+            loginVC.loginSuccess = ^{
+                
+                weakSelf.selectedIndex = idx;
+                
+            };
+            
+            TLNavigationController *nav = [[TLNavigationController alloc] initWithRootViewController:loginVC];
+            [self presentViewController:nav animated:YES completion:nil];
             self.selectedIndex = idx;
+            
+        }
             
 //        }
         

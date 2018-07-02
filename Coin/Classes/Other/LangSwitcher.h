@@ -10,7 +10,10 @@
 
 typedef NS_ENUM(NSUInteger, LangType) {
     LangTypeSimple,
-    LangTypeTraditional
+    LangTypeTraditional,
+    LangTypeEnglish,
+    LangTypeKorean,
+    LangTypeJapanese
 };
 
 @interface LangSwitcher : NSObject

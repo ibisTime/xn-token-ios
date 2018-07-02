@@ -38,8 +38,8 @@
             
             if ([responseObject[@"errorCode"] isEqual:@"4"]) {
                 //token错误  4
-                
-                [TLAlert alertWithTitle:nil message:@"为了您的账户安全，请重新登录" confirmAction:^{
+               
+                [TLAlert alertWithTitle:nil message: [LangSwitcher switchLang:@"您的账号已在其他终端登录,重新登录" key:nil] confirmAction:^{
                     
                     [[NSNotificationCenter defaultCenter] postNotificationName:kUserLoginOutNotification
                                                                         object:nil];

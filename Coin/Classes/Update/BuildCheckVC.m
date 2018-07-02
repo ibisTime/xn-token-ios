@@ -305,11 +305,20 @@
 
         NSString *address = [MnemonicUtil getAddressWithPrivateKey:prikey];
         
-        [[NSUserDefaults standardUserDefaults] setObject:self.titleWord forKey:KWalletWord];
-
-        [[NSUserDefaults standardUserDefaults] setObject:prikey forKey:KWalletPrivateKey];
-        [[NSUserDefaults standardUserDefaults] setObject:address forKey:KWalletAddress];
-        [[NSUserDefaults standardUserDefaults] synchronize];
+//        [[NSUserDefaults standardUserDefaults] setObject:self.titleWord forKey:KWalletWord];
+//
+//        [[NSUserDefaults standardUserDefaults] setObject:prikey forKey:KWalletPrivateKey];
+//        [[NSUserDefaults standardUserDefaults] setObject:address forKey:KWalletAddress];
+//        [[NSUserDefaults standardUserDefaults] synchronize];
+        NSString *user = [TLUser user].userId;
+        //创建钱包后 储存助记伺 地址 私钥
+        TLDataBase *dateBase = [TLDataBase sharedManager];
+        if ([dateBase.dataBase open]) {
+            BOOL sucess = [dateBase.dataBase executeUpdate:@"insert into THAWallet(userId,Mnemonics,wanAddress,wanPrivate,ethPrivate,ethAddress) values(?,?,?,?,?,?)",user,self.titleWord,address,prikey,prikey,address];
+            
+            NSLog(@"插入地址私钥%d",sucess);
+        }
+      
         NSString *text = [LangSwitcher switchLang:@"助记词顺序验证通过,请妥善保管助记词" key:nil];
         
         [TLAlert alertWithMsg:text];

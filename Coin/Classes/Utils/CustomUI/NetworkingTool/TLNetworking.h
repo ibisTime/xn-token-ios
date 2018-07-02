@@ -25,6 +25,7 @@
 @property (nonatomic, copy) NSString *isShow;
 @property (nonatomic, assign) BOOL disableLog;
 @property (nonatomic, assign)  BOOL ISparametArray;
+@property (nonatomic, assign) BOOL isLocal;
 
 
 - (NSURLSessionDataTask *)postWithSuccess:(void (^)(id responseObject))success failure:(void (^)(NSError *error))failure;

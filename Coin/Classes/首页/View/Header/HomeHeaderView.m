@@ -38,7 +38,7 @@
     
     self = [super initWithFrame:frame];
     if (self) {
-        
+        self.backgroundColor = kWhiteColor;
         //轮播图
         [self initBannerView];
         //统计
@@ -55,7 +55,7 @@
     CoinWeakSelf;
     
     //顶部轮播
-    TLBannerView *bannerView = [[TLBannerView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kWidth(185))];
+    TLBannerView *bannerView = [[TLBannerView alloc] initWithFrame:CGRectMake(15, 0, kScreenWidth-30, kHeight(138))];
     
     bannerView.selected = ^(NSInteger index) {
         
@@ -225,68 +225,73 @@
     iconIV.backgroundColor = kAppCustomMainColor;
 
     [self.applicationView addSubview:iconIV];
-    [iconIV mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.left.equalTo(@15);
-        make.top.equalTo(@14);
-        make.width.equalTo(@3);
-        make.height.equalTo(@11);
-    }];
+//    [iconIV mas_makeConstraints:^(MASConstraintMaker *make) {
+//
+//        make.left.equalTo(@15);
+//        make.top.equalTo(@14);
+//        make.width.equalTo(@3);
+//        make.height.equalTo(@11);
+//    }];
     
     //商业应用
     UILabel *textLbl = [UILabel labelWithBackgroundColor:kClearColor
-                                               textColor:kTextColor
-                                                    font:15.0];
-    textLbl.text = [LangSwitcher switchLang:@"商业应用" key:nil];
-    [self addSubview:textLbl];
+                                               textColor:kTextBlack
+                                                    font:16.0];
+    textLbl.text = [LangSwitcher switchLang:@"推荐应用" key:nil];
+    [self.applicationView addSubview:textLbl];
     [textLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.left.equalTo(iconIV.mas_right).offset(10);
-        make.centerY.equalTo(iconIV.mas_centerY);
+        make.left.equalTo(@15);
+        make.top.equalTo(@15);
     }];
     
     //topLine
-    UIView *topLine = [[UIView alloc] init];
+//    UIView *topLine = [[UIView alloc] init];
+//
+//    topLine.backgroundColor = kLineColor;
+//
+//    [self.applicationView addSubview:topLine];
+//    [topLine mas_makeConstraints:^(MASConstraintMaker *make) {
+//
+//        make.left.right.equalTo(@0);
+//        make.top.equalTo(@40);
+//        make.height.equalTo(@0.5);
+//    }];
     
-    topLine.backgroundColor = kLineColor;
-    
-    [self.applicationView addSubview:topLine];
-    [topLine mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.left.right.equalTo(@0);
-        make.top.equalTo(@40);
-        make.height.equalTo(@0.5);
-    }];
-    
-    NSArray *textArr = @[@"币生币",
-                         @"THA星球",
-                         @"余币宝"];
+    NSArray *textArr = @[@"首创玩法",
+                         @"余币宝",
+                         @"量化理财"];
     
     [textArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         
-        CGFloat width = kScreenWidth/3.0;
-
-        UIButton *btn = [UIButton buttonWithTitle:obj
-                                            titleColor:kTextColor2
+        CGFloat width = (kScreenWidth-60)/3;
+        
+        UIButton *btn = [UIButton buttonWithTitle:[LangSwitcher switchLang:obj key:nil]
+                                            titleColor:kWhiteColor
                                        backgroundColor:kClearColor
                                              titleFont:15.0];
         
         [btn setImage:kImage(obj) forState:UIControlStateNormal];
-        
+        [btn setBackgroundImage:kImage(obj) forState:UIControlStateNormal];
         btn.contentMode = UIViewContentModeScaleAspectFit;
         btn.tag = 1500 + idx;
         [btn addTarget:self action:@selector(clickButton:) forControlEvents:UIControlEventTouchUpInside];
-        
+        UILabel *textLab = [UILabel labelWithBackgroundColor:kClearColor textColor:kWhiteColor font:15];
+        [btn addSubview:textLab];
+        textLab.text = [LangSwitcher switchLang:obj key:nil];
+        [textLab mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.left.equalTo(@12);
+        }];
         [self.applicationView addSubview:btn];
         [btn mas_makeConstraints:^(MASConstraintMaker *make) {
             
-            make.top.equalTo(topLine.mas_bottom);
-            make.left.equalTo(@(idx*width));
-            make.width.height.equalTo(@(width));
-            make.height.equalTo(@94.5);
+            make.top.equalTo(textLbl.mas_bottom).offset(15);
+            make.left.equalTo(@(idx*width+(idx+1)*15));
+            make.width.equalTo(@(width));
+            make.height.equalTo(@110);
         }];
         
-        [btn setTitleBottom];
+//        [btn setTitleBottom];
     }];
     
 }

@@ -10,7 +10,7 @@
 #import "CaptchaView.h"
 #import "NSString+Check.h"
 #import "APICodeMacro.h"
-
+#import "UIBarButtonItem+convience.h"
 @interface TLUserForgetPwdVC ()
 
 @property (nonatomic,strong) TLTextField *phoneTf;
@@ -24,7 +24,13 @@
 @end
 
 @implementation TLUserForgetPwdVC
+-(void)viewWillAppear:(BOOL)animated
+{
+    
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBar.hidden = NO;
 
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -38,56 +44,98 @@
 
 - (void)initSubviews {
 
-    self.view.backgroundColor = kBackgroundColor;
+    self.view.backgroundColor = kWhiteColor;
     
     CGFloat margin = ACCOUNT_MARGIN;
     CGFloat w = kScreenWidth - 2*margin;
     CGFloat h = ACCOUNT_HEIGHT;
     
     CGFloat btnMargin = 15;
-    
+    UILabel *lab = [UILabel labelWithBackgroundColor:kWhiteColor textColor:kBlackColor font:30];
+    lab.text = @"找回!";
+    [self.view addSubview:lab];
+    [lab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(@40);
+        make.left.equalTo(@30);
+        
+        
+    }];
     //账号
-    TLTextField *phoneTf = [[TLTextField alloc] initWithFrame:CGRectMake(margin, 10, w, h) leftTitle:[LangSwitcher switchLang:@"手机号" key:nil] titleWidth:100 placeholder:[LangSwitcher switchLang:@"请输入手机号" key:nil]];
+    UILabel *sureLab = [UILabel labelWithTitle:@"手机号" frame:CGRectMake(20, kHeight(122), w, 22)];
+    sureLab.font = [UIFont systemFontOfSize:14];
+    sureLab.textAlignment = NSTextAlignmentLeft;
+    sureLab.textColor = kTextColor;
+    [self.view addSubview:sureLab];
+    TLTextField *phoneTf = [[TLTextField alloc] initWithFrame:CGRectMake(margin, sureLab.yy, w, h) leftTitle:[LangSwitcher switchLang:@"" key:nil] titleWidth:20 placeholder:[LangSwitcher switchLang:@"请输入手机号" key:nil]];
     phoneTf.keyboardType = UIKeyboardTypeNumberPad;
     [self.view addSubview:phoneTf];
     self.phoneTf = phoneTf;
-    
+    UIView *phone = [[UIView alloc] init];
+    [self.view addSubview:phone];
+    phone.backgroundColor = kLineColor;
+    phone.frame = CGRectMake(btnMargin, phoneTf.yy, w-30, 1);
     //验证码
-    CaptchaView *captchaView = [[CaptchaView alloc] initWithFrame:CGRectMake(margin, phoneTf.yy + 1, w, h)];
+    
+    UILabel *codeLab = [UILabel labelWithTitle:@"验证码" frame:CGRectMake(20, phoneTf.yy, w, 22)];
+    codeLab.font = [UIFont systemFontOfSize:14];
+    codeLab.textAlignment = NSTextAlignmentLeft;
+    codeLab.textColor = kTextColor;
+    [self.view addSubview:codeLab];
+    CaptchaView *captchaView = [[CaptchaView alloc] initWithFrame:CGRectMake(margin, codeLab.yy + 1, w, h)];
     [captchaView.captchaBtn addTarget:self action:@selector(sendCaptcha) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:captchaView];
     
     self.captchaView = captchaView;
-    
+    UIView *phone2 = [[UIView alloc] init];
+    [self.view addSubview:phone2];
+    phone2.backgroundColor = kLineColor;
+    phone2.frame = CGRectMake(btnMargin, captchaView.yy, w-30, 1);
     //密码
-    TLTextField *pwdTf = [[TLTextField alloc] initWithFrame:CGRectMake(margin, captchaView.yy + 10, w, h) leftTitle:[LangSwitcher switchLang:@"新密码" key:nil] titleWidth:100 placeholder:[LangSwitcher switchLang:@"请输入密码" key:nil]];
+    UILabel *pwdLab = [UILabel labelWithTitle:@"密码" frame:CGRectMake(20, captchaView.yy, w, 22)];
+    pwdLab.font = [UIFont systemFontOfSize:14];
+    pwdLab.textAlignment = NSTextAlignmentLeft;
+    pwdLab.textColor = kTextColor;
+    [self.view addSubview:pwdLab];
+    
+    TLTextField *pwdTf = [[TLTextField alloc] initWithFrame:CGRectMake(margin, pwdLab.yy + 10, w, h) leftTitle:[LangSwitcher switchLang:@"" key:nil] titleWidth:20 placeholder:[LangSwitcher switchLang:@"请输入密码" key:nil]];
     pwdTf.secureTextEntry = YES;
     
     [self.view addSubview:pwdTf];
     self.pwdTf = pwdTf;
-    
+    UIView *phone3 = [[UIView alloc] init];
+    [self.view addSubview:phone3];
+    phone3.backgroundColor = kLineColor;
+    phone3.frame = CGRectMake(btnMargin, pwdTf.yy, w-30, 1);
     //re密码
-    TLTextField *rePwdTf = [[TLTextField alloc] initWithFrame:CGRectMake(margin, pwdTf.yy + 1, w, h) leftTitle:[LangSwitcher switchLang:@"确认密码" key:nil] titleWidth:100 placeholder:[LangSwitcher switchLang:@"确认密码" key:nil]];
+    UILabel *pLab = [UILabel labelWithTitle:@"密码" frame:CGRectMake(20, pwdTf.yy, w, 22)];
+    pLab.font = [UIFont systemFontOfSize:14];
+    pLab.textAlignment = NSTextAlignmentLeft;
+    pLab.textColor = kTextColor;
+    [self.view addSubview:pLab];
+    TLTextField *rePwdTf = [[TLTextField alloc] initWithFrame:CGRectMake(margin, pLab.yy + 1, w, h) leftTitle:[LangSwitcher switchLang:@"" key:nil] titleWidth:20 placeholder:[LangSwitcher switchLang:@"确认密码" key:nil]];
     rePwdTf.secureTextEntry = YES;
     [self.view addSubview:rePwdTf];
     self.rePwdTf = rePwdTf;
-    
-    for (int i = 0; i < 2; i++) {
-        
-        UIView *line = [[UIView alloc] init];
-        
-        line.backgroundColor = [UIColor lineColor];
-        
-        [self.view addSubview:line];
-        [line mas_makeConstraints:^(MASConstraintMaker *make) {
-            
-            make.left.mas_equalTo(margin);
-            make.right.mas_equalTo(0);
-            make.height.mas_equalTo(0.5);
-            make.top.mas_equalTo(10 + h + i*(2*h + 10 + 1));
-            
-        }];
-    }
+    UIView *phone4 = [[UIView alloc] init];
+    [self.view addSubview:phone4];
+    phone4.backgroundColor = kLineColor;
+    phone4.frame = CGRectMake(btnMargin, rePwdTf.yy, w-30, 1);
+//    for (int i = 0; i < 2; i++) {
+//
+//        UIView *line = [[UIView alloc] init];
+//
+//        line.backgroundColor = [UIColor lineColor];
+//
+//        [self.view addSubview:line];
+//        [line mas_makeConstraints:^(MASConstraintMaker *make) {
+//
+//            make.left.mas_equalTo(margin);
+//            make.right.mas_equalTo(0);
+//            make.height.mas_equalTo(0.5);
+//            make.top.mas_equalTo(10 + h + i*(2*h + 10 + 1));
+//
+//        }];
+//    }
     
     //
     UIButton *confirmBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"确认" key:nil] titleColor:kWhiteColor backgroundColor:kAppCustomMainColor titleFont:16.0 cornerRadius:5];

@@ -37,6 +37,8 @@
 #import "BuildWalletMineVC.h"
 #import "TLTabBarController.h"
 #import <FMDB/FMDB.h>
+#import "TLDataBase.h"
+#import "TLUserLoginVC.h"
 //#import "TLPublishInputView.h"      czy
 
 @interface AppDelegate ()
@@ -53,8 +55,9 @@
 //    [NSThread sleepForTimeInterval:2];
     
     //服务器环境
-    [AppConfig config].runEnv = RunEnvTest;
+    [AppConfig config].runEnv = RunEnvDev;
     [AppConfig config].isChecking = NO;
+#warning  //pods 更新后会导致wan币转账失败
 //    [AppConfig config].isUploadCheck = YES;
     self.respHandler = [[RespHandler alloc] init];
      
@@ -64,18 +67,20 @@
     
     //配置键盘
     [self configIQKeyboard];
-    
+   
     //配置根控制器
     [self configRootViewController];
     
     //初始化为繁体
     [LangSwitcher startWithTraditional];
+    //初始化数据库
     
-    self.dataStr = [self dataFilePath];
-//    [self createTable];
-//    if (dataFilePath) {
-//        KDataBase = dataFilePath;
-//    }
+    ;
+    if ([[TLDataBase sharedManager].dataBase open]) {
+//        [ [TLDataBase sharedManager].dataBase executeUpdate:@"UPDATE THAWallet SET userId='China'"];
+
+        NSLog(@"数据库打开成功");
+    }
 
     //退出登录消息通知
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -184,7 +189,7 @@
     if ([tabbarContrl isKindOfClass:[BuildWalletMineVC class]]) {
         return;
     }
-    tabbarContrl.selectedIndex = 0;
+    tabbarContrl.selectedIndex = 2;
     [tabbarContrl.tabBar hideBadgeOnItemIndex:4];
     //应用外数量为0
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
@@ -245,27 +250,37 @@
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     
-    if (![AppConfig config].isChecking) {
-        //先配置到，检查更新的VC,开启更新检查
-        BuildWalletMineVC *MineVC = [[BuildWalletMineVC alloc] init];
-        TLNavigationController *na = [[TLNavigationController alloc] initWithRootViewController:MineVC];
-        NSString *word = [[NSUserDefaults standardUserDefaults] objectForKey:KWalletWord];
-        if (word.length > 0) {
+//    if (![AppConfig config].isChecking) {
+//        //先配置到，检查更新的VC,开启更新检查
+//        BuildWalletMineVC *MineVC = [[BuildWalletMineVC alloc] init];
+//        TLNavigationController *na = [[TLNavigationController alloc] initWithRootViewController:MineVC];
+//        NSString *name;
+//        TLDataBase *db = [TLDataBase sharedManager];
+//        if ([db.dataBase open]) {
+//            FMResultSet *set = [db.dataBase executeQuery:@"SELECT Mnemonics from THAWallet"];
+//            while ([set next])
+//            {
+//                name = [set stringForColumn:@"Mnemonics"];
+//
+//            }
+//            [set close];
+//
+//        }
+//
+//        [db.dataBase close];
+////        NSString *word = [[NSUserDefaults standardUserDefaults] objectForKey:KWalletWord];
+//
+//    }
+        if (![AppConfig config].isChecking) {
             TLUpdateVC *updateVC = [[TLUpdateVC alloc] init];
+            if ([TLUser user].checkLogin == NO) {
+                
+            }
             self.window.rootViewController = updateVC;
         }else{
-        TLUpdateVC *updateVC = [[TLUpdateVC alloc] init];
-        self.window.rootViewController = na;
+            TLTabBarController *tabBarCtrl = [[TLTabBarController alloc] init];
+            self.window.rootViewController = tabBarCtrl;
         }
-
-    } else {
-        
-        //检查更新过后再
-//        BuildWalletMineVC *MineVC = [[BuildWalletMineVC alloc] init];
-        TLTabBarController *tabBarCtrl = [[TLTabBarController alloc] init];
-        self.window.rootViewController = tabBarCtrl;
-        
-    }
     
 }
 
@@ -410,7 +425,7 @@
         NSLog(@"还未创建数据库，现在正在创建数据库");
         if([db open]) {
             
-            [db executeUpdate:@"create table if not exists THAWallet.sqlite (name text, address text, id text)"];
+            [db executeUpdate:@"create table if not exists THAWallet(userId text, Mnemonics text, wanAddress text,btcAddress text,ethAddress text,ethPrivate text,btcPrivate text,wanPrivate text)"];
             
             [db close];
         }else{

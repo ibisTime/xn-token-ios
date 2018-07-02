@@ -21,7 +21,7 @@
 #import "CurrencyModel.h"
 
 #import "AccountTf.h"
-
+#import "ChooseCountryVc.h"
 //腾讯云
 //#import "ChatManager.h"   czy
 //#import "IMModel.h"
@@ -30,19 +30,21 @@
 
 @interface TLUserLoginVC ()
 
-@property (nonatomic,strong) AccountTf *phoneTf;
+@property (nonatomic,strong) TLTextField *phoneTf;
 @property (nonatomic,strong) AccountTf *pwdTf;
 
 @property (nonatomic, copy) NSString *verifyCode;
 
 @property (nonatomic, copy) NSString *mobile;
 
+@property (nonatomic ,strong) UIButton *accessoryImageView;
+
 @end
 
 @implementation TLUserLoginVC
 
 - (void)viewWillAppear:(BOOL)animated {
-    
+    self.navigationController.navigationBar.hidden = YES;
     [super viewWillAppear:animated];
 }
 
@@ -64,9 +66,9 @@
 - (void)setBarButtonItem {
 
     //取消按钮
-    [UIBarButtonItem addLeftItemWithImageName:kCancelIcon frame:CGRectMake(-30, 0, 80, 44) vc:self action:@selector(back)];
+   [UIBarButtonItem addLeftItemWithImageName:kCancelIcon frame:CGRectMake(-30, 0, 80, 44) vc:self action:@selector(back)];
     //注册
-    [UIBarButtonItem addRightItemWithTitle:[LangSwitcher switchLang:@"注册" key:nil] titleColor:kTextColor frame:CGRectMake(0, 0, 60, 44) vc:self action:@selector(goReg)];
+//    [UIBarButtonItem addRightItemWithTitle:[LangSwitcher switchLang:@"注册" key:nil] titleColor:kTextColor frame:CGRectMake(0, 0, 60, 44) vc:self action:@selector(goReg)];
 }
 
 - (void)setUpUI {
@@ -76,63 +78,150 @@
     CGFloat w = kScreenWidth;
     CGFloat h = ACCOUNT_HEIGHT;
     
-    UIView *bgView = [[UIView alloc] init];
+    UIImageView *imageView = [[UIImageView alloc] init];
+    imageView.contentMode = UIViewContentModeScaleToFill;
+    [self.view addSubview:imageView];
+    imageView.userInteractionEnabled  = YES;
+    imageView.image = kImage(@"登录背景");
+    [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.top.mas_equalTo(@(0));
+        make.left.mas_equalTo(0);
+        make.bottom.mas_equalTo(0);
+        make.right.mas_equalTo(0);
+        
+    }];
+    
+    UIImageView *logoView = [[UIImageView alloc] init];
+    logoView.contentMode = UIViewContentModeScaleToFill;
+    [imageView addSubview:logoView];
+    logoView.image = kImage(@"logo");
+    [logoView mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.top.mas_equalTo(@(43+kStatusBarHeight));
+        make.centerX.mas_equalTo(imageView.mas_centerX);
+        make.width.mas_equalTo(@(kWidth(108)));
+        make.height.mas_equalTo(@(kHeight(49)));
+        
+    }];
+    
+     UIView *bgView = [[UIView alloc] init];
     
     bgView.backgroundColor = kWhiteColor;
+    bgView.layer.cornerRadius = 12;
+    bgView.clipsToBounds = YES;
     
     [self.view addSubview:bgView];
     [bgView mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.top.equalTo(@(10));
-        make.left.mas_equalTo(0);
-        make.height.mas_equalTo(2*h + 1);
-        make.width.mas_equalTo(w);
+        make.top.equalTo(@(kHeight(139)));
+        make.left.mas_equalTo(20);
+        make.height.mas_equalTo(@(kHeight(416)));
+        make.width.mas_equalTo(w-40);
         
     }];
     
+    //找回密码
+    UIButton *registBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"立即注册" key:nil] titleColor:kAppCustomMainColor backgroundColor:kWhiteColor titleFont:14.0];
+    
+//    registBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+    [registBtn addTarget:self action:@selector(goReg) forControlEvents:UIControlEventTouchUpInside];
+    [imageView addSubview:registBtn];
+    
+    [registBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.centerX.equalTo(bgView.mas_centerX);
+        make.top.equalTo(bgView.mas_bottom).offset(0);
+        make.width.equalTo(@(kWidth(295)));
+        make.height.equalTo(@(52));
+
+        
+    }];
+    
+    UILabel *titleLab = [UILabel labelWithBackgroundColor:kClearColor textColor:kBlackColor font:30];
+    [bgView addSubview:titleLab];
+    titleLab.text = [LangSwitcher switchLang:@"欢迎回来!" key:nil];
+    [titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.top.equalTo(@30);
+        make.left.mas_equalTo(20);
+    }];
     //账号
-    AccountTf *phoneTf = [[AccountTf alloc] initWithFrame:CGRectMake(0, 0, w, h)];
-    phoneTf.leftIconView.image = [UIImage imageNamed:@"手机"];
-    phoneTf.placeHolder = [LangSwitcher switchLang:@"请输入手机号码" key:nil];
-    [bgView addSubview:phoneTf];
-    self.phoneTf = phoneTf;
-    phoneTf.keyboardType = UIKeyboardTypeNumberPad;
+    UILabel *titlePhpne = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:14];
+    [bgView addSubview:titlePhpne];
+    titlePhpne.text = [LangSwitcher switchLang:@"中国" key:nil];
+    [titlePhpne mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.top.equalTo(titleLab.mas_bottom).offset(40);
+        make.left.mas_equalTo(20);
+    }];
+    
+    TLTextField *phone = [[TLTextField alloc] initWithFrame:CGRectMake(20, kHeight(134), w, h) leftTitle:[LangSwitcher switchLang:@"+86" key:nil] titleWidth:50 placeholder:[LangSwitcher switchLang:@"请输入手机号" key:nil]];
+    phone.keyboardType = UIKeyboardTypeNumberPad;
+    AccountTf *phoneTf = [[AccountTf alloc] initWithFrame:CGRectMake(0, kHeight(134), w-40, h)];
+//    phoneTf.leftIconView.image = [UIImage imageNamed:@"手机"];
+    
+//    phoneTf.placeHolder = [LangSwitcher switchLang:@"请输入手机号码" key:nil];
+    [bgView addSubview:phone];
+    self.phoneTf = phone;
+    phone.keyboardType = UIKeyboardTypeNumberPad;
+
+    self.accessoryImageView = [[UIButton alloc] init];
+    [bgView addSubview:self.accessoryImageView];
+    [self.accessoryImageView setImage:kImage(@"更多-灰色") forState:UIControlStateNormal];
+    [self.accessoryImageView addTarget:self action:@selector(chooseCountry) forControlEvents:UIControlEventTouchUpInside];
+    [self.accessoryImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.centerY.equalTo(titlePhpne.mas_centerY).offset(0);
+        make.right.mas_equalTo(-20);
+        make.width.height.equalTo(@40);
+    }];
+    
+    
+    UIView *lineView = [[UIView alloc] init];
+    lineView.backgroundColor = kLineColor;
+    [bgView addSubview:lineView];
+    lineView.frame = CGRectMake(20, phoneTf.yy, w-40-40, 2);
     
     
     //密码
-    AccountTf *pwdTf = [[AccountTf alloc] initWithFrame:CGRectMake(0, phoneTf.yy + 1, w, h)];
+    AccountTf *pwdTf = [[AccountTf alloc] initWithFrame:CGRectMake(0, phoneTf.yy + 3, w-40, h)];
     pwdTf.secureTextEntry = YES;
-    pwdTf.leftIconView.image = [UIImage imageNamed:@"密码"];
+//    pwdTf.leftIconView.image = [UIImage imageNamed:@"密码"];
     pwdTf.placeHolder = [LangSwitcher switchLang:@"请输入密码" key:nil];
     [bgView addSubview:pwdTf];
     self.pwdTf = pwdTf;
+    UIView *line = [[UIView alloc] init];
+    line.backgroundColor = kLineColor;
+    [bgView addSubview:line];
+    line.frame = CGRectMake(20, pwdTf.yy, w-40-40, 2);
     
-    for (int i = 0; i < 2; i++) {
-        
-        UIView *line = [[UIView alloc] init];
-        
-        line.backgroundColor = kLineColor;
-        
-        [bgView addSubview:line];
-        [line mas_makeConstraints:^(MASConstraintMaker *make) {
-            
-            make.left.mas_equalTo(0);
-            make.right.mas_equalTo(0);
-            make.height.mas_equalTo(0.5);
-            make.top.mas_equalTo((i+1)*h);
-            
-        }];
-    }
+//    for (int i = 0; i < 2; i++) {
+//
+//        UIView *line = [[UIView alloc] init];
+//
+//        line.backgroundColor = kLineColor;
+//
+//        [bgView addSubview:line];
+//        [line mas_makeConstraints:^(MASConstraintMaker *make) {
+//
+//            make.left.mas_equalTo(0);
+//            make.right.mas_equalTo(0);
+//            make.height.mas_equalTo(0.5);
+//            make.top.mas_equalTo((i+1)*h);
+//
+//        }];
+//    }
     //登录
     UIButton *loginBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"登录" key:nil] titleColor:kWhiteColor backgroundColor:kAppCustomMainColor titleFont:17.0 cornerRadius:5];
     [loginBtn addTarget:self action:@selector(goLogin) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:loginBtn];
+    [bgView addSubview:loginBtn];
     [loginBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.left.equalTo(@(15));
-        make.height.equalTo(@(h - 5));
-        make.right.equalTo(@(-15));
-        make.top.equalTo(bgView.mas_bottom).offset(28);
+        make.left.equalTo(@(20));
+        make.height.equalTo(@(h ));
+        make.right.equalTo(@(-20));
+        make.top.equalTo(pwdTf.mas_bottom).offset(30);
         
     }];
     
@@ -145,7 +234,7 @@
     
     [forgetPwdBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.right.equalTo(loginBtn.mas_right);
+        make.centerX.equalTo(loginBtn.mas_centerX);
         make.top.equalTo(loginBtn.mas_bottom).offset(18);
 
     }];
@@ -161,10 +250,23 @@
 
 #pragma mark - Events
 
+- (void)chooseCountry
+{
+    
+    //选择国家 设置区号
+    
+    ChooseCountryVc *countryVc = [ChooseCountryVc new];
+    [self presentViewController:countryVc animated:YES completion:nil];
+}
+
 - (void)back {
     
+    if (self.NeedLogin == YES) {
+        [self.navigationController popViewControllerAnimated:YES];
+        return;
+    }
     [self.view endEditing:YES];
-    
+ 
     [self dismissViewControllerAnimated:YES completion:nil];
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -270,6 +372,7 @@
             self.loginSuccess();
         }
         
+        self.NeedLogin = NO;
         [[NSNotificationCenter defaultCenter] postNotificationName:kUserLoginNotification object:nil];
         [self.navigationController popToRootViewControllerAnimated:YES];
         

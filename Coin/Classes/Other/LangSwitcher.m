@@ -11,6 +11,9 @@
 
 #define SIMPLE @"simple"
 #define TRADITIONAL @"Traditional"
+#define ENGLISH @"English"
+#define KOREAN @"Korean"
+#define Japanese @"Japanese"
 
 
 #define LANG @"LANG"
@@ -23,9 +26,15 @@
     NSString *lang = [[NSUserDefaults standardUserDefaults] objectForKey:LANG];
     if (!lang || [lang isEqualToString:SIMPLE]) {
         return content;
+    }else if ([lang isEqualToString:TRADITIONAL])
+    {
+        return [ZMChineseConvert convertSimplifiedToTraditional:content];
+    }else{
+        
+        return NSLocalizedString(content, key);
+        
     }
-
-   return [ZMChineseConvert convertSimplifiedToTraditional:content];
+    
     
 }
 
@@ -43,6 +52,15 @@
     if ([lang isEqualToString:TRADITIONAL]) {
         return LangTypeTraditional;
     }
+    if ([lang isEqualToString:ENGLISH]) {
+        return LangTypeEnglish;
+    }
+    if ([lang isEqualToString:KOREAN]) {
+        return LangTypeKorean;
+        
+    }if ([lang isEqualToString:Japanese]) {
+        return LangTypeJapanese;
+    }
 
     return LangTypeSimple;
     
@@ -54,7 +72,10 @@
     
     NSDictionary *dict = @{
                            SIMPLE : @"简体中文",
-                           TRADITIONAL : @"繁体中文"
+                           TRADITIONAL : @"繁体中文",
+                           ENGLISH : @"英文",
+                           KOREAN : @"韩文",
+                           Japanese : @"日文"
                            };
     
     NSString *lang = [[NSUserDefaults standardUserDefaults] objectForKey:LANG];
@@ -81,6 +102,21 @@
 
         } break;
 
+        case LangTypeEnglish: {
+            [userDefaults setObject:ENGLISH forKey:LANG];
+
+            break;
+        }
+        case LangTypeKorean: {
+            [userDefaults setObject:KOREAN forKey:LANG];
+
+            break;
+        }
+        case LangTypeJapanese: {
+            [userDefaults setObject:Japanese forKey:LANG];
+
+            break;
+        }
     }
     
 }
@@ -90,8 +126,38 @@
     NSString *lang = [[NSUserDefaults standardUserDefaults] objectForKey:LANG];
     if (!lang || lang.length <= 0) {
         
-        [self changLangType:LangTypeTraditional];
+        //获取手机当前语言
+        NSString *currentLanguage = [[NSLocale preferredLanguages] objectAtIndex:0];
+        if ([currentLanguage isEqualToString:@"en-US"]) {
+            [self changLangType:LangTypeEnglish];
+
+            //英文
+        }else if ([currentLanguage isEqualToString:@"ko-US"])
+        {//韩文
+            [self changLangType:LangTypeKorean];
+
+            
+        }else if ([currentLanguage isEqualToString:@"ja-US"])
+        {//日文
+            [self changLangType:LangTypeJapanese];
+
+            
+        }
+        else if ([currentLanguage isEqualToString:@"zh-Hant-US"]||[currentLanguage isEqualToString:@"zh-Hant-HK"])
+        {//繁体
+            [self changLangType:LangTypeTraditional];
+
+            
+        }else if ([currentLanguage isEqualToString:@"zh-Hans-US"])
+        {//简体
+            [self changLangType:LangTypeSimple];
+
+        }
+        
     }
+//    NSString *currentLanguage = [[NSLocale preferredLanguages] objectAtIndex:0];
+//    NSLog(@"currentlanguage = %@ alllanguage%@",currentLanguage,[NSLocale preferredLanguages]);
+//zh-Hant-US zh-Hans-US
     
 }
 

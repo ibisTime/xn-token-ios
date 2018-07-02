@@ -64,7 +64,7 @@
     [super viewDidLoad];
     //
     self.title = [LangSwitcher switchLang:@"发现" key:nil];
-    
+    self.view.backgroundColor = kWhiteColor;
     [self initTableView];
     
     [CoinUtil refreshOpenCoinList:^{
@@ -90,7 +90,7 @@
     
     self.tableView = [[HomeTableView alloc] initWithFrame:CGRectZero
                                                     style:UITableViewStyleGrouped];
-    
+    self.tableView.backgroundColor = kWhiteColor;
         self.tableView.tableHeaderView = self.headerView;
 //    self.tableView.refreshDelegate = self;
 //        [self.tableView adjustsContentInsets];
@@ -133,7 +133,7 @@
         
         CoinWeakSelf;
         //头部
-        _headerView = [[HomeHeaderView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kWidth(185) + 305)];
+        _headerView = [[HomeHeaderView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kHeight(185) + kHeight(305))];
         
         _headerView.headerBlock = ^(HomeEventsType type, NSInteger index) {
             

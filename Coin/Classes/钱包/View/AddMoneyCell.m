@@ -91,7 +91,7 @@
         
         make.right.equalTo(@-15);
         make.centerY.equalTo(self.coinIV.mas_centerY);
-        make.width.height.equalTo(@20);
+        make.width.height.equalTo(@40);
         
     }];
     
@@ -123,61 +123,11 @@
     
     //    self.coinIV.image = kImage(_currency.getImgName);
     
-//    CoinModel *coin = [CoinUtil getCoinModel:currency.currency];
+    CoinModel *coin = [CoinUtil getCoinModel:currency.symbol];
     self.currencyNameLbl.text = [NSString stringWithFormat:@"%@",currency.symbol];
-    if ([currency.symbol isEqualToString:@"WAN"]) {
-        self.coinIV.image = [UIImage imageNamed:@"wan"];
-    }else if ([currency.symbol isEqualToString:@"ETH"])
-    {
-        self.coinIV.image = [UIImage imageNamed:@"eth"];
-    }
-    NSArray *a = [[NSUserDefaults standardUserDefaults] objectForKey:@"localArray"];
-    if (a.count == 1) {
-        for (NSMutableDictionary*Dictionary in a) {
-            
-            NSString *symbol = [Dictionary objectForKey:@"symbol"];
-            if (symbol == currency.symbol) {
-                self.selectButton.selected = YES;
+    self.selectButton.selected = currency.IsSelected;
 
-            }else
-            {
-                self.selectButton.selected = NO;
-
-                
-            }
-            
-        }
-        
-    }else if(a.count == 2)
-    {
-        {
-            for (NSMutableDictionary*Dictionary in a) {
-                
-                NSString *symbol = [Dictionary objectForKey:@"symbol"];
-                if (symbol == currency.symbol) {
-                    self.selectButton.selected = YES;
-                    
-                }else
-                {
-                    self.selectButton.selected = YES;
-                    
-                    
-                }
-                
-            }
-            
-        }
-        
-    }else
-    {
-        self.selectButton.selected = currency.IsSelected;
-
-        
-    }
-   
-   
-
-//    [self.coinIV sd_setImageWithURL:[NSURL URLWithString:[coin.pic1 convertImageUrl]]];
+    [self.coinIV sd_setImageWithURL:[NSURL URLWithString:[coin.pic1 convertImageUrl]]];
     
 //    NSString *leftAmount = [_currency.amountString subNumber:_currency.frozenAmountString];
     

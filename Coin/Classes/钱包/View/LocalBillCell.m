@@ -177,16 +177,16 @@
         
         
     }
-    if ([self.currencyModel.symbol isEqualToString:@"ETH"]) {
-        self.iconIV.image = kImage(@"eth");
-    }else if ([self.currencyModel.symbol isEqualToString:@"WAN"])
-    {
-        self.iconIV.image  = kImage(@"wan");
-        
-    }else{
-        [self.iconIV sd_setImageWithURL:[NSURL URLWithString:[coin.pic1 convertImageUrl]]];
-
-    }
+//    if ([self.currencyModel.symbol isEqualToString:@"ETH"]) {
+//        self.iconIV.image = kImage(@"eth");
+//    }else if ([self.currencyModel.symbol isEqualToString:@"WAN"])
+//    {
+//        self.iconIV.image  = kImage(@"wan");
+//        
+//    }else{
+//        [self.iconIV sd_setImageWithURL:[NSURL URLWithString:[coin.pic1 convertImageUrl]]];
+//
+//    }
 
     self.dayLbl.text = [_billModel.transDatetime convertDateWithFormat:@"dd日"];
     self.timeLbl.text = [_billModel.transDatetime convertDateWithFormat:@"HH:mm"];
@@ -194,11 +194,14 @@
     self.moneyLbl.text = moneyStr;
     if ([billModel.direction isEqualToString:@"0"]) {
         self.detailLbl.text = [LangSwitcher switchLang:[NSString stringWithFormat:@"%@ 转账",self.currencyModel.symbol] key:nil]; ;
+        self.iconIV.image = kImage(@"提现");
+
 
     }else
     {
-         self.detailLbl.text = [LangSwitcher switchLang:[NSString stringWithFormat:@"%@  收款",self.currencyModel.symbol] key:nil]; ;
-        
+         self.detailLbl.text = [LangSwitcher switchLang:[NSString stringWithFormat:@"%@ 收款",self.currencyModel.symbol] key:nil]; ;
+        self.iconIV.image  = kImage(@"充值");
+
     }
 //    self.detailLbl.text = [LangSwitcher switchLang:_billModel.bizNote key:nil]; ;
     

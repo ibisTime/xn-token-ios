@@ -97,7 +97,7 @@
         
         CoinWeakSelf;
         
-        _headerView = [[WalletHeaderView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 150 + kStatusBarHeight+50 )];
+        _headerView = [[WalletHeaderView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 150 + kStatusBarHeight )];
         _headerView.addButton.hidden = YES;
         _headerView.headerBlock = ^{
             
@@ -124,14 +124,9 @@
     
     self.currentTableView = [[PlatformTableView alloc] initWithFrame:CGRectMake(0, self.headerView.height, kScreenWidth, kScreenHeight  - self.headerView.height)
                                                                style:UITableViewStyleGrouped];
-    
-    //    self.tableView.tableHeaderView = self.headerView;
     self.currentTableView.refreshDelegate = self;
-    //    [self.tableView adjustsContentInsets];
     [self.view addSubview:self.currentTableView];
-    //    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-    //        make.top.equalTo(self.headerView.mas_bottom);
-    //    }];
+   
     CoinWeakSelf;
     self.currentTableView.selectBlock = ^(NSInteger inter) {
         NSLog(@"%ld",inter);
@@ -237,9 +232,9 @@
         }];
         
         //查询美元汇率
-        [weakSelf searchRateWithCurrency:@"USD"];
+//        [weakSelf searchRateWithCurrency:@"USD"];
         //查询港元汇率
-        [weakSelf searchRateWithCurrency:@"HKD"];
+//        [weakSelf searchRateWithCurrency:@"HKD"];
         //查询总资产
         [weakSelf queryTotalAmount];
         
@@ -249,27 +244,26 @@
     
 }
 
-- (void)searchRateWithCurrency:(NSString *)currency {
-    
-    TLNetworking *http = [TLNetworking new];
-    
-    http.code = @"625280";
-    
-    http.parameters[@"currency"] = currency;
-    
-    [http postWithSuccess:^(id responseObject) {
-        
-        if ([currency isEqualToString:@"USD"]) {
-            
-            self.headerView.usdRate = responseObject[@"data"][@"rate"];
-            
-        }
-        
-    } failure:^(NSError *error) {
-        
-        
-    }];
-}
+//- (void)searchRateWithCurrency:(NSString *)currency {
+//
+//    TLNetworking *http = [TLNetworking new];
+//
+//    http.code = @"625280";
+//
+//    http.parameters[@"currency"] = currency;
+//
+//    [http postWithSuccess:^(id responseObject) {
+//
+//        if ([currency isEqualToString:@"USD"]) {
+//
+//            self.headerView.usdRate = responseObject[@"data"][@"rate"];
+//
+//        }
+//
+//    } failure:^(NSError *error) {
+//addNotification//
+//    }];
+//}
 
 #pragma mark - RefreshDelegate
 - (void)refreshTableViewButtonClick:(TLTableView *)refreshTableview button:(UIButton *)sender selectRowAtIndex:(NSInteger)index {

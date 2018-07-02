@@ -25,6 +25,8 @@
 //账户
 @property (nonatomic, assign) BOOL isCurrency;
 
+@property (nonatomic, assign) BOOL isLocal;
+
 //设置改值后外界只需要 调用reloadData
 @property (nonatomic,weak) TLTableView *tableView;
 

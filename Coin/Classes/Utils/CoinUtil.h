@@ -60,7 +60,6 @@ typedef void (^RefreshOpenCoinListFailureBlock)();
 
 + (void)refreshOpenCoinList:(RefreshOpenCoinListBlock)block
                     failure:(RefreshOpenCoinListFailureBlock)failure;
-
 @end
 
 

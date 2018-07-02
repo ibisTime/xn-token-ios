@@ -9,17 +9,20 @@
 #import "BuildWalletMineVC.h"
 #import "RevisePassWordVC.h"
 #import "WalletImportVC.h"
+#import "HTMLStrVC.h"
 @interface BuildWalletMineVC ()
 
 @property (nonatomic ,strong) UIImageView *iconImage;
 
-@property (nonatomic ,strong) UILabel *nameLable;
+@property (nonatomic ,strong) UIImageView *nameLable;
 
 @property (nonatomic ,strong) UIButton *buildButton;
 
 @property (nonatomic ,strong) UIButton *importButton;
 
 @property (nonatomic ,strong) UIButton *introduceButton;
+@property (nonatomic ,copy) NSString *h5String;
+
 
 @end
 
@@ -27,36 +30,58 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self requestProtect];
     [self initViews];
+//    self.navigationController.navigationBar.hidden = YES;
     // Do any additional setup after loading the view.
 }
 
 - (void)initViews
 {
+    UIButton *cancelBtn = [UIButton buttonWithImageName:@"cancel"];
+    
+    [cancelBtn addTarget:self action:@selector(clickCancel) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.view addSubview:cancelBtn];
+    [cancelBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.top.equalTo(@(kStatusBarHeight+20));
+        make.left.equalTo(@5);
+        make.width.equalTo(@50);
+        make.height.equalTo(@25);
+
+        
+    }];
+    
     self.view.backgroundColor = kHexColor(@"#ffffff");
     self.iconImage = [[UIImageView alloc] init];
     [self.view addSubview:self.iconImage];
     self.iconImage.image = kImage(@"logoTHA");
     [self.iconImage mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(@72.5);
+        make.top.equalTo(@(kHeight(150)));
         make.centerX.equalTo(self.view.mas_centerX);
         make.width.height.equalTo(@75);
         
     }];
     
-    self.nameLable = [UILabel labelWithBackgroundColor:kClearColor textColor:kBlackColor font:24];
-//    self.title = [LangSwitcher switchLang:@"我的" key:nil];
+    self.nameLable = [[UIImageView alloc] init];
+    //    self.title = [LangSwitcher switchLang:@"我的" key:nil];
     [self.view addSubview:self.nameLable];
-    self.nameLable.text = [LangSwitcher switchLang:@"THA WALLET" key:nil];
     [self.nameLable mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.iconImage.mas_bottom).offset(28);
         make.centerX.equalTo(self.view.mas_centerX);
+        make.height.equalTo(@19);
         
     }];
+    self.nameLable.contentMode = UIViewContentModeScaleToFill;
+    self.nameLable.image = kImage(@"THAWALLET");
+    
     
     
     self.buildButton = [UIButton buttonWithImageName:nil cornerRadius:6];
-    NSString *text = [LangSwitcher switchLang:@"创建钱包" key:nil];
+    NSString *text =  [LangSwitcher switchLang:@"创建钱包" key:nil];
+//     = NSLocalizedString(@"创建钱包", nil);
+    
     [self.buildButton setTitle:text forState:UIControlStateNormal];
     self.buildButton.titleLabel.font = [UIFont systemFontOfSize:16];
 
@@ -74,7 +99,9 @@
     
     
     self.importButton = [UIButton buttonWithImageName:nil cornerRadius:6];
-    NSString *text2 = [LangSwitcher switchLang:@"导入钱包" key:nil];
+    NSString *text2 =  [LangSwitcher switchLang:@"导入钱包" key:nil];
+
+//    NSString *text2 = NSLocalizedString(@"导入钱包", nil);
     [self.importButton setTitle:text2 forState:UIControlStateNormal];
     self.importButton.titleLabel.font = [UIFont systemFontOfSize:16];
 
@@ -95,7 +122,9 @@
     
     self.introduceButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [self.view addSubview:self.introduceButton];
-    NSString *text3 = [LangSwitcher switchLang:@"我已阅读并同意服务及隐私条款" key:nil];
+    NSString *text3 =  [LangSwitcher switchLang:@"我已阅读并同意服务及隐私条款" key:nil];
+
+//    NSString *text3 = NSLocalizedString(@"我已阅读并同意服务及隐私条款", nil);
     [self.introduceButton setTitle:text3 forState:UIControlStateNormal];
     [self.introduceButton addTarget:self action:@selector(html5Wallet) forControlEvents:UIControlEventTouchUpInside];
     self.introduceButton.titleLabel.font = [UIFont systemFontOfSize:12];
@@ -110,25 +139,56 @@
 
     
 }
+
+- (void)requestProtect
+{
+    TLNetworking *http = [TLNetworking new];
+    http.showView = self.view;
+    http.code = @"660917";
+    
+    http.parameters[@"ckey"] = @"reg_protocol";
+    
+    [http postWithSuccess:^(id responseObject) {
+        
+        self.h5String = responseObject[@"data"][@"cvalue"];
+        
+        
+    } failure:^(NSError *error) {
+        
+    }];
+    
+}
 //创建钱包
 - (void)buildWallet
 {
-    
+    self.navigationController.navigationBar.hidden = NO;
+
     RevisePassWordVC *vc = [[RevisePassWordVC alloc] init];
-    vc.title =  [LangSwitcher switchLang:@"创建钱包" key:nil];
+     vc.title =  [LangSwitcher switchLang:@"创建钱包" key:nil];
+
+//    vc.title =  NSLocalizedString(@"创建钱包", nil);
     [self.navigationController pushViewController:vc animated:YES];
 //    [self presentViewController:vc animated:YES completion:nil];
     
 }
-
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBar.hidden = YES;
+    
+}
 //导入钱包
 - (void)importWallet
 {
+    self.navigationController.navigationBar.hidden = NO;
+
 //    RevisePassWordVC *vc = [[RevisePassWordVC alloc] init];
 //    vc.title =  [LangSwitcher switchLang:@"创建钱包" key:nil];
 //    [self.navigationController pushViewController:vc animated:YES];
     WalletImportVC *vc = [[WalletImportVC alloc] init];
     vc.title =  [LangSwitcher switchLang:@"导入钱包" key:nil];
+
+//    vc.title = NSLocalizedString(@"导入钱包", nil);
     [self.navigationController pushViewController:vc animated:YES];
     
 }
@@ -136,7 +196,23 @@
 //加载隐私条款
 - (void)html5Wallet
 {
+    HTMLStrVC *htmlVC = [[HTMLStrVC alloc] init];
+    self.navigationController.navigationBar.hidden = NO;
+
+    htmlVC.type = HTMLTypeRegProtocol;
     
+    [self.navigationController pushViewController:htmlVC animated:YES];
+    
+}
+
+
+- (void)clickCancel
+{
+    if (self.walletBlock) {
+        self.walletBlock();
+    }
+    
+    [self.navigationController popViewControllerAnimated:YES];
     
 }
 - (void)didReceiveMemoryWarning {

@@ -41,6 +41,7 @@
 #import "WalletSettingVC.h"
 #import "TLAccountMoneyVC.h"
 #import "TLUserLoginVC.h"
+#import "ChooseCountryVc.h"
 @interface TLMineVC ()<MineHeaderSeletedDelegate, UINavigationControllerDelegate>
 
 //@property (nonatomic, strong) FBKVOController *chatKVOCtrl;   czy
@@ -147,8 +148,8 @@
     
     CoinWeakSelf;
     MineModel *accounrModel = [MineModel new];
-    accounrModel.text = [LangSwitcher switchLang:@"托管账户" key:nil];
-    accounrModel.imgName = @"钱包设置";
+    accounrModel.text = [LangSwitcher switchLang:@"本地货币" key:nil];
+    accounrModel.imgName = @"本地货币";
     accounrModel.action = ^{
         if (![TLUser user].isLogin) {
             TLUserLoginVC *loginVC= [TLUserLoginVC new];
@@ -158,28 +159,18 @@
             };
             return ;
         }
-        TLAccountMoneyVC *moneyVC= [[TLAccountMoneyVC alloc] init];
-        [weakSelf.navigationController pushViewController:moneyVC animated:YES];
+        ChooseCountryVc *moneyVC= [[ChooseCountryVc alloc] init];
+//        moneyVC.cancelBtn.hidden = YES;
+//        [weakSelf.navigationController pushViewController:moneyVC animated:YES];
 
-        
+        [weakSelf presentViewController:moneyVC animated:YES completion:nil];
 
     };
     
     MineModel *settingModel = [MineModel new];
-    settingModel.text = [LangSwitcher switchLang:@"钱包设置" key:nil];
-    settingModel.imgName = @"钱包设置";
+    settingModel.text = [LangSwitcher switchLang:@"账户与安全" key:nil];
+    settingModel.imgName = @"账户与安全";
     settingModel.action = ^{
-        
-        WalletSettingVC *settingVC = [WalletSettingVC new];
-        
-        [weakSelf.navigationController pushViewController:settingVC animated:YES];
-    };
-    
-    //安全中心
-    MineModel *securityCenter = [MineModel new];
-    securityCenter.text = [LangSwitcher switchLang:@"系统设置" key:nil];
-    securityCenter.imgName = @"安全中心";
-    securityCenter.action = ^{
         if (![TLUser user].isLogin) {
             TLUserLoginVC *loginVC= [TLUserLoginVC new];
             [weakSelf.navigationController pushViewController:loginVC animated:YES];
@@ -189,7 +180,26 @@
             return ;
         }
         SettingVC *settingVC = [SettingVC new];
+
+        [weakSelf.navigationController pushViewController:settingVC animated:YES];
+    };
+    MineModel *language = [MineModel new];
+    language.text = [LangSwitcher switchLang:@"语言设置" key:nil];
+    language.imgName = @"语言";
+    language.action =^{
         
+        LangChooseVC *vc = [[LangChooseVC alloc] init];
+        [weakSelf.navigationController pushViewController:vc animated:YES];
+        
+    };
+    //安全中心
+    MineModel *securityCenter = [MineModel new];
+    securityCenter.text = [LangSwitcher switchLang:@"钱包工具" key:nil];
+    securityCenter.imgName = @"钱包工具";
+    securityCenter.action = ^{
+        
+        WalletSettingVC *settingVC = [WalletSettingVC new];
+
         [weakSelf.navigationController pushViewController:settingVC animated:YES];
     };
     
@@ -275,7 +285,7 @@
     //    //工单
     MineModel *helpModel = [MineModel new];
     helpModel.text = [LangSwitcher switchLang:@"帮助中心" key:nil];
-    helpModel.imgName = @"常见问题";
+    helpModel.imgName = @"帮助中心";
     helpModel.action = ^{
         if (![TLUser user].isLogin) {
             TLUserLoginVC *loginVC= [TLUserLoginVC new];
@@ -340,8 +350,8 @@
         
         self.group.sections = @[
                                 
-                                @[accounrModel,settingModel,securityCenter, languageSetting],
-                                @[helpModel, abountUs]
+                                @[securityCenter,accounrModel,language ],
+                                @[languageSetting,settingModel,helpModel, abountUs]
                                 ];
         
     }
@@ -447,8 +457,10 @@
     }
     
     self.headerView.nameLbl.text = [TLUser user].nickname;
-    
-    self.headerView.mobileLbl.text = [TLUser user].mobile;
+    NSRange rang = NSMakeRange(4, 4);
+
+    self.headerView.mobileLbl.text = [[TLUser user].mobile stringByReplacingCharactersInRange:rang withString:@"xxxx"];
+
     
     self.headerView.levelBtn.hidden = [[TLUser user].level isEqualToString:kLevelOrdinaryTraders] ? YES : NO;
     
@@ -457,7 +469,14 @@
 }
 
 - (void)changeHeadIcon {
-    
+    if (![TLUser user].isLogin) {
+        TLUserLoginVC *loginVC= [TLUserLoginVC new];
+        [self.navigationController pushViewController:loginVC animated:YES];
+        loginVC.loginSuccess = ^{
+            
+        };
+        return ;
+    }
     [self.imagePicker picker];
 }
 

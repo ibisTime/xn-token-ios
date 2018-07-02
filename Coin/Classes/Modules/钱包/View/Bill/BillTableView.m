@@ -84,7 +84,7 @@ static NSString *identifierCell = @"BillListCell";
     lab.textColor = kTextColor;
     lab.font = [UIFont systemFontOfSize:12];
     
-    lab.text = @"    交易记录";
+    lab.text = [NSString stringWithFormat:@"    %@",[LangSwitcher switchLang:@"交易记录" key:nil]];
     return lab;
 }
 

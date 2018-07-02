@@ -24,7 +24,8 @@
 - (void)viewDidLoad {
     self.title = @"添加资产";
     [self initTableView];
-    [self queryTotalAmount];
+    [self getStatusSymbol];
+//    [self queryTotalAmount];
 
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -39,6 +40,7 @@
     self.tableView.refreshDelegate = self;
     //    [self.tableView adjustsContentInsets];
     [self.view addSubview:self.tableView];
+   
     //    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
     //        make.top.equalTo(self.headerView.mas_bottom);
     //    }];
@@ -190,8 +192,60 @@
     
 }
 
-- (void)viewWillDisappear:(BOOL)animated{
+- (void)getStatusSymbol
+{
+    self.currentModels = [NSMutableArray array];
+        NSString *totalcount;
+        TLDataBase *data = [TLDataBase sharedManager];
+        
+        if ([data.dataBase open]) {
+            //            [db executeUpdate:@"create table if not exists LocalWallet(id INTEGER PRIMARY KEY AUTOINCREMENT,walletId text, symbol text, type text ,status text,cname text,unit text,pic1 text,withdrawFeeString text,withfrawFee text,orderNo text,ename text,icon text,pic2 text,pic3 text,address text,IsSelect INTEGER,next text)"];
+            NSString *sql = [NSString stringWithFormat:@"SELECT * from LocalWallet lo, THAWallet th where lo.walletId = th.walletId  and th.userId = '%@'",[TLUser user].userId];
+            FMResultSet *set = [data.dataBase executeQuery:sql];
+            while ([set next]) {
+                CurrencyModel *model =[CurrencyModel new];
+
+                totalcount = [set stringForColumn:@"IsSelect"];
+                model.IsSelected = [totalcount boolValue];
+                model.symbol = [set stringForColumn:@"symbol"];
+                [self.currentModels addObject:model];
+            }
+            [set close];
+        }
+        [data.dataBase close];
     
+    
+    self.tableView.currencys = self.currentModels;
+    self.currentModels = self.currentModels;
+    [self.tableView reloadData];
+    
+}
+
+- (void)SaveStatusSymbol
+{
+    self.currencys = self.currentModels.mutableCopy;
+    for (int i = 0; i < self.tableView.currencys.count; i++) {
+        NSString *totalcount;
+        TLDataBase *data = [TLDataBase sharedManager];
+        CurrencyModel *model = self.tableView.currencys[i];
+        if ([data.dataBase open]) {
+            //            [db executeUpdate:@"create table if not exists LocalWallet(id INTEGER PRIMARY KEY AUTOINCREMENT,walletId text, symbol text, type text ,status text,cname text,unit text,pic1 text,withdrawFeeString text,withfrawFee text,orderNo text,ename text,icon text,pic2 text,pic3 text,address text,IsSelect INTEGER,next text)"];
+            NSString *sql = [NSString stringWithFormat:@"UPDATE LocalWallet SET IsSelect = '%@' WHERE walletId = (SELECT walletId from THAWallet where userId='%@') and symbol = '%@' ",[NSNumber numberWithBool:model.IsSelected],[TLUser user].userId,model.symbol];
+            BOOL sucess = [data.dataBase executeUpdate:sql];
+            NSLog(@"更新自选状态%d",sucess);
+        }
+        [data.dataBase close];
+    }
+    
+    
+    self.tableView.currencys = self.currencys;
+    self.currentModels = self.currentModels;
+    [self.tableView reloadData];
+    
+}
+- (void)viewWillDisappear:(BOOL)animated{
+    self.currencys = self.tableView.currencys;
+    [self SaveStatusSymbol];
     NSMutableArray *a = [NSMutableArray array];
     for (int i = 0; i < self.currencys.count; i++) {
         CurrencyModel *model = self.currencys[i];
@@ -199,25 +253,7 @@
             [a addObject:model];
         }
     }
-    
-    NSUserDefaults *defaules = [NSUserDefaults standardUserDefaults];
-    NSMutableArray *arr = [NSMutableArray array];
-    if (a.count == 0) {
-        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"localArray"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-    }else{
-    for (int i = 0; i < a.count; i++) {
-        CurrencyModel *model = a[i];
-        
-            NSMutableDictionary *dic = [NSMutableDictionary dictionary];
-            [dic setObject:model.symbol forKey:@"symbol"];
-            [dic setObject:model.address forKey:@"address"];
-            [arr addObject:dic];
-    }
-    [defaules setObject:arr forKey:@"localArray"];
-    [defaules synchronize];
-  }
-    
+
     [super viewWillDisappear:animated];
     CoinWeakSelf;
     　　if ([self.navigationController.viewControllers indexOfObject:self]==NSNotFound) {

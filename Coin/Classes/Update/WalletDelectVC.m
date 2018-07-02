@@ -15,6 +15,7 @@
 #import "RevisePassWordVC.h"
 #import "MnemonicUtil.h"
 #import "BuildWalletMineVC.h"
+#import "TLTabBarController.h"
 @interface WalletDelectVC ()<UITextViewDelegate>
 @property (nonatomic ,strong) UILabel *nameLable;
 
@@ -32,8 +33,21 @@
 - (void)viewDidLoad {
     self.title = [LangSwitcher switchLang:@"删除钱包" key:nil];
     self.view.backgroundColor = kBackgroundColor;
-    NSString *word = [[NSUserDefaults standardUserDefaults] objectForKey:KWalletWord];
-    
+//    NSString *word = [[NSUserDefaults standardUserDefaults] objectForKey:KWalletWord];
+    TLDataBase *dataBase = [TLDataBase sharedManager];
+    NSString *word;
+    if ([dataBase.dataBase open]) {
+        NSString *sql = [NSString stringWithFormat:@"SELECT Mnemonics from THAWallet where userId = '%@'",[TLUser user].userId];
+        //        [sql appendString:[TLUser user].userId];
+        FMResultSet *set = [dataBase.dataBase executeQuery:sql];
+        while ([set next])
+        {
+            word = [set stringForColumn:@"Mnemonics"];
+            
+        }
+        [set close];
+    }
+    [dataBase.dataBase close];
     //验证
     self.userTempArray = [word componentsSeparatedByString:@" "];
     self.wordTempArray = [NSMutableArray array];
@@ -87,7 +101,7 @@
     textView.backgroundColor = kWhiteColor;
     textView.textColor = kTextColor;
     textView.font = [UIFont systemFontOfSize:15];
-    textView.placholder = [LangSwitcher switchLang:@"请钱包助记词" key:nil];
+    textView.placholder = [LangSwitcher switchLang:@"请输入钱包助记词" key:nil];
     [self.view addSubview:self.textView];
     //    [self.textView mas_makeConstraints:^(MASConstraintMaker *make) {
     //        make.top.equalTo(self.nameLable.mas_bottom).offset(28);
@@ -142,25 +156,73 @@
     
     if ([[MnemonicUtil getMnemonicsISRight:self.textView.text] isEqualToString:@"1"]) {
         
-        NSString *word = [[NSUserDefaults standardUserDefaults] objectForKey:KWalletWord];
-        if (!word) {
+        TLDataBase *dataBase = [TLDataBase sharedManager];
+        NSString *word;
+        if ([dataBase.dataBase open]) {
+           
+            
+            NSString *sql = [NSString stringWithFormat:@"SELECT Mnemonics from THAWallet where userId = '%@'",[TLUser user].userId];
+            //        [sql appendString:[TLUser user].userId];
+            FMResultSet *set = [dataBase.dataBase executeQuery:sql];
+            while ([set next])
+            {
+                word = [set stringForColumn:@"Mnemonics"];
+                
+            }
+            [set close];
+        }
+        [dataBase.dataBase close];        if (!word) {
             return;
         }
+        
         if ([self.textView.text isEqualToString:word]) {
-            [[NSUserDefaults standardUserDefaults] removeObjectForKey:KWalletWord];
-            [[NSUserDefaults standardUserDefaults] removeObjectForKey:KWalletAddress];
-            [[NSUserDefaults standardUserDefaults] removeObjectForKey:KWalletPrivateKey];
-            [[NSUserDefaults standardUserDefaults] synchronize];
+            [TLAlert alertWithTitle:@"删除钱包" msg:@"请确保助记伺已保存妥善" confirmMsg:@"确定" cancleMsg:@"取消" maker:self cancle:^(UIAlertAction *action) {
+               
+                
+            } confirm:^(UIAlertAction *action) {
+                
+                TLDataBase *db = [TLDataBase sharedManager];
+                
+                if ([db.dataBase open]) {
+                    NSString *Sql2 =[NSString stringWithFormat:@"delete from LocalWallet WHERE walletId = (SELECT walletId from THAWallet where userId='%@')",[TLUser user].userId];
+                    
+                    BOOL sucess2  = [db.dataBase executeUpdate:Sql2];
+                    NSLog(@"删除自选表%d",sucess2);
 
-            [TLAlert alertWithMsg:@"删除成功"];
+                    NSString *Sql =[NSString stringWithFormat:@"delete from THAWallet WHERE userId = '%@'",[TLUser user].userId];
+                    
+                 BOOL sucess  = [db.dataBase executeUpdate:Sql];
+                    
+                    NSLog(@"删除钱包表%d",sucess);
+                  
+                    
+                }
+                
+                [db.dataBase close];
+//                [[NSUserDefaults standardUserDefaults] removeObjectForKey:KWalletWord];
+//                [[NSUserDefaults standardUserDefaults] removeObjectForKey:KWalletAddress];
+//                [[NSUserDefaults standardUserDefaults] removeObjectForKey:KWalletPrivateKey];
+//                [[NSUserDefaults standardUserDefaults] synchronize];
+                [TLAlert alertWithMsg:@"删除成功"];
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    
+                    TLTabBarController *MineVC = [[TLTabBarController alloc] init];
+                   
+                    [UIApplication sharedApplication].keyWindow.rootViewController = MineVC;
+                });
+            }];
+           
+
+//            [TLAlert alertWithTitle:@"删除钱包" msg:@"请确保助记伺已保存妥善" confirmMsg:@"确定" cancleMsg:@"取消" maker:self cancle:^(UIAlertAction *action) {
+//                [TLAlert alertWithMsg:@"删除成功"];
+//
+//
+//            } confirm:^(UIAlertAction *action) {
+//
+//            }];
             
             
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-
-                BuildWalletMineVC *MineVC = [[BuildWalletMineVC alloc] init];
-                TLNavigationController *na = [[TLNavigationController alloc] initWithRootViewController:MineVC];
-                [UIApplication sharedApplication].keyWindow.rootViewController = na;
-            });
+            
 
             //验证通过
         }
@@ -191,7 +253,7 @@
         //        [TLAlert alertWithMsg:@"助记词验证成功"];
         [TLAlert alertWithMsg:@"助记词不存在,请检测备份"];
         self.importButton.selected = NO;
-        return;
+        
         
         //        RevisePassWordVC *vc = [[RevisePassWordVC alloc] init];
         //        vc.IsImport = YES;

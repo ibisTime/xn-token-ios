@@ -7,7 +7,7 @@
 //
 
 #import "WalletLocalWebVC.h"
-
+#import "AppConfig.h"
 @interface WalletLocalWebVC ()
 @property (nonatomic ,strong) UIWebView *web;
 @end
@@ -16,11 +16,17 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
     self.title = [LangSwitcher switchLang:@"更多" key:nil];
     self.web = [[UIWebView alloc] initWithFrame:self.view.bounds];
     [self.view addSubview:self.web];
-    
-    [self.web loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://rinkeby.etherscan.io/tx/%@",self.urlString]]]];
+    if ([self.currentModel.symbol isEqualToString:@"ETH"]) {
+         [self.web loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",[AppConfig config].ethHash,self.urlString]]]];
+    }else{
+         [self.web loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",[AppConfig config].wanHash,self.urlString]]]];
+        
+    }
+   
     
     
     // Do any additional setup after loading the view.

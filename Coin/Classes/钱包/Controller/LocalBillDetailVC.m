@@ -153,6 +153,7 @@
     }
     WalletLocalWebVC *webVC = [WalletLocalWebVC new];
     webVC.urlString = self.bill.txHash;
+    webVC.currentModel = self.currentModel;
     [self.navigationController pushViewController:webVC animated:YES];
     
     

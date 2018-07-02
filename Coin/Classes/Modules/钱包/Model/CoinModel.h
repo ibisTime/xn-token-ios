@@ -34,8 +34,20 @@
 @property (nonatomic, copy) NSString *orderNo;
 //取现手续费
 @property (nonatomic, copy) NSString *withdrawFeeString;
+@property (nonatomic, copy) NSString *withfrawFee;
+
 //状态 PUBLISHED("0", "已发布"), REVOKE("1", "已撤下");
 @property (nonatomic, copy) NSString *status;
+
+@property (nonatomic, copy) NSString *address;
+
+@property (nonatomic, assign) BOOL IsSelect;
+
+@property (nonatomic, copy) NSString *id;
+
+@property (nonatomic, copy) NSString *walletId;
+
+
 
 //存储币种列表
 - (void)saveOpenCoinList:(NSArray *)coinList;

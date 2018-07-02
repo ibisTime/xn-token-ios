@@ -66,19 +66,36 @@
     TLNetworking *http = [TLNetworking new];
     http.code = @"802270";
     //    [[NSUserDefaults standardUserDefaults] removeObjectForKey:KWalletWord];
-    NSString *address  =  [[NSUserDefaults standardUserDefaults] objectForKey:KWalletAddress];
-    //    NSString *address1  =  [[NSUserDefaults standardUserDefaults] objectForKey:KWalletWord];
-    //    NSString *address2  =  [[NSUserDefaults standardUserDefaults] objectForKey:KWalletPrivateKey];
+    TLDataBase *dataBase = [TLDataBase sharedManager];
+    NSString *symbol;
+    NSString *address;
+    NSMutableArray *arr = [NSMutableArray array];
+    if ([dataBase.dataBase open]) {
+        NSString *sql = [NSString stringWithFormat:@"SELECT symbol,address from LocalWallet lo, THAWallet th where lo.walletId = th.walletId  and th.userId = '%@'",[TLUser user].userId];
+        //        [sql appendString:[TLUser user].userId];
+        FMResultSet *set = [dataBase.dataBase executeQuery:sql];
+        while ([set next])
+        {
+            NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+            
+            symbol = [set stringForColumn:@"symbol"];
+            address = [set stringForColumn:@"address"];
+            
+            if (!address) {
+                [dic setObject:@"" forKey:@"address"];
+                
+            }else{
+                
+                [dic setObject:address forKey:@"address"];
+                
+            }
+            [dic setObject:symbol forKey:@"symbol"];
+            [arr addObject:dic];
+        }
+        [set close];
+    }
+    [dataBase.dataBase close];
     
-    http.ISparametArray = YES;
-    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
-    NSMutableDictionary *dicWan = [NSMutableDictionary dictionary];
-    
-    [dic setObject:@"ETH" forKey:@"symbol"];
-    [dic setObject:address forKey:@"address"];
-    [dicWan setObject:@"WAN" forKey:@"symbol"];
-    [dicWan setObject:address forKey:@"address"];
-    NSArray *arr = @[dic,dicWan];
     http.parameters[@"accountList"] = arr;
     
     //    http.parametArray = @[ dic];
@@ -198,5 +215,22 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+//-(void)viewDidDisappear:(BOOL)animated
+//{
+//    
+//    [self.navigationController popToRootViewControllerAnimated:YES];
+//    
+//}
+- (void)viewWillDisappear:(BOOL)animated{
+    
+    　　if ([self.navigationController.viewControllers indexOfObject:self]==NSNotFound) {
+            [self.navigationController popToRootViewControllerAnimated:YES];
+
+        　　}
+    [super viewWillDisappear:animated];
+    
+}
+
 
 @end

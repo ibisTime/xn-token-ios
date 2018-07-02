@@ -10,7 +10,8 @@
 #import "SettingModel.h"
 #import "CoinHeader.h"
 #import <CDCommon/UIScrollView+TLAdd.h>
-
+#import "TLTabBarController.h"
+#import "LangSwitcher.h"
 @interface LangChooseVC ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) UITableView *langChooseTV;
@@ -34,7 +35,9 @@
     __weak typeof(self) weakself = self;
     //
     SettingModel *simpleModel = [[SettingModel alloc] init];
-    simpleModel.text = [LangSwitcher switchLang:@"简体中文" key:nil];
+//    simpleModel.text = [LangSwitcher switchLang:@"简体中文" key:nil];
+    simpleModel.text = @"简体中文";
+
     simpleModel.isSelect = [LangSwitcher currentLangType] == LangTypeSimple;
     [simpleModel setAction:^{
         
@@ -42,23 +45,53 @@
     }];
     //
     SettingModel *tridationModel = [[SettingModel alloc] init];
-    tridationModel.text = [LangSwitcher switchLang:@"繁体中文" key:nil];
+//    tridationModel.text = [LangSwitcher switchLang:@"繁体中文" key:nil];
+    tridationModel.text = @"繁体中文";
+
     tridationModel.isSelect = [LangSwitcher currentLangType] == LangTypeTraditional;
     [tridationModel setAction:^{
         
         [weakself langType:LangTypeTraditional];
 
     }];
+    SettingModel *EnglishModel = [[SettingModel alloc] init];
+//    EnglishModel.text = [LangSwitcher switchLang:@"英文" key:nil];
+    EnglishModel.text = @"English";
+
+    EnglishModel.isSelect = [LangSwitcher currentLangType] == LangTypeEnglish;
+    [EnglishModel setAction:^{
+        
+        [weakself langType:LangTypeEnglish];
+        
+    }];
+    SettingModel *KorenModel = [[SettingModel alloc] init];
+    KorenModel.text = @"한국어.";
+//    KorenModel.text = [LangSwitcher switchLang:@"韩文" key:nil];
+
+    KorenModel.isSelect = [LangSwitcher currentLangType] == LangTypeKorean;
+    [KorenModel setAction:^{
+        
+        [weakself langType:LangTypeKorean];
+        
+    }];
+    SettingModel *JapanseModel = [[SettingModel alloc] init];
+    JapanseModel.text = [LangSwitcher switchLang:@"日文" key:nil];
+    JapanseModel.isSelect = [LangSwitcher currentLangType] == LangTypeJapanese;
+    [JapanseModel setAction:^{
+        
+        [weakself langType:LangTypeJapanese];
+        
+    }];
     
     //
-    [self.models addObjectsFromArray:@[simpleModel,tridationModel]];
+    [self.models addObjectsFromArray:@[simpleModel,tridationModel,EnglishModel,KorenModel,JapanseModel]];
     
     
 }
 
 - (void)langType:(LangType)type {
     
-        [TLAlert alertWithTitle:[LangSwitcher switchLang:@"切换语言需要退出应用" key:nil]
+        [TLAlert alertWithTitle:[LangSwitcher switchLang:@"切换语言" key:nil]
                             msg:nil
                      confirmMsg:[LangSwitcher switchLang:@"确定" key:nil]
                       cancleMsg:[LangSwitcher switchLang:@"取消" key:nil]
@@ -68,9 +101,14 @@
     
                              [LangSwitcher changLangType:type];
                              //                             UIView *v = nil;
+                             TLTabBarController *tabBarCtrl = [[TLTabBarController alloc] init];
+                      [UIApplication sharedApplication].keyWindow.rootViewController = tabBarCtrl;
+                             [LangSwitcher startWithTraditional];
                              //                             [v sizeToFit];
-                             NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
-                             dict[nil] = @"";
+                             
+                             
+//                             NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
+//                             dict[nil] = @"";
                          }];
     
 }

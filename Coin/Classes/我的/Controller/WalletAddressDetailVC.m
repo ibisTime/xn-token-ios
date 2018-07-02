@@ -115,10 +115,22 @@
     }];
     
     self.privateButton = [UIButton buttonWithTitle:@"" titleColor:kTextColor backgroundColor:kClearColor titleFont:12];
-    NSString *privates = [[NSUserDefaults standardUserDefaults] objectForKey:KWalletPrivateKey];
-    NSString *word = [[NSUserDefaults standardUserDefaults] objectForKey:KWalletWord];
-    NSString *adress = [[NSUserDefaults standardUserDefaults] objectForKey:KWalletAddress];
-
+    NSString *privates;
+//    = [[NSUserDefaults standardUserDefaults] objectForKey:KWalletPrivateKey];
+//    NSString *word = [[NSUserDefaults standardUserDefaults] objectForKey:KWalletWord];
+//    NSString *adress = [[NSUserDefaults standardUserDefaults] objectForKey:KWalletAddress];
+    TLDataBase *db = [TLDataBase sharedManager];
+    if ([db.dataBase open]) {
+         NSString *sql = [NSString stringWithFormat:@"SELECT %@private from THAWallet where userId = '%@'",[self.currentModel.symbol lowercaseString],[TLUser user].userId];
+        FMResultSet *set = [db.dataBase executeQuery:sql];
+        while ([set next]) {
+            privates = [set stringForColumn:[NSString stringWithFormat:@"%@private",self.currentModel.symbol]];
+        }
+        
+        
+        NSLog(@"导入钱包交易密码%d",access);
+    }
+    [db.dataBase close];
 
     self.privates = privates;
     [self.privateButton setTitle:privates forState:UIControlStateNormal];
@@ -186,7 +198,6 @@
 - (void)viewWillDisappear:(BOOL)animated{
     
     　　if ([self.navigationController.viewControllers indexOfObject:self]==NSNotFound) {
-        [self.navigationController popToRootViewControllerAnimated:YES];
         
         　　}
     [super viewWillDisappear:animated];

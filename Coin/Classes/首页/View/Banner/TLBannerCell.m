@@ -43,12 +43,12 @@
         
         if ([urlString containsString:@".gif"]) {
             
-            [_imageIV sd_setImageWithURL:url placeholderImage:GOOD_PLACEHOLDER_SMALL];
+//            [_imageIV sd_setImageWithURL:url placeholderImage:GOOD_PLACEHOLDER_SMALL];
             
             return ;
         }
         
-        [_imageIV sd_setImageWithURL:url placeholderImage:GOOD_PLACEHOLDER_SMALL];
+//        [_imageIV sd_setImageWithURL:url placeholderImage:GOOD_PLACEHOLDER_SMALL];
         return ;
     }
     //本地图片

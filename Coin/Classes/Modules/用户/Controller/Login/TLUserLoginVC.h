@@ -13,5 +13,9 @@
 
 @property (nonatomic,copy) void(^loginSuccess)();
 
+@property (nonatomic,copy) void(^loginFailed)();
+
+@property (nonatomic,strong) UIBarButtonItem *backItem;
+@property (nonatomic , assign) BOOL  NeedLogin;
 
 @end

@@ -14,6 +14,7 @@
 #import "TLTabBarController.h"
 #import "AppConfig.h"
 #import "BuildWalletMineVC.h"
+#import "TLUserLoginVC.h"
 @interface TLUpdateVC ()
 
 @end
@@ -35,7 +36,9 @@
     bgIV.contentMode = UIViewContentModeScaleAspectFill;
     
     bgIV.image = [UIImage imageNamed:@"Launch"];
-    [self setPlaceholderViewTitle:@"加载失败" operationTitle:@"重新加载"];
+    [self setPlaceholderViewTitle:[LangSwitcher switchLang:@"加载失败" key:nil] operationTitle:[LangSwitcher switchLang:@"加载失败" key:nil]];
+
+//    [self setPlaceholderViewTitle:@"加载失败" operationTitle:@"重新加载"];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillEnterForeground) name:UIApplicationWillEnterForegroundNotification object:nil];
     
@@ -146,7 +149,7 @@
             if ([update.forceUpdate isEqualToString:@"0"]) {
 
                 //不强制
-                [TLAlert alertWithTitle:@"更新提醒" msg:update.note confirmMsg:@"立即升级" cancleMsg:@"稍后提醒" cancle:^(UIAlertAction *action) {
+                [TLAlert alertWithTitle:[LangSwitcher switchLang:@"更新提示" key:nil] msg:update.note confirmMsg:[LangSwitcher switchLang:@"立即升级" key:nil] cancleMsg:[LangSwitcher switchLang:@"稍后提醒" key:nil] cancle:^(UIAlertAction *action) {
 
                     [self setRootVC];
 
@@ -159,7 +162,7 @@
             } else {
 
                 //强制
-                [TLAlert alertWithTitle:@"更新提醒" message:update.note confirmMsg:@"立即升级" confirmAction:^{
+                [TLAlert alertWithTitle:[LangSwitcher switchLang:@"更新提醒" key:nil] message:update.note confirmMsg:[LangSwitcher switchLang:@"立即升级" key:nil] confirmAction:^{
 
 //                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[update.xiaZaiUrl stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]]];
                     [self goBcoinWeb:update.downloadUrl];
@@ -194,9 +197,28 @@
     
     TLTabBarController *tabBarCtrl = [[TLTabBarController alloc] init];
 //    TLNavigationController *na = [[TLNavigationController alloc] initWithRootViewController:mineVC];
-    
-    [UIApplication sharedApplication].keyWindow.rootViewController = tabBarCtrl;
+    if( ![TLUser user].isLogin) {
+        
+        TLUserLoginVC *loginVC = [TLUserLoginVC new];
+        
+        loginVC.loginSuccess = ^{
+            
+            [UIApplication sharedApplication].keyWindow.rootViewController = tabBarCtrl;
 
+        };
+        CoinWeakSelf;
+        loginVC.NeedLogin = YES;
+        loginVC.loginFailed = ^{
+            [weakSelf setRootVC];
+
+        };
+        
+        TLNavigationController *nav = [[TLNavigationController alloc] initWithRootViewController:loginVC];
+
+        [self presentViewController:nav animated:YES completion:nil];
+    }
+
+    [UIApplication sharedApplication].keyWindow.rootViewController = tabBarCtrl;
 
 }
 

@@ -117,7 +117,7 @@
         //    NSString *leftAmount = [platform.amountString subNumber:platform.frozenAmountString];
         
         CGFloat t = [currency.balance doubleValue]/1000000000000000000;
-        self.textLbl.text = [NSString stringWithFormat:@"%.6f ",t];
+        self.textLbl.text = [NSString stringWithFormat:@"%.6f %@",t,currency.symbol];
         //    NSString *rightAmount = [platform.inAmountString subNumber:platform.addAmountString];
         
         //对应币种价格
@@ -135,7 +135,7 @@
     self.currentLbl.text = currency.currency;
     NSString *leftAmount = [currency.amountString subNumber:currency.frozenAmountString];
 
-    self.textLbl.text = [NSString stringWithFormat:@"%.4f CNY",[[CoinUtil convertToRealCoin:leftAmount coin:currency.currency] doubleValue]];
+    self.textLbl.text = [NSString stringWithFormat:@"%.4f %@",[[CoinUtil convertToRealCoin:leftAmount coin:currency.currency] doubleValue],currency.currency];
     NSString *rightAmount = [currency.inAmountString subNumber:currency.addAmountString];
     
     //对应币种价格

@@ -60,27 +60,6 @@
 #pragma mark - Data
 - (void)requestRateList {
     
-//    CoinWeakSelf;
-//    RateModel *model = [RateModel new];
-//    model.title = @"THA钱包上线";
-//    model.time = @"2018/06/07/21/04";
-//    model.soure = @"THA官方";
-//    model.imageName = @"如何充值";
-//
-//    RateModel *model1 = [RateModel new];
-//    model1.title = @"区块链区块链区块链区块链区块链区块链区块链区块链区块链区块链区块链区块链区块链";
-//    model1.time = @"2018/06/07/20/04";
-//    model1.soure = @"THA";
-//    model1.imageName = @"如何注册";
-//
-//    self.rates = [NSMutableArray array];
-//    [self.rates addObject:model];
-//    [self.rates addObject:model1];
-//    self.tableView.rates = self.rates;
-//    [self.tableView reloadData_tl];
-//
-//
-//    return;
     CoinWeakSelf;
     TLPageDataHelper *help = [[TLPageDataHelper alloc] init];
 //    help.isList = YES;

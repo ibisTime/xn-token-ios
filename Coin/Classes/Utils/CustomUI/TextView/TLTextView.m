@@ -26,7 +26,7 @@
                             labelWithFrame:CGRectMake(5, 7, self.width - 30, 20)
                                              textAligment:NSTextAlignmentLeft
                                           backgroundColor:[UIColor clearColor]
-                                                     font:self.font
+                                                     font:[UIFont systemFontOfSize:13]
                                                 textColor:kTextColor2];
         _placeholderLbl.userInteractionEnabled = YES;
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(beginEdit)];

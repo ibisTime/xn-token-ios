@@ -250,15 +250,22 @@
 //        [TLAlert alertWithInfo:@"退出登录失败"];
 //
 //    }];
-    [[NSNotificationCenter defaultCenter] postNotificationName:kUserLoginOutNotification object:nil];
-    
-    TLTabBarController *tabbarVC = (TLTabBarController *)self.tabBarController;
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    [TLAlert alertWithTitle:@"退出登录" msg:@"退出登录？" confirmMsg:@"确定" cancleMsg:@"取消" maker:self cancle:^(UIAlertAction *action) {
         
-        tabbarVC.selectedIndex = 0;
-        [self.navigationController popViewControllerAnimated:NO];
         
-    });
+    } confirm:^(UIAlertAction *action) {
+       
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            
+//            tabbarVC.selectedIndex = 0;
+//            [self.navigationController popViewControllerAnimated:NO];
+//            [self popoverPresentationController];
+            [self.navigationController popToRootViewControllerAnimated:YES];
+             [[NSNotificationCenter defaultCenter] postNotificationName:kUserLoginOutNotification object:nil];
+            
+        });
+    }];
+   
 }
 
 - (void)setGoogleAuth {

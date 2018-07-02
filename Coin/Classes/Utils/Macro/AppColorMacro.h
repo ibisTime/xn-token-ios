@@ -42,6 +42,7 @@
 #define kThemeColor             [UIColor colorWithHexString:@"#ff7d0e"]  //红色文字
 #define kPaleBlueColor          [UIColor colorWithHexString:@"#48b0fb"]    //蓝色文字
 #define kRiseColor              [UIColor colorWithHexString:@"#2ac64c"]  //涨
+#define kTextBlack              [UIColor colorWithHexString:@"#333333"]   //黑文字
 
 #define kAuxiliaryTipColor      [UIColor colorWithHexString:@"#FF254C"]   //辅助提示颜色
 #define kBottomItemGrayColor    [UIColor colorWithHexString:@"#FAFAFA"]   //底栏灰色
@@ -92,9 +93,9 @@
 #pragma mark - Image
 
 #define USER_PLACEHOLDER_SMALL [UIImage imageNamed:@"头像"]
-#define PLACEHOLDER_SMALL @"icon"
+#define PLACEHOLDER_SMALL @"banner"
 #define kCancelIcon @"cancel"
-#define GOOD_PLACEHOLDER_SMALL [UIImage imageNamed:@"icon"]
+#define GOOD_PLACEHOLDER_SMALL [UIImage imageNamed:@"banner"]
 
 #define kDateFormmatter @"MMM dd, yyyy hh:mm:ss aa"
 #define KUserPwd @"userPwd"

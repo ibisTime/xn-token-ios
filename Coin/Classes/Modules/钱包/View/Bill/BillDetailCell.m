@@ -28,7 +28,7 @@
         [self.titleLbl mas_makeConstraints:^(MASConstraintMaker *make) {
             
             make.left.equalTo(self.mas_left).offset(15);
-            make.width.equalTo(@60);
+//            make.width.equalTo(@60);
             make.centerY.equalTo(self.contentView.mas_centerY);
             
         }];

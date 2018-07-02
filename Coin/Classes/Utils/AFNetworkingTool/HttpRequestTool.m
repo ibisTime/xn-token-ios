@@ -13,7 +13,7 @@
 #import "NSObject+Extension.h"
 #import "AppConfig.h"
 #import "AppColorMacro.h"
-
+#import "LangSwitcher.h"
 #import "MBProgressHUD.h"
 
 @interface HttpRequestTool () <MBProgressHUDDelegate>
@@ -161,8 +161,8 @@
         
         if ([responseObj[@"errorCode"] isEqual:@"4"]) {
             //token错误  4
-            
-            [self showTextOnly:@"为了您的账户安全，请重新登录"];
+            NSString *text = [LangSwitcher switchLang:@"您的账号已在其他终端登录,重新登录" key:nil];
+            [self showTextOnly:text];
 //            [[NSNotificationCenter defaultCenter] postNotificationName:kUserLoginOutNotification object:nil];
 
             return;

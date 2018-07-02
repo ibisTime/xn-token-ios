@@ -13,7 +13,7 @@
 @interface WalletHeaderView ()
 //背景
 @property (nonatomic, strong) UIImageView *bgIV;
-
+@property (nonatomic, strong) UIImageView *bottomIV;
 //汇率
 @property (nonatomic, strong) UILabel *rateAmountLbl;
 //左边国旗
@@ -21,6 +21,15 @@
 //右边国旗
 @property (nonatomic, strong) UIImageView *rightFlag;
 @property (nonatomic, strong) UILabel *textLbl;
+@property (nonatomic, strong) UILabel *localLbl;
+
+@property (nonatomic, strong) UIImageView *rightArrowIV;
+
+@property (nonatomic, strong) UIImageView *segmentLeft;
+
+@property (nonatomic, strong) UIImageView *segmentRight;
+
+
 @end
 
 @implementation WalletHeaderView
@@ -43,81 +52,202 @@
 - (void)initSubvies {
     
     self.backgroundColor = [UIColor whiteColor];
-    
-    UIImageView *bgIV = [[UIImageView alloc] init];
-    
-    bgIV.image = kImage(@"资产背景");
-    bgIV.contentMode = UIViewContentModeScaleToFill;
-    
-    [self addSubview:bgIV];
-    [bgIV mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.left.top.right.equalTo(@0);
-        make.height.equalTo(@(150 + kStatusBarHeight));
-        
-    }];
-    
-    self.bgIV = bgIV;
+    self.userInteractionEnabled = YES;
+   
     
     //text
-    UILabel *textLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kWhiteColor font:18.0];
-    
-    textLbl.text = [LangSwitcher switchLang:@"我的资产" key:nil];
-    self.textLbl = textLbl;
-    [self addSubview:textLbl];
-    [textLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.centerX.equalTo(self.mas_centerX);
-        make.top.equalTo(self.mas_top).offset(13 + kStatusBarHeight);
-        
-    }];
+  
     UIButton *addButton = [UIButton buttonWithType:UIButtonTypeCustom];
     self.addButton = addButton;
-    [addButton setBackgroundImage:kImage(@"添加") forState:UIControlStateNormal];
+    [addButton setImage:kImage(@"增加") forState:UIControlStateNormal];
     [addButton addTarget:self action:@selector(addCurrent) forControlEvents:UIControlEventTouchUpInside];
-    
-    
-    //    [equivalentBtn setImage:kImage(@"总资产") forState:UIControlStateNormal];
-    
+    addButton.backgroundColor = kClearColor;
     [self addSubview:addButton];
     [addButton mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.right.equalTo(self.mas_right).offset(-10);
-        make.centerY.equalTo(self.textLbl.mas_centerY);
-        make.width.height.equalTo(@17);
+        make.top.equalTo(self.mas_top).offset(15+kStatusBarHeight);
+        make.width.height.equalTo(@20);
         
     }];
-    //总资产折合CNY
-    UIButton *equivalentBtn = [UIButton buttonWithTitle:
-                               [LangSwitcher switchLang:@"总资产(CNY)" key:nil]
-                            
-                                             titleColor:kWhiteColor backgroundColor:kClearColor titleFont:12.0];
+    addButton.hidden = YES;
+    UIButton *codeButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.codeButton = codeButton;
+    [codeButton setImage:kImage(@"扫一扫-黑色") forState:UIControlStateNormal];
+    [codeButton addTarget:self action:@selector(codeChoose) forControlEvents:UIControlEventTouchUpInside];
+    codeButton.backgroundColor = kClearColor;
+    [self addSubview:codeButton];
+    [codeButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.right.equalTo(self.addButton.mas_left).offset(-20);
+        make.top.equalTo(self.mas_top).offset(15+kStatusBarHeight);
+        make.width.height.equalTo(@20);
+        
+    }];
     
+    UILabel *equivalentBtn = [UILabel labelWithBackgroundColor:kClearColor textColor:kHexColor(@"#333333") font:10];
+    equivalentBtn.text = [LangSwitcher switchLang:@"总资产(CNY)" key:nil];
     
 //    [equivalentBtn setImage:kImage(@"总资产") forState:UIControlStateNormal];
     
     [self addSubview:equivalentBtn];
     [equivalentBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.top.equalTo(textLbl.mas_bottom).offset(15);
-        make.centerX.equalTo(self.mas_centerX);
-        make.width.greaterThanOrEqualTo(@115);
+        make.top.equalTo(self.mas_top).offset(10+kStatusBarHeight);
+        make.left.equalTo(self.mas_left).offset(19);
+//        make.width.greaterThanOrEqualTo(@115);
         
     }];
     
-    [equivalentBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, 15, 0, 0)];
     
     //总资产
-    self.cnyAmountLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kWhiteColor font:35.0];
+    self.cnyAmountLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kHexColor(@"#333333") font:18.0];
     
     [self addSubview:self.cnyAmountLbl];
     [self.cnyAmountLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.top.equalTo(equivalentBtn.mas_bottom).offset(10);
-        make.centerX.equalTo(self.mas_centerX);
+        make.top.equalTo(equivalentBtn.mas_bottom).offset(5);
+        make.left.equalTo(equivalentBtn.mas_left);
+        make.height.equalTo(@25);
+
+    }];
+    UIImageView *bottomIV = [[UIImageView alloc] init];
+    bottomIV.image = kImage(@"Group8");
+    bottomIV.contentMode = UIViewContentModeScaleToFill;
+    UISwipeGestureRecognizer *leftBottomSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeBottomClick:)];
+    
+    // 设置轻扫的方向
+    
+    leftBottomSwipe.direction = UISwipeGestureRecognizerDirectionLeft;
+    
+    [bottomIV addGestureRecognizer:leftBottomSwipe];
+
+    [self addSubview:bottomIV];
+    bottomIV.userInteractionEnabled = YES;
+    
+    [bottomIV mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.cnyAmountLbl.mas_bottom).offset(30);
+        make.left.equalTo(self.cnyAmountLbl.mas_left).offset(kWidth(120));
+        make.height.equalTo(@(kHeight(120)));
+        make.width.equalTo(@(kWidth(226)));
+        
+    }];
+    self.bottomIV = bottomIV;
+    UILabel *localLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kWhiteColor font:12.0];
+    
+    localLbl.text = [LangSwitcher switchLang:@"私钥钱包 (CNY)" key:nil];
+    self.localLbl = localLbl;
+    [self.bottomIV addSubview:localLbl];
+    UIImageView *imageView  = [[UIImageView alloc] init];
+    imageView.backgroundColor = kClearColor;
+    [self.bottomIV addSubview:imageView];
+    imageView.image = kImage(@"问号");
+    [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.localLbl.mas_top);
+        make.left.equalTo(self.localLbl.mas_right).offset(3);
+        make.width.height.equalTo(@14);
+
+    }];
+    [localLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.left.equalTo(self.bottomIV.mas_left).offset(kWidth(47));
+        make.top.equalTo(self.bottomIV.mas_top).offset(kWidth(44));
         
     }];
     
+    UILabel *LocalMoney = [UILabel labelWithBackgroundColor:kClearColor textColor:kWhiteColor font:30.0];
+    
+    self.LocalMoney = LocalMoney;
+    [self.bottomIV addSubview:LocalMoney];
+    [LocalMoney mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.left.equalTo(self.bottomIV.mas_left).offset(kWidth(43));
+        make.top.equalTo(self.localLbl.mas_bottom).offset(kHeight(3));
+        
+    }];
+    
+    UIImageView *bgIV = [[UIImageView alloc] init];
+    bgIV.image = kImage(@"个人钱包背景");
+    bgIV.contentMode = UIViewContentModeScaleToFill;
+    
+    [self addSubview:bgIV];
+    bgIV.userInteractionEnabled = YES;
+
+    [bgIV mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.cnyAmountLbl.mas_bottom).offset(10);
+        make.left.equalTo(self.cnyAmountLbl.mas_left);
+        make.height.equalTo(@(kHeight(150)));
+        make.width.equalTo(@(kWidth(325)));
+
+    }];
+    UISwipeGestureRecognizer *leftSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeClick:)];
+    
+    // 设置轻扫的方向
+    
+    leftSwipe.direction = UISwipeGestureRecognizerDirectionLeft;
+    
+    [bgIV addGestureRecognizer:leftSwipe];
+
+    self.bgIV = bgIV;
+    UILabel *textLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kHexColor(@"#D3FFFF") font:12.0];
+    
+    textLbl.text = [LangSwitcher switchLang:@"个人钱包 (CNY)" key:nil];
+    self.textLbl = textLbl;
+    [self.bgIV addSubview:textLbl];
+    [textLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.left.equalTo(self.bgIV.mas_left).offset(kWidth(47));
+        make.top.equalTo(self.bgIV.mas_top).offset(kHeight(44));
+        
+    }];
+    UIImageView *image  = [[UIImageView alloc] init];
+    [self.bgIV addSubview:image];
+    image.backgroundColor = kClearColor;
+
+    image.image = kImage(@"问号");
+    [image mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.textLbl.mas_top);
+        make.left.equalTo(self.textLbl.mas_right).offset(3);
+        make.width.height.equalTo(@14);
+        
+    }];
+    UILabel *privateMoney = [UILabel labelWithBackgroundColor:kClearColor textColor:kWhiteColor font:30.0];
+    
+    self.privateMoney = privateMoney;
+    [self.bgIV addSubview:privateMoney];
+    [privateMoney mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.left.equalTo(self.bgIV.mas_left).offset(kWidth(43));
+        make.top.equalTo(self.textLbl.mas_bottom).offset(kHeight(3));
+        
+    }];
+    
+    self.segmentLeft = [[UIImageView alloc] init];
+    [self addSubview:self.segmentLeft];
+    self.segmentLeft.layer.cornerRadius = 4.0;
+    self.segmentLeft.clipsToBounds = YES;
+    self.segmentLeft.backgroundColor = kHexColor(@"#007AFF");
+    [self.segmentLeft mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self.mas_centerX).offset(-5);
+        make.top.equalTo(@(kHeight(244)));
+        make.width.equalTo(@16);
+        make.height.equalTo(@8);
+
+    }];
+    
+    self.segmentRight = [[UIImageView alloc] init];
+    [self addSubview:self.segmentRight];
+    self.segmentRight.layer.cornerRadius = 4.0;
+    self.segmentRight.clipsToBounds = YES;
+    self.segmentRight.backgroundColor = kHexColor(@"#C6D5DC");
+    [self.segmentRight mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.mas_centerX).offset(5);
+        make.top.equalTo(@(kHeight(244)));
+        make.width.equalTo(@8);
+        make.height.equalTo(@8);
+        
+    }];
+   
     //美元
 //    self.usdAmountLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kWhiteColor font:15.0];
 //    
@@ -148,11 +278,157 @@
     
 }
 
+-(void)swipeClick:(UISwipeGestureRecognizer *)swpie{
+    CGPoint point = [swpie locationInView:self];
+    
+    NSLog(@"%@",NSStringFromCGPoint(point));
+//    [UIView animateWithDuration:2 animations:^{
+//
+//
+//
+//        }];
+//
+//    }];
+    [self setNeedsUpdateConstraints];
+
+    [UIView animateWithDuration:0.5 animations:^{
+        [self.bgIV mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.cnyAmountLbl.mas_bottom).offset(10);
+            make.right.equalTo(self.mas_left).offset(-30);
+            make.height.equalTo(@(kHeight(150)));
+            make.width.equalTo(@(kWidth(kScreenWidth-80)));
+        }];
+
+       
+        [self layoutIfNeeded];
+
+        
+    } completion:^(BOOL finished) {
+        if (self.switchBlock) {
+            self.switchBlock(0);
+        }
+        [self setNeedsUpdateConstraints];
+        self.addButton.hidden = NO;
+
+        [UIView animateWithDuration:0.5 animations:^{
+            [self bringSubviewToFront:self.bottomIV];
+
+            [self.bottomIV mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.top.equalTo(self.cnyAmountLbl.mas_bottom).offset(10);
+                make.left.equalTo(self.cnyAmountLbl.mas_left);
+                make.height.equalTo(@(kHeight(150)));
+                make.width.equalTo(@(kWidth(325)));
+                
+            }];
+            
+            [self.bgIV mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.top.equalTo(self.cnyAmountLbl.mas_bottom).offset(30);
+                make.left.equalTo(self.cnyAmountLbl.mas_left).offset(kWidth(120));
+                make.height.equalTo(@(kHeight(120)));
+                make.width.equalTo(@(kWidth(225)));
+                
+            }];
+            [self.segmentRight mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.right.equalTo(self.mas_centerX).offset(-5);
+                make.top.equalTo(@(kHeight(244)));
+                make.width.equalTo(@8);
+                make.height.equalTo(@8);
+                
+            }];
+            
+            
+            [self.segmentLeft mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.left.equalTo(self.mas_centerX).offset(5);
+                make.top.equalTo(@(kHeight(244)));
+                make.width.equalTo(@16);
+                make.height.equalTo(@8);
+                
+            }];
+            [self layoutIfNeeded];
+            [self setNeedsDisplay];
+           
+           
+        }];
+       
+    }];
+    
+}
+-(void)swipeBottomClick:(UISwipeGestureRecognizer *)swpie{
+  
+    [UIView animateWithDuration:0.5 animations:^{
+        [self setNeedsUpdateConstraints];
+        [self.bottomIV mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.cnyAmountLbl.mas_bottom).offset(10);
+            make.right.equalTo(self.cnyAmountLbl.mas_left).offset(-30);
+            make.height.equalTo(@(kHeight(150)));
+            make.width.equalTo(@(kWidth(325)));
+        }];
+        
+        [self layoutIfNeeded];
+        
+        
+    } completion:^(BOOL finished) {
+        if (self.switchBlock) {
+            self.switchBlock(1);
+        }
+        [UIView animateWithDuration:0.5 animations:^{
+            self.addButton.hidden = YES;
+
+            [self setNeedsUpdateConstraints];
+            [self.bgIV mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.top.equalTo(self.cnyAmountLbl.mas_bottom).offset(10);
+                make.left.equalTo(self.cnyAmountLbl.mas_left);
+                make.height.equalTo(@(kHeight(150)));
+                make.width.equalTo(@(kWidth(325)));
+                
+            }];
+            [self bringSubviewToFront:self.bgIV];
+            [self.bottomIV mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.top.equalTo(self.cnyAmountLbl.mas_bottom).offset(30);
+                make.left.equalTo(self.cnyAmountLbl.mas_left).offset((kWidth(120)));
+                make.height.equalTo(@(kHeight(120)));
+                make.width.equalTo(@(kWidth(220)));
+                
+            }];
+            [self.segmentLeft mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.right.equalTo(self.mas_centerX).offset(-5);
+                make.top.equalTo(@(kHeight(244)));
+                make.width.equalTo(@16);
+                make.height.equalTo(@8);
+                
+            }];
+            
+            
+            [self.segmentRight mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.left.equalTo(self.mas_centerX).offset(5);
+                make.top.equalTo(@(kHeight(244)));
+                make.width.equalTo(@8);
+                make.height.equalTo(@8);
+                
+            }];
+            [self layoutIfNeeded];
+            [self setNeedsDisplay];
+
+        }];
+       
+
+    }];
+    
+}
 - (void)addCurrent
 {
     
     if (_addBlock) {
         _addBlock();
+    }
+    
+    
+}
+- (void)codeChoose
+{
+    
+    if (self.codeBlock) {
+        self.codeBlock();
     }
     
     
@@ -168,15 +444,11 @@
     [whiteView mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.left.right.equalTo(@0);
-        make.top.equalTo(self.bgIV.mas_bottom);
-        make.height.equalTo(@50);
+        make.top.equalTo(@(kHeight(256)));
+        make.bottom.equalTo(self.mas_bottom);
         
     }];
-    
-    //点击手势
-    UITapGestureRecognizer *tapGR = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickRate:)];
-    
-    [whiteView addGestureRecognizer:tapGR];
+   
     
     //左边国旗
     self.leftFlag = [[UIImageView alloc] init];
@@ -190,15 +462,22 @@
     }];
     
     //汇率
-    self.rateAmountLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:15.0];
+    self.rateAmountLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:12.0];
     
     [whiteView addSubview:self.rateAmountLbl];
     [self.rateAmountLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.left.equalTo(self.leftFlag.mas_right).offset(10);
         make.centerY.equalTo(whiteView.mas_centerY);
-        
+//        make.right.equalTo(self.rightArrowIV.mas_left).offset(10);
+
+
     }];
+    
+    //点击手势
+    UITapGestureRecognizer *tapGR = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickRate:)];
+    
+    [self.rateAmountLbl addGestureRecognizer:tapGR];
     //右边国旗
     self.rightFlag = [[UIImageView alloc] init];
     
@@ -207,20 +486,39 @@
         
         make.left.equalTo(self.rateAmountLbl.mas_right).offset(10);
         make.centerY.equalTo(whiteView.mas_centerY);
-        
+
     }];
     
     //右箭头
-    UIImageView *rightArrowIV = [[UIImageView alloc] initWithImage:kImage(@"更多-灰色")];
+    UIImageView *rightArrowIV = [[UIImageView alloc] initWithImage:kImage(@"关闭")];
+    self.rightArrowIV = rightArrowIV;
+    rightArrowIV.userInteractionEnabled = YES;
+    UITapGestureRecognizer *leftSwipe = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapClick:)];
+    
+    // 设置轻扫的方向
+    [rightArrowIV addGestureRecognizer:leftSwipe];
     
     [whiteView addSubview:rightArrowIV];
     [rightArrowIV mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.right.equalTo(whiteView.mas_right).offset(-15);
-        make.centerY.equalTo(whiteView.mas_centerY);
-        make.width.equalTo(@(6.5));
+        make.centerY.equalTo(self.leftFlag.mas_centerY);
+        make.width.height.equalTo(@(16));
 
     }];
+}
+
+- (void)tapClick: (UITapGestureRecognizer* )tap
+{
+//    [self.whiteView mas_remakeConstraints:^(MASConstraintMaker *make) {
+//
+//        make.left.right.top.bottom.equalTo(0);
+//    }];
+     [self.whiteView removeFromSuperview];
+    if (self.clearBlock) {
+        self.clearBlock();
+    }
+    
 }
 
 #pragma mark - Setting
@@ -230,7 +528,7 @@
     
     self.leftFlag.image = kImage(@"公告");
     
-    self.rateAmountLbl.text = @"区块链迎来新时代!";
+    self.rateAmountLbl.text =[NSString stringWithFormat:@"  |  %@",usdRate];
     
 //    self.rightFlag.image = kImage(@"中国国旗");
     

@@ -11,7 +11,7 @@
 #import <Photos/Photos.h>
 #import "TLNavigationController.h"
 #import "HTMLStrVC.h"
-
+#import "UIBarButtonItem+convience.h"
 #import <CoreLocation/CoreLocation.h>
 
 #import "CaptchaView.h"
@@ -41,69 +41,152 @@
 //同意按钮
 @property (nonatomic, strong) UIButton *checkBtn;
 
+@property (nonatomic, strong) UIScrollView *contentScrollView;
+
 @end
 
 @implementation TLUserRegisterVC
+-(void)viewWillAppear:(BOOL)animated
+{
+    
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBar.hidden = NO;
+    self.title = [LangSwitcher switchLang:@"注册" key:nil];
 
+}
 - (void)viewDidLoad {
     
     [super viewDidLoad];
-    self.title = [LangSwitcher switchLang:@"注册" key:nil];
-    
+    //取消按钮
+    [UIBarButtonItem addLeftItemWithImageName:kCancelIcon frame:CGRectMake(0, 0, 80, 44) vc:self action:@selector(back)];
+   
+
     [self setUpUI];
 
 }
-
+- (void)back {
+    
+   
+    [self.view endEditing:YES];
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+    [self.navigationController popViewControllerAnimated:YES];
+}
 #pragma mark - Events
 
 - (void)setUpUI {
     
-    self.view.backgroundColor = kBackgroundColor;
+    UIScrollView *contentScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, kStatusBarHeight, kScreenWidth, kScreenHeight)];
+    contentScrollView.backgroundColor = kWhiteColor;
+    self.contentScrollView = contentScrollView;
+    [self.view addSubview:contentScrollView];
+    self.view.backgroundColor = kWhiteColor;
     
     CGFloat margin = ACCOUNT_MARGIN;
     CGFloat w = kScreenWidth - 2*margin;
     CGFloat h = ACCOUNT_HEIGHT;
-    CGFloat titleWidth = 110;
+    CGFloat titleWidth = 20;
     
     CGFloat btnMargin = 15;
+    UILabel *lab = [UILabel labelWithBackgroundColor:kWhiteColor textColor:kBlackColor font:30];
+    lab.text = @"注册!";
+    [self.contentScrollView addSubview:lab];
+    [lab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(@40);
+        make.left.equalTo(@30);
+
+        
+    }];
     
+    UILabel *titlename = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:14];
+    [self.contentScrollView addSubview:titlename];
+    titlename.text = [LangSwitcher switchLang:@"昵称" key:nil];
+    [titlename mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.top.equalTo(lab.mas_bottom).offset(50);
+        make.left.mas_equalTo(20);
+    }];
     //昵称
-    TLTextField *nickNameTF = [[TLTextField alloc] initWithFrame:CGRectMake(margin, 10, w, h) leftTitle:[LangSwitcher switchLang:@"昵称" key:nil] titleWidth:titleWidth placeholder:[LangSwitcher switchLang:@"请设置你的昵称" key:nil]];
-    
-    [self.view addSubview:nickNameTF];
+    TLTextField *nickNameTF = [[TLTextField alloc] initWithFrame:CGRectMake(margin, kHeight(144), w, h) leftTitle:[LangSwitcher switchLang:@"" key:nil] titleWidth:titleWidth placeholder:[LangSwitcher switchLang:@"请设置你的昵称" key:nil]];
+
+    [self.contentScrollView addSubview:nickNameTF];
     self.nickNameTF = nickNameTF;
     
+    
+    UIView *name = [[UIView alloc] init];
+    [self.contentScrollView addSubview:name];
+    name.backgroundColor = kLineColor;
+    name.frame = CGRectMake(btnMargin, nickNameTF.yy, w-30, 2);
+    
+    UILabel *titlePhpne = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:14];
+    [self.contentScrollView addSubview:titlePhpne];
+    titlePhpne.text = [LangSwitcher switchLang:@"手机号" key:nil];
+    titlePhpne.frame = CGRectMake(btnMargin, nickNameTF.yy+5, w-30, 22);
+
     //账号
-    TLTextField *phoneTf = [[TLTextField alloc] initWithFrame:CGRectMake(margin, nickNameTF.yy + 1, w, h) leftTitle:[LangSwitcher switchLang:@"手机号" key:nil] titleWidth:titleWidth placeholder:[LangSwitcher switchLang:@"请输入手机号" key:nil]];
+    TLTextField *phoneTf = [[TLTextField alloc] initWithFrame:CGRectMake(margin, titlePhpne.yy, w, h) leftTitle:[LangSwitcher switchLang:@"" key:nil] titleWidth:titleWidth placeholder:[LangSwitcher switchLang:@"请输入手机号" key:nil]];
     phoneTf.keyboardType = UIKeyboardTypeNumberPad;
-    [self.view addSubview:phoneTf];
+    [self.contentScrollView addSubview:phoneTf];
     self.phoneTf = phoneTf;
     
-    //验证码
-    CaptchaView *captchaView = [[CaptchaView alloc] initWithFrame:CGRectMake(margin, phoneTf.yy + 1, w, h)];
-    [captchaView.captchaBtn addTarget:self action:@selector(sendCaptcha) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:captchaView];
+    UIView *phone = [[UIView alloc] init];
+    [self.contentScrollView addSubview:phone];
+    phone.backgroundColor = kLineColor;
+    phone.frame = CGRectMake(btnMargin, phoneTf.yy, w-30, 2);
+    
+    UILabel *codeLab = [UILabel labelWithTitle:@"验证码" frame:CGRectMake(20, phoneTf.yy+5, w, 22)];
+    codeLab.font = [UIFont systemFontOfSize:14];
+    codeLab.textAlignment = NSTextAlignmentLeft;
+    codeLab.textColor = kTextColor;
+    [self.contentScrollView addSubview:codeLab];
 
+    
+    //验证码
+    CaptchaView *captchaView = [[CaptchaView alloc] initWithFrame:CGRectMake(margin, codeLab.yy + 1, w, h)];
+    [captchaView.captchaBtn addTarget:self action:@selector(sendCaptcha) forControlEvents:UIControlEventTouchUpInside];
+    [self.contentScrollView addSubview:captchaView];
+    UIView *phone1 = [[UIView alloc] init];
+    [self.contentScrollView addSubview:phone1];
+    phone1.backgroundColor = kLineColor;
+    phone1.frame = CGRectMake(btnMargin, captchaView.yy, w-30, 2);
     self.captchaView = captchaView;
     
-    //推荐人
-    self.referTF = [[TLTextField alloc] initWithFrame:CGRectMake(margin, captchaView.yy + 1 , w, h) leftTitle:[LangSwitcher switchLang:@"推荐人(选填)" key:nil] titleWidth:titleWidth placeholder:[LangSwitcher switchLang:@"请输入推荐人手机号码" key:nil]];
-    [self.view addSubview:self.referTF];
-    self.referTF.keyboardType = UIKeyboardTypeNumberPad;
+//    //推荐人
+//    self.referTF = [[TLTextField alloc] initWithFrame:CGRectMake(margin, captchaView.yy + 1 , w, h) leftTitle:[LangSwitcher switchLang:@"推荐人(选填)" key:nil] titleWidth:titleWidth placeholder:[LangSwitcher switchLang:@"请输入推荐人手机号码" key:nil]];
+//    [self.view addSubview:self.referTF];
+//    self.referTF.keyboardType = UIKeyboardTypeNumberPad;
     
     //密码
-    TLTextField *pwdTf = [[TLTextField alloc] initWithFrame:CGRectMake(margin, self.referTF.yy + 10, w, h) leftTitle:[LangSwitcher switchLang:@"密码" key:nil] titleWidth:titleWidth placeholder:[LangSwitcher switchLang:@"请输入密码(不少于6位)" key:nil]];
+    
+    UILabel *pwdLab = [UILabel labelWithTitle:@"密码" frame:CGRectMake(20, captchaView.yy+5, w, 22)];
+    pwdLab.font = [UIFont systemFontOfSize:14];
+    pwdLab.textAlignment = NSTextAlignmentLeft;
+    pwdLab.textColor = kTextColor;
+    [self.contentScrollView addSubview:pwdLab];
+    TLTextField *pwdTf = [[TLTextField alloc] initWithFrame:CGRectMake(margin, pwdLab.yy + 10, w, h) leftTitle:[LangSwitcher switchLang:@"" key:nil] titleWidth:titleWidth placeholder:[LangSwitcher switchLang:@"请输入密码(不少于6位)" key:nil]];
     pwdTf.secureTextEntry = YES;
     
-    [self.view addSubview:pwdTf];
+    [self.contentScrollView addSubview:pwdTf];
     self.pwdTf = pwdTf;
-    
+    UIView *phone2 = [[UIView alloc] init];
+    [self.contentScrollView addSubview:phone2];
+    phone2.backgroundColor = kLineColor;
+    phone2.frame = CGRectMake(btnMargin, pwdTf.yy, w-30, 2);
     //re密码
-    TLTextField *rePwdTf = [[TLTextField alloc] initWithFrame:CGRectMake(margin, pwdTf.yy + 1, w, h) leftTitle:[LangSwitcher switchLang:@"确认密码" key:nil] titleWidth:titleWidth placeholder:[LangSwitcher switchLang:@"确认密码" key:nil]];
-    rePwdTf.secureTextEntry = YES;
-    [self.view addSubview:rePwdTf];
-    self.rePwdTf = rePwdTf;
+    UILabel *sureLab = [UILabel labelWithTitle:@"确认密码" frame:CGRectMake(20, pwdTf.yy+5, w, 22)];
+    sureLab.font = [UIFont systemFontOfSize:14];
+    sureLab.textAlignment = NSTextAlignmentLeft;
+    sureLab.textColor = kTextColor;
+    [self.contentScrollView addSubview:sureLab];
     
+    TLTextField *rePwdTf = [[TLTextField alloc] initWithFrame:CGRectMake(margin, sureLab.yy + 1, w, h) leftTitle:[LangSwitcher switchLang:@"" key:nil] titleWidth:titleWidth placeholder:[LangSwitcher switchLang:@"确认密码" key:nil]];
+    rePwdTf.secureTextEntry = YES;
+    [self.contentScrollView addSubview:rePwdTf];
+    self.rePwdTf = rePwdTf;
+    UIView *phone3 = [[UIView alloc] init];
+    [self.contentScrollView addSubview:phone3];
+    phone3.backgroundColor = kLineColor;
+    phone3.frame = CGRectMake(btnMargin, rePwdTf.yy, w-30, 2);
 //    for (int i = 0; i < 2; i++) {
     
 //        UIView *line = [[UIView alloc] init];
@@ -122,11 +205,11 @@
 //    }
     
     //
-    UIButton *confirmBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"确认注册" key:nil] titleColor:kWhiteColor backgroundColor:kAppCustomMainColor titleFont:16.0 cornerRadius:5];
+    UIButton *confirmBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"确定" key:nil] titleColor:kWhiteColor backgroundColor:kAppCustomMainColor titleFont:16.0 cornerRadius:5];
     
     [confirmBtn addTarget:self action:@selector(goReg) forControlEvents:UIControlEventTouchUpInside];
     
-    [self.view addSubview:confirmBtn];
+    [self.contentScrollView addSubview:confirmBtn];
     [confirmBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.left.mas_equalTo(btnMargin);
@@ -143,7 +226,7 @@
     
     [checkBtn addTarget:self action:@selector(clickSelect:) forControlEvents:UIControlEventTouchUpInside];
     
-    [self.view addSubview:checkBtn];
+    [self.contentScrollView addSubview:checkBtn];
     [checkBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.left.equalTo(confirmBtn.mas_left).offset(5);
@@ -161,7 +244,7 @@
     
     textLbl.userInteractionEnabled = YES;
     
-    [self.view addSubview:textLbl];
+    [self.contentScrollView addSubview:textLbl];
     [textLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.left.equalTo(checkBtn.mas_right).offset(5);
@@ -173,13 +256,16 @@
     
     [protocolBtn addTarget:self action:@selector(readProtocal) forControlEvents:UIControlEventTouchUpInside];
     
-    [self.view addSubview:protocolBtn];
+    [self.contentScrollView addSubview:protocolBtn];
     [protocolBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.left.equalTo(textLbl.mas_right);
         make.centerY.equalTo(checkBtn.mas_centerY);
         
     }];
+    
+    self.contentScrollView.contentSize = CGSizeMake(0, self.rePwdTf.yy+200 );
+    self.contentScrollView.scrollEnabled = YES;
 }
 
 
@@ -217,9 +303,9 @@
 - (void)goReg {
     
     if (![self.nickNameTF.text valid]) {
-        
+
         [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请设置你的昵称" key:nil]];
-        
+
         return ;
     }
     

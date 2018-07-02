@@ -294,7 +294,7 @@
     
     [textArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         
-        UIButton *btn = [UIButton buttonWithTitle:textArr[idx] titleColor:kTextColor backgroundColor:kClearColor titleFont:16.0];
+        UIButton *btn = [UIButton buttonWithTitle:textArr[idx] titleColor:kTextColor backgroundColor:kWhiteColor titleFont:16.0];
         [btn addTarget:self action:@selector(btnClickCurreny:) forControlEvents:UIControlEventTouchUpInside];
         [btn setTitleColor:kHexColor(@"#ffffff") forState:UIControlStateNormal];
 
@@ -319,7 +319,8 @@
             UIView *vLine = [[UIView alloc] init];
             
             vLine.backgroundColor = kLineColor;
-            
+            [btn setBackgroundColor:kWhiteColor forState:UIControlStateNormal];
+
             [self.bottomViw addSubview:vLine];
             [vLine mas_makeConstraints:^(MASConstraintMaker *make) {
                 

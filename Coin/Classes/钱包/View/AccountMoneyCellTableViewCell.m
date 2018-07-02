@@ -161,17 +161,9 @@
     
     //    self.coinIV.image = kImage(_currency.getImgName);
     
-    CoinModel *coin = [CoinUtil getCoinModel:platform.currency];
-    if ([platform.symbol isEqualToString:@"ETH"]) {
-        self.presentImage.image = kImage(@"eth");
-    }else if ([platform.symbol isEqualToString:@"WAN"])
-    {
-        self.presentImage.image = kImage(@"wan");
-
-    }
-    else{
+    CoinModel *coin = [CoinUtil getCoinModel:platform.symbol];
+    
     [self.presentImage sd_setImageWithURL:[NSURL URLWithString:[coin.pic1 convertImageUrl]]];
-    }
     //    self.presentImage.image = [UIImage imageNamed:[platform.currency lowercaseString]];
     
     //    platform.bgColor = kThemeColor;

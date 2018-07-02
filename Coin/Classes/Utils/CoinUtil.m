@@ -231,6 +231,9 @@ NSString *const kCNY = @"CNY";
         NSMutableArray *coinList = responseObject[@"data"];
         
         [[CoinModel coin] saveOpenCoinList:coinList];
+       
+
+    
         
         if (block) {
             block();

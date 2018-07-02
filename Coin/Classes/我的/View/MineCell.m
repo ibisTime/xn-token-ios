@@ -26,6 +26,9 @@
     
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         
+        self.layer.cornerRadius = 4;
+        self.clipsToBounds = YES;
+        
         self.iconImageView = [[UIImageView alloc] init];
         [self.contentView addSubview:self.iconImageView];
         self.iconImageView.contentMode = UIViewContentModeScaleAspectFit;

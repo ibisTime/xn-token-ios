@@ -205,7 +205,9 @@
 		B819BAAA20C6DD7800CEEC5E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B819BAA920C6DD7700CEEC5E /* LaunchScreen.storyboard */; };
 		B83D1E0C20CE63A2007835DB /* WalletLocalVc.m in Sources */ = {isa = PBXBuildFile; fileRef = B83D1E0B20CE63A2007835DB /* WalletLocalVc.m */; };
 		B83D1E0F20CE7076007835DB /* WalletForwordVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B83D1E0E20CE7076007835DB /* WalletForwordVC.m */; };
+		B842D5D520E91AA900891289 /* ChooseCountryVc.m in Sources */ = {isa = PBXBuildFile; fileRef = B842D5D420E91AA900891289 /* ChooseCountryVc.m */; };
 		B87B1BCA20D2509E00EF7B8E /* WalletNewFeaturesVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B87B1BC920D2509E00EF7B8E /* WalletNewFeaturesVC.m */; };
+		B887819920E366BC00879330 /* UIImageView+RotateImgV.m in Sources */ = {isa = PBXBuildFile; fileRef = B887819720E366BC00879330 /* UIImageView+RotateImgV.m */; };
 		B88B092120C8E29D005C2D2F /* JoinMineVc.m in Sources */ = {isa = PBXBuildFile; fileRef = B88B092020C8E29D005C2D2F /* JoinMineVc.m */; };
 		B88B092420C8E34F005C2D2F /* JoinMineTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = B88B092320C8E34F005C2D2F /* JoinMineTableView.m */; };
 		B88B092720C8E371005C2D2F /* JoinMineCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B88B092620C8E371005C2D2F /* JoinMineCell.m */; };
@@ -213,6 +215,7 @@
 		B88B092D20C8F878005C2D2F /* WalletSettingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B88B092C20C8F878005C2D2F /* WalletSettingVC.m */; };
 		B88B093020C9072B005C2D2F /* RevisePassWordVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B88B092F20C9072B005C2D2F /* RevisePassWordVC.m */; };
 		B88B093320C908DC005C2D2F /* ResiseTextFiled.m in Sources */ = {isa = PBXBuildFile; fileRef = B88B093220C908DC005C2D2F /* ResiseTextFiled.m */; };
+		B8A2436520E5E0F20074DF8F /* TLDataBase.m in Sources */ = {isa = PBXBuildFile; fileRef = B8A2436420E5E0F20074DF8F /* TLDataBase.m */; };
 		B8B15C0220CA312100F13220 /* BuildWalletMineVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B8B15C0120CA312100F13220 /* BuildWalletMineVC.m */; };
 		B8B15C0520CA55D600F13220 /* BuildSucessVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B8B15C0420CA55D600F13220 /* BuildSucessVC.m */; };
 		B8B15C0820CA5B1800F13220 /* BuildBackUpVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B8B15C0720CA5B1800F13220 /* BuildBackUpVC.m */; };
@@ -244,6 +247,10 @@
 		B8D5F15620CE0F530005CF96 /* AccountMoneyCellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B8D5F15520CE0F530005CF96 /* AccountMoneyCellTableViewCell.m */; };
 		B8D7E38220D140BC00453860 /* BilllistVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B8D7E38120D140BC00453860 /* BilllistVC.m */; };
 		B8D7E38520D14B8200453860 /* SystemWallModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B8D7E38420D14B8200453860 /* SystemWallModel.m */; };
+		B8D9290620E9BDF10026A3DF /* country.plist in Resources */ = {isa = PBXBuildFile; fileRef = B8D9290520E9BDF00026A3DF /* country.plist */; };
+		B8D9290920E9BF600026A3DF /* CountryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B8D9290820E9BF600026A3DF /* CountryModel.m */; };
+		B8D9290C20E9C1EC0026A3DF /* countrGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = B8D9290B20E9C1EC0026A3DF /* countrGroup.m */; };
+		B8DAD14720E2208B00AF4CD4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B8DAD14920E2208B00AF4CD4 /* InfoPlist.strings */; };
 		B8F63ED720D362DA00556150 /* WalletLocalBillTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = B8F63ED620D362DA00556150 /* WalletLocalBillTableView.m */; };
 		B8F63EDA20D3639900556150 /* LocalBillCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B8F63ED920D3639900556150 /* LocalBillCell.m */; };
 		B8F63EDD20D37FE700556150 /* LocalBillDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B8F63EDC20D37FE700556150 /* LocalBillDetailVC.m */; };
@@ -626,7 +633,6 @@
 		2EE950C41FB05B5900429257 /* TLMineVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLMineVC.h; sourceTree = "<group>"; };
 		2EE950C51FB05B5900429257 /* TLMineVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLMineVC.m; sourceTree = "<group>"; };
 		2EE950D31FB0685300429257 /* TLUIHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLUIHeader.h; sourceTree = "<group>"; };
-		2EFFE6AD1FF483E000BFCC40 /* Base */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		2EFFE6AF1FF4866700BFCC40 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		2EFFE6B41FF6289600BFCC40 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		4C2438232066C2F0003B35F3 /* TopSegmentUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopSegmentUtil.m; sourceTree = "<group>"; };
@@ -656,8 +662,12 @@
 		B83D1E0B20CE63A2007835DB /* WalletLocalVc.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WalletLocalVc.m; sourceTree = "<group>"; };
 		B83D1E0D20CE7076007835DB /* WalletForwordVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WalletForwordVC.h; sourceTree = "<group>"; };
 		B83D1E0E20CE7076007835DB /* WalletForwordVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WalletForwordVC.m; sourceTree = "<group>"; };
+		B842D5D320E91AA900891289 /* ChooseCountryVc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChooseCountryVc.h; sourceTree = "<group>"; };
+		B842D5D420E91AA900891289 /* ChooseCountryVc.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChooseCountryVc.m; sourceTree = "<group>"; };
 		B87B1BC820D2509E00EF7B8E /* WalletNewFeaturesVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WalletNewFeaturesVC.h; sourceTree = "<group>"; };
 		B87B1BC920D2509E00EF7B8E /* WalletNewFeaturesVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WalletNewFeaturesVC.m; sourceTree = "<group>"; };
+		B887819720E366BC00879330 /* UIImageView+RotateImgV.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+RotateImgV.m"; sourceTree = "<group>"; };
+		B887819820E366BC00879330 /* UIImageView+RotateImgV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+RotateImgV.h"; sourceTree = "<group>"; };
 		B88B091F20C8E29D005C2D2F /* JoinMineVc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JoinMineVc.h; sourceTree = "<group>"; };
 		B88B092020C8E29D005C2D2F /* JoinMineVc.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JoinMineVc.m; sourceTree = "<group>"; };
 		B88B092220C8E34F005C2D2F /* JoinMineTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JoinMineTableView.h; sourceTree = "<group>"; };
@@ -672,6 +682,8 @@
 		B88B092F20C9072B005C2D2F /* RevisePassWordVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RevisePassWordVC.m; sourceTree = "<group>"; };
 		B88B093120C908DC005C2D2F /* ResiseTextFiled.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ResiseTextFiled.h; sourceTree = "<group>"; };
 		B88B093220C908DC005C2D2F /* ResiseTextFiled.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ResiseTextFiled.m; sourceTree = "<group>"; };
+		B8A2436320E5E0F20074DF8F /* TLDataBase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLDataBase.h; sourceTree = "<group>"; };
+		B8A2436420E5E0F20074DF8F /* TLDataBase.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLDataBase.m; sourceTree = "<group>"; };
 		B8B15C0020CA312100F13220 /* BuildWalletMineVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BuildWalletMineVC.h; sourceTree = "<group>"; };
 		B8B15C0120CA312100F13220 /* BuildWalletMineVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BuildWalletMineVC.m; sourceTree = "<group>"; };
 		B8B15C0320CA55D600F13220 /* BuildSucessVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BuildSucessVC.h; sourceTree = "<group>"; };
@@ -734,6 +746,20 @@
 		B8D7E38120D140BC00453860 /* BilllistVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BilllistVC.m; sourceTree = "<group>"; };
 		B8D7E38320D14B8200453860 /* SystemWallModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SystemWallModel.h; sourceTree = "<group>"; };
 		B8D7E38420D14B8200453860 /* SystemWallModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SystemWallModel.m; sourceTree = "<group>"; };
+		B8D9290520E9BDF00026A3DF /* country.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = country.plist; sourceTree = "<group>"; };
+		B8D9290720E9BF600026A3DF /* CountryModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CountryModel.h; sourceTree = "<group>"; };
+		B8D9290820E9BF600026A3DF /* CountryModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CountryModel.m; sourceTree = "<group>"; };
+		B8D9290A20E9C1EC0026A3DF /* countrGroup.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = countrGroup.h; sourceTree = "<group>"; };
+		B8D9290B20E9C1EC0026A3DF /* countrGroup.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = countrGroup.m; sourceTree = "<group>"; };
+		B8DAD14820E2208B00AF4CD4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		B8DAD14A20E2208F00AF4CD4 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		B8DAD14B20E2209200AF4CD4 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		B8DAD14C20E220AB00AF4CD4 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		B8DAD14D20E220B500AF4CD4 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		B8DAD14E20E220B500AF4CD4 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
+		B8DAD14F20E220D100AF4CD4 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		B8DAD15120E220DA00AF4CD4 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
+		B8DAD15220E220EE00AF4CD4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B8F63ED520D362DA00556150 /* WalletLocalBillTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WalletLocalBillTableView.h; sourceTree = "<group>"; };
 		B8F63ED620D362DA00556150 /* WalletLocalBillTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WalletLocalBillTableView.m; sourceTree = "<group>"; };
 		B8F63ED820D3639900556150 /* LocalBillCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocalBillCell.h; sourceTree = "<group>"; };
@@ -1204,6 +1230,8 @@
 			isa = PBXGroup;
 			children = (
 				211DE66D1FB58B4B002FCF3D /* UIView+Responder.h */,
+				B887819820E366BC00879330 /* UIImageView+RotateImgV.h */,
+				B887819720E366BC00879330 /* UIImageView+RotateImgV.m */,
 				211DE66F1FB58B4B002FCF3D /* UIView+Responder.m */,
 				211DE66E1FB58B4B002FCF3D /* UIView+Extension.h */,
 				211DE6701FB58B4B002FCF3D /* UIView+Extension.m */,
@@ -1787,6 +1815,8 @@
 				21A7F2F21FB2E2F900FAA0A2 /* TLUserRegisterVC.m */,
 				21A7F2ED1FB2E2F900FAA0A2 /* TLUserForgetPwdVC.h */,
 				21A7F2F11FB2E2F900FAA0A2 /* TLUserForgetPwdVC.m */,
+				B842D5D320E91AA900891289 /* ChooseCountryVc.h */,
+				B842D5D420E91AA900891289 /* ChooseCountryVc.m */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -2055,6 +2085,7 @@
 				B8F63EE520D3DC5E00556150 /* QSount.caf */,
 				2E973FC71FDA279C005C2D5F /* LangSwitcher.h */,
 				2E973FC81FDA279C005C2D5F /* LangSwitcher.m */,
+				B8D9290520E9BDF00026A3DF /* country.plist */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -2092,6 +2123,10 @@
 				2E973FD51FDBC5CC005C2D5F /* BaseButton.m */,
 				2EE3613D1FFC738700A5C3EB /* TLBaseLabel.h */,
 				2EE3613E1FFC738700A5C3EB /* TLBaseLabel.m */,
+				B8D9290A20E9C1EC0026A3DF /* countrGroup.h */,
+				B8D9290B20E9C1EC0026A3DF /* countrGroup.m */,
+				B8D9290720E9BF600026A3DF /* CountryModel.h */,
+				B8D9290820E9BF600026A3DF /* CountryModel.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2123,6 +2158,7 @@
 				2E394FA31FB0546E00BA0829 /* Classes */,
 				2EA584C01FA813C900C7106C /* Assets.xcassets */,
 				2EA584C51FA813C900C7106C /* Info.plist */,
+				B8DAD14920E2208B00AF4CD4 /* InfoPlist.strings */,
 				2EE361351FFB7D4500A5C3EB /* README.md */,
 				B819BAA920C6DD7700CEEC5E /* LaunchScreen.storyboard */,
 				2EA584C61FA813C900C7106C /* main.m */,
@@ -2186,6 +2222,8 @@
 		B860C8AE20CE194700BD29F8 /* DataBase */ = {
 			isa = PBXGroup;
 			children = (
+				B8A2436320E5E0F20074DF8F /* TLDataBase.h */,
+				B8A2436420E5E0F20074DF8F /* TLDataBase.m */,
 			);
 			path = DataBase;
 			sourceTree = "<group>";
@@ -2262,7 +2300,7 @@
 					2EA584B31FA813C900C7106C = {
 						CreatedOnToolsVersion = 9.0.1;
 						LastSwiftMigration = 0940;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -2282,6 +2320,9 @@
 				Base,
 				"zh-Hans",
 				"zh-Hant",
+				en,
+				ko,
+				ja,
 			);
 			mainGroup = 2EA584AB1FA813C900C7106C;
 			productRefGroup = 2EA584B51FA813C900C7106C /* Products */;
@@ -2301,12 +2342,14 @@
 				B8F63EE620D3DC9600556150 /* QSount.caf in Resources */,
 				B819BAAA20C6DD7800CEEC5E /* LaunchScreen.storyboard in Resources */,
 				B819BAA620C6B80300CEEC5E /* AlipaySDK.bundle in Resources */,
+				B8D9290620E9BDF10026A3DF /* country.plist in Resources */,
 				2EFFE6AA1FF4829100BFCC40 /* Localizable.strings in Resources */,
 				2EA584C11FA813C900C7106C /* Assets.xcassets in Resources */,
 				2EB9495B1FDF6B1A00CE4B94 /* SimplifiedCode.txt in Resources */,
 				2EE361361FFB7D4500A5C3EB /* README.md in Resources */,
 				4CA3385D20D2027B006ACE4A /* README.txt in Resources */,
 				4CA3385F20D2027B006ACE4A /* read_me.txt in Resources */,
+				B8DAD14720E2208B00AF4CD4 /* InfoPlist.strings in Resources */,
 				2EB9495C1FDF6B1A00CE4B94 /* TraditionalCode.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2593,6 +2636,7 @@
 				211DE6C01FB58B4C002FCF3D /* NSObject+Extension.m in Sources */,
 				211DE6C71FB58B4C002FCF3D /* HttpRequestObject.m in Sources */,
 				211DE6BD1FB58B4C002FCF3D /* NSString+Date.m in Sources */,
+				B8D9290C20E9C1EC0026A3DF /* countrGroup.m in Sources */,
 				B8C2057320CF9E8800952765 /* WalletLocalAddressVC.m in Sources */,
 				21205CCF1FCCFDCF003C6C7C /* FansTableView.m in Sources */,
 				211DE6C31FB58B4C002FCF3D /* HttpRequestTool.m in Sources */,
@@ -2601,6 +2645,7 @@
 				211DE6A51FB58B4C002FCF3D /* TLProgressHUD.m in Sources */,
 				B88B092D20C8F878005C2D2F /* WalletSettingVC.m in Sources */,
 				216F5B3B206CD9DA00F2C832 /* StoreModel.m in Sources */,
+				B842D5D520E91AA900891289 /* ChooseCountryVc.m in Sources */,
 				2EB039B51FEA0B4500589D8E /* TLUpdateVC.m in Sources */,
 				2159796D1FB831B10029F177 /* FilterView.m in Sources */,
 				21205CDE1FCD3131003C6C7C /* CoinAddressTableView.m in Sources */,
@@ -2612,8 +2657,10 @@
 				211CEF141FCBBF90000FB0C4 /* SelectScrollView.m in Sources */,
 				21CB94F01FDC0CAA00CAB090 /* LanguageSettingCell.m in Sources */,
 				B8BBA63D20C7F6FC00DC4D5F /* WallAccountVC.m in Sources */,
+				B887819920E366BC00879330 /* UIImageView+RotateImgV.m in Sources */,
 				4CC7F0ED205FBC5400BBEC4D /* CoinModel.m in Sources */,
 				211DE6B11FB58B4C002FCF3D /* UIButton+EnLargeEdge.m in Sources */,
+				B8A2436520E5E0F20074DF8F /* TLDataBase.m in Sources */,
 				2EE361551FFE182800A5C3EB /* RespHandler.m in Sources */,
 				21205CE51FCD31E0003C6C7C /* CoinAddressCell.m in Sources */,
 				B8B15C2720CA75CC00F13220 /* AddSearchBottomCell.m in Sources */,
@@ -2638,6 +2685,7 @@
 				216F5B5A206D02DC00F2C832 /* PosMiningVC.m in Sources */,
 				211D3C121FCFE35E00B55F9F /* HistoryRateVC.m in Sources */,
 				216F5B16206CD9C900F2C832 /* TradeFlowListVC.m in Sources */,
+				B8D9290920E9BF600026A3DF /* CountryModel.m in Sources */,
 				4C2438252066C2F1003B35F3 /* TopSegmentUtil.m in Sources */,
 				2E973FD31FDBC5B0005C2D5F /* BaseLabel.m in Sources */,
 				2ED651D22010443D0065A1B0 /* TLAboutUsVC.m in Sources */,
@@ -2658,10 +2706,25 @@
 		2EFFE6AC1FF4829100BFCC40 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				2EFFE6AD1FF483E000BFCC40 /* Base */,
 				2EFFE6AF1FF4866700BFCC40 /* zh-Hans */,
+				B8DAD14E20E220B500AF4CD4 /* ja */,
+				B8DAD14F20E220D100AF4CD4 /* zh-Hant */,
+				B8DAD15120E220DA00AF4CD4 /* ko */,
+				B8DAD15220E220EE00AF4CD4 /* en */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		B8DAD14920E2208B00AF4CD4 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B8DAD14820E2208B00AF4CD4 /* en */,
+				B8DAD14A20E2208F00AF4CD4 /* zh-Hans */,
+				B8DAD14B20E2209200AF4CD4 /* zh-Hant */,
+				B8DAD14C20E220AB00AF4CD4 /* ko */,
+				B8DAD14D20E220B500AF4CD4 /* ja */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -2789,9 +2852,9 @@
 				CODE_SIGN_ENTITLEMENTS = Coin/Coin.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = ZKTVZ75A59;
+				DEVELOPMENT_TEAM = 6PF7VHZB5Z;
 				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = NO;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2818,8 +2881,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.cdkj.wallet;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "df0528b3-24f8-4721-b514-c83e857f3a3f";
+				PROVISIONING_PROFILE_SPECIFIER = devogcwallet;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -2840,9 +2903,9 @@
 				CODE_SIGN_ENTITLEMENTS = Coin/Coin.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = ZKTVZ75A59;
+				DEVELOPMENT_TEAM = 6PF7VHZB5Z;
 				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = NO;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2869,8 +2932,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.cdkj.wallet;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "df0528b3-24f8-4721-b514-c83e857f3a3f";
+				PROVISIONING_PROFILE_SPECIFIER = devogcwallet;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;

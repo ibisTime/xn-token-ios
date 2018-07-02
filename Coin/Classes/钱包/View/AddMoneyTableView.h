@@ -10,6 +10,6 @@
 #import "CurrencyModel.h"
 
 @interface AddMoneyTableView : TLTableView
-@property (nonatomic, strong) NSArray <CurrencyModel *>*currencys;
+@property (nonatomic, strong) NSMutableArray <CurrencyModel *>*currencys;
 
 @end

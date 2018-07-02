@@ -19,9 +19,11 @@
 + (NSString *)getAddressWithPrivateKey: (NSString*)privateKey;
 
 + (NSString * )getGasPrice;
++ (NSString * )getWanGasPrice;
 
 + (NSString * )sendTransactionWithMnemonicWallet: (NSString *)wallet address:(NSString *)address amount:(NSString *)amount gaspic:(NSString*)gasPric gasLimt:(NSString *)gasLimt;
 
++ (NSString * )sendWanTransactionWithMnemonicWallet: (NSString *)wallet address:(NSString *)address amount:(NSString *)amount gaspic:(NSString*)gasPric gasLimt:(NSString *)gasLimt;
 
 +(NSString *)getMnemonicsISRight:(NSString *)mnemon;
 

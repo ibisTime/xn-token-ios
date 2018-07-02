@@ -44,6 +44,11 @@
     
     
 }
++(NSString *)getWanGasPrice
+{
+    return [EthCrypto getWanGasPrice];
+
+}
 
 +(NSString*)getMnemonicsISRight:(NSString *)mnemon
 {
@@ -59,7 +64,12 @@
     return str;
 }
 
-   
++(NSString *)sendWanTransactionWithMnemonicWallet:(NSString *)wallet address:(NSString *)address amount:(NSString *)amount gaspic:(NSString *)gasPric gasLimt:(NSString *)gasLimt
+{
+    
+    NSString *str = [EthCrypto sendWanTransactionWithMnemonic:wallet to:address amount:amount gasPrice:gasPric gasLimit:gasLimt];
+    return str;
+}
 
 
 +(NSString *)getGenerateMnemonics

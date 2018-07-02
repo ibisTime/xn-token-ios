@@ -34,8 +34,21 @@
 - (void)viewDidLoad {
     self.title = [LangSwitcher switchLang:@"导入钱包" key:nil];
     self.view.backgroundColor = kBackgroundColor;
-    NSString *word = [[NSUserDefaults standardUserDefaults] objectForKey:KWalletWord];
-    
+//    NSString *word = [[NSUserDefaults standardUserDefaults] objectForKey:KWalletWord];
+    TLDataBase *dataBase = [TLDataBase sharedManager];
+    NSString *word;
+    if ([dataBase.dataBase open]) {
+        NSString *sql = [NSString stringWithFormat:@"SELECT Mnemonics from THAWallet where userId = '%@'",[TLUser user].userId];
+        //        [sql appendString:[TLUser user].userId];
+        FMResultSet *set = [dataBase.dataBase executeQuery:sql];
+        while ([set next])
+        {
+            word = [set stringForColumn:@"Mnemonics"];
+            
+        }
+        [set close];
+    }
+    [dataBase.dataBase close];
     //验证
     self.userTempArray = [word componentsSeparatedByString:@" "];
     self.wordTempArray = [NSMutableArray array];
@@ -150,17 +163,52 @@
         
         NSString *address = [MnemonicUtil getAddressWithPrivateKey:prikey];
         
-        [[NSUserDefaults standardUserDefaults] setObject:word forKey:KWalletWord];
+        //储存用户导入的钱包
+        //1 查询本地是否存储已创建的钱包
+        TLDataBase *dataBase = [TLDataBase sharedManager];
+        NSString *Mnemonics;
+        if ([dataBase.dataBase open]) {
+            NSString *sql = [NSString stringWithFormat:@"SELECT Mnemonics from THAWallet where userId = '%@'",[TLUser user].userId];
+            //        [sql appendString:[TLUser user].userId];
+            FMResultSet *set = [dataBase.dataBase executeQuery:sql];
+            while ([set next])
+            {
+                Mnemonics = [set stringForColumn:@"Mnemonics"];
+                
+            }
+            [set close];
+        }
+        [dataBase.dataBase close];
         
+        if (Mnemonics.length > 0) {
+            //验证正确
+            RevisePassWordVC *vc = [[RevisePassWordVC alloc] init];
+            vc.IsImport = YES;
+            [self.navigationController pushViewController:vc animated:YES];
+            [TLAlert alertWithMsg:@"导入成功"];
+        }else{
+            
+            //储存导入的钱包
+            TLDataBase *dateBase = [TLDataBase sharedManager];
+            if ([dateBase.dataBase open]) {
+                BOOL sucess = [dateBase.dataBase executeUpdate:@"insert into THAWallet(userId,Mnemonics,wanAddress,wanPrivate,ethPrivate,ethAddress) values(?,?,?,?,?,?)",[TLUser user].userId,word,address,prikey,prikey,address];
+                
+                NSLog(@"导入地址私钥%d",sucess);
+            }
+            [dateBase.dataBase close];
+            RevisePassWordVC *vc = [[RevisePassWordVC alloc] init];
+            vc.IsImport = YES;
+            [self.navigationController pushViewController:vc animated:YES];
+            [TLAlert alertWithMsg:@"导入成功"];
+        }
         
-        [[NSUserDefaults standardUserDefaults] setObject:prikey forKey:KWalletPrivateKey];
-        [[NSUserDefaults standardUserDefaults] setObject:address forKey:KWalletAddress];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-        //验证正确
-        RevisePassWordVC *vc = [[RevisePassWordVC alloc] init];
-        vc.IsImport = YES;
-        [self.navigationController pushViewController:vc animated:YES];
-        [TLAlert alertWithMsg:@"导入成功"];
+//        [[NSUserDefaults standardUserDefaults] setObject:word forKey:KWalletWord];
+//
+//
+//        [[NSUserDefaults standardUserDefaults] setObject:prikey forKey:KWalletPrivateKey];
+//        [[NSUserDefaults standardUserDefaults] setObject:address forKey:KWalletAddress];
+//        [[NSUserDefaults standardUserDefaults] synchronize];
+       
 
         //设置交易密码
     }else{

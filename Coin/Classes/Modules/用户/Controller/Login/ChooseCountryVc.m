@@ -1,0 +1,121 @@
+//
+//  ChooseCountryVc.m
+//  Coin
+//
+//  Created by shaojianfei on 2018/7/1.
+//  Copyright © 2018年 chengdai. All rights reserved.
+//
+
+#import "ChooseCountryVc.h"
+#import "CountryModel.h"
+#import "TLNetworking.h"
+@interface ChooseCountryVc ()<UITableViewDelegate,UITableViewDataSource>
+@property (nonatomic,strong) NSMutableArray <CountryModel *>*countrys;
+@property (nonatomic,strong) UITableView *tableView;
+
+
+@end
+
+@implementation ChooseCountryVc
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.view.backgroundColor = kBackgroundColor;
+    UIButton *cancelBtn = [UIButton buttonWithImageName:@"cancel"];
+    self.cancelBtn = cancelBtn;
+    [cancelBtn addTarget:self action:@selector(clickCancel) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.view addSubview:cancelBtn];
+    [cancelBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.top.equalTo(@(kStatusBarHeight+20));
+        make.left.equalTo(@5);
+        make.width.equalTo(@50);
+        make.height.equalTo(@25);
+        
+        
+    }];
+    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(15, self.cancelBtn.yy+5, kScreenWidth, kScreenHeight - kStatusBarHeight -kTabBarHeight) style:UITableViewStylePlain];
+    tableView.delegate = self;
+    tableView.dataSource = self;
+    self.tableView = tableView;
+    [self loadData];
+    self.title = [LangSwitcher switchLang:@"选择国家" key:nil];
+    // Do any additional setup after loading the view.
+}
+
+- (void)loadData
+{
+    
+   
+    TLNetworking *net = [TLNetworking new];
+    net.showView = self.view;
+    net.code = @"801120";
+    net.isLocal = YES;
+    net.ISparametArray = YES;
+    net.parameters[@"status"] = @"1";
+    [net postWithSuccess:^(id responseObject) {
+        
+        NSLog(@"%@",responseObject);
+//        NSString *str = [NSString stringWithFormat:@"%@", responseObject[@"data"]];
+//        [[NSNotificationCenter defaultCenter] postNotificationName:@"RealNameAuthResult" object:str];
+        
+    } failure:^(NSError *error) {
+        
+        
+    }];
+    
+    
+    
+}
+- (void)clickCancel
+{
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+    
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    
+    return self.countrys.count;
+    
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *IdCell = @"country";
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:IdCell forIndexPath:indexPath];
+    if (!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:IdCell];
+    }
+    
+    cell.textLabel.text = self.countrys[indexPath.row].chineseName;
+    return cell;
+    
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    return 60;
+    
+}
+
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
+
+@end

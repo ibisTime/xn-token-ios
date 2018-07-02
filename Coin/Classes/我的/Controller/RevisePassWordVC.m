@@ -231,18 +231,39 @@
         if (self.IsImport == YES) {
             //导入
             NSString *pwd = [self.FirstPSWArray componentsJoinedByString:@""];
-            [[NSUserDefaults standardUserDefaults] setObject:pwd forKey:KUserPwd];
-            [[NSUserDefaults standardUserDefaults] synchronize];
+//            [[NSUserDefaults standardUserDefaults] setObject:pwd forKey:KUserPwd];
+            //导入钱包交易密码
+            NSString *name;
+            TLDataBase *db = [TLDataBase sharedManager];
+            if ([db.dataBase open]) {
+                NSString *sql = [NSString stringWithFormat:@"UPDATE THAWallet SET PwdKey = '%@' WHERE userId = '%@'",pwd,[TLUser user].userId];
+                BOOL sucess = [db.dataBase executeUpdate:sql];
+               
+                NSLog(@"导入钱包交易密码%d",sucess);
+            }
+            [db.dataBase close];
+    //
+            
+//            [[NSUserDefaults standardUserDefaults] synchronize];
             WalletNewFeaturesVC *newVC = [WalletNewFeaturesVC new];
             [UIApplication sharedApplication].keyWindow.rootViewController = newVC;
 
           
             
         }else{
-            //创建
+            //创建钱包交易密码
             NSString *pwd = [self.FirstPSWArray componentsJoinedByString:@""];
-            [[NSUserDefaults standardUserDefaults] setObject:pwd forKey:KUserPwd];
-            [[NSUserDefaults standardUserDefaults] synchronize];
+//            [[NSUserDefaults standardUserDefaults] setObject:pwd forKey:KUserPwd];
+//            [[NSUserDefaults standardUserDefaults] synchronize];
+            
+            NSString *name;
+            TLDataBase *db = [TLDataBase sharedManager];
+            if ([db.dataBase open]) {
+                NSString *sql = [NSString stringWithFormat:@"UPDATE THAWallet SET PwdKey = '%@' WHERE userId = '%@'",pwd,[TLUser user].userId];
+                BOOL sucess = [db.dataBase executeUpdate:sql];
+                
+                NSLog(@"创建钱包交易密码%d",sucess);
+            }
         BuildSucessVC *sucessVC = [BuildSucessVC new];
         TLNavigationController *na = [[TLNavigationController alloc] initWithRootViewController:sucessVC];
         
