@@ -87,6 +87,7 @@
 
                               RedEnvelopeShoreVC *vc = [RedEnvelopeShoreVC new];
                               vc.code = responseObject[@"data"][@"code"];
+                              vc.content = greeting;
                               [self presentViewController:vc animated:YES completion:nil];
                               NSLog(@"%@",responseObject);
                           } failure:^(NSError *error) {

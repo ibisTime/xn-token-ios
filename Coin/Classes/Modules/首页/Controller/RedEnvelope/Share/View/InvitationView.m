@@ -3,6 +3,9 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "TLUIHeader.h"
 #import <SVProgressHUD/SVProgressHUD.h>
+#import "AppConfig.h"
+#import "TLUser.h"
+#import "AppColorMacro.h"
 @implementation InvitationView
 {
     UIImageView *wechatImageView;
@@ -16,23 +19,23 @@
     self = [super initWithFrame:frame];
     if (self) {
         
-        UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - 60, 20)];
-        lineView.backgroundColor = [UIColor redColor];
-        [self addSubview:lineView];
+//        UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - 60, 20)];
+//        lineView.backgroundColor = [UIColor redColor];
+//        [self addSubview:lineView];
         
-        self.backgroundColor = [UIColor whiteColor];
+        self.backgroundColor =kHexColor(@"#8F0000");
         
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(InfoNotificationAction:) name:@"InfoNotification" object:nil];
         
-        
-        UIButton *button = [UIButton buttonWithType:(UIButtonTypeCustom)];
-        button.frame = CGRectMake(40, SCREEN_WIDTH - 70, SCREEN_WIDTH - 140, 40);
-        [button setTitle:@"保存二维码" forState:(UIControlStateNormal)];
-        [button addTarget:self action:@selector(buttonClick) forControlEvents:(UIControlEventTouchUpInside)];
-        button.titleLabel.font = FONT(16);
-        [button setBackgroundColor:[UIColor redColor]];
-        [self addSubview:button];
+//
+//        UIButton *button = [UIButton buttonWithType:(UIButtonTypeCustom)];
+//        button.frame = CGRectMake(40, SCREEN_WIDTH - 70, SCREEN_WIDTH - 140, 40);
+//        [button setTitle:@"保存二维码" forState:(UIControlStateNormal)];
+//        [button addTarget:self action:@selector(buttonClick) forControlEvents:(UIControlEventTouchUpInside)];
+//        button.titleLabel.font = FONT(16);
+//        [button setBackgroundColor:[UIColor redColor]];
+//        [self addSubview:button];
         
         
 //        UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(0, SCREEN_WIDTH - 20, SCREEN_WIDTH - 60, 20)];
@@ -52,14 +55,17 @@
     NSLog(@"%@",notification.userInfo);
     NSLog(@"---接收到通知---");
     urlStr = [NSString stringWithFormat:@"%@",notification.userInfo[@"code"]];
+    NSString *shareUrl = [NSString stringWithFormat:@"http://m.thadev.hichengdai.com/redPacket/receive.html?code=%@&@inviteCode=%@&lang=%@",urlStr,[TLUser user].inviteCode,@"ZN-CN"];
+    
+    
     // 1. 实例化二维码滤镜
-    NSLog(@"======%@",urlStr);
+    NSLog(@"shareUrl======%@",shareUrl);
     CIFilter *filter = [CIFilter filterWithName:@"CIQRCodeGenerator"];
     // 2. 恢复滤镜的默认属性
     [filter setDefaults];
     // 3. 将字符串转换成NSData
     ;//测试二维码地址,次二维码不能支付,需要配合服务器来二维码的地址(跟后台人员配合)
-    NSData *data = [urlStr dataUsingEncoding:NSUTF8StringEncoding];
+    NSData *data = [shareUrl dataUsingEncoding:NSUTF8StringEncoding];
     // 4. 通过KVO设置滤镜inputMessage数据
     [filter setValue:data forKey:@"inputMessage"];
     
@@ -69,10 +75,24 @@
     // 6. 将CIImage转换成UIImage，并放大显示 (此时获取到的二维码比较模糊,所以需要用下面的createNonInterpolatedUIImageFormCIImage方法重绘二维码)
     //            UIImage *codeImage = [UIImage imageWithCIImage:outputImage scale:1.0 orientation:UIImageOrientationUp];
     
-    wechatImageView = [[UIImageView alloc] initWithFrame:CGRectMake(40, 40, SCREEN_WIDTH - 140, SCREEN_WIDTH - 140)];
+    wechatImageView = [[UIImageView alloc] initWithFrame:CGRectMake(10,10,148,148)];
     
-    wechatImageView.image = [self createNonInterpolatedUIImageFormCIImage:outputImage withSize:200];//重绘二维码,使其显示清晰
+    wechatImageView.image = [self createNonInterpolatedUIImageFormCIImage:outputImage withSize:183];//重绘二维码,使其显示清晰
+    
+    UIImageView *image = [[UIImageView alloc] init];
+    [self addSubview:image];
+    image.image = kImage(@"二维码 框");
+    image.frame =CGRectMake(0,0,168,168);
     [self addSubview:wechatImageView];
+    
+    
+  
+    
+    if (self.codeblock) {
+        self.codeblock = ^{
+            
+        };
+    }
 }
 
 - (void)dealloc

@@ -161,11 +161,7 @@
     [bgView addSubview:PhoneCode];
     PhoneCode.text = [LangSwitcher switchLang:@"+86" key:nil];
     self.PhoneCode = PhoneCode;
-    [PhoneCode mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.top.equalTo(titlePhpne.mas_bottom).offset(40);
-        make.left.mas_equalTo(20);
-    }];
+    PhoneCode.frame = CGRectMake(15, kHeight(134), 45, h);
     TLTextField *phone = [[TLTextField alloc] initWithFrame:CGRectMake(60, kHeight(134), w, h) leftTitle:[LangSwitcher switchLang:@"" key:nil] titleWidth:0 placeholder:[LangSwitcher switchLang:@"请输入手机号" key:nil]];
     phone.keyboardType = UIKeyboardTypeNumberPad;
     AccountTf *phoneTf = [[AccountTf alloc] initWithFrame:CGRectMake(0, kHeight(134), w-40, h)];

@@ -48,7 +48,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view
-    self.title = @"还款";
+    self.title = @"我的糖包";
 
     UIView *backView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 70)];
     backView.backgroundColor = HeadBackColor;

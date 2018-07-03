@@ -12,5 +12,6 @@
 
 @property (nonatomic , strong)UIImageView *headImage;
 @property (nonatomic , strong)UIButton *shoreButton;
-
+@property (nonatomic , copy)NSString *content;
+@property (nonatomic , strong) UILabel *detailedLabel;
 @end
