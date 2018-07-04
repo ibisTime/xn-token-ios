@@ -106,13 +106,10 @@
     _currency = currency;
     if (self.ISLocal == YES) {
         //去中心化货币
-        if ([currency.symbol isEqualToString:@"ETH"]) {
-            self.bgIV.image = kImage(@"eth");
-        }else if ([currency.symbol isEqualToString:@"WAN"])
-        {
-            self.bgIV.image = kImage(@"wan");
+        CoinModel *coin = [CoinUtil getCoinModel:currency.symbol];
 
-        }
+        [self.bgIV sd_setImageWithURL:[NSURL URLWithString:[coin.icon convertImageUrl]]];
+
         self.currentLbl.text = currency.symbol;
         //    NSString *leftAmount = [platform.amountString subNumber:platform.frozenAmountString];
         
@@ -138,7 +135,7 @@
        
     CoinModel *coin = [CoinUtil getCoinModel:currency.currency];
 
-    [self.bgIV sd_setImageWithURL:[NSURL URLWithString:[coin.icon convertImageUrl]]];
+    [self.bgIV sd_setImageWithURL:[NSURL URLWithString:[coin.pic1 convertImageUrl]]];
     self.currentLbl.text = currency.currency;
     NSString *leftAmount = [currency.amountString subNumber:currency.frozenAmountString];
 

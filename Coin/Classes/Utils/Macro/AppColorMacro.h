@@ -46,7 +46,7 @@
 #define kPaleBlueColor          [UIColor colorWithHexString:@"#48b0fb"]    //蓝色文字
 #define kRiseColor              [UIColor colorWithHexString:@"#2ac64c"]  //涨
 #define kTextBlack              [UIColor colorWithHexString:@"#333333"]   //黑文字
-#define SugarPacketsBack        [UIColor colorWithHexString:@"#FFB25B"]   //糖包背景
+#define SugarPacketsBack        [UIColor colorWithHexString:@"#FFB25B"]   //红包背景
 #define HeadBackColor           [UIColor colorWithHexString:@"#F66253"]
 
 

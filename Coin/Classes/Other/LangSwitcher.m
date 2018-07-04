@@ -55,7 +55,7 @@
     }
     
     if ([lang isEqualToString:TRADITIONAL]) {
-        return LangTypeTraditional;
+        return LangTypeEnglish;
     }
     if ([lang isEqualToString:ENGLISH]) {
         return LangTypeEnglish;
@@ -76,9 +76,7 @@
 + (NSString *)currentLang {
     
     NSDictionary *dict = @{
-                           SIMPLE : @"简体中文",
-                           TRADITIONAL : @"繁体中文",
-                           ENGLISH : @"英文"
+                           SIMPLE : @"简体中文",                           ENGLISH : @"英文"
                            };
     
     NSString *lang = [[NSUserDefaults standardUserDefaults] objectForKey:LANG];
@@ -101,7 +99,7 @@
         } break;
         case LangTypeTraditional: {
             
-            [userDefaults setObject:TRADITIONAL forKey:LANG];
+            [userDefaults setObject:ENGLISH forKey:LANG];
 
         } break;
 

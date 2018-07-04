@@ -7,10 +7,11 @@
 //
 
 #import "TLBaseVC.h"
-
+#import "RedEnvelopeShoreView.h"
 @interface RedEnvelopeShoreVC : TLBaseVC
 
 @property (nonatomic , copy)NSString *code;
 @property (nonatomic , copy)NSString *content;
+@property (nonatomic , strong) RedEnvelopeShoreView *shoreVie;
 
 @end

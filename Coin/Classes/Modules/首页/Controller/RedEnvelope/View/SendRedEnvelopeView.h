@@ -30,4 +30,7 @@
 
 @property (nonatomic , strong)UILabel *totalNumberLabel;
 
+@property (nonatomic , strong)UILabel *total;
+
+
 @end

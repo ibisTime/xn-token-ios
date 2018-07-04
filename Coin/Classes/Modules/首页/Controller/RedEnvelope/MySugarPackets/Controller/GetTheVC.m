@@ -9,8 +9,8 @@
 #import "GetTheVC.h"
 #import "GetTheTableView.h"
 #import "GetTheModel.h"
-
-@interface GetTheVC ()
+#import "RedEnvelopeVC.h"
+@interface GetTheVC ()<RefreshDelegate>
 @property (nonatomic , strong)GetTheTableView *tableView;
 @property (nonatomic, strong) NSMutableArray <GetTheModel *>*getthe;
 @end
@@ -26,7 +26,7 @@
         self.tableView.backgroundColor = kWhiteColor;
         self.tableView.sectionHeaderHeight = 22;
 
-
+        self.tableView.refreshDelegate = self;
 
     }
     return _tableView;
@@ -120,6 +120,10 @@
     [self.tableView beginRefreshing];
 }
 
-
+-(void)refreshTableView:(TLTableView *)refreshTableview didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+    
+}
 
 @end

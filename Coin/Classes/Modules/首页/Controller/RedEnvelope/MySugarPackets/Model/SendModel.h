@@ -29,4 +29,9 @@
 
 @property (nonatomic , copy)NSString *totalCount;
 
+@property (nonatomic , copy)NSString *code;
+
+@property (nonatomic , copy)NSString *greeting;
+
+
 @end

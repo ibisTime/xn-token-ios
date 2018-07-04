@@ -65,7 +65,7 @@
     [whiteView addSubview:self.coinIV];
     [self.coinIV mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.left.equalTo(@(0));
+        make.left.equalTo(@(10));
         make.top.equalTo(@10);
         make.width.equalTo(@(62));
         make.height.equalTo(@(62));

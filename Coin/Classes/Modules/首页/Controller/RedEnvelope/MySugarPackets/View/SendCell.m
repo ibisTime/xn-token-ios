@@ -28,7 +28,8 @@
     if (self) {
         headImage = [[UIImageView alloc]initWithFrame:CGRectMake(14, 16, 34, 34)];
         [self addSubview:headImage];
-
+        headImage.layer.cornerRadius = 17;
+        headImage.clipsToBounds = YES;
         nameLabel = [UILabel labelWithFrame:CGRectMake(63, 16, (SCREEN_WIDTH - 79)/2, 20) textAligment:(NSTextAlignmentLeft) backgroundColor:kClearColor font:FONT(14) textColor:[UIColor blackColor]];
         [self addSubview:nameLabel];
 
@@ -54,10 +55,10 @@
 -(void)setSendModel:(SendModel *)sendModel
 {
 //    NSLog(@"%@",getModel);
-    nameLabel.text = [NSString stringWithFormat:@"来自 %@",sendModel.sendUserNickname];
+    nameLabel.text = [NSString stringWithFormat:@"%@",sendModel.sendUserNickname];
     timeLabel.text = [sendModel.createDateTime convertDate] ;
 
-    [headImage sd_setImageWithURL:[NSURL URLWithString:[sendModel.sendUserPhoto convertImageUrl]]];
+    [headImage sd_setImageWithURL:[NSURL URLWithString:[sendModel.sendUserPhoto convertImageUrl]] placeholderImage:kImage(@"头像")];
     priceLabel.text = [NSString stringWithFormat:@"%@ %@",sendModel.totalCount,sendModel.symbol];
 //    TheValueLabel.text = [NSString stringWithFormat:@"¥%@",sendModel.totalCountCNY];
 }

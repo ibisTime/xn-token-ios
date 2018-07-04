@@ -27,7 +27,7 @@
 {
     if (!_nameLabel) {
         _nameLabel = [[UILabel alloc]initWithFrame:CGRectMake(54, 0, kScreenWidth - 108, 44)];
-        _nameLabel.text = [LangSwitcher switchLang:@"发糖果" key:nil];
+        _nameLabel.text = [LangSwitcher switchLang:@"发红包" key:nil];
         _nameLabel.textAlignment = NSTextAlignmentCenter;
         _nameLabel.font = Font(18);
         _nameLabel.textColor = [UIColor whiteColor];
@@ -39,8 +39,8 @@
 {
     if (!_recordButton) {
         _recordButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
-        _recordButton.frame = CGRectMake(kScreenWidth - 90, 0, 80, 44);
-        [_recordButton setTitle:[LangSwitcher switchLang:@"我的糖包" key:nil] forState:(UIControlStateNormal)];
+        _recordButton.frame = CGRectMake(kScreenWidth - 140, 0, 120, 44);
+        [_recordButton setTitle:[LangSwitcher switchLang:@"我的红包" key:nil] forState:(UIControlStateNormal)];
         _recordButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
         _recordButton.titleLabel.font = Font(17);
         [_recordButton setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];

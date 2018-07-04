@@ -146,17 +146,17 @@
     
     return [self.manager POST:self.url parameters:self.parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
       
-      [HttpLogger logDebugInfoWithResponse:task.response apiName:self.code resposeString:responseObject request:task.originalRequest error:nil];
-      
-      //打印JSON字符串
-      [HttpLogger logJSONStringWithResponseObject:responseObject];
-      if (!self.disableLog && [AppConfig config].runEnv != RunEnvRelease) {
-          
-          [HttpLogger logDebugInfoWithResponse:task.response apiName:self.code resposeString:responseObject request:task.originalRequest error:nil];
-          
-          //打印JSON字符串
-          [HttpLogger logJSONStringWithResponseObject:responseObject];
-      }
+//      [HttpLogger logDebugInfoWithResponse:task.response apiName:self.code resposeString:responseObject request:task.originalRequest error:nil];
+//
+//      //打印JSON字符串
+//      [HttpLogger logJSONStringWithResponseObject:responseObject];
+//      if (!self.disableLog && [AppConfig config].runEnv != RunEnvRelease) {
+//
+//          [HttpLogger logDebugInfoWithResponse:task.response apiName:self.code resposeString:responseObject request:task.originalRequest error:nil];
+//
+//          //打印JSON字符串
+//          [HttpLogger logJSONStringWithResponseObject:responseObject];
+//      }
       if(self.showView){
           
           [TLProgressHUD dismiss];

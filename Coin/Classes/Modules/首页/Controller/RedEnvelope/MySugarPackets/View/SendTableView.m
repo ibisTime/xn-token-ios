@@ -55,7 +55,9 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
+    if ([self.refreshDelegate respondsToSelector:@selector(refreshTableView:didSelectRowAtIndexPath:)]) {
+        [self.refreshDelegate refreshTableView:tableView didSelectRowAtIndexPath:indexPath];
+    }
 }
 
 #pragma mark -- 行高

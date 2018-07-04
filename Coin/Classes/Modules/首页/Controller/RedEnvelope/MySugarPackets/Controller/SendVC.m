@@ -9,7 +9,9 @@
 #import "SendVC.h"
 #import "SendTableView.h"
 #import "SendModel.h"
-@interface SendVC ()
+#import "RedEnvelopeVC.h"
+#import "RedEnvelopeShoreVC.h"
+@interface SendVC ()<RefreshDelegate>
 @property (nonatomic , strong)SendTableView *tableView;
 @property (nonatomic, strong) NSMutableArray <SendModel *>*send;
 
@@ -25,6 +27,7 @@
 
         self.tableView.backgroundColor = kWhiteColor;
         self.tableView.sectionHeaderHeight = 22;
+        self.tableView.refreshDelegate =self;
     }
     return _tableView;
 }
@@ -116,5 +119,16 @@
 
     [self.tableView beginRefreshing];
 }
+-(void)refreshTableView:(TLTableView *)refreshTableview didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    SendModel *model = self.send[indexPath.row];
+    RedEnvelopeShoreVC *share = [RedEnvelopeShoreVC new];
+    share.code = model.code;
+    share.content = model.greeting;
+    [self presentViewController:share animated:YES completion:nil];
+   
+}
+
+
 
 @end

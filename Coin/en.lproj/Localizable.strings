@@ -38,8 +38,8 @@
 "钱包导入成功" = "The success of the wallet introduction";
 "立即体验" = "Immediate experience";
 "发现" = "found";
-"官方服务" = "";
-"店铺" = "";
+"开" = "open";
+"已抢" = "opened";
 "空投统计" = "";
 "商业应用" = "";
 "币生币" = "coin to coin";
@@ -84,12 +84,12 @@
 "请输入资金密码" = "Please enter the capital cipher";
 "提币申请提交成功" = "The successful submission of the application for the currency";
 "内部转账成功" = "Internal transfer success";
-"可用余额" = "available balance";
+"可用余额" = "Available balance";
 "交易详情" = "transaction details";
 "转出" = "Turn out";
 "转入" = "To change into";
 "我的资产" = "My assets";
-"总资产(CNY)" = "Total assets (CNY)";
+"总资产" = "Total assets";
 "账单" = "Bill";
 "冻结" = "frozen";
 "收款地址" = "Receivable address";
@@ -125,7 +125,7 @@
 "修改交易密码" = "Change transaction password";
 "导出私钥" = "to export the private key";
 "请输入交易密码" = "Please set the trading password";
-//"注意!  THA不储存用户密码,   无法提供找回或重置功能。  如果忘记密码,   用户只能通过自己备份的钱包私钥,   重新导入后设置新密码" = "";
+"注意!  THA不储存用户密码,   无法提供找回或重置功能。  如包忘记密码,   用户只能通过自己备份的钱包私钥,   重新导入后设置新密码" = "";
 "请确认交易密码" = "Please confirm the transaction password";
 "密码输入错误" = "Two input passwords inconsistent";
 "交易密码修改成功" = "Password modified successfully";
@@ -242,9 +242,9 @@
 "自动好评" = "";
 "自动加信任" = "";
 "自动好评开启成功" = "";
-"自动好评关闭成功" = "";
-"自动加信任开启成功" = "";
-"自动加信任关闭成功" = "";
+"关闭" = "close";
+"分享红包" = "share red packet";
+"给您发了一个红包" = "send you a red packet";
 "简体中文" = "Simplified Chinese";
 "繁体中文" = "Traditional Chinese";
 "切换语言" = "To switch between languages";
@@ -274,5 +274,68 @@
 
 "您的账号已在其他终端登录,重新登录" = "your account is already logged in at another terminal, log on again ";
 "交易记录" = "transaction record";
+"重新获取" = "Retrieved";
+"加载失败" = "Load error";
+"发红包" = "Send packet";
+"塞进红包" = "Prepare red packet";
+"红包个数" = "red packet count";
+"red_package_sub_total" = "Token amount";
+"代币" = "token";
+"代币总额" = "Token amount";
+"代币总额" = "Token amount";
+"代币单额" = "Token single";
+
+"我的红包" = "my red packet";
+"红包一响,黄金万两" = "red packet rings, money rises";
+"给您发送了一个红包" = "sent you a red packet";
+"抢到红包" = "received packets";
+"总共发送" = "all";
+"枚" = "Amount";
+"持有" = "hold";
+"总量" = "total";
+"暂无可用货币" = "No currency available";
+"设置资金密码" = "set the funding password";
+"输入资金密码" = "Please input the funding password";
+"修改资金密码" = "set the fund password";
+"资产" = "assets";
+"闪兑" = "flash";
+"一键划转" = "one-click transfer";
+"个人钱包" = "My wallet";
+"秘钥钱包" = "secret key wallet";
+"首创玩法" = "First play";
+"量化理财" = "Quantitative financial management";
+"账户与安全" = "Account and Security";
+"本地货币" = "local currency";
+"钱包工具" = "wallet tool";
+"欢迎回来!" = "welcom back ！";
+"中国!" = "china";
+"请输入手机号" = "Please input your mobile number";
+"忘记密码" = "forgot password";
+"还没账号？" = "No account yet?";
+"立即注册" = "Register now";
+"发红包" = "send red packet";
+"不能为空" = "must not be null";
+"请输入数量" = "input quantity";
+"不能为空" = "must not be null";
+"改为普通红包" = "changed to ordinary red packets";
+"改为拼手气红包" = "changed to a lucky red packetsl";
+"不能为空" = "must not be null";
+"个" = "a";
+"枚" = "a";
+"不能为空" = "must not be null";
+"发出红包" = "sent a red packet";
+"分享" = "share";
+
+
+
+
+
+
+
+
+
+
+
+
 
 

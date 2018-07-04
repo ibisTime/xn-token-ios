@@ -126,16 +126,16 @@
     bottomIV.userInteractionEnabled = YES;
     
     [bottomIV mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.cnyAmountLbl.mas_bottom).offset(30);
+        make.top.equalTo(self.equivalentBtn.mas_bottom).offset(53);
         make.left.equalTo(self.cnyAmountLbl.mas_left).offset(kWidth(120));
         make.height.equalTo(@(kHeight(120)));
         make.width.equalTo(@(kWidth(226)));
         
     }];
     self.bottomIV = bottomIV;
-    UILabel *localLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kWhiteColor font:12.0];
+    UILabel *localLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kWhiteColor font:14.0];
     
-    localLbl.text = [LangSwitcher switchLang:@"私钥钱包" key:nil];
+    localLbl.text = [LangSwitcher switchLang:@"秘钥钱包" key:nil];
     self.localLbl = localLbl;
     [self.bottomIV addSubview:localLbl];
     UIImageView *imageView  = [[UIImageView alloc] init];
@@ -174,7 +174,7 @@
     bgIV.userInteractionEnabled = YES;
 
     [bgIV mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.cnyAmountLbl.mas_bottom).offset(10);
+        make.top.equalTo(self.equivalentBtn.mas_bottom).offset(37);
         make.left.equalTo(self.cnyAmountLbl.mas_left);
         make.height.equalTo(@(kHeight(150)));
         make.width.equalTo(@(kWidth(325)));
@@ -189,7 +189,7 @@
     [bgIV addGestureRecognizer:leftSwipe];
 
     self.bgIV = bgIV;
-    UILabel *textLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kHexColor(@"#D3FFFF") font:12.0];
+    UILabel *textLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kHexColor(@"#D3FFFF") font:14.0];
     
     textLbl.text = [LangSwitcher switchLang:@"个人钱包" key:nil];
     self.textLbl = textLbl;
@@ -293,7 +293,7 @@
 
     [UIView animateWithDuration:0.5 animations:^{
         [self.bgIV mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.cnyAmountLbl.mas_bottom).offset(10);
+            make.top.equalTo(self.equivalentBtn.mas_bottom).offset(37);
             make.right.equalTo(self.mas_left).offset(-30);
             make.height.equalTo(@(kHeight(150)));
             make.width.equalTo(@(kWidth(kScreenWidth-80)));
@@ -314,7 +314,7 @@
             [self bringSubviewToFront:self.bottomIV];
 
             [self.bottomIV mas_remakeConstraints:^(MASConstraintMaker *make) {
-                make.top.equalTo(self.cnyAmountLbl.mas_bottom).offset(10);
+                make.top.equalTo(self.equivalentBtn.mas_bottom).offset(37);
                 make.left.equalTo(self.cnyAmountLbl.mas_left);
                 make.height.equalTo(@(kHeight(150)));
                 make.width.equalTo(@(kWidth(325)));
@@ -322,7 +322,7 @@
             }];
             
             [self.bgIV mas_remakeConstraints:^(MASConstraintMaker *make) {
-                make.top.equalTo(self.cnyAmountLbl.mas_bottom).offset(30);
+                make.top.equalTo(self.equivalentBtn.mas_bottom).offset(53);
                 make.left.equalTo(self.cnyAmountLbl.mas_left).offset(kWidth(120));
                 make.height.equalTo(@(kHeight(120)));
                 make.width.equalTo(@(kWidth(225)));
@@ -358,7 +358,7 @@
     [UIView animateWithDuration:0.5 animations:^{
         [self setNeedsUpdateConstraints];
         [self.bottomIV mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.cnyAmountLbl.mas_bottom).offset(10);
+            make.top.equalTo(self.equivalentBtn.mas_bottom).offset(37);
             make.right.equalTo(self.cnyAmountLbl.mas_left).offset(-30);
             make.height.equalTo(@(kHeight(150)));
             make.width.equalTo(@(kWidth(325)));
@@ -376,7 +376,7 @@
 
             [self setNeedsUpdateConstraints];
             [self.bgIV mas_remakeConstraints:^(MASConstraintMaker *make) {
-                make.top.equalTo(self.cnyAmountLbl.mas_bottom).offset(10);
+                make.top.equalTo(self.equivalentBtn.mas_bottom).offset(37);
                 make.left.equalTo(self.cnyAmountLbl.mas_left);
                 make.height.equalTo(@(kHeight(150)));
                 make.width.equalTo(@(kWidth(325)));
@@ -384,7 +384,7 @@
             }];
             [self bringSubviewToFront:self.bgIV];
             [self.bottomIV mas_remakeConstraints:^(MASConstraintMaker *make) {
-                make.top.equalTo(self.cnyAmountLbl.mas_bottom).offset(30);
+                make.top.equalTo(self.equivalentBtn.mas_bottom).offset(53);
                 make.left.equalTo(self.cnyAmountLbl.mas_left).offset((kWidth(120)));
                 make.height.equalTo(@(kHeight(120)));
                 make.width.equalTo(@(kWidth(220)));

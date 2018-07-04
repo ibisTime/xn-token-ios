@@ -43,7 +43,7 @@
         [Image sd_setImageWithURL: [NSURL URLWithString: [[TLUser user].photo convertImageUrl]] placeholderImage:kImage(@"头像")];        
         Image.layer.cornerRadius = 30;
         Image.clipsToBounds = YES;
-        [self addSubview:Image];
+        [_headImage addSubview:Image];
         [Image mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.left.equalTo(@5);
             make.bottom.right.equalTo(@-5);
@@ -65,14 +65,15 @@
 
 
         UILabel *detailedLabel = [[UILabel alloc]initWithFrame:CGRectMake(kWidth(35), kHeight(336), kWidth(kScreenWidth - 70), kHeight(33))];
-        detailedLabel.text = @"糖包一响,黄金万两";
+        detailedLabel.text = self.content;
+        self.detailedLabel = detailedLabel;
         detailedLabel.textAlignment = NSTextAlignmentCenter;
         detailedLabel.font = boldFont(24);
         detailedLabel.textColor = kTextColor7;
         [self addSubview:detailedLabel];
 
 
-        _shoreButton  = [UIButton buttonWithTitle:@"分享" titleColor:kTextColor6 backgroundColor:kClearColor titleFont:0];
+        _shoreButton  = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"分享" key:nil] titleColor:kTextColor6 backgroundColor:kClearColor titleFont:0];
         _shoreButton.frame = CGRectMake(kScreenWidth/2 - kHeight(45), kHeight(400), kHeight(90), kHeight(90));
         _shoreButton.titleLabel.font = boldFont(20);
         [_shoreButton setBackgroundImage:kImage(@"圆 按钮") forState:(UIControlStateNormal)];

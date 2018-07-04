@@ -49,7 +49,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view
     UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 100, 44)];
-    label.text = @"我的糖包";
+    label.text = [LangSwitcher switchLang:@"我的红包" key:nil];
     label.textColor = [UIColor whiteColor];
     label.textAlignment = NSTextAlignmentCenter;
     label.font = [UIFont fontWithName:@"Georgia-Bold" size:18];
@@ -128,8 +128,8 @@
 - (void)setupPageButton{
     //button的index值应当从0开始
 
-    UIButton *btn = [self setupButtonWithTitle:@"抢到糖包" Index:0];
-    [self setupButtonWithTitle:@"发出糖包" Index:1];
+    UIButton *btn = [self setupButtonWithTitle:[LangSwitcher switchLang:@"抢到红包" key:nil] Index:0];
+    [self setupButtonWithTitle:[LangSwitcher switchLang:@"发出红包" key:nil] Index:1];
 //    kViewBorderRadius(btn, 0, 2, [UIColor whiteColor]);
     [btn setTitleColor:HeadBackColor forState:(UIControlStateNormal)];
     [btn setBackgroundColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
@@ -138,7 +138,7 @@
 - (UIButton *)setupButtonWithTitle:(NSString *)title Index:(NSInteger)index{
     CGFloat x = SCREEN_WIDTH/2 - 100 +  index * 100;
     CGFloat y = 15;
-    CGFloat w = 101;
+    CGFloat w = 100;
     CGFloat h = 40;
 
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -166,7 +166,6 @@
         maskLayer.path=maskPath.CGPath;
         btn.layer.mask=maskLayer;
     }
-
 
     return btn;
 }
