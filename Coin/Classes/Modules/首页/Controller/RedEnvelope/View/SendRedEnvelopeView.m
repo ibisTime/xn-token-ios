@@ -79,7 +79,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        _type = @"0";
+        _type = @"1";
 
         UIImageView *backImage = [[UIImageView alloc]initWithFrame:self.frame];
         backImage.image = kImage(@"红包底部背景");
@@ -200,7 +200,7 @@
 
     if (_platforms.count > 0) {
         NSMutableArray *nameArray = [NSMutableArray array];
-        for (int i = 0; i < 4; i ++) {
+        for (int i = 0; i < _platforms.count; i ++) {
             CurrencyModel *platform = _platforms[i];
             [nameArray addObject:platform.currency];
         }
@@ -266,7 +266,6 @@
 -(void)setPlatforms:(NSMutableArray<CurrencyModel *> *)platforms
 {
     _platforms = platforms;
-
     CurrencyModel *platform = platforms[index];
     NSLog(@"%@",platform);
     [self Platform:platform];
