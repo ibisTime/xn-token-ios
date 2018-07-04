@@ -11,6 +11,7 @@
 #import "AppColorMacro.h"
 #import "UIImageView+WebCache.h"
 #import "NSString+Extension.h"
+#import "NSString+Date.h"
 @implementation SendCell
 {
     UIImageView *headImage;
@@ -35,11 +36,11 @@
         [self addSubview:timeLabel];
 
 
-        priceLabel = [UILabel labelWithFrame:CGRectMake(63 + (SCREEN_WIDTH - 79)/2, 16, (SCREEN_WIDTH - 79)/2, 20) textAligment:(NSTextAlignmentRight) backgroundColor:kClearColor font:FONT(16) textColor:kPaleBlueColor];
+        priceLabel = [UILabel labelWithFrame:CGRectMake(63 + (SCREEN_WIDTH - 79)/2, 16, (SCREEN_WIDTH - 79)/2, 36) textAligment:(NSTextAlignmentRight) backgroundColor:kClearColor font:FONT(16) textColor:kPaleBlueColor];
         [self addSubview:priceLabel];
 
-        TheValueLabel = [UILabel labelWithFrame:CGRectMake(63 + (SCREEN_WIDTH - 79)/2, 36, (SCREEN_WIDTH - 79)/2 , 14) textAligment:(NSTextAlignmentRight) backgroundColor:kClearColor font:FONT(11) textColor:RGB(173, 186, 192)];
-        [self addSubview:TheValueLabel];
+//        TheValueLabel = [UILabel labelWithFrame:CGRectMake(63 + (SCREEN_WIDTH - 79)/2, 36, (SCREEN_WIDTH - 79)/2 , 14) textAligment:(NSTextAlignmentRight) backgroundColor:kClearColor font:FONT(11) textColor:RGB(173, 186, 192)];
+//        [self addSubview:TheValueLabel];
 
 
         UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(10, 65, SCREEN_WIDTH - 20, 1)];
@@ -54,10 +55,10 @@
 {
 //    NSLog(@"%@",getModel);
     nameLabel.text = [NSString stringWithFormat:@"来自 %@",sendModel.sendUserNickname];
-    timeLabel.text = sendModel.createDateTime;
+    timeLabel.text = [sendModel.createDateTime convertDate] ;
 
     [headImage sd_setImageWithURL:[NSURL URLWithString:[sendModel.sendUserPhoto convertImageUrl]]];
     priceLabel.text = [NSString stringWithFormat:@"%@ %@",sendModel.totalCount,sendModel.symbol];
-    TheValueLabel.text = [NSString stringWithFormat:@"价值%@元",sendModel.totalCountCNY];
+//    TheValueLabel.text = [NSString stringWithFormat:@"¥%@",sendModel.totalCountCNY];
 }
 @end

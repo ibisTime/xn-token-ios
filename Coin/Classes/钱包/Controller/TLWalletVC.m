@@ -75,6 +75,7 @@
 //清除公告 更新UI
 @property (nonatomic, assign) BOOL isClear;
 
+@property (nonatomic, copy) NSString *IsLocalExsit;
 
 @end
 
@@ -692,11 +693,13 @@
     http.parameters[@"token"] = [TLUser user].token;
     
     [http postWithSuccess:^(id responseObject) {
-        
+
         if ([[TLUser user].localMoney isEqualToString:@"美元"]) {
             NSString *cnyStr = [responseObject[@"data"][@"totalAmountUSD"] convertToSimpleRealMoney];
+            if (![self.IsLocalExsit isEqualToString:@"1"]) {
+                self.headerView.cnyAmountLbl.text = [NSString stringWithFormat:@"$ %.2f", [cnyStr doubleValue]];
 
-            self.headerView.cnyAmountLbl.text = [NSString stringWithFormat:@"$ %.2f", [cnyStr doubleValue]];
+            }
             self.headerView.privateMoney.text = [NSString stringWithFormat:@"$ %.2f", [cnyStr doubleValue]];
             self.headerView.equivalentBtn.text = @"总资产(USD)";
             self.headerView.localLbl.text = @"私钥钱包(USD)";
@@ -704,8 +707,11 @@
             [self.headerView setNeedsDisplay];
         }else{
             NSString *cnyStr = [responseObject[@"data"][@"totalAmountCNY"] convertToSimpleRealMoney];
-
-            self.headerView.cnyAmountLbl.text = [NSString stringWithFormat:@"¥ %.2f", [cnyStr doubleValue]];
+            if (![self.IsLocalExsit isEqualToString:@"1"]) {
+                self.headerView.cnyAmountLbl.text = [NSString stringWithFormat:@"$ %.2f", [cnyStr doubleValue]];
+                
+            }
+//            self.headerView.cnyAmountLbl.text = [NSString stringWithFormat:@"¥ %.2f", [cnyStr doubleValue]];
             self.headerView.privateMoney.text = [NSString stringWithFormat:@"¥ %.2f", [cnyStr doubleValue]];
             self.headerView.equivalentBtn.text = @"总资产(CNY)";
             self.headerView.localLbl.text = @"私钥钱包(CNY)";
@@ -781,6 +787,7 @@
         [http postWithSuccess:^(id responseObject) {
     
             NSString *cnyStr = [responseObject[@"data"][@"totalAmountCNY"] convertToSimpleRealMoney];
+            self.IsLocalExsit = @"1";
             if ([[TLUser user].localMoney isEqualToString:@"美元"]) {
                 cnyStr = [responseObject[@"data"][@"totalAmountUSD"] convertToSimpleRealMoney];
                 double f =  [cnyStr doubleValue]+[[self.headerView.privateMoney.text substringFromIndex:1] doubleValue] ;

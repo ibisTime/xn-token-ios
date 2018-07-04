@@ -266,7 +266,7 @@
         NSLog(@"==========%ld",idx);
         CGFloat width = (kScreenWidth-60)/3;
         
-        UIButton *btn = [UIButton buttonWithTitle:[LangSwitcher switchLang:obj key:nil]
+        UIButton *btn = [UIButton buttonWithTitle:nil
                                             titleColor:kWhiteColor
                                        backgroundColor:kClearColor
                                              titleFont:15.0];
