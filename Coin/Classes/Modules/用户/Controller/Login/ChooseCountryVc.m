@@ -19,7 +19,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = kWhiteColor;
+    self.view.backgroundColor = kBackgroundColor;
     UIButton *cancelBtn = [UIButton buttonWithImageName:@"cancel"];
     self.cancelBtn = cancelBtn;
     [cancelBtn addTarget:self action:@selector(clickCancel) forControlEvents:UIControlEventTouchUpInside];
@@ -34,10 +34,25 @@
         
         
     }];
+    UIView *view = [[UIView alloc] init];
+    [self.view addSubview:view];
+    view.backgroundColor = kLineColor;
+    [view mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(cancelBtn.mas_bottom).offset(10);
+        make.left.equalTo(@5);
+        make.right.equalTo(@-5);
+        make.height.equalTo(@2);
+        
+        
+    }];
     UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(15, kStatusBarHeight+70, kScreenWidth-30, kScreenHeight - kStatusBarHeight -kTabBarHeight) style:UITableViewStylePlain];
     tableView.delegate = self;
     tableView.dataSource = self;
+    tableView.showsVerticalScrollIndicator = NO;
+    /** 去掉分割线 */
+    tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView = tableView;
+    tableView.backgroundColor = kBackgroundColor;
     [self.view addSubview:tableView];
     [self loadData];
     UILabel *titleLab = [UILabel labelWithBackgroundColor:kClearColor textColor:kBlackColor font:15];
@@ -108,8 +123,19 @@ static NSString *IdCell = @"country";
     }
      cell.selectionStyle = UITableViewCellSelectionStyleNone;
 
-    cell.textLabel.text = [NSString stringWithFormat:@"%@    %@",self.countrys[indexPath.row].chineseName,self.countrys[indexPath.row].interCode];
+    cell.textLabel.text = [NSString stringWithFormat:@"%@    +%@",self.countrys[indexPath.row].chineseName,[self.countrys[indexPath.row].interCode substringFromIndex:2]];
     cell.detailTextLabel.text = self.countrys[indexPath.row].interCode;
+    cell.backgroundColor = kClearColor;
+    UIView *view = [[UIView alloc] init];
+    view.backgroundColor = kLineColor;
+    [cell addSubview:view];
+    [view mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(cell.mas_bottom).offset(0);
+        make.left.equalTo(@5);
+        make.right.equalTo(@-5);
+        make.height.equalTo(@1);
+
+    }];
     return cell;
     
 }

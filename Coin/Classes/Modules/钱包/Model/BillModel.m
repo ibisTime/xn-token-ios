@@ -42,6 +42,8 @@
                            @"o2o_out" : [LangSwitcher switchLang:@"o2o店铺消费支出" key:nil],
                            @"transfer_in" : [LangSwitcher switchLang:@"转账收入" key:nil],
                            @"transfer_out" : [LangSwitcher switchLang:@"转账支出" key:nil]
+                           ,
+                           @"sendredpacket_out" : [LangSwitcher switchLang:@"发红包" key:nil]
                            };
     
     return dict[self.bizType];

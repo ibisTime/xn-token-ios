@@ -128,7 +128,7 @@
 //    registBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
     [registBtn addTarget:self action:@selector(goReg) forControlEvents:UIControlEventTouchUpInside];
     [imageView addSubview:registBtn];
-    
+    [registBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, 50, 0, 0 )];
     [registBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.centerX.equalTo(bgView.mas_centerX);
@@ -137,6 +137,14 @@
         make.height.equalTo(@(52));
 
         
+    }];
+    UILabel *title = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:14];
+    [registBtn addSubview:title];
+    title.text = [LangSwitcher switchLang:@"还没账号?" key:nil];
+    [title mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.centerX.equalTo(registBtn.mas_centerX).offset(-40);
+        make.centerY.equalTo(registBtn.mas_centerY);
     }];
     
     UILabel *titleLab = [UILabel labelWithBackgroundColor:kClearColor textColor:kBlackColor font:30];
@@ -232,7 +240,7 @@
     }];
     
     //找回密码
-    UIButton *forgetPwdBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"找回密码?" key:nil] titleColor:kTextColor2 backgroundColor:kClearColor titleFont:14.0];
+    UIButton *forgetPwdBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"忘记密码?" key:nil] titleColor:kTextColor2 backgroundColor:kClearColor titleFont:14.0];
     
     forgetPwdBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
     [forgetPwdBtn addTarget:self action:@selector(findPwd) forControlEvents:UIControlEventTouchUpInside];

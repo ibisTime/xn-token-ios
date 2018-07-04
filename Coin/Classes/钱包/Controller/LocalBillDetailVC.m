@@ -43,13 +43,13 @@
     icImage.layer.cornerRadius = 25;
     icImage.clipsToBounds = YES;
     [self.headerView addSubview:icImage];
-    if ([self.currentModel.symbol isEqualToString:@"ETH"]) {
-        icImage.image = kImage(@"eth");
-    }else if ([self.currentModel.symbol isEqualToString:@"WAN"])
-    {
-        icImage.image = kImage(@"wan");
-
-    }
+//    if ([self.currentModel.symbol isEqualToString:@"ETH"]) {
+//        icImage.image = kImage(@"eth");
+//    }else if ([self.currentModel.symbol isEqualToString:@"WAN"])
+//    {
+//        icImage.image = kImage(@"wan");
+//
+//    }
     
     [icImage mas_makeConstraints:^(MASConstraintMaker *make) {
         
@@ -82,6 +82,7 @@
         
     }
     
+    
     //金额
     UILabel *amountLbl = [UILabel labelWithBackgroundColor:kClearColor
                                                  textColor:kAppCustomMainColor
@@ -104,10 +105,14 @@
     }];
     if ([_bill.direction isEqualToString:@"0"]) {
         textLbl.text = [LangSwitcher switchLang:@"转出" key:nil];
-    }else
-    {
-        
-        textLbl.text = [LangSwitcher switchLang:@"转入" key:nil];
+          icImage.image = kImage(@"提现");
+            
+            
+     } else
+        {
+           
+            icImage.image  = kImage(@"充值");
+            textLbl.text = [LangSwitcher switchLang:@"转入" key:nil];
 
     }
     //

@@ -30,7 +30,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.title = [LangSwitcher switchLang:@"交易流水" key:nil];
+    self.title = [LangSwitcher switchLang:@"敬请期待" key:nil];
     //
     [self initPlaceHolderView];
     //

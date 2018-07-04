@@ -169,6 +169,18 @@
             make.height.width.mas_equalTo(20);
         }];
 
+    }else{
+        
+        UIImageView *iv = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
+        //        iv.backgroundColor = [UIColor orangeColor];
+        [cell addSubview:iv];
+        iv.image = [UIImage imageNamed:@"未选中"];
+        [iv mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.equalTo(cell.mas_centerY);
+            make.right.equalTo(cell.mas_right).offset(-20);
+            make.height.width.mas_equalTo(20);
+        }];
+        
     }
     
     

@@ -32,7 +32,8 @@
     }else{
         
         return NSLocalizedString(content, key);
-        
+//        return NSLocalizedStringFromTable(content,@"MyStrings", @"");
+
     }
     
     
@@ -123,13 +124,16 @@
 }
 
 + (void)startWithTraditional {
-    
+    NSString *currentLanguage = [[NSLocale preferredLanguages] objectAtIndex:0];
+
+    NSLog(@"currentlanguage = %@ alllanguage%@",currentLanguage,[NSLocale preferredLanguages]);
+
     NSString *lang = [[NSUserDefaults standardUserDefaults] objectForKey:LANG];
     if (!lang || lang.length <= 0) {
         
         //获取手机当前语言
         NSString *currentLanguage = [[NSLocale preferredLanguages] objectAtIndex:0];
-        if ([currentLanguage isEqualToString:@"en-US"]) {
+        if ([currentLanguage isEqualToString:@"en-US"]||[currentLanguage isEqualToString:@"en"]) {
             [self changLangType:LangTypeEnglish];
 
             //英文
@@ -157,8 +161,6 @@
         }
         
     }
-//    NSString *currentLanguage = [[NSLocale preferredLanguages] objectAtIndex:0];
-//    NSLog(@"currentlanguage = %@ alllanguage%@",currentLanguage,[NSLocale preferredLanguages]);
 //zh-Hant-US zh-Hans-US
     
 }

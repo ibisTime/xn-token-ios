@@ -21,7 +21,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.title = [LangSwitcher switchLang:@"THA星球" key:nil];
+    self.title = [LangSwitcher switchLang:@"敬请期待" key:nil];
     //敬请期待
     [self initPlaceHolderView];
 }
@@ -29,7 +29,7 @@
 #pragma mark - Init
 - (void)initPlaceHolderView {
     
-    self.placeholderView = [TLPlaceholderView placeholderViewWithImage:nil text:[LangSwitcher switchLang:@"暂未开放, 敬请期待!" key:nil] textColor:kHexColor(@"#fe8472")];
+    self.placeholderView = [TLPlaceholderView placeholderViewWithImage:nil text:[LangSwitcher switchLang:@" 敬请期待!" key:nil] textColor:kTextColor];
     
     [self.view addSubview:self.placeholderView];
 }

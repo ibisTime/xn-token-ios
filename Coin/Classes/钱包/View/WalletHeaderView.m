@@ -70,19 +70,19 @@
         
     }];
     addButton.hidden = YES;
-    UIButton *codeButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.codeButton = codeButton;
-    [codeButton setImage:kImage(@"扫一扫-黑色") forState:UIControlStateNormal];
-    [codeButton addTarget:self action:@selector(codeChoose) forControlEvents:UIControlEventTouchUpInside];
-    codeButton.backgroundColor = kClearColor;
-    [self addSubview:codeButton];
-    [codeButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.right.equalTo(self.addButton.mas_left).offset(-20);
-        make.top.equalTo(self.mas_top).offset(15+kStatusBarHeight);
-        make.width.height.equalTo(@20);
-        
-    }];
+//    UIButton *codeButton = [UIButton buttonWithType:UIButtonTypeCustom];
+//    self.codeButton = codeButton;
+//    [codeButton setImage:kImage(@"扫一扫-黑色") forState:UIControlStateNormal];
+//    [codeButton addTarget:self action:@selector(codeChoose) forControlEvents:UIControlEventTouchUpInside];
+//    codeButton.backgroundColor = kClearColor;
+//    [self addSubview:codeButton];
+//    [codeButton mas_makeConstraints:^(MASConstraintMaker *make) {
+//        
+//        make.right.equalTo(self.addButton.mas_left).offset(-20);
+//        make.top.equalTo(self.mas_top).offset(15+kStatusBarHeight);
+//        make.width.height.equalTo(@20);
+//        
+//    }];
     
     UILabel *equivalentBtn = [UILabel labelWithBackgroundColor:kClearColor textColor:kHexColor(@"#333333") font:10];
 //    equivalentBtn.text = [LangSwitcher switchLang:@"总资产(CNY" key:nil];
@@ -465,6 +465,7 @@
     self.rateAmountLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:12.0];
     
     [whiteView addSubview:self.rateAmountLbl];
+    self.rateAmountLbl.userInteractionEnabled = YES;
     [self.rateAmountLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.left.equalTo(self.leftFlag.mas_right).offset(10);

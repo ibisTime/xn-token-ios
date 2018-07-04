@@ -58,7 +58,7 @@
 
 @property (nonatomic, strong) NSMutableArray <RateModel *>*rates;
 
-@property (nonatomic, strong) TLPageDataHelper *helper;
+@property (nonatomic, strong) TLNetworking *helper;
 
 @property (nonatomic,strong) NSMutableArray <BillModel *>*bills;
 
@@ -70,7 +70,7 @@
 
 @property (nonatomic,strong) NSMutableArray <CountryModel *>*countrys;
 
-
+@property (nonatomic, strong) TLNetworking *http;
 @property (nonatomic, assign) NSInteger switchTager;
 //清除公告 更新UI
 @property (nonatomic, assign) BOOL isClear;
@@ -88,8 +88,13 @@
 //        NSDictionary *arr = [NSDictionary dictionaryWithContentsOfFile: file];
 //        NSLog(@"%@",arr);
        
-    }else if (self.switchTager == 1&&[TLUser user].isLogin == YES){
+    }else if (self.switchTager == 1 &&[TLUser user].isLogin == YES){
         [self switchWithTager:0];
+
+    }else if(self.switchTager&&[TLUser user].isLogin == YES)
+    {
+        [self switchWithTager:0];
+
 
     }else{
         
@@ -134,6 +139,7 @@
     [self requestRateList];
    
     
+    
 //    self.tableView.backgroundColor = [UIColor themeColor];
     
 }
@@ -145,7 +151,7 @@
     
     
     
-    
+    [self queryCenterTotalAmount];
     //获取我的资产
     [self queryMyAmount];
    
@@ -250,7 +256,7 @@
 //                [weakSelf.currentTableView reloadData];
 //                [weakSelf ]
 
-//                [weakSelf switchWithTager:0];
+                [weakSelf switchWithTager:0];
                 NSLog(@"%@",model);
             };
             
@@ -357,6 +363,7 @@
        
 
         [self getMyCurrencyList];
+        [self queryMyAmount];
         self.switchTager = tager;
 
 
@@ -407,6 +414,7 @@
         [self saveLocalWallet];
 
         [self getLocalWalletMessage];
+        
 
         //已存在
         return;
@@ -424,9 +432,9 @@
     [self.currencys removeAllObjects];
     [self.tableView reloadData];
     [self.tableView removeFromSuperview];
-    self.headerView.cnyAmountLbl.text = [NSString stringWithFormat:@" %.2f", 0.00];
-    self.headerView.privateMoney.text = [NSString stringWithFormat:@" %.2f", 0.00];
-    self.headerView.LocalMoney.text = [NSString stringWithFormat:@" %.2f", 0.00];
+//    self.headerView.cnyAmountLbl.text = [NSString stringWithFormat:@" %.2f", 0.00];
+//    self.headerView.privateMoney.text = [NSString stringWithFormat:@" %.2f", 0.00];
+//    self.headerView.LocalMoney.text = [NSString stringWithFormat:@" %.2f", 0.00];
 //    TLNavigationController *na = [[TLNavigationController alloc] initWithRootViewController:MineVC];
 //    [UIApplication sharedApplication].keyWindow.rootViewController = na;
 //    [TLAlert alertWithTitle:[LangSwitcher switchLang:@"创建私钥钱包" key:nil]
@@ -539,7 +547,9 @@
                 
                 [shouldDisplayCoins addObject:currencyModel];
                 //                }
-                
+                //查询总资产
+                [weakSelf queryCenterTotalAmount];
+                [weakSelf queryMyAmount];
             }];
             
             //
@@ -552,8 +562,7 @@
             
         }];
       
-        //查询总资产
-        [weakSelf queryCenterTotalAmount];
+       
         
     }];
     
@@ -573,7 +582,9 @@
                 
                 [shouldDisplayCoins addObject:currencyModel];
                 //                }
-                
+                //查询总资产
+                [weakSelf queryCenterTotalAmount];
+                [weakSelf queryMyAmount];
             }];
             
             //
@@ -629,8 +640,17 @@
     self.coins = arr;
 }
 
+- (void)loadSum
+{
+  
+    self.headerView.cnyAmountLbl.text = [NSString stringWithFormat:@"%.2f",[self.headerView.LocalMoney.text doubleValue] + [self.headerView.privateMoney.text doubleValue]] ;
+    [self.headerView setNeedsDisplay];
+    
+}
+
 - (void)loadNotiction
 {
+    
     TLPageDataHelper *http = [TLPageDataHelper new];
     http.code = @"804040";
     http.parameters[@"channelType"] = @4;
@@ -666,6 +686,7 @@
 - (void)queryCenterTotalAmount {
     
     TLNetworking *http = [TLNetworking new];
+    self.helper = http;
     http.code = @"802503";
     http.parameters[@"userId"] = [TLUser user].userId;
     http.parameters[@"token"] = [TLUser user].token;
@@ -675,7 +696,7 @@
         if ([[TLUser user].localMoney isEqualToString:@"美元"]) {
             NSString *cnyStr = [responseObject[@"data"][@"totalAmountUSD"] convertToSimpleRealMoney];
 
-            self.headerView.cnyAmountLbl.text = [NSString stringWithFormat:@"$ %.2f", [cnyStr doubleValue]];
+//            self.headerView.cnyAmountLbl.text = [NSString stringWithFormat:@"$ %.2f", [cnyStr doubleValue]];
             self.headerView.privateMoney.text = [NSString stringWithFormat:@"$ %.2f", [cnyStr doubleValue]];
             self.headerView.equivalentBtn.text = @"总资产(USD)";
             self.headerView.localLbl.text = @"私钥钱包(USD)";
@@ -684,7 +705,7 @@
         }else{
             NSString *cnyStr = [responseObject[@"data"][@"totalAmountCNY"] convertToSimpleRealMoney];
 
-            self.headerView.cnyAmountLbl.text = [NSString stringWithFormat:@"¥ %.2f", [cnyStr doubleValue]];
+//            self.headerView.cnyAmountLbl.text = [NSString stringWithFormat:@"¥ %.2f", [cnyStr doubleValue]];
             self.headerView.privateMoney.text = [NSString stringWithFormat:@"¥ %.2f", [cnyStr doubleValue]];
             self.headerView.equivalentBtn.text = @"总资产(CNY)";
             self.headerView.localLbl.text = @"私钥钱包(CNY)";
@@ -710,7 +731,7 @@
 }
 - (void)queryMyAmount
 {
-    TLNetworking *http = [TLNetworking new];
+    TLNetworking *http = self.helper;
     http.code = @"802270";
     http.isLocal = YES;
     http.isUploadToken = NO;
@@ -762,8 +783,8 @@
             NSString *cnyStr = [responseObject[@"data"][@"totalAmountCNY"] convertToSimpleRealMoney];
             if ([[TLUser user].localMoney isEqualToString:@"美元"]) {
                 cnyStr = [responseObject[@"data"][@"totalAmountUSD"] convertToSimpleRealMoney];
-
-                self.headerView.cnyAmountLbl.text = [NSString stringWithFormat:@"$ %.2f", [cnyStr doubleValue]];
+                double f =  [cnyStr doubleValue]+[[self.headerView.privateMoney.text substringFromIndex:1] doubleValue] ;
+                self.headerView.cnyAmountLbl.text = [NSString stringWithFormat:@"$ %.2f", f] ;
                 self.headerView.LocalMoney.text = [NSString stringWithFormat:@"$ %.2f", [cnyStr doubleValue]];
                 self.headerView.localLbl.text = @"私钥钱包(USD)";
                 self.headerView.textLbl.text = @"个人钱包(USD)";
@@ -786,7 +807,9 @@
 
             }else
             {
-                self.headerView.cnyAmountLbl.text = [NSString stringWithFormat:@"¥ %.2f", [cnyStr doubleValue]];
+                double f =  [cnyStr doubleValue]+[[self.headerView.privateMoney.text substringFromIndex:1] doubleValue] ;
+                self.headerView.cnyAmountLbl.text = [NSString stringWithFormat:@"¥ %.2f", f];
+//                self.headerView.cnyAmountLbl.text = [NSString stringWithFormat:@"¥ %.2f", [cnyStr doubleValue]];
                 self.headerView.LocalMoney.text = [NSString stringWithFormat:@"¥ %.2f", [cnyStr doubleValue]];
                 self.headerView.equivalentBtn.text = @"总资产(CNY)";
 
@@ -817,6 +840,8 @@
         }];
     
 }
+
+
 
 #pragma mark - Data
 - (void)queryTotalAmount {
@@ -1105,33 +1130,16 @@
     
     CoinWeakSelf;
     
-    //判断是否认证身份
-    if (![[TLUser user].realName valid]) {
-        
-        ZMAuthVC *zmAuthVC = [ZMAuthVC new];
-        
-        zmAuthVC.title = [LangSwitcher switchLang:@"实名认证" key:nil];
-        
-        zmAuthVC.success = ^{
-            
-            //实名认证成功后，判断是否设置资金密码
-            if ([[TLUser user].tradepwdFlag isEqualToString:@"0"]) {
-                
-                [TLAlert alertWithInfo:[LangSwitcher switchLang:@"实名认证成功, 请设置资金密码" key:nil]];
-                
-            } else {
-                
-                [TLAlert alertWithInfo:[LangSwitcher switchLang:@"实名认证成功" key:nil]];
-            }
-            
-            [weakSelf clickWithdrawWithCurrency:currencyModel];
-            
-        };
-        
-        [self.navigationController pushViewController:zmAuthVC animated:YES];
-        
-        return ;
-    }
+//    //判断是否认证身份
+//    if (![[TLUser user].realName valid]) {
+//
+//        ZMAuthVC *zmAuthVC = [ZMAuthVC new];
+//
+//        zmAuthVC.title = [LangSwitcher switchLang:@"实名认证" key:nil];
+//
+//        zmAuthVC.success = ^{
+    
+          
     
     //实名认证成功后，判断是否设置资金密码
     if ([[TLUser user].tradepwdFlag isEqualToString:@"0"]) {
