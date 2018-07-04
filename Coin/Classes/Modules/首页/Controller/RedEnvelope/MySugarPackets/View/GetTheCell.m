@@ -10,6 +10,8 @@
 #import "TLUIHeader.h"
 #import "AppColorMacro.h"
 #import "UIImageView+WebCache.h"
+#import "NSString+Extension.h"
+#import "NSString+Date.h"
 @implementation GetTheCell
 {
     UIImageView *headImage;
@@ -36,13 +38,13 @@
         [self addSubview:timeLabel];
 
 
-        priceLabel = [UILabel labelWithFrame:CGRectMake(63 + (SCREEN_WIDTH - 79)/2, 16, (SCREEN_WIDTH - 79)/2, 20) textAligment:(NSTextAlignmentRight) backgroundColor:kClearColor font:FONT(16) textColor:kPaleBlueColor];
+        priceLabel = [UILabel labelWithFrame:CGRectMake(63 + (SCREEN_WIDTH - 79)/2, 16, (SCREEN_WIDTH - 79)/2, 36) textAligment:(NSTextAlignmentRight) backgroundColor:kClearColor font:FONT(16) textColor:kPaleBlueColor];
 //        priceLabel.text = @"来自  王小二";
         [self addSubview:priceLabel];
 
-        TheValueLabel = [UILabel labelWithFrame:CGRectMake(63 + (SCREEN_WIDTH - 79)/2, 36, (SCREEN_WIDTH - 79)/2 , 14) textAligment:(NSTextAlignmentRight) backgroundColor:kClearColor font:FONT(11) textColor:RGB(173, 186, 192)];
-//        TheValueLabel.text = @"06-12 wfdsa";
-        [self addSubview:TheValueLabel];
+//        TheValueLabel = [UILabel labelWithFrame:CGRectMake(63 + (SCREEN_WIDTH - 79)/2, 36, (SCREEN_WIDTH - 79)/2 , 14) textAligment:(NSTextAlignmentRight) backgroundColor:kClearColor font:FONT(11) textColor:RGB(173, 186, 192)];
+////        TheValueLabel.text = @"06-12 wfdsa";
+//        [self addSubview:TheValueLabel];
 
 
         UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(10, 65, SCREEN_WIDTH - 20, 1)];
@@ -58,10 +60,10 @@
     NSLog(@"%@",getModel);
     NSDictionary *redPacketInfo = getModel.redPacketInfo;
     nameLabel.text = [NSString stringWithFormat:@"来自 %@",redPacketInfo[@"sendUserNickname"]];
-    timeLabel.text = getModel.createDatetime;
+    timeLabel.text = [getModel.createDatetime convertDate];
 
-    [headImage sd_setImageWithURL:[NSURL URLWithString:redPacketInfo[@"sendUserPhoto"]]];
-    priceLabel.text = [NSString stringWithFormat:@"%@ %@",redPacketInfo[@"receivedNum"],redPacketInfo[@"symbol"]];
-    TheValueLabel.text = [NSString stringWithFormat:@"价值%@元",redPacketInfo[@"totalCountCNY"]];
+    [headImage sd_setImageWithURL:[NSURL URLWithString:[redPacketInfo[@"sendUserPhoto"] convertImageUrl ]]];
+    priceLabel.text = [NSString stringWithFormat:@"%@ %@",redPacketInfo[@"totalCount"],redPacketInfo[@"symbol"]];
+//    TheValueLabel.text = [NSString stringWithFormat:@"¥%@",redPacketInfo[@"totalCountCNY"]];
 }
 @end

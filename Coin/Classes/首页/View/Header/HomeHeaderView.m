@@ -260,13 +260,13 @@
     NSArray *textArr = @[@"首创玩法",
                          @"余币宝",
                          @"量化理财",
-                         @"红包"];
+                         @"发红包"];
     
     [textArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         NSLog(@"==========%ld",idx);
         CGFloat width = (kScreenWidth-60)/3;
         
-        UIButton *btn = [UIButton buttonWithTitle:[LangSwitcher switchLang:obj key:nil]
+        UIButton *btn = [UIButton buttonWithTitle:nil
                                             titleColor:kWhiteColor
                                        backgroundColor:kClearColor
                                              titleFont:15.0];
