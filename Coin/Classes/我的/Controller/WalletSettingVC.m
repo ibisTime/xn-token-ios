@@ -130,7 +130,7 @@
   
     
     self.group = [SettingGroup new];
-    self.group.sections = @[@[changeTradePwd], @[idAuth, bindEmail, changeLoginPwd]];
+    self.group.sections = @[@[changeTradePwd], @[idAuth, changeLoginPwd]];
     
 }
 

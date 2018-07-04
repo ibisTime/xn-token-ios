@@ -128,7 +128,7 @@
 //    registBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
     [registBtn addTarget:self action:@selector(goReg) forControlEvents:UIControlEventTouchUpInside];
     [imageView addSubview:registBtn];
-    
+    [registBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, 50, 0, 0 )];
     [registBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.centerX.equalTo(bgView.mas_centerX);
@@ -137,6 +137,14 @@
         make.height.equalTo(@(52));
 
         
+    }];
+    UILabel *title = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:14];
+    [registBtn addSubview:title];
+    title.text = [LangSwitcher switchLang:@"还没账号?" key:nil];
+    [title mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.centerX.equalTo(registBtn.mas_centerX).offset(-40);
+        make.centerY.equalTo(registBtn.mas_centerY);
     }];
     
     UILabel *titleLab = [UILabel labelWithBackgroundColor:kClearColor textColor:kBlackColor font:30];
@@ -161,11 +169,7 @@
     [bgView addSubview:PhoneCode];
     PhoneCode.text = [LangSwitcher switchLang:@"+86" key:nil];
     self.PhoneCode = PhoneCode;
-    [PhoneCode mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.top.equalTo(titlePhpne.mas_bottom).offset(40);
-        make.left.mas_equalTo(20);
-    }];
+    PhoneCode.frame = CGRectMake(15, kHeight(134), 45, h);
     TLTextField *phone = [[TLTextField alloc] initWithFrame:CGRectMake(60, kHeight(134), w, h) leftTitle:[LangSwitcher switchLang:@"" key:nil] titleWidth:0 placeholder:[LangSwitcher switchLang:@"请输入手机号" key:nil]];
     phone.keyboardType = UIKeyboardTypeNumberPad;
     AccountTf *phoneTf = [[AccountTf alloc] initWithFrame:CGRectMake(0, kHeight(134), w-40, h)];
@@ -236,7 +240,7 @@
     }];
     
     //找回密码
-    UIButton *forgetPwdBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"找回密码?" key:nil] titleColor:kTextColor2 backgroundColor:kClearColor titleFont:14.0];
+    UIButton *forgetPwdBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"忘记密码?" key:nil] titleColor:kTextColor2 backgroundColor:kClearColor titleFont:14.0];
     
     forgetPwdBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
     [forgetPwdBtn addTarget:self action:@selector(findPwd) forControlEvents:UIControlEventTouchUpInside];

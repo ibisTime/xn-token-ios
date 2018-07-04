@@ -204,7 +204,7 @@
     }];
     
     self.group = [SettingGroup new];
-    self.group.sections = @[@[changeTradePwd], @[idAuth, bindEmail, changeLoginPwd, google,languageSetting]];
+    self.group.sections = @[@[changeTradePwd], @[idAuth, bindEmail, changeLoginPwd, google]];
     
 }
 

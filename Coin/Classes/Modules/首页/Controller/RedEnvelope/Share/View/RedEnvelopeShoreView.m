@@ -10,6 +10,9 @@
 #import "AppColorMacro.h"
 #import "TLUIHeader.h"
 #import "TLUser.h"
+#import "UIImageView+WebCache.h"
+#import "TLUser.h"
+#import "NSString+Extension.h"
 @implementation RedEnvelopeShoreView
 
 -(UIImageView *)headImage
@@ -35,6 +38,16 @@
         [self addSubview:backImg];
 
         [self addSubview:self.headImage];
+        
+        UIImageView *Image = [[UIImageView alloc]init];
+        [Image sd_setImageWithURL: [NSURL URLWithString: [[TLUser user].photo convertImageUrl]] placeholderImage:kImage(@"头像")];        
+        Image.layer.cornerRadius = 30;
+        Image.clipsToBounds = YES;
+        [self addSubview:Image];
+        [Image mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.left.equalTo(@5);
+            make.bottom.right.equalTo(@-5);
+        }];
 
         UILabel *nameLabel = [[UILabel alloc]initWithFrame:CGRectMake(kWidth(35), kHeight(260), kWidth(kScreenWidth - 70), kHeight(20))];
         nameLabel.text = [TLUser user].nickname;

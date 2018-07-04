@@ -34,7 +34,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = [LangSwitcher switchLang:@"币生币" key:nil];
+    self.title = [LangSwitcher switchLang:@"敬请期待" key:nil];
     //
     [self initPlaceHolderView];
     //获取店铺列表
@@ -65,7 +65,7 @@
 
 - (void)initPlaceHolderView {
     
-    self.placeholderView = [TLPlaceholderView placeholderViewWithImage:nil text:[LangSwitcher switchLang:@"暂未开放, 敬请期待!" key:nil] textColor:kHexColor(@"#fe8472")];
+    self.placeholderView = [TLPlaceholderView placeholderViewWithImage:nil text:[LangSwitcher switchLang:@" 敬请期待!" key:nil] textColor:kTextColor];
     
     [self.view addSubview:self.placeholderView];
     

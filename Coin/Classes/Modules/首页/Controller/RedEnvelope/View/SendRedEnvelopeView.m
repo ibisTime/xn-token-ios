@@ -16,6 +16,10 @@
 #import "TLNetworking.h"
 #import "TLAlert.h"
 #import "UIImageView+WebCache.h"
+
+#import "NSString+Date.h"
+#import "NSString+Check.h"
+
 @implementation SendRedEnvelopeView
 {
     UILabel *alltotalLabel;
@@ -29,6 +33,7 @@
     NSString *_greeting;
 
 }
+
 -(UIImageView *)headImage
 {
     if (!_headImage) {
@@ -84,10 +89,26 @@
         UIImageView *backImg = [[UIImageView alloc]initWithFrame:CGRectMake(kWidth(20), kHeight(84), kWidth(335), kHeight(543))];
         backImg.image = kImage(@"红包背景");
         [self addSubview:backImg];
-
+       
+       
+         
+         
 
         [self addSubview:self.headImage];
         [self.headImage addSubview:self.HeadPortraitImage];
+        
+        UIImageView *imageView =[[UIImageView alloc] init];
+        [imageView sd_setImageWithURL: [NSURL URLWithString: [[TLUser user].photo convertImageUrl]] placeholderImage:kImage(@"头像")];        imageView.layer.cornerRadius = 30;
+        imageView.clipsToBounds = YES;
+        [self.headImage addSubview:imageView];
+        [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.top.left.equalTo(@5);
+            make.right.bottom.equalTo(@-5);
+
+            
+        }];
+
         [self addSubview:self.totalNumberLabel];
 
 

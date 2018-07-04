@@ -25,9 +25,13 @@
 {
     if (!_invitationView) {
         _invitationView = [[InvitationView alloc]initWithFrame:CGRectMake(30, SCREEN_HEIGHT, SCREEN_WIDTH - 60, SCREEN_WIDTH + 40)];
-        _invitationView.backgroundColor = RGB(245, 248, 253);
+        _invitationView.backgroundColor = kHexColor(@"#8F000000");
         _invitationView.layer.masksToBounds = YES;
         _invitationView.layer.cornerRadius = 10;
+        CoinWeakSelf;
+        _invitationView.codeblock = ^{
+          
+        };
     }
     return _invitationView;
 }
@@ -37,6 +41,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     RedEnvelopeShoreView *shoreView = [[RedEnvelopeShoreView alloc]initWithFrame:self.view.frame];
+//    shoreView.content = self.content;
+    shoreView.detailedLabel.text = self.content;
     [shoreView.shoreButton addTarget:self action:@selector(shoreButtonClick) forControlEvents:(UIControlEventTouchUpInside)];
     [self.view addSubview:shoreView];
 
@@ -50,13 +56,20 @@
     NSDictionary *dic = @{@"code":_code};
     NSNotification *notification =[NSNotification notificationWithName:@"InfoNotification" object:nil userInfo:dic];
     [[NSNotificationCenter defaultCenter] postNotification:notification];
+    
 }
-
+- (void)getShareUrl
+{
+    
+    
+}
 -(void)shoreButtonClick
 {
-    NSLog(@"123");
-    _invitationView.frame = CGRectMake(30, 100, SCREEN_WIDTH - 60, SCREEN_WIDTH + 40);
+    
+    _invitationView.frame = CGRectMake(30, kHeight(300), 173,173);
     [self showPopAnimationWithAnimationStyle:2];
+    
+   
 }
 
 #pragma mark -- 显示弹框

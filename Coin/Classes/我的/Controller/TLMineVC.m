@@ -358,8 +358,8 @@
         
         self.group.sections = @[
                                 
-                                @[securityCenter,accounrModel,language ],
-                                @[languageSetting,settingModel,helpModel, abountUs]
+                                @[settingModel,accounrModel,language ],
+                                @[languageSetting,securityCenter,helpModel, abountUs]
                                 ];
         
     }

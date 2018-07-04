@@ -29,14 +29,14 @@
     self.delegate = self;
 
     NSArray *titles = @[
-                        [LangSwitcher switchLang:@"钱包" key:nil],
+                        [LangSwitcher switchLang:@"资产" key:nil],
                         [LangSwitcher switchLang:@"发现" key:nil],
                         [LangSwitcher switchLang:@"我的" key:nil]
                         ];
     NSArray *VCNames = @[@"TLWalletVC", @"HomeVC", @"TLMineVC"];
     
-    NSArray *imageNames = @[@"icon_wallet_48", @"fen-lei", @"我的"];
-    NSArray *selectedImageNames = @[@"icon_wallet_filled_48", @"fen-lei-full", @"我的点击"];
+    NSArray *imageNames = @[@"icon_wallet_48", @"发现", @"我的"];
+    NSArray *selectedImageNames = @[@"资产点击", @"发现点击", @"我的点击"];
     
     for (int i = 0; i < imageNames.count; i++) {
         

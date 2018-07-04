@@ -73,6 +73,8 @@
 
 @property (nonatomic, copy) NSString *txHash;
 
+@property (nonatomic, copy) NSString *interType;
+
 
 
 

@@ -29,6 +29,7 @@
 #import "WebVC.h"
 
 #import "MnemonicUtil.h"
+#import "UIBarButtonItem+convience.h"
 
 @interface HomeVC ()
 
@@ -84,9 +85,10 @@
 - (void)initTableView {
     
     CoinWeakSelf;
-    UIBarButtonItem *rightBarItem = [[UIBarButtonItem alloc] initWithImage:kImage(@"消息1") style:UIBarButtonItemStyleDone target:self action:@selector(OpenMessage)];
-    
-    self.navigationItem.rightBarButtonItem = rightBarItem;
+//    UIBarButtonItem *rightBarItem = [[UIBarButtonItem alloc] initWithImage:kImage(@"消息1") style:UIBarButtonItemStyleDone target:self action:@selector(OpenMessage)];
+//
+//    self.navigationItem.rightBarButtonItem = rightBarItem;
+    [UIBarButtonItem addRightItemWithImageName:@"消息" frame:CGRectMake(0, 0, 30, 30) vc:self action:@selector(OpenMessage)];
     [self.view addSubview:self.headerView];
     
     self.tableView = [[HomeTableView alloc] initWithFrame:CGRectZero
