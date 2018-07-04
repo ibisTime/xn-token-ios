@@ -696,7 +696,7 @@
         if ([[TLUser user].localMoney isEqualToString:@"美元"]) {
             NSString *cnyStr = [responseObject[@"data"][@"totalAmountUSD"] convertToSimpleRealMoney];
 
-//            self.headerView.cnyAmountLbl.text = [NSString stringWithFormat:@"$ %.2f", [cnyStr doubleValue]];
+            self.headerView.cnyAmountLbl.text = [NSString stringWithFormat:@"$ %.2f", [cnyStr doubleValue]];
             self.headerView.privateMoney.text = [NSString stringWithFormat:@"$ %.2f", [cnyStr doubleValue]];
             self.headerView.equivalentBtn.text = @"总资产(USD)";
             self.headerView.localLbl.text = @"私钥钱包(USD)";
@@ -705,7 +705,7 @@
         }else{
             NSString *cnyStr = [responseObject[@"data"][@"totalAmountCNY"] convertToSimpleRealMoney];
 
-//            self.headerView.cnyAmountLbl.text = [NSString stringWithFormat:@"¥ %.2f", [cnyStr doubleValue]];
+            self.headerView.cnyAmountLbl.text = [NSString stringWithFormat:@"¥ %.2f", [cnyStr doubleValue]];
             self.headerView.privateMoney.text = [NSString stringWithFormat:@"¥ %.2f", [cnyStr doubleValue]];
             self.headerView.equivalentBtn.text = @"总资产(CNY)";
             self.headerView.localLbl.text = @"私钥钱包(CNY)";

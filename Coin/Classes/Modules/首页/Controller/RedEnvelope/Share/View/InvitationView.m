@@ -55,7 +55,24 @@
     NSLog(@"%@",notification.userInfo);
     NSLog(@"---接收到通知---");
     urlStr = [NSString stringWithFormat:@"%@",notification.userInfo[@"code"]];
-    NSString *shareUrl = [NSString stringWithFormat:@"http://m.thadev.hichengdai.com/redPacket/receive.html?code=%@&@inviteCode=%@&lang=%@",urlStr,[TLUser user].inviteCode,@"ZN-CN"];
+    NSString *shareUrl;
+    NSString *lang;
+    LangType type = [LangSwitcher currentLangType];
+    if (type == LangTypeSimple || type == LangTypeTraditional) {
+        lang = @"cn";
+    }else{
+        lang = @"en";
+
+        
+    }
+    if ([TLUser user].secretUserId) {
+        
+        shareUrl = [NSString stringWithFormat:@"http://m.thadev.hichengdai.com/redPacket/receive.html?code=%@&@inviteCode=%@&lang=%@",urlStr,[TLUser user].inviteCode,lang];
+    }else{
+        shareUrl = [NSString stringWithFormat:@"http://m.thadev.hichengdai.com/redPacket/receive.html?code=%@&@inviteCode=%@&lang=%@",urlStr,[TLUser user].secretUserId,lang];
+        
+    }
+    
     
     
     // 1. 实例化二维码滤镜

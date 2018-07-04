@@ -43,7 +43,9 @@
                            @"transfer_in" : [LangSwitcher switchLang:@"转账收入" key:nil],
                            @"transfer_out" : [LangSwitcher switchLang:@"转账支出" key:nil]
                            ,
-                           @"sendredpacket_out" : [LangSwitcher switchLang:@"发红包" key:nil]
+                           @"sendredpacket_out" : [LangSwitcher switchLang:@"发红包" key:nil],
+                            @"redpacket_back" : [LangSwitcher switchLang:@"红包退回" key:nil],
+                           @"sendredpacket_in" : [LangSwitcher switchLang:@"抢红包" key:nil],
                            };
     
     return dict[self.bizType];

@@ -10,6 +10,7 @@
 #import "TLUIHeader.h"
 #import "AppColorMacro.h"
 #import "UIImageView+WebCache.h"
+#import "NSString+Extension.h"
 @implementation GetTheCell
 {
     UIImageView *headImage;
@@ -60,7 +61,7 @@
     nameLabel.text = [NSString stringWithFormat:@"来自 %@",redPacketInfo[@"sendUserNickname"]];
     timeLabel.text = getModel.createDatetime;
 
-    [headImage sd_setImageWithURL:[NSURL URLWithString:redPacketInfo[@"sendUserPhoto"]]];
+    [headImage sd_setImageWithURL:[NSURL URLWithString:[redPacketInfo[@"sendUserPhoto"] convertImageUrl ]]];
     priceLabel.text = [NSString stringWithFormat:@"%@ %@",redPacketInfo[@"receivedNum"],redPacketInfo[@"symbol"]];
     TheValueLabel.text = [NSString stringWithFormat:@"价值%@元",redPacketInfo[@"totalCountCNY"]];
 }
