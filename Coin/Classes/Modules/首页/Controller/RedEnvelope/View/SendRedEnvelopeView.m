@@ -15,6 +15,7 @@
 #import "TLUser.h"
 #import "TLNetworking.h"
 #import "TLAlert.h"
+#import "UIImageView+WebCache.h"
 @implementation SendRedEnvelopeView
 {
     UILabel *alltotalLabel;
@@ -35,6 +36,16 @@
         _headImage.image = kImage(@"圆 按钮");
     }
     return _headImage;
+}
+
+-(UIImageView *)HeadPortraitImage
+{
+    if (_HeadPortraitImage) {
+        _HeadPortraitImage =[[UIImageView alloc]initWithFrame:CGRectMake(kHeight(3)  , kHeight(3), kHeight(64), kHeight(64))];
+        kViewRadius(_HeadPortraitImage, kHeight(32));
+        [_HeadPortraitImage sd_setImageWithURL:[NSURL URLWithString:[TLUser user].photo]];
+    }
+    return _HeadPortraitImage;
 }
 
 -(UILabel *)totalNumberLabel
@@ -76,6 +87,7 @@
 
 
         [self addSubview:self.headImage];
+        [self.headImage addSubview:self.HeadPortraitImage];
         [self addSubview:self.totalNumberLabel];
 
 

@@ -24,6 +24,8 @@
 
 @property (nonatomic, assign) id <SendRedEnvelopeDelegate> delegate;
 
+@property (nonatomic , strong)UIImageView *HeadPortraitImage;
+
 @property (nonatomic , strong)UIImageView *headImage;
 
 @property (nonatomic , strong)UILabel *totalNumberLabel;
