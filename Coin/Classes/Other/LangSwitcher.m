@@ -31,6 +31,10 @@
         return [ZMChineseConvert convertSimplifiedToTraditional:content];
     }else{
         
+        NSString *text = [NSBundle.mainBundle localizedStringForKey:(content) value:@"" table:nil];
+        
+        NSLog(@"%@",text);
+
         return NSLocalizedString(content, key);
 //        return NSLocalizedStringFromTable(content,@"MyStrings", @"");
 
@@ -63,7 +67,7 @@
 //        return LangTypeJapanese;
 //    }
 
-    return LangTypeSimple;
+    return LangTypeEnglish;
     
 }
 
@@ -79,10 +83,10 @@
     
     NSString *lang = [[NSUserDefaults standardUserDefaults] objectForKey:LANG];
     if (!lang) {
-        return dict[SIMPLE];
+        return dict[ENGLISH];
     }
     //
-    return [self switchLang:dict[lang]? : dict[SIMPLE] key:nil];
+    return [self switchLang:dict[lang]? : dict[ENGLISH] key:nil];
     
 }
 
@@ -151,12 +155,16 @@
 //        }
         else if ([currentLanguage isEqualToString:@"zh-Hant-US"]||[currentLanguage isEqualToString:@"zh-Hant-HK"])
         {//繁体
-            [self changLangType:LangTypeTraditional];
+            [self changLangType:LangTypeEnglish];
 
             
         }else if ([currentLanguage isEqualToString:@"zh-Hans-US"])
         {//简体
-            [self changLangType:LangTypeSimple];
+            [self changLangType:LangTypeEnglish];
+
+        }else{
+            
+            [self changLangType:LangTypeEnglish];
 
         }
         

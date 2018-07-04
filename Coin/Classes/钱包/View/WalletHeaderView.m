@@ -112,7 +112,7 @@
 
     }];
     UIImageView *bottomIV = [[UIImageView alloc] init];
-    bottomIV.image = kImage(@"Group8");
+    bottomIV.image = kImage(@"秘钥背景");
     bottomIV.contentMode = UIViewContentModeScaleToFill;
     UISwipeGestureRecognizer *leftBottomSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeBottomClick:)];
     
@@ -167,7 +167,7 @@
     }];
     
     UIImageView *bgIV = [[UIImageView alloc] init];
-    bgIV.image = kImage(@"个人钱包背景");
+    bgIV.image = kImage(@"个人钱包");
     bgIV.contentMode = UIViewContentModeScaleToFill;
     
     [self addSubview:bgIV];
