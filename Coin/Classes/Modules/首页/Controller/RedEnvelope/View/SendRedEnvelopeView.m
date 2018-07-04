@@ -16,6 +16,7 @@
 #import "TLNetworking.h"
 #import "TLAlert.h"
 #import "UIImageView+WebCache.h"
+
 #import "NSString+Date.h"
 #import "NSString+Check.h"
 
@@ -32,6 +33,7 @@
     NSString *_greeting;
 
 }
+
 -(UIImageView *)headImage
 {
     if (!_headImage) {
@@ -39,6 +41,16 @@
         _headImage.image = kImage(@"圆 按钮");
     }
     return _headImage;
+}
+
+-(UIImageView *)HeadPortraitImage
+{
+    if (_HeadPortraitImage) {
+        _HeadPortraitImage =[[UIImageView alloc]initWithFrame:CGRectMake(kHeight(3)  , kHeight(3), kHeight(64), kHeight(64))];
+        kViewRadius(_HeadPortraitImage, kHeight(32));
+        [_HeadPortraitImage sd_setImageWithURL:[NSURL URLWithString:[TLUser user].photo]];
+    }
+    return _HeadPortraitImage;
 }
 
 -(UILabel *)totalNumberLabel
@@ -67,7 +79,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        _type = @"0";
+        _type = @"1";
 
         UIImageView *backImage = [[UIImageView alloc]initWithFrame:self.frame];
         backImage.image = kImage(@"红包底部背景");
@@ -83,6 +95,7 @@
          
 
         [self addSubview:self.headImage];
+        [self.headImage addSubview:self.HeadPortraitImage];
         
         UIImageView *imageView =[[UIImageView alloc] init];
         [imageView sd_setImageWithURL: [NSURL URLWithString: [[TLUser user].photo convertImageUrl]] placeholderImage:kImage(@"头像")];        imageView.layer.cornerRadius = 30;
@@ -95,7 +108,7 @@
 
             
         }];
-        
+
         [self addSubview:self.totalNumberLabel];
 
 
@@ -187,7 +200,7 @@
 
     if (_platforms.count > 0) {
         NSMutableArray *nameArray = [NSMutableArray array];
-        for (int i = 0; i < 4; i ++) {
+        for (int i = 0; i < _platforms.count; i ++) {
             CurrencyModel *platform = _platforms[i];
             [nameArray addObject:platform.currency];
         }
@@ -253,7 +266,6 @@
 -(void)setPlatforms:(NSMutableArray<CurrencyModel *> *)platforms
 {
     _platforms = platforms;
-
     CurrencyModel *platform = platforms[index];
     NSLog(@"%@",platform);
     [self Platform:platform];

@@ -25,9 +25,6 @@
 
         self.tableView.backgroundColor = kWhiteColor;
         self.tableView.sectionHeaderHeight = 22;
-
-
-
     }
     return _tableView;
 }

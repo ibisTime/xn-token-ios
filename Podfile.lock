@@ -26,16 +26,16 @@ PODS:
   - CDCommon/Category (1.0.3)
   - CDCommon/Frame (1.0.3)
   - CDCommon/ImageTool (1.0.3)
-  - CryptoSwift (0.9.0)
+  - CryptoSwift (0.10.0)
   - DACircularProgress (2.3.1)
   - FMDB (2.7.2):
     - FMDB/standard (= 2.7.2)
   - FMDB/standard (2.7.2)
-  - HappyDNS (0.3.12)
+  - HappyDNS (0.3.14)
   - IQKeyboardManager (5.0.2)
-  - JCore (1.1.5)
-  - JPush (3.0.6):
-    - JCore (~> 1.1.1)
+  - JCore (1.2.0)
+  - JPush (3.0.9):
+    - JCore (~> 1.2.0)
   - libsodium (1.0.12)
   - Masonry (1.0.2)
   - MBProgressHUD (0.9.2)
@@ -56,22 +56,24 @@ PODS:
   - SDWebImage/Core (3.8.1)
   - secp256k1_ios (0.1.3)
   - SGQRCode (2.1.8)
-  - SipHash (1.2.1)
+  - SipHash (1.2.2)
   - SVProgressHUD (2.2)
   - UIDeviceIdentifier (1.1.1)
-  - web3swift (0.8.0):
+  - web3swift (0.8.1):
     - Alamofire (~> 4.7)
     - Alamofire-Synchronous (~> 4.0)
     - BigInt (~> 3.0.1)
-    - CryptoSwift (~> 0.9.0)
+    - CryptoSwift (~> 0.10.0)
     - libsodium (~> 1.0.12)
     - Result (~> 3.0.0)
     - secp256k1_ios (~> 0.1.3)
-  - ZendeskSDK (1.11.0.1):
-    - ZendeskSDK/Providers (= 1.11.0.1)
-    - ZendeskSDK/UI (= 1.11.0.1)
-  - ZendeskSDK/Providers (1.11.0.1)
-  - ZendeskSDK/UI (1.11.0.1):
+  - ZendeskSDK (2.0.3):
+    - ZendeskSDK/Providers (= 2.0.3)
+    - ZendeskSDK/UI (= 2.0.3)
+  - ZendeskSDK/Core (2.0.3)
+  - ZendeskSDK/Providers (2.0.3)
+  - ZendeskSDK/UI (2.0.3):
+    - ZendeskSDK/Core
     - ZendeskSDK/Providers
 
 DEPENDENCIES:
@@ -141,13 +143,13 @@ SPEC CHECKSUMS:
   Alamofire-Synchronous: eedf1e6e961c3795a63c74990b3f7d9fbfac7e50
   BigInt: 8e8a52161c745cd3ab78e3dc346a9fbee51e6cf6
   CDCommon: 3551a469e0787c1c7ffdb8d2e2ba912747b903a1
-  CryptoSwift: bca8c5b653dcc2d9734409242a070ff53bafac86
+  CryptoSwift: 6c778d69282bed3b4e975ff97a79d074f20bb011
   DACircularProgress: 4dd437c0fc3da5161cb289e07ac449493d41db71
   FMDB: 6198a90e7b6900cfc046e6bc0ef6ebb7be9236aa
-  HappyDNS: 691a3041128055d09866f86e6e9ca90f24da1f18
+  HappyDNS: dc6a164ee81979093123c241c6353bcf0218add6
   IQKeyboardManager: 5ab84749f20f682f784160c2c63bef4f19d10d26
-  JCore: 9bd9c770c877c583d98b90a68792b8361974c231
-  JPush: c41be50eb1a574a66aeb68d237f00a4ec6ec3a82
+  JCore: b52e3dd73625eec70afd1244bb9c41038aa06087
+  JPush: 48041e8c5ad2ef9b48709eb0888af9640b36e9b0
   libsodium: 9a8faa5ef2fa0d2d57bd7f7d79bf8fb7c1a9f0ea
   Masonry: 7c429b56da9d4ee0bbb3ed77a5ea710d6a5df39e
   MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
@@ -160,12 +162,12 @@ SPEC CHECKSUMS:
   SDWebImage: 35f9627a3e44b4f292a8a8ce6a531fa488239b91
   secp256k1_ios: ac9ef04e761f43c58012b28548afa91493761f17
   SGQRCode: 989df341fb231fc7bf7e82316de2fc8de2961e10
-  SipHash: b26918dbe6925368d4322374371437c62c9038e2
+  SipHash: fad90a4683e420c52ef28063063dbbce248ea6d4
   SVProgressHUD: 3f37f3409ddb15f35c99315ae7dc33c474aa3256
   UIDeviceIdentifier: 9281343882e24460235f00a0d7d2fc04a65688c6
-  web3swift: a0c0f5f7ddab09af3119a76e1ef304b050b4595e
-  ZendeskSDK: 4e075d7610e74755c576188886a073cfc5810145
+  web3swift: 79f72b48005f1b28e73191eaf78194d6cf5f8a35
+  ZendeskSDK: 7495659b1b89091065b4353d32c8339b83b20e3d
 
 PODFILE CHECKSUM: 6f33fe18a671ef7f155d9c2ec34362a844097eff
 
-COCOAPODS: 1.5.2
+COCOAPODS: 1.5.3

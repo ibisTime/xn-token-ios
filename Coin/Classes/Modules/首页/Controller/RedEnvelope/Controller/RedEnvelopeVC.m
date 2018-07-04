@@ -41,6 +41,7 @@
     [self LoadData];
 }
 
+#pragma mark - 钱包网络请求
 -(void)LoadData
 {
     if (![TLUser user].isLogin) {
@@ -52,6 +53,7 @@
     http.parameters[@"token"] = [TLUser user].token;
 
     [http postWithSuccess:^(id responseObject) {
+        NSLog(@"%@",responseObject);
         self.currencys = [CurrencyModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"][@"accountList"]];
         _sendView.platforms = self.currencys;
     } failure:^(NSError *error) {
@@ -61,56 +63,61 @@
 
 -(void)SendRedEnvelopeButton:(NSInteger)tag currency:(NSString *)currency type:(NSString *)type count:(NSString *)count sendNum:(NSString *)sendNum greeting:(NSString *)greeting
 {
-    
-    //
     if ([[TLUser user].tradepwdFlag isEqualToString:@"0"]) {
-
     TLPwdType pwdType = TLPwdTypeSetTrade;
     TLPwdRelatedVC *pwdRelatedVC = [[TLPwdRelatedVC alloc] initWithType:pwdType];
     pwdRelatedVC.isWallet = YES;
     pwdRelatedVC.success = ^{
-        [TLAlert alertWithTitle:[LangSwitcher switchLang:@"请输入资金密码" key:nil]
-                            msg:@""
-                     confirmMsg:[LangSwitcher switchLang:@"确定" key:nil]
-                      cancleMsg:[LangSwitcher switchLang:@"取消" key:nil]
-                    placeHolder:[LangSwitcher switchLang:@"请输入资金密码" key:nil]
-                          maker:self cancle:^(UIAlertAction *action) {
-                              
-                          } confirm:^(UIAlertAction *action, UITextField *textField) {
-                              
-                              if ([textField.text isEqualToString:@""]) {
-                                  [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入资金密码" key:nil]];
-                                  return ;
-                              }
-                              NSLog(@"%@",textField.text);
-                              TLNetworking *http = [TLNetworking new];
-                              http.code = @"623000";
-                              http.parameters[@"userId"] = [TLUser user].userId;
-                              http.parameters[@"symbol"] = currency;
-                              http.parameters[@"type"] = type;
-                              http.parameters[@"count"] = count;
-                              http.parameters[@"sendNum"] = sendNum;
-                              http.parameters[@"greeting"] = greeting;
-                              http.parameters[@"tradePwd"] = textField.text;
-                              [http postWithSuccess:^(id responseObject) {
-                                  
-                                  RedEnvelopeShoreVC *vc = [RedEnvelopeShoreVC new];
-                                  vc.code = responseObject[@"data"][@"code"];
-                                  vc.content = greeting;
-                                  [self presentViewController:vc animated:YES completion:nil];
-                                  NSLog(@"%@",responseObject);
-                              } failure:^(NSError *error) {
-                                  NSLog(@"%@",error);
-                              }];
-                              
-                          }];
-        
+
+        [self GiveAnyRequestAndCurrency:currency type:type count:count sendNum:sendNum greeting:greeting];
 
     };
     [self.navigationController pushViewController:pwdRelatedVC animated:YES];
     
     
+    }else
+    {
+        [self GiveAnyRequestAndCurrency:currency type:type count:count sendNum:sendNum greeting:greeting];
     }
+}
+
+#pragma mark - 发糖包
+-(void)GiveAnyRequestAndCurrency:(NSString *)currency type:(NSString *)type count:(NSString *)count sendNum:(NSString *)sendNum greeting:(NSString *)greeting
+{
+    [TLAlert alertWithTitle:[LangSwitcher switchLang:@"请输入资金密码" key:nil]
+                        msg:@""
+                 confirmMsg:[LangSwitcher switchLang:@"确定" key:nil]
+                  cancleMsg:[LangSwitcher switchLang:@"取消" key:nil]
+                placeHolder:[LangSwitcher switchLang:@"请输入资金密码" key:nil]
+                      maker:self cancle:^(UIAlertAction *action) {
+
+                      } confirm:^(UIAlertAction *action, UITextField *textField) {
+
+                          if ([textField.text isEqualToString:@""]) {
+                              [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入资金密码" key:nil]];
+                              return ;
+                          }
+                          NSLog(@"%@",textField.text);
+                          TLNetworking *http = [TLNetworking new];
+                          http.code = @"623000";
+                          http.parameters[@"userId"] = [TLUser user].userId;
+                          http.parameters[@"symbol"] = currency;
+                          http.parameters[@"type"] = type;
+                          http.parameters[@"count"] = count;
+                          http.parameters[@"sendNum"] = sendNum;
+                          http.parameters[@"greeting"] = greeting;
+                          http.parameters[@"tradePwd"] = textField.text;
+                          [http postWithSuccess:^(id responseObject) {
+
+                              RedEnvelopeShoreVC *vc = [RedEnvelopeShoreVC new];
+                              vc.code = responseObject[@"data"][@"code"];
+                              vc.content = greeting;
+                              [self presentViewController:vc animated:YES completion:nil];
+                          } failure:^(NSError *error) {
+                              NSLog(@"%@",error);
+                          }];
+
+                      }];
 }
 
 -(void)RedEnvelopeHeadButton:(NSInteger)tag
