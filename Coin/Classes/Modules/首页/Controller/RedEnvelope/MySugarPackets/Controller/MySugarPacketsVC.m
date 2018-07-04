@@ -48,7 +48,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view
-    self.title = @"我的糖包";
+    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 100, 44)];
+    label.text = @"我的糖包";
+    label.textColor = [UIColor whiteColor];
+    label.textAlignment = NSTextAlignmentCenter;
+    label.font = [UIFont fontWithName:@"Georgia-Bold" size:18];
+    self.navigationItem.titleView = label;
 
     UIView *backView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 70)];
     backView.backgroundColor = HeadBackColor;
@@ -64,7 +69,7 @@
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     self.navigationController.navigationBar.barTintColor = HeadBackColor;
     self.view.backgroundColor = [UIColor whiteColor];
-
+    
     //设置可以左右滑动的ScrollView
     [self setupScrollView];
     //设置控制的每一个子控制器
@@ -125,7 +130,7 @@
 
     UIButton *btn = [self setupButtonWithTitle:@"抢到糖包" Index:0];
     [self setupButtonWithTitle:@"发出糖包" Index:1];
-    kViewBorderRadius(btn, 5, 2, [UIColor whiteColor]);
+//    kViewBorderRadius(btn, 0, 2, [UIColor whiteColor]);
     [btn setTitleColor:HeadBackColor forState:(UIControlStateNormal)];
     [btn setBackgroundColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
     self.selectBtn = btn;
@@ -146,6 +151,22 @@
     [btn setBackgroundColor:HeadBackColor forState:(UIControlStateNormal)];
     [btn addTarget:self action:@selector(pageClick:) forControlEvents:(UIControlEventTouchUpInside)];
     [self.view addSubview:btn];
+    
+    if (index == 0) {
+        UIBezierPath *maskPath=[UIBezierPath bezierPathWithRoundedRect:btn.bounds byRoundingCorners:UIRectCornerTopLeft|UIRectCornerBottomLeft cornerRadii:CGSizeMake(5, 5)];
+        CAShapeLayer *maskLayer=[[CAShapeLayer alloc]init];
+        maskLayer.frame=btn.bounds;
+        maskLayer.path=maskPath.CGPath;
+        btn.layer.mask=maskLayer;
+    }else if (index == 0)
+    {
+        UIBezierPath *maskPath=[UIBezierPath bezierPathWithRoundedRect:btn.bounds byRoundingCorners:UIRectCornerTopRight|UIRectCornerBottomRight cornerRadii:CGSizeMake(5, 5)];
+        CAShapeLayer *maskLayer=[[CAShapeLayer alloc]init];
+        maskLayer.frame=btn.bounds;
+        maskLayer.path=maskPath.CGPath;
+        btn.layer.mask=maskLayer;
+    }
+
 
     return btn;
 }

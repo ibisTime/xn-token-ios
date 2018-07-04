@@ -20,6 +20,8 @@
 #import "NSString+Date.h"
 #import "NSString+Check.h"
 
+#define ALLPRICE 1000000
+
 @implementation SendRedEnvelopeView
 {
     UILabel *alltotalLabel;
@@ -31,6 +33,7 @@
     NSString *_count;
     NSString *_sendNum;
     NSString *_greeting;
+    NSString *allPrice;
 
 }
 
@@ -249,6 +252,11 @@
             return;
 
         }
+        if ([allPrice floatValue] > ALLPRICE) {
+            [TLAlert alertWithInfo:[LangSwitcher switchLang:@"不得大于一百万" key:nil]];
+            return;
+        }
+
         UITextField *textField3 = [self viewWithTag:10003];
         if ([textField3.text isEqualToString:@""]) {
             _greeting = @"糖包一响,黄金万两";
@@ -256,6 +264,7 @@
         {
             _greeting = textField3.text;
         }
+
         [_delegate SendRedEnvelopeButton:102 currency:_currency type:_type count:_count sendNum:_sendNum greeting:_greeting];
 
     }
@@ -274,13 +283,6 @@
 
 -(void)Platform:(CurrencyModel *)platform
 {
-
-    UITextField *textField2 = [self viewWithTag:10001];
-    UITextField *textField3 = [self viewWithTag:10002];
-    _count = @"";
-    _sendNum = @"";
-    textField2.text = @"";
-    textField3.text = @"";
 
     UITextField *textField1 = [self viewWithTag:10000];
     textField1.text = platform.currency;
@@ -308,26 +310,30 @@
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
-//    NSLog(@"-%@-%@",textField.text,string);
-    if (textField.tag == 10001 || textField.tag == 10002) {
+    NSString * resultStr = [textField.text stringByAppendingString:string];
+    if (textField.tag == 10001) {
+
         if ([textField.text rangeOfString:@"."].location == NSNotFound) {
             isHaveDian = NO;
         }
         if ([string length] > 0) {
             unichar single = [string characterAtIndex:0];//当前输入的字符
             if ((single >= '0' && single <= '9') || single == '.') {//数据格式正确
-                //首字母不能为0和小数点
+                //首字母不能为小数点
                 if([textField.text length] == 0){
                     if(single == '.') {
-                        //                    [self showError:@"亲，第一个数字不能为小数点"];
+
                         [textField.text stringByReplacingCharactersInRange:range withString:@""];
+                        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"格式错误" key:nil]];
                         return NO;
                     }
-                    //                if (single == '0') {
-                    //                    //                    [self showError:@"亲，第一个数字不能为0"];
-                    //                    [textField.text stringByReplacingCharactersInRange:range withString:@""];
-                    //                    return NO;
-                    //                }
+                }
+                if ([resultStr floatValue] > ALLPRICE) {
+                    [TLAlert alertWithInfo:[LangSwitcher switchLang:@"不得大于一百万" key:nil]];
+                    return NO;
+                }else
+                {
+                    return YES;
                 }
                 //输入的字符是否是小数点
                 if (single == '.') {
@@ -338,6 +344,8 @@
 
                     }else{
                         [textField.text stringByReplacingCharactersInRange:range withString:@""];
+
+                        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"格式错误" key:nil]];
                         return NO;
                     }
                 }else{
@@ -348,6 +356,7 @@
                         if (range.location - ran.location <= 3) {
                             return YES;
                         }else{
+                            [TLAlert alertWithInfo:[LangSwitcher switchLang:@"格式错误" key:nil]];
                             return NO;
                         }
                     }else{
@@ -355,6 +364,7 @@
                     }
                 }
             }else{//输入的数据格式不正确
+                [TLAlert alertWithInfo:[LangSwitcher switchLang:@"格式错误" key:nil]];
                 [textField.text stringByReplacingCharactersInRange:range withString:@""];
                 return NO;
             }
@@ -363,14 +373,39 @@
             return YES;
         }
     }
-    else
+    else if(textField.tag == 10002)
     {
-        return YES;
+        if ([string length] > 0) {
+            unichar single = [string characterAtIndex:0];//当前输入的字符
+
+            if([textField.text length] == 0){
+                if(single == '.' || single == '0') {
+                    [TLAlert alertWithInfo:[LangSwitcher switchLang:@"格式错误" key:nil]];
+                    return NO;
+                }
+            }
+            if ((single >= '0' && single <= '9')) {
+                if ([resultStr floatValue] > 100) {
+                    [TLAlert alertWithInfo:[LangSwitcher switchLang:@"数量不得大于100" key:nil]];
+                    return NO;
+                }else
+                {
+                    return YES;
+                }
+            }else
+            {
+                [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入数字" key:nil]];
+                return NO;
+            }
+        }
     }
+
+    return YES;
 }
 
 
 - (void)textFieldDidChange:(UITextField *)textField{
+
     if (textField.tag == 10001) {
         _count = textField.text;
     }
@@ -378,6 +413,7 @@
         _sendNum = textField.text;
 
     }
+
 
     NSLog(@"%@==%@",_count,_sendNum);
     [self CalculateThePrice];
@@ -389,11 +425,13 @@
     if ([_type isEqualToString:@"0"]) {
         if (![_count isEqualToString:@""] && ![_sendNum isEqualToString:@""]) {
             NSString *str = [NSString stringWithFormat:@"共发送 %.3f %@",[_count floatValue]*[_sendNum floatValue],_currency];
+            allPrice = [NSString stringWithFormat:@"%f",[_count floatValue]*[_sendNum floatValue]];
             [self labelText:str];
         }
     }else
     {
         NSString *str = [NSString stringWithFormat:@"共发送 %.3f %@",[_count floatValue],_currency];
+        allPrice = [NSString stringWithFormat:@"%f",[_count floatValue]];
         [self labelText:str];
     }
 }
