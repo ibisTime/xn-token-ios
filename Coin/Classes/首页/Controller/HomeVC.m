@@ -30,6 +30,8 @@
 
 #import "MnemonicUtil.h"
 #import "UIBarButtonItem+convience.h"
+#import "TLPwdRelatedVC.h"
+
 
 @interface HomeVC ()
 
@@ -198,7 +200,28 @@
         {
             RedEnvelopeVC *redEnvelopeVC = [RedEnvelopeVC new];
 
-            [self presentViewController:redEnvelopeVC animated:YES completion:nil];
+            if ([[TLUser user].tradepwdFlag isEqualToString:@"0"]) {
+                TLPwdType pwdType = TLPwdTypeSetTrade;
+                TLPwdRelatedVC *pwdRelatedVC = [[TLPwdRelatedVC alloc] initWithType:pwdType];
+               
+                pwdRelatedVC.isWallet = YES;
+                pwdRelatedVC.success = ^{
+                    
+                  
+                    [self presentViewController:redEnvelopeVC animated:YES completion:nil];
+
+                };
+                [self.navigationController pushViewController:pwdRelatedVC animated:YES];
+
+                
+            }else{
+                
+                [self presentViewController:redEnvelopeVC animated:YES completion:nil];
+
+                
+            }
+            
+
         }break;
             
         default:

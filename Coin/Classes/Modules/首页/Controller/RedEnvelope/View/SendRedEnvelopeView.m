@@ -428,7 +428,7 @@
 {
     if ([_type isEqualToString:@"0"]) {
         if (![_count isEqualToString:@""] && ![_sendNum isEqualToString:@""]) {
-            NSString *str = [NSString stringWithFormat:@"共发送 %.3f %@",[_count floatValue]*[_sendNum floatValue],_currency];
+            NSString *str = [NSString stringWithFormat:@"%@ %.3f %@",[LangSwitcher switchLang:@"共发送" key:nil],[_count floatValue]*[_sendNum floatValue],_currency];
             allPrice = [NSString stringWithFormat:@"%f",[_count floatValue]*[_sendNum floatValue]];
             [self labelText:str];
         }

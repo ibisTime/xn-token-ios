@@ -214,7 +214,7 @@ public class EthCrypto: NSObject
             web3wan?.addKeystoreManager(keystoreManager)
             
             var options = Web3Options.defaultOptions()
-//            options.Txtype = BigUInt(1)
+            options.Txtype = BigUInt(1)
             options.gasLimit = BigUInt(21000)
             options.gasPrice = BigUInt(gasPrice)
             options.from = keystore?.addresses?.first!

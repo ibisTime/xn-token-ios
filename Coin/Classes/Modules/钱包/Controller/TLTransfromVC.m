@@ -18,7 +18,7 @@
     [super viewDidLoad];
     self.view.backgroundColor = kBackgroundColor;
     
-    self.title = [LangSwitcher switchLang:@"一键旋转" key:nil];
+    self.title = [LangSwitcher switchLang:@"一键划转" key:nil];
     self.placeholderView = [TLPlaceholderView placeholderViewWithImage:nil text:[LangSwitcher switchLang:@"敬请期待!" key:nil] textColor:kTextColor];
     
         [self.view addSubview:self.placeholderView];

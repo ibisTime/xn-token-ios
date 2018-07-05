@@ -185,7 +185,7 @@
             RevisePassWordVC *vc = [[RevisePassWordVC alloc] init];
             vc.IsImport = YES;
             [self.navigationController pushViewController:vc animated:YES];
-            [TLAlert alertWithMsg:@"导入成功"];
+            [TLAlert alertWithMsg:[LangSwitcher switchLang:@"导入成功" key:nil]];
         }else{
             
             //储存导入的钱包
@@ -199,7 +199,7 @@
             RevisePassWordVC *vc = [[RevisePassWordVC alloc] init];
             vc.IsImport = YES;
             [self.navigationController pushViewController:vc animated:YES];
-            [TLAlert alertWithMsg:@"导入成功"];
+            [TLAlert alertWithMsg:[LangSwitcher switchLang:@"导入成功" key:nil]];
         }
         
 //        [[NSUserDefaults standardUserDefaults] setObject:word forKey:KWalletWord];

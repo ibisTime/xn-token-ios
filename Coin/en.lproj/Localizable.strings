@@ -12,7 +12,7 @@
 "我已阅读并同意服务及隐私条款" = "I have read and agreed to the terms of service and privacy";
 "钱包备份" = "Wallet backup";
 "重要提示" = "Important tip";
-"重要提示" = "拥有钱包私钥就能完全控制钱包资产,  因此强烈建议在使用钱包前做好备份,  将钱包私钥保存到安全的地方。";
+"拥有钱包私钥就能完全控制钱包资产,  因此强烈建议在使用钱包前做好备份,  将钱包私钥保存到安全的地方。" = "With a wallet private key, you can fully control your wallet assets, so it's highly recommended to make a backup before using your wallet and save your wallet private key to a safe place.";
 "立即备份" = "now back up";
 "请记下您的钱包助词并保存到安全的地方" = "";
 "钱包助词用于恢复钱包资产,拥有助记词即可完全控制钱包资产,请务必妥善保管,丢失助记词既丢失钱包资产。无法提供找回功能" = "";
@@ -21,8 +21,10 @@
 "根据你记下的助记词,按顺序点击,验证你备份的助记词正确无误" = "";
 "确认" = "confirm";
 "取消" = "cancel";
-"助记词验证失败,请检查备份" = "";
-"助记词顺序验证通过,请妥善保管助记词" = "";
+"助记词验证失败,请检查备份" = "Mnemonic verification failed, please check backup
+";
+"助记词顺序验证通过,请妥善保管助记词" = "The mnemonic order is verified, please keep the mnemonic
+";
 "删除钱包" = "delete wallet";
 "请输入导入的钱包助记词 (12个英文单词)  , 按空格分离" = "Please input imported wallet mnemonic (12 English words), separated by space.";
 "请输入钱包助记词" = "Please enter the purse word
@@ -101,7 +103,7 @@
 "代理人" = "Agent";
 "我要购买" = "I want to buy";
 "我要出售" = "I want to sell it";
-"我的" = "my";
+"我的" = "My";
 "托管账户" = "Escrow Account";
 "钱包设置" = "Wallet settings";
 "系统设置" = "System setup";
@@ -172,7 +174,6 @@
 "手机号" = "Cell phone number";
 "请填写手机号码" = "Please fill in the mobile number ";
 "手机号码格式不正确" = "mobile number format is incorrect ";
-"验证码已发送,请注意查收" = "";
 "请输入正确的验证码" = "Please enter the verification code";
 "修改成功" = "modified successfully";
 "绑定手机号" = "The verification code has been sent. Please check it";
@@ -224,8 +225,8 @@
 "修改谷歌验证" = "Modify Google validation";
 "关闭谷歌验证" = "Close Google validation";
 "谷歌验证" = "Google authentication";
-"已开启" = "Has been open";
-"未开启" = "Did not open";
+"已开启" = "is turned on";
+"未开启" = "not open";
 "完成" = "complete";
 "身份认证" = "The identity authentication";
 "姓名" = "The name";
@@ -274,20 +275,18 @@
 "交易记录" = "transaction record";
 "重新获取" = "Retrieved";
 "加载失败" = "Load error";
-"发红包" = "Send packet";
+"发红包" = "Red packet";
 "塞进红包" = "Prepare red packet";
 "红包个数" = "red packet count";
 "red_package_sub_total" = "Token amount";
 "代币" = "token";
 "代币总额" = "Token amount";
-"代币总额" = "Token amount";
-"代币单额" = "Token single";
-
+"单个数量" = "Token single";
 "我的红包" = "my red packet";
 "红包一响,黄金万两" = "red packets come, coins sound";
 "给您发送了一个红包" = "sent you a red packet";
 "抢到红包" = "received packets";
-"总共发送" = "all";
+"共发送" = "all";
 "枚" = "Amount";
 "持有" = "hold";
 "总量" = "total";
@@ -295,19 +294,19 @@
 "设置资金密码" = "set the funding password";
 "输入资金密码" = "Please input the funding password";
 "修改资金密码" = "set the fund password";
-"资产" = "assets";
+"资产" = "Assets";
 "闪兑" = "flash";
 "一键划转" = "one-click transfer";
 "个人账户" = "My wallet";
 "私钥钱包" = "secret key wallet";
 "首创玩法" = "First play";
-"量化理财" = "Quantitative financial management";
+"量化理财" = "Quantitative Finance";
 "账户与安全" = "Account and Security";
 "本地货币" = "local currency";
 "钱包工具" = "wallet tool";
-"欢迎回来!" = "welcom back ！";
+"欢迎回来!" = "Welcome back ！";
 "中国!" = "china";
-"中国" = "china";
+"中国" = "China";
 "请输入手机号" = "Please input your mobile number";
 "忘记密码" = "forgot password";
 "忘记密码?" = "forgot password?";
@@ -350,7 +349,7 @@
 "注册成功,为您自动登录" = "registration is successful, log in automatically for you";
 "注册失败" = "registration failed";
 "提币地址" = "withdraw address";
-"手机验证码" = "verification code";
+"短信验证码" = "verification code";
 "验证码" = "verification code";
 "密码" = "Password";
 "注册!" = "Registered!";
@@ -470,6 +469,7 @@
 "真实姓名" = "real name";
 "内容" = "content";
 "选择" = "select";
+"确认设置" = "Confirm settings";
 "请输入帐号" = "Please input an account";
 "登录成功" = "sign_in_success";
 "登录失败" = "log in failed";

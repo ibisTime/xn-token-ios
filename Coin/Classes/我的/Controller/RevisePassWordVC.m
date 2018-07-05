@@ -257,14 +257,15 @@
 //            [[NSUserDefaults standardUserDefaults] synchronize];
             
             NSString *name;
-            TLDataBase *db = [TLDataBase sharedManager];
-            if ([db.dataBase open]) {
-                NSString *sql = [NSString stringWithFormat:@"UPDATE THAWallet SET PwdKey = '%@' WHERE userId = '%@'",pwd,[TLUser user].userId];
-                BOOL sucess = [db.dataBase executeUpdate:sql];
-                
-                NSLog(@"创建钱包交易密码%d",sucess);
-            }
+//            TLDataBase *db = [TLDataBase sharedManager];
+//            if ([db.dataBase open]) {
+//                NSString *sql = [NSString stringWithFormat:@"UPDATE THAWallet SET PwdKey = '%@' WHERE userId = '%@'",pwd,[TLUser user].userId];
+//                BOOL sucess = [db.dataBase executeUpdate:sql];
+//                
+//                NSLog(@"创建钱包交易密码%d",sucess);
+//            }
         BuildSucessVC *sucessVC = [BuildSucessVC new];
+            sucessVC.PWD = pwd;
         TLNavigationController *na = [[TLNavigationController alloc] initWithRootViewController:sucessVC];
         
         [UIApplication sharedApplication].keyWindow.rootViewController = na;

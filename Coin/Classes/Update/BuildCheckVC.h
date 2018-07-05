@@ -17,6 +17,9 @@
 
 @property (nonatomic, copy) NSString *titleWord;
 
+@property (nonatomic, copy) NSString *pwd;
+
+
 @property (nonatomic, assign) BOOL isCopy;
 
 

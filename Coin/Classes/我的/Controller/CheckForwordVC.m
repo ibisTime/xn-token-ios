@@ -251,6 +251,7 @@
 {
     ChangeForwordVC *changeVC= [[ChangeForwordVC alloc] init];
     BuildSucessVC  *sucessVC = [[BuildSucessVC alloc] init];
+    
     sucessVC.title = [LangSwitcher switchLang:@"钱包备份" key:nil];
 
     WalletLocalAddressVC  *adressVC = [[WalletLocalAddressVC alloc] init];

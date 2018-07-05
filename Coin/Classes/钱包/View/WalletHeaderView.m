@@ -9,6 +9,7 @@
 #import "WalletHeaderView.h"
 #import "TLUIHeader.h"
 #import "AppColorMacro.h"
+#import "TLUser.h"
 
 @interface WalletHeaderView ()
 //背景
@@ -526,8 +527,19 @@
 - (void)setUsdRate:(NSString *)usdRate {
     
     _usdRate = usdRate;
-    
-    self.leftFlag.image = kImage(@"公告");
+//    if ([LangSwitcher currentLangType] == LangTypeEnglish) {
+//        
+//    }
+    if ([LangSwitcher currentLangType] == LangTypeEnglish) {
+        self.leftFlag.image = kImage(@"NOTICE");
+
+    }else{
+        self.leftFlag.image = kImage(@"公告");
+
+        
+    }
+        
+        
     
     self.rateAmountLbl.text =[NSString stringWithFormat:@"  |  %@",usdRate];
     

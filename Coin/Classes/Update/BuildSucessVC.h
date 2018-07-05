@@ -10,4 +10,6 @@
 
 @interface BuildSucessVC : TLBaseVC
 @property (nonatomic , assign) BOOL isCopy;
+@property (nonatomic , copy) NSString  *PWD;
+
 @end

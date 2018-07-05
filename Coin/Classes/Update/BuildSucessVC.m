@@ -32,7 +32,7 @@
 @implementation BuildSucessVC
 
 - (void)viewDidLoad {
-    self.title = NSLocalizedString(@"钱包备份", nil);
+    self.title = [LangSwitcher switchLang:@"钱包备份" key:nil];
     
     [self initViews];
 //    self.mnemonics =  [MnemonicUtil getGenerateMnemonics];
@@ -65,7 +65,7 @@
     self.nameLable = [UILabel labelWithBackgroundColor:kClearColor textColor:kBlackColor font:14];
     //    self.title = [LangSwitcher switchLang:@"我的" key:nil];
     [self.view addSubview:self.nameLable];
-    self.nameLable.text = NSLocalizedString(@"重要提示", nil);
+    self.nameLable.text = [LangSwitcher switchLang:@"重要提示" key:nil];
 
 //    self.nameLable.text = [LangSwitcher switchLang:@"重要提示" key:nil];
     [self.nameLable mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -80,7 +80,7 @@
     self.messageLable.backgroundColor = kClearColor;
     self.messageLable.textColor = kHexColor(@"#999999");
 //    self.messageLable.text = [LangSwitcher switchLang:@"拥有钱包私钥就能完全控制钱包资产,  因此强烈建议在使用钱包前做好备份,  将钱包私钥保存到安全的地方。"key:nil];
-   self.messageLable.text = NSLocalizedString(@"拥有钱包私钥就能完全控制钱包资产,  因此强烈建议在使用钱包前做好备份,  将钱包私钥保存到安全的地方。", nil);
+   self.messageLable.text = [LangSwitcher switchLang:@"拥有钱包私钥就能完全控制钱包资产,  因此强烈建议在使用钱包前做好备份,  将钱包私钥保存到安全的地方。" key:nil];
 
     
     [self.messageLable mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -153,6 +153,7 @@
 {
     //点击备份钱包 生成助记词
     BuildBackUpVC *backUpVC = [BuildBackUpVC new];
+    backUpVC.pwd = self.PWD;
 //    NSString *word  =[[NSUserDefaults standardUserDefaults] objectForKey:KWalletWord];
     TLDataBase *dataBase = [TLDataBase sharedManager];
     NSString *word;
