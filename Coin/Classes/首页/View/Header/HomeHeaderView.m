@@ -277,11 +277,15 @@
         btn.tag = 1500 + idx;
 //        btn.backgroundColor = [UIColor redColor];
         [btn addTarget:self action:@selector(clickButton:) forControlEvents:UIControlEventTouchUpInside];
-        UILabel *textLab = [UILabel labelWithBackgroundColor:kClearColor textColor:kWhiteColor font:15];
+        UILabel *textLab = [UILabel labelWithBackgroundColor:kClearColor textColor:kWhiteColor font:13];
         [btn addSubview:textLab];
+        textLab.numberOfLines = 0;
         textLab.text = [LangSwitcher switchLang:obj key:nil];
         [textLab mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.left.equalTo(@12);
+            make.top.equalTo(@12);
+
+            make.left.equalTo(@1);
+            make.right.equalTo(@-1);
         }];
         [self.applicationView addSubview:btn];
         [btn mas_makeConstraints:^(MASConstraintMaker *make) {

@@ -41,13 +41,14 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     RedEnvelopeShoreView *shoreView = [[RedEnvelopeShoreView alloc]initWithFrame:self.view.frame];
-//    shoreView.content = self.content;
+    self.shoreVie = shoreView;
+    shoreView.content = self.content;
     shoreView.detailedLabel.text = self.content;
     [shoreView.shoreButton addTarget:self action:@selector(shoreButtonClick) forControlEvents:(UIControlEventTouchUpInside)];
     [self.view addSubview:shoreView];
 
     RedEnvelopeHeadView *headView = [[RedEnvelopeHeadView alloc]initWithFrame:CGRectMake(0, kStatusBarHeight, SCREEN_WIDTH, 44)];
-    headView.nameLabel.text = @"分享";
+    headView.nameLabel.text = [LangSwitcher switchLang:@"分享" key:nil];
     headView.recordButton.hidden = YES;
     headView.delegate = self;
     [shoreView addSubview:headView];
@@ -118,6 +119,8 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    self.shoreVie.content = self.content;
+    self.shoreVie.detailedLabel.text = self.content;
     [self.navigationController setNavigationBarHidden:YES animated:animated];
 
 }

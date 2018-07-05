@@ -43,16 +43,16 @@
 - (void)data {
     
     
-    self.iconImageView.image = [UIImage imageNamed:@"logoTHA"];
-    self.nameLbl.text = [LangSwitcher switchLang:[NSString stringWithFormat:@"THA钱包V%@",[NSString appVersionString]] key:nil];
-    self.versionLbl.text = [LangSwitcher switchLang:@"钱包是一款全新的数字货币钱包" key:nil];
-    self.versionLbl2.text = [LangSwitcher switchLang:@"为你提高安全丶便捷的一站式管理方案" key:nil];
-    self.versionLbl3.text = [LangSwitcher switchLang:@"服务时间:  9:00 - 18:00 " key:nil];
-    self.banQuanLbl.text = [LangSwitcher switchLang:@"联系电话" key:nil];
-    self.phoneNumber.text = [LangSwitcher switchLang:@"0571-8765650" key:nil];
-
-    //
-    NSString *at = @"@";
+    self.iconImageView.image = [UIImage imageNamed:@"icon圆角"];
+    self.nameLbl.text = [LangSwitcher switchLang:[NSString stringWithFormat:@"THAV%@",[NSString appVersionString]] key:nil];
+//    self.versionLbl.text = [LangSwitcher switchLang:@"钱包是一款全新的数字货币钱包" key:nil];
+//    self.versionLbl2.text = [LangSwitcher switchLang:@"为你提高安全丶便捷的一站式管理方案" key:nil];
+//    self.versionLbl3.text = [LangSwitcher switchLang:@"服务时间:  9:00 - 18:00 " key:nil];
+//    self.banQuanLbl.text = [LangSwitcher switchLang:@"联系电话" key:nil];
+//    self.phoneNumber.text = [LangSwitcher switchLang:@"0571-8765650" key:nil];
+//
+//    //
+//    NSString *at = @"@";
     
     
     
@@ -140,7 +140,7 @@
     
     [self.iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.top.equalTo(self.bgView.mas_top).offset(57.5);
+        make.top.equalTo(self.bgView.mas_top).offset(157.5);
         make.width.height.mas_equalTo(75);
         make.centerX.equalTo(self.bgView.mas_centerX);
         

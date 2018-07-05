@@ -143,7 +143,7 @@
     title.text = [LangSwitcher switchLang:@"还没账号?" key:nil];
     [title mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.centerX.equalTo(registBtn.mas_centerX).offset(-40);
+        make.centerX.equalTo(registBtn.mas_centerX).offset(-60);
         make.centerY.equalTo(registBtn.mas_centerY);
     }];
     

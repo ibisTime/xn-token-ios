@@ -30,7 +30,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self requestProtect];
+//    [self requestProtect];
     [self initViews];
 //    self.navigationController.navigationBar.hidden = YES;
     // Do any additional setup after loading the view.
@@ -56,7 +56,7 @@
     self.view.backgroundColor = kHexColor(@"#ffffff");
     self.iconImage = [[UIImageView alloc] init];
     [self.view addSubview:self.iconImage];
-    self.iconImage.image = kImage(@"logoTHA");
+    self.iconImage.image = kImage(@"icon圆角");
     [self.iconImage mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(@(kHeight(150)));
         make.centerX.equalTo(self.view.mas_centerX);
@@ -121,21 +121,21 @@
     }];
     
     self.introduceButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [self.view addSubview:self.introduceButton];
-    NSString *text3 =  [LangSwitcher switchLang:@"我已阅读并同意服务及隐私条款" key:nil];
+//    [self.view addSubview:self.introduceButton];
+//    NSString *text3 =  [LangSwitcher switchLang:@"我已阅读并同意服务及隐私条款" key:nil];
 
 //    NSString *text3 = NSLocalizedString(@"我已阅读并同意服务及隐私条款", nil);
-    [self.introduceButton setTitle:text3 forState:UIControlStateNormal];
+//    [self.introduceButton setTitle:text3 forState:UIControlStateNormal];
     [self.introduceButton addTarget:self action:@selector(html5Wallet) forControlEvents:UIControlEventTouchUpInside];
     self.introduceButton.titleLabel.font = [UIFont systemFontOfSize:12];
     [self.introduceButton setTitleColor:kAppCustomMainColor forState:UIControlStateNormal];
-    [self.introduceButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.view.mas_centerX);
-        make.bottom.equalTo(self.view.mas_bottom).offset(-30);
-        make.width.equalTo(@(kScreenWidth));
-        make.height.equalTo(@30);
-        
-    }];
+//    [self.introduceButton mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.centerX.equalTo(self.view.mas_centerX);
+//        make.bottom.equalTo(self.view.mas_bottom).offset(-30);
+//        make.width.equalTo(@(kScreenWidth));
+//        make.height.equalTo(@30);
+//
+//    }];
 
     
 }

@@ -65,15 +65,8 @@
 
         
     }
-    if ([TLUser user].secretUserId) {
-        
-        shareUrl = [NSString stringWithFormat:@"http://m.thadev.hichengdai.com/redPacket/receive.html?code=%@&@inviteCode=%@&lang=%@",urlStr,[TLUser user].inviteCode,lang];
-    }else{
+    
         shareUrl = [NSString stringWithFormat:@"http://m.thadev.hichengdai.com/redPacket/receive.html?code=%@&@inviteCode=%@&lang=%@",urlStr,[TLUser user].secretUserId,lang];
-        
-    }
-    
-    
     
     // 1. 实例化二维码滤镜
     NSLog(@"shareUrl======%@",shareUrl);

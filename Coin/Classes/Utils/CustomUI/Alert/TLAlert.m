@@ -10,7 +10,7 @@
 #import "MBProgressHUD.h"
 #import <SVProgressHUD/SVProgressHUD.h>
 #import "AppColorMacro.h"
-
+#import "LangSwitcher.h"
 @implementation TLAlert
 
 //info
@@ -92,7 +92,7 @@
     
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:message preferredStyle:UIAlertControllerStyleAlert];
     //取消行为
-    UIAlertAction *action2 = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction *action2 = [UIAlertAction actionWithTitle:[LangSwitcher switchLang:@"确定" key:nil] style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
     }];
     
     [alertController addAction:action2];
@@ -123,7 +123,7 @@
     [alertController setValue:messageStr forKey:@"attributedMessage"];
     //取消行为
     
-    UIAlertAction *action2 = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction *action2 = [UIAlertAction actionWithTitle:[LangSwitcher switchLang:@"确定" key:nil] style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
         
         if (confirmAction) {
             confirmAction();

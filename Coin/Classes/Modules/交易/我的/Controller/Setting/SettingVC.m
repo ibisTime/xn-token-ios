@@ -30,6 +30,7 @@
 #import "NSString+Check.h"
 #import "TLProgressHUD.h"
 #import "LangChooseVC.h"
+#import "TLUserLoginVC.h"
 @interface SettingVC ()
 
 @property (nonatomic, strong) SettingGroup *group;
@@ -254,14 +255,17 @@
         
         
     } confirm:^(UIAlertAction *action) {
-       
+        [[NSNotificationCenter defaultCenter] postNotificationName:kUserLoginOutNotification object:nil];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            
+          
+                TLUserLoginVC *loginVC= [TLUserLoginVC new];
+                [self.navigationController pushViewController:loginVC animated:YES];
+          
 //            tabbarVC.selectedIndex = 0;
 //            [self.navigationController popViewControllerAnimated:NO];
 //            [self popoverPresentationController];
-            [self.navigationController popToRootViewControllerAnimated:YES];
-             [[NSNotificationCenter defaultCenter] postNotificationName:kUserLoginOutNotification object:nil];
+            
+            
             
         });
     }];

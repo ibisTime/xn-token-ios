@@ -298,18 +298,15 @@
         accountVC.currency = weakSelf.currencys[inter];
         accountVC.billType = LocalTypeAll;
         [weakSelf.navigationController pushViewController:accountVC animated:YES];
-        
-        
     };
 }
 - (void)initTableView {
-    self.leftButton = [UIButton buttonWithTitle:@"闪兑" titleColor:kHexColor(@"#333333") backgroundColor:kWhiteColor titleFont:15.0];
+    self.leftButton = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"闪兑" key:nil] titleColor:kHexColor(@"#333333") backgroundColor:kWhiteColor titleFont:14.0];
     [self.leftButton setImage:kImage(@"闪兑") forState:UIControlStateNormal];
-    self.rightButton = [UIButton buttonWithTitle:@"一键划转" titleColor:kHexColor(@"#333333") backgroundColor:kWhiteColor titleFont:15.0];
+    self.rightButton = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"一键划转" key:nil] titleColor:kHexColor(@"#333333") backgroundColor:kWhiteColor titleFont:14.0];
     [self.rightButton setImage:kImage(@"一键划转") forState:UIControlStateNormal];
     [self.view addSubview:self.leftButton];
     [self.view addSubview:self.rightButton];
-    [self.leftButton setImageEdgeInsets:UIEdgeInsetsMake(0, -20, 0, 0)];
     [self.leftButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 0)];
     
     [self.leftButton mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -328,7 +325,6 @@
         make.height.equalTo(@(kHeight(50)));
         
     }];
-    [self.rightButton setImageEdgeInsets:UIEdgeInsetsMake(0, -20, 0, 0)];
     [self.rightButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 0)];
     CGFloat f = self.isClear == YES ?318 : 338;
 
@@ -687,7 +683,6 @@
 - (void)queryCenterTotalAmount {
     
     TLNetworking *http = [TLNetworking new];
-    self.helper = http;
     http.code = @"802503";
     http.parameters[@"userId"] = [TLUser user].userId;
     http.parameters[@"token"] = [TLUser user].token;
@@ -701,9 +696,9 @@
 
             }
             self.headerView.privateMoney.text = [NSString stringWithFormat:@"$ %.2f", [cnyStr doubleValue]];
-            self.headerView.equivalentBtn.text = @"总资产(USD)";
-            self.headerView.localLbl.text = @"私钥钱包(USD)";
-            self.headerView.textLbl.text = @"个人钱包(USD)";
+            self.headerView.equivalentBtn.text = [NSString stringWithFormat:@"%@(USD)", [LangSwitcher switchLang:@"总资产" key:nil]];
+            self.headerView.localLbl.text = [NSString stringWithFormat:@"%@(USD)", [LangSwitcher switchLang:@"秘钥钱包" key:nil]];
+            self.headerView.textLbl.text = [NSString stringWithFormat:@"%@(USD)", [LangSwitcher switchLang:@"个人钱包" key:nil]];
             [self.headerView setNeedsDisplay];
         }else{
             NSString *cnyStr = [responseObject[@"data"][@"totalAmountCNY"] convertToSimpleRealMoney];
@@ -713,9 +708,9 @@
             }
 //            self.headerView.cnyAmountLbl.text = [NSString stringWithFormat:@"¥ %.2f", [cnyStr doubleValue]];
             self.headerView.privateMoney.text = [NSString stringWithFormat:@"¥ %.2f", [cnyStr doubleValue]];
-            self.headerView.equivalentBtn.text = @"总资产(CNY)";
-            self.headerView.localLbl.text = @"私钥钱包(CNY)";
-            self.headerView.textLbl.text = @"个人钱包(CNY)";
+            self.headerView.equivalentBtn.text = [NSString stringWithFormat:@"%@(CNY)", [LangSwitcher switchLang:@"总资产" key:nil]];
+            self.headerView.localLbl.text = [NSString stringWithFormat:@"%@(CNY)", [LangSwitcher switchLang:@"秘钥钱包" key:nil]];
+            self.headerView.textLbl.text = [NSString stringWithFormat:@"%@(CNY)", [LangSwitcher switchLang:@"个人钱包" key:nil]];
             [self.headerView setNeedsDisplay];
 
         }
@@ -737,10 +732,11 @@
 }
 - (void)queryMyAmount
 {
-    TLNetworking *http = self.helper;
+    TLNetworking *http = [TLNetworking new];
     http.code = @"802270";
     http.isLocal = YES;
     http.isUploadToken = NO;
+    
     //获取私钥钱包余额
     TLDataBase *dataBase = [TLDataBase sharedManager];
     NSString *symbol;
@@ -778,6 +774,9 @@
                 http.ISparametArray = YES;
         
         http.parameters[@"accountList"] = arr;
+    }else{
+        
+        return;
     }
     
     
@@ -793,8 +792,8 @@
                 double f =  [cnyStr doubleValue]+[[self.headerView.privateMoney.text substringFromIndex:1] doubleValue] ;
                 self.headerView.cnyAmountLbl.text = [NSString stringWithFormat:@"$ %.2f", f] ;
                 self.headerView.LocalMoney.text = [NSString stringWithFormat:@"$ %.2f", [cnyStr doubleValue]];
-                self.headerView.localLbl.text = @"私钥钱包(USD)";
-                self.headerView.textLbl.text = @"个人钱包(USD)";
+                self.headerView.localLbl.text = [NSString stringWithFormat:@"%@(USD)", [LangSwitcher switchLang:@"秘钥钱包" key:nil]];;
+                self.headerView.textLbl.text = [NSString stringWithFormat:@"%@(USD)", [LangSwitcher switchLang:@"个人钱包" key:nil]];;
 
                 NSArray *usdStr = responseObject[@"data"][@"accountList"];
                 
@@ -804,12 +803,12 @@
                 
                 //            weakSelf.currentTableView.platforms = weakSelf.currencys;
                 //            [weakSelf.currentTableView reloadData_tl];
-                self.headerView.usdAmountLbl.text = [NSString stringWithFormat:@"%@USD", usdStr];
-                self.headerView.equivalentBtn.text = @"总资产(USD)";
+                self.headerView.usdAmountLbl.text = [NSString stringWithFormat:@"%@CNY", usdStr];
+                self.headerView.equivalentBtn.text = [NSString stringWithFormat:@"%@(CNY)", [LangSwitcher switchLang:@"总资产" key:nil]];;
 
                 NSString *hkdStr = [responseObject[@"data"][@"totalAmountHKD"] convertToSimpleRealMoney];
                 
-                self.headerView.hkdAmountLbl.text = [NSString stringWithFormat:@"%@HKD", hkdStr];
+                self.headerView.hkdAmountLbl.text = [NSString stringWithFormat:@"%@CNY", hkdStr];
                 [self.headerView setNeedsDisplay];
 
             }else
@@ -818,11 +817,11 @@
                 self.headerView.cnyAmountLbl.text = [NSString stringWithFormat:@"¥ %.2f", f];
 //                self.headerView.cnyAmountLbl.text = [NSString stringWithFormat:@"¥ %.2f", [cnyStr doubleValue]];
                 self.headerView.LocalMoney.text = [NSString stringWithFormat:@"¥ %.2f", [cnyStr doubleValue]];
-                self.headerView.equivalentBtn.text = @"总资产(CNY)";
+                self.headerView.equivalentBtn.text = [NSString stringWithFormat:@"%@(CNY)", [LangSwitcher switchLang:@"总资产" key:nil]];
 
                 NSArray *usdStr = responseObject[@"data"][@"accountList"];
-                self.headerView.localLbl.text = @"私钥钱包(CNY)";
-                self.headerView.textLbl.text = @"个人钱包(CNY)";
+                self.headerView.localLbl.text = [NSString stringWithFormat:@"%@(CNY)", [LangSwitcher switchLang:@"秘钥钱包" key:nil]];
+                self.headerView.textLbl.text = [NSString stringWithFormat:@"%@(CNY)", [LangSwitcher switchLang:@"个人钱包" key:nil]];
                 //            weakSelf.currencys   =  [CurrencyModel mj_objectArrayWithKeyValuesArray:usdStr];
                 
                 NSLog(@"%@",self.currencys);
@@ -894,10 +893,12 @@
     if (arr.count > 0) {
         
         http.parameters[@"accountList"] = arr;
-    }
-
+    }else{
+        return;
+        }
+  
 //    http.parametArray = @[ dic];
-
+   
     CoinWeakSelf;
     http.isList = YES;
     http.isCurrency = YES;

@@ -116,7 +116,7 @@
 
 
         NSArray *heightArray = @[@(kHeight(257)),@(kHeight(320)),@(kHeight(414)),@(kHeight(477))];
-        NSArray *nameArray = @[[LangSwitcher switchLang:@"代币" key:nil],[LangSwitcher switchLang:@"代币总额" key:nil],[LangSwitcher switchLang:@"糖果个数" key:nil]];
+        NSArray *nameArray = @[[LangSwitcher switchLang:@"代币" key:nil],[LangSwitcher switchLang:@"代币总额" key:nil],[LangSwitcher switchLang:@"红包个数" key:nil]];
         NSArray *symbolArrayl = @[[LangSwitcher switchLang:@"枚" key:nil],[LangSwitcher switchLang:@"个" key:nil]];
 
         for (int i = 0; i<4; i ++) {
@@ -130,7 +130,9 @@
                 UILabel *nameLabel = [UILabel labelWithFrame:CGRectMake(10, 0, 80, kHeight(48)) textAligment:(NSTextAlignmentLeft) backgroundColor:kClearColor font:Font(14) textColor:kTextColor3];
                 nameLabel.text = nameArray[i];
                 [backView addSubview:nameLabel];
-
+                if (i == 1) {
+                    self.total = nameLabel;
+                }
                 UITextField *nameTF = [[UITextField alloc]initWithFrame:CGRectMake(90, 0, kWidth(255) - 90 - 30, kHeight(48))];
                 if (i == 0) {
                     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(Tap)];
@@ -165,7 +167,7 @@
                 UITextField *nameTF = [[UITextField alloc]initWithFrame:CGRectMake(10, 0, kWidth(255) - 20, kHeight(48))];
                 nameTF.font = Font(14);
                 nameTF.tag = 10003;
-                nameTF.placeholder = [LangSwitcher switchLang:@"糖包一响,黄金万两" key:nil];
+                nameTF.placeholder = [LangSwitcher switchLang:@"红包一响,黄金万两" key:nil];
                 [nameTF setValue:Font(14) forKeyPath:@"_placeholderLabel.font"];
                 [backView addSubview:nameTF];
             }
@@ -176,15 +178,15 @@
         [self addSubview:alltotalLabel];
 
 
-        UIButton *TheWalletButton = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"改为普通钱包" key:nil] titleColor:kTextColor5 backgroundColor:kClearColor titleFont:11];
+        UIButton *TheWalletButton = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"改为普通红包" key:nil] titleColor:kTextColor5 backgroundColor:kClearColor titleFont:11];
         [TheWalletButton setTitle:[LangSwitcher switchLang:@"改为拼手气红包" key:nil] forState:(UIControlStateSelected)];
-        TheWalletButton.frame = CGRectMake(kScreenWidth - kWidth(60) - 80, kHeight(378), 80, kHeight(26));
+        TheWalletButton.frame = CGRectMake(kScreenWidth - kWidth(60)-kWidth(140), kHeight(378), kWidth(160), kHeight(26));
         [TheWalletButton addTarget:self action:@selector(ButtonClick:) forControlEvents:(UIControlEventTouchUpInside)];
         TheWalletButton.tag = 101;
         kViewBorderRadius(TheWalletButton,0,0.5,kTextColor5);
         [self addSubview:TheWalletButton];
 
-        UIButton *IntoButton = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"塞进糖包" key:nil] titleColor:kTextColor6 backgroundColor:SugarPacketsBack titleFont:16];
+        UIButton *IntoButton = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"塞进红包" key:nil] titleColor:kTextColor6 backgroundColor:SugarPacketsBack titleFont:16];
         kViewRadius(IntoButton, 5);
         IntoButton.frame = CGRectMake(kWidth(60), kHeight(550), kWidth(255), kHeight(48));
         IntoButton.tag = 102;
@@ -231,10 +233,13 @@
         sender.selected = !sender.selected;
         if (sender.selected == YES)
         {
+            self.total.text = [LangSwitcher switchLang:@"代币单额" key:nil];
             _type = @"0";
         }
         else
         {
+            self.total.text = [LangSwitcher switchLang:@"代币总额" key:nil];
+
             _type = @"1";
         }
         [self CalculateThePrice];
@@ -243,12 +248,19 @@
         if (![TLUser user].isLogin) {
             return;
         }
-        if ([_count isEqualToString:@""]) {
+        if ([_count isEqualToString:@""] || !_count) {
             [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入代币数量" key:nil]];
             return;
         }
-        if ([_sendNum isEqualToString:@""]) {
-            [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入糖果个数" key:nil]];
+      if([_count floatValue] <0.001)
+        {
+            [TLAlert alertWithInfo:[LangSwitcher switchLang:@"总金额最少为0.001" key:nil]];
+
+            return;
+        }
+        
+        if ([_sendNum isEqualToString:@""] || !_sendNum) {
+            [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入红包个数" key:nil]];
             return;
 
         }
@@ -258,8 +270,8 @@
         }
 
         UITextField *textField3 = [self viewWithTag:10003];
-        if ([textField3.text isEqualToString:@""]) {
-            _greeting = @"糖包一响,黄金万两";
+        if ([textField3.text isEqualToString:@""] || !textField3.text ) {
+            _greeting = @"红包一响,黄金万两";
         }else
         {
             _greeting = textField3.text;
@@ -268,6 +280,7 @@
         [_delegate SendRedEnvelopeButton:102 currency:_currency type:_type count:_count sendNum:_sendNum greeting:_greeting];
 
     }
+    
 }
 
 
@@ -292,10 +305,10 @@
     NSString *leftAmount = [CoinUtil convertToRealCoin:platform.amountString coin:coin.symbol];
     NSString *rightAmount = [CoinUtil convertToRealCoin:platform.frozenAmountString coin:coin.symbol];
     NSString *ritAmount = [leftAmount subNumber:rightAmount];
-    alltotalLabel.text = [NSString stringWithFormat:@"持有%@总量:%.3f",platform.currency,[ritAmount floatValue]];
+    alltotalLabel.text = [NSString stringWithFormat:@"%@%@%@:%.3f",[LangSwitcher switchLang:@"持有" key:nil],[LangSwitcher switchLang:@"总量" key:nil],platform.currency,[ritAmount floatValue]];
 
 
-    NSString *str = [NSString stringWithFormat:@"共发送 0.000 %@",_currency];
+    NSString *str = [NSString stringWithFormat:@"%@ 0.000 %@",[LangSwitcher switchLang:@"总共发送" key:nil],_currency];
     [self labelText:str];
 }
 
@@ -320,14 +333,7 @@
             unichar single = [string characterAtIndex:0];//当前输入的字符
             if ((single >= '0' && single <= '9') || single == '.') {//数据格式正确
                 //首字母不能为小数点
-                if([textField.text length] == 0){
-                    if(single == '.') {
-
-                        [textField.text stringByReplacingCharactersInRange:range withString:@""];
-                        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"格式错误" key:nil]];
-                        return NO;
-                    }
-                }
+               
                 if ([resultStr floatValue] > ALLPRICE) {
                     [TLAlert alertWithInfo:[LangSwitcher switchLang:@"不得大于一百万" key:nil]];
                     return NO;
@@ -345,7 +351,6 @@
                     }else{
                         [textField.text stringByReplacingCharactersInRange:range withString:@""];
 
-                        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"格式错误" key:nil]];
                         return NO;
                     }
                 }else{
@@ -356,7 +361,7 @@
                         if (range.location - ran.location <= 3) {
                             return YES;
                         }else{
-                            [TLAlert alertWithInfo:[LangSwitcher switchLang:@"格式错误" key:nil]];
+                            
                             return NO;
                         }
                     }else{
@@ -364,7 +369,6 @@
                     }
                 }
             }else{//输入的数据格式不正确
-                [TLAlert alertWithInfo:[LangSwitcher switchLang:@"格式错误" key:nil]];
                 [textField.text stringByReplacingCharactersInRange:range withString:@""];
                 return NO;
             }

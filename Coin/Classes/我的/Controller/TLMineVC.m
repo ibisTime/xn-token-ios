@@ -185,7 +185,7 @@
         [weakSelf.navigationController pushViewController:settingVC animated:YES];
     };
     MineModel *language = [MineModel new];
-    language.text = [LangSwitcher switchLang:@"语言设置" key:nil];
+    language.text = [LangSwitcher switchLang:@"语言" key:nil];
     language.imgName = @"语言";
     language.action =^{
         

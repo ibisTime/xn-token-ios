@@ -28,7 +28,8 @@
     if (self) {
         headImage = [[UIImageView alloc]initWithFrame:CGRectMake(14, 16, 34, 34)];
         [self addSubview:headImage];
-
+        headImage.layer.cornerRadius = 17;
+        headImage.clipsToBounds = YES;
         nameLabel = [UILabel labelWithFrame:CGRectMake(63, 16, (SCREEN_WIDTH - 79)/2, 20) textAligment:(NSTextAlignmentLeft) backgroundColor:kClearColor font:FONT(14) textColor:[UIColor blackColor]];
 //        nameLabel.text = @"来自  王小二";
         [self addSubview:nameLabel];
@@ -59,11 +60,11 @@
 {
     NSLog(@"%@",getModel);
     NSDictionary *redPacketInfo = getModel.redPacketInfo;
-    nameLabel.text = [NSString stringWithFormat:@"来自 %@",redPacketInfo[@"sendUserNickname"]];
+    nameLabel.text = [NSString stringWithFormat:@"%@",redPacketInfo[@"sendUserNickname"]];
     timeLabel.text = [getModel.createDatetime convertDate];
 
-    [headImage sd_setImageWithURL:[NSURL URLWithString:[redPacketInfo[@"sendUserPhoto"] convertImageUrl ]]];
-    priceLabel.text = [NSString stringWithFormat:@"%@ %@",redPacketInfo[@"totalCount"],redPacketInfo[@"symbol"]];
+    [headImage sd_setImageWithURL:[NSURL URLWithString:[redPacketInfo[@"sendUserPhoto"] convertImageUrl ] ] placeholderImage:kImage(@"头像")];
+    priceLabel.text = [NSString stringWithFormat:@"%@ %@",getModel.count,redPacketInfo[@"symbol"]];
 //    TheValueLabel.text = [NSString stringWithFormat:@"¥%@",redPacketInfo[@"totalCountCNY"]];
 }
 @end

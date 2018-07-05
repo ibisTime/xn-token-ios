@@ -31,6 +31,10 @@
         return [ZMChineseConvert convertSimplifiedToTraditional:content];
     }else{
         
+        NSString *text = [NSBundle.mainBundle localizedStringForKey:(content) value:@"" table:nil];
+        
+        NSLog(@"%@",text);
+
         return NSLocalizedString(content, key);
 //        return NSLocalizedStringFromTable(content,@"MyStrings", @"");
 
@@ -51,7 +55,7 @@
     }
     
     if ([lang isEqualToString:TRADITIONAL]) {
-        return LangTypeTraditional;
+        return LangTypeEnglish;
     }
     if ([lang isEqualToString:ENGLISH]) {
         return LangTypeEnglish;
@@ -63,7 +67,7 @@
 //        return LangTypeJapanese;
 //    }
 
-    return LangTypeSimple;
+    return LangTypeEnglish;
     
 }
 
@@ -72,17 +76,15 @@
 + (NSString *)currentLang {
     
     NSDictionary *dict = @{
-                           SIMPLE : @"简体中文",
-                           TRADITIONAL : @"繁体中文",
-                           ENGLISH : @"英文"
+                           SIMPLE : @"简体中文",                           ENGLISH : @"英文"
                            };
     
     NSString *lang = [[NSUserDefaults standardUserDefaults] objectForKey:LANG];
     if (!lang) {
-        return dict[SIMPLE];
+        return dict[ENGLISH];
     }
     //
-    return [self switchLang:dict[lang]? : dict[SIMPLE] key:nil];
+    return [self switchLang:dict[lang]? : dict[ENGLISH] key:nil];
     
 }
 
@@ -97,7 +99,7 @@
         } break;
         case LangTypeTraditional: {
             
-            [userDefaults setObject:TRADITIONAL forKey:LANG];
+            [userDefaults setObject:ENGLISH forKey:LANG];
 
         } break;
 
@@ -151,12 +153,16 @@
 //        }
         else if ([currentLanguage isEqualToString:@"zh-Hant-US"]||[currentLanguage isEqualToString:@"zh-Hant-HK"])
         {//繁体
-            [self changLangType:LangTypeTraditional];
+            [self changLangType:LangTypeEnglish];
 
             
         }else if ([currentLanguage isEqualToString:@"zh-Hans-US"])
         {//简体
-            [self changLangType:LangTypeSimple];
+            [self changLangType:LangTypeEnglish];
+
+        }else{
+            
+            [self changLangType:LangTypeEnglish];
 
         }
         

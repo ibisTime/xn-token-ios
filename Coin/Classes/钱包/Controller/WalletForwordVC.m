@@ -302,15 +302,15 @@ typedef NS_ENUM(NSInteger, WalletAddressType) {
         
     }];
     UIImageView *rightArrow = [[UIImageView alloc] initWithImage:kImage(@"更多-灰色")];
-    rightArrow.frame = CGRectMake(0, self.tranAmountTF.yy + 10, 60, heightMargin);
+//    rightArrow.frame = CGRectMake(0, self.tranAmountTF.yy + 10, 30, 20);
     [self.view addSubview:rightArrow];
-//    [rightArrow mas_makeConstraints:^(MASConstraintMaker *make) {
-//
-//        make.right.equalTo(self.view.mas_right).offset(-15);
-//        make.centerY.equalTo(self.minerFeeTF.mas_centerY);
-//        make.width.equalTo(@6.5);
-//
-//    }];
+    [rightArrow mas_makeConstraints:^(MASConstraintMaker *make) {
+
+        make.right.equalTo(self.view.mas_right).offset(-15);
+        make.centerY.equalTo(self.minerFeeTF.mas_centerY);
+        make.width.equalTo(@6.5);
+
+    }];
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickImage)];
     [rightArrow addGestureRecognizer:tapGesture];
     rightArrow.userInteractionEnabled = YES;

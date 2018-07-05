@@ -47,14 +47,14 @@
     [bgCtrl addSubview:bgView];
     
     //取消btn
-    UIButton *cancleBtn = [[UIButton alloc] initWithFrame:CGRectMake(10, 0, 60, 40) title:@"取消" backgroundColor:[UIColor whiteColor]];
+    UIButton *cancleBtn = [[UIButton alloc] initWithFrame:CGRectMake(10, 0, 60, 40) title:[LangSwitcher switchLang:@"取消" key:nil] backgroundColor:[UIColor whiteColor]];
     [cancleBtn addTarget:self action:@selector(cancle) forControlEvents:UIControlEventTouchUpInside];
     [cancleBtn setTitleColor:kAppCustomMainColor forState:UIControlStateNormal];
     bgView.backgroundColor = [UIColor whiteColor];
     [bgView addSubview:cancleBtn];
     
     //确定btn
-    UIButton *confirmBtn = [[UIButton alloc] initWithFrame:CGRectMake(kScreenWidth - 70, 0, 60, 40) title:@"确定" backgroundColor:[UIColor whiteColor]];
+    UIButton *confirmBtn = [[UIButton alloc] initWithFrame:CGRectMake(kScreenWidth - 70, 0, 60, 40) title:[LangSwitcher switchLang:@"确定" key:nil] backgroundColor:[UIColor whiteColor]];
     [confirmBtn addTarget:self action:@selector(confirm) forControlEvents:UIControlEventTouchUpInside];
     [bgView addSubview:confirmBtn];
     [confirmBtn setTitleColor:kAppCustomMainColor forState:UIControlStateNormal];

@@ -84,7 +84,7 @@
 //    }];
     
     //
-    [self.models addObjectsFromArray:@[simpleModel,tridationModel,EnglishModel]];
+    [self.models addObjectsFromArray:@[simpleModel,EnglishModel]];
     
     
 }

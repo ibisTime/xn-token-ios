@@ -27,5 +27,6 @@
 @property (nonatomic , copy)NSString *totalCountCNY;
 
 @property (nonatomic , copy)NSString *totalCount;
+@property (nonatomic , copy)NSString *count;
 
 @end

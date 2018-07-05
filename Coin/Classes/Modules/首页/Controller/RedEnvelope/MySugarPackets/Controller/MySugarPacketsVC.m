@@ -52,7 +52,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view
     UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 100, 44)];
-    label.text = @"我的糖包";
+    label.text = [LangSwitcher switchLang:@"我的糖包" key:nil];
     label.textColor = [UIColor whiteColor];
     label.textAlignment = NSTextAlignmentCenter;
     label.font = [UIFont fontWithName:@"Georgia-Bold" size:18];
@@ -131,7 +131,7 @@
 - (void)setupPageButton{
     //button的index值应当从0开始
 
-    NSArray *array = [NSArray arrayWithObjects:@"抢到糖包",@"发出糖包", nil];
+    NSArray *array = [NSArray arrayWithObjects:[LangSwitcher switchLang:@"抢到糖包" key:nil],[LangSwitcher switchLang:@"发出糖包" key:nil], nil];
     //初始化UISegmentedControl
     segment = [[UISegmentedControl alloc]initWithItems:array];
     //设置frame
@@ -150,36 +150,8 @@
     [self.view addSubview:segment];
     [segment addTarget:self action:@selector(pageClick:) forControlEvents:UIControlEventValueChanged];
 
-
-//    UIButton *btn = [self setupButtonWithTitle:@"抢到糖包" Index:0];
-//    [self setupButtonWithTitle:@"发出糖包" Index:1];
-////    kViewBorderRadius(btn, 0, 2, [UIColor whiteColor]);
-//    [btn setTitleColor:HeadBackColor forState:(UIControlStateNormal)];
-//    [btn setBackgroundColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
-//    self.selectBtn = btn;
 }
-//- (UIButton *)setupButtonWithTitle:(NSString *)title Index:(NSInteger)index{
-//    CGFloat x = SCREEN_WIDTH/2 - 100 +  index * 100;
-//    CGFloat y = 15;
-//    CGFloat w = 101;
-//    CGFloat h = 40;
-//
-//    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-//    [btn setTitle:title forState:(UIControlStateNormal)];
-//    btn.frame = CGRectMake(x, y, w, h);
-//    kViewBorderRadius(btn, 5, 2, [UIColor whiteColor]);
-//    btn.titleLabel.font = FONT(14);
-//    btn.tag = index + kTag;
-//    [btn setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
-//    [btn setBackgroundColor:HeadBackColor forState:(UIControlStateNormal)];
-//    [btn addTarget:self action:@selector(pageClick:) forControlEvents:(UIControlEventTouchUpInside)];
-//    [self.view addSubview:btn];
-//
-//
-//
-//
-//    return btn;
-//}
+
 
 #pragma mark -- 按钮点击方法
 - (void)pageClick:(UISegmentedControl *)sender
@@ -190,26 +162,6 @@
     frame.size = _scroll.frame.size;
     [_scroll scrollRectToVisible:frame animated:YES];
 }
-#pragma mark - 设置选中button的样式
-//- (void)setupSelectBtn{
-//    UIButton *btn = [self.view viewWithTag:self.currentPages + kTag];
-//    if ([self.selectBtn isEqual:btn]) {
-//        return;
-//    }
-//    kViewBorderRadius(self.selectBtn, 5, 2, [UIColor whiteColor]);
-//    [self.selectBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
-//    [self.selectBtn setBackgroundColor:HeadBackColor forState:(UIControlStateNormal)];
-//
-//    self.selectBtn = btn;
-//    kViewBorderRadius(btn, 5, 2, [UIColor whiteColor]);
-//    [btn setTitleColor:HeadBackColor forState:(UIControlStateNormal)];
-//    [btn setBackgroundColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
-//
-//}
-#pragma mark -   进入当前的选定页面
-//- (void)gotoCurrentPage{
-//
-//}
 
 #pragma mark - ScrollView delegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {

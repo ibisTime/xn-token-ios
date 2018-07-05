@@ -97,7 +97,7 @@
     }];
     
     //确定
-    UIButton *confirmBtn = [UIButton buttonWithTitle:@"确定" titleColor:kAppCustomMainColor backgroundColor:kClearColor titleFont:15.0];
+    UIButton *confirmBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"确定" key:nil] titleColor:kAppCustomMainColor backgroundColor:kClearColor titleFont:15.0];
     
     [confirmBtn addTarget:self action:@selector(confirm) forControlEvents:UIControlEventTouchUpInside];
     

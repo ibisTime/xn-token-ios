@@ -22,7 +22,7 @@
 @implementation AddAccoutMoneyVc
 
 - (void)viewDidLoad {
-    self.title = @"添加资产";
+    self.title = [LangSwitcher switchLang:@"添加资产" key:nil];
     [self initTableView];
     [self getStatusSymbol];
 //    [self queryTotalAmount];

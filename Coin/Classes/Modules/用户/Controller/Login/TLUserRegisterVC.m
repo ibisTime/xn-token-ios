@@ -93,7 +93,7 @@
     
     CGFloat btnMargin = 15;
     UILabel *lab = [UILabel labelWithBackgroundColor:kWhiteColor textColor:kBlackColor font:30];
-    lab.text = @"注册!";
+    lab.text = [LangSwitcher switchLang:@"注册!" key:nil];
     [self.contentScrollView addSubview:lab];
     [lab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(@20);
@@ -139,7 +139,7 @@
     phone.backgroundColor = kLineColor;
     phone.frame = CGRectMake(btnMargin, phoneTf.yy, w-30, 2);
     
-    UILabel *codeLab = [UILabel labelWithTitle:@"验证码" frame:CGRectMake(20, phoneTf.yy+5, w, 22)];
+    UILabel *codeLab = [UILabel labelWithTitle:[LangSwitcher switchLang:@"验证码" key:nil] frame:CGRectMake(20, phoneTf.yy+5, w, 22)];
     codeLab.font = [UIFont systemFontOfSize:14];
     codeLab.textAlignment = NSTextAlignmentLeft;
     codeLab.textColor = kTextColor;
@@ -163,7 +163,7 @@
     
     //密码
     
-    UILabel *pwdLab = [UILabel labelWithTitle:@"密码" frame:CGRectMake(20, captchaView.yy+5, w, 22)];
+    UILabel *pwdLab = [UILabel labelWithTitle:[LangSwitcher switchLang:@"密码" key:nil] frame:CGRectMake(20, captchaView.yy+5, w, 22)];
     pwdLab.font = [UIFont systemFontOfSize:14];
     pwdLab.textAlignment = NSTextAlignmentLeft;
     pwdLab.textColor = kTextColor;
@@ -178,7 +178,7 @@
     phone2.backgroundColor = kLineColor;
     phone2.frame = CGRectMake(btnMargin, pwdTf.yy, w-30, 2);
     //re密码
-    UILabel *sureLab = [UILabel labelWithTitle:@"确认密码" frame:CGRectMake(20, pwdTf.yy+5, w, 22)];
+    UILabel *sureLab = [UILabel labelWithTitle:[LangSwitcher switchLang:@"确认密码" key:nil] frame:CGRectMake(20, pwdTf.yy+5, w, 22)];
     sureLab.font = [UIFont systemFontOfSize:14];
     sureLab.textAlignment = NSTextAlignmentLeft;
     sureLab.textColor = kTextColor;

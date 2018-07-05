@@ -189,9 +189,14 @@
     if ([tabbarContrl isKindOfClass:[BuildWalletMineVC class]]) {
         return;
     }
-    tabbarContrl.selectedIndex = 2;
-    [tabbarContrl.tabBar hideBadgeOnItemIndex:4];
+//    tabbarContrl.selectedIndex = 0;
+//    [tabbarContrl.tabBar hideBadgeOnItemIndex:4];
     //应用外数量为0
+    TLUserLoginVC *login = [TLUserLoginVC new];
+
+    TLNavigationController *na = [[TLNavigationController alloc] initWithRootViewController:login];
+//    TLTabBarController *tab = [TLTabBarController new];
+    [UIApplication sharedApplication].keyWindow.rootViewController = na;
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
     
 }
