@@ -135,7 +135,7 @@
     self.bottomIV = bottomIV;
     UILabel *localLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kWhiteColor font:14.0];
     
-    localLbl.text = [LangSwitcher switchLang:@"秘钥钱包" key:nil];
+    localLbl.text = [LangSwitcher switchLang:@"私钥钱包" key:nil];
     self.localLbl = localLbl;
     [self.bottomIV addSubview:localLbl];
     UIImageView *imageView  = [[UIImageView alloc] init];
@@ -191,7 +191,7 @@
     self.bgIV = bgIV;
     UILabel *textLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kHexColor(@"#D3FFFF") font:14.0];
     
-    textLbl.text = [LangSwitcher switchLang:@"个人钱包" key:nil];
+    textLbl.text = [LangSwitcher switchLang:@"个人账户" key:nil];
     self.textLbl = textLbl;
     [self.bgIV addSubview:textLbl];
     [textLbl mas_makeConstraints:^(MASConstraintMaker *make) {

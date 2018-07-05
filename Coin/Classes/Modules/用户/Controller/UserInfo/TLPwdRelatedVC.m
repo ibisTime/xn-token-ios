@@ -104,8 +104,8 @@
 
     [PhoneCode mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.top.equalTo(titlePhone.mas_bottom).offset(10);
-        make.left.mas_equalTo(20);
+        make.top.equalTo(@20);
+        make.left.equalTo(titlePhone.mas_right).offset(15);
     }];
     
     self.accessoryImageView = [[UIButton alloc] init];

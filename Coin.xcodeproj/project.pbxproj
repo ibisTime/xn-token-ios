@@ -233,6 +233,8 @@
 		B88B092D20C8F878005C2D2F /* WalletSettingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B88B092C20C8F878005C2D2F /* WalletSettingVC.m */; };
 		B88B093020C9072B005C2D2F /* RevisePassWordVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B88B092F20C9072B005C2D2F /* RevisePassWordVC.m */; };
 		B88B093320C908DC005C2D2F /* ResiseTextFiled.m in Sources */ = {isa = PBXBuildFile; fileRef = B88B093220C908DC005C2D2F /* ResiseTextFiled.m */; };
+		B88D6C6F20EDF39F0043832C /* TLFastvc.m in Sources */ = {isa = PBXBuildFile; fileRef = B88D6C6E20EDF39F0043832C /* TLFastvc.m */; };
+		B88D6C7220EDF3B50043832C /* TLTransfromVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B88D6C7120EDF3B50043832C /* TLTransfromVC.m */; };
 		B8A2436520E5E0F20074DF8F /* TLDataBase.m in Sources */ = {isa = PBXBuildFile; fileRef = B8A2436420E5E0F20074DF8F /* TLDataBase.m */; };
 		B8B15C0220CA312100F13220 /* BuildWalletMineVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B8B15C0120CA312100F13220 /* BuildWalletMineVC.m */; };
 		B8B15C0520CA55D600F13220 /* BuildSucessVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B8B15C0420CA55D600F13220 /* BuildSucessVC.m */; };
@@ -737,6 +739,10 @@
 		B88B092F20C9072B005C2D2F /* RevisePassWordVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RevisePassWordVC.m; sourceTree = "<group>"; };
 		B88B093120C908DC005C2D2F /* ResiseTextFiled.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ResiseTextFiled.h; sourceTree = "<group>"; };
 		B88B093220C908DC005C2D2F /* ResiseTextFiled.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ResiseTextFiled.m; sourceTree = "<group>"; };
+		B88D6C6D20EDF39F0043832C /* TLFastvc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLFastvc.h; sourceTree = "<group>"; };
+		B88D6C6E20EDF39F0043832C /* TLFastvc.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLFastvc.m; sourceTree = "<group>"; };
+		B88D6C7020EDF3B50043832C /* TLTransfromVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLTransfromVC.h; sourceTree = "<group>"; };
+		B88D6C7120EDF3B50043832C /* TLTransfromVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLTransfromVC.m; sourceTree = "<group>"; };
 		B8A2436320E5E0F20074DF8F /* TLDataBase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLDataBase.h; sourceTree = "<group>"; };
 		B8A2436420E5E0F20074DF8F /* TLDataBase.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLDataBase.m; sourceTree = "<group>"; };
 		B8B15C0020CA312100F13220 /* BuildWalletMineVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BuildWalletMineVC.h; sourceTree = "<group>"; };
@@ -2118,6 +2124,10 @@
 				211A53241FBFE42B00CC6294 /* BIll */,
 				2ED651C7200F2F6F0065A1B0 /* TLCoinWithdrawOrderVC.h */,
 				2ED651C8200F2F6F0065A1B0 /* TLCoinWithdrawOrderVC.m */,
+				B88D6C6D20EDF39F0043832C /* TLFastvc.h */,
+				B88D6C6E20EDF39F0043832C /* TLFastvc.m */,
+				B88D6C7020EDF3B50043832C /* TLTransfromVC.h */,
+				B88D6C7120EDF3B50043832C /* TLTransfromVC.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2691,6 +2701,7 @@
 				216F5B1C206CD9C900F2C832 /* StoreDetailHeaderView.m in Sources */,
 				B8C2057620CF9FFD00952765 /* WalletAdressTableView.m in Sources */,
 				211DE6BC1FB58B4C002FCF3D /* NSString+Extension.m in Sources */,
+				B88D6C6F20EDF39F0043832C /* TLFastvc.m in Sources */,
 				21C91D7D1FDBCF9C006EDB16 /* ZMAuthVC.m in Sources */,
 				21A7F3161FB2E2F900FAA0A2 /* TLUserLoginVC.m in Sources */,
 				211A34EB1FB42F8100FEB71F /* SettingVC.m in Sources */,
@@ -2817,6 +2828,7 @@
 				7A8A5D1520EA076C002D9A48 /* RedEnvelopeVC.m in Sources */,
 				21A7F35E1FB2EBAA00FAA0A2 /* CurrencyModel.m in Sources */,
 				B8C2057F20CFFE1C00952765 /* WalletLocalModel.m in Sources */,
+				B88D6C7220EDF3B50043832C /* TLTransfromVC.m in Sources */,
 				211DE6A61FB58B4C002FCF3D /* TLTextView.m in Sources */,
 				B8B15C0820CA5B1800F13220 /* BuildBackUpVC.m in Sources */,
 				B8BBA64320C843F800DC4D5F /* AddAccoutMoneyVc.m in Sources */,

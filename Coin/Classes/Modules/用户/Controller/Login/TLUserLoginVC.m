@@ -22,6 +22,7 @@
 
 #import "AccountTf.h"
 #import "ChooseCountryVc.h"
+#import "TLTabBarController.h"
 //腾讯云
 //#import "ChatManager.h"   czy
 //#import "IMModel.h"
@@ -143,7 +144,7 @@
     title.text = [LangSwitcher switchLang:@"还没账号?" key:nil];
     [title mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.centerX.equalTo(registBtn.mas_centerX).offset(-60);
+        make.centerX.equalTo(registBtn.mas_centerX).offset(-80);
         make.centerY.equalTo(registBtn.mas_centerY);
     }];
     
@@ -396,6 +397,15 @@
             self.loginSuccess();
         }
         
+        if (self.IsAPPJoin == YES) {
+             [[NSNotificationCenter defaultCenter] postNotificationName:kUserLoginNotification object:nil];
+            self.NeedLogin = NO;
+            [self.navigationController popToRootViewControllerAnimated:YES];
+         TLTabBarController*tab   = [[TLTabBarController alloc] init];
+        [UIApplication sharedApplication].keyWindow.rootViewController = tab;
+            
+            return ;
+        }
         self.NeedLogin = NO;
         [[NSNotificationCenter defaultCenter] postNotificationName:kUserLoginNotification object:nil];
         [self.navigationController popToRootViewControllerAnimated:YES];

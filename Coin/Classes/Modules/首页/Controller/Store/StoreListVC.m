@@ -27,6 +27,9 @@
 
 @property (nonatomic, strong) TLPlaceholderView *placeholderView;
 
+@property (nonatomic, strong) UILabel *titleLable;
+
+@property (nonatomic, strong) UILabel *contentLab;
 
 @end
 
@@ -34,7 +37,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = [LangSwitcher switchLang:@"敬请期待" key:nil];
+    self.title = [LangSwitcher switchLang:@"首创玩法" key:nil];
     //
     [self initPlaceHolderView];
     //获取店铺列表
@@ -65,9 +68,31 @@
 
 - (void)initPlaceHolderView {
     
-    self.placeholderView = [TLPlaceholderView placeholderViewWithImage:nil text:[LangSwitcher switchLang:@" 敬请期待!" key:nil] textColor:kTextColor];
+    self.titleLable = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:14];
+    [self.view addSubview:self.titleLable];
+    self.titleLable.numberOfLines = 0;
+    [self.titleLable mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(@(kHeight(20)));
+        make.right.equalTo(@-10);
+        make.left.equalTo(@10);
+
+    }];
     
-    [self.view addSubview:self.placeholderView];
+    self.titleLable.text = @"THA用户可以通过邀请制收取徒弟，并根据任务引导来教育徒弟，从而获得算力。另外，徒弟使用THA钱包购买量化理财或余币宝，师父可获得徒弟一定比例的收益奖励。";
+    self.contentLab = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:14];
+    [self.view addSubview:self.contentLab];
+    self.contentLab.numberOfLines = 0;
+    self.contentLab.text = @"Global Master and Apprentice Initiative:/n THA Users can receive apprentice through the invitation system, and instruct apprentice according to the task, thus obtain the calculation force. In addition, the apprentice uses THA Wallet to purchase quantitative financial products or Yubibao, masters can obtain a certain percentage of the Apprentice reward.";
+    [self.contentLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.titleLable.mas_bottom).offset(20);
+        make.right.equalTo(@-10);
+        make.left.equalTo(@10);
+    }];
+    
+    
+//    self.placeholderView = [TLPlaceholderView placeholderViewWithImage:nil text:[LangSwitcher switchLang:@" 敬请期待!" key:nil] textColor:kTextColor];
+//
+//    [self.view addSubview:self.placeholderView];
     
 //    self.placeHolderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight - 40)];
 //
