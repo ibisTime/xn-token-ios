@@ -152,7 +152,7 @@
         
         [UIBarButtonItem addRightItemWithTitle:[LangSwitcher switchLang:@"筛选" key:nil]
                                     titleColor:kTextColor
-                                         frame:CGRectMake(0, 0, 40, 30)
+                                         frame:CGRectMake(0, 0, 60, 30)
                                             vc:self
                                         action:@selector(clickFilter:)];
         

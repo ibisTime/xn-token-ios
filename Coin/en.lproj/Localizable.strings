@@ -284,7 +284,7 @@
 "代币单额" = "Token single";
 
 "我的红包" = "my red packet";
-"红包一响,黄金万两" = "red packet rings, money rises";
+"红包一响,黄金万两" = "red packets come, coins sound";
 "给您发送了一个红包" = "sent you a red packet";
 "抢到红包" = "received packets";
 "总共发送" = "all";
@@ -298,8 +298,8 @@
 "资产" = "assets";
 "闪兑" = "flash";
 "一键划转" = "one-click transfer";
-"个人钱包" = "My wallet";
-"秘钥钱包" = "secret key wallet";
+"个人账户" = "My wallet";
+"私钥钱包" = "secret key wallet";
 "首创玩法" = "First play";
 "量化理财" = "Quantitative financial management";
 "账户与安全" = "Account and Security";
@@ -320,13 +320,13 @@
 "改为普通红包" = "changed to ordinary red packets";
 "改为拼手气红包" = "changed to a lucky red packetsl";
 "不能为空" = "must not be null";
-"个" = "a";
-"枚" = "a";
+"个" = "";
+"枚" = "";
 "不能为空" = "must not be null";
 "发出红包" = "sent a red packet";
 "分享" = "share";
 "提币数量" = "withdraw amount";
-"手续费将在提现金额中扣除" = "The withdraw fee will be deducted from the cash amount";
+"手续费将在提币金额中扣除" = "The withdraw fee will be deducted from the cash amount";
 "确认提币" = "Withdraw confirm";
 "提币订单" = "Withdraw order";
 "暂无提现记录" = "no withdraw records";
@@ -479,6 +479,9 @@
 "拍照" = "take a photo";
 "从手机相册选择" = "Select from phone album";
 "不少于6位" = "not less than 6 characters";
+"推荐应用" = "Recommended Applications";
+"不得大于一百万" = "the maximum total amount is 10000000";
+"数量不得大于500" = "the maximum amount of red packets is 500";
 
 
 

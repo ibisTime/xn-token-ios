@@ -80,7 +80,7 @@
     
     [self addSubview:self.pickerView];
     //取消
-    UIButton *cancelBtn = [UIButton buttonWithTitle:@"取消" titleColor:kTextColor2 backgroundColor:kClearColor titleFont:15.0];
+    UIButton *cancelBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"取消" key:nil] titleColor:kTextColor2 backgroundColor:kClearColor titleFont:15.0];
     
     [cancelBtn addTarget:self action:@selector(hide) forControlEvents:UIControlEventTouchUpInside];
     

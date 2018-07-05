@@ -85,7 +85,7 @@ typedef NS_ENUM(NSInteger, AddressType) {
     
     [UIBarButtonItem addRightItemWithTitle:[LangSwitcher switchLang:@"记录" key:nil]
                                 titleColor:kTextColor
-                                     frame:CGRectMake(0, 0, 40, 30)
+                                     frame:CGRectMake(0, 0, 60, 30)
                                         vc:self
                                     action:@selector(clickRecord:)];
 
@@ -226,7 +226,7 @@ typedef NS_ENUM(NSInteger, AddressType) {
     //转账数量
     self.tranAmountTF = [[TLTextField alloc] initWithFrame:CGRectMake(0, receiveView.yy, kScreenWidth, heightMargin)
                                                  leftTitle:[LangSwitcher switchLang:@"提币数量" key:nil]
-                                                titleWidth:90
+                                                titleWidth:120
                                                placeholder:[LangSwitcher switchLang:@"请填写数量" key:nil]
                          ];
     
@@ -241,7 +241,7 @@ typedef NS_ENUM(NSInteger, AddressType) {
     //矿工费
     self.minerFeeTF = [[TLTextField alloc] initWithFrame:CGRectMake(0, self.tranAmountTF.yy + 10, kScreenWidth, heightMargin)
                                                leftTitle:[LangSwitcher switchLang:@"手续费" key:nil]
-                                              titleWidth:90
+                                              titleWidth:120
                                              placeholder:@""];
     
     self.minerFeeTF.enabled = NO;
