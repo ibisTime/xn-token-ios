@@ -18,4 +18,6 @@
 @property (nonatomic,strong) UIBarButtonItem *backItem;
 @property (nonatomic , assign) BOOL  NeedLogin;
 
+@property (nonatomic , assign) BOOL  IsAPPJoin;
+
 @end

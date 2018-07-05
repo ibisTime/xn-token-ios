@@ -38,7 +38,7 @@
 {
     self.iconImage = [[UIImageView alloc] init];
     [self.view addSubview:self.iconImage];
-    self.iconImage.image = kImage(@"logoTHA");
+    self.iconImage.image = kImage(@"icon圆角");
     [self.iconImage mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(@100);
         make.centerX.equalTo(self.view.mas_centerX);

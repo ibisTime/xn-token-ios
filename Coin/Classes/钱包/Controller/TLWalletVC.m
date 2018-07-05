@@ -41,6 +41,8 @@
 #import "BuildWalletMineVC.h"
 #import "CountryModel.h"
 #import "countrGroup.h"
+#import "TLFastvc.h"
+#import "TLTransfromVC.h"
 //#import <CoreBitcoin.h>
 //#import <CoreBitcoin/CoreBitcoin.h>
 //#import "BTCMnemonic+Tests.h"
@@ -305,6 +307,8 @@
     [self.leftButton setImage:kImage(@"闪兑") forState:UIControlStateNormal];
     self.rightButton = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"一键划转" key:nil] titleColor:kHexColor(@"#333333") backgroundColor:kWhiteColor titleFont:14.0];
     [self.rightButton setImage:kImage(@"一键划转") forState:UIControlStateNormal];
+    [self.leftButton addTarget:self action:@selector(fast) forControlEvents:UIControlEventTouchUpInside];
+      [self.rightButton addTarget:self action:@selector(transNext) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.leftButton];
     [self.view addSubview:self.rightButton];
     [self.leftButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 0)];
@@ -367,7 +371,7 @@
     }else{
         self.switchTager = tager;
 
-        //切换秘钥钱包 需要查询用户是否已经创建完钱包
+        //切换私钥钱包 需要查询用户是否已经创建完钱包
         [self checkUserLocalWallet];
         
         
@@ -376,6 +380,22 @@
         
     }
     //切换中心钱包和本地化钱包
+    
+}
+- (void)fast
+{
+    //闪兑
+    TLFastvc *fast = [TLFastvc new];
+    [self.navigationController pushViewController:fast animated:YES];
+    
+    
+}
+- (void)transNext
+{
+    //一键旋转
+    TLTransfromVC *trans = [TLTransfromVC new];
+    [self.navigationController pushViewController:trans animated:YES];
+    
     
 }
 
@@ -697,20 +717,20 @@
             }
             self.headerView.privateMoney.text = [NSString stringWithFormat:@"$ %.2f", [cnyStr doubleValue]];
             self.headerView.equivalentBtn.text = [NSString stringWithFormat:@"%@(USD)", [LangSwitcher switchLang:@"总资产" key:nil]];
-            self.headerView.localLbl.text = [NSString stringWithFormat:@"%@(USD)", [LangSwitcher switchLang:@"秘钥钱包" key:nil]];
-            self.headerView.textLbl.text = [NSString stringWithFormat:@"%@(USD)", [LangSwitcher switchLang:@"个人钱包" key:nil]];
+            self.headerView.localLbl.text = [NSString stringWithFormat:@"%@(USD)", [LangSwitcher switchLang:@"私钥钱包" key:nil]];
+            self.headerView.textLbl.text = [NSString stringWithFormat:@"%@(USD)", [LangSwitcher switchLang:@"个人账户" key:nil]];
             [self.headerView setNeedsDisplay];
         }else{
             NSString *cnyStr = [responseObject[@"data"][@"totalAmountCNY"] convertToSimpleRealMoney];
             if (![self.IsLocalExsit isEqualToString:@"1"]) {
-                self.headerView.cnyAmountLbl.text = [NSString stringWithFormat:@"$ %.2f", [cnyStr doubleValue]];
+                self.headerView.cnyAmountLbl.text = [NSString stringWithFormat:@"¥ %.2f", [cnyStr doubleValue]];
                 
             }
 //            self.headerView.cnyAmountLbl.text = [NSString stringWithFormat:@"¥ %.2f", [cnyStr doubleValue]];
             self.headerView.privateMoney.text = [NSString stringWithFormat:@"¥ %.2f", [cnyStr doubleValue]];
             self.headerView.equivalentBtn.text = [NSString stringWithFormat:@"%@(CNY)", [LangSwitcher switchLang:@"总资产" key:nil]];
-            self.headerView.localLbl.text = [NSString stringWithFormat:@"%@(CNY)", [LangSwitcher switchLang:@"秘钥钱包" key:nil]];
-            self.headerView.textLbl.text = [NSString stringWithFormat:@"%@(CNY)", [LangSwitcher switchLang:@"个人钱包" key:nil]];
+            self.headerView.localLbl.text = [NSString stringWithFormat:@"%@(CNY)", [LangSwitcher switchLang:@"私钥钱包" key:nil]];
+            self.headerView.textLbl.text = [NSString stringWithFormat:@"%@(CNY)", [LangSwitcher switchLang:@"个人账户" key:nil]];
             [self.headerView setNeedsDisplay];
 
         }
@@ -792,8 +812,8 @@
                 double f =  [cnyStr doubleValue]+[[self.headerView.privateMoney.text substringFromIndex:1] doubleValue] ;
                 self.headerView.cnyAmountLbl.text = [NSString stringWithFormat:@"$ %.2f", f] ;
                 self.headerView.LocalMoney.text = [NSString stringWithFormat:@"$ %.2f", [cnyStr doubleValue]];
-                self.headerView.localLbl.text = [NSString stringWithFormat:@"%@(USD)", [LangSwitcher switchLang:@"秘钥钱包" key:nil]];;
-                self.headerView.textLbl.text = [NSString stringWithFormat:@"%@(USD)", [LangSwitcher switchLang:@"个人钱包" key:nil]];;
+                self.headerView.localLbl.text = [NSString stringWithFormat:@"%@(USD)", [LangSwitcher switchLang:@"私钥钱包" key:nil]];;
+                self.headerView.textLbl.text = [NSString stringWithFormat:@"%@(USD)", [LangSwitcher switchLang:@"个人账户" key:nil]];;
 
                 NSArray *usdStr = responseObject[@"data"][@"accountList"];
                 
@@ -820,8 +840,8 @@
                 self.headerView.equivalentBtn.text = [NSString stringWithFormat:@"%@(CNY)", [LangSwitcher switchLang:@"总资产" key:nil]];
 
                 NSArray *usdStr = responseObject[@"data"][@"accountList"];
-                self.headerView.localLbl.text = [NSString stringWithFormat:@"%@(CNY)", [LangSwitcher switchLang:@"秘钥钱包" key:nil]];
-                self.headerView.textLbl.text = [NSString stringWithFormat:@"%@(CNY)", [LangSwitcher switchLang:@"个人钱包" key:nil]];
+                self.headerView.localLbl.text = [NSString stringWithFormat:@"%@(CNY)", [LangSwitcher switchLang:@"私钥钱包" key:nil]];
+                self.headerView.textLbl.text = [NSString stringWithFormat:@"%@(CNY)", [LangSwitcher switchLang:@"个人账户" key:nil]];
                 //            weakSelf.currencys   =  [CurrencyModel mj_objectArrayWithKeyValuesArray:usdStr];
                 
                 NSLog(@"%@",self.currencys);

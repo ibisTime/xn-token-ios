@@ -180,7 +180,7 @@
 
         UIButton *TheWalletButton = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"改为普通红包" key:nil] titleColor:kTextColor5 backgroundColor:kClearColor titleFont:11];
         [TheWalletButton setTitle:[LangSwitcher switchLang:@"改为拼手气红包" key:nil] forState:(UIControlStateSelected)];
-        TheWalletButton.frame = CGRectMake(kScreenWidth - kWidth(60)-kWidth(140), kHeight(378), kWidth(160), kHeight(26));
+        TheWalletButton.frame = CGRectMake(kScreenWidth - kWidth(60)-kWidth(84), kHeight(378), kWidth(84), kHeight(26));
         [TheWalletButton addTarget:self action:@selector(ButtonClick:) forControlEvents:(UIControlEventTouchUpInside)];
         TheWalletButton.tag = 101;
         kViewBorderRadius(TheWalletButton,0,0.5,kTextColor5);
@@ -233,7 +233,7 @@
         sender.selected = !sender.selected;
         if (sender.selected == YES)
         {
-            self.total.text = [LangSwitcher switchLang:@"代币单额" key:nil];
+            self.total.text = [LangSwitcher switchLang:@"单个数量" key:nil];
             _type = @"0";
         }
         else
@@ -308,7 +308,7 @@
     alltotalLabel.text = [NSString stringWithFormat:@"%@%@%@:%.3f",[LangSwitcher switchLang:@"持有" key:nil],[LangSwitcher switchLang:@"总量" key:nil],platform.currency,[ritAmount floatValue]];
 
 
-    NSString *str = [NSString stringWithFormat:@"%@ 0.000 %@",[LangSwitcher switchLang:@"总共发送" key:nil],_currency];
+    NSString *str = [NSString stringWithFormat:@"%@ 0.000 %@",[LangSwitcher switchLang:@"共发送" key:nil],_currency];
     [self labelText:str];
 }
 
@@ -389,8 +389,8 @@
                 }
             }
             if ((single >= '0' && single <= '9')) {
-                if ([resultStr floatValue] > 100) {
-                    [TLAlert alertWithInfo:[LangSwitcher switchLang:@"数量不得大于100" key:nil]];
+                if ([resultStr floatValue] > 500) {
+                    [TLAlert alertWithInfo:[LangSwitcher switchLang:@"数量不得大于500" key:nil]];
                     return NO;
                 }else
                 {

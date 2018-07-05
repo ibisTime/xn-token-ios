@@ -46,6 +46,8 @@
 //@property (nonatomic, strong) FBKVOController *chatKVOCtrl;   czy
 @property (nonatomic, strong) RespHandler *respHandler;
 @property (nonatomic ,copy) NSString *dataStr;
+@property (nonatomic ,assign) BOOL IsEnterBack;
+
 @end
 
 @implementation AppDelegate
@@ -189,14 +191,14 @@
     if ([tabbarContrl isKindOfClass:[BuildWalletMineVC class]]) {
         return;
     }
-//    tabbarContrl.selectedIndex = 0;
-//    [tabbarContrl.tabBar hideBadgeOnItemIndex:4];
+    tabbarContrl.selectedIndex = 2;
+    [tabbarContrl.tabBar hideBadgeOnItemIndex:4];
     //应用外数量为0
-    TLUserLoginVC *login = [TLUserLoginVC new];
-
-    TLNavigationController *na = [[TLNavigationController alloc] initWithRootViewController:login];
+//    TLUserLoginVC *login = [TLUserLoginVC new];
+//
+//    TLNavigationController *na = [[TLNavigationController alloc] initWithRootViewController:login];
 //    TLTabBarController *tab = [TLTabBarController new];
-    [UIApplication sharedApplication].keyWindow.rootViewController = na;
+//    [UIApplication sharedApplication].keyWindow.rootViewController = na;
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
     
 }
@@ -381,13 +383,30 @@
       [[TLUser user] changLoginTime];
 //czy      [[IMAPlatform sharedInstance] configOnAppDidBecomeActive];
 
-    };
+    }
+    if (self.IsEnterBack == YES) {
+        if ([TLUser user].isLogin==NO) {
+            
+            TLUserLoginVC *login = [TLUserLoginVC new];
+            TLNavigationController *na = [[TLNavigationController alloc] initWithRootViewController:login];
+            self.IsEnterBack = NO;
+            login.IsAPPJoin = YES;
+            self.window.rootViewController = na;
+            
+        }
+    }
+    
+            
+        
+    
     
 }
 
 #pragma mark- 应用切后台
 - (void)applicationDidEnterBackground:(UIApplication *)application  {
     
+    //
+    self.IsEnterBack = YES;
     __block UIBackgroundTaskIdentifier bgTaskID;
     bgTaskID = [application beginBackgroundTaskWithExpirationHandler:^ {
         
@@ -406,21 +425,18 @@
 }
 
 #pragma mark- 应用切前台
-//- (void)applicationWillEnterForeground:(UIApplication *)application {
-//
-//    if([[TLUser user] checkLogin]) {
-//
-//        [[IMAPlatform sharedInstance] configOnAppEnterForeground];
-//
-//    }
-// czy
-//}
+- (void)applicationWillEnterForeground:(UIApplication *)application {
+
+    
+}
 - (NSString *) dataFilePath//应用程序的沙盒路径
 {
     NSArray *path = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *document = [path objectAtIndex:0];
     return[document stringByAppendingPathComponent:@"THAWallet.sqlite"];
 }
+
+
 
 - (void)createTable
 {

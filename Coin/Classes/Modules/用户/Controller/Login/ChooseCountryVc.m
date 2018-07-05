@@ -122,8 +122,17 @@ static NSString *IdCell = @"country";
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:IdCell];
     }
      cell.selectionStyle = UITableViewCellSelectionStyleNone;
-
-    cell.textLabel.text = [NSString stringWithFormat:@"%@    +%@",self.countrys[indexPath.row].chineseName,[self.countrys[indexPath.row].interCode substringFromIndex:2]];
+    if (indexPath.row == 0) {
+          cell.textLabel.text = [NSString stringWithFormat:@"China    %@       +%@",self.countrys[indexPath.row].chineseName,[self.countrys[indexPath.row].interCode substringFromIndex:2]];
+    }else if (indexPath.row ==1)
+    {
+          cell.textLabel.text = [NSString stringWithFormat:@"Indonesia    %@       +%@",self.countrys[indexPath.row].chineseName,[self.countrys[indexPath.row].interCode substringFromIndex:2]];
+        
+    }else{
+        
+          cell.textLabel.text = [NSString stringWithFormat:@"Malaysia     %@       +%@",self.countrys[indexPath.row].chineseName,[self.countrys[indexPath.row].interCode substringFromIndex:2]];
+    }
+  
     cell.detailTextLabel.text = self.countrys[indexPath.row].interCode;
     cell.backgroundColor = kClearColor;
     UIView *view = [[UIView alloc] init];

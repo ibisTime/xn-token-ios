@@ -26,28 +26,40 @@
 }
 - (void)initModels
 {
-        JoinModel *model = [[JoinModel alloc] init];
-        model.name = @"Facebook";
-        model.content = @"@thahoffchaj";
-        JoinModel *model1 = [[JoinModel alloc] init];
-        model1.name = @"Twitter";
-        model1.content = @"@thahoffchaj";
+//        JoinModel *model = [[JoinModel alloc] init];
+//        model.name = @"官网";
+//        model.content = @"@thachain.org";
+//        JoinModel *model1 = [[JoinModel alloc] init];
+//        model1.name = @"邮箱地址";
+//        model1.content = @"@official@thachain.org";
         JoinModel *mode2 = [[JoinModel alloc] init];
         mode2.name = @"Telegram";
-        mode2.content = @"@thahoffchaj";
-        JoinModel *mode3 = [[JoinModel alloc] init];
-        mode3.name = @"QQ Group";
-        mode3.content = @"@88329343";
-        JoinModel *mode4 = [[JoinModel alloc] init];
-        mode4.name = @"Wechat";
-        mode4.content = @"@88493384";
+         mode2.content = @"https://t.me/THAWallet.cn";
+//        JoinModel *mode3 = [[JoinModel alloc] init];
+//        mode3.name = @"QTelegram 英文社区";
+//        mode3.content = @"https://t.me/THAWallet cn";
+//        JoinModel *mode4 = [[JoinModel alloc] init];
+//        mode4.name = @"新浪微博:";
+//        mode4.content = @"http://weibo.com/THAWallet";
+        JoinModel *mode5 = [[JoinModel alloc] init];
+
+        mode5.name = @"Twitter";
+        mode5.content = @"@ThAWallet";
+        JoinModel *mode6 = [[JoinModel alloc] init];
+
+        mode6.name = @"Facebook";
+        mode6.content = @"@ThAWallet";
+    JoinModel *mode7 = [[JoinModel alloc] init];
     
+    mode7.name = @"Wechat";
+    mode7.content = @"@THA-Wallet";
         self.models = [NSMutableArray array];
-        [self.models addObject:model];
-        [self.models addObject:model1];
+    
         [self.models addObject:mode2];
-        [self.models addObject:mode3];
-        [self.models addObject:mode4];
+    
+        [self.models addObject:mode5];
+        [self.models addObject:mode6];
+        [self.models addObject:mode7];
 
         self.tableView.models = self.models;
         [self.tableView beginRefreshing];
