@@ -208,7 +208,7 @@ typedef NS_ENUM(NSInteger, WalletAddressType) {
     [receiveView addSubview:receiveAddressLbl];
     [receiveAddressLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.left.equalTo(@90);
+        make.left.equalTo(receiveTextLbl.mas_right).offset(5);
         make.right.equalTo(rightArrowIV.mas_left).offset(-10);
         make.centerY.equalTo(receiveView.mas_centerY);
         

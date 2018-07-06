@@ -127,7 +127,7 @@
 
 
             if (i != 3) {
-                UILabel *nameLabel = [UILabel labelWithFrame:CGRectMake(10, 0, 80, kHeight(48)) textAligment:(NSTextAlignmentLeft) backgroundColor:kClearColor font:Font(14) textColor:kTextColor3];
+                UILabel *nameLabel = [UILabel labelWithFrame:CGRectMake(10, 0, 120, kHeight(48)) textAligment:(NSTextAlignmentLeft) backgroundColor:kClearColor font:Font(14) textColor:kTextColor3];
                 nameLabel.text = nameArray[i];
                 [backView addSubview:nameLabel];
                 if (i == 1) {
@@ -180,8 +180,9 @@
 
         UIButton *TheWalletButton = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"改为普通红包" key:nil] titleColor:kTextColor5 backgroundColor:kClearColor titleFont:11];
         [TheWalletButton setTitle:[LangSwitcher switchLang:@"改为拼手气红包" key:nil] forState:(UIControlStateSelected)];
-        TheWalletButton.frame = CGRectMake(kScreenWidth - kWidth(60)-kWidth(84), kHeight(378), kWidth(84), kHeight(26));
+        TheWalletButton.frame = CGRectMake(kScreenWidth - kWidth(60)-kWidth(84), kHeight(378), kWidth(84), kHeight(36));
         [TheWalletButton addTarget:self action:@selector(ButtonClick:) forControlEvents:(UIControlEventTouchUpInside)];
+        TheWalletButton.titleLabel.numberOfLines = 0;
         TheWalletButton.tag = 101;
         kViewBorderRadius(TheWalletButton,0,0.5,kTextColor5);
         [self addSubview:TheWalletButton];
@@ -434,7 +435,7 @@
         }
     }else
     {
-        NSString *str = [NSString stringWithFormat:@"共发送 %.3f %@",[_count floatValue],_currency];
+        NSString *str = [NSString stringWithFormat:@"%@ %.3f %@",[LangSwitcher switchLang:@"共发送" key:nil],[_count floatValue],_currency];
         allPrice = [NSString stringWithFormat:@"%f",[_count floatValue]];
         [self labelText:str];
     }

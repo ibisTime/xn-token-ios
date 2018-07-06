@@ -11,7 +11,7 @@
 #import "APICodeMacro.h"
 #import "ChooseCountryVc.h"
 #import "NSString+Check.h"
-
+#import "CountryModel.h"
 @interface TLPwdRelatedVC ()
 
 @property (nonatomic,assign) TLPwdType type;
@@ -25,6 +25,9 @@
 @property (nonatomic ,strong) UILabel *titlePhpne;
 @property (nonatomic ,strong) UILabel *PhoneCode;
 @property (nonatomic ,strong) UIButton *accessoryImageView;
+
+@property (nonatomic,strong) NSMutableArray <CountryModel *>*countrys;
+
 
 @end
 
@@ -45,12 +48,16 @@
     [super viewDidLoad];
     self.view.backgroundColor = kWhiteColor;
     [self setUpUI];
-    
+    [self loadData];
     if ([TLUser user].mobile) {
         
         self.phoneTf.enabled = NO;
         self.phoneTf.text = [TLUser user].mobile;
+        self.PhoneCode.text =[NSString stringWithFormat:@"+%@",[[TLUser user].interCode substringFromIndex:2]];
+        
+       
     }
+    
     
     if(self.type == TLPwdTypeForget) {
         
@@ -108,18 +115,18 @@
         make.left.equalTo(titlePhone.mas_right).offset(15);
     }];
     
-    self.accessoryImageView = [[UIButton alloc] init];
-    //    self.accessoryImageView.frame = CGRectMake(kScreenWidth - 40-40, 90, 40, 40);
-    [view addSubview:self.accessoryImageView];
-    [self.accessoryImageView setImage:kImage(@"更多-灰色") forState:UIControlStateNormal];
-    [self.accessoryImageView addTarget:self action:@selector(chooseCountry) forControlEvents:UIControlEventTouchUpInside];
-    [self.accessoryImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.centerY.equalTo(titlePhone.mas_centerY).offset(0);
-        make.right.mas_equalTo(-20);
-        make.width.height.equalTo(@40);
-    }];
-    
+//    self.accessoryImageView = [[UIButton alloc] init];
+//    //    self.accessoryImageView.frame = CGRectMake(kScreenWidth - 40-40, 90, 40, 40);
+//    [view addSubview:self.accessoryImageView];
+//    [self.accessoryImageView setImage:kImage(@"更多-灰色") forState:UIControlStateNormal];
+//    [self.accessoryImageView addTarget:self action:@selector(chooseCountry) forControlEvents:UIControlEventTouchUpInside];
+//    [self.accessoryImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+//
+//        make.centerY.equalTo(titlePhone.mas_centerY).offset(0);
+//        make.right.mas_equalTo(-20);
+//        make.width.height.equalTo(@40);
+//    }];
+//
     //手机号
     TLTextField *phoneTf = [[TLTextField alloc] initWithFrame:CGRectMake(0, view.yy, kScreenWidth, 45)
                                                     leftTitle:[LangSwitcher switchLang:@"手机号" key:nil]
@@ -219,8 +226,45 @@
     
 }
 
+- (void)loadData
+{
+    
+    
+    TLNetworking *net = [TLNetworking new];
+    net.showView = self.view;
+    net.code = @"801120";
+    net.isLocal = YES;
+    net.ISparametArray = YES;
+    net.parameters[@"status"] = @"1";
+    [net postWithSuccess:^(id responseObject) {
+        
+        NSLog(@"%@",responseObject);
+        
+        self.countrys = [CountryModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
+        //        NSString *str = [NSString stringWithFormat:@"%@", responseObject[@"data"]];
+        //        [[NSNotificationCenter defaultCenter] postNotificationName:@"RealNameAuthResult" object:str];
+        for (int i = 0 ; i < self.countrys.count; i++) {
+            CountryModel *model = self.countrys[i];
+            if ([model.interCode isEqualToString:[TLUser user].interCode]) {
+              LangType type =   [LangSwitcher currentLangType];
+                if ([LangSwitcher currentLangType] == LangTypeEnglish) {
+                    self.titlePhpne.text = model.interName;
 
+                }else{
+                    self.titlePhpne.text = model.chineseName;
 
+                }
+
+            }
+        }
+        
+        
+        
+    } failure:^(NSError *error) {
+        
+        
+    }];
+}
 #pragma mark - Events
 - (void)chooseCountry
 {

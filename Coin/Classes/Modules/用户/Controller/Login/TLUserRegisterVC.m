@@ -61,7 +61,7 @@
     
     [super viewDidLoad];
     //取消按钮
-    [UIBarButtonItem addLeftItemWithImageName:kCancelIcon frame:CGRectMake(0, 0, 80, 44) vc:self action:@selector(back)];
+    [UIBarButtonItem addLeftItemWithImageName:kCancelIcon frame:CGRectMake(0, 0, 7, 14) vc:self action:@selector(back)];
     self.navigationController.navigationBar.hidden = NO;
     self.title = [LangSwitcher switchLang:@"注册" key:nil];
 

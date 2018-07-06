@@ -102,8 +102,8 @@
         
         make.top.mas_equalTo(@(43+kStatusBarHeight));
         make.centerX.mas_equalTo(imageView.mas_centerX);
-        make.width.mas_equalTo(@(kWidth(108)));
-        make.height.mas_equalTo(@(kHeight(49)));
+        make.width.mas_equalTo(@108);
+        make.height.mas_equalTo(@49);
         
     }];
     

@@ -251,7 +251,7 @@
 //        [TLAlert alertWithInfo:@"退出登录失败"];
 //
 //    }];
-    [TLAlert alertWithTitle:@"退出登录" msg:@"退出登录？" confirmMsg:@"确定" cancleMsg:@"取消" maker:self cancle:^(UIAlertAction *action) {
+    [TLAlert alertWithTitle:[LangSwitcher switchLang:@"退出登录" key:nil] msg:[LangSwitcher switchLang:@"退出登录?" key:nil] confirmMsg:[LangSwitcher switchLang:@"确定" key:nil] cancleMsg:[LangSwitcher switchLang:@"取消" key:nil] maker:self cancle:^(UIAlertAction *action) {
         
         
     } confirm:^(UIAlertAction *action) {

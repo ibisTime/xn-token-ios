@@ -18,7 +18,7 @@
 @implementation JoinMineVc
 
 - (void)viewDidLoad {
-    self.title = @"加入社群";
+    self.title = [LangSwitcher switchLang:@"加入社群" key:nil];
     [super viewDidLoad];
     [self initTableView];
     [self initModels];

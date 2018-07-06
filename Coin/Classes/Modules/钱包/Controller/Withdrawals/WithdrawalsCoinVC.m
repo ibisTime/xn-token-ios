@@ -97,7 +97,7 @@ typedef NS_ENUM(NSInteger, AddressType) {
     //余额
     self.balanceTF = [[TLTextField alloc] initWithFrame:CGRectMake(0, 10, kScreenWidth, heightMargin)
                                               leftTitle:[LangSwitcher switchLang:@"可用余额" key:nil]
-                                             titleWidth:90
+                                             titleWidth:120
                                             placeholder:@""];
     
     self.balanceTF.textColor = kHexColor(@"#109ee9");
@@ -166,7 +166,7 @@ typedef NS_ENUM(NSInteger, AddressType) {
     [receiveView addSubview:receiveAddressLbl];
     [receiveAddressLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.left.equalTo(@90);
+        make.left.equalTo(receiveTextLbl.mas_right).offset(5);
         make.right.equalTo(rightArrowIV.mas_left).offset(-10);
         make.centerY.equalTo(receiveView.mas_centerY);
         
@@ -226,7 +226,7 @@ typedef NS_ENUM(NSInteger, AddressType) {
     //转账数量
     self.tranAmountTF = [[TLTextField alloc] initWithFrame:CGRectMake(0, receiveView.yy, kScreenWidth, heightMargin)
                                                  leftTitle:[LangSwitcher switchLang:@"提币数量" key:nil]
-                                                titleWidth:120
+                                                titleWidth:150
                                                placeholder:[LangSwitcher switchLang:@"请填写数量" key:nil]
                          ];
     
@@ -241,7 +241,7 @@ typedef NS_ENUM(NSInteger, AddressType) {
     //矿工费
     self.minerFeeTF = [[TLTextField alloc] initWithFrame:CGRectMake(0, self.tranAmountTF.yy + 10, kScreenWidth, heightMargin)
                                                leftTitle:[LangSwitcher switchLang:@"手续费" key:nil]
-                                              titleWidth:120
+                                              titleWidth:150
                                              placeholder:@""];
     
     self.minerFeeTF.enabled = NO;

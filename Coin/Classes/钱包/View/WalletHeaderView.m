@@ -90,6 +90,8 @@
     
 //    [equivalentBtn setImage:kImage(@"总资产") forState:UIControlStateNormal];
     
+    
+    
     self.equivalentBtn = equivalentBtn;
     [self addSubview:equivalentBtn];
     [equivalentBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -475,7 +477,7 @@
 
 
     }];
-    
+    [self.rateAmountLbl sizeToFit];
     //点击手势
     UITapGestureRecognizer *tapGR = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickRate:)];
     

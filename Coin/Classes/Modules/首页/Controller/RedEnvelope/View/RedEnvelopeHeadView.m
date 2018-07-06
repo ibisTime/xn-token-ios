@@ -15,8 +15,8 @@
 {
     if (!_backButton) {
         _backButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
-        _backButton.frame = CGRectMake(10, 0, 44, 44);
-        [_backButton setImage:kImage(@"返回1") forState:(UIControlStateNormal)];
+        _backButton.frame = CGRectMake(10, 0, 40, 60);
+        [_backButton setImage:kImage(@"cancel") forState:(UIControlStateNormal)];
         [_backButton addTarget:self action:@selector(buttonClick:) forControlEvents:(UIControlEventTouchUpInside)];
         _backButton.tag = 100;
     }
@@ -39,10 +39,10 @@
 {
     if (!_recordButton) {
         _recordButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
-        _recordButton.frame = CGRectMake(kScreenWidth - 140, 0, 120, 44);
+        _recordButton.frame = CGRectMake(kScreenWidth - 140, 10, 120, 44);
         [_recordButton setTitle:[LangSwitcher switchLang:@"我的红包" key:nil] forState:(UIControlStateNormal)];
         _recordButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
-        _recordButton.titleLabel.font = Font(17);
+        _recordButton.titleLabel.font = Font(15);
         [_recordButton setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
         [_recordButton addTarget:self action:@selector(buttonClick:) forControlEvents:(UIControlEventTouchUpInside)];
         _recordButton.tag = 101;

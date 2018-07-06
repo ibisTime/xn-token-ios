@@ -72,7 +72,7 @@
 "扫描二维码" = "Scan two-dimensional code ";
 "粘贴地址" = "paste address";
 "接收地址" = "receive address";
-"优先" = "first";
+"优先" = "priority";
 "普通" = "ordinary";
 "经济" = "economic";
 "请选择经济的手续费,可能会导致延长交易确认时间,对时间有要求的交易,请选择优先" = "";
@@ -201,7 +201,7 @@
 "请输入正确的手机号" = "Please enter the correct mobile phone number";
 "请输入6位以上密码" = "Please enter 6 or more passwords";
 "登录" = "login ";
-"获取验证码" = "Get verification code";
+"获取验证码" = "verification code";
 "昵称" = "nickname";
 "请设置你的昵称" = "Please set your nickname";
 "推荐人(选填)" = "Presenter (optional)";
@@ -212,7 +212,6 @@
 "验证码已发送,请注意查收" = "The verification code has been sent. Please check it";
 "发送失败,请检查手机号" = "Failed to send, please check the phone number";
 "注册成功" = "Registered successfully";
-"登录" = "The login";
 "地址管理" = "Address management";
 "请选择货币类型" = "Please select the currency type";
 "暂无地址" = "No address";
@@ -222,6 +221,8 @@
 "资金密码" = "Money password";
 "语言设置" = "Language Settings";
 "退出登录" = "Log out";
+"退出登录?" = "Log out?";
+
 "修改谷歌验证" = "Modify Google validation";
 "关闭谷歌验证" = "Close Google validation";
 "谷歌验证" = "Google authentication";
@@ -261,7 +262,7 @@
 "英文" = "English";
 "韩文" = "Korean";
 "日文" = "Japanese";
-"加入社群" = " Join community";
+"加入社群" = "Join community";
 "请输入密码" = "Please enter your password";
 "语言" = "language";
 "确定" = "confirm";
@@ -464,14 +465,15 @@
 "请输入手机号码" = "Please input your mobile number";
 "修改昵称" =  "activity_nick_title";
 "请输入昵称" = "Please input a nickname";
-"资金密码不能低于6位数" = "At least 12 characters";
+"资金密码不能低于6位数" = "The fund password cannot be lower than 6 digits
+";
 "提示" = "tip";
 "真实姓名" = "real name";
 "内容" = "content";
 "选择" = "select";
 "确认设置" = "Confirm settings";
 "请输入帐号" = "Please input an account";
-"登录成功" = "sign_in_success";
+"登录成功" = "sign in success";
 "登录失败" = "log in failed";
 "发送给朋友" = "Send to a friend";
 "保存到相册" = "Save the photo album";
@@ -482,6 +484,8 @@
 "推荐应用" = "Recommended Applications";
 "不得大于一百万" = "the maximum total amount is 10000000";
 "数量不得大于500" = "the maximum amount of red packets is 500";
+"人民币" = "Renminbi";
+"美元" = "Dollar";
 
 
 
