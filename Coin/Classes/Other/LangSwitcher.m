@@ -95,7 +95,9 @@
     switch (langType) {
         case LangTypeSimple: {
             
-            [userDefaults setObject:SIMPLE forKey:LANG];
+            [[NSUserDefaults standardUserDefaults] setObject:SIMPLE forKey:LANG];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+
             NSString *lan =[[NSUserDefaults standardUserDefaults] objectForKey:@"appLanguage"];
             
             if ([lan hasPrefix:@"zh"]) {
@@ -111,7 +113,9 @@
         } break;
 
         case LangTypeEnglish: {
-            [userDefaults setObject:ENGLISH forKey:LANG];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+
+            [[NSUserDefaults standardUserDefaults] setObject:ENGLISH forKey:LANG];
             NSString *lan =[[NSUserDefaults standardUserDefaults] objectForKey:@"appLanguage"];
             
            
@@ -142,8 +146,11 @@
     NSString *currentLanguage = [[NSLocale preferredLanguages] objectAtIndex:0];
 
     NSLog(@"currentlanguage = %@ alllanguage%@",currentLanguage,[NSLocale preferredLanguages]);
-
+ NSString *lan =[[NSUserDefaults standardUserDefaults] objectForKey:@"appLanguage"];
+    NSLog(@"lan%@",lan);
     NSString *lang = [[NSUserDefaults standardUserDefaults] objectForKey:LANG];
+    NSLog(@"lang%@",lang);
+
     if (!lang || lang.length <= 0) {
         
         //获取手机当前语言
@@ -181,9 +188,12 @@
         
     }else{
         
-        
+        if ([lang isEqualToString:@"simple"]) {
+            [self changLangType:LangTypeSimple];
+
+        }else{
         [self changLangType:LangTypeEnglish];
-        
+        }
     }
 //zh-Hant-US zh-Hans-US
     

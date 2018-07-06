@@ -103,7 +103,7 @@
                              //                             UIView *v = nil;
                              TLTabBarController *tabBarCtrl = [[TLTabBarController alloc] init];
                       [UIApplication sharedApplication].keyWindow.rootViewController = tabBarCtrl;
-                             [LangSwitcher startWithTraditional];
+//                             [LangSwitcher startWithTraditional];
                              //                             [v sizeToFit];
                              
                              
