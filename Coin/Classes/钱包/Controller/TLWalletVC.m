@@ -84,18 +84,23 @@
 @implementation TLWalletVC
 
 - (void)viewWillAppear:(BOOL)animated {
+    
+    TLDataBase *dataBase = [TLDataBase sharedManager];
+    NSString *word;
+    if ([dataBase.dataBase open]) {
+        NSString *sql = [NSString stringWithFormat:@"SELECT Mnemonics from THAWallet where userId = '%@'",[TLUser user].userId];
+        //        [sql appendString:[TLUser user].userId];
+        FMResultSet *set = [dataBase.dataBase executeQuery:sql];
+        while ([set next])
+        {
+            word = [set stringForColumn:@"Mnemonics"];
+            
+        }
+        [set close];
+    }
+    [dataBase.dataBase close];
 //    [self queryTotalAmount];
-    if (self.switchTager == 0 ) {
-
-//      NSString *file =  [[NSBundle mainBundle] pathForResource:@"country.plist" ofType:nil];
-//        NSDictionary *arr = [NSDictionary dictionaryWithContentsOfFile: file];
-//        NSLog(@"%@",arr);
-       
-    }else if (self.switchTager == 1 &&[TLUser user].isLogin == YES){
-        [self switchWithTager:0];
-
-    }else if(self.switchTager&&[TLUser user].isLogin == YES)
-    {
+    if (word != nil && word.length > 0) {
         [self switchWithTager:0];
 
 
@@ -104,6 +109,7 @@
         [self switchWithTager:1];
 
     }
+    
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES animated:animated];
     

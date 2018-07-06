@@ -32,10 +32,11 @@
     }else{
         
         NSString *text = [NSBundle.mainBundle localizedStringForKey:(content) value:@"" table:nil];
-        
+       NSString *langue = [[NSUserDefaults standardUserDefaults] objectForKey:AppLanguage];
         NSLog(@"%@",text);
+        NSLog(@"%@",langue);
 
-        return NSLocalizedString(content, key);
+        return ZBLocalized(content, nil);
 //        return NSLocalizedStringFromTable(content,@"MyStrings", @"");
 
     }
@@ -95,6 +96,12 @@
         case LangTypeSimple: {
             
             [userDefaults setObject:SIMPLE forKey:LANG];
+            NSString *lan =[[NSUserDefaults standardUserDefaults] objectForKey:@"appLanguage"];
+            
+            if ([lan hasPrefix:@"zh"]) {
+                [[NSUserDefaults standardUserDefaults] setObject:@"zh-Hans-US" forKey:AppLanguage];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+            }
             
         } break;
         case LangTypeTraditional: {
@@ -105,7 +112,13 @@
 
         case LangTypeEnglish: {
             [userDefaults setObject:ENGLISH forKey:LANG];
+            NSString *lan =[[NSUserDefaults standardUserDefaults] objectForKey:@"appLanguage"];
+            
+           
+            [[NSUserDefaults standardUserDefaults] setObject:@"en" forKey:@"appLanguage"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
 
+            
             break;
         }
             
@@ -153,18 +166,23 @@
 //        }
         else if ([currentLanguage isEqualToString:@"zh-Hant-US"]||[currentLanguage isEqualToString:@"zh-Hant-HK"])
         {//繁体
-            [self changLangType:LangTypeEnglish];
+            [self changLangType:LangTypeSimple];
 
             
         }else if ([currentLanguage isEqualToString:@"zh-Hans-US"])
         {//简体
-            [self changLangType:LangTypeEnglish];
+            [self changLangType:LangTypeSimple];
 
         }else{
             
             [self changLangType:LangTypeEnglish];
 
         }
+        
+    }else{
+        
+        
+        [self changLangType:LangTypeEnglish];
         
     }
 //zh-Hant-US zh-Hans-US

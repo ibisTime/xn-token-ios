@@ -57,7 +57,7 @@
 //    [NSThread sleepForTimeInterval:2];
     
     //服务器环境
-    [AppConfig config].runEnv = RunEnvRelease;
+    [AppConfig config].runEnv = RunEnvDev;
     [AppConfig config].isChecking = NO;
 #warning  //pods 更新后会导致wan币转账失败
 //    [AppConfig config].isUploadCheck = YES;
@@ -69,12 +69,12 @@
     
     //配置键盘
     [self configIQKeyboard];
-   
+
     //配置根控制器
     [self configRootViewController];
-    
-    //初始化为繁体
     [LangSwitcher startWithTraditional];
+
+    //初始化为繁体
     //初始化数据库
     
     ;
