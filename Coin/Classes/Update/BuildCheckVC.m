@@ -126,7 +126,7 @@
     self.view.backgroundColor = kWhiteColor;
 
     [self.sureButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(self.view.mas_bottom).offset(-5);
+        make.bottom.equalTo(self.view.mas_bottom).offset(-(kBottomInsetHeight+10));
         make.right.equalTo(self.view.mas_right).offset(-15);
         make.left.equalTo(self.view.mas_left).offset(15);
         make.height.equalTo(@45);

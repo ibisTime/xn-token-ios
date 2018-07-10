@@ -15,7 +15,7 @@
 "拥有钱包私钥就能完全控制钱包资产,  因此强烈建议在使用钱包前做好备份,  将钱包私钥保存到安全的地方。" = "With a wallet private key, you can fully control your wallet assets, so it's highly recommended to make a backup before using your wallet and save your wallet private key to a safe place.";
 "立即备份" = "now back up";
 "请记下您的钱包助词并保存到安全的地方" = "";
-"钱包助词用于恢复钱包资产,拥有助记词即可完全控制钱包资产,请务必妥善保管,丢失助记词既丢失钱包资产。无法提供找回功能" = "";
+"钱包助词用于恢复钱包资产,拥有助记词即可完全控制钱包资产,请务必妥善保管,丢失助记词既丢失钱包资产。无法提供找回功能" = "Wallet auxiliaries are used to restore wallet assets. With mnemonics, you can fully control your wallet assets. Be sure to keep them safe. Losing mnemonics will lose your wallet assets. Unable to provide recovery function";
 "下一步" = "next";
 "验证你的钱包助记词" = "Verify your wallet mnemonic";
 "根据你记下的助记词,按顺序点击,验证你备份的助记词正确无误" = "";
@@ -268,7 +268,10 @@
 "确定" = "confirm";
 "确认退出?" = " confirm exit?";
 "更新提醒" = " update hint";
+"更新提示" = " update hint";
+
 "立即升级" = "to confirm";
+"稍后提醒" = "later";
 "稍后升级" = "later";
 "您已通过实名认证" = "You have passed the real-name authentication";
 
@@ -304,6 +307,7 @@
 "量化理财" = "Quantitative Finance";
 "账户与安全" = "Account and Security";
 "本地货币" = "local currency";
+"切换货币" = "Switch currency";
 "钱包工具" = "wallet tool";
 "欢迎回来!" = "Welcome back ！";
 "中国!" = "china";
@@ -436,11 +440,11 @@
 "暂无国家" = "No country";
 "选择国家" = "Select a country";
 "钱包删除成功" = "wallet deleted successfully";
-"我的糖包" = "My sugar packets";
+"我的红包" = "My sugar packets";
 "发糖果" = "sent red packet";
 "糖包一响,黄金万两" = "red packet rings, money rises";
-"抢到糖包" = "received packets";
-"发出糖包" = "sent a red packet";
+"抢到红包" = "received packets";
+"发出红包" = "sent a red packet";
 "糖果个数" = "Number";
 "请输入祝福语" = "Best wishes";
 "塞进糖包" = "Prepare red packet";

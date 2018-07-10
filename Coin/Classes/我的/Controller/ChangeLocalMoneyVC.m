@@ -66,7 +66,7 @@
     //
     SettingModel *tridationModel = [[SettingModel alloc] init];
     //    tridationModel.text = [LangSwitcher switchLang:@"繁体中文" key:nil];
-    tridationModel.text = @"美元";
+    tridationModel.text = @"Dollar";
     
     tridationModel.isSelect = [tridationModel.text isEqualToString:self.type];
     [tridationModel setAction:^{
@@ -85,7 +85,7 @@
         money = @"人民币";
     }else{
         
-        money = @"美元";
+        money = @"Dollar";
     }
     
     [TLAlert alertWithTitle:[LangSwitcher switchLang:@"切换货币" key:nil]

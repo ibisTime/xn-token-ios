@@ -159,7 +159,7 @@
     NSString *rightAmount = [CoinUtil convertToRealCoin:platform.frozenAmountString coin:coin.symbol];
     NSString *ritAmount = [leftAmount subNumber:rightAmount];
 
-    if ([[TLUser user].localMoney isEqualToString:@"美元"]) {
+    if ([[TLUser user].localMoney isEqualToString:@"Dollar"]) {
         self.tradeVolumeLbl.text = [NSString stringWithFormat:@"≈%.2f USD",[platform.priceUSD doubleValue]];
         self.rmbPriceLbl.text = [NSString stringWithFormat:@"%.2f USD",[platform.amountUSD doubleValue]];
 

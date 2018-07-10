@@ -42,7 +42,8 @@ static NSString *identifierCell = @"JoinMineCell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     JoinMineCell *cell = [tableView dequeueReusableCellWithIdentifier:identifierCell forIndexPath:indexPath];
-    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
     cell.model = self.models[indexPath.section];
     
    

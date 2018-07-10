@@ -129,13 +129,16 @@
 //    registBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
     [registBtn addTarget:self action:@selector(goReg) forControlEvents:UIControlEventTouchUpInside];
     [imageView addSubview:registBtn];
+    registBtn.layer.cornerRadius = 5;
+    registBtn.clipsToBounds = YES;
+    
     [registBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, 50, 0, 0 )];
     [registBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.centerX.equalTo(bgView.mas_centerX);
-        make.top.equalTo(bgView.mas_bottom).offset(0);
+        make.top.equalTo(bgView.mas_bottom).offset(-5);
         make.width.equalTo(@(kWidth(295)));
-        make.height.equalTo(@(52));
+        make.height.equalTo(@(57));
 
         
     }];

@@ -118,7 +118,7 @@
         //    NSString *rightAmount = [platform.inAmountString subNumber:platform.addAmountString];
         
         //对应币种价格
-        if ([[TLUser user].localMoney isEqualToString:@"美元"]) {
+        if ([[TLUser user].localMoney isEqualToString:@"Dollar"]) {
             self.amountLbl.text = [NSString stringWithFormat:@"≈%.2f USD", [currency.amountUSD doubleValue]];
 
         }else{
@@ -141,7 +141,7 @@
 
     self.textLbl.text = [NSString stringWithFormat:@"%.4f %@",[[CoinUtil convertToRealCoin:leftAmount coin:currency.currency] doubleValue],currency.currency];
     NSString *rightAmount = [currency.inAmountString subNumber:currency.addAmountString];
-        if ([[TLUser user].localMoney isEqualToString:@"美元"]) {
+        if ([[TLUser user].localMoney isEqualToString:@"Dollar"]) {
             self.amountLbl.text = [NSString stringWithFormat:@"≈%.2fUSD", [currency.amountUSD doubleValue]];
 
         }else{

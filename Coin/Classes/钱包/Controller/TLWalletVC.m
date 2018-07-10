@@ -101,12 +101,12 @@
     [dataBase.dataBase close];
 //    [self queryTotalAmount];
     if (word != nil && word.length > 0) {
-        [self switchWithTager:0];
+        [self switchWithTager:0 ];
 
 
     }else{
         
-        [self switchWithTager:1];
+        [self switchWithTager:1 ];
 
     }
     
@@ -217,9 +217,13 @@
             [weakSelf.view setNeedsLayout];
         };
         //切换钱包事件
+        
         _headerView.switchBlock = ^(NSInteger teger) {
             [weakSelf switchWithTager:teger];
+
         };
+//        _headerView.switchBlock = ^(NSInteger teger) {
+//        };
         //点击二维码事件
         
         _headerView.codeBlock = ^{
@@ -362,24 +366,101 @@
     if (tager == 1) {
         [self.leftButton setImage:kImage(@"闪兑") forState:UIControlStateNormal];
         [self.rightButton setImage:kImage(@"一键划转") forState:UIControlStateNormal];
-        [self initTableView];
+        CGFloat f = self.isClear == YES ?318 : 338;
 
-        [self.currentTableView.platforms removeAllObjects];
-        [self.currencys removeAllObjects];
-        [self.currentTableView reloadData];
-       
+//        [UIView animateWithDuration:0.5 animations:^{
+//                 self.currentTableView.frame = CGRectMake(-kScreenWidth, kHeight(f)+kStatusBarHeight, kScreenWidth, kScreenHeight - kTabBarHeight - kHeight(354));
+////            }else{
+////                 self.currentTableView.frame = CGRectMake(kScreenWidth, kHeight(f)+kStatusBarHeight, kScreenWidth, kScreenHeight - kTabBarHeight - kHeight(354));
+////            }
+//
+////             self.tableView.frame = CGRectMake(-kScreenWidth, kHeight(f)+kStatusBarHeight, kScreenWidth, kScreenHeight - kTabBarHeight - kHeight(354));
+//
+//        } completion:^(BOOL finished) {
+//
+                [self.currentTableView.platforms removeAllObjects];
+                [self.currencys removeAllObjects];
+                [self.currentTableView reloadData];
+                [self.currentTableView removeFromSuperview];
+                self.tableView.hidden = YES;
+                self.currentTableView.hidden = YES;
 
-        [self getMyCurrencyList];
-        [self queryMyAmount];
-        self.switchTager = tager;
+                [self initTableView];
 
+                [self getMyCurrencyList];
+                [self queryMyAmount];
+                self.switchTager = tager;
+
+//            }];
+      
 
     }else{
         self.switchTager = tager;
 
         //切换私钥钱包 需要查询用户是否已经创建完钱包
-        [self checkUserLocalWallet];
+        TLDataBase *dataBase = [TLDataBase sharedManager];
+        NSString *Mnemonics;
+        if ([dataBase.dataBase open]) {
+            NSString *sql = [NSString stringWithFormat:@"SELECT Mnemonics from THAWallet where userId = '%@'",[TLUser user].userId];
+            //        [sql appendString:[TLUser user].userId];
+            FMResultSet *set = [dataBase.dataBase executeQuery:sql];
+            while ([set next])
+            {
+                Mnemonics = [set stringForColumn:@"Mnemonics"];
+                
+            }
+            [set close];
+        }
+        [dataBase.dataBase close];
         
+        if (Mnemonics.length > 0) {
+            [self.leftButton setImage:kImage(@"闪兑-秘钥") forState:UIControlStateNormal];
+            [self.rightButton setImage:kImage(@"划转-秘钥") forState:UIControlStateNormal];
+            CGFloat f = self.isClear == YES ?318 : 338;
+            
+//            [UIView animateWithDuration:0.5 animations:^{
+//                      self.tableView.frame = CGRectMake(-kScreenWidth, kHeight(f)+kStatusBarHeight, kScreenWidth, kScreenHeight - kTabBarHeight - kHeight(354));
+//                }else{
+//                       self.tableView.frame = CGRectMake(kScreenWidth, kHeight(f)+kStatusBarHeight, kScreenWidth, kScreenHeight - kTabBarHeight - kHeight(354));
+//
+//                }
+           
+                //              self.currentTableView.frame = CGRectMake(-kScreenWidth, kHeight(f)+kStatusBarHeight, kScreenWidth, kScreenHeight - kTabBarHeight - kHeight(354));
+//            } completion:^(BOOL finished) {
+                [self.tableView.platforms removeAllObjects];
+                [self.currencys removeAllObjects];
+                [self.tableView reloadData];
+                [self.tableView removeFromSuperview];
+                self.tableView.hidden = YES;
+                self.currentTableView.hidden = YES;
+                
+                [self initLocalTableView];
+                [self saveLocalWalletData];
+                [self saveLocalWallet];
+                
+                [self getLocalWalletMessage];
+//            }];
+            
+            
+            
+            
+            
+            //已存在
+            return;
+        }
+        // 2不存在就创建
+        self.switchTager = 0;
+        CoinWeakSelf;
+        BuildWalletMineVC *MineVC = [[BuildWalletMineVC alloc] init];
+        MineVC.walletBlock  = ^{
+            [weakSelf.headerView swipeBottomClick:nil];
+            
+        };
+        [self.navigationController pushViewController:MineVC animated:YES];
+        [self.tableView.platforms removeAllObjects];
+        [self.currencys removeAllObjects];
+        [self.tableView reloadData];
+        [self.tableView removeFromSuperview];
         
        
        
@@ -409,52 +490,7 @@
 {
    // 1 去本地数据库查询用户记录是否存在
     
-    TLDataBase *dataBase = [TLDataBase sharedManager];
-    NSString *Mnemonics;
-    if ([dataBase.dataBase open]) {
-        NSString *sql = [NSString stringWithFormat:@"SELECT Mnemonics from THAWallet where userId = '%@'",[TLUser user].userId];
-//        [sql appendString:[TLUser user].userId];
-        FMResultSet *set = [dataBase.dataBase executeQuery:sql];
-        while ([set next])
-            {
-             Mnemonics = [set stringForColumn:@"Mnemonics"];
-        
-            }
-        [set close];
-    }
-    [dataBase.dataBase close];
-    
-    if (Mnemonics.length > 0) {
-        [self.leftButton setImage:kImage(@"闪兑-秘钥") forState:UIControlStateNormal];
-        [self.rightButton setImage:kImage(@"划转-秘钥") forState:UIControlStateNormal];
-        
-        [self.tableView.platforms removeAllObjects];
-        [self.currencys removeAllObjects];
-        [self.tableView reloadData];
-        [self.tableView removeFromSuperview];
-        [self initLocalTableView];
-        [self saveLocalWalletData];
-        [self saveLocalWallet];
-
-        [self getLocalWalletMessage];
-        
-
-        //已存在
-        return;
-    }
-    // 2不存在就创建
-    self.switchTager = 0;
-    CoinWeakSelf;
-    BuildWalletMineVC *MineVC = [[BuildWalletMineVC alloc] init];
-        MineVC.walletBlock  = ^{
-            [weakSelf.headerView swipeBottomClick:nil];
-
-        };
-    [self.navigationController pushViewController:MineVC animated:YES];
-    [self.tableView.platforms removeAllObjects];
-    [self.currencys removeAllObjects];
-    [self.tableView reloadData];
-    [self.tableView removeFromSuperview];
+   
 //    self.headerView.cnyAmountLbl.text = [NSString stringWithFormat:@" %.2f", 0.00];
 //    self.headerView.privateMoney.text = [NSString stringWithFormat:@" %.2f", 0.00];
 //    self.headerView.LocalMoney.text = [NSString stringWithFormat:@" %.2f", 0.00];
@@ -715,7 +751,7 @@
     
     [http postWithSuccess:^(id responseObject) {
 
-        if ([[TLUser user].localMoney isEqualToString:@"美元"]) {
+        if ([[TLUser user].localMoney isEqualToString:@"Dollar"]) {
             NSString *cnyStr = [responseObject[@"data"][@"totalAmountUSD"] convertToSimpleRealMoney];
             if (![self.IsLocalExsit isEqualToString:@"1"]) {
                 self.headerView.cnyAmountLbl.text = [NSString stringWithFormat:@"$ %.2f", [cnyStr doubleValue]];
@@ -813,7 +849,7 @@
     
             NSString *cnyStr = [responseObject[@"data"][@"totalAmountCNY"] convertToSimpleRealMoney];
             self.IsLocalExsit = @"1";
-            if ([[TLUser user].localMoney isEqualToString:@"美元"]) {
+            if ([[TLUser user].localMoney isEqualToString:@"Dollar"]) {
                 cnyStr = [responseObject[@"data"][@"totalAmountUSD"] convertToSimpleRealMoney];
                 double f =  [cnyStr doubleValue]+[[self.headerView.privateMoney.text substringFromIndex:1] doubleValue] ;
                 self.headerView.cnyAmountLbl.text = [NSString stringWithFormat:@"$ %.2f", f] ;

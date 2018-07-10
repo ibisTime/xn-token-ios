@@ -174,7 +174,7 @@
     self.currencyNameLbl.text = platform.symbol;
 //    NSString *leftAmount = [platform.amountString subNumber:platform.frozenAmountString];
     
-    if ([[TLUser user].localMoney isEqualToString:@"美元"]) {
+    if ([[TLUser user].localMoney isEqualToString:@"Dollar"]) {
         self.tradeVolumeLbl.text = [NSString stringWithFormat:@"≈%.2f USD",[platform.priceUSD doubleValue]];
         self.rmbPriceLbl.text = [NSString stringWithFormat:@"%.2f USD",[platform.amountUSD doubleValue]];
 

@@ -36,7 +36,9 @@
     if (!_backbButton) {
         _backbButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
         _backbButton.frame = CGRectMake(0, 0, 44, 44);
-        [_backbButton setImage:kImage(@"返回1") forState:(UIControlStateNormal)];
+        [_backbButton setImage:kImage(@"cancel") forState:(UIControlStateNormal)];
+        [_backbButton setImageEdgeInsets:UIEdgeInsetsMake(0, -20, 0, 0)];
+
         [_backbButton addTarget:self action:@selector(buttonMethodClick) forControlEvents:(UIControlEventTouchUpInside)];
 
     }
@@ -52,7 +54,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view
     UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 100, 44)];
-    label.text = [LangSwitcher switchLang:@"我的糖包" key:nil];
+    label.text = [LangSwitcher switchLang:@"我的红包" key:nil];
     label.textColor = [UIColor whiteColor];
     label.textAlignment = NSTextAlignmentCenter;
     label.font = [UIFont fontWithName:@"Georgia-Bold" size:18];
@@ -131,7 +133,7 @@
 - (void)setupPageButton{
     //button的index值应当从0开始
 
-    NSArray *array = [NSArray arrayWithObjects:[LangSwitcher switchLang:@"抢到糖包" key:nil],[LangSwitcher switchLang:@"发出糖包" key:nil], nil];
+    NSArray *array = [NSArray arrayWithObjects:[LangSwitcher switchLang:@"抢到红包" key:nil],[LangSwitcher switchLang:@"发出红包" key:nil], nil];
     //初始化UISegmentedControl
     segment = [[UISegmentedControl alloc]initWithItems:array];
     //设置frame

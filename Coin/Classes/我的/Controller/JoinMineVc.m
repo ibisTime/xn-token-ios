@@ -93,6 +93,13 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void)refreshTableView:(TLTableView *)refreshTableview didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    
+    
+}
+
 /*
 #pragma mark - Navigation
 

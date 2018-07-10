@@ -166,7 +166,7 @@
         
     } else {
         
-        [TLAlert alertWithSucces:@"复制成功"];
+        [TLAlert alertWithSucces:[LangSwitcher switchLang:@"复制成功" key:nil]];
     }
     
 }
@@ -186,7 +186,7 @@
         
     } else {
         
-        [TLAlert alertWithSucces:@"复制成功"];
+        [TLAlert alertWithSucces:[LangSwitcher switchLang:@"复制成功" key:nil]];
     }
     
 }

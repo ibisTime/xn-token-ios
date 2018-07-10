@@ -11,6 +11,8 @@
 #import "UILabel+Extension.h"
 #import "UILable+convience.h"
 #import "AppColorMacro.h"
+#import "TLAlert.h"
+#import "LangSwitcher.h"
 @interface  JoinMineCell()
 
 @property (nonatomic , strong) UILabel *nameLab;
@@ -46,8 +48,31 @@
         make.right.equalTo(@-15);
 
     }];
+    
+    self.contentLab.userInteractionEnabled = YES;
+      UITapGestureRecognizer *leftSwipe = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap)];
+    
+    [self.contentLab addGestureRecognizer:leftSwipe];
 }
 
+-(void)tap{
+    UIPasteboard *pasteBoard = [UIPasteboard generalPasteboard];
+    NSString *address ;
+        address = self.contentLab.text;
+   
+    pasteBoard.string = address;
+    
+    if (pasteBoard == nil) {
+        
+        [TLAlert alertWithError:@"复制失败, 请重新复制"];
+        
+    } else {
+        
+        [TLAlert alertWithSucces:[LangSwitcher switchLang:@"复制成功" key:nil]];
+    }
+    
+    
+}
 -(void)setModel:(JoinModel *)model
 {
     

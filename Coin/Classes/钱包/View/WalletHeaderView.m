@@ -118,12 +118,17 @@
     bottomIV.image = kImage(@"秘钥背景");
     bottomIV.contentMode = UIViewContentModeScaleToFill;
     UISwipeGestureRecognizer *leftBottomSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeBottomClick:)];
+     UISwipeGestureRecognizer *rightBottomSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeRightBottomClick:)];
     
     // 设置轻扫的方向
     
     leftBottomSwipe.direction = UISwipeGestureRecognizerDirectionLeft;
     
     [bottomIV addGestureRecognizer:leftBottomSwipe];
+    
+    rightBottomSwipe.direction = UISwipeGestureRecognizerDirectionRight;
+    
+    [bottomIV addGestureRecognizer:rightBottomSwipe];
 
     [self addSubview:bottomIV];
     bottomIV.userInteractionEnabled = YES;
@@ -184,12 +189,16 @@
 
     }];
     UISwipeGestureRecognizer *leftSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeClick:)];
-    
+    UISwipeGestureRecognizer *rightSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeRightClick:)];
     // 设置轻扫的方向
     
     leftSwipe.direction = UISwipeGestureRecognizerDirectionLeft;
+    rightSwipe.direction = UISwipeGestureRecognizerDirectionRight;
+
     
     [bgIV addGestureRecognizer:leftSwipe];
+    [bgIV addGestureRecognizer:rightSwipe];
+
 
     self.bgIV = bgIV;
     UILabel *textLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kHexColor(@"#D3FFFF") font:14.0];
@@ -281,17 +290,77 @@
     
 }
 
--(void)swipeClick:(UISwipeGestureRecognizer *)swpie{
-    CGPoint point = [swpie locationInView:self];
+-(void)swipeRightClick:(UISwipeGestureRecognizer *)swpie{
     
-    NSLog(@"%@",NSStringFromCGPoint(point));
-//    [UIView animateWithDuration:2 animations:^{
-//
-//
-//
-//        }];
-//
-//    }];
+    
+    NSLog(@"swipe right");
+    [self setNeedsUpdateConstraints];
+    
+    [UIView animateWithDuration:0.5 animations:^{
+        [self.bgIV mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.equivalentBtn.mas_bottom).offset(37);
+            make.left.equalTo(self.mas_right).offset(30);
+            make.height.equalTo(@(kHeight(150)));
+            make.width.equalTo(@(kWidth(kScreenWidth-80)));
+        }];
+        [self layoutIfNeeded];
+    } completion:^(BOOL finished) {
+        if (self.switchBlock) {
+            self.switchBlock(0);
+        }
+        [self setNeedsUpdateConstraints];
+        self.addButton.hidden = NO;
+        
+        [UIView animateWithDuration:0.5 animations:^{
+            [self bringSubviewToFront:self.bottomIV];
+            
+            [self.bottomIV mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.top.equalTo(self.equivalentBtn.mas_bottom).offset(37);
+                make.left.equalTo(self.cnyAmountLbl.mas_left);
+                make.height.equalTo(@(kHeight(150)));
+                make.width.equalTo(@(kWidth(325)));
+                
+            }];
+            
+            [self.bgIV mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.top.equalTo(self.equivalentBtn.mas_bottom).offset(53);
+                make.left.equalTo(self.cnyAmountLbl.mas_left).offset(kWidth(120));
+                make.height.equalTo(@(kHeight(120)));
+                make.width.equalTo(@(kWidth(225)));
+                
+            }];
+            [self.segmentRight mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.right.equalTo(self.mas_centerX).offset(-5);
+                make.top.equalTo(@(kHeight(244)));
+                make.width.equalTo(@8);
+                make.height.equalTo(@8);
+                
+            }];
+            
+            
+            [self.segmentLeft mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.left.equalTo(self.mas_centerX).offset(5);
+                make.top.equalTo(@(kHeight(244)));
+                make.width.equalTo(@16);
+                make.height.equalTo(@8);
+                
+            }];
+            [self layoutIfNeeded];
+            [self setNeedsDisplay];
+            
+            
+        }];
+        
+    }];
+    
+    
+}
+
+-(void)swipeClick:(UISwipeGestureRecognizer *)swpie{
+   
+    
+    NSLog(@"swipe left");
+
     [self setNeedsUpdateConstraints];
 
     [UIView animateWithDuration:0.5 animations:^{
@@ -354,6 +423,69 @@
         }];
        
     }];
+    
+}
+
+-(void)swipeRightBottomClick:(UISwipeGestureRecognizer *)swpie{
+    [UIView animateWithDuration:0.5 animations:^{
+        [self setNeedsUpdateConstraints];
+        [self.bottomIV mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.equivalentBtn.mas_bottom).offset(37);
+            make.left.equalTo(self.mas_right).offset(30);
+            make.height.equalTo(@(kHeight(150)));
+            make.width.equalTo(@(kWidth(325)));
+        }];
+        
+        [self layoutIfNeeded];
+        
+        
+    } completion:^(BOOL finished) {
+        if (self.switchBlock) {
+            self.switchBlock(1);
+        }
+        [UIView animateWithDuration:0.5 animations:^{
+            self.addButton.hidden = YES;
+            
+            [self setNeedsUpdateConstraints];
+            [self.bgIV mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.top.equalTo(self.equivalentBtn.mas_bottom).offset(37);
+                make.left.equalTo(self.cnyAmountLbl.mas_left);
+                make.height.equalTo(@(kHeight(150)));
+                make.width.equalTo(@(kWidth(325)));
+                
+            }];
+            [self bringSubviewToFront:self.bgIV];
+            [self.bottomIV mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.top.equalTo(self.equivalentBtn.mas_bottom).offset(53);
+                make.left.equalTo(self.cnyAmountLbl.mas_left).offset((kWidth(120)));
+                make.height.equalTo(@(kHeight(120)));
+                make.width.equalTo(@(kWidth(220)));
+                
+            }];
+            [self.segmentLeft mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.right.equalTo(self.mas_centerX).offset(-5);
+                make.top.equalTo(@(kHeight(244)));
+                make.width.equalTo(@16);
+                make.height.equalTo(@8);
+                
+            }];
+            
+            
+            [self.segmentRight mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.left.equalTo(self.mas_centerX).offset(5);
+                make.top.equalTo(@(kHeight(244)));
+                make.width.equalTo(@8);
+                make.height.equalTo(@8);
+                
+            }];
+            [self layoutIfNeeded];
+            [self setNeedsDisplay];
+            
+        }];
+        
+        
+    }];
+    
     
 }
 -(void)swipeBottomClick:(UISwipeGestureRecognizer *)swpie{
