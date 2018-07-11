@@ -214,8 +214,10 @@
         };
         
         TLNavigationController *nav = [[TLNavigationController alloc] initWithRootViewController:loginVC];
-
-        [self presentViewController:nav animated:YES completion:nil];
+        [UIApplication sharedApplication].keyWindow.rootViewController = nav;
+//        [self.navigationController pushViewController:loginVC animated:YES];
+//        [self presentViewController:nav animated:YES completion:nil];
+        return;
     }
 
     [UIApplication sharedApplication].keyWindow.rootViewController = tabBarCtrl;

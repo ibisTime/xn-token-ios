@@ -70,11 +70,21 @@
 
 -(void)labelText:(NSString *)text
 {
+   
     NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc]initWithString:text];
-    [attrStr addAttribute:NSFontAttributeName value:
-     [UIFont systemFontOfSize:24.0f] range:NSMakeRange(3, text.length - 6)];
-    [attrStr addAttribute:NSForegroundColorAttributeName value:
-     kTextColor7 range:NSMakeRange(3, text.length - 6)];
+    if ([LangSwitcher currentLangType] == LangTypeEnglish) {
+        [attrStr addAttribute:NSFontAttributeName value:
+         [UIFont systemFontOfSize:24.0f] range:NSMakeRange(12, text.length - 15)];
+        [attrStr addAttribute:NSForegroundColorAttributeName value:
+         kTextColor7 range:NSMakeRange(12, text.length - 15)];
+    }else{
+        [attrStr addAttribute:NSFontAttributeName value:
+         [UIFont systemFontOfSize:24.0f] range:NSMakeRange(3, text.length - 6)];
+        [attrStr addAttribute:NSForegroundColorAttributeName value:
+         kTextColor7 range:NSMakeRange(3, text.length - 6)];
+        
+    }
+   
     _totalNumberLabel.attributedText = attrStr;
 }
 
@@ -139,7 +149,14 @@
                     [nameTF addGestureRecognizer:tap];
                 }
                 nameTF.tag = 10000 + i;
-                nameTF.textAlignment = NSTextAlignmentRight;
+                if (i == 0) {
+                    nameTF.textAlignment = NSTextAlignmentRight;
+
+                }else{
+                    
+                    nameTF.textAlignment = NSTextAlignmentCenter;
+
+                }
                 nameTF.font = Font(14);
                 nameTF.keyboardType = UIKeyboardTypeEmailAddress;
                 nameTF.placeholder = [LangSwitcher switchLang:[LangSwitcher switchLang:@"请输入数量" key:nil] key:nil];
@@ -159,7 +176,7 @@
 
             }
             if (i == 1 || i == 2) {
-                UILabel *symbolLabel = [UILabel labelWithFrame:CGRectMake(kWidth(255) - 25, kHeight(48)/2 - 6.35, 17.4, 12.7) textAligment:(NSTextAlignmentCenter) backgroundColor:kClearColor font:Font(14) textColor:kTextColor3];
+                UILabel *symbolLabel = [UILabel labelWithFrame:CGRectMake(kWidth(255) - 55, kHeight(48)/2 - 6.35, 47.4, 12.7) textAligment:(NSTextAlignmentCenter) backgroundColor:kClearColor font:Font(12) textColor:kTextColor3];
                 symbolLabel.text = symbolArrayl[i - 1];
                 [backView addSubview:symbolLabel];
             }
@@ -182,7 +199,9 @@
         [TheWalletButton setTitle:[LangSwitcher switchLang:@"改为拼手气红包" key:nil] forState:(UIControlStateSelected)];
         TheWalletButton.frame = CGRectMake(kScreenWidth - kWidth(60)-kWidth(84), kHeight(378), kWidth(84), kHeight(36));
         [TheWalletButton addTarget:self action:@selector(ButtonClick:) forControlEvents:(UIControlEventTouchUpInside)];
-        TheWalletButton.titleLabel.numberOfLines = 0;
+        TheWalletButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+        [TheWalletButton.titleLabel sizeToFit];
+//        TheWalletButton.titleLabel.numberOfLines = 0;
         TheWalletButton.tag = 101;
         kViewBorderRadius(TheWalletButton,0,0.5,kTextColor5);
         [self addSubview:TheWalletButton];
@@ -306,7 +325,7 @@
     NSString *leftAmount = [CoinUtil convertToRealCoin:platform.amountString coin:coin.symbol];
     NSString *rightAmount = [CoinUtil convertToRealCoin:platform.frozenAmountString coin:coin.symbol];
     NSString *ritAmount = [leftAmount subNumber:rightAmount];
-    alltotalLabel.text = [NSString stringWithFormat:@"%@%@%@:%.3f",[LangSwitcher switchLang:@"持有" key:nil],[LangSwitcher switchLang:@"总量" key:nil],platform.currency,[ritAmount floatValue]];
+    alltotalLabel.text = [NSString stringWithFormat:@"Blance:%.3f",[ritAmount floatValue]];
 
 
     NSString *str = [NSString stringWithFormat:@"%@ 0.000 %@",[LangSwitcher switchLang:@"共发送" key:nil],_currency];

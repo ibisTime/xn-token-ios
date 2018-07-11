@@ -168,14 +168,16 @@
     if (money > 0) {
         
         moneyStr = [NSString stringWithFormat:@"+%@ %@",countStr , billModel.currency];
+        
+        self.iconIV.image = kImage(@"充值");
 
-        [self.iconIV sd_setImageWithURL:[NSURL URLWithString:[coin.pic2 convertImageUrl]]];
+//        [self.iconIV sd_setImageWithURL:[NSURL URLWithString:[coin.pic2 convertImageUrl]]];
 
     } else if (money <= 0) {
         
         moneyStr = [NSString stringWithFormat:@"%@ %@", countStr, billModel.currency];
 
-        [self.iconIV sd_setImageWithURL:[NSURL URLWithString:[coin.pic3 convertImageUrl]]];
+        self.iconIV.image = kImage(@"提现");
 
     }
 

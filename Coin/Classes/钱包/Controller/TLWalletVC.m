@@ -101,7 +101,7 @@
     [dataBase.dataBase close];
 //    [self queryTotalAmount];
     if (word != nil && word.length > 0) {
-        [self switchWithTager:0 ];
+//        [self switchWithTager:0 ];
 
 
     }else{
@@ -112,6 +112,7 @@
     
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES animated:animated];
+
     
 }
 
@@ -121,11 +122,6 @@
     [super viewWillDisappear:animated];
     [self.navigationController setNavigationBarHidden:NO animated:animated];
 
-}
-
-- (UIStatusBarStyle)preferredStatusBarStyle {
-    
-    return UIStatusBarStyleLightContent;
 }
 
 - (void)viewDidLoad {
@@ -751,7 +747,7 @@
     
     [http postWithSuccess:^(id responseObject) {
 
-        if ([[TLUser user].localMoney isEqualToString:@"Dollar"]) {
+        if ([[TLUser user].localMoney isEqualToString:@"USD"]) {
             NSString *cnyStr = [responseObject[@"data"][@"totalAmountUSD"] convertToSimpleRealMoney];
             if (![self.IsLocalExsit isEqualToString:@"1"]) {
                 self.headerView.cnyAmountLbl.text = [NSString stringWithFormat:@"$ %.2f", [cnyStr doubleValue]];
@@ -849,7 +845,7 @@
     
             NSString *cnyStr = [responseObject[@"data"][@"totalAmountCNY"] convertToSimpleRealMoney];
             self.IsLocalExsit = @"1";
-            if ([[TLUser user].localMoney isEqualToString:@"Dollar"]) {
+            if ([[TLUser user].localMoney isEqualToString:@"USD"]) {
                 cnyStr = [responseObject[@"data"][@"totalAmountUSD"] convertToSimpleRealMoney];
                 double f =  [cnyStr doubleValue]+[[self.headerView.privateMoney.text substringFromIndex:1] doubleValue] ;
                 self.headerView.cnyAmountLbl.text = [NSString stringWithFormat:@"$ %.2f", f] ;
@@ -865,8 +861,8 @@
                 
                 //            weakSelf.currentTableView.platforms = weakSelf.currencys;
                 //            [weakSelf.currentTableView reloadData_tl];
-                self.headerView.usdAmountLbl.text = [NSString stringWithFormat:@"%@CNY", usdStr];
-                self.headerView.equivalentBtn.text = [NSString stringWithFormat:@"%@(CNY)", [LangSwitcher switchLang:@"总资产" key:nil]];;
+                self.headerView.usdAmountLbl.text = [NSString stringWithFormat:@"%@USD", usdStr];
+                self.headerView.equivalentBtn.text = [NSString stringWithFormat:@"%@(USD)", [LangSwitcher switchLang:@"总资产" key:nil]];;
 
                 NSString *hkdStr = [responseObject[@"data"][@"totalAmountHKD"] convertToSimpleRealMoney];
                 
@@ -913,6 +909,7 @@
 
 #pragma mark - Data
 - (void)queryTotalAmount {
+    
     NSString *audioFile = [[NSBundle mainBundle] pathForResource:@"QSount.caf" ofType:nil];
 
     NSLog(@"%@",audioFile);
@@ -947,7 +944,7 @@
             [dic setObject:symbol forKey:@"symbol"];
             [arr addObject:dic];
         }
-        [set close];
+            [set close];
     }
     [dataBase.dataBase close];
     

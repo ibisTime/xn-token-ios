@@ -52,6 +52,8 @@
 
 - (NSString *)convertDate;
 
+- (NSString *)convertRedDate;
+
 
 
 - (NSDate *)convertToSysDate;

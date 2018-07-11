@@ -37,7 +37,7 @@
         [self addSubview:timeLabel];
 
 
-        priceLabel = [UILabel labelWithFrame:CGRectMake(63 + (SCREEN_WIDTH - 79)/2, 16, (SCREEN_WIDTH - 79)/2, 36) textAligment:(NSTextAlignmentRight) backgroundColor:kClearColor font:FONT(16) textColor:kPaleBlueColor];
+        priceLabel = [UILabel labelWithFrame:CGRectMake(63 + (SCREEN_WIDTH - 79)/2, 16, (SCREEN_WIDTH - 79)/2, 36) textAligment:(NSTextAlignmentRight) backgroundColor:kClearColor font:FONT(16) textColor:HeadBackColor];
         [self addSubview:priceLabel];
 
 //        TheValueLabel = [UILabel labelWithFrame:CGRectMake(63 + (SCREEN_WIDTH - 79)/2, 36, (SCREEN_WIDTH - 79)/2 , 14) textAligment:(NSTextAlignmentRight) backgroundColor:kClearColor font:FONT(11) textColor:RGB(173, 186, 192)];
@@ -56,7 +56,7 @@
 {
 //    NSLog(@"%@",getModel);
     nameLabel.text = [NSString stringWithFormat:@"%@",sendModel.sendUserNickname];
-    timeLabel.text = [sendModel.createDateTime convertDate] ;
+    timeLabel.text = [sendModel.createDateTime convertRedDate] ;
 
     [headImage sd_setImageWithURL:[NSURL URLWithString:[sendModel.sendUserPhoto convertImageUrl]] placeholderImage:kImage(@"头像")];
     priceLabel.text = [NSString stringWithFormat:@"%@ %@",sendModel.totalCount,sendModel.symbol];

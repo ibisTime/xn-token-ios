@@ -34,7 +34,7 @@
 //        model1.content = @"@official@thachain.org";
         JoinModel *mode2 = [[JoinModel alloc] init];
         mode2.name = @"Telegram";
-         mode2.content = @"https://t.me/THAWallet.cn";
+         mode2.content = @"https://t.me/THAWallet_cn";
 //        JoinModel *mode3 = [[JoinModel alloc] init];
 //        mode3.name = @"QTelegram 英文社区";
 //        mode3.content = @"https://t.me/THAWallet cn";
@@ -44,21 +44,21 @@
         JoinModel *mode5 = [[JoinModel alloc] init];
 
         mode5.name = @"Twitter";
-        mode5.content = @"@ThAWallet";
+        mode5.content = @"@THAWallet";
         JoinModel *mode6 = [[JoinModel alloc] init];
 
         mode6.name = @"Facebook";
-        mode6.content = @"@ThAWallet";
+        mode6.content = @"@THAWallet";
     JoinModel *mode7 = [[JoinModel alloc] init];
     
     mode7.name = @"Wechat";
-    mode7.content = @"@THA-Wallet";
+    mode7.content = @"THA-Wallet";
         self.models = [NSMutableArray array];
-    
+        [self.models addObject:mode6];
+        [self.models addObject:mode5];
+
         [self.models addObject:mode2];
     
-        [self.models addObject:mode5];
-        [self.models addObject:mode6];
         [self.models addObject:mode7];
 
         self.tableView.models = self.models;

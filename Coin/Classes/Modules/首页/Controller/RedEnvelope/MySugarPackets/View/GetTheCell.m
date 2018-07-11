@@ -39,7 +39,7 @@
         [self addSubview:timeLabel];
 
 
-        priceLabel = [UILabel labelWithFrame:CGRectMake(63 + (SCREEN_WIDTH - 79)/2, 16, (SCREEN_WIDTH - 79)/2, 36) textAligment:(NSTextAlignmentRight) backgroundColor:kClearColor font:FONT(16) textColor:kPaleBlueColor];
+        priceLabel = [UILabel labelWithFrame:CGRectMake(63 + (SCREEN_WIDTH - 79)/2, 16, (SCREEN_WIDTH - 79)/2, 36) textAligment:(NSTextAlignmentRight) backgroundColor:kClearColor font:FONT(16) textColor:HeadBackColor];
 //        priceLabel.text = @"来自  王小二";
         [self addSubview:priceLabel];
 
@@ -61,7 +61,7 @@
     NSLog(@"%@",getModel);
     NSDictionary *redPacketInfo = getModel.redPacketInfo;
     nameLabel.text = [NSString stringWithFormat:@"%@",redPacketInfo[@"sendUserNickname"]];
-    timeLabel.text = [getModel.createDatetime convertDate];
+    timeLabel.text = [getModel.createDatetime convertRedDate];
 
     [headImage sd_setImageWithURL:[NSURL URLWithString:[redPacketInfo[@"sendUserPhoto"] convertImageUrl ] ] placeholderImage:kImage(@"头像")];
     priceLabel.text = [NSString stringWithFormat:@"%@ %@",getModel.count,redPacketInfo[@"symbol"]];

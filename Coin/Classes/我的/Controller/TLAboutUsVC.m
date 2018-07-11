@@ -44,7 +44,8 @@
     
     
     self.iconImageView.image = [UIImage imageNamed:@"icon圆角"];
-    self.nameLbl.text = [LangSwitcher switchLang:[NSString stringWithFormat:@"THAV%@",[NSString appVersionString]] key:nil];
+    self.nameLbl.text = @"THA";
+    self.versionLbl.text = [LangSwitcher switchLang:[NSString stringWithFormat:@"V%@",[NSString appVersionString]] key:nil];
 //    self.versionLbl.text = [LangSwitcher switchLang:@"钱包是一款全新的数字货币钱包" key:nil];
 //    self.versionLbl2.text = [LangSwitcher switchLang:@"为你提高安全丶便捷的一站式管理方案" key:nil];
 //    self.versionLbl3.text = [LangSwitcher switchLang:@"服务时间:  9:00 - 18:00 " key:nil];
@@ -95,8 +96,8 @@
     self.versionLbl = [UILabel labelWithFrame:CGRectZero
                                  textAligment:NSTextAlignmentCenter
                               backgroundColor:[UIColor whiteColor]
-                                         font:[UIFont systemFontOfSize:12]
-                                    textColor:kHexColor(@"#808080")];
+                                         font:[UIFont systemFontOfSize:15]
+                                    textColor:kTextColor];
     [self.bgView addSubview:self.versionLbl];
     
     self.versionLbl2 = [UILabel labelWithFrame:CGRectZero
@@ -155,7 +156,7 @@
     
     [self.versionLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.top.equalTo(self.nameLbl.mas_bottom).offset(22.5);
+        make.top.equalTo(self.nameLbl.mas_bottom).offset(12.5);
         make.centerX.equalTo(self.bgView);
         
     }];

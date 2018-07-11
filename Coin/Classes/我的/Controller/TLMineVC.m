@@ -465,9 +465,10 @@
     }
     
     self.headerView.nameLbl.text = [TLUser user].nickname;
-    NSRange rang = NSMakeRange(4, 4);
+    NSRange rang = NSMakeRange(3, 4);
 
-    self.headerView.mobileLbl.text = [[TLUser user].mobile stringByReplacingCharactersInRange:rang withString:@"xxxx"];
+    self.headerView.mobileLbl.text = [NSString stringWithFormat:@"+%@ %@",[[TLUser user].interCode substringFromIndex:2], [[TLUser user].mobile stringByReplacingCharactersInRange:rang withString:@"****"]];
+   ;
 
     
     self.headerView.levelBtn.hidden = [[TLUser user].level isEqualToString:kLevelOrdinaryTraders] ? YES : NO;

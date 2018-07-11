@@ -266,7 +266,20 @@ NSString  * const kCDSysTimeFormat = @"MMM dd, yyyy hh:mm:ss aa";
     
     return [formatter stringFromDate:date01];
 }
-
+- (NSString *)convertRedDate
+{
+//    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+//    formatter.dateFormat = @"MM-dd hh:mm";
+//    formatter.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    formatter.dateFormat = @"MMM dd, yyyy hh:mm:ss aa";
+    formatter.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
+    NSDate *date01 = [formatter dateFromString:self];
+    formatter.dateFormat = @"MM-dd hh:mm";
+    formatter.locale = [NSLocale currentLocale];
+    
+    return [formatter stringFromDate:date01];
+}
 - (NSString *)convertDateWithFormat:(NSString *)format {
     
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];

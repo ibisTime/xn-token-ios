@@ -288,7 +288,7 @@
                          [LangSwitcher switchLang:@"提币" key:nil]
                          ];
     
-    NSArray *imgArr = @[@"提币", @"充币"];
+    NSArray *imgArr = @[@"充币", @"提币"];
     
     CGFloat btnW = (kScreenWidth - 2*0)/2.0;
     
@@ -314,12 +314,13 @@
         }];
         
         if (idx != 1) {
-            [btn setTitleColor:kWhiteColor forState:UIControlStateNormal];
+            [btn setTitleColor:kHexColor(@"#108ee9") forState:UIControlStateNormal];
+            
+            [btn setBackgroundColor:kWhiteColor forState:UIControlStateNormal];
 
             UIView *vLine = [[UIView alloc] init];
             
             vLine.backgroundColor = kLineColor;
-            [btn setBackgroundColor:kHexColor(@"#108ee9") forState:UIControlStateNormal];
 
             [self.bottomViw addSubview:vLine];
             [vLine mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -332,9 +333,9 @@
             }];
         }
         else{
-            [btn setTitleColor:kHexColor(@"#108ee9") forState:UIControlStateNormal];
+            [btn setTitleColor:kWhiteColor forState:UIControlStateNormal];
 
-            [btn setBackgroundColor:kWhiteColor forState:UIControlStateNormal];
+            [btn setBackgroundColor:kHexColor(@"#108ee9") forState:UIControlStateNormal];
         }
         if (idx == 0) {
             

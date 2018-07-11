@@ -281,6 +281,7 @@
 //    }
         if (![AppConfig config].isChecking) {
             TLUpdateVC *updateVC = [[TLUpdateVC alloc] init];
+            TLNavigationController *na = [[TLNavigationController alloc] initWithRootViewController:updateVC];
             if ([TLUser user].checkLogin == NO) {
                 
             }
@@ -385,17 +386,17 @@
 //czy      [[IMAPlatform sharedInstance] configOnAppDidBecomeActive];
 
     }
-    if (self.IsEnterBack == YES) {
-        if ([TLUser user].isLogin==NO) {
-            
-            TLUserLoginVC *login = [TLUserLoginVC new];
-            TLNavigationController *na = [[TLNavigationController alloc] initWithRootViewController:login];
-            self.IsEnterBack = NO;
-            login.IsAPPJoin = YES;
-            self.window.rootViewController = na;
-            
-        }
-    }
+//    if (self.IsEnterBack == YES) {
+//        if ([TLUser user].isLogin==NO) {
+//            
+//            TLUserLoginVC *login = [TLUserLoginVC new];
+//            TLNavigationController *na = [[TLNavigationController alloc] initWithRootViewController:login];
+//            self.IsEnterBack = NO;
+//            login.IsAPPJoin = YES;
+//            self.window.rootViewController = na;
+//            
+//        }
+//    }
     
             
         

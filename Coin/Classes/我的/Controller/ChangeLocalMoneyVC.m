@@ -53,7 +53,7 @@
    self.type =   [[NSUserDefaults standardUserDefaults] objectForKey:KLocalMoney];
     SettingModel *simpleModel = [[SettingModel alloc] init];
     //    simpleModel.text = [LangSwitcher switchLang:@"简体中文" key:nil];
-    simpleModel.text = @"人民币";
+    simpleModel.text = @"CNY";
     
     simpleModel.isSelect = [simpleModel.text isEqualToString:self.type];
     if (!self.type) {
@@ -66,7 +66,7 @@
     //
     SettingModel *tridationModel = [[SettingModel alloc] init];
     //    tridationModel.text = [LangSwitcher switchLang:@"繁体中文" key:nil];
-    tridationModel.text = @"Dollar";
+    tridationModel.text = @"USD";
     
     tridationModel.isSelect = [tridationModel.text isEqualToString:self.type];
     [tridationModel setAction:^{
@@ -82,10 +82,10 @@
     
     NSString *money ;
     if (type == LangTypeSimple) {
-        money = @"人民币";
+        money = @"CNY";
     }else{
         
-        money = @"Dollar";
+        money = @"USD";
     }
     
     [TLAlert alertWithTitle:[LangSwitcher switchLang:@"切换货币" key:nil]

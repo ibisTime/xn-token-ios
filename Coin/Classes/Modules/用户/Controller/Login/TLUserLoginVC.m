@@ -131,8 +131,13 @@
     [imageView addSubview:registBtn];
     registBtn.layer.cornerRadius = 5;
     registBtn.clipsToBounds = YES;
-    
-    [registBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, 50, 0, 0 )];
+    if ([LangSwitcher currentLangType] == LangTypeEnglish) {
+        [registBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, 80, 0, 0 )];
+
+    }else{
+        [registBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, 60, 0, 0 )];
+
+    }
     [registBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.centerX.equalTo(bgView.mas_centerX);
@@ -143,11 +148,12 @@
         
     }];
     UILabel *title = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:14];
+    title.textAlignment = NSTextAlignmentCenter;
     [registBtn addSubview:title];
     title.text = [LangSwitcher switchLang:@"还没账号?" key:nil];
     [title mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.centerX.equalTo(registBtn.mas_centerX).offset(-80);
+        make.right.equalTo(registBtn.mas_centerX).offset(-5);
         make.centerY.equalTo(registBtn.mas_centerY);
     }];
     
@@ -276,7 +282,18 @@
     ChooseCountryVc *countryVc = [ChooseCountryVc new];
     countryVc.selectCountry = ^(CountryModel *model) {
         //更新国家 区号
-        weakSelf.titlePhpne.text = model.chineseName;
+        if ([LangSwitcher currentLangType] == LangTypeSimple) {
+            weakSelf.titlePhpne.text = model.chineseName;
+
+        }else if ([LangSwitcher currentLangType] == LangTypeEnglish){
+
+            weakSelf.titlePhpne.text = model.interName;
+
+        }else{
+            weakSelf.titlePhpne.text = model.interName;
+
+            
+        }
         weakSelf.PhoneCode.text = [NSString stringWithFormat:@"+%@",[model.interCode substringFromIndex:2]];
     } ;
     [self presentViewController:countryVc animated:YES completion:nil];

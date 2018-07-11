@@ -82,7 +82,7 @@
     self.contentLab = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:14];
     [self.view addSubview:self.contentLab];
     self.contentLab.numberOfLines = 0;
-    self.contentLab.text = @"Global Master and Apprentice Initiative:/n THA Users can receive apprentice through the invitation system, and instruct apprentice according to the task, thus obtain the calculation force. In addition, the apprentice uses THA Wallet to purchase quantitative financial products or Yubibao, masters can obtain a certain percentage of the Apprentice reward.";
+    self.contentLab.text = @"Global Master and Apprentice Initiative: THA Users can receive apprentice through the invitation system, and instruct apprentice according to the task, thus obtain the calculation force. In addition, the apprentice uses THA Wallet to purchase quantitative financial products or Yubibao, masters can obtain a certain percentage of the Apprentice reward.";
     [self.contentLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.titleLable.mas_bottom).offset(20);
         make.right.equalTo(@-10);

@@ -36,7 +36,7 @@
     if (!_backbButton) {
         _backbButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
         _backbButton.frame = CGRectMake(0, 0, 44, 44);
-        [_backbButton setImage:kImage(@"cancel") forState:(UIControlStateNormal)];
+        [_backbButton setImage:kImage(@"返回1") forState:(UIControlStateNormal)];
         [_backbButton setImageEdgeInsets:UIEdgeInsetsMake(0, -20, 0, 0)];
 
         [_backbButton addTarget:self action:@selector(buttonMethodClick) forControlEvents:(UIControlEventTouchUpInside)];
@@ -57,7 +57,7 @@
     label.text = [LangSwitcher switchLang:@"我的红包" key:nil];
     label.textColor = [UIColor whiteColor];
     label.textAlignment = NSTextAlignmentCenter;
-    label.font = [UIFont fontWithName:@"Georgia-Bold" size:18];
+    label.font = [UIFont systemFontOfSize:18];
     self.navigationItem.titleView = label;
 
     UIView *backView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 70)];
@@ -67,7 +67,7 @@
     UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
 
     //    negativeSpacer.width = -10;
-    self.navigationItem.leftBarButtonItems = @[negativeSpacer, [[UIBarButtonItem alloc] initWithCustomView:self.backbButton]];self.navigationController.navigationBar.titleTextAttributes=@{NSForegroundColorAttributeName:[UIColor whiteColor],NSFontAttributeName:[UIFont boldSystemFontOfSize:18]};
+    self.navigationItem.leftBarButtonItems = @[negativeSpacer, [[UIBarButtonItem alloc] initWithCustomView:self.backbButton]];self.navigationController.navigationBar.titleTextAttributes=@{NSForegroundColorAttributeName:[UIColor whiteColor],NSFontAttributeName:[UIFont systemFontOfSize:18]};
     self.navigationController.navigationBar.titleTextAttributes=
   @{NSForegroundColorAttributeName:[UIColor whiteColor],
     NSFontAttributeName:[UIFont fontWithName:@"Helvetica-Bold" size:18]};

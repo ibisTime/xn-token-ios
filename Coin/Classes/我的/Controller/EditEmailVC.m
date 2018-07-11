@@ -68,10 +68,23 @@
     self.contentTf.keyboardType = UIKeyboardTypeEmailAddress;
     [self.view addSubview:self.contentTf];
     
+   
+    
     //
     self.captchaView = [[CaptchaView alloc] initWithFrame:CGRectMake(0, self.contentTf.yy + 0.7, kScreenWidth, 45) leftTitleWidth:80];
+//    self.captchaView.captchaTf.text = [LangSwitcher switchLang:@"验证码" key:nil];
     [self.view addSubview:self.captchaView];
+    UILabel *code = [[UILabel alloc] init];
+    [self.captchaView addSubview:code];
+    
+    code.textColor = kTextColor;
+    code.font = [UIFont systemFontOfSize:14];
+    code.text = [LangSwitcher switchLang:@"验证码" key:nil];
+    [code mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.captchaView.mas_left).offset(15);
+        make.centerY.equalTo(self.captchaView.mas_centerY).offset(0);
 
+    }];
 //    self.codeTf = [[TLTextField alloc] initWithFrame:CGRectMake(0, self.contentTf.yy, kScreenWidth, 45)
 //                                           leftTitle:[LangSwitcher switchLang:@"验证码" key:nil]
 //                                          titleWidth:80

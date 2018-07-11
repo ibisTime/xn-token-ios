@@ -16,7 +16,7 @@
     if (!_backButton) {
         _backButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
         _backButton.frame = CGRectMake(0, 0, 40, 40);
-        [_backButton setImage:kImage(@"cancel") forState:(UIControlStateNormal)];
+        [_backButton setImage:kImage(@"返回1") forState:(UIControlStateNormal)];
         [_backButton addTarget:self action:@selector(buttonClick:) forControlEvents:(UIControlEventTouchUpInside)];
 
         _backButton.tag = 100;

@@ -55,7 +55,9 @@
     CoinWeakSelf;
     
     //顶部轮播
-    TLBannerView *bannerView = [[TLBannerView alloc] initWithFrame:CGRectMake(15, 0, kScreenWidth-30, kHeight(138))];
+    TLBannerView *bannerView = [[TLBannerView alloc] initWithFrame:CGRectMake(15, 5, kScreenWidth-30, kHeight(138))];
+    bannerView.layer.cornerRadius = 5;
+    bannerView.clipsToBounds = YES;
     
     bannerView.selected = ^(NSInteger index) {
         
