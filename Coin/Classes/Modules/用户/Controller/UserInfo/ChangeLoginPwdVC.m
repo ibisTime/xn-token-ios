@@ -77,7 +77,7 @@
     TLTextField *oldPwdTf = [[TLTextField alloc] initWithFrame:CGRectMake(0, captchaViewY, kScreenWidth, height)
                                                   leftTitle:[LangSwitcher switchLang:@"旧密码" key:nil]
                                                  titleWidth:leftW
-                                                placeholder:[LangSwitcher switchLang:@"请输入旧密码(不少于6位)" key:nil]];
+                                                placeholder:[LangSwitcher switchLang:@"请输入旧密码" key:nil]];
     
     oldPwdTf.returnKeyType = UIReturnKeyNext;
     oldPwdTf.secureTextEntry = YES;
@@ -90,7 +90,7 @@
     TLTextField *rePwdTf = [[TLTextField alloc] initWithFrame:CGRectMake(0, oldPwdTf.yy + 1, kScreenWidth, height)
                                                     leftTitle:[LangSwitcher switchLang:@"新密码" key:nil]
                                                    titleWidth:leftW
-                                                  placeholder:[LangSwitcher switchLang:@"请输入新密码(不少于6位)" key:nil]];
+                                                  placeholder:[LangSwitcher switchLang:@"请输入新密码" key:nil]];
     
     rePwdTf.returnKeyType = UIReturnKeyDone;
     

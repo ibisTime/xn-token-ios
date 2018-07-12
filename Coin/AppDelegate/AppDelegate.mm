@@ -182,22 +182,30 @@
     //
     
     UITabBarController *tabbarContrl = (UITabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
-    if ([tabbarContrl isKindOfClass:[TLUpdateVC class]]) {
-        return;
-    }
+//    if ([tabbarContrl isKindOfClass:[TLUpdateVC class]]) {
+//        return;
+//    }
     if ([tabbarContrl isKindOfClass:[TLNavigationController class]]) {
         return;
     }
     if ([tabbarContrl isKindOfClass:[BuildWalletMineVC class]]) {
         return;
     }
+    TLTabBarController *tab = [[TLTabBarController alloc] init];
     
-    tabbarContrl.selectedIndex = 2;
-    [tabbarContrl.tabBar hideBadgeOnItemIndex:4];
+//    tabbarContrl.selectedIndex = 2;
+//    [tabbarContrl.tabBar hideBadgeOnItemIndex:4];
     //应用外数量为0
-//    TLUserLoginVC *login = [TLUserLoginVC new];
+    TLUserLoginVC *login = [TLUserLoginVC new];
+    
 //
-//    TLNavigationController *na = [[TLNavigationController alloc] initWithRootViewController:login];
+    TLNavigationController *na = [[TLNavigationController alloc] initWithRootViewController:login];
+    self.window.rootViewController = na;
+
+    login.loginSuccess = ^{
+        self.window.rootViewController = tab;
+
+    };
 //    TLTabBarController *tab = [TLTabBarController new];
 //    [UIApplication sharedApplication].keyWindow.rootViewController = na;
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;

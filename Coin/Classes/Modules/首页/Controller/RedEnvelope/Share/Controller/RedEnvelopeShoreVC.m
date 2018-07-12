@@ -39,6 +39,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self getShareUrl];
     // Do any additional setup after loading the view.
     RedEnvelopeShoreView *shoreView = [[RedEnvelopeShoreView alloc]initWithFrame:self.view.frame];
     self.shoreVie = shoreView;
@@ -54,13 +55,28 @@
     [shoreView addSubview:headView];
 
     [self.view addSubview:self.invitationView];
-    NSDictionary *dic = @{@"code":_code};
-    NSNotification *notification =[NSNotification notificationWithName:@"InfoNotification" object:nil userInfo:dic];
-    [[NSNotificationCenter defaultCenter] postNotification:notification];
+   
     
 }
 - (void)getShareUrl
 {
+    
+    TLNetworking *http = [TLNetworking new];
+    http.showView = self.view;
+    http.code = @"660917";
+    
+    http.parameters[@"ckey"] = @"redPacketShareUrl";
+    
+    [http postWithSuccess:^(id responseObject) {
+        
+        _invitationView.h5String = responseObject[@"data"][@"cvalue"];
+        
+        NSDictionary *dic = @{@"code":_code};
+        NSNotification *notification =[NSNotification notificationWithName:@"InfoNotification" object:nil userInfo:dic];
+        [[NSNotificationCenter defaultCenter] postNotification:notification];
+    } failure:^(NSError *error) {
+        
+    }];
     
     
 }

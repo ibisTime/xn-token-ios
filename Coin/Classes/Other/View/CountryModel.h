@@ -24,4 +24,7 @@
 //状态 0=未上架 1=已上架
 @property (nonatomic , copy) NSString *status;
 
+@property (nonatomic , copy) NSString *pic;
+
+
 @end

@@ -12,6 +12,8 @@
 #import "ChooseCountryVc.h"
 #import "NSString+Check.h"
 #import "CountryModel.h"
+#import <SDWebImage/UIImageView+WebCache.h>
+#import "NSString+Extension.h"
 @interface TLPwdRelatedVC ()
 
 @property (nonatomic,assign) TLPwdType type;
@@ -25,7 +27,7 @@
 @property (nonatomic ,strong) UILabel *titlePhpne;
 @property (nonatomic ,strong) UILabel *PhoneCode;
 @property (nonatomic ,strong) UIButton *accessoryImageView;
-
+@property (nonatomic ,strong) UIImageView *pic;
 @property (nonatomic,strong) NSMutableArray <CountryModel *>*countrys;
 
 
@@ -91,28 +93,29 @@
     
     [self.view addSubview:view];
     view.backgroundColor = kWhiteColor;
-    view.frame = CGRectMake(0, 0, kScreenWidth, 60);
+    view.frame = CGRectMake(0, 0, 100, 60);
+    UIImageView *pic = [[UIImageView alloc] init];
+    self.pic = pic;
+    pic.userInteractionEnabled = YES;
+    NSString *url = [NSString stringWithFormat:@"%@.png",[TLUser user].userId];
+    [pic sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:kImage(@"中国国旗")];
+//    pic.image = kImage(@"中国国旗");
+    UITapGestureRecognizer *tap3 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(chooseCountry)];
     
-    UILabel *titlePhone = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:14];
-    [view addSubview:titlePhone];
-    titlePhone.text = [LangSwitcher switchLang:@"中国" key:nil];
-    self.titlePhpne = titlePhone;
-    titlePhone.backgroundColor = kWhiteColor;
-    [titlePhone mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.top.equalTo(@20);
-        make.left.mas_equalTo(20);
-    }];
+    [pic addGestureRecognizer:tap3];
+    pic.contentMode = UIViewContentModeScaleToFill;
+    pic.frame = CGRectMake(17, 13, 24, 16);
+    [view addSubview:pic];
     UILabel *PhoneCode = [UILabel labelWithBackgroundColor:kWhiteColor textColor:kTextColor font:16];
     [view addSubview:PhoneCode];
-    PhoneCode.text = [LangSwitcher switchLang:@"+86" key:nil];
+    PhoneCode.text = [NSString stringWithFormat:@"+%@",[[TLUser user].interCode substringFromIndex:2]];
     self.PhoneCode = PhoneCode;
     PhoneCode.backgroundColor = kWhiteColor;
 
     [PhoneCode mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.top.equalTo(@20);
-        make.left.equalTo(titlePhone.mas_right).offset(15);
+        make.top.equalTo(@13);
+        make.left.equalTo(pic.mas_right).offset(5);
     }];
     
 //    self.accessoryImageView = [[UIButton alloc] init];
@@ -128,9 +131,9 @@
 //    }];
 //
     //手机号
-    TLTextField *phoneTf = [[TLTextField alloc] initWithFrame:CGRectMake(0, view.yy, kScreenWidth, 45)
-                                                    leftTitle:[LangSwitcher switchLang:@"手机号" key:nil]
-                                                   titleWidth:leftW
+    TLTextField *phoneTf = [[TLTextField alloc] initWithFrame:CGRectMake(100, 0, kScreenWidth, 45)
+                                                    leftTitle:[LangSwitcher switchLang:@"" key:nil]
+                                                   titleWidth:0
                                                   placeholder:[LangSwitcher switchLang:@"请输入手机号" key:nil]];
     [self.bgSV addSubview:phoneTf];
     self.phoneTf = phoneTf;
@@ -177,7 +180,7 @@
     TLTextField *pwdTf = [[TLTextField alloc] initWithFrame:CGRectMake(0, captchaView.yy + 10, phoneTf.width, phoneTf.height)
                                                   leftTitle:[LangSwitcher switchLang:@"新密码" key:nil]
                                                  titleWidth:leftW
-                                                placeholder:[LangSwitcher switchLang:@"请输入密码(不少于6位)" key:nil]];
+                                                placeholder:[LangSwitcher switchLang:@"请输入密码" key:nil]];
     
     pwdTf.returnKeyType = UIReturnKeyNext;
     

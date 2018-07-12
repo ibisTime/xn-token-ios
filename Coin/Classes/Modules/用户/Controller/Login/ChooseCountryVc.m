@@ -8,6 +8,8 @@
 
 #import "ChooseCountryVc.h"
 #import "TLNetworking.h"
+#import <SDWebImage/UIImageView+WebCache.h>
+#import "NSString+Extension.h"
 @interface ChooseCountryVc ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,strong) NSMutableArray <CountryModel *>*countrys;
 @property (nonatomic,strong) UITableView *tableView;
@@ -19,7 +21,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = kBackgroundColor;
+    self.view.backgroundColor = kWhiteColor;
     UIButton *cancelBtn = [UIButton buttonWithImageName:@"cancel"];
     self.cancelBtn = cancelBtn;
     [cancelBtn addTarget:self action:@selector(clickCancel) forControlEvents:UIControlEventTouchUpInside];
@@ -52,7 +54,7 @@
     /** 去掉分割线 */
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView = tableView;
-    tableView.backgroundColor = kBackgroundColor;
+    tableView.backgroundColor = kWhiteColor;
     [self.view addSubview:tableView];
     [self loadData];
     UILabel *titleLab = [UILabel labelWithBackgroundColor:kClearColor textColor:kBlackColor font:15];
@@ -122,29 +124,79 @@ static NSString *IdCell = @"country";
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:IdCell];
     }
      cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    if (indexPath.row == 0) {
-          cell.textLabel.text = [NSString stringWithFormat:@"China    %@       +%@",self.countrys[indexPath.row].chineseName,[self.countrys[indexPath.row].interCode substringFromIndex:2]];
-    }else if (indexPath.row ==1)
-    {
-          cell.textLabel.text = [NSString stringWithFormat:@"Indonesia    %@       +%@",self.countrys[indexPath.row].chineseName,[self.countrys[indexPath.row].interCode substringFromIndex:2]];
-        
-    }else{
-        
-          cell.textLabel.text = [NSString stringWithFormat:@"Malaysia     %@       +%@",self.countrys[indexPath.row].chineseName,[self.countrys[indexPath.row].interCode substringFromIndex:2]];
-    }
+    cell.backgroundColor = kWhiteColor;
+//
+//    UIImage * icon = [UIImage imageNamed:@"goods_1"];
+//    CGSize itemSize = CGSizeMake(36, 36);//固定图片大小为36*36
+//    UIGraphicsBeginImageContextWithOptions(itemSize, NO, 0.0);//*1
+//    CGRect imageRect = CGRectMake(0, 0, itemSize.width, itemSize.height);
+//    [icon drawInRect:imageRect];
+//    cell.imageView.image = UIGraphicsGetImageFromCurrentImageContext();//*2
+//    UIGraphicsEndImageContext();
+//
+ 
+    NSString *url = [self.countrys[indexPath.row].pic convertImageUrl];
+//    [cell.imageView sd_setImageWithURL:[NSURL URLWithString:url]];
   
-    cell.detailTextLabel.text = self.countrys[indexPath.row].interCode;
-    cell.backgroundColor = kClearColor;
-    UIView *view = [[UIView alloc] init];
-    view.backgroundColor = kLineColor;
-    [cell addSubview:view];
-    [view mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(cell.mas_bottom).offset(0);
-        make.left.equalTo(@5);
-        make.right.equalTo(@-5);
-        make.height.equalTo(@1);
+    [cell.imageView sd_setImageWithURL:[NSURL URLWithString:url] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        
+          UIImage *im = cell.imageView.image ;
+        CGSize itemSize = CGSizeMake(22.4, 16);//固定图片大小为36*36
+        UIGraphicsBeginImageContextWithOptions(itemSize, NO, 0.0);//*1
+        CGRect imageRect = CGRectMake(0, 0, itemSize.width, itemSize.height);
+        [im drawInRect:imageRect];
+        cell.imageView.image = UIGraphicsGetImageFromCurrentImageContext();//*2
+        UIGraphicsEndImageContext();
+        
+        if (indexPath.row == 0) {
+            cell.textLabel.text = [NSString stringWithFormat:@"%@   +%@",[LangSwitcher switchLang:self.countrys[indexPath.row].chineseName key:nil],[self.countrys[indexPath.row].interCode substringFromIndex:2]];
+        }else if (indexPath.row ==1)
+        {
+            
+            cell.textLabel.text = [NSString stringWithFormat:@"%@   +%@",[LangSwitcher switchLang:self.countrys[indexPath.row].chineseName key:nil],[self.countrys[indexPath.row].interCode substringFromIndex:2]];
+            
+        }else{
+            
+            cell.textLabel.text = [NSString stringWithFormat:@"%@   +%@",[LangSwitcher switchLang:self.countrys[indexPath.row].chineseName key:nil],[self.countrys[indexPath.row].interCode substringFromIndex:2]];
+        }
+        
+        cell.detailTextLabel.text = self.countrys[indexPath.row].interCode;
+        cell.backgroundColor = kClearColor;
+        UIView *view = [[UIView alloc] init];
+        view.backgroundColor = kLineColor;
+        [cell addSubview:view];
+        [view mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.bottom.equalTo(cell.mas_bottom).offset(0);
+            make.left.equalTo(@5);
+            make.right.equalTo(@-5);
+            make.height.equalTo(@1);
+            
+        }];
+        
+        UIImageView *imageView = [[UIImageView alloc] init];
+        
+        [cell addSubview:imageView];
+        
+        imageView.image = kImage(@"choose");
+        imageView.hidden = YES;
+        [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.right.equalTo(@-15);
+            make.centerY.equalTo(cell.mas_centerY);
+            make.height.equalTo(@11);
+            make.width.equalTo(@14);
 
+        }];
+
+        if ([self.interCode isEqualToString:self.countrys[indexPath.row].interCode]) {
+            imageView.hidden = NO;
+
+        }else{
+            imageView.hidden = YES;
+
+        }
+        
     }];
+    
     return cell;
     
 }
@@ -160,6 +212,14 @@ static NSString *IdCell = @"country";
 {
     
     [self dismissViewControllerAnimated:YES completion:nil];
+//    BOOL isChoose = [[NSUserDefaults standardUserDefaults] boolForKey:@""];
+
+        NSData *data = [NSKeyedArchiver archivedDataWithRootObject:self.countrys[indexPath.row]];
+        
+        [[NSUserDefaults standardUserDefaults] setObject:data forKey:@"chooseModel"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"chooseCoutry"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
     if (self.selectCountry) {
         self.selectCountry(self.countrys[indexPath.row]);
     }

@@ -18,4 +18,7 @@ typedef void(^selectCurrent)(CountryModel *model );
 
 @property (nonatomic ,copy)  selectCurrent selectCountry;
 
+@property (nonatomic ,copy)  NSString* interCode;
+
+
 @end

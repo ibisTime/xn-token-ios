@@ -21,8 +21,29 @@
     self.title = [LangSwitcher switchLang:@"加入社群" key:nil];
     [super viewDidLoad];
     [self initTableView];
-    [self initModels];
+    [self requestInfo];
+//    [self initModels];
     // Do any additional setup after loading the view.
+}
+
+
+- (void)requestInfo
+{
+    
+    TLNetworking *http = [[TLNetworking alloc] init];
+    
+    http.code = @"660919";
+    http.parameters[@"type"] = @"followUs";
+    
+    [http postWithSuccess:^(id responseObject) {
+        self.models = [JoinModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
+//        NSLog(@"%@",responseObject);
+        self.tableView.models = self.models;
+        [self.tableView reloadData];
+    } failure:^(NSError *error) {
+        
+    }];
+    
 }
 - (void)initModels
 {
@@ -33,8 +54,8 @@
 //        model1.name = @"邮箱地址";
 //        model1.content = @"@official@thachain.org";
         JoinModel *mode2 = [[JoinModel alloc] init];
-        mode2.name = @"Telegram";
-         mode2.content = @"https://t.me/THAWallet_cn";
+//        mode2.name = @"Telegram";
+//         mode2.content = @"https://t.me/THAWallet_cn";
 //        JoinModel *mode3 = [[JoinModel alloc] init];
 //        mode3.name = @"QTelegram 英文社区";
 //        mode3.content = @"https://t.me/THAWallet cn";
@@ -43,23 +64,23 @@
 //        mode4.content = @"http://weibo.com/THAWallet";
         JoinModel *mode5 = [[JoinModel alloc] init];
 
-        mode5.name = @"Twitter";
-        mode5.content = @"@THAWallet";
-        JoinModel *mode6 = [[JoinModel alloc] init];
-
-        mode6.name = @"Facebook";
-        mode6.content = @"@THAWallet";
-    JoinModel *mode7 = [[JoinModel alloc] init];
-    
-    mode7.name = @"Wechat";
-    mode7.content = @"THA-Wallet";
-        self.models = [NSMutableArray array];
-        [self.models addObject:mode6];
-        [self.models addObject:mode5];
-
-        [self.models addObject:mode2];
-    
-        [self.models addObject:mode7];
+//        mode5.name = @"Twitter";
+//        mode5.content = @"@THAWallet";
+//        JoinModel *mode6 = [[JoinModel alloc] init];
+//
+//        mode6.name = @"Facebook";
+//        mode6.content = @"@THAWallet";
+//    JoinModel *mode7 = [[JoinModel alloc] init];
+//
+//    mode7.name = @"Wechat";
+//    mode7.content = @"THA-Wallet";
+//        self.models = [NSMutableArray array];
+//        [self.models addObject:mode6];
+//        [self.models addObject:mode5];
+//
+//        [self.models addObject:mode2];
+//
+//        [self.models addObject:mode7];
 
         self.tableView.models = self.models;
         [self.tableView beginRefreshing];

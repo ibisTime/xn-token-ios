@@ -7,7 +7,8 @@
 //
 
 #import "CountryModel.h"
+#import <MJExtension/MJExtension.h>
 
 @implementation CountryModel
-
+MJExtensionCodingImplementation
 @end

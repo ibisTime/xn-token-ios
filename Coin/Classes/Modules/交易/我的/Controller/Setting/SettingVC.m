@@ -156,19 +156,26 @@
     
     //修改登录密码
     SettingModel *changeLoginPwd = [SettingModel new];
-    changeLoginPwd.text = [LangSwitcher switchLang:@"修改登录密码" key:nil];
+    if ([TLUser user].loginPwdFlag == 1) {
+        changeLoginPwd.text = [LangSwitcher switchLang:@"修改登录密码" key:nil];
+
+    }else{
+        
+        changeLoginPwd.text = [LangSwitcher switchLang:@"设置登录密码" key:nil];
+
+    }
     [changeLoginPwd setAction:^{
         
-        ChangeLoginPwdVC *changeLoginPwdVC = [ChangeLoginPwdVC new];
+        TLUserForgetPwdVC *changeLoginPwdVC = [TLUserForgetPwdVC new];
         
-        changeLoginPwdVC.success = ^{
-            
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                
-                [weakSelf.navigationController popViewControllerAnimated:YES];
-                
-            });
-        };
+//        changeLoginPwdVC.success = ^{
+//            
+//            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//                
+//                [weakSelf.navigationController popViewControllerAnimated:YES];
+//                
+//            });
+//        };
         
         [weakSelf.navigationController pushViewController:changeLoginPwdVC animated:YES];
         

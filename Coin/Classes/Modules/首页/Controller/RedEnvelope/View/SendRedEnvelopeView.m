@@ -291,7 +291,7 @@
 
         UITextField *textField3 = [self viewWithTag:10003];
         if ([textField3.text isEqualToString:@""] || !textField3.text ) {
-            _greeting = @"红包一响,黄金万两";
+            _greeting = [LangSwitcher switchLang:@"红包一响,黄金万两" key:nil];
         }else
         {
             _greeting = textField3.text;

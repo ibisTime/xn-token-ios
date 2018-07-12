@@ -77,8 +77,8 @@
 {
     
     _model = model;
-    self.nameLab.text = model.name;
-    self.contentLab.text = model.content;
+    self.nameLab.text = model.ckey;
+    self.contentLab.text = model.cvalue;
     
 }
 

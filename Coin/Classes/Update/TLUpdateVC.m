@@ -15,7 +15,9 @@
 #import "AppConfig.h"
 #import "BuildWalletMineVC.h"
 #import "TLUserLoginVC.h"
+#import "CountryModel.h"
 @interface TLUpdateVC ()
+@property (nonatomic,strong) NSMutableArray <CountryModel *>*countrys;
 
 @end
 
@@ -41,10 +43,93 @@
 //    [self setPlaceholderViewTitle:@"加载失败" operationTitle:@"重新加载"];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillEnterForeground) name:UIApplicationWillEnterForegroundNotification object:nil];
-    
+    BOOL isChoose = [[NSUserDefaults standardUserDefaults] boolForKey:@"chooseCoutry"];
+
+    if (isChoose == YES) {
+        [self configUpdate];
+
+    }else{
+        
+        [self loadData];
+
+    }
+
     // 由于无法通过，审核。如果为强制更新
-    [self configUpdate];
 }
+-(NSString *)getWANIP
+{
+    //通过淘宝的服务来定位WAN的IP，否则获取路由IP没什么用
+    NSURL *ipURL = [NSURL URLWithString:@"http://ip.taobao.com/service/getIpInfo.php?ip=myip"];
+    NSData *data = [NSData dataWithContentsOfURL:ipURL];
+    NSDictionary *ipDic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil]; 
+    NSString *ipStr = nil;
+    if (ipDic && [ipDic[@"code"] integerValue] == 0) { //获取成功
+        ipStr = ipDic[@"data"][@"country_id"];
+    }
+    return (ipStr ? ipStr : @"");
+    
+}
+- (void)loadData
+{
+    
+    
+    TLNetworking *net = [TLNetworking new];
+    net.showView = self.view;
+    net.code = @"801120";
+    net.isLocal = YES;
+    net.ISparametArray = YES;
+    net.parameters[@"status"] = @"1";
+    [net postWithSuccess:^(id responseObject) {
+        self.countrys = [CountryModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
+        NSString *dic = [self getWANIP];
+        
+//
+
+        for (int i = 0; i < self.countrys.count; i++) {
+
+            if ([dic isEqualToString:self.countrys[i].interSimpleCode]) {
+                NSData *data = [NSKeyedArchiver archivedDataWithRootObject:self.countrys[i]];
+
+                [[NSUserDefaults standardUserDefaults] setObject:data forKey:@"chooseModel"];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+//
+//                [self.pic sd_setImageWithURL:[NSURL URLWithString:[self.countrys[i].pic convertImageUrl]] placeholderImage:kImage(@"中国国旗")];
+//
+//
+            }
+            
+            
+        }
+        
+        [self configUpdate];
+
+        
+        //        for (int i = 0; i < self.countrys.count; i++) {
+        //
+        //            CountryModel *model = self.countrys[i];
+        //            NSString *code =[TLUser user].interCode;
+        //            if (code == model.interCode) {
+        //                NSString *url = [model.pic convertImageUrl];
+        //                [self.pic sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:kImage(@"中国国旗")];
+        //                self.PhoneCode.text = [NSString stringWithFormat:@"+%@",[model.interCode substringFromIndex:2]];
+        //            }
+        //        }
+        
+        //        [self.tableView reloadData];
+        //        NSString *str = [NSString stringWithFormat:@"%@", responseObject[@"data"]];
+        //        [[NSNotificationCenter defaultCenter] postNotificationName:@"RealNameAuthResult" object:str];
+        
+    } failure:^(NSError *error) {
+        
+        [self configUpdate];
+
+    }];
+    
+    
+    
+}
+
+
 
 - (void)applicationWillEnterForeground {
 
@@ -124,7 +209,7 @@
 
 - (NSString *)version {
     
-   return [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+   return [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
     
 }
 
@@ -144,7 +229,8 @@
         //获取当前版本号
         NSString *currentVersion = [self version];
 
-        if (![currentVersion isEqualToString:update.version]) {
+       
+        if ([currentVersion integerValue] < [update.version integerValue]) {
 
             if ([update.forceUpdate isEqualToString:@"0"]) {
 

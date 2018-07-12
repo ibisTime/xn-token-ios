@@ -19,6 +19,8 @@
 #import "APICodeMacro.h"
 #import "NSString+Check.h"
 #import "ChooseCountryVc.h"
+#import <SDWebImage/UIImageView+WebCache.h>
+#import "NSString+Extension.h"
 @interface TLUserRegisterVC ()<CLLocationManagerDelegate>
 
 @property (nonatomic,strong) CaptchaView *captchaView;
@@ -45,8 +47,8 @@
 
 @property (nonatomic ,strong) UILabel *titlePhpne;
 @property (nonatomic ,strong) UILabel *PhoneCode;
-@property (nonatomic ,strong) UIButton *accessoryImageView;
-
+@property (nonatomic ,strong) UIImageView *accessoryImageView;
+@property (nonatomic ,strong) UIImageView *pic;
 @end
 
 @implementation TLUserRegisterVC
@@ -66,6 +68,35 @@
     self.title = [LangSwitcher switchLang:@"注册" key:nil];
 
     [self setUpUI];
+    
+    BOOL isChoose =  [[NSUserDefaults standardUserDefaults] boolForKey:@"chooseCoutry"];
+    
+    if (isChoose == YES) {
+        NSData *data   =  [[NSUserDefaults standardUserDefaults] objectForKey:@"chooseModel"];
+        CountryModel *model = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        
+        if (model) {
+            NSString *url = [model.pic convertImageUrl];
+            [self.pic sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:kImage(@"中国国旗")];
+            self.PhoneCode.text = [NSString stringWithFormat:@"+%@",[model.interCode substringFromIndex:2]];
+            
+        }
+    }else{
+        NSData *data   =  [[NSUserDefaults standardUserDefaults] objectForKey:@"chooseModel"];
+        CountryModel *model = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        
+        if (model) {
+            NSString *url = [model.pic convertImageUrl];
+            [self.pic sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:kImage(@"中国国旗")];
+            self.PhoneCode.text = [NSString stringWithFormat:@"+%@",[model.interCode substringFromIndex:2]];
+            
+        }else{
+            self.pic.image = kImage(@"中国国旗");
+            self.PhoneCode.text  = @"+86";
+            
+        }
+        
+    }
 
 }
 - (void)back {
@@ -80,7 +111,7 @@
 
 - (void)setUpUI {
     
-    UIScrollView *contentScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, kStatusBarHeight, kScreenWidth, kScreenHeight)];
+    UIScrollView *contentScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
     contentScrollView.backgroundColor = kWhiteColor;
     self.contentScrollView = contentScrollView;
     [self.view addSubview:contentScrollView];
@@ -92,44 +123,76 @@
     CGFloat titleWidth = 20;
     
     CGFloat btnMargin = 15;
-    UILabel *lab = [UILabel labelWithBackgroundColor:kWhiteColor textColor:kBlackColor font:30];
-    lab.text = [LangSwitcher switchLang:@"注册!" key:nil];
-    [self.contentScrollView addSubview:lab];
-    [lab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(@20);
-        make.left.equalTo(@30);
-
-        
-    }];
+//    UILabel *lab = [UILabel labelWithBackgroundColor:kWhiteColor textColor:kBlackColor font:30];
+//    lab.text = [LangSwitcher switchLang:@"注册!" key:nil];
+//    [self.contentScrollView addSubview:lab];
+//    [lab mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(@20);
+//        make.left.equalTo(@30);
+//
+//
+//    }];
     //账号
-    UILabel *titlePhone = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:14];
-    [self.contentScrollView addSubview:titlePhone];
-    titlePhone.text = [LangSwitcher switchLang:@"中国" key:nil];
-    self.titlePhpne = titlePhone;
-    [titlePhone mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.top.equalTo(lab.mas_bottom).offset(40);
-        make.left.mas_equalTo(20);
-    }];
+//    UILabel *titlePhone = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:14];
+//    [self.contentScrollView addSubview:titlePhone];
+//    titlePhone.text = [LangSwitcher switchLang:@"中国" key:nil];
+//    self.titlePhpne = titlePhone;
+//    [titlePhone mas_makeConstraints:^(MASConstraintMaker *make) {
+//
+//        make.top.equalTo(lab.mas_bottom).offset(40);
+//        make.left.mas_equalTo(20);
+//    }];
    
   
 
-    UILabel *titlePhpne = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:14];
-    [self.contentScrollView addSubview:titlePhpne];
-    titlePhpne.text = [LangSwitcher switchLang:@"手机号" key:nil];
-    titlePhpne.frame = CGRectMake(btnMargin, kHeight(144)+5, w-30, 22);
+//    UILabel *titlePhpne = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:14];
+//    [self.contentScrollView addSubview:titlePhpne];
+//    titlePhpne.text = [LangSwitcher switchLang:@"手机号" key:nil];
+//    titlePhpne.frame = CGRectMake(btnMargin, kHeight(144)+5, w-30, 22);
 
+    UIImageView *pic = [[UIImageView alloc] init];
+    self.pic = pic;
+    pic.userInteractionEnabled = YES;
+    pic.image = kImage(@"中国国旗");
+    UITapGestureRecognizer *tap3 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(chooseCountry)];
+    
+    [pic addGestureRecognizer:tap3];
+    pic.contentMode = UIViewContentModeScaleToFill;
+    pic.frame = CGRectMake(17, kHeight(30), 24, 16);
+    [self.contentScrollView addSubview:pic];
     UILabel *PhoneCode = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:14];
+    PhoneCode.userInteractionEnabled = YES;
     [self.contentScrollView addSubview:PhoneCode];
     PhoneCode.text = [LangSwitcher switchLang:@"+86" key:nil];
     self.PhoneCode = PhoneCode;
+    UITapGestureRecognizer *tap2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(chooseCountry)];
+    
+    [PhoneCode addGestureRecognizer:tap2];
     [PhoneCode mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.top.equalTo(@(titlePhpne.yy+15));
-        make.left.mas_equalTo(20);
+        make.top.equalTo(@(30));
+        make.left.mas_equalTo(45);
     }];
+    
+    self.accessoryImageView = [[UIImageView alloc] init];
+    [self.contentScrollView addSubview:self.accessoryImageView];
+    self.accessoryImageView.image = kImage(@"TriangleNomall");
+    //        [self.accessoryImageView addTarget:self action:@selector(chooseCountry) forControlEvents:UIControlEventTouchUpInside];
+    self.accessoryImageView.userInteractionEnabled = YES;
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(chooseCountry)];
+    [self.accessoryImageView addGestureRecognizer:tap];
+    
+    self.accessoryImageView.contentMode = UIViewContentModeScaleToFill;
+    [self.accessoryImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(PhoneCode.mas_centerY);
+        make.left.mas_equalTo(PhoneCode.mas_right).offset(5);
+        make.width.equalTo(@14);
+        make.height.equalTo(@7);
+        
+    }];
+    
     //账号
-    TLTextField *phoneTf = [[TLTextField alloc] initWithFrame:CGRectMake(60, titlePhpne.yy, w, h) leftTitle:[LangSwitcher switchLang:@"" key:nil] titleWidth:titleWidth placeholder:[LangSwitcher switchLang:@"请输入手机号" key:nil]];
+    TLTextField *phoneTf = [[TLTextField alloc] initWithFrame:CGRectMake(100, 15, w-95, h) leftTitle:[LangSwitcher switchLang:@"" key:nil] titleWidth:titleWidth placeholder:[LangSwitcher switchLang:@"请输入手机号" key:nil]];
     phoneTf.keyboardType = UIKeyboardTypeNumberPad;
     [self.contentScrollView addSubview:phoneTf];
     self.phoneTf = phoneTf;
@@ -168,7 +231,7 @@
     pwdLab.textAlignment = NSTextAlignmentLeft;
     pwdLab.textColor = kTextColor;
     [self.contentScrollView addSubview:pwdLab];
-    TLTextField *pwdTf = [[TLTextField alloc] initWithFrame:CGRectMake(margin, pwdLab.yy + 10, w, h) leftTitle:[LangSwitcher switchLang:@"" key:nil] titleWidth:titleWidth placeholder:[LangSwitcher switchLang:@"请输入密码(不少于6位)" key:nil]];
+    TLTextField *pwdTf = [[TLTextField alloc] initWithFrame:CGRectMake(margin, pwdLab.yy + 10, w, h) leftTitle:[LangSwitcher switchLang:@"" key:nil] titleWidth:titleWidth placeholder:[LangSwitcher switchLang:@"请输入密码" key:nil]];
     pwdTf.secureTextEntry = YES;
     
     [self.contentScrollView addSubview:pwdTf];
@@ -210,7 +273,7 @@
 //    }
     
     //
-    UIButton *confirmBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"确定" key:nil] titleColor:kWhiteColor backgroundColor:kAppCustomMainColor titleFont:16.0 cornerRadius:5];
+    UIButton *confirmBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"注册" key:nil] titleColor:kWhiteColor backgroundColor:kAppCustomMainColor titleFont:16.0 cornerRadius:5];
     
     [confirmBtn addTarget:self action:@selector(goReg) forControlEvents:UIControlEventTouchUpInside];
     
@@ -258,11 +321,11 @@
 //    }];
 //
     
-    self.accessoryImageView = [[UIButton alloc] init];
-    self.accessoryImageView.frame = CGRectMake(kScreenWidth - 40-40, 90, 40, 40);
-    [self.contentScrollView addSubview:self.accessoryImageView];
-    [self.accessoryImageView setImage:kImage(@"更多-灰色") forState:UIControlStateNormal];
-    [self.accessoryImageView addTarget:self action:@selector(chooseCountry) forControlEvents:UIControlEventTouchUpInside];
+//    self.accessoryImageView = [[UIButton alloc] init];
+//    self.accessoryImageView.frame = CGRectMake(kScreenWidth - 40-40, 90, 40, 40);
+//    [self.contentScrollView addSubview:self.accessoryImageView];
+//    [self.accessoryImageView setImage:kImage(@"更多-灰色") forState:UIControlStateNormal];
+//    [self.accessoryImageView addTarget:self action:@selector(chooseCountry) forControlEvents:UIControlEventTouchUpInside];
 //    [self.accessoryImageView mas_makeConstraints:^(MASConstraintMaker *make) {
 //
 //        make.centerY.equalTo(titlePhone.mas_centerY).offset(0);
@@ -294,8 +357,11 @@
     //选择国家 设置区号
     CoinWeakSelf;
     ChooseCountryVc *countryVc = [ChooseCountryVc new];
+     countryVc.interCode = [NSString stringWithFormat:@"00%@",[self.PhoneCode.text substringFromIndex:1]];
     countryVc.selectCountry = ^(CountryModel *model) {
         //更新国家 区号
+        [self.pic sd_setImageWithURL:[NSURL URLWithString:[model.pic convertImageUrl]]];
+
         weakSelf.titlePhpne.text = model.chineseName;
         weakSelf.PhoneCode.text = [NSString stringWithFormat:@"+%@",[model.interCode substringFromIndex:2]];
     } ;

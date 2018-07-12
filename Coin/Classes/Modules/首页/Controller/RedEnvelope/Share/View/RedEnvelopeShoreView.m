@@ -48,27 +48,44 @@
             make.top.left.equalTo(@5);
             make.bottom.right.equalTo(@-5);
         }];
-
-        UILabel *nameLabel = [[UILabel alloc]initWithFrame:CGRectMake(kWidth(35), kHeight(260), kWidth(kScreenWidth - 70), kHeight(20))];
+        UILabel *nameLabel;
+        if (kDevice_Is_iPhoneX) {
+             nameLabel = [[UILabel alloc]initWithFrame:CGRectMake(kWidth(35), kHeight(260), kWidth(kScreenWidth - 70), kHeight(20))];
+        }else{
+            
+            nameLabel = [[UILabel alloc]initWithFrame:CGRectMake(kWidth(35), kHeight(260), kWidth(kScreenWidth - 70-20), kHeight(20))];
+        }
+       
         nameLabel.text = [TLUser user].nickname;
         nameLabel.textAlignment = NSTextAlignmentCenter;
         nameLabel.font = Font(14);
         nameLabel.textColor = kTextColor5;
         [self addSubview:nameLabel];
-
-        UILabel *stateLabel = [[UILabel alloc]initWithFrame:CGRectMake(kWidth(35), kHeight(284), kWidth(kScreenWidth - 70), kHeight(22))];
+        UILabel *stateLabel;
+        if (kDevice_Is_iPhoneX) {
+            stateLabel = [[UILabel alloc]initWithFrame:CGRectMake(kWidth(35), kHeight(284), kWidth(kScreenWidth - 70), kHeight(22))];
+        }else{
+            stateLabel = [[UILabel alloc]initWithFrame:CGRectMake(kWidth(35), kHeight(284), kWidth(kScreenWidth - 70-20), kHeight(22))];
+            
+        }
+       
         stateLabel.text = [LangSwitcher switchLang:@"给您发了一个红包" key:nil];
         stateLabel.textAlignment = NSTextAlignmentCenter;
         stateLabel.font = Font(16);
         stateLabel.textColor = [UIColor whiteColor];
         [self addSubview:stateLabel];
 
-
-        UILabel *detailedLabel = [[UILabel alloc]initWithFrame:CGRectMake(kWidth(35), kHeight(336), kWidth(kScreenWidth - 70), kHeight(33))];
+        UILabel *detailedLabel;
+        if (kDevice_Is_iPhoneX) {
+            detailedLabel = [[UILabel alloc]initWithFrame:CGRectMake(kWidth(35), kHeight(336), kWidth(kScreenWidth - 70), kHeight(33))];
+        }else{
+            
+            detailedLabel = [[UILabel alloc]initWithFrame:CGRectMake(kWidth(35), kHeight(336), kWidth(kScreenWidth - 70), kHeight(33))];
+        }
         detailedLabel.text = self.content;
         self.detailedLabel = detailedLabel;
         detailedLabel.textAlignment = NSTextAlignmentCenter;
-        detailedLabel.font = boldFont(24);
+        detailedLabel.font = boldFont(20);
         detailedLabel.textColor = kTextColor7;
         [self addSubview:detailedLabel];
 

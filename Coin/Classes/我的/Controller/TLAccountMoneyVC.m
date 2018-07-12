@@ -151,6 +151,7 @@
 - (void)userlogin {
     
     [self getMyCurrencyList];
+    self.headerView.cnyAmountLbl.text = @"";
     
 }
 

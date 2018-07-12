@@ -23,6 +23,10 @@
 #import "AccountTf.h"
 #import "ChooseCountryVc.h"
 #import "TLTabBarController.h"
+#import "TLCaptchaView.h"
+#import <SDWebImage/UIImageView+WebCache.h>
+#import "NSString+Extension.h"
+#import "TLUserFindPwdVC.h"
 //腾讯云
 //#import "ChatManager.h"   czy
 //#import "IMModel.h"
@@ -38,9 +42,17 @@
 
 @property (nonatomic, copy) NSString *mobile;
 
-@property (nonatomic ,strong) UIButton *accessoryImageView;
+@property (nonatomic ,strong) UIImageView *accessoryImageView;
 @property (nonatomic ,strong) UILabel *titlePhpne;
 @property (nonatomic ,strong) UILabel *PhoneCode;
+@property (nonatomic ,strong) UIButton *forgetPwdBtn;
+@property (nonatomic ,strong) UILabel *forgetLab;
+@property (nonatomic ,strong) UIButton *codeButton;
+@property (nonatomic ,strong) TLCaptchaView *captchaView;
+@property (nonatomic ,strong)  UIImageView *pic;
+
+@property (nonatomic,strong) NSMutableArray <CountryModel *>*countrys;
+
 @end
 
 @implementation TLUserLoginVC
@@ -48,6 +60,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     self.navigationController.navigationBar.hidden = YES;
     [super viewWillAppear:animated];
+    [self configData];
 }
 
 - (void)viewDidLoad {
@@ -58,11 +71,58 @@
     [self setBarButtonItem];
     
     [self setUpUI];
+    [self changeCodeLogin];
+    
+ 
+//    if ([dic hasPrefix:@"CN"]) {
+//
+//
+//    }else{
+//
+//        self.pic.image = kImage(@"中国国旗");
+//
+//        self.PhoneCode.text = [LangSwitcher switchLang:@"+60" key:nil];
+//
+//    }
+//    NSLog(@"%@",dic);
     //腾讯云登录成功
 //    [self setUpNotification];
     
 }
 
+- (void)configData
+{
+    
+    BOOL isChoose =  [[NSUserDefaults standardUserDefaults] boolForKey:@"chooseCoutry"];
+    
+    if (isChoose == YES) {
+        
+        NSData *data   =  [[NSUserDefaults standardUserDefaults] objectForKey:@"chooseModel"];
+        CountryModel *model = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        
+        if (model) {
+            NSString *url = [model.pic convertImageUrl];
+            [self.pic sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:kImage(@"中国国旗")];
+            self.PhoneCode.text = [NSString stringWithFormat:@"+%@",[model.interCode substringFromIndex:2]];
+            
+        }
+    }else{
+        NSData *data   =  [[NSUserDefaults standardUserDefaults] objectForKey:@"chooseModel"];
+        CountryModel *model = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        if (model) {
+            NSString *url = [model.pic convertImageUrl];
+            [self.pic sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:kImage(@"中国国旗")];
+            self.PhoneCode.text = [NSString stringWithFormat:@"+%@",[model.interCode substringFromIndex:2]];
+            
+        }else{
+            
+            self.pic.image = kImage(@"中国国旗");
+            self.PhoneCode.text  = @"+86";
+            
+        }
+        
+    }
+}
 #pragma mark - Init
 
 - (void)setBarButtonItem {
@@ -157,32 +217,68 @@
         make.centerY.equalTo(registBtn.mas_centerY);
     }];
     
-    UILabel *titleLab = [UILabel labelWithBackgroundColor:kClearColor textColor:kBlackColor font:30];
+    UILabel *titleLab = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:15];
     [bgView addSubview:titleLab];
-    titleLab.text = [LangSwitcher switchLang:@"欢迎回来!" key:nil];
+    titleLab.text = [LangSwitcher switchLang:@"手机号" key:nil];
     [titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.top.equalTo(@30);
+        make.top.equalTo(@50);
         make.left.mas_equalTo(20);
     }];
     //账号
-    UILabel *titlePhpne = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:14];
-    [bgView addSubview:titlePhpne];
-    titlePhpne.text = [LangSwitcher switchLang:@"中国" key:nil];
-    self.titlePhpne = titlePhpne;
-    [titlePhpne mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.top.equalTo(titleLab.mas_bottom).offset(40);
-        make.left.mas_equalTo(20);
-    }];
+//    UILabel *titlePhpne = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:14];
+//    [bgView addSubview:titlePhpne];
+//    titlePhpne.text = [LangSwitcher switchLang:@"中国" key:nil];
+//    self.titlePhpne = titlePhpne;
+//    [titlePhpne mas_makeConstraints:^(MASConstraintMaker *make) {
+//
+//        make.top.equalTo(titleLab.mas_bottom).offset(40);
+//        make.left.mas_equalTo(20);
+//    }];
+    
+    
+    UIImageView *pic = [[UIImageView alloc] init];
+    self.pic = pic;
+    pic.userInteractionEnabled = YES;
+//    pic.image = kImage(@"中国国旗");
+   
+
+    UITapGestureRecognizer *tap3 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(chooseCountry)];
+    
+    [pic addGestureRecognizer:tap3];
+    pic.contentMode = UIViewContentModeScaleToFill;
+    pic.frame = CGRectMake(17, kHeight(114-40)+17.5, 24, 16);
+    [bgView addSubview:pic];
     UILabel *PhoneCode = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:14];
+    PhoneCode.userInteractionEnabled = YES;
     [bgView addSubview:PhoneCode];
-    PhoneCode.text = [LangSwitcher switchLang:@"+86" key:nil];
+//    PhoneCode.text = [LangSwitcher switchLang:@"+86" key:nil];
+    UITapGestureRecognizer *tap2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(chooseCountry)];
+    [PhoneCode addGestureRecognizer:tap2];
+    PhoneCode.textAlignment = NSTextAlignmentRight;
     self.PhoneCode = PhoneCode;
-    PhoneCode.frame = CGRectMake(15, kHeight(134), 45, h);
-    TLTextField *phone = [[TLTextField alloc] initWithFrame:CGRectMake(60, kHeight(134), w, h) leftTitle:[LangSwitcher switchLang:@"" key:nil] titleWidth:0 placeholder:[LangSwitcher switchLang:@"请输入手机号" key:nil]];
+    PhoneCode.frame = CGRectMake(40, kHeight(114-40), 35, h);
+    
+        self.accessoryImageView = [[UIImageView alloc] init];
+        [bgView addSubview:self.accessoryImageView];
+        self.accessoryImageView.image = kImage(@"TriangleNomall");
+//        [self.accessoryImageView addTarget:self action:@selector(chooseCountry) forControlEvents:UIControlEventTouchUpInside];
+    self.accessoryImageView.userInteractionEnabled = YES;
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(chooseCountry)];
+    [self.accessoryImageView addGestureRecognizer:tap];
+    
+    self.accessoryImageView.contentMode = UIViewContentModeScaleToFill;
+        [self.accessoryImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.equalTo(PhoneCode.mas_centerY);
+            make.left.mas_equalTo(PhoneCode.mas_right).offset(5);
+            make.width.equalTo(@14);
+            make.height.equalTo(@7);
+
+        }];
+//      TLTextField *pwdTf = [[TLTextField alloc] initWithFrame:CGRectMake(margin, pwdLab.yy + 10, w, h) leftTitle:[LangSwitcher switchLang:@"" key:nil] titleWidth:titleWidth placeholder:[LangSwitcher switchLang:@"请输入密码(不少于6位)" key:nil]];
+    TLTextField *phone = [[TLTextField alloc] initWithFrame:CGRectMake(100, kHeight(114-40), w-140, h) leftTitle:[LangSwitcher switchLang:@"" key:nil] titleWidth:0 placeholder:[LangSwitcher switchLang:@"请输入手机号" key:nil]];
     phone.keyboardType = UIKeyboardTypeNumberPad;
-    AccountTf *phoneTf = [[AccountTf alloc] initWithFrame:CGRectMake(0, kHeight(134), w-40, h)];
+//    AccountTf *phoneTf = [[AccountTf alloc] initWithFrame:CGRectMake(0, kHeight(114-40), w-40, h)];
 //    phoneTf.leftIconView.image = [UIImage imageNamed:@"手机"];
     
 //    phoneTf.placeHolder = [LangSwitcher switchLang:@"请输入手机号码" key:nil];
@@ -190,26 +286,17 @@
     self.phoneTf = phone;
     phone.keyboardType = UIKeyboardTypeNumberPad;
 
-    self.accessoryImageView = [[UIButton alloc] init];
-    [bgView addSubview:self.accessoryImageView];
-    [self.accessoryImageView setImage:kImage(@"更多-灰色") forState:UIControlStateNormal];
-    [self.accessoryImageView addTarget:self action:@selector(chooseCountry) forControlEvents:UIControlEventTouchUpInside];
-    [self.accessoryImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.centerY.equalTo(titlePhpne.mas_centerY).offset(0);
-        make.right.mas_equalTo(-20);
-        make.width.height.equalTo(@40);
-    }];
+
     
     
     UIView *lineView = [[UIView alloc] init];
     lineView.backgroundColor = kLineColor;
     [bgView addSubview:lineView];
-    lineView.frame = CGRectMake(20, phoneTf.yy, w-40-40, 2);
+    lineView.frame = CGRectMake(20, phone.yy, w-40-40, 2);
     
     
     //密码
-    AccountTf *pwdTf = [[AccountTf alloc] initWithFrame:CGRectMake(40, phoneTf.yy + 3, w-40, h)];
+    AccountTf *pwdTf = [[AccountTf alloc] initWithFrame:CGRectMake(15, phone.yy + 3, w-180, h)];
     pwdTf.secureTextEntry = YES;
 //    pwdTf.leftIconView.image = [UIImage imageNamed:@"密码"];
     pwdTf.placeHolder = [LangSwitcher switchLang:@"请输入密码" key:nil];
@@ -219,6 +306,38 @@
     line.backgroundColor = kLineColor;
     [bgView addSubview:line];
     line.frame = CGRectMake(20, pwdTf.yy, w-40-40, 2);
+    
+    UILabel *forgetLab = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor2 font:14];
+    forgetLab.textAlignment = NSTextAlignmentCenter;
+    [bgView addSubview:forgetLab];
+    forgetLab.userInteractionEnabled = YES;
+    forgetLab.frame = CGRectMake(w-180, phone.yy, 160, h);
+    forgetLab.text = [LangSwitcher switchLang:@"忘记密码?" key:nil];
+    self.forgetLab = forgetLab;
+    
+    UITapGestureRecognizer *tap1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(findPwd)];
+    
+    [forgetLab addGestureRecognizer:tap1];
+    //验证码
+    TLCaptchaView *captchaView = [[TLCaptchaView alloc] initWithFrame:CGRectMake(-70, phone.yy + 1, w-30+50, phone.height)];
+    captchaView.captchaTf.leftLbl.text = @"";
+    captchaView.captchaTf.leftLbl.frame = CGRectZero;
+    captchaView.captchaBtn.frame = CGRectMake(0, 7, 85, h - 15);
+    [bgView addSubview:captchaView];
+    self.captchaView = captchaView;
+    captchaView.hidden = YES;
+    [captchaView.captchaBtn addTarget:self action:@selector(sendCaptcha) forControlEvents:UIControlEventTouchUpInside];
+//    UIButton *codeButton = [UIButton buttonWithTitle:@"获取验证码" titleColor:kAppCustomMainColor backgroundColor:kClearColor titleFont:14 cornerRadius:3.0];
+//    self.codeButton = codeButton;
+//    codeButton.layer.borderWidth = 1.0;
+//    codeButton.layer.borderColor = kAppCustomMainColor.CGColor;
+////    [bgView addSubview:codeButton];
+//    codeButton.frame = CGRectMake(w-180, phone.yy+7, 120, h-10);;
+//    codeButton.hidden = YES;
+//    
+//    [codeButton addTarget:self action:@selector(getCode) forControlEvents:UIControlEventTouchUpInside];
+//    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(findPwd)];
+//    [forgetLab addGestureRecognizer:tap];
     
 //    for (int i = 0; i < 2; i++) {
 //
@@ -250,10 +369,11 @@
     }];
     
     //找回密码
-    UIButton *forgetPwdBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"忘记密码?" key:nil] titleColor:kTextColor2 backgroundColor:kClearColor titleFont:14.0];
-    
+    UIButton *forgetPwdBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"验证码快捷登录" key:nil] titleColor:kAppCustomMainColor backgroundColor:kClearColor titleFont:14.0];
+    self.forgetPwdBtn = forgetPwdBtn;
+     [forgetPwdBtn setTitle:[LangSwitcher switchLang:@"账号密码登录" key:nil] forState:UIControlStateSelected];
     forgetPwdBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
-    [forgetPwdBtn addTarget:self action:@selector(findPwd) forControlEvents:UIControlEventTouchUpInside];
+    [forgetPwdBtn addTarget:self action:@selector(changeCodeLogin) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:forgetPwdBtn];
     
     [forgetPwdBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -263,6 +383,48 @@
 
     }];
     
+}
+
+- (void)sendCaptcha
+{
+    if (![self.phoneTf.text isPhoneNum]) {
+        
+        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入正确的手机号" key:nil]];
+        
+        return;
+    }
+    
+    
+    
+        //发送验证码
+        TLNetworking *http = [TLNetworking new];
+        http.showView = self.view;
+        http.code = CAPTCHA_CODE;
+        http.parameters[@"bizType"] = @"805044";
+        http.parameters[@"mobile"] = self.phoneTf.text;
+        http.parameters[@"interCode"] = [NSString stringWithFormat:@"00%@",[self.PhoneCode.text substringFromIndex:1]];;
+        
+        [http postWithSuccess:^(id responseObject) {
+            
+            [TLAlert alertWithSucces:[LangSwitcher switchLang:@"验证码已发送,请注意查收" key:nil]];
+            
+            [self.captchaView.captchaBtn begin];
+            
+        } failure:^(NSError *error) {
+            
+        }];
+        
+    
+    
+}
+- (void)changeCodeLogin
+{
+    self.forgetPwdBtn.selected = !self.forgetPwdBtn.selected;
+   
+    self.forgetLab.hidden = !self.forgetLab.hidden;
+    self.codeButton.hidden = !self.codeButton.hidden;
+    self.pwdTf.hidden = !self.pwdTf.hidden;
+    self.captchaView.hidden = !self.captchaView.hidden;
 }
 
 //- (void)setUpNotification {
@@ -280,11 +442,14 @@
     //选择国家 设置区号
     CoinWeakSelf;
     ChooseCountryVc *countryVc = [ChooseCountryVc new];
+    countryVc.interCode = [NSString stringWithFormat:@"00%@",[self.PhoneCode.text substringFromIndex:1]];
     countryVc.selectCountry = ^(CountryModel *model) {
         //更新国家 区号
+        [self.pic sd_setImageWithURL:[NSURL URLWithString:[model.pic convertImageUrl]]];
+        
         if ([LangSwitcher currentLangType] == LangTypeSimple) {
             weakSelf.titlePhpne.text = model.chineseName;
-
+//
         }else if ([LangSwitcher currentLangType] == LangTypeEnglish){
 
             weakSelf.titlePhpne.text = model.interName;
@@ -330,7 +495,7 @@
 
 - (void)findPwd {
     
-    TLUserForgetPwdVC *vc = [[TLUserForgetPwdVC alloc] init];
+    TLUserFindPwdVC *vc = [[TLUserFindPwdVC alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
     
 }
@@ -346,33 +511,50 @@
 
 - (void)goLogin {
     
-    if (![self.phoneTf.text isPhoneNum]) {
+    if (![self.phoneTf.text isPhoneNum] ) {
         
         [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入正确的手机号" key:nil]];
         
         return;
     }
     
-    if (!(self.pwdTf.text &&self.pwdTf.text.length > 5)) {
+    if (!(self.pwdTf.text &&self.pwdTf.text.length > 5) && self.pwdTf.hidden == NO) {
         
         [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入6位以上密码" key:nil]];
         return;
     }
-    if (!self.titlePhpne.text || !self.PhoneCode.text) {
+    if (!self.PhoneCode.text) {
         [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请选择国家" key:nil]];
 
+        return;
+    }
+    
+    if (![self.captchaView.captchaTf.text isPhoneNum] &&self.captchaView.hidden == NO) {
+        
+        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入验证码" key:nil]];
         return;
     }
     [self.view endEditing:YES];
 
     TLNetworking *http = [TLNetworking new];
     http.showView = self.view;
-    http.code = USER_LOGIN_CODE;
-    
+    if (self.captchaView.hidden == NO) {
+        //验证码登录
+        http.code = @"805044";
+
+    http.parameters[@"mobile"] = self.phoneTf.text;
+    http.parameters[@"interCode"] = [NSString stringWithFormat:@"00%@",[self.PhoneCode.text substringFromIndex:1]];
+    http.parameters[@"smsCaptcha"] = self.captchaView.captchaTf.text;
+
+        
+    }else{
+        http.code = USER_LOGIN_CODE;
+
     http.parameters[@"loginName"] = self.phoneTf.text;
+      http.parameters[@"interCode"] = [NSString stringWithFormat:@"00%@",[self.PhoneCode.text substringFromIndex:1]];
     http.parameters[@"loginPwd"] = self.pwdTf.text;
     http.parameters[@"kind"] = APP_KIND;
-
+    }
     [http postWithSuccess:^(id responseObject) {
         
         [self requesUserInfoWithResponseObject:responseObject];
@@ -472,5 +654,8 @@
     
     [self.view endEditing:YES];
 }
+
+
+
 
 @end

@@ -1,12 +1,12 @@
 //
-//  TLUserForgetPwdVC.m
-//  ZHBusiness
+//  TLUserFindPwdVC.m
+//  Coin
 //
-//  Created by  tianlei on 2016/12/12.
-//  Copyright © 2016年  tianlei. All rights reserved.
+//  Created by shaojianfei on 2018/7/12.
+//  Copyright © 2018年 chengdai. All rights reserved.
 //
 
-#import "TLUserForgetPwdVC.h"
+#import "TLUserFindPwdVC.h"
 #import "CaptchaView.h"
 #import "NSString+Check.h"
 #import "APICodeMacro.h"
@@ -15,8 +15,7 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "NSString+Extension.h"
 #import "CountryModel.h"
-@interface TLUserForgetPwdVC ()
-
+@interface TLUserFindPwdVC ()
 @property (nonatomic,strong) TLTextField *phoneTf;
 
 @property (nonatomic,strong) TLTextField *pwdTf;
@@ -30,33 +29,58 @@
 @property (nonatomic ,strong) UIImageView *pic;
 
 @property (nonatomic,strong) NSMutableArray <CountryModel *>*countrys;
-
 @end
 
-@implementation TLUserForgetPwdVC
+@implementation TLUserFindPwdVC
+
 -(void)viewWillAppear:(BOOL)animated
 {
     
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.hidden = NO;
-
+    BOOL isChoose =  [[NSUserDefaults standardUserDefaults] boolForKey:@"chooseCoutry"];
+    
+    if (isChoose == YES) {
+        
+        NSData *data   =  [[NSUserDefaults standardUserDefaults] objectForKey:@"chooseModel"];
+        CountryModel *model = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        if (model) {
+            NSString *url = [model.pic convertImageUrl];
+            [self.pic sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:kImage(@"中国国旗")];
+            self.PhoneCode.text = [NSString stringWithFormat:@"+%@",[model.interCode substringFromIndex:2]];
+            
+        }
+    }else{
+        NSData *data   =  [[NSUserDefaults standardUserDefaults] objectForKey:@"chooseModel"];
+        CountryModel *model = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        if (model) {
+            NSString *url = [model.pic convertImageUrl];
+            [self.pic sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:kImage(@"中国国旗")];
+            self.PhoneCode.text = [NSString stringWithFormat:@"+%@",[model.interCode substringFromIndex:2]];
+            
+        }else{
+            
+            self.pic.image = kImage(@"中国国旗");
+            self.PhoneCode.text  = @"+86";
+        }
+        
+    }
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     if ([TLUser user].loginPwdFlag == 1) {
         self.title = [LangSwitcher switchLang:@"修改登录密码" key:nil];
-
+        
     }else{
         self.title = [LangSwitcher switchLang:@"设置登录密码" key:nil];
-
-        }
+        
+    }
     
     self.view.backgroundColor = kWhiteColor;
     
     [self initSubviews];
-    [self loadData];
-    
+   
 }
 - (void)loadData
 {
@@ -85,7 +109,7 @@
             }
         }
         
-//        [self.tableView reloadData];
+        //        [self.tableView reloadData];
         //        NSString *str = [NSString stringWithFormat:@"%@", responseObject[@"data"]];
         //        [[NSNotificationCenter defaultCenter] postNotificationName:@"RealNameAuthResult" object:str];
         
@@ -99,7 +123,7 @@
 }
 
 - (void)initSubviews {
-
+    
     self.view.backgroundColor = kWhiteColor;
     
     CGFloat margin = ACCOUNT_MARGIN;
@@ -107,51 +131,51 @@
     CGFloat h = ACCOUNT_HEIGHT;
     
     CGFloat btnMargin = 15;
-//    UILabel *lab = [UILabel labelWithBackgroundColor:kWhiteColor textColor:kBlackColor font:30];
-//    lab.text = @"找回密码!";
-//    [self.view addSubview:lab];
-//    [lab mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.equalTo(@40);
-//        make.left.equalTo(@30);
-//
-//
-//    }];
+    //    UILabel *lab = [UILabel labelWithBackgroundColor:kWhiteColor textColor:kBlackColor font:30];
+    //    lab.text = @"找回密码!";
+    //    [self.view addSubview:lab];
+    //    [lab mas_makeConstraints:^(MASConstraintMaker *make) {
+    //        make.top.equalTo(@40);
+    //        make.left.equalTo(@30);
+    //
+    //
+    //    }];
     //账号
-//    UILabel *titlePhone = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:14];
-//    [self.view addSubview:titlePhone];
-//    titlePhone.text = [LangSwitcher switchLang:@"中国" key:nil];
-//    self.titlePhpne = titlePhone;
-//    [titlePhone mas_makeConstraints:^(MASConstraintMaker *make) {
-//
-//        make.top.equalTo(lab.mas_bottom).offset(20);
-//        make.left.mas_equalTo(20);
-//    }];
-//    //账号
-//    UILabel *sureLab = [UILabel labelWithTitle:@"手机号" frame:CGRectMake(20, kHeight(122), w, 22)];
-//    sureLab.font = [UIFont systemFontOfSize:14];
-//    sureLab.textAlignment = NSTextAlignmentLeft;
-//    sureLab.textColor = kTextColor;
-//    [self.view addSubview:sureLab];
-//
+    //    UILabel *titlePhone = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:14];
+    //    [self.view addSubview:titlePhone];
+    //    titlePhone.text = [LangSwitcher switchLang:@"中国" key:nil];
+    //    self.titlePhpne = titlePhone;
+    //    [titlePhone mas_makeConstraints:^(MASConstraintMaker *make) {
+    //
+    //        make.top.equalTo(lab.mas_bottom).offset(20);
+    //        make.left.mas_equalTo(20);
+    //    }];
+    //    //账号
+    //    UILabel *sureLab = [UILabel labelWithTitle:@"手机号" frame:CGRectMake(20, kHeight(122), w, 22)];
+    //    sureLab.font = [UIFont systemFontOfSize:14];
+    //    sureLab.textAlignment = NSTextAlignmentLeft;
+    //    sureLab.textColor = kTextColor;
+    //    [self.view addSubview:sureLab];
+    //
     
     
     UIImageView *pic = [[UIImageView alloc] init];
     self.pic = pic;
     pic.image = kImage(@"中国国旗");
-//    pic.userInteractionEnabled = YES;
-  
-    //    UITapGestureRecognizer *tap3 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(chooseCountry)];
-//
-//    [pic addGestureRecognizer:tap3];
+        pic.userInteractionEnabled = YES;
+    
+        UITapGestureRecognizer *tap3 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(chooseCountry)];
+    
+        [pic addGestureRecognizer:tap3];
     pic.contentMode = UIViewContentModeScaleToFill;
     pic.frame = CGRectMake(17, kHeight(30), 24, 16);
     [self.view addSubview:pic];
     UILabel *PhoneCode = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:14];
     [self.view addSubview:PhoneCode];
-//    PhoneCode.userInteractionEnabled = YES;
-//    UITapGestureRecognizer *tap2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(chooseCountry)];
-//
-//    [PhoneCode addGestureRecognizer:tap2];
+        PhoneCode.userInteractionEnabled = YES;
+        UITapGestureRecognizer *tap2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(chooseCountry)];
+    
+        [PhoneCode addGestureRecognizer:tap2];
     PhoneCode.text = [LangSwitcher switchLang:@"+86" key:nil];
     self.PhoneCode = PhoneCode;
     [PhoneCode mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -160,22 +184,22 @@
         make.left.mas_equalTo(45);
     }];
     
-//    self.accessoryImageView = [[UIImageView alloc] init];
-//    [self.view addSubview:self.accessoryImageView];
-//    self.accessoryImageView.image = kImage(@"TriangleNomall");
-//    //        [self.accessoryImageView addTarget:self action:@selector(chooseCountry) forControlEvents:UIControlEventTouchUpInside];
-////    self.accessoryImageView.userInteractionEnabled = YES;
-////    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(chooseCountry)];
-////    [self.accessoryImageView addGestureRecognizer:tap];
-//
-//    self.accessoryImageView.contentMode = UIViewContentModeScaleToFill;
-//    [self.accessoryImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.centerY.equalTo(PhoneCode.mas_centerY);
-//        make.left.mas_equalTo(PhoneCode.mas_right).offset(5);
-//        make.width.equalTo(@14);
-//        make.height.equalTo(@7);
-//
-//    }];
+    self.accessoryImageView = [[UIImageView alloc] init];
+    [self.view addSubview:self.accessoryImageView];
+    self.accessoryImageView.image = kImage(@"TriangleNomall");
+//    [self.accessoryImageView addTarget:self action:@selector(chooseCountry) forControlEvents:UIControlEventTouchUpInside];
+        self.accessoryImageView.userInteractionEnabled = YES;
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(chooseCountry)];
+        [self.accessoryImageView addGestureRecognizer:tap];
+    
+    self.accessoryImageView.contentMode = UIViewContentModeScaleToFill;
+    [self.accessoryImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(PhoneCode.mas_centerY);
+        make.left.mas_equalTo(PhoneCode.mas_right).offset(5);
+        make.width.equalTo(@14);
+        make.height.equalTo(@7);
+        
+    }];
     TLTextField *phoneTf = [[TLTextField alloc] initWithFrame:CGRectMake(100, 15, w-95, h) leftTitle:[LangSwitcher switchLang:@"" key:nil] titleWidth:20 placeholder:[LangSwitcher switchLang:@"请输入手机号" key:nil]];
     phoneTf.keyboardType = UIKeyboardTypeNumberPad;
     [self.view addSubview:phoneTf];
@@ -183,7 +207,6 @@
     if ([TLUser user].isLogin) {
         phoneTf.text = [TLUser user].mobile;
     }
-    phoneTf.enabled = NO;
     UIView *phone = [[UIView alloc] init];
     [self.view addSubview:phone];
     phone.backgroundColor = kLineColor;
@@ -234,35 +257,35 @@
     [self.view addSubview:phone4];
     phone4.backgroundColor = kLineColor;
     phone4.frame = CGRectMake(btnMargin, rePwdTf.yy, w-30, 1);
-//    for (int i = 0; i < 2; i++) {
-//
-//        UIView *line = [[UIView alloc] init];
-//
-//        line.backgroundColor = [UIColor lineColor];
-//
-//        [self.view addSubview:line];
-//        [line mas_makeConstraints:^(MASConstraintMaker *make) {
-//
-//            make.left.mas_equalTo(margin);
-//            make.right.mas_equalTo(0);
-//            make.height.mas_equalTo(0.5);
-//            make.top.mas_equalTo(10 + h + i*(2*h + 10 + 1));
-//
-//        }];
-//    }
+    //    for (int i = 0; i < 2; i++) {
+    //
+    //        UIView *line = [[UIView alloc] init];
+    //
+    //        line.backgroundColor = [UIColor lineColor];
+    //
+    //        [self.view addSubview:line];
+    //        [line mas_makeConstraints:^(MASConstraintMaker *make) {
+    //
+    //            make.left.mas_equalTo(margin);
+    //            make.right.mas_equalTo(0);
+    //            make.height.mas_equalTo(0.5);
+    //            make.top.mas_equalTo(10 + h + i*(2*h + 10 + 1));
+    //
+    //        }];
+    //    }
     
     //
-//    self.accessoryImageView = [[UIButton alloc] init];
-////    self.accessoryImageView.frame = CGRectMake(kScreenWidth - 40-40, 90, 40, 40);
-//    [self.view addSubview:self.accessoryImageView];
-//    [self.accessoryImageView setImage:kImage(@"更多-灰色") forState:UIControlStateNormal];
-//    [self.accessoryImageView addTarget:self action:@selector(chooseCountry) forControlEvents:UIControlEventTouchUpInside];
-//        [self.accessoryImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-//
-//            make.centerY.equalTo(titlePhone.mas_centerY).offset(0);
-//            make.right.mas_equalTo(-20);
-//            make.width.height.equalTo(@40);
-//        }];
+    //    self.accessoryImageView = [[UIButton alloc] init];
+    ////    self.accessoryImageView.frame = CGRectMake(kScreenWidth - 40-40, 90, 40, 40);
+    //    [self.view addSubview:self.accessoryImageView];
+    //    [self.accessoryImageView setImage:kImage(@"更多-灰色") forState:UIControlStateNormal];
+    //    [self.accessoryImageView addTarget:self action:@selector(chooseCountry) forControlEvents:UIControlEventTouchUpInside];
+    //        [self.accessoryImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+    //
+    //            make.centerY.equalTo(titlePhone.mas_centerY).offset(0);
+    //            make.right.mas_equalTo(-20);
+    //            make.width.height.equalTo(@40);
+    //        }];
     UIButton *confirmBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"确认" key:nil] titleColor:kWhiteColor backgroundColor:kAppCustomMainColor titleFont:16.0 cornerRadius:5];
     
     [confirmBtn addTarget:self action:@selector(changePwd) forControlEvents:UIControlEventTouchUpInside];
@@ -283,6 +306,7 @@
     //选择国家 设置区号
     CoinWeakSelf;
     ChooseCountryVc *countryVc = [ChooseCountryVc new];
+     countryVc.interCode = [NSString stringWithFormat:@"00%@",[self.PhoneCode.text substringFromIndex:1]];
     countryVc.selectCountry = ^(CountryModel *model) {
         //更新国家 区号
         weakSelf.titlePhpne.text = model.chineseName;
@@ -307,7 +331,7 @@
     http.parameters[@"bizType"] = USER_FIND_PWD_CODE;
     http.parameters[@"mobile"] = self.phoneTf.text;
     http.parameters[@"interCode"] = [NSString stringWithFormat:@"00%@",[self.PhoneCode.text substringFromIndex:1]];
-
+    
     [http postWithSuccess:^(id responseObject) {
         
         [TLAlert alertWithSucces:[LangSwitcher switchLang:@"验证码已发送,请注意查收" key:nil]];
@@ -350,7 +374,7 @@
     }
     
     [self.view endEditing:YES];
-
+    
     TLNetworking *http = [TLNetworking new];
     http.showView = self.view;
     http.code = USER_FIND_PWD_CODE;
@@ -359,20 +383,20 @@
     http.parameters[@"newLoginPwd"] = self.pwdTf.text;
     http.parameters[@"kind"] = APP_KIND;
     http.parameters[@"interCode"] = [NSString stringWithFormat:@"00%@",[self.PhoneCode.text substringFromIndex:1]];
-
+    
     [http postWithSuccess:^(id responseObject) {
         if ([TLUser user].loginPwdFlag  == 1) {
             [TLAlert alertWithSucces:[LangSwitcher switchLang:@"修改成功" key:nil]];
-
+            
         }else{
             [TLAlert alertWithSucces:[LangSwitcher switchLang:@"设置成功" key:nil]];
-
+            
             
         }
         [[TLUser user] updateUserInfo];
         
         //保存用户账号和密码
-//        [[TLUser user] saveUserName:self.phoneTf.text pwd:self.pwdTf.text];
+        //        [[TLUser user] saveUserName:self.phoneTf.text pwd:self.pwdTf.text];
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             
@@ -391,6 +415,7 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 
 
 @end

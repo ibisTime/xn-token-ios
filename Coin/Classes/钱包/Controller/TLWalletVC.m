@@ -311,13 +311,17 @@
 - (void)initTableView {
     self.leftButton = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"闪兑" key:nil] titleColor:kHexColor(@"#333333") backgroundColor:kWhiteColor titleFont:14.0];
     [self.leftButton setImage:kImage(@"闪兑") forState:UIControlStateNormal];
+//    self.leftButton.layer.borderWidth = 0.2;
+//    self.leftButton.layer.borderColor = kHexColor(@"#ABC0D9").CGColor;
     self.rightButton = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"一键划转" key:nil] titleColor:kHexColor(@"#333333") backgroundColor:kWhiteColor titleFont:14.0];
     [self.rightButton setImage:kImage(@"一键划转") forState:UIControlStateNormal];
     [self.leftButton addTarget:self action:@selector(fast) forControlEvents:UIControlEventTouchUpInside];
       [self.rightButton addTarget:self action:@selector(transNext) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.leftButton];
     [self.view addSubview:self.rightButton];
-    [self.leftButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 0)];
+//    self.rightButton.layer.borderWidth = 0.2;
+//    self.rightButton.layer.borderColor = kHexColor(@"#ABC0D9").CGColor;
+    [self.rightButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 0)];
     
     [self.leftButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view.mas_left).offset(15);
@@ -362,6 +366,11 @@
     if (tager == 1) {
         [self.leftButton setImage:kImage(@"闪兑") forState:UIControlStateNormal];
         [self.rightButton setImage:kImage(@"一键划转") forState:UIControlStateNormal];
+//        self.leftButton.layer.borderWidth = 0.5;
+//
+//        self.leftButton.layer.borderColor = kHexColor(@"#ABC0D9").CGColor;
+//        self.rightButton.layer.borderWidth = 0.5;
+//        self.rightButton.layer.borderColor = kHexColor(@"#ABC0D9").CGColor;
         CGFloat f = self.isClear == YES ?318 : 338;
 
 //        [UIView animateWithDuration:0.5 animations:^{
@@ -412,6 +421,12 @@
         if (Mnemonics.length > 0) {
             [self.leftButton setImage:kImage(@"闪兑-秘钥") forState:UIControlStateNormal];
             [self.rightButton setImage:kImage(@"划转-秘钥") forState:UIControlStateNormal];
+            
+//            self.leftButton.layer.borderWidth = 0.5;
+//            self.leftButton.layer.borderColor = kHexColor(@"#D1B3AB").CGColor;
+//            self.rightButton.layer.borderWidth = 0.5;
+//            self.rightButton.layer.borderColor = kHexColor(@"#D1B3AB").CGColor;
+            
             CGFloat f = self.isClear == YES ?318 : 338;
             
 //            [UIView animateWithDuration:0.5 animations:^{
@@ -517,7 +532,7 @@
 - (void)addNotification {
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userlogin) name:kUserLoginNotification object:nil];
-    
+     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userloginOut) name:kUserLoginOutNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(withDrawCoinSuccess) name:kWithDrawCoinSuccess object:nil];
 }
 
@@ -528,7 +543,7 @@
     TLDataBase *data = [TLDataBase sharedManager];
 
     if ([data.dataBase open]) {
-        //            [db executeUpdate:@"create table if not exists LocalWallet(id INTEGER PRIMARY KEY AUTOINCREMENT,walletId text, symbol text, type text ,status text,cname text,unit text,pic1 text,withdrawFeeString text,withfrawFee text,orderNo text,ename text,icon text,pic2 text,pic3 text,address text,IsSelect INTEGER,next text)"];
+      
         NSString *sql = [NSString stringWithFormat:@"SELECT next from LocalWallet lo, THAWallet th where lo.walletId = th.walletId  and th.userId = '%@'",[TLUser user].userId];
         FMResultSet *set = [data.dataBase executeQuery:sql];
         while ([set next]) {
@@ -539,6 +554,61 @@
     }
     [data.dataBase close];
     if ([totalcount integerValue] == self.coins.count) {
+        //判断是否新加并且删除了币种
+        NSMutableArray *symbolArr = [NSMutableArray array];
+        NSString *totalcount;
+        TLDataBase *data = [TLDataBase sharedManager];
+        
+        if ([data.dataBase open]) {
+            
+            NSString *sql = [NSString stringWithFormat:@"SELECT symbol from LocalWallet lo, THAWallet th where lo.walletId = th.walletId  and th.userId = '%@'",[TLUser user].userId];
+            FMResultSet *set = [data.dataBase executeQuery:sql];
+            while ([set next]) {
+                
+                totalcount = [set stringForColumn:@"symbol"];
+                [symbolArr addObject:totalcount];
+            }
+            [set close];
+        }
+        [data.dataBase close];
+        
+        for (int i = 0; i < self.coins.count; i++) {
+            
+//            for (NSString *symbol in symbolArr) {
+                if ([symbolArr containsObject:self.coins[i].symbol]) {
+                    
+                }else{
+                    //存在不同的币种 更新本地币种表
+                    TLDataBase *db = [TLDataBase sharedManager];
+                    
+                    if ([db.dataBase open]) {
+                        NSString *Sql2 =[NSString stringWithFormat:@"delete from LocalWallet WHERE walletId = (SELECT walletId from THAWallet where userId='%@')",[TLUser user].userId];
+                        
+                        BOOL sucess2  = [db.dataBase executeUpdate:Sql2];
+                        NSLog(@"更新自选表%d",sucess2);
+                    }
+                    [db.dataBase close];
+                    
+                    
+                    for (int i = 0; i < self.coins.count; i++) {
+                        
+                        CoinModel *model = self.coins[i];
+                        TLDataBase *dateBase = [TLDataBase sharedManager];
+                        if ([dateBase.dataBase open]) {
+                            //            [db executeUpdate:@"create table if not exists LocalWallet(id INTEGER PRIMARY KEY AUTOINCREMENT,walletId text, symbol text, type text ,status text,cname text,unit text,pic1 text,withdrawFeeString text,withfrawFee text,orderNo text,ename text,icon text,pic2 text,pic3 text,address text,IsSelect INTEGER,next text)"];
+                            BOOL sucess = [dateBase.dataBase executeUpdate:@"INSERT INTO  LocalWallet(walletId,symbol,type,status,cname,unit,pic1,withdrawFeeString,withfrawFee,orderNo,ename,icon,pic2,pic3,address,IsSelect,next) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",model.walletId,model.symbol,model.type,model.status,model.cname,model.unit,model.pic1,model.withdrawFeeString,model.withfrawFee,model.orderNo,model.ename,model.icon,model.pic2,model.pic3,model.address,[NSNumber numberWithBool:YES],[NSString stringWithFormat:@"%ld",self.coins.count]];
+                            
+                            NSLog(@"插入币种表%d",sucess);
+                        }
+                        [dateBase.dataBase close];
+                    }
+                    
+                    
+                }
+//            }
+          
+        }
+        
         return;
     }
     if ([totalcount integerValue] > 0) {
@@ -603,10 +673,10 @@
                 [shouldDisplayCoins addObject:currencyModel];
                 //                }
                 //查询总资产
-                [weakSelf queryCenterTotalAmount];
-                [weakSelf queryMyAmount];
+               
             }];
-            
+            [weakSelf queryCenterTotalAmount];
+            [weakSelf queryMyAmount];
             //
             weakSelf.currencys = shouldDisplayCoins;
             weakSelf.tableView.platforms = shouldDisplayCoins;
@@ -638,10 +708,12 @@
                 [shouldDisplayCoins addObject:currencyModel];
                 //                }
                 //查询总资产
-                [weakSelf queryCenterTotalAmount];
-                [weakSelf queryMyAmount];
+              
             }];
-            
+            [weakSelf refreshOpenCoinList];
+
+            [weakSelf queryCenterTotalAmount];
+            [weakSelf queryMyAmount];
             //
             weakSelf.currencys = shouldDisplayCoins;
             weakSelf.tableView.platforms = shouldDisplayCoins;
@@ -728,11 +800,22 @@
 #pragma mark - Events
 
 - (void)userlogin {
-    
+  
     [self getMyCurrencyList];
     
 }
 
+- (void)userloginOut
+{
+    if ([[TLUser user].localMoney isEqualToString:@"USD"]) {
+        self.headerView.cnyAmountLbl.text = [NSString stringWithFormat:@"$ %@", @"0.00"];
+    }else{
+        self.headerView.cnyAmountLbl.text = [NSString stringWithFormat:@"¥ %@", @"0.00"];
+
+        
+    }
+    
+}
 - (void)withDrawCoinSuccess {
     
 //    [self getMyCurrencyList];
@@ -981,6 +1064,7 @@
     [self.currentTableView beginRefreshing];
     [self.currentTableView addLoadMoreAction:^{
         http.isUploadToken = NO;
+        [weakSelf refreshOpenCoinList];
 
         [http loadMore:^(NSMutableArray *objs, BOOL stillHave) {
             
@@ -988,6 +1072,7 @@
                 
                 [weakSelf removePlaceholderView];
             }
+            
             [weakSelf queryMyAmount];
             weakSelf.currencys = objs;
             

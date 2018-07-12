@@ -6,6 +6,7 @@
 #import "AppConfig.h"
 #import "TLUser.h"
 #import "AppColorMacro.h"
+#import "TLNetworking.h"
 @implementation InvitationView
 {
     UIImageView *wechatImageView;
@@ -50,6 +51,24 @@
     
 }
 
+//- (void)getShareUrl
+//{
+//
+//    TLNetworking *http = [TLNetworking new];
+//    http.code = @"660918";
+//    http.parameters[@"type"] = @"redPacketShareUrl";
+////    net.parameters[@"accountList"] = arr;
+//    [http postWithSuccess:^(id responseObject) {
+//
+//        NSLog(@"%@",res)
+//
+//    } failure:^(NSError *error) {
+//
+//    }];
+//
+//
+//}
+
 - (void)InfoNotificationAction:(NSNotification *)notification{
     
     NSLog(@"%@",notification.userInfo);
@@ -66,7 +85,7 @@
         
     }
     
-        shareUrl = [NSString stringWithFormat:@"http://m.thachain.org/redPacket/receive.html?code=%@&inviteCode=%@&lang=%@",urlStr,[TLUser user].secretUserId,lang];
+        shareUrl = [NSString stringWithFormat:@"%@/redPacket/receive.html?code=%@&inviteCode=%@&lang=%@",self.h5String,urlStr,[TLUser user].secretUserId,lang];
     
     // 1. 实例化二维码滤镜
     NSLog(@"shareUrl======%@",shareUrl);

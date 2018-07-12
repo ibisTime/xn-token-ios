@@ -235,6 +235,7 @@
 		B88B093320C908DC005C2D2F /* ResiseTextFiled.m in Sources */ = {isa = PBXBuildFile; fileRef = B88B093220C908DC005C2D2F /* ResiseTextFiled.m */; };
 		B88D6C6F20EDF39F0043832C /* TLFastvc.m in Sources */ = {isa = PBXBuildFile; fileRef = B88D6C6E20EDF39F0043832C /* TLFastvc.m */; };
 		B88D6C7220EDF3B50043832C /* TLTransfromVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B88D6C7120EDF3B50043832C /* TLTransfromVC.m */; };
+		B89783D720F6FB310088C713 /* TLUserFindPwdVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B89783D620F6FB310088C713 /* TLUserFindPwdVC.m */; };
 		B8A2436520E5E0F20074DF8F /* TLDataBase.m in Sources */ = {isa = PBXBuildFile; fileRef = B8A2436420E5E0F20074DF8F /* TLDataBase.m */; };
 		B8B15C0220CA312100F13220 /* BuildWalletMineVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B8B15C0120CA312100F13220 /* BuildWalletMineVC.m */; };
 		B8B15C0520CA55D600F13220 /* BuildSucessVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B8B15C0420CA55D600F13220 /* BuildSucessVC.m */; };
@@ -743,6 +744,8 @@
 		B88D6C6E20EDF39F0043832C /* TLFastvc.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLFastvc.m; sourceTree = "<group>"; };
 		B88D6C7020EDF3B50043832C /* TLTransfromVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLTransfromVC.h; sourceTree = "<group>"; };
 		B88D6C7120EDF3B50043832C /* TLTransfromVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLTransfromVC.m; sourceTree = "<group>"; };
+		B89783D520F6FB310088C713 /* TLUserFindPwdVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLUserFindPwdVC.h; sourceTree = "<group>"; };
+		B89783D620F6FB310088C713 /* TLUserFindPwdVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLUserFindPwdVC.m; sourceTree = "<group>"; };
 		B8A2436320E5E0F20074DF8F /* TLDataBase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLDataBase.h; sourceTree = "<group>"; };
 		B8A2436420E5E0F20074DF8F /* TLDataBase.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLDataBase.m; sourceTree = "<group>"; };
 		B8B15C0020CA312100F13220 /* BuildWalletMineVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BuildWalletMineVC.h; sourceTree = "<group>"; };
@@ -1877,6 +1880,8 @@
 				21A7F2F11FB2E2F900FAA0A2 /* TLUserForgetPwdVC.m */,
 				B842D5D320E91AA900891289 /* ChooseCountryVc.h */,
 				B842D5D420E91AA900891289 /* ChooseCountryVc.m */,
+				B89783D520F6FB310088C713 /* TLUserFindPwdVC.h */,
+				B89783D620F6FB310088C713 /* TLUserFindPwdVC.m */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -2752,6 +2757,7 @@
 				211DE6C61FB58B4C002FCF3D /* HttpLogger.m in Sources */,
 				211DE6CA1FB5A586002FCF3D /* RechargeCoinVC.m in Sources */,
 				B8BBA64020C7FB4600DC4D5F /* WallAccountHeadView.m in Sources */,
+				B89783D720F6FB310088C713 /* TLUserFindPwdVC.m in Sources */,
 				2159796A1FB82BC10029F177 /* CustomPickerView.m in Sources */,
 				216F5AFA206CD1B400F2C832 /* CoinChangeView.m in Sources */,
 				216F5B19206CD9C900F2C832 /* TradeFlowModel.m in Sources */,

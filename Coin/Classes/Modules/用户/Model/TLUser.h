@@ -85,6 +85,7 @@
 
 @property (nonatomic, copy) NSString *interCode;
 
+@property (nonatomic, assign) BOOL loginPwdFlag;
 
 ////未读消息数
 //@property (nonatomic, assign) NSInteger unReadMsgCount;
