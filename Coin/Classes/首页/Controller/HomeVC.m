@@ -125,6 +125,13 @@
     
 }
 
+- (void)changeWord
+{
+    NSString * str = @"";
+    
+    
+}
+
 - (void)OpenMessage
 {
     RateDescVC *vc = [RateDescVC new];

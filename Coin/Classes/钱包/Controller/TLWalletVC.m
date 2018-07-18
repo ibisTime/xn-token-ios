@@ -388,7 +388,10 @@
                 [self.currentTableView reloadData];
                 [self.currentTableView removeFromSuperview];
                 self.tableView.hidden = YES;
+                [self.tableView.platforms removeAllObjects];
+                [self.tableView reloadData];
                 self.currentTableView.hidden = YES;
+        
 
                 [self initTableView];
 
@@ -690,7 +693,8 @@
        
         
     }];
-    
+    [self.tableView beginRefreshing];
+
     [self.tableView addLoadMoreAction:^{
         helper.parameters[@"userId"] = [TLUser user].userId;
         helper.parameters[@"token"] = [TLUser user].token;
@@ -726,7 +730,6 @@
         
     }];
     
-    [self.tableView beginRefreshing];
     
 }
 - (void)saveLocalWalletData

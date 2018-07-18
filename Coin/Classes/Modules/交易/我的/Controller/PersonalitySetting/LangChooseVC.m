@@ -64,16 +64,16 @@
         [weakself langType:LangTypeEnglish];
         
     }];
-//    SettingModel *KorenModel = [[SettingModel alloc] init];
-//    KorenModel.text = @"한국어.";
-////    KorenModel.text = [LangSwitcher switchLang:@"韩文" key:nil];
-//
-//    KorenModel.isSelect = [LangSwitcher currentLangType] == LangTypeKorean;
-//    [KorenModel setAction:^{
-//
-//        [weakself langType:LangTypeKorean];
-//
-//    }];
+    SettingModel *KorenModel = [[SettingModel alloc] init];
+    KorenModel.text = @"한국어.";
+//    KorenModel.text = [LangSwitcher switchLang:@"韩文" key:nil];
+
+    KorenModel.isSelect = [LangSwitcher currentLangType] == LangTypeKorean;
+    [KorenModel setAction:^{
+
+        [weakself langType:LangTypeKorean];
+
+    }];
 //    SettingModel *JapanseModel = [[SettingModel alloc] init];
 //    JapanseModel.text = [LangSwitcher switchLang:@"日文" key:nil];
 //    JapanseModel.isSelect = [LangSwitcher currentLangType] == LangTypeJapanese;
@@ -84,7 +84,7 @@
 //    }];
     
     //
-    [self.models addObjectsFromArray:@[simpleModel,EnglishModel]];
+    [self.models addObjectsFromArray:@[simpleModel,EnglishModel,KorenModel]];
     
     
 }
@@ -101,6 +101,12 @@
     
                              [LangSwitcher changLangType:type];
                              //                             UIView *v = nil;
+                             if (type == LangTypeKorean) {
+                                 [LangSwitcher startWithTraditional];
+                                 TLTabBarController *tabBarCtrl = [[TLTabBarController alloc] init];
+                                 [UIApplication sharedApplication].keyWindow.rootViewController = tabBarCtrl;
+                                 return ;
+                             }
                              TLTabBarController *tabBarCtrl = [[TLTabBarController alloc] init];
                       [UIApplication sharedApplication].keyWindow.rootViewController = tabBarCtrl;
 //                             [LangSwitcher startWithTraditional];

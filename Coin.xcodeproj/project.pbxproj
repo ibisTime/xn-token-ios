@@ -768,6 +768,8 @@
 		B8B15C2B20CA8A3900F13220 /* BuildCheckVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BuildCheckVC.m; sourceTree = "<group>"; };
 		B8B15C3020CAB4DE00F13220 /* CustomLayoutWallet.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomLayoutWallet.h; sourceTree = "<group>"; };
 		B8B15C3120CAB4DE00F13220 /* CustomLayoutWallet.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomLayoutWallet.m; sourceTree = "<group>"; };
+		B8B9AA9820F8545A0015F0D4 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		B8B9AA9920F8545A0015F0D4 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B8BBA5F620C780F900DC4D5F /* PlatformTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlatformTableView.m; sourceTree = "<group>"; };
 		B8BBA5F720C780F900DC4D5F /* PlatformCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlatformCell.m; sourceTree = "<group>"; };
 		B8BBA5F820C780FA00DC4D5F /* PlatformTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlatformTableView.h; sourceTree = "<group>"; };
@@ -2523,6 +2525,7 @@
 				"zh-Hans",
 				"zh-Hant",
 				en,
+				ko,
 			);
 			mainGroup = 2EA584AB1FA813C900C7106C;
 			productRefGroup = 2EA584B51FA813C900C7106C /* Products */;
@@ -2935,6 +2938,7 @@
 				2EFFE6AF1FF4866700BFCC40 /* zh-Hans */,
 				B8DAD14F20E220D100AF4CD4 /* zh-Hant */,
 				B8DAD15220E220EE00AF4CD4 /* en */,
+				B8B9AA9920F8545A0015F0D4 /* ko */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -2945,6 +2949,7 @@
 				B8DAD14820E2208B00AF4CD4 /* en */,
 				B8DAD14A20E2208F00AF4CD4 /* zh-Hans */,
 				B8DAD14B20E2209200AF4CD4 /* zh-Hant */,
+				B8B9AA9820F8545A0015F0D4 /* ko */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";

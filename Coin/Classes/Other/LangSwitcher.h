@@ -14,8 +14,8 @@ typedef NS_ENUM(NSUInteger, LangType) {
     LangTypeSimple,
     LangTypeTraditional,
     LangTypeEnglish
-//    ,
-//    LangTypeKorean,
+    ,
+    LangTypeKorean
 //    LangTypeJapanese
 };
 

@@ -61,10 +61,11 @@
     if ([lang isEqualToString:ENGLISH]) {
         return LangTypeEnglish;
     }
-//    if ([lang isEqualToString:KOREAN]) {
-//        return LangTypeKorean;
-//
-//    }if ([lang isEqualToString:Japanese]) {
+    if ([lang isEqualToString:KOREAN]) {
+        return LangTypeKorean;
+
+    }
+//    if ([lang isEqualToString:Japanese]) {
 //        return LangTypeJapanese;
 //    }
 
@@ -125,6 +126,19 @@
             
             break;
         }
+        case LangTypeKorean: {
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            
+            [[NSUserDefaults standardUserDefaults] setObject:KOREAN forKey:LANG];
+            NSString *lan =[[NSUserDefaults standardUserDefaults] objectForKey:@"appLanguage"];
+            
+            
+            [[NSUserDefaults standardUserDefaults] setObject:@"ko" forKey:@"appLanguage"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            
+            
+            break;
+        }
             
             default:
             break;
@@ -160,12 +174,13 @@
 
             //英文
         }
-//        else if ([currentLanguage isEqualToString:@"ko-US"])
-//        {//韩文
-//            [self changLangType:LangTypeKorean];
-//
-//
-//        }else if ([currentLanguage isEqualToString:@"ja-US"])
+        else if ([currentLanguage isEqualToString:@"ko-US"])
+        {//韩文
+            [self changLangType:LangTypeKorean];
+
+
+        }
+//            else if ([currentLanguage isEqualToString:@"ja-US"])
 //        {//日文
 //            [self changLangType:LangTypeJapanese];
 //
@@ -191,7 +206,14 @@
         if ([lang isEqualToString:@"simple"]) {
             [self changLangType:LangTypeSimple];
 
-        }else{
+        }else if([lang isEqualToString:@"Korean"])
+        {
+            [self changLangType:LangTypeKorean];
+
+            
+        }
+        
+        else{
         [self changLangType:LangTypeEnglish];
         }
     }
