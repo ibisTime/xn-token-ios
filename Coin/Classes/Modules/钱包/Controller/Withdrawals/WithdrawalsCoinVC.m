@@ -56,6 +56,9 @@ typedef NS_ENUM(NSInteger, AddressType) {
 //地址
 @property (nonatomic, strong) CoinAddressModel *addressModel;
 
+@property (nonatomic, strong) UIImageView *bgImage;
+
+@property (nonatomic, strong) UILabel * blanceFree;
 @end
 
 @implementation WithdrawalsCoinVC
@@ -65,6 +68,7 @@ typedef NS_ENUM(NSInteger, AddressType) {
     // Do any additional setup after loading the view.
     
     self.title = [LangSwitcher switchLang:@"提币" key:nil];
+    self.view.backgroundColor = kWhiteColor;
     //记录
     [self addRecordItem];
     //
@@ -93,26 +97,76 @@ typedef NS_ENUM(NSInteger, AddressType) {
 
 - (void)initSubviews {
     
-    CGFloat heightMargin = 50;
-    //余额
-    self.balanceTF = [[TLTextField alloc] initWithFrame:CGRectMake(0, 10, kScreenWidth, heightMargin)
-                                              leftTitle:[LangSwitcher switchLang:@"可用余额" key:nil]
-                                             titleWidth:120
-                                            placeholder:@""];
     
-    self.balanceTF.textColor = kHexColor(@"#109ee9");
-    self.balanceTF.enabled = NO;
+    UIView *top = [[UIView alloc] init];
+    [self.view addSubview:top];
+    top.backgroundColor = kHexColor(@"#0848DF");
+    
+    [top mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.view.mas_top);
+        
+        make.left.equalTo(self.view.mas_left);
+        make.right.equalTo(self.view.mas_right);
+        make.height.equalTo(@(kHeight(66)));
+    }];
+    
+    UIImageView *bgImage = [[UIImageView alloc] init];
+    
+    self.bgImage = bgImage;
+    bgImage.image = kImage(@"提背景");
+    bgImage.contentMode = UIViewContentModeScaleToFill;
+    [self.view addSubview:bgImage];
+    
+    [bgImage mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.view.mas_top);
+        make.left.equalTo(self.view.mas_left).offset(15);
+        make.right.equalTo(self.view.mas_right).offset(-15);
+        make.height.equalTo(@90);
+        
+    }];
+    
+    UILabel *blance = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor2 font:12];
+    blance.text = [LangSwitcher switchLang:@"可用余额" key:nil];
+    [bgImage addSubview:blance];
+    [blance mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(bgImage.mas_top).offset(19);
+        make.centerX.equalTo(bgImage.mas_centerX);
+        
+    }];
+    UILabel *symbolBlance = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextBlack font:24];
+    [bgImage addSubview:symbolBlance];
     NSString *leftAmount = [self.currency.amountString subNumber:self.currency.frozenAmountString];
     
     NSString *currentCurrency = self.currency.currency;
-    self.balanceTF.text = [NSString stringWithFormat:@"%.2f %@",[[CoinUtil convertToRealCoin:leftAmount coin:currentCurrency] doubleValue],currentCurrency];
+    symbolBlance.text = [NSString stringWithFormat:@"%.6f %@",[[CoinUtil convertToRealCoin:leftAmount coin:currentCurrency] doubleValue],currentCurrency];
     
+//    symbolBlance.text = [NSString stringWithFormat:@"%.6f %@",[self.currency.balance doubleValue]/1000000000000000000,self.currency.symbol];
+    [symbolBlance mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(blance.mas_bottom).offset(2);
+        make.centerX.equalTo(bgImage.mas_centerX);
+        
+    }];
     
-    
-    [self.view addSubview:self.balanceTF];
+    CGFloat heightMargin = 50;
+//    //余额
+//    self.balanceTF = [[TLTextField alloc] initWithFrame:CGRectMake(0, 10, kScreenWidth, heightMargin)
+//                                              leftTitle:[LangSwitcher switchLang:@"可用余额" key:nil]
+//                                             titleWidth:120
+//                                            placeholder:@""];
+//
+//    self.balanceTF.textColor = kHexColor(@"#109ee9");
+//    self.balanceTF.enabled = NO;
+////    NSString *leftAmount = [self.currency.amountString subNumber:self.currency.frozenAmountString];
+////
+////    NSString *currentCurrency = self.currency.currency;
+////    self.balanceTF.text = [NSString stringWithFormat:@"%.2f %@",[[CoinUtil convertToRealCoin:leftAmount coin:currentCurrency] doubleValue],currentCurrency];
+//    
+//
+//    
+//    [self.view addSubview:self.balanceTF];
     
     //接受地址
-    UIView *receiveView = [[UIView alloc] initWithFrame:CGRectMake(0, self.balanceTF.yy + 10, kScreenWidth, heightMargin)];
+    UIView *receiveView = [[UIView alloc] initWithFrame:CGRectMake(0, kHeight(103) + 10, kScreenWidth, heightMargin)];
                                                                    
     receiveView.backgroundColor = kWhiteColor;
     

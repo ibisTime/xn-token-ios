@@ -27,17 +27,21 @@
     
     //
     UINavigationBar *navBar = [UINavigationBar appearance];
-    NSString *text = [LangSwitcher switchLang:@"返回" key:nil];
-    [self.navigationItem.backBarButtonItem setTitle:text];
-    
-    navBar.backIndicatorImage = [UIImage imageNamed:@"返回"];
-    navBar.backIndicatorTransitionMaskImage = [UIImage imageNamed:@"返回"];
-    navBar.barTintColor = [UIColor whiteColor];
+//    NSString *text = [LangSwitcher switchLang:@"返回" key:nil];
+//    [self.navigationItem.backBarButtonItem setTitle:@""];
+
+//    self.navigationBar.topItem.title = @"";
+//    navBar.backIndicatorImage = [UIImage imageNamed:@"返回 白色"];
+    [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -60)
+                                                         forBarMetrics:UIBarMetricsDefault];
+    navBar.backIndicatorTransitionMaskImage = [UIImage imageNamed:@"返回 白色"];
+    [self.navigationController.navigationItem setHidesBackButton:YES];
+    navBar.barTintColor = kHexColor(@"#0848DF");
     navBar.translucent = NO;
-    navBar.tintColor = kAppCustomMainColor;
-    [navBar setTitleTextAttributes:@{
-                                     NSForegroundColorAttributeName : [UIColor textColor]
-                                     }];
+    navBar.tintColor = kWhiteColor;
+    self.navigationBar.titleTextAttributes=
+  @{NSForegroundColorAttributeName:[UIColor whiteColor],
+    NSFontAttributeName:[UIFont systemFontOfSize:16]};
 
 }
 

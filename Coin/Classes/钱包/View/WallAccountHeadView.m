@@ -21,7 +21,7 @@
 @property (nonatomic ,strong) UILabel *textLbl;
 @property (nonatomic ,strong) UILabel *currentLbl;
 @property (nonatomic ,strong) UILabel *amountLbl;
-
+@property (nonatomic ,strong) UIImageView *bgImage;
 @end
 @implementation WallAccountHeadView
 
@@ -39,15 +39,31 @@
 - (void)initSubvies
 {
     
+    UIImageView *bgImage = [[UIImageView alloc] init];
+
+    self.bgImage = bgImage;
+    bgImage.image = kImage(@"账单背景");
+    bgImage.contentMode = UIViewContentModeScaleToFill;
+    [self addSubview:bgImage];
+
+    [bgImage mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.mas_top);
+        make.bottom.equalTo(self.mas_bottom);
+        make.left.equalTo(self.mas_left);
+        make.right.equalTo(self.mas_right);
+
+        
+    }];
     UIImageView *bgIV = [[UIImageView alloc] init];
     self.bgIV = bgIV;
     bgIV.contentMode = UIViewContentModeScaleToFill;
-    
-    [self addSubview:bgIV];
+    bgIV.layer.cornerRadius = 20;
+    bgIV.clipsToBounds = YES;
+    [self.bgImage addSubview:bgIV];
     [bgIV mas_makeConstraints:^(MASConstraintMaker *make) {
-         make.centerX.equalTo(self.mas_centerX);
-        make.top.equalTo(@16);
-        make.width.height.equalTo(@49);
+         make.left.equalTo(self.bgImage.mas_left).offset(20);
+        make.top.equalTo(@28);
+        make.width.height.equalTo(@40);
         
     }];
     
@@ -58,11 +74,11 @@
     
 //    textLbl.text = [LangSwitcher switchLang:@"我的资产" key:nil];
     self.textLbl = textLbl;
-    [self addSubview:textLbl];
+    [self.bgImage addSubview:textLbl];
     [textLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.centerX.equalTo(self.mas_centerX);
-        make.top.equalTo(self.bgIV.mas_bottom).offset(10);
+        make.left.equalTo(self.bgIV.mas_right).offset(17);
+        make.top.equalTo(self.bgImage.mas_top).offset(24);
         
     }];
     
@@ -70,35 +86,35 @@
     
     //    textLbl.text = [LangSwitcher switchLang:@"我的资产" key:nil];
     self.currentLbl = currentLbl;
-    [self addSubview:currentLbl];
+    [self.bgImage addSubview:currentLbl];
     [currentLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.left.equalTo(self.mas_right).offset(10);
-        make.top.equalTo(self.textLbl.mas_top).offset(0);
+        make.left.equalTo(self.bgIV.mas_right).offset(17);
+        make.top.equalTo(self.textLbl.mas_top).offset(10);
         
     }];
-    UILabel *amountLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kHexColor(@"#108ee9") font:12.0];
+    UILabel *amountLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:12.0];
     
     //    textLbl.text = [LangSwitcher switchLang:@"我的资产" key:nil];
     self.amountLbl = amountLbl;
-    [self addSubview:amountLbl];
+    [self.bgImage addSubview:amountLbl];
     [amountLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.centerX.equalTo(self.mas_centerX);
+        make.left.equalTo(self.bgIV.mas_right).offset(17);
         make.top.equalTo(self.textLbl.mas_bottom).offset(10);
         
     }];
     
-    UIView *lineView = [[UIView alloc] init];
-    lineView.backgroundColor = [UIColor colorWithRed:248/255.0 green:248/255.0 blue:248/255.0 alpha:1.0];
-    [self addSubview:lineView];
-    [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.mas_right);
-        make.left.equalTo(self.mas_left);
-
-        make.bottom.equalTo(self.mas_bottom).offset(-8);
-        make.height.equalTo(@4);
-    }];
+//    UIView *lineView = [[UIView alloc] init];
+//    lineView.backgroundColor = [UIColor colorWithRed:248/255.0 green:248/255.0 blue:248/255.0 alpha:1.0];
+//    [self.bgImage addSubview:lineView];
+//    [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.right.equalTo(self.mas_right);
+//        make.left.equalTo(self.mas_left);
+//
+//        make.bottom.equalTo(self.mas_bottom).offset(-8);
+//        make.height.equalTo(@4);
+//    }];
 }
 
 -(void)setCurrency:(CurrencyModel *)currency
@@ -110,11 +126,12 @@
 
         [self.bgIV sd_setImageWithURL:[NSURL URLWithString:[coin.icon convertImageUrl]]];
 
-        self.currentLbl.text = currency.symbol;
+//        self.currentLbl.text = currency.symbol;
         //    NSString *leftAmount = [platform.amountString subNumber:platform.frozenAmountString];
         
         CGFloat t = [currency.balance doubleValue]/1000000000000000000;
-        self.textLbl.text = [NSString stringWithFormat:@"%.6f %@",t,currency.symbol];
+       
+        self.textLbl.text = [NSString stringWithFormat:@"¥%.6f ",t];
         //    NSString *rightAmount = [platform.inAmountString subNumber:platform.addAmountString];
         
         //对应币种价格
@@ -136,10 +153,16 @@
     CoinModel *coin = [CoinUtil getCoinModel:currency.currency];
 
     [self.bgIV sd_setImageWithURL:[NSURL URLWithString:[coin.pic1 convertImageUrl]]];
-    self.currentLbl.text = currency.currency;
+//    self.currentLbl.text = currency.currency;
     NSString *leftAmount = [currency.amountString subNumber:currency.frozenAmountString];
 
-    self.textLbl.text = [NSString stringWithFormat:@"%.4f %@",[[CoinUtil convertToRealCoin:leftAmount coin:currency.currency] doubleValue],currency.currency];
+        if ([[TLUser user].localMoney isEqualToString:@"CNY"]) {
+             self.textLbl.text = [NSString stringWithFormat:@"¥%.4f",[[CoinUtil convertToRealCoin:leftAmount coin:currency.currency] doubleValue]];
+        }else{
+            
+                self.textLbl.text = [NSString stringWithFormat:@"$%.4f",[[CoinUtil convertToRealCoin:leftAmount coin:currency.currency] doubleValue]];
+        }
+
     NSString *rightAmount = [currency.inAmountString subNumber:currency.addAmountString];
         if ([[TLUser user].localMoney isEqualToString:@"USD"]) {
             self.amountLbl.text = [NSString stringWithFormat:@"≈%.2fUSD", [currency.amountUSD doubleValue]];

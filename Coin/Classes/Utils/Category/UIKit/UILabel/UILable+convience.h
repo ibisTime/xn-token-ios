@@ -30,4 +30,6 @@
  */
 + (UILabel *)labelWithTitle:(NSString *)title frame:(CGRect)frame;
 
++ (UILabel *)labelWithNaTitle:(NSString *)title frame:(CGRect)frame;
+
 @end

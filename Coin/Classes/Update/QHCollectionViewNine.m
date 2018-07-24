@@ -26,8 +26,9 @@ static NSString *bottomIdentifierCell = @"AddSearchBottomCell";
         _imageArr = image;
 //        _Layout = (UICollectionViewFlowLayout *)layout;
         self.pagingEnabled = NO;
-//        _Layout.minimumLineSpacing      = 15.f;
-      
+//        _Layout.minimumLineSpacing      = 5.f;
+//        _Layout.minimumInteritemSpacing      = 5.f;
+
         self.allowsSelection = YES;
         self.allowsMultipleSelection = YES;
 //        self.bounces = NO;
@@ -81,24 +82,29 @@ static NSString *bottomIdentifierCell = @"AddSearchBottomCell";
     NSLog(@"%s", __FUNCTION__);
     return YES;
 }
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (self.type == SearchTypeTop) {
-        CurrencyTitleModel *titleModel = self.titles[indexPath.row];
-        CGSize labSize = [titleModel.symbol boundingRectWithSize:CGSizeMake(kScreenWidth, __FLT_MAX__) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSDocumentTypeDocumentAttribute : NSHTMLTextDocumentType,NSFontAttributeName :[UIFont systemFontOfSize:18]} context:nil].size;
-        NSLog(@"%@",NSStringFromCGSize(labSize));
-        return CGSizeMake(labSize.width +15, 40);
-    }else{
-//        if (self.IsNeedRefash == NO) {
-//            return CGSizeMake(80, 40);
+//- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    if (self.isRead == YES) {
+//        return CGSizeMake(kWidth(100), 45);
+//    }else{
+//        if (self.type == SearchTypeTop) {
+//            CurrencyTitleModel *titleModel = self.titles[indexPath.row];
+//            CGSize labSize = [titleModel.symbol boundingRectWithSize:CGSizeMake(kScreenWidth, __FLT_MAX__) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSDocumentTypeDocumentAttribute : NSHTMLTextDocumentType,NSFontAttributeName :[UIFont systemFontOfSize:18]} context:nil].size;
+//            NSLog(@"%@",NSStringFromCGSize(labSize));
+//            return CGSizeMake(labSize.width +15, 40);
+//        }else{
+//            //        if (self.IsNeedRefash == NO) {
+//            //            return CGSizeMake(80, 40);
+//            //        }
+//            CurrencyTitleModel *titleModel = self.bottomtitles[indexPath.row];
+//            CGSize labSize = [titleModel.symbol boundingRectWithSize:CGSizeMake(kScreenWidth, __FLT_MAX__) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSDocumentTypeDocumentAttribute : NSHTMLTextDocumentType,NSFontAttributeName :[UIFont systemFontOfSize:18]} context:nil].size;
+//            NSLog(@"%@",NSStringFromCGSize(labSize));
+//            return CGSizeMake(labSize.width +10, 40);
 //        }
-    CurrencyTitleModel *titleModel = self.bottomtitles[indexPath.row];
-    CGSize labSize = [titleModel.symbol boundingRectWithSize:CGSizeMake(kScreenWidth, __FLT_MAX__) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSDocumentTypeDocumentAttribute : NSHTMLTextDocumentType,NSFontAttributeName :[UIFont systemFontOfSize:18]} context:nil].size;
-    NSLog(@"%@",NSStringFromCGSize(labSize));
-    return CGSizeMake(labSize.width +10, 40);
-    }
-    
-}
+//    }
+//    
+//    
+//}
 
 - (BOOL)collectionView:(UICollectionView *)collectionView canMoveItemAtIndexPath:(NSIndexPath *)indexPath
 {

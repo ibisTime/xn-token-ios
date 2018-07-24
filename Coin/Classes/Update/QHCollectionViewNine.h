@@ -37,6 +37,7 @@ typedef  NS_ENUM(NSInteger,SearchType) {
 
 @property (nonatomic ,assign) BOOL IsNeedRefash;
 
+@property (nonatomic ,assign) BOOL isRead;
 
 
 

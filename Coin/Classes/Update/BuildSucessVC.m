@@ -27,12 +27,14 @@
 
 @property (nonatomic ,copy) NSString *mnemonics;
 
+@property (nonatomic ,strong) UIButton *howButton;
+
 @end
 
 @implementation BuildSucessVC
 
 - (void)viewDidLoad {
-    self.title = [LangSwitcher switchLang:@"钱包备份" key:nil];
+    self.title = [LangSwitcher switchLang:@"创建钱包" key:nil];
     
     [self initViews];
 //    self.mnemonics =  [MnemonicUtil getGenerateMnemonics];
@@ -42,7 +44,7 @@
 }
 - (void)initViews
 {
-    self.view.backgroundColor = kHexColor(@"#f8f8f8");
+    self.view.backgroundColor = kWhiteColor;
 //    self.iconImage = [[UIImageView alloc] init];
 //    [self.view addSubview:self.iconImage];
 //    self.iconImage.image = kImage(@"logoTHA");
@@ -52,64 +54,146 @@
 //        make.width.height.equalTo(@75);
 //
 //    }];
-        self.introduceButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [self.view addSubview:self.introduceButton];
-        [self.introduceButton setBackgroundImage:kImage(@"重要提示") forState:UIControlStateNormal];
-        [self.introduceButton mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.view.mas_top).offset(54);
-            make.left.equalTo(self.view.mas_left).offset(20);
-            make.height.equalTo(@14);
-            make.width.equalTo(@14);
     
-        }];
-    self.nameLable = [UILabel labelWithBackgroundColor:kClearColor textColor:kBlackColor font:14];
-    //    self.title = [LangSwitcher switchLang:@"我的" key:nil];
-    [self.view addSubview:self.nameLable];
-    self.nameLable.text = [LangSwitcher switchLang:@"重要提示" key:nil];
+    UIView *topView = [[UIView alloc] init];
+    [self.view addSubview:topView];
+    topView.backgroundColor = kHexColor(@"#0848DF");
+    
+    [topView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.view.mas_top);
+        
+        make.left.equalTo(self.view.mas_left);
+        make.right.equalTo(self.view.mas_right);
+        make.height.equalTo(@(kHeight(66)));
+    }];
+    UIView *whiteView = [[UIView alloc] init];
+    whiteView.backgroundColor = kWhiteColor;
+    [self.view addSubview:whiteView];
+    UIImageView *bgImage = [[UIImageView alloc] init];
+    bgImage.image = kImage(@"打勾 大");
+    [whiteView addSubview:bgImage];
+    
+    [bgImage mas_makeConstraints:^(MASConstraintMaker *make) {
+       
+        make.top.equalTo(@(kHeight(50)));
+        make.centerX.equalTo(whiteView.mas_centerX);
+        make.width.height.equalTo(@(kHeight(80)));
+    }];
+    
+    UILabel *newWallet = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextBlack font:20];
+    
+    [whiteView addSubview:newWallet];
+    newWallet.text = [LangSwitcher switchLang:@"新钱包创建成功" key:nil];
+    newWallet.textAlignment = NSTextAlignmentCenter;
+    [newWallet mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.top.equalTo(bgImage.mas_bottom).offset(16);
+        make.centerX.equalTo(whiteView.mas_centerX);
+//        make.width.height.equalTo(@(kHeight(80)));
+    }];
+    
+    UILabel *introduce = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor2 font:12];
+    
+    [whiteView addSubview:introduce];
+    introduce.numberOfLines = 0;
+    introduce.text = [LangSwitcher switchLang:@"强烈建议您在使用钱包前做好备份,导出助记词存储到安全的地方。然后开始尝试转入小额资金启用" key:nil];
+    introduce.textAlignment = NSTextAlignmentLeft;
+    [introduce mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.top.equalTo(newWallet.mas_bottom).offset(8);
+        make.left.equalTo(whiteView.mas_left).offset(30);
+        make.right.equalTo(whiteView.mas_right).offset(-30);
 
+//        make.centerX.equalTo(whiteView.mas_centerX);
+        //        make.width.height.equalTo(@(kHeight(80)));
+    }];
+    
+    [whiteView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.view.mas_left).offset(15);
+        make.right.equalTo(self.view.mas_right).offset(-15);
+        make.top.equalTo(self.view.mas_top);
+        
+        make.height.equalTo(@(kHeight(292)));
+    }];
+    
+    whiteView.layer.cornerRadius = 4;
+    whiteView.clipsToBounds = YES;
+//        self.introduceButton = [UIButton buttonWithType:UIButtonTypeCustom];
+//        [self.view addSubview:self.introduceButton];
+//        [self.introduceButton setBackgroundImage:kImage(@"重要提示") forState:UIControlStateNormal];
+//        [self.introduceButton mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.top.equalTo(self.view.mas_top).offset(54);
+//            make.left.equalTo(self.view.mas_left).offset(20);
+//            make.height.equalTo(@14);
+//            make.width.equalTo(@14);
+//
+//        }];
+//    self.nameLable = [UILabel labelWithBackgroundColor:kClearColor textColor:kBlackColor font:14];
+//    //    self.title = [LangSwitcher switchLang:@"我的" key:nil];
+//    [self.view addSubview:self.nameLable];
 //    self.nameLable.text = [LangSwitcher switchLang:@"重要提示" key:nil];
-    [self.nameLable mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view.mas_top).offset(50);
-        make.left.equalTo(self.view.mas_left).offset(48);
-        
-    }];
-    self.messageLable = [[UILabel alloc] init];
-    [self.view addSubview:_messageLable];
-    self.messageLable.font  = [UIFont systemFontOfSize:14];
-    self.messageLable.numberOfLines = 0;
-    self.messageLable.backgroundColor = kClearColor;
-    self.messageLable.textColor = kHexColor(@"#999999");
-//    self.messageLable.text = [LangSwitcher switchLang:@"拥有钱包私钥就能完全控制钱包资产,  因此强烈建议在使用钱包前做好备份,  将钱包私钥保存到安全的地方。"key:nil];
-   self.messageLable.text = [LangSwitcher switchLang:@"拥有钱包私钥就能完全控制钱包资产,  因此强烈建议在使用钱包前做好备份,  将钱包私钥保存到安全的地方。" key:nil];
-
-    
-    [self.messageLable mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.nameLable.mas_bottom).offset(25);
-        make.left.equalTo(@20);
-        make.right.equalTo(@-20);
-        
-    }];
+//
+////    self.nameLable.text = [LangSwitcher switchLang:@"重要提示" key:nil];
+//    [self.nameLable mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(self.view.mas_top).offset(450);
+//        make.left.equalTo(self.view.mas_left).offset(48);
+//
+//    }];
+//    self.messageLable = [[UILabel alloc] init];
+//    [self.view addSubview:_messageLable];
+//    self.messageLable.font  = [UIFont systemFontOfSize:14];
+//    self.messageLable.numberOfLines = 0;
+//    self.messageLable.backgroundColor = kClearColor;
+//    self.messageLable.textColor = kHexColor(@"#999999");
+////    self.messageLable.text = [LangSwitcher switchLang:@"拥有钱包私钥就能完全控制钱包资产,  因此强烈建议在使用钱包前做好备份,  将钱包私钥保存到安全的地方。"key:nil];
+//   self.messageLable.text = [LangSwitcher switchLang:@"拥有钱包私钥就能完全控制钱包资产,  因此强烈建议在使用钱包前做好备份,  将钱包私钥保存到安全的地方。" key:nil];
+//
+//
+//    [self.messageLable mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(self.nameLable.mas_bottom).offset(25);
+//        make.left.equalTo(@20);
+//        make.right.equalTo(@-20);
+//
+//    }];
 
     
     self.buildButton = [UIButton buttonWithImageName:nil cornerRadius:6];
 //    NSString *text = [LangSwitcher switchLang:@"立即备份" key:nil];
-    NSString *text = NSLocalizedString(@"立即备份", nil);
+    NSString *text = NSLocalizedString(@"备份钱包", nil);
 
     [self.buildButton setTitle:text forState:UIControlStateNormal];
     self.buildButton.titleLabel.font = [UIFont systemFontOfSize:16];
     
     [self.buildButton setTitleColor:kWhiteColor forState:UIControlStateNormal];
     [self.buildButton addTarget:self action:@selector(buildBackUpWallet) forControlEvents:UIControlEventTouchUpInside];
-    [self.buildButton setBackgroundColor:kAppCustomMainColor forState:UIControlStateNormal];
+    [self.buildButton setBackgroundColor:kHexColor(@"#0848DF") forState:UIControlStateNormal];
     [self.view addSubview:self.buildButton];
     [self.buildButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.messageLable.mas_bottom).offset(68);
+        make.top.equalTo(whiteView.mas_bottom).offset(26);
         make.right.equalTo(self.view.mas_right).offset(-20);
         make.left.equalTo(self.view.mas_left).offset(20);
         make.height.equalTo(@45);
         
     }];
     
+    self.howButton = [UIButton buttonWithImageName:nil cornerRadius:6];
+    //    NSString *text = [LangSwitcher switchLang:@"立即备份" key:nil];
+    NSString *text1 = NSLocalizedString(@"如何备份钱包?", nil);
+    
+    [self.howButton setTitle:text1 forState:UIControlStateNormal];
+    self.howButton.titleLabel.font = [UIFont systemFontOfSize:15];
+    
+    [self.howButton setTitleColor:kHexColor(@"#0848DF") forState:UIControlStateNormal];
+    [self.howButton addTarget:self action:@selector(backUpWalletIntroduce) forControlEvents:UIControlEventTouchUpInside];
+    [self.howButton setBackgroundColor:kClearColor forState:UIControlStateNormal];
+    [self.view addSubview:self.howButton];
+    [self.howButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.buildButton.mas_bottom).offset(16);
+        make.right.equalTo(self.view.mas_right).offset(-20);
+        make.left.equalTo(self.view.mas_left).offset(20);
+        make.height.equalTo(@45);
+        
+    }];
 //    self.bottomLable = [[UILabel alloc] init];
 //    [self.view addSubview:self.bottomLable];
 //    self.bottomLable.font  = [UIFont systemFontOfSize:16];
@@ -221,7 +305,10 @@
 //    TLNavigationController *na = [[TLNavigationController alloc] initWithRootViewController:backUpVC];
 //    [UIApplication sharedApplication].keyWindow.rootViewController = na;
 
-    
+}
+
+- (void)backUpWalletIntroduce
+{
     
     
     

@@ -30,6 +30,7 @@
     //
     self.view.backgroundColor = [UIColor colorWithHexString:@"#f8f8f8"];
     
+    
 //    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStyleBordered target:nil action:nil];
 //    self.navigationItem.backBarButtonItem = backItem;
 //    self.view.backgroundColor = [UIColor backgroundColor];
@@ -57,8 +58,10 @@
 }
 
 - (void)setTitle:(NSString *)title {
-    
-    self.navigationItem.titleView = [UILabel labelWithTitle:title frame:CGRectMake(0, 0, 200, 44)];
+
+    self.navigationItem.titleView = [UILabel labelWithNaTitle:title frame:CGRectMake(0, 0, 200, 44)];
+//    self.titleStr = title;
+
 }
 ////隐藏底部横条
 //- (BOOL)prefersHomeIndicatorAutoHidden {
@@ -136,7 +139,7 @@
     }
 
 }
-
+#pragma mark - Setting
 
 //- (UIStatusBarStyle)preferredStatusBarStyle {
 //    

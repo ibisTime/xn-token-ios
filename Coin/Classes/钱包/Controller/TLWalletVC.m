@@ -43,6 +43,12 @@
 #import "countrGroup.h"
 #import "TLFastvc.h"
 #import "TLTransfromVC.h"
+#import "BuildLocalHomeView.h"
+#import "RevisePassWordVC.h"
+#import "WalletImportVC.h"
+#import "HTMLStrVC.h"
+#import "BuildSucessVC.h"
+#import "BuildWalletMineVC.h"
 //#import <CoreBitcoin.h>
 //#import <CoreBitcoin/CoreBitcoin.h>
 //#import "BTCMnemonic+Tests.h"
@@ -79,12 +85,22 @@
 
 @property (nonatomic, copy) NSString *IsLocalExsit;
 
+@property (nonatomic, strong) UIView *titleView;
+
+@property (nonatomic, strong) UIButton *addButton;
+
+@property (nonatomic, strong) UIView *contentView;
+
+@property (nonatomic, strong) BuildLocalHomeView *homeView;
+
+@property (nonatomic, assign) BOOL isBulid;
+
 @end
 
 @implementation TLWalletVC
 
 - (void)viewWillAppear:(BOOL)animated {
-    
+  
     TLDataBase *dataBase = [TLDataBase sharedManager];
     NSString *word;
     if ([dataBase.dataBase open]) {
@@ -102,18 +118,26 @@
 //    [self queryTotalAmount];
     if (word != nil && word.length > 0) {
 //        [self switchWithTager:0 ];
-
-
-    }else{
         
-        [self switchWithTager:1 ];
+//        [super viewWillAppear:animated];
+//        [self.navigationController setNavigationBarHidden:YES animated:animated];
+//        return;
+    }else{
+        if (self.isBulid == YES) {
+            [self switchWithTager:0 ];
 
+        }else{
+            
+            [self switchWithTager:1 ];
+
+        }
+//   [self inreoduceView:@"个人账户" content:@"个人账户就是指中心化钱包,是由THA替您保管私钥,在中心化钱包中,不存在钱包丢失了无法找回的情况,可以通过身份证找回您的钱包,并且可以让您体验到更多的服务。"];
     }
     
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES animated:animated];
+  
 
-    
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -131,7 +155,7 @@
 //
 //    BTCMnemonic *m = [[BTCMnemonic alloc] init];
 //    NSLog(@"%@",m.words);
-    
+    self.view.backgroundColor = kWhiteColor;
     //tableView
     [self.view addSubview:self.headerView];
 
@@ -143,7 +167,6 @@
     [self refreshOpenCoinList];
     [self requestRateList];
    
-    
     
 //    self.tableView.backgroundColor = [UIColor themeColor];
     
@@ -183,33 +206,54 @@
     if (!_headerView) {
         
         CoinWeakSelf;
-        
-        _headerView = [[WalletHeaderView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kHeight(250 + kStatusBarHeight+20) )];
+        CGFloat f1 = kDevice_Is_iPhoneX ==YES ? 20 : 20;
+//        CGFloat f = self.isClear == YES ?308 : 348;
+
+        _headerView = [[WalletHeaderView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kHeight(250 + f1) )];
 //        _headerView.usdRate = @"test";
 
 //        _headerView.whiteView.hidden = YES;
         
+        
+        _headerView.centerBlock = ^{
+             [weakSelf inreoduceView:@"个人账户" content:@"个人账户就是指中心化钱包,是由THA替您保管私钥,在中心化钱包中,不存在钱包丢失了无法找回的情况,可以通过身份证找回您的钱包,并且可以让您体验到更多的服务。"];
+        };
+        
+        _headerView.localBlock = ^{
+             [weakSelf inreoduceView:@"私钥账户" content:@"私钥钱包就是去中心化钱包,在去中心化钱包中,所有的用户身份验证内容,如交易密码,私钥，助记词等都保存在用户手机本地,并不是保存在中心化服务器里面,如果用户误删钱包,忘记备份私钥或者助记词，将无法找到钱包"];
+        };
         _headerView.clearBlock = ^{
+            CGFloat f2 = kDevice_Is_iPhoneX ==YES ? 282 : 260;
             weakSelf.isClear = YES;
-            weakSelf.headerView.frame = CGRectMake(0, 0, kScreenWidth, kHeight(250 + kStatusBarHeight) );
+            weakSelf.headerView.frame = CGRectMake(0, 0, kScreenWidth, kHeight(250-10 ) );
             [weakSelf.leftButton mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.left.equalTo(weakSelf.view.mas_left).offset(15);
-                make.top.equalTo(weakSelf.headerView.mas_bottom).offset(8);
+                make.top.equalTo(weakSelf.headerView.mas_bottom).offset(15);
                 make.width.equalTo(@(kWidth(167.5)));
                 make.height.equalTo(@(kHeight(50)));
-                
             }];
             
             
             [weakSelf.rightButton mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.left.equalTo(weakSelf.leftButton.mas_right).offset(10);
-                make.top.equalTo(weakSelf.headerView.mas_bottom).offset(8);
+                make.top.equalTo(weakSelf.headerView.mas_bottom).offset(15);
                 make.width.equalTo(@(kWidth(167.5)));
                 make.height.equalTo(@(kHeight(50)));
                 
             }];
-              weakSelf.currentTableView.frame = CGRectMake(0, kHeight(318)+kStatusBarHeight, kScreenWidth, kScreenHeight - kTabBarHeight - kHeight(334));
-              weakSelf.tableView.frame = CGRectMake(0, kHeight(318)+kStatusBarHeight, kScreenWidth, kScreenHeight - kTabBarHeight - kHeight(334));
+            
+            [weakSelf.titleView mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.top.equalTo(@(kHeight(320-30)));
+                make.right.equalTo(@-15);
+                make.left.equalTo(@15);
+                make.height.equalTo(@30);
+            }];
+            CGFloat f = self.isClear == YES ?348-30 : 358-30;
+
+            CGFloat f1 = kDevice_Is_iPhoneX == YES ?15 :0;
+
+              weakSelf.currentTableView.frame = CGRectMake(0, kHeight(f), kScreenWidth, kScreenHeight - kTabBarHeight - kHeight(308));
+              weakSelf.tableView.frame = CGRectMake(0, kHeight(f), kScreenWidth, kScreenHeight - kTabBarHeight - kHeight(308));
             [weakSelf.view setNeedsLayout];
         };
         //切换钱包事件
@@ -276,13 +320,107 @@
     return _headerView;
 }
 
+- (void)inreoduceView: (NSString *)name content: (NSString *)contents
+{
+    
+    UIView *contentView = [[UIView alloc] init];
+    
+    UIView *contentText = [UIView new];
+    
+    [contentView addSubview:contentText];
+    contentText.backgroundColor = kWhiteColor;
+    [contentText mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.centerX.equalTo(contentView.mas_centerX);
+        make.centerY.equalTo(contentView.mas_centerY);
+        make.width.equalTo(@(kWidth(325)));
+        make.height.equalTo(@(kWidth(314)));
+
+
+    }];
+    
+    UILabel *title = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextBlack font:20.0];
+    
+    [contentText addSubview:title];
+    [title mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.top.equalTo(contentText.mas_top).offset(40);
+        make.centerX.equalTo(contentText.mas_centerX);
+//        make.width.equalTo(@(kWidth(325)));
+//        make.height.equalTo(@(kWidth(336)));
+        
+        
+    }];
+    title.text = [LangSwitcher switchLang:name key:nil];
+    
+    UILabel *content = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextBlack font:16];
+    content.numberOfLines = 0;
+    [contentText addSubview:content];
+    [content mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.top.equalTo(title.mas_bottom).offset(23);
+//        make.centerX.equalTo(contentText.mas_centerX);
+        make.left.equalTo(@20);
+        make.right.equalTo(@-20);
+
+        //        make.width.equalTo(@(kWidth(325)));
+        //        make.height.equalTo(@(kWidth(336)));
+        
+        
+    }];
+    
+    content.text = [LangSwitcher switchLang:contents key:nil];
+    
+    UIButton *sureButton = [UIButton buttonWithTitle:@"确定" titleColor:kWhiteColor backgroundColor:kAppCustomMainColor titleFont:16];
+    
+    [contentText addSubview:sureButton];
+    sureButton.layer.cornerRadius = 4.0;
+    sureButton.clipsToBounds = YES;
+    [sureButton addTarget:self action:@selector(sureClick) forControlEvents:UIControlEventTouchUpInside];
+    [sureButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.bottom.equalTo(contentText.mas_bottom).offset(-30);
+        make.left.equalTo(@20);
+        make.right.equalTo(@-20);
+        make.height.equalTo(@50);
+        
+        
+    }];
+    [[UIApplication sharedApplication].keyWindow.rootViewController.view addSubview:contentView];
+    contentView.frame = [UIScreen mainScreen].bounds;
+    self.contentView = contentView;
+    contentView.backgroundColor = [UIColor colorWithRed:137/255.0 green:137/255.0 blue:137/255.0 alpha:0.3];
+
+}
+
+- (void)sureClick
+{
+    
+    self.contentView.hidden = YES;
+    
+}
+
 - (void)initLocalTableView {
     
-    CGFloat f = self.isClear == YES ?318 : 338;
-
-   
-    self.currentTableView = [[TLAccountTableView alloc] initWithFrame:CGRectMake(0, kHeight(f)+kStatusBarHeight, kScreenWidth, kScreenHeight - kTabBarHeight - kHeight(354)) style:UITableViewStyleGrouped];
     
+    CGFloat f = self.isClear == YES ?328-30 : 358-30;
+    CGFloat f1 = kDevice_Is_iPhoneX == YES ?15 :0;
+    CGFloat f3 = self.isClear == YES ?334-30 : 354-30;
+    CGFloat f4 = self.isClear == YES ?320-30 : 350-30;
+
+    [self.titleView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(@(kHeight(f4)));
+        make.right.equalTo(@-15);
+        make.left.equalTo(@15);
+        make.height.equalTo(@30);
+    }];
+    f = f - f1;
+    self.currentTableView = [[TLAccountTableView alloc] initWithFrame:CGRectMake(0, kHeight(f)+kStatusBarHeight, kScreenWidth, kScreenHeight - kTabBarHeight - kHeight(f3)) style:UITableViewStyleGrouped];
+    self.currentTableView.backgroundColor = kWhiteColor;
+//    self.currentTableView.tableHeaderView = self.titleView;
+//    self.currentTableView.tableHeaderView.height = 40;
+
+    self.addButton.hidden = NO;
     
 //    self.currentTableView.tableHeaderView = [UIView new];
 //    self.currentTableView.tableFooterView = [UIView new];
@@ -309,6 +447,7 @@
     };
 }
 - (void)initTableView {
+    [self.titleView removeFromSuperview];
     self.leftButton = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"闪兑" key:nil] titleColor:kHexColor(@"#333333") backgroundColor:kWhiteColor titleFont:14.0];
     [self.leftButton setImage:kImage(@"闪兑") forState:UIControlStateNormal];
 //    self.leftButton.layer.borderWidth = 0.2;
@@ -319,6 +458,45 @@
       [self.rightButton addTarget:self action:@selector(transNext) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.leftButton];
     [self.view addSubview:self.rightButton];
+    self.titleView = [[UIView alloc] init];
+    [self.view addSubview:self.titleView];
+    self.titleView.backgroundColor = kWhiteColor;
+    CGFloat f4 = self.isClear == YES ?320-30 : 350-30;
+
+    [self.titleView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(@(kHeight(f4)));
+        make.right.equalTo(@-15);
+        make.left.equalTo(@15);
+        make.height.equalTo(@30);
+    }];
+    UILabel *text = [UILabel labelWithBackgroundColor:kWhiteColor textColor:kTextBlack font:16];
+    text.text = [LangSwitcher switchLang:@"币种列表" key:nil];
+    text.frame = CGRectMake(10, 4, 100, 22);
+    [self.titleView addSubview:text];
+//    self.titleView.userInteractionEnabled = YES;
+    UIButton *addButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.addButton = addButton;
+    
+//    UITapGestureRecognizer *ta = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(addCurrent)];
+//
+//    [self.titleView addGestureRecognizer:ta];
+    
+    [addButton setImage:kImage(@"增加") forState:UIControlStateNormal];
+    [addButton addTarget:self action:@selector(addCurrent) forControlEvents:UIControlEventTouchUpInside];
+    addButton.backgroundColor = kClearColor;
+    [self.titleView addSubview:addButton];
+    [addButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.titleView.mas_top).offset(4);
+//        make.centerX.equalTo(self.titleView.mas_centerX);
+        
+        make.right.equalTo(self.titleView.mas_right).offset(-10);
+//        make.bottom.equalTo(self.view.mas_bottom).offset(15);
+        make.width.height.equalTo(@20);
+        
+    }];
+    self.addButton.hidden= YES;
+
+//    addButton.hidden = YES;
 //    self.rightButton.layer.borderWidth = 0.2;
 //    self.rightButton.layer.borderColor = kHexColor(@"#ABC0D9").CGColor;
     [self.rightButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 0)];
@@ -340,10 +518,18 @@
         
     }];
     [self.rightButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 0)];
-    CGFloat f = self.isClear == YES ?318 : 338;
+    CGFloat f = self.isClear == YES ?338-30 : 368-30;
+    CGFloat f1 = kDevice_Is_iPhoneX == YES ?25 :0;
+    f = f - f1;
+    CGFloat f3 = self.isClear == YES ?324-30 : 354-30;
 
-    self.tableView = [[PlatformTableView alloc] initWithFrame:CGRectMake(0, kHeight(f)+kStatusBarHeight, kScreenWidth, kScreenHeight - kTabBarHeight - kHeight(354)) style:UITableViewStyleGrouped];
-    
+//    [self.titleView mas_remakeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(@(kHeight(f4)));
+//        make.right.equalTo(@-15);
+//        make.left.equalTo(@15);
+//        make.height.equalTo(@30);
+//    }];
+    self.tableView = [[PlatformTableView alloc] initWithFrame:CGRectMake(0, kHeight(f)+kStatusBarHeight, kScreenWidth, kScreenHeight - kTabBarHeight - kHeight(f3)) style:UITableViewStyleGrouped];
     
     self.tableView.backgroundColor = kWhiteColor;
     self.tableView.refreshDelegate = self;
@@ -354,16 +540,57 @@
         weakSelf.switchTager = 0;
         WallAccountVC *accountVC= [[WallAccountVC alloc] init];
         accountVC.currency = weakSelf.currencys[inter];
+        accountVC.title = accountVC.currency.currency;
         accountVC.billType = CurrentTypeAll;
         [weakSelf.navigationController pushViewController:accountVC animated:YES];
         
         
     };
 }
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    NSSet *allTouches = [event allTouches];    //返回与当前接收者有关的所有的触摸对象
+    UITouch *touch = [allTouches anyObject];
+    
+}
+
+- (void)addCurrent
+{
+    
+    AddAccoutMoneyVc *monyVc = [[AddAccoutMoneyVc alloc] init];
+    monyVc.currentModels = self.currencys;
+    [self.navigationController pushViewController:monyVc animated:YES];
+    
+    self.tempcurrencys = [NSMutableArray array];
+    monyVc.select = ^(NSMutableArray *model) {
+        //                weakSelf.currencys = model;
+        //                weakSelf.currencys = [NSMutableArray array];
+        //                for (CurrencyModel *m in model) {
+        //                    if (m.IsSelected == YES) {
+        //                        [weakSelf.currencys addObject:m];
+        //                    }
+        //                }
+        //                weakSelf.currentTableView.platforms = nil;
+        //                [weakSelf.currentTableView reloadData];
+        //
+        //                weakSelf.currentTableView.platforms = weakSelf.currencys;
+        ////                [weakSelf.currentTableView beginRefreshing];
+        //                [weakSelf.currentTableView reloadData];
+        //                [weakSelf ]
+        
+        [self switchWithTager:0];
+        NSLog(@"%@",model);
+    };
+    
+    NSLog(@"点击添加");
+    
+}
 - (void)switchWithTager: (NSInteger)tager
 {
 
     if (tager == 1) {
+//        [self.tabBarController.tabBar setHidden:NO];
+
         [self.leftButton setImage:kImage(@"闪兑") forState:UIControlStateNormal];
         [self.rightButton setImage:kImage(@"一键划转") forState:UIControlStateNormal];
 //        self.leftButton.layer.borderWidth = 0.5;
@@ -372,6 +599,9 @@
 //        self.rightButton.layer.borderWidth = 0.5;
 //        self.rightButton.layer.borderColor = kHexColor(@"#ABC0D9").CGColor;
         CGFloat f = self.isClear == YES ?318 : 338;
+//        self.contentView.hidden = YES;
+//        [self inreoduceView:@"个人账户" content:@"个人账户就是指中心化钱包,是由THA替您保管私钥,在中心化钱包中,不存在钱包丢失了无法找回的情况,可以通过身份证找回您的钱包,并且可以让您体验到更多的服务。"];
+//        self.contentView.hidden = NO;
 
 //        [UIView animateWithDuration:0.5 animations:^{
 //                 self.currentTableView.frame = CGRectMake(-kScreenWidth, kHeight(f)+kStatusBarHeight, kScreenWidth, kScreenHeight - kTabBarHeight - kHeight(354));
@@ -383,9 +613,16 @@
 //
 //        } completion:^(BOOL finished) {
 //
+        for (UIView *vie in self.view.subviews) {
+            if ([vie isKindOfClass:[BuildLocalHomeView class]]) {
+                [vie removeFromSuperview];
+            }
+        }
+    
                 [self.currentTableView.platforms removeAllObjects];
                 [self.currencys removeAllObjects];
                 [self.currentTableView reloadData];
+       
                 [self.currentTableView removeFromSuperview];
                 self.tableView.hidden = YES;
                 [self.tableView.platforms removeAllObjects];
@@ -398,6 +635,8 @@
                 [self getMyCurrencyList];
                 [self queryMyAmount];
                 self.switchTager = tager;
+        
+        
 
 //            }];
       
@@ -424,7 +663,8 @@
         if (Mnemonics.length > 0) {
             [self.leftButton setImage:kImage(@"闪兑-秘钥") forState:UIControlStateNormal];
             [self.rightButton setImage:kImage(@"划转-秘钥") forState:UIControlStateNormal];
-            
+//            [self.tabBarController.tabBar setHidden:NO];
+
 //            self.leftButton.layer.borderWidth = 0.5;
 //            self.leftButton.layer.borderColor = kHexColor(@"#D1B3AB").CGColor;
 //            self.rightButton.layer.borderWidth = 0.5;
@@ -453,6 +693,13 @@
                 [self saveLocalWallet];
                 
                 [self getLocalWalletMessage];
+//                self.contentView.hidden = YES;
+//            if (self.contentView.hidden == NO) {
+//                return;
+//            }
+//                [self inreoduceView:@"私钥账户" content:@"私钥钱包就是去中心化钱包,在去中心化钱包中,所有的用户身份验证内容,如交易密码,私钥，助记词等都保存在用户手机本地,并不是保存在中心化服务器里面,如果用户误删钱包,忘记备份私钥或者助记词，将无法找到钱包"];
+//                self.contentView.hidden = NO;
+
 //            }];
             
             
@@ -464,21 +711,73 @@
         }
         // 2不存在就创建
         self.switchTager = 0;
-        CoinWeakSelf;
-        BuildWalletMineVC *MineVC = [[BuildWalletMineVC alloc] init];
-        MineVC.walletBlock  = ^{
-            [weakSelf.headerView swipeBottomClick:nil];
-            
-        };
-        [self.navigationController pushViewController:MineVC animated:YES];
+//        CoinWeakSelf;
+//        BuildWalletMineVC *MineVC = [[BuildWalletMineVC alloc] init];
+//        MineVC.walletBlock  = ^{
+//            [weakSelf.headerView swipeBottomClick:nil];
+//
+//        };
+//        [self.navigationController pushViewController:MineVC animated:YES];
         [self.tableView.platforms removeAllObjects];
         [self.currencys removeAllObjects];
         [self.tableView reloadData];
         [self.tableView removeFromSuperview];
+//        [self.tabBarController.tabBar setHidden:YES];
+        self.homeView = [[BuildLocalHomeView alloc] init];
+        [self.view addSubview:self.homeView];
         
-       
-       
         
+        self.homeView.backgroundColor = kWhiteColor;
+        [self.homeView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.headerView.mas_bottom).offset(15);
+            make.right.equalTo(@-15);
+            make.left.equalTo(@15);
+            make.bottom.equalTo(self.view.mas_bottom).offset(0);
+        }];
+        CoinWeakSelf;
+        self.homeView.buildBlock = ^{
+            
+            weakSelf.navigationController.navigationBar.hidden = NO;
+            BuildWalletMineVC *sucessVC = [[BuildWalletMineVC alloc] init];
+//            RevisePassWordVC *vc = [[RevisePassWordVC alloc] init];
+//            sucessVC.title =  [LangSwitcher switchLang:@"创建钱包" key:nil];
+            
+//            vc.walletBlock = ^{
+//                [weakSelf switchWithTager:0];
+////                weakSelf.isBulid = NO;
+//
+//            };
+            
+            //    vc.title =  NSLocalizedString(@"创建钱包", nil);
+            [weakSelf.navigationController pushViewController:sucessVC animated:YES];
+            weakSelf.homeView = nil;
+//
+//            [weakSelf.homeView removeFromSuperview];
+            //    [self presentViewController:vc animated:YES completion:nil];
+            weakSelf.isBulid = YES;
+        };
+        self.homeView.importBlock = ^{
+            weakSelf.navigationController.navigationBar.hidden = NO;
+            
+            //    RevisePassWordVC *vc = [[RevisePassWordVC alloc] init];
+            //    vc.title =  [LangSwitcher switchLang:@"创建钱包" key:nil];
+            //    [self.navigationController pushViewController:vc animated:YES];
+            WalletImportVC *vc = [[WalletImportVC alloc] init];
+            vc.title =  [LangSwitcher switchLang:@"导入钱包" key:nil];
+            vc.walletBlock = ^{
+//            [weakSelf switchWithTager:0];
+//                weakSelf.isBulid = NO;
+
+            };
+            //    vc.title = NSLocalizedString(@"导入钱包", nil);
+            [weakSelf.navigationController pushViewController:vc animated:YES];
+//            weakSelf.homeView.hidden = YES;
+//            [weakSelf.homeView removeFromSuperview];
+            weakSelf.isBulid = YES;
+            weakSelf.homeView = nil;
+
+            
+        };
     }
     //切换中心钱包和本地化钱包
     

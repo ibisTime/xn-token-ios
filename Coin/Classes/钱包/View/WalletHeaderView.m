@@ -25,9 +25,9 @@
 
 @property (nonatomic, strong) UIImageView *rightArrowIV;
 
-@property (nonatomic, strong) UIImageView *segmentLeft;
-
-@property (nonatomic, strong) UIImageView *segmentRight;
+//@property (nonatomic, strong) UIImageView *segmentLeft;
+//
+//@property (nonatomic, strong) UIImageView *segmentRight;
 
 
 @end
@@ -38,11 +38,11 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        
+        [self initRateView];
+
         //
         [self initSubvies];
         //汇率
-        [self initRateView];
         
     }
     return self;
@@ -62,15 +62,15 @@
     [addButton setImage:kImage(@"增加") forState:UIControlStateNormal];
     [addButton addTarget:self action:@selector(addCurrent) forControlEvents:UIControlEventTouchUpInside];
     addButton.backgroundColor = kClearColor;
-    [self addSubview:addButton];
-    [addButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.right.equalTo(self.mas_right).offset(-10);
-        make.top.equalTo(self.mas_top).offset(15+kStatusBarHeight);
-        make.width.height.equalTo(@20);
-        
-    }];
-    addButton.hidden = YES;
+//    [self addSubview:addButton];
+//    [addButton mas_makeConstraints:^(MASConstraintMaker *make) {
+//
+//        make.right.equalTo(self.mas_right).offset(-10);
+//        make.bottom.equalTo(self.mas_bottom).offset(15);
+//        make.width.height.equalTo(@20);
+//
+//    }];
+//    addButton.hidden = YES;
 //    UIButton *codeButton = [UIButton buttonWithType:UIButtonTypeCustom];
 //    self.codeButton = codeButton;
 //    [codeButton setImage:kImage(@"扫一扫-黑色") forState:UIControlStateNormal];
@@ -96,7 +96,7 @@
     [self addSubview:equivalentBtn];
     [equivalentBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.top.equalTo(self.mas_top).offset(10+kStatusBarHeight);
+        make.top.equalTo(_whiteView.mas_bottom).offset(11);
         make.left.equalTo(self.mas_left).offset(19);
 //        make.width.greaterThanOrEqualTo(@115);
         
@@ -148,6 +148,10 @@
     [self.bottomIV addSubview:localLbl];
     UIImageView *imageView  = [[UIImageView alloc] init];
     imageView.backgroundColor = kClearColor;
+    
+    UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(centerClick)];
+    [imageView addGestureRecognizer:tap];
+    imageView.userInteractionEnabled = YES;
     [self.bottomIV addSubview:imageView];
     imageView.image = kImage(@"问号");
     [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -223,6 +227,9 @@
         make.width.height.equalTo(@14);
         
     }];
+    image.userInteractionEnabled = YES;
+    UITapGestureRecognizer * tap1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(localClick)];
+    [image addGestureRecognizer:tap1];
     UILabel *privateMoney = [UILabel labelWithBackgroundColor:kClearColor textColor:kWhiteColor font:30.0];
     
     self.privateMoney = privateMoney;
@@ -234,31 +241,31 @@
         
     }];
     
-    self.segmentLeft = [[UIImageView alloc] init];
-    [self addSubview:self.segmentLeft];
-    self.segmentLeft.layer.cornerRadius = 4.0;
-    self.segmentLeft.clipsToBounds = YES;
-    self.segmentLeft.backgroundColor = kHexColor(@"#007AFF");
-    [self.segmentLeft mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.mas_centerX).offset(-5);
-        make.top.equalTo(@(kHeight(244)));
-        make.width.equalTo(@16);
-        make.height.equalTo(@8);
-
-    }];
-    
-    self.segmentRight = [[UIImageView alloc] init];
-    [self addSubview:self.segmentRight];
-    self.segmentRight.layer.cornerRadius = 4.0;
-    self.segmentRight.clipsToBounds = YES;
-    self.segmentRight.backgroundColor = kHexColor(@"#C6D5DC");
-    [self.segmentRight mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.mas_centerX).offset(5);
-        make.top.equalTo(@(kHeight(244)));
-        make.width.equalTo(@8);
-        make.height.equalTo(@8);
-        
-    }];
+//    self.segmentLeft = [[UIImageView alloc] init];
+//    [self addSubview:self.segmentLeft];
+//    self.segmentLeft.layer.cornerRadius = 4.0;
+//    self.segmentLeft.clipsToBounds = YES;
+//    self.segmentLeft.backgroundColor = kHexColor(@"#007AFF");
+//    [self.segmentLeft mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.right.equalTo(self.mas_centerX).offset(-5);
+//        make.bottom.equalTo(self.mas_bottom).offset(-5);
+//        make.width.equalTo(@16);
+//        make.height.equalTo(@8);
+//
+//    }];
+//
+//    self.segmentRight = [[UIImageView alloc] init];
+//    [self addSubview:self.segmentRight];
+//    self.segmentRight.layer.cornerRadius = 4.0;
+//    self.segmentRight.clipsToBounds = YES;
+//    self.segmentRight.backgroundColor = kHexColor(@"#C6D5DC");
+//    [self.segmentRight mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.equalTo(self.mas_centerX).offset(5);
+//        make.bottom.equalTo(self.mas_bottom).offset(-5);
+//        make.width.equalTo(@8);
+//        make.height.equalTo(@8);
+//
+//    }];
    
     //美元
 //    self.usdAmountLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kWhiteColor font:15.0];
@@ -329,22 +336,22 @@
                 make.width.equalTo(@(kWidth(225)));
                 
             }];
-            [self.segmentRight mas_remakeConstraints:^(MASConstraintMaker *make) {
-                make.right.equalTo(self.mas_centerX).offset(-5);
-                make.top.equalTo(@(kHeight(244)));
-                make.width.equalTo(@8);
-                make.height.equalTo(@8);
-                
-            }];
-            
-            
-            [self.segmentLeft mas_remakeConstraints:^(MASConstraintMaker *make) {
-                make.left.equalTo(self.mas_centerX).offset(5);
-                make.top.equalTo(@(kHeight(244)));
-                make.width.equalTo(@16);
-                make.height.equalTo(@8);
-                
-            }];
+//            [self.segmentRight mas_remakeConstraints:^(MASConstraintMaker *make) {
+//                make.right.equalTo(self.mas_centerX).offset(-5);
+//                make.bottom.equalTo(self.mas_bottom).offset(-5);
+//                make.width.equalTo(@8);
+//                make.height.equalTo(@8);
+//
+//            }];
+//
+//
+//            [self.segmentLeft mas_remakeConstraints:^(MASConstraintMaker *make) {
+//                make.left.equalTo(self.mas_centerX).offset(5);
+//                make.bottom.equalTo(self.mas_bottom).offset(-5);
+//                make.width.equalTo(@16);
+//                make.height.equalTo(@8);
+//
+//            }];
             [self layoutIfNeeded];
             [self setNeedsDisplay];
             
@@ -353,6 +360,24 @@
         
     }];
     
+    
+}
+
+
+- (void)centerClick
+{
+   
+    if (self.localBlock) {
+        self.localBlock();
+    }
+}
+
+- (void)localClick
+{
+    
+    if (self.centerBlock) {
+        self.centerBlock();
+    }
     
 }
 
@@ -400,22 +425,22 @@
                 make.width.equalTo(@(kWidth(225)));
                 
             }];
-            [self.segmentRight mas_remakeConstraints:^(MASConstraintMaker *make) {
-                make.right.equalTo(self.mas_centerX).offset(-5);
-                make.top.equalTo(@(kHeight(244)));
-                make.width.equalTo(@8);
-                make.height.equalTo(@8);
-                
-            }];
-            
-            
-            [self.segmentLeft mas_remakeConstraints:^(MASConstraintMaker *make) {
-                make.left.equalTo(self.mas_centerX).offset(5);
-                make.top.equalTo(@(kHeight(244)));
-                make.width.equalTo(@16);
-                make.height.equalTo(@8);
-                
-            }];
+//            [self.segmentRight mas_remakeConstraints:^(MASConstraintMaker *make) {
+//                make.right.equalTo(self.mas_centerX).offset(-5);
+//                make.bottom.equalTo(self.mas_bottom).offset(-5);
+//                make.width.equalTo(@8);
+//                make.height.equalTo(@8);
+//
+//            }];
+//
+//
+//            [self.segmentLeft mas_remakeConstraints:^(MASConstraintMaker *make) {
+//                make.left.equalTo(self.mas_centerX).offset(5);
+//                make.bottom.equalTo(self.mas_bottom).offset(-5);
+//                make.width.equalTo(@16);
+//                make.height.equalTo(@8);
+//
+//            }];
             [self layoutIfNeeded];
             [self setNeedsDisplay];
            
@@ -462,22 +487,22 @@
                 make.width.equalTo(@(kWidth(220)));
                 
             }];
-            [self.segmentLeft mas_remakeConstraints:^(MASConstraintMaker *make) {
-                make.right.equalTo(self.mas_centerX).offset(-5);
-                make.top.equalTo(@(kHeight(244)));
-                make.width.equalTo(@16);
-                make.height.equalTo(@8);
-                
-            }];
-            
-            
-            [self.segmentRight mas_remakeConstraints:^(MASConstraintMaker *make) {
-                make.left.equalTo(self.mas_centerX).offset(5);
-                make.top.equalTo(@(kHeight(244)));
-                make.width.equalTo(@8);
-                make.height.equalTo(@8);
-                
-            }];
+//            [self.segmentLeft mas_remakeConstraints:^(MASConstraintMaker *make) {
+//                make.right.equalTo(self.mas_centerX).offset(-5);
+//                make.bottom.equalTo(self.mas_bottom).offset(-5);
+//                make.width.equalTo(@16);
+//                make.height.equalTo(@8);
+//
+//            }];
+//
+//
+//            [self.segmentRight mas_remakeConstraints:^(MASConstraintMaker *make) {
+//                make.left.equalTo(self.mas_centerX).offset(5);
+//                make.bottom.equalTo(self.mas_bottom).offset(-5);
+//                make.width.equalTo(@8);
+//                make.height.equalTo(@8);
+//
+//            }];
             [self layoutIfNeeded];
             [self setNeedsDisplay];
             
@@ -525,22 +550,22 @@
                 make.width.equalTo(@(kWidth(220)));
                 
             }];
-            [self.segmentLeft mas_remakeConstraints:^(MASConstraintMaker *make) {
-                make.right.equalTo(self.mas_centerX).offset(-5);
-                make.top.equalTo(@(kHeight(244)));
-                make.width.equalTo(@16);
-                make.height.equalTo(@8);
-                
-            }];
-            
-            
-            [self.segmentRight mas_remakeConstraints:^(MASConstraintMaker *make) {
-                make.left.equalTo(self.mas_centerX).offset(5);
-                make.top.equalTo(@(kHeight(244)));
-                make.width.equalTo(@8);
-                make.height.equalTo(@8);
-                
-            }];
+//            [self.segmentLeft mas_remakeConstraints:^(MASConstraintMaker *make) {
+//                make.right.equalTo(self.mas_centerX).offset(-5);
+//                make.bottom.equalTo(self.mas_bottom).offset(-5);
+//                make.width.equalTo(@16);
+//                make.height.equalTo(@8);
+//
+//            }];
+//
+//
+//            [self.segmentRight mas_remakeConstraints:^(MASConstraintMaker *make) {
+//                make.left.equalTo(self.mas_centerX).offset(5);
+//                make.width.equalTo(@8);
+//                make.height.equalTo(@8);
+//                make.bottom.equalTo(self.mas_bottom).offset(-5);
+//
+//            }];
             [self layoutIfNeeded];
             [self setNeedsDisplay];
 
@@ -579,8 +604,8 @@
     [whiteView mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.left.right.equalTo(@0);
-        make.top.equalTo(@(kHeight(256)));
-        make.bottom.equalTo(self.mas_bottom);
+        make.top.equalTo(@(kStatusBarHeight));
+        make.height.equalTo(@(kHeight(40)));
         
     }];
    
@@ -650,7 +675,13 @@
 //
 //        make.left.right.top.bottom.equalTo(0);
 //    }];
-     [self.whiteView removeFromSuperview];
+//     [self.whiteView removeFromSuperview];
+     self.whiteView.hidden = YES;
+    
+    [self.equivalentBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(@(kStatusBarHeight+15));
+        make.left.equalTo(self.mas_left).offset(19);
+    }];
     if (self.clearBlock) {
         self.clearBlock();
     }

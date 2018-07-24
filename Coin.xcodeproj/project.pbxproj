@@ -235,6 +235,7 @@
 		B88B093320C908DC005C2D2F /* ResiseTextFiled.m in Sources */ = {isa = PBXBuildFile; fileRef = B88B093220C908DC005C2D2F /* ResiseTextFiled.m */; };
 		B88D6C6F20EDF39F0043832C /* TLFastvc.m in Sources */ = {isa = PBXBuildFile; fileRef = B88D6C6E20EDF39F0043832C /* TLFastvc.m */; };
 		B88D6C7220EDF3B50043832C /* TLTransfromVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B88D6C7120EDF3B50043832C /* TLTransfromVC.m */; };
+		B891F0682101899900ED5DDF /* BuildLocalHomeView.m in Sources */ = {isa = PBXBuildFile; fileRef = B891F0672101899900ED5DDF /* BuildLocalHomeView.m */; };
 		B89783D720F6FB310088C713 /* TLUserFindPwdVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B89783D620F6FB310088C713 /* TLUserFindPwdVC.m */; };
 		B8A2436520E5E0F20074DF8F /* TLDataBase.m in Sources */ = {isa = PBXBuildFile; fileRef = B8A2436420E5E0F20074DF8F /* TLDataBase.m */; };
 		B8B15C0220CA312100F13220 /* BuildWalletMineVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B8B15C0120CA312100F13220 /* BuildWalletMineVC.m */; };
@@ -744,6 +745,8 @@
 		B88D6C6E20EDF39F0043832C /* TLFastvc.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLFastvc.m; sourceTree = "<group>"; };
 		B88D6C7020EDF3B50043832C /* TLTransfromVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLTransfromVC.h; sourceTree = "<group>"; };
 		B88D6C7120EDF3B50043832C /* TLTransfromVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLTransfromVC.m; sourceTree = "<group>"; };
+		B891F0662101899900ED5DDF /* BuildLocalHomeView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BuildLocalHomeView.h; sourceTree = "<group>"; };
+		B891F0672101899900ED5DDF /* BuildLocalHomeView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BuildLocalHomeView.m; sourceTree = "<group>"; };
 		B89783D520F6FB310088C713 /* TLUserFindPwdVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLUserFindPwdVC.h; sourceTree = "<group>"; };
 		B89783D620F6FB310088C713 /* TLUserFindPwdVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLUserFindPwdVC.m; sourceTree = "<group>"; };
 		B8A2436320E5E0F20074DF8F /* TLDataBase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLDataBase.h; sourceTree = "<group>"; };
@@ -1000,6 +1003,8 @@
 				B8F63ED920D3639900556150 /* LocalBillCell.m */,
 				B8F63EDE20D3809700556150 /* LocalBillDetailTableView.h */,
 				B8F63EDF20D3809700556150 /* LocalBillDetailTableView.m */,
+				B891F0662101899900ED5DDF /* BuildLocalHomeView.h */,
+				B891F0672101899900ED5DDF /* BuildLocalHomeView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2891,6 +2896,7 @@
 				2EE361551FFE182800A5C3EB /* RespHandler.m in Sources */,
 				7A8A5D3520EA3E5A002D9A48 /* SendVC.m in Sources */,
 				21205CE51FCD31E0003C6C7C /* CoinAddressCell.m in Sources */,
+				B891F0682101899900ED5DDF /* BuildLocalHomeView.m in Sources */,
 				B8B15C2720CA75CC00F13220 /* AddSearchBottomCell.m in Sources */,
 				211DE6A21FB58B4C002FCF3D /* TLCaptchaView.m in Sources */,
 				211DE6B71FB58B4C002FCF3D /* UIBarButtonItem+convience.m in Sources */,

@@ -14,6 +14,8 @@ typedef void(^SwitchSelectBlock)(NSInteger teger);
 typedef void(^WalletCodeBlock)(void);
 typedef void(^WalletclearBlock)(void);
 
+typedef void(^WalletcenterBlock)(void);
+typedef void(^WalletlocalBlock)(void);
 @interface WalletHeaderView : UIView
 
 @property (nonatomic, copy) WalletHeaderBlock headerBlock;
@@ -21,6 +23,8 @@ typedef void(^WalletclearBlock)(void);
 @property (nonatomic, copy) SwitchSelectBlock switchBlock;
 @property (nonatomic, copy) WalletCodeBlock codeBlock;
 @property (nonatomic, copy) WalletclearBlock clearBlock;
+@property (nonatomic, copy) WalletcenterBlock centerBlock;
+@property (nonatomic, copy) WalletlocalBlock localBlock;
 
 
 //总资产(人民币)

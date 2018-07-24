@@ -74,21 +74,52 @@ static NSString *identifierCell = @"BillListCell";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     
-    return 10;
+    return 22;
 }
 
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     
-    UILabel *lab = [[UILabel alloc] initWithFrame:CGRectMake(15, 20, kScreenWidth, 22)];
+    UIView *contentView = [[UIView alloc] initWithFrame:CGRectMake(15, 20, kScreenWidth, 22)];
+    
+    UIButton *button = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"筛选" key:nil] titleColor:kTextColor backgroundColor:kClearColor titleFont:12];
+    [button addTarget:self action:@selector(clickFilter:) forControlEvents:UIControlEventTouchUpInside];
+//    [UIBarButtonItem addRightItemWithTitle:[LangSwitcher switchLang:@"筛选" key:nil]
+//                                titleColor:kTextColor
+//                                     frame:CGRectMake(0, 0, 60, 30)
+//                                        vc:self
+//                                    action:@selector(clickFilter:)];
+    [contentView addSubview:button];
+    
+    [button mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(contentView.mas_top);
+        make.right.equalTo(contentView.mas_right).offset(-15);
+        make.width.equalTo(@35);
+        make.height.equalTo(@22);
+    }];
+    UILabel *lab = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 22)];
+    [contentView addSubview:lab];
+    
     lab.textColor = kTextColor;
     lab.font = [UIFont systemFontOfSize:12];
     
-    lab.text = [NSString stringWithFormat:@"    %@",[LangSwitcher switchLang:@"交易记录" key:nil]];
-    return lab;
+    lab.text =[NSString stringWithFormat:@"    %@",[LangSwitcher switchLang:@"交易记录" key:nil]];
+    UIView *view = [UIView new];
+    view.backgroundColor = kHexColor(@"276FFA ");
+    view.frame = CGRectMake(0, 8, 10, 5);
+    [contentView addSubview:view];
+    
+    return contentView;
 }
 
-
+- (void)clickFilter:(UIButton *)sender {
+    
+    if (self.addBlock) {
+        self.addBlock();
+    }
+    NSLog(@"ready");
+    
+}
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
     

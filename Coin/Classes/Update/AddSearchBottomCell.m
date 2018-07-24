@@ -35,8 +35,8 @@
         [self.selectedBtn setTitle:@"test1" forState:UIControlStateSelected];
         
         self.selectedBtn.enabled = NO;
-        self.selectedBtn.layer.cornerRadius = 4.0;
-        self.selectedBtn.layer.borderColor = (__bridge CGColorRef _Nullable)(kAppCustomMainColor);
+//        self.selectedBtn.layer.cornerRadius = 4.0;
+        self.selectedBtn.layer.borderColor = kLineColor.CGColor;
         self.selectedBtn.layer.borderWidth=1;
         self.selectedBtn.frame = self.bounds;
         //        [self.selectedBtn setImage:[UIImage imageNamed:@"金"] forState:UIControlStateNormal];
@@ -85,14 +85,14 @@
     _title = title;
     [self.selectedBtn setTitle:title.symbol forState:UIControlStateNormal];
     if (title.IsSelect == YES) {
-        [self.selectedBtn setBackgroundColor:kAppCustomMainColor];
-        [self.selectedBtn setTitleColor:kWhiteColor forState:UIControlStateNormal];
+        [self.selectedBtn setBackgroundColor:kHexColor(@"#F8F8F8")];
+        [self.selectedBtn setTitleColor:kHexColor(@"#CCCCCC") forState:UIControlStateNormal];
 
 //        self.photoImageView.hidden = NO;
     }else{
         
-        [self.selectedBtn setBackgroundColor:[UIColor colorWithHexString:@"#F5F5F5"]];
-        [self.selectedBtn setTitleColor:kBlackColor forState:UIControlStateNormal];
+        [self.selectedBtn setBackgroundColor:kWhiteColor];
+        [self.selectedBtn setTitleColor:kTextBlack forState:UIControlStateNormal];
 
 //        self.photoImageView.hidden = YES;
     }

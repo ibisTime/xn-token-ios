@@ -34,11 +34,30 @@
 
 #pragma mark - Init
 - (void)initHeaderView {
+    self.view.backgroundColor = kWhiteColor;
+    UIView *topView = [[UIView alloc] init];
+    [self.view addSubview:topView];
+    topView.backgroundColor = kHexColor(@"#0848DF");
     
-    self.headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 0)];
+    [topView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.view.mas_top);
+        
+        make.left.equalTo(self.view.mas_left);
+        make.right.equalTo(self.view.mas_right);
+        make.height.equalTo(@(kHeight(66)));
+    }];
+    
+    self.headerView = [[UIView alloc] initWithFrame:CGRectZero];
     self.headerView.backgroundColor = kWhiteColor;
+    [self.view addSubview:self.headerView];
 //    self.tableView.tableHeaderView = self.headerView;
-
+    [self.headerView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.view.mas_top);
+        
+        make.left.equalTo(self.view.mas_left).offset(15);
+        make.right.equalTo(self.view.mas_right).offset(-15);
+        make.height.equalTo(@(kHeight(90)));
+    }];
     //账单类型
     UILabel *textLbl = [UILabel labelWithBackgroundColor:kClearColor
                                                textColor:kTextColor
@@ -106,14 +125,14 @@
 //    }];
     
     [self.headerView layoutIfNeeded];
-    self.headerView.frame = CGRectMake(0, 0, SCREEN_WIDTH, line.bottom);
-    self.tableView.tableHeaderView = self.headerView;
+//    self.headerView.frame = CGRectMake(0, 0, SCREEN_WIDTH, line.bottom);
+//    self.tableView.tableHeaderView = self.headerView;
     
 }
 
 - (void)initTableView {
     
-    self.tableView = [[BillDetailTableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight) style:UITableViewStylePlain];
+    self.tableView = [[BillDetailTableView alloc] initWithFrame:CGRectMake(0, kHeight(90), kScreenWidth, kSuperViewHeight) style:UITableViewStylePlain];
     self.tableView.bill = self.bill;
     [self.view addSubview:self.tableView];
 }

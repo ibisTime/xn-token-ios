@@ -25,7 +25,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title = [LangSwitcher switchLang:@"交易详情" key:nil];
-    
+    self.view.backgroundColor = kWhiteColor;
     [self initTableView];
     //
     [self initHeaderView];
@@ -34,15 +34,33 @@
 
 #pragma mark - Init
 - (void)initHeaderView {
+    UIView *topView = [[UIView alloc] init];
+    [self.view addSubview:topView];
+    topView.backgroundColor = kHexColor(@"#0848DF");
     
-    self.headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 0)];
+    [topView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.view.mas_top);
+        
+        make.left.equalTo(self.view.mas_left);
+        make.right.equalTo(self.view.mas_right);
+        make.height.equalTo(@(kHeight(66)));
+    }];
+    self.headerView = [[UIView alloc] init];
     self.headerView.backgroundColor = kWhiteColor;
+    [self.view addSubview:self.headerView];
+    [self.headerView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.view.mas_top);
+        make.left.equalTo(self.view.mas_left).offset(15);
+        make.right.equalTo(self.view.mas_right).offset(-15);
+        make.height.equalTo(@(kHeight(90)));
+    }];
     //    self.tableView.tableHeaderView = self.headerView;
     UIImageView *icImage = [[UIImageView alloc] init];
     icImage.contentMode = UIViewContentModeScaleToFill;
-    icImage.layer.cornerRadius = 25;
-    icImage.clipsToBounds = YES;
+//    icImage.layer.cornerRadius = 25;
+//    icImage.clipsToBounds = YES;
     [self.headerView addSubview:icImage];
+    icImage.image = kImage(@"提背景");
 //    if ([self.currentModel.symbol isEqualToString:@"ETH"]) {
 //        icImage.image = kImage(@"eth");
 //    }else if ([self.currentModel.symbol isEqualToString:@"WAN"])
@@ -53,9 +71,11 @@
     
     [icImage mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.top.equalTo(@25);
-        make.left.equalTo(@15);
-        make.width.height.equalTo(@50);
+        make.top.equalTo(self.headerView.mas_top);
+        make.left.equalTo(self.headerView.mas_left);
+        make.right.equalTo(self.headerView.mas_right);
+        make.bottom.equalTo(self.headerView.mas_bottom);
+
     }];
     
     //账单类型
@@ -64,7 +84,7 @@
                                                     font:16.0];
     textLbl.textAlignment = NSTextAlignmentCenter;
     textLbl.numberOfLines = 0;
-    [self.headerView addSubview:textLbl];
+    [icImage addSubview:textLbl];
 //    textLbl.text = _bill.bizNote;
     
     
@@ -88,62 +108,60 @@
                                                  textColor:kAppCustomMainColor
                                                       font:20.0];
     amountLbl.text = moneyStr;
-    [self.headerView addSubview:amountLbl];
+    [icImage addSubview:amountLbl];
     
     //分割线
-    UIView *line = [[UIView alloc] init];
-    line.backgroundColor = kLineColor;
-    [self.headerView addSubview:line];
+//    UIView *line = [[UIView alloc] init];
+//    line.backgroundColor = kLineColor;
+//    [self.headerView addSubview:line];
     
     
     [textLbl mas_makeConstraints:^(MASConstraintMaker *make) {
 
-        make.top.equalTo(self.headerView.mas_top).offset(15);
-        //        make.centerX.equalTo(self.headerView.mas_centerX);
-        make.left.equalTo(icImage.mas_right).offset(15);
+        make.top.equalTo(icImage.mas_top).offset(19);
+        make.centerX.equalTo(icImage.mas_centerX);
 
     }];
     if ([_bill.direction isEqualToString:@"0"]) {
         textLbl.text = [LangSwitcher switchLang:@"转出" key:nil];
-          icImage.image = kImage(@"提现");
-            
-            
+        
+            self.title =  [LangSwitcher switchLang:@"转出" key:nil];
      } else
         {
            
-            icImage.image  = kImage(@"充值");
             textLbl.text = [LangSwitcher switchLang:@"转入" key:nil];
+            self.title =  [LangSwitcher switchLang:@"转入" key:nil];
 
     }
     //
     [amountLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.top.equalTo(textLbl.mas_bottom).offset(10);
-        make.left.equalTo(icImage.mas_right).offset(15);
+        make.centerX.equalTo(icImage.mas_centerX);
         
     }];
     
-    [line mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.top.equalTo(amountLbl.mas_bottom).offset(10);
-        make.left.right.equalTo(self.headerView);
-        make.height.mas_equalTo(0.5);
-        
-    }];
+//    [line mas_makeConstraints:^(MASConstraintMaker *make) {
+//
+//        make.top.equalTo(amountLbl.mas_bottom).offset(10);
+//        make.left.right.equalTo(self.headerView);
+//        make.height.mas_equalTo(0.5);
+//
+//    }];
     
     //    [self.headerView mas_makeConstraints:^(MASConstraintMaker *make) {
     //        make.width.mas_equalTo(SCREEN_WIDTH);
     //    }];
     
     [self.headerView layoutIfNeeded];
-    self.headerView.frame = CGRectMake(0, 0, SCREEN_WIDTH, line.bottom);
-    self.tableView.tableHeaderView = self.headerView;
+   
+//    self.tableView.tableHeaderView = self.headerView;
     
 }
 
 - (void)initTableView {
     
-    self.tableView = [[LocalBillDetailTableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight) style:UITableViewStylePlain];
+    self.tableView = [[LocalBillDetailTableView alloc] initWithFrame:CGRectMake(0, kHeight(90), kScreenWidth, kSuperViewHeight) style:UITableViewStylePlain];
     self.tableView.bill = self.bill;
     self.tableView.refreshDelegate = self;
     self.tableView.currentModel = self.currentModel;

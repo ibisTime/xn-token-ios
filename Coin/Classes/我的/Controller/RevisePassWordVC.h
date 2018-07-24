@@ -12,7 +12,11 @@ typedef NS_ENUM(NSInteger, PassWprdType) {
     PassWprdTypeFirst = 0,   //第一次
     PassWprdTypeSecond = 1  //第二次
 };
+
+typedef void(^WalletBackBlock)(void);
+
 @interface RevisePassWordVC : TLBaseVC
+@property (nonatomic , copy) WalletBackBlock walletBlock;
 
 @property (nonatomic, assign) PassWprdType Type;
 

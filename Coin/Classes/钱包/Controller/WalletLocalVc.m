@@ -135,11 +135,11 @@
 - (void)initTableView {
     
     self.tableView = [[WalletLocalBillTableView alloc]
-                      initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight)
+                      initWithFrame:CGRectMake(0, self.headView.yy+16, kScreenWidth, kSuperViewHeight)
                       style:UITableViewStyleGrouped];
     
     self.tableView.placeHolderView = self.placeHolderView;
-    self.tableView.tableHeaderView = self.headView;
+//    self.tableView.tableHeaderView = self.headView;
     self.tableView.backgroundColor = kWhiteColor;
     self.tableView.refreshDelegate = self;
     self.tableView.billModel = self.currency;
@@ -266,8 +266,22 @@
 
 - (void)initHeadView
 {
+  
+    self.view.backgroundColor = kWhiteColor;
+    UIView *topView = [[UIView alloc] init];
+    [self.view addSubview:topView];
+    topView.backgroundColor = kHexColor(@"#0848DF");
     
-    WallAccountHeadView *headView = [[WallAccountHeadView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 150)];
+    [topView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.view.mas_top);
+        
+        make.left.equalTo(self.view.mas_left);
+        make.right.equalTo(self.view.mas_right);
+        make.height.equalTo(@(kHeight(66)));
+    }];
+   
+    
+    WallAccountHeadView *headView = [[WallAccountHeadView alloc] initWithFrame:CGRectMake(15, 0, kScreenWidth-30, 90)];
     self.headView = headView;
     [self.view addSubview:headView];
     self.headView.ISLocal = YES;
@@ -301,15 +315,16 @@
     
     [textArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         
-        UIButton *btn = [UIButton buttonWithTitle:textArr[idx] titleColor:kTextColor backgroundColor:kClearColor titleFont:16.0];
+        UIButton *btn = [UIButton buttonWithTitle:textArr[idx] titleColor:kTextColor backgroundColor:kClearColor titleFont:12.0];
         [btn addTarget:self action:@selector(btnClickCurreny:) forControlEvents:UIControlEventTouchUpInside];
         [btn setTitleColor:kHexColor(@"#ffffff") forState:UIControlStateNormal];
         
         [btn setImage:kImage(imgArr[idx]) forState:UIControlStateNormal];
         
         btn.tag = 201806+idx;
-        [btn setTitleEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 0)];
-        
+        [btn setTitleEdgeInsets:UIEdgeInsetsMake(30, 10, 0, 0)];
+        [btn setImageEdgeInsets:UIEdgeInsetsMake(0, 50, 10, 0)];
+
         [self.bottomViw addSubview:btn];
         [btn mas_makeConstraints:^(MASConstraintMaker *make) {
             
@@ -322,7 +337,7 @@
         
         if (idx != 1) {
             [btn setBackgroundColor:kWhiteColor forState:UIControlStateNormal];
-            [btn setTitleColor:kHexColor(@"#108ee9") forState:UIControlStateNormal];
+            [btn setTitleColor:kTextColor forState:UIControlStateNormal];
             UIView *vLine = [[UIView alloc] init];
             
             vLine.backgroundColor = kLineColor;
@@ -339,8 +354,8 @@
         }
         else{
             
-            [btn setTitleColor:kWhiteColor forState:UIControlStateNormal];
-            [btn setBackgroundColor:kHexColor(@"#108ee9") forState:UIControlStateNormal];
+            [btn setTitleColor:kTextColor forState:UIControlStateNormal];
+            [btn setBackgroundColor:kWhiteColor forState:UIControlStateNormal];
 
         }
         if (idx == 0) {

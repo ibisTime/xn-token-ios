@@ -296,6 +296,19 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    CoinWeakSelf;
+    　　if ([self.navigationController.viewControllers indexOfObject:self]==NSNotFound) {
+        
+        if (self.walletBlock) {
+            self.walletBlock();
+        }
+        　　　　NSLog(@"clicked navigationbar back button");
+        　　}
+    
+}
+
 /*
 #pragma mark - Navigation
 

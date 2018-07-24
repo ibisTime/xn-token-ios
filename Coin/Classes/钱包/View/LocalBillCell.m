@@ -26,6 +26,8 @@
 @property (nonatomic, strong) UILabel *dayLbl;
 
 @property (nonatomic,strong) UILabel *timeLbl;
+@property (nonatomic,strong) UILabel *introduceLab;
+
 @end
 
 
@@ -35,22 +37,50 @@
     
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         
+        self.iconIV = [[UIImageView alloc] init];
+        self.iconIV.contentMode = UIViewContentModeScaleAspectFill;
+        self.iconIV.layer.cornerRadius = 15;
+        self.iconIV.clipsToBounds = YES;
+        [self addSubview:self.iconIV];
+        [self.iconIV mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.top.equalTo(self.mas_top).offset(20);
+            make.left.equalTo(self.mas_left).offset(15);
+
+            make.width.height.equalTo(@30);
+            
+        }];
+        
+        //备注
+        self.detailLbl = [UILabel labelWithFrame:CGRectZero textAligment:NSTextAlignmentLeft
+                                 backgroundColor:[UIColor clearColor]
+                                            font:Font(14)
+                                       textColor:kTextBlack];
+        self.detailLbl.numberOfLines = 0;
+        self.detailLbl.height = [FONT(14) lineHeight];
+        [self addSubview:self.detailLbl];
+        
+        [self.detailLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.mas_top).offset(17);
+            make.left.equalTo(self.iconIV.mas_right).offset(15);
+            //            make.right.equalTo(rightArrowIV.mas_left).offset(-15);
+            
+        }];
         CGFloat left = 15;
         CGFloat timeW = 100;
         
         //
-        self.dayLbl = [UILabel labelWithFrame:CGRectMake(left,15, 40, 20) textAligment:NSTextAlignmentLeft
+        self.dayLbl = [UILabel labelWithFrame:CGRectZero textAligment:NSTextAlignmentLeft
                               backgroundColor:[UIColor clearColor]
-                                         font:Font(15.0)
+                                         font:Font(11.0)
                                     textColor:kTextColor];
         [self addSubview:self.dayLbl];
         
         [self.dayLbl mas_makeConstraints:^(MASConstraintMaker *make) {
             
-            make.left.equalTo(self.mas_left).offset(15);
-            make.centerY.equalTo(self.mas_centerY).offset(-10);
-            make.width.equalTo(@40);
-            make.height.equalTo(@20);
+            make.left.equalTo(self.iconIV.mas_right).offset(15);
+            make.top.equalTo(self.detailLbl.mas_bottom).offset(2);
+          
         }];
         
         self.timeLbl = [UILabel labelWithFrame:CGRectMake(left,15, 40, 20) textAligment:NSTextAlignmentLeft
@@ -60,26 +90,16 @@
         [self addSubview:self.timeLbl];
         
         [self.timeLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-            
-            make.left.equalTo(self.mas_left).offset(15);
-            make.centerY.equalTo(self.mas_centerY).offset(10);
-            make.width.equalTo(@40);
-            make.height.equalTo(@20);
+            make.top.equalTo(self.dayLbl.mas_top);
+
+            make.left.equalTo(self.dayLbl.mas_right).offset(3);
+           
         }];
         
-        self.iconIV = [[UIImageView alloc] init];
-        self.iconIV.contentMode = UIViewContentModeScaleAspectFill;
-        [self addSubview:self.iconIV];
-        [self.iconIV mas_makeConstraints:^(MASConstraintMaker *make) {
-            
-            make.centerY.equalTo(@0);
-            make.width.height.equalTo(@36);
-            make.left.equalTo(self.timeLbl.mas_right).offset(15);
-            
-        }];
-        
+       
+       
         //钱
-        self.moneyLbl = [UILabel labelWithFrame:CGRectMake(left, 15, kScreenWidth - left - timeW - 15, 20) textAligment:NSTextAlignmentLeft
+        self.moneyLbl = [UILabel labelWithFrame:CGRectZero textAligment:NSTextAlignmentLeft
                                 backgroundColor:[UIColor clearColor]
                                            font:Font(17.0)
                                       textColor:kTextColor];
@@ -87,38 +107,37 @@
         [self addSubview:self.moneyLbl];
         [self.moneyLbl mas_makeConstraints:^(MASConstraintMaker *make) {
             
-            make.left.equalTo(self.iconIV.mas_right).offset(15);
-            make.right.equalTo(@(-15));
-            make.top.equalTo(@(12.5));
-            
-        }];
-        
-        //右箭头
-        UIImageView *rightArrowIV = [[UIImageView alloc] initWithImage:kImage(@"更多-灰色")];
-        
-        [self addSubview:rightArrowIV];
-        [rightArrowIV mas_makeConstraints:^(MASConstraintMaker *make) {
-            
             make.right.equalTo(self.mas_right).offset(-15);
-            make.centerY.equalTo(self.mas_centerY);
-            make.width.equalTo(@(6.5));
-        }];
-        
-        //备注
-        self.detailLbl = [UILabel labelWithFrame:CGRectZero textAligment:NSTextAlignmentLeft
-                                 backgroundColor:[UIColor clearColor]
-                                            font:Font(14)
-                                       textColor:kTextColor2];
-        self.detailLbl.numberOfLines = 0;
-        self.detailLbl.height = [FONT(14) lineHeight];
-        [self addSubview:self.detailLbl];
-        
-        [self.detailLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.bottom.equalTo(self.mas_bottom).offset(-12.5);
-            make.left.equalTo(self.iconIV.mas_right).offset(15);
-            make.right.equalTo(rightArrowIV.mas_left).offset(-15);
+            make.top.equalTo(@(18.5));
             
         }];
+        self.introduceLab = [UILabel labelWithFrame:CGRectZero textAligment:NSTextAlignmentLeft
+                                 backgroundColor:[UIColor clearColor]
+                                            font:Font(11)
+                                       textColor:kTextColor3];
+        self.introduceLab.numberOfLines = 0;
+        self.introduceLab.height = [FONT(14) lineHeight];
+        [self addSubview:self.introduceLab];
+        
+        [self.introduceLab mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.dayLbl.mas_bottom).offset(3);
+            make.left.equalTo(self.iconIV.mas_right).offset(15);
+            
+            //            make.right.equalTo(rightArrowIV.mas_left).offset(-15);
+            
+        }];
+        //右箭头
+//        UIImageView *rightArrowIV = [[UIImageView alloc] initWithImage:kImage(@"更多-灰色")];
+//
+//        [self addSubview:rightArrowIV];
+//        [rightArrowIV mas_makeConstraints:^(MASConstraintMaker *make) {
+//
+//            make.right.equalTo(self.mas_right).offset(-15);
+//            make.centerY.equalTo(self.mas_centerY);
+//            make.width.equalTo(@(6.5));
+//        }];
+//
+       
         
         UIView *line = [[UIView alloc] init];
         
@@ -166,15 +185,16 @@
     
     CoinModel *coin = [CoinUtil getCoinModel:self.currencyModel.symbol];
     if ([billModel.direction isEqualToString:@"1"]) {
-        
-        moneyStr = [NSString stringWithFormat:@"+%@ %@",countStr , self.currencyModel.symbol];
-        
+        self.moneyLbl.textColor = kHexColor(@"#FE4F4F");
+         self.moneyLbl.text = [NSString stringWithFormat:@"+%@ %@",countStr , self.currencyModel.symbol];
+        self.introduceLab.text = [NSString stringWithFormat:@"%@-%@",[LangSwitcher switchLang:@"收款-外部地址" key:nil],billModel.from];
         
     } else
     {
-        
-        moneyStr = [NSString stringWithFormat:@"-%@ %@", countStr, self.currencyModel.symbol];
-        
+        self.moneyLbl.textColor = kHexColor(@"#47D047");
+
+         self.moneyLbl.text = [NSString stringWithFormat:@"-%@ %@", countStr, self.currencyModel.symbol];
+         self.introduceLab.text = [NSString stringWithFormat:@"%@-%@",[LangSwitcher switchLang:@"转账-外部地址" key:nil],billModel.to];
         
     }
 //    if ([self.currencyModel.symbol isEqualToString:@"ETH"]) {
@@ -191,16 +211,15 @@
     self.dayLbl.text = [_billModel.transDatetime convertDateWithFormat:@"dd日"];
     self.timeLbl.text = [_billModel.transDatetime convertDateWithFormat:@"HH:mm"];
     
-    self.moneyLbl.text = moneyStr;
     if ([billModel.direction isEqualToString:@"0"]) {
-        self.detailLbl.text = [LangSwitcher switchLang:[NSString stringWithFormat:@"%@ 转账",self.currencyModel.symbol] key:nil]; ;
-        self.iconIV.image = kImage(@"提现");
+        self.detailLbl.text = [LangSwitcher switchLang:[NSString stringWithFormat:@"转账"] key:nil]; ;
+        self.iconIV.image = kImage(@"转账");
 
 
     }else
     {
-         self.detailLbl.text = [LangSwitcher switchLang:[NSString stringWithFormat:@"%@ 收款",self.currencyModel.symbol] key:nil]; ;
-        self.iconIV.image  = kImage(@"充值");
+         self.detailLbl.text = [LangSwitcher switchLang:[NSString stringWithFormat:@"收款"] key:nil]; ;
+        self.iconIV.image  = kImage(@"收款");
 
     }
 //    self.detailLbl.text = [LangSwitcher switchLang:_billModel.bizNote key:nil]; ;

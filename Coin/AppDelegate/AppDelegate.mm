@@ -57,7 +57,7 @@
 //    [NSThread sleepForTimeInterval:2];
     
     //服务器环境
-    [AppConfig config].runEnv = RunEnvRelease;
+    [AppConfig config].runEnv = RunEnvDev;
     [AppConfig config].isChecking = NO;
 #warning  //pods 更新后会导致wan币转账失败
 //    [AppConfig config].isUploadCheck = YES;
@@ -69,6 +69,9 @@
     
     //配置键盘
     [self configIQKeyboard];
+    
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+    //UIStatusBarStyleLightContent状态栏字体白色 UIStatusBarStyleDefault黑色
 
     //配置根控制器
     [self configRootViewController];
@@ -265,7 +268,7 @@
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
-    
+   
 //    if (![AppConfig config].isChecking) {
 //        //先配置到，检查更新的VC,开启更新检查
 //        BuildWalletMineVC *MineVC = [[BuildWalletMineVC alloc] init];

@@ -48,11 +48,12 @@
 
 - (void)viewDidLoad {
     
-//    self.title = @"账单";
   
 //    [self setPlaceholderViewTitle:@"加载失败" operationTitle:@"重新加载"];
     //暂无明细
     [super viewDidLoad];
+    self.view.backgroundColor = kWhiteColor;
+
     [self initHeadView];
     [self initPlaceHolderView];
     [self initTableView];
@@ -134,33 +135,35 @@
 - (void)initTableView {
     
     self.tableView = [[BillTableView alloc]
-                      initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight)
+                      initWithFrame:CGRectMake(0, kHeight(90), kScreenWidth, kSuperViewHeight)
                       style:UITableViewStyleGrouped];
-    
     self.tableView.placeHolderView = self.placeHolderView;
-    self.tableView.tableHeaderView = self.headView;
     self.tableView.backgroundColor = kWhiteColor;
     self.tableView.refreshDelegate = self;
     self.tableView.sectionHeaderHeight = 22;
     [self.view addSubview:self.tableView];
+    CoinWeakSelf;
+    self.tableView.addBlock = ^{
+        [weakSelf clickFilter];
+    };
     
 }
 
 - (void)addFilterItem {
-    
-    if (self.billType == CurrentTypeAll) {
-        
-        [UIBarButtonItem addRightItemWithTitle:[LangSwitcher switchLang:@"筛选" key:nil]
-                                    titleColor:kTextColor
-                                         frame:CGRectMake(0, 0, 60, 30)
-                                            vc:self
-                                        action:@selector(clickFilter:)];
-        
-    }
+//
+//    if (self.billType == CurrentTypeAll) {
+//
+//        [UIBarButtonItem addRightItemWithTitle:[LangSwitcher switchLang:@"筛选" key:nil]
+//                                    titleColor:kTextColor
+//                                         frame:CGRectMake(0, 0, 60, 30)
+//                                            vc:self
+//                                        action:@selector(clickFilter:)];
+//
+//    }
 }
 
 #pragma mark - Events
-- (void)clickFilter:(UIButton *)sender {
+- (void)clickFilter{
     
     [self.filterPicker show];
     
@@ -259,8 +262,19 @@
 
 - (void)initHeadView
 {
+    UIView *top = [[UIView alloc] init];
+    [self.view addSubview:top];
+    top.backgroundColor = kHexColor(@"#0848DF");
     
-    WallAccountHeadView *headView = [[WallAccountHeadView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 150)];
+    [top mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.view.mas_top);
+        
+        make.left.equalTo(self.view.mas_left);
+        make.right.equalTo(self.view.mas_right);
+        make.height.equalTo(@(kHeight(66)));
+    }];
+    
+    WallAccountHeadView *headView = [[WallAccountHeadView alloc] initWithFrame:CGRectMake(15, 0, kScreenWidth-30, 90)];
     self.headView = headView;
     [self.view addSubview:headView];
     
@@ -294,14 +308,15 @@
     
     [textArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         
-        UIButton *btn = [UIButton buttonWithTitle:textArr[idx] titleColor:kTextColor backgroundColor:kWhiteColor titleFont:16.0];
+        UIButton *btn = [UIButton buttonWithTitle:textArr[idx] titleColor:kTextColor backgroundColor:kClearColor titleFont:12.0];
         [btn addTarget:self action:@selector(btnClickCurreny:) forControlEvents:UIControlEventTouchUpInside];
         [btn setTitleColor:kHexColor(@"#ffffff") forState:UIControlStateNormal];
-
+        
         [btn setImage:kImage(imgArr[idx]) forState:UIControlStateNormal];
         
         btn.tag = 201806+idx;
-        [btn setTitleEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 0)];
+        [btn setTitleEdgeInsets:UIEdgeInsetsMake(30, 10, 0, 0)];
+        [btn setImageEdgeInsets:UIEdgeInsetsMake(0, 50, 10, 0)];
         
         [self.bottomViw addSubview:btn];
         [btn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -314,14 +329,12 @@
         }];
         
         if (idx != 1) {
-            [btn setTitleColor:kHexColor(@"#108ee9") forState:UIControlStateNormal];
-            
             [btn setBackgroundColor:kWhiteColor forState:UIControlStateNormal];
-
+            [btn setTitleColor:kTextColor forState:UIControlStateNormal];
             UIView *vLine = [[UIView alloc] init];
             
             vLine.backgroundColor = kLineColor;
-
+            
             [self.bottomViw addSubview:vLine];
             [vLine mas_makeConstraints:^(MASConstraintMaker *make) {
                 
@@ -333,9 +346,10 @@
             }];
         }
         else{
-            [btn setTitleColor:kWhiteColor forState:UIControlStateNormal];
-
-            [btn setBackgroundColor:kHexColor(@"#108ee9") forState:UIControlStateNormal];
+            
+            [btn setTitleColor:kTextColor forState:UIControlStateNormal];
+            [btn setBackgroundColor:kWhiteColor forState:UIControlStateNormal];
+            
         }
         if (idx == 0) {
             

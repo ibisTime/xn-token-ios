@@ -9,10 +9,13 @@
 #import <UIKit/UIKit.h>
 #import "BillModel.h"
 #import "TLTableView.h"
+typedef void(^WalletAddBlock)(void);
 
 @interface BillTableView : TLTableView
 
 @property (nonatomic,strong) NSMutableArray <BillModel *>*bills;
+
+@property (nonatomic,copy) WalletAddBlock addBlock;
 
 - (instancetype)initWithFrame:(CGRect)frame style:(UITableViewStyle)style;
 

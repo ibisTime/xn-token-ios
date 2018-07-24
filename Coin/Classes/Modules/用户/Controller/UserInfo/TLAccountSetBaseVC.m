@@ -34,9 +34,7 @@
     
     [self.bgSV addGestureRecognizer:tap];
     
-//    [self.navigationController.navigationBar setTitleTextAttributes:@{
-//                                     NSForegroundColorAttributeName : [UIColor whiteColor]
-//                                     }];
+
 }
 
 - (void)tap {

@@ -66,7 +66,7 @@ static NSString *identifierLocalBillCell = @"LocalBillCell";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    return self.bills[indexPath.row].dHeightValue + 70;
+    return 76;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -84,12 +84,23 @@ static NSString *identifierLocalBillCell = @"LocalBillCell";
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     
-    UILabel *lab = [[UILabel alloc] initWithFrame:CGRectMake(15, 20, kScreenWidth, 22)];
+    UIView *contentView = [[UIView alloc] initWithFrame:CGRectMake(15, 20, kScreenWidth, 22)];
+    
+    
+    
+    UILabel *lab = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 22)];
+    [contentView addSubview:lab];
+    
     lab.textColor = kTextColor;
     lab.font = [UIFont systemFontOfSize:12];
     
     lab.text =[NSString stringWithFormat:@"    %@",[LangSwitcher switchLang:@"交易记录" key:nil]];
-    return lab;
+    UIView *view = [UIView new];
+    view.backgroundColor = kHexColor(@"276FFA ");
+    view.frame = CGRectMake(0, 8, 10, 5);
+    [contentView addSubview:view];
+    
+    return contentView;
 }
 
 

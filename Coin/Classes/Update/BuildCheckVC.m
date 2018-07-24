@@ -31,15 +31,19 @@
 @property (nonatomic, strong) NSMutableArray *topNames;
 
 @property (nonatomic, strong) NSMutableArray *bottomNames;
+
+@property (nonatomic ,strong) UIView *whiteView;
+
 @end
 
 @implementation BuildCheckVC
 
 - (void)viewDidLoad {
+    [super viewDidLoad];
+
     self.title = [LangSwitcher switchLang:@"钱包备份" key:nil];
     [self initSubViews];
-    [super viewDidLoad];
-    
+    self.view.backgroundColor = kWhiteColor;
     self.bottomView.bottomtitles = self.bottomtitles;
     self.bottomView.IsNeedRefash = YES;
 
@@ -77,20 +81,58 @@
 - (void)initSubViews
 {
     
-    self.view.backgroundColor = kWhiteColor;
+    
+    UIView *topView = [[UIView alloc] init];
+    [self.view addSubview:topView];
+    topView.backgroundColor = kWhiteColor;
+    
+    [topView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.view.mas_top);
+        
+        make.left.equalTo(self.view.mas_left);
+        make.right.equalTo(self.view.mas_right);
+        make.height.equalTo(@(kHeight(66)));
+    }];
+    UIView *whiteView = [[UIView alloc] init];
+    self.whiteView = whiteView;
+    whiteView.backgroundColor = kWhiteColor;
+    [self.view addSubview:whiteView];
+    [whiteView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.view.mas_left).offset(15);
+        make.right.equalTo(self.view.mas_right).offset(-15);
+        make.top.equalTo(self.view.mas_top);
+        
+        make.height.equalTo(@(kHeight(384)));
+    }];
+    
+    UIImageView *bgBiew = [[UIImageView alloc] init];
+    [self.view addSubview:bgBiew];
+    [whiteView addSubview:bgBiew];
+    bgBiew.image = kImage(@"back");
+    bgBiew.userInteractionEnabled = YES;
+    [bgBiew mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(whiteView.mas_left);
+        make.right.equalTo(whiteView.mas_right);
+        make.top.equalTo(whiteView.mas_top);
+        
+        make.height.equalTo(@(kHeight(384)));
+    }];
+    
+    whiteView.layer.cornerRadius = 4;
+    whiteView.clipsToBounds = YES;
     self.nameLable = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:16];
     //    self.title = [LangSwitcher switchLang:@"我的" key:nil];
-    [self.view addSubview:self.nameLable];
+    [whiteView addSubview:self.nameLable];
     self.nameLable.textAlignment = NSTextAlignmentCenter;
     self.nameLable.text = [LangSwitcher switchLang:@"验证你的钱包助记词" key:nil];
     [self.nameLable mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view.mas_top).offset(30);
-        make.left.equalTo(self.view.mas_left).offset(15);
-        make.right.equalTo(self.view.mas_right).offset(-15);
+        make.top.equalTo(whiteView.mas_top).offset(30);
+        make.left.equalTo(whiteView.mas_left).offset(15);
+        make.right.equalTo(whiteView.mas_right).offset(-15);
     }];
     self.contentLable = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor2 font:14];
     //    self.title = [LangSwitcher switchLang:@"我的" key:nil];
-    [self.view addSubview:self.contentLable];
+    [whiteView addSubview:self.contentLable];
     self.contentLable.textAlignment = NSTextAlignmentLeft;
     self.contentLable.numberOfLines = 0;
     self.contentLable.text = [LangSwitcher switchLang:@"根据你记下的助记词,按顺序点击,验证你备份的助记词正确无误" key:nil];
@@ -105,8 +147,8 @@
     self.contentLable.attributedText = attributeStr;
     [self.contentLable mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.nameLable.mas_bottom).offset(19);
-        make.left.equalTo(self.view.mas_left).offset(15);
-        make.right.equalTo(self.view.mas_right).offset(-15);
+        make.left.equalTo(whiteView.mas_left).offset(15);
+        make.right.equalTo(whiteView.mas_right).offset(-15);
     }];
     
     [self initTopCollectionView];
@@ -138,39 +180,49 @@
     
         CustomLayoutWallet *layout = [[CustomLayoutWallet alloc] init];
         layout.minimumLineSpacing = 10.0; // 竖
-    layout.minimumInteritemSpacing = 10.f;
-
+    layout.minimumInteritemSpacing = 10.0;
+    layout.itemSize = CGSizeMake(80, 36);
         UIImage *image1 = [UIImage imageNamed:@"bch"];
         UIImage *image2 = [UIImage imageNamed:@"eth"];
         UIImage *image3 = [UIImage imageNamed:@"ltc"];
         NSArray *array = @[image2, image2, image3, image2, image3, image1, image3, image1, image1];
 
-        QHCollectionViewNine *nineView = [[QHCollectionViewNine alloc] initWithFrame:CGRectMake(15, 115, kScreenWidth-30, 170) collectionViewLayout:layout withImage:array];
+        QHCollectionViewNine *nineView = [[QHCollectionViewNine alloc] initWithFrame:CGRectZero collectionViewLayout:layout withImage:array];
         self.nineView = nineView;
-        nineView.backgroundColor = kHexColor(@"#f5f5f5");
+    [self.whiteView addSubview:nineView];
+    [nineView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.whiteView.mas_top).offset(kHeight(153));
+        make.left.equalTo(self.whiteView.mas_left).offset(30);
+        make.right.equalTo(self.whiteView.mas_right).offset(-30);
+        make.height.equalTo(@(kHeight(150)));
+
+    }];
+        nineView.backgroundColor = kWhiteColor;
 
         self.nineView.type = SearchTypeTop;
         nineView.refreshDelegate = self;
         nineView.layer.cornerRadius = 6;
         nineView.clipsToBounds = YES;
-        [self.view addSubview:nineView];
+//        [self.view addSubview:nineView];
     
 }
 
 - (void)initColllention
 {
     CustomLayoutWallet *layout = [[CustomLayoutWallet alloc] init];
-//    layout.minimumLineSpacing = 10.f;
-//    layout.minimumInteritemSpacing = 10.f;
+    layout.minimumLineSpacing = 0.0f;
+    layout.minimumInteritemSpacing = 0.0f;
+    layout.itemSize = CGSizeMake(kScreenWidth/3, 46);
+
     layout.scrollDirection         = UICollectionViewScrollDirectionVertical;
     UIImage *image1 = [UIImage imageNamed:@"bch"];
     UIImage *image2 = [UIImage imageNamed:@"eth"];
     UIImage *image3 = [UIImage imageNamed:@"ltc"];
     NSArray *array = @[image2, image2, image3, image2, image3, image1, image3, image1, image1];
-    QHCollectionViewNine *bottomView = [[QHCollectionViewNine alloc] initWithFrame:CGRectMake(15, 150+173+10, kScreenWidth-30, 173) collectionViewLayout:layout withImage:array];
+    QHCollectionViewNine *bottomView = [[QHCollectionViewNine alloc] initWithFrame:CGRectMake(0, 422, kScreenWidth, 200) collectionViewLayout:layout withImage:array];
     self.bottomView = bottomView;
     bottomView.refreshDelegate = self;
-    bottomView.backgroundColor = kHexColor(@"#f5f5f5");
+    bottomView.backgroundColor = kWhiteColor;
     self.bottomView.type = SearchTypeBottom;
     [self.view addSubview:bottomView];
     
@@ -294,6 +346,12 @@
 - (void)buildSureWallet
 {
     
+    WalletNewFeaturesVC * newVC = [WalletNewFeaturesVC new];
+    //        [self.navigationController pushViewController:newVC animated:YES];
+    [UIApplication sharedApplication].keyWindow.rootViewController = newVC;
+    
+    
+    return;
     //验证助记词
     if ([self.titles isEqualToArray:self.userTitles]) {
         

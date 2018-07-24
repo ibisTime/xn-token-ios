@@ -30,7 +30,7 @@
 @property (nonatomic, strong) NSMutableArray <CurrencyTitleModel *> *bottomNames;
 
 @property (nonatomic, strong) NSMutableArray <CurrencyTitleModel *> *tempNames;
-
+@property (nonatomic ,strong) UIView *whiteView;
 
 @end
 
@@ -58,7 +58,7 @@
     for (int i = 0; i < tempArr.count; i++) {
      CurrencyTitleModel *title =  [[CurrencyTitleModel alloc] init];
         title.symbol = words[i];
-        title.IsSelect = YES;
+        title.IsSelect = NO;
 
         [self.bottomNames addObject:title];
     }
@@ -76,48 +76,138 @@
 - (void)initColllention
 {
     CustomLayoutWallet *layout = [[CustomLayoutWallet alloc] init];
-//    layout.itemSize = CGSizeMake(80, 30);
-    layout.minimumLineSpacing = 10.0; // 竖
-//    layout.minimumInteritemSpacing = 10.0; // 横
+    layout.minimumLineSpacing = 0.0; // 竖
+    layout.minimumInteritemSpacing = 0.0; // 横
 //    layout.sectionInset = UIEdgeInsetsMake(10, 10, , 10);
+    layout.itemSize = CGSizeMake((kWidth(kScreenWidth-60))/3, 45);
     UIImage *image1 = [UIImage imageNamed:@"bch"];
     UIImage *image2 = [UIImage imageNamed:@"eth"];
     UIImage *image3 = [UIImage imageNamed:@"ltc"];
     NSArray *array = @[image2, image2, image3, image2, image3, image1, image3, image1, image1];
-    QHCollectionViewNine *bottomView = [[QHCollectionViewNine alloc] initWithFrame:CGRectMake(15, 150, kScreenWidth-30, 173) collectionViewLayout:layout withImage:array];
+    QHCollectionViewNine *bottomView = [[QHCollectionViewNine alloc] initWithFrame:CGRectMake(15, kHeight(253), (kWidth(kScreenWidth-60)), 220) collectionViewLayout:layout withImage:array];
     self.bottomView = bottomView;
+    bottomView.isRead = YES;
     bottomView.refreshDelegate = self;
     self.bottomView.type = SearchTypeTop;
-    [self.view addSubview:bottomView];
+    [self.whiteView addSubview:bottomView];
+//    [bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(@(kHeight(253)));
+//        make.left.equalTo(self.whiteView.mas_left).offset(15);
+//        make.right.equalTo(self.whiteView.mas_right).offset(-15);
+//        make.height.equalTo(@(kHeight(175)));
+//
+//    }];
     
-    bottomView.layer.cornerRadius = 6;
-    bottomView.clipsToBounds = YES;
-    bottomView.backgroundColor = kHexColor(@"#2a323e");
+//    bottomView.layer.cornerRadius = 6;
+//    bottomView.clipsToBounds = YES;
+    bottomView.backgroundColor = kWhiteColor;
 }
+
+- (void)addBorderToLayer:(UIView *)view
+{
+    CAShapeLayer *border = [CAShapeLayer layer];
+    //  线条颜色
+    border.strokeColor = [UIColor lightGrayColor].CGColor;
+    
+    border.fillColor = nil;
+    
+    
+    UIBezierPath *pat = [UIBezierPath bezierPath];
+    [pat moveToPoint:CGPointMake(0, 0)];
+    if (CGRectGetWidth(view.frame) > CGRectGetHeight(view.frame)) {
+        [pat addLineToPoint:CGPointMake(view.bounds.size.width, 0)];
+    }else{
+        [pat addLineToPoint:CGPointMake(0, view.bounds.size.height)];
+    }
+    border.path = pat.CGPath;
+    
+    border.frame = view.bounds;
+    
+    // 不要设太大 不然看不出效果
+    border.lineWidth = 0.5;
+    border.lineCap = @"butt";
+    
+    //  第一个是 线条长度   第二个是间距    nil时为实线
+    border.lineDashPattern = @[@6, @10];
+    
+    [view.layer addSublayer:border];
+}
+
+
 - (void)initWalletUI
 {
     self.view.backgroundColor = kWhiteColor;
-    self.nameLable = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:16];
-    //    self.title = [LangSwitcher switchLang:@"我的" key:nil];
-    [self.view addSubview:self.nameLable];
-    self.nameLable.textAlignment = NSTextAlignmentCenter;
-    self.nameLable.text = [LangSwitcher switchLang:@"请记下您的钱包助词并保存到安全的地方" key:nil];
-    [self.nameLable mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view.mas_top).offset(30);
+    
+    UIView *topView = [[UIView alloc] init];
+    [self.view addSubview:topView];
+    topView.backgroundColor = kHexColor(@"#0848DF");
+    
+    [topView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.view.mas_top);
+        
+        make.left.equalTo(self.view.mas_left);
+        make.right.equalTo(self.view.mas_right);
+        make.height.equalTo(@(kHeight(66)));
+    }];
+    UIView *whiteView = [[UIView alloc] init];
+    self.whiteView = whiteView;
+    whiteView.backgroundColor = kWhiteColor;
+    [self.view addSubview:whiteView];
+    [whiteView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view.mas_left).offset(15);
         make.right.equalTo(self.view.mas_right).offset(-15);
+        make.top.equalTo(self.view.mas_top);
+        
+        make.height.equalTo(@(kHeight(482)));
     }];
     
-    self.contentLable = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor2 font:14];
-    self.contentLable.numberOfLines = 0;
-    //    self.title = [LangSwitcher switchLang:@"我的" key:nil];
-    [self.view addSubview:self.contentLable];
-    self.contentLable.textAlignment = NSTextAlignmentLeft;
-    self.contentLable.text = [LangSwitcher switchLang:@"钱包助词用于恢复钱包资产,拥有助记词即可完全控制钱包资产,请务必妥善保管,丢失助记词既丢失钱包资产。无法提供找回功能" key:nil];
-    [self.contentLable mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.nameLable.mas_bottom).offset(19);
+    UIImageView *bgBiew = [[UIImageView alloc] init];
+    [self.view addSubview:bgBiew];
+    [whiteView addSubview:bgBiew];
+    bgBiew.image = kImage(@"back");
+    bgBiew.userInteractionEnabled = YES;
+    [bgBiew mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view.mas_left).offset(15);
         make.right.equalTo(self.view.mas_right).offset(-15);
+        make.top.equalTo(self.view.mas_top);
+        
+        make.height.equalTo(@(kHeight(482)));
+    }];
+    
+    whiteView.layer.cornerRadius = 4;
+    whiteView.clipsToBounds = YES;
+    self.nameLable = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:16];
+    //    self.title = [LangSwitcher switchLang:@"我的" key:nil];
+    [whiteView addSubview:self.nameLable];
+    self.nameLable.textAlignment = NSTextAlignmentCenter;
+    self.nameLable.text = [LangSwitcher switchLang:@"您的恢复词是 在纸上记下他们并安全的保存它" key:nil];
+    [self.nameLable mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(whiteView.mas_top).offset(30);
+        make.left.equalTo(whiteView.mas_left).offset(20);
+        make.right.equalTo(whiteView.mas_right).offset(-20);
+    }];
+    
+    self.contentLable = [UILabel labelWithBackgroundColor:kHexColor(@"#F3F5F7") textColor:kTextColor2 font:11];
+    self.contentLable.numberOfLines = 0;
+    //    self.title = [LangSwitcher switchLang:@"我的" key:nil];
+    [whiteView addSubview:self.contentLable];
+    self.contentLable.textAlignment = NSTextAlignmentLeft;
+    self.contentLable.text = [LangSwitcher switchLang:@"在您的手机丢失或者忘记密码的情况下, 恢复助记词可用于您的钱包或资金。" key:nil];
+    [self.contentLable mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.nameLable.mas_bottom).offset(24);
+        make.left.equalTo(whiteView.mas_left).offset(20);
+        make.right.equalTo(whiteView.mas_right).offset(-20);
+    }];
+    
+    UIView *line = [[UIView alloc] init];
+    line.backgroundColor = kLineColor;
+    [whiteView addSubview:line];
+//        [self addBorderToLayer:line];
+    [line mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(whiteView.mas_top).offset(kHeight(172));
+        make.left.equalTo(whiteView.mas_left).offset(30);
+        make.right.equalTo(whiteView.mas_right).offset(-30);
+        make.height.equalTo(@2);
     }];
     [self initColllention];
 
@@ -134,7 +224,7 @@
     [self.nextButton setBackgroundColor:kAppCustomMainColor forState:UIControlStateNormal];
     [self.view addSubview:self.nextButton];
     [self.nextButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.bottomView.mas_bottom).offset(40);
+        make.top.equalTo(whiteView.mas_bottom).offset(40);
         make.right.equalTo(self.view.mas_right).offset(-15);
         make.left.equalTo(self.view.mas_left).offset(15);
         make.height.equalTo(@45);

@@ -15,6 +15,8 @@
 
 @property (nonatomic,strong) UIView *tl_placeholderView;
 
+@property (nonatomic, strong) NSString *titleStr;
+
 
 - (void)tl_placeholderOperation;
 

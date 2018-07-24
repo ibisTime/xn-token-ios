@@ -7,7 +7,9 @@
 //
 
 #import "TLBaseVC.h"
+typedef void(^WalletBackBlock)(void);
 
 @interface WalletImportVC : TLBaseVC
+@property (nonatomic , copy) WalletBackBlock walletBlock;
 
 @end
