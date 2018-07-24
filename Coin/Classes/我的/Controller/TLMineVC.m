@@ -96,6 +96,7 @@
 
 }
 
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = [LangSwitcher switchLang:@"我的" key:nil];

@@ -17,10 +17,49 @@
 
 @property (nonatomic, strong) WKWebView *webView;
 
+@property (nonatomic, strong) UIView *bgView;
+@property (nonatomic, strong) UIImageView *bgImage;
+
+@property (nonatomic, strong) UIImageView *iconImageView;
+@property (nonatomic, strong) UIImageView *nameLbl;
+@property (nonatomic, strong) UILabel *versionLbl;
+@property (nonatomic, strong) UILabel *versionLbl2;
+@property (nonatomic, strong) UILabel *versionLbl3;
+
+@property (nonatomic, strong) UILabel *lastVersionLbl;
+@property (nonatomic, strong) UILabel *banQuanLbl;
+@property (nonatomic, strong) UIView *phoneView;
+@property (nonatomic, strong) UILabel *phoneNumber;
+
+@property (nonatomic, strong) UIButton *backButton;
+
+@property (nonatomic, strong) UILabel *nameLable;
+
+@property (nonatomic, strong)  UIView *line;
+
+@property (nonatomic, strong)  UIView *line2;
 @end
 
 @implementation HTMLStrVC
 
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    //    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+    //去掉导航栏底部的黑线
+    self.navigationController.navigationBarHidden = YES;
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
+    
+}
+//如果仅设置当前页导航透明，需加入下面方法
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    self.navigationController.navigationBarHidden = NO;
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+    
+    //    [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
+    //    [self.navigationController.navigationBar setShadowImage:nil];
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
    
@@ -32,6 +71,19 @@
 #pragma mark - Data
 
 - (void)requestContent {
+    
+    
+    self.backButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
+    self.backButton.frame = CGRectMake(15, kStatusBarHeight+5, 40, 40);
+    [self.backButton setImage:kImage(@"返回1-1") forState:(UIControlStateNormal)];
+    [self.backButton addTarget:self action:@selector(buttonClick) forControlEvents:(UIControlEventTouchUpInside)];
+    [self.bgImage addSubview:self.backButton];
+    self.nameLable = [[UILabel alloc]initWithFrame:CGRectMake(54, kStatusBarHeight+5, kScreenWidth - 108, 44)];
+    self.nameLable.text = [LangSwitcher switchLang:@"关于我们" key:nil];
+    self.nameLable.textAlignment = NSTextAlignmentCenter;
+    self.nameLable.font = Font(16);
+    self.nameLable.textColor = kTextBlack;
+    [self.bgImage addSubview:self.nameLable];
     
     NSString *name = @"";
     
@@ -80,7 +132,7 @@
         } break;
     }
 
-    self.title = name;
+    self.nameLable.text = name;
     
     TLNetworking *http = [TLNetworking new];
     http.showView = self.view;
@@ -100,8 +152,14 @@
 }
 
 #pragma mark - Init
-
+- (void)buttonClick
+{
+    
+    [self.navigationController popViewControllerAnimated:YES];
+    
+}
 - (void)initWebView {
+   
 
     NSString *jS = [NSString stringWithFormat:@"var meta = document.createElement('meta'); meta.setAttribute('name', 'viewport'); meta.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0'); meta.setAttribute('width', %lf); document.getElementsByTagName('head')[0].appendChild(meta);",kScreenWidth];
     
@@ -115,7 +173,7 @@
     
     wkConfig.userContentController = wkUCC;
     
-    _webView = [[WKWebView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight) configuration:wkConfig];
+    _webView = [[WKWebView alloc] initWithFrame:CGRectMake(15, kHeight(90), kScreenWidth-30, kSuperViewHeight) configuration:wkConfig];
     
     _webView.backgroundColor = kWhiteColor;
     
