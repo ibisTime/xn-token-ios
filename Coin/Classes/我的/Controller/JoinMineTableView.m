@@ -55,14 +55,17 @@ static NSString *identifierCell = @"JoinMineCell";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if ([self.refreshDelegate respondsToSelector:@selector(refreshTableView:didSelectRowAtIndexPath:)]) {
+        [self.refreshDelegate refreshTableView:self didSelectRowAtIndexPath:indexPath];
+    }
+//    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    return 44;
+    return 55;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {

@@ -71,6 +71,9 @@
 #pragma mark - 发红包
 -(void)GiveAnyRequestAndCurrency:(NSString *)currency type:(NSString *)type count:(NSString *)count sendNum:(NSString *)sendNum greeting:(NSString *)greeting
 {
+    
+    
+    
     [TLAlert alertWithTitle:[LangSwitcher switchLang:@"请输入资金密码" key:nil]
                         msg:@""
                  confirmMsg:[LangSwitcher switchLang:@"确定" key:nil]

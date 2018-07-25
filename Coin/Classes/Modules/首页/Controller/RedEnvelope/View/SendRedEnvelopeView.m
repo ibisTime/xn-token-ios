@@ -19,6 +19,7 @@
 
 #import "NSString+Date.h"
 #import "NSString+Check.h"
+#import "CurrencyModel.h"
 
 #define ALLPRICE 1000000
 
@@ -34,7 +35,8 @@
     NSString *_sendNum;
     NSString *_greeting;
     NSString *allPrice;
-
+    UILabel *introduce;
+    CurrencyModel *plat;
 }
 
 -(UIImageView *)headImage
@@ -99,7 +101,7 @@
         [self addSubview:backImage];
 
 
-        UIImageView *backImg = [[UIImageView alloc]initWithFrame:CGRectMake(kWidth(20), kHeight(84), kWidth(335), kHeight(543))];
+        UIImageView *backImg = [[UIImageView alloc]initWithFrame:CGRectMake(kWidth(20), kHeight(84), kWidth(325), kHeight(543))];
         backImg.image = kImage(@"红包背景");
         [self addSubview:backImg];
        
@@ -125,8 +127,8 @@
         [self addSubview:self.totalNumberLabel];
 
 
-        NSArray *heightArray = @[@(kHeight(257)),@(kHeight(320)),@(kHeight(414)),@(kHeight(477))];
-        NSArray *nameArray = @[[LangSwitcher switchLang:@"代币" key:nil],[LangSwitcher switchLang:@"代币总额" key:nil],[LangSwitcher switchLang:@"红包个数" key:nil]];
+        NSArray *heightArray = @[@(kHeight(257)),@(kHeight(330)),@(kHeight(414)),@(kHeight(477))];
+        NSArray *nameArray = @[[LangSwitcher switchLang:@"代币类型" key:nil],[LangSwitcher switchLang:@"代币总额" key:nil],[LangSwitcher switchLang:@"红包个数" key:nil]];
         NSArray *symbolArrayl = @[[LangSwitcher switchLang:@"枚" key:nil],[LangSwitcher switchLang:@"个" key:nil]];
 
         for (int i = 0; i<4; i ++) {
@@ -191,13 +193,19 @@
 
         }
 
-        alltotalLabel = [UILabel labelWithFrame:CGRectMake(kWidth(60),kHeight(383) , kWidth(255) - 80, kHeight(26)) textAligment:(NSTextAlignmentLeft) backgroundColor:kClearColor font:Font(11) textColor:kTextColor5];
+        alltotalLabel = [UILabel labelWithFrame:CGRectMake(kWidth(60),kHeight(284+25) , kWidth(92), kHeight(16)) textAligment:(NSTextAlignmentLeft) backgroundColor:kClearColor font:Font(11) textColor:kTextColor5];
         [self addSubview:alltotalLabel];
-
+        introduce = [UILabel labelWithBackgroundColor:kClearColor textColor:kWhiteColor font:11];
+        
+        introduce.text = [LangSwitcher switchLang:@"当前为拼手气红包" key:nil];
+        introduce.layer.borderWidth = 0.5;
+        introduce.layer.borderColor = kHexColor(@"#FBDDA9").CGColor;
+        introduce.frame = CGRectMake(kWidth(60), kHeight(388), kWidth(84), kHeight(16));
+        [self addSubview:introduce];
 
         UIButton *TheWalletButton = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"改为普通红包" key:nil] titleColor:kTextColor5 backgroundColor:kClearColor titleFont:11];
         [TheWalletButton setTitle:[LangSwitcher switchLang:@"改为拼手气红包" key:nil] forState:(UIControlStateSelected)];
-        TheWalletButton.frame = CGRectMake(kScreenWidth - kWidth(60)-kWidth(84), kHeight(378), kWidth(84), kHeight(36));
+        TheWalletButton.frame = CGRectMake(kScreenWidth - kWidth(60)-kWidth(84), kHeight(382), kWidth(84), kHeight(26));
         [TheWalletButton addTarget:self action:@selector(ButtonClick:) forControlEvents:(UIControlEventTouchUpInside)];
         TheWalletButton.titleLabel.textAlignment = NSTextAlignmentCenter;
         [TheWalletButton.titleLabel sizeToFit];
@@ -253,13 +261,15 @@
         sender.selected = !sender.selected;
         if (sender.selected == YES)
         {
+            introduce.text = [LangSwitcher switchLang:@"当前为拼手气红包" key:nil];
+
             self.total.text = [LangSwitcher switchLang:@"单个数量" key:nil];
             _type = @"0";
         }
         else
         {
             self.total.text = [LangSwitcher switchLang:@"代币总额" key:nil];
-
+            introduce.text = [LangSwitcher switchLang:@"当前为普通红包" key:nil];
             _type = @"1";
         }
         [self CalculateThePrice];
@@ -296,15 +306,136 @@
         {
             _greeting = textField3.text;
         }
-
-        [_delegate SendRedEnvelopeButton:102 currency:_currency type:_type count:_count sendNum:_sendNum greeting:_greeting];
+     //付款
+        [self payAmount];
+        
+        
+       
 
     }
     
 }
 
+- (void)payAmount
+{
+    UIView * view1 = [UIView new];
+    self.view1 = view1;
+    view1.frame =CGRectMake(0, 0, kScreenWidth, kScreenHeight);
+    view1.backgroundColor =
+    view1.backgroundColor = [UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0.45];
+    
+//    view.alpha = 0.5;
+    [self addSubview:view1];
+    UIView *whiteView = [UIView new];
+    
+    [view1 addSubview:whiteView];
+    
+    whiteView.frame = CGRectMake(24, kHeight(194), kScreenWidth - 48, kHeight(300));
+    
+    whiteView.backgroundColor = kWhiteColor;
+    UIButton *exitBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [exitBtn setBackgroundImage:kImage(@"红包 删除") forState:UIControlStateNormal];
+    [exitBtn addTarget:self action:@selector(hideSelf) forControlEvents:UIControlEventTouchUpInside];
+    [whiteView addSubview:exitBtn];
+    [exitBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(whiteView.mas_top).offset(10);
+        make.right.equalTo(whiteView.mas_right).offset(-15);
+        make.width.height.equalTo(@22.5);
+    }];
+    
+    UILabel *sureLab = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextBlack font:20];
+    sureLab.text = [LangSwitcher switchLang:@"确认付款" key:nil];
+    [whiteView addSubview:sureLab];
+    [sureLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(whiteView.mas_top).offset(50);
+        make.centerX.equalTo(whiteView.mas_centerX);
+    }];
+    UILabel *money = [UILabel labelWithBackgroundColor:kClearColor textColor:kHexColor(@"#A75E02") font:17];
+    CoinModel *coin = [CoinUtil getCoinModel:plat.currency];
+    
+    NSString *leftAmount = [CoinUtil convertToRealCoin:plat.amountString coin:coin.symbol];
+    NSString *rightAmount = [CoinUtil convertToRealCoin:plat.frozenAmountString coin:coin.symbol];
+    NSString *ritAmount = [leftAmount subNumber:rightAmount];
+    money.text = [NSString stringWithFormat:@"%@%@",_count,plat.currency];
+    [whiteView addSubview:money];
+    [money mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(sureLab.mas_bottom).offset(16);
+        make.centerX.equalTo(whiteView.mas_centerX);
+    }];
+    
+    UIView *buttonView =[UIView new];
+    buttonView.backgroundColor = kWhiteColor;
+    buttonView.layer.borderWidth = 0.5;
+    buttonView.layer.borderColor = kLineColor.CGColor;
+//    buttonView.layer.cornerRadius = 5.0;
+//    buttonView.clipsToBounds = YES;
+    [whiteView addSubview:buttonView];
+    
+    [buttonView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(money.mas_bottom).offset(16);
+        make.left.equalTo(whiteView.mas_left).offset(25);
+        make.right.equalTo(whiteView.mas_right).offset(-25);
+        make.height.equalTo(@48);
+    }];
+    
+    UILabel *blanceMoney = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor3 font:15];
+    blanceMoney.text = [LangSwitcher switchLang:@"账户余额" key:nil];
+    [buttonView addSubview:blanceMoney];
+    [blanceMoney mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(buttonView.mas_top).offset(13);
+        make.left.equalTo(buttonView.mas_left).offset(10);
+        
+    }];
+    
+    UILabel *blance = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:15];
+    blance.text = [LangSwitcher switchLang:[NSString stringWithFormat:@"%.3f%@",[ritAmount floatValue],plat.currency] key:nil];
+    [buttonView addSubview:blance];
+    [blance mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(buttonView.mas_top).offset(13);
+        make.left.equalTo(blanceMoney.mas_right).offset(16);
+        
+    }];
+    
+    UIButton *sureButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [sureButton setBackgroundColor:kHexColor(@"#FFB25B") forState:UIControlStateNormal];
+    [sureButton setTitleColor:kHexColor(@"#A75E02 ") forState:UIControlStateNormal];
+    [whiteView addSubview:sureButton];
+    [sureButton setTitle:[LangSwitcher switchLang:@"确认付款" key:nil] forState:UIControlStateNormal];
+    [sureButton addTarget:self action:@selector(payMoney) forControlEvents:UIControlEventTouchUpInside];
+    
+    [sureButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(buttonView.mas_bottom).offset(20);
+        make.left.equalTo(whiteView.mas_left).offset(20);
+        make.right.equalTo(whiteView.mas_right).offset(-20);
+        make.height.equalTo(@50);
+        
+    }];
+}
 
+- (void)hideSelf
+{
+    
+    [UIView animateWithDuration:0.5 animations:^{
+        self.view1.hidden = YES;
+        self.view1.frame = CGRectZero;
+        [self.view1 removeFromSuperview];
+        
+    }];
+}
 
+- (void)payMoney
+{
+    
+    self.view1.hidden = YES;
+    self.view1.frame = CGRectZero;
+    [self.view1 removeFromSuperview];
+    [UIView animateWithDuration:0.5 animations:^{
+        [_delegate SendRedEnvelopeButton:102 currency:_currency type:_type count:_count sendNum:_sendNum greeting:_greeting];
+        
+    }];
+    
+    
+}
 -(void)setPlatforms:(NSMutableArray<CurrencyModel *> *)platforms
 {
     _platforms = platforms;
@@ -319,13 +450,14 @@
 
     UITextField *textField1 = [self viewWithTag:10000];
     textField1.text = platform.currency;
+    plat = platform;
     _currency = platform.currency;
     CoinModel *coin = [CoinUtil getCoinModel:platform.currency];
 
     NSString *leftAmount = [CoinUtil convertToRealCoin:platform.amountString coin:coin.symbol];
     NSString *rightAmount = [CoinUtil convertToRealCoin:platform.frozenAmountString coin:coin.symbol];
     NSString *ritAmount = [leftAmount subNumber:rightAmount];
-    alltotalLabel.text = [NSString stringWithFormat:@"Blance:%.3f",[ritAmount floatValue]];
+    alltotalLabel.text = [NSString stringWithFormat:@"%@%@%@ %.3f",[LangSwitcher switchLang:@"持有" key:nil],platform.currency,[LangSwitcher switchLang:@"总量" key:nil],[ritAmount floatValue]];
 
 
     NSString *str = [NSString stringWithFormat:@"%@ 0.000 %@",[LangSwitcher switchLang:@"共发送" key:nil],_currency];

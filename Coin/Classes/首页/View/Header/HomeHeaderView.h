@@ -23,7 +23,7 @@ typedef NS_ENUM(NSInteger, HomeEventsType) {
 
 typedef void(^HomeHeaderEventsBlock)(HomeEventsType type, NSInteger index);
 
-@interface HomeHeaderView : UIView
+@interface HomeHeaderView : UIScrollView
 
 @property (nonatomic, copy) HomeHeaderEventsBlock headerBlock;
 //轮播图

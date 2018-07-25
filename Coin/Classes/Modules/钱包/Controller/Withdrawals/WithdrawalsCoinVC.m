@@ -88,7 +88,7 @@ typedef NS_ENUM(NSInteger, AddressType) {
 - (void)addRecordItem {
     
     [UIBarButtonItem addRightItemWithTitle:[LangSwitcher switchLang:@"记录" key:nil]
-                                titleColor:kTextColor
+                                titleColor:kWhiteColor
                                      frame:CGRectMake(0, 0, 60, 30)
                                         vc:self
                                     action:@selector(clickRecord:)];

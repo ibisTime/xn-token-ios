@@ -41,11 +41,33 @@
 @property (nonatomic, strong) HomeHeaderView *headerView;
 //
 @property (nonatomic,strong) NSMutableArray <BannerModel *>*bannerRoom;
+@property (nonatomic, strong) UIImageView *bgImage;
+
+@property (nonatomic, strong) UIButton *backButton;
+
+@property (nonatomic, strong) UILabel *nameLable;
 
 @end
 
 @implementation HomeVC
-
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    //    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+    //去掉导航栏底部的黑线
+    self.navigationController.navigationBarHidden = YES;
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
+    
+}
+//如果仅设置当前页导航透明，需加入下面方法
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    self.navigationController.navigationBarHidden = NO;
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+    
+    //    [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
+    //    [self.navigationController.navigationBar setShadowImage:nil];
+}
 - (void)viewDidLoad {
     
 //    [MnemonicUtil test];
@@ -90,19 +112,40 @@
 //    UIBarButtonItem *rightBarItem = [[UIBarButtonItem alloc] initWithImage:kImage(@"消息1") style:UIBarButtonItemStyleDone target:self action:@selector(OpenMessage)];
 //
 //    self.navigationItem.rightBarButtonItem = rightBarItem;
-    [UIBarButtonItem addRightItemWithImageName:@"消息" frame:CGRectMake(0, 0, 30, 30) vc:self action:@selector(OpenMessage)];
-    [self.view addSubview:self.headerView];
+//    [UIBarButtonItem addRightItemWithImageName:@"消息" frame:CGRectMake(0, 0, 30, 30) vc:self action:@selector(OpenMessage)];
     
-    self.tableView = [[HomeTableView alloc] initWithFrame:CGRectZero
-                                                    style:UITableViewStyleGrouped];
+    self.bgImage = [[UIImageView alloc] init];
+    self.bgImage.contentMode = UIViewContentModeScaleToFill;
+    self.bgImage.userInteractionEnabled = YES;
+//    self.bgImage.image = kImage(@"我的 背景");
+    [self.view  addSubview:self.bgImage];
+    
+    [self.bgImage mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(UIEdgeInsetsZero);
+    }];
+    self.backButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
+    self.backButton.frame = CGRectMake(kScreenWidth-70, kStatusBarHeight+5, 40, 40);
+    [self.backButton setImage:kImage(@"消息") forState:(UIControlStateNormal)];
+    [self.backButton addTarget:self action:@selector(OpenMessage) forControlEvents:(UIControlEventTouchUpInside)];
+    [self.bgImage addSubview:self.backButton];
+    self.nameLable = [[UILabel alloc]initWithFrame:CGRectMake(54, kStatusBarHeight+5, kScreenWidth - 108, 44)];
+    self.nameLable.text = [LangSwitcher switchLang:@"发现" key:nil];
+    self.nameLable.textAlignment = NSTextAlignmentCenter;
+    self.nameLable.font = Font(16);
+    self.nameLable.textColor = kTextBlack;
+    [self.bgImage addSubview:self.nameLable];
+    
+    self.tableView = [[HomeTableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
     self.tableView.backgroundColor = kWhiteColor;
-        self.tableView.tableHeaderView = self.headerView;
+    [self.view addSubview:self.headerView];
+
+//        self.tableView.tableHeaderView = self.headerView;
 //    self.tableView.refreshDelegate = self;
 //        [self.tableView adjustsContentInsets];
     [self.view addSubview:self.tableView];
-        [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.edges.mas_equalTo(UIEdgeInsetsZero);
-        }];
+//        [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.edges.mas_equalTo(UIEdgeInsetsZero);
+//        }];
     
     [self.tableView addRefreshAction:^{
         
@@ -117,13 +160,7 @@
 }
 
 #pragma mark - Init
--(void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    
-    
-    
-}
+
 
 - (void)changeWord
 {
@@ -145,14 +182,14 @@
         
         CoinWeakSelf;
         //头部
-        _headerView = [[HomeHeaderView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kHeight(185) + kHeight(305))];
+        _headerView = [[HomeHeaderView alloc] initWithFrame:CGRectMake(15, kHeight(80), kScreenWidth, kScreenHeight)];
         
         _headerView.headerBlock = ^(HomeEventsType type, NSInteger index) {
             
             [weakSelf headerViewEventsWithType:type index:index];
         };
-        
-        self.tableView.tableHeaderView = _headerView;
+        _headerView.contentSize = CGSizeMake(kScreenWidth, kScreenHeight+100);
+//        self.tableView.tableHeaderView = _headerView;
     }
     return _headerView;
 }
@@ -184,17 +221,38 @@
             
         case HomeEventsTypeStore:
         {
-            StoreListVC *storeVC = [StoreListVC new];
+            RedEnvelopeVC *redEnvelopeVC = [RedEnvelopeVC new];
             
-            [self.navigationController pushViewController:storeVC animated:YES];
+            if ([[TLUser user].tradepwdFlag isEqualToString:@"0"]) {
+                TLPwdType pwdType = TLPwdTypeSetTrade;
+                TLPwdRelatedVC *pwdRelatedVC = [[TLPwdRelatedVC alloc] initWithType:pwdType];
+                
+                pwdRelatedVC.isWallet = YES;
+                pwdRelatedVC.success = ^{
+                    
+                    
+                    [self presentViewController:redEnvelopeVC animated:YES completion:nil];
+                    
+                };
+                [self.navigationController pushViewController:pwdRelatedVC animated:YES];
+                
+                
+            }else{
+                
+                [self presentViewController:redEnvelopeVC animated:YES completion:nil];
+                
+                
+            }
+
             
         }break;
             
         case HomeEventsTypeGoodMall:
         {
-            GoodMallVC *mallVC = [GoodMallVC new];
+            StoreListVC *storeVC = [StoreListVC new];
             
-            [self.navigationController pushViewController:mallVC animated:YES];
+            [self.navigationController pushViewController:storeVC animated:YES];
+           
         }break;
             
         case HomeEventsTypePosMining:
@@ -205,28 +263,9 @@
         }break;
         case HomeEventsTypeRedEnvelope:
         {
-            RedEnvelopeVC *redEnvelopeVC = [RedEnvelopeVC new];
-
-            if ([[TLUser user].tradepwdFlag isEqualToString:@"0"]) {
-                TLPwdType pwdType = TLPwdTypeSetTrade;
-                TLPwdRelatedVC *pwdRelatedVC = [[TLPwdRelatedVC alloc] initWithType:pwdType];
-               
-                pwdRelatedVC.isWallet = YES;
-                pwdRelatedVC.success = ^{
-                    
-                  
-                    [self presentViewController:redEnvelopeVC animated:YES completion:nil];
-
-                };
-                [self.navigationController pushViewController:pwdRelatedVC animated:YES];
-
-                
-            }else{
-                
-                [self presentViewController:redEnvelopeVC animated:YES completion:nil];
-
-                
-            }
+            GoodMallVC *mallVC = [GoodMallVC new];
+            
+            [self.navigationController pushViewController:mallVC animated:YES];
             
 
         }break;

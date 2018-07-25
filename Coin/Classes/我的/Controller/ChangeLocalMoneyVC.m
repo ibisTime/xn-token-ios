@@ -18,22 +18,62 @@
 @property (nonatomic, strong) UITableView *langChooseTV;
 @property (nonatomic, strong) NSMutableArray <SettingModel *>*models;
 @property (nonatomic, copy)  NSString *type;
+@property (nonatomic, strong) UIImageView *bgImage;
 
+@property (nonatomic, strong) UIButton *backButton;
+
+@property (nonatomic, strong) UILabel *nameLable;
 @end
 
 @implementation ChangeLocalMoneyVC
-
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBarHidden = YES;
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
+    
+}
+//如果仅设置当前页导航透明，需加入下面方法
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    self.navigationController.navigationBarHidden = NO;
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+    
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = [LangSwitcher switchLang:@"本地货币" key:nil];
     self.models = [[NSMutableArray alloc] init];
     
-    self.langChooseTV = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
-    [self.view addSubview:self.langChooseTV];
+    self.bgImage = [[UIImageView alloc] init];
+    self.bgImage.contentMode = UIViewContentModeScaleToFill;
+    self.bgImage.userInteractionEnabled = YES;
+    self.bgImage.image = kImage(@"我的 背景");
+    [self.view  addSubview:self.bgImage];
+    
+    [self.bgImage mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(UIEdgeInsetsZero);
+    }];
+    //
+    self.backButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
+    self.backButton.frame = CGRectMake(15, kStatusBarHeight+5, 40, 40);
+    [self.backButton setImage:kImage(@"返回1-1") forState:(UIControlStateNormal)];
+    [self.backButton addTarget:self action:@selector(buttonClick) forControlEvents:(UIControlEventTouchUpInside)];
+    [self.bgImage addSubview:self.backButton];
+    self.nameLable = [[UILabel alloc]initWithFrame:CGRectMake(54, kStatusBarHeight+5, kScreenWidth - 108, 44)];
+    self.nameLable.text = [LangSwitcher switchLang:@"选择货币" key:nil];
+    self.nameLable.textAlignment = NSTextAlignmentCenter;
+    self.nameLable.font = Font(16);
+    self.nameLable.textColor = kTextBlack;
+    [self.bgImage addSubview:self.nameLable];
+    
+    self.langChooseTV = [[UITableView alloc] initWithFrame:CGRectMake(15, kHeight(90), kScreenWidth-15, kHeight(175)) style:UITableViewStylePlain];
+    self.langChooseTV.rowHeight = 55;
+    [self.bgImage addSubview:self.langChooseTV];
     self.langChooseTV.delegate = self;
     self.langChooseTV.dataSource = self;
     self.langChooseTV.separatorStyle = UITableViewCellSeparatorStyleNone;
-    [self.langChooseTV adjustsContentInsets];
+//    [self.langChooseTV adjustsContentInsets];
     __weak typeof(self) weakself = self;
     //
 //    TLDataBase *db = [TLDataBase sharedManager];
@@ -76,6 +116,12 @@
     }];
     [self.models addObjectsFromArray:@[simpleModel,tridationModel]];
 
+}
+- (void)buttonClick
+{
+    
+    [self.navigationController popViewControllerAnimated:YES];
+    
 }
 
 -(void)langType:(LangType)type {
@@ -124,9 +170,9 @@
     
 }
 
-- (void)viewDidLayoutSubviews {
-    self.langChooseTV.frame = self.view.bounds;
-}
+//- (void)viewDidLayoutSubviews {
+//    self.langChooseTV.frame = self.view.bounds;
+//}
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
@@ -142,6 +188,8 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.models.count;
 }
+
+
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
@@ -170,10 +218,11 @@
     
     if (settingModel.isSelect) {
         
-        UIImageView *iv = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
+        UIImageView *iv = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 14, 11)];
+        iv.contentMode = UIViewContentModeScaleToFill;
         //        iv.backgroundColor = [UIColor orangeColor];
         [cell addSubview:iv];
-        iv.image = [UIImage imageNamed:@"语言选中"];
+        iv.image = [UIImage imageNamed:@"打勾"];
         [iv mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.equalTo(cell.mas_centerY);
             make.right.equalTo(cell.mas_right).offset(-20);
@@ -185,7 +234,7 @@
         UIImageView *iv = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
         //        iv.backgroundColor = [UIColor orangeColor];
         [cell addSubview:iv];
-        iv.image = [UIImage imageNamed:@"未选中"];
+        iv.image = [UIImage imageNamed:@""];
         [iv mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.equalTo(cell.mas_centerY);
             make.right.equalTo(cell.mas_right).offset(-20);
@@ -200,14 +249,5 @@
 }
 
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

@@ -12,11 +12,28 @@
 @interface JoinMineVc ()<RefreshDelegate>
 @property (nonatomic , strong) JoinMineTableView *tableView;
 @property (nonatomic , strong) NSMutableArray <JoinModel *>*models;
+@property (nonatomic, strong) UIImageView *bgImage;
+
+@property (nonatomic, strong) UIButton *backButton;
+
+@property (nonatomic, strong) UILabel *nameLable;
+
+@property (nonatomic, strong) UIButton *showView;
 
 @end
 
 @implementation JoinMineVc
-
+-(UIButton *)showView
+{
+    
+    if (!_showView) {
+        _showView = [[UIButton alloc] init];
+        [_showView setBackgroundColor:kBlackColor];
+        [_showView setTitleColor:kWhiteColor forState:UIControlStateNormal];
+        
+    }
+    return _showView;
+}
 - (void)viewDidLoad {
     self.title = [LangSwitcher switchLang:@"加入社群" key:nil];
     [super viewDidLoad];
@@ -26,7 +43,20 @@
     // Do any additional setup after loading the view.
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBarHidden = YES;
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
+    
+}
+//如果仅设置当前页导航透明，需加入下面方法
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    self.navigationController.navigationBarHidden = NO;
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
 
+}
 - (void)requestInfo
 {
     
@@ -87,14 +117,35 @@
 }
 - (void)initTableView {
     
+    self.bgImage = [[UIImageView alloc] init];
+    self.bgImage.contentMode = UIViewContentModeScaleToFill;
+    self.bgImage.userInteractionEnabled = YES;
+    self.bgImage.image = kImage(@"我的 背景");
+    [self.view  addSubview:self.bgImage];
     
+    [self.bgImage mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(UIEdgeInsetsZero);
+    }];
+    //
+    self.backButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
+    self.backButton.frame = CGRectMake(15, kStatusBarHeight+5, 40, 40);
+    [self.backButton setImage:kImage(@"返回1-1") forState:(UIControlStateNormal)];
+    [self.backButton addTarget:self action:@selector(buttonClick) forControlEvents:(UIControlEventTouchUpInside)];
+    [self.bgImage addSubview:self.backButton];
+    self.nameLable = [[UILabel alloc]initWithFrame:CGRectMake(54, kStatusBarHeight+5, kScreenWidth - 108, 44)];
+    self.nameLable.text = [LangSwitcher switchLang:@"加入社群" key:nil];
+    self.nameLable.textAlignment = NSTextAlignmentCenter;
+    self.nameLable.font = Font(16);
+    self.nameLable.textColor = kTextBlack;
+    [self.bgImage addSubview:self.nameLable];
     
-    self.tableView = [[JoinMineTableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - kTabBarHeight) style:UITableViewStylePlain];
+    self.tableView = [[JoinMineTableView alloc] initWithFrame:CGRectMake(15, kHeight(90), kScreenWidth-30, kHeight(293)) style:UITableViewStylePlain];
     
     //    self.tableView.tableHeaderView = self.headerView;
     self.tableView.refreshDelegate = self;
+    self.tableView.backgroundColor = kWhiteColor;
     //    [self.tableView adjustsContentInsets];
-    [self.view addSubview:self.tableView];
+    [self.bgImage addSubview:self.tableView];
     //    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
     //        make.top.equalTo(self.headerView.mas_bottom);
     //    }];
@@ -109,6 +160,14 @@
     //
     //    };
 }
+
+- (void)buttonClick
+{
+    
+    [self.navigationController popViewControllerAnimated:YES];
+    
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -117,6 +176,60 @@
 -(void)refreshTableView:(TLTableView *)refreshTableview didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
+        
+        
+        
+        UIPasteboard *pasteBoard = [UIPasteboard generalPasteboard];
+        NSString *address ;
+        address = self.tableView.models[indexPath.row].cvalue;
+        pasteBoard.string = address;
+        
+        if (pasteBoard == nil) {
+            
+            [self.view addSubview:self.showView];
+            [self.showView setTitle:[LangSwitcher switchLang:@"复制失败, 请重新复制" key:nil] forState:UIControlStateNormal];
+            self.showView.hidden = NO;
+
+            [self.showView mas_makeConstraints:^(MASConstraintMaker *make) {
+             
+                make.centerX.equalTo(self.tableView.mas_centerX);
+                make.centerY.equalTo(self.tableView.mas_centerY);
+                make.width.equalTo(@114);
+                make.height.equalTo(@53);
+
+            }];
+//            [TLAlert alertWithError:@"复制失败, 请重新复制"];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                self.showView.hidden = YES;
+                [self.showView removeFromSuperview];
+            });
+        } else {
+            
+            
+            
+            [self.view addSubview:self.showView];
+            self.showView.hidden = NO;
+
+            [self.showView setTitle:[LangSwitcher switchLang:@"复制成功" key:nil] forState:UIControlStateNormal];
+            [self.showView mas_makeConstraints:^(MASConstraintMaker *make) {
+                
+                make.centerX.equalTo(self.tableView.mas_centerX);
+                make.centerY.equalTo(self.tableView.mas_centerY);
+                make.width.equalTo(@114);
+                make.height.equalTo(@53);
+                
+            }];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                self.showView.hidden = YES;
+                [self.showView removeFromSuperview];
+            });
+            
+//            [TLAlert alertWithSucces:[LangSwitcher switchLang:@"复制成功" key:nil]];
+            
+        }
+        
+        
+
     
     
 }

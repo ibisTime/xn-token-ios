@@ -13,7 +13,6 @@
 @interface TLAboutUsVC ()
 
 @property (nonatomic, strong) UIView *bgView;
-@property (nonatomic, strong) UIImageView *bgImage;
 
 @property (nonatomic, strong) UIImageView *iconImageView;
 @property (nonatomic, strong) UIImageView *nameLbl;
@@ -25,6 +24,7 @@
 @property (nonatomic, strong) UILabel *banQuanLbl;
 @property (nonatomic, strong) UIView *phoneView;
 @property (nonatomic, strong) UILabel *phoneNumber;
+@property (nonatomic, strong) UIImageView *bgImage;
 
 @property (nonatomic, strong) UIButton *backButton;
 

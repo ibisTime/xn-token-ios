@@ -15,12 +15,30 @@
 @interface WalletSettingVC ()
 @property (nonatomic, strong) SettingGroup *group;
 @property (nonatomic, strong) SettingTableView *tableView;
+@property (nonatomic, strong) UIImageView *bgImage;
+
+@property (nonatomic, strong) UIButton *backButton;
+
+@property (nonatomic, strong) UILabel *nameLable;
 @end
 
 @implementation WalletSettingVC
-
+//- (void)viewWillAppear:(BOOL)animated{
+//    [super viewWillAppear:animated];
+//    self.navigationController.navigationBarHidden = YES;
+//    self.navigationController.navigationBar.shadowImage = [UIImage new];
+//    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
+//    [self.tableView reloadData];
+//}
+////如果仅设置当前页导航透明，需加入下面方法
+//- (void)viewWillDisappear:(BOOL)animated{
+//    [super viewWillDisappear:animated];
+//    self.navigationController.navigationBarHidden = NO;
+//    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+//    
+//}
 - (void)viewDidLoad {
-    self.title = [LangSwitcher switchLang:@"钱包设置" key:nil];
+    self.title = [LangSwitcher switchLang:@"钱包工具" key:nil];
     [self setGroup];
     [self initTableView];
     [super viewDidLoad];
@@ -29,6 +47,7 @@
 #pragma mark - Init
 
 - (void)initTableView {
+    
     
     self.tableView = [[SettingTableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight) style:UITableViewStyleGrouped];
     
@@ -44,6 +63,21 @@
     CoinWeakSelf;
     
     //资金密码
+    
+    SettingModel *walletName = [SettingModel new];
+    walletName.text = [LangSwitcher switchLang:@"钱包名称" key:nil];
+//    [walletName setAction:^{
+//
+//
+//        CheckForwordVC *pwdAboutVC = [[CheckForwordVC alloc] init];
+//        pwdAboutVC.title = [LangSwitcher switchLang:@"修改交易密码" key:nil];
+//
+//        pwdAboutVC.Type = PassWprdTypeFirst;
+//        pwdAboutVC.WalletType = WalletWordTypeFirst;
+//        [weakSelf.navigationController pushViewController:pwdAboutVC animated:YES];
+//
+//    }];
+    
     SettingModel *changeTradePwd = [SettingModel new];
     changeTradePwd.text = [LangSwitcher switchLang:@"修改密码" key:nil];
     [changeTradePwd setAction:^{
@@ -130,7 +164,7 @@
   
     
     self.group = [SettingGroup new];
-    self.group.sections = @[@[changeTradePwd], @[idAuth, changeLoginPwd]];
+    self.group.sections = @[@[walletName,changeTradePwd,bindEmail], @[idAuth, changeLoginPwd]];
     
 }
 

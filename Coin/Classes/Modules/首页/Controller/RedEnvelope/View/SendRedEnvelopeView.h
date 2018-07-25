@@ -32,5 +32,5 @@
 
 @property (nonatomic , strong)UILabel *total;
 
-
+@property (nonatomic , strong) UIView * view1;
 @end

@@ -30,6 +30,8 @@
 //应用
 @property (nonatomic, strong) UIView *applicationView;
 
+@property (nonatomic, strong) UIButton *tempBtn;
+
 @end
 
 @implementation HomeHeaderView
@@ -55,7 +57,7 @@
     CoinWeakSelf;
     
     //顶部轮播
-    TLBannerView *bannerView = [[TLBannerView alloc] initWithFrame:CGRectMake(15, 5, kScreenWidth-30, kHeight(138))];
+    TLBannerView *bannerView = [[TLBannerView alloc] initWithFrame:CGRectMake(0, 5, kScreenWidth-30, kHeight(138))];
     bannerView.layer.cornerRadius = 5;
     bannerView.clipsToBounds = YES;
     
@@ -217,7 +219,7 @@
 
 - (void)initApplicationView {
     
-    self.applicationView = [[UIView alloc] initWithFrame:CGRectMake(0, self.bannerView.yy, kScreenWidth, 145 + 125)];
+    self.applicationView = [[UIView alloc] initWithFrame:CGRectMake(0, self.bannerView.yy, kScreenWidth, kHeight(500))];
     self.applicationView.backgroundColor = kWhiteColor;
     [self addSubview:self.applicationView];
     
@@ -259,49 +261,114 @@
 //        make.height.equalTo(@0.5);
 //    }];
     
-    NSArray *textArr = @[@"首创玩法",
-                         @"余币宝",
+    NSArray *textArr = @[@"红包",
+                         @"首创玩法",
                          @"量化理财",
-                         @"发红包"];
+                         @"余币宝"];
     
     [textArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         NSLog(@"==========%ld",idx);
         CGFloat width = (kScreenWidth-60)/3;
         
+//        UIView *contentView = [UIView new];
+//        contentView.backgroundColor = kHexColor(@"#EFF5FE");
         UIButton *btn = [UIButton buttonWithTitle:nil
                                             titleColor:kWhiteColor
                                        backgroundColor:kClearColor
                                              titleFont:15.0];
-        
-        [btn setImage:kImage(obj) forState:UIControlStateNormal];
-        [btn setBackgroundImage:kImage(obj) forState:UIControlStateNormal];
+        self.tempBtn = btn;
+
+        UIImageView *imageView= [[UIImageView alloc] init];
+        imageView.contentMode = UIViewContentModeScaleToFill;
+        [btn addSubview:imageView];
+//        [btn setImage:kImage(obj) forState:UIControlStateNormal];
+//        [btn setBackgroundImage:kImage(obj) forState:UIControlStateNormal];
+        [btn setBackgroundColor: kHexColor(@"#EFF5FE") forState:UIControlStateNormal];
         btn.contentMode = UIViewContentModeScaleAspectFit;
         btn.tag = 1500 + idx;
 //        btn.backgroundColor = [UIColor redColor];
         [btn addTarget:self action:@selector(clickButton:) forControlEvents:UIControlEventTouchUpInside];
-        UILabel *textLab = [UILabel labelWithBackgroundColor:kClearColor textColor:kWhiteColor font:13];
+        UILabel *textLab = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextBlack font:18];
         [btn addSubview:textLab];
         textLab.numberOfLines = 0;
         textLab.text = [LangSwitcher switchLang:obj key:nil];
-        [textLab mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(@12);
-
-            make.left.equalTo(@1);
-            make.right.equalTo(@-1);
-        }];
+//        UITapGestureRecognizer *ta = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickButton:)];
+//        [contentView addGestureRecognizer:ta]
+        UILabel *introfucec = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor3 font:12];
+        [btn addSubview:introfucec];
+        introfucec.numberOfLines = 0;
+        introfucec.text = [LangSwitcher switchLang:obj key:nil];
+        
         [self.applicationView addSubview:btn];
         [btn mas_makeConstraints:^(MASConstraintMaker *make) {
-            if (idx == 3) {
-                make.top.equalTo(textLbl.mas_bottom).offset(140);
-                make.left.equalTo(@(15));
-            }else
+            if (idx == 0) {
+                make.top.equalTo(@(idx * 90 +40));
+
+            }else if (idx == 1)
             {
-                make.top.equalTo(textLbl.mas_bottom).offset(15);
-                make.left.equalTo(@(idx*width+(idx+1)*15));
+                
+                make.top.equalTo(@(kHeight(130)));
+
+                
             }
-            make.width.equalTo(@(width));
-            make.height.equalTo(@110);
+            else if (idx == 2)
+            {
+                
+                make.top.equalTo(@(kHeight(220)));
+
+                
+            }
+            else if (idx == 3)
+            {
+                
+                make.top.equalTo(@(kHeight(310)));
+
+                
+            }
+            make.width.equalTo(@(kScreenWidth-30));
+            make.height.equalTo(@90);
         }];
+        [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(btn.mas_top).offset(20);
+            make.left.equalTo(btn.mas_left).offset(38);
+            make.width.equalTo(@55);
+            make.height.equalTo(@58);
+
+        }];
+        [textLab mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(imageView.mas_top).offset(22);
+            
+            make.left.equalTo(imageView.mas_right).offset(28);
+        }];
+        
+        [introfucec mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(textLab.mas_bottom).offset(6);
+            
+            make.left.equalTo(textLab.mas_left);
+           
+        }];
+        if (idx == 0) {
+            
+            imageView.image = kImage(@"红包-1");
+            introfucec.text = [LangSwitcher switchLang:@"将数字货币塞入其中,发给好友" key:nil];
+        }else if (idx == 1)
+        {
+            imageView.image = kImage(@"THA矿山");
+            introfucec.text = [LangSwitcher switchLang:@"将数字货币塞入其中,发给好友" key:nil];
+
+        }else if (idx == 2)
+        {
+            imageView.image = kImage(@"量化理财");
+            introfucec.text = [LangSwitcher switchLang:@"活期理财产品,存取方便,年化率" key:nil];
+
+            
+        }else if (idx == 3)
+        {
+            
+            imageView.image = kImage(@"余币包");
+            introfucec.text = [LangSwitcher switchLang:@"玩法" key:nil];
+
+        }
         
 //        [btn setTitleBottom];
     }];

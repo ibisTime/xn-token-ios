@@ -42,24 +42,40 @@
 @property (nonatomic, strong) SettingModel *emailSettingModel;
 @property (nonatomic, strong) SettingModel *googleAuthSettingModel;
 
+@property (nonatomic, strong) UIImageView *bgImage;
+
+@property (nonatomic, strong) UIButton *backButton;
+
+@property (nonatomic, strong) UILabel *nameLable;
 @end
 
 @implementation SettingVC
 
-- (void)viewWillAppear:(BOOL)animated {
-    
+- (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    self.navigationController.navigationBarHidden = YES;
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
     [self.tableView reloadData];
     [self requestUserInfo];
+}
+//如果仅设置当前页导航透明，需加入下面方法
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    self.navigationController.navigationBarHidden = NO;
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     
 }
+
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     self.title = [LangSwitcher switchLang:@"安全设置" key:nil];
-    [self setGroup];
     [self initTableView];
+
+    [self setGroup];
     
 }
 
@@ -67,13 +83,35 @@
 
 - (void)initTableView {
     
-    self.tableView = [[SettingTableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight) style:UITableViewStyleGrouped];
+    self.bgImage = [[UIImageView alloc] init];
+    self.bgImage.contentMode = UIViewContentModeScaleToFill;
+    self.bgImage.userInteractionEnabled = YES;
+    self.bgImage.image = kImage(@"我的 背景");
+    [self.view  addSubview:self.bgImage];
+    
+    [self.bgImage mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(UIEdgeInsetsZero);
+    }];
+    //
+    self.backButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
+    self.backButton.frame = CGRectMake(15, kStatusBarHeight+5, 40, 40);
+    [self.backButton setImage:kImage(@"返回1-1") forState:(UIControlStateNormal)];
+    [self.backButton addTarget:self action:@selector(buttonClick) forControlEvents:(UIControlEventTouchUpInside)];
+    [self.bgImage addSubview:self.backButton];
+    self.nameLable = [[UILabel alloc]initWithFrame:CGRectMake(54, kStatusBarHeight+5, kScreenWidth - 108, 44)];
+    self.nameLable.text = [LangSwitcher switchLang:@"安全设置" key:nil];
+    self.nameLable.textAlignment = NSTextAlignmentCenter;
+    self.nameLable.font = Font(16);
+    self.nameLable.textColor = kTextBlack;
+    [self.bgImage addSubview:self.nameLable];
+    
+    self.tableView = [[SettingTableView alloc] initWithFrame:CGRectMake(15, kHeight(90), kScreenWidth-30, kHeight(350)) style:UITableViewStyleGrouped];
     
     self.tableView.group = self.group;
+    self.tableView.backgroundColor = kWhiteColor;
+    [self.bgImage addSubview:self.tableView];
     
-    [self.view addSubview:self.tableView];
-    
-    UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 150)];
+    UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth-30-30, 150)];
     
     [footerView addSubview:self.loginOutBtn];
     
@@ -81,7 +119,12 @@
     
     
 }
-
+- (void)buttonClick
+{
+    
+    [self.navigationController popViewControllerAnimated:YES];
+    
+}
 - (void)setGroup {
     
     CoinWeakSelf;
@@ -212,8 +255,9 @@
     }];
     
     self.group = [SettingGroup new];
-    self.group.sections = @[@[changeTradePwd], @[ bindEmail, changeLoginPwd, google]];
-    
+    self.group.sections = @[@[changeTradePwd,bindEmail,google], @[changeLoginPwd]];
+    self.tableView.group = self.group;
+
 }
 
 #pragma mark- 退出登录
@@ -222,11 +266,13 @@
     
     if (!_loginOutBtn) {
         
-        _loginOutBtn = [[UIButton alloc] initWithFrame:CGRectMake(15, 55, kScreenWidth - 30, 45)];
-        _loginOutBtn.backgroundColor = kAppCustomMainColor;
+        _loginOutBtn = [[UIButton alloc] initWithFrame:CGRectMake(15, 55, kScreenWidth - 30-30, 50)];
+        _loginOutBtn.backgroundColor = kClearColor;
         [_loginOutBtn setTitle:[LangSwitcher switchLang:@"退出登录" key:nil] forState:UIControlStateNormal];
-        [_loginOutBtn setTitleColor:kWhiteColor forState:UIControlStateNormal];
+        [_loginOutBtn setTitleColor:kHexColor(@"#007AFF") forState:UIControlStateNormal];
         _loginOutBtn.layer.cornerRadius = 5;
+        _loginOutBtn.layer.borderWidth = 1;
+        _loginOutBtn.layer.borderColor = kHexColor(@"#007AFF").CGColor;
         _loginOutBtn.clipsToBounds = YES;
         _loginOutBtn.titleLabel.font = FONT(15);
         [_loginOutBtn addTarget:self action:@selector(logout) forControlEvents:UIControlEventTouchUpInside];

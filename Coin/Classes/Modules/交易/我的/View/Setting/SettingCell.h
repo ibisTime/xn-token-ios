@@ -20,5 +20,7 @@
 @property (nonatomic, assign) BOOL arrowHidden;
 
 @property (nonatomic, assign) BOOL switchHidden;
+@property (nonatomic, strong) UIImageView *iconImageView;
+@property (nonatomic, strong) UILabel *titleLbl;
 
 @end

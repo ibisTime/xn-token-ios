@@ -13,9 +13,7 @@
 
 @interface SettingCell ()
 
-@property (nonatomic, strong) UIImageView *iconImageView;
 
-@property (nonatomic, strong) UILabel *titleLbl;
 
 @property (nonatomic, strong) UIImageView *accessoryImageView;
 
@@ -27,6 +25,7 @@
     
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         
+        self.backgroundColor = kWhiteColor;
         self.iconImageView = [[UIImageView alloc] init];
         [self.contentView addSubview:self.iconImageView];
         self.iconImageView.contentMode = UIViewContentModeScaleAspectFit;
@@ -88,10 +87,11 @@
         line.backgroundColor = kLineColor;
         [self addSubview:line];
         [line mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self.mas_left).offset(0);
-            make.width.equalTo(self.mas_width);
-            make.height.equalTo(@(kLineHeight));
-            make.bottom.equalTo(self.mas_bottom);
+            make.left.equalTo(self.mas_left).offset(15);
+            make.right.equalTo(self.mas_right).offset(-15);
+
+            make.height.equalTo(@1);
+            make.bottom.equalTo(self.mas_bottom).offset(-1);
         }];
         
     }

@@ -24,7 +24,7 @@ static NSString *identifierCell = @"SettingCell";
         
         self.dataSource = self;
         self.delegate = self;
-        
+//        self.backgroundColor = kWhiteColor;
         [self registerClass:[SettingCell class] forCellReuseIdentifier:identifierCell];
     }
     
@@ -48,21 +48,32 @@ static NSString *identifierCell = @"SettingCell";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
+    
     SettingCell *cell = [tableView dequeueReusableCellWithIdentifier:identifierCell];
     
     self.group.items = self.group.sections[indexPath.section];
     SettingModel *settingModel = self.group.items[indexPath.row];
-    cell.textLabel.text = settingModel.text;
-    cell.textLabel.textColor = kTextColor;
-    cell.textLabel.font = Font(15.0);
+    
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.switchHidden = YES;
+    if (indexPath.section == 0 && indexPath.row == 0) {
+        cell.switchHidden = YES;
+        cell.arrowHidden = YES;
+        settingModel.imgName = @"钱包";
+//        cell.iconImageView.image = kImage(@"钱包");
+    }else{
+        cell.switchHidden = YES;
+        cell.textLabel.text = settingModel.text;
+        cell.textLabel.textColor = kTextColor;
+        cell.textLabel.font = Font(15.0);
+        
+    }
     if (settingModel.subText) {
         
         cell.rightLabel.text = settingModel.subText;
 
     }
-    
+    cell.settingModel = settingModel;
+
 //    if (indexPath.section == 1) {
 //
 //        cell.arrowHidden = indexPath.row == 4 ? YES: NO;
@@ -100,7 +111,7 @@ static NSString *identifierCell = @"SettingCell";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    return 50;
+    return 55;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {

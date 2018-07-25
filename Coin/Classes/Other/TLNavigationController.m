@@ -27,11 +27,6 @@
     
     //
     UINavigationBar *navBar = [UINavigationBar appearance];
-//    NSString *text = [LangSwitcher switchLang:@"返回" key:nil];
-//    [self.navigationItem.backBarButtonItem setTitle:@""];
-
-//    self.navigationBar.topItem.title = @"";
-//    navBar.backIndicatorImage = [UIImage imageNamed:@"返回 白色"];
     [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -60)
                                                          forBarMetrics:UIBarMetricsDefault];
     navBar.backIndicatorTransitionMaskImage = [UIImage imageNamed:@"返回 白色"];

@@ -19,6 +19,7 @@
 
 @property (nonatomic , strong) UILabel *contentLab;
 
+@property (nonatomic , strong) UIButton *showView;
 
 @end
 @implementation JoinMineCell
@@ -34,6 +35,7 @@
 }
 - (void)initSubviews {
     
+    self.backgroundColor = kWhiteColor;
     self.nameLab = [UILabel labelWithBackgroundColor:kWhiteColor textColor:kTextColor font:15];
     [self addSubview:self.nameLab];
     [self.nameLab mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -48,29 +50,46 @@
         make.right.equalTo(@-15);
 
     }];
+    UIView *line = [UIView new];
+    line.backgroundColor = kLineColor;
+    [self addSubview:line];
+    
+    [line mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(self.mas_bottom).offset(-1);
+        make.right.left.equalTo(@0);
+        make.height.equalTo(@1);
+    }];
     
     self.contentLab.userInteractionEnabled = YES;
       UITapGestureRecognizer *leftSwipe = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap)];
-    
+    [self.nameLab addGestureRecognizer:leftSwipe];
+
     [self.contentLab addGestureRecognizer:leftSwipe];
+    [self addSubview:self.contentLab];
 }
 
+
 -(void)tap{
-    UIPasteboard *pasteBoard = [UIPasteboard generalPasteboard];
-    NSString *address ;
-        address = self.contentLab.text;
-   
-    pasteBoard.string = address;
     
-    if (pasteBoard == nil) {
-        
-        [TLAlert alertWithError:@"复制失败, 请重新复制"];
-        
-    } else {
-        
-        [TLAlert alertWithSucces:[LangSwitcher switchLang:@"复制成功" key:nil]];
-    }
     
+    
+//    UIPasteboard *pasteBoard = [UIPasteboard generalPasteboard];
+//    NSString *address ;
+//        address = self.contentLab.text;
+//
+//    pasteBoard.string = address;
+//
+//    if (pasteBoard == nil) {
+//
+//
+//        [TLAlert alertWithError:@"复制失败, 请重新复制"];
+//
+//    } else {
+//
+//        [TLAlert alertWithSucces:[LangSwitcher switchLang:@"复制成功" key:nil]];
+//
+//    }
+//
     
 }
 -(void)setModel:(JoinModel *)model

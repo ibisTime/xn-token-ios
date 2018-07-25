@@ -18,7 +18,6 @@
 @property (nonatomic, strong) WKWebView *webView;
 
 @property (nonatomic, strong) UIView *bgView;
-@property (nonatomic, strong) UIImageView *bgImage;
 
 @property (nonatomic, strong) UIImageView *iconImageView;
 @property (nonatomic, strong) UIImageView *nameLbl;
@@ -30,6 +29,7 @@
 @property (nonatomic, strong) UILabel *banQuanLbl;
 @property (nonatomic, strong) UIView *phoneView;
 @property (nonatomic, strong) UILabel *phoneNumber;
+@property (nonatomic, strong) UIImageView *bgImage;
 
 @property (nonatomic, strong) UIButton *backButton;
 
@@ -72,14 +72,23 @@
 
 - (void)requestContent {
     
+    self.bgImage = [[UIImageView alloc] init];
+    self.bgImage.contentMode = UIViewContentModeScaleToFill;
+    self.bgImage.userInteractionEnabled = YES;
+    self.bgImage.image = kImage(@"我的 背景");
+    [self.view  addSubview:self.bgImage];
     
+    [self.bgImage mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(UIEdgeInsetsZero);
+    }];
+    //
     self.backButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
     self.backButton.frame = CGRectMake(15, kStatusBarHeight+5, 40, 40);
     [self.backButton setImage:kImage(@"返回1-1") forState:(UIControlStateNormal)];
     [self.backButton addTarget:self action:@selector(buttonClick) forControlEvents:(UIControlEventTouchUpInside)];
     [self.bgImage addSubview:self.backButton];
     self.nameLable = [[UILabel alloc]initWithFrame:CGRectMake(54, kStatusBarHeight+5, kScreenWidth - 108, 44)];
-    self.nameLable.text = [LangSwitcher switchLang:@"关于我们" key:nil];
+    self.nameLable.text = [LangSwitcher switchLang:@"帮助中心" key:nil];
     self.nameLable.textAlignment = NSTextAlignmentCenter;
     self.nameLable.font = Font(16);
     self.nameLable.textColor = kTextBlack;
@@ -111,7 +120,7 @@
             
             ckey = @"questions";
             
-            name = [LangSwitcher switchLang: @"常见问题" key:nil];
+            name = [LangSwitcher switchLang: @"帮助中心" key:nil];
             
         } break;
             
@@ -181,7 +190,7 @@
     
     _webView.allowsBackForwardNavigationGestures = YES;
     [_webView.scrollView adjustsContentInsets];
-    [self.view addSubview:_webView];
+    [self.bgImage addSubview:_webView];
     
     [self loadWebWithString:self.htmlStr];
 }
