@@ -28,6 +28,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
+        
         UIImageView *backImage = [[UIImageView alloc]initWithFrame:self.frame];
         backImage.image = kImage(@"红包底部背景");
         [self addSubview:backImage];
@@ -55,7 +56,7 @@
             
             nameLabel = [[UILabel alloc]initWithFrame:CGRectMake(kWidth(35), kHeight(260), kWidth(kScreenWidth - 70-20), kHeight(20))];
         }
-       
+        self.nameLabel = nameLabel;
         nameLabel.text = [TLUser user].nickname;
         nameLabel.textAlignment = NSTextAlignmentCenter;
         nameLabel.font = Font(14);
@@ -68,7 +69,7 @@
             stateLabel = [[UILabel alloc]initWithFrame:CGRectMake(kWidth(35), kHeight(284), kWidth(kScreenWidth - 70-20), kHeight(22))];
             
         }
-       
+        self.stateLabel = stateLabel;
         stateLabel.text = [LangSwitcher switchLang:@"给您发了一个红包" key:nil];
         stateLabel.textAlignment = NSTextAlignmentCenter;
         stateLabel.font = Font(16);

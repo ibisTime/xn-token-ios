@@ -15,6 +15,9 @@
 
 #import "CurrencyModel.h"
 #import "TLPwdRelatedVC.h"
+#import "AssetPwdView.h"
+#import "UIButton+Custom.h"
+#import "UIButton+EnLargeEdge.h"
 @interface RedEnvelopeVC ()<SendRedEnvelopeDelegate,RedEnvelopeHeadDelegate>
 
 @property (nonatomic, strong) NSMutableArray <CurrencyModel *>*currencys;
@@ -25,6 +28,14 @@
 
 @implementation RedEnvelopeVC
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [self LoadData];
+    
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -32,9 +43,29 @@
 
 
     _sendView = [[SendRedEnvelopeView alloc]initWithFrame:self.view.frame];
+    CoinWeakSelf;
+    
+    _sendView.transFormBlock = ^(CurrencyModel *model) {
+        RechargeCoinVC *coinVC = [RechargeCoinVC new];
+        
+//        TLNavigationController * navigation = [[TLNavigationController alloc]initWithRootViewController:coinVC];
+//        coinVC.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+//        coinVC.modalPresentationStyle = UIModalTransitionStyleFlipHorizontal;
+        coinVC.currency = model;
+        [weakSelf presentViewController:coinVC animated:YES completion:nil];
+
+    };
     _sendView.delegate = self;
     [self.view addSubview:_sendView];
-
+    AssetPwdView *pwdView =[[AssetPwdView alloc] init];
+    self.pwdView = pwdView;
+    pwdView.HiddenBlock = ^{
+        self.pwdView.hidden = YES;
+        [self.pwdView removeFromSuperview];
+    };
+    pwdView.hidden = YES;
+    pwdView.frame = self.view.bounds;
+    [self.view addSubview:pwdView];
     RedEnvelopeHeadView *headView = [[RedEnvelopeHeadView alloc]initWithFrame:CGRectMake(0, kStatusBarHeight, SCREEN_WIDTH, 44)];
     headView.delegate = self;
     [_sendView addSubview:headView];
@@ -72,42 +103,50 @@
 -(void)GiveAnyRequestAndCurrency:(NSString *)currency type:(NSString *)type count:(NSString *)count sendNum:(NSString *)sendNum greeting:(NSString *)greeting
 {
     
-    
-    
-    [TLAlert alertWithTitle:[LangSwitcher switchLang:@"请输入资金密码" key:nil]
-                        msg:@""
-                 confirmMsg:[LangSwitcher switchLang:@"确定" key:nil]
-                  cancleMsg:[LangSwitcher switchLang:@"取消" key:nil]
-                placeHolder:[LangSwitcher switchLang:@"请输入资金密码" key:nil]
-                      maker:self cancle:^(UIAlertAction *action) {
-
-                      } confirm:^(UIAlertAction *action, UITextField *textField) {
-
-                          if ([textField.text isEqualToString:@""]) {
-                              [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入资金密码" key:nil]];
-                              return ;
-                          }
-                          NSLog(@"%@",textField.text);
-                          TLNetworking *http = [TLNetworking new];
-                          http.code = @"623000";
-                          http.parameters[@"userId"] = [TLUser user].userId;
-                          http.parameters[@"symbol"] = currency;
-                          http.parameters[@"type"] = type;
-                          http.parameters[@"count"] = count;
-                          http.parameters[@"sendNum"] = sendNum;
-                          http.parameters[@"greeting"] = greeting;
-                          http.parameters[@"tradePwd"] = textField.text;
-                          [http postWithSuccess:^(id responseObject) {
-
-                              RedEnvelopeShoreVC *vc = [RedEnvelopeShoreVC new];
-                              vc.code = responseObject[@"data"][@"code"];
-                              vc.content = greeting;
-                              [self presentViewController:vc animated:YES completion:nil];
-                          } failure:^(NSError *error) {
-                              NSLog(@"%@",error);
-                          }];
-
-                      }];
+    self.pwdView.hidden = NO;
+    self.pwdView.password.textField.enabled = YES;
+    CoinWeakSelf;
+    self.pwdView.passwordBlock = ^(NSString *password) {
+        if ([password isEqualToString:@""]) {
+            [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入支付密码" key:nil]];
+            return ;
+        }
+        
+        TLNetworking *http = [TLNetworking new];
+        http.code = @"623000";
+        http.parameters[@"userId"] = [TLUser user].userId;
+        http.parameters[@"symbol"] = currency;
+        http.parameters[@"type"] = type;
+        http.parameters[@"count"] = count;
+        http.parameters[@"sendNum"] = sendNum;
+        http.parameters[@"greeting"] = greeting;
+        http.parameters[@"tradePwd"] = password;
+        [http postWithSuccess:^(id responseObject) {
+            weakSelf.pwdView.hidden = YES;
+            [weakSelf.pwdView.password clearText];
+            RedEnvelopeShoreVC *vc = [RedEnvelopeShoreVC new];
+            vc.code = responseObject[@"data"][@"code"];
+            vc.content = greeting;
+            [weakSelf presentViewController:vc animated:YES completion:nil];
+        } failure:^(NSError *error) {
+            NSLog(@"%@",error);
+        }];
+    };
+//    return;
+//    [TLAlert alertWithTitle:[LangSwitcher switchLang:@"请输入资金密码" key:nil]
+//                        msg:@""
+//                 confirmMsg:[LangSwitcher switchLang:@"确定" key:nil]
+//                  cancleMsg:[LangSwitcher switchLang:@"取消" key:nil]
+//                placeHolder:[LangSwitcher switchLang:@"请输入资金密码" key:nil]
+//                      maker:self cancle:^(UIAlertAction *action) {
+//
+//                      } confirm:^(UIAlertAction *action, UITextField *textField) {
+//
+//
+//                          NSLog(@"%@",textField.text);
+//
+//
+//                      }];
 }
 
 -(void)RedEnvelopeHeadButton:(NSInteger)tag

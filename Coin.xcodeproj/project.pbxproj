@@ -263,6 +263,8 @@
 		B8C2057920CFA0B300952765 /* WalletAddressCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B8C2057820CFA0B300952765 /* WalletAddressCell.m */; };
 		B8C2057C20CFA3FC00952765 /* WalletAddressDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B8C2057B20CFA3FC00952765 /* WalletAddressDetailVC.m */; };
 		B8C2057F20CFFE1C00952765 /* WalletLocalModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B8C2057E20CFFE1C00952765 /* WalletLocalModel.m */; };
+		B8CA0D6A21081B850015A19D /* AssetPwdView.m in Sources */ = {isa = PBXBuildFile; fileRef = B8CA0D6921081B850015A19D /* AssetPwdView.m */; };
+		B8CA0D6D210822400015A19D /* TTPasswordView.m in Sources */ = {isa = PBXBuildFile; fileRef = B8CA0D6C2108223F0015A19D /* TTPasswordView.m */; };
 		B8CA7D4920CBA22800A0E93C /* WalletImportVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B8CA7D4820CBA22800A0E93C /* WalletImportVC.m */; };
 		B8D5F15020CE08790005CF96 /* TLAccountMoneyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B8D5F14F20CE08790005CF96 /* TLAccountMoneyVC.m */; };
 		B8D5F15320CE0E4C0005CF96 /* TLAccountTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = B8D5F15220CE0E4C0005CF96 /* TLAccountTableView.m */; };
@@ -803,6 +805,10 @@
 		B8C2057B20CFA3FC00952765 /* WalletAddressDetailVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WalletAddressDetailVC.m; sourceTree = "<group>"; };
 		B8C2057D20CFFE1C00952765 /* WalletLocalModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WalletLocalModel.h; sourceTree = "<group>"; };
 		B8C2057E20CFFE1C00952765 /* WalletLocalModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WalletLocalModel.m; sourceTree = "<group>"; };
+		B8CA0D6821081B850015A19D /* AssetPwdView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AssetPwdView.h; sourceTree = "<group>"; };
+		B8CA0D6921081B850015A19D /* AssetPwdView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AssetPwdView.m; sourceTree = "<group>"; };
+		B8CA0D6B2108223F0015A19D /* TTPasswordView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTPasswordView.h; sourceTree = "<group>"; };
+		B8CA0D6C2108223F0015A19D /* TTPasswordView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTPasswordView.m; sourceTree = "<group>"; };
 		B8CA7D4720CBA22800A0E93C /* WalletImportVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WalletImportVC.h; sourceTree = "<group>"; };
 		B8CA7D4820CBA22800A0E93C /* WalletImportVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WalletImportVC.m; sourceTree = "<group>"; };
 		B8D5F14E20CE08790005CF96 /* TLAccountMoneyVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLAccountMoneyVC.h; sourceTree = "<group>"; };
@@ -973,6 +979,8 @@
 		211A35051FB45CB500FEB71F /* View */ = {
 			isa = PBXGroup;
 			children = (
+				B8CA0D6B2108223F0015A19D /* TTPasswordView.h */,
+				B8CA0D6C2108223F0015A19D /* TTPasswordView.m */,
 				B8BBA5F920C780FA00DC4D5F /* PlatformCell.h */,
 				B8BBA5F720C780F900DC4D5F /* PlatformCell.m */,
 				B8BBA5F820C780FA00DC4D5F /* PlatformTableView.h */,
@@ -1005,6 +1013,8 @@
 				B8F63EDF20D3809700556150 /* LocalBillDetailTableView.m */,
 				B891F0662101899900ED5DDF /* BuildLocalHomeView.h */,
 				B891F0672101899900ED5DDF /* BuildLocalHomeView.m */,
+				B8CA0D6821081B850015A19D /* AssetPwdView.h */,
+				B8CA0D6921081B850015A19D /* AssetPwdView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2716,6 +2726,7 @@
 				211DE6BC1FB58B4C002FCF3D /* NSString+Extension.m in Sources */,
 				B88D6C6F20EDF39F0043832C /* TLFastvc.m in Sources */,
 				21C91D7D1FDBCF9C006EDB16 /* ZMAuthVC.m in Sources */,
+				B8CA0D6A21081B850015A19D /* AssetPwdView.m in Sources */,
 				21A7F3161FB2E2F900FAA0A2 /* TLUserLoginVC.m in Sources */,
 				211A34EB1FB42F8100FEB71F /* SettingVC.m in Sources */,
 				211DE6C51FB58B4C002FCF3D /* HttpRequestService.m in Sources */,
@@ -2806,6 +2817,7 @@
 				7A3821C620EAD4EA00D6B636 /* SendModel.m in Sources */,
 				211D4ED61FCD9B0C000E0D43 /* EditVC.m in Sources */,
 				211A34D71FB3F51400FEB71F /* MineHeaderView.m in Sources */,
+				B8CA0D6D210822400015A19D /* TTPasswordView.m in Sources */,
 				211DE6C11FB58B4C002FCF3D /* AppConfig.m in Sources */,
 				21C91D801FDBCFB6006EDB16 /* ZMAuthResultVC.m in Sources */,
 				211DE6A41FB58B4C002FCF3D /* TLPickerTextField.m in Sources */,

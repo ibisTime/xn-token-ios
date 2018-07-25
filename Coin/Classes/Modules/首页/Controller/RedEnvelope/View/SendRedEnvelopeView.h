@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "CurrencyModel.h"
 #import "CustomActionSheet.h"
+#import "RechargeCoinVC.h"
 @protocol SendRedEnvelopeDelegate <NSObject>
 
 -(void)SendRedEnvelopeButton:(NSInteger)tag currency:(NSString *)currency type:(NSString *)type count:(NSString *)count sendNum:(NSString *)sendNum greeting:(NSString *)greeting;
@@ -33,4 +34,8 @@
 @property (nonatomic , strong)UILabel *total;
 
 @property (nonatomic , strong) UIView * view1;
+@property (nonatomic , strong) RechargeCoinVC *coinVC;
+
+@property (nonatomic , copy)void (^transFormBlock)(CurrencyModel *model);
+
 @end

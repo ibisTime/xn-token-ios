@@ -11,11 +11,15 @@
 #import "RedEnvelopeHeadView.h"
 #import "InvitationView.h"
 #import "ZJAnimationPopView.h"
+#import "UIImageView+WebCache.h"
+
 @interface RedEnvelopeShoreVC ()<RedEnvelopeHeadDelegate>
 {
-    ZJAnimationPopView *popView;
 }
 @property (nonatomic , strong)InvitationView *invitationView;
+@property (nonatomic , strong)UIImageView *headImage;
+@property (nonatomic , strong)UIButton *shoreButton;
+@property (nonatomic , strong) UILabel *detailedLabel;
 @end
 
 @implementation RedEnvelopeShoreVC
@@ -82,8 +86,15 @@
 }
 -(void)shoreButtonClick
 {
+    self.shoreVie.headImage.hidden = YES;
+    self.shoreVie.detailedLabel.hidden = YES;
+    self.shoreVie.shoreButton.hidden = YES;
+    self.shoreVie.nameLabel.hidden = YES;
+    self.shoreVie.stateLabel.hidden = YES;
     
-    _invitationView.frame = CGRectMake(30, kHeight(300), 173,173);
+    _invitationView.frame = CGRectMake(30, kHeight(300), 173,173+60);
+    
+    
     [self showPopAnimationWithAnimationStyle:2];
     
    
@@ -95,8 +106,8 @@
     ZJAnimationPopStyle popStyle = (style == 8) ? ZJAnimationPopStyleCardDropFromLeft : (ZJAnimationPopStyle)style;
     ZJAnimationDismissStyle dismissStyle = (ZJAnimationDismissStyle)style;
     // 1.初始化
-    popView = [[ZJAnimationPopView alloc] initWithCustomView:_invitationView popStyle:popStyle dismissStyle:dismissStyle];
-
+  ZJAnimationPopView *popView = [[ZJAnimationPopView alloc] initWithCustomView:_invitationView popStyle:popStyle dismissStyle:dismissStyle];
+    self.popView = popView;
     // 2.设置属性，可不设置使用默认值，见注解
     // 2.1 显示时点击背景是否移除弹框
     popView.isClickBGDismiss = ![_invitationView isKindOfClass:[ZJAnimationPopView class]];
@@ -110,17 +121,78 @@
     //    popView.dismissAnimationDuration = 0.8f;
 
     // 2.6 显示完成回调
+    CoinWeakSelf;
     popView.popComplete = ^{
+//        [weakSelf.popView addSubview:weakSelf.shoreVie.headImage];
+        
+        [self addIconImage];
+        
+
         NSLog(@"显示完成");
     };
     // 2.7 移除完成回调
     popView.dismissComplete = ^{
+        weakSelf.shoreVie.headImage.hidden = NO;
+        weakSelf.shoreVie.detailedLabel.hidden = NO;
+        weakSelf.shoreVie.shoreButton.hidden = NO;
+        weakSelf.shoreVie.nameLabel.hidden = NO;
+        weakSelf.shoreVie.stateLabel.hidden = NO;
+
+        [ self removeIcon];
         NSLog(@"移除完成");
+        
     };
     // 4.显示弹框
     [popView pop];
 }
 
+- (void)removeIcon
+{
+    
+    
+}
+
+- (void)addIconImage
+{
+    
+ 
+    
+    
+    self.headImage = [[UIImageView alloc]initWithFrame:CGRectMake(kScreenWidth/2 - kHeight(70)/2, kHeight(170), kHeight(70), kHeight(70))];
+    self.headImage.image = kImage(@"圆 按钮");
+    [self.popView addSubview:self.headImage];
+    
+    UIImageView *Image = [[UIImageView alloc]init];
+    [Image sd_setImageWithURL: [NSURL URLWithString: [[TLUser user].photo convertImageUrl]] placeholderImage:kImage(@"头像")];
+    Image.layer.cornerRadius = 30;
+    Image.clipsToBounds = YES;
+    [_headImage addSubview:Image];
+    [Image mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.equalTo(@5);
+        make.bottom.right.equalTo(@-5);
+    }];
+    
+    UILabel *introduce = [UILabel labelWithBackgroundColor:kClearColor textColor:kHexColor(@"#FBDDA9") font:14];
+    introduce.frame = CGRectMake(kScreenWidth/2-35, self.headImage.yy +2, kHeight(70), kHeight(22));
+    introduce.textAlignment = NSTextAlignmentCenter;
+    [self.popView addSubview:introduce];
+    introduce.text = [TLUser user].nickname;
+
+    UILabel *introduce2 = [UILabel labelWithBackgroundColor:kClearColor textColor:kWhiteColor font:16];
+    introduce2.frame = CGRectMake(kWidth(120), introduce.yy , kWidth(150), kHeight(22));
+    introduce2.textAlignment = NSTextAlignmentCenter;
+    introduce2.text = [LangSwitcher switchLang:@"给您发了一个红包" key:nil];
+
+    [self.popView addSubview:introduce2];
+    UILabel *introduce3 = [UILabel labelWithBackgroundColor:kClearColor textColor:kWhiteColor font:14];
+    
+    introduce3.frame = CGRectMake(kWidth(120), kHeight(456), kWidth(150), kHeight(22));
+    introduce3.text = [LangSwitcher switchLang:@"扫码二维码领取THA红包" key:nil];
+
+    introduce3.textAlignment = NSTextAlignmentCenter;
+    [self.popView addSubview:introduce3];
+
+}
 
 -(void)RedEnvelopeHeadButton:(NSInteger)tag
 {

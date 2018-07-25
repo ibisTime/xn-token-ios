@@ -104,14 +104,14 @@
     // 6. 将CIImage转换成UIImage，并放大显示 (此时获取到的二维码比较模糊,所以需要用下面的createNonInterpolatedUIImageFormCIImage方法重绘二维码)
     //            UIImage *codeImage = [UIImage imageWithCIImage:outputImage scale:1.0 orientation:UIImageOrientationUp];
     
-    wechatImageView = [[UIImageView alloc] initWithFrame:CGRectMake(10,10,148,148)];
+    wechatImageView = [[UIImageView alloc] initWithFrame:CGRectMake(10,70,148,148)];
     
     wechatImageView.image = [self createNonInterpolatedUIImageFormCIImage:outputImage withSize:183];//重绘二维码,使其显示清晰
     
     UIImageView *image = [[UIImageView alloc] init];
     [self addSubview:image];
     image.image = kImage(@"二维码 框");
-    image.frame =CGRectMake(0,0,168,168);
+    image.frame =CGRectMake(0,60,168,168);
     [self addSubview:wechatImageView];
     
     

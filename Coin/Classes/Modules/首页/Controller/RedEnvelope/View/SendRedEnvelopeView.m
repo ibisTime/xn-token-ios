@@ -20,12 +20,14 @@
 #import "NSString+Date.h"
 #import "NSString+Check.h"
 #import "CurrencyModel.h"
-
+#import "RechargeCoinVC.h"
 #define ALLPRICE 1000000
 
 @implementation SendRedEnvelopeView
 {
     UILabel *alltotalLabel;
+    UILabel *transFormLab;
+
     NSInteger index;
     BOOL isHaveDian;
 
@@ -124,7 +126,7 @@
             
         }];
 
-        [self addSubview:self.totalNumberLabel];
+//        [self addSubview:self.totalNumberLabel];
 
 
         NSArray *heightArray = @[@(kHeight(257)),@(kHeight(330)),@(kHeight(414)),@(kHeight(477))];
@@ -193,8 +195,26 @@
 
         }
 
-        alltotalLabel = [UILabel labelWithFrame:CGRectMake(kWidth(60),kHeight(284+25) , kWidth(92), kHeight(16)) textAligment:(NSTextAlignmentLeft) backgroundColor:kClearColor font:Font(11) textColor:kTextColor5];
+        alltotalLabel = [UILabel labelWithFrame:CGRectMake(kWidth(60),kHeight(284+25) , kWidth(92+50), kHeight(16)) textAligment:(NSTextAlignmentLeft) backgroundColor:kClearColor font:Font(11) textColor:kTextColor5];
         [self addSubview:alltotalLabel];
+        
+        transFormLab = [UILabel labelWithFrame:CGRectMake(kWidth(60+120),kHeight(284+25) , kWidth(92), kHeight(16)) textAligment:(NSTextAlignmentLeft) backgroundColor:kClearColor font:Font(11) textColor:kHexColor(@"#FBDDA9")];
+        transFormLab.userInteractionEnabled = YES;
+        [self addSubview:transFormLab];
+        
+        transFormLab.text = [LangSwitcher switchLang:@"转入资金" key:nil];
+        UIView *lineView = [UIView new];
+        lineView.backgroundColor = kHexColor(@"#FBDDA9");
+        [transFormLab addSubview:lineView];
+        UITapGestureRecognizer *ta = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(transformMoney)];
+        [transFormLab addGestureRecognizer:ta];
+        [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.bottom.equalTo(transFormLab.mas_bottom).offset(-2);
+            make.left.equalTo(transFormLab.mas_left).offset(0);
+            make.height.equalTo(@0.5);
+            make.width.equalTo(@50);
+
+        }];
         introduce = [UILabel labelWithBackgroundColor:kClearColor textColor:kWhiteColor font:11];
         
         introduce.text = [LangSwitcher switchLang:@"当前为拼手气红包" key:nil];
@@ -226,7 +246,16 @@
     return self;
 }
 
+- (void)transformMoney
+{
+    RechargeCoinVC *coinVC = [RechargeCoinVC new];
 
+    coinVC.currency = plat;
+    
+    if (self.transFormBlock) {
+        self.transFormBlock(plat);
+    }
+}
 
 -(void)Tap
 {
@@ -318,8 +347,11 @@
 
 - (void)payAmount
 {
+    [self endEditing:YES];
     UIView * view1 = [UIView new];
     self.view1 = view1;
+    self.view1.hidden = NO;
+
     view1.frame =CGRectMake(0, 0, kScreenWidth, kScreenHeight);
     view1.backgroundColor =
     view1.backgroundColor = [UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0.45];
@@ -430,6 +462,7 @@
     self.view1.frame = CGRectZero;
     [self.view1 removeFromSuperview];
     [UIView animateWithDuration:0.5 animations:^{
+        
         [_delegate SendRedEnvelopeButton:102 currency:_currency type:_type count:_count sendNum:_sendNum greeting:_greeting];
         
     }];
@@ -457,7 +490,7 @@
     NSString *leftAmount = [CoinUtil convertToRealCoin:platform.amountString coin:coin.symbol];
     NSString *rightAmount = [CoinUtil convertToRealCoin:platform.frozenAmountString coin:coin.symbol];
     NSString *ritAmount = [leftAmount subNumber:rightAmount];
-    alltotalLabel.text = [NSString stringWithFormat:@"%@%@%@ %.3f",[LangSwitcher switchLang:@"持有" key:nil],platform.currency,[LangSwitcher switchLang:@"总量" key:nil],[ritAmount floatValue]];
+    alltotalLabel.text = [NSString stringWithFormat:@"%@%@ %.3f,",[LangSwitcher switchLang:@"个人账户余额" key:nil],platform.currency,[ritAmount floatValue]];
 
 
     NSString *str = [NSString stringWithFormat:@"%@ 0.000 %@",[LangSwitcher switchLang:@"共发送" key:nil],_currency];

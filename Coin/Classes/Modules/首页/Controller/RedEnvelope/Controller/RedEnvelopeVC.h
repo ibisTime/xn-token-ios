@@ -7,7 +7,7 @@
 //
 
 #import "TLBaseVC.h"
-
+#import "AssetPwdView.h"
 @interface RedEnvelopeVC : TLBaseVC
-
+@property (nonatomic ,strong) AssetPwdView *pwdView;
 @end

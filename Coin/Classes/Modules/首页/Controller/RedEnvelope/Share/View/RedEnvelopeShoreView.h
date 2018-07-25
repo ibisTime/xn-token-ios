@@ -14,4 +14,6 @@
 @property (nonatomic , strong)UIButton *shoreButton;
 @property (nonatomic , copy)NSString *content;
 @property (nonatomic , strong) UILabel *detailedLabel;
+@property (nonatomic , strong) UILabel *nameLabel;
+@property (nonatomic , strong) UILabel *stateLabel;
 @end
