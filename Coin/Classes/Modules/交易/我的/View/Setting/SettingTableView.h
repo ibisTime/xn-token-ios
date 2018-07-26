@@ -12,5 +12,6 @@
 @interface SettingTableView : TLTableView
 
 @property (nonatomic, strong) SettingGroup *group;
+@property (nonatomic, copy) void (^ SwitchBlock) (NSInteger switchBlock);
 
 @end

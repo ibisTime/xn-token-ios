@@ -156,21 +156,12 @@
 		21CB94F51FDC179700CAB090 /* PersonalModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 21CB94F41FDC179700CAB090 /* PersonalModel.m */; };
 		21D216861FB9C5750040795E /* QRCodeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21D216851FB9C5750040795E /* QRCodeVC.m */; };
 		2E394FED1FB0575A00BA0829 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2E394FEB1FB0575A00BA0829 /* AppDelegate.mm */; };
-		2E394FF41FB057B300BA0829 /* TLTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E394FEF1FB057B200BA0829 /* TLTabBarController.m */; };
-		2E394FF51FB057B300BA0829 /* TLNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E394FF01FB057B200BA0829 /* TLNavigationController.m */; };
 		2E394FFC1FB059C100BA0829 /* TLBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E394FF91FB059C100BA0829 /* TLBaseModel.m */; };
 		2E394FFD1FB059C100BA0829 /* TLBaseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E394FFA1FB059C100BA0829 /* TLBaseVC.m */; };
-		2E42616B2028431200913DCF /* TLSwitchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E42616A2028431200913DCF /* TLSwitchView.m */; };
-		2E42616E20284BEC00913DCF /* TestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E42616D20284BEC00913DCF /* TestViewController.m */; };
-		2E42617120284CA600913DCF /* TestContentVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E42617020284CA600913DCF /* TestContentVC.m */; };
 		2E5F33A9202BF25F00B2F263 /* TLLeftRightView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E5F33A8202BF25F00B2F263 /* TLLeftRightView.m */; };
-		2E973FC91FDA279C005C2D5F /* LangSwitcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E973FC81FDA279C005C2D5F /* LangSwitcher.m */; };
-		2E973FD31FDBC5B0005C2D5F /* BaseLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E973FD21FDBC5B0005C2D5F /* BaseLabel.m */; };
-		2E973FD61FDBC5CC005C2D5F /* BaseButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E973FD51FDBC5CC005C2D5F /* BaseButton.m */; };
 		2EA2526E1FF09B52007FF9A2 /* CoinUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EA2526D1FF09B52007FF9A2 /* CoinUtil.m */; };
 		2EA584C11FA813C900C7106C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2EA584C01FA813C900C7106C /* Assets.xcassets */; };
 		2EA584C71FA813C900C7106C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EA584C61FA813C900C7106C /* main.m */; };
-		2EB039981FE79ADF00589D8E /* UIColor+theme.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EB039961FE79ADF00589D8E /* UIColor+theme.m */; };
 		2EB039A71FE8B23300589D8E /* EditEmailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EB039A61FE8B23300589D8E /* EditEmailVC.m */; };
 		2EB039AD1FE8EDE300589D8E /* UserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EB039AC1FE8EDE300589D8E /* UserInfo.m */; };
 		2EB039B51FEA0B4500589D8E /* TLUpdateVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EB039B31FEA0B4500589D8E /* TLUpdateVC.m */; };
@@ -183,7 +174,6 @@
 		2ED651CF200F34280065A1B0 /* TLCoinWithdrawOrderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ED651CE200F34280065A1B0 /* TLCoinWithdrawOrderCell.m */; };
 		2ED651D22010443D0065A1B0 /* TLAboutUsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ED651D12010443C0065A1B0 /* TLAboutUsVC.m */; };
 		2EE361361FFB7D4500A5C3EB /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 2EE361351FFB7D4500A5C3EB /* README.md */; };
-		2EE3613F1FFC738700A5C3EB /* TLBaseLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE3613E1FFC738700A5C3EB /* TLBaseLabel.m */; };
 		2EE361551FFE182800A5C3EB /* RespHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE361541FFE182700A5C3EB /* RespHandler.m */; };
 		2EE950C31FB05B4500429257 /* TLWalletVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE950C21FB05B4500429257 /* TLWalletVC.m */; };
 		2EE950C61FB05B5900429257 /* TLMineVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE950C51FB05B5900429257 /* TLMineVC.m */; };
@@ -233,6 +223,16 @@
 		B88B092D20C8F878005C2D2F /* WalletSettingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B88B092C20C8F878005C2D2F /* WalletSettingVC.m */; };
 		B88B093020C9072B005C2D2F /* RevisePassWordVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B88B092F20C9072B005C2D2F /* RevisePassWordVC.m */; };
 		B88B093320C908DC005C2D2F /* ResiseTextFiled.m in Sources */ = {isa = PBXBuildFile; fileRef = B88B093220C908DC005C2D2F /* ResiseTextFiled.m */; };
+		B88B58752109A3E100F20D1B /* TLGestureVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B88B58742109A3E100F20D1B /* TLGestureVC.m */; };
+		B88B59172109AEC400F20D1B /* country.plist in Resources */ = {isa = PBXBuildFile; fileRef = B88B58FF2109AEC300F20D1B /* country.plist */; };
+		B88B59182109AEC400F20D1B /* UIColor+theme.m in Sources */ = {isa = PBXBuildFile; fileRef = B88B59032109AEC300F20D1B /* UIColor+theme.m */; };
+		B88B59192109AEC400F20D1B /* TLTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = B88B59042109AEC300F20D1B /* TLTabBarController.m */; };
+		B88B591A2109AEC400F20D1B /* TLNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = B88B59052109AEC300F20D1B /* TLNavigationController.m */; };
+		B88B591B2109AEC400F20D1B /* LangSwitcher.m in Sources */ = {isa = PBXBuildFile; fileRef = B88B59062109AEC300F20D1B /* LangSwitcher.m */; };
+		B88B59232109AEF500F20D1B /* CountryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B88B59212109AEF400F20D1B /* CountryModel.m */; };
+		B88B592A2109B2EF00F20D1B /* ZLGestureLockViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B88B59262109B2EE00F20D1B /* ZLGestureLockViewController.m */; };
+		B88B592B2109B2EF00F20D1B /* ZLGestureLockIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = B88B59282109B2EE00F20D1B /* ZLGestureLockIndicator.m */; };
+		B88B592C2109B2EF00F20D1B /* ZLGestureLockView.m in Sources */ = {isa = PBXBuildFile; fileRef = B88B59292109B2EF00F20D1B /* ZLGestureLockView.m */; };
 		B88D6C6F20EDF39F0043832C /* TLFastvc.m in Sources */ = {isa = PBXBuildFile; fileRef = B88D6C6E20EDF39F0043832C /* TLFastvc.m */; };
 		B88D6C7220EDF3B50043832C /* TLTransfromVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B88D6C7120EDF3B50043832C /* TLTransfromVC.m */; };
 		B891F0682101899900ED5DDF /* BuildLocalHomeView.m in Sources */ = {isa = PBXBuildFile; fileRef = B891F0672101899900ED5DDF /* BuildLocalHomeView.m */; };
@@ -271,9 +271,6 @@
 		B8D5F15620CE0F530005CF96 /* AccountMoneyCellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B8D5F15520CE0F530005CF96 /* AccountMoneyCellTableViewCell.m */; };
 		B8D7E38220D140BC00453860 /* BilllistVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B8D7E38120D140BC00453860 /* BilllistVC.m */; };
 		B8D7E38520D14B8200453860 /* SystemWallModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B8D7E38420D14B8200453860 /* SystemWallModel.m */; };
-		B8D9290620E9BDF10026A3DF /* country.plist in Resources */ = {isa = PBXBuildFile; fileRef = B8D9290520E9BDF00026A3DF /* country.plist */; };
-		B8D9290920E9BF600026A3DF /* CountryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B8D9290820E9BF600026A3DF /* CountryModel.m */; };
-		B8D9290C20E9C1EC0026A3DF /* countrGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = B8D9290B20E9C1EC0026A3DF /* countrGroup.m */; };
 		B8D9290F20EA58290026A3DF /* ChangeLocalMoneyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B8D9290E20EA58290026A3DF /* ChangeLocalMoneyVC.m */; };
 		B8DAD14720E2208B00AF4CD4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B8DAD14920E2208B00AF4CD4 /* InfoPlist.strings */; };
 		B8F63ED720D362DA00556150 /* WalletLocalBillTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = B8F63ED620D362DA00556150 /* WalletLocalBillTableView.m */; };
@@ -281,7 +278,6 @@
 		B8F63EDD20D37FE700556150 /* LocalBillDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B8F63EDC20D37FE700556150 /* LocalBillDetailVC.m */; };
 		B8F63EE020D3809700556150 /* LocalBillDetailTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = B8F63EDF20D3809700556150 /* LocalBillDetailTableView.m */; };
 		B8F63EE320D397B000556150 /* WalletLocalWebVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B8F63EE220D397B000556150 /* WalletLocalWebVC.m */; };
-		B8F63EE620D3DC9600556150 /* QSount.caf in Resources */ = {isa = PBXBuildFile; fileRef = B8F63EE520D3DC5E00556150 /* QSount.caf */; };
 		FB49ABC88B6B7FFBB19DF11D /* Pods_Coin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 524739678D50CF78B722738E /* Pods_Coin.framework */; };
 /* End PBXBuildFile section */
 
@@ -318,7 +314,6 @@
 		211A53311FBFE4F100CC6294 /* RateDescTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RateDescTableView.m; sourceTree = "<group>"; };
 		211A53331FBFE53100CC6294 /* RateModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RateModel.h; sourceTree = "<group>"; };
 		211A53341FBFE53100CC6294 /* RateModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RateModel.m; sourceTree = "<group>"; };
-		211C01381FC65ED600E51FCF /* CoinPrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoinPrefixHeader.pch; sourceTree = "<group>"; };
 		211C05071FC6714400E51FCF /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		211C05091FC6714F00E51FCF /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		211C050B1FC6715B00E51FCF /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
@@ -528,8 +523,6 @@
 		216F5B52206D004600F2C832 /* GoodMallVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GoodMallVC.m; sourceTree = "<group>"; };
 		216F5B58206D02DC00F2C832 /* PosMiningVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PosMiningVC.h; sourceTree = "<group>"; };
 		216F5B59206D02DC00F2C832 /* PosMiningVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PosMiningVC.m; sourceTree = "<group>"; };
-		21A7F2D21FB2D2D300FAA0A2 /* FoundationHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FoundationHeader.h; sourceTree = "<group>"; };
-		21A7F2D71FB2D62A00FAA0A2 /* CoinHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoinHeader.h; sourceTree = "<group>"; };
 		21A7F2E31FB2E2F900FAA0A2 /* TLChangeMobileVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLChangeMobileVC.h; sourceTree = "<group>"; };
 		21A7F2E41FB2E2F900FAA0A2 /* BindMobileVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BindMobileVC.m; sourceTree = "<group>"; };
 		21A7F2E51FB2E2F900FAA0A2 /* TLAccountSetBaseVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLAccountSetBaseVC.m; sourceTree = "<group>"; };
@@ -556,7 +549,6 @@
 		21A7F3091FB2E2F900FAA0A2 /* CaptchaView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaptchaView.h; sourceTree = "<group>"; };
 		21A7F30C1FB2E2F900FAA0A2 /* CaptchaView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CaptchaView.m; sourceTree = "<group>"; };
 		21A7F30D1FB2E2F900FAA0A2 /* AccountTf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountTf.h; sourceTree = "<group>"; };
-		21A7F3251FB2E4DF00FAA0A2 /* CustomUIHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomUIHeader.h; sourceTree = "<group>"; };
 		21A7F35C1FB2EBA900FAA0A2 /* CurrencyModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurrencyModel.m; sourceTree = "<group>"; };
 		21A7F35D1FB2EBA900FAA0A2 /* CurrencyModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurrencyModel.h; sourceTree = "<group>"; };
 		21A7F3611FB2F16B00FAA0A2 /* HTMLStrVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTMLStrVC.h; sourceTree = "<group>"; };
@@ -591,20 +583,10 @@
 		21D216851FB9C5750040795E /* QRCodeVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QRCodeVC.m; sourceTree = "<group>"; };
 		2E394FEB1FB0575A00BA0829 /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
 		2E394FEC1FB0575A00BA0829 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		2E394FEE1FB057B200BA0829 /* TLTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLTabBarController.h; sourceTree = "<group>"; };
-		2E394FEF1FB057B200BA0829 /* TLTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLTabBarController.m; sourceTree = "<group>"; };
-		2E394FF01FB057B200BA0829 /* TLNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLNavigationController.m; sourceTree = "<group>"; };
-		2E394FF31FB057B200BA0829 /* TLNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLNavigationController.h; sourceTree = "<group>"; };
 		2E394FF81FB059C100BA0829 /* TLBaseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLBaseModel.h; sourceTree = "<group>"; };
 		2E394FF91FB059C100BA0829 /* TLBaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLBaseModel.m; sourceTree = "<group>"; };
 		2E394FFA1FB059C100BA0829 /* TLBaseVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLBaseVC.m; sourceTree = "<group>"; };
 		2E394FFB1FB059C100BA0829 /* TLBaseVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLBaseVC.h; sourceTree = "<group>"; };
-		2E4261692028431200913DCF /* TLSwitchView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLSwitchView.h; sourceTree = "<group>"; };
-		2E42616A2028431200913DCF /* TLSwitchView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLSwitchView.m; sourceTree = "<group>"; };
-		2E42616C20284BEC00913DCF /* TestViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestViewController.h; sourceTree = "<group>"; };
-		2E42616D20284BEC00913DCF /* TestViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestViewController.m; sourceTree = "<group>"; };
-		2E42616F20284CA600913DCF /* TestContentVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestContentVC.h; sourceTree = "<group>"; };
-		2E42617020284CA600913DCF /* TestContentVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestContentVC.m; sourceTree = "<group>"; };
 		2E5F191E1FED0CA900100420 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		2E5F191F1FED0CAE00100420 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		2E5F19201FED0CB600100420 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
@@ -614,20 +596,12 @@
 		2E5F19241FED0CDD00100420 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		2E5F33A7202BF25F00B2F263 /* TLLeftRightView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLLeftRightView.h; sourceTree = "<group>"; };
 		2E5F33A8202BF25F00B2F263 /* TLLeftRightView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLLeftRightView.m; sourceTree = "<group>"; };
-		2E973FC71FDA279C005C2D5F /* LangSwitcher.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LangSwitcher.h; sourceTree = "<group>"; };
-		2E973FC81FDA279C005C2D5F /* LangSwitcher.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LangSwitcher.m; sourceTree = "<group>"; };
-		2E973FD11FDBC5B0005C2D5F /* BaseLabel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseLabel.h; sourceTree = "<group>"; };
-		2E973FD21FDBC5B0005C2D5F /* BaseLabel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseLabel.m; sourceTree = "<group>"; };
-		2E973FD41FDBC5CC005C2D5F /* BaseButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseButton.h; sourceTree = "<group>"; };
-		2E973FD51FDBC5CC005C2D5F /* BaseButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseButton.m; sourceTree = "<group>"; };
 		2EA2526C1FF09B52007FF9A2 /* CoinUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoinUtil.h; sourceTree = "<group>"; };
 		2EA2526D1FF09B52007FF9A2 /* CoinUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoinUtil.m; sourceTree = "<group>"; };
 		2EA584B41FA813C900C7106C /* Coin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Coin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EA584C01FA813C900C7106C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2EA584C51FA813C900C7106C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2EA584C61FA813C900C7106C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		2EB039961FE79ADF00589D8E /* UIColor+theme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+theme.m"; sourceTree = "<group>"; };
-		2EB039971FE79ADF00589D8E /* UIColor+theme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+theme.h"; sourceTree = "<group>"; };
 		2EB039A51FE8B23300589D8E /* EditEmailVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EditEmailVC.h; sourceTree = "<group>"; };
 		2EB039A61FE8B23300589D8E /* EditEmailVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EditEmailVC.m; sourceTree = "<group>"; };
 		2EB039AB1FE8EDE300589D8E /* UserInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserInfo.h; sourceTree = "<group>"; };
@@ -649,15 +623,12 @@
 		2ED651D02010443C0065A1B0 /* TLAboutUsVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLAboutUsVC.h; sourceTree = "<group>"; };
 		2ED651D12010443C0065A1B0 /* TLAboutUsVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLAboutUsVC.m; sourceTree = "<group>"; };
 		2EE361351FFB7D4500A5C3EB /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		2EE3613D1FFC738700A5C3EB /* TLBaseLabel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLBaseLabel.h; sourceTree = "<group>"; };
-		2EE3613E1FFC738700A5C3EB /* TLBaseLabel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLBaseLabel.m; sourceTree = "<group>"; };
 		2EE361531FFE182500A5C3EB /* RespHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RespHandler.h; sourceTree = "<group>"; };
 		2EE361541FFE182700A5C3EB /* RespHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RespHandler.m; sourceTree = "<group>"; };
 		2EE950C11FB05B4500429257 /* TLWalletVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLWalletVC.h; sourceTree = "<group>"; };
 		2EE950C21FB05B4500429257 /* TLWalletVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLWalletVC.m; sourceTree = "<group>"; };
 		2EE950C41FB05B5900429257 /* TLMineVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLMineVC.h; sourceTree = "<group>"; };
 		2EE950C51FB05B5900429257 /* TLMineVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLMineVC.m; sourceTree = "<group>"; };
-		2EE950D31FB0685300429257 /* TLUIHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLUIHeader.h; sourceTree = "<group>"; };
 		2EFFE6AF1FF4866700BFCC40 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		2EFFE6B41FF6289600BFCC40 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		4C2438232066C2F0003B35F3 /* TopSegmentUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopSegmentUtil.m; sourceTree = "<group>"; };
@@ -743,6 +714,30 @@
 		B88B092F20C9072B005C2D2F /* RevisePassWordVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RevisePassWordVC.m; sourceTree = "<group>"; };
 		B88B093120C908DC005C2D2F /* ResiseTextFiled.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ResiseTextFiled.h; sourceTree = "<group>"; };
 		B88B093220C908DC005C2D2F /* ResiseTextFiled.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ResiseTextFiled.m; sourceTree = "<group>"; };
+		B88B58732109A3E100F20D1B /* TLGestureVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLGestureVC.h; sourceTree = "<group>"; };
+		B88B58742109A3E100F20D1B /* TLGestureVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLGestureVC.m; sourceTree = "<group>"; };
+		B88B58F42109AEC300F20D1B /* LangSwitcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LangSwitcher.h; sourceTree = "<group>"; };
+		B88B58F52109AEC300F20D1B /* TLUIHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLUIHeader.h; sourceTree = "<group>"; };
+		B88B58F62109AEC300F20D1B /* TLNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLNavigationController.h; sourceTree = "<group>"; };
+		B88B58F72109AEC300F20D1B /* TLTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLTabBarController.h; sourceTree = "<group>"; };
+		B88B58FF2109AEC300F20D1B /* country.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = country.plist; sourceTree = "<group>"; };
+		B88B59002109AEC300F20D1B /* CustomUIHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomUIHeader.h; sourceTree = "<group>"; };
+		B88B59012109AEC300F20D1B /* CoinPrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoinPrefixHeader.pch; sourceTree = "<group>"; };
+		B88B59022109AEC300F20D1B /* CoinHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoinHeader.h; sourceTree = "<group>"; };
+		B88B59032109AEC300F20D1B /* UIColor+theme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+theme.m"; sourceTree = "<group>"; };
+		B88B59042109AEC300F20D1B /* TLTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLTabBarController.m; sourceTree = "<group>"; };
+		B88B59052109AEC300F20D1B /* TLNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLNavigationController.m; sourceTree = "<group>"; };
+		B88B59062109AEC300F20D1B /* LangSwitcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LangSwitcher.m; sourceTree = "<group>"; };
+		B88B59072109AEC300F20D1B /* FoundationHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FoundationHeader.h; sourceTree = "<group>"; };
+		B88B59132109AEC400F20D1B /* UIColor+theme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+theme.h"; sourceTree = "<group>"; };
+		B88B59212109AEF400F20D1B /* CountryModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CountryModel.m; sourceTree = "<group>"; };
+		B88B59222109AEF500F20D1B /* CountryModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CountryModel.h; sourceTree = "<group>"; };
+		B88B59242109B2EC00F20D1B /* ZLGestureLockView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZLGestureLockView.h; sourceTree = "<group>"; };
+		B88B59252109B2ED00F20D1B /* ZLGestureLockViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZLGestureLockViewController.h; sourceTree = "<group>"; };
+		B88B59262109B2EE00F20D1B /* ZLGestureLockViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZLGestureLockViewController.m; sourceTree = "<group>"; };
+		B88B59272109B2EE00F20D1B /* ZLGestureLockIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZLGestureLockIndicator.h; sourceTree = "<group>"; };
+		B88B59282109B2EE00F20D1B /* ZLGestureLockIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZLGestureLockIndicator.m; sourceTree = "<group>"; };
+		B88B59292109B2EF00F20D1B /* ZLGestureLockView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZLGestureLockView.m; sourceTree = "<group>"; };
 		B88D6C6D20EDF39F0043832C /* TLFastvc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLFastvc.h; sourceTree = "<group>"; };
 		B88D6C6E20EDF39F0043832C /* TLFastvc.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLFastvc.m; sourceTree = "<group>"; };
 		B88D6C7020EDF3B50043832C /* TLTransfromVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLTransfromVC.h; sourceTree = "<group>"; };
@@ -821,11 +816,6 @@
 		B8D7E38120D140BC00453860 /* BilllistVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BilllistVC.m; sourceTree = "<group>"; };
 		B8D7E38320D14B8200453860 /* SystemWallModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SystemWallModel.h; sourceTree = "<group>"; };
 		B8D7E38420D14B8200453860 /* SystemWallModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SystemWallModel.m; sourceTree = "<group>"; };
-		B8D9290520E9BDF00026A3DF /* country.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = country.plist; sourceTree = "<group>"; };
-		B8D9290720E9BF600026A3DF /* CountryModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CountryModel.h; sourceTree = "<group>"; };
-		B8D9290820E9BF600026A3DF /* CountryModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CountryModel.m; sourceTree = "<group>"; };
-		B8D9290A20E9C1EC0026A3DF /* countrGroup.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = countrGroup.h; sourceTree = "<group>"; };
-		B8D9290B20E9C1EC0026A3DF /* countrGroup.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = countrGroup.m; sourceTree = "<group>"; };
 		B8D9290D20EA58290026A3DF /* ChangeLocalMoneyVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChangeLocalMoneyVC.h; sourceTree = "<group>"; };
 		B8D9290E20EA58290026A3DF /* ChangeLocalMoneyVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChangeLocalMoneyVC.m; sourceTree = "<group>"; };
 		B8DAD14820E2208B00AF4CD4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -843,7 +833,6 @@
 		B8F63EDF20D3809700556150 /* LocalBillDetailTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocalBillDetailTableView.m; sourceTree = "<group>"; };
 		B8F63EE120D397B000556150 /* WalletLocalWebVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WalletLocalWebVC.h; sourceTree = "<group>"; };
 		B8F63EE220D397B000556150 /* WalletLocalWebVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WalletLocalWebVC.m; sourceTree = "<group>"; };
-		B8F63EE520D3DC5E00556150 /* QSount.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = QSount.caf; path = Coin/QSount.caf; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2013,13 +2002,13 @@
 		2E394FA31FB0546E00BA0829 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				B88B58F32109AEC300F20D1B /* Other */,
 				216F5AF0206CC73D00F2C832 /* Update */,
 				216F5AEF206CC70500F2C832 /* Resp */,
 				216F5B1D206CD9D900F2C832 /* 首页 */,
 				2E394FA41FB055DE00BA0829 /* 钱包 */,
 				2E394FAC1FB055DE00BA0829 /* 我的 */,
 				2E394FD11FB0568F00BA0829 /* Modules */,
-				2E394FEA1FB056A900BA0829 /* Other */,
 				2E394FF71FB0599D00BA0829 /* Expand */,
 				211DE63B1FB58B4B002FCF3D /* Utils */,
 			);
@@ -2105,6 +2094,8 @@
 				B8C2057220CF9E8800952765 /* WalletLocalAddressVC.m */,
 				B8C2057420CF9FFD00952765 /* WalletAdressTableView.h */,
 				B8C2057520CF9FFD00952765 /* WalletAdressTableView.m */,
+				B88B58732109A3E100F20D1B /* TLGestureVC.h */,
+				B88B58742109A3E100F20D1B /* TLGestureVC.m */,
 				B8C2057720CFA0B300952765 /* WalletAddressCell.h */,
 				B8C2057820CFA0B300952765 /* WalletAddressCell.m */,
 				B8C2057A20CFA3FC00952765 /* WalletAddressDetailVC.h */,
@@ -2154,30 +2145,6 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
-		2E394FEA1FB056A900BA0829 /* Other */ = {
-			isa = PBXGroup;
-			children = (
-				2E426168202842EC00913DCF /* test */,
-				2EB039971FE79ADF00589D8E /* UIColor+theme.h */,
-				2EB039961FE79ADF00589D8E /* UIColor+theme.m */,
-				2E973FD01FDBC57C005C2D5F /* View */,
-				2E394FF31FB057B200BA0829 /* TLNavigationController.h */,
-				2E394FF01FB057B200BA0829 /* TLNavigationController.m */,
-				2E394FEE1FB057B200BA0829 /* TLTabBarController.h */,
-				2E394FEF1FB057B200BA0829 /* TLTabBarController.m */,
-				2EE950D31FB0685300429257 /* TLUIHeader.h */,
-				21A7F2D21FB2D2D300FAA0A2 /* FoundationHeader.h */,
-				21A7F3251FB2E4DF00FAA0A2 /* CustomUIHeader.h */,
-				21A7F2D71FB2D62A00FAA0A2 /* CoinHeader.h */,
-				211C01381FC65ED600E51FCF /* CoinPrefixHeader.pch */,
-				B8F63EE520D3DC5E00556150 /* QSount.caf */,
-				2E973FC71FDA279C005C2D5F /* LangSwitcher.h */,
-				2E973FC81FDA279C005C2D5F /* LangSwitcher.m */,
-				B8D9290520E9BDF00026A3DF /* country.plist */,
-			);
-			path = Other;
-			sourceTree = "<group>";
-		};
 		2E394FF71FB0599D00BA0829 /* Expand */ = {
 			isa = PBXGroup;
 			children = (
@@ -2187,36 +2154,6 @@
 				2E394FFA1FB059C100BA0829 /* TLBaseVC.m */,
 			);
 			path = Expand;
-			sourceTree = "<group>";
-		};
-		2E426168202842EC00913DCF /* test */ = {
-			isa = PBXGroup;
-			children = (
-				2E4261692028431200913DCF /* TLSwitchView.h */,
-				2E42616A2028431200913DCF /* TLSwitchView.m */,
-				2E42616C20284BEC00913DCF /* TestViewController.h */,
-				2E42616D20284BEC00913DCF /* TestViewController.m */,
-				2E42616F20284CA600913DCF /* TestContentVC.h */,
-				2E42617020284CA600913DCF /* TestContentVC.m */,
-			);
-			path = test;
-			sourceTree = "<group>";
-		};
-		2E973FD01FDBC57C005C2D5F /* View */ = {
-			isa = PBXGroup;
-			children = (
-				2E973FD11FDBC5B0005C2D5F /* BaseLabel.h */,
-				2E973FD21FDBC5B0005C2D5F /* BaseLabel.m */,
-				2E973FD41FDBC5CC005C2D5F /* BaseButton.h */,
-				2E973FD51FDBC5CC005C2D5F /* BaseButton.m */,
-				2EE3613D1FFC738700A5C3EB /* TLBaseLabel.h */,
-				2EE3613E1FFC738700A5C3EB /* TLBaseLabel.m */,
-				B8D9290A20E9C1EC0026A3DF /* countrGroup.h */,
-				B8D9290B20E9C1EC0026A3DF /* countrGroup.m */,
-				B8D9290720E9BF600026A3DF /* CountryModel.h */,
-				B8D9290820E9BF600026A3DF /* CountryModel.m */,
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		2EA584AB1FA813C900C7106C = {
@@ -2447,6 +2384,51 @@
 			path = DataBase;
 			sourceTree = "<group>";
 		};
+		B88B58F32109AEC300F20D1B /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				B88B59222109AEF500F20D1B /* CountryModel.h */,
+				B88B59272109B2EE00F20D1B /* ZLGestureLockIndicator.h */,
+				B88B59282109B2EE00F20D1B /* ZLGestureLockIndicator.m */,
+				B88B59242109B2EC00F20D1B /* ZLGestureLockView.h */,
+				B88B59292109B2EF00F20D1B /* ZLGestureLockView.m */,
+				B88B59252109B2ED00F20D1B /* ZLGestureLockViewController.h */,
+				B88B59262109B2EE00F20D1B /* ZLGestureLockViewController.m */,
+				B88B59212109AEF400F20D1B /* CountryModel.m */,
+				B88B58F42109AEC300F20D1B /* LangSwitcher.h */,
+				B88B58F52109AEC300F20D1B /* TLUIHeader.h */,
+				B88B58F62109AEC300F20D1B /* TLNavigationController.h */,
+				B88B58F72109AEC300F20D1B /* TLTabBarController.h */,
+				B88B58F82109AEC300F20D1B /* test */,
+				B88B58FF2109AEC300F20D1B /* country.plist */,
+				B88B59002109AEC300F20D1B /* CustomUIHeader.h */,
+				B88B59012109AEC300F20D1B /* CoinPrefixHeader.pch */,
+				B88B59022109AEC300F20D1B /* CoinHeader.h */,
+				B88B59032109AEC300F20D1B /* UIColor+theme.m */,
+				B88B59042109AEC300F20D1B /* TLTabBarController.m */,
+				B88B59052109AEC300F20D1B /* TLNavigationController.m */,
+				B88B59062109AEC300F20D1B /* LangSwitcher.m */,
+				B88B59072109AEC300F20D1B /* FoundationHeader.h */,
+				B88B59082109AEC300F20D1B /* View */,
+				B88B59132109AEC400F20D1B /* UIColor+theme.h */,
+			);
+			path = Other;
+			sourceTree = "<group>";
+		};
+		B88B58F82109AEC300F20D1B /* test */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = test;
+			sourceTree = "<group>";
+		};
+		B88B59082109AEC300F20D1B /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		C678617F8B7C3B3F2F7DE44F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -2557,10 +2539,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B88B59172109AEC400F20D1B /* country.plist in Resources */,
 				7A8A5D0920E9F361002D9A48 /* AlipaySDK.bundle in Resources */,
-				B8F63EE620D3DC9600556150 /* QSount.caf in Resources */,
 				B819BAAA20C6DD7800CEEC5E /* LaunchScreen.storyboard in Resources */,
-				B8D9290620E9BDF10026A3DF /* country.plist in Resources */,
 				2EFFE6AA1FF4829100BFCC40 /* Localizable.strings in Resources */,
 				2EA584C11FA813C900C7106C /* Assets.xcassets in Resources */,
 				2EB9495B1FDF6B1A00CE4B94 /* SimplifiedCode.txt in Resources */,
@@ -2732,16 +2713,16 @@
 				211DE6C51FB58B4C002FCF3D /* HttpRequestService.m in Sources */,
 				B88B092A20C8ED77005C2D2F /* JoinModel.m in Sources */,
 				21205CD21FCCFE70003C6C7C /* FansCell.m in Sources */,
+				B88B59232109AEF500F20D1B /* CountryModel.m in Sources */,
 				B8F63EDD20D37FE700556150 /* LocalBillDetailVC.m in Sources */,
 				B8B15C0220CA312100F13220 /* BuildWalletMineVC.m in Sources */,
 				211DE6A91FB58B4C002FCF3D /* TLPlaceholderView.m in Sources */,
 				2E394FED1FB0575A00BA0829 /* AppDelegate.mm in Sources */,
 				21CB94E21FDC0A0F00CAB090 /* PersonalitySettingVC.m in Sources */,
+				B88B592B2109B2EF00F20D1B /* ZLGestureLockIndicator.m in Sources */,
 				211D3C1B1FCFE46C00B55F9F /* HistoryRateModel.m in Sources */,
 				21D216861FB9C5750040795E /* QRCodeVC.m in Sources */,
 				211DE6B51FB58B4C002FCF3D /* UIView+Responder.m in Sources */,
-				2EB039981FE79ADF00589D8E /* UIColor+theme.m in Sources */,
-				2EE3613F1FFC738700A5C3EB /* TLBaseLabel.m in Sources */,
 				211EAD901FD0FC500037FBA8 /* UIViewController+BackButtonHander.m in Sources */,
 				B88B093320C908DC005C2D2F /* ResiseTextFiled.m in Sources */,
 				7A8A5D1820EA0A23002D9A48 /* RedEnvelopeHeadView.m in Sources */,
@@ -2754,10 +2735,8 @@
 				211DE6AE1FB58B4C002FCF3D /* TLUploadManager.m in Sources */,
 				B8C2057920CFA0B300952765 /* WalletAddressCell.m in Sources */,
 				215979701FB84B8A0029F177 /* BillDetailVC.m in Sources */,
-				2E42616E20284BEC00913DCF /* TestViewController.m in Sources */,
 				B88B092120C8E29D005C2D2F /* JoinMineVc.m in Sources */,
 				B8D5F15620CE0F530005CF96 /* AccountMoneyCellTableViewCell.m in Sources */,
-				2E394FF51FB057B300BA0829 /* TLNavigationController.m in Sources */,
 				21A7F3241FB2E2F900FAA0A2 /* CaptchaView.m in Sources */,
 				B8BBA5FA20C780FA00DC4D5F /* PlatformTableView.m in Sources */,
 				2EE950C61FB05B5900429257 /* TLMineVC.m in Sources */,
@@ -2785,6 +2764,7 @@
 				211DE6AB1FB58B4C002FCF3D /* TLTableView.m in Sources */,
 				21CB94E51FDC0AFC00CAB090 /* LanguageSettingVC.m in Sources */,
 				211DE6C21FB58B4C002FCF3D /* Foundation+Log.m in Sources */,
+				B88B592C2109B2EF00F20D1B /* ZLGestureLockView.m in Sources */,
 				21C91D881FDBD604006EDB16 /* TLAlipayManager.m in Sources */,
 				211DE6A11FB58B4C002FCF3D /* TLTimeButton.m in Sources */,
 				211A34F71FB4328800FEB71F /* SettingTableView.m in Sources */,
@@ -2828,13 +2808,13 @@
 				216F5B53206D004600F2C832 /* GoodMallVC.m in Sources */,
 				7A8A5D1B20EA131A002D9A48 /* SendRedEnvelopeView.m in Sources */,
 				B8C2057020CF984900952765 /* WalletDelectVC.m in Sources */,
-				2E973FC91FDA279C005C2D5F /* LangSwitcher.m in Sources */,
 				211DE6AD1FB58B4C002FCF3D /* TLAlert.m in Sources */,
 				21205CFD1FCD61D6003C6C7C /* CustomShareView.m in Sources */,
 				21A7F3201FB2E2F900FAA0A2 /* UserDefaultsUtil.m in Sources */,
 				211A34DB1FB4083300FEB71F /* MineTableView.m in Sources */,
 				216F5B49206CDA3700F2C832 /* DetailWebView.m in Sources */,
 				211A34E11FB4247800FEB71F /* MineModel.m in Sources */,
+				B88B591B2109AEC400F20D1B /* LangSwitcher.m in Sources */,
 				21A7F3631FB2F16C00FAA0A2 /* HTMLStrVC.m in Sources */,
 				211DE6B91FB58B4C002FCF3D /* NSDictionary+Extension.m in Sources */,
 				7A8A5DCE20EA9CD5002D9A48 /* GetTheModel.m in Sources */,
@@ -2855,6 +2835,7 @@
 				21A7F35E1FB2EBAA00FAA0A2 /* CurrencyModel.m in Sources */,
 				B8C2057F20CFFE1C00952765 /* WalletLocalModel.m in Sources */,
 				B88D6C7220EDF3B50043832C /* TLTransfromVC.m in Sources */,
+				B88B58752109A3E100F20D1B /* TLGestureVC.m in Sources */,
 				211DE6A61FB58B4C002FCF3D /* TLTextView.m in Sources */,
 				B8B15C0820CA5B1800F13220 /* BuildBackUpVC.m in Sources */,
 				B8BBA64320C843F800DC4D5F /* AddAccoutMoneyVc.m in Sources */,
@@ -2864,7 +2845,6 @@
 				211DE6B81FB58B4C002FCF3D /* UIControl+Block.m in Sources */,
 				2E5F33A9202BF25F00B2F263 /* TLLeftRightView.m in Sources */,
 				211DE6C41FB58B4C002FCF3D /* HttpSign.m in Sources */,
-				2E42616B2028431200913DCF /* TLSwitchView.m in Sources */,
 				216F5AF6206CCED300F2C832 /* TLNotficationService.m in Sources */,
 				B8D9290F20EA58290026A3DF /* ChangeLocalMoneyVC.m in Sources */,
 				211A35041FB45A6A00FEB71F /* WalletHeaderView.m in Sources */,
@@ -2877,7 +2857,6 @@
 				211DE6C01FB58B4C002FCF3D /* NSObject+Extension.m in Sources */,
 				211DE6C71FB58B4C002FCF3D /* HttpRequestObject.m in Sources */,
 				211DE6BD1FB58B4C002FCF3D /* NSString+Date.m in Sources */,
-				B8D9290C20E9C1EC0026A3DF /* countrGroup.m in Sources */,
 				B8C2057320CF9E8800952765 /* WalletLocalAddressVC.m in Sources */,
 				21205CCF1FCCFDCF003C6C7C /* FansTableView.m in Sources */,
 				211DE6C31FB58B4C002FCF3D /* HttpRequestTool.m in Sources */,
@@ -2887,10 +2866,10 @@
 				B88B092D20C8F878005C2D2F /* WalletSettingVC.m in Sources */,
 				216F5B3B206CD9DA00F2C832 /* StoreModel.m in Sources */,
 				B842D5D520E91AA900891289 /* ChooseCountryVc.m in Sources */,
+				B88B591A2109AEC400F20D1B /* TLNavigationController.m in Sources */,
 				2EB039B51FEA0B4500589D8E /* TLUpdateVC.m in Sources */,
 				2159796D1FB831B10029F177 /* FilterView.m in Sources */,
 				21205CDE1FCD3131003C6C7C /* CoinAddressTableView.m in Sources */,
-				2E42617120284CA600913DCF /* TestContentVC.m in Sources */,
 				B8F63EE320D397B000556150 /* WalletLocalWebVC.m in Sources */,
 				2129FE6F1FDFBAA3009DA374 /* ChangeLoginPwdVC.m in Sources */,
 				211A532F1FBFE4CF00CC6294 /* RateDescCell.m in Sources */,
@@ -2900,9 +2879,11 @@
 				7A3821BD20EABD1300D6B636 /* GetTheTableView.m in Sources */,
 				211CEF141FCBBF90000FB0C4 /* SelectScrollView.m in Sources */,
 				21CB94F01FDC0CAA00CAB090 /* LanguageSettingCell.m in Sources */,
+				B88B59192109AEC400F20D1B /* TLTabBarController.m in Sources */,
 				B8BBA63D20C7F6FC00DC4D5F /* WallAccountVC.m in Sources */,
 				B887819920E366BC00879330 /* UIImageView+RotateImgV.m in Sources */,
 				4CC7F0ED205FBC5400BBEC4D /* CoinModel.m in Sources */,
+				B88B59182109AEC400F20D1B /* UIColor+theme.m in Sources */,
 				211DE6B11FB58B4C002FCF3D /* UIButton+EnLargeEdge.m in Sources */,
 				B8A2436520E5E0F20074DF8F /* TLDataBase.m in Sources */,
 				2EE361551FFE182800A5C3EB /* RespHandler.m in Sources */,
@@ -2917,7 +2898,6 @@
 				B8D7E38220D140BC00453860 /* BilllistVC.m in Sources */,
 				211A34E41FB4255700FEB71F /* MineGroup.m in Sources */,
 				2EB949541FDE6D6D00CE4B94 /* LangChooseVC.m in Sources */,
-				2E394FF41FB057B300BA0829 /* TLTabBarController.m in Sources */,
 				21A7F3191FB2E2F900FAA0A2 /* TLAccountBaseVC.m in Sources */,
 				216F5AFD206CD3A800F2C832 /* GengXinModel.m in Sources */,
 				21CB94F51FDC179700CAB090 /* PersonalModel.m in Sources */,
@@ -2925,15 +2905,13 @@
 				2ED651C9200F2F6F0065A1B0 /* TLCoinWithdrawOrderVC.m in Sources */,
 				211DE6B21FB58B4C002FCF3D /* UIButton+Custom.m in Sources */,
 				211DE6171FB54685002FCF3D /* WalletCell.m in Sources */,
-				2E973FD61FDBC5CC005C2D5F /* BaseButton.m in Sources */,
 				211A34F01FB430DB00FEB71F /* SettingGroup.m in Sources */,
 				B8B15C2020CA752900F13220 /* CurrencyTitleModel.m in Sources */,
 				216F5B5A206D02DC00F2C832 /* PosMiningVC.m in Sources */,
 				211D3C121FCFE35E00B55F9F /* HistoryRateVC.m in Sources */,
 				216F5B16206CD9C900F2C832 /* TradeFlowListVC.m in Sources */,
-				B8D9290920E9BF600026A3DF /* CountryModel.m in Sources */,
 				4C2438252066C2F1003B35F3 /* TopSegmentUtil.m in Sources */,
-				2E973FD31FDBC5B0005C2D5F /* BaseLabel.m in Sources */,
+				B88B592A2109B2EF00F20D1B /* ZLGestureLockViewController.m in Sources */,
 				2ED651D22010443D0065A1B0 /* TLAboutUsVC.m in Sources */,
 				B8C2057C20CFA3FC00952765 /* WalletAddressDetailVC.m in Sources */,
 				4CE70FE120C82EDD00F0C803 /* MnemonicUtil.m in Sources */,

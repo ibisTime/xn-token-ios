@@ -108,6 +108,7 @@
 #define KWalletWord @"walletWord"
 #define KWalletAddress @"walletAddress"
 #define KWalletPrivateKey @"walletPrivateKey"
+#define GesturesPassword @"gesturespassword"
 
 
 #pragma mark - 轮播图

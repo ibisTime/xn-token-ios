@@ -298,7 +298,7 @@
     [self.view insertSubview:bottomView aboveSubview:self.tableView];
     [bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.left.equalTo(@0);
-        make.bottom.equalTo(@(-kBottomInsetHeight));
+        make.bottom.equalTo(@(0));
         make.height.equalTo(@50);
     }];
     
@@ -322,8 +322,8 @@
         [btn setImage:kImage(imgArr[idx]) forState:UIControlStateNormal];
         
         btn.tag = 201806+idx;
-        [btn setTitleEdgeInsets:UIEdgeInsetsMake(30, 10, 0, 0)];
-        [btn setImageEdgeInsets:UIEdgeInsetsMake(0, 50, 10, 0)];
+        [btn setTitleEdgeInsets:UIEdgeInsetsMake(30, 0, 0, 0)];
+        [btn setImageEdgeInsets:UIEdgeInsetsMake(0, 40, 10, 0)];
 
         [self.bottomViw addSubview:btn];
         [btn mas_makeConstraints:^(MASConstraintMaker *make) {

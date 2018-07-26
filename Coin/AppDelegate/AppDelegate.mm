@@ -39,6 +39,7 @@
 #import <FMDB/FMDB.h>
 #import "TLDataBase.h"
 #import "TLUserLoginVC.h"
+#import "ZLGestureLockViewController.h"
 //#import "TLPublishInputView.h"      czy
 
 @interface AppDelegate ()
@@ -293,6 +294,9 @@
         if (![AppConfig config].isChecking) {
             TLUpdateVC *updateVC = [[TLUpdateVC alloc] init];
             TLNavigationController *na = [[TLNavigationController alloc] initWithRootViewController:updateVC];
+            na.isLanch = YES;
+            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isLanch"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
             if ([TLUser user].checkLogin == NO) {
                 
             }
@@ -409,8 +413,21 @@
 //        }
 //    }
     
-            
+    
+    
+    if ([TLUser user].isLogin == YES) {
+        //验证手势密码
+        ZLGestureLockViewController *vc = [ZLGestureLockViewController new];
+        vc.isCheck = YES;
+        TLNavigationController *na = [[TLNavigationController alloc] initWithRootViewController:vc];
+        BOOL isLanch  = [[NSUserDefaults standardUserDefaults] boolForKey:@"isLanch"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        if (isLanch == YES) {
+            return;
+        }
+        self.window.rootViewController = na;
         
+    }
     
     
 }
@@ -440,7 +457,8 @@
 #pragma mark- 应用切前台
 - (void)applicationWillEnterForeground:(UIApplication *)application {
 
-    
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isLanch"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 - (NSString *) dataFilePath//应用程序的沙盒路径
 {

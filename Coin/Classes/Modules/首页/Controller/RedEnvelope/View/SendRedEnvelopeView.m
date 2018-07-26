@@ -198,7 +198,7 @@
         alltotalLabel = [UILabel labelWithFrame:CGRectMake(kWidth(60),kHeight(284+25) , kWidth(92+50), kHeight(16)) textAligment:(NSTextAlignmentLeft) backgroundColor:kClearColor font:Font(11) textColor:kTextColor5];
         [self addSubview:alltotalLabel];
         
-        transFormLab = [UILabel labelWithFrame:CGRectMake(kWidth(60+120),kHeight(284+25) , kWidth(92), kHeight(16)) textAligment:(NSTextAlignmentLeft) backgroundColor:kClearColor font:Font(11) textColor:kHexColor(@"#FBDDA9")];
+        transFormLab = [UILabel labelWithFrame:CGRectMake(alltotalLabel.xx+10,kHeight(284+25) , kWidth(92), kHeight(16)) textAligment:(NSTextAlignmentLeft) backgroundColor:kClearColor font:Font(11) textColor:kHexColor(@"#FBDDA9")];
         transFormLab.userInteractionEnabled = YES;
         [self addSubview:transFormLab];
         

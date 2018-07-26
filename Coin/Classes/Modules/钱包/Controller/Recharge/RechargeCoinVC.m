@@ -54,28 +54,28 @@
 
 - (void)initTopView {
     
-//    CGFloat topH = kScreenWidth > 375 ? kHeight(50): 50;
-//
-//    self.topView = [[UIView alloc] initWithFrame:CGRectMake(0, kStatusBarHeight, kScreenWidth, topH)];
-//
-//    self.topView.backgroundColor = [UIColor colorWithHexString:@"#fdfbed"];
-//
-//    [self.view addSubview:self.topView];
+    CGFloat topH = kScreenWidth > 375 ? kHeight(50): 50;
+
+    self.topView = [[UIView alloc] initWithFrame:CGRectMake(0, kStatusBarHeight, kScreenWidth, topH)];
+
+    self.topView.backgroundColor = kWhiteColor;
+
+    [self.view addSubview:self.topView];
     
-    UIButton *cancelBtn = [UIButton buttonWithImageName:@"取消"];
+    UIButton *cancelBtn = [UIButton buttonWithImageName:@"返回1"];
     cancelBtn.frame = CGRectMake(12, kStatusBarHeight, 60, 30);
     [cancelBtn addTarget:self action:@selector(clickCancel) forControlEvents:UIControlEventTouchUpInside];
     
     [cancelBtn setEnlargeEdge:15];
     
     [self.view addSubview:cancelBtn];
-//    [cancelBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-//
-//        make.width.height.equalTo(@15);
-//        make.centerY.equalTo(@0);
-//        make.right.equalTo(@(-15));
-//
-//    }];
+    [cancelBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+
+        make.width.height.equalTo(@15);
+        make.centerY.equalTo(@0);
+        make.right.equalTo(@(-15));
+
+    }];
     
     
     UILabel *promptLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kAppCustomMainColor font:12.0];
@@ -284,8 +284,8 @@
 
 
 - (void)addRecodeItem {
-    
-//    [UIBarButtonItem addRightItemWithTitle:[LangSwitcher switchLang:@"记录" key:nil]
+    [UIBarButtonItem addLeftItemWithImageName:@"返回1" frame:CGRectMake(0, 0, 40, 44) vc:self action:@selector(backTop)];
+//    [UIBarButtonItem addLeftItemWithTitle:[LangSwitcher switchLang:@"记录" key:nil]
 //                                titleColor:kTextColor
 //                                     frame:CGRectMake(0, 0, 40, 44)
 //                                        vc:self
@@ -327,6 +327,12 @@
         
         [TLAlert alertWithSucces:[LangSwitcher switchLang:@"复制成功" key:nil]];
     }
+}
+- (void)backTop
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+    [self.navigationController popViewControllerAnimated:YES];
+    
 }
 
 - (void)lookBillRecord {

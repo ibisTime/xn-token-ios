@@ -23,12 +23,26 @@
 //    [UINavigationBar appearance].backIndicatorImage = [UIImage imageNamed:@"返回"];
 //    [UINavigationBar appearance].backIndicatorTransitionMaskImage = [UIImage imageNamed:@"返回"];
     
-   
+    if (@available(iOS 11.0, *)) {
+        
+        [[UIBarButtonItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor clearColor]} forState:UIControlStateNormal];//将title 文字的颜色改为透明
+        
+    }else {
+        
+        //隐藏返回按钮的文字
+        
+        [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -60) forBarMetrics:UIBarMetricsDefault];
+        
+    }
+    
+
     
     //
     UINavigationBar *navBar = [UINavigationBar appearance];
-    [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -60)
-                                                         forBarMetrics:UIBarMetricsDefault];
+//    [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -60)
+//                                                         forBarMetrics:UIBarMetricsDefault];
+//    [[UIBarButtonItem appearance] setBackButtonBackgroundVerticalPositionAdjustment:10 forBarMetrics:UIBarMetricsDefault];
+//    [self.navigationItem.backBarButtonItem setImageInsets:UIEdgeInsetsMake(0, -10, 0, 0)];
     navBar.backIndicatorTransitionMaskImage = [UIImage imageNamed:@"返回 白色"];
     [self.navigationController.navigationItem setHidesBackButton:YES];
     navBar.barTintColor = kHexColor(@"#0848DF");

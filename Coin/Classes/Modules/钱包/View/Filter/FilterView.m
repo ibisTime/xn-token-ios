@@ -16,7 +16,7 @@
 //筛选
 @property (nonatomic, strong) UIPickerView *filterPicker;
 //text
-@property (nonatomic, strong) UILabel *textLbl;
+//@property (nonatomic, strong) UILabel *textLbl;
 
 
 
@@ -52,14 +52,14 @@
     
     if (!_filterPicker) {
         
-        _filterPicker = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 100, kScreenWidth, 200)];
+        _filterPicker = [[UIPickerView alloc] init];
         
         _filterPicker.delegate = self;
         _filterPicker.dataSource = self;
         
         _filterPicker.backgroundColor = [UIColor whiteColor];
 
-        [self.pickerView addSubview:_filterPicker];
+//        [self.pickerView addSubview:_filterPicker];
     }
     
     return _filterPicker;
@@ -94,24 +94,24 @@
     }];
     
     //text
-    self.textLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:14.0];
+//    self.textLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:14.0];
+//
+//    [self.pickerView addSubview:self.textLbl];
+//    self.textLbl.numberOfLines = 0;
+//    self.textLbl.textAlignment = NSTextAlignmentCenter;
+//    [self.textLbl sizeToFit];
+//
+//    [self.textLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+//
+//        make.top.equalTo(@45);
+////        make.left.equalTo(@)
+////        make.centerX.equalTo(self.pickerView.mas_centerX);
+//        make.left.equalTo(@15);
+//        make.right.equalTo(@-15);
+//
+//        make.height.equalTo(@64);
     
-    [self.pickerView addSubview:self.textLbl];
-    self.textLbl.numberOfLines = 0;
-    self.textLbl.textAlignment = NSTextAlignmentCenter;
-    [self.textLbl sizeToFit];
-
-    [self.textLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.top.equalTo(@45);
-//        make.left.equalTo(@)
-//        make.centerX.equalTo(self.pickerView.mas_centerX);
-        make.left.equalTo(@15);
-        make.right.equalTo(@-15);
-
-        make.height.equalTo(@64);
-        
-    }];
+//    }];
     
     //确定
     UIButton *confirmBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"确定" key:nil] 
@@ -136,19 +136,29 @@
     [self.pickerView addSubview:line];
     [line mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.top.equalTo(_textLbl.mas_bottom);
+        make.top.equalTo(cancelBtn.mas_bottom).offset(5);
         make.left.equalTo(@0);
         make.width.equalTo(@(kScreenWidth));
         make.height.equalTo(@0.5);
         
     }];
+    [self.pickerView addSubview:self.filterPicker];
+    
+    [self.filterPicker mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.top.equalTo(line.mas_bottom).offset(5);
+        make.left.equalTo(@0);
+        make.right.equalTo(@0);
+        make.height.equalTo(@200);
+        
+    }];
+    
 }
 
 - (void)setTitle:(NSString *)title {
     
     _title = title;
     
-    self.textLbl.text = title;
 
 }
 

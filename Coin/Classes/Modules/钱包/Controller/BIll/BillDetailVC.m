@@ -65,7 +65,7 @@
     textLbl.textAlignment = NSTextAlignmentCenter;
     textLbl.numberOfLines = 0;
     [self.headerView addSubview:textLbl];
-    textLbl.text = _bill.bizNote;
+    textLbl.text = _bill.getBizName;
 
 
     NSString *onlyCountStr = [CoinUtil convertToRealCoin:_bill.transAmountString coin:_bill.currency];

@@ -40,7 +40,6 @@
 #import "QRCodeVC.h"
 #import "BuildWalletMineVC.h"
 #import "CountryModel.h"
-#import "countrGroup.h"
 #import "TLFastvc.h"
 #import "TLTransfromVC.h"
 #import "BuildLocalHomeView.h"

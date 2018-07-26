@@ -41,12 +41,15 @@
 //    self.navigationController.navigationBar.shadowImage = [kLineColor convertToImage];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    
-    [super viewWillAppear:animated];
-    
-//    [self.navigationController setNavigationBarHidden:NO animated:animated];
+- (void)viewWillAppear:(BOOL)animated
+{
+    //去掉透明后导航栏下边的黑边
+    [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
+}
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [self.navigationController.navigationBar setShadowImage:nil];
 }
 
 // 如果tableview在视图最底层 默认会偏移电池栏的高度

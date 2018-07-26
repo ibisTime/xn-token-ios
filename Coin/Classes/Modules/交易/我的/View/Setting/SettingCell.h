@@ -23,4 +23,6 @@
 @property (nonatomic, strong) UIImageView *iconImageView;
 @property (nonatomic, strong) UILabel *titleLbl;
 
+@property (nonatomic, copy) void (^ SwitchBlock) (NSInteger switchBlock);
+
 @end

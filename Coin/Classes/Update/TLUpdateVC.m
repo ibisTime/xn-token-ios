@@ -298,7 +298,7 @@
             [weakSelf setRootVC];
 
         };
-        
+
         TLNavigationController *nav = [[TLNavigationController alloc] initWithRootViewController:loginVC];
         [UIApplication sharedApplication].keyWindow.rootViewController = nav;
 //        [self.navigationController pushViewController:loginVC animated:YES];

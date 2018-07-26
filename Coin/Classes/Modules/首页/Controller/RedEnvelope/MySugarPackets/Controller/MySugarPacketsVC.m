@@ -133,7 +133,7 @@
 - (void)setupPageButton{
     //button的index值应当从0开始
 
-    NSArray *array = [NSArray arrayWithObjects:[LangSwitcher switchLang:@"抢到红包" key:nil],[LangSwitcher switchLang:@"发出红包" key:nil], nil];
+    NSArray *array = [NSArray arrayWithObjects:[LangSwitcher switchLang:@"我收到的" key:nil],[LangSwitcher switchLang:@"我发出的" key:nil], nil];
     //初始化UISegmentedControl
     segment = [[UISegmentedControl alloc]initWithItems:array];
     //设置frame

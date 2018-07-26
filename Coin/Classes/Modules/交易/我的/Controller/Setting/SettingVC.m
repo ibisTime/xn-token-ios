@@ -31,6 +31,9 @@
 #import "TLProgressHUD.h"
 #import "LangChooseVC.h"
 #import "TLUserLoginVC.h"
+#import "TLGestureVC.h"
+#import "ZLGestureLockViewController.h"
+
 @interface SettingVC ()
 
 @property (nonatomic, strong) SettingGroup *group;
@@ -110,7 +113,22 @@
     self.tableView.group = self.group;
     self.tableView.backgroundColor = kWhiteColor;
     [self.bgImage addSubview:self.tableView];
-    
+    CoinWeakSelf;
+    self.tableView.SwitchBlock = ^(NSInteger switchBlock) {
+        if (switchBlock ==1) {
+            ZLGestureLockViewController *vc = [[ZLGestureLockViewController alloc] initWithUnlockType:ZLUnlockTypeCreatePsw];
+            [weakSelf.navigationController pushViewController:vc animated:YES];
+        }else{
+            [ZLGestureLockViewController deleteGesturesPassword];
+
+//            ZLGestureLockViewController *vc = [[ZLGestureLockViewController alloc] initWithUnlockType:ZLUnlockTypeCreatePsw];
+//            [weakSelf.navigationController pushViewController:vc animated:YES];
+            
+            
+        }
+        
+        
+    };
     UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth-30-30, 150)];
     
     [footerView addSubview:self.loginOutBtn];
@@ -245,17 +263,15 @@
     
     //语言设置
     SettingModel *languageSetting = [SettingModel new];
-    languageSetting.text = [LangSwitcher switchLang:@"语言设置" key:nil];
-    languageSetting.subText = [LangSwitcher currentLang];
+    languageSetting.text = [LangSwitcher switchLang:@"手势密码" key:nil];
     [languageSetting setAction:^{
         
-        LangChooseVC *vc = [[LangChooseVC alloc] init];
-        [weakSelf.navigationController pushViewController:vc animated:YES];
+      
         
     }];
     
     self.group = [SettingGroup new];
-    self.group.sections = @[@[changeTradePwd,bindEmail,google], @[changeLoginPwd]];
+    self.group.sections = @[@[changeTradePwd,bindEmail,google], @[changeLoginPwd,languageSetting]];
     self.tableView.group = self.group;
 
 }

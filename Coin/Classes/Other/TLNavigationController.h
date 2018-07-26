@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface TLNavigationController : UINavigationController
-
+@property (nonatomic, assign) BOOL isLanch;
 @end

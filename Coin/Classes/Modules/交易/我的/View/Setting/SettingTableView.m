@@ -9,6 +9,7 @@
 #import "SettingTableView.h"
 #import "CoinHeader.h"
 #import "SettingCell.h"
+#import "ZLGestureLockViewController.h"
 
 @interface SettingTableView ()<UITableViewDataSource, UITableViewDelegate>
 
@@ -54,6 +55,12 @@ static NSString *identifierCell = @"SettingCell";
     self.group.items = self.group.sections[indexPath.section];
     SettingModel *settingModel = self.group.items[indexPath.row];
     
+    CoinWeakSelf;
+    cell.SwitchBlock = ^(NSInteger switchBlock) {
+        if (self.SwitchBlock) {
+            self.SwitchBlock(switchBlock);
+        }
+    };
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     if (indexPath.section == 0 && indexPath.row == 0) {
         cell.switchHidden = YES;
@@ -71,6 +78,20 @@ static NSString *identifierCell = @"SettingCell";
         
         cell.rightLabel.text = settingModel.subText;
 
+    }
+    if (indexPath.section == 1 & indexPath.row == 1) {
+        NSString* gesture  =  [ZLGestureLockViewController gesturesPassword];
+        if (gesture.length >0) {
+            cell.switchHidden = NO;
+            cell.sw.on = YES;
+        }else{
+            
+            cell.switchHidden = NO;
+            cell.sw.on = NO;
+
+        }
+//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//        cell.userInteractionEnabled = NO;
     }
     cell.settingModel = settingModel;
 

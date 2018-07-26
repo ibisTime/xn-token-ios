@@ -48,11 +48,11 @@
     _sendView.transFormBlock = ^(CurrencyModel *model) {
         RechargeCoinVC *coinVC = [RechargeCoinVC new];
         
-//        TLNavigationController * navigation = [[TLNavigationController alloc]initWithRootViewController:coinVC];
-//        coinVC.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-//        coinVC.modalPresentationStyle = UIModalTransitionStyleFlipHorizontal;
+        TLNavigationController * navigation = [[TLNavigationController alloc]initWithRootViewController:coinVC];
+        coinVC.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+        coinVC.modalPresentationStyle = UIModalTransitionStyleFlipHorizontal;
         coinVC.currency = model;
-        [weakSelf presentViewController:coinVC animated:YES completion:nil];
+        [weakSelf presentViewController:navigation animated:YES completion:nil];
 
     };
     _sendView.delegate = self;

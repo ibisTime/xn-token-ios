@@ -72,7 +72,8 @@
         }];
         //开关
         UISwitch *sw = [[UISwitch alloc] init];
-        
+        [sw addTarget:self action:@selector(switchAction:) forControlEvents:UIControlEventValueChanged];
+
         [self addSubview:sw];
         [sw mas_makeConstraints:^(MASConstraintMaker *make) {
             
@@ -111,6 +112,24 @@
     _arrowHidden = arrowHidden;
     
     _accessoryImageView.hidden = _arrowHidden;
+    
+}
+
+- (void)switchAction :(UISwitch *)sw
+{
+    
+    if (sw.on == YES) {
+        NSLog(@"打开开关");
+        if (self.SwitchBlock) {
+            self.SwitchBlock(sw.on);
+        }
+    }else{
+        if (self.SwitchBlock) {
+            self.SwitchBlock(sw.on);
+        }
+        NSLog(@"关闭开关");
+
+    }
     
 }
 

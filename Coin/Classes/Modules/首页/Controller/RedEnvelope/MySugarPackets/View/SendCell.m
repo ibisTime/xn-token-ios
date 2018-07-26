@@ -33,15 +33,15 @@
         nameLabel = [UILabel labelWithFrame:CGRectMake(63, 16, (SCREEN_WIDTH - 79)/2, 20) textAligment:(NSTextAlignmentLeft) backgroundColor:kClearColor font:FONT(14) textColor:[UIColor blackColor]];
         [self addSubview:nameLabel];
 
-        timeLabel = [UILabel labelWithFrame:CGRectMake(63, 36, (SCREEN_WIDTH - 79)/2, 14) textAligment:(NSTextAlignmentLeft) backgroundColor:kClearColor font:FONT(11) textColor:kTextBlack];
+        timeLabel = [UILabel labelWithFrame:CGRectMake(63, 36, (SCREEN_WIDTH - 79)/2, 24) textAligment:(NSTextAlignmentLeft) backgroundColor:kClearColor font:FONT(11) textColor:kTextBlack];
         [self addSubview:timeLabel];
 
 
         priceLabel = [UILabel labelWithFrame:CGRectMake(63 + (SCREEN_WIDTH - 79)/2, 16, (SCREEN_WIDTH - 79)/2, 36) textAligment:(NSTextAlignmentRight) backgroundColor:kClearColor font:FONT(16) textColor:HeadBackColor];
         [self addSubview:priceLabel];
 
-//        TheValueLabel = [UILabel labelWithFrame:CGRectMake(63 + (SCREEN_WIDTH - 79)/2, 36, (SCREEN_WIDTH - 79)/2 , 14) textAligment:(NSTextAlignmentRight) backgroundColor:kClearColor font:FONT(11) textColor:RGB(173, 186, 192)];
-//        [self addSubview:TheValueLabel];
+        TheValueLabel = [UILabel labelWithFrame:CGRectMake(63 + (SCREEN_WIDTH - 79)/2, 46, (SCREEN_WIDTH - 79)/2 , 14) textAligment:(NSTextAlignmentRight) backgroundColor:kClearColor font:FONT(11) textColor:RGB(173, 186, 192)];
+        [self addSubview:TheValueLabel];
 
 
         UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(10, 65, SCREEN_WIDTH - 20, 1)];
@@ -57,9 +57,9 @@
 //    NSLog(@"%@",getModel);
     nameLabel.text = [NSString stringWithFormat:@"%@",sendModel.sendUserNickname];
     timeLabel.text = [sendModel.createDateTime convertRedDate] ;
-
-    [headImage sd_setImageWithURL:[NSURL URLWithString:[sendModel.sendUserPhoto convertImageUrl]] placeholderImage:kImage(@"头像")];
+    headImage.image = kImage(@"普通红包");
+//    [headImage sd_setImageWithURL:[NSURL URLWithString:[sendModel.sendUserPhoto convertImageUrl]] placeholderImage:kImage(@"普通红包")];
     priceLabel.text = [NSString stringWithFormat:@"%@ %@",sendModel.totalCount,sendModel.symbol];
-//    TheValueLabel.text = [NSString stringWithFormat:@"¥%@",sendModel.totalCountCNY];
+    TheValueLabel.text = [NSString stringWithFormat:@"≈%@元",sendModel.totalCountCNY];
 }
 @end
