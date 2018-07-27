@@ -320,36 +320,38 @@
 {
     
     
-//    if (!self.nameTf.text) {
-//        
-//        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入钱包名称" key:nil]];
-//        
-//        return;
-//    }
-//    
-//    if (!(self.pwdTf.text && self.pwdTf.text.length > 5)) {
-//        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入6位以上密码" key:nil]];
-//        
-//        return;
-//    }
-//    
-//    if (!(self.rePwdTf.text &&self.rePwdTf.text.length > 5)) {
-//        
-//        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入6位以上密码" key:nil]];
-//        return;
-//    }
-//    
-//    if (![self.pwdTf.text isEqualToString:self.rePwdTf.text]) {
-//        
-//        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"输入的密码不一致" key:nil]];
-//        return;
-//        
-//    }
+    if (!self.nameTf.text) {
+        
+        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入钱包名称" key:nil]];
+        
+        return;
+    }
+    
+    if (!(self.pwdTf.text && self.pwdTf.text.length > 5)) {
+        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入6位以上密码" key:nil]];
+        
+        return;
+    }
+    
+    if (!(self.rePwdTf.text &&self.rePwdTf.text.length > 5)) {
+        
+        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入6位以上密码" key:nil]];
+        return;
+    }
+    
+    if (![self.pwdTf.text isEqualToString:self.rePwdTf.text]) {
+        
+        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"输入的密码不一致" key:nil]];
+        return;
+        
+    }
     
     BuildSucessVC *sucess = [[BuildSucessVC alloc] init];
+    sucess.name = self.nameTf.text;
+    sucess.PWD = self.rePwdTf.text;
     [self.navigationController pushViewController:sucess animated:YES];
     
-    //创建钱包
+//    创建钱包
     
 //    self.navigationController.navigationBar.hidden = NO;
 //

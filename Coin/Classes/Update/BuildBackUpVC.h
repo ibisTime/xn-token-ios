@@ -12,6 +12,7 @@
 
 @property (nonatomic ,copy) NSString *mnemonics;
 @property (nonatomic ,copy) NSString *pwd;
+@property (nonatomic ,copy) NSString *name;
 
 @property (nonatomic ,assign) BOOL isCopy;
 

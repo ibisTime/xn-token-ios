@@ -186,11 +186,11 @@ typedef NS_ENUM(NSInteger, WalletAddressType) {
     
     CGFloat heightMargin = 50;
     //余额
-    self.balanceTF = [[TLTextField alloc] initWithFrame:CGRectMake(0, kHeight(103), kScreenWidth, heightMargin)
+    self.balanceTF = [[TLTextField alloc] initWithFrame:CGRectMake(0, kHeight(103), kScreenWidth, heightMargin+20)
                                               leftTitle:[LangSwitcher switchLang:@"接受地址" key:nil]
                                              titleWidth:80
                                             placeholder:[LangSwitcher switchLang:@"请输入付币地址或扫码" key:nil]];
-
+ 
     self.balanceTF.textColor = kHexColor(@"#109ee9");
 //    NSString *leftAmount = [self.currency.amountString subNumber:self.currency.frozenAmountString];
 //
@@ -746,7 +746,7 @@ typedef NS_ENUM(NSInteger, WalletAddressType) {
     
     [self.view endEditing:YES];
     
-    if ([self.balanceTF.text isEqualToString:@"请输入付币地址或扫码"]) {
+    if ([self.balanceTF.text isEqualToString:@"请输入接受地址地址或扫码"]) {
         
         [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请选择地址地址" key:nil] ];
         return ;
@@ -785,10 +785,10 @@ typedef NS_ENUM(NSInteger, WalletAddressType) {
         //    NSNumber *gaspic = [NSNumber numberWithFloat:[self.tranAmountTF.text floatValue] *1000000000000000000] ;
         NSString *result;
         if ([self.currency.symbol isEqualToString:@"ETH"]) {
-            result =[MnemonicUtil sendTransactionWithMnemonicWallet:word address:self.receiveAddressLbl.text amount:gaspic gaspic:self.pricr gasLimt:@"21000"];
+            result =[MnemonicUtil sendTransactionWithMnemonicWallet:word address:self.balanceTF.text amount:gaspic gaspic:self.pricr gasLimt:@"21000"];
         }else{
             
-            result =[MnemonicUtil sendWanTransactionWithMnemonicWallet:word address:self.receiveAddressLbl.text amount:gaspic gaspic:self.pricr gasLimt:@"21000"];
+            result =[MnemonicUtil sendWanTransactionWithMnemonicWallet:word address:self.balanceTF.text amount:gaspic gaspic:self.pricr gasLimt:@"21000"];
         }
         
         
@@ -894,6 +894,12 @@ typedef NS_ENUM(NSInteger, WalletAddressType) {
 - (void)clickImage
 {
     [self.WorkMoneyPicker show];
+    
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    [self.view endEditing:YES];
     
 }
 

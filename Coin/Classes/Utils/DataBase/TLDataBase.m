@@ -83,7 +83,7 @@ NSString *const dbName = @"THAWallet.db";
         NSLog(@"还未创建数据库，现在正在创建数据库");
         if([db open]) {
             
-            [db executeUpdate:@"create table if not exists THAWallet(walletId INTEGER PRIMARY KEY AUTOINCREMENT,userId text, Mnemonics text, wanaddress text,wanprivate text,ethaddress text,ethprivate text,btcaddress text,btcprivate text,PwdKey text,MoneyType text)"];
+            [db executeUpdate:@"create table if not exists THAWallet(walletId INTEGER PRIMARY KEY AUTOINCREMENT,userId text, Mnemonics text, wanaddress text,wanprivate text,ethaddress text,ethprivate text,btcaddress text,btcprivate text,PwdKey text,name text)"];
              [db executeUpdate:@"create table if not exists LocalWallet(id INTEGER PRIMARY KEY AUTOINCREMENT,walletId text, symbol text, type text ,status text,cname text,unit text,pic1 text,withdrawFeeString text,withfrawFee text,orderNo text,ename text,icon text,pic2 text,pic3 text,address text,IsSelect INTEGER,next text)"];
             [db close];
         }else{

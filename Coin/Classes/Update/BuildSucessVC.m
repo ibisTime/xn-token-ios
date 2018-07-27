@@ -238,6 +238,7 @@
     //点击备份钱包 生成助记词
     BuildBackUpVC *backUpVC = [BuildBackUpVC new];
     backUpVC.pwd = self.PWD;
+    backUpVC.name = self.name;
 //    NSString *word  =[[NSUserDefaults standardUserDefaults] objectForKey:KWalletWord];
     TLDataBase *dataBase = [TLDataBase sharedManager];
     NSString *word;

@@ -80,6 +80,9 @@ static NSString *identifierCell = @"SettingCell";
 
     }
     if (indexPath.section == 1 & indexPath.row == 1) {
+        if ([settingModel.text isEqualToString:@"删除钱包"]) {
+            
+        }else{
         NSString* gesture  =  [ZLGestureLockViewController gesturesPassword];
         if (gesture.length >0) {
             cell.switchHidden = NO;
@@ -90,7 +93,9 @@ static NSString *identifierCell = @"SettingCell";
             cell.sw.on = NO;
 
         }
-//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        }
+//
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
 //        cell.userInteractionEnabled = NO;
     }
     cell.settingModel = settingModel;

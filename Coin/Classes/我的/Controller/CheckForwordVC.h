@@ -27,4 +27,6 @@ typedef NS_ENUM(NSInteger, WalletWordType) {
 @property (nonatomic, assign) WalletWordType WalletType;
 
 @property (nonatomic, assign) BOOL IsImport;
+@property (nonatomic, assign) BOOL IsCopy;
+
 @end

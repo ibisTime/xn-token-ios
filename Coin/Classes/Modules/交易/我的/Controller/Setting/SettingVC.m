@@ -108,7 +108,7 @@
     self.nameLable.textColor = kTextBlack;
     [self.bgImage addSubview:self.nameLable];
     
-    self.tableView = [[SettingTableView alloc] initWithFrame:CGRectMake(15, kHeight(90), kScreenWidth-30, kHeight(350)) style:UITableViewStyleGrouped];
+    self.tableView = [[SettingTableView alloc] initWithFrame:CGRectMake(15, kHeight(90), kScreenWidth-30, kHeight(400)) style:UITableViewStyleGrouped];
     
     self.tableView.group = self.group;
     self.tableView.backgroundColor = kWhiteColor;

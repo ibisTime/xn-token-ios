@@ -164,16 +164,16 @@
     [self.sureButton setBackgroundColor:kAppCustomMainColor forState:UIControlStateNormal];
     [self.sureButton setBackgroundColor:kHexColor(@"#f5f5f5") forState:UIControlStateDisabled];
     self.sureButton.enabled = NO;
-    [self.view addSubview:self.sureButton];
-    self.view.backgroundColor = kWhiteColor;
-
-    [self.sureButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(self.view.mas_bottom).offset(-(kBottomInsetHeight+10));
-        make.right.equalTo(self.view.mas_right).offset(-15);
-        make.left.equalTo(self.view.mas_left).offset(15);
-        make.height.equalTo(@45);
-        
-    }];
+//    [self.view addSubview:self.sureButton];
+//    self.view.backgroundColor = kWhiteColor;
+//
+//    [self.sureButton mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.bottom.equalTo(self.view.mas_bottom).offset(-(kBottomInsetHeight+10));
+//        make.right.equalTo(self.view.mas_right).offset(-15);
+//        make.left.equalTo(self.view.mas_left).offset(15);
+//        make.height.equalTo(@45);
+//        
+//    }];
     
 }
 - (void)initTopCollectionView{
@@ -322,6 +322,7 @@
         [self.nineView reloadData];
         if (self.titles.count == 12) {
             self.sureButton.enabled = YES;
+            [self buildSureWallet];
         }
 //        self.bottomView.IsNeedRefash = NO;
         [self.bottomView.bottomtitles removeAllObjects];
@@ -347,18 +348,31 @@
 {
     
     WalletNewFeaturesVC * newVC = [WalletNewFeaturesVC new];
+    
     //        [self.navigationController pushViewController:newVC animated:YES];
     [UIApplication sharedApplication].keyWindow.rootViewController = newVC;
     
     
-    return;
+//    return;
     //验证助记词
     if ([self.titles isEqualToArray:self.userTitles]) {
         
         NSLog(@"%@",self.titleWord);
         
 //        NSString *word =  [[NSUserDefaults standardUserDefaults] objectForKey:self.titleWord];
-    
+        if (self.isCopy == YES) {
+            
+            
+            NSString *text = [LangSwitcher switchLang:@"备份成功,请妥善保管助记词" key:nil];
+            
+            [TLAlert alertWithMsg:text];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                WalletNewFeaturesVC * newVC = [WalletNewFeaturesVC new];
+                //        [self.navigationController pushViewController:newVC animated:YES];
+                [UIApplication sharedApplication].keyWindow.rootViewController = newVC;
+                return ;
+            });
+        }
         NSString *prikey   =[MnemonicUtil getPrivateKeyWithMnemonics:self.titleWord];
 
         NSString *address = [MnemonicUtil getAddressWithPrivateKey:prikey];
@@ -372,7 +386,7 @@
         //创建钱包后 储存助记伺 地址 私钥
         TLDataBase *dateBase = [TLDataBase sharedManager];
         if ([dateBase.dataBase open]) {
-            BOOL sucess = [dateBase.dataBase executeUpdate:@"insert into THAWallet(userId,Mnemonics,wanAddress,wanPrivate,ethPrivate,ethAddress,PwdKey) values(?,?,?,?,?,?,?)",user,self.titleWord,address,prikey,prikey,address,self.pwd];
+            BOOL sucess = [dateBase.dataBase executeUpdate:@"insert into THAWallet(userId,Mnemonics,wanAddress,wanPrivate,ethPrivate,ethAddress,PwdKey,name) values(?,?,?,?,?,?,?,?)",user,self.titleWord,address,prikey,prikey,address,self.pwd,self.name];
             
             NSLog(@"插入地址私钥%d",sucess);
         }
@@ -382,12 +396,7 @@
         [TLAlert alertWithMsg:text];
         //验证通过
         
-        if (self.isCopy == YES) {
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                [self.navigationController popToRootViewControllerAnimated:YES];
-                return ;
-            });
-        }
+      
         
         WalletNewFeaturesVC * newVC = [WalletNewFeaturesVC new];
 //        [self.navigationController pushViewController:newVC animated:YES];

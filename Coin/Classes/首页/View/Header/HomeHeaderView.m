@@ -290,7 +290,6 @@
         [btn addTarget:self action:@selector(clickButton:) forControlEvents:UIControlEventTouchUpInside];
         UILabel *textLab = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextBlack font:18];
         [btn addSubview:textLab];
-        textLab.numberOfLines = 0;
         textLab.text = [LangSwitcher switchLang:obj key:nil];
 //        UITapGestureRecognizer *ta = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickButton:)];
 //        [contentView addGestureRecognizer:ta]
@@ -336,8 +335,8 @@
 
         }];
         [textLab mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(imageView.mas_top).offset(22);
-            
+            make.top.equalTo(imageView.mas_top).offset(10);
+            make.width.equalTo(@200);
             make.left.equalTo(imageView.mas_right).offset(28);
         }];
         

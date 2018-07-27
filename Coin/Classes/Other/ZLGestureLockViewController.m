@@ -403,6 +403,7 @@
         
         if ([TLUser user].isLogin == NO) {
             TLUserLoginVC *lg = [TLUserLoginVC new];
+            lg.IsAPPJoin = YES;
             TLNavigationController *na = [[TLNavigationController alloc] initWithRootViewController:lg];
             
             [UIApplication sharedApplication].keyWindow.rootViewController = na;

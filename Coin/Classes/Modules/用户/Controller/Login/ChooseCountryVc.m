@@ -10,6 +10,8 @@
 #import "TLNetworking.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "NSString+Extension.h"
+#import "TLTabBarController.h"
+#import "TLUserLoginVC.h"
 @interface ChooseCountryVc ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,strong) NSMutableArray <CountryModel *>*countrys;
 @property (nonatomic,strong) UITableView *tableView;
@@ -222,6 +224,43 @@ static NSString *IdCell = @"country";
     [[NSUserDefaults standardUserDefaults] synchronize];
     if (self.selectCountry) {
         self.selectCountry(self.countrys[indexPath.row]);
+        CountryModel *model = self.countrys[indexPath.row];
+        if ([TLUser user].isLogin == NO) {
+            TLUserLoginVC *log = [TLUserLoginVC new];
+            TLNavigationController *na = [[TLNavigationController alloc] initWithRootViewController:log];
+            log.IsAPPJoin = YES;
+            if ([model.interSimpleCode isEqualToString:@"CN"]) {
+                [LangSwitcher changLangType:LangTypeSimple];
+                TLTabBarController *tabBarCtrl = [[TLTabBarController alloc] init];
+                [UIApplication sharedApplication].keyWindow.rootViewController = na;
+            }else if ([model.interSimpleCode isEqualToString:@"ID"])
+            {
+                [LangSwitcher changLangType:LangTypeEnglish];
+                TLTabBarController *tabBarCtrl = [[TLTabBarController alloc] init];
+                [UIApplication sharedApplication].keyWindow.rootViewController = na;
+                
+            }else if ([model.interSimpleCode isEqualToString:@"MY"])
+            {
+                [LangSwitcher changLangType:LangTypeEnglish];
+                
+                TLTabBarController *tabBarCtrl = [[TLTabBarController alloc] init];
+                [UIApplication sharedApplication].keyWindow.rootViewController = na;
+                
+            }else if ([model.interSimpleCode isEqualToString:@"KR"])
+            {
+                [LangSwitcher changLangType:LangTypeKorean];
+                TLTabBarController *tabBarCtrl = [[TLTabBarController alloc] init];
+                [UIApplication sharedApplication].keyWindow.rootViewController = na;
+                
+            }else{
+                
+                [LangSwitcher changLangType:LangTypeEnglish];
+                TLTabBarController *tabBarCtrl = [[TLTabBarController alloc] init];
+                [UIApplication sharedApplication].keyWindow.rootViewController = na;
+                
+            }
+        }
+       
     }
 }
 

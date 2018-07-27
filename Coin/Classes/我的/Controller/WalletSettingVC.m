@@ -20,6 +20,9 @@
 @property (nonatomic, strong) UIButton *backButton;
 
 @property (nonatomic, strong) UILabel *nameLable;
+
+@property (nonatomic ,strong) UIButton *importButton;
+
 @end
 
 @implementation WalletSettingVC
@@ -55,6 +58,34 @@
     
     [self.view addSubview:self.tableView];
  
+    self.importButton = [UIButton buttonWithImageName:nil cornerRadius:6];
+    NSString *text2 = [LangSwitcher switchLang:@"删除钱包" key:nil];
+    [self.importButton setTitle:text2 forState:UIControlStateNormal];
+    self.importButton.titleLabel.font = [UIFont systemFontOfSize:16];
+    
+    [self.importButton setTitleColor:kAppCustomMainColor forState:UIControlStateNormal];
+    [self.importButton addTarget:self action:@selector(importNow) forControlEvents:UIControlEventTouchUpInside];
+    [self.importButton setBackgroundColor:kWhiteColor forState:UIControlStateNormal];
+    self.importButton.layer.borderColor = (kAppCustomMainColor.CGColor);
+    self.importButton.layer.borderWidth = 1;
+    self.importButton.clipsToBounds = YES;
+    [self.view addSubview:self.importButton];
+    [self.importButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(@(kHeight(200)));
+        make.right.equalTo(self.view.mas_right).offset(-15);
+        make.left.equalTo(self.view.mas_left).offset(15);
+        make.height.equalTo(@50);
+        
+    }];
+}
+
+- (void)importNow
+{
+    CheckForwordVC *authVC = [CheckForwordVC new];
+    authVC.WalletType = WalletWordTypeThree;
+    authVC.title = [LangSwitcher switchLang:@"删除钱包" key:nil];
+    
+    [self.navigationController pushViewController:authVC animated:YES];
     
 }
 
@@ -65,7 +96,29 @@
     //资金密码
     
     SettingModel *walletName = [SettingModel new];
-    walletName.text = [LangSwitcher switchLang:@"钱包名称" key:nil];
+    
+    TLDataBase *dataBase = [TLDataBase sharedManager];
+    NSString *word;
+    if ([dataBase.dataBase open]) {
+        NSString *sql = [NSString stringWithFormat:@"SELECT name from THAWallet where userId = '%@'",[TLUser user].userId];
+        //        [sql appendString:[TLUser user].userId];
+        FMResultSet *set = [dataBase.dataBase executeQuery:sql];
+        while ([set next])
+        {
+            word = [set stringForColumn:@"name"];
+            
+        }
+        [set close];
+    }
+    [dataBase.dataBase close];
+    if (word || word.length > 0) {
+        walletName.text = [LangSwitcher switchLang:word key:nil];
+
+    }else{
+        walletName.text = [LangSwitcher switchLang:@"钱包名称" key:nil];
+
+        
+    }
 //    [walletName setAction:^{
 //
 //
@@ -99,6 +152,7 @@
     [idAuth setAction:^{
         
         CheckForwordVC *authVC = [CheckForwordVC new];
+        authVC.IsCopy = YES;
         authVC.WalletType = WalletWordTypeSecond;
         authVC.title = [LangSwitcher switchLang:@"钱包备份" key:nil];
         
@@ -156,7 +210,9 @@
 //
 //            });
 //        };
-        
+//        WalletDelectVC *changeLoginPwdVC = [WalletDelectVC new];
+
+
         [weakSelf.navigationController pushViewController:changeLoginPwdVC animated:YES];
         
     }];
@@ -164,7 +220,7 @@
   
     
     self.group = [SettingGroup new];
-    self.group.sections = @[@[walletName,changeTradePwd,bindEmail], @[idAuth, changeLoginPwd]];
+    self.group.sections = @[@[walletName,changeTradePwd], @[idAuth]];
     
 }
 

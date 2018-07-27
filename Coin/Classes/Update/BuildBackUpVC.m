@@ -252,6 +252,7 @@
     //验证助记词
     BuildCheckVC *checkVC= [[BuildCheckVC alloc] init];
     checkVC.pwd = self.pwd;
+    checkVC.name = self.name;
 //    checkVC.view.backgroundColor = kClearColor;
     checkVC.isCopy = self.isCopy;
 //    self.mnemonics =  [MnemonicUtil getGenerateMnemonics];

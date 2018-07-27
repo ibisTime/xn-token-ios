@@ -106,7 +106,18 @@
     CGFloat h = ACCOUNT_HEIGHT;
     
     CGFloat btnMargin = 15;
-    TLTextField *pwdTf = [[TLTextField alloc] initWithFrame:CGRectMake(margin, textView.yy+5, w, h) leftTitle:[LangSwitcher switchLang:@"" key:nil] titleWidth:20 placeholder:[LangSwitcher switchLang:@"请输入密码" key:nil]];
+    
+    TLTextField *nameTf = [[TLTextField alloc] initWithFrame:CGRectMake(margin, textView.yy+5, w, h) leftTitle:[LangSwitcher switchLang:@"" key:nil] titleWidth:20 placeholder:[LangSwitcher switchLang:@"钱包名称" key:nil]];
+    nameTf.secureTextEntry = YES;
+    
+    [self.view addSubview:nameTf];
+    self.nameTf = nameTf;
+    
+    UIView *phone7 = [[UIView alloc] init];
+    [self.view addSubview:phone7];
+    phone7.backgroundColor = kLineColor;
+    phone7.frame = CGRectMake(margin*2, nameTf.yy, w-30, 1);
+    TLTextField *pwdTf = [[TLTextField alloc] initWithFrame:CGRectMake(margin, nameTf.yy+5, w, h) leftTitle:[LangSwitcher switchLang:@"" key:nil] titleWidth:20 placeholder:[LangSwitcher switchLang:@"请输入密码" key:nil]];
     pwdTf.secureTextEntry = YES;
     
     [self.view addSubview:pwdTf];
@@ -115,6 +126,8 @@
     [self.view addSubview:phone3];
     phone3.backgroundColor = kLineColor;
     phone3.frame = CGRectMake(margin*2, pwdTf.yy, w-30, 1);
+    
+    
     //re密码
     //    UILabel *pLab = [UILabel labelWithTitle:[LangSwitcher switchLang:@"密码" key:nil] frame:CGRectMake(20, pwdTf.yy, w, 22)];
     //    pLab.font = [UIFont systemFontOfSize:14];
@@ -130,14 +143,14 @@
     phone4.backgroundColor = kLineColor;
     phone4.frame = CGRectMake(margin*2, rePwdTf.yy, w-30, 1);
     
-    TLTextField *introduceTf = [[TLTextField alloc] initWithFrame:CGRectMake(margin, rePwdTf.yy + 1, w, h) leftTitle:[LangSwitcher switchLang:@"" key:nil] titleWidth:20 placeholder:[LangSwitcher switchLang:@"提示信息" key:nil]];
-    //    introduceTf.secureTextEntry = YES;
-    [self.view addSubview:introduceTf];
-    self.introduceTf = introduceTf;
-    UIView *phone5 = [[UIView alloc] init];
-    [self.view addSubview:phone5];
-    phone5.backgroundColor = kLineColor;
-    phone5.frame = CGRectMake(margin*2, introduceTf.yy, w-30, 1);
+//    TLTextField *introduceTf = [[TLTextField alloc] initWithFrame:CGRectMake(margin, rePwdTf.yy + 1, w, h) leftTitle:[LangSwitcher switchLang:@"" key:nil] titleWidth:20 placeholder:[LangSwitcher switchLang:@"提示信息" key:nil]];
+//    //    introduceTf.secureTextEntry = YES;
+//    [self.view addSubview:introduceTf];
+//    self.introduceTf = introduceTf;
+//    UIView *phone5 = [[UIView alloc] init];
+//    [self.view addSubview:phone5];
+//    phone5.backgroundColor = kLineColor;
+//    phone5.frame = CGRectMake(margin*2, introduceTf.yy, w-30, 1);
     
     
     
@@ -151,7 +164,7 @@
     self.introduceButton.titleLabel.font = [UIFont systemFontOfSize:12];
     [self.introduceButton setTitleColor:kAppCustomMainColor forState:UIControlStateNormal];
     [self.introduceButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(introduceTf.mas_bottom).offset(15);
+        make.top.equalTo(rePwdTf.mas_bottom).offset(15);
         make.left.equalTo(self.view.mas_left).offset(15);
         make.width.equalTo(@(207));
         make.height.equalTo(@30);
@@ -231,6 +244,31 @@
 - (void)importNow
 {
     
+    if (!self.nameTf.text) {
+        
+        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入钱包名称" key:nil]];
+        
+        return;
+    }
+    
+    if (!(self.pwdTf.text && self.pwdTf.text.length > 5)) {
+        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入6位以上密码" key:nil]];
+        
+        return;
+    }
+    
+    if (!(self.rePwdTf.text &&self.rePwdTf.text.length > 5)) {
+        
+        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入6位以上密码" key:nil]];
+        return;
+    }
+    
+    if (![self.pwdTf.text isEqualToString:self.rePwdTf.text]) {
+        
+        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"输入的密码不一致" key:nil]];
+        return;
+        
+    }
 //    NSString *pwd = [self.FirstPSWArray componentsJoinedByString:@""];
 //    //            [[NSUserDefaults standardUserDefaults] setObject:pwd forKey:KUserPwd];
 //    //导入钱包交易密码
@@ -305,7 +343,7 @@
             //储存导入的钱包
             TLDataBase *dateBase = [TLDataBase sharedManager];
             if ([dateBase.dataBase open]) {
-                BOOL sucess = [dateBase.dataBase executeUpdate:@"insert into THAWallet(userId,Mnemonics,wanAddress,wanPrivate,ethPrivate,ethAddress,PwdKey) values(?,?,?,?,?,?,?)",[TLUser user].userId,word,address,prikey,prikey,address,self.pwdTf.text];
+                BOOL sucess = [dateBase.dataBase executeUpdate:@"insert into THAWallet(userId,Mnemonics,wanAddress,wanPrivate,ethPrivate,ethAddress,PwdKey,name) values(?,?,?,?,?,?,?,?)",[TLUser user].userId,word,address,prikey,prikey,address,self.pwdTf.text,self.nameTf.text];
                 
                 NSLog(@"导入地址私钥%d",sucess);
             }
@@ -327,15 +365,7 @@
         //设置交易密码
     }else{
         
-//        NSString *str = [MnemonicUtil getPrivateKeyWithMnemonics:self.textView.text];
 
-       
-        //验证失败
-//        [self.navigationController pushViewController:vc animated:YES];
-//
-//       NSString *str = [MnemonicUtil getPrivateKeyWithMnemonics:self.textView.text];
-//        NSLog(@"%@",str);
-//        [TLAlert alertWithMsg:@"助记词验证成功"];
         [TLAlert alertWithMsg:@"助记词不存在,请检测备份"];
         self.importButton.selected = NO;
         return;
@@ -348,6 +378,12 @@
     //
     
 }
+- (void)html5Wallet
+{
+    
+    
+}
+
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
     

@@ -25,10 +25,10 @@
         UILabel *leftLbl = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, titleWidth - 18, frame.size.height)];
         leftLbl.text = leftTitle;
         leftLbl.textAlignment = NSTextAlignmentLeft;
-        leftLbl.font = Font(15.0);
+        leftLbl.font = Font(13.0);
         leftLbl.textColor = [UIColor colorWithHexString:@"#484848"];
         [leftBgView addSubview:leftLbl];
-        
+        leftLbl.numberOfLines = 0;
         self.leftLbl = leftLbl;
         
         self.leftView = leftBgView;
@@ -41,7 +41,7 @@
         self.clearButtonMode = UITextFieldViewModeWhileEditing;
         self.placeholder = placeholder;
         //    [tf addAction];
-        self.font = [UIFont systemFontOfSize:15];
+        self.font = [UIFont systemFontOfSize:13];
 
     }
     return self;
@@ -54,7 +54,7 @@
         
         self.clearButtonMode = UITextFieldViewModeWhileEditing;
 //        self.textAlignment = NSTextAlignmentRight;
-        self.font = [UIFont systemFontOfSize:15];
+        self.font = [UIFont systemFontOfSize:13];
 
     }
     

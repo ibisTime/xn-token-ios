@@ -271,8 +271,7 @@
              break;
             
         case 2:
-            [self.navigationController pushViewController:adressVC animated:YES];
-
+            [self deleteWallet];
             break;
             
         default:
@@ -281,6 +280,69 @@
     
     
 }
+
+- (void)deleteWallet
+{
+    
+    TLDataBase *dataBase = [TLDataBase sharedManager];
+    NSString *word;
+    if ([dataBase.dataBase open]) {
+        
+        
+        NSString *sql = [NSString stringWithFormat:@"SELECT Mnemonics from THAWallet where userId = '%@'",[TLUser user].userId];
+        //        [sql appendString:[TLUser user].userId];
+        FMResultSet *set = [dataBase.dataBase executeQuery:sql];
+        while ([set next])
+        {
+            word = [set stringForColumn:@"Mnemonics"];
+            
+        }
+        [set close];
+    }
+    [dataBase.dataBase close];
+    if (!word) {
+        return;
+    }
+    
+        [TLAlert alertWithTitle:@"删除钱包" msg:@"请确保助记伺已保存妥善" confirmMsg:@"确定" cancleMsg:@"取消" maker:self cancle:^(UIAlertAction *action) {
+            
+            
+        } confirm:^(UIAlertAction *action) {
+            
+            TLDataBase *db = [TLDataBase sharedManager];
+            
+            if ([db.dataBase open]) {
+                NSString *Sql2 =[NSString stringWithFormat:@"delete from LocalWallet WHERE walletId = (SELECT walletId from THAWallet where userId='%@')",[TLUser user].userId];
+                
+                BOOL sucess2  = [db.dataBase executeUpdate:Sql2];
+                NSLog(@"删除自选表%d",sucess2);
+                
+                NSString *Sql =[NSString stringWithFormat:@"delete from THAWallet WHERE userId = '%@'",[TLUser user].userId];
+                
+                BOOL sucess  = [db.dataBase executeUpdate:Sql];
+                
+                NSLog(@"删除钱包表%d",sucess);
+                
+                
+            }
+            
+            [db.dataBase close];
+            //                [[NSUserDefaults standardUserDefaults] removeObjectForKey:KWalletWord];
+            //                [[NSUserDefaults standardUserDefaults] removeObjectForKey:KWalletAddress];
+            //                [[NSUserDefaults standardUserDefaults] removeObjectForKey:KWalletPrivateKey];
+            //                [[NSUserDefaults standardUserDefaults] synchronize];
+            [TLAlert alertWithMsg:@"删除成功"];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                
+                TLTabBarController *MineVC = [[TLTabBarController alloc] init];
+                
+                [UIApplication sharedApplication].keyWindow.rootViewController = MineVC;
+            });
+        }];
+        
+
+}
+
 - (void)setNewPWD
 {
     self.FirstPSWArray = [NSMutableArray arrayWithCapacity:6];
@@ -337,6 +399,7 @@
             }
             [db.dataBase close];
             BuildSucessVC *sucessVC = [BuildSucessVC new];
+            sucessVC.isCopy = self.IsCopy;
             TLNavigationController *na = [[TLNavigationController alloc] initWithRootViewController:sucessVC];
             
             [UIApplication sharedApplication].keyWindow.rootViewController = na;

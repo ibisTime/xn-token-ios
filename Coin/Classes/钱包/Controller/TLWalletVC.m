@@ -724,6 +724,7 @@
 //        [self.tabBarController.tabBar setHidden:YES];
         self.homeView = [[BuildLocalHomeView alloc] init];
         [self.view addSubview:self.homeView];
+//        self.homeView.contentSize = CGSizeMake(0, 300);
         
         
         self.homeView.backgroundColor = kWhiteColor;

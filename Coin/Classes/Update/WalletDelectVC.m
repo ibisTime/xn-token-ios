@@ -171,7 +171,8 @@
             }
             [set close];
         }
-        [dataBase.dataBase close];        if (!word) {
+        [dataBase.dataBase close];
+        if (!word) {
             return;
         }
         
