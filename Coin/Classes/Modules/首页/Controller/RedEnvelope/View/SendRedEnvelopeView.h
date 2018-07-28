@@ -38,4 +38,6 @@
 
 @property (nonatomic , copy)void (^transFormBlock)(CurrencyModel *model);
 
+@property (nonatomic , copy)void (^redPackBlock)();
+
 @end

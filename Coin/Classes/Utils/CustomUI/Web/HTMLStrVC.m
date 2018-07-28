@@ -10,7 +10,7 @@
 #import <WebKit/WebKit.h>
 #import "APICodeMacro.h"
 #import "UIScrollView+TLAdd.h"
-
+#import "APPLanguage.h"
 @interface HTMLStrVC ()<WKNavigationDelegate>
 
 @property (nonatomic, copy) NSString *htmlStr;
@@ -101,17 +101,13 @@
     switch (self.type) {
             
         case HTMLTypeAboutUs: {
-            
-            ckey = @"about_us";
-            
+            ckey = [NSString stringWithFormat:@"questions_%@",[APPLanguage currentLanguage].currentLange];
             name = [LangSwitcher switchLang:@"关于我们" key:nil];
             
         } break;
             
         case HTMLTypeRegProtocol: {
-            
-            ckey = @"reg_protocol";
-            
+            ckey = [NSString stringWithFormat:@"reg_protocol_%@",[APPLanguage currentLanguage].currentLange];
             name = [LangSwitcher switchLang:@"注册协议" key:nil];
             
         } break;
@@ -139,6 +135,54 @@
             name = [LangSwitcher switchLang:@"交易提醒" key:nil];
             
         } break;
+        case HTMLTypeMnemonic: {
+            ckey = [NSString stringWithFormat:@"mnemonic_%@",[APPLanguage currentLanguage].currentLange];
+            
+            name = [LangSwitcher switchLang:@"什么是助记词" key:nil];
+            break;
+        }
+        case HTMLTypeCreate_wallet: {
+            ckey = [NSString stringWithFormat:@"create_wallet_%@",[APPLanguage currentLanguage].currentLange];
+            
+            name = [LangSwitcher switchLang:@"创建钱包流程" key:nil];
+            break;
+        }
+        case HTMLTypeMnemonic_backup: {
+            ckey = [NSString stringWithFormat:@"mnemonic_backup_%@",[APPLanguage currentLanguage].currentLange];
+            
+            name = [LangSwitcher switchLang:@"如何备份助记词" key:nil];
+            break;
+        }
+        case HTMLTypeRed_packet_rule: {
+            ckey = [NSString stringWithFormat:@"red_packet_rule_%@",[APPLanguage currentLanguage].currentLange];
+            
+            name = [LangSwitcher switchLang:@"红包规则" key:nil];
+            break;
+        }
+        case HTMLTypePrivacy: {
+            ckey = [NSString stringWithFormat:@"privacy_%@",[APPLanguage currentLanguage].currentLange];
+            
+            name = [LangSwitcher switchLang:@"隐私政策" key:nil];
+            break;
+        }
+        case HTMLTypeGlobal_master: {
+            ckey = [NSString stringWithFormat:@"global_master_%@",[APPLanguage currentLanguage].currentLange];
+            
+            name = [LangSwitcher switchLang:@"首创玩法" key:nil];
+            break;
+        }
+        case HTMLTypeQuantitative_finance: {
+            ckey = [NSString stringWithFormat:@"quantitative_finance_%@",[APPLanguage currentLanguage].currentLange];
+            
+            name = [LangSwitcher switchLang:@"量化理财" key:nil];
+            break;
+        }
+        case HTMLTypeYubibao: {
+            ckey = [NSString stringWithFormat:@"yubibao_%@",[APPLanguage currentLanguage].currentLange];
+            
+            name = [LangSwitcher switchLang:@"余币宝" key:nil];
+            break;
+        }
     }
 
     self.nameLable.text = name;

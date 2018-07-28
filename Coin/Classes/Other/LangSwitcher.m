@@ -8,7 +8,7 @@
 
 #import "LangSwitcher.h"
 #import "ZMChineseConvert.h"
-
+#import "APPLanguage.h"
 #define SIMPLE @"simple"
 #define TRADITIONAL @"Traditional"
 #define ENGLISH @"English"
@@ -105,11 +105,14 @@
                 [[NSUserDefaults standardUserDefaults] setObject:@"zh-Hans-US" forKey:AppLanguage];
                 [[NSUserDefaults standardUserDefaults] synchronize];
             }
+            [APPLanguage currentLanguage].currentLange = @"ZH_CN";
             
         } break;
         case LangTypeTraditional: {
             
             [userDefaults setObject:ENGLISH forKey:LANG];
+            [APPLanguage currentLanguage].currentLange = @"_EN";
+
 
         } break;
 
@@ -123,7 +126,8 @@
             [[NSUserDefaults standardUserDefaults] setObject:@"en" forKey:@"appLanguage"];
             [[NSUserDefaults standardUserDefaults] synchronize];
 
-            
+            [APPLanguage currentLanguage].currentLange = @"_EN";
+
             break;
         }
         case LangTypeKorean: {
@@ -131,7 +135,8 @@
             
             [[NSUserDefaults standardUserDefaults] setObject:KOREAN forKey:LANG];
             NSString *lan =[[NSUserDefaults standardUserDefaults] objectForKey:@"appLanguage"];
-            
+            [APPLanguage currentLanguage].currentLange = @"_KO";
+
             
             [[NSUserDefaults standardUserDefaults] setObject:@"ko" forKey:@"appLanguage"];
             [[NSUserDefaults standardUserDefaults] synchronize];

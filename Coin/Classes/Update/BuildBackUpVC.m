@@ -180,7 +180,7 @@
     //    self.title = [LangSwitcher switchLang:@"我的" key:nil];
     [whiteView addSubview:self.nameLable];
     self.nameLable.textAlignment = NSTextAlignmentCenter;
-    self.nameLable.text = [LangSwitcher switchLang:@"您的恢复词是 在纸上记下他们并安全的保存它" key:nil];
+    self.nameLable.text = [LangSwitcher switchLang:@"您的恢复词是12个，在纸上记下他们并安全的保存它" key:nil];
     [self.nameLable mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(whiteView.mas_top).offset(30);
         make.left.equalTo(whiteView.mas_left).offset(20);
@@ -192,7 +192,7 @@
     //    self.title = [LangSwitcher switchLang:@"我的" key:nil];
     [whiteView addSubview:self.contentLable];
     self.contentLable.textAlignment = NSTextAlignmentLeft;
-    self.contentLable.text = [LangSwitcher switchLang:@"在您的手机丢失或者忘记密码的情况下, 恢复助记词可用于您的钱包或资金。" key:nil];
+    self.contentLable.text = [LangSwitcher switchLang:@"在您的手机丢失或者忘记密码的情况下，恢复词可用于你的钱包或者资金" key:nil];
     [self.contentLable mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.nameLable.mas_bottom).offset(24);
         make.left.equalTo(whiteView.mas_left).offset(20);

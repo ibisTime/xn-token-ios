@@ -18,6 +18,7 @@
 #import "AssetPwdView.h"
 #import "UIButton+Custom.h"
 #import "UIButton+EnLargeEdge.h"
+#import "HTMLStrVC.h"
 @interface RedEnvelopeVC ()<SendRedEnvelopeDelegate,RedEnvelopeHeadDelegate>
 
 @property (nonatomic, strong) NSMutableArray <CurrencyModel *>*currencys;
@@ -54,6 +55,14 @@
         coinVC.currency = model;
         [weakSelf presentViewController:navigation animated:YES completion:nil];
 
+    };
+    _sendView.redPackBlock = ^{
+        HTMLStrVC *htmlVC = [[HTMLStrVC alloc] init];
+        weakSelf.navigationController.navigationBar.hidden = NO;
+        
+        htmlVC.type = HTMLTypeRed_packet_rule;
+        
+        [weakSelf.navigationController pushViewController:htmlVC animated:YES];
     };
     _sendView.delegate = self;
     [self.view addSubview:_sendView];

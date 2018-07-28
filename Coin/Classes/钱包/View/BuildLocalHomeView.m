@@ -110,7 +110,7 @@
         
     }];
    UILabel *content = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextBlack font:16];
-    content.text = [LangSwitcher switchLang:@"只有用户保存私钥" key:nil];
+    content.text = [LangSwitcher switchLang:@"只有用户保护私钥，安全性更高" key:nil];
     [self.topView addSubview:content];
     [content mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(@15);

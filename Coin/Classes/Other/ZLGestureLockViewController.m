@@ -244,36 +244,36 @@
     lab.text = [LangSwitcher switchLang:@"切换登录" key:nil];
     lab.userInteractionEnabled = YES;
     UITapGestureRecognizer *tap1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(otherAccountLogin:)];
-    lab.textAlignment = NSTextAlignmentRight;
+    lab.textAlignment = NSTextAlignmentCenter;
     if (self.isCheck == YES) {
         [self.view addSubview:lab];
         [lab addGestureRecognizer:tap1];
 
     [lab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(@-20);
-        make.top.equalTo(self.gestureLockView.mas_bottom).offset(50);
-        make.width.equalTo(@100);
+        make.top.equalTo(self.gestureLockView.mas_bottom).offset(30);
+        make.left.equalTo(@20);
         make.height.equalTo(@40);
     }];
    }
     
-    UILabel *lab2 = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:14];
-    lab2.text =[LangSwitcher switchLang:@"忘记手势密码?" key:nil];
-    lab2.userInteractionEnabled = YES;
-
-    lab2.textAlignment = NSTextAlignmentLeft;
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(forgetGesturesPassword:)];
-    if (self.isCheck == YES) {
-        [self.view addSubview:lab2];
-        [lab2 addGestureRecognizer:tap];
-
-        [lab2 mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(@20);
-            make.top.equalTo(self.gestureLockView.mas_bottom).offset(50);
-            make.width.equalTo(@100);
-            make.height.equalTo(@40);
-        }];
-    }
+//    UILabel *lab2 = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:14];
+//    lab2.text =[LangSwitcher switchLang:@"忘记手势密码?" key:nil];
+//    lab2.userInteractionEnabled = YES;
+//
+//    lab2.textAlignment = NSTextAlignmentLeft;
+//    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(forgetGesturesPassword:)];
+//    if (self.isCheck == YES) {
+//        [self.view addSubview:lab2];
+//        [lab2 addGestureRecognizer:tap];
+//
+//        [lab2 mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.left.equalTo(@20);
+//            make.top.equalTo(self.gestureLockView.mas_bottom).offset(50);
+//            make.width.equalTo(@100);
+//            make.height.equalTo(@40);
+//        }];
+//    }
    
 }
 

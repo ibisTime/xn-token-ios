@@ -17,6 +17,7 @@
 #import "TLTextField.h"
 #import "CaptchaView.h"
 #import "WalletNewFeaturesVC.h"
+#import "HTMLStrVC.h"
 #define ACCOUNT_HEIGHT 55;
 
 @interface WalletImportVC ()<UITextViewDelegate>
@@ -226,7 +227,7 @@
     self.introduceButton.titleLabel.font = [UIFont systemFontOfSize:16];
     
     [self.introduceButton setTitleColor:kHexColor(@"#007AFF") forState:UIControlStateNormal];
-    [self.introduceButton addTarget:self action:@selector(importNow) forControlEvents:UIControlEventTouchUpInside];
+    [self.introduceButton addTarget:self action:@selector(html5Wallet) forControlEvents:UIControlEventTouchUpInside];
     [self.introduceButton setBackgroundColor:kWhiteColor forState:UIControlStateNormal];
 //    self.introduceButton.layer.borderColor = (kAppCustomMainColor.CGColor);
 //    self.introduceButton.layer.borderWidth = 1;
@@ -380,7 +381,12 @@
 }
 - (void)html5Wallet
 {
+    HTMLStrVC *htmlVC = [[HTMLStrVC alloc] init];
+    self.navigationController.navigationBar.hidden = NO;
     
+    htmlVC.type = HTMLTypeMnemonic;
+    
+    [self.navigationController pushViewController:htmlVC animated:YES];
     
 }
 

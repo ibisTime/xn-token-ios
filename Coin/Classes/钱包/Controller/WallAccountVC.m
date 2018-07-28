@@ -76,13 +76,21 @@
         NSArray *textArr = @[[LangSwitcher switchLang:@"全部" key:nil],
                              [LangSwitcher switchLang:@"充币" key:nil],
                              [LangSwitcher switchLang:@"提币" key:nil],
-                             [LangSwitcher switchLang:@"取现手续费" key:nil]
+                             [LangSwitcher switchLang:@"取现手续费" key:nil],
+                             [LangSwitcher switchLang:@"红包退回" key:nil],
+                             [LangSwitcher switchLang:@"抢红包" key:nil],
+                             [LangSwitcher switchLang:@"发红包" key:nil]
+
                              ];
         
         NSArray *typeArr = @[@"",
                              @"charge",
                              @"withdraw",
-                             @"withdrawfee"];
+                             @"withdrawfee",
+                             @"redpacket_back",
+                             @"sendredpacket_in",
+                             @"sendredpacket_out"
+                             ];
         
         _filterPicker = [[FilterView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
         

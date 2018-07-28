@@ -147,7 +147,7 @@
     
     UILabel *topLable = [UILabel labelWithBackgroundColor:[UIColor colorWithRed:243/255.0 green:244/255.0 blue:247/255.0 alpha:1.0] textColor:kTextColor font:11];
     topLable.numberOfLines = 0;
-    topLable.text = [LangSwitcher switchLang:@"注意! THA不存储用户密码, 无法提供找回或重置功能, 密码必须自己要备份好, 密码用于加密保护私钥, 强度也非常重要。" key:nil];
+    topLable.text = [LangSwitcher switchLang:@"注意！THA不存储用户密码，无法提供找回或重置功能，密码必须要自己备份好。密码用于加密保护私钥，强度也非常重要。" key:nil];
     [whiteView addSubview:topLable];
     [topLable mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(whiteView.mas_left).offset(15);
@@ -206,15 +206,15 @@
     phone4.backgroundColor = kLineColor;
     phone4.frame = CGRectMake(margin*2, rePwdTf.yy, w-30, 1);
     
-    TLTextField *introduceTf = [[TLTextField alloc] initWithFrame:CGRectMake(margin, rePwdTf.yy + 1, w, h) leftTitle:[LangSwitcher switchLang:@"" key:nil] titleWidth:20 placeholder:[LangSwitcher switchLang:@"密码提示信息 (可不填)" key:nil]];
-//    introduceTf.secureTextEntry = YES;
-    [self.view addSubview:introduceTf];
-    self.introduceTf = introduceTf;
-    UIView *phone5 = [[UIView alloc] init];
-    [self.view addSubview:phone5];
-    phone5.backgroundColor = kLineColor;
-    phone5.frame = CGRectMake(margin*2, introduceTf.yy, w-30, 1);
-    
+//    TLTextField *introduceTf = [[TLTextField alloc] initWithFrame:CGRectMake(margin, rePwdTf.yy + 1, w, h) leftTitle:[LangSwitcher switchLang:@"" key:nil] titleWidth:20 placeholder:[LangSwitcher switchLang:@"密码提示信息 (可不填)" key:nil]];
+////    introduceTf.secureTextEntry = YES;
+////    [self.view addSubview:introduceTf];
+//    self.introduceTf = introduceTf;
+//    UIView *phone5 = [[UIView alloc] init];
+//    [self.view addSubview:phone5];
+//    phone5.backgroundColor = kLineColor;
+//    phone5.frame = CGRectMake(margin*2, introduceTf.yy, w-30, 1);
+//
     
     
     self.introduceButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -227,7 +227,7 @@
     self.introduceButton.titleLabel.font = [UIFont systemFontOfSize:12];
     [self.introduceButton setTitleColor:kAppCustomMainColor forState:UIControlStateNormal];
         [self.introduceButton mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(introduceTf.mas_bottom).offset(15);
+            make.top.equalTo(rePwdTf.mas_bottom).offset(15);
             make.left.equalTo(whiteView.mas_left).offset(15);
             make.width.equalTo(@(207));
             make.height.equalTo(@30);
@@ -395,7 +395,7 @@
     HTMLStrVC *htmlVC = [[HTMLStrVC alloc] init];
     self.navigationController.navigationBar.hidden = NO;
 
-    htmlVC.type = HTMLTypeRegProtocol;
+    htmlVC.type = HTMLTypePrivacy;
 
     [self.navigationController pushViewController:htmlVC animated:YES];
     

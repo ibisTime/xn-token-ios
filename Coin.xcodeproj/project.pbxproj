@@ -210,6 +210,7 @@
 		7A8A5DCB20EA7EB8002D9A48 /* GetTheCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A8A5DCA20EA7EB8002D9A48 /* GetTheCell.m */; };
 		7A8A5DCE20EA9CD5002D9A48 /* GetTheModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A8A5DCD20EA9CD5002D9A48 /* GetTheModel.m */; };
 		7A8A5DD120EAA2DE002D9A48 /* InvitationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A8A5DCF20EAA2DB002D9A48 /* InvitationView.m */; };
+		B80D54CB210C84CA005303D5 /* APPLanguage.m in Sources */ = {isa = PBXBuildFile; fileRef = B80D54CA210C84CA005303D5 /* APPLanguage.m */; };
 		B819BAAA20C6DD7800CEEC5E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B819BAA920C6DD7700CEEC5E /* LaunchScreen.storyboard */; };
 		B83D1E0C20CE63A2007835DB /* WalletLocalVc.m in Sources */ = {isa = PBXBuildFile; fileRef = B83D1E0B20CE63A2007835DB /* WalletLocalVc.m */; };
 		B83D1E0F20CE7076007835DB /* WalletForwordVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B83D1E0E20CE7076007835DB /* WalletForwordVC.m */; };
@@ -689,6 +690,8 @@
 		7A8A5DD020EAA2DD002D9A48 /* InvitationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InvitationView.h; sourceTree = "<group>"; };
 		8863748C5281F9DC1DDF8EEA /* Pods-Coin.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Coin.release.xcconfig"; path = "Pods/Target Support Files/Pods-Coin/Pods-Coin.release.xcconfig"; sourceTree = "<group>"; };
 		AB34D27FC9725550E9092EC2 /* Pods-Coin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Coin.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Coin/Pods-Coin.debug.xcconfig"; sourceTree = "<group>"; };
+		B80D54C9210C84CA005303D5 /* APPLanguage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = APPLanguage.h; sourceTree = "<group>"; };
+		B80D54CA210C84CA005303D5 /* APPLanguage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = APPLanguage.m; sourceTree = "<group>"; };
 		B819BAA920C6DD7700CEEC5E /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B83D1E0A20CE63A2007835DB /* WalletLocalVc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WalletLocalVc.h; sourceTree = "<group>"; };
 		B83D1E0B20CE63A2007835DB /* WalletLocalVc.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WalletLocalVc.m; sourceTree = "<group>"; };
@@ -1393,6 +1396,8 @@
 			children = (
 				211DE68F1FB58B4C002FCF3D /* AppConfig.h */,
 				211DE68E1FB58B4C002FCF3D /* AppConfig.m */,
+				B80D54C9210C84CA005303D5 /* APPLanguage.h */,
+				B80D54CA210C84CA005303D5 /* APPLanguage.m */,
 			);
 			path = AppConfig;
 			sourceTree = "<group>";
@@ -2878,6 +2883,7 @@
 				7A8A5DCB20EA7EB8002D9A48 /* GetTheCell.m in Sources */,
 				7A3821BD20EABD1300D6B636 /* GetTheTableView.m in Sources */,
 				211CEF141FCBBF90000FB0C4 /* SelectScrollView.m in Sources */,
+				B80D54CB210C84CA005303D5 /* APPLanguage.m in Sources */,
 				21CB94F01FDC0CAA00CAB090 /* LanguageSettingCell.m in Sources */,
 				B88B59192109AEC400F20D1B /* TLTabBarController.m in Sources */,
 				B8BBA63D20C7F6FC00DC4D5F /* WallAccountVC.m in Sources */,

@@ -21,6 +21,7 @@
 #import "NSString+Check.h"
 #import "CurrencyModel.h"
 #import "RechargeCoinVC.h"
+
 #define ALLPRICE 1000000
 
 @implementation SendRedEnvelopeView
@@ -236,14 +237,49 @@
 
         UIButton *IntoButton = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"塞进红包" key:nil] titleColor:kTextColor6 backgroundColor:SugarPacketsBack titleFont:16];
         kViewRadius(IntoButton, 5);
-        IntoButton.frame = CGRectMake(kWidth(60), kHeight(550), kWidth(255), kHeight(48));
+        IntoButton.frame = CGRectMake(kWidth(60), kHeight(540), kWidth(255), kHeight(48));
         IntoButton.tag = 102;
         [IntoButton addTarget:self action:@selector(ButtonClick:) forControlEvents:(UIControlEventTouchUpInside)];
         [self addSubview:IntoButton];
-
+       
+        UILabel *redIntroduce = [UILabel labelWithBackgroundColor:kClearColor textColor:kWhiteColor font:11];
+        redIntroduce.text = [LangSwitcher switchLang:@"红包规则" key:nil];
+        redIntroduce.userInteractionEnabled = YES;
+        UITapGestureRecognizer * tap1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(centerClick)];
+        [redIntroduce addGestureRecognizer:tap1];
+        [self addSubview:redIntroduce];
+        [redIntroduce mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(IntoButton.mas_bottom).offset(10);
+            make.centerX.equalTo(self.mas_centerX);
+            
+        }];
+        UIImageView *imageV  = [[UIImageView alloc] init];
+        imageV.backgroundColor = kClearColor;
+        
+        UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(centerClick)];
+        [imageV addGestureRecognizer:tap];
+        imageV.userInteractionEnabled = YES;
+        [self addSubview:imageV];
+        imageV.image = kImage(@"问号");
+        [imageV mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(IntoButton.mas_bottom).offset(10);
+            make.left.equalTo(redIntroduce.mas_right).offset(3);
+            make.width.height.equalTo(@14);
+            
+        }];
 
     }
     return self;
+}
+
+- (void)centerClick
+{
+    if (self.redPackBlock) {
+        self.redPackBlock();
+    }
+    
+   
+    
 }
 
 - (void)transformMoney

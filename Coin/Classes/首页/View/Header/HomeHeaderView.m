@@ -261,7 +261,7 @@
 //        make.height.equalTo(@0.5);
 //    }];
     
-    NSArray *textArr = @[@"红包",
+    NSArray *textArr = @[@"发红包",
                          @"首创玩法",
                          @"量化理财",
                          @"余币宝"];

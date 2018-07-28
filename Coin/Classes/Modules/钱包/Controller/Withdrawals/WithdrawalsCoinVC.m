@@ -331,7 +331,7 @@ typedef NS_ENUM(NSInteger, AddressType) {
     
     UILabel *minerPromptLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor3 font:11.0];
     
-    minerPromptLbl.text = [LangSwitcher switchLang:@"手续费将在提币金额中扣除" key:nil];
+    minerPromptLbl.text = [LangSwitcher switchLang:@"矿工费将在可用余额中扣除，余额不足将从转账金额扣除" key:nil];
     
     minerPromptLbl.numberOfLines = 0;
     

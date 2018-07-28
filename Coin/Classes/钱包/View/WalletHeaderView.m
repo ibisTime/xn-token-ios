@@ -695,11 +695,11 @@
 //    if ([LangSwitcher currentLangType] == LangTypeEnglish) {
 //        
 //    }
-    if ([LangSwitcher currentLangType] == LangTypeEnglish) {
-        self.leftFlag.image = kImage(@"NOTICE");
+    if ([LangSwitcher currentLangType] == LangTypeSimple) {
+        self.leftFlag.image = kImage(@"公告");
 
     }else{
-        self.leftFlag.image = kImage(@"公告");
+        self.leftFlag.image = kImage(@"NOTICE");
 
         
     }

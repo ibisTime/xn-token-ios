@@ -28,7 +28,9 @@
         
         self.layer.cornerRadius = 4;
         self.clipsToBounds = YES;
+        self.layer.borderWidth = 1;
         
+        self.layer.borderColor = [UIColor colorWithRed:240/255.0 green:244/255.0  blue:247/255.0  alpha:0.3].CGColor;
         self.iconImageView = [[UIImageView alloc] init];
         [self.contentView addSubview:self.iconImageView];
         self.iconImageView.contentMode = UIViewContentModeScaleAspectFit;

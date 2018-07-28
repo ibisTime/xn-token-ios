@@ -357,9 +357,7 @@
     } else {
         
         
-        self.group.sections = @[
-                                
-                                @[settingModel,accounrModel,language ],
+        self.group.sections = @[ @[settingModel], @[accounrModel,language ],
                                 @[languageSetting,securityCenter,helpModel, abountUs]
                                 ];
         
@@ -369,8 +367,10 @@
 
 - (void)initTableView {
     
-    self.tableView = [[MineTableView alloc] initWithFrame:CGRectMake(0, self.headerView.height, kScreenWidth, kScreenHeight - kTabBarHeight - self.headerView.height) style:UITableViewStyleGrouped];
-    
+    self.tableView = [[MineTableView alloc] initWithFrame:CGRectMake(15, self.headerView.height, kScreenWidth-30, kScreenHeight - kTabBarHeight - self.headerView.height) style:UITableViewStyleGrouped];
+    self.tableView.showsVerticalScrollIndicator = YES;
+    self.tableView.showsHorizontalScrollIndicator = YES;
+
     self.tableView.mineGroup = self.group;
     
 //    self.tableView.tableHeaderView = self.headerView;

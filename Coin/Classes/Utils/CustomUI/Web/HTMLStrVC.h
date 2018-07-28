@@ -14,6 +14,15 @@ typedef NS_ENUM(NSUInteger, HTMLType) {
     HTMLTypeCommonProblem,  //常见问题
     HTMLTypeLinkService,    //联系客服
     HTMLTypeTradeRemind,    //交易提醒
+    HTMLTypeMnemonic,    //什么是助记词
+    HTMLTypeCreate_wallet,    //创建钱包流程
+    HTMLTypeMnemonic_backup,    //如何备份助记词
+    HTMLTypeRed_packet_rule,    //红包规则
+    HTMLTypePrivacy,    //隐私政策
+    HTMLTypeGlobal_master,    // 首创玩法
+    HTMLTypeQuantitative_finance,    //量化理财
+    HTMLTypeYubibao    //余币宝
+
     
 };
 

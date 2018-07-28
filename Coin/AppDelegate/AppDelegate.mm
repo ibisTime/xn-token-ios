@@ -417,6 +417,11 @@
     
     if ([TLUser user].isLogin == YES) {
         //验证手势密码
+        
+      NSString *pwd =  [ZLGestureLockViewController gesturesPassword];
+        if (!pwd) {
+            return;
+        }
         ZLGestureLockViewController *vc = [ZLGestureLockViewController new];
         vc.isCheck = YES;
         TLNavigationController *na = [[TLNavigationController alloc] initWithRootViewController:vc];

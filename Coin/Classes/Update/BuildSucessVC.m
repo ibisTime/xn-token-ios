@@ -9,6 +9,7 @@
 #import "BuildSucessVC.h"
 #import "BuildBackUpVC.h"
 #import "MnemonicUtil.h"
+#import "HTMLStrVC.h"
 @interface BuildSucessVC ()
 
 @property (nonatomic ,strong) UIImageView *iconImage;
@@ -96,7 +97,7 @@
     
     [whiteView addSubview:introduce];
     introduce.numberOfLines = 0;
-    introduce.text = [LangSwitcher switchLang:@"强烈建议您在使用钱包前做好备份,导出助记词存储到安全的地方。然后开始尝试转入小额资金启用" key:nil];
+    introduce.text = [LangSwitcher switchLang:@"强烈建议您在使用钱包前做好备份，导出[助记词]存储到安全的地方。然后开始尝试转入小额资金启用" key:nil];
     introduce.textAlignment = NSTextAlignmentLeft;
     [introduce mas_makeConstraints:^(MASConstraintMaker *make) {
         
@@ -158,8 +159,8 @@
 
     
     self.buildButton = [UIButton buttonWithImageName:nil cornerRadius:6];
-//    NSString *text = [LangSwitcher switchLang:@"立即备份" key:nil];
-    NSString *text = NSLocalizedString(@"备份钱包", nil);
+    NSString *text = [LangSwitcher switchLang:@"备份钱包" key:nil];
+//    NSString *text = NSLocalizedString(@"备份钱包", nil);
 
     [self.buildButton setTitle:text forState:UIControlStateNormal];
     self.buildButton.titleLabel.font = [UIFont systemFontOfSize:16];
@@ -177,8 +178,8 @@
     }];
     
     self.howButton = [UIButton buttonWithImageName:nil cornerRadius:6];
-    //    NSString *text = [LangSwitcher switchLang:@"立即备份" key:nil];
-    NSString *text1 = NSLocalizedString(@"如何备份钱包?", nil);
+        NSString *text1 = [LangSwitcher switchLang:@"如何备份钱包?" key:nil];
+//    NSString *text1 = NSLocalizedString(@"如何备份钱包?", nil);
     
     [self.howButton setTitle:text1 forState:UIControlStateNormal];
     self.howButton.titleLabel.font = [UIFont systemFontOfSize:15];
@@ -311,7 +312,12 @@
 - (void)backUpWalletIntroduce
 {
     
+    HTMLStrVC *htmlVC = [[HTMLStrVC alloc] init];
+    self.navigationController.navigationBar.hidden = NO;
     
+    htmlVC.type = HTMLTypeMnemonic_backup;
+    
+    [self.navigationController pushViewController:htmlVC animated:YES];
     
 }
 - (void)didReceiveMemoryWarning {

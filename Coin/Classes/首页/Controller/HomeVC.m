@@ -31,7 +31,7 @@
 #import "MnemonicUtil.h"
 #import "UIBarButtonItem+convience.h"
 #import "TLPwdRelatedVC.h"
-
+#import "HTMLStrVC.h"
 
 @interface HomeVC ()
 
@@ -249,23 +249,28 @@
             
         case HomeEventsTypeGoodMall:
         {
-            StoreListVC *storeVC = [StoreListVC new];
+            HTMLStrVC *vc = [HTMLStrVC new];
+            vc.type = HTMLTypeGlobal_master;
+//            StoreListVC *storeVC = [StoreListVC new];
             
-            [self.navigationController pushViewController:storeVC animated:YES];
+            [self.navigationController pushViewController:vc animated:YES];
            
         }break;
             
         case HomeEventsTypePosMining:
         {
-            PosMiningVC *posMiningVC = [PosMiningVC new];
-            
-            [self.navigationController pushViewController:posMiningVC animated:YES];
+//            PosMiningVC *posMiningVC = [PosMiningVC new];
+            HTMLStrVC *vc = [HTMLStrVC new];
+            vc.type = HTMLTypeGlobal_master;
+            [self.navigationController pushViewController:vc animated:YES];
         }break;
         case HomeEventsTypeRedEnvelope:
         {
-            GoodMallVC *mallVC = [GoodMallVC new];
+            HTMLStrVC *vc = [HTMLStrVC new];
+            vc.type = HTMLTypeGlobal_master;
+//            GoodMallVC *mallVC = [GoodMallVC new];
             
-            [self.navigationController pushViewController:mallVC animated:YES];
+            [self.navigationController pushViewController:vc animated:YES];
             
 
         }break;
