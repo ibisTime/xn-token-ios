@@ -186,7 +186,7 @@
     [self.popView addSubview:introduce2];
     UILabel *introduce3 = [UILabel labelWithBackgroundColor:kClearColor textColor:kWhiteColor font:14];
     
-    introduce3.frame = CGRectMake(kWidth(120), kHeight(456), kWidth(150), kHeight(22));
+    introduce3.frame = CGRectMake(kWidth(120), kHeight(456), kWidth(180), kHeight(22));
     introduce3.text = [LangSwitcher switchLang:@"扫码二维码领取THA红包" key:nil];
 
     introduce3.textAlignment = NSTextAlignmentCenter;

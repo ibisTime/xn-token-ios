@@ -43,6 +43,7 @@
 #import "TLUserLoginVC.h"
 #import "ChooseCountryVc.h"
 #import "ChangeLocalMoneyVC.h"
+#import "TLChangeNikeName.h"
 @interface TLMineVC ()<MineHeaderSeletedDelegate, UINavigationControllerDelegate>
 
 //@property (nonatomic, strong) FBKVOController *chatKVOCtrl;   czy
@@ -467,7 +468,9 @@
     
     self.headerView.nameLbl.text = [TLUser user].nickname;
     NSRange rang = NSMakeRange(3, 4);
-
+    UITapGestureRecognizer *ta = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(changeNickName)];
+    [self.headerView.nameLbl addGestureRecognizer:ta];
+    
     self.headerView.mobileLbl.text = [NSString stringWithFormat:@"+%@ %@",[[TLUser user].interCode substringFromIndex:2], [[TLUser user].mobile stringByReplacingCharactersInRange:rang withString:@"****"]];
    ;
 
@@ -475,6 +478,17 @@
     self.headerView.levelBtn.hidden = [[TLUser user].level isEqualToString:kLevelOrdinaryTraders] ? YES : NO;
     
 //    [self addUnReadMsgKVO];   czy
+    
+}
+- (void)changeNickName
+{
+    //修改昵称
+    TLChangeNikeName *name = [TLChangeNikeName new];
+    if ([TLUser user].isLogin == YES) {
+        name.text = [TLUser user].nickname;
+        [self.navigationController pushViewController:name animated:YES];
+
+    }
     
 }
 

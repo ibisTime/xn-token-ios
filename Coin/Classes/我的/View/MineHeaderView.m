@@ -92,7 +92,7 @@
     
     //昵称
     self.nameLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextBlack font:30.0];
-    
+    self.nameLbl.userInteractionEnabled = YES;
     [titleView addSubview:self.nameLbl];
     [self.nameLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         

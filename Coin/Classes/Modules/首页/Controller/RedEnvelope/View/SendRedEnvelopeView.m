@@ -272,6 +272,12 @@
     return self;
 }
 
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    
+    [self endEditing:YES];
+}
+
 - (void)centerClick
 {
     if (self.redPackBlock) {

@@ -66,9 +66,9 @@
 //- (BOOL)canPerformAction:(SEL)action withSender:(id)sender
 //{
 //    if(self.isSecurity){
-//        
+//
 //        return NO;
-//        
+//
 //    } else{
 //        return [super canPerformAction:action withSender:sender];
 //    }
@@ -79,7 +79,6 @@
 //    //    if (action == @selector(selectAll:))// 禁止全选
 //    //        return NO;
 //}
-
 
 
 @end

@@ -211,6 +211,7 @@
 		7A8A5DCE20EA9CD5002D9A48 /* GetTheModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A8A5DCD20EA9CD5002D9A48 /* GetTheModel.m */; };
 		7A8A5DD120EAA2DE002D9A48 /* InvitationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A8A5DCF20EAA2DB002D9A48 /* InvitationView.m */; };
 		B80D54CB210C84CA005303D5 /* APPLanguage.m in Sources */ = {isa = PBXBuildFile; fileRef = B80D54CA210C84CA005303D5 /* APPLanguage.m */; };
+		B80D54CE210C9C11005303D5 /* TLChangeNikeName.m in Sources */ = {isa = PBXBuildFile; fileRef = B80D54CD210C9C11005303D5 /* TLChangeNikeName.m */; };
 		B819BAAA20C6DD7800CEEC5E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B819BAA920C6DD7700CEEC5E /* LaunchScreen.storyboard */; };
 		B83D1E0C20CE63A2007835DB /* WalletLocalVc.m in Sources */ = {isa = PBXBuildFile; fileRef = B83D1E0B20CE63A2007835DB /* WalletLocalVc.m */; };
 		B83D1E0F20CE7076007835DB /* WalletForwordVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B83D1E0E20CE7076007835DB /* WalletForwordVC.m */; };
@@ -692,6 +693,8 @@
 		AB34D27FC9725550E9092EC2 /* Pods-Coin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Coin.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Coin/Pods-Coin.debug.xcconfig"; sourceTree = "<group>"; };
 		B80D54C9210C84CA005303D5 /* APPLanguage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = APPLanguage.h; sourceTree = "<group>"; };
 		B80D54CA210C84CA005303D5 /* APPLanguage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = APPLanguage.m; sourceTree = "<group>"; };
+		B80D54CC210C9C11005303D5 /* TLChangeNikeName.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLChangeNikeName.h; sourceTree = "<group>"; };
+		B80D54CD210C9C11005303D5 /* TLChangeNikeName.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLChangeNikeName.m; sourceTree = "<group>"; };
 		B819BAA920C6DD7700CEEC5E /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B83D1E0A20CE63A2007835DB /* WalletLocalVc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WalletLocalVc.h; sourceTree = "<group>"; };
 		B83D1E0B20CE63A2007835DB /* WalletLocalVc.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WalletLocalVc.m; sourceTree = "<group>"; };
@@ -2107,6 +2110,8 @@
 				B8C2057B20CFA3FC00952765 /* WalletAddressDetailVC.m */,
 				B8D9290D20EA58290026A3DF /* ChangeLocalMoneyVC.h */,
 				B8D9290E20EA58290026A3DF /* ChangeLocalMoneyVC.m */,
+				B80D54CC210C9C11005303D5 /* TLChangeNikeName.h */,
+				B80D54CD210C9C11005303D5 /* TLChangeNikeName.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2751,6 +2756,7 @@
 				B8F63EE020D3809700556150 /* LocalBillDetailTableView.m in Sources */,
 				21205CD61FCD0435003C6C7C /* FansModel.m in Sources */,
 				216F5B1A206CD9C900F2C832 /* TradeFlowTableView.m in Sources */,
+				B80D54CE210C9C11005303D5 /* TLChangeNikeName.m in Sources */,
 				B8B15C1F20CA752900F13220 /* QHCollectionViewNine.m in Sources */,
 				216F5B3C206CD9DA00F2C832 /* BannerModel.m in Sources */,
 				216F5B4F206CE7A600F2C832 /* StoreListVC.m in Sources */,

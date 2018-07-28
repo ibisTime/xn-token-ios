@@ -17,11 +17,26 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = kBackgroundColor;
-    
+//    [LangSwitcher currentLang];
     self.title = [LangSwitcher switchLang:@"一键划转" key:nil];
-    self.placeholderView = [TLPlaceholderView placeholderViewWithImage:nil text:[LangSwitcher switchLang:@"敬请期待!" key:nil] textColor:kTextColor];
+    UIImageView *image =   [UIImageView new];
+    image.contentMode = UIViewContentModeScaleToFill;
+    if ([LangSwitcher currentLangType] == LangTypeKorean) {
+        image.image = kImage(@"洞悉-一键划转--韩文");
+
+
+    }else{
+        image.image = kImage(@"洞悉一键划转");
+
+    }
+    [self.view addSubview:image];
     
-        [self.view addSubview:self.placeholderView];
+    [image mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(UIEdgeInsetsZero);
+    }];
+//    self.placeholderView = [TLPlaceholderView placeholderViewWithImage:nil text:[LangSwitcher switchLang:@"敬请期待!" key:nil] textColor:kTextColor];
+//
+//        [self.view addSubview:self.placeholderView];
     // Do any additional setup after loading the view.
 }
 

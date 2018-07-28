@@ -50,53 +50,76 @@
             make.bottom.right.equalTo(@-5);
         }];
         UILabel *nameLabel;
-        if (kDevice_Is_iPhoneX) {
-             nameLabel = [[UILabel alloc]initWithFrame:CGRectMake(kWidth(35), kHeight(260), kWidth(kScreenWidth - 70), kHeight(20))];
-        }else{
-            
-            nameLabel = [[UILabel alloc]initWithFrame:CGRectMake(kWidth(35), kHeight(260), kWidth(kScreenWidth - 70-20), kHeight(20))];
-        }
+//        if (kDevice_Is_iPhoneX) {
+//             nameLabel = [[UILabel alloc]initWithFrame:CGRectMake(kWidth(35), kHeight(260), kWidth(kScreenWidth - 70), kHeight(20))];
+//        }else{
+//            
+//            nameLabel = [[UILabel alloc]initWithFrame:CGRectMake(kWidth(35), kHeight(260), kWidth(kScreenWidth - 70-20), kHeight(20))];
+//        }
+        nameLabel = [UILabel new];
         self.nameLabel = nameLabel;
         nameLabel.text = [TLUser user].nickname;
         nameLabel.textAlignment = NSTextAlignmentCenter;
         nameLabel.font = Font(14);
         nameLabel.textColor = kTextColor5;
         [self addSubview:nameLabel];
+        [nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(_headImage.mas_bottom).offset(20);
+            make.centerX.equalTo(self.mas_centerX);
+        }];
         UILabel *stateLabel;
-        if (kDevice_Is_iPhoneX) {
-            stateLabel = [[UILabel alloc]initWithFrame:CGRectMake(kWidth(35), kHeight(284), kWidth(kScreenWidth - 70), kHeight(22))];
-        }else{
-            stateLabel = [[UILabel alloc]initWithFrame:CGRectMake(kWidth(35), kHeight(284), kWidth(kScreenWidth - 70-20), kHeight(22))];
-            
-        }
+//        if (kDevice_Is_iPhoneX) {
+//            stateLabel = [[UILabel alloc]initWithFrame:CGRectMake(kWidth(35), kHeight(284), kWidth(kScreenWidth - 70), kHeight(22))];
+//        }else{
+//            stateLabel = [[UILabel alloc]initWithFrame:CGRectMake(kWidth(35), kHeight(284), kWidth(kScreenWidth - 70-20), kHeight(22))];
+//
+//        }
+        
+        stateLabel = [UILabel new];
+        [self addSubview:stateLabel];
+
+        [stateLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(nameLabel.mas_bottom).offset(20);
+            make.centerX.equalTo(self.mas_centerX);
+        }];
         self.stateLabel = stateLabel;
         stateLabel.text = [LangSwitcher switchLang:@"给您发了一个红包" key:nil];
         stateLabel.textAlignment = NSTextAlignmentCenter;
         stateLabel.font = Font(16);
         stateLabel.textColor = [UIColor whiteColor];
-        [self addSubview:stateLabel];
 
         UILabel *detailedLabel;
-        if (kDevice_Is_iPhoneX) {
-            detailedLabel = [[UILabel alloc]initWithFrame:CGRectMake(kWidth(35), kHeight(336), kWidth(kScreenWidth - 70), kHeight(33))];
-        }else{
-            
-            detailedLabel = [[UILabel alloc]initWithFrame:CGRectMake(kWidth(35), kHeight(336), kWidth(kScreenWidth - 70), kHeight(33))];
-        }
+        detailedLabel = [UILabel new];
+        [self addSubview:detailedLabel];
+
+        [detailedLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(stateLabel.mas_bottom).offset(20);
+            make.centerX.equalTo(self.mas_centerX);
+        }];
+//        if (kDevice_Is_iPhoneX) {
+//            detailedLabel = [[UILabel alloc]initWithFrame:CGRectMake(kWidth(35), kHeight(336), kWidth(kScreenWidth - 70), kHeight(33))];
+//        }else{
+//
+//            detailedLabel = [[UILabel alloc]initWithFrame:CGRectMake(kWidth(35), kHeight(336), kWidth(kScreenWidth - 70-70), kHeight(33))];
+//        }
         detailedLabel.text = self.content;
         self.detailedLabel = detailedLabel;
         detailedLabel.textAlignment = NSTextAlignmentCenter;
         detailedLabel.font = boldFont(20);
         detailedLabel.textColor = kTextColor7;
-        [self addSubview:detailedLabel];
 
 
         _shoreButton  = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"分享" key:nil] titleColor:kTextColor6 backgroundColor:kClearColor titleFont:0];
-        _shoreButton.frame = CGRectMake(kScreenWidth/2 - kHeight(45), kHeight(400), kHeight(90), kHeight(90));
+//        _shoreButton.frame = CGRectMake(kScreenWidth/2 - kHeight(45), kHeight(400), kHeight(90), kHeight(90));
         _shoreButton.titleLabel.font = boldFont(20);
         [_shoreButton setBackgroundImage:kImage(@"圆 按钮") forState:(UIControlStateNormal)];
         [self addSubview:_shoreButton];
         
+        [_shoreButton mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(stateLabel.mas_bottom).offset(50);
+            make.centerX.equalTo(self.mas_centerX);
+            make.width.height.equalTo(@(kHeight(90)));
+        }];
 
     }
     return self;
