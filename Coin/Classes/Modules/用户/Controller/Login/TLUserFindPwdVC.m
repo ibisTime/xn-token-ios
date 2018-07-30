@@ -70,7 +70,7 @@
     [super viewDidLoad];
     
     if ([TLUser user].loginPwdFlag == 1) {
-        self.title = [LangSwitcher switchLang:@"修改登录密码" key:nil];
+        self.title = [LangSwitcher switchLang:@"找回登录密码" key:nil];
         
     }else{
         self.title = [LangSwitcher switchLang:@"设置登录密码" key:nil];

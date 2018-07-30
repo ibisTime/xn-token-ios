@@ -215,7 +215,7 @@
 "暂无地址" = "No address";
 "请输入标签" = "Please enter label";
 "向认证账户提现将不再输入资金密码、谷歌验证码" = "Withdrawal to the authentication account will no longer enter the fund password, Google verification code";
-"安全设置" = "security settings";
+"账户与安全" = "security settings";
 "资金密码" = "Capital password";
 "语言设置" = "Language Settings";
 "退出登录" = "Log out";

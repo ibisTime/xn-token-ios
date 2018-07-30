@@ -15,6 +15,9 @@ typedef NS_ENUM(NSInteger,ZLUnlockType) {
 
 @interface ZLGestureLockViewController : TLBaseVC
 @property (nonatomic ,assign) BOOL isCheck;
+
+@property (nonatomic ,copy) void (^ CheckSucessBlock) ();
+
 + (void)deleteGesturesPassword;//删除手势密码
 + (NSString *)gesturesPassword;//获取手势密码
 

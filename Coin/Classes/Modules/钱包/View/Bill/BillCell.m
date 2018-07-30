@@ -186,14 +186,14 @@
     if (money > 0) {
         
         moneyStr = [NSString stringWithFormat:@"+%@ %@",countStr , billModel.currency];
-        self.moneyLbl.textColor = kHexColor(@"#FE4F4F");
+        self.moneyLbl.textColor = kHexColor(@"#47D047");
 
         self.iconIV.image = kImage(@"充值");
 
 //        [self.iconIV sd_setImageWithURL:[NSURL URLWithString:[coin.pic2 convertImageUrl]]];
 
     } else if (money <= 0) {
-        self.moneyLbl.textColor = kHexColor(@"#47D047");
+        self.moneyLbl.textColor = kHexColor(@"#FE4F4F");
 
         moneyStr = [NSString stringWithFormat:@"%@ %@", countStr, billModel.currency];
 

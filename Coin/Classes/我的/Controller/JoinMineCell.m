@@ -40,7 +40,8 @@
     [self addSubview:self.nameLab];
     [self.nameLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.equalTo(@15);
-        
+        make.left.equalTo(@15);
+
     }];
     
     self.contentLab = [UILabel labelWithBackgroundColor:kWhiteColor textColor:kTextColor2 font:15];

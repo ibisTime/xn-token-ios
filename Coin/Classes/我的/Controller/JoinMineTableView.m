@@ -42,7 +42,6 @@ static NSString *identifierCell = @"JoinMineCell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     JoinMineCell *cell = [tableView dequeueReusableCellWithIdentifier:identifierCell forIndexPath:indexPath];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
 
     cell.model = self.models[indexPath.section];
     
@@ -55,10 +54,12 @@ static NSString *identifierCell = @"JoinMineCell";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
+//    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+
     if ([self.refreshDelegate respondsToSelector:@selector(refreshTableView:didSelectRowAtIndexPath:)]) {
         [self.refreshDelegate refreshTableView:self didSelectRowAtIndexPath:indexPath];
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
     }
-//    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     
 }
@@ -70,7 +71,7 @@ static NSString *identifierCell = @"JoinMineCell";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     
-    return 10;
+    return 0.1;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {

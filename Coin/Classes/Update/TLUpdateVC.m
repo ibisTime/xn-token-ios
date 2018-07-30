@@ -16,6 +16,7 @@
 #import "BuildWalletMineVC.h"
 #import "TLUserLoginVC.h"
 #import "CountryModel.h"
+#import "ZLGestureLockViewController.h"
 @interface TLUpdateVC ()
 @property (nonatomic,strong) NSMutableArray <CountryModel *>*countrys;
 
@@ -291,6 +292,8 @@
             
             [UIApplication sharedApplication].keyWindow.rootViewController = tabBarCtrl;
 
+            
+
         };
         CoinWeakSelf;
         loginVC.NeedLogin = YES;
@@ -305,8 +308,28 @@
 //        [self presentViewController:nav animated:YES completion:nil];
         return;
     }
+    ZLGestureLockViewController *vc = [ZLGestureLockViewController new];
+    vc.isCheck = YES;
+    
+    TLNavigationController *na = [[TLNavigationController alloc] initWithRootViewController:vc];
+    BOOL isLanch  = [[NSUserDefaults standardUserDefaults] boolForKey:@"isLanch"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    NSString *word = [ZLGestureLockViewController gesturesPassword];
+    if (word.length >0) {
+        [self presentViewController:na animated:YES completion:nil];
+        vc.CheckSucessBlock = ^{
+            [UIApplication sharedApplication].keyWindow.rootViewController = tabBarCtrl;
 
-    [UIApplication sharedApplication].keyWindow.rootViewController = tabBarCtrl;
+        };
+    }else{
+        
+        [UIApplication sharedApplication].keyWindow.rootViewController = tabBarCtrl;
+
+    }
+    
+    
+
 
 }
 

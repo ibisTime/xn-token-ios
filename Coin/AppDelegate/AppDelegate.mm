@@ -430,7 +430,7 @@
         if (isLanch == YES) {
             return;
         }
-        self.window.rootViewController = na;
+        [self.window.rootViewController presentViewController:na animated:YES completion:nil];
         
     }
     

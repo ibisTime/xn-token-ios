@@ -170,13 +170,22 @@
     
 }
 
+
+- (void)payMoney
+{
+    if (self.forgetBlock) {
+        self.forgetBlock();
+    }
+    
+    
+}
 - (void)hideSelf
 {
     if (self.HiddenBlock) {
         self.HiddenBlock();
     }
-    self.hidden = YES;
-    [self removeFromSuperview];
+//    self.hidden = YES;
+//    [self removeFromSuperview];
 }
 /*
 // Only override drawRect: if you perform custom drawing.

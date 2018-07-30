@@ -44,6 +44,7 @@
 #import "ChooseCountryVc.h"
 #import "ChangeLocalMoneyVC.h"
 #import "TLChangeNikeName.h"
+#import "BuildWalletMineVC.h"
 @interface TLMineVC ()<MineHeaderSeletedDelegate, UINavigationControllerDelegate>
 
 //@property (nonatomic, strong) FBKVOController *chatKVOCtrl;   czy
@@ -208,9 +209,32 @@
             };
             return ;
         }
-        WalletSettingVC *settingVC = [WalletSettingVC new];
-
-        [weakSelf.navigationController pushViewController:settingVC animated:YES];
+        
+        TLDataBase *dataBase = [TLDataBase sharedManager];
+        NSString *word;
+        if ([dataBase.dataBase open]) {
+            NSString *sql = [NSString stringWithFormat:@"SELECT Mnemonics from THAWallet where userId = '%@'",[TLUser user].userId];
+            //        [sql appendString:[TLUser user].userId];
+            FMResultSet *set = [dataBase.dataBase executeQuery:sql];
+            while ([set next])
+            {
+                word = [set stringForColumn:@"Mnemonics"];
+                
+            }
+            [set close];
+        }
+        [dataBase.dataBase close];
+        if (word.length > 0) {
+            WalletSettingVC *settingVC = [WalletSettingVC new];
+            
+            [weakSelf.navigationController pushViewController:settingVC animated:YES];
+        }else{
+            
+            BuildWalletMineVC *settingVC = [BuildWalletMineVC new];
+            
+            [weakSelf.navigationController pushViewController:settingVC animated:YES];
+        }
+       
     };
     
     //语言设置

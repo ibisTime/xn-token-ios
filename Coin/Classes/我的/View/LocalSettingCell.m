@@ -1,26 +1,21 @@
 //
-//  SettingCell.m
-//  YS_iOS
+//  LocalSettingCell.m
+//  Coin
 //
-//  Created by 蔡卓越 on 2017/6/8.
-//  Copyright © 2017年 cuilukai. All rights reserved.
+//  Created by shaojianfei on 2018/7/30.
+//  Copyright © 2018年 chengdai. All rights reserved.
 //
 
-#import "SettingCell.h"
-
+#import "LocalSettingCell.h"
 #import "TLUIHeader.h"
 #import "AppColorMacro.h"
 
-@interface SettingCell ()
-
-
-
+@interface LocalSettingCell()
 @property (nonatomic, strong) UIImageView *accessoryImageView;
 
+
 @end
-
-@implementation SettingCell
-
+@implementation LocalSettingCell
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
@@ -73,7 +68,7 @@
         //开关
         UISwitch *sw = [[UISwitch alloc] init];
         [sw addTarget:self action:@selector(switchAction:) forControlEvents:UIControlEventValueChanged];
-
+        
         [self addSubview:sw];
         [sw mas_makeConstraints:^(MASConstraintMaker *make) {
             
@@ -90,7 +85,7 @@
         [line mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.mas_left).offset(15);
             make.right.equalTo(self.mas_right).offset(-15);
-
+            
             make.height.equalTo(@1);
             make.bottom.equalTo(self.mas_bottom).offset(-1);
         }];
@@ -101,18 +96,18 @@
 }
 
 - (void)setSettingModel:(SettingModel *)settingModel {
-    if (self.iconImageView.hidden == YES) {
-        [self.titleLbl mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self.mas_left).offset(20);
-            
-            make.centerY.equalTo(self.contentView.mas_centerY);
-            make.right.lessThanOrEqualTo(self.accessoryImageView.mas_left);
-        }];
-    }else{
+//    if (self.iconImageView.hidden == YES) {
+//        [self.titleLbl mas_remakeConstraints:^(MASConstraintMaker *make) {
+//            make.left.equalTo(self.mas_left).offset(20);
+//
+//            make.centerY.equalTo(self.contentView.mas_centerY);
+//            make.right.lessThanOrEqualTo(self.accessoryImageView.mas_left);
+//        }];
+//    }else{
         self.iconImageView.image = [UIImage imageNamed:settingModel.imgName];
-
         
-    }
+        
+//    }
     self.titleLbl.text = settingModel.text;
     self.rightLabel.text = settingModel.subText;
     
@@ -139,7 +134,7 @@
             self.SwitchBlock(sw.on);
         }
         NSLog(@"关闭开关");
-
+        
     }
     
 }

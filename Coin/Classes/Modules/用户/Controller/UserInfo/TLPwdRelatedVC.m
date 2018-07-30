@@ -29,7 +29,11 @@
 @property (nonatomic ,strong) UIButton *accessoryImageView;
 @property (nonatomic ,strong) UIImageView *pic;
 @property (nonatomic,strong) NSMutableArray <CountryModel *>*countrys;
+@property (nonatomic, strong) UIImageView *bgImage;
 
+@property (nonatomic, strong) UIButton *backButton;
+
+@property (nonatomic, strong) UILabel *nameLable;
 
 @end
 
@@ -49,6 +53,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = kWhiteColor;
+//    [self initTop];
+
     [self setUpUI];
     [self loadData];
     if ([TLUser user].mobile) {
@@ -78,6 +84,47 @@
         self.title = [LangSwitcher switchLang:@"设置资金密码" key:nil];
 
     }
+    
+}
+
+- (void)initTop
+{
+    
+    
+    if(self.type == TLPwdTypeForget) {
+        self.backButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
+        self.backButton.frame = CGRectMake(15, kStatusBarHeight+5, 40, 40);
+        [self.backButton setImage:kImage(@"返回1-1") forState:(UIControlStateNormal)];
+        [self.backButton addTarget:self action:@selector(buttonClick) forControlEvents:(UIControlEventTouchUpInside)];
+        [self.view addSubview:self.backButton];
+        self.nameLable = [[UILabel alloc]initWithFrame:CGRectMake(54, kStatusBarHeight+5, kScreenWidth - 108, 44)];
+        self.nameLable.text = [LangSwitcher switchLang:@"忘记密码" key:nil];
+        self.nameLable.textAlignment = NSTextAlignmentCenter;
+        self.nameLable.font = Font(16);
+        self.nameLable.textColor = kTextBlack;
+        [self.view addSubview:self.nameLable];
+        
+    } else if (self.type == TLPwdTypeReset) {
+        
+        self.nameLable.text = [LangSwitcher switchLang:@"修改登录密码" key:nil];
+        
+    } else if (self.type == TLPwdTypeTradeReset) {
+        
+        self.nameLable.text = [LangSwitcher switchLang:@"修改资金密码" key:nil];
+        
+    } else if (self.type == TLPwdTypeSetTrade) {
+        
+        self.nameLable.text = [LangSwitcher switchLang:@"设置资金密码" key:nil];
+        
+    }
+
+    
+}
+
+- (void)buttonClick
+{
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
     
 }
 

@@ -19,6 +19,7 @@
 #import "UIButton+Custom.h"
 #import "UIButton+EnLargeEdge.h"
 #import "HTMLStrVC.h"
+#import "TLPwdRelatedVC.h"
 @interface RedEnvelopeVC ()<SendRedEnvelopeDelegate,RedEnvelopeHeadDelegate>
 
 @property (nonatomic, strong) NSMutableArray <CurrencyModel *>*currencys;
@@ -32,9 +33,16 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
+    self.navigationController.navigationBarHidden = YES;
     [self LoadData];
     
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    self.navigationController.navigationBarHidden = NO;
+
 }
 
 - (void)viewDidLoad {
@@ -61,8 +69,8 @@
         weakSelf.navigationController.navigationBar.hidden = NO;
         
         htmlVC.type = HTMLTypeRed_packet_rule;
-        
-        [weakSelf.navigationController pushViewController:htmlVC animated:YES];
+        [weakSelf presentViewController:htmlVC animated:YES completion:nil];
+//        [weakSelf.navigationController pushViewController:htmlVC animated:YES];
     };
     _sendView.delegate = self;
     [self.view addSubview:_sendView];
@@ -70,7 +78,16 @@
     self.pwdView = pwdView;
     pwdView.HiddenBlock = ^{
         self.pwdView.hidden = YES;
-        [self.pwdView removeFromSuperview];
+//        [self.pwdView removeFromSuperview];
+    };
+    self.pwdView.forgetBlock = ^{
+        
+        
+        TLPwdRelatedVC *vc  = [[TLPwdRelatedVC alloc] initWithType:TLPwdTypeForget];
+
+        [weakSelf.navigationController pushViewController:vc animated:YES];
+        
+        
     };
     pwdView.hidden = YES;
     pwdView.frame = self.view.bounds;
@@ -117,7 +134,7 @@
     CoinWeakSelf;
     self.pwdView.passwordBlock = ^(NSString *password) {
         if ([password isEqualToString:@""]) {
-            [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入支付密码" key:nil]];
+            [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入资金密码" key:nil]];
             return ;
         }
         
@@ -131,7 +148,7 @@
         http.parameters[@"greeting"] = greeting;
         http.parameters[@"tradePwd"] = password;
         [http postWithSuccess:^(id responseObject) {
-            weakSelf.pwdView.hidden = YES;
+//            weakSelf.pwdView.hidden = YES;
             [weakSelf.pwdView.password clearText];
             RedEnvelopeShoreVC *vc = [RedEnvelopeShoreVC new];
             vc.code = responseObject[@"data"][@"code"];
@@ -163,6 +180,7 @@
     switch (tag) {
         case 0:
         {
+            [self.navigationController popViewControllerAnimated:YES];
             [self dismissViewControllerAnimated:YES completion:nil];
         }
             break;

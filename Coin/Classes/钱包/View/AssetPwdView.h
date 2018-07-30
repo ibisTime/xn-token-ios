@@ -14,6 +14,9 @@
 
 @property (nonatomic, copy) void(^passwordBlock)(NSString *password);
 
+@property (nonatomic, copy) void(^forgetBlock)();
+
+
 @property (nonatomic, copy) void(^HiddenBlock)();
 
 @end

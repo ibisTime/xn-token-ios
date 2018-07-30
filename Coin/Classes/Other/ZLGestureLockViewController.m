@@ -302,17 +302,22 @@
                 self.statusLabel.text = @"密码正确";
                 [self.gestureLockView clearAll];
                 [TLAlert alertWithSucces:@"验证通过"];
+                
+                if (self.CheckSucessBlock) {
+                    self.CheckSucessBlock();
+                }
+                
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    TLTabBarController *tabBarCtrl = [[TLTabBarController alloc] init];
-                     [UIApplication sharedApplication].keyWindow.rootViewController = tabBarCtrl;
+                    [self dismissViewControllerAnimated:YES completion:nil];
                     return ;
                 });
 
             }else{
                 
-                self.statusLabel.text = @"密码错误，请重新输入";
+//                self.statusLabel.text = @"密码错误，请重新输入";
+                [self validateGesturesPassword:gesturesPassword];
                 [self.gestureLockView showErrowMessage];
-                
+
                 [self shakeAnimationForView:self.statusLabel];
                 return ;
 
@@ -458,7 +463,18 @@
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     // 重新登陆
-    NSLog(@"重新登陆");
+    [[NSNotificationCenter defaultCenter] postNotificationName:kUserLoginOutNotification object:nil];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
+        if ([TLUser user].isLogin == NO) {
+            TLUserLoginVC *lg = [TLUserLoginVC new];
+            lg.IsAPPJoin = YES;
+            TLNavigationController *na = [[TLNavigationController alloc] initWithRootViewController:lg];
+            
+            [UIApplication sharedApplication].keyWindow.rootViewController = na;
+        }
+        
+    });
 }
 
 

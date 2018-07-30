@@ -109,7 +109,7 @@
     CGFloat btnMargin = 15;
     
     TLTextField *nameTf = [[TLTextField alloc] initWithFrame:CGRectMake(margin, textView.yy+5, w, h) leftTitle:[LangSwitcher switchLang:@"" key:nil] titleWidth:20 placeholder:[LangSwitcher switchLang:@"钱包名称" key:nil]];
-    nameTf.secureTextEntry = YES;
+//    nameTf.secureTextEntry = YES;
     
     [self.view addSubview:nameTf];
     self.nameTf = nameTf;
@@ -384,7 +384,7 @@
     HTMLStrVC *htmlVC = [[HTMLStrVC alloc] init];
     self.navigationController.navigationBar.hidden = NO;
     
-    htmlVC.type = HTMLTypeMnemonic;
+    htmlVC.type = HTMLTypePrivacy;
     
     [self.navigationController pushViewController:htmlVC animated:YES];
     

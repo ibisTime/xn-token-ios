@@ -33,12 +33,14 @@
 #import "TLUserLoginVC.h"
 #import "TLGestureVC.h"
 #import "ZLGestureLockViewController.h"
-
+#import "LocalSettingTableView.h"
 @interface SettingVC ()
 
 @property (nonatomic, strong) SettingGroup *group;
 @property (nonatomic, strong) UIButton *loginOutBtn;
-@property (nonatomic, strong) SettingTableView *tableView;
+//@property (nonatomic, strong) SettingTableView *tableView;
+@property (nonatomic, strong) LocalSettingTableView *tableView;
+
 
 //
 @property (nonatomic, strong) SettingModel *realNameSettingModel;
@@ -75,7 +77,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = [LangSwitcher switchLang:@"安全设置" key:nil];
+    self.title = [LangSwitcher switchLang:@"账户与安全" key:nil];
     [self initTableView];
 
     [self setGroup];
@@ -102,13 +104,13 @@
     [self.backButton addTarget:self action:@selector(buttonClick) forControlEvents:(UIControlEventTouchUpInside)];
     [self.bgImage addSubview:self.backButton];
     self.nameLable = [[UILabel alloc]initWithFrame:CGRectMake(54, kStatusBarHeight+5, kScreenWidth - 108, 44)];
-    self.nameLable.text = [LangSwitcher switchLang:@"安全设置" key:nil];
+    self.nameLable.text = [LangSwitcher switchLang:@"账户与安全" key:nil];
     self.nameLable.textAlignment = NSTextAlignmentCenter;
     self.nameLable.font = Font(16);
     self.nameLable.textColor = kTextBlack;
     [self.bgImage addSubview:self.nameLable];
     
-    self.tableView = [[SettingTableView alloc] initWithFrame:CGRectMake(15, kHeight(90), kScreenWidth-30, kHeight(400)) style:UITableViewStyleGrouped];
+    self.tableView = [[LocalSettingTableView alloc] initWithFrame:CGRectMake(15, kHeight(90), kScreenWidth-30, kHeight(400)) style:UITableViewStyleGrouped];
     
     self.tableView.group = self.group;
     self.tableView.backgroundColor = kWhiteColor;
@@ -149,6 +151,7 @@
     
     //资金密码
     SettingModel *changeTradePwd = [SettingModel new];
+    
     changeTradePwd.text = [LangSwitcher switchLang:@"资金密码" key:nil];
     [changeTradePwd setAction:^{
         
@@ -271,7 +274,7 @@
     }];
     
     self.group = [SettingGroup new];
-    self.group.sections = @[@[changeTradePwd,bindEmail,google], @[changeLoginPwd,languageSetting]];
+    self.group.sections = @[@[changeTradePwd,google,bindEmail], @[changeLoginPwd,languageSetting]];
     self.tableView.group = self.group;
 
 }

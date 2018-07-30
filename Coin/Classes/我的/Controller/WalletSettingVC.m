@@ -12,6 +12,8 @@
 #import "SettingTableView.h"
 #import "EditEmailVC.h"
 #import "WalletDelectVC.h"
+#import "BuildSucessVC.h"
+#import "TLTabBarController.h"
 @interface WalletSettingVC ()
 @property (nonatomic, strong) SettingGroup *group;
 @property (nonatomic, strong) SettingTableView *tableView;
@@ -81,11 +83,40 @@
 
 - (void)importNow
 {
-    CheckForwordVC *authVC = [CheckForwordVC new];
-    authVC.WalletType = WalletWordTypeThree;
+    WalletDelectVC *authVC = [WalletDelectVC new];
+//    authVC.WalletType = WalletWordTypeThree;
     authVC.title = [LangSwitcher switchLang:@"删除钱包" key:nil];
-    
-    [self.navigationController pushViewController:authVC animated:YES];
+    [TLAlert alertWithTitle:[LangSwitcher switchLang:@"请输入交易密码" key:nil]
+                        msg:@""
+                 confirmMsg:[LangSwitcher switchLang:@"确定" key:nil]
+                  cancleMsg:[LangSwitcher switchLang:@"取消" key:nil]
+                placeHolder:[LangSwitcher switchLang:@"请输入交易密码" key:nil]
+                      maker:self cancle:^(UIAlertAction *action) {
+                          
+                      } confirm:^(UIAlertAction *action, UITextField *textField) {
+                          TLDataBase *dataBase = [TLDataBase sharedManager];
+                          NSString *word;
+                          if ([dataBase.dataBase open]) {
+                              NSString *sql = [NSString stringWithFormat:@"SELECT PwdKey from THAWallet where userId = '%@'",[TLUser user].userId];
+                              //        [sql appendString:[TLUser user].userId];
+                              FMResultSet *set = [dataBase.dataBase executeQuery:sql];
+                              while ([set next])
+                              {
+                                  word = [set stringForColumn:@"PwdKey"];
+                                  
+                              }
+                              [set close];
+                          }
+                          [dataBase.dataBase close];
+                          if ([word isEqualToString:textField.text]) {
+                              [self deleteWallet];
+                          }else{
+                              [TLAlert alertWithError:@"交易密码错误"];
+                              
+                          }
+//                          [self confirmWithdrawalsWithPwd:textField.text];
+
+                      }];
     
 }
 
@@ -149,14 +180,49 @@
     //实名认证
     SettingModel *idAuth = [SettingModel new];
     idAuth.text = [LangSwitcher switchLang:@"钱包备份" key:nil];
+    BuildSucessVC *vc =[BuildSucessVC new];
+    vc.title = [LangSwitcher switchLang:@"钱包备份" key:nil];
     [idAuth setAction:^{
         
-        CheckForwordVC *authVC = [CheckForwordVC new];
-        authVC.IsCopy = YES;
-        authVC.WalletType = WalletWordTypeSecond;
-        authVC.title = [LangSwitcher switchLang:@"钱包备份" key:nil];
-        
-        [weakSelf.navigationController pushViewController:authVC animated:YES];
+        [TLAlert alertWithTitle:[LangSwitcher switchLang:@"请输入交易密码" key:nil]
+                            msg:@""
+                     confirmMsg:[LangSwitcher switchLang:@"确定" key:nil]
+                      cancleMsg:[LangSwitcher switchLang:@"取消" key:nil]
+                    placeHolder:[LangSwitcher switchLang:@"请输入交易密码" key:nil]
+                          maker:self cancle:^(UIAlertAction *action) {
+                              
+                          } confirm:^(UIAlertAction *action, UITextField *textField) {
+                              TLDataBase *dataBase = [TLDataBase sharedManager];
+                              NSString *word;
+                              if ([dataBase.dataBase open]) {
+                                  NSString *sql = [NSString stringWithFormat:@"SELECT PwdKey from THAWallet where userId = '%@'",[TLUser user].userId];
+                                  //        [sql appendString:[TLUser user].userId];
+                                  FMResultSet *set = [dataBase.dataBase executeQuery:sql];
+                                  while ([set next])
+                                  {
+                                      word = [set stringForColumn:@"PwdKey"];
+                                      
+                                  }
+                                  [set close];
+                              }
+                              [dataBase.dataBase close];
+                              if ([word isEqualToString:textField.text]) {
+                                  [self.navigationController pushViewController:vc animated:YES];
+                              }else{
+                                  [TLAlert alertWithError:@"交易密码错误"];
+                                  
+                              }
+//                              if (word || word.length > 0) {
+//                                  walletName.text = [LangSwitcher switchLang:word key:nil];
+//
+//                              }else{
+//                                  walletName.text = [LangSwitcher switchLang:@"钱包名称" key:nil];
+//
+//
+//                              }
+                              //                          [self confirmWithdrawalsWithPwd:textField.text];
+                              
+                          }];
         
     }];
     
@@ -221,6 +287,67 @@
     
     self.group = [SettingGroup new];
     self.group.sections = @[@[walletName,changeTradePwd], @[idAuth]];
+    
+}
+- (void)deleteWallet
+{
+    
+    TLDataBase *dataBase = [TLDataBase sharedManager];
+    NSString *word;
+    if ([dataBase.dataBase open]) {
+        
+        
+        NSString *sql = [NSString stringWithFormat:@"SELECT Mnemonics from THAWallet where userId = '%@'",[TLUser user].userId];
+        //        [sql appendString:[TLUser user].userId];
+        FMResultSet *set = [dataBase.dataBase executeQuery:sql];
+        while ([set next])
+        {
+            word = [set stringForColumn:@"Mnemonics"];
+            
+        }
+        [set close];
+    }
+    [dataBase.dataBase close];
+    if (!word) {
+        return;
+    }
+    
+    [TLAlert alertWithTitle:@"删除钱包" msg:@"请确保助记伺已保存妥善" confirmMsg:@"确定" cancleMsg:@"取消" maker:self cancle:^(UIAlertAction *action) {
+        
+        
+    } confirm:^(UIAlertAction *action) {
+        
+        TLDataBase *db = [TLDataBase sharedManager];
+        
+        if ([db.dataBase open]) {
+            NSString *Sql2 =[NSString stringWithFormat:@"delete from LocalWallet WHERE walletId = (SELECT walletId from THAWallet where userId='%@')",[TLUser user].userId];
+            
+            BOOL sucess2  = [db.dataBase executeUpdate:Sql2];
+            NSLog(@"删除自选表%d",sucess2);
+            
+            NSString *Sql =[NSString stringWithFormat:@"delete from THAWallet WHERE userId = '%@'",[TLUser user].userId];
+            
+            BOOL sucess  = [db.dataBase executeUpdate:Sql];
+            
+            NSLog(@"删除钱包表%d",sucess);
+            
+            
+        }
+        
+        [db.dataBase close];
+        //                [[NSUserDefaults standardUserDefaults] removeObjectForKey:KWalletWord];
+        //                [[NSUserDefaults standardUserDefaults] removeObjectForKey:KWalletAddress];
+        //                [[NSUserDefaults standardUserDefaults] removeObjectForKey:KWalletPrivateKey];
+        //                [[NSUserDefaults standardUserDefaults] synchronize];
+        [TLAlert alertWithMsg:@"删除成功"];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            
+            TLTabBarController *MineVC = [[TLTabBarController alloc] init];
+            
+            [UIApplication sharedApplication].keyWindow.rootViewController = MineVC;
+        });
+    }];
+    
     
 }
 

@@ -184,13 +184,36 @@
     introduce2.text = [LangSwitcher switchLang:@"给您发了一个红包" key:nil];
 
     [self.popView addSubview:introduce2];
+    [introduce2 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(@(introduce.yy));
+        make.centerX.equalTo(self.popView.mas_centerX);
+        
+    }];
     UILabel *introduce3 = [UILabel labelWithBackgroundColor:kClearColor textColor:kWhiteColor font:14];
     
-    introduce3.frame = CGRectMake(kWidth(120), kHeight(456), kWidth(180), kHeight(22));
+//    introduce3.frame = CGRectMake(kWidth(120), kHeight(456), kScreenWidth - kWidth(120), kHeight(22));
     introduce3.text = [LangSwitcher switchLang:@"扫码二维码领取THA红包" key:nil];
 
     introduce3.textAlignment = NSTextAlignmentCenter;
     [self.popView addSubview:introduce3];
+    [introduce3 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(@(kHeight(456)));
+        make.centerX.equalTo(self.popView.mas_centerX);
+        
+    }];
+    UILabel *introduce4 = [UILabel labelWithBackgroundColor:kClearColor textColor:kWhiteColor font:14];
+    
+//    introduce4.frame = CGRectMake(kWidth(120), kHeight(456), kScreenWidth - kWidth(120), kHeight(22));
+    introduce4.text = [LangSwitcher switchLang:@"截图分享二维码" key:nil];
+    
+    introduce4.textAlignment = NSTextAlignmentCenter;
+    [self.popView addSubview:introduce4];
+    [introduce4 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(self.popView.mas_bottom).offset(-50-(kBottomInsetHeight));
+        make.centerX.equalTo(self.popView.mas_centerX);
+
+
+    }];
 
 }
 

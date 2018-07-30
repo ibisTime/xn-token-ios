@@ -144,6 +144,8 @@
     UILabel *localLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kWhiteColor font:14.0];
     
     localLbl.text = [LangSwitcher switchLang:@"私钥钱包" key:nil];
+    
+    
     self.localLbl = localLbl;
     [self.bottomIV addSubview:localLbl];
     UIImageView *imageView  = [[UIImageView alloc] init];
@@ -170,6 +172,21 @@
     UILabel *LocalMoney = [UILabel labelWithBackgroundColor:kClearColor textColor:kWhiteColor font:30.0];
     
     self.LocalMoney = LocalMoney;
+    if ([TLUser user].localMoney) {
+        if ([[TLUser user].localMoney isEqualToString:@"CNY"] ) {
+            self.LocalMoney.text = @"¥0.00";
+            
+        }else{
+            self.LocalMoney.text = @"$0.00";
+            
+            
+        }
+    }else{
+        
+        self.LocalMoney.text = @"¥0.00";
+
+    }
+    
     [self.bottomIV addSubview:LocalMoney];
     [LocalMoney mas_makeConstraints:^(MASConstraintMaker *make) {
         

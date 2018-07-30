@@ -213,6 +213,8 @@
 		B80D54CB210C84CA005303D5 /* APPLanguage.m in Sources */ = {isa = PBXBuildFile; fileRef = B80D54CA210C84CA005303D5 /* APPLanguage.m */; };
 		B80D54CE210C9C11005303D5 /* TLChangeNikeName.m in Sources */ = {isa = PBXBuildFile; fileRef = B80D54CD210C9C11005303D5 /* TLChangeNikeName.m */; };
 		B819BAAA20C6DD7800CEEC5E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B819BAA920C6DD7700CEEC5E /* LaunchScreen.storyboard */; };
+		B83666F3210EAF480065DF18 /* LocalSettingTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = B83666F2210EAF470065DF18 /* LocalSettingTableView.m */; };
+		B83666F6210EC0610065DF18 /* LocalSettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B83666F5210EC0610065DF18 /* LocalSettingCell.m */; };
 		B83D1E0C20CE63A2007835DB /* WalletLocalVc.m in Sources */ = {isa = PBXBuildFile; fileRef = B83D1E0B20CE63A2007835DB /* WalletLocalVc.m */; };
 		B83D1E0F20CE7076007835DB /* WalletForwordVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B83D1E0E20CE7076007835DB /* WalletForwordVC.m */; };
 		B842D5D520E91AA900891289 /* ChooseCountryVc.m in Sources */ = {isa = PBXBuildFile; fileRef = B842D5D420E91AA900891289 /* ChooseCountryVc.m */; };
@@ -696,6 +698,10 @@
 		B80D54CC210C9C11005303D5 /* TLChangeNikeName.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLChangeNikeName.h; sourceTree = "<group>"; };
 		B80D54CD210C9C11005303D5 /* TLChangeNikeName.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLChangeNikeName.m; sourceTree = "<group>"; };
 		B819BAA920C6DD7700CEEC5E /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		B83666F1210EAF470065DF18 /* LocalSettingTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocalSettingTableView.h; sourceTree = "<group>"; };
+		B83666F2210EAF470065DF18 /* LocalSettingTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocalSettingTableView.m; sourceTree = "<group>"; };
+		B83666F4210EC0610065DF18 /* LocalSettingCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocalSettingCell.h; sourceTree = "<group>"; };
+		B83666F5210EC0610065DF18 /* LocalSettingCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocalSettingCell.m; sourceTree = "<group>"; };
 		B83D1E0A20CE63A2007835DB /* WalletLocalVc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WalletLocalVc.h; sourceTree = "<group>"; };
 		B83D1E0B20CE63A2007835DB /* WalletLocalVc.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WalletLocalVc.m; sourceTree = "<group>"; };
 		B83D1E0D20CE7076007835DB /* WalletForwordVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WalletForwordVC.h; sourceTree = "<group>"; };
@@ -877,6 +883,10 @@
 				2E5F33A8202BF25F00B2F263 /* TLLeftRightView.m */,
 				B88B093120C908DC005C2D2F /* ResiseTextFiled.h */,
 				B88B093220C908DC005C2D2F /* ResiseTextFiled.m */,
+				B83666F1210EAF470065DF18 /* LocalSettingTableView.h */,
+				B83666F2210EAF470065DF18 /* LocalSettingTableView.m */,
+				B83666F4210EC0610065DF18 /* LocalSettingCell.h */,
+				B83666F5210EC0610065DF18 /* LocalSettingCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2769,6 +2779,7 @@
 				B89783D720F6FB310088C713 /* TLUserFindPwdVC.m in Sources */,
 				2159796A1FB82BC10029F177 /* CustomPickerView.m in Sources */,
 				216F5AFA206CD1B400F2C832 /* CoinChangeView.m in Sources */,
+				B83666F3210EAF480065DF18 /* LocalSettingTableView.m in Sources */,
 				216F5B19206CD9C900F2C832 /* TradeFlowModel.m in Sources */,
 				211D3C181FCFE3C100B55F9F /* HistoryRateCell.m in Sources */,
 				211A34DE1FB4245D00FEB71F /* MineCell.m in Sources */,
@@ -2798,6 +2809,7 @@
 				2EB039AD1FE8EDE300589D8E /* UserInfo.m in Sources */,
 				7A8A5DD120EAA2DE002D9A48 /* InvitationView.m in Sources */,
 				B8CA7D4920CBA22800A0E93C /* WalletImportVC.m in Sources */,
+				B83666F6210EC0610065DF18 /* LocalSettingCell.m in Sources */,
 				216F5B39206CD9DA00F2C832 /* HomeVC.m in Sources */,
 				216F5B3F206CD9DA00F2C832 /* HomeHeaderView.m in Sources */,
 				B8B15C2920CA75CC00F13220 /* AddNumberModel.m in Sources */,

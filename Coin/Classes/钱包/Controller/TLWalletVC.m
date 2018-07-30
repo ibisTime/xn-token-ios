@@ -415,6 +415,8 @@
     }];
     f = f - f1;
     self.currentTableView = [[TLAccountTableView alloc] initWithFrame:CGRectMake(0, kHeight(f)+kStatusBarHeight, kScreenWidth, kScreenHeight - kTabBarHeight - kHeight(f3)) style:UITableViewStyleGrouped];
+    self.currentTableView.contentInset = UIEdgeInsetsMake(0, 0, kTabBarHeight, 0);
+
     self.currentTableView.backgroundColor = kWhiteColor;
 //    self.currentTableView.tableHeaderView = self.titleView;
 //    self.currentTableView.tableHeaderView.height = 40;
@@ -449,8 +451,8 @@
     [self.titleView removeFromSuperview];
     self.leftButton = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"闪兑" key:nil] titleColor:kHexColor(@"#333333") backgroundColor:kWhiteColor titleFont:14.0];
     [self.leftButton setImage:kImage(@"闪兑") forState:UIControlStateNormal];
-//    self.leftButton.layer.borderWidth = 0.2;
-//    self.leftButton.layer.borderColor = kHexColor(@"#ABC0D9").CGColor;
+    self.leftButton.layer.borderWidth = 0.2;
+    self.leftButton.layer.borderColor = kHexColor(@"#ABC0D9").CGColor;
     self.rightButton = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"一键划转" key:nil] titleColor:kHexColor(@"#333333") backgroundColor:kWhiteColor titleFont:14.0];
     [self.rightButton setImage:kImage(@"一键划转") forState:UIControlStateNormal];
     [self.leftButton addTarget:self action:@selector(fast) forControlEvents:UIControlEventTouchUpInside];
@@ -496,15 +498,15 @@
     self.addButton.hidden= YES;
 
 //    addButton.hidden = YES;
-//    self.rightButton.layer.borderWidth = 0.2;
-//    self.rightButton.layer.borderColor = kHexColor(@"#ABC0D9").CGColor;
+    self.rightButton.layer.borderWidth = 0.2;
+    self.rightButton.layer.borderColor = kHexColor(@"#ABC0D9").CGColor;
     [self.rightButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 0)];
     
     [self.leftButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view.mas_left).offset(15);
         make.top.equalTo(self.headerView.mas_bottom).offset(8);
         make.width.equalTo(@(kWidth(167.5)));
-        make.height.equalTo(@(kHeight(50)));
+        make.height.equalTo(@(kHeight(40)));
         
     }];
     
@@ -513,7 +515,7 @@
         make.left.equalTo(self.leftButton.mas_right).offset(10);
         make.top.equalTo(self.headerView.mas_bottom).offset(8);
         make.width.equalTo(@(kWidth(167.5)));
-        make.height.equalTo(@(kHeight(50)));
+        make.height.equalTo(@(kHeight(40)));
         
     }];
     [self.rightButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 0)];
@@ -529,7 +531,7 @@
 //        make.height.equalTo(@30);
 //    }];
     self.tableView = [[PlatformTableView alloc] initWithFrame:CGRectMake(0, kHeight(f)+kStatusBarHeight, kScreenWidth, kScreenHeight - kTabBarHeight - kHeight(f3)) style:UITableViewStyleGrouped];
-    
+    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, kTabBarHeight, 0);
     self.tableView.backgroundColor = kWhiteColor;
     self.tableView.refreshDelegate = self;
     [self.view addSubview:self.tableView];
@@ -592,11 +594,11 @@
 
         [self.leftButton setImage:kImage(@"闪兑") forState:UIControlStateNormal];
         [self.rightButton setImage:kImage(@"一键划转") forState:UIControlStateNormal];
-//        self.leftButton.layer.borderWidth = 0.5;
-//
-//        self.leftButton.layer.borderColor = kHexColor(@"#ABC0D9").CGColor;
-//        self.rightButton.layer.borderWidth = 0.5;
-//        self.rightButton.layer.borderColor = kHexColor(@"#ABC0D9").CGColor;
+        self.leftButton.layer.borderWidth = 0.5;
+
+        self.leftButton.layer.borderColor = kHexColor(@"#ABC0D9").CGColor;
+        self.rightButton.layer.borderWidth = 0.5;
+        self.rightButton.layer.borderColor = kHexColor(@"#ABC0D9").CGColor;
         CGFloat f = self.isClear == YES ?318 : 338;
 //        self.contentView.hidden = YES;
 //        [self inreoduceView:@"个人账户" content:@"个人账户就是指中心化钱包,是由THA替您保管私钥,在中心化钱包中,不存在钱包丢失了无法找回的情况,可以通过身份证找回您的钱包,并且可以让您体验到更多的服务。"];
@@ -664,10 +666,10 @@
             [self.rightButton setImage:kImage(@"划转-秘钥") forState:UIControlStateNormal];
 //            [self.tabBarController.tabBar setHidden:NO];
 
-//            self.leftButton.layer.borderWidth = 0.5;
-//            self.leftButton.layer.borderColor = kHexColor(@"#D1B3AB").CGColor;
-//            self.rightButton.layer.borderWidth = 0.5;
-//            self.rightButton.layer.borderColor = kHexColor(@"#D1B3AB").CGColor;
+            self.leftButton.layer.borderWidth = 0.5;
+            self.leftButton.layer.borderColor = kHexColor(@"#D1B3AB").CGColor;
+            self.rightButton.layer.borderWidth = 0.5;
+            self.rightButton.layer.borderColor = kHexColor(@"#D1B3AB").CGColor;
             
             CGFloat f = self.isClear == YES ?318 : 338;
             

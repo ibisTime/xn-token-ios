@@ -114,8 +114,7 @@
             
         case HTMLTypeCommonProblem: {
             
-            ckey = @"questions";
-            
+             ckey = [NSString stringWithFormat:@"questions_%@",[APPLanguage currentLanguage].currentLange];
             name = [LangSwitcher switchLang: @"帮助中心" key:nil];
             
         } break;
@@ -209,7 +208,7 @@
 {
     
     [self.navigationController popViewControllerAnimated:YES];
-    
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 - (void)initWebView {
    

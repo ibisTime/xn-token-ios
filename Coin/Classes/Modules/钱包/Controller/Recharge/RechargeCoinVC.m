@@ -108,8 +108,18 @@
 
 - (void)initQRView {
     
-    self.qrView = [[UIView alloc] initWithFrame:CGRectMake(0, self.topView.yy, kScreenWidth, 275)];
+   
     
+    
+    self.qrView = [[UIView alloc] initWithFrame:CGRectMake(0, self.topView.yy, kScreenWidth, 275)];
+     UILabel *lab = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextBlack font:16];
+    [self.qrView addSubview:lab];
+    lab.text = @"我的收款地址";
+    [lab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.qrView.mas_top).offset(10);
+        make.centerX.equalTo(self.qrView.mas_centerX);
+     
+    }];
     self.qrView.backgroundColor = kHexColor(@"#F1F2F5");
     UIImageView *bgImage = [[UIImageView alloc] init];
     [self.qrView addSubview:bgImage];

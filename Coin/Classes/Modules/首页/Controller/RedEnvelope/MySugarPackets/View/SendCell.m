@@ -57,9 +57,9 @@
 //    NSLog(@"%@",getModel);
     nameLabel.text = [NSString stringWithFormat:@"%@",sendModel.sendUserNickname];
     timeLabel.text = [sendModel.createDateTime convertRedDate] ;
-    headImage.image = kImage(@"普通红包");
-//    [headImage sd_setImageWithURL:[NSURL URLWithString:[sendModel.sendUserPhoto convertImageUrl]] placeholderImage:kImage(@"普通红包")];
+//    headImage.image = kImage(@"头像");
+    [headImage sd_setImageWithURL:[NSURL URLWithString:[sendModel.sendUserPhoto convertImageUrl]] placeholderImage:kImage(@"普通红包")];
     priceLabel.text = [NSString stringWithFormat:@"%@ %@",sendModel.totalCount,sendModel.symbol];
-    TheValueLabel.text = [NSString stringWithFormat:@"≈%@元",sendModel.totalCountCNY];
+//    TheValueLabel.text = [NSString stringWithFormat:@"≈%@元",sendModel.totalCountCNY];
 }
 @end

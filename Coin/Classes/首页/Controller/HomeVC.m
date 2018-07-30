@@ -231,16 +231,17 @@
                 pwdRelatedVC.success = ^{
                     
                     
-                    [self presentViewController:redEnvelopeVC animated:YES completion:nil];
-                    
+//                    [self presentViewController:redEnvelopeVC animated:YES completion:nil];
+                    [self.navigationController pushViewController:redEnvelopeVC animated:YES];
+
                 };
                 [self.navigationController pushViewController:pwdRelatedVC animated:YES];
                 
                 
             }else{
                 
-                [self presentViewController:redEnvelopeVC animated:YES completion:nil];
-                
+                [self.navigationController pushViewController:redEnvelopeVC animated:YES];
+
                 
             }
 

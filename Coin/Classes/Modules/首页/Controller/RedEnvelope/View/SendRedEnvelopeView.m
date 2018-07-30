@@ -418,7 +418,7 @@
     }];
     
     UILabel *sureLab = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextBlack font:20];
-    sureLab.text = [LangSwitcher switchLang:@"确认付款" key:nil];
+    sureLab.text = [LangSwitcher switchLang:@"立即付款" key:nil];
     [whiteView addSubview:sureLab];
     [sureLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(whiteView.mas_top).offset(50);
@@ -474,7 +474,7 @@
     [sureButton setBackgroundColor:kHexColor(@"#FFB25B") forState:UIControlStateNormal];
     [sureButton setTitleColor:kHexColor(@"#A75E02 ") forState:UIControlStateNormal];
     [whiteView addSubview:sureButton];
-    [sureButton setTitle:[LangSwitcher switchLang:@"确认付款" key:nil] forState:UIControlStateNormal];
+    [sureButton setTitle:[LangSwitcher switchLang:@"立即付款" key:nil] forState:UIControlStateNormal];
     [sureButton addTarget:self action:@selector(payMoney) forControlEvents:UIControlEventTouchUpInside];
     
     [sureButton mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -491,8 +491,8 @@
     
     [UIView animateWithDuration:0.5 animations:^{
         self.view1.hidden = YES;
-        self.view1.frame = CGRectZero;
-        [self.view1 removeFromSuperview];
+//        self.view1.frame = CGRectZero;
+//        [self.view1 removeFromSuperview];
         
     }];
 }
@@ -501,8 +501,8 @@
 {
     
     self.view1.hidden = YES;
-    self.view1.frame = CGRectZero;
-    [self.view1 removeFromSuperview];
+//    self.view1.frame = CGRectZero;
+//    [self.view1 removeFromSuperview];
     [UIView animateWithDuration:0.5 animations:^{
         
         [_delegate SendRedEnvelopeButton:102 currency:_currency type:_type count:_count sendNum:_sendNum greeting:_greeting];

@@ -110,7 +110,7 @@
         
     }];
    UILabel *content = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextBlack font:16];
-    content.text = [LangSwitcher switchLang:@"只有用户保护私钥，安全性更高" key:nil];
+    content.text = [LangSwitcher switchLang:@"只有用户保存私钥" key:nil];
     [self.topView addSubview:content];
     [content mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(@15);
@@ -227,8 +227,8 @@
     [self.importButton setTitleColor:kHexColor(@"#FF6953") forState:UIControlStateNormal];
     [self.importButton addTarget:self action:@selector(importWallet) forControlEvents:UIControlEventTouchUpInside];
     [self.importButton setBackgroundColor:kWhiteColor forState:UIControlStateNormal];
-    self.importButton.layer.borderColor = (kHexColor(@"#FF6953").CGColor);
-    self.importButton.layer.borderWidth = 1;
+//    self.importButton.layer.borderColor = (kHexColor(@"#FF6953").CGColor);
+//    self.importButton.layer.borderWidth = 1;
     self.importButton.clipsToBounds = YES;
     [self addSubview:self.importButton];
     [self.importButton mas_makeConstraints:^(MASConstraintMaker *make) {

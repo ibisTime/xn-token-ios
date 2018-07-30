@@ -57,12 +57,13 @@
                                             font:Font(14)
                                        textColor:kTextBlack];
         self.detailLbl.numberOfLines = 0;
-        self.detailLbl.height = [FONT(14) lineHeight];
+//        self.detailLbl.height = [FONT(14) lineHeight];
         [self addSubview:self.detailLbl];
         
         [self.detailLbl mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.mas_top).offset(17);
             make.left.equalTo(self.iconIV.mas_right).offset(15);
+            make.width.equalTo(@(kScreenWidth -130));
             //            make.right.equalTo(rightArrowIV.mas_left).offset(-15);
             
         }];
@@ -113,15 +114,17 @@
         }];
         self.introduceLab = [UILabel labelWithFrame:CGRectZero textAligment:NSTextAlignmentLeft
                                  backgroundColor:[UIColor clearColor]
-                                            font:Font(11)
+                                            font:Font(12)
                                        textColor:kTextColor3];
         self.introduceLab.numberOfLines = 0;
-        self.introduceLab.height = [FONT(14) lineHeight];
+//        self.introduceLab.height = [FONT(14) lineHeight];
         [self addSubview:self.introduceLab];
         
         [self.introduceLab mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.dayLbl.mas_bottom).offset(3);
             make.left.equalTo(self.iconIV.mas_right).offset(15);
+            make.right.equalTo(self.mas_right).offset(-15);
+
             
             //            make.right.equalTo(rightArrowIV.mas_left).offset(-15);
             
@@ -185,13 +188,14 @@
     
     CoinModel *coin = [CoinUtil getCoinModel:self.currencyModel.symbol];
     if ([billModel.direction isEqualToString:@"1"]) {
-        self.moneyLbl.textColor = kHexColor(@"#FE4F4F");
+        self.moneyLbl.textColor = kHexColor(@"#47D047");
+
          self.moneyLbl.text = [NSString stringWithFormat:@"+%@ %@",countStr , self.currencyModel.symbol];
         self.introduceLab.text = [NSString stringWithFormat:@"%@-%@",[LangSwitcher switchLang:@"收款-外部地址" key:nil],billModel.from];
         
     } else
     {
-        self.moneyLbl.textColor = kHexColor(@"#47D047");
+        self.moneyLbl.textColor = kHexColor(@"#FE4F4F");
 
          self.moneyLbl.text = [NSString stringWithFormat:@"-%@ %@", countStr, self.currencyModel.symbol];
          self.introduceLab.text = [NSString stringWithFormat:@"%@-%@",[LangSwitcher switchLang:@"转账-外部地址" key:nil],billModel.to];

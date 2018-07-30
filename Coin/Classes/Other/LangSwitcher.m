@@ -111,7 +111,7 @@
         case LangTypeTraditional: {
             
             [userDefaults setObject:ENGLISH forKey:LANG];
-            [APPLanguage currentLanguage].currentLange = @"_EN";
+            [APPLanguage currentLanguage].currentLange = @"EN";
 
 
         } break;
@@ -126,7 +126,7 @@
             [[NSUserDefaults standardUserDefaults] setObject:@"en" forKey:@"appLanguage"];
             [[NSUserDefaults standardUserDefaults] synchronize];
 
-            [APPLanguage currentLanguage].currentLange = @"_EN";
+            [APPLanguage currentLanguage].currentLange = @"EN";
 
             break;
         }
@@ -135,7 +135,7 @@
             
             [[NSUserDefaults standardUserDefaults] setObject:KOREAN forKey:LANG];
             NSString *lan =[[NSUserDefaults standardUserDefaults] objectForKey:@"appLanguage"];
-            [APPLanguage currentLanguage].currentLange = @"_KO";
+            [APPLanguage currentLanguage].currentLange = @"KO";
 
             
             [[NSUserDefaults standardUserDefaults] setObject:@"ko" forKey:@"appLanguage"];
