@@ -67,7 +67,6 @@
 "请填写数量" = "Please fill in the quantity";
 "矿工费" = "Miner's fee";
 "更多" = "more";
-"矿工费将在可用余额中扣除,余额不足将从转账金额中扣除" = "";
 "扫描二维码" = "Scan two-dimensional code ";
 "粘贴地址" = "paste address";
 "接收地址" = "receive address";
@@ -281,7 +280,7 @@
 "塞进红包" = "PREPARE RED PACKET";
 "红包个数" = "Quantity";
 "red_package_sub_total" = "Token amount";
-"代币" = "Token";
+"代币类型" = "Token";
 "代币总额" = "Token amount";
 "单个数量" = "Token single";
 "我的红包" = "My red packet";
@@ -491,8 +490,27 @@
 "印度尼西亚" = "Indonesia";
 "马来西亚" = "Malaysia";
 "韩国" = "South Korea";
+"我的收款地址"="My payment address";
+"个人账户就是指中心化钱包,是由THA替您保管私钥,在中心化钱包中,不存在钱包丢失了无法找回的情况,可以通过身份证找回您的钱包,并且可以让您体验到更多的服务。" = "개인계정은 탈중심화 지갑이고 THA에서 대신 프라이빗키를 보관하고 있습니다. 중심화된 지갑에서는 지갑분실시 되찾을수 있어서 인증만 통과하면 되찾을수 있고 그외 더욱많은 서비스를 이용할수 있습니다.";
+"私钥钱包就是去中心化钱包,在去中心化钱包中,所有的用户身份验证内容,如交易密码,私钥，助记词等都保存在用户手机本地,并不是保存在中心化服务器里面,如果用户误删钱包,忘记备份私钥或者助记词，将无法找到钱包" = "프라이빗 지갑은 탈중심화 지갑이고 탈중심화 지갑관련 모든 신상정보,거래비밀번호,프라이빗키,복구키등 모든 내용은 사용자의 핸드폰에 저장되고 중심화된 서버에 저장되지 않습니다.만약 사용자 실수로 지급을 삭제시 또한 백업해논 프라이빗키 혹은 복구키도 분실되면 지갑은 되찾을수 없습니다.";
 
-
+"隐私政策" = "Privacy Policy";
+"美元" = "Dollar";
+"有矿工费" = "There's mining fee.";
+"转账速度慢" = "The transaction rate is slow.";
+"强烈建议您在使用钱包钱做好备份，导出[助记词]存储到安全的地方,然后开始尝试转入小额资金启用" = "We are highly recommending you  that prepare a backup with wallet asset, export [mnemonics] to a safe place, and then start with using a tinny fund as start up.";
+"如何备份钱包" = "How to back up your wallet";
+"在您的手机丢失或者忘记密码的情况下，助记词可用于你的钱包或者资金。" = "In case your phone loses or forgets your password, mnemonics can be used for your wallet or money.";
+"复制收款地址" = "Copy a collection address";
+"至少连接N个点，请重新绘制" = "At least Connect n dots,please redraw again";
+"密码错误，还剩N次机会" = "Wrong password, n time chance left";
+"红包退回" = "Red Envelopes returned";
+"抢红包" = "Grab a red envelope";
+"资金密码错误" = "Money Password Error";
+"币种列表" = "List of currencies";
+//"抢红包" = "Grab a red envelope";
+"请输入交易密码" = "Please enter the trading password.";
+"欢迎回来" = "Welcome back!";
 
 
 

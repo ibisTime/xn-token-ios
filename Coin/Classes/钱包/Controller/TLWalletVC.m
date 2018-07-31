@@ -370,7 +370,7 @@
     
     content.text = [LangSwitcher switchLang:contents key:nil];
     
-    UIButton *sureButton = [UIButton buttonWithTitle:@"确定" titleColor:kWhiteColor backgroundColor:kAppCustomMainColor titleFont:16];
+    UIButton *sureButton = [UIButton buttonWithTitle:@"确认" titleColor:kWhiteColor backgroundColor:kAppCustomMainColor titleFont:16];
     
     [contentText addSubview:sureButton];
     sureButton.layer.cornerRadius = 4.0;

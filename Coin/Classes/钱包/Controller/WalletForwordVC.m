@@ -339,7 +339,7 @@ typedef NS_ENUM(NSInteger, WalletAddressType) {
     self.minerFeeTF = [[TLTextField alloc] initWithFrame:CGRectMake(0, self.tranAmountTF.yy + 10, kScreenWidth-100, heightMargin)
                                                leftTitle:[LangSwitcher switchLang:@"矿工费" key:nil]
                                               titleWidth:80
-                                             placeholder:[LangSwitcher switchLang:@"矿工费将在可用余额中扣除,余额不足将从转账金额中扣除" key:nil]];
+                                             placeholder:[LangSwitcher switchLang:@"矿工费将在可用余额中扣除，余额不足将从转账金额扣除" key:nil]];
     
     self.minerFeeTF.enabled = NO;
     

@@ -114,7 +114,7 @@
     self.qrView = [[UIView alloc] initWithFrame:CGRectMake(0, self.topView.yy, kScreenWidth, 275)];
      UILabel *lab = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextBlack font:16];
     [self.qrView addSubview:lab];
-    lab.text = @"我的收款地址";
+    lab.text = [LangSwitcher switchLang:@"我的收款地址" key:nil];
     [lab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.qrView.mas_top).offset(10);
         make.centerX.equalTo(self.qrView.mas_centerX);

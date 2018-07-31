@@ -188,7 +188,9 @@ typedef NS_ENUM(NSInteger, AddressType) {
                                             placeholder:[LangSwitcher switchLang:@"请输入付币地址或扫码" key:nil]];
     
     self.balanceTF.textColor = kHexColor(@"#109ee9");
-    self.balanceTF.leftLbl.font = [UIFont systemFontOfSize:11];
+    self.balanceTF.leftLbl.font = [UIFont systemFontOfSize:13];
+    self.balanceTF.font = [UIFont systemFontOfSize:11];
+    
     //    NSString *leftAmount = [self.currency.amountString subNumber:self.currency.frozenAmountString];
     //
     //    NSString *currentCurrency = self.currency.currency;

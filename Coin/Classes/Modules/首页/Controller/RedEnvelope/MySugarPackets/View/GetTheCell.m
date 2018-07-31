@@ -60,7 +60,7 @@
 {
     NSLog(@"%@",getModel);
     NSDictionary *redPacketInfo = getModel.redPacketInfo;
-    nameLabel.text = [NSString stringWithFormat:@"来自 %@",redPacketInfo[@"sendUserNickname"]];
+    nameLabel.text = [NSString stringWithFormat:@"%@ %@",[LangSwitcher switchLang:@"来自" key:nil],redPacketInfo[@"sendUserNickname"]];
     timeLabel.text = [getModel.createDatetime convertRedDate];
 
     [headImage sd_setImageWithURL:[NSURL URLWithString:[redPacketInfo[@"sendUserPhoto"] convertImageUrl ] ] placeholderImage:kImage(@"头像")];

@@ -182,7 +182,7 @@
     UILabel *statusLabel = [[UILabel alloc]initWithFrame:CGRectMake((self.view.frame.size.width - 200) * 0.5, f3 +10, 200, 30)];
     statusLabel.textAlignment = NSTextAlignmentCenter;
     
-    statusLabel.text = self.isCheck == YES ? @"请输入手势密码" :@"绘制手势密码";
+    statusLabel.text = self.isCheck == YES ? [LangSwitcher switchLang:@"请输入手势密码" key:nil] :[LangSwitcher switchLang:@"绘制手势密码" key:nil] ;
     statusLabel.font = [UIFont systemFontOfSize:14];
     statusLabel.textColor = kTextColor2;
     [self.view addSubview:statusLabel];
@@ -285,7 +285,7 @@
     if (self.lastGesturePsw.length == 0) {
         
         if (gesturesPassword.length < 4) {
-            self.statusLabel.text = @"至少连接四个点，请重新输入";
+            self.statusLabel.text = [LangSwitcher switchLang:@"至少连接四个点，请重新输入" key:nil];
             [self.gestureLockView showErrowMessage];
             [self shakeAnimationForView:self.statusLabel];
             return;
@@ -327,7 +327,7 @@
         self.lastGesturePsw = gesturesPassword;
         [self.gestureLockIndicator setGesturePassword:gesturesPassword];
         
-        self.statusLabel.text = @"请再次绘制手势密码";
+        self.statusLabel.text = [LangSwitcher switchLang:@"请再次绘制手势密码" key:nil];
         return;
     }
     
@@ -338,7 +338,7 @@
             [self.gestureLockView clearAll];
 
             
-            [TLAlert alertWithSucces:@"手势密码设置成功"];
+            [TLAlert alertWithSucces:[LangSwitcher switchLang:@"手势密码设置成功" key:nil]];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [self.navigationController popViewControllerAnimated:YES];
 
@@ -346,7 +346,7 @@
       
         
     }else {
-        self.statusLabel.text = @"手势不同，请重新绘制";
+        self.statusLabel.text = [LangSwitcher switchLang:@"与上次绘制不一致，请重新绘制" key:nil];
         [self.gestureLockView showErrowMessage];
 
         [self shakeAnimationForView:self.statusLabel];
@@ -368,13 +368,13 @@
     } else {
         
         if (errorCount - 1 == 0) { // 你已经输错五次了！ 退出重新登陆！
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"手势密码已失效" message:@"请重新登陆" delegate:self cancelButtonTitle:nil otherButtonTitles:@"重新登陆", nil];
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"手势密码已失效" message:[LangSwitcher switchLang:@"请重新登陆" key:nil] delegate:self cancelButtonTitle:nil otherButtonTitles:[LangSwitcher switchLang:@"重新登陆" key:nil], nil];
             [alertView show];
             errorCount = 5;
             return;
         }
         
-        self.statusLabel.text = [NSString stringWithFormat:@"密码错误，还可以再输入%ld次",--errorCount];
+        self.statusLabel.text = [NSString stringWithFormat:@"%@%ld",@"密码错误，还可以再输入%ld次",--errorCount];
         [self shakeAnimationForView:self.statusLabel];
     }
 }
