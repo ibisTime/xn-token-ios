@@ -65,12 +65,12 @@
 //    help.isList = YES;
     
 //    help.parameters[@"channelType"] = @4;
-    help.parameters[@"channelType"] = @4;
+    help.parameters[@"channelType"] = @"4";
     help.parameters[@"toSystemCode"] = [AppConfig config].systemCode;
     help.parameters[@"fromSystemCode"] = [AppConfig config].systemCode;
 
     help.parameters[@"start"] = @"1";
-    help.parameters[@"start"] = @"1";
+    help.parameters[@"status"] = @"1";
 
     help.parameters[@"limit"] = @"10";
     help.code = @"804040";
@@ -88,10 +88,12 @@
             weakSelf.tableView.rates = objs;
             
             [weakSelf.tableView reloadData_tl];
+            [weakSelf.tableView endRefreshingWithNoMoreData_tl];
             
         } failure:^(NSError *error) {
             
-            
+            [weakSelf.tableView endRefreshingWithNoMoreData_tl];
+
         }];
     }];
     

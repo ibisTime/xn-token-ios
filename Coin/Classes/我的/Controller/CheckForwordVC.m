@@ -100,7 +100,7 @@
     
     self.warnLabel.textColor = kAppCustomMainColor;
     self.warnLabel.font = [UIFont systemFontOfSize:14];
-    self.warnLabel.text = [LangSwitcher switchLang:@"注意!  THA不储存用户密码,   无法提供找回或重置功能。  如果忘记密码,   用户只能通过自己备份的钱包私钥,   重新导入后设置新密码" key:nil];
+//    self.warnLabel.text = [LangSwitcher switchLang:@"注意!  THA不储存用户密码,   无法提供找回或重置功能。  如果忘记密码,   用户只能通过自己备份的钱包私钥,   重新导入后设置新密码" key:nil];
     [self.view addSubview:self.warnLabel];
     [self.warnLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view.mas_left).offset(15);

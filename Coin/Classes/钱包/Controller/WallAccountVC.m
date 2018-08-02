@@ -143,11 +143,13 @@
 - (void)initTableView {
     
     self.tableView = [[BillTableView alloc]
-                      initWithFrame:CGRectMake(0, kHeight(90), kScreenWidth, kSuperViewHeight)
+                      initWithFrame:CGRectMake(0, kHeight(90), kScreenWidth, kSuperViewHeight-kTabBarHeight)
                       style:UITableViewStyleGrouped];
     self.tableView.placeHolderView = self.placeHolderView;
     self.tableView.backgroundColor = kWhiteColor;
     self.tableView.refreshDelegate = self;
+    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, kTabBarHeight, 0);
+
     self.tableView.sectionHeaderHeight = 22;
     [self.view addSubview:self.tableView];
     CoinWeakSelf;
@@ -300,7 +302,7 @@
     [bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.left.equalTo(@0);
         make.bottom.equalTo(@(0));
-        make.height.equalTo(@50);
+        make.height.equalTo(@(50));
     }];
     
     //底部操作按钮
@@ -316,16 +318,33 @@
     
     [textArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         
-        UIButton *btn = [UIButton buttonWithTitle:textArr[idx] titleColor:kTextColor backgroundColor:kClearColor titleFont:12.0];
+        UIButton *btn = [UIButton buttonWithTitle:nil titleColor:kTextColor backgroundColor:kClearColor titleFont:12.0];
         [btn addTarget:self action:@selector(btnClickCurreny:) forControlEvents:UIControlEventTouchUpInside];
         [btn setTitleColor:kHexColor(@"#ffffff") forState:UIControlStateNormal];
         
         [btn setImage:kImage(imgArr[idx]) forState:UIControlStateNormal];
         
-        btn.tag = 201806+idx;
-        [btn setTitleEdgeInsets:UIEdgeInsetsMake(30, -10, 0, 0)];
-        [btn setImageEdgeInsets:UIEdgeInsetsMake(0, 40, 10, 0)];
         
+        
+        btn.tag = 201806+idx;
+//        [btn setTitleEdgeInsets:UIEdgeInsetsMake(30, -10, 0, 0)];
+//        if ([LangSwitcher currentLangType] == LangTypeSimple) {
+//
+//        }else if ([LangSwitcher currentLangType] == LangTypeEnglish)
+//        {
+//            [btn setImageEdgeInsets:UIEdgeInsetsMake(0, kWidth(50), 10, 0)];
+//
+//
+//        }else if ([LangSwitcher currentLangType] == LangTypeKorean)
+//        {
+//            [btn setImageEdgeInsets:UIEdgeInsetsMake(0, kWidth(35), 10, 0)];
+//
+//        }
+        [btn setImageEdgeInsets:UIEdgeInsetsMake(-12, 0, 0, 0)];
+
+        UILabel *lab = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:12];
+        lab.text = [LangSwitcher switchLang:textArr[idx] key:nil];
+        [btn addSubview:lab];
         [self.bottomViw addSubview:btn];
         [btn mas_makeConstraints:^(MASConstraintMaker *make) {
             
@@ -335,10 +354,17 @@
             make.height.equalTo(@(50));
             
         }];
-        
+        [lab mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.centerX.equalTo(btn.mas_centerX).offset(2);
+            make.top.equalTo(btn.mas_centerY).offset(5);
+
+            
+        }];
         if (idx != 1) {
             [btn setBackgroundColor:kWhiteColor forState:UIControlStateNormal];
-            [btn setTitleColor:kTextColor forState:UIControlStateNormal];
+//            [btn setTitleColor:kTextColor forState:UIControlStateNormal];
+            lab.textColor = kTextColor;
             UIView *vLine = [[UIView alloc] init];
             
             vLine.backgroundColor = kLineColor;
@@ -354,8 +380,9 @@
             }];
         }
         else{
-            
-            [btn setTitleColor:kTextColor forState:UIControlStateNormal];
+            lab.textColor = kTextColor;
+
+//            [btn setTitleColor:kTextColor forState:UIControlStateNormal];
             [btn setBackgroundColor:kWhiteColor forState:UIControlStateNormal];
             
         }

@@ -230,7 +230,7 @@
                                                 placeholder:[LangSwitcher switchLang:@"请输入密码" key:nil]];
     
     pwdTf.returnKeyType = UIReturnKeyNext;
-    
+    pwdTf.keyboardType = UIKeyboardTypePhonePad;
     [pwdTf addTarget:self action:@selector(next:) forControlEvents:UIControlEventEditingDidEndOnExit];
     
     [self.bgSV addSubview:pwdTf];
@@ -244,6 +244,7 @@
                                                   placeholder:[LangSwitcher switchLang:@"请确认密码" key:nil]];
     
     rePwdTf.returnKeyType = UIReturnKeyDone;
+    rePwdTf.keyboardType = UIKeyboardTypePhonePad;
 
     [rePwdTf addTarget:self action:@selector(done:) forControlEvents:UIControlEventEditingDidEndOnExit];
 
@@ -419,15 +420,15 @@
         }
     }
     
-    if (!(self.captchaView.captchaTf.text && self.captchaView.captchaTf.text.length > 3)) {
+    if (!self.captchaView.captchaTf.text) {
         [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入正确的验证码" key:nil]];
         
         return;
     }
     
-    if (!(self.pwdTf.text &&self.pwdTf.text.length > 5)) {
+    if ((!self.pwdTf.text || self.pwdTf.text.length != 6)) {
         
-        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入6位以上密码" key:nil]];
+        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入6位密码" key:nil]];
         return;
     }
     

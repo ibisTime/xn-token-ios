@@ -615,7 +615,7 @@
     //白色背景
     UIView *whiteView = [[UIView alloc] init];
     
-    whiteView.backgroundColor = kWhiteColor;
+    whiteView.backgroundColor = kHexColor(@"#F7F9FC");
     self.whiteView = whiteView;
     [self addSubview:whiteView];
     [whiteView mas_makeConstraints:^(MASConstraintMaker *make) {

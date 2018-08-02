@@ -10,7 +10,7 @@
 #define APICodeMacro_h
 
 //验证码
-#define CAPTCHA_CODE @"805950"
+#define CAPTCHA_CODE @"805953"
 
 //用户
 #define USER_REG_CODE @"805041"//注册

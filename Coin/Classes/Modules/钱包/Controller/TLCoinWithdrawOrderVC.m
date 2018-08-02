@@ -63,14 +63,14 @@
     
     [super viewDidLoad];
     self.isFirst  = YES;
-    self.title = [LangSwitcher switchLang:@"提币记录" key:nil];
+    self.title = [LangSwitcher switchLang:@"提币订单" key:nil];
     
     TLTableView *tableView = [TLTableView tableViewWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 0)
                                                     delegate:self dataSource:self];
     [self.view addSubview:tableView];
     self.orderTableView = tableView;
     self.orderTableView.allowsSelection = NO;
-    self.orderTableView.placeHolderView = [TLPlaceholderView placeholderViewWithImgAndText:@"暂无订单"];
+    self.orderTableView.placeHolderView = [TLPlaceholderView placeholderViewWithImgAndText:[LangSwitcher switchLang:@"暂无订单" key:nil]];
     
     //
     TLPageDataHelper *helper = [[TLPageDataHelper alloc] init];

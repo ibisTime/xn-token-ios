@@ -65,6 +65,6 @@
 
     [headImage sd_setImageWithURL:[NSURL URLWithString:[redPacketInfo[@"sendUserPhoto"] convertImageUrl ] ] placeholderImage:kImage(@"头像")];
     priceLabel.text = [NSString stringWithFormat:@"%@ %@",getModel.count,redPacketInfo[@"symbol"]];
-    TheValueLabel.text = [NSString stringWithFormat:@"≈%@元",redPacketInfo[@"totalCountCNY"]];
+//    TheValueLabel.text = [NSString stringWithFormat:@"≈%@元",redPacketInfo[@"totalCountCNY"]];
 }
 @end

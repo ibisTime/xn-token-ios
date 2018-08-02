@@ -33,7 +33,7 @@
 //
 //#import <ImSDK/TIMManager.h>
 
-@interface TLUserLoginVC ()
+@interface TLUserLoginVC ()<UITextFieldDelegate>
 
 @property (nonatomic,strong) TLTextField *phoneTf;
 @property (nonatomic,strong) AccountTf *pwdTf;
@@ -301,6 +301,9 @@
 //    pwdTf.leftIconView.image = [UIImage imageNamed:@"密码"];
     pwdTf.placeHolder = [LangSwitcher switchLang:@"请输入密码" key:nil];
     [bgView addSubview:pwdTf];
+//    pwdTf.keyboardType = UIKeyboardTypePhonePad;
+    pwdTf.returnKeyType = UIReturnKeyDone;
+    pwdTf.delegate =self;
     self.pwdTf = pwdTf;
     UIView *line = [[UIView alloc] init];
     line.backgroundColor = kLineColor;
@@ -325,6 +328,10 @@
     captchaView.captchaBtn.frame = CGRectMake(0, 7, 85, h - 15);
     [bgView addSubview:captchaView];
     self.captchaView = captchaView;
+    captchaView.captchaTf.keyboardType = UIKeyboardTypePhonePad;
+    captchaView.captchaTf.returnKeyType = UIReturnKeyDone;
+    captchaView.captchaTf.delegate =self;
+
     captchaView.hidden = YES;
     [captchaView.captchaBtn addTarget:self action:@selector(sendCaptcha) forControlEvents:UIControlEventTouchUpInside];
 //    UIButton *codeButton = [UIButton buttonWithTitle:@"获取验证码" titleColor:kAppCustomMainColor backgroundColor:kClearColor titleFont:14 cornerRadius:3.0];
@@ -492,7 +499,14 @@
 //    }
 //
 //}
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
 
+{
+    [self goLogin];
+    
+    return YES;
+    
+}
 - (void)findPwd {
     
     TLUserFindPwdVC *vc = [[TLUserFindPwdVC alloc] init];
@@ -518,9 +532,9 @@
         return;
     }
     
-    if (!(self.pwdTf.text &&self.pwdTf.text.length > 5) && self.pwdTf.hidden == NO) {
+    if ((!self.pwdTf.text ) && self.pwdTf.hidden == NO) {
         
-        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入6位以上密码" key:nil]];
+        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入密码" key:nil]];
         return;
     }
     if (!self.PhoneCode.text) {

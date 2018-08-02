@@ -135,7 +135,8 @@
     
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES animated:animated];
-  
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
+
 
 }
 
@@ -144,6 +145,7 @@
     
     [super viewWillDisappear:animated];
     [self.navigationController setNavigationBarHidden:NO animated:animated];
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
 
 }
 
@@ -219,7 +221,7 @@
         };
         
         _headerView.localBlock = ^{
-             [weakSelf inreoduceView:@"私钥账户" content:@"私钥钱包就是去中心化钱包,在去中心化钱包中,所有的用户身份验证内容,如交易密码,私钥，助记词等都保存在用户手机本地,并不是保存在中心化服务器里面,如果用户误删钱包,忘记备份私钥或者助记词，将无法找到钱包"];
+             [weakSelf inreoduceView:@"私钥钱包" content:@"私钥钱包就是去中心化钱包,在去中心化钱包中,所有的用户身份验证内容,如交易密码,私钥，助记词等都保存在用户手机本地,并不是保存在中心化服务器里面,如果用户误删钱包,忘记备份私钥或者助记词，将无法找到钱包"];
         };
         _headerView.clearBlock = ^{
             CGFloat f2 = kDevice_Is_iPhoneX ==YES ? 282 : 260;
@@ -370,7 +372,7 @@
     
     content.text = [LangSwitcher switchLang:contents key:nil];
     
-    UIButton *sureButton = [UIButton buttonWithTitle:@"确认" titleColor:kWhiteColor backgroundColor:kAppCustomMainColor titleFont:16];
+    UIButton *sureButton = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"确定" key:nil] titleColor:kWhiteColor backgroundColor:kAppCustomMainColor titleFont:16];
     
     [contentText addSubview:sureButton];
     sureButton.layer.cornerRadius = 4.0;
@@ -414,8 +416,8 @@
         make.height.equalTo(@30);
     }];
     f = f - f1;
-    self.currentTableView = [[TLAccountTableView alloc] initWithFrame:CGRectMake(0, kHeight(f)+kStatusBarHeight, kScreenWidth, kScreenHeight - kTabBarHeight - kHeight(f3)) style:UITableViewStyleGrouped];
-    self.currentTableView.contentInset = UIEdgeInsetsMake(0, 0, kTabBarHeight, 0);
+    self.currentTableView = [[TLAccountTableView alloc] initWithFrame:CGRectMake(0, kHeight(f)+kStatusBarHeight, kScreenWidth, kScreenHeight - 49 - kHeight(f3)) style:UITableViewStyleGrouped];
+    self.currentTableView.contentInset = UIEdgeInsetsMake(0, 0, 30, 0);
 
     self.currentTableView.backgroundColor = kWhiteColor;
 //    self.currentTableView.tableHeaderView = self.titleView;
@@ -451,7 +453,7 @@
     [self.titleView removeFromSuperview];
     self.leftButton = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"闪兑" key:nil] titleColor:kHexColor(@"#333333") backgroundColor:kWhiteColor titleFont:14.0];
     [self.leftButton setImage:kImage(@"闪兑") forState:UIControlStateNormal];
-    self.leftButton.layer.borderWidth = 0.2;
+    self.leftButton.layer.borderWidth = 0.3;
     self.leftButton.layer.borderColor = kHexColor(@"#ABC0D9").CGColor;
     self.rightButton = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"一键划转" key:nil] titleColor:kHexColor(@"#333333") backgroundColor:kWhiteColor titleFont:14.0];
     [self.rightButton setImage:kImage(@"一键划转") forState:UIControlStateNormal];
@@ -472,7 +474,7 @@
     }];
     UILabel *text = [UILabel labelWithBackgroundColor:kWhiteColor textColor:kTextBlack font:16];
     text.text = [LangSwitcher switchLang:@"币种列表" key:nil];
-    text.frame = CGRectMake(10, 4, 100, 22);
+    text.frame = CGRectMake(10, 4, 200, 22);
     [self.titleView addSubview:text];
 //    self.titleView.userInteractionEnabled = YES;
     UIButton *addButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -498,7 +500,7 @@
     self.addButton.hidden= YES;
 
 //    addButton.hidden = YES;
-    self.rightButton.layer.borderWidth = 0.2;
+    self.rightButton.layer.borderWidth = 0.3;
     self.rightButton.layer.borderColor = kHexColor(@"#ABC0D9").CGColor;
     [self.rightButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 0)];
     
@@ -530,8 +532,8 @@
 //        make.left.equalTo(@15);
 //        make.height.equalTo(@30);
 //    }];
-    self.tableView = [[PlatformTableView alloc] initWithFrame:CGRectMake(0, kHeight(f)+kStatusBarHeight, kScreenWidth, kScreenHeight - kTabBarHeight - kHeight(f3)) style:UITableViewStyleGrouped];
-    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, kTabBarHeight, 0);
+    self.tableView = [[PlatformTableView alloc] initWithFrame:CGRectMake(0, kHeight(f)+kStatusBarHeight, kScreenWidth, kScreenHeight - 49 - kHeight(f3)) style:UITableViewStyleGrouped];
+    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 30, 0);
     self.tableView.backgroundColor = kWhiteColor;
     self.tableView.refreshDelegate = self;
     [self.view addSubview:self.tableView];
@@ -539,6 +541,8 @@
     self.tableView.selectBlock = ^(NSInteger inter) {
         NSLog(@"%ld",inter);
         weakSelf.switchTager = 0;
+        weakSelf.isBulid = NO;
+
         WallAccountVC *accountVC= [[WallAccountVC alloc] init];
         accountVC.currency = weakSelf.currencys[inter];
         accountVC.title = accountVC.currency.currency;
@@ -594,10 +598,10 @@
 
         [self.leftButton setImage:kImage(@"闪兑") forState:UIControlStateNormal];
         [self.rightButton setImage:kImage(@"一键划转") forState:UIControlStateNormal];
-        self.leftButton.layer.borderWidth = 0.5;
+        self.leftButton.layer.borderWidth = 0.3;
 
         self.leftButton.layer.borderColor = kHexColor(@"#ABC0D9").CGColor;
-        self.rightButton.layer.borderWidth = 0.5;
+        self.rightButton.layer.borderWidth = 0.3;
         self.rightButton.layer.borderColor = kHexColor(@"#ABC0D9").CGColor;
         CGFloat f = self.isClear == YES ?318 : 338;
 //        self.contentView.hidden = YES;
@@ -662,13 +666,15 @@
         [dataBase.dataBase close];
         
         if (Mnemonics.length > 0) {
+            self.leftButton.hidden = NO;
+            self.rightButton.hidden = NO;
             [self.leftButton setImage:kImage(@"闪兑-秘钥") forState:UIControlStateNormal];
             [self.rightButton setImage:kImage(@"划转-秘钥") forState:UIControlStateNormal];
 //            [self.tabBarController.tabBar setHidden:NO];
 
-            self.leftButton.layer.borderWidth = 0.5;
+            self.leftButton.layer.borderWidth = 0.3;
             self.leftButton.layer.borderColor = kHexColor(@"#D1B3AB").CGColor;
-            self.rightButton.layer.borderWidth = 0.5;
+            self.rightButton.layer.borderWidth = 0.3;
             self.rightButton.layer.borderColor = kHexColor(@"#D1B3AB").CGColor;
             
             CGFloat f = self.isClear == YES ?318 : 338;
@@ -725,13 +731,16 @@
         [self.tableView removeFromSuperview];
 //        [self.tabBarController.tabBar setHidden:YES];
         self.homeView = [[BuildLocalHomeView alloc] init];
+        self.leftButton.hidden = YES;
+        self.rightButton.hidden = YES;
+
         [self.view addSubview:self.homeView];
 //        self.homeView.contentSize = CGSizeMake(0, 300);
         
         
         self.homeView.backgroundColor = kWhiteColor;
         [self.homeView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.headerView.mas_bottom).offset(15);
+            make.top.equalTo(self.headerView.mas_bottom).offset(2);
             make.right.equalTo(@-15);
             make.left.equalTo(@15);
             make.bottom.equalTo(self.view.mas_bottom).offset(0);
@@ -1452,6 +1461,8 @@
     help.parameters[@"toSystemCode"] = [AppConfig config].systemCode;
     help.parameters[@"fromSystemCode"] = [AppConfig config].systemCode;
         help.parameters[@"start"] = @"1";
+    help.parameters[@"status"] = @"1";
+
 //    help.isLocal = YES;
     help.parameters[@"limit"] = @"10";
     help.code = @"804040";

@@ -63,7 +63,7 @@
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     self.navigationController.navigationBarHidden = NO;
-    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
     
     //    [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
     //    [self.navigationController.navigationBar setShadowImage:nil];
@@ -188,7 +188,7 @@
             
             [weakSelf headerViewEventsWithType:type index:index];
         };
-        _headerView.contentSize = CGSizeMake(kScreenWidth, kScreenHeight+100);
+        _headerView.contentSize = CGSizeMake(kScreenWidth, kScreenHeight+50);
 //        self.tableView.tableHeaderView = _headerView;
     }
     return _headerView;
@@ -262,13 +262,13 @@
         {
 //            PosMiningVC *posMiningVC = [PosMiningVC new];
             HTMLStrVC *vc = [HTMLStrVC new];
-            vc.type = HTMLTypeGlobal_master;
+            vc.type = HTMLTypeQuantitative_finance;
             [self.navigationController pushViewController:vc animated:YES];
         }break;
         case HomeEventsTypeRedEnvelope:
         {
             HTMLStrVC *vc = [HTMLStrVC new];
-            vc.type = HTMLTypeGlobal_master;
+            vc.type = HTMLTypeYubibao;
 //            GoodMallVC *mallVC = [GoodMallVC new];
             
             [self.navigationController pushViewController:vc animated:YES];

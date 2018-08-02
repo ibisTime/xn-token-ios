@@ -61,11 +61,11 @@
         make.height.equalTo(@1);
     }];
     
-    self.contentLab.userInteractionEnabled = YES;
-      UITapGestureRecognizer *leftSwipe = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap)];
-    [self.nameLab addGestureRecognizer:leftSwipe];
+//    self.contentLab.userInteractionEnabled = YES;
+//      UITapGestureRecognizer *leftSwipe = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap)];
+//    [self.nameLab addGestureRecognizer:leftSwipe];
 
-    [self.contentLab addGestureRecognizer:leftSwipe];
+//    [self.contentLab addGestureRecognizer:leftSwipe];
     [self addSubview:self.contentLab];
 }
 

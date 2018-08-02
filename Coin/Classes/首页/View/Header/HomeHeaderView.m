@@ -219,7 +219,7 @@
 
 - (void)initApplicationView {
     
-    self.applicationView = [[UIView alloc] initWithFrame:CGRectMake(0, self.bannerView.yy, kScreenWidth, kHeight(500))];
+    self.applicationView = [[UIView alloc] initWithFrame:CGRectMake(0, self.bannerView.yy, kScreenWidth, kHeight(450))];
     self.applicationView.backgroundColor = kWhiteColor;
     [self addSubview:self.applicationView];
     
@@ -242,11 +242,23 @@
                                                     font:16.0];
     textLbl.text = [LangSwitcher switchLang:@"推荐应用" key:nil];
     [self.applicationView addSubview:textLbl];
-    [textLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+    if (kDevice_Is_iPhoneX) {
+        [textLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.left.equalTo(@15);
+            
+            make.top.equalTo(@5);
+        }];
+    }else{
+        [textLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.left.equalTo(@15);
+            
+            make.top.equalTo(@5);
+        }];
         
-        make.left.equalTo(@15);
-        make.top.equalTo(@15);
-    }];
+    }
+    
     
     //topLine
 //    UIView *topLine = [[UIView alloc] init];
@@ -295,14 +307,18 @@
 //        [contentView addGestureRecognizer:ta]
         UILabel *introfucec = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor3 font:12];
         [btn addSubview:introfucec];
-        introfucec.numberOfLines = 0;
+//        introfucec.numberOfLines = 0;
         introfucec.text = [LangSwitcher switchLang:obj key:nil];
         
         [self.applicationView addSubview:btn];
         [btn mas_makeConstraints:^(MASConstraintMaker *make) {
             if (idx == 0) {
-                make.top.equalTo(@(idx * 90 +40));
+                if (kDevice_Is_iPhoneX) {
+                    make.top.equalTo(@(kHeight(idx * 90) +40));
 
+                }else{
+                make.top.equalTo(@(kHeight(idx * 90) +30));
+                }
             }else if (idx == 1)
             {
                 
@@ -313,19 +329,19 @@
             else if (idx == 2)
             {
                 
-                make.top.equalTo(@(kHeight(220)));
+                make.top.equalTo(@(kHeight(230)));
 
                 
             }
             else if (idx == 3)
             {
                 
-                make.top.equalTo(@(kHeight(310)));
+                make.top.equalTo(@(kHeight(330)));
 
                 
             }
-            make.width.equalTo(@(kScreenWidth-30));
-            make.height.equalTo(@90);
+            make.width.equalTo(@(kScreenWidth-15));
+            make.height.equalTo(@(kHeight(90)));
         }];
         [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(btn.mas_top).offset(20);
@@ -344,28 +360,29 @@
             make.top.equalTo(textLab.mas_bottom).offset(6);
             
             make.left.equalTo(textLab.mas_left);
-           
+            make.right.equalTo(btn.mas_right);
+
         }];
         if (idx == 0) {
             
             imageView.image = kImage(@"红包-1");
-            introfucec.text = [LangSwitcher switchLang:@"将数字货币塞入其中,发给好友" key:nil];
+            introfucec.text = [LangSwitcher switchLang:@"发数字货币红包、查收发记录和提现" key:nil];
         }else if (idx == 1)
         {
             imageView.image = kImage(@"THA矿山");
-            introfucec.text = [LangSwitcher switchLang:@"将数字货币塞入其中,发给好友" key:nil];
+            introfucec.text = [LangSwitcher switchLang:@"师徒教育玩法、双向奖励机制" key:nil];
 
         }else if (idx == 2)
         {
             imageView.image = kImage(@"量化理财");
-            introfucec.text = [LangSwitcher switchLang:@"活期理财产品,存取方便,年化率" key:nil];
+            introfucec.text = [LangSwitcher switchLang:@"低风险、高收益、定期理财产品" key:nil];
 
             
         }else if (idx == 3)
         {
             
             imageView.image = kImage(@"余币包");
-            introfucec.text = [LangSwitcher switchLang:@"玩法" key:nil];
+            introfucec.text = [LangSwitcher switchLang:@"随存随取、灵活理财" key:nil];
 
         }
         

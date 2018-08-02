@@ -77,7 +77,7 @@
     }];
     
     UILabel *sureLab = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextBlack font:20];
-    sureLab.text = [LangSwitcher switchLang:@"请输入支付密码" key:nil];
+    sureLab.text = [LangSwitcher switchLang:@"请输入资金密码" key:nil];
     [whiteView addSubview:sureLab];
     [sureLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(whiteView.mas_top).offset(50);
@@ -157,7 +157,7 @@
     [sureButton setBackgroundColor:kClearColor forState:UIControlStateNormal];
     [sureButton setTitleColor:kTextColor3 forState:UIControlStateNormal];
     [whiteView addSubview:sureButton];
-    [sureButton setTitle:[LangSwitcher switchLang:@"忘记密码？" key:nil] forState:UIControlStateNormal];
+    [sureButton setTitle:[LangSwitcher switchLang:@"忘记密码?" key:nil] forState:UIControlStateNormal];
     [sureButton addTarget:self action:@selector(payMoney) forControlEvents:UIControlEventTouchUpInside];
     
     [sureButton mas_makeConstraints:^(MASConstraintMaker *make) {

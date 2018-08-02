@@ -156,11 +156,12 @@
 //    self.currentLbl.text = currency.currency;
     NSString *leftAmount = [currency.amountString subNumber:currency.frozenAmountString];
 
-        if ([[TLUser user].localMoney isEqualToString:@"CNY"]) {
-             self.textLbl.text = [NSString stringWithFormat:@"¥%.4f",[[CoinUtil convertToRealCoin:leftAmount coin:currency.currency] doubleValue]];
+        if ([[TLUser user].localMoney isEqualToString:@"USD"]) {
+                self.textLbl.text = [NSString stringWithFormat:@"%.4f%@",[[CoinUtil convertToRealCoin:leftAmount coin:currency.currency] doubleValue],currency.currency];
+           
         }else{
             
-                self.textLbl.text = [NSString stringWithFormat:@"$%.4f",[[CoinUtil convertToRealCoin:leftAmount coin:currency.currency] doubleValue]];
+              self.textLbl.text = [NSString stringWithFormat:@"%.4f%@",[[CoinUtil convertToRealCoin:leftAmount coin:currency.currency] doubleValue],currency.currency];
         }
 
     NSString *rightAmount = [currency.inAmountString subNumber:currency.addAmountString];

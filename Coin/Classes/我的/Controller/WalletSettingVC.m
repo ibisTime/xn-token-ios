@@ -312,7 +312,7 @@
         return;
     }
     
-    [TLAlert alertWithTitle:@"删除钱包" msg:@"请确保助记伺已保存妥善" confirmMsg:@"确定" cancleMsg:@"取消" maker:self cancle:^(UIAlertAction *action) {
+    [TLAlert alertWithTitle:[LangSwitcher switchLang:@"删除钱包" key:nil] msg:[LangSwitcher switchLang:@"请确保已备份钱包至安全的地方，THA不承担任何钱包丢失、被盗、忘记密码等产生的资产损失!" key:nil] confirmMsg:[LangSwitcher switchLang:@"确定" key:nil] cancleMsg:[LangSwitcher switchLang:@"取消" key:nil] maker:self cancle:^(UIAlertAction *action) {
         
         
     } confirm:^(UIAlertAction *action) {
@@ -339,7 +339,7 @@
         //                [[NSUserDefaults standardUserDefaults] removeObjectForKey:KWalletAddress];
         //                [[NSUserDefaults standardUserDefaults] removeObjectForKey:KWalletPrivateKey];
         //                [[NSUserDefaults standardUserDefaults] synchronize];
-        [TLAlert alertWithMsg:@"删除成功"];
+        [TLAlert alertWithMsg:[LangSwitcher switchLang:@"删除成功" key:nil]];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             
             TLTabBarController *MineVC = [[TLTabBarController alloc] init];

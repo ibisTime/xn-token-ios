@@ -94,9 +94,24 @@
                 [[NSUserDefaults standardUserDefaults] setObject:data forKey:@"chooseModel"];
                 [[NSUserDefaults standardUserDefaults] synchronize];
 //
-//                [self.pic sd_setImageWithURL:[NSURL URLWithString:[self.countrys[i].pic convertImageUrl]] placeholderImage:kImage(@"中国国旗")];
-//
-//
+                NSString *str = self.countrys[i].interSimpleCode;
+                if ([str isEqualToString:@"CN"] || [str hasPrefix:@"CN"]) {
+                    [LangSwitcher changLangType:LangTypeSimple];
+                }else if ([str isEqualToString:@"KR"])
+                {
+                    [LangSwitcher changLangType:LangTypeKorean];
+
+                    
+                }else{
+                    
+                    [LangSwitcher changLangType:LangTypeEnglish];
+
+                }
+                
+            }else{
+                
+                //
+                
             }
             
             

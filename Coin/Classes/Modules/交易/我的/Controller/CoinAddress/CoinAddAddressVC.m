@@ -375,7 +375,7 @@
         return ;
     }
     
-    if (!(self.captchaView.captchaTf.text && self.captchaView.captchaTf.text.length > 3)) {
+    if (!self.captchaView.captchaTf.text) {
         
         [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入正确的验证码" key:nil]];
         return;

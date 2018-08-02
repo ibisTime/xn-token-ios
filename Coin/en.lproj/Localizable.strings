@@ -101,7 +101,7 @@
 "代理人" = "Agent";
 "我要购买" = "I want to buy";
 "我要出售" = "I want to sell it";
-"我的" = "My";
+"我的" = "Me";
 "托管账户" = "Escrow Account";
 "钱包设置" = "Wallet settings";
 "系统设置" = "System setup";
@@ -162,7 +162,7 @@
 "冻结明细" = "frozen detail";
 "筛选" = "to filter";
 "账单详情" = "bill detail";
-"提币记录" = "coin record";
+"提币记录" = "Coin record";
 "变动前金额" = "Amount before change";
 "变动后金额" = "Variable amount";
 "变动时间" = "Change the time";
@@ -182,21 +182,22 @@
 "确认修改" = "Confirm";
 "确实设置" = "Indeed set";
 "粘贴内容为空" = "The paste is empty";
-"请输入6位以上密码" = "Please enter 6 or more passwords";
 "找回成功" = "Find success";
 "设置成功" = "Set up the success";
 "旧密码" = "Old password";
 "请输入旧密码" = "Enter the old password";
 "新密码" = "New password";
 "请输入新密码" = "Enter a new password";
-"请输入6位以上旧密码" = "Please enter 6 or more old passwords";
+"请输入6位旧密码" = "Please enter 6 old passwords";
+"请输入6位新密码" = "Please enter 6 new passwords";
+
 "请输入旧密码" = "Please enter the old password";
 "新登录密码不能与原有密码重复" = "The new login password cannot be repeated with the original password";
 "输入的密码不一致" = "The passwords entered do not match";
 "注册" = "REGISTRATION";
 "找回密码" = "Find the password";
 "请输入正确的手机号" = "Please enter the correct mobile phone number";
-"请输入6位以上密码" = "Please enter 6 or more passwords";
+"请输入6位密码" = "Please enter a 6-digit password";
 "登录" = "LOGIN ";
 "获取验证码" = "Get code";
 "昵称" = "nickname";
@@ -211,6 +212,8 @@
 "注册成功" = "Registered successfully";
 "地址管理" = "Address management";
 "请选择货币类型" = "Please select the currency type";
+"选择货币" = "Select the currency";
+
 "暂无地址" = "No address";
 "请输入标签" = "Please enter label";
 "向认证账户提现将不再输入资金密码、谷歌验证码" = "Withdrawal to the authentication account will no longer enter the fund password, Google verification code";
@@ -264,8 +267,8 @@
 "语言" = "Language";
 "确定" = "Confirm";
 "确认退出?" = " Confirm exit?";
-"更新提醒" = " Update hint";
-"更新提示" = " Update hint";
+"更新提醒" = " Update Hint";
+"更新提示" = " Update Hint";
 
 "立即升级" = "Confirm now";
 "稍后提醒" = "Later";
@@ -286,10 +289,9 @@
 "我的红包" = "My red packet";
 "红包一响,黄金万两" = "Red packets come, Coins sound";
 "给您发送了一个红包" = "Sent you a red packet";
-"抢到红包" = "Received";
+"我收到的" = "Received";
 "共发送" = "Total amount";
 "枚" = "Amount";
-//"持有" = "hold";
 //"持有总量" = "total";
 "暂无可用货币" = "No currency available";
 "设置资金密码" = "set the funding password";
@@ -323,7 +325,7 @@
 "不能为空" = "must not be null";
 "个" = "Amount";
 "不能为空" = "must not be null";
-"发出红包" = "Sent";
+"我发出的" = "Sent";
 "分享" = "share";
 "提币数量" = "withdraw amount";
 "手续费将在提币金额中扣除" = "The withdraw fee will be deducted from the cash amount";
@@ -405,6 +407,8 @@
 "以太坊" = "Ethereum";
 "WAN" = "WAN";
 "矿工费将在可用余额中扣除，余额不足将从转账金额中扣除" = "Transaction Fees will be deducted from the available balance, and the insufficient balance will be deducted from the transfer amount";
+"矿工费将在提币金额中扣除" = "The withdraw fee will be deducted from the cash amount";
+
 "私钥已复制" = "private key has been copied";
 "请先打开网络" = "Please open the network first";
 "隐私协议" = "privacy agreement";
@@ -462,7 +466,7 @@
 "是否下载并安装支付宝完成认证?" = "Download and Install Alipay to complete the certification?";
 "好的" = "confirm";
 "请输入手机号码" = "Please input your mobile number";
-"修改昵称" =  "activity_nick_title";
+"修改昵称" =  "NickName";
 "请输入昵称" = "Please input a nickname";
 "资金密码不能低于6位数" = "The fund password cannot be lower than 6 digits
 ";
@@ -498,12 +502,17 @@
 "美元" = "Dollar";
 "有矿工费" = "There's mining fee.";
 "转账速度慢" = "The transaction rate is slow.";
-"强烈建议您在使用钱包钱做好备份，导出[助记词]存储到安全的地方,然后开始尝试转入小额资金启用" = "We are highly recommending you  that prepare a backup with wallet asset, export [mnemonics] to a safe place, and then start with using a tinny fund as start up.";
-"如何备份钱包" = "How to back up your wallet";
-"在您的手机丢失或者忘记密码的情况下，助记词可用于你的钱包或者资金。" = "In case your phone loses or forgets your password, mnemonics can be used for your wallet or money.";
+"强烈建议您在使用钱包前做好备份，导出[助记词]存储到安全的地方。然后开始尝试转入小额资金启用" = "We are highly recommending you  that prepare a backup with wallet asset, export [mnemonics] to a safe place, and then start with using a tinny fund as start up.";
+"在您的手机丢失或者忘记密码的情况下，恢复词可用于你的钱包或者资金" = "In case your phone loses or forgets your password, mnemonics can be used for your wallet or money.";
 "复制收款地址" = "Copy a collection address";
-"至少连接N个点，请重新绘制" = "At least Connect n dots,please redraw again";
-"密码错误，还剩N次机会" = "Wrong password, n time chance left";
+"至少连接4个点，请重新绘制" = "At least Connect 4 dots,please redraw again";
+
+"密码错误，还可以再输入4次" = "Wrong password, Four time chance left";
+"密码错误，还可以再输入3次" = "Wrong password, Three time chance left";
+"密码错误，还可以再输入2次" = "Wrong password, Two time chance left";
+"密码错误，还可以再输入1次" = "Wrong password, One time chance left";
+"密码错误，还可以再输入0次" = "Wrong password, Zero time chance left";
+
 "红包退回" = "Red Envelopes returned";
 "抢红包" = "Grab a red envelope";
 "资金密码错误" = "Money Password Error";
@@ -511,6 +520,71 @@
 //"抢红包" = "Grab a red envelope";
 "请输入交易密码" = "Please enter the trading password.";
 "欢迎回来" = "Welcome back!";
+"个人账户就是指中心化钱包,是由THA替您保管私钥,在中心化钱包中,不存在钱包丢失了无法找回的情况,可以通过身份证找回您的钱包,并且可以让您体验到更多的服务。" = "no loss of wallet that cannot be recovered, and can be verified to retrieve your wallet and allow you to experience more services.";
+"私钥钱包就是去中心化钱包,在去中心化钱包中,所有的用户身份验证内容,如交易密码,私钥，助记词等都保存在用户手机本地,并不是保存在中心化服务器里面,如果用户误删钱包,忘记备份私钥或者助记词，将无法找到钱包" = " mobile phone local, not stored in the centralized server. If the user mistakenly deletes the wallet, forgets to back up the private key or mnemonics, will not be able to retrieve the wallet.";
+"优点" = "Advantages";
+"缺点" = "Disadvantage";
+"只有用户保存私钥" = "Only the user saves the private key";
+"助记词,按空格分离" = "Mnemonic words, separated by space";
+"开始导入" = "Start input";
+"什么是助记词" = "What is notation word";
+"我已经仔细阅读并同意服务及隐私条款" = "I have carefully read and agree to the terms of service and privacy";
+"钱包名称" = "Wallet Name";
+"请按顺序点击助记词，以确定您的备份助记词填写正确" = " Please click on the mnemonics in order to make sure your backup mnemonics are filled in correctly";
+"确认您的钱包助记词" = "Confirm the notation words which helps you remember your wallet";
+"现在写下这些词" = "Now write down these words";
+"您的恢复词是12个，在纸上记下他们并安全的保存它" = "Your have 12 recovery words, write them down on paper and keep it safely.";
+"确认转账" = "Transfer confirmed ";
+"注意！THA不存储用户密码，无法提供找回或重置功能，密码必须要自己备份好。密码用于加密保护私钥，强度也非常重要。" = "Attention! Tha does not store user passwords, can not provide recovery or reset functions, passwords must be backed up well by users. Passwords are used to encrypt the private key, and strength is also important.";
+"免责声明" = "Disclaimer";
+"请确保已备份钱包至安全的地方，THA不承担任何钱包丢失、被盗、忘记密码等产生的资产损失！" = "Please ensure that the wallet has been backed up safely THA does not bear any loss of loss of wallet, stolen, forgotten password and other assets lost!";
+"扫描二维码领取THA红包" = "Scan the QR-code for tha red envelopes";
+"截图分享二维码" = "Screenshot the QR-code for sharing";
+"红包规则" = "Rules of Red Envelope";
+"当前为普通红包" = "This is ordinary red envelopes";
+"当前为拼手气红包" = "This is Red Envelope for spell luck";
+"确认付款" = "Payment Confirmed";
+"个人账户余额" = "Account balance";
+"账户余额" = "Balance";
 
+"立即付款" = "Prompt payment";
+"转入资金" = "Transfer-in funds";
+"设置手势密码" = "Set Gesture Password";
+"手势密码" = "Gesture Password";
 
+"请设置您的新手势密码" = "Please draw your gesture password";
+"绘制手势密码" = "Draw the gesture Password";
+"请输入手势密码" = "Draw the gesture Password";
 
+"忘记手势密码" = "Forget gesture password";
+"切换登录" = "Switch logins";
+"请再次绘制手势密码" = "Please draw the gesture password again";
+"手势密码设置成功" = "Gesture Password Set success!";
+"解锁成功" = "Succeed unlock";
+"与上次绘制不一致，请重新绘制" = "Inconsistent with the last drawing, please redraw";
+"请阅读并同意服务及隐私条款" = "Please read and agree to the terms of service and privacy";
+"请输入钱包名称" = "Please enter the wallet name";
+"验证通过" = "Verification passed";
+"请输入付币地址或扫码" = "Please enter the currency address or scan code";
+"请输入重复密码" = "Please enter a duplicate password";
+"新钱包创建成功" = "Please backup your wallet now!";
+"烈建议您在使用钱包前做好备份，导出[助记词]存储到安全的地方。然后开始尝试转入小额资金启用" = "we highly recommend your write the Mnemonic words(Backup Phrase)on paper and keep it in a safe place,anynoe get it can access or spend your assets.Also get start with a small amount of assents";
+"备份钱包" = "Go backup now";
+"请输入资金密码" = "Please inPut Capital password";
+"如何备份钱包?" = "How to backup wallet";
+"THA用户可以通过邀请制收取徒弟，并根据任务引导来教育徒弟，从而获得算力。另外，徒弟使用THA钱包购买量化理财或余币宝，师父可获得徒弟一定比例的收益奖励" = "Global Master and Apprentice Initiative: THA Users can receive apprentice through the invitation system, and instruct apprentice according to the task, thus obtain the calculation force. In addition, the apprentice uses THA Wallet to purchase quantitative financial products or Yubibao, masters can obtain a certain percentage of the Apprentice reward.";
+"THA Wallet为用户提供多种类型的优质理财产品，用户可以使用比特币、以太坊等数字货币购买理财产品而获得收益" = "THA Wallet provides users with a variety of quality management products, users can use Bitcoin, Ethernet and other digital currencies to buy money products and gain income.";
+"余币宝是THA Wallet旗下的数字货币增值服务和活期数字货币管理服务产品。特点是操作简便、低门槛、零手续费、可随取随用，让您更灵活的管理数字资产" = "Yubibao is the digital currency value-added service and demand digital money managemen service product of THA wallet. It is easy to operate, has low threshold, without handling fees,  and are available with access, so that you can manage your digital assets with more flexibility.";
+"版本号" = "Version number";
+"THA版权所有" = "THA All rights reserved";
+"发数字货币红包、查收发记录和提现" = "Send a digital currency in red envelope,check the receive records and cash the balance";
+"师徒教育玩法、双向奖励机制" = "Two-way incentive mechanism,master and apprentice orientation";
+"低风险、高收益、定期理财产品" = "Regular financial product,Low risk high return";
+"随存随取、灵活理财" = "Flexible financial management,Save in and cash the balance anytime";
+"重新登陆" = "Register";
+"请重新登陆" = "Please login again";
+"请确保已备份钱包至安全的地方，THA不承担任何钱包丢失、被盗、忘记密码等产生的资产损失!" = "Please ensure that the wallet has been backed up safely THA does not bear any loss of loss of wallet, stolen, forgotten password and other assets lost!";
+"请填写付币数量" = "Please input  the number of coins";
+"快" = "fast";
+"慢" = "slow";
+"数量不得大于10000" = "The number must not exceed 10000";

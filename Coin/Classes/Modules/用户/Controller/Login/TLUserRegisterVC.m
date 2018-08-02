@@ -215,6 +215,8 @@
     [self.contentScrollView addSubview:captchaView];
     UIView *phone1 = [[UIView alloc] init];
     [self.contentScrollView addSubview:phone1];
+    captchaView.captchaTf.keyboardType = UIKeyboardTypePhonePad;
+
     phone1.backgroundColor = kLineColor;
     phone1.frame = CGRectMake(btnMargin, captchaView.yy, w-30, 2);
     self.captchaView = captchaView;
@@ -233,7 +235,8 @@
     [self.contentScrollView addSubview:pwdLab];
     TLTextField *pwdTf = [[TLTextField alloc] initWithFrame:CGRectMake(margin, pwdLab.yy + 10, w, h) leftTitle:[LangSwitcher switchLang:@"" key:nil] titleWidth:titleWidth placeholder:[LangSwitcher switchLang:@"请输入密码" key:nil]];
     pwdTf.secureTextEntry = YES;
-    
+//    pwdTf.keyboardType = UIKeyboardTypePhonePad;
+
     [self.contentScrollView addSubview:pwdTf];
     self.pwdTf = pwdTf;
     UIView *phone2 = [[UIView alloc] init];
@@ -249,6 +252,8 @@
     
     TLTextField *rePwdTf = [[TLTextField alloc] initWithFrame:CGRectMake(margin, sureLab.yy + 1, w, h) leftTitle:[LangSwitcher switchLang:@"" key:nil] titleWidth:titleWidth placeholder:[LangSwitcher switchLang:@"确认密码" key:nil]];
     rePwdTf.secureTextEntry = YES;
+//    rePwdTf.keyboardType = UIKeyboardTypePhonePad;
+
     [self.contentScrollView addSubview:rePwdTf];
     self.rePwdTf = rePwdTf;
     UIView *phone3 = [[UIView alloc] init];
@@ -415,15 +420,15 @@
         return;
     }
     
-    if (!(self.captchaView.captchaTf.text && self.captchaView.captchaTf.text.length > 3)) {
+    if (!self.captchaView.captchaTf.text) {
         [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入正确的验证码" key:nil]];
         
         return;
     }
     
-    if (!(self.pwdTf.text &&self.pwdTf.text.length > 5)) {
+    if ((!self.pwdTf.text )) {
         
-        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入6位以上密码" key:nil]];
+        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入密码" key:nil]];
         return;
     }
     

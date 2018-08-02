@@ -107,7 +107,7 @@
     //
     [amountLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.top.equalTo(textLbl.mas_bottom).offset(17);
+        make.top.equalTo(textLbl.mas_bottom).offset(10);
         make.centerX.equalTo(self.headerView.mas_centerX);
         
     }];

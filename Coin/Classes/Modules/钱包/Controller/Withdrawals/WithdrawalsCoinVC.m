@@ -189,7 +189,13 @@ typedef NS_ENUM(NSInteger, AddressType) {
     
     self.balanceTF.textColor = kHexColor(@"#109ee9");
     self.balanceTF.leftLbl.font = [UIFont systemFontOfSize:13];
-    self.balanceTF.font = [UIFont systemFontOfSize:11];
+    if (kDevice_Is_iPhoneX) {
+        self.balanceTF.font = [UIFont systemFontOfSize:11];
+
+    }else{
+        self.balanceTF.font = [UIFont systemFontOfSize:10];
+
+    }
     
     //    NSString *leftAmount = [self.currency.amountString subNumber:self.currency.frozenAmountString];
     //
@@ -361,7 +367,7 @@ typedef NS_ENUM(NSInteger, AddressType) {
     
     UILabel *minerPromptLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor3 font:11.0];
     
-    minerPromptLbl.text = [LangSwitcher switchLang:@"矿工费将在提现金额中扣除" key:nil];
+    minerPromptLbl.text = [LangSwitcher switchLang:@"矿工费将在提币金额中扣除" key:nil];
     
     minerPromptLbl.numberOfLines = 0;
     
@@ -511,8 +517,8 @@ typedef NS_ENUM(NSInteger, AddressType) {
         
         weakSelf.balanceTF.text = result;
         //        weakSelf.receiveAddressLbl.textColor = kTextColor;
-//        weakSelf.addressType = WalletAddressTypeScan;
-        //                [weakSelf setGoogleAuth];
+        weakSelf.addressType = AddressTypeScan;
+                        [weakSelf setGoogleAuth];
         
     };
     
@@ -572,6 +578,8 @@ typedef NS_ENUM(NSInteger, AddressType) {
         return ;
     }
     
+    [self setGoogleAuth];
+
     CGFloat amount = [self.tranAmountTF.text doubleValue];
     
     if (amount <= 0 || ![self.tranAmountTF.text valid]) {
@@ -803,7 +811,7 @@ typedef NS_ENUM(NSInteger, AddressType) {
     //    http.parameters[@"applyNote"] = @"ios-提现";
     http.parameters[@"applyUser"] = [TLUser user].userId;
     http.parameters[@"payCardInfo"] = self.currency.currency;
-    http.parameters[@"payCardNo"] = self.receiveAddressLbl.text;
+    http.parameters[@"payCardNo"] = self.balanceTF.text;
     http.parameters[@"token"] = [TLUser user].token;
     //    http.parameters[@"fee"] = @"-0.1";
     //    http.parameters[@"fee"] = @"-10";
@@ -842,6 +850,12 @@ typedef NS_ENUM(NSInteger, AddressType) {
     }];
     
 }
+
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    [self.view endEditing:YES];
+}
+
 
 - (void)doTransfer:(NSString *)pwd {
     

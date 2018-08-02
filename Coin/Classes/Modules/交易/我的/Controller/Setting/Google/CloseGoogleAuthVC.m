@@ -68,15 +68,18 @@
     [authView addSubview:pasteBtn];
     
     self.googleAuthTF.rightView = authView;
-    
-    //短信验证码
-    self.captchaView = [[CaptchaView alloc] initWithFrame:CGRectMake(leftMargin, self.googleAuthTF.yy, kScreenWidth - 2*leftMargin, height)];
-    
+    self.captchaView = [[CaptchaView alloc] initWithFrame:CGRectMake(leftMargin, self.googleAuthTF.yy, kScreenWidth - 2*leftMargin, height) leftTitleWidth:100];
     self.captchaView.captchaTf.leftLbl.text = [LangSwitcher switchLang:@"短信验证码" key:nil];
-    
     [self.captchaView.captchaBtn addTarget:self action:@selector(sendCaptcha) forControlEvents:UIControlEventTouchUpInside];
-    
     [self.view addSubview:self.captchaView];
+    //短信验证码
+//    self.captchaView = [[CaptchaView alloc] initWithFrame:CGRectMake(leftMargin, self.googleAuthTF.yy, kScreenWidth - 2*leftMargin, height)];
+//
+//    self.captchaView.captchaTf.leftLbl.text = [LangSwitcher switchLang:@"短信验证码" key:nil];
+//
+//    [self.captchaView.captchaBtn addTarget:self action:@selector(sendCaptcha) forControlEvents:UIControlEventTouchUpInside];
+//
+//    [self.view addSubview:self.captchaView];
     
     //修改按钮
     UIButton *confirmBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"关闭谷歌认证" key:nil] titleColor:kWhiteColor backgroundColor:kAppCustomMainColor titleFont:16.0 cornerRadius:5];

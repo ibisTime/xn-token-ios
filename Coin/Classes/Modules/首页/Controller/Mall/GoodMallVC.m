@@ -35,7 +35,7 @@
     self.titleLable.numberOfLines = 0;
     [self.titleLable mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(@(kHeight(20)));
-        make.right.equalTo(@-10);
+        make.right.equalTo(self.view.mas_right).offset(-15);
         make.left.equalTo(@10);
         
     }];

@@ -15,6 +15,7 @@
 @property (nonatomic, strong) TLTextField *contentTf;
 
 @property (nonatomic, strong) UIButton *importButton;
+@property (nonatomic, assign) NSInteger textLocation;//这里声明一个全局属性，用来记录输入位置
 
 @end
 
@@ -26,7 +27,9 @@
     self.contentTf = [[TLTextField alloc] initWithFrame:CGRectMake(0, 10, kScreenWidth, 45) leftTitle:[LangSwitcher switchLang:@"昵称" key:nil] titleWidth:80 placeholder:[LangSwitcher switchLang:@"请填写昵称" key:nil]];
     self.contentTf.delegate = self;
     self.contentTf.text = [self.text valid] ? self.text: @"";
+    [self.contentTf addTarget:self action:@selector(textFieldDidChanged:) forControlEvents:UIControlEventEditingChanged];//注意：textFied没有textFieldDidChanged代理方法，但是有UITextFieldTextDidChangeNotification通知，这里添加通知方法，textView有textFieldDidChanged代理方法，下面用法一样
     
+  
     [self.view addSubview:self.contentTf];
     
     self.importButton = [UIButton buttonWithImageName:nil cornerRadius:6];
@@ -91,6 +94,23 @@
     
     
 }
+
+- (void)textFieldDidChanged:(UITextField *)textField
+{
+    if (textField.text.length > 11) {
+        textField.text = [textField.text substringToIndex:1];
+//        [self showMessage:@"不可超过20字！"];
+    }else {
+        if (self.textLocation == -1) {
+            NSLog(@"输入不含emoji表情");
+        }else {
+            NSLog(@"输入含emoji表情");
+            //截取emoji表情前
+            textField.text = [textField.text substringToIndex:self.textLocation];
+        }
+    }
+}
+
 -(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
    
     NSString *tem = [[string componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]componentsJoinedByString:@""];
@@ -101,52 +121,60 @@
         return NO;
         
     }
-    if ([self isContainsTwoEmoji:string]) {
-        return NO;
+    if ([self stringContainsEmoji:string]) {
+        self.textLocation = range.location;
+    }else {
+        self.textLocation = -1;
     }
+    
+  
+//    if ([self isContainsTwoEmoji:string]) {
+//        return NO;
+//    }
     return YES;
     
 }
 
-- (BOOL)isContainsTwoEmoji:(NSString *)string
-{
-    __block BOOL isEomji = NO;
-    [string enumerateSubstringsInRange:NSMakeRange(0, [string length]) options:NSStringEnumerationByComposedCharacterSequences usingBlock:
-     ^(NSString *substring, NSRange substringRange, NSRange enclosingRange, BOOL *stop) {
-         const unichar hs = [substring characterAtIndex:0];
-         //         NSLog(@"hs++++++++%04x",hs);
-         if (0xd800 <= hs && hs <= 0xdbff) {
-             if (substring.length > 1) {
-                 const unichar ls = [substring characterAtIndex:1];
-                 const int uc = ((hs - 0xd800) * 0x400) + (ls - 0xdc00) + 0x10000;
-                 if (0x1d000 <= uc && uc <= 0x1f77f)
-                 {
-                     isEomji = YES;
-                 }
-                 //                 NSLog(@"uc++++++++%04x",uc);
-             }
-         } else if (substring.length > 1) {
-             const unichar ls = [substring characterAtIndex:1];
-             if (ls == 0x20e3|| ls ==0xfe0f) {
-                 isEomji = YES;
-             } //             NSLog(@"ls++++++++%04x",ls);
-         } else {
-             if (0x2100 <= hs && hs <= 0x27ff && hs != 0x263b) {
-                 isEomji = YES;
-             } else if (0x2B05 <= hs && hs <= 0x2b07) {
-                 isEomji = YES;
-             } else if (0x2934 <= hs && hs <= 0x2935) {
-                 isEomji = YES;
-             } else if (0x3297 <= hs && hs <= 0x3299) {
-                 isEomji = YES;
-             } else if (hs == 0xa9 || hs == 0xae || hs == 0x303d || hs == 0x3030 || hs == 0x2b55 || hs == 0x2b1c || hs == 0x2b1b || hs == 0x2b50|| hs == 0x231a ) {
-                 isEomji = YES;
-             }
-         }
-         
-     }];
-    return isEomji;
+- (BOOL)stringContainsEmoji:(NSString *)string {
+    
+    __block BOOL returnValue = NO;
+    
+    [string enumerateSubstringsInRange:NSMakeRange(0, [string length])
+                               options:NSStringEnumerationByComposedCharacterSequences
+                            usingBlock:^(NSString *substring, NSRange substringRange, NSRange enclosingRange, BOOL *stop) {
+                                const unichar hs = [substring characterAtIndex:0];
+                                if (0xd800 <= hs && hs <= 0xdbff) {
+                                    if (substring.length > 1) {
+                                        const unichar ls = [substring characterAtIndex:1];
+                                        const int uc = ((hs - 0xd800) * 0x400) + (ls - 0xdc00) + 0x10000;
+                                        if (0x1d000 <= uc && uc <= 0x1f77f) {
+                                            returnValue = YES;
+                                        }
+                                    }
+                                } else if (substring.length > 1) {
+                                    const unichar ls = [substring characterAtIndex:1];
+                                    if (ls == 0x20e3) {
+                                        returnValue = YES;
+                                    }
+                                } else {
+                                    if (0x2100 <= hs && hs <= 0x27ff) {
+                                        returnValue = YES;
+                                    } else if (0x2B05 <= hs && hs <= 0x2b07) {
+                                        returnValue = YES;
+                                    } else if (0x2934 <= hs && hs <= 0x2935) {
+                                        returnValue = YES;
+                                    } else if (0x3297 <= hs && hs <= 0x3299) {
+                                        returnValue = YES;
+                                    } else if (hs == 0xa9 || hs == 0xae || hs == 0x303d || hs == 0x3030 || hs == 0x2b55 || hs == 0x2b1c || hs == 0x2b1b || hs == 0x2b50) {
+                                        returnValue = YES;
+                                    }
+                                }
+                            }];
+    
+    return returnValue;
 }
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

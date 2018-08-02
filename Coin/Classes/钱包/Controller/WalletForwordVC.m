@@ -186,13 +186,22 @@ typedef NS_ENUM(NSInteger, WalletAddressType) {
     
     CGFloat heightMargin = 50;
     //余额
-    self.balanceTF = [[TLTextField alloc] initWithFrame:CGRectMake(0, kHeight(103), kScreenWidth, heightMargin+20)
+    self.balanceTF = [[TLTextField alloc] initWithFrame:CGRectMake(0, kHeight(103), kScreenWidth-30, heightMargin+20)
                                               leftTitle:[LangSwitcher switchLang:@"接收地址" key:nil]
                                              titleWidth:80
                                             placeholder:[LangSwitcher switchLang:@"请输入付币地址或扫码" key:nil]];
  
     self.balanceTF.textColor = kHexColor(@"#109ee9");
-    self.balanceTF.font = [UIFont systemFontOfSize:11];
+    if (kDevice_Is_iPhoneX) {
+        self.balanceTF.font =FONT(11);
+
+    }else{
+        
+        self.balanceTF.font =FONT(10);
+
+    }
+//    [UIFont systemFontOfSize:10];
+    
 //    self.balanceTF.textAlignment = NSTextAlignmentCenter;
 //    NSString *leftAmount = [self.currency.amountString subNumber:self.currency.frozenAmountString];
 //
@@ -336,18 +345,26 @@ typedef NS_ENUM(NSInteger, WalletAddressType) {
     [self.view addSubview:self.tranAmountTF];
     
     //矿工费
-    self.minerFeeTF = [[TLTextField alloc] initWithFrame:CGRectMake(0, self.tranAmountTF.yy + 10, kScreenWidth-100, heightMargin)
+    self.minerFeeTF = [[TLTextField alloc] initWithFrame:CGRectMake(0, self.tranAmountTF.yy + 10, kScreenWidth-30, heightMargin)
                                                leftTitle:[LangSwitcher switchLang:@"矿工费" key:nil]
                                               titleWidth:80
-                                             placeholder:[LangSwitcher switchLang:@"矿工费将在可用余额中扣除，余额不足将从转账金额扣除" key:nil]];
+                                             placeholder:nil];
     
     self.minerFeeTF.enabled = NO;
-    
-    self.minerFeeTF.font = Font(12.0);
+    self.minerFeeTF.backgroundColor = [UIColor colorWithHexString:@"#fdfdfd"];
+
+    self.minerFeeTF.font = [UIFont systemFontOfSize:11];
     
 //    self.minerFeeTF.text = [NSString stringWithFormat:@"-- %@", self.currency.currency];
     
+    UILabel *free = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor3 font:12];
+    free.frame = CGRectMake(80, self.tranAmountTF.yy + 10, kScreenWidth-100, heightMargin);
+    free.text = [LangSwitcher switchLang:@"矿工费将在可用余额中扣除，余额不足将从转账金额中扣除" key:nil];
+    free.numberOfLines = 0;
+//    [LangSwitcher switchLang:@"矿工费将在可用余额中扣除，余额不足将从转账金额中扣除"];
     [self.view addSubview:self.minerFeeTF];
+
+    [self.view addSubview:free];
     [self.minerFeeTF mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.left.equalTo(@0);
@@ -608,12 +625,21 @@ typedef NS_ENUM(NSInteger, WalletAddressType) {
         CGFloat value = slider.value;
         NSLog(@"%f", value);
         if (value == 0) {
-            self.blanceFree.text = [NSString stringWithFormat:@"%.6f %@",self.gamPrice/2,self.currency.symbol];
-            self.pricr = [NSString stringWithFormat:@"%lld",[self.pricr longLongValue]/2];
+            self.blanceFree.text = [NSString stringWithFormat:@"%.8f %@",self.gamPrice*85/100,self.currency.symbol];
+            self.pricr = [NSString stringWithFormat:@"%lld",[self.pricr longLongValue]*85/100];
         }else{
-            self.blanceFree.text = [NSString stringWithFormat:@"%.6f %@",self.gamPrice*2*value,self.currency.symbol];
-            self.pricr = [NSString stringWithFormat:@"%f",[self.pricr longLongValue]*value*2];
+            self.blanceFree.text = [NSString stringWithFormat:@"%.8f %@",self.gamPrice*value,self.currency.symbol];
+            
+            self.pricr = [NSString stringWithFormat:@"%f",[self.pricr longLongValue]*value];
         }
+         if (value == 1)
+         {
+             
+             self.blanceFree.text = [NSString stringWithFormat:@"%.8f %@",self.gamPrice*value*115/100,self.currency.symbol];
+             
+             self.pricr = [NSString stringWithFormat:@"%f",[self.pricr longLongValue]*value*115/100];
+         }
+        
         
 
 
@@ -763,14 +789,14 @@ typedef NS_ENUM(NSInteger, WalletAddressType) {
     }
 //   NSString *word =  [[NSUserDefaults standardUserDefaults] objectForKey:KWalletWord];
     TLDataBase *dataBase = [TLDataBase sharedManager];
-    NSString *word;
+    NSString *Mnemonics;
     if ([dataBase.dataBase open]) {
         NSString *sql = [NSString stringWithFormat:@"SELECT Mnemonics from THAWallet where userId = '%@'",[TLUser user].userId];
         //        [sql appendString:[TLUser user].userId];
         FMResultSet *set = [dataBase.dataBase executeQuery:sql];
         while ([set next])
         {
-            word = [set stringForColumn:@"Mnemonics"];
+            Mnemonics = [set stringForColumn:@"Mnemonics"];
             
         }
         [set close];
@@ -810,19 +836,19 @@ typedef NS_ENUM(NSInteger, WalletAddressType) {
                               }
                               [dataBase.dataBase close];
                               if ([word isEqualToString:textField.text]) {
-
+           
                                   NSString *result;
                                   if ([self.currency.symbol isEqualToString:@"ETH"]) {
-                                      result =[MnemonicUtil sendTransactionWithMnemonicWallet:word address:self.balanceTF.text amount:gaspic gaspic:self.pricr gasLimt:@"21000"];
+                                      result =[MnemonicUtil sendTransactionWithMnemonicWallet:Mnemonics address:self.balanceTF.text amount:gaspic gaspic:self.pricr gasLimt:@"21000"];
                                   }else{
                                       
-                                      result =[MnemonicUtil sendWanTransactionWithMnemonicWallet:word address:self.balanceTF.text amount:gaspic gaspic:self.pricr gasLimt:@"21000"];
+                                      result =[MnemonicUtil sendWanTransactionWithMnemonicWallet:Mnemonics address:self.balanceTF.text amount:gaspic gaspic:self.pricr gasLimt:@"21000"];
                                   }
                                   
                                   
                                   if ([result isEqualToString:@"1"]) {
                                       [MBProgressHUD hideHUDForView:self.view animated:YES];
-                                      [TLAlert alertWithInfo:@"转账成功"];
+                                      [TLAlert alertWithInfo:[LangSwitcher switchLang:@"转账成功" key:nil]];
                                       dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                                           [self.navigationController popViewControllerAnimated:YES];
                                       });
@@ -831,12 +857,12 @@ typedef NS_ENUM(NSInteger, WalletAddressType) {
                                   {
                                       [MBProgressHUD hideHUDForView:self.view animated:YES];
                                       
-                                      [TLAlert alertWithInfo:@"转账失败"];
-                                      
+                                      [TLAlert alertWithInfo:[LangSwitcher switchLang:@"转账失败" key:nil]];
+
                                       
                                   }
                               }else{
-                                  [TLAlert alertWithError:@"交易密码错误"];
+                                  [TLAlert alertWithError:[LangSwitcher switchLang:@"交易密码错误" key:nil]];
                                   [MBProgressHUD hideHUDForView:self.view animated:YES];
 
                               }

@@ -212,17 +212,17 @@
     UITapGestureRecognizer *tapGR = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickCopy)];
     [self.addressView addGestureRecognizer:tapGR];
     
-    //分割线
-    UIView *line = [[UIView alloc] init];
-    line.backgroundColor = kLineColor;
-    [self.addressView addSubview:line];
-    [line mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.left.right.equalTo(@0);
-        make.top.equalTo(@0);
-        make.height.equalTo(@0.5);
-        
-    }];
+//    //分割线
+//    UIView *line = [[UIView alloc] init];
+//    line.backgroundColor = kLineColor;
+//    [self.addressView addSubview:line];
+//    [line mas_makeConstraints:^(MASConstraintMaker *make) {
+//
+//        make.left.right.equalTo(@0);
+//        make.top.equalTo(@0);
+//        make.height.equalTo(@0.5);
+//
+//    }];
     
     UILabel *textlbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:15.0];
     textlbl.text = [LangSwitcher switchLang:@"地址" key:nil];

@@ -137,7 +137,6 @@
             [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入资金密码" key:nil]];
             return ;
         }
-        
         TLNetworking *http = [TLNetworking new];
         http.code = @"623000";
         http.parameters[@"userId"] = [TLUser user].userId;
@@ -148,13 +147,17 @@
         http.parameters[@"greeting"] = greeting;
         http.parameters[@"tradePwd"] = password;
         [http postWithSuccess:^(id responseObject) {
-//            weakSelf.pwdView.hidden = YES;
+            weakSelf.pwdView.hidden = YES;
             [weakSelf.pwdView.password clearText];
             RedEnvelopeShoreVC *vc = [RedEnvelopeShoreVC new];
             vc.code = responseObject[@"data"][@"code"];
             vc.content = greeting;
             [weakSelf presentViewController:vc animated:YES completion:nil];
         } failure:^(NSError *error) {
+            weakSelf.pwdView.hidden = YES;
+
+            [weakSelf.pwdView.password clearText];
+
             NSLog(@"%@",error);
         }];
     };

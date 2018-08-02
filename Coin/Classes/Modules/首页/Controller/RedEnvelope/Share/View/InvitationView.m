@@ -78,10 +78,14 @@
     NSString *lang;
     LangType type = [LangSwitcher currentLangType];
     if (type == LangTypeSimple || type == LangTypeTraditional) {
-        lang = @"cn";
-    }else{
-        lang = @"en";
+        lang = @"ZH_CN";
+    }else if (type == LangTypeKorean)
+    {
+        lang = @"KO";
 
+        
+    }else{
+         lang = @"EN";
         
     }
     

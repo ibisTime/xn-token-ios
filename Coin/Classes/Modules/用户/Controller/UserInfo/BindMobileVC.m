@@ -111,7 +111,7 @@
         return;
     }
     
-    if (![self.captchaView.captchaTf.text valid] || self.captchaView.captchaTf.text.length < 4 ) {
+    if (![self.captchaView.captchaTf.text valid] ) {
         [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入正确的验证码" key:nil]];
         return;
     }

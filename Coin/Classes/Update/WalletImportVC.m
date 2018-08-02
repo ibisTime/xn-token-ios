@@ -120,7 +120,8 @@
     phone7.frame = CGRectMake(margin*2, nameTf.yy, w-30, 1);
     TLTextField *pwdTf = [[TLTextField alloc] initWithFrame:CGRectMake(margin, nameTf.yy+5, w, h) leftTitle:[LangSwitcher switchLang:@"" key:nil] titleWidth:20 placeholder:[LangSwitcher switchLang:@"请输入密码" key:nil]];
     pwdTf.secureTextEntry = YES;
-    
+    pwdTf.keyboardType = UIKeyboardTypePhonePad;
+
     [self.view addSubview:pwdTf];
     self.pwdTf = pwdTf;
     UIView *phone3 = [[UIView alloc] init];
@@ -138,6 +139,8 @@
     TLTextField *rePwdTf = [[TLTextField alloc] initWithFrame:CGRectMake(margin, pwdTf.yy + 1, w, h) leftTitle:[LangSwitcher switchLang:@"" key:nil] titleWidth:20 placeholder:[LangSwitcher switchLang:@"请输入重复密码" key:nil]];
     rePwdTf.secureTextEntry = YES;
     [self.view addSubview:rePwdTf];
+    rePwdTf.keyboardType = UIKeyboardTypePhonePad;
+
     self.rePwdTf = rePwdTf;
     UIView *phone4 = [[UIView alloc] init];
     [self.view addSubview:phone4];
@@ -252,15 +255,15 @@
         return;
     }
     
-    if (!(self.pwdTf.text && self.pwdTf.text.length > 5)) {
-        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入6位以上密码" key:nil]];
+    if ((!self.pwdTf.text || self.pwdTf.text.length != 6)) {
+        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入6位密码" key:nil]];
         
         return;
     }
     
-    if (!(self.rePwdTf.text &&self.rePwdTf.text.length > 5)) {
+    if ((!self.rePwdTf.text  || self.rePwdTf.text.length != 6)) {
         
-        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入6位以上密码" key:nil]];
+        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入6位密码" key:nil]];
         return;
     }
     
@@ -285,8 +288,7 @@
 //    //
     
     //            [[NSUserDefaults standardUserDefaults] synchronize];
-    WalletNewFeaturesVC *newVC = [WalletNewFeaturesVC new];
-    [UIApplication sharedApplication].keyWindow.rootViewController = newVC;
+  
     
     //验证
     self.wordArray = [NSArray array];
@@ -335,10 +337,13 @@
         
         if (Mnemonics.length > 0) {
             //验证正确
-            RevisePassWordVC *vc = [[RevisePassWordVC alloc] init];
-            vc.IsImport = YES;
-            [self.navigationController pushViewController:vc animated:YES];
             [TLAlert alertWithMsg:[LangSwitcher switchLang:@"导入成功" key:nil]];
+
+            WalletNewFeaturesVC *newVC = [WalletNewFeaturesVC new];
+            [UIApplication sharedApplication].keyWindow.rootViewController = newVC;
+//            RevisePassWordVC *vc = [[RevisePassWordVC alloc] init];
+//            vc.IsImport = YES;
+//            [self.navigationController pushViewController:vc animated:YES];
         }else{
             
             //储存导入的钱包
@@ -349,10 +354,10 @@
                 NSLog(@"导入地址私钥%d",sucess);
             }
             [dateBase.dataBase close];
-            RevisePassWordVC *vc = [[RevisePassWordVC alloc] init];
-            vc.IsImport = YES;
-            [self.navigationController pushViewController:vc animated:YES];
             [TLAlert alertWithMsg:[LangSwitcher switchLang:@"导入成功" key:nil]];
+
+            WalletNewFeaturesVC *newVC = [WalletNewFeaturesVC new];
+            [UIApplication sharedApplication].keyWindow.rootViewController = newVC;
         }
         
 //        [[NSUserDefaults standardUserDefaults] setObject:word forKey:KWalletWord];
@@ -384,7 +389,7 @@
     HTMLStrVC *htmlVC = [[HTMLStrVC alloc] init];
     self.navigationController.navigationBar.hidden = NO;
     
-    htmlVC.type = HTMLTypePrivacy;
+    htmlVC.type = HTMLTypeMnemonic;
     
     [self.navigationController pushViewController:htmlVC animated:YES];
     

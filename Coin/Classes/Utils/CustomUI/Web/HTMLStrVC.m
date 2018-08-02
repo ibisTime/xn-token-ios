@@ -149,7 +149,7 @@
         case HTMLTypeMnemonic_backup: {
             ckey = [NSString stringWithFormat:@"mnemonic_backup_%@",[APPLanguage currentLanguage].currentLange];
             
-            name = [LangSwitcher switchLang:@"如何备份助记词" key:nil];
+            name = [LangSwitcher switchLang:@"如何备份钱包" key:nil];
             break;
         }
         case HTMLTypeRed_packet_rule: {

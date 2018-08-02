@@ -94,7 +94,7 @@ static NSString *identifierCell = @"BillListCell";
     [button mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(contentView.mas_top);
         make.right.equalTo(contentView.mas_right).offset(-15);
-        make.width.equalTo(@35);
+        make.width.equalTo(@75);
         make.height.equalTo(@22);
     }];
     UILabel *lab = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 22)];

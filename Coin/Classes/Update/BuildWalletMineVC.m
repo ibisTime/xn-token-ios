@@ -183,6 +183,7 @@
     phone1.frame = CGRectMake(margin*2,90+51, w-30, 1);
     
     TLTextField *pwdTf = [[TLTextField alloc] initWithFrame:CGRectMake(margin, 150 + 10, w, h) leftTitle:[LangSwitcher switchLang:@"" key:nil] titleWidth:20 placeholder:[LangSwitcher switchLang:@"请输入密码" key:nil]];
+    pwdTf.keyboardType = UIKeyboardTypePhonePad;
     pwdTf.secureTextEntry = YES;
     
     [self.view addSubview:pwdTf];
@@ -199,6 +200,8 @@
 //    [self.view addSubview:pLab];
     TLTextField *rePwdTf = [[TLTextField alloc] initWithFrame:CGRectMake(margin, pwdTf.yy + 1, w, h) leftTitle:[LangSwitcher switchLang:@"" key:nil] titleWidth:20 placeholder:[LangSwitcher switchLang:@"确认密码" key:nil]];
     rePwdTf.secureTextEntry = YES;
+    rePwdTf.keyboardType = UIKeyboardTypePhonePad;
+
     [self.view addSubview:rePwdTf];
     self.rePwdTf = rePwdTf;
     UIView *phone4 = [[UIView alloc] init];
@@ -333,15 +336,15 @@
         return;
     }
     
-    if (!(self.pwdTf.text && self.pwdTf.text.length > 5)) {
-        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入6位以上密码" key:nil]];
+    if ((!self.pwdTf.text || self.pwdTf.text.length != 6 )) {
+        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入6位密码" key:nil]];
         
         return;
     }
     
-    if (!(self.rePwdTf.text &&self.rePwdTf.text.length > 5)) {
+    if ((!self.rePwdTf.text || self.rePwdTf.text.length != 6)) {
         
-        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入6位以上密码" key:nil]];
+        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入6位密码" key:nil]];
         return;
     }
     

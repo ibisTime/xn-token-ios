@@ -168,9 +168,9 @@
         return;
     }
     
-    if (!(self.oldPwdTf.text.length > 5)) {
+    if ((self.oldPwdTf.text.length != 6)) {
         
-        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入6位以上旧密码" key:nil]];
+        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入6位旧密码" key:nil]];
         return;
     }
     
@@ -180,9 +180,9 @@
         return;
     }
     
-    if (!(self.rePwdTf.text.length > 5)) {
+    if ((self.rePwdTf.text.length != 6)) {
         
-        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入6位以上新密码" key:nil]];
+        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入6位新密码" key:nil]];
         return;
     }
     

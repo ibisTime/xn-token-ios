@@ -109,7 +109,7 @@
     
     TLNetworking *http = [TLNetworking new];
     http.showView = self.view;
-    http.code = @"805952";
+    http.code = @"805954";
 //    http.parameters[@"companyCode"] = @"";
     http.parameters[@"email"] = self.contentTf.text;
     http.parameters[@"bizType"] = @"805081";

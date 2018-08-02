@@ -148,8 +148,14 @@
                 if (i == 1) {
                     self.total = nameLabel;
                 }
+                
                 UITextField *nameTF = [[UITextField alloc]initWithFrame:CGRectMake(90, 0, kWidth(255) - 90 - 30, kHeight(48))];
                 if (i == 0) {
+//                    nameTF.enabled = NO;
+                  UILabel *  name = [[UILabel alloc] initWithFrame:CGRectMake(90, 0, kWidth(255) - 90 - 30, kHeight(48))];
+//                    nameTF = name;
+                    
+//                    [nameTF resignFirstResponder];
                     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(Tap)];
                     [nameTF addGestureRecognizer:tap];
                 }
@@ -260,7 +266,7 @@
         [imageV addGestureRecognizer:tap];
         imageV.userInteractionEnabled = YES;
         [self addSubview:imageV];
-        imageV.image = kImage(@"问号");
+        imageV.image = kImage(@"红包规则问号");
         [imageV mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(IntoButton.mas_bottom).offset(10);
             make.left.equalTo(redIntroduce.mas_right).offset(3);
@@ -332,7 +338,7 @@
         sender.selected = !sender.selected;
         if (sender.selected == YES)
         {
-            introduce.text = [LangSwitcher switchLang:@"当前为拼手气红包" key:nil];
+            introduce.text = [LangSwitcher switchLang:@"当前为普通红包" key:nil];
 
             self.total.text = [LangSwitcher switchLang:@"单个数量" key:nil];
             _type = @"0";
@@ -340,7 +346,7 @@
         else
         {
             self.total.text = [LangSwitcher switchLang:@"代币总额" key:nil];
-            introduce.text = [LangSwitcher switchLang:@"当前为普通红包" key:nil];
+            introduce.text = [LangSwitcher switchLang:@"当前为拼手气红包" key:nil];
             _type = @"1";
         }
         [self CalculateThePrice];
@@ -471,7 +477,7 @@
     }];
     
     UIButton *sureButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [sureButton setBackgroundColor:kHexColor(@"#FFB25B") forState:UIControlStateNormal];
+    [sureButton setBackgroundColor:SugarPacketsBack forState:UIControlStateNormal];
     [sureButton setTitleColor:kHexColor(@"#A75E02 ") forState:UIControlStateNormal];
     [whiteView addSubview:sureButton];
     [sureButton setTitle:[LangSwitcher switchLang:@"立即付款" key:nil] forState:UIControlStateNormal];
@@ -532,7 +538,7 @@
     NSString *leftAmount = [CoinUtil convertToRealCoin:platform.amountString coin:coin.symbol];
     NSString *rightAmount = [CoinUtil convertToRealCoin:platform.frozenAmountString coin:coin.symbol];
     NSString *ritAmount = [leftAmount subNumber:rightAmount];
-    alltotalLabel.text = [NSString stringWithFormat:@"%@%@ %.3f,",[LangSwitcher switchLang:@"个人账户余额" key:nil],platform.currency,[ritAmount floatValue]];
+    alltotalLabel.text = [NSString stringWithFormat:@"%@%@ %.3f",[LangSwitcher switchLang:@"个人账户余额" key:nil],platform.currency,[ritAmount floatValue]];
 
 
     NSString *str = [NSString stringWithFormat:@"%@ 0.000 %@",[LangSwitcher switchLang:@"共发送" key:nil],_currency];
@@ -542,6 +548,10 @@
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
     if (textField.tag == 1000) {
+        return NO;
+    }
+    if (textField.tag == 10000) {
+        [self Tap];
         return NO;
     }
     return YES;
@@ -616,8 +626,8 @@
                 }
             }
             if ((single >= '0' && single <= '9')) {
-                if ([resultStr floatValue] > 500) {
-                    [TLAlert alertWithInfo:[LangSwitcher switchLang:@"数量不得大于500" key:nil]];
+                if ([resultStr floatValue] > 10000) {
+                    [TLAlert alertWithInfo:[LangSwitcher switchLang:@"数量不得大于10000" key:nil]];
                     return NO;
                 }else
                 {
@@ -629,6 +639,10 @@
                 return NO;
             }
         }
+    }else if(textField.tag == 10000)
+    {
+        
+        return NO;
     }
 
     return YES;

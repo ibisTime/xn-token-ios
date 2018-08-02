@@ -119,6 +119,8 @@
     UIImageView *headIcon = [[UIImageView alloc] initWithFrame:CGRectMake((self.view.frame.size.width - 56) * 0.5, 30, 70, 70)];
     NSString *s = [[TLUser user].photo convertImageUrl];
     NSURL *url = [NSURL URLWithString:s];
+    headIcon.layer.cornerRadius = 35;
+    headIcon.clipsToBounds = YES;
      [headIcon sd_setImageWithURL:url placeholderImage:kImage(@"头像")];
     [self.view addSubview:headIcon];
     if (self.isCheck == YES) {
@@ -285,7 +287,7 @@
     if (self.lastGesturePsw.length == 0) {
         
         if (gesturesPassword.length < 4) {
-            self.statusLabel.text = [LangSwitcher switchLang:@"至少连接四个点，请重新输入" key:nil];
+            self.statusLabel.text = [LangSwitcher switchLang:@"至少连接4个点，请重新绘制" key:nil];
             [self.gestureLockView showErrowMessage];
             [self shakeAnimationForView:self.statusLabel];
             return;
@@ -301,7 +303,7 @@
                 //验证成功
                 self.statusLabel.text = @"密码正确";
                 [self.gestureLockView clearAll];
-                [TLAlert alertWithSucces:@"验证通过"];
+                [TLAlert alertWithSucces:[LangSwitcher switchLang:@"验证通过" key:nil]];
                 
                 if (self.CheckSucessBlock) {
                     self.CheckSucessBlock();
@@ -368,13 +370,14 @@
     } else {
         
         if (errorCount - 1 == 0) { // 你已经输错五次了！ 退出重新登陆！
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"手势密码已失效" message:[LangSwitcher switchLang:@"请重新登陆" key:nil] delegate:self cancelButtonTitle:nil otherButtonTitles:[LangSwitcher switchLang:@"重新登陆" key:nil], nil];
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[LangSwitcher switchLang:@"请重新登陆" key:nil] message:[LangSwitcher switchLang:@"请重新登陆" key:nil] delegate:self cancelButtonTitle:nil otherButtonTitles:[LangSwitcher switchLang:@"重新登陆" key:nil], nil];
             [alertView show];
             errorCount = 5;
             return;
         }
         
-        self.statusLabel.text = [NSString stringWithFormat:@"%@%ld",@"密码错误，还可以再输入%ld次",--errorCount];
+        self.statusLabel.text =[LangSwitcher switchLang:[NSString stringWithFormat:@"密码错误，还可以再输入%ld次",--errorCount] key:nil];
+        ;
         [self shakeAnimationForView:self.statusLabel];
     }
 }

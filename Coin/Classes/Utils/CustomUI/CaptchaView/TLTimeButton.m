@@ -78,7 +78,13 @@
         [_timer invalidate];
         _timer = nil;
         _time = _totalTime;
-        self.backgroundColor = kClearColor;
+        self.backgroundColor = kAppCustomMainColor;
+        [self setTitle:[LangSwitcher switchLang:@"获取验证码" key:nil] forState:UIControlStateNormal];
+        
+        [self setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        
+//        [self setTitleColor:[UIColor whiteColor] forState:UIControlStateDisabled];
+//        self.titleLabel.font = Font(15.0);
         self.enabled = YES;
     }
     
