@@ -108,17 +108,17 @@
     
     CGFloat btnMargin = 15;
     
-    TLTextField *nameTf = [[TLTextField alloc] initWithFrame:CGRectMake(margin, textView.yy+5, w, h) leftTitle:[LangSwitcher switchLang:@"" key:nil] titleWidth:20 placeholder:[LangSwitcher switchLang:@"钱包名称" key:nil]];
-//    nameTf.secureTextEntry = YES;
-    
-    [self.view addSubview:nameTf];
-    self.nameTf = nameTf;
-    
-    UIView *phone7 = [[UIView alloc] init];
-    [self.view addSubview:phone7];
-    phone7.backgroundColor = kLineColor;
-    phone7.frame = CGRectMake(margin*2, nameTf.yy, w-30, 1);
-    TLTextField *pwdTf = [[TLTextField alloc] initWithFrame:CGRectMake(margin, nameTf.yy+5, w, h) leftTitle:[LangSwitcher switchLang:@"" key:nil] titleWidth:20 placeholder:[LangSwitcher switchLang:@"请输入密码" key:nil]];
+//    TLTextField *nameTf = [[TLTextField alloc] initWithFrame:CGRectMake(margin, textView.yy+5, w, h) leftTitle:[LangSwitcher switchLang:@"" key:nil] titleWidth:20 placeholder:[LangSwitcher switchLang:@"钱包名称" key:nil]];
+////    nameTf.secureTextEntry = YES;
+//
+//    [self.view addSubview:nameTf];
+//    self.nameTf = nameTf;
+//
+//    UIView *phone7 = [[UIView alloc] init];
+//    [self.view addSubview:phone7];
+//    phone7.backgroundColor = kLineColor;
+//    phone7.frame = CGRectMake(margin*2, nameTf.yy, w-30, 1);
+    TLTextField *pwdTf = [[TLTextField alloc] initWithFrame:CGRectMake(margin, textView.yy+5, w, h) leftTitle:[LangSwitcher switchLang:@"" key:nil] titleWidth:20 placeholder:[LangSwitcher switchLang:@"请输入密码" key:nil]];
     pwdTf.secureTextEntry = YES;
     pwdTf.keyboardType = UIKeyboardTypePhonePad;
 
@@ -248,12 +248,12 @@
 - (void)importNow
 {
     
-    if (!self.nameTf.text) {
-        
-        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入钱包名称" key:nil]];
-        
-        return;
-    }
+//    if (!self.nameTf.text) {
+//
+//        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入钱包名称" key:nil]];
+//
+//        return;
+//    }
     
     if ((!self.pwdTf.text || self.pwdTf.text.length != 6)) {
         [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入6位密码" key:nil]];
@@ -276,15 +276,7 @@
 //    NSString *pwd = [self.FirstPSWArray componentsJoinedByString:@""];
 //    //            [[NSUserDefaults standardUserDefaults] setObject:pwd forKey:KUserPwd];
 //    //导入钱包交易密码
-//    NSString *name;
-//    TLDataBase *db = [TLDataBase sharedManager];
-//    if ([db.dataBase open]) {
-//        NSString *sql = [NSString stringWithFormat:@"UPDATE THAWallet SET PwdKey = '%@' WHERE userId = '%@'",pwd,[TLUser user].userId];
-//        BOOL sucess = [db.dataBase executeUpdate:sql];
-//
-//        NSLog(@"导入钱包交易密码%d",sucess);
-//    }
-//    [db.dataBase close];
+   
 //    //
     
     //            [[NSUserDefaults standardUserDefaults] synchronize];
@@ -349,8 +341,9 @@
             //储存导入的钱包
             TLDataBase *dateBase = [TLDataBase sharedManager];
             if ([dateBase.dataBase open]) {
-                BOOL sucess = [dateBase.dataBase executeUpdate:@"insert into THAWallet(userId,Mnemonics,wanAddress,wanPrivate,ethPrivate,ethAddress,PwdKey,name) values(?,?,?,?,?,?,?,?)",[TLUser user].userId,word,address,prikey,prikey,address,self.pwdTf.text,self.nameTf.text];
-                
+                BOOL sucess = [dateBase.dataBase executeUpdate:@"insert into THAWallet(userId,Mnemonics,wanAddress,wanPrivate,ethPrivate,ethAddress,PwdKey) values(?,?,?,?,?,?,?)",[TLUser user].userId,word,address,prikey,prikey,address,self.pwdTf.text];
+//
+//                 BOOL sucess = [dateBase.dataBase executeUpdate:@"insert into THAWallet(userId,Mnemonics,wanAddress,wanPrivate,ethPrivate,ethAddress,PwdKey,name) values(?,?,?,?,?,?,?,?)",[TLUser user].userId,word,address,prikey,prikey,address,self.pwdTf.text,self.nameTf.text];
                 NSLog(@"导入地址私钥%d",sucess);
             }
             [dateBase.dataBase close];

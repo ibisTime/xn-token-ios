@@ -77,7 +77,7 @@
     //配置根控制器
     [self configRootViewController];
     [LangSwitcher startWithTraditional];
-
+   
     //初始化为繁体
     //初始化数据库
     
@@ -86,7 +86,12 @@
 //        [ [TLDataBase sharedManager].dataBase executeUpdate:@"UPDATE THAWallet SET userId='China'"];
 
         NSLog(@"数据库打开成功");
+        
+        
+        
     }
+    
+    
 
     //退出登录消息通知
     [[NSNotificationCenter defaultCenter] addObserver:self
