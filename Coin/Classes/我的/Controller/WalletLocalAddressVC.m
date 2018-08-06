@@ -71,7 +71,7 @@
     NSString *address;
     NSMutableArray *arr = [NSMutableArray array];
     if ([dataBase.dataBase open]) {
-        NSString *sql = [NSString stringWithFormat:@"SELECT symbol,address from LocalWallet lo, THAWallet th where lo.walletId = th.walletId  and th.userId = '%@'",[TLUser user].userId];
+        NSString *sql = [NSString stringWithFormat:@"SELECT symbol,address from THALocal lo, THAUser th where lo.walletId = th.walletId  and th.userId = '%@'",[TLUser user].userId];
         //        [sql appendString:[TLUser user].userId];
         FMResultSet *set = [dataBase.dataBase executeQuery:sql];
         while ([set next])

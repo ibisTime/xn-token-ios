@@ -200,7 +200,7 @@
         
         if ([data.dataBase open]) {
             //            [db executeUpdate:@"create table if not exists LocalWallet(id INTEGER PRIMARY KEY AUTOINCREMENT,walletId text, symbol text, type text ,status text,cname text,unit text,pic1 text,withdrawFeeString text,withfrawFee text,orderNo text,ename text,icon text,pic2 text,pic3 text,address text,IsSelect INTEGER,next text)"];
-            NSString *sql = [NSString stringWithFormat:@"SELECT * from LocalWallet lo, THAWallet th where lo.walletId = th.walletId  and th.userId = '%@'",[TLUser user].userId];
+            NSString *sql = [NSString stringWithFormat:@"SELECT * from THALocal lo, THAUser th where lo.walletId = th.walletId  and th.userId = '%@'",[TLUser user].userId];
             FMResultSet *set = [data.dataBase executeQuery:sql];
             while ([set next]) {
                 CurrencyModel *model =[CurrencyModel new];
@@ -230,7 +230,7 @@
         CurrencyModel *model = self.tableView.currencys[i];
         if ([data.dataBase open]) {
             //            [db executeUpdate:@"create table if not exists LocalWallet(id INTEGER PRIMARY KEY AUTOINCREMENT,walletId text, symbol text, type text ,status text,cname text,unit text,pic1 text,withdrawFeeString text,withfrawFee text,orderNo text,ename text,icon text,pic2 text,pic3 text,address text,IsSelect INTEGER,next text)"];
-            NSString *sql = [NSString stringWithFormat:@"UPDATE LocalWallet SET IsSelect = '%@' WHERE walletId = (SELECT walletId from THAWallet where userId='%@') and symbol = '%@' ",[NSNumber numberWithBool:model.IsSelected],[TLUser user].userId,model.symbol];
+            NSString *sql = [NSString stringWithFormat:@"UPDATE THALocal SET IsSelect = '%@' WHERE walletId = (SELECT walletId from THAUser where userId='%@') and symbol = '%@' ",[NSNumber numberWithBool:model.IsSelected],[TLUser user].userId,model.symbol];
             BOOL sucess = [data.dataBase executeUpdate:sql];
             NSLog(@"更新自选状态%d",sucess);
         }

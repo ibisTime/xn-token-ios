@@ -172,17 +172,17 @@
 //    [self.view addSubview:pwdLab];
     
     
-//    TLTextField *nameTf = [[TLTextField alloc] initWithFrame:CGRectMake(margin, 90 + 10, w, h) leftTitle:[LangSwitcher switchLang:@"" key:nil] titleWidth:20 placeholder:[LangSwitcher switchLang:@"钱包名称" key:nil]];
-////    nameTf.secureTextEntry = YES;
-//
-//    [self.view addSubview:nameTf];
-//    self.nameTf = nameTf;
-//    UIView *phone1 = [[UIView alloc] init];
-//    [self.view addSubview:phone1];
-//    phone1.backgroundColor = kLineColor;
-//    phone1.frame = CGRectMake(margin*2,90+51, w-30, 1);
-//
-    TLTextField *pwdTf = [[TLTextField alloc] initWithFrame:CGRectMake(margin, 90 + 10, w, h) leftTitle:[LangSwitcher switchLang:@"" key:nil] titleWidth:20 placeholder:[LangSwitcher switchLang:@"请输入密码" key:nil]];
+    TLTextField *nameTf = [[TLTextField alloc] initWithFrame:CGRectMake(margin, 90 + 10, w, h) leftTitle:[LangSwitcher switchLang:@"" key:nil] titleWidth:20 placeholder:[LangSwitcher switchLang:@"钱包名称" key:nil]];
+//    nameTf.secureTextEntry = YES;
+
+    [self.view addSubview:nameTf];
+    self.nameTf = nameTf;
+    UIView *phone1 = [[UIView alloc] init];
+    [self.view addSubview:phone1];
+    phone1.backgroundColor = kLineColor;
+    phone1.frame = CGRectMake(margin*2,90+51, w-30, 1);
+
+    TLTextField *pwdTf = [[TLTextField alloc] initWithFrame:CGRectMake(margin, nameTf.yy + 10, w, h) leftTitle:[LangSwitcher switchLang:@"" key:nil] titleWidth:20 placeholder:[LangSwitcher switchLang:@"请输入密码" key:nil]];
     pwdTf.keyboardType = UIKeyboardTypePhonePad;
     pwdTf.secureTextEntry = YES;
     
@@ -329,12 +329,12 @@
 {
     
     
-//    if (!self.nameTf.text) {
-//
-//        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入钱包名称" key:nil]];
-//
-//        return;
-//    }
+    if (!self.nameTf.text) {
+
+        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入钱包名称" key:nil]];
+
+        return;
+    }
     
     if ((!self.pwdTf.text || self.pwdTf.text.length != 6 )) {
         [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入6位密码" key:nil]];

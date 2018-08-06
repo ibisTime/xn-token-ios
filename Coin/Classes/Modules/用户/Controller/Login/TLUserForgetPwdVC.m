@@ -231,6 +231,9 @@
     rePwdTf.secureTextEntry = YES;
 //    rePwdTf.keyboardType = UIKeyboardTypePhonePad;
 
+    rePwdTf.returnKeyType = UIReturnKeyDone;
+    [rePwdTf addTarget:self action:@selector(changePwd) forControlEvents:UIControlEventEditingDidEndOnExit];
+
     [self.view addSubview:rePwdTf];
     self.rePwdTf = rePwdTf;
     UIView *phone4 = [[UIView alloc] init];
@@ -388,6 +391,11 @@
         
     }];
     
+}
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    
+    [self.view endEditing:YES];
 }
 
 - (void)didReceiveMemoryWarning {

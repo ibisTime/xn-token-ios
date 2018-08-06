@@ -109,6 +109,8 @@
 #define KWalletAddress @"walletAddress"
 #define KWalletPrivateKey @"walletPrivateKey"
 #define GesturesPassword @"gesturespassword"
+#define KDBVersion @"KDBVersion"
+#define KIS160 @"KIS160"
 
 
 #pragma mark - 轮播图

@@ -791,7 +791,7 @@ typedef NS_ENUM(NSInteger, WalletAddressType) {
     TLDataBase *dataBase = [TLDataBase sharedManager];
     NSString *Mnemonics;
     if ([dataBase.dataBase open]) {
-        NSString *sql = [NSString stringWithFormat:@"SELECT Mnemonics from THAWallet where userId = '%@'",[TLUser user].userId];
+        NSString *sql = [NSString stringWithFormat:@"SELECT Mnemonics from THAUser where userId = '%@'",[TLUser user].userId];
         //        [sql appendString:[TLUser user].userId];
         FMResultSet *set = [dataBase.dataBase executeQuery:sql];
         while ([set next])
@@ -824,7 +824,7 @@ typedef NS_ENUM(NSInteger, WalletAddressType) {
                               TLDataBase *dataBase = [TLDataBase sharedManager];
                               NSString *word;
                               if ([dataBase.dataBase open]) {
-                                  NSString *sql = [NSString stringWithFormat:@"SELECT PwdKey from THAWallet where userId = '%@'",[TLUser user].userId];
+                                  NSString *sql = [NSString stringWithFormat:@"SELECT PwdKey from THAUser where userId = '%@'",[TLUser user].userId];
                                   //        [sql appendString:[TLUser user].userId];
                                   FMResultSet *set = [dataBase.dataBase executeQuery:sql];
                                   while ([set next])

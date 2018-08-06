@@ -176,6 +176,9 @@
                       forKeyPath:@"_placeholderLabel.font"];
                 [nameTF addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
                 [backView addSubview:nameTF];
+                if (i == 2) {
+                    nameTF.keyboardType = UIKeyboardTypePhonePad;
+                }
 
             }
             if (i == 0) {
@@ -189,6 +192,9 @@
             if (i == 1 || i == 2) {
                 UILabel *symbolLabel = [UILabel labelWithFrame:CGRectMake(kWidth(255) - 55, kHeight(48)/2 - 6.35, 47.4, 12.7) textAligment:(NSTextAlignmentCenter) backgroundColor:kClearColor font:Font(12) textColor:kTextColor3];
                 symbolLabel.text = symbolArrayl[i - 1];
+                if (i == 2) {
+                    
+                }
                 [backView addSubview:symbolLabel];
             }
             if (i == 3) {
@@ -436,7 +442,13 @@
     NSString *leftAmount = [CoinUtil convertToRealCoin:plat.amountString coin:coin.symbol];
     NSString *rightAmount = [CoinUtil convertToRealCoin:plat.frozenAmountString coin:coin.symbol];
     NSString *ritAmount = [leftAmount subNumber:rightAmount];
-    money.text = [NSString stringWithFormat:@"%@%@",_count,plat.currency];
+    if ([_type isEqualToString:@"0"]) {
+        money.text = [NSString stringWithFormat:@"%f%@",[_count floatValue]*[_sendNum floatValue],plat.currency];
+
+    }else{
+        money.text = [NSString stringWithFormat:@"%@%@",_count,plat.currency];
+
+    }
     [whiteView addSubview:money];
     [money mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(sureLab.mas_bottom).offset(16);

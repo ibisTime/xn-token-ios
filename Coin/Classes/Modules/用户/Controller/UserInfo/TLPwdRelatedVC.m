@@ -242,9 +242,9 @@
                                                     leftTitle:[LangSwitcher switchLang:@"确认密码" key:nil]
                                                    titleWidth:leftW
                                                   placeholder:[LangSwitcher switchLang:@"请确认密码" key:nil]];
-    
-    rePwdTf.returnKeyType = UIReturnKeyDone;
     rePwdTf.keyboardType = UIKeyboardTypePhonePad;
+
+    rePwdTf.returnKeyType = UIReturnKeyDone;
 
     [rePwdTf addTarget:self action:@selector(done:) forControlEvents:UIControlEventEditingDidEndOnExit];
 
@@ -361,6 +361,12 @@
         
     }];
     
+}
+
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    
+    [self.view endEditing:YES];
 }
 
 - (void)clickPaste {

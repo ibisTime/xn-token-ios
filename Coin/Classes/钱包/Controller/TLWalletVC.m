@@ -103,7 +103,7 @@
     TLDataBase *dataBase = [TLDataBase sharedManager];
     NSString *word;
     if ([dataBase.dataBase open]) {
-        NSString *sql = [NSString stringWithFormat:@"SELECT Mnemonics from THAWallet where userId = '%@'",[TLUser user].userId];
+        NSString *sql = [NSString stringWithFormat:@"SELECT Mnemonics from THAUser where userId = '%@'",[TLUser user].userId];
         //        [sql appendString:[TLUser user].userId];
         FMResultSet *set = [dataBase.dataBase executeQuery:sql];
         while ([set next])
@@ -126,8 +126,8 @@
             [self switchWithTager:0 ];
 
         }else{
-            
-            [self switchWithTager:1 ];
+//            [self.headerView swipeBottomClick:nil];
+//            [self switchWithTager:1 ];
 
         }
 //   [self inreoduceView:@"个人账户" content:@"个人账户就是指中心化钱包,是由THA替您保管私钥,在中心化钱包中,不存在钱包丢失了无法找回的情况,可以通过身份证找回您的钱包,并且可以让您体验到更多的服务。"];
@@ -653,7 +653,7 @@
         TLDataBase *dataBase = [TLDataBase sharedManager];
         NSString *Mnemonics;
         if ([dataBase.dataBase open]) {
-            NSString *sql = [NSString stringWithFormat:@"SELECT Mnemonics from THAWallet where userId = '%@'",[TLUser user].userId];
+            NSString *sql = [NSString stringWithFormat:@"SELECT Mnemonics from THAUser where userId = '%@'",[TLUser user].userId];
             //        [sql appendString:[TLUser user].userId];
             FMResultSet *set = [dataBase.dataBase executeQuery:sql];
             while ([set next])
@@ -857,7 +857,7 @@
 
     if ([data.dataBase open]) {
       
-        NSString *sql = [NSString stringWithFormat:@"SELECT next from LocalWallet lo, THAWallet th where lo.walletId = th.walletId  and th.userId = '%@'",[TLUser user].userId];
+        NSString *sql = [NSString stringWithFormat:@"SELECT next from THALocal lo, THAUser th where lo.walletId = th.walletId  and th.userId = '%@'",[TLUser user].userId];
         FMResultSet *set = [data.dataBase executeQuery:sql];
         while ([set next]) {
             
@@ -874,7 +874,7 @@
         
         if ([data.dataBase open]) {
             
-            NSString *sql = [NSString stringWithFormat:@"SELECT symbol from LocalWallet lo, THAWallet th where lo.walletId = th.walletId  and th.userId = '%@'",[TLUser user].userId];
+            NSString *sql = [NSString stringWithFormat:@"SELECT symbol from THALocal lo, THAUser th where lo.walletId = th.walletId  and th.userId = '%@'",[TLUser user].userId];
             FMResultSet *set = [data.dataBase executeQuery:sql];
             while ([set next]) {
                 
@@ -895,7 +895,7 @@
                     TLDataBase *db = [TLDataBase sharedManager];
                     
                     if ([db.dataBase open]) {
-                        NSString *Sql2 =[NSString stringWithFormat:@"delete from LocalWallet WHERE walletId = (SELECT walletId from THAWallet where userId='%@')",[TLUser user].userId];
+                        NSString *Sql2 =[NSString stringWithFormat:@"delete from THALocal WHERE walletId = (SELECT walletId from THAUser where userId='%@')",[TLUser user].userId];
                         
                         BOOL sucess2  = [db.dataBase executeUpdate:Sql2];
                         NSLog(@"更新自选表%d",sucess2);
@@ -909,7 +909,7 @@
                         TLDataBase *dateBase = [TLDataBase sharedManager];
                         if ([dateBase.dataBase open]) {
                             //            [db executeUpdate:@"create table if not exists LocalWallet(id INTEGER PRIMARY KEY AUTOINCREMENT,walletId text, symbol text, type text ,status text,cname text,unit text,pic1 text,withdrawFeeString text,withfrawFee text,orderNo text,ename text,icon text,pic2 text,pic3 text,address text,IsSelect INTEGER,next text)"];
-                            BOOL sucess = [dateBase.dataBase executeUpdate:@"INSERT INTO  LocalWallet(walletId,symbol,type,status,cname,unit,pic1,withdrawFeeString,withfrawFee,orderNo,ename,icon,pic2,pic3,address,IsSelect,next) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",model.walletId,model.symbol,model.type,model.status,model.cname,model.unit,model.pic1,model.withdrawFeeString,model.withfrawFee,model.orderNo,model.ename,model.icon,model.pic2,model.pic3,model.address,[NSNumber numberWithBool:YES],[NSString stringWithFormat:@"%ld",self.coins.count]];
+                            BOOL sucess = [dateBase.dataBase executeUpdate:@"INSERT INTO  THALocal(walletId,symbol,type,status,cname,unit,pic1,withdrawFeeString,withfrawFee,orderNo,ename,icon,pic2,pic3,address,IsSelect,next) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",model.walletId,model.symbol,model.type,model.status,model.cname,model.unit,model.pic1,model.withdrawFeeString,model.withfrawFee,model.orderNo,model.ename,model.icon,model.pic2,model.pic3,model.address,[NSNumber numberWithBool:YES],[NSString stringWithFormat:@"%ld",self.coins.count]];
                             
                             NSLog(@"插入币种表%d",sucess);
                         }
@@ -928,7 +928,7 @@
         TLDataBase *db = [TLDataBase sharedManager];
         
         if ([db.dataBase open]) {
-            NSString *Sql2 =[NSString stringWithFormat:@"delete from LocalWallet WHERE walletId = (SELECT walletId from THAWallet where userId='%@')",[TLUser user].userId];
+            NSString *Sql2 =[NSString stringWithFormat:@"delete from THALocal WHERE walletId = (SELECT walletId from THAUser where userId='%@')",[TLUser user].userId];
             
             BOOL sucess2  = [db.dataBase executeUpdate:Sql2];
             NSLog(@"更新自选表%d",sucess2);
@@ -941,7 +941,7 @@
         TLDataBase *dateBase = [TLDataBase sharedManager];
         if ([dateBase.dataBase open]) {
 //            [db executeUpdate:@"create table if not exists LocalWallet(id INTEGER PRIMARY KEY AUTOINCREMENT,walletId text, symbol text, type text ,status text,cname text,unit text,pic1 text,withdrawFeeString text,withfrawFee text,orderNo text,ename text,icon text,pic2 text,pic3 text,address text,IsSelect INTEGER,next text)"];
-            BOOL sucess = [dateBase.dataBase executeUpdate:@"INSERT INTO  LocalWallet(walletId,symbol,type,status,cname,unit,pic1,withdrawFeeString,withfrawFee,orderNo,ename,icon,pic2,pic3,address,IsSelect,next) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",model.walletId,model.symbol,model.type,model.status,model.cname,model.unit,model.pic1,model.withdrawFeeString,model.withfrawFee,model.orderNo,model.ename,model.icon,model.pic2,model.pic3,model.address,[NSNumber numberWithBool:YES],[NSString stringWithFormat:@"%ld",self.coins.count]];
+            BOOL sucess = [dateBase.dataBase executeUpdate:@"INSERT INTO  THALocal(walletId,symbol,type,status,cname,unit,pic1,withdrawFeeString,withfrawFee,orderNo,ename,icon,pic2,pic3,address,IsSelect,next) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",model.walletId,model.symbol,model.type,model.status,model.cname,model.unit,model.pic1,model.withdrawFeeString,model.withfrawFee,model.orderNo,model.ename,model.icon,model.pic2,model.pic3,model.address,[NSNumber numberWithBool:YES],[NSString stringWithFormat:@"%ld",self.coins.count]];
             
             NSLog(@"插入币种表%d",sucess);
         }
@@ -1064,7 +1064,7 @@
         }
    
     if ([db.dataBase open]) {
-          NSString *sql = [NSString stringWithFormat:@"SELECT %@address,walletId from THAWallet where userId = '%@'",symbol,[TLUser user].userId];
+          NSString *sql = [NSString stringWithFormat:@"SELECT %@address,walletId from THAUser where userId = '%@'",symbol,[TLUser user].userId];
        FMResultSet *set =  [db.dataBase executeQuery:sql];
         while ([set next]) {
            CoinModel *coin  = arr[i];
@@ -1198,7 +1198,7 @@
     NSMutableArray *arr = [NSMutableArray array];
 
     if ([dataBase.dataBase open]) {
-        NSString *sql = [NSString stringWithFormat:@"SELECT symbol,address from LocalWallet lo, THAWallet th where lo.walletId = th.walletId  and th.userId = '%@' and lo.IsSelect = 1",[TLUser user].userId];
+        NSString *sql = [NSString stringWithFormat:@"SELECT symbol,address from THALocal lo, THAUser th where lo.walletId = th.walletId  and th.userId = '%@' and lo.IsSelect = 1",[TLUser user].userId];
         //        [sql appendString:[TLUser user].userId];
         FMResultSet *set = [dataBase.dataBase executeQuery:sql];
         while ([set next])
@@ -1319,7 +1319,7 @@
     NSString *address;
     NSMutableArray *arr = [NSMutableArray array];
     if ([dataBase.dataBase open]) {
-        NSString *sql = [NSString stringWithFormat:@"SELECT symbol,address from LocalWallet lo, THAWallet th where lo.walletId = th.walletId  and th.userId = '%@' and lo.IsSelect = 1",[TLUser user].userId];
+        NSString *sql = [NSString stringWithFormat:@"SELECT symbol,address from THALocal lo, THAUser th where lo.walletId = th.walletId  and th.userId = '%@' and lo.IsSelect = 1",[TLUser user].userId];
         //        [sql appendString:[TLUser user].userId];
         FMResultSet *set = [dataBase.dataBase executeQuery:sql];
         while ([set next])

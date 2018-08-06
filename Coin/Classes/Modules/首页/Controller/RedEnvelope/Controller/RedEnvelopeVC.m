@@ -83,7 +83,7 @@
     self.pwdView.forgetBlock = ^{
         
         
-        TLPwdRelatedVC *vc  = [[TLPwdRelatedVC alloc] initWithType:TLPwdTypeForget];
+        TLPwdRelatedVC *vc  = [[TLPwdRelatedVC alloc] initWithType:TLPwdTypeTradeReset];
 
         [weakSelf.navigationController pushViewController:vc animated:YES];
         

@@ -588,3 +588,53 @@
 "快" = "fast";
 "慢" = "slow";
 "数量不得大于10000" = "The number must not exceed 10000";
+"你最多只能选择9张图片" = "choose 9 pictures at most";
+"问题描述(必填)" = "problem discrption (must)";
+"问题描述" = "problem discrption";
+"请详细描述一下问题" = "please describe problem in details";
+"复现步骤（必填)" = "reproduction steps (must)";
+"请填写复现步骤" = "please fill in reproduction steps";
+"备注(选填)" = "remark (option)";
+"历史反馈" = "Feedback history";
+"提交" = "submit";
+"问题反馈" = "Problem feedback";
+"问题反馈提交成功" = "problem feedback submit successful";
+"暂无历史反馈" = "no feedback history";
+"问题详情" = "problem details";
+"所在端" = "device";
+"问题描述" = "problem description";
+"复现步骤" = "reproduction steps";
+"问题截图(选填)" = "problem screenshot";
+"备注" = "remark";
+"bug状态" = "bug status";
+"最终确认等级" = "final level confirmation";
+"待确认" = "to be confirmed";
+"复现不成功" = "reproduction failed";
+"已确认,待奖励" = "confirmed,Pending rewards";
+"奖励" = "reward";
+"奖励确认中" = "reward confirmation processing";
+"客户端" = "device";
+"提交时间" = "Submission Time";
+"最终发放奖励金额" = "Final award Payment";
+"待奖励" = "Pending rewards";
+"已奖励" = "Has been rewarded";
+"严重缺陷" = "Serious defects";
+"一般缺陷" = "General defects";
+"优化缺陷" = "Optimization defects";
+"奖励发放中" = "In the award release";
+"严重" = "Serious";
+"一般" = "Normal";
+"优化" = "Optimization";
+
+"奖励0" = "reward0";
+"优化缺陷" = "Optimization defect ";
+"已于" = "has been";
+"版本修复" = "Repair Version";
+"请选择客户端" = "select the client";
+"已领取" = "Already received";
+
+
+
+
+
+

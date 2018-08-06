@@ -121,7 +121,7 @@
 //    NSString *adress = [[NSUserDefaults standardUserDefaults] objectForKey:KWalletAddress];
     TLDataBase *db = [TLDataBase sharedManager];
     if ([db.dataBase open]) {
-         NSString *sql = [NSString stringWithFormat:@"SELECT %@private from THAWallet where userId = '%@'",[self.currentModel.symbol lowercaseString],[TLUser user].userId];
+         NSString *sql = [NSString stringWithFormat:@"SELECT %@private from THAUser where userId = '%@'",[self.currentModel.symbol lowercaseString],[TLUser user].userId];
         FMResultSet *set = [db.dataBase executeQuery:sql];
         while ([set next]) {
             privates = [set stringForColumn:[NSString stringWithFormat:@"%@private",self.currentModel.symbol]];

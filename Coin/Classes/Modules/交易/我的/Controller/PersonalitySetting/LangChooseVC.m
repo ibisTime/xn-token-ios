@@ -105,7 +105,7 @@
         
     }];
     SettingModel *KorenModel = [[SettingModel alloc] init];
-    KorenModel.text = @"한국어.";
+    KorenModel.text = @"한국어";
 //    KorenModel.text = [LangSwitcher switchLang:@"韩文" key:nil];
 
     KorenModel.isSelect = [LangSwitcher currentLangType] == LangTypeKorean;

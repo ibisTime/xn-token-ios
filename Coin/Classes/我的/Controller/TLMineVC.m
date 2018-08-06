@@ -45,6 +45,7 @@
 #import "ChangeLocalMoneyVC.h"
 #import "TLChangeNikeName.h"
 #import "BuildWalletMineVC.h"
+#import "TLQusertionVC.h"
 @interface TLMineVC ()<MineHeaderSeletedDelegate, UINavigationControllerDelegate>
 
 //@property (nonatomic, strong) FBKVOController *chatKVOCtrl;   czy
@@ -213,7 +214,7 @@
         TLDataBase *dataBase = [TLDataBase sharedManager];
         NSString *word;
         if ([dataBase.dataBase open]) {
-            NSString *sql = [NSString stringWithFormat:@"SELECT Mnemonics from THAWallet where userId = '%@'",[TLUser user].userId];
+            NSString *sql = [NSString stringWithFormat:@"SELECT Mnemonics from THAUser where userId = '%@'",[TLUser user].userId];
             //        [sql appendString:[TLUser user].userId];
             FMResultSet *set = [dataBase.dataBase executeQuery:sql];
             while ([set next])
@@ -257,20 +258,13 @@
     };
     
     //个性设置
-    MineModel *personalSetting = [MineModel new];
+    MineModel *questionSetting = [MineModel new];
     
-    personalSetting.text = [LangSwitcher switchLang:@"个性设置" key:nil];
-    personalSetting.imgName = @"提醒设置";
-    personalSetting.action = ^{
-        if (![TLUser user].isLogin) {
-            TLUserLoginVC *loginVC= [TLUserLoginVC new];
-            [weakSelf.navigationController pushViewController:loginVC animated:YES];
-            loginVC.loginSuccess = ^{
-                
-            };
-            return ;
-        }
-        PersonalitySettingVC *personalSettingVC = [PersonalitySettingVC new];
+    questionSetting.text = [LangSwitcher switchLang:@"问题反馈" key:nil];
+    questionSetting.imgName = @"问题反馈";
+    questionSetting.action = ^{
+       
+        TLQusertionVC *personalSettingVC = [TLQusertionVC new];
         [weakSelf.navigationController pushViewController:personalSettingVC animated:YES];
         
     };
@@ -383,7 +377,7 @@
         
         
         self.group.sections = @[ @[settingModel], @[accounrModel,language ],
-                                @[languageSetting,securityCenter,helpModel, abountUs]
+                                @[languageSetting,securityCenter,questionSetting,helpModel, abountUs]
                                 ];
         
     }

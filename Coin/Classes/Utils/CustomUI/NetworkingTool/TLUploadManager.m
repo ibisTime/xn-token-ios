@@ -133,6 +133,52 @@
 }
 
 
+- (void)getQuestionTokenShowView:(UIView *)showView succes:(void(^)(NSString * token))success
+                 failure:(void(^)(NSError *error))failure
+{
+    
+    TLNetworking *getUploadToken = [TLNetworking new];
+    
+    getUploadToken.showView = showView;
+    getUploadToken.code = IMG_UPLOAD_CODE;
+    getUploadToken.parameters[@"token"] = [TLUser user].token;
+    [getUploadToken postWithSuccess:^(id responseObject) {
+        
+        NSString *token = responseObject[@"data"][@"uploadToken"];
+        
+        QNConfiguration *config = [QNConfiguration build:^(QNConfigurationBuilder *builder) {
+            builder.zone = [QNZone zone0];
+        }];
+        
+        QNUploadManager *manager = [[QNUploadManager alloc] initWithConfiguration:config];
+        
+        [manager putData:self.imgData key:[TLUploadManager imageNameByImage:self.image] token:token complete:^(QNResponseInfo *info, NSString *key, NSDictionary *resp) {
+            
+            if (info.error) {
+                
+                [TLAlert alertWithError:@"上传失败"];
+                NSLog(@"info.error = %@", info.error);
+                
+                return ;
+            }
+            
+            if (success) {
+                
+                success(key);
+            }
+            
+        } option:nil];
+        
+    } failure:^(NSError *error) {
+        if (failure) {
+            failure(error);
+        }
+    }];
+    
+    
+}
+
+
 + (NSString *)imageNameByImage:(UIImage *)img{
     CGSize imgSize = img.size;//
     

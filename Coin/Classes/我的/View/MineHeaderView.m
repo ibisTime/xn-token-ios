@@ -80,6 +80,10 @@
     self.photoBtn.imageView.contentMode = UIViewContentModeScaleAspectFill;
     
     [titleView addSubview:self.photoBtn];
+    UIImageView *image = [[UIImageView alloc] init];
+    image.contentMode = UIViewContentModeScaleToFill;
+    image.image = kImage(@"1");
+    [titleView addSubview:image];
     [self.photoBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.width.equalTo(@(imgWidth));
@@ -88,6 +92,16 @@
         make.right.equalTo(@(-20));
         make.top.equalTo(@(27));
 
+    }];
+    
+    [image mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.centerX.equalTo(self.photoBtn.mas_centerX);
+        make.height.equalTo(@17);
+        make.width.equalTo(@20);
+
+        make.bottom.equalTo(self.photoBtn.mas_top).offset(-2);
+        
     }];
     
     //昵称

@@ -8,8 +8,12 @@
 
 #import <Foundation/Foundation.h>
 #import <FMDB/FMDB.h>
+#import "DataBaseModel.h"
+#import "CoinModel.h"
 @interface TLDataBase : NSObject
 @property (nonatomic, strong) FMDatabase *dataBase;
+@property (nonatomic, strong) NSMutableArray <DataBaseModel *>*dataBaseModels;
+@property (nonatomic, strong) NSMutableArray <CoinModel *>*coinModels;
 
 
 @property (nonatomic ,copy) NSString *dataStr;

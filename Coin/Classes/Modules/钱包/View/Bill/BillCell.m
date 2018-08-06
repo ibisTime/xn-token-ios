@@ -188,7 +188,7 @@
         moneyStr = [NSString stringWithFormat:@"+%@ %@",countStr , billModel.currency];
         self.moneyLbl.textColor = kHexColor(@"#47D047");
 
-        self.iconIV.image = kImage(@"充值");
+        self.iconIV.image = kImage(@"收款");
 
 //        [self.iconIV sd_setImageWithURL:[NSURL URLWithString:[coin.pic2 convertImageUrl]]];
 
@@ -197,7 +197,7 @@
 
         moneyStr = [NSString stringWithFormat:@"%@ %@", countStr, billModel.currency];
 
-        self.iconIV.image = kImage(@"提现");
+        self.iconIV.image = kImage(@"转账");
 
     }
 

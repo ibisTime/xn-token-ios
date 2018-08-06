@@ -349,6 +349,7 @@
         
     }else {
         self.statusLabel.text = [LangSwitcher switchLang:@"与上次绘制不一致，请重新绘制" key:nil];
+        
         [self.gestureLockView showErrowMessage];
 
         [self shakeAnimationForView:self.statusLabel];

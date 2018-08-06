@@ -386,7 +386,7 @@
         //创建钱包后 储存助记伺 地址 私钥
         TLDataBase *dateBase = [TLDataBase sharedManager];
         if ([dateBase.dataBase open]) {
-            BOOL sucess = [dateBase.dataBase executeUpdate:@"insert into THAWallet(userId,Mnemonics,wanAddress,wanPrivate,ethPrivate,ethAddress,PwdKey) values(?,?,?,?,?,?,?)",user,self.titleWord,address,prikey,prikey,address,self.pwd];
+            BOOL sucess = [dateBase.dataBase executeUpdate:@"insert into THAUser(userId,Mnemonics,wanAddress,wanPrivate,ethPrivate,ethAddress,PwdKey,name) values(?,?,?,?,?,?,?,?)",user,self.titleWord,address,prikey,prikey,address,self.pwd,self.name];
             
             NSLog(@"插入地址私钥%d",sucess);
         }

@@ -150,7 +150,7 @@
 - (void)applicationWillEnterForeground {
 
 //    [self updateApp];
-    [self configUpdate];
+    //    [self updateApp];
 
 }
 

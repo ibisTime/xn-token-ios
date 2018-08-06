@@ -122,6 +122,12 @@
     
 }
 
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    
+    [self.view endEditing:YES];
+    
+}
 - (void)initSubviews {
     
     self.view.backgroundColor = kWhiteColor;
@@ -253,7 +259,6 @@
     [self.view addSubview:pLab];
     TLTextField *rePwdTf = [[TLTextField alloc] initWithFrame:CGRectMake(margin, pLab.yy + 1, w, h) leftTitle:[LangSwitcher switchLang:@"" key:nil] titleWidth:20 placeholder:[LangSwitcher switchLang:@"确认密码" key:nil]];
     rePwdTf.secureTextEntry = YES;
-    rePwdTf.keyboardType = UIKeyboardTypePhonePad;
 
     [self.view addSubview:rePwdTf];
     self.rePwdTf = rePwdTf;

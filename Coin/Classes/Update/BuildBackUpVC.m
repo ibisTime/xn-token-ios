@@ -176,10 +176,12 @@
     
     whiteView.layer.cornerRadius = 4;
     whiteView.clipsToBounds = YES;
-    self.nameLable = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:16];
+    self.nameLable = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:15];
     //    self.title = [LangSwitcher switchLang:@"我的" key:nil];
+    
     [whiteView addSubview:self.nameLable];
     self.nameLable.textAlignment = NSTextAlignmentCenter;
+    self.nameLable.numberOfLines = 0;
     self.nameLable.text = [LangSwitcher switchLang:@"您的恢复词是12个，在纸上记下他们并安全的保存它" key:nil];
     [self.nameLable mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(whiteView.mas_top).offset(30);

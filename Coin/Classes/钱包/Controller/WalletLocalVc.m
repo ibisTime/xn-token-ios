@@ -104,7 +104,6 @@
 
 - (void)initPlaceHolderView {
     
-    self.placeHolderView = [[UIView alloc] initWithFrame:CGRectMake(0, 240, kScreenWidth,  40)];
     
     //    UIImageView *billIV = [[UIImageView alloc] init];
     //
@@ -117,7 +116,8 @@
     //        make.top.equalTo(@140);
     //
     //    }];
-    
+    self.placeHolderView = [[UIView alloc] initWithFrame:CGRectMake(0, 240, kScreenWidth,  40)];
+
     UILabel *textLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor2 font:14.0];
     
     textLbl.text = [LangSwitcher switchLang:@"暂无明细" key:nil];

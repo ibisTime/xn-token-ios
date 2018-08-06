@@ -243,7 +243,7 @@
             [[NSUserDefaults standardUserDefaults] synchronize];
             TLDataBase *db = [TLDataBase sharedManager];
             if ([db.dataBase open]) {
-                NSString *sql = [NSString stringWithFormat:@"UPDATE THAWallet SET PwdKey = '%@' WHERE userId = '%@'",pwd,[TLUser user].userId];
+                NSString *sql = [NSString stringWithFormat:@"UPDATE THAUser SET PwdKey = '%@' WHERE userId = '%@'",pwd,[TLUser user].userId];
                 BOOL sucess = [db.dataBase executeUpdate:sql];
                 
                 NSLog(@"导入钱包交易密码%d",sucess);

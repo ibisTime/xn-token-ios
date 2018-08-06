@@ -199,7 +199,7 @@
                  TLDataBase *dataBase = [TLDataBase sharedManager];
                  NSString *pwd;
                  if ([dataBase.dataBase open]) {
-                     NSString *sql = [NSString stringWithFormat:@"SELECT PwdKey from THAWallet where userId = '%@'",[TLUser user].userId];
+                     NSString *sql = [NSString stringWithFormat:@"SELECT PwdKey from THAUser where userId = '%@'",[TLUser user].userId];
                      //        [sql appendString:[TLUser user].userId];
                      FMResultSet *set = [dataBase.dataBase executeQuery:sql];
                      while ([set next])
@@ -289,7 +289,7 @@
     if ([dataBase.dataBase open]) {
         
         
-        NSString *sql = [NSString stringWithFormat:@"SELECT Mnemonics from THAWallet where userId = '%@'",[TLUser user].userId];
+        NSString *sql = [NSString stringWithFormat:@"SELECT Mnemonics from THAUser where userId = '%@'",[TLUser user].userId];
         //        [sql appendString:[TLUser user].userId];
         FMResultSet *set = [dataBase.dataBase executeQuery:sql];
         while ([set next])
@@ -312,12 +312,12 @@
             TLDataBase *db = [TLDataBase sharedManager];
             
             if ([db.dataBase open]) {
-                NSString *Sql2 =[NSString stringWithFormat:@"delete from LocalWallet WHERE walletId = (SELECT walletId from THAWallet where userId='%@')",[TLUser user].userId];
+                NSString *Sql2 =[NSString stringWithFormat:@"delete from THALocal WHERE walletId = (SELECT walletId from THAUser where userId='%@')",[TLUser user].userId];
                 
                 BOOL sucess2  = [db.dataBase executeUpdate:Sql2];
                 NSLog(@"删除自选表%d",sucess2);
                 
-                NSString *Sql =[NSString stringWithFormat:@"delete from THAWallet WHERE userId = '%@'",[TLUser user].userId];
+                NSString *Sql =[NSString stringWithFormat:@"delete from THAUser WHERE userId = '%@'",[TLUser user].userId];
                 
                 BOOL sucess  = [db.dataBase executeUpdate:Sql];
                 
@@ -372,7 +372,7 @@
 //            //
             TLDataBase *db = [TLDataBase sharedManager];
             if ([db.dataBase open]) {
-                NSString *sql = [NSString stringWithFormat:@"UPDATE THAWallet SET PwdKey = '%@' WHERE userId = '%@'",pwd,[TLUser user].userId];
+                NSString *sql = [NSString stringWithFormat:@"UPDATE THAUser SET PwdKey = '%@' WHERE userId = '%@'",pwd,[TLUser user].userId];
                 BOOL sucess = [db.dataBase executeUpdate:sql];
                 
                 NSLog(@"导入钱包交易密码%d",sucess);
@@ -392,7 +392,7 @@
 //            [[NSUserDefaults standardUserDefaults] synchronize];
             TLDataBase *db = [TLDataBase sharedManager];
             if ([db.dataBase open]) {
-                NSString *sql = [NSString stringWithFormat:@"UPDATE THAWallet SET PwdKey = '%@' WHERE userId = '%@'",pwd,[TLUser user].userId];
+                NSString *sql = [NSString stringWithFormat:@"UPDATE THAUser SET PwdKey = '%@' WHERE userId = '%@'",pwd,[TLUser user].userId];
                 BOOL sucess = [db.dataBase executeUpdate:sql];
                 
                 NSLog(@"导入钱包交易密码%d",sucess);

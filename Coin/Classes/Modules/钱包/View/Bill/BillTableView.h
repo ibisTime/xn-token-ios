@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "BillModel.h"
 #import "TLTableView.h"
+
 typedef void(^WalletAddBlock)(void);
 
 @interface BillTableView : TLTableView

@@ -57,7 +57,7 @@
     TLDataBase *dataBase = [TLDataBase sharedManager];
     NSString *word;
     if ([dataBase.dataBase open]) {
-        NSString *sql = [NSString stringWithFormat:@"SELECT Mnemonics from THAWallet where userId = '%@'",[TLUser user].userId];
+        NSString *sql = [NSString stringWithFormat:@"SELECT Mnemonics from THAUser where userId = '%@'",[TLUser user].userId];
         //        [sql appendString:[TLUser user].userId];
         FMResultSet *set = [dataBase.dataBase executeQuery:sql];
         while ([set next])
@@ -108,17 +108,17 @@
     
     CGFloat btnMargin = 15;
     
-//    TLTextField *nameTf = [[TLTextField alloc] initWithFrame:CGRectMake(margin, textView.yy+5, w, h) leftTitle:[LangSwitcher switchLang:@"" key:nil] titleWidth:20 placeholder:[LangSwitcher switchLang:@"钱包名称" key:nil]];
-////    nameTf.secureTextEntry = YES;
-//
-//    [self.view addSubview:nameTf];
-//    self.nameTf = nameTf;
-//
-//    UIView *phone7 = [[UIView alloc] init];
-//    [self.view addSubview:phone7];
-//    phone7.backgroundColor = kLineColor;
-//    phone7.frame = CGRectMake(margin*2, nameTf.yy, w-30, 1);
-    TLTextField *pwdTf = [[TLTextField alloc] initWithFrame:CGRectMake(margin, textView.yy+5, w, h) leftTitle:[LangSwitcher switchLang:@"" key:nil] titleWidth:20 placeholder:[LangSwitcher switchLang:@"请输入密码" key:nil]];
+    TLTextField *nameTf = [[TLTextField alloc] initWithFrame:CGRectMake(margin, textView.yy+5, w, h) leftTitle:[LangSwitcher switchLang:@"" key:nil] titleWidth:20 placeholder:[LangSwitcher switchLang:@"钱包名称" key:nil]];
+//    nameTf.secureTextEntry = YES;
+
+    [self.view addSubview:nameTf];
+    self.nameTf = nameTf;
+
+    UIView *phone7 = [[UIView alloc] init];
+    [self.view addSubview:phone7];
+    phone7.backgroundColor = kLineColor;
+    phone7.frame = CGRectMake(margin*2, nameTf.yy, w-30, 1);
+    TLTextField *pwdTf = [[TLTextField alloc] initWithFrame:CGRectMake(margin, nameTf.yy+5, w, h) leftTitle:[LangSwitcher switchLang:@"" key:nil] titleWidth:20 placeholder:[LangSwitcher switchLang:@"请输入密码" key:nil]];
     pwdTf.secureTextEntry = YES;
     pwdTf.keyboardType = UIKeyboardTypePhonePad;
 
@@ -164,7 +164,7 @@
     [self.introduceButton setImage:kImage(@"打勾 圆") forState:UIControlStateNormal];
     
     [self.introduceButton setTitle:text3 forState:UIControlStateNormal];
-    [self.introduceButton addTarget:self action:@selector(html5Wallet) forControlEvents:UIControlEventTouchUpInside];
+    [self.introduceButton addTarget:self action:@selector(html5Pri) forControlEvents:UIControlEventTouchUpInside];
     self.introduceButton.titleLabel.font = [UIFont systemFontOfSize:12];
     [self.introduceButton setTitleColor:kAppCustomMainColor forState:UIControlStateNormal];
     [self.introduceButton mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -248,12 +248,12 @@
 - (void)importNow
 {
     
-//    if (!self.nameTf.text) {
-//
-//        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入钱包名称" key:nil]];
-//
-//        return;
-//    }
+    if (!self.nameTf.text) {
+
+        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入钱包名称" key:nil]];
+
+        return;
+    }
     
     if ((!self.pwdTf.text || self.pwdTf.text.length != 6)) {
         [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入6位密码" key:nil]];
@@ -315,7 +315,7 @@
         TLDataBase *dataBase = [TLDataBase sharedManager];
         NSString *Mnemonics;
         if ([dataBase.dataBase open]) {
-            NSString *sql = [NSString stringWithFormat:@"SELECT Mnemonics from THAWallet where userId = '%@'",[TLUser user].userId];
+            NSString *sql = [NSString stringWithFormat:@"SELECT Mnemonics from THAUser where userId = '%@'",[TLUser user].userId];
             //        [sql appendString:[TLUser user].userId];
             FMResultSet *set = [dataBase.dataBase executeQuery:sql];
             while ([set next])
@@ -341,7 +341,7 @@
             //储存导入的钱包
             TLDataBase *dateBase = [TLDataBase sharedManager];
             if ([dateBase.dataBase open]) {
-                BOOL sucess = [dateBase.dataBase executeUpdate:@"insert into THAWallet(userId,Mnemonics,wanAddress,wanPrivate,ethPrivate,ethAddress,PwdKey) values(?,?,?,?,?,?,?)",[TLUser user].userId,word,address,prikey,prikey,address,self.pwdTf.text];
+                BOOL sucess = [dateBase.dataBase executeUpdate:@"insert into THAUser(userId,Mnemonics,wanAddress,wanPrivate,ethPrivate,ethAddress,PwdKey,name) values(?,?,?,?,?,?,?,?)",[TLUser user].userId,word,address,prikey,prikey,address,self.pwdTf.text,self.nameTf.text];
 //
 //                 BOOL sucess = [dateBase.dataBase executeUpdate:@"insert into THAWallet(userId,Mnemonics,wanAddress,wanPrivate,ethPrivate,ethAddress,PwdKey,name) values(?,?,?,?,?,?,?,?)",[TLUser user].userId,word,address,prikey,prikey,address,self.pwdTf.text,self.nameTf.text];
                 NSLog(@"导入地址私钥%d",sucess);
@@ -377,6 +377,19 @@
     //
     
 }
+
+- (void)html5Pri
+{
+    HTMLStrVC *htmlVC = [[HTMLStrVC alloc] init];
+    self.navigationController.navigationBar.hidden = NO;
+    
+    htmlVC.type = HTMLTypePrivacy;
+    
+    [self.navigationController pushViewController:htmlVC animated:YES];
+    
+}
+
+
 - (void)html5Wallet
 {
     HTMLStrVC *htmlVC = [[HTMLStrVC alloc] init];

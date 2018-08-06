@@ -23,4 +23,8 @@
 - (void)getTokenShowView:(UIView *)showView succes:(void(^)(NSString * token))success
                  failure:(void(^)(NSError *error))failure;
 
+
+- (void)getQuestionTokenShowView:(UIView *)showView succes:(void(^)(NSString * token))success
+                 failure:(void(^)(NSError *error))failure;
+
 @end
