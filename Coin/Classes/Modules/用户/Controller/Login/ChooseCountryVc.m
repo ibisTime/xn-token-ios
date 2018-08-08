@@ -115,10 +115,12 @@
     return self.countrys.count;
     
 }
-static NSString *IdCell = @"country";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
+    NSString *IdCell =[NSString stringWithFormat:@"country%ld",indexPath.row];
+
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:IdCell];
 
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:IdCell forIndexPath:indexPath];
@@ -150,17 +152,26 @@ static NSString *IdCell = @"country";
         cell.imageView.image = UIGraphicsGetImageFromCurrentImageContext();//*2
         UIGraphicsEndImageContext();
         
-        if (indexPath.row == 0) {
+//        if (indexPath.row == 0) {
+//            cell.textLabel.text = [NSString stringWithFormat:@"%@   +%@",[LangSwitcher switchLang:self.countrys[indexPath.row].chineseName key:nil],[self.countrys[indexPath.row].interCode substringFromIndex:2]];
+//        }else if (indexPath.row ==1)
+//        {
+//
+//            cell.textLabel.text = [NSString stringWithFormat:@"%@   +%@",[LangSwitcher switchLang:self.countrys[indexPath.row].chineseName key:nil],[self.countrys[indexPath.row].interCode substringFromIndex:2]];
+//
+//        }else{
+        
+        if ([LangSwitcher currentLangType] == LangTypeSimple || [LangSwitcher currentLangType] == LangTypeTraditional) {
             cell.textLabel.text = [NSString stringWithFormat:@"%@   +%@",[LangSwitcher switchLang:self.countrys[indexPath.row].chineseName key:nil],[self.countrys[indexPath.row].interCode substringFromIndex:2]];
-        }else if (indexPath.row ==1)
-        {
-            
-            cell.textLabel.text = [NSString stringWithFormat:@"%@   +%@",[LangSwitcher switchLang:self.countrys[indexPath.row].chineseName key:nil],[self.countrys[indexPath.row].interCode substringFromIndex:2]];
-            
+            //        }
         }else{
+            cell.textLabel.text = [NSString stringWithFormat:@"%@   +%@",[LangSwitcher switchLang:self.countrys[indexPath.row].interName key:nil],[self.countrys[indexPath.row].interCode substringFromIndex:2]];
+            //        }
             
-            cell.textLabel.text = [NSString stringWithFormat:@"%@   +%@",[LangSwitcher switchLang:self.countrys[indexPath.row].chineseName key:nil],[self.countrys[indexPath.row].interCode substringFromIndex:2]];
         }
+        
+//
+        
         
         cell.detailTextLabel.text = self.countrys[indexPath.row].interCode;
         cell.backgroundColor = kClearColor;
@@ -175,13 +186,13 @@ static NSString *IdCell = @"country";
             
         }];
         
-        UIImageView *imageView = [[UIImageView alloc] init];
+        UIImageView *image1 = [[UIImageView alloc] init];
         
-        [cell addSubview:imageView];
+        [cell addSubview:image1];
         
-        imageView.image = kImage(@"choose");
-        imageView.hidden = YES;
-        [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        image1.image = kImage(@"choose");
+//        image1.hidden = YES;
+        [image1 mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.equalTo(@-15);
             make.centerY.equalTo(cell.mas_centerY);
             make.height.equalTo(@11);
@@ -190,10 +201,10 @@ static NSString *IdCell = @"country";
         }];
 
         if ([self.interCode isEqualToString:self.countrys[indexPath.row].interCode]) {
-            imageView.hidden = NO;
+            image1.hidden = NO;
 
         }else{
-            imageView.hidden = YES;
+            image1.hidden = YES;
 
         }
         
@@ -229,7 +240,7 @@ static NSString *IdCell = @"country";
             TLUserLoginVC *log = [TLUserLoginVC new];
             TLNavigationController *na = [[TLNavigationController alloc] initWithRootViewController:log];
             log.IsAPPJoin = YES;
-            if ([model.interSimpleCode isEqualToString:@"CN"]) {
+            if ([model.interSimpleCode isEqualToString:@"CN"] ||[model.interSimpleCode isEqualToString:@"HK"] ||[model.interSimpleCode isEqualToString:@"TW"] || [model.interSimpleCode isEqualToString:@"MO"]) {
                 [LangSwitcher changLangType:LangTypeSimple];
                 TLTabBarController *tabBarCtrl = [[TLTabBarController alloc] init];
                 [UIApplication sharedApplication].keyWindow.rootViewController = na;

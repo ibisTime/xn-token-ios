@@ -249,15 +249,15 @@
     pic.contentMode = UIViewContentModeScaleToFill;
     pic.frame = CGRectMake(17, kHeight(114-40)+17.5, 24, 16);
     [bgView addSubview:pic];
-    UILabel *PhoneCode = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:14];
+    UILabel *PhoneCode = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:12];
     PhoneCode.userInteractionEnabled = YES;
     [bgView addSubview:PhoneCode];
 //    PhoneCode.text = [LangSwitcher switchLang:@"+86" key:nil];
     UITapGestureRecognizer *tap2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(chooseCountry)];
     [PhoneCode addGestureRecognizer:tap2];
-    PhoneCode.textAlignment = NSTextAlignmentRight;
+    PhoneCode.textAlignment = NSTextAlignmentCenter;
     self.PhoneCode = PhoneCode;
-    PhoneCode.frame = CGRectMake(40, kHeight(114-40), 35, h);
+    PhoneCode.frame = CGRectMake(40, kHeight(114-40), 55, h);
     
         self.accessoryImageView = [[UIImageView alloc] init];
         [bgView addSubview:self.accessoryImageView];
@@ -276,7 +276,7 @@
 
         }];
 //      TLTextField *pwdTf = [[TLTextField alloc] initWithFrame:CGRectMake(margin, pwdLab.yy + 10, w, h) leftTitle:[LangSwitcher switchLang:@"" key:nil] titleWidth:titleWidth placeholder:[LangSwitcher switchLang:@"请输入密码(不少于6位)" key:nil]];
-    TLTextField *phone = [[TLTextField alloc] initWithFrame:CGRectMake(100, kHeight(114-40), w-140, h) leftTitle:[LangSwitcher switchLang:@"" key:nil] titleWidth:0 placeholder:[LangSwitcher switchLang:@"请输入手机号" key:nil]];
+    TLTextField *phone = [[TLTextField alloc] initWithFrame:CGRectMake(120, kHeight(114-40), w-140, h) leftTitle:[LangSwitcher switchLang:@"" key:nil] titleWidth:0 placeholder:[LangSwitcher switchLang:@"请输入手机号" key:nil]];
     phone.keyboardType = UIKeyboardTypeNumberPad;
 //    AccountTf *phoneTf = [[AccountTf alloc] initWithFrame:CGRectMake(0, kHeight(114-40), w-40, h)];
 //    phoneTf.leftIconView.image = [UIImage imageNamed:@"手机"];
