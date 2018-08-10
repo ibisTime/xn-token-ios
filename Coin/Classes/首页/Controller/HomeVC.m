@@ -32,7 +32,7 @@
 #import "UIBarButtonItem+convience.h"
 #import "TLPwdRelatedVC.h"
 #import "HTMLStrVC.h"
-
+#import "HomeFindModel.h"
 @interface HomeVC ()
 
 @property (nonatomic, strong) HomeTableView *tableView;
@@ -46,6 +46,8 @@
 @property (nonatomic, strong) UIButton *backButton;
 
 @property (nonatomic, strong) UILabel *nameLable;
+
+@property (nonatomic,strong) NSMutableArray <HomeFindModel *>*findModels;
 
 @end
 
@@ -93,6 +95,8 @@
     self.view.backgroundColor = kWhiteColor;
     [self initTableView];
     
+    [self reloadFindData];
+    
     [CoinUtil refreshOpenCoinList:^{
         
         //获取banner列表
@@ -105,6 +109,41 @@
     }];
    
 }
+
+- (void)reloadFindData
+{
+    
+    AFHTTPSessionManager *sess = [AFHTTPSessionManager manager];
+    
+    [sess POST:@"http://rap2.hichengdai.com:8080/app/mock/22/625410" parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        
+    } progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        self.findModels = [HomeFindModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"][@"list"]];
+
+        NSLog(@"%@",self.findModels);
+        self.headerView.findModels = self.findModels;
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@",error);
+    }];
+    return;
+    TLNetworking *http = [TLNetworking new];
+    
+    http.code = @"625410";
+    [http postWithSuccess:^(id responseObject) {
+        
+        
+        [self.tableView endRefreshHeader];
+        
+    } failure:^(NSError *error) {
+        [self.tableView endRefreshHeader];
+    }];
+    
+}
+
+
+
 
 - (void)initTableView {
     
@@ -260,9 +299,9 @@
             
         case HomeEventsTypePosMining:
         {
-//            PosMiningVC *posMiningVC = [PosMiningVC new];
-            HTMLStrVC *vc = [HTMLStrVC new];
-            vc.type = HTMLTypeQuantitative_finance;
+            PosMiningVC *vc = [PosMiningVC new];
+//            HTMLStrVC *vc = [HTMLStrVC new];
+//            vc.type = HTMLTypeQuantitative_finance;
             [self.navigationController pushViewController:vc animated:YES];
         }break;
         case HomeEventsTypeRedEnvelope:

@@ -46,7 +46,6 @@
         //统计
 //        [self initStatisticsView];
         //应用
-        [self initApplicationView];
     }
     return self;
 }
@@ -428,6 +427,15 @@
     
 }
 
+
+-(void)setFindModels:(NSMutableArray<HomeFindModel *> *)findModels
+{
+    _findModels = findModels;
+    
+    [self initApplicationView];
+
+    
+}
 - (void)setCountInfo:(CountInfoModel *)countInfo {
     
     _countInfo = countInfo;

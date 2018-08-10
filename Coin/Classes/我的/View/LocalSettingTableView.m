@@ -75,7 +75,7 @@ static NSString *identifierCell = @"SettingCell";
     
 //    cell.rightLabel.text = @"test";
     if (indexPath.section == 1 & indexPath.row == 1) {
-        if ([settingModel.text isEqualToString:@"删除钱包"]) {
+        if ([settingModel.text isEqualToString:@"删除钱包"] || settingModel.isSetting == YES) {
             
         }else{
             NSString* gesture  =  [ZLGestureLockViewController gesturesPassword];
@@ -92,10 +92,23 @@ static NSString *identifierCell = @"SettingCell";
                 
             }
         }
-        //
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+       
         //        cell.userInteractionEnabled = NO;
     }
+//    if (settingModel.isVersion == YES) {
+//        UILabel *lab = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:14];
+//        lab.textAlignment = NSTextAlignmentRight;
+//        
+//        [cell addSubview:lab];
+//        [lab mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.centerX.equalTo(cell.mas_centerX);
+//            make.right.equalTo(cell.mas_right).offset(20);
+//        }];
+//        
+//        cell.rightLabel.text = @"版本号";
+//    }
+    //
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
 //    cell.settingModel = settingModel;
     
     //    if (indexPath.section == 1) {

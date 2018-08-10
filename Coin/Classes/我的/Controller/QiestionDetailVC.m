@@ -133,14 +133,14 @@
     
     [self.nameLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.contentView.mas_top).offset(20);
-        make.left.equalTo(self.contentView.mas_left).offset(10);
-        make.width.equalTo(@100);
+        make.left.equalTo(self.contentView.mas_left).offset(20);
+//        make.width.equalTo(@100);
 
     }];
     [self.stateLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.nameLab.mas_centerY);
         make.left.equalTo(self.nameLab.mas_right).offset(20);
-        make.right.equalTo(self.view.mas_right).offset(-10);
+//        make.right.equalTo(self.view.mas_right).offset(-10);
         
     }];
     
@@ -167,8 +167,8 @@
     
     [self.desLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(line.mas_bottom).offset(20);
-        make.left.equalTo(self.view.mas_left).offset(10);
-        make.width.equalTo(@100);
+        make.left.equalTo(self.view.mas_left).offset(20);
+//        make.width.equalTo(@100);
 
     }];
     [self.desLab2 mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -200,8 +200,8 @@
     
     [self.comLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(line1.mas_bottom).offset(20);
-        make.left.equalTo(self.view.mas_left).offset(10);
-        make.width.equalTo(@100);
+        make.left.equalTo(self.view.mas_left).offset(20);
+//        make.width.equalTo(@100);
         
     }];
     [self.comLab2 mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -254,13 +254,13 @@
     
     [self.noteLab mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(line2.mas_bottom).offset(20);
-            make.left.equalTo(self.view.mas_left).offset(10);
+            make.left.equalTo(self.view.mas_left).offset(20);
         
         
     }];
     [self.noteLab2 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.noteLab.mas_centerY);
-        make.left.equalTo(self.noteLab.mas_left).offset(150);
+        make.left.equalTo(self.noteLab.mas_right).offset(20);
         make.right.equalTo(self.view.mas_right).offset(-10);
         
     }];
@@ -293,8 +293,8 @@
     }];
     [self.timeLab2 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.timeLab.mas_centerY);
-        make.left.equalTo(self.timeLab.mas_left).offset(150);
-        make.right.equalTo(self.view.mas_right).offset(-10);
+        make.left.equalTo(self.timeLab.mas_right).offset(20);
+//        make.right.equalTo(self.view.mas_right).offset(-10);
         
     }];
     
@@ -326,7 +326,7 @@
     }];
     [self.bugLab2 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.bugLab.mas_centerY);
-        make.left.equalTo(self.bugLab.mas_left).offset(150);
+        make.left.equalTo(self.bugLab.mas_right).offset(20);
         make.right.equalTo(self.view.mas_right).offset(-10);
         
     }];
@@ -359,8 +359,8 @@
     }];
     [self.sureLab2 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.sureLab.mas_centerY);
-        make.left.equalTo(self.sureLab.mas_left).offset(150);
-        make.right.equalTo(self.view.mas_right).offset(-10);
+        make.left.equalTo(self.sureLab.mas_right).offset(20);
+//        make.right.equalTo(self.view.mas_right).offset(-10);
         
     }];
     
@@ -522,7 +522,7 @@
                 }];
                 [self.noteLab2 mas_remakeConstraints:^(MASConstraintMaker *make) {
                     make.centerY.equalTo(self.noteLab.mas_centerY);
-                    make.left.equalTo(self.noteLab.mas_left).offset(150);
+                    make.left.equalTo(self.noteLab.mas_right).offset(20);
                     make.right.equalTo(self.view.mas_right).offset(-10);
                     
                 }];
@@ -545,7 +545,7 @@
                 }];
                 [self.timeLab2 mas_remakeConstraints:^(MASConstraintMaker *make) {
                     make.centerY.equalTo(self.timeLab.mas_centerY);
-                    make.left.equalTo(self.timeLab.mas_left).offset(150);
+                    make.left.equalTo(self.timeLab.mas_right).offset(20);
                     make.right.equalTo(self.view.mas_right).offset(-10);
                     
                 }];
@@ -568,8 +568,8 @@
                 }];
                 [self.bugLab2 mas_remakeConstraints:^(MASConstraintMaker *make) {
                     make.centerY.equalTo(self.bugLab.mas_centerY);
-                    make.left.equalTo(self.bugLab.mas_left).offset(150);
-                    make.right.equalTo(self.view.mas_right).offset(-10);
+                    make.left.equalTo(self.bugLab.mas_right).offset(20);
+//                    make.right.equalTo(self.view.mas_right).offset(-10);
                     
                 }];
                 
@@ -593,8 +593,8 @@
                 }];
                 [self.sureLab2 mas_remakeConstraints:^(MASConstraintMaker *make) {
                     make.centerY.equalTo(self.sureLab.mas_centerY);
-                    make.left.equalTo(self.sureLab.mas_left).offset(150);
-                    make.right.equalTo(self.view.mas_right).offset(-10);
+                    make.left.equalTo(self.sureLab.mas_right).offset(20);
+//                    make.right.equalTo(self.view.mas_right).offset(-10);
                     
                 }];
                 

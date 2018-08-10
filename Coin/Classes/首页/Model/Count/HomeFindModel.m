@@ -9,5 +9,13 @@
 #import "HomeFindModel.h"
 
 @implementation HomeFindModel
-
+MJCodingImplementation
++ (NSString *)mj_replacedKeyFromPropertyName121:(NSString *)propertyName {
+    
+    if ([propertyName isEqualToString:@"Description"]) {
+        return @"description";
+    }
+    
+    return propertyName;
+}
 @end

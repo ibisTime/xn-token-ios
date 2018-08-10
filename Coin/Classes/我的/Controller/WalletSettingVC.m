@@ -14,6 +14,7 @@
 #import "WalletDelectVC.h"
 #import "BuildSucessVC.h"
 #import "TLTabBarController.h"
+#import "BuildBackUpVC.h"
 @interface WalletSettingVC ()
 @property (nonatomic, strong) SettingGroup *group;
 @property (nonatomic, strong) SettingTableView *tableView;
@@ -180,7 +181,7 @@
     //实名认证
     SettingModel *idAuth = [SettingModel new];
     idAuth.text = [LangSwitcher switchLang:@"钱包备份" key:nil];
-    BuildSucessVC *vc =[BuildSucessVC new];
+    BuildBackUpVC *vc =[BuildBackUpVC new];
     vc.title = [LangSwitcher switchLang:@"钱包备份" key:nil];
     [idAuth setAction:^{
         
@@ -207,7 +208,31 @@
                               }
                               [dataBase.dataBase close];
                               if ([word isEqualToString:textField.text]) {
-                                  [self.navigationController pushViewController:vc animated:YES];
+                                  
+                                  TLDataBase *dataBase = [TLDataBase sharedManager];
+                                  NSString *word;
+                                  if ([dataBase.dataBase open]) {
+                                      NSString *sql = [NSString stringWithFormat:@"SELECT Mnemonics from THAUser where userId = '%@'",[TLUser user].userId];
+                                      //        [sql appendString:[TLUser user].userId];
+                                      FMResultSet *set = [dataBase.dataBase executeQuery:sql];
+                                      while ([set next])
+                                      {
+                                          word = [set stringForColumn:@"Mnemonics"];
+                                          
+                                      }
+                                      [set close];
+                                  }
+                                  [dataBase.dataBase close];
+                                  
+                                  if (word.length > 0) {
+                                      vc.mnemonics = word;
+                                      [self.navigationController pushViewController:vc animated:YES];
+
+                                  }else{
+                                      
+                                      return ;
+                                  }
+                                  
                               }else{
                                   [TLAlert alertWithError:@"交易密码错误"];
                                   

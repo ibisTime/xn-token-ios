@@ -141,15 +141,15 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-//- (void)viewWillDisappear:(BOOL)animated{
-//    
-//    　　if ([self.navigationController.viewControllers indexOfObject:self]==NSNotFound) {
-//        [self.navigationController popToRootViewControllerAnimated:YES];
-//        
-//        　　}
-//    [super viewWillDisappear:animated];
-//    
-//}
+- (void)viewWillDisappear:(BOOL)animated{
+    
+    　　if ([self.navigationController.viewControllers indexOfObject:self]==NSNotFound) {
+        [self.navigationController popToRootViewControllerAnimated:YES];
+        
+        　　}
+    [super viewWillDisappear:animated];
+    
+}
 
 /*
 #pragma mark - Navigation

@@ -95,8 +95,8 @@
         
     }];
     TLTextView *textView = [[TLTextView alloc] initWithFrame:CGRectMake(15, 90, kScreenWidth - 30, 245)];
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(beginEdit)];
-    [textView addGestureRecognizer:tap];
+//    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(beginEdit)];
+//    [textView addGestureRecognizer:tap];
     self.textView = textView;
     textView.backgroundColor = kWhiteColor;
     textView.textColor = kTextColor;

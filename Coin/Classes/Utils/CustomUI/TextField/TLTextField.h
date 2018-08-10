@@ -20,5 +20,7 @@
 //禁止复制粘贴等功能
 @property (nonatomic,assign) BOOL isSecurity;
 
+@property (nonatomic,assign) NSInteger maxCount;
+
 
 @end

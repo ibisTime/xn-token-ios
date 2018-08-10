@@ -185,7 +185,7 @@
     TLTextField *pwdTf = [[TLTextField alloc] initWithFrame:CGRectMake(margin, nameTf.yy + 10, w, h) leftTitle:[LangSwitcher switchLang:@"" key:nil] titleWidth:20 placeholder:[LangSwitcher switchLang:@"请输入密码" key:nil]];
     pwdTf.keyboardType = UIKeyboardTypePhonePad;
     pwdTf.secureTextEntry = YES;
-    
+    pwdTf.maxCount = 6;
     [self.view addSubview:pwdTf];
     self.pwdTf = pwdTf;
     UIView *phone3 = [[UIView alloc] init];
@@ -201,7 +201,7 @@
     TLTextField *rePwdTf = [[TLTextField alloc] initWithFrame:CGRectMake(margin, pwdTf.yy + 1, w, h) leftTitle:[LangSwitcher switchLang:@"" key:nil] titleWidth:20 placeholder:[LangSwitcher switchLang:@"确认密码" key:nil]];
     rePwdTf.secureTextEntry = YES;
     rePwdTf.keyboardType = UIKeyboardTypePhonePad;
-
+    rePwdTf.maxCount = 6;
     [self.view addSubview:rePwdTf];
     self.rePwdTf = rePwdTf;
     UIView *phone4 = [[UIView alloc] init];

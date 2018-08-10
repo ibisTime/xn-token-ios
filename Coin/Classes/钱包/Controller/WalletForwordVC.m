@@ -24,6 +24,7 @@
 #import <MBProgressHUD/MBProgressHUD.h>
 #import "MnemonicUtil.h"
 #import "CoinUtil.h"
+#import <SVProgressHUD/SVProgressHUD.h>
 typedef NS_ENUM(NSInteger, WalletAddressType) {
     
     WalletAddressTypeSelectAddress = 0,       //选择地址
@@ -71,6 +72,9 @@ typedef NS_ENUM(NSInteger, WalletAddressType) {
 @property (nonatomic, strong) UILabel * blanceFree;
 
 @property (nonatomic, strong) UISlider *slider;
+
+@property (nonatomic, copy) NSString *word;
+
 @end
 
 @implementation WalletForwordVC
@@ -83,11 +87,31 @@ typedef NS_ENUM(NSInteger, WalletAddressType) {
     [self addRecordItem];
     //
     [self initSubviews];
-    
+    [self loadPwd];
     //矿工费
     //获取手续费费率
 //    [self setWithdrawFee];
     // Do any additional setup after loading the view.
+}
+
+- (void)loadPwd
+{
+    
+    TLDataBase *dataBase = [TLDataBase sharedManager];
+//    NSString *word;
+    if ([dataBase.dataBase open]) {
+        NSString *sql = [NSString stringWithFormat:@"SELECT PwdKey from THAUser where userId = '%@'",[TLUser user].userId];
+        //        [sql appendString:[TLUser user].userId];
+        FMResultSet *set = [dataBase.dataBase executeQuery:sql];
+        while ([set next])
+        {
+            self.word = [set stringForColumn:@"PwdKey"];
+            
+        }
+        [set close];
+    }
+    [dataBase.dataBase close];
+    
 }
 - (BOOL)navigationShouldPopOnBackButton {
     
@@ -806,9 +830,10 @@ typedef NS_ENUM(NSInteger, WalletAddressType) {
     //
     CGFloat f =  [self.tranAmountTF.text floatValue];
     f = f *1000000000000000000;
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+//    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    NSLog(@"线程1--->%d",[NSThread isMainThread]);
 
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+
         NSString *gaspic =  [CoinUtil convertToSysCoin:self.tranAmountTF.text coin:self.currency.symbol];
         //    NSNumber *gaspic = [NSNumber numberWithFloat:[self.tranAmountTF.text floatValue] *1000000000000000000] ;
         
@@ -818,54 +843,51 @@ typedef NS_ENUM(NSInteger, WalletAddressType) {
                       cancleMsg:[LangSwitcher switchLang:@"取消" key:nil]
                     placeHolder:[LangSwitcher switchLang:@"请输入交易密码" key:nil]
                           maker:self cancle:^(UIAlertAction *action) {
-                              [MBProgressHUD hideHUDForView:self.view animated:YES];
-
+                             
+                              return ;
                           } confirm:^(UIAlertAction *action, UITextField *textField) {
-                              TLDataBase *dataBase = [TLDataBase sharedManager];
-                              NSString *word;
-                              if ([dataBase.dataBase open]) {
-                                  NSString *sql = [NSString stringWithFormat:@"SELECT PwdKey from THAUser where userId = '%@'",[TLUser user].userId];
-                                  //        [sql appendString:[TLUser user].userId];
-                                  FMResultSet *set = [dataBase.dataBase executeQuery:sql];
-                                  while ([set next])
-                                  {
-                                      word = [set stringForColumn:@"PwdKey"];
+                              [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+//                               [SVProgressHUD show];
+                              dispatch_after(0.5, dispatch_get_main_queue(), ^{
+                                  if ([self.word isEqualToString:textField.text]) {
+                                      NSString *result;
+                                      NSLog(@"线程2--->%d",[NSThread isMainThread]);
+                                      //                                  [SVProgressHUD show];
                                       
-                                  }
-                                  [set close];
-                              }
-                              [dataBase.dataBase close];
-                              if ([word isEqualToString:textField.text]) {
-           
-                                  NSString *result;
-                                  if ([self.currency.symbol isEqualToString:@"ETH"]) {
-                                      result =[MnemonicUtil sendTransactionWithMnemonicWallet:Mnemonics address:self.balanceTF.text amount:gaspic gaspic:self.pricr gasLimt:@"21000"];
+                                      //
+                                      if ([self.currency.symbol isEqualToString:@"ETH"]) {
+                                          result =[MnemonicUtil sendTransactionWithMnemonicWallet:Mnemonics address:self.balanceTF.text amount:gaspic gaspic:self.pricr gasLimt:@"21000"];
+                                          
+                                      }else{
+                                          
+                                          result =[MnemonicUtil sendWanTransactionWithMnemonicWallet:Mnemonics address:self.balanceTF.text amount:gaspic gaspic:self.pricr gasLimt:@"21000"];
+                                      }
+                                      
+                                      
+                                      if ([result isEqualToString:@"1"]) {
+                                          [MBProgressHUD hideHUDForView:self.view animated:YES];
+                                          [TLAlert alertWithSucces:[LangSwitcher switchLang:@"转账成功" key:nil]];
+                                          dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                                              [self.navigationController popViewControllerAnimated:YES];
+                                          });
+                                          
+                                      }else
+                                      {
+                                          NSLog(@"线程3--->%d",[NSThread isMainThread]);
+                                          
+                                          [MBProgressHUD hideHUDForView:self.view animated:YES];
+                                          
+                                          [TLAlert alertWithError:[LangSwitcher switchLang:@"转账失败" key:nil]];
+                                          
+                                          
+                                      }
                                   }else{
-                                      
-                                      result =[MnemonicUtil sendWanTransactionWithMnemonicWallet:Mnemonics address:self.balanceTF.text amount:gaspic gaspic:self.pricr gasLimt:@"21000"];
-                                  }
-                                  
-                                  
-                                  if ([result isEqualToString:@"1"]) {
-                                      [MBProgressHUD hideHUDForView:self.view animated:YES];
-                                      [TLAlert alertWithInfo:[LangSwitcher switchLang:@"转账成功" key:nil]];
-                                      dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                                          [self.navigationController popViewControllerAnimated:YES];
-                                      });
-                                      
-                                  }else
-                                  {
+                                      [TLAlert alertWithError:[LangSwitcher switchLang:@"交易密码错误" key:nil]];
                                       [MBProgressHUD hideHUDForView:self.view animated:YES];
                                       
-                                      [TLAlert alertWithInfo:[LangSwitcher switchLang:@"转账失败" key:nil]];
-
-                                      
                                   }
-                              }else{
-                                  [TLAlert alertWithError:[LangSwitcher switchLang:@"交易密码错误" key:nil]];
-                                  [MBProgressHUD hideHUDForView:self.view animated:YES];
-
-                              }
+                              });
+                              
                               //                          [self confirmWithdrawalsWithPwd:textField.text];
                               
                           }];
@@ -873,7 +895,7 @@ typedef NS_ENUM(NSInteger, WalletAddressType) {
         
       
         
-    });
+//    });
    
 //    if ([TLUser user].isGoogleAuthOpen) {
 //

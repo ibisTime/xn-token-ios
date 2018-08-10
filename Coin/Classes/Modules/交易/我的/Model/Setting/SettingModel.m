@@ -6,8 +6,10 @@
 //  Copyright © 2017年 cuilukai. All rights reserved.
 //
 
+#import <MJExtension/MJExtension.h>
 #import "SettingModel.h"
 
-@implementation SettingModel
 
+@implementation SettingModel
+MJExtensionCodingImplementation
 @end

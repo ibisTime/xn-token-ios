@@ -24,6 +24,8 @@
 //@property (nonatomic, strong) TLTextField *codeTf;
 @property (nonatomic, strong) CaptchaView *captchaView;
 
+@property (nonatomic, strong) UIButton *nextButton;
+
 @end
 
 @implementation EditEmailVC
@@ -56,7 +58,7 @@
 
 - (void)setUpUI {
     
-    [UIBarButtonItem addRightItemWithTitle:[LangSwitcher switchLang:@"完成" key:nil] titleColor:kTextColor frame:CGRectMake(0, 0, 40, 20) vc:self action:@selector(hasDone)];
+//    [UIBarButtonItem addRightItemWithTitle:[LangSwitcher switchLang:@"完成" key:nil] titleColor:kTextColor frame:CGRectMake(0, 0, 40, 20) vc:self action:@selector(hasDone)];
     
     
     self.contentTf = [[TLTextField alloc] initWithFrame:CGRectMake(0, 10, kScreenWidth, 45)
@@ -94,7 +96,25 @@
     [self.captchaView.captchaBtn addTarget:self action:@selector(sendCaptcha) forControlEvents:UIControlEventTouchUpInside];
     
     
+    self.nextButton = [UIButton buttonWithImageName:nil cornerRadius:6];
+    NSString *text = [LangSwitcher switchLang:@"确认" key:nil];
+    [self.nextButton setTitle:text forState:UIControlStateNormal];
+    self.nextButton.titleLabel.font = [UIFont systemFontOfSize:16];
+    
+    [self.nextButton setTitleColor:kWhiteColor forState:UIControlStateNormal];
+    [self.nextButton addTarget:self action:@selector(hasDone) forControlEvents:UIControlEventTouchUpInside];
+    [self.nextButton setBackgroundColor:kAppCustomMainColor forState:UIControlStateNormal];
+    [self.view addSubview:self.nextButton];
+    [self.nextButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.captchaView.mas_bottom).offset(20);
+        make.right.equalTo(self.view.mas_right).offset(-15);
+        make.left.equalTo(self.view.mas_left).offset(15);
+        make.height.equalTo(@45);
+        
+    }];
+    
 }
+
 
 
 #pragma mark- 发送验证码

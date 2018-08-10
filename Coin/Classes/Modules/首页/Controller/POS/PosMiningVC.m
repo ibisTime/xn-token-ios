@@ -9,13 +9,18 @@
 #import "PosMiningVC.h"
 //V
 #import "TLPlaceholderView.h"
-
-@interface PosMiningVC ()
+#import "StoreTableView.h"
+#import "StoreModel.h"
+#import "UIBarButtonItem+convience.h"
+@interface PosMiningVC ()<RefreshDelegate>
 //
 @property (nonatomic, strong) TLPlaceholderView *placeholderView;
 @property (nonatomic, strong) UILabel *titleLable;
 
 @property (nonatomic, strong) UILabel *contentLab;
+
+@property (nonatomic, strong) StoreTableView *tableView;
+
 @end
 
 @implementation PosMiningVC
@@ -25,30 +30,76 @@
     self.title = [LangSwitcher switchLang:@"量化理财" key:nil];
     //敬请期待
     [self initPlaceHolderView];
+    
+    StoreModel *m = [StoreModel new];
+    m.city = @"杭州";
+    m.desc = @"THA蓄势待发";
+    StoreModel *m1 = [StoreModel new];
+    m1.city = @"北京";
+    m1.desc = @"wanChina";
+    self.tableView.stores = @[m,m1];
+    [self.tableView reloadData];
+    
+//    [UIBarButtonItem addr]
+    
+//    self.tableView.
+}
+
+- (StoreTableView *)tableView {
+    
+    if (!_tableView) {
+        
+        _tableView = [[StoreTableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+        
+        //        _tableView.placeHolderView = self.placeHolderView;
+        _tableView.refreshDelegate = self;
+        
+        [self.view addSubview:_tableView];
+        [_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.edges.mas_equalTo(UIEdgeInsetsMake(0, 15, 0, 15));
+        }];
+        
+    }
+    return _tableView;
 }
 
 #pragma mark - Init
 - (void)initPlaceHolderView {
+    self.view.backgroundColor = kWhiteColor;
+    UIView *topView = [[UIView alloc] init];
+    [self.view addSubview:topView];
+    topView.backgroundColor = kHexColor(@"#0848DF");
     
-    self.titleLable = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:14];
-    [self.view addSubview:self.titleLable];
-    self.titleLable.numberOfLines = 0;
-    [self.titleLable mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(@(kHeight(20)));
-        make.right.equalTo(@-10);
-        make.left.equalTo(@10);
+    [topView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.view.mas_top);
         
+        make.left.equalTo(self.view.mas_left);
+        make.right.equalTo(self.view.mas_right);
+        make.height.equalTo(@(kHeight(66)));
     }];
-    self.titleLable.text = @"THA Wallet为用户提供多种类型的优质理财产品，用户可以使用比特币、以太坊等数字货币购买理财产品而获得收益";
-    self.contentLab = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:14];
-    [self.view addSubview:self.contentLab];
-    self.contentLab.numberOfLines = 0;
-    self.contentLab.text = @"THA Wallet provides users with a variety of quality management products, users can use Bitcoin, Ethernet and other digital currencies to buy money products and gain income.";
-    [self.contentLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.titleLable.mas_bottom).offset(20);
-        make.right.equalTo(@-10);
-        make.left.equalTo(@10);
-    }];
+    
+    
+    
+//    self.titleLable = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:14];
+//    [self.view addSubview:self.titleLable];
+//    self.titleLable.numberOfLines = 0;
+//    [self.titleLable mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(@(kHeight(20)));
+//        make.right.equalTo(@-10);
+//        make.left.equalTo(@10);
+//
+//    }];
+//    self.titleLable.text = @"THA Wallet为用户提供多种类型的优质理财产品，用户可以使用比特币、以太坊等数字货币购买理财产品而获得收益";
+//    self.contentLab = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:14];
+//    [self.view addSubview:self.contentLab];
+//    self.contentLab.numberOfLines = 0;
+//    self.contentLab.text = @"THA Wallet provides users with a variety of quality management products, users can use Bitcoin, Ethernet and other digital currencies to buy money products and gain income.";
+//    [self.contentLab mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(self.titleLable.mas_bottom).offset(20);
+//        make.right.equalTo(@-10);
+//        make.left.equalTo(@10);
+//    }];
     
 //    self.placeholderView = [TLPlaceholderView placeholderViewWithImage:nil text:[LangSwitcher switchLang:@"暂未开放, 敬请期待!" key:nil] textColor:kHexColor(@"#fe8472")];
     

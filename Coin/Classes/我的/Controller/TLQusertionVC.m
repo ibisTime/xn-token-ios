@@ -525,8 +525,8 @@
     textView.returnKeyType = UIReturnKeyDone;
     
 //    textView.delegate = self;
-    UITapGestureRecognizer *tap1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(beginEdit)];
-    [textView addGestureRecognizer:tap1];
+//    UITapGestureRecognizer *tap1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(beginEdit)];
+//    [textView addGestureRecognizer:tap1];
 //    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(beginEdit)];
 //    [textView addGestureRecognizer:tap];
     self.textView = textView;
@@ -560,8 +560,8 @@
     reproductionView.userInteractionEnabled = YES;
     reproductionView.returnKeyType = UIReturnKeyDone;
 //    reproductionView.delegate = self;
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(beginEdits)];
-    [reproductionView addGestureRecognizer:tap];
+//    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(beginEdits)];
+//    [reproductionView addGestureRecognizer:tap];
 //    [reproductionView addTarget:self action:@selector(done) forControlEvents:UIControlEventEditingDidEndOnExit];
 //
 //        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(end)];

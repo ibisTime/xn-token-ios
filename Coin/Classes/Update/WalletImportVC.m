@@ -119,6 +119,7 @@
     phone7.backgroundColor = kLineColor;
     phone7.frame = CGRectMake(margin*2, nameTf.yy, w-30, 1);
     TLTextField *pwdTf = [[TLTextField alloc] initWithFrame:CGRectMake(margin, nameTf.yy+5, w, h) leftTitle:[LangSwitcher switchLang:@"" key:nil] titleWidth:20 placeholder:[LangSwitcher switchLang:@"请输入密码" key:nil]];
+    pwdTf.maxCount = 6;
     pwdTf.secureTextEntry = YES;
     pwdTf.keyboardType = UIKeyboardTypePhonePad;
 
@@ -138,6 +139,7 @@
     //    [self.view addSubview:pLab];
     TLTextField *rePwdTf = [[TLTextField alloc] initWithFrame:CGRectMake(margin, pwdTf.yy + 1, w, h) leftTitle:[LangSwitcher switchLang:@"" key:nil] titleWidth:20 placeholder:[LangSwitcher switchLang:@"请输入重复密码" key:nil]];
     rePwdTf.secureTextEntry = YES;
+     rePwdTf.maxCount = 6;
     [self.view addSubview:rePwdTf];
     rePwdTf.keyboardType = UIKeyboardTypePhonePad;
 

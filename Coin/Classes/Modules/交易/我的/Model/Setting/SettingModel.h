@@ -18,4 +18,8 @@
 
 @property (nonatomic, assign) BOOL isSelect;
 
+@property (nonatomic, assign) BOOL isSetting;
+
+@property (nonatomic, assign) BOOL isVersion;
+
 @end

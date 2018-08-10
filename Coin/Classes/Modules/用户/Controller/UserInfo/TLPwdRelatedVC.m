@@ -231,6 +231,7 @@
     
     pwdTf.returnKeyType = UIReturnKeyNext;
     pwdTf.keyboardType = UIKeyboardTypePhonePad;
+    pwdTf.maxCount = 6;
     [pwdTf addTarget:self action:@selector(next:) forControlEvents:UIControlEventEditingDidEndOnExit];
     
     [self.bgSV addSubview:pwdTf];
@@ -245,7 +246,7 @@
     rePwdTf.keyboardType = UIKeyboardTypePhonePad;
 
     rePwdTf.returnKeyType = UIReturnKeyDone;
-
+    rePwdTf.maxCount = 6;
     [rePwdTf addTarget:self action:@selector(done:) forControlEvents:UIControlEventEditingDidEndOnExit];
 
     [self.bgSV addSubview:rePwdTf];

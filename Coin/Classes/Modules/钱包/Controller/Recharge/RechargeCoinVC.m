@@ -141,14 +141,6 @@
         make.width.height.equalTo(@233);
     }];
     [self.view addSubview:self.qrView];
-//    [self.qrView mas_makeConstraints:^(MASConstraintMaker *make) {
-//
-//        make.top.equalTo(self.topView.mas_bottom);
-//        make.left.right.equalTo(@0);
-//        make.height.equalTo(@275);
-//
-//    }];
-    
     //二维码
     UIImageView *qrIV = [[UIImageView alloc] init];
     NSString *address ;

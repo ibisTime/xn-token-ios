@@ -10,7 +10,7 @@
 //M
 #import "BannerModel.h"
 #import "CountInfoModel.h"
-
+#import "HomeFindModel.h"
 typedef NS_ENUM(NSInteger, HomeEventsType) {
     
     HomeEventsTypeBanner = 0,   //Banner图
@@ -30,5 +30,7 @@ typedef void(^HomeHeaderEventsBlock)(HomeEventsType type, NSInteger index);
 @property (nonatomic, strong) NSMutableArray <BannerModel *>*banners;
 //统计
 @property (nonatomic, strong) CountInfoModel *countInfo;
+@property (nonatomic,strong) NSMutableArray <HomeFindModel *>*findModels;
+
 
 @end

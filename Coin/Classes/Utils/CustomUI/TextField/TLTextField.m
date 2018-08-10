@@ -10,6 +10,10 @@
 #import "AppColorMacro.h"
 #import "UIColor+Extension.h"
 
+@interface TLTextField()<UITextFieldDelegate>
+
+
+@end
 @implementation TLTextField
 
 - (instancetype)initWithFrame:(CGRect)frame
@@ -55,13 +59,25 @@
         self.clearButtonMode = UITextFieldViewModeWhileEditing;
 //        self.textAlignment = NSTextAlignmentRight;
         self.font = [UIFont systemFontOfSize:13];
-
+        self.delegate = self;
     }
     
     return self;
 
 }
-
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    
+    if (!self.maxCount) {
+        return YES;
+    }
+        if (textField.text.length >= self.maxCount) {
+            return NO;
+        }else{
+        return YES;
+        }
+        
+        
+    }
 #pragma mark --处理复制粘贴事件
 //- (BOOL)canPerformAction:(SEL)action withSender:(id)sender
 //{

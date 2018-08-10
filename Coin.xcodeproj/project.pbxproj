@@ -213,6 +213,8 @@
 		B80D54CB210C84CA005303D5 /* APPLanguage.m in Sources */ = {isa = PBXBuildFile; fileRef = B80D54CA210C84CA005303D5 /* APPLanguage.m */; };
 		B80D54CE210C9C11005303D5 /* TLChangeNikeName.m in Sources */ = {isa = PBXBuildFile; fileRef = B80D54CD210C9C11005303D5 /* TLChangeNikeName.m */; };
 		B819BAAA20C6DD7800CEEC5E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B819BAA920C6DD7700CEEC5E /* LaunchScreen.storyboard */; };
+		B82D3878211BD4A50053A2E4 /* TLQrCodeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B82D3877211BD4A50053A2E4 /* TLQrCodeVC.m */; };
+		B82D387B211C1BDB0053A2E4 /* HomeFindModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B82D387A211C1BDB0053A2E4 /* HomeFindModel.m */; };
 		B83666F3210EAF480065DF18 /* LocalSettingTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = B83666F2210EAF470065DF18 /* LocalSettingTableView.m */; };
 		B83666F6210EC0610065DF18 /* LocalSettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B83666F5210EC0610065DF18 /* LocalSettingCell.m */; };
 		B83D1E0C20CE63A2007835DB /* WalletLocalVc.m in Sources */ = {isa = PBXBuildFile; fileRef = B83D1E0B20CE63A2007835DB /* WalletLocalVc.m */; };
@@ -244,6 +246,8 @@
 		B88D6C7220EDF3B50043832C /* TLTransfromVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B88D6C7120EDF3B50043832C /* TLTransfromVC.m */; };
 		B891F0682101899900ED5DDF /* BuildLocalHomeView.m in Sources */ = {isa = PBXBuildFile; fileRef = B891F0672101899900ED5DDF /* BuildLocalHomeView.m */; };
 		B89783D720F6FB310088C713 /* TLUserFindPwdVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B89783D620F6FB310088C713 /* TLUserFindPwdVC.m */; };
+		B89F07DF211B06E20057E781 /* TLinviteVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B89F07DE211B06E20057E781 /* TLinviteVC.m */; };
+		B89F07E2211B07FA0057E781 /* TLMeSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = B89F07E1211B07FA0057E781 /* TLMeSetting.m */; };
 		B8A2436520E5E0F20074DF8F /* TLDataBase.m in Sources */ = {isa = PBXBuildFile; fileRef = B8A2436420E5E0F20074DF8F /* TLDataBase.m */; };
 		B8B15C0220CA312100F13220 /* BuildWalletMineVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B8B15C0120CA312100F13220 /* BuildWalletMineVC.m */; };
 		B8B15C0520CA55D600F13220 /* BuildSucessVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B8B15C0420CA55D600F13220 /* BuildSucessVC.m */; };
@@ -728,6 +732,10 @@
 		B80D54CC210C9C11005303D5 /* TLChangeNikeName.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLChangeNikeName.h; sourceTree = "<group>"; };
 		B80D54CD210C9C11005303D5 /* TLChangeNikeName.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLChangeNikeName.m; sourceTree = "<group>"; };
 		B819BAA920C6DD7700CEEC5E /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		B82D3876211BD4A50053A2E4 /* TLQrCodeVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLQrCodeVC.h; sourceTree = "<group>"; };
+		B82D3877211BD4A50053A2E4 /* TLQrCodeVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLQrCodeVC.m; sourceTree = "<group>"; };
+		B82D3879211C1BDB0053A2E4 /* HomeFindModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeFindModel.h; sourceTree = "<group>"; };
+		B82D387A211C1BDB0053A2E4 /* HomeFindModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeFindModel.m; sourceTree = "<group>"; };
 		B83666F1210EAF470065DF18 /* LocalSettingTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocalSettingTableView.h; sourceTree = "<group>"; };
 		B83666F2210EAF470065DF18 /* LocalSettingTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocalSettingTableView.m; sourceTree = "<group>"; };
 		B83666F4210EC0610065DF18 /* LocalSettingCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocalSettingCell.h; sourceTree = "<group>"; };
@@ -794,6 +802,10 @@
 		B891F0672101899900ED5DDF /* BuildLocalHomeView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BuildLocalHomeView.m; sourceTree = "<group>"; };
 		B89783D520F6FB310088C713 /* TLUserFindPwdVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLUserFindPwdVC.h; sourceTree = "<group>"; };
 		B89783D620F6FB310088C713 /* TLUserFindPwdVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLUserFindPwdVC.m; sourceTree = "<group>"; };
+		B89F07DD211B06E20057E781 /* TLinviteVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLinviteVC.h; sourceTree = "<group>"; };
+		B89F07DE211B06E20057E781 /* TLinviteVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLinviteVC.m; sourceTree = "<group>"; };
+		B89F07E0211B07FA0057E781 /* TLMeSetting.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLMeSetting.h; sourceTree = "<group>"; };
+		B89F07E1211B07FA0057E781 /* TLMeSetting.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLMeSetting.m; sourceTree = "<group>"; };
 		B8A2436320E5E0F20074DF8F /* TLDataBase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLDataBase.h; sourceTree = "<group>"; };
 		B8A2436420E5E0F20074DF8F /* TLDataBase.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLDataBase.m; sourceTree = "<group>"; };
 		B8B15C0020CA312100F13220 /* BuildWalletMineVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BuildWalletMineVC.h; sourceTree = "<group>"; };
@@ -1851,6 +1863,8 @@
 			children = (
 				216F5B23206CD9D900F2C832 /* CountInfoModel.h */,
 				216F5B24206CD9D900F2C832 /* CountInfoModel.m */,
+				B82D3879211C1BDB0053A2E4 /* HomeFindModel.h */,
+				B82D387A211C1BDB0053A2E4 /* HomeFindModel.m */,
 			);
 			path = Count;
 			sourceTree = "<group>";
@@ -2234,6 +2248,12 @@
 				B8D938CE2116C2AC00B2AA88 /* QiestionDetailVC.m */,
 				B8D938D92117169E00B2AA88 /* CustomImageView.h */,
 				B8D938DA2117169E00B2AA88 /* CustomImageView.m */,
+				B89F07DD211B06E20057E781 /* TLinviteVC.h */,
+				B89F07DE211B06E20057E781 /* TLinviteVC.m */,
+				B89F07E0211B07FA0057E781 /* TLMeSetting.h */,
+				B89F07E1211B07FA0057E781 /* TLMeSetting.m */,
+				B82D3876211BD4A50053A2E4 /* TLQrCodeVC.h */,
+				B82D3877211BD4A50053A2E4 /* TLQrCodeVC.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2677,7 +2697,7 @@
 					2EA584B31FA813C900C7106C = {
 						CreatedOnToolsVersion = 9.0.1;
 						LastSwiftMigration = 0940;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 0;
@@ -2855,9 +2875,11 @@
 				216F5B40206CD9DA00F2C832 /* TLBannerView.m in Sources */,
 				216F5AF7206CCED300F2C832 /* CoinService.m in Sources */,
 				21A7F3181FB2E2F900FAA0A2 /* TLUserRegisterVC.m in Sources */,
+				B82D3878211BD4A50053A2E4 /* TLQrCodeVC.m in Sources */,
 				216F5B3A206CD9DA00F2C832 /* CountInfoModel.m in Sources */,
 				4C41F84920723D6600BBA366 /* HomeCell.m in Sources */,
 				211CEF151FCBBF90000FB0C4 /* SortBar.m in Sources */,
+				B89F07E2211B07FA0057E781 /* TLMeSetting.m in Sources */,
 				215979761FB84CC70029F177 /* BillDetailCell.m in Sources */,
 				B8CAA1562115FF7100695BC3 /* QuestionTB.m in Sources */,
 				B8CAA14D2115DE6300695BC3 /* TLhistoryListVC.m in Sources */,
@@ -2906,6 +2928,7 @@
 				211DE6B51FB58B4C002FCF3D /* UIView+Responder.m in Sources */,
 				211EAD901FD0FC500037FBA8 /* UIViewController+BackButtonHander.m in Sources */,
 				B88B093320C908DC005C2D2F /* ResiseTextFiled.m in Sources */,
+				B89F07DF211B06E20057E781 /* TLinviteVC.m in Sources */,
 				7A8A5D1820EA0A23002D9A48 /* RedEnvelopeHeadView.m in Sources */,
 				7A3821C320EACDA100D6B636 /* SendCell.m in Sources */,
 				21223CB71FBDB2D200057444 /* WebVC.m in Sources */,
@@ -2960,6 +2983,7 @@
 				211DE6B01FB58B4C002FCF3D /* UILable+convience.m in Sources */,
 				B8CAA13F21158FF200695BC3 /* LPDVideoPlayerController.m in Sources */,
 				21205CFE1FCD61D6003C6C7C /* ShareView.m in Sources */,
+				B82D387B211C1BDB0053A2E4 /* HomeFindModel.m in Sources */,
 				B8BBA64620C8497000DC4D5F /* AddMoneyTableView.m in Sources */,
 				B8B15C3220CAB4DE00F13220 /* CustomLayoutWallet.m in Sources */,
 				2159795D1FB81C2B0029F177 /* BillVC.m in Sources */,
@@ -3284,9 +3308,9 @@
 				CODE_SIGN_ENTITLEMENTS = Coin/Coin.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 6PF7VHZB5Z;
+				DEVELOPMENT_TEAM = TX9SHE4ST4;
 				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = NO;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3311,10 +3335,10 @@
 					"$(PROJECT_DIR)/Coin/Extension/sdk/idfa",
 					"$(PROJECT_DIR)/Coin/Extension/WechatSDK1.8.2",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.cdkj.wallet;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ZQB.HappyFirstGo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "cc8de7e4-93a3-43e8-963e-822bc861b7cb";
-				PROVISIONING_PROFILE_SPECIFIER = devogcwallet;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -3334,9 +3358,9 @@
 				CODE_SIGN_ENTITLEMENTS = Coin/Coin.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 6PF7VHZB5Z;
+				DEVELOPMENT_TEAM = TX9SHE4ST4;
 				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = NO;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3361,10 +3385,10 @@
 					"$(PROJECT_DIR)/Coin/Extension/sdk/idfa",
 					"$(PROJECT_DIR)/Coin/Extension/WechatSDK1.8.2",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.cdkj.wallet;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ZQB.HappyFirstGo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "cc8de7e4-93a3-43e8-963e-822bc861b7cb";
-				PROVISIONING_PROFILE_SPECIFIER = devogcwallet;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;

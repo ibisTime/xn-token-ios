@@ -46,6 +46,8 @@
 #import "TLChangeNikeName.h"
 #import "BuildWalletMineVC.h"
 #import "TLQusertionVC.h"
+#import "TLinviteVC.h"
+#import "TLMeSetting.h"
 @interface TLMineVC ()<MineHeaderSeletedDelegate, UINavigationControllerDelegate>
 
 //@property (nonatomic, strong) FBKVOController *chatKVOCtrl;   czy
@@ -186,6 +188,24 @@
         }
         SettingVC *settingVC = [SettingVC new];
 
+        [weakSelf.navigationController pushViewController:settingVC animated:YES];
+    };
+    
+    
+    MineModel *inviteModel = [MineModel new];
+    inviteModel.text = [LangSwitcher switchLang:@"邀请有礼" key:nil];
+    inviteModel.imgName = @"邀请有礼";
+    inviteModel.action = ^{
+        if (![TLUser user].isLogin) {
+            TLUserLoginVC *loginVC= [TLUserLoginVC new];
+            [weakSelf.navigationController pushViewController:loginVC animated:YES];
+            loginVC.loginSuccess = ^{
+                
+            };
+            return ;
+        }
+        TLinviteVC *settingVC = [TLinviteVC new];
+        
         [weakSelf.navigationController pushViewController:settingVC animated:YES];
     };
     MineModel *language = [MineModel new];
@@ -362,6 +382,21 @@
         
     };
     
+    MineModel *meSetting = [MineModel new];
+    meSetting.text = [LangSwitcher switchLang:@"设置" key:nil];
+    meSetting.imgName = @"设置";
+    meSetting.action = ^{
+        
+        //        HTMLStrVC *htmlVC = [HTMLStrVC new];
+        //        htmlVC.type = HTMLTypeAboutUs;
+        //        [weakSelf.navigationController pushViewController:htmlVC animated:YES];
+        
+        TLMeSetting *vc = [[TLMeSetting alloc] init];
+        [weakSelf.navigationController pushViewController:vc animated:YES];
+        
+        
+    };
+    
     self.group = [MineGroup new];
     
     
@@ -376,8 +411,8 @@
     } else {
         
         
-        self.group.sections = @[ @[settingModel], @[accounrModel,language ],
-                                @[languageSetting,securityCenter,questionSetting,helpModel, abountUs]
+        self.group.sections = @[ @[settingModel], @[inviteModel,questionSetting ],
+                                @[languageSetting,securityCenter,helpModel, meSetting]
                                 ];
         
     }
