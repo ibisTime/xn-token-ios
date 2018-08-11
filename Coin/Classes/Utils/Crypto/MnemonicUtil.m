@@ -9,6 +9,29 @@
 #import "MnemonicUtil.h"
 #import "Coin-Swift.h"
 #import "AppColorMacro.h"
+#import "BTCMnemonic.h"
+#import "BTC256+Tests.h"
+#import "BTCData+Tests.h"
+#import "BTCMnemonic+Tests.h"
+#import "BTCBigNumber+Tests.h"
+#import "BTCBase58+Tests.h"
+#import "BTCAddress+Tests.h"
+#import "BTCProtocolSerialization+Tests.h"
+#import "BTCKey+Tests.h"
+#import "BTCKeychain+Tests.h"
+#import "BTCCurvePoint+Tests.h"
+#import "BTCBlindSignature+Tests.h"
+#import "BTCEncryptedBackup+Tests.h"
+#import "BTCEncryptedMessage+Tests.h"
+#import "BTCFancyEncryptedMessage+Tests.h"
+#import "BTCScript+Tests.h"
+#import "BTCTransaction+Tests.h"
+#import "BTCBlockchainInfo+Tests.h"
+#import "BTCPriceSource+Tests.h"
+#import "BTCMerkleTree+Tests.h"
+#import "BTCBitcoinURL+Tests.h"
+#import "BTCCurrencyConverter+Tests.h"
+#import "BTCData.h"
 @implementation MnemonicUtil
 
 + (void)test{
@@ -98,37 +121,37 @@
     
 }
 
-//+ (BTCMnemonic *)generateNewMnemonic {
-//    BTCMnemonic *mnemonic =  [[BTCMnemonic alloc] initWithEntropy:BTCRandomDataWithLength(16) password:nil wordListType:BTCMnemonicWordListTypeEnglish];
-//    return mnemonic;
-//}
-//
-//+ (BTCMnemonic *)importMnemonic:(NSArray *)wordList {
-//    BTCMnemonic *mnemonic =  [[BTCMnemonic alloc] initWithWords:wordList password:nil wordListType:BTCMnemonicWordListTypeEnglish];
-//    return mnemonic;
-//}
-//
-//+ (NSString *)getBtcPrivateKey:(BTCMnemonic *)mnemonic {
-//    BTCKeychain *keychain = [mnemonic keychain];
-//    return keychain.key.privateKeyAddress.string;
-//}
-//
-//+ (NSString *)getBtcAddress:(BTCMnemonic *)mnemonic {
-//    BTCKeychain *keychain = [mnemonic keychain];
-//    return keychain.key.address.string;
-//}
-//
-//+ (NSString *)getEthPrivateKey:(BTCMnemonic *)mnemonic {
-//    BTCKeychain *keychain = [mnemonic keychain];
-//    keychain = [keychain derivedKeychainWithPath:@"m/44'/1'/2'"];
-//    
-//    return keychain.key.privateKeyAddress.string;
-//}
-//
-//+ (NSString *)getEthAddress:(BTCMnemonic *)mnemonic {
-//    BTCKeychain *keychain = [mnemonic keychain];
-//    keychain = [keychain derivedKeychainWithPath:@"m/44'/1'/2'"];
-//    return [NSString stringWithFormat:@"0x%@", keychain.key.address.string];
-//}
++ (BTCMnemonic *)generateNewMnemonic {
+    BTCMnemonic *mnemonic =  [[BTCMnemonic alloc] initWithEntropy:BTCRandomDataWithLength(16) password:nil wordListType:BTCMnemonicWordListTypeEnglish];
+    return mnemonic;
+}
+
++ (BTCMnemonic *)importMnemonic:(NSArray *)wordList {
+    BTCMnemonic *mnemonic =  [[BTCMnemonic alloc] initWithWords:wordList password:nil wordListType:BTCMnemonicWordListTypeEnglish];
+    return mnemonic;
+}
+
++ (NSString *)getBtcPrivateKey:(BTCMnemonic *)mnemonic {
+    BTCKeychain *keychain = [mnemonic keychain];
+    return keychain.key.privateKeyAddressTestnet.string;
+}
+
++ (NSString *)getBtcAddress:(BTCMnemonic *)mnemonic {
+    BTCKeychain *keychain = [mnemonic keychain];
+    return keychain.key.addressTestnet.string;
+}
+
++ (NSString *)getEthPrivateKey:(BTCMnemonic *)mnemonic {
+    BTCKeychain *keychain = [mnemonic keychain];
+    keychain = [keychain derivedKeychainWithPath:@"m/44'/1'/2'"];
+    
+    return keychain.key.privateKeyAddress.string;
+}
+
++ (NSString *)getEthAddress:(BTCMnemonic *)mnemonic {
+    BTCKeychain *keychain = [mnemonic keychain];
+    keychain = [keychain derivedKeychainWithPath:@"m/44'/1'/2'"];
+    return [NSString stringWithFormat:@"0x%@", keychain.key.address.string];
+}
 
 @end

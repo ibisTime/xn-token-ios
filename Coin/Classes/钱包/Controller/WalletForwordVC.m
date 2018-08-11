@@ -25,13 +25,28 @@
 #import "MnemonicUtil.h"
 #import "CoinUtil.h"
 #import <SVProgressHUD/SVProgressHUD.h>
+#import "utxoModel.h"
+#import "BTCBlockchainInfo.h"
+#import "BTCTransactionOutput.h"
+#import "BTCData.h"
+#import "BTCKey.h"
+#import "BTCScript.h"
+#import "BTCScriptMachine.h"
+#import "BTCAddress.h"
+#import "BTCChainCom.h"
+#import "BTCTransaction.h"
+#import "BTCTransactionInput.h"
+
 typedef NS_ENUM(NSInteger, WalletAddressType) {
     
     WalletAddressTypeSelectAddress = 0,       //选择地址
     WalletAddressTypeScan,                    //扫码
     WalletAddressTypeCopy,                    //复制粘贴
 };
-
+typedef enum : NSUInteger {
+    BTCAPIChain,
+    BTCAPIBlockchain,
+} BTCAPI;
 @interface WalletForwordVC ()
 //可用余额
 @property (nonatomic, strong) TLTextField *balanceTF;
@@ -74,6 +89,12 @@ typedef NS_ENUM(NSInteger, WalletAddressType) {
 @property (nonatomic, strong) UISlider *slider;
 
 @property (nonatomic, copy) NSString *word;
+@property (nonatomic, strong) UILabel *symbolBlance;
+
+@property (nonatomic, copy) NSString *btcAddress;
+
+@property (nonatomic, copy) NSString *btcPrivate;
+@property (nonatomic, strong) NSMutableArray <utxoModel *>*utxis;
 
 @end
 
@@ -122,10 +143,379 @@ typedef NS_ENUM(NSInteger, WalletAddressType) {
 
 - (void)viewDidAppear:(BOOL)animated
 {
+    
+    [self loadUtxoList];
+    
     [self getgamProce];
 
     [super viewDidAppear:animated];
 }
+
+- (void)loadUtxoList
+{
+    
+    TLDataBase *dataBase = [TLDataBase sharedManager];
+    NSString *btcaddress;
+    NSString *btcprivate;
+
+    if ([dataBase.dataBase open]) {
+        NSString *sql = [NSString stringWithFormat:@"SELECT btcaddress,btcprivate from THAUser where userId = '%@'",[TLUser user].userId];
+        //        [sql appendString:[TLUser user].userId];
+        FMResultSet *set = [dataBase.dataBase executeQuery:sql];
+        while ([set next])
+        {
+            btcaddress = [set stringForColumn:@"btcaddress"];
+            btcprivate = [set stringForColumn:@"btcprivate"];
+
+        }
+        [set close];
+    }
+    [dataBase.dataBase close];
+    self.btcAddress = btcaddress;
+    self.btcPrivate = btcprivate;
+
+    TLNetworking *net = [TLNetworking new];
+    
+    
+    net.code = @"802220";
+    net.parameters[@"address"] = btcaddress;
+    
+    
+    [net postWithSuccess:^(id responseObject) {
+       NSString *blance = responseObject[@"data"][@"balance"];
+        
+        CoinModel *currentCoin = [CoinUtil getCoinModel:@"BTC"];
+//
+//        NSString *leftAmount = [blance subNumber:currentCoin.withdrawFeeString];
+        NSString *text =  [CoinUtil convertToRealCoin:blance coin:@"BTC"];
+
+        self.symbolBlance.text = [NSString stringWithFormat:@"%.6f %@",[text floatValue],self.currency.symbol];
+        NSLog(@"%@",responseObject);
+        
+        self.utxis = [utxoModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"][@"utxoList"]];
+        [self testSpendCoins:BTCAPIChain];
+
+        NSLog(@"%@",self.utxis);
+//        [self.tableView endRefreshHeader];
+        
+    } failure:^(NSError *error) {
+        NSLog(@"%@",error);
+
+//        [self.tableView endRefreshHeader];
+    }];
+}
+
+- (void) testSpendCoins:(BTCAPI)btcAPI {
+    // For safety I'm not putting a private key in the source code, but copy-paste here from Keychain on each run.为了安全起见，我没有在源代码中放入私钥，而是在每次运行时从Keychain复制粘贴过来。
+    
+    
+//    NSString * str＝ self._btcPrivate;
+     char * a =[self.btcPrivate UTF8String];
+//    printf("Private key in hex:\n");
+//    char str[1000] = {self.btcPrivate};
+    gets(a);
+    
+    NSData* privateKey = BTCDataWithHexCString(a);
+    NSLog(@"Private key: %@", privateKey);
+    
+    BTCKey* key = [[BTCKey alloc] initWithPrivateKey:privateKey];
+    
+    NSLog(@"Address: %@", key.compressedPublicKeyAddress);
+    
+//    if (![@"1TipsuQ7CSqfQsjA9KU5jarSB1AnrVLLo" isEqualToString:key.compressedPublicKeyAddress.string]) {
+//        NSLog(@"WARNING: incorrect private key is supplied");
+//        return;
+//    }
+    
+    NSError* error = nil;
+    BTCTransaction* transaction = [self transactionSpendingFromPrivateKey:privateKey
+                                                                       to:[BTCPublicKeyAddress addressWithString:@"mta8isvnW6GbrzmqAMJCyfiYVEWAtHRUHJ"]
+                                                                   change:key.compressedPublicKeyAddress // send change to the same address
+                                                                   amount:0.02
+                                                                      fee:0
+                                                                      api:btcAPI
+                                                                    error:&error];
+    
+    if (!transaction) {
+        NSLog(@"Can't make a transaction: %@", error);
+    }
+    
+    NSLog(@"transaction = %@", transaction.dictionary);
+    NSLog(@"transaction in hex:\n------------------\n%@\n------------------\n", BTCHexFromData([transaction data]));
+    
+    NSLog(@"Sending in 5 sec...");
+    sleep(5);
+    NSLog(@"Sending...");
+    sleep(1);
+    NSURLRequest* req = [[[BTCChainCom alloc] initWithToken:@"Free API Token form chain.com"] requestForTransactionBroadcastWithData:[transaction data]];
+    NSData* data = [NSURLConnection sendSynchronousRequest:req returningResponse:nil error:nil];
+
+    NSLog(@"Broadcast result: data = %@", data);
+    NSLog(@"string = %@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+}
+
+
+// Simple method for now, fetching unspent coins on the fly //目前的方法很简单，即动态提取未使用的硬币
+
+
+- (BTCTransaction*) transactionSpendingFromPrivateKey:(NSData*)privateKey
+                                                   to:(BTCPublicKeyAddress*)destinationAddress
+                                               change:(BTCPublicKeyAddress*)changeAddress
+                                               amount:(BTCAmount)amount
+                                                  fee:(BTCAmount)fee
+                                                  api:(BTCAPI)btcApi
+                                                error:(NSError**)errorOut
+{
+    // 1. Get a private key, destination address, change address and amount
+    // 2. Get unspent outputs for that key (using both compressed and non-compressed pubkey)
+    // 3. Take the smallest available outputs to combine into the inputs of new transaction
+    // 4. Prepare the scripts with proper signatures for the inputs
+    // 5. Broadcast the transaction
+    
+    /// 1。获取私钥、目标地址、更改地址和金额
+    
+    // 2。获取该键的未使用的输出(使用压缩和非压缩pubkey)
+    
+    // 3。将最小的可用输出合并到新事务的输入中
+    
+    // 4。为输入准备带有适当签名的脚本
+    
+    // 5。广播事务
+    BTCKey* key = [[BTCKey alloc] initWithPrivateKey:privateKey];
+    
+    NSError* error = nil;
+    NSArray* utxos = self.utxis;
+    
+//    switch (btcApi) {
+//        case BTCAPIBlockchain: {
+//            BTCBlockchainInfo* bci = [[BTCBlockchainInfo alloc] init];
+//            utxos = [bci unspentOutputsWithAddresses:@[ key.compressedPublicKeyAddress ] error:&error];
+//            break;
+//        }
+//        case BTCAPIChain: {
+//            BTCChainCom* chain = [[BTCChainCom alloc] initWithToken:@"Free API Token form chain.com"];
+//            utxos = [chain unspentOutputsWithAddress:key.compressedPublicKeyAddress error:&error];
+//            break;
+//        }
+//        default:
+//            break;
+//    }
+    
+    NSLog(@"UTXOs for %@: %@ %@", key.compressedPublicKeyAddress, utxos, error);
+    
+    // Can't download unspent outputs - return with error. //无法下载未使用的输出-返回错误。
+    
+    
+//    if (!utxos) {
+//        *errorOut = error;
+//        return nil;
+//    }
+    
+    
+    // Find enough outputs to spend the total amount. //找到足够的产出来花完总量。
+    
+    
+    BTCAmount totalAmount = amount + fee;
+    BTCAmount dustThreshold = 100000/100000000; // don't want less than 1mBTC in the change.
+    
+    // We need to avoid situation when change is very small. In such case we should leave smallest coin alone and add some bigger one.
+    // Ideally, we need to maintain more-or-less binary distribution of coins: having 0.001, 0.002, 0.004, 0.008, 0.016, 0.032, 0.064, 0.128, 0.256, 0.512, 1.024 etc.
+    // Another option is to spend a coin which is 2x bigger than amount to be spent.
+    // Desire to maintain a certain distribution of change to closely match the spending pattern is the best strategy.
+    // Yet another strategy is to minimize both current and future spending fees. Thus, keeping number of outputs low and change sum above "dust" threshold.
+    
+    // For this test we'll just choose the smallest output.
+    
+    // 1. Sort outputs by amount
+    // 2. Find the output that is bigger than what we need and closer to 2x the amount.
+    // 3. If not, find a bigger one which covers the amount + reasonably big change (to avoid dust), but as small as possible.
+    // 4. If not, find a combination of two outputs closer to 2x amount from the top.
+    // 5. If not, find a combination of two outputs closer to 1x amount with enough change.
+    // 6. If not, find a combination of three outputs.
+    // Maybe Monte Carlo method is a way to go.
+    
+    
+    // Another way:
+    // Find the minimum number of txouts by scanning from the biggest one.
+    // Find the maximum number of txouts by scanning from the lowest one.
+    // Scan with a minimum window increasing it if needed if no good enough change can be found.
+    // Yet another option: finding combinations so the below-the-dust change can go to miners.
+    //我们需要避免变化很小的情况。在这种情况下，我们应该留下最小的硬币，并增加一些更大的。
+    
+    //理想情况下，我们需要保持硬币的或多或少的二元分布:有0.001、0.002、0.004、0.008、0.016、0.032、0.064、0.128、0.256、0.512、1.024等。
+    
+    //另一种选择是花一枚比要花的钱多两倍的硬币。
+    
+    //希望保持一定的分布变化，以密切配合消费模式是最好的策略。
+    
+    //另一个策略是尽量减少当前和未来的支出费用。因此，将输出数量保持在低水平，并将总数更改到“尘埃”阈值以上。
+    
+    
+    //对于这个测试，我们只选择最小的输出。
+    
+    
+    // / 1。排序输出的数量
+    
+    // 2。找到比我们需要的更大的输出，接近2倍的输出。
+    
+    // 3。如果没有，那就找一个更大的吧，它能覆盖足够大的变化(避免灰尘)，但要尽可能小。
+    
+    // 4。如果不是，从顶部找到两个接近2x的输出的组合。
+    
+    // 5。如果没有，找到两个输出的组合，它们的数量接近1倍，并且有足够的变化。
+    
+    /// 6。如果没有，找到三个输出的组合。
+    
+    //也许蒙特卡洛方法是一种方法。
+    
+    
+    
+    // /另一种方式:
+    
+    //从最大的一个扫描到最小的txout数。
+    
+    //通过从最低的一个扫描找到最大的txout数。
+    NSMutableArray *arr = [NSMutableArray array];
+    for (int i = 0; i < self.utxis.count; i++) {
+        utxoModel *newut = [utxoModel new];
+        newut = self.utxis[i];
+        newut.count = [CoinUtil convertToRealCoin:self.utxis[i].count coin:@"BTC"];
+        [arr addObject:newut];
+    }
+    utxos = [arr sortedArrayUsingComparator:^(utxoModel* obj1, utxoModel* obj2) {
+        if (([obj1.count floatValue] - [obj2.count floatValue]) < 0) return NSOrderedAscending;
+        else return NSOrderedDescending;
+    }];
+    
+    NSArray* txouts = nil;
+    
+    for (utxoModel* txout in arr) {
+        if ([txout.count floatValue] > (totalAmount + dustThreshold)) {
+            txouts = @[ txout ];
+            break;
+        }
+    }
+    
+    
+    //扫描与最小窗口增加，如果需要，如果没有足够好的变化可以找到。
+    
+    //还有另一种选择:寻找各种组合，以便让矿商能够实现“低于尘埃的改变”。
+    
+    // Sort utxo in order of
+//    utxos = [utxos sortedArrayUsingComparator:^(BTCTransactionOutput* obj1, BTCTransactionOutput* obj2) {
+//        if ((obj1.value - obj2.value) < 0) return NSOrderedAscending;
+//        else return NSOrderedDescending;
+//    }];
+//
+//    NSArray* txouts = nil;
+//
+//    for (BTCTransactionOutput* txout in utxos) {
+//        if (txout.value > (totalAmount + dustThreshold) && txout.script.isPayToPublicKeyHashScript) {
+//            txouts = @[ txout ];
+//            break;
+//        }
+//    }
+    
+    // We support spending just one output for now. 我们目前只支持支出一项产出。
+    
+    
+    if (!txouts) return nil;
+    
+    // Create a new transaction
+    BTCTransaction* tx = [[BTCTransaction alloc] init];
+    
+    BTCAmount spentCoins = 0;
+    
+    // Add all outputs as inputs
+    for (utxoModel* txout in txouts) {
+        BTCTransactionInput* txin = [[BTCTransactionInput alloc] init];
+        txin.previousHash = [txout.scriptPubKey dataUsingEncoding:NSUTF8StringEncoding];
+        txin.previousIndex = [txout.vout intValue];
+        [tx addInput:txin];
+        
+        NSLog(@"txhash: http://blockchain.info/rawtx/%@", BTCHexFromData(txin.previousHash));
+        NSLog(@"txhash: http://blockchain.info/rawtx/%@ (reversed)", BTCHexFromData(BTCReversedData([txout.scriptPubKey dataUsingEncoding:NSUTF8StringEncoding])));
+        
+        spentCoins += [txout.count floatValue];
+    }
+    
+    NSLog(@"Total satoshis to spend:       %lld", spentCoins);
+    NSLog(@"Total satoshis to destination: %lld", amount);
+    NSLog(@"Total satoshis to fee:         %lld", fee);
+    NSLog(@"Total satoshis to change:      %lld", (spentCoins - (amount + fee)));
+    
+    // Add required outputs - payment and change
+    BTCTransactionOutput* paymentOutput = [[BTCTransactionOutput alloc] initWithValue:amount address:destinationAddress];
+    BTCTransactionOutput* changeOutput = [[BTCTransactionOutput alloc] initWithValue:(spentCoins - (amount + fee)) address:changeAddress];
+    
+    // Idea: deterministically-randomly choose which output goes first to improve privacy.//想法:确定随机选择哪个输出优先用于提高隐私。
+    
+    
+    [tx addOutput:paymentOutput];
+    [tx addOutput:changeOutput];
+    
+    
+    // Sign all inputs. We now have both inputs and outputs defined, so we can sign the transaction. / /所有输入信号。现在我们已经定义了输入和输出，因此可以对事务进行签名。
+    
+    
+    for (int i = 0; i < txouts.count; i++) {
+        // Normally, we have to find proper keys to sign this txin, but in this 通常情况下，我们需要找到合适的钥匙来签这个txin，example we already know that we use a single private key.但是在这个例我们已经知道我们使用的是一个私钥。
+        
+        
+        utxoModel* txout = txouts[i]; // output from a previous tx which is referenced by this txin. 此txin引用的前一个tx的输出。
+        
+        
+        BTCTransactionInput* txin = tx.inputs[i];
+        
+        BTCScript* sigScript = [[BTCScript alloc] init];
+        
+        NSData* d1 = tx.data;
+        
+        BTCSignatureHashType hashtype = BTCSignatureHashTypeAll;
+        BTCScript *sc = [[BTCScript alloc] initWithString:txout.scriptPubKey];
+        NSData* hash = [tx signatureHashForScript:sc inputIndex:i hashType:hashtype error:errorOut];
+        
+        NSData* d2 = tx.data;
+        
+        NSAssert([d1 isEqual:d2], @"Transaction must not change within signatureHashForScript!");
+        
+        // 134675e153a5df1b8e0e0f0c45db0822f8f681a2eb83a0f3492ea8f220d4d3e4
+        NSLog(@"Hash for input %d: %@", i, BTCHexFromData(hash));
+        if (!hash) {
+            return nil;
+        }
+        
+        NSData* signatureForScript = [key signatureForHash:hash hashType:hashtype];
+        [sigScript appendData:signatureForScript];
+        [sigScript appendData:key.publicKey];
+        
+        NSData* sig = [signatureForScript subdataWithRange:NSMakeRange(0, signatureForScript.length - 1)]; // trim hashtype byte to check the signature.
+        NSAssert([key isValidSignature:sig hash:hash], @"Signature must be valid");
+        
+        txin.signatureScript = sigScript;
+    }
+    
+    // Validate the signatures before returning for extra measure. 在返回额外度量之前验证签名。
+    
+    
+    {
+        BTCScriptMachine* sm = [[BTCScriptMachine alloc] initWithTransaction:tx inputIndex:0];
+        NSError* error = nil;
+        BOOL r = [sm verifyWithOutputScript:[[(BTCTransactionOutput*)txouts[0] script] copy] error:&error];
+        NSLog(@"Error: %@", error);
+        NSAssert(r, @"should verify first output");
+    }
+    
+    // Transaction is signed now, return it. 交易现已签署，返回
+    
+    
+    return tx;
+}
+
+
+
+
+#warning BTC转账测试!!
 - (void)getgamProce
 {
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -201,6 +591,7 @@ typedef NS_ENUM(NSInteger, WalletAddressType) {
     }];
     UILabel *symbolBlance = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextBlack font:24];
     [bgImage addSubview:symbolBlance];
+    self.symbolBlance = symbolBlance;
     symbolBlance.text = [NSString stringWithFormat:@"%.6f %@",[self.currency.balance doubleValue]/1000000000000000000,self.currency.symbol];
     [symbolBlance mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(blance.mas_bottom).offset(2);
@@ -1238,19 +1629,6 @@ typedef NS_ENUM(NSInteger, WalletAddressType) {
 }
 
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

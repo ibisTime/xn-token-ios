@@ -192,8 +192,8 @@
         
         CoinModel *currentCoin = [CoinUtil getCoinModel:@"WAN"];
         
-        NSString *leftAmount = [model.payAmount subNumber:currentCoin.withdrawFeeString];
-        NSString *text =  [CoinUtil convertToRealCoin:leftAmount coin:@"WAN"];
+//        NSString *leftAmount = [model.payAmount subNumber:currentCoin.withdrawFeeString];
+        NSString *text =  [CoinUtil convertToRealCoin:model.payAmount coin:@"WAN"];
 
         
         NSString *str = [NSString stringWithFormat:@"%@%.2fwan-%@,,%@%@%@",[LangSwitcher switchLang:@"奖励" key:nil],[text floatValue],type,[LangSwitcher switchLang:@"已于" key:nil],model.repairVersionCode,[LangSwitcher switchLang:@"版本修复" key:nil]];

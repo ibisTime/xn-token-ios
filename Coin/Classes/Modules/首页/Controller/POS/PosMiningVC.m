@@ -12,6 +12,8 @@
 #import "StoreTableView.h"
 #import "StoreModel.h"
 #import "UIBarButtonItem+convience.h"
+#import "TLMakeMoney.h"
+#import "QuestionModel.h"
 @interface PosMiningVC ()<RefreshDelegate>
 //
 @property (nonatomic, strong) TLPlaceholderView *placeholderView;
@@ -19,7 +21,7 @@
 
 @property (nonatomic, strong) UILabel *contentLab;
 
-@property (nonatomic, strong) StoreTableView *tableView;
+@property (nonatomic, strong) TLMakeMoney *tableView;
 
 @end
 
@@ -31,13 +33,13 @@
     //敬请期待
     [self initPlaceHolderView];
     
-    StoreModel *m = [StoreModel new];
-    m.city = @"杭州";
-    m.desc = @"THA蓄势待发";
-    StoreModel *m1 = [StoreModel new];
-    m1.city = @"北京";
-    m1.desc = @"wanChina";
-    self.tableView.stores = @[m,m1];
+    QuestionModel *m = [QuestionModel new];
+    m.Description = @"杭州";
+    m.reappear = @"THA蓄势待发";
+    QuestionModel *m1 = [QuestionModel new];
+    m1.Description = @"北京";
+    m1.reappear = @"wanChina";
+    self.tableView.questions = @[m,m1];
     [self.tableView reloadData];
     
 //    [UIBarButtonItem addr]
@@ -45,11 +47,11 @@
 //    self.tableView.
 }
 
-- (StoreTableView *)tableView {
+- (TLMakeMoney *)tableView {
     
     if (!_tableView) {
         
-        _tableView = [[StoreTableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+        _tableView = [[TLMakeMoney alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         
         //        _tableView.placeHolderView = self.placeHolderView;
         _tableView.refreshDelegate = self;

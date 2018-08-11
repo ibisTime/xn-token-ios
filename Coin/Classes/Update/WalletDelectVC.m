@@ -13,9 +13,10 @@
 #import "TLTextView.h"
 #import "TLAlert.h"
 #import "RevisePassWordVC.h"
-#import "MnemonicUtil.h"
 #import "BuildWalletMineVC.h"
 #import "TLTabBarController.h"
+#import "MnemonicUtil.h"
+
 @interface WalletDelectVC ()<UITextViewDelegate>
 @property (nonatomic ,strong) UILabel *nameLable;
 

@@ -129,9 +129,9 @@
 //        self.currentLbl.text = currency.symbol;
         //    NSString *leftAmount = [platform.amountString subNumber:platform.frozenAmountString];
         
-        CGFloat t = [currency.balance doubleValue]/1000000000000000000;
+        NSString* t = [CoinUtil convertToRealCoin:currency.balance coin:currency.symbol];
        
-        self.textLbl.text = [NSString stringWithFormat:@"¥%.6f ",t];
+        self.textLbl.text = [NSString stringWithFormat:@"¥%.6f ",[t floatValue]];
         //    NSString *rightAmount = [platform.inAmountString subNumber:platform.addAmountString];
         
         //对应币种价格

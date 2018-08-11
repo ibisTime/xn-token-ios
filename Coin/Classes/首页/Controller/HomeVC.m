@@ -33,6 +33,30 @@
 #import "TLPwdRelatedVC.h"
 #import "HTMLStrVC.h"
 #import "HomeFindModel.h"
+#import "BTC256+Tests.h"
+#import "BTCData+Tests.h"
+#import "BTCMnemonic+Tests.h"
+#import "BTCBigNumber+Tests.h"
+#import "BTCBase58+Tests.h"
+#import "BTCAddress+Tests.h"
+#import "BTCProtocolSerialization+Tests.h"
+#import "BTCKey+Tests.h"
+#import "BTCKeychain+Tests.h"
+#import "BTCCurvePoint+Tests.h"
+#import "BTCBlindSignature+Tests.h"
+#import "BTCEncryptedBackup+Tests.h"
+#import "BTCEncryptedMessage+Tests.h"
+#import "BTCFancyEncryptedMessage+Tests.h"
+#import "BTCScript+Tests.h"
+#import "BTCTransaction+Tests.h"
+#import "BTCBlockchainInfo+Tests.h"
+#import "BTCPriceSource+Tests.h"
+#import "BTCMerkleTree+Tests.h"
+#import "BTCBitcoinURL+Tests.h"
+#import "BTCCurrencyConverter+Tests.h"
+#import "MnemonicUtil.h"
+#import "BTCData.h"
+#import "BTCNetwork.h"
 @interface HomeVC ()
 
 @property (nonatomic, strong) HomeTableView *tableView;
@@ -71,6 +95,54 @@
     //    [self.navigationController.navigationBar setShadowImage:nil];
 }
 - (void)viewDidLoad {
+    
+    
+    
+    NSArray* words = [@"uniform claim drum stool evidence stage prevent quiz lunar dove record kit" componentsSeparatedByString:@" "];
+    
+    BTCMnemonic *mnemonic =  [MnemonicUtil importMnemonic:words];
+    mnemonic.keychain.network = [BTCNetwork testnet];
+    NSLog(@"Seed=%@", BTCHexFromData(mnemonic.seed));
+    NSLog(@"Mnemonic=%@", mnemonic.words);
+    NSLog(@"btc_privateKey=%@", [MnemonicUtil getBtcPrivateKey:mnemonic]);
+    //btc_privateKey=L5ggwMgJQh2DfXVME1AMA5hoPACKFQF24i36uDsVMHJUpNPDuodw
+    //btc_privateKey=L5ggwMgJQh2DfXVME1AMA5hoPACKFQF24i36uDsVMHJUpNPDuodw
+    //btc_privateKey=cW3gQGg9qkiUpxxccQyUXQCs1PViurLi8kBa1eKzrPxV57U7npk1
+    
+    NSString *btc_address = [MnemonicUtil getBtcAddress:mnemonic];
+    NSLog(@"btc_address=%@", [MnemonicUtil getBtcAddress:mnemonic]);
+    //btc_address=16kva3dw1AjrFTn9AXswebYvzq21dEeRsx
+    //  btc_address=16kva3dw1AjrFTn9AXswebYvzq21dEeRsx
+    //btc_address=mmGss6iupCB72aFkt6rKUWmFrpciaaLZuH
+    // eth_privateKey=KzGdnUHhqNVuzDBnJgWttLgFtwBtMTDqHdBT4Xgd52GRWDfo7dhk
+    // eth_publicKey=0x1PzsHPZET7uGwtwaMujpfrhaY7cX1C3NHT
+    
+    TLNetworking *net = [TLNetworking new];
+    
+    
+    net.code = @"802220";
+    net.parameters[@"address"] = btc_address ;
+
+    
+    [net postWithSuccess:^(id responseObject) {
+        
+        
+        [self.tableView endRefreshHeader];
+        
+    } failure:^(NSError *error) {
+        [self.tableView endRefreshHeader];
+    }];
+    
+//    return;
+    NSLog(@"%ld,%ld",mnemonic.keychain.network.isTestnet,mnemonic.keychain.network.isMainnet);
+    
+    NSLog(@"eth_privateKey=%@", [MnemonicUtil getEthPrivateKey:mnemonic]);
+    NSLog(@"eth_publicKey=%@", [MnemonicUtil getEthAddress:mnemonic]);
+    
+    mnemonic =  [MnemonicUtil importMnemonic:mnemonic.words];
+    NSLog(@"Seed=%@", BTCHexFromData(mnemonic.seed));
+    NSLog(@"Mnemonic=%@", mnemonic.words);
+    NSLog(@"privateKey=%@", [MnemonicUtil getBtcPrivateKey:mnemonic]);
     
 //    [MnemonicUtil test];
 

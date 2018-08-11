@@ -48,6 +48,11 @@
 #import "HTMLStrVC.h"
 #import "BuildSucessVC.h"
 #import "BuildWalletMineVC.h"
+#import "BTCMnemonic.h"
+#import "BTCNetwork.h"
+#import "BTCData.h"
+#import "MnemonicUtil.h"
+#import "BTCKeychain.h"
 //#import <CoreBitcoin.h>
 //#import <CoreBitcoin/CoreBitcoin.h>
 //#import "BTCMnemonic+Tests.h"
@@ -100,6 +105,9 @@
 
 - (void)viewWillAppear:(BOOL)animated {
   
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:YES animated:animated];
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
     TLDataBase *dataBase = [TLDataBase sharedManager];
     NSString *word;
     if ([dataBase.dataBase open]) {
@@ -116,12 +124,50 @@
     [dataBase.dataBase close];
 //    [self queryTotalAmount];
     if (word != nil && word.length > 0) {
+        BOOL HasChecked =  [[NSUserDefaults standardUserDefaults] boolForKey:KIS170];
+
+        if (HasChecked == YES) {
+            return;
+        }
+        NSArray *words = [word componentsSeparatedByString:@" "];
+        
+        BTCMnemonic *mnemonic =  [MnemonicUtil importMnemonic:words];
+        mnemonic.keychain.network = [BTCNetwork testnet];
+        NSLog(@"Seed=%@", BTCHexFromData(mnemonic.seed));
+        NSLog(@"Mnemonic=%@", mnemonic.words);
+        NSLog(@"btc_privateKey=%@", [MnemonicUtil getBtcPrivateKey:mnemonic]);
+        //btc_privateKey=L5ggwMgJQh2DfXVME1AMA5hoPACKFQF24i36uDsVMHJUpNPDuodw
+        //btc_privateKey=L5ggwMgJQh2DfXVME1AMA5hoPACKFQF24i36uDsVMHJUpNPDuodw
+        //btc_privateKey=cW3gQGg9qkiUpxxccQyUXQCs1PViurLi8kBa1eKzrPxV57U7npk1
+        NSString *btc_private = [MnemonicUtil getBtcPrivateKey:mnemonic];
+        
+        NSString *btc_address = [MnemonicUtil getBtcAddress:mnemonic];
+        //        NSLog(@"btc_address=%@", [MnemonicUtil getBtcAddress:mnemonic]);
+        
+        //助记词存在 新增btc地址
+        TLDataBase *data = [TLDataBase sharedManager];
+        if ([data.dataBase open]) {
+            //            [db executeUpdate:@"create table if not exists LocalWallet(id INTEGER PRIMARY KEY AUTOINCREMENT,walletId text, symbol text, type text ,status text,cname text,unit text,pic1 text,withdrawFeeString text,withfrawFee text,orderNo text,ename text,icon text,pic2 text,pic3 text,address text,IsSelect INTEGER,next text)"];
+            NSString *sql = [NSString stringWithFormat:@"UPDATE THAUser SET btcaddress = '%@',btcprivate = '%@' WHERE userId='%@'",btc_address,btc_private,[TLUser user].userId];
+              NSString *sql1 = [NSString stringWithFormat:@"UPDATE THALocal SET address = '%@' WHERE walletId = (SELECT walletId from THAUser where userId='%@') and symbol = '%@' ",btc_address,[TLUser user].userId,@"BTC"];
+            BOOL sucess = [data.dataBase executeUpdate:sql];
+            BOOL sucess1 = [data.dataBase executeUpdate:sql1];
+
+            NSLog(@"更新自选状态%d",sucess);
+            NSLog(@"更新自选状态%d",sucess1);
+            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:KIS170];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+        }
+        [data.dataBase close];
+        
 //        [self switchWithTager:0 ];
         
 //        [super viewWillAppear:animated];
 //        [self.navigationController setNavigationBarHidden:YES animated:animated];
 //        return;
     }else{
+        
+       
         if (self.isBulid == YES) {
             [self switchWithTager:0 ];
 
@@ -133,9 +179,7 @@
 //   [self inreoduceView:@"个人账户" content:@"个人账户就是指中心化钱包,是由THA替您保管私钥,在中心化钱包中,不存在钱包丢失了无法找回的情况,可以通过身份证找回您的钱包,并且可以让您体验到更多的服务。"];
     }
     
-    [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:YES animated:animated];
-    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
+  
 
 
 }

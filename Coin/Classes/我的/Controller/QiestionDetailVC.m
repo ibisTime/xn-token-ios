@@ -649,9 +649,9 @@
 
 //        return;
     }else{
-        NSString *leftAmount = [self.questionModel.payAmount subNumber:currentCoin.withdrawFeeString];
+//        NSString *leftAmount = [self.questionModel.payAmount subNumber:currentCoin.withdrawFeeString];
         
-        NSString *text1 =  [CoinUtil convertToRealCoin:leftAmount coin:@"WAN"];
+        NSString *text1 =  [CoinUtil convertToRealCoin:self.questionModel.payAmount  coin:@"WAN"];
         self.symbolBlance.text = [NSString stringWithFormat:@"%.2fwan",[text1 floatValue]];
     }
    

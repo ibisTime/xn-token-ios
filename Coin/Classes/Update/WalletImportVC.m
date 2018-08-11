@@ -13,11 +13,11 @@
 #import "TLTextView.h"
 #import "TLAlert.h"
 #import "RevisePassWordVC.h"
-#import "MnemonicUtil.h"
 #import "TLTextField.h"
 #import "CaptchaView.h"
 #import "WalletNewFeaturesVC.h"
 #import "HTMLStrVC.h"
+#import "MnemonicUtil.h"
 #define ACCOUNT_HEIGHT 55;
 
 @interface WalletImportVC ()<UITextViewDelegate>

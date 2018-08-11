@@ -188,9 +188,14 @@
 //    NSString *rightAmount = [platform.balance subNumber:platform.balance];
     
     //对应币种价格
-    CGFloat t = [platform.balance doubleValue];
-    t = t / 1000000000000000000;
-    self.opppsitePriceLbl.text = [NSString stringWithFormat:@"%.6f", t];
+//    CoinModel *currentCoin = [CoinUtil getCoinModel:platform.symbol];
+    //
+//    NSString *leftAmount = [platform.balance subNumber:currentCoin.withdrawFeeString];
+    NSString *text =  [CoinUtil convertToRealCoin:platform.balance coin:platform.symbol];
+//    CoinModel *model  = [CoinUtil ]
+//    CGFloat t = [platform.balance doubleValue];
+//    t = t / 1000000000000000000;
+    self.opppsitePriceLbl.text = [NSString stringWithFormat:@"%.6f", [text floatValue]];
     
     //人民币价格
     

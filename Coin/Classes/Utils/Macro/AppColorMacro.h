@@ -111,7 +111,7 @@
 #define GesturesPassword @"gesturespassword"
 #define KDBVersion @"KDBVersion"
 #define KIS160 @"KIS160"
-
+#define  KIS170@"KIS170"
 
 #pragma mark - 轮播图
 

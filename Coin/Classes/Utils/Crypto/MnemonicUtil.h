@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "BTCMnemonic.h"
 @interface MnemonicUtil : NSObject
 
 + (void)test ;
@@ -28,22 +28,22 @@
 
 +(NSString *)getMnemonicsISRight:(NSString *)mnemon;
 
-////生成随机的助记词
-//+ (BTCMnemonic *)generateNewMnemonic;
-//
-////导入助记词
-//+ (BTCMnemonic *)importMnemonic:(NSArray *)wordList;
-//
-////获取BTC私钥
-//+ (NSString *)getBtcPrivateKey:(BTCMnemonic *)mnemonic;
-//
-////获取BTC地址
-//+ (NSString *)getBtcAddress:(BTCMnemonic *)mnemonic;
-//
-////获取ETH私钥
-//+ (NSString *)getEthPrivateKey:(BTCMnemonic *)mnemonic;
-//
-////获取ETH地址
-//+ (NSString *)getEthAddress:(BTCMnemonic *)mnemonic;
+//生成随机的助记词
++ (BTCMnemonic *)generateNewMnemonic;
+
+//导入助记词
++ (BTCMnemonic *)importMnemonic:(NSArray *)wordList;
+
+//获取BTC私钥
++ (NSString *)getBtcPrivateKey:(BTCMnemonic *)mnemonic;
+
+//获取BTC地址
++ (NSString *)getBtcAddress:(BTCMnemonic *)mnemonic;
+
+//获取ETH私钥
++ (NSString *)getEthPrivateKey:(BTCMnemonic *)mnemonic;
+
+//获取ETH地址
++ (NSString *)getEthAddress:(BTCMnemonic *)mnemonic;
 
 @end
