@@ -36,7 +36,8 @@
 #import "BTCChainCom.h"
 #import "BTCTransaction.h"
 #import "BTCTransactionInput.h"
-
+#import "BTCNetwork.h"
+#import "BTCKeychain.h"
 typedef NS_ENUM(NSInteger, WalletAddressType) {
     
     WalletAddressTypeSelectAddress = 0,       //选择地址
@@ -96,6 +97,11 @@ typedef enum : NSUInteger {
 @property (nonatomic, copy) NSString *btcPrivate;
 @property (nonatomic, strong) NSMutableArray <utxoModel *>*utxis;
 
+@property (nonatomic, copy) NSString *signTx;
+
+@property (nonatomic, copy) NSString *priceSlow ;
+@property (nonatomic, copy) NSString *priceFast;
+
 @end
 
 @implementation WalletForwordVC
@@ -146,7 +152,7 @@ typedef enum : NSUInteger {
     
     [self loadUtxoList];
     
-    [self getgamProce];
+//    [self getgamProce];
 
     [super viewDidAppear:animated];
 }
@@ -189,12 +195,14 @@ typedef enum : NSUInteger {
 //        NSString *leftAmount = [blance subNumber:currentCoin.withdrawFeeString];
         NSString *text =  [CoinUtil convertToRealCoin:blance coin:@"BTC"];
 
-        self.symbolBlance.text = [NSString stringWithFormat:@"%.6f %@",[text floatValue],self.currency.symbol];
+        self.symbolBlance.text = [NSString stringWithFormat:@"%.8f %@",[text floatValue],self.currency.symbol];
         NSLog(@"%@",responseObject);
         
         self.utxis = [utxoModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"][@"utxoList"]];
         [self testSpendCoins:BTCAPIChain];
 
+        [self loadHash];
+        
         NSLog(@"%@",self.utxis);
 //        [self.tableView endRefreshHeader];
         
@@ -205,44 +213,76 @@ typedef enum : NSUInteger {
     }];
 }
 
+- (void)loadHash
+{
+    TLNetworking *net = [TLNetworking new];
+    
+    
+    net.code = @"802222";
+    net.parameters[@"signTx"] = self.signTx;
+    
+    [net postWithSuccess:^(id responseObject) {
+        NSLog(@"%@",responseObject);
+    } failure:^(NSError *error) {
+        NSLog(@"%@",error);
+    }];
+    
+}
 - (void) testSpendCoins:(BTCAPI)btcAPI {
     // For safety I'm not putting a private key in the source code, but copy-paste here from Keychain on each run.为了安全起见，我没有在源代码中放入私钥，而是在每次运行时从Keychain复制粘贴过来。
     
     
 //    NSString * str＝ self._btcPrivate;
-     char * a =[self.btcPrivate UTF8String];
-//    printf("Private key in hex:\n");
-//    char str[1000] = {self.btcPrivate};
-    gets(a);
+//     char * a =[self.btcPrivate UTF8String];
+////    printf("Private key in hex:\n");
+////    char str[1000] = {self.btcPrivate};
+//    gets(a);
     
-    NSData* privateKey = BTCDataWithHexCString(a);
+    NSData* privateKey = BTCDataWithHexCString([@"cSgaJMM6sKhFMXFq1jVFUJp657nojoApaXb3kv1ma1SC1PwGujTB" UTF8String]);
     NSLog(@"Private key: %@", privateKey);
     
     BTCKey* key = [[BTCKey alloc] initWithPrivateKey:privateKey];
+    key.publicKeyCompressed = NO;
+    BTCKeychain *keychain = [[BTCKeychain  alloc] initWithSeed:privateKey];
     
-    NSLog(@"Address: %@", key.compressedPublicKeyAddress);
+    NSLog(@"Address: %@", keychain.key.privateKeyAddressTestnet.string);
+
+//    NSLog(@"Address: %@", key.compressedPublicKeyAddress);
     
-//    if (![@"1TipsuQ7CSqfQsjA9KU5jarSB1AnrVLLo" isEqualToString:key.compressedPublicKeyAddress.string]) {
-//        NSLog(@"WARNING: incorrect private key is supplied");
-//        return;
-//    }
-    
+    if (![@"mta8isvnW6GbrzmqAMJCyfiYVEWAtHRUHJ" isEqualToString:key.compressedPublicKeyAddress.string]) {
+        NSLog(@"WARNING: incorrect private key is supplied");
+        return;
+    }
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
     NSError* error = nil;
     BTCTransaction* transaction = [self transactionSpendingFromPrivateKey:privateKey
-                                                                       to:[BTCPublicKeyAddress addressWithString:@"mta8isvnW6GbrzmqAMJCyfiYVEWAtHRUHJ"]
+                                                                       to:[BTCPublicKeyAddressTestnet addressWithString:@"mta8isvnW6GbrzmqAMJCyfiYVEWAtHRUHJ"]
                                                                    change:key.compressedPublicKeyAddress // send change to the same address
-                                                                   amount:0.02
-                                                                      fee:0
+                                                                   amount:0.02*100000000
+                                                                      fee:0.001*100000000
                                                                       api:btcAPI
                                                                     error:&error];
-    
+
     if (!transaction) {
         NSLog(@"Can't make a transaction: %@", error);
     }
-    
+    self.signTx = BTCHexFromData([transaction data]);
+
     NSLog(@"transaction = %@", transaction.dictionary);
     NSLog(@"transaction in hex:\n------------------\n%@\n------------------\n", BTCHexFromData([transaction data]));
+    return;
+    TLNetworking *net = [TLNetworking new];
     
+    
+    net.code = @"802222";
+    net.parameters[@"signTx"] = [[NSString alloc] initWithData:[transaction data] encoding:NSUTF8StringEncoding];
+    
+    [net postWithSuccess:^(id responseObject) {
+        NSLog(@"%@",responseObject);
+    } failure:^(NSError *error) {
+        NSLog(@"%@",error);
+    }];
+    return;
     NSLog(@"Sending in 5 sec...");
     sleep(5);
     NSLog(@"Sending...");
@@ -282,7 +322,9 @@ typedef enum : NSUInteger {
     
     // 5。广播事务
     BTCKey* key = [[BTCKey alloc] initWithPrivateKey:privateKey];
-    
+   
+   BTCNetwork *net = [[BTCNetwork alloc] initWithName:@"testnet3"];
+    NSLog(@"%d",net.isTestnet);
     NSError* error = nil;
     NSArray* utxos = self.utxis;
     
@@ -316,7 +358,7 @@ typedef enum : NSUInteger {
     
     
     BTCAmount totalAmount = amount + fee;
-    BTCAmount dustThreshold = 100000/100000000; // don't want less than 1mBTC in the change.
+    BTCAmount dustThreshold = 100000; // don't want less than 1mBTC in the change.
     
     // We need to avoid situation when change is very small. In such case we should leave smallest coin alone and add some bigger one.
     // Ideally, we need to maintain more-or-less binary distribution of coins: having 0.001, 0.002, 0.004, 0.008, 0.016, 0.032, 0.064, 0.128, 0.256, 0.512, 1.024 etc.
@@ -390,7 +432,10 @@ typedef enum : NSUInteger {
     NSArray* txouts = nil;
     
     for (utxoModel* txout in arr) {
-        if ([txout.count floatValue] > (totalAmount + dustThreshold)) {
+        BTCAmount a = [[CoinUtil convertToSysCoin:txout.count coin:@"BTC"] longLongValue];
+//                        convertToRealCoin:txout.count coin:@"BTC"] longLongValue];
+
+        if ( a > (totalAmount + dustThreshold)) {
             txouts = @[ txout ];
             break;
         }
@@ -429,14 +474,14 @@ typedef enum : NSUInteger {
     // Add all outputs as inputs
     for (utxoModel* txout in txouts) {
         BTCTransactionInput* txin = [[BTCTransactionInput alloc] init];
-        txin.previousHash = [txout.scriptPubKey dataUsingEncoding:NSUTF8StringEncoding];
+        txin.previousHash = [txout.txid dataUsingEncoding:NSUTF8StringEncoding];
         txin.previousIndex = [txout.vout intValue];
         [tx addInput:txin];
         
         NSLog(@"txhash: http://blockchain.info/rawtx/%@", BTCHexFromData(txin.previousHash));
         NSLog(@"txhash: http://blockchain.info/rawtx/%@ (reversed)", BTCHexFromData(BTCReversedData([txout.scriptPubKey dataUsingEncoding:NSUTF8StringEncoding])));
         
-        spentCoins += [txout.count floatValue];
+        spentCoins +=  [[CoinUtil convertToSysCoin:txout.count coin:@"BTC"] longLongValue];
     }
     
     NSLog(@"Total satoshis to spend:       %lld", spentCoins);
@@ -469,6 +514,7 @@ typedef enum : NSUInteger {
         
         BTCScript* sigScript = [[BTCScript alloc] init];
         
+        
         NSData* d1 = tx.data;
         
         BTCSignatureHashType hashtype = BTCSignatureHashTypeAll;
@@ -498,13 +544,13 @@ typedef enum : NSUInteger {
     // Validate the signatures before returning for extra measure. 在返回额外度量之前验证签名。
     
     
-    {
-        BTCScriptMachine* sm = [[BTCScriptMachine alloc] initWithTransaction:tx inputIndex:0];
-        NSError* error = nil;
-        BOOL r = [sm verifyWithOutputScript:[[(BTCTransactionOutput*)txouts[0] script] copy] error:&error];
-        NSLog(@"Error: %@", error);
-        NSAssert(r, @"should verify first output");
-    }
+//    {
+//        BTCScriptMachine* sm = [[BTCScriptMachine alloc] initWithTransaction:tx inputIndex:0];
+//        NSError* error = nil;
+//        BOOL r = [sm verifyWithOutputScript:[[(BTCTransactionOutput*)txouts[0] script] copy] error:&error];
+//        NSLog(@"Error: %@", error);
+//        NSAssert(r, @"should verify first output");
+//    }
     
     // Transaction is signed now, return it. 交易现已签署，返回
     
@@ -521,6 +567,33 @@ typedef enum : NSUInteger {
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         NSString *pricr;
+        if ([self.currency.symbol isEqualToString:@"BTC"]) {
+            TLNetworking *net = [TLNetworking new];
+            
+            
+            net.code = @"802223";
+            
+            [net postWithSuccess:^(id responseObject) {
+                NSLog(@"%@",responseObject);
+                NSNumber *slow = responseObject[@"data"][@"fastestFeeMin"];
+                NSNumber *fast = responseObject[@"data"][@"fastestFeeMax"];
+
+                int f = ([slow intValue] +[fast intValue])/2;
+                NSString *priceSlow = [CoinUtil convertToRealCoin:[NSString stringWithFormat:@"%@",slow] coin:@"BTC"];
+                NSString *priceFast = [CoinUtil convertToRealCoin:[NSString stringWithFormat:@"%@",fast] coin:@"BTC"];
+                self.priceSlow = priceSlow;
+                self.priceFast = priceFast;
+                NSString *price = [CoinUtil convertToRealCoin:[NSString stringWithFormat:@"%d",f] coin:@"BTC"];
+
+                NSLog(@"%@low@,fast%@",priceSlow,priceFast);
+                self.gamPrice = [price floatValue ] ;
+                [MBProgressHUD hideHUDForView:self.view animated:YES];
+                [self WorkpickerEventWithIndex:1];
+            } failure:^(NSError *error) {
+                NSLog(@"%@",error);
+            }];
+            
+        }else{
 
         if ([self.currency.symbol isEqualToString:@"ETH"]) {
             pricr = [MnemonicUtil getGasPrice];
@@ -536,7 +609,7 @@ typedef enum : NSUInteger {
         self.gamPrice = p;
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         [self WorkpickerEventWithIndex:1];
-
+        }
     });
    
   
@@ -1040,19 +1113,40 @@ typedef enum : NSUInteger {
         CGFloat value = slider.value;
         NSLog(@"%f", value);
         if (value == 0) {
-            self.blanceFree.text = [NSString stringWithFormat:@"%.8f %@",self.gamPrice*85/100,self.currency.symbol];
-            self.pricr = [NSString stringWithFormat:@"%lld",[self.pricr longLongValue]*85/100];
-        }else{
-            self.blanceFree.text = [NSString stringWithFormat:@"%.8f %@",self.gamPrice*value,self.currency.symbol];
+            if ([self.currency.symbol isEqualToString:@"BTC"]) {
+                self.blanceFree.text = [NSString stringWithFormat:@"%@ %@",self.priceSlow,self.currency.symbol];
+                self.pricr = [NSString stringWithFormat:@"%lld",[self.pricr longLongValue]/2];
+            }else{
+                self.blanceFree.text = [NSString stringWithFormat:@"%.8f %@",self.gamPrice/2,self.currency.symbol];
+                self.pricr = [NSString stringWithFormat:@"%lld",[self.pricr longLongValue]/2];
+            }
             
-            self.pricr = [NSString stringWithFormat:@"%f",[self.pricr longLongValue]*value];
+        }else{
+            if ([self.currency.symbol isEqualToString:@"BTC"]) {
+                self.blanceFree.text = [NSString stringWithFormat:@"%.8f %@",self.gamPrice*value*2,self.currency.symbol];
+                
+                self.pricr = [NSString stringWithFormat:@"%f",[self.pricr longLongValue]*value];
+            }else{
+                
+                self.blanceFree.text = [NSString stringWithFormat:@"%.8f %@",self.gamPrice*value,self.currency.symbol];
+                
+                self.pricr = [NSString stringWithFormat:@"%f",[self.pricr longLongValue]*value];
+            }
+           
         }
          if (value == 1)
          {
-             
-             self.blanceFree.text = [NSString stringWithFormat:@"%.8f %@",self.gamPrice*value*115/100,self.currency.symbol];
-             
-             self.pricr = [NSString stringWithFormat:@"%f",[self.pricr longLongValue]*value*115/100];
+          
+             if ([self.currency.symbol isEqualToString:@"BTC"]) {
+                 self.blanceFree.text = [NSString stringWithFormat:@"%@ %@",self.priceFast,self.currency.symbol];
+                 
+                 self.pricr = [NSString stringWithFormat:@"%f",[self.pricr longLongValue]*value*2];
+             }else{
+                 self.blanceFree.text = [NSString stringWithFormat:@"%.8f %@",self.gamPrice*value*2,self.currency.symbol];
+                 
+                 self.pricr = [NSString stringWithFormat:@"%f",[self.pricr longLongValue]*value*2];
+             }
+          
          }
         
         
@@ -1133,7 +1227,7 @@ typedef enum : NSUInteger {
             break;
         case 1:
             //普通
-            self.blanceFree.text = [NSString stringWithFormat:@"%.6f %@",self.gamPrice,self.currency.symbol];
+            self.blanceFree.text = [NSString stringWithFormat:@"%.8f %@",self.gamPrice,self.currency.symbol];
 //            self.choseLab.text =  [LangSwitcher switchLang:@"普通" key:nil];
             self.pricr = [NSString stringWithFormat:@"%lld",[self.pricr longLongValue]];
 

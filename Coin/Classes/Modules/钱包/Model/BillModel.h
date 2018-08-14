@@ -74,8 +74,12 @@
 @property (nonatomic, copy) NSString *txHash;
 
 @property (nonatomic, copy) NSString *interType;
+//输入来源
+@property (nonatomic, strong) NSArray *vin;
+//输出来源
+@property (nonatomic, strong) NSArray *vout;
 
-
+@property (nonatomic, assign) CGFloat rowHeight;
 
 
 

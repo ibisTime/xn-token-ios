@@ -282,6 +282,9 @@
 		B8086531211EA17D00755158 /* BTCFancyEncryptedMessage+Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = B8086496211EA17C00755158 /* BTCFancyEncryptedMessage+Tests.m */; };
 		B8086532211EA17D00755158 /* BTCErrors.m in Sources */ = {isa = PBXBuildFile; fileRef = B808649B211EA17C00755158 /* BTCErrors.m */; };
 		B8086535211ED6AC00755158 /* utxoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B8086534211ED6AC00755158 /* utxoModel.m */; };
+		B8086538211F19BF00755158 /* TLBillBTCVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B8086537211F19BF00755158 /* TLBillBTCVC.m */; };
+		B808653B211F1B6000755158 /* TLBTCtableView.m in Sources */ = {isa = PBXBuildFile; fileRef = B808653A211F1B6000755158 /* TLBTCtableView.m */; };
+		B808653E211F1BCD00755158 /* TLBTCCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B808653D211F1BCD00755158 /* TLBTCCell.m */; };
 		B80D54CB210C84CA005303D5 /* APPLanguage.m in Sources */ = {isa = PBXBuildFile; fileRef = B80D54CA210C84CA005303D5 /* APPLanguage.m */; };
 		B80D54CE210C9C11005303D5 /* TLChangeNikeName.m in Sources */ = {isa = PBXBuildFile; fileRef = B80D54CD210C9C11005303D5 /* TLChangeNikeName.m */; };
 		B819BAAA20C6DD7800CEEC5E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B819BAA920C6DD7700CEEC5E /* LaunchScreen.storyboard */; };
@@ -371,6 +374,9 @@
 		B8CAA1532115FD6100695BC3 /* QuestionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B8CAA1522115FD6100695BC3 /* QuestionModel.m */; };
 		B8CAA1562115FF7100695BC3 /* QuestionTB.m in Sources */ = {isa = PBXBuildFile; fileRef = B8CAA1552115FF7100695BC3 /* QuestionTB.m */; };
 		B8CAA15C211611D000695BC3 /* questionListCells.m in Sources */ = {isa = PBXBuildFile; fileRef = B8CAA15B211611D000695BC3 /* questionListCells.m */; };
+		B8CF2CC52121375800055706 /* BTCDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B8CF2CC42121375800055706 /* BTCDetailModel.m */; };
+		B8CF2CC821214A8800055706 /* CommentTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = B8CF2CC721214A8800055706 /* CommentTableView.m */; };
+		B8CF2CCB21214AB500055706 /* CommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B8CF2CCA21214AB500055706 /* CommentCell.m */; };
 		B8D5F15020CE08790005CF96 /* TLAccountMoneyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B8D5F14F20CE08790005CF96 /* TLAccountMoneyVC.m */; };
 		B8D5F15320CE0E4C0005CF96 /* TLAccountTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = B8D5F15220CE0E4C0005CF96 /* TLAccountTableView.m */; };
 		B8D5F15620CE0F530005CF96 /* AccountMoneyCellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B8D5F15520CE0F530005CF96 /* AccountMoneyCellTableViewCell.m */; };
@@ -1025,6 +1031,12 @@
 		B80864EB211EA17C00755158 /* lhash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lhash.h; sourceTree = "<group>"; };
 		B8086533211ED6AC00755158 /* utxoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = utxoModel.h; sourceTree = "<group>"; };
 		B8086534211ED6AC00755158 /* utxoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = utxoModel.m; sourceTree = "<group>"; };
+		B8086536211F19BF00755158 /* TLBillBTCVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLBillBTCVC.h; sourceTree = "<group>"; };
+		B8086537211F19BF00755158 /* TLBillBTCVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLBillBTCVC.m; sourceTree = "<group>"; };
+		B8086539211F1B6000755158 /* TLBTCtableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLBTCtableView.h; sourceTree = "<group>"; };
+		B808653A211F1B6000755158 /* TLBTCtableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLBTCtableView.m; sourceTree = "<group>"; };
+		B808653C211F1BCD00755158 /* TLBTCCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLBTCCell.h; sourceTree = "<group>"; };
+		B808653D211F1BCD00755158 /* TLBTCCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLBTCCell.m; sourceTree = "<group>"; };
 		B80D54C9210C84CA005303D5 /* APPLanguage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = APPLanguage.h; sourceTree = "<group>"; };
 		B80D54CA210C84CA005303D5 /* APPLanguage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = APPLanguage.m; sourceTree = "<group>"; };
 		B80D54CC210C9C11005303D5 /* TLChangeNikeName.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLChangeNikeName.h; sourceTree = "<group>"; };
@@ -1207,6 +1219,12 @@
 		B8CAA1552115FF7100695BC3 /* QuestionTB.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QuestionTB.m; sourceTree = "<group>"; };
 		B8CAA15A211611D000695BC3 /* questionListCells.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = questionListCells.h; sourceTree = "<group>"; };
 		B8CAA15B211611D000695BC3 /* questionListCells.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = questionListCells.m; sourceTree = "<group>"; };
+		B8CF2CC32121375800055706 /* BTCDetailModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTCDetailModel.h; sourceTree = "<group>"; };
+		B8CF2CC42121375800055706 /* BTCDetailModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTCDetailModel.m; sourceTree = "<group>"; };
+		B8CF2CC621214A8800055706 /* CommentTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommentTableView.h; sourceTree = "<group>"; };
+		B8CF2CC721214A8800055706 /* CommentTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommentTableView.m; sourceTree = "<group>"; };
+		B8CF2CC921214AB500055706 /* CommentCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommentCell.h; sourceTree = "<group>"; };
+		B8CF2CCA21214AB500055706 /* CommentCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommentCell.m; sourceTree = "<group>"; };
 		B8D5F14E20CE08790005CF96 /* TLAccountMoneyVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLAccountMoneyVC.h; sourceTree = "<group>"; };
 		B8D5F14F20CE08790005CF96 /* TLAccountMoneyVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLAccountMoneyVC.m; sourceTree = "<group>"; };
 		B8D5F15120CE0E4C0005CF96 /* TLAccountTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLAccountTableView.h; sourceTree = "<group>"; };
@@ -1394,6 +1412,10 @@
 				211A53231FBFE41B00CC6294 /* Bill */,
 				2ED651CD200F34280065A1B0 /* TLCoinWithdrawOrderCell.h */,
 				2ED651CE200F34280065A1B0 /* TLCoinWithdrawOrderCell.m */,
+				B8CF2CC621214A8800055706 /* CommentTableView.h */,
+				B8CF2CC721214A8800055706 /* CommentTableView.m */,
+				B8CF2CC921214AB500055706 /* CommentCell.h */,
+				B8CF2CCA21214AB500055706 /* CommentCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1439,6 +1461,10 @@
 				B8CA0D6921081B850015A19D /* AssetPwdView.m */,
 				B8086533211ED6AC00755158 /* utxoModel.h */,
 				B8086534211ED6AC00755158 /* utxoModel.m */,
+				B8086539211F1B6000755158 /* TLBTCtableView.h */,
+				B808653A211F1B6000755158 /* TLBTCtableView.m */,
+				B808653C211F1BCD00755158 /* TLBTCCell.h */,
+				B808653D211F1BCD00755158 /* TLBTCCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1969,6 +1995,8 @@
 				2ED651CB200F32BC0065A1B0 /* TLCoinWithdrawModel.m */,
 				4CC7F0EB205FBC5400BBEC4D /* CoinModel.h */,
 				4CC7F0EC205FBC5400BBEC4D /* CoinModel.m */,
+				B8CF2CC32121375800055706 /* BTCDetailModel.h */,
+				B8CF2CC42121375800055706 /* BTCDetailModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2489,6 +2517,8 @@
 				B8F63EDC20D37FE700556150 /* LocalBillDetailVC.m */,
 				B8F63EE120D397B000556150 /* WalletLocalWebVC.h */,
 				B8F63EE220D397B000556150 /* WalletLocalWebVC.m */,
+				B8086536211F19BF00755158 /* TLBillBTCVC.h */,
+				B8086537211F19BF00755158 /* TLBillBTCVC.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -3521,6 +3551,7 @@
 				215979641FB81CED0029F177 /* BillModel.m in Sources */,
 				216F5B41206CD9DA00F2C832 /* TLBannerCell.m in Sources */,
 				215979791FB947730029F177 /* WithdrawalsCoinVC.m in Sources */,
+				B8CF2CCB21214AB500055706 /* CommentCell.m in Sources */,
 				211DE6AE1FB58B4C002FCF3D /* TLUploadManager.m in Sources */,
 				B8C2057920CFA0B300952765 /* WalletAddressCell.m in Sources */,
 				B80864EF211EA17D00755158 /* BTCBlockHeader.m in Sources */,
@@ -3553,6 +3584,7 @@
 				B87BF1D3211426C300DD5C05 /* Migration.m in Sources */,
 				2ED651CC200F32BC0065A1B0 /* TLCoinWithdrawModel.m in Sources */,
 				21205CE21FCD3163003C6C7C /* CoinAddressModel.m in Sources */,
+				B808653B211F1B6000755158 /* TLBTCtableView.m in Sources */,
 				211DE6C61FB58B4C002FCF3D /* HttpLogger.m in Sources */,
 				211DE6CA1FB5A586002FCF3D /* RechargeCoinVC.m in Sources */,
 				B8BBA64020C7FB4600DC4D5F /* WallAccountHeadView.m in Sources */,
@@ -3574,6 +3606,7 @@
 				B808651A211EA17D00755158 /* BTCAddress+Tests.m in Sources */,
 				B88B592C2109B2EF00F20D1B /* ZLGestureLockView.m in Sources */,
 				21C91D881FDBD604006EDB16 /* TLAlipayManager.m in Sources */,
+				B8086538211F19BF00755158 /* TLBillBTCVC.m in Sources */,
 				211DE6A11FB58B4C002FCF3D /* TLTimeButton.m in Sources */,
 				211A34F71FB4328800FEB71F /* SettingTableView.m in Sources */,
 				211DE6B01FB58B4C002FCF3D /* UILable+convience.m in Sources */,
@@ -3684,6 +3717,7 @@
 				B8086529211EA17D00755158 /* BTCPaymentProtocol.m in Sources */,
 				211D3C151FCFE3AB00B55F9F /* HistoryRateTableView.m in Sources */,
 				211DE6BB1FB58B4C002FCF3D /* NSString+CGSize.m in Sources */,
+				B8CF2CC52121375800055706 /* BTCDetailModel.m in Sources */,
 				211DE6B81FB58B4C002FCF3D /* UIControl+Block.m in Sources */,
 				2E5F33A9202BF25F00B2F263 /* TLLeftRightView.m in Sources */,
 				B8086504211EA17D00755158 /* BTCProtocolSerialization.m in Sources */,
@@ -3692,6 +3726,7 @@
 				B8086513211EA17D00755158 /* BTCTransactionInput.m in Sources */,
 				216F5AF6206CCED300F2C832 /* TLNotficationService.m in Sources */,
 				B8D9290F20EA58290026A3DF /* ChangeLocalMoneyVC.m in Sources */,
+				B808653E211F1BCD00755158 /* TLBTCCell.m in Sources */,
 				211A35041FB45A6A00FEB71F /* WalletHeaderView.m in Sources */,
 				7A8A5DC020EA6977002D9A48 /* CustomActionSheet.m in Sources */,
 				B8CAA14221158FF200695BC3 /* LPDPhotoArrangeCell.m in Sources */,
@@ -3787,6 +3822,7 @@
 				216F5B16206CD9C900F2C832 /* TradeFlowListVC.m in Sources */,
 				B8086524211EA17D00755158 /* BTCKey+Tests.m in Sources */,
 				B80864F2211EA17D00755158 /* BTCTransactionBuilder.m in Sources */,
+				B8CF2CC821214A8800055706 /* CommentTableView.m in Sources */,
 				4C2438252066C2F1003B35F3 /* TopSegmentUtil.m in Sources */,
 				B88B592A2109B2EF00F20D1B /* ZLGestureLockViewController.m in Sources */,
 				2ED651D22010443D0065A1B0 /* TLAboutUsVC.m in Sources */,

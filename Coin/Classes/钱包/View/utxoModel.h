@@ -19,4 +19,15 @@
 @property (nonatomic ,copy) NSString *txid;
 @property (nonatomic ,copy) NSString *vout;
 
+@property (nonatomic ,copy) NSString *n;
+
+@property (nonatomic ,copy) NSString *addr;
+
+@property (nonatomic ,copy) NSString *valueSat;
+
+@property (nonatomic ,copy) NSString *value;
+
+
+
+
 @end

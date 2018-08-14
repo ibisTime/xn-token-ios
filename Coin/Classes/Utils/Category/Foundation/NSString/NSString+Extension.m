@@ -159,7 +159,14 @@
     } else {
         
         //        return [[@"http:/7xnuu2.com1.z0.glb.clouddn.com/" add:self] add:@"?imageMogr2/auto-orient/strip/quality/50!"];
-        NSString *imageUrl = [[NSString stringWithFormat:@"%@/%@?imageMogr2/auto-orient/strip/quality/%ld!",[AppConfig config].qiniuDomain,self,scale] stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+                NSString *imageUrl = [[NSString stringWithFormat:@"%@/%@?imageMogr2/auto-orient/strip/quality/%ld!",[AppConfig config].qiniuDomain,self,scale] stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+        if ([self rangeOfString:@"%"].location !=NSNotFound) {
+               imageUrl = [NSString stringWithFormat:@"%@/%@?imageMogr2/auto-orient/strip/quality/%ld!",[AppConfig config].qiniuDomain,self,scale];
+        }
+   
+//        imageUrl = [imageUrl stringByAppending]
+        
+        
 //        NSLog(@"%@",imageUrl);
 
         return imageUrl;

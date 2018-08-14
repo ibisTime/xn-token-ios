@@ -26,5 +26,6 @@
 
 @property (nonatomic , copy) NSString *pic;
 
+@property (nonatomic , copy) NSString *code;
 
 @end

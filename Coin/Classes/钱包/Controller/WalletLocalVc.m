@@ -22,6 +22,7 @@
 #import "WalletForwordVC.h"
 #import "WalletLocalBillTableView.h"
 #import "LocalBillDetailVC.h"
+#import "TLBillBTCVC.h"
 @interface WalletLocalVc ()<RefreshDelegate>
 @property (nonatomic, strong) WalletLocalBillTableView *tableView;
 
@@ -57,7 +58,6 @@
     //筛选
     [self addFilterItem];
     //获取账单
-    [self requestBillList];
     // Do any additional setup after loading the view.
 }
 
@@ -65,6 +65,111 @@
 {
     [super viewWillAppear:animated];
     self.title = [LangSwitcher switchLang: [NSString stringWithFormat:@"%@",self.currency.symbol] key:nil];;
+    if ([self.currency.symbol isEqualToString:@"BTC"]) {
+        [self requestBtcList];
+
+    }else{
+    [self requestBillList];
+    }
+}
+
+- (void)requestBtcList
+{
+    //--//
+    __weak typeof(self) weakSelf = self;
+    
+    NSString *bizType = @"";
+    
+    if (self.billType == LocalTypeRecharge) {
+        
+        bizType = @"charge";
+        
+    } else if (self.billType == LocalTypeWithdraw) {
+        
+        bizType = @"withdraw";
+        
+    } else if (self.billType == LocalTypeFrozen) {
+        
+        bizType = @"";
+    }
+    
+    TLPageDataHelper *helper = [[TLPageDataHelper alloc] init];
+    
+    helper.tableView = self.tableView;
+    self.helper = helper;
+    
+    helper.code = @"802221";
+    helper.start = 0;
+    helper.limit = 10;
+    helper.parameters[@"address"] = self.currency.address;
+    //    helper.parameters[@"bizType"] = bizType;
+    //    helper.parameters[@"kind"] = self.billType == LocalTypeFrozen ? @"1": @"0";
+    
+//    helper.parameters[@"symbol"] = self.currency.symbol;
+//    helper.parameters[@"address"] = self.currency.address;
+    
+    //    helper.parameters[@"channelType"] = @"C";
+    //    helper.parameters[@"status"] = @"";
+    
+    //0 刚生成待回调，1 已回调待对账，2 对账通过, 3 对账不通过待调账,4 已调账,9,无需对账
+    //pageDataHelper.parameters[@"status"] = [ZHUser user].token;
+    
+    [helper modelClass:[BillModel class]];
+    
+    [self.tableView addRefreshAction:^{
+        
+        [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
+            
+            //            if (weakSelf.tl_placeholderView.superview != nil) {
+            //
+            //                [weakSelf removePlaceholderView];
+            //            }
+            if (objs.count == 0) {
+                [weakSelf addPlaceholderView];
+                
+            }
+           
+            weakSelf.bills = objs;
+            
+            weakSelf.tableView.billModel = weakSelf.currency;
+            
+            weakSelf.tableView.bills = objs;
+            [weakSelf.tableView reloadData_tl];
+            
+        } failure:^(NSError *error) {
+            
+            [weakSelf addPlaceholderView];
+            
+        }];
+    }];
+    
+    [self.tableView beginRefreshing];
+    
+    [self.tableView addLoadMoreAction:^{
+        
+        [helper loadMore:^(NSMutableArray *objs, BOOL stillHave) {
+            
+            if (weakSelf.tl_placeholderView.superview != nil) {
+                
+                [weakSelf removePlaceholderView];
+            }
+            
+            weakSelf.bills = objs;
+            weakSelf.tableView.billModel = weakSelf.currency;
+            weakSelf.tableView.bills = objs;
+            [weakSelf.tableView reloadData_tl];
+            
+        } failure:^(NSError *error) {
+            
+            [weakSelf addPlaceholderView];
+            
+        }];
+        
+    }];
+    
+    [self.tableView endRefreshingWithNoMoreData_tl];
+    
+    
 }
 #pragma mark - Init
 - (FilterView *)filterPicker {
@@ -479,6 +584,15 @@
     LocalBillDetailVC *detailVc  =  [LocalBillDetailVC new];
     detailVc.bill = self.bills[indexPath.row];
     detailVc.currentModel = self.currency;
+    if ([self.currency.symbol isEqualToString:@"BTC"]) {
+        TLBillBTCVC *vc = [TLBillBTCVC  new];
+        vc.bill = self.bills[indexPath.row];
+        vc.currentModel = self.currency;
+        vc.address = self.currency.address;
+        [self.navigationController pushViewController:vc animated:YES];
+        return;
+
+    }
     [self.navigationController pushViewController:detailVc animated:YES];
     
 }

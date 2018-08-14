@@ -14,7 +14,7 @@
 #import "UILabel+Extension.h"
 #import "CoinUtil.h"
 #import <SDWebImage/UIImageView+WebCache.h>
-
+#import "NSString+Check.h"
 @interface  LocalBillCell()
 
 @property (nonatomic, strong) UIImageView *iconIV;
@@ -166,10 +166,9 @@
     
     NSString *moneyStr = @"";
     
-    NSString *countStr = [CoinUtil convertToRealCoin:_billModel.value
-                                                coin:self.currencyModel.symbol];
+   
     //    [_billModel.transAmountString convertToSimpleRealCoin];
-    CGFloat money = [countStr doubleValue];
+//    CGFloat money = [countStr doubleValue];
     
     //    if (money > 0) {
     //
@@ -189,16 +188,39 @@
     CoinModel *coin = [CoinUtil getCoinModel:self.currencyModel.symbol];
     if ([billModel.direction isEqualToString:@"1"]) {
         self.moneyLbl.textColor = kHexColor(@"#47D047");
+        if (![_billModel.value valid]) {
+            self.moneyLbl.text = [NSString stringWithFormat:@"%@",[LangSwitcher switchLang:@"即将到账" key:nil]];
 
-         self.moneyLbl.text = [NSString stringWithFormat:@"+%@ %@",countStr , self.currencyModel.symbol];
+        }else{
+            NSString *countStr = [CoinUtil convertToRealCoin:_billModel.value
+                                                        coin:self.currencyModel.symbol];
+            self.moneyLbl.text = [NSString stringWithFormat:@"+%@ %@",countStr , self.currencyModel.symbol];
+
+        }
+        
         self.introduceLab.text = [NSString stringWithFormat:@"%@-%@",[LangSwitcher switchLang:@"收款-外部地址" key:nil],billModel.from];
+        if ([self.currencyModel.symbol isEqualToString:@"BTC"]) {
+            self.introduceLab.text = [NSString stringWithFormat:@"%@-%@",[LangSwitcher switchLang:@"收款-交易Hash" key:nil],billModel.txHash];
+
+        }
         
     } else
     {
         self.moneyLbl.textColor = kHexColor(@"#FE4F4F");
+        if (![_billModel.value valid]) {
+            self.moneyLbl.text = [NSString stringWithFormat:@"%@",[LangSwitcher switchLang:@"即将到账" key:nil]];
+            
+        }else{
+            NSString *countStr = [CoinUtil convertToRealCoin:_billModel.value
+                                                        coin:self.currencyModel.symbol];
+            self.moneyLbl.text = [NSString stringWithFormat:@"-%@ %@", countStr, self.currencyModel.symbol];
 
-         self.moneyLbl.text = [NSString stringWithFormat:@"-%@ %@", countStr, self.currencyModel.symbol];
+        }
          self.introduceLab.text = [NSString stringWithFormat:@"%@-%@",[LangSwitcher switchLang:@"转账-外部地址" key:nil],billModel.to];
+        if ([self.currencyModel.symbol isEqualToString:@"BTC"]) {
+            self.introduceLab.text = [NSString stringWithFormat:@"%@-%@",[LangSwitcher switchLang:@"转账-交易Hash" key:nil],billModel.txHash];
+            
+        }
         
     }
 //    if ([self.currencyModel.symbol isEqualToString:@"ETH"]) {

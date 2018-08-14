@@ -10,8 +10,17 @@
 #import "AppColorMacro.h"
 #import "NSString+CGSize.h"
 #import "LangSwitcher.h"
-
+#import "utxoModel.h"
 @implementation BillModel
+
++(NSDictionary *)mj_objectClassInArray
+{
+    return @{
+              @"vin" : [utxoModel class],
+              @"vout" : [utxoModel class]
+             };
+    
+}
 
 - (NSString *)getStatusName {
     

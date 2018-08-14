@@ -18,6 +18,7 @@
 #import "CoinUtil.h"
 //V
 #import "TLBannerView.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface HomeHeaderView()
 
@@ -218,7 +219,9 @@
 
 - (void)initApplicationView {
     
-    self.applicationView = [[UIView alloc] initWithFrame:CGRectMake(0, self.bannerView.yy, kScreenWidth, kHeight(450))];
+    
+    
+    self.applicationView = [[UIView alloc] initWithFrame:CGRectMake(0, self.bannerView.yy, kScreenWidth, kHeight(self.findModels.count *110))];
     self.applicationView.backgroundColor = kWhiteColor;
     [self addSubview:self.applicationView];
     
@@ -272,12 +275,12 @@
 //        make.height.equalTo(@0.5);
 //    }];
     
-    NSArray *textArr = @[@"发红包",
-                         @"首创玩法",
-                         @"量化理财",
-                         @"余币宝"];
+//    NSArray *textArr = @[@"发红包",
+//                         @"首创玩法",
+//                         @"量化理财",
+//                         @"余币宝"];
     
-    [textArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+    [self.findModels enumerateObjectsUsingBlock:^(HomeFindModel* obj, NSUInteger idx, BOOL * _Nonnull stop) {
         NSLog(@"==========%ld",idx);
         CGFloat width = (kScreenWidth-60)/3;
         
@@ -301,13 +304,13 @@
         [btn addTarget:self action:@selector(clickButton:) forControlEvents:UIControlEventTouchUpInside];
         UILabel *textLab = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextBlack font:18];
         [btn addSubview:textLab];
-        textLab.text = [LangSwitcher switchLang:obj key:nil];
+        textLab.text = [LangSwitcher switchLang:obj.name key:nil];
 //        UITapGestureRecognizer *ta = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickButton:)];
 //        [contentView addGestureRecognizer:ta]
         UILabel *introfucec = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor3 font:12];
         [btn addSubview:introfucec];
 //        introfucec.numberOfLines = 0;
-        introfucec.text = [LangSwitcher switchLang:obj key:nil];
+        introfucec.text = [LangSwitcher switchLang:obj.slogan key:nil];
         
         [self.applicationView addSubview:btn];
         [btn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -339,6 +342,13 @@
 
                 
             }
+            else if (idx == 4)
+            {
+                
+                make.top.equalTo(@(kHeight(430)));
+                
+                
+            }
             make.width.equalTo(@(kScreenWidth-15));
             make.height.equalTo(@(kHeight(90)));
         }];
@@ -362,28 +372,9 @@
             make.right.equalTo(btn.mas_right);
 
         }];
-        if (idx == 0) {
-            
-            imageView.image = kImage(@"红包-1");
-            introfucec.text = [LangSwitcher switchLang:@"发数字货币红包、查收发记录和提现" key:nil];
-        }else if (idx == 1)
-        {
-            imageView.image = kImage(@"THA矿山");
-            introfucec.text = [LangSwitcher switchLang:@"师徒教育玩法、双向奖励机制" key:nil];
-
-        }else if (idx == 2)
-        {
-            imageView.image = kImage(@"量化理财");
-            introfucec.text = [LangSwitcher switchLang:@"低风险、高收益、定期理财产品" key:nil];
-
-            
-        }else if (idx == 3)
-        {
-            
-            imageView.image = kImage(@"余币包");
-            introfucec.text = [LangSwitcher switchLang:@"随存随取、灵活理财" key:nil];
-
-        }
+        NSString *url = [self.findModels[idx].icon convertImageUrl];
+        [imageView sd_setImageWithURL:[NSURL URLWithString:url]];
+        
         
 //        [btn setTitleBottom];
     }];
@@ -428,7 +419,7 @@
 }
 
 
--(void)setFindModels:(NSMutableArray<HomeFindModel *> *)findModels
+-(void)setFindModels:(NSArray<HomeFindModel *> *)findModels
 {
     _findModels = findModels;
     

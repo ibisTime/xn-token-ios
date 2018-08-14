@@ -53,6 +53,11 @@
 
 @property (nonatomic,strong) NSMutableArray <CountryModel *>*countrys;
 
+@property (nonatomic, copy) NSString *code;
+
+@property (nonatomic, strong) CountryModel *model;
+
+
 @end
 
 @implementation TLUserLoginVC
@@ -139,6 +144,8 @@
     
     CGFloat w = kScreenWidth;
     CGFloat h = ACCOUNT_HEIGHT;
+    
+    
     
     UIImageView *imageView = [[UIImageView alloc] init];
     imageView.contentMode = UIViewContentModeScaleToFill;
@@ -452,6 +459,8 @@
     countryVc.interCode = [NSString stringWithFormat:@"00%@",[self.PhoneCode.text substringFromIndex:1]];
     countryVc.selectCountry = ^(CountryModel *model) {
         //更新国家 区号
+        self.model = model;
+        self.code = model.code;
         [self.pic sd_setImageWithURL:[NSURL URLWithString:[model.pic convertImageUrl]]];
         
         if ([LangSwitcher currentLangType] == LangTypeSimple) {
@@ -557,15 +566,26 @@
         http.code = @"805044";
 
     http.parameters[@"mobile"] = self.phoneTf.text;
-    http.parameters[@"interCode"] = [NSString stringWithFormat:@"00%@",[self.PhoneCode.text substringFromIndex:1]];
+    NSData *data   =  [[NSUserDefaults standardUserDefaults] objectForKey:@"chooseModel"];
+    CountryModel *model = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        if (model) {
+            http.parameters[@"countryCode"] = model.code;
+            
+        }
     http.parameters[@"smsCaptcha"] = self.captchaView.captchaTf.text;
 
         
     }else{
+        
+        NSData *data   =  [[NSUserDefaults standardUserDefaults] objectForKey:@"chooseModel"];
+        CountryModel *model = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        
         http.code = USER_LOGIN_CODE;
+        if (model) {
+            http.parameters[@"countryCode"] = model.code;
 
+        }
     http.parameters[@"loginName"] = self.phoneTf.text;
-      http.parameters[@"interCode"] = [NSString stringWithFormat:@"00%@",[self.PhoneCode.text substringFromIndex:1]];
     http.parameters[@"loginPwd"] = self.pwdTf.text;
     http.parameters[@"kind"] = APP_KIND;
     }

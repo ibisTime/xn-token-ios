@@ -30,7 +30,7 @@ typedef void(^HomeHeaderEventsBlock)(HomeEventsType type, NSInteger index);
 @property (nonatomic, strong) NSMutableArray <BannerModel *>*banners;
 //统计
 @property (nonatomic, strong) CountInfoModel *countInfo;
-@property (nonatomic,strong) NSMutableArray <HomeFindModel *>*findModels;
+@property (nonatomic,strong) NSArray <HomeFindModel *>*findModels;
 
 
 @end

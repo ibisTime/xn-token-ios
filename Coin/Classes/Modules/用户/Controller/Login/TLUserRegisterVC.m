@@ -451,7 +451,12 @@
     http.showView = self.view;
     http.code = USER_REG_CODE;
     http.parameters[@"mobile"] = self.phoneTf.text;
-    http.parameters[@"interCode"] = [NSString stringWithFormat:@"00%@",[self.PhoneCode.text substringFromIndex:1]];
+    NSData *data   =  [[NSUserDefaults standardUserDefaults] objectForKey:@"chooseModel"];
+    CountryModel *model = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    if (model) {
+        http.parameters[@"countryCode"] = model.code;
+    }
+    
 
     http.parameters[@"loginPwd"] = self.pwdTf.text;
 //    http.parameters[@"isRegHx"] = @"0";

@@ -480,7 +480,13 @@
         http.parameters[@"googleCaptcha"] = self.googleAuthTF.text;
 
     }
-    http.parameters[@"interCode"] = [NSString stringWithFormat:@"00%@",[self.PhoneCode.text substringFromIndex:1]];
+    NSData *data   =  [[NSUserDefaults standardUserDefaults] objectForKey:@"chooseModel"];
+    CountryModel *model = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    if (model) {
+        http.parameters[@"countryCode"] = model.code;
+    }
+    
+  
 
     [http postWithSuccess:^(id responseObject) {
         

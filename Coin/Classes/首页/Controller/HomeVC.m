@@ -71,7 +71,7 @@
 
 @property (nonatomic, strong) UILabel *nameLable;
 
-@property (nonatomic,strong) NSMutableArray <HomeFindModel *>*findModels;
+@property (nonatomic,strong) NSArray <HomeFindModel *>*findModels;
 
 @end
 
@@ -117,32 +117,32 @@
     // eth_privateKey=KzGdnUHhqNVuzDBnJgWttLgFtwBtMTDqHdBT4Xgd52GRWDfo7dhk
     // eth_publicKey=0x1PzsHPZET7uGwtwaMujpfrhaY7cX1C3NHT
     
-    TLNetworking *net = [TLNetworking new];
-    
-    
-    net.code = @"802220";
-    net.parameters[@"address"] = btc_address ;
-
-    
-    [net postWithSuccess:^(id responseObject) {
-        
-        
-        [self.tableView endRefreshHeader];
-        
-    } failure:^(NSError *error) {
-        [self.tableView endRefreshHeader];
-    }];
-    
-//    return;
-    NSLog(@"%ld,%ld",mnemonic.keychain.network.isTestnet,mnemonic.keychain.network.isMainnet);
-    
-    NSLog(@"eth_privateKey=%@", [MnemonicUtil getEthPrivateKey:mnemonic]);
-    NSLog(@"eth_publicKey=%@", [MnemonicUtil getEthAddress:mnemonic]);
-    
-    mnemonic =  [MnemonicUtil importMnemonic:mnemonic.words];
-    NSLog(@"Seed=%@", BTCHexFromData(mnemonic.seed));
-    NSLog(@"Mnemonic=%@", mnemonic.words);
-    NSLog(@"privateKey=%@", [MnemonicUtil getBtcPrivateKey:mnemonic]);
+//    TLNetworking *net = [TLNetworking new];
+//
+//
+//    net.code = @"802220";
+//    net.parameters[@"address"] = btc_address ;
+//
+//
+//    [net postWithSuccess:^(id responseObject) {
+//
+//
+//        [self.tableView endRefreshHeader];
+//
+//    } failure:^(NSError *error) {
+//        [self.tableView endRefreshHeader];
+//    }];
+//
+////    return;
+//    NSLog(@"%ld,%ld",mnemonic.keychain.network.isTestnet,mnemonic.keychain.network.isMainnet);
+//
+//    NSLog(@"eth_privateKey=%@", [MnemonicUtil getEthPrivateKey:mnemonic]);
+//    NSLog(@"eth_publicKey=%@", [MnemonicUtil getEthAddress:mnemonic]);
+//
+//    mnemonic =  [MnemonicUtil importMnemonic:mnemonic.words];
+//    NSLog(@"Seed=%@", BTCHexFromData(mnemonic.seed));
+//    NSLog(@"Mnemonic=%@", mnemonic.words);
+//    NSLog(@"privateKey=%@", [MnemonicUtil getBtcPrivateKey:mnemonic]);
     
 //    [MnemonicUtil test];
 
@@ -185,28 +185,47 @@
 - (void)reloadFindData
 {
     
-    AFHTTPSessionManager *sess = [AFHTTPSessionManager manager];
-    
-    [sess POST:@"http://rap2.hichengdai.com:8080/app/mock/22/625410" parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
-        
-    } progress:^(NSProgress * _Nonnull uploadProgress) {
-        
-    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        self.findModels = [HomeFindModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"][@"list"]];
+//    AFHTTPSessionManager *sess = [AFHTTPSessionManager manager];
+//
+//    [sess POST:@"http://rap2.hichengdai.com:8080/app/mock/22/625410" parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+//
+//    } progress:^(NSProgress * _Nonnull uploadProgress) {
+//
+//    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+//
+//    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+//        NSLog(@"%@",error);
+//    }];
+//    return;
+    NSString *lang;
 
-        NSLog(@"%@",self.findModels);
-        self.headerView.findModels = self.findModels;
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"%@",error);
-    }];
-    return;
+    LangType type = [LangSwitcher currentLangType];
+    if (type == LangTypeSimple || type == LangTypeTraditional) {
+        lang = @"ZH_CN";
+    }else if (type == LangTypeKorean)
+    {
+        lang = @"KO";
+        
+        
+    }else{
+        lang = @"EN";
+        
+    }
     TLNetworking *http = [TLNetworking new];
     
-    http.code = @"625410";
+    http.code = @"625412";
+    http.parameters[@"language"] = lang  ;
+    http.parameters[@"location"] = @"0"  ;
+    http.parameters[@"status"] = @"1"  ;
+
     [http postWithSuccess:^(id responseObject) {
         
+        self.findModels = [HomeFindModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
         
+        NSLog(@"%@",self.findModels);
+        self.headerView.findModels = self.findModels;
         [self.tableView endRefreshHeader];
+        self.headerView.contentSize = CGSizeMake(0, kScreenHeight + self.findModels.count%4*110);
         
     } failure:^(NSError *error) {
         [self.tableView endRefreshHeader];

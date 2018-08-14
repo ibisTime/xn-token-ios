@@ -8,7 +8,7 @@
 
 #import "CoinUtil.h"
 #import "TLNetworking.h"
-
+#import "NSString+Check.h"
 NSString *const kETH = @"ETH";
 NSString *const kSC = @"SC";
 NSString *const kBTC = @"BTC";
@@ -24,6 +24,9 @@ NSString *const kCNY = @"CNY";
 
 + (NSString *)convertToRealCoin:(NSString *)count coin:(NSString *)coin {
     
+    if (![count valid]) {
+        return nil ;
+    }
     return [self convertCount:count scale:SCALE cardinality:[self getCardinality:coin]];
     
 }
