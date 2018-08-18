@@ -92,7 +92,7 @@
     
     NSString *onlyCountStr;
     if (![_bill.value valid]) {
-       onlyCountStr = @"即将到账";
+       onlyCountStr = @"正在打包中,即将到账";
 
     }else{
         onlyCountStr = [CoinUtil convertToRealCoin:_bill.value coin:_currentModel.symbol];
@@ -104,7 +104,7 @@
     //
     if ([_bill.direction isEqualToString:@"1"]) {
         if (![_bill.value valid]) {
-            onlyCountStr = @"即将到账";
+            onlyCountStr = @"正在打包中,即将到账";
             moneyStr = [NSString stringWithFormat:@"%@", onlyCountStr];
 
         }else{
@@ -115,7 +115,7 @@
         
     } else  {
         if (![_bill.value valid]) {
-            onlyCountStr = @"即将到账";
+            onlyCountStr = @"正在打包中,即将到账";
             moneyStr = [NSString stringWithFormat:@"%@", onlyCountStr];
 
         }else{

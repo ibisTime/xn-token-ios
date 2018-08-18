@@ -20,13 +20,14 @@ pod 'IQKeyboardManager',    '5.0.2'
 pod 'MBProgressHUD',        '0.9.2’
 pod 'SGQRCode',             '2.1.8'
 pod 'PYPhotoBrowser',       '1.1.5'
-pod 'FMDBMigrationManager'
+#pod 'FMDBMigrationManager'
 
 #pod 'pop',                 '1.0.10'
 pod 'FMDB'
 
 #七牛云
 pod 'JPush'
+pod'UMengAnalytics-NO-IDFA'
 
 #    MGSwipeTableCell
 pod 'Qiniu',                '7.1.5'

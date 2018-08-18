@@ -1,23 +1,24 @@
 //
-//  TLMakeMoney.m
+//  TLMyRecodeTB.m
 //  Coin
 //
-//  Created by shaojianfei on 2018/8/10.
+//  Created by shaojianfei on 2018/8/18.
 //  Copyright © 2018年 chengdai. All rights reserved.
 //
 
-#import "TLMakeMoney.h"
+#import "TLMyRecodeTB.h"
 #import "CoinHeader.h"
 #import "AppColorMacro.h"
 #import "BillCell.h"
 #import "questionListCells.h"
-#import "MakeMoneyCell.h"
-@interface TLMakeMoney()<UITableViewDelegate, UITableViewDataSource>
-
+#import "RecodeCell.h"
+@interface TLMyRecodeTB ()<UITableViewDelegate, UITableViewDataSource>
 
 @end
-@implementation TLMakeMoney
-static NSString *identifierCell = @"MakeMoneyCell";
+
+@implementation TLMyRecodeTB
+
+static NSString *identifierCell = @"RecodeCell";
 
 - (instancetype)initWithFrame:(CGRect)frame style:(UITableViewStyle)style {
     
@@ -28,7 +29,7 @@ static NSString *identifierCell = @"MakeMoneyCell";
         [self setContentInset:UIEdgeInsetsMake(5, 0.0, -5, 0.0)];
         self.backgroundColor = kBackgroundColor;
         
-        [self registerClass:[MakeMoneyCell class] forCellReuseIdentifier:identifierCell];
+        [self registerClass:[RecodeCell class] forCellReuseIdentifier:identifierCell];
         
         self.separatorStyle = UITableViewCellSeparatorStyleNone;
     }
@@ -49,7 +50,7 @@ static NSString *identifierCell = @"MakeMoneyCell";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    MakeMoneyCell *cell = [tableView dequeueReusableCellWithIdentifier:identifierCell forIndexPath:indexPath];
+    RecodeCell *cell = [tableView dequeueReusableCellWithIdentifier:identifierCell forIndexPath:indexPath];
     
     cell.model = self.Moneys[indexPath.row];
     
@@ -62,7 +63,7 @@ static NSString *identifierCell = @"MakeMoneyCell";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    return kHeight(160);
+    return kHeight(170);
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -79,31 +80,7 @@ static NSString *identifierCell = @"MakeMoneyCell";
 
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    
-    //    UIView *contentView = [[UIView alloc] initWithFrame:CGRectMake(15, 20, kScreenWidth, 22)];
-    //
-    //    UIButton *button = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"筛选" key:nil] titleColor:kTextColor backgroundColor:kClearColor titleFont:12];
-    //    [button addTarget:self action:@selector(clickFilter:) forControlEvents:UIControlEventTouchUpInside];
-    //    //    [UIBarButtonItem addRightItemWithTitle:[LangSwitcher switchLang:@"筛选" key:nil]
-    //    //                                titleColor:kTextColor
-    //    //                                     frame:CGRectMake(0, 0, 60, 30)
-    //    //                                        vc:self
-    //    //                                    action:@selector(clickFilter:)];
-    //    [contentView addSubview:button];
-    //
-    //    [button mas_makeConstraints:^(MASConstraintMaker *make) {
-    //        make.top.equalTo(contentView.mas_top);
-    //        make.right.equalTo(contentView.mas_right).offset(-15);
-    //        make.width.equalTo(@75);
-    //        make.height.equalTo(@22);
-    //    }];
-    //    UILabel *lab = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 22)];
-    //    [contentView addSubview:lab];
-    //
-    //    lab.textColor = kTextColor;
-    //    lab.font = [UIFont systemFontOfSize:12];
-    //
-    //    lab.text =[NSString stringWithFormat:@"    %@",[LangSwitcher switchLang:@"交易记录" key:nil]];
+   
     UIView *view = [UIView new];
     //    view.backgroundColor = kHexColor(@"276FFA ");
     //    view.frame = CGRectMake(0, 8, 10, 5);
@@ -125,12 +102,5 @@ static NSString *identifierCell = @"MakeMoneyCell";
     
     return [UIView new];
 }
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-*/
 
 @end

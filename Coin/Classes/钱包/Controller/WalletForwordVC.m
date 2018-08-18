@@ -150,9 +150,9 @@ typedef enum : NSUInteger {
 - (void)viewDidAppear:(BOOL)animated
 {
     
-    [self loadUtxoList];
+//    [self loadUtxoList];
     
-//    [self getgamProce];
+    [self getgamProce];
 
     [super viewDidAppear:animated];
 }
@@ -595,12 +595,13 @@ typedef enum : NSUInteger {
             
         }else{
 
-        if ([self.currency.symbol isEqualToString:@"ETH"]) {
-            pricr = [MnemonicUtil getGasPrice];
+        if ([self.currency.symbol isEqualToString:@"WAN"]) {
+            pricr = [MnemonicUtil getWanGasPrice];
+
         }else
         {
-            pricr = [MnemonicUtil getWanGasPrice];
-            
+            pricr = [MnemonicUtil getGasPrice];
+
         }
         self.pricr = pricr;
         CGFloat p = [pricr doubleValue]/1000000000000000000;
@@ -1343,15 +1344,25 @@ typedef enum : NSUInteger {
                                       if ([self.currency.symbol isEqualToString:@"ETH"]) {
                                           result =[MnemonicUtil sendTransactionWithMnemonicWallet:Mnemonics address:self.balanceTF.text amount:gaspic gaspic:self.pricr gasLimt:@"21000"];
                                           
-                                      }else{
+                                      }else if ([self.currency.symbol isEqualToString:@"WAN"]){
+                                          
                                           
                                           result =[MnemonicUtil sendWanTransactionWithMnemonicWallet:Mnemonics address:self.balanceTF.text amount:gaspic gaspic:self.pricr gasLimt:@"21000"];
+                                      }else{
+                                          
+//                                          NSString *address = [MnemonicUtil get]
+                                          
+                                          CoinModel *coin = [CoinUtil getCoinModel:self.currency.symbol];
+                                          
+                                        
+                                          result = [MnemonicUtil sendEthTokenTransactionWithAddress:Mnemonics contractAddress:coin.contractAddress address:self.balanceTF.text amount:self.tranAmountTF.text gaspic:self.pricr gasLimt:@"210000"];
+                                          
                                       }
                                       
                                       
                                       if ([result isEqualToString:@"1"]) {
                                           [MBProgressHUD hideHUDForView:self.view animated:YES];
-                                          [TLAlert alertWithSucces:[LangSwitcher switchLang:@"转账成功" key:nil]];
+                                          [TLAlert alertWithSucces:[LangSwitcher switchLang:@"广播成功" key:nil]];
                                           dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                                               [self.navigationController popViewControllerAnimated:YES];
                                           });
@@ -1362,7 +1373,7 @@ typedef enum : NSUInteger {
                                           
                                           [MBProgressHUD hideHUDForView:self.view animated:YES];
                                           
-                                          [TLAlert alertWithError:[LangSwitcher switchLang:@"转账失败" key:nil]];
+                                          [TLAlert alertWithError:[LangSwitcher switchLang:@"广播失败" key:nil]];
                                           
                                           
                                       }

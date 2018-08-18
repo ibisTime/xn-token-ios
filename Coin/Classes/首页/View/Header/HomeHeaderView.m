@@ -65,7 +65,7 @@
         
         if (weakSelf.headerBlock) {
             
-            weakSelf.headerBlock(HomeEventsTypeBanner, index);
+            weakSelf.headerBlock(HomeEventsTypeBanner, index,nil);
         }
     };
     
@@ -386,7 +386,7 @@
     
     if (_headerBlock) {
         
-        _headerBlock(HomeEventsTypeStatistics, 0);
+        _headerBlock(HomeEventsTypeStatistics, 0,nil);
     }
 }
 
@@ -396,7 +396,7 @@
     
     if (_headerBlock) {
         
-        _headerBlock(index+2, 0);
+        _headerBlock(index+2, 0,self.findModels[index]);
     }
 }
 

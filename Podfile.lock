@@ -59,6 +59,7 @@ PODS:
   - SipHash (1.2.1)
   - SVProgressHUD (2.2)
   - UIDeviceIdentifier (1.1.1)
+  - UMengAnalytics-NO-IDFA (4.2.5)
   - web3swift (0.8.0):
     - Alamofire (~> 4.7)
     - Alamofire-Synchronous (~> 4.0)
@@ -91,6 +92,7 @@ DEPENDENCIES:
   - SGQRCode (= 2.1.8)
   - SVProgressHUD (= 2.2)
   - UIDeviceIdentifier (from `https://github.com/squarefrog/UIDeviceIdentifier.git`)
+  - UMengAnalytics-NO-IDFA
   - web3swift (~> 0.8.0)
   - ZendeskSDK
 
@@ -120,6 +122,7 @@ SPEC REPOS:
     - SGQRCode
     - SipHash
     - SVProgressHUD
+    - UMengAnalytics-NO-IDFA
     - web3swift
     - ZendeskSDK
   https://github.com/tianleios/CDSpecs.git:
@@ -163,9 +166,10 @@ SPEC CHECKSUMS:
   SipHash: b26918dbe6925368d4322374371437c62c9038e2
   SVProgressHUD: 3f37f3409ddb15f35c99315ae7dc33c474aa3256
   UIDeviceIdentifier: 9281343882e24460235f00a0d7d2fc04a65688c6
+  UMengAnalytics-NO-IDFA: 16666e32edce5be44ae5b14aaaa7f3582e09d6ab
   web3swift: a0c0f5f7ddab09af3119a76e1ef304b050b4595e
   ZendeskSDK: 4e075d7610e74755c576188886a073cfc5810145
 
-PODFILE CHECKSUM: 6f33fe18a671ef7f155d9c2ec34362a844097eff
+PODFILE CHECKSUM: 0e7bc28452e8ff389d8b3a7d67e9801e0e3081d0
 
 COCOAPODS: 1.5.2

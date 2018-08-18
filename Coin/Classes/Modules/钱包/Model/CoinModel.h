@@ -46,8 +46,8 @@
 @property (nonatomic, copy) NSString *id;
 
 @property (nonatomic, copy) NSString *walletId;
-
-
+//token币合约地址
+@property (nonatomic, copy) NSString * contractAddress;
 
 //存储币种列表
 - (void)saveOpenCoinList:(NSArray *)coinList;

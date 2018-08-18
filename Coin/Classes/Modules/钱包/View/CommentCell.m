@@ -66,7 +66,7 @@
     NSString *money;
 
     if (![utModel.value valid]) {
-        money = [LangSwitcher switchLang:@"即将到账" key:nil];
+        money = [LangSwitcher switchLang:@"正在打包中,即将到账" key:nil];
 
     }else{
         money = [CoinUtil convertToRealCoin:utModel.value coin:@"BTC"];

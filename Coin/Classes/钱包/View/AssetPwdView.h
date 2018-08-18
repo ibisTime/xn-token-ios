@@ -19,4 +19,6 @@
 
 @property (nonatomic, copy) void(^HiddenBlock)();
 
+@property (nonatomic ,assign) BOOL isPay;
+
 @end

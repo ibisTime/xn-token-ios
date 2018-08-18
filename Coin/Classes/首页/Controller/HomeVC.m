@@ -314,10 +314,11 @@
         //头部
         _headerView = [[HomeHeaderView alloc] initWithFrame:CGRectMake(15, kHeight(80), kScreenWidth, kScreenHeight)];
         
-        _headerView.headerBlock = ^(HomeEventsType type, NSInteger index) {
-            
-            [weakSelf headerViewEventsWithType:type index:index];
+        _headerView.headerBlock = ^(HomeEventsType type, NSInteger index, HomeFindModel *find) {
+            [weakSelf headerViewEventsWithType:type index:index model:find];
+
         };
+    
         _headerView.contentSize = CGSizeMake(kScreenWidth, kScreenHeight+50);
 //        self.tableView.tableHeaderView = _headerView;
     }
@@ -325,7 +326,64 @@
 }
 
 #pragma mark - HeaderEvents
-- (void)headerViewEventsWithType:(HomeEventsType)type index:(NSInteger)index {
+- (void)headerViewEventsWithType:(HomeEventsType)type index:(NSInteger)index  model:(HomeFindModel *)model {
+    
+    if ([model.action isEqualToString:@"red_packet"]) {
+        
+        RedEnvelopeVC *redEnvelopeVC = [RedEnvelopeVC new];
+        
+        if ([[TLUser user].tradepwdFlag isEqualToString:@"0"]) {
+            TLPwdType pwdType = TLPwdTypeSetTrade;
+            TLPwdRelatedVC *pwdRelatedVC = [[TLPwdRelatedVC alloc] initWithType:pwdType];
+            
+            pwdRelatedVC.isWallet = YES;
+            pwdRelatedVC.success = ^{
+                
+                
+                //                    [self presentViewController:redEnvelopeVC animated:YES completion:nil];
+                [self.navigationController pushViewController:redEnvelopeVC animated:YES];
+                
+            };
+            [self.navigationController pushViewController:pwdRelatedVC animated:YES];
+            
+            
+        }else{
+            
+            [self.navigationController pushViewController:redEnvelopeVC animated:YES];
+            
+            
+        }
+
+        return;
+    }
+    
+    if ([model.action isEqualToString:@"none"]) {
+        if ([model.name isEqualToString:@"首创玩法"]) {
+            HTMLStrVC *vc = [HTMLStrVC new];
+            vc.type = HTMLTypeGlobal_master;
+            vc.des = model.Description;
+            [self.navigationController pushViewController:vc animated:YES];
+        }else if ([model.name isEqualToString:@"量化理财"])
+        {
+            PosMiningVC *vc = [PosMiningVC new];
+
+//            HTMLStrVC *vc = [HTMLStrVC new];
+//            vc.des = model.Description;
+//            vc.type = HTMLTypeQuantitative_finance;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+        else if ([model.name isEqualToString:@"余币宝"])
+        {
+            HTMLStrVC *vc = [HTMLStrVC new];
+            vc.des = model.Description;
+            
+            vc.type = HTMLTypeYubibao;
+            
+            [self.navigationController pushViewController:vc animated:YES];
+            
+        }
+        return;
+    }
     
     switch (type) {
             
@@ -382,8 +440,7 @@
         {
             HTMLStrVC *vc = [HTMLStrVC new];
             vc.type = HTMLTypeGlobal_master;
-//            StoreListVC *storeVC = [StoreListVC new];
-            
+            vc.des = model.Description;
             [self.navigationController pushViewController:vc animated:YES];
            
         }break;
@@ -392,14 +449,16 @@
         {
             PosMiningVC *vc = [PosMiningVC new];
 //            HTMLStrVC *vc = [HTMLStrVC new];
+//            vc.des = model.Description;
 //            vc.type = HTMLTypeQuantitative_finance;
             [self.navigationController pushViewController:vc animated:YES];
         }break;
         case HomeEventsTypeRedEnvelope:
         {
             HTMLStrVC *vc = [HTMLStrVC new];
+            vc.des = model.Description;
+
             vc.type = HTMLTypeYubibao;
-//            GoodMallVC *mallVC = [GoodMallVC new];
             
             [self.navigationController pushViewController:vc animated:YES];
             

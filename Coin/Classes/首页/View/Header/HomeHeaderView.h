@@ -21,7 +21,7 @@ typedef NS_ENUM(NSInteger, HomeEventsType) {
     HomeEventsTypeRedEnvelope = 5,    //红包
 };
 
-typedef void(^HomeHeaderEventsBlock)(HomeEventsType type, NSInteger index);
+typedef void(^HomeHeaderEventsBlock)(HomeEventsType type, NSInteger index, HomeFindModel*find);
 
 @interface HomeHeaderView : UIScrollView
 

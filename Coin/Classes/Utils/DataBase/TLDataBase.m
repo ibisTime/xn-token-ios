@@ -7,6 +7,7 @@
 //
 
 #import "TLDataBase.h"
+//#import "FMDBMigrationManager.h"
 #import "AppColorMacro.h"
 #import "TLUser.h"
 #import "FMDBMigrationManager.h"
@@ -117,13 +118,13 @@ NSString *const dbName = @"THAWallet.db";
 //        }
     }else{
         // 如果数据库存在，弃用原来的，创建新库，并迁移数据
-        [self updatePrivateMsg];
       BOOL HasChecked =  [[NSUserDefaults standardUserDefaults] boolForKey:KIS160];
         
         if (HasChecked == YES) {
             return;
         }
-        
+        [self updatePrivateMsg];
+
         /*
          create table if not exists THAUser(walletId INTEGER PRIMARY KEY AUTOINCREMENT,userId text, Mnemonics text, wanaddress text,wanprivate text,ethaddress text,ethprivate text,btcaddress text,btcprivate text,PwdKey text,name text)
          */

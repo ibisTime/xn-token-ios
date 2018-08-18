@@ -30,6 +30,6 @@ typedef NS_ENUM(NSUInteger, HTMLType) {
 
 @property (nonatomic, assign) HTMLType type;
 
-//@property (nonatomic, copy) NSString *ckey;
+@property (nonatomic, copy) NSString *des;
 
 @end

@@ -89,8 +89,16 @@
 
 +(NSString *)sendWanTransactionWithMnemonicWallet:(NSString *)wallet address:(NSString *)address amount:(NSString *)amount gaspic:(NSString *)gasPric gasLimt:(NSString *)gasLimt
 {
-    
+   
     NSString *str = [EthCrypto sendWanTransactionWithMnemonic:wallet to:address amount:amount gasPrice:gasPric gasLimit:gasLimt];
+    return str;
+}
+
++(NSString *)sendEthTokenTransactionWithAddress: (NSString *)wallet contractAddress:(NSString *)contract address:(NSString *)address amount:(NSString *)amount gaspic:(NSString*)gasPric gasLimt:(NSString *)gasLimt
+{
+    
+    NSString *str = [EthCrypto sendEthTokenTransactionWithMnemonic:wallet con:contract to:address amount:amount gasPrice:gasPric gasLimit:gasLimt];
+    
     return str;
 }
 

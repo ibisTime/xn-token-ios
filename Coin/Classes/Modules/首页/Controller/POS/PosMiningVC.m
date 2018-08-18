@@ -14,12 +14,16 @@
 #import "UIBarButtonItem+convience.h"
 #import "TLMakeMoney.h"
 #import "QuestionModel.h"
+#import "TLtakeMoneyModel.h"
+#import "TLMoneyDeailVC.h"
+#import "TLMyRecordVC.h"
 @interface PosMiningVC ()<RefreshDelegate>
 //
 @property (nonatomic, strong) TLPlaceholderView *placeholderView;
 @property (nonatomic, strong) UILabel *titleLable;
 
 @property (nonatomic, strong) UILabel *contentLab;
+@property (nonatomic,strong) NSArray <TLtakeMoneyModel *>*Moneys;
 
 @property (nonatomic, strong) TLMakeMoney *tableView;
 
@@ -33,18 +37,92 @@
     //敬请期待
     [self initPlaceHolderView];
     
-    QuestionModel *m = [QuestionModel new];
-    m.Description = @"杭州";
-    m.reappear = @"THA蓄势待发";
-    QuestionModel *m1 = [QuestionModel new];
-    m1.Description = @"北京";
-    m1.reappear = @"wanChina";
-    self.tableView.questions = @[m,m1];
-    [self.tableView reloadData];
-    
-//    [UIBarButtonItem addr]
+//    TLtakeMoneyModel *m = [TLtakeMoneyModel new];
+//    m.name = @"币币赢第一期";
+//    m.symbol = @"BTC";
+//    m.expectYield = @"0.07";
+//    m.minAmount = @"100";
+//    m.limitAmount = @"500";
+//    m.limitDays = @"360";
+//    m.avilAmount = @"1000";
+//    
+//    TLtakeMoneyModel *m1 = [TLtakeMoneyModel new];
+//    m1.name = @"币币赢第二期";
+//    m1.symbol = @"BTC";
+//    m1.expectYield = @"0.12";
+//    m1.minAmount = @"1000";
+//    m1.limitAmount = @"5000";
+//
+//    m1.limitDays = @"129";
+//    m1.avilAmount = @"10000";
+//    self.tableView.Moneys = @[m,m1];
+//    self.Moneys = self.tableView.Moneys;
+//    [self.tableView reloadData];
+    [self getMyCurrencyList];
+    [UIBarButtonItem addRightItemWithTitle:[LangSwitcher switchLang:@"我的理财" key:nil] titleColor:kWhiteColor frame:CGRectMake(0, 0, 80, 40) vc:self action:@selector(myRecodeClick)];
     
 //    self.tableView.
+}
+
+- (void)getMyCurrencyList {
+    
+    CoinWeakSelf;
+    
+    TLPageDataHelper *helper = [[TLPageDataHelper alloc] init];
+    
+    helper.code = @"625510";
+    helper.parameters[@"userId"] = [TLUser user].userId;
+    helper.parameters[@"token"] = [TLUser user].token;
+    helper.isCurrency = YES;
+    helper.tableView = self.tableView;
+    [helper modelClass:[TLtakeMoneyModel class]];
+    [self.tableView addRefreshAction:^{
+        
+        
+        [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
+            
+            //去除没有的币种
+            weakSelf.Moneys = objs;
+            weakSelf.tableView.Moneys = objs;
+            [weakSelf.tableView reloadData_tl];
+            
+        } failure:^(NSError *error) {
+            
+            
+        }];
+        
+        
+        
+    }];
+   
+    [self.tableView beginRefreshing];
+    
+    [helper loadMore:^(NSMutableArray *objs, BOOL stillHave) {
+        
+        if (weakSelf.tl_placeholderView.superview != nil) {
+            
+            [weakSelf removePlaceholderView];
+        }
+        
+        weakSelf.Moneys = objs;
+        weakSelf.tableView.Moneys = objs;
+        weakSelf.tableView.bills = objs;
+        [weakSelf.tableView reloadData_tl];
+        
+    } failure:^(NSError *error) {
+        
+        [weakSelf addPlaceholderView];
+        
+    }];
+    
+}
+
+- (void)myRecodeClick
+{
+    TLMyRecordVC *VC = [TLMyRecordVC new];
+    VC.title = [LangSwitcher switchLang:@"我的理财" key:nil];
+    [self.navigationController pushViewController:VC animated:YES];
+    
 }
 
 - (TLMakeMoney *)tableView {
@@ -55,7 +133,8 @@
         
         //        _tableView.placeHolderView = self.placeHolderView;
         _tableView.refreshDelegate = self;
-        
+        _tableView.backgroundColor = kWhiteColor;
+
         [self.view addSubview:_tableView];
         [_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
             
@@ -82,33 +161,6 @@
     }];
     
     
-    
-//    self.titleLable = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:14];
-//    [self.view addSubview:self.titleLable];
-//    self.titleLable.numberOfLines = 0;
-//    [self.titleLable mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.equalTo(@(kHeight(20)));
-//        make.right.equalTo(@-10);
-//        make.left.equalTo(@10);
-//
-//    }];
-//    self.titleLable.text = @"THA Wallet为用户提供多种类型的优质理财产品，用户可以使用比特币、以太坊等数字货币购买理财产品而获得收益";
-//    self.contentLab = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:14];
-//    [self.view addSubview:self.contentLab];
-//    self.contentLab.numberOfLines = 0;
-//    self.contentLab.text = @"THA Wallet provides users with a variety of quality management products, users can use Bitcoin, Ethernet and other digital currencies to buy money products and gain income.";
-//    [self.contentLab mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.equalTo(self.titleLable.mas_bottom).offset(20);
-//        make.right.equalTo(@-10);
-//        make.left.equalTo(@10);
-//    }];
-    
-//    self.placeholderView = [TLPlaceholderView placeholderViewWithImage:nil text:[LangSwitcher switchLang:@"暂未开放, 敬请期待!" key:nil] textColor:kHexColor(@"#fe8472")];
-    
-//    [self.view addSubview:self.placeholderView];
-//    self.placeholderView = [TLPlaceholderView placeholderViewWithImage:nil text:[LangSwitcher switchLang:@"敬请期待!" key:nil] textColor:kTextColor];
-//    
-//    [self.view addSubview:self.placeholderView];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -116,5 +168,15 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void)refreshTableView:(TLTableView *)refreshTableview didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    
+    TLMoneyDeailVC *money = [TLMoneyDeailVC new];
+    money.moneyModel = self.Moneys[1];
+    money.title = [LangSwitcher switchLang:@"量化产品详情" key:nil];
+    [self.navigationController pushViewController:money animated:YES];
+    
+}
 
 @end

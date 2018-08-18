@@ -46,16 +46,23 @@ void TLLog(NSString *format, ...) {
     switch (_runEnv) {
             
         case RunEnvTest: {
-//            self.qiniuDomain = @"http://pajvine9a.bkt.clouddn.com";
-//
-////            self.qiniuDomain = @"http://p5k7690z2.bkt.clouddn.com";
-//            self.addr = @"http://139.196.162.23:2101";
+            self.qiniuDomain = @"http://pajvine9a.bkt.clouddn.com";
+
+//            self.qiniuDomain = @"http://p5k7690z2.bkt.clouddn.com";
+//            http://m.thatest.hichengdai.com/api
+            self.addr = @"http://m.thatest.hichengdai.com/api";
+
+//            self.addr = @"http://47.254.69.142:3306";
+            self.ethHash = @"https://rinkeby.etherscan.io/tx";
+            self.wanHash = @"http://47.104.61.26/block/trans";
 
         }break;
             
         case RunEnvDev: {
             self.qiniuDomain = @"http://pajvine9a.bkt.clouddn.com";
+//            self.addr = @"http://120.26.6.213:2101";
             self.addr = @"http://120.26.6.213:2101";
+
             //交易hash
             self.ethHash = @"https://rinkeby.etherscan.io/tx";
             self.wanHash = @"http://47.104.61.26/block/trans";

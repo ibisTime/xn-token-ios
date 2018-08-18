@@ -26,7 +26,10 @@
 
 + (NSString * )sendWanTransactionWithMnemonicWallet: (NSString *)wallet address:(NSString *)address amount:(NSString *)amount gaspic:(NSString*)gasPric gasLimt:(NSString *)gasLimt;
 
++ (NSString * )sendEthTokenTransactionWithAddress: (NSString *)wallet contractAddress:(NSString *)contract address:(NSString *)address amount:(NSString *)amount gaspic:(NSString*)gasPric gasLimt:(NSString *)gasLimt;
+
 +(NSString *)getMnemonicsISRight:(NSString *)mnemon;
+
 
 //生成随机的助记词
 + (BTCMnemonic *)generateNewMnemonic;

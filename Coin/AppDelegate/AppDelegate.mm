@@ -16,7 +16,7 @@
 //#import "IMALoginParam.h"         czy
 #import "WXApi.h"
 #import "TLWXManager.h"
-#import "TLAlipayManager.h"
+//#import "TLAlipayManager.h"
 //#import "ChatManager.h"           czy
 //#import "ChatViewController.h"    czy
 #import "IQKeyboardManager.h"
@@ -40,6 +40,7 @@
 #import "TLDataBase.h"
 #import "TLUserLoginVC.h"
 #import "ZLGestureLockViewController.h"
+#import <UMMobClick/MobClick.h>
 //#import "TLPublishInputView.h"      czy
 
 @interface AppDelegate ()
@@ -63,14 +64,17 @@
 #warning  //pods 更新后会导致wan币转账失败
 //    [AppConfig config].isUploadCheck = YES;
     self.respHandler = [[RespHandler alloc] init];
-     
+    
+//    [MobClick profileSignInWithPUID:@"UserID"];
+//    [MobClick profileSignInWithPUID:@"UserID" provider:@"WB"];
     [NBNetworkConfig config].respDelegate = self.respHandler;
     //2.新版本请求
     [NBNetworkConfig config].baseUrl = [AppConfig config].apiUrl;
     
     //配置键盘
     [self configIQKeyboard];
-    
+    //配置友盟统计
+//    [self configUManalytics];
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     //UIStatusBarStyleLightContent状态栏字体白色 UIStatusBarStyleDefault黑色
 
@@ -129,7 +133,29 @@
     
     
 }
+- (void)configUManalytics
+{
+    
+   
 
+    @try{
+        UMConfigInstance.appKey = @"5b73d999f29d9825200001db";
+        UMConfigInstance.channelId = @"test";//一般是这样写，用于友盟后台的渠道统计，当然苹果也不会有其他渠道，写死就好
+        UMConfigInstance.ePolicy =SEND_INTERVAL; //上传模式，这种为最小间隔发送90S，也可按照要求选择其他上传模式。也可不设置，在友盟后台修改。
+        [MobClick startWithConfigure:UMConfigInstance];//开启SDK
+        
+        NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey: @"CFBundleShortVersionString"];
+        [MobClick setAppVersion:version];
+        [MobClick setLogEnabled:YES];
+    }
+    @catch(NSException *exception) {
+        NSLog(@"exception:%@", exception);
+    }
+    @finally {
+        
+    }
+
+}
 #pragma mark- 上传推送 token
 //- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
 //
@@ -364,36 +390,36 @@
 // iOS9 NS_AVAILABLE_IOS
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
     
-    if ([url.host isEqualToString:@"certi.back"]) {
-        
-        //查询是否认证成功
-        TLNetworking *http = [TLNetworking new];
-        http.showView = [UIApplication sharedApplication].keyWindow;
-        http.code = @"805196";
-        http.parameters[@"bizNo"] = [TLUser user].tempBizNo;
-        http.parameters[@"userId"] = [TLUser user].userId;
-        [http postWithSuccess:^(id responseObject) {
-            
-            NSString *str = [NSString stringWithFormat:@"%@", responseObject[@"data"][@"isSuccess"]];
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"RealNameAuthResult" object:str];
-            
-        } failure:^(NSError *error) {
-            
-            
-        }];
-        
-        return YES;
-    }
+//    if ([url.host isEqualToString:@"certi.back"]) {
+//
+//        //查询是否认证成功
+//        TLNetworking *http = [TLNetworking new];
+//        http.showView = [UIApplication sharedApplication].keyWindow;
+//        http.code = @"805196";
+//        http.parameters[@"bizNo"] = [TLUser user].tempBizNo;
+//        http.parameters[@"userId"] = [TLUser user].userId;
+//        [http postWithSuccess:^(id responseObject) {
+//
+//            NSString *str = [NSString stringWithFormat:@"%@", responseObject[@"data"][@"isSuccess"]];
+//            [[NSNotificationCenter defaultCenter] postNotificationName:@"RealNameAuthResult" object:str];
+//
+//        } failure:^(NSError *error) {
+//
+//
+//        }];
+//
+//        return YES;
+//    }
     
-    if ([url.host isEqualToString:@"safepay"]) {
-        
-        [TLAlipayManager hadleCallBackWithUrl:url];
-        return YES;
-        
-    } else {
-        
+//    if ([url.host isEqualToString:@"safepay"]) {
+//
+//        [TLAlipayManager hadleCallBackWithUrl:url];
+//        return YES;
+//
+//    } else {
+    
         return [WXApi handleOpenURL:url delegate:[TLWXManager manager]];
-    }
+//    }
 }
 
 #pragma mark- 应用进入前台，改变登录时间

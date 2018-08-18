@@ -166,26 +166,44 @@
         }
         case HTMLTypeGlobal_master: {
             ckey = [NSString stringWithFormat:@"global_master_%@",[APPLanguage currentLanguage].currentLange];
-            
             name = [LangSwitcher switchLang:@"首创玩法" key:nil];
+            self.htmlStr = self.des;
+
+            [self initWebView];
+            self.nameLable.text = name;
+
+            return;
+
             break;
         }
         case HTMLTypeQuantitative_finance: {
             ckey = [NSString stringWithFormat:@"quantitative_finance_%@",[APPLanguage currentLanguage].currentLange];
             
             name = [LangSwitcher switchLang:@"量化理财" key:nil];
+            self.htmlStr = self.des;
+            
+            [self initWebView];
+            self.nameLable.text = name;
+
+            return;
             break;
         }
         case HTMLTypeYubibao: {
             ckey = [NSString stringWithFormat:@"yubibao_%@",[APPLanguage currentLanguage].currentLange];
             
             name = [LangSwitcher switchLang:@"余币宝" key:nil];
+            self.htmlStr = self.des;
+            
+            [self initWebView];
+            self.nameLable.text = name;
+
+            return;
             break;
         }
     }
 
     self.nameLable.text = name;
-    
+
     TLNetworking *http = [TLNetworking new];
     http.showView = self.view;
     http.code = USER_CKEY_CVALUE;
@@ -211,7 +229,7 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 - (void)initWebView {
-   
+
 
     NSString *jS = [NSString stringWithFormat:@"var meta = document.createElement('meta'); meta.setAttribute('name', 'viewport'); meta.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0'); meta.setAttribute('width', %lf); document.getElementsByTagName('head')[0].appendChild(meta);",kScreenWidth];
     

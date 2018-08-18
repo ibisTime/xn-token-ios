@@ -17,6 +17,7 @@
 #import "TLUserLoginVC.h"
 #import "CountryModel.h"
 #import "ZLGestureLockViewController.h"
+#import "NSString+Check.h"
 @interface TLUpdateVC ()
 @property (nonatomic,strong) NSMutableArray <CountryModel *>*countrys;
 
@@ -64,7 +65,11 @@
 {
     //通过淘宝的服务来定位WAN的IP，否则获取路由IP没什么用
     NSURL *ipURL = [NSURL URLWithString:@"http://ip.taobao.com/service/getIpInfo.php?ip=myip"];
+    
     NSData *data = [NSData dataWithContentsOfURL:ipURL];
+    if (data == nil) {
+        return @"0086";
+    }
     NSDictionary *ipDic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil]; 
     NSString *ipStr = nil;
     if (ipDic && [ipDic[@"code"] integerValue] == 0) { //获取成功
@@ -114,7 +119,8 @@
             }else{
                 
                 //
-                
+                [LangSwitcher changLangType:LangTypeEnglish];
+
             }
             
             

@@ -290,7 +290,7 @@ NSString *const kGoogleAuthClose = @"0";
     self.level = dict[@"level"];
     self.photo = dict[@"photo"];
     self.email = dict[@"email"];
-    self.interCode = dict[@"interCode"];
+    self.interCode = dict[@"country"][@"interCode"];
     self.secretUserId =  dict[@"secretUserId"];
     
     //腾讯云-设置昵称和头像
