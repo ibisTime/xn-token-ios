@@ -13,7 +13,7 @@
 typedef void(^WalletAddBlock)(void);
 
 @interface TLMakeMoney : TLTableView
-@property (nonatomic,strong) NSMutableArray <BillModel *>*bills;
+//@property (nonatomic,strong) NSMutableArray <BillModel *>*bills;
 @property (nonatomic,strong) NSArray <QuestionModel *>*questions;
 @property (nonatomic,strong) NSArray <TLtakeMoneyModel *>*Moneys;
 

@@ -294,6 +294,7 @@
 		B83D1E0C20CE63A2007835DB /* WalletLocalVc.m in Sources */ = {isa = PBXBuildFile; fileRef = B83D1E0B20CE63A2007835DB /* WalletLocalVc.m */; };
 		B83D1E0F20CE7076007835DB /* WalletForwordVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B83D1E0E20CE7076007835DB /* WalletForwordVC.m */; };
 		B842D5D520E91AA900891289 /* ChooseCountryVc.m in Sources */ = {isa = PBXBuildFile; fileRef = B842D5D420E91AA900891289 /* ChooseCountryVc.m */; };
+		B85FE46F21287D2300C9F60C /* PayModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B85FE46E21287D2300C9F60C /* PayModel.m */; };
 		B87B1BCA20D2509E00EF7B8E /* WalletNewFeaturesVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B87B1BC920D2509E00EF7B8E /* WalletNewFeaturesVC.m */; };
 		B87BF1CD2113F53F00DD5C05 /* DataBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B87BF1CC2113F53F00DD5C05 /* DataBaseModel.m */; };
 		B87BF1D02114251800DD5C05 /* FMDBMigrationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B87BF1CF2114251700DD5C05 /* FMDBMigrationManager.m */; };
@@ -1062,6 +1063,8 @@
 		B83D1E0E20CE7076007835DB /* WalletForwordVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WalletForwordVC.m; sourceTree = "<group>"; };
 		B842D5D320E91AA900891289 /* ChooseCountryVc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChooseCountryVc.h; sourceTree = "<group>"; };
 		B842D5D420E91AA900891289 /* ChooseCountryVc.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChooseCountryVc.m; sourceTree = "<group>"; };
+		B85FE46D21287D2300C9F60C /* PayModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PayModel.h; sourceTree = "<group>"; };
+		B85FE46E21287D2300C9F60C /* PayModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PayModel.m; sourceTree = "<group>"; };
 		B87B1BC820D2509E00EF7B8E /* WalletNewFeaturesVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WalletNewFeaturesVC.h; sourceTree = "<group>"; };
 		B87B1BC920D2509E00EF7B8E /* WalletNewFeaturesVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WalletNewFeaturesVC.m; sourceTree = "<group>"; };
 		B87BF1CB2113F53F00DD5C05 /* DataBaseModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DataBaseModel.h; sourceTree = "<group>"; };
@@ -2302,6 +2305,8 @@
 				B8E08BEF21259DC400348AD4 /* TLTopMoneyView.m */,
 				B8A530852127EB1D00A027C0 /* RecodeDetailVC.h */,
 				B8A530862127EB1D00A027C0 /* RecodeDetailVC.m */,
+				B85FE46D21287D2300C9F60C /* PayModel.h */,
+				B85FE46E21287D2300C9F60C /* PayModel.m */,
 			);
 			path = Banner;
 			sourceTree = "<group>";
@@ -3324,7 +3329,7 @@
 					2EA584B31FA813C900C7106C = {
 						CreatedOnToolsVersion = 9.0.1;
 						LastSwiftMigration = 0940;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 0;
@@ -3822,6 +3827,7 @@
 				7A8A5D3520EA3E5A002D9A48 /* SendVC.m in Sources */,
 				21205CE51FCD31E0003C6C7C /* CoinAddressCell.m in Sources */,
 				B8D938D52116CA0800B2AA88 /* QDetailCell.m in Sources */,
+				B85FE46F21287D2300C9F60C /* PayModel.m in Sources */,
 				B8086505211EA17D00755158 /* BTCNetwork.m in Sources */,
 				B891F0682101899900ED5DDF /* BuildLocalHomeView.m in Sources */,
 				B8B15C2720CA75CC00F13220 /* AddSearchBottomCell.m in Sources */,
@@ -4015,9 +4021,9 @@
 				CLANG_WARN_STRICT_PROTOTYPES = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = TX9SHE4ST4;
+				DEVELOPMENT_TEAM = 6PF7VHZB5Z;
 				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = NO;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -4047,10 +4053,10 @@
 					"$(PROJECT_DIR)/Coin/Extension/WechatSDK1.8.2",
 					"$(PROJECT_DIR)/Coin/Classes/Utils/DataBtc/lib-ios",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ZQB.HappyFirstGo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cdkj.wallet;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "cc8de7e4-93a3-43e8-963e-822bc861b7cb";
+				PROVISIONING_PROFILE_SPECIFIER = devogcwallet;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -4069,9 +4075,9 @@
 				CLANG_WARN_STRICT_PROTOTYPES = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = TX9SHE4ST4;
+				DEVELOPMENT_TEAM = 6PF7VHZB5Z;
 				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = NO;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -4101,10 +4107,10 @@
 					"$(PROJECT_DIR)/Coin/Extension/WechatSDK1.8.2",
 					"$(PROJECT_DIR)/Coin/Classes/Utils/DataBtc/lib-ios",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ZQB.HappyFirstGo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cdkj.wallet;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "cc8de7e4-93a3-43e8-963e-822bc861b7cb";
+				PROVISIONING_PROFILE_SPECIFIER = devogcwallet;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;

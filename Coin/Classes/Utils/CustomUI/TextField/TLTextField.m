@@ -68,16 +68,28 @@
 -(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
     
     if (!self.maxCount) {
+        NSLog(@"%@  %@",textField.text,string);
+
         return YES;
     }
         if (textField.text.length >= self.maxCount) {
             return NO;
         }else{
+            NSLog(@"%@  %@",textField.text,string);
         return YES;
         }
         
         
     }
+
+
+-(void)textFieldDidEndEditing:(UITextField *)textField
+{
+    
+    NSLog(@"%@ end",textField.text);
+
+    
+}
 #pragma mark --处理复制粘贴事件
 //- (BOOL)canPerformAction:(SEL)action withSender:(id)sender
 //{

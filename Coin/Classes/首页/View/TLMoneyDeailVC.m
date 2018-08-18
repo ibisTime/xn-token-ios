@@ -15,6 +15,9 @@
 #import "TLTextField.h"
 #import "AssetPwdView.h"
 #import "TLPwdRelatedVC.h"
+#import "NSString+Check.h"
+#import "PayModel.h"
+#import "NSString+Date.h"
 @interface TLMoneyDeailVC () <UIScrollViewDelegate,UIWebViewDelegate>
 
 @property (nonatomic ,strong) UIScrollView *contentView;
@@ -38,9 +41,11 @@
 @property (nonatomic ,strong) NSTimer * timeOut;
 @property (nonatomic ,assign) NSInteger  time;
 @property (nonatomic ,assign) UILabel *timeLab;
-@property (nonatomic, strong) NSMutableArray <CurrencyModel *>*currencys;
 @property (nonatomic ,strong) CurrencyModel * currencyModel;
-
+@property (nonatomic ,strong) TLTextField *inputFiled;
+@property (nonatomic ,assign) UILabel *coinLab;
+@property (nonatomic ,strong)  PayModel *payModel;
+@property (nonatomic ,strong) UILabel *moneyLab;
 @end
 
 @implementation TLMoneyDeailVC
@@ -50,7 +55,11 @@
     self.view.backgroundColor = kWhiteColor;
     [self initCustomView];
     [self LoadData];
+    self.tit.model = self.moneyModel;
     
+    self.pronameDetail.text = self.moneyModel.name;
+    self.symblename.text = self.moneyModel.symbol;
+    self.backdetailLab.text = [LangSwitcher switchLang:@"期满自动转入个人账户" key:nil];
     AssetPwdView *pwdView =[[AssetPwdView alloc] init];
     pwdView.isPay = YES;
     self.pwdView = pwdView;
@@ -61,7 +70,7 @@
     CoinWeakSelf;
     self.pwdView.forgetBlock = ^{
         
-        
+        weakSelf.view2.hidden = YES;
         TLPwdRelatedVC *vc  = [[TLPwdRelatedVC alloc] initWithType:TLPwdTypeTradeReset];
         
         [weakSelf.navigationController pushViewController:vc animated:YES];
@@ -81,7 +90,7 @@
         make.right.equalTo(self.view.mas_right).offset(-15);
         make.height.equalTo(@(300));
     }];
-    [web loadHTMLString:@"币加加是蓝潮基金提供给THA用户的一项低风险高收益的数字资产定期理财产品，蓝潮基金主要通过跨市场套利、期限套利、做市套利、统计套利等多种套利模型实现数字资产的稳健增值。币加加是蓝潮基金提供给THA用户的一项低风险高收益的数字资产定期理财产品，蓝潮基金主要通过跨市场套利、期限套利、做市套利、统计套利等多种套利模型实现数字资产的稳健增值。币加加是蓝潮基金提供给THA用户的一项低风险高收益的数字资产定期理财产品，蓝潮基金主要通过跨市场套利、期限套利、做市套利、统计套利等多种套利模型实现数字资产的稳健增值。" baseURL:nil];
+    [web loadHTMLString:self.moneyModel.Description baseURL:nil];
 //    self.contentView.contentSize = CGSizeMake(0, kScreenHeight+150);
     
      [self.web.scrollView addObserver:self forKeyPath:@"contentSize" options:NSKeyValueObservingOptionNew context:nil];
@@ -89,11 +98,18 @@
 }
 
 
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.tit.model = self.moneyModel;
+    
 
+    
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
     
 }
 
@@ -135,7 +151,7 @@
         make.top.equalTo(self.view.mas_top);
         make.left.equalTo(self.view.mas_left).offset(15);
         make.right.equalTo(self.view.mas_right).offset(-15);
-        make.height.equalTo(@183);
+        make.height.equalTo(@203);
 
     }];
     
@@ -200,7 +216,7 @@
     
     [self.pronameDetail mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.proname.mas_centerY);
-        make.left.equalTo(self.tit.mas_right).offset(20);
+        make.left.equalTo(self.proname.mas_right).offset(20);
     }];
     
     [self.symble mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -219,7 +235,7 @@
     }];
     
     [self.backdetailLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.symble.mas_bottom).offset(25);
+        make.centerY.equalTo(self.backLable.mas_centerY);
         make.left.equalTo(self.symble.mas_right).offset(20);
     }];
     
@@ -269,27 +285,29 @@
         make.width.equalTo(@10);
         make.height.equalTo(@6);
     }];
-    
-    self.importButton = [UIButton buttonWithImageName:nil cornerRadius:6];
-    NSString *text2 = [LangSwitcher switchLang:@"购 买" key:nil];
-    [self.importButton setTitle:text2 forState:UIControlStateNormal];
-    self.importButton.titleLabel.font = [UIFont systemFontOfSize:16];
-    
-    [self.importButton setTitleColor:kWhiteColor forState:UIControlStateNormal];
-    [self.importButton addTarget:self action:@selector(buyNow) forControlEvents:UIControlEventTouchUpInside];
-    [self.importButton setBackgroundColor:kAppCustomMainColor forState:UIControlStateNormal];
-    self.importButton.layer.borderColor = (kAppCustomMainColor.CGColor);
-    self.importButton.layer.borderWidth = 1;
-    self.importButton.layer.cornerRadius = 4;
-    self.importButton.clipsToBounds = YES;
-    [self.view addSubview:self.importButton];
-    [self.importButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(self.view.mas_bottom).offset(-26);
-        make.right.equalTo(self.view.mas_right).offset(-30);
-        make.left.equalTo(self.view.mas_left).offset(30);
-        make.height.equalTo(@48);
+    if ([self.moneyModel.status isEqualToString:@"5"]) {
+        self.importButton = [UIButton buttonWithImageName:nil cornerRadius:6];
+        NSString *text2 = [LangSwitcher switchLang:@"购 买" key:nil];
+        [self.importButton setTitle:text2 forState:UIControlStateNormal];
+        self.importButton.titleLabel.font = [UIFont systemFontOfSize:16];
         
-    }];
+        [self.importButton setTitleColor:kWhiteColor forState:UIControlStateNormal];
+        [self.importButton addTarget:self action:@selector(buyNow) forControlEvents:UIControlEventTouchUpInside];
+        [self.importButton setBackgroundColor:kAppCustomMainColor forState:UIControlStateNormal];
+        self.importButton.layer.borderColor = (kAppCustomMainColor.CGColor);
+        self.importButton.layer.borderWidth = 1;
+        self.importButton.layer.cornerRadius = 4;
+        self.importButton.clipsToBounds = YES;
+        [self.view addSubview:self.importButton];
+        [self.importButton mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.bottom.equalTo(self.view.mas_bottom).offset(-26);
+            make.right.equalTo(self.view.mas_right).offset(-30);
+            make.left.equalTo(self.view.mas_left).offset(30);
+            make.height.equalTo(@48);
+            
+        }];
+    }
+    
 }
 #pragma mark - 钱包网络请求
 -(void)LoadData
@@ -323,16 +341,32 @@
 }
 - (void)buyNow
 {
+    
+    for (int i = 0; i < self.currencys.count; i++) {
+        
+        if ([self.moneyModel.symbol isEqualToString:self.currencys[i].currency]) {
+            
+            self.currencyModel = self.currencys[i];
+            
+        }
+    }
+    
     //购买
     [self payAmount];
     
 }
+
+
 
 - (void)payAmount
 {
 //    [self endEditing:YES];
     UIView * view1 = [UIView new];
     self.view1 = view1;
+    view1.userInteractionEnabled = YES;
+    UITapGestureRecognizer *t = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideinPut)];
+    
+    [view1 addGestureRecognizer:t];
     self.view1.hidden = NO;
     
     view1.frame =CGRectMake(0, 0, kScreenWidth, kScreenHeight);
@@ -348,6 +382,12 @@
     whiteView.frame = CGRectMake(24, kHeight(194), kScreenWidth - 48, kHeight(300));
     
     whiteView.backgroundColor = kWhiteColor;
+    whiteView.userInteractionEnabled = YES;
+    
+    UITapGestureRecognizer *t1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideinPut)];
+    
+    [whiteView addGestureRecognizer:t1];
+    
     UIButton *exitBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [exitBtn setBackgroundImage:kImage(@"红包 删除") forState:UIControlStateNormal];
     [exitBtn addTarget:self action:@selector(hideSelf) forControlEvents:UIControlEventTouchUpInside];
@@ -367,11 +407,14 @@
     }];
     
     UILabel *symLab = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextBlack font:15];
-    symLab.text = self.currencyModel.symbol;
+    symLab.text = self.moneyModel.symbol;
+    
+    
+    
     [whiteView addSubview:symLab];
     [symLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(sureLab.mas_centerY);
-        make.left.equalTo(whiteView.mas_right).offset(20);
+        make.left.equalTo(sureLab.mas_right).offset(20);
     }];
     
     UILabel *blanceLab = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor3 font:14];
@@ -381,17 +424,21 @@
         make.top.equalTo(sureLab.mas_bottom).offset(15);
         make.left.equalTo(sureLab.mas_left);
     }];
+    
     UILabel *moneyLab = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextBlack font:16];
-//    moneyLab.text = [LangSwitcher switchLang:@"可用余额" key:nil];
+    CoinModel *coin = [CoinUtil getCoinModel:self.currencyModel.currency];
+    self.moneyLab = moneyLab;
+    NSString *mon = [CoinUtil convertToRealCoin:self.currencyModel.amountString coin:coin.symbol];
+    moneyLab.text = mon;
     [whiteView addSubview:moneyLab];
     [moneyLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(sureLab.mas_bottom).offset(15);
+        make.centerY.equalTo(blanceLab.mas_centerY);
         make.left.equalTo(blanceLab.mas_right).offset(20);
     }];
-    CoinModel *coin = [CoinUtil getCoinModel:self.currencyModel.currency];
+//    CoinModel *coin = [CoinUtil getCoinModel:self.currencyModel.currency];
 
-    NSString *m = [CoinUtil convertToRealCoin:coin.unit coin:self.moneyModel.symbol];
-    moneyLab.text = [NSString stringWithFormat:@"%@",m];
+//    NSString *m = [CoinUtil convertToRealCoin:coin.unit coin:self.moneyModel.symbol];
+//    moneyLab.text = [NSString stringWithFormat:@"%@",m];
     
     UILabel *symLab1 = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextBlack font:15];
     symLab1.text = self.currencyModel.currency;
@@ -408,14 +455,15 @@
     transFormLab.layer.borderColor = kTextBlack.CGColor;
     transFormLab.layer.borderWidth = 0.3;
     transFormLab.clipsToBounds = YES;
+    transFormLab.textAlignment = NSTextAlignmentCenter;
     transFormLab.text = [LangSwitcher switchLang:@"转入资金" key:nil];
     UITapGestureRecognizer *ta = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(transformMoney)];
     [transFormLab addGestureRecognizer:ta];
     [transFormLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(symLab1.mas_centerY);
-        make.right.equalTo(whiteView.mas_right).offset(-15);
-        make.height.equalTo(@20);
-//        make.width.equalTo(@50);
+        make.right.equalTo(whiteView.mas_right).offset(-35);
+        make.height.equalTo(@30);
+        make.width.equalTo(@80);
         
     }];
     
@@ -442,7 +490,8 @@
     
     TLTextField *inputFiled = [[TLTextField alloc] initWithFrame:CGRectZero leftTitle:nil titleWidth:15 placeholder:[LangSwitcher switchLang:@"请输入购买额度" key:nil]];
     [whiteView addSubview:inputFiled];
-    
+    self.inputFiled = inputFiled;
+    inputFiled.keyboardType = UIKeyboardTypePhonePad;
     [inputFiled mas_makeConstraints:^(MASConstraintMaker *make) {
        
         make.top.equalTo(buyCount.mas_bottom).offset(5);
@@ -482,7 +531,8 @@
     }];
     
     UILabel *coinLab = [UILabel labelWithBackgroundColor:kClearColor textColor:kHexColor(@"#FF6400") font:15];
-    coinLab.text = [LangSwitcher switchLang:@"1000" key:nil];
+    self.coinLab = coinLab;
+//    coinLab.text = [LangSwitcher switchLang:@"1000" key:nil];
     self.payCount = coinLab.text;
     [whiteView addSubview:coinLab];
     [coinLab mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -498,46 +548,6 @@
         make.top.equalTo(line1.mas_bottom).offset(15);
         make.left.equalTo(coinLab.mas_right).offset(3);
     }];
-//    UILabel *money = [UILabel labelWithBackgroundColor:kClearColor textColor:kHexColor(@"#A75E02") font:17];
-//
-//    [whiteView addSubview:money];
-//    [money mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.equalTo(sureLab.mas_bottom).offset(100);
-//        make.centerX.equalTo(whiteView.mas_centerX);
-//    }];
-//
-//    UIView *buttonView =[UIView new];
-//    buttonView.backgroundColor = kWhiteColor;
-//    buttonView.layer.borderWidth = 0.5;
-//    buttonView.layer.borderColor = kLineColor.CGColor;
-//    //    buttonView.layer.cornerRadius = 5.0;
-//    //    buttonView.clipsToBounds = YES;
-//    [whiteView addSubview:buttonView];
-//
-//    [buttonView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.equalTo(buyCount.mas_bottom).offset(100);
-//        make.left.equalTo(whiteView.mas_left).offset(25);
-//        make.right.equalTo(whiteView.mas_right).offset(-25);
-//        make.height.equalTo(@48);
-//    }];
-//
-//    UILabel *blanceMoney = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor3 font:15];
-//    blanceMoney.text = [LangSwitcher switchLang:@"账户余额" key:nil];
-//    [buttonView addSubview:blanceMoney];
-//    [blanceMoney mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.equalTo(buttonView.mas_top).offset(213);
-//        make.left.equalTo(buttonView.mas_left).offset(10);
-//
-//    }];
-//
-//    UILabel *blance = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:15];
-//    blance.text = [LangSwitcher switchLang:[NSString stringWithFormat:@"%.3f%@",@"2",self.moneyModel.symbol] key:nil];
-//    [buttonView addSubview:blance];
-//    [blance mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.equalTo(buttonView.mas_top).offset(13);
-//        make.left.equalTo(blanceMoney.mas_right).offset(16);
-//
-//    }];
     
     UIButton *sureButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [sureButton setBackgroundColor:kAppCustomMainColor forState:UIControlStateNormal];
@@ -555,6 +565,19 @@
     }];
 }
 
+- (void)hideinPut
+{
+    
+    [self.inputFiled resignFirstResponder];
+    if (![self.inputFiled.text isBlank] ) {
+        
+        self.coinLab.text = [NSString stringWithFormat:@"%.2f",[self.moneyModel.expectYield floatValue]* [self.inputFiled.text floatValue] ];
+
+        
+    }
+    
+}
+
 - (void)transformMoney
 {
     RechargeCoinVC *coinVC = [RechargeCoinVC new];
@@ -567,11 +590,20 @@
     
 }
 
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    [self.inputFiled endEditing:YES];
+    
+    
+}
+
 - (void)hideSelf
 {
     
     [UIView animateWithDuration:0.5 animations:^{
+        [self.inputFiled resignFirstResponder];
         self.view1.hidden = YES;
+        
     }];
     
 }
@@ -586,8 +618,62 @@
 - (void)payMoney
 {
  
+    //确认购买 第一步 验证
+    if ([self.inputFiled.text isBlank]) {
+        [TLAlert alertWithMsg:[LangSwitcher switchLang:@"请输入金额" key:nil]];
+        return;
+    }
+
+    CoinModel *coin = [CoinUtil getCoinModel:self.moneyModel.symbol];
+
+    NSString *mAmount = [CoinUtil convertToRealCoin:self.moneyModel.minAmount coin:coin.symbol];
+
+    // 第二步 不能小于起购金额
+    if ([self.inputFiled.text floatValue] < [mAmount floatValue]) {
+        [TLAlert alertWithMsg:[LangSwitcher switchLang:@"不能小于起购金额" key:nil]];
+        return;
+
+    }
+    if ([self.inputFiled.text floatValue] > [self.moneyLab.text floatValue]) {
+        [TLAlert alertWithMsg:[LangSwitcher switchLang:@"余额不足,请充值" key:nil]];
+        return;
+    }
+
+    //第三步 不能大于限购金额
+    NSString *limtmount = [CoinUtil convertToRealCoin:self.moneyModel.limitAmount coin:coin.symbol];
+    if ([self.inputFiled.text floatValue] > [limtmount floatValue]) {
+        [TLAlert alertWithMsg:[LangSwitcher switchLang:@"不能大于限购金额" key:nil]];
+        return;
+    }
+   //第四步  不能大于可售余额
+
+    NSString *avmount = [CoinUtil convertToRealCoin:self.moneyModel.avilAmount coin:coin.symbol];
+    if ([self.inputFiled.text floatValue] > [avmount floatValue]) {
+        [TLAlert alertWithMsg:[LangSwitcher switchLang:@"不能大于可售金额" key:nil]];
+        return;
+    }
+    //第五步 递增  todo
+   NSString *all = [CoinUtil convertToSysCoin:self.inputFiled.text coin:self.moneyModel.symbol];
+    
+    long long f = [all longLongValue] -[self.moneyModel.minAmount longLongValue];
+    long long f1 = [self.moneyModel.minAmount longLongValue];
+    long long f2= f % f1;
+    if (f2 != 0) {
+        [TLAlert alertWithMsg:[LangSwitcher switchLang:@"" key:nil]];
+        return;
+        
+    }
+    
     self.view1.hidden = YES;
     //确认购买
+    
+    PayModel *payModel = [PayModel new];
+    self.payModel = payModel;
+    payModel.name = self.moneyModel.symbol;
+    payModel.count = self.inputFiled.text;
+    payModel.endTime = self.moneyModel.arriveDatetime;
+    payModel.getFree = self.coinLab.text;
+
     
     UIView * view2 = [UIView new];
     self.view2 = view2;
@@ -602,7 +688,7 @@
     
     [view2 addSubview:whiteView];
     
-    whiteView.frame = CGRectMake(24, kHeight(194), kScreenWidth - 48, kHeight(300));
+    whiteView.frame = CGRectMake(24, kHeight(194), kScreenWidth - 48, kHeight(350));
     
     whiteView.backgroundColor = kWhiteColor;
     UIButton *exitBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -619,14 +705,14 @@
     sureLab.text = [LangSwitcher switchLang:@"购买产品" key:nil];
     [whiteView addSubview:sureLab];
     [sureLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(whiteView.mas_top).offset(20);
+        make.top.equalTo(whiteView.mas_top).offset(40);
         make.left.equalTo(whiteView.mas_left).offset(43);
     }];
     UILabel *nameLab = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextBlack font:15];
     [whiteView addSubview:nameLab];
     nameLab.text = self.currencyModel.currency;
     [nameLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(whiteView.mas_top).offset(20);
+        make.top.equalTo(whiteView.mas_top).offset(40);
         make.left.equalTo(sureLab.mas_right).offset(23);
     }];
     
@@ -651,7 +737,7 @@
     }];
     UILabel *buy = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextBlack font:16];
     [whiteView addSubview:buy];
-    buy.text = self.payCount;
+    buy.text = self.payModel.count;
     [buy mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(line1.mas_bottom).offset(25);
         make.left.equalTo(buycount.mas_right).offset(20);
@@ -680,11 +766,11 @@
     [whiteView addSubview:freeTime];
     [freeTime mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(line2.mas_bottom).offset(15);
-        make.left.equalTo(whiteView.mas_left).offset(43);
+        make.right.equalTo(buycount.mas_right);
     }];
     UILabel *timeLab = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextBlack font:15];
     [whiteView addSubview:timeLab];
-    timeLab.text = @"2018-08-17";
+    timeLab.text = [self.payModel.endTime convertDate];
     [timeLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(line2.mas_bottom).offset(15);
         make.left.equalTo(freeTime.mas_right).offset(10);
@@ -709,7 +795,7 @@
         make.left.equalTo(sureLab.mas_left);
     }];
     UILabel *money = [UILabel labelWithBackgroundColor:kClearColor textColor:kHexColor(@"#FF6400") font:16];
-    money.text = self.payCount;
+    money.text = self.payModel.getFree;
     [whiteView addSubview:money];
     [money mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(moneyMay.mas_top);
@@ -768,12 +854,31 @@
             [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入支付密码" key:nil]];
             return ;
         }
-    
         weakSelf.pwdView.hidden = YES;
-        
         [weakSelf.pwdView.password clearText];
+
+        TLNetworking *http = [[TLNetworking alloc] init];
         
-        [weakSelf showBuySucess];
+        http.code = @"625520";
+        http.parameters[@"code"] = weakSelf.moneyModel.code;
+        CoinModel *model = [CoinUtil getCoinModel:weakSelf.moneyModel.symbol];
+        NSString *money = [CoinUtil convertToSysCoin:weakSelf.payModel.count coin:model.symbol];
+        
+        http.parameters[@"investAmount"] = money;
+        http.parameters[@"tradePwd"] = password;
+        http.parameters[@"userId"] = [TLUser user].userId;
+
+        [http postWithSuccess:^(id responseObject) {
+            
+            
+            [weakSelf showBuySucess];
+
+        } failure:^(NSError *error) {
+            
+        }];
+        
+        
+        
         
     };
     
@@ -868,12 +973,6 @@
         //        make.centerY.equalTo(whiteView.mas_centerY);
         
     }];
-    
-//    [self begin];
-//    [timeLab setTitle:[NSString stringWithFormat:@"%@(%ld)",[LangSwitcher switchLang:@"重新发送" key:nil],_totalTime] forState:UIControlStateDisabled];
-//
-//    self.backgroundColor = kTextColor2;
-    
     self.timeOut = [NSTimer timerWithTimeInterval:1.0 target:self selector:@selector(timeAction) userInfo:nil repeats:YES];
     [[NSRunLoop mainRunLoop] addTimer:self.timeOut forMode:NSRunLoopCommonModes];
 }
@@ -893,15 +992,7 @@
         self.timeOut = nil;
         self.view3.hidden = YES;
         [self.navigationController popViewControllerAnimated:YES];
-//        se = _totalTime;
-//        self.backgroundColor = kAppCustomMainColor;
-//        [self setTitle:[LangSwitcher switchLang:@"获取验证码" key:nil] forState:UIControlStateNormal];
-//
-//        [self setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        
-        //        [self setTitleColor:[UIColor whiteColor] forState:UIControlStateDisabled];
-        //        self.titleLabel.font = Font(15.0);
-//        self.enabled = YES;
+
     }
     
 }
@@ -929,24 +1020,9 @@
     //
     self.web.height = sizeHeight;
     
-//    [self.web mas_remakeConstraints:^(MASConstraintMaker *make) {
-//        make.top.equalTo(self.bottomLab.mas_bottom).offset(15);
-//        make.left.equalTo(self.view.mas_left).offset(15);
-//        make.right.equalTo(self.view.mas_right).offset(-15);
-//        make.height.equalTo(@(sizeHeight));
-//    }];
-    
-    //    [self.userImg mas_remakeConstraints:^(MASConstraintMaker *make) {
-    //        make.height.mas_equalTo(sizeHeight);
-    //
-    //    }];
+
     [self.web setNeedsLayout];
-//    [self.web setNeedsDisplay];
-
-//    [self.contentView setContentSize:CGSizeMake(kScreenWidth, sizeHeight +kScreenHeight)];
-
-//    self.selectBlock(sizeHeight);
-    
+ 
 }
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context
@@ -956,36 +1032,10 @@
         CGSize fit = [self.web sizeThatFits:CGSizeZero];
         self.web.height = fit.height;
 
-//        NSLog(@"webView%@",NSStringFromCGSize(fit));
-//        [self.web mas_remakeConstraints:^(MASConstraintMaker *make) {
-//            make.top.equalTo(self.bottomLab.mas_bottom).offset(15);
-//            make.left.equalTo(self.view.mas_left).offset(15);
-//            make.right.equalTo(self.view.mas_right).offset(-15);
-//            make.height.equalTo(@(fit.height));
-//        }];
-//
-//        [self.contentView setNeedsLayout];
-//        [self.contentView setNeedsDisplay];
-
         [self.web setNeedsLayout];
-//        [self.web setNeedsDisplay];
-//        [self.contentView setContentSize:CGSizeMake(kScreenWidth, fit.height +kScreenHeight)];
-
-        
+    
     }
 }
 
-
-
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

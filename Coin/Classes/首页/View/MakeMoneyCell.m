@@ -123,8 +123,8 @@
         
     }];
     [self.freeLable mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(self.blueView.mas_centerY);
-        make.right.equalTo(self.mas_right).offset(-15);
+        make.centerY.equalTo(self.bottomView.mas_centerY);
+        make.right.equalTo(self.mas_right).offset(-5);
         
     }];
     
@@ -191,34 +191,73 @@
     CoinModel *coin = [CoinUtil getCoinModel:model.symbol];
     self.nameLab.text = model.name;
     
-    NSString *expectYield = [CoinUtil convertToRealCoin:model.expectYield coin:coin.symbol];
     NSString *allAmount = [CoinUtil convertToRealCoin:model.amount coin:coin.symbol];
-    NSString *currentAmount = [CoinUtil convertToRealCoin:model.avilAmount coin:coin.symbol];
+    NSString *currentAmount = [CoinUtil convertToRealCoin:model.saleAmount coin:coin.symbol];
+    CGFloat f;
+    if ([allAmount isEqualToString:@"0"]) {
+        f = 0;
+    }else{
+       f =  [currentAmount floatValue]/[allAmount floatValue];
 
-    CGFloat f =  [currentAmount floatValue]/[allAmount floatValue];
+    }
     
-    [self.blueView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.stateLab.mas_bottom).offset(17);
-        make.left.equalTo(self.mas_left).offset(30);
-        //        make.right.equalTo(self.mas_right).offset(-30);
-        make.height.equalTo(@8);
-        make.width.equalTo(@((kScreenWidth - 60)*f));
-        
-    }];
-    self.stateLab.text = [NSString stringWithFormat:@"%.2f%%",[expectYield floatValue]];
-    self.freeLable.text = [NSString stringWithFormat:@"%.0f%%",[expectYield floatValue]];
+   
+    NSLog(@"比例是%f",f);
+//    [self setNeedsLayout];
+    
+    self.stateLab.text = [NSString stringWithFormat:@"%.2f%%",[model.expectYield floatValue]*100];
+    self.freeLable.text = [NSString stringWithFormat:@"%.0f%%",f*100];
     NSString *minAmount = [CoinUtil convertToRealCoin:model.minAmount coin:coin.symbol];
 
     self.desLab.text = [NSString stringWithFormat:@"%@%@ %@",minAmount,model.symbol,[LangSwitcher switchLang:@"起购" key:nil]];
     self.timeLab.text =[NSString stringWithFormat:@"%@%@",model.limitDays,[LangSwitcher switchLang:@"个月" key:nil]];
     NSString *avilAmount = [CoinUtil convertToRealCoin:model.avilAmount coin:coin.symbol];
 
+    if ([model.status isEqualToString:@"4"]) {
+         self.leaveLable.text =[LangSwitcher switchLang:@"即将开始" key:nil];
+    }else if ([model.status isEqualToString:@"5"])
+    {
      self.leaveLable.text =[NSString stringWithFormat:@"%@ %@%@",[LangSwitcher switchLang:@"剩余" key:nil],avilAmount,model.symbol];
-//    self.nameLab.text = model.payNote;
-//    self.nameLab.text = model.payNote;
-//    self.nameLab.text = model.payNote;
-//    self.nameLab.text = model.payNote;
+    }
+    else if ([model.status isEqualToString:@"6"])
+    {
+        self.leaveLable.text =[LangSwitcher switchLang:@"停止交易" key:nil];
 
+    }
+    else if ([model.status isEqualToString:@"7"])
+    {
+        self.leaveLable.text =[LangSwitcher switchLang:@"产品封闭期" key:nil];
+
+    }
+    else if ([model.status isEqualToString:@"8"])
+    {
+        self.leaveLable.text =[LangSwitcher switchLang:@"还款成功" key:nil];
+
+    } else if ([model.status isEqualToString:@"9"])
+    {
+        self.leaveLable.text =[LangSwitcher switchLang:@"募集失败" key:nil];
+
+    }else{
+        
+        self.leaveLable.text =[LangSwitcher switchLang:@"敬请期待" key:nil];
+
+    }
+    
+    [self.blueView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.stateLab.mas_bottom).offset(17);
+        make.left.equalTo(self.mas_left).offset(30);
+        //        make.right.equalTo(self.mas_right).offset(-30);
+        make.height.equalTo(@8);
+        make.width.equalTo(@((kScreenWidth - 120)*f));
+        
+    }];
+//    [self.blueView mas_remakeConstraints:^(MASConstraintMaker *make) {
+//
+//        make.width.equalTo(@((kScreenWidth - 60)*f));
+//
+//    }];
+    [self setNeedsLayout];
+    [self setNeedsDisplay];
     
     
 }

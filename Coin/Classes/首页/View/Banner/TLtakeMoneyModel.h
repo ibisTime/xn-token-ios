@@ -67,4 +67,33 @@
 @property (nonatomic ,copy) NSString *updateDatetime;
 //已购人数
 @property (nonatomic ,copy) NSString *saleNum;
+//赎回金额
+@property (nonatomic ,copy) NSString *redeemAmount;
+//投资次数
+@property (nonatomic ,copy) NSString *investNum;
+//投资总金额
+@property (nonatomic ,copy) NSString *investAmount;
+//逾期收益
+@property (nonatomic ,copy) NSString *expectIncome;
+//实际到账收益
+@property (nonatomic ,copy) NSString *income;
+//剩余待还本金
+@property (nonatomic ,copy) NSString *leftPrincipal;
+//产品编号
+@property (nonatomic ,copy) NSString *productCode;
+//赎回次数
+@property (nonatomic ,copy) NSString *redeemTimes;
+//最后认购时间
+@property (nonatomic ,copy) NSString *lastInvestDatetime;
+
+//最后赎回时间
+@property (nonatomic ,copy) NSString *lastRedeemDatetime;
+
+@property (nonatomic ,copy) NSDictionary *productInfo;
+
+@property (nonatomic ,copy) NSDictionary *userInfo;
+
+
+@property (nonatomic ,strong) TLtakeMoneyModel *produceModel;
+
 @end

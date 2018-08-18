@@ -43,6 +43,11 @@
 
 @property (nonatomic ,strong) UILabel *beiginLableDetail;
 
+@property (nonatomic ,strong) UILabel *sumLable;
+
+
+@property (nonatomic ,strong) UILabel *sumLableDetail;
+
 @end
 @implementation TLTopMoneyView
 - (instancetype)initWithFrame:(CGRect)frame
@@ -79,13 +84,16 @@
      self.beiginLableDetail = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextBlack font:14];
     self.leftLable = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor3 font:14];
     self.beiginLable = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor3 font:14];
+    self.sumLable = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor3 font:14];
+    self.sumLableDetail = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor3 font:14];
     [self addSubview:self.freeLable];
     [self addSubview:self.orderLable];
     [self addSubview:self.leftLable];
     [self addSubview:self.beiginLable];
     [self addSubview:self.leftLableDetail];
     [self addSubview:self.beiginLableDetail];
-
+    [self addSubview:self.sumLable];
+    [self addSubview:self.sumLableDetail];
 //    UIView *bottomView = [UIView new];
 //    self.bottomView = bottomView;
 //    bottomView.backgroundColor = kHexColor(@"#EFEFEF");
@@ -180,7 +188,7 @@
     
     [self.orderLable mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.blueView.mas_centerY);
-        make.right.equalTo(self.mas_right).offset(-15);
+        make.right.equalTo(self.mas_right).offset(-5);
         
     }];
     [self.freeLable mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -226,7 +234,17 @@
         make.left.equalTo(self.beiginLable.mas_right).offset(10);
         
     }];
-   
+    
+    [self.sumLable mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.beiginLable.mas_bottom).offset(12);
+        make.left.equalTo(self.beiginLable.mas_left);
+        
+    }];
+    [self.sumLableDetail mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.beiginLable.mas_bottom).offset(12);
+        make.left.equalTo(self.sumLable.mas_right).offset(10);
+        
+    }];
 //    [self.moreButton mas_makeConstraints:^(MASConstraintMaker *make) {
 //        make.top.equalTo(self.stateLab.mas_bottom).offset(8);
 //        make.right.equalTo(self.mas_right).offset(-10);
@@ -254,19 +272,48 @@
 -(void)setModel:(TLtakeMoneyModel *)model
 {
     _model = model;
+    CoinModel *coin = [CoinUtil getCoinModel:model.symbol];
+
     self.nameLab.text = [NSString stringWithFormat:@"%.2f%%",[model.expectYield floatValue]*100];
     self.stateLab.text = [NSString stringWithFormat:@"%@%@",model.limitDays,[LangSwitcher switchLang:@"个月" key:nil]];
     self.freeLable.text = [NSString stringWithFormat:@"%@%@",model.limitDays,[LangSwitcher switchLang:@"个月" key:nil]];
-    self.desLab.text = [NSString stringWithFormat:@"%@%@",model.minAmount,model.symbol];
+    NSString *totAmount = [CoinUtil convertToRealCoin:model.amount coin:coin.symbol];
+
+    self.desLab.text = [NSString stringWithFormat:@"%@%@",totAmount,model.symbol];
     self.timeLab.text = [LangSwitcher switchLang:@"产品期限" key:nil];
     self.leaveLable.text = [LangSwitcher switchLang:@"产品总额" key:nil];
-    self.orderLable.text = [NSString stringWithFormat:@"%@%.0f%%",[LangSwitcher switchLang:@"已认购" key:nil],[model.expectYield floatValue]*100];
+    NSString *allAmount = [CoinUtil convertToRealCoin:model.amount coin:coin.symbol];
+    NSString *currentAmount = [CoinUtil convertToRealCoin:model.saleAmount coin:coin.symbol];
+    CGFloat f;
+    if ([allAmount isEqualToString:@"0"]) {
+        f = 0;
+    }else{
+        f =  [currentAmount floatValue]/[allAmount floatValue];
+        
+    }
+    [self.blueView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.stateLab.mas_bottom).offset(17);
+        make.left.equalTo(self.mas_left).offset(30);
+        //        make.right.equalTo(self.mas_right).offset(-30);
+        make.height.equalTo(@8);
+        make.width.equalTo(@((kScreenWidth - 60-100)*f));
+        
+    }];
+    self.orderLable.text = [NSString stringWithFormat:@"%@%.0f%%",[LangSwitcher switchLang:@"已认购" key:nil],f*100];
     self.leftLable.text = [LangSwitcher switchLang:@"剩余" key:nil];
     self.beiginLable.text = [LangSwitcher switchLang:@"起购" key:nil];
-    self.leftLableDetail.text = [NSString stringWithFormat:@"%.4f%@",[model.avilAmount floatValue],model.symbol];
-    self.beiginLableDetail.text = [NSString stringWithFormat:@"%.2f%@  (%@%@%@)",[model.minAmount floatValue],model.symbol,[LangSwitcher switchLang:@"每人限购" key:nil],model.limitAmount,model.symbol];
-    
-    
+    self.sumLable.text = [LangSwitcher switchLang:@"递增金额" key:nil];
+
+    NSString *salemount = [CoinUtil convertToRealCoin:model.avilAmount coin:coin.symbol];
+
+    self.leftLableDetail.text = [NSString stringWithFormat:@"%.4f%@",[salemount floatValue],model.symbol];
+    NSString *buyAmount = [CoinUtil convertToRealCoin:model.limitAmount coin:coin.symbol];
+    NSString *mAmount = [CoinUtil convertToRealCoin:model.minAmount coin:coin.symbol];
+    NSString *sAmount = [CoinUtil convertToRealCoin:model.increAmount coin:coin.symbol];
+
+    self.beiginLableDetail.text = [NSString stringWithFormat:@"%.2f%@  (%@%@%@)",[mAmount floatValue],model.symbol,[LangSwitcher switchLang:@"每人限购" key:nil],buyAmount,model.symbol];
+      self.leftLableDetail.text = [NSString stringWithFormat:@"%.2f%@",[salemount floatValue],model.symbol];
+       self.sumLableDetail.text = [NSString stringWithFormat:@"%.2f%@",[sAmount floatValue],model.symbol];
 //    self.leaveLable.text =[NSString stringWithFormat:@"%@ %@%@",[LangSwitcher switchLang:@"剩余" key:nil],model.avilAmount,model.symbol];
     //    self.nameLab.text = model.payNote; m1.name = @"币币赢第二期";
 //    m1.symbol = @"BTC";

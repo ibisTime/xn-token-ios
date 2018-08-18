@@ -17,10 +17,12 @@
 #import "TLtakeMoneyModel.h"
 #import "TLMoneyDeailVC.h"
 #import "TLMyRecordVC.h"
+#import "CurrencyModel.h"
 @interface PosMiningVC ()<RefreshDelegate>
 //
 @property (nonatomic, strong) TLPlaceholderView *placeholderView;
 @property (nonatomic, strong) UILabel *titleLable;
+@property (nonatomic, strong) NSMutableArray <CurrencyModel *>*currencys;
 
 @property (nonatomic, strong) UILabel *contentLab;
 @property (nonatomic,strong) NSArray <TLtakeMoneyModel *>*Moneys;
@@ -59,6 +61,7 @@
 //    self.Moneys = self.tableView.Moneys;
 //    [self.tableView reloadData];
     [self getMyCurrencyList];
+    [self getMySyspleList];
     [UIBarButtonItem addRightItemWithTitle:[LangSwitcher switchLang:@"我的理财" key:nil] titleColor:kWhiteColor frame:CGRectMake(0, 0, 80, 40) vc:self action:@selector(myRecodeClick)];
     
 //    self.tableView.
@@ -72,7 +75,7 @@
     
     helper.code = @"625510";
     helper.parameters[@"userId"] = [TLUser user].userId;
-    helper.parameters[@"token"] = [TLUser user].token;
+    helper.parameters[@"status"] = @"appDisplay";
     helper.isCurrency = YES;
     helper.tableView = self.tableView;
     [helper modelClass:[TLtakeMoneyModel class]];
@@ -106,7 +109,7 @@
         
         weakSelf.Moneys = objs;
         weakSelf.tableView.Moneys = objs;
-        weakSelf.tableView.bills = objs;
+//        weakSelf.tableView.bills = objs;
         [weakSelf.tableView reloadData_tl];
         
     } failure:^(NSError *error) {
@@ -115,7 +118,90 @@
         
     }];
     
+    
 }
+
+
+- (void)getMySyspleList {
+    
+    CoinWeakSelf;
+    
+    TLPageDataHelper *helper = [[TLPageDataHelper alloc] init];
+    if (![TLUser user].isLogin) {
+        return;
+    }
+    helper.code = @"802503";
+    helper.parameters[@"userId"] = [TLUser user].userId;
+    helper.parameters[@"token"] = [TLUser user].token;
+    helper.isList = YES;
+    helper.isCurrency = YES;
+    helper.tableView = self.tableView;
+    [helper modelClass:[CurrencyModel class]];
+    [self.tableView addRefreshAction:^{
+        
+        [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
+            
+            //去除没有的币种
+            
+            
+            NSMutableArray <CurrencyModel *> *shouldDisplayCoins = [[NSMutableArray alloc] init];
+            [objs enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                
+                CurrencyModel *currencyModel = (CurrencyModel *)obj;
+                //                if ([[CoinUtil shouldDisplayCoinArray] indexOfObject:currencyModel.currency ] != NSNotFound ) {
+                
+                [shouldDisplayCoins addObject:currencyModel];
+                //                }
+                //查询总资产
+                
+            }];
+         
+            //
+            weakSelf.currencys = shouldDisplayCoins;
+            
+        } failure:^(NSError *error) {
+            
+            
+        }];
+        
+        
+        
+    }];
+    [self.tableView beginRefreshing];
+    
+    [self.tableView addLoadMoreAction:^{
+        helper.parameters[@"userId"] = [TLUser user].userId;
+        helper.parameters[@"token"] = [TLUser user].token;
+        [helper loadMore:^(NSMutableArray *objs, BOOL stillHave) {
+            
+            //去除没有的币种
+            
+            
+            NSMutableArray <CurrencyModel *> *shouldDisplayCoins = [[NSMutableArray alloc] init];
+            [objs enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                
+                CurrencyModel *currencyModel = (CurrencyModel *)obj;
+                //                if ([[CoinUtil shouldDisplayCoinArray] indexOfObject:currencyModel.currency ] != NSNotFound ) {
+                
+                [shouldDisplayCoins addObject:currencyModel];
+                //                }
+                //查询总资产
+                
+            }];
+            
+            //
+            weakSelf.currencys = shouldDisplayCoins;
+           
+        } failure:^(NSError *error) {
+            
+            
+        }];
+        
+    }];
+    
+    
+}
+
 
 - (void)myRecodeClick
 {
@@ -173,7 +259,8 @@
     
     
     TLMoneyDeailVC *money = [TLMoneyDeailVC new];
-    money.moneyModel = self.Moneys[1];
+    money.moneyModel = self.Moneys[indexPath.row];
+    money.currencys = self.currencys;
     money.title = [LangSwitcher switchLang:@"量化产品详情" key:nil];
     [self.navigationController pushViewController:money animated:YES];
     

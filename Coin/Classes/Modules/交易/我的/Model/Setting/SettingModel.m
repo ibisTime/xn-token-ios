@@ -11,5 +11,7 @@
 
 
 @implementation SettingModel
-MJExtensionCodingImplementation
+
+
+
 @end

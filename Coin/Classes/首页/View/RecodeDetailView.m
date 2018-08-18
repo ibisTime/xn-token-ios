@@ -405,31 +405,34 @@
 -(void)setModel:(TLtakeMoneyModel *)model
 {
     _model = model;
-    self.nameLab.text = model.name;
-   
+    self.nameLab.text = model.produceModel.name;
+    CoinModel *coin = [CoinUtil getCoinModel:model.produceModel.symbol];
     self.stateLab.text =  [LangSwitcher switchLang:@"购买成功" key:nil];;
-    [NSString stringWithFormat:@"%@%@",model.limitDays,[LangSwitcher switchLang:@"个月" key:nil]];
+    [NSString stringWithFormat:@"%@%@",model.produceModel.limitDays,[LangSwitcher switchLang:@"个月" key:nil]];
   
     self.desLab.text =   [LangSwitcher switchLang:@"合约编号" key:nil];;
-    self.timeLab.text = @"2018-08-01";
+    self.timeLab.text = model.produceModel.code;
     self.totalLable.text =  [LangSwitcher switchLang:@"产品年限" key:nil];
 
     self.freeLable.text =  [LangSwitcher switchLang:@"交易时间" key:nil];
-    self.freeTime.text = @"2018-09-10";
+    self.freeTime.text = [model.produceModel.createDatetime convertToDetailDate];
     self.buyLab.text =  [LangSwitcher switchLang:@"购买金额" key:nil];
 
-    self.buycount.text =  [NSString stringWithFormat:@"%.4f%@",[model.avilAmount floatValue],model.symbol];
+    NSString *inv = [CoinUtil convertToRealCoin:model.investAmount coin:model.produceModel.symbol];
+    self.buycount.text =  [NSString stringWithFormat:@"%.4f%@",[inv floatValue],model.produceModel.symbol];
 
     self.leaveLable.text = model.name;
-    self.orderLable.text = [NSString stringWithFormat:@"%@%@",model.limitDays,[LangSwitcher switchLang:@"个月" key:nil]];
+    self.orderLable.text = [NSString stringWithFormat:@"%@%@",model.produceModel.limitDays,[LangSwitcher switchLang:@"个月" key:nil]];
     self.leftLable.text = [LangSwitcher switchLang:@"年收益率" key:nil];
     self.beiginLable.text = [LangSwitcher switchLang:@"总收益" key:nil];
-    self.leftLableDetail.text = [NSString stringWithFormat:@"%.4f%@",[model.avilAmount floatValue],model.symbol];
-    self.beiginLableDetail.text = [NSString stringWithFormat:@"%.2f%@  (%@%@%@)",[model.minAmount floatValue],model.symbol,[LangSwitcher switchLang:@"每人限购" key:nil],model.limitAmount,model.symbol];
+    NSString *inall = [CoinUtil convertToRealCoin:model.expectIncome coin:model.produceModel.symbol];
+
+    self.leftLableDetail.text = [NSString stringWithFormat:@"%.2f%%",[model.produceModel.expectYield floatValue]*100];
+    self.beiginLableDetail.text = [NSString stringWithFormat:@"%.2f%@",[inall floatValue],model.produceModel.symbol];
     self.beiginTime.text = [LangSwitcher switchLang:@"起息时间" key:nil];
-    self.beiginTimeLab.text = @"2018-09";
+    self.beiginTimeLab.text = [model.produceModel.incomeDatetime convertToDetailDate ];
     self.endTime.text = [LangSwitcher switchLang:@"到息时间" key:nil];
-    self.endTimeLab.text = @"2018-12";
+    self.endTimeLab.text = [model.produceModel.arriveDatetime convertToDetailDate ];
 
 
     

@@ -10,6 +10,7 @@
 #import "TLMyRecodeTB.h"
 #import "TLtakeMoneyModel.h"
 #import "RecodeDetailVC.h"
+#import "CurrencyModel.h"
 @interface TLMyRecordVC ()<RefreshDelegate>
 
 @property (nonatomic ,strong) TLMyRecodeTB *tableView;
@@ -23,27 +24,7 @@
     [super viewDidLoad];
     
     [self initPliceHodel];
-    TLtakeMoneyModel *m = [TLtakeMoneyModel new];
-    m.name = @"币币赢第一期";
-    m.symbol = @"BTC";
-    m.expectYield = @"0.07";
-    m.minAmount = @"100";
-    m.limitAmount = @"500";
-    m.limitDays = @"360";
-    m.avilAmount = @"1000";
-    
-    TLtakeMoneyModel *m1 = [TLtakeMoneyModel new];
-    m1.name = @"币币赢第二期";
-    m1.symbol = @"BTC";
-    m1.expectYield = @"0.12";
-    m1.minAmount = @"1000";
-    m1.limitAmount = @"5000";
-    
-    m1.limitDays = @"129";
-    m1.avilAmount = @"10000";
-    self.tableView.Moneys = @[m,m1];
-    self.Moneys = self.tableView.Moneys;
-    [self.tableView reloadData];
+    [self getMyCurrencyList];
     
     
     // Do any additional setup after loading the view.
@@ -82,6 +63,78 @@
         make.right.equalTo(self.view.mas_right);
         make.height.equalTo(@(kHeight(66)));
     }];
+}
+- (void)getMyCurrencyList {
+    
+    CoinWeakSelf;
+    
+    TLPageDataHelper *helper = [[TLPageDataHelper alloc] init];
+    
+    helper.code = @"625526";
+    helper.parameters[@"userId"] = [TLUser user].userId;
+    helper.isCurrency = YES;
+    helper.tableView = self.tableView;
+    [helper modelClass:[TLtakeMoneyModel class]];
+    [self.tableView addRefreshAction:^{
+        
+        
+        [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
+            NSMutableArray *mod = [NSMutableArray array];
+            for (int i = 0; i < objs.count; i++) {
+                TLtakeMoneyModel *model =objs[i];
+                TLtakeMoneyModel *m = [TLtakeMoneyModel mj_objectWithKeyValues:model.productInfo];
+                model.produceModel = m;
+                
+                [mod addObject:model];
+
+            }
+            //去除没有的币种
+            
+            
+            weakSelf.Moneys = mod;
+            weakSelf.tableView.Moneys = mod;
+            [weakSelf.tableView reloadData];
+            
+        } failure:^(NSError *error) {
+            
+            
+        }];
+        
+        
+        
+    }];
+    
+    [self.tableView beginRefreshing];
+    
+    [helper loadMore:^(NSMutableArray *objs, BOOL stillHave) {
+        
+        if (weakSelf.tl_placeholderView.superview != nil) {
+            
+            [weakSelf removePlaceholderView];
+        }
+        NSMutableArray *mod = [NSMutableArray array];
+        for (int i = 0; i < objs.count; i++) {
+            TLtakeMoneyModel *model =objs[i];
+            TLtakeMoneyModel *m = [TLtakeMoneyModel mj_objectWithKeyValues:model.productInfo];
+            model.produceModel = m;
+            
+            [mod addObject:model];
+            
+        }
+        //去除没有的币种
+        
+        
+        weakSelf.Moneys = mod;
+        weakSelf.tableView.Moneys = mod;
+        [weakSelf.tableView reloadData_tl];
+        
+    } failure:^(NSError *error) {
+        
+        [weakSelf addPlaceholderView];
+        
+    }];
+    
+    
 }
 
 -(void)refreshTableView:(TLTableView *)refreshTableview didSelectRowAtIndexPath:(NSIndexPath *)indexPath

@@ -210,16 +210,41 @@
 -(void)setModel:(TLtakeMoneyModel *)model
 {
     _model = model;
-    self.nameLab.text = model.name;
-    self.stateLab.text = @"2018-08-18";
+    CoinModel *m = [CoinUtil getCoinModel:model.produceModel.symbol];
+    
+    NSString *inv = [CoinUtil convertToRealCoin:model.investAmount coin:m.symbol];
+    self.nameLab.text = model.produceModel.name;
+    self.stateLab.text = [model.createDatetime convertToDetailDate];
      self.desLab.text = [LangSwitcher switchLang:@"购买金额" key:nil];
-     self.timeLab.text =[NSString stringWithFormat:@"%.0f%%",[model.expectYield floatValue]*100];
+     self.timeLab.text =[NSString stringWithFormat:@"%@%@",inv,m.symbol];
     self.freeLable.text =  [LangSwitcher switchLang:@"总收益" key:nil];
     self.endLable.text = [LangSwitcher switchLang:@"到期时间" key:nil];
-    self.endTimeLable.text = @"2018-08-19";
+    self.endTimeLable.text = [model.produceModel.arriveDatetime convertToDetailDate];;
 
 //    self.timeLab.text =[NSString stringWithFormat:@"%@%@",model.limitDays,[LangSwitcher switchLang:@"个月" key:nil]];
-    self.leaveLable.text = [NSString stringWithFormat:@"%@%@",model.minAmount,model.symbol];
+    NSString *inv2 = [CoinUtil convertToRealCoin:model.expectIncome coin:m.symbol];
+
+    self.leaveLable.text = [NSString stringWithFormat:@"%@%@",inv2,m.symbol];
+    if ([model.status isEqualToString:@"0"]) {
+        
+        [self.moreButton setTitle:[LangSwitcher switchLang:@"申购中" key:nil] forState:UIControlStateNormal];
+        
+    }else if ([model.status isEqualToString:@"1"])
+    {
+        [self.moreButton setTitle:[LangSwitcher switchLang:@"持有中" key:nil] forState:UIControlStateNormal];
+
+        
+    }else if ([model.status isEqualToString:@"已到期"])
+    {
+        [self.moreButton setTitle:[LangSwitcher switchLang:@"" key:nil] forState:UIControlStateNormal];
+
+        
+    }else
+    {
+        [self.moreButton setTitle:[LangSwitcher switchLang:@"募集失败" key:nil] forState:UIControlStateNormal];
+
+        
+    }
     //    self.nameLab.text = model.payNote;
     //    self.nameLab.text = model.payNote;
     //    self.nameLab.text = model.payNote;
