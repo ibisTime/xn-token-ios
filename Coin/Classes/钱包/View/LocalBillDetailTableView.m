@@ -52,17 +52,34 @@ static NSString *identifierCell = @"BillDetailCell";
                          [LangSwitcher switchLang:@"" key:nil]
 
                          ];
-    
-    NSString *dateStr = [_bill.transDatetime convertToDetailDate];
-    
-    NSString *toAdress = _bill.to;
-    NSString *formAdress = _bill.from;
-    NSString *charge = _bill.txFee;
-    NSString *height = _bill.height;
-    NSString *texthash = _bill.txHash;
-
-
-    NSString *postAmount = [CoinUtil convertToRealCoin:_bill.txFee coin:_currentModel.symbol];
+    NSString *dateStr;
+    NSString *toAdress;
+    NSString *formAdress;
+    NSString *charge;
+    NSString *height;
+    NSString *texthash;
+    NSString *postAmount;
+    if ([_bill.tokenSymbol isEqualToString:@"LXT"]) {
+        dateStr = [_bill.createDatetime convertToDetailDate];
+        toAdress = _bill.to;
+        formAdress = _bill.from;
+        charge = _bill.cumulativeGasUsed;
+        height = _bill.blockNumber;
+        texthash = _bill.Hashs;
+        CoinModel *co = [CoinUtil getCoinModel:_currentModel.symbol];
+        postAmount  = [CoinUtil convertToRealCoin:_bill.txFee coin:co.symbol];
+        
+    }else{
+        dateStr = [_bill.transDatetime convertToDetailDate];
+        toAdress = _bill.to;
+        formAdress = _bill.from;
+        charge = _bill.txFee;
+        height = _bill.height;
+        texthash = _bill.txHash;
+        
+        postAmount  = [CoinUtil convertToRealCoin:_bill.txFee coin:_currentModel.symbol];
+    }
+  
     
 //    NSString *preAmount = [CoinUtil convertToRealCoin:_bill.preAmountString coin:_bill.currency];
     

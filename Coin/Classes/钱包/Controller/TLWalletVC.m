@@ -133,6 +133,7 @@
         
         BTCMnemonic *mnemonic =  [MnemonicUtil importMnemonic:words];
         mnemonic.keychain.network = [BTCNetwork testnet];
+        
         NSLog(@"Seed=%@", BTCHexFromData(mnemonic.seed));
         NSLog(@"Mnemonic=%@", mnemonic.words);
         NSLog(@"btc_privateKey=%@", [MnemonicUtil getBtcPrivateKey:mnemonic]);

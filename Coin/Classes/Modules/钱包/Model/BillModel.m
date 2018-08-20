@@ -13,6 +13,15 @@
 #import "utxoModel.h"
 @implementation BillModel
 
++ (NSString *)mj_replacedKeyFromPropertyName121:(NSString *)propertyName {
+    
+    if ([propertyName isEqualToString:@"Hashs"]) {
+        return @"hash";
+    }
+    
+    return propertyName;
+}
+
 +(NSDictionary *)mj_objectClassInArray
 {
     return @{

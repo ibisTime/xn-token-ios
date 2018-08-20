@@ -319,7 +319,7 @@
 
         };
     
-        _headerView.contentSize = CGSizeMake(kScreenWidth, kScreenHeight+50);
+        _headerView.contentSize = CGSizeMake(kScreenWidth, kScreenHeight+100);
 //        self.tableView.tableHeaderView = _headerView;
     }
     return _headerView;

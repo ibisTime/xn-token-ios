@@ -81,11 +81,20 @@
 
 @property (nonatomic, assign) CGFloat rowHeight;
 
+//Token
+@property (nonatomic, copy) NSString *Hashs;
+
+@property (nonatomic, copy) NSString *contractAddress;
+
+@property (nonatomic, copy) NSString *tokenName;
+
+@property (nonatomic, copy) NSString *tokenSymbol;
 
 
+@property (nonatomic, copy) NSString *blockNumber;
 
-
-
+@property (nonatomic, copy) NSString *input;
+@property (nonatomic, copy) NSString *cumulativeGasUsed;
 
 
 - (NSString *)getStatusName;

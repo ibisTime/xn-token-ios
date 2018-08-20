@@ -220,7 +220,8 @@ public class EthCrypto: NSObject
             let keystore = try! BIP32Keystore(mnemonics: mnemonic, password: "BANKEXFOUNDATION", mnemonicsPassword: "")
             let web3Rinkeby = Web3.InfuraRinkebyWeb3()
 //              let web3Rinkeby = Web3.InfuraMainnetWeb3()
-
+            let keystoreManager = KeystoreManager.init([keystore!])
+            web3Rinkeby.addKeystoreManager(keystoreManager)
             var convenienceTransferOptions = Web3Options.defaultOptions()
             convenienceTransferOptions.gasLimit = BigUInt(210000)
 
@@ -311,6 +312,62 @@ public class EthCrypto: NSObject
         }
         
     }
+    
+    //发送WANtoken交易（签名并广播）
+    static public func sendWanTokenTransaction(mnemonic: String,con: String, to: String, amount: String, gasPrice: String, gasLimit: String) -> String? {
+        
+        var txHash : String!
+        //        txHash = "";
+        do{
+            
+            let keystore = try! BIP32Keystore(mnemonics: mnemonic, password: "BANKEXFOUNDATION", mnemonicsPassword: "")
+            
+            let web3Rinkeby = Web3.InfuraRinkebyWeb3()
+            //              let web3Rinkeby = Web3.InfuraMainnetWeb3()
+            let keystoreManager = KeystoreManager.init([keystore!])
+            web3Rinkeby.addKeystoreManager(keystoreManager)
+            
+            var options = Web3Options.defaultOptions()
+            options.Txtype = BigUInt(1)
+            options.gasLimit = BigUInt(21000)
+            options.gasPrice = BigUInt(gasPrice)
+            options.from = keystore?.addresses?.first!
+            let am = BigUInt.init(amount)
+            options.value = am
+            let toaddress = EthereumAddress(to)
+            let convenienceTokenTransfer = web3Rinkeby.eth.sendERC20tokensWithNaturalUnits(tokenAddress: EthereumAddress(con)!, from: (keystore?.addresses?.first!)!, to: EthereumAddress(to)!, amount: amount, options: options)
+//
+//            let intermediateSend = web3Rinkeby?.contract(Web3.Utils.coldWalletABI, at: toaddress, abiVersion: 2)!.method(options: options)!
+//            let sendResult = intermediateSend?.send(password: "BANKEXFOUNDATION")
+//            switch sendResult {
+//            case .success(let r)?:
+//                print("Sucess",r.values.first as Any)
+//                txHash=r.values.first as Any as! String
+//                if txHash != nil {
+//                    txHash =  "1"
+//                } else {
+//                    txHash = "0"
+//                }
+//            //todo 返回交易hash
+//            case .failure(let err)?:
+//                print("Eroor",err)
+            
+                //            if txHash != nil {
+                //                txHash =  "1"
+                //            } else {
+                //                txHash = "0"
+                //            }
+                
+//            case .none: break
+//                
+//            }
+            
+            return txHash;
+            
+        }
+        
+    }
+    
     
 //    public struct Web3s {
 //
