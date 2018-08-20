@@ -38,6 +38,7 @@
 #import "BTCTransactionInput.h"
 #import "BTCNetwork.h"
 #import "BTCKeychain.h"
+#import "BTCHashID.h"
 typedef NS_ENUM(NSInteger, WalletAddressType) {
     
     WalletAddressTypeSelectAddress = 0,       //选择地址
@@ -257,16 +258,7 @@ typedef enum : NSUInteger {
         keychain.network = [BTCNetwork testnet];
         BTCKey *key = keychain.key;
         self.key = key;
-        NSString * str＝_btcPrivate;
-    
-        NSString *pub =  BTCHexFromData(key.publicKey);
-//   = [[NSString alloc] initWithData:key.publicKey encoding:NSUTF8StringEncoding];
-//     char * a =[self.btcPrivate UTF8String];
-////    printf("Private key in hex:\n");
-////    char str[1000] = {self.btcPrivate};
-//    gets(a);
-    
-    NSData* privateKey = BTCDataWithHexCString([@"cQ2QJ8XJ8KQ7cqRER4WF8ezRBfPKs9vGp63eyHFnL9vgXsVEM1UH" UTF8String]);
+    NSData* privateKey = BTCDataFromHex(self.btcPrivate);
     NSLog(@"Private key: %@", privateKey);
     
 //    BTCKey* key = [[BTCKey alloc] initWithPrivateKey:privateKey];
@@ -277,10 +269,10 @@ typedef enum : NSUInteger {
 
     NSLog(@"Address: %@", key.privateKeyAddressTestnet);
     
-    if (![@"cQ2QJ8XJ8KQ7cqRER4WF8ezRBfPKs9vGp63eyHFnL9vgXsVEM1UH" isEqualToString:key.privateKeyAddressTestnet.string]) {
-        NSLog(@"WARNING: incorrect private key is supplied");
-        return;
-    }
+//    if (![@"cQ2QJ8XJ8KQ7cqRER4WF8ezRBfPKs9vGp63eyHFnL9vgXsVEM1UH" isEqualToString:key.privateKeyAddressTestnet.string]) {
+//        NSLog(@"WARNING: incorrect private key is supplied");
+//        return;
+//    }
     [MBProgressHUD hideHUDForView:self.view animated:YES];
     NSError* error = nil;
     BTCTransaction* transaction = [self transactionSpendingFromPrivateKey:privateKey
@@ -298,7 +290,7 @@ typedef enum : NSUInteger {
 
     NSLog(@"transaction = %@", transaction.dictionary);
     NSLog(@"transaction in hex:\n------------------\n%@\n------------------\n", BTCHexFromData([transaction data]));
-    return;
+//    return;
     TLNetworking *net = [TLNetworking new];
     
     
@@ -502,7 +494,7 @@ typedef enum : NSUInteger {
     // Add all outputs as inputs
     for (utxoModel* txout in txouts) {
         BTCTransactionInput* txin = [[BTCTransactionInput alloc] init];
-        txin.previousHash =  BTCDataFromHex(txout.txid);
+        txin.previousHash =  BTCHashFromID(txout.txid);
         txin.previousIndex = [txout.vout intValue];
         [tx addInput:txin];
         
@@ -546,7 +538,7 @@ typedef enum : NSUInteger {
         NSData* d1 = tx.data;
         
         BTCSignatureHashType hashtype = BTCSignatureHashTypeAll;
-        BTCScript *sc = [[BTCScript alloc] initWithString:txout.scriptPubKey];
+        BTCScript *sc = [[BTCScript alloc] initWithData:BTCDataFromHex(txout.scriptPubKey)];
         NSData* hash = [tx signatureHashForScript:sc inputIndex:i hashType:hashtype error:errorOut];
         
         NSData* d2 = tx.data;
@@ -555,6 +547,8 @@ typedef enum : NSUInteger {
         
         // 134675e153a5df1b8e0e0f0c45db0822f8f681a2eb83a0f3492ea8f220d4d3e4
         NSLog(@"Hash for input %d: %@", i, BTCHexFromData(hash));
+        NSLog(@"pubKey: %@", BTCHexFromData(self.key.publicKey));
+
         if (!hash) {
             return nil;
         }
@@ -572,14 +566,17 @@ typedef enum : NSUInteger {
 //     Validate the signatures before returning for extra measure. 在返回额外度量之前验证签名。
     
     
-//    {
-//        BTCScriptMachine* sm = [[BTCScriptMachine alloc] initWithTransaction:tx inputIndex:0];
-//        NSError* error = nil;
-//        BOOL r = [sm verifyWithOutputScript:[[(BTCTransactionOutput*)tx.outputs[0] script] copy] error:&error];
-//        NSLog(@"Error: %@", error);
-//        NSAssert(r, @"should verify first output");
-//    }
-    
+    {
+        BTCScriptMachine* sm = [[BTCScriptMachine alloc] initWithTransaction:tx inputIndex:0];
+        NSError* error = nil;
+        NSString *scriptPubKey = [[txouts objectAtIndex:0] scriptPubKey];
+        BTCScript *script = [[BTCScript alloc] initWithData:BTCDataFromHex(scriptPubKey)];
+        //        BTCScript *script = [[BTCScript alloc] initWithString:scriptPubKey];
+        BOOL r = [sm verifyWithOutputScript:script error:&error];
+        NSLog(@"Error: %@", error);
+        NSAssert(r, @"should verify first output");
+    }
+
 //     Transaction is signed now, return it. 交易现已签署，返回
     
     
