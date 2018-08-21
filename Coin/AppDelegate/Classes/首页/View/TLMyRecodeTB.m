@@ -41,7 +41,7 @@ static NSString *identifierCell = @"RecodeCell";
 
 -(NSInteger)numberOfRowsInSection:(NSInteger)section
 {
-    return 0;
+    return 1;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
@@ -63,7 +63,7 @@ static NSString *identifierCell = @"RecodeCell";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    return kHeight(170);
+    return 200;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

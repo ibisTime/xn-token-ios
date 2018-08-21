@@ -10,6 +10,7 @@
 
 @interface CurrencyModel : TLBaseModel
 
+@property (nonatomic,copy) NSString *name;
 //积分 JF
 //人民币 CNY
 //账户编号

@@ -29,6 +29,8 @@
 
 @property (nonatomic, strong) TLMakeMoney *tableView;
 
+
+@property (nonatomic, strong) TLMakeMoney *tableView1;
 @end
 
 @implementation PosMiningVC
@@ -38,7 +40,7 @@
     self.title = [LangSwitcher switchLang:@"量化理财" key:nil];
     //敬请期待
     [self initPlaceHolderView];
-    
+    [self.view addSubview:self.tableView1];
 //    TLtakeMoneyModel *m = [TLtakeMoneyModel new];
 //    m.name = @"币币赢第一期";
 //    m.symbol = @"BTC";
@@ -79,66 +81,122 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"LOADDATA" object:nil];
 }
 
-- (void)getMyCurrencyList {
-    
+//- (void)getMyCurrencyList {
+//
+//    CoinWeakSelf;
+//
+//    TLPageDataHelper *helper = [[TLPageDataHelper alloc] init];
+//
+//    helper.code = @"625510";
+//    helper.parameters[@"userId"] = [TLUser user].userId;
+//    helper.parameters[@"status"] = @"appDisplay";
+//    helper.isCurrency = YES;
+//    helper.tableView = self.tableView;
+//    [helper modelClass:[TLtakeMoneyModel class]];
+//    [self.tableView addRefreshAction:^{
+//        [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
+//            //去除没有的币种
+//            weakSelf.Moneys = objs;
+//            weakSelf.tableView.Moneys = objs;
+//            [weakSelf.tableView reloadData_tl];
+//
+//        } failure:^(NSError *error) {
+//
+//
+//        }];
+//
+//
+//
+//    }];
+//
+//    [self.tableView beginRefreshing];
+//
+//    [self.tableView addLoadMoreAction:^{
+//        [helper loadMore:^(NSMutableArray *objs, BOOL stillHave) {
+//
+//            if (weakSelf.tl_placeholderView.superview != nil) {
+//
+//                [weakSelf removePlaceholderView];
+//            }
+//
+//
+//            weakSelf.Moneys = objs;
+//            weakSelf.tableView.Moneys = objs;
+//            //        weakSelf.tableView.bills = objs;
+//            [weakSelf.tableView reloadData_tl];
+//
+//        } failure:^(NSError *error) {
+//
+//            [weakSelf addPlaceholderView];
+//
+//        }];
+//    }];
+//
+//    [self.tableView endRefreshingWithNoMoreData_tl];
+//
+//}
+
+-(void)getMyCurrencyList
+{
     CoinWeakSelf;
-    
     TLPageDataHelper *helper = [[TLPageDataHelper alloc] init];
-    
     helper.code = @"625510";
     helper.parameters[@"userId"] = [TLUser user].userId;
     helper.parameters[@"status"] = @"appDisplay";
     helper.isCurrency = YES;
     helper.tableView = self.tableView;
     [helper modelClass:[TLtakeMoneyModel class]];
+
     [self.tableView addRefreshAction:^{
         [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
-            //去除没有的币种
-            weakSelf.Moneys = objs;
-            weakSelf.tableView.Moneys = objs;
-            [weakSelf.tableView reloadData_tl];
+            NSMutableArray <TLtakeMoneyModel *> *shouldDisplayCoins = [[NSMutableArray alloc] init];
+            [objs enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                TLtakeMoneyModel *model = (TLtakeMoneyModel *)obj;
+                [shouldDisplayCoins addObject:model];
+            }];
+//            weakSelf.model = shouldDisplayCoins;
+//            weakSelf.tableView.model = shouldDisplayCoins;
+//            [weakSelf.tableView reloadData_tl];
 
+            weakSelf.Moneys = shouldDisplayCoins;
+            weakSelf.tableView.Moneys = shouldDisplayCoins;
+            //        weakSelf.tableView.bills = objs;
+            [weakSelf.tableView reloadData_tl];
         } failure:^(NSError *error) {
-            
-            
+
         }];
-        
-        
-        
     }];
-   
-    [self.tableView beginRefreshing];
     [self.tableView addLoadMoreAction:^{
+
         helper.parameters[@"userId"] = [TLUser user].userId;
         helper.parameters[@"status"] = @"appDisplay";
         [helper loadMore:^(NSMutableArray *objs, BOOL stillHave) {
+            NSLog(@" ==== %@",objs);
+            NSMutableArray <TLtakeMoneyModel *> *shouldDisplayCoins = [[NSMutableArray alloc] init];
+            [objs enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
 
-            if (weakSelf.tl_placeholderView.superview != nil) {
-
-                [weakSelf removePlaceholderView];
-            }
-
-            weakSelf.Moneys = objs;
-            weakSelf.tableView.Moneys = objs;
+                TLtakeMoneyModel *model = (TLtakeMoneyModel *)obj;
+                [shouldDisplayCoins addObject:model];
+            }];
+            weakSelf.Moneys = shouldDisplayCoins;
+            weakSelf.tableView.Moneys = shouldDisplayCoins;
             //        weakSelf.tableView.bills = objs;
             [weakSelf.tableView reloadData_tl];
 
         } failure:^(NSError *error) {
-
-            [weakSelf addPlaceholderView];
-
         }];
     }];
-
-    
-    
+    [self.tableView beginRefreshing];
 }
 
 
 - (void)getMySyspleList {
     
     CoinWeakSelf;
-    
+
+
+
+
     TLPageDataHelper *helper = [[TLPageDataHelper alloc] init];
     if (![TLUser user].isLogin) {
         return;
@@ -148,7 +206,7 @@
     helper.parameters[@"token"] = [TLUser user].token;
     helper.isList = YES;
     helper.isCurrency = YES;
-    helper.tableView = self.tableView;
+    helper.tableView = self.tableView1;
     [helper modelClass:[CurrencyModel class]];
     [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
 
@@ -214,6 +272,26 @@
     VC.title = [LangSwitcher switchLang:@"我的理财" key:nil];
     [self.navigationController pushViewController:VC animated:YES];
     
+}
+
+- (TLMakeMoney *)tableView1 {
+
+    if (!_tableView1) {
+
+        _tableView1 = [[TLMakeMoney alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+
+        //        _tableView.placeHolderView = self.placeHolderView;
+        _tableView1.refreshDelegate = self;
+        _tableView1.backgroundColor = kWhiteColor;
+        _tableView1.frame = CGRectMake(0, 0, 0, 0);
+        [self.view addSubview:_tableView1];
+//        [_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+//
+//            make.edges.mas_equalTo(UIEdgeInsetsMake(0, 15, 0, 15));
+//        }];
+
+    }
+    return _tableView1;
 }
 
 - (TLMakeMoney *)tableView {
