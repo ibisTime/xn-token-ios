@@ -57,6 +57,7 @@
 
     [self setUpUI];
     [self loadData];
+    [self configData];
     if ([TLUser user].mobile) {
         
         self.phoneTf.enabled = NO;
@@ -86,7 +87,42 @@
     }
     
 }
-
+- (void)configData
+{
+    
+    BOOL isChoose =  [[NSUserDefaults standardUserDefaults] boolForKey:@"chooseCoutry"];
+    
+    if (isChoose == YES) {
+        
+        NSData *data   =  [[NSUserDefaults standardUserDefaults] objectForKey:@"chooseModel"];
+        CountryModel *model = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        
+        if (model) {
+            NSString *url = [model.pic convertImageUrl];
+            [self.pic sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:kImage(@"中国国旗")];
+            self.PhoneCode.text = [NSString stringWithFormat:@"+%@",[model.interCode substringFromIndex:2]];
+            
+        }
+    }else{
+        NSData *data   =  [[NSUserDefaults standardUserDefaults] objectForKey:@"chooseModel"];
+        CountryModel *model = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        if (model) {
+            NSString *url = [model.pic convertImageUrl];
+            [self.pic sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:kImage(@"中国国旗")];
+            self.PhoneCode.text = [NSString stringWithFormat:@"+%@",[model.interCode substringFromIndex:2]];
+            
+            
+        }else{
+            //
+            CountryModel *model = self.countrys[0];
+            self.pic.image = kImage(@"中国国旗");
+            self.PhoneCode.text  = @"+86";
+            
+            
+        }
+        
+    }
+}
 - (void)initTop
 {
     
@@ -144,8 +180,8 @@
     UIImageView *pic = [[UIImageView alloc] init];
     self.pic = pic;
     pic.userInteractionEnabled = YES;
-    NSString *url = [NSString stringWithFormat:@"%@.png",[TLUser user].userId];
-    [pic sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:kImage(@"中国国旗")];
+//    NSString *url = [NSString stringWithFormat:@"%@.png",[TLUser user].userId];
+//    [pic sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:kImage(@"中国国旗")];
 //    pic.image = kImage(@"中国国旗");
     UITapGestureRecognizer *tap3 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(chooseCountry)];
     
