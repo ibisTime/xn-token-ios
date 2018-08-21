@@ -81,51 +81,51 @@
 - (void)loadData
 {
     
+//
+//
+//    TLNetworking *net = [TLNetworking new];
+//    net.showView = self.view;
+//    net.code = @"801120";
+//    net.isLocal = YES;
+//    net.ISparametArray = YES;
+//    net.parameters[@"status"] = @"1";
+//    [net postWithSuccess:^(id responseObject) {
+//        self.countrys = [CountryModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
+////        self.countrys = [CountryModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
+//
+////
+//
+//        for (int i = 0; i < self.countrys.count; i++) {
+//
+//            if ([dic isEqualToString:self.countrys[i].interSimpleCode]) {
+//                NSData *data = [NSKeyedArchiver archivedDataWithRootObject:self.countrys[i]];
+//
+//                [[NSUserDefaults standardUserDefaults] setObject:data forKey:@"chooseModel"];
+//                [[NSUserDefaults standardUserDefaults] synchronize];
+////
+//                NSString *str = self.countrys[i].interSimpleCode;
+//                if ([str isEqualToString:@"CN"] || [str hasPrefix:@"CN"]) {
+//                    [LangSwitcher changLangType:LangTypeSimple];
+//                }else if ([str isEqualToString:@"KR"])
+//                {
+//                    [LangSwitcher changLangType:LangTypeKorean];
+//
+//
+//                }else{
+//
+//                    [LangSwitcher changLangType:LangTypeEnglish];
+//
+//                }
+//
+//            }else{
+//
+//                //
+//                [LangSwitcher changLangType:LangTypeEnglish];
+//
+//            }
+//
+//
     
-    TLNetworking *net = [TLNetworking new];
-    net.showView = self.view;
-    net.code = @"801120";
-    net.isLocal = YES;
-    net.ISparametArray = YES;
-    net.parameters[@"status"] = @"1";
-    [net postWithSuccess:^(id responseObject) {
-        self.countrys = [CountryModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
-        NSString *dic = [self getWANIP];
-        
-//
-
-        for (int i = 0; i < self.countrys.count; i++) {
-
-            if ([dic isEqualToString:self.countrys[i].interSimpleCode]) {
-                NSData *data = [NSKeyedArchiver archivedDataWithRootObject:self.countrys[i]];
-
-                [[NSUserDefaults standardUserDefaults] setObject:data forKey:@"chooseModel"];
-                [[NSUserDefaults standardUserDefaults] synchronize];
-//
-                NSString *str = self.countrys[i].interSimpleCode;
-                if ([str isEqualToString:@"CN"] || [str hasPrefix:@"CN"]) {
-                    [LangSwitcher changLangType:LangTypeSimple];
-                }else if ([str isEqualToString:@"KR"])
-                {
-                    [LangSwitcher changLangType:LangTypeKorean];
-
-                    
-                }else{
-                    
-                    [LangSwitcher changLangType:LangTypeEnglish];
-
-                }
-                
-            }else{
-                
-                //
-                [LangSwitcher changLangType:LangTypeEnglish];
-
-            }
-            
-            
-        }
-        
         [self configUpdate];
 
         
@@ -144,11 +144,11 @@
         //        NSString *str = [NSString stringWithFormat:@"%@", responseObject[@"data"]];
         //        [[NSNotificationCenter defaultCenter] postNotificationName:@"RealNameAuthResult" object:str];
         
-    } failure:^(NSError *error) {
-        
-        [self configUpdate];
-
-    }];
+//
+//    } failure:^(NSError *error) {
+//
+//        [self configUpdate];
+//
     
     
     

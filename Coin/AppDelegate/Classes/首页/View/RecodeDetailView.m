@@ -409,6 +409,30 @@
     CoinModel *coin = [CoinUtil getCoinModel:model.produceModel.symbol];
     self.stateLab.text =  [LangSwitcher switchLang:@"购买成功" key:nil];;
     [NSString stringWithFormat:@"%@%@",model.produceModel.limitDays,[LangSwitcher switchLang:@"天" key:nil]];
+    
+    if ([model.status isEqualToString:@"0"]) {
+        
+        self.stateLab.text =  [LangSwitcher switchLang:@"申购中" key:nil];;
+
+    }else if ([model.status isEqualToString:@"1"])
+    {
+        self.stateLab.text =  [LangSwitcher switchLang:@"购买成功" key:nil];;
+
+        
+    }else if ([model.status isEqualToString:@"已到期"])
+    {
+        self.stateLab.text =  [LangSwitcher switchLang:@"已到期" key:nil];;
+
+        
+    }else
+    {
+        self.stateLab.text =  [LangSwitcher switchLang:@"募集失败" key:nil];;
+
+        
+    }
+    
+    [NSString stringWithFormat:@"%@%@",model.produceModel.limitDays,[LangSwitcher switchLang:@"天" key:nil]];
+
   
     self.desLab.text =   [LangSwitcher switchLang:@"合约编号" key:nil];;
     self.timeLab.text = model.produceModel.code;

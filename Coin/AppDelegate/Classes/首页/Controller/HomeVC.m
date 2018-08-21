@@ -352,45 +352,58 @@
                 
             };
             [self.navigationController pushViewController:pwdRelatedVC animated:YES];
-            
+            return;
             
         }else{
             
             [self.navigationController pushViewController:redEnvelopeVC animated:YES];
             
-            
+            return;
+
         }
 
-        return;
+//        return;
     }
     
     if ([model.action isEqualToString:@"none"]) {
-        if ([model.name isEqualToString:@"首创玩法"]) {
             HTMLStrVC *vc = [HTMLStrVC new];
-            vc.type = HTMLTypeGlobal_master;
+            vc.title = model.name;
+            vc.name = model.name;
             vc.des = model.Description;
+        
             [self.navigationController pushViewController:vc animated:YES];
-        }else if ([model.name isEqualToString:@"量化理财"])
-        {
-            PosMiningVC *vc = [PosMiningVC new];
-
-//            HTMLStrVC *vc = [HTMLStrVC new];
-//            vc.des = model.Description;
-//            vc.type = HTMLTypeQuantitative_finance;
-            [self.navigationController pushViewController:vc animated:YES];
-        }
-        else if ([model.name isEqualToString:@"余币宝"])
-        {
-            HTMLStrVC *vc = [HTMLStrVC new];
-            vc.des = model.Description;
-            
-            vc.type = HTMLTypeYubibao;
-            
-            [self.navigationController pushViewController:vc animated:YES];
-            
-        }
         return;
-    }
+        
+    }else{
+         if ([model.action isEqualToString:@"money_manager"])
+         {
+             PosMiningVC *vc = [PosMiningVC new];
+             
+             
+             if ([[TLUser user].tradepwdFlag isEqualToString:@"0"]) {
+                 TLPwdType pwdType = TLPwdTypeSetTrade;
+                 TLPwdRelatedVC *pwdRelatedVC = [[TLPwdRelatedVC alloc] initWithType:pwdType];
+                 
+                 pwdRelatedVC.isWallet = YES;
+                 pwdRelatedVC.success = ^{
+                     
+                     
+                     //                    [self presentViewController:redEnvelopeVC animated:YES completion:nil];
+                     [self.navigationController pushViewController:vc animated:YES];
+                     
+                 };
+                 [self.navigationController pushViewController:pwdRelatedVC animated:YES];
+                 
+                 
+             }else{
+                 [self.navigationController pushViewController:vc animated:YES];
+                 
+             }
+             
+             return;
+         }
+        
+        }
     
     switch (type) {
             
@@ -455,11 +468,31 @@
         case HomeEventsTypePosMining:
         {
             PosMiningVC *vc = [PosMiningVC new];
+            
+            
+            if ([[TLUser user].tradepwdFlag isEqualToString:@"0"]) {
+                TLPwdType pwdType = TLPwdTypeSetTrade;
+                TLPwdRelatedVC *pwdRelatedVC = [[TLPwdRelatedVC alloc] initWithType:pwdType];
+                
+                pwdRelatedVC.isWallet = YES;
+                pwdRelatedVC.success = ^{
+                    
+                    
+                    //                    [self presentViewController:redEnvelopeVC animated:YES completion:nil];
+                    [self.navigationController pushViewController:vc animated:YES];
+                    
+                };
+            
 //            HTMLStrVC *vc = [HTMLStrVC new];
 //            vc.des = model.Description;
 //            vc.type = HTMLTypeQuantitative_finance;
-            [self.navigationController pushViewController:vc animated:YES];
-        }break;
+            }else{
+                [self.navigationController pushViewController:vc animated:YES];
+
+                
+            }
+        }
+            break;
         case HomeEventsTypeRedEnvelope:
         {
             HTMLStrVC *vc = [HTMLStrVC new];
