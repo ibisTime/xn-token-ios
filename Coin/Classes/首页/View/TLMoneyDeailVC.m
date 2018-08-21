@@ -448,7 +448,14 @@
     UILabel *moneyLab = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextBlack font:16];
     CoinModel *coin = [CoinUtil getCoinModel:self.currencyModel.currency];
     self.moneyLab = moneyLab;
-    NSString *mon = [CoinUtil convertToRealCoin:self.currencyModel.amountString coin:coin.symbol];
+//    NSString *mon = [CoinUtil convertToRealCoin:self.currencyModel.amountString coin:coin.symbol];
+    
+    NSString *leftAmount = [self.currencyModel.amountString subNumber:self.currencyModel.frozenAmountString];
+    
+    //
+    NSString *mon = [CoinUtil convertToRealCoin:leftAmount coin:self.currencyModel.currency];
+    
+    
     moneyLab.text = mon;
     [whiteView addSubview:moneyLab];
     [moneyLab mas_makeConstraints:^(MASConstraintMaker *make) {

@@ -110,14 +110,17 @@
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
     TLDataBase *dataBase = [TLDataBase sharedManager];
     NSString *word;
+    NSString *btcadd;
+
     if ([dataBase.dataBase open]) {
-        NSString *sql = [NSString stringWithFormat:@"SELECT Mnemonics from THAUser where userId = '%@'",[TLUser user].userId];
+        NSString *sql = [NSString stringWithFormat:@"SELECT Mnemonics,btcaddress  from THAUser where userId = '%@'",[TLUser user].userId];
         //        [sql appendString:[TLUser user].userId];
         FMResultSet *set = [dataBase.dataBase executeQuery:sql];
         while ([set next])
         {
             word = [set stringForColumn:@"Mnemonics"];
-            
+            btcadd = [set stringForColumn:@"btcaddress"];
+
         }
         [set close];
     }
@@ -125,10 +128,10 @@
 //    [self queryTotalAmount];
     if (word != nil && word.length > 0) {
         BOOL HasChecked =  [[NSUserDefaults standardUserDefaults] boolForKey:KIS170];
-
-        if (HasChecked == YES) {
+        if (btcadd != nil && btcadd.length > 0) {
             return;
         }
+        
         NSArray *words = [word componentsSeparatedByString:@" "];
         
         BTCMnemonic *mnemonic =  [MnemonicUtil importMnemonic:words];
