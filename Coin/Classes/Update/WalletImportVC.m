@@ -46,6 +46,8 @@
 
 @property (nonatomic ,strong) UIButton *introduceButton;
 
+@property (nonatomic,copy)NSString *isSelect;
+
 @end
 
 @implementation WalletImportVC
@@ -159,24 +161,37 @@
 //    phone5.frame = CGRectMake(margin*2, introduceTf.yy, w-30, 1);
     
     
-    
+    _isSelect = @"0";
     self.introduceButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [self.view addSubview:self.introduceButton];
-    NSString *text3 =  [LangSwitcher switchLang:@"我已阅读并同意服务及隐私条款" key:nil];
+//    NSString *text3 =  [LangSwitcher switchLang:@"我已阅读并同意服务及隐私条款" key:nil];
     [self.introduceButton setImage:kImage(@"打勾 圆") forState:UIControlStateNormal];
+    [self.introduceButton setImage:kImage(@"未选中") forState:UIControlStateSelected];
     
-    [self.introduceButton setTitle:text3 forState:UIControlStateNormal];
-    [self.introduceButton addTarget:self action:@selector(html5Pri) forControlEvents:UIControlEventTouchUpInside];
-    self.introduceButton.titleLabel.font = [UIFont systemFontOfSize:12];
-    [self.introduceButton setTitleColor:kAppCustomMainColor forState:UIControlStateNormal];
+//    [self.introduceButton setTitle:text3 forState:UIControlStateNormal];
+
+    [self.introduceButton addTarget:self action:@selector(html5Pri:) forControlEvents:UIControlEventTouchUpInside];
+//    self.introduceButton.titleLabel.font = [UIFont systemFontOfSize:12];
+//    [self.introduceButton setTitleColor:kAppCustomMainColor forState:UIControlStateNormal];
     [self.introduceButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(rePwdTf.mas_bottom).offset(15);
         make.left.equalTo(self.view.mas_left).offset(15);
-        make.width.equalTo(@(207));
+        make.width.equalTo(@(30));
         make.height.equalTo(@30);
         
     }];
-    
+
+    UIButton *button = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"我已阅读并同意服务及隐私条款" key:nil] titleColor:kAppCustomMainColor backgroundColor:kClearColor titleFont:12];
+    button.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    [button addTarget:self action:@selector(buttonClick) forControlEvents:(UIControlEventTouchUpInside)];
+    [self.view addSubview:button];
+    [button mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(rePwdTf.mas_bottom).offset(15);
+        make.left.equalTo(self.introduceButton.mas_right).offset(0);
+        make.width.equalTo(@(SCREEN_WIDTH - 60));
+        make.height.equalTo(@30);
+
+    }];
     
 //    self.nameLable.text = [LangSwitcher switchLang:@"请输入导入的钱包助记词 (12个英文单词)  , 按空格分离" key:nil];
 //    NSMutableParagraphStyle  *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
@@ -237,6 +252,7 @@
 //    self.introduceButton.layer.borderColor = (kAppCustomMainColor.CGColor);
 //    self.introduceButton.layer.borderWidth = 1;
 //    self.introduceButton.clipsToBounds = YES;
+
     [self.view addSubview:self.introduceButton];
     [self.introduceButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.importButton.mas_bottom).offset(26);
@@ -249,7 +265,12 @@
 }
 - (void)importNow
 {
-    
+    if (![self.isSelect isEqualToString:@"1"]) {
+
+        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请先阅读并同意服务条款" key:nil]];
+
+        return;
+    }
     if (!self.nameTf.text) {
 
         [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入钱包名称" key:nil]];
@@ -380,15 +401,25 @@
     
 }
 
-- (void)html5Pri
+- (void)html5Pri:(UIButton *)sender
+{
+    sender.selected = !sender.selected;
+    if (sender.selected == YES)
+    {
+        _isSelect = @"0";
+    }else
+    {
+        _isSelect = @"1";
+    }
+
+}
+
+-(void)buttonClick
 {
     HTMLStrVC *htmlVC = [[HTMLStrVC alloc] init];
     self.navigationController.navigationBar.hidden = NO;
-    
     htmlVC.type = HTMLTypePrivacy;
-    
     [self.navigationController pushViewController:htmlVC animated:YES];
-    
 }
 
 

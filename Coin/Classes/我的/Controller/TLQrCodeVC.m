@@ -184,7 +184,7 @@
     }];
     
     self.nameLable = [[UILabel alloc]init];
-    self.nameLable.text = [LangSwitcher switchLang:@"我是i3,邀请您使THA钱包" key:nil];
+    self.nameLable.text = [LangSwitcher switchLang:@"我是i3,邀请您使用THA钱包" key:nil];
     self.nameLable.textAlignment = NSTextAlignmentCenter;
     self.nameLable.font = Font(14);
     self.nameLable.textColor = kTextBlack;

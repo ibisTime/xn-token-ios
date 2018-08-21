@@ -65,6 +65,18 @@
     [UIBarButtonItem addRightItemWithTitle:[LangSwitcher switchLang:@"我的理财" key:nil] titleColor:kWhiteColor frame:CGRectMake(0, 0, 80, 40) vc:self action:@selector(myRecodeClick)];
     
 //    self.tableView.
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(InfoNotificationAction:) name:@"LOADDATA" object:nil];
+}
+
+#pragma mark -- 接收到通知
+- (void)InfoNotificationAction:(NSNotification *)notification{
+    [self getMyCurrencyList];
+}
+
+#pragma mark -- 删除通知
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"LOADDATA" object:nil];
 }
 
 - (void)getMyCurrencyList {
@@ -80,15 +92,12 @@
     helper.tableView = self.tableView;
     [helper modelClass:[TLtakeMoneyModel class]];
     [self.tableView addRefreshAction:^{
-        
-        
         [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
-            
             //去除没有的币种
             weakSelf.Moneys = objs;
             weakSelf.tableView.Moneys = objs;
             [weakSelf.tableView reloadData_tl];
-            
+
         } failure:^(NSError *error) {
             
             
@@ -99,24 +108,28 @@
     }];
    
     [self.tableView beginRefreshing];
-    
-    [helper loadMore:^(NSMutableArray *objs, BOOL stillHave) {
-        
-        if (weakSelf.tl_placeholderView.superview != nil) {
-            
-            [weakSelf removePlaceholderView];
-        }
-        
-        weakSelf.Moneys = objs;
-        weakSelf.tableView.Moneys = objs;
-//        weakSelf.tableView.bills = objs;
-        [weakSelf.tableView reloadData_tl];
-        
-    } failure:^(NSError *error) {
-        
-        [weakSelf addPlaceholderView];
-        
+    [self.tableView addLoadMoreAction:^{
+        helper.parameters[@"userId"] = [TLUser user].userId;
+        helper.parameters[@"status"] = @"appDisplay";
+        [helper loadMore:^(NSMutableArray *objs, BOOL stillHave) {
+
+            if (weakSelf.tl_placeholderView.superview != nil) {
+
+                [weakSelf removePlaceholderView];
+            }
+
+            weakSelf.Moneys = objs;
+            weakSelf.tableView.Moneys = objs;
+            //        weakSelf.tableView.bills = objs;
+            [weakSelf.tableView reloadData_tl];
+
+        } failure:^(NSError *error) {
+
+            [weakSelf addPlaceholderView];
+
+        }];
     }];
+
     
     
 }
@@ -137,68 +150,60 @@
     helper.isCurrency = YES;
     helper.tableView = self.tableView;
     [helper modelClass:[CurrencyModel class]];
-    [self.tableView addRefreshAction:^{
-        
-        [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
-            
-            //去除没有的币种
-            
-            
-            NSMutableArray <CurrencyModel *> *shouldDisplayCoins = [[NSMutableArray alloc] init];
-            [objs enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                
-                CurrencyModel *currencyModel = (CurrencyModel *)obj;
-                //                if ([[CoinUtil shouldDisplayCoinArray] indexOfObject:currencyModel.currency ] != NSNotFound ) {
-                
-                [shouldDisplayCoins addObject:currencyModel];
-                //                }
-                //查询总资产
-                
-            }];
-         
-            //
-            weakSelf.currencys = shouldDisplayCoins;
-            
-        } failure:^(NSError *error) {
-            
-            
+    [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
+
+        //去除没有的币种
+
+
+        NSMutableArray <CurrencyModel *> *shouldDisplayCoins = [[NSMutableArray alloc] init];
+        [objs enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+
+            CurrencyModel *currencyModel = (CurrencyModel *)obj;
+            //                if ([[CoinUtil shouldDisplayCoinArray] indexOfObject:currencyModel.currency ] != NSNotFound ) {
+
+            [shouldDisplayCoins addObject:currencyModel];
+            //                }
+            //查询总资产
         }];
-        
-        
-        
-    }];
-    [self.tableView beginRefreshing];
-    
-    [self.tableView addLoadMoreAction:^{
-        helper.parameters[@"userId"] = [TLUser user].userId;
-        helper.parameters[@"token"] = [TLUser user].token;
-        [helper loadMore:^(NSMutableArray *objs, BOOL stillHave) {
-            
-            //去除没有的币种
-            
-            
-            NSMutableArray <CurrencyModel *> *shouldDisplayCoins = [[NSMutableArray alloc] init];
-            [objs enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                
-                CurrencyModel *currencyModel = (CurrencyModel *)obj;
-                //                if ([[CoinUtil shouldDisplayCoinArray] indexOfObject:currencyModel.currency ] != NSNotFound ) {
-                
-                [shouldDisplayCoins addObject:currencyModel];
-                //                }
-                //查询总资产
-                
-            }];
-            
-            //
-            weakSelf.currencys = shouldDisplayCoins;
-           
-        } failure:^(NSError *error) {
-            
-            
-        }];
-        
+
+        //
+        weakSelf.currencys = shouldDisplayCoins;
+
+    } failure:^(NSError *error) {
+
+
     }];
     
+//    [self.tableView addLoadMoreAction:^{
+//        helper.parameters[@"userId"] = [TLUser user].userId;
+//        helper.parameters[@"token"] = [TLUser user].token;
+//        [helper loadMore:^(NSMutableArray *objs, BOOL stillHave) {
+//
+//            //去除没有的币种
+//
+//
+//            NSMutableArray <CurrencyModel *> *shouldDisplayCoins = [[NSMutableArray alloc] init];
+//            [objs enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+//
+//                CurrencyModel *currencyModel = (CurrencyModel *)obj;
+//                //                if ([[CoinUtil shouldDisplayCoinArray] indexOfObject:currencyModel.currency ] != NSNotFound ) {
+//
+//                [shouldDisplayCoins addObject:currencyModel];
+//                //                }
+//                //查询总资产
+//
+//            }];
+//
+//            //
+//            weakSelf.currencys = shouldDisplayCoins;
+//
+//        } failure:^(NSError *error) {
+//
+//
+//        }];
+//
+//    }];
+
     
 }
 

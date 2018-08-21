@@ -173,6 +173,7 @@
         
         //获取banner列表
         [self requestBannerList];
+
         
     } failure:^{
         
@@ -225,7 +226,10 @@
         NSLog(@"%@",self.findModels);
         self.headerView.findModels = self.findModels;
         [self.tableView endRefreshHeader];
-        self.headerView.contentSize = CGSizeMake(0, kScreenHeight + self.findModels.count%4*110);
+        self.headerView.contentSize = CGSizeMake(0,  self.findModels.count * 110  + kHeight(138));
+        self.headerView.frame = CGRectMake(0, 0, kScreenWidth - 30, self.findModels.count * 110 + 65  + kHeight(138));
+
+
         
     } failure:^(NSError *error) {
         [self.tableView endRefreshHeader];
@@ -265,14 +269,16 @@
     self.nameLable.textColor = kTextBlack;
     [self.bgImage addSubview:self.nameLable];
     
-    self.tableView = [[HomeTableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
+    self.tableView = [[HomeTableView alloc] initWithFrame:CGRectMake(15, kHeight(80), kScreenWidth, kScreenHeight - kHeight(80) - kTabBarHeight) style:UITableViewStyleGrouped];
     self.tableView.backgroundColor = kWhiteColor;
-    [self.view addSubview:self.headerView];
+//    [self.view addSubview:self.headerView];
+
 
 //        self.tableView.tableHeaderView = self.headerView;
 //    self.tableView.refreshDelegate = self;
 //        [self.tableView adjustsContentInsets];
     [self.view addSubview:self.tableView];
+    self.tableView.tableHeaderView = self.headerView;
 //        [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
 //            make.edges.mas_equalTo(UIEdgeInsetsZero);
 //        }];
@@ -282,6 +288,7 @@
         [CoinUtil refreshOpenCoinList:^{
             //获取banner列表
             [weakSelf requestBannerList];
+            [weakSelf reloadFindData];
         } failure:^{
             [weakSelf.tableView endRefreshHeader];
         }];
@@ -312,14 +319,14 @@
         
         CoinWeakSelf;
         //头部
-        _headerView = [[HomeHeaderView alloc] initWithFrame:CGRectMake(15, kHeight(80), kScreenWidth, kScreenHeight)];
+        _headerView = [[HomeHeaderView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth - 30, 4 * 110 + 65 + kHeight(138))];
         
         _headerView.headerBlock = ^(HomeEventsType type, NSInteger index, HomeFindModel *find) {
             [weakSelf headerViewEventsWithType:type index:index model:find];
 
         };
-    
-        _headerView.contentSize = CGSizeMake(kScreenWidth, kScreenHeight+100);
+         _headerView.scrollEnabled = NO;
+//        _headerView.contentSize = CGSizeMake(kScreenWidth, kScreenHeight+100);
 //        self.tableView.tableHeaderView = _headerView;
     }
     return _headerView;
@@ -491,8 +498,8 @@
         self.headerView.banners = self.bannerRoom;
         
         //获取官方钱包总量，已空投量
-        [self requestCountInfo];
-        
+//        [self requestCountInfo];
+
     } failure:^(NSError *error) {
         
         [self.tableView endRefreshHeader];
@@ -505,41 +512,41 @@
 /**
  获取官方钱包总量，已空投量
  */
-- (void)requestCountInfo {
-    
-    NSString *symbol = @"OGC";
-    NSArray *tokens = [CoinUtil shouldDisplayTokenCoinArray];
-    if (tokens.count > 0) {
-        symbol = [[CoinUtil shouldDisplayTokenCoinArray] objectAtIndex:0];
-    }
-    
-    TLNetworking *http = [TLNetworking new];
-
-    http.code = @"802906";
-    http.parameters[@"currency"] = symbol;
-
-    [http postWithSuccess:^(id responseObject) {
-
-        CountInfoModel *countInfo = [CountInfoModel mj_objectWithKeyValues:responseObject[@"data"]];
-
-        self.headerView.countInfo = countInfo;
-        [self.tableView endRefreshHeader];
-
-    } failure:^(NSError *error) {
-        [self.tableView endRefreshHeader];
-    }];
-    
-    /*未完成功能，模拟数据*/
-//    CountInfoModel *countInfo = [[CountInfoModel alloc] init];
-//    countInfo.initialBalance = @"100000000000000";
-//    countInfo.useBalance = @"60000000000000";
-//    countInfo.useRate = @"0.6";
-    
-//    self.headerView.countInfo = countInfo;
-    
-    [TLProgressHUD dismiss];
-    
-}
+//- (void)requestCountInfo {
+//
+//    NSString *symbol = @"OGC";
+//    NSArray *tokens = [CoinUtil shouldDisplayTokenCoinArray];
+//    if (tokens.count > 0) {
+//        symbol = [[CoinUtil shouldDisplayTokenCoinArray] objectAtIndex:0];
+//    }
+//
+//    TLNetworking *http = [TLNetworking new];
+//
+//    http.code = @"802906";
+//    http.parameters[@"currency"] = symbol;
+//
+//    [http postWithSuccess:^(id responseObject) {
+//
+//        CountInfoModel *countInfo = [CountInfoModel mj_objectWithKeyValues:responseObject[@"data"]];
+//
+//        self.headerView.countInfo = countInfo;
+//        [self.tableView endRefreshHeader];
+//
+//    } failure:^(NSError *error) {
+//        [self.tableView endRefreshHeader];
+//    }];
+//
+//    /*未完成功能，模拟数据*/
+////    CountInfoModel *countInfo = [[CountInfoModel alloc] init];
+////    countInfo.initialBalance = @"100000000000000";
+////    countInfo.useBalance = @"60000000000000";
+////    countInfo.useRate = @"0.6";
+//
+////    self.headerView.countInfo = countInfo;
+//
+//    [TLProgressHUD dismiss];
+//
+//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

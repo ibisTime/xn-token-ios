@@ -234,8 +234,8 @@
 //
 //    }
 
-    self.dayLbl.text = [_billModel.transDatetime convertDateWithFormat:@"dd日"];
-    self.timeLbl.text = [_billModel.transDatetime convertDateWithFormat:@"HH:mm"];
+//    self.dayLbl.text = [_billModel.transDatetime convertRedDate];
+    self.timeLbl.text = [_billModel.transDatetime convertRedDate];
     
     if ([billModel.direction isEqualToString:@"0"]) {
         self.detailLbl.text = [LangSwitcher switchLang:[NSString stringWithFormat:@"转账"] key:nil]; ;

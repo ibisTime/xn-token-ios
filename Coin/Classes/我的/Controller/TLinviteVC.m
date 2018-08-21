@@ -58,7 +58,7 @@
     bgView.userInteractionEnabled = YES;
     bgView.contentMode = UIViewContentModeScaleToFill;
     
-    bgView.image = kImage(@"iPhone 8-背景");
+    bgView.image = kImage(@"邀请好友背景");
     [self.view addSubview:bgView];
     bgView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
 
@@ -90,15 +90,29 @@
     self.nameLable.textColor = kWhiteColor;
     [self.bgImage addSubview:self.nameLable];
 //    iPhone 8-背景@2x@2x
+
+    UILabel *invitationLabel = [UILabel labelWithFrame:CGRectMake(0, kNavigationBarHeight + 21, SCREEN_WIDTH, 52) textAligment:(NSTextAlignmentCenter) backgroundColor:kClearColor font:FONT(30) textColor:kWhiteColor];
+    invitationLabel.text = @"邀请有礼";
+    [self.bgView addSubview:invitationLabel];
+
+    UILabel *introduceLabel = [UILabel labelWithFrame:CGRectMake(0, kNavigationBarHeight + 21 + 52, SCREEN_WIDTH, 52) textAligment:(NSTextAlignmentCenter) backgroundColor:kClearColor font:FONT(30) textColor:kWhiteColor];
+    introduceLabel.text = @"注册THA钱包";
+    [self.bgView addSubview:introduceLabel];
+
+
+
     
-    
-    UIButton *inviteButton = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"海报邀请" key:nil] titleColor:kWhiteColor backgroundColor:kHexColor(@"#F19001") titleFont:16.0];
+    UIButton *inviteButton = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"海报邀请" key:nil] titleColor:kWhiteColor backgroundColor:kHexColor(@"#F59D14") titleFont:16.0];
     
     [inviteButton addTarget:self action:@selector(inviteButtonClick) forControlEvents:UIControlEventTouchUpInside];
+    inviteButton.frame = CGRectMake(27, SCREEN_HEIGHT - 138, SCREEN_WIDTH/2 - 54, 50);
 
-     UIButton *sendInviteButton = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"发红包邀请好友" key:nil] titleColor:kWhiteColor backgroundColor:kHexColor(@"#F19001") titleFont:16.0];
+     UIButton *sendInviteButton = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"发红包邀请好友" key:nil] titleColor:kWhiteColor backgroundColor:kHexColor(@"#F59D14") titleFont:16.0];
     
     [sendInviteButton addTarget:self action:@selector(sendinviteButtonClick) forControlEvents:UIControlEventTouchUpInside];
+
+    sendInviteButton.frame = CGRectMake(SCREEN_WIDTH/2 + 27, SCREEN_HEIGHT - 138, SCREEN_WIDTH/2 - 54, 50);
+
 
     UIImageView *left = [[UIImageView alloc] init];
     left.contentMode = UIViewContentModeScaleToFill;
@@ -117,47 +131,19 @@
     
     sendInviteButton.layer.cornerRadius = 25;
     sendInviteButton.clipsToBounds = YES;
-    [inviteButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(self.view.mas_bottom).offset(-58);
-        make.left.equalTo(self.view.mas_left).offset(34);
-        make.width.equalTo(@(kWidth(145)));
-        make.height.equalTo(@(kHeight(50)));
 
 
-    }];
-    
-    [sendInviteButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(self.view.mas_bottom).offset(-58);
-        make.right.equalTo(self.view.mas_right).offset(-34);
-        make.width.equalTo(@(kWidth(145)));
-        make.height.equalTo(@(kHeight(50)));
-    }];
     
     UILabel *introLab = [UILabel labelWithBackgroundColor:kClearColor textColor:kWhiteColor font:11];
+    introLab.textAlignment = NSTextAlignmentCenter;
+    introLab.frame = CGRectMake(0, SCREEN_HEIGHT - 44, SCREEN_WIDTH, 16);
     [self.bgView addSubview:introLab];
-    [introLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(sendInviteButton.mas_bottom).offset(14);
-        make.centerX.equalTo(self.view.mas_centerX);
-    
-    }];
+
+
     introLab.text = [LangSwitcher switchLang:@"点击生成邀请海报并截图给好友" key:nil];
-    [left mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(introLab.mas_centerY);
-        make.right.equalTo(introLab.mas_left).offset(-8);
-        make.width.equalTo(@(kWidth(22)));
-        make.height.equalTo(@(kHeight(1)));
-        
-        
-    }];
-    
-    [right mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(introLab.mas_centerY);
-        make.left.equalTo(introLab.mas_right).offset(8);
-        make.width.equalTo(@(kWidth(22)));
-        make.height.equalTo(@(kHeight(1)));
-        
-        
-    }];
+    left.frame = CGRectMake(SCREEN_WIDTH/2 - 105, SCREEN_HEIGHT - 28 - 8 + 0.5, 22, 1);
+    right.frame = CGRectMake(SCREEN_WIDTH/2 + 83, SCREEN_HEIGHT - 28 - 8 + 0.5, 22, 1);
+
 }
 
 

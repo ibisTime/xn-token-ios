@@ -244,23 +244,24 @@
                                                     font:16.0];
     textLbl.text = [LangSwitcher switchLang:@"推荐应用" key:nil];
     [self.applicationView addSubview:textLbl];
-    if (kDevice_Is_iPhoneX) {
-        [textLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-            
-            make.left.equalTo(@15);
-            
-            make.top.equalTo(@5);
-        }];
-    }else{
-        [textLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-            
-            make.left.equalTo(@15);
-            
-            make.top.equalTo(@5);
-        }];
-        
-    }
-    
+    textLbl.frame = CGRectMake(0, 0, SCREEN_WIDTH - 30, 50);
+//    if (kDevice_Is_iPhoneX) {
+//        [textLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+//
+//            make.left.equalTo(@0);
+//
+//            make.top.equalTo(@5);
+//        }];
+//    }else{
+//        [textLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+//
+//            make.left.equalTo(@0);
+//
+//            make.top.equalTo(@5);
+//        }];
+//
+//    }
+
     
     //topLine
 //    UIView *topLine = [[UIView alloc] init];
@@ -281,6 +282,7 @@
 //                         @"余币宝"];
     
     [self.findModels enumerateObjectsUsingBlock:^(HomeFindModel* obj, NSUInteger idx, BOOL * _Nonnull stop) {
+
         NSLog(@"==========%ld",idx);
         CGFloat width = (kScreenWidth-60)/3;
         
@@ -313,45 +315,48 @@
         introfucec.text = [LangSwitcher switchLang:obj.slogan key:nil];
         
         [self.applicationView addSubview:btn];
-        [btn mas_makeConstraints:^(MASConstraintMaker *make) {
-            if (idx == 0) {
-                if (kDevice_Is_iPhoneX) {
-                    make.top.equalTo(@(kHeight(idx * 90) +40));
 
-                }else{
-                make.top.equalTo(@(kHeight(idx * 90) +30));
-                }
-            }else if (idx == 1)
-            {
-                
-                make.top.equalTo(@(kHeight(130)));
+        btn.frame = CGRectMake(0, 50 + idx%100 * 110, SCREEN_WIDTH - 30, 100);
 
-                
-            }
-            else if (idx == 2)
-            {
-                
-                make.top.equalTo(@(kHeight(230)));
-
-                
-            }
-            else if (idx == 3)
-            {
-                
-                make.top.equalTo(@(kHeight(330)));
-
-                
-            }
-            else if (idx == 4)
-            {
-                
-                make.top.equalTo(@(kHeight(430)));
-                
-                
-            }
-            make.width.equalTo(@(kScreenWidth-15));
-            make.height.equalTo(@(kHeight(90)));
-        }];
+//        [btn mas_makeConstraints:^(MASConstraintMaker *make) {
+//            if (idx == 0) {
+//                if (kDevice_Is_iPhoneX) {
+//                    make.top.equalTo(@(kHeight(idx * 90) +40));
+//
+//                }else{
+//                make.top.equalTo(@(kHeight(idx * 90) +30));
+//                }
+//            }else if (idx == 1)
+//            {
+//
+//                make.top.equalTo(@(kHeight(130)));
+//
+//
+//            }
+//            else if (idx == 2)
+//            {
+//
+//                make.top.equalTo(@(kHeight(230)));
+//
+//
+//            }
+//            else if (idx == 3)
+//            {
+//
+//                make.top.equalTo(@(kHeight(330)));
+//
+//
+//            }
+//            else if (idx == 4)
+//            {
+//
+//                make.top.equalTo(@(kHeight(430)));
+//
+//
+//            }
+//            make.width.equalTo(@(kScreenWidth-15));
+//            make.height.equalTo(@(kHeight(90)));
+//        }];
         [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(btn.mas_top).offset(20);
             make.left.equalTo(btn.mas_left).offset(38);

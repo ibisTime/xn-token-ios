@@ -18,6 +18,7 @@
 #import "NSString+Check.h"
 #import "PayModel.h"
 #import "NSString+Date.h"
+#import "TLMyRecordVC.h"
 @interface TLMoneyDeailVC () <UIScrollViewDelegate,UIWebViewDelegate>
 
 @property (nonatomic ,strong) UIScrollView *contentView;
@@ -69,17 +70,16 @@
     };
     CoinWeakSelf;
     self.pwdView.forgetBlock = ^{
-        
+        weakSelf.pwdView.hidden = YES;
         weakSelf.view2.hidden = YES;
         TLPwdRelatedVC *vc  = [[TLPwdRelatedVC alloc] initWithType:TLPwdTypeTradeReset];
-        
         [weakSelf.navigationController pushViewController:vc animated:YES];
-        
-        
     };
+
     pwdView.hidden = YES;
     pwdView.frame = self.view.bounds;
-    [self.navigationController.view addSubview:pwdView];
+    UIWindow *keyWindow = [[[UIApplication sharedApplication] delegate] window];
+    [keyWindow addSubview:pwdView];
     UIWebView *web = [[UIWebView alloc] init];
     [self.contentView addSubview:web];
     web.delegate =self;
@@ -307,7 +307,7 @@
             
         }];
     }
-    
+
 }
 #pragma mark - 钱包网络请求
 -(void)LoadData
@@ -341,22 +341,41 @@
 }
 - (void)buyNow
 {
-    
-    for (int i = 0; i < self.currencys.count; i++) {
-        
-        if ([self.moneyModel.symbol isEqualToString:self.currencys[i].currency]) {
-            
-            self.currencyModel = self.currencys[i];
-            
+    if ([[TLUser user].tradepwdFlag isEqualToString:@"0"]) {
+        TLPwdType pwdType = TLPwdTypeSetTrade;
+        TLPwdRelatedVC *pwdRelatedVC = [[TLPwdRelatedVC alloc] initWithType:pwdType];
+
+        pwdRelatedVC.isWallet = NO;
+//        pwdRelatedVC.success = ^{
+//
+//
+//            //                    [self presentViewController:redEnvelopeVC animated:YES completion:nil];
+//            [self.navigationController pushViewController:redEnvelopeVC animated:YES];
+//
+//        };
+        [self.navigationController pushViewController:pwdRelatedVC animated:YES];
+
+
+    }else
+    {
+        for (int i = 0; i < self.currencys.count; i++) {
+
+            if ([self.moneyModel.symbol isEqualToString:self.currencys[i].currency]) {
+
+                self.currencyModel = self.currencys[i];
+
+            }
         }
+        //购买
+        [self payAmount];
     }
-    
-    //购买
-    [self payAmount];
-    
+
 }
 
-
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [self.view endEditing:YES];
+}
 
 - (void)payAmount
 {
@@ -374,7 +393,8 @@
     view1.backgroundColor = [UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0.45];
     
     //    view.alpha = 0.5;
-    [self.navigationController.view addSubview:view1];
+    UIWindow *window = [[UIApplication sharedApplication] keyWindow];
+    [window addSubview:view1];
     UIView *whiteView = [UIView new];
     
     [view1 addSubview:whiteView];
@@ -491,12 +511,12 @@
     TLTextField *inputFiled = [[TLTextField alloc] initWithFrame:CGRectZero leftTitle:nil titleWidth:15 placeholder:[LangSwitcher switchLang:@"请输入购买额度" key:nil]];
     [whiteView addSubview:inputFiled];
     self.inputFiled = inputFiled;
-    inputFiled.keyboardType = UIKeyboardTypePhonePad;
+    inputFiled.keyboardType = UIKeyboardTypeNumberPad;
     [inputFiled mas_makeConstraints:^(MASConstraintMaker *make) {
        
         make.top.equalTo(buyCount.mas_bottom).offset(5);
         make.left.equalTo(whiteView.mas_left).offset(15);
-        make.right.equalTo(whiteView.mas_right).offset(-15);
+        make.right.equalTo(whiteView.mas_right).offset(-50);
         make.height.equalTo(@58);
 
     }];
@@ -593,7 +613,7 @@
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
     [self.inputFiled endEditing:YES];
-    
+
     
 }
 
@@ -620,7 +640,7 @@
  
     //确认购买 第一步 验证
     if ([self.inputFiled.text isBlank]) {
-        [TLAlert alertWithMsg:[LangSwitcher switchLang:@"请输入金额" key:nil]];
+        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入金额" key:nil]];
         return;
     }
 
@@ -630,26 +650,26 @@
 
     // 第二步 不能小于起购金额
     if ([self.inputFiled.text floatValue] < [mAmount floatValue]) {
-        [TLAlert alertWithMsg:[LangSwitcher switchLang:@"不能小于起购金额" key:nil]];
+        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"不能小于起购金额" key:nil]];
         return;
 
     }
     if ([self.inputFiled.text floatValue] > [self.moneyLab.text floatValue]) {
-        [TLAlert alertWithMsg:[LangSwitcher switchLang:@"余额不足,请充值" key:nil]];
+        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"余额不足,请充值" key:nil]];
         return;
     }
 
     //第三步 不能大于限购金额
     NSString *limtmount = [CoinUtil convertToRealCoin:self.moneyModel.limitAmount coin:coin.symbol];
     if ([self.inputFiled.text floatValue] > [limtmount floatValue]) {
-        [TLAlert alertWithMsg:[LangSwitcher switchLang:@"不能大于限购金额" key:nil]];
+        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"不能大于限购金额" key:nil]];
         return;
     }
    //第四步  不能大于可售余额
 
     NSString *avmount = [CoinUtil convertToRealCoin:self.moneyModel.avilAmount coin:coin.symbol];
     if ([self.inputFiled.text floatValue] > [avmount floatValue]) {
-        [TLAlert alertWithMsg:[LangSwitcher switchLang:@"不能大于可售金额" key:nil]];
+        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"不能大于可售金额" key:nil]];
         return;
     }
     //第五步 递增  todo
@@ -659,7 +679,7 @@
     long long f1 = [self.moneyModel.minAmount longLongValue];
     long long f2= f % f1;
     if (f2 != 0) {
-        [TLAlert alertWithMsg:[LangSwitcher switchLang:@"" key:nil]];
+        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"" key:nil]];
         return;
         
     }
@@ -683,7 +703,8 @@
     view2.backgroundColor = [UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0.45];
     
     //    view.alpha = 0.5;
-    [self.navigationController.view addSubview:view2];
+    UIWindow *keyWindow = [[[UIApplication sharedApplication] delegate] window];
+    [keyWindow addSubview:view2];
     UIView *whiteView = [UIView new];
     
     [view2 addSubview:whiteView];
@@ -870,7 +891,8 @@
 
         [http postWithSuccess:^(id responseObject) {
             
-            
+            NSNotification *notification =[NSNotification notificationWithName:@"LOADDATA" object:nil userInfo:nil];
+            [[NSNotificationCenter defaultCenter] postNotification:notification];
             [weakSelf showBuySucess];
 
         } failure:^(NSError *error) {
@@ -898,7 +920,8 @@
     view3.backgroundColor = [UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0.45];
     
     //    view.alpha = 0.5;
-    [self.navigationController.view addSubview:view3];
+    UIWindow *keyWindow = [[[UIApplication sharedApplication] delegate] window];
+    [keyWindow addSubview:view3];
     UIView *whiteView = [UIView new];
     
     [view3 addSubview:whiteView];
@@ -991,14 +1014,19 @@
         [self.timeOut invalidate];
         self.timeOut = nil;
         self.view3.hidden = YES;
-        [self.navigationController popViewControllerAnimated:YES];
-
+        TLMyRecordVC *VC = [TLMyRecordVC new];
+        VC.title = [LangSwitcher switchLang:@"我的理财" key:nil];
+        [self.navigationController pushViewController:VC animated:YES];
     }
-    
 }
 - (void)payMoneyNowRecode
 {
-    
+    [self.timeOut invalidate];
+    self.timeOut = nil;
+    self.view3.hidden = YES;
+    TLMyRecordVC *VC = [TLMyRecordVC new];
+    VC.title = [LangSwitcher switchLang:@"我的理财" key:nil];
+    [self.navigationController pushViewController:VC animated:YES];
     
 }
 

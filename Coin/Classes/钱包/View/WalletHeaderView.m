@@ -22,8 +22,12 @@
 //右边国旗
 @property (nonatomic, strong) UIImageView *rightFlag;
 
-
 @property (nonatomic, strong) UIImageView *rightArrowIV;
+
+@property (nonatomic, strong) UILabel *allLabel;
+@property (nonatomic , strong)UILabel *privateKeyLabel;
+@property (nonatomic , strong)UILabel *personalLabel;
+
 
 //@property (nonatomic, strong) UIImageView *segmentLeft;
 //
@@ -114,12 +118,47 @@
         make.height.equalTo(@25);
 
     }];
+
+    self.allLabel = [UILabel labelWithBackgroundColor:kClearColor textColor:kHexColor(@"#333333") font:18.0];
+    self.allLabel.text = @"¥ ****";
+    [self addSubview:self.allLabel];
+
+    [self.allLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+
+        make.top.equalTo(equivalentBtn.mas_bottom).offset(5);
+        make.left.equalTo(equivalentBtn.mas_left);
+        make.height.equalTo(@25);
+
+    }];
+    self.allLabel.hidden = YES;
+
+    UIButton *eyesButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
+    [eyesButton setImage:[UIImage imageNamed:@"眼睛"] forState:(UIControlStateNormal)];
+    [eyesButton setImage:[UIImage imageNamed:@"闭眼"] forState:(UIControlStateSelected)];
+
+
+
+    [eyesButton addTarget:self action:@selector(eyesButtonClick:) forControlEvents:(UIControlEventTouchUpInside)];
+    eyesButton.backgroundColor = [UIColor whiteColor];
+    [self addSubview:eyesButton];
+
+    [eyesButton mas_makeConstraints:^(MASConstraintMaker *make) {
+
+        make.top.equalTo(equivalentBtn.mas_bottom).offset(-10);
+        make.right.equalTo(self.mas_right).offset(0);
+        make.width.equalTo(@30);
+        make.height.equalTo(@30);
+
+    }];
+
     UIImageView *bottomIV = [[UIImageView alloc] init];
     bottomIV.image = kImage(@"秘钥背景");
     bottomIV.contentMode = UIViewContentModeScaleToFill;
     UISwipeGestureRecognizer *leftBottomSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeBottomClick:)];
      UISwipeGestureRecognizer *rightBottomSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeRightBottomClick:)];
-    
+
+
+
     // 设置轻扫的方向
     
     leftBottomSwipe.direction = UISwipeGestureRecognizerDirectionLeft;
@@ -170,7 +209,6 @@
     }];
     
     UILabel *LocalMoney = [UILabel labelWithBackgroundColor:kClearColor textColor:kWhiteColor font:30.0];
-    
     self.LocalMoney = LocalMoney;
     if ([TLUser user].localMoney) {
         if ([[TLUser user].localMoney isEqualToString:@"CNY"] ) {
@@ -194,6 +232,39 @@
         make.top.equalTo(self.localLbl.mas_bottom).offset(kHeight(3));
         
     }];
+
+
+
+    self.privateKeyLabel = [UILabel labelWithBackgroundColor:kClearColor textColor:kWhiteColor font:30.0];
+//    self.privateKeyLabel.backgroundColor = [UIColor redColor]
+    if ([TLUser user].localMoney) {
+        if ([[TLUser user].localMoney isEqualToString:@"CNY"] ) {
+            self.privateKeyLabel.text = @"¥****";
+
+        }else{
+            self.privateKeyLabel.text = @"$****";
+
+
+        }
+    }else{
+
+        self.privateKeyLabel.text = @"¥****";
+
+    }
+
+    [self.bottomIV addSubview:self.privateKeyLabel];
+    [self.privateKeyLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+
+        make.left.equalTo(self.bottomIV.mas_left).offset(kWidth(43));
+        make.top.equalTo(self.localLbl.mas_bottom).offset(kHeight(3));
+
+    }];
+
+
+
+
+
+
     
     UIImageView *bgIV = [[UIImageView alloc] init];
     bgIV.image = kImage(@"个人钱包");
@@ -247,6 +318,8 @@
     image.userInteractionEnabled = YES;
     UITapGestureRecognizer * tap1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(localClick)];
     [image addGestureRecognizer:tap1];
+
+
     UILabel *privateMoney = [UILabel labelWithBackgroundColor:kClearColor textColor:kWhiteColor font:30.0];
     
     self.privateMoney = privateMoney;
@@ -257,6 +330,44 @@
         make.top.equalTo(self.textLbl.mas_bottom).offset(kHeight(3));
         
     }];
+
+
+    self.personalLabel = [UILabel labelWithBackgroundColor:kClearColor textColor:kWhiteColor font:30.0];
+    self.personalLabel.text = @"¥****";
+//    self.personalLabel.backgroundColor = [UIColor redColor];
+    [self.bgIV addSubview:self.personalLabel];
+    [self.personalLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+
+        make.left.equalTo(self.bgIV.mas_left).offset(kWidth(43));
+        make.top.equalTo(self.textLbl.mas_bottom).offset(kHeight(3));
+
+    }];
+
+
+
+
+    NSString *eyes = [[NSUserDefaults standardUserDefaults] objectForKey:@"eyes"];
+    if ([eyes isEqualToString:@"1"]) {
+        eyesButton.selected = YES;
+        self.cnyAmountLbl.hidden = YES;
+        self.allLabel.hidden = NO;
+        self.LocalMoney.hidden = YES;
+        self.privateKeyLabel.hidden = NO;
+        self.privateMoney.hidden = YES;
+        self.personalLabel.hidden = NO;
+    }
+    else
+    {
+        eyesButton.selected = NO;
+        self.cnyAmountLbl.hidden = NO;
+        self.allLabel.hidden = YES;
+        self.LocalMoney.hidden = NO;
+        self.privateKeyLabel.hidden = YES;
+        self.privateMoney.hidden = NO;
+        self.personalLabel.hidden = YES;
+    }
+
+
     
 //    self.segmentLeft = [[UIImageView alloc] init];
 //    [self addSubview:self.segmentLeft];
@@ -312,6 +423,31 @@
 //        
 //    }];
     
+}
+
+-(void)eyesButtonClick:(UIButton *)sender
+{
+    sender.selected = !sender.selected;
+    if (sender.selected == YES) {
+        self.cnyAmountLbl.hidden = YES;
+        self.allLabel.hidden = NO;
+        self.LocalMoney.hidden = YES;
+        self.privateKeyLabel.hidden = NO;
+        self.privateMoney.hidden = YES;
+        self.personalLabel.hidden = NO;
+        [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"eyes"];
+    }
+    else
+    {
+        self.cnyAmountLbl.hidden = NO;
+        self.allLabel.hidden = YES;
+        self.LocalMoney.hidden = NO;
+        self.privateKeyLabel.hidden = YES;
+        self.privateMoney.hidden = NO;
+        self.personalLabel.hidden = YES;
+        [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:@"eyes"];
+    }
+
 }
 
 -(void)swipeRightClick:(UISwipeGestureRecognizer *)swpie{

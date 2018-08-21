@@ -1288,7 +1288,7 @@
             self.IsLocalExsit = @"1";
             if ([[TLUser user].localMoney isEqualToString:@"USD"]) {
                 cnyStr = [responseObject[@"data"][@"totalAmountUSD"] convertToSimpleRealMoney];
-                double f =  [cnyStr doubleValue]+[[self.headerView.privateMoney.text substringFromIndex:1] doubleValue] ;
+                double f =  [cnyStr doubleValue] +[[self.headerView.privateMoney.text substringFromIndex:1] doubleValue] ;
                 self.headerView.cnyAmountLbl.text = [NSString stringWithFormat:@"$ %.2f", f] ;
                 self.headerView.LocalMoney.text = [NSString stringWithFormat:@"$ %.2f", [cnyStr doubleValue]];
                 self.headerView.localLbl.text = [NSString stringWithFormat:@"%@(USD)", [LangSwitcher switchLang:@"私钥钱包" key:nil]];;

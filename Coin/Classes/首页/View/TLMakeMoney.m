@@ -40,7 +40,7 @@ static NSString *identifierCell = @"MakeMoneyCell";
 
 -(NSInteger)numberOfRowsInSection:(NSInteger)section
 {
-    return 0;
+    return 1;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     

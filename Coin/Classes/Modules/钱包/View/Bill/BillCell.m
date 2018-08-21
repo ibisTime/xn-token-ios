@@ -202,8 +202,8 @@
     }
 
 
-    self.dayLbl.text = [_billModel.createDatetime convertDateWithFormat:@"dd日"];
-    self.timeLbl.text = [_billModel.createDatetime convertDateWithFormat:@"HH:mm"];
+//    self.dayLbl.text = [_billModel.createDatetime convertDateWithFormat:[NSString stringWithFormat:@"dd%@",[LangSwitcher switchLang:[NSString stringWithFormat:@"日"] key:nil]]];
+    self.timeLbl.text = [_billModel.createDatetime convertRedDate];
 
     self.moneyLbl.text = moneyStr;
 

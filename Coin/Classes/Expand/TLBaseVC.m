@@ -25,12 +25,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.edgesForExtendedLayout = UIRectEdgeNone;
-    
-    //
-    //
+
+
     self.view.backgroundColor = [UIColor colorWithHexString:@"#f8f8f8"];
-    
-    
+
 //    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStyleBordered target:nil action:nil];
 //    self.navigationItem.backBarButtonItem = backItem;
 //    self.view.backgroundColor = [UIColor backgroundColor];
