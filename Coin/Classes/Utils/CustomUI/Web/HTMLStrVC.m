@@ -252,8 +252,16 @@
     _webView.allowsBackForwardNavigationGestures = YES;
     [_webView.scrollView adjustsContentInsets];
     [self.bgImage addSubview:_webView];
-    
-    [self loadWebWithString:self.htmlStr];
+    if (self.des) {
+//        self.title = self.name;
+        self.nameLable.text = self.name;
+
+        [_webView loadHTMLString:self.des baseURL:nil];
+    }else{
+        [self loadWebWithString:self.htmlStr];
+
+        
+    }
 }
 
 - (void)loadWebWithString:(NSString *)string {

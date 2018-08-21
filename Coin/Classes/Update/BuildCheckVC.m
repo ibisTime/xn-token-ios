@@ -350,7 +350,6 @@
     WalletNewFeaturesVC * newVC = [WalletNewFeaturesVC new];
     
     //        [self.navigationController pushViewController:newVC animated:YES];
-    [UIApplication sharedApplication].keyWindow.rootViewController = newVC;
     
     
 //    return;
@@ -406,7 +405,7 @@
         //验证失败
         NSString *text = [LangSwitcher switchLang:@"助记词验证失败,请检查备份" key:nil];
         [TLAlert alertWithMsg:text];
-
+        return;
         }
     
 }

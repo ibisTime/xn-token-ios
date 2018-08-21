@@ -68,6 +68,17 @@ static NSString *identifierCell = @"BTCDetailModel";
     NSString *formAdress = @"";
     NSString *charge = _bill.txFee;
     NSString *height = _bill.height;
+
+    if ([_bill.height isEqualToString:@"-1"]) {
+        
+        if ([_bill.direction isEqualToString:@"1"]) {
+            height =  [LangSwitcher switchLang:@"即将到账" key:nil];
+        }else{
+            
+            height =  [LangSwitcher switchLang:@"同步打包中" key:nil];
+
+        }
+    }
     NSString *texthash = _bill.txHash;
     if (indexPath.row == 0) {
         [cell localInfoWithData:textArr index:indexPath.row];

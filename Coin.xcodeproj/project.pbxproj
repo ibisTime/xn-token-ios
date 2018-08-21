@@ -403,6 +403,7 @@
 		B8F63EDD20D37FE700556150 /* LocalBillDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B8F63EDC20D37FE700556150 /* LocalBillDetailVC.m */; };
 		B8F63EE020D3809700556150 /* LocalBillDetailTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = B8F63EDF20D3809700556150 /* LocalBillDetailTableView.m */; };
 		B8F63EE320D397B000556150 /* WalletLocalWebVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B8F63EE220D397B000556150 /* WalletLocalWebVC.m */; };
+		B8FFD548212C2F430032738A /* TLNewPwdVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B8FFD547212C2F430032738A /* TLNewPwdVC.m */; };
 		FB49ABC88B6B7FFBB19DF11D /* Pods_Coin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 524739678D50CF78B722738E /* Pods_Coin.framework */; };
 /* End PBXBuildFile section */
 
@@ -1289,6 +1290,8 @@
 		B8F63EDF20D3809700556150 /* LocalBillDetailTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocalBillDetailTableView.m; sourceTree = "<group>"; };
 		B8F63EE120D397B000556150 /* WalletLocalWebVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WalletLocalWebVC.h; sourceTree = "<group>"; };
 		B8F63EE220D397B000556150 /* WalletLocalWebVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WalletLocalWebVC.m; sourceTree = "<group>"; };
+		B8FFD546212C2F430032738A /* TLNewPwdVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLNewPwdVC.h; sourceTree = "<group>"; };
+		B8FFD547212C2F430032738A /* TLNewPwdVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLNewPwdVC.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2635,6 +2638,8 @@
 				B89F07E1211B07FA0057E781 /* TLMeSetting.m */,
 				B82D3876211BD4A50053A2E4 /* TLQrCodeVC.h */,
 				B82D3877211BD4A50053A2E4 /* TLQrCodeVC.m */,
+				B8FFD546212C2F430032738A /* TLNewPwdVC.h */,
+				B8FFD547212C2F430032738A /* TLNewPwdVC.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -3638,6 +3643,7 @@
 				21205CFE1FCD61D6003C6C7C /* ShareView.m in Sources */,
 				B82D387B211C1BDB0053A2E4 /* HomeFindModel.m in Sources */,
 				B8BBA64620C8497000DC4D5F /* AddMoneyTableView.m in Sources */,
+				B8FFD548212C2F430032738A /* TLNewPwdVC.m in Sources */,
 				B8086507211EA17D00755158 /* BTCBlindSignature+Tests.m in Sources */,
 				B8B15C3220CAB4DE00F13220 /* CustomLayoutWallet.m in Sources */,
 				2159795D1FB81C2B0029F177 /* BillVC.m in Sources */,

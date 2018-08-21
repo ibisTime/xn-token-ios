@@ -65,7 +65,6 @@
 - (void)viewWillAppear:(BOOL)animated {
     self.navigationController.navigationBar.hidden = YES;
     [super viewWillAppear:animated];
-    [self configData];
 }
 
 - (void)viewDidLoad {
@@ -74,8 +73,10 @@
     self.title = [LangSwitcher switchLang:@"登录" key:nil];
     
     [self setBarButtonItem];
-    
+
     [self setUpUI];
+    [self configData];
+
     [self changeCodeLogin];
     
  
@@ -119,10 +120,13 @@
             [self.pic sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:kImage(@"中国国旗")];
             self.PhoneCode.text = [NSString stringWithFormat:@"+%@",[model.interCode substringFromIndex:2]];
             
-        }else{
             
+        }else{
+            //
+            CountryModel *model = self.countrys[0];
             self.pic.image = kImage(@"中国国旗");
             self.PhoneCode.text  = @"+86";
+            
             
         }
         
@@ -135,6 +139,24 @@
     //取消按钮
    [UIBarButtonItem addLeftItemWithImageName:kCancelIcon frame:CGRectMake(-30, 0, 80, 44) vc:self action:@selector(back)];
     //注册
+    
+    
+    TLNetworking *net = [TLNetworking new];
+    net.showView = self.view;
+    net.code = @"801120";
+    net.isLocal = YES;
+    net.ISparametArray = YES;
+    net.parameters[@"status"] = @"1";
+    [net postWithSuccess:^(id responseObject) {
+        self.countrys = [CountryModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
+
+//
+
+    } failure:^(NSError *error) {
+        
+    }];
+
+    
 //    [UIBarButtonItem addRightItemWithTitle:[LangSwitcher switchLang:@"注册" key:nil] titleColor:kTextColor frame:CGRectMake(0, 0, 60, 44) vc:self action:@selector(goReg)];
 }
 
@@ -571,6 +593,10 @@
         if (model) {
             http.parameters[@"countryCode"] = model.code;
             
+        }else{
+            
+            http.parameters[@"countryCode"] =  self.countrys[0].code;
+
         }
         
     http.parameters[@"smsCaptcha"] = self.captchaView.captchaTf.text;
@@ -585,6 +611,10 @@
         if (model) {
             http.parameters[@"countryCode"] = model.code;
 
+        }else{
+            
+            http.parameters[@"countryCode"] = self.countrys[0].code;
+            
         }
     http.parameters[@"loginName"] = self.phoneTf.text;
     http.parameters[@"loginPwd"] = self.pwdTf.text;
