@@ -208,8 +208,6 @@
 		7A8A5DCB20EA7EB8002D9A48 /* GetTheCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A8A5DCA20EA7EB8002D9A48 /* GetTheCell.m */; };
 		7A8A5DCE20EA9CD5002D9A48 /* GetTheModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A8A5DCD20EA9CD5002D9A48 /* GetTheModel.m */; };
 		7A8A5DD120EAA2DE002D9A48 /* InvitationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A8A5DCF20EAA2DB002D9A48 /* InvitationView.m */; };
-		B80864EC211EA17D00755158 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B808640B211EA17C00755158 /* libcrypto.a */; };
-		B80864ED211EA17D00755158 /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B808640C211EA17C00755158 /* libssl.a */; };
 		B80864EE211EA17D00755158 /* BTCBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = B8086411211EA17C00755158 /* BTCBlock.m */; };
 		B80864EF211EA17D00755158 /* BTCBlockHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = B8086412211EA17C00755158 /* BTCBlockHeader.m */; };
 		B80864F0211EA17D00755158 /* BTCEncryptedBackup.m in Sources */ = {isa = PBXBuildFile; fileRef = B8086415211EA17C00755158 /* BTCEncryptedBackup.m */; };
@@ -398,12 +396,14 @@
 		B8DDF885211D2AD10058D19D /* MakeMoneyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B8DDF884211D2AD10058D19D /* MakeMoneyCell.m */; };
 		B8E08BED212594FF00348AD4 /* TLMoneyDeailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B8E08BEC212594FF00348AD4 /* TLMoneyDeailVC.m */; };
 		B8E08BF021259DC400348AD4 /* TLTopMoneyView.m in Sources */ = {isa = PBXBuildFile; fileRef = B8E08BEF21259DC400348AD4 /* TLTopMoneyView.m */; };
+		B8F44025212C81E700809522 /* TLNewPwdVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B8F44023212C81E600809522 /* TLNewPwdVC.m */; };
+		B8F44029212C851C00809522 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B8F44027212C851C00809522 /* libcrypto.a */; };
+		B8F4402A212C851C00809522 /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B8F44028212C851C00809522 /* libssl.a */; };
 		B8F63ED720D362DA00556150 /* WalletLocalBillTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = B8F63ED620D362DA00556150 /* WalletLocalBillTableView.m */; };
 		B8F63EDA20D3639900556150 /* LocalBillCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B8F63ED920D3639900556150 /* LocalBillCell.m */; };
 		B8F63EDD20D37FE700556150 /* LocalBillDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B8F63EDC20D37FE700556150 /* LocalBillDetailVC.m */; };
 		B8F63EE020D3809700556150 /* LocalBillDetailTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = B8F63EDF20D3809700556150 /* LocalBillDetailTableView.m */; };
 		B8F63EE320D397B000556150 /* WalletLocalWebVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B8F63EE220D397B000556150 /* WalletLocalWebVC.m */; };
-		B8FFD548212C2F430032738A /* TLNewPwdVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B8FFD547212C2F430032738A /* TLNewPwdVC.m */; };
 		FB49ABC88B6B7FFBB19DF11D /* Pods_Coin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 524739678D50CF78B722738E /* Pods_Coin.framework */; };
 /* End PBXBuildFile section */
 
@@ -813,8 +813,6 @@
 		7A8A5DD020EAA2DD002D9A48 /* InvitationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InvitationView.h; sourceTree = "<group>"; };
 		8863748C5281F9DC1DDF8EEA /* Pods-Coin.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Coin.release.xcconfig"; path = "Pods/Target Support Files/Pods-Coin/Pods-Coin.release.xcconfig"; sourceTree = "<group>"; };
 		AB34D27FC9725550E9092EC2 /* Pods-Coin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Coin.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Coin/Pods-Coin.debug.xcconfig"; sourceTree = "<group>"; };
-		B808640B211EA17C00755158 /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libcrypto.a; sourceTree = "<group>"; };
-		B808640C211EA17C00755158 /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libssl.a; sourceTree = "<group>"; };
 		B808640E211EA17C00755158 /* BTCMerkleTree+Tests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BTCMerkleTree+Tests.h"; sourceTree = "<group>"; };
 		B808640F211EA17C00755158 /* BTCPaymentMethodDetails.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTCPaymentMethodDetails.h; sourceTree = "<group>"; };
 		B8086410211EA17C00755158 /* BTCProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTCProcessor.h; sourceTree = "<group>"; };
@@ -1280,6 +1278,10 @@
 		B8E08BEC212594FF00348AD4 /* TLMoneyDeailVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLMoneyDeailVC.m; sourceTree = "<group>"; };
 		B8E08BEE21259DC400348AD4 /* TLTopMoneyView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLTopMoneyView.h; sourceTree = "<group>"; };
 		B8E08BEF21259DC400348AD4 /* TLTopMoneyView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLTopMoneyView.m; sourceTree = "<group>"; };
+		B8F44023212C81E600809522 /* TLNewPwdVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLNewPwdVC.m; sourceTree = "<group>"; };
+		B8F44024212C81E700809522 /* TLNewPwdVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLNewPwdVC.h; sourceTree = "<group>"; };
+		B8F44027212C851C00809522 /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libcrypto.a; sourceTree = "<group>"; };
+		B8F44028212C851C00809522 /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libssl.a; sourceTree = "<group>"; };
 		B8F63ED520D362DA00556150 /* WalletLocalBillTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WalletLocalBillTableView.h; sourceTree = "<group>"; };
 		B8F63ED620D362DA00556150 /* WalletLocalBillTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WalletLocalBillTableView.m; sourceTree = "<group>"; };
 		B8F63ED820D3639900556150 /* LocalBillCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocalBillCell.h; sourceTree = "<group>"; };
@@ -1290,8 +1292,6 @@
 		B8F63EDF20D3809700556150 /* LocalBillDetailTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocalBillDetailTableView.m; sourceTree = "<group>"; };
 		B8F63EE120D397B000556150 /* WalletLocalWebVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WalletLocalWebVC.h; sourceTree = "<group>"; };
 		B8F63EE220D397B000556150 /* WalletLocalWebVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WalletLocalWebVC.m; sourceTree = "<group>"; };
-		B8FFD546212C2F430032738A /* TLNewPwdVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLNewPwdVC.h; sourceTree = "<group>"; };
-		B8FFD547212C2F430032738A /* TLNewPwdVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLNewPwdVC.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1301,7 +1301,7 @@
 			files = (
 				2EFFE6B31FF6287D00BFCC40 /* UserNotifications.framework in Frameworks */,
 				2EFFE6B21FF6286600BFCC40 /* CoreTelephony.framework in Frameworks */,
-				B80864ED211EA17D00755158 /* libssl.a in Frameworks */,
+				B8F44029212C851C00809522 /* libcrypto.a in Frameworks */,
 				21C91D981FDBD7E4006EDB16 /* CoreMotion.framework in Frameworks */,
 				7A272662212BFFA70067E3CD /* libWeChatSDK.a in Frameworks */,
 				211C05081FC6714500E51FCF /* libz.tbd in Frameworks */,
@@ -1309,8 +1309,8 @@
 				211C050C1FC6715B00E51FCF /* libsqlite3.tbd in Frameworks */,
 				211C05121FC6717300E51FCF /* libstdc++.6.tbd in Frameworks */,
 				211C05111FC6717300E51FCF /* libstdc++.6.0.9.tbd in Frameworks */,
-				B80864EC211EA17D00755158 /* libcrypto.a in Frameworks */,
 				2EFFE6B51FF6289600BFCC40 /* libsqlite3.0.tbd in Frameworks */,
+				B8F4402A212C851C00809522 /* libssl.a in Frameworks */,
 				FB49ABC88B6B7FFBB19DF11D /* Pods_Coin.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2587,6 +2587,8 @@
 		2E394FAD1FB055DE00BA0829 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				B8F44024212C81E700809522 /* TLNewPwdVC.h */,
+				B8F44023212C81E600809522 /* TLNewPwdVC.m */,
 				2EE950C41FB05B5900429257 /* TLMineVC.h */,
 				2EE950C51FB05B5900429257 /* TLMineVC.m */,
 				2EB039A51FE8B23300589D8E /* EditEmailVC.h */,
@@ -2639,8 +2641,6 @@
 				B89F07E1211B07FA0057E781 /* TLMeSetting.m */,
 				B82D3876211BD4A50053A2E4 /* TLQrCodeVC.h */,
 				B82D3877211BD4A50053A2E4 /* TLQrCodeVC.m */,
-				B8FFD546212C2F430032738A /* TLNewPwdVC.h */,
-				B8FFD547212C2F430032738A /* TLNewPwdVC.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2898,20 +2898,10 @@
 		B8086409211EA17C00755158 /* DataBtc */ = {
 			isa = PBXGroup;
 			children = (
-				B808640A211EA17C00755158 /* lib-ios */,
 				B808640D211EA17C00755158 /* CoreBitcoin */,
 				B808649F211EA17C00755158 /* include-ios */,
 			);
 			path = DataBtc;
-			sourceTree = "<group>";
-		};
-		B808640A211EA17C00755158 /* lib-ios */ = {
-			isa = PBXGroup;
-			children = (
-				B808640B211EA17C00755158 /* libcrypto.a */,
-				B808640C211EA17C00755158 /* libssl.a */,
-			);
-			path = "lib-ios";
 			sourceTree = "<group>";
 		};
 		B808640D211EA17C00755158 /* CoreBitcoin */ = {
@@ -3069,6 +3059,7 @@
 		B808649F211EA17C00755158 /* include-ios */ = {
 			isa = PBXGroup;
 			children = (
+				B8F44026212C851C00809522 /* lib-ios */,
 				B80864A0211EA17C00755158 /* openssl */,
 			);
 			path = "include-ios";
@@ -3252,6 +3243,15 @@
 				B8CAA13A21158FF200695BC3 /* LPDAssetModel.h */,
 			);
 			path = ImagePicker;
+			sourceTree = "<group>";
+		};
+		B8F44026212C851C00809522 /* lib-ios */ = {
+			isa = PBXGroup;
+			children = (
+				B8F44027212C851C00809522 /* libcrypto.a */,
+				B8F44028212C851C00809522 /* libssl.a */,
+			);
+			path = "lib-ios";
 			sourceTree = "<group>";
 		};
 		C678617F8B7C3B3F2F7DE44F /* Frameworks */ = {
@@ -3643,7 +3643,7 @@
 				21205CFE1FCD61D6003C6C7C /* ShareView.m in Sources */,
 				B82D387B211C1BDB0053A2E4 /* HomeFindModel.m in Sources */,
 				B8BBA64620C8497000DC4D5F /* AddMoneyTableView.m in Sources */,
-				B8FFD548212C2F430032738A /* TLNewPwdVC.m in Sources */,
+				B8F44025212C81E700809522 /* TLNewPwdVC.m in Sources */,
 				B8086507211EA17D00755158 /* BTCBlindSignature+Tests.m in Sources */,
 				B8B15C3220CAB4DE00F13220 /* CustomLayoutWallet.m in Sources */,
 				2159795D1FB81C2B0029F177 /* BillVC.m in Sources */,
@@ -4041,7 +4041,7 @@
 					"$(PROJECT_DIR)/Coin/Classes/Utils/common/common_ios_1.5.2/normal",
 				);
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = YES;
-				GCC_PREFIX_HEADER = "$(SRCROOT)/Coin/Classes/Other/CoinPrefixHeader.pch";
+				GCC_PREFIX_HEADER = "/Users/shaojianfei/xn-token-ios/Coin/AppDelegate/Classes/Other/CoinPrefixHeader.pch";
 				INFOPLIST_FILE = Coin/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -4055,6 +4055,7 @@
 					"$(PROJECT_DIR)/Coin/Extension/WechatSDK1.8.2",
 					"$(PROJECT_DIR)/Coin/Classes/Utils/DataBtc/lib-ios",
 					"$(PROJECT_DIR)/Coin/WechatSDK1.8.2",
+					"$(PROJECT_DIR)/Coin/AppDelegate/Classes/Utils/DataBtc/include-ios/lib-ios",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.ZQB.HappyFirstGo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -4096,7 +4097,7 @@
 					"$(PROJECT_DIR)/Coin/Classes/Utils/common/common_ios_1.5.2/normal",
 				);
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = YES;
-				GCC_PREFIX_HEADER = "$(SRCROOT)/Coin/Classes/Other/CoinPrefixHeader.pch";
+				GCC_PREFIX_HEADER = "/Users/shaojianfei/xn-token-ios/Coin/AppDelegate/Classes/Other/CoinPrefixHeader.pch";
 				INFOPLIST_FILE = Coin/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -4110,6 +4111,7 @@
 					"$(PROJECT_DIR)/Coin/Extension/WechatSDK1.8.2",
 					"$(PROJECT_DIR)/Coin/Classes/Utils/DataBtc/lib-ios",
 					"$(PROJECT_DIR)/Coin/WechatSDK1.8.2",
+					"$(PROJECT_DIR)/Coin/AppDelegate/Classes/Utils/DataBtc/include-ios/lib-ios",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.ZQB.HappyFirstGo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
