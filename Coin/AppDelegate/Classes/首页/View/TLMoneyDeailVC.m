@@ -399,7 +399,7 @@
     
     [view1 addSubview:whiteView];
     
-    whiteView.frame = CGRectMake(24, kHeight(194), kScreenWidth - 48, kHeight(300));
+    whiteView.frame = CGRectMake(24, 194, kScreenWidth - 48, 300);
     
     whiteView.backgroundColor = kWhiteColor;
     whiteView.userInteractionEnabled = YES;
@@ -709,7 +709,7 @@
     
     [view2 addSubview:whiteView];
     
-    whiteView.frame = CGRectMake(24, kHeight(194), kScreenWidth - 48, kHeight(350));
+    whiteView.frame = CGRectMake(24, 194, kScreenWidth - 48, 350);
     
     whiteView.backgroundColor = kWhiteColor;
     UIButton *exitBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -731,7 +731,7 @@
     }];
     UILabel *nameLab = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextBlack font:15];
     [whiteView addSubview:nameLab];
-    nameLab.text = self.currencyModel.currency;
+    nameLab.text = self.moneyModel.name;
     [nameLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(whiteView.mas_top).offset(40);
         make.left.equalTo(sureLab.mas_right).offset(23);
@@ -787,7 +787,7 @@
     [whiteView addSubview:freeTime];
     [freeTime mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(line2.mas_bottom).offset(15);
-        make.right.equalTo(buycount.mas_right);
+        make.left.equalTo(buycount.mas_left);
     }];
     UILabel *timeLab = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextBlack font:15];
     [whiteView addSubview:timeLab];
@@ -926,7 +926,7 @@
     
     [view3 addSubview:whiteView];
     
-    whiteView.frame = CGRectMake(24, kHeight(194), kScreenWidth - 48, kHeight(300));
+    whiteView.frame = CGRectMake(24, 194, kScreenWidth - 48, 300);
     
     whiteView.backgroundColor = kWhiteColor;
     UIButton *exitBtn = [UIButton buttonWithType:UIButtonTypeCustom];

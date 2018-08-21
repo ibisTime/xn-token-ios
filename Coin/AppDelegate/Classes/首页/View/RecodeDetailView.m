@@ -408,7 +408,7 @@
     self.nameLab.text = model.produceModel.name;
     CoinModel *coin = [CoinUtil getCoinModel:model.produceModel.symbol];
     self.stateLab.text =  [LangSwitcher switchLang:@"购买成功" key:nil];;
-    [NSString stringWithFormat:@"%@%@",model.produceModel.limitDays,[LangSwitcher switchLang:@"个月" key:nil]];
+    [NSString stringWithFormat:@"%@%@",model.produceModel.limitDays,[LangSwitcher switchLang:@"天" key:nil]];
   
     self.desLab.text =   [LangSwitcher switchLang:@"合约编号" key:nil];;
     self.timeLab.text = model.produceModel.code;
@@ -422,7 +422,7 @@
     self.buycount.text =  [NSString stringWithFormat:@"%.4f%@",[inv floatValue],model.produceModel.symbol];
 
     self.leaveLable.text = model.name;
-    self.orderLable.text = [NSString stringWithFormat:@"%@%@",model.produceModel.limitDays,[LangSwitcher switchLang:@"个月" key:nil]];
+    self.orderLable.text = [NSString stringWithFormat:@"%@%@",model.produceModel.limitDays,[LangSwitcher switchLang:@"天" key:nil]];
     self.leftLable.text = [LangSwitcher switchLang:@"年收益率" key:nil];
     self.beiginLable.text = [LangSwitcher switchLang:@"总收益" key:nil];
     NSString *inall = [CoinUtil convertToRealCoin:model.expectIncome coin:model.produceModel.symbol];

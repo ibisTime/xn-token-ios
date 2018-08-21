@@ -210,7 +210,7 @@
     NSString *minAmount = [CoinUtil convertToRealCoin:model.minAmount coin:coin.symbol];
 
     self.desLab.text = [NSString stringWithFormat:@"%@%@ %@",minAmount,model.symbol,[LangSwitcher switchLang:@"起购" key:nil]];
-    self.timeLab.text =[NSString stringWithFormat:@"%@%@",model.limitDays,[LangSwitcher switchLang:@"个月" key:nil]];
+    self.timeLab.text =[NSString stringWithFormat:@"%@%@",model.limitDays,[LangSwitcher switchLang:@"天" key:nil]];
     NSString *avilAmount = [CoinUtil convertToRealCoin:model.avilAmount coin:coin.symbol];
 
     if ([model.status isEqualToString:@"4"]) {

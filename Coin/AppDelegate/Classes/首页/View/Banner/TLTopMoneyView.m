@@ -275,8 +275,8 @@
     CoinModel *coin = [CoinUtil getCoinModel:model.symbol];
 
     self.nameLab.text = [NSString stringWithFormat:@"%.2f%%",[model.expectYield floatValue]*100];
-    self.stateLab.text = [NSString stringWithFormat:@"%@%@",model.limitDays,[LangSwitcher switchLang:@"个月" key:nil]];
-    self.freeLable.text = [NSString stringWithFormat:@"%@%@",model.limitDays,[LangSwitcher switchLang:@"个月" key:nil]];
+    self.stateLab.text = [NSString stringWithFormat:@"%@%@",model.limitDays,[LangSwitcher switchLang:@"天" key:nil]];
+    self.freeLable.text = [NSString stringWithFormat:@"%@%@",model.limitDays,[LangSwitcher switchLang:@"天" key:nil]];
     NSString *totAmount = [CoinUtil convertToRealCoin:model.amount coin:coin.symbol];
 
     self.desLab.text = [NSString stringWithFormat:@"%@%@",totAmount,model.symbol];
