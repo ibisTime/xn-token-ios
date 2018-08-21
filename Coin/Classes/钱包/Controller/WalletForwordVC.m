@@ -152,9 +152,9 @@ typedef enum : NSUInteger {
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    
+    //获取BTCUTXO
     [self loadUtxoList];
-    
+    //获取矿工费
     [self getgamProce];
 
     [super viewDidAppear:animated];
@@ -202,9 +202,9 @@ typedef enum : NSUInteger {
         NSLog(@"%@",responseObject);
         
         self.utxis = [utxoModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"][@"utxoList"]];
-        [self testSpendCoins:BTCAPIChain];
-
-        [self loadHash];
+//        [self testSpendCoins:BTCAPIChain];
+//
+//        [self loadHash];
         
         NSLog(@"%@",self.utxis);
 //        [self.tableView endRefreshHeader];
@@ -604,11 +604,11 @@ typedef enum : NSUInteger {
                 NSNumber *fast = responseObject[@"data"][@"fastestFeeMax"];
 
                 int f = ([slow intValue] +[fast intValue])/2;
-                NSString *priceSlow = [CoinUtil convertToRealCoin:[NSString stringWithFormat:@"%@",slow] coin:@"BTC"];
-                NSString *priceFast = [CoinUtil convertToRealCoin:[NSString stringWithFormat:@"%@",fast] coin:@"BTC"];
+                NSString *priceSlow = [NSString stringWithFormat:@"%@",slow];
+                NSString *priceFast = [NSString stringWithFormat:@"%@",fast];
                 self.priceSlow = priceSlow;
                 self.priceFast = priceFast;
-                NSString *price = [CoinUtil convertToRealCoin:[NSString stringWithFormat:@"%d",f] coin:@"BTC"];
+                NSString *price = [NSString stringWithFormat:@"%d",f];
 
                 NSLog(@"%@low@,fast%@",priceSlow,priceFast);
                 self.gamPrice = [price floatValue ] ;
@@ -1140,16 +1140,16 @@ typedef enum : NSUInteger {
         NSLog(@"%f", value);
         if (value == 0) {
             if ([self.currency.symbol isEqualToString:@"BTC"]) {
-                self.blanceFree.text = [NSString stringWithFormat:@"%@ %@",self.priceSlow,self.currency.symbol];
-                self.pricr = [NSString stringWithFormat:@"%lld",[self.pricr longLongValue]/2];
+                self.blanceFree.text = [NSString stringWithFormat:@"%@ %@",self.priceSlow,@"sat/b"];
+                self.pricr = self.priceSlow;
             }else{
-                self.blanceFree.text = [NSString stringWithFormat:@"%.8f %@",self.gamPrice/2,self.currency.symbol];
+                self.blanceFree.text = [NSString stringWithFormat:@"%.0f %@",self.gamPrice/2,self.currency.symbol];
                 self.pricr = [NSString stringWithFormat:@"%lld",[self.pricr longLongValue]/2];
             }
             
         }else{
             if ([self.currency.symbol isEqualToString:@"BTC"]) {
-                self.blanceFree.text = [NSString stringWithFormat:@"%.8f %@",self.gamPrice*value*2,self.currency.symbol];
+                self.blanceFree.text = [NSString stringWithFormat:@"%.0f %@",self.gamPrice*value,@"sat/b"];
                 
                 self.pricr = [NSString stringWithFormat:@"%f",[self.pricr longLongValue]*value];
             }else{
@@ -1164,7 +1164,7 @@ typedef enum : NSUInteger {
          {
           
              if ([self.currency.symbol isEqualToString:@"BTC"]) {
-                 self.blanceFree.text = [NSString stringWithFormat:@"%@ %@",self.priceFast,self.currency.symbol];
+                 self.blanceFree.text = [NSString stringWithFormat:@"%@ %@",self.priceFast,@"sat/b"];
                  
                  self.pricr = [NSString stringWithFormat:@"%f",[self.pricr longLongValue]*value*2];
              }else{
@@ -1247,23 +1247,49 @@ typedef enum : NSUInteger {
     switch (index) {
         case 2:
             //优先
-            self.minerFeeTF.text = [NSString stringWithFormat:@"%.8f %@",self.gamPrice/2,self.currency.symbol];
-            self.choseLab.text =  [LangSwitcher switchLang:@"经济" key:nil];
-            self.pricr = [NSString stringWithFormat:@"%lld",[self.pricr longLongValue]/2];
-            self.slider.value = 0.5;
+            
+            if ([self.currency.symbol isEqualToString:@"BTC"]) {
+                self.minerFeeTF.text = [NSString stringWithFormat:@"%@ %@",self.priceSlow,@"sat/b"];
+                self.choseLab.text =  [LangSwitcher switchLang:@"经济" key:nil];
+//                self.pricr = [NSString stringWithFormat:@"%lld",[self.pricr longLongValue]/2];
+                self.slider.value = 0.5;
+            }else{
+                self.minerFeeTF.text = [NSString stringWithFormat:@"%.8f %@",self.gamPrice/2,self.currency.symbol];
+                self.choseLab.text =  [LangSwitcher switchLang:@"经济" key:nil];
+                self.pricr = [NSString stringWithFormat:@"%lld",[self.pricr longLongValue]/2];
+                self.slider.value = 0.5;
+            }
+          
             break;
         case 1:
-            //普通
-            self.blanceFree.text = [NSString stringWithFormat:@"%.8f %@",self.gamPrice,self.currency.symbol];
-//            self.choseLab.text =  [LangSwitcher switchLang:@"普通" key:nil];
-            self.pricr = [NSString stringWithFormat:@"%lld",[self.pricr longLongValue]];
+            if ([self.currency.symbol isEqualToString:@"BTC"]) {
+                self.blanceFree.text = [NSString stringWithFormat:@"%.0f %@",self.gamPrice,@"sat/b"];
+                //            self.choseLab.text =  [LangSwitcher switchLang:@"普通" key:nil];
+//                self.pricr = [NSString stringWithFormat:@"%lld",[self.pricr longLongValue]];
 
+            }else{
+                
+                self.blanceFree.text = [NSString stringWithFormat:@"%.8f %@",self.gamPrice,self.currency.symbol];
+                //            self.choseLab.text =  [LangSwitcher switchLang:@"普通" key:nil];
+                self.pricr = [NSString stringWithFormat:@"%lld",[self.pricr longLongValue]];
+
+            }
+            //普通
+         
             break;
         case 0:
             //经济
-            self.minerFeeTF.text = [NSString stringWithFormat:@"%.8f %@",self.gamPrice*2,self.currency.symbol];
-            self.choseLab.text =  [LangSwitcher switchLang:@"优先" key:nil];
-            self.pricr = [NSString stringWithFormat:@"%lld",[self.pricr longLongValue]*2];
+            if ([self.currency.symbol isEqualToString:@"BTC"]) {
+                self.minerFeeTF.text = [NSString stringWithFormat:@"%@ %@",self.priceFast,@"sat/b"];
+                self.choseLab.text =  [LangSwitcher switchLang:@"优先" key:nil];
+//                self.pricr = [NSString stringWithFormat:@"%lld",[self.pricr longLongValue]*2];
+            }else{
+                
+                self.minerFeeTF.text = [NSString stringWithFormat:@"%.8f %@",self.gamPrice*2,self.currency.symbol];
+                self.choseLab.text =  [LangSwitcher switchLang:@"优先" key:nil];
+                self.pricr = [NSString stringWithFormat:@"%lld",[self.pricr longLongValue]*2];
+            }
+          
 
 //            self.pricr = [NSString stringWithFormat:@"%f",[self.pricr floatValue]];
             break;
