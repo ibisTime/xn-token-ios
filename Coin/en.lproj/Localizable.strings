@@ -275,7 +275,7 @@
 "稍后升级" = "Later";
 "您已通过实名认证" = "You have passed the real-name authentication";
 
-"您的账号已在其他终端登录,重新登录" = "Your account is already logged in at another terminal, log on again ";
+"token信息已失效,请重新登录" = "Your account is already logged in at another terminal, log on again ";
 "交易记录" = "Transaction record";
 "重新获取" = "Retrieved";
 "加载失败" = "Load error";
@@ -632,6 +632,9 @@
 "版本修复" = "Repair Version";
 "请选择客户端" = "select the client";
 "已领取" = "Already received";
+"请选择账户来源" = "select an account source";
+
+
 
 
 

@@ -15,6 +15,7 @@
 #import "BuildSucessVC.h"
 #import "TLTabBarController.h"
 #import "BuildBackUpVC.h"
+#import "TLNewPwdVC.h"
 @interface WalletSettingVC ()
 @property (nonatomic, strong) SettingGroup *group;
 @property (nonatomic, strong) SettingTableView *tableView;
@@ -67,7 +68,7 @@
     self.importButton.titleLabel.font = [UIFont systemFontOfSize:16];
     
     [self.importButton setTitleColor:kAppCustomMainColor forState:UIControlStateNormal];
-    [self.importButton addTarget:self action:@selector(importNow) forControlEvents:UIControlEventTouchUpInside];
+    [self.importButton addTarget:self action:@selector(import) forControlEvents:UIControlEventTouchUpInside];
     [self.importButton setBackgroundColor:kWhiteColor forState:UIControlStateNormal];
     self.importButton.layer.borderColor = (kAppCustomMainColor.CGColor);
     self.importButton.layer.borderWidth = 1;
@@ -82,7 +83,7 @@
     }];
 }
 
-- (void)importNow
+- (void)import
 {
     WalletDelectVC *authVC = [WalletDelectVC new];
 //    authVC.WalletType = WalletWordTypeThree;
@@ -167,13 +168,15 @@
     changeTradePwd.text = [LangSwitcher switchLang:@"修改密码" key:nil];
     [changeTradePwd setAction:^{
         
-        
-        CheckForwordVC *pwdAboutVC = [[CheckForwordVC alloc] init];
-        pwdAboutVC.title = [LangSwitcher switchLang:@"修改交易密码" key:nil];
+        TLNewPwdVC *new = [[TLNewPwdVC alloc] init];
+        new.title = [LangSwitcher switchLang:@"修改交易密码" key:nil];
 
-        pwdAboutVC.Type = PassWprdTypeFirst;
-        pwdAboutVC.WalletType = WalletWordTypeFirst;
-        [weakSelf.navigationController pushViewController:pwdAboutVC animated:YES];
+//        CheckForwordVC *pwdAboutVC = [[CheckForwordVC alloc] init];
+//        pwdAboutVC.title = [LangSwitcher switchLang:@"修改交易密码" key:nil];
+//
+//        pwdAboutVC.Type = PassWprdTypeFirst;
+//        pwdAboutVC.WalletType = WalletWordTypeFirst;
+        [weakSelf.navigationController pushViewController:new animated:YES];
         
     }];
     

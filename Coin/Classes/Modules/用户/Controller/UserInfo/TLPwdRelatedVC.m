@@ -433,9 +433,9 @@
         return;
     }
     
-    if ((!self.pwdTf.text || self.pwdTf.text.length != 6)) {
+    if ((!self.pwdTf.text )) {
         
-        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入6位密码" key:nil]];
+        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入密码" key:nil]];
         return;
     }
     

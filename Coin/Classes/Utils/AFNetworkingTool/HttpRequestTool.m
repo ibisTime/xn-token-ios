@@ -161,7 +161,7 @@
         
         if ([responseObj[@"errorCode"] isEqual:@"4"]) {
             //token错误  4
-            NSString *text = [LangSwitcher switchLang:@"您的账号已在其他终端登录,重新登录" key:nil];
+            NSString *text = [LangSwitcher switchLang:@"token信息已失效,请重新登录" key:nil];
             [self showTextOnly:text];
 //            [[NSNotificationCenter defaultCenter] postNotificationName:kUserLoginOutNotification object:nil];
 
