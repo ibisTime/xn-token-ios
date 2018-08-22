@@ -74,6 +74,7 @@
         weakSelf.view2.hidden = YES;
         TLPwdRelatedVC *vc  = [[TLPwdRelatedVC alloc] initWithType:TLPwdTypeTradeReset];
         [weakSelf.navigationController pushViewController:vc animated:YES];
+        
     };
 
     pwdView.hidden = YES;
@@ -83,7 +84,9 @@
     UIWebView *web = [[UIWebView alloc] init];
     [self.contentView addSubview:web];
     web.delegate =self;
+    web.dataDetectorTypes=UIDataDetectorTypeNone;
     
+
     [web mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.bottomLab.mas_bottom).offset(15);
         make.left.equalTo(self.view.mas_left).offset(15);
@@ -399,7 +402,7 @@
     
     [view1 addSubview:whiteView];
     
-    whiteView.frame = CGRectMake(24, 194, kScreenWidth - 48, 300);
+    whiteView.frame = CGRectMake(24, 194, kScreenWidth - 48, 330);
     
     whiteView.backgroundColor = kWhiteColor;
     whiteView.userInteractionEnabled = YES;
@@ -518,7 +521,7 @@
     TLTextField *inputFiled = [[TLTextField alloc] initWithFrame:CGRectZero leftTitle:nil titleWidth:15 placeholder:[LangSwitcher switchLang:@"请输入购买额度" key:nil]];
     [whiteView addSubview:inputFiled];
     self.inputFiled = inputFiled;
-    inputFiled.keyboardType = UIKeyboardTypeNumberPad;
+    inputFiled.keyboardType = UIKeyboardTypeDecimalPad ;
     [inputFiled mas_makeConstraints:^(MASConstraintMaker *make) {
        
         make.top.equalTo(buyCount.mas_bottom).offset(5);
@@ -584,10 +587,10 @@
     [sureButton addTarget:self action:@selector(payMoney) forControlEvents:UIControlEventTouchUpInside];
     
     [sureButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(line1.mas_bottom).offset(56);
+        make.top.equalTo(line1.mas_bottom).offset(46);
         make.left.equalTo(whiteView.mas_left).offset(20);
         make.right.equalTo(whiteView.mas_right).offset(-20);
-        make.height.equalTo(@50);
+        make.height.equalTo(@(50));
         
     }];
 }
@@ -598,7 +601,8 @@
     [self.inputFiled resignFirstResponder];
     if (![self.inputFiled.text isBlank] ) {
         
-        self.coinLab.text = [NSString stringWithFormat:@"%.2f",[self.moneyModel.expectYield floatValue]* [self.inputFiled.text floatValue] ];
+        
+        self.coinLab.text = [NSString stringWithFormat:@"%.2f",[self.moneyModel.expectYield floatValue]* [self.inputFiled.text floatValue]/360* [self.moneyModel.limitDays floatValue]];
 
         
     }
@@ -607,6 +611,7 @@
 
 - (void)transformMoney
 {
+    self.view1.hidden = YES;
     RechargeCoinVC *coinVC = [RechargeCoinVC new];
 
     TLNavigationController * navigation = [[TLNavigationController alloc]initWithRootViewController:coinVC];
@@ -691,6 +696,9 @@
         
     }
     
+    [self.inputFiled resignFirstResponder];
+    [self.view1 endEditing:YES];
+    [self.view endEditing:YES];
     self.view1.hidden = YES;
     //确认购买
     
@@ -699,6 +707,13 @@
     payModel.name = self.moneyModel.symbol;
     payModel.count = self.inputFiled.text;
     payModel.endTime = self.moneyModel.arriveDatetime;
+    if (![self.inputFiled.text isBlank] ) {
+        
+        
+        self.coinLab.text = [NSString stringWithFormat:@"%.2f",[self.moneyModel.expectYield floatValue]* [self.inputFiled.text floatValue]/360* [self.moneyModel.limitDays floatValue]];
+        
+        
+    }
     payModel.getFree = self.coinLab.text;
 
     
@@ -826,7 +841,7 @@
     money.text = self.payModel.getFree;
     [whiteView addSubview:money];
     [money mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(moneyMay.mas_top);
+        make.centerY.equalTo(moneyMay.mas_centerY);
         make.left.equalTo(moneyMay.mas_right).offset(20);
     }];
     UILabel *buysymbol1 = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextBlack font:14];
@@ -872,6 +887,22 @@
 
 - (void)payMoneyNow
 {
+    
+    if ([[TLUser user].tradepwdFlag isEqualToString:@"0"]) {
+        TLPwdType pwdType = TLPwdTypeSetTrade;
+        TLPwdRelatedVC *pwdRelatedVC = [[TLPwdRelatedVC alloc] initWithType:pwdType];
+        
+        pwdRelatedVC.isWallet = YES;
+        pwdRelatedVC.success = ^{
+            
+            
+            
+        };
+        self.navigationController.navigationBar.hidden = NO;
+        [self.navigationController pushViewController:pwdRelatedVC animated:YES];
+        return;
+    }
+    
     //确认付款
     self.view2.hidden = YES;
     self.pwdView.hidden = NO;
@@ -903,6 +934,7 @@
             [weakSelf showBuySucess];
 
         } failure:^(NSError *error) {
+            return ;
             
         }];
         

@@ -99,7 +99,7 @@
     //    self.stateLab.font = Font(26);
     //    self.stateLab.numberOfLines = 0;
     //    [self.stateLab sizeToFit];
-    self.desLab = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor3 font:14];
+    self.desLab = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor2 font:14];
     self.timeLab = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextBlack font:14];
    
 
@@ -419,14 +419,14 @@
         self.stateLab.text =  [LangSwitcher switchLang:@"购买成功" key:nil];;
 
         
-    }else if ([model.status isEqualToString:@"已到期"])
+    }else if ([model.status isEqualToString:@"2"])
     {
         self.stateLab.text =  [LangSwitcher switchLang:@"已到期" key:nil];;
 
         
     }else
     {
-        self.stateLab.text =  [LangSwitcher switchLang:@"募集失败" key:nil];;
+        self.stateLab.text =  [LangSwitcher switchLang:@"已到期" key:nil];;
 
         
     }
@@ -436,7 +436,7 @@
   
     self.desLab.text =   [LangSwitcher switchLang:@"合约编号" key:nil];;
     self.timeLab.text = model.produceModel.code;
-    self.totalLable.text =  [LangSwitcher switchLang:@"产品年限" key:nil];
+    self.totalLable.text =  [LangSwitcher switchLang:@"产品期限" key:nil];
 
     self.freeLable.text =  [LangSwitcher switchLang:@"交易时间" key:nil];
     self.freeTime.text = [model.produceModel.createDatetime convertToDetailDate];
@@ -455,7 +455,7 @@
     self.beiginLableDetail.text = [NSString stringWithFormat:@"%.2f%@",[inall floatValue],model.produceModel.symbol];
     self.beiginTime.text = [LangSwitcher switchLang:@"起息时间" key:nil];
     self.beiginTimeLab.text = [model.produceModel.incomeDatetime convertToDetailDate ];
-    self.endTime.text = [LangSwitcher switchLang:@"到息时间" key:nil];
+    self.endTime.text = [LangSwitcher switchLang:@"到期时间" key:nil];
     self.endTimeLab.text = [model.produceModel.arriveDatetime convertToDetailDate ];
 
 

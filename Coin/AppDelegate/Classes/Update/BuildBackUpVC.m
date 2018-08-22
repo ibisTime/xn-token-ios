@@ -31,7 +31,8 @@
 
 @property (nonatomic, strong) NSMutableArray <CurrencyTitleModel *> *tempNames;
 @property (nonatomic ,strong) UIView *whiteView;
-
+@property (nonatomic ,strong) UIView *showView;
+@property (nonatomic ,strong) UIView * view1;
 @end
 
 @implementation BuildBackUpVC
@@ -42,11 +43,128 @@
 //    [self.navigationItem setHidesBackButton:YES];
 //    [self.navigationController.navigationBar.backItem setHidesBackButton:YES];
     [self initWalletUI];
+    [self initShowView];
     [self inititem];
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 }
 
+- (void)initShowView
+{
+    
+//    UIView *bottom = []
+    
+    UIView * view1 = [UIView new];
+    self.view1 = view1;
+    view1.userInteractionEnabled = YES;
+    UITapGestureRecognizer *t = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideinPut)];
+    
+    [view1 addGestureRecognizer:t];
+    self.view1.hidden = NO;
+    
+    view1.frame =CGRectMake(0, 0, kScreenWidth, kScreenHeight);
+    view1.backgroundColor =
+    view1.backgroundColor = [UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0.45];
+    
+    //    view.alpha = 0.5;
+    UIWindow *window = [[UIApplication sharedApplication] keyWindow];
+    [window addSubview:view1];
+    
+    UIView *showView = [UIView new];
+    self.showView = showView;
+    showView.backgroundColor = kHexColor(@"#FB744E");
+    
+    [self.view1 addSubview:showView];
+    
+    showView.layer.cornerRadius = 4;
+    showView.clipsToBounds = YES;
+    
+    [showView mas_makeConstraints:^(MASConstraintMaker *make) {
+       
+        make.top.equalTo(@(kHeight(180)));
+        make.left.equalTo(@35);
+        make.right.equalTo(@-35);
+        make.height.equalTo(@245);
+
+    }];
+    
+    UILabel *tit =[UILabel labelWithBackgroundColor:kClearColor textColor:kWhiteColor font:22];
+    
+    tit.text = [LangSwitcher switchLang:@"请勿截图" key:nil];
+    [showView addSubview:tit];
+    tit.textAlignment = NSTextAlignmentCenter;
+    [tit mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.top.equalTo(showView.mas_top).offset(26);
+        make.centerX.equalTo(showView.mas_centerX);
+        make.left.equalTo(@35);
+        make.right.equalTo(@-35);
+        
+    }];
+    UILabel *tit1 =[UILabel labelWithBackgroundColor:kClearColor textColor:kWhiteColor font:12];
+    tit1.textAlignment = NSTextAlignmentCenter;
+
+    tit1.text = [LangSwitcher switchLang:@"请确保四周无人及无任何摄像头!" key:nil];
+    [showView addSubview:tit1];
+    
+    [tit1 mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.top.equalTo(tit.mas_bottom).offset(8);
+        make.centerX.equalTo(showView.mas_centerX);
+ 
+        
+    }];
+    
+    UILabel *tit2 =[UILabel labelWithBackgroundColor:kClearColor textColor:kWhiteColor font:12];
+    tit2.textAlignment = NSTextAlignmentCenter;
+
+    tit2.text = [LangSwitcher switchLang:@"务用截图或者拍照方式保存助记词" key:nil];
+    [showView addSubview:tit2];
+    
+    [tit2 mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.top.equalTo(tit1.mas_bottom).offset(2);
+        make.centerX.equalTo(showView.mas_centerX);
+   
+    }];
+    
+    UIImageView *im  =[[UIImageView alloc] init];
+    im.contentMode = UIViewContentModeScaleToFill;
+    im.image = kImage(@"请勿截图");
+    [showView addSubview:im];
+    [im mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.top.equalTo(tit2.mas_bottom).offset(15);
+        make.centerX.equalTo(showView.mas_centerX);
+    
+        make.width.equalTo(@60);
+        make.height.equalTo(@70);
+
+    }];
+    
+    UIButton *knowBut = [UIButton buttonWithTitle:@"知道了" titleColor:kHexColor(@"#FB744E") backgroundColor:kWhiteColor titleFont:14];
+    [self.view1 addSubview:knowBut];
+    knowBut.layer.cornerRadius =4;
+    knowBut.clipsToBounds = YES;
+    [knowBut mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.centerY.equalTo(showView.mas_bottom);
+        make.centerX.equalTo(showView.mas_centerX);
+        
+        make.width.equalTo(@122);
+        make.height.equalTo(@36);
+        
+    }];
+    
+    [knowBut addTarget:self action:@selector(known) forControlEvents:UIControlEventTouchUpInside];
+    
+}
+
+- (void)known
+{
+    
+    self.view1.hidden = YES;
+    }
 - (void)inititem
 {
     NSArray *words = [self.mnemonics componentsSeparatedByString:@" "];

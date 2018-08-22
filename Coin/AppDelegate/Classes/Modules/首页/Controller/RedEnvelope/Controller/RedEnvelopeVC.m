@@ -120,8 +120,22 @@
 
 -(void)SendRedEnvelopeButton:(NSInteger)tag currency:(NSString *)currency type:(NSString *)type count:(NSString *)count sendNum:(NSString *)sendNum greeting:(NSString *)greeting
 {
-   
-        [self GiveAnyRequestAndCurrency:currency type:type count:count sendNum:sendNum greeting:greeting];
+    if ([[TLUser user].tradepwdFlag isEqualToString:@"0"]) {
+        TLPwdType pwdType = TLPwdTypeSetTrade;
+        TLPwdRelatedVC *pwdRelatedVC = [[TLPwdRelatedVC alloc] initWithType:pwdType];
+        
+        pwdRelatedVC.isWallet = YES;
+        pwdRelatedVC.success = ^{
+            
+            [self GiveAnyRequestAndCurrency:currency type:type count:count sendNum:sendNum greeting:greeting];
+
+            
+        };
+        
+        [self.navigationController pushViewController:pwdRelatedVC animated:YES];
+        return;
+    }
+    [self GiveAnyRequestAndCurrency:currency type:type count:count sendNum:sendNum greeting:greeting];
 
 }
 

@@ -69,13 +69,13 @@
         money = [LangSwitcher switchLang:@"正在打包中,即将到账" key:nil];
 
     }else{
-        money = [CoinUtil convertToRealCoin:utModel.value coin:@"BTC"];
+//        money = [CoinUtil convertToRealCoin:utModel.value coin:@"BTC"];
 
     }
 //    NSString *money = [CoinUtil convertToRealCoin:utModel.value coin:@"BTC"];
     self.titleLbl.text = utModel.addr;
     
-    self.rightLabel.text = [NSString stringWithFormat:@"%@ BTC",money];
+    self.rightLabel.text = [NSString stringWithFormat:@"%@ BTC",utModel.value];
     if ([self.address isEqualToString:utModel.addr]) {
         self.titleLbl.textColor = kAppCustomMainColor;
 

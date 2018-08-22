@@ -13,6 +13,7 @@
 #import "TLTextField.h"
 #import "CaptchaView.h"
 #import "BuildSucessVC.h"
+#import "NSString+Check.h"
 @interface BuildWalletMineVC ()
 
 @property (nonatomic ,strong) UIImageView *iconImage;
@@ -37,6 +38,7 @@
 
 @property (nonatomic,strong) TLTextField *introduceTf;
 
+@property (nonatomic,copy)NSString *isSelect;
 
 @end
 
@@ -222,21 +224,33 @@
     
     self.introduceButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [self.view addSubview:self.introduceButton];
-        NSString *text3 =  [LangSwitcher switchLang:@"我已阅读并同意服务及隐私条款" key:nil];
+//        NSString *text3 =  [LangSwitcher switchLang:@"我已阅读并同意服务及隐私条款" key:nil];
         [self.introduceButton setImage:kImage(@"打勾 圆") forState:UIControlStateNormal];
+        [self.introduceButton setImage:kImage(@"未选中") forState:UIControlStateSelected];
+        _isSelect = @"1";
+//        [self.introduceButton setTitle:text3 forState:UIControlStateNormal];
+    [self.introduceButton addTarget:self action:@selector(html5Pri:) forControlEvents:UIControlEventTouchUpInside];
 
-        [self.introduceButton setTitle:text3 forState:UIControlStateNormal];
-        [self.introduceButton addTarget:self action:@selector(html5Wallet) forControlEvents:UIControlEventTouchUpInside];
     self.introduceButton.titleLabel.font = [UIFont systemFontOfSize:12];
     [self.introduceButton setTitleColor:kAppCustomMainColor forState:UIControlStateNormal];
         [self.introduceButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(rePwdTf.mas_bottom).offset(15);
             make.left.equalTo(whiteView.mas_left).offset(15);
-            make.width.equalTo(@(207));
+            make.width.equalTo(@(30));
             make.height.equalTo(@30);
     
         }];
-
+    UIButton *button = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"我已阅读并同意服务及隐私条款" key:nil] titleColor:kAppCustomMainColor backgroundColor:kClearColor titleFont:12];
+    button.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    [button addTarget:self action:@selector(html5Wallet) forControlEvents:(UIControlEventTouchUpInside)];
+    [self.view addSubview:button];
+    [button mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(rePwdTf.mas_bottom).offset(15);
+        make.left.equalTo(self.introduceButton.mas_right).offset(0);
+        make.width.equalTo(@(SCREEN_WIDTH - 60));
+        make.height.equalTo(@30);
+        
+    }];
     
     self.buildButton = [UIButton buttonWithImageName:nil cornerRadius:6];
     NSString *text =  [LangSwitcher switchLang:@"创建钱包" key:nil];
@@ -329,20 +343,20 @@
 {
     
     
-    if (!self.nameTf.text) {
+    if ([self.nameTf.text isBlank]) {
 
         [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入钱包名称" key:nil]];
 
         return;
     }
     
-    if ((!self.pwdTf.text)) {
+    if (([self.pwdTf.text isBlank])) {
         [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入密码" key:nil]];
         
         return;
     }
     
-    if ((!self.rePwdTf.text )) {
+    if (([self.rePwdTf.text isBlank])) {
         
         [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入密码" key:nil]];
         return;
@@ -354,7 +368,12 @@
         return;
         
     }
-    
+    if (![self.isSelect isEqualToString:@"1"]) {
+        
+        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请先阅读并同意服务条款" key:nil]];
+        
+        return;
+    }
     BuildSucessVC *sucess = [[BuildSucessVC alloc] init];
     sucess.name = self.nameTf.text;
     sucess.PWD = self.rePwdTf.text;
@@ -393,7 +412,18 @@
     [self.navigationController pushViewController:vc animated:YES];
     
 }
-
+- (void)html5Pri:(UIButton *)sender
+{
+    sender.selected = !sender.selected;
+    if (sender.selected == YES)
+    {
+        _isSelect = @"0";
+    }else
+    {
+        _isSelect = @"1";
+    }
+    
+}
 //加载隐私条款
 - (void)html5Wallet
 {

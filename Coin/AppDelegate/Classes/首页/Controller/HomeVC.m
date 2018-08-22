@@ -333,37 +333,28 @@
 }
 
 #pragma mark - HeaderEvents
-- (void)headerViewEventsWithType:(HomeEventsType)type index:(NSInteger)index  model:(HomeFindModel *)model {
+- (void)headerViewEventsWithType:(HomeEventsType)type index:(NSInteger)index  model:(HomeFindModel *)model
+{
     
     if ([model.action isEqualToString:@"red_packet"]) {
         
         RedEnvelopeVC *redEnvelopeVC = [RedEnvelopeVC new];
         
-        if ([[TLUser user].tradepwdFlag isEqualToString:@"0"]) {
-            TLPwdType pwdType = TLPwdTypeSetTrade;
-            TLPwdRelatedVC *pwdRelatedVC = [[TLPwdRelatedVC alloc] initWithType:pwdType];
-            
-            pwdRelatedVC.isWallet = YES;
-            pwdRelatedVC.success = ^{
-                
-                
-                //                    [self presentViewController:redEnvelopeVC animated:YES completion:nil];
-                [self.navigationController pushViewController:redEnvelopeVC animated:YES];
-                
-            };
-            [self.navigationController pushViewController:pwdRelatedVC animated:YES];
-            return;
-            
-        }else{
-            
+//        if ([[TLUser user].tradepwdFlag isEqualToString:@"0"]) {
+//            TLPwdType pwdType = TLPwdTypeSetTrade;
+//            TLPwdRelatedVC *pwdRelatedVC = [[TLPwdRelatedVC alloc] initWithType:pwdType];
+        
+//            pwdRelatedVC.isWallet = YES;
+//            pwdRelatedVC.success = ^{
+//
+//
+//                //                    [self presentViewController:redEnvelopeVC animated:YES completion:nil];
+//                [self.navigationController pushViewController:redEnvelopeVC animated:YES];
+        //            [self.navigationController pushViewController:redEnvelopeVC animated:YES];
             [self.navigationController pushViewController:redEnvelopeVC animated:YES];
-            
             return;
 
-        }
-
-//        return;
-    }
+            }
     
     if ([model.action isEqualToString:@"none"]) {
             HTMLStrVC *vc = [HTMLStrVC new];
@@ -379,31 +370,13 @@
          {
              PosMiningVC *vc = [PosMiningVC new];
              
-             
-             if ([[TLUser user].tradepwdFlag isEqualToString:@"0"]) {
-                 TLPwdType pwdType = TLPwdTypeSetTrade;
-                 TLPwdRelatedVC *pwdRelatedVC = [[TLPwdRelatedVC alloc] initWithType:pwdType];
-                 
-                 pwdRelatedVC.isWallet = YES;
-                 pwdRelatedVC.success = ^{
-                     
-                     
-                     //                    [self presentViewController:redEnvelopeVC animated:YES completion:nil];
-                     [self.navigationController pushViewController:vc animated:YES];
-                     
-                 };
-                 [self.navigationController pushViewController:pwdRelatedVC animated:YES];
-                 
-                 
-             }else{
+            
                  [self.navigationController pushViewController:vc animated:YES];
-                 
-             }
-             
+          
              return;
-         }
-        
+     
         }
+    }
     
     switch (type) {
             
@@ -431,27 +404,27 @@
         {
             RedEnvelopeVC *redEnvelopeVC = [RedEnvelopeVC new];
             
-            if ([[TLUser user].tradepwdFlag isEqualToString:@"0"]) {
-                TLPwdType pwdType = TLPwdTypeSetTrade;
-                TLPwdRelatedVC *pwdRelatedVC = [[TLPwdRelatedVC alloc] initWithType:pwdType];
-                
-                pwdRelatedVC.isWallet = YES;
-                pwdRelatedVC.success = ^{
-                    
-                    
+//            if ([[TLUser user].tradepwdFlag isEqualToString:@"0"]) {
+//                TLPwdType pwdType = TLPwdTypeSetTrade;
+//                TLPwdRelatedVC *pwdRelatedVC = [[TLPwdRelatedVC alloc] initWithType:pwdType];
+//
+//                pwdRelatedVC.isWallet = YES;
+//                pwdRelatedVC.success = ^{
+//
+//
 //                    [self presentViewController:redEnvelopeVC animated:YES completion:nil];
                     [self.navigationController pushViewController:redEnvelopeVC animated:YES];
 
-                };
-                [self.navigationController pushViewController:pwdRelatedVC animated:YES];
-                
-                
-            }else{
-                
-                [self.navigationController pushViewController:redEnvelopeVC animated:YES];
-
-                
-            }
+//                };
+//                [self.navigationController pushViewController:pwdRelatedVC animated:YES];
+//
+//
+//            }else{
+//
+//                [self.navigationController pushViewController:redEnvelopeVC animated:YES];
+//
+//
+//            }
 
             
         }break;
@@ -470,27 +443,27 @@
             PosMiningVC *vc = [PosMiningVC new];
             
             
-            if ([[TLUser user].tradepwdFlag isEqualToString:@"0"]) {
-                TLPwdType pwdType = TLPwdTypeSetTrade;
-                TLPwdRelatedVC *pwdRelatedVC = [[TLPwdRelatedVC alloc] initWithType:pwdType];
-                
-                pwdRelatedVC.isWallet = YES;
-                pwdRelatedVC.success = ^{
-                    
+//            if ([[TLUser user].tradepwdFlag isEqualToString:@"0"]) {
+//                TLPwdType pwdType = TLPwdTypeSetTrade;
+//                TLPwdRelatedVC *pwdRelatedVC = [[TLPwdRelatedVC alloc] initWithType:pwdType];
+//
+//                pwdRelatedVC.isWallet = YES;
+//                pwdRelatedVC.success = ^{
+            
                     
                     //                    [self presentViewController:redEnvelopeVC animated:YES completion:nil];
                     [self.navigationController pushViewController:vc animated:YES];
                     
-                };
-            
-//            HTMLStrVC *vc = [HTMLStrVC new];
-//            vc.des = model.Description;
-//            vc.type = HTMLTypeQuantitative_finance;
-            }else{
+//                };
+//
+////            HTMLStrVC *vc = [HTMLStrVC new];
+////            vc.des = model.Description;
+////            vc.type = HTMLTypeQuantitative_finance;
+//            }else{
                 [self.navigationController pushViewController:vc animated:YES];
 
                 
-            }
+//            }
         }
             break;
         case HomeEventsTypeRedEnvelope:

@@ -84,7 +84,7 @@
           
         }];
         
-        self.timeLbl = [UILabel labelWithFrame:CGRectMake(left,15, 40, 20) textAligment:NSTextAlignmentLeft
+        self.timeLbl = [UILabel labelWithFrame:CGRectZero textAligment:NSTextAlignmentLeft
                                backgroundColor:[UIColor clearColor]
                                           font:Font(12.0)
                                      textColor:kTextColor2];
@@ -121,7 +121,7 @@
         [self addSubview:self.introduceLab];
         
         [self.introduceLab mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.dayLbl.mas_bottom).offset(3);
+            make.top.equalTo(self.timeLbl.mas_bottom).offset(3);
             make.left.equalTo(self.iconIV.mas_right).offset(15);
             make.right.equalTo(self.mas_right).offset(-15);
 
@@ -188,13 +188,14 @@
     CoinModel *coin = [CoinUtil getCoinModel:self.currencyModel.symbol];
     if ([billModel.direction isEqualToString:@"1"]) {
         self.moneyLbl.textColor = kHexColor(@"#47D047");
+        NSString *countStr = [CoinUtil convertToRealCoin:_billModel.value
+                                                    coin:self.currencyModel.symbol];
         if (![_billModel.value valid]) {
-            self.moneyLbl.text = [NSString stringWithFormat:@"%@",[LangSwitcher switchLang:@"即将到账" key:nil]];
+            self.moneyLbl.text = [NSString stringWithFormat:@"%@%@%@",countStr,self.currencyModel.symbol,[LangSwitcher switchLang:@"即将到账" key:nil]];
 
         }else{
             if ([_billModel.height isEqualToString:@"-1"]) {
-                self.moneyLbl.text = [NSString stringWithFormat:@"%@",[LangSwitcher switchLang:@"即将到账" key:nil]];
-
+                self.moneyLbl.text = [NSString stringWithFormat:@"%@%@%@",countStr,self.currencyModel.symbol,[LangSwitcher switchLang:@"即将到账" key:nil]];
             }else{
                 
                 NSString *countStr = [CoinUtil convertToRealCoin:_billModel.value
@@ -205,9 +206,9 @@
 
         }
         
-        self.introduceLab.text = [NSString stringWithFormat:@"%@-%@",[LangSwitcher switchLang:@"收款-外部地址" key:nil],billModel.from];
+        self.introduceLab.text = [NSString stringWithFormat:@"%@",billModel.from];
         if ([self.currencyModel.symbol isEqualToString:@"BTC"]) {
-            self.introduceLab.text = [NSString stringWithFormat:@"%@-%@",[LangSwitcher switchLang:@"收款-交易Hash" key:nil],billModel.txHash];
+            self.introduceLab.text = [NSString stringWithFormat:@"%@",billModel.txHash];
 
         }
         
@@ -231,9 +232,9 @@
             }
   
         }
-         self.introduceLab.text = [NSString stringWithFormat:@"%@-%@",[LangSwitcher switchLang:@"转账-外部地址" key:nil],billModel.to];
+         self.introduceLab.text = [NSString stringWithFormat:@"%@",billModel.to];
         if ([self.currencyModel.symbol isEqualToString:@"BTC"]) {
-            self.introduceLab.text = [NSString stringWithFormat:@"%@-%@",[LangSwitcher switchLang:@"转账-交易Hash" key:nil],billModel.txHash];
+            self.introduceLab.text = [NSString stringWithFormat:@"%@",billModel.txHash];
             
         }
         
@@ -254,13 +255,13 @@
     
     if ([billModel.direction isEqualToString:@"0"]) {
         self.detailLbl.text = [LangSwitcher switchLang:[NSString stringWithFormat:@"转账"] key:nil]; ;
-        self.iconIV.image = kImage(@"转出");
+        self.iconIV.image = kImage(@"转账");
 
 
     }else
     {
          self.detailLbl.text = [LangSwitcher switchLang:[NSString stringWithFormat:@"收款"] key:nil]; ;
-        self.iconIV.image  = kImage(@"转入");
+        self.iconIV.image  = kImage(@"收款");
 
     }
 //    self.detailLbl.text = [LangSwitcher switchLang:_billModel.bizNote key:nil]; ;

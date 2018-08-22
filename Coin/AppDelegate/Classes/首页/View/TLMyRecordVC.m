@@ -11,10 +11,13 @@
 #import "TLtakeMoneyModel.h"
 #import "RecodeDetailVC.h"
 #import "CurrencyModel.h"
+#import "TLPlaceholderView.h"
 @interface TLMyRecordVC ()<RefreshDelegate>
 
 @property (nonatomic ,strong) TLMyRecodeTB *tableView;
 @property (nonatomic,strong) NSArray <TLtakeMoneyModel *>*Moneys;
+@property (nonatomic ,strong) UIView *placeHolderView;
+
 
 @end
 
@@ -23,7 +26,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self initPliceHodel];
     [self getMyCurrencyList];
     
     
@@ -41,6 +43,23 @@
         _tableView.backgroundColor = kWhiteColor;
         
         [self.view addSubview:_tableView];
+//        [self initPliceHodel];
+        self.placeHolderView = [[UIView alloc] initWithFrame:CGRectMake(0, 150, kScreenWidth,  40)];
+        
+        UILabel *textLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor2 font:14.0];
+        
+        textLbl.text = [LangSwitcher switchLang:@"暂无明细" key:nil];
+        textLbl.textAlignment = NSTextAlignmentCenter;
+        
+        [self.placeHolderView addSubview:textLbl];
+        [textLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.top.equalTo(self.placeHolderView.mas_top).offset(150);
+            make.centerX.equalTo(self.placeHolderView.mas_centerX);
+            
+        }];
+        [self.view addSubview:self.placeHolderView];
+        self.placeHolderView.hidden = YES;
         [_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
             
             make.edges.mas_equalTo(UIEdgeInsetsMake(0, 15, 0, 15));
@@ -63,6 +82,10 @@
         make.right.equalTo(self.view.mas_right);
         make.height.equalTo(@(kHeight(66)));
     }];
+    
+   
+    
+    
 }
 - (void)getMyCurrencyList {
     
@@ -79,6 +102,12 @@
         
         
         [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
+            if (objs.count == 0) {
+                weakSelf.placeHolderView.hidden = NO;
+                return ;
+            }
+            weakSelf.placeHolderView.hidden = YES;
+
             NSMutableArray *mod = [NSMutableArray array];
             for (int i = 0; i < objs.count; i++) {
                 TLtakeMoneyModel *model =objs[i];
@@ -96,7 +125,8 @@
             [weakSelf.tableView reloadData];
             
         } failure:^(NSError *error) {
-            
+            weakSelf.placeHolderView.hidden = NO;
+
             
         }];
         

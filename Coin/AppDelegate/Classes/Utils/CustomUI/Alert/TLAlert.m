@@ -298,7 +298,7 @@
     [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
         
         textField.placeholder = placeHolder;
-        textField.keyboardType = UIKeyboardTypePhonePad;
+//        textField.keyboardType = UIKeyboardTypePhonePad;
         textField.secureTextEntry = YES;
         
     }];

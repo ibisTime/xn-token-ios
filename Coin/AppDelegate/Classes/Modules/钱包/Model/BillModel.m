@@ -64,6 +64,10 @@
                            @"sendredpacket_out" : [LangSwitcher switchLang:@"发红包" key:nil],
                             @"redpacket_back" : [LangSwitcher switchLang:@"红包退回" key:nil],
                            @"sendredpacket_in" : [LangSwitcher switchLang:@"抢红包" key:nil],
+                           @"lhlc_invest" : [LangSwitcher switchLang:@"量化理财投资" key:nil],
+                           @"lhlc_repay" : [LangSwitcher switchLang:@"量化理财还款" key:nil],
+
+                           
                            };
     
     return dict[self.bizType];

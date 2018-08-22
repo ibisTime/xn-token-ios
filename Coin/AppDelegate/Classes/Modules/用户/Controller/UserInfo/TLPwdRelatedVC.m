@@ -176,7 +176,7 @@
     
     [self.view addSubview:view];
     view.backgroundColor = kWhiteColor;
-    view.frame = CGRectMake(0, 0, 100, 60);
+    view.frame = CGRectMake(0, 0, 100, 43);
     UIImageView *pic = [[UIImageView alloc] init];
     self.pic = pic;
     pic.userInteractionEnabled = YES;

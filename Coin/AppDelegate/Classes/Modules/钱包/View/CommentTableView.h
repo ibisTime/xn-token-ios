@@ -9,7 +9,7 @@
 #import "TLTableView.h"
 #import "utxoModel.h"
 @interface CommentTableView : TLTableView
-@property (nonatomic, strong) NSMutableArray <utxoModel *>*utxis;
+@property (nonatomic, strong) NSArray <utxoModel *>*utxis;
 
 @property (nonatomic, assign) CGFloat owHeight;
 

@@ -518,6 +518,9 @@
 - (void)payMoney
 {
     
+    
+    
+    
     self.view1.hidden = YES;
 //    self.view1.frame = CGRectZero;
 //    [self.view1 removeFromSuperview];

@@ -18,6 +18,7 @@
 #import "WalletNewFeaturesVC.h"
 #import "HTMLStrVC.h"
 #import "MnemonicUtil.h"
+#import "NSString+Check.h"
 #define ACCOUNT_HEIGHT 55;
 
 @interface WalletImportVC ()<UITextViewDelegate>
@@ -161,13 +162,13 @@
 //    phone5.frame = CGRectMake(margin*2, introduceTf.yy, w-30, 1);
     
     
-    _isSelect = @"0";
+    _isSelect = @"1";
     self.introduceButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [self.view addSubview:self.introduceButton];
 //    NSString *text3 =  [LangSwitcher switchLang:@"我已阅读并同意服务及隐私条款" key:nil];
     [self.introduceButton setImage:kImage(@"打勾 圆") forState:UIControlStateNormal];
     [self.introduceButton setImage:kImage(@"未选中") forState:UIControlStateSelected];
-    
+
 //    [self.introduceButton setTitle:text3 forState:UIControlStateNormal];
 
     [self.introduceButton addTarget:self action:@selector(html5Pri:) forControlEvents:UIControlEventTouchUpInside];
@@ -265,26 +266,25 @@
 }
 - (void)importNow
 {
-    if (![self.isSelect isEqualToString:@"1"]) {
-
-        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请先阅读并同意服务条款" key:nil]];
-
+    
+    if ([self.textView.text isBlank]) {
+        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入助记词" key:nil]];
         return;
     }
-    if (!self.nameTf.text) {
+    if ([self.nameTf.text isBlank]) {
 
         [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入钱包名称" key:nil]];
 
         return;
     }
     
-    if ((!self.pwdTf.text )) {
+    if (([self.pwdTf.text  isBlank])) {
         [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入密码" key:nil]];
         
         return;
     }
     
-    if ((!self.rePwdTf.text)) {
+    if (([self.rePwdTf.text isBlank])) {
         
         [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入密码" key:nil]];
         return;
@@ -295,6 +295,12 @@
         [TLAlert alertWithInfo:[LangSwitcher switchLang:@"输入的密码不一致" key:nil]];
         return;
         
+    }
+    if (![self.isSelect isEqualToString:@"1"]) {
+        
+        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请先阅读并同意服务条款" key:nil]];
+        
+        return;
     }
 //    NSString *pwd = [self.FirstPSWArray componentsJoinedByString:@""];
 //    //            [[NSUserDefaults standardUserDefaults] setObject:pwd forKey:KUserPwd];

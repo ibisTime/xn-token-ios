@@ -79,7 +79,11 @@
                              [LangSwitcher switchLang:@"取现手续费" key:nil],
                              [LangSwitcher switchLang:@"红包退回" key:nil],
                              [LangSwitcher switchLang:@"抢红包" key:nil],
-                             [LangSwitcher switchLang:@"发红包" key:nil]
+                             [LangSwitcher switchLang:@"发红包" key:nil],
+                             [LangSwitcher switchLang:@"量化理财投资" key:nil],
+                             [LangSwitcher switchLang:@"量化理财还款" key:nil]
+
+
 
                              ];
         
@@ -89,7 +93,9 @@
                              @"withdrawfee",
                              @"redpacket_back",
                              @"sendredpacket_in",
-                             @"sendredpacket_out"
+                             @"sendredpacket_out",
+                             @"lhlc_invest",
+                             @"lhlc_repay"
                              ];
         
         _filterPicker = [[FilterView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
@@ -113,19 +119,7 @@
 - (void)initPlaceHolderView {
     
     self.placeHolderView = [[UIView alloc] initWithFrame:CGRectMake(0, 240, kScreenWidth,  40)];
-    
-//    UIImageView *billIV = [[UIImageView alloc] init];
-//
-//    billIV.image = kImage(@"暂无订单");
-//
-//    [self.placeHolderView addSubview:billIV];
-//    [billIV mas_makeConstraints:^(MASConstraintMaker *make) {
-//
-//        make.centerX.equalTo(@0);
-//        make.top.equalTo(@140);
-//
-//    }];
-    
+
     UILabel *textLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor2 font:14.0];
     
     textLbl.text = [LangSwitcher switchLang:@"暂无明细" key:nil];

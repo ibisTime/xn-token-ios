@@ -312,19 +312,25 @@ typedef enum : NSUInteger {
     }
     self.signTx = BTCHexFromData([transaction data]);
 
-    NSLog(@"transaction = %@", transaction.dictionary);
-    NSLog(@"transaction in hex:\n------------------\n%@\n------------------\n", BTCHexFromData([transaction data]));
+   
 //    return;
     TLNetworking *net = [TLNetworking new];
     
     
     net.code = @"802222";
     net.parameters[@"signTx"] = self.signTx;
-    
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [net postWithSuccess:^(id responseObject) {
         NSLog(@"%@",responseObject);
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        [TLAlert alertWithSucces:@"广播成功"];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self.navigationController popViewControllerAnimated:YES];
+
+        });
     } failure:^(NSError *error) {
-        NSLog(@"%@",error);
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+
     }];
    
 }
@@ -542,7 +548,7 @@ typedef enum : NSUInteger {
 {
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        NSString *pricr;
+      __block  NSString *pricr;
         if ([self.currency.type isEqualToString:@"0"]) {
             
             if ([self.currency.symbol isEqualToString:@"BTC"]) {
@@ -575,27 +581,67 @@ typedef enum : NSUInteger {
                 }];
                 
             }else if ([self.currency.symbol isEqualToString:@"WAN"]) {
-                    pricr = [MnemonicUtil getWanGasPrice];
+//                    pricr = [MnemonicUtil getWanGasPrice];
+                
+                TLNetworking *net =[TLNetworking new];
+                net.code = @"802358";
+                [net postWithSuccess:^(id responseObject) {
+                pricr   = responseObject[@"data"][@"gasPrice"];
+                    self.pricr = pricr;
+                    CGFloat p = [pricr doubleValue]/1000000000000000000;
+                    p = p *21000;
+                    NSLog(@"%.8f",p);
+                    self.gamPrice = p;
+                    [MBProgressHUD hideHUDForView:self.view animated:YES];
                     
+                    [self WorkpickerEventWithIndex:1];
+                    
+                } failure:^(NSError *error) {
+                    
+                }];
+                
                 }else
                 {
-                    pricr = [MnemonicUtil getGasPrice];
-                    
+//                    pricr = [MnemonicUtil getGasPrice];
+                    TLNetworking *net =[TLNetworking new];
+                    net.code = @"802117";
+                    [net postWithSuccess:^(id responseObject) {
+                       pricr  = responseObject[@"data"][@"gasPrice"];
+                        
+                        self.pricr = pricr;
+                        CGFloat p = [pricr doubleValue]/1000000000000000000;
+                        p = p *21000;
+                        NSLog(@"%.8f",p);
+                        self.gamPrice = p;
+                        [MBProgressHUD hideHUDForView:self.view animated:YES];
+                        
+                        [self WorkpickerEventWithIndex:1];
+                    } failure:^(NSError *error) {
+                        
+                    }];
                 }
             
         }else{
             
-            pricr = [MnemonicUtil getGasPrice];
-
+            TLNetworking *net =[TLNetworking new];
+            net.code = @"802117";
+            [net postWithSuccess:^(id responseObject) {
+                pricr   = responseObject[@"data"][@"gasPrice"];
+                
+                self.pricr = pricr;
+                CGFloat p = [pricr doubleValue]/1000000000000000000;
+                p = p *21000;
+                NSLog(@"%.8f",p);
+                self.gamPrice = p;
+                [MBProgressHUD hideHUDForView:self.view animated:YES];
+                
+                [self WorkpickerEventWithIndex:1];
+            } failure:^(NSError *error) {
+                
+            }];
         }
         
-        self.pricr = pricr;
-        CGFloat p = [pricr doubleValue]/1000000000000000000;
-        p = p *21000;
-        NSLog(@"%.8f",p);
-        self.gamPrice = p;
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
-        [self WorkpickerEventWithIndex:1];
+       
         });
    
   
@@ -833,7 +879,7 @@ typedef enum : NSUInteger {
     
     UILabel *free = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor3 font:12];
     free.frame = CGRectMake(80, self.tranAmountTF.yy + 10, kScreenWidth-100, heightMargin);
-    free.text = [LangSwitcher switchLang:@"矿工费将在可用余额中扣除，余额不足将从转账金额中扣除" key:nil];
+    free.text = [LangSwitcher switchLang:@"矿工费将在可用余额中扣除" key:nil];
     free.numberOfLines = 0;
 //    [LangSwitcher switchLang:@"矿工费将在可用余额中扣除，余额不足将从转账金额中扣除"];
     [self.view addSubview:self.minerFeeTF];
@@ -1103,7 +1149,7 @@ typedef enum : NSUInteger {
                 self.blanceFree.text = [NSString stringWithFormat:@"%@ %@",self.priceSlow,@"sat/b"];
                 self.btcPrice = [self.priceSlow integerValue];
             }else{
-                self.blanceFree.text = [NSString stringWithFormat:@"%.0f %@",self.gamPrice/2,self.currency.symbol];
+                self.blanceFree.text = [NSString stringWithFormat:@"%.8f %@",self.gamPrice/2,self.currency.symbol];
                 self.pricr = [NSString stringWithFormat:@"%lld",[self.pricr longLongValue]/2];
             }
             
@@ -1367,8 +1413,15 @@ typedef enum : NSUInteger {
                                           }else{
                                               
                                             //btc
-                                              [self testSpendCoins:self.balanceTF.text :self.tranAmountTF.text :[NSString stringWithFormat:@"%ld",self.btcPrice]];
                                               
+                                              if ([self.balanceTF.text isEqualToString:self.btcAddress]) {
+                                                  [TLAlert alertWithMsg:@"转入和转出地址不能相同"];
+                                                  return ;
+                                              }
+                                              
+                                              
+                                              [self testSpendCoins:self.balanceTF.text :self.tranAmountTF.text :[NSString stringWithFormat:@"%ld",self.btcPrice]];
+                                              return ;
                                           }
                                       }else{
                                           

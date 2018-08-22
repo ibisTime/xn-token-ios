@@ -65,7 +65,7 @@
 }
 - (void)initSubvies
 {
-    self.nameLab = [UILabel labelWithBackgroundColor:kClearColor textColor:kHexColor(@"#FF6400") font:24];
+    self.nameLab = [UILabel labelWithBackgroundColor:kClearColor textColor:kHexColor(@"#FF6400") font:28];
     [self addSubview:self.nameLab];
     
     self.stateLab = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor3 font:12];
@@ -74,7 +74,7 @@
     [self addSubview:self.stateLab];
     //    [self.stateLab sizeToFit];
     self.desLab = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextBlack font:18];
-    self.timeLab = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor3 font:12];
+    self.timeLab = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor3 font:14];
     [self addSubview:self.timeLab];
     self.freeLable = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextBlack font:18];
     
@@ -125,7 +125,7 @@
     self.leaveLable = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextBlack font:14];
     [self addSubview:self.leaveLable];
     [self.nameLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.mas_top).offset(20);
+        make.top.equalTo(self.mas_top).offset(30);
         make.left.equalTo(self.mas_left).offset(15);
         
     }];
@@ -172,7 +172,7 @@
     [self.bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.stateLab.mas_bottom).offset(17);
         make.left.equalTo(self.mas_left).offset(30);
-        make.right.equalTo(self.mas_right).offset(-110);
+        make.right.equalTo(self.mas_right).offset(-120);
         make.height.equalTo(@8);
         
         
@@ -192,23 +192,23 @@
         
     }];
     [self.freeLable mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(self.nameLab.mas_centerY);
+        make.top.equalTo(self.mas_top).offset(20);
         make.left.equalTo(self.nameLab.mas_right).offset(56);
         
     }];
     [self.timeLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(self.stateLab.mas_centerY);
+        make.top.equalTo(self.freeLable.mas_bottom).offset(10);
         make.left.equalTo(self.freeLable.mas_left);
         
     }];
     [self.desLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(self.freeLable.mas_centerY);
+        make.top.equalTo(self.mas_top).offset(20);
         make.left.equalTo(self.freeLable.mas_right).offset(56);
         
     }];
     
     [self.leaveLable mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(self.timeLab.mas_centerY);
+        make.top.equalTo(self.desLab.mas_bottom).offset(10);
         make.left.equalTo(self.desLab.mas_left);
 
     }];
@@ -275,7 +275,7 @@
     CoinModel *coin = [CoinUtil getCoinModel:model.symbol];
 
     self.nameLab.text = [NSString stringWithFormat:@"%.2f%%",[model.expectYield floatValue]*100];
-    self.stateLab.text = [NSString stringWithFormat:@"%@%@",model.limitDays,[LangSwitcher switchLang:@"天" key:nil]];
+//    self.stateLab.text = [NSString stringWithFormat:@"%@%@",model.limitDays,[LangSwitcher switchLang:@"天" key:nil]];
     self.freeLable.text = [NSString stringWithFormat:@"%@%@",model.limitDays,[LangSwitcher switchLang:@"天" key:nil]];
     NSString *totAmount = [CoinUtil convertToRealCoin:model.amount coin:coin.symbol];
 
@@ -296,10 +296,10 @@
         make.left.equalTo(self.mas_left).offset(30);
         //        make.right.equalTo(self.mas_right).offset(-30);
         make.height.equalTo(@8);
-        make.width.equalTo(@((kScreenWidth - 60-100)*f));
+        make.width.equalTo(@((kScreenWidth - 80-100)*f));
         
     }];
-    self.orderLable.text = [NSString stringWithFormat:@"%@%.0f%%",[LangSwitcher switchLang:@"已认购" key:nil],f*100];
+    self.orderLable.text = [NSString stringWithFormat:@"%@%.2f%%",[LangSwitcher switchLang:@"已认购" key:nil],f*100];
     self.leftLable.text = [LangSwitcher switchLang:@"剩余" key:nil];
     self.beiginLable.text = [LangSwitcher switchLang:@"起购" key:nil];
     self.sumLable.text = [LangSwitcher switchLang:@"递增金额" key:nil];

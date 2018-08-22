@@ -234,14 +234,14 @@
         [self.moreButton setTitle:[LangSwitcher switchLang:@"持有中" key:nil] forState:UIControlStateNormal];
 
         
-    }else if ([model.status isEqualToString:@"已到期"])
+    }else if ([model.status isEqualToString:@"2"])
     {
-        [self.moreButton setTitle:[LangSwitcher switchLang:@"" key:nil] forState:UIControlStateNormal];
+        [self.moreButton setTitle:[LangSwitcher switchLang:@"已到期" key:nil] forState:UIControlStateNormal];
 
         
     }else
     {
-        [self.moreButton setTitle:[LangSwitcher switchLang:@"募集失败" key:nil] forState:UIControlStateNormal];
+        [self.moreButton setTitle:[LangSwitcher switchLang:@"已到期" key:nil] forState:UIControlStateNormal];
 
         
     }

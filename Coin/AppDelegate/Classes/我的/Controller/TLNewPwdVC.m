@@ -75,7 +75,7 @@
     TLTextField *pwdTf = [[TLTextField alloc] initWithFrame:CGRectMake(margin,  10, w, h) leftTitle:[LangSwitcher switchLang:@"旧密码" key:nil] titleWidth:80 placeholder:[LangSwitcher switchLang:@"请输入密码" key:nil]];
     //    pwdTf.keyboardType = UIKeyboardTypePhonePad;
 //    pwdTf.returnKeyType = UIReturnKeyNext;
-
+    pwdTf.secureTextEntry = YES;
     [self.view addSubview:pwdTf];
     self.pwdTf = pwdTf;
     UIView *phone3 = [[UIView alloc] init];
@@ -85,7 +85,8 @@
     
     TLTextField *rePwdTf = [[TLTextField alloc] initWithFrame:CGRectMake(margin, pwdTf.yy + 1, w, h) leftTitle:[LangSwitcher switchLang:@"新密码" key:nil] titleWidth:80 placeholder:[LangSwitcher switchLang:@"请输入密码" key:nil]];
     //    rePwdTf.keyboardType = UIKeyboardTypePhonePad;
-    
+    rePwdTf.secureTextEntry = YES;
+
 //    rePwdTf.returnKeyType = UIReturnKeyNext;
     [rePwdTf addTarget:self action:@selector(changePwd) forControlEvents:UIControlEventEditingDidEndOnExit];
     
@@ -98,7 +99,8 @@
     
     TLTextField *surePwdTf = [[TLTextField alloc] initWithFrame:CGRectMake(margin, rePwdTf.yy + 1, w, h) leftTitle:[LangSwitcher switchLang:@"确认密码" key:nil] titleWidth:80 placeholder:[LangSwitcher switchLang:@"请输入密码" key:nil]];
     //    rePwdTf.keyboardType = UIKeyboardTypePhonePad;
-    
+    surePwdTf.secureTextEntry = YES;
+
     surePwdTf.returnKeyType = UIReturnKeyDone;
     [rePwdTf addTarget:self action:@selector(changePwd) forControlEvents:UIControlEventEditingDidEndOnExit];
     

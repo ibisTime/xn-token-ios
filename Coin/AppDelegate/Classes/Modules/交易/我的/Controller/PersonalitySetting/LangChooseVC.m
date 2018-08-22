@@ -207,7 +207,19 @@
     
     SettingModel *settingModel = self.models[indexPath.row];
     cell.textLabel.text = settingModel.text;
-
+    if (indexPath.row != 0) {
+        UILabel *beat = [UILabel labelWithBackgroundColor:kAppCustomMainColor textColor:kWhiteColor font:12];
+        
+        [cell addSubview:beat];
+        beat.text = @"Beta";
+        
+        [beat mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(cell.mas_top).offset(20);
+            
+            make.left.equalTo(cell.mas_left).offset(70);
+        }];
+    }
+   
     if (settingModel.isSelect) {
         
         UIImageView *iv = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 14, 11)];

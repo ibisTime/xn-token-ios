@@ -495,7 +495,7 @@
 "马来西亚" = "Malaysia";
 "韩国" = "South Korea";
 "我的收款地址"="My payment address";
-"个人账户就是指中心化钱包,是由THA替您保管私钥,在中心化钱包中,不存在钱包丢失了无法找回的情况,可以通过身份证找回您的钱包,并且可以让您体验到更多的服务。" = "개인계정은 탈중심화 지갑이고 THA에서 대신 프라이빗키를 보관하고 있습니다. 중심화된 지갑에서는 지갑분실시 되찾을수 있어서 인증만 통과하면 되찾을수 있고 그외 더욱많은 서비스를 이용할수 있습니다.";
+"个人账户就是指中心化钱包,是由Theia替您保管私钥,在中心化钱包中,不存在钱包丢失了无法找回的情况,可以通过身份证找回您的钱包,并且可以让您体验到更多的服务。" = "개인계정은 탈중심화 지갑이고 THA에서 대신 프라이빗키를 보관하고 있습니다. 중심화된 지갑에서는 지갑분실시 되찾을수 있어서 인증만 통과하면 되찾을수 있고 그외 더욱많은 서비스를 이용할수 있습니다.";
 "私钥钱包就是去中心化钱包,在去中心化钱包中,所有的用户身份验证内容,如交易密码,私钥，助记词等都保存在用户手机本地,并不是保存在中心化服务器里面,如果用户误删钱包,忘记备份私钥或者助记词，将无法找到钱包" = "프라이빗 지갑은 탈중심화 지갑이고 탈중심화 지갑관련 모든 신상정보,거래비밀번호,프라이빗키,복구키등 모든 내용은 사용자의 핸드폰에 저장되고 중심화된 서버에 저장되지 않습니다.만약 사용자 실수로 지급을 삭제시 또한 백업해논 프라이빗키 혹은 복구키도 분실되면 지갑은 되찾을수 없습니다.";
 
 "隐私政策" = "Privacy Policy";
@@ -520,7 +520,7 @@
 //"抢红包" = "Grab a red envelope";
 "请输入交易密码" = "Please enter the trading password.";
 "欢迎回来" = "Welcome back!";
-"个人账户就是指中心化钱包,是由THA替您保管私钥,在中心化钱包中,不存在钱包丢失了无法找回的情况,可以通过身份证找回您的钱包,并且可以让您体验到更多的服务。" = "no loss of wallet that cannot be recovered, and can be verified to retrieve your wallet and allow you to experience more services.";
+"个人账户就是指中心化钱包,是由Theia替您保管私钥,在中心化钱包中,不存在钱包丢失了无法找回的情况,可以通过身份证找回您的钱包,并且可以让您体验到更多的服务。" = "no loss of wallet that cannot be recovered, and can be verified to retrieve your wallet and allow you to experience more services.";
 "私钥钱包就是去中心化钱包,在去中心化钱包中,所有的用户身份验证内容,如交易密码,私钥，助记词等都保存在用户手机本地,并不是保存在中心化服务器里面,如果用户误删钱包,忘记备份私钥或者助记词，将无法找到钱包" = " mobile phone local, not stored in the centralized server. If the user mistakenly deletes the wallet, forgets to back up the private key or mnemonics, will not be able to retrieve the wallet.";
 "优点" = "Advantages";
 "缺点" = "Disadvantage";
