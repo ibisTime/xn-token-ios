@@ -60,7 +60,7 @@
 //    [NSThread sleepForTimeInterval:2];
     
     //服务器环境 //递增金额
-    [AppConfig config].runEnv = RunEnvDev;
+    [AppConfig config].runEnv = RunEnvRelease;
     [AppConfig config].isChecking = NO;
 #warning  //pods 更新后会导致wan币转账失败
 //    [AppConfig config].isUploadCheck = YES;
@@ -97,34 +97,7 @@
     }
     
     
-    TLDataBase *da = [TLDataBase sharedManager];
-    self.dataBaseModels = [NSMutableArray array];
-    if ([da.dataBase open]) {
-        NSString *sql = [NSString stringWithFormat:@"SELECT * from THAUser"];
-        //        [sql appendString:[TLUser user].userId];
-        /*walletId INTEGER PRIMARY KEY AUTOINCREMENT,userId text, Mnemonics text, wanaddress text,wanprivate text,ethaddress text,ethprivate text,btcaddress text,btcprivate text,PwdKey text,name text*/
-        FMResultSet *set = [da.dataBase executeQuery:sql];
-        while ([set next])
-        {
-            DataBaseModel *dbModel = [DataBaseModel new];
-
-            dbModel.walletId = [set intForColumn:@"walletId"];
-            dbModel.userId = [set stringForColumn:@"userId"];
-            dbModel.Mnemonics = [set stringForColumn:@"Mnemonics"];
-            dbModel.wanaddress = [set stringForColumn:@"wanaddress"];
-            dbModel.wanprivate = [set stringForColumn:@"wanprivate"];
-            dbModel.ethaddress = [set stringForColumn:@"ethaddress"];
-            dbModel.ethprivate = [set stringForColumn:@"ethprivate"];
-            dbModel.btcaddress = [set stringForColumn:@"btcaddress"];
-            dbModel.btcprivate = [set stringForColumn:@"btcprivate"];
-            dbModel.PwdKey = [set stringForColumn:@"PwdKey"];
-            //                dbModel.name = [set stringForColumn:@"name"];
-            [self.dataBaseModels addObject:dbModel];
-        }
-        [set close];
-    }
-    [da.dataBase close];
-    NSLog(@"%@",self.dataBaseModels);
+   
 
     //退出登录消息通知
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -174,14 +147,20 @@
    
 
     @try{
-        UMConfigInstance.appKey = @"5b73d999f29d9825200001db";
-        UMConfigInstance.channelId = @"test";//一般是这样写，用于友盟后台的渠道统计，当然苹果也不会有其他渠道，写死就好
+//        UMConfigInstance.appKey = @"5b73d999f29d9825200001db";//研发
+        UMConfigInstance.appKey = @"5b73b2e68f4a9d21830002fd";//正式
+
+      //一般是这样写，用于友盟后台的渠道统计，当然苹果也不会有其他渠道，写死就好
+//        UMConfigInstance.channelId = @"Theia"; //渠道区分
+//        UMConfigInstance.channelId = @"facebook"; //渠道区分
+        UMConfigInstance.channelId = @"biyongbao"; //渠道区分
+
         UMConfigInstance.ePolicy =SEND_INTERVAL; //上传模式，这种为最小间隔发送90S，也可按照要求选择其他上传模式。也可不设置，在友盟后台修改。
         [MobClick startWithConfigure:UMConfigInstance];//开启SDK
         
         NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey: @"CFBundleShortVersionString"];
         [MobClick setAppVersion:version];
-        [MobClick setLogEnabled:YES];
+//        [MobClick setLogEnabled:YES];
     }
     @catch(NSException *exception) {
         NSLog(@"exception:%@", exception);

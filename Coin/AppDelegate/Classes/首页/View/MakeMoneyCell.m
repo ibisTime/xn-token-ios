@@ -32,7 +32,7 @@
 
 @property (nonatomic ,strong) UIView *blueView;
 
-
+@property (nonatomic ,strong) UIView *drakView;
 @end
 @implementation MakeMoneyCell
 
@@ -168,7 +168,15 @@
     self.layer.cornerRadius = 4;
     self.clipsToBounds = YES;
     
-    
+    UIView *drakView = [UIView new];
+    drakView.backgroundColor = kLineColor;
+    drakView.alpha = 0.5;
+    self.drakView = drakView;
+    drakView.hidden = YES;
+    [self addSubview:drakView];
+    [drakView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(UIEdgeInsetsZero);
+    }];
 }
 
 -(void)setFrame:(CGRect)frame
@@ -270,14 +278,10 @@
     }
     else if ([model.status isEqualToString:@"8"])
     {
-        UIView *drakView = [UIView new];
-        drakView.backgroundColor = kLineColor;
-        drakView.alpha = 0.5;
-        [self addSubview:drakView];
-        [drakView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.edges.mas_equalTo(UIEdgeInsetsZero);
-        }];
-        
+        if (self.drakView.hidden == NO) {
+            return;
+        }
+        self.drakView.hidden = NO;
         self.leaveLable.text =[LangSwitcher switchLang:@"已到期" key:nil];
     } else if ([model.status isEqualToString:@"9"])
     {

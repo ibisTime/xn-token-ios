@@ -159,6 +159,8 @@
 //            [weakSelf.tableView reloadData_tl];
 
             weakSelf.Moneys = shouldDisplayCoins;
+            [weakSelf.tableView.Moneys removeAllObjects];
+            [weakSelf.tableView reloadData];
             weakSelf.tableView.Moneys = shouldDisplayCoins;
             //        weakSelf.tableView.bills = objs;
             [weakSelf.tableView reloadData_tl];
@@ -179,6 +181,7 @@
                 [shouldDisplayCoins addObject:model];
             }];
             weakSelf.Moneys = shouldDisplayCoins;
+          
             weakSelf.tableView.Moneys = shouldDisplayCoins;
             //        weakSelf.tableView.bills = objs;
             [weakSelf.tableView reloadData_tl];

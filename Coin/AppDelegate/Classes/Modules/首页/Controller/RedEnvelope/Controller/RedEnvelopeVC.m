@@ -91,8 +91,8 @@
         weakSelf.navigationController.navigationBar.hidden = NO;
         
         htmlVC.type = HTMLTypeRed_packet_rule;
-        [weakSelf presentViewController:htmlVC animated:YES completion:nil];
-//        [weakSelf.navigationController pushViewController:htmlVC animated:YES];
+//        [weakSelf presentViewController:htmlVC animated:YES completion:nil];
+        [weakSelf.navigationController pushViewController:htmlVC animated:YES];
     };
     _sendView.delegate = self;
     [self.view addSubview:_sendView];

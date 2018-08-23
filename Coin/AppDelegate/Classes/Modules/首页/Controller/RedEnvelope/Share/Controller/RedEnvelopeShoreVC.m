@@ -20,6 +20,8 @@
 @property (nonatomic , strong)UIImageView *headImage;
 @property (nonatomic , strong)UIButton *shoreButton;
 @property (nonatomic , strong) UILabel *detailedLabel;
+@property (nonatomic , strong) UIButton *backbButton;
+
 @end
 
 @implementation RedEnvelopeShoreVC
@@ -44,15 +46,29 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self getShareUrl];
+    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(kScreenWidth/2-75, kStatusBarHeight+5, 150, 44)];
+    label.text = [LangSwitcher switchLang:@"我的红包" key:nil];
+    label.textColor = [UIColor whiteColor];
+    label.textAlignment = NSTextAlignmentCenter;
+    label.font = [UIFont systemFontOfSize:18];
+    self.backbButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
+    self.backbButton.frame = CGRectMake(15, kStatusBarHeight+5, 44, 44);
+    [self.backbButton setImage:kImage(@"返回1") forState:(UIControlStateNormal)];
+//    [self.backbButton setImageEdgeInsets:UIEdgeInsetsMake(0, -20, 0, 0)];
+    
+    [self.backbButton addTarget:self action:@selector(buttonMethodClick) forControlEvents:(UIControlEventTouchUpInside)];
     // Do any additional setup after loading the view.
     RedEnvelopeShoreView *shoreView = [[RedEnvelopeShoreView alloc]initWithFrame:self.view.frame];
     self.shoreVie = shoreView;
+    [shoreView addSubview:label];
+    [shoreView addSubview:self.backbButton];
+
     shoreView.content = self.content;
     shoreView.detailedLabel.text = self.content;
     [shoreView.shoreButton addTarget:self action:@selector(shoreButtonClick) forControlEvents:(UIControlEventTouchUpInside)];
     [self.view addSubview:shoreView];
 
-    RedEnvelopeHeadView *headView = [[RedEnvelopeHeadView alloc]initWithFrame:CGRectMake(0, kStatusBarHeight, SCREEN_WIDTH, 44)];
+    RedEnvelopeHeadView *headView = [[RedEnvelopeHeadView alloc]initWithFrame:CGRectMake(0, kStatusBarHeight+55, SCREEN_WIDTH, 44)];
     headView.nameLabel.text = [LangSwitcher switchLang:@"分享" key:nil];
     headView.recordButton.hidden = YES;
     headView.delegate = self;
@@ -62,6 +78,13 @@
    
     
 }
+
+- (void)buttonMethodClick
+{
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 - (void)getShareUrl
 {
     

@@ -78,7 +78,7 @@ void TLLog(NSString *format, ...) {
             self.addr = @"http://47.75.165.70:2101";
             self.ethHash = @"https://etherscan.io/tx";
             self.wanHash = @"https://www.wanscan.org/tx";
-            self.btcHash = @"https://www.blockchain.com/explorer";
+            self.btcHash = @"https://www.blockchain.com/btc/";
 
         } break;
             
