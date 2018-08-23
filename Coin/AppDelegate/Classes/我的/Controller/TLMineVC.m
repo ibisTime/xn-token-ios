@@ -106,7 +106,7 @@
     [super viewDidLoad];
     self.title = [LangSwitcher switchLang:@"我的" key:nil];
     
-    self.navigationController.delegate = self;
+//    self.navigationController.delegate = self;
     //顶部视图
     [self initMineHeaderView];
     //模型
@@ -118,21 +118,7 @@
     //通知
     [self addNotification];
     
-//    [self addUnReadMsgKVO];   czy
-//
-//    [self asyncHandleTopUnreadMsgHint];   czy
-//    [self checkBage];
-    
-    // viewDidLoad __ todo
-//    FBKVOController *kvoController = [[FBKVOController alloc] initWithObserver:self];
-//    [kvoController observe:[ZDCChat instance]
-//                   keyPath:@"unreadMessagesCount"
-//                   options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
-//                     block:^(id observer, id object, NSDictionary *change) {
-//
-//                         [[UIApplication sharedApplication] ]
-//
-//                     }];
+
     
     
 }

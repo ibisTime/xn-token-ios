@@ -14,6 +14,7 @@
 #import "TLUIHeader.h"
 #import "CoinUtil.h"
 #import "NSString+Check.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 @interface QiestionDetailVC () <UIScrollViewDelegate>
 
 @property (nonatomic ,strong) UIImageView *bgImage;
@@ -21,7 +22,7 @@
 @property (nonatomic,strong) NSArray <QuestionModel *>*questions;
 @property (nonatomic ,strong) QuestionModel *questionModel;
 @property (nonatomic ,strong) UIScrollView *contentView;
-@property (nonatomic ,strong)  CustomImageView *imageView;
+@property (nonatomic ,strong)  UIImageView *imageView;
 @property (nonatomic ,strong) UILabel *nameLab;
 @property (nonatomic ,strong) UILabel *stateLab;
 
@@ -119,10 +120,10 @@
     contentView.userInteractionEnabled = YES;
     contentView.scrollEnabled = YES;
     contentView.delegate = self;
-    [contentView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(UIEdgeInsetsMake(90, 0, 0, 0));
-    }];
-//    contentView.frame = CGRectMake(0, 90, kScreenWidth-20, kScreenHeight);
+//    [contentView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.edges.mas_equalTo(UIEdgeInsetsMake(90, 0, 0, 0));
+//    }];
+    contentView.frame = CGRectMake(0, 90, kScreenWidth, kScreenHeight - 90 - kNavigationBarHeight);
 //    contentView.contentSize = CGSizeMake(0, kScreenHeight);
     self.nameLab = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor2 font:14];
     [self.contentView addSubview:self.nameLab];
@@ -459,189 +460,158 @@
     } failure:^(NSError *error) {
         
     }];
-    
-    
-    
 }
 
 - (void)reloadData
 {
+    self.nameLab.text = [LangSwitcher switchLang:@"所在端" key:nil];
+    self.stateLab.text = [LangSwitcher switchLang:self.questionModel.deviceSystem key:nil];
+
+    self.desLab.text = [LangSwitcher switchLang:@"问题描述" key:nil];
+    self.desLab2.text = [LangSwitcher switchLang:self.questionModel.Description key:nil];
+
+
+    self.comLab.text = [LangSwitcher switchLang:@"复现步骤" key:nil];
+    self.comLab2.text = [LangSwitcher switchLang:self.questionModel.reappear key:nil];
+    self.sureLab.text = [LangSwitcher switchLang:@"最终确认等级" key:nil];
+    self.sureLab2.text = [LangSwitcher switchLang:self.questionModel.level key:nil];
  
-            self.nameLab.text = [LangSwitcher switchLang:@"所在端" key:nil];
-            self.stateLab.text = [LangSwitcher switchLang:self.questionModel.deviceSystem key:nil];
 
-            self.desLab.text = [LangSwitcher switchLang:@"问题描述" key:nil];
-            self.desLab2.text = [LangSwitcher switchLang:self.questionModel.Description key:nil];
-    
-    
-            self.comLab.text = [LangSwitcher switchLang:@"复现步骤" key:nil];
-            self.comLab2.text = [LangSwitcher switchLang:self.questionModel.reappear key:nil];
-            self.sureLab.text = [LangSwitcher switchLang:@"最终确认等级" key:nil];
-            self.sureLab2.text = [LangSwitcher switchLang:self.questionModel.level key:nil];
-    
-            if (self.questionModel.pic) {
-                self.nameLab.text = [LangSwitcher switchLang:@"问题截图" key:nil];
-                NSArray *arr = [self.questionModel.pic componentsSeparatedByString:@"||"];
-                CGFloat f ;
-                if (arr.count < 3) {
-                    f = 90;
-                }else if (arr.count > 7)
-                {
-                    f = 150;
+    NSArray *arr = [self.questionModel.pic componentsSeparatedByString:@"||"];
+    if (self.questionModel.pic) {
 
-                }else{
-                    f = 150;
-
-                }
-                CustomImageView *imageView = [[CustomImageView alloc] initWithFrame:CGRectMake(15, self.comLab.yy+60, kScreenWidth-30, f) withCount:arr.count withName:arr];
-                self.imageView = imageView;
-                imageView.name = [LangSwitcher switchLang:@"问题截图" key:nil];
-                [self.contentView addSubview:imageView];
-                CGFloat f1;
-                if (arr.count < 3) {
-                    f1 = 70;
-                }else if (arr.count > 7)
-                {
-                    
-                    f1 = 220;
-                }else{
-                    
-                    f1 = 120;
-                }
-
-                [self.noteLab mas_remakeConstraints:^(MASConstraintMaker *make) {
-                    if (imageView.hidden == YES) {
-                        make.top.equalTo(imageView.mas_bottom).offset(f1);
-                        make.left.equalTo(self.view.mas_left).offset(10);
-                    }else{
-                        make.top.equalTo(imageView.mas_bottom).offset(f1);
-                        make.left.equalTo(self.view.mas_left).offset(10);
-                    }
-                    
-                    
-                }];
-                [self.noteLab2 mas_remakeConstraints:^(MASConstraintMaker *make) {
-                    make.centerY.equalTo(self.noteLab.mas_centerY);
-                    make.left.equalTo(self.noteLab.mas_right).offset(20);
-                    make.right.equalTo(self.view.mas_right).offset(-10);
-                    
-                }];
-                
-           
-                
-                [self.line3 mas_remakeConstraints:^(MASConstraintMaker *make) {
-                    make.top.equalTo(self.noteLab.mas_bottom).offset(20);
-                    make.left.equalTo(self.nameLab.mas_left);
-                    make.right.equalTo(self.view.mas_right).offset(-15);
-                    make.height.equalTo(@0.5);
-                    
-                    
-                }];
-                
-                [self.timeLab mas_remakeConstraints:^(MASConstraintMaker *make) {
-                    make.top.equalTo(self.line3.mas_bottom).offset(20);
-                    make.left.equalTo(self.view.mas_left).offset(10);
-                    
-                }];
-                [self.timeLab2 mas_remakeConstraints:^(MASConstraintMaker *make) {
-                    make.centerY.equalTo(self.timeLab.mas_centerY);
-                    make.left.equalTo(self.timeLab.mas_right).offset(20);
-                    make.right.equalTo(self.view.mas_right).offset(-10);
-                    
-                }];
-                
-             
-                
-                [self.line4 mas_remakeConstraints:^(MASConstraintMaker *make) {
-                    make.top.equalTo(self.timeLab.mas_bottom).offset(20);
-                    make.left.equalTo(self.nameLab.mas_left);
-                    make.right.equalTo(self.view.mas_right).offset(-15);
-                    make.height.equalTo(@0.5);
-                    
-                    
-                }];
-                
-                [self.bugLab mas_remakeConstraints:^(MASConstraintMaker *make) {
-                    make.top.equalTo(self.line4.mas_top).offset(20);
-                    make.left.equalTo(self.view.mas_left).offset(10);
-                    
-                }];
-                [self.bugLab2 mas_remakeConstraints:^(MASConstraintMaker *make) {
-                    make.centerY.equalTo(self.bugLab.mas_centerY);
-                    make.left.equalTo(self.bugLab.mas_right).offset(20);
-//                    make.right.equalTo(self.view.mas_right).offset(-10);
-                    
-                }];
-                
-                UIView *line5 = [UIView new];
-                line5.backgroundColor = kLineColor;
-                [self.contentView addSubview:line5];
-                self.line5 = line5;
-                
-                [self.line5 mas_remakeConstraints:^(MASConstraintMaker *make) {
-                    make.top.equalTo(self.bugLab.mas_bottom).offset(20);
-                    make.left.equalTo(self.nameLab.mas_left);
-                    make.right.equalTo(self.view.mas_right).offset(-15);
-                    make.height.equalTo(@0.5);
-                    
-                    
-                }];
-                [self.sureLab mas_remakeConstraints:^(MASConstraintMaker *make) {
-                    make.top.equalTo(self.line5.mas_bottom).offset(20);
-                    make.left.equalTo(self.view.mas_left).offset(10);
-                    
-                }];
-                [self.sureLab2 mas_remakeConstraints:^(MASConstraintMaker *make) {
-                    make.centerY.equalTo(self.sureLab.mas_centerY);
-                    make.left.equalTo(self.sureLab.mas_right).offset(20);
-//                    make.right.equalTo(self.view.mas_right).offset(-10);
-                    
-                }];
-                
-             
-                
-                [self.line6 mas_remakeConstraints:^(MASConstraintMaker *make) {
-                    make.top.equalTo(self.sureLab.mas_bottom).offset(20);
-                    make.left.equalTo(self.nameLab.mas_left);
-                    make.right.equalTo(self.view.mas_right).offset(-15);
-                    make.height.equalTo(@0.5);
-                    
-                    
-                }];
-                
-                [self.contentView setNeedsLayout];
-                [self.contentView setNeedsDisplay];
-            
-                
-
-            }else{
-
-                self.noteLab.text = [LangSwitcher switchLang:@"备注" key:nil];
-                self.noteLab2.text = [LangSwitcher switchLang:self.questionModel.commitNote key:nil];
-                
+        self.imageView = [[UIImageView alloc]init];
+        for (int i = 0; i < arr.count; i ++) {
+            UIImageView *photoImage = [[UIImageView alloc]initWithFrame:CGRectMake(15 + i%4*((SCREEN_WIDTH - 60 )/4 + 10), self.comLab.yy + 100 + i/4*((SCREEN_WIDTH - 60 )/4 + 10), (SCREEN_WIDTH - 60)/4, (SCREEN_WIDTH - 60)/4)];
+            kViewRadius(photoImage, 5);
+            [photoImage sd_setImageWithURL:[NSURL URLWithString:[arr[i] convertImageUrl]]];
+            [self.contentView addSubview:photoImage];
+            if (i == arr.count - 1) {
+                self.imageView = photoImage;
             }
+        }
+        [self.noteLab mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.imageView.mas_bottom).offset(30);
+            make.left.equalTo(self.view.mas_left).offset(10);
+        }];
+        [self.noteLab2 mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.equalTo(self.noteLab.mas_centerY);
+            make.left.equalTo(self.noteLab.mas_right).offset(20);
+            make.right.equalTo(self.view.mas_right).offset(-10);
+
+        }];
+
+
+
+        [self.line3 mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.noteLab.mas_bottom).offset(20);
+            make.left.equalTo(self.nameLab.mas_left);
+            make.right.equalTo(self.view.mas_right).offset(-15);
+            make.height.equalTo(@0.5);
+
+
+        }];
+
+        [self.timeLab mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.line3.mas_bottom).offset(20);
+            make.left.equalTo(self.view.mas_left).offset(10);
+
+        }];
+        [self.timeLab2 mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.equalTo(self.timeLab.mas_centerY);
+            make.left.equalTo(self.timeLab.mas_right).offset(20);
+            make.right.equalTo(self.view.mas_right).offset(-10);
+
+        }];
+
+
+
+        [self.line4 mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.timeLab.mas_bottom).offset(20);
+            make.left.equalTo(self.nameLab.mas_left);
+            make.right.equalTo(self.view.mas_right).offset(-15);
+            make.height.equalTo(@0.5);
+
+
+        }];
+
+        [self.bugLab mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.line4.mas_top).offset(20);
+            make.left.equalTo(self.view.mas_left).offset(10);
+
+        }];
+        [self.bugLab2 mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.equalTo(self.bugLab.mas_centerY);
+            make.left.equalTo(self.bugLab.mas_right).offset(20);
+            //                    make.right.equalTo(self.view.mas_right).offset(-10);
+
+        }];
+
+        UIView *line5 = [UIView new];
+        line5.backgroundColor = kLineColor;
+        [self.contentView addSubview:line5];
+        self.line5 = line5;
+
+        [self.line5 mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.bugLab.mas_bottom).offset(20);
+            make.left.equalTo(self.nameLab.mas_left);
+            make.right.equalTo(self.view.mas_right).offset(-15);
+            make.height.equalTo(@0.5);
+
+
+        }];
+        [self.sureLab mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.line5.mas_bottom).offset(20);
+            make.left.equalTo(self.view.mas_left).offset(10);
+
+        }];
+
+        [self.sureLab2 mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.equalTo(self.sureLab.mas_centerY);
+            make.left.equalTo(self.sureLab.mas_right).offset(20);
+            //                    make.right.equalTo(self.view.mas_right).offset(-10);
+
+        }];
+
+        [self.line6 mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.sureLab.mas_bottom).offset(20);
+            make.left.equalTo(self.nameLab.mas_left);
+            make.right.equalTo(self.view.mas_right).offset(-15);
+            make.height.equalTo(@0.5);
+        }];
+
+        [self.contentView setNeedsLayout];
+        [self.contentView setNeedsDisplay];
+
+    }else{
+
+        self.noteLab.text = [LangSwitcher switchLang:@"备注" key:nil];
+        self.noteLab2.text = [LangSwitcher switchLang:self.questionModel.commitNote key:nil];
+
+    }
+
+    self.noteLab.text = [LangSwitcher switchLang:@"备注" key:nil];
+    self.noteLab2.text = [LangSwitcher switchLang:self.questionModel.commitNote key:nil];
+    self.timeLab.text = [LangSwitcher switchLang:@"提交时间" key:nil];
+    self.timeLab2.text = [LangSwitcher switchLang:[self.questionModel.commitDatetime convertDate] key:nil];
+
+    self.bugLab.text = [LangSwitcher switchLang:@"bug状态" key:nil];
+    if ([self.questionModel.status isEqualToString:@"0"]) {
+        self.bugLab2.text = [LangSwitcher switchLang:@"待确认" key:nil];
+
+    }else if ([self.questionModel.status isEqualToString:@"1"]) {
+        self.bugLab2.text = [LangSwitcher switchLang:@"已确认,待奖励" key:nil];
+
+    }
+    else if ([self.questionModel.status isEqualToString:@"2"]) {
+        self.bugLab2.text = [LangSwitcher switchLang:@"复现不成功" key:nil];
+
+    }else{
+        self.bugLab2.text = [LangSwitcher switchLang:@"已领取" key:nil];
+    }
+
     
-                self.noteLab.text = [LangSwitcher switchLang:@"备注" key:nil];
-                self.noteLab2.text = [LangSwitcher switchLang:self.questionModel.commitNote key:nil];
-                self.timeLab.text = [LangSwitcher switchLang:@"提交时间" key:nil];
-                self.timeLab2.text = [LangSwitcher switchLang:[self.questionModel.commitDatetime convertDate] key:nil];
-    
-                self.bugLab.text = [LangSwitcher switchLang:@"bug状态" key:nil];
-                if ([self.questionModel.status isEqualToString:@"0"]) {
-                    self.bugLab2.text = [LangSwitcher switchLang:@"待确认" key:nil];
-                    
-                }else if ([self.questionModel.status isEqualToString:@"1"]) {
-                    self.bugLab2.text = [LangSwitcher switchLang:@"已确认,待奖励" key:nil];
-                    
-                }
-                else if ([self.questionModel.status isEqualToString:@"2"]) {
-                    self.bugLab2.text = [LangSwitcher switchLang:@"复现不成功" key:nil];
-                    
-                }else{
-                    self.bugLab2.text = [LangSwitcher switchLang:@"已领取" key:nil];
-                                    }
-    
-    self.contentView.contentSize = CGSizeMake(0, self.imageView.yy + 400);
+    self.contentView.contentSize = CGSizeMake(0, self.imageView.yy + 250);
 
     CoinModel *currentCoin = [CoinUtil getCoinModel:@"WAN"];
     if ([self.questionModel.payAmount isBlank] || !self.questionModel.payAmount) {

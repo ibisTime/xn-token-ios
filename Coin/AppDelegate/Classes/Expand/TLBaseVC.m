@@ -11,7 +11,7 @@
 #import "UIColor+theme.h"
 #import "AppColorMacro.h"
 
-@interface TLBaseVC ()<UIGestureRecognizerDelegate,UINavigationBarDelegate,UINavigationControllerDelegate,UIGestureRecognizerDelegate>
+@interface TLBaseVC ()<UIGestureRecognizerDelegate,UINavigationBarDelegate,UINavigationControllerDelegate>
 
 @end
 
@@ -44,15 +44,29 @@
 
 //    self.navigationController.interactivePopGestureRecognizer.delegate = self;
 
+    //隐藏返回按钮
+//    self.navigationItem.hidesBackButton = YES;
+
+    
+
     self.navigationController.navigationBar.backIndicatorImage = [UIImage imageNamed:@"返回 白色"];
     self.navigationController.navigationBar.backIndicatorTransitionMaskImage = [UIImage imageNamed:@"返回 白色"];
 
-    self.navigationController.delegate = self;
+//    self.navigationController.delegate = self;
+//    __weak typeof (self)weakSelf = self;
+
+
+
+//    if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
+//        self.navigationController.interactivePopGestureRecognizer.delegate = weakSelf;
+//        self.navigationController.interactivePopGestureRecognizer.enabled = YES;
+//    }
+
 }
 
 -(void)handleNavigationTransition:(UIPanGestureRecognizer *)pan
 {
-    [self.navigationController popViewControllerAnimated:YES];
+//    [self.navigationController popViewControllerAnimated:YES];
 }
 
 
@@ -60,25 +74,18 @@
     return YES;
 }
 
-- (void)navigationController:(UINavigationController* )navigationController didShowViewController:(UIViewController* )viewController animated:(BOOL)animated
-{
-//    __weak typeof (self)weakSelf = self;
-//    if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
-//        self.navigationController.interactivePopGestureRecognizer.delegate = self;
+//- (void)navigationController:(UINavigationController* )navigationController didShowViewController:(UIViewController* )viewController animated:(BOOL)animated
+//{
+//
+//    if (navigationController.viewControllers.count == 1) {
+//        self.navigationController.interactivePopGestureRecognizer.enabled = NO;
 //    }
-//    NSLog(@"==========%ld",navigationController.viewControllers.count);
-    if (navigationController.viewControllers.count == 1) {
-        navigationController.interactivePopGestureRecognizer.enabled = NO;
-    }
-    else
-    {
-        id target = self.navigationController.interactivePopGestureRecognizer.delegate;
-        UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:target action:@selector(handleNavigationTransition:)];
-        pan.delegate = self;
-        [self.view addGestureRecognizer:pan];
-        self.navigationController.interactivePopGestureRecognizer.enabled = NO;
-    }
-}
+//    else
+//    {
+//        self.navigationController.interactivePopGestureRecognizer.enabled = YES;
+//    }
+//
+//}
 
 
 
@@ -118,6 +125,7 @@
 {
     //去掉透明后导航栏下边的黑边
     [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
+
 }
 
 - (void)viewWillDisappear:(BOOL)animated

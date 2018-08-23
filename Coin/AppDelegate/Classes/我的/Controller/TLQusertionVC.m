@@ -64,7 +64,12 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
-    self.navigationController.navigationBarHidden = YES;
+
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+    self.navigationController.navigationBar.tintColor = [UIColor blackColor];
+    self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
+
+    self.navigationItem.backBarButtonItem = item;
     self.navigationController.navigationBar.shadowImage = [UIImage new];
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
     
@@ -72,12 +77,20 @@
 //如果仅设置当前页导航透明，需加入下面方法
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    self.navigationController.navigationBarHidden = NO;
+//    self.navigationController.navigationBarHidden = NO;
+
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    self.navigationController.navigationBar.barTintColor = kHexColor(@"#0848DF");
+
+    self.navigationItem.backBarButtonItem = item;
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     self.view.backgroundColor = kWhiteColor;
     self.title = [LangSwitcher switchLang:@"问题反馈" key:nil];
 
@@ -423,37 +436,43 @@
         make.edges.mas_equalTo(UIEdgeInsetsZero);
     }];
     
-    self.backButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
-    self.backButton.frame = CGRectMake(15, kStatusBarHeight, 40, 40);
-    [self.backButton setImage:kImage(@"返回1-1") forState:(UIControlStateNormal)];
-    [self.backButton addTarget:self action:@selector(buttonClick) forControlEvents:(UIControlEventTouchUpInside)];
-    [self.bgImage addSubview:self.backButton];
-    self.nameLable = [[UILabel alloc]initWithFrame:CGRectMake(54, kStatusBarHeight, kScreenWidth - 108, 44)];
+//    self.backButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
+//    self.backButton.frame = CGRectMake(15, kStatusBarHeight, 40, 40);
+//    [self.backButton setImage:kImage(@"返回1-1") forState:(UIControlStateNormal)];
+//    [self.backButton addTarget:self action:@selector(buttonClick) forControlEvents:(UIControlEventTouchUpInside)];
+//    [self.bgImage addSubview:self.backButton];
+
+    self.nameLable = [[UILabel alloc]initWithFrame:CGRectMake(120, 0, kScreenWidth - 240, 44)];
     self.nameLable.text = [LangSwitcher switchLang:@"问题反馈" key:nil];
     self.nameLable.textAlignment = NSTextAlignmentCenter;
     self.nameLable.font = Font(16);
     self.nameLable.textColor = kTextBlack;
-    [self.bgImage addSubview:self.nameLable];
+//    self.nameLable.backgroundColor = [UIColor redColor];
+//    [self.bgImage addSubview:self.nameLable];
+    self.navigationItem.titleView = self.nameLable;
+
     
-    
-    
-    self.historyLable = [[UILabel alloc] init];
-//    WithFrame:CGRectMake(kScreenWidth -54 -108-20, kStatusBarHeight+5, kScreenWidth - 108, 44)
+    self.historyLable = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 44)];
     self.historyLable.text = [LangSwitcher switchLang:@"历史反馈" key:nil];
     self.historyLable.textAlignment = NSTextAlignmentRight;
     self.historyLable.userInteractionEnabled = YES;
     self.historyLable.font = Font(13);
     self.historyLable.textColor = kTextBlack;
-    [self.bgImage addSubview:self.historyLable];
-    [self.historyLable mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(self.nameLable.mas_centerY);
-        make.right.equalTo(self.view.mas_right).offset(-15);
-        
-        
-    }];
+
+
+    UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
+    negativeSpacer.width = -10;
+    self.navigationItem.rightBarButtonItems = @[negativeSpacer, [[UIBarButtonItem alloc] initWithCustomView:self.historyLable]];
+
+//    [self.historyLable mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.centerY.equalTo(self.nameLable.mas_centerY);
+//        make.right.equalTo(self.view.mas_right).offset(-15);
+//
+//
+//    }];
     UITapGestureRecognizer *ta = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(gohistory)];
     [self.historyLable addGestureRecognizer:ta];
-    
+
     
     
 }
@@ -476,7 +495,7 @@
     self.typeLab.textColor = kTextColor3;
     [self.bgImage addSubview:self.typeLab];
     [self.typeLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(@(kHeight(90)));
+        make.top.equalTo(@(kHeight(30)));
         make.left.equalTo(self.bgImage.mas_left).offset(15);
     }];
     
@@ -489,7 +508,7 @@
     [self.typeButton addTarget:self action:@selector(history) forControlEvents:(UIControlEventTouchUpInside)];
     [self.bgImage addSubview:self.typeButton];
     [self.typeButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(@(kHeight(90)));
+        make.top.equalTo(@(kHeight(30)));
         make.right.equalTo(self.view.mas_right).offset(-15);
         make.width.equalTo(@(kWidth(14)));
         make.height.equalTo(@(kWidth(7)));
@@ -533,7 +552,7 @@
         make.left.equalTo(self.bgImage.mas_left).offset(15);
     }];
  
-    TLTextView *textView = [[TLTextView alloc] initWithFrame:CGRectMake(15, kHeight(159), kScreenWidth - 30, 100)];
+    TLTextView *textView = [[TLTextView alloc] initWithFrame:CGRectMake(15, kHeight(100), kScreenWidth - 30, 100)];
     textView.userInteractionEnabled = YES;
     textView.returnKeyType = UIReturnKeyDone;
     
@@ -548,6 +567,7 @@
     lineView.backgroundColor = kHexColor(@"#E3E3E3");
     lineView.frame = CGRectMake(15, textView.yy+5, kScreenWidth - 30, 0.5);
     [self.bgImage addSubview:lineView];
+
     textView.backgroundColor = kHexColor(@"#FFFFFF");
     textView.textColor = kTextColor;
     textView.font = [UIFont systemFontOfSize:15];

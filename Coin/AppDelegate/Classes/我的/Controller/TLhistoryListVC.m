@@ -142,11 +142,12 @@
     // Dispose of any resources that can be recreated.
 }
 - (void)viewWillDisappear:(BOOL)animated{
-    
-    　　if ([self.navigationController.viewControllers indexOfObject:self]==NSNotFound) {
+
+    if ([self.navigationController.viewControllers indexOfObject:self]==NSNotFound) {
         [self.navigationController popToRootViewControllerAnimated:YES];
-        
-        　　}
+
+    }
+
     [super viewWillDisappear:animated];
     
 }

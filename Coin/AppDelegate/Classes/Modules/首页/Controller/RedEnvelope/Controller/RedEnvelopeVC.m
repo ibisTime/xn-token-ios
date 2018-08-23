@@ -33,7 +33,12 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.navigationController.navigationBarHidden = YES;
+//    self.navigationController.navigationBarHidden = YES;
+
+    self.navigationController.navigationBar.translucent = YES;
+    [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
+
     [self LoadData];
     
 }
@@ -41,8 +46,10 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    self.navigationController.navigationBarHidden = NO;
 
+    self.navigationController.navigationBar.translucent = NO;
+    [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setShadowImage:nil];
 }
 
 - (void)viewDidLoad {
@@ -50,8 +57,23 @@
     // Do any additional setup after loading the view.
 //    self.title = [LangSwitcher switchLang:@"" key:nil];
 
+    self.title = [LangSwitcher switchLang:@"发红包" key:nil];
 
-    _sendView = [[SendRedEnvelopeView alloc]initWithFrame:self.view.frame];
+
+    UIButton *_recordButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
+    _recordButton.frame = CGRectMake(0, 0, 0, 44);
+    [_recordButton setTitle:[LangSwitcher switchLang:@"我的红包" key:nil] forState:(UIControlStateNormal)];
+    _recordButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+    _recordButton.titleLabel.font = Font(14);
+    [_recordButton setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
+    [_recordButton addTarget:self action:@selector(buttonClick) forControlEvents:(UIControlEventTouchUpInside)];
+    UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
+    negativeSpacer.width = -10;
+    self.navigationItem.rightBarButtonItems = @[negativeSpacer, [[UIBarButtonItem alloc] initWithCustomView:_recordButton]];
+    [_recordButton sizeToFit];
+
+
+    _sendView = [[SendRedEnvelopeView alloc]initWithFrame:CGRectMake(0, - kNavigationBarHeight, SCREEN_WIDTH, SCREEN_HEIGHT + kNavigationBarHeight)];
     CoinWeakSelf;
     
     _sendView.transFormBlock = ^(CurrencyModel *model) {
@@ -74,6 +96,7 @@
     };
     _sendView.delegate = self;
     [self.view addSubview:_sendView];
+    
     AssetPwdView *pwdView =[[AssetPwdView alloc] init];
     self.pwdView = pwdView;
     pwdView.HiddenBlock = ^{
@@ -98,6 +121,17 @@
     [_sendView addSubview:headView];
     [self LoadData];
 }
+
+
+-(void)buttonClick
+{
+    MySugarPacketsVC *vc = [[MySugarPacketsVC alloc]init];
+    UINavigationController * navigation = [[UINavigationController alloc]initWithRootViewController:vc];
+    vc.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+    vc.modalPresentationStyle = UIModalTransitionStyleFlipHorizontal;
+    [self presentViewController:navigation animated:NO completion:nil];
+}
+
 
 #pragma mark - 钱包网络请求
 -(void)LoadData
@@ -204,11 +238,7 @@
             break;
         case 1:
         {
-            MySugarPacketsVC *vc = [[MySugarPacketsVC alloc]init];
-            UINavigationController * navigation = [[UINavigationController alloc]initWithRootViewController:vc];
-            vc.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-            vc.modalPresentationStyle = UIModalTransitionStyleFlipHorizontal;
-            [self presentViewController:navigation animated:NO completion:nil];
+
         }
             break;
 
