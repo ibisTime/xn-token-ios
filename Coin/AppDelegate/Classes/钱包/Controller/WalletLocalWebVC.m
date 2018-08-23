@@ -20,12 +20,22 @@
     self.title = [LangSwitcher switchLang:@"更多" key:nil];
     self.web = [[UIWebView alloc] initWithFrame:self.view.bounds];
     [self.view addSubview:self.web];
-    if ([self.currentModel.symbol isEqualToString:@"ETH"]) {
-         [self.web loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",[AppConfig config].ethHash,self.urlString]]]];
-    }else{
-         [self.web loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",[AppConfig config].wanHash,self.urlString]]]];
+    if ([self.currentModel.type isEqualToString:@"0"]) {
+        if ([self.currentModel.symbol isEqualToString:@"ETH"]) {
+            [self.web loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",[AppConfig config].ethHash,self.urlString]]]];
+        }else{
+            [self.web loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",[AppConfig config].wanHash,self.urlString]]]];
+            
+        }
+    }else if ([self.currentModel.type isEqualToString:@"1"])
+    {
         
+        
+    }else{
+        
+        [self.web loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",[AppConfig config].ethHash,self.urlString]]]];
     }
+   
    
     
     

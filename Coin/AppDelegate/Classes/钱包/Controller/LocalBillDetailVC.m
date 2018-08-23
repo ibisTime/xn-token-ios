@@ -26,9 +26,26 @@
     // Do any additional setup after loading the view.
     self.title = [LangSwitcher switchLang:@"交易详情" key:nil];
     self.view.backgroundColor = kWhiteColor;
+    TLDataBase *dataBase = [TLDataBase sharedManager];
+    NSString *type;
+    
+    if ([dataBase.dataBase open]) {
+        NSString *sql = [NSString stringWithFormat:@"SELECT type from THALocal where symbol = '%@'",self.currentModel.symbol];
+        //        [sql appendString:[TLUser user].userId];
+        FMResultSet *set = [dataBase.dataBase executeQuery:sql];
+        while ([set next])
+        {
+            type = [set stringForColumn:@"type"];
+            
+        }
+        [set close];
+    }
+    [dataBase.dataBase close];
+    self.currentModel.type = type;
     [self initTableView];
     //
     [self initHeaderView];
+    
     
 }
 

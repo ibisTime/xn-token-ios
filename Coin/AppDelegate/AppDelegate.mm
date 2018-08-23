@@ -49,6 +49,7 @@
 @property (nonatomic, strong) RespHandler *respHandler;
 @property (nonatomic ,copy) NSString *dataStr;
 @property (nonatomic ,assign) BOOL IsEnterBack;
+@property (nonatomic, strong) NSMutableArray <DataBaseModel *>*dataBaseModels;
 
 @end
 
@@ -96,6 +97,8 @@
     }
     
     
+    
+    
 
     //退出登录消息通知
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -107,8 +110,8 @@
                                              selector:@selector(userLogin) name:kUserLoginNotification
                                                object:nil];
     
-    //重新登录
-    if([TLUser user].isLogin) {
+
+        
         
         [[TLUser user] updateUserInfo];
         // 登录时间变更到，didBecomeActive中

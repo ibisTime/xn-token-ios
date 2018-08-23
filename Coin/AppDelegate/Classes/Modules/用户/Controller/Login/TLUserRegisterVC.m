@@ -21,6 +21,7 @@
 #import "ChooseCountryVc.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "NSString+Extension.h"
+#import "TLTabBarController.h"
 @interface TLUserRegisterVC ()<CLLocationManagerDelegate>
 
 @property (nonatomic,strong) CaptchaView *captchaView;
@@ -497,10 +498,15 @@
                 //保存信息
                 [[TLUser user] saveUserInfo:userInfo];
                 [[TLUser user] setUserInfoWithDict:userInfo];
+                
+                TLTabBarController *ta = [[TLTabBarController alloc] init];
+                
+                [UIApplication sharedApplication].keyWindow.rootViewController = ta;
                 //dismiss 掉
-                [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+//                [self.navigationController dismissViewControllerAnimated:YES completion:nil];
                 [[NSNotificationCenter defaultCenter] postNotificationName:kUserLoginNotification object:nil];
-                [self.navigationController popToRootViewControllerAnimated:YES];
+//                [self.navigationController popToRootViewControllerAnimated:YES];
+                
 
             } failure:^(NSError *error) {
                 

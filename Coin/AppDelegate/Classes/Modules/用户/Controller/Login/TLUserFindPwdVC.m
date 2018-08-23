@@ -393,6 +393,17 @@
     http.parameters[@"kind"] = APP_KIND;
     http.parameters[@"interCode"] = [NSString stringWithFormat:@"00%@",[self.PhoneCode.text substringFromIndex:1]];
     
+    NSData *data   =  [[NSUserDefaults standardUserDefaults] objectForKey:@"chooseModel"];
+    CountryModel *model = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    if (model) {
+        http.parameters[@"countryCode"] = model.code;
+        
+    }else{
+        
+        http.parameters[@"countryCode"] =  self.countrys[0].code;
+        
+    }
+    
     [http postWithSuccess:^(id responseObject) {
         if ([TLUser user].loginPwdFlag  == 1) {
             [TLAlert alertWithSucces:[LangSwitcher switchLang:@"修改成功" key:nil]];
