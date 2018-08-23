@@ -6,10 +6,11 @@
 //  Copyright © 2017年  tianlei. All rights reserved.
 //
 //语言切换
+#import <Foundation/Foundation.h>
+
 static NSString * const AppLanguage = @"appLanguage";
 #define ZBLocalized(key, comment)  [[NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:AppLanguage]] ofType:@"lproj"]] localizedStringForKey:(key) value:@"" table:nil]
 
-#import <Foundation/Foundation.h>
 typedef NS_ENUM(NSUInteger, LangType) {
     LangTypeSimple,
     LangTypeTraditional,

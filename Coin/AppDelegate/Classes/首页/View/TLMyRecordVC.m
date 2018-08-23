@@ -171,7 +171,7 @@
 {
     
     RecodeDetailVC *vc = [RecodeDetailVC new];
-    vc.moneyModel = self.Moneys[indexPath.section];
+    vc.moneyModel = self.Moneys[indexPath.row];
     vc.title = [LangSwitcher switchLang:@"我的理财" key:nil];
     [self.navigationController pushViewController:vc animated:YES];
 }

@@ -2029,6 +2029,7 @@
 		216F5AEE206CC6F600F2C832 /* AppDelegate */ = {
 			isa = PBXGroup;
 			children = (
+				B88B59012109AEC300F20D1B /* CoinPrefixHeader.pch */,
 				2E394FEC1FB0575A00BA0829 /* AppDelegate.h */,
 				2E394FA31FB0546E00BA0829 /* Classes */,
 				2E394FEB1FB0575A00BA0829 /* AppDelegate.mm */,
@@ -3180,7 +3181,6 @@
 				B88B58F82109AEC300F20D1B /* test */,
 				B88B58FF2109AEC300F20D1B /* country.plist */,
 				B88B59002109AEC300F20D1B /* CustomUIHeader.h */,
-				B88B59012109AEC300F20D1B /* CoinPrefixHeader.pch */,
 				B88B59022109AEC300F20D1B /* CoinHeader.h */,
 				B88B59032109AEC300F20D1B /* UIColor+theme.m */,
 				B88B59042109AEC300F20D1B /* TLTabBarController.m */,
@@ -4044,7 +4044,6 @@
 					"$(PROJECT_DIR)/Coin/Classes/Utils/common/common_ios_1.5.2/normal",
 				);
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = YES;
-				GCC_PREFIX_HEADER = /Users/qinbaozheng/Desktop/QB/Coin/AppDelegate/Classes/Other/CoinPrefixHeader.pch;
 				INFOPLIST_FILE = Coin/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -4100,7 +4099,6 @@
 					"$(PROJECT_DIR)/Coin/Classes/Utils/common/common_ios_1.5.2/normal",
 				);
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = YES;
-				GCC_PREFIX_HEADER = /Users/qinbaozheng/Desktop/QB/Coin/AppDelegate/Classes/Other/CoinPrefixHeader.pch;
 				INFOPLIST_FILE = Coin/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

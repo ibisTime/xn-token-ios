@@ -243,7 +243,7 @@
     }
     else if ([model.status isEqualToString:@"6"])
     {
-        self.leaveLable.text =[LangSwitcher switchLang:@"募集结束" key:nil];
+        self.leaveLable.text =[LangSwitcher switchLang:@"停止交易" key:nil];
 
     }
     else if ([model.status isEqualToString:@"7"])
@@ -261,7 +261,7 @@
             make.edges.mas_equalTo(UIEdgeInsetsZero);
         }];
         
-        self.leaveLable.text =[LangSwitcher switchLang:@"还款成功" key:nil];
+        self.leaveLable.text =[LangSwitcher switchLang:@"已到期" key:nil];
     } else if ([model.status isEqualToString:@"9"])
     {
         self.leaveLable.text =[LangSwitcher switchLang:@"募集失败" key:nil];

@@ -64,7 +64,7 @@
         self.phoneTf.text = [TLUser user].mobile;
         self.PhoneCode.text =[NSString stringWithFormat:@"+%@",[[TLUser user].interCode substringFromIndex:2]];
         
-       
+        self.pic.userInteractionEnabled = NO;
     }
     
     
@@ -147,9 +147,10 @@
     } else if (self.type == TLPwdTypeTradeReset) {
         
         self.nameLable.text = [LangSwitcher switchLang:@"修改资金密码" key:nil];
-        
+        self.pic.userInteractionEnabled = NO;
     } else if (self.type == TLPwdTypeSetTrade) {
-        
+        self.pic.userInteractionEnabled = NO;
+
         self.nameLable.text = [LangSwitcher switchLang:@"设置资金密码" key:nil];
         
     }
@@ -555,6 +556,8 @@
             [self.navigationController popViewControllerAnimated:YES];
 
         }else{
+            [self.navigationController popViewControllerAnimated:YES];
+
             [self dismissViewControllerAnimated:YES completion:nil];
         }
 

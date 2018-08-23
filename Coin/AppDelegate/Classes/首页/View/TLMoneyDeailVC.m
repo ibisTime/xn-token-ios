@@ -741,15 +741,25 @@
     }
     //第五步 递增  todo
    NSString *all = [CoinUtil convertToSysCoin:self.inputFiled.text coin:self.moneyModel.symbol];
+  
+    NSString *mo = [all subNumber:self.moneyModel.minAmount];
     
-    long long f = [all longLongValue] -[self.moneyModel.minAmount longLongValue];
-    long long f1 = [self.moneyModel.minAmount longLongValue];
-    long long f2= f % f1;
-    if (f2 != 0) {
-        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"" key:nil]];
-        return;
+//    long long f = [all longLongValue] -[self.moneyModel.minAmount longLongValue];
+    NSString *mo2 = [mo divNumber:self.moneyModel.minAmount leaveNum:4];
+    
+//    long long f1 = [self.moneyModel.minAmount longLongValue];
+//    long long f2= f % f1;
+    if ([mo2 isEqualToString:@"0"]) {
         
+    }else{
+        BOOL yes = [self isPureInt:[NSString stringWithFormat:@"%@",mo2]];
+        if (yes == 0) {
+            [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请按递增额度购买" key:nil]];
+            return;
+            
+        }
     }
+   
     
     [self.inputFiled resignFirstResponder];
     [self.view1 endEditing:YES];
@@ -935,6 +945,16 @@
     }];
 }
 
+- (BOOL)isPureInt:(NSString*)string{
+    
+    NSScanner* scan = [NSScanner scannerWithString:string];
+    
+    int val;
+    
+    return[scan scanInt:&val] && [scan isAtEnd];
+    
+}
+
 - (void)layoutCustomUi {
     
 }
@@ -968,7 +988,6 @@
             [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入支付密码" key:nil]];
             return ;
         }
-        weakSelf.pwdView.hidden = YES;
         [weakSelf.pwdView.password clearText];
 
         TLNetworking *http = [[TLNetworking alloc] init];
@@ -986,9 +1005,14 @@
             
             NSNotification *notification =[NSNotification notificationWithName:@"LOADDATA" object:nil userInfo:nil];
             [[NSNotificationCenter defaultCenter] postNotification:notification];
+            
             [weakSelf showBuySucess];
+            weakSelf.pwdView.hidden = YES;
 
         } failure:^(NSError *error) {
+            weakSelf.pwdView.hidden = NO;
+            [weakSelf.pwdView.password clearText];
+
             return ;
             
         }];
