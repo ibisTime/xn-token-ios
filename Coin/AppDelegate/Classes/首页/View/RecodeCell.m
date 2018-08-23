@@ -144,7 +144,7 @@
     }];
     [self.freeLable mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.timeLab.mas_bottom).offset(15);
-        make.left.equalTo(self.mas_left).offset(15);
+        make.left.equalTo(self.mas_left).offset(30);
         
     }];
   

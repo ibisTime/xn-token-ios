@@ -135,7 +135,13 @@
         NSArray *words = [word componentsSeparatedByString:@" "];
         
         BTCMnemonic *mnemonic =  [MnemonicUtil importMnemonic:words];
-        mnemonic.keychain.network = [BTCNetwork testnet];
+        if ([AppConfig config].runEnv == 0) {
+            mnemonic.keychain.network = [BTCNetwork mainnet];
+
+        }else{
+            mnemonic.keychain.network = [BTCNetwork testnet];
+
+        }
         
         NSLog(@"Seed=%@", BTCHexFromData(mnemonic.seed));
         NSLog(@"Mnemonic=%@", mnemonic.words);
@@ -971,8 +977,8 @@
         }
         
         return;
-    }
-    if ([totalcount integerValue] > 0) {
+    }else {
+        
         TLDataBase *db = [TLDataBase sharedManager];
         
         if ([db.dataBase open]) {
@@ -982,7 +988,7 @@
             NSLog(@"更新自选表%d",sucess2);
         }
         [db.dataBase close];
-    }
+   
     for (int i = 0; i < self.coins.count; i++) {
         
         CoinModel *model = self.coins[i];
@@ -998,7 +1004,7 @@
     
     //插入币种表
     
-    
+     }
     
 }
 
@@ -1092,6 +1098,9 @@
 }
 - (void)saveLocalWalletData
 {
+    if ( self.coins.count > 0) {
+        return;
+    }
     NSMutableArray *arr = [[CoinModel coin] getOpenCoinList];
     NSMutableArray *temp = arr.mutableCopy;
     TLDataBase *db = [TLDataBase sharedManager];

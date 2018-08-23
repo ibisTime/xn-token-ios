@@ -406,7 +406,7 @@
 "Wancoin" = "Wancoin";
 "以太坊" = "Ethereum";
 "WAN" = "WAN";
-"矿工费将在可用余额中扣除，余额不足将从转账金额中扣除" = "Transaction Fees will be deducted from the available balance, and the insufficient balance will be deducted from the transfer amount";
+"矿工费将在可用余额中扣除" = "Transaction Fees will be deducted from the available balance";
 "矿工费将在提币金额中扣除" = "The withdraw fee will be deducted from the cash amount";
 
 "私钥已复制" = "private key has been copied";
@@ -648,7 +648,7 @@
 "总收益" = "Total earnings";
 "到期时间" = "Due date";
 "我是" = "I'm";
-"邀请您使用THA钱包" = "inviting you to try out Theia Wallet";
+"邀请您使用Thiea钱包" = "inviting you to try out Theia Wallet";
 "购买成功" = "Purchase successful";
 "合约编号" = "Contract number";
 "交易时间" = "Trasaction time";
@@ -666,7 +666,7 @@
 "广播成功，正在同步中" = "Broadcasting successful, processing block";
 "产品期限" = "Subscription period";
 "产品总额" = "Product amount";
-"已认购%s" = "Bought %s";
+"已认购" = "Bought";
 "剩余" = "Remaining";
 "起购" = "Purchase minimum amount";
 "产品详情" = "Product details";
@@ -681,24 +681,22 @@
 "购买产品" = "Purchase product";
 "购买额度" = "Purchase amount";
 "本息到期日期" = "Principal and interest due date";
-"预计收入" = "Estimated income";
-"秒钟自动跳转" = "%sseconds automatic redirecting";
+"秒钟自动跳转" = "seconds automatic redirecting";
 "查看购买记录" = "View purchase history";
 "暂无产品" = "No product";
 "起购" = "Purchase minimum amount";
 "理财产品详情" = "Financial product details";
 "天" = "days";
 "期满自动转入个人账户" = "On due date automatically transfered into platform account";
-"每人限购" = "Maximum limit for per person's subscription %s)";
-"购买额度" = "Quota limit";
+"每人限购" = "Maximum limit)";
 "执行合约" = "Carry out contract";
 "购买失败" = "Failed to purchase";
 "旧密码" = "Old password";
 "修改交易密码" = "Modify transaction password";
 "旧密码错误" = "Wrong old password";
-"购买" = "Purchase";
+"确认购买" = "Confirm the purchase";
 "我的理财" = "My finance";
-"递增" = "Increment";
+"递增金额" = "Increment limit";
 "即将开始" = "Starting soon";
 "停止交易" = "Stop transaction";
 "已售罄" = "Sold out";

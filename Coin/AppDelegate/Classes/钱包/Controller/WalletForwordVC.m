@@ -39,6 +39,7 @@
 #import "BTCNetwork.h"
 #import "BTCKeychain.h"
 #import "BTCHashID.h"
+#import "AppConfig.h"
 typedef NS_ENUM(NSInteger, WalletAddressType) {
     
     WalletAddressTypeSelectAddress = 0,       //选择地址
@@ -279,8 +280,14 @@ typedef enum : NSUInteger {
         
         BTCMnemonic *mnemonic =  [MnemonicUtil importMnemonic:words];
         BTCKeychain *keychain = [mnemonic keychain];
+    
+    if ([AppConfig config].runEnv == 0) {
+        keychain.network = [BTCNetwork mainnet];
 
+    }else{
         keychain.network = [BTCNetwork testnet];
+
+    }
         BTCKey *key = keychain.key;
         self.key = key;
     NSData* privateKey = BTCDataFromHex(self.btcPrivate);
@@ -300,13 +307,25 @@ typedef enum : NSUInteger {
 //    }
     [MBProgressHUD hideHUDForView:self.view animated:YES];
     NSError* error = nil;
-    BTCTransaction* transaction = [self transactionSpendingFromPrivateKey:privateKey
-                                                                       to:[BTCPublicKeyAddressTestnet addressWithString:to]
-                                                                   change:key.addressTestnet // send change to the same address
-                                                                   amount:count
-                                                                      fee:free
-                                                                      api:0
-                                                                    error:&error];
+    BTCTransaction* transaction;
+    if ([AppConfig config].runEnv == 0) {
+        transaction = [self transactionSpendingFromPrivateKey:privateKey
+                                                           to:[BTCPublicKeyAddress addressWithString:to]
+                                                       change:key.address // send change to the same address
+                                                       amount:count
+                                                          fee:free
+                                                          api:0
+                                                        error:&error];
+    }else{
+        transaction = [self transactionSpendingFromPrivateKey:privateKey
+                                                           to:[BTCPublicKeyAddressTestnet addressWithString:to]
+                                                       change:key.addressTestnet // send change to the same address
+                                                       amount:count
+                                                          fee:free
+                                                          api:0
+                                                        error:&error];
+    }
+    
 
     if (!transaction) {
         NSLog(@"Can't make a transaction: %@", error);
@@ -1162,8 +1181,9 @@ typedef enum : NSUInteger {
             
         }else{
             if ([self.currency.symbol isEqualToString:@"BTC"]) {
-                self.blanceFree.text = [NSString stringWithFormat:@"%.0f %@",self.gamPrice*value,@"sat/b"];
-                self.btcPrice = self.btcPrice *value;
+               
+                self.blanceFree.text = [NSString stringWithFormat:@"%.0f %@", ([self.priceFast floatValue] - [self.pricr floatValue])*value,@"sat/b"];
+                self.btcPrice = ([self.priceFast floatValue] - [self.pricr floatValue]) *value;
 
                 self.pricr = [NSString stringWithFormat:@"%f",[self.pricr intValue]*value];
             }else{

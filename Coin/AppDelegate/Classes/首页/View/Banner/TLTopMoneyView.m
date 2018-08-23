@@ -193,23 +193,28 @@
     }];
     [self.freeLable mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.mas_top).offset(20);
-        make.left.equalTo(self.nameLab.mas_right).offset(56);
+        make.left.equalTo(self.nameLab.mas_right).offset(36);
         
     }];
+
     [self.timeLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.freeLable.mas_bottom).offset(10);
         make.left.equalTo(self.freeLable.mas_left);
+        make.width.equalTo(@(kWidth(80)));
+
         
     }];
+    self.timeLab.numberOfLines = 0;
     [self.desLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.mas_top).offset(20);
-        make.left.equalTo(self.freeLable.mas_right).offset(56);
+        make.left.equalTo(self.freeLable.mas_right).offset(36);
         
     }];
-    
+    self.leaveLable.numberOfLines = 0;
     [self.leaveLable mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.desLab.mas_bottom).offset(10);
         make.left.equalTo(self.desLab.mas_left);
+        make.width.equalTo(@(kWidth(80)));
 
     }];
     [self.leftLable mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -218,11 +223,22 @@
         
     }];
     
-    [self.beiginLable mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.leftLable.mas_bottom).offset(12);
-        make.left.equalTo(self.leftLable.mas_left);
-        
-    }];
+    if ([LangSwitcher currentLangType] == LangTypeEnglish) {
+        [self.beiginLable mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.leftLable.mas_bottom).offset(12);
+            make.left.equalTo(self.leftLable.mas_left);
+            make.width.equalTo(@(kWidth(100)));
+            
+        }];
+    }else{
+        [self.beiginLable mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.leftLable.mas_bottom).offset(12);
+            make.left.equalTo(self.leftLable.mas_left);
+            
+        }];
+    }
+    
+   
     [self.leftLableDetail mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.bottomView.mas_bottom).offset(15);
         make.left.equalTo(self.leftLable.mas_right).offset(10);
@@ -231,7 +247,7 @@
     
     [self.beiginLableDetail mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.leftLable.mas_bottom).offset(12);
-        make.left.equalTo(self.beiginLable.mas_right).offset(10);
+        make.left.equalTo(self.beiginLable.mas_right).offset(5);
         
     }];
     
@@ -311,7 +327,7 @@
     NSString *mAmount = [CoinUtil convertToRealCoin:model.minAmount coin:coin.symbol];
     NSString *sAmount = [CoinUtil convertToRealCoin:model.increAmount coin:coin.symbol];
 
-    self.beiginLableDetail.text = [NSString stringWithFormat:@"%.2f%@  (%@%@%@)",[mAmount floatValue],model.symbol,[LangSwitcher switchLang:@"每人限购" key:nil],buyAmount,model.symbol];
+    self.beiginLableDetail.text = [NSString stringWithFormat:@"%.2f%@ (%@%@%@)",[mAmount floatValue],model.symbol,[LangSwitcher switchLang:@"每人限购" key:nil],buyAmount,model.symbol];
       self.leftLableDetail.text = [NSString stringWithFormat:@"%.2f%@",[salemount floatValue],model.symbol];
        self.sumLableDetail.text = [NSString stringWithFormat:@"%.2f%@",[sAmount floatValue],model.symbol];
 //    self.leaveLable.text =[NSString stringWithFormat:@"%@ %@%@",[LangSwitcher switchLang:@"剩余" key:nil],model.avilAmount,model.symbol];

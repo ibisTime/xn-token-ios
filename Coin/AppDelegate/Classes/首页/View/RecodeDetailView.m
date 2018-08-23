@@ -204,18 +204,18 @@
     
     [self.desLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(vi.mas_bottom).offset(45);
-        make.left.equalTo(self.mas_left).offset(35);
+        make.left.equalTo(self.mas_left).offset(25);
         
     }];
     
     [self.timeLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.desLab.mas_centerY);
-        make.right.equalTo(self.mas_right).offset(-35);
+        make.right.equalTo(self.mas_right).offset(-15);
         
     }];
    
     [self.freeLable mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.mas_left).offset(35);
+        make.left.equalTo(self.mas_left).offset(25);
         make.top.equalTo(self.timeLab.mas_bottom).offset(35);
         
     }];
@@ -228,7 +228,7 @@
     
     
     [self.totalLable mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.mas_left).offset(35);
+        make.left.equalTo(self.mas_left).offset(25);
         make.top.equalTo(self.freeLable.mas_bottom).offset(35);
         
     }];
@@ -240,7 +240,7 @@
     }];
     
     [self.leftLable mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.mas_left).offset(35);
+        make.left.equalTo(self.mas_left).offset(25);
         make.top.equalTo(self.totalLable.mas_bottom).offset(35);
         
     }];
@@ -253,7 +253,7 @@
     
     
     [self.buyLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.mas_left).offset(35);
+        make.left.equalTo(self.mas_left).offset(25);
         make.top.equalTo(self.leftLable.mas_bottom).offset(35);
         
     }];
@@ -265,7 +265,7 @@
     }];
     
     [self.beiginLable mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.mas_left).offset(35);
+        make.left.equalTo(self.mas_left).offset(25);
         make.top.equalTo(self.buyLab.mas_bottom).offset(35);
         
     }];
@@ -277,7 +277,7 @@
     }];
     
     [self.beiginTime mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.mas_left).offset(35);
+        make.left.equalTo(self.mas_left).offset(25);
         make.top.equalTo(self.beiginLable.mas_bottom).offset(35);
         
     }];
@@ -290,7 +290,7 @@
     
     
     [self.endTime mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.mas_left).offset(35);
+        make.left.equalTo(self.mas_left).offset(25);
         make.top.equalTo(self.beiginTime.mas_bottom).offset(35);
         
     }];

@@ -84,7 +84,6 @@
     [self addSubview:blueView];
     
     [self addSubview:self.desLab];
-    self.desLab.numberOfLines = 0;
     
    
     self.timeLab.numberOfLines = 0;
@@ -131,6 +130,7 @@
     [self.desLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(self.mas_bottom).offset(-10);
         make.left.equalTo(self.mas_left).offset(15);
+        
         
     }];
     
@@ -229,6 +229,7 @@
          self.leaveLable.text =[LangSwitcher switchLang:@"即将开始" key:nil];
     }else if ([model.status isEqualToString:@"5"])
     {
+        
         NSString *s = [LangSwitcher switchLang:@"剩余" key:nil];
         NSString *m =[NSString stringWithFormat:@" %.2f%@",[avilAmount floatValue],model.symbol];
 
@@ -240,10 +241,26 @@
       
         self.leaveLable.attributedText = attrStr;
 //     self.leaveLable.text =[NSString stringWithFormat:@"%@ %@%@",[LangSwitcher switchLang:@"剩余" key:nil],avilAmount,model.symbol];
+        
+        
+        [self.desLab mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.bottom.equalTo(self.mas_bottom).offset(-10);
+            make.left.equalTo(self.mas_left).offset(15);
+            make.width.equalTo(@(kWidth(150)));
+            
+        }];
+        
+        
     }
     else if ([model.status isEqualToString:@"6"])
     {
-        self.leaveLable.text =[LangSwitcher switchLang:@"停止交易" key:nil];
+        if ([model.avilAmount isEqualToString:@"0"]) {
+            self.leaveLable.text =[LangSwitcher switchLang:@"已售罄" key:nil];
+
+        }else{
+            self.leaveLable.text =[LangSwitcher switchLang:@"募集结束" key:nil];
+
+        }
 
     }
     else if ([model.status isEqualToString:@"7"])

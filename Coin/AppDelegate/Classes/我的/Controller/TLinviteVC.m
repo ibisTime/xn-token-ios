@@ -92,7 +92,7 @@
 //    iPhone 8-背景@2x@2x
 
     UILabel *invitationLabel = [UILabel labelWithFrame:CGRectMake(0, kNavigationBarHeight + 21, SCREEN_WIDTH, 52) textAligment:(NSTextAlignmentCenter) backgroundColor:kClearColor font:FONT(30) textColor:kWhiteColor];
-    invitationLabel.text = [LangSwitcher switchLang:@"邀请有礼" key:nil];
+    invitationLabel.text = [LangSwitcher switchLang:@"邀请好友" key:nil];
     [self.bgView addSubview:invitationLabel];
 
     UILabel *introduceLabel = [UILabel labelWithFrame:CGRectMake(0, kNavigationBarHeight + 21 + 52, SCREEN_WIDTH, 52) textAligment:(NSTextAlignmentCenter) backgroundColor:kClearColor font:FONT(30) textColor:kWhiteColor];
@@ -159,27 +159,11 @@
     
     RedEnvelopeVC *redEnvelopeVC = [RedEnvelopeVC new];
     
-    if ([[TLUser user].tradepwdFlag isEqualToString:@"0"]) {
-        TLPwdType pwdType = TLPwdTypeSetTrade;
-        TLPwdRelatedVC *pwdRelatedVC = [[TLPwdRelatedVC alloc] initWithType:pwdType];
+
         
-        pwdRelatedVC.isWallet = YES;
-        pwdRelatedVC.success = ^{
-            
-            
-            //                    [self presentViewController:redEnvelopeVC animated:YES completion:nil];
-            [self.navigationController pushViewController:redEnvelopeVC animated:YES];
-            
-        };
-        [self.navigationController pushViewController:pwdRelatedVC animated:YES];
+    [self.navigationController pushViewController:redEnvelopeVC animated:YES];
         
-        
-    }else{
-        
-        [self.navigationController pushViewController:redEnvelopeVC animated:YES];
-        
-        
-    }
+  
 
 }
 - (void)buttonClick
