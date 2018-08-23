@@ -32,6 +32,7 @@
 #import "BTCBitcoinURL+Tests.h"
 #import "BTCCurrencyConverter+Tests.h"
 #import "BTCData.h"
+#import "AppConfig.h"
 @implementation MnemonicUtil
 
 + (void)test{
@@ -141,12 +142,46 @@
 
 + (NSString *)getBtcPrivateKey:(BTCMnemonic *)mnemonic {
     BTCKeychain *keychain = [mnemonic keychain];
-    return keychain.key.privateKeyAddressTestnet.string;
+
+    switch ([AppConfig config].runEnv) {
+
+        case 0:
+            return keychain.key.privateKeyAddress.string;
+
+            break;
+        case 1:
+            return keychain.key.privateKeyAddressTestnet.string;
+
+            break;
+        case 2:
+            return keychain.key.privateKeyAddressTestnet.string;
+
+            break;
+        default:
+            break;
+    }
 }
 
 + (NSString *)getBtcAddress:(BTCMnemonic *)mnemonic {
     BTCKeychain *keychain = [mnemonic keychain];
-    return keychain.key.addressTestnet.string;
+    
+    switch ([AppConfig config].runEnv) {
+            
+        case 0:
+            return keychain.key.address.string;
+            
+            break;
+        case 1:
+            return keychain.key.privateKeyAddressTestnet.string;
+            
+            break;
+        case 2:
+            return keychain.key.privateKeyAddressTestnet.string;
+            
+            break;
+        default:
+            break;
+    }
 }
 
 + (NSString *)getEthPrivateKey:(BTCMnemonic *)mnemonic {

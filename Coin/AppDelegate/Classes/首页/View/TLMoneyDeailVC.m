@@ -66,6 +66,8 @@
     self.pwdView = pwdView;
     pwdView.HiddenBlock = ^{
         self.pwdView.hidden = YES;
+        [self.pwdView endEditing:YES];
+        [self.view endEditing:YES];
         //        [self.pwdView removeFromSuperview];
     };
     CoinWeakSelf;
@@ -294,7 +296,9 @@
     
     [self.backdetailLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.backLable.mas_centerY);
-        make.left.equalTo(self.symble.mas_right).offset(20);
+        make.left.equalTo(self.symble.mas_right).offset(10);
+        make.right.equalTo(self.view.mas_right).offset(-10);
+
     }];
     
     
@@ -518,7 +522,7 @@
     [whiteView addSubview:moneyLab];
     [moneyLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(blanceLab.mas_centerY);
-        make.left.equalTo(blanceLab.mas_right).offset(20);
+        make.left.equalTo(blanceLab.mas_right).offset(5);
     }];
 //    CoinModel *coin = [CoinUtil getCoinModel:self.currencyModel.currency];
 
@@ -530,10 +534,10 @@
     [whiteView addSubview:symLab1];
     [symLab1 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(moneyLab.mas_centerY);
-        make.left.equalTo(moneyLab.mas_right).offset(5);
+        make.left.equalTo(moneyLab.mas_right).offset(3);
     }];
     
-    UILabel * transFormLab = [UILabel labelWithBackgroundColor:kClearColor textColor:kHexColor(@"#3E3A39") font:13];
+    UILabel * transFormLab = [UILabel labelWithBackgroundColor:kClearColor textColor:kHexColor(@"#3E3A39") font:11];
     transFormLab.userInteractionEnabled = YES;
     [whiteView addSubview:transFormLab];
     transFormLab.layer.cornerRadius = 1;
@@ -546,9 +550,9 @@
     [transFormLab addGestureRecognizer:ta];
     [transFormLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(symLab1.mas_centerY);
-        make.right.equalTo(whiteView.mas_right).offset(-35);
+        make.right.equalTo(whiteView.mas_right).offset(-10);
         make.height.equalTo(@30);
-        make.width.equalTo(@80);
+        make.width.equalTo(@100);
         
     }];
     
@@ -745,7 +749,7 @@
     NSString *mo = [all subNumber:self.moneyModel.minAmount];
     
 //    long long f = [all longLongValue] -[self.moneyModel.minAmount longLongValue];
-    NSString *mo2 = [mo divNumber:self.moneyModel.minAmount leaveNum:4];
+    NSString *mo2 = [mo divNumber:self.moneyModel.increAmount leaveNum:4];
     
 //    long long f1 = [self.moneyModel.minAmount longLongValue];
 //    long long f2= f % f1;
@@ -870,7 +874,7 @@
     }];
     
     UILabel *freeTime = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor3 font:14];
-    freeTime.text = [LangSwitcher switchLang:@"本息到期时间" key:nil];
+    freeTime.text = [LangSwitcher switchLang:@"本息到期日期" key:nil];
     [whiteView addSubview:freeTime];
     [freeTime mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(line2.mas_bottom).offset(15);
@@ -896,7 +900,7 @@
         
     }];
     UILabel *moneyMay = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor3 font:14];
-    moneyMay.text = [LangSwitcher switchLang:@"预计收益" key:nil];
+    moneyMay.text = [LangSwitcher switchLang:@"预计收入" key:nil];
     [whiteView addSubview:moneyMay];
     [moneyMay mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(line3.mas_bottom).offset(15);
@@ -1105,7 +1109,7 @@
     UILabel *timeLab = [UILabel labelWithBackgroundColor:kClearColor textColor:kPlaceholderColor font:12];
     self.timeLab = timeLab;
     [whiteView addSubview:timeLab];
-    NSString * t  = [NSString stringWithFormat:@"%ld%@",self.time,[LangSwitcher switchLang:@"秒钟" key:nil]];
+    NSString * t  = [NSString stringWithFormat:@"%ld",self.time];
     timeLab.text = [NSString stringWithFormat:@"%@%@",t,[LangSwitcher switchLang:@"秒钟自动跳转" key:nil]];
     [timeLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(sureButton.mas_bottom).offset(18);
@@ -1124,7 +1128,7 @@
     
     self.time --;
     
-    NSString * t  = [NSString stringWithFormat:@"%ld%@",self.time,[LangSwitcher switchLang:@"秒钟" key:nil]];
+    NSString * t  = [NSString stringWithFormat:@"%ld",self.time];
     _timeLab.text = [NSString stringWithFormat:@"%@%@",t,[LangSwitcher switchLang:@"秒钟自动跳转" key:nil]];
     
     if (self.time == 0) {

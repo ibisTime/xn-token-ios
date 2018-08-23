@@ -57,6 +57,7 @@
 #import "MnemonicUtil.h"
 #import "BTCData.h"
 #import "BTCNetwork.h"
+#import "AppConfig.h"
 @interface HomeVC ()
 
 @property (nonatomic, strong) HomeTableView *tableView;
@@ -102,17 +103,20 @@
 
     NSArray* words = [@"uniform claim drum stool evidence stage prevent quiz lunar dove record kit" componentsSeparatedByString:@" "];
     
-    BTCMnemonic *mnemonic =  [MnemonicUtil importMnemonic:words];
-    mnemonic.keychain.network = [BTCNetwork testnet];
-    NSLog(@"Seed=%@", BTCHexFromData(mnemonic.seed));
-    NSLog(@"Mnemonic=%@", mnemonic.words);
-    NSLog(@"btc_privateKey=%@", [MnemonicUtil getBtcPrivateKey:mnemonic]);
-    //btc_privateKey=L5ggwMgJQh2DfXVME1AMA5hoPACKFQF24i36uDsVMHJUpNPDuodw
-    //btc_privateKey=L5ggwMgJQh2DfXVME1AMA5hoPACKFQF24i36uDsVMHJUpNPDuodw
-    //btc_privateKey=cW3gQGg9qkiUpxxccQyUXQCs1PViurLi8kBa1eKzrPxV57U7npk1
-    
-    NSString *btc_address = [MnemonicUtil getBtcAddress:mnemonic];
-    NSLog(@"btc_address=%@", [MnemonicUtil getBtcAddress:mnemonic]);
+//    BTCMnemonic *mnemonic =  [MnemonicUtil importMnemonic:words];
+//    if ([AppConfig config].runEnv == 0) {
+//        mnemonic.keychain.network = [BTCNetwork mainnet];
+//
+//    }else{
+//        mnemonic.keychain.network = [BTCNetwork testnet];
+//
+//    }
+// 
+//    NSLog(@"btc_privateKey=%@", [MnemonicUtil getBtcPrivateKey:mnemonic]);
+//  
+//    
+//    NSString *btc_address = [MnemonicUtil getBtcAddress:mnemonic];
+//    NSLog(@"btc_address=%@", [MnemonicUtil getBtcAddress:mnemonic]);
     //btc_address=16kva3dw1AjrFTn9AXswebYvzq21dEeRsx
     //  btc_address=16kva3dw1AjrFTn9AXswebYvzq21dEeRsx
     //btc_address=mmGss6iupCB72aFkt6rKUWmFrpciaaLZuH

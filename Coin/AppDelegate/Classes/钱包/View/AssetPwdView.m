@@ -187,6 +187,7 @@
 }
 - (void)hideSelf
 {
+    [self.password.textField resignFirstResponder];
     if (self.HiddenBlock) {
         self.HiddenBlock();
     }
