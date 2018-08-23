@@ -27,6 +27,8 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "NSString+Extension.h"
 #import "TLUserFindPwdVC.h"
+
+#import <UMMobClick/MobClick.h>
 //腾讯云
 //#import "ChatManager.h"   czy
 //#import "IMModel.h"
@@ -621,9 +623,9 @@
     http.parameters[@"kind"] = APP_KIND;
     }
     [http postWithSuccess:^(id responseObject) {
-        
+        NSLog(@"%@",responseObject[@"data"][@"userId"]);
         [self requesUserInfoWithResponseObject:responseObject];
-        
+        [MobClick profileSignInWithPUID:responseObject[@"data"][@"userId"]];
     } failure:^(NSError *error) {
         
         

@@ -178,13 +178,13 @@
     [qrIV mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.top.equalTo(codeView.mas_top).offset(15);
-        make.left.equalTo(codeView.mas_left).offset(15);
+        make.centerX.equalTo(self.view.mas_centerX);
         make.width.height.equalTo(@150);
         
     }];
     
     self.nameLable = [[UILabel alloc]init];
-    self.nameLable.text = [NSString stringWithFormat:@"%@%@%@",[LangSwitcher switchLang:@"我是" key:nil],[TLUser user].nickname,[LangSwitcher switchLang:@"邀请您使用THA钱包" key:nil]];
+    self.nameLable.text = [NSString stringWithFormat:@"%@%@,%@",[LangSwitcher switchLang:@"我是" key:nil],[TLUser user].nickname,[LangSwitcher switchLang:@"邀请您使用THA钱包" key:nil]];
     self.nameLable.textAlignment = NSTextAlignmentCenter;
     self.nameLable.font = Font(14);
     self.nameLable.textColor = kTextBlack;
@@ -236,7 +236,7 @@
         make.centerX.equalTo(self.view.mas_centerX);
         
     }];
-    introLab.text = [LangSwitcher switchLang:@"扫码二维码领取奖励" key:nil];
+    introLab.text = [LangSwitcher switchLang:@"扫描二维码领取奖励" key:nil];
     
 }
 

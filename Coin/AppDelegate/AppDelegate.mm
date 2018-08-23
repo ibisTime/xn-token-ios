@@ -75,7 +75,7 @@
     //配置键盘
     [self configIQKeyboard];
     //配置友盟统计
-//    [self configUManalytics];
+    [self configUManalytics];
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     //UIStatusBarStyleLightContent状态栏字体白色 UIStatusBarStyleDefault黑色
 
@@ -125,11 +125,20 @@
 //czy    [[IMAPlatform sharedInstance] configOnAppLaunchWithOptions:launchOptions];
     
     
+//<<<<<<< HEAD
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 
         [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
 
     });
+//=======
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//
+//        [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+//
+//    });
+
+//>>>>>>> 6e82b334b4dc1c7e16ffab5c7d736649c1b2d51b
 
     //
     return YES;

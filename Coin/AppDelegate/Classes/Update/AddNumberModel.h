@@ -6,9 +6,9 @@
 //  Copyright © 2018年 caizhuoyue. All rights reserved.
 //
 
-#import "AddNumberModel.h"
+#import "TLBaseModel.h"
 
-@interface AddNumberModel : NSObject
+@interface AddNumberModel : TLBaseModel
 @property (nonatomic ,assign) NSInteger allCount;
 @property (nonatomic ,assign) NSInteger currentCount;
 @property (nonatomic ,assign) NSInteger moreCount;

@@ -92,11 +92,11 @@
 //    iPhone 8-背景@2x@2x
 
     UILabel *invitationLabel = [UILabel labelWithFrame:CGRectMake(0, kNavigationBarHeight + 21, SCREEN_WIDTH, 52) textAligment:(NSTextAlignmentCenter) backgroundColor:kClearColor font:FONT(30) textColor:kWhiteColor];
-    invitationLabel.text = @"邀请有礼";
+    invitationLabel.text = [LangSwitcher switchLang:@"邀请有礼" key:nil];
     [self.bgView addSubview:invitationLabel];
 
     UILabel *introduceLabel = [UILabel labelWithFrame:CGRectMake(0, kNavigationBarHeight + 21 + 52, SCREEN_WIDTH, 52) textAligment:(NSTextAlignmentCenter) backgroundColor:kClearColor font:FONT(30) textColor:kWhiteColor];
-    introduceLabel.text = @"注册THA钱包";
+    introduceLabel.text = [LangSwitcher switchLang:@"注册THA钱包" key:nil];
     [self.bgView addSubview:introduceLabel];
 
 
