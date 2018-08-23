@@ -303,17 +303,17 @@
     if (_selectedPhotos.count >3 && _selectedPhotos.count <8) {
         
         if (self.HeightChange) {
-            self.HeightChange(180);
+            self.HeightChange(self.frame.size.width / 4 * 2);
         }
     }else if (_selectedPhotos.count < 4){
         if (self.HeightChange) {
-            self.HeightChange(90);
+            self.HeightChange(self.frame.size.width / 4);
         }
        
     }else{
         
         if (self.HeightChange) {
-            self.HeightChange(270);
+            self.HeightChange(self.frame.size.width / 4 * 3);
         }
         
     }

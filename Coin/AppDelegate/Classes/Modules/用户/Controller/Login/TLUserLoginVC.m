@@ -35,7 +35,7 @@
 //
 //#import <ImSDK/TIMManager.h>
 
-@interface TLUserLoginVC ()<UITextFieldDelegate>
+@interface TLUserLoginVC ()<UITextFieldDelegate,UIGestureRecognizerDelegate>
 
 @property (nonatomic,strong) TLTextField *phoneTf;
 @property (nonatomic,strong) AccountTf *pwdTf;
@@ -96,7 +96,23 @@
     //腾讯云登录成功
 //    [self setUpNotification];
     
+    id target = self.navigationController.interactivePopGestureRecognizer.delegate;
+    UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:target action:@selector(handleNavigationTransition:)];
+    pan.delegate = self;
+    [self.view addGestureRecognizer:pan];
+    self.navigationController.interactivePopGestureRecognizer.enabled = NO;
 }
+
+-(void)handleNavigationTransition:(UIPanGestureRecognizer *)pan
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer{
+    return YES;
+}
+
 
 - (void)configData
 {

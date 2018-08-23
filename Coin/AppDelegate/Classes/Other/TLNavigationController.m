@@ -52,7 +52,12 @@
   @{NSForegroundColorAttributeName:[UIColor whiteColor],
     NSFontAttributeName:[UIFont systemFontOfSize:16]};
 
+//    __weak typeof (self)weakSelf = self;
+//    if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {        self.navigationController.interactivePopGestureRecognizer.delegate = weakSelf;
+//    }
+
 }
+
 
 - (void)popToLast {
     
