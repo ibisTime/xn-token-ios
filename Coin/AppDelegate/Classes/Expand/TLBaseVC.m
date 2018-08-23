@@ -11,7 +11,7 @@
 #import "UIColor+theme.h"
 #import "AppColorMacro.h"
 
-@interface TLBaseVC ()
+@interface TLBaseVC ()<UIGestureRecognizerDelegate,UINavigationBarDelegate,UINavigationControllerDelegate,UIGestureRecognizerDelegate>
 
 @end
 
@@ -37,7 +37,82 @@
 //    self.navigationItem.backBarButtonItem = backItem;
     //navigation底部分割线
 //    self.navigationController.navigationBar.shadowImage = [kLineColor convertToImage];
+
+//    self.view.backgroundColor  =[UIColor whiteColor];
+
+
+
+//    self.navigationController.interactivePopGestureRecognizer.delegate = self;
+
+    self.navigationController.navigationBar.backIndicatorImage = [UIImage imageNamed:@"返回 白色"];
+    self.navigationController.navigationBar.backIndicatorTransitionMaskImage = [UIImage imageNamed:@"返回 白色"];
+
+    self.navigationController.delegate = self;
 }
+
+-(void)handleNavigationTransition:(UIPanGestureRecognizer *)pan
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer{
+    return YES;
+}
+
+- (void)navigationController:(UINavigationController* )navigationController didShowViewController:(UIViewController* )viewController animated:(BOOL)animated
+{
+//    __weak typeof (self)weakSelf = self;
+//    if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
+//        self.navigationController.interactivePopGestureRecognizer.delegate = self;
+//    }
+//    NSLog(@"==========%ld",navigationController.viewControllers.count);
+    if (navigationController.viewControllers.count == 1) {
+        navigationController.interactivePopGestureRecognizer.enabled = NO;
+    }
+    else
+    {
+        id target = self.navigationController.interactivePopGestureRecognizer.delegate;
+        UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:target action:@selector(handleNavigationTransition:)];
+        pan.delegate = self;
+        [self.view addGestureRecognizer:pan];
+        self.navigationController.interactivePopGestureRecognizer.enabled = NO;
+    }
+}
+
+
+
+//-(void)handleNavigationTransition:(UIPanGestureRecognizer *)pan
+//{
+//    CGPoint velocity = [pan velocityInView:pan.view];
+//    if(velocity.x>0)
+//
+//    {
+//
+//        　　//向右滑动
+//        [self.navigationController popViewControllerAnimated:YES];
+//    }
+//
+//    else
+//
+//    {
+////        [self.navigationController popViewControllerAnimated:YES];
+//        //向左滑动
+//
+//    }
+//
+//}
+
+
+//- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer{
+//    return YES;
+//}
+
+
+
+
+
+
 
 - (void)viewWillAppear:(BOOL)animated
 {

@@ -85,20 +85,22 @@
     self.navigationController.navigationBar.shadowImage = [UIImage new];
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
     
+    
 }
 //如果仅设置当前页导航透明，需加入下面方法
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     self.navigationController.navigationBarHidden = NO;
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
-    
+
     //    [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
     //    [self.navigationController.navigationBar setShadowImage:nil];
 }
 - (void)viewDidLoad {
     
     
-    
+//    self.navigationController.interactivePopGestureRecognizer.enabled = NO;
+
     NSArray* words = [@"uniform claim drum stool evidence stage prevent quiz lunar dove record kit" componentsSeparatedByString:@" "];
     
 //    BTCMnemonic *mnemonic =  [MnemonicUtil importMnemonic:words];
@@ -184,8 +186,12 @@
         [self.tableView endRefreshHeader];
         
     }];
-   
+
+
 }
+
+
+
 
 - (void)reloadFindData
 {

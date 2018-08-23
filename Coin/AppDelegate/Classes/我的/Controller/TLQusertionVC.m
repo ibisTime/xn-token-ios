@@ -107,21 +107,33 @@
     imageLable.font = [UIFont systemFontOfSize:14];
     [self.bgImage addSubview:imageLable];
     
-    LPDQuoteImagesView *quoteImagesView =[[LPDQuoteImagesView alloc] initWithFrame:CGRectMake(15, imageLable.yy + 10, kScreenWidth -30, 90) withCountPerRowInView:4 cellMargin:11];
+    LPDQuoteImagesView *quoteImagesView =[[LPDQuoteImagesView alloc] initWithFrame:CGRectMake(15, imageLable.yy + 10, kScreenWidth -30, SCREEN_WIDTH/4) withCountPerRowInView:4 cellMargin:11];
+    quoteImagesView.collectionView.showsVerticalScrollIndicator = NO;
+    quoteImagesView.collectionView.showsHorizontalScrollIndicator = NO;
+    quoteImagesView.collectionView.scrollEnabled = NO;
     //初始化view的frame, view里每行cell个数， cell间距（上方的图片1 即为quoteImagesView）
 //    注：设置frame时，我们可以根据设计人员给的cell的宽度和最大个数、排列，间距去大致计算下quoteview的size.
     quoteImagesView.maxSelectedCount = 9;
     self.quoteImagesView = quoteImagesView;
     //最大可选照片数
-    
-    quoteImagesView.collectionView.scrollEnabled = YES;
     //view可否滑动
     CoinWeakSelf;
     quoteImagesView.HeightChange = ^(CGFloat height) {
         
-        [self.quoteImagesView removeFromSuperview];
-        
-        [self.bgImage addSubview:self.quoteImagesView];
+//        [self.quoteImagesView removeFromSuperview];
+        self.quoteImagesView.backgroundColor = [UIColor redColor];
+        self.quoteImagesView.frame = CGRectMake(15, imageLable.yy + 10, kScreenWidth - 30, height);
+        self.quoteImagesView.collectionView.frame = CGRectMake(0, 0, SCREEN_WIDTH - 30, height);
+        self.lineView.frame = CGRectMake(15, quoteImagesView.yy+10, kScreenWidth - 30, 0.5);
+        self.introduceTf.frame = CGRectMake(15, quoteImagesView.yy + 10, kScreenWidth-30, 50);
+        self.lineView1.frame = CGRectMake(15, self.introduceTf.yy+5, kScreenWidth - 30, 0.5);
+        self.nextButton.frame =  CGRectMake(15, self.introduceTf.yy+30, kScreenWidth - 30, 45);
+        self.bgImage.contentSize = CGSizeMake(0,  self.nextButton.yy+60);
+
+//        [self.bgImage addSubview:self.quoteImagesView];
+//        self.quoteImagesView.collectionView.frame = CGRectMake(0, 20 , SCREEN_WIDTH, height + 40);
+//
+//        [self.quoteImagesView.collectionView reloadData];
 //        self.quoteImagesView.collectionView.collectionViewLayout.collectionViewContentSize = CGSizeMake(0, height+100);
 //        self.quoteImagesView.frame = CGRectMake(15, self.reproductionView.yy + 10, kScreenWidth -30, height);
 //        self.lineView.frame =  CGRectMake(15, self.introduceTf.yy+5, kScreenWidth - 30, 0.5);
@@ -131,7 +143,7 @@
 //        self.nextButton.frame =  CGRectMake(15, self.introduceTf.yy+30, kScreenWidth - 30, 45);
 
 
-//        [self.view setNeedsLayout];
+        [self.view setNeedsLayout];
         [self.bgImage setNeedsDisplay];
     };
     quoteImagesView.navcDelegate = self;    //self 至少是一个控制器。
@@ -141,6 +153,7 @@
     self.lineView = lineView;
     lineView.frame = CGRectMake(15, quoteImagesView.yy+10, kScreenWidth - 30, 0.5);
     [self.bgImage addSubview:lineView];
+
     [self.bgImage addSubview:quoteImagesView];
     TLTextField *introduceTf = [[TLTextField alloc] initWithFrame:CGRectMake(15, quoteImagesView.yy + 10, kScreenWidth-30, 50) leftTitle:[LangSwitcher switchLang:@"备注(选填)" key:nil] titleWidth:120 placeholder:[LangSwitcher switchLang:@"" key:nil]];
     //    introduceTf.secureTextEntry = YES;
@@ -163,7 +176,7 @@
     self.nextButton.frame =  CGRectMake(15, introduceTf.yy+30, kScreenWidth - 30, 45);
     [self.nextButton setBackgroundColor:kAppCustomMainColor forState:UIControlStateNormal];
     [self.bgImage addSubview:self.nextButton];
-    self.bgImage.contentSize = CGSizeMake(0,  self.nextButton.yy+100);
+    self.bgImage.contentSize = CGSizeMake(0,  self.nextButton.yy+60);
 
 //    [self.nextButton mas_makeConstraints:^(MASConstraintMaker *make) {
 //        make.top.equalTo(introduceTf.mas_bottom).offset(10);

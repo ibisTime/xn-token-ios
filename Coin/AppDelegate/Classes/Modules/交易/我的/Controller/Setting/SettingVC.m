@@ -76,12 +76,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     self.title = [LangSwitcher switchLang:@"账户与安全" key:nil];
     [self initTableView];
 
     [self setGroup];
-    
+
+
 }
 
 #pragma mark - Init
