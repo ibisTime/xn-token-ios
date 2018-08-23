@@ -98,7 +98,7 @@
 - (void)textFieldDidChanged:(UITextField *)textField
 {
     if (textField.text.length > 11) {
-        textField.text = [textField.text substringToIndex:1];
+//        textField.text = [textField.text substringToIndex:1];
 //        [self showMessage:@"不可超过20字！"];
     }else {
         if (self.textLocation == -1) {
@@ -106,7 +106,7 @@
         }else {
             NSLog(@"输入含emoji表情");
             //截取emoji表情前
-            textField.text = [textField.text substringToIndex:self.textLocation];
+//            textField.text = [textField.text substringToIndex:self.textLocation];
         }
     }
 }

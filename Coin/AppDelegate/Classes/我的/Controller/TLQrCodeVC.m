@@ -146,7 +146,7 @@
     
     [codeView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.whiteImage.mas_top).offset(kHeight(120));
-        make.left.equalTo(self.whiteImage.mas_left).offset(68);
+        make.centerX.equalTo(self.whiteImage.mas_centerX);
         make.right.equalTo(self.whiteImage.mas_right).offset(-68);
 
         make.width.height.equalTo(@180);

@@ -1168,9 +1168,9 @@ typedef enum : NSUInteger {
                 self.pricr = [NSString stringWithFormat:@"%f",[self.pricr intValue]*value];
             }else{
                 
-                self.blanceFree.text = [NSString stringWithFormat:@"%.8f %@",self.gamPrice*value,self.currency.symbol];
+                self.blanceFree.text = [NSString stringWithFormat:@"%.8f %@", self.gamPrice *0.85 +self.gamPrice*value*1/3 ,self.currency.symbol];
                 
-                self.pricr = [NSString stringWithFormat:@"%f",[self.tempPrice longLongValue]*value];
+                self.pricr = [NSString stringWithFormat:@"%f",[self.tempPrice longLongValue] + [self.tempPrice longLongValue] *value *1/3];
             }
            
         }
