@@ -91,7 +91,7 @@
 
 - (void)requestContent {
     
-    self.bgImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, -kNavigationBarHeight, SCREEN_WIDTH, SCREEN_HEIGHT + kNavigationBarHeight)];
+    self.bgImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, -kNavigationBarHeight, SCREEN_WIDTH, SCREEN_HEIGHT)];
     self.bgImage.contentMode = UIViewContentModeScaleToFill;
     self.bgImage.userInteractionEnabled = YES;
     self.bgImage.image = kImage(@"我的 背景");
@@ -264,7 +264,7 @@
     
     wkConfig.userContentController = wkUCC;
     
-    _webView = [[WKWebView alloc] initWithFrame:CGRectMake(15, kHeight(90), kScreenWidth-30, kSuperViewHeight) configuration:wkConfig];
+    _webView = [[WKWebView alloc] initWithFrame:CGRectMake(15, kNavigationBarHeight + 30, kScreenWidth-30, kSuperViewHeight) configuration:wkConfig];
     
     _webView.backgroundColor = kWhiteColor;
     

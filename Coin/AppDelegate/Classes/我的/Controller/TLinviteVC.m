@@ -113,7 +113,7 @@
     [self.bgView addSubview:invitationLabel];
 
     UILabel *introduceLabel = [UILabel labelWithFrame:CGRectMake(0, kNavigationBarHeight + 21 + 52, SCREEN_WIDTH, 52) textAligment:(NSTextAlignmentCenter) backgroundColor:kClearColor font:FONT(30) textColor:kWhiteColor];
-    introduceLabel.text = @"注册THA钱包";
+    introduceLabel.text = [LangSwitcher switchLang:@"注册Theia钱包" key:nil];
     [self.bgView addSubview:introduceLabel];
 
 

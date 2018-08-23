@@ -60,16 +60,32 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    self.navigationController.navigationBarHidden = YES;
+    self.navigationController.navigationBar.translucent = YES;
+    [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
+
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+    self.navigationController.navigationBar.tintColor = [UIColor blackColor];
+    self.navigationController.navigationBar.barTintColor = [UIColor blackColor];
+    self.navigationItem.backBarButtonItem = item;
     self.navigationController.navigationBar.shadowImage = [UIImage new];
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
     [self.tableView reloadData];
     [self requestUserInfo];
 }
+
+
 //如果仅设置当前页导航透明，需加入下面方法
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    self.navigationController.navigationBarHidden = NO;
+    self.navigationController.navigationBar.translucent = NO;
+    [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setShadowImage:nil];
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    self.navigationController.navigationBar.barTintColor = kHexColor(@"#0848DF");
+    self.navigationItem.backBarButtonItem = item;
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     
 }
@@ -78,8 +94,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    self.title = [LangSwitcher switchLang:@"设置" key:nil];
+
+    self.nameLable = [[UILabel alloc]init];
+    self.nameLable.text = [LangSwitcher switchLang:@"设置" key:nil];
+    self.nameLable.textAlignment = NSTextAlignmentCenter;
+    self.nameLable.font = Font(16);
+    self.nameLable.textColor = kTextBlack;
+    self.navigationItem.titleView = self.nameLable;
+//    self.title = [LangSwitcher switchLang:@"设置" key:nil];
     [self initTableView];
     
     [self setGroup];
@@ -90,28 +112,28 @@
 
 - (void)initTableView {
     
-    self.bgImage = [[UIImageView alloc] init];
+    self.bgImage = [[UIImageView alloc] initWithFrame:CGRectMake( 0, -kNavigationBarHeight, SCREEN_WIDTH, SCREEN_HEIGHT )];
     self.bgImage.contentMode = UIViewContentModeScaleToFill;
     self.bgImage.userInteractionEnabled = YES;
     self.bgImage.image = kImage(@"我的 背景");
     [self.view  addSubview:self.bgImage];
     
-    [self.bgImage mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(UIEdgeInsetsZero);
-    }];
+//    [self.bgImage mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.edges.mas_equalTo(UIEdgeInsetsZero);
+//    }];
     //
-    self.backButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
-    self.backButton.frame = CGRectMake(15, kStatusBarHeight+5, 40, 40);
-    [self.backButton setImage:kImage(@"返回1-1") forState:(UIControlStateNormal)];
-    [self.backButton addTarget:self action:@selector(buttonClick) forControlEvents:(UIControlEventTouchUpInside)];
-    [self.bgImage addSubview:self.backButton];
-    self.nameLable = [[UILabel alloc]initWithFrame:CGRectMake(54, kStatusBarHeight+5, kScreenWidth - 108, 44)];
-    self.nameLable.text = [LangSwitcher switchLang:@"设置" key:nil];
-    self.nameLable.textAlignment = NSTextAlignmentCenter;
-    self.nameLable.font = Font(16);
-    self.nameLable.textColor = kTextBlack;
-    [self.bgImage addSubview:self.nameLable];
-    
+//    self.backButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
+//    self.backButton.frame = CGRectMake(15, kStatusBarHeight+30, 40, 40);
+//    [self.backButton setImage:kImage(@"返回1-1") forState:(UIControlStateNormal)];
+//    [self.backButton addTarget:self action:@selector(buttonClick) forControlEvents:(UIControlEventTouchUpInside)];
+//    [self.bgImage addSubview:self.backButton];
+//    self.nameLable = [[UILabel alloc]initWithFrame:CGRectMake(54, kStatusBarHeight+5, kScreenWidth - 108, 44)];
+//    self.nameLable.text = [LangSwitcher switchLang:@"设置" key:nil];
+//    self.nameLable.textAlignment = NSTextAlignmentCenter;
+//    self.nameLable.font = Font(16);
+//    self.nameLable.textColor = kTextBlack;
+//    [self.bgImage addSubview:self.nameLable];
+
     self.tableView = [[LocalSettingTableView alloc] initWithFrame:CGRectMake(15, kHeight(90), kScreenWidth-30, kHeight(400)) style:UITableViewStyleGrouped];
     
     self.tableView.group = self.group;

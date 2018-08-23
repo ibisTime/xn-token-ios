@@ -11,7 +11,7 @@
 #import "UIColor+theme.h"
 #import "AppColorMacro.h"
 
-@interface TLBaseVC ()<UIGestureRecognizerDelegate,UINavigationBarDelegate,UINavigationControllerDelegate>
+@interface TLBaseVC ()<UIGestureRecognizerDelegate,UINavigationBarDelegate,UINavigationControllerDelegate,UIGestureRecognizerDelegate>
 
 @end
 
@@ -44,48 +44,12 @@
 
 //    self.navigationController.interactivePopGestureRecognizer.delegate = self;
 
-    //隐藏返回按钮
-//    self.navigationItem.hidesBackButton = YES;
-
-    
-
     self.navigationController.navigationBar.backIndicatorImage = [UIImage imageNamed:@"返回 白色"];
     self.navigationController.navigationBar.backIndicatorTransitionMaskImage = [UIImage imageNamed:@"返回 白色"];
 
-//    self.navigationController.delegate = self;
-//    __weak typeof (self)weakSelf = self;
-
-
-
-//    if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
-//        self.navigationController.interactivePopGestureRecognizer.delegate = weakSelf;
-//        self.navigationController.interactivePopGestureRecognizer.enabled = YES;
-//    }
 
 }
 
--(void)handleNavigationTransition:(UIPanGestureRecognizer *)pan
-{
-//    [self.navigationController popViewControllerAnimated:YES];
-}
-
-
-- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer{
-    return YES;
-}
-
-//- (void)navigationController:(UINavigationController* )navigationController didShowViewController:(UIViewController* )viewController animated:(BOOL)animated
-//{
-//
-//    if (navigationController.viewControllers.count == 1) {
-//        self.navigationController.interactivePopGestureRecognizer.enabled = NO;
-//    }
-//    else
-//    {
-//        self.navigationController.interactivePopGestureRecognizer.enabled = YES;
-//    }
-//
-//}
 
 
 
@@ -125,7 +89,6 @@
 {
     //去掉透明后导航栏下边的黑边
     [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
-
 }
 
 - (void)viewWillDisappear:(BOOL)animated

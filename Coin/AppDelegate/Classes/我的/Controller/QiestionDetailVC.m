@@ -253,19 +253,20 @@
     
     
     
-    [self.noteLab mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(line2.mas_bottom).offset(20);
-            make.left.equalTo(self.view.mas_left).offset(20);
-        
-        
-    }];
-    [self.noteLab2 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(self.noteLab.mas_centerY);
-        make.left.equalTo(self.noteLab.mas_right).offset(20);
-        make.right.equalTo(self.view.mas_right).offset(-10);
-        
-    }];
-    
+//    [self.noteLab mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.top.equalTo(line2.mas_bottom).offset(20);
+//            make.left.equalTo(self.view.mas_left).offset(20);
+//    }];
+////    self.noteLab.backgroundColor = [UIColor redColor];
+//
+//    [self.noteLab2 mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.centerY.equalTo(self.noteLab.mas_centerY);
+//        make.left.equalTo(self.noteLab.mas_right).offset(20);
+//        make.right.equalTo(self.view.mas_right).offset(-10);
+//
+//    }];
+//    self.noteLab2.backgroundColor = [UIColor redColor];
+
     UIView *line3 = [UIView new];
     line3.backgroundColor = kLineColor;
     [self.contentView addSubview:line3];
@@ -287,18 +288,18 @@
     [self.contentView addSubview:self.timeLab2];
     
     
-    [self.timeLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(line3.mas_bottom).offset(20);
-        make.left.equalTo(self.view.mas_left).offset(10);
-        
-    }];
-    [self.timeLab2 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(self.timeLab.mas_centerY);
-        make.left.equalTo(self.timeLab.mas_right).offset(20);
-//        make.right.equalTo(self.view.mas_right).offset(-10);
-        
-    }];
-    
+//    [self.timeLab mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(line3.mas_bottom).offset(20);
+//        make.left.equalTo(self.view.mas_left).offset(10);
+//
+//    }];
+//    [self.timeLab2 mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.centerY.equalTo(self.timeLab.mas_centerY);
+//        make.left.equalTo(self.timeLab.mas_right).offset(20);
+////        make.right.equalTo(self.view.mas_right).offset(-10);
+//
+//    }];
+
     UIView *line4 = [UIView new];
     line4.backgroundColor = kLineColor;
     [self.contentView addSubview:line4];
@@ -320,18 +321,18 @@
     [self.contentView addSubview:self.bugLab2];
     
     
-    [self.bugLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(line4.mas_top).offset(20);
-        make.left.equalTo(self.view.mas_left).offset(10);
-        
-    }];
-    [self.bugLab2 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(self.bugLab.mas_centerY);
-        make.left.equalTo(self.bugLab.mas_right).offset(20);
-        make.right.equalTo(self.view.mas_right).offset(-10);
-        
-    }];
-    
+//    [self.bugLab mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(line4.mas_top).offset(20);
+//        make.left.equalTo(self.view.mas_left).offset(10);
+//
+//    }];
+//    [self.bugLab2 mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.centerY.equalTo(self.bugLab.mas_centerY);
+//        make.left.equalTo(self.bugLab.mas_right).offset(20);
+//        make.right.equalTo(self.view.mas_right).offset(-10);
+//
+//    }];
+
     UIView *line5 = [UIView new];
     line5.backgroundColor = kLineColor;
     [self.contentView addSubview:line5];
@@ -353,17 +354,17 @@
     [self.contentView addSubview:self.sureLab2];
     
     
-    [self.sureLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(line5.mas_bottom).offset(20);
-        make.left.equalTo(self.view.mas_left).offset(10);
-        
-    }];
-    [self.sureLab2 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(self.sureLab.mas_centerY);
-        make.left.equalTo(self.sureLab.mas_right).offset(20);
-//        make.right.equalTo(self.view.mas_right).offset(-10);
-        
-    }];
+//    [self.sureLab mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(line5.mas_bottom).offset(20);
+//        make.left.equalTo(self.view.mas_left).offset(10);
+//        
+//    }];
+//    [self.sureLab2 mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.centerY.equalTo(self.sureLab.mas_centerY);
+//        make.left.equalTo(self.sureLab.mas_right).offset(20);
+////        make.right.equalTo(self.view.mas_right).offset(-10);
+//        
+//    }];
     
     UIView *line6 = [UIView new];
     self.line6 = line6;
@@ -494,6 +495,7 @@
             make.top.equalTo(self.imageView.mas_bottom).offset(30);
             make.left.equalTo(self.view.mas_left).offset(10);
         }];
+
         [self.noteLab2 mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.centerY.equalTo(self.noteLab.mas_centerY);
             make.left.equalTo(self.noteLab.mas_right).offset(20);
@@ -508,8 +510,6 @@
             make.left.equalTo(self.nameLab.mas_left);
             make.right.equalTo(self.view.mas_right).offset(-15);
             make.height.equalTo(@0.5);
-
-
         }];
 
         [self.timeLab mas_remakeConstraints:^(MASConstraintMaker *make) {
@@ -517,6 +517,7 @@
             make.left.equalTo(self.view.mas_left).offset(10);
 
         }];
+
         [self.timeLab2 mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.centerY.equalTo(self.timeLab.mas_centerY);
             make.left.equalTo(self.timeLab.mas_right).offset(20);
@@ -540,6 +541,8 @@
             make.left.equalTo(self.view.mas_left).offset(10);
 
         }];
+
+
         [self.bugLab2 mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.centerY.equalTo(self.bugLab.mas_centerY);
             make.left.equalTo(self.bugLab.mas_right).offset(20);
@@ -565,6 +568,7 @@
             make.left.equalTo(self.view.mas_left).offset(10);
 
         }];
+        [self.sureLab sizeToFit];
 
         [self.sureLab2 mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.centerY.equalTo(self.sureLab.mas_centerY);
