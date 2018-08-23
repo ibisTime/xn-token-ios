@@ -74,7 +74,7 @@
     //配置键盘
     [self configIQKeyboard];
     //配置友盟统计
-//    [self configUManalytics];
+    [self configUManalytics];
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     //UIStatusBarStyleLightContent状态栏字体白色 UIStatusBarStyleDefault黑色
 

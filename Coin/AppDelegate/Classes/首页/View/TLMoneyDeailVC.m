@@ -76,30 +76,80 @@
         [weakSelf.navigationController pushViewController:vc animated:YES];
         
     };
-
     pwdView.hidden = YES;
     pwdView.frame = self.view.bounds;
+
     UIWindow *keyWindow = [[[UIApplication sharedApplication] delegate] window];
     [keyWindow addSubview:pwdView];
-    UIWebView *web = [[UIWebView alloc] init];
-    [self.contentView addSubview:web];
-    web.delegate =self;
-    web.dataDetectorTypes=UIDataDetectorTypeNone;
-    
 
-    [web mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.bottomLab.mas_bottom).offset(15);
-        make.left.equalTo(self.view.mas_left).offset(15);
-        make.right.equalTo(self.view.mas_right).offset(-15);
-        make.height.equalTo(@(300));
-    }];
-    [web loadHTMLString:self.moneyModel.Description baseURL:nil];
-//    self.contentView.contentSize = CGSizeMake(0, kScreenHeight+150);
-    
-     [self.web.scrollView addObserver:self forKeyPath:@"contentSize" options:NSKeyValueObservingOptionNew context:nil];
-   
+    self.web = [[UIWebView alloc] initWithFrame:CGRectMake(15, self.bottomLab.frame.size.height + self.bottomLab.frame.origin.y + 15, SCREEN_WIDTH - 30, 1)];
+    self.web.delegate =self;
+    self.web.scrollView.bounces=NO;
+    self.web.dataDetectorTypes=UIDataDetectorTypeNone;
+
+    [self.contentView addSubview:self.web];
+
+
+    [self.web.scrollView addObserver:self forKeyPath:@"contentSize" options:NSKeyValueObservingOptionNew context:nil];
 }
 
+//监听触发
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    if ([keyPath isEqualToString:@"contentSize"]) {
+        //通过JS代码获取webview的内容高度
+        CGFloat webViewHeight = [[self.web stringByEvaluatingJavaScriptFromString:@"document.body.scrollHeight"] floatValue];
+
+        //通过webview的contentSize获取内容高度
+
+        //        self.webViewHeight = [self.showWebView.scrollView contentSize].height;
+
+        CGRect newFrame = self.web.frame;
+
+//        newFrame.size.height = self.webViewHeight;
+
+//        NSLog(@"-document.body.scrollHeight-----%f",self.webViewHeight);
+
+//        NSLog(@"-contentSize-----%f",self.webViewHeight);
+//
+//        [self createBtn];
+
+        self.web.frame = CGRectMake(15, self.bottomLab.frame.size.height + self.bottomLab.frame.origin.y + 15, SCREEN_WIDTH - 30, webViewHeight);
+        self.contentView.contentSize = CGSizeMake(0, self.web.frame.origin.y + self.web.frame.size.height + 10);
+
+    }
+}
+
+//移除观察者
+-(void)dealloc
+{
+    [self.web.scrollView removeObserver:self forKeyPath:@"contentSize" context:nil];
+}
+
+
+
+
+//-(void)webViewDidFinishLoad:(UIWebView *)webView
+//{
+//    CGFloat webViewHeight = [[webView stringByEvaluatingJavaScriptFromString:@"document.body.scrollHeight"] floatValue];
+//
+//
+//    webView.frame = CGRectMake(15, self.bottomLab.frame.size.height + self.bottomLab.frame.origin.y + 15, SCREEN_WIDTH - 30, webViewHeight);
+//    self.contentView.contentSize = CGSizeMake(0, webView.frame.origin.y+webView.frame.size.height + 10);
+//}
+
+//-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context
+//{
+//
+//    if ([keyPath isEqualToString:@"contentSize"]) {
+//        CGSize fit = [self.web sizeThatFits:CGSizeZero];
+//        self.web.height = fit.height;
+//        self.contentView.contentSize = CGSizeMake(0, self.web.frame.origin.y+self.web.frame.size.height + 10);
+//
+//        [self.web setNeedsLayout];
+//
+//    }
+//}
 
 
 - (void)viewWillAppear:(BOOL)animated
@@ -108,6 +158,11 @@
     
 
     
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    [self.web loadHTMLString:self.moneyModel.Description baseURL:nil];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -119,28 +174,29 @@
 - (void)initCustomView
 {
     UIScrollView *contentView = [[UIScrollView alloc] init];
+    if ([self.moneyModel.status isEqualToString:@"5"])
+    {
+        contentView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - kNavigationBarHeight - 84);
+    }else
+    {
+        contentView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - kNavigationBarHeight);
+    }
     self.contentView = contentView;
     [self.view addSubview:contentView];
-    contentView.userInteractionEnabled = YES;
+//    contentView.userInteractionEnabled = YES;
 //    contentView.contentSize = CGSizeMake(0, kScreenHeight);
-    contentView.scrollEnabled = YES;
+//    contentView.scrollEnabled = YES;
     contentView.delegate = self;
-    [contentView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(UIEdgeInsetsMake(0, 0, 0, 0));
-        make.bottom.equalTo(self.view.mas_bottom).offset(-kBottomInsetHeight);
-    }];
+//    [contentView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.edges.mas_equalTo(UIEdgeInsetsMake(0, 0, 0, 0));
+//        make.bottom.equalTo(self.view.mas_bottom).offset(-kBottomInsetHeight);
+//    }];
+
     UIView *topView = [[UIView alloc] init];
     [contentView addSubview:topView];
     topView.backgroundColor = kHexColor(@"#0848DF");
-    
-    [topView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view.mas_top);
-        
-        make.left.equalTo(self.view.mas_left);
-        make.right.equalTo(self.view.mas_right);
-        make.height.equalTo(@(kHeight(66)));
-    }];
-    
+    topView.frame = CGRectMake(0, 0, SCREEN_WIDTH, 66);
+
     TLTopMoneyView *titleView = [[TLTopMoneyView alloc] init];
     titleView.backgroundColor = kWhiteColor;
     self.tit = titleView;
@@ -149,15 +205,14 @@
     titleView.layer.borderColor = [UIColor colorWithRed:62/255.0 green:58/255.0 blue:57/255.0 alpha:0.16].CGColor;
     titleView.layer.cornerRadius = 4;
     titleView.clipsToBounds = YES;
-    
+//    titleView.frame = CGRectMake(15, 15, SCREEN_WIDTH - 30, 203);
     [titleView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view.mas_top);
-        make.left.equalTo(self.view.mas_left).offset(15);
-        make.right.equalTo(self.view.mas_right).offset(-15);
+        make.top.equalTo(self.contentView.mas_top).offset(15);
+        make.left.equalTo(self.contentView.mas_left).offset(15);
+        make.width.equalTo(@(SCREEN_WIDTH - 30));
         make.height.equalTo(@203);
-
     }];
-    
+
     self.proInfo = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextBlack font:15];
     [self.contentView addSubview:self.proInfo];
     self.proInfo.text = [LangSwitcher switchLang:@"产品详情" key:nil];
@@ -1027,7 +1082,7 @@
     self.timeLab = timeLab;
     [whiteView addSubview:timeLab];
     NSString * t  = [NSString stringWithFormat:@"%ld%@",self.time,[LangSwitcher switchLang:@"秒钟" key:nil]];
-    timeLab.text = [NSString stringWithFormat:@"%@%@",t,[LangSwitcher switchLang:@"自动跳转" key:nil]];
+    timeLab.text = [NSString stringWithFormat:@"%@%@",t,[LangSwitcher switchLang:@"秒钟自动跳转" key:nil]];
     [timeLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(sureButton.mas_bottom).offset(18);
         
@@ -1046,7 +1101,7 @@
     self.time --;
     
     NSString * t  = [NSString stringWithFormat:@"%ld%@",self.time,[LangSwitcher switchLang:@"秒钟" key:nil]];
-    _timeLab.text = [NSString stringWithFormat:@"%@%@",t,[LangSwitcher switchLang:@"自动跳转" key:nil]];
+    _timeLab.text = [NSString stringWithFormat:@"%@%@",t,[LangSwitcher switchLang:@"秒钟自动跳转" key:nil]];
     
     if (self.time == 0) {
         
@@ -1080,29 +1135,19 @@
 
 
 }
-- (void)webViewDidFinishLoad:(UIWebView *)webView{
-    [self.web stringByEvaluatingJavaScriptFromString:@"document.getElementsByTagName('body')[0].style.background='#f7f7f7'"];
-    
-    CGFloat sizeHeight = [[webView stringByEvaluatingJavaScriptFromString:@"document.body.scrollHeight;"]floatValue]  ;
-    //
-    self.web.height = sizeHeight;
-    
+//- (void)webViewDidFinishLoad:(UIWebView *)webView{
+//    [self.web stringByEvaluatingJavaScriptFromString:@"document.getElementsByTagName('body')[0].style.background='#f7f7f7'"];
+//
+//    CGFloat sizeHeight = [[webView stringByEvaluatingJavaScriptFromString:@"document.body.scrollHeight;"]floatValue]  ;
+//    //
+//    self.web.height = sizeHeight;
+//
+//
+//    [self.web setNeedsLayout];
+//
+//}
 
-    [self.web setNeedsLayout];
- 
-}
 
--(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context
-{
-    
-    if ([keyPath isEqualToString:@"contentSize"]) {
-        CGSize fit = [self.web sizeThatFits:CGSizeZero];
-        self.web.height = fit.height;
-
-        [self.web setNeedsLayout];
-    
-    }
-}
 
 
 @end

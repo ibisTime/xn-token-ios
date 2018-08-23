@@ -248,7 +248,7 @@
     }
     else if ([model.status isEqualToString:@"7"])
     {
-        self.leaveLable.text =[LangSwitcher switchLang:@"已售馨" key:nil];
+        self.leaveLable.text =[LangSwitcher switchLang:@"已售罄" key:nil];
 
     }
     else if ([model.status isEqualToString:@"8"])

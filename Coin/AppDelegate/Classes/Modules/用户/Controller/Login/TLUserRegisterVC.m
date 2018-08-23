@@ -21,6 +21,7 @@
 #import "ChooseCountryVc.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "NSString+Extension.h"
+#import <UMMobClick/MobClick.h>
 @interface TLUserRegisterVC ()<CLLocationManagerDelegate>
 
 @property (nonatomic,strong) CaptchaView *captchaView;
@@ -475,7 +476,7 @@
         
         NSString *token = responseObject[@"data"][@"token"];
         NSString *userId = responseObject[@"data"][@"userId"];
-        
+        [MobClick profileSignInWithPUID:userId];
         //保存用户账号和密码
 //        [[TLUser user] saveUserName:self.phoneTf.text pwd:self.pwdTf.text];
         
