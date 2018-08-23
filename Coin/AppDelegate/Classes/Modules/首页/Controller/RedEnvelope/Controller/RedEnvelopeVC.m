@@ -82,7 +82,8 @@
     };
     self.pwdView.forgetBlock = ^{
         
-        
+        weakSelf.pwdView.hidden = YES;
+
         TLPwdRelatedVC *vc  = [[TLPwdRelatedVC alloc] initWithType:TLPwdTypeTradeReset];
 
         [weakSelf.navigationController pushViewController:vc animated:YES];

@@ -36,6 +36,7 @@ FOUNDATION_EXPORT void TLLog(NSString *format, ...);
 @property (nonatomic,strong) NSString *ethHash;
 @property (nonatomic,strong) NSString *wanAddress;
 @property (nonatomic,strong) NSString *ethAddress;
+@property (nonatomic,strong) NSString *btcHash;
 
 @property (nonatomic, assign) BOOL isUploadCheck;
 

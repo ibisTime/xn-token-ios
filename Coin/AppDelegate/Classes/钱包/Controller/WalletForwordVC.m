@@ -82,6 +82,7 @@ typedef enum : NSUInteger {
 @property (nonatomic, strong) UILabel *choseLab;
 //矿工费
 @property (nonatomic, assign) CGFloat gamPrice;
+@property (nonatomic, copy) NSString *tempPrice;
 
 @property (nonatomic, copy) NSString *pricr;
 @property (nonatomic, strong) UIImageView *bgImage;
@@ -571,6 +572,7 @@ typedef enum : NSUInteger {
                     self.priceFast = priceFast;
                     NSString *price = [NSString stringWithFormat:@"%d",f];
                     self.btcPrice = f;
+                    self.tempPrice = pricr;
                     self.pricr = pricr;
                     NSLog(@"%@low@,fast%@",priceSlow,priceFast);
                     self.gamPrice = [price floatValue ] ;
@@ -588,6 +590,8 @@ typedef enum : NSUInteger {
                 [net postWithSuccess:^(id responseObject) {
                 pricr   = responseObject[@"data"][@"gasPrice"];
                     self.pricr = pricr;
+                    self.tempPrice = pricr;
+
                     CGFloat p = [pricr doubleValue]/1000000000000000000;
                     p = p *21000;
                     NSLog(@"%.8f",p);
@@ -609,6 +613,8 @@ typedef enum : NSUInteger {
                        pricr  = responseObject[@"data"][@"gasPrice"];
                         
                         self.pricr = pricr;
+                        self.tempPrice = pricr;
+
                         CGFloat p = [pricr doubleValue]/1000000000000000000;
                         p = p *21000;
                         NSLog(@"%.8f",p);
@@ -627,7 +633,8 @@ typedef enum : NSUInteger {
             net.code = @"802117";
             [net postWithSuccess:^(id responseObject) {
                 pricr   = responseObject[@"data"][@"gasPrice"];
-                
+                self.tempPrice = pricr;
+
                 self.pricr = pricr;
                 CGFloat p = [pricr doubleValue]/1000000000000000000;
                 p = p *21000;
@@ -1149,8 +1156,8 @@ typedef enum : NSUInteger {
                 self.blanceFree.text = [NSString stringWithFormat:@"%@ %@",self.priceSlow,@"sat/b"];
                 self.btcPrice = [self.priceSlow integerValue];
             }else{
-                self.blanceFree.text = [NSString stringWithFormat:@"%.8f %@",self.gamPrice/2,self.currency.symbol];
-                self.pricr = [NSString stringWithFormat:@"%lld",[self.pricr longLongValue]/2];
+                self.blanceFree.text = [NSString stringWithFormat:@"%.8f %@",self.gamPrice*0.85,self.currency.symbol];
+                self.pricr = [NSString stringWithFormat:@"%f",[self.tempPrice longLongValue]*0.85];
             }
             
         }else{
@@ -1163,7 +1170,7 @@ typedef enum : NSUInteger {
                 
                 self.blanceFree.text = [NSString stringWithFormat:@"%.8f %@",self.gamPrice*value,self.currency.symbol];
                 
-                self.pricr = [NSString stringWithFormat:@"%f",[self.pricr longLongValue]*value];
+                self.pricr = [NSString stringWithFormat:@"%f",[self.tempPrice longLongValue]*value];
             }
            
         }
@@ -1177,9 +1184,9 @@ typedef enum : NSUInteger {
                  self.pricr = [NSString stringWithFormat:@"%@",self.priceFast];
              }else{
                  
-                 self.blanceFree.text = [NSString stringWithFormat:@"%.8f %@",self.gamPrice*value*2,self.currency.symbol];
+                 self.blanceFree.text = [NSString stringWithFormat:@"%.8f %@",self.gamPrice*value*1.15,self.currency.symbol];
                  
-                 self.pricr = [NSString stringWithFormat:@"%f",[self.pricr longLongValue]*value*2];
+                 self.pricr = [NSString stringWithFormat:@"%f",[self.tempPrice longLongValue]*value*1.15];
              }
           
          }
@@ -1264,7 +1271,7 @@ typedef enum : NSUInteger {
             }else{
                 self.minerFeeTF.text = [NSString stringWithFormat:@"%.8f %@",self.gamPrice/2,self.currency.symbol];
                 self.choseLab.text =  [LangSwitcher switchLang:@"经济" key:nil];
-                self.pricr = [NSString stringWithFormat:@"%lld",[self.pricr longLongValue]/2];
+                self.pricr = [NSString stringWithFormat:@"%lld",[self.tempPrice longLongValue]/2];
                 self.slider.value = 0.5;
             }
           
@@ -1273,13 +1280,13 @@ typedef enum : NSUInteger {
             if ([self.currency.symbol isEqualToString:@"BTC"]) {
                 self.blanceFree.text = [NSString stringWithFormat:@"%.0f %@",self.gamPrice,@"sat/b"];
                 //            self.choseLab.text =  [LangSwitcher switchLang:@"普通" key:nil];
-                self.pricr = [NSString stringWithFormat:@"%ld",(long)[self.pricr integerValue]];
+                self.pricr = [NSString stringWithFormat:@"%ld",(long)[self.tempPrice integerValue]];
 
             }else{
                 
                 self.blanceFree.text = [NSString stringWithFormat:@"%.8f %@",self.gamPrice,self.currency.symbol];
                 //            self.choseLab.text =  [LangSwitcher switchLang:@"普通" key:nil];
-                self.pricr = [NSString stringWithFormat:@"%lld",[self.pricr longLongValue]];
+                self.pricr = [NSString stringWithFormat:@"%lld",[self.tempPrice longLongValue]];
 
             }
             //普通

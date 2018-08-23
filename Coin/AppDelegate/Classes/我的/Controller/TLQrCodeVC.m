@@ -169,7 +169,7 @@
         
     }
     http://m.thadev.hichengdai.com/user/register.html?inviteCode=U201807030441369491006&lang=ZH_CN
-     address = [NSString stringWithFormat:@"%@/user/register.html?inviteCode=%@&lang=%@",self.h5String,[TLUser user].userId,lang];
+     address = [NSString stringWithFormat:@"%@/user/register.html?inviteCode=%@&lang=%@",self.h5String,[TLUser user].secretUserId,lang];
         
     
     qrIV.image = [SGQRCodeGenerateManager generateWithDefaultQRCodeData:address imageViewWidth:170];

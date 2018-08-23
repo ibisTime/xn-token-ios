@@ -20,16 +20,35 @@
     self.title = [LangSwitcher switchLang:@"更多" key:nil];
     self.web = [[UIWebView alloc] initWithFrame:self.view.bounds];
     [self.view addSubview:self.web];
-    if ([self.currentModel.type isEqualToString:@"0"]) {
-        if ([self.currentModel.symbol isEqualToString:@"ETH"]) {
-            [self.web loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",[AppConfig config].ethHash,self.urlString]]]];
-        }else{
-            [self.web loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",[AppConfig config].wanHash,self.urlString]]]];
+    TLDataBase *dataBase = [TLDataBase sharedManager];
+    NSString *type;
+    
+    if ([dataBase.dataBase open]) {
+        NSString *sql = [NSString stringWithFormat:@"SELECT type from THALocal where symbol = '%@'",self.currentModel.symbol];
+        //        [sql appendString:[TLUser user].userId];
+        FMResultSet *set = [dataBase.dataBase executeQuery:sql];
+        while ([set next])
+        {
+            type = [set stringForColumn:@"type"];
             
         }
-    }else if ([self.currentModel.type isEqualToString:@"1"])
+        [set close];
+    }
+    
+    [dataBase.dataBase close];
+    if ([type isEqualToString:@"0"]) {
+        if ([self.currentModel.symbol isEqualToString:@"ETH"]) {
+            [self.web loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",[AppConfig config].ethHash,self.urlString]]]];
+        }else if([self.currentModel.symbol isEqualToString:@"WAN"]){
+            
+            [self.web loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",[AppConfig config].wanHash,self.urlString]]]];
+            
+        }else{
+           [self.web loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[AppConfig config].btcHash,self.urlString]]]];
+        }
+    }else if ([type isEqualToString:@"1"])
     {
-        
+         [self.web loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",[AppConfig config].ethHash,self.urlString]]]];
         
     }else{
         

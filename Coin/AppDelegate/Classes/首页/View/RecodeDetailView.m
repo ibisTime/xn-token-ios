@@ -416,7 +416,7 @@
 
     }else if ([model.status isEqualToString:@"1"])
     {
-        self.stateLab.text =  [LangSwitcher switchLang:@"购买成功" key:nil];;
+        self.stateLab.text =  [LangSwitcher switchLang:@"持有中" key:nil];;
 
         
     }else if ([model.status isEqualToString:@"2"])

@@ -74,7 +74,7 @@
     [self addSubview:self.stateLab];
     //    [self.stateLab sizeToFit];
     self.desLab = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextBlack font:18];
-    self.timeLab = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor3 font:14];
+    self.timeLab = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextBlack font:14];
     [self addSubview:self.timeLab];
     self.freeLable = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextBlack font:18];
     
@@ -116,7 +116,7 @@
     self.desLab.numberOfLines = 0;
     
     
-    self.timeLab.numberOfLines = 0;
+//    self.timeLab.numberOfLines = 0;
     
     self.moreButton = [UIButton buttonWithTitle:@"" titleColor:kClearColor backgroundColor:kClearColor titleFont:12];
 //    [self.moreButton setImage:kImage(@"更多") forState:UIControlStateNormal];
