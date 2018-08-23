@@ -344,7 +344,7 @@
     TLMoneyDeailVC *money = [TLMoneyDeailVC new];
     money.moneyModel = self.Moneys[indexPath.row];
     money.currencys = self.currencys;
-    money.title = [LangSwitcher switchLang:@"量化产品详情" key:nil];
+    money.title = [LangSwitcher switchLang:@"理财产品详情" key:nil];
     [self.navigationController pushViewController:money animated:YES];
     
 }

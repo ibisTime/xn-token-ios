@@ -650,6 +650,8 @@
 "我是" = "I'm";
 "邀请您使用Thiea钱包" = "inviting you to try out Theia Wallet";
 "购买成功" = "Purchase successful";
+"购买" = "Purchase";
+
 "合约编号" = "Contract number";
 "交易时间" = "Trasaction time";
 "产品期限" = "Subscription period";
@@ -661,8 +663,8 @@
 "请勿截图" = "Do not take a screenshot";
 "请确保四周无人及无任何摄像头！" = "Please make sure there is no one and no camera around!";
 "勿用截图或者拍照方式备份助记词。" = "Please do not take a screenshot or a picture to back up the mnemonic words.";
-"即将到账..." = "Trasfering…";
-"同步打包中..." = "Processing block…";
+"即将到账" = "Trasfering…";
+"同步打包中" = "Processing block…";
 "广播成功，正在同步中" = "Broadcasting successful, processing block";
 "产品期限" = "Subscription period";
 "产品总额" = "Product amount";

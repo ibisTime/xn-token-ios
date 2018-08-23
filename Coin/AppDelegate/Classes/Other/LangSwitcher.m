@@ -100,7 +100,8 @@
             [[NSUserDefaults standardUserDefaults] synchronize];
 
             NSString *lan =[[NSUserDefaults standardUserDefaults] objectForKey:@"appLanguage"];
-            
+            [[NSUserDefaults standardUserDefaults] setObject:@"zh-Hans-US" forKey:AppLanguage];
+            [[NSUserDefaults standardUserDefaults] synchronize];
             if ([lan hasPrefix:@"zh"]) {
                 [[NSUserDefaults standardUserDefaults] setObject:@"zh-Hans-US" forKey:AppLanguage];
                 [[NSUserDefaults standardUserDefaults] synchronize];

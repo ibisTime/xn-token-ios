@@ -172,11 +172,11 @@
             
             break;
         case 1:
-            return keychain.key.privateKeyAddressTestnet.string;
+            return keychain.key.addressTestnet.string;
             
             break;
         case 2:
-            return keychain.key.privateKeyAddressTestnet.string;
+            return keychain.key.addressTestnet.string;
             
             break;
         default:

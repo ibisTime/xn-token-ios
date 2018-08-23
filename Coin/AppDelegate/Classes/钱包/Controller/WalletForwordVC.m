@@ -1182,8 +1182,8 @@ typedef enum : NSUInteger {
         }else{
             if ([self.currency.symbol isEqualToString:@"BTC"]) {
                
-                self.blanceFree.text = [NSString stringWithFormat:@"%.0f %@", ([self.priceFast floatValue] - [self.pricr floatValue])*value,@"sat/b"];
-                self.btcPrice = ([self.priceFast floatValue] - [self.pricr floatValue]) *value;
+                self.blanceFree.text = [NSString stringWithFormat:@"%.0f %@", ([self.priceFast floatValue] - [self.priceSlow floatValue])*value,@"sat/b"];
+                self.btcPrice = ([self.priceFast floatValue] - [self.priceSlow floatValue]) *value;
 
                 self.pricr = [NSString stringWithFormat:@"%f",[self.pricr intValue]*value];
             }else{

@@ -349,7 +349,7 @@
     }];
     if ([self.moneyModel.status isEqualToString:@"5"]) {
         self.importButton = [UIButton buttonWithImageName:nil cornerRadius:6];
-        NSString *text2 = [LangSwitcher switchLang:@"购 买" key:nil];
+        NSString *text2 = [LangSwitcher switchLang:@"购买" key:nil];
         [self.importButton setTitle:text2 forState:UIControlStateNormal];
         self.importButton.titleLabel.font = [UIFont systemFontOfSize:16];
         
@@ -879,6 +879,8 @@
     [freeTime mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(line2.mas_bottom).offset(15);
         make.left.equalTo(buycount.mas_left);
+        make.width.equalTo(@(kWidth(140)));
+
     }];
     UILabel *timeLab = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextBlack font:15];
     [whiteView addSubview:timeLab];

@@ -97,8 +97,34 @@
     }
     
     
-    
-    
+    TLDataBase *da = [TLDataBase sharedManager];
+    self.dataBaseModels = [NSMutableArray array];
+    if ([da.dataBase open]) {
+        NSString *sql = [NSString stringWithFormat:@"SELECT * from THAUser"];
+        //        [sql appendString:[TLUser user].userId];
+        /*walletId INTEGER PRIMARY KEY AUTOINCREMENT,userId text, Mnemonics text, wanaddress text,wanprivate text,ethaddress text,ethprivate text,btcaddress text,btcprivate text,PwdKey text,name text*/
+        FMResultSet *set = [da.dataBase executeQuery:sql];
+        while ([set next])
+        {
+            DataBaseModel *dbModel = [DataBaseModel new];
+
+            dbModel.walletId = [set intForColumn:@"walletId"];
+            dbModel.userId = [set stringForColumn:@"userId"];
+            dbModel.Mnemonics = [set stringForColumn:@"Mnemonics"];
+            dbModel.wanaddress = [set stringForColumn:@"wanaddress"];
+            dbModel.wanprivate = [set stringForColumn:@"wanprivate"];
+            dbModel.ethaddress = [set stringForColumn:@"ethaddress"];
+            dbModel.ethprivate = [set stringForColumn:@"ethprivate"];
+            dbModel.btcaddress = [set stringForColumn:@"btcaddress"];
+            dbModel.btcprivate = [set stringForColumn:@"btcprivate"];
+            dbModel.PwdKey = [set stringForColumn:@"PwdKey"];
+            //                dbModel.name = [set stringForColumn:@"name"];
+            [self.dataBaseModels addObject:dbModel];
+        }
+        [set close];
+    }
+    [da.dataBase close];
+    NSLog(@"%@",self.dataBaseModels);
 
     //退出登录消息通知
     [[NSNotificationCenter defaultCenter] addObserver:self
