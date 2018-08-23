@@ -29,24 +29,37 @@
     [super viewWillAppear:animated];
     //    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
     //去掉导航栏底部的黑线
-    self.navigationController.navigationBarHidden = YES;
+    self.navigationController.navigationBar.translucent = YES;
+    [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
+
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
+    self.navigationItem.backBarButtonItem = item;
     self.navigationController.navigationBar.shadowImage = [UIImage new];
-    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
-    
+    //    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
+
 }
 //如果仅设置当前页导航透明，需加入下面方法
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    self.navigationController.navigationBarHidden = NO;
-    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
-    
-    //    [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
-    //    [self.navigationController.navigationBar setShadowImage:nil];
+    self.navigationController.navigationBar.translucent = NO;
+    [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setShadowImage:nil];
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    self.navigationController.navigationBar.barTintColor = kHexColor(@"#0848DF");
+    self.navigationItem.backBarButtonItem = item;
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
+    //    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
 }
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = [LangSwitcher switchLang:@"邀请有礼" key:nil];
+//    self.title = [LangSwitcher switchLang:@"邀请有礼" key:nil];
     [self getShareUrl];
     
     // Do any additional setup after loading the view.
@@ -80,15 +93,15 @@
     
     
     
-    UIImageView *bgView = [[UIImageView alloc] init];
+    UIImageView *bgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, -kNavigationBarHeight, SCREEN_WIDTH, SCREEN_HEIGHT)];
     self.bgView = bgView;
     bgView.userInteractionEnabled = YES;
     bgView.contentMode = UIViewContentModeScaleToFill;
     
     bgView.image = kImage(@"邀请有礼1");
     [self.view addSubview:bgView];
-    bgView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
-    
+//    bgView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
+
     //    [bgView mas_makeConstraints:^(MASConstraintMaker *make) {
     //        make.edges.mas_equalTo(UIEdgeInsetsZero);
     //
@@ -109,12 +122,12 @@
         }];
     
     
-    self.backButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
-    self.backButton.frame = CGRectMake(15, kStatusBarHeight+5, 40, 40);
-    [self.backButton setImage:kImage(@"返回 白色") forState:(UIControlStateNormal)];
-    [self.backButton addTarget:self action:@selector(buttonClick) forControlEvents:(UIControlEventTouchUpInside)];
-    [self.bgView addSubview:self.backButton];
-    
+//    self.backButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
+//    self.backButton.frame = CGRectMake(15, kStatusBarHeight+5, 40, 40);
+//    [self.backButton setImage:kImage(@"返回 白色") forState:(UIControlStateNormal)];
+//    [self.backButton addTarget:self action:@selector(buttonClick) forControlEvents:(UIControlEventTouchUpInside)];
+//    [self.bgView addSubview:self.backButton];
+
     
     
     self.whiteImage = [[UIImageView alloc] init];
@@ -124,7 +137,7 @@
     [self.bgView  addSubview:self.whiteImage];
     
     [self.whiteImage mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view.mas_top).offset(kHeight(190));
+        make.top.equalTo(self.view.mas_top).offset(-kNavigationBarHeight + kHeight(190));
         make.left.equalTo(self.view.mas_left).offset(30);
         make.right.equalTo(self.view.mas_right).offset(-30);
         make.height.equalTo(@440);
@@ -133,6 +146,7 @@
     UIView *line = [UIView new];
     line.backgroundColor = kLineColor;
     [self.whiteImage addSubview:line];
+
     [line mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.whiteImage.mas_top).offset(88);
         make.left.equalTo(self.whiteImage.mas_left).offset(30);
@@ -146,12 +160,13 @@
     
     [codeView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.whiteImage.mas_top).offset(kHeight(120));
-        make.centerX.equalTo(self.whiteImage.mas_centerX);
+        make.left.equalTo(self.whiteImage.mas_left).offset(68);
         make.right.equalTo(self.whiteImage.mas_right).offset(-68);
-
-        make.width.height.equalTo(@180);
+        make.height.equalTo(@(SCREEN_WIDTH - 98 * 2));
     }];
     [self.whiteImage addSubview:codeView];
+
+
     //二维码
     UIImageView *qrIV = [[UIImageView alloc] init];
     NSString *address ;
@@ -178,9 +193,12 @@
     [qrIV mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.top.equalTo(codeView.mas_top).offset(15);
-        make.centerX.equalTo(self.view.mas_centerX);
-        make.width.height.equalTo(@150);
-        
+        make.right.equalTo(codeView.mas_right).offset(-15);
+        make.left.equalTo(codeView.mas_left).offset(15);
+        make.bottom.equalTo(codeView.mas_bottom).offset(-15);
+//        make.centerX.equalTo(self.view.mas_centerX);
+//        make.width.height.equalTo(@150);
+
     }];
     
     self.nameLable = [[UILabel alloc]init];

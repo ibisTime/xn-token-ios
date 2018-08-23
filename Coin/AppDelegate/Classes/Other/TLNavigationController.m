@@ -48,7 +48,7 @@
     navBar.barTintColor = kHexColor(@"#0848DF");
     navBar.translucent = NO;
     navBar.tintColor = kWhiteColor;
-    self.navigationBar.titleTextAttributes=
+    self.navigationController.navigationBar.titleTextAttributes=
   @{NSForegroundColorAttributeName:[UIColor whiteColor],
     NSFontAttributeName:[UIFont systemFontOfSize:16]};
 
