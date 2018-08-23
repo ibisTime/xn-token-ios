@@ -80,7 +80,7 @@
     
     UIImageView *bgBiew = [[UIImageView alloc] init];
     [self addSubview:bgBiew];
-    bgBiew.image = kImage(@"back2");
+    bgBiew.image = kImage(@"Combined Shape");
     bgBiew.contentMode = UIViewContentModeScaleToFill;
     bgBiew.userInteractionEnabled = YES;
     [bgBiew mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -426,7 +426,7 @@
         
     }else
     {
-        self.stateLab.text =  [LangSwitcher switchLang:@"已到期" key:nil];;
+        self.stateLab.text =  [LangSwitcher switchLang:@"募集失败" key:nil];;
 
         
     }
@@ -435,7 +435,7 @@
 
   
     self.desLab.text =   [LangSwitcher switchLang:@"合约编号" key:nil];;
-    self.timeLab.text = model.produceModel.code;
+    self.timeLab.text = model.code;
     self.totalLable.text =  [LangSwitcher switchLang:@"产品期限" key:nil];
 
     self.freeLable.text =  [LangSwitcher switchLang:@"交易时间" key:nil];

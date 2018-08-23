@@ -172,13 +172,14 @@ NSString *const dbName = @"THAWallet.db";
         self.coinModels = [NSMutableArray array];
         
         if ([self.dataBase open]) {
-            CoinModel *coinModel = [CoinModel new];
             NSString *sql = [NSString stringWithFormat:@"SELECT * from LocalWallet"];
             //        [sql appendString:[TLUser user].userId];
             /*(id INTEGER PRIMARY KEY AUTOINCREMENT,walletId text, symbol text, type text ,status text,cname text,unit text,pic1 text,withdrawFeeString text,withfrawFee text,orderNo text,ename text,icon text,pic2 text,pic3 text,address text,IsSelect INTEGER,next text)*/
             FMResultSet *set = [self.dataBase executeQuery:sql];
             while ([set next])
             {
+                CoinModel *coinModel = [CoinModel new];
+
                 coinModel.id = [set stringForColumn:@"id"];
                 coinModel.walletId = [set stringForColumn:@"walletId"];
                 coinModel.symbol = [set stringForColumn:@"symbol"];
@@ -250,13 +251,14 @@ NSString *const dbName = @"THAWallet.db";
     
     self.dataBaseModels = [NSMutableArray array];
     if ([self.dataBase open]) {
-        DataBaseModel *dbModel = [DataBaseModel new];
         NSString *sql = [NSString stringWithFormat:@"SELECT * from THAUser"];
         //        [sql appendString:[TLUser user].userId];
         /*walletId INTEGER PRIMARY KEY AUTOINCREMENT,userId text, Mnemonics text, wanaddress text,wanprivate text,ethaddress text,ethprivate text,btcaddress text,btcprivate text,PwdKey text,name text*/
         FMResultSet *set = [self.dataBase executeQuery:sql];
         while ([set next])
         {
+            DataBaseModel *dbModel = [DataBaseModel new];
+
             dbModel.walletId = [set intForColumn:@"walletId"];
             dbModel.userId = [set stringForColumn:@"userId"];
             dbModel.Mnemonics = [set stringForColumn:@"Mnemonics"];

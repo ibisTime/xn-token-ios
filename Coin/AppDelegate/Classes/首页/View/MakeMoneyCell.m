@@ -253,10 +253,18 @@
     }
     else if ([model.status isEqualToString:@"8"])
     {
+        UIView *drakView = [UIView new];
+        drakView.backgroundColor = kLineColor;
+        drakView.alpha = 0.5;
+        [self addSubview:drakView];
+        [drakView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.mas_equalTo(UIEdgeInsetsZero);
+        }];
+        
         self.leaveLable.text =[LangSwitcher switchLang:@"还款成功" key:nil];
     } else if ([model.status isEqualToString:@"9"])
     {
-        self.leaveLable.text =[LangSwitcher switchLang:@"已到期" key:nil];
+        self.leaveLable.text =[LangSwitcher switchLang:@"募集失败" key:nil];
 
     }else{
         
@@ -277,6 +285,8 @@
 //        make.width.equalTo(@((kScreenWidth - 60)*f));
 //
 //    }];
+    
+  
     [self setNeedsLayout];
     [self setNeedsDisplay];
     

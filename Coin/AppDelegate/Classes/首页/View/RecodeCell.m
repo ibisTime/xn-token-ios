@@ -241,7 +241,7 @@
         
     }else
     {
-        [self.moreButton setTitle:[LangSwitcher switchLang:@"已到期" key:nil] forState:UIControlStateNormal];
+        [self.moreButton setTitle:[LangSwitcher switchLang:@"募集失败" key:nil] forState:UIControlStateNormal];
 
         
     }
