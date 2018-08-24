@@ -200,7 +200,10 @@
 
         }];
 
-        if ([self.interCode isEqualToString:self.countrys[indexPath.row].interCode]) {
+        NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:@"chooseModel"];
+        CountryModel *model = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        
+        if ([model.code isEqualToString:self.countrys[indexPath.row].code]) {
             image1.hidden = NO;
 
         }else{
@@ -231,42 +234,29 @@
         
         [[NSUserDefaults standardUserDefaults] setObject:data forKey:@"chooseModel"];
         [[NSUserDefaults standardUserDefaults] synchronize];
-    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"chooseCoutry"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+//    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"chooseCoutry"];
+//    [[NSUserDefaults standardUserDefaults] synchronize];
     if (self.selectCountry) {
+        
         self.selectCountry(self.countrys[indexPath.row]);
+        
         CountryModel *model = self.countrys[indexPath.row];
+        
         if ([TLUser user].isLogin == NO) {
             TLUserLoginVC *log = [TLUserLoginVC new];
             TLNavigationController *na = [[TLNavigationController alloc] initWithRootViewController:log];
             log.IsAPPJoin = YES;
             if ([model.interSimpleCode isEqualToString:@"CN"] ||[model.interSimpleCode isEqualToString:@"HK"] ||[model.interSimpleCode isEqualToString:@"TW"] || [model.interSimpleCode isEqualToString:@"MO"]) {
                 [LangSwitcher changLangType:LangTypeSimple];
-                TLTabBarController *tabBarCtrl = [[TLTabBarController alloc] init];
                 [UIApplication sharedApplication].keyWindow.rootViewController = na;
-            }else if ([model.interSimpleCode isEqualToString:@"ID"])
-            {
-                [LangSwitcher changLangType:LangTypeEnglish];
-                TLTabBarController *tabBarCtrl = [[TLTabBarController alloc] init];
-                [UIApplication sharedApplication].keyWindow.rootViewController = na;
-                
-            }else if ([model.interSimpleCode isEqualToString:@"MY"])
-            {
-                [LangSwitcher changLangType:LangTypeEnglish];
-                
-                TLTabBarController *tabBarCtrl = [[TLTabBarController alloc] init];
-                [UIApplication sharedApplication].keyWindow.rootViewController = na;
-                
             }else if ([model.interSimpleCode isEqualToString:@"KR"])
             {
                 [LangSwitcher changLangType:LangTypeKorean];
-                TLTabBarController *tabBarCtrl = [[TLTabBarController alloc] init];
                 [UIApplication sharedApplication].keyWindow.rootViewController = na;
                 
             }else{
                 
                 [LangSwitcher changLangType:LangTypeEnglish];
-                TLTabBarController *tabBarCtrl = [[TLTabBarController alloc] init];
                 [UIApplication sharedApplication].keyWindow.rootViewController = na;
                 
             }

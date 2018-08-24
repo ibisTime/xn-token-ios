@@ -38,33 +38,9 @@
     
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.hidden = NO;
-    BOOL isChoose =  [[NSUserDefaults standardUserDefaults] boolForKey:@"chooseCoutry"];
+    [self loadData];
+    [self configData];
     
-    if (isChoose == YES) {
-        
-        NSData *data   =  [[NSUserDefaults standardUserDefaults] objectForKey:@"chooseModel"];
-        CountryModel *model = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-        if (model) {
-            NSString *url = [model.pic convertImageUrl];
-            [self.pic sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:kImage(@"中国国旗")];
-            self.PhoneCode.text = [NSString stringWithFormat:@"+%@",[model.interCode substringFromIndex:2]];
-            
-        }
-    }else{
-        NSData *data   =  [[NSUserDefaults standardUserDefaults] objectForKey:@"chooseModel"];
-        CountryModel *model = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-        if (model) {
-            NSString *url = [model.pic convertImageUrl];
-            [self.pic sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:kImage(@"中国国旗")];
-            self.PhoneCode.text = [NSString stringWithFormat:@"+%@",[model.interCode substringFromIndex:2]];
-            
-        }else{
-            
-            self.pic.image = kImage(@"中国国旗");
-            self.PhoneCode.text  = @"+86";
-        }
-        
-    }
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -82,6 +58,53 @@
     [self initSubviews];
    
 }
+- (void)configData
+{
+    
+    BOOL isChoose =  [[NSUserDefaults standardUserDefaults] boolForKey:@"chooseCoutry"];
+    
+    if (isChoose == YES) {
+        
+        
+        NSData *data   =  [[NSUserDefaults standardUserDefaults] objectForKey:@"chooseModel"];
+        CountryModel *model = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        if ([model.code isNotBlank]) {
+            NSString *url = [model.pic convertImageUrl];
+            
+            [self.pic sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:kImage(@"中国国旗")];
+            self.PhoneCode.text = [NSString stringWithFormat:@"+%@",[model.interCode substringFromIndex:2]];
+        }else {
+            for (CountryModel *country in self.countrys) {
+                if ([country.interCode isEqualToString:model.interCode]) {
+                    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:country];
+                    [[NSUserDefaults standardUserDefaults] setObject:data forKey:@"chooseModel"];
+                    [[NSUserDefaults standardUserDefaults] synchronize];
+                    NSString *url = [country.pic convertImageUrl];
+                    
+                    [self.pic sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:kImage(@"中国国旗")];
+                    self.PhoneCode.text = [NSString stringWithFormat:@"+%@",[country.interCode substringFromIndex:2]];
+                }
+            }
+        }
+        
+    }else{
+        
+        CountryModel *model = self.countrys[0];
+        NSData *data = [NSKeyedArchiver archivedDataWithRootObject:model];
+        [[NSUserDefaults standardUserDefaults] setObject:data forKey:@"chooseModel"];
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"chooseCoutry"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        NSString *url = [model.pic convertImageUrl];
+        
+        [self.pic sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:kImage(@"中国国旗")];
+        self.PhoneCode.text = [NSString stringWithFormat:@"+%@",[model.interCode substringFromIndex:2]];
+        
+        
+        
+    }
+}
+
+
 - (void)loadData
 {
     
@@ -315,7 +338,7 @@
     //选择国家 设置区号
     CoinWeakSelf;
     ChooseCountryVc *countryVc = [ChooseCountryVc new];
-     countryVc.interCode = [NSString stringWithFormat:@"00%@",[self.PhoneCode.text substringFromIndex:1]];
+//     countryVc.interCode = [NSString stringWithFormat:@"00%@",[self.PhoneCode.text substringFromIndex:1]];
     countryVc.selectCountry = ^(CountryModel *model) {
         //更新国家 区号
         weakSelf.titlePhpne.text = model.chineseName;

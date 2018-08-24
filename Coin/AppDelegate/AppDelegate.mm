@@ -60,7 +60,7 @@
 //    [NSThread sleepForTimeInterval:2];
     
     //服务器环境 //递增金额
-    [AppConfig config].runEnv = RunEnvRelease;
+    [AppConfig config].runEnv = RunEnvDev;
     [AppConfig config].isChecking = NO;
 #warning  //pods 更新后会导致wan币转账失败
 //    [AppConfig config].isUploadCheck = YES;
@@ -147,13 +147,13 @@
    
 
     @try{
-//        UMConfigInstance.appKey = @"5b73d999f29d9825200001db";//研发
+        UMConfigInstance.appKey = @"5b73d999f29d9825200001db";//研发
         UMConfigInstance.appKey = @"5b73b2e68f4a9d21830002fd";//正式
 
       //一般是这样写，用于友盟后台的渠道统计，当然苹果也不会有其他渠道，写死就好
 //        UMConfigInstance.channelId = @"Theia"; //渠道区分
 //        UMConfigInstance.channelId = @"facebook"; //渠道区分
-        UMConfigInstance.channelId = @"biyongbao"; //渠道区分
+//        UMConfigInstance.channelId = @"biyongbao"; //渠道区分
 
         UMConfigInstance.ePolicy =SEND_INTERVAL; //上传模式，这种为最小间隔发送90S，也可按照要求选择其他上传模式。也可不设置，在友盟后台修改。
         [MobClick startWithConfigure:UMConfigInstance];//开启SDK

@@ -87,6 +87,7 @@
     }
     
 }
+
 - (void)configData
 {
     
@@ -94,32 +95,41 @@
     
     if (isChoose == YES) {
         
-        NSData *data   =  [[NSUserDefaults standardUserDefaults] objectForKey:@"chooseModel"];
-        CountryModel *model = [NSKeyedUnarchiver unarchiveObjectWithData:data];
         
-        if (model) {
-            NSString *url = [model.pic convertImageUrl];
-            [self.pic sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:kImage(@"中国国旗")];
-            self.PhoneCode.text = [NSString stringWithFormat:@"+%@",[model.interCode substringFromIndex:2]];
-            
-        }
-    }else{
         NSData *data   =  [[NSUserDefaults standardUserDefaults] objectForKey:@"chooseModel"];
         CountryModel *model = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-        if (model) {
+        if ([model.code isNotBlank]) {
             NSString *url = [model.pic convertImageUrl];
+            
             [self.pic sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:kImage(@"中国国旗")];
             self.PhoneCode.text = [NSString stringWithFormat:@"+%@",[model.interCode substringFromIndex:2]];
-            
-            
-        }else{
-            //
-            CountryModel *model = self.countrys[0];
-            self.pic.image = kImage(@"中国国旗");
-            self.PhoneCode.text  = @"+86";
-            
-            
+        }else {
+            for (CountryModel *country in self.countrys) {
+                if ([country.interCode isEqualToString:model.interCode]) {
+                    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:country];
+                    [[NSUserDefaults standardUserDefaults] setObject:data forKey:@"chooseModel"];
+                    [[NSUserDefaults standardUserDefaults] synchronize];
+                    NSString *url = [country.pic convertImageUrl];
+                    
+                    [self.pic sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:kImage(@"中国国旗")];
+                    self.PhoneCode.text = [NSString stringWithFormat:@"+%@",[country.interCode substringFromIndex:2]];
+                }
+            }
         }
+        
+    }else{
+        
+        CountryModel *model = self.countrys[0];
+        NSData *data = [NSKeyedArchiver archivedDataWithRootObject:model];
+        [[NSUserDefaults standardUserDefaults] setObject:data forKey:@"chooseModel"];
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"chooseCoutry"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        NSString *url = [model.pic convertImageUrl];
+        
+        [self.pic sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:kImage(@"中国国旗")];
+        self.PhoneCode.text = [NSString stringWithFormat:@"+%@",[model.interCode substringFromIndex:2]];
+        
+        
         
     }
 }
@@ -519,7 +529,7 @@
     }
     NSData *data   =  [[NSUserDefaults standardUserDefaults] objectForKey:@"chooseModel"];
     CountryModel *model = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-    if (model) {
+    if ([model.code isNotBlank]) {
         http.parameters[@"countryCode"] = model.code;
     }
     

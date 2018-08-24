@@ -54,6 +54,8 @@
 @property (nonatomic ,strong) UILabel *PhoneCode;
 @property (nonatomic ,strong) UIImageView *accessoryImageView;
 @property (nonatomic ,strong) UIImageView *pic;
+@property (nonatomic,strong) NSMutableArray <CountryModel *>*countrys;
+
 @end
 
 @implementation TLUserRegisterVC
@@ -73,37 +75,61 @@
     self.title = [LangSwitcher switchLang:@"注册" key:nil];
 
     [self setUpUI];
+    [self loadData];
+
+    [self configData];
+
+}
+
+
+
+
+- (void)configData
+{
     
     BOOL isChoose =  [[NSUserDefaults standardUserDefaults] boolForKey:@"chooseCoutry"];
     
     if (isChoose == YES) {
+        
+        
         NSData *data   =  [[NSUserDefaults standardUserDefaults] objectForKey:@"chooseModel"];
         CountryModel *model = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-        
-        if (model) {
+        if ([model.code isNotBlank]) {
             NSString *url = [model.pic convertImageUrl];
+            
             [self.pic sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:kImage(@"中国国旗")];
             self.PhoneCode.text = [NSString stringWithFormat:@"+%@",[model.interCode substringFromIndex:2]];
-            
+        }else {
+            for (CountryModel *country in self.countrys) {
+                if ([country.interCode isEqualToString:model.interCode]) {
+                    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:country];
+                    [[NSUserDefaults standardUserDefaults] setObject:data forKey:@"chooseModel"];
+                    [[NSUserDefaults standardUserDefaults] synchronize];
+                    NSString *url = [country.pic convertImageUrl];
+                    
+                    [self.pic sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:kImage(@"中国国旗")];
+                    self.PhoneCode.text = [NSString stringWithFormat:@"+%@",[country.interCode substringFromIndex:2]];
+                }
+            }
         }
+        
     }else{
-        NSData *data   =  [[NSUserDefaults standardUserDefaults] objectForKey:@"chooseModel"];
-        CountryModel *model = [NSKeyedUnarchiver unarchiveObjectWithData:data];
         
-        if (model) {
-            NSString *url = [model.pic convertImageUrl];
-            [self.pic sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:kImage(@"中国国旗")];
-            self.PhoneCode.text = [NSString stringWithFormat:@"+%@",[model.interCode substringFromIndex:2]];
-            
-        }else{
-            self.pic.image = kImage(@"中国国旗");
-            self.PhoneCode.text  = @"+86";
-            
-        }
+        CountryModel *model = self.countrys[0];
+        NSData *data = [NSKeyedArchiver archivedDataWithRootObject:model];
+        [[NSUserDefaults standardUserDefaults] setObject:data forKey:@"chooseModel"];
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"chooseCoutry"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        NSString *url = [model.pic convertImageUrl];
+        
+        [self.pic sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:kImage(@"中国国旗")];
+        self.PhoneCode.text = [NSString stringWithFormat:@"+%@",[model.interCode substringFromIndex:2]];
+        
+        
         
     }
-
 }
+
 - (void)back {
     
    
@@ -367,7 +393,7 @@
     //选择国家 设置区号
     CoinWeakSelf;
     ChooseCountryVc *countryVc = [ChooseCountryVc new];
-     countryVc.interCode = [NSString stringWithFormat:@"00%@",[self.PhoneCode.text substringFromIndex:1]];
+//     countryVc.interCode = [NSString stringWithFormat:@"00%@",[self.PhoneCode.text substringFromIndex:1]];
     countryVc.selectCountry = ^(CountryModel *model) {
         //更新国家 区号
         [self.pic sd_setImageWithURL:[NSURL URLWithString:[model.pic convertImageUrl]]];
@@ -408,7 +434,45 @@
     
 }
 
-
+- (void)loadData
+{
+    
+    
+    TLNetworking *net = [TLNetworking new];
+    net.showView = self.view;
+    net.code = @"801120";
+    net.isLocal = YES;
+    net.ISparametArray = YES;
+    net.parameters[@"status"] = @"1";
+    [net postWithSuccess:^(id responseObject) {
+        
+        NSLog(@"%@",responseObject);
+        
+        self.countrys = [CountryModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
+        
+        for (int i = 0; i < self.countrys.count; i++) {
+            
+            CountryModel *model = self.countrys[i];
+            NSString *code =[TLUser user].interCode;
+            if (code == model.interCode) {
+                NSString *url = [model.pic convertImageUrl];
+                [self.pic sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:kImage(@"中国国旗")];
+                self.PhoneCode.text = [NSString stringWithFormat:@"+%@",[model.interCode substringFromIndex:2]];
+            }
+        }
+        
+        //        [self.tableView reloadData];
+        //        NSString *str = [NSString stringWithFormat:@"%@", responseObject[@"data"]];
+        //        [[NSNotificationCenter defaultCenter] postNotificationName:@"RealNameAuthResult" object:str];
+        
+    } failure:^(NSError *error) {
+        
+        
+    }];
+    
+    
+    
+}
 - (void)goReg {
     
 //    if (![self.nickNameTF.text valid]) {
@@ -458,9 +522,12 @@
     http.parameters[@"mobile"] = self.phoneTf.text;
     NSData *data   =  [[NSUserDefaults standardUserDefaults] objectForKey:@"chooseModel"];
     CountryModel *model = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-    if (model) {
+    if ([model.code isNotBlank]) {
         http.parameters[@"countryCode"] = model.code;
-    }
+    }else{
+        http.parameters[@"countryCode"] = self.countrys[0].code;
+
+        }
     
 
     http.parameters[@"loginPwd"] = self.pwdTf.text;

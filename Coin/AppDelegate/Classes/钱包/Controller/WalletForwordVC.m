@@ -1431,12 +1431,12 @@ typedef enum : NSUInteger {
                                       if ([self.currency.type isEqualToString:@"0"]) {
                                           //公链 ETH WAN BTC
                                           if ([self.currency.symbol isEqualToString:@"ETH"]) {
-                                              result =[MnemonicUtil sendTransactionWithMnemonicWallet:Mnemonics address:self.balanceTF.text amount:gaspic gaspic:self.pricr gasLimt:@"21000"];
+                                              result =[MnemonicUtil sendTransactionWithMnemonicWallet:Mnemonics address:[self.balanceTF.text lowercaseString] amount:gaspic gaspic:self.pricr gasLimt:@"21000"];
                                               
                                           }else if ([self.currency.symbol isEqualToString:@"WAN"]){
                                               
                                               
-                                              result =[MnemonicUtil sendWanTransactionWithMnemonicWallet:Mnemonics address:self.balanceTF.text amount:gaspic gaspic:self.pricr gasLimt:@"21000"];
+                                              result =[MnemonicUtil sendWanTransactionWithMnemonicWallet:Mnemonics address:[self.balanceTF.text lowercaseString] amount:gaspic gaspic:self.pricr gasLimt:@"21000"];
                                           }else{
                                               
                                             //btc
@@ -1456,7 +1456,7 @@ typedef enum : NSUInteger {
                                           CoinModel *coin = [CoinUtil getCoinModel:self.currency.symbol];
                                           
                                           
-                                          result = [MnemonicUtil sendEthTokenTransactionWithAddress:Mnemonics contractAddress:coin.contractAddress address:self.balanceTF.text amount:self.tranAmountTF.text gaspic:self.pricr gasLimt:@"210000"];
+                                          result = [MnemonicUtil sendEthTokenTransactionWithAddress:Mnemonics contractAddress:coin.contractAddress address:[self.balanceTF.text lowercaseString] amount:self.tranAmountTF.text gaspic:self.pricr gasLimt:@"210000"];
                                           
                                       }
                                       

@@ -74,10 +74,9 @@
     
     self.title = [LangSwitcher switchLang:@"登录" key:nil];
     
-    [self setBarButtonItem];
-
     [self setUpUI];
-    [self configData];
+
+    [self loadData];
 
     [self changeCodeLogin];
     
@@ -99,52 +98,107 @@
 
 }
 
-
 - (void)configData
 {
+    //获取缓存的国家
+    NSData *data   =  [[NSUserDefaults standardUserDefaults] objectForKey:@"chooseModel"];
     
-    BOOL isChoose =  [[NSUserDefaults standardUserDefaults] boolForKey:@"chooseCoutry"];
-    
-    if (isChoose == YES) {
+    //有缓存加载缓存国家
+    if (data) {
         
-        NSData *data   =  [[NSUserDefaults standardUserDefaults] objectForKey:@"chooseModel"];
         CountryModel *model = [NSKeyedUnarchiver unarchiveObjectWithData:data];
         
-        if (model) {
-            NSString *url = [model.pic convertImageUrl];
-            [self.pic sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:kImage(@"中国国旗")];
-            self.PhoneCode.text = [NSString stringWithFormat:@"+%@",[model.interCode substringFromIndex:2]];
+        //如果国家编号不为空，说明是1.7.0之后缓存的，直接设置即可
+        if ([model.code isNotBlank]) {
             
+            NSString *url = [model.pic convertImageUrl];
+            
+            [self.pic sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:kImage(@"中国国旗")];
+            
+            self.PhoneCode.text = [NSString stringWithFormat:@"+%@",[model.interCode substringFromIndex:2]];
+        
         }
-    }else{
-        NSData *data   =  [[NSUserDefaults standardUserDefaults] objectForKey:@"chooseModel"];
-        CountryModel *model = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-        if (model) {
-            NSString *url = [model.pic convertImageUrl];
+        //如果国家编号为空，说明是1.7.0之前缓存的，需要移除
+        else {
+            
+            CountryModel *defaultCountry = [self.countrys objectAtIndex:0];
+            NSData *data = [NSKeyedArchiver archivedDataWithRootObject:defaultCountry];
+            [[NSUserDefaults standardUserDefaults] setObject:data forKey:@"chooseModel"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            
+            NSString *url = [defaultCountry.pic convertImageUrl];
             [self.pic sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:kImage(@"中国国旗")];
-            self.PhoneCode.text = [NSString stringWithFormat:@"+%@",[model.interCode substringFromIndex:2]];
-            
-            
-        }else{
-            //
-            CountryModel *model = self.countrys[0];
-            self.pic.image = kImage(@"中国国旗");
-            self.PhoneCode.text  = @"+86";
-            
+            self.PhoneCode.text = [NSString stringWithFormat:@"+%@",[defaultCountry.interCode substringFromIndex:2]];
             
         }
         
     }
+    //没有缓存加载网络请求国家中的中国
+    else {
+        
+        CountryModel *defaultCountry = [self.countrys objectAtIndex:0];
+        NSData *data = [NSKeyedArchiver archivedDataWithRootObject:defaultCountry];
+        [[NSUserDefaults standardUserDefaults] setObject:data forKey:@"chooseModel"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        NSString *url = [defaultCountry.pic convertImageUrl];
+        [self.pic sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:kImage(@"中国国旗")];
+        self.PhoneCode.text = [NSString stringWithFormat:@"+%@",[defaultCountry.interCode substringFromIndex:2]];
+        
+    }
+    
+}
+
+- (void)configData_bak
+{
+
+    BOOL isChoose =  [[NSUserDefaults standardUserDefaults] boolForKey:@"chooseCoutry"];
+    
+    if (isChoose == YES) {
+      
+        NSData *data   =  [[NSUserDefaults standardUserDefaults] objectForKey:@"chooseModel"];
+        CountryModel *model = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        if ([model.code isNotBlank]) {
+            NSString *url = [model.pic convertImageUrl];
+
+            [self.pic sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:kImage(@"中国国旗")];
+            self.PhoneCode.text = [NSString stringWithFormat:@"+%@",[model.interCode substringFromIndex:2]];
+        }else {
+            for (CountryModel *country in self.countrys) {
+                if ([country.interCode isEqualToString:model.interCode]) {
+                    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:country];
+                    [[NSUserDefaults standardUserDefaults] setObject:data forKey:@"chooseModel"];
+                    [[NSUserDefaults standardUserDefaults] synchronize];
+                    NSString *url = [country.pic convertImageUrl];
+                    
+                    [self.pic sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:kImage(@"中国国旗")];
+                    self.PhoneCode.text = [NSString stringWithFormat:@"+%@",[country.interCode substringFromIndex:2]];
+                }
+            }
+        }
+        
+    }else{
+       
+            CountryModel *model = self.countrys[0];
+            NSData *data = [NSKeyedArchiver archivedDataWithRootObject:model];
+            [[NSUserDefaults standardUserDefaults] setObject:data forKey:@"chooseModel"];
+            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"chooseCoutry"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            NSString *url = [model.pic convertImageUrl];
+
+            [self.pic sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:kImage(@"中国国旗")];
+            self.PhoneCode.text = [NSString stringWithFormat:@"+%@",[model.interCode substringFromIndex:2]];
+            
+            
+      
+    }
 }
 #pragma mark - Init
 
-- (void)setBarButtonItem {
+- (void)loadData {
 
-    //取消按钮
-   [UIBarButtonItem addLeftItemWithImageName:kCancelIcon frame:CGRectMake(-30, 0, 80, 44) vc:self action:@selector(back)];
-    //注册
     
-    
+    //获取国家列表
     TLNetworking *net = [TLNetworking new];
     net.showView = self.view;
     net.code = @"801120";
@@ -152,9 +206,10 @@
     net.ISparametArray = YES;
     net.parameters[@"status"] = @"1";
     [net postWithSuccess:^(id responseObject) {
+        
         self.countrys = [CountryModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
 
-//
+        [self configData];
 
     } failure:^(NSError *error) {
         
@@ -482,25 +537,12 @@
     //选择国家 设置区号
     CoinWeakSelf;
     ChooseCountryVc *countryVc = [ChooseCountryVc new];
-    countryVc.interCode = [NSString stringWithFormat:@"00%@",[self.PhoneCode.text substringFromIndex:1]];
+//    countryVc.interCode = [NSString stringWithFormat:@"00%@",[self.PhoneCode.text substringFromIndex:1]];
     countryVc.selectCountry = ^(CountryModel *model) {
         //更新国家 区号
         self.model = model;
         self.code = model.code;
         [self.pic sd_setImageWithURL:[NSURL URLWithString:[model.pic convertImageUrl]]];
-        
-        if ([LangSwitcher currentLangType] == LangTypeSimple) {
-            weakSelf.titlePhpne.text = model.chineseName;
-//
-        }else if ([LangSwitcher currentLangType] == LangTypeEnglish){
-
-            weakSelf.titlePhpne.text = model.interName;
-
-        }else{
-            weakSelf.titlePhpne.text = model.interName;
-
-            
-        }
         weakSelf.PhoneCode.text = [NSString stringWithFormat:@"+%@",[model.interCode substringFromIndex:2]];
     } ;
     [self presentViewController:countryVc animated:YES completion:nil];
@@ -594,7 +636,7 @@
     http.parameters[@"mobile"] = self.phoneTf.text;
     NSData *data   =  [[NSUserDefaults standardUserDefaults] objectForKey:@"chooseModel"];
     CountryModel *model = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-        if (model) {
+        if ([model.code isNotBlank]) {
             http.parameters[@"countryCode"] = model.code;
             
         }else{
@@ -612,14 +654,14 @@
         CountryModel *model = [NSKeyedUnarchiver unarchiveObjectWithData:data];
         
         http.code = USER_LOGIN_CODE;
-        if (model) {
-            http.parameters[@"countryCode"] = model.code;
+        if ([model.code isNotBlank]) {
+            
+                http.parameters[@"countryCode"] = model.code;
+            }else {
+                http.parameters[@"countryCode"] =  self.countrys[0].code;
 
-        }else{
-            
-            http.parameters[@"countryCode"] = self.countrys[0].code;
-            
-        }
+            }
+        
     http.parameters[@"loginName"] = self.phoneTf.text;
     http.parameters[@"loginPwd"] = self.pwdTf.text;
     http.parameters[@"kind"] = APP_KIND;
