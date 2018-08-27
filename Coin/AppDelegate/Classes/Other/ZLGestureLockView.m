@@ -188,7 +188,20 @@
         button.layer.borderColor =  kHexColor(@"#FE4F4F").CGColor;
         
     }
-
+    for (UIButton *button in self.subviews) {
+        
+            UIView *btn =[button viewWithTag:button.tag+100];
+            //            UIView *center = [UIView new];
+        if (button.isSelected == YES) {
+            [self.selectBtns addObject:button];
+            [self showErrowMessage];
+        }
+        
+        
+    }
+    
+    [self layoutIfNeeded];
+    
     [UIView animateWithDuration:0.5 animations:^{
 //        [self setNeedsDisplay];
 

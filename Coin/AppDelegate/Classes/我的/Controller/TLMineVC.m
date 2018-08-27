@@ -29,7 +29,7 @@
 #import "TLImagePicker.h"
 #import "TLUploadManager.h"
 #import "AppConfig.h"
-#import <ZendeskSDK/ZendeskSDK.h>
+//#import <ZendeskSDK/ZendeskSDK.h>
 //#import <ZDCChat/ZDCChat.h>
 #import <IQKeyboardManager/IQKeyboardManager.h>
 #import <CDCommon/UIScrollView+TLAdd.h>
@@ -48,6 +48,7 @@
 #import "TLQusertionVC.h"
 #import "TLinviteVC.h"
 #import "TLMeSetting.h"
+
 @interface TLMineVC ()<MineHeaderSeletedDelegate, UINavigationControllerDelegate>
 
 //@property (nonatomic, strong) FBKVOController *chatKVOCtrl;   czy

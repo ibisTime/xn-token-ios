@@ -584,6 +584,19 @@
     
 }
 
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    CoinWeakSelf;
+    　　if ([self.navigationController.viewControllers indexOfObject:self]==NSNotFound) {
+        
+        if (self.success) {
+            self.success();
+        }
+        　　　　NSLog(@"clicked navigationbar back button");
+        　　}
+    
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

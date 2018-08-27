@@ -68,11 +68,14 @@ PODS:
     - libsodium (~> 1.0.12)
     - Result (~> 3.0.0)
     - secp256k1_ios (~> 0.1.3)
-  - ZendeskSDK (1.11.0.1):
-    - ZendeskSDK/Providers (= 1.11.0.1)
-    - ZendeskSDK/UI (= 1.11.0.1)
-  - ZendeskSDK/Providers (1.11.0.1)
-  - ZendeskSDK/UI (1.11.0.1):
+  - ZendeskSDK (2.1.0):
+    - ZendeskSDK/Providers (= 2.1.0)
+    - ZendeskSDK/UI (= 2.1.0)
+  - ZendeskSDK/Core (2.1.0)
+  - ZendeskSDK/Providers (2.1.0):
+    - ZendeskSDK/Core
+  - ZendeskSDK/UI (2.1.0):
+    - ZendeskSDK/Core
     - ZendeskSDK/Providers
 
 DEPENDENCIES:
@@ -168,8 +171,8 @@ SPEC CHECKSUMS:
   UIDeviceIdentifier: 9281343882e24460235f00a0d7d2fc04a65688c6
   UMengAnalytics-NO-IDFA: 16666e32edce5be44ae5b14aaaa7f3582e09d6ab
   web3swift: a0c0f5f7ddab09af3119a76e1ef304b050b4595e
-  ZendeskSDK: 4e075d7610e74755c576188886a073cfc5810145
+  ZendeskSDK: e2d9245bc42fb4782eff959219ce4d6bdae13b64
 
-PODFILE CHECKSUM: 0e7bc28452e8ff389d8b3a7d67e9801e0e3081d0
+PODFILE CHECKSUM: 83bc185f09fe966052dbe8272fc17f2a4f246394
 
 COCOAPODS: 1.5.2

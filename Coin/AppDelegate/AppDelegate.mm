@@ -26,7 +26,8 @@
 #import "ZMChineseConvert.h"
 #import "SettingModel.h"
 #import "TLUpdateVC.h"
-#import <ZendeskSDK/ZendeskSDK.h>
+//#import <ZendeskSDK/ZendeskSDK.h>
+//#import <ZendeskCoreSDK/ZendeskCoreSDK.h>
 //#import "ZDKConfig.h"
 #import "LangSwitcher.h"
 //#import <ZDCChat/ZDCChat.h>
@@ -41,6 +42,7 @@
 #import "TLUserLoginVC.h"
 #import "ZLGestureLockViewController.h"
 #import <UMMobClick/MobClick.h>
+//#import ""
 //#import "TLPublishInputView.h"      czy
 
 @interface AppDelegate ()
@@ -82,7 +84,7 @@
     //配置根控制器
     [self configRootViewController];
     [LangSwitcher startWithTraditional];
-   
+    [self configZendSdk];
     //初始化为繁体
     //初始化数据库
     
@@ -141,18 +143,34 @@
     
     
 }
+- (void)configZendSdk
+{
+
+    
+
+//    [ZDKZendesk  initializeWithAppId :@"appId"  clientId :@"clientId"  zendeskUrl :
+//     @"url"];
+//
+//
+//    [Zendesk initializeWithAppId: @"1abb5d09d1ae5884d0f88f76a4368847ee01bffed4f92181"
+//                           clientId: @"mobile_sdk_client_6e8e6247d8e39ba2b3d6"
+//                         zendeskUrl: @"https://hzcl.zendesk.com"];
+//    [zend initializeWithZendesk: [ZDKZendesk instance]];
+    
+}
+
 - (void)configUManalytics
 {
     
    
 
     @try{
-//        UMConfigInstance.appKey = @"5b73d999f29d9825200001db";//研发
-        UMConfigInstance.appKey = @"5b73b2e68f4a9d21830002fd";//正式
+        UMConfigInstance.appKey = @"5b73d999f29d9825200001db";//研发
+//        UMConfigInstance.appKey = @"5b73b2e68f4a9d21830002fd";//正式
 
       //一般是这样写，用于友盟后台的渠道统计，当然苹果也不会有其他渠道，写死就好
 //        UMConfigInstance.channelId = @"Theia"; //渠道区分
-        UMConfigInstance.channelId = @"facebook"; //渠道区分
+//        UMConfigInstance.channelId = @"facebook"; //渠道区分
 //        UMConfigInstance.channelId = @"biyongbao"; //渠道区分
 
         UMConfigInstance.ePolicy =SEND_INTERVAL; //上传模式，这种为最小间隔发送90S，也可按照要求选择其他上传模式。也可不设置，在友盟后台修改。
@@ -160,7 +178,7 @@
         
         NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey: @"CFBundleShortVersionString"];
         [MobClick setAppVersion:version];
-//        [MobClick setLogEnabled:YES];
+        [MobClick setLogEnabled:YES];
     }
     @catch(NSException *exception) {
         NSLog(@"exception:%@", exception);

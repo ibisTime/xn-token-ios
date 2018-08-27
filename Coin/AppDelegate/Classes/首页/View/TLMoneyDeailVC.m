@@ -76,6 +76,10 @@
         weakSelf.view2.hidden = YES;
         TLPwdRelatedVC *vc  = [[TLPwdRelatedVC alloc] initWithType:TLPwdTypeTradeReset];
         [weakSelf.navigationController pushViewController:vc animated:YES];
+        vc.success = ^{
+            weakSelf.pwdView.hidden = NO;
+            weakSelf.view2.hidden = NO;
+        };
         
     };
     pwdView.hidden = YES;

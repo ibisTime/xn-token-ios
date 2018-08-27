@@ -246,6 +246,8 @@
         
         make.left.equalTo(self.view.mas_left).offset(30);
         make.top.equalTo(textlbl.mas_bottom).offset(8);
+        make.right.equalTo(self.view.mas_right).offset(-15);
+
         make.height.equalTo(@50);
         
     }];
