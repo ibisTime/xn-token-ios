@@ -194,7 +194,7 @@
         make.top.equalTo(self.whiteView.mas_top).offset(kHeight(153));
         make.left.equalTo(self.whiteView.mas_left).offset(30);
         make.right.equalTo(self.whiteView.mas_right).offset(-30);
-        make.height.equalTo(@(kHeight(150)));
+        make.height.equalTo(@(kHeight(180)));
 
     }];
         nineView.backgroundColor = kWhiteColor;

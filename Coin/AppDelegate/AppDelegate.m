@@ -42,6 +42,11 @@
 #import "TLUserLoginVC.h"
 #import "ZLGestureLockViewController.h"
 #import <UMMobClick/MobClick.h>
+#import <ZendeskSDK/ZendeskSDK.h>
+
+//#import <ZendeskSDK/ZendeskSDK.h>
+#import <ZendeskCoreSDK/ZendeskCoreSDK.h>
+#import <ZendeskProviderSDK/ZendeskProviderSDK.h>
 //#import ""
 //#import "TLPublishInputView.h"      czy
 
@@ -49,7 +54,6 @@
 
 //@property (nonatomic, strong) FBKVOController *chatKVOCtrl;   czy
 @property (nonatomic, strong) RespHandler *respHandler;
-@property (nonatomic ,copy) NSString *dataStr;
 @property (nonatomic ,assign) BOOL IsEnterBack;
 @property (nonatomic, strong) NSMutableArray <DataBaseModel *>*dataBaseModels;
 
@@ -62,7 +66,7 @@
 //    [NSThread sleepForTimeInterval:2];
     
     //服务器环境 //递增金额
-    [AppConfig config].runEnv = RunEnvRelease;
+    [AppConfig config].runEnv = RunEnvTest;
     [AppConfig config].isChecking = NO;
 #warning  //pods 更新后会导致wan币转账失败
 //    [AppConfig config].isUploadCheck = YES;
@@ -78,13 +82,14 @@
     [self configIQKeyboard];
     //配置友盟统计
     [self configUManalytics];
+    [self configZendSdk];
+
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     //UIStatusBarStyleLightContent状态栏字体白色 UIStatusBarStyleDefault黑色
 
     //配置根控制器
     [self configRootViewController];
     [LangSwitcher startWithTraditional];
-    [self configZendSdk];
     //初始化为繁体
     //初始化数据库
     
@@ -145,18 +150,22 @@
 }
 - (void)configZendSdk
 {
-
-    
-
-//    [ZDKZendesk  initializeWithAppId :@"appId"  clientId :@"clientId"  zendeskUrl :
-//     @"url"];
-//
-//
-//    [Zendesk initializeWithAppId: @"1abb5d09d1ae5884d0f88f76a4368847ee01bffed4f92181"
-//                           clientId: @"mobile_sdk_client_6e8e6247d8e39ba2b3d6"
-//                         zendeskUrl: @"https://hzcl.zendesk.com"];
-//    [zend initializeWithZendesk: [ZDKZendesk instance]];
-    
+    [ ZDKCoreLogger  setEnabled :YES ];
+    [ ZDKCoreLogger  setLogLevel :ZDKLogLevelDebug ];
+    [ZDKZendesk initializeWithAppId: @"7c57b7ae871f2047848c4df5cf93ff82900fd7b50e61cda0"
+                           clientId: @"mobile_sdk_client_6e8970b59d1d4045a373"
+                         zendeskUrl: @"https://theiahelp1.zendesk.com/hc/ko"];
+    [ZDKLocalization printAllKeys];
+    [ZDKHelpCenterSettings initialize];
+    // //hc/en-us
+//    [ZDKSupport initializeWithZendesk: [ZDKZendesk instance]];
+//                         zendeskUrl: @"https://hzcl.zendesk.com/hc/ko"];
+//    ZDKRequest
+    [ZDKSupport initializeWithZendesk: [ZDKZendesk instance]];
+//    [ZDKLocalization registerTableName:@"ko.strings"];
+    id<ZDKObjCIdentity> userIdentity = [[ZDKObjCAnonymous alloc] initWithName:nil email:nil];
+    [[ZDKZendesk instance] setIdentity:userIdentity];
+    [[ZDKSupport instance] setHelpCenterLocaleOverride:@"ko"];
 }
 
 - (void)configUManalytics
@@ -537,22 +546,6 @@
 
 
 
-- (void)createTable
-{
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    FMDatabase *db = [FMDatabase databaseWithPath:_dataStr];
-    if(![fileManager fileExistsAtPath:_dataStr]) {
-        NSLog(@"还未创建数据库，现在正在创建数据库");
-        if([db open]) {
-            
-            [db executeUpdate:@"create table if not exists THAWallet(userId text, Mnemonics text, wanAddress text,btcAddress text,ethAddress text,ethPrivate text,btcPrivate text,wanPrivate text)"];
-            
-            [db close];
-        }else{
-            NSLog(@"database open error");
-        }
-    }
-    NSLog(@"FMDatabase:---------%@",db);
-}
+
 
 @end

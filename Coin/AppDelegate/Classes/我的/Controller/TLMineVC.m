@@ -29,7 +29,10 @@
 #import "TLImagePicker.h"
 #import "TLUploadManager.h"
 #import "AppConfig.h"
-//#import <ZendeskSDK/ZendeskSDK.h>
+#import <ZendeskSDK/ZendeskSDK.h>
+#import <ZendeskCoreSDK/ZendeskCoreSDK.h>
+#import <ZendeskProviderSDK/ZendeskProviderSDK.h>
+
 //#import <ZDCChat/ZDCChat.h>
 #import <IQKeyboardManager/IQKeyboardManager.h>
 #import <CDCommon/UIScrollView+TLAdd.h>
@@ -330,29 +333,23 @@
             };
             return ;
         }
-        HTMLStrVC *htmlVC = [HTMLStrVC new];
-        htmlVC.type = HTMLTypeCommonProblem;
-        [weakSelf.navigationController pushViewController:htmlVC animated:YES];
+//        HTMLStrVC *htmlVC = [HTMLStrVC new];
+//        htmlVC.type = HTMLTypeCommonProblem;
+        //                 [self.navigationController pushViewController:htmlVC animated:YES];
+
+//        ZDKHelpCenterUiConfiguration  *  hcConfig  =  [ ZDKHelpCenterUiConfiguration  new ];
+//        [ hcConfig  setGroupType :ZDKHelpCenterOverviewGroupTypeCategory ];
+//        [ hcConfig  setGroupIds :@ [ @ 1234 , @ 5678 ] ];
+        //         设置界面的代理
+        //                [ZDKHelpCenter setUIDelegate:weakSelf];
+      
+//        注册用户的身份,管理端可以看到这些信息
         
-        //注册用户的身份,管理端可以看到这些信息
-        //   [ZDKRequests pushRequestListWithNavigationController:self.navigationController];
-        
-        //跳转
-        //         ZDKHelpCenterOverviewContentModel *contentModel = [ZDKHelpCenterOverviewContentModel defaultContent];
-        //        contentModel.groupType = ZDKHelpCenterOverviewGroupTypeDefault;
-        
-        // 设置界面的代理
-        //        [ZDKHelpCenter setUIDelegate:weakSelf];
-        //
-        //        contentModel.labels = @[@"tag"];
-        //        contentModel.groupType = ZDKHelpCenterOverviewGroupTypeSection;
-        //        contentModel.groupIds = @[@"sections2"];
-        
-        //        [ZDKHelpCenter pushHelpCenterOverview:self.navigationController
-        //                             withContentModel:contentModel];
-        
+        UIViewController  * helpCenter  =  [ ZDKHelpCenterUi  buildHelpCenterOverviewWithConfigs :@[]];
+        NSLog(@"locale%@",[ZDKHelpCenterSettings new].locale);
+
+        [ self.navigationController pushViewController :helpCenter  animated :YES ];
     };
-    
     //关于我们
     MineModel *abountUs = [MineModel new];
     abountUs.text = [LangSwitcher switchLang:@"关于我们" key:nil];
@@ -366,9 +363,7 @@
         TLAboutUsVC *vc = [[TLAboutUsVC alloc] init];
         [weakSelf.navigationController pushViewController:vc animated:YES];
         
-        
     };
-    
     MineModel *meSetting = [MineModel new];
     meSetting.text = [LangSwitcher switchLang:@"设置" key:nil];
     meSetting.imgName = @"设置";

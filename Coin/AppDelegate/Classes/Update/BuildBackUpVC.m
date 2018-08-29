@@ -164,6 +164,7 @@
 {
     
     self.view1.hidden = YES;
+    
     }
 - (void)inititem
 {

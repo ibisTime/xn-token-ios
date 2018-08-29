@@ -195,7 +195,7 @@
         make.top.equalTo(codeView.mas_top).offset(15);
         make.right.equalTo(codeView.mas_right).offset(-15);
         make.left.equalTo(codeView.mas_left).offset(15);
-        make.bottom.equalTo(codeView.mas_bottom).offset(-15);
+//        make.bottom.equalTo(codeView.mas_bottom).offset(-15);
 //        make.centerX.equalTo(self.view.mas_centerX);
 //        make.width.height.equalTo(@150);
 

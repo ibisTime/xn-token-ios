@@ -155,7 +155,7 @@
 		21CB94F01FDC0CAA00CAB090 /* LanguageSettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 21CB94EF1FDC0CAA00CAB090 /* LanguageSettingCell.m */; };
 		21CB94F51FDC179700CAB090 /* PersonalModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 21CB94F41FDC179700CAB090 /* PersonalModel.m */; };
 		21D216861FB9C5750040795E /* QRCodeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21D216851FB9C5750040795E /* QRCodeVC.m */; };
-		2E394FED1FB0575A00BA0829 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2E394FEB1FB0575A00BA0829 /* AppDelegate.mm */; };
+		2E394FED1FB0575A00BA0829 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E394FEB1FB0575A00BA0829 /* AppDelegate.m */; };
 		2E394FFC1FB059C100BA0829 /* TLBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E394FF91FB059C100BA0829 /* TLBaseModel.m */; };
 		2E394FFD1FB059C100BA0829 /* TLBaseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E394FFA1FB059C100BA0829 /* TLBaseVC.m */; };
 		2E5F33A9202BF25F00B2F263 /* TLLeftRightView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E5F33A8202BF25F00B2F263 /* TLLeftRightView.m */; };
@@ -707,7 +707,7 @@
 		21CB94F41FDC179700CAB090 /* PersonalModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PersonalModel.m; sourceTree = "<group>"; };
 		21D216841FB9C5750040795E /* QRCodeVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QRCodeVC.h; sourceTree = "<group>"; };
 		21D216851FB9C5750040795E /* QRCodeVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QRCodeVC.m; sourceTree = "<group>"; };
-		2E394FEB1FB0575A00BA0829 /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
+		2E394FEB1FB0575A00BA0829 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		2E394FEC1FB0575A00BA0829 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		2E394FF81FB059C100BA0829 /* TLBaseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLBaseModel.h; sourceTree = "<group>"; };
 		2E394FF91FB059C100BA0829 /* TLBaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLBaseModel.m; sourceTree = "<group>"; };
@@ -2032,7 +2032,7 @@
 				B88B59012109AEC300F20D1B /* CoinPrefixHeader.pch */,
 				2E394FEC1FB0575A00BA0829 /* AppDelegate.h */,
 				2E394FA31FB0546E00BA0829 /* Classes */,
-				2E394FEB1FB0575A00BA0829 /* AppDelegate.mm */,
+				2E394FEB1FB0575A00BA0829 /* AppDelegate.m */,
 			);
 			path = AppDelegate;
 			sourceTree = "<group>";
@@ -3303,7 +3303,7 @@
 				2EA584B11FA813C900C7106C /* Frameworks */,
 				2EA584B21FA813C900C7106C /* Resources */,
 				0BDC83309660578EA1D37FA1 /* [CP] Embed Pods Frameworks */,
-				D665798A93E315138F53765A /* [CP] Copy Pods Resources */,
+				1812E9774E0A3138E5681DB8 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -3458,7 +3458,7 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Coin/Pods-Coin-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		D665798A93E315138F53765A /* [CP] Copy Pods Resources */ = {
+		1812E9774E0A3138E5681DB8 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -3565,7 +3565,7 @@
 				211DE6A91FB58B4C002FCF3D /* TLPlaceholderView.m in Sources */,
 				B8086502211EA17D00755158 /* BTCScriptMachine.m in Sources */,
 				B8A530812127DE8F00A027C0 /* TLMyRecodeTB.m in Sources */,
-				2E394FED1FB0575A00BA0829 /* AppDelegate.mm in Sources */,
+				2E394FED1FB0575A00BA0829 /* AppDelegate.m in Sources */,
 				21CB94E21FDC0A0F00CAB090 /* PersonalitySettingVC.m in Sources */,
 				B88B592B2109B2EF00F20D1B /* ZLGestureLockIndicator.m in Sources */,
 				211D3C1B1FCFE46C00B55F9F /* HistoryRateModel.m in Sources */,
@@ -4043,6 +4043,8 @@
 					"$(PROJECT_DIR)/Coin/Classes/Utils/umcommonlog/umcommonlog_ios_1.0.0",
 					"$(PROJECT_DIR)/Coin/Classes/Utils/common/common_ios_1.5.2/normal",
 					"$(PROJECT_DIR)/Coin/AppDelegate/Classes/Utils/ZDK",
+					"$(PROJECT_DIR)/Coin/AppDelegate/Classes/Utils/ZendeskSDK/ZendeskSDK/4.1",
+					"$(PROJECT_DIR)/Coin/AppDelegate/Classes/Utils",
 				);
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = YES;
 				INFOPLIST_FILE = Coin/Info.plist;
@@ -4099,6 +4101,8 @@
 					"$(PROJECT_DIR)/Coin/Classes/Utils/umcommonlog/umcommonlog_ios_1.0.0",
 					"$(PROJECT_DIR)/Coin/Classes/Utils/common/common_ios_1.5.2/normal",
 					"$(PROJECT_DIR)/Coin/AppDelegate/Classes/Utils/ZDK",
+					"$(PROJECT_DIR)/Coin/AppDelegate/Classes/Utils/ZendeskSDK/ZendeskSDK/4.1",
+					"$(PROJECT_DIR)/Coin/AppDelegate/Classes/Utils",
 				);
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = YES;
 				INFOPLIST_FILE = Coin/Info.plist;

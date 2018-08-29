@@ -783,7 +783,7 @@
         
         make.left.equalTo(self.leftFlag.mas_right).offset(10);
         make.centerY.equalTo(whiteView.mas_centerY);
-//        make.right.equalTo(self.rightArrowIV.mas_left).offset(10);
+        make.width.equalTo(@(kScreenWidth-100));
 
 
     }];

@@ -47,7 +47,8 @@
 //        self.selectedBtn.layer.cornerRadius = 4.0;
         self.selectedBtn.layer.borderColor = kLineColor.CGColor;
         self.selectedBtn.layer.borderWidth=1;
-        
+        self.selectedBtn.titleLabel.font = [UIFont systemFontOfSize:16];
+
 //        [self.selectedBtn setImage:[UIImage imageNamed:@"金"] forState:UIControlStateNormal];
 //        [self.selectedBtn setImage:[UIImage imageNamed:@"银"] forState:UIControlStateSelected];
         [self.selectedBtn mas_makeConstraints:^(MASConstraintMaker *make) {

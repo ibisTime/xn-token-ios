@@ -301,8 +301,7 @@
     [self.backdetailLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.backLable.mas_centerY);
         make.left.equalTo(self.symble.mas_right).offset(10);
-        make.right.equalTo(self.view.mas_right).offset(-10);
-
+        make.width.equalTo(@200);
     }];
     
     

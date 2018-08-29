@@ -259,7 +259,8 @@
         self.mnemonics = word;
 //        self.mnemonics = @"marine lazy bind fun panther broken warfare tower captain blouse wet lazy";
         backUpVC.mnemonics = self.mnemonics;
-
+        backUpVC.isCopy = self.isCopy;
+        [self.navigationController pushViewController:backUpVC animated:YES];
     }else{
     self.mnemonics = [MnemonicUtil getGenerateMnemonics];
     
@@ -298,11 +299,11 @@
         [self buildBackUpWallet];
      }
         backUpVC.mnemonics = [categoryArray componentsJoinedByString:@" "];
-
+        backUpVC.isCopy = self.isCopy;
+        [self.navigationController pushViewController:backUpVC animated:YES];
     }
 //    self.bottomNames = [NSMutableArray array];
-    backUpVC.isCopy = self.isCopy;
-    [self.navigationController pushViewController:backUpVC animated:YES];
+  
     
 //    TLNavigationController *na = [[TLNavigationController alloc] initWithRootViewController:backUpVC];
 //    [UIApplication sharedApplication].keyWindow.rootViewController = na;
