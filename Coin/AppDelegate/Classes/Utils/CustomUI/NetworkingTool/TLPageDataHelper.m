@@ -54,6 +54,23 @@
     http.parameters = self.parameters;
     http.parameters[@"start"] = [NSString stringWithFormat:@"%ld",self.start];
     http.parameters[@"limit"] = [NSString stringWithFormat:@"%ld",self.limit];
+    switch ([LangSwitcher currentLangType]) {
+        case LangTypeKorean:
+            http.parameters[@"language"] = @"KO";
+            
+            break;
+        case LangTypeEnglish:
+            http.parameters[@"language"] = @"EN";
+            
+            break;
+        case LangTypeSimple:
+            http.parameters[@"language"] = @"ZH_CN";
+            
+            break;
+            
+        default:
+            break;
+    }
 //    if (self) {
 //        <#statements#>
 //    }

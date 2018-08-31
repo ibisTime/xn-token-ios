@@ -73,6 +73,10 @@
         return YES;
     }
         if (textField.text.length >= self.maxCount) {
+            if ([string isEqualToString:@""]) {
+                return YES;
+            }
+            
             return NO;
         }else{
             NSLog(@"%@  %@",textField.text,string);

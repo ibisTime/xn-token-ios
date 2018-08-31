@@ -225,6 +225,9 @@
         
     }];
     UILabel *introduce4 = [UILabel labelWithBackgroundColor:kClearColor textColor:kWhiteColor font:14];
+    UITapGestureRecognizer *ta = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(shareQr)];
+    [introduce4 addGestureRecognizer:ta];
+    introduce4.userInteractionEnabled = YES;
     
 //    introduce4.frame = CGRectMake(kWidth(120), kHeight(456), kScreenWidth - kWidth(120), kHeight(22));
     introduce4.text = [LangSwitcher switchLang:@"截图分享二维码" key:nil];
@@ -238,6 +241,28 @@
 
     }];
 
+}
+
+- (void)shareQr
+{
+    
+    CGSize s = self.popView.bounds.size;
+    // 下面方法，第一个参数表示区域大小。第二个参数表示是否是非透明的。如果需要显示半透明效果，需要传NO，否则传YES。第三个参数就是屏幕密度了
+    UIGraphicsBeginImageContextWithOptions(s, NO, [UIScreen mainScreen].scale);
+    [self.popView.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage*image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+
+    UIImageWriteToSavedPhotosAlbum(image, self, @selector(image: didFinishSavingWithError: contextInfo:), nil);
+    
+}
+
+
+
+
+- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
+{
+    error ? [TLAlert alertWithError:@"保存失败"] : [TLAlert alertWithSucces:@"保存成功"];
 }
 
 -(void)RedEnvelopeHeadButton:(NSInteger)tag

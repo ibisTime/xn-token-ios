@@ -276,10 +276,10 @@
                                                  titleWidth:leftW
                                                 placeholder:[LangSwitcher switchLang:@"请输入密码" key:nil]];
     
-    pwdTf.returnKeyType = UIReturnKeyNext;
+//    pwdTf.returnKeyType = UIReturnKeyNext;
     pwdTf.keyboardType = UIKeyboardTypePhonePad;
     pwdTf.maxCount = 6;
-    [pwdTf addTarget:self action:@selector(next:) forControlEvents:UIControlEventEditingDidEndOnExit];
+//    [pwdTf addTarget:self action:@selector(next:) forControlEvents:UIControlEventEditingDidEndOnExit];
     
     [self.bgSV addSubview:pwdTf];
     pwdTf.secureTextEntry = YES;
@@ -292,9 +292,9 @@
                                                   placeholder:[LangSwitcher switchLang:@"请确认密码" key:nil]];
     rePwdTf.keyboardType = UIKeyboardTypePhonePad;
 
-    rePwdTf.returnKeyType = UIReturnKeyDone;
+//    rePwdTf.returnKeyType = UIReturnKeyDone;
     rePwdTf.maxCount = 6;
-    [rePwdTf addTarget:self action:@selector(done:) forControlEvents:UIControlEventEditingDidEndOnExit];
+//    [rePwdTf addTarget:self action:@selector(done:) forControlEvents:UIControlEventEditingDidEndOnExit];
 
     [self.bgSV addSubview:rePwdTf];
     rePwdTf.secureTextEntry = YES;

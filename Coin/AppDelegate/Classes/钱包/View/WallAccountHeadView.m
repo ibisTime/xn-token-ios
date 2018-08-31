@@ -159,7 +159,12 @@
         if ([[TLUser user].localMoney isEqualToString:@"USD"]) {
                 self.textLbl.text = [NSString stringWithFormat:@"%.4f%@",[[CoinUtil convertToRealCoin:leftAmount coin:currency.currency] doubleValue],currency.currency];
            
-        }else{
+        }else if ([[TLUser user].localMoney isEqualToString:@"KRW"])
+        {
+            self.textLbl.text = [NSString stringWithFormat:@"%.4f%@",[[CoinUtil convertToRealCoin:leftAmount coin:currency.currency] doubleValue],currency.currency];
+            
+        }
+        else{
             
               self.textLbl.text = [NSString stringWithFormat:@"%.4f%@",[[CoinUtil convertToRealCoin:leftAmount coin:currency.currency] doubleValue],currency.currency];
         }

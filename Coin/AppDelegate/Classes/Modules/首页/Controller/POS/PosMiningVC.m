@@ -143,6 +143,8 @@
     helper.code = @"625510";
     helper.parameters[@"userId"] = [TLUser user].userId;
     helper.parameters[@"status"] = @"appDisplay";
+   
+
     helper.isCurrency = YES;
     helper.tableView = self.tableView;
     [helper modelClass:[TLtakeMoneyModel class]];

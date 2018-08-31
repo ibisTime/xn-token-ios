@@ -115,7 +115,7 @@
 - (void)data {
     
     
-    self.iconImageView.image = [UIImage imageNamed:@"icon圆角"];
+    self.iconImageView.image = [UIImage imageNamed:@"Group 3"];
     self.versionLbl.text = [LangSwitcher switchLang:[NSString stringWithFormat:@"%@  V%@",[LangSwitcher switchLang:@"版本号" key:nil],[NSString appVersionString]] key:nil];
 //    self.versionLbl.text = [LangSwitcher switchLang:@"钱包是一款全新的数字货币钱包" key:nil];
     self.versionLbl2.text = [NSString stringWithFormat:@"2018%@",[LangSwitcher switchLang:@"Theia版权所有" key:nil]];
@@ -172,7 +172,7 @@
     //
     self.nameLbl = [[UIImageView alloc] init];
     self.nameLbl.contentMode = UIViewContentModeScaleToFill;
-    self.nameLbl.image = kImage(@"THA");
+//    self.nameLbl.image = kImage(@"THA");
     [self.bgImage addSubview:self.nameLbl];
     
     UIView *line = [[UIView alloc] init];
@@ -237,7 +237,9 @@
     [self.iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.top.equalTo(self.bgImage.mas_top).offset(157.5);
-        make.width.height.mas_equalTo(90);
+        make.width.mas_equalTo(@(kHeight(116)));
+        make.height.mas_equalTo(@(kHeight(156)));
+
         make.centerX.equalTo(self.bgImage.mas_centerX);
         
     }];

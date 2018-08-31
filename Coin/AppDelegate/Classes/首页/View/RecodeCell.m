@@ -213,7 +213,9 @@
     CoinModel *m = [CoinUtil getCoinModel:model.produceModel.symbol];
     
     NSString *inv = [CoinUtil convertToRealCoin:model.investAmount coin:m.symbol];
-    self.nameLab.text = model.produceModel.name;
+    
+    self.nameLab.text =  model.produceModel.name;
+
     self.stateLab.text = [model.createDatetime convertToDetailDate];
      self.desLab.text = [LangSwitcher switchLang:@"购买金额" key:nil];
      self.timeLab.text =[NSString stringWithFormat:@"%@%@",inv,m.symbol];

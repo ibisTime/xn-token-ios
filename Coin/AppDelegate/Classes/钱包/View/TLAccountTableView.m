@@ -49,9 +49,7 @@ static NSString *platformCell = @"AccountMoneyCellTableViewCell";
     AccountMoneyCellTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:platformCell forIndexPath:indexPath];
     cell.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0);
 
-//    tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     cell.platform = platform;
-//    cell.backgroundColor = indexPath.row%2 == 0 ? kBackgroundColor: kWhiteColor;
     
     return cell;
 }

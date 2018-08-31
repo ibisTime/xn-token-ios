@@ -52,4 +52,5 @@ typedef void(^WalletlocalBlock)(void);
 @property (nonatomic, strong) UILabel *localLbl;
 
 -(void)swipeBottomClick:(UISwipeGestureRecognizer *)swpie;
+- (void)tapClick: (UITapGestureRecognizer* )tap;
 @end

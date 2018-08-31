@@ -120,7 +120,26 @@
     }];
 
     self.allLabel = [UILabel labelWithBackgroundColor:kClearColor textColor:kHexColor(@"#333333") font:18.0];
-    self.allLabel.text = @"¥ ****";
+    if ([TLUser user].localMoney) {
+        if ([[TLUser user].localMoney isEqualToString:@"CNY"] ) {
+            self.allLabel.text = @"¥****";
+            
+        }else if ([[TLUser user].localMoney isEqualToString:@"KRW"])
+        {
+            self.allLabel.text = @"₩****";
+            
+        }
+        else{
+            self.allLabel.text = @"$****";
+            
+            
+        }
+    }else{
+        
+        self.allLabel.text = @"¥****";
+        
+    }
+
     [self addSubview:self.allLabel];
 
     [self.allLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -214,7 +233,13 @@
         if ([[TLUser user].localMoney isEqualToString:@"CNY"] ) {
             self.LocalMoney.text = @"¥0.00";
             
-        }else{
+        }else if ([[TLUser user].localMoney isEqualToString:@"KRW"])
+        {
+            self.LocalMoney.text = @"₩0.00";
+
+            
+        }
+        else{
             self.LocalMoney.text = @"$0.00";
             
             
@@ -241,7 +266,12 @@
         if ([[TLUser user].localMoney isEqualToString:@"CNY"] ) {
             self.privateKeyLabel.text = @"¥****";
 
-        }else{
+        }else if ([[TLUser user].localMoney isEqualToString:@"KRW"])
+        {
+            self.privateKeyLabel.text = @"₩****";
+
+        }
+        else{
             self.privateKeyLabel.text = @"$****";
 
 
@@ -333,7 +363,29 @@
 
 
     self.personalLabel = [UILabel labelWithBackgroundColor:kClearColor textColor:kWhiteColor font:30.0];
-    self.personalLabel.text = @"¥****";
+    
+    if ([TLUser user].localMoney) {
+        if ([[TLUser user].localMoney isEqualToString:@"CNY"] ) {
+            self.personalLabel.text = @"¥****";
+
+        }else if ([[TLUser user].localMoney isEqualToString:@"KRW"])
+        {
+            self.personalLabel.text = @"₩****";
+
+            
+            
+        }
+        else{
+            self.personalLabel.text = @"$****";
+
+            
+            
+        }
+    }else{
+        self.personalLabel.text = @"¥****";
+
+        
+    }
 //    self.personalLabel.backgroundColor = [UIColor redColor];
     [self.bgIV addSubview:self.personalLabel];
     [self.personalLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -757,7 +809,7 @@
     [whiteView mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.left.right.equalTo(@0);
-        make.top.equalTo(@(kStatusBarHeight));
+        make.top.equalTo(@(0));
         make.height.equalTo(@(kHeight(40)));
         
     }];

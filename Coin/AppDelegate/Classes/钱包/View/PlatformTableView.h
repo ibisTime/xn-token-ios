@@ -26,5 +26,6 @@ typedef void(^selectCurrent)(NSInteger );
 
 @property (nonatomic,copy)selectCurrent selectBlock;
 
+@property (nonatomic, assign) BOOL isLocal;
 
 @end

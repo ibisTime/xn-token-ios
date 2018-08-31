@@ -100,6 +100,9 @@
 
 - (void)configData
 {
+    NSString *money ;
+   
+    
     //获取缓存的国家
     NSData *data   =  [[NSUserDefaults standardUserDefaults] objectForKey:@"chooseModel"];
     
@@ -129,7 +132,24 @@
             NSString *url = [defaultCountry.pic convertImageUrl];
             [self.pic sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:kImage(@"中国国旗")];
             self.PhoneCode.text = [NSString stringWithFormat:@"+%@",[defaultCountry.interCode substringFromIndex:2]];
+            if ([defaultCountry.interSimpleCode isEqualToString:@"CN"] ||[defaultCountry.interSimpleCode isEqualToString:@"HK"] ||[model.interSimpleCode isEqualToString:@"TW"] || [defaultCountry.interSimpleCode isEqualToString:@"MO"]) {
+                [LangSwitcher changLangType:LangTypeSimple];
+                
+                    money = @"CNY";
+               
+                    
             
+            }else if ([defaultCountry.interSimpleCode isEqualToString:@"KR"] || [defaultCountry.interSimpleCode isEqualToString:@"KO"] )
+            {
+                [LangSwitcher changLangType:LangTypeKorean];
+                money = @"KRW";
+
+            }else{
+                
+                [LangSwitcher changLangType:LangTypeEnglish];
+                money = @"USD";
+
+            }
         }
         
     }
@@ -144,9 +164,27 @@
         NSString *url = [defaultCountry.pic convertImageUrl];
         [self.pic sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:kImage(@"中国国旗")];
         self.PhoneCode.text = [NSString stringWithFormat:@"+%@",[defaultCountry.interCode substringFromIndex:2]];
-        
+        if ([defaultCountry.interSimpleCode isEqualToString:@"CN"] ||[defaultCountry.interSimpleCode isEqualToString:@"HK"] ||[defaultCountry.interSimpleCode isEqualToString:@"TW"] || [defaultCountry.interSimpleCode isEqualToString:@"MO"]) {
+            [LangSwitcher changLangType:LangTypeSimple];
+            
+            money = @"CNY";
+            
+            
+            
+        }else if ([defaultCountry.interSimpleCode isEqualToString:@"KR"] || [defaultCountry.interSimpleCode isEqualToString:@"KO"] )
+        {
+            [LangSwitcher changLangType:LangTypeKorean];
+            money = @"KRW";
+            
+        }else{
+            
+            [LangSwitcher changLangType:LangTypeEnglish];
+            money = @"USD";
+            
+        }
     }
-    
+    [[NSUserDefaults standardUserDefaults] setObject:money forKey:KLocalMoney];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 - (void)configData_bak

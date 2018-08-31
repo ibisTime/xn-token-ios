@@ -66,6 +66,9 @@
 
 @property (nonatomic, strong) NSMutableArray <CurrencyModel *>*currencys;
 
+@property (nonatomic, strong) NSMutableArray <CurrencyModel *>*localCurrencys;
+
+
 @property (nonatomic, strong) NSMutableArray <CurrencyModel *>*tempcurrencys;
 
 @property (nonatomic, strong) NSMutableArray <RateModel *>*rates;
@@ -99,6 +102,8 @@
 
 @property (nonatomic, assign) BOOL isBulid;
 
+@property (nonatomic, assign) BOOL isAddBack;
+
 @end
 
 @implementation TLWalletVC
@@ -127,11 +132,24 @@
     [dataBase.dataBase close];
 //    [self queryTotalAmount];
     if (word != nil && word.length > 0) {
+       BOOL isBuild = [[NSUserDefaults standardUserDefaults] objectForKey:KISBuild];
+        if (isBuild == YES) {
+            [self saveLocalWalletData];
+            [self saveLocalWallet];
+//            self.tableView.bounces = YES;
+            
+            
+            [self getLocalWalletMessage];
+            //            [self.headerView swipeBottomClick:nil];
+
+        }
+//        [self getMyCurrencyList];
+     
         BOOL HasChecked =  [[NSUserDefaults standardUserDefaults] boolForKey:KIS170];
         if (btcadd != nil && btcadd.length > 0) {
             return;
         }
-        
+      
         NSArray *words = [word componentsSeparatedByString:@" "];
         
         BTCMnemonic *mnemonic =  [MnemonicUtil importMnemonic:words];
@@ -169,7 +187,12 @@
             [[NSUserDefaults standardUserDefaults] synchronize];
         }
         [data.dataBase close];
-        
+//        [self getMyCurrencyList];
+        [self queryCenterTotalAmount];
+        [self queryMyAmount];
+        //
+        [self queryTotalAmount];
+        [self requestRateList];
 //        [self switchWithTager:0 ];
         
 //        [super viewWillAppear:animated];
@@ -212,14 +235,19 @@
 //    NSLog(@"%@",m.words);
     self.view.backgroundColor = kWhiteColor;
     //tableView
-    [self.view addSubview:self.headerView];
+//    [self.view addSubview:self.headerView];
 
     [self initTableView];
+    self.switchTager = 1;
+
     //通知
     [self addNotification];
     //列表查询我的币种
     [self getMyCurrencyList];
-    [self refreshOpenCoinList];
+    [self queryCenterTotalAmount];
+    [self queryMyAmount];
+    //
+    [self queryTotalAmount];
     [self requestRateList];
    
     
@@ -234,12 +262,7 @@
     
     
     
-    [self queryCenterTotalAmount];
-    //获取我的资产
-    [self queryMyAmount];
-   
-
-    [self queryTotalAmount];
+  
     //本地读取数据
 
     
@@ -261,8 +284,7 @@
     if (!_headerView) {
         
         CoinWeakSelf;
-        CGFloat f1 = kDevice_Is_iPhoneX ==YES ? 20 : 20;
-//        CGFloat f = self.isClear == YES ?308 : 348;
+        CGFloat f1 = kDevice_Is_iPhoneX ==YES ? 50 : 50;
 
         _headerView = [[WalletHeaderView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kHeight(250 + f1) )];
 //        _headerView.usdRate = @"test";
@@ -280,35 +302,40 @@
         _headerView.clearBlock = ^{
             CGFloat f2 = kDevice_Is_iPhoneX ==YES ? 282 : 260;
             weakSelf.isClear = YES;
-            weakSelf.headerView.frame = CGRectMake(0, 0, kScreenWidth, kHeight(250-10 ) );
-            [weakSelf.leftButton mas_makeConstraints:^(MASConstraintMaker *make) {
+
+            weakSelf.headerView.frame = CGRectMake(0, 0, kScreenWidth, kHeight(250+50 ) );
+           
+            CGFloat f = self.isClear == YES ?348-30 : 358-30;
+
+            CGFloat f1 = kDevice_Is_iPhoneX == YES ?15 :0;
+            CGFloat fx = kDevice_Is_iPhoneX == YES ?15 :27;
+
+            weakSelf.currentTableView.frame = CGRectMake(0, 5, kScreenWidth, kScreenHeight);
+            weakSelf.tableView.frame = CGRectMake(0, 5, kScreenWidth, kScreenHeight );
+            [weakSelf.leftButton mas_remakeConstraints:^(MASConstraintMaker *make) {
                 make.left.equalTo(weakSelf.view.mas_left).offset(15);
-                make.top.equalTo(weakSelf.headerView.mas_bottom).offset(15);
+                make.bottom.equalTo(weakSelf.headerView.mas_bottom).offset(-fx);
                 make.width.equalTo(@(kWidth(167.5)));
-                make.height.equalTo(@(kHeight(50)));
-            }];
-            
-            
-            [weakSelf.rightButton mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.left.equalTo(weakSelf.leftButton.mas_right).offset(10);
-                make.top.equalTo(weakSelf.headerView.mas_bottom).offset(15);
-                make.width.equalTo(@(kWidth(167.5)));
-                make.height.equalTo(@(kHeight(50)));
+                make.height.equalTo(@(kHeight(40)));
                 
             }];
             
-            [weakSelf.titleView mas_remakeConstraints:^(MASConstraintMaker *make) {
-                make.top.equalTo(@(kHeight(320-30)));
+            
+            [weakSelf.rightButton mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.left.equalTo(weakSelf.leftButton.mas_right).offset(10);
+                make.bottom.equalTo(weakSelf.headerView.mas_bottom).offset(-fx);
+                make.width.equalTo(@(kWidth(167.5)));
+                make.height.equalTo(@(kHeight(40)));
+                
+            }];
+            CGFloat f4 = self.isClear == YES ?320-30-15 : 350-30-30;
+            
+            [weakSelf.titleView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.top.equalTo(@(kHeight(f4)));
                 make.right.equalTo(@-15);
                 make.left.equalTo(@15);
                 make.height.equalTo(@30);
             }];
-            CGFloat f = self.isClear == YES ?348-30 : 358-30;
-
-            CGFloat f1 = kDevice_Is_iPhoneX == YES ?15 :0;
-
-              weakSelf.currentTableView.frame = CGRectMake(0, kHeight(f), kScreenWidth, kScreenHeight - kTabBarHeight - kHeight(308));
-              weakSelf.tableView.frame = CGRectMake(0, kHeight(f), kScreenWidth, kScreenHeight - kTabBarHeight - kHeight(308));
             [weakSelf.view setNeedsLayout];
         };
         //切换钱包事件
@@ -463,14 +490,14 @@
     CGFloat f3 = self.isClear == YES ?334-30 : 354-30;
     CGFloat f4 = self.isClear == YES ?320-30 : 350-30;
 
-    [self.titleView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(@(kHeight(f4)));
-        make.right.equalTo(@-15);
-        make.left.equalTo(@15);
-        make.height.equalTo(@30);
-    }];
+//    [self.titleView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(@(kHeight(f4)));
+//        make.right.equalTo(@-15);
+//        make.left.equalTo(@15);
+//        make.height.equalTo(@30);
+//    }];
     f = f - f1;
-    self.currentTableView = [[TLAccountTableView alloc] initWithFrame:CGRectMake(0, kHeight(f)+kStatusBarHeight, kScreenWidth, kScreenHeight - 49 - kHeight(f3)) style:UITableViewStyleGrouped];
+    self.currentTableView = [[TLAccountTableView alloc] initWithFrame:CGRectMake(0, kStatusBarHeight+5, kScreenWidth, kScreenHeight - 49) style:UITableViewStyleGrouped];
     self.currentTableView.contentInset = UIEdgeInsetsMake(0, 0, 30, 0);
 
     self.currentTableView.backgroundColor = kWhiteColor;
@@ -502,9 +529,40 @@
         accountVC.billType = LocalTypeAll;
         [weakSelf.navigationController pushViewController:accountVC animated:YES];
     };
+    
+    [self.titleView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(@(kHeight(f4)));
+        make.right.equalTo(@-15);
+        make.left.equalTo(@15);
+        make.height.equalTo(@30);
+    }];
+    
 }
 - (void)initTableView {
     [self.titleView removeFromSuperview];
+    CGFloat f1 = kDevice_Is_iPhoneX == YES ?25 :0;
+    CGFloat f = self.isClear == YES ?338-30 : 368-30;
+
+    f = f - f1;
+    self.currentTableView = [[TLAccountTableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
+    
+    [self.view addSubview:self.currentTableView];
+    
+    
+    CGFloat f3 = self.isClear == YES ?324-30 : 354-30;
+    
+    //    [self.titleView mas_remakeConstraints:^(MASConstraintMaker *make) {
+    //        make.top.equalTo(@(kHeight(f4)));
+    //        make.right.equalTo(@-15);
+    //        make.left.equalTo(@15);
+    //        make.height.equalTo(@30);
+    //    }];
+    self.tableView = [[PlatformTableView alloc] initWithFrame:CGRectMake(0, kStatusBarHeight+5, kScreenWidth, kScreenHeight ) style:UITableViewStyleGrouped];
+    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 30, 0);
+    self.tableView.backgroundColor = kWhiteColor;
+    self.tableView.refreshDelegate = self;
+    self.tableView.tableHeaderView = self.headerView;
+    [self.view addSubview:self.tableView];
     self.leftButton = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"闪兑" key:nil] titleColor:kHexColor(@"#333333") backgroundColor:kWhiteColor titleFont:14.0];
     [self.leftButton setImage:kImage(@"闪兑") forState:UIControlStateNormal];
     self.leftButton.layer.borderWidth = 0.3;
@@ -513,12 +571,12 @@
     [self.rightButton setImage:kImage(@"一键划转") forState:UIControlStateNormal];
     [self.leftButton addTarget:self action:@selector(fast) forControlEvents:UIControlEventTouchUpInside];
       [self.rightButton addTarget:self action:@selector(transNext) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:self.leftButton];
-    [self.view addSubview:self.rightButton];
+    [self.tableView addSubview:self.leftButton];
+    [self.tableView addSubview:self.rightButton];
     self.titleView = [[UIView alloc] init];
-    [self.view addSubview:self.titleView];
+    [self.headerView addSubview:self.titleView];
     self.titleView.backgroundColor = kWhiteColor;
-    CGFloat f4 = self.isClear == YES ?320-30 : 350-30;
+    CGFloat f4 = self.isClear == YES ?320-30-30 : 350-30-30;
 
     [self.titleView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(@(kHeight(f4)));
@@ -546,7 +604,7 @@
         make.top.equalTo(self.titleView.mas_top).offset(4);
 //        make.centerX.equalTo(self.titleView.mas_centerX);
         
-        make.right.equalTo(self.titleView.mas_right).offset(-10);
+        make.right.equalTo(self.view.mas_right).offset(-10);
 //        make.bottom.equalTo(self.view.mas_bottom).offset(15);
         make.width.height.equalTo(@20);
         
@@ -557,10 +615,11 @@
     self.rightButton.layer.borderWidth = 0.3;
     self.rightButton.layer.borderColor = kHexColor(@"#ABC0D9").CGColor;
     [self.rightButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 0)];
-    
+    CGFloat fx = kDevice_Is_iPhoneX == YES ?15 :7;
+
     [self.leftButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view.mas_left).offset(15);
-        make.top.equalTo(self.headerView.mas_bottom).offset(8);
+        make.bottom.equalTo(self.headerView.mas_bottom).offset(-fx);
         make.width.equalTo(@(kWidth(167.5)));
         make.height.equalTo(@(kHeight(40)));
         
@@ -569,39 +628,32 @@
     
     [self.rightButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.leftButton.mas_right).offset(10);
-        make.top.equalTo(self.headerView.mas_bottom).offset(8);
+        make.bottom.equalTo(self.headerView.mas_bottom).offset(-fx);
         make.width.equalTo(@(kWidth(167.5)));
         make.height.equalTo(@(kHeight(40)));
         
     }];
     [self.rightButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 0)];
-    CGFloat f = self.isClear == YES ?338-30 : 368-30;
-    CGFloat f1 = kDevice_Is_iPhoneX == YES ?25 :0;
-    f = f - f1;
-    CGFloat f3 = self.isClear == YES ?324-30 : 354-30;
-
-//    [self.titleView mas_remakeConstraints:^(MASConstraintMaker *make) {
-//        make.top.equalTo(@(kHeight(f4)));
-//        make.right.equalTo(@-15);
-//        make.left.equalTo(@15);
-//        make.height.equalTo(@30);
-//    }];
-    self.tableView = [[PlatformTableView alloc] initWithFrame:CGRectMake(0, kHeight(f)+kStatusBarHeight, kScreenWidth, kScreenHeight - 49 - kHeight(f3)) style:UITableViewStyleGrouped];
-    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 30, 0);
-    self.tableView.backgroundColor = kWhiteColor;
-    self.tableView.refreshDelegate = self;
-    [self.view addSubview:self.tableView];
+   
+    
     CoinWeakSelf;
     self.tableView.selectBlock = ^(NSInteger inter) {
         NSLog(@"%ld",inter);
-        weakSelf.switchTager = 0;
         weakSelf.isBulid = NO;
-
-        WallAccountVC *accountVC= [[WallAccountVC alloc] init];
-        accountVC.currency = weakSelf.currencys[inter];
-        accountVC.title = accountVC.currency.currency;
-        accountVC.billType = CurrentTypeAll;
-        [weakSelf.navigationController pushViewController:accountVC animated:YES];
+        if (weakSelf.switchTager == 1) {
+            WallAccountVC *accountVC= [[WallAccountVC alloc] init];
+            accountVC.currency = weakSelf.currencys[inter];
+            accountVC.title = accountVC.currency.currency;
+            accountVC.billType = CurrentTypeAll;
+            [weakSelf.navigationController pushViewController:accountVC animated:YES];
+        }else{
+            
+            WalletLocalVc *accountVC= [[WalletLocalVc alloc] init];
+            accountVC.currency = weakSelf.localCurrencys[inter];
+            accountVC.billType = LocalTypeAll;
+            [weakSelf.navigationController pushViewController:accountVC animated:YES];
+        }
+      
         
         
     };
@@ -619,25 +671,17 @@
     AddAccoutMoneyVc *monyVc = [[AddAccoutMoneyVc alloc] init];
     monyVc.currentModels = self.currencys;
     [self.navigationController pushViewController:monyVc animated:YES];
-    
+    CoinWeakSelf;
     self.tempcurrencys = [NSMutableArray array];
     monyVc.select = ^(NSMutableArray *model) {
-        //                weakSelf.currencys = model;
-        //                weakSelf.currencys = [NSMutableArray array];
-        //                for (CurrencyModel *m in model) {
-        //                    if (m.IsSelected == YES) {
-        //                        [weakSelf.currencys addObject:m];
-        //                    }
-        //                }
-        //                weakSelf.currentTableView.platforms = nil;
-        //                [weakSelf.currentTableView reloadData];
-        //
-        //                weakSelf.currentTableView.platforms = weakSelf.currencys;
-        ////                [weakSelf.currentTableView beginRefreshing];
-        //                [weakSelf.currentTableView reloadData];
-        //                [weakSelf ]
-        
-        [self switchWithTager:0];
+//        [weakSelf getMyCurrencyList];
+//        [weakSelf queryCenterTotalAmount];
+//        [weakSelf queryMyAmount];
+//        //
+        weakSelf.isAddBack = YES;
+        [weakSelf queryTotalAmount];
+//        [self switchWithTager:0];
+//        [weakSelf.tableView beginRefreshing];
         NSLog(@"%@",model);
     };
     
@@ -658,41 +702,62 @@
         self.rightButton.layer.borderWidth = 0.3;
         self.rightButton.layer.borderColor = kHexColor(@"#ABC0D9").CGColor;
         CGFloat f = self.isClear == YES ?318 : 338;
-//        self.contentView.hidden = YES;
-//        [self inreoduceView:@"个人账户" content:@"个人账户就是指中心化钱包,是由THA替您保管私钥,在中心化钱包中,不存在钱包丢失了无法找回的情况,可以通过身份证找回您的钱包,并且可以让您体验到更多的服务。"];
-//        self.contentView.hidden = NO;
 
-//        [UIView animateWithDuration:0.5 animations:^{
-//                 self.currentTableView.frame = CGRectMake(-kScreenWidth, kHeight(f)+kStatusBarHeight, kScreenWidth, kScreenHeight - kTabBarHeight - kHeight(354));
-////            }else{
-////                 self.currentTableView.frame = CGRectMake(kScreenWidth, kHeight(f)+kStatusBarHeight, kScreenWidth, kScreenHeight - kTabBarHeight - kHeight(354));
-////            }
-//
-////             self.tableView.frame = CGRectMake(-kScreenWidth, kHeight(f)+kStatusBarHeight, kScreenWidth, kScreenHeight - kTabBarHeight - kHeight(354));
-//
-//        } completion:^(BOOL finished) {
-//
         for (UIView *vie in self.view.subviews) {
             if ([vie isKindOfClass:[BuildLocalHomeView class]]) {
                 [vie removeFromSuperview];
             }
         }
-    
-                [self.currentTableView.platforms removeAllObjects];
-                [self.currencys removeAllObjects];
-                [self.currentTableView reloadData];
+
+            self.leftButton.hidden = NO;
+            self.rightButton.hidden = NO;
+//                [self.currentTableView removeFromSuperview];
+//                self.currentTableView.hidden = YES;
+            self.tableView.hidden = NO;
+            self.tableView.isLocal = NO;
+        self.addButton.hidden = YES;
+        CGFloat fx = kDevice_Is_iPhoneX == YES ?15 :7;
+        CGFloat h = self.isClear == YES ? 300 : 315;
+        self.headerView.frame = CGRectMake(0, 0, kScreenWidth, kHeight(h));
+
+        self.tableView.frame = CGRectMake(0, kStatusBarHeight, kScreenWidth, kScreenHeight);
        
-                [self.currentTableView removeFromSuperview];
-                self.tableView.hidden = YES;
-                [self.tableView.platforms removeAllObjects];
-                [self.tableView reloadData];
-                self.currentTableView.hidden = YES;
+        [self.leftButton mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.view.mas_left).offset(15);
+            make.bottom.equalTo(self.headerView.mas_bottom).offset(-fx-15);
+            make.width.equalTo(@(kWidth(167.5)));
+            make.height.equalTo(@(kHeight(40)));
+            
+        }];
         
+        
+        [self.rightButton mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.leftButton.mas_right).offset(10);
+            make.bottom.equalTo(self.headerView.mas_bottom).offset(-fx-15);
+            make.width.equalTo(@(kWidth(167.5)));
+            make.height.equalTo(@(kHeight(40)));
+            
+        }];
+        CGFloat f4 = self.isClear == YES ?320-30-15 : 350-30-30;
+        self.tableView.hidden = NO;
 
-                [self initTableView];
+        [self.titleView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(@(kHeight(f4+6)));
+            make.right.equalTo(@-15);
+            make.left.equalTo(@15);
+            make.height.equalTo(@30);
+        }];
+        [self.view setNeedsLayout];
+        
+//                [self.tableView.platforms removeAllObjects];
+            self.tableView.platforms = self.currencys;
+                [self.tableView reloadData];
+            self.tableView.scrollEnabled = YES;
+            self.tableView.bounces = YES;
+//                [self initTableView];
 
-                [self getMyCurrencyList];
-                [self queryMyAmount];
+//                [self getMyCurrencyList];
+//                [self queryMyAmount];
                 self.switchTager = tager;
         
         
@@ -725,13 +790,45 @@
             [self.leftButton setImage:kImage(@"闪兑-秘钥") forState:UIControlStateNormal];
             [self.rightButton setImage:kImage(@"划转-秘钥") forState:UIControlStateNormal];
 //            [self.tabBarController.tabBar setHidden:NO];
-
+            self.tableView.hidden = NO;
             self.leftButton.layer.borderWidth = 0.3;
             self.leftButton.layer.borderColor = kHexColor(@"#D1B3AB").CGColor;
             self.rightButton.layer.borderWidth = 0.3;
             self.rightButton.layer.borderColor = kHexColor(@"#D1B3AB").CGColor;
             
-            CGFloat f = self.isClear == YES ?318 : 338;
+            CGFloat f = self.isClear == YES ?300 : 320;
+            self.headerView.frame = CGRectMake(0, 0, kScreenWidth, kHeight(f) );
+            CGFloat fx = kDevice_Is_iPhoneX == YES ?15 :27;
+            
+            self.currentTableView.frame = CGRectMake(0, 5, kScreenWidth, kScreenHeight );
+            self.tableView.frame = CGRectMake(0, kStatusBarHeight, kScreenWidth, kScreenHeight );
+            [self.leftButton mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.left.equalTo(self.view.mas_left).offset(15);
+                make.bottom.equalTo(self.headerView.mas_bottom).offset(-fx-2);
+                make.width.equalTo(@(kWidth(167.5)));
+                make.height.equalTo(@(kHeight(40)));
+                
+            }];
+            
+            
+            [self.rightButton mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.left.equalTo(self.leftButton.mas_right).offset(10);
+                make.bottom.equalTo(self.headerView.mas_bottom).offset(-fx-2);
+                make.width.equalTo(@(kWidth(167.5)));
+                make.height.equalTo(@(kHeight(40)));
+                
+            }];
+            self.addButton.hidden = NO;
+            self.titleView.hidden = NO;
+
+            CGFloat f4 = self.isClear == YES ?350-30-15 : 350-30-30+5;
+            
+            [self.titleView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.top.equalTo(@(kHeight(f4)));
+                make.right.equalTo(@-15);
+                make.left.equalTo(@15);
+                make.height.equalTo(@30);
+            }];
             
 //            [UIView animateWithDuration:0.5 animations:^{
 //                      self.tableView.frame = CGRectMake(-kScreenWidth, kHeight(f)+kStatusBarHeight, kScreenWidth, kScreenHeight - kTabBarHeight - kHeight(354));
@@ -742,17 +839,23 @@
            
                 //              self.currentTableView.frame = CGRectMake(-kScreenWidth, kHeight(f)+kStatusBarHeight, kScreenWidth, kScreenHeight - kTabBarHeight - kHeight(354));
 //            } completion:^(BOOL finished) {
-                [self.tableView.platforms removeAllObjects];
-                [self.currencys removeAllObjects];
-                [self.tableView reloadData];
-                [self.tableView removeFromSuperview];
-                self.tableView.hidden = YES;
-                self.currentTableView.hidden = YES;
-                
-                [self initLocalTableView];
+//                [self.tableView.platforms removeAllObjects];
+//                [self.currencys removeAllObjects];
+//                [self.tableView reloadData];
+//                [self.tableView removeFromSuperview];
+//                self.tableView.hidden = YES;
+//                self.currentTableView.hidden = NO;
+            
+            
+//                [self initLocalTableView];
+            self.tableView.isLocal = YES;
+            self.tableView.platforms = self.localCurrencys;
+            [self.tableView reloadData];
                 [self saveLocalWalletData];
                 [self saveLocalWallet];
-                
+            self.tableView.bounces = YES;
+
+
                 [self getLocalWalletMessage];
 //                self.contentView.hidden = YES;
 //            if (self.contentView.hidden == NO) {
@@ -779,22 +882,24 @@
 //
 //        };
 //        [self.navigationController pushViewController:MineVC animated:YES];
-        [self.tableView.platforms removeAllObjects];
-        [self.currencys removeAllObjects];
-        [self.tableView reloadData];
-        [self.tableView removeFromSuperview];
+//        [self.tableView.platforms removeAllObjects];
+//        [self.currencys removeAllObjects];
+//        [self.tableView reloadData];
+//        [self.tableView removeFromSuperview];
 //        [self.tabBarController.tabBar setHidden:YES];
+        
         self.homeView = [[BuildLocalHomeView alloc] init];
         self.leftButton.hidden = YES;
         self.rightButton.hidden = YES;
-
+        self.tableView.bounces = NO;
+        self.tableView.scrollEnabled = NO;
         [self.view addSubview:self.homeView];
 //        self.homeView.contentSize = CGSizeMake(0, 300);
         
         
         self.homeView.backgroundColor = kWhiteColor;
         [self.homeView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.headerView.mas_bottom).offset(2);
+            make.top.equalTo(self.headerView.mas_bottom).offset(-30);
             make.right.equalTo(@-15);
             make.left.equalTo(@15);
             make.bottom.equalTo(self.view.mas_bottom).offset(0);
@@ -1016,6 +1121,7 @@
     if (![TLUser user].isLogin) {
         return;
     }
+    
     helper.code = @"802503";
     helper.parameters[@"userId"] = [TLUser user].userId;
     helper.parameters[@"token"] = [TLUser user].token;
@@ -1042,16 +1148,26 @@
                 //查询总资产
                
             }];
-            [weakSelf queryCenterTotalAmount];
-            [weakSelf queryMyAmount];
-            //
-            weakSelf.currencys = shouldDisplayCoins;
-            weakSelf.tableView.platforms = shouldDisplayCoins;
-            [weakSelf.tableView reloadData_tl];
+
             
+            if (weakSelf.switchTager == 0) {
+                weakSelf.currencys = shouldDisplayCoins;
+                weakSelf.tableView.platforms = weakSelf.localCurrencys;
+                [weakSelf.tableView reloadData_tl];
+                [weakSelf queryTotalAmount];
+                [weakSelf.tableView endRefreshingWithNoMoreData_tl];
+            }else{
+                weakSelf.currencys = shouldDisplayCoins;
+                weakSelf.tableView.platforms = shouldDisplayCoins;
+                [weakSelf.tableView reloadData_tl];
+                [weakSelf.tableView endRefreshingWithNoMoreData_tl];
+            }
+          
+           
         } failure:^(NSError *error) {
             
-            
+            [weakSelf.tableView endRefreshingWithNoMoreData_tl];
+
         }];
       
        
@@ -1079,16 +1195,26 @@
               
             }];
             [weakSelf refreshOpenCoinList];
-
+            [weakSelf queryTotalAmount];
             [weakSelf queryCenterTotalAmount];
             [weakSelf queryMyAmount];
+            if (weakSelf.switchTager == 0) {
+                weakSelf.currencys = shouldDisplayCoins;
+                weakSelf.tableView.platforms = weakSelf.localCurrencys;
+                [weakSelf.tableView reloadData_tl];
+            }else{
+                weakSelf.currencys = shouldDisplayCoins;
+                weakSelf.tableView.platforms = shouldDisplayCoins;
+                [weakSelf.tableView reloadData_tl];
+                
+            }
+          
             //
-            weakSelf.currencys = shouldDisplayCoins;
-            weakSelf.tableView.platforms = shouldDisplayCoins;
-            [weakSelf.tableView reloadData_tl];
-            
+         
+
         } failure:^(NSError *error) {
-            
+            [weakSelf.tableView endRefreshingWithNoMoreData_tl];
+
             
         }];
         
@@ -1179,7 +1305,14 @@
 {
     if ([[TLUser user].localMoney isEqualToString:@"USD"]) {
         self.headerView.cnyAmountLbl.text = [NSString stringWithFormat:@"$ %@", @"0.00"];
-    }else{
+    }else if ([[TLUser user].localMoney isEqualToString:@"KRW"])
+    {
+        self.headerView.cnyAmountLbl.text = [NSString stringWithFormat:@"₩ %@", @"0.00"];
+
+        
+    }
+    
+    else{
         self.headerView.cnyAmountLbl.text = [NSString stringWithFormat:@"¥ %@", @"0.00"];
 
         
@@ -1211,7 +1344,22 @@
             self.headerView.localLbl.text = [NSString stringWithFormat:@"%@(USD)", [LangSwitcher switchLang:@"私钥钱包" key:nil]];
             self.headerView.textLbl.text = [NSString stringWithFormat:@"%@(USD)", [LangSwitcher switchLang:@"个人账户" key:nil]];
             [self.headerView setNeedsDisplay];
-        }else{
+        } else if ([[TLUser user].localMoney isEqualToString:@"KRW"])
+        {
+            NSString *cnyStr = [responseObject[@"data"][@"totalAmountKRW"] convertToSimpleRealMoney];
+            if (![self.IsLocalExsit isEqualToString:@"1"]) {
+                self.headerView.cnyAmountLbl.text = [NSString stringWithFormat:@"₩ %.2f", [cnyStr doubleValue]];
+                
+            }
+            self.headerView.privateMoney.text = [NSString stringWithFormat:@"₩ %.2f", [cnyStr doubleValue]];
+            self.headerView.equivalentBtn.text = [NSString stringWithFormat:@"%@(KRW)", [LangSwitcher switchLang:@"总资产" key:nil]];
+            self.headerView.localLbl.text = [NSString stringWithFormat:@"%@(KRW)", [LangSwitcher switchLang:@"私钥钱包" key:nil]];
+            self.headerView.textLbl.text = [NSString stringWithFormat:@"%@(KRW)", [LangSwitcher switchLang:@"个人账户" key:nil]];
+            [self.headerView setNeedsDisplay];
+            
+        }
+        
+        else{
             NSString *cnyStr = [responseObject[@"data"][@"totalAmountCNY"] convertToSimpleRealMoney];
             if (![self.IsLocalExsit isEqualToString:@"1"]) {
                 self.headerView.cnyAmountLbl.text = [NSString stringWithFormat:@"¥ %.2f", [cnyStr doubleValue]];
@@ -1322,7 +1470,22 @@
                 self.headerView.hkdAmountLbl.text = [NSString stringWithFormat:@"%@CNY", hkdStr];
                 [self.headerView setNeedsDisplay];
 
-            }else
+            } else if ([[TLUser user].localMoney isEqualToString:@"KRW"])
+            {
+                NSString *cnyStr = [responseObject[@"data"][@"totalAmountKRW"] convertToSimpleRealMoney];
+                if (![self.IsLocalExsit isEqualToString:@"1"]) {
+                    self.headerView.cnyAmountLbl.text = [NSString stringWithFormat:@"₩ %.2f", [cnyStr doubleValue]];
+                    
+                }
+                self.headerView.privateMoney.text = [NSString stringWithFormat:@"₩ %.2f", [cnyStr doubleValue]];
+                self.headerView.equivalentBtn.text = [NSString stringWithFormat:@"%@(KRW)", [LangSwitcher switchLang:@"总资产" key:nil]];
+                self.headerView.localLbl.text = [NSString stringWithFormat:@"%@(KRW)", [LangSwitcher switchLang:@"私钥钱包" key:nil]];
+                self.headerView.textLbl.text = [NSString stringWithFormat:@"%@(KRW)", [LangSwitcher switchLang:@"个人账户" key:nil]];
+                [self.headerView setNeedsDisplay];
+                
+            }
+                
+                
             {
                 double f =  [cnyStr doubleValue]+[[self.headerView.privateMoney.text substringFromIndex:1] doubleValue] ;
                 self.headerView.cnyAmountLbl.text = [NSString stringWithFormat:@"¥ %.2f", f];
@@ -1352,7 +1515,6 @@
     
         } failure:^(NSError *error) {
     
-            [self.currentTableView endRefreshingWithNoMoreData_tl];
     
         }];
     
@@ -1362,12 +1524,12 @@
 
 #pragma mark - Data
 - (void)queryTotalAmount {
-    
+
     NSString *audioFile = [[NSBundle mainBundle] pathForResource:@"QSount.caf" ofType:nil];
 
     NSLog(@"%@",audioFile);
 //    [self.currentTableView beginRefreshing];
-    TLPageDataHelper *http = [TLPageDataHelper new];
+    TLNetworking *http = [TLNetworking new];
     http.code = @"802270";
     http.isLocal = YES;
     http.isUploadToken = NO;
@@ -1412,76 +1574,18 @@
 //    http.parametArray = @[ dic];
    
     CoinWeakSelf;
-    http.isList = YES;
-    http.isCurrency = YES;
-    http.tableView = self.currentTableView;
-    [http modelClass:[CurrencyModel class]];
-
-    [self.currentTableView addRefreshAction:^{
-        [http refresh:^(NSMutableArray *objs, BOOL stillHave) {
-            weakSelf.currencys = objs;
-            weakSelf.currentTableView.platforms = weakSelf.currencys;
-            [weakSelf.currentTableView reloadData_tl];
-            NSLog(@"%@",objs);
-            [weakSelf.currentTableView endRefreshingWithNoMoreData_tl];
-            [weakSelf queryMyAmount];
-            
-        } failure:^(NSError *error) {
-            
-        }];
-    }];
-    
-    [self.currentTableView beginRefreshing];
-    [self.currentTableView addLoadMoreAction:^{
-        http.isUploadToken = NO;
-        [weakSelf refreshOpenCoinList];
-
-        [http loadMore:^(NSMutableArray *objs, BOOL stillHave) {
-            
-            if (weakSelf.tl_placeholderView.superview != nil) {
-                
-                [weakSelf removePlaceholderView];
-            }
-            
-            [weakSelf queryMyAmount];
-            weakSelf.currencys = objs;
-            
-            weakSelf.currentTableView.platforms = objs;
-            [weakSelf.currentTableView reloadData_tl];
-            
-        } failure:^(NSError *error) {
-            
-            [weakSelf addPlaceholderView];
-            
-        }];
+  
+    [http postWithSuccess:^(id responseObject) {
+        weakSelf.localCurrencys = [CurrencyModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"][@"accountList"]];
+        if (weakSelf.isAddBack == YES || weakSelf.switchTager == 0) {
+            weakSelf.tableView.platforms = weakSelf.localCurrencys;
+            [weakSelf.tableView reloadData];
+        }
+       
+    } failure:^(NSError *error) {
         
     }];
     
-//    [http postWithSuccess:^(id responseObject) {
-//
-//        NSString *cnyStr = [responseObject[@"data"][@"totalAmountCNY"] convertToSimpleRealMoney];
-//
-//        self.headerView.cnyAmountLbl.text = [NSString stringWithFormat:@"%.2f", [cnyStr doubleValue]];
-//
-//        NSArray *usdStr = responseObject[@"data"][@"accountList"];
-//
-//        weakSelf.currencys   =  [CurrencyModel mj_objectArrayWithKeyValuesArray:usdStr];
-//
-//        NSLog(@"%@",self.currencys);
-//
-//        weakSelf.currentTableView.platforms = weakSelf.currencys;
-//        [weakSelf.currentTableView reloadData_tl];
-//        self.headerView.usdAmountLbl.text = [NSString stringWithFormat:@"%@USD", usdStr];
-//
-//        NSString *hkdStr = [responseObject[@"data"][@"totalAmountHKD"] convertToSimpleRealMoney];
-
-//        self.headerView.hkdAmountLbl.text = [NSString stringWithFormat:@"%@HKD", hkdStr];
-//
-//    } failure:^(NSError *error) {
-//
-//        [self.currentTableView endRefreshingWithNoMoreData_tl];
-//
-//    }];
 }
 
 
@@ -1529,6 +1633,10 @@
     
         [help refresh:^(NSMutableArray *objs, BOOL stillHave) {
             
+            if (objs.count == 0) {
+                [weakSelf.headerView tapClick:nil];
+                
+            }
             weakSelf.rates = objs;
             
             if (objs.count > 0) {

@@ -209,7 +209,7 @@
     [self.buildButton setBackgroundColor:kHexColor(@"#FF6953") forState:UIControlStateNormal];
     [self addSubview:self.buildButton];
     [self.buildButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.bottomView.mas_bottom).offset(20);
+        make.top.equalTo(self.bottomView.mas_bottom).offset(10);
         make.right.equalTo(self.mas_right).offset(-15);
         make.left.equalTo(self.mas_left).offset(15);
         make.height.equalTo(@40);
@@ -232,7 +232,7 @@
     self.importButton.clipsToBounds = YES;
     [self addSubview:self.importButton];
     [self.importButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.buildButton.mas_bottom).offset(20);
+        make.top.equalTo(self.buildButton.mas_bottom).offset(10);
         make.right.equalTo(self.mas_right).offset(-15);
         make.left.equalTo(self.mas_left).offset(15);
         make.height.equalTo(@40);

@@ -84,7 +84,8 @@
     //导入钱包 设置的交易密码
     TLUpdateVC *up = [[TLUpdateVC alloc] init];
     TLTabBarController *tabBarCtrl = [[TLTabBarController alloc] init];
-    
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:KISBuild];
+    [[NSUserDefaults standardUserDefaults] synchronize];
     [UIApplication sharedApplication].keyWindow.rootViewController = up;
     
 }

@@ -405,7 +405,10 @@
 -(void)setModel:(TLtakeMoneyModel *)model
 {
     _model = model;
-    self.nameLab.text = model.produceModel.name;
+    
+   
+    self.nameLab.text =  model.produceModel.name;
+
     CoinModel *coin = [CoinUtil getCoinModel:model.produceModel.symbol];
     self.stateLab.text =  [LangSwitcher switchLang:@"购买成功" key:nil];;
     [NSString stringWithFormat:@"%@%@",model.produceModel.limitDays,[LangSwitcher switchLang:@"天" key:nil]];

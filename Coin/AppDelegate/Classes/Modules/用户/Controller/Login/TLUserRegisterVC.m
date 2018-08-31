@@ -266,6 +266,8 @@
     [self.contentScrollView addSubview:pwdLab];
     TLTextField *pwdTf = [[TLTextField alloc] initWithFrame:CGRectMake(margin, pwdLab.yy + 10, w, h) leftTitle:[LangSwitcher switchLang:@"" key:nil] titleWidth:titleWidth placeholder:[LangSwitcher switchLang:@"请输入密码" key:nil]];
     pwdTf.secureTextEntry = YES;
+    pwdTf.returnKeyType = UIReturnKeyNext;
+    [pwdTf addTarget:self action:@selector(next) forControlEvents:UIControlEventEditingDidEndOnExit];
 //    pwdTf.keyboardType = UIKeyboardTypePhonePad;
 
     [self.contentScrollView addSubview:pwdTf];
@@ -284,6 +286,8 @@
     TLTextField *rePwdTf = [[TLTextField alloc] initWithFrame:CGRectMake(margin, sureLab.yy + 1, w, h) leftTitle:[LangSwitcher switchLang:@"" key:nil] titleWidth:titleWidth placeholder:[LangSwitcher switchLang:@"确认密码" key:nil]];
     rePwdTf.secureTextEntry = YES;
 //    rePwdTf.keyboardType = UIKeyboardTypePhonePad;
+    rePwdTf.returnKeyType = UIReturnKeyNext;
+    [rePwdTf addTarget:self action:@selector(next1) forControlEvents:UIControlEventEditingDidEndOnExit];
 
     [self.contentScrollView addSubview:rePwdTf];
     self.rePwdTf = rePwdTf;
@@ -386,6 +390,18 @@
     self.contentScrollView.scrollEnabled = YES;
 }
 
+- (void)next
+{
+    [self.pwdTf resignFirstResponder];
+    [self.rePwdTf becomeFirstResponder];
+    
+}
+- (void)next1
+{
+    [self.rePwdTf resignFirstResponder];
+    
+    [self goReg];
+}
 
 - (void)chooseCountry
 {

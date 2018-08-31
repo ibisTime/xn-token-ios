@@ -15,9 +15,10 @@
 #import "UIBarButtonItem+convience.h"
 
 #import "SGQRCodeGenerateManager.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 #import "BillVC.h"
-
+#import "CoinUtil.h"
 @interface RechargeCoinVC ()
 
 @property (nonatomic, strong) UIView *topView;
@@ -30,6 +31,8 @@
 
 @property (nonatomic ,strong) UIButton *buildButton;
 
+@property (nonatomic ,strong) UIButton *saveButton;
+@property (nonatomic, strong)  UIImageView *qrIV;
 @end
 
 @implementation RechargeCoinVC
@@ -143,7 +146,9 @@
     [self.view addSubview:self.qrView];
     //二维码
     UIImageView *qrIV = [[UIImageView alloc] init];
+    self.qrIV = qrIV;
     NSString *address ;
+    
     if (self.currency.symbol) {
         address = self.currency.address;
     }else{
@@ -151,9 +156,13 @@
 
         
     }
-    
-    qrIV.image = [SGQRCodeGenerateManager generateWithDefaultQRCodeData:address imageViewWidth:200];
-    
+    CoinModel * coin = [CoinUtil getCoinModel:self.currency.currency.length > 0 ? self.currency.currency : self.currency.symbol];
+
+    [qrIV sd_setImageWithURL:[NSURL URLWithString:[coin.pic1 convertImageUrl]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        qrIV.image = [self generateWithLogoQRCodeData:address logoImageName:image logoScaleToSuperView:0.2];
+
+    }];
+//    qrIV.image = [SGQRCodeGenerateManager generateWithDefaultQRCodeData:address imageViewWidth:200];
     [view addSubview:qrIV];
     [qrIV mas_makeConstraints:^(MASConstraintMaker *make) {
         
@@ -187,6 +196,57 @@
 //                                  color:kAppCustomMainColor];
 
 }
+
+- (UIImage *)generateWithLogoQRCodeData:(NSString *)data logoImageName:(UIImage *)logoImageName logoScaleToSuperView:(CGFloat)logoScaleToSuperView {
+    // 1、创建滤镜对象
+    CIFilter *filter = [CIFilter filterWithName:@"CIQRCodeGenerator"];
+    
+    // 恢复滤镜的默认属性
+    [filter setDefaults];
+    
+    // 2、设置数据
+    NSString *string_data = data;
+    // 将字符串转换成 NSdata (虽然二维码本质上是字符串, 但是这里需要转换, 不转换就崩溃)
+    NSData *qrImageData = [string_data dataUsingEncoding:NSUTF8StringEncoding];
+    
+    // 设置过滤器的输入值, KVC赋值
+    [filter setValue:qrImageData forKey:@"inputMessage"];
+    
+    // 3、获得滤镜输出的图像
+    CIImage *outputImage = [filter outputImage];
+    
+    // 图片小于(27,27),我们需要放大
+    outputImage = [outputImage imageByApplyingTransform:CGAffineTransformMakeScale(20, 20)];
+    
+    // 4、将CIImage类型转成UIImage类型
+    UIImage *start_image = [UIImage imageWithCIImage:outputImage];
+    
+    // - - - - - - - - - - - - - - - - 添加中间小图标 - - - - - - - - - - - - - - - -
+    // 5、开启绘图, 获取图形上下文 (上下文的大小, 就是二维码的大小)
+    UIGraphicsBeginImageContext(start_image.size);
+    
+    // 把二维码图片画上去 (这里是以图形上下文, 左上角为(0,0)点
+    [start_image drawInRect:CGRectMake(0, 0, start_image.size.width, start_image.size.height)];
+    
+    // 再把小图片画上去
+    UIImage *icon_imageName = logoImageName;
+    UIImage *icon_image = logoImageName;
+    CGFloat icon_imageW = start_image.size.width * logoScaleToSuperView;
+    CGFloat icon_imageH = start_image.size.height * logoScaleToSuperView;
+    CGFloat icon_imageX = (start_image.size.width - icon_imageW) * 0.5;
+    CGFloat icon_imageY = (start_image.size.height - icon_imageH) * 0.5;
+    
+    [icon_image drawInRect:CGRectMake(icon_imageX, icon_imageY, icon_imageW, icon_imageH)];
+    
+    // 6、获取当前画得的这张图片
+    UIImage *final_image = UIGraphicsGetImageFromCurrentImageContext();
+    
+    // 7、关闭图形上下文
+    UIGraphicsEndImageContext();
+    
+    return final_image;
+}
+
 
 - (void)initAddressView {
     
@@ -277,7 +337,26 @@
     [self.buildButton setBackgroundColor:kHexColor(@"0848DF") forState:UIControlStateNormal];
     [bottomView addSubview:self.buildButton];
     [self.buildButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(bottomView.mas_top).offset(26);
+        make.top.equalTo(bottomView.mas_top).offset(6);
+        make.right.equalTo(bottomView.mas_right).offset(-30);
+        make.left.equalTo(bottomView.mas_left).offset(30);
+        make.height.equalTo(@48);
+        
+    }];
+    
+    self.saveButton = [UIButton buttonWithImageName:nil cornerRadius:6];
+    NSString *text1 =  [LangSwitcher switchLang:@"保存二维码" key:nil];
+    //     = NSLocalizedString(@"创建钱包", nil);
+    
+    [self.saveButton setTitle:text1 forState:UIControlStateNormal];
+    self.saveButton.titleLabel.font = [UIFont systemFontOfSize:16];
+    
+    [self.saveButton setTitleColor:kWhiteColor forState:UIControlStateNormal];
+    [self.saveButton addTarget:self action:@selector(saveCode) forControlEvents:UIControlEventTouchUpInside];
+    [self.saveButton setBackgroundColor:kHexColor(@"0848DF") forState:UIControlStateNormal];
+    [bottomView addSubview:self.saveButton];
+    [self.saveButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.buildButton.mas_bottom).offset(6);
         make.right.equalTo(bottomView.mas_right).offset(-30);
         make.left.equalTo(bottomView.mas_left).offset(30);
         make.height.equalTo(@48);
@@ -286,6 +365,16 @@
 }
 
 
+- (void)saveCode
+{
+       UIImageWriteToSavedPhotosAlbum(self.qrIV.image, self, @selector(image: didFinishSavingWithError: contextInfo:), nil);
+    
+    
+}
+- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
+{
+    error ? [TLAlert alertWithError:@"保存失败"] : [TLAlert alertWithSucces:@"保存成功"];
+}
 
 - (void)addRecodeItem {
     [UIBarButtonItem addLeftItemWithImageName:@"返回1" frame:CGRectMake(0, 0, 40, 44) vc:self action:@selector(backTop)];

@@ -297,7 +297,7 @@
     }];
     
     self.group = [SettingGroup new];
-    self.group.sections = @[@[changeTradePwd,google,bindEmail], @[changeLoginPwd,languageSetting]];
+    self.group.sections = @[@[changeTradePwd,google], @[changeLoginPwd,languageSetting]];
     self.tableView.group = self.group;
 
 }

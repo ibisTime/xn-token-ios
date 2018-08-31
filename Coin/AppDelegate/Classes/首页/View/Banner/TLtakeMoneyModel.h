@@ -17,7 +17,15 @@
 @property (nonatomic ,copy) NSString *symbol;
 //产品详情
 @property (nonatomic ,copy) NSString *Description;
+
+@property (nonatomic ,copy) NSString *descriptionEn;
+@property (nonatomic ,copy) NSString *descriptionKo;
+@property (nonatomic ,copy) NSString *descriptionZhCn;
+
+
+
 //预计年化收益率
+
 @property (nonatomic ,copy) NSString *expectYield;
 //实际年化收益率
 @property (nonatomic ,copy) NSString *actualYield;
@@ -39,6 +47,11 @@
 @property (nonatomic ,copy) NSString *successAmount;
 //产品名
 @property (nonatomic ,copy) NSString *name;
+@property (nonatomic ,copy) NSString *nameEn;
+@property (nonatomic ,copy) NSString *nameKo;
+@property (nonatomic ,copy) NSString *nameZhCn;
+
+
 //产品状态
 @property (nonatomic ,copy) NSString *status;
 //创建时间

@@ -176,7 +176,8 @@
     
     TLTextField *nameTf = [[TLTextField alloc] initWithFrame:CGRectMake(margin, 90 + 10, w, h) leftTitle:[LangSwitcher switchLang:@"" key:nil] titleWidth:20 placeholder:[LangSwitcher switchLang:@"钱包名称" key:nil]];
 //    nameTf.secureTextEntry = YES;
-
+    nameTf.returnKeyType = UIReturnKeyNext;
+    [nameTf addTarget:self action:@selector(next) forControlEvents:UIControlEventEditingDidEndOnExit];
     [self.view addSubview:nameTf];
     self.nameTf = nameTf;
     UIView *phone1 = [[UIView alloc] init];
@@ -187,6 +188,8 @@
     TLTextField *pwdTf = [[TLTextField alloc] initWithFrame:CGRectMake(margin, nameTf.yy + 10, w, h) leftTitle:[LangSwitcher switchLang:@"" key:nil] titleWidth:20 placeholder:[LangSwitcher switchLang:@"请输入密码" key:nil]];
 //    pwdTf.keyboardType = UIKeyboardTypePhonePad;
     pwdTf.secureTextEntry = YES;
+    pwdTf.returnKeyType = UIReturnKeyNext;
+    [pwdTf addTarget:self action:@selector(next1) forControlEvents:UIControlEventEditingDidEndOnExit];
 //    pwdTf.maxCount = 6;
     [self.view addSubview:pwdTf];
     self.pwdTf = pwdTf;
@@ -201,6 +204,8 @@
 //    pLab.textColor = kTextColor;
 //    [self.view addSubview:pLab];
     TLTextField *rePwdTf = [[TLTextField alloc] initWithFrame:CGRectMake(margin, pwdTf.yy + 1, w, h) leftTitle:[LangSwitcher switchLang:@"" key:nil] titleWidth:20 placeholder:[LangSwitcher switchLang:@"确认密码" key:nil]];
+    rePwdTf.returnKeyType = UIReturnKeyNext;
+    [rePwdTf addTarget:self action:@selector(next2) forControlEvents:UIControlEventEditingDidEndOnExit];
     rePwdTf.secureTextEntry = YES;
 //    rePwdTf.keyboardType = UIKeyboardTypePhonePad;
 //    rePwdTf.maxCount = 6;
@@ -312,6 +317,23 @@
 //    }];
 
     
+}
+
+- (void)next
+{
+    [self.nameTf resignFirstResponder];
+    [self.pwdTf becomeFirstResponder];
+    
+}
+- (void)next1
+{
+    [self.pwdTf resignFirstResponder];
+    [self.rePwdTf becomeFirstResponder];
+    
+}
+- (void)next2
+{
+    [self.rePwdTf resignFirstResponder];
 }
 
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event

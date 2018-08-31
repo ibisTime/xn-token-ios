@@ -131,10 +131,22 @@
     tridationModel.isSelect = [tridationModel.text isEqualToString:self.type];
     [tridationModel setAction:^{
         
-        [weakself langType:LangTypeTraditional];
+        [weakself langType:LangTypeEnglish];
         
     }];
-    [self.models addObjectsFromArray:@[simpleModel,tridationModel]];
+    
+    SettingModel *tridationModel1 = [[SettingModel alloc] init];
+    //    tridationModel.text = [LangSwitcher switchLang:@"繁体中文" key:nil];
+    tridationModel1.text = @"KRW";
+    
+    tridationModel1.isSelect = [tridationModel1.text isEqualToString:self.type];
+    [tridationModel1 setAction:^{
+        
+        [weakself langType:LangTypeKorean];
+        
+    }];
+    
+    [self.models addObjectsFromArray:@[simpleModel,tridationModel,tridationModel1]];
 
 }
 - (void)buttonClick
@@ -149,7 +161,13 @@
     NSString *money ;
     if (type == LangTypeSimple) {
         money = @"CNY";
-    }else{
+    }else if (type == LangTypeKorean)
+    {
+        
+        money = @"KRW";
+
+    }
+    else{
         
         money = @"USD";
     }
@@ -174,6 +192,7 @@
 //                             }
 //                         }
 //                         [db.dataBase close];
+                         [TLUser user].localMoney = money;
                          [[NSUserDefaults standardUserDefaults] setObject:money forKey:KLocalMoney];
 
 //                         [LangSwitcher changLangType:type];

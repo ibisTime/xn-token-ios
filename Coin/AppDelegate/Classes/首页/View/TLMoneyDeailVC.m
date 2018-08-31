@@ -59,6 +59,7 @@
     self.tit.model = self.moneyModel;
     
     self.pronameDetail.text = self.moneyModel.name;
+
     self.symblename.text = self.moneyModel.symbol;
     self.backdetailLab.text = [LangSwitcher switchLang:@"期满自动转入个人账户" key:nil];
     AssetPwdView *pwdView =[[AssetPwdView alloc] init];
@@ -169,6 +170,10 @@
 -(void)viewDidAppear:(BOOL)animated
 {
     [self.web loadHTMLString:self.moneyModel.Description baseURL:nil];
+
+    
+    
+    
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -825,7 +830,23 @@
     }];
     UILabel *nameLab = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextBlack font:15];
     [whiteView addSubview:nameLab];
-    nameLab.text = self.moneyModel.name;
+    switch ([LangSwitcher currentLangType]) {
+        case LangTypeEnglish:
+            nameLab.text = self.moneyModel.nameEn;
+
+            break;
+        case LangTypeKorean:
+            nameLab.text = self.moneyModel.nameKo;
+
+            break;
+        case LangTypeSimple:
+            nameLab.text = self.moneyModel.nameZhCn;
+
+            break;
+            
+        default:
+            break;
+    }
     [nameLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(whiteView.mas_top).offset(40);
         make.left.equalTo(sureLab.mas_right).offset(23);

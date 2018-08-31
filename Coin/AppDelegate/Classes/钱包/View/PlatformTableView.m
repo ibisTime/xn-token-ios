@@ -9,7 +9,7 @@
 #import "PlatformTableView.h"
 //V
 #import "PlatformCell.h"
-
+#import "AccountMoneyCellTableViewCell.h"
 @interface PlatformTableView()<UITableViewDelegate, UITableViewDataSource>
 
 @end
@@ -19,6 +19,7 @@
 static NSString *platformAllCell = @"PlatformAllCell";
 static NSString *platformPriceCell = @"PlatformPriceCell";
 static NSString *platformCell = @"PlatformCell";
+static NSString *platformCell1 = @"AccountMoneyCellTableViewCell";
 
 - (instancetype)initWithFrame:(CGRect)frame style:(UITableViewStyle)style {
     
@@ -27,6 +28,8 @@ static NSString *platformCell = @"PlatformCell";
         self.dataSource = self;
         self.delegate = self;
         [self registerClass:[PlatformCell class] forCellReuseIdentifier:platformCell];
+        [self registerClass:[AccountMoneyCellTableViewCell class] forCellReuseIdentifier:platformCell1];
+
     }
     
     return self;
@@ -41,18 +44,42 @@ static NSString *platformCell = @"PlatformCell";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
-    if (self.platforms.count >0) {
-        CurrencyModel *platform = self.platforms[indexPath.row];
-        
-        
-        PlatformCell *cell = [tableView dequeueReusableCellWithIdentifier:platformCell forIndexPath:indexPath];
-        cell.platform = platform;
-        return cell;
+    if (self.isLocal == YES) {
+        if (self.platforms.count >0) {
+            CurrencyModel *platform = self.platforms[indexPath.row];
+            
+            
+            AccountMoneyCellTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:platformCell1 forIndexPath:indexPath];
+            cell.platform = platform;
+            if (indexPath.row == 0) {
+                
+            }
+            return cell;
+        }else{
+            
+            
+            return nil;
+        }
     }else{
+        if (self.platforms.count >0) {
+            CurrencyModel *platform = self.platforms[indexPath.row];
+            
+            
+            PlatformCell *cell = [tableView dequeueReusableCellWithIdentifier:platformCell forIndexPath:indexPath];
+            cell.platform = platform;
+            if (indexPath.row == 0) {
+                
+            }
+            return cell;
+        }else{
+            
+            
+            return nil;
+        }
         
-        
-        return nil;
     }
+    
+    
     
 }
 

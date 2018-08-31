@@ -230,6 +230,7 @@
         
     }];
     TLTextField *phoneTf = [[TLTextField alloc] initWithFrame:CGRectMake(100, 15, w-95, h) leftTitle:[LangSwitcher switchLang:@"" key:nil] titleWidth:20 placeholder:[LangSwitcher switchLang:@"请输入手机号" key:nil]];
+    
     phoneTf.keyboardType = UIKeyboardTypeNumberPad;
     [self.view addSubview:phoneTf];
     self.phoneTf = phoneTf;
@@ -266,6 +267,9 @@
     
     TLTextField *pwdTf = [[TLTextField alloc] initWithFrame:CGRectMake(margin, pwdLab.yy + 10, w, h) leftTitle:[LangSwitcher switchLang:@"" key:nil] titleWidth:20 placeholder:[LangSwitcher switchLang:@"请输入密码" key:nil]];
     pwdTf.secureTextEntry = YES;
+    pwdTf.returnKeyType = UIReturnKeyNext;
+    [pwdTf addTarget:self action:@selector(next) forControlEvents:UIControlEventEditingDidEndOnExit];
+
 //    pwdTf.keyboardType = UIKeyboardTypePhonePad;
 
     [self.view addSubview:pwdTf];
@@ -282,6 +286,8 @@
     [self.view addSubview:pLab];
     TLTextField *rePwdTf = [[TLTextField alloc] initWithFrame:CGRectMake(margin, pLab.yy + 1, w, h) leftTitle:[LangSwitcher switchLang:@"" key:nil] titleWidth:20 placeholder:[LangSwitcher switchLang:@"确认密码" key:nil]];
     rePwdTf.secureTextEntry = YES;
+    rePwdTf.returnKeyType = UIReturnKeyNext;
+    [rePwdTf addTarget:self action:@selector(next1) forControlEvents:UIControlEventEditingDidEndOnExit];
 
     [self.view addSubview:rePwdTf];
     self.rePwdTf = rePwdTf;
@@ -331,6 +337,19 @@
         make.top.mas_equalTo(rePwdTf.mas_bottom).mas_equalTo(40);
         
     }];
+}
+
+- (void)next
+{
+    [self.pwdTf resignFirstResponder];
+    [self.rePwdTf becomeFirstResponder];
+    
+}
+- (void)next1
+{
+    [self.rePwdTf resignFirstResponder];
+
+    [self changePwd];
 }
 - (void)chooseCountry
 {

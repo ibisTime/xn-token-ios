@@ -6,7 +6,7 @@
   Copyright © 2017年  tianlei. All rights reserved.
 */
 
-"THA WALLET" = "THA WALLET";
+"Theia " = "Theia";
 "创建钱包" = "Create a wallet";
 "导入钱包" = "Import the wallet";
 "我已阅读并同意服务及隐私条款" = "I have read and agreed to the terms of service and privacy";
@@ -45,7 +45,7 @@
 "空投统计" = "";
 "商业应用" = "Business Application";
 "币生币" = "coin to coin";
-"THA星球" = "Planet THA";
+"Theia星球" = "Planet Theia";
 "余币宝" = "Yubibao";
 "实名认证" = "real-name authentication";
 "实名认证成功, 请设置资金密码" = "Success of real-name authentication , Please set up the fund password";
@@ -115,7 +115,7 @@
 "请输入您的邮箱" = "Enter your email address";
 "请输入邮箱" = "Please enter email";
 "请输入验证码" = "Enter code";
-"THA钱包" = "THA Wallet";
+"Theia钱包" = "Theia Wallet";
 "钱包是一款全新的数字货币钱包" = "Wallet is a brand new digital money wallet";
 "为你提高安全丶便捷的一站式管理方案" = "Improve your safety and convenient one-stop management plan";
 "服务时间" = "Service time : AM 9:00 - PM 6:00 ";
@@ -124,7 +124,7 @@
 "修改交易密码" = "Change transaction password";
 "导出私钥" = "to export the private key";
 "请输入交易密码" = "Set the trading password";
-"注意!  THA不储存用户密码,   无法提供找回或重置功能。  如果忘记密码,   用户只能通过自己备份的钱包私钥,   重新导入后设置新密码" = "Attention!THA't store a user's password, retrieve or reset function can not be provided.Such as package forgot password, the user only through their own backup wallet private key, to set a new password after import";
+"注意!  Theia不储存用户密码,   无法提供找回或重置功能。  如果忘记密码,   用户只能通过自己备份的钱包私钥,   重新导入后设置新密码" = "Attention!Theia't store a user's password, retrieve or reset function can not be provided.Such as package forgot password, the user only through their own backup wallet private key, to set a new password after import";
 "请确认交易密码" = "Please confirm the transaction password";
 "密码输入错误" = "Two input passwords inconsistent";
 "交易密码修改成功" = "Password modified successfully";
@@ -393,7 +393,7 @@
 "泄露助记词将导致资产丢失，请认真抄写，切勿截屏" = "Leaking the mnemonic will result in the loss of assets, please y copy carefully, do not screen";
 "钱包导入失败" = "wallet import failed";
 "请记下您的钱包助记词并保存到安全的地方" = "Please remember your wallet mnemonic";
-"钱包助记词用于恢复钱包资产，拥有助记词即可完全控制钱包资产，请务必妥善保管，丢失助记词即丢失钱包资产。THA不存储用户助记词，无法提供找回功能。" = "The wallet mnemonic is used to restore the wallet assets. With the mnemonic, you can completely control the wallet assets. Please keep it safe. If you lose your mnemonic, you will lose your wallet assets. THA does not store user mnemonics and cannot provide a retrieval function.";
+"钱包助记词用于恢复钱包资产，拥有助记词即可完全控制钱包资产，请务必妥善保管，丢失助记词即丢失钱包资产。Theia不存储用户助记词，无法提供找回功能。" = "Theia wallet mnemonic is used to restore the wallet assets. With the mnemonic, you can completely control the wallet assets. Please keep it safe. If you lose your mnemonic, you will lose your wallet assets. Theia does not store user mnemonics and cannot provide a retrieval function.";
 "请输入备份的钱包助记词（12个英文单词），按空格分离" = "Please input the backup wallet mnemonic (12 English words), separated by space";
 "根据你记下的助记词，顺序点击，验证你备份的记助词正确无误" = "According to the mnemonics you wrote down, click in the order to verify that the backup mnemonics you made are correct.";
 "密码修改成功" = "password modified successfully";
@@ -495,8 +495,6 @@
 "马来西亚" = "Malaysia";
 "韩国" = "South Korea";
 "我的收款地址"="My payment address";
-"个人账户就是指中心化钱包,是由Theia替您保管私钥,在中心化钱包中,不存在钱包丢失了无法找回的情况,可以通过身份证找回您的钱包,并且可以让您体验到更多的服务。" = "개인계정은 탈중심화 지갑이고 THA에서 대신 프라이빗키를 보관하고 있습니다. 중심화된 지갑에서는 지갑분실시 되찾을수 있어서 인증만 통과하면 되찾을수 있고 그외 더욱많은 서비스를 이용할수 있습니다.";
-"私钥钱包就是去中心化钱包,在去中心化钱包中,所有的用户身份验证内容,如交易密码,私钥，助记词等都保存在用户手机本地,并不是保存在中心化服务器里面,如果用户误删钱包,忘记备份私钥或者助记词，将无法找到钱包" = "프라이빗 지갑은 탈중심화 지갑이고 탈중심화 지갑관련 모든 신상정보,거래비밀번호,프라이빗키,복구키등 모든 내용은 사용자의 핸드폰에 저장되고 중심화된 서버에 저장되지 않습니다.만약 사용자 실수로 지급을 삭제시 또한 백업해논 프라이빗키 혹은 복구키도 분실되면 지갑은 되찾을수 없습니다.";
 
 "隐私政策" = "Privacy Policy";
 "美元" = "Dollar";
@@ -535,10 +533,10 @@
 "现在写下这些词" = "Now write down these words";
 "您的恢复词是12个，在纸上记下他们并安全的保存它" = "Your have 12 recovery words, write them down on paper and keep it safely.";
 "确认转账" = "Transfer confirmed ";
-"注意！THA不存储用户密码，无法提供找回或重置功能，密码必须要自己备份好。密码用于加密保护私钥，强度也非常重要。" = "Attention! Tha does not store user passwords, can not provide recovery or reset functions, passwords must be backed up well by users. Passwords are used to encrypt the private key, and strength is also important.";
+"注意！Theia不存储用户密码，无法提供找回或重置功能，密码必须要自己备份好。密码用于加密保护私钥，强度也非常重要。" = "Attention! Theia does not store user passwords, can not provide recovery or reset functions, passwords must be backed up well by users. Passwords are used to encrypt the private key, and strength is also important.";
 "免责声明" = "Disclaimer";
-"请确保已备份钱包至安全的地方，THA不承担任何钱包丢失、被盗、忘记密码等产生的资产损失！" = "Please ensure that the wallet has been backed up safely THA does not bear any loss of loss of wallet, stolen, forgotten password and other assets lost!";
-"扫描二维码领取THA红包" = "Scan the QR-code for tha red envelopes";
+"请确保已备份钱包至安全的地方，Theia不承担任何钱包丢失、被盗、忘记密码等产生的资产损失！" = "Please ensure that the wallet has been backed up safely Theia does not bear any loss of loss of wallet, stolen, forgotten password and other assets lost!";
+"扫描二维码领取Theia红包" = "Scan the QR-code for Theia red envelopes";
 "截图分享二维码" = "Screenshot the QR-code for sharing";
 "红包规则" = "Rules of Red Envelope";
 "当前为普通红包" = "This is ordinary red envelopes";
@@ -572,9 +570,9 @@
 "备份钱包" = "Go backup now";
 "请输入资金密码" = "Please inPut Capital password";
 "如何备份钱包?" = "How to backup wallet";
-"THA用户可以通过邀请制收取徒弟，并根据任务引导来教育徒弟，从而获得算力。另外，徒弟使用THA钱包购买量化理财或余币宝，师父可获得徒弟一定比例的收益奖励" = "Global Master and Apprentice Initiative: THA Users can receive apprentice through the invitation system, and instruct apprentice according to the task, thus obtain the calculation force. In addition, the apprentice uses THA Wallet to purchase quantitative financial products or Yubibao, masters can obtain a certain percentage of the Apprentice reward.";
-"THA Wallet为用户提供多种类型的优质理财产品，用户可以使用比特币、以太坊等数字货币购买理财产品而获得收益" = "THA Wallet provides users with a variety of quality management products, users can use Bitcoin, Ethernet and other digital currencies to buy money products and gain income.";
-"余币宝是THA Wallet旗下的数字货币增值服务和活期数字货币管理服务产品。特点是操作简便、低门槛、零手续费、可随取随用，让您更灵活的管理数字资产" = "Yubibao is the digital currency value-added service and demand digital money managemen service product of THA wallet. It is easy to operate, has low threshold, without handling fees,  and are available with access, so that you can manage your digital assets with more flexibility.";
+"Theia用户可以通过邀请制收取徒弟，并根据任务引导来教育徒弟，从而获得算力。另外，徒弟使用Theia钱包购买量化理财或余币宝，师父可获得徒弟一定比例的收益奖励" = "Global Master and Apprentice Initiative: Theia Users can receive apprentice through the invitation system, and instruct apprentice according to the task, thus obtain the calculation force. In addition, the apprentice uses Theia Wallet to purchase quantitative financial products or Yubibao, masters can obtain a certain percentage of the Apprentice reward.";
+"Theia Wallet为用户提供多种类型的优质理财产品，用户可以使用比特币、以太坊等数字货币购买理财产品而获得收益" = "Theia Wallet provides users with a variety of quality management products, users can use Bitcoin, Ethernet and other digital currencies to buy money products and gain income.";
+"余币宝是Theia Wallet旗下的数字货币增值服务和活期数字货币管理服务产品。特点是操作简便、低门槛、零手续费、可随取随用，让您更灵活的管理数字资产" = "Yubibao is the digital currency value-added service and demand digital money managemen service product of Theia wallet. It is easy to operate, has low threshold, without handling fees,  and are available with access, so that you can manage your digital assets with more flexibility.";
 "版本号" = "Version number";
 "Theia版权所有" = "Theia All rights reserved";
 "发数字货币红包、查收发记录和提现" = "Send a digital currency in red envelope,check the receive records and cash the balance";
@@ -583,7 +581,7 @@
 "随存随取、灵活理财" = "Flexible financial management,Save in and cash the balance anytime";
 "重新登陆" = "Register";
 "请重新登陆" = "Please login again";
-"请确保已备份钱包至安全的地方，THA不承担任何钱包丢失、被盗、忘记密码等产生的资产损失!" = "Please ensure that the wallet has been backed up safely THA does not bear any loss of loss of wallet, stolen, forgotten password and other assets lost!";
+"请确保已备份钱包至安全的地方，Theia不承担任何钱包丢失、被盗、忘记密码等产生的资产损失!" = "Please ensure that the wallet has been backed up safely Theia does not bear any loss of loss of wallet, stolen, forgotten password and other assets lost!";
 "请填写付币数量" = "Please input  the number of coins";
 "快" = "fast";
 "慢" = "slow";

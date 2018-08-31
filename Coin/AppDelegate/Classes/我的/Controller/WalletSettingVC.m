@@ -370,6 +370,8 @@
         [TLAlert alertWithMsg:[LangSwitcher switchLang:@"删除成功" key:nil]];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             
+            [[NSUserDefaults standardUserDefaults] setBool:NO forKey:KISBuild];
+            [[NSUserDefaults standardUserDefaults] synchronize];
             TLTabBarController *MineVC = [[TLTabBarController alloc] init];
             
             [UIApplication sharedApplication].keyWindow.rootViewController = MineVC;

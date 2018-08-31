@@ -126,6 +126,11 @@ typedef enum : NSUInteger {
 //    [self setWithdrawFee];
     // Do any additional setup after loading the view.
 }
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    
+    [self.view endEditing:YES];
+}
 
 - (void)loadPwd
 {
@@ -1584,11 +1589,6 @@ typedef enum : NSUInteger {
     
 }
 
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
-{
-    [self.view endEditing:YES];
-    
-}
 
 - (void)pickerEventWithIndex:(NSInteger)index {
     

@@ -100,6 +100,10 @@
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(beginEdit)];
     [textView addGestureRecognizer:tap];
     self.textView = textView;
+    textView.returnKeyType = UIReturnKeyNext;
+
+    
+
     textView.backgroundColor = kWhiteColor;
     textView.textColor = kTextColor;
     textView.font = [UIFont systemFontOfSize:15];
@@ -113,7 +117,8 @@
     
     TLTextField *nameTf = [[TLTextField alloc] initWithFrame:CGRectMake(margin, textView.yy+5, w, h) leftTitle:[LangSwitcher switchLang:@"" key:nil] titleWidth:20 placeholder:[LangSwitcher switchLang:@"钱包名称" key:nil]];
 //    nameTf.secureTextEntry = YES;
-
+    nameTf.returnKeyType = UIReturnKeyNext;
+    [nameTf addTarget:self action:@selector(next) forControlEvents:UIControlEventEditingDidEndOnExit];
     [self.view addSubview:nameTf];
     self.nameTf = nameTf;
 
@@ -123,6 +128,8 @@
     phone7.frame = CGRectMake(margin*2, nameTf.yy, w-30, 1);
     TLTextField *pwdTf = [[TLTextField alloc] initWithFrame:CGRectMake(margin, nameTf.yy+5, w, h) leftTitle:[LangSwitcher switchLang:@"" key:nil] titleWidth:20 placeholder:[LangSwitcher switchLang:@"请输入密码" key:nil]];
 //    pwdTf.maxCount = 6;
+    pwdTf.returnKeyType = UIReturnKeyNext;
+    [pwdTf addTarget:self action:@selector(next1) forControlEvents:UIControlEventEditingDidEndOnExit];
     pwdTf.secureTextEntry = YES;
 //    pwdTf.keyboardType = UIKeyboardTypePhonePad;
 
@@ -141,6 +148,8 @@
     //    pLab.textColor = kTextColor;
     //    [self.view addSubview:pLab];
     TLTextField *rePwdTf = [[TLTextField alloc] initWithFrame:CGRectMake(margin, pwdTf.yy + 1, w, h) leftTitle:[LangSwitcher switchLang:@"" key:nil] titleWidth:20 placeholder:[LangSwitcher switchLang:@"请输入重复密码" key:nil]];
+    rePwdTf.returnKeyType = UIReturnKeyNext;
+    [rePwdTf addTarget:self action:@selector(next2) forControlEvents:UIControlEventEditingDidEndOnExit];
     rePwdTf.secureTextEntry = YES;
 //     rePwdTf.maxCount = 6;
     [self.view addSubview:rePwdTf];
@@ -264,6 +273,23 @@
     }];
     
 }
+- (void)next
+{
+    [self.nameTf resignFirstResponder];
+    [self.pwdTf becomeFirstResponder];
+    
+}
+- (void)next1
+{
+    [self.pwdTf resignFirstResponder];
+    [self.rePwdTf becomeFirstResponder];
+    
+}
+- (void)next2
+{
+    [self.rePwdTf resignFirstResponder];
+}
+
 - (void)importNow
 {
     

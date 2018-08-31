@@ -41,9 +41,13 @@
 @property (nonatomic,copy) NSString *address;
 @property (nonatomic,copy) NSString *priceCNY;
 @property (nonatomic,copy) NSString *priceUSD;
+@property (nonatomic,copy) NSString *priceKRW;
+
 @property (nonatomic,copy) NSString *amountCNY;
 @property (nonatomic,copy) NSString *priceHKD;
 @property (nonatomic,copy) NSString *amountUSD;
+@property (nonatomic,copy) NSString *amountKRW;
+
 @property (nonatomic,copy) NSString *amountHKD;
 @property (nonatomic,copy) NSString *balance;
 

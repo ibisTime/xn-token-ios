@@ -101,7 +101,7 @@
 #define USER_PLACEHOLDER_SMALL [UIImage imageNamed:@"头像"]
 #define PLACEHOLDER_SMALL @"banner"
 #define kCancelIcon @"cancel"
-#define GOOD_PLACEHOLDER_SMALL [UIImage imageNamed:@"banner"]
+#define GOOD_PLACEHOLDER_SMALL [UIImage imageNamed:@"default_pic"]
 #define KLocalMoney @"KLocalMoney"
 #define kDateFormmatter @"MMM dd, yyyy hh:mm:ss aa"
 #define KUserPwd @"userPwd"
@@ -111,7 +111,8 @@
 #define GesturesPassword @"gesturespassword"
 #define KDBVersion @"KDBVersion"
 #define KIS160 @"KIS160"
-#define  KIS170@"KIS170"
+#define  KIS170 @"KIS170"
+#define  KISBuild @"KISBuild"
 
 #pragma mark - 轮播图
 

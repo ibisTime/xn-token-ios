@@ -323,7 +323,7 @@
     //    //工单
     MineModel *helpModel = [MineModel new];
     helpModel.text = [LangSwitcher switchLang:@"帮助中心" key:nil];
-    helpModel.imgName = @"帮助中心";
+    helpModel.imgName = @"帮助中心-1";
     helpModel.action = ^{
         if (![TLUser user].isLogin) {
             TLUserLoginVC *loginVC= [TLUserLoginVC new];
