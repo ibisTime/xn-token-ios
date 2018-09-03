@@ -215,7 +215,7 @@
     UILabel *introduce3 = [UILabel labelWithBackgroundColor:kClearColor textColor:kWhiteColor font:14];
     
 //    introduce3.frame = CGRectMake(kWidth(120), kHeight(456), kScreenWidth - kWidth(120), kHeight(22));
-    introduce3.text = [LangSwitcher switchLang:@"扫描二维码领取THA红包" key:nil];
+    introduce3.text = [LangSwitcher switchLang:@"扫描二维码领取Theia红包" key:nil];
 
     introduce3.textAlignment = NSTextAlignmentCenter;
     [self.popView addSubview:introduce3];
@@ -262,7 +262,7 @@
 
 - (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
 {
-    error ? [TLAlert alertWithError:@"保存失败"] : [TLAlert alertWithSucces:@"保存成功"];
+    error ? [TLAlert alertWithError:[LangSwitcher switchLang:@"保存失败" key:nil]] : [TLAlert alertWithSucces:[LangSwitcher switchLang:@"保存成功" key:nil]];
 }
 
 -(void)RedEnvelopeHeadButton:(NSInteger)tag

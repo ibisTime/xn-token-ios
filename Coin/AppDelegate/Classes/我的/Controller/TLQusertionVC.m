@@ -168,7 +168,7 @@
     [self.bgImage addSubview:lineView];
 
     [self.bgImage addSubview:quoteImagesView];
-    TLTextField *introduceTf = [[TLTextField alloc] initWithFrame:CGRectMake(15, quoteImagesView.yy + 10, kScreenWidth-30, 50) leftTitle:[LangSwitcher switchLang:@"备注(选填)" key:nil] titleWidth:120 placeholder:[LangSwitcher switchLang:@"请留下您的联系方式（推荐邮箱）" key:nil]];
+    TLTextField *introduceTf = [[TLTextField alloc] initWithFrame:CGRectMake(15, quoteImagesView.yy + 10, kScreenWidth-30, 50) leftTitle:[LangSwitcher switchLang:@"备注(选填)" key:nil] titleWidth:120 placeholder:[LangSwitcher switchLang:@"请留下您的联系方式（推荐邮箱)" key:nil]];
     //    introduceTf.secureTextEntry = YES;
     [self.bgImage addSubview:introduceTf];
     introduceTf.leftLbl.font = [UIFont systemFontOfSize:14];

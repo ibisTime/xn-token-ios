@@ -66,7 +66,7 @@
 //    [NSThread sleepForTimeInterval:2];
     
     //服务器环境 //递增金额
-    [AppConfig config].runEnv = RunEnvTest;
+    [AppConfig config].runEnv = RunEnvDev;
     [AppConfig config].isChecking = NO;
 #warning  //pods 更新后会导致wan币转账失败
 //    [AppConfig config].isUploadCheck = YES;
@@ -150,26 +150,42 @@
 }
 - (void)configZendSdk
 {
-//    [ ZDKCoreLogger  setEnabled :YES ];
-//    [ ZDKCoreLogger  setLogLevel :ZDKLogLevelDebug ];
+    [ ZDKCoreLogger  setEnabled :YES ];
+    [ ZDKCoreLogger  setLogLevel :ZDKLogLevelDebug ];
     [ZDKZendesk initializeWithAppId: @"1abb5d09d1ae5884d0f88f76a4368847ee01bffed4f92181"
                            clientId: @"mobile_sdk_client_6e8e6247d8e39ba2b3d6"
                          zendeskUrl: @"https://hzcl.zendesk.com"];
-    [ZDKSupport initializeWithZendesk: [ZDKZendesk instance]];
+    id<ZDKObjCIdentity> userIdentity = [[ZDKObjCAnonymous alloc] initWithName:nil email:nil];
+    [[ZDKZendesk instance] setIdentity:userIdentity];
 
+    [ZDKSupport initializeWithZendesk: [ZDKZendesk instance]];
+    LangType type = [LangSwitcher currentLangType];
+    NSString *lan;
+    if (type == LangTypeSimple || type == LangTypeTraditional) {
+        
+    }else if (type == LangTypeKorean)
+    {
+        lan = @"ko";
+        [ZDKSupport instance].helpCenterLocaleOverride = lan;
+
+        
+    }else{
+        lan = @"en-us";
+        [ZDKSupport instance].helpCenterLocaleOverride = lan;
+
+    }
+
+//    [ZDKLocalization localizedStringWithKey:@"en"];
     // //hc/en-us
 //    [ZDKSupport initializeWithZendesk: [ZDKZendesk instance]];
 //                         zendeskUrl: @"https://hzcl.zendesk.com/hc/ko"];
 //    ZDKRequest
-//    [ZDKLocalization registerTableName:@"ko.strings"];
   
 }
 
 - (void)configUManalytics
 {
     
-   
-
     @try{
         UMConfigInstance.appKey = @"5b73d999f29d9825200001db";//研发
 //        UMConfigInstance.appKey = @"5b73b2e68f4a9d21830002fd";//正式

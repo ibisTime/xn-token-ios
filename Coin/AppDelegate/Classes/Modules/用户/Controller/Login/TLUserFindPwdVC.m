@@ -398,12 +398,12 @@
 
 - (void)changePwd {
     
-    if (![self.phoneTf.text isBlank]) {
-        
-        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入正确的手机号" key:nil]];
-        
-        return;
-    }
+//    if (![self.phoneTf.text isBlank]) {
+//        
+//        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入正确的手机号" key:nil]];
+//        
+//        return;
+//    }
     
     if ([self.captchaView.captchaTf.text isBlank] ) {
         [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入正确的验证码" key:nil]];

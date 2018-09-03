@@ -116,6 +116,7 @@
     TLDataBase *dataBase = [TLDataBase sharedManager];
     NSString *word;
     NSString *btcadd;
+    NSString *pwd;
 
     if ([dataBase.dataBase open]) {
         NSString *sql = [NSString stringWithFormat:@"SELECT Mnemonics,btcaddress  from THAUser where userId = '%@'",[TLUser user].userId];
@@ -125,6 +126,7 @@
         {
             word = [set stringForColumn:@"Mnemonics"];
             btcadd = [set stringForColumn:@"btcaddress"];
+            pwd = [set stringForColumn:@"pwd"];
 
         }
         [set close];
@@ -187,6 +189,22 @@
             [[NSUserDefaults standardUserDefaults] synchronize];
         }
         [data.dataBase close];
+        
+        if ([pwd isBlank]) {
+            TLDataBase *data = [TLDataBase sharedManager];
+            if ([data.dataBase open]) {
+                //            [db executeUpdate:@"create table if not exists LocalWallet(id INTEGER PRIMARY KEY AUTOINCREMENT,walletId text, symbol text, type text ,status text,cname text,unit text,pic1 text,withdrawFeeString text,withfrawFee text,orderNo text,ename text,icon text,pic2 text,pic3 text,address text,IsSelect INTEGER,next text)"];
+                NSString *sql = [NSString stringWithFormat:@"UPDATE THAUser SET PwdKey = '%@' WHERE userId='%@'",@"888888",[TLUser user].userId];
+               
+                BOOL sucess = [data.dataBase executeUpdate:sql];
+                
+                NSLog(@"更新自选状态%d",sucess);
+              
+            }
+            [data.dataBase close];
+
+        }
+        
 //        [self getMyCurrencyList];
         [self queryCenterTotalAmount];
         [self queryMyAmount];
@@ -311,7 +329,7 @@
             CGFloat fx = kDevice_Is_iPhoneX == YES ?15 :27;
 
             weakSelf.currentTableView.frame = CGRectMake(0, 5, kScreenWidth, kScreenHeight);
-            weakSelf.tableView.frame = CGRectMake(0, 5, kScreenWidth, kScreenHeight );
+            weakSelf.tableView.frame = CGRectMake(0, 5, kScreenWidth, kScreenHeight-kTabBarHeight );
             
             [weakSelf.leftButton mas_remakeConstraints:^(MASConstraintMaker *make) {
                 make.left.equalTo(weakSelf.view.mas_left).offset(15);
@@ -558,7 +576,7 @@
     //        make.left.equalTo(@15);
     //        make.height.equalTo(@30);
     //    }];
-    self.tableView = [[PlatformTableView alloc] initWithFrame:CGRectMake(0, kStatusBarHeight+5, kScreenWidth, kScreenHeight ) style:UITableViewStyleGrouped];
+    self.tableView = [[PlatformTableView alloc] initWithFrame:CGRectMake(0, kStatusBarHeight+5, kScreenWidth, kScreenHeight-kTabBarHeight ) style:UITableViewStyleGrouped];
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, kTabBarHeight, 0);
 
     self.tableView.backgroundColor = kWhiteColor;
@@ -577,7 +595,7 @@
     [self.tableView addSubview:self.rightButton];
     self.titleView = [[UIView alloc] init];
     [self.headerView addSubview:self.titleView];
-    self.titleView.backgroundColor = kWhiteColor;
+    self.titleView.backgroundColor = kClearColor;
     CGFloat f4 = self.isClear == YES ?320-30-30 : 350-30-30;
 
     [self.titleView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -722,7 +740,7 @@
         CGFloat h = self.isClear == YES ? 300 : 315;
         self.headerView.frame = CGRectMake(0, 0, kScreenWidth, kHeight(h));
 
-        self.tableView.frame = CGRectMake(0, kStatusBarHeight, kScreenWidth, kScreenHeight);
+        self.tableView.frame = CGRectMake(0, kStatusBarHeight, kScreenWidth, kScreenHeight-kTabBarHeight);
        
         [self.leftButton mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.view.mas_left).offset(15);
@@ -803,7 +821,7 @@
             CGFloat fx = kDevice_Is_iPhoneX == YES ?15 :27;
             
             self.currentTableView.frame = CGRectMake(0, 5, kScreenWidth, kScreenHeight );
-            self.tableView.frame = CGRectMake(0, kStatusBarHeight, kScreenWidth, kScreenHeight );
+            self.tableView.frame = CGRectMake(0, kStatusBarHeight, kScreenWidth, kScreenHeight-kTabBarHeight );
             [self.leftButton mas_remakeConstraints:^(MASConstraintMaker *make) {
                 make.left.equalTo(self.view.mas_left).offset(15);
                 make.bottom.equalTo(self.headerView.mas_bottom).offset(-fx-2);
@@ -1492,7 +1510,9 @@
                     self.headerView.cnyAmountLbl.text = [NSString stringWithFormat:@"₩ %.2f", [cnyStr doubleValue]];
                     
                 }
-                self.headerView.privateMoney.text = [NSString stringWithFormat:@"₩ %.2f", [cnyStr doubleValue]];
+                  double f =  [cnyStr doubleValue] +[[self.headerView.privateMoney.text substringFromIndex:1] doubleValue] ;
+                self.headerView.cnyAmountLbl.text = [NSString stringWithFormat:@"$ %.2f", f] ;
+                self.headerView.LocalMoney.text = [NSString stringWithFormat:@"$ %.2f", [cnyStr doubleValue]];
                 self.headerView.equivalentBtn.text = [NSString stringWithFormat:@"%@(KRW)", [LangSwitcher switchLang:@"总资产" key:nil]];
                 self.headerView.localLbl.text = [NSString stringWithFormat:@"%@(KRW)", [LangSwitcher switchLang:@"私钥钱包" key:nil]];
                 self.headerView.textLbl.text = [NSString stringWithFormat:@"%@(KRW)", [LangSwitcher switchLang:@"个人账户" key:nil]];

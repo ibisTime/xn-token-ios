@@ -369,7 +369,8 @@
 {
     
     CGRect frame = self.view.frame;
-    UIGraphicsBeginImageContext(self.view.size);
+    UIGraphicsBeginImageContextWithOptions(self.view.size, NO, [[UIScreen mainScreen] scale]);
+
     CGContextRef contextRef = UIGraphicsGetCurrentContext();
     [self.view.layer renderInContext:contextRef];
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
@@ -383,8 +384,7 @@
 }
 - (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
 {
-    error ? [TLAlert alertWithError:@"保存失败"] : [TLAlert alertWithSucces:@"保存成功"];
-}
+  error ? [TLAlert alertWithError:[LangSwitcher switchLang:@"保存失败" key:nil]] : [TLAlert alertWithSucces:[LangSwitcher switchLang:@"保存成功" key:nil]];}
 
 - (void)addRecodeItem {
     [UIBarButtonItem addLeftItemWithImageName:@"返回1" frame:CGRectMake(0, 0, 40, 44) vc:self action:@selector(backTop)];

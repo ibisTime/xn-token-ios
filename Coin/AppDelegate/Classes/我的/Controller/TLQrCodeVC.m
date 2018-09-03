@@ -202,7 +202,7 @@
     }];
     
     self.nameLable = [[UILabel alloc]init];
-    self.nameLable.text = [NSString stringWithFormat:@"%@%@,%@",[LangSwitcher switchLang:@"我是" key:nil],[TLUser user].nickname,[LangSwitcher switchLang:@"邀请您使用Thiea钱包" key:nil]];
+    self.nameLable.text = [NSString stringWithFormat:@"%@%@,%@",[LangSwitcher switchLang:@"我是" key:nil],[TLUser user].nickname,[LangSwitcher switchLang:@"邀请您使用Thea钱包" key:nil]];
     self.nameLable.textAlignment = NSTextAlignmentCenter;
     self.nameLable.font = Font(14);
     self.nameLable.textColor = kTextBlack;

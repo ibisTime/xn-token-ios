@@ -1380,7 +1380,7 @@ typedef enum : NSUInteger {
     
     [self.view endEditing:YES];
     
-    if ([self.balanceTF.text isEqualToString:@"请输入接收地址地址或扫码"]) {
+    if ([self.balanceTF.text isBlank]) {
         
         [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请选择地址地址" key:nil] ];
         return ;
@@ -1388,7 +1388,7 @@ typedef enum : NSUInteger {
     
     CGFloat amount = [self.tranAmountTF.text doubleValue];
     
-    if (amount <= 0 || ![self.tranAmountTF.text valid]) {
+    if (amount <= 0 || [self.tranAmountTF.text isBlank]) {
         
         [TLAlert alertWithInfo:@"转账金额需大于0"];
         return ;

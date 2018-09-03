@@ -52,7 +52,7 @@
 #import "TLinviteVC.h"
 #import "TLMeSetting.h"
 
-@interface TLMineVC ()<MineHeaderSeletedDelegate, UINavigationControllerDelegate>
+@interface TLMineVC ()<MineHeaderSeletedDelegate, UINavigationControllerDelegate,ZDKHelpCenterArticleRatingStateProtocol,ZDKHelpCenterConversationsUIDelegate>
 
 //@property (nonatomic, strong) FBKVOController *chatKVOCtrl;   czy
 
@@ -333,20 +333,20 @@
             };
             return ;
         }
-//        HTMLStrVC *htmlVC = [HTMLStrVC new];
-//        htmlVC.type = HTMLTypeCommonProblem;
-        //                 [self.navigationController pushViewController:htmlVC animated:YES];
 
-//        ZDKHelpCenterUiConfiguration  *  hcConfig  =  [ ZDKHelpCenterUiConfiguration  new ];
-//        [ hcConfig  setGroupType :ZDKHelpCenterOverviewGroupTypeCategory ];
-//        [ hcConfig  setGroupIds :@ [ @ 1234 , @ 5678 ] ];
-        //         设置界面的代理
-        //                [ZDKHelpCenter setUIDelegate:weakSelf];
-      
-//        注册用户的身份,管理端可以看到这些信息
         
+        ZDKRequestUiConfiguration *c = [[ZDKRequestUiConfiguration alloc] init];
+       
         UIViewController  * helpCenter  =  [ ZDKHelpCenterUi  buildHelpCenterOverviewWithConfigs :@[]];
+        ZDKTheme * theme = [ZDKTheme currentTheme];
         
+        
+        // Set the theme properties
+        theme.primaryColor = [UIColor colorWithRed:34.0f/255.0f green:34.0f/255.0f blue:48.0f/255.0f alpha:1.0f];
+        
+        // Apply the change
+//        [theme apply];
+        //ZDKHelpCenterUi.buildHelpCenterOverview.uiDelegate
 
         [ self.navigationController pushViewController :helpCenter  animated :YES ];
     };
@@ -691,6 +691,7 @@
 //    });
 //
 //}
+
 
 
 @end

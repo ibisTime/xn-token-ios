@@ -647,7 +647,7 @@
 "总收益" = "Total earnings";
 "到期时间" = "Due date";
 "我是" = "I'm";
-"邀请您使用Thiea钱包" = "inviting you to try out Theia Wallet";
+"邀请您使用Theia钱包" = "inviting you to try out Theia Wallet";
 "购买成功" = "Purchase successful";
 "购买" = "Purchase";
 
@@ -729,6 +729,16 @@
 "加载失败" = "Load failed";
 "全部加载完成" = "No more data to be loaded";
 
+"请留下您的联系方式（推荐邮箱)" = "Please leave your contact info (email address is highly recommended)";
+"保存二维码" = "Save QR code";
+"保存成功" = "Save successfully";
+"保存失败" = "Save failed";
+"超过红包最大个数限制" = "Exceed maximum number limit for sending out gifts";
+"超过红包最大金额限制" = "Exceed maximum amount limit for sending out gifts";
+"单个红包不能小于0.001" = "Every gift's amount should be no less than 0.001";
+"不存在的红包类型" = "Nonexistent gift type";
+"红包错误，请联系管理员" = "Gift error, please contact admin";
+"红包已过期，下次记得早点来" = "Gift has expired, remember to open it sooner next time";
 
 
 
