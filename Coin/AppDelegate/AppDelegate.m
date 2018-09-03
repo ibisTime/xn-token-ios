@@ -150,22 +150,19 @@
 }
 - (void)configZendSdk
 {
-    [ ZDKCoreLogger  setEnabled :YES ];
-    [ ZDKCoreLogger  setLogLevel :ZDKLogLevelDebug ];
-    [ZDKZendesk initializeWithAppId: @"7c57b7ae871f2047848c4df5cf93ff82900fd7b50e61cda0"
-                           clientId: @"mobile_sdk_client_6e8970b59d1d4045a373"
-                         zendeskUrl: @"https://theiahelp1.zendesk.com/hc/ko"];
-    [ZDKLocalization printAllKeys];
-    [ZDKHelpCenterSettings initialize];
+//    [ ZDKCoreLogger  setEnabled :YES ];
+//    [ ZDKCoreLogger  setLogLevel :ZDKLogLevelDebug ];
+    [ZDKZendesk initializeWithAppId: @"1abb5d09d1ae5884d0f88f76a4368847ee01bffed4f92181"
+                           clientId: @"mobile_sdk_client_6e8e6247d8e39ba2b3d6"
+                         zendeskUrl: @"https://hzcl.zendesk.com"];
+    [ZDKSupport initializeWithZendesk: [ZDKZendesk instance]];
+
     // //hc/en-us
 //    [ZDKSupport initializeWithZendesk: [ZDKZendesk instance]];
 //                         zendeskUrl: @"https://hzcl.zendesk.com/hc/ko"];
 //    ZDKRequest
-    [ZDKSupport initializeWithZendesk: [ZDKZendesk instance]];
 //    [ZDKLocalization registerTableName:@"ko.strings"];
-    id<ZDKObjCIdentity> userIdentity = [[ZDKObjCAnonymous alloc] initWithName:nil email:nil];
-    [[ZDKZendesk instance] setIdentity:userIdentity];
-    [[ZDKSupport instance] setHelpCenterLocaleOverride:@"ko"];
+  
 }
 
 - (void)configUManalytics

@@ -26,7 +26,6 @@
 @implementation WalletNewFeaturesVC
 
 - (void)viewDidLoad {
-    self.title = [LangSwitcher switchLang:@"导入成功" key:nil];
 
     [super viewDidLoad];
     [self initSubViews];
@@ -49,7 +48,14 @@
     self.nameLable = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:18];
     //    self.title = [LangSwitcher switchLang:@"我的" key:nil];
     [self.view addSubview:self.nameLable];
-    self.nameLable.text = [LangSwitcher switchLang:@"导入成功" key:nil];
+    
+    if (self.isimport == YES) {
+        self.nameLable.text = [LangSwitcher switchLang:@"导入成功" key:nil];
+
+    }else{
+        self.nameLable.text = [LangSwitcher switchLang:@"备份成功" key:nil];
+
+    }
     [self.nameLable mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.iconImage.mas_bottom).offset(28);
         make.centerX.equalTo(self.view.mas_centerX);

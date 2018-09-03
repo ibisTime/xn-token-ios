@@ -367,6 +367,7 @@
             [TLAlert alertWithMsg:text];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 WalletNewFeaturesVC * newVC = [WalletNewFeaturesVC new];
+                newVC.isimport = NO;
                 //        [self.navigationController pushViewController:newVC animated:YES];
                 [UIApplication sharedApplication].keyWindow.rootViewController = newVC;
                 return ;

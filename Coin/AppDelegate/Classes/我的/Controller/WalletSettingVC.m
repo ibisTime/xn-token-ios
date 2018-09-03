@@ -197,31 +197,34 @@
                               
                           } confirm:^(UIAlertAction *action, UITextField *textField) {
                               TLDataBase *dataBase = [TLDataBase sharedManager];
-                              NSString *word;
+                              NSString *pwd;
                               if ([dataBase.dataBase open]) {
                                   NSString *sql = [NSString stringWithFormat:@"SELECT PwdKey from THAUser where userId = '%@'",[TLUser user].userId];
                                   //        [sql appendString:[TLUser user].userId];
                                   FMResultSet *set = [dataBase.dataBase executeQuery:sql];
                                   while ([set next])
                                   {
-                                      word = [set stringForColumn:@"PwdKey"];
+                                      pwd = [set stringForColumn:@"PwdKey"];
                                       
                                   }
                                   [set close];
                               }
                               [dataBase.dataBase close];
-                              if ([word isEqualToString:textField.text]) {
+                              if ([pwd isEqualToString:textField.text]) {
                                   
                                   TLDataBase *dataBase = [TLDataBase sharedManager];
                                   NSString *word;
+                                  NSString *name;
+
                                   if ([dataBase.dataBase open]) {
-                                      NSString *sql = [NSString stringWithFormat:@"SELECT Mnemonics from THAUser where userId = '%@'",[TLUser user].userId];
+                                      NSString *sql = [NSString stringWithFormat:@"SELECT Mnemonics,name from THAUser where userId = '%@'",[TLUser user].userId];
                                       //        [sql appendString:[TLUser user].userId];
                                       FMResultSet *set = [dataBase.dataBase executeQuery:sql];
                                       while ([set next])
                                       {
                                           word = [set stringForColumn:@"Mnemonics"];
-                                          
+                                          name = [set stringForColumn:@"name"];
+
                                       }
                                       [set close];
                                   }
@@ -229,6 +232,8 @@
                                   
                                   if (word.length > 0) {
                                       vc.mnemonics = word;
+                                      vc.pwd = pwd;
+                                      vc.name = name;
                                       [self.navigationController pushViewController:vc animated:YES];
 
                                   }else{
@@ -340,7 +345,7 @@
         return;
     }
     
-    [TLAlert alertWithTitle:[LangSwitcher switchLang:@"删除钱包" key:nil] msg:[LangSwitcher switchLang:@"请确保已备份钱包至安全的地方，THA不承担任何钱包丢失、被盗、忘记密码等产生的资产损失!" key:nil] confirmMsg:[LangSwitcher switchLang:@"确定" key:nil] cancleMsg:[LangSwitcher switchLang:@"取消" key:nil] maker:self cancle:^(UIAlertAction *action) {
+    [TLAlert alertWithTitle:[LangSwitcher switchLang:@"删除钱包" key:nil] msg:[LangSwitcher switchLang:@"请确保已备份钱包至安全的地方，Theia不承担任何钱包丢失、被盗、忘记密码等产生的资产损失!" key:nil] confirmMsg:[LangSwitcher switchLang:@"确定" key:nil] cancleMsg:[LangSwitcher switchLang:@"取消" key:nil] maker:self cancle:^(UIAlertAction *action) {
         
         
     } confirm:^(UIAlertAction *action) {

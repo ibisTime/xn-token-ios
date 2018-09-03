@@ -367,7 +367,17 @@
 
 - (void)saveCode
 {
-       UIImageWriteToSavedPhotosAlbum(self.qrIV.image, self, @selector(image: didFinishSavingWithError: contextInfo:), nil);
+    
+    CGRect frame = self.view.frame;
+    UIGraphicsBeginImageContext(self.view.size);
+    CGContextRef contextRef = UIGraphicsGetCurrentContext();
+    [self.view.layer renderInContext:contextRef];
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+
+    
+       UIImageWriteToSavedPhotosAlbum(image, self, @selector(image: didFinishSavingWithError: contextInfo:), nil);
     
     
 }

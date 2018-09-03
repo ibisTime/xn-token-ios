@@ -346,7 +346,7 @@
 //        注册用户的身份,管理端可以看到这些信息
         
         UIViewController  * helpCenter  =  [ ZDKHelpCenterUi  buildHelpCenterOverviewWithConfigs :@[]];
-        NSLog(@"locale%@",[ZDKHelpCenterSettings new].locale);
+        
 
         [ self.navigationController pushViewController :helpCenter  animated :YES ];
     };

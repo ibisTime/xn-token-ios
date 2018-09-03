@@ -444,7 +444,7 @@
 - (void)confirm {
     
     
-    if (![self.phoneTf.text isPhoneNum]) {
+    if ([self.phoneTf.text isBlank]) {
         
         [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入正确的手机号" key:nil]];
         
@@ -474,13 +474,13 @@
         }
     }
     
-    if (!self.captchaView.captchaTf.text) {
+    if ([self.captchaView.captchaTf.text isBlank]) {
         [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入正确的验证码" key:nil]];
         
         return;
     }
     
-    if ((!self.pwdTf.text )) {
+    if ([self.pwdTf.text isBlank]) {
         
         [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入密码" key:nil]];
         return;

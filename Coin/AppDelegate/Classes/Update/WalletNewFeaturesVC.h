@@ -9,5 +9,6 @@
 #import "TLBaseVC.h"
 
 @interface WalletNewFeaturesVC : TLBaseVC
+@property (nonatomic ,assign) BOOL  isimport;
 
 @end

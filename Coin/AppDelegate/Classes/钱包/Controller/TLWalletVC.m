@@ -132,7 +132,7 @@
     [dataBase.dataBase close];
 //    [self queryTotalAmount];
     if (word != nil && word.length > 0) {
-       BOOL isBuild = [[NSUserDefaults standardUserDefaults] objectForKey:KISBuild];
+       BOOL isBuild = [[NSUserDefaults standardUserDefaults] boolForKey:KISBuild];
         if (isBuild == YES) {
             [self saveLocalWalletData];
             [self saveLocalWallet];
@@ -312,6 +312,7 @@
 
             weakSelf.currentTableView.frame = CGRectMake(0, 5, kScreenWidth, kScreenHeight);
             weakSelf.tableView.frame = CGRectMake(0, 5, kScreenWidth, kScreenHeight );
+            
             [weakSelf.leftButton mas_remakeConstraints:^(MASConstraintMaker *make) {
                 make.left.equalTo(weakSelf.view.mas_left).offset(15);
                 make.bottom.equalTo(weakSelf.headerView.mas_bottom).offset(-fx);
@@ -558,7 +559,8 @@
     //        make.height.equalTo(@30);
     //    }];
     self.tableView = [[PlatformTableView alloc] initWithFrame:CGRectMake(0, kStatusBarHeight+5, kScreenWidth, kScreenHeight ) style:UITableViewStyleGrouped];
-    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 30, 0);
+    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, kTabBarHeight, 0);
+
     self.tableView.backgroundColor = kWhiteColor;
     self.tableView.refreshDelegate = self;
     self.tableView.tableHeaderView = self.headerView;
@@ -1266,7 +1268,20 @@
 - (void)loadSum
 {
   
-    self.headerView.cnyAmountLbl.text = [NSString stringWithFormat:@"%.2f",[self.headerView.LocalMoney.text doubleValue] + [self.headerView.privateMoney.text doubleValue]] ;
+    if ([[TLUser user].localMoney isEqualToString:@"USD"]) {
+  self.headerView.cnyAmountLbl.text = [NSString stringWithFormat:@"￥ %.2f",[self.headerView.LocalMoney.text doubleValue] + [self.headerView.privateMoney.text doubleValue]] ;
+        
+    }else if ([[TLUser user].localMoney isEqualToString:@"KRW"])
+    {
+  self.headerView.cnyAmountLbl.text = [NSString stringWithFormat:@"₩ %.2f",[self.headerView.LocalMoney.text doubleValue] + [self.headerView.privateMoney.text doubleValue]] ;
+        
+    }
+    
+    else{
+  self.headerView.cnyAmountLbl.text = [NSString stringWithFormat:@"¥ %.2f",[self.headerView.LocalMoney.text doubleValue] + [self.headerView.privateMoney.text doubleValue]] ;
+        
+    }
+  
     [self.headerView setNeedsDisplay];
     
 }
@@ -1467,7 +1482,7 @@
 
                 NSString *hkdStr = [responseObject[@"data"][@"totalAmountHKD"] convertToSimpleRealMoney];
                 
-                self.headerView.hkdAmountLbl.text = [NSString stringWithFormat:@"%@CNY", hkdStr];
+//                self.headerView.hkdAmountLbl.text = [NSString stringWithFormat:@"%@CNY", hkdStr];
                 [self.headerView setNeedsDisplay];
 
             } else if ([[TLUser user].localMoney isEqualToString:@"KRW"])
@@ -1484,9 +1499,8 @@
                 [self.headerView setNeedsDisplay];
                 
             }
-                
-                
-            {
+           else
+                {
                 double f =  [cnyStr doubleValue]+[[self.headerView.privateMoney.text substringFromIndex:1] doubleValue] ;
                 self.headerView.cnyAmountLbl.text = [NSString stringWithFormat:@"¥ %.2f", f];
 //                self.headerView.cnyAmountLbl.text = [NSString stringWithFormat:@"¥ %.2f", [cnyStr doubleValue]];

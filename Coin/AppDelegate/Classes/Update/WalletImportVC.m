@@ -387,6 +387,7 @@
             [TLAlert alertWithMsg:[LangSwitcher switchLang:@"导入成功" key:nil]];
 
             WalletNewFeaturesVC *newVC = [WalletNewFeaturesVC new];
+            newVC.isimport = YES;
             [UIApplication sharedApplication].keyWindow.rootViewController = newVC;
 //            RevisePassWordVC *vc = [[RevisePassWordVC alloc] init];
 //            vc.IsImport = YES;
@@ -405,6 +406,7 @@
             [TLAlert alertWithMsg:[LangSwitcher switchLang:@"导入成功" key:nil]];
 
             WalletNewFeaturesVC *newVC = [WalletNewFeaturesVC new];
+            newVC.isimport = YES;
             [UIApplication sharedApplication].keyWindow.rootViewController = newVC;
         }
         

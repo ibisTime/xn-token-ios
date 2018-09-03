@@ -105,8 +105,24 @@
                 
             }
         }
-        // 此处 巨坑
-       
+        //
+        switch ([LangSwitcher currentLangType]) {
+            case LangTypeKorean:
+                self.parameters[@"language"] = @"KO";
+                
+                break;
+            case LangTypeEnglish:
+                self.parameters[@"language"] = @"EN";
+                
+                break;
+            case LangTypeSimple:
+                self.parameters[@"language"] = @"ZH_CN";
+                
+                break;
+                
+            default:
+                break;
+        }
         
         if (self.ISparametArray == YES) {
             self.parameters[@"systemCode"] = nil;
@@ -146,17 +162,17 @@
     
     return [self.manager POST:self.url parameters:self.parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
       
-//      [HttpLogger logDebugInfoWithResponse:task.response apiName:self.code resposeString:responseObject request:task.originalRequest error:nil];
-//
-//      //打印JSON字符串
-//      [HttpLogger logJSONStringWithResponseObject:responseObject];
-//      if (!self.disableLog && [AppConfig config].runEnv != RunEnvRelease) {
-//
-//          [HttpLogger logDebugInfoWithResponse:task.response apiName:self.code resposeString:responseObject request:task.originalRequest error:nil];
-//
-//          //打印JSON字符串
-//          [HttpLogger logJSONStringWithResponseObject:responseObject];
-//      }
+      [HttpLogger logDebugInfoWithResponse:task.response apiName:self.code resposeString:responseObject request:task.originalRequest error:nil];
+
+      //打印JSON字符串
+      [HttpLogger logJSONStringWithResponseObject:responseObject];
+      if (!self.disableLog && [AppConfig config].runEnv != RunEnvRelease) {
+
+          [HttpLogger logDebugInfoWithResponse:task.response apiName:self.code resposeString:responseObject request:task.originalRequest error:nil];
+
+          //打印JSON字符串
+          [HttpLogger logJSONStringWithResponseObject:responseObject];
+      }
       if(self.showView){
           
           [TLProgressHUD dismiss];
@@ -168,55 +184,11 @@
               success(responseObject);
           }
           
-      }else if ([responseObject[@"errorCode"] isEqual:@"3"])
-      {
-          if ([responseObject[@"errorCode"] isEqual:@"HB000001"])
-          {
-              [TLAlert alertWithInfo:[LangSwitcher switchLang:@"超过红包最大个数限制" key:nil]];
-              
-          }else if ([responseObject[@"errorCode"] isEqual:@"HB000002"])
-          {
-              [TLAlert alertWithInfo:[LangSwitcher switchLang:@"超过红包最大金额限制" key:nil]];
-              
-          }else if ([responseObject[@"errorCode"] isEqual:@"HB000003"])
-          {
-              [TLAlert alertWithInfo:[LangSwitcher switchLang:@"单个红包不能小于0.001" key:nil]];
-              
-          }else if ([responseObject[@"errorCode"] isEqual:@"HB000004"])
-          {
-              [TLAlert alertWithInfo:[LangSwitcher switchLang:@"不存在的红包类型" key:nil]];
-              
-          }else if ([responseObject[@"errorCode"] isEqual:@"HB000005"])
-          {
-              [TLAlert alertWithInfo:[LangSwitcher switchLang:@"红包错误，请联系管理员" key:nil]];
-              
-          }else if ([responseObject[@"errorCode"] isEqual:@"HB000006"])
-          {
-              [TLAlert alertWithInfo:[LangSwitcher switchLang:@"红包已过期，下次记得早点来" key:nil]];
-              
-          }else if ([responseObject[@"errorCode"] isEqual:@"HB000007"])
-          {
-              [TLAlert alertWithInfo:[LangSwitcher switchLang:@"红包已抢完" key:nil]];
-              
-          }else if ([responseObject[@"errorCode"] isEqual:@"HB000008"])
-          {
-              [TLAlert alertWithInfo:[LangSwitcher switchLang:@"红包不存在" key:nil]];
-              
-          }
-          else if ([responseObject[@"errorCode"] isEqual:@"HB000009"])
-          {
-              [TLAlert alertWithInfo:[LangSwitcher switchLang:@"红包不存在" key:nil]];
-          }
-          else if ([responseObject[@"errorCode"] isEqual:@"AC000000"])
-          {
-              [TLAlert alertWithInfo:[LangSwitcher switchLang:@"账户可用余额不足" key:nil]];
-          }
       }
-     
       else {
           
           if (failure) {
-              failure(nil);
+              failure(responseObject);
           }
           
           if ([responseObject[@"errorCode"] isEqual:@"4"]) {

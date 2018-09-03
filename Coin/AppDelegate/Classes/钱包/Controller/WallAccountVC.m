@@ -118,7 +118,15 @@
 
 - (void)initPlaceHolderView {
     
-    self.placeHolderView = [[UIView alloc] initWithFrame:CGRectMake(0, 240, kScreenWidth,  40)];
+    self.placeHolderView = [[UIView alloc] init];
+    [self.view addSubview:self.placeHolderView];
+    
+    [self.placeHolderView mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.centerY.equalTo(self.view.mas_centerY);
+        make.centerX.equalTo(self.view.mas_centerX);
+        
+    }];
 
     UILabel *textLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor2 font:14.0];
     
@@ -139,7 +147,7 @@
     self.tableView = [[BillTableView alloc]
                       initWithFrame:CGRectMake(0, kHeight(90), kScreenWidth, kSuperViewHeight-kTabBarHeight)
                       style:UITableViewStyleGrouped];
-    self.tableView.placeHolderView = self.placeHolderView;
+   
     self.tableView.backgroundColor = kWhiteColor;
     self.tableView.refreshDelegate = self;
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, kTabBarHeight, 0);

@@ -327,9 +327,9 @@
     NSString *mAmount = [CoinUtil convertToRealCoin:model.minAmount coin:coin.symbol];
     NSString *sAmount = [CoinUtil convertToRealCoin:model.increAmount coin:coin.symbol];
 
-    self.beiginLableDetail.text = [NSString stringWithFormat:@"%.2f%@ (%@%@%@)",[mAmount floatValue],model.symbol,[LangSwitcher switchLang:@"每人限购" key:nil],buyAmount,model.symbol];
-      self.leftLableDetail.text = [NSString stringWithFormat:@"%.2f%@",[salemount floatValue],model.symbol];
-       self.sumLableDetail.text = [NSString stringWithFormat:@"%.2f%@",[sAmount floatValue],model.symbol];
+    self.beiginLableDetail.text = [NSString stringWithFormat:@"%@%@ (%@%@%@)",@(mAmount.floatValue),model.symbol,[LangSwitcher switchLang:@"每人限购" key:nil],buyAmount,model.symbol];
+      self.leftLableDetail.text = [NSString stringWithFormat:@"%@%@",@(salemount.floatValue),model.symbol];
+       self.sumLableDetail.text = [NSString stringWithFormat:@"%@%@",@(sAmount.floatValue),model.symbol];
 //    self.leaveLable.text =[NSString stringWithFormat:@"%@ %@%@",[LangSwitcher switchLang:@"剩余" key:nil],model.avilAmount,model.symbol];
     //    self.nameLab.text = model.payNote; m1.name = @"币币赢第二期";
 //    m1.symbol = @"BTC";
@@ -344,5 +344,9 @@
     
 }
 
+- (NSString*)removeFloatAllZeroByString:(NSString *)testNumber{
+    NSString * outNumber = [NSString stringWithFormat:@"%@",@(testNumber.floatValue)];
+    return outNumber;
+}
 
 @end

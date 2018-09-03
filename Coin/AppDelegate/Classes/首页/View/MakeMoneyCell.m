@@ -239,9 +239,9 @@
     {
         
         NSString *s = [LangSwitcher switchLang:@"剩余" key:nil];
-        NSString *m =[NSString stringWithFormat:@" %.2f%@",[avilAmount floatValue],model.symbol];
+        NSString *m =[NSString stringWithFormat:@" %@%@",@(avilAmount.floatValue),model.symbol];
 
-        NSString *str = [NSString stringWithFormat:@"%@ %.2f%@",[LangSwitcher switchLang:@"剩余" key:nil],[avilAmount floatValue],model.symbol];
+        NSString *str = [NSString stringWithFormat:@"%@ %@%@",[LangSwitcher switchLang:@"剩余" key:nil],@(avilAmount.floatValue),model.symbol];
         NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:str];
             [attrStr addAttribute:NSForegroundColorAttributeName
                             value:kTextBlack

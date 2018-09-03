@@ -149,7 +149,7 @@
     
     UILabel *topLable = [UILabel labelWithBackgroundColor:[UIColor colorWithRed:243/255.0 green:244/255.0 blue:247/255.0 alpha:1.0] textColor:kTextColor font:11];
     topLable.numberOfLines = 0;
-    topLable.text = [LangSwitcher switchLang:@"注意！THA不存储用户密码，无法提供找回或重置功能，密码必须要自己备份好。密码用于加密保护私钥，强度也非常重要。" key:nil];
+    topLable.text = [LangSwitcher switchLang:@"注意！Theia不存储用户密码，无法提供找回或重置功能，密码必须要自己备份好。密码用于加密保护私钥，强度也非常重要。" key:nil];
     [whiteView addSubview:topLable];
     [topLable mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(whiteView.mas_left).offset(15);

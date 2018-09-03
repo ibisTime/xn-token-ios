@@ -1189,7 +1189,11 @@ typedef enum : NSUInteger {
                
                 self.blanceFree.text = [NSString stringWithFormat:@"%.0f %@", ([self.priceFast floatValue] - [self.priceSlow floatValue])*value,@"sat/b"];
                 self.btcPrice = ([self.priceFast floatValue] - [self.priceSlow floatValue]) *value;
+                if (([self.priceFast floatValue] - [self.priceSlow floatValue])*value < [self.priceSlow floatValue]) {
+                    self.blanceFree.text = [NSString stringWithFormat:@"%@ %@",self.priceSlow,@"sat/b"];
 
+                }
+                
                 self.pricr = [NSString stringWithFormat:@"%f",[self.pricr intValue]*value];
             }else{
                 
