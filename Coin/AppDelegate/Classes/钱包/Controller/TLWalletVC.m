@@ -119,14 +119,14 @@
     NSString *pwd;
 
     if ([dataBase.dataBase open]) {
-        NSString *sql = [NSString stringWithFormat:@"SELECT Mnemonics,btcaddress  from THAUser where userId = '%@'",[TLUser user].userId];
+        NSString *sql = [NSString stringWithFormat:@"SELECT Mnemonics,btcaddress,PwdKey  from THAUser where userId = '%@'",[TLUser user].userId];
         //        [sql appendString:[TLUser user].userId];
         FMResultSet *set = [dataBase.dataBase executeQuery:sql];
         while ([set next])
         {
             word = [set stringForColumn:@"Mnemonics"];
             btcadd = [set stringForColumn:@"btcaddress"];
-            pwd = [set stringForColumn:@"pwd"];
+            pwd = [set stringForColumn:@"PwdKey"];
 
         }
         [set close];
@@ -148,7 +148,7 @@
 //        [self getMyCurrencyList];
      
         BOOL HasChecked =  [[NSUserDefaults standardUserDefaults] boolForKey:KIS170];
-        if (btcadd != nil && btcadd.length > 0) {
+        if (btcadd != nil && btcadd.length > 0 && pwd !=nil) {
             return;
         }
       
@@ -190,7 +190,7 @@
         }
         [data.dataBase close];
         
-        if ([pwd isBlank]) {
+        if (pwd==nil ) {
             TLDataBase *data = [TLDataBase sharedManager];
             if ([data.dataBase open]) {
                 //            [db executeUpdate:@"create table if not exists LocalWallet(id INTEGER PRIMARY KEY AUTOINCREMENT,walletId text, symbol text, type text ,status text,cname text,unit text,pic1 text,withdrawFeeString text,withfrawFee text,orderNo text,ename text,icon text,pic2 text,pic3 text,address text,IsSelect INTEGER,next text)"];
