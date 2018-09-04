@@ -450,11 +450,11 @@
 "暂无可用币种" = "No currency available";
 "请先设置支付密码" = "Please set the payment password first";
 "红包个数最少为1个" = "The minimum number of red packets is 1";
-"请输入要发红包数量" = "Please input the number of red packets to be sent";
+"请输入红包个数" = "Please input the number of red packets to be sent";
 "数量最小为0.001个" = "The minimum amount is 0.001";
-"请输入要发的数量" = "Please input the quantity to be sent";
+"请输入要发的数量" = "Please input the quantity";
 "请选择代币" = "Please select tokens";
-"请输入单个数量" = "Please input quantity";
+"请输入代币数量" = "Please input token quantity";
 "请输入总数量" = "Please input the total quantity";
 "暂无抢到的红包" = "None";
 "请求接口错误" = "Request interface error";

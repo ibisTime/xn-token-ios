@@ -131,14 +131,19 @@
         
         NSString* t = [CoinUtil convertToRealCoin:currency.balance coin:currency.symbol];
        
-        self.textLbl.text = [NSString stringWithFormat:@"¥%.6f ",[t floatValue]];
+        self.textLbl.text = [NSString stringWithFormat:@"%.6f%@ ",[t floatValue],currency.symbol];
         //    NSString *rightAmount = [platform.inAmountString subNumber:platform.addAmountString];
         
         //对应币种价格
         if ([[TLUser user].localMoney isEqualToString:@"USD"]) {
             self.amountLbl.text = [NSString stringWithFormat:@"≈%.2f USD", [currency.amountUSD doubleValue]];
 
-        }else{
+        }else if ([[TLUser user].localMoney isEqualToString:@"KRW"])
+        {
+            self.amountLbl.text = [NSString stringWithFormat:@"≈%.2f KRW", [currency.amountKRW doubleValue]];
+
+        }
+        else{
             
             self.amountLbl.text = [NSString stringWithFormat:@"≈%.2f CNY", [currency.amountCNY doubleValue]];
 
@@ -173,7 +178,10 @@
         if ([[TLUser user].localMoney isEqualToString:@"USD"]) {
             self.amountLbl.text = [NSString stringWithFormat:@"≈%.2fUSD", [currency.amountUSD doubleValue]];
 
-        }else{
+        }else if ([[TLUser user].localMoney isEqualToString:@"KRW"])
+            self.amountLbl.text = [NSString stringWithFormat:@"≈%.2fKRW", [currency.amountKRW doubleValue]];
+
+        else{
             
             self.amountLbl.text = [NSString stringWithFormat:@"≈%.2fCNY", [currency.amountCNY doubleValue]];
 

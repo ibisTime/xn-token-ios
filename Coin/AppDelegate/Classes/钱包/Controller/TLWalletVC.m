@@ -741,13 +741,13 @@
             self.tableView.isLocal = NO;
         self.addButton.hidden = YES;
         CGFloat fx = kDevice_Is_iPhoneX == YES ?15 :7;
-        if (kDevice_Is_iPhoneX) {
-            fx = self.isClear == YES ?fx-10 : fx;
-
-        }else{
-            
-            
-        }
+//        if (kDevice_Is_iPhoneX) {
+//            fx = self.isClear == YES ?fx-10 : fx;
+//
+//        }else{
+//
+//
+//        }
 
         CGFloat h = self.isClear == YES ? 300 : 315;
         self.headerView.frame = CGRectMake(0, 0, kScreenWidth, kHeight(h));
@@ -832,15 +832,15 @@
 //            CGFloat f2 = kDevice_Is_iPhoneX == YES ?15 :27;
 
             self.headerView.frame = CGRectMake(0, 0, kScreenWidth, kHeight(f) );
-            CGFloat fx = kDevice_Is_iPhoneX == YES ?37 :15;
-            if (kDevice_Is_iPhoneX) {
-                fx = self.isClear == YES ?fx-20 : fx;
-
-            }else{
-                
-                fx = self.isClear == YES ?fx-10 : fx;
-
-            }
+            CGFloat fx = kDevice_Is_iPhoneX == YES ?37 :25;
+//            if (kDevice_Is_iPhoneX) {
+//                fx = self.isClear == YES ?fx-20 : fx;
+//
+//            }else{
+//
+//                fx = self.isClear == YES ?fx : fx;
+//
+//            }
             self.currentTableView.frame = CGRectMake(0, 5, kScreenWidth, kScreenHeight );
             self.tableView.frame = CGRectMake(0, kStatusBarHeight, kScreenWidth, kScreenHeight-kTabBarHeight );
             [self.leftButton mas_remakeConstraints:^(MASConstraintMaker *make) {
@@ -1405,6 +1405,8 @@
                 self.headerView.cnyAmountLbl.text = [NSString stringWithFormat:@"₩ %.2f", [cnyStr doubleValue]];
                 
             }
+            self.headerView.cnyAmountLbl.text = [NSString stringWithFormat:@"₩ %.2f", [cnyStr doubleValue]];
+
             self.headerView.privateMoney.text = [NSString stringWithFormat:@"₩ %.2f", [cnyStr doubleValue]];
             self.headerView.equivalentBtn.text = [NSString stringWithFormat:@"%@(KRW)", [LangSwitcher switchLang:@"总资产" key:nil]];
             self.headerView.localLbl.text = [NSString stringWithFormat:@"%@(KRW)", [LangSwitcher switchLang:@"私钥钱包" key:nil]];
@@ -1530,10 +1532,13 @@
                 if (![self.IsLocalExsit isEqualToString:@"1"]) {
                     self.headerView.cnyAmountLbl.text = [NSString stringWithFormat:@"₩ %.2f", [cnyStr doubleValue]];
                     
+                    
                 }
+                self.headerView.cnyAmountLbl.text = [NSString stringWithFormat:@"₩ %.2f", [cnyStr doubleValue]];
+
                   double f =  [cnyStr doubleValue] +[[self.headerView.privateMoney.text substringFromIndex:1] doubleValue] ;
-                self.headerView.cnyAmountLbl.text = [NSString stringWithFormat:@"$ %.2f", f] ;
-                self.headerView.LocalMoney.text = [NSString stringWithFormat:@"$ %.2f", [cnyStr doubleValue]];
+                self.headerView.cnyAmountLbl.text = [NSString stringWithFormat:@"₩ %.2f", f] ;
+                self.headerView.LocalMoney.text = [NSString stringWithFormat:@"₩ %.2f", [cnyStr doubleValue]];
                 self.headerView.equivalentBtn.text = [NSString stringWithFormat:@"%@(KRW)", [LangSwitcher switchLang:@"总资产" key:nil]];
                 self.headerView.localLbl.text = [NSString stringWithFormat:@"%@(KRW)", [LangSwitcher switchLang:@"私钥钱包" key:nil]];
                 self.headerView.textLbl.text = [NSString stringWithFormat:@"%@(KRW)", [LangSwitcher switchLang:@"个人账户" key:nil]];
