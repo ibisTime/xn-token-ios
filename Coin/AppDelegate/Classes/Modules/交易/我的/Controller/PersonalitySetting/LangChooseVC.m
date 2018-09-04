@@ -171,9 +171,9 @@
                          cancle:^(UIAlertAction *action) {
     
                          } confirm:^(UIAlertAction *action) {
-                             [ZDKZendesk initializeWithAppId: @"1abb5d09d1ae5884d0f88f76a4368847ee01bffed4f92181"
-                                                    clientId: @"mobile_sdk_client_6e8e6247d8e39ba2b3d6"
-                                                  zendeskUrl: @"https://hzcl.zendesk.com"];
+                             [ZDKZendesk initializeWithAppId: @"71d2ca9aba0cccc12deebfbdd352fbae8c53cd8999dd10bc"
+                                                    clientId: @"mobile_sdk_client_7af3526c83d0c1999bc3"
+                                                  zendeskUrl: @"https://thachainhelp.zendesk.com"];
                              id<ZDKObjCIdentity> userIdentity = [[ZDKObjCAnonymous alloc] initWithName:nil email:nil];
                              [[ZDKZendesk instance] setIdentity:userIdentity];
                              

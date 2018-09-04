@@ -52,7 +52,7 @@
 #import "TLinviteVC.h"
 #import "TLMeSetting.h"
 
-@interface TLMineVC ()<MineHeaderSeletedDelegate, UINavigationControllerDelegate,ZDKHelpCenterArticleRatingStateProtocol,ZDKHelpCenterConversationsUIDelegate>
+@interface TLMineVC ()<MineHeaderSeletedDelegate, UINavigationControllerDelegate,ZDKHelpCenterArticleRatingStateProtocol,ZDKHelpCenterConversationsUIDelegate,ZDKHelpCenterDelegate>
 
 //@property (nonatomic, strong) FBKVOController *chatKVOCtrl;   czy
 
@@ -66,6 +66,8 @@
 
 @property (nonatomic, strong) TLImagePicker *imagePicker;
 
+@property (nonatomic, assign) id <ZDKHelpCenterConversationsUIDelegate> helpDelegate;
+
 @end
 
 @implementation TLMineVC
@@ -74,14 +76,17 @@
     [super viewWillDisappear:animated];
     
     [self.navigationController setNavigationBarHidden:NO animated:animated];
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+//    self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     
     [super viewWillAppear:animated];
-    
+   
     [self.navigationController setNavigationBarHidden:YES animated:animated];
-    
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+//    self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
@@ -334,18 +339,18 @@
             return ;
         }
 
-        
-        ZDKRequestUiConfiguration *c = [[ZDKRequestUiConfiguration alloc] init];
+        ZDKHelpCenterUiConfiguration  *  hcConfig  =  [ ZDKHelpCenterUiConfiguration  new ];
+        [ hcConfig setHideContactSupport :YES ];
        
-        UIViewController  * helpCenter  =  [ ZDKHelpCenterUi  buildHelpCenterOverviewWithConfigs :@[]];
-      
+        UIViewController<ZDKHelpCenterDelegate>*helpCenter  =  [ ZDKHelpCenterUi  buildHelpCenterOverviewWithConfigs :@[hcConfig]];
+        helpCenter.title = @"帮助中心";
+        helpCenter.uiDelegate = self;
         
-        ZDKTheme * theme = [ZDKTheme currentTheme];
-        [ZDKTheme currentTheme].primaryColor = [UIColor whiteColor];
-        helpCenter.navigationController.navigationBar.titleTextAttributes=
-        @{NSForegroundColorAttributeName:[UIColor whiteColor],
-          NSFontAttributeName:[UIFont systemFontOfSize:16]};
+        [self.navigationController setNavigationBarHidden:YES animated:YES];
+
+//        [ZDKUiConfiguration setNavBarConversationsUIType：ZDKNavBarConversationsUITypeNone];
         
+
         // Set the theme properties
 //        theme.primaryColor = [UIColor colorWithRed:34.0f/255.0f green:34.0f/255.0f blue:48.0f/255.0f alpha:1.0f];
         
@@ -353,6 +358,7 @@
 //        [theme apply];
         //ZDKHelpCenterUi.buildHelpCenterOverview.uiDelegate
 
+        
         [ self.navigationController pushViewController :helpCenter  animated :YES ];
     };
     //关于我们
@@ -405,7 +411,16 @@
     }
  
 }
+-(ZDKContactUsVisibility)active {
+    return ZDKContactUsVisibilityArticleListOnly;
+}
 
+
+- (ZDKNavBarConversationsUIType) navBarConversationsUIType
+{
+    
+    return ZDKNavBarConversationsUITypeNone;
+}
 - (void)initTableView {
     
     self.tableView = [[MineTableView alloc] initWithFrame:CGRectMake(15, self.headerView.height, kScreenWidth-30, kScreenHeight - kTabBarHeight - self.headerView.height) style:UITableViewStyleGrouped];

@@ -66,7 +66,7 @@
 //    [NSThread sleepForTimeInterval:2];
     
     //服务器环境 
-    [AppConfig config].runEnv = RunEnvTest;
+    [AppConfig config].runEnv = RunEnvRelease;
     [AppConfig config].isChecking = NO;
 #warning  //pods 更新后会导致wan币转账失败
 //    [AppConfig config].isUploadCheck = YES;
@@ -150,11 +150,11 @@
 }
 - (void)configZendSdk
 {
-    [ ZDKCoreLogger  setEnabled :YES ];
-    [ ZDKCoreLogger  setLogLevel :ZDKLogLevelDebug ];
-    [ZDKZendesk initializeWithAppId: @"1abb5d09d1ae5884d0f88f76a4368847ee01bffed4f92181"
-                           clientId: @"mobile_sdk_client_6e8e6247d8e39ba2b3d6"
-                         zendeskUrl: @"https://hzcl.zendesk.com"];
+//    [ ZDKCoreLogger  setEnabled :YES ];
+//    [ ZDKCoreLogger  setLogLevel :ZDKLogLevelDebug ];
+    [ZDKZendesk initializeWithAppId: @"71d2ca9aba0cccc12deebfbdd352fbae8c53cd8999dd10bc"
+                           clientId: @"mobile_sdk_client_7af3526c83d0c1999bc3"
+                         zendeskUrl: @"https://thachainhelp.zendesk.com"];
     id<ZDKObjCIdentity> userIdentity = [[ZDKObjCAnonymous alloc] initWithName:nil email:nil];
     [[ZDKZendesk instance] setIdentity:userIdentity];
 
@@ -187,11 +187,11 @@
 {
     
     @try{
-        UMConfigInstance.appKey = @"5b73d999f29d9825200001db";//研发
-//        UMConfigInstance.appKey = @"5b73b2e68f4a9d21830002fd";//正式
+//        UMConfigInstance.appKey = @"5b73d999f29d9825200001db";//研发
+        UMConfigInstance.appKey = @"5b73b2e68f4a9d21830002fd";//正式
 
       //一般是这样写，用于友盟后台的渠道统计，当然苹果也不会有其他渠道，写死就好
-//        UMConfigInstance.channelId = @"Theia"; //渠道区分
+        UMConfigInstance.channelId = @"Theia"; //渠道区分
 //        UMConfigInstance.channelId = @"facebook"; //渠道区分
 //        UMConfigInstance.channelId = @"biyongbao"; //渠道区分
 
@@ -200,7 +200,7 @@
         
         NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey: @"CFBundleShortVersionString"];
         [MobClick setAppVersion:version];
-        [MobClick setLogEnabled:YES];
+//        [MobClick setLogEnabled:YES];
     }
     @catch(NSException *exception) {
         NSLog(@"exception:%@", exception);
