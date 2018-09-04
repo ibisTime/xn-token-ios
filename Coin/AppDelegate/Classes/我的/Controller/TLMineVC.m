@@ -338,11 +338,16 @@
         ZDKRequestUiConfiguration *c = [[ZDKRequestUiConfiguration alloc] init];
        
         UIViewController  * helpCenter  =  [ ZDKHelpCenterUi  buildHelpCenterOverviewWithConfigs :@[]];
-        ZDKTheme * theme = [ZDKTheme currentTheme];
+      
         
+        ZDKTheme * theme = [ZDKTheme currentTheme];
+        [ZDKTheme currentTheme].primaryColor = [UIColor whiteColor];
+        helpCenter.navigationController.navigationBar.titleTextAttributes=
+        @{NSForegroundColorAttributeName:[UIColor whiteColor],
+          NSFontAttributeName:[UIFont systemFontOfSize:16]};
         
         // Set the theme properties
-        theme.primaryColor = [UIColor colorWithRed:34.0f/255.0f green:34.0f/255.0f blue:48.0f/255.0f alpha:1.0f];
+//        theme.primaryColor = [UIColor colorWithRed:34.0f/255.0f green:34.0f/255.0f blue:48.0f/255.0f alpha:1.0f];
         
         // Apply the change
 //        [theme apply];

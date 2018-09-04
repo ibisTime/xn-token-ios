@@ -329,7 +329,7 @@
             CGFloat fx = kDevice_Is_iPhoneX == YES ?15 :27;
 
             weakSelf.currentTableView.frame = CGRectMake(0, 5, kScreenWidth, kScreenHeight);
-            weakSelf.tableView.frame = CGRectMake(0, 5, kScreenWidth, kScreenHeight-kTabBarHeight );
+            weakSelf.tableView.frame = CGRectMake(0, 5, kScreenWidth, kScreenHeight );
             
             [weakSelf.leftButton mas_remakeConstraints:^(MASConstraintMaker *make) {
                 make.left.equalTo(weakSelf.view.mas_left).offset(15);
@@ -520,7 +520,7 @@
 //        make.height.equalTo(@30);
 //    }];
     f = f - f1;
-    self.currentTableView = [[TLAccountTableView alloc] initWithFrame:CGRectMake(0, kStatusBarHeight+5, kScreenWidth, kScreenHeight - 49) style:UITableViewStyleGrouped];
+    self.currentTableView = [[TLAccountTableView alloc] initWithFrame:CGRectMake(0, kStatusBarHeight+5, kScreenWidth, kScreenHeight - kStatusBarHeight) style:UITableViewStyleGrouped];
     self.currentTableView.contentInset = UIEdgeInsetsMake(0, 0, 30, 0);
 
     self.currentTableView.backgroundColor = kWhiteColor;
@@ -580,7 +580,7 @@
     //        make.left.equalTo(@15);
     //        make.height.equalTo(@30);
     //    }];
-    self.tableView = [[PlatformTableView alloc] initWithFrame:CGRectMake(0, kStatusBarHeight+5, kScreenWidth, kScreenHeight-kTabBarHeight ) style:UITableViewStyleGrouped];
+    self.tableView = [[PlatformTableView alloc] initWithFrame:CGRectMake(0, kStatusBarHeight+5, kScreenWidth, kScreenHeight-kStatusBarHeight ) style:UITableViewStyleGrouped];
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, kTabBarHeight, 0);
 
     self.tableView.backgroundColor = kWhiteColor;
@@ -752,7 +752,7 @@
         CGFloat h = self.isClear == YES ? 300 : 315;
         self.headerView.frame = CGRectMake(0, 0, kScreenWidth, kHeight(h));
 
-        self.tableView.frame = CGRectMake(0, kStatusBarHeight, kScreenWidth, kScreenHeight-kTabBarHeight);
+        self.tableView.frame = CGRectMake(0, kStatusBarHeight, kScreenWidth, kScreenHeight-kStatusBarHeight);
        
         [self.leftButton mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.view.mas_left).offset(15);
@@ -833,16 +833,19 @@
 
             self.headerView.frame = CGRectMake(0, 0, kScreenWidth, kHeight(f) );
             CGFloat fx = kDevice_Is_iPhoneX == YES ?37 :25;
-//            if (kDevice_Is_iPhoneX) {
-//                fx = self.isClear == YES ?fx-20 : fx;
-//
-//            }else{
-//
-//                fx = self.isClear == YES ?fx : fx;
-//
-//            }
+            if (self.isClear) {
+
+                if (kDevice_Is_iPhoneX) {
+                    
+                }else{
+                    fx = kDevice_Is_iPhoneX == YES ?37 :20;
+                }
+            }else{
+
+
+            }
             self.currentTableView.frame = CGRectMake(0, 5, kScreenWidth, kScreenHeight );
-            self.tableView.frame = CGRectMake(0, kStatusBarHeight, kScreenWidth, kScreenHeight-kTabBarHeight );
+            self.tableView.frame = CGRectMake(0, kStatusBarHeight, kScreenWidth, kScreenHeight-kStatusBarHeight );
             [self.leftButton mas_remakeConstraints:^(MASConstraintMaker *make) {
                 make.left.equalTo(self.view.mas_left).offset(15);
                 make.bottom.equalTo(self.headerView.mas_bottom).offset(-fx-2);
@@ -1483,12 +1486,14 @@
         [set close];
     }
     [dataBase.dataBase close];
+    NSSet *set = [NSSet setWithArray:arr];
+    NSArray *resultArray = [set allObjects];
     
 //    NSArray *a = [[NSUserDefaults standardUserDefaults] objectForKey:@"localArray"];
-    if (arr.count > 0) {
+    if (resultArray.count > 0) {
                 http.ISparametArray = YES;
         
-        http.parameters[@"accountList"] = arr;
+        http.parameters[@"accountList"] = resultArray;
     }else{
         
         return;
@@ -1623,10 +1628,12 @@
     }
     [dataBase.dataBase close];
     
+    NSSet *set = [NSSet setWithArray:arr];
+    NSArray *resultArray = [set allObjects];
     //    NSArray *a = [[NSUserDefaults standardUserDefaults] objectForKey:@"localArray"];
-    if (arr.count > 0) {
+    if (resultArray.count > 0) {
         
-        http.parameters[@"accountList"] = arr;
+        http.parameters[@"accountList"] = resultArray;
     }else{
         return;
         }

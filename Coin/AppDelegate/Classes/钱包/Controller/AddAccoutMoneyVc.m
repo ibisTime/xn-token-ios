@@ -214,7 +214,9 @@
         }
         [data.dataBase close];
     
-    
+    NSSet *set = [NSSet setWithArray:self.currentModels];
+    NSArray *resultArray = [set allObjects];
+    self.currentModels = (NSMutableArray*)resultArray;
     self.tableView.currencys = self.currentModels;
     self.currentModels = self.currentModels;
     [self.tableView reloadData];
