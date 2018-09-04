@@ -348,7 +348,11 @@
                 
             }];
             CGFloat f4 = self.isClear == YES ?320-30-15 : 350-30-30;
-            
+            if (kDevice_Is_iPhoneX) {
+                f4 =320-30;
+            }else{
+                
+                }
             [weakSelf.titleView mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.top.equalTo(@(kHeight(f4)));
                 make.right.equalTo(@-15);
@@ -737,6 +741,14 @@
             self.tableView.isLocal = NO;
         self.addButton.hidden = YES;
         CGFloat fx = kDevice_Is_iPhoneX == YES ?15 :7;
+        if (kDevice_Is_iPhoneX) {
+            fx = self.isClear == YES ?fx-10 : fx;
+
+        }else{
+            
+            
+        }
+
         CGFloat h = self.isClear == YES ? 300 : 315;
         self.headerView.frame = CGRectMake(0, 0, kScreenWidth, kHeight(h));
 
@@ -817,9 +829,18 @@
             self.rightButton.layer.borderColor = kHexColor(@"#D1B3AB").CGColor;
             
             CGFloat f = self.isClear == YES ?300 : 320;
+//            CGFloat f2 = kDevice_Is_iPhoneX == YES ?15 :27;
+
             self.headerView.frame = CGRectMake(0, 0, kScreenWidth, kHeight(f) );
-            CGFloat fx = kDevice_Is_iPhoneX == YES ?15 :27;
-            
+            CGFloat fx = kDevice_Is_iPhoneX == YES ?37 :15;
+            if (kDevice_Is_iPhoneX) {
+                fx = self.isClear == YES ?fx-20 : fx;
+
+            }else{
+                
+                fx = self.isClear == YES ?fx-10 : fx;
+
+            }
             self.currentTableView.frame = CGRectMake(0, 5, kScreenWidth, kScreenHeight );
             self.tableView.frame = CGRectMake(0, kStatusBarHeight, kScreenWidth, kScreenHeight-kTabBarHeight );
             [self.leftButton mas_remakeConstraints:^(MASConstraintMaker *make) {
