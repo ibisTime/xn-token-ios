@@ -380,6 +380,7 @@
 		B8CF2CC52121375800055706 /* BTCDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B8CF2CC42121375800055706 /* BTCDetailModel.m */; };
 		B8CF2CC821214A8800055706 /* CommentTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = B8CF2CC721214A8800055706 /* CommentTableView.m */; };
 		B8CF2CCB21214AB500055706 /* CommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B8CF2CCA21214AB500055706 /* CommentCell.m */; };
+		B8D157CB213FC41400941304 /* NewHelpCentetVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B8D157CA213FC41400941304 /* NewHelpCentetVC.m */; };
 		B8D5F15020CE08790005CF96 /* TLAccountMoneyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B8D5F14F20CE08790005CF96 /* TLAccountMoneyVC.m */; };
 		B8D5F15320CE0E4C0005CF96 /* TLAccountTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = B8D5F15220CE0E4C0005CF96 /* TLAccountTableView.m */; };
 		B8D5F15620CE0F530005CF96 /* AccountMoneyCellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B8D5F15520CE0F530005CF96 /* AccountMoneyCellTableViewCell.m */; };
@@ -1243,6 +1244,8 @@
 		B8CF2CC721214A8800055706 /* CommentTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommentTableView.m; sourceTree = "<group>"; };
 		B8CF2CC921214AB500055706 /* CommentCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommentCell.h; sourceTree = "<group>"; };
 		B8CF2CCA21214AB500055706 /* CommentCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommentCell.m; sourceTree = "<group>"; };
+		B8D157C9213FC41400941304 /* NewHelpCentetVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NewHelpCentetVC.h; sourceTree = "<group>"; };
+		B8D157CA213FC41400941304 /* NewHelpCentetVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewHelpCentetVC.m; sourceTree = "<group>"; };
 		B8D5F14E20CE08790005CF96 /* TLAccountMoneyVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLAccountMoneyVC.h; sourceTree = "<group>"; };
 		B8D5F14F20CE08790005CF96 /* TLAccountMoneyVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLAccountMoneyVC.m; sourceTree = "<group>"; };
 		B8D5F15120CE0E4C0005CF96 /* TLAccountTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLAccountTableView.h; sourceTree = "<group>"; };
@@ -2642,6 +2645,8 @@
 				B89F07E1211B07FA0057E781 /* TLMeSetting.m */,
 				B82D3876211BD4A50053A2E4 /* TLQrCodeVC.h */,
 				B82D3877211BD4A50053A2E4 /* TLQrCodeVC.m */,
+				B8D157C9213FC41400941304 /* NewHelpCentetVC.h */,
+				B8D157CA213FC41400941304 /* NewHelpCentetVC.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -3329,7 +3334,7 @@
 					2EA584B31FA813C900C7106C = {
 						CreatedOnToolsVersion = 9.0.1;
 						LastSwiftMigration = 0940;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 0;
@@ -3834,6 +3839,7 @@
 				B8D938D52116CA0800B2AA88 /* QDetailCell.m in Sources */,
 				B85FE46F21287D2300C9F60C /* PayModel.m in Sources */,
 				B8086505211EA17D00755158 /* BTCNetwork.m in Sources */,
+				B8D157CB213FC41400941304 /* NewHelpCentetVC.m in Sources */,
 				B891F0682101899900ED5DDF /* BuildLocalHomeView.m in Sources */,
 				B8B15C2720CA75CC00F13220 /* AddSearchBottomCell.m in Sources */,
 				211DE6A21FB58B4C002FCF3D /* TLCaptchaView.m in Sources */,
@@ -4026,9 +4032,9 @@
 				CLANG_WARN_STRICT_PROTOTYPES = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 6PF7VHZB5Z;
+				DEVELOPMENT_TEAM = TX9SHE4ST4;
 				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = NO;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -4062,10 +4068,10 @@
 					"$(PROJECT_DIR)/Coin/WechatSDK1.8.2",
 					"$(PROJECT_DIR)/Coin/AppDelegate/Classes/Utils/DataBtc/include-ios/lib-ios",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.cdkj.wallet;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ZQB.HappyFirstGo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "cc8de7e4-93a3-43e8-963e-822bc861b7cb";
-				PROVISIONING_PROFILE_SPECIFIER = devogcwallet;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -4084,9 +4090,9 @@
 				CLANG_WARN_STRICT_PROTOTYPES = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 6PF7VHZB5Z;
+				DEVELOPMENT_TEAM = TX9SHE4ST4;
 				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = NO;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -4120,10 +4126,10 @@
 					"$(PROJECT_DIR)/Coin/WechatSDK1.8.2",
 					"$(PROJECT_DIR)/Coin/AppDelegate/Classes/Utils/DataBtc/include-ios/lib-ios",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.cdkj.wallet;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ZQB.HappyFirstGo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "cc8de7e4-93a3-43e8-963e-822bc861b7cb";
-				PROVISIONING_PROFILE_SPECIFIER = devogcwallet;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;

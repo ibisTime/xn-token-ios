@@ -51,6 +51,7 @@
 #import "TLQusertionVC.h"
 #import "TLinviteVC.h"
 #import "TLMeSetting.h"
+#import "NewHelpCentetVC.h"
 
 @interface TLMineVC ()<MineHeaderSeletedDelegate, UINavigationControllerDelegate,ZDKHelpCenterArticleRatingStateProtocol,ZDKHelpCenterConversationsUIDelegate,ZDKHelpCenterDelegate>
 
@@ -342,8 +343,8 @@
         ZDKHelpCenterUiConfiguration  *  hcConfig  =  [ ZDKHelpCenterUiConfiguration  new ];
         [ hcConfig setHideContactSupport :YES ];
        
-        UIViewController<ZDKHelpCenterDelegate>*helpCenter  =  [ ZDKHelpCenterUi  buildHelpCenterOverviewWithConfigs :@[hcConfig]];
-        helpCenter.title = @"帮助中心";
+        NewHelpCentetVC<ZDKHelpCenterDelegate>*helpCenter  =  [ ZDKHelpCenterUi  buildHelpCenterOverviewWithConfigs :@[hcConfig]];
+        helpCenter.title = [LangSwitcher switchLang:@"帮助中心" key:nil];
         helpCenter.uiDelegate = self;
         
         [self.navigationController setNavigationBarHidden:YES animated:YES];
