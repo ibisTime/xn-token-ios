@@ -29,9 +29,9 @@
 #import "TLImagePicker.h"
 #import "TLUploadManager.h"
 #import "AppConfig.h"
-#import <ZendeskSDK/ZendeskSDK.h>
-#import <ZendeskCoreSDK/ZendeskCoreSDK.h>
-#import <ZendeskProviderSDK/ZendeskProviderSDK.h>
+//#import <ZendeskSDK/ZendeskSDK.h>
+//#import <ZendeskCoreSDK/ZendeskCoreSDK.h>
+//#import <ZendeskProviderSDK/ZendeskProviderSDK.h>
 
 //#import <ZDCChat/ZDCChat.h>
 #import <IQKeyboardManager/IQKeyboardManager.h>
@@ -53,7 +53,7 @@
 #import "TLMeSetting.h"
 #import "NewHelpCentetVC.h"
 
-@interface TLMineVC ()<MineHeaderSeletedDelegate, UINavigationControllerDelegate,ZDKHelpCenterArticleRatingStateProtocol,ZDKHelpCenterConversationsUIDelegate,ZDKHelpCenterDelegate>
+@interface TLMineVC ()<MineHeaderSeletedDelegate, UINavigationControllerDelegate>
 
 //@property (nonatomic, strong) FBKVOController *chatKVOCtrl;   czy
 
@@ -67,7 +67,7 @@
 
 @property (nonatomic, strong) TLImagePicker *imagePicker;
 
-@property (nonatomic, assign) id <ZDKHelpCenterConversationsUIDelegate> helpDelegate;
+//@property (nonatomic, assign) id <ZDKHelpCenterConversationsUIDelegate> helpDelegate;
 
 @end
 
@@ -340,13 +340,13 @@
             return ;
         }
 
-        ZDKHelpCenterUiConfiguration  *  hcConfig  =  [ ZDKHelpCenterUiConfiguration  new ];
-        [ hcConfig setHideContactSupport :YES ];
-       
-        NewHelpCentetVC<ZDKHelpCenterDelegate>*helpCenter  =  [ ZDKHelpCenterUi  buildHelpCenterOverviewWithConfigs :@[hcConfig]];
-        helpCenter.title = [LangSwitcher switchLang:@"帮助中心" key:nil];
-        helpCenter.uiDelegate = self;
-        
+//        ZDKHelpCenterUiConfiguration  *  hcConfig  =  [ ZDKHelpCenterUiConfiguration  new ];
+//        [ hcConfig setHideContactSupport :YES ];
+//
+//        NewHelpCentetVC<ZDKHelpCenterDelegate>*helpCenter  =  [ ZDKHelpCenterUi  buildHelpCenterOverviewWithConfigs :@[hcConfig]];
+//        helpCenter.title = [LangSwitcher switchLang:@"帮助中心" key:nil];
+//        helpCenter.uiDelegate = self;
+
         [self.navigationController setNavigationBarHidden:YES animated:YES];
 
 //        [ZDKUiConfiguration setNavBarConversationsUIType：ZDKNavBarConversationsUITypeNone];
@@ -360,7 +360,7 @@
         //ZDKHelpCenterUi.buildHelpCenterOverview.uiDelegate
 
         
-        [ self.navigationController pushViewController :helpCenter  animated :YES ];
+//        [ self.navigationController pushViewController :helpCenter  animated :YES ];
     };
     //关于我们
     MineModel *abountUs = [MineModel new];
@@ -412,16 +412,16 @@
     }
  
 }
--(ZDKContactUsVisibility)active {
-    return ZDKContactUsVisibilityArticleListOnly;
-}
-
-
-- (ZDKNavBarConversationsUIType) navBarConversationsUIType
-{
-    
-    return ZDKNavBarConversationsUITypeNone;
-}
+//-(ZDKContactUsVisibility)active {
+//    return ZDKContactUsVisibilityArticleListOnly;
+//}
+//
+//
+//- (ZDKNavBarConversationsUIType) navBarConversationsUIType
+//{
+//
+//    return ZDKNavBarConversationsUITypeNone;
+//}
 - (void)initTableView {
     
     self.tableView = [[MineTableView alloc] initWithFrame:CGRectMake(15, self.headerView.height, kScreenWidth-30, kScreenHeight - kTabBarHeight - self.headerView.height) style:UITableViewStyleGrouped];

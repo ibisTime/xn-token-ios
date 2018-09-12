@@ -208,6 +208,9 @@
 		7A8A5DCB20EA7EB8002D9A48 /* GetTheCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A8A5DCA20EA7EB8002D9A48 /* GetTheCell.m */; };
 		7A8A5DCE20EA9CD5002D9A48 /* GetTheModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A8A5DCD20EA9CD5002D9A48 /* GetTheModel.m */; };
 		7A8A5DD120EAA2DE002D9A48 /* InvitationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A8A5DCF20EAA2DB002D9A48 /* InvitationView.m */; };
+		7AABEAF82148ED4D00283BC7 /* UIButton+SGImagePosition.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AABEAF72148ED4C00283BC7 /* UIButton+SGImagePosition.m */; };
+		7AABEAFB2148FEEF00283BC7 /* PoliteInstructionsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AABEAFA2148FEEF00283BC7 /* PoliteInstructionsVC.m */; };
+		7AABEAFE2149127200283BC7 /* BouncedPasteView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AABEAFD2149127200283BC7 /* BouncedPasteView.m */; };
 		B80864EE211EA17D00755158 /* BTCBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = B8086411211EA17C00755158 /* BTCBlock.m */; };
 		B80864EF211EA17D00755158 /* BTCBlockHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = B8086412211EA17C00755158 /* BTCBlockHeader.m */; };
 		B80864F0211EA17D00755158 /* BTCEncryptedBackup.m in Sources */ = {isa = PBXBuildFile; fileRef = B8086415211EA17C00755158 /* BTCEncryptedBackup.m */; };
@@ -814,6 +817,12 @@
 		7A8A5DCD20EA9CD5002D9A48 /* GetTheModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GetTheModel.m; sourceTree = "<group>"; };
 		7A8A5DCF20EAA2DB002D9A48 /* InvitationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InvitationView.m; sourceTree = "<group>"; };
 		7A8A5DD020EAA2DD002D9A48 /* InvitationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InvitationView.h; sourceTree = "<group>"; };
+		7AABEAF62148ED4B00283BC7 /* UIButton+SGImagePosition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+SGImagePosition.h"; sourceTree = "<group>"; };
+		7AABEAF72148ED4C00283BC7 /* UIButton+SGImagePosition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+SGImagePosition.m"; sourceTree = "<group>"; };
+		7AABEAF92148FEEF00283BC7 /* PoliteInstructionsVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PoliteInstructionsVC.h; sourceTree = "<group>"; };
+		7AABEAFA2148FEEF00283BC7 /* PoliteInstructionsVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PoliteInstructionsVC.m; sourceTree = "<group>"; };
+		7AABEAFC2149127200283BC7 /* BouncedPasteView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BouncedPasteView.h; sourceTree = "<group>"; };
+		7AABEAFD2149127200283BC7 /* BouncedPasteView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BouncedPasteView.m; sourceTree = "<group>"; };
 		8863748C5281F9DC1DDF8EEA /* Pods-Coin.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Coin.release.xcconfig"; path = "Pods/Target Support Files/Pods-Coin/Pods-Coin.release.xcconfig"; sourceTree = "<group>"; };
 		AB34D27FC9725550E9092EC2 /* Pods-Coin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Coin.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Coin/Pods-Coin.debug.xcconfig"; sourceTree = "<group>"; };
 		B808640E211EA17C00755158 /* BTCMerkleTree+Tests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BTCMerkleTree+Tests.h"; sourceTree = "<group>"; };
@@ -1782,6 +1791,8 @@
 				211DE6661FB58B4B002FCF3D /* UIButton+Custom.m */,
 				211DE6641FB58B4B002FCF3D /* UIButton+EnLargeEdge.h */,
 				211DE6651FB58B4B002FCF3D /* UIButton+EnLargeEdge.m */,
+				7AABEAF62148ED4B00283BC7 /* UIButton+SGImagePosition.h */,
+				7AABEAF72148ED4C00283BC7 /* UIButton+SGImagePosition.m */,
 			);
 			path = UIButton;
 			sourceTree = "<group>";
@@ -2657,6 +2668,10 @@
 				B82D3877211BD4A50053A2E4 /* TLQrCodeVC.m */,
 				B8D157C9213FC41400941304 /* NewHelpCentetVC.h */,
 				B8D157CA213FC41400941304 /* NewHelpCentetVC.m */,
+				7AABEAF92148FEEF00283BC7 /* PoliteInstructionsVC.h */,
+				7AABEAFA2148FEEF00283BC7 /* PoliteInstructionsVC.m */,
+				7AABEAFC2149127200283BC7 /* BouncedPasteView.h */,
+				7AABEAFD2149127200283BC7 /* BouncedPasteView.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -3318,7 +3333,6 @@
 				2EA584B11FA813C900C7106C /* Frameworks */,
 				2EA584B21FA813C900C7106C /* Resources */,
 				0BDC83309660578EA1D37FA1 /* [CP] Embed Pods Frameworks */,
-				95ED5A22D492767C508867EA /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -3429,9 +3443,6 @@
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SipHash/SipHash.framework",
 				"${BUILT_PRODUCTS_DIR}/UIDeviceIdentifier/UIDeviceIdentifier.framework",
-				"${PODS_ROOT}/ZendeskSDK/ZendeskSDK/4.1/ZendeskCoreSDK.framework",
-				"${PODS_ROOT}/ZendeskSDK/ZendeskSDK/4.1/ZendeskProviderSDK.framework",
-				"${PODS_ROOT}/ZendeskSDK/ZendeskSDK/4.1/ZendeskSDK.framework",
 				"${BUILT_PRODUCTS_DIR}/libsodium/libsodium.framework",
 				"${BUILT_PRODUCTS_DIR}/secp256k1_ios/secp256k1_ios.framework",
 				"${BUILT_PRODUCTS_DIR}/web3swift/web3swift.framework",
@@ -3461,9 +3472,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SipHash.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UIDeviceIdentifier.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ZendeskCoreSDK.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ZendeskProviderSDK.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ZendeskSDK.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/libsodium.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/secp256k1_ios.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/web3swift.framework",
@@ -3471,24 +3479,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Coin/Pods-Coin-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		95ED5A22D492767C508867EA /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Coin/Pods-Coin-resources.sh",
-				"${PODS_ROOT}/ZendeskSDK/ZendeskSDK/4.1/ZendeskSDKStrings.bundle",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ZendeskSDKStrings.bundle",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Coin/Pods-Coin-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		DC1EF316622605A8AD2B2DED /* [CP] Check Pods Manifest.lock */ = {
@@ -3621,6 +3611,7 @@
 				B8DDF885211D2AD10058D19D /* MakeMoneyCell.m in Sources */,
 				B8F63EE020D3809700556150 /* LocalBillDetailTableView.m in Sources */,
 				21205CD61FCD0435003C6C7C /* FansModel.m in Sources */,
+				7AABEAFE2149127200283BC7 /* BouncedPasteView.m in Sources */,
 				216F5B1A206CD9C900F2C832 /* TradeFlowTableView.m in Sources */,
 				B80D54CE210C9C11005303D5 /* TLChangeNikeName.m in Sources */,
 				B808650B211EA17D00755158 /* BTCFancyEncryptedMessage.m in Sources */,
@@ -3628,6 +3619,7 @@
 				B8B15C1F20CA752900F13220 /* QHCollectionViewNine.m in Sources */,
 				216F5B3C206CD9DA00F2C832 /* BannerModel.m in Sources */,
 				216F5B4F206CE7A600F2C832 /* StoreListVC.m in Sources */,
+				7AABEAF82148ED4D00283BC7 /* UIButton+SGImagePosition.m in Sources */,
 				7A8A5D2F20EA3C09002D9A48 /* MySugarPacketsVC.m in Sources */,
 				B87BF1D3211426C300DD5C05 /* Migration.m in Sources */,
 				2ED651CC200F32BC0065A1B0 /* TLCoinWithdrawModel.m in Sources */,
@@ -3850,6 +3842,7 @@
 				21205CE51FCD31E0003C6C7C /* CoinAddressCell.m in Sources */,
 				B8D938D52116CA0800B2AA88 /* QDetailCell.m in Sources */,
 				B85FE46F21287D2300C9F60C /* PayModel.m in Sources */,
+				7AABEAFB2148FEEF00283BC7 /* PoliteInstructionsVC.m in Sources */,
 				B8086505211EA17D00755158 /* BTCNetwork.m in Sources */,
 				B8D157CB213FC41400941304 /* NewHelpCentetVC.m in Sources */,
 				B891F0682101899900ED5DDF /* BuildLocalHomeView.m in Sources */,
