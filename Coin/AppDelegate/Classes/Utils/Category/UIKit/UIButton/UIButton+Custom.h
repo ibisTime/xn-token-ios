@@ -27,5 +27,6 @@
                 backgroundColor:(UIColor *)color;
 
 - (void)setBackgroundColor:(UIColor *)color forState:(UIControlState)state;
+- (void)xr_setButtonImageWithUrl:(NSString *)urlStr;
 
 @end

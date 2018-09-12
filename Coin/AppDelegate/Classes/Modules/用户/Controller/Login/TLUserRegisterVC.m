@@ -77,7 +77,6 @@
     [self setUpUI];
     [self loadData];
 
-    [self configData];
 
 }
 
@@ -480,10 +479,12 @@
         //        [self.tableView reloadData];
         //        NSString *str = [NSString stringWithFormat:@"%@", responseObject[@"data"]];
         //        [[NSNotificationCenter defaultCenter] postNotificationName:@"RealNameAuthResult" object:str];
-        
+        [self configData];
+
     } failure:^(NSError *error) {
         
-        
+        [self configData];
+
     }];
     
     

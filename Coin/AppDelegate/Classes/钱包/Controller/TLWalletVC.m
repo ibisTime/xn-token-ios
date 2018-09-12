@@ -1008,7 +1008,34 @@
 {
     //一键旋转
     TLTransfromVC *trans = [TLTransfromVC new];
-    [self.navigationController pushViewController:trans animated:YES];
+    trans.isLocal = self.switchTager == 0 ? YES : NO;
+    trans.currencys = self.currencys;
+    
+    TLDataBase *dataBase = [TLDataBase sharedManager];
+    NSString *word;
+    if ([dataBase.dataBase open]) {
+        NSString *sql = [NSString stringWithFormat:@"SELECT Mnemonics from THAUser where userId = '%@'",[TLUser user].userId];
+        //        [sql appendString:[TLUser user].userId];
+        FMResultSet *set = [dataBase.dataBase executeQuery:sql];
+        while ([set next])
+        {
+            word = [set stringForColumn:@"Mnemonics"];
+            
+        }
+        [set close];
+    }
+    [dataBase.dataBase close];
+    if (word.length > 0) {
+        [self.navigationController pushViewController:trans animated:YES];
+
+    }else{
+        
+        BuildWalletMineVC *settingVC = [BuildWalletMineVC new];
+        
+        [self.navigationController pushViewController:settingVC animated:YES];
+    }
+    
+    
     
     
 }

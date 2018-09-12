@@ -39,7 +39,6 @@
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.hidden = NO;
     [self loadData];
-    [self configData];
     
 }
 - (void)viewDidLoad {
@@ -118,7 +117,7 @@
     [net postWithSuccess:^(id responseObject) {
         
         NSLog(@"%@",responseObject);
-        
+
         self.countrys = [CountryModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
         
         for (int i = 0; i < self.countrys.count; i++) {
@@ -131,13 +130,15 @@
                 self.PhoneCode.text = [NSString stringWithFormat:@"+%@",[model.interCode substringFromIndex:2]];
             }
         }
-        
+        [self configData];
+
         //        [self.tableView reloadData];
         //        NSString *str = [NSString stringWithFormat:@"%@", responseObject[@"data"]];
         //        [[NSNotificationCenter defaultCenter] postNotificationName:@"RealNameAuthResult" object:str];
         
     } failure:^(NSError *error) {
-        
+        [self configData];
+
         
     }];
     

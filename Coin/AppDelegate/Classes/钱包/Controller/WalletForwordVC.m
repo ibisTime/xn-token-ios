@@ -82,10 +82,7 @@ typedef enum : NSUInteger {
 
 @property (nonatomic, strong) UILabel *choseLab;
 //矿工费
-@property (nonatomic, assign) CGFloat gamPrice;
-@property (nonatomic, copy) NSString *tempPrice;
 
-@property (nonatomic, copy) NSString *pricr;
 @property (nonatomic, strong) UIImageView *bgImage;
 
 @property (nonatomic, strong) UILabel * blanceFree;
@@ -94,7 +91,10 @@ typedef enum : NSUInteger {
 
 @property (nonatomic, copy) NSString *word;
 @property (nonatomic, strong) UILabel *symbolBlance;
+@property (nonatomic, assign) CGFloat gamPrice;
+@property (nonatomic, copy) NSString *tempPrice;
 
+@property (nonatomic, copy) NSString *pricr;
 @property (nonatomic, copy) NSString *btcAddress;
 
 @property (nonatomic, copy) NSString *btcPrivate;
@@ -1417,7 +1417,7 @@ typedef enum : NSUInteger {
 
 
         NSString *gaspic =  [CoinUtil convertToSysCoin:self.tranAmountTF.text coin:self.currency.symbol];
-        //    NSNumber *gaspic = [NSNumber numberWithFloat:[self.tranAmountTF.text floatValue] *1000000000000000000] ;
+        ;
         
         [TLAlert alertWithTitle:[LangSwitcher switchLang:@"请输入交易密码" key:nil]
                             msg:@""

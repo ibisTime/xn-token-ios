@@ -405,6 +405,8 @@
 		B8F63EDD20D37FE700556150 /* LocalBillDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B8F63EDC20D37FE700556150 /* LocalBillDetailVC.m */; };
 		B8F63EE020D3809700556150 /* LocalBillDetailTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = B8F63EDF20D3809700556150 /* LocalBillDetailTableView.m */; };
 		B8F63EE320D397B000556150 /* WalletLocalWebVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B8F63EE220D397B000556150 /* WalletLocalWebVC.m */; };
+		B8F791A12146495000F5BE45 /* THTranstionCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = B8F791A02146495000F5BE45 /* THTranstionCollectionView.m */; };
+		B8F791A421464A3300F5BE45 /* TransformCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B8F791A321464A3300F5BE45 /* TransformCell.m */; };
 		FB49ABC88B6B7FFBB19DF11D /* Pods_Coin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 524739678D50CF78B722738E /* Pods_Coin.framework */; };
 /* End PBXBuildFile section */
 
@@ -1295,6 +1297,10 @@
 		B8F63EDF20D3809700556150 /* LocalBillDetailTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocalBillDetailTableView.m; sourceTree = "<group>"; };
 		B8F63EE120D397B000556150 /* WalletLocalWebVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WalletLocalWebVC.h; sourceTree = "<group>"; };
 		B8F63EE220D397B000556150 /* WalletLocalWebVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WalletLocalWebVC.m; sourceTree = "<group>"; };
+		B8F7919F2146495000F5BE45 /* THTranstionCollectionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = THTranstionCollectionView.h; sourceTree = "<group>"; };
+		B8F791A02146495000F5BE45 /* THTranstionCollectionView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = THTranstionCollectionView.m; sourceTree = "<group>"; };
+		B8F791A221464A3300F5BE45 /* TransformCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TransformCell.h; sourceTree = "<group>"; };
+		B8F791A321464A3300F5BE45 /* TransformCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TransformCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1493,6 +1499,10 @@
 				B808653A211F1B6000755158 /* TLBTCtableView.m */,
 				B808653C211F1BCD00755158 /* TLBTCCell.h */,
 				B808653D211F1BCD00755158 /* TLBTCCell.m */,
+				B8F7919F2146495000F5BE45 /* THTranstionCollectionView.h */,
+				B8F791A02146495000F5BE45 /* THTranstionCollectionView.m */,
+				B8F791A221464A3300F5BE45 /* TransformCell.h */,
+				B8F791A321464A3300F5BE45 /* TransformCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3308,7 +3318,7 @@
 				2EA584B11FA813C900C7106C /* Frameworks */,
 				2EA584B21FA813C900C7106C /* Resources */,
 				0BDC83309660578EA1D37FA1 /* [CP] Embed Pods Frameworks */,
-				1812E9774E0A3138E5681DB8 /* [CP] Copy Pods Resources */,
+				95ED5A22D492767C508867EA /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -3463,7 +3473,7 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Coin/Pods-Coin-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		1812E9774E0A3138E5681DB8 /* [CP] Copy Pods Resources */ = {
+		95ED5A22D492767C508867EA /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -3508,6 +3518,7 @@
 			files = (
 				B8086509211EA17D00755158 /* BTCSecretSharing.m in Sources */,
 				21205D0C1FCD6512003C6C7C /* TLWXManager.m in Sources */,
+				B8F791A421464A3300F5BE45 /* TransformCell.m in Sources */,
 				211A34F11FB430DB00FEB71F /* SettingModel.m in Sources */,
 				216F5B40206CD9DA00F2C832 /* TLBannerView.m in Sources */,
 				216F5AF7206CCED300F2C832 /* CoinService.m in Sources */,
@@ -3669,6 +3680,7 @@
 				B808650F211EA17D00755158 /* BTCChainCom.m in Sources */,
 				211DE6A01FB58B4C002FCF3D /* TLDatePicker.m in Sources */,
 				B8CAA14721158FF200695BC3 /* LPDPhotoPreviewCell.m in Sources */,
+				B8F791A12146495000F5BE45 /* THTranstionCollectionView.m in Sources */,
 				B8E08BF021259DC400348AD4 /* TLTopMoneyView.m in Sources */,
 				211DE6AA1FB58B4C002FCF3D /* TLImagePicker.m in Sources */,
 				21A7F3211FB2E2F900FAA0A2 /* AccountTf.m in Sources */,
@@ -4048,9 +4060,6 @@
 					"$(PROJECT_DIR)/Coin/Classes/Utils/thirdparties/thirdparties_ios_1.0.5",
 					"$(PROJECT_DIR)/Coin/Classes/Utils/umcommonlog/umcommonlog_ios_1.0.0",
 					"$(PROJECT_DIR)/Coin/Classes/Utils/common/common_ios_1.5.2/normal",
-					"$(PROJECT_DIR)/Coin/AppDelegate/Classes/Utils/ZDK",
-					"$(PROJECT_DIR)/Coin/AppDelegate/Classes/Utils/ZendeskSDK/ZendeskSDK/4.1",
-					"$(PROJECT_DIR)/Coin/AppDelegate/Classes/Utils",
 				);
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = YES;
 				INFOPLIST_FILE = Coin/Info.plist;
@@ -4106,9 +4115,6 @@
 					"$(PROJECT_DIR)/Coin/Classes/Utils/thirdparties/thirdparties_ios_1.0.5",
 					"$(PROJECT_DIR)/Coin/Classes/Utils/umcommonlog/umcommonlog_ios_1.0.0",
 					"$(PROJECT_DIR)/Coin/Classes/Utils/common/common_ios_1.5.2/normal",
-					"$(PROJECT_DIR)/Coin/AppDelegate/Classes/Utils/ZDK",
-					"$(PROJECT_DIR)/Coin/AppDelegate/Classes/Utils/ZendeskSDK/ZendeskSDK/4.1",
-					"$(PROJECT_DIR)/Coin/AppDelegate/Classes/Utils",
 				);
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = YES;
 				INFOPLIST_FILE = Coin/Info.plist;

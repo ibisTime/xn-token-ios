@@ -7,7 +7,10 @@
 //
 
 #import "TLBaseVC.h"
-
+#import "CurrencyModel.h"
 @interface TLTransfromVC : TLBaseVC
+@property (nonatomic, strong) NSMutableArray <CurrencyModel *>*currencys;
+
+@property (nonatomic, assign) BOOL isLocal;
 
 @end
