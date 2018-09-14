@@ -73,6 +73,9 @@ typedef NS_ENUM(NSInteger, ZJAnimationDismissStyle) {
  */
 - (void)pop;
 
+- (void)pop : (UIView *)view ;
+
+
 /**
  移除弹框
  */

@@ -21,10 +21,18 @@
 
 @implementation AddAccoutMoneyVc
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    
+    [super viewWillAppear:animated];
+}
+
 - (void)viewDidLoad {
     self.title = [LangSwitcher switchLang:@"添加资产" key:nil];
     [self initTableView];
-    [self getStatusSymbol];
+   
+        [self getStatusSymbol];
+
 //    [self queryTotalAmount];
 
     [super viewDidLoad];
@@ -194,33 +202,51 @@
 
 - (void)getStatusSymbol
 {
+    if (self.isRedPage == YES) {
+        self.tableView.currencys = self.currentModels;
+        self.currentModels = self.currentModels;
+        [self.tableView reloadData];
+    }else{
     self.currentModels = [NSMutableArray array];
         NSString *totalcount;
         TLDataBase *data = [TLDataBase sharedManager];
         
         if ([data.dataBase open]) {
             //            [db executeUpdate:@"create table if not exists LocalWallet(id INTEGER PRIMARY KEY AUTOINCREMENT,walletId text, symbol text, type text ,status text,cname text,unit text,pic1 text,withdrawFeeString text,withfrawFee text,orderNo text,ename text,icon text,pic2 text,pic3 text,address text,IsSelect INTEGER,next text)"];
-            NSString *sql = [NSString stringWithFormat:@"SELECT * from THALocal lo, THAUser th where lo.walletId = th.walletId  and th.userId = '%@'",[TLUser user].userId];
+            NSString *sql;
+            if (self.isRedPage == YES) {
+                  sql = [NSString stringWithFormat:@"SELECT * from THALocal lo, THAUser th where lo.walletId = th.walletId  and th.userId = '%@'",[TLUser user].userId];
+            }else{
+                
+                 sql = [NSString stringWithFormat:@"SELECT * from THALocal"];
+            }
+          
             FMResultSet *set = [data.dataBase executeQuery:sql];
             while ([set next]) {
                 CurrencyModel *model =[CurrencyModel new];
-
-                totalcount = [set stringForColumn:@"IsSelect"];
-                model.IsSelected = [totalcount boolValue];
-                model.symbol = [set stringForColumn:@"symbol"];
-                [self.currentModels addObject:model];
+                if (self.isRedPage == YES) {
+                    model.symbol = [set stringForColumn:@"symbol"];
+                    [self.currentModels addObject:model];
+                }else{
+                    totalcount = [set stringForColumn:@"IsSelect"];
+                    model.IsSelected = [totalcount boolValue];
+                    model.symbol = [set stringForColumn:@"symbol"];
+                    [self.currentModels addObject:model];
+                    
+                }
+              
             }
             [set close];
         }
         [data.dataBase close];
     
-    NSSet *set = [NSSet setWithArray:self.currentModels];
-    NSArray *resultArray = [set allObjects];
-    self.currentModels = (NSMutableArray*)resultArray;
+//    NSSet *set = [NSSet setWithArray:self.currentModels];
+//    NSArray *resultArray = [set allObjects];
+//    self.currentModels = (NSMutableArray*)resultArray;
     self.tableView.currencys = self.currentModels;
     self.currentModels = self.currentModels;
     [self.tableView reloadData];
-    
+    }
 }
 
 - (void)SaveStatusSymbol
@@ -246,6 +272,11 @@
     
 }
 - (void)viewWillDisappear:(BOOL)animated{
+    if (self.isRedPage) {
+        return;
+    }
+    
+    
     self.currencys = self.tableView.currencys;
     [self SaveStatusSymbol];
     NSMutableArray *a = [NSMutableArray array];
@@ -285,4 +316,16 @@
 }
 */
 
+
+-(void)refreshTableView:(TLTableView *)refreshTableview didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (self.isRedPage == YES) {
+        if (self.curreryBlock) {
+            self.curreryBlock(self.currentModels[indexPath.section]);
+        }
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+   
+    
+}
 @end

@@ -704,6 +704,9 @@
     http.parameters[@"loginPwd"] = self.pwdTf.text;
     http.parameters[@"kind"] = APP_KIND;
     }
+    http.parameters[@"client"] = @"ios";
+
+    
     [http postWithSuccess:^(id responseObject) {
         NSLog(@"%@",responseObject[@"data"][@"userId"]);
         [self requesUserInfoWithResponseObject:responseObject];

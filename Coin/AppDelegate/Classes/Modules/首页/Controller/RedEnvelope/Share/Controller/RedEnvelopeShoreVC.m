@@ -12,7 +12,7 @@
 #import "InvitationView.h"
 #import "ZJAnimationPopView.h"
 #import "UIImageView+WebCache.h"
-
+#import "MySugarPacketsVC.h"
 @interface RedEnvelopeShoreVC ()<RedEnvelopeHeadDelegate>
 {
 }
@@ -30,7 +30,7 @@
 -(InvitationView *)invitationView
 {
     if (!_invitationView) {
-        _invitationView = [[InvitationView alloc]initWithFrame:CGRectMake(30, SCREEN_HEIGHT, SCREEN_WIDTH - 60, SCREEN_WIDTH + 40)];
+        _invitationView = [[InvitationView alloc]initWithFrame:CGRectMake(kScreenWidth/3, SCREEN_HEIGHT, SCREEN_WIDTH - 60, SCREEN_WIDTH + 40)];
         _invitationView.backgroundColor = kHexColor(@"#8F000000");
         _invitationView.layer.masksToBounds = YES;
         _invitationView.layer.cornerRadius = 10;
@@ -45,15 +45,17 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.view.backgroundColor = kWhiteColor;
+    //kHexColor(@"#777777")
     [self getShareUrl];
     UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(kScreenWidth/2-75, kStatusBarHeight+5, 150, 44)];
-    label.text = [LangSwitcher switchLang:@"我的红包" key:nil];
-    label.textColor = [UIColor whiteColor];
+    label.text = [LangSwitcher switchLang:@"Theia红包" key:nil];
+    label.textColor = kTextBlack;
     label.textAlignment = NSTextAlignmentCenter;
     label.font = [UIFont systemFontOfSize:18];
     self.backbButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
     self.backbButton.frame = CGRectMake(15, kStatusBarHeight+5, 44, 44);
-    [self.backbButton setImage:kImage(@"返回1") forState:(UIControlStateNormal)];
+    [self.backbButton setImage:kImage(@"返回") forState:(UIControlStateNormal)];
 //    [self.backbButton setImageEdgeInsets:UIEdgeInsetsMake(0, -20, 0, 0)];
     
     [self.backbButton addTarget:self action:@selector(buttonMethodClick) forControlEvents:(UIControlEventTouchUpInside)];
@@ -61,10 +63,21 @@
     RedEnvelopeShoreView *shoreView = [[RedEnvelopeShoreView alloc]initWithFrame:self.view.frame];
     self.shoreVie = shoreView;
     [shoreView addSubview:label];
+    CoinWeakSelf;
+    shoreView.redPackBlock = ^{
+        [weakSelf.navigationController setNavigationBarHidden:NO];
+
+        [weakSelf dismissViewControllerAnimated:YES completion:nil];
+//        MySugarPacketsVC *vc = [[MySugarPacketsVC alloc]init];
+//        UINavigationController * navigation = [[UINavigationController alloc]initWithRootViewController:vc];
+//        vc.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+//        vc.modalPresentationStyle = UIModalTransitionStyleFlipHorizontal;
+//        [self presentViewController:navigation animated:NO completion:nil];
+    };
     [shoreView addSubview:self.backbButton];
 
-    shoreView.content = self.content;
-    shoreView.detailedLabel.text = self.content;
+//    shoreView.content = self.content;
+//    shoreView.detailedLabel.text = self.content;
     [shoreView.shoreButton addTarget:self action:@selector(shoreButtonClick) forControlEvents:(UIControlEventTouchUpInside)];
     [self.view addSubview:shoreView];
 
@@ -101,6 +114,8 @@
         NSDictionary *dic = @{@"code":_code};
         NSNotification *notification =[NSNotification notificationWithName:@"InfoNotification" object:nil userInfo:dic];
         [[NSNotificationCenter defaultCenter] postNotification:notification];
+        
+        [self shoreButtonClick];
     } failure:^(NSError *error) {
         
     }];
@@ -109,13 +124,14 @@
 }
 -(void)shoreButtonClick
 {
-    self.shoreVie.headImage.hidden = YES;
-    self.shoreVie.detailedLabel.hidden = YES;
-    self.shoreVie.shoreButton.hidden = YES;
-    self.shoreVie.nameLabel.hidden = YES;
-    self.shoreVie.stateLabel.hidden = YES;
+//    self.shoreVie.headImage.hidden = YES;
+//    self.shoreVie.detailedLabel.hidden = YES;
+//    self.shoreVie.shoreButton.hidden = YES;
+//    self.shoreVie.nameLabel.hidden = YES;
+//    self.shoreVie.stateLabel.hidden = YES;
     
-    _invitationView.frame = CGRectMake(30, kHeight(300), 173,173+60);
+    
+    _invitationView.frame = CGRectMake(kScreenWidth/2 - 86, kHeight(250), 173,173+60);
     
     
     [self showPopAnimationWithAnimationStyle:2];
@@ -133,7 +149,7 @@
     self.popView = popView;
     // 2.设置属性，可不设置使用默认值，见注解
     // 2.1 显示时点击背景是否移除弹框
-    popView.isClickBGDismiss = ![_invitationView isKindOfClass:[ZJAnimationPopView class]];
+    popView.isClickBGDismiss = [_invitationView isKindOfClass:[ZJAnimationPopView class]];
     // 2.2 显示时背景的透明度
     //    popView.popBGAlpha = 0.5f;
     // 2.3 显示时是否监听屏幕旋转
@@ -166,7 +182,7 @@
         
     };
     // 4.显示弹框
-    [popView pop];
+    [popView pop:self.view];
 }
 
 - (void)removeIcon
@@ -181,65 +197,65 @@
  
     
     
-    self.headImage = [[UIImageView alloc]initWithFrame:CGRectMake(kScreenWidth/2 - kHeight(70)/2, kHeight(170), kHeight(70), kHeight(70))];
-    self.headImage.image = kImage(@"圆 按钮");
-    [self.popView addSubview:self.headImage];
+//    self.headImage = [[UIImageView alloc]initWithFrame:CGRectMake(kScreenWidth/2 - kHeight(70)/2, kHeight(170), kHeight(70), kHeight(70))];
+//    self.headImage.image = kImage(@"圆 按钮");
+//    [self.popView addSubview:self.headImage];
+//
+//    UIImageView *Image = [[UIImageView alloc]init];
+//    [Image sd_setImageWithURL: [NSURL URLWithString: [[TLUser user].photo convertImageUrl]] placeholderImage:kImage(@"头像")];
+//    Image.layer.cornerRadius = 30;
+//    Image.clipsToBounds = YES;
+//    [_headImage addSubview:Image];
+//    [Image mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.left.equalTo(@5);
+//        make.bottom.right.equalTo(@-5);
+//    }];
     
-    UIImageView *Image = [[UIImageView alloc]init];
-    [Image sd_setImageWithURL: [NSURL URLWithString: [[TLUser user].photo convertImageUrl]] placeholderImage:kImage(@"头像")];
-    Image.layer.cornerRadius = 30;
-    Image.clipsToBounds = YES;
-    [_headImage addSubview:Image];
-    [Image mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.equalTo(@5);
-        make.bottom.right.equalTo(@-5);
-    }];
-    
-    UILabel *introduce = [UILabel labelWithBackgroundColor:kClearColor textColor:kHexColor(@"#FBDDA9") font:14];
-    introduce.frame = CGRectMake(kScreenWidth/2-35, self.headImage.yy +2, kHeight(70), kHeight(22));
-    introduce.textAlignment = NSTextAlignmentCenter;
-    [self.popView addSubview:introduce];
-    introduce.text = [TLUser user].nickname;
+//    UILabel *introduce = [UILabel labelWithBackgroundColor:kClearColor textColor:kHexColor(@"#FBDDA9") font:14];
+//    introduce.frame = CGRectMake(kScreenWidth/2-35, self.headImage.yy +2, kHeight(70), kHeight(22));
+//    introduce.textAlignment = NSTextAlignmentCenter;
+//    [self.popView addSubview:introduce];
+//    introduce.text = [TLUser user].nickname;
 
-    UILabel *introduce2 = [UILabel labelWithBackgroundColor:kClearColor textColor:kWhiteColor font:16];
-    introduce2.frame = CGRectMake(kWidth(120), introduce.yy , kWidth(150), kHeight(22));
-    introduce2.textAlignment = NSTextAlignmentCenter;
-    introduce2.text = [LangSwitcher switchLang:@"给您发了一个红包" key:nil];
-
-    [self.popView addSubview:introduce2];
-    [introduce2 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(@(introduce.yy));
-        make.centerX.equalTo(self.popView.mas_centerX);
-        
-    }];
-    UILabel *introduce3 = [UILabel labelWithBackgroundColor:kClearColor textColor:kWhiteColor font:14];
-    
-//    introduce3.frame = CGRectMake(kWidth(120), kHeight(456), kScreenWidth - kWidth(120), kHeight(22));
-    introduce3.text = [LangSwitcher switchLang:@"扫描二维码领取Theia红包" key:nil];
-
-    introduce3.textAlignment = NSTextAlignmentCenter;
-    [self.popView addSubview:introduce3];
-    [introduce3 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(@(kHeight(456)));
-        make.centerX.equalTo(self.popView.mas_centerX);
-        
-    }];
-    UILabel *introduce4 = [UILabel labelWithBackgroundColor:kClearColor textColor:kWhiteColor font:14];
-    UITapGestureRecognizer *ta = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(shareQr)];
-    [introduce4 addGestureRecognizer:ta];
-    introduce4.userInteractionEnabled = YES;
-    
-//    introduce4.frame = CGRectMake(kWidth(120), kHeight(456), kScreenWidth - kWidth(120), kHeight(22));
-    introduce4.text = [LangSwitcher switchLang:@"截图分享二维码" key:nil];
-    
-    introduce4.textAlignment = NSTextAlignmentCenter;
-    [self.popView addSubview:introduce4];
-    [introduce4 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(self.popView.mas_bottom).offset(-50-(kBottomInsetHeight));
-        make.centerX.equalTo(self.popView.mas_centerX);
-
-
-    }];
+//    UILabel *introduce2 = [UILabel labelWithBackgroundColor:kClearColor textColor:kWhiteColor font:16];
+//    introduce2.frame = CGRectMake(kWidth(120), 200 , kWidth(150), kHeight(22));
+//    introduce2.textAlignment = NSTextAlignmentCenter;
+//    introduce2.text = [LangSwitcher switchLang:@"扫码领红包" key:nil];
+//
+//    [self.popView addSubview:introduce2];
+//    [introduce2 mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(@(200));
+//        make.centerX.equalTo(self.popView.mas_centerX);
+//
+//    }];
+//    UILabel *introduce3 = [UILabel labelWithBackgroundColor:kClearColor textColor:kWhiteColor font:14];
+//
+////    introduce3.frame = CGRectMake(kWidth(120), kHeight(456), kScreenWidth - kWidth(120), kHeight(22));
+//    introduce3.text = [LangSwitcher switchLang:@"扫描二维码领取Theia红包" key:nil];
+//
+//    introduce3.textAlignment = NSTextAlignmentCenter;
+//    [self.popView addSubview:introduce3];
+//    [introduce3 mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(@(kHeight(456)));
+//        make.centerX.equalTo(self.popView.mas_centerX);
+//
+//    }];
+//    UILabel *introduce4 = [UILabel labelWithBackgroundColor:kClearColor textColor:kWhiteColor font:14];
+//    UITapGestureRecognizer *ta = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(shareQr)];
+//    [introduce4 addGestureRecognizer:ta];
+//    introduce4.userInteractionEnabled = YES;
+//
+////    introduce4.frame = CGRectMake(kWidth(120), kHeight(456), kScreenWidth - kWidth(120), kHeight(22));
+//    introduce4.text = [LangSwitcher switchLang:@"截图分享二维码" key:nil];
+//
+//    introduce4.textAlignment = NSTextAlignmentCenter;
+//    [self.popView addSubview:introduce4];
+//    [introduce4 mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.bottom.equalTo(self.popView.mas_bottom).offset(-50-(kBottomInsetHeight));
+//        make.centerX.equalTo(self.popView.mas_centerX);
+//
+//
+//    }];
 
 }
 

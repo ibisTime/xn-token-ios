@@ -9,6 +9,7 @@
 #import "MySugarPacketsVC.h"
 #import "GetTheVC.h"
 #import "SendVC.h"
+#import "FilterView.h"
 @interface MySugarPacketsVC ()<UIScrollViewDelegate>
 {
     UISegmentedControl *segment;
@@ -22,8 +23,12 @@
 @property (nonatomic, strong)GetTheVC *vc1;
 @property (nonatomic, strong)SendVC *vc2;
 @property (nonatomic , strong)UIButton *backbButton;
+@property (nonatomic , strong)UIButton *chooseButton;
+@property (nonatomic, strong) FilterView *filterPicker;
+
+
 #define kPageCount 2
-#define kButton_H 70
+#define kButton_H 0
 #define kMrg 10
 #define kTag 1000
 
@@ -36,13 +41,34 @@
     if (!_backbButton) {
         _backbButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
         _backbButton.frame = CGRectMake(0, 0, 44, 44);
-        [_backbButton setImage:kImage(@"返回1") forState:(UIControlStateNormal)];
+        [_backbButton setImage:kImage(@"返回") forState:(UIControlStateNormal)];
         [_backbButton setImageEdgeInsets:UIEdgeInsetsMake(0, -20, 0, 0)];
 
         [_backbButton addTarget:self action:@selector(buttonMethodClick) forControlEvents:(UIControlEventTouchUpInside)];
 
     }
     return _backbButton;
+}
+
+-(UIButton *)chooseButton
+{
+    if (!_chooseButton) {
+        _chooseButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
+        _chooseButton.frame = CGRectMake(kScreenWidth-60, 0, 44, 44);
+        [_chooseButton setImage:kImage(@"topbar_more") forState:(UIControlStateNormal)];
+//        [_chooseButton setImageEdgeInsets:UIEdgeInsetsMake(0, -20, 0, 0)];
+        
+        [_chooseButton addTarget:self action:@selector(buttonMethod) forControlEvents:(UIControlEventTouchUpInside)];
+        
+    }
+    return _chooseButton;
+}
+
+
+- (void)buttonMethod
+{
+    [self.filterPicker show];
+  
 }
 
 -(void)buttonMethodClick
@@ -55,13 +81,13 @@
     // Do any additional setup after loading the view
     UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 100, 44)];
     label.text = [LangSwitcher switchLang:@"我的红包" key:nil];
-    label.textColor = [UIColor whiteColor];
+    label.textColor = kTextBlack;
     label.textAlignment = NSTextAlignmentCenter;
     label.font = [UIFont systemFontOfSize:18];
     self.navigationItem.titleView = label;
 
     UIView *backView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 70)];
-    backView.backgroundColor = HeadBackColor;
+    backView.backgroundColor = kWhiteColor;
     [self.view addSubview:backView];
 
     UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
@@ -71,8 +97,9 @@
     self.navigationController.navigationBar.titleTextAttributes=
   @{NSForegroundColorAttributeName:[UIColor whiteColor],
     NSFontAttributeName:[UIFont fontWithName:@"Helvetica-Bold" size:16]};
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.chooseButton];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-    self.navigationController.navigationBar.barTintColor = HeadBackColor;
+    self.navigationController.navigationBar.barTintColor = kWhiteColor;
     self.view.backgroundColor = [UIColor whiteColor];
     
     //设置可以左右滑动的ScrollView
@@ -80,7 +107,7 @@
     //设置控制的每一个子控制器
     [self setupChildViewControll];
     //设置分页按钮
-    [self setupPageButton];
+//    [self setupPageButton];
 
 //    [self setupSelectBtn];
     [_scroll setContentOffset:CGPointMake(SCREEN_WIDTH * _currentPages, 0) animated:YES];
@@ -113,20 +140,20 @@
 #pragma mark - 设置控制的每一个子控制器
 - (void)setupChildViewControll{
     self.vc1 = [[GetTheVC alloc]init];
-    self.vc2 = [[SendVC alloc]init];
+    self.vc1.isRecevied = YES;
+//    self.vc2 = [[SendVC alloc]init];
 
     //指定该控制器为其子控制器
     [self addChildViewController:_vc1];
-    [self addChildViewController:_vc2];
-
+//    [self addChildViewController:_vc2];
 
     //将视图加入ScrollView上
     [_scroll addSubview:_vc1.view];
-    [_scroll addSubview:_vc2.view];
+//    [_scroll addSubview:_vc2.view];
 
     //设置两个控制器的尺寸
     _vc1.view.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-    _vc2.view.frame = CGRectMake(SCREEN_WIDTH, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+//    _vc2.view.frame = CGRectMake(SCREEN_WIDTH, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
 
 }
 #pragma mark - 设置分页按钮
@@ -154,7 +181,58 @@
 
 }
 
+- (FilterView *)filterPicker {
+    
+    if (!_filterPicker) {
+        
+        CoinWeakSelf;
+        
+//        NSArray * textArr = self.textArr;
+                NSArray *textArr = @[[LangSwitcher switchLang:@"我收到的" key:nil],
+                                     ];
+        
+        NSArray *typeArr = @[@"tt",
+                             @"charge",
+                             ];
+        
+        _filterPicker = [[FilterView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
+        
+        //        _filterPicker.title =  [LangSwitcher switchLang: @"请选择交易类型" key:nil];
+        
+        _filterPicker.selectBlock = ^(NSInteger index) {
+            
+            [weakSelf pickerChoose:index];
+            
+            //            [weakSelf.tableView beginRefreshing];
+        };
+        
+        _filterPicker.tagNames = textArr;
+        
+    }
+    
+    return _filterPicker;
+}
 
+- (void)pickerChoose: (NSInteger)inter
+{
+    
+    [_vc1.view removeFromSuperview];
+    
+    self.vc1 = [[GetTheVC alloc]init];
+    self.vc1.isRecevied = NO;
+    //    self.vc2 = [[SendVC alloc]init];
+    
+    //指定该控制器为其子控制器
+    [self addChildViewController:_vc1];
+    //    [self addChildViewController:_vc2];
+    
+    //将视图加入ScrollView上
+    [_scroll addSubview:_vc1.view];
+    //    [_scroll addSubview:_vc2.view];
+    
+    //设置两个控制器的尺寸
+    _vc1.view.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+}
 #pragma mark -- 按钮点击方法
 - (void)pageClick:(UISegmentedControl *)sender
 {

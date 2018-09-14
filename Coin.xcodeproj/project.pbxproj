@@ -293,6 +293,7 @@
 		B83D1E0F20CE7076007835DB /* WalletForwordVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B83D1E0E20CE7076007835DB /* WalletForwordVC.m */; };
 		B842D5D520E91AA900891289 /* ChooseCountryVc.m in Sources */ = {isa = PBXBuildFile; fileRef = B842D5D420E91AA900891289 /* ChooseCountryVc.m */; };
 		B85FE46F21287D2300C9F60C /* PayModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B85FE46E21287D2300C9F60C /* PayModel.m */; };
+		B8657833214B90D400179EB1 /* DetailSugarView.m in Sources */ = {isa = PBXBuildFile; fileRef = B8657832214B90D400179EB1 /* DetailSugarView.m */; };
 		B87B1BCA20D2509E00EF7B8E /* WalletNewFeaturesVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B87B1BC920D2509E00EF7B8E /* WalletNewFeaturesVC.m */; };
 		B87BF1CD2113F53F00DD5C05 /* DataBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B87BF1CC2113F53F00DD5C05 /* DataBaseModel.m */; };
 		B87BF1D02114251800DD5C05 /* FMDBMigrationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B87BF1CF2114251700DD5C05 /* FMDBMigrationManager.m */; };
@@ -407,6 +408,7 @@
 		B8F63EE320D397B000556150 /* WalletLocalWebVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B8F63EE220D397B000556150 /* WalletLocalWebVC.m */; };
 		B8F791A12146495000F5BE45 /* THTranstionCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = B8F791A02146495000F5BE45 /* THTranstionCollectionView.m */; };
 		B8F791A421464A3300F5BE45 /* TransformCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B8F791A321464A3300F5BE45 /* TransformCell.m */; };
+		B8FDB704214A824400313EC3 /* MysugarView.m in Sources */ = {isa = PBXBuildFile; fileRef = B8FDB703214A824400313EC3 /* MysugarView.m */; };
 		FB49ABC88B6B7FFBB19DF11D /* Pods_Coin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 524739678D50CF78B722738E /* Pods_Coin.framework */; };
 /* End PBXBuildFile section */
 
@@ -1067,6 +1069,8 @@
 		B842D5D420E91AA900891289 /* ChooseCountryVc.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChooseCountryVc.m; sourceTree = "<group>"; };
 		B85FE46D21287D2300C9F60C /* PayModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PayModel.h; sourceTree = "<group>"; };
 		B85FE46E21287D2300C9F60C /* PayModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PayModel.m; sourceTree = "<group>"; };
+		B8657831214B90D400179EB1 /* DetailSugarView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailSugarView.h; sourceTree = "<group>"; };
+		B8657832214B90D400179EB1 /* DetailSugarView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailSugarView.m; sourceTree = "<group>"; };
 		B87B1BC820D2509E00EF7B8E /* WalletNewFeaturesVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WalletNewFeaturesVC.h; sourceTree = "<group>"; };
 		B87B1BC920D2509E00EF7B8E /* WalletNewFeaturesVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WalletNewFeaturesVC.m; sourceTree = "<group>"; };
 		B87BF1CB2113F53F00DD5C05 /* DataBaseModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DataBaseModel.h; sourceTree = "<group>"; };
@@ -1301,6 +1305,8 @@
 		B8F791A02146495000F5BE45 /* THTranstionCollectionView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = THTranstionCollectionView.m; sourceTree = "<group>"; };
 		B8F791A221464A3300F5BE45 /* TransformCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TransformCell.h; sourceTree = "<group>"; };
 		B8F791A321464A3300F5BE45 /* TransformCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TransformCell.m; sourceTree = "<group>"; };
+		B8FDB702214A824400313EC3 /* MysugarView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MysugarView.h; sourceTree = "<group>"; };
+		B8FDB703214A824400313EC3 /* MysugarView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MysugarView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2883,6 +2889,10 @@
 				7A3821BF20EACD8B00D6B636 /* SendTableView.m */,
 				7A3821C120EACDA100D6B636 /* SendCell.h */,
 				7A3821C220EACDA100D6B636 /* SendCell.m */,
+				B8FDB702214A824400313EC3 /* MysugarView.h */,
+				B8FDB703214A824400313EC3 /* MysugarView.m */,
+				B8657831214B90D400179EB1 /* DetailSugarView.h */,
+				B8657832214B90D400179EB1 /* DetailSugarView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3609,6 +3619,7 @@
 				B8086516211EA17D00755158 /* BTCAddress.m in Sources */,
 				B8D5F15620CE0F530005CF96 /* AccountMoneyCellTableViewCell.m in Sources */,
 				B80864F6211EA17D00755158 /* BTCProtocolSerialization+Tests.m in Sources */,
+				B8657833214B90D400179EB1 /* DetailSugarView.m in Sources */,
 				B87BF1CD2113F53F00DD5C05 /* DataBaseModel.m in Sources */,
 				21A7F3241FB2E2F900FAA0A2 /* CaptchaView.m in Sources */,
 				B8BBA5FA20C780FA00DC4D5F /* PlatformTableView.m in Sources */,
@@ -3677,6 +3688,7 @@
 				B88B092720C8E371005C2D2F /* JoinMineCell.m in Sources */,
 				2120D8A31FCEE1DE00712600 /* HourPickerView.m in Sources */,
 				B80864FE211EA17D00755158 /* BTCBigNumber.m in Sources */,
+				B8FDB704214A824400313EC3 /* MysugarView.m in Sources */,
 				B808650F211EA17D00755158 /* BTCChainCom.m in Sources */,
 				211DE6A01FB58B4C002FCF3D /* TLDatePicker.m in Sources */,
 				B8CAA14721158FF200695BC3 /* LPDPhotoPreviewCell.m in Sources */,

@@ -99,10 +99,17 @@ typedef enum : NSUInteger {
     [self initInPutView];
     
     [self transformNow];
+    self.nineView.isLocal = self.isLocal == YES ? YES : NO ;
     self.nineView.models = self.currencys;
     [self.nineView reloadData];
-    
+    if (self.isLocal == YES) {
 
+//        [self loadtype];
+//        [self loadGas];
+        [self changes];
+    }
+  
+  
 //    UIImageView *image =   [UIImageView new];
 //    image.contentMode = UIViewContentModeScaleToFill;
 //    if ([LangSwitcher currentLangType] == LangTypeKorean) {
@@ -127,10 +134,10 @@ typedef enum : NSUInteger {
 - (void)initTopCollectionView{
     
     CustomLayoutWallet *layout = [[CustomLayoutWallet alloc] init];
-    layout.minimumLineSpacing = 20;
+    layout.minimumLineSpacing = 10;
 //
 //    layout.minimumInteritemSpacing = 10;
-    layout.itemSize = CGSizeMake(100, 44);
+    layout.itemSize = CGSizeMake((kScreenWidth-60)/3, 42);
     UIImage *image1 = [UIImage imageNamed:@"bch"];
     UIImage *image2 = [UIImage imageNamed:@"eth"];
     UIImage *image3 = [UIImage imageNamed:@"ltc"];
@@ -139,14 +146,28 @@ typedef enum : NSUInteger {
     THTranstionCollectionView *nineView = [[THTranstionCollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout withImage:array];
     self.nineView = nineView;
     [self.view addSubview:nineView];
+    int n ;
+    CGFloat i  = self.currencys.count / 3;
+    if (i <= 1) {
+        n = 1;
+    }else if (  i <= 2 )
+    {
+        
+        n = 2;
+    }else  if (  i <= 3 ){
+        n =3;
+    }else{
+        n = 4;
+        }
+    
     [nineView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.view.mas_top).offset(0);
         make.left.equalTo(self.view.mas_left).offset(15);
         make.right.equalTo(self.view.mas_right).offset(-15);
-        make.height.equalTo(@(kHeight(180)));
+        make.height.equalTo(@(kHeight(i *90+30)));
         
     }];
-    nineView.backgroundColor = [UIColor colorWithRed:238/255.0 green:238/255.0  blue:242/255.0  alpha:1.0];
+    nineView.backgroundColor = kHexColor(@"#F1F2F5");
     
     self.nineView.type = SearchTypeTop;
     nineView.refreshDelegate = self;
@@ -235,7 +256,8 @@ typedef enum : NSUInteger {
         make.left.equalTo(to.mas_right).offset(15);
     }];
 
-    UIButton *but = [UIButton buttonWithTitle:@"切换" titleColor:kTextBlack backgroundColor:kClearColor titleFont:15];
+    UIButton *but = [UIButton buttonWithTitle:@"" titleColor:kTextBlack backgroundColor:kClearColor titleFont:15];
+    [but setImage:kImage(@"转换ICON") forState:UIControlStateNormal];
     
     [self.whiteView addSubview:but];
     self.changebut = but;
@@ -251,13 +273,23 @@ typedef enum : NSUInteger {
     
 }
 
+- (void)changesDetail
+{
+    
+    
+}
+
 - (void)changes
 {
     if (self.changebut.isSelected == YES) {
+        self.currencys = self.centercurrencys;
+        self.currentModel = self.centercurrencys[0];
+        self.isLocal = NO;
+        
         self.privateKey.text = [LangSwitcher switchLang:@"私钥账户" key:nil];
         self.blue.backgroundColor =kAppCustomMainColor;
         self.org.backgroundColor =kOrangeRedColor;
-
+        self.inputFiled.text = nil;
         self.myprivate.text = [LangSwitcher switchLang:@"个人账户" key:nil];
         [self.wallletView mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.privateKey.mas_bottom).offset(10);
@@ -267,8 +299,26 @@ typedef enum : NSUInteger {
         }];
         self.slider.hidden = YES;
         [self.view setNeedsLayout];
+        
+       
+            NSString *money = [CoinUtil convertToRealCoin:self.currencys[0].amountString coin:self.currentModel.currency];
+            
+            self.amountlLab.text = [NSString stringWithFormat:@"%@ %@",money,self.currentModel.currency];
+       
 
+        
+        if (self.isLocal == NO) {
+            CoinModel *currentCoin = [CoinUtil getCoinModel:self.currencys[0].currency];
+            //
+            self.Free.text = currentCoin.withdrawFeeString;
+            
+            self.Free.text = [NSString stringWithFormat:@"%@ %@", [CoinUtil convertToRealCoin:currentCoin.withdrawFeeString coin:self.currencys[0].currency], self.currencys[0].currency];
+        }
     }else{
+        self.isLocal = YES;
+        self.currencys = self.localcurrencys;
+        self.currentModel = self.localcurrencys[0];
+
         self.blue.backgroundColor =kOrangeRedColor;
         self.org.backgroundColor =kAppCustomMainColor;
         self.privateKey.text = [LangSwitcher switchLang:@"个人账户" key:nil];
@@ -281,9 +331,18 @@ typedef enum : NSUInteger {
             make.height.equalTo(@210);
 
         }];
+        [self loadtype];
+        [self loadGas];
         self.slider.hidden = NO;
-
-        [self.view setNeedsLayout];
+        if (self.isLocal == YES) {
+            NSString *money = [CoinUtil convertToRealCoin:self.currentModel.balance coin:self.currentModel.symbol];
+            
+            self.amountlLab.text = [NSString stringWithFormat:@"%@ %@",money,self.currencys[0].symbol];
+        }
+        
+        
+     
+            [self.view setNeedsLayout];
     }
   
     self.changebut.selected = ! self.changebut.selected;
@@ -296,9 +355,9 @@ typedef enum : NSUInteger {
     UIView *wallletView  = [UIView new];
     wallletView.backgroundColor = kWhiteColor;
     self.wallletView = wallletView;
-    wallletView.layer.cornerRadius = 3;
-    wallletView.layer.borderWidth = 0.3;
-    wallletView.layer.borderColor = kAppCustomMainColor.CGColor;
+    wallletView.layer.cornerRadius = 4;
+    wallletView.layer.borderWidth = 1;
+    wallletView.layer.borderColor = kHexColor(@"#2B5495").CGColor;
     wallletView.clipsToBounds = YES;
     [self.whiteView addSubview:wallletView];
     [wallletView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -319,6 +378,9 @@ typedef enum : NSUInteger {
     }];
     
     self.inputFiled = [[TLTextField alloc] initWithFrame:CGRectMake(30, kHeight(110), kScreenWidth-60, 60) leftTitle:@"" titleWidth:5 placeholder:[LangSwitcher switchLang:@"单行输入" key:nil]];
+    self.inputFiled.clearButtonMode = UITextFieldViewModeNever;
+    
+
     [self.whiteView addSubview:self.inputFiled];
     self.inputFiled.layer.cornerRadius = 3;
     self.inputFiled.layer.borderWidth = 1;
@@ -365,9 +427,16 @@ typedef enum : NSUInteger {
 
     UILabel *avildAmount = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:15];
     self.amountlLab = avildAmount;
-    NSString *money = [CoinUtil convertToRealCoin:self.currencys[0].amountString coin:self.currencys[0].currency];
-
-    avildAmount.text = [NSString stringWithFormat:@"%@ %@",money,self.currencys[0].currency];
+    if (self.isLocal == YES) {
+        NSString *money = [CoinUtil convertToRealCoin:self.currencys[0].balance coin:self.currencys[0].symbol];
+        
+        avildAmount.text = [NSString stringWithFormat:@"%@ %@",money,self.currencys[0].symbol];
+    }else{
+        NSString *money = [CoinUtil convertToRealCoin:self.currencys[0].amountString coin:self.currencys[0].currency];
+        
+        avildAmount.text = [NSString stringWithFormat:@"%@ %@",money,self.currencys[0].currency];
+    }
+   
     [wallletView addSubview:avildAmount];
     [avildAmount mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(leftAmount.mas_centerY);
@@ -381,7 +450,7 @@ typedef enum : NSUInteger {
                                                placeholder:[LangSwitcher switchLang:@"请输入谷歌验证码" key:nil]];
     
     self.googleAuthTF.keyboardType = UIKeyboardTypeNumberPad;
-    
+    [wallletView addSubview:self.googleAuthTF];
     if (self.isLocal == NO) {
         [self.view addSubview:self.googleAuthTF];
 
@@ -437,7 +506,7 @@ typedef enum : NSUInteger {
         make.bottom.equalTo(self.whiteView.mas_bottom).offset(-kBottomInsetHeight-20);
         make.right.equalTo(self.view.mas_right).offset(-35);
         make.left.equalTo(self.view.mas_left).offset(35);
-        make.height.equalTo(@50);
+        make.height.equalTo(@48);
         
     }];
     
@@ -452,6 +521,7 @@ typedef enum : NSUInteger {
 
     UILabel *Free = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:14];
     self.Free = Free;
+    
     NSString *money1 = [CoinUtil convertToRealCoin:self.currencys[0].amountString coin:self.currencys[0].currency];
     Free.text = [NSString stringWithFormat:@"%@ %@",money1,self.currencys[0].currency];
     [self.whiteView addSubview:Free];
@@ -477,17 +547,23 @@ typedef enum : NSUInteger {
         if (value == 0) {
             if ([self.currentModel.symbol isEqualToString:@"BTC"]) {
                 
-                
-                
-                
-                
-                
+    
                 self.Free.text = [NSString stringWithFormat:@"%@ %@ ",self.priceSlow,@"sat/b"];
                 self.btcPrice = [self.priceSlow integerValue];
             }else{
-                self.Free.text = [NSString stringWithFormat:@"%@ %@ %@",self.priceSlow,@"sat/b",self.currentModel.symbol];
+                if ([self.currentModel.type isEqualToString:@"0"]) {
+                    self.Free.text = [NSString stringWithFormat:@"%.8f %@",self.gamPrice*0.85,self.currentModel.symbol];
 
-                self.Free.text = [NSString stringWithFormat:@"%.8f %@",self.gamPrice*0.85,self.currentModel.symbol];
+                }else if ([self.currentModel.type isEqualToString:@"1"])
+                {
+                    self.Free.text = [NSString stringWithFormat:@"%.8f %@",self.gamPrice*0.85,@"ETH"];
+
+                }else{
+                    
+                    self.Free.text = [NSString stringWithFormat:@"%.8f %@",self.gamPrice*0.85,@"WAN"];
+
+                }
+                
                 self.pricr = [NSString stringWithFormat:@"%f",[self.tempPrice longLongValue]*0.85];
             }
             
@@ -503,8 +579,16 @@ typedef enum : NSUInteger {
                 
                 self.pricr = [NSString stringWithFormat:@"%f",[self.pricr intValue]*value];
             }else{
-                
-                self.Free.text = [NSString stringWithFormat:@"%.8f %@", self.gamPrice *0.85 +self.gamPrice*value*1/3 ,self.currentModel.symbol];
+                if ([self.currentModel.type isEqualToString:@"0"]) {
+                      self.Free.text = [NSString stringWithFormat:@"%.8f %@", self.gamPrice *0.85 +self.gamPrice*value*1/3 ,self.currentModel.symbol];
+                }else if ([self.currentModel.type isEqualToString:@"1"])
+                {
+                    self.Free.text = [NSString stringWithFormat:@"%.8f %@", self.gamPrice *0.85 +self.gamPrice*value*1/3 ,@"ETH"];
+                }else{
+                    
+                    self.Free.text = [NSString stringWithFormat:@"%.8f %@", self.gamPrice *0.85 +self.gamPrice*value*1/3,@"WAN" ];
+                }
+              
                 
                 self.pricr = [NSString stringWithFormat:@"%f",[self.tempPrice longLongValue] + [self.tempPrice longLongValue] *value *1/3];
             }
@@ -519,8 +603,18 @@ typedef enum : NSUInteger {
                 
                 self.pricr = [NSString stringWithFormat:@"%@",self.priceFast];
             }else{
-                
-                self.Free.text = [NSString stringWithFormat:@"%.8f %@",self.gamPrice*value*1.15,self.currentModel.symbol];
+                if ([self.currentModel.type isEqualToString:@"0"]) {
+                    self.Free.text = [NSString stringWithFormat:@"%.8f %@",self.gamPrice*value*1.15,self.currentModel.symbol];
+
+                }else if ([self.currentModel.type isEqualToString:@"1"])
+                {
+                    self.Free.text = [NSString stringWithFormat:@"%.8f %@",self.gamPrice*value*1.15,@"ETH"];
+
+                }else{
+                    self.Free.text = [NSString stringWithFormat:@"%.8f %@",self.gamPrice*value*1.15,@"WAN"];
+
+                    
+                }
                 
                 self.pricr = [NSString stringWithFormat:@"%f",[self.tempPrice longLongValue]*value*1.15];
             }
@@ -537,13 +631,15 @@ typedef enum : NSUInteger {
 - (void)transformNow
 {
     
-    
-    CoinModel *currentCoin = [CoinUtil getCoinModel:self.currencys[0].currency];
-    
-    self.Free.text = currentCoin.withdrawFeeString;
-    
-    self.Free.text = [NSString stringWithFormat:@"%@ %@", [CoinUtil convertToRealCoin:currentCoin.withdrawFeeString coin:self.currencys[0].currency], self.currencys[0].currency];
-    
+    if (self.isLocal == NO) {
+        CoinModel *currentCoin = [CoinUtil getCoinModel:self.currencys[0].currency];
+        //
+        self.Free.text = currentCoin.withdrawFeeString;
+        
+        self.Free.text = [NSString stringWithFormat:@"%@ %@", [CoinUtil convertToRealCoin:currentCoin.withdrawFeeString coin:self.currencys[0].currency], self.currencys[0].currency];
+        
+    }
+  
 }
 
 - (void)transform
@@ -571,11 +667,11 @@ typedef enum : NSUInteger {
             [set close];
         }
         [dataBase.dataBase close];
-        if ([address isNotBlank]) {
+//        if ([address isNotBlank]) {
             [self loadtype];
             [self loadPwd];
             [self sendExcange];
-        }
+//        }
         //去中心化划转
     }else{
         //中心化划转
@@ -587,7 +683,7 @@ typedef enum : NSUInteger {
             pwdRelatedVC.success = ^{
                 
                 
-                [self  requestTransform];
+                
 
             };
             [self.navigationController pushViewController:pwdRelatedVC animated:YES];
@@ -600,12 +696,12 @@ typedef enum : NSUInteger {
                     placeHolder:[LangSwitcher switchLang:@"请输入资金密码" key:nil]
                           maker:self cancle:^(UIAlertAction *action) {
                               [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-                              //验证密码正确
-                              [self  requestTransform];
                               
                           } confirm:^(UIAlertAction *action, UITextField *textField) {
-                              
-                              
+                              //验证密码正确
+
+                              [self  requestTransform:textField.text];
+
                           }];
         
     }
@@ -613,7 +709,7 @@ typedef enum : NSUInteger {
 }
 
 
-- (void)requestTransform
+- (void)requestTransform : (NSString *)pwd
 {
     TLNetworking *http = [TLNetworking new];
     
@@ -626,11 +722,18 @@ typedef enum : NSUInteger {
     //    http.parameters[@"applyNote"] = @"ios-提现";
     http.parameters[@"applyUser"] = [TLUser user].userId;
     http.parameters[@"payCardInfo"] = self.currentModel.currency;
-    http.parameters[@"payCardNo"] = self.currentModel.address;
+    NSString *add;
+    for (int i = 0; i < self.localcurrencys.count; i++) {
+        if ([self.currentModel.currency isEqualToString:self.localcurrencys[i].symbol]) {
+            add = self.localcurrencys[i].address;
+        }
+    }
+    http.parameters[@"payCardNo"] = add;
     http.parameters[@"token"] = [TLUser user].token;
     //    http.parameters[@"fee"] = @"-0.1";
     //    http.parameters[@"fee"] = @"-10";
-    
+    http.parameters[@"tradePwd"] = pwd;
+
     
     if ([TLUser user].isGoogleAuthOpen) {
         
@@ -644,7 +747,7 @@ typedef enum : NSUInteger {
         [[NSNotificationCenter defaultCenter] postNotificationName:kWithDrawCoinSuccess object:nil];
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            
+            [self.navigationController popViewControllerAnimated:YES];
             
         });
         
@@ -730,6 +833,8 @@ typedef enum : NSUInteger {
                     self.pricr = pricr;
                     NSLog(@"%@low@,fast%@",priceSlow,priceFast);
                     self.gamPrice = [price floatValue ] ;
+                    self.slider.value = 0.5;
+                    [self valueChange:self.slider];
                     [MBProgressHUD hideHUDForView:self.view animated:YES];
                 } failure:^(NSError *error) {
                     NSLog(@"%@",error);
@@ -749,6 +854,8 @@ typedef enum : NSUInteger {
                     p = p *21000;
                     NSLog(@"%.8f",p);
                     self.gamPrice = p;
+                    self.slider.value = 0.5;
+                    [self valueChange:self.slider];
                     [MBProgressHUD hideHUDForView:self.view animated:YES];
                     
                     
@@ -771,6 +878,8 @@ typedef enum : NSUInteger {
                     p = p *21000;
                     NSLog(@"%.8f",p);
                     self.gamPrice = p;
+                    self.slider.value = 0.5;
+                    [self valueChange:self.slider];
                     [MBProgressHUD hideHUDForView:self.view animated:YES];
                     
                 } failure:^(NSError *error) {
@@ -791,6 +900,8 @@ typedef enum : NSUInteger {
                 p = p *21000;
                 NSLog(@"%.8f",p);
                 self.gamPrice = p;
+                self.slider.value = 0.5;
+                [self valueChange:self.slider];
                 [MBProgressHUD hideHUDForView:self.view animated:YES];
                 
             } failure:^(NSError *error) {
@@ -887,7 +998,7 @@ typedef enum : NSUInteger {
                 placeHolder:[LangSwitcher switchLang:@"请输入交易密码" key:nil]
                       maker:self cancle:^(UIAlertAction *action) {
                           
-                          return ;
+                        
                       } confirm:^(UIAlertAction *action, UITextField *textField) {
                           [MBProgressHUD showHUDAddedTo:self.view animated:YES];
                           //                               [SVProgressHUD show];
@@ -896,34 +1007,40 @@ typedef enum : NSUInteger {
                                   NSString *result;
                                   NSLog(@"线程2--->%d",[NSThread isMainThread]);
                                   //                                  [SVProgressHUD show];
-                                  
+                                  NSString *add;
+                                  for (int i = 0; i < self.localcurrencys.count; i++) {
+                                      if ([self.currentModel.symbol isEqualToString:self.centercurrencys[i].currency]) {
+                                          add = self.centercurrencys[i].coinAddress;
+                                      }
+                                  }
                                   
                                   if ([self.currentModel.type isEqualToString:@"0"]) {
                                       //公链 ETH WAN BTC
                                       if ([self.currentModel.symbol isEqualToString:@"ETH"]) {
                                           CoinModel *model = [CoinUtil getCoinModel:self.currentModel.symbol];
 
-                                          result =[MnemonicUtil sendTransactionWithMnemonicWallet:Mnemonics address:model.address amount:gaspic gaspic:self.pricr gasLimt:@"21000"];
+                                          result =[MnemonicUtil sendTransactionWithMnemonicWallet:Mnemonics address:add amount:gaspic gaspic:self.pricr gasLimt:@"21000"];
                                           
                                       }else if ([self.currentModel.symbol isEqualToString:@"WAN"]){
                                     
                                           CoinModel *model = [CoinUtil getCoinModel:self.currentModel.symbol];
 
-                                          result =[MnemonicUtil sendWanTransactionWithMnemonicWallet:Mnemonics address:model.address amount:gaspic gaspic:self.pricr gasLimt:@"21000"];
+                                          result =[MnemonicUtil sendWanTransactionWithMnemonicWallet:Mnemonics address:add amount:gaspic gaspic:self.pricr gasLimt:@"21000"];
                                       }else{
                                           
                                           //btc
                                           
                                           CoinModel *model = [CoinUtil getCoinModel:self.currentModel.symbol];
 
-                                          if ([model.address isEqualToString:self.btcAddress]) {
+                                          if ([add isEqualToString:self.btcAddress]) {
                                               [TLAlert alertWithMsg:@"转入和转出地址不能相同"];
                                               return ;
                                           }
                                           
-                                           NSString *money = [CoinUtil convertToRealCoin:self.currentModel.amountString coin:self.currentModel.currency];
+                                          NSString *money = [CoinUtil convertToRealCoin:self.inputFiled.text coin:self.currentModel.symbol];
+
                                           
-                                          [self testSpendCoins:money :model.address :[NSString stringWithFormat:@"%ld",self.btcPrice]];
+                                          [self testSpendCoins:add :money :[NSString stringWithFormat:@"%ld",self.btcPrice]];
                                           return ;
                                       }
                                   }else{
@@ -932,7 +1049,7 @@ typedef enum : NSUInteger {
                                       CoinModel *coin = [CoinUtil getCoinModel:self.currentModel.symbol];
                                       
                                       
-                                      result = [MnemonicUtil sendEthTokenTransactionWithAddress:Mnemonics contractAddress:coin.contractAddress address:coin.address amount:self.inputFiled.text gaspic:self.pricr gasLimt:@"210000"];
+                                      result = [MnemonicUtil sendEthTokenTransactionWithAddress:Mnemonics contractAddress:coin.contractAddress address:add amount:self.inputFiled.text gaspic:self.pricr gasLimt:@"210000"];
                                       
                                   }
                                   
@@ -976,22 +1093,39 @@ typedef enum : NSUInteger {
 - (void)allTransform
 {
     
-    
+    if (self.isLocal == YES) {
+        self.inputFiled.text = [CoinUtil convertToRealCoin:self.currentModel.balance coin:self.currentModel.symbol];
+    }else{
     self.inputFiled.text = [CoinUtil convertToRealCoin:self.currentModel.amountString coin:self.currentModel.currency];
-    
+    }
 }
 -(void)refreshCollectionView:(THTranstionCollectionView *)refreshCollectionview didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    NSString *money = [CoinUtil convertToRealCoin:self.currencys[indexPath.row].amountString coin:self.currencys[0].currency];
-    self.currentModel = self.currencys[indexPath.row];
-    self.symbolLab.text = self.currencys[indexPath.row].currency;
-    self.amountlLab.text = [NSString stringWithFormat:@"%@ %@",money,self.currencys[indexPath.row].currency];
-    CoinModel *currentCoin = [CoinUtil getCoinModel:self.currencys[indexPath.row].currency];
-    
-    self.Free.text = currentCoin.withdrawFeeString;
-    
-    self.Free.text = [NSString stringWithFormat:@"%@ %@", [CoinUtil convertToRealCoin:currentCoin.withdrawFeeString coin:self.currencys[indexPath.row].currency], self.currencys[indexPath.row].currency];
+    self.inputFiled.text = nil;
+    if (self.isLocal == YES) {
+        NSString *money = [CoinUtil convertToRealCoin:self.currencys[indexPath.row].balance coin:self.currencys[indexPath.row].symbol];
+        self.currentModel = self.currencys[indexPath.row];
+        self.symbolLab.text = self.currencys[indexPath.row].symbol;
+        self.amountlLab.text = [NSString stringWithFormat:@"%@ %@",money,self.currencys[indexPath.row].symbol];
+        CoinModel *currentCoin = [CoinUtil getCoinModel:self.currencys[indexPath.row].symbol];
+        
+        [self loadtype];
+        [self loadGas];
+       
+    }else{
+        NSString *money = [CoinUtil convertToRealCoin:self.currencys[indexPath.row].amountString coin:self.currencys[indexPath.row].currency];
+        self.currentModel = self.currencys[indexPath.row];
+        self.symbolLab.text = self.currencys[indexPath.row].currency;
+        self.amountlLab.text = [NSString stringWithFormat:@"%@ %@",money,self.currencys[indexPath.row].currency];
+        CoinModel *currentCoin = [CoinUtil getCoinModel:self.currencys[indexPath.row].currency];
+        
+        self.Free.text = currentCoin.withdrawFeeString;
+        
+        self.Free.text = [NSString stringWithFormat:@"%@ %@", [CoinUtil convertToRealCoin:currentCoin.withdrawFeeString coin:self.currencys[indexPath.row].currency], self.currencys[indexPath.row].currency];
+        
+    }
+  
     NSLog(@"%ld",indexPath.row);
 
     

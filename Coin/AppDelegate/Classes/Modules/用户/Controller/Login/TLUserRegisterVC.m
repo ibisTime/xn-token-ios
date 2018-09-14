@@ -551,6 +551,8 @@
 //    http.parameters[@"isRegHx"] = @"0";
     http.parameters[@"smsCaptcha"] = self.captchaView.captchaTf.text;
     http.parameters[@"kind"] = APP_KIND;
+    http.parameters[@"client"] = @"ios";
+
     if ([self.referTF.text valid]) {
         
         http.parameters[@"userReferee"] = self.referTF.text;

@@ -33,5 +33,10 @@
 
 @property (nonatomic , copy)NSString *greeting;
 
+@property (nonatomic , copy)NSString *type;
+
+@property (nonatomic , copy)NSString *singleCount;
+
+@property (nonatomic , copy)NSString * receivedNum;
 
 @end

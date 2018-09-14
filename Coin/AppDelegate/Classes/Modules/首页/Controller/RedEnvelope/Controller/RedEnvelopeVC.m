@@ -20,9 +20,12 @@
 #import "UIButton+EnLargeEdge.h"
 #import "HTMLStrVC.h"
 #import "TLPwdRelatedVC.h"
+#import "AddAccoutMoneyVc.h"
+#import "FilterView.h"
 @interface RedEnvelopeVC ()<SendRedEnvelopeDelegate,RedEnvelopeHeadDelegate>
 
 @property (nonatomic, strong) NSMutableArray <CurrencyModel *>*currencys;
+@property (nonatomic, strong) FilterView *filterPicker;
 
 @property (nonatomic , strong)SendRedEnvelopeView *sendView;
 
@@ -35,11 +38,10 @@
     [super viewWillAppear:animated];
 //    self.navigationController.navigationBarHidden = YES;
 
-    self.navigationController.navigationBar.translucent = YES;
-    [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
-    [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
+//    self.navigationController.navigationBar.translucent = YES;
+//    [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
+//    [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
 
-    [self LoadData];
     
 }
 
@@ -47,9 +49,9 @@
 {
     [super viewWillDisappear:animated];
 
-    self.navigationController.navigationBar.translucent = NO;
-    [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
-    [self.navigationController.navigationBar setShadowImage:nil];
+//    self.navigationController.navigationBar.translucent = NO;
+//    [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
+//    [self.navigationController.navigationBar setShadowImage:nil];
 }
 
 - (void)viewDidLoad {
@@ -62,10 +64,11 @@
 
     UIButton *_recordButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
     _recordButton.frame = CGRectMake(0, 0, 0, 44);
-    [_recordButton setTitle:[LangSwitcher switchLang:@"我的红包" key:nil] forState:(UIControlStateNormal)];
+    [_recordButton setTitle:[LangSwitcher switchLang:@"" key:nil] forState:(UIControlStateNormal)];
     _recordButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
     _recordButton.titleLabel.font = Font(14);
     [_recordButton setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
+    [_recordButton setImage:kImage(@"topbar_more") forState:UIControlStateNormal];
     [_recordButton addTarget:self action:@selector(buttonClick) forControlEvents:(UIControlEventTouchUpInside)];
     UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
     negativeSpacer.width = -10;
@@ -76,6 +79,20 @@
     _sendView = [[SendRedEnvelopeView alloc]initWithFrame:CGRectMake(0, - kNavigationBarHeight, SCREEN_WIDTH, SCREEN_HEIGHT + kNavigationBarHeight)];
     CoinWeakSelf;
     
+    self.sendView.transBlock = ^(CurrencyModel *model) {
+        AddAccoutMoneyVc *monyVc = [[AddAccoutMoneyVc alloc] init];
+        monyVc.isRedPage = YES;
+        monyVc.currentModels = weakSelf.currencys;
+        [weakSelf.navigationController pushViewController:monyVc animated:YES];
+        monyVc.select = ^(NSMutableArray *model) {
+          
+            NSLog(@"%@",model);
+        };
+        monyVc.curreryBlock = ^(CurrencyModel *model) {
+//            model.currency = model.symbol;
+            [weakSelf.sendView Platform:model];
+        };
+    };
     _sendView.transFormBlock = ^(CurrencyModel *model) {
         RechargeCoinVC *coinVC = [RechargeCoinVC new];
         
@@ -123,13 +140,64 @@
 }
 
 
+
+- (FilterView *)filterPicker {
+    
+    if (!_filterPicker) {
+        
+        CoinWeakSelf;
+        
+        NSArray *textArr = @[[LangSwitcher switchLang:@"我的红包记录" key:nil],
+                             [LangSwitcher switchLang:@"红包说明及常见问题" key:nil],
+                             ];
+        
+        NSArray *typeArr = @[@"tt",
+                             @"charge",
+                             ];
+        
+        _filterPicker = [[FilterView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
+        
+        //        _filterPicker.title =  [LangSwitcher switchLang: @"请选择交易类型" key:nil];
+        
+        _filterPicker.selectBlock = ^(NSInteger index) {
+            
+            [weakSelf pickerChoose:index];
+//            [weakSelf.tableView beginRefreshing];
+        };
+        
+        _filterPicker.tagNames = textArr;
+        
+    }
+    
+    return _filterPicker;
+}
+
+- (void)pickerChoose :(NSInteger)integer
+{
+    if (integer == 0) {
+            MySugarPacketsVC *vc = [[MySugarPacketsVC alloc]init];
+            UINavigationController * navigation = [[UINavigationController alloc]initWithRootViewController:vc];
+            vc.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+            vc.modalPresentationStyle = UIModalTransitionStyleFlipHorizontal;
+            [self presentViewController:navigation animated:NO completion:nil];
+    }else{
+        
+        HTMLStrVC *htmlVC = [[HTMLStrVC alloc] init];
+        self.navigationController.navigationBar.hidden = NO;
+        
+        htmlVC.type = HTMLTypeRed_packet_rule;
+        //        [weakSelf presentViewController:htmlVC animated:YES completion:nil];
+        [self.navigationController pushViewController:htmlVC animated:YES];
+        
+    }
+    
+}
+
 -(void)buttonClick
 {
-    MySugarPacketsVC *vc = [[MySugarPacketsVC alloc]init];
-    UINavigationController * navigation = [[UINavigationController alloc]initWithRootViewController:vc];
-    vc.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-    vc.modalPresentationStyle = UIModalTransitionStyleFlipHorizontal;
-    [self presentViewController:navigation animated:NO completion:nil];
+    
+    [self.filterPicker show];
+
 }
 
 
@@ -185,7 +253,7 @@
     CoinWeakSelf;
     self.pwdView.passwordBlock = ^(NSString *password) {
         if ([password isEqualToString:@""]) {
-            [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入资金密码" key:nil]];
+            [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入您的交易密码" key:nil]];
             return ;
         }
         

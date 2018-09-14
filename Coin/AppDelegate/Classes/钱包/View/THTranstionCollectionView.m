@@ -51,6 +51,7 @@ static NSString *identifierCell = @"TransformCell";
     
  
         TransformCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifierCell forIndexPath:indexPath];
+        cell.isLocal = self.isLocal;
         cell.model = self.models[indexPath.row];
         
         return cell;

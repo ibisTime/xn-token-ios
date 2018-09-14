@@ -9,5 +9,5 @@
 #import "TLBaseVC.h"
 
 @interface GetTheVC : TLBaseVC
-
+@property (nonatomic ,assign) BOOL  isRecevied;
 @end

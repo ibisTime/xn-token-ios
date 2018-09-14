@@ -11,7 +11,12 @@
 #import "SendModel.h"
 #import "RedEnvelopeVC.h"
 #import "RedEnvelopeShoreVC.h"
+#import "FilterView.h"
+#import "DetailSugarView.h"
 @interface SendVC ()<RefreshDelegate>
+@property (nonatomic, strong) FilterView *filterPicker;
+@property (nonatomic , strong)DetailSugarView *headView;
+
 @property (nonatomic , strong)SendTableView *tableView;
 @property (nonatomic, strong) NSMutableArray <SendModel *>*send;
 
@@ -32,12 +37,66 @@
     return _tableView;
 }
 
+- (FilterView *)filterPicker {
+    
+    if (!_filterPicker) {
+        
+        CoinWeakSelf;
+        
+//        NSArray * textArr = self.textArr;
+                NSArray *textArr = @[[LangSwitcher switchLang:@"2018" key:nil],
+                                     [LangSwitcher switchLang:@"2017" key:nil],
+                                      [LangSwitcher switchLang:@"2016" key:nil],
+                                     ];
+        
+        NSArray *typeArr = @[@"tt",
+                             @"charge",
+                             ];
+        
+        _filterPicker = [[FilterView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
+        
+        //        _filterPicker.title =  [LangSwitcher switchLang: @"请选择交易类型" key:nil];
+        
+        _filterPicker.selectBlock = ^(NSInteger index) {
+            
+            [weakSelf pickerChoose:index];
+//            weakSelf.year = textArr[index];
+            [weakSelf.headView.tameBtn setTitle:[NSString stringWithFormat:@"%@%@",textArr[index],[LangSwitcher switchLang:@"年" key:nil]] forState:UIControlStateNormal];
+            //            [weakSelf.tableView beginRefreshing];
+        };
+        
+        _filterPicker.tagNames = textArr;
+        
+    }
+    
+    return _filterPicker;
+}
+
+- (void)pickerChoose:(NSInteger)index
+{
+    [self.tableView beginRefreshing];
+}
+
+-(DetailSugarView *)headView
+{
+    if (!_headView) {
+        _headView = [[DetailSugarView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kHeight(260))];
+        
+    }
+    return _headView;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = [LangSwitcher switchLang:@"红包详情" key:nil];
     // Do any additional setup after loading the view.
     [self.view addSubview:self.tableView];
-    [self LoadData];
+    self.tableView.tableHeaderView = self.headView;
+    CoinWeakSelf;
+    self.headView.clickBlock = ^{
+        [weakSelf dismissViewControllerAnimated:YES completion:nil];
+    };
+//    [self LoadData];
 }
 
 

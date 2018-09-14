@@ -45,20 +45,20 @@
         _popAnimationDuration = -0.1f;
         _dismissAnimationDuration = -0.1f;
         self.backgroundColor = [UIColor clearColor];
-        self.frame = CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height);
+        self.frame = customView.frame;
         
-        _backgroundView = [[UIView alloc] initWithFrame:self.bounds];
-        _backgroundView.backgroundColor = [UIColor blackColor];
-        _backgroundView.alpha = 0.0f;
-        [self addSubview:_backgroundView];
+//        _backgroundView = [[UIView alloc] initWithFrame:self.bounds];
+//        _backgroundView.backgroundColor = [UIColor blackColor];
+//        _backgroundView.alpha = 0.0f;
+//        [self addSubview:_backgroundView];
         
         _contentView = [[UIView alloc] initWithFrame:self.bounds];
         _contentView.backgroundColor = [UIColor clearColor];
         [self addSubview:_contentView];
         
-        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapBGLayer:)];
-        tap.delegate = self;
-        [_contentView addGestureRecognizer:tap];
+//        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapBGLayer:)];
+//        tap.delegate = self;
+//        [_contentView addGestureRecognizer:tap];
         
         customView.center = _contentView.center;
         [_contentView addSubview:customView];
@@ -97,6 +97,45 @@
     return ![_customView.layer containsPoint:location];
 }
 
+- (void)pop:(UIView *)view
+{
+    [view addSubview:self];
+    
+    __weak typeof(self) ws = self;
+    NSTimeInterval defaultDuration = [self getPopDefaultDuration:self.animationPopStyle];
+    NSTimeInterval duration = (_popAnimationDuration < 0.0f) ? defaultDuration : _popAnimationDuration;
+    if (self.animationPopStyle == ZJAnimationPopStyleNO) {
+        self.alpha = 0.0;
+        if (self.isTransparent) {
+            self.backgroundView.backgroundColor = [UIColor clearColor];
+        } else {
+            self.backgroundView.alpha = 0.0;
+        }
+        [UIView animateWithDuration:duration animations:^{
+            ws.alpha = 1.0;
+            if (!ws.isTransparent) {
+                ws.backgroundView.alpha = ws.popBGAlpha;
+            }
+        }];
+    } else {
+        if (ws.isTransparent) {
+            self.backgroundView.backgroundColor = [UIColor clearColor];
+        } else {
+            self.backgroundView.alpha = 0.0;
+            [UIView animateWithDuration:duration * 0.5 animations:^{
+                ws.backgroundView.alpha = ws.popBGAlpha;
+            }];
+        }
+        [self hanlePopAnimationWithDuration:duration];
+    }
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(duration * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        if (ws.popComplete) {
+            ws.popComplete();
+        }
+    });
+    
+}
 - (void)pop
 {
     [[UIApplication sharedApplication].keyWindow addSubview:self];

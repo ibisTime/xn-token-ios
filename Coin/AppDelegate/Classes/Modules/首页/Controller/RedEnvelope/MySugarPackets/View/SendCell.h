@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "SendModel.h"
+#import "GetTheModel.h"
 @interface SendCell : UITableViewCell
 
 @property (nonatomic, strong)SendModel *sendModel;

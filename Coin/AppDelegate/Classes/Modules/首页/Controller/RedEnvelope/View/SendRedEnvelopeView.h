@@ -37,7 +37,14 @@
 @property (nonatomic , strong) RechargeCoinVC *coinVC;
 
 @property (nonatomic , copy)void (^transFormBlock)(CurrencyModel *model);
+@property (nonatomic , copy)void (^transBlock)(CurrencyModel *model);
 
 @property (nonatomic , copy)void (^redPackBlock)();
+@property (nonatomic , strong) UIButton *WalletButton;
+@property (nonatomic , strong) UIButton *TheWalletButton;
+@property (nonatomic , strong) UILabel *symbolLabtype;
+@property (nonatomic , strong) UILabel *symbolLabCoin;
+@property (nonatomic , strong) UIButton *IntoButton;
 
+- (void)Platform:(CurrencyModel *)platform;
 @end

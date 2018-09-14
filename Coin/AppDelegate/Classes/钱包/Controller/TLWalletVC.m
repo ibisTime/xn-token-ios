@@ -1009,7 +1009,16 @@
     //一键旋转
     TLTransfromVC *trans = [TLTransfromVC new];
     trans.isLocal = self.switchTager == 0 ? YES : NO;
-    trans.currencys = self.currencys;
+    if (self.switchTager == 1) {
+        trans.currencys = self.currencys;
+        trans.centercurrencys = self.currencys;
+        trans.localcurrencys = self.localCurrencys;
+
+    }else{
+        trans.currencys = self.localCurrencys;
+        trans.centercurrencys = self.currencys;
+        trans.localcurrencys = self.localCurrencys;
+    }
     
     TLDataBase *dataBase = [TLDataBase sharedManager];
     NSString *word;

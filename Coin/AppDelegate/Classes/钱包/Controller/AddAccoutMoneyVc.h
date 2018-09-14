@@ -14,7 +14,10 @@ typedef void(^currenSelect)(NSMutableArray * model) ;
 @property (nonatomic ,copy) currenSelect select;
 @property (nonatomic, strong) NSMutableArray <CurrencyModel *>*currencys;
 @property (nonatomic, strong) NSMutableArray <CurrencyModel *>*currentModels;
+@property (nonatomic , copy)void (^curreryBlock)(CurrencyModel *model);
 
 @property (nonatomic, strong) CurrencyModel *currentModel;
+
+@property (nonatomic, assign) BOOL  isRedPage;
 
 @end
