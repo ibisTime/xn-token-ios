@@ -14,6 +14,7 @@
 
 -(UILabel *)informationLabel
 {
+    
     if (!_informationLabel) {
         _informationLabel = [UILabel labelWithFrame:CGRectMake(kWidth(6), kHeight(10), SCREEN_WIDTH - kWidth(112), 0) textAligment:(NSTextAlignmentLeft) backgroundColor:kClearColor font:FONT(14) textColor:kHexColor(@"#2A2A2A")];
         _informationLabel.attributedText = [self ReturnsTheDistanceBetween:@"【Theia是全球首款跨链生态钱包，同时支持BTC、ETH、USDT等多币数字货币储存。注册即送10原矿，千万BTC/ETH/WAN矿山，等您来挖】1cjiosuadfiosdaufi0xf750b288323dfpfd【Theia是全球首款跨链生态钱包，同时支持BTC、ETH、USDT等多币数字货币储存。注册即送10原矿，千万BTC/ETH/WAN矿山，等您来挖】1cjiosuadfiosdaufi0xf750b288323dfpfd"];
