@@ -96,11 +96,11 @@
 - (void)upInfo
 {
     [self.integralBtn setTitle:@"" forState:UIControlStateNormal];
-    NSString *str = [NSString stringWithFormat:@"您拥有积分%@点    马上提币",[TLUser user].jfAmount];
-    NSString *str1 = @"您拥有积分";
+    NSString *str = [NSString stringWithFormat:@"%@%@%@",[LangSwitcher switchLang:@"您拥有积分" key:nil],[TLUser user].jfAmount,[LangSwitcher switchLang:@"点    马上提币" key:nil]];
+    NSString *str1 = [LangSwitcher switchLang:@"您拥有积分" key:nil];
     NSString *str2 = [NSString stringWithFormat:@"%@",[TLUser user].jfAmount];
-    NSString *str3 = @"点";
-    NSString *str4 = @"马上提币";
+    NSString *str3 = [LangSwitcher switchLang:@"点" key:nil];
+    NSString *str4 = [LangSwitcher switchLang:@"马上提币" key:nil];
     NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:str];
     [attrStr addAttribute:NSForegroundColorAttributeName
                     value:kHexColor(@"#A2A5C4")
@@ -191,17 +191,17 @@
     [textBackImage addSubview:numberUsersLabel];
 
     UILabel *ThankYouLabel = [UILabel labelWithFrame:CGRectMake(kWidth(15), kHeight(110), SCREEN_WIDTH - kWidth(110), kHeight(22)) textAligment:(NSTextAlignmentCenter) backgroundColor:kClearColor font:FONT(16) textColor:kHexColor(@"#FFFFFF")];
-    ThankYouLabel.text = [LangSwitcher switchLang:@"感谢您的付出！" key:nil];
+    ThankYouLabel.text = [LangSwitcher switchLang:@"感谢您的付出!" key:nil];
     [textBackImage addSubview:ThankYouLabel];
 
     UIButton *integralBtn = [UIButton buttonWithTitle:@"" titleColor:kHexColor(@"#A2A5C4") backgroundColor:kClearColor titleFont:13];
     self.integralBtn = integralBtn;
     [integralBtn addTarget:self action:@selector(coinClick) forControlEvents:UIControlEventTouchUpInside];
-    NSString *str = [NSString stringWithFormat:@"您拥有积分%@点    马上提币",[TLUser user].jfAmount];
-    NSString *str1 = @"您拥有积分";
+    NSString *str = [NSString stringWithFormat:@"%@%@%@",[LangSwitcher switchLang:@"您拥有积分" key:nil],[TLUser user].jfAmount,[LangSwitcher switchLang:@"点    马上提币" key:nil]];
+    NSString *str1 = [LangSwitcher switchLang:@"您拥有积分" key:nil];
     NSString *str2 = [NSString stringWithFormat:@"%@",[TLUser user].jfAmount];
-    NSString *str3 = @"点";
-    NSString *str4 = @"马上提币";
+    NSString *str3 =[LangSwitcher switchLang:@"点" key:nil] ;
+    NSString *str4 = [LangSwitcher switchLang:@"马上提币" key:nil];
     NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:str];
     [attrStr addAttribute:NSForegroundColorAttributeName
                     value:kHexColor(@"#A2A5C4")
@@ -216,6 +216,7 @@
                     value:kHexColor(@"#00F7FE")
                     range:NSMakeRange(str.length - str4.length, str4.length)];
     [integralBtn setAttributedTitle:attrStr forState:(UIControlStateNormal)];
+
     integralBtn.frame = CGRectMake(kWidth(15), kHeight(143), SCREEN_WIDTH - kWidth(110), kHeight(18));
 
     [integralBtn SG_imagePositionStyle:(SGImagePositionStyleRight) spacing:4 imagePositionBlock:^(UIButton *button) {

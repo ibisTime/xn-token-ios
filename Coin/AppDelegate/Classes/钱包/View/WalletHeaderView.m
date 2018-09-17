@@ -46,10 +46,95 @@
 
         //
         [self initSubvies];
+        self.isMobile = NO;
         //汇率
-        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(InfoNotificationAction:) name:@"LOADDATAPAGE" object:nil];
     }
     return self;
+}
+
+#pragma mark -- 接收到通知
+- (void)InfoNotificationAction:(NSNotification *)notification
+{
+    if (self.bgIV.frame.size.width < self.bottomIV.frame.size.width) {
+
+
+
+        [self setNeedsUpdateConstraints];
+        [self.bottomIV mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.equivalentBtn.mas_bottom).offset(37);
+            make.right.equalTo(self.cnyAmountLbl.mas_left).offset(-30);
+            make.height.equalTo(@(kHeight(150)));
+            make.width.equalTo(@(kWidth(325)));
+        }];
+
+        [self layoutIfNeeded];
+        if (self.switchBlock) {
+            self.switchBlock(1);
+        }
+
+        self.addButton.hidden = YES;
+
+        [self setNeedsUpdateConstraints];
+        [self.bgIV mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.equivalentBtn.mas_bottom).offset(37);
+            make.left.equalTo(self.cnyAmountLbl.mas_left);
+            make.height.equalTo(@(kHeight(150)));
+            make.width.equalTo(@(kWidth(325)));
+
+        }];
+        [self bringSubviewToFront:self.bgIV];
+        [self.bottomIV mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.equivalentBtn.mas_bottom).offset(53);
+            make.left.equalTo(self.cnyAmountLbl.mas_left).offset((kWidth(120)));
+            make.height.equalTo(@(kHeight(120)));
+            make.width.equalTo(@(kWidth(220)));
+
+        }];
+
+        [self layoutIfNeeded];
+        [self setNeedsDisplay];
+
+//        [UIView animateWithDuration:0.5 animations:^{
+//            self.addButton.hidden = YES;
+//
+//            [self setNeedsUpdateConstraints];
+//            [self.bgIV mas_remakeConstraints:^(MASConstraintMaker *make) {
+//                make.top.equalTo(self.equivalentBtn.mas_bottom).offset(37);
+//                make.left.equalTo(self.cnyAmountLbl.mas_left);
+//                make.height.equalTo(@(kHeight(150)));
+//                make.width.equalTo(@(kWidth(325)));
+//
+//            }];
+//            [self bringSubviewToFront:self.bgIV];
+//            [self.bottomIV mas_remakeConstraints:^(MASConstraintMaker *make) {
+//                make.top.equalTo(self.equivalentBtn.mas_bottom).offset(53);
+//                make.left.equalTo(self.cnyAmountLbl.mas_left).offset((kWidth(120)));
+//                make.height.equalTo(@(kHeight(120)));
+//                make.width.equalTo(@(kWidth(220)));
+//
+//            }];
+//
+//            [self layoutIfNeeded];
+//            [self setNeedsDisplay];
+//
+//        }];
+
+//        [UIView animateWithDuration:0.5 animations:^{
+//
+//
+//
+//        } completion:^(BOOL finished) {
+//
+//
+//        }];
+
+    }
+}
+#pragma mark -- 删除通知
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"LOADDATAPAGE" object:nil];
 }
 
 #pragma mark - Init
@@ -257,9 +342,6 @@
         make.top.equalTo(self.localLbl.mas_bottom).offset(kHeight(3));
         
     }];
-
-
-
     self.privateKeyLabel = [UILabel labelWithBackgroundColor:kClearColor textColor:kWhiteColor font:30.0];
 //    self.privateKeyLabel.backgroundColor = [UIColor redColor]
     if ([TLUser user].localMoney) {
@@ -503,8 +585,7 @@
 }
 
 -(void)swipeRightClick:(UISwipeGestureRecognizer *)swpie{
-    
-    
+
     NSLog(@"swipe right");
     [self setNeedsUpdateConstraints];
     
@@ -583,12 +664,10 @@
     if (self.centerBlock) {
         self.centerBlock();
     }
-    
 }
 
 -(void)swipeClick:(UISwipeGestureRecognizer *)swpie{
-   
-    
+
     NSLog(@"swipe left");
 
     [self setNeedsUpdateConstraints];
@@ -719,7 +798,7 @@
     
 }
 -(void)swipeBottomClick:(UISwipeGestureRecognizer *)swpie{
-  
+
     [UIView animateWithDuration:0.5 animations:^{
         [self setNeedsUpdateConstraints];
         [self.bottomIV mas_remakeConstraints:^(MASConstraintMaker *make) {

@@ -20,6 +20,8 @@ typedef NS_ENUM(NSUInteger, MineHeaderSeletedType) {
 
 - (void)didSelectedWithType:(MineHeaderSeletedType)type;
 
+
+
 @end
 
 @interface MineHeaderView : UIView
@@ -35,5 +37,7 @@ typedef NS_ENUM(NSUInteger, MineHeaderSeletedType) {
 @property (nonatomic, strong) UIButton *levelBtn;
 //交易、好评跟信任
 @property (nonatomic, strong) UILabel *dataLbl;
+
+@property (nonatomic, strong)UIButton *integralBtn;
 
 @end

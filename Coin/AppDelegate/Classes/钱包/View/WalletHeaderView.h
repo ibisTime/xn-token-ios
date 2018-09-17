@@ -26,6 +26,7 @@ typedef void(^WalletlocalBlock)(void);
 @property (nonatomic, copy) WalletcenterBlock centerBlock;
 @property (nonatomic, copy) WalletlocalBlock localBlock;
 
+@property (nonatomic , assign)BOOL isMobile;
 
 //总资产(人民币)
 @property (nonatomic, strong) UILabel *cnyAmountLbl;
