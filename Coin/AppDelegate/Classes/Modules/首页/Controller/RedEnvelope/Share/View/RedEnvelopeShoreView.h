@@ -17,5 +17,6 @@
 @property (nonatomic , strong) UILabel *nameLabel;
 @property (nonatomic , strong) UILabel *stateLabel;
 @property (nonatomic , copy)void (^redPackBlock)();
-
+@property (nonatomic , copy)void (^shareBlock)(NSInteger inter);
+@property (nonatomic , strong) UIImageView *backImg;
 @end

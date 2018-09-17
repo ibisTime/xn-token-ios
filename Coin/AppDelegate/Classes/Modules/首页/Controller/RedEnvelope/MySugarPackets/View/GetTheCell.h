@@ -12,4 +12,6 @@
 
 @property (nonatomic, strong)GetTheModel *getModel;
 
+@property (nonatomic, assign) BOOL isClose;
+
 @end

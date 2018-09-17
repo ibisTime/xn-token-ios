@@ -81,7 +81,9 @@
                              [LangSwitcher switchLang:@"抢红包" key:nil],
                              [LangSwitcher switchLang:@"发红包" key:nil],
                              [LangSwitcher switchLang:@"量化理财投资" key:nil],
-                             [LangSwitcher switchLang:@"量化理财还款" key:nil]
+                             [LangSwitcher switchLang:@"量化理财还款" key:nil],
+                             [LangSwitcher switchLang:@"积分抽奖" key:nil]
+
 
 
 
@@ -95,7 +97,9 @@
                              @"sendredpacket_in",
                              @"sendredpacket_out",
                              @"lhlc_invest",
-                             @"lhlc_repay"
+                             @"lhlc_repay",
+                             @"jf_lottery_in"
+
                              ];
         
         _filterPicker = [[FilterView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];

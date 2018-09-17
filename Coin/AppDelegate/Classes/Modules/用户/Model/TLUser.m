@@ -203,6 +203,8 @@ NSString *const kGoogleAuthClose = @"0";
     self.token = nil;
     //
     //
+    self.jfAmount = nil;
+    self.jfInviteNumber = nil;
     self.localMoney = nil;
     self.secretUserId = nil;
     self.photo = nil;
@@ -271,6 +273,31 @@ NSString *const kGoogleAuthClose = @"0";
     
 }
 
+- (BOOL)chang
+{
+
+    TLNetworking *http = [TLNetworking new];
+    
+    http.isShowMsg = NO;
+    http.code = USER_INFO;
+    http.parameters[@"userId"] = self.userId;
+    http.parameters[@"token"] = self.token;
+    CoinWeakSelf;
+    [http postWithSuccess:^(id responseObject) {
+    
+        [self setUserInfoWithDict:responseObject[@"data"]];
+        [self saveUserInfo:responseObject[@"data"]];
+//        return YES;
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"upsecuees" object:nil];
+        
+    } failure:^(NSError *error) {
+        
+        
+    }];
+    return YES;
+}
+
 - (void)updateUserInfo {
     
     [self updateUserInfoWithNotification:YES];
@@ -283,6 +310,8 @@ NSString *const kGoogleAuthClose = @"0";
     self.nickname = dict[@"nickname"];
     self.realName = dict[@"realName"];
     self.loginPwdFlag = dict[@"loginPwdFlag"];
+    self.jfAmount = dict[@"jfAmount"];
+    self.jfInviteNumber = dict[@"jfInviteNumber"];
 
     self.idNo = dict[@"idNo"];
     self.tradepwdFlag = [NSString stringWithFormat:@"%@", dict[@"tradepwdFlag"]];

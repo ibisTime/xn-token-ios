@@ -30,7 +30,7 @@
 #import "BTCKeychain.h"
 #import "BTCHashID.h"
 #import "AppConfig.h"
-
+#import "NSString+Extension.h"
 typedef enum : NSUInteger {
     BTCAPIChain,
     BTCAPIBlockchain,
@@ -78,7 +78,7 @@ typedef enum : NSUInteger {
 @property (nonatomic, copy) NSString *priceSlow ;
 @property (nonatomic, copy) NSString *priceFast;
 @property (nonatomic, assign) NSInteger btcPrice;
-
+@property (nonatomic, strong) UILabel *totalFree;
 @property (nonatomic, strong) BTCKey *key;
 
 @end
@@ -285,7 +285,8 @@ typedef enum : NSUInteger {
         self.currencys = self.centercurrencys;
         self.currentModel = self.centercurrencys[0];
         self.isLocal = NO;
-        
+        self.totalFree.text = [LangSwitcher switchLang:@"本次划转手续费为" key:nil];
+
         self.privateKey.text = [LangSwitcher switchLang:@"私钥账户" key:nil];
         self.blue.backgroundColor =kAppCustomMainColor;
         self.org.backgroundColor =kOrangeRedColor;
@@ -301,7 +302,10 @@ typedef enum : NSUInteger {
         [self.view setNeedsLayout];
         
        
-            NSString *money = [CoinUtil convertToRealCoin:self.currencys[0].amountString coin:self.currentModel.currency];
+        NSString *leftAmount = [self.currencys[0].amountString subNumber:self.currencys[0].frozenAmountString];
+        
+        //
+        NSString *money = [CoinUtil convertToRealCoin:leftAmount coin:self.self.currencys[0].currency];
             
             self.amountlLab.text = [NSString stringWithFormat:@"%@ %@",money,self.currentModel.currency];
        
@@ -311,7 +315,8 @@ typedef enum : NSUInteger {
             CoinModel *currentCoin = [CoinUtil getCoinModel:self.currencys[0].currency];
             //
             self.Free.text = currentCoin.withdrawFeeString;
-            
+//            self.totalFree.text = [LangSwitcher switchLang:@"本次划转矿工费为" key:nil];
+
             self.Free.text = [NSString stringWithFormat:@"%@ %@", [CoinUtil convertToRealCoin:currentCoin.withdrawFeeString coin:self.currencys[0].currency], self.currencys[0].currency];
         }
     }else{
@@ -332,8 +337,6 @@ typedef enum : NSUInteger {
 
         }];
         [self loadtype];
-        [self loadGas];
-        self.slider.hidden = NO;
         if (self.isLocal == YES) {
             NSString *money = [CoinUtil convertToRealCoin:self.currentModel.balance coin:self.currentModel.symbol];
             
@@ -341,8 +344,11 @@ typedef enum : NSUInteger {
         }
         
         
-     
-            [self.view setNeedsLayout];
+        
+        [self.view setNeedsLayout];
+        [self loadGas];
+        self.slider.hidden = NO;
+       
     }
   
     self.changebut.selected = ! self.changebut.selected;
@@ -364,7 +370,7 @@ typedef enum : NSUInteger {
         make.top.equalTo(self.privateKey.mas_bottom).offset(10);
         make.left.equalTo(@15);
         make.right.equalTo(@-15);
-        make.height.equalTo(@170);
+        make.height.equalTo(@(kHeight(170)));
     }];
     
     UILabel *introduce = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextBlack font:15];
@@ -377,7 +383,7 @@ typedef enum : NSUInteger {
         
     }];
     
-    self.inputFiled = [[TLTextField alloc] initWithFrame:CGRectMake(30, kHeight(110), kScreenWidth-60, 60) leftTitle:@"" titleWidth:5 placeholder:[LangSwitcher switchLang:@"单行输入" key:nil]];
+    self.inputFiled = [[TLTextField alloc] initWithFrame:CGRectMake(30, kHeight(115), kScreenWidth-60, 60) leftTitle:@"" titleWidth:5 placeholder:[LangSwitcher switchLang:@"转账数量" key:nil]];
     self.inputFiled.clearButtonMode = UITextFieldViewModeNever;
     
 
@@ -432,8 +438,11 @@ typedef enum : NSUInteger {
         
         avildAmount.text = [NSString stringWithFormat:@"%@ %@",money,self.currencys[0].symbol];
     }else{
-        NSString *money = [CoinUtil convertToRealCoin:self.currencys[0].amountString coin:self.currencys[0].currency];
+        NSString *leftAmount = [self.currencys[0].amountString subNumber:self.currencys[0].frozenAmountString];
         
+        //
+        NSString *money = [CoinUtil convertToRealCoin:leftAmount coin:self.currencys[0].currency];
+       
         avildAmount.text = [NSString stringWithFormat:@"%@ %@",money,self.currencys[0].currency];
     }
    
@@ -503,7 +512,7 @@ typedef enum : NSUInteger {
     self.importButton.clipsToBounds = YES;
     [self.whiteView addSubview:self.importButton];
     [self.importButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(self.whiteView.mas_bottom).offset(-kBottomInsetHeight-20);
+        make.top.equalTo(wallletView.mas_bottom).offset(60);
         make.right.equalTo(self.view.mas_right).offset(-35);
         make.left.equalTo(self.view.mas_left).offset(35);
         make.height.equalTo(@48);
@@ -511,11 +520,18 @@ typedef enum : NSUInteger {
     }];
     
     UILabel *totalFree = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:14];
-    totalFree.text = [LangSwitcher switchLang:@"本次划转手续费为" key:nil];
+    if (self.isLocal == YES) {
+        totalFree.text = [LangSwitcher switchLang:@"本次划转矿工费为" key:nil];
+        
+    }else{
+        totalFree.text = [LangSwitcher switchLang:@"本次划转手续费为" key:nil];
+
+    }
     [self.whiteView addSubview:totalFree];
+    self.totalFree = totalFree;
     [totalFree mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(self.importButton.mas_top).offset(-10);
-        make.left.equalTo(self.importButton.mas_left).offset(80);
+        make.left.equalTo(self.importButton.mas_left).offset(60);
         
     }];
 
@@ -695,7 +711,7 @@ typedef enum : NSUInteger {
                       cancleMsg:[LangSwitcher switchLang:@"取消" key:nil]
                     placeHolder:[LangSwitcher switchLang:@"请输入资金密码" key:nil]
                           maker:self cancle:^(UIAlertAction *action) {
-                              [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+//                              [MBProgressHUD showHUDAddedTo:self.view animated:YES];
                               
                           } confirm:^(UIAlertAction *action, UITextField *textField) {
                               //验证密码正确
@@ -716,6 +732,12 @@ typedef enum : NSUInteger {
     http.code = @"802750";
     http.showView = self.view;
     http.parameters[@"accountNumber"] = self.currentModel.accountNumber;
+    
+    NSString *leftAmount = [self.currentModel.amountString subNumber:self.currentModel.frozenAmountString];
+    
+    //
+    self.inputFiled.text = [CoinUtil convertToRealCoin:leftAmount coin:self.currentModel.currency];
+    
     http.parameters[@"amount"] = [CoinUtil convertToSysCoin:self.inputFiled.text
                                                        coin:self.currentModel.currency];
     http.parameters[@"applyNote"] = [NSString stringWithFormat:@"%@提现", self.currentModel.currency];
@@ -742,7 +764,7 @@ typedef enum : NSUInteger {
     
     [http postWithSuccess:^(id responseObject) {
         
-        [TLAlert alertWithSucces:[LangSwitcher switchLang:@"提币申请提交成功" key:nil]];
+        [TLAlert alertWithSucces:[LangSwitcher switchLang:@"划转成功" key:nil]];
         
         [[NSNotificationCenter defaultCenter] postNotificationName:kWithDrawCoinSuccess object:nil];
         [MBProgressHUD hideHUDForView:self.view animated:YES];
@@ -916,6 +938,145 @@ typedef enum : NSUInteger {
     
 }
 
+- (void)loadGas1: (NSIndexPath *)indexPath
+{
+    
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        __block  NSString *pricr;
+        if ([self.currentModel.type isEqualToString:@"0"]) {
+            
+            if ([self.currentModel.symbol isEqualToString:@"BTC"]) {
+                TLNetworking *net = [TLNetworking new];
+                
+                //获取BTCUTXO
+                [self loadUtxoList];
+                net.code = @"802223";
+                
+                [net postWithSuccess:^(id responseObject) {
+                    NSLog(@"%@",responseObject);
+                    NSNumber *slow = responseObject[@"data"][@"fastestFeeMin"];
+                    NSNumber *fast = responseObject[@"data"][@"fastestFeeMax"];
+                    
+                    int f = ([fast intValue] -[slow intValue])/2;
+                    f = f + [slow intValue];
+                    NSString *priceSlow = [NSString stringWithFormat:@"%@",slow];
+                    NSString *priceFast = [NSString stringWithFormat:@"%@",fast];
+                    self.priceSlow = priceSlow;
+                    self.priceFast = priceFast;
+                    NSString *price = [NSString stringWithFormat:@"%d",f];
+                    self.btcPrice = f;
+                    self.tempPrice = pricr;
+                    self.pricr = pricr;
+                    NSLog(@"%@low@,fast%@",priceSlow,priceFast);
+                    self.gamPrice = [price floatValue ] ;
+                    self.slider.value = 0.5;
+                    [self valueChange:self.slider];
+                    NSString *money = [CoinUtil convertToRealCoin:self.currencys[indexPath.row].balance coin:self.currencys[indexPath.row].symbol];
+                    
+                    self.currentModel = self.currencys[indexPath.row];
+                    self.symbolLab.text = self.currencys[indexPath.row].symbol;
+                    self.amountlLab.text = [NSString stringWithFormat:@"%@ %@",money,self.currencys[indexPath.row].symbol];
+                    CoinModel *currentCoin = [CoinUtil getCoinModel:self.currencys[indexPath.row].symbol];
+                    [MBProgressHUD hideHUDForView:self.view animated:YES];
+                } failure:^(NSError *error) {
+                    NSLog(@"%@",error);
+                }];
+                
+            }else if ([self.currentModel.symbol isEqualToString:@"WAN"]) {
+                //                    pricr = [MnemonicUtil getWanGasPrice];
+                
+                TLNetworking *net =[TLNetworking new];
+                net.code = @"802358";
+                [net postWithSuccess:^(id responseObject) {
+                    pricr   = responseObject[@"data"][@"gasPrice"];
+                    self.pricr = pricr;
+                    self.tempPrice = pricr;
+                    
+                    CGFloat p = [pricr doubleValue]/1000000000000000000;
+                    p = p *21000;
+                    NSLog(@"%.8f",p);
+                    self.gamPrice = p;
+                    self.slider.value = 0.5;
+                    [self valueChange:self.slider];
+                    NSString *money = [CoinUtil convertToRealCoin:self.currencys[indexPath.row].balance coin:self.currencys[indexPath.row].symbol];
+                    
+                    self.currentModel = self.currencys[indexPath.row];
+                    self.symbolLab.text = self.currencys[indexPath.row].symbol;
+                    self.amountlLab.text = [NSString stringWithFormat:@"%@ %@",money,self.currencys[indexPath.row].symbol];
+                    CoinModel *currentCoin = [CoinUtil getCoinModel:self.currencys[indexPath.row].symbol];
+                    [MBProgressHUD hideHUDForView:self.view animated:YES];
+                    
+                    
+                } failure:^(NSError *error) {
+                    
+                }];
+                
+            }else
+            {
+                //                    pricr = [MnemonicUtil getGasPrice];
+                TLNetworking *net =[TLNetworking new];
+                net.code = @"802117";
+                [net postWithSuccess:^(id responseObject) {
+                    pricr  = responseObject[@"data"][@"gasPrice"];
+                    
+                    self.pricr = pricr;
+                    self.tempPrice = pricr;
+                    
+                    CGFloat p = [pricr doubleValue]/1000000000000000000;
+                    p = p *21000;
+                    NSLog(@"%.8f",p);
+                    self.gamPrice = p;
+                    self.slider.value = 0.5;
+                    [self valueChange:self.slider];
+                    NSString *money = [CoinUtil convertToRealCoin:self.currencys[indexPath.row].balance coin:self.currencys[indexPath.row].symbol];
+                    
+                    self.currentModel = self.currencys[indexPath.row];
+                    self.symbolLab.text = self.currencys[indexPath.row].symbol;
+                    self.amountlLab.text = [NSString stringWithFormat:@"%@ %@",money,self.currencys[indexPath.row].symbol];
+                    CoinModel *currentCoin = [CoinUtil getCoinModel:self.currencys[indexPath.row].symbol];
+                    [MBProgressHUD hideHUDForView:self.view animated:YES];
+                    
+                } failure:^(NSError *error) {
+                    
+                }];
+            }
+            
+        }else{
+            
+            TLNetworking *net =[TLNetworking new];
+            net.code = @"802117";
+            [net postWithSuccess:^(id responseObject) {
+                pricr   = responseObject[@"data"][@"gasPrice"];
+                self.tempPrice = pricr;
+                
+                self.pricr = pricr;
+                CGFloat p = [pricr doubleValue]/1000000000000000000;
+                p = p *21000;
+                NSLog(@"%.8f",p);
+                self.gamPrice = p;
+                self.slider.value = 0.5;
+                [self valueChange:self.slider];
+                NSString *money = [CoinUtil convertToRealCoin:self.currencys[indexPath.row].balance coin:self.currencys[indexPath.row].symbol];
+                
+                self.currentModel = self.currencys[indexPath.row];
+                self.symbolLab.text = self.currencys[indexPath.row].symbol;
+                self.amountlLab.text = [NSString stringWithFormat:@"%@ %@",money,self.currencys[indexPath.row].symbol];
+                CoinModel *currentCoin = [CoinUtil getCoinModel:self.currencys[indexPath.row].symbol];
+                [MBProgressHUD hideHUDForView:self.view animated:YES];
+                
+            } failure:^(NSError *error) {
+                
+            }];
+        }
+        
+        
+    });
+    
+    
+    
+}
+
 - (void)loadUtxoList
 {
     
@@ -1018,14 +1179,14 @@ typedef enum : NSUInteger {
                                       //公链 ETH WAN BTC
                                       if ([self.currentModel.symbol isEqualToString:@"ETH"]) {
                                           CoinModel *model = [CoinUtil getCoinModel:self.currentModel.symbol];
-
-                                          result =[MnemonicUtil sendTransactionWithMnemonicWallet:Mnemonics address:add amount:gaspic gaspic:self.pricr gasLimt:@"21000"];
+                                          NSString *g = [NSString stringWithFormat:@"%lld",[self.pricr longLongValue]*21000];
+                                          result =[MnemonicUtil sendTransactionWithMnemonicWallet:Mnemonics address:add amount:[gaspic subNumber:g] gaspic:[NSString stringWithFormat:@"%lld",[self.pricr longLongValue]] gasLimt:@"21000"];
                                           
                                       }else if ([self.currentModel.symbol isEqualToString:@"WAN"]){
                                     
                                           CoinModel *model = [CoinUtil getCoinModel:self.currentModel.symbol];
-
-                                          result =[MnemonicUtil sendWanTransactionWithMnemonicWallet:Mnemonics address:add amount:gaspic gaspic:self.pricr gasLimt:@"21000"];
+                                          NSString *g = [NSString stringWithFormat:@"%lld",[self.pricr longLongValue]*21000];
+                                          result =[MnemonicUtil sendWanTransactionWithMnemonicWallet:Mnemonics address:add amount:[gaspic subNumber:g] gaspic:[NSString stringWithFormat:@"%lld",[self.pricr longLongValue]] gasLimt:@"21000"];
                                       }else{
                                           
                                           //btc
@@ -1059,7 +1220,7 @@ typedef enum : NSUInteger {
                                   
                                   if ([result isEqualToString:@"1"]) {
                                       [MBProgressHUD hideHUDForView:self.view animated:YES];
-                                      [TLAlert alertWithSucces:[LangSwitcher switchLang:@"广播成功" key:nil]];
+                                      [TLAlert alertWithSucces:[LangSwitcher switchLang:@"划转成功" key:nil]];
                                       dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                                           [self.navigationController popViewControllerAnimated:YES];
                                       });
@@ -1070,7 +1231,7 @@ typedef enum : NSUInteger {
                                       
                                       [MBProgressHUD hideHUDForView:self.view animated:YES];
                                       
-                                      [TLAlert alertWithError:[LangSwitcher switchLang:@"广播失败" key:nil]];
+                                      [TLAlert alertWithError:[LangSwitcher switchLang:@"划转失败" key:nil]];
                                       
                                       
                                   }
@@ -1096,7 +1257,10 @@ typedef enum : NSUInteger {
     if (self.isLocal == YES) {
         self.inputFiled.text = [CoinUtil convertToRealCoin:self.currentModel.balance coin:self.currentModel.symbol];
     }else{
-    self.inputFiled.text = [CoinUtil convertToRealCoin:self.currentModel.amountString coin:self.currentModel.currency];
+        NSString *leftAmount = [self.currentModel.amountString subNumber:self.currentModel.frozenAmountString];
+        
+        //
+    self.inputFiled.text = [CoinUtil convertToRealCoin:leftAmount coin:self.currentModel.currency];
     }
 }
 -(void)refreshCollectionView:(THTranstionCollectionView *)refreshCollectionview didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -1104,17 +1268,19 @@ typedef enum : NSUInteger {
     
     self.inputFiled.text = nil;
     if (self.isLocal == YES) {
-        NSString *money = [CoinUtil convertToRealCoin:self.currencys[indexPath.row].balance coin:self.currencys[indexPath.row].symbol];
-        self.currentModel = self.currencys[indexPath.row];
-        self.symbolLab.text = self.currencys[indexPath.row].symbol;
-        self.amountlLab.text = [NSString stringWithFormat:@"%@ %@",money,self.currencys[indexPath.row].symbol];
-        CoinModel *currentCoin = [CoinUtil getCoinModel:self.currencys[indexPath.row].symbol];
+       
         
         [self loadtype];
-        [self loadGas];
+        [self loadGas1:indexPath];
        
     }else{
-        NSString *money = [CoinUtil convertToRealCoin:self.currencys[indexPath.row].amountString coin:self.currencys[indexPath.row].currency];
+//        NSString *money = [CoinUtil convertToRealCoin:self.currencys[indexPath.row].amountString coin:self.currencys[indexPath.row].currency];
+        NSString *leftAmount = [self.currencys[indexPath.row].amountString subNumber:self.currencys[indexPath.row].frozenAmountString];
+        
+        //
+        NSString *money = [CoinUtil convertToRealCoin:leftAmount coin:self.currencys[indexPath.row].currency];
+        
+        
         self.currentModel = self.currencys[indexPath.row];
         self.symbolLab.text = self.currencys[indexPath.row].currency;
         self.amountlLab.text = [NSString stringWithFormat:@"%@ %@",money,self.currencys[indexPath.row].currency];

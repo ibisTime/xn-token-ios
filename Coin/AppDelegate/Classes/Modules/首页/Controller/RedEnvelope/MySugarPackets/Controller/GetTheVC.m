@@ -28,6 +28,7 @@
 
 @property (nonatomic, copy) NSString *year;
 
+@property (nonatomic, assign) BOOL isClose;
 
 @end
 
@@ -105,6 +106,17 @@
     self.headView.clickBlock = ^{
         [weakSelf.filterPicker show];
     };
+    self.headView.closeBlock = ^(BOOL isClose) {
+        weakSelf.isClose = isClose;
+        if (weakSelf.isRecevied ) {
+            [weakSelf LoadData];
+
+        }else{
+            [weakSelf LoadSendData];
+
+        }
+
+    };
     [self loadYear];
 }
 
@@ -162,12 +174,27 @@
             }];
             
             //
-            weakSelf.headView.total.text = [LangSwitcher switchLang:@"共发出红包" key:nil];
-            weakSelf.headView.count.text = [NSString stringWithFormat:@"%ld%@",shouldDisplayCoins.count,[LangSwitcher switchLang:@"个" key:nil]];
+            if (self.isClose == YES) {
+                weakSelf.headView.total.text = [LangSwitcher switchLang:@"共发出红包" key:nil];
+                weakSelf.headView.count.text = [NSString stringWithFormat:@"***"];
+                
+                weakSelf.sends = shouldDisplayCoins;
+                weakSelf.tableView.isClose = weakSelf.isClose;
 
-            weakSelf.sends = shouldDisplayCoins;
-            weakSelf.tableView.sends = shouldDisplayCoins;
-            [weakSelf.tableView reloadData_tl];
+                weakSelf.tableView.sends = shouldDisplayCoins;
+                [weakSelf.tableView reloadData_tl];
+            }else{
+                
+                weakSelf.headView.total.text = [LangSwitcher switchLang:@"共发出红包" key:nil];
+                weakSelf.headView.count.text = [NSString stringWithFormat:@"%ld",shouldDisplayCoins.count];
+                
+                weakSelf.sends = shouldDisplayCoins;
+                weakSelf.tableView.isClose = weakSelf.isClose;
+
+                weakSelf.tableView.sends = shouldDisplayCoins;
+                [weakSelf.tableView reloadData_tl];
+            }
+           
             
         } failure:^(NSError *error) {
             
@@ -198,8 +225,9 @@
             
             //
             weakSelf.headView.total.text = [LangSwitcher switchLang:@"共发出红包" key:nil];
-            weakSelf.headView.count.text = [NSString stringWithFormat:@"%ld%@",shouldDisplayCoins.count,[LangSwitcher switchLang:@"个" key:nil]];
+            weakSelf.headView.count.text = [NSString stringWithFormat:@"%ld",shouldDisplayCoins.count];
             weakSelf.sends = shouldDisplayCoins;
+            
             weakSelf.tableView.sends = shouldDisplayCoins;
             [weakSelf.tableView reloadData_tl];
             
@@ -249,7 +277,7 @@
             //
             weakSelf.getthe = shouldDisplayCoins;
             
-            weakSelf.headView.count.text = [NSString stringWithFormat:@"%ld %@",weakSelf.getthe.count,[LangSwitcher switchLang:@"个" key:nil]];
+            weakSelf.headView.count.text = [NSString stringWithFormat:@"%ld",weakSelf.getthe.count];
             weakSelf.tableView.getthe = shouldDisplayCoins;
             [weakSelf.tableView reloadData_tl];
 
@@ -299,7 +327,13 @@
 {
 //    [self dismissViewControllerAnimated:YES completion:nil];
     SendVC *send = [[SendVC alloc] init];
-    
+    if (self.isRecevied == YES) {
+        send.code = self.getthe[indexPath.row].redPacketInfo[@"code"];
+
+    }else{
+        send.code = self.sends[indexPath.row].code;
+
+    }
     [self presentViewController:send animated:YES completion:nil];
     
 //    [self.navigationController pushViewController:send animated:YES];

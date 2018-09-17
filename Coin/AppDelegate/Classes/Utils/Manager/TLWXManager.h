@@ -19,6 +19,9 @@
 + (void)wxShareWebPageWithScene:(int)scene title:(NSString *)title desc:(NSString *)desc url:(NSString *)url;
 
 + (void)wxShareWebPageWith:(NSString *)title desc:(NSString *)desc url:(NSString *)url;
+
++ (void)shareSinaWeiboWithText:(NSString *)text image:(UIImage *)image;
+
 @property (nonatomic, copy) void(^wxPay)(BOOL isSuccess,int errorCode);
 @property (nonatomic, copy) void(^wxShare)(BOOL isSuccess,int errorCode);
 

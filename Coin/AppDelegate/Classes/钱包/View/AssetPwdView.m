@@ -81,7 +81,7 @@
         sureLab.text = [LangSwitcher switchLang:@"请输入支付密码" key:nil];
 
     }else{
-        sureLab.text = [LangSwitcher switchLang:@"请输入您的交易密码" key:nil];
+        sureLab.text = [LangSwitcher switchLang:@"请输入资金密码" key:nil];
 
     }
     [whiteView addSubview:sureLab];
@@ -159,24 +159,24 @@
 //
 //    }];
     UIImageView *im = [[UIImageView alloc] init];
-    im.image = kImage(@"注意");
-    [whiteView addSubview:im];
-    [im mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.password.mas_bottom).offset(10);
-        make.left.equalTo(whiteView.mas_left).offset(70);
-        make.height.equalTo(@20);
-        make.width.equalTo(@20);
-
-    }];
+//    im.image = kImage(@"注意");
+//    [whiteView addSubview:im];
+//    [im mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(self.password.mas_bottom).offset(10);
+//        make.left.equalTo(whiteView.mas_left).offset(70);
+//        make.height.equalTo(@20);
+//        make.width.equalTo(@20);
+//
+//    }];
     UILabel *sure = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor2 font:12];
-    [whiteView addSubview:sure];
-    [sure mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.password.mas_bottom).offset(10);
-        make.left.equalTo(whiteView.mas_left).offset(100);
-        make.right.equalTo(whiteView.mas_right).offset(-20);
-        make.height.equalTo(@20);
-        
-    }];
+//    [whiteView addSubview:sure];
+//    [sure mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(self.password.mas_bottom).offset(10);
+//        make.left.equalTo(whiteView.mas_left).offset(100);
+//        make.right.equalTo(whiteView.mas_right).offset(-20);
+//        make.height.equalTo(@20);
+//
+//    }];
     sure.text = [LangSwitcher switchLang:@"连续5次密码错误我们将暂时锁定您的账号" key:nil];
     UIButton *sureButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [sureButton setBackgroundColor:kClearColor forState:UIControlStateNormal];
@@ -190,7 +190,7 @@
         make.left.equalTo(whiteView.mas_left).offset(20);
         make.right.equalTo(whiteView.mas_right).offset(-20);
         make.height.equalTo(@20);
-        
+
     }];
     
 }

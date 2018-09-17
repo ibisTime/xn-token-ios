@@ -110,7 +110,7 @@ void TLLog(NSString *format, ...) {
 
 - (NSString *)wxKey {
     
-    return @"wx8cb7c18fa507f630";
+    return @"wx368e6044b7436dff";
 }
 
 @end

@@ -28,7 +28,13 @@
 }
 
 - (void)viewDidLoad {
-    self.title = [LangSwitcher switchLang:@"添加资产" key:nil];
+    if (self.isRedPage == YES) {
+        self.title = [LangSwitcher switchLang:@"选择币种" key:nil];
+
+    }else{
+        self.title = [LangSwitcher switchLang:@"添加资产" key:nil];
+
+        }
     [self initTableView];
    
         [self getStatusSymbol];

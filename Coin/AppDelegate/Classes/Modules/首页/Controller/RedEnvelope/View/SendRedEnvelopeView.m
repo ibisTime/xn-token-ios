@@ -187,7 +187,7 @@
 
             }
             if (i == 0) {
-                UIImageView *youImage = [[UIImageView alloc]initWithFrame:CGRectMake(kScreenWidth - 100, kHeight(48)/2 - 6.35, 7.4, 12.7)];
+                UIImageView *youImage = [[UIImageView alloc]initWithFrame:CGRectMake(kScreenWidth - 45, kHeight(48)/2 - 6.35, 7.4, 12.7)];
                 youImage.image = kImage(@"more");
                 [backView addSubview:youImage];
 
@@ -231,7 +231,7 @@
 
         }
 
-        alltotalLabel = [UILabel labelWithFrame:CGRectMake(kWidth(kScreenWidth/4),kHeight(430+40) , kWidth(120), kHeight(16)) textAligment:(NSTextAlignmentCenter) backgroundColor:kClearColor font:Font(11) textColor:kTextColor];
+        alltotalLabel = [UILabel labelWithFrame:CGRectMake(kWidth(kScreenWidth/4),kHeight(430+40) , kWidth(140), kHeight(16)) textAligment:(NSTextAlignmentCenter) backgroundColor:kClearColor font:Font(11) textColor:kTextColor];
         [self addSubview:alltotalLabel];
         
         transFormLab = [UILabel labelWithFrame:CGRectMake(alltotalLabel.xx+10,kHeight(430+40) , kWidth(92), kHeight(16)) textAligment:(NSTextAlignmentLeft) backgroundColor:kClearColor font:Font(11) textColor:kAppCustomMainColor];
@@ -261,9 +261,9 @@
         
         typelab = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor3 font:11];
         
-        typelab.text = [LangSwitcher switchLang:@"当前为拼手气红包" key:nil];
+        typelab.text = [LangSwitcher switchLang:@"拼手气红包" key:nil];
         
-        typelab.frame = CGRectMake(kWidth(94), kHeight(218), kWidth(84), kHeight(16));
+        typelab.frame = CGRectMake(kWidth(94), kHeight(218), kWidth(124), kHeight(16));
         [self addSubview:typelab];
 
         
@@ -271,7 +271,7 @@
         
         typepin.text = [LangSwitcher switchLang:@"每人获得金额随机" key:nil];
         
-        typepin.frame = CGRectMake(kScreenWidth - 100, kHeight(284+35), kWidth(84), kHeight(16));
+        typepin.frame = CGRectMake(kScreenWidth - 120, kHeight(284+35), kWidth(104), kHeight(16));
         [self addSubview:typepin];
         UIButton *TheWalletButton = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"拼" key:nil] titleColor:kWhiteColor backgroundColor:kHexColor(@"#F35641") titleFont:11];
         self.TheWalletButton = TheWalletButton;
@@ -314,27 +314,32 @@
         redIntroduce.userInteractionEnabled = YES;
         UITapGestureRecognizer * tap1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(centerClick)];
         [redIntroduce addGestureRecognizer:tap1];
-        [self addSubview:redIntroduce];
-        [redIntroduce mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(IntoButton.mas_bottom).offset(10);
-            make.centerX.equalTo(self.mas_centerX);
-            
-        }];
+//        [self addSubview:redIntroduce];
+//        [redIntroduce mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.top.equalTo(IntoButton.mas_bottom).offset(10);
+//            make.centerX.equalTo(self.mas_centerX);
+//
+//        }];
         UIImageView *imageV  = [[UIImageView alloc] init];
         imageV.backgroundColor = kClearColor;
         
         UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(centerClick)];
-        [imageV addGestureRecognizer:tap];
+//        [imageV addGestureRecognizer:tap];
         imageV.userInteractionEnabled = YES;
-        [self addSubview:imageV];
+//        [self addSubview:imageV];
         imageV.image = kImage(@"红包规则问号");
-        [imageV mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(IntoButton.mas_bottom).offset(10);
-            make.left.equalTo(redIntroduce.mas_right).offset(3);
-            make.width.height.equalTo(@14);
-            
-        }];
-
+//        [imageV mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.top.equalTo(IntoButton.mas_bottom).offset(10);
+//            make.left.equalTo(redIntroduce.mas_right).offset(3);
+//            make.width.height.equalTo(@14);
+//            
+//        }];
+        UILabel *bottomLab = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor3 font:11];
+        
+        bottomLab.text = [LangSwitcher switchLang:@"如24小时未领取红包,则红包退回原地址" key:nil];
+        
+        bottomLab.frame = CGRectMake(kWidth(84),kScreenHeight-kTabBarHeight , kScreenWidth-kWidth(84*2), kHeight(16));
+        [self addSubview:bottomLab];
     }
     return self;
 }
@@ -416,14 +421,15 @@
         if (sender.selected == YES)
         {
             typelab.text = [LangSwitcher switchLang:@"普通红包" key:nil];
-            self.symbolLabCoin.hidden= YES;
-            self.symbolLabtype.hidden= YES;
-            alltotalLabel.frame = CGRectMake(kWidth(kScreenWidth/4),kHeight(430) , kWidth(120), kHeight(16));
-            self.IntoButton.frame = CGRectMake(kWidth(15), kHeight(500), kScreenWidth-60, kHeight(48));
-            transFormLab.frame = CGRectMake(alltotalLabel.xx+10,kHeight(430) , kWidth(92), kHeight(16));
+//            self.symbolLabCoin.hidden= YES;
+////            self.symbolLabtype.hidden= YES;
+//            alltotalLabel.frame = CGRectMake(kWidth(kScreenWidth/4),kHeight(430) , kWidth(120), kHeight(16));
+//            self.IntoButton.frame = CGRectMake(kWidth(15), kHeight(500), kScreenWidth-60, kHeight(48));
+//            transFormLab.frame = CGRectMake(alltotalLabel.xx+10,kHeight(430) , kWidth(92), kHeight(16));
             self.total.text = [LangSwitcher switchLang:@"单个金额" key:nil];
             _type = @"0";
             typepin.text = [LangSwitcher switchLang:@"每人获得金额固定" key:nil];
+            [self CalculateThePrice];
             [self setNeedsLayout];
             [self setNeedsDisplay];
 //            [self.WalletButton setBackgroundColor:kHexColor(@"#F35641") forState:UIControlStateNormal];
@@ -433,13 +439,14 @@
         }
         else
         {
-            self.symbolLabCoin.hidden= NO;
-            self.symbolLabtype.hidden= NO;
-             alltotalLabel.frame = CGRectMake(kWidth(kScreenWidth/4),kHeight(430+40) , kWidth(120), kHeight(16));
-            transFormLab.frame = CGRectMake(alltotalLabel.xx+10,kHeight(430+40) , kWidth(92), kHeight(16));
+//            self.symbolLabCoin.hidden= NO;
+//            self.symbolLabtype.hidden= NO;
+//             alltotalLabel.frame = CGRectMake(kWidth(kScreenWidth/4),kHeight(430+40) , kWidth(120), kHeight(16));
+//            transFormLab.frame = CGRectMake(alltotalLabel.xx+10,kHeight(430+40) , kWidth(92), kHeight(16));
+            [self CalculateThePrice];
 
             self.total.text = [LangSwitcher switchLang:@"总额" key:nil];
-            self.IntoButton.frame = CGRectMake(kWidth(15), kHeight(500+40), kScreenWidth-60, kHeight(48));
+//            self.IntoButton.frame = CGRectMake(kWidth(15), kHeight(500+40), kScreenWidth-60, kHeight(48));
             [self setNeedsLayout];
 
             typelab.text = [LangSwitcher switchLang:@"拼手气红包" key:nil];
@@ -483,7 +490,7 @@
             _greeting = textField3.text;
         }
      //付款
-        [self payAmount];
+        [self payMoney];
         
         
        
@@ -646,12 +653,12 @@
     NSString *leftAmount = [CoinUtil convertToRealCoin:platform.amountString coin:coin.symbol];
     NSString *rightAmount = [CoinUtil convertToRealCoin:platform.frozenAmountString coin:coin.symbol];
     NSString *ritAmount = [leftAmount subNumber:rightAmount];
-    alltotalLabel.text = [NSString stringWithFormat:@"%@%@ %.3f",[LangSwitcher switchLang:@"个人账户" key:nil],platform.currency,[ritAmount floatValue]];
+    alltotalLabel.text = [NSString stringWithFormat:@"%@%@ %.3f",[LangSwitcher switchLang:@"个人账户余额" key:nil],platform.currency,[ritAmount floatValue]];
     self.symbolLabtype.text = [NSString stringWithFormat:@"%@",platform.currency];
 //    symbolLabCoin.text =
 
     NSString *str = [NSString stringWithFormat:@"0.000 %@ %@",_currency,[LangSwitcher switchLang:@"枚" key:nil]];
-    [self labelText:str];
+    [self CalculateThePrice];
 }
 
 

@@ -12,5 +12,6 @@
 @interface SendCell : UITableViewCell
 
 @property (nonatomic, strong)SendModel *sendModel;
+@property (nonatomic, assign) BOOL isClose;
 
 @end

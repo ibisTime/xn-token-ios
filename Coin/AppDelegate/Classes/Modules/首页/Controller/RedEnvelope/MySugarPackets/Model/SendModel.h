@@ -38,5 +38,19 @@
 @property (nonatomic , copy)NSString *singleCount;
 
 @property (nonatomic , copy)NSString * receivedNum;
+@property (nonatomic , copy)NSString * userId;
+
+@property (nonatomic , copy)NSString * receivedCount;
+@property (nonatomic , copy)NSString * lastReceivedDatetime;
+@property (nonatomic , copy)NSString * bestHandUser;
+@property (nonatomic , copy)NSString * invalidDatetime;
+@property (nonatomic , copy)NSString * status;
+@property (nonatomic , copy)NSString * bestHandUserPhoto;
+@property (nonatomic , copy)NSString * bestHandUserNickname;
+@property (nonatomic , copy)NSString * isReceived;
+@property (nonatomic , copy)NSString * bestHandCount;
+
+@property (nonatomic , strong)NSArray *receiverList;
+
 
 @end

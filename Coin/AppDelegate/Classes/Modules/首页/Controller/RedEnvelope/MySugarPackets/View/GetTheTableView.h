@@ -15,5 +15,6 @@
 @property (nonatomic, strong) NSMutableArray <SendModel *>*sends;
 
 @property (nonatomic, assign) BOOL isRecvied;
+@property (nonatomic, assign) BOOL isClose;
 
 @end

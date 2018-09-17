@@ -11,6 +11,6 @@
 
 @interface SendTableView : TLTableView
 
-@property (nonatomic, strong) NSMutableArray <SendModel *>*send;
+@property (nonatomic, strong) NSArray *send;
 
 @end

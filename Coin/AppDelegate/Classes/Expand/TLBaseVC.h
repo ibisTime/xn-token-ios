@@ -11,7 +11,8 @@
 #import "TLUser.h"
 #import "TLDataBase.h"
 #import "TLNavigationController.h"
-
+#import "TLWXManager.h"
+#import "TLWBManger.h"
 @interface TLBaseVC : UIViewController
 
 @property (nonatomic,strong) UIView *tl_placeholderView;

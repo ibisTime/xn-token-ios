@@ -12,7 +12,10 @@
 #import "TLPwdRelatedVC.h"
 #import "UIButton+SGImagePosition.h"
 #import "PoliteInstructionsVC.h"
-@interface TLinviteVC ()
+#import "NewHtmlVC.h"
+#import "AppDelegate.h"
+#import <WeiboSDK.h>
+@interface TLinviteVC ()<WBMediaTransferProtocol>
 
 @property (nonatomic ,strong) UIImageView *bgView;
 @property (nonatomic, strong) UIImageView *bgImage;
@@ -20,6 +23,12 @@
 @property (nonatomic, strong) UIButton *backButton;
 
 @property (nonatomic, strong) UILabel *nameLable;
+
+@property (nonatomic, strong) NSString *h5String;
+@property (nonatomic, strong) WBMessageObject *messageObject;
+@property (nonatomic, strong) UIAlertController *actionSheetController;
+@property (nonatomic, strong) UITapGestureRecognizer *tap;
+@property (nonatomic, strong) UIButton *integralBtn;
 @end
 
 @implementation TLinviteVC
@@ -37,8 +46,15 @@
     self.navigationItem.backBarButtonItem = item;
     self.navigationController.navigationBar.shadowImage = [UIImage new];
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+    
+    if ([TLUser user].isLogin) {
+      BOOL is =  [[TLUser user] chang];
 
+    }
+   
 }
+
+
 //如果仅设置当前页导航透明，需加入下面方法
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
@@ -62,7 +78,7 @@
     self.nameLable.font = Font(18);
     self.nameLable.textColor = [UIColor whiteColor];
     self.navigationItem.titleView = self.nameLable;
-
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(upInfo) name:@"upsecuees" object:nil];
     UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
     negativeSpacer.width = -10;
     UIButton *RightButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
@@ -72,9 +88,34 @@
 
     [self initUI];
 
-    
+    [self getShareUrl];
     
     // Do any additional setup after loading the view.
+}
+
+- (void)upInfo
+{
+    [self.integralBtn setTitle:@"" forState:UIControlStateNormal];
+    NSString *str = [NSString stringWithFormat:@"您拥有积分%@点    马上提币",[TLUser user].jfAmount];
+    NSString *str1 = @"您拥有积分";
+    NSString *str2 = [NSString stringWithFormat:@"%@",[TLUser user].jfAmount];
+    NSString *str3 = @"点";
+    NSString *str4 = @"马上提币";
+    NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:str];
+    [attrStr addAttribute:NSForegroundColorAttributeName
+                    value:kHexColor(@"#A2A5C4")
+                    range:NSMakeRange(0, str1.length)];
+    [attrStr addAttribute:NSForegroundColorAttributeName
+                    value:kHexColor(@"#00F7FE")
+                    range:NSMakeRange(str1.length, str2.length)];
+    [attrStr addAttribute:NSForegroundColorAttributeName
+                    value:kHexColor(@"#A2A5C4")
+                    range:NSMakeRange(str1.length + str2.length, str3.length)];
+    [attrStr addAttribute:NSForegroundColorAttributeName
+                    value:kHexColor(@"#00F7FE")
+                    range:NSMakeRange(str.length - str4.length, str4.length)];
+    [self.integralBtn setAttributedTitle:attrStr forState:(UIControlStateNormal)];
+    
 }
 
 -(void)rightButtonClick
@@ -86,11 +127,32 @@
         [self.navigationController pushViewController:vc animated:YES];
 
     }];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:[LangSwitcher switchLang:@"取消" key:nil] style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        
+        
+    }];
+    
     [showAllInfoAction setValue:kHexColor(@"#333333") forKey:@"_titleTextColor"];
     [actionSheetController addAction:showAllInfoAction];
+    [actionSheetController addAction:cancelAction];
 
+    self.actionSheetController = actionSheetController;
     [self presentViewController:actionSheetController animated:YES completion:nil];
+    UIWindow *alertWindow = (UIWindow *)[UIApplication sharedApplication].windows.lastObject;
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideAlert)];
+    [alertWindow addGestureRecognizer:tap];
+}
 
+- (void)hideAlert
+{
+    UIWindow *alertWindow = (UIWindow *)[UIApplication sharedApplication].windows.lastObject;
+    [alertWindow removeGestureRecognizer:self.tap];
+    [self.actionSheetController dismissViewControllerAnimated:YES completion:nil];
+}
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    [self.actionSheetController dismissViewControllerAnimated:YES completion:nil];
+    
 }
 
 - (void)initUI
@@ -121,10 +183,11 @@
 
     UIImageView *textBackImage = [[UIImageView alloc]initWithFrame:CGRectMake(kWidth(40), kHeight(211 + kNavigationBarHeight), SCREEN_WIDTH - kWidth(80), kHeight(201))];
     textBackImage.image = kImage(@"长框");
+    textBackImage.userInteractionEnabled = YES;
     [bgView addSubview:textBackImage];
 
     UILabel *numberUsersLabel = [UILabel labelWithFrame:CGRectMake(kWidth(15), kHeight(44), SCREEN_WIDTH - kWidth(110), kHeight(22)) textAligment:(NSTextAlignmentCenter) backgroundColor:kClearColor font:FONT(16) textColor:kHexColor(@"#FFFFFF")];
-    numberUsersLabel.text = [LangSwitcher switchLang:@"您已成功邀请10名用户" key:nil];
+    numberUsersLabel.text = [NSString stringWithFormat:@"%@ %@ %@",[LangSwitcher switchLang:@"您已成功邀请" key:nil],[TLUser user].jfInviteNumber,[LangSwitcher switchLang:@"名用户" key:nil]];
     [textBackImage addSubview:numberUsersLabel];
 
     UILabel *ThankYouLabel = [UILabel labelWithFrame:CGRectMake(kWidth(15), kHeight(110), SCREEN_WIDTH - kWidth(110), kHeight(22)) textAligment:(NSTextAlignmentCenter) backgroundColor:kClearColor font:FONT(16) textColor:kHexColor(@"#FFFFFF")];
@@ -132,9 +195,11 @@
     [textBackImage addSubview:ThankYouLabel];
 
     UIButton *integralBtn = [UIButton buttonWithTitle:@"" titleColor:kHexColor(@"#A2A5C4") backgroundColor:kClearColor titleFont:13];
-    NSString *str = @"您拥有积分5点    马上提币";
+    self.integralBtn = integralBtn;
+    [integralBtn addTarget:self action:@selector(coinClick) forControlEvents:UIControlEventTouchUpInside];
+    NSString *str = [NSString stringWithFormat:@"您拥有积分%@点    马上提币",[TLUser user].jfAmount];
     NSString *str1 = @"您拥有积分";
-    NSString *str2 = @"5";
+    NSString *str2 = [NSString stringWithFormat:@"%@",[TLUser user].jfAmount];
     NSString *str3 = @"点";
     NSString *str4 = @"马上提币";
     NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:str];
@@ -193,6 +258,104 @@
   
 
 }
+
+- (void)getShareUrl
+{
+    
+    TLNetworking *http = [TLNetworking new];
+    http.showView = self.view;
+    http.code = @"660917";
+    
+    http.parameters[@"ckey"] = @"redPacketShareUrl";
+    
+    [http postWithSuccess:^(id responseObject) {
+        
+        self.h5String = responseObject[@"data"][@"cvalue"];
+        
+      
+    } failure:^(NSError *error) {
+        
+    }];
+    
+    
+}
+
+- (void)coinClick
+{
+    //
+    NSString *shareUrl;
+    NSString *lang;
+    LangType type = [LangSwitcher currentLangType];
+    if (type == LangTypeSimple || type == LangTypeTraditional) {
+        lang = @"ZH_CN";
+    }else if (type == LangTypeKorean)
+    {
+        lang = @"KO";
+        
+        
+    }else{
+        lang = @"EN";
+        
+    }
+    
+    shareUrl = [NSString stringWithFormat:@"%@/luckDraw/luckDraw.html?userId=%@&lang=%@",self.h5String,[TLUser user].userId,lang];
+    NewHtmlVC  *h5 = [NewHtmlVC new];
+    h5.h5string = shareUrl;
+//    [self sinaShare];
+//    [TLWXManager shareSinaWeiboWithText:@"theia" image:self.bgImage.image];
+//    [TLWXManager wxShareWebPageWithScene:WXSceneSession
+//                                   title:@"theia"
+//                                    desc:lang
+//                                     url:self.h5String];
+//    [TLWXManager manager].wxShare = ^(BOOL isSuccess, int errorCode) {
+//
+//        if (isSuccess) {
+//
+//            [TLAlert alertWithSucces:@"分享成功"];
+//        } else {
+//
+//            [TLAlert alertWithError:@"分享失败"];
+//        }
+//    };
+    
+    [self.navigationController pushViewController:h5 animated:YES];
+    
+}
+
+- (void)sinaShare {
+    self.messageObject = [self messageToShare];
+    AppDelegate *myDelegate =(AppDelegate*)[[UIApplication sharedApplication] delegate];
+    
+    WBAuthorizeRequest *authRequest = [WBAuthorizeRequest request];
+    authRequest.redirectURI = @"www.baidu.com";
+    authRequest.scope = @"all";
+    
+    WBSendMessageToWeiboRequest *request = [WBSendMessageToWeiboRequest requestWithMessage:_messageObject authInfo:authRequest access_token:myDelegate.wbtoken];
+    request.userInfo = @{@"ShareMessageFrom": @"SendMessageToWeiboViewController",
+                         @"Other_Info_1": [NSNumber numberWithInt:123],
+                         @"Other_Info_2": @[@"obj1", @"obj2"],
+                         @"Other_Info_3": @{@"key1": @"obj1", @"key2": @"obj2"}};
+    if (![WeiboSDK sendRequest:request]) {
+        NSLog(@"打开失败");
+    }
+}
+
+- (WBMessageObject *)messageToShare
+{
+    WBMessageObject *message = [WBMessageObject message];
+
+    UIImage *image = kImage(@"头像");
+  
+    NSArray *imageArray = [NSArray arrayWithObjects:image, nil];
+    WBImageObject *imageObject = [WBImageObject object];
+    imageObject.imageData = UIImageJPEGRepresentation(image, 1.0);
+    message.imageObject = imageObject;
+    imageObject.delegate = self;
+    message.imageObject = imageObject;
+    return message;
+}
+
+
 - (void)buttonClick
 {
     

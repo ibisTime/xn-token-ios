@@ -13,6 +13,7 @@
 #import "ZJAnimationPopView.h"
 #import "UIImageView+WebCache.h"
 #import "MySugarPacketsVC.h"
+#import "TLMyRecordVC.h"
 @interface RedEnvelopeShoreVC ()<RedEnvelopeHeadDelegate>
 {
 }
@@ -64,10 +65,17 @@
     self.shoreVie = shoreView;
     [shoreView addSubview:label];
     CoinWeakSelf;
+    shoreView.shareBlock = ^(NSInteger inter) {
+        [weakSelf shareWithTag:inter];
+    };
+    
     shoreView.redPackBlock = ^{
-        [weakSelf.navigationController setNavigationBarHidden:NO];
-
-        [weakSelf dismissViewControllerAnimated:YES completion:nil];
+        MySugarPacketsVC *vc = [[MySugarPacketsVC alloc]init];
+        vc.isSend = YES;
+        UINavigationController * navigation = [[UINavigationController alloc]initWithRootViewController:vc];
+        vc.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+        vc.modalPresentationStyle = UIModalTransitionStyleFlipHorizontal;
+        [self presentViewController:navigation animated:NO completion:nil];
 //        MySugarPacketsVC *vc = [[MySugarPacketsVC alloc]init];
 //        UINavigationController * navigation = [[UINavigationController alloc]initWithRootViewController:vc];
 //        vc.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
@@ -89,6 +97,87 @@
 
     [self.view addSubview:self.invitationView];
    
+    
+}
+- (void)shareWithTag: (NSInteger)inter
+{
+//    (kWidth(20), kHeight(116-30), kWidth(335), kHeight(434))
+    
+    switch (inter) {
+        case 0:
+        {
+            
+            UIGraphicsBeginImageContextWithOptions(self.shoreVie.backImg.bounds.size, NO, [[UIScreen mainScreen] scale]);
+//            UIGraphicsBeginImageContextWithOptions(self.shoreVie.backImg.bounds.size), NO, [self.shoreVie.backImg scale]);
+            [self.shoreVie.backImg.layer renderInContext:UIGraphicsGetCurrentContext()];
+            UIImage *viewImage = UIGraphicsGetImageFromCurrentImageContext();
+            UIGraphicsEndImageContext();
+            [TLWXManager wxShareImgWith:@"" scene:0 desc:nil image:viewImage];
+            [[TLWXManager manager] setWxShare:^(BOOL isSuccess, int errorCode) {
+                
+                if (isSuccess) {
+                    
+                    [TLAlert alertWithInfo:@"分享成功"];
+                    
+                } else {
+                    
+                    [TLAlert alertWithInfo:@"分享失败"];
+                    
+                }
+                
+            }];
+            
+        }
+            break;
+        case 1:
+        {
+            UIGraphicsBeginImageContextWithOptions(self.shoreVie.backImg.bounds.size, NO, [[UIScreen mainScreen] scale]);
+            [self.shoreVie.backImg.layer renderInContext:UIGraphicsGetCurrentContext()];
+            UIImage *viewImage = UIGraphicsGetImageFromCurrentImageContext();
+            UIGraphicsEndImageContext();
+            [TLWXManager wxShareImgWith:@"" scene:1 desc:nil image:viewImage];
+            [[TLWXManager manager] setWxShare:^(BOOL isSuccess, int errorCode) {
+                
+                if (isSuccess) {
+                    
+                    [TLAlert alertWithInfo:@"分享成功"];
+                    
+                } else {
+                    
+                    [TLAlert alertWithInfo:@"分享失败"];
+                    
+                }
+                
+            }];
+        }
+            break;
+        case 2:
+        {
+           UIGraphicsBeginImageContextWithOptions(self.shoreVie.backImg.bounds.size, NO, [[UIScreen mainScreen] scale]);
+            [self.shoreVie.backImg.layer renderInContext:UIGraphicsGetCurrentContext()];
+            UIImage *viewImage = UIGraphicsGetImageFromCurrentImageContext();
+            UIGraphicsEndImageContext();
+            [TLWBManger sinaShareWithImage:viewImage];
+        }
+            break;
+        case 3:
+        {
+            [TLAlert alertWithSucces:[LangSwitcher switchLang:@"保存成功!" key:nil]];
+            UIGraphicsBeginImageContextWithOptions(self.shoreVie.backImg.bounds.size, NO, [[UIScreen mainScreen] scale]);
+            [self.shoreVie.backImg.layer renderInContext:UIGraphicsGetCurrentContext()];
+            UIImage *viewImage = UIGraphicsGetImageFromCurrentImageContext();
+            UIGraphicsEndImageContext();
+            UIImageWriteToSavedPhotosAlbum(viewImage, nil, nil, nil);
+            
+        }
+            break;
+            
+        default:
+            break;
+    }
+    
+    
+//    CGRectMake(kWidth(20), kHeight(116-30), kWidth(335), kHeight(434))
     
 }
 
@@ -131,7 +220,7 @@
 //    self.shoreVie.stateLabel.hidden = YES;
     
     
-    _invitationView.frame = CGRectMake(kScreenWidth/2 - 86, kHeight(250), 173,173+60);
+    _invitationView.frame = CGRectMake(kScreenWidth/2 - 106, kHeight(140), 173,173+60);
     
     
     [self showPopAnimationWithAnimationStyle:2];
@@ -182,7 +271,7 @@
         
     };
     // 4.显示弹框
-    [popView pop:self.view];
+    [popView pop:self.shoreVie.backImg];
 }
 
 - (void)removeIcon

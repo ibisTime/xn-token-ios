@@ -12,5 +12,11 @@
 @property (nonatomic ,strong) UILabel *count;
 @property (nonatomic ,strong) UIButton *tameBtn;
 @property (nonatomic ,strong) UILabel *total;
+@property (nonatomic ,strong) UILabel *alltotal;
+@property (nonatomic ,strong) UIButton *shareBtn;
+
 @property (nonatomic ,copy) void (^clickBlock) ();
+
+@property (nonatomic ,copy) void (^shareBlock) ();
+
 @end

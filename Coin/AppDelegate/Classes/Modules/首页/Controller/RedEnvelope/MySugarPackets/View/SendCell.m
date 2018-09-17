@@ -67,7 +67,7 @@
         headImage.image = kImage(@"拼手气红包 copy");
     }else{
         //普通
-        headImage.image = kImage(@" 普通红包");
+        headImage.image = kImage(@"普通红包-1");
         
         
     }
@@ -75,7 +75,12 @@
     CoinModel *coin = [CoinUtil getCoinModel:sendModel.symbol];
     [sysmbolImage sd_setImageWithURL:[NSURL URLWithString:[coin.pic1 convertImageUrl ] ] placeholderImage:kImage(@"头像")];
     //    [headImage sd_setImageWithURL:[NSURL URLWithString:[sendModel.sendUserPhoto convertImageUrl]] placeholderImage:kImage(@"普通红包")];
-    priceLabel.text = [NSString stringWithFormat:@"%@ %@",sendModel.totalCount,[LangSwitcher switchLang:@"枚" key:nil]];
+    if (self.isClose == YES) {
+          priceLabel.text = [NSString stringWithFormat:@"**** %@",[LangSwitcher switchLang:@"枚" key:nil]];
+    }else{
+          priceLabel.text = [NSString stringWithFormat:@"%@ %@",sendModel.totalCount,[LangSwitcher switchLang:@"枚" key:nil]];
+    }
+  
     TheValueLabel.text = [NSString stringWithFormat:@"%@/%@个",sendModel.receivedNum,sendModel.sendNum];
 }
 @end

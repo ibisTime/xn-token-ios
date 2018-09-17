@@ -56,13 +56,17 @@
     NSLog(@"%@",self.getthe);
     if (self.isRecvied == YES) {
         GetTheModel *gettheModel = self.getthe[indexPath.row];
+    
         GetTheCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+        cell.isClose = self.isClose;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.getModel = gettheModel;
         return cell;
     }else{
         SendModel *gettheModel = self.sends[indexPath.row];
         SendCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SendCell" forIndexPath:indexPath];
+        cell.isClose = self.isClose;
+
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.sendModel = gettheModel;
         

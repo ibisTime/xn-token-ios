@@ -30,7 +30,7 @@ static NSString *identifierCell = @"TransformCell";
         self.pagingEnabled = NO;
                 
         self.allowsSelection = YES;
-        self.allowsMultipleSelection = YES;
+        self.allowsMultipleSelection = NO;
         //        self.bounces = NO;
         //        self.backgroundColor = [UIColor whiteColor];
         self.delegate = self;
@@ -62,6 +62,11 @@ static NSString *identifierCell = @"TransformCell";
     NSLog(@"%ld分区---%ldItem", indexPath.section, indexPath.row);
     
      TransformCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifierCell forIndexPath:indexPath];
+//    cell.backgroundColor = kOrangeRedColor;
+//    UIView *back = [UIView new];
+//    back.backgroundColor = kTextBlack;
+//    back.frame = cell.bounds;
+//    [cell addSubview:back];
     cell.isClick = YES;
     if ([self.refreshDelegate respondsToSelector:@selector(refreshCollectionView:didSelectRowAtIndexPath:)]) {
         [self.refreshDelegate refreshCollectionView:self didSelectRowAtIndexPath:indexPath];
@@ -157,6 +162,24 @@ static NSString *identifierCell = @"TransformCell";
 {
     return UIEdgeInsetsMake(20, 0, -20, 10);//分别为上、左、下、右
 }
+-(void) collectionView:(UICollectionView *)collectionView didHighlightItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    TransformCell *cell1 = (TransformCell *)[collectionView cellForItemAtIndexPath:self.inde];
+    cell1.backgroundColor = kWhiteColor;
+    
+    TransformCell *cell = (TransformCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    self.inde = indexPath;
+    cell.backgroundColor = kLineColor;
+}
+//点击放开item,cell上图片复原
+- (void)collectionView:(UICollectionView *)collectionView  didUnhighlightItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    TransformCell *cell = (TransformCell *)[collectionView cellForItemAtIndexPath:indexPath];
+
+    
+
+}
+
 
 //- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
 //{

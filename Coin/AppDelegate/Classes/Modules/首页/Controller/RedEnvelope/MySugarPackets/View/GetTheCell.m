@@ -38,7 +38,7 @@
 //        nameLabel.text = @"来自  王小二";
         [self addSubview:nameLabel];
 
-        typeimage = [[UIImageView alloc ] initWithFrame:CGRectMake(kWidth(120), 16, 20, 20)];
+        typeimage = [[UIImageView alloc ] initWithFrame:CGRectMake(kWidth(130), 16, 20, 20)];
         typeimage.contentMode = UIViewContentModeScaleToFill;
         //        nameLabel.text = @"来自  王小二";
         [self addSubview:typeimage];
@@ -46,7 +46,7 @@
 //        timeLabel.text = @"06-12 wfdsa";
         [self addSubview:timeLabel];
 
-        sysmbolImage = [[UIImageView alloc]initWithFrame:CGRectMake( (SCREEN_WIDTH - 120), 16, 36, 36)];
+        sysmbolImage = [[UIImageView alloc]initWithFrame:CGRectMake( (SCREEN_WIDTH - 130), 16, 36, 36)];
         [self addSubview:sysmbolImage];
 
         priceLabel = [UILabel labelWithFrame:CGRectMake(kScreenWidth - (SCREEN_WIDTH - 79)/3, 16, (SCREEN_WIDTH - 79)/4, 36) textAligment:(NSTextAlignmentRight) backgroundColor:kClearColor font:FONT(16) textColor:kTextColor];
@@ -75,7 +75,7 @@
         typeimage.image = kImage(@"拼手气红包 copy");
     }else{
         //普通
-        typeimage.image = kImage(@" 普通红包");
+        typeimage.image = kImage(@"普通红包-1");
 
        
     }
@@ -83,7 +83,13 @@
     
     CoinModel *coin = [CoinUtil getCoinModel:redPacketInfo[@"symbol"]];
      [sysmbolImage sd_setImageWithURL:[NSURL URLWithString:[coin.pic1 convertImageUrl ] ] placeholderImage:kImage(@"头像")];
-    priceLabel.text = [NSString stringWithFormat:@"%@ %@",getModel.count,[LangSwitcher switchLang:@"枚" key:nil]];
+    if (self.isClose == YES) {
+         priceLabel.text = [NSString stringWithFormat:@"**** %@",[LangSwitcher switchLang:@"枚" key:nil]];
+    }else{
+        
+      priceLabel.text = [NSString stringWithFormat:@"%@ %@",getModel.count,[LangSwitcher switchLang:@"枚" key:nil]];
+    }
+  
 //    TheValueLabel.text = [NSString stringWithFormat:@"≈%@元",redPacketInfo[@"totalCountCNY"]];
 }
 @end

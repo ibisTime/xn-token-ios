@@ -67,8 +67,20 @@
 
 - (void)buttonMethod
 {
+    
     [self.filterPicker show];
-  
+//    if ([self.filterPicker.tagNames[0] isEqualToString:@"我发出的"]) {
+//        NSArray *textArr = @[[LangSwitcher switchLang:@"我收到的" key:nil],
+//                             ];
+//        self.filterPicker.tagNames = textArr;
+//        return;
+//
+//    }
+//    NSArray *textArr = @[[LangSwitcher switchLang:@"我发出的" key:nil],
+//                         ];
+//
+//
+//    self.filterPicker.tagNames = textArr;
 }
 
 -(void)buttonMethodClick
@@ -80,7 +92,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view
     UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 100, 44)];
-    label.text = [LangSwitcher switchLang:@"我的红包" key:nil];
+    label.text = [LangSwitcher switchLang:@"红包记录" key:nil];
     label.textColor = kTextBlack;
     label.textAlignment = NSTextAlignmentCenter;
     label.font = [UIFont systemFontOfSize:18];
@@ -105,7 +117,13 @@
     //设置可以左右滑动的ScrollView
     [self setupScrollView];
     //设置控制的每一个子控制器
-    [self setupChildViewControll];
+    if (self.isSend == YES) {
+        [self setupChildViewControll1];
+
+    }else{
+        [self setupChildViewControll];
+
+        }
     //设置分页按钮
 //    [self setupPageButton];
 
@@ -138,6 +156,24 @@
 }
 
 #pragma mark - 设置控制的每一个子控制器
+- (void)setupChildViewControll1{
+    self.vc1 = [[GetTheVC alloc]init];
+    self.vc1.isRecevied = NO;
+    //    self.vc2 = [[SendVC alloc]init];
+    
+    //指定该控制器为其子控制器
+    [self addChildViewController:_vc1];
+    //    [self addChildViewController:_vc2];
+    
+    //将视图加入ScrollView上
+    [_scroll addSubview:_vc1.view];
+    //    [_scroll addSubview:_vc2.view];
+    
+    //设置两个控制器的尺寸
+    _vc1.view.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+    //    _vc2.view.frame = CGRectMake(SCREEN_WIDTH, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+    
+}
 - (void)setupChildViewControll{
     self.vc1 = [[GetTheVC alloc]init];
     self.vc1.isRecevied = YES;
@@ -188,7 +224,7 @@
         CoinWeakSelf;
         
 //        NSArray * textArr = self.textArr;
-                NSArray *textArr = @[[LangSwitcher switchLang:@"我收到的" key:nil],
+                NSArray *textArr = @[[LangSwitcher switchLang:@"我发出的" key:nil],
                                      ];
         
         NSArray *typeArr = @[@"tt",
@@ -216,12 +252,27 @@
 - (void)pickerChoose: (NSInteger)inter
 {
     
+    
     [_vc1.view removeFromSuperview];
     
     self.vc1 = [[GetTheVC alloc]init];
-    self.vc1.isRecevied = NO;
+    if ([self.filterPicker.tagNames[0] isEqualToString:@"我发出的"]) {
+        NSArray *textArr = @[[LangSwitcher switchLang:@"我收到的" key:nil],
+                             ];
+        self.filterPicker.tagNames = textArr;
+        self.vc1.isRecevied = NO;
+
+    }else{
+        
+        NSArray *textArr = @[[LangSwitcher switchLang:@"我发出的" key:nil],
+                             ];
+        self.filterPicker.tagNames = textArr;
+        self.vc1.isRecevied = YES;
+    }
     //    self.vc2 = [[SendVC alloc]init];
-    
+//    NSArray *textArr = @[[LangSwitcher switchLang:@"我发出的" key:nil],
+//                         ];
+//    self.filterPicker.tagNames = textArr;
     //指定该控制器为其子控制器
     [self addChildViewController:_vc1];
     //    [self addChildViewController:_vc2];
