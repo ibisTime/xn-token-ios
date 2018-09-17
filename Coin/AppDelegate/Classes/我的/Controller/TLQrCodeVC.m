@@ -339,19 +339,19 @@
             UIImage *viewImage = UIGraphicsGetImageFromCurrentImageContext();
             UIGraphicsEndImageContext();
             [TLWXManager wxShareImgWith:@"" scene:0 desc:nil image:viewImage];
-            [[TLWXManager manager] setWxShare:^(BOOL isSuccess, int errorCode) {
-                
-                if (isSuccess) {
-                    
-                    [TLAlert alertWithInfo:@"分享成功"];
-                    
-                } else {
-                    
-                    [TLAlert alertWithInfo:@"分享失败"];
-                    
-                }
-                
-            }];
+//            [[TLWXManager manager] setWxShare:^(BOOL isSuccess, int errorCode) {
+//                
+//                if (isSuccess) {
+//                    
+//                    [TLAlert alertWithInfo:@"分享成功"];
+//                    
+//                } else {
+//                    
+//                    [TLAlert alertWithInfo:@"分享失败"];
+//                    
+//                }
+//                
+//            }];
         }
             break;
         case 2:
@@ -361,19 +361,19 @@
             UIImage *viewImage = UIGraphicsGetImageFromCurrentImageContext();
             UIGraphicsEndImageContext();
             [TLWXManager wxShareImgWith:@"" scene:1 desc:nil image:viewImage];
-            [[TLWXManager manager] setWxShare:^(BOOL isSuccess, int errorCode) {
-                
-                if (isSuccess) {
-                    
-                    [TLAlert alertWithInfo:@"分享成功"];
-                    
-                } else {
-                    
-                    [TLAlert alertWithInfo:@"分享失败"];
-                    
-                }
-                
-            }];
+//            [[TLWXManager manager] setWxShare:^(BOOL isSuccess, int errorCode) {
+//
+//                if (isSuccess) {
+//
+//                    [TLAlert alertWithInfo:@"分享成功"];
+//
+//                } else {
+//
+//                    [TLAlert alertWithInfo:@"分享失败"];
+//
+//                }
+//
+//            }];
         }
             break;
         case 3:

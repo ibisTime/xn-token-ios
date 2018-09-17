@@ -138,11 +138,11 @@
             self.headView.shareBtn.hidden = NO;
 
             }
-        self.headView.total.text = [NSString stringWithFormat:@"%@/%@",model.receivedNum,model.totalCount];
+        self.headView.total.text = [NSString stringWithFormat:@"%@/%@",model.receivedNum,model.sendNum];
         if (model.receivedCount.length >5) {
-              self.headView.alltotal.text = [NSString stringWithFormat:@"%.4f/%@",[model.receivedCount floatValue],model.totalCountCNY];
+              self.headView.alltotal.text = [NSString stringWithFormat:@"%.4f/%@",[model.receivedCount floatValue],model.totalCount];
         }else{
-            self.headView.alltotal.text = [NSString stringWithFormat:@"%@/%@",model.receivedCount,model.totalCountCNY];
+            self.headView.alltotal.text = [NSString stringWithFormat:@"%@/%@",model.receivedCount,model.totalCount];
         }
       
         self.model = model;

@@ -78,7 +78,7 @@
     if (self.isClose == YES) {
           priceLabel.text = [NSString stringWithFormat:@"**** %@",[LangSwitcher switchLang:@"枚" key:nil]];
     }else{
-          priceLabel.text = [NSString stringWithFormat:@"%@ %@",sendModel.totalCount,[LangSwitcher switchLang:@"枚" key:nil]];
+          priceLabel.text = [NSString stringWithFormat:@"%@ %@",sendModel.receivedCount,[LangSwitcher switchLang:@"枚" key:nil]];
     }
   
     TheValueLabel.text = [NSString stringWithFormat:@"%@/%@个",sendModel.receivedNum,sendModel.sendNum];

@@ -742,7 +742,7 @@
             self.tableView.hidden = NO;
             self.tableView.isLocal = NO;
         self.addButton.hidden = YES;
-        CGFloat fx = kDevice_Is_iPhoneX == YES ?36 :7;
+        CGFloat fx = kDevice_Is_iPhoneX == YES ?36 :17+5;
 //        if (kDevice_Is_iPhoneX) {
 //            fx = self.isClear == YES ?fx-10 : fx;
 //

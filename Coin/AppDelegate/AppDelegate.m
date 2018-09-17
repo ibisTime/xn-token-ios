@@ -611,9 +611,9 @@
     if ([response isKindOfClass:WBSendMessageToWeiboResponse.class])
     {
         if(response.statusCode == WeiboSDKResponseStatusCodeSuccess){
-            [TLAlert alertWithSucces:[LangSwitcher switchLang:@"分享成功" key:nil]];
+//            [TLAlert alertWithSucces:[LangSwitcher switchLang:@"分享成功" key:nil]];
         }else{
-            [TLAlert alertWithSucces:[LangSwitcher switchLang:@"分享失败" key:nil]];
+//            [TLAlert alertWithSucces:[LangSwitcher switchLang:@"分享失败" key:nil]];
 
         }
         WBSendMessageToWeiboResponse* sendMessageToWeiboResponse = (WBSendMessageToWeiboResponse*)response;

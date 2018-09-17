@@ -66,7 +66,8 @@
  
     //    [headImage sd_setImageWithURL:[NSURL URLWithString:[sendModel.sendUserPhoto convertImageUrl]] placeholderImage:kImage(@"普通红包")];
 //    priceLabel.text = [NSString stringWithFormat:@"%@ %@",sendModel[@"totalCount"],[LangSwitcher switchLang:@"枚" key:nil]];
-    TheValueLabel.text = [NSString stringWithFormat:@"%f枚",[sendModel[@"count"] floatValue]];
+    NSString *count = sendModel[@"count"];
+    TheValueLabel.text = [NSString stringWithFormat:@"%@枚",@([count floatValue])];
 }
 
 @end
