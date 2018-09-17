@@ -7,18 +7,19 @@
 */
 
 "Theia " = "Theia";
-"创建钱包" = "Create a wallet";
-"导入钱包" = "Import the wallet";
-"我已阅读并同意服务及隐私条款" = "I have read and agreed to the terms of service and privacy";
-"钱包备份" = "Wallet backup";
+"创建钱包" = "Create Wallet";
+"导入钱包" = "Import wallet";
+"我已阅读并同意服务及隐私条款" = "Agree on Terms of Service and Privacy Policy";
+"助记词，按空格分离" = "Please use space to separate the mnemonic words";
+"钱包备份" = "Back Up Wallet";
 "重要提示" = "Important tip";
 "拥有钱包私钥就能完全控制钱包资产,  因此强烈建议在使用钱包前做好备份,  将钱包私钥保存到安全的地方。" = "With a wallet private key, you can fully control your wallet assets, so it's highly recommended to make a backup before using your wallet and save your wallet private key to a safe place.";
 "立即备份" = "now back up";
 "请记下您的钱包助词并保存到安全的地方" = "";
 "钱包助词用于恢复钱包资产,拥有助记词即可完全控制钱包资产,请务必妥善保管,丢失助记词既丢失钱包资产。无法提供找回功能" = "Wallet auxiliaries are used to restore wallet assets. With mnemonics, you can fully control your wallet assets. Be sure to keep them safe. Losing mnemonics will lose your wallet assets. Unable to provide recovery function";
-"下一步" = "next";
-"验证你的钱包助记词" = "Verify your wallet mnemonic";
-"根据你记下的助记词,按顺序点击,验证你备份的助记词正确无误" = "";
+"下一步" = "Next";
+"验证你的钱包助记词" = "Confirm your mnemonic words";
+"根据你记下的助记词,按顺序点击,验证你备份的助记词正确无误" = "Please choose mnemonic words in order and make sure your mnemonic words are correctly written";
 "确认" = "CONFIRM";
 "取消" = "Cancel";
 "助记词验证失败,请检查备份" = "Mnemonic verification failed, please check backup
@@ -35,10 +36,10 @@
 "删除成功" = "delete success";
 "助记词不存在,请检测备份" = "The mnemonic does not exist, please check the backup";
 "请输入导入的钱包助记词" = "Please enter the imported mnemonic";
-"立即导入" = "Immediate introduction";
-"导入成功" = "Import success";
+"立即导入" = "Start Importing";
+"导入成功" = "Wallet imported successfully";
 "钱包导入成功" = "The success of the wallet introduction";
-"立即体验" = "Immediate experience";
+"立即体验" = "Try out now";
 "发现" = "Discover";
 "开" = "open";
 "已抢" = "opened";
@@ -52,12 +53,12 @@
 "实名认证成功" = "Success of real-name authentication";
 "全部" = "all";
 //"冲币" = "";
-"提币" = "Withdraw";
+"提币" = "Send";
 "取现手续费" = "The Handling fee is";
 "请选择交易类型" = "Please select the transaction type";
 "暂无明细" = "no record";
-"筛选" = "screen";
-"充币" = "Charge";
+"筛选" = "Filter";
+"充币" = "Receive";
 "转账" = "Send";
 "收款" = "Receive";
 "请粘贴地址或扫码录入" = "Please paste the address or the scavenging entry";
@@ -69,7 +70,7 @@
 "更多" = "more";
 "扫描二维码" = "Scan two-dimensional code ";
 "粘贴地址" = "paste address";
-"接收地址" = "receive address";
+"接收地址" = "Receiver’s address";
 "优先" = "priority";
 "普通" = "ordinary";
 "经济" = "economic";
@@ -88,12 +89,12 @@
 "转出" = "Turn out";
 "转入" = "To change into";
 "我的资产" = "My assets";
-"总资产" = "Total Assets";
+"总资产" = "Total assets";
 "账单" = "Bill";
 "冻结" = "frozen";
 "收款地址" = "Receivable address";
 "转出地址" = "Transfer address";
-"手续费" = "Service Charge";
+"手续费" = "Mining fee";
 "区块高度" = "block height";
 "交易号" = "Transaction number";
 "交易时间" = "Transaction time";
@@ -107,7 +108,8 @@
 "系统设置" = "System setup";
 "个性提醒" = " personality settings";
 "帮助中心" = "Help center";
-"关于我们" = "About us";
+"关于我们" = "About";
+"设量" = "Quantity";
 "修改头像成功" = "Modified avatar successfully";
 "绑定邮箱" = "Binding Mailbox";
 "完成" = "complete";
@@ -131,7 +133,7 @@
 "交易密码修改失败" = " password modification failed";
 "私钥" = "private key";
 "注意 ! 拥有私钥就能完全控制该地址的资产 , 不要分享给任何人" = "";
-"地址" = "address";
+"地址" = "Address";
 "复制失败, 请重新复制" = "";
 "复制成功" = "replicated ";
 "敬请期待!" = "Stay tuned";
@@ -144,7 +146,7 @@
 "联系对方" = "Contact the other party";
 "暂无店主手机号" = "";
 "我要支付" = "I want to pay";
-"待对账" = "";
+"待对账" = "Balance to be checked";
 "已对账且账已平" = "";
 "帐不平待调账审批" = "";
 "已对账且账不平" = "";
@@ -161,13 +163,13 @@
 "提币明细" = "coin detail";
 "冻结明细" = "frozen detail";
 "筛选" = "to filter";
-"账单详情" = "bill detail";
+"账单详情" = "Transaction Record";
 "提币记录" = "Coin record";
-"变动前金额" = "Amount before change";
-"变动后金额" = "Variable amount";
-"变动时间" = "Change the time";
-"明细状态" = "The detail status";
-"明细摘要" = "Detail in this paper";
+"变动前金额" = "Balance before transaction";
+"变动后金额" = "Balance after transaction";
+"变动时间" = "Transaction time";
+"明细状态" = "Transaction status";
+"明细摘要" = "Transaction summary";
 "手机号" = "Mobile number";
 "请填写手机号码" = "Please fill in the mobile number ";
 "手机号码格式不正确" = "mobile number format is incorrect ";
@@ -175,7 +177,7 @@
 "修改成功" = "modified successfully";
 "绑定手机号" = "The verification code has been sent. Please check it";
 "绑定" = "The binding";
-"请输入密码" = "Enter password";
+"请输入密码" = "Password";
 "确认密码" = "Confirm password";
 "请确认密码" = "Please confirm the password.";
 "确认找回" = "Confirm back";
@@ -203,7 +205,7 @@
 "昵称" = "nickname";
 "请设置你的昵称" = "Please set your nickname";
 "推荐人(选填)" = "Presenter (optional)";
-"确认密码" = "Confirm password";
+"确认密码" = "Repeat password";
 "确认注册" = "Confirm the registration";
 "我已阅读并同意" = "I have read and agreed";
 "注册协议" = "The registration agreement";
@@ -217,8 +219,8 @@
 "暂无地址" = "No address";
 "请输入标签" = "Please enter label";
 "向认证账户提现将不再输入资金密码、谷歌验证码" = "Withdrawal to the authentication account will no longer enter the fund password, Google verification code";
-"账户与安全" = "security settings";
-"资金密码" = "Capital password";
+"账户与安全" = "Account and Privacy";
+"资金密码" = "Capital Password";
 "语言设置" = "Language Settings";
 "退出登录" = "Log out";
 "退出登录?" = "Log out?";
@@ -255,7 +257,8 @@
 "钱包" = "wallet";
 "返回" = "return";
 "注册协议" = "The registration agreement";
-"常见问题" = "Common problems";
+"常见问题" = "FAQ";
+"使用指南" = "User guide";
 "联系客服" = "Contact customer service";
 "重新发送" = "To resend";
 "修改登录密码" = "Modify login password";
@@ -263,7 +266,7 @@
 "英文" = "English";
 "韩文" = "Korean";
 "日文" = "Japanese";
-"加入社群" = "Join community";
+"加入社群" = "Join the community";
 "语言" = "Language";
 "确定" = "Confirm";
 "确认退出?" = " Confirm exit?";
@@ -276,10 +279,10 @@
 "您已通过实名认证" = "You have passed the real-name authentication";
 
 "token信息已失效,请重新登录" = "Your account is already logged in at another terminal, log on again ";
-"交易记录" = "Transaction record";
+"交易记录" = "Transactions";
 "重新获取" = "Retrieved";
 "加载失败" = "Load error";
-"发红包" = "Send Red packet";
+"发红包" = "Gift sent";
 "塞进红包" = "PREPARE RED PACKET";
 "红包个数" = "Quantity";
 "red_package_sub_total" = "Token amount";
@@ -297,18 +300,18 @@
 "设置资金密码" = "set the funding password";
 "输入资金密码" = "Please input the funding password";
 "修改资金密码" = "set the fund password";
-"资产" = "Assets";
-"闪兑" = "Instant Swap";
-"一键划转" = "Smart Transfer";
-"个人账户" = "My wallet";
-"私钥钱包" = "Decentralized Wallet";
+"资产" = "Property";
+"闪兑" = "Instant swap";
+"一键划转" = "Smart transfer";
+"个人账户" = "Platform account";
+"私钥钱包" = "Private key wallet";
 "首创玩法" = "Global Master and Apprentice Initiative";
 "量化理财" = "Quantitative Finance";
 "账户与安全" = "Account and Security";
-"本地货币" = "local currency";
+"本地货币" = "Local currency";
 "切换货币" = "Switch currency";
-"钱包工具" = "Wallet tool";
-"欢迎回来!" = "Welcome back ！";
+"钱包工具" = "Tools";
+"欢迎回来!" = "Pattern Password ！";
 "中国!" = "china";
 "中国" = "China";
 "请输入手机号" = "Enter mobile number";
@@ -327,13 +330,15 @@
 "不能为空" = "must not be null";
 "我发出的" = "Sent";
 "分享" = "share";
-"提币数量" = "withdraw amount";
+"提币数量" = "Amount";
 "手续费将在提币金额中扣除" = "The withdraw fee will be deducted from the cash amount";
-"确认提币" = "Withdraw confirm";
-"提币订单" = "Withdraw order";
+"确认提币" = "Confirm";
+"提币订单" = "Transaction";
+
+"暂无订单" = "No transaction";
 "暂无提现记录" = "no withdraw records";
 "暂无冻结明细" = "No frozen details";
-"记录" = "record";
+"记录" = "Transactions";
 "地址已复制" = "Address has been copied";
 "请输入发送地址" = "Please input the sending address";
 "您最多可以提现" = "You can withdraw up to";
@@ -344,6 +349,10 @@
 "您确定要删除该地址吗?" = "Are you sure you want to delete this address?";
 "中文简体" = "user_language_simplified";
 "中文繁体" = "Chinese Traditional";
+"分享到" = "Share";
+"微信" = "WeChat";
+"朋友圈" = "Moments";
+"微博" = "Weibo";
 "开启谷歌验证" = "Open Google verification";
 "请设置您的昵称" = "Please set your username";
 "验证码格式不正确" = "The format of the verification code is incorrect";
@@ -407,7 +416,7 @@
 "以太坊" = "Ethereum";
 "WAN" = "WAN";
 "矿工费将在可用余额中扣除" = "Transaction Fees will be deducted from the available balance";
-"矿工费将在提币金额中扣除" = "The withdraw fee will be deducted from the cash amount";
+"矿工费将在提币金额中扣除" = "Mining fee will be deducted from the amount you sent out";
 
 "私钥已复制" = "private key has been copied";
 "请先打开网络" = "Please open the network first";
@@ -436,9 +445,10 @@
 "请输入转账数量" = "Please input the transfer amount";
 "没有权限，无法拨打电话，请到设置--->权限管理里授予用户拨打电话权限" = "do not have permission, can't make a call, please go to Settings--->Permission Management to grant users the right to call";
 "暂无系统公告" = "No system announcement";
+"公告" = "Announcements";
 "请先创建或导入钱包" = "Please create or import a wallet first";
 "暂无资产" = "no assets";
-"欢迎回来！" = "Welcome back!";
+"欢迎回来！" = "Pattern Password!";
 "暂无国家" = "No country";
 "选择国家" = "Select a country";
 "钱包删除成功" = "wallet deleted successfully";
@@ -454,6 +464,7 @@
 "数量最小为0.001个" = "The minimum amount is 0.001";
 "请输入要发的数量" = "Please input the quantity";
 "请选择代币" = "Please select tokens";
+"请选择代币和类" = "Please choose the currency";
 "请输入代币数量" = "Please input token quantity";
 "请输入总数量" = "Please input the total quantity";
 "暂无抢到的红包" = "None";
@@ -494,15 +505,15 @@
 "印度尼西亚" = "Indonesia";
 "马来西亚" = "Malaysia";
 "韩国" = "South Korea";
-"我的收款地址"="My payment address";
+"我的收款地址"="My address";
 
 "隐私政策" = "Privacy Policy";
 "美元" = "Dollar";
-"有矿工费" = "There's mining fee.";
-"转账速度慢" = "The transaction rate is slow.";
-"强烈建议您在使用钱包前做好备份，导出[助记词]存储到安全的地方。然后开始尝试转入小额资金启用" = "We are highly recommending you  that prepare a backup with wallet asset, export [mnemonics] to a safe place, and then start with using a tinny fund as start up.";
-"在您的手机丢失或者忘记密码的情况下，恢复词可用于你的钱包或者资金" = "In case your phone loses or forgets your password, mnemonics can be used for your wallet or money.";
-"复制收款地址" = "Copy a collection address";
+"有矿工费" = "Mining fees are compulsory";
+"转账速度慢" = "Transaction speed is rather slow";
+"强烈建议您在使用钱包前做好备份，导出[助记词]存储到安全的地方。然后开始尝试转入小额资金启用" = "Please backup your wallet now! We highly recommend you write the mnemonic words  on paper and keep it in a safe place, anyone get it can gain control over all your assets. Also get start with a small amount of assets.";
+"在您的手机丢失或者忘记密码的情况下，恢复词可用于你的钱包或者资金" = "Mnemonic words are your private key, which can help you recover your wallet and assets when your phone is lost or your password forgotten.";
+"复制收款地址" = "Copy address";
 "至少连接4个点，请重新绘制" = "At least Connect 4 dots,please redraw again";
 
 "密码错误，还可以再输入4次" = "Wrong password, Four time chance left";
@@ -511,29 +522,30 @@
 "密码错误，还可以再输入1次" = "Wrong password, One time chance left";
 "密码错误，还可以再输入0次" = "Wrong password, Zero time chance left";
 
-"红包退回" = "Red Envelopes returned";
-"抢红包" = "Grab a red envelope";
+"红包退回" = "Gift retrieved";
+"抢红包" = "Gift received";
 "资金密码错误" = "Money Password Error";
-"币种列表" = "List of currencies";
+"币种列表" = "Currency";
 //"抢红包" = "Grab a red envelope";
 "请输入交易密码" = "Please enter the trading password.";
-"欢迎回来" = "Welcome back!";
+"欢迎回来" = "Pattern Password!";
 "个人账户就是指中心化钱包,是由Theia替您保管私钥,在中心化钱包中,不存在钱包丢失了无法找回的情况,可以通过身份证找回您的钱包,并且可以让您体验到更多的服务。" = "no loss of wallet that cannot be recovered, and can be verified to retrieve your wallet and allow you to experience more services.";
 "私钥钱包就是去中心化钱包,在去中心化钱包中,所有的用户身份验证内容,如交易密码,私钥，助记词等都保存在用户手机本地,并不是保存在中心化服务器里面,如果用户误删钱包,忘记备份私钥或者助记词，将无法找到钱包" = " mobile phone local, not stored in the centralized server. If the user mistakenly deletes the wallet, forgets to back up the private key or mnemonics, will not be able to retrieve the wallet.";
 "优点" = "Advantages";
-"缺点" = "Disadvantage";
-"只有用户保存私钥" = "Only the user saves the private key";
+"缺点" = "Disadvantages";
+"只有用户保存私钥" = "Your private keys are 100% managed by yourself";
 "助记词,按空格分离" = "Mnemonic words, separated by space";
 "开始导入" = "Start input";
-"什么是助记词" = "What is notation word";
+"什么是助记词" = "What are mnemonic words?";
 "我已经仔细阅读并同意服务及隐私条款" = "I have carefully read and agree to the terms of service and privacy";
-"钱包名称" = "Wallet Name";
+"钱包名称" = "Wallet name";
 "请按顺序点击助记词，以确定您的备份助记词填写正确" = " Please click on the mnemonics in order to make sure your backup mnemonics are filled in correctly";
 "确认您的钱包助记词" = "Confirm the notation words which helps you remember your wallet";
 "现在写下这些词" = "Now write down these words";
-"您的恢复词是12个，在纸上记下他们并安全的保存它" = "Your have 12 recovery words, write them down on paper and keep it safely.";
+"您的恢复词是12个，在纸上记下他们并安全的保存它" = "These 12 mnemonic words are for recovering your wallet, please write down correctly on paper and keep it in a safe place";
 "确认转账" = "Transfer confirmed ";
-"注意！Theia不存储用户密码，无法提供找回或重置功能，密码必须要自己备份好。密码用于加密保护私钥，强度也非常重要。" = "Attention! Theia does not store user passwords, can not provide recovery or reset functions, passwords must be backed up well by users. Passwords are used to encrypt the private key, and strength is also important.";
+"注意！Theia不存储用户密码，无法提供找回或重置功能，密码必须要自己备份好。密码用于加密保护私钥，强度也非常重要。" = "Attention! Theia don’t store users’ password, and we can’t recover or reset your password, please backup cautiously. Password strength is critical to guard your private key.
+";
 "免责声明" = "Disclaimer";
 "请确保已备份钱包至安全的地方，Theia不承担任何钱包丢失、被盗、忘记密码等产生的资产损失！" = "Please ensure that the wallet has been backed up safely Theia does not bear any loss of loss of wallet, stolen, forgotten password and other assets lost!";
 "扫描二维码领取Theia红包" = "Scan the QR-code for Theia red envelopes";
@@ -552,28 +564,28 @@
 
 "请设置您的新手势密码" = "Please draw your gesture password";
 "绘制手势密码" = "Draw the gesture Password";
-"请输入手势密码" = "Draw the gesture Password";
+"请输入手势密码" = "Enter pattern password";
 
 "忘记手势密码" = "Forget gesture password";
-"切换登录" = "Switch logins";
+"切换登录" = "Forgot Pattern Password?";
 "请再次绘制手势密码" = "Please draw the gesture password again";
 "手势密码设置成功" = "Gesture Password Set success!";
 "解锁成功" = "Succeed unlock";
 "与上次绘制不一致，请重新绘制" = "Inconsistent with the last drawing, please redraw";
 "请阅读并同意服务及隐私条款" = "Please read and agree to the terms of service and privacy";
 "请输入钱包名称" = "Please enter the wallet name";
-"验证通过" = "Verification passed";
+"验证通过" = "Verified";
 "请输入付币地址或扫码" = "Please enter the currency address or scan code";
-"请输入重复密码" = "Please enter a duplicate password";
-"新钱包创建成功" = "Please backup your wallet now!";
+"请输入重复密码" = "Repeat Password";
+"新钱包创建成功" = "New wallet created successfully";
 "烈建议您在使用钱包前做好备份，导出[助记词]存储到安全的地方。然后开始尝试转入小额资金启用" = "we highly recommend your write the Mnemonic words(Backup Phrase)on paper and keep it in a safe place,anynoe get it can access or spend your assets.Also get start with a small amount of assents";
-"备份钱包" = "Go backup now";
+"备份钱包" = "Backup Now";
 "请输入资金密码" = "Please inPut Capital password";
-"如何备份钱包?" = "How to backup wallet";
+"如何备份钱包?" = "How to back up wallet?";
 "Theia用户可以通过邀请制收取徒弟，并根据任务引导来教育徒弟，从而获得算力。另外，徒弟使用Theia钱包购买量化理财或余币宝，师父可获得徒弟一定比例的收益奖励" = "Global Master and Apprentice Initiative: Theia Users can receive apprentice through the invitation system, and instruct apprentice according to the task, thus obtain the calculation force. In addition, the apprentice uses Theia Wallet to purchase quantitative financial products or Yubibao, masters can obtain a certain percentage of the Apprentice reward.";
 "Theia Wallet为用户提供多种类型的优质理财产品，用户可以使用比特币、以太坊等数字货币购买理财产品而获得收益" = "Theia Wallet provides users with a variety of quality management products, users can use Bitcoin, Ethernet and other digital currencies to buy money products and gain income.";
 "余币宝是Theia Wallet旗下的数字货币增值服务和活期数字货币管理服务产品。特点是操作简便、低门槛、零手续费、可随取随用，让您更灵活的管理数字资产" = "Yubibao is the digital currency value-added service and demand digital money managemen service product of Theia wallet. It is easy to operate, has low threshold, without handling fees,  and are available with access, so that you can manage your digital assets with more flexibility.";
-"版本号" = "Version number";
+"版本号" = "Current version";
 "Theia版权所有" = "Theia All rights reserved";
 "发数字货币红包、查收发记录和提现" = "Send a digital currency in red envelope,check the receive records and cash the balance";
 "师徒教育玩法、双向奖励机制" = "Two-way incentive mechanism,master and apprentice orientation";
@@ -595,7 +607,7 @@
 "备注(选填)" = "remark (option)";
 "历史反馈" = "Feedback history";
 "提交" = "submit";
-"问题反馈" = "Problem feedback";
+"问题反馈" = "Feedback";
 "问题反馈提交成功" = "problem feedback submit successful";
 "暂无历史反馈" = "no feedback history";
 "问题详情" = "problem details";
@@ -632,9 +644,9 @@
 "已领取" = "Already received";
 "请选择账户来源" = "select an account source";
 "设置" = "Settings";
-"版本更新" = "Upgrade";
+"版本更新" = "Edition";
 "有可更新版本" = "Upgrade info";
-"邀请有礼" = "Invitation gift";
+"邀请有礼" = "Invite friends";
 "海报邀请" = "Invitation";
 "注册Theia钱包" = "Register for Theia Wallet";
 "发红包邀请好友" = "Send out gifts to invite friends";
@@ -669,7 +681,8 @@
 "产品总额" = "Product amount";
 "已认购" = "Bought";
 "剩余" = "Remaining";
-"起购" = "Purchase minimum amount";
+"扫码领红包" = "Scan QR code to take the gift";
+"起购" = "Grow purchase";
 "产品详情" = "Product details";
 "产品介绍" = "Product introduction";
 "产品名称" = "Product name";
@@ -739,9 +752,13 @@
 "不存在的红包类型" = "Nonexistent gift type";
 "红包错误，请联系管理员" = "Gift error, please contact admin";
 "红包已过期，下次记得早点来" = "Gift has expired, remember to open it sooner next time";
-
-
-
-
+"全球首款跨链生态钱包" = "THEIA CROSS-CHAIN PROFIT SHARING WALLET";
+"您已成功邀请" = "You have successfully welcomed";
+"名用户" = "users";
+"感谢您的付出!" = "Thank you for your effort!";
+"您拥有积分" = "You have";
+"点" = "points to";
+"马上提币" = "withdraw immediately";
+"点    马上提币" = "points to withdraw immediately";
 
 

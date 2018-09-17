@@ -211,6 +211,7 @@
 		7AABEAF82148ED4D00283BC7 /* UIButton+SGImagePosition.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AABEAF72148ED4C00283BC7 /* UIButton+SGImagePosition.m */; };
 		7AABEAFB2148FEEF00283BC7 /* PoliteInstructionsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AABEAFA2148FEEF00283BC7 /* PoliteInstructionsVC.m */; };
 		7AABEAFE2149127200283BC7 /* BouncedPasteView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AABEAFD2149127200283BC7 /* BouncedPasteView.m */; };
+		7AAF0312214F8C35008507FF /* IntegralVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AAF0311214F8C35008507FF /* IntegralVC.m */; };
 		B80864EE211EA17D00755158 /* BTCBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = B8086411211EA17C00755158 /* BTCBlock.m */; };
 		B80864EF211EA17D00755158 /* BTCBlockHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = B8086412211EA17C00755158 /* BTCBlockHeader.m */; };
 		B80864F0211EA17D00755158 /* BTCEncryptedBackup.m in Sources */ = {isa = PBXBuildFile; fileRef = B8086415211EA17C00755158 /* BTCEncryptedBackup.m */; };
@@ -303,7 +304,6 @@
 		B87BF1D02114251800DD5C05 /* FMDBMigrationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B87BF1CF2114251700DD5C05 /* FMDBMigrationManager.m */; };
 		B87BF1D3211426C300DD5C05 /* Migration.m in Sources */ = {isa = PBXBuildFile; fileRef = B87BF1D1211426C200DD5C05 /* Migration.m */; };
 		B887819920E366BC00879330 /* UIImageView+RotateImgV.m in Sources */ = {isa = PBXBuildFile; fileRef = B887819720E366BC00879330 /* UIImageView+RotateImgV.m */; };
-		B889003F214CB3820081AC4F /* TencentOpenAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B889003E214CB3810081AC4F /* TencentOpenAPI.framework */; };
 		B8890042214CB5070081AC4F /* QQManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B8890041214CB5070081AC4F /* QQManager.m */; };
 		B8890045214CD61A0081AC4F /* WBManger.m in Sources */ = {isa = PBXBuildFile; fileRef = B8890044214CD61A0081AC4F /* WBManger.m */; };
 		B88B092120C8E29D005C2D2F /* JoinMineVc.m in Sources */ = {isa = PBXBuildFile; fileRef = B88B092020C8E29D005C2D2F /* JoinMineVc.m */; };
@@ -838,6 +838,8 @@
 		7AABEAFA2148FEEF00283BC7 /* PoliteInstructionsVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PoliteInstructionsVC.m; sourceTree = "<group>"; };
 		7AABEAFC2149127200283BC7 /* BouncedPasteView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BouncedPasteView.h; sourceTree = "<group>"; };
 		7AABEAFD2149127200283BC7 /* BouncedPasteView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BouncedPasteView.m; sourceTree = "<group>"; };
+		7AAF0310214F8C35008507FF /* IntegralVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IntegralVC.h; sourceTree = "<group>"; };
+		7AAF0311214F8C35008507FF /* IntegralVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IntegralVC.m; sourceTree = "<group>"; };
 		8863748C5281F9DC1DDF8EEA /* Pods-Coin.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Coin.release.xcconfig"; path = "Pods/Target Support Files/Pods-Coin/Pods-Coin.release.xcconfig"; sourceTree = "<group>"; };
 		AB34D27FC9725550E9092EC2 /* Pods-Coin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Coin.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Coin/Pods-Coin.debug.xcconfig"; sourceTree = "<group>"; };
 		B808640E211EA17C00755158 /* BTCMerkleTree+Tests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BTCMerkleTree+Tests.h"; sourceTree = "<group>"; };
@@ -1105,7 +1107,6 @@
 		B87BF1D2211426C200DD5C05 /* Migration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Migration.h; sourceTree = "<group>"; };
 		B887819720E366BC00879330 /* UIImageView+RotateImgV.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+RotateImgV.m"; sourceTree = "<group>"; };
 		B887819820E366BC00879330 /* UIImageView+RotateImgV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+RotateImgV.h"; sourceTree = "<group>"; };
-		B889003E214CB3810081AC4F /* TencentOpenAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TencentOpenAPI.framework; sourceTree = SOURCE_ROOT; };
 		B8890040214CB5070081AC4F /* QQManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = QQManager.h; path = manger/QQManager.h; sourceTree = "<group>"; };
 		B8890041214CB5070081AC4F /* QQManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = QQManager.m; path = manger/QQManager.m; sourceTree = "<group>"; };
 		B8890043214CD61A0081AC4F /* WBManger.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WBManger.h; sourceTree = "<group>"; };
@@ -1365,7 +1366,6 @@
 				B8F44029212C851C00809522 /* libcrypto.a in Frameworks */,
 				21C91D981FDBD7E4006EDB16 /* CoreMotion.framework in Frameworks */,
 				7A272662212BFFA70067E3CD /* libWeChatSDK.a in Frameworks */,
-				B889003F214CB3820081AC4F /* TencentOpenAPI.framework in Frameworks */,
 				211C05081FC6714500E51FCF /* libz.tbd in Frameworks */,
 				211C050A1FC6715000E51FCF /* libc++.tbd in Frameworks */,
 				211C050C1FC6715B00E51FCF /* libsqlite3.tbd in Frameworks */,
@@ -2724,6 +2724,8 @@
 				7AABEAFD2149127200283BC7 /* BouncedPasteView.m */,
 				B8DC39CF214B9FE9002E62E7 /* NewHtmlVC.h */,
 				B8DC39D0214B9FE9002E62E7 /* NewHtmlVC.m */,
+				7AAF0310214F8C35008507FF /* IntegralVC.h */,
+				7AAF0311214F8C35008507FF /* IntegralVC.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -3431,7 +3433,7 @@
 					2EA584B31FA813C900C7106C = {
 						CreatedOnToolsVersion = 9.0.1;
 						LastSwiftMigration = 0940;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 0;
@@ -3517,9 +3519,6 @@
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SipHash/SipHash.framework",
 				"${BUILT_PRODUCTS_DIR}/UIDeviceIdentifier/UIDeviceIdentifier.framework",
-				"${PODS_ROOT}/ZendeskSDK/ZendeskSDK/4.1/ZendeskCoreSDK.framework",
-				"${PODS_ROOT}/ZendeskSDK/ZendeskSDK/4.1/ZendeskProviderSDK.framework",
-				"${PODS_ROOT}/ZendeskSDK/ZendeskSDK/4.1/ZendeskSDK.framework",
 				"${BUILT_PRODUCTS_DIR}/libsodium/libsodium.framework",
 				"${BUILT_PRODUCTS_DIR}/secp256k1_ios/secp256k1_ios.framework",
 				"${BUILT_PRODUCTS_DIR}/web3swift/web3swift.framework",
@@ -3549,9 +3548,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SipHash.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UIDeviceIdentifier.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ZendeskCoreSDK.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ZendeskProviderSDK.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ZendeskSDK.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/libsodium.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/secp256k1_ios.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/web3swift.framework",
@@ -3569,12 +3565,10 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Coin/Pods-Coin-resources.sh",
 				"${PODS_ROOT}/Weibo_SDK/libWeiboSDK/WeiboSDK.bundle",
-				"${PODS_ROOT}/ZendeskSDK/ZendeskSDK/4.1/ZendeskSDKStrings.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/WeiboSDK.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ZendeskSDKStrings.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -3649,6 +3643,7 @@
 				B8CAA13D21158FF200695BC3 /* LPDAssetCell.m in Sources */,
 				2EB039A71FE8B23300589D8E /* EditEmailVC.m in Sources */,
 				4C8DE98520C983D100EC183C /* EthereumUtil.swift in Sources */,
+				7AAF0312214F8C35008507FF /* IntegralVC.m in Sources */,
 				B80864F3211EA17D00755158 /* BTCAssetType.m in Sources */,
 				7A8A5D2520EA301E002D9A48 /* RedEnvelopeShoreVC.m in Sources */,
 				21CB94ED1FDC0C9100CAB090 /* LanguageSettingTableView.m in Sources */,
@@ -4150,9 +4145,9 @@
 				CLANG_WARN_STRICT_PROTOTYPES = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 3ZCW993X44;
+				DEVELOPMENT_TEAM = VQPS9BLJYN;
 				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = NO;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -4186,8 +4181,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.cdkj.tha;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "ba3a2a48-8ea4-4944-8e53-dbbc784ca83d";
-				PROVISIONING_PROFILE_SPECIFIER = theia;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -4206,9 +4201,9 @@
 				CLANG_WARN_STRICT_PROTOTYPES = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 3ZCW993X44;
+				DEVELOPMENT_TEAM = VQPS9BLJYN;
 				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = NO;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -4242,8 +4237,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.cdkj.tha;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "ba3a2a48-8ea4-4944-8e53-dbbc784ca83d";
-				PROVISIONING_PROFILE_SPECIFIER = theia;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;

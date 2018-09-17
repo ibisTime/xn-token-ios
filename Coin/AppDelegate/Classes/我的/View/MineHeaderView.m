@@ -89,7 +89,7 @@
         make.width.equalTo(@(imgWidth));
         make.height.equalTo(@64);
 
-        make.right.equalTo(@(-20));
+        make.left.equalTo(@(20));
         make.top.equalTo(@(27));
 
     }];
@@ -111,7 +111,7 @@
     [self.nameLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.top.equalTo(titleView.mas_top).offset(25);
-        make.left.equalTo(titleView.mas_left).offset(20);
+        make.left.equalTo(self.photoBtn.mas_right).offset(20);
         
     }];
     UIImageView *phone = [[UIImageView alloc] init];
@@ -132,9 +132,10 @@
         
         make.left.equalTo(phone.mas_right).offset(5);
         make.top.equalTo(@(kHeight(75)));
+        make.height.equalTo(@14);
 
     }];
-    
+
     //用户等级
     self.levelBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"代理人" key:nil]
                                    titleColor:kWhiteColor
@@ -170,6 +171,24 @@
     //        make.top.equalTo(self.nameLbl.mas_bottom).offset(15);
     //
     //    }];
+
+    UIButton *integralBtn = [UIButton buttonWithTitle:@"" titleColor:kHexColor(@"#666666") backgroundColor:kClearColor titleFont:14];
+    integralBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    [titleView addSubview:integralBtn];
+    self.integralBtn = integralBtn;
+    
+
+    NSString *str = @"信用积分 0";
+    NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:str];
+    [attrStr addAttribute:NSForegroundColorAttributeName
+                    value:kHexColor(@"#666666")
+                    range:NSMakeRange(0, 4)];
+    [attrStr addAttribute:NSForegroundColorAttributeName
+                    value:RGB(0, 126, 246)
+                    range:NSMakeRange(4, str.length - 4)];
+    [integralBtn setAttributedTitle:attrStr forState:(UIControlStateNormal)];
+
+
 }
 
 - (void)initBuyAndSell {
