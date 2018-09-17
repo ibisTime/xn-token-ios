@@ -22,6 +22,7 @@
 #import "TLPwdRelatedVC.h"
 #import "AddAccoutMoneyVc.h"
 #import "FilterView.h"
+#import "TLRedintroduceVC.h"
 @interface RedEnvelopeVC ()<SendRedEnvelopeDelegate,RedEnvelopeHeadDelegate>
 
 @property (nonatomic, strong) NSMutableArray <CurrencyModel *>*currencys;
@@ -225,13 +226,13 @@
             vc.modalPresentationStyle = UIModalTransitionStyleFlipHorizontal;
             [self presentViewController:navigation animated:NO completion:nil];
     }else{
-        
+        TLRedintroduceVC *red = [[TLRedintroduceVC alloc] init];
         HTMLStrVC *htmlVC = [[HTMLStrVC alloc] init];
         self.navigationController.navigationBar.hidden = NO;
         
         htmlVC.type = HTMLTypeRed_packet_rule;
         //        [weakSelf presentViewController:htmlVC animated:YES completion:nil];
-        [self.navigationController pushViewController:htmlVC animated:YES];
+        [self.navigationController pushViewController:red animated:YES];
         
     }
     

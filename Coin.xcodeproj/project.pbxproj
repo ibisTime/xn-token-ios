@@ -330,6 +330,7 @@
 		B89F07DF211B06E20057E781 /* TLinviteVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B89F07DE211B06E20057E781 /* TLinviteVC.m */; };
 		B89F07E2211B07FA0057E781 /* TLMeSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = B89F07E1211B07FA0057E781 /* TLMeSetting.m */; };
 		B8A2436520E5E0F20074DF8F /* TLDataBase.m in Sources */ = {isa = PBXBuildFile; fileRef = B8A2436420E5E0F20074DF8F /* TLDataBase.m */; };
+		B8A483FF214FC02800450819 /* 未标题-1.png in Resources */ = {isa = PBXBuildFile; fileRef = B8A483FE214FC02800450819 /* 未标题-1.png */; };
 		B8A5307E2127DBD600A027C0 /* TLMyRecordVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B8A5307D2127DBD600A027C0 /* TLMyRecordVC.m */; };
 		B8A530812127DE8F00A027C0 /* TLMyRecodeTB.m in Sources */ = {isa = PBXBuildFile; fileRef = B8A530802127DE8F00A027C0 /* TLMyRecodeTB.m */; };
 		B8A530842127E0C300A027C0 /* RecodeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B8A530832127E0C300A027C0 /* RecodeCell.m */; };
@@ -401,6 +402,12 @@
 		B8D938D82116EF5900B2AA88 /* imageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B8D938D72116EF5900B2AA88 /* imageCell.m */; };
 		B8D938DB2117169E00B2AA88 /* CustomImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = B8D938DA2117169E00B2AA88 /* CustomImageView.m */; };
 		B8DAD14720E2208B00AF4CD4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B8DAD14920E2208B00AF4CD4 /* InfoPlist.strings */; };
+		B8DB9EB1214F68E70091276E /* TLRedintroduceVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B8DB9EB0214F68E60091276E /* TLRedintroduceVC.m */; };
+		B8DB9EB4214F6A730091276E /* RedIntroduceTB.m in Sources */ = {isa = PBXBuildFile; fileRef = B8DB9EB3214F6A730091276E /* RedIntroduceTB.m */; };
+		B8DB9EB7214F6AA90091276E /* RedintrodeceVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B8DB9EB6214F6AA90091276E /* RedintrodeceVC.m */; };
+		B8DB9EBA214F6AF10091276E /* RedIntroduce.m in Sources */ = {isa = PBXBuildFile; fileRef = B8DB9EB9214F6AF10091276E /* RedIntroduce.m */; };
+		B8DB9EBD214F6BE60091276E /* RedModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B8DB9EBC214F6BE60091276E /* RedModel.m */; };
+		B8DB9EC3214F8A220091276E /* H5DrtailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B8DB9EC2214F8A220091276E /* H5DrtailVC.m */; };
 		B8DC39D1214B9FEA002E62E7 /* NewHtmlVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B8DC39D0214B9FE9002E62E7 /* NewHtmlVC.m */; };
 		B8DC39D4214BB39D002E62E7 /* DetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B8DC39D3214BB39D002E62E7 /* DetailCell.m */; };
 		B8DDF882211D29EE0058D19D /* TLMakeMoney.m in Sources */ = {isa = PBXBuildFile; fileRef = B8DDF881211D29EE0058D19D /* TLMakeMoney.m */; };
@@ -1155,6 +1162,7 @@
 		B89F07E1211B07FA0057E781 /* TLMeSetting.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLMeSetting.m; sourceTree = "<group>"; };
 		B8A2436320E5E0F20074DF8F /* TLDataBase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLDataBase.h; sourceTree = "<group>"; };
 		B8A2436420E5E0F20074DF8F /* TLDataBase.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLDataBase.m; sourceTree = "<group>"; };
+		B8A483FE214FC02800450819 /* 未标题-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "未标题-1.png"; sourceTree = "<group>"; };
 		B8A5307C2127DBD600A027C0 /* TLMyRecordVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLMyRecordVC.h; sourceTree = "<group>"; };
 		B8A5307D2127DBD600A027C0 /* TLMyRecordVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLMyRecordVC.m; sourceTree = "<group>"; };
 		B8A5307F2127DE8F00A027C0 /* TLMyRecodeTB.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLMyRecodeTB.h; sourceTree = "<group>"; };
@@ -1301,6 +1309,18 @@
 		B8DAD14B20E2209200AF4CD4 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		B8DAD14F20E220D100AF4CD4 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		B8DAD15220E220EE00AF4CD4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		B8DB9EAF214F68E60091276E /* TLRedintroduceVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLRedintroduceVC.h; sourceTree = "<group>"; };
+		B8DB9EB0214F68E60091276E /* TLRedintroduceVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLRedintroduceVC.m; sourceTree = "<group>"; };
+		B8DB9EB2214F6A730091276E /* RedIntroduceTB.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RedIntroduceTB.h; sourceTree = "<group>"; };
+		B8DB9EB3214F6A730091276E /* RedIntroduceTB.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RedIntroduceTB.m; sourceTree = "<group>"; };
+		B8DB9EB5214F6AA90091276E /* RedintrodeceVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RedintrodeceVC.h; sourceTree = "<group>"; };
+		B8DB9EB6214F6AA90091276E /* RedintrodeceVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RedintrodeceVC.m; sourceTree = "<group>"; };
+		B8DB9EB8214F6AF10091276E /* RedIntroduce.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RedIntroduce.h; sourceTree = "<group>"; };
+		B8DB9EB9214F6AF10091276E /* RedIntroduce.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RedIntroduce.m; sourceTree = "<group>"; };
+		B8DB9EBB214F6BE60091276E /* RedModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RedModel.h; sourceTree = "<group>"; };
+		B8DB9EBC214F6BE60091276E /* RedModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RedModel.m; sourceTree = "<group>"; };
+		B8DB9EC1214F8A220091276E /* H5DrtailVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = H5DrtailVC.h; sourceTree = "<group>"; };
+		B8DB9EC2214F8A220091276E /* H5DrtailVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = H5DrtailVC.m; sourceTree = "<group>"; };
 		B8DC39CF214B9FE9002E62E7 /* NewHtmlVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NewHtmlVC.h; sourceTree = "<group>"; };
 		B8DC39D0214B9FE9002E62E7 /* NewHtmlVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewHtmlVC.m; sourceTree = "<group>"; };
 		B8DC39D2214BB39C002E62E7 /* DetailCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailCell.h; sourceTree = "<group>"; };
@@ -2779,6 +2799,7 @@
 		2EA584B61FA813C900C7106C /* Coin */ = {
 			isa = PBXGroup;
 			children = (
+				B8A483FE214FC02800450819 /* 未标题-1.png */,
 				B889003E214CB3810081AC4F /* TencentOpenAPI.framework */,
 				7A27265B212BFFA70067E3CD /* WechatSDK1.8.2 */,
 				215421CF1FD708AC00FDD25C /* Coin.entitlements */,
@@ -2851,6 +2872,14 @@
 				7A8A5DBF20EA6977002D9A48 /* CustomActionSheet.m */,
 				7A8A5DC220EA6FE5002D9A48 /* UIView+Extension.h */,
 				7A8A5DC420EA6FE6002D9A48 /* UIView+Extension.m */,
+				B8DB9EB2214F6A730091276E /* RedIntroduceTB.h */,
+				B8DB9EB3214F6A730091276E /* RedIntroduceTB.m */,
+				B8DB9EB5214F6AA90091276E /* RedintrodeceVC.h */,
+				B8DB9EB6214F6AA90091276E /* RedintrodeceVC.m */,
+				B8DB9EB8214F6AF10091276E /* RedIntroduce.h */,
+				B8DB9EB9214F6AF10091276E /* RedIntroduce.m */,
+				B8DB9EBB214F6BE60091276E /* RedModel.h */,
+				B8DB9EBC214F6BE60091276E /* RedModel.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2867,6 +2896,10 @@
 			children = (
 				7A8A5D1320EA076C002D9A48 /* RedEnvelopeVC.h */,
 				7A8A5D1420EA076C002D9A48 /* RedEnvelopeVC.m */,
+				B8DB9EAF214F68E60091276E /* TLRedintroduceVC.h */,
+				B8DB9EB0214F68E60091276E /* TLRedintroduceVC.m */,
+				B8DB9EC1214F8A220091276E /* H5DrtailVC.h */,
+				B8DB9EC2214F8A220091276E /* H5DrtailVC.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -3439,6 +3472,7 @@
 				B8CAA14321158FF200695BC3 /* LPDImagePickerController.bundle in Resources */,
 				B88B59172109AEC400F20D1B /* country.plist in Resources */,
 				7A272664212BFFA70067E3CD /* README.txt in Resources */,
+				B8A483FF214FC02800450819 /* 未标题-1.png in Resources */,
 				B819BAAA20C6DD7800CEEC5E /* LaunchScreen.storyboard in Resources */,
 				2EFFE6AA1FF4829100BFCC40 /* Localizable.strings in Resources */,
 				7A272663212BFFA70067E3CD /* read_me.txt in Resources */,
@@ -3600,6 +3634,7 @@
 				B8086530211EA17D00755158 /* BTCData+Tests.m in Sources */,
 				B8CAA14521158FF200695BC3 /* LPDPhotoArrangeCVlLayout.m in Sources */,
 				216F5B18206CD9C900F2C832 /* StoreDetailVC.m in Sources */,
+				B8DB9EB7214F6AA90091276E /* RedintrodeceVC.m in Sources */,
 				216F5B3D206CD9DA00F2C832 /* StoreCell.m in Sources */,
 				B8BBA5FB20C780FA00DC4D5F /* PlatformCell.m in Sources */,
 				211A53221FBFE3A100CC6294 /* RateDescVC.m in Sources */,
@@ -3676,6 +3711,7 @@
 				21205CDA1FCD2FC8003C6C7C /* CoinAddressListVC.m in Sources */,
 				B8CAA14021158FF200695BC3 /* LPDAssetModel.m in Sources */,
 				B8DDF885211D2AD10058D19D /* MakeMoneyCell.m in Sources */,
+				B8DB9EC3214F8A220091276E /* H5DrtailVC.m in Sources */,
 				B8F63EE020D3809700556150 /* LocalBillDetailTableView.m in Sources */,
 				21205CD61FCD0435003C6C7C /* FansModel.m in Sources */,
 				7AABEAFE2149127200283BC7 /* BouncedPasteView.m in Sources */,
@@ -3684,6 +3720,7 @@
 				B808650B211EA17D00755158 /* BTCFancyEncryptedMessage.m in Sources */,
 				B87BF1D02114251800DD5C05 /* FMDBMigrationManager.m in Sources */,
 				B8B15C1F20CA752900F13220 /* QHCollectionViewNine.m in Sources */,
+				B8DB9EBD214F6BE60091276E /* RedModel.m in Sources */,
 				216F5B3C206CD9DA00F2C832 /* BannerModel.m in Sources */,
 				216F5B4F206CE7A600F2C832 /* StoreListVC.m in Sources */,
 				7AABEAF82148ED4D00283BC7 /* UIButton+SGImagePosition.m in Sources */,
@@ -3766,6 +3803,7 @@
 				B8CA0D6D210822400015A19D /* TTPasswordView.m in Sources */,
 				B808651F211EA17D00755158 /* BTCPaymentMethodDetails.m in Sources */,
 				211DE6C11FB58B4C002FCF3D /* AppConfig.m in Sources */,
+				B8DB9EBA214F6AF10091276E /* RedIntroduce.m in Sources */,
 				B83604132125581A0089CC17 /* TLtakeMoneyModel.m in Sources */,
 				21C91D801FDBCFB6006EDB16 /* ZMAuthResultVC.m in Sources */,
 				211DE6A41FB58B4C002FCF3D /* TLPickerTextField.m in Sources */,
@@ -3839,6 +3877,7 @@
 				B8CF2CC52121375800055706 /* BTCDetailModel.m in Sources */,
 				211DE6B81FB58B4C002FCF3D /* UIControl+Block.m in Sources */,
 				2E5F33A9202BF25F00B2F263 /* TLLeftRightView.m in Sources */,
+				B8DB9EB4214F6A730091276E /* RedIntroduceTB.m in Sources */,
 				B8086504211EA17D00755158 /* BTCProtocolSerialization.m in Sources */,
 				B8CAA14421158FF200695BC3 /* LPDImageManager.m in Sources */,
 				211DE6C41FB58B4C002FCF3D /* HttpSign.m in Sources */,
@@ -3890,6 +3929,7 @@
 				B8F63EE320D397B000556150 /* WalletLocalWebVC.m in Sources */,
 				2129FE6F1FDFBAA3009DA374 /* ChangeLoginPwdVC.m in Sources */,
 				211A532F1FBFE4CF00CC6294 /* RateDescCell.m in Sources */,
+				B8DB9EB1214F68E70091276E /* TLRedintroduceVC.m in Sources */,
 				21CB94EA1FDC0C2500CAB090 /* PersonalitySettingTableView.m in Sources */,
 				7A8A5DC620EA6FE7002D9A48 /* UIView+Extension.m in Sources */,
 				7A8A5DCB20EA7EB8002D9A48 /* GetTheCell.m in Sources */,

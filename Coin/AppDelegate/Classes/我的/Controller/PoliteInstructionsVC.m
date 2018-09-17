@@ -119,10 +119,10 @@
 
     UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
     negativeSpacer.width = -10;
-    UIButton *RightButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
-    self.navigationItem.rightBarButtonItems = @[negativeSpacer, [[UIBarButtonItem alloc] initWithCustomView:RightButton]];
-    [RightButton setImage:kImage(@"more 白色") forState:(UIControlStateNormal)];
-    [RightButton addTarget:self action:@selector(rightButtonClick) forControlEvents:(UIControlEventTouchUpInside)];
+//    UIButton *RightButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
+//    self.navigationItem.rightBarButtonItems = @[negativeSpacer, [[UIBarButtonItem alloc] initWithCustomView:RightButton]];
+//    [RightButton setImage:kImage(@"more 白色") forState:(UIControlStateNormal)];
+//    [RightButton addTarget:self action:@selector(rightButtonClick) forControlEvents:(UIControlEventTouchUpInside)];
 
 
     [self initUI];

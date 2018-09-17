@@ -167,6 +167,7 @@
     bgView.frame = CGRectMake(0, -kNavigationBarHeight, kScreenWidth, kScreenHeight);
     
     UIImageView *iconImage = [[UIImageView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH/2 - kWidth(38), kHeight(kNavigationBarHeight + 16), kWidth(76), kHeight(103))];
+    iconImage.contentMode = UIViewContentModeScaleToFill;
     iconImage.image = kImage(@"logoo");
     [bgView addSubview:iconImage];
 

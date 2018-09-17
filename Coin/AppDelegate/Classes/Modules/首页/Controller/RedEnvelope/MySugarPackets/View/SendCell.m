@@ -39,9 +39,9 @@
         [self addSubview:timeLabel];
 
 
-        priceLabel = [UILabel labelWithFrame:CGRectMake(63 + (SCREEN_WIDTH - 79)/2, 10, (SCREEN_WIDTH - 79)/2, 36) textAligment:(NSTextAlignmentRight) backgroundColor:kClearColor font:FONT(16) textColor:kTextBlack];
+        priceLabel = [UILabel labelWithFrame:CGRectMake(63 + (SCREEN_WIDTH - 79)/2, 10, (SCREEN_WIDTH - 79)/2, 36) textAligment:(NSTextAlignmentRight) backgroundColor:kClearColor font:FONT(14) textColor:kTextBlack];
         [self addSubview:priceLabel];
-        sysmbolImage = [[UIImageView alloc]initWithFrame:CGRectMake( (SCREEN_WIDTH - 100), 16, 36, 36)];
+        sysmbolImage = [[UIImageView alloc]initWithFrame:CGRectMake( (SCREEN_WIDTH - 110), 16, 36, 36)];
         [self addSubview:sysmbolImage];
 
         TheValueLabel = [UILabel labelWithFrame:CGRectMake(63 + (SCREEN_WIDTH - 79)/2, 46, (SCREEN_WIDTH - 79)/2 , 14) textAligment:(NSTextAlignmentRight) backgroundColor:kClearColor font:FONT(11) textColor:kTextColor2];
@@ -64,10 +64,10 @@
 
     if ([sendModel.type isEqualToString:@"1"]) {
         //拼手气
-        headImage.image = kImage(@"拼手气红包 copy");
+        headImage.image = kImage(@"拼");
     }else{
         //普通
-        headImage.image = kImage(@"普通红包-1");
+        headImage.image = kImage(@"普通红包");
         
         
     }
@@ -78,7 +78,7 @@
     if (self.isClose == YES) {
           priceLabel.text = [NSString stringWithFormat:@"**** %@",[LangSwitcher switchLang:@"枚" key:nil]];
     }else{
-          priceLabel.text = [NSString stringWithFormat:@"%@ %@",sendModel.receivedCount,[LangSwitcher switchLang:@"枚" key:nil]];
+          priceLabel.text = [NSString stringWithFormat:@"%@ %@",sendModel.totalCount,[LangSwitcher switchLang:@"枚" key:nil]];
     }
   
     TheValueLabel.text = [NSString stringWithFormat:@"%@/%@个",sendModel.receivedNum,sendModel.sendNum];

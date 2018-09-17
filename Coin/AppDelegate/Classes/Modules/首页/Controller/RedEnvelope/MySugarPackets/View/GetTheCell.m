@@ -72,10 +72,10 @@
     timeLabel.text = [getModel.createDatetime convertRedDate];
     if ([redPacketInfo[@"type"] isEqualToString:@"1"]) {
         //拼手气
-        typeimage.image = kImage(@"拼手气红包 copy");
+        typeimage.image = kImage(@"拼");
     }else{
         //普通
-        typeimage.image = kImage(@"普通红包-1");
+        typeimage.image = kImage(@"普通红包");
 
        
     }

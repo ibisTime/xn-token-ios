@@ -37,7 +37,7 @@
 -(UITableView *)tableView{
     if (_tableView == nil) {
         self.tableView = [[GetTheTableView alloc]
-                          initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight - 70)
+                          initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight)
                           style:UITableViewStyleGrouped];
 
         self.tableView.backgroundColor = kWhiteColor;
@@ -118,6 +118,7 @@
 
     };
     [self loadYear];
+  
 }
 
 - (void)loadYear
@@ -276,8 +277,15 @@
 
             //
             weakSelf.getthe = shouldDisplayCoins;
-            
-            weakSelf.headView.count.text = [NSString stringWithFormat:@"%ld",weakSelf.getthe.count];
+            if (weakSelf.isClose == YES) {
+               
+                weakSelf.headView.count.text = @"***";
+
+            }else{
+                
+                weakSelf.headView.count.text = [NSString stringWithFormat:@"%ld",weakSelf.getthe.count];
+
+            }
             weakSelf.tableView.getthe = shouldDisplayCoins;
             [weakSelf.tableView reloadData_tl];
 

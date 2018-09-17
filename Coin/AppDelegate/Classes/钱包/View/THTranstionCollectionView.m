@@ -51,6 +51,9 @@ static NSString *identifierCell = @"TransformCell";
     
  
         TransformCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifierCell forIndexPath:indexPath];
+    if (indexPath.row == 0) {
+        cell.backgroundColor = kLineColor;
+    }
         cell.isLocal = self.isLocal;
         cell.model = self.models[indexPath.row];
         
@@ -164,6 +167,12 @@ static NSString *identifierCell = @"TransformCell";
 }
 -(void) collectionView:(UICollectionView *)collectionView didHighlightItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (self.inde  == nil) {
+        NSIndexPath *ind = [NSIndexPath indexPathForRow:0 inSection:0];
+        
+        TransformCell *cell1 = (TransformCell *)[collectionView cellForItemAtIndexPath:ind];
+        cell1.backgroundColor = kWhiteColor;
+    }
     TransformCell *cell1 = (TransformCell *)[collectionView cellForItemAtIndexPath:self.inde];
     cell1.backgroundColor = kWhiteColor;
     

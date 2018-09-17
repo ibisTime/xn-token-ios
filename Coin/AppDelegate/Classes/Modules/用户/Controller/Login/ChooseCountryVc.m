@@ -233,8 +233,9 @@
         NSData *data = [NSKeyedArchiver archivedDataWithRootObject:self.countrys[indexPath.row]];
         
         [[NSUserDefaults standardUserDefaults] setObject:data forKey:@"chooseModel"];
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"chooseCoutry"];
         [[NSUserDefaults standardUserDefaults] synchronize];
-//    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"chooseCoutry"];
+
 //    [[NSUserDefaults standardUserDefaults] synchronize];
     if (self.selectCountry) {
         

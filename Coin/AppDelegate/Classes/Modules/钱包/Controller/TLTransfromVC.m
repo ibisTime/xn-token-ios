@@ -320,6 +320,8 @@ typedef enum : NSUInteger {
             self.Free.text = [NSString stringWithFormat:@"%@ %@", [CoinUtil convertToRealCoin:currentCoin.withdrawFeeString coin:self.currencys[0].currency], self.currencys[0].currency];
         }
     }else{
+        self.totalFree.text = [LangSwitcher switchLang:@"本次划矿工费为" key:nil];
+
         self.isLocal = YES;
         self.currencys = self.localcurrencys;
         self.currentModel = self.localcurrencys[0];
@@ -520,13 +522,7 @@ typedef enum : NSUInteger {
     }];
     
     UILabel *totalFree = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:14];
-    if (self.isLocal == YES) {
-        totalFree.text = [LangSwitcher switchLang:@"本次划转矿工费为" key:nil];
-        
-    }else{
-        totalFree.text = [LangSwitcher switchLang:@"本次划转手续费为" key:nil];
-
-    }
+   
     [self.whiteView addSubview:totalFree];
     self.totalFree = totalFree;
     [totalFree mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -537,9 +533,15 @@ typedef enum : NSUInteger {
 
     UILabel *Free = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:14];
     self.Free = Free;
-    
-    NSString *money1 = [CoinUtil convertToRealCoin:self.currencys[0].amountString coin:self.currencys[0].currency];
-    Free.text = [NSString stringWithFormat:@"%@ %@",money1,self.currencys[0].currency];
+    if (self.isLocal == YES) {
+        totalFree.text = [LangSwitcher switchLang:@"本次划转矿工费为" key:nil];
+        
+    }else{
+        totalFree.text = [LangSwitcher switchLang:@"本次划转手续费为" key:nil];
+        NSString *money1 = [CoinUtil convertToRealCoin:self.currencys[0].amountString coin:self.currencys[0].currency];
+        Free.text = [NSString stringWithFormat:@"%@ %@",money1,self.currencys[0].currency];
+    }
+  
     [self.whiteView addSubview:Free];
     [Free mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(self.importButton.mas_top).offset(-10);
@@ -1268,7 +1270,7 @@ typedef enum : NSUInteger {
     
     self.inputFiled.text = nil;
     if (self.isLocal == YES) {
-       
+        self.currentModel = self.currencys[indexPath.row];
         
         [self loadtype];
         [self loadGas1:indexPath];

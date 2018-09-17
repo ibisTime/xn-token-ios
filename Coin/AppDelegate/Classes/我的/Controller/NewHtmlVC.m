@@ -54,8 +54,9 @@
     [_webView.scrollView adjustsContentInsets];
     [self.view addSubview:_webView];
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.h5string]]];
-//    [self loadWebWithString:self.h5string];
+//    [_webView loadHTMLString:self.h5string baseURL:nil];
+//    [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.h5string]]];
+    [self loadWebWithString:self.h5string];
     
      
 }

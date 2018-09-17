@@ -28,7 +28,7 @@
 -(UITableView *)tableView{
     if (_tableView == nil) {
         self.tableView = [[SendTableView alloc]
-                          initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight - 70)
+                          initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight)
                           style:UITableViewStyleGrouped];
 
         self.tableView.backgroundColor = kWhiteColor;
@@ -138,6 +138,10 @@
             self.headView.shareBtn.hidden = NO;
 
             }
+        if ([model.receivedCount isEqualToString:model.totalCount]) {
+            self.headView.shareBtn.hidden = YES;
+
+        }
         self.headView.total.text = [NSString stringWithFormat:@"%@/%@",model.receivedNum,model.sendNum];
         if (model.receivedCount.length >5) {
               self.headView.alltotal.text = [NSString stringWithFormat:@"%.4f/%@",[model.receivedCount floatValue],model.totalCount];

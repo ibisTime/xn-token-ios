@@ -164,7 +164,9 @@
     //指定该控制器为其子控制器
     [self addChildViewController:_vc1];
     //    [self addChildViewController:_vc2];
-    
+    NSArray *textArr = @[[LangSwitcher switchLang:@"我收到的" key:nil],
+                         ];
+    self.filterPicker.tagNames = textArr;
     //将视图加入ScrollView上
     [_scroll addSubview:_vc1.view];
     //    [_scroll addSubview:_vc2.view];

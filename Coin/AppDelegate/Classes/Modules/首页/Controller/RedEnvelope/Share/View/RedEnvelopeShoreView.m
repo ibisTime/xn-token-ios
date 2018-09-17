@@ -30,7 +30,7 @@
 -(UIImageView *)headImage
 {
     if (!_headImage) {
-        _headImage = [[UIImageView alloc]initWithFrame:CGRectMake(kScreenWidth/2 - kHeight(70)/2, kHeight(116), kHeight(17), kHeight(17))];
+        _headImage = [[UIImageView alloc]initWithFrame:CGRectMake(kScreenWidth/2 - kHeight(70)/2, kHeight(116), kHeight(27), kHeight(27))];
         _headImage.image = kImage(@"红包-关闭");
     }
     return _headImage;
