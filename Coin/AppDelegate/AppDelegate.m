@@ -14,8 +14,6 @@
 #import "UITabBar+Badge.h"
 #import "AppConfig.h"
 //#import "IMALoginParam.h"         czy
-#import "WXApi.h"
-#import "TLWXManager.h"
 //#import "TLAlipayManager.h"
 //#import "ChatManager.h"           czy
 //#import "ChatViewController.h"    czy
@@ -43,14 +41,22 @@
 #import "ZLGestureLockViewController.h"
 #import <UMMobClick/MobClick.h>
 #import <ZendeskSDK/ZendeskSDK.h>
-
+#import "QQManager.h"
+#import "TLWXManager.h"
+#import <UMMobClick/MobClick.h>
+//Extension
+#import <TencentOpenAPI/TencentOAuth.h>
+#import <TencentOpenAPI/QQApiInterface.h>
+#import "WXApi.h"
+#import "IQKeyboardManager.h"
 //#import <ZendeskSDK/ZendeskSDK.h>
 #import <ZendeskCoreSDK/ZendeskCoreSDK.h>
 #import <ZendeskProviderSDK/ZendeskProviderSDK.h>
+#import <WeiboSDK.h>
 //#import ""
 //#import "TLPublishInputView.h"      czy
 
-@interface AppDelegate ()
+@interface AppDelegate ()<WeiboSDKDelegate>
 
 //@property (nonatomic, strong) FBKVOController *chatKVOCtrl;   czy
 @property (nonatomic, strong) RespHandler *respHandler;
@@ -80,6 +86,12 @@
     
     //配置键盘
     [self configIQKeyboard];
+    [[TLWXManager manager] registerApp];
+    [WeiboSDK registerApp:@"947817370"];
+    [WeiboSDK enableDebugMode:YES];
+
+    [self configWeibo];
+
     //配置友盟统计
     [self configUManalytics];
     [self configZendSdk];
@@ -148,6 +160,13 @@
     
     
 }
+
+- (void)configWeibo
+{
+    
+    
+}
+
 - (void)configZendSdk
 {
 //    [ ZDKCoreLogger  setEnabled :YES ];
@@ -472,8 +491,28 @@
 //
 //    } else {
     
-        return [WXApi handleOpenURL:url delegate:[TLWXManager manager]];
+//        return [WXApi handleOpenURL:url delegate:[TLWXManager manager]];
 //    }
+   
+        
+        //    BOOL isQQ = [QQApiInterface handleOpenURL:url delegate:[QQManager manager]];
+        
+        if ([url.host containsString:@"response"]) {
+            [WeiboSDK handleOpenURL:url delegate:self];
+
+//            if(response.statusCode == WeiboSDKResponseStatusCodeSuccess){
+//                [TLAlert alertWithSucces:[LangSwitcher switchLang:@"分享成功" key:nil]];
+//            }else{
+//                [TLAlert alertWithSucces:[LangSwitcher switchLang:@"分享失败" key:nil]];
+            
+            }
+         else {
+            
+            return [WXApi handleOpenURL:url delegate:[TLWXManager manager]];
+        }
+        
+        return YES;
+
 }
 
 #pragma mark- 应用进入前台，改变登录时间
@@ -556,7 +595,41 @@
     NSString *document = [path objectAtIndex:0];
     return[document stringByAppendingPathComponent:@"THAWallet.sqlite"];
 }
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+    return [WeiboSDK handleOpenURL:url delegate:self];
+}
 
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
+{
+    return [WeiboSDK handleOpenURL:url delegate:self ];
+}
+
+- (void)didReceiveWeiboResponse:(WBBaseResponse *)response {
+    
+    
+    if ([response isKindOfClass:WBSendMessageToWeiboResponse.class])
+    {
+        if(response.statusCode == WeiboSDKResponseStatusCodeSuccess){
+//            [TLAlert alertWithSucces:[LangSwitcher switchLang:@"分享成功" key:nil]];
+        }else{
+//            [TLAlert alertWithSucces:[LangSwitcher switchLang:@"分享失败" key:nil]];
+
+        }
+        WBSendMessageToWeiboResponse* sendMessageToWeiboResponse = (WBSendMessageToWeiboResponse*)response;
+        NSString* accessToken = [sendMessageToWeiboResponse.authResponse accessToken];
+        if (accessToken)
+        {
+            self.wbtoken = accessToken;
+        }
+        NSString* userID = [sendMessageToWeiboResponse.authResponse userID];
+        if (userID) {
+            self.wbCurrentUserID = userID;
+        }
+        
+    }
+    
+}
 
 
 

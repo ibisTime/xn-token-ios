@@ -10,6 +10,8 @@
 #import "CurrencyModel.h"
 @interface TLTransfromVC : TLBaseVC
 @property (nonatomic, strong) NSMutableArray <CurrencyModel *>*currencys;
+@property (nonatomic, strong) NSMutableArray <CurrencyModel *>*centercurrencys;
+@property (nonatomic, strong) NSMutableArray <CurrencyModel *>*localcurrencys;
 
 @property (nonatomic, assign) BOOL isLocal;
 

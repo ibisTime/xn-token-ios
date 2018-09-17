@@ -14,7 +14,7 @@
 #import "UIButton+EnLargeEdge.h"
 #import "CoinUtil.h"
 #import <SDWebImage/UIImageView+WebCache.h>
-
+#import "NSString+Check.h"
 @interface AddMoneyCell()
 
 //币种图标
@@ -122,12 +122,24 @@
     
     
     //    self.coinIV.image = kImage(_currency.getImgName);
-    
-    CoinModel *coin = [CoinUtil getCoinModel:currency.symbol];
-    self.currencyNameLbl.text = [NSString stringWithFormat:@"%@",currency.symbol];
-    self.selectButton.selected = currency.IsSelected;
+    CoinModel *coin ;
 
-    [self.coinIV sd_setImageWithURL:[NSURL URLWithString:[coin.pic1 convertImageUrl]]];
+    if (currency.currency) {
+        coin = [CoinUtil getCoinModel:currency.currency];
+        self.currencyNameLbl.text = [NSString stringWithFormat:@"%@",currency.currency];
+        self.selectButton.selected = currency.IsSelected;
+        [self.selectButton setImage:kImage(@"more") forState:UIControlStateNormal];
+        [self.selectButton setImage:kImage(@"more") forState:UIControlStateSelected];
+
+        [self.coinIV sd_setImageWithURL:[NSURL URLWithString:[coin.pic1 convertImageUrl]]];
+    }else{
+        coin = [CoinUtil getCoinModel:currency.symbol];
+        self.currencyNameLbl.text = [NSString stringWithFormat:@"%@",currency.symbol];
+        self.selectButton.selected = currency.IsSelected;
+        
+        [self.coinIV sd_setImageWithURL:[NSURL URLWithString:[coin.pic1 convertImageUrl]]];
+    }
+  
     
 //    NSString *leftAmount = [_currency.amountString subNumber:_currency.frozenAmountString];
     

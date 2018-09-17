@@ -1440,12 +1440,13 @@ typedef enum : NSUInteger {
                                       if ([self.currency.type isEqualToString:@"0"]) {
                                           //公链 ETH WAN BTC
                                           if ([self.currency.symbol isEqualToString:@"ETH"]) {
-                                              result =[MnemonicUtil sendTransactionWithMnemonicWallet:Mnemonics address:[self.balanceTF.text lowercaseString] amount:gaspic gaspic:self.pricr gasLimt:@"21000"];
+                                              NSString *g = [NSString stringWithFormat:@"%lld",[self.pricr longLongValue]*21000];
+                                              result =[MnemonicUtil sendTransactionWithMnemonicWallet:Mnemonics address:[self.balanceTF.text lowercaseString] amount:[gaspic subNumber:g] gaspic:[NSString stringWithFormat:@"%lld",[self.pricr longLongValue]] gasLimt:@"21000"];
                                               
                                           }else if ([self.currency.symbol isEqualToString:@"WAN"]){
                                               
-                                              
-                                              result =[MnemonicUtil sendWanTransactionWithMnemonicWallet:Mnemonics address:[self.balanceTF.text lowercaseString] amount:gaspic gaspic:self.pricr gasLimt:@"21000"];
+                                              NSString *g = [NSString stringWithFormat:@"%lld",[self.pricr longLongValue]*21000];
+                                              result =[MnemonicUtil sendWanTransactionWithMnemonicWallet:Mnemonics address:[self.balanceTF.text lowercaseString] amount:[gaspic subNumber:g] gaspic:[NSString stringWithFormat:@"%lld",[self.pricr longLongValue]] gasLimt:@"21000"];
                                           }else{
                                               
                                             //btc

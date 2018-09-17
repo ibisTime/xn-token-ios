@@ -318,15 +318,17 @@
              [weakSelf inreoduceView:@"私钥钱包" content:@"私钥钱包就是去中心化钱包,在去中心化钱包中,所有的用户身份验证内容,如交易密码,私钥，助记词等都保存在用户手机本地,并不是保存在中心化服务器里面,如果用户误删钱包,忘记备份私钥或者助记词，将无法找到钱包"];
         };
         _headerView.clearBlock = ^{
-            CGFloat f2 = kDevice_Is_iPhoneX ==YES ? 282 : 260;
+            CGFloat f2 = kDevice_Is_iPhoneX ==YES ? 320 : 300;
             weakSelf.isClear = YES;
+            CGFloat fq = self.isClear == YES ?250+50 : 358-30;
 
-            weakSelf.headerView.frame = CGRectMake(0, 0, kScreenWidth, kHeight(250+50 ) );
-           
             CGFloat f = self.isClear == YES ?348-30 : 358-30;
 
+            weakSelf.headerView.frame = CGRectMake(0, 0, kScreenWidth, kHeight(f2) );
+           
+
             CGFloat f1 = kDevice_Is_iPhoneX == YES ?15 :0;
-            CGFloat fx = kDevice_Is_iPhoneX == YES ?15 :27;
+            CGFloat fx = kDevice_Is_iPhoneX == YES ?36 :22;
 
             weakSelf.currentTableView.frame = CGRectMake(0, 5, kScreenWidth, kScreenHeight);
             weakSelf.tableView.frame = CGRectMake(0, 5, kScreenWidth, kScreenHeight );
@@ -347,7 +349,7 @@
                 make.height.equalTo(@(kHeight(40)));
                 
             }];
-            CGFloat f4 = self.isClear == YES ?320-30-15 : 350-30-30;
+            CGFloat f4 = self.isClear == YES ?320-30-15+5 : 350-30-30;
             if (kDevice_Is_iPhoneX) {
                 f4 =320-30;
             }else{
@@ -740,7 +742,7 @@
             self.tableView.hidden = NO;
             self.tableView.isLocal = NO;
         self.addButton.hidden = YES;
-        CGFloat fx = kDevice_Is_iPhoneX == YES ?15 :7;
+        CGFloat fx = kDevice_Is_iPhoneX == YES ?36 :17+5;
 //        if (kDevice_Is_iPhoneX) {
 //            fx = self.isClear == YES ?fx-10 : fx;
 //
@@ -750,13 +752,16 @@
 //        }
 
         CGFloat h = self.isClear == YES ? 300 : 315;
+        if (kDevice_Is_iPhoneX) {
+            h += 20;
+        }
         self.headerView.frame = CGRectMake(0, 0, kScreenWidth, kHeight(h));
 
         self.tableView.frame = CGRectMake(0, kStatusBarHeight, kScreenWidth, kScreenHeight-kStatusBarHeight);
        
         [self.leftButton mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.view.mas_left).offset(15);
-            make.bottom.equalTo(self.headerView.mas_bottom).offset(-fx-15);
+            make.bottom.equalTo(self.headerView.mas_bottom).offset(-fx);
             make.width.equalTo(@(kWidth(167.5)));
             make.height.equalTo(@(kHeight(40)));
             
@@ -765,12 +770,15 @@
         
         [self.rightButton mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.leftButton.mas_right).offset(10);
-            make.bottom.equalTo(self.headerView.mas_bottom).offset(-fx-15);
+            make.bottom.equalTo(self.headerView.mas_bottom).offset(-fx);
             make.width.equalTo(@(kWidth(167.5)));
             make.height.equalTo(@(kHeight(40)));
             
         }];
         CGFloat f4 = self.isClear == YES ?320-30-15 : 350-30-30;
+        if (kDevice_Is_iPhoneX) {
+            f4 += 10;
+        }
         self.tableView.hidden = NO;
 
         [self.titleView mas_remakeConstraints:^(MASConstraintMaker *make) {
@@ -942,12 +950,23 @@
         
         
         self.homeView.backgroundColor = kWhiteColor;
-        [self.homeView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.headerView.mas_bottom).offset(-30);
-            make.right.equalTo(@-15);
-            make.left.equalTo(@15);
-            make.bottom.equalTo(self.view.mas_bottom).offset(0);
-        }];
+        if (kDevice_Is_iPhoneX&& self.isClear == YES) {
+            [self.homeView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.top.equalTo(self.headerView.mas_bottom).offset(-30);
+                make.right.equalTo(@-15);
+                make.left.equalTo(@15);
+                make.bottom.equalTo(self.view.mas_bottom).offset(0);
+            }];
+        }else
+        {
+            [self.homeView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.top.equalTo(self.headerView.mas_bottom).offset(-30);
+                make.right.equalTo(@-15);
+                make.left.equalTo(@15);
+                make.bottom.equalTo(self.view.mas_bottom).offset(0);
+            }];
+        }
+        
         CoinWeakSelf;
         self.homeView.buildBlock = ^{
             
@@ -1009,7 +1028,16 @@
     //一键旋转
     TLTransfromVC *trans = [TLTransfromVC new];
     trans.isLocal = self.switchTager == 0 ? YES : NO;
-    trans.currencys = self.currencys;
+    if (self.switchTager == 1) {
+        trans.currencys = self.currencys;
+        trans.centercurrencys = self.currencys;
+        trans.localcurrencys = self.localCurrencys;
+
+    }else{
+        trans.currencys = self.localCurrencys;
+        trans.centercurrencys = self.currencys;
+        trans.localcurrencys = self.localCurrencys;
+    }
     
     TLDataBase *dataBase = [TLDataBase sharedManager];
     NSString *word;
@@ -1225,13 +1253,47 @@
                 weakSelf.currencys = shouldDisplayCoins;
                 weakSelf.tableView.platforms = weakSelf.localCurrencys;
                 [weakSelf.tableView reloadData_tl];
+                [weakSelf saveLocalWalletData];
+                [weakSelf saveLocalWallet];
                 [weakSelf queryTotalAmount];
+                [weakSelf queryCenterTotalAmount];
+                [weakSelf queryMyAmount];
+                
                 [weakSelf.tableView endRefreshingWithNoMoreData_tl];
             }else{
-                weakSelf.currencys = shouldDisplayCoins;
-                weakSelf.tableView.platforms = shouldDisplayCoins;
-                [weakSelf.tableView reloadData_tl];
-                [weakSelf.tableView endRefreshingWithNoMoreData_tl];
+                TLDataBase *dataBase = [TLDataBase sharedManager];
+                NSString *Mnemonics;
+                if ([dataBase.dataBase open]) {
+                    NSString *sql = [NSString stringWithFormat:@"SELECT Mnemonics from THAUser where userId = '%@'",[TLUser user].userId];
+                    //        [sql appendString:[TLUser user].userId];
+                    FMResultSet *set = [dataBase.dataBase executeQuery:sql];
+                    while ([set next])
+                    {
+                        Mnemonics = [set stringForColumn:@"Mnemonics"];
+                        
+                    }
+                    [set close];
+                }
+                [dataBase.dataBase close];
+                if (Mnemonics.length>0) {
+                    weakSelf.currencys = shouldDisplayCoins;
+                    weakSelf.tableView.platforms = shouldDisplayCoins;
+                    [weakSelf.tableView reloadData_tl];
+                    [weakSelf queryCenterTotalAmount];
+                    [weakSelf queryMyAmount];
+                    [weakSelf saveLocalWalletData];
+                    [weakSelf saveLocalWallet];
+                    [weakSelf.tableView endRefreshingWithNoMoreData_tl];
+                }else{
+                    
+                    weakSelf.currencys = shouldDisplayCoins;
+                    weakSelf.tableView.platforms = shouldDisplayCoins;
+                    [weakSelf.tableView reloadData_tl];
+                    [weakSelf queryCenterTotalAmount];
+                    
+                    [weakSelf.tableView endRefreshingWithNoMoreData_tl];
+                }
+              
             }
           
            
@@ -1249,7 +1311,7 @@
     [self.tableView addLoadMoreAction:^{
         helper.parameters[@"userId"] = [TLUser user].userId;
         helper.parameters[@"token"] = [TLUser user].token;
-        [helper loadMore:^(NSMutableArray *objs, BOOL stillHave) {
+        [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
             
             //去除没有的币种
             

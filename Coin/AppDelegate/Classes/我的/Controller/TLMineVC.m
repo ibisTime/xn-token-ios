@@ -29,9 +29,9 @@
 #import "TLImagePicker.h"
 #import "TLUploadManager.h"
 #import "AppConfig.h"
-//#import <ZendeskSDK/ZendeskSDK.h>
-//#import <ZendeskCoreSDK/ZendeskCoreSDK.h>
-//#import <ZendeskProviderSDK/ZendeskProviderSDK.h>
+#import <ZendeskSDK/ZendeskSDK.h>
+#import <ZendeskCoreSDK/ZendeskCoreSDK.h>
+#import <ZendeskProviderSDK/ZendeskProviderSDK.h>
 
 //#import <ZDCChat/ZDCChat.h>
 #import <IQKeyboardManager/IQKeyboardManager.h>
@@ -53,7 +53,7 @@
 #import "TLMeSetting.h"
 #import "NewHelpCentetVC.h"
 
-@interface TLMineVC ()<MineHeaderSeletedDelegate, UINavigationControllerDelegate>
+@interface TLMineVC ()<MineHeaderSeletedDelegate, UINavigationControllerDelegate,ZDKHelpCenterConversationsUIDelegate>
 
 //@property (nonatomic, strong) FBKVOController *chatKVOCtrl;   czy
 
@@ -340,27 +340,27 @@
             return ;
         }
 
-//        ZDKHelpCenterUiConfiguration  *  hcConfig  =  [ ZDKHelpCenterUiConfiguration  new ];
-//        [ hcConfig setHideContactSupport :YES ];
-//
-//        NewHelpCentetVC<ZDKHelpCenterDelegate>*helpCenter  =  [ ZDKHelpCenterUi  buildHelpCenterOverviewWithConfigs :@[hcConfig]];
-//        helpCenter.title = [LangSwitcher switchLang:@"帮助中心" key:nil];
-//        helpCenter.uiDelegate = self;
+        ZDKHelpCenterUiConfiguration  *  hcConfig  =  [ ZDKHelpCenterUiConfiguration  new ];
+        [ hcConfig setHideContactSupport :YES ];
 
-        [self.navigationController setNavigationBarHidden:YES animated:YES];
+        UIViewController<ZDKHelpCenterDelegate>*helpCenter  =  [ ZDKHelpCenterUi  buildHelpCenterOverviewWithConfigs :@[hcConfig]];
+        helpCenter.title = [LangSwitcher switchLang:@"帮助中心" key:nil];
+        helpCenter.uiDelegate = self;
+
+//        [self.navigationController setNavigationBarHidden:YES animated:YES];
 
 //        [ZDKUiConfiguration setNavBarConversationsUIType：ZDKNavBarConversationsUITypeNone];
         
 
-        // Set the theme properties
+//         Set the theme properties
 //        theme.primaryColor = [UIColor colorWithRed:34.0f/255.0f green:34.0f/255.0f blue:48.0f/255.0f alpha:1.0f];
-        
-        // Apply the change
+//
+////         Apply the change
 //        [theme apply];
-        //ZDKHelpCenterUi.buildHelpCenterOverview.uiDelegate
+//        ZDKHelpCenterUi.buildHelpCenterOverview.uiDelegate
 
         
-//        [ self.navigationController pushViewController :helpCenter  animated :YES ];
+        [ self.navigationController pushViewController :helpCenter  animated :YES ];
     };
     //关于我们
     MineModel *abountUs = [MineModel new];
@@ -412,16 +412,16 @@
     }
  
 }
-//-(ZDKContactUsVisibility)active {
-//    return ZDKContactUsVisibilityArticleListOnly;
-//}
-//
-//
-//- (ZDKNavBarConversationsUIType) navBarConversationsUIType
-//{
-//
-//    return ZDKNavBarConversationsUITypeNone;
-//}
+-(ZDKContactUsVisibility)active {
+    return ZDKContactUsVisibilityArticleListOnly;
+}
+
+
+- (ZDKNavBarConversationsUIType) navBarConversationsUIType
+{
+
+    return ZDKNavBarConversationsUITypeNone;
+}
 - (void)initTableView {
     
     self.tableView = [[MineTableView alloc] initWithFrame:CGRectMake(15, self.headerView.height, kScreenWidth-30, kScreenHeight - kTabBarHeight - self.headerView.height) style:UITableViewStyleGrouped];

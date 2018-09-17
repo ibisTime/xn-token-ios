@@ -8,7 +8,7 @@
 
 #import "GetTheTableView.h"
 #import "GetTheCell.h"
-
+#import "SendCell.h"
 @interface GetTheTableView()<UITableViewDelegate, UITableViewDataSource>
 
 @end
@@ -24,10 +24,10 @@
 
         self.dataSource = self;
         self.delegate = self;
-        //全部平台
-
-        //具体平台
+       
         [self registerClass:[GetTheCell class] forCellReuseIdentifier:@"cell"];
+        [self registerClass:[SendCell class] forCellReuseIdentifier:@"SendCell"];
+
     }
 
     return self;
@@ -41,25 +41,44 @@
 #pragma mark -- 行数
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    if (self.isRecvied == YES) {
+        return self.getthe.count;
 
-    return self.getthe.count;
+    }else{
+        return self.sends.count;
+
+    }
 }
 
 #pragma mark -- tableView
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSLog(@"%@",self.getthe);
-    GetTheModel *gettheModel = self.getthe[indexPath.row];
-    GetTheCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.getModel = gettheModel;
-    return cell;
+    if (self.isRecvied == YES) {
+        GetTheModel *gettheModel = self.getthe[indexPath.row];
+    
+        GetTheCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+        cell.isClose = self.isClose;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.getModel = gettheModel;
+        return cell;
+    }else{
+        SendModel *gettheModel = self.sends[indexPath.row];
+        SendCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SendCell" forIndexPath:indexPath];
+        cell.isClose = self.isClose;
+
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.sendModel = gettheModel;
+        
+        return cell;
+    }
+  
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if ([self.refreshDelegate respondsToSelector:@selector(refreshTableView:didSelectRowAtIndexPath:)]) {
-        [self.refreshDelegate refreshTableView:tableView didSelectRowAtIndexPath:indexPath];
+        [self.refreshDelegate refreshTableView:self didSelectRowAtIndexPath:indexPath];
     }
 }
 

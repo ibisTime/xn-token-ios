@@ -22,6 +22,7 @@
 @property (nonatomic, strong) UIButton *backButton;
 
 @property (nonatomic, strong) UILabel *nameLable;
+@property (nonatomic, copy) NSString *h5String;
 
 @end
 
@@ -36,13 +37,43 @@
     }
     return _bouncedView;
 }
-
+- (void)getShareUrl
+{
+    
+    TLNetworking *http = [TLNetworking new];
+    http.showView = self.view;
+    http.code = @"660917";
+    
+    http.parameters[@"ckey"] = @"redPacketShareUrl";
+    
+    [http postWithSuccess:^(id responseObject) {
+        self.h5String = responseObject[@"data"][@"cvalue"];
+        
+    } failure:^(NSError *error) {
+        
+    }];
+    
+    
+}
 //打开微信,去粘贴
 -(void)pasteButtonClick
 {
     [TLAlert alertWithSucces:[LangSwitcher switchLang:@"复制成功!" key:nil]];
     UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
-    pasteboard.string = @"【Theia是全球首款跨链生态钱包，同时支持BTC、ETH、USDT等多币数字货币储存。注册即送10原矿，千万BTC/ETH/WAN矿山，等您来挖】1cjiosuadfiosdaufi0xf750b288323dfpfd【Theia是全球首款跨链生态钱包，同时支持BTC、ETH、USDT等多币数字货币储存。注册即送10原矿，千万BTC/ETH/WAN矿山，等您来挖】1cjiosuadfiosdaufi0xf750b288323dfpfd";
+    NSString *lang;
+    LangType type = [LangSwitcher currentLangType];
+    if (type == LangTypeSimple || type == LangTypeTraditional) {
+        lang = @"ZH_CN";
+    }else if (type == LangTypeKorean)
+    {
+        lang = @"KO";
+    }else{
+        lang = @"EN";
+        
+    }
+//http://m.thadev.hichengdai.com/user/register.html?inviteCode=U201807030441369491006&lang=ZH_CN
+   NSString * address = [NSString stringWithFormat:@"%@/user/register.html?inviteCode=%@&lang=%@",self.h5String,[TLUser user].secretUserId,lang];
+    pasteboard.string = address;
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -77,6 +108,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self getShareUrl];
     //    self.title = [LangSwitcher switchLang:@"邀请有礼" key:nil];
     self.nameLable = [[UILabel alloc]init];
     self.nameLable.text = [LangSwitcher switchLang:@"邀请有礼" key:nil];
@@ -103,7 +135,7 @@
 
 -(void)rightButtonClick
 {
-    _bouncedView.frame = CGRectMake(kWidth(25), (SCREEN_HEIGHT + kNavigationBarHeight)/2 -  (_bouncedView.pasteButton.yy + kHeight(30))/2, SCREEN_WIDTH - kWidth(50), _bouncedView.pasteButton.yy + kHeight(30));
+    _bouncedView.frame = CGRectMake(kWidth(25), kHeight(140), SCREEN_WIDTH - kWidth(50), _bouncedView.pasteButton.yy + kHeight(30));
     [self showPopAnimationWithAnimationStyle:8];
 }
 
@@ -136,10 +168,17 @@
         NSLog(@"移除完成");
     };
     // 4.显示弹框
-    [_popView pop];
+    [_popView pop:self.view];
 }
 
 
+
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    
+    [self.popView removeFromSuperview];
+    
+}
 - (void)initUI
 {
     UIImageView *bgView = [[UIImageView alloc] init];
@@ -229,7 +268,7 @@
 
     UILabel *introduceLabel4 = [UILabel labelWithFrame:CGRectMake(kWidth(20) + 20, introduceLabel3.yy + kHeight(10), SCREEN_WIDTH - kWidth(120) - 20, 0) textAligment:(NSTextAlignmentLeft) backgroundColor:kClearColor font:FONT(14) textColor:kHexColor(@"#FFFFFF")];
 //    introduceLabel4.text = [LangSwitcher switchLang:@"每一位用户成功注册并登陆后可获得购买加宝收益每次翻倍奖励。" key:nil];
-    [introduceLabel4  setAttributedText:[self ReturnsTheDistanceBetween:[LangSwitcher switchLang:@"每一位用户成功注册并登陆后可获得购买加宝收益每次翻倍奖励。每一位用户成功注册并登陆后可获得购买加宝收益每次翻倍奖励。每一位用户成功注册并登陆后可获得购买加宝收益每次翻倍奖励。每一位用户成功注册并登陆后可获得购买加宝收益每次翻倍奖励。每一位用户成功注册并登陆后可获得购买加宝收益每次翻倍奖励。每一位用户成功注册并登陆后可获得购买加宝收益每次翻倍奖励。每一位用户成功注册并登陆后可获得购买加宝收益每次翻倍奖励。每一位用户成功注册并登陆后可获得购买加宝收益每次翻倍奖励。" key:nil]]];
+    [introduceLabel4  setAttributedText:[self ReturnsTheDistanceBetween:[LangSwitcher switchLang:@"每一位用户成功注册并登陆后可获得购买加宝收益每次翻倍奖励。" key:nil]]];
     introduceLabel4.numberOfLines = 0;
     [introduceLabel4 sizeToFit];
     [scrollView addSubview:introduceLabel4];

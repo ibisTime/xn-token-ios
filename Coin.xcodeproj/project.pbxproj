@@ -286,6 +286,7 @@
 		B808653E211F1BCD00755158 /* TLBTCCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B808653D211F1BCD00755158 /* TLBTCCell.m */; };
 		B80D54CB210C84CA005303D5 /* APPLanguage.m in Sources */ = {isa = PBXBuildFile; fileRef = B80D54CA210C84CA005303D5 /* APPLanguage.m */; };
 		B80D54CE210C9C11005303D5 /* TLChangeNikeName.m in Sources */ = {isa = PBXBuildFile; fileRef = B80D54CD210C9C11005303D5 /* TLChangeNikeName.m */; };
+		B8131E94214CF12C00BEF5E0 /* TLWBManger.m in Sources */ = {isa = PBXBuildFile; fileRef = B8131E93214CF12C00BEF5E0 /* TLWBManger.m */; };
 		B819BAAA20C6DD7800CEEC5E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B819BAA920C6DD7700CEEC5E /* LaunchScreen.storyboard */; };
 		B82D3878211BD4A50053A2E4 /* TLQrCodeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B82D3877211BD4A50053A2E4 /* TLQrCodeVC.m */; };
 		B82D387B211C1BDB0053A2E4 /* HomeFindModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B82D387A211C1BDB0053A2E4 /* HomeFindModel.m */; };
@@ -296,11 +297,15 @@
 		B83D1E0F20CE7076007835DB /* WalletForwordVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B83D1E0E20CE7076007835DB /* WalletForwordVC.m */; };
 		B842D5D520E91AA900891289 /* ChooseCountryVc.m in Sources */ = {isa = PBXBuildFile; fileRef = B842D5D420E91AA900891289 /* ChooseCountryVc.m */; };
 		B85FE46F21287D2300C9F60C /* PayModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B85FE46E21287D2300C9F60C /* PayModel.m */; };
+		B8657833214B90D400179EB1 /* DetailSugarView.m in Sources */ = {isa = PBXBuildFile; fileRef = B8657832214B90D400179EB1 /* DetailSugarView.m */; };
 		B87B1BCA20D2509E00EF7B8E /* WalletNewFeaturesVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B87B1BC920D2509E00EF7B8E /* WalletNewFeaturesVC.m */; };
 		B87BF1CD2113F53F00DD5C05 /* DataBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B87BF1CC2113F53F00DD5C05 /* DataBaseModel.m */; };
 		B87BF1D02114251800DD5C05 /* FMDBMigrationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B87BF1CF2114251700DD5C05 /* FMDBMigrationManager.m */; };
 		B87BF1D3211426C300DD5C05 /* Migration.m in Sources */ = {isa = PBXBuildFile; fileRef = B87BF1D1211426C200DD5C05 /* Migration.m */; };
 		B887819920E366BC00879330 /* UIImageView+RotateImgV.m in Sources */ = {isa = PBXBuildFile; fileRef = B887819720E366BC00879330 /* UIImageView+RotateImgV.m */; };
+		B889003F214CB3820081AC4F /* TencentOpenAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B889003E214CB3810081AC4F /* TencentOpenAPI.framework */; };
+		B8890042214CB5070081AC4F /* QQManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B8890041214CB5070081AC4F /* QQManager.m */; };
+		B8890045214CD61A0081AC4F /* WBManger.m in Sources */ = {isa = PBXBuildFile; fileRef = B8890044214CD61A0081AC4F /* WBManger.m */; };
 		B88B092120C8E29D005C2D2F /* JoinMineVc.m in Sources */ = {isa = PBXBuildFile; fileRef = B88B092020C8E29D005C2D2F /* JoinMineVc.m */; };
 		B88B092420C8E34F005C2D2F /* JoinMineTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = B88B092320C8E34F005C2D2F /* JoinMineTableView.m */; };
 		B88B092720C8E371005C2D2F /* JoinMineCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B88B092620C8E371005C2D2F /* JoinMineCell.m */; };
@@ -396,6 +401,8 @@
 		B8D938D82116EF5900B2AA88 /* imageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B8D938D72116EF5900B2AA88 /* imageCell.m */; };
 		B8D938DB2117169E00B2AA88 /* CustomImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = B8D938DA2117169E00B2AA88 /* CustomImageView.m */; };
 		B8DAD14720E2208B00AF4CD4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B8DAD14920E2208B00AF4CD4 /* InfoPlist.strings */; };
+		B8DC39D1214B9FEA002E62E7 /* NewHtmlVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B8DC39D0214B9FE9002E62E7 /* NewHtmlVC.m */; };
+		B8DC39D4214BB39D002E62E7 /* DetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B8DC39D3214BB39D002E62E7 /* DetailCell.m */; };
 		B8DDF882211D29EE0058D19D /* TLMakeMoney.m in Sources */ = {isa = PBXBuildFile; fileRef = B8DDF881211D29EE0058D19D /* TLMakeMoney.m */; };
 		B8DDF885211D2AD10058D19D /* MakeMoneyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B8DDF884211D2AD10058D19D /* MakeMoneyCell.m */; };
 		B8E08BED212594FF00348AD4 /* TLMoneyDeailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B8E08BEC212594FF00348AD4 /* TLMoneyDeailVC.m */; };
@@ -410,6 +417,7 @@
 		B8F63EE320D397B000556150 /* WalletLocalWebVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B8F63EE220D397B000556150 /* WalletLocalWebVC.m */; };
 		B8F791A12146495000F5BE45 /* THTranstionCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = B8F791A02146495000F5BE45 /* THTranstionCollectionView.m */; };
 		B8F791A421464A3300F5BE45 /* TransformCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B8F791A321464A3300F5BE45 /* TransformCell.m */; };
+		B8FDB704214A824400313EC3 /* MysugarView.m in Sources */ = {isa = PBXBuildFile; fileRef = B8FDB703214A824400313EC3 /* MysugarView.m */; };
 		FB49ABC88B6B7FFBB19DF11D /* Pods_Coin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 524739678D50CF78B722738E /* Pods_Coin.framework */; };
 /* End PBXBuildFile section */
 
@@ -1057,6 +1065,8 @@
 		B80D54CA210C84CA005303D5 /* APPLanguage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = APPLanguage.m; sourceTree = "<group>"; };
 		B80D54CC210C9C11005303D5 /* TLChangeNikeName.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLChangeNikeName.h; sourceTree = "<group>"; };
 		B80D54CD210C9C11005303D5 /* TLChangeNikeName.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLChangeNikeName.m; sourceTree = "<group>"; };
+		B8131E92214CF12C00BEF5E0 /* TLWBManger.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLWBManger.h; sourceTree = "<group>"; };
+		B8131E93214CF12C00BEF5E0 /* TLWBManger.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLWBManger.m; sourceTree = "<group>"; };
 		B819BAA920C6DD7700CEEC5E /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B82D3876211BD4A50053A2E4 /* TLQrCodeVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLQrCodeVC.h; sourceTree = "<group>"; };
 		B82D3877211BD4A50053A2E4 /* TLQrCodeVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLQrCodeVC.m; sourceTree = "<group>"; };
@@ -1076,6 +1086,8 @@
 		B842D5D420E91AA900891289 /* ChooseCountryVc.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChooseCountryVc.m; sourceTree = "<group>"; };
 		B85FE46D21287D2300C9F60C /* PayModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PayModel.h; sourceTree = "<group>"; };
 		B85FE46E21287D2300C9F60C /* PayModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PayModel.m; sourceTree = "<group>"; };
+		B8657831214B90D400179EB1 /* DetailSugarView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailSugarView.h; sourceTree = "<group>"; };
+		B8657832214B90D400179EB1 /* DetailSugarView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailSugarView.m; sourceTree = "<group>"; };
 		B87B1BC820D2509E00EF7B8E /* WalletNewFeaturesVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WalletNewFeaturesVC.h; sourceTree = "<group>"; };
 		B87B1BC920D2509E00EF7B8E /* WalletNewFeaturesVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WalletNewFeaturesVC.m; sourceTree = "<group>"; };
 		B87BF1CB2113F53F00DD5C05 /* DataBaseModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DataBaseModel.h; sourceTree = "<group>"; };
@@ -1086,6 +1098,11 @@
 		B87BF1D2211426C200DD5C05 /* Migration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Migration.h; sourceTree = "<group>"; };
 		B887819720E366BC00879330 /* UIImageView+RotateImgV.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+RotateImgV.m"; sourceTree = "<group>"; };
 		B887819820E366BC00879330 /* UIImageView+RotateImgV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+RotateImgV.h"; sourceTree = "<group>"; };
+		B889003E214CB3810081AC4F /* TencentOpenAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TencentOpenAPI.framework; sourceTree = SOURCE_ROOT; };
+		B8890040214CB5070081AC4F /* QQManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = QQManager.h; path = manger/QQManager.h; sourceTree = "<group>"; };
+		B8890041214CB5070081AC4F /* QQManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = QQManager.m; path = manger/QQManager.m; sourceTree = "<group>"; };
+		B8890043214CD61A0081AC4F /* WBManger.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WBManger.h; sourceTree = "<group>"; };
+		B8890044214CD61A0081AC4F /* WBManger.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WBManger.m; sourceTree = "<group>"; };
 		B88B091F20C8E29D005C2D2F /* JoinMineVc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JoinMineVc.h; sourceTree = "<group>"; };
 		B88B092020C8E29D005C2D2F /* JoinMineVc.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JoinMineVc.m; sourceTree = "<group>"; };
 		B88B092220C8E34F005C2D2F /* JoinMineTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JoinMineTableView.h; sourceTree = "<group>"; };
@@ -1284,6 +1301,10 @@
 		B8DAD14B20E2209200AF4CD4 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		B8DAD14F20E220D100AF4CD4 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		B8DAD15220E220EE00AF4CD4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		B8DC39CF214B9FE9002E62E7 /* NewHtmlVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NewHtmlVC.h; sourceTree = "<group>"; };
+		B8DC39D0214B9FE9002E62E7 /* NewHtmlVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewHtmlVC.m; sourceTree = "<group>"; };
+		B8DC39D2214BB39C002E62E7 /* DetailCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailCell.h; sourceTree = "<group>"; };
+		B8DC39D3214BB39D002E62E7 /* DetailCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailCell.m; sourceTree = "<group>"; };
 		B8DDF880211D29EE0058D19D /* TLMakeMoney.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLMakeMoney.h; sourceTree = "<group>"; };
 		B8DDF881211D29EE0058D19D /* TLMakeMoney.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLMakeMoney.m; sourceTree = "<group>"; };
 		B8DDF883211D2AD10058D19D /* MakeMoneyCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MakeMoneyCell.h; sourceTree = "<group>"; };
@@ -1310,6 +1331,8 @@
 		B8F791A02146495000F5BE45 /* THTranstionCollectionView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = THTranstionCollectionView.m; sourceTree = "<group>"; };
 		B8F791A221464A3300F5BE45 /* TransformCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TransformCell.h; sourceTree = "<group>"; };
 		B8F791A321464A3300F5BE45 /* TransformCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TransformCell.m; sourceTree = "<group>"; };
+		B8FDB702214A824400313EC3 /* MysugarView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MysugarView.h; sourceTree = "<group>"; };
+		B8FDB703214A824400313EC3 /* MysugarView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MysugarView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1322,6 +1345,7 @@
 				B8F44029212C851C00809522 /* libcrypto.a in Frameworks */,
 				21C91D981FDBD7E4006EDB16 /* CoreMotion.framework in Frameworks */,
 				7A272662212BFFA70067E3CD /* libWeChatSDK.a in Frameworks */,
+				B889003F214CB3820081AC4F /* TencentOpenAPI.framework in Frameworks */,
 				211C05081FC6714500E51FCF /* libz.tbd in Frameworks */,
 				211C050A1FC6715000E51FCF /* libc++.tbd in Frameworks */,
 				211C050C1FC6715B00E51FCF /* libsqlite3.tbd in Frameworks */,
@@ -1712,6 +1736,8 @@
 		211DE63B1FB58B4B002FCF3D /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				B8890040214CB5070081AC4F /* QQManager.h */,
+				B8890041214CB5070081AC4F /* QQManager.m */,
 				B8086409211EA17C00755158 /* DataBtc */,
 				B860C8AE20CE194700BD29F8 /* DataBase */,
 				4CE70FD920C82B8A00F0C803 /* Crypto */,
@@ -1725,6 +1751,8 @@
 				211DE6951FB58B4C002FCF3D /* AFNetworkingTool */,
 				2EA2526C1FF09B52007FF9A2 /* CoinUtil.h */,
 				2EA2526D1FF09B52007FF9A2 /* CoinUtil.m */,
+				B8890043214CD61A0081AC4F /* WBManger.h */,
+				B8890044214CD61A0081AC4F /* WBManger.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -2018,6 +2046,8 @@
 				21205D0A1FCD6512003C6C7C /* TLWXManager.m */,
 				21C91D861FDBD604006EDB16 /* TLAlipayManager.h */,
 				21C91D871FDBD604006EDB16 /* TLAlipayManager.m */,
+				B8131E92214CF12C00BEF5E0 /* TLWBManger.h */,
+				B8131E93214CF12C00BEF5E0 /* TLWBManger.m */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -2672,6 +2702,8 @@
 				7AABEAFA2148FEEF00283BC7 /* PoliteInstructionsVC.m */,
 				7AABEAFC2149127200283BC7 /* BouncedPasteView.h */,
 				7AABEAFD2149127200283BC7 /* BouncedPasteView.m */,
+				B8DC39CF214B9FE9002E62E7 /* NewHtmlVC.h */,
+				B8DC39D0214B9FE9002E62E7 /* NewHtmlVC.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2747,6 +2779,7 @@
 		2EA584B61FA813C900C7106C /* Coin */ = {
 			isa = PBXGroup;
 			children = (
+				B889003E214CB3810081AC4F /* TencentOpenAPI.framework */,
 				7A27265B212BFFA70067E3CD /* WechatSDK1.8.2 */,
 				215421CF1FD708AC00FDD25C /* Coin.entitlements */,
 				216F5AEE206CC6F600F2C832 /* AppDelegate */,
@@ -2898,6 +2931,12 @@
 				7A3821BF20EACD8B00D6B636 /* SendTableView.m */,
 				7A3821C120EACDA100D6B636 /* SendCell.h */,
 				7A3821C220EACDA100D6B636 /* SendCell.m */,
+				B8FDB702214A824400313EC3 /* MysugarView.h */,
+				B8FDB703214A824400313EC3 /* MysugarView.m */,
+				B8657831214B90D400179EB1 /* DetailSugarView.h */,
+				B8657832214B90D400179EB1 /* DetailSugarView.m */,
+				B8DC39D2214BB39C002E62E7 /* DetailCell.h */,
+				B8DC39D3214BB39D002E62E7 /* DetailCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3333,6 +3372,7 @@
 				2EA584B11FA813C900C7106C /* Frameworks */,
 				2EA584B21FA813C900C7106C /* Resources */,
 				0BDC83309660578EA1D37FA1 /* [CP] Embed Pods Frameworks */,
+				30ACCAABEA0B7BA64C7CEAE6 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -3358,7 +3398,7 @@
 					2EA584B31FA813C900C7106C = {
 						CreatedOnToolsVersion = 9.0.1;
 						LastSwiftMigration = 0940;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 0;
@@ -3443,6 +3483,9 @@
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SipHash/SipHash.framework",
 				"${BUILT_PRODUCTS_DIR}/UIDeviceIdentifier/UIDeviceIdentifier.framework",
+				"${PODS_ROOT}/ZendeskSDK/ZendeskSDK/4.1/ZendeskCoreSDK.framework",
+				"${PODS_ROOT}/ZendeskSDK/ZendeskSDK/4.1/ZendeskProviderSDK.framework",
+				"${PODS_ROOT}/ZendeskSDK/ZendeskSDK/4.1/ZendeskSDK.framework",
 				"${BUILT_PRODUCTS_DIR}/libsodium/libsodium.framework",
 				"${BUILT_PRODUCTS_DIR}/secp256k1_ios/secp256k1_ios.framework",
 				"${BUILT_PRODUCTS_DIR}/web3swift/web3swift.framework",
@@ -3472,6 +3515,9 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SipHash.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UIDeviceIdentifier.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ZendeskCoreSDK.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ZendeskProviderSDK.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ZendeskSDK.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/libsodium.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/secp256k1_ios.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/web3swift.framework",
@@ -3479,6 +3525,26 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Coin/Pods-Coin-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		30ACCAABEA0B7BA64C7CEAE6 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Coin/Pods-Coin-resources.sh",
+				"${PODS_ROOT}/Weibo_SDK/libWeiboSDK/WeiboSDK.bundle",
+				"${PODS_ROOT}/ZendeskSDK/ZendeskSDK/4.1/ZendeskSDKStrings.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/WeiboSDK.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ZendeskSDKStrings.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Coin/Pods-Coin-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		DC1EF316622605A8AD2B2DED /* [CP] Check Pods Manifest.lock */ = {
@@ -3599,6 +3665,7 @@
 				B8086516211EA17D00755158 /* BTCAddress.m in Sources */,
 				B8D5F15620CE0F530005CF96 /* AccountMoneyCellTableViewCell.m in Sources */,
 				B80864F6211EA17D00755158 /* BTCProtocolSerialization+Tests.m in Sources */,
+				B8657833214B90D400179EB1 /* DetailSugarView.m in Sources */,
 				B87BF1CD2113F53F00DD5C05 /* DataBaseModel.m in Sources */,
 				21A7F3241FB2E2F900FAA0A2 /* CaptchaView.m in Sources */,
 				B8BBA5FA20C780FA00DC4D5F /* PlatformTableView.m in Sources */,
@@ -3627,6 +3694,7 @@
 				B808653B211F1B6000755158 /* TLBTCtableView.m in Sources */,
 				211DE6C61FB58B4C002FCF3D /* HttpLogger.m in Sources */,
 				211DE6CA1FB5A586002FCF3D /* RechargeCoinVC.m in Sources */,
+				B8DC39D4214BB39D002E62E7 /* DetailCell.m in Sources */,
 				B8BBA64020C7FB4600DC4D5F /* WallAccountHeadView.m in Sources */,
 				B89783D720F6FB310088C713 /* TLUserFindPwdVC.m in Sources */,
 				2159796A1FB82BC10029F177 /* CustomPickerView.m in Sources */,
@@ -3644,6 +3712,7 @@
 				B808650E211EA17D00755158 /* BTCEncryptedMessage+Tests.m in Sources */,
 				211DE6C21FB58B4C002FCF3D /* Foundation+Log.m in Sources */,
 				B808651A211EA17D00755158 /* BTCAddress+Tests.m in Sources */,
+				B8890045214CD61A0081AC4F /* WBManger.m in Sources */,
 				B88B592C2109B2EF00F20D1B /* ZLGestureLockView.m in Sources */,
 				21C91D881FDBD604006EDB16 /* TLAlipayManager.m in Sources */,
 				B8086538211F19BF00755158 /* TLBillBTCVC.m in Sources */,
@@ -3669,6 +3738,8 @@
 				B88B092720C8E371005C2D2F /* JoinMineCell.m in Sources */,
 				2120D8A31FCEE1DE00712600 /* HourPickerView.m in Sources */,
 				B80864FE211EA17D00755158 /* BTCBigNumber.m in Sources */,
+				B8131E94214CF12C00BEF5E0 /* TLWBManger.m in Sources */,
+				B8FDB704214A824400313EC3 /* MysugarView.m in Sources */,
 				B808650F211EA17D00755158 /* BTCChainCom.m in Sources */,
 				211DE6A01FB58B4C002FCF3D /* TLDatePicker.m in Sources */,
 				B8CAA14721158FF200695BC3 /* LPDPhotoPreviewCell.m in Sources */,
@@ -3718,6 +3789,7 @@
 				B808650A211EA17D00755158 /* BTCOpcode.m in Sources */,
 				211A34DB1FB4083300FEB71F /* MineTableView.m in Sources */,
 				216F5B49206CDA3700F2C832 /* DetailWebView.m in Sources */,
+				B8890042214CB5070081AC4F /* QQManager.m in Sources */,
 				211A34E11FB4247800FEB71F /* MineModel.m in Sources */,
 				B8D938D82116EF5900B2AA88 /* imageCell.m in Sources */,
 				B8DDF882211D29EE0058D19D /* TLMakeMoney.m in Sources */,
@@ -3753,6 +3825,7 @@
 				B88D6C7220EDF3B50043832C /* TLTransfromVC.m in Sources */,
 				B88B58752109A3E100F20D1B /* TLGestureVC.m in Sources */,
 				211DE6A61FB58B4C002FCF3D /* TLTextView.m in Sources */,
+				B8DC39D1214B9FEA002E62E7 /* NewHtmlVC.m in Sources */,
 				B80864F9211EA17D00755158 /* BTCBitcoinURL+Tests.m in Sources */,
 				B8B15C0820CA5B1800F13220 /* BuildBackUpVC.m in Sources */,
 				B8BBA64320C843F800DC4D5F /* AddAccoutMoneyVc.m in Sources */,
@@ -4037,9 +4110,9 @@
 				CLANG_WARN_STRICT_PROTOTYPES = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = TX9SHE4ST4;
+				DEVELOPMENT_TEAM = 3ZCW993X44;
 				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = NO;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -4053,6 +4126,7 @@
 					"$(PROJECT_DIR)/Coin/Classes/Utils/thirdparties/thirdparties_ios_1.0.5",
 					"$(PROJECT_DIR)/Coin/Classes/Utils/umcommonlog/umcommonlog_ios_1.0.0",
 					"$(PROJECT_DIR)/Coin/Classes/Utils/common/common_ios_1.5.2/normal",
+					"$(PROJECT_DIR)",
 				);
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = YES;
 				INFOPLIST_FILE = Coin/Info.plist;
@@ -4070,10 +4144,10 @@
 					"$(PROJECT_DIR)/Coin/WechatSDK1.8.2",
 					"$(PROJECT_DIR)/Coin/AppDelegate/Classes/Utils/DataBtc/include-ios/lib-ios",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ZQB.HappyFirstGo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cdkj.tha;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "ba3a2a48-8ea4-4944-8e53-dbbc784ca83d";
+				PROVISIONING_PROFILE_SPECIFIER = theia;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -4092,9 +4166,9 @@
 				CLANG_WARN_STRICT_PROTOTYPES = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = TX9SHE4ST4;
+				DEVELOPMENT_TEAM = 3ZCW993X44;
 				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = NO;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -4108,6 +4182,7 @@
 					"$(PROJECT_DIR)/Coin/Classes/Utils/thirdparties/thirdparties_ios_1.0.5",
 					"$(PROJECT_DIR)/Coin/Classes/Utils/umcommonlog/umcommonlog_ios_1.0.0",
 					"$(PROJECT_DIR)/Coin/Classes/Utils/common/common_ios_1.5.2/normal",
+					"$(PROJECT_DIR)",
 				);
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = YES;
 				INFOPLIST_FILE = Coin/Info.plist;
@@ -4125,10 +4200,10 @@
 					"$(PROJECT_DIR)/Coin/WechatSDK1.8.2",
 					"$(PROJECT_DIR)/Coin/AppDelegate/Classes/Utils/DataBtc/include-ios/lib-ios",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ZQB.HappyFirstGo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cdkj.tha;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "ba3a2a48-8ea4-4944-8e53-dbbc784ca83d";
+				PROVISIONING_PROFILE_SPECIFIER = theia;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;

@@ -9,5 +9,6 @@
 #import "TLBaseVC.h"
 
 @interface MySugarPacketsVC : TLBaseVC
+@property (nonatomic, assign)BOOL isSend;
 
 @end

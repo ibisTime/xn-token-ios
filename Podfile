@@ -36,6 +36,7 @@ pod 'ZendeskSDK'
 
 #pod 'WechatOpenSDK'
 #pod 'ZDCChat'
+pod "Weibo_SDK", :git => "https://github.com/sinaweibosdk/weibo_ios_sdk.git" 
 
 #设备
 pod 'UIDeviceIdentifier', :git => 'https://github.com/squarefrog/UIDeviceIdentifier.git'

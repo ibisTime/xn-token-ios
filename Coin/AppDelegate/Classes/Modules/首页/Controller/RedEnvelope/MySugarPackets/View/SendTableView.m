@@ -8,7 +8,7 @@
 
 #import "SendTableView.h"
 #import "SendCell.h"
-
+#import "DetailCell.h"
 @interface SendTableView()<UITableViewDelegate, UITableViewDataSource>
 
 @end
@@ -25,6 +25,8 @@
 
         //具体平台
         [self registerClass:[SendCell class] forCellReuseIdentifier:@"cell1"];
+        [self registerClass:[DetailCell class] forCellReuseIdentifier:@"cell2"];
+
     }
 
     return self;
@@ -46,8 +48,8 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSLog(@"======+++++++%@",self.send);
-    SendModel *sendModel = self.send[indexPath.row];
-    SendCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell1" forIndexPath:indexPath];
+    NSDictionary *sendModel = self.send[indexPath.row];
+    DetailCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell2" forIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.sendModel = sendModel;
     return cell;
@@ -56,7 +58,7 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if ([self.refreshDelegate respondsToSelector:@selector(refreshTableView:didSelectRowAtIndexPath:)]) {
-        [self.refreshDelegate refreshTableView:tableView didSelectRowAtIndexPath:indexPath];
+        [self.refreshDelegate refreshTableView:self didSelectRowAtIndexPath:indexPath];
     }
 }
 

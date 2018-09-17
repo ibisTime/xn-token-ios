@@ -15,5 +15,6 @@
 @property (nonatomic , copy) CurrencyTitleModel *title;
 @property (nonatomic , strong) CurrencyModel *model;
 @property (nonatomic , assign) BOOL isClick;
+@property (nonatomic , assign) BOOL isLocal;
 
 @end

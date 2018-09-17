@@ -28,8 +28,9 @@
     self = [super initWithFrame:frame];
     if (self) {
         
-        self.layer.borderColor = kLineColor.CGColor;
-        self.layer.cornerRadius = 4;
+        self.layer.borderColor = kHexColor(@"#DEE0E5").CGColor;
+        self.layer.borderWidth = 1;
+        self.layer.cornerRadius = 2;
         self.clipsToBounds = YES;
         self.backgroundColor = kWhiteColor;
         UIImageView *photoImageView = [[UIImageView alloc] init];
@@ -109,13 +110,22 @@
     _model = model;
     
     
-    CoinModel *coin = [CoinUtil getCoinModel:model.currency];
+    CoinModel *coin;
    
-    
-    [self.photoImageView sd_setImageWithURL:[NSURL URLWithString:[coin.pic1 convertImageUrl]]];
+    if (self.isLocal == YES) {
+        coin = [CoinUtil getCoinModel:model.symbol];
+        [self.photoImageView sd_setImageWithURL:[NSURL URLWithString:[coin.pic1 convertImageUrl]]];
+        
+        [self.selectedBtn setTitle:model.symbol forState:UIControlStateNormal];
 
-    [self.selectedBtn setTitle:model.currency forState:UIControlStateNormal];
+    }else{
+        coin = [CoinUtil getCoinModel:model.currency];
+        [self.photoImageView sd_setImageWithURL:[NSURL URLWithString:[coin.pic1 convertImageUrl]]];
+        
+        [self.selectedBtn setTitle:model.currency forState:UIControlStateNormal];
 
+    }
+  
     
 }
 - (void)setNumberModel:(AddNumberModel *)numberModel

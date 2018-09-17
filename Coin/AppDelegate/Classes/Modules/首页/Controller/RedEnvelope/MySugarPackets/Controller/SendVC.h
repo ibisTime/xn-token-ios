@@ -9,5 +9,6 @@
 #import "TLBaseVC.h"
 
 @interface SendVC : TLBaseVC
+@property (nonatomic, copy) NSString *code;
 
 @end

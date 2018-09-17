@@ -8,7 +8,13 @@
 
 #import "TLTableView.h"
 #import "GetTheModel.h"
+#import "SendModel.h"
 @interface GetTheTableView : TLTableView
-//
+
 @property (nonatomic, strong) NSMutableArray <GetTheModel *>*getthe;
+@property (nonatomic, strong) NSMutableArray <SendModel *>*sends;
+
+@property (nonatomic, assign) BOOL isRecvied;
+@property (nonatomic, assign) BOOL isClose;
+
 @end

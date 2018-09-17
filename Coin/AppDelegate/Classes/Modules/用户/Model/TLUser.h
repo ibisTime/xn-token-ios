@@ -83,9 +83,15 @@
 
 @property (nonatomic, copy) NSString *localMoney;
 
+@property (nonatomic, copy) NSNumber *jfAmount;
+
+@property (nonatomic, copy) NSNumber *jfInviteNumber;
+
 @property (nonatomic, copy) NSString *interCode;
 
 @property (nonatomic, assign) BOOL loginPwdFlag;
+
+@property (nonatomic, assign) void(^upsucess)() ;
 
 ////未读消息数
 //@property (nonatomic, assign) NSInteger unReadMsgCount;
@@ -126,6 +132,7 @@
 - (void)changLoginTime;
 //获取七牛云域名
 - (void)requestQiniuDomain;
+- (BOOL)chang;
 
 @end
 

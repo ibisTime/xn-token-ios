@@ -11,6 +11,8 @@
 #import "AppConfig.h"
 #import "UIButton+SGImagePosition.h"
 #import <QuartzCore/QuartzCore.h>
+#import "TLWBManger.h"
+#import "TLWXManager.h"
 @interface TLQrCodeVC ()
 {
     NSString *address ;
@@ -332,17 +334,56 @@
             break;
         case 1:
         {
-
+            UIGraphicsBeginImageContextWithOptions(self.bgView1.bounds.size, NO, [[UIScreen mainScreen] scale]);
+            [self.bgView1.layer renderInContext:UIGraphicsGetCurrentContext()];
+            UIImage *viewImage = UIGraphicsGetImageFromCurrentImageContext();
+            UIGraphicsEndImageContext();
+            [TLWXManager wxShareImgWith:@"" scene:0 desc:nil image:viewImage];
+//            [[TLWXManager manager] setWxShare:^(BOOL isSuccess, int errorCode) {
+//                
+//                if (isSuccess) {
+//                    
+//                    [TLAlert alertWithInfo:@"分享成功"];
+//                    
+//                } else {
+//                    
+//                    [TLAlert alertWithInfo:@"分享失败"];
+//                    
+//                }
+//                
+//            }];
         }
             break;
         case 2:
         {
-
+            UIGraphicsBeginImageContextWithOptions(self.bgView1.bounds.size, NO, [[UIScreen mainScreen] scale]);
+            [self.bgView1.layer renderInContext:UIGraphicsGetCurrentContext()];
+            UIImage *viewImage = UIGraphicsGetImageFromCurrentImageContext();
+            UIGraphicsEndImageContext();
+            [TLWXManager wxShareImgWith:@"" scene:1 desc:nil image:viewImage];
+//            [[TLWXManager manager] setWxShare:^(BOOL isSuccess, int errorCode) {
+//
+//                if (isSuccess) {
+//
+//                    [TLAlert alertWithInfo:@"分享成功"];
+//
+//                } else {
+//
+//                    [TLAlert alertWithInfo:@"分享失败"];
+//
+//                }
+//
+//            }];
         }
             break;
         case 3:
         {
-
+            UIGraphicsBeginImageContextWithOptions(self.bgView1.bounds.size, NO, [[UIScreen mainScreen] scale]);
+            [self.bgView1.layer renderInContext:UIGraphicsGetCurrentContext()];
+            UIImage *viewImage = UIGraphicsGetImageFromCurrentImageContext();
+            UIGraphicsEndImageContext();
+            [TLWBManger sinaShareWithImage:viewImage];
+            
         }
             break;
 

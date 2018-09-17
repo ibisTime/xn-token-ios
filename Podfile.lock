@@ -68,6 +68,7 @@ PODS:
     - libsodium (~> 1.0.12)
     - Result (~> 3.0.0)
     - secp256k1_ios (~> 0.1.3)
+  - Weibo_SDK (3.2.3)
   - ZendeskSDK (2.1.0):
     - ZendeskSDK/Providers (= 2.1.0)
     - ZendeskSDK/UI (= 2.1.0)
@@ -97,6 +98,7 @@ DEPENDENCIES:
   - UIDeviceIdentifier (from `https://github.com/squarefrog/UIDeviceIdentifier.git`)
   - UMengAnalytics-NO-IDFA
   - web3swift (~> 0.8.0)
+  - Weibo_SDK (from `https://github.com/sinaweibosdk/weibo_ios_sdk.git`)
   - ZendeskSDK
 
 SPEC REPOS:
@@ -135,11 +137,16 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   UIDeviceIdentifier:
     :git: https://github.com/squarefrog/UIDeviceIdentifier.git
+  Weibo_SDK:
+    :git: https://github.com/sinaweibosdk/weibo_ios_sdk.git
 
 CHECKOUT OPTIONS:
   UIDeviceIdentifier:
     :commit: ab74270cb08ec710b01bc74bfdf8dccb29375d57
     :git: https://github.com/squarefrog/UIDeviceIdentifier.git
+  Weibo_SDK:
+    :commit: f5b138320aefe0ed20b76b8510521432f1a6c9ac
+    :git: https://github.com/sinaweibosdk/weibo_ios_sdk.git
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
@@ -171,8 +178,9 @@ SPEC CHECKSUMS:
   UIDeviceIdentifier: 9281343882e24460235f00a0d7d2fc04a65688c6
   UMengAnalytics-NO-IDFA: 16666e32edce5be44ae5b14aaaa7f3582e09d6ab
   web3swift: a0c0f5f7ddab09af3119a76e1ef304b050b4595e
+  Weibo_SDK: 652ca78c2f7147a5de5e75e7cbea89838a81772a
   ZendeskSDK: e2d9245bc42fb4782eff959219ce4d6bdae13b64
 
-PODFILE CHECKSUM: 83bc185f09fe966052dbe8272fc17f2a4f246394
+PODFILE CHECKSUM: 2c7bc71dcf466df91554211ffd54d19d29e36c6a
 
 COCOAPODS: 1.5.2

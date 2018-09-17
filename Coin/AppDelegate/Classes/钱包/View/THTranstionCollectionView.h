@@ -39,7 +39,10 @@ typedef  NS_ENUM(NSInteger,SearchType) {
 
 @property (nonatomic ,assign) BOOL IsNeedRefash;
 
+@property (nonatomic ,strong) NSIndexPath *inde;
+
 @property (nonatomic ,assign) BOOL isRead;
+@property (nonatomic ,assign) BOOL isLocal;
 
 
 

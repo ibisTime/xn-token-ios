@@ -20,9 +20,12 @@
 #import "UIButton+EnLargeEdge.h"
 #import "HTMLStrVC.h"
 #import "TLPwdRelatedVC.h"
+#import "AddAccoutMoneyVc.h"
+#import "FilterView.h"
 @interface RedEnvelopeVC ()<SendRedEnvelopeDelegate,RedEnvelopeHeadDelegate>
 
 @property (nonatomic, strong) NSMutableArray <CurrencyModel *>*currencys;
+@property (nonatomic, strong) FilterView *filterPicker;
 
 @property (nonatomic , strong)SendRedEnvelopeView *sendView;
 
@@ -39,7 +42,6 @@
     [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
     [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
 
-    [self LoadData];
     
 }
 
@@ -57,25 +59,80 @@
     // Do any additional setup after loading the view.
 //    self.title = [LangSwitcher switchLang:@"" key:nil];
 
-    self.title = [LangSwitcher switchLang:@"发红包" key:nil];
+    self.title = [LangSwitcher switchLang:@"Theia红包" key:nil];
+    UIButton *_backButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
+    _backButton.frame = CGRectMake(10, 20, 0, 44);
+    [_backButton setTitle:[LangSwitcher switchLang:@"" key:nil] forState:(UIControlStateNormal)];
+    _backButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+    _backButton.titleLabel.font = Font(14);
+    [_backButton setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
+    [_backButton setImage:kImage(@"返回1-1") forState:UIControlStateNormal];
+    [_backButton addTarget:self action:@selector(backbuttonClick) forControlEvents:(UIControlEventTouchUpInside)];
+    UIButton *titleButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
+    titleButton.frame = CGRectMake(20,20, 120, 44);
+    [titleButton setTitle:[LangSwitcher switchLang:@"Theia红包" key:nil] forState:(UIControlStateNormal)];
+    titleButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+    titleButton.titleLabel.font = Font(16);
+    [titleButton setTitleColor:kTextBlack forState:(UIControlStateNormal)];
+//    [titleButton addTarget:self action:@selector(backbuttonClick) forControlEvents:(UIControlEventTouchUpInside)];
+//     *tit = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextBlack font:16];
+//
+//    tit.frame = CGRectMake(kScreenWidth/2-60, 20, 120, 20);
+//    tit.text = [LangSwitcher switchLang:@"Theia红包" key:nil];
 
+   
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:_backButton];
 
     UIButton *_recordButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
-    _recordButton.frame = CGRectMake(0, 0, 0, 44);
-    [_recordButton setTitle:[LangSwitcher switchLang:@"我的红包" key:nil] forState:(UIControlStateNormal)];
+    _recordButton.frame = CGRectMake(10, 0, 0, 44);
+    [_recordButton setTitle:[LangSwitcher switchLang:@"" key:nil] forState:(UIControlStateNormal)];
     _recordButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
     _recordButton.titleLabel.font = Font(14);
     [_recordButton setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
+    [_recordButton setImage:kImage(@"topbar_more") forState:UIControlStateNormal];
     [_recordButton addTarget:self action:@selector(buttonClick) forControlEvents:(UIControlEventTouchUpInside)];
     UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
     negativeSpacer.width = -10;
     self.navigationItem.rightBarButtonItems = @[negativeSpacer, [[UIBarButtonItem alloc] initWithCustomView:_recordButton]];
     [_recordButton sizeToFit];
+    UILabel *titleText = [[UILabel alloc] initWithFrame: CGRectMake(kScreenWidth/2-60, 0, 120, 50)];
+    titleText.textAlignment = NSTextAlignmentCenter;
+    titleText.backgroundColor = [UIColor clearColor];
+    
+    titleText.textColor=kTextColor;
+    
+    [titleText setFont:[UIFont systemFontOfSize:17.0]];
+    
+    [titleText setText:@"Theia红包"];
+    
+    self.navigationItem.titleView=titleText;
+    
+
+//    UIView *vie = [UIView new];
+//    [vie addSubview:tit];
+//    tit.frame = vie.bounds;
+//    tit.text = [LangSwitcher switchLang:@"Theia红包" key:nil];
+
+//    self.navigationItem.titleView = [[UIView alloc] initWithFrame:CGRectMake(100, 10, 120, 44)];
 
 
     _sendView = [[SendRedEnvelopeView alloc]initWithFrame:CGRectMake(0, - kNavigationBarHeight, SCREEN_WIDTH, SCREEN_HEIGHT + kNavigationBarHeight)];
     CoinWeakSelf;
     
+    self.sendView.transBlock = ^(CurrencyModel *model) {
+        AddAccoutMoneyVc *monyVc = [[AddAccoutMoneyVc alloc] init];
+        monyVc.isRedPage = YES;
+        monyVc.currentModels = weakSelf.currencys;
+        [weakSelf.navigationController pushViewController:monyVc animated:YES];
+        monyVc.select = ^(NSMutableArray *model) {
+          
+            NSLog(@"%@",model);
+        };
+        monyVc.curreryBlock = ^(CurrencyModel *model) {
+//            model.currency = model.symbol;
+            [weakSelf.sendView Platform:model];
+        };
+    };
     _sendView.transFormBlock = ^(CurrencyModel *model) {
         RechargeCoinVC *coinVC = [RechargeCoinVC new];
         
@@ -122,14 +179,69 @@
     [self LoadData];
 }
 
+- (void)backbuttonClick
+{
+    
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (FilterView *)filterPicker {
+    
+    if (!_filterPicker) {
+        
+        CoinWeakSelf;
+        
+        NSArray *textArr = @[[LangSwitcher switchLang:@"我的红包记录" key:nil],
+                             [LangSwitcher switchLang:@"红包说明及常见问题" key:nil],
+                             ];
+        
+        NSArray *typeArr = @[@"tt",
+                             @"charge",
+                             ];
+        
+        _filterPicker = [[FilterView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
+        
+        //        _filterPicker.title =  [LangSwitcher switchLang: @"请选择交易类型" key:nil];
+        
+        _filterPicker.selectBlock = ^(NSInteger index) {
+            
+            [weakSelf pickerChoose:index];
+//            [weakSelf.tableView beginRefreshing];
+        };
+        
+        _filterPicker.tagNames = textArr;
+        
+    }
+    
+    return _filterPicker;
+}
+
+- (void)pickerChoose :(NSInteger)integer
+{
+    if (integer == 0) {
+            MySugarPacketsVC *vc = [[MySugarPacketsVC alloc]init];
+            UINavigationController * navigation = [[UINavigationController alloc]initWithRootViewController:vc];
+            vc.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+            vc.modalPresentationStyle = UIModalTransitionStyleFlipHorizontal;
+            [self presentViewController:navigation animated:NO completion:nil];
+    }else{
+        
+        HTMLStrVC *htmlVC = [[HTMLStrVC alloc] init];
+        self.navigationController.navigationBar.hidden = NO;
+        
+        htmlVC.type = HTMLTypeRed_packet_rule;
+        //        [weakSelf presentViewController:htmlVC animated:YES completion:nil];
+        [self.navigationController pushViewController:htmlVC animated:YES];
+        
+    }
+    
+}
 
 -(void)buttonClick
 {
-    MySugarPacketsVC *vc = [[MySugarPacketsVC alloc]init];
-    UINavigationController * navigation = [[UINavigationController alloc]initWithRootViewController:vc];
-    vc.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-    vc.modalPresentationStyle = UIModalTransitionStyleFlipHorizontal;
-    [self presentViewController:navigation animated:NO completion:nil];
+    
+    [self.filterPicker show];
+
 }
 
 
@@ -185,7 +297,7 @@
     CoinWeakSelf;
     self.pwdView.passwordBlock = ^(NSString *password) {
         if ([password isEqualToString:@""]) {
-            [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入资金密码" key:nil]];
+            [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入您的交易密码" key:nil]];
             return ;
         }
         

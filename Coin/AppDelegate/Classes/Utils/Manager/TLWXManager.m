@@ -12,7 +12,7 @@
 #import <CDCommon/ImageUtil.h>
 #import "TLAlert.h"
 #import "WXApi.h"
-
+#import <WeiboSDK.h>
 @interface TLWXManager()<WXApiDelegate>
 
 
@@ -38,12 +38,41 @@
 
 
 }
-
-
--(void) onReq:(BaseReq*)req {
++ (void)shareSinaWeiboWithText:(NSString *)text image:(UIImage *)image{
+    if (![WeiboSDK isWeiboAppInstalled]) {
+        
+        //        [self showLoadSinaWeiboClient];
+    }else {
+        WBMessageObject *message = [WBMessageObject message];
+        message.text = text;
+        
+        // 消息的图片内容中，图片数据不能为空并且大小不能超过10M
+        WBImageObject *imageObject = [WBImageObject object];
+        imageObject.imageData = UIImageJPEGRepresentation(image, 1.0);
+        message.imageObject = imageObject;
+        
+        WBSendMessageToWeiboRequest *request = [WBSendMessageToWeiboRequest requestWithMessage:message];
+        [WeiboSDK sendRequest:request];
+    }
     
+}
+
+
+-(void) onReq:(BaseReq*)reqonReq
+
+ {
+     if([reqonReq isKindOfClass:[SendMessageToWXResp class]]) { //分享回调
+         
+         if (self.wxShare) {
+             
+//             self.wxShare(reqonReq.errCode == 0,resp.errCode);
+             
+         }
+         
+     }
 
 }
+
 
 #pragma mark- 收到微信的回应
 -(void) onResp:(BaseResp*)resp {
@@ -60,6 +89,7 @@
 
 
         if([resp isKindOfClass:[SendMessageToWXResp class]]) { //分享回调
+            SendMessageToWXResp * tmpResp = (SendMessageToWXResp *)resp;
 
         if (self.wxShare) {
 
@@ -230,6 +260,7 @@
         endHandler(lastImg);
     }
 }
+
 
 
 @end

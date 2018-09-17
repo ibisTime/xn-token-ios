@@ -61,7 +61,7 @@ void TLLog(NSString *format, ...) {
         case RunEnvDev: {
             self.qiniuDomain = @"http://pajvine9a.bkt.clouddn.com";
 //            self.addr = @"http://120.26.6.213:2101";
-            self.addr = @"http://m.dev.thachain.org/api";
+            self.addr = @"http://47.254.69.142:3101";
 
             //交易hash
             self.ethHash = @"https://rinkeby.etherscan.io/tx";
@@ -110,7 +110,7 @@ void TLLog(NSString *format, ...) {
 
 - (NSString *)wxKey {
     
-    return @"wx8cb7c18fa507f630";
+    return @"wx368e6044b7436dff";
 }
 
 @end

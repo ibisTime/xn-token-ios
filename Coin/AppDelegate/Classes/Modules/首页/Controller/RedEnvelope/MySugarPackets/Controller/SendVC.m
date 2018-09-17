@@ -11,9 +11,15 @@
 #import "SendModel.h"
 #import "RedEnvelopeVC.h"
 #import "RedEnvelopeShoreVC.h"
+#import "FilterView.h"
+#import "DetailSugarView.h"
 @interface SendVC ()<RefreshDelegate>
+@property (nonatomic, strong) FilterView *filterPicker;
+@property (nonatomic , strong)DetailSugarView *headView;
+
 @property (nonatomic , strong)SendTableView *tableView;
 @property (nonatomic, strong) NSMutableArray <SendModel *>*send;
+@property (nonatomic, strong) SendModel *model;
 
 @end
 
@@ -32,11 +38,77 @@
     return _tableView;
 }
 
+- (FilterView *)filterPicker {
+    
+    if (!_filterPicker) {
+        
+        CoinWeakSelf;
+        
+//        NSArray * textArr = self.textArr;
+                NSArray *textArr = @[[LangSwitcher switchLang:@"2018" key:nil],
+                                     [LangSwitcher switchLang:@"2017" key:nil],
+                                      [LangSwitcher switchLang:@"2016" key:nil],
+                                     ];
+        
+        NSArray *typeArr = @[@"tt",
+                             @"charge",
+                             ];
+        
+        _filterPicker = [[FilterView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
+        
+        //        _filterPicker.title =  [LangSwitcher switchLang: @"请选择交易类型" key:nil];
+        
+        _filterPicker.selectBlock = ^(NSInteger index) {
+            
+            [weakSelf pickerChoose:index];
+//            weakSelf.year = textArr[index];
+            [weakSelf.headView.tameBtn setTitle:[NSString stringWithFormat:@"%@%@",textArr[index],[LangSwitcher switchLang:@"年" key:nil]] forState:UIControlStateNormal];
+            //            [weakSelf.tableView beginRefreshing];
+        };
+        
+        _filterPicker.tagNames = textArr;
+        
+    }
+    
+    return _filterPicker;
+}
+
+- (void)pickerChoose:(NSInteger)index
+{
+    [self.tableView beginRefreshing];
+}
+
+-(DetailSugarView *)headView
+{
+    if (!_headView) {
+        _headView = [[DetailSugarView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kHeight(260))];
+        
+    }
+    return _headView;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = [LangSwitcher switchLang:@"红包详情" key:nil];
     // Do any additional setup after loading the view.
     [self.view addSubview:self.tableView];
+    self.tableView.tableHeaderView = self.headView;
+
+    CoinWeakSelf;
+    self.headView.clickBlock = ^{
+        [weakSelf dismissViewControllerAnimated:YES completion:nil];
+    };
+    self.headView.shareBlock  = ^{
+       
+        if ([weakSelf.model.receivedNum floatValue] == [weakSelf.model.totalCount floatValue]) {
+            return ;
+        }
+        SendModel *model = weakSelf.model;
+        RedEnvelopeShoreVC *share = [RedEnvelopeShoreVC new];
+        share.code = model.code;
+        share.content = model.greeting;
+        [weakSelf presentViewController:share animated:YES completion:nil];
+    };
     [self LoadData];
 }
 
@@ -47,85 +119,45 @@
 
     CoinWeakSelf;
 
-    TLPageDataHelper *helper = [[TLPageDataHelper alloc] init];
+    TLNetworking *helper = [[TLNetworking alloc] init];
     if (![TLUser user].isLogin) {
         return;
     }
-    helper.code = @"623005";
+    helper.code = @"623006";
     helper.parameters[@"userId"] = [TLUser user].userId;
-    helper.isList = NO;
-    helper.isCurrency = YES;
-    helper.tableView = self.tableView;
-    [helper modelClass:[SendModel class]];
+    helper.parameters[@"code"] = self.code;
+    [helper postWithSuccess:^(id responseObject) {
+        
+       
+        
+        SendModel *model = [SendModel mj_objectWithKeyValues:responseObject[@"data"]];
+        if ([model.isReceived isEqualToString:@"1"]) {
+            self.headView.shareBtn.hidden = YES;
 
-    [self.tableView addRefreshAction:^{
+        }else{
+            self.headView.shareBtn.hidden = NO;
 
-        [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
+            }
+        self.headView.total.text = [NSString stringWithFormat:@"%@/%@",model.receivedNum,model.sendNum];
+        if (model.receivedCount.length >5) {
+              self.headView.alltotal.text = [NSString stringWithFormat:@"%.4f/%@",[model.receivedCount floatValue],model.totalCount];
+        }else{
+            self.headView.alltotal.text = [NSString stringWithFormat:@"%@/%@",model.receivedCount,model.totalCount];
+        }
+      
+        self.model = model;
+        self.tableView.send = model.receiverList;
+        [self.tableView reloadData_tl];
+    } failure:^(NSError *error) {
+        
+    }
+     ];
 
-            //去除没有的币种
-            NSLog(@" ==== %@",objs);
-
-            NSMutableArray <SendModel *> *shouldDisplayCoins = [[NSMutableArray alloc] init];
-            [objs enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-
-                SendModel *getModel = (SendModel *)obj;
-                [shouldDisplayCoins addObject:getModel];
-
-            }];
-
-            //
-            weakSelf.send = shouldDisplayCoins;
-            weakSelf.tableView.send = shouldDisplayCoins;
-            [weakSelf.tableView reloadData_tl];
-
-        } failure:^(NSError *error) {
-
-
-        }];
-
-
-    }];
-
-    [self.tableView addLoadMoreAction:^{
-        helper.parameters[@"userId"] = [TLUser user].userId;
-        helper.parameters[@"token"] = [TLUser user].token;
-        [helper loadMore:^(NSMutableArray *objs, BOOL stillHave) {
-            NSLog(@" ==== %@",objs);
-            //去除没有的币种
-
-
-            NSMutableArray <SendModel *> *shouldDisplayCoins = [[NSMutableArray alloc] init];
-            [objs enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-
-                SendModel *send = (SendModel *)obj;
-                //                if ([[CoinUtil shouldDisplayCoinArray] indexOfObject:currencyModel.currency ] != NSNotFound ) {
-
-                [shouldDisplayCoins addObject:send];
-                //                }
-
-            }];
-
-            //
-            weakSelf.send = shouldDisplayCoins;
-            weakSelf.tableView.send = shouldDisplayCoins;
-            [weakSelf.tableView reloadData_tl];
-
-        } failure:^(NSError *error) {
-
-
-        }];
-
-    }];
-
-    [self.tableView beginRefreshing];
+   
 }
 -(void)refreshTableView:(TLTableView *)refreshTableview didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    SendModel *model = self.send[indexPath.row];
-    RedEnvelopeShoreVC *share = [RedEnvelopeShoreVC new];
-    share.code = model.code;
-    share.content = model.greeting;
-    [self presentViewController:share animated:YES completion:nil];
+   
    
 }
 
