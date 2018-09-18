@@ -230,7 +230,7 @@
     UILabel *introduceLabel1 = [UILabel labelWithFrame:CGRectMake(kWidth(20) + 20, kHeight(58), SCREEN_WIDTH - kWidth(120) - 20, 0) textAligment:(NSTextAlignmentLeft) backgroundColor:kClearColor font:FONT(14) textColor:kHexColor(@"#FFFFFF")];
 
     // 设置Label要显示的text
-    [introduceLabel1  setAttributedText:[self ReturnsTheDistanceBetween:[LangSwitcher switchLang:@"每邀请1位好友注册并登陆后获得奖励10积分" key:nil]]];
+    [introduceLabel1  setAttributedText:[self ReturnsTheDistanceBetween:[LangSwitcher switchLang:@"新用户注册并登录可获得10积分奖励" key:nil]]];
     introduceLabel1.numberOfLines = 0;
     [introduceLabel1 sizeToFit];
     [scrollView addSubview:introduceLabel1];
@@ -241,7 +241,7 @@
     [scrollView addSubview:numberLabel2];
 
     UILabel *introduceLabel2 = [UILabel labelWithFrame:CGRectMake(kWidth(20) + 20, introduceLabel1.yy + kHeight(10), SCREEN_WIDTH - kWidth(120) - 20, 0) textAligment:(NSTextAlignmentLeft) backgroundColor:kClearColor font:FONT(14) textColor:kHexColor(@"#FFFFFF")];
-    [introduceLabel2  setAttributedText:[self ReturnsTheDistanceBetween:[LangSwitcher switchLang:@"每邀请1位好友注册并登陆后获得好友币加宝收益7%额外奖励。" key:nil]]];
+    [introduceLabel2  setAttributedText:[self ReturnsTheDistanceBetween:[LangSwitcher switchLang:@"每邀请1位好友注册并登录后获得好友币加宝收益7%额外奖励。（有效期3个月）" key:nil]]];
     introduceLabel2.numberOfLines = 0;
     [introduceLabel2 sizeToFit];
     [scrollView addSubview:introduceLabel2];
@@ -269,7 +269,7 @@
 
     UILabel *introduceLabel4 = [UILabel labelWithFrame:CGRectMake(kWidth(20) + 20, introduceLabel3.yy + kHeight(10), SCREEN_WIDTH - kWidth(120) - 20, 0) textAligment:(NSTextAlignmentLeft) backgroundColor:kClearColor font:FONT(14) textColor:kHexColor(@"#FFFFFF")];
 //    introduceLabel4.text = [LangSwitcher switchLang:@"每一位用户成功注册并登陆后可获得购买加宝收益每次翻倍奖励。" key:nil];
-    [introduceLabel4  setAttributedText:[self ReturnsTheDistanceBetween:[LangSwitcher switchLang:@"每一位用户成功注册并登陆后可获得购买加宝收益每次翻倍奖励。" key:nil]]];
+    [introduceLabel4  setAttributedText:[self ReturnsTheDistanceBetween:[LangSwitcher switchLang:@"每一位用户成功注册并登录后可获得购买加宝收益首次翻倍奖励。" key:nil]]];
     introduceLabel4.numberOfLines = 0;
     [introduceLabel4 sizeToFit];
     [scrollView addSubview:introduceLabel4];

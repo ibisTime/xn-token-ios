@@ -23,7 +23,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = kClearColor;
-    self.title = [LangSwitcher switchLang:@"抽奖" key:nil];
+    self.title = [LangSwitcher switchLang:@"积分抽奖" key:nil];
 
     [self initWebView];
     // Do any additional setup after loading the view.

@@ -54,7 +54,7 @@
 -(UIButton *)pasteButton
 {
     if (!_pasteButton) {
-        _pasteButton = [UIButton buttonWithTitle:@"复制" titleColor:kHexColor(@"#333333") backgroundColor:kClearColor titleFont:16];
+        _pasteButton = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"复制" key:nil] titleColor:kHexColor(@"#333333") backgroundColor:kClearColor titleFont:16];
         _pasteButton.frame = CGRectMake(kWidth(20), _informationLabel.frame.size.height + kHeight(70), SCREEN_WIDTH - kWidth(90), kHeight(48));
         kViewBorderRadius(_pasteButton, 4, 1, kHexColor(@"#DEE0E5"));
     }

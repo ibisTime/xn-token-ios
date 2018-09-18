@@ -122,7 +122,7 @@
 {
     UIAlertController *actionSheetController = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
 
-    UIAlertAction *showAllInfoAction = [UIAlertAction actionWithTitle:@"邀请有礼说明" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction *showAllInfoAction = [UIAlertAction actionWithTitle:[LangSwitcher switchLang:@"邀请有礼说明" key:nil] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         PoliteInstructionsVC *vc = [PoliteInstructionsVC new];
         [self.navigationController pushViewController:vc animated:YES];
 
