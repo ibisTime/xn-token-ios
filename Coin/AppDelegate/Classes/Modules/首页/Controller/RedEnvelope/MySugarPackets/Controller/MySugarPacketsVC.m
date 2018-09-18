@@ -41,7 +41,7 @@
     if (!_backbButton) {
         _backbButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
         _backbButton.frame = CGRectMake(0, 0, 44, 44);
-        [_backbButton setImage:kImage(@"返回") forState:(UIControlStateNormal)];
+        [_backbButton setImage:kImage(@"返回1-1") forState:(UIControlStateNormal)];
         [_backbButton setImageEdgeInsets:UIEdgeInsetsMake(0, -20, 0, 0)];
 
         [_backbButton addTarget:self action:@selector(buttonMethodClick) forControlEvents:(UIControlEventTouchUpInside)];

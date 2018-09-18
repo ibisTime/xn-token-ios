@@ -34,6 +34,7 @@
 
 @implementation RedEnvelopeVC
 
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -75,13 +76,6 @@
     titleButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
     titleButton.titleLabel.font = Font(16);
     [titleButton setTitleColor:kTextBlack forState:(UIControlStateNormal)];
-//    [titleButton addTarget:self action:@selector(backbuttonClick) forControlEvents:(UIControlEventTouchUpInside)];
-//     *tit = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextBlack font:16];
-//
-//    tit.frame = CGRectMake(kScreenWidth/2-60, 20, 120, 20);
-//    tit.text = [LangSwitcher switchLang:@"Theia红包" key:nil];
-
-   
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:_backButton];
 
     UIButton *_recordButton = [UIButton buttonWithType:(UIButtonTypeCustom)];

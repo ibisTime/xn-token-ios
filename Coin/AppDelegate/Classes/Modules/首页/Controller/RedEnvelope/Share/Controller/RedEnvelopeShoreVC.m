@@ -56,7 +56,7 @@
     label.font = [UIFont systemFontOfSize:18];
     self.backbButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
     self.backbButton.frame = CGRectMake(15, kStatusBarHeight+5, 44, 44);
-    [self.backbButton setImage:kImage(@"返回") forState:(UIControlStateNormal)];
+    [self.backbButton setImage:kImage(@"返回1-1") forState:(UIControlStateNormal)];
 //    [self.backbButton setImageEdgeInsets:UIEdgeInsetsMake(0, -20, 0, 0)];
     
     [self.backbButton addTarget:self action:@selector(buttonMethodClick) forControlEvents:(UIControlEventTouchUpInside)];

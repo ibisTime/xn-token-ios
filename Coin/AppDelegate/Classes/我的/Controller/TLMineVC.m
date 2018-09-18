@@ -55,7 +55,7 @@
 
 #import "IntegralVC.h"
 
-@interface TLMineVC ()<MineHeaderSeletedDelegate, UINavigationControllerDelegate>
+@interface TLMineVC ()<MineHeaderSeletedDelegate, UINavigationControllerDelegate,ZDKHelpCenterConversationsUIDelegate,ZDKHelpCenterDelegate>
 
 //@property (nonatomic, strong) FBKVOController *chatKVOCtrl;   czy
 
@@ -342,27 +342,25 @@
             return ;
         }
 
-//        ZDKHelpCenterUiConfiguration  *  hcConfig  =  [ ZDKHelpCenterUiConfiguration  new ];
-//        [ hcConfig setHideContactSupport :YES ];
-//
-//        UIViewController<ZDKHelpCenterDelegate>*helpCenter  =  [ ZDKHelpCenterUi  buildHelpCenterOverviewWithConfigs :@[hcConfig]];
-//        helpCenter.title = [LangSwitcher switchLang:@"帮助中心" key:nil];
-//        helpCenter.uiDelegate = self;
+        ZDKHelpCenterUiConfiguration  *  hcConfig  =  [ ZDKHelpCenterUiConfiguration  new ];
+        [ hcConfig setHideContactSupport :YES ];
 
-//        [self.navigationController setNavigationBarHidden:YES animated:YES];
+        UIViewController<ZDKHelpCenterDelegate>*helpCenter  =  [ ZDKHelpCenterUi  buildHelpCenterOverviewWithConfigs :@[hcConfig]];
+        helpCenter.title = [LangSwitcher switchLang:@"帮助中心" key:nil];
+        helpCenter.uiDelegate = self;
 
-//        [ZDKUiConfiguration setNavBarConversationsUIType：ZDKNavBarConversationsUITypeNone];
+        [self.navigationController setNavigationBarHidden:YES animated:YES];
+
         
 
 //         Set the theme properties
 //        theme.primaryColor = [UIColor colorWithRed:34.0f/255.0f green:34.0f/255.0f blue:48.0f/255.0f alpha:1.0f];
-//
-////         Apply the change
+
+//         Apply the change
 //        [theme apply];
-//        ZDKHelpCenterUi.buildHelpCenterOverview.uiDelegate
 
         
-//        [ self.navigationController pushViewController :helpCenter  animated :YES ];
+        [ self.navigationController pushViewController :helpCenter  animated :YES ];
     };
     //关于我们
     MineModel *abountUs = [MineModel new];
@@ -414,16 +412,16 @@
     }
  
 }
-//-(ZDKContactUsVisibility)active {
-//    return ZDKContactUsVisibilityArticleListOnly;
-//}
-//
-//
-//- (ZDKNavBarConversationsUIType) navBarConversationsUIType
-//{
-//
-//    return ZDKNavBarConversationsUITypeNone;
-//}
+-(ZDKContactUsVisibility)active {
+    return ZDKContactUsVisibilityArticleListOnly;
+}
+
+
+- (ZDKNavBarConversationsUIType) navBarConversationsUIType
+{
+
+    return ZDKNavBarConversationsUITypeNone;
+}
 - (void)initTableView {
     
     self.tableView = [[MineTableView alloc] initWithFrame:CGRectMake(15, self.headerView.height, kScreenWidth-30, kScreenHeight - kTabBarHeight - self.headerView.height) style:UITableViewStyleGrouped];

@@ -58,7 +58,7 @@
 -(void)setSendModel:(NSDictionary *)sendModel
 {
     //    NSLog(@"%@",getModel);
-    nameLabel.text = [NSString stringWithFormat:@"%@",[TLUser user].nickname];
+    nameLabel.text = [NSString stringWithFormat:@"%@",sendModel[@"userNickname"]];
     timeLabel.text = [sendModel[@"createDatetime"] convertRedDate] ;
     
     

@@ -21,6 +21,26 @@
 @end
 
 @implementation TLRedintroduceVC
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    //    self.navigationController.navigationBarHidden = YES;
+    
+    self.navigationController.navigationBar.translucent = YES;
+    [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
+    
+    
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    self.navigationController.navigationBar.translucent = NO;
+    [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setShadowImage:nil];
+}
 
 -(RedIntroduce *)headView
 {
@@ -48,7 +68,35 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.view.backgroundColor =  kWhiteColor;
     self.title = [LangSwitcher switchLang:@"Theia红包说明" key:nil];
+    UIButton *_backButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
+    _backButton.frame = CGRectMake(10, 20, 0, 44);
+    [_backButton setTitle:[LangSwitcher switchLang:@"" key:nil] forState:(UIControlStateNormal)];
+    _backButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+    _backButton.titleLabel.font = Font(14);
+    [_backButton setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
+    [_backButton setImage:kImage(@"返回1-1") forState:UIControlStateNormal];
+    [_backButton addTarget:self action:@selector(backbuttonClick) forControlEvents:(UIControlEventTouchUpInside)];
+    UIButton *titleButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
+    titleButton.frame = CGRectMake(20,20, 120, 44);
+    [titleButton setTitle:[LangSwitcher switchLang:@"Theia红包说明" key:nil] forState:(UIControlStateNormal)];
+    titleButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+    titleButton.titleLabel.font = Font(16);
+    [titleButton setTitleColor:kTextBlack forState:(UIControlStateNormal)];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:_backButton];
+    
+    UILabel *titleText = [[UILabel alloc] initWithFrame: CGRectMake(kScreenWidth/2-60, 0, 120, 50)];
+    titleText.textAlignment = NSTextAlignmentCenter;
+    titleText.backgroundColor = [UIColor clearColor];
+    
+    titleText.textColor=kTextColor;
+    
+    [titleText setFont:[UIFont systemFontOfSize:17.0]];
+    
+    [titleText setText:@"Theia红包说明"];
+    
+    self.navigationItem.titleView=titleText;
     [self.view addSubview:self.tableView];
     self.tableView.tableHeaderView = self.headView;
     
@@ -75,26 +123,23 @@
     }];
 }
 
+- (void)backbuttonClick
+{
+    [self.navigationController popViewControllerAnimated:YES];
+    
+}
 
 -(void)refreshTableView:(TLTableView *)refreshTableview didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
     RedModel *model = self.redModels[indexPath.row];
      H5DrtailVC *detail = [[H5DrtailVC alloc] init];
-    detail.h5 = model.answer;
+    detail.model = model;
 //    [detail.contentWeb loadHTMLString:model.answer baseURL:nil];
 //    detail.name = model.question;
     [self.navigationController pushViewController:detail animated:YES];
     
 }
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

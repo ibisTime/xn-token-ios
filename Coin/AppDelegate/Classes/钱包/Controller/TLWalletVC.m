@@ -117,6 +117,7 @@
     NSString *word;
     NSString *btcadd;
     NSString *pwd;
+    [self getMyCurrencyList];
 
     if ([dataBase.dataBase open]) {
         NSString *sql = [NSString stringWithFormat:@"SELECT Mnemonics,btcaddress,PwdKey  from THAUser where userId = '%@'",[TLUser user].userId];
@@ -743,22 +744,34 @@
             self.tableView.isLocal = NO;
         self.addButton.hidden = YES;
         CGFloat fx = kDevice_Is_iPhoneX == YES ?36 :17+5;
-//        if (kDevice_Is_iPhoneX) {
-//            fx = self.isClear == YES ?fx-10 : fx;
-//
-//        }else{
-//
-//
-//        }
+        if (kDevice_Is_iPhoneX) {
+            fx = self.isClear == YES ?fx-10 : fx+15;
+
+        }else{
+
+
+        }
+        
+        
 
         CGFloat h = self.isClear == YES ? 300 : 315;
         if (kDevice_Is_iPhoneX) {
             h += 20;
         }
-        self.headerView.frame = CGRectMake(0, 0, kScreenWidth, kHeight(h));
+        if (self.isClear == YES) {
+            self.headerView.frame = CGRectMake(-30, 0, kScreenWidth, kHeight(h));
 
-        self.tableView.frame = CGRectMake(0, kStatusBarHeight, kScreenWidth, kScreenHeight-kStatusBarHeight);
-       
+        }else{
+            self.headerView.frame = CGRectMake(0, 0, kScreenWidth, kHeight(h));
+
+        }
+
+        if (self.isClear == YES) {
+            self.tableView.frame = CGRectMake(0, 5, kScreenWidth, kScreenHeight-kStatusBarHeight );
+        }else{
+            self.tableView.frame = CGRectMake(0, kStatusBarHeight, kScreenWidth, kScreenHeight-kStatusBarHeight );
+            
+        }
         [self.leftButton mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.view.mas_left).offset(15);
             make.bottom.equalTo(self.headerView.mas_bottom).offset(-fx);
@@ -777,7 +790,7 @@
         }];
         CGFloat f4 = self.isClear == YES ?320-30-15 : 350-30-30;
         if (kDevice_Is_iPhoneX) {
-            f4 += 10;
+            f4 += 17;
         }
         self.tableView.hidden = NO;
 
@@ -844,7 +857,7 @@
             if (self.isClear) {
 
                 if (kDevice_Is_iPhoneX) {
-                    
+                    fx -= 20;
                 }else{
                     fx = kDevice_Is_iPhoneX == YES ?37 :20;
                 }
@@ -853,7 +866,13 @@
 
             }
             self.currentTableView.frame = CGRectMake(0, 5, kScreenWidth, kScreenHeight );
-            self.tableView.frame = CGRectMake(0, kStatusBarHeight, kScreenWidth, kScreenHeight-kStatusBarHeight );
+            if (self.isClear == YES) {
+                  self.tableView.frame = CGRectMake(0, 5, kScreenWidth, kScreenHeight-kStatusBarHeight );
+            }else{
+                 self.tableView.frame = CGRectMake(0, kStatusBarHeight, kScreenWidth, kScreenHeight-kStatusBarHeight );
+                
+            }
+          
             [self.leftButton mas_remakeConstraints:^(MASConstraintMaker *make) {
                 make.left.equalTo(self.view.mas_left).offset(15);
                 make.bottom.equalTo(self.headerView.mas_bottom).offset(-fx-2);
@@ -874,7 +893,11 @@
             self.titleView.hidden = NO;
 
             CGFloat f4 = self.isClear == YES ?350-30-15 : 350-30-30+5;
-            
+            if (kDevice_Is_iPhoneX) {
+                if (self.isClear == YES) {
+                    f4 =350-30-15-15;
+                }
+            }
             [self.titleView mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.top.equalTo(@(kHeight(f4)));
                 make.right.equalTo(@-15);
@@ -952,7 +975,7 @@
         self.homeView.backgroundColor = kWhiteColor;
         if (kDevice_Is_iPhoneX&& self.isClear == YES) {
             [self.homeView mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.top.equalTo(self.headerView.mas_bottom).offset(-30);
+                make.top.equalTo(self.headerView.mas_bottom).offset(-30-30);
                 make.right.equalTo(@-15);
                 make.left.equalTo(@15);
                 make.bottom.equalTo(self.view.mas_bottom).offset(0);

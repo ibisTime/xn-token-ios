@@ -42,7 +42,15 @@
         make.right.equalTo(self.mas_right).offset(-15);
         make.width.height.equalTo(@15);
     }];
-    
+    UIView *line = [UIView new];
+    line.backgroundColor = kLineColor;
+    [self addSubview:line];
+    [line mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(self.mas_bottom);
+        make.left.equalTo(self.mas_left);
+        make.right.equalTo(self.mas_right);
+        make.height.equalTo(@1);
+    }];
 }
 
 -(void)setModel:(RedModel *)model

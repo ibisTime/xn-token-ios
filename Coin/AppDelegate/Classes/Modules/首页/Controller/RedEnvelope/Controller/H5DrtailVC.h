@@ -7,9 +7,11 @@
 //
 
 #import "TLBaseVC.h"
-
+#import "RedModel.h"
 @interface H5DrtailVC : TLBaseVC
 @property (nonatomic , strong)UIWebView *contentWeb;
 @property (nonatomic , copy)NSString *h5;
+@property (nonatomic , strong)RedModel *model;
+
 
 @end

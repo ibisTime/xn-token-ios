@@ -274,6 +274,7 @@
                 [shouldDisplayCoins addObject:getModel];
 
             }];
+            weakSelf.tableView.isClose = weakSelf.isClose;
 
             //
             weakSelf.getthe = shouldDisplayCoins;
@@ -315,9 +316,11 @@
                 //                }
 
             }];
+            weakSelf.tableView.isClose = weakSelf.isClose;
 
             //
             weakSelf.getthe = shouldDisplayCoins;
+
             weakSelf.tableView.getthe = shouldDisplayCoins;
             [weakSelf.tableView reloadData_tl];
 
@@ -336,11 +339,13 @@
 //    [self dismissViewControllerAnimated:YES completion:nil];
     SendVC *send = [[SendVC alloc] init];
     if (self.isRecevied == YES) {
+        
         send.code = self.getthe[indexPath.row].redPacketInfo[@"code"];
-
+        send.getModel = self.getthe[indexPath.row];
     }else{
         send.code = self.sends[indexPath.row].code;
-
+        send.sen = self.sends[indexPath.row];
+        send.isSend = YES;
     }
     [self presentViewController:send animated:YES completion:nil];
     

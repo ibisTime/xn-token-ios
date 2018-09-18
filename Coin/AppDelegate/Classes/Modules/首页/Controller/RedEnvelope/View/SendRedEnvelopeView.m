@@ -303,7 +303,7 @@
 
         UIButton *IntoButton = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"塞进红包" key:nil] titleColor:kWhiteColor backgroundColor:kHexColor(@"#F35641") titleFont:16];
         kViewRadius(IntoButton, 5);
-        IntoButton.frame = CGRectMake(kWidth(15), kHeight(540), kScreenWidth-60, kHeight(48));
+        IntoButton.frame = CGRectMake(kWidth(15), kHeight(540), kScreenWidth-30, kHeight(48));
         IntoButton.tag = 102;
         self.IntoButton = IntoButton;
         [IntoButton addTarget:self action:@selector(ButtonClick:) forControlEvents:(UIControlEventTouchUpInside)];
@@ -335,11 +335,14 @@
 //            
 //        }];
         UILabel *bottomLab = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor3 font:11];
-        
-        bottomLab.text = [LangSwitcher switchLang:@"如24小时未领取红包,则红包退回原地址" key:nil];
-        
-        bottomLab.frame = CGRectMake(kWidth(84),kScreenHeight-kTabBarHeight , kScreenWidth-kWidth(84*2), kHeight(16));
         [self addSubview:bottomLab];
+
+        bottomLab.text = [LangSwitcher switchLang:@"如24小时未领取红包,则红包退回原地址" key:nil];
+        [bottomLab mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.equalTo(self.mas_centerX);
+            make.top.equalTo(@(IntoButton.yy+20));
+        }];
+//        bottomLab.frame = CGRectMake(kWidth(84),kScreenHeight-kTabBarHeight , kScreenWidth-kWidth(84*2), kHeight(16));
     }
     return self;
 }

@@ -14,7 +14,7 @@
 @property (nonatomic ,strong) UILabel *total;
 @property (nonatomic ,strong) UILabel *alltotal;
 @property (nonatomic ,strong) UIButton *shareBtn;
-
+@property (nonatomic ,strong) UIImageView *back;
 @property (nonatomic ,copy) void (^clickBlock) ();
 
 @property (nonatomic ,copy) void (^shareBlock) ();

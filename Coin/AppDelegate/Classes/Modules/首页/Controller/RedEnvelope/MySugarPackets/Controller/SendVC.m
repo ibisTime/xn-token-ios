@@ -13,6 +13,9 @@
 #import "RedEnvelopeShoreVC.h"
 #import "FilterView.h"
 #import "DetailSugarView.h"
+#import <SDWebImage/UIImageView+WebCache.h>
+#import "NSString+Extension.h"
+
 @interface SendVC ()<RefreshDelegate>
 @property (nonatomic, strong) FilterView *filterPicker;
 @property (nonatomic , strong)DetailSugarView *headView;
@@ -109,6 +112,14 @@
         share.content = model.greeting;
         [weakSelf presentViewController:share animated:YES completion:nil];
     };
+    if (self.isSend == YES) {
+        NSURL *u = [NSURL URLWithString:[self.sen.sendUserPhoto convertImageUrl]];
+        [self.headView.back sd_setImageWithURL:u placeholderImage:kImage(@"头像")];
+    }else{
+        NSURL *u = [NSURL URLWithString:[[TLUser user].photo convertImageUrl]];
+        [self.headView.back sd_setImageWithURL:u placeholderImage:kImage(@"头像")];
+        
+    }
     [self LoadData];
 }
 

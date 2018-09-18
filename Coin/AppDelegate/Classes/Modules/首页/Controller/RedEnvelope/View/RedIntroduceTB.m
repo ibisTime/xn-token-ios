@@ -79,7 +79,7 @@ static NSString *identifierCell = @"RedintrodeceVC";
     
     UILabel *lab = [UILabel labelWithBackgroundColor:kBackgroundColor textColor:kTextColor font:15];
     lab.text = [LangSwitcher switchLang:@"常见问题帮助" key:nil];
-    lab.frame = CGRectMake(15, 5, kScreenWidth, 30);
+    lab.frame = CGRectMake(15, 0, kScreenWidth, 30);
     UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 30)];
     [v addSubview:lab];
     return v;

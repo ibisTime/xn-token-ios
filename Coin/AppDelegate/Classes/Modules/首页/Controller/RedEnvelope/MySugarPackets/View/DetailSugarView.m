@@ -26,14 +26,15 @@
 {
     UIImageView *back = [[UIImageView alloc] init];
     back.userInteractionEnabled = YES;
+    
     back.contentMode = UIViewContentModeScaleToFill;
     back.image = kImage(@"Rectangle 2");
     [self addSubview:back];
     UIImageView *icon = [[UIImageView alloc] init];
     icon.contentMode = UIViewContentModeScaleToFill;
     //     icon sd_S
-    icon.image = kImage(@"头像");
-    
+//    icon.image = kImage(@"头像");
+    self.back = icon;
     [self addSubview:icon];
     
     UILabel *nike =[UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:14];

@@ -304,7 +304,6 @@
 		B87BF1D02114251800DD5C05 /* FMDBMigrationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B87BF1CF2114251700DD5C05 /* FMDBMigrationManager.m */; };
 		B87BF1D3211426C300DD5C05 /* Migration.m in Sources */ = {isa = PBXBuildFile; fileRef = B87BF1D1211426C200DD5C05 /* Migration.m */; };
 		B887819920E366BC00879330 /* UIImageView+RotateImgV.m in Sources */ = {isa = PBXBuildFile; fileRef = B887819720E366BC00879330 /* UIImageView+RotateImgV.m */; };
-		B8890042214CB5070081AC4F /* QQManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B8890041214CB5070081AC4F /* QQManager.m */; };
 		B8890045214CD61A0081AC4F /* WBManger.m in Sources */ = {isa = PBXBuildFile; fileRef = B8890044214CD61A0081AC4F /* WBManger.m */; };
 		B88B092120C8E29D005C2D2F /* JoinMineVc.m in Sources */ = {isa = PBXBuildFile; fileRef = B88B092020C8E29D005C2D2F /* JoinMineVc.m */; };
 		B88B092420C8E34F005C2D2F /* JoinMineTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = B88B092320C8E34F005C2D2F /* JoinMineTableView.m */; };
@@ -1107,8 +1106,6 @@
 		B87BF1D2211426C200DD5C05 /* Migration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Migration.h; sourceTree = "<group>"; };
 		B887819720E366BC00879330 /* UIImageView+RotateImgV.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+RotateImgV.m"; sourceTree = "<group>"; };
 		B887819820E366BC00879330 /* UIImageView+RotateImgV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+RotateImgV.h"; sourceTree = "<group>"; };
-		B8890040214CB5070081AC4F /* QQManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = QQManager.h; path = manger/QQManager.h; sourceTree = "<group>"; };
-		B8890041214CB5070081AC4F /* QQManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = QQManager.m; path = manger/QQManager.m; sourceTree = "<group>"; };
 		B8890043214CD61A0081AC4F /* WBManger.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WBManger.h; sourceTree = "<group>"; };
 		B8890044214CD61A0081AC4F /* WBManger.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WBManger.m; sourceTree = "<group>"; };
 		B88B091F20C8E29D005C2D2F /* JoinMineVc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JoinMineVc.h; sourceTree = "<group>"; };
@@ -1756,8 +1753,6 @@
 		211DE63B1FB58B4B002FCF3D /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				B8890040214CB5070081AC4F /* QQManager.h */,
-				B8890041214CB5070081AC4F /* QQManager.m */,
 				B8086409211EA17C00755158 /* DataBtc */,
 				B860C8AE20CE194700BD29F8 /* DataBase */,
 				4CE70FD920C82B8A00F0C803 /* Crypto */,
@@ -2802,7 +2797,6 @@
 			isa = PBXGroup;
 			children = (
 				B8A483FE214FC02800450819 /* 未标题-1.png */,
-				B889003E214CB3810081AC4F /* TencentOpenAPI.framework */,
 				7A27265B212BFFA70067E3CD /* WechatSDK1.8.2 */,
 				215421CF1FD708AC00FDD25C /* Coin.entitlements */,
 				216F5AEE206CC6F600F2C832 /* AppDelegate */,
@@ -3433,7 +3427,7 @@
 					2EA584B31FA813C900C7106C = {
 						CreatedOnToolsVersion = 9.0.1;
 						LastSwiftMigration = 0940;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 0;
@@ -3822,7 +3816,6 @@
 				B808650A211EA17D00755158 /* BTCOpcode.m in Sources */,
 				211A34DB1FB4083300FEB71F /* MineTableView.m in Sources */,
 				216F5B49206CDA3700F2C832 /* DetailWebView.m in Sources */,
-				B8890042214CB5070081AC4F /* QQManager.m in Sources */,
 				211A34E11FB4247800FEB71F /* MineModel.m in Sources */,
 				B8D938D82116EF5900B2AA88 /* imageCell.m in Sources */,
 				B8DDF882211D29EE0058D19D /* TLMakeMoney.m in Sources */,
@@ -4145,9 +4138,9 @@
 				CLANG_WARN_STRICT_PROTOTYPES = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = VQPS9BLJYN;
+				DEVELOPMENT_TEAM = 3ZCW993X44;
 				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = NO;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -4181,8 +4174,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.cdkj.tha;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "f0bdfda8-16f4-44bb-9c04-c57f281a59dc";
+				PROVISIONING_PROFILE_SPECIFIER = theia;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -4201,9 +4194,9 @@
 				CLANG_WARN_STRICT_PROTOTYPES = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = VQPS9BLJYN;
+				DEVELOPMENT_TEAM = 3ZCW993X44;
 				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = NO;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -4237,8 +4230,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.cdkj.tha;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "f0bdfda8-16f4-44bb-9c04-c57f281a59dc";
+				PROVISIONING_PROFILE_SPECIFIER = theia;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
