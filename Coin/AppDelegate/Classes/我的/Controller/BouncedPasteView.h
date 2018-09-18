@@ -14,4 +14,6 @@
 
 @property (nonatomic , strong)UIButton *pasteButton;
 
+@property (nonatomic , copy)NSString *code;
+
 @end

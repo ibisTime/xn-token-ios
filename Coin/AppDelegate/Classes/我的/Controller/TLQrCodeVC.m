@@ -13,6 +13,8 @@
 #import <QuartzCore/QuartzCore.h>
 #import "TLWBManger.h"
 #import "TLWXManager.h"
+#import "BouncedPasteView.h"
+#import "ZJAnimationPopView.h"
 @interface TLQrCodeVC ()
 {
     NSString *address ;
@@ -25,6 +27,7 @@
 
 @property (nonatomic, strong) UIImageView *bgImage;
 
+@property (nonatomic , strong)ZJAnimationPopView *popView;
 
 @property (nonatomic, strong) UIButton *backButton;
 
@@ -32,9 +35,88 @@
 
 @property (nonatomic, copy) NSString *h5String;
 
+@property (nonatomic , strong)BouncedPasteView *bouncedView;
+
 @end
 
 @implementation TLQrCodeVC
+
+
+-(BouncedPasteView *)bouncedView
+{
+    if (!_bouncedView) {
+        _bouncedView = [[BouncedPasteView alloc]initWithFrame:CGRectMake(kWidth(25), SCREEN_HEIGHT + kNavigationBarHeight , SCREEN_WIDTH - kWidth(50), _bouncedView.pasteButton.yy + kHeight(30))];
+        kViewRadius(_bouncedView, 4);
+        [_bouncedView.pasteButton addTarget:self action:@selector(pasteButtonClick) forControlEvents:(UIControlEventTouchUpInside)];
+        
+//        _bouncedView.informationLabel.attributedText = [self ReturnsTheDistanceBetween:[NSString stringWithFormat:@"【Theia是全球首款跨链生态钱包，同时支持BTC、ETH、USDT等多币数字货币储存。注册即送10积分，千万BTC/ETH/WAN矿山，等您来挖】%@",address1]];
+//        _bouncedView.informationLabel.text = [self ReturnsTheDistanceBetween:[NSString stringWithFormat:@"【Theia是全球首款跨链生态钱包，同时支持BTC、ETH、USDT等多币数字货币储存。注册即送10积分，千万BTC/ETH/WAN矿山，等您来挖】%@",address1]];
+//        _bouncedView.informationLabel.numberOfLines = 0;
+//        _bouncedView.frame = CGRectMake(kWidth(25), SCREEN_HEIGHT + kNavigationBarHeight , SCREEN_WIDTH - kWidth(50), _bouncedView.pasteButton.yy + kHeight(30));
+//        [_bouncedView.informationLabel sizeToFit];
+
+    }
+    return _bouncedView;
+}
+
+
+
+#pragma mark 显示弹框
+- (void)showPopAnimationWithAnimationStyle:(NSInteger)style
+{
+    ZJAnimationPopStyle popStyle = (style == 8) ? ZJAnimationPopStyleCardDropFromLeft : (ZJAnimationPopStyle)style;
+    ZJAnimationDismissStyle dismissStyle = (ZJAnimationDismissStyle)style;
+    // 1.初始化
+    _popView = [[ZJAnimationPopView alloc] initWithCustomView:_bouncedView popStyle:popStyle dismissStyle:dismissStyle];
+
+    // 2.设置属性，可不设置使用默认值，见注解
+    // 2.1 显示时点击背景是否移除弹框
+    _popView.isClickBGDismiss = ![_bouncedView isKindOfClass:[BouncedPasteView class]];
+//    移除
+    _popView.isClickBGDismiss = YES;
+    // 2.2 显示时背景的透明度
+    //    popView.popBGAlpha = 0.5f;
+    // 2.3 显示时是否监听屏幕旋转
+    _popView.isObserverOrientationChange = YES;
+    // 2.4 显示时动画时长
+    //    popView.popAnimationDuration = 0.8f;
+    // 2.5 移除时动画时长
+    //    popView.dismissAnimationDuration = 0.8f;
+
+    // 2.6 显示完成回调
+    _popView.popComplete = ^{
+        NSLog(@"显示完成");
+    };
+    // 2.7 移除完成回调
+    _popView.dismissComplete = ^{
+        NSLog(@"移除完成");
+    };
+    // 4.显示弹框
+    [_popView pop];
+}
+
+//打开微信,去粘贴
+-(void)pasteButtonClick
+{
+    [TLAlert alertWithSucces:[LangSwitcher switchLang:@"复制成功!" key:nil]];
+    UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+    NSString *lang;
+    LangType type = [LangSwitcher currentLangType];
+    if (type == LangTypeSimple || type == LangTypeTraditional) {
+        lang = @"ZH_CN";
+    }else if (type == LangTypeKorean)
+    {
+        lang = @"KO";
+    }else{
+        lang = @"EN";
+
+    }
+    //http://m.thadev.hichengdai.com/user/register.html?inviteCode=U201807030441369491006&lang=ZH_CN
+    NSString * address = [NSString stringWithFormat:@"%@/user/register.html?inviteCode=%@&lang=%@",self.h5String,[TLUser user].secretUserId,lang];
+    pasteboard.string = address;
+}
+
+
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -89,7 +171,7 @@
     self.navigationItem.titleView = self.nameLable;
 
     self.view.backgroundColor  =[UIColor whiteColor];
-
+    [self.view addSubview:self.bouncedView];
     // Do any additional setup after loading the view.
 }
 
@@ -105,6 +187,8 @@
     
     [http postWithSuccess:^(id responseObject) {
         self.h5String = responseObject[@"data"][@"cvalue"];
+
+
         [self initUI];
         [self initUI1];
     } failure:^(NSError *error) {
@@ -202,7 +286,8 @@
     }
     http://m.thadev.hichengdai.com/user/register.html?inviteCode=U201807030441369491006&lang=ZH_CN
      address = [NSString stringWithFormat:@"%@/user/register.html?inviteCode=%@&lang=%@",self.h5String,[TLUser user].secretUserId,lang];
-        
+
+    self.bouncedView.informationLabel.attributedText = [self ReturnsTheDistanceBetween:[NSString stringWithFormat:@"【Theia是全球首款跨链生态钱包，同时支持BTC、ETH、USDT等多币数字货币储存。注册即送10积分，千万BTC/ETH/WAN矿山，等您来挖】%@",address]];
     
     qrIV.image = [SGQRCodeGenerateManager generateWithDefaultQRCodeData:address imageViewWidth:170];
     
@@ -290,7 +375,7 @@
     UILabel *introduceLabel1 = [UILabel labelWithFrame:CGRectMake(kWidth(60) + 20, InviteFriendsLabel.yy +  kHeight(16), SCREEN_WIDTH - kWidth(120) - 20, 0) textAligment:(NSTextAlignmentLeft) backgroundColor:kClearColor font:FONT(14) textColor:kHexColor(@"#FFFFFF")];
 
     // 设置Label要显示的text
-    [introduceLabel1  setAttributedText:[self ReturnsTheDistanceBetween:[LangSwitcher switchLang:@"新用户注册并登陆可获得10原矿奖励" key:nil]]];
+    [introduceLabel1  setAttributedText:[self ReturnsTheDistanceBetween:[LangSwitcher switchLang:@"新用户注册并登陆可获得10积分奖励" key:nil]]];
     introduceLabel1.numberOfLines = 0;
     [introduceLabel1 sizeToFit];
     [bgView addSubview:introduceLabel1];
@@ -396,9 +481,11 @@
 //复制
 -(void)copyButtonClick
 {
-    [TLAlert alertWithSucces:[LangSwitcher switchLang:@"复制成功!" key:nil]];
-    UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
-    pasteboard.string = address;
+    _bouncedView.frame = CGRectMake(kWidth(25), kHeight(140), SCREEN_WIDTH - kWidth(50), _bouncedView.pasteButton.yy + kHeight(30));
+    [self showPopAnimationWithAnimationStyle:8];
+//    [TLAlert alertWithSucces:[LangSwitcher switchLang:@"复制成功!" key:nil]];
+//    UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+//    pasteboard.string = address;
 
 }
 

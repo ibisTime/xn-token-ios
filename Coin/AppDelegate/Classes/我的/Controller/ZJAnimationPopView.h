@@ -1,3 +1,13 @@
+//
+//  ZJAnimationPopView.h
+//  ZJAnimationPopView <https://github.com/Abnerzj/ZJAnimationPopView>
+//
+//  Created by Abnerzj on 2017/8/12.
+//  Copyright © 2017年 Abnerzj. All rights reserved.
+//
+//  This source code is licensed under the MIT-style license found in the
+//  LICENSE file in the root directory of this source tree.
+//
 
 #import <UIKit/UIKit.h>
 
@@ -47,7 +57,6 @@ typedef NS_ENUM(NSInteger, ZJAnimationDismissStyle) {
 @property (nonatomic) BOOL isObserverOrientationChange;
 /** 显示时背景的透明度，取值(0.0~1.0)，默认为0.5 */
 @property (nonatomic) CGFloat popBGAlpha;
-@property (nonatomic , strong) UIImageView *headImage;
 
 /// 动画相关属性参数
 /** 显示时动画时长，>= 0。不设置则使用默认的动画时长 */
@@ -72,9 +81,6 @@ typedef NS_ENUM(NSInteger, ZJAnimationDismissStyle) {
  显示弹框
  */
 - (void)pop;
-
-- (void)pop : (UIView *)view ;
-
 
 /**
  移除弹框

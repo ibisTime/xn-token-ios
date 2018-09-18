@@ -64,8 +64,8 @@
     self.goodImage.image = kImage(@"优点");
     [self addSubview:self.goodImage];
     [self.goodImage mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(@5);
-        make.left.equalTo(@15);
+        make.top.equalTo(@15);
+        make.left.equalTo(@20);
         make.height.equalTo(@22);
         make.width.equalTo(@22);
 
@@ -76,8 +76,8 @@
     self.topLable.text = [LangSwitcher switchLang:@"优点" key:nil];
     [self addSubview:self.topLable];
     [self.topLable mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(@5);
-        make.left.equalTo(@50);
+        make.top.equalTo(@15);
+        make.left.equalTo(@55);
         
     }];
     
@@ -85,9 +85,9 @@
     [self addSubview:self.topView];
     [self.topView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.topLable.mas_bottom).offset(10);
-        make.left.equalTo(@15);
-        make.right.equalTo(@-15);
-        make.height.equalTo(@(kHeight(50)));
+        make.left.equalTo(@20);
+        make.right.equalTo(@-20);
+        make.height.equalTo(@50);
 
 
     }];
@@ -97,12 +97,13 @@
     self.topView.layer.borderColor = kHexColor(@"#ABC0D9").CGColor;
     self.topView.layer.cornerRadius = 4;
     self.topView.clipsToBounds = YES;
+
     
     self.goodSmallImage = [[UIImageView alloc] init];
     self.goodSmallImage.image = kImage(@"红");
     [self.topView addSubview:self.goodSmallImage];
     [self.goodSmallImage mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(@18);
+        make.top.equalTo(@19);
         make.left.equalTo(@20);
         make.height.equalTo(@12);
         make.width.equalTo(@6);
@@ -112,43 +113,42 @@
    UILabel *content = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextBlack font:16];
     content.text = [LangSwitcher switchLang:@"只有用户保存私钥" key:nil];
     [self.topView addSubview:content];
+//    content.backgroundColor = [UIColor redColor];
     [content mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(@15);
-        make.left.equalTo(@50);
-        
+
+        make.top.equalTo(@17);
+        make.left.equalTo(self.goodSmallImage.mas_right).offset(20);
+        make.height.equalTo(@16);
+        make.right.equalTo(@15);
+
     }];
     
     self.bottomLable = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextBlack font:16];
     self.bottomLable.text = [LangSwitcher switchLang:@"缺点" key:nil];
     [self addSubview:self.bottomLable];
     [self.bottomLable mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.topView.mas_bottom).offset(10);
-        make.left.equalTo(@50);
-        
+        make.top.equalTo(self.topView.mas_bottom).offset(20);
+        make.left.equalTo(@55);
+        make.height.equalTo(@22);
     }];
     
     self.badImage = [[UIImageView alloc] init];
     self.badImage.image = kImage(@"缺点");
     [self addSubview:self.badImage];
     [self.badImage mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.topView.mas_bottom).offset(10);
+        make.top.equalTo(self.topView.mas_bottom).offset(20);
         make.left.equalTo(@20);
         make.height.equalTo(@22);
         make.width.equalTo(@22);
-        
-        
     }];
-    
-    
+
     self.bottomView = [[UIView alloc] init];
     [self addSubview:self.bottomView];
     [self.bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.badImage.mas_bottom).offset(20);
-        make.left.equalTo(@15);
-        make.right.equalTo(@-15);
-        make.height.equalTo(@(kHeight(57)));
-        
-        
+        make.top.equalTo(self.badImage.mas_bottom).offset(10);
+        make.left.equalTo(@20);
+        make.right.equalTo(@-20);
+        make.height.equalTo(@(70));
     }];
     
     
@@ -162,7 +162,7 @@
     self.badSmallImage.image = kImage(@"绿");
     [self.bottomView addSubview:self.badSmallImage];
     [self.badSmallImage mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(@10);
+        make.top.equalTo(@14);
         make.left.equalTo(@20);
         make.height.equalTo(@12);
         make.width.equalTo(@6);
@@ -174,27 +174,32 @@
     content1.text = [LangSwitcher switchLang:@"有矿工费" key:nil];
     [self.bottomView addSubview:content1];
     [content1 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(@5);
+        make.top.equalTo(@12);
         make.left.equalTo(@50);
+        make.height.equalTo(@16);
+        make.right.equalTo(@15);
     }];
     
     UIImageView *bottmImage = [[UIImageView alloc] init];
     bottmImage.image = kImage(@"绿");
     [self.bottomView addSubview:bottmImage];
     [bottmImage mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.badSmallImage.mas_bottom).offset(13);
+        make.top.equalTo(@44);
         make.left.equalTo(@20);
         make.height.equalTo(@12);
         make.width.equalTo(@6);
+
+
     }];
     
     UILabel *content2 = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextBlack font:16];
     content2.text = [LangSwitcher switchLang:@"转账速度慢" key:nil];
     [self.bottomView addSubview:content2];
     [content2 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(content1.mas_bottom).offset(10);
+        make.top.equalTo(@42);
         make.left.equalTo(@50);
-        
+        make.height.equalTo(@16);
+        make.right.equalTo(@15);
     }];
     
     self.buildButton = [UIButton buttonWithImageName:nil cornerRadius:6];
@@ -209,7 +214,7 @@
     [self.buildButton setBackgroundColor:kHexColor(@"#FF6953") forState:UIControlStateNormal];
     [self addSubview:self.buildButton];
     [self.buildButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.bottomView.mas_bottom).offset(10);
+        make.top.equalTo(self.bottomView.mas_bottom).offset(15);
         make.right.equalTo(self.mas_right).offset(-15);
         make.left.equalTo(self.mas_left).offset(15);
         make.height.equalTo(@40);
@@ -232,7 +237,7 @@
     self.importButton.clipsToBounds = YES;
     [self addSubview:self.importButton];
     [self.importButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.buildButton.mas_bottom).offset(10);
+        make.top.equalTo(self.buildButton.mas_bottom).offset(15);
         make.right.equalTo(self.mas_right).offset(-15);
         make.left.equalTo(self.mas_left).offset(15);
         make.height.equalTo(@40);

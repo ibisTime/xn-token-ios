@@ -126,7 +126,7 @@
 
 
     [self initUI];
-    [self.view addSubview:self.bouncedView];
+//    [self.view addSubview:self.bouncedView];
 
 
 
@@ -168,7 +168,7 @@
         NSLog(@"移除完成");
     };
     // 4.显示弹框
-    [_popView pop:self.view];
+    [_popView pop];
 }
 
 
@@ -176,9 +176,10 @@
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
     
-    [self.popView removeFromSuperview];
+    [self.popView dismiss];
     
 }
+
 - (void)initUI
 {
     UIImageView *bgView = [[UIImageView alloc] init];
@@ -229,7 +230,7 @@
     UILabel *introduceLabel1 = [UILabel labelWithFrame:CGRectMake(kWidth(20) + 20, kHeight(58), SCREEN_WIDTH - kWidth(120) - 20, 0) textAligment:(NSTextAlignmentLeft) backgroundColor:kClearColor font:FONT(14) textColor:kHexColor(@"#FFFFFF")];
 
     // 设置Label要显示的text
-    [introduceLabel1  setAttributedText:[self ReturnsTheDistanceBetween:[LangSwitcher switchLang:@"每邀请1位好友注册并登陆后获得奖励10原矿" key:nil]]];
+    [introduceLabel1  setAttributedText:[self ReturnsTheDistanceBetween:[LangSwitcher switchLang:@"每邀请1位好友注册并登陆后获得奖励10积分" key:nil]]];
     introduceLabel1.numberOfLines = 0;
     [introduceLabel1 sizeToFit];
     [scrollView addSubview:introduceLabel1];
@@ -256,7 +257,7 @@
     [scrollView addSubview:numberLabel3];
 
     UILabel *introduceLabel3 = [UILabel labelWithFrame:CGRectMake(kWidth(20) + 20, kHeight(58) + introduceLabel2.yy, SCREEN_WIDTH - kWidth(120) - 20, 0) textAligment:(NSTextAlignmentLeft) backgroundColor:kClearColor font:FONT(14) textColor:kHexColor(@"#FFFFFF")];
-    [introduceLabel3  setAttributedText:[self ReturnsTheDistanceBetween:[LangSwitcher switchLang:@"每一位用户注册成功并登陆可获得奖励10原矿" key:nil]]];
+    [introduceLabel3  setAttributedText:[self ReturnsTheDistanceBetween:[LangSwitcher switchLang:@"每一位用户注册成功并登陆可获得奖励10积分" key:nil]]];
     introduceLabel3.numberOfLines = 0;
     [introduceLabel3 sizeToFit];
     [scrollView addSubview:introduceLabel3];
