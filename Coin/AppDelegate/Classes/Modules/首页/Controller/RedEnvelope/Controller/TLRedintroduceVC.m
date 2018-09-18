@@ -94,7 +94,7 @@
     
     [titleText setFont:[UIFont systemFontOfSize:17.0]];
     
-    [titleText setText:@"Theia红包说明"];
+    [titleText setText:[LangSwitcher switchLang:@"Theia红包说明" key:nil]];
     
     self.navigationItem.titleView=titleText;
     [self.view addSubview:self.tableView];

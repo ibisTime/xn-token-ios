@@ -67,7 +67,7 @@
     [bgImg addSubview:integralLabel];
 
     UILabel *numberLabel = [UILabel labelWithFrame:CGRectMake(kWidth(15), kHeight(101), SCREEN_WIDTH - kWidth(60), kHeight(24)) textAligment:(NSTextAlignmentCenter) backgroundColor:kClearColor font:FONT(28) textColor:kHexColor(@"#333333")];
-    numberLabel.text = @"0分";
+    numberLabel.text = [NSString stringWithFormat:@"0%@",[LangSwitcher switchLang:@"分" key:nil]];
     [bgImg addSubview:numberLabel];
 
 

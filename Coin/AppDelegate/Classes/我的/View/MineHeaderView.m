@@ -178,7 +178,7 @@
     self.integralBtn = integralBtn;
     
 
-    NSString *str = @"信用积分 0";
+    NSString *str = [NSString stringWithFormat:@"%@ 0",[LangSwitcher switchLang:@"信用积分" key:nil]];
     NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:str];
     [attrStr addAttribute:NSForegroundColorAttributeName
                     value:kHexColor(@"#666666")

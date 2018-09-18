@@ -337,7 +337,7 @@
         UILabel *bottomLab = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor3 font:11];
         [self addSubview:bottomLab];
 
-        bottomLab.text = [LangSwitcher switchLang:@"如24小时未领取红包,则红包退回原地址" key:nil];
+        bottomLab.text = [LangSwitcher switchLang:@"如24小时未领取红包，则红包退回原地址" key:nil];
         [bottomLab mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.equalTo(self.mas_centerX);
             make.top.equalTo(@(IntoButton.yy+20));

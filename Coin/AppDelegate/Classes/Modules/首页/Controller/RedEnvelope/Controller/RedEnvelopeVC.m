@@ -91,7 +91,28 @@
     negativeSpacer.width = -10;
     self.navigationItem.rightBarButtonItems = @[negativeSpacer, [[UIBarButtonItem alloc] initWithCustomView:_recordButton]];
     [_recordButton sizeToFit];
-  
+
+
+    UILabel *titleText = [[UILabel alloc] initWithFrame: CGRectMake(kScreenWidth/2-60, 0, 120, 50)];
+    titleText.textAlignment = NSTextAlignmentCenter;
+    titleText.backgroundColor = [UIColor clearColor];
+    
+    titleText.textColor=kTextColor;
+    
+    [titleText setFont:[UIFont systemFontOfSize:17.0]];
+    
+    [titleText setText:[LangSwitcher switchLang:@"Theia红包" key:nil]];
+    
+    self.navigationItem.titleView=titleText;
+    
+
+//    UIView *vie = [UIView new];
+//    [vie addSubview:tit];
+//    tit.frame = vie.bounds;
+//    tit.text = [LangSwitcher switchLang:@"Theia红包" key:nil];
+
+//    self.navigationItem.titleView = [[UIView alloc] initWithFrame:CGRectMake(100, 10, 120, 44)];
+
 
     _sendView = [[SendRedEnvelopeView alloc]initWithFrame:CGRectMake(0, - kNavigationBarHeight, SCREEN_WIDTH, SCREEN_HEIGHT + kNavigationBarHeight)];
     CoinWeakSelf;
