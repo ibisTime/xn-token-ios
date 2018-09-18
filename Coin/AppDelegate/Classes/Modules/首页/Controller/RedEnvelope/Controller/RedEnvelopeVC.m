@@ -29,54 +29,56 @@
 @property (nonatomic, strong) FilterView *filterPicker;
 
 @property (nonatomic , strong)SendRedEnvelopeView *sendView;
+@property (nonatomic, strong) UILabel *nameLable;
 
 @end
 
 @implementation RedEnvelopeVC
 
-
-- (void)viewWillAppear:(BOOL)animated
-{
+- (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-//    self.navigationController.navigationBarHidden = YES;
-
     self.navigationController.navigationBar.translucent = YES;
     [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
     [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
-
+    
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+    self.navigationController.navigationBar.tintColor = [UIColor blackColor];
+    self.navigationController.navigationBar.barTintColor = [UIColor blackColor];
+    self.navigationItem.backBarButtonItem = item;
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
+  
     
 }
 
-- (void)viewWillDisappear:(BOOL)animated
-{
+//如果仅设置当前页导航透明，需加入下面方法
+- (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-
+    
     self.navigationController.navigationBar.translucent = NO;
     [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
     [self.navigationController.navigationBar setShadowImage:nil];
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    self.navigationController.navigationBar.barTintColor = kHexColor(@"#0848DF");
+    self.navigationItem.backBarButtonItem = item;
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+    
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 //    self.title = [LangSwitcher switchLang:@"" key:nil];
-
+    self.nameLable = [[UILabel alloc]init];
+    self.nameLable.text = [LangSwitcher switchLang:@"Theia红包" key:nil];
+    self.nameLable.textAlignment = NSTextAlignmentCenter;
+    self.nameLable.font = Font(16);
+    self.nameLable.textColor = kTextBlack;
+    self.navigationItem.titleView = self.nameLable;
     self.title = [LangSwitcher switchLang:@"Theia红包" key:nil];
-    UIButton *_backButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
-    _backButton.frame = CGRectMake(10, 20, 0, 44);
-    [_backButton setTitle:[LangSwitcher switchLang:@"" key:nil] forState:(UIControlStateNormal)];
-    _backButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
-    _backButton.titleLabel.font = Font(14);
-    [_backButton setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
-    [_backButton setImage:kImage(@"返回1-1") forState:UIControlStateNormal];
-    [_backButton addTarget:self action:@selector(backbuttonClick) forControlEvents:(UIControlEventTouchUpInside)];
-    UIButton *titleButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
-    titleButton.frame = CGRectMake(20,20, 120, 44);
-    [titleButton setTitle:[LangSwitcher switchLang:@"Theia红包" key:nil] forState:(UIControlStateNormal)];
-    titleButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
-    titleButton.titleLabel.font = Font(16);
-    [titleButton setTitleColor:kTextBlack forState:(UIControlStateNormal)];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:_backButton];
+
 
     UIButton *_recordButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
     _recordButton.frame = CGRectMake(10, 0, 0, 44);
@@ -90,6 +92,8 @@
     negativeSpacer.width = -10;
     self.navigationItem.rightBarButtonItems = @[negativeSpacer, [[UIBarButtonItem alloc] initWithCustomView:_recordButton]];
     [_recordButton sizeToFit];
+
+
     UILabel *titleText = [[UILabel alloc] initWithFrame: CGRectMake(kScreenWidth/2-60, 0, 120, 50)];
     titleText.textAlignment = NSTextAlignmentCenter;
     titleText.backgroundColor = [UIColor clearColor];

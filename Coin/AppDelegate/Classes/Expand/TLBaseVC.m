@@ -42,8 +42,8 @@
 
 
 
-    self.navigationController.interactivePopGestureRecognizer.delegate = self;
-
+//    self.navigationController.interactivePopGestureRecognizer.delegate = self;
+//
     self.navigationController.navigationBar.backIndicatorImage = [UIImage imageNamed:@"返回 白色"];
     self.navigationController.navigationBar.backIndicatorTransitionMaskImage = [UIImage imageNamed:@"返回 白色"];
 
@@ -53,31 +53,31 @@
 
 
 
--(void)handleNavigationTransition:(UIPanGestureRecognizer *)pan
-{
-    CGPoint velocity = [pan velocityInView:pan.view];
-    if(velocity.x>0)
-
-    {
-
-        　　//向右滑动
-        [self.navigationController popViewControllerAnimated:YES];
-    }
-
-    else
-
-    {
+//-(void)handleNavigationTransition:(UIPanGestureRecognizer *)pan
+//{
+//    CGPoint velocity = [pan velocityInView:pan.view];
+//    if(velocity.x>0)
+//
+//    {
+//
+//        　　//向右滑动
 //        [self.navigationController popViewControllerAnimated:YES];
-        //向左滑动
+//    }
+//
+//    else
+//
+//    {
+////        [self.navigationController popViewControllerAnimated:YES];
+//        //向左滑动
+//
+//    }
+//
+//}
 
-    }
 
-}
-
-
-- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer{
-    return YES;
-}
+//- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer{
+//    return YES;
+//}
 
 
 

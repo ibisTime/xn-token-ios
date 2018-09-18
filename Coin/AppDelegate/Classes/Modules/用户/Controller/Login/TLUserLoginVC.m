@@ -640,14 +640,14 @@
 
 - (void)goLogin {
     
-    if (![self.phoneTf.text isPhoneNum] ) {
+    if ([self.phoneTf.text isBlank] ) {
         
         [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入正确的手机号" key:nil]];
         
         return;
     }
     
-    if ((!self.pwdTf.text ) && self.pwdTf.hidden == NO) {
+    if ([self.pwdTf.text isBlank] && self.pwdTf.hidden == NO) {
         
         [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入密码" key:nil]];
         return;
@@ -658,7 +658,7 @@
         return;
     }
     
-    if (![self.captchaView.captchaTf.text isPhoneNum] &&self.captchaView.hidden == NO) {
+    if ([self.captchaView.captchaTf.text isBlank] &&self.captchaView.hidden == NO) {
         
         [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入验证码" key:nil]];
         return;
