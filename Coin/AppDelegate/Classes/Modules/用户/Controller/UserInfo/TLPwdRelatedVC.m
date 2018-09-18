@@ -589,9 +589,9 @@
     CoinWeakSelf;
     　　if ([self.navigationController.viewControllers indexOfObject:self]==NSNotFound) {
         
-        if (self.success) {
-            self.success();
-        }
+//        if (self.success) {
+//            self.success();
+//        }
         　　　　NSLog(@"clicked navigationbar back button");
         　　}
     

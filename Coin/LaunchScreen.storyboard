@@ -18,16 +18,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="未标题-1" translatesAutoresizingMaskIntoConstraints="NO" id="sM9-xD-Gtd">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lanch-1.png" translatesAutoresizingMaskIntoConstraints="NO" id="uvP-KW-mJf">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="N9z-HA-c7K" firstAttribute="trailing" secondItem="sM9-xD-Gtd" secondAttribute="trailing" id="RVl-0v-P0Q"/>
-                            <constraint firstItem="sM9-xD-Gtd" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="fRc-fa-vm9"/>
-                            <constraint firstItem="sM9-xD-Gtd" firstAttribute="leading" secondItem="N9z-HA-c7K" secondAttribute="leading" id="mfl-OH-nxh"/>
-                            <constraint firstItem="sM9-xD-Gtd" firstAttribute="bottom" secondItem="N9z-HA-c7K" secondAttribute="bottom" id="z4k-WE-s7p"/>
+                            <constraint firstItem="N9z-HA-c7K" firstAttribute="trailing" secondItem="uvP-KW-mJf" secondAttribute="trailing" id="0Ai-TM-q51"/>
+                            <constraint firstItem="uvP-KW-mJf" firstAttribute="top" secondItem="N9z-HA-c7K" secondAttribute="top" id="aMk-mu-545"/>
+                            <constraint firstItem="N9z-HA-c7K" firstAttribute="bottom" secondItem="uvP-KW-mJf" secondAttribute="bottom" id="n6c-XL-FdD"/>
+                            <constraint firstItem="uvP-KW-mJf" firstAttribute="leading" secondItem="N9z-HA-c7K" secondAttribute="leading" id="ruw-fA-JiO"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="N9z-HA-c7K"/>
                     </view>
@@ -38,6 +38,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="未标题-1" width="1242" height="2208"/>
+        <image name="lanch-1.png" width="1242" height="2208"/>
     </resources>
 </document>

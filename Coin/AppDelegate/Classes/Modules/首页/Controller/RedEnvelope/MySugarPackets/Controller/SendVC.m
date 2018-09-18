@@ -116,7 +116,7 @@
         NSURL *u = [NSURL URLWithString:[self.sen.sendUserPhoto convertImageUrl]];
         [self.headView.back sd_setImageWithURL:u placeholderImage:kImage(@"头像")];
     }else{
-        NSURL *u = [NSURL URLWithString:[[TLUser user].photo convertImageUrl]];
+        NSURL *u = [NSURL URLWithString:[self.getModel.redPacketInfo[@"sendUserPhoto"] convertImageUrl]];
         [self.headView.back sd_setImageWithURL:u placeholderImage:kImage(@"头像")];
         
     }
@@ -149,8 +149,11 @@
             self.headView.shareBtn.hidden = NO;
 
             }
-        if ([model.receivedCount isEqualToString:model.totalCount]) {
+        if ([model.receivedNum isEqualToString:model.sendNum]) {
             self.headView.shareBtn.hidden = YES;
+
+        }else{
+            self.headView.shareBtn.hidden = NO;
 
         }
         self.headView.total.text = [NSString stringWithFormat:@"%@/%@",model.receivedNum,model.sendNum];

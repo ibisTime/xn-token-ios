@@ -260,7 +260,7 @@
     phone2.backgroundColor = kLineColor;
     phone2.frame = CGRectMake(btnMargin, captchaView.yy, w-30, 1);
     //密码
-    UILabel *pwdLab = [UILabel labelWithTitle:[LangSwitcher switchLang:@"密码" key:nil] frame:CGRectMake(20, captchaView.yy, w, 22)];
+    UILabel *pwdLab = [UILabel labelWithTitle:[LangSwitcher switchLang:@"新密码" key:nil] frame:CGRectMake(20, captchaView.yy, w, 22)];
     pwdLab.font = [UIFont systemFontOfSize:14];
     pwdLab.textAlignment = NSTextAlignmentLeft;
     pwdLab.textColor = kTextColor;
@@ -280,7 +280,7 @@
     phone3.backgroundColor = kLineColor;
     phone3.frame = CGRectMake(btnMargin, pwdTf.yy, w-30, 1);
     //re密码
-    UILabel *pLab = [UILabel labelWithTitle:[LangSwitcher switchLang:@"密码" key:nil] frame:CGRectMake(20, pwdTf.yy, w, 22)];
+    UILabel *pLab = [UILabel labelWithTitle:[LangSwitcher switchLang:@"确认密码" key:nil] frame:CGRectMake(20, pwdTf.yy, w, 22)];
     pLab.font = [UIFont systemFontOfSize:14];
     pLab.textAlignment = NSTextAlignmentLeft;
     pLab.textColor = kTextColor;

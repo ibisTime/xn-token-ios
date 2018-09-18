@@ -691,7 +691,6 @@
 "请输入购买额度" = "Please put in purchase amount";
 "预计收入" = "Estimated income";
 "代币名称" = "Ticker";
-"可用余额" = "Available balance";
 "购买产品" = "Purchase product";
 "购买额度" = "Purchase amount";
 "本息到期日期" = "Principal and interest due date";
@@ -760,5 +759,55 @@
 "点" = "points to";
 "马上提币" = "withdraw immediately";
 "点    马上提币" = "points to withdraw immediately";
+"本次划转矿工费为" = "Transaction fee is";
+"私钥账户" = "Private key account";
+"从" = "from";
+"到" = "to";
+"划转" = "Transfe";
+"Theia红包" = "Theia gifts";
+"拼手气红包" = "Random allocated gift";
+"普通红包" = "Normal gift";
+"总额" = "total amount";
+"单个金额" = "single amount";
+"每人获得金额随机" = "Each user will get random allocated amount";
+"每人获得金额固定" = "Each user will get fixed amount";
+"拼" = "R";
+"普" = "N";
+"请选择代币种类" = "Please choose currency type";
+"扫码领红包" = "Scan QR code to take the gift";
+"分享到" = "Share to";
+"我的红包记录" = "My gift record";
+"红包说明及常见问题" = "Gift rules & FAQ";
+"年" = "year";
+"红包记录" = "Gift record";
+"共发出红包" = "Gifts sent in total";
+"共收到红包" = "Gifts received in total";
+"数量" = "number";
+"总额" = "total amount";
+"领取列表" = "Received list";
+"红包详情" = "Gift details";
+"常见问题帮助" = "FAQ help";
+"问" = "Question";
+"答" = "Answer";
+"Theia红包说明" = "Instruction for Theia gifts";
+"微博" = "Weibo";
+"积分抽奖" = "Wheel of fortune using points";
+"您拥有积分" = "You have";
+
+"微博" = "Weibo";
+"微博" = "Weibo";
+"微博" = "Weibo";
+"微博" = "Weibo";
+"微博" = "Weibo";
+"微博" = "Weibo";
+"微博" = "Weibo";
+"微博" = "Weibo";
+"微博" = "Weibo";
+"微博" = "Weibo";
+"微博" = "Weibo";
+"微博" = "Weibo";
+"微博" = "Weibo";
+"微博" = "Weibo";
+
 
 

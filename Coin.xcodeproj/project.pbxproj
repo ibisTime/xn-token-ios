@@ -329,7 +329,7 @@
 		B89F07DF211B06E20057E781 /* TLinviteVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B89F07DE211B06E20057E781 /* TLinviteVC.m */; };
 		B89F07E2211B07FA0057E781 /* TLMeSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = B89F07E1211B07FA0057E781 /* TLMeSetting.m */; };
 		B8A2436520E5E0F20074DF8F /* TLDataBase.m in Sources */ = {isa = PBXBuildFile; fileRef = B8A2436420E5E0F20074DF8F /* TLDataBase.m */; };
-		B8A483FF214FC02800450819 /* 未标题-1.png in Resources */ = {isa = PBXBuildFile; fileRef = B8A483FE214FC02800450819 /* 未标题-1.png */; };
+		B8A483FF214FC02800450819 /* lanch-1.png in Resources */ = {isa = PBXBuildFile; fileRef = B8A483FE214FC02800450819 /* lanch-1.png */; };
 		B8A5307E2127DBD600A027C0 /* TLMyRecordVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B8A5307D2127DBD600A027C0 /* TLMyRecordVC.m */; };
 		B8A530812127DE8F00A027C0 /* TLMyRecodeTB.m in Sources */ = {isa = PBXBuildFile; fileRef = B8A530802127DE8F00A027C0 /* TLMyRecodeTB.m */; };
 		B8A530842127E0C300A027C0 /* RecodeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B8A530832127E0C300A027C0 /* RecodeCell.m */; };
@@ -1160,7 +1160,7 @@
 		B89F07E1211B07FA0057E781 /* TLMeSetting.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLMeSetting.m; sourceTree = "<group>"; };
 		B8A2436320E5E0F20074DF8F /* TLDataBase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLDataBase.h; sourceTree = "<group>"; };
 		B8A2436420E5E0F20074DF8F /* TLDataBase.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLDataBase.m; sourceTree = "<group>"; };
-		B8A483FE214FC02800450819 /* 未标题-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "未标题-1.png"; sourceTree = "<group>"; };
+		B8A483FE214FC02800450819 /* lanch-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lanch-1.png"; sourceTree = "<group>"; };
 		B8A5307C2127DBD600A027C0 /* TLMyRecordVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLMyRecordVC.h; sourceTree = "<group>"; };
 		B8A5307D2127DBD600A027C0 /* TLMyRecordVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLMyRecordVC.m; sourceTree = "<group>"; };
 		B8A5307F2127DE8F00A027C0 /* TLMyRecodeTB.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLMyRecodeTB.h; sourceTree = "<group>"; };
@@ -2796,7 +2796,7 @@
 		2EA584B61FA813C900C7106C /* Coin */ = {
 			isa = PBXGroup;
 			children = (
-				B8A483FE214FC02800450819 /* 未标题-1.png */,
+				B8A483FE214FC02800450819 /* lanch-1.png */,
 				7A27265B212BFFA70067E3CD /* WechatSDK1.8.2 */,
 				215421CF1FD708AC00FDD25C /* Coin.entitlements */,
 				216F5AEE206CC6F600F2C832 /* AppDelegate */,
@@ -3468,7 +3468,7 @@
 				B8CAA14321158FF200695BC3 /* LPDImagePickerController.bundle in Resources */,
 				B88B59172109AEC400F20D1B /* country.plist in Resources */,
 				7A272664212BFFA70067E3CD /* README.txt in Resources */,
-				B8A483FF214FC02800450819 /* 未标题-1.png in Resources */,
+				B8A483FF214FC02800450819 /* lanch-1.png in Resources */,
 				B819BAAA20C6DD7800CEEC5E /* LaunchScreen.storyboard in Resources */,
 				2EFFE6AA1FF4829100BFCC40 /* Localizable.strings in Resources */,
 				7A272663212BFFA70067E3CD /* read_me.txt in Resources */,

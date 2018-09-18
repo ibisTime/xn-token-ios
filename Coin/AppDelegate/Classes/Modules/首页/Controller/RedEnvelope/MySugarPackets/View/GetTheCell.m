@@ -17,7 +17,7 @@
 {
     UIImageView *headImage;
     UILabel *nameLabel;
-    UIImageView *typeimage;
+    UIButton *typeimage;
 
     UILabel *timeLabel;
     UILabel *priceLabel;
@@ -38,8 +38,9 @@
 //        nameLabel.text = @"来自  王小二";
         [self addSubview:nameLabel];
 
-        typeimage = [[UIImageView alloc ] initWithFrame:CGRectMake(kWidth(130), 16, 20, 20)];
-        typeimage.contentMode = UIViewContentModeScaleToFill;
+        typeimage = [[UIButton alloc ] initWithFrame:CGRectMake(kWidth(130), 16, 20, 20)];
+        typeimage.titleLabel.font = FONT(11);
+//        typeimage.contentMode = UIViewContentModeScaleToFill;
         //        nameLabel.text = @"来自  王小二";
         [self addSubview:typeimage];
         timeLabel = [UILabel labelWithFrame:CGRectMake(63, 36, (SCREEN_WIDTH - 79)/2, 14) textAligment:(NSTextAlignmentLeft) backgroundColor:kClearColor font:FONT(11) textColor:kTextBlack];
@@ -72,12 +73,18 @@
     timeLabel.text = [getModel.createDatetime convertRedDate];
     if ([redPacketInfo[@"type"] isEqualToString:@"1"]) {
         //拼手气
-        typeimage.image = kImage(@"拼");
+        [typeimage setTitleColor:kWhiteColor forState:UIControlStateNormal];
+        [typeimage setBackgroundColor:[UIColor redColor] forState:UIControlStateNormal];
+        [typeimage setTitle:[LangSwitcher switchLang:@"拼" key:nil] forState:UIControlStateNormal];
+        typeimage.layer.borderColor = [UIColor redColor].CGColor;
+        typeimage.layer.borderWidth = 1.0;
     }else{
         //普通
-        typeimage.image = kImage(@"普通红包");
-
-       
+        [typeimage setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+        [typeimage setBackgroundColor:kWhiteColor forState:UIControlStateNormal];
+        [typeimage setTitle:[LangSwitcher switchLang:@"普" key:nil] forState:UIControlStateNormal];
+        typeimage.layer.borderColor = [UIColor redColor].CGColor;
+        typeimage.layer.borderWidth = 1.0;
     }
     [headImage sd_setImageWithURL:[NSURL URLWithString:[redPacketInfo[@"sendUserPhoto"] convertImageUrl ] ] placeholderImage:kImage(@"头像")];
     

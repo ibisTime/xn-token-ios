@@ -64,10 +64,10 @@
 
     if ([sendModel.type isEqualToString:@"1"]) {
         //拼手气
-        headImage.image = kImage(@"拼");
+        headImage.image = kImage(@"拼手气红包 copy");
     }else{
         //普通
-        headImage.image = kImage(@"普通红包");
+        headImage.image = kImage(@"普通红包-1");
         
         
     }

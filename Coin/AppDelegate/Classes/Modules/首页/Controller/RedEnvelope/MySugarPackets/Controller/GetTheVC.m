@@ -225,6 +225,7 @@
             }];
             
             //
+            
             weakSelf.headView.total.text = [LangSwitcher switchLang:@"共发出红包" key:nil];
             weakSelf.headView.count.text = [NSString stringWithFormat:@"%ld",shouldDisplayCoins.count];
             weakSelf.sends = shouldDisplayCoins;

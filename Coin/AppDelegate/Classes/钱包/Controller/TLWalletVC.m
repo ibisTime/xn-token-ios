@@ -68,6 +68,7 @@
 
 @property (nonatomic, strong) NSMutableArray <CurrencyModel *>*localCurrencys;
 
+@property (nonatomic, strong) NSMutableArray <CurrencyModel *>*allCurrencys;
 
 @property (nonatomic, strong) NSMutableArray <CurrencyModel *>*tempcurrencys;
 
@@ -117,7 +118,13 @@
     NSString *word;
     NSString *btcadd;
     NSString *pwd;
-    [self getMyCurrencyList];
+//    if (self.tableView.mj_header.isRefreshing) {
+//
+//
+//    }else{
+//        [self getMyCurrencyList];
+//
+//    }
 
     if ([dataBase.dataBase open]) {
         NSString *sql = [NSString stringWithFormat:@"SELECT Mnemonics,btcaddress,PwdKey  from THAUser where userId = '%@'",[TLUser user].userId];
@@ -207,11 +214,14 @@
         }
         
 //        [self getMyCurrencyList];
-        [self queryCenterTotalAmount];
-        [self queryMyAmount];
-        //
-        [self queryTotalAmount];
-        [self requestRateList];
+//        if (self.tableView.mj_header.isRefreshing) {
+//            return;
+//        }
+//        [self queryCenterTotalAmount];
+//        [self queryMyAmount];
+//        //
+//        [self queryTotalAmount];
+//        [self requestRateList];
 //        [self switchWithTager:0 ];
         
 //        [super viewWillAppear:animated];
@@ -221,6 +231,9 @@
         
        
         if (self.isBulid == YES) {
+            if (self.tableView.mj_header.isRefreshing) {
+                return;
+            }
             [self switchWithTager:0 ];
 
         }else{
@@ -265,6 +278,7 @@
     [self getMyCurrencyList];
     [self queryCenterTotalAmount];
     [self queryMyAmount];
+    [self queryTotalAllAmount];
     //
     [self queryTotalAmount];
     [self requestRateList];
@@ -1057,9 +1071,9 @@
         trans.localcurrencys = self.localCurrencys;
 
     }else{
-        trans.currencys = self.localCurrencys;
+        trans.currencys = self.allCurrencys;
         trans.centercurrencys = self.currencys;
-        trans.localcurrencys = self.localCurrencys;
+        trans.localcurrencys = self.allCurrencys;
     }
     
     TLDataBase *dataBase = [TLDataBase sharedManager];
@@ -1761,6 +1775,74 @@
             [weakSelf.tableView reloadData];
         }
        
+    } failure:^(NSError *error) {
+        
+    }];
+    
+}
+
+- (void)queryTotalAllAmount {
+    
+    NSString *audioFile = [[NSBundle mainBundle] pathForResource:@"QSount.caf" ofType:nil];
+    
+    NSLog(@"%@",audioFile);
+    //    [self.currentTableView beginRefreshing];
+    TLNetworking *http = [TLNetworking new];
+    http.code = @"802270";
+    http.isLocal = YES;
+    http.isUploadToken = NO;
+    TLDataBase *dataBase = [TLDataBase sharedManager];
+    NSString *symbol;
+    NSString *address;
+    NSMutableArray *arr = [NSMutableArray array];
+    if ([dataBase.dataBase open]) {
+        NSString *sql = [NSString stringWithFormat:@"SELECT symbol,address from THALocal lo, THAUser th where lo.walletId = th.walletId  and th.userId = '%@'",[TLUser user].userId];
+        //        [sql appendString:[TLUser user].userId];
+        FMResultSet *set = [dataBase.dataBase executeQuery:sql];
+        while ([set next])
+        {
+            NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+            
+            symbol = [set stringForColumn:@"symbol"];
+            address = [set stringForColumn:@"address"];
+            
+            if (!address) {
+                [dic setObject:@"" forKey:@"address"];
+                
+            }else{
+                
+                [dic setObject:address forKey:@"address"];
+                
+            }
+            [dic setObject:symbol forKey:@"symbol"];
+            [arr addObject:dic];
+        }
+        [set close];
+    }
+    [dataBase.dataBase close];
+    
+    NSSet *set = [NSSet setWithArray:arr];
+    NSArray *resultArray = [set allObjects];
+    //    NSArray *a = [[NSUserDefaults standardUserDefaults] objectForKey:@"localArray"];
+    if (resultArray.count > 0) {
+        
+        http.parameters[@"accountList"] = resultArray;
+    }else{
+        return;
+    }
+    
+    //    http.parametArray = @[ dic];
+    
+    CoinWeakSelf;
+    
+    [http postWithSuccess:^(id responseObject) {
+       weakSelf.allCurrencys = [CurrencyModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"][@"accountList"]];
+//        if (weakSelf.isAddBack == YES || weakSelf.switchTager == 0) {
+//            weakSelf.tableView.platforms = weakSelf.localCurrencys;
+//            [weakSelf.tableView reloadData];
+//        }
+//        weakSelf.allCurrencys = localCurrencys;
+        
     } failure:^(NSError *error) {
         
     }];
