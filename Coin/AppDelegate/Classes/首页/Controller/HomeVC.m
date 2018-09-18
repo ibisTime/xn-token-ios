@@ -58,6 +58,7 @@
 #import "BTCData.h"
 #import "BTCNetwork.h"
 #import "AppConfig.h"
+#import "TLinviteVC.h"
 @interface HomeVC ()
 
 @property (nonatomic, strong) HomeTableView *tableView;
@@ -171,7 +172,6 @@
     //
     self.title = [LangSwitcher switchLang:@"发现" key:nil];
     self.view.backgroundColor = kWhiteColor;
-    [self initTableView];
     
     [self reloadFindData];
     
@@ -232,13 +232,15 @@
     [http postWithSuccess:^(id responseObject) {
         
         self.findModels = [HomeFindModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
-        
+        [self initTableView];
+
         NSLog(@"%@",self.findModels);
         self.headerView.findModels = self.findModels;
         [self.tableView endRefreshHeader];
-        self.headerView.contentSize = CGSizeMake(0,  self.findModels.count * 110  + kHeight(138));
+//        self.headerView.contentSize = CGSizeMake(0,  self.findModels.count * 110  + kHeight(138));
         self.headerView.frame = CGRectMake(0, 0, kScreenWidth - 30, self.findModels.count * 110 + 65  + kHeight(138));
 
+//        self.headerView.contentInset =UIEdgeInsetsMake(0, 0, kTabBarHeight, 0);
 
         
     } failure:^(NSError *error) {
@@ -329,7 +331,7 @@
         
         CoinWeakSelf;
         //头部
-        _headerView = [[HomeHeaderView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth - 30, 4 * 110 + 65 + kHeight(138))];
+        _headerView = [[HomeHeaderView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth - 30, self.findModels.count * 110 + 65 + kHeight(138))];
         
         _headerView.headerBlock = ^(HomeEventsType type, NSInteger index, HomeFindModel *find) {
             [weakSelf headerViewEventsWithType:type index:index model:find];
@@ -385,6 +387,16 @@
           
              return;
      
+         }else if ([model.action isEqualToString:@"invitation"])
+        {
+//            PosMiningVC *vc = [PosMiningVC new];
+            
+            TLinviteVC *settingVC = [TLinviteVC new];
+
+            [self.navigationController pushViewController:settingVC animated:YES];
+            
+            return;
+            
         }
     }
     

@@ -183,6 +183,7 @@ public class EthCrypto: NSObject
             
             var options = Web3Options.defaultOptions()
             options.gasLimit = BigUInt(21000)
+            options.gasPrice = BigUInt(gasPrice)
             options.from = keystore?.addresses?.first!
             let am = BigUInt.init(amount)
             options.value = am

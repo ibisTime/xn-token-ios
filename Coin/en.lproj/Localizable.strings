@@ -89,7 +89,7 @@
 "转出" = "Turn out";
 "转入" = "To change into";
 "我的资产" = "My assets";
-"总资产" = "Total assets";
+"总资产" = "Total Assets";
 "账单" = "Bill";
 "冻结" = "frozen";
 "收款地址" = "Receivable address";
@@ -303,8 +303,8 @@
 "资产" = "Property";
 "闪兑" = "Instant swap";
 "一键划转" = "Smart transfer";
-"个人账户" = "Platform account";
-"私钥钱包" = "Private key wallet";
+"个人账户" = "My Wallet ";
+"私钥钱包" = "Decentralized Wallet";
 "首创玩法" = "Global Master and Apprentice Initiative";
 "量化理财" = "Quantitative Finance";
 "账户与安全" = "Account and Security";

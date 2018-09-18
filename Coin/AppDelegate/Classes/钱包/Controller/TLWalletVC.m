@@ -1285,15 +1285,22 @@
                 //查询总资产
               
             }];
-            [weakSelf refreshOpenCoinList];
-            [weakSelf queryTotalAmount];
-            [weakSelf queryCenterTotalAmount];
-            [weakSelf queryMyAmount];
+           
             if (weakSelf.switchTager == 0) {
+                [weakSelf saveLocalWalletData];
+                [weakSelf saveLocalWallet];
+                [weakSelf refreshOpenCoinList];
+                [weakSelf queryTotalAmount];
+                [weakSelf queryCenterTotalAmount];
+                [weakSelf queryMyAmount];
                 weakSelf.currencys = shouldDisplayCoins;
                 weakSelf.tableView.platforms = weakSelf.localCurrencys;
                 [weakSelf.tableView reloadData_tl];
             }else{
+                [weakSelf refreshOpenCoinList];
+                [weakSelf queryTotalAmount];
+                [weakSelf queryCenterTotalAmount];
+                [weakSelf queryMyAmount];
                 weakSelf.currencys = shouldDisplayCoins;
                 weakSelf.tableView.platforms = shouldDisplayCoins;
                 [weakSelf.tableView reloadData_tl];

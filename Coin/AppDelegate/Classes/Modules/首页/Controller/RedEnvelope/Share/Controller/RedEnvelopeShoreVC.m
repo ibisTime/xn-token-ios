@@ -220,7 +220,7 @@
 //    self.shoreVie.stateLabel.hidden = YES;
     
     
-    _invitationView.frame = CGRectMake(kScreenWidth/2 - 106, kHeight(140), 173,173+60);
+    _invitationView.frame = CGRectMake(kScreenWidth/2 - 210/2, kHeight(130), 173,173+60);
     
     
     [self showPopAnimationWithAnimationStyle:2];
@@ -239,7 +239,7 @@
     // 2.设置属性，可不设置使用默认值，见注解
     // 2.1 显示时点击背景是否移除弹框
     popView.isClickBGDismiss = [_invitationView isKindOfClass:[ZJAnimationPopView class]];
-    popView.isClickBGDismiss = YES;
+//    popView.isClickBGDismiss = YES;
     // 2.2 显示时背景的透明度
     //    popView.popBGAlpha = 0.5f;
     // 2.3 显示时是否监听屏幕旋转
@@ -272,7 +272,8 @@
         
     };
     // 4.显示弹框
-    [popView pop];
+    [popView pop:self.shoreVie.backImg];
+//    [popView pop];
 }
 
 - (void)removeIcon

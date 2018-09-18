@@ -201,7 +201,7 @@
 //    CoinModel *model  = [CoinUtil ]
 //    CGFloat t = [platform.balance doubleValue];
 //    t = t / 1000000000000000000;
-    self.opppsitePriceLbl.text = [NSString stringWithFormat:@"%.6f", [text floatValue]];
+    self.opppsitePriceLbl.text = [NSString stringWithFormat:@"%.8f", [text floatValue]];
     
     //人民币价格
     

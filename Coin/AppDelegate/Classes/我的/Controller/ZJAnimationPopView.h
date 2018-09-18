@@ -67,7 +67,7 @@ typedef NS_ENUM(NSInteger, ZJAnimationDismissStyle) {
 @property (nullable, nonatomic, copy) void(^popComplete)();
 /** 移除完成回调 */
 @property (nullable, nonatomic, copy) void(^dismissComplete)();
-
+@property (nonatomic , strong) UIImageView *headImage;
 /**
  通过自定义视图来构造弹框视图
  
@@ -82,6 +82,7 @@ typedef NS_ENUM(NSInteger, ZJAnimationDismissStyle) {
  */
 - (void)pop;
 
+- (void)pop : (UIView *)view;
 /**
  移除弹框
  */

@@ -77,7 +77,6 @@
     self.nameLable.font = Font(16);
     self.nameLable.textColor = kTextBlack;
     self.navigationItem.titleView = self.nameLable;
-    self.title = [LangSwitcher switchLang:@"Theia红包" key:nil];
 
 
     UIButton *_recordButton = [UIButton buttonWithType:(UIButtonTypeCustom)];

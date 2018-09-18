@@ -1179,19 +1179,19 @@ typedef enum : NSUInteger {
     if (![self.currentModel.symbol isEqualToString:@"BTC"]) {
         NSString *intputMoney = [CoinUtil convertToSysCoin:self.inputFiled.text coin:self.currentModel.symbol];
         
-        NSString *money1 = [CoinUtil convertToSysCoin:self.currentModel.balance coin:self.currentModel.symbol];
+//        NSString *money1 = [CoinUtil convertToSysCoin:self.currentModel.balance coin:self.currentModel.symbol];
         NSString *g1 = [NSString stringWithFormat:@"%lld",[self.pricr longLongValue]*21000];
         
         NSString *text1 = [intputMoney subNumber:g1];
         
-        if (text1.floatValue  > money1.floatValue) {
+        if (text1.floatValue  > self.currentModel.balance.floatValue) {
             [TLAlert alertWithError:[LangSwitcher switchLang:@"可用余额不足" key:nil]];
             return;
         }
     }else{
-        NSString *money1 = [CoinUtil convertToRealCoin:self.currentModel.balance coin:self.currentModel.symbol];
+//        NSString *money1 = [CoinUtil convertToRealCoin:self.currentModel.balance coin:self.currentModel.symbol];
 
-        if (self.inputFiled.text.floatValue  > money1.floatValue) {
+        if (self.inputFiled.text.floatValue  > self.currentModel.balance.floatValue) {
             
             [TLAlert alertWithError:[LangSwitcher switchLang:@"可用余额不足" key:nil]];
                 return;
@@ -1244,18 +1244,19 @@ typedef enum : NSUInteger {
                                       //公链 ETH WAN BTC
                                       if ([self.currentModel.symbol isEqualToString:@"ETH"]) {
                                           CoinModel *model = [CoinUtil getCoinModel:self.currentModel.symbol];
-                                          NSString *g = [NSString stringWithFormat:@"%lld",[self.pricr longLongValue]*21000];
+                                          NSString *g = [NSString stringWithFormat:@"%lld",[self.tempPrice longLongValue]*21000];
                                           
                                           
                                       
-                                          result =[MnemonicUtil sendTransactionWithMnemonicWallet:Mnemonics address:add amount:gaspic gaspic:[NSString stringWithFormat:@"%lld",[self.pricr longLongValue]] gasLimt:@"21000"];
+                                          result =[MnemonicUtil sendTransactionWithMnemonicWallet:Mnemonics address:add amount:gaspic gaspic:[NSString stringWithFormat:@"%lld",[self.tempPrice longLongValue]] gasLimt:@"21000"];
+                                          
                                           
                                       }else if ([self.currentModel.symbol isEqualToString:@"WAN"]){
                                     
                                           CoinModel *model = [CoinUtil getCoinModel:self.currentModel.symbol];
                                           NSString *g = [NSString stringWithFormat:@"%lld",[self.pricr longLongValue]*21000];
                                         
-                                          result =[MnemonicUtil sendWanTransactionWithMnemonicWallet:Mnemonics address:add amount:gaspic gaspic:[NSString stringWithFormat:@"%lld",[self.pricr longLongValue]] gasLimt:@"21000"];
+                                          result =[MnemonicUtil sendWanTransactionWithMnemonicWallet:Mnemonics address:add amount:gaspic gaspic:[NSString stringWithFormat:@"%lld",[self.tempPrice longLongValue]] gasLimt:@"21000"];
                                       }else{
                                           
                                           //btc
@@ -1279,7 +1280,7 @@ typedef enum : NSUInteger {
                                       CoinModel *coin = [CoinUtil getCoinModel:self.currentModel.symbol];
                                       
                                       
-                                      result = [MnemonicUtil sendEthTokenTransactionWithAddress:Mnemonics contractAddress:coin.contractAddress address:add amount:self.inputFiled.text gaspic:self.pricr gasLimt:@"210000"];
+                                      result = [MnemonicUtil sendEthTokenTransactionWithAddress:Mnemonics contractAddress:coin.contractAddress address:add amount:gaspic gaspic:self.tempPrice gasLimt:@"210000"];
                                       
                                   }
                                   
@@ -1330,15 +1331,31 @@ typedef enum : NSUInteger {
             NSString *ga = [NSString stringWithFormat:@"%@ %@",money,self.currentModel.symbol];
             NSString *gaspic =  [CoinUtil convertToSysCoin:ga coin:self.currentModel.symbol];
             
-            NSString *g = [NSString stringWithFormat:@"%lld",[self.pricr longLongValue]*21000];
+            NSString *g = [NSString stringWithFormat:@"%lld",[self.tempPrice longLongValue]*21000];
             NSString *text = [gaspic subNumber:g];
             
 //            self.amountlLab.text  = [CoinUtil convertToRealCoin:text coin:self.currentModel.symbol];
+            if ([self.currentModel.balance longLongValue] <= 0) {
+                self.inputFiled.text = @"0";
+            }else{
             self.inputFiled.text = [CoinUtil convertToRealCoin:text coin:self.currentModel.symbol];
+                if ([self.inputFiled.text floatValue]  <= 0) {
+                    self.inputFiled.text = @"0";
+                }
+            }
         }else{
             
-            self.inputFiled.text = [CoinUtil convertToRealCoin:self.currentModel.balance coin:self.currentModel.symbol];
-
+            if ([self.currentModel.balance longLongValue] <= 0) {
+                self.inputFiled.text = @"0";
+            }else{
+                self.inputFiled.text = [CoinUtil convertToRealCoin:self.currentModel.balance coin:self.currentModel.symbol];
+                
+                if ([self.inputFiled.text floatValue]  <= 0) {
+                    self.inputFiled.text = @"0";
+                }
+            }
+            
+           
         }
       
     }else{
