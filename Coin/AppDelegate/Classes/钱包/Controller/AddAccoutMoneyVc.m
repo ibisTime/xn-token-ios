@@ -77,134 +77,134 @@
     }];
 }
 
-- (void)queryTotalAmount {
-    [self.tableView beginRefreshing];
-    TLNetworking *http = [TLNetworking new];
-    http.code = @"802270";
-    //    [[NSUserDefaults standardUserDefaults] removeObjectForKey:KWalletWord];
-    NSString *address  =  [[NSUserDefaults standardUserDefaults] objectForKey:KWalletAddress];
-    //    NSString *address1  =  [[NSUserDefaults standardUserDefaults] objectForKey:KWalletWord];
-    //    NSString *address2  =  [[NSUserDefaults standardUserDefaults] objectForKey:KWalletPrivateKey];
-    
-    http.ISparametArray = YES;
-    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
-    NSMutableDictionary *dicWan = [NSMutableDictionary dictionary];
-    
-    [dic setObject:@"ETH" forKey:@"symbol"];
-    [dic setObject:address forKey:@"address"];
-    [dicWan setObject:@"WAN" forKey:@"symbol"];
-    [dicWan setObject:address forKey:@"address"];
-    NSArray *arr = @[dic,dicWan];
-    http.parameters[@"accountList"] = arr;
-    
-    //    http.parametArray = @[ dic];
-    
-    
-    CoinWeakSelf;
-    
-    [http postWithSuccess:^(id responseObject) {
-        
-        NSString *cnyStr = [responseObject[@"data"][@"totalAmountCNY"] convertToSimpleRealMoney];
-        
-//        self.headerView.cnyAmountLbl.text = [NSString stringWithFormat:@"%.2f", [cnyStr doubleValue]];
-        
-        NSArray *usdStr = responseObject[@"data"][@"accountList"];
-        
-        weakSelf.currencys   =  [CurrencyModel mj_objectArrayWithKeyValuesArray:usdStr];
-        NSMutableArray <CurrencyModel *> *shouldDisplayCoins = [[NSMutableArray alloc] init];
-        [weakSelf.currentModels enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            
-            {
-            CurrencyModel *currencyModel = weakSelf.currencys[idx];
-            if ([weakSelf.currencys containsObject:currencyModel] != NSNotFound)
-            {
-                    currencyModel.IsSelected = YES;
+//- (void)queryTotalAmount {
+//    [self.tableView beginRefreshing];
+//    TLNetworking *http = [TLNetworking new];
+//    http.code = @"802270";
+//    //    [[NSUserDefaults standardUserDefaults] removeObjectForKey:KWalletWord];
+//    NSString *address  =  [[NSUserDefaults standardUserDefaults] objectForKey:KWalletAddress];
+//    //    NSString *address1  =  [[NSUserDefaults standardUserDefaults] objectForKey:KWalletWord];
+//    //    NSString *address2  =  [[NSUserDefaults standardUserDefaults] objectForKey:KWalletPrivateKey];
+//
+//    http.ISparametArray = YES;
+//    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+//    NSMutableDictionary *dicWan = [NSMutableDictionary dictionary];
+//
+//    [dic setObject:@"ETH" forKey:@"symbol"];
+//    [dic setObject:address forKey:@"address"];
+//    [dicWan setObject:@"WAN" forKey:@"symbol"];
+//    [dicWan setObject:address forKey:@"address"];
+//    NSArray *arr = @[dic,dicWan];
+//    http.parameters[@"accountList"] = arr;
+//
+//    //    http.parametArray = @[ dic];
+//
+//
+//    CoinWeakSelf;
+//
+//    [http postWithSuccess:^(id responseObject) {
+//
+//        NSString *cnyStr = [responseObject[@"data"][@"totalAmountCNY"] convertToSimpleRealMoney];
+//
+////        self.headerView.cnyAmountLbl.text = [NSString stringWithFormat:@"%.2f", [cnyStr doubleValue]];
+//
+//        NSArray *usdStr = responseObject[@"data"][@"accountList"];
+//
+//        weakSelf.currencys   =  [CurrencyModel mj_objectArrayWithKeyValuesArray:usdStr];
+//        NSMutableArray <CurrencyModel *> *shouldDisplayCoins = [[NSMutableArray alloc] init];
+//        [weakSelf.currentModels enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+//
+//            {
+//            CurrencyModel *currencyModel = weakSelf.currencys[idx];
+//            if ([weakSelf.currencys containsObject:currencyModel] != NSNotFound)
+//            {
+//                    currencyModel.IsSelected = YES;
+////                [shouldDisplayCoins addObject:currencyModel];
+//
+//                }else{
+//
+//                     currencyModel.IsSelected = NO;
+////                    [shouldDisplayCoins addObject:currencyModel];
+//
+//                }
+//
+//            }
+//            //                if ([[CoinUtil shouldDisplayCoinArray] indexOfObject:currencyModel.currency ] != NSNotFound ) {
+//
+//            //                }
+//
+//        }];
+//
+//        NSLog(@"%@",self.currencys);
+////        weakSelf.currencys = shouldDisplayCoins;
+//
+//        weakSelf.tableView.currencys = weakSelf.currencys;
+//        [weakSelf.tableView reloadData_tl];
+//        //        self.headerView.usdAmountLbl.text = [NSString stringWithFormat:@"%@USD", usdStr];
+//        //
+//        //        NSString *hkdStr = [responseObject[@"data"][@"totalAmountHKD"] convertToSimpleRealMoney];
+//
+//        //        self.headerView.hkdAmountLbl.text = [NSString stringWithFormat:@"%@HKD", hkdStr];
+//        [self.tableView endRefreshingWithNoMoreData_tl];
+//
+//    } failure:^(NSError *error) {
+//
+//        [self.tableView endRefreshingWithNoMoreData_tl];
+//
+//    }];
+//}
+
+//- (void)getMyCurrencyList {
+//
+//    CoinWeakSelf;
+//
+//    TLPageDataHelper *helper = [[TLPageDataHelper alloc] init];
+//
+//    helper.code = @"802503";
+//    helper.parameters[@"userId"] = [TLUser user].userId;
+//    helper.parameters[@"token"] = [TLUser user].token;
+//    helper.isList = YES;
+//    helper.isCurrency = YES;
+//    helper.tableView = self.tableView;
+//    [helper modelClass:[CurrencyModel class]];
+//    [self.tableView addRefreshAction:^{
+//
+//        [weakSelf refreshOpenCoinList];
+//
+//        [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
+//
+//            //去除没有的币种
+//
+//
+//            NSMutableArray <CurrencyModel *> *shouldDisplayCoins = [[NSMutableArray alloc] init];
+//            [objs enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+//
+//                CurrencyModel *currencyModel = (CurrencyModel *)obj;
+//                currencyModel.IsSelected = YES;
+//                //                if ([[CoinUtil shouldDisplayCoinArray] indexOfObject:currencyModel.currency ] != NSNotFound ) {
+//
 //                [shouldDisplayCoins addObject:currencyModel];
-
-                }else{
-                    
-                     currencyModel.IsSelected = NO;
-//                    [shouldDisplayCoins addObject:currencyModel];
-
-                }
-
-            }
-            //                if ([[CoinUtil shouldDisplayCoinArray] indexOfObject:currencyModel.currency ] != NSNotFound ) {
-            
-            //                }
-            
-        }];
-        
-        NSLog(@"%@",self.currencys);
-//        weakSelf.currencys = shouldDisplayCoins;
-        
-        weakSelf.tableView.currencys = weakSelf.currencys;
-        [weakSelf.tableView reloadData_tl];
-        //        self.headerView.usdAmountLbl.text = [NSString stringWithFormat:@"%@USD", usdStr];
-        //
-        //        NSString *hkdStr = [responseObject[@"data"][@"totalAmountHKD"] convertToSimpleRealMoney];
-        
-        //        self.headerView.hkdAmountLbl.text = [NSString stringWithFormat:@"%@HKD", hkdStr];
-        [self.tableView endRefreshingWithNoMoreData_tl];
-        
-    } failure:^(NSError *error) {
-        
-        [self.tableView endRefreshingWithNoMoreData_tl];
-        
-    }];
-}
-
-- (void)getMyCurrencyList {
-    
-    CoinWeakSelf;
-    
-    TLPageDataHelper *helper = [[TLPageDataHelper alloc] init];
-    
-    helper.code = @"802503";
-    helper.parameters[@"userId"] = [TLUser user].userId;
-    helper.parameters[@"token"] = [TLUser user].token;
-    helper.isList = YES;
-    helper.isCurrency = YES;
-    helper.tableView = self.tableView;
-    [helper modelClass:[CurrencyModel class]];
-    [self.tableView addRefreshAction:^{
-        
-        [weakSelf refreshOpenCoinList];
-        
-        [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
-            
-            //去除没有的币种
-            
-            
-            NSMutableArray <CurrencyModel *> *shouldDisplayCoins = [[NSMutableArray alloc] init];
-            [objs enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                
-                CurrencyModel *currencyModel = (CurrencyModel *)obj;
-                currencyModel.IsSelected = YES;
-                //                if ([[CoinUtil shouldDisplayCoinArray] indexOfObject:currencyModel.currency ] != NSNotFound ) {
-                
-                [shouldDisplayCoins addObject:currencyModel];
-                //                }
-                
-            }];
-            
-            //
-            weakSelf.currencys = shouldDisplayCoins;
-            weakSelf.tableView.currencys = shouldDisplayCoins;
-            [weakSelf.tableView reloadData_tl];
-            
-        } failure:^(NSError *error) {
-            
-            
-        }];
-        
-      
-        
-    }];
-    
-    [self.tableView beginRefreshing];
-    
-}
+//                //                }
+//
+//            }];
+//
+//            //
+//            weakSelf.currencys = shouldDisplayCoins;
+//            weakSelf.tableView.currencys = shouldDisplayCoins;
+//            [weakSelf.tableView reloadData_tl];
+//
+//        } failure:^(NSError *error) {
+//
+//
+//        }];
+//
+//
+//
+//    }];
+//
+//    [self.tableView beginRefreshing];
+//
+//}
 
 - (void)getStatusSymbol
 {
@@ -224,7 +224,8 @@
                   sql = [NSString stringWithFormat:@"SELECT * from THALocal lo, THAUser th where lo.walletId = th.walletId  and th.userId = '%@'",[TLUser user].userId];
             }else{
                 
-                 sql = [NSString stringWithFormat:@"SELECT * from THALocal"];
+//                 sql = [NSString stringWithFormat:@"SELECT * from THALocal"];
+                sql = [NSString stringWithFormat:@"SELECT * from THALocal lo, THAUser th where lo.walletId = th.walletId  and th.userId = '%@'",[TLUser user].userId];
             }
           
             FMResultSet *set = [data.dataBase executeQuery:sql];

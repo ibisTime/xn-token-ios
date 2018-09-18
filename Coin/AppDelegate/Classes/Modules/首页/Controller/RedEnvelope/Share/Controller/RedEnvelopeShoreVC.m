@@ -239,6 +239,7 @@
     // 2.设置属性，可不设置使用默认值，见注解
     // 2.1 显示时点击背景是否移除弹框
     popView.isClickBGDismiss = [_invitationView isKindOfClass:[ZJAnimationPopView class]];
+    popView.isClickBGDismiss = YES;
     // 2.2 显示时背景的透明度
     //    popView.popBGAlpha = 0.5f;
     // 2.3 显示时是否监听屏幕旋转
@@ -271,13 +272,12 @@
         
     };
     // 4.显示弹框
-    [popView pop:self.shoreVie.backImg];
+    [popView pop];
 }
 
 - (void)removeIcon
 {
-    
-    
+
 }
 
 - (void)addIconImage

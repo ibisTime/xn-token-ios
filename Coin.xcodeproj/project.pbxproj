@@ -190,7 +190,6 @@
 		7A272662212BFFA70067E3CD /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A27265C212BFFA70067E3CD /* libWeChatSDK.a */; };
 		7A272663212BFFA70067E3CD /* read_me.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7A27265D212BFFA70067E3CD /* read_me.txt */; };
 		7A272664212BFFA70067E3CD /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7A27265E212BFFA70067E3CD /* README.txt */; };
-		7A3821BA20EAA54700D6B636 /* ZJAnimationPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A3821B820EAA54600D6B636 /* ZJAnimationPopView.m */; };
 		7A3821BD20EABD1300D6B636 /* GetTheTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A3821BC20EABD1300D6B636 /* GetTheTableView.m */; };
 		7A3821C020EACD8B00D6B636 /* SendTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A3821BF20EACD8B00D6B636 /* SendTableView.m */; };
 		7A3821C320EACDA100D6B636 /* SendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A3821C220EACDA100D6B636 /* SendCell.m */; };
@@ -212,6 +211,7 @@
 		7AABEAFB2148FEEF00283BC7 /* PoliteInstructionsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AABEAFA2148FEEF00283BC7 /* PoliteInstructionsVC.m */; };
 		7AABEAFE2149127200283BC7 /* BouncedPasteView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AABEAFD2149127200283BC7 /* BouncedPasteView.m */; };
 		7AAF0312214F8C35008507FF /* IntegralVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AAF0311214F8C35008507FF /* IntegralVC.m */; };
+		7AAF031821511BDE008507FF /* ZJAnimationPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AAF031621511BDD008507FF /* ZJAnimationPopView.m */; };
 		B80864EE211EA17D00755158 /* BTCBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = B8086411211EA17C00755158 /* BTCBlock.m */; };
 		B80864EF211EA17D00755158 /* BTCBlockHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = B8086412211EA17C00755158 /* BTCBlockHeader.m */; };
 		B80864F0211EA17D00755158 /* BTCEncryptedBackup.m in Sources */ = {isa = PBXBuildFile; fileRef = B8086415211EA17C00755158 /* BTCEncryptedBackup.m */; };
@@ -795,8 +795,6 @@
 		7A27265F212BFFA70067E3CD /* WechatAuthSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WechatAuthSDK.h; sourceTree = "<group>"; };
 		7A272660212BFFA70067E3CD /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
 		7A272661212BFFA70067E3CD /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
-		7A3821B820EAA54600D6B636 /* ZJAnimationPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZJAnimationPopView.m; sourceTree = "<group>"; };
-		7A3821B920EAA54600D6B636 /* ZJAnimationPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZJAnimationPopView.h; sourceTree = "<group>"; };
 		7A3821BB20EABD1300D6B636 /* GetTheTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GetTheTableView.h; sourceTree = "<group>"; };
 		7A3821BC20EABD1300D6B636 /* GetTheTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GetTheTableView.m; sourceTree = "<group>"; };
 		7A3821BE20EACD8B00D6B636 /* SendTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SendTableView.h; sourceTree = "<group>"; };
@@ -839,6 +837,8 @@
 		7AABEAFD2149127200283BC7 /* BouncedPasteView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BouncedPasteView.m; sourceTree = "<group>"; };
 		7AAF0310214F8C35008507FF /* IntegralVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IntegralVC.h; sourceTree = "<group>"; };
 		7AAF0311214F8C35008507FF /* IntegralVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IntegralVC.m; sourceTree = "<group>"; };
+		7AAF031621511BDD008507FF /* ZJAnimationPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZJAnimationPopView.m; sourceTree = "<group>"; };
+		7AAF031721511BDD008507FF /* ZJAnimationPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZJAnimationPopView.h; sourceTree = "<group>"; };
 		8863748C5281F9DC1DDF8EEA /* Pods-Coin.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Coin.release.xcconfig"; path = "Pods/Target Support Files/Pods-Coin/Pods-Coin.release.xcconfig"; sourceTree = "<group>"; };
 		AB34D27FC9725550E9092EC2 /* Pods-Coin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Coin.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Coin/Pods-Coin.debug.xcconfig"; sourceTree = "<group>"; };
 		B808640E211EA17C00755158 /* BTCMerkleTree+Tests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BTCMerkleTree+Tests.h"; sourceTree = "<group>"; };
@@ -2721,6 +2721,8 @@
 				B8DC39D0214B9FE9002E62E7 /* NewHtmlVC.m */,
 				7AAF0310214F8C35008507FF /* IntegralVC.h */,
 				7AAF0311214F8C35008507FF /* IntegralVC.m */,
+				7AAF031721511BDD008507FF /* ZJAnimationPopView.h */,
+				7AAF031621511BDD008507FF /* ZJAnimationPopView.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2913,8 +2915,6 @@
 		7A8A5D1D20EA2FC2002D9A48 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				7A3821B920EAA54600D6B636 /* ZJAnimationPopView.h */,
-				7A3821B820EAA54600D6B636 /* ZJAnimationPopView.m */,
 				7A8A5D2620EA3124002D9A48 /* RedEnvelopeShoreView.h */,
 				7A8A5D2720EA3124002D9A48 /* RedEnvelopeShoreView.m */,
 				7A8A5DD020EAA2DD002D9A48 /* InvitationView.h */,
@@ -3671,6 +3671,7 @@
 				B88B093320C908DC005C2D2F /* ResiseTextFiled.m in Sources */,
 				B8086510211EA17D00755158 /* BTCAssetAddress.m in Sources */,
 				B89F07DF211B06E20057E781 /* TLinviteVC.m in Sources */,
+				7AAF031821511BDE008507FF /* ZJAnimationPopView.m in Sources */,
 				7A8A5D1820EA0A23002D9A48 /* RedEnvelopeHeadView.m in Sources */,
 				7A3821C320EACDA100D6B636 /* SendCell.m in Sources */,
 				21223CB71FBDB2D200057444 /* WebVC.m in Sources */,
@@ -3757,7 +3758,6 @@
 				211A53321FBFE4F100CC6294 /* RateDescTableView.m in Sources */,
 				B8D938CF2116C2AC00B2AA88 /* QiestionDetailVC.m in Sources */,
 				216F5B17206CD9C900F2C832 /* StorePayVC.m in Sources */,
-				7A3821BA20EAA54700D6B636 /* ZJAnimationPopView.m in Sources */,
 				B83D1E0F20CE7076007835DB /* WalletForwordVC.m in Sources */,
 				211DE6B61FB58B4C002FCF3D /* UIView+Extension.m in Sources */,
 				21A7F3141FB2E2F900FAA0A2 /* TLPwdRelatedVC.m in Sources */,
@@ -4174,7 +4174,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.cdkj.tha;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "f0bdfda8-16f4-44bb-9c04-c57f281a59dc";
+				PROVISIONING_PROFILE = "379e50f8-6249-4e15-bb24-d0ca275acdad";
 				PROVISIONING_PROFILE_SPECIFIER = theia;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -4230,7 +4230,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.cdkj.tha;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "f0bdfda8-16f4-44bb-9c04-c57f281a59dc";
+				PROVISIONING_PROFILE = "379e50f8-6249-4e15-bb24-d0ca275acdad";
 				PROVISIONING_PROFILE_SPECIFIER = theia;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 3.0;
