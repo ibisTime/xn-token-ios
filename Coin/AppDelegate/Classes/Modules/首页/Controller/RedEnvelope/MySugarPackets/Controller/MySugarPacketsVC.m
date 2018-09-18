@@ -258,7 +258,7 @@
     [_vc1.view removeFromSuperview];
     
     self.vc1 = [[GetTheVC alloc]init];
-    if ([self.filterPicker.tagNames[0] isEqualToString:@"我发出的"]) {
+    if ([self.filterPicker.tagNames[0] isEqualToString:[LangSwitcher switchLang:@"我发出的" key:nil]]) {
         NSArray *textArr = @[[LangSwitcher switchLang:@"我收到的" key:nil],
                              ];
         self.filterPicker.tagNames = textArr;

@@ -1210,14 +1210,14 @@
             if (weakSelf.switchTager == 0) {
                 weakSelf.currencys = shouldDisplayCoins;
                 weakSelf.tableView.platforms = weakSelf.localCurrencys;
-                [weakSelf.tableView reloadData_tl];
                 [weakSelf saveLocalWalletData];
                 [weakSelf saveLocalWallet];
                 [weakSelf queryTotalAmount];
                 [weakSelf queryCenterTotalAmount];
                 [weakSelf queryMyAmount];
-                
-                [weakSelf.tableView endRefreshingWithNoMoreData_tl];
+                [weakSelf.tableView reloadData_tl];
+
+//                [weakSelf.tableView endRefreshingWithNoMoreData_tl];
             }else{
                 TLDataBase *dataBase = [TLDataBase sharedManager];
                 NSString *Mnemonics;
@@ -1236,12 +1236,14 @@
                 if (Mnemonics.length>0) {
                     weakSelf.currencys = shouldDisplayCoins;
                     weakSelf.tableView.platforms = shouldDisplayCoins;
-                    [weakSelf.tableView reloadData_tl];
+                    [weakSelf queryTotalAmount];
                     [weakSelf queryCenterTotalAmount];
                     [weakSelf queryMyAmount];
                     [weakSelf saveLocalWalletData];
                     [weakSelf saveLocalWallet];
-                    [weakSelf.tableView endRefreshingWithNoMoreData_tl];
+                    [weakSelf.tableView reloadData_tl];
+
+//                    [weakSelf.tableView endRefreshingWithNoMoreData_tl];
                 }else{
                     
                     weakSelf.currencys = shouldDisplayCoins;
@@ -1249,7 +1251,7 @@
                     [weakSelf.tableView reloadData_tl];
                     [weakSelf queryCenterTotalAmount];
                     
-                    [weakSelf.tableView endRefreshingWithNoMoreData_tl];
+//                    [weakSelf.tableView endRefreshingWithNoMoreData_tl];
                 }
               
             }
@@ -1289,15 +1291,16 @@
             if (weakSelf.switchTager == 0) {
                 [weakSelf saveLocalWalletData];
                 [weakSelf saveLocalWallet];
-                [weakSelf refreshOpenCoinList];
+//                [weakSelf refreshOpenCoinList];
                 [weakSelf queryTotalAmount];
                 [weakSelf queryCenterTotalAmount];
                 [weakSelf queryMyAmount];
+//                [weakSelf queryTotalAmount];
                 weakSelf.currencys = shouldDisplayCoins;
                 weakSelf.tableView.platforms = weakSelf.localCurrencys;
                 [weakSelf.tableView reloadData_tl];
             }else{
-                [weakSelf refreshOpenCoinList];
+//                [weakSelf refreshOpenCoinList];
                 [weakSelf queryTotalAmount];
                 [weakSelf queryCenterTotalAmount];
                 [weakSelf queryMyAmount];

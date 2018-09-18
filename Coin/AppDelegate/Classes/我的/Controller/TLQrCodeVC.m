@@ -92,9 +92,14 @@
         NSLog(@"移除完成");
     };
     // 4.显示弹框
-    [_popView pop];
+    [_popView pop:self.view];
 }
 
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    self.popView.hidden = YES;
+    
+}
 //打开微信,去粘贴
 -(void)pasteButtonClick
 {

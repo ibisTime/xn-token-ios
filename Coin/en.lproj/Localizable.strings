@@ -344,7 +344,7 @@
 "不能为空" = "must not be null";
 "个" = "";
 "常见问题帮助" = "FAQ help";
-"年" = "year";
+"年" = "";
 "Theia红包说明" = "Instruction for Theia gifts";
 "不能为空" = "must not be null";
 "我发出的" = "Sent";
@@ -815,7 +815,6 @@
 "分享到" = "Share to";
 "我的红包记录" = "My gift record";
 "红包说明及常见问题" = "Gift rules & FAQ";
-"年" = "year";
 "红包记录" = "Gift record";
 "共发出红包" = "Gifts sent in total";
 "共收到红包" = "Gifts received in total";
