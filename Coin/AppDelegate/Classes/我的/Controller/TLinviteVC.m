@@ -151,7 +151,7 @@
 }
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
-    [self.actionSheetController dismissViewControllerAnimated:YES completion:nil];
+    [self hideAlert];
     
 }
 

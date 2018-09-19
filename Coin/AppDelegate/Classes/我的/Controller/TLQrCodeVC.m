@@ -117,8 +117,11 @@
 
     }
     //http://m.thadev.hichengdai.com/user/register.html?inviteCode=U201807030441369491006&lang=ZH_CN
-    NSString * address = [NSString stringWithFormat:@"%@/user/register.html?inviteCode=%@&lang=%@",self.h5String,[TLUser user].secretUserId,lang];
-    pasteboard.string = address;
+//    NSString *content = @"Theia是全球首款跨链生态钱包，同时支持BTC、ETH、USDT等多币数字货币储存。注册即送10积分，千万BTC/ETH/WAN矿山，等您来挖】千万BTC/ETH/WAN矿山，等您来挖】千万BTC/ETH/WAN矿山，等您来挖】千万BTC/ETH/WAN矿山，等您来挖】";
+    
+//    NSString * address = [NSString stringWithFormat:@"%@/user/register.html?inviteCode=%@&lang=%@",self.h5String,[TLUser user].secretUserId,lang];
+//    NSString *h5Detail = [NSString stringWithFormat:@"%@ %@",content,address];
+    pasteboard.string = self.bouncedView.informationLabel.text;
 }
 
 

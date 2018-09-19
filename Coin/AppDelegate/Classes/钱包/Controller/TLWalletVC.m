@@ -145,6 +145,7 @@
 //    [self queryTotalAmount];
     if (word != nil && word.length > 0) {
        BOOL isBuild = [[NSUserDefaults standardUserDefaults] boolForKey:KISBuild];
+        //判断是否是创建或者导入钱包之后返回的
         if (isBuild == YES) {
             [self saveLocalWalletData];
             [self saveLocalWallet];
@@ -156,14 +157,14 @@
 
         }
 //        [self getMyCurrencyList];
-     
+     //1.7.0版本升级适配
         BOOL HasChecked =  [[NSUserDefaults standardUserDefaults] boolForKey:KIS170];
         if (btcadd != nil && btcadd.length > 0 && pwd !=nil) {
             return;
         }
       
         NSArray *words = [word componentsSeparatedByString:@" "];
-        
+        //这里第一次进行BTC的私钥和地址创建 存到用户表里面 和币种表
         BTCMnemonic *mnemonic =  [MnemonicUtil importMnemonic:words];
         if ([AppConfig config].runEnv == 0) {
             mnemonic.keychain.network = [BTCNetwork mainnet];
@@ -214,7 +215,8 @@
             [data.dataBase close];
 
         }
-        
+        //这里是从别的界面跳转回来 是否要下拉更新数据
+
 //        [self getMyCurrencyList];
 //        if (self.tableView.mj_header.isRefreshing) {
 //            return;
@@ -236,6 +238,7 @@
             if (self.tableView.mj_header.isRefreshing) {
                 return;
             }
+            //从私钥钱包子界面返回
             [self switchWithTager:0 ];
 
         }else{
@@ -278,15 +281,19 @@
     [self initTableView];
     self.switchTager = 1;
 
-    //通知
+    //登录退出通知
     [self addNotification];
-    //列表查询我的币种
+    //列表查询中心化币种列表
     [self getMyCurrencyList];
+    //列表查询个人账户总余额
     [self queryCenterTotalAmount];
+    //列表查询私钥钱包总余额
     [self queryMyAmount];
+    //数据库查询一键划转私钥钱包的币种
     [self queryTotalAllAmount];
-    //
+    //列表查询私钥钱包币种列表
     [self queryTotalAmount];
+    //获取公告列表
     [self requestRateList];
    
     
@@ -307,7 +314,7 @@
     
     
 }
-
+// 更新所有币种的配置信息 会存在沙盒里
 - (void)refreshOpenCoinList {
     [CoinUtil refreshOpenCoinList:^{
         
@@ -339,6 +346,7 @@
         _headerView.localBlock = ^{
              [weakSelf inreoduceView:@"私钥钱包" content:@"私钥钱包就是去中心化钱包,在去中心化钱包中,所有的用户身份验证内容,如交易密码,私钥，助记词等都保存在用户手机本地,并不是保存在中心化服务器里面,如果用户误删钱包,忘记备份私钥或者助记词，将无法找到钱包"];
         };
+        //点击公告隐藏按钮
         _headerView.clearBlock = ^{
 
 
@@ -356,51 +364,13 @@
             [weakSelf.tableView reloadData];
 
             
-
-//            CGFloat f1 = kDevice_Is_iPhoneX == YES ?15 :0;
-//            CGFloat fx = kDevice_Is_iPhoneX == YES ?36 :22;
-
-//            weakSelf.currentTableView.frame = CGRectMake(0, 5, kScreenWidth, kScreenHeight);
-//            weakSelf.tableView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight );
-
-//            [weakSelf.leftButton mas_remakeConstraints:^(MASConstraintMaker *make) {
-//                make.left.equalTo(weakSelf.view.mas_left).offset(15);
-//                make.bottom.equalTo(weakSelf.headerView.mas_bottom).offset(-fx);
-//                make.width.equalTo(@(kWidth(167.5)));
-//                make.height.equalTo(@(kHeight(40)));
-//
-//            }];
-//
-//
-//            [weakSelf.rightButton mas_remakeConstraints:^(MASConstraintMaker *make) {
-//                make.left.equalTo(weakSelf.leftButton.mas_right).offset(10);
-//                make.bottom.equalTo(weakSelf.headerView.mas_bottom).offset(-fx);
-//                make.width.equalTo(@(kWidth(167.5)));
-//                make.height.equalTo(@(kHeight(40)));
-//
-//            }];
-//            CGFloat f4 = self.isClear == YES ?320-30-15+5 : 350-30-30;
-//            if (kDevice_Is_iPhoneX) {
-//                f4 =320-30;
-//            }else{
-//
-//                }
-//            [weakSelf.titleView mas_makeConstraints:^(MASConstraintMaker *make) {
-//                make.top.equalTo(@(kHeight(f4)));
-//                make.right.equalTo(@-15);
-//                make.left.equalTo(@15);
-//                make.height.equalTo(@30);
-//            }];
-//            [weakSelf.view setNeedsLayout];
         };
         //切换钱包事件
-        
         _headerView.switchBlock = ^(NSInteger teger) {
             [weakSelf switchWithTager:teger];
 
         };
-//        _headerView.switchBlock = ^(NSInteger teger) {
-//        };
+
         //点击二维码事件
         
         _headerView.codeBlock = ^{
@@ -408,11 +378,7 @@
             
             qrCodeVC.scanSuccess = ^(NSString *result) {
                 
-//                weakSelf.receiveAddressLbl.text = result;
-//                weakSelf.receiveAddressLbl.textColor = kTextColor;
-//                weakSelf.addressType = WalletAddressTypeScan;
-                //                [weakSelf setGoogleAuth];
-                
+
             };
             
             [weakSelf.navigationController pushViewController:qrCodeVC animated:YES];
@@ -431,20 +397,6 @@
             
             weakSelf.tempcurrencys = [NSMutableArray array];
             monyVc.select = ^(NSMutableArray *model) {
-//                weakSelf.currencys = model;
-//                weakSelf.currencys = [NSMutableArray array];
-//                for (CurrencyModel *m in model) {
-//                    if (m.IsSelected == YES) {
-//                        [weakSelf.currencys addObject:m];
-//                    }
-//                }
-//                weakSelf.currentTableView.platforms = nil;
-//                [weakSelf.currentTableView reloadData];
-//
-//                weakSelf.currentTableView.platforms = weakSelf.currencys;
-////                [weakSelf.currentTableView beginRefreshing];
-//                [weakSelf.currentTableView reloadData];
-//                [weakSelf ]
 
                 [weakSelf switchWithTager:0];
                 NSLog(@"%@",model);
@@ -456,7 +408,7 @@
     }
     return _headerView;
 }
-
+//点击问号的提示构造方法
 - (void)inreoduceView: (NSString *)name content: (NSString *)contents
 {
     
@@ -536,7 +488,7 @@
     self.contentView.hidden = YES;
     
 }
-
+//弃用
 - (void)initLocalTableView {
     
     
@@ -703,6 +655,7 @@
         
     };
 }
+
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
     NSSet *allTouches = [event allTouches];    //返回与当前接收者有关的所有的触摸对象
@@ -710,6 +663,9 @@
     
 }
 
+/**
+点击加号
+ */
 - (void)addCurrent
 {
     
@@ -734,6 +690,12 @@
     NSLog(@"点击添加");
     
 }
+
+/**
+ 切换私钥钱包和个人钱包滑块
+
+ @param tager 索引
+ */
 - (void)switchWithTager: (NSInteger)tager
 {
 
@@ -761,14 +723,7 @@
         self.tableView.hidden = NO;
         self.tableView.isLocal = NO;
         self.addButton.hidden = YES;
-//        CGFloat fx = kDevice_Is_iPhoneX == YES ?36 :17+5;
-//        if (kDevice_Is_iPhoneX) {
-//            fx = self.isClear == YES ?fx-10 : fx+15;
-//
-//        }else{
-//
-//
-//        }
+
         CGFloat h = self.isClear == YES ? 300 : 315;
         if (kDevice_Is_iPhoneX) {
             h += 20;
@@ -817,7 +772,7 @@
             [set close];
         }
         [dataBase.dataBase close];
-        
+        //如果已创建钱包 显示私钥钱包列表
         if (Mnemonics.length > 0) {
             self.homeView.hidden = YES;
             self.leftButton.hidden = NO;
@@ -861,21 +816,14 @@
             self.tableView.platforms = self.localCurrencys;
 
             [self.tableView reloadData];
+            //检查币种表是否更新 是否需要缓存 更新
                 [self saveLocalWalletData];
                 [self saveLocalWallet];
 //            self.tableView.bounces = YES;
 
 
                 [self getLocalWalletMessage];
-//                self.contentView.hidden = YES;
-//            if (self.contentView.hidden == NO) {
-//                return;
-//            }
-//                [self inreoduceView:@"私钥账户" content:@"私钥钱包就是去中心化钱包,在去中心化钱包中,所有的用户身份验证内容,如交易密码,私钥，助记词等都保存在用户手机本地,并不是保存在中心化服务器里面,如果用户误删钱包,忘记备份私钥或者助记词，将无法找到钱包"];
-//                self.contentView.hidden = NO;
 
-//            }];
-            //已存在
             return;
         }
         // 2不存在就创建
@@ -1768,11 +1716,10 @@
     
     [http postWithSuccess:^(id responseObject) {
        weakSelf.allCurrencys = [CurrencyModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"][@"accountList"]];
-//        if (weakSelf.isAddBack == YES || weakSelf.switchTager == 0) {
-//            weakSelf.tableView.platforms = weakSelf.localCurrencys;
-//            [weakSelf.tableView reloadData];
-//        }
-//        weakSelf.allCurrencys = localCurrencys;
+        if (weakSelf.isAddBack == YES || weakSelf.switchTager == 0) {
+            weakSelf.tableView.platforms = weakSelf.localCurrencys;
+            [weakSelf.tableView reloadData];
+        }
         
     } failure:^(NSError *error) {
         
