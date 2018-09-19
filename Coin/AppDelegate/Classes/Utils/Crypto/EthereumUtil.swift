@@ -106,8 +106,8 @@ public class EthCrypto: NSObject
     static public func getGasPrice() -> String? {
         
         //rinkey测试环境，上线需要修改
-        let web3 = Web3.InfuraMainnetWeb3();
-//        let web3 = Web3.InfuraRinkebyWeb3();
+//        let web3 = Web3.InfuraMainnetWeb3();
+        let web3 = Web3.InfuraRinkebyWeb3();
 
         let gasPriceResult = web3.eth.getGasPrice();
         if case .failure(_) = gasPriceResult {
@@ -124,9 +124,9 @@ public class EthCrypto: NSObject
     static public func getWanGasPrice() -> String? {
         
         //rinkey测试环境，上线需要修改
-//        let web3 = Web3.new(URL.init(string: "http://120.26.6.213:8546")!)
+        let web3 = Web3.new(URL.init(string: "http://120.26.6.213:8546")!)
 
-        let web3 = Web3.new(URL.init(string: "http://47.75.165.70:8546")!)
+//        let web3 = Web3.new(URL.init(string: "http://47.75.165.70:8546")!)
         let gasPriceResult = web3?.eth.getGasPrice();
         if case .failure(_)? = gasPriceResult {
             return (nil)
@@ -143,8 +143,8 @@ public class EthCrypto: NSObject
     static public func getETHTokenPrice() -> String? {
         
 //        //rinkey测试环境，上线需要修改
-        let web3 = Web3.InfuraMainnetWeb3();
-//                let web3 = Web3.InfuraRinkebyWeb3();
+//        let web3 = Web3.InfuraMainnetWeb3();
+                let web3 = Web3.InfuraRinkebyWeb3();
 
 //
 //        let gasPriceResult = web3.eth.getGasPrice();
@@ -176,8 +176,8 @@ public class EthCrypto: NSObject
            
             let keystore = try! BIP32Keystore(mnemonics: mnemonic, password: "BANKEXFOUNDATION", mnemonicsPassword: "")
             
-            let web3Rinkeby = Web3.InfuraMainnetWeb3()
-//             let web3Rinkeby = Web3.InfuraRinkebyWeb3()
+//            let web3Rinkeby = Web3.InfuraMainnetWeb3()
+             let web3Rinkeby = Web3.InfuraRinkebyWeb3()
             let keystoreManager = KeystoreManager.init([keystore!])
             web3Rinkeby.addKeystoreManager(keystoreManager)
             
@@ -219,8 +219,8 @@ public class EthCrypto: NSObject
         //        txHash = "";
         do{
             let keystore = try! BIP32Keystore(mnemonics: mnemonic, password: "BANKEXFOUNDATION", mnemonicsPassword: "")
-//            let web3Rinkeby = Web3.InfuraRinkebyWeb3()
-              let web3Rinkeby = Web3.InfuraMainnetWeb3()
+            let web3Rinkeby = Web3.InfuraRinkebyWeb3()
+//              let web3Rinkeby = Web3.InfuraMainnetWeb3()
             let keystoreManager = KeystoreManager.init([keystore!])
             web3Rinkeby.addKeystoreManager(keystoreManager)
             var convenienceTransferOptions = Web3Options.defaultOptions()
@@ -267,8 +267,8 @@ public class EthCrypto: NSObject
             
             let keystore = try! BIP32Keystore(mnemonics: mnemonic, password: "BANKEXFOUNDATION", mnemonicsPassword: "")
             
-            let web3wan = Web3.new(URL.init(string: "http://47.75.165.70:8546")!)
-//            let web3wan = Web3.new(URL.init(string: "http://120.26.6.213:8546")!)
+//            let web3wan = Web3.new(URL.init(string: "http://47.75.165.70:8546")!)
+            let web3wan = Web3.new(URL.init(string: "http://120.26.6.213:8546")!)
             
             let keystoreManager = KeystoreManager.init([keystore!])
             web3wan?.addKeystoreManager(keystoreManager)
