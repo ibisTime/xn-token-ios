@@ -4362,7 +4362,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = VQPS9BLJYN;
+				DEVELOPMENT_TEAM = 3ZCW993X44;
 				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = NO;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -4380,6 +4380,7 @@
 					"$(PROJECT_DIR)/Coin/ValidationSDK",
 				);
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = YES;
+				GCC_PREFIX_HEADER = /Users/qinbaozheng/Desktop/THA/Coin/AppDelegate/CoinPrefixHeader.pch;
 				INFOPLIST_FILE = Coin/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -4519,7 +4520,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = VQPS9BLJYN;
+				DEVELOPMENT_TEAM = 3ZCW993X44;
 				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = NO;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -4537,6 +4538,7 @@
 					"$(PROJECT_DIR)/Coin/ValidationSDK",
 				);
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = YES;
+				GCC_PREFIX_HEADER = /Users/qinbaozheng/Desktop/THA/Coin/AppDelegate/CoinPrefixHeader.pch;
 				INFOPLIST_FILE = Coin/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

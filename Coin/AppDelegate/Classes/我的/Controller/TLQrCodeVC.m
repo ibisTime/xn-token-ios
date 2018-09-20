@@ -49,11 +49,7 @@
         kViewRadius(_bouncedView, 4);
         [_bouncedView.pasteButton addTarget:self action:@selector(pasteButtonClick) forControlEvents:(UIControlEventTouchUpInside)];
         
-//        _bouncedView.informationLabel.attributedText = [self ReturnsTheDistanceBetween:[NSString stringWithFormat:@"【Theia是全球首款跨链生态钱包，同时支持BTC、ETH、USDT等多币数字货币储存。注册即送10积分，千万BTC/ETH/WAN矿山，等您来挖】%@",address1]];
-//        _bouncedView.informationLabel.text = [self ReturnsTheDistanceBetween:[NSString stringWithFormat:@"【Theia是全球首款跨链生态钱包，同时支持BTC、ETH、USDT等多币数字货币储存。注册即送10积分，千万BTC/ETH/WAN矿山，等您来挖】%@",address1]];
-//        _bouncedView.informationLabel.numberOfLines = 0;
-//        _bouncedView.frame = CGRectMake(kWidth(25), SCREEN_HEIGHT + kNavigationBarHeight , SCREEN_WIDTH - kWidth(50), _bouncedView.pasteButton.yy + kHeight(30));
-//        [_bouncedView.informationLabel sizeToFit];
+
 
     }
     return _bouncedView;
@@ -116,11 +112,7 @@
         lang = @"EN";
 
     }
-    //http://m.thadev.hichengdai.com/user/register.html?inviteCode=U201807030441369491006&lang=ZH_CN
-//    NSString *content = @"Theia是全球首款跨链生态钱包，同时支持BTC、ETH、USDT等多币数字货币储存。注册即送10积分，千万BTC/ETH/WAN矿山，等您来挖】千万BTC/ETH/WAN矿山，等您来挖】千万BTC/ETH/WAN矿山，等您来挖】千万BTC/ETH/WAN矿山，等您来挖】";
-    
-//    NSString * address = [NSString stringWithFormat:@"%@/user/register.html?inviteCode=%@&lang=%@",self.h5String,[TLUser user].secretUserId,lang];
-//    NSString *h5Detail = [NSString stringWithFormat:@"%@ %@",content,address];
+
     pasteboard.string = self.bouncedView.informationLabel.text;
 }
 
@@ -295,7 +287,7 @@
     http://m.thadev.hichengdai.com/user/register.html?inviteCode=U201807030441369491006&lang=ZH_CN
      address = [NSString stringWithFormat:@"%@/user/register.html?inviteCode=%@&lang=%@",self.h5String,[TLUser user].secretUserId,lang];
 
-    self.bouncedView.informationLabel.attributedText = [self ReturnsTheDistanceBetween:[NSString stringWithFormat:@"%@%@",[LangSwitcher switchLang:@"【Theia是全球首款跨链生态钱包，同时支持BTC、ETH、USDT等多币数字货币储存。注册即送10积分，千万BTC/ETH/WAN矿山，等您来挖】" key:nil],address]];
+    self.bouncedView.informationLabel.attributedText = [self ReturnsTheDistanceBetween:[NSString stringWithFormat:@"%@%@",[LangSwitcher switchLang:@"【Theia是全球首款跨链生态钱包，同时支持BTC、ETH、TUSD等多币数字货币储存。注册即送10积分，千万BTC/ETH/WAN矿山，等您来挖】" key:nil],address]];
 
 
 

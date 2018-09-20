@@ -315,8 +315,8 @@
 "资产" = "Assets";
 "闪兑" = "Instant swap";
 "一键划转" = "Smart transfer";
-"个人账户" = "My Wallet ";
-"私钥钱包" = "Decentralized Wallet";
+"个人账户" = "Platform Account";
+"私钥钱包" = "Private Key Wallet ";
 "首创玩法" = "Global Master and Apprentice Initiative";
 "量化理财" = "Quantitative Finance";
 "账户与安全" = "Account and Security";
@@ -350,7 +350,7 @@
 "我发出的" = "Sent";
 "积分抽奖" = "Wheel of fortune using points";
 "分享" = "share";
-"私钥账户" = "Private key account";
+"私钥账户" = "Private Key Wallet";
 "提币数量" = "Amount";
 "Theia红包" = "Theia gifts";
 "手续费将在提币金额中扣除" = "The withdraw fee will be deducted from the cash amount";
@@ -774,7 +774,7 @@
 "加载完成" = "Load completed";
 "加载失败" = "Load failed";
 "全部加载完成" = "No more data to be loaded";
-"【Theia是全球首款跨链生态钱包，同时支持BTC、ETH、USDT等多币数字货币储存。注册即送10积分，千万BTC/ETH/WAN矿山，等您来挖】" = "Theia is the world’s first cross-chain profit sharing wallet, which supports multi-crypto-asset management, including BTC, ETH and USDT. Register and get 10 points, and you’ll have chance to draw a prize from ¥10,000,000 RMB worth of prize pool (BTC, ETH and WAN).";
+"【Theia是全球首款跨链生态钱包，同时支持BTC、ETH、TUSD等多币数字货币储存。注册即送10积分，千万BTC/ETH/WAN矿山，等您来挖】" = "Theia is the world’s first cross-chain profit sharing wallet, which supports multi-crypto-asset management, including BTC, ETH and TUSD. Register and get 10 points, and you’ll have chance to draw a prize from ¥10,000,000 RMB worth of prize pool (BTC, ETH and WAN).";
 "请留下您的联系方式（推荐邮箱)" = "Please leave your contact info (email address is highly recommended)";
 "保存二维码" = "Save QR code";
 "信用积分" = "Credit";
@@ -797,7 +797,6 @@
 "马上提币" = "withdraw immediately";
 "点    马上提币" = "points to withdraw immediately";
 "本次划转矿工费为" = "Transaction fee is";
-"私钥账户" = "Private key account";
 "从" = "from";
 "到" = "to";
 "划转" = "Transfe";

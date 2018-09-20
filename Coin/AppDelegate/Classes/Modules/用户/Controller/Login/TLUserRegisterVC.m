@@ -435,14 +435,14 @@
     LangType type = [LangSwitcher currentLangType];
     NSString *lang;
     if (type == LangTypeSimple || type == LangTypeTraditional) {
-        lang = @"ZH_CN";
+        lang = @"zh_CN";
     }else if (type == LangTypeKorean)
     {
-        lang = @"KO";
+        lang = @"nil";
 
 
     }else{
-        lang = @"EN";
+        lang = @"en";
 
     }
     UIViewController *vc = [MSAuthVCFactory simapleVerifyWithType:(MSAuthTypeSlide) language:lang Delegate:self authCode:@"0335" appKey:nil];
@@ -461,6 +461,8 @@
             TLNetworking *http = [TLNetworking new];
             http.showView = self.view;
             http.code = CAPTCHA_CODE;
+            http.parameters[@"client"] = @"ios";
+            http.parameters[@"sessionId"] = sessionId;
             http.parameters[@"bizType"] = USER_REG_CODE;
             http.parameters[@"mobile"] = self.phoneTf.text;
             http.parameters[@"interCode"] = [NSString stringWithFormat:@"00%@",[self.PhoneCode.text substringFromIndex:1]];

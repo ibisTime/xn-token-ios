@@ -20,7 +20,7 @@
 #import "QRCodeVC.h"
 
 #define ADDRESS_ADD_API_CODE @"802170"
-@interface CoinAddAddressVC ()
+@interface CoinAddAddressVC ()<MSAuthProtocol>
 //标签
 @property (nonatomic, strong) TLTextField *remarkTF;
 //提币地址
@@ -341,24 +341,57 @@
 
 - (void)sendCaptcha {
     
-    TLNetworking *http = [TLNetworking new];
-    http.showView = self.view;
-    http.code = CAPTCHA_CODE;
-    http.parameters[@"bizType"] = ADDRESS_ADD_API_CODE;
-    http.parameters[@"mobile"] = [TLUser user].mobile;
-    
-    [http postWithSuccess:^(id responseObject) {
-        
-        [TLAlert alertWithSucces:[LangSwitcher switchLang:@"验证码已发送,请注意查收" key:nil]];
-        
-        [self.captchaView.captchaBtn begin];
-        
-    } failure:^(NSError *error) {
-        
-        [TLAlert alertWithError:[LangSwitcher switchLang:@"发送失败,请检查手机号" key:nil]];
-        
-    }];
-    
+
+    LangType type = [LangSwitcher currentLangType];
+    NSString *lang;
+    if (type == LangTypeSimple || type == LangTypeTraditional) {
+        lang = @"zh_CN";
+    }else if (type == LangTypeKorean)
+    {
+        lang = @"nil";
+
+
+    }else{
+        lang = @"en";
+
+    }
+    UIViewController *vc = [MSAuthVCFactory simapleVerifyWithType:(MSAuthTypeSlide) language:lang Delegate:self authCode:@"0335" appKey:nil];
+    [self.navigationController pushViewController:vc animated:YES];
+
+}
+
+-(void)verifyDidFinishedWithResult:(t_verify_reuslt)code Error:(NSError *)error SessionId:(NSString *)sessionId
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if (error) {
+            NSLog(@"验证失败 %@", error);
+            [TLAlert alertWithSucces:[LangSwitcher switchLang:@"验证失败" key:nil]];
+        } else {
+
+            TLNetworking *http = [TLNetworking new];
+            http.showView = self.view;
+            http.code = CAPTCHA_CODE;
+            http.parameters[@"client"] = @"ios";
+            http.parameters[@"sessionId"] = sessionId;
+            http.parameters[@"bizType"] = ADDRESS_ADD_API_CODE;
+            http.parameters[@"mobile"] = [TLUser user].mobile;
+
+            [http postWithSuccess:^(id responseObject) {
+
+                [TLAlert alertWithSucces:[LangSwitcher switchLang:@"验证码已发送,请注意查收" key:nil]];
+
+                [self.captchaView.captchaBtn begin];
+
+            } failure:^(NSError *error) {
+
+                [TLAlert alertWithError:[LangSwitcher switchLang:@"发送失败,请检查手机号" key:nil]];
+
+            }];
+
+        }
+        [self.navigationController popViewControllerAnimated:YES];
+        //将sessionid传到经过app服务器做二次验证
+    });
 }
 
 - (void)clickConfirm:(UIButton *)sender {

@@ -20,33 +20,7 @@
     if (!_informationLabel) {
         _informationLabel = [UILabel labelWithFrame:CGRectMake(kWidth(6), kHeight(10), SCREEN_WIDTH - kWidth(112), 200) textAligment:(NSTextAlignmentLeft) backgroundColor:kClearColor font:FONT(14) textColor:kHexColor(@"#2A2A2A")];
         _informationLabel.numberOfLines = 0;
-//        UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
-//        _informationLabel.attributedText = [self ReturnsTheDistanceBetween:@"【Theia是全球首款跨链生态钱包，同时支持BTC、ETH、USDT等多币数字货币储存。注册即送10积分，千万BTC/ETH/WAN矿山，等您来挖】千万BTC/ETH/WAN矿山，等您来挖】千万BTC/ETH/WAN矿山，等您来挖】千万BTC/ETH/WAN矿山，等您来挖】"];
-//        _informationLabel.numberOfLines = 0;
-//        [_informationLabel sizeToFit];
-//        NSString *lang;
-//        LangType type = [LangSwitcher currentLangType];
-//        if (type == LangTypeSimple || type == LangTypeTraditional) {
-//            lang = @"ZH_CN";
-//        }else if (type == LangTypeKorean)
-//        {
-//            lang = @"KO";
-//        }else{
-//            lang = @"EN";
-//
-//        }
-//        TLNetworking *http = [TLNetworking new];
-//        http.showView = self;
-//        http.code = @"660917";
-//        http.parameters[@"ckey"] = @"redPacketShareUrl";
-//        [http postWithSuccess:^(id responseObject) {
-//            NSString *str = [NSString stringWithFormat:@"%@/user/register.html?inviteCode=%@&lang=%@",responseObject[@"data"][@"cvalue"],[TLUser user].secretUserId,lang];
-//
-//
-//            [self setNeedsDisplay];
-//        } failure:^(NSError *error) {
-//
-//        }];
+
     }
     return _informationLabel;
 }

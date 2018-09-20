@@ -212,15 +212,15 @@
 
     LangType type = [LangSwitcher currentLangType];
     if (type == LangTypeSimple || type == LangTypeTraditional) {
-        lang = @"ZH_CN";
+        lang = @"zh_CN";
     }else if (type == LangTypeKorean)
     {
-        lang = @"KO";
-        
-        
+        lang = @"nil";
+
+
     }else{
-        lang = @"EN";
-        
+        lang = @"en";
+
     }
     TLNetworking *http = [TLNetworking new];
     

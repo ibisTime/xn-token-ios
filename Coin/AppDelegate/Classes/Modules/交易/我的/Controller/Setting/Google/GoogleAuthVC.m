@@ -14,8 +14,13 @@
 #import "APICodeMacro.h"
 
 #import "NSString+Check.h"
+#import <SecurityGuardSDK/JAQ/SecurityVerification.h>
+#import <MSAuthSDK/MSAuthVCFactory.h>
+#import <MSAuthSDK/MSAuthSDK.h>
+#import <SecurityGuardSDK/JAQ/SecurityVerification.h>
+#import <SVProgressHUD/SVProgressHUD.h>
 
-@interface GoogleAuthVC ()<UITextFieldDelegate>
+@interface GoogleAuthVC ()<UITextFieldDelegate,MSAuthProtocol>
 
 //密钥
 @property (nonatomic, strong) TLTextField *secretTF;
@@ -149,26 +154,57 @@
 
 - (void)sendCaptcha {
     
-    //发送验证码
-    TLNetworking *http = [TLNetworking new];
-    http.showView = self.view;
-    http.code = CAPTCHA_CODE;
-    http.parameters[@"bizType"] = @"805071";
-    http.parameters[@"mobile"] = [TLUser user].mobile;
-    http.parameters[@"interCode"] = [TLUser user].interCode;
+    
+    LangType type = [LangSwitcher currentLangType];
+    NSString *lang;
+    if (type == LangTypeSimple || type == LangTypeTraditional) {
+        lang = @"zh_CN";
+    }else if (type == LangTypeKorean)
+    {
+        lang = @"nil";
 
-    [http postWithSuccess:^(id responseObject) {
-        
-        [TLAlert alertWithSucces:[LangSwitcher switchLang:@"验证码已发送,请注意查收" key:nil]];
-        
-        [self.captchaView.captchaBtn begin];
-        
-    } failure:^(NSError *error) {
-        
-    }];
-    
-    
+
+    }else{
+        lang = @"en";
+
+    }
+    UIViewController *vc = [MSAuthVCFactory simapleVerifyWithType:(MSAuthTypeSlide) language:lang Delegate:self authCode:@"0335" appKey:nil];
+    [self.navigationController pushViewController:vc animated:YES];
+
 }
+
+-(void)verifyDidFinishedWithResult:(t_verify_reuslt)code Error:(NSError *)error SessionId:(NSString *)sessionId
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if (error) {
+            NSLog(@"验证失败 %@", error);
+            [TLAlert alertWithSucces:[LangSwitcher switchLang:@"验证失败" key:nil]];
+        } else {
+            //发送验证码
+            TLNetworking *http = [TLNetworking new];
+            http.showView = self.view;
+            http.code = CAPTCHA_CODE;
+            http.parameters[@"client"] = @"ios";
+            http.parameters[@"sessionId"] = sessionId;
+            http.parameters[@"bizType"] = @"805071";
+            http.parameters[@"mobile"] = [TLUser user].mobile;
+            http.parameters[@"interCode"] = [TLUser user].interCode;
+            http.parameters[@"sessionId"] = sessionId;
+            [http postWithSuccess:^(id responseObject) {
+
+                [TLAlert alertWithSucces:[LangSwitcher switchLang:@"验证码已发送,请注意查收" key:nil]];
+
+                [self.captchaView.captchaBtn begin];
+
+            } failure:^(NSError *error) {
+
+            }];
+        }
+        [self.navigationController popViewControllerAnimated:YES];
+        //将sessionid传到经过app服务器做二次验证
+    });
+}
+
 
 - (void)changeGoogleAuth {
     

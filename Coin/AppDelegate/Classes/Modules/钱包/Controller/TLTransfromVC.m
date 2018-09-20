@@ -102,14 +102,18 @@ typedef enum : NSUInteger {
     
     [self transformNow];
     self.nineView.isLocal = self.isLocal == YES ? YES : NO ;
-    self.nineView.models = self.currencys;
-    [self.nineView reloadData];
-    if (self.isLocal == YES) {
 
+
+    if (self.isLocal == YES) {
+        self.nineView.models = self.localcurrencys;
 //        [self loadtype];
 //        [self loadGas];
         [self changes];
+    }else
+    {
+        self.nineView.models = self.currencys;
     }
+    [self.nineView reloadData];
   
   
 //    UIImageView *image =   [UIImageView new];
@@ -290,7 +294,6 @@ typedef enum : NSUInteger {
             if (self.currentModel.symbol == self.centercurrencys[i].currency) {
                 self.currentModel = self.centercurrencys[i];
             }
-            
         }
         if (self.currentModel.currency.length > 0) {
             
@@ -488,12 +491,10 @@ typedef enum : NSUInteger {
     
     self.googleAuthTF.keyboardType = UIKeyboardTypeNumberPad;
     [wallletView addSubview:self.googleAuthTF];
-    if (self.isLocal == NO) {
         [self.view addSubview:self.googleAuthTF];
 
         self.googleAuthTF.hidden = ![TLUser user].isGoogleAuthOpen;
 
-    }
 
 
     
@@ -796,8 +797,7 @@ typedef enum : NSUInteger {
 
     
     if ([TLUser user].isGoogleAuthOpen) {
-        
-        [TLAlert alertWithInfo:@"请关闭谷歌验证"];
+        http.parameters[@"googleCaptcha"] = self.googleAuthTF.text;
     }
     
     [http postWithSuccess:^(id responseObject) {

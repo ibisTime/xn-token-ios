@@ -29,13 +29,19 @@
 #import "TLUserFindPwdVC.h"
 
 #import <UMMobClick/MobClick.h>
+
+#import <SecurityGuardSDK/JAQ/SecurityVerification.h>
+#import <MSAuthSDK/MSAuthVCFactory.h>
+#import <MSAuthSDK/MSAuthSDK.h>
+#import <SecurityGuardSDK/JAQ/SecurityVerification.h>
+#import <SVProgressHUD/SVProgressHUD.h>
 //腾讯云
 //#import "ChatManager.h"   czy
 //#import "IMModel.h"
 //
 //#import <ImSDK/TIMManager.h>
 
-@interface TLUserLoginVC ()<UITextFieldDelegate>
+@interface TLUserLoginVC ()<UITextFieldDelegate,MSAuthProtocol>
 
 @property (nonatomic,strong) TLTextField *phoneTf;
 @property (nonatomic,strong) AccountTf *pwdTf;
@@ -67,6 +73,10 @@
 - (void)viewWillAppear:(BOOL)animated {
     self.navigationController.navigationBar.hidden = YES;
     [super viewWillAppear:animated];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    self.navigationController.navigationBar.hidden = NO;
 }
 
 - (void)viewDidLoad {
@@ -523,33 +533,67 @@
     if (![self.phoneTf.text isPhoneNum]) {
         
         [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入正确的手机号" key:nil]];
-        
         return;
     }
-    
-    
-    
-        //发送验证码
-        TLNetworking *http = [TLNetworking new];
-        http.showView = self.view;
-        http.code = CAPTCHA_CODE;
-        http.parameters[@"bizType"] = @"805044";
-        http.parameters[@"mobile"] = self.phoneTf.text;
-        http.parameters[@"interCode"] = [NSString stringWithFormat:@"00%@",[self.PhoneCode.text substringFromIndex:1]];;
-        
-        [http postWithSuccess:^(id responseObject) {
-            
-            [TLAlert alertWithSucces:[LangSwitcher switchLang:@"验证码已发送,请注意查收" key:nil]];
-            
-            [self.captchaView.captchaBtn begin];
-            
-        } failure:^(NSError *error) {
-            
-        }];
-        
-    
-    
+    LangType type = [LangSwitcher currentLangType];
+    NSString *lang;
+    if (type == LangTypeSimple || type == LangTypeTraditional) {
+        lang = @"zh_CN";
+    }else if (type == LangTypeKorean)
+    {
+        lang = @"nil";
+
+
+    }else{
+        lang = @"en";
+
+    }
+    UIViewController *vc = [MSAuthVCFactory simapleVerifyWithType:(MSAuthTypeSlide) language:lang Delegate:self authCode:@"0335" appKey:nil];
+    [self.navigationController pushViewController:vc animated:YES];
+
 }
+
+-(void)verifyDidFinishedWithResult:(t_verify_reuslt)code Error:(NSError *)error SessionId:(NSString *)sessionId
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if (error) {
+            NSLog(@"验证失败 %@", error);
+            [TLAlert alertWithSucces:[LangSwitcher switchLang:@"验证失败" key:nil]];
+        } else {
+            NSLog(@"验证通过 %@", sessionId);
+            //发送验证码
+//            [SVProgressHUD show];
+            TLNetworking *http = [TLNetworking new];
+            http.showView = self.view;
+            http.code = CAPTCHA_CODE;
+            http.parameters[@"client"] = @"ios";
+            http.parameters[@"sessionId"] = sessionId;
+            http.parameters[@"bizType"] = @"805044";
+            http.parameters[@"mobile"] = self.phoneTf.text;
+            http.parameters[@"interCode"] = [NSString stringWithFormat:@"00%@",[self.PhoneCode.text substringFromIndex:1]];;
+            http.parameters[@"sessionId"] = sessionId;
+
+            [http postWithSuccess:^(id responseObject) {
+
+                [TLAlert alertWithSucces:[LangSwitcher switchLang:@"验证码已发送,请注意查收" key:nil]];
+
+                [self.captchaView.captchaBtn begin];
+//                MBProgressHUD hi
+//                [MBProgressHUD hideHUDForView:self.view animated:YES];
+
+            } failure:^(NSError *error) {
+
+//                [MBProgressHUD hideHUDForView:self.view animated:YES];
+            }];
+        }
+        [self.navigationController popViewControllerAnimated:YES];
+        //将sessionid传到经过app服务器做二次验证
+    });
+}
+
+
+
+
 - (void)changeCodeLogin
 {
     self.forgetPwdBtn.selected = !self.forgetPwdBtn.selected;
@@ -628,6 +672,8 @@
     [self.navigationController pushViewController:vc animated:YES];
     
 }
+
+
 
 - (void)goReg {
     

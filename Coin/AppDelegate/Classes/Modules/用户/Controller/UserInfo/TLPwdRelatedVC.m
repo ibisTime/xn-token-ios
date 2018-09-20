@@ -14,7 +14,12 @@
 #import "CountryModel.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "NSString+Extension.h"
-@interface TLPwdRelatedVC ()
+#import <SecurityGuardSDK/JAQ/SecurityVerification.h>
+#import <MSAuthSDK/MSAuthVCFactory.h>
+#import <MSAuthSDK/MSAuthSDK.h>
+#import <SecurityGuardSDK/JAQ/SecurityVerification.h>
+
+@interface TLPwdRelatedVC ()<MSAuthProtocol>
 
 @property (nonatomic,assign) TLPwdType type;
 @property (nonatomic,strong) TLTextField *phoneTf;
@@ -380,35 +385,66 @@
 }
 
 - (void)sendCaptcha {
-    
-    TLNetworking *http = [TLNetworking new];
-    http.showView = self.view;
-    http.code = CAPTCHA_CODE;
-    if (self.type == TLPwdTypeTradeReset) { //重置交易密码
-        
-        http.parameters[@"bizType"] = USER_FIND_TRADE_PWD;
-        
-    } else if (self.type == TLPwdTypeForget || self.type == TLPwdTypeReset){ //找回密码||修改登录密码
-        
-        http.parameters[@"bizType"] = USER_CHANGE_PWD_CODE;
-        
-    } else if (self.type == TLPwdTypeSetTrade) {//设置资金密码
-        
-        http.parameters[@"bizType"] = USER_SET_TRADE_PWD;
-        
-    }
-    http.parameters[@"mobile"] = self.phoneTf.text;
 
-    http.parameters[@"interCode"] = [NSString stringWithFormat:@"00%@",[self.PhoneCode.text substringFromIndex:1]];
-    [http postWithSuccess:^(id responseObject) {
-        
-        [TLAlert alertWithSucces:[LangSwitcher switchLang:@"验证码已发送,请注意查收" key:nil]];
-        [self.captchaView.captchaBtn begin];
-        
-    } failure:^(NSError *error) {
-        
-    }];
-    
+    LangType type = [LangSwitcher currentLangType];
+    NSString *lang;
+    if (type == LangTypeSimple || type == LangTypeTraditional) {
+        lang = @"zh_CN";
+    }else if (type == LangTypeKorean)
+    {
+        lang = @"nil";
+
+
+    }else{
+        lang = @"en";
+
+    }
+    UIViewController *vc = [MSAuthVCFactory simapleVerifyWithType:(MSAuthTypeSlide) language:lang Delegate:self authCode:@"0335" appKey:nil];
+    [self.navigationController pushViewController:vc animated:YES];
+
+}
+
+-(void)verifyDidFinishedWithResult:(t_verify_reuslt)code Error:(NSError *)error SessionId:(NSString *)sessionId
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if (error) {
+            NSLog(@"验证失败 %@", error);
+            [TLAlert alertWithSucces:[LangSwitcher switchLang:@"验证失败" key:nil]];
+        } else {
+            NSLog(@"验证通过 %@", sessionId);
+            TLNetworking *http = [TLNetworking new];
+            http.showView = self.view;
+            http.code = CAPTCHA_CODE;
+            http.parameters[@"client"] = @"ios";
+            http.parameters[@"sessionId"] = sessionId;
+            if (self.type == TLPwdTypeTradeReset) { //重置交易密码
+
+                http.parameters[@"bizType"] = USER_FIND_TRADE_PWD;
+
+            } else if (self.type == TLPwdTypeForget || self.type == TLPwdTypeReset){ //找回密码||修改登录密码
+
+                http.parameters[@"bizType"] = USER_CHANGE_PWD_CODE;
+
+            } else if (self.type == TLPwdTypeSetTrade) {//设置资金密码
+
+                http.parameters[@"bizType"] = USER_SET_TRADE_PWD;
+
+            }
+            http.parameters[@"mobile"] = self.phoneTf.text;
+
+            http.parameters[@"interCode"] = [NSString stringWithFormat:@"00%@",[self.PhoneCode.text substringFromIndex:1]];
+            [http postWithSuccess:^(id responseObject) {
+
+                [TLAlert alertWithSucces:[LangSwitcher switchLang:@"验证码已发送,请注意查收" key:nil]];
+                [self.captchaView.captchaBtn begin];
+
+            } failure:^(NSError *error) {
+
+            }];
+        }
+        [self.navigationController popViewControllerAnimated:YES];
+        //将sessionid传到经过app服务器做二次验证
+    });
 }
 
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
@@ -495,7 +531,7 @@
     
     TLNetworking *http = [TLNetworking new];
     http.showView = self.view;
-    
+
     if (self.type == TLPwdTypeTradeReset) { //资金密码po
         
         http.code = USER_FIND_TRADE_PWD;
