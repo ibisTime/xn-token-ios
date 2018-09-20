@@ -44,8 +44,7 @@
 #import "TLWXManager.h"
 #import <UMMobClick/MobClick.h>
 //Extension
-#import <TencentOpenAPI/TencentOAuth.h>
-#import <TencentOpenAPI/QQApiInterface.h>
+
 #import "WXApi.h"
 #import "IQKeyboardManager.h"
 //#import <ZendeskSDK/ZendeskSDK.h>

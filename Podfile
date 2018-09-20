@@ -32,7 +32,7 @@ pod'UMengAnalytics-NO-IDFA'
 #    MGSwipeTableCell
 pod 'Qiniu',                '7.1.5'
 pod 'SVProgressHUD',        '2.2'
-pod 'ZendeskSDK'
+pod 'ZendeskSDK',    '2.1.0'
 
 #pod 'WechatOpenSDK'
 #pod 'ZDCChat'

@@ -1280,8 +1280,8 @@ typedef enum : NSUInteger {
                                       CoinModel *coin = [CoinUtil getCoinModel:self.currentModel.symbol];
                                       
                                       
-                                      result = [MnemonicUtil sendEthTokenTransactionWithAddress:Mnemonics contractAddress:coin.contractAddress address:add amount:gaspic gaspic:self.tempPrice gasLimt:@"210000"];
-                                      
+                                      result = [MnemonicUtil sendEthTokenTransactionWithAddress:Mnemonics contractAddress:coin.contractAddress address:add amount:self.inputFiled.text gaspic:[NSString stringWithFormat:@"%lld",[self.tempPrice longLongValue]] gasLimt:@"210000"];
+
                                   }
                                   
                                   //

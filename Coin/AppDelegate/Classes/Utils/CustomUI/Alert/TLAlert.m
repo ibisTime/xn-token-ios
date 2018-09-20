@@ -33,7 +33,7 @@
     
     [SVProgressHUD showSuccessWithStatus:msg];
     [SVProgressHUD dismissWithDelay:2];
-    
+
 }
 
 //+ (void)alertHUDWithMsg:(NSString *)msg {

@@ -99,7 +99,7 @@ DEPENDENCIES:
   - UMengAnalytics-NO-IDFA
   - web3swift (~> 0.8.0)
   - Weibo_SDK (from `https://github.com/sinaweibosdk/weibo_ios_sdk.git`)
-  - ZendeskSDK
+  - ZendeskSDK (= 2.1.0)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -181,6 +181,6 @@ SPEC CHECKSUMS:
   Weibo_SDK: 652ca78c2f7147a5de5e75e7cbea89838a81772a
   ZendeskSDK: e2d9245bc42fb4782eff959219ce4d6bdae13b64
 
-PODFILE CHECKSUM: 2c7bc71dcf466df91554211ffd54d19d29e36c6a
+PODFILE CHECKSUM: 792ec6a69feea0334a69563b4b47810682e25cfe
 
-COCOAPODS: 1.5.2
+COCOAPODS: 1.5.3

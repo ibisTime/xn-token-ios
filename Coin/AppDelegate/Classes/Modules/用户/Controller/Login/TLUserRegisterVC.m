@@ -8,6 +8,7 @@
 
 #import "TLUserRegisterVC.h"
 //#import "SGScanningQRCodeVC.h"
+#import <MSAuthSDK/MSAuthVCFactory.h>
 #import <Photos/Photos.h>
 #import "TLNavigationController.h"
 #import "HTMLStrVC.h"
@@ -15,7 +16,7 @@
 #import <CoreLocation/CoreLocation.h>
 
 #import "CaptchaView.h"
-
+#import "YZVC.h"
 #import "APICodeMacro.h"
 #import "NSString+Check.h"
 #import "ChooseCountryVc.h"
@@ -25,8 +26,13 @@
 #import <UMMobClick/MobClick.h>
 
 #import "TLTabBarController.h"
+#import <SecurityGuardSDK/JAQ/SecurityVerification.h>
+#import <MSAuthSDK/MSAuthVCFactory.h>
+#import <MSAuthSDK/MSAuthSDK.h>
+#import <SecurityGuardSDK/JAQ/SecurityVerification.h>
 
-@interface TLUserRegisterVC ()<CLLocationManagerDelegate>
+
+@interface TLUserRegisterVC ()<CLLocationManagerDelegate,MSAuthProtocol>
 
 @property (nonatomic,strong) CaptchaView *captchaView;
 //昵称
@@ -398,7 +404,6 @@
 - (void)next1
 {
     [self.rePwdTf resignFirstResponder];
-    
     [self goReg];
 }
 
@@ -418,41 +423,81 @@
     } ;
     [self presentViewController:countryVc animated:YES completion:nil];
 }
+
+
 #pragma mark - Events
 - (void)sendCaptcha {
     
     if (![self.phoneTf.text isPhoneNum]) {
-        
         [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入正确的手机号" key:nil]];
-        
         return;
     }
-    
-    TLNetworking *http = [TLNetworking new];
-    http.showView = self.view;
-    http.code = CAPTCHA_CODE;
-    http.parameters[@"bizType"] = USER_REG_CODE;
-    http.parameters[@"mobile"] = self.phoneTf.text;
-    http.parameters[@"interCode"] = [NSString stringWithFormat:@"00%@",[self.PhoneCode.text substringFromIndex:1]];
+    LangType type = [LangSwitcher currentLangType];
+    NSString *lang;
+    if (type == LangTypeSimple || type == LangTypeTraditional) {
+        lang = @"ZH_CN";
+    }else if (type == LangTypeKorean)
+    {
+        lang = @"KO";
 
-    [http postWithSuccess:^(id responseObject) {
-        
-        [TLAlert alertWithSucces:[LangSwitcher switchLang:@"验证码已发送,请注意查收" key:nil]];
-        
-        [self.captchaView.captchaBtn begin];
-        
-    } failure:^(NSError *error) {
-        
-        [TLAlert alertWithError:[LangSwitcher switchLang:@"发送失败,请检查手机号" key:nil]];
-        
-    }];
-    
+
+    }else{
+        lang = @"EN";
+
+    }
+    UIViewController *vc = [MSAuthVCFactory simapleVerifyWithType:(MSAuthTypeSlide) language:lang Delegate:self authCode:@"0335" appKey:nil];
+    [self.navigationController pushViewController:vc animated:YES];
+
 }
+
+-(void)verifyDidFinishedWithResult:(t_verify_reuslt)code Error:(NSError *)error SessionId:(NSString *)sessionId
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if (error) {
+            NSLog(@"验证失败 %@", error);
+            [TLAlert alertWithSucces:[LangSwitcher switchLang:@"验证失败" key:nil]];
+        } else {
+            NSLog(@"验证通过 %@", sessionId);
+            TLNetworking *http = [TLNetworking new];
+            http.showView = self.view;
+            http.code = CAPTCHA_CODE;
+            http.parameters[@"bizType"] = USER_REG_CODE;
+            http.parameters[@"mobile"] = self.phoneTf.text;
+            http.parameters[@"interCode"] = [NSString stringWithFormat:@"00%@",[self.PhoneCode.text substringFromIndex:1]];
+            http.parameters[@"sessionId"] = sessionId;
+
+            [http postWithSuccess:^(id responseObject) {
+
+                [TLAlert alertWithSucces:[LangSwitcher switchLang:@"验证码已发送,请注意查收" key:nil]];
+
+                [self.captchaView.captchaBtn begin];
+
+            } failure:^(NSError *error) {
+
+                [TLAlert alertWithError:[LangSwitcher switchLang:@"发送失败,请检查手机号" key:nil]];
+
+            }];
+            
+        }
+        [self.navigationController popViewControllerAnimated:YES];
+        //将sessionid传到经过app服务器做二次验证
+    });
+}
+
+//- (void)verifyDidFinishedWithError:(NSError *)error SessionId:(NSString *)sessionId {
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//        if (error) {
+//            NSLog(@"验证失败 %@", error);
+//        } else {
+//            NSLog(@"验证通过 %@", sessionId);
+//        }
+//        [self.navigationController popViewControllerAnimated:YES];
+//        //将sessionid传到经过app服务器做二次验证
+//    });
+//}
 
 - (void)loadData
 {
-    
-    
     TLNetworking *net = [TLNetworking new];
     net.showView = self.view;
     net.code = @"801120";
@@ -475,10 +520,7 @@
                 self.PhoneCode.text = [NSString stringWithFormat:@"+%@",[model.interCode substringFromIndex:2]];
             }
         }
-        
-        //        [self.tableView reloadData];
-        //        NSString *str = [NSString stringWithFormat:@"%@", responseObject[@"data"]];
-        //        [[NSNotificationCenter defaultCenter] postNotificationName:@"RealNameAuthResult" object:str];
+
         [self configData];
 
     } failure:^(NSError *error) {
@@ -530,7 +572,7 @@
 //        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请同意《注册协议》" key:nil]];
 //        return ;
 //    }
-    
+
     [self.view endEditing:YES];
 
     TLNetworking *http = [TLNetworking new];

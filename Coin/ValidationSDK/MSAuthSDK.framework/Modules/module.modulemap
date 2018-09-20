@@ -1,0 +1,6 @@
+framework module MSAuthSDK {
+  umbrella header "MSAuthSDK.h"
+
+  export *
+  module * { export * }
+}

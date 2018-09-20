@@ -1,0 +1,51 @@
+/* 
+  Localizable.strings
+  MSSlideUnlock
+
+  Created by Jeff Wang on 16/2/3.
+  Copyright © 2016年 Jeff Wang. All rights reserved.
+*/
+
+"MSA_btn_refresh_title"               = "刷新";
+"MSA_slide_auth_title"                = "安全验证";
+"MSA_slide_auth_tip_1"                = "为了你的账号安全，本次登录需要进行验证";
+"MSA_slide_auth_tip_2"                = "请将下方的图标，移动到圆形区域内";
+"MSA_slide_auth_tip_3"                = "请将下方的Logo，移动到圆形区域内";
+"MSA_slide_auth_tip_4"                = "请摇一摇你的手机";
+
+"MSA_sms_auth_title_init"             = "短信安全验证";
+"MSA_sms_auth_title_sent"             = "短信安全验证";
+"MSA_sms_auth_title_sent_fail"        = "服务端发送验证码失败";
+"MSA_sms_auth_sub_title"              = "已帮您抵御验证码劫持风险";
+
+"MSA_call_auth_title"                 = "语音安全验证";
+"MSA_call_auth_calling"               = "电话拨打中...请留意一下来电";
+
+"MSA_mobile_no"                       = "手机号";
+"MSA_veri_code"                       = "验证码";
+
+"MSA_sms_auth_send_sms"               = "发送验证码";
+"MSA_sms_auth_count_down"             = "%lu秒重新接收";
+
+"MSA_submit_button"                   = "提交";
+"MSA_submit_button_waiting"           = "阿里聚安全验证中";
+
+"MSA_switch_auth_from_slide_to_call"  = "无法通过?点此接收语音验证码";
+
+"MSA_switch_auth_from_slide_to_call1" = "无法通过?";
+"MSA_switch_auth_from_slide_to_call2" = "手机号码已更换";
+"MSA_switch_auth_from_slide_to_call3" = "或者接收";
+"MSA_switch_auth_from_slide_to_call4" = "语音验证码";
+
+"MSA_switch_auth_from_sms_to_call"    = "收不到验证码？点此重新接听电话";
+
+"MSA_alert_cancel"                    = "取消";
+"MSA_alert_ok"                        = "好";
+"MSA_alert_answer"                    = "接听";
+
+"MSA_veri_code_auth_failed"           = "验证码错误，请重新输入";
+"MSA_veri_code_auth_call_failed"      = "验证码错误，请挂断电话，重新发送验证码";
+
+"MSA_slide_auth_ball_title"           = "通过平衡球验证登录";
+
+"MSA_pay_attention_to_call"           = "现在接听语音安全验证？";

@@ -407,7 +407,14 @@
 
             WalletNewFeaturesVC *newVC = [WalletNewFeaturesVC new];
             newVC.isimport = YES;
+        
             [UIApplication sharedApplication].keyWindow.rootViewController = newVC;
+
+
+
+
+
+
         }
         
 //        [[NSUserDefaults standardUserDefaults] setObject:word forKey:KWalletWord];

@@ -9,8 +9,11 @@
 #import <Foundation/Foundation.h>
 
 typedef NS_ENUM(NSUInteger, RunEnv) {
+//    正式
     RunEnvRelease = 0,
+//    研发
     RunEnvDev,
+//    测试
     RunEnvTest
 };
 

@@ -212,6 +212,41 @@
 		7AABEAFE2149127200283BC7 /* BouncedPasteView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AABEAFD2149127200283BC7 /* BouncedPasteView.m */; };
 		7AAF0312214F8C35008507FF /* IntegralVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AAF0311214F8C35008507FF /* IntegralVC.m */; };
 		7AAF031821511BDE008507FF /* ZJAnimationPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AAF031621511BDD008507FF /* ZJAnimationPopView.m */; };
+		7AAF0326215267ED008507FF /* SGNoCaptcha.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AAF0321215267EB008507FF /* SGNoCaptcha.framework */; };
+		7AAF0327215267ED008507FF /* SecurityGuardSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AAF0322215267EB008507FF /* SecurityGuardSDK.framework */; };
+		7AAF0328215267ED008507FF /* SGMain.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AAF0323215267EC008507FF /* SGMain.framework */; };
+		7AAF0329215267ED008507FF /* SGSecurityBody.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AAF0324215267ED008507FF /* SGSecurityBody.framework */; };
+		7AAF032B21526956008507FF /* yw_1222_0335.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7AAF032A21526955008507FF /* yw_1222_0335.jpg */; };
+		7AAF035F21526977008507FF /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7AAF033421526977008507FF /* LICENSE.txt */; };
+		7AAF036021526977008507FF /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 7AAF033521526977008507FF /* README.md */; };
+		7AAF036121526977008507FF /* aescrypt.c in Sources */ = {isa = PBXBuildFile; fileRef = 7AAF033A21526977008507FF /* aescrypt.c */; };
+		7AAF036221526977008507FF /* aeskey.c in Sources */ = {isa = PBXBuildFile; fileRef = 7AAF033B21526977008507FF /* aeskey.c */; };
+		7AAF036321526977008507FF /* aestab.c in Sources */ = {isa = PBXBuildFile; fileRef = 7AAF033D21526977008507FF /* aestab.c */; };
+		7AAF036421526977008507FF /* entropy.c in Sources */ = {isa = PBXBuildFile; fileRef = 7AAF034121526977008507FF /* entropy.c */; };
+		7AAF036521526977008507FF /* fileenc.c in Sources */ = {isa = PBXBuildFile; fileRef = 7AAF034321526977008507FF /* fileenc.c */; };
+		7AAF036621526977008507FF /* hmac.c in Sources */ = {isa = PBXBuildFile; fileRef = 7AAF034521526977008507FF /* hmac.c */; };
+		7AAF036721526977008507FF /* prng.c in Sources */ = {isa = PBXBuildFile; fileRef = 7AAF034721526977008507FF /* prng.c */; };
+		7AAF036821526977008507FF /* pwd2key.c in Sources */ = {isa = PBXBuildFile; fileRef = 7AAF034921526977008507FF /* pwd2key.c */; };
+		7AAF036921526977008507FF /* sha1.c in Sources */ = {isa = PBXBuildFile; fileRef = 7AAF034B21526977008507FF /* sha1.c */; };
+		7AAF036A21526977008507FF /* ioapi.c in Sources */ = {isa = PBXBuildFile; fileRef = 7AAF035021526977008507FF /* ioapi.c */; };
+		7AAF036B21526977008507FF /* mztools.c in Sources */ = {isa = PBXBuildFile; fileRef = 7AAF035221526977008507FF /* mztools.c */; };
+		7AAF036C21526977008507FF /* unzip.c in Sources */ = {isa = PBXBuildFile; fileRef = 7AAF035421526977008507FF /* unzip.c */; };
+		7AAF036D21526977008507FF /* zip.c in Sources */ = {isa = PBXBuildFile; fileRef = 7AAF035621526977008507FF /* zip.c */; };
+		7AAF036E21526977008507FF /* SSZipArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AAF035921526977008507FF /* SSZipArchive.m */; };
+		7AAF036F215269D0008507FF /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E5F19231FED0CD500100420 /* AdSupport.framework */; };
+		7AAF0370215269D8008507FF /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E5F191E1FED0CA900100420 /* CFNetwork.framework */; };
+		7AAF0372215269ED008507FF /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AAF0371215269ED008507FF /* CoreLocation.framework */; };
+		7AAF0373215269F6008507FF /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E5F19211FED0CC100100420 /* SystemConfiguration.framework */; };
+		7AAF037421526A00008507FF /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E5F191F1FED0CAE00100420 /* CoreFoundation.framework */; };
+		7AAF037521526A07008507FF /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E5F19221FED0CC900100420 /* CoreGraphics.framework */; };
+		7AAF037721526A31008507FF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AAF037621526A31008507FF /* UIKit.framework */; };
+		7AAF037921526A39008507FF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AAF037821526A38008507FF /* Foundation.framework */; };
+		7AAF037C21526EC4008507FF /* MSADefaultImages.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7AAF037A21526EC3008507FF /* MSADefaultImages.bundle */; };
+		7AAF037D21526EC4008507FF /* MSADefaultLocale.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7AAF037B21526EC3008507FF /* MSADefaultLocale.bundle */; };
+		7AAF037F21526FEE008507FF /* MSAuthSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AAF037E21526FEE008507FF /* MSAuthSDK.framework */; };
+		7AAF038121527166008507FF /* ZipArchive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AAF038021527165008507FF /* ZipArchive.framework */; };
+		7AAF039321527A5E008507FF /* YZViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AAF039221527A5E008507FF /* YZViewController.m */; };
+		7AAF039C21527FD9008507FF /* YZVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AAF039B21527FD9008507FF /* YZVC.m */; };
 		B80864EE211EA17D00755158 /* BTCBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = B8086411211EA17C00755158 /* BTCBlock.m */; };
 		B80864EF211EA17D00755158 /* BTCBlockHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = B8086412211EA17C00755158 /* BTCBlockHeader.m */; };
 		B80864F0211EA17D00755158 /* BTCEncryptedBackup.m in Sources */ = {isa = PBXBuildFile; fileRef = B8086415211EA17C00755158 /* BTCEncryptedBackup.m */; };
@@ -839,6 +874,58 @@
 		7AAF0311214F8C35008507FF /* IntegralVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IntegralVC.m; sourceTree = "<group>"; };
 		7AAF031621511BDD008507FF /* ZJAnimationPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZJAnimationPopView.m; sourceTree = "<group>"; };
 		7AAF031721511BDD008507FF /* ZJAnimationPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZJAnimationPopView.h; sourceTree = "<group>"; };
+		7AAF0321215267EB008507FF /* SGNoCaptcha.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SGNoCaptcha.framework; sourceTree = "<group>"; };
+		7AAF0322215267EB008507FF /* SecurityGuardSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SecurityGuardSDK.framework; sourceTree = "<group>"; };
+		7AAF0323215267EC008507FF /* SGMain.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SGMain.framework; sourceTree = "<group>"; };
+		7AAF0324215267ED008507FF /* SGSecurityBody.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SGSecurityBody.framework; sourceTree = "<group>"; };
+		7AAF032A21526955008507FF /* yw_1222_0335.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = yw_1222_0335.jpg; sourceTree = "<group>"; };
+		7AAF033421526977008507FF /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
+		7AAF033521526977008507FF /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		7AAF033821526977008507FF /* aes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aes.h; sourceTree = "<group>"; };
+		7AAF033921526977008507FF /* aes_via_ace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aes_via_ace.h; sourceTree = "<group>"; };
+		7AAF033A21526977008507FF /* aescrypt.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = aescrypt.c; sourceTree = "<group>"; };
+		7AAF033B21526977008507FF /* aeskey.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = aeskey.c; sourceTree = "<group>"; };
+		7AAF033C21526977008507FF /* aesopt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aesopt.h; sourceTree = "<group>"; };
+		7AAF033D21526977008507FF /* aestab.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = aestab.c; sourceTree = "<group>"; };
+		7AAF033E21526977008507FF /* aestab.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aestab.h; sourceTree = "<group>"; };
+		7AAF033F21526977008507FF /* brg_endian.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = brg_endian.h; sourceTree = "<group>"; };
+		7AAF034021526977008507FF /* brg_types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = brg_types.h; sourceTree = "<group>"; };
+		7AAF034121526977008507FF /* entropy.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = entropy.c; sourceTree = "<group>"; };
+		7AAF034221526977008507FF /* entropy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = entropy.h; sourceTree = "<group>"; };
+		7AAF034321526977008507FF /* fileenc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fileenc.c; sourceTree = "<group>"; };
+		7AAF034421526977008507FF /* fileenc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fileenc.h; sourceTree = "<group>"; };
+		7AAF034521526977008507FF /* hmac.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hmac.c; sourceTree = "<group>"; };
+		7AAF034621526977008507FF /* hmac.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hmac.h; sourceTree = "<group>"; };
+		7AAF034721526977008507FF /* prng.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = prng.c; sourceTree = "<group>"; };
+		7AAF034821526977008507FF /* prng.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = prng.h; sourceTree = "<group>"; };
+		7AAF034921526977008507FF /* pwd2key.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pwd2key.c; sourceTree = "<group>"; };
+		7AAF034A21526977008507FF /* pwd2key.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pwd2key.h; sourceTree = "<group>"; };
+		7AAF034B21526977008507FF /* sha1.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = sha1.c; sourceTree = "<group>"; };
+		7AAF034C21526977008507FF /* sha1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sha1.h; sourceTree = "<group>"; };
+		7AAF034D21526977008507FF /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
+		7AAF034F21526977008507FF /* crypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = crypt.h; sourceTree = "<group>"; };
+		7AAF035021526977008507FF /* ioapi.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ioapi.c; sourceTree = "<group>"; };
+		7AAF035121526977008507FF /* ioapi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ioapi.h; sourceTree = "<group>"; };
+		7AAF035221526977008507FF /* mztools.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mztools.c; sourceTree = "<group>"; };
+		7AAF035321526977008507FF /* mztools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mztools.h; sourceTree = "<group>"; };
+		7AAF035421526977008507FF /* unzip.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = unzip.c; sourceTree = "<group>"; };
+		7AAF035521526977008507FF /* unzip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = unzip.h; sourceTree = "<group>"; };
+		7AAF035621526977008507FF /* zip.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = zip.c; sourceTree = "<group>"; };
+		7AAF035721526977008507FF /* zip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zip.h; sourceTree = "<group>"; };
+		7AAF035821526977008507FF /* SSZipArchive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSZipArchive.h; sourceTree = "<group>"; };
+		7AAF035921526977008507FF /* SSZipArchive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSZipArchive.m; sourceTree = "<group>"; };
+		7AAF035A21526977008507FF /* ZipArchive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZipArchive.h; sourceTree = "<group>"; };
+		7AAF0371215269ED008507FF /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		7AAF037621526A31008507FF /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		7AAF037821526A38008507FF /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		7AAF037A21526EC3008507FF /* MSADefaultImages.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MSADefaultImages.bundle; sourceTree = "<group>"; };
+		7AAF037B21526EC3008507FF /* MSADefaultLocale.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MSADefaultLocale.bundle; sourceTree = "<group>"; };
+		7AAF037E21526FEE008507FF /* MSAuthSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MSAuthSDK.framework; sourceTree = "<group>"; };
+		7AAF038021527165008507FF /* ZipArchive.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ZipArchive.framework; sourceTree = "<group>"; };
+		7AAF039121527A5E008507FF /* YZViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZViewController.h; sourceTree = "<group>"; };
+		7AAF039221527A5E008507FF /* YZViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZViewController.m; sourceTree = "<group>"; };
+		7AAF039A21527FD9008507FF /* YZVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZVC.h; sourceTree = "<group>"; };
+		7AAF039B21527FD9008507FF /* YZVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZVC.m; sourceTree = "<group>"; };
 		8863748C5281F9DC1DDF8EEA /* Pods-Coin.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Coin.release.xcconfig"; path = "Pods/Target Support Files/Pods-Coin/Pods-Coin.release.xcconfig"; sourceTree = "<group>"; };
 		AB34D27FC9725550E9092EC2 /* Pods-Coin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Coin.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Coin/Pods-Coin.debug.xcconfig"; sourceTree = "<group>"; };
 		B808640E211EA17C00755158 /* BTCMerkleTree+Tests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BTCMerkleTree+Tests.h"; sourceTree = "<group>"; };
@@ -1358,12 +1445,26 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2EFFE6B31FF6287D00BFCC40 /* UserNotifications.framework in Frameworks */,
+				7AAF037921526A39008507FF /* Foundation.framework in Frameworks */,
+				7AAF037721526A31008507FF /* UIKit.framework in Frameworks */,
 				2EFFE6B21FF6286600BFCC40 /* CoreTelephony.framework in Frameworks */,
-				B8F44029212C851C00809522 /* libcrypto.a in Frameworks */,
+				7AAF037521526A07008507FF /* CoreGraphics.framework in Frameworks */,
+				7AAF037421526A00008507FF /* CoreFoundation.framework in Frameworks */,
+				7AAF0373215269F6008507FF /* SystemConfiguration.framework in Frameworks */,
+				7AAF0372215269ED008507FF /* CoreLocation.framework in Frameworks */,
 				21C91D981FDBD7E4006EDB16 /* CoreMotion.framework in Frameworks */,
-				7A272662212BFFA70067E3CD /* libWeChatSDK.a in Frameworks */,
+				7AAF0370215269D8008507FF /* CFNetwork.framework in Frameworks */,
+				7AAF036F215269D0008507FF /* AdSupport.framework in Frameworks */,
 				211C05081FC6714500E51FCF /* libz.tbd in Frameworks */,
+				7AAF037F21526FEE008507FF /* MSAuthSDK.framework in Frameworks */,
+				2EFFE6B31FF6287D00BFCC40 /* UserNotifications.framework in Frameworks */,
+				7AAF0326215267ED008507FF /* SGNoCaptcha.framework in Frameworks */,
+				7AAF0328215267ED008507FF /* SGMain.framework in Frameworks */,
+				7AAF0327215267ED008507FF /* SecurityGuardSDK.framework in Frameworks */,
+				B8F44029212C851C00809522 /* libcrypto.a in Frameworks */,
+				7A272662212BFFA70067E3CD /* libWeChatSDK.a in Frameworks */,
+				7AAF038121527166008507FF /* ZipArchive.framework in Frameworks */,
+				7AAF0329215267ED008507FF /* SGSecurityBody.framework in Frameworks */,
 				211C050A1FC6715000E51FCF /* libc++.tbd in Frameworks */,
 				211C050C1FC6715B00E51FCF /* libsqlite3.tbd in Frameworks */,
 				211C05121FC6717300E51FCF /* libstdc++.6.tbd in Frameworks */,
@@ -2260,14 +2361,14 @@
 			path = Detail;
 			sourceTree = "<group>";
 		};
-		216F5B1D206CD9D900F2C832 /* 首页 */ = {
+		216F5B1D206CD9D900F2C832 /* 发现 */ = {
 			isa = PBXGroup;
 			children = (
 				216F5B1E206CD9D900F2C832 /* Controller */,
 				216F5B21206CD9D900F2C832 /* Model */,
 				216F5B2B206CD9DA00F2C832 /* View */,
 			);
-			path = "首页";
+			path = "发现";
 			sourceTree = "<group>";
 		};
 		216F5B1E206CD9D900F2C832 /* Controller */ = {
@@ -2475,6 +2576,10 @@
 				B842D5D420E91AA900891289 /* ChooseCountryVc.m */,
 				B89783D520F6FB310088C713 /* TLUserFindPwdVC.h */,
 				B89783D620F6FB310088C713 /* TLUserFindPwdVC.m */,
+				7AAF039121527A5E008507FF /* YZViewController.h */,
+				7AAF039221527A5E008507FF /* YZViewController.m */,
+				7AAF039A21527FD9008507FF /* YZVC.h */,
+				7AAF039B21527FD9008507FF /* YZVC.m */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -2594,8 +2699,8 @@
 				B88B58F32109AEC300F20D1B /* Other */,
 				216F5AF0206CC73D00F2C832 /* Update */,
 				216F5AEF206CC70500F2C832 /* Resp */,
-				216F5B1D206CD9D900F2C832 /* 首页 */,
-				2E394FA41FB055DE00BA0829 /* 钱包 */,
+				216F5B1D206CD9D900F2C832 /* 发现 */,
+				2E394FA41FB055DE00BA0829 /* 资产 */,
 				2E394FAC1FB055DE00BA0829 /* 我的 */,
 				2E394FD11FB0568F00BA0829 /* Modules */,
 				2E394FF71FB0599D00BA0829 /* Expand */,
@@ -2604,14 +2709,14 @@
 			path = Classes;
 			sourceTree = "<group>";
 		};
-		2E394FA41FB055DE00BA0829 /* 钱包 */ = {
+		2E394FA41FB055DE00BA0829 /* 资产 */ = {
 			isa = PBXGroup;
 			children = (
 				2E394FA51FB055DE00BA0829 /* Controller */,
 				211A35051FB45CB500FEB71F /* View */,
 				2E394FA61FB055DE00BA0829 /* Model */,
 			);
-			path = "钱包";
+			path = "资产";
 			sourceTree = "<group>";
 		};
 		2E394FA51FB055DE00BA0829 /* Controller */ = {
@@ -2798,6 +2903,7 @@
 		2EA584B61FA813C900C7106C /* Coin */ = {
 			isa = PBXGroup;
 			children = (
+				7AAF031F215267B7008507FF /* ValidationSDK */,
 				B8A483FE214FC02800450819 /* lanch-1.png */,
 				7A27265B212BFFA70067E3CD /* WechatSDK1.8.2 */,
 				215421CF1FD708AC00FDD25C /* Coin.entitlements */,
@@ -2992,6 +3098,90 @@
 				7A8A5D3420EA3E5A002D9A48 /* SendVC.m */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		7AAF031F215267B7008507FF /* ValidationSDK */ = {
+			isa = PBXGroup;
+			children = (
+				7AAF033321526977008507FF /* SSZipArchive */,
+				7AAF032A21526955008507FF /* yw_1222_0335.jpg */,
+				7AAF037A21526EC3008507FF /* MSADefaultImages.bundle */,
+				7AAF037B21526EC3008507FF /* MSADefaultLocale.bundle */,
+				7AAF037E21526FEE008507FF /* MSAuthSDK.framework */,
+				7AAF0322215267EB008507FF /* SecurityGuardSDK.framework */,
+				7AAF0323215267EC008507FF /* SGMain.framework */,
+				7AAF038021527165008507FF /* ZipArchive.framework */,
+				7AAF0321215267EB008507FF /* SGNoCaptcha.framework */,
+				7AAF0324215267ED008507FF /* SGSecurityBody.framework */,
+			);
+			path = ValidationSDK;
+			sourceTree = "<group>";
+		};
+		7AAF033321526977008507FF /* SSZipArchive */ = {
+			isa = PBXGroup;
+			children = (
+				7AAF033421526977008507FF /* LICENSE.txt */,
+				7AAF033521526977008507FF /* README.md */,
+				7AAF033621526977008507FF /* SSZipArchive */,
+			);
+			path = SSZipArchive;
+			sourceTree = "<group>";
+		};
+		7AAF033621526977008507FF /* SSZipArchive */ = {
+			isa = PBXGroup;
+			children = (
+				7AAF033721526977008507FF /* aes */,
+				7AAF034D21526977008507FF /* Common.h */,
+				7AAF034E21526977008507FF /* minizip */,
+				7AAF035821526977008507FF /* SSZipArchive.h */,
+				7AAF035921526977008507FF /* SSZipArchive.m */,
+				7AAF035A21526977008507FF /* ZipArchive.h */,
+			);
+			path = SSZipArchive;
+			sourceTree = "<group>";
+		};
+		7AAF033721526977008507FF /* aes */ = {
+			isa = PBXGroup;
+			children = (
+				7AAF033821526977008507FF /* aes.h */,
+				7AAF033921526977008507FF /* aes_via_ace.h */,
+				7AAF033A21526977008507FF /* aescrypt.c */,
+				7AAF033B21526977008507FF /* aeskey.c */,
+				7AAF033C21526977008507FF /* aesopt.h */,
+				7AAF033D21526977008507FF /* aestab.c */,
+				7AAF033E21526977008507FF /* aestab.h */,
+				7AAF033F21526977008507FF /* brg_endian.h */,
+				7AAF034021526977008507FF /* brg_types.h */,
+				7AAF034121526977008507FF /* entropy.c */,
+				7AAF034221526977008507FF /* entropy.h */,
+				7AAF034321526977008507FF /* fileenc.c */,
+				7AAF034421526977008507FF /* fileenc.h */,
+				7AAF034521526977008507FF /* hmac.c */,
+				7AAF034621526977008507FF /* hmac.h */,
+				7AAF034721526977008507FF /* prng.c */,
+				7AAF034821526977008507FF /* prng.h */,
+				7AAF034921526977008507FF /* pwd2key.c */,
+				7AAF034A21526977008507FF /* pwd2key.h */,
+				7AAF034B21526977008507FF /* sha1.c */,
+				7AAF034C21526977008507FF /* sha1.h */,
+			);
+			path = aes;
+			sourceTree = "<group>";
+		};
+		7AAF034E21526977008507FF /* minizip */ = {
+			isa = PBXGroup;
+			children = (
+				7AAF034F21526977008507FF /* crypt.h */,
+				7AAF035021526977008507FF /* ioapi.c */,
+				7AAF035121526977008507FF /* ioapi.h */,
+				7AAF035221526977008507FF /* mztools.c */,
+				7AAF035321526977008507FF /* mztools.h */,
+				7AAF035421526977008507FF /* unzip.c */,
+				7AAF035521526977008507FF /* unzip.h */,
+				7AAF035621526977008507FF /* zip.c */,
+				7AAF035721526977008507FF /* zip.h */,
+			);
+			path = minizip;
 			sourceTree = "<group>";
 		};
 		B8086409211EA17C00755158 /* DataBtc */ = {
@@ -3355,6 +3545,9 @@
 		C678617F8B7C3B3F2F7DE44F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7AAF037821526A38008507FF /* Foundation.framework */,
+				7AAF037621526A31008507FF /* UIKit.framework */,
+				7AAF0371215269ED008507FF /* CoreLocation.framework */,
 				2EFFE6B41FF6289600BFCC40 /* libsqlite3.0.tbd */,
 				2E5F19241FED0CDD00100420 /* UserNotifications.framework */,
 				2E5F19231FED0CD500100420 /* AdSupport.framework */,
@@ -3427,7 +3620,7 @@
 					2EA584B31FA813C900C7106C = {
 						CreatedOnToolsVersion = 9.0.1;
 						LastSwiftMigration = 0940;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 0;
@@ -3465,16 +3658,21 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7AAF035F21526977008507FF /* LICENSE.txt in Resources */,
+				7AAF037D21526EC4008507FF /* MSADefaultLocale.bundle in Resources */,
 				B8CAA14321158FF200695BC3 /* LPDImagePickerController.bundle in Resources */,
 				B88B59172109AEC400F20D1B /* country.plist in Resources */,
 				7A272664212BFFA70067E3CD /* README.txt in Resources */,
 				B8A483FF214FC02800450819 /* lanch-1.png in Resources */,
 				B819BAAA20C6DD7800CEEC5E /* LaunchScreen.storyboard in Resources */,
+				7AAF036021526977008507FF /* README.md in Resources */,
 				2EFFE6AA1FF4829100BFCC40 /* Localizable.strings in Resources */,
 				7A272663212BFFA70067E3CD /* read_me.txt in Resources */,
 				2EA584C11FA813C900C7106C /* Assets.xcassets in Resources */,
+				7AAF032B21526956008507FF /* yw_1222_0335.jpg in Resources */,
 				2EB9495B1FDF6B1A00CE4B94 /* SimplifiedCode.txt in Resources */,
 				2EE361361FFB7D4500A5C3EB /* README.md in Resources */,
+				7AAF037C21526EC4008507FF /* MSADefaultImages.bundle in Resources */,
 				B8DAD14720E2208B00AF4CD4 /* InfoPlist.strings in Resources */,
 				2EB9495C1FDF6B1A00CE4B94 /* TraditionalCode.txt in Resources */,
 			);
@@ -3513,6 +3711,9 @@
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SipHash/SipHash.framework",
 				"${BUILT_PRODUCTS_DIR}/UIDeviceIdentifier/UIDeviceIdentifier.framework",
+				"${PODS_ROOT}/ZendeskSDK/ZendeskSDK/4.1/ZendeskCoreSDK.framework",
+				"${PODS_ROOT}/ZendeskSDK/ZendeskSDK/4.1/ZendeskProviderSDK.framework",
+				"${PODS_ROOT}/ZendeskSDK/ZendeskSDK/4.1/ZendeskSDK.framework",
 				"${BUILT_PRODUCTS_DIR}/libsodium/libsodium.framework",
 				"${BUILT_PRODUCTS_DIR}/secp256k1_ios/secp256k1_ios.framework",
 				"${BUILT_PRODUCTS_DIR}/web3swift/web3swift.framework",
@@ -3542,6 +3743,9 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SipHash.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UIDeviceIdentifier.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ZendeskCoreSDK.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ZendeskProviderSDK.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ZendeskSDK.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/libsodium.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/secp256k1_ios.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/web3swift.framework",
@@ -3559,10 +3763,12 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Coin/Pods-Coin-resources.sh",
 				"${PODS_ROOT}/Weibo_SDK/libWeiboSDK/WeiboSDK.bundle",
+				"${PODS_ROOT}/ZendeskSDK/ZendeskSDK/4.1/ZendeskSDKStrings.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/WeiboSDK.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ZendeskSDKStrings.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -3594,14 +3800,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7AAF036621526977008507FF /* hmac.c in Sources */,
 				B8086509211EA17D00755158 /* BTCSecretSharing.m in Sources */,
 				21205D0C1FCD6512003C6C7C /* TLWXManager.m in Sources */,
 				B8F791A421464A3300F5BE45 /* TransformCell.m in Sources */,
 				211A34F11FB430DB00FEB71F /* SettingModel.m in Sources */,
 				216F5B40206CD9DA00F2C832 /* TLBannerView.m in Sources */,
 				216F5AF7206CCED300F2C832 /* CoinService.m in Sources */,
+				7AAF036321526977008507FF /* aestab.c in Sources */,
 				B8A5308A2127EE9000A027C0 /* RecodeDetailView.m in Sources */,
 				21A7F3181FB2E2F900FAA0A2 /* TLUserRegisterVC.m in Sources */,
+				7AAF036721526977008507FF /* prng.c in Sources */,
 				B82D3878211BD4A50053A2E4 /* TLQrCodeVC.m in Sources */,
 				216F5B3A206CD9DA00F2C832 /* CountInfoModel.m in Sources */,
 				4C41F84920723D6600BBA366 /* HomeCell.m in Sources */,
@@ -3611,6 +3820,7 @@
 				215979761FB84CC70029F177 /* BillDetailCell.m in Sources */,
 				B8CAA1562115FF7100695BC3 /* QuestionTB.m in Sources */,
 				B8CAA14D2115DE6300695BC3 /* TLhistoryListVC.m in Sources */,
+				7AAF036E21526977008507FF /* SSZipArchive.m in Sources */,
 				B80864EE211EA17D00755158 /* BTCBlock.m in Sources */,
 				21A821171FDA690700AE59F2 /* GoogleAuthVC.m in Sources */,
 				21A7F3171FB2E2F900FAA0A2 /* TLUserForgetPwdVC.m in Sources */,
@@ -3689,11 +3899,13 @@
 				B88B092120C8E29D005C2D2F /* JoinMineVc.m in Sources */,
 				B8086516211EA17D00755158 /* BTCAddress.m in Sources */,
 				B8D5F15620CE0F530005CF96 /* AccountMoneyCellTableViewCell.m in Sources */,
+				7AAF036521526977008507FF /* fileenc.c in Sources */,
 				B80864F6211EA17D00755158 /* BTCProtocolSerialization+Tests.m in Sources */,
 				B8657833214B90D400179EB1 /* DetailSugarView.m in Sources */,
 				B87BF1CD2113F53F00DD5C05 /* DataBaseModel.m in Sources */,
 				21A7F3241FB2E2F900FAA0A2 /* CaptchaView.m in Sources */,
 				B8BBA5FA20C780FA00DC4D5F /* PlatformTableView.m in Sources */,
+				7AAF039C21527FD9008507FF /* YZVC.m in Sources */,
 				2EE950C61FB05B5900429257 /* TLMineVC.m in Sources */,
 				7A3821C020EACD8B00D6B636 /* SendTableView.m in Sources */,
 				B808652C211EA17D00755158 /* BTCBlockchainInfo+Tests.m in Sources */,
@@ -3717,6 +3929,7 @@
 				7A8A5D2F20EA3C09002D9A48 /* MySugarPacketsVC.m in Sources */,
 				B87BF1D3211426C300DD5C05 /* Migration.m in Sources */,
 				2ED651CC200F32BC0065A1B0 /* TLCoinWithdrawModel.m in Sources */,
+				7AAF036221526977008507FF /* aeskey.c in Sources */,
 				21205CE21FCD3163003C6C7C /* CoinAddressModel.m in Sources */,
 				B808653B211F1B6000755158 /* TLBTCtableView.m in Sources */,
 				211DE6C61FB58B4C002FCF3D /* HttpLogger.m in Sources */,
@@ -3764,6 +3977,7 @@
 				B88B092720C8E371005C2D2F /* JoinMineCell.m in Sources */,
 				2120D8A31FCEE1DE00712600 /* HourPickerView.m in Sources */,
 				B80864FE211EA17D00755158 /* BTCBigNumber.m in Sources */,
+				7AAF036C21526977008507FF /* unzip.c in Sources */,
 				B8131E94214CF12C00BEF5E0 /* TLWBManger.m in Sources */,
 				B8FDB704214A824400313EC3 /* MysugarView.m in Sources */,
 				B808650F211EA17D00755158 /* BTCChainCom.m in Sources */,
@@ -3786,6 +4000,8 @@
 				215979671FB81D230029F177 /* BillCell.m in Sources */,
 				211DE6A81FB58B4C002FCF3D /* TLTextField.m in Sources */,
 				7A3821C620EAD4EA00D6B636 /* SendModel.m in Sources */,
+				7AAF039321527A5E008507FF /* YZViewController.m in Sources */,
+				7AAF036121526977008507FF /* aescrypt.c in Sources */,
 				211D4ED61FCD9B0C000E0D43 /* EditVC.m in Sources */,
 				B8086528211EA17D00755158 /* BTCPaymentMethod.m in Sources */,
 				211A34D71FB3F51400FEB71F /* MineHeaderView.m in Sources */,
@@ -3817,7 +4033,9 @@
 				211A34DB1FB4083300FEB71F /* MineTableView.m in Sources */,
 				216F5B49206CDA3700F2C832 /* DetailWebView.m in Sources */,
 				211A34E11FB4247800FEB71F /* MineModel.m in Sources */,
+				7AAF036421526977008507FF /* entropy.c in Sources */,
 				B8D938D82116EF5900B2AA88 /* imageCell.m in Sources */,
+				7AAF036821526977008507FF /* pwd2key.c in Sources */,
 				B8DDF882211D29EE0058D19D /* TLMakeMoney.m in Sources */,
 				B88B591B2109AEC400F20D1B /* LangSwitcher.m in Sources */,
 				21A7F3631FB2F16C00FAA0A2 /* HTMLStrVC.m in Sources */,
@@ -3832,6 +4050,7 @@
 				B8CAA1502115FC6B00695BC3 /* QuestionListTableView.m in Sources */,
 				B8086535211ED6AC00755158 /* utxoModel.m in Sources */,
 				B8086514211EA17D00755158 /* BTCCurrencyConverter+Tests.m in Sources */,
+				7AAF036921526977008507FF /* sha1.c in Sources */,
 				B8086503211EA17D00755158 /* BTCMnemonic.m in Sources */,
 				B808652A211EA17D00755158 /* BTCBase58.m in Sources */,
 				B8086517211EA17D00755158 /* BTCProtocolBuffers.m in Sources */,
@@ -3883,6 +4102,7 @@
 				B80864F5211EA17D00755158 /* BTCAssetID.m in Sources */,
 				211A34FD1FB4507E00FEB71F /* IdAuthVC.m in Sources */,
 				B80864FF211EA17D00755158 /* BTCScript+Tests.m in Sources */,
+				7AAF036B21526977008507FF /* mztools.c in Sources */,
 				215979731FB84CB10029F177 /* BillDetailTableView.m in Sources */,
 				211DE6C01FB58B4C002FCF3D /* NSObject+Extension.m in Sources */,
 				211DE6C71FB58B4C002FCF3D /* HttpRequestObject.m in Sources */,
@@ -3890,6 +4110,7 @@
 				B8086527211EA17D00755158 /* BTCCurrencyConverter.m in Sources */,
 				B808650D211EA17D00755158 /* BTCPriceSource+Tests.m in Sources */,
 				B80864F7211EA17D00755158 /* BTCBlindSignature.m in Sources */,
+				7AAF036D21526977008507FF /* zip.c in Sources */,
 				B8C2057320CF9E8800952765 /* WalletLocalAddressVC.m in Sources */,
 				B8086501211EA17D00755158 /* BTCNumberFormatter.m in Sources */,
 				B8086523211EA17D00755158 /* BTCKeychain+Tests.m in Sources */,
@@ -3962,6 +4183,7 @@
 				21CB94F51FDC179700CAB090 /* PersonalModel.m in Sources */,
 				B8F63EDA20D3639900556150 /* LocalBillCell.m in Sources */,
 				2ED651C9200F2F6F0065A1B0 /* TLCoinWithdrawOrderVC.m in Sources */,
+				7AAF036A21526977008507FF /* ioapi.c in Sources */,
 				211DE6B21FB58B4C002FCF3D /* UIButton+Custom.m in Sources */,
 				B8CAA1532115FD6100695BC3 /* QuestionModel.m in Sources */,
 				211DE6171FB54685002FCF3D /* WalletCell.m in Sources */,
@@ -4138,9 +4360,9 @@
 				CLANG_WARN_STRICT_PROTOTYPES = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 3ZCW993X44;
+				DEVELOPMENT_TEAM = VQPS9BLJYN;
 				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = NO;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -4155,6 +4377,7 @@
 					"$(PROJECT_DIR)/Coin/Classes/Utils/umcommonlog/umcommonlog_ios_1.0.0",
 					"$(PROJECT_DIR)/Coin/Classes/Utils/common/common_ios_1.5.2/normal",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Coin/ValidationSDK",
 				);
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = YES;
 				INFOPLIST_FILE = Coin/Info.plist;
@@ -4172,10 +4395,110 @@
 					"$(PROJECT_DIR)/Coin/WechatSDK1.8.2",
 					"$(PROJECT_DIR)/Coin/AppDelegate/Classes/Utils/DataBtc/include-ios/lib-ios",
 				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-l\"WeiboSDK\"",
+					"-l\"jcore-ios-1.1.5\"",
+					"-l\"jpush-ios-3.0.6\"",
+					"-l\"resolv\"",
+					"-l\"sqlite3\"",
+					"-l\"z\"",
+					"-framework",
+					"\"AFNetworking\"",
+					"-framework",
+					"\"Alamofire\"",
+					"-framework",
+					"\"Alamofire_Synchronous\"",
+					"-framework",
+					"\"BigInt\"",
+					"-framework",
+					"\"CDCommon\"",
+					"-framework",
+					"\"CFNetwork\"",
+					"-framework",
+					"\"CoreFoundation\"",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"CoreTelephony\"",
+					"-framework",
+					"\"CoreText\"",
+					"-framework",
+					"\"CryptoSwift\"",
+					"-framework",
+					"\"DACircularProgress\"",
+					"-framework",
+					"\"FMDB\"",
+					"-framework",
+					"\"Foundation\"",
+					"-framework",
+					"\"HappyDNS\"",
+					"-framework",
+					"\"IQKeyboardManager\"",
+					"-framework",
+					"\"ImageIO\"",
+					"-framework",
+					"\"MBProgressHUD\"",
+					"-framework",
+					"\"MJExtension\"",
+					"-framework",
+					"\"MJRefresh\"",
+					"-framework",
+					"\"Masonry\"",
+					"-framework",
+					"\"MessageUI\"",
+					"-framework",
+					"\"MobileCoreServices\"",
+					"-framework",
+					"\"NBHTTP\"",
+					"-framework",
+					"\"PYPhotoBrowser\"",
+					"-framework",
+					"\"Photos\"",
+					"-framework",
+					"\"Qiniu\"",
+					"-framework",
+					"\"QuartzCore\"",
+					"-framework",
+					"\"Result\"",
+					"-framework",
+					"\"SDWebImage\"",
+					"-framework",
+					"\"SGQRCode\"",
+					"-framework",
+					"\"SVProgressHUD\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"SipHash\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-framework",
+					"\"UIDeviceIdentifier\"",
+					"-framework",
+					"\"UIKit\"",
+					"-framework",
+					"\"UMMobClick\"",
+					"-framework",
+					"\"ZendeskCoreSDK\"",
+					"-framework",
+					"\"ZendeskProviderSDK\"",
+					"-framework",
+					"\"ZendeskSDK\"",
+					"-framework",
+					"\"libsodium\"",
+					"-framework",
+					"\"secp256k1_ios\"",
+					"-framework",
+					"\"web3swift\"",
+					"-weak_framework",
+					"\"UserNotifications\"",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.cdkj.tha;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "379e50f8-6249-4e15-bb24-d0ca275acdad";
-				PROVISIONING_PROFILE_SPECIFIER = theia;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -4194,9 +4517,9 @@
 				CLANG_WARN_STRICT_PROTOTYPES = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 3ZCW993X44;
+				DEVELOPMENT_TEAM = VQPS9BLJYN;
 				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = NO;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -4211,6 +4534,7 @@
 					"$(PROJECT_DIR)/Coin/Classes/Utils/umcommonlog/umcommonlog_ios_1.0.0",
 					"$(PROJECT_DIR)/Coin/Classes/Utils/common/common_ios_1.5.2/normal",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Coin/ValidationSDK",
 				);
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = YES;
 				INFOPLIST_FILE = Coin/Info.plist;
@@ -4228,10 +4552,110 @@
 					"$(PROJECT_DIR)/Coin/WechatSDK1.8.2",
 					"$(PROJECT_DIR)/Coin/AppDelegate/Classes/Utils/DataBtc/include-ios/lib-ios",
 				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-l\"WeiboSDK\"",
+					"-l\"jcore-ios-1.1.5\"",
+					"-l\"jpush-ios-3.0.6\"",
+					"-l\"resolv\"",
+					"-l\"sqlite3\"",
+					"-l\"z\"",
+					"-framework",
+					"\"AFNetworking\"",
+					"-framework",
+					"\"Alamofire\"",
+					"-framework",
+					"\"Alamofire_Synchronous\"",
+					"-framework",
+					"\"BigInt\"",
+					"-framework",
+					"\"CDCommon\"",
+					"-framework",
+					"\"CFNetwork\"",
+					"-framework",
+					"\"CoreFoundation\"",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"CoreTelephony\"",
+					"-framework",
+					"\"CoreText\"",
+					"-framework",
+					"\"CryptoSwift\"",
+					"-framework",
+					"\"DACircularProgress\"",
+					"-framework",
+					"\"FMDB\"",
+					"-framework",
+					"\"Foundation\"",
+					"-framework",
+					"\"HappyDNS\"",
+					"-framework",
+					"\"IQKeyboardManager\"",
+					"-framework",
+					"\"ImageIO\"",
+					"-framework",
+					"\"MBProgressHUD\"",
+					"-framework",
+					"\"MJExtension\"",
+					"-framework",
+					"\"MJRefresh\"",
+					"-framework",
+					"\"Masonry\"",
+					"-framework",
+					"\"MessageUI\"",
+					"-framework",
+					"\"MobileCoreServices\"",
+					"-framework",
+					"\"NBHTTP\"",
+					"-framework",
+					"\"PYPhotoBrowser\"",
+					"-framework",
+					"\"Photos\"",
+					"-framework",
+					"\"Qiniu\"",
+					"-framework",
+					"\"QuartzCore\"",
+					"-framework",
+					"\"Result\"",
+					"-framework",
+					"\"SDWebImage\"",
+					"-framework",
+					"\"SGQRCode\"",
+					"-framework",
+					"\"SVProgressHUD\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"SipHash\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-framework",
+					"\"UIDeviceIdentifier\"",
+					"-framework",
+					"\"UIKit\"",
+					"-framework",
+					"\"UMMobClick\"",
+					"-framework",
+					"\"ZendeskCoreSDK\"",
+					"-framework",
+					"\"ZendeskProviderSDK\"",
+					"-framework",
+					"\"ZendeskSDK\"",
+					"-framework",
+					"\"libsodium\"",
+					"-framework",
+					"\"secp256k1_ios\"",
+					"-framework",
+					"\"web3swift\"",
+					"-weak_framework",
+					"\"UserNotifications\"",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.cdkj.tha;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "379e50f8-6249-4e15-bb24-d0ca275acdad";
-				PROVISIONING_PROFILE_SPECIFIER = theia;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;

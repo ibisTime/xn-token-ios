@@ -1,0 +1,51 @@
+/* 
+  Localizable.strings
+  MSSlideUnlock
+
+  Created by Jeff Wang on 16/2/3.
+  Copyright © 2016年 Jeff Wang. All rights reserved.
+*/
+
+"MSA_btn_refresh_title"               = "Refresh";
+"MSA_slide_auth_title"                = "Authentication Required";
+"MSA_slide_auth_tip_1"                = "For the security of your account，an authentication is required for current access.";
+"MSA_slide_auth_tip_2"                = "Please drag the icon into the Target zone.";
+"MSA_slide_auth_tip_3"                = "Please drag the icon into the Target zone.";
+"MSA_slide_auth_tip_4"                = "Please shake the icon.";
+
+"MSA_sms_auth_title_init"             = "SMS Authentication";
+"MSA_sms_auth_title_sent"             = "SMS Authentication";
+"MSA_sms_auth_title_sent_fail"        = "Send code fail";
+"MSA_sms_auth_sub_title"              = "Protect you against SMS hijacking";
+
+"MSA_call_auth_title"                 = "Voice call Authentication";
+"MSA_call_auth_calling"               = "Please look at call";
+
+"MSA_mobile_no"                       = "Phone No.";
+"MSA_veri_code"                       = "Veri. Code";
+
+"MSA_sms_auth_send_sms"               = "Send Code";
+"MSA_sms_auth_count_down"             = "Resend after %lus";
+
+"MSA_submit_button"                   = "Submit";
+"MSA_submit_button_waiting"           = "Authenticating By Ali Juanquan";
+
+"MSA_switch_auth_from_slide_to_call"  = "Can't pass, switch to voice call authentication";
+"MSA_switch_auth_from_slide_to_call1" = "Can't pass?";
+"MSA_switch_auth_from_slide_to_call2" = "Phone No changed";
+"MSA_switch_auth_from_slide_to_call3" = "or switch to";
+"MSA_switch_auth_from_slide_to_call4" = "voice call authentication";
+
+"MSA_switch_auth_from_sms_to_call"    = "If can't receive code, click here to retry";
+
+"MSA_alert_cancel"                    = "Cancel";
+"MSA_alert_ok"                        = "Ok";
+"MSA_alert_answer"                    = "Ok";
+
+"MSA_veri_code_auth_failed"           = "Verification code wrong，input again";
+"MSA_veri_code_auth_call_failed"      = "Verification code wrong, hang up phone and send code again";
+
+"MSA_pay_attention_to_call"           = "Begin to recieve voice call now?";
+
+"MSA_slide_auth_ball_title"           = "Balance ball authentication";
+"MSA_slide_auth_ball_tip1"            = "Keep the phone flat start rolling";

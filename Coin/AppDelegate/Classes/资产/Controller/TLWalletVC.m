@@ -69,7 +69,6 @@
 @property (nonatomic, strong) NSMutableArray <CurrencyModel *>*localCurrencys;
 
 @property (nonatomic, strong) NSMutableArray <CurrencyModel *>*allCurrencys;
-@property (nonatomic, strong) NSMutableArray <CurrencyModel *>*localCurrencys1;
 
 @property (nonatomic, strong) NSMutableArray <CurrencyModel *>*tempcurrencys;
 
@@ -114,6 +113,8 @@
   
     [super viewWillAppear:animated];
 
+
+
     [self.navigationController setNavigationBarHidden:YES animated:animated];
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
     TLDataBase *dataBase = [TLDataBase sharedManager];
@@ -127,7 +128,7 @@
 //        [self getMyCurrencyList];
 //
 //    }
-
+//   获取一键划转币种列表
     if ([dataBase.dataBase open]) {
         NSString *sql = [NSString stringWithFormat:@"SELECT Mnemonics,btcaddress,PwdKey  from THAUser where userId = '%@'",[TLUser user].userId];
         //        [sql appendString:[TLUser user].userId];
@@ -215,22 +216,7 @@
             [data.dataBase close];
 
         }
-        //这里是从别的界面跳转回来 是否要下拉更新数据
 
-//        [self getMyCurrencyList];
-//        if (self.tableView.mj_header.isRefreshing) {
-//            return;
-//        }
-//        [self queryCenterTotalAmount];
-//        [self queryMyAmount];
-//        //
-//        [self queryTotalAmount];
-//        [self requestRateList];
-//        [self switchWithTager:0 ];
-        
-//        [super viewWillAppear:animated];
-//        [self.navigationController setNavigationBarHidden:YES animated:animated];
-//        return;
     }else{
         
        
@@ -241,17 +227,7 @@
             //从私钥钱包子界面返回
             [self switchWithTager:0 ];
 
-        }else{
-//        if (self.isBulid == YES) {
-//            [self switchWithTager:0 ];
-//
-//        }else{
-//            [self.headerView swipeBottomClick:nil];
-//            [self switchWithTager:1 ];
-//
-//        }
-//   [self inreoduceView:@"个人账户" content:@"个人账户就是指中心化钱包,是由THA替您保管私钥,在中心化钱包中,不存在钱包丢失了无法找回的情况,可以通过身份证找回您的钱包,并且可以让您体验到更多的服务。"];
-    }
+        }
     
   
     }
@@ -281,6 +257,8 @@
     [self initTableView];
     self.switchTager = 1;
 
+
+    //数据库查询一键划转私钥钱包的币种
     //登录退出通知
     [self addNotification];
     //列表查询中心化币种列表
@@ -289,8 +267,7 @@
     [self queryCenterTotalAmount];
     //列表查询私钥钱包总余额
     [self queryMyAmount];
-    //数据库查询一键划转私钥钱包的币种
-    [self queryTotalAllAmount];
+
     //列表查询私钥钱包币种列表
     [self queryTotalAmount];
     //获取公告列表
@@ -299,6 +276,18 @@
     
 //    self.tableView.backgroundColor = [UIColor themeColor];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(InfoNotificationAction:) name:@"LOADDATAPAGE" object:nil];
+}
+
+#pragma mark -- 接收到通知
+- (void)InfoNotificationAction:(NSNotification *)notification{
+
+}
+
+#pragma mark -- 删除通知
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"LOADDATAPAGE" object:nil];
 }
 
 
@@ -547,26 +536,13 @@
 }
 - (void)initTableView {
     [self.titleView removeFromSuperview];
-    CGFloat f1 = kDevice_Is_iPhoneX == YES ?25 :0;
-    CGFloat f = self.isClear == YES ?338-30 : 368-30;
 
-    f = f - f1;
     self.currentTableView = [[TLAccountTableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
     
     [self.view addSubview:self.currentTableView];
-    
-    
-    CGFloat f3 = self.isClear == YES ?324-30 : 354-30;
-    
-    //    [self.titleView mas_remakeConstraints:^(MASConstraintMaker *make) {
-    //        make.top.equalTo(@(kHeight(f4)));
-    //        make.right.equalTo(@-15);
-    //        make.left.equalTo(@15);
-    //        make.height.equalTo(@30);
-    //    }];
+
     self.tableView = [[PlatformTableView alloc] initWithFrame:CGRectMake(0, kStatusBarHeight, kScreenWidth, kScreenHeight-kStatusBarHeight ) style:UITableViewStyleGrouped];
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, kTabBarHeight, 0);
-
     self.tableView.backgroundColor = kWhiteColor;
     self.tableView.refreshDelegate = self;
     self.tableView.tableHeaderView = self.headerView;
@@ -576,13 +552,13 @@
     [self.leftButton setImage:kImage(@"闪兑") forState:UIControlStateNormal];
     self.leftButton.layer.borderWidth = 0.3;
     self.leftButton.layer.borderColor = kHexColor(@"#ABC0D9").CGColor;
-
+    [self.headerView addSubview:self.leftButton];
 
     self.rightButton = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"一键划转" key:nil] titleColor:kHexColor(@"#333333") backgroundColor:kWhiteColor titleFont:14.0];
     [self.rightButton setImage:kImage(@"一键划转") forState:UIControlStateNormal];
     [self.leftButton addTarget:self action:@selector(fast) forControlEvents:UIControlEventTouchUpInside];
       [self.rightButton addTarget:self action:@selector(transNext) forControlEvents:UIControlEventTouchUpInside];
-    [self.headerView addSubview:self.leftButton];
+
     [self.headerView addSubview:self.rightButton];
     self.titleView = [[UIView alloc] init];
     [self.headerView addSubview:self.titleView];
@@ -593,7 +569,6 @@
     text.text = [LangSwitcher switchLang:@"币种列表" key:nil];
     text.frame = CGRectMake( 20, 0, SCREEN_WIDTH - 40, 30);
     [self.titleView addSubview:text];
-//    self.titleView.userInteractionEnabled = YES;
     UIButton *addButton = [UIButton buttonWithType:UIButtonTypeCustom];
     self.addButton = addButton;
     
@@ -620,8 +595,6 @@
     self.rightButton.layer.borderWidth = 0.3;
     self.rightButton.layer.borderColor = kHexColor(@"#ABC0D9").CGColor;
     [self.rightButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 0)];
-    CGFloat fx = kDevice_Is_iPhoneX == YES ?15 + 50 :7 + 50;
-
 
     self.leftButton.frame = CGRectMake(15, 65 + kHeight(150)+ 11 + 40, SCREEN_WIDTH/2 - 20, kHeight(40));
     self.rightButton.frame = CGRectMake(5 + SCREEN_WIDTH/2, 65 + kHeight(150)+ 11 + 40, SCREEN_WIDTH/2 - 20, kHeight(40));
@@ -638,21 +611,21 @@
         NSLog(@"%ld",inter);
         weakSelf.isBulid = NO;
         if (weakSelf.switchTager == 1) {
+//            个人
             WallAccountVC *accountVC= [[WallAccountVC alloc] init];
             accountVC.currency = weakSelf.currencys[inter];
             accountVC.title = accountVC.currency.currency;
             accountVC.billType = CurrentTypeAll;
             [weakSelf.navigationController pushViewController:accountVC animated:YES];
-        }else{
-            
+        }
+        else
+        {
+//            私钥1
             WalletLocalVc *accountVC= [[WalletLocalVc alloc] init];
             accountVC.currency = weakSelf.localCurrencys[inter];
             accountVC.billType = LocalTypeAll;
             [weakSelf.navigationController pushViewController:accountVC animated:YES];
         }
-      
-        
-        
     };
 }
 
@@ -817,13 +790,9 @@
 
             [self.tableView reloadData];
             //检查币种表是否更新 是否需要缓存 更新
-                [self saveLocalWalletData];
-                [self saveLocalWallet];
-//            self.tableView.bounces = YES;
-
-
-                [self getLocalWalletMessage];
-
+            [self saveLocalWalletData];
+            [self saveLocalWallet];
+            [self getLocalWalletMessage];
             return;
         }
         // 2不存在就创建
@@ -831,33 +800,10 @@
 
 
         self.switchTager = 0;
-//        CoinWeakSelf;
-//        BuildWalletMineVC *MineVC = [[BuildWalletMineVC alloc] init];
-//        MineVC.walletBlock  = ^{
-//            [weakSelf.headerView swipeBottomClick:nil];
-//
-//        };
-//        [self.navigationController pushViewController:MineVC animated:YES];
-//        [self.tableView.platforms removeAllObjects];
-//        [self.currencys removeAllObjects];
-//        [self.tableView reloadData];
-//        [self.tableView removeFromSuperview];
-//        [self.tabBarController.tabBar setHidden:YES];
-        
-//        self.homeView = [[BuildLocalHomeView alloc] initWithFrame:CGRectMake(0, 65 + kHeight(150)+ 11 , SCREEN_WIDTH, 310)];
+
         self.leftButton.hidden = YES;
         self.rightButton.hidden = YES;
         self.homeView.hidden = NO;
-//        self.tableView.bounces = NO;
-//        self.tableView.scrollEnabled = NO;
-//        [self.headerView addSubview:self.homeView];
-//        self.homeView.contentSize = CGSizeMake(0, 300);
-//        [self.homeView mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.top.equalTo(self.headerView.mas_bottom).offset(5);
-//            make.right.equalTo(@0);
-//            make.left.equalTo(@0);
-//            make.bottom.equalTo(self.view.mas_bottom).offset(0);
-//        }];
         if (self.isClear == YES)
         {
             self.headerView.frame = CGRectMake(0, 0, kScreenWidth, 65 + kHeight(150) + 20 + 340);
@@ -880,43 +826,19 @@
             
             weakSelf.navigationController.navigationBar.hidden = NO;
             BuildWalletMineVC *sucessVC = [[BuildWalletMineVC alloc] init];
-//            RevisePassWordVC *vc = [[RevisePassWordVC alloc] init];
-//            sucessVC.title =  [LangSwitcher switchLang:@"创建钱包" key:nil];
-            
-//            vc.walletBlock = ^{
-//                [weakSelf switchWithTager:0];
-////                weakSelf.isBulid = NO;
-//
-//            };
-            
-            //    vc.title =  NSLocalizedString(@"创建钱包", nil);
             [weakSelf.navigationController pushViewController:sucessVC animated:YES];
-//            weakSelf.homeView = nil;
-//
-//            [weakSelf.homeView removeFromSuperview];
-            //    [self presentViewController:vc animated:YES completion:nil];
             weakSelf.isBulid = YES;
         };
         self.homeView.importBlock = ^{
             weakSelf.navigationController.navigationBar.hidden = NO;
-            
-            //    RevisePassWordVC *vc = [[RevisePassWordVC alloc] init];
-            //    vc.title =  [LangSwitcher switchLang:@"创建钱包" key:nil];
-            //    [self.navigationController pushViewController:vc animated:YES];
             WalletImportVC *vc = [[WalletImportVC alloc] init];
             vc.title =  [LangSwitcher switchLang:@"导入钱包" key:nil];
             vc.walletBlock = ^{
-//            [weakSelf switchWithTager:0];
-//                weakSelf.isBulid = NO;
+
 
             };
-            //    vc.title = NSLocalizedString(@"导入钱包", nil);
             [weakSelf.navigationController pushViewController:vc animated:YES];
-//            weakSelf.homeView.hidden = YES;
-//            [weakSelf.homeView removeFromSuperview];
             weakSelf.isBulid = YES;
-//            weakSelf.homeView = nil;
-
             
         };
     }
@@ -933,7 +855,7 @@
 }
 - (void)transNext
 {
-    //一键旋转
+    //一键划转
     TLTransfromVC *trans = [TLTransfromVC new];
     trans.isLocal = self.switchTager == 0 ? YES : NO;
     if (self.switchTager == 1) {
@@ -976,36 +898,6 @@
     
 }
 
-- (void)checkUserLocalWallet
-{
-   // 1 去本地数据库查询用户记录是否存在
-//    self.headerView.cnyAmountLbl.text = [NSString stringWithFormat:@" %.2f", 0.00];
-//    self.headerView.privateMoney.text = [NSString stringWithFormat:@" %.2f", 0.00];
-//    self.headerView.LocalMoney.text = [NSString stringWithFormat:@" %.2f", 0.00];
-//    TLNavigationController *na = [[TLNavigationController alloc] initWithRootViewController:MineVC];
-//    [UIApplication sharedApplication].keyWindow.rootViewController = na;
-//    [TLAlert alertWithTitle:[LangSwitcher switchLang:@"创建私钥钱包" key:nil]
-//                        msg:nil
-//                 confirmMsg:[LangSwitcher switchLang:@"确定" key:nil]
-//                  cancleMsg:[LangSwitcher switchLang:@"取消" key:nil]
-//                     cancle:^(UIAlertAction *action) {
-//                         [self.leftButton setImage:kImage(@"闪兑-秘钥") forState:UIControlStateNormal];
-//                         [self.rightButton setImage:kImage(@"划转-秘钥") forState:UIControlStateNormal];
-//
-//                         [self.tableView.platforms removeAllObjects];
-//                         [self.currencys removeAllObjects];
-//                         [self.tableView reloadData];
-//                         [self.tableView removeFromSuperview];
-//                         self.headerView.cnyAmountLbl.text = [NSString stringWithFormat:@"¥ %.2f", 0.00];
-//                         self.headerView.privateMoney.text = [NSString stringWithFormat:@"¥ %.2f", 0.00];
-//                         self.headerView.LocalMoney.text = [NSString stringWithFormat:@"¥ %.2f", 0.00];
-//
-//                     } confirm:^(UIAlertAction *action) {
-//
-//                     }];
-//
-    
-}
 - (void)addNotification {
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userlogin) name:kUserLoginNotification object:nil];
@@ -1013,6 +905,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(withDrawCoinSuccess) name:kWithDrawCoinSuccess object:nil];
 }
 
+//更新数据库
 - (void)saveLocalWallet
 {
 
@@ -1072,7 +965,7 @@
                         CoinModel *model = self.coins[i];
                         TLDataBase *dateBase = [TLDataBase sharedManager];
                         if ([dateBase.dataBase open]) {
-                            //            [db executeUpdate:@"create table if not exists LocalWallet(id INTEGER PRIMARY KEY AUTOINCREMENT,walletId text, symbol text, type text ,status text,cname text,unit text,pic1 text,withdrawFeeString text,withfrawFee text,orderNo text,ename text,icon text,pic2 text,pic3 text,address text,IsSelect INTEGER,next text)"];
+
                             BOOL sucess = [dateBase.dataBase executeUpdate:@"INSERT INTO  THALocal(walletId,symbol,type,status,cname,unit,pic1,withdrawFeeString,withfrawFee,orderNo,ename,icon,pic2,pic3,address,IsSelect,next) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",model.walletId,model.symbol,model.type,model.status,model.cname,model.unit,model.pic1,model.withdrawFeeString,model.withfrawFee,model.orderNo,model.ename,model.icon,model.pic2,model.pic3,model.address,[NSNumber numberWithBool:YES],[NSString stringWithFormat:@"%ld",self.coins.count]];
                             
                             NSLog(@"插入币种表%d",sucess);
@@ -1085,7 +978,7 @@
 //            }
           
         }
-        
+        [self queryTotalAllAmount];
         return;
     }else {
         
@@ -1104,7 +997,7 @@
         CoinModel *model = self.coins[i];
         TLDataBase *dateBase = [TLDataBase sharedManager];
         if ([dateBase.dataBase open]) {
-//            [db executeUpdate:@"create table if not exists LocalWallet(id INTEGER PRIMARY KEY AUTOINCREMENT,walletId text, symbol text, type text ,status text,cname text,unit text,pic1 text,withdrawFeeString text,withfrawFee text,orderNo text,ename text,icon text,pic2 text,pic3 text,address text,IsSelect INTEGER,next text)"];
+
             BOOL sucess = [dateBase.dataBase executeUpdate:@"INSERT INTO  THALocal(walletId,symbol,type,status,cname,unit,pic1,withdrawFeeString,withfrawFee,orderNo,ename,icon,pic2,pic3,address,IsSelect,next) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",model.walletId,model.symbol,model.type,model.status,model.cname,model.unit,model.pic1,model.withdrawFeeString,model.withfrawFee,model.orderNo,model.ename,model.icon,model.pic2,model.pic3,model.address,[NSNumber numberWithBool:YES],[NSString stringWithFormat:@"%ld",self.coins.count]];
             
             NSLog(@"插入币种表%d",sucess);
@@ -1113,10 +1006,12 @@
     }
     
     //插入币种表
-    
+    [self queryTotalAllAmount];
      }
+
     
 }
+
 
 - (void)getMyCurrencyList {
     
@@ -1344,9 +1239,6 @@
     http.parameters[@"limit"] = @"10";
     http.isList = YES;
 
-  
-
-    
 }
 - (void)loadBottom
 {
@@ -1437,16 +1329,6 @@
             [self.headerView setNeedsDisplay];
 
         }
-      
-        
-        
-        //        NSString *usdStr = [responseObject[@"data"][@"totalAmountUSD"] convertToSimpleRealMoney];
-        
-        //        self.headerView.usdAmountLbl.text = [NSString stringWithFormat:@"%@USD", usdStr];
-        //
-        //        NSString *hkdStr = [responseObject[@"data"][@"totalAmountHKD"] convertToSimpleRealMoney];
-        
-        //        self.headerView.hkdAmountLbl.text = [NSString stringWithFormat:@"%@HKD", hkdStr];
         
     } failure:^(NSError *error) {
         
@@ -1653,6 +1535,8 @@
             weakSelf.tableView.platforms = weakSelf.localCurrencys;
             [weakSelf.tableView reloadData];
         }
+
+
        
     } failure:^(NSError *error) {
         
@@ -1702,7 +1586,6 @@
     
     NSSet *set = [NSSet setWithArray:arr];
     NSArray *resultArray = [set allObjects];
-    //    NSArray *a = [[NSUserDefaults standardUserDefaults] objectForKey:@"localArray"];
     if (resultArray.count > 0) {
         
         http.parameters[@"accountList"] = resultArray;
@@ -1839,62 +1722,7 @@
 
 -(void)refreshTableView:(TLTableView *)refreshTableview didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//- (void)refreshTableViewButtonClick:(TLTableView *)refreshTableview button:(UIButton *)sender selectRowAtIndex:(NSInteger)index {
-//
-//    CoinWeakSelf;
-//
-//    NSInteger tag = (sender.tag - 1200)%100;
-//
-//    CurrencyModel *currencyModel = self.currencys[index];
-//
-//    switch (tag) {
-//        case 0:
-//        {
-//            RechargeCoinVC *coinVC = [RechargeCoinVC new];
-//            coinVC.currency = currencyModel;
-//            [self.navigationController pushViewController:coinVC animated:YES];
-//
-//        }break;
-//
-//        case 1:
-//        {
-//            [self clickWithdrawWithCurrency:currencyModel];
-//
-//        }break;
-//
-//        case 2:
-//        {
-//
-//            BillVC *billVC = [BillVC new];
-//            billVC.accountNumber = currencyModel.accountNumber;
-//            billVC.billType = BillTypeAll;
-//            [self.navigationController pushViewController:billVC animated:YES];
-//
-//        }break;
-//
-//        case 3:
-//        {
-//
-//            BillVC *billVC = [BillVC new];
-//            billVC.accountNumber = currencyModel.accountNumber;
-//            billVC.billType = BillTypeFrozen;
-//            [self.navigationController pushViewController:billVC animated:YES];
-//
-//        }break;
-//
-//        default:
-//            break;
-//    }
-//}
 
-//-(void)refreshTableView:(TLTableView *)refreshTableview didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//
-//
-//
-//
-//
-    //}
 }
 
 - (void)clickWithdrawWithCurrency:(CurrencyModel *)currencyModel {
