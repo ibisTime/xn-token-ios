@@ -178,14 +178,15 @@
     self.integralBtn = integralBtn;
     
 
+    NSString *JF = [LangSwitcher switchLang:@"信用积分" key:nil];
     NSString *str = [NSString stringWithFormat:@"%@ 0",[LangSwitcher switchLang:@"信用积分" key:nil]];
     NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:str];
     [attrStr addAttribute:NSForegroundColorAttributeName
                     value:kHexColor(@"#666666")
-                    range:NSMakeRange(0, 4)];
+                    range:NSMakeRange(0, JF.length)];
     [attrStr addAttribute:NSForegroundColorAttributeName
                     value:RGB(0, 126, 246)
-                    range:NSMakeRange(4, str.length - 4)];
+                    range:NSMakeRange(JF.length, str.length - JF.length)];
     [integralBtn setAttributedTitle:attrStr forState:(UIControlStateNormal)];
 
 

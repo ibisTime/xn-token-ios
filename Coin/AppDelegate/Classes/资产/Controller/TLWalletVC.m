@@ -110,6 +110,11 @@
 
 @implementation TLWalletVC
 
+-(void)viewDidAppear:(BOOL)animated
+{
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
+}
+
 - (void)viewWillAppear:(BOOL)animated {
   
     [super viewWillAppear:animated];
@@ -235,9 +240,10 @@
     
     [super viewWillDisappear:animated];
     [self.navigationController setNavigationBarHidden:NO animated:animated];
-    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
 
 }
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];

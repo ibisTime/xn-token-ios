@@ -71,11 +71,11 @@
     
     //服务器环境
 //    研发
-//    [AppConfig config].runEnv = RunEnvDev;
+    [AppConfig config].runEnv = RunEnvDev;
 //    测试
 //    [AppConfig config].runEnv = RunEnvTest;
 //    正式
-    [AppConfig config].runEnv = RunEnvRelease;
+//    [AppConfig config].runEnv = RunEnvRelease;
 
 
     [AppConfig config].isChecking = NO;

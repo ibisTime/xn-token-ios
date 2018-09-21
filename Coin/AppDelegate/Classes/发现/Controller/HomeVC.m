@@ -85,18 +85,20 @@
     self.navigationController.navigationBarHidden = YES;
     self.navigationController.navigationBar.shadowImage = [UIImage new];
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
-    
-    
 }
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
+}
+
 //如果仅设置当前页导航透明，需加入下面方法
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     self.navigationController.navigationBarHidden = NO;
-    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
-
-    //    [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
-    //    [self.navigationController.navigationBar setShadowImage:nil];
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
 }
+
 - (void)viewDidLoad {
     
     
@@ -169,18 +171,13 @@
 //    return;
     
     [super viewDidLoad];
-    //
-    self.title = [LangSwitcher switchLang:@"发现" key:nil];
+    [self initNavigationNar];
+    [self initTableView];
     self.view.backgroundColor = kWhiteColor;
-    
     [self reloadFindData];
-    
     [CoinUtil refreshOpenCoinList:^{
-        
         //获取banner列表
         [self requestBannerList];
-
-        
     } failure:^{
         
         [self.tableView endRefreshHeader];
@@ -191,8 +188,35 @@
 }
 
 
+-(void)initNavigationNar
+{
+    self.bgImage = [[UIImageView alloc] init];
+    self.bgImage.contentMode = UIViewContentModeScaleToFill;
+    self.bgImage.userInteractionEnabled = YES;
+    //    self.bgImage.image = kImage(@"我的 背景");
+    [self.view  addSubview:self.bgImage];
 
 
+    [self.bgImage mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(UIEdgeInsetsZero);
+    }];
+
+
+    self.backButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
+    self.backButton.frame = CGRectMake(kScreenWidth-74, kStatusBarHeight, 44, 44);
+    [self.backButton setImage:kImage(@"消息") forState:(UIControlStateNormal)];
+    [self.backButton addTarget:self action:@selector(OpenMessage) forControlEvents:(UIControlEventTouchUpInside)];
+    [self.bgImage addSubview:self.backButton];
+    self.nameLable = [[UILabel alloc]initWithFrame:CGRectMake(54, kStatusBarHeight, kScreenWidth - 108, 44)];
+    self.nameLable.text = [LangSwitcher switchLang:@"发现" key:nil];
+    self.nameLable.textAlignment = NSTextAlignmentCenter;
+    self.nameLable.font = Font(16);
+    self.nameLable.textColor = kTextBlack;
+    [self.bgImage addSubview:self.nameLable];
+}
+
+
+#pragma mark - 获取发现列表数据
 - (void)reloadFindData
 {
     
@@ -211,15 +235,15 @@
     NSString *lang;
 
     LangType type = [LangSwitcher currentLangType];
-    if (type == LangTypeSimple || type == LangTypeTraditional) {
-        lang = @"zh_CN";
+    if (type == LangTypeSimple || type == LangTypeTraditional)
+    {
+        lang = @"ZH_CN";
     }else if (type == LangTypeKorean)
     {
-        lang = @"nil";
-
-
-    }else{
-        lang = @"en";
+        lang = @"KO";
+    }else
+    {
+        lang = @"EN";
 
     }
     TLNetworking *http = [TLNetworking new];
@@ -232,16 +256,12 @@
     [http postWithSuccess:^(id responseObject) {
         
         self.findModels = [HomeFindModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
-        [self initTableView];
 
         NSLog(@"%@",self.findModels);
         self.headerView.findModels = self.findModels;
         [self.tableView endRefreshHeader];
-//        self.headerView.contentSize = CGSizeMake(0,  self.findModels.count * 110  + kHeight(138));
         self.headerView.frame = CGRectMake(0, 0, kScreenWidth - 30, self.findModels.count * 110 + 65  + kHeight(138));
-
-//        self.headerView.contentInset =UIEdgeInsetsMake(0, 0, kTabBarHeight, 0);
-
+        [self.tableView reloadData];
         
     } failure:^(NSError *error) {
         [self.tableView endRefreshHeader];
@@ -260,40 +280,12 @@
 //    self.navigationItem.rightBarButtonItem = rightBarItem;
 //    [UIBarButtonItem addRightItemWithImageName:@"消息" frame:CGRectMake(0, 0, 30, 30) vc:self action:@selector(OpenMessage)];
     
-    self.bgImage = [[UIImageView alloc] init];
-    self.bgImage.contentMode = UIViewContentModeScaleToFill;
-    self.bgImage.userInteractionEnabled = YES;
-//    self.bgImage.image = kImage(@"我的 背景");
-    [self.view  addSubview:self.bgImage];
+
     
-    [self.bgImage mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(UIEdgeInsetsZero);
-    }];
-    self.backButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
-    self.backButton.frame = CGRectMake(kScreenWidth-70, kStatusBarHeight+5, 40, 40);
-    [self.backButton setImage:kImage(@"消息") forState:(UIControlStateNormal)];
-    [self.backButton addTarget:self action:@selector(OpenMessage) forControlEvents:(UIControlEventTouchUpInside)];
-    [self.bgImage addSubview:self.backButton];
-    self.nameLable = [[UILabel alloc]initWithFrame:CGRectMake(54, kStatusBarHeight+5, kScreenWidth - 108, 44)];
-    self.nameLable.text = [LangSwitcher switchLang:@"发现" key:nil];
-    self.nameLable.textAlignment = NSTextAlignmentCenter;
-    self.nameLable.font = Font(16);
-    self.nameLable.textColor = kTextBlack;
-    [self.bgImage addSubview:self.nameLable];
-    
-    self.tableView = [[HomeTableView alloc] initWithFrame:CGRectMake(15, kHeight(80), kScreenWidth, kScreenHeight - kHeight(80) - kTabBarHeight) style:UITableViewStyleGrouped];
+    self.tableView = [[HomeTableView alloc] initWithFrame:CGRectMake(15, kNavigationBarHeight, kScreenWidth, kScreenHeight - kNavigationBarHeight - kTabBarHeight) style:UITableViewStyleGrouped];
     self.tableView.backgroundColor = kWhiteColor;
-//    [self.view addSubview:self.headerView];
-
-
-//        self.tableView.tableHeaderView = self.headerView;
-//    self.tableView.refreshDelegate = self;
-//        [self.tableView adjustsContentInsets];
     [self.view addSubview:self.tableView];
     self.tableView.tableHeaderView = self.headerView;
-//        [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.edges.mas_equalTo(UIEdgeInsetsZero);
-//        }];
     
     [self.tableView addRefreshAction:^{
         
@@ -311,12 +303,6 @@
 #pragma mark - Init
 
 
-- (void)changeWord
-{
-    NSString * str = @"";
-    
-    
-}
 
 - (void)OpenMessage
 {
@@ -338,8 +324,6 @@
 
         };
          _headerView.scrollEnabled = NO;
-//        _headerView.contentSize = CGSizeMake(kScreenWidth, kScreenHeight+100);
-//        self.tableView.tableHeaderView = _headerView;
     }
     return _headerView;
 }
@@ -522,7 +506,6 @@
     [http postWithSuccess:^(id responseObject) {
         
         self.bannerRoom = [BannerModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
-        
         self.headerView.banners = self.bannerRoom;
         
         //获取官方钱包总量，已空投量

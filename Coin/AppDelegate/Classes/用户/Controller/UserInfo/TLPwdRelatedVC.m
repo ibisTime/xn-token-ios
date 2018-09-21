@@ -185,14 +185,14 @@
 - (void)setUpUI {
     
     CGFloat leftW = 100;
-    
+
     //账号
     
     UIView *view = [[UIView alloc] init];
-    
+
     [self.view addSubview:view];
     view.backgroundColor = kWhiteColor;
-    view.frame = CGRectMake(0, 0, 100, 43);
+    view.frame = CGRectMake(0, 0, 100, 50);
     UIImageView *pic = [[UIImageView alloc] init];
     self.pic = pic;
     pic.userInteractionEnabled = YES;
@@ -203,34 +203,26 @@
     
     [pic addGestureRecognizer:tap3];
     pic.contentMode = UIViewContentModeScaleToFill;
-    pic.frame = CGRectMake(17, 13, 24, 16);
-    [view addSubview:pic];
+    pic.frame = CGRectMake(17, 17, 24, 16);
+    [self.view addSubview:pic];
+
+
     UILabel *PhoneCode = [UILabel labelWithBackgroundColor:kWhiteColor textColor:kTextColor font:16];
-    [view addSubview:PhoneCode];
+    [self.view addSubview:PhoneCode];
     PhoneCode.text = [NSString stringWithFormat:@"+%@",[[TLUser user].interCode substringFromIndex:2]];
     self.PhoneCode = PhoneCode;
     PhoneCode.backgroundColor = kWhiteColor;
 
     [PhoneCode mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.top.equalTo(@13);
+        make.top.equalTo(@17);
         make.left.equalTo(pic.mas_right).offset(5);
+        make.height.equalTo(@16);
     }];
-    
-//    self.accessoryImageView = [[UIButton alloc] init];
-//    //    self.accessoryImageView.frame = CGRectMake(kScreenWidth - 40-40, 90, 40, 40);
-//    [view addSubview:self.accessoryImageView];
-//    [self.accessoryImageView setImage:kImage(@"更多-灰色") forState:UIControlStateNormal];
-//    [self.accessoryImageView addTarget:self action:@selector(chooseCountry) forControlEvents:UIControlEventTouchUpInside];
-//    [self.accessoryImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-//
-//        make.centerY.equalTo(titlePhone.mas_centerY).offset(0);
-//        make.right.mas_equalTo(-20);
-//        make.width.height.equalTo(@40);
-//    }];
+
 //
     //手机号
-    TLTextField *phoneTf = [[TLTextField alloc] initWithFrame:CGRectMake(100, 0, kScreenWidth, 45)
+    TLTextField *phoneTf = [[TLTextField alloc] initWithFrame:CGRectMake(100, 0, kScreenWidth,50)
                                                     leftTitle:[LangSwitcher switchLang:@"" key:nil]
                                                    titleWidth:0
                                                   placeholder:[LangSwitcher switchLang:@"请输入手机号" key:nil]];
@@ -245,7 +237,6 @@
                                                placeholder:[LangSwitcher switchLang:@"请输入谷歌验证码" key:nil]];
     
     self.googleAuthTF.keyboardType = UIKeyboardTypeNumberPad;
-
     [self.view addSubview:self.googleAuthTF];
     
     self.googleAuthTF.hidden = ![TLUser user].isGoogleAuthOpen;
@@ -255,8 +246,7 @@
     
     UIButton *pasteBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"粘贴" key:nil] titleColor:kWhiteColor backgroundColor:kAppCustomMainColor titleFont:13.0 cornerRadius:5];
     
-    pasteBtn.frame = CGRectMake(0, 0, 85, self.googleAuthTF.height - 15);
-    
+    pasteBtn.frame = CGRectMake(0, 0, 85, 35);
     pasteBtn.centerY = authView.height/2.0;
     
     [pasteBtn addTarget:self action:@selector(clickPaste) forControlEvents:UIControlEventTouchUpInside];
@@ -622,14 +612,13 @@
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    CoinWeakSelf;
-    　　if ([self.navigationController.viewControllers indexOfObject:self]==NSNotFound) {
+    　if ([self.navigationController.viewControllers indexOfObject:self]==NSNotFound) {
         
 //        if (self.success) {
 //            self.success();
 //        }
-        　　　　NSLog(@"clicked navigationbar back button");
-        　　}
+        　　NSLog(@"clicked navigationbar back button");
+        }
     
 }
 

@@ -137,6 +137,8 @@ typedef enum : NSUInteger {
     // Do any additional setup after loading the view.
 }
 
+
+
 - (void)initTopCollectionView{
     
     CustomLayoutWallet *layout = [[CustomLayoutWallet alloc] init];
@@ -665,10 +667,6 @@ typedef enum : NSUInteger {
             }
             
         }
-        
-        
-        
-        
     }
     
 }
@@ -791,8 +789,6 @@ typedef enum : NSUInteger {
     }
     http.parameters[@"payCardNo"] = add;
     http.parameters[@"token"] = [TLUser user].token;
-    //    http.parameters[@"fee"] = @"-0.1";
-    //    http.parameters[@"fee"] = @"-10";
     http.parameters[@"tradePwd"] = pwd;
 
     

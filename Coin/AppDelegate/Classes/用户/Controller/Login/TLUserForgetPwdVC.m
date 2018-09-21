@@ -191,7 +191,7 @@
 //
 //    [pic addGestureRecognizer:tap3];
     pic.contentMode = UIViewContentModeScaleToFill;
-    pic.frame = CGRectMake(17, kHeight(30), 24, 16);
+    pic.frame = CGRectMake(17, 30, 24, 16);
     [self.view addSubview:pic];
     UILabel *PhoneCode = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:14];
     [self.view addSubview:PhoneCode];
@@ -205,25 +205,11 @@
         
         make.top.equalTo(@(30));
         make.left.mas_equalTo(45);
+        make.height.equalTo(@16);
     }];
     
-//    self.accessoryImageView = [[UIImageView alloc] init];
-//    [self.view addSubview:self.accessoryImageView];
-//    self.accessoryImageView.image = kImage(@"TriangleNomall");
-//    //        [self.accessoryImageView addTarget:self action:@selector(chooseCountry) forControlEvents:UIControlEventTouchUpInside];
-////    self.accessoryImageView.userInteractionEnabled = YES;
-////    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(chooseCountry)];
-////    [self.accessoryImageView addGestureRecognizer:tap];
-//
-//    self.accessoryImageView.contentMode = UIViewContentModeScaleToFill;
-//    [self.accessoryImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.centerY.equalTo(PhoneCode.mas_centerY);
-//        make.left.mas_equalTo(PhoneCode.mas_right).offset(5);
-//        make.width.equalTo(@14);
-//        make.height.equalTo(@7);
-//
-//    }];
-    TLTextField *phoneTf = [[TLTextField alloc] initWithFrame:CGRectMake(100, 15, w-95, h) leftTitle:[LangSwitcher switchLang:@"" key:nil] titleWidth:20 placeholder:[LangSwitcher switchLang:@"请输入手机号" key:nil]];
+
+    TLTextField *phoneTf = [[TLTextField alloc] initWithFrame:CGRectMake(80, 15, SCREEN_WIDTH - 110, 46) leftTitle:[LangSwitcher switchLang:@"" key:nil] titleWidth:20 placeholder:[LangSwitcher switchLang:@"请输入手机号" key:nil]];
     phoneTf.keyboardType = UIKeyboardTypeNumberPad;
     [self.view addSubview:phoneTf];
     self.phoneTf = phoneTf;
@@ -234,31 +220,35 @@
     UIView *phone = [[UIView alloc] init];
     [self.view addSubview:phone];
     phone.backgroundColor = kLineColor;
-    phone.frame = CGRectMake(btnMargin, phoneTf.yy, w-30, 1);
+
+    phone.frame = CGRectMake(15, phoneTf.yy, w-30, 1);
     //验证码
     
-    UILabel *codeLab = [UILabel labelWithTitle:[LangSwitcher switchLang:@"验证码" key:nil] frame:CGRectMake(20, phoneTf.yy, w, 22)];
+    UILabel *codeLab = [UILabel labelWithTitle:[LangSwitcher switchLang:@"验证码" key:nil] frame:CGRectMake(20, phone.yy + 10, SCREEN_WIDTH - 40 , 14)];
     codeLab.font = [UIFont systemFontOfSize:14];
     codeLab.textAlignment = NSTextAlignmentLeft;
     codeLab.textColor = kTextColor;
     [self.view addSubview:codeLab];
+
+
     CaptchaView *captchaView = [[CaptchaView alloc] initWithFrame:CGRectMake(margin, codeLab.yy + 1, w, h)];
     [captchaView.captchaBtn addTarget:self action:@selector(sendCaptcha) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:captchaView];
     
     self.captchaView = captchaView;
+
     UIView *phone2 = [[UIView alloc] init];
     [self.view addSubview:phone2];
     phone2.backgroundColor = kLineColor;
     phone2.frame = CGRectMake(btnMargin, captchaView.yy, w-30, 1);
     //密码
-    UILabel *pwdLab = [UILabel labelWithTitle:[LangSwitcher switchLang:@"新密码" key:nil] frame:CGRectMake(20, captchaView.yy, w, 22)];
+    UILabel *pwdLab = [UILabel labelWithTitle:[LangSwitcher switchLang:@"新密码" key:nil] frame:CGRectMake(20, phone2.yy + 10, w, 14)];
     pwdLab.font = [UIFont systemFontOfSize:14];
     pwdLab.textAlignment = NSTextAlignmentLeft;
     pwdLab.textColor = kTextColor;
     [self.view addSubview:pwdLab];
     
-    TLTextField *pwdTf = [[TLTextField alloc] initWithFrame:CGRectMake(margin, pwdLab.yy + 10, w, h) leftTitle:[LangSwitcher switchLang:@"" key:nil] titleWidth:20 placeholder:[LangSwitcher switchLang:@"请输入密码" key:nil]];
+    TLTextField *pwdTf = [[TLTextField alloc] initWithFrame:CGRectMake(margin, pwdLab.yy + 1, w, h) leftTitle:[LangSwitcher switchLang:@"" key:nil] titleWidth:20 placeholder:[LangSwitcher switchLang:@"请输入密码" key:nil]];
     pwdTf.secureTextEntry = YES;
 //    pwdTf.keyboardType = UIKeyboardTypePhonePad;
 
@@ -269,11 +259,13 @@
     phone3.backgroundColor = kLineColor;
     phone3.frame = CGRectMake(btnMargin, pwdTf.yy, w-30, 1);
     //re密码
-    UILabel *pLab = [UILabel labelWithTitle:[LangSwitcher switchLang:@"确认密码" key:nil] frame:CGRectMake(20, pwdTf.yy, w, 22)];
+    UILabel *pLab = [UILabel labelWithTitle:[LangSwitcher switchLang:@"确认密码" key:nil] frame:CGRectMake(20, phone3.yy + 10, w, 14)];
     pLab.font = [UIFont systemFontOfSize:14];
     pLab.textAlignment = NSTextAlignmentLeft;
     pLab.textColor = kTextColor;
     [self.view addSubview:pLab];
+
+
     TLTextField *rePwdTf = [[TLTextField alloc] initWithFrame:CGRectMake(margin, pLab.yy + 1, w, h) leftTitle:[LangSwitcher switchLang:@"" key:nil] titleWidth:20 placeholder:[LangSwitcher switchLang:@"确认密码" key:nil]];
     rePwdTf.secureTextEntry = YES;
 //    rePwdTf.keyboardType = UIKeyboardTypePhonePad;
@@ -287,35 +279,8 @@
     [self.view addSubview:phone4];
     phone4.backgroundColor = kLineColor;
     phone4.frame = CGRectMake(btnMargin, rePwdTf.yy, w-30, 1);
-//    for (int i = 0; i < 2; i++) {
-//
-//        UIView *line = [[UIView alloc] init];
-//
-//        line.backgroundColor = [UIColor lineColor];
-//
-//        [self.view addSubview:line];
-//        [line mas_makeConstraints:^(MASConstraintMaker *make) {
-//
-//            make.left.mas_equalTo(margin);
-//            make.right.mas_equalTo(0);
-//            make.height.mas_equalTo(0.5);
-//            make.top.mas_equalTo(10 + h + i*(2*h + 10 + 1));
-//
-//        }];
-//    }
+
     
-    //
-//    self.accessoryImageView = [[UIButton alloc] init];
-////    self.accessoryImageView.frame = CGRectMake(kScreenWidth - 40-40, 90, 40, 40);
-//    [self.view addSubview:self.accessoryImageView];
-//    [self.accessoryImageView setImage:kImage(@"更多-灰色") forState:UIControlStateNormal];
-//    [self.accessoryImageView addTarget:self action:@selector(chooseCountry) forControlEvents:UIControlEventTouchUpInside];
-//        [self.accessoryImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-//
-//            make.centerY.equalTo(titlePhone.mas_centerY).offset(0);
-//            make.right.mas_equalTo(-20);
-//            make.width.height.equalTo(@40);
-//        }];
     UIButton *confirmBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"确认" key:nil] titleColor:kWhiteColor backgroundColor:kAppCustomMainColor titleFont:16.0 cornerRadius:5];
     
     [confirmBtn addTarget:self action:@selector(changePwd) forControlEvents:UIControlEventTouchUpInside];

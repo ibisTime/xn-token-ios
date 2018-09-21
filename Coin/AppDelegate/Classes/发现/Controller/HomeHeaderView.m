@@ -230,13 +230,7 @@
     iconIV.backgroundColor = kAppCustomMainColor;
 
     [self.applicationView addSubview:iconIV];
-//    [iconIV mas_makeConstraints:^(MASConstraintMaker *make) {
-//
-//        make.left.equalTo(@15);
-//        make.top.equalTo(@14);
-//        make.width.equalTo(@3);
-//        make.height.equalTo(@11);
-//    }];
+
     
     //商业应用
     UILabel *textLbl = [UILabel labelWithBackgroundColor:kClearColor
@@ -284,10 +278,7 @@
     [self.findModels enumerateObjectsUsingBlock:^(HomeFindModel* obj, NSUInteger idx, BOOL * _Nonnull stop) {
 
         NSLog(@"==========%ld",idx);
-        CGFloat width = (kScreenWidth-60)/3;
-        
-//        UIView *contentView = [UIView new];
-//        contentView.backgroundColor = kHexColor(@"#EFF5FE");
+
         UIButton *btn = [UIButton buttonWithTitle:nil
                                             titleColor:kWhiteColor
                                        backgroundColor:kClearColor
@@ -297,18 +288,24 @@
         UIImageView *imageView= [[UIImageView alloc] init];
         imageView.contentMode = UIViewContentModeScaleToFill;
         [btn addSubview:imageView];
-//        [btn setImage:kImage(obj) forState:UIControlStateNormal];
-//        [btn setBackgroundImage:kImage(obj) forState:UIControlStateNormal];
+
         [btn setBackgroundColor: kHexColor(@"#EFF5FE") forState:UIControlStateNormal];
+        btn.layer.cornerRadius=5;
+        btn.layer.shadowOpacity = 0.22;// 阴影透明度
+        btn.layer.shadowColor = [UIColor grayColor].CGColor;// 阴影的颜色
+        btn.layer.shadowRadius=3;// 阴影扩散的范围控制
+        btn.layer.shadowOffset = CGSizeMake(1, 1);// 阴影的范围
         btn.contentMode = UIViewContentModeScaleAspectFit;
         btn.tag = 1500 + idx;
-//        btn.backgroundColor = [UIColor redColor];
         [btn addTarget:self action:@selector(clickButton:) forControlEvents:UIControlEventTouchUpInside];
-        UILabel *textLab = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextBlack font:18];
+
+
+        UILabel *textLab = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextBlack font:16];
         [btn addSubview:textLab];
         textLab.text = [LangSwitcher switchLang:obj.name key:nil];
 //        UITapGestureRecognizer *ta = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickButton:)];
 //        [contentView addGestureRecognizer:ta]
+
         UILabel *introfucec = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor3 font:12];
         [btn addSubview:introfucec];
 //        introfucec.numberOfLines = 0;
@@ -358,25 +355,18 @@
 //            make.height.equalTo(@(kHeight(90)));
 //        }];
         [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(btn.mas_top).offset(20);
-            make.left.equalTo(btn.mas_left).offset(38);
+            make.top.equalTo(btn.mas_top).offset(22.5);
+            make.left.equalTo(btn.mas_left).offset(20);
             make.width.equalTo(@55);
             make.height.equalTo(@58);
 
         }];
-        [textLab mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(imageView.mas_top).offset(10);
-            make.width.equalTo(@200);
-            make.left.equalTo(imageView.mas_right).offset(28);
-        }];
-        
-        [introfucec mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(textLab.mas_bottom).offset(6);
-            
-            make.left.equalTo(textLab.mas_left);
-            make.right.equalTo(btn.mas_right);
+        introfucec.frame = CGRectMake(90, 0, SCREEN_WIDTH - 135, 0);
+        introfucec.numberOfLines = 3;
+        [introfucec sizeToFit];
+        textLab.frame = CGRectMake(90, (100 - introfucec.frame.size.height - 8 - 10)/2, SCREEN_WIDTH - 135, 16);
+        introfucec.frame = CGRectMake(90, textLab.yy + 5, SCREEN_WIDTH - 135, introfucec.frame.size.height);
 
-        }];
         NSString *url = [self.findModels[idx].icon convertImageUrl];
         [imageView sd_setImageWithURL:[NSURL URLWithString:url]];
         
