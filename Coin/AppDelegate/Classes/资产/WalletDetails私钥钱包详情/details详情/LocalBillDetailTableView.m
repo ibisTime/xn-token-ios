@@ -49,7 +49,7 @@ static NSString *identifierCell = @"BillDetailCell";
                          [LangSwitcher switchLang:@"区块高度" key:nil],
                          [LangSwitcher switchLang:@"交易号" key:nil],
                          [LangSwitcher switchLang:@"交易时间" key:nil],
-                         [LangSwitcher switchLang:@"" key:nil]
+                         [LangSwitcher switchLang:@"查看更多详情" key:nil]
 
                          ];
     NSString *dateStr;
@@ -76,20 +76,12 @@ static NSString *identifierCell = @"BillDetailCell";
         charge = _bill.txFee;
         height = _bill.height;
         texthash = _bill.txHash;
-        
         postAmount  = [CoinUtil convertToRealCoin:_bill.txFee coin:_currentModel.symbol];
     }
-  
-    
-//    NSString *preAmount = [CoinUtil convertToRealCoin:_bill.preAmountString coin:_bill.currency];
-    
-    NSArray *rightArr = @[toAdress, formAdress, postAmount, height,texthash,dateStr,@"查看更多详情"];
+    NSArray *rightArr = @[toAdress, formAdress, postAmount, height,texthash,dateStr,@""];
     
     cell.titleLbl.text = textArr[indexPath.row];
-    //    [LangSwitcher switchLang:textArr[indexPath.row] key:nil];
-    
     cell.rightLabel.text = rightArr[indexPath.row];
-    //    [LangSwitcher switchLang:rightArr[indexPath.row] key:nil] ;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
     

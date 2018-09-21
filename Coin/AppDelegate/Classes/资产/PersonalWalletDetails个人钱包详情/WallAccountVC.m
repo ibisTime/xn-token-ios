@@ -149,14 +149,14 @@
 - (void)initTableView {
     
     self.tableView = [[BillTableView alloc]
-                      initWithFrame:CGRectMake(0, kHeight(90), kScreenWidth, kSuperViewHeight-kTabBarHeight)
+                      initWithFrame:CGRectMake(0, 110, kScreenWidth, SCREEN_HEIGHT - 170 - kStatusBarHeight)
                       style:UITableViewStyleGrouped];
    
     self.tableView.backgroundColor = kWhiteColor;
     self.tableView.refreshDelegate = self;
-    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, kTabBarHeight, 0);
+//    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, kTabBarHeight, 0);
 
-    self.tableView.sectionHeaderHeight = 22;
+//    self.tableView.sectionHeaderHeight = 22;
     [self.view addSubview:self.tableView];
     CoinWeakSelf;
     self.tableView.addBlock = ^{
@@ -287,10 +287,10 @@
         
         make.left.equalTo(self.view.mas_left);
         make.right.equalTo(self.view.mas_right);
-        make.height.equalTo(@(kHeight(66)));
+        make.height.equalTo(@(60));
     }];
     
-    WallAccountHeadView *headView = [[WallAccountHeadView alloc] initWithFrame:CGRectMake(15, 0, kScreenWidth-30, 90)];
+    WallAccountHeadView *headView = [[WallAccountHeadView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 110)];
     self.headView = headView;
     [self.view addSubview:headView];
     
@@ -308,9 +308,13 @@
     [bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.left.equalTo(@0);
         make.bottom.equalTo(@(0));
-        make.height.equalTo(@(50));
+        make.height.equalTo(@60);
     }];
-    
+    bottomView.layer.cornerRadius=5;
+    bottomView.layer.shadowOpacity = 0.22;// 阴影透明度
+    bottomView.layer.shadowColor = [UIColor grayColor].CGColor;// 阴影的颜色
+    bottomView.layer.shadowRadius=3;// 阴影扩散的范围控制
+    bottomView.layer.shadowOffset=CGSizeMake(1, 1);// 阴影的范围
     //底部操作按钮
     
     NSArray *textArr = @[

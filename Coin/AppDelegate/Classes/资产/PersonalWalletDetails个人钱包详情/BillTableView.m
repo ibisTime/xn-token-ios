@@ -12,7 +12,9 @@
 #import "BillCell.h"
 
 @interface BillTableView ()<UITableViewDelegate, UITableViewDataSource>
-
+{
+    BillCell *cell;
+}
 @end
 
 @implementation BillTableView
@@ -49,7 +51,7 @@ static NSString *identifierCell = @"BillListCell";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    BillCell *cell = [tableView dequeueReusableCellWithIdentifier:identifierCell forIndexPath:indexPath];
+    cell = [tableView dequeueReusableCellWithIdentifier:identifierCell forIndexPath:indexPath];
     
     cell.billModel = self.bills[indexPath.row];
     
@@ -62,7 +64,8 @@ static NSString *identifierCell = @"BillListCell";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    return self.bills[indexPath.row].dHeightValue + 70;
+//    return self.bills[indexPath.row].dHeightValue + 70;
+    return cell.timeLbl.yy + 16;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -74,41 +77,50 @@ static NSString *identifierCell = @"BillListCell";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     
-    return 22;
+    return 40;
 }
 
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    
-    UIView *contentView = [[UIView alloc] initWithFrame:CGRectMake(15, 20, kScreenWidth, 22)];
+
+
+
+    UIView *contentView = [[UIView alloc] init];
+
+    UIView *backView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 40)];
+    backView.backgroundColor = [UIColor whiteColor];
+    [contentView addSubview:backView];
+
+    UILabel *lab = [[UILabel alloc] initWithFrame:CGRectMake(25, 0, kScreenWidth - 35, 40)];
+    [backView addSubview:lab];
+
+    lab.textColor = kTextColor;
+    lab.font = [UIFont systemFontOfSize:13];
+    lab.text =[NSString stringWithFormat:@"%@",[LangSwitcher switchLang:@"交易记录" key:nil]];
+
+
+    UIView *view = [UIView new];
+    view.backgroundColor = kHexColor(@"276FFA ");
+    view.frame = CGRectMake(15, 14, 5, 12);
+    kViewRadius(view, 1);
+    [backView addSubview:view];
+
+
+    UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(15, 39, SCREEN_WIDTH - 30, 1)];
+    lineView.backgroundColor = kLineColor;
+    [backView addSubview:lineView];
+
     
     UIButton *button = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"筛选" key:nil] titleColor:kTextColor backgroundColor:kClearColor titleFont:12];
     [button addTarget:self action:@selector(clickFilter:) forControlEvents:UIControlEventTouchUpInside];
-//    [UIBarButtonItem addRightItemWithTitle:[LangSwitcher switchLang:@"筛选" key:nil]
-//                                titleColor:kTextColor
-//                                     frame:CGRectMake(0, 0, 60, 30)
-//                                        vc:self
-//                                    action:@selector(clickFilter:)];
+    button.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
     [contentView addSubview:button];
-    
     [button mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(contentView.mas_top);
         make.right.equalTo(contentView.mas_right).offset(-15);
         make.width.equalTo(@75);
-        make.height.equalTo(@22);
+        make.height.equalTo(@40);
     }];
-    UILabel *lab = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 22)];
-    [contentView addSubview:lab];
-    
-    lab.textColor = kTextColor;
-    lab.font = [UIFont systemFontOfSize:12];
-    
-    lab.text =[NSString stringWithFormat:@"    %@",[LangSwitcher switchLang:@"交易记录" key:nil]];
-    UIView *view = [UIView new];
-    view.backgroundColor = kHexColor(@"276FFA ");
-    view.frame = CGRectMake(0, 8, 10, 5);
-    [contentView addSubview:view];
-    
     return contentView;
 }
 

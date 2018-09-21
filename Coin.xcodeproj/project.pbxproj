@@ -1583,36 +1583,20 @@
 			children = (
 				B8CA0D6B2108223F0015A19D /* TTPasswordView.h */,
 				B8CA0D6C2108223F0015A19D /* TTPasswordView.m */,
-				B8BBA5F920C780FA00DC4D5F /* PlatformCell.h */,
-				B8BBA5F720C780F900DC4D5F /* PlatformCell.m */,
-				B8BBA5F820C780FA00DC4D5F /* PlatformTableView.h */,
-				B8BBA5F620C780F900DC4D5F /* PlatformTableView.m */,
-				211A35021FB45A6A00FEB71F /* WalletHeaderView.h */,
-				211A35031FB45A6A00FEB71F /* WalletHeaderView.m */,
 				211DE6121FB5465E002FCF3D /* WalletTableView.h */,
 				211DE6131FB5465E002FCF3D /* WalletTableView.m */,
 				211DE6151FB54685002FCF3D /* WalletCell.h */,
 				211DE6161FB54685002FCF3D /* WalletCell.m */,
-				B8BBA63E20C7FB4600DC4D5F /* WallAccountHeadView.h */,
-				B8BBA63F20C7FB4600DC4D5F /* WallAccountHeadView.m */,
 				B8BBA64420C8497000DC4D5F /* AddMoneyTableView.h */,
 				B8BBA64520C8497000DC4D5F /* AddMoneyTableView.m */,
 				B8BBA64720C849BB00DC4D5F /* AddMoneyCell.h */,
 				B8BBA64820C849BB00DC4D5F /* AddMoneyCell.m */,
 				B8D5F15120CE0E4C0005CF96 /* TLAccountTableView.h */,
 				B8D5F15220CE0E4C0005CF96 /* TLAccountTableView.m */,
-				B8D5F15420CE0F530005CF96 /* AccountMoneyCellTableViewCell.h */,
-				B8D5F15520CE0F530005CF96 /* AccountMoneyCellTableViewCell.m */,
 				B8C2057D20CFFE1C00952765 /* WalletLocalModel.h */,
 				B8C2057E20CFFE1C00952765 /* WalletLocalModel.m */,
 				B8D7E38320D14B8200453860 /* SystemWallModel.h */,
 				B8D7E38420D14B8200453860 /* SystemWallModel.m */,
-				B8F63ED520D362DA00556150 /* WalletLocalBillTableView.h */,
-				B8F63ED620D362DA00556150 /* WalletLocalBillTableView.m */,
-				B8F63ED820D3639900556150 /* LocalBillCell.h */,
-				B8F63ED920D3639900556150 /* LocalBillCell.m */,
-				B8F63EDE20D3809700556150 /* LocalBillDetailTableView.h */,
-				B8F63EDF20D3809700556150 /* LocalBillDetailTableView.m */,
 				B891F0662101899900ED5DDF /* BuildLocalHomeView.h */,
 				B891F0672101899900ED5DDF /* BuildLocalHomeView.m */,
 				B8CA0D6821081B850015A19D /* AssetPwdView.h */,
@@ -1632,14 +1616,6 @@
 		211A53231FBFE41B00CC6294 /* Bill */ = {
 			isa = PBXGroup;
 			children = (
-				2159795E1FB81CC40029F177 /* BillTableView.h */,
-				2159795F1FB81CC40029F177 /* BillTableView.m */,
-				215979651FB81D230029F177 /* BillCell.h */,
-				215979661FB81D230029F177 /* BillCell.m */,
-				215979711FB84CB10029F177 /* BillDetailTableView.h */,
-				215979721FB84CB10029F177 /* BillDetailTableView.m */,
-				215979741FB84CC70029F177 /* BillDetailCell.h */,
-				215979751FB84CC70029F177 /* BillDetailCell.m */,
 				B8D7E38020D140BC00453860 /* BilllistVC.h */,
 				B8D7E38120D140BC00453860 /* BilllistVC.m */,
 			);
@@ -1651,8 +1627,6 @@
 			children = (
 				2159795B1FB81C2B0029F177 /* BillVC.h */,
 				2159795C1FB81C2B0029F177 /* BillVC.m */,
-				2159796E1FB84B8A0029F177 /* BillDetailVC.h */,
-				2159796F1FB84B8A0029F177 /* BillDetailVC.m */,
 			);
 			path = BIll;
 			sourceTree = "<group>";
@@ -1671,8 +1645,6 @@
 		211A53261FBFE44C00CC6294 /* Recharge */ = {
 			isa = PBXGroup;
 			children = (
-				211DE6C81FB5A586002FCF3D /* RechargeCoinVC.h */,
-				211DE6C91FB5A586002FCF3D /* RechargeCoinVC.m */,
 				21D216841FB9C5750040795E /* QRCodeVC.h */,
 				21D216851FB9C5750040795E /* QRCodeVC.m */,
 			);
@@ -2675,6 +2647,10 @@
 		2E394FA41FB055DE00BA0829 /* 资产 */ = {
 			isa = PBXGroup;
 			children = (
+				7AEF235E2154DCE100BF1DB5 /* Home */,
+				7AEF23612154E5E000BF1DB5 /* Receivables收款 */,
+				7AEF235D2154D60100BF1DB5 /* PersonalWalletDetails个人钱包详情 */,
+				7AEF235C2154CB1500BF1DB5 /* WalletDetails私钥钱包详情 */,
 				7AEF235B2154C81400BF1DB5 /* AddWallet导入钱包 */,
 				7AEF23562154C3A200BF1DB5 /* Transfer一键划转 */,
 				2E394FA51FB055DE00BA0829 /* Controller */,
@@ -2686,20 +2662,10 @@
 		2E394FA51FB055DE00BA0829 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				2EE950C11FB05B4500429257 /* TLWalletVC.h */,
-				2EE950C21FB05B4500429257 /* TLWalletVC.m */,
-				B8BBA63B20C7F6FC00DC4D5F /* WallAccountVC.h */,
-				B8BBA63C20C7F6FC00DC4D5F /* WallAccountVC.m */,
 				B8BBA64120C843F800DC4D5F /* AddAccoutMoneyVc.h */,
 				B8BBA64220C843F800DC4D5F /* AddAccoutMoneyVc.m */,
-				B83D1E0A20CE63A2007835DB /* WalletLocalVc.h */,
-				B83D1E0B20CE63A2007835DB /* WalletLocalVc.m */,
 				B83D1E0D20CE7076007835DB /* WalletForwordVC.h */,
 				B83D1E0E20CE7076007835DB /* WalletForwordVC.m */,
-				B8F63EDB20D37FE700556150 /* LocalBillDetailVC.h */,
-				B8F63EDC20D37FE700556150 /* LocalBillDetailVC.m */,
-				B8F63EE120D397B000556150 /* WalletLocalWebVC.h */,
-				B8F63EE220D397B000556150 /* WalletLocalWebVC.m */,
 				B8086536211F19BF00755158 /* TLBillBTCVC.h */,
 				B8086537211F19BF00755158 /* TLBillBTCVC.m */,
 			);
@@ -2903,10 +2869,11 @@
 		7A8A5D0E20EA0677002D9A48 /* RedEnvelope */ = {
 			isa = PBXGroup;
 			children = (
-				7A8A5D2920EA3BCA002D9A48 /* MySugarPackets */,
+				7AEF23622154EE6300BF1DB5 /* Theia红包 */,
+				7AEF23652154F18600BF1DB5 /* Theia红包说明 */,
+				7AEF23632154EF7000BF1DB5 /* Record红包记录 */,
 				7A8A5D1C20EA2F44002D9A48 /* Share */,
 				7A8A5D1220EA06AA002D9A48 /* Controller */,
-				7A8A5D1120EA06A4002D9A48 /* Model */,
 				7A8A5D1020EA06A1002D9A48 /* View */,
 			);
 			path = RedEnvelope;
@@ -2935,22 +2902,9 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		7A8A5D1120EA06A4002D9A48 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
 		7A8A5D1220EA06AA002D9A48 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				7A8A5D1320EA076C002D9A48 /* RedEnvelopeVC.h */,
-				7A8A5D1420EA076C002D9A48 /* RedEnvelopeVC.m */,
-				B8DB9EAF214F68E60091276E /* TLRedintroduceVC.h */,
-				B8DB9EB0214F68E60091276E /* TLRedintroduceVC.m */,
-				B8DB9EC1214F8A220091276E /* H5DrtailVC.h */,
-				B8DB9EC2214F8A220091276E /* H5DrtailVC.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2959,7 +2913,6 @@
 			isa = PBXGroup;
 			children = (
 				7A8A5D1F20EA2FC7002D9A48 /* Controller */,
-				7A8A5D1E20EA2FC4002D9A48 /* Model */,
 				7A8A5D1D20EA2FC2002D9A48 /* View */,
 			);
 			path = Share;
@@ -2976,13 +2929,6 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		7A8A5D1E20EA2FC4002D9A48 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
 		7A8A5D1F20EA2FC7002D9A48 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -2990,16 +2936,6 @@
 				7A8A5D2420EA301E002D9A48 /* RedEnvelopeShoreVC.m */,
 			);
 			path = Controller;
-			sourceTree = "<group>";
-		};
-		7A8A5D2920EA3BCA002D9A48 /* MySugarPackets */ = {
-			isa = PBXGroup;
-			children = (
-				7A8A5D2C20EA3BEB002D9A48 /* Controller */,
-				7A8A5D2B20EA3BE9002D9A48 /* Model */,
-				7A8A5D2A20EA3BE7002D9A48 /* View */,
-			);
-			path = MySugarPackets;
 			sourceTree = "<group>";
 		};
 		7A8A5D2A20EA3BE7002D9A48 /* View */ = {
@@ -3032,19 +2968,6 @@
 				7A3821C520EAD4EA00D6B636 /* SendModel.m */,
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		7A8A5D2C20EA3BEB002D9A48 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				7A8A5D2D20EA3C09002D9A48 /* MySugarPacketsVC.h */,
-				7A8A5D2E20EA3C09002D9A48 /* MySugarPacketsVC.m */,
-				7A8A5D3020EA3E0E002D9A48 /* GetTheVC.h */,
-				7A8A5D3120EA3E0E002D9A48 /* GetTheVC.m */,
-				7A8A5D3320EA3E5A002D9A48 /* SendVC.h */,
-				7A8A5D3420EA3E5A002D9A48 /* SendVC.m */,
-			);
-			path = Controller;
 			sourceTree = "<group>";
 		};
 		7AAF031F215267B7008507FF /* ValidationSDK */ = {
@@ -3198,6 +3121,131 @@
 				B8CA7D4820CBA22800A0E93C /* WalletImportVC.m */,
 			);
 			path = "AddWallet导入钱包";
+			sourceTree = "<group>";
+		};
+		7AEF235C2154CB1500BF1DB5 /* WalletDetails私钥钱包详情 */ = {
+			isa = PBXGroup;
+			children = (
+				7AEF23602154E35A00BF1DB5 /* details详情 */,
+				B83D1E0A20CE63A2007835DB /* WalletLocalVc.h */,
+				B83D1E0B20CE63A2007835DB /* WalletLocalVc.m */,
+				B8BBA63E20C7FB4600DC4D5F /* WallAccountHeadView.h */,
+				B8BBA63F20C7FB4600DC4D5F /* WallAccountHeadView.m */,
+				B8F63ED520D362DA00556150 /* WalletLocalBillTableView.h */,
+				B8F63ED620D362DA00556150 /* WalletLocalBillTableView.m */,
+				B8F63ED820D3639900556150 /* LocalBillCell.h */,
+				B8F63ED920D3639900556150 /* LocalBillCell.m */,
+			);
+			path = "WalletDetails私钥钱包详情";
+			sourceTree = "<group>";
+		};
+		7AEF235D2154D60100BF1DB5 /* PersonalWalletDetails个人钱包详情 */ = {
+			isa = PBXGroup;
+			children = (
+				7AEF235F2154E26700BF1DB5 /* details详情 */,
+				B8BBA63B20C7F6FC00DC4D5F /* WallAccountVC.h */,
+				B8BBA63C20C7F6FC00DC4D5F /* WallAccountVC.m */,
+				2159795E1FB81CC40029F177 /* BillTableView.h */,
+				2159795F1FB81CC40029F177 /* BillTableView.m */,
+				215979651FB81D230029F177 /* BillCell.h */,
+				215979661FB81D230029F177 /* BillCell.m */,
+			);
+			path = "PersonalWalletDetails个人钱包详情";
+			sourceTree = "<group>";
+		};
+		7AEF235E2154DCE100BF1DB5 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				2EE950C11FB05B4500429257 /* TLWalletVC.h */,
+				2EE950C21FB05B4500429257 /* TLWalletVC.m */,
+				211A35021FB45A6A00FEB71F /* WalletHeaderView.h */,
+				211A35031FB45A6A00FEB71F /* WalletHeaderView.m */,
+				B8BBA5F820C780FA00DC4D5F /* PlatformTableView.h */,
+				B8BBA5F620C780F900DC4D5F /* PlatformTableView.m */,
+				B8D5F15420CE0F530005CF96 /* AccountMoneyCellTableViewCell.h */,
+				B8D5F15520CE0F530005CF96 /* AccountMoneyCellTableViewCell.m */,
+				B8BBA5F920C780FA00DC4D5F /* PlatformCell.h */,
+				B8BBA5F720C780F900DC4D5F /* PlatformCell.m */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		7AEF235F2154E26700BF1DB5 /* details详情 */ = {
+			isa = PBXGroup;
+			children = (
+				2159796E1FB84B8A0029F177 /* BillDetailVC.h */,
+				2159796F1FB84B8A0029F177 /* BillDetailVC.m */,
+				215979711FB84CB10029F177 /* BillDetailTableView.h */,
+				215979721FB84CB10029F177 /* BillDetailTableView.m */,
+				215979741FB84CC70029F177 /* BillDetailCell.h */,
+				215979751FB84CC70029F177 /* BillDetailCell.m */,
+			);
+			path = "details详情";
+			sourceTree = "<group>";
+		};
+		7AEF23602154E35A00BF1DB5 /* details详情 */ = {
+			isa = PBXGroup;
+			children = (
+				B8F63EDB20D37FE700556150 /* LocalBillDetailVC.h */,
+				B8F63EDC20D37FE700556150 /* LocalBillDetailVC.m */,
+				B8F63EDE20D3809700556150 /* LocalBillDetailTableView.h */,
+				B8F63EDF20D3809700556150 /* LocalBillDetailTableView.m */,
+				B8F63EE120D397B000556150 /* WalletLocalWebVC.h */,
+				B8F63EE220D397B000556150 /* WalletLocalWebVC.m */,
+			);
+			path = "details详情";
+			sourceTree = "<group>";
+		};
+		7AEF23612154E5E000BF1DB5 /* Receivables收款 */ = {
+			isa = PBXGroup;
+			children = (
+				211DE6C81FB5A586002FCF3D /* RechargeCoinVC.h */,
+				211DE6C91FB5A586002FCF3D /* RechargeCoinVC.m */,
+			);
+			path = "Receivables收款";
+			sourceTree = "<group>";
+		};
+		7AEF23622154EE6300BF1DB5 /* Theia红包 */ = {
+			isa = PBXGroup;
+			children = (
+				7A8A5D1320EA076C002D9A48 /* RedEnvelopeVC.h */,
+				7A8A5D1420EA076C002D9A48 /* RedEnvelopeVC.m */,
+			);
+			path = "Theia红包";
+			sourceTree = "<group>";
+		};
+		7AEF23632154EF7000BF1DB5 /* Record红包记录 */ = {
+			isa = PBXGroup;
+			children = (
+				7AEF23642154EFBF00BF1DB5 /* Controller */,
+				7A8A5D2B20EA3BE9002D9A48 /* Model */,
+				7A8A5D2A20EA3BE7002D9A48 /* View */,
+			);
+			path = "Record红包记录";
+			sourceTree = "<group>";
+		};
+		7AEF23642154EFBF00BF1DB5 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				7A8A5D2D20EA3C09002D9A48 /* MySugarPacketsVC.h */,
+				7A8A5D2E20EA3C09002D9A48 /* MySugarPacketsVC.m */,
+				7A8A5D3020EA3E0E002D9A48 /* GetTheVC.h */,
+				7A8A5D3120EA3E0E002D9A48 /* GetTheVC.m */,
+				7A8A5D3320EA3E5A002D9A48 /* SendVC.h */,
+				7A8A5D3420EA3E5A002D9A48 /* SendVC.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		7AEF23652154F18600BF1DB5 /* Theia红包说明 */ = {
+			isa = PBXGroup;
+			children = (
+				B8DB9EAF214F68E60091276E /* TLRedintroduceVC.h */,
+				B8DB9EB0214F68E60091276E /* TLRedintroduceVC.m */,
+				B8DB9EC1214F8A220091276E /* H5DrtailVC.h */,
+				B8DB9EC2214F8A220091276E /* H5DrtailVC.m */,
+			);
+			path = "Theia红包说明";
 			sourceTree = "<group>";
 		};
 		B8086409211EA17C00755158 /* DataBtc */ = {

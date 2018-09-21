@@ -10,7 +10,7 @@
 #import "BillModel.h"
 
 @interface BillCell : UITableViewCell
-
+@property (nonatomic,strong) UILabel *timeLbl;
 @property (nonatomic,strong) BillModel *billModel;
 
 @end

@@ -14,7 +14,6 @@
 #import "WithdrawalsCoinVC.h"
 #import "Masonry.h"
 #import "TLUser.h"
-#import "BillTableView.h"
 #import "BillModel.h"
 #import "NSString+Check.h"
 #import "FilterView.h"
@@ -34,6 +33,7 @@
 @property (nonatomic, strong) FilterView *filterPicker;
 //暂无推荐历史
 @property (nonatomic, strong) UIView *placeHolderView;
+
 @property (nonatomic , strong) WallAccountHeadView *headView;
 
 @property (nonatomic , strong) UIView *bottomViw;
@@ -58,6 +58,18 @@
 
     //筛选
     [self addFilterItem];
+
+//    if ([self.currency.symbol isEqualToString:@"BTC"]) {
+//        [self requestBtcList];
+//
+//    }else if ([self.currency.symbol isEqualToString:@"LXT"])
+//    {
+//        [self requestLXTList];
+//    }
+//    else
+//    {
+//        [self requestBillList];
+//    }
     //获取账单
     // Do any additional setup after loading the view.
 }
@@ -65,17 +77,18 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.title = [LangSwitcher switchLang: [NSString stringWithFormat:@"%@",self.currency.symbol] key:nil];;
+    self.title = [LangSwitcher switchLang: [NSString stringWithFormat:@"%@",self.currency.symbol] key:nil];
+
     if ([self.currency.symbol isEqualToString:@"BTC"]) {
         [self requestBtcList];
 
     }else if ([self.currency.symbol isEqualToString:@"LXT"])
     {
         [self requestLXTList];
-        
     }
-    else{
-    [self requestBillList];
+    else
+    {
+        [self requestBillList];
     }
 }
 
@@ -347,16 +360,14 @@
 - (void)initTableView {
     
     self.tableView = [[WalletLocalBillTableView alloc]
-                      initWithFrame:CGRectMake(0, self.headView.yy+16, kScreenWidth, kSuperViewHeight-kTabBarHeight)
+                      initWithFrame:CGRectMake(0, 110, kScreenWidth, SCREEN_HEIGHT - 170 - kStatusBarHeight)
                       style:UITableViewStyleGrouped];
     
     self.tableView.placeHolderView = self.placeHolderView;
-//    self.tableView.tableHeaderView = self.headView;
-     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, kTabBarHeight, 0);
     self.tableView.backgroundColor = kWhiteColor;
     self.tableView.refreshDelegate = self;
     self.tableView.billModel = self.currency;
-    self.tableView.sectionHeaderHeight = 22;
+//    self.tableView.sectionHeaderHeight = 22;
     [self.view addSubview:self.tableView];
     
 }
@@ -490,11 +501,11 @@
         
         make.left.equalTo(self.view.mas_left);
         make.right.equalTo(self.view.mas_right);
-        make.height.equalTo(@(kHeight(66)));
+        make.height.equalTo(@(60));
     }];
    
     
-    WallAccountHeadView *headView = [[WallAccountHeadView alloc] initWithFrame:CGRectMake(15, 0, kScreenWidth-30, 90)];
+    WallAccountHeadView *headView = [[WallAccountHeadView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 110)];
     self.headView = headView;
     [self.view addSubview:headView];
     self.headView.ISLocal = YES;
@@ -512,9 +523,13 @@
     [bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.left.equalTo(@0);
         make.bottom.equalTo(@(0));
-        make.height.equalTo(@50);
+        make.height.equalTo(@60);
     }];
-    
+    bottomView.layer.cornerRadius=5;
+    bottomView.layer.shadowOpacity = 0.22;// 阴影透明度
+    bottomView.layer.shadowColor = [UIColor grayColor].CGColor;// 阴影的颜色
+    bottomView.layer.shadowRadius=3;// 阴影扩散的范围控制
+    bottomView.layer.shadowOffset=CGSizeMake(1, 1);// 阴影的范围
     //底部操作按钮
     
     NSArray *textArr = @[

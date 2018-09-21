@@ -46,7 +46,6 @@
             
             make.top.equalTo(self.mas_top).offset(20);
             make.left.equalTo(self.mas_left).offset(15);
-
             make.width.height.equalTo(@30);
             
         }];
@@ -63,7 +62,8 @@
         [self.detailLbl mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.mas_top).offset(17);
             make.left.equalTo(self.iconIV.mas_right).offset(15);
-            make.width.equalTo(@(kScreenWidth -130));
+            make.width.equalTo(@(kScreenWidth - 130));
+            make.height.equalTo(@(14));
             //            make.right.equalTo(rightArrowIV.mas_left).offset(-15);
             
         }];
@@ -83,7 +83,8 @@
             make.top.equalTo(self.detailLbl.mas_bottom).offset(2);
           
         }];
-        
+
+
         self.timeLbl = [UILabel labelWithFrame:CGRectZero textAligment:NSTextAlignmentLeft
                                backgroundColor:[UIColor clearColor]
                                           font:Font(12.0)
@@ -92,8 +93,8 @@
         
         [self.timeLbl mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.dayLbl.mas_top);
-
-            make.left.equalTo(self.dayLbl.mas_right).offset(3);
+            make.left.equalTo(self.dayLbl.mas_right).offset(0);
+            make.height.equalTo(@(14));
            
         }];
         
@@ -121,10 +122,10 @@
         [self addSubview:self.introduceLab];
         
         [self.introduceLab mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.timeLbl.mas_bottom).offset(3);
+            make.top.equalTo(self.timeLbl.mas_bottom).offset(2);
             make.left.equalTo(self.iconIV.mas_right).offset(15);
             make.right.equalTo(self.mas_right).offset(-15);
-
+            make.height.equalTo(@(14));
             
             //            make.right.equalTo(rightArrowIV.mas_left).offset(-15);
             
@@ -148,9 +149,9 @@
         
         [self addSubview:line];
         [line mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self.mas_left);
-            make.width.equalTo(self.mas_width);
-            make.height.equalTo(@(0.5));
+            make.left.equalTo(self.mas_left).offset(15);
+            make.right.equalTo(self.mas_right).offset(-15);
+            make.height.equalTo(@(1));
             make.bottom.equalTo(self.mas_bottom);
         }];
     }
@@ -243,7 +244,6 @@
             self.introduceLab.text = [NSString stringWithFormat:@"%@",billModel.txHash];
             
         }
-        
     }
 //    if ([self.currencyModel.symbol isEqualToString:@"ETH"]) {
 //        self.iconIV.image = kImage(@"eth");

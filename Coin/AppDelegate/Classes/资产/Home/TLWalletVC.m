@@ -35,7 +35,6 @@
 #import "WalletLocalModel.h"
 #import "AppConfig.h"
 #import "RateModel.h"
-#import "BillTableView.h"
 #import "WallAccountVC.h"
 #import "QRCodeVC.h"
 #import "BuildWalletMineVC.h"
@@ -53,6 +52,7 @@
 #import "BTCData.h"
 #import "MnemonicUtil.h"
 #import "BTCKeychain.h"
+#import "BillModel.h"
 //#import <CoreBitcoin.h>
 //#import <CoreBitcoin/CoreBitcoin.h>
 //#import "BTCMnemonic+Tests.h"

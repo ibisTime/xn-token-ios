@@ -62,11 +62,17 @@
         make.right.equalTo(self.view.mas_right);
         make.height.equalTo(@(kHeight(66)));
     }];
+
     self.headerView = [[UIView alloc] init];
+    self.headerView.layer.cornerRadius=5;
+    self.headerView.layer.shadowOpacity = 0.22;// 阴影透明度
+    self.headerView.layer.shadowColor = [UIColor grayColor].CGColor;// 阴影的颜色
+    self.headerView.layer.shadowRadius=3;// 阴影扩散的范围控制
+    self.headerView.layer.shadowOffset=CGSizeMake(1, 1);// 阴影的范围
     self.headerView.backgroundColor = kWhiteColor;
     [self.view addSubview:self.headerView];
     [self.headerView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view.mas_top);
+        make.top.equalTo(self.view.mas_top).offset(10);
         make.left.equalTo(self.view.mas_left).offset(15);
         make.right.equalTo(self.view.mas_right).offset(-15);
         make.height.equalTo(@(kHeight(90)));
@@ -182,13 +188,14 @@
     self.tableView.bill = self.bill;
     self.tableView.refreshDelegate = self;
     self.tableView.currentModel = self.currentModel;
+    self.tableView.frame = CGRectMake(0, kHeight(110), SCREEN_WIDTH, SCREEN_HEIGHT - kHeight(110) - kNavigationBarHeight);
 //    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, -130, 0);
     [self.view addSubview:self.tableView];
-    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(UIEdgeInsetsMake(90, 0, -0, 0));
-        
-    }];
-    
+//    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.edges.mas_equalTo(UIEdgeInsetsMake(90, 0, -0, 0));
+//
+//    }];
+
 //     self.tableView.contentSize = [self.tableView sizeThatFits:CGSizeMake(CGRectGetWidth(self.tableView.bounds), CGFLOAT_MAX)];
 //    [self.tableView sizeThatFits:CGSizeMake(CGRectGetWidth(self.tableView.bounds), CGFLOAT_MAX)];
 }

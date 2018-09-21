@@ -52,12 +52,17 @@
     [self.view addSubview:self.headerView];
 //    self.tableView.tableHeaderView = self.headerView;
     [self.headerView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view.mas_top);
+        make.top.equalTo(self.view.mas_top).offset(10);
         
         make.left.equalTo(self.view.mas_left).offset(15);
         make.right.equalTo(self.view.mas_right).offset(-15);
         make.height.equalTo(@(kHeight(90)));
     }];
+    self.headerView.layer.cornerRadius=5;
+    self.headerView.layer.shadowOpacity = 0.22;// 阴影透明度
+    self.headerView.layer.shadowColor = [UIColor grayColor].CGColor;// 阴影的颜色
+    self.headerView.layer.shadowRadius=3;// 阴影扩散的范围控制
+    self.headerView.layer.shadowOffset=CGSizeMake(1, 1);// 阴影的范围
     //账单类型
     UILabel *textLbl = [UILabel labelWithBackgroundColor:kClearColor
                                                textColor:kTextColor
@@ -132,7 +137,7 @@
 
 - (void)initTableView {
     
-    self.tableView = [[BillDetailTableView alloc] initWithFrame:CGRectMake(0, kHeight(90), kScreenWidth, kSuperViewHeight) style:UITableViewStylePlain];
+    self.tableView = [[BillDetailTableView alloc] initWithFrame:CGRectMake(0, kHeight(110), kScreenWidth, SCREEN_HEIGHT - kHeight(110)) style:UITableViewStylePlain];
     self.tableView.bill = self.bill;
     [self.view addSubview:self.tableView];
 }

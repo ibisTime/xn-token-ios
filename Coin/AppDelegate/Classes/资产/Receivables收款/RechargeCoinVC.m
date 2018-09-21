@@ -112,25 +112,33 @@
 - (void)initQRView {
     
    
-    
+    self.view.backgroundColor = [UIColor whiteColor];
     
     self.qrView = [[UIView alloc] initWithFrame:CGRectMake(0, self.topView.yy, kScreenWidth, 275)];
+
      UILabel *lab = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextBlack font:16];
     [self.qrView addSubview:lab];
+
     lab.text = [LangSwitcher switchLang:@"我的收款地址" key:nil];
     [lab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.qrView.mas_top).offset(10);
+        make.top.equalTo(self.qrView.mas_top).offset(20);
         make.centerX.equalTo(self.qrView.mas_centerX);
      
     }];
-    self.qrView.backgroundColor = kHexColor(@"#F1F2F5");
+//    self.qrView.backgroundColor = kHexColor(@"#F1F2F5");
     UIImageView *bgImage = [[UIImageView alloc] init];
     [self.qrView addSubview:bgImage];
     self.bgImage = bgImage;
     bgImage.image = kImage(@"二维码框");
+    bgImage.layer.cornerRadius=5;
+    bgImage.layer.shadowOpacity = 0.22;// 阴影透明度
+    bgImage.layer.shadowColor = [UIColor grayColor].CGColor;// 阴影的颜色
+    bgImage.layer.shadowRadius=3;// 阴影扩散的范围控制
+    bgImage.layer.shadowOffset=CGSizeMake(1, 1);// 阴影的范围
     [bgImage mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(@62);
-        make.left.equalTo(@(kWidth(45)));
+        make.centerX.equalTo(self.qrView.mas_centerX);
+//        make.left.equalTo(@(kWidth(45)));
         make.width.height.equalTo(@285);
     }];
     
@@ -287,7 +295,7 @@
         
     }];
     
-    UILabel *addressLbl = [UILabel labelWithBackgroundColor:kHexColor(@"#FDFEFF ") textColor:kTextColor font:14.0];
+    UILabel *addressLbl = [UILabel labelWithBackgroundColor:kHexColor(@"#FDFEFF") textColor:kTextColor font:14.0];
     addressLbl.numberOfLines = 0;
     NSString *address ;
     if (self.currency.symbol) {
@@ -300,19 +308,18 @@
     addressLbl.text = [NSString stringWithFormat:@"%@", address];
     [self.view addSubview:addressLbl];
     addressLbl.numberOfLines = 0;
-    addressLbl.layer.cornerRadius = 4.0;
-    addressLbl.clipsToBounds = YES;
+    addressLbl.layer.cornerRadius=5;
+    addressLbl.layer.shadowOpacity = 0.22;// 阴影透明度
+    addressLbl.layer.shadowColor = [UIColor grayColor].CGColor;// 阴影的颜色
+    addressLbl.layer.shadowRadius=3;// 阴影扩散的范围控制
+    addressLbl.layer.shadowOffset=CGSizeMake(1, 1);// 阴影的范围
     [addressLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.left.equalTo(self.view.mas_left).offset(30);
         make.top.equalTo(textlbl.mas_bottom).offset(8);
-        make.right.equalTo(self.view.mas_right).offset(-15);
-
+        make.right.equalTo(self.view.mas_right).offset(-30);
         make.height.equalTo(@50);
-        
     }];
-    
-    
     UIView *bottomView = [UIView new];
     bottomView.backgroundColor = kWhiteColor;
     [self.view addSubview:bottomView];
@@ -387,7 +394,7 @@
   error ? [TLAlert alertWithError:[LangSwitcher switchLang:@"保存失败" key:nil]] : [TLAlert alertWithSucces:[LangSwitcher switchLang:@"保存成功" key:nil]];}
 
 - (void)addRecodeItem {
-    [UIBarButtonItem addLeftItemWithImageName:@"返回1" frame:CGRectMake(0, 0, 40, 44) vc:self action:@selector(backTop)];
+//    [UIBarButtonItem addLeftItemWithImageName:@"返回1" frame:CGRectMake(0, 0, 40, 44) vc:self action:@selector(backTop)];
 //    [UIBarButtonItem addLeftItemWithTitle:[LangSwitcher switchLang:@"记录" key:nil]
 //                                titleColor:kTextColor
 //                                     frame:CGRectMake(0, 0, 40, 44)

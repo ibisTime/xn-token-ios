@@ -25,7 +25,7 @@
 
 @property (nonatomic, strong) UILabel *dayLbl;
 
-@property (nonatomic,strong) UILabel *timeLbl;
+//@property (nonatomic,strong) UILabel *timeLbl;
 @property (nonatomic,strong) UILabel *introduceLab;
 
 @end
@@ -74,11 +74,9 @@
                                          font:Font(11.0)
                                     textColor:kTextColor];
         [self addSubview:self.dayLbl];
-        
         [self.dayLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-            
             make.left.equalTo(self.iconIV.mas_right).offset(15);
-            make.top.equalTo(self.detailLbl.mas_bottom).offset(2);
+            make.top.equalTo(self.detailLbl.mas_bottom).offset(4);
             
         }];
         
@@ -88,12 +86,7 @@
                                      textColor:kTextColor2];
         [self addSubview:self.timeLbl];
         
-        [self.timeLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.dayLbl.mas_top);
-            
-            make.left.equalTo(self.dayLbl.mas_right).offset(3);
-            
-        }];
+
         
         
         
@@ -119,7 +112,7 @@
         [self addSubview:self.introduceLab];
         
         [self.introduceLab mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.dayLbl.mas_bottom).offset(3);
+            make.top.equalTo(self.dayLbl.mas_bottom).offset(4);
             make.left.equalTo(self.iconIV.mas_right).offset(15);
             
             //            make.right.equalTo(rightArrowIV.mas_left).offset(-15);
@@ -144,10 +137,10 @@
         
         [self addSubview:line];
         [line mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self.mas_left);
-            make.width.equalTo(self.mas_width);
-            make.height.equalTo(@(0.5));
-            make.bottom.equalTo(self.mas_bottom);
+            make.left.equalTo(self.mas_left).offset(15);
+            make.right.equalTo(self.mas_right).offset(-15);
+            make.height.equalTo(@(1));
+            make.top.equalTo(self.timeLbl.mas_bottom).offset(15);
         }];
     }
     return self;
@@ -212,9 +205,12 @@
     [self layoutSubviews];
     
     NSInteger num = [self.detailLbl getLinesArrayOfStringInLabel];
-    
     _billModel.dHeightValue = num == 1 ? 0: self.detailLbl.height - 10;
     
+    [self.timeLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.detailLbl.mas_bottom).offset(4);
+        make.left.equalTo(self.detailLbl.mas_left).offset(0);
+    }];
 }
 
 @end

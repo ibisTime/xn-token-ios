@@ -69,15 +69,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-//    self.title = [LangSwitcher switchLang:@"" key:nil];
-    self.nameLable = [[UILabel alloc]init];
-    self.nameLable.text = [LangSwitcher switchLang:@"Theia红包" key:nil];
-    self.nameLable.textAlignment = NSTextAlignmentCenter;
-    self.nameLable.font = Font(16);
-    self.nameLable.textColor = kTextBlack;
-    self.navigationItem.titleView = self.nameLable;
-
 
     UIButton *_recordButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
     _recordButton.frame = CGRectMake(10, 0, 0, 44);
@@ -96,13 +87,9 @@
     UILabel *titleText = [[UILabel alloc] initWithFrame: CGRectMake(kScreenWidth/2-60, 0, 120, 50)];
     titleText.textAlignment = NSTextAlignmentCenter;
     titleText.backgroundColor = [UIColor clearColor];
-    
     titleText.textColor=kTextColor;
-    
     [titleText setFont:[UIFont systemFontOfSize:17.0]];
-    
     [titleText setText:[LangSwitcher switchLang:@"Theia红包" key:nil]];
-    
     self.navigationItem.titleView=titleText;
     
 
@@ -131,14 +118,13 @@
             [weakSelf.sendView Platform:model];
         };
     };
+
+//    转入金额
     _sendView.transFormBlock = ^(CurrencyModel *model) {
         RechargeCoinVC *coinVC = [RechargeCoinVC new];
-        
-        TLNavigationController * navigation = [[TLNavigationController alloc]initWithRootViewController:coinVC];
-        coinVC.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-        coinVC.modalPresentationStyle = UIModalTransitionStyleFlipHorizontal;
         coinVC.currency = model;
-        [weakSelf presentViewController:navigation animated:YES completion:nil];
+        [weakSelf.navigationController pushViewController:coinVC animated:YES];
+//        [weakSelf presentViewController:navigation animated:YES completion:nil];
 
     };
     _sendView.redPackBlock = ^{
@@ -218,11 +204,10 @@
 {
     if (integer == 0) {
             MySugarPacketsVC *vc = [[MySugarPacketsVC alloc]init];
-            UINavigationController * navigation = [[UINavigationController alloc]initWithRootViewController:vc];
-            vc.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-            vc.modalPresentationStyle = UIModalTransitionStyleFlipHorizontal;
-            [self presentViewController:navigation animated:NO completion:nil];
-    }else{
+            [self.navigationController pushViewController:vc animated:YES];
+    }
+    else
+    {
         TLRedintroduceVC *red = [[TLRedintroduceVC alloc] init];
         HTMLStrVC *htmlVC = [[HTMLStrVC alloc] init];
         self.navigationController.navigationBar.hidden = NO;

@@ -44,15 +44,18 @@
     self.bgImage = bgImage;
     bgImage.image = kImage(@"账单背景");
     bgImage.contentMode = UIViewContentModeScaleToFill;
+    bgImage.layer.cornerRadius=5;
+    bgImage.layer.shadowOpacity = 0.22;// 阴影透明度
+    bgImage.layer.shadowColor = [UIColor grayColor].CGColor;// 阴影的颜色
+    bgImage.layer.shadowRadius=3;// 阴影扩散的范围控制
+    bgImage.layer.shadowOffset=CGSizeMake(1, 1);// 阴影的范围
     [self addSubview:bgImage];
 
     [bgImage mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.mas_top);
-        make.bottom.equalTo(self.mas_bottom);
-        make.left.equalTo(self.mas_left);
-        make.right.equalTo(self.mas_right);
-
-        
+        make.top.equalTo(self.mas_top).offset(10);
+        make.bottom.equalTo(self.mas_bottom).offset(-10);
+        make.left.equalTo(self.mas_left).offset(15);
+        make.right.equalTo(self.mas_right).offset(-15);
     }];
     UIImageView *bgIV = [[UIImageView alloc] init];
     self.bgIV = bgIV;
@@ -66,9 +69,8 @@
         make.width.height.equalTo(@40);
         
     }];
-    
     self.bgIV = bgIV;
-    
+
     //text
     UILabel *textLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kBlackColor font:17.0];
     

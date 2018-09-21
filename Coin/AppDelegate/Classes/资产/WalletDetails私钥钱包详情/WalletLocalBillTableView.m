@@ -44,7 +44,7 @@ static NSString *identifierLocalBillCell = @"LocalBillCell";
 
 -(NSInteger)numberOfRowsInSection:(NSInteger)section
 {
-    return 0;
+    return 1;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
@@ -56,7 +56,6 @@ static NSString *identifierLocalBillCell = @"LocalBillCell";
     LocalBillCell *cell = [tableView dequeueReusableCellWithIdentifier:identifierLocalBillCell forIndexPath:indexPath];
     cell.currencyModel = self.billModel;
     cell.billModel = self.bills[indexPath.row];
-    
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     return cell;
@@ -66,7 +65,7 @@ static NSString *identifierLocalBillCell = @"LocalBillCell";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    return 96;
+    return 86;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -78,28 +77,42 @@ static NSString *identifierLocalBillCell = @"LocalBillCell";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     
-    return 10;
+    return 40;
 }
 
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     
-    UIView *contentView = [[UIView alloc] initWithFrame:CGRectMake(15, 20, kScreenWidth, 22)];
-    
-    
-    
-    UILabel *lab = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 22)];
-    [contentView addSubview:lab];
+    UIView *contentView = [[UIView alloc] init];
+
+    UIView *backView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 40)];
+    backView.backgroundColor = [UIColor whiteColor];
+    [contentView addSubview:backView];
+
+    UILabel *lab = [[UILabel alloc] initWithFrame:CGRectMake(25, 0, kScreenWidth - 35, 40)];
+    [backView addSubview:lab];
     
     lab.textColor = kTextColor;
-    lab.font = [UIFont systemFontOfSize:12];
-    
-    lab.text =[NSString stringWithFormat:@"    %@",[LangSwitcher switchLang:@"交易记录" key:nil]];
+    lab.font = [UIFont systemFontOfSize:13];
+    lab.text =[NSString stringWithFormat:@"%@",[LangSwitcher switchLang:@"交易记录" key:nil]];
+
+
     UIView *view = [UIView new];
     view.backgroundColor = kHexColor(@"276FFA ");
-    view.frame = CGRectMake(0, 8, 10, 5);
-    [contentView addSubview:view];
-    
+    view.frame = CGRectMake(15, 14, 5, 12);
+    kViewRadius(view, 1);
+    [backView addSubview:view];
+
+
+    UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(15, 39, SCREEN_WIDTH - 30, 1)];
+    lineView.backgroundColor = kLineColor;
+    [backView addSubview:lineView];
+
+
+//    UIView *lineView1 = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 0.5)];
+//    lineView1.backgroundColor = kLineColor;
+//    [backView addSubview:lineView1];
+
     return contentView;
 }
 

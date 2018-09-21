@@ -19,7 +19,7 @@
     [super viewDidLoad];
 
     self.title = [LangSwitcher switchLang:@"更多" key:nil];
-    self.web = [[UIWebView alloc] initWithFrame:self.view.bounds];
+    self.web = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH , SCREEN_HEIGHT - kNavigationBarHeight)];
     [self.view addSubview:self.web];
     self.web.delegate = self;
     TLDataBase *dataBase = [TLDataBase sharedManager];
@@ -70,19 +70,6 @@
     [MBProgressHUD hideHUDForView:self.view animated:YES];
     
 }
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
