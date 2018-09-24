@@ -2144,7 +2144,6 @@
 			children = (
 				B88B59012109AEC300F20D1B /* CoinPrefixHeader.pch */,
 				2E394FEC1FB0575A00BA0829 /* AppDelegate.h */,
-				2E394FA31FB0546E00BA0829 /* Classes */,
 				2E394FEB1FB0575A00BA0829 /* AppDelegate.m */,
 			);
 			path = AppDelegate;
@@ -2641,7 +2640,8 @@
 				2E394FF71FB0599D00BA0829 /* Expand */,
 				211DE63B1FB58B4B002FCF3D /* Utils */,
 			);
-			path = Classes;
+			name = Classes;
+			path = AppDelegate/Classes;
 			sourceTree = "<group>";
 		};
 		2E394FA41FB055DE00BA0829 /* 资产 */ = {
@@ -2821,6 +2821,7 @@
 				7A27265B212BFFA70067E3CD /* WechatSDK1.8.2 */,
 				215421CF1FD708AC00FDD25C /* Coin.entitlements */,
 				216F5AEE206CC6F600F2C832 /* AppDelegate */,
+				2E394FA31FB0546E00BA0829 /* Classes */,
 				2EA584C01FA813C900C7106C /* Assets.xcassets */,
 				2EA584C51FA813C900C7106C /* Info.plist */,
 				B8DAD14920E2208B00AF4CD4 /* InfoPlist.strings */,
