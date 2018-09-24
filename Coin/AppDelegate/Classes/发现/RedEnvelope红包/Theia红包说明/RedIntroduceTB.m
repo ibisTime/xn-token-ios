@@ -66,22 +66,23 @@ static NSString *identifierCell = @"RedintrodeceVC";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    return 70;
+    return 60;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     
-    return 50;
+    return 30;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     
-    
+    UIView *v = [[UIView alloc] init];
+
     UILabel *lab = [UILabel labelWithBackgroundColor:kBackgroundColor textColor:kTextColor font:15];
     lab.text = [LangSwitcher switchLang:@"常见问题帮助" key:nil];
-    lab.frame = CGRectMake(15, 0, kScreenWidth, 30);
-    UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 30)];
+    lab.frame = CGRectMake(15, 0, kScreenWidth - 30, 30);
     [v addSubview:lab];
+
     return v;
 }
 

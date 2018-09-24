@@ -77,7 +77,7 @@
     self.count = count;
     icon.layer.cornerRadius = 29;
     icon.clipsToBounds = YES;
-    UILabel *listLab =[UILabel labelWithBackgroundColor:kHexColor(@"#F7F7F7") textColor:kTextBlack font:18];
+    UILabel *listLab =[UILabel labelWithBackgroundColor:kHexColor(@"#F7F7F7") textColor:kTextBlack font:16];
     listLab.text = [LangSwitcher switchLang:@"  领取列表" key:nil];
     [self addSubview:listLab];
     

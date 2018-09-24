@@ -54,35 +54,45 @@
     label.textColor = kTextBlack;
     label.textAlignment = NSTextAlignmentCenter;
     label.font = [UIFont systemFontOfSize:18];
-    self.backbButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
-    self.backbButton.frame = CGRectMake(15, kStatusBarHeight+5, 44, 44);
-    [self.backbButton setImage:kImage(@"返回1-1") forState:(UIControlStateNormal)];
-//    [self.backbButton setImageEdgeInsets:UIEdgeInsetsMake(0, -20, 0, 0)];
-    
-    [self.backbButton addTarget:self action:@selector(buttonMethodClick) forControlEvents:(UIControlEventTouchUpInside)];
-    // Do any additional setup after loading the view.
+    self.navigationItem.titleView = label;
+
     RedEnvelopeShoreView *shoreView = [[RedEnvelopeShoreView alloc]initWithFrame:self.view.frame];
     self.shoreVie = shoreView;
-    [shoreView addSubview:label];
+//    [shoreView addSubview:label];
     CoinWeakSelf;
     shoreView.shareBlock = ^(NSInteger inter) {
         [weakSelf shareWithTag:inter];
     };
     
     shoreView.redPackBlock = ^{
-        MySugarPacketsVC *vc = [[MySugarPacketsVC alloc]init];
-        vc.isSend = YES;
-        UINavigationController * navigation = [[UINavigationController alloc]initWithRootViewController:vc];
-        vc.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-        vc.modalPresentationStyle = UIModalTransitionStyleFlipHorizontal;
-        [self presentViewController:navigation animated:NO completion:nil];
+        if ([_state isEqualToString:@"100"]) {
+            NSInteger index = (NSInteger)[[self.navigationController viewControllers] indexOfObject:self];
+            if (index > 2) {
+//                返回到红包记录页面
+                [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:(index-2)] animated:YES];
+            }else{
+                [self.navigationController popViewControllerAnimated:YES];
+            }
+
+
+        }else
+        {
+            MySugarPacketsVC *vc = [[MySugarPacketsVC alloc]init];
+            vc.isSend = YES;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+
+//        UINavigationController * navigation = [[UINavigationController alloc]initWithRootViewController:vc];
+//        vc.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+//        vc.modalPresentationStyle = UIModalTransitionStyleFlipHorizontal;
+//        [self presentViewController:navigation animated:NO completion:nil];
 //        MySugarPacketsVC *vc = [[MySugarPacketsVC alloc]init];
 //        UINavigationController * navigation = [[UINavigationController alloc]initWithRootViewController:vc];
 //        vc.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
 //        vc.modalPresentationStyle = UIModalTransitionStyleFlipHorizontal;
 //        [self presentViewController:navigation animated:NO completion:nil];
     };
-    [shoreView addSubview:self.backbButton];
+//    [shoreView addSubview:self.backbButton];
 
 //    shoreView.content = self.content;
 //    shoreView.detailedLabel.text = self.content;
@@ -184,7 +194,7 @@
 - (void)buttonMethodClick
 {
     
-    [self dismissViewControllerAnimated:YES completion:nil];
+//    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)getShareUrl
@@ -213,11 +223,6 @@
 }
 -(void)shoreButtonClick
 {
-//    self.shoreVie.headImage.hidden = YES;
-//    self.shoreVie.detailedLabel.hidden = YES;
-//    self.shoreVie.shoreButton.hidden = YES;
-//    self.shoreVie.nameLabel.hidden = YES;
-//    self.shoreVie.stateLabel.hidden = YES;
     
     
     _invitationView.frame = CGRectMake(kScreenWidth/2 - 210/2, kHeight(130), 173,173+60);
@@ -254,8 +259,8 @@
     popView.popComplete = ^{
 //        [weakSelf.popView addSubview:weakSelf.shoreVie.headImage];
         
-        [self addIconImage];
-        
+//        [self addIconImage];
+
 
         NSLog(@"显示完成");
     };
@@ -267,7 +272,7 @@
         weakSelf.shoreVie.nameLabel.hidden = NO;
         weakSelf.shoreVie.stateLabel.hidden = NO;
 
-        [ self removeIcon];
+//        [ self removeIcon];
         NSLog(@"移除完成");
         
     };
@@ -276,78 +281,6 @@
 //    [popView pop];
 }
 
-- (void)removeIcon
-{
-
-}
-
-- (void)addIconImage
-{
-    
- 
-    
-    
-//    self.headImage = [[UIImageView alloc]initWithFrame:CGRectMake(kScreenWidth/2 - kHeight(70)/2, kHeight(170), kHeight(70), kHeight(70))];
-//    self.headImage.image = kImage(@"圆 按钮");
-//    [self.popView addSubview:self.headImage];
-//
-//    UIImageView *Image = [[UIImageView alloc]init];
-//    [Image sd_setImageWithURL: [NSURL URLWithString: [[TLUser user].photo convertImageUrl]] placeholderImage:kImage(@"头像")];
-//    Image.layer.cornerRadius = 30;
-//    Image.clipsToBounds = YES;
-//    [_headImage addSubview:Image];
-//    [Image mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.left.equalTo(@5);
-//        make.bottom.right.equalTo(@-5);
-//    }];
-    
-//    UILabel *introduce = [UILabel labelWithBackgroundColor:kClearColor textColor:kHexColor(@"#FBDDA9") font:14];
-//    introduce.frame = CGRectMake(kScreenWidth/2-35, self.headImage.yy +2, kHeight(70), kHeight(22));
-//    introduce.textAlignment = NSTextAlignmentCenter;
-//    [self.popView addSubview:introduce];
-//    introduce.text = [TLUser user].nickname;
-
-//    UILabel *introduce2 = [UILabel labelWithBackgroundColor:kClearColor textColor:kWhiteColor font:16];
-//    introduce2.frame = CGRectMake(kWidth(120), 200 , kWidth(150), kHeight(22));
-//    introduce2.textAlignment = NSTextAlignmentCenter;
-//    introduce2.text = [LangSwitcher switchLang:@"扫码领红包" key:nil];
-//
-//    [self.popView addSubview:introduce2];
-//    [introduce2 mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.equalTo(@(200));
-//        make.centerX.equalTo(self.popView.mas_centerX);
-//
-//    }];
-//    UILabel *introduce3 = [UILabel labelWithBackgroundColor:kClearColor textColor:kWhiteColor font:14];
-//
-////    introduce3.frame = CGRectMake(kWidth(120), kHeight(456), kScreenWidth - kWidth(120), kHeight(22));
-//    introduce3.text = [LangSwitcher switchLang:@"扫描二维码领取Theia红包" key:nil];
-//
-//    introduce3.textAlignment = NSTextAlignmentCenter;
-//    [self.popView addSubview:introduce3];
-//    [introduce3 mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.equalTo(@(kHeight(456)));
-//        make.centerX.equalTo(self.popView.mas_centerX);
-//
-//    }];
-//    UILabel *introduce4 = [UILabel labelWithBackgroundColor:kClearColor textColor:kWhiteColor font:14];
-//    UITapGestureRecognizer *ta = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(shareQr)];
-//    [introduce4 addGestureRecognizer:ta];
-//    introduce4.userInteractionEnabled = YES;
-//
-////    introduce4.frame = CGRectMake(kWidth(120), kHeight(456), kScreenWidth - kWidth(120), kHeight(22));
-//    introduce4.text = [LangSwitcher switchLang:@"截图分享二维码" key:nil];
-//
-//    introduce4.textAlignment = NSTextAlignmentCenter;
-//    [self.popView addSubview:introduce4];
-//    [introduce4 mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.bottom.equalTo(self.popView.mas_bottom).offset(-50-(kBottomInsetHeight));
-//        make.centerX.equalTo(self.popView.mas_centerX);
-//
-//
-//    }];
-
-}
 
 - (void)shareQr
 {
@@ -363,9 +296,6 @@
     
 }
 
-
-
-
 - (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
 {
     error ? [TLAlert alertWithError:[LangSwitcher switchLang:@"保存失败" key:nil]] : [TLAlert alertWithSucces:[LangSwitcher switchLang:@"保存成功" key:nil]];
@@ -373,22 +303,47 @@
 
 -(void)RedEnvelopeHeadButton:(NSInteger)tag
 {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self.navigationController popViewControllerAnimated:YES];
 
 }
 
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    [self.navigationController setNavigationBarHidden:NO animated:animated];
-}
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
+
+- (void)viewWillAppear:(BOOL)animated{
+
     self.shoreVie.content = self.content;
     self.shoreVie.detailedLabel.text = self.content;
-    [self.navigationController setNavigationBarHidden:YES animated:animated];
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBar.translucent = YES;
+    [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
+
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+    self.navigationController.navigationBar.tintColor = [UIColor blackColor];
+    self.navigationController.navigationBar.barTintColor = [UIColor blackColor];
+    self.navigationItem.backBarButtonItem = item;
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
+
 
 }
+
+//如果仅设置当前页导航透明，需加入下面方法
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+
+    self.navigationController.navigationBar.translucent = NO;
+    [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setShadowImage:nil];
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    self.navigationController.navigationBar.barTintColor = kHexColor(@"#0848DF");
+    self.navigationItem.backBarButtonItem = item;
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

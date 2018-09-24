@@ -28,10 +28,24 @@
 
 @implementation SendVC
 
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+}
+
+
 -(UITableView *)tableView{
     if (_tableView == nil) {
         self.tableView = [[SendTableView alloc]
-                          initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight)
+                          initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)
                           style:UITableViewStyleGrouped];
 
         self.tableView.backgroundColor = kWhiteColor;
@@ -58,8 +72,7 @@
                              ];
         
         _filterPicker = [[FilterView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
-        
-        //        _filterPicker.title =  [LangSwitcher switchLang: @"请选择交易类型" key:nil];
+
         
         _filterPicker.selectBlock = ^(NSInteger index) {
             
@@ -99,7 +112,8 @@
 
     CoinWeakSelf;
     self.headView.clickBlock = ^{
-        [weakSelf dismissViewControllerAnimated:YES completion:nil];
+        [weakSelf.navigationController popViewControllerAnimated:YES];
+//        [weakSelf dismissViewControllerAnimated:YES completion:nil];
     };
     self.headView.shareBlock  = ^{
        
@@ -109,8 +123,11 @@
         SendModel *model = weakSelf.model;
         RedEnvelopeShoreVC *share = [RedEnvelopeShoreVC new];
         share.code = model.code;
+        share.state = @"100";
         share.content = model.greeting;
-        [weakSelf presentViewController:share animated:YES completion:nil];
+        [weakSelf.navigationController setNavigationBarHidden:NO animated:YES];
+        [weakSelf.navigationController pushViewController:share animated:YES];
+//        [weakSelf presentViewController:share animated:YES completion:nil];
     };
     if (self.isSend == YES) {
         NSURL *u = [NSURL URLWithString:[self.sen.sendUserPhoto convertImageUrl]];

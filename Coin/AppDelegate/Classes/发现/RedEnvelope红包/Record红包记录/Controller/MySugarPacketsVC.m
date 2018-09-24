@@ -27,7 +27,7 @@
 @property (nonatomic, strong) FilterView *filterPicker;
 
 
-#define kPageCount 2
+#define kPageCount 1
 #define kButton_H 0
 #define kMrg 10
 #define kTag 1000
@@ -36,19 +36,7 @@
 
 @implementation MySugarPacketsVC
 
--(UIButton *)backbButton
-{
-    if (!_backbButton) {
-        _backbButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
-        _backbButton.frame = CGRectMake(0, 0, 44, 44);
-        [_backbButton setImage:kImage(@"返回1-1") forState:(UIControlStateNormal)];
-        [_backbButton setImageEdgeInsets:UIEdgeInsetsMake(0, -20, 0, 0)];
 
-        [_backbButton addTarget:self action:@selector(buttonMethodClick) forControlEvents:(UIControlEventTouchUpInside)];
-
-    }
-    return _backbButton;
-}
 
 -(UIButton *)chooseButton
 {
@@ -83,11 +71,6 @@
 //    self.filterPicker.tagNames = textArr;
 }
 
--(void)buttonMethodClick
-{
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view
@@ -102,10 +85,10 @@
     backView.backgroundColor = kWhiteColor;
     [self.view addSubview:backView];
 
-    UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
+//    UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
 
     //    negativeSpacer.width = -10;
-    self.navigationItem.leftBarButtonItems = @[negativeSpacer, [[UIBarButtonItem alloc] initWithCustomView:self.backbButton]];self.navigationController.navigationBar.titleTextAttributes=@{NSForegroundColorAttributeName:[UIColor whiteColor],NSFontAttributeName:[UIFont systemFontOfSize:16]};
+//    self.navigationItem.leftBarButtonItems = @[negativeSpacer, [[UIBarButtonItem alloc] initWithCustomView:self.backbButton]];self.navigationController.navigationBar.titleTextAttributes=@{NSForegroundColorAttributeName:[UIColor whiteColor],NSFontAttributeName:[UIFont systemFontOfSize:16]};
     self.navigationController.navigationBar.titleTextAttributes=
   @{NSForegroundColorAttributeName:[UIColor whiteColor],
     NSFontAttributeName:[UIFont fontWithName:@"Helvetica-Bold" size:16]};
@@ -131,19 +114,37 @@
     [_scroll setContentOffset:CGPointMake(SCREEN_WIDTH * _currentPages, 0) animated:YES];
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    //去掉透明后导航栏下边的黑边
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBar.translucent = YES;
+    [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
     [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
+
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+    self.navigationController.navigationBar.tintColor = [UIColor blackColor];
+    self.navigationController.navigationBar.barTintColor = [UIColor blackColor];
+    self.navigationItem.backBarButtonItem = item;
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
+
+
 }
 
-- (void)viewWillDisappear:(BOOL)animated
-{
+//如果仅设置当前页导航透明，需加入下面方法
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+
+    self.navigationController.navigationBar.translucent = NO;
+    [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
     [self.navigationController.navigationBar setShadowImage:nil];
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    self.navigationController.navigationBar.barTintColor = kHexColor(@"#0848DF");
+    self.navigationItem.backBarButtonItem = item;
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
-}
 
+}
 #pragma mark - 设置可以左右滑动的ScrollView
 - (void)setupScrollView{
 

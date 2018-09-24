@@ -1806,7 +1806,6 @@
 				211DE63C1FB58B4B002FCF3D /* CustomUI */,
 				211DE65B1FB58B4B002FCF3D /* Category */,
 				211DE68D1FB58B4C002FCF3D /* AppConfig */,
-				211DE6901FB58B4C002FCF3D /* Macro */,
 				211DE6951FB58B4C002FCF3D /* AFNetworkingTool */,
 				2EA2526C1FF09B52007FF9A2 /* CoinUtil.h */,
 				2EA2526D1FF09B52007FF9A2 /* CoinUtil.m */,
@@ -2001,6 +2000,7 @@
 		211DE6901FB58B4C002FCF3D /* Macro */ = {
 			isa = PBXGroup;
 			children = (
+				B88B59012109AEC300F20D1B /* CoinPrefixHeader.pch */,
 				211DE6921FB58B4C002FCF3D /* AppMacro.h */,
 				211DE6911FB58B4C002FCF3D /* AppColorMacro.h */,
 				211DE6931FB58B4C002FCF3D /* APICodeMacro.h */,
@@ -2142,7 +2142,6 @@
 		216F5AEE206CC6F600F2C832 /* AppDelegate */ = {
 			isa = PBXGroup;
 			children = (
-				B88B59012109AEC300F20D1B /* CoinPrefixHeader.pch */,
 				2E394FEC1FB0575A00BA0829 /* AppDelegate.h */,
 				2E394FEB1FB0575A00BA0829 /* AppDelegate.m */,
 			);
@@ -2204,55 +2203,31 @@
 			path = Service;
 			sourceTree = "<group>";
 		};
-		216F5AFE206CD9C900F2C832 /* 首页 */ = {
-			isa = PBXGroup;
-			children = (
-				216F5AFF206CD9C900F2C832 /* Controller */,
-				216F5B09206CD9C900F2C832 /* Model */,
-				216F5B0D206CD9C900F2C832 /* View */,
-			);
-			path = "首页";
-			sourceTree = "<group>";
-		};
-		216F5AFF206CD9C900F2C832 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
-		216F5B00206CD9C900F2C832 /* TradeFlow */ = {
+		216F5B00206CD9C900F2C832 /* TradeFlow敬请期待 */ = {
 			isa = PBXGroup;
 			children = (
 				216F5B02206CD9C900F2C832 /* TradeFlowListVC.h */,
 				216F5B01206CD9C900F2C832 /* TradeFlowListVC.m */,
 			);
-			path = TradeFlow;
+			path = "TradeFlow敬请期待";
 			sourceTree = "<group>";
 		};
-		216F5B03206CD9C900F2C832 /* Pay */ = {
+		216F5B03206CD9C900F2C832 /* Pay确认支付 */ = {
 			isa = PBXGroup;
 			children = (
 				216F5B05206CD9C900F2C832 /* StorePayVC.h */,
 				216F5B04206CD9C900F2C832 /* StorePayVC.m */,
 			);
-			path = Pay;
+			path = "Pay确认支付";
 			sourceTree = "<group>";
 		};
-		216F5B06206CD9C900F2C832 /* Detail */ = {
+		216F5B06206CD9C900F2C832 /* Detail店铺详情 */ = {
 			isa = PBXGroup;
 			children = (
 				216F5B07206CD9C900F2C832 /* StoreDetailVC.h */,
 				216F5B08206CD9C900F2C832 /* StoreDetailVC.m */,
 			);
-			path = Detail;
-			sourceTree = "<group>";
-		};
-		216F5B09206CD9C900F2C832 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
+			path = "Detail店铺详情";
 			sourceTree = "<group>";
 		};
 		216F5B0A206CD9C900F2C832 /* TradeFlow */ = {
@@ -2262,13 +2237,6 @@
 				216F5B0C206CD9C900F2C832 /* TradeFlowModel.m */,
 			);
 			path = TradeFlow;
-			sourceTree = "<group>";
-		};
-		216F5B0D206CD9C900F2C832 /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		216F5B0E206CD9C900F2C832 /* TradeFlow */ = {
@@ -2294,13 +2262,13 @@
 		216F5B1D206CD9D900F2C832 /* 发现 */ = {
 			isa = PBXGroup;
 			children = (
-				7A8A5D0E20EA0677002D9A48 /* RedEnvelope */,
-				216F5B54206D005200F2C832 /* POS */,
-				216F5B50206D002400F2C832 /* Mall */,
-				216F5B4C206CE77B00F2C832 /* Store */,
-				216F5B00206CD9C900F2C832 /* TradeFlow */,
-				216F5B03206CD9C900F2C832 /* Pay */,
-				216F5B06206CD9C900F2C832 /* Detail */,
+				7A8A5D0E20EA0677002D9A48 /* RedEnvelope红包 */,
+				216F5B54206D005200F2C832 /* POS量化理财 */,
+				216F5B50206D002400F2C832 /* Mall余币宝 */,
+				216F5B4C206CE77B00F2C832 /* Store首创玩法 */,
+				216F5B00206CD9C900F2C832 /* TradeFlow敬请期待 */,
+				216F5B03206CD9C900F2C832 /* Pay确认支付 */,
+				216F5B06206CD9C900F2C832 /* Detail店铺详情 */,
 				216F5B1E206CD9D900F2C832 /* Controller */,
 				216F5B21206CD9D900F2C832 /* Model */,
 				216F5B2B206CD9DA00F2C832 /* View */,
@@ -2369,14 +2337,9 @@
 				216F5B0E206CD9C900F2C832 /* TradeFlow */,
 				216F5B13206CD9C900F2C832 /* Detail */,
 				216F5B2C206CD9DA00F2C832 /* Stores */,
-				216F5B31206CD9DA00F2C832 /* Header */,
 				216F5B34206CD9DA00F2C832 /* Banner */,
-				B8DDF880211D29EE0058D19D /* TLMakeMoney.h */,
-				B8DDF881211D29EE0058D19D /* TLMakeMoney.m */,
 				B8DDF883211D2AD10058D19D /* MakeMoneyCell.h */,
 				B8DDF884211D2AD10058D19D /* MakeMoneyCell.m */,
-				B8E08BEB212594FF00348AD4 /* TLMoneyDeailVC.h */,
-				B8E08BEC212594FF00348AD4 /* TLMoneyDeailVC.m */,
 				B8A5307C2127DBD600A027C0 /* TLMyRecordVC.h */,
 				B8A5307D2127DBD600A027C0 /* TLMyRecordVC.m */,
 				B8A5307F2127DE8F00A027C0 /* TLMyRecodeTB.h */,
@@ -2398,13 +2361,6 @@
 				216F5B30206CD9DA00F2C832 /* StoreTableView.m */,
 			);
 			path = Stores;
-			sourceTree = "<group>";
-		};
-		216F5B31206CD9DA00F2C832 /* Header */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Header;
 			sourceTree = "<group>";
 		};
 		216F5B34206CD9DA00F2C832 /* Banner */ = {
@@ -2439,31 +2395,35 @@
 			path = Web;
 			sourceTree = "<group>";
 		};
-		216F5B4C206CE77B00F2C832 /* Store */ = {
+		216F5B4C206CE77B00F2C832 /* Store首创玩法 */ = {
 			isa = PBXGroup;
 			children = (
 				216F5B4D206CE7A600F2C832 /* StoreListVC.h */,
 				216F5B4E206CE7A600F2C832 /* StoreListVC.m */,
 			);
-			path = Store;
+			path = "Store首创玩法";
 			sourceTree = "<group>";
 		};
-		216F5B50206D002400F2C832 /* Mall */ = {
+		216F5B50206D002400F2C832 /* Mall余币宝 */ = {
 			isa = PBXGroup;
 			children = (
 				216F5B51206D004600F2C832 /* GoodMallVC.h */,
 				216F5B52206D004600F2C832 /* GoodMallVC.m */,
 			);
-			path = Mall;
+			path = "Mall余币宝";
 			sourceTree = "<group>";
 		};
-		216F5B54206D005200F2C832 /* POS */ = {
+		216F5B54206D005200F2C832 /* POS量化理财 */ = {
 			isa = PBXGroup;
 			children = (
 				216F5B58206D02DC00F2C832 /* PosMiningVC.h */,
 				216F5B59206D02DC00F2C832 /* PosMiningVC.m */,
+				B8DDF880211D29EE0058D19D /* TLMakeMoney.h */,
+				B8DDF881211D29EE0058D19D /* TLMakeMoney.m */,
+				B8E08BEB212594FF00348AD4 /* TLMoneyDeailVC.h */,
+				B8E08BEC212594FF00348AD4 /* TLMoneyDeailVC.m */,
 			);
-			path = POS;
+			path = "POS量化理财";
 			sourceTree = "<group>";
 		};
 		21A7F2D81FB2E2F900FAA0A2 /* 用户 */ = {
@@ -2629,6 +2589,7 @@
 		2E394FA31FB0546E00BA0829 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				211DE6901FB58B4C002FCF3D /* Macro */,
 				B88B58F32109AEC300F20D1B /* Other */,
 				216F5AF0206CC73D00F2C832 /* Update */,
 				216F5AEF206CC70500F2C832 /* Resp */,
@@ -2751,7 +2712,6 @@
 		2E394FD11FB0568F00BA0829 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				216F5AFE206CD9C900F2C832 /* 首页 */,
 				216F5AF1206CCED300F2C832 /* Service */,
 				2E394FD21FB0568F00BA0829 /* 钱包 */,
 				211A34E51FB42F5000FEB71F /* 我的 */,
@@ -2867,17 +2827,17 @@
 			path = WechatSDK1.8.2;
 			sourceTree = "<group>";
 		};
-		7A8A5D0E20EA0677002D9A48 /* RedEnvelope */ = {
+		7A8A5D0E20EA0677002D9A48 /* RedEnvelope红包 */ = {
 			isa = PBXGroup;
 			children = (
 				7AEF23622154EE6300BF1DB5 /* Theia红包 */,
 				7AEF23652154F18600BF1DB5 /* Theia红包说明 */,
 				7AEF23632154EF7000BF1DB5 /* Record红包记录 */,
-				7A8A5D1C20EA2F44002D9A48 /* Share */,
+				7A8A5D1C20EA2F44002D9A48 /* Share分享 */,
 				7A8A5D1220EA06AA002D9A48 /* Controller */,
 				7A8A5D1020EA06A1002D9A48 /* View */,
 			);
-			path = RedEnvelope;
+			path = "RedEnvelope红包";
 			sourceTree = "<group>";
 		};
 		7A8A5D1020EA06A1002D9A48 /* View */ = {
@@ -2885,16 +2845,10 @@
 			children = (
 				7A8A5D1620EA0A23002D9A48 /* RedEnvelopeHeadView.h */,
 				7A8A5D1720EA0A23002D9A48 /* RedEnvelopeHeadView.m */,
-				7A8A5D1920EA131A002D9A48 /* SendRedEnvelopeView.h */,
-				7A8A5D1A20EA131A002D9A48 /* SendRedEnvelopeView.m */,
 				7A8A5DBE20EA6977002D9A48 /* CustomActionSheet.h */,
 				7A8A5DBF20EA6977002D9A48 /* CustomActionSheet.m */,
 				7A8A5DC220EA6FE5002D9A48 /* UIView+Extension.h */,
 				7A8A5DC420EA6FE6002D9A48 /* UIView+Extension.m */,
-				B8DB9EB2214F6A730091276E /* RedIntroduceTB.h */,
-				B8DB9EB3214F6A730091276E /* RedIntroduceTB.m */,
-				B8DB9EB5214F6AA90091276E /* RedintrodeceVC.h */,
-				B8DB9EB6214F6AA90091276E /* RedintrodeceVC.m */,
 				B8DB9EB8214F6AF10091276E /* RedIntroduce.h */,
 				B8DB9EB9214F6AF10091276E /* RedIntroduce.m */,
 				B8DB9EBB214F6BE60091276E /* RedModel.h */,
@@ -2910,13 +2864,13 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
-		7A8A5D1C20EA2F44002D9A48 /* Share */ = {
+		7A8A5D1C20EA2F44002D9A48 /* Share分享 */ = {
 			isa = PBXGroup;
 			children = (
 				7A8A5D1F20EA2FC7002D9A48 /* Controller */,
 				7A8A5D1D20EA2FC2002D9A48 /* View */,
 			);
-			path = Share;
+			path = "Share分享";
 			sourceTree = "<group>";
 		};
 		7A8A5D1D20EA2FC2002D9A48 /* View */ = {
@@ -3211,6 +3165,8 @@
 			children = (
 				7A8A5D1320EA076C002D9A48 /* RedEnvelopeVC.h */,
 				7A8A5D1420EA076C002D9A48 /* RedEnvelopeVC.m */,
+				7A8A5D1920EA131A002D9A48 /* SendRedEnvelopeView.h */,
+				7A8A5D1A20EA131A002D9A48 /* SendRedEnvelopeView.m */,
 			);
 			path = "Theia红包";
 			sourceTree = "<group>";
@@ -3245,6 +3201,10 @@
 				B8DB9EB0214F68E60091276E /* TLRedintroduceVC.m */,
 				B8DB9EC1214F8A220091276E /* H5DrtailVC.h */,
 				B8DB9EC2214F8A220091276E /* H5DrtailVC.m */,
+				B8DB9EB2214F6A730091276E /* RedIntroduceTB.h */,
+				B8DB9EB3214F6A730091276E /* RedIntroduceTB.m */,
+				B8DB9EB5214F6AA90091276E /* RedintrodeceVC.h */,
+				B8DB9EB6214F6AA90091276E /* RedintrodeceVC.m */,
 			);
 			path = "Theia红包说明";
 			sourceTree = "<group>";
@@ -4411,7 +4371,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 3ZCW993X44;
+				DEVELOPMENT_TEAM = VQPS9BLJYN;
 				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = NO;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -4429,7 +4389,7 @@
 					"$(PROJECT_DIR)/Coin/ValidationSDK",
 				);
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = YES;
-				GCC_PREFIX_HEADER = /Users/qinbaozheng/Desktop/THA/Coin/AppDelegate/CoinPrefixHeader.pch;
+				GCC_PREFIX_HEADER = /Users/qinbaozheng/Desktop/THA/Coin/AppDelegate/Classes/Macro/CoinPrefixHeader.pch;
 				INFOPLIST_FILE = Coin/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -4569,7 +4529,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 3ZCW993X44;
+				DEVELOPMENT_TEAM = VQPS9BLJYN;
 				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = NO;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -4587,7 +4547,7 @@
 					"$(PROJECT_DIR)/Coin/ValidationSDK",
 				);
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = YES;
-				GCC_PREFIX_HEADER = /Users/qinbaozheng/Desktop/THA/Coin/AppDelegate/CoinPrefixHeader.pch;
+				GCC_PREFIX_HEADER = /Users/qinbaozheng/Desktop/THA/Coin/AppDelegate/Classes/Macro/CoinPrefixHeader.pch;
 				INFOPLIST_FILE = Coin/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

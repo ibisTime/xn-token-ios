@@ -804,20 +804,7 @@
 - (void)transNext
 {
     //一键划转
-    TLTransfromVC *trans = [TLTransfromVC new];
-    trans.isLocal = self.switchTager == 0 ? YES : NO;
-//    个人
-    if (self.switchTager == 1) {
-        trans.currencys = self.currencys;
-        trans.centercurrencys = self.currencys;
-        trans.localcurrencys = self.allCurrencys;
 
-    }else{
-//        私钥
-        trans.currencys = self.currencys;
-        trans.centercurrencys = self.currencys;
-        trans.localcurrencys = self.allCurrencys;
-    }
     
     TLDataBase *dataBase = [TLDataBase sharedManager];
     NSString *word;
@@ -834,10 +821,29 @@
     }
     [dataBase.dataBase close];
     if (word.length > 0) {
+//        一键划转
+        TLTransfromVC *trans = [TLTransfromVC new];
+        trans.isLocal = self.switchTager == 0 ? YES : NO;
+        //    个人
+        if (self.currencys.count == 0 || self.currencys.count == 0 || self.allCurrencys == 0) {
+            return;
+        }
+        if (self.switchTager == 1) {
+            trans.currencys = self.currencys;
+            trans.centercurrencys = self.currencys;
+            trans.localcurrencys = self.allCurrencys;
+
+        }else{
+            //        私钥
+            trans.currencys = self.currencys;
+            trans.centercurrencys = self.currencys;
+            trans.localcurrencys = self.allCurrencys;
+        }
         [self.navigationController pushViewController:trans animated:YES];
 
     }else{
-        
+
+//        导入钱包
         BuildWalletMineVC *settingVC = [BuildWalletMineVC new];
         
         [self.navigationController pushViewController:settingVC animated:YES];
@@ -998,62 +1004,81 @@
                 //                }
                 //查询总资产
             }];
-            if (weakSelf.switchTager == 0) {
-                weakSelf.currencys = shouldDisplayCoins;
-//                weakSelf.tableView.platforms = weakSelf.localCurrencys;
-//                获取本地存储私钥钱包
-                [weakSelf saveLocalWalletData];
-//                监测是否需要更新新币种
-                [weakSelf saveLocalWallet];
-//                获取私钥钱包列表
-                [weakSelf queryTotalAmount];
-//                个人钱包余额查询
-                [weakSelf queryCenterTotalAmount];
-//                私钥钱包余额查询
-                [weakSelf queryMyAmount];
-                [weakSelf.tableView reloadData_tl];
 
-            }else{
-                TLDataBase *dataBase = [TLDataBase sharedManager];
-                NSString *Mnemonics;
-                if ([dataBase.dataBase open]) {
-                    NSString *sql = [NSString stringWithFormat:@"SELECT Mnemonics from THAUser where userId = '%@'",[TLUser user].userId];
-                    //        [sql appendString:[TLUser user].userId];
-                    FMResultSet *set = [dataBase.dataBase executeQuery:sql];
-                    while ([set next])
-                    {
-                        Mnemonics = [set stringForColumn:@"Mnemonics"];
-                        
-                    }
-                    [set close];
-                }
-                [dataBase.dataBase close];
-                if (Mnemonics.length>0) {
-
+            weakSelf.currencys = shouldDisplayCoins;
+            //                weakSelf.tableView.platforms = weakSelf.localCurrencys;
+            //                获取本地存储私钥钱包
+            [weakSelf saveLocalWalletData];
+            //                监测是否需要更新新币种
+            [weakSelf saveLocalWallet];
+            //                获取私钥钱包列表
+            [weakSelf queryTotalAmount];
+            //                个人钱包余额查询
+            [weakSelf queryCenterTotalAmount];
+            //                私钥钱包余额查询
+            [weakSelf queryMyAmount];
+            weakSelf.tableView.platforms = shouldDisplayCoins;
+            [weakSelf.tableView reloadData_tl];
+//            if (weakSelf.switchTager == 0) {
+//                weakSelf.currencys = shouldDisplayCoins;
+////                weakSelf.tableView.platforms = weakSelf.localCurrencys;
+////                获取本地存储私钥钱包
+//                [weakSelf saveLocalWalletData];
+////                监测是否需要更新新币种
+//                [weakSelf saveLocalWallet];
+////                获取私钥钱包列表
+//                [weakSelf queryTotalAmount];
+////                个人钱包余额查询
+//                [weakSelf queryCenterTotalAmount];
+////                私钥钱包余额查询
+//                [weakSelf queryMyAmount];
+//                [weakSelf.tableView reloadData_tl];
 //
+//            }else{
+//                TLDataBase *dataBase = [TLDataBase sharedManager];
+//                NSString *Mnemonics;
+//                if ([dataBase.dataBase open]) {
+//                    NSString *sql = [NSString stringWithFormat:@"SELECT Mnemonics from THAUser where userId = '%@'",[TLUser user].userId];
+//                    //        [sql appendString:[TLUser user].userId];
+//                    FMResultSet *set = [dataBase.dataBase executeQuery:sql];
+//                    while ([set next])
+//                    {
+//                        Mnemonics = [set stringForColumn:@"Mnemonics"];
 //
-                    [weakSelf queryTotalAmount];
-                    [weakSelf queryCenterTotalAmount];
-                    [weakSelf queryMyAmount];
-
-                    weakSelf.currencys = shouldDisplayCoins;
-                    weakSelf.tableView.platforms = shouldDisplayCoins;
+//                    }
+//                    [set close];
+//                }
+//                [dataBase.dataBase close];
+//                if (Mnemonics.length>0) {
+//                    //                获取本地存储私钥钱包
 //                    [weakSelf saveLocalWalletData];
+//                    //                监测是否需要更新新币种
 //                    [weakSelf saveLocalWallet];
-                    [weakSelf.tableView reloadData_tl];
+//                    //                获取私钥钱包列表
+//                    [weakSelf queryTotalAmount];
+//                    //                个人钱包余额查询
+//                    [weakSelf queryCenterTotalAmount];
+//                    //                私钥钱包余额查询
+//                    [weakSelf queryMyAmount];
+//
+//                    weakSelf.currencys = shouldDisplayCoins;
+//                    weakSelf.tableView.platforms = shouldDisplayCoins;
+////                    [weakSelf saveLocalWalletData];
+////                    [weakSelf saveLocalWallet];
+//                    [weakSelf.tableView reloadData_tl];
+//
+////                    [weakSelf.tableView endRefreshingWithNoMoreData_tl];
+//                }else{
+//
+//                    weakSelf.currencys = shouldDisplayCoins;
+//                    weakSelf.tableView.platforms = shouldDisplayCoins;
+//                    [weakSelf.tableView reloadData_tl];
+//                    [weakSelf queryCenterTotalAmount];
+//
+//                }
+//
+//            }
 
-//                    [weakSelf.tableView endRefreshingWithNoMoreData_tl];
-                }else{
-                    
-                    weakSelf.currencys = shouldDisplayCoins;
-                    weakSelf.tableView.platforms = shouldDisplayCoins;
-                    [weakSelf.tableView reloadData_tl];
-                    [weakSelf queryCenterTotalAmount];
-
-                }
-              
-            }
-          
            
         } failure:^(NSError *error) {
             
@@ -1070,22 +1095,22 @@
         helper.parameters[@"userId"] = [TLUser user].userId;
         helper.parameters[@"token"] = [TLUser user].token;
         [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
-            
+
             //去除没有的币种
-            
-            
+
+
             NSMutableArray <CurrencyModel *> *shouldDisplayCoins = [[NSMutableArray alloc] init];
             [objs enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                
+
                 CurrencyModel *currencyModel = (CurrencyModel *)obj;
                 //                if ([[CoinUtil shouldDisplayCoinArray] indexOfObject:currencyModel.currency ] != NSNotFound ) {
-                
+
                 [shouldDisplayCoins addObject:currencyModel];
                 //                }
                 //查询总资产
-              
+
             }];
-           
+
             if (weakSelf.switchTager == 0) {
                 [weakSelf saveLocalWalletData];
                 [weakSelf saveLocalWallet];
@@ -1105,20 +1130,20 @@
                 weakSelf.currencys = shouldDisplayCoins;
                 weakSelf.tableView.platforms = shouldDisplayCoins;
                 [weakSelf.tableView reloadData_tl];
-                
+
             }
-          
+
             //
-         
+
 
         } failure:^(NSError *error) {
             [weakSelf.tableView endRefreshingWithNoMoreData_tl];
 
-            
+
         }];
-        
+
     }];
-    
+
     
 }
 - (void)saveLocalWalletData

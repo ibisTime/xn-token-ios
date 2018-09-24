@@ -28,46 +28,14 @@
         
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(InfoNotificationAction:) name:@"InfoNotification" object:nil];
-        
-//
-//        UIButton *button = [UIButton buttonWithType:(UIButtonTypeCustom)];
-//        button.frame = CGRectMake(40, SCREEN_WIDTH - 70, SCREEN_WIDTH - 140, 40);
-//        [button setTitle:@"保存二维码" forState:(UIControlStateNormal)];
-//        [button addTarget:self action:@selector(buttonClick) forControlEvents:(UIControlEventTouchUpInside)];
-//        button.titleLabel.font = FONT(16);
-//        [button setBackgroundColor:[UIColor redColor]];
-//        [self addSubview:button];
-        
-        
-//        UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(0, SCREEN_WIDTH - 20, SCREEN_WIDTH - 60, 20)];
-//        label.text = @"保存二维码邀请好友注册代理";
-//        label.textAlignment = NSTextAlignmentCenter;
-//        label.font = FONT(13);
-//        label.textColor = [uic];
-//        [self addSubview:label];
+
 
     }
     return self;
     
 }
 
-//- (void)getShareUrl
-//{
-//
-//    TLNetworking *http = [TLNetworking new];
-//    http.code = @"660918";
-//    http.parameters[@"type"] = @"redPacketShareUrl";
-////    net.parameters[@"accountList"] = arr;
-//    [http postWithSuccess:^(id responseObject) {
-//
-//        NSLog(@"%@",res)
-//
-//    } failure:^(NSError *error) {
-//
-//    }];
-//
-//
-//}
+
 
 - (void)InfoNotificationAction:(NSNotification *)notification{
     

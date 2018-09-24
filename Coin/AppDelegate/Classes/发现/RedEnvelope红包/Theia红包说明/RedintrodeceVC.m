@@ -29,6 +29,7 @@
     self.contentLab.numberOfLines = 0;
     [self.contentLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.mas_top).offset(15);
+        make.bottom.equalTo(self.mas_bottom).offset(-15);
         make.left.equalTo(self.mas_left).offset(15);
         make.right.equalTo(self.mas_right).offset(-15);
     }];
@@ -40,7 +41,8 @@
     [arrow mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.contentLab.mas_centerY);
         make.right.equalTo(self.mas_right).offset(-15);
-        make.width.height.equalTo(@15);
+        make.width.equalTo(@10);
+        make.height.equalTo(@15);
     }];
     UIView *line = [UIView new];
     line.backgroundColor = kLineColor;

@@ -91,6 +91,7 @@
     
     //配置键盘
     [self configIQKeyboard];
+
     [[TLWXManager manager] registerApp];
     [WeiboSDK registerApp:@"947817370"];
     [WeiboSDK enableDebugMode:YES];

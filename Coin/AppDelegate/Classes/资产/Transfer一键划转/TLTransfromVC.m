@@ -311,12 +311,7 @@ typedef enum : NSUInteger {
         self.org.backgroundColor =kOrangeRedColor;
         self.inputFiled.text = nil;
         self.myprivate.text = [LangSwitcher switchLang:@"个人账户" key:nil];
-        [self.wallletView mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.privateKey.mas_bottom).offset(10);
-            make.left.equalTo(@15);
-            make.right.equalTo(@-15);
-            make.height.equalTo(@170);
-        }];
+
         self.slider.hidden = YES;
         [self.view setNeedsLayout];
         
@@ -337,6 +332,24 @@ typedef enum : NSUInteger {
 //            self.totalFree.text = [LangSwitcher switchLang:@"本次划转矿工费为" key:nil];
 
             self.Free.text = [NSString stringWithFormat:@"%@ %@", [CoinUtil convertToRealCoin:currentCoin.withdrawFeeString coin:self.currentModel.currency], self.currentModel.currency];
+
+            self.totalFree.text = [NSString stringWithFormat:@"%@ %@",[LangSwitcher switchLang:@"本次划转手续费为" key:nil],[NSString stringWithFormat:@"%@ %@", [CoinUtil convertToRealCoin:currentCoin.withdrawFeeString coin:self.currentModel.currency], self.currentModel.currency]];
+        }
+        if ([TLUser user].isGoogleAuthOpen == YES) {
+            [self.wallletView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.top.equalTo(self.privateKey.mas_bottom).offset(10);
+                make.left.equalTo(@15);
+                make.right.equalTo(@-15);
+                make.height.equalTo(@(kHeight(240)));
+            }];
+        }else
+        {
+            [self.wallletView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.top.equalTo(self.privateKey.mas_bottom).offset(10);
+                make.left.equalTo(@15);
+                make.right.equalTo(@-15);
+                make.height.equalTo(@(kHeight(170)));
+            }];
         }
     }else{
         self.totalFree.text = [LangSwitcher switchLang:@"本次划矿工费为" key:nil];
@@ -362,13 +375,23 @@ typedef enum : NSUInteger {
         self.privateKey.text = [LangSwitcher switchLang:@"个人账户" key:nil];
         
         self.myprivate.text = [LangSwitcher switchLang:@"私钥账户" key:nil];
-        [self.wallletView mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.privateKey.mas_bottom).offset(10);
-            make.left.equalTo(@15);
-            make.right.equalTo(@-15);
-            make.height.equalTo(@210);
 
-        }];
+        if ([TLUser user].isGoogleAuthOpen == YES) {
+            [self.wallletView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.top.equalTo(self.privateKey.mas_bottom).offset(10);
+                make.left.equalTo(@15);
+                make.right.equalTo(@-15);
+                make.height.equalTo(@(kHeight(280)));
+            }];
+        }else
+        {
+            [self.wallletView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.top.equalTo(self.privateKey.mas_bottom).offset(10);
+                make.left.equalTo(@15);
+                make.right.equalTo(@-15);
+                make.height.equalTo(@(kHeight(210)));
+            }];
+        }
         [self loadtype];
         if (self.isLocal == YES) {
             NSString *money = [CoinUtil convertToRealCoin:self.currentModel.balance coin:self.currentModel.symbol];
@@ -399,12 +422,9 @@ typedef enum : NSUInteger {
     wallletView.layer.borderColor = kHexColor(@"#2B5495").CGColor;
     wallletView.clipsToBounds = YES;
     [self.whiteView addSubview:wallletView];
-    [wallletView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.privateKey.mas_bottom).offset(10);
-        make.left.equalTo(@15);
-        make.right.equalTo(@-15);
-        make.height.equalTo(@(kHeight(170)));
-    }];
+
+
+
     
     UILabel *introduce = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextBlack font:15];
     introduce.text = [LangSwitcher switchLang:@"划入数量" key:nil];
@@ -418,13 +438,13 @@ typedef enum : NSUInteger {
     
     self.inputFiled = [[TLTextField alloc] initWithFrame:CGRectMake(30, kHeight(115), kScreenWidth-60, 60) leftTitle:@"" titleWidth:5 placeholder:[LangSwitcher switchLang:@"转账数量" key:nil]];
     self.inputFiled.clearButtonMode = UITextFieldViewModeNever;
-    
-
     [self.whiteView addSubview:self.inputFiled];
     self.inputFiled.layer.cornerRadius = 3;
     self.inputFiled.layer.borderWidth = 1;
     self.inputFiled.layer.borderColor = kLineColor.CGColor;
     self.inputFiled.keyboardType = UIKeyboardTypeDecimalPad;
+
+
     UILabel *symbolLab = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextBlack font:15];
     symbolLab.text = self.currencys[0].currency;
     self.symbolLab = symbolLab;
@@ -453,16 +473,55 @@ typedef enum : NSUInteger {
     allLab.layer.borderColor = kAppCustomMainColor.CGColor;
     allLab.clipsToBounds = YES;
     [allLab addTarget:self action:@selector(allTransform) forControlEvents:UIControlEventTouchUpInside];
+
+
     
+
+//     谷歌验证码输入框
+    self.googleAuthTF = [[TLTextField alloc] initWithFrame:CGRectMake(30, self.inputFiled.yy + 5, kScreenWidth-60, 60)
+                                                 leftTitle:[LangSwitcher switchLang:@"" key:nil]
+                                                titleWidth:5
+                                               placeholder:[LangSwitcher switchLang:@"请输入谷歌验证码" key:nil]];
+    kViewBorderRadius(self.googleAuthTF, 2, 1, kLineColor);
+
+    self.googleAuthTF.keyboardType = UIKeyboardTypeNumberPad;
+    [self.whiteView addSubview:self.googleAuthTF];
+
+
+    
+
     UILabel *leftAmount = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:15];
     leftAmount.text = [LangSwitcher switchLang:@"可用余额" key:nil];
     [wallletView addSubview:leftAmount];
-    [leftAmount mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.inputFiled.mas_bottom).offset(10);
 
-        make.left.equalTo(wallletView.mas_left).offset(15);
 
-    }];
+    if ([TLUser user].isGoogleAuthOpen == YES) {
+        [wallletView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.privateKey.mas_bottom).offset(10);
+            make.left.equalTo(@15);
+            make.right.equalTo(@-15);
+            make.height.equalTo(@(kHeight(240)));
+        }];
+        [leftAmount mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.googleAuthTF.mas_bottom).offset(10);
+
+            make.left.equalTo(wallletView.mas_left).offset(15);
+
+        }];
+    }else
+    {
+        [wallletView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.privateKey.mas_bottom).offset(10);
+            make.left.equalTo(@15);
+            make.right.equalTo(@-15);
+            make.height.equalTo(@(kHeight(170)));
+        }];
+        [leftAmount mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.inputFiled.mas_bottom).offset(10);
+            make.left.equalTo(wallletView.mas_left).offset(15);
+
+        }];
+    }
 
     UILabel *avildAmount = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:15];
     self.amountlLab = avildAmount;
@@ -480,26 +539,16 @@ typedef enum : NSUInteger {
     }
    
     [wallletView addSubview:avildAmount];
+
+
     [avildAmount mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(leftAmount.mas_centerY);
 
         make.left.equalTo(leftAmount.mas_right).offset(15);
 
     }];
-    self.googleAuthTF = [[TLTextField alloc] initWithFrame:CGRectMake(0, self.inputFiled.yy + 60, kScreenWidth-60, 50)
-                                                 leftTitle:[LangSwitcher switchLang:@"谷歌验证码" key:nil]
-                                                titleWidth:20
-                                               placeholder:[LangSwitcher switchLang:@"请输入谷歌验证码" key:nil]];
-    
-    self.googleAuthTF.keyboardType = UIKeyboardTypeNumberPad;
-    [wallletView addSubview:self.googleAuthTF];
-        [self.view addSubview:self.googleAuthTF];
 
-        self.googleAuthTF.hidden = ![TLUser user].isGoogleAuthOpen;
-
-
-
-    
+    self.googleAuthTF.hidden = ![TLUser user].isGoogleAuthOpen;
     
     UISlider *slider = [UISlider new];
     self.slider = slider;
@@ -518,6 +567,8 @@ typedef enum : NSUInteger {
         make.width.equalTo(@(kScreenWidth-60));
         make.height.equalTo(@(20));
     }];
+
+
     UIView *line = [UIView new];
     line.backgroundColor = kLineColor;
     [wallletView addSubview:line];
@@ -553,29 +604,32 @@ typedef enum : NSUInteger {
     UILabel *totalFree = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:14];
    
     [self.whiteView addSubview:totalFree];
+    totalFree.textAlignment = NSTextAlignmentCenter;
     self.totalFree = totalFree;
     [totalFree mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(self.importButton.mas_top).offset(-10);
-        make.left.equalTo(self.importButton.mas_left).offset(60);
+        make.left.equalTo(self.importButton.mas_left).offset(0);
+        make.right.equalTo(self.importButton.mas_right).offset(0);
         
     }];
 
-    UILabel *Free = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:14];
-    self.Free = Free;
+//    UILabel *Free = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:14];
+//    self.Free = Free;
     if (self.isLocal == YES) {
         totalFree.text = [LangSwitcher switchLang:@"本次划转矿工费为" key:nil];
         
     }else{
-        totalFree.text = [LangSwitcher switchLang:@"本次划转手续费为" key:nil];
+
         NSString *money1 = [CoinUtil convertToRealCoin:self.currencys[0].amountString coin:self.currencys[0].currency];
-        Free.text = [NSString stringWithFormat:@"%@ %@",money1,self.currencys[0].currency];
+        totalFree.text = [NSString stringWithFormat:@"%@ %@",[LangSwitcher switchLang:@"本次划转手续费为" key:nil],[NSString stringWithFormat:@"%@ %@",money1,self.currencys[0].currency]];
+//        Free.text = [NSString stringWithFormat:@"%@ %@",money1,self.currencys[0].currency];
     }
   
-    [self.whiteView addSubview:Free];
-    [Free mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(self.importButton.mas_top).offset(-10);
-        make.left.equalTo(totalFree.mas_right).offset(2);
-    }];
+//    [self.whiteView addSubview:Free];
+//    [Free mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.bottom.equalTo(self.importButton.mas_top).offset(-10);
+//        make.left.equalTo(totalFree.mas_right).offset(2);
+//    }];
 
     
     
@@ -594,20 +648,24 @@ typedef enum : NSUInteger {
         if (value == 0) {
             if ([self.currentModel.symbol isEqualToString:@"BTC"]) {
                 
-    
+
                 self.Free.text = [NSString stringWithFormat:@"%@ %@ ",self.priceSlow,@"sat/b"];
+                self.totalFree.text = [NSString stringWithFormat:@"%@ %@",[LangSwitcher switchLang:@"本次划转手续费为" key:nil],[NSString stringWithFormat:@"%@ %@ ",self.priceSlow,@"sat/b"]];
                 self.btcPrice = [self.priceSlow integerValue];
             }else{
                 if ([self.currentModel.type isEqualToString:@"0"]) {
                     self.Free.text = [NSString stringWithFormat:@"%.8f %@",self.gamPrice*0.85,self.currentModel.symbol];
+                    self.totalFree.text = [NSString stringWithFormat:@"%@ %@",[LangSwitcher switchLang:@"本次划转手续费为" key:nil],[NSString stringWithFormat:@"%.8f %@",self.gamPrice*0.85,self.currentModel.symbol]];
 
                 }else if ([self.currentModel.type isEqualToString:@"1"])
                 {
                     self.Free.text = [NSString stringWithFormat:@"%.8f %@",self.gamPrice*0.85,@"ETH"];
+                    self.totalFree.text = [NSString stringWithFormat:@"%@ %@",[LangSwitcher switchLang:@"本次划转手续费为" key:nil],[NSString stringWithFormat:@"%.8f %@",self.gamPrice*0.85,@"ETH"]];
 
                 }else{
                     
                     self.Free.text = [NSString stringWithFormat:@"%.8f %@",self.gamPrice*0.85,@"WAN"];
+                    self.totalFree.text = [NSString stringWithFormat:@"%@ %@",[LangSwitcher switchLang:@"本次划转手续费为" key:nil],[NSString stringWithFormat:@"%.8f %@",self.gamPrice*0.85,@"WAN"]];
 
                 }
                 
@@ -618,9 +676,13 @@ typedef enum : NSUInteger {
             if ([self.currentModel.symbol isEqualToString:@"BTC"]) {
                 
                 self.Free.text = [NSString stringWithFormat:@"%.0f %@", ([self.priceFast floatValue] - [self.priceSlow floatValue])*value,@"sat/b"];
+
+                self.totalFree.text = [NSString stringWithFormat:@"%@ %@",[LangSwitcher switchLang:@"本次划转手续费为" key:nil],[NSString stringWithFormat:@"%.0f %@", ([self.priceFast floatValue] - [self.priceSlow floatValue])*value,@"sat/b"]];
+
                 self.btcPrice = ([self.priceFast floatValue] - [self.priceSlow floatValue]) *value;
                 if (([self.priceFast floatValue] - [self.priceSlow floatValue])*value < [self.priceSlow floatValue]) {
                     self.Free.text = [NSString stringWithFormat:@"%@ %@",self.priceSlow,@"sat/b"];
+                    self.totalFree.text = [NSString stringWithFormat:@"%@ %@",[LangSwitcher switchLang:@"本次划转手续费为" key:nil],[NSString stringWithFormat:@"%@ %@",self.priceSlow,@"sat/b"]];
                     
                 }
                 
@@ -628,12 +690,16 @@ typedef enum : NSUInteger {
             }else{
                 if ([self.currentModel.type isEqualToString:@"0"]) {
                       self.Free.text = [NSString stringWithFormat:@"%.8f %@", self.gamPrice *0.85 +self.gamPrice*value*1/3 ,self.currentModel.symbol];
+
+                    self.totalFree.text = [NSString stringWithFormat:@"%@ %@",[LangSwitcher switchLang:@"本次划转手续费为" key:nil],[NSString stringWithFormat:@"%.8f %@", self.gamPrice *0.85 +self.gamPrice*value*1/3 ,self.currentModel.symbol]];
                 }else if ([self.currentModel.type isEqualToString:@"1"])
                 {
                     self.Free.text = [NSString stringWithFormat:@"%.8f %@", self.gamPrice *0.85 +self.gamPrice*value*1/3 ,@"ETH"];
+                    self.totalFree.text = [NSString stringWithFormat:@"%@ %@",[LangSwitcher switchLang:@"本次划转手续费为" key:nil],[NSString stringWithFormat:@"%.8f %@", self.gamPrice *0.85 +self.gamPrice*value*1/3 ,@"ETH"]];
                 }else{
                     
                     self.Free.text = [NSString stringWithFormat:@"%.8f %@", self.gamPrice *0.85 +self.gamPrice*value*1/3,@"WAN" ];
+                    self.totalFree.text = [NSString stringWithFormat:@"%@ %@",[LangSwitcher switchLang:@"本次划转手续费为" key:nil],[NSString stringWithFormat:@"%.8f %@", self.gamPrice *0.85 +self.gamPrice*value*1/3,@"WAN" ]];
                 }
               
                 
@@ -646,19 +712,22 @@ typedef enum : NSUInteger {
             
             if ([self.currentModel.symbol isEqualToString:@"BTC"]) {
                 self.Free.text = [NSString stringWithFormat:@"%@ %@",self.priceFast,@"sat/b"];
+                self.totalFree.text = [NSString stringWithFormat:@"%@ %@",[LangSwitcher switchLang:@"本次划转手续费为" key:nil],[NSString stringWithFormat:@"%@ %@",self.priceFast,@"sat/b"]];
                 self.btcPrice = [self.priceFast integerValue];
                 
                 self.pricr = [NSString stringWithFormat:@"%@",self.priceFast];
             }else{
                 if ([self.currentModel.type isEqualToString:@"0"]) {
                     self.Free.text = [NSString stringWithFormat:@"%.8f %@",self.gamPrice*value*1.15,self.currentModel.symbol];
+                    self.totalFree.text = [NSString stringWithFormat:@"%@ %@",[LangSwitcher switchLang:@"本次划转手续费为" key:nil],[NSString stringWithFormat:@"%.8f %@",self.gamPrice*value*1.15,self.currentModel.symbol]];
 
                 }else if ([self.currentModel.type isEqualToString:@"1"])
                 {
                     self.Free.text = [NSString stringWithFormat:@"%.8f %@",self.gamPrice*value*1.15,@"ETH"];
-
+                    self.totalFree.text = [NSString stringWithFormat:@"%@ %@",[LangSwitcher switchLang:@"本次划转手续费为" key:nil],[NSString stringWithFormat:@"%.8f %@",self.gamPrice*value*1.15,@"ETH"]];
                 }else{
                     self.Free.text = [NSString stringWithFormat:@"%.8f %@",self.gamPrice*value*1.15,@"WAN"];
+                    self.totalFree.text = [NSString stringWithFormat:@"%@ %@",[LangSwitcher switchLang:@"本次划转手续费为" key:nil],[NSString stringWithFormat:@"%.8f %@",self.gamPrice*value*1.15,@"WAN"]];
 
                     
                 }
@@ -680,6 +749,9 @@ typedef enum : NSUInteger {
         self.Free.text = currentCoin.withdrawFeeString;
         
         self.Free.text = [NSString stringWithFormat:@"%@ %@", [CoinUtil convertToRealCoin:currentCoin.withdrawFeeString coin:self.currencys[0].currency], self.currencys[0].currency];
+
+        self.totalFree.text = [NSString stringWithFormat:@"%@ %@",[LangSwitcher switchLang:@"本次划转手续费为" key:nil],[NSString stringWithFormat:@"%@ %@", [CoinUtil convertToRealCoin:currentCoin.withdrawFeeString coin:self.currencys[0].currency], self.currencys[0].currency]];
+
         
     }
   
@@ -1405,6 +1477,8 @@ typedef enum : NSUInteger {
         self.Free.text = currentCoin.withdrawFeeString;
         
         self.Free.text = [NSString stringWithFormat:@"%@ %@", [CoinUtil convertToRealCoin:currentCoin.withdrawFeeString coin:self.currentModel.currency], self.currentModel.currency];
+
+        self.totalFree.text = [NSString stringWithFormat:@"%@ %@",[LangSwitcher switchLang:@"本次划转手续费为" key:nil],[NSString stringWithFormat:@"%@ %@", [CoinUtil convertToRealCoin:currentCoin.withdrawFeeString coin:self.currentModel.currency], self.currentModel.currency]];
         
     }
   

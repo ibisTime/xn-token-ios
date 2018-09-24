@@ -105,6 +105,7 @@
     CoinWeakSelf;
     
     self.sendView.transBlock = ^(CurrencyModel *model) {
+
         AddAccoutMoneyVc *monyVc = [[AddAccoutMoneyVc alloc] init];
         monyVc.isRedPage = YES;
         monyVc.currentModels = weakSelf.currencys;
@@ -299,7 +300,8 @@
             RedEnvelopeShoreVC *vc = [RedEnvelopeShoreVC new];
             vc.code = responseObject[@"data"][@"code"];
             vc.content = greeting;
-            [weakSelf presentViewController:vc animated:YES completion:nil];
+//            [weakSelf presentViewController:vc animated:YES completion:nil];
+            [weakSelf.navigationController pushViewController:vc animated:YES];
         } failure:^(id responseObject) {
             
              if ([responseObject[@"errorCode"] isEqual:@"3"])

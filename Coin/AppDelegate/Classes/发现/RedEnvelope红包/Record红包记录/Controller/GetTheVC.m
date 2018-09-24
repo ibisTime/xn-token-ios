@@ -348,10 +348,13 @@
         send.sen = self.sends[indexPath.row];
         send.isSend = YES;
     }
-    [self presentViewController:send animated:YES completion:nil];
-    
+    [self.navigationController pushViewController:send animated:YES];
+//    [self presentViewController:send animated:YES completion:nil];
+
 //    [self.navigationController pushViewController:send animated:YES];
     
 }
+
+
 
 @end

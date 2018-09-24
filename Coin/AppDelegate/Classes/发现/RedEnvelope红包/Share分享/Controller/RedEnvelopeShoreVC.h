@@ -11,6 +11,8 @@
 #import "ZJAnimationPopView.h"
 @interface RedEnvelopeShoreVC : TLBaseVC
 
+
+@property (nonatomic , copy)NSString *state;
 @property (nonatomic , copy)NSString *code;
 @property (nonatomic , copy)NSString *content;
 @property (nonatomic , strong) RedEnvelopeShoreView *shoreVie;
