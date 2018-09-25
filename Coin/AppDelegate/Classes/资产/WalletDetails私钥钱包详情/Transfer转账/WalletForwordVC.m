@@ -1393,7 +1393,9 @@ typedef enum : NSUInteger {
         [TLAlert alertWithInfo:@"转账金额需大于0"];
         return ;
     }
-//   NSString *word =  [[NSUserDefaults standardUserDefaults] objectForKey:KWalletWord];
+//      去除字符串空格
+    self.balanceTF.text = [self.balanceTF.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+
     TLDataBase *dataBase = [TLDataBase sharedManager];
     NSString *Mnemonics;
     if ([dataBase.dataBase open]) {

@@ -1562,8 +1562,6 @@
 				211A53291FBFE49B00CC6294 /* Rate */,
 				211A53281FBFE47800CC6294 /* Filter */,
 				211A53231FBFE41B00CC6294 /* Bill */,
-				2ED651CD200F34280065A1B0 /* TLCoinWithdrawOrderCell.h */,
-				2ED651CE200F34280065A1B0 /* TLCoinWithdrawOrderCell.m */,
 				B8CF2CC621214A8800055706 /* CommentTableView.h */,
 				B8CF2CC721214A8800055706 /* CommentTableView.m */,
 				B8CF2CC921214AB500055706 /* CommentCell.h */,
@@ -1648,8 +1646,6 @@
 		211A53271FBFE45F00CC6294 /* Withdrawals */ = {
 			isa = PBXGroup;
 			children = (
-				215979771FB947730029F177 /* WithdrawalsCoinVC.h */,
-				215979781FB947730029F177 /* WithdrawalsCoinVC.m */,
 			);
 			path = Withdrawals;
 			sourceTree = "<group>";
@@ -2613,8 +2609,6 @@
 			children = (
 				B8BBA64120C843F800DC4D5F /* AddAccoutMoneyVc.h */,
 				B8BBA64220C843F800DC4D5F /* AddAccoutMoneyVc.m */,
-				B83D1E0D20CE7076007835DB /* WalletForwordVC.h */,
-				B83D1E0E20CE7076007835DB /* WalletForwordVC.m */,
 				B8086536211F19BF00755158 /* TLBillBTCVC.h */,
 				B8086537211F19BF00755158 /* TLBillBTCVC.m */,
 			);
@@ -2696,8 +2690,6 @@
 				211A53261FBFE44C00CC6294 /* Recharge */,
 				211A53251FBFE43900CC6294 /* Rate */,
 				211A53241FBFE42B00CC6294 /* BIll */,
-				2ED651C7200F2F6F0065A1B0 /* TLCoinWithdrawOrderVC.h */,
-				2ED651C8200F2F6F0065A1B0 /* TLCoinWithdrawOrderVC.m */,
 				B88D6C6D20EDF39F0043832C /* TLFastvc.h */,
 				B88D6C6E20EDF39F0043832C /* TLFastvc.m */,
 			);
@@ -2887,6 +2879,28 @@
 				B8D938CE2116C2AC00B2AA88 /* QiestionDetailVC.m */,
 			);
 			path = "Feedback问题反馈";
+			sourceTree = "<group>";
+		};
+		7A2CC63F215A28CF00B27E2D /* Transfer转账 */ = {
+			isa = PBXGroup;
+			children = (
+				B83D1E0D20CE7076007835DB /* WalletForwordVC.h */,
+				B83D1E0E20CE7076007835DB /* WalletForwordVC.m */,
+			);
+			path = "Transfer转账";
+			sourceTree = "<group>";
+		};
+		7A2CC640215A29C800B27E2D /* MentionMoney提币 */ = {
+			isa = PBXGroup;
+			children = (
+				215979771FB947730029F177 /* WithdrawalsCoinVC.h */,
+				215979781FB947730029F177 /* WithdrawalsCoinVC.m */,
+				2ED651C7200F2F6F0065A1B0 /* TLCoinWithdrawOrderVC.h */,
+				2ED651C8200F2F6F0065A1B0 /* TLCoinWithdrawOrderVC.m */,
+				2ED651CD200F34280065A1B0 /* TLCoinWithdrawOrderCell.h */,
+				2ED651CE200F34280065A1B0 /* TLCoinWithdrawOrderCell.m */,
+			);
+			path = "MentionMoney提币";
 			sourceTree = "<group>";
 		};
 		7A8A5D0E20EA0677002D9A48 /* RedEnvelope红包 */ = {
@@ -3145,6 +3159,7 @@
 		7AEF235C2154CB1500BF1DB5 /* WalletDetails私钥钱包详情 */ = {
 			isa = PBXGroup;
 			children = (
+				7A2CC63F215A28CF00B27E2D /* Transfer转账 */,
 				7AEF23602154E35A00BF1DB5 /* details详情 */,
 				B83D1E0A20CE63A2007835DB /* WalletLocalVc.h */,
 				B83D1E0B20CE63A2007835DB /* WalletLocalVc.m */,
@@ -3161,6 +3176,7 @@
 		7AEF235D2154D60100BF1DB5 /* PersonalWalletDetails个人钱包详情 */ = {
 			isa = PBXGroup;
 			children = (
+				7A2CC640215A29C800B27E2D /* MentionMoney提币 */,
 				7AEF235F2154E26700BF1DB5 /* details详情 */,
 				B8BBA63B20C7F6FC00DC4D5F /* WallAccountVC.h */,
 				B8BBA63C20C7F6FC00DC4D5F /* WallAccountVC.m */,

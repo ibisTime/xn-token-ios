@@ -155,8 +155,6 @@
     RedModel *model = self.redModels[indexPath.row];
     H5DrtailVC *detail = [[H5DrtailVC alloc] init];
     detail.model = model;
-//    [detail.contentWeb loadHTMLString:model.answer baseURL:nil];
-//    detail.name = model.question;
     [self.navigationController pushViewController:detail animated:YES];
     
 }

@@ -13,7 +13,6 @@
 
 @interface RespHandler()
 
-
 @end
 
 @implementation RespHandler
@@ -22,9 +21,7 @@
 
     if ([req isKindOfClass:[NBCDRequest class]]) {
         //我方请求
-        
         if([responseObject[@"errorCode"] isEqual:@"0"]){ //成功
-            
             if(req.success){
                 req.success(req);
             }
@@ -40,40 +37,26 @@
                 //token错误  4
                
                 [TLAlert alertWithTitle:nil message: [LangSwitcher switchLang:@"token信息已失效,请重新登录" key:nil] confirmAction:^{
-                    
                     [[NSNotificationCenter defaultCenter] postNotificationName:kUserLoginOutNotification
-                                                                        object:nil];
-                    
+                      object:nil];
                 }];
-                
                 return;
-                
             }
-            
             [TLAlert alertWithInfo:responseObject[@"errorInfo"]];
-            
         }
-        
         return;
     }
-    
     //其它普通请求
     req.success(req);
-
 }
 
 //--网络请求失败的处理对象
-- (void)handleHttpFailureWithReq:(NBBaseRequest *)req task:(NSURLSessionDataTask *)task error:(NSError *)error  {
-
+- (void)handleHttpFailureWithReq:(NBBaseRequest *)req task:(NSURLSessionDataTask *)task error:(NSError *)error {
     //
     if (req.failure) {
-        
         req.failure(req);
-        
     }
-    
     [TLAlert alertWithInfo:error.localizedDescription];
-
 }
 
 @end

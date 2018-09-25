@@ -58,31 +58,30 @@
     [titleText setFont:[UIFont systemFontOfSize:17.0]];
     [titleText setText:[LangSwitcher switchLang:@"Theia红包说明" key:nil]];
     self.navigationItem.titleView=titleText;
-    
     self.view.backgroundColor = kWhiteColor;
-    UILabel *ask = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextBlack font:16];
-    ask.text = [LangSwitcher switchLang:@"问" key:nil];
-    ask.frame = CGRectMake(15, 20, 40, 22);
-    [self.view addSubview:ask];
-    
+
     UILabel *askDetail = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor3 font:16];
-    askDetail.text = self.model.question;
-    askDetail.frame = CGRectMake(15+40+10, 20, kScreenWidth-15+40+10, 22);
+    askDetail.text = askDetail.text = [NSString stringWithFormat:@"%@  %@",[LangSwitcher switchLang:@"问" key:nil],self.model.question];
+    askDetail.frame = CGRectMake(15, 20, kScreenWidth-30, 22);
     [self.view addSubview:askDetail];
     
-    UILabel *asnwer = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextBlack font:16];
-    asnwer.text = [LangSwitcher switchLang:@"答" key:nil];
-    asnwer.frame = CGRectMake(15, 70, 40, 22);
+    UILabel *asnwer = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor3 font:16];
+    asnwer.text = [NSString stringWithFormat:@"%@",[LangSwitcher switchLang:@"答" key:nil]];
+    asnwer.frame = CGRectMake(15, 70, 0, 22);
+    [asnwer sizeToFit];
     [self.view addSubview:asnwer];
 
     self.contentWeb = [[UIWebView alloc] init];
-    self.contentWeb.backgroundColor = kWhiteColor;
-
+    self.contentWeb.backgroundColor = [UIColor whiteColor];
+    [self.contentWeb loadHTMLString:self.model.answer baseURL:nil];
     [self.view addSubview:self.contentWeb];
-    [self.contentWeb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(UIEdgeInsetsMake(60, 60, 0, 15));
-    }];
-    self.contentWeb.delegate = self;}
+//    [self.contentWeb mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.edges.mas_equalTo(UIEdgeInsetsMake(63, asnwer.xx + 10, 15, 15));
+//    }];
+    self.contentWeb.frame = CGRectMake(asnwer.xx + 5, 61, SCREEN_WIDTH - asnwer.xx - 20, SCREEN_HEIGHT - 61 - 15 - kNavigationBarHeight);
+    self.contentWeb.delegate = self;
+
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

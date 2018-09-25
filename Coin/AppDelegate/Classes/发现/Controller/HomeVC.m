@@ -174,6 +174,7 @@
     [self initNavigationNar];
     [self initTableView];
     self.view.backgroundColor = kWhiteColor;
+
     [self reloadFindData];
     [CoinUtil refreshOpenCoinList:^{
         //获取banner列表
@@ -447,38 +448,15 @@
         case HomeEventsTypePosMining:
         {
             PosMiningVC *vc = [PosMiningVC new];
-            
-            
-//            if ([[TLUser user].tradepwdFlag isEqualToString:@"0"]) {
-//                TLPwdType pwdType = TLPwdTypeSetTrade;
-//                TLPwdRelatedVC *pwdRelatedVC = [[TLPwdRelatedVC alloc] initWithType:pwdType];
-//
-//                pwdRelatedVC.isWallet = YES;
-//                pwdRelatedVC.success = ^{
-            
-                    
-                    //                    [self presentViewController:redEnvelopeVC animated:YES completion:nil];
-                    [self.navigationController pushViewController:vc animated:YES];
-                    
-//                };
-//
-////            HTMLStrVC *vc = [HTMLStrVC new];
-////            vc.des = model.Description;
-////            vc.type = HTMLTypeQuantitative_finance;
-//            }else{
-                [self.navigationController pushViewController:vc animated:YES];
+            [self.navigationController pushViewController:vc animated:YES];
 
-                
-//            }
         }
             break;
         case HomeEventsTypeRedEnvelope:
         {
             HTMLStrVC *vc = [HTMLStrVC new];
             vc.des = model.Description;
-
             vc.type = HTMLTypeYubibao;
-            
             [self.navigationController pushViewController:vc animated:YES];
             
 
@@ -498,7 +476,7 @@
 //    [TLProgressHUD show];
 
     TLNetworking *http = [TLNetworking new];
-    
+    http.showView = self.view;
     http.isUploadToken = NO;
     http.code = @"805806";
     http.parameters[@"location"] = @"app_home";
