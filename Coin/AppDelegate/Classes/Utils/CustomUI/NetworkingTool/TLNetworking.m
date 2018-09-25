@@ -13,6 +13,7 @@
 #import "TLProgressHUD.h"
 #import "TLUser.h"
 #import "TLAlert.h"
+#import <SVProgressHUD/SVProgressHUD.h>
 
 @implementation TLNetworking
 
@@ -80,6 +81,7 @@
     if(self.showView){
     
         [TLProgressHUD show];
+        
     }
     
     if(self.code && self.code.length > 0){
@@ -173,14 +175,15 @@
           //打印JSON字符串
           [HttpLogger logJSONStringWithResponseObject:responseObject];
       }
-      if(self.showView){
-          
-          [TLProgressHUD dismiss];
-      }
-      
+//      if(self.showView){
+//
+//          [TLProgressHUD dismiss];
+//      }
+
       if([responseObject[@"errorCode"] isEqual:@"0"]){ //成功
           
           if(success){
+              [TLProgressHUD dismiss];
               success(responseObject);
           }
           

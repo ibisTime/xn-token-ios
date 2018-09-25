@@ -9,6 +9,18 @@
 import Foundation
 import BigInt
 import web3swift
+//测试
+let APPURL = "http://120.26.6.213:8546"
+let web3 = Web3.InfuraRinkebyWeb3();
+let web3Rinkeby = Web3.InfuraRinkebyWeb3()
+
+//            测试环境
+//let APPURL = "http://47.75.165.70:8546"
+//let web3 = Web3.InfuraMainnetWeb3();
+
+//let web3Rinkeby = Web3.InfuraMainnetWeb3()
+
+
 
 public class EthCrypto: NSObject
 {
@@ -101,12 +113,15 @@ public class EthCrypto: NSObject
         address = Web3Utils.publicToAddressString(publicKey);
         return address;
     }
-    
+
     //获取矿工燃料费用单价
     static public func getGasPrice() -> String? {
         
-        //rinkey测试环境，上线需要修改
-        let web3 = Web3.InfuraMainnetWeb3();
+
+        //        正式环境
+//        let web3 = Web3.InfuraMainnetWeb3();
+
+                //rinkey测试环境，上线需要修改
 //        let web3 = Web3.InfuraRinkebyWeb3();
 
         let gasPriceResult = web3.eth.getGasPrice();
@@ -125,8 +140,9 @@ public class EthCrypto: NSObject
         
         //rinkey测试环境，上线需要修改
 //        let web3 = Web3.new(URL.init(string: "http://120.26.6.213:8546")!)
-
-        let web3 = Web3.new(URL.init(string: "http://47.75.165.70:8546")!)
+//      正式环境
+//        let web3 = Web3.new(URL.init(string: "http://47.75.165.70:8546")!)
+        let web3 = Web3.new(URL.init(string: APPURL)!)
         let gasPriceResult = web3?.eth.getGasPrice();
         if case .failure(_)? = gasPriceResult {
             return (nil)
@@ -142,8 +158,9 @@ public class EthCrypto: NSObject
     //获取矿工燃料费用单价
     static public func getETHTokenPrice() -> String? {
         
-//        //rinkey测试环境，上线需要修改
-        let web3 = Web3.InfuraMainnetWeb3();
+//          正式环境
+//        let web3 = Web3.InfuraMainnetWeb3();
+//          测试环境
 //                let web3 = Web3.InfuraRinkebyWeb3();
 
 //
@@ -175,8 +192,10 @@ public class EthCrypto: NSObject
         do{
            
             let keystore = try! BIP32Keystore(mnemonics: mnemonic, password: "BANKEXFOUNDATION", mnemonicsPassword: "")
-            
-            let web3Rinkeby = Web3.InfuraMainnetWeb3()
+//            正式环境
+//            let web3Rinkeby = Web3.InfuraMainnetWeb3()
+
+//            测试环境
 //             let web3Rinkeby = Web3.InfuraRinkebyWeb3()
             let keystoreManager = KeystoreManager.init([keystore!])
             web3Rinkeby.addKeystoreManager(keystoreManager)
@@ -219,8 +238,10 @@ public class EthCrypto: NSObject
         //        txHash = "";
         do{
             let keystore = try! BIP32Keystore(mnemonics: mnemonic, password: "BANKEXFOUNDATION", mnemonicsPassword: "")
+//            测试环境
 //            let web3Rinkeby = Web3.InfuraRinkebyWeb3()
-              let web3Rinkeby = Web3.InfuraMainnetWeb3()
+//            正式环境
+//              let web3Rinkeby = Web3.InfuraMainnetWeb3()
             let keystoreManager = KeystoreManager.init([keystore!])
             web3Rinkeby.addKeystoreManager(keystoreManager)
             var convenienceTransferOptions = Web3Options.defaultOptions()
@@ -266,8 +287,9 @@ public class EthCrypto: NSObject
         do{
             
             let keystore = try! BIP32Keystore(mnemonics: mnemonic, password: "BANKEXFOUNDATION", mnemonicsPassword: "")
-            
-            let web3wan = Web3.new(URL.init(string: "http://47.75.165.70:8546")!)
+//            正式环境
+            let web3wan = Web3.new(URL.init(string: APPURL)!)
+//            测试环境
 //            let web3wan = Web3.new(URL.init(string: "http://120.26.6.213:8546")!)
 
             let keystoreManager = KeystoreManager.init([keystore!])
@@ -322,9 +344,10 @@ public class EthCrypto: NSObject
         do{
             
             let keystore = try! BIP32Keystore(mnemonics: mnemonic, password: "BANKEXFOUNDATION", mnemonicsPassword: "")
-            
+//            测试环境
             let web3Rinkeby = Web3.InfuraRinkebyWeb3()
-//                          let web3Rinkeby = Web3.InfuraMainnetWeb3()
+//            正式环境
+//            let web3Rinkeby = Web3.InfuraMainnetWeb3()
             let keystoreManager = KeystoreManager.init([keystore!])
             web3Rinkeby.addKeystoreManager(keystoreManager)
             

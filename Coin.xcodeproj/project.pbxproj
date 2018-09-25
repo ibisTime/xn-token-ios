@@ -1481,12 +1481,6 @@
 		211A34D81FB3F55600FEB71F /* View */ = {
 			isa = PBXGroup;
 			children = (
-				211A34D51FB3F51400FEB71F /* MineHeaderView.h */,
-				211A34D61FB3F51400FEB71F /* MineHeaderView.m */,
-				211A34D91FB4083300FEB71F /* MineTableView.h */,
-				211A34DA1FB4083300FEB71F /* MineTableView.m */,
-				211A34DC1FB4245D00FEB71F /* MineCell.h */,
-				211A34DD1FB4245D00FEB71F /* MineCell.m */,
 				2E5F33A7202BF25F00B2F263 /* TLLeftRightView.h */,
 				2E5F33A8202BF25F00B2F263 /* TLLeftRightView.m */,
 				B88B093120C908DC005C2D2F /* ResiseTextFiled.h */,
@@ -2178,10 +2172,6 @@
 				B8B15C0120CA312100F13220 /* BuildWalletMineVC.m */,
 				B8B15C0320CA55D600F13220 /* BuildSucessVC.h */,
 				B8B15C0420CA55D600F13220 /* BuildSucessVC.m */,
-				B8B15C0620CA5B1800F13220 /* BuildBackUpVC.h */,
-				B8B15C0720CA5B1800F13220 /* BuildBackUpVC.m */,
-				B8B15C2A20CA8A3900F13220 /* BuildCheckVC.h */,
-				B8B15C2B20CA8A3900F13220 /* BuildCheckVC.m */,
 				B8B15C3020CAB4DE00F13220 /* CustomLayoutWallet.h */,
 				B8B15C3120CAB4DE00F13220 /* CustomLayoutWallet.m */,
 				B8C2056E20CF984900952765 /* WalletDelectVC.h */,
@@ -2571,8 +2561,6 @@
 				21CB94E11FDC0A0F00CAB090 /* PersonalitySettingVC.m */,
 				21CB94E31FDC0AFC00CAB090 /* LanguageSettingVC.h */,
 				21CB94E41FDC0AFC00CAB090 /* LanguageSettingVC.m */,
-				2EB949521FDE6D6D00CE4B94 /* LangChooseVC.h */,
-				2EB949531FDE6D6D00CE4B94 /* LangChooseVC.m */,
 			);
 			path = PersonalitySetting;
 			sourceTree = "<group>";
@@ -2636,12 +2624,16 @@
 		2E394FAC1FB055DE00BA0829 /* 我的 */ = {
 			isa = PBXGroup;
 			children = (
+				7A2CC6372159E0E900B27E2D /* Home */,
 				7AEF23592154C67F00BF1DB5 /* AccountsAndSecurity账户与安全 */,
-				7AEF23582154C58A00BF1DB5 /* WalletSetting钱包工具 */,
+				7A2CC63A2159E35000B27E2D /* Invitation邀请有礼 */,
+				7A2CC63E2159E42600B27E2D /* Feedback问题反馈 */,
 				7AEF23572154C51D00BF1DB5 /* JoinMine加入社群 */,
+				7AEF23582154C58A00BF1DB5 /* WalletSetting钱包工具 */,
+				7A2CC63D2159E3F700B27E2D /* SetUp设置 */,
+				2E394FAD1FB055DE00BA0829 /* Controller */,
 				21A7F35B1FB2EB9300FAA0A2 /* Model */,
 				211A34D81FB3F55600FEB71F /* View */,
-				2E394FAD1FB055DE00BA0829 /* Controller */,
 			);
 			path = "我的";
 			sourceTree = "<group>";
@@ -2649,14 +2641,8 @@
 		2E394FAD1FB055DE00BA0829 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				2EE950C41FB05B5900429257 /* TLMineVC.h */,
-				2EE950C51FB05B5900429257 /* TLMineVC.m */,
-				B8F44024212C81E700809522 /* TLNewPwdVC.h */,
-				B8F44023212C81E600809522 /* TLNewPwdVC.m */,
 				2EB039A51FE8B23300589D8E /* EditEmailVC.h */,
 				2EB039A61FE8B23300589D8E /* EditEmailVC.m */,
-				2ED651D02010443C0065A1B0 /* TLAboutUsVC.h */,
-				2ED651D12010443C0065A1B0 /* TLAboutUsVC.m */,
 				B88B092E20C9072B005C2D2F /* RevisePassWordVC.h */,
 				B88B092F20C9072B005C2D2F /* RevisePassWordVC.m */,
 				B8D5F14E20CE08790005CF96 /* TLAccountMoneyVC.h */,
@@ -2675,36 +2661,10 @@
 				B8C2057820CFA0B300952765 /* WalletAddressCell.m */,
 				B8C2057A20CFA3FC00952765 /* WalletAddressDetailVC.h */,
 				B8C2057B20CFA3FC00952765 /* WalletAddressDetailVC.m */,
-				B8D9290D20EA58290026A3DF /* ChangeLocalMoneyVC.h */,
-				B8D9290E20EA58290026A3DF /* ChangeLocalMoneyVC.m */,
-				B80D54CC210C9C11005303D5 /* TLChangeNikeName.h */,
-				B80D54CD210C9C11005303D5 /* TLChangeNikeName.m */,
-				B8CAA1182115693A00695BC3 /* TLQusertionVC.h */,
-				B8CAA1192115693A00695BC3 /* TLQusertionVC.m */,
-				B8CAA14B2115DE6300695BC3 /* TLhistoryListVC.h */,
-				B8CAA14C2115DE6300695BC3 /* TLhistoryListVC.m */,
-				B8D938CD2116C2AC00B2AA88 /* QiestionDetailVC.h */,
-				B8D938CE2116C2AC00B2AA88 /* QiestionDetailVC.m */,
 				B8D938D92117169E00B2AA88 /* CustomImageView.h */,
 				B8D938DA2117169E00B2AA88 /* CustomImageView.m */,
-				B89F07DD211B06E20057E781 /* TLinviteVC.h */,
-				B89F07DE211B06E20057E781 /* TLinviteVC.m */,
-				B89F07E0211B07FA0057E781 /* TLMeSetting.h */,
-				B89F07E1211B07FA0057E781 /* TLMeSetting.m */,
-				B82D3876211BD4A50053A2E4 /* TLQrCodeVC.h */,
-				B82D3877211BD4A50053A2E4 /* TLQrCodeVC.m */,
 				B8D157C9213FC41400941304 /* NewHelpCentetVC.h */,
 				B8D157CA213FC41400941304 /* NewHelpCentetVC.m */,
-				7AABEAF92148FEEF00283BC7 /* PoliteInstructionsVC.h */,
-				7AABEAFA2148FEEF00283BC7 /* PoliteInstructionsVC.m */,
-				7AABEAFC2149127200283BC7 /* BouncedPasteView.h */,
-				7AABEAFD2149127200283BC7 /* BouncedPasteView.m */,
-				B8DC39CF214B9FE9002E62E7 /* NewHtmlVC.h */,
-				B8DC39D0214B9FE9002E62E7 /* NewHtmlVC.m */,
-				7AAF0310214F8C35008507FF /* IntegralVC.h */,
-				7AAF0311214F8C35008507FF /* IntegralVC.m */,
-				7AAF031721511BDD008507FF /* ZJAnimationPopView.h */,
-				7AAF031621511BDD008507FF /* ZJAnimationPopView.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2825,6 +2785,108 @@
 				7A272661212BFFA70067E3CD /* WXApiObject.h */,
 			);
 			path = WechatSDK1.8.2;
+			sourceTree = "<group>";
+		};
+		7A2CC6372159E0E900B27E2D /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				2EE950C41FB05B5900429257 /* TLMineVC.h */,
+				2EE950C51FB05B5900429257 /* TLMineVC.m */,
+				211A34D51FB3F51400FEB71F /* MineHeaderView.h */,
+				211A34D61FB3F51400FEB71F /* MineHeaderView.m */,
+				211A34D91FB4083300FEB71F /* MineTableView.h */,
+				211A34DA1FB4083300FEB71F /* MineTableView.m */,
+				211A34DC1FB4245D00FEB71F /* MineCell.h */,
+				211A34DD1FB4245D00FEB71F /* MineCell.m */,
+				B80D54CC210C9C11005303D5 /* TLChangeNikeName.h */,
+				B80D54CD210C9C11005303D5 /* TLChangeNikeName.m */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		7A2CC6382159E14800B27E2D /* ChangeTransactionPassword修改交易密码 */ = {
+			isa = PBXGroup;
+			children = (
+				B8F44024212C81E700809522 /* TLNewPwdVC.h */,
+				B8F44023212C81E600809522 /* TLNewPwdVC.m */,
+			);
+			path = "ChangeTransactionPassword修改交易密码";
+			sourceTree = "<group>";
+		};
+		7A2CC6392159E28400B27E2D /* WalletBackup钱包备份 */ = {
+			isa = PBXGroup;
+			children = (
+				B8B15C0620CA5B1800F13220 /* BuildBackUpVC.h */,
+				B8B15C0720CA5B1800F13220 /* BuildBackUpVC.m */,
+				B8B15C2A20CA8A3900F13220 /* BuildCheckVC.h */,
+				B8B15C2B20CA8A3900F13220 /* BuildCheckVC.m */,
+			);
+			path = "WalletBackup钱包备份";
+			sourceTree = "<group>";
+		};
+		7A2CC63A2159E35000B27E2D /* Invitation邀请有礼 */ = {
+			isa = PBXGroup;
+			children = (
+				7A2CC63B2159E39B00B27E2D /* Controller */,
+				7A2CC63C2159E3A200B27E2D /* View */,
+			);
+			path = "Invitation邀请有礼";
+			sourceTree = "<group>";
+		};
+		7A2CC63B2159E39B00B27E2D /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				B89F07DD211B06E20057E781 /* TLinviteVC.h */,
+				B89F07DE211B06E20057E781 /* TLinviteVC.m */,
+				B82D3876211BD4A50053A2E4 /* TLQrCodeVC.h */,
+				B82D3877211BD4A50053A2E4 /* TLQrCodeVC.m */,
+				7AAF0310214F8C35008507FF /* IntegralVC.h */,
+				7AAF0311214F8C35008507FF /* IntegralVC.m */,
+				B8DC39CF214B9FE9002E62E7 /* NewHtmlVC.h */,
+				B8DC39D0214B9FE9002E62E7 /* NewHtmlVC.m */,
+				7AABEAF92148FEEF00283BC7 /* PoliteInstructionsVC.h */,
+				7AABEAFA2148FEEF00283BC7 /* PoliteInstructionsVC.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		7A2CC63C2159E3A200B27E2D /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7AABEAFC2149127200283BC7 /* BouncedPasteView.h */,
+				7AABEAFD2149127200283BC7 /* BouncedPasteView.m */,
+				7AAF031721511BDD008507FF /* ZJAnimationPopView.h */,
+				7AAF031621511BDD008507FF /* ZJAnimationPopView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		7A2CC63D2159E3F700B27E2D /* SetUp设置 */ = {
+			isa = PBXGroup;
+			children = (
+				B89F07E0211B07FA0057E781 /* TLMeSetting.h */,
+				B89F07E1211B07FA0057E781 /* TLMeSetting.m */,
+				2EB949521FDE6D6D00CE4B94 /* LangChooseVC.h */,
+				2EB949531FDE6D6D00CE4B94 /* LangChooseVC.m */,
+				B8D9290D20EA58290026A3DF /* ChangeLocalMoneyVC.h */,
+				B8D9290E20EA58290026A3DF /* ChangeLocalMoneyVC.m */,
+				2ED651D02010443C0065A1B0 /* TLAboutUsVC.h */,
+				2ED651D12010443C0065A1B0 /* TLAboutUsVC.m */,
+			);
+			path = "SetUp设置";
+			sourceTree = "<group>";
+		};
+		7A2CC63E2159E42600B27E2D /* Feedback问题反馈 */ = {
+			isa = PBXGroup;
+			children = (
+				B8CAA1182115693A00695BC3 /* TLQusertionVC.h */,
+				B8CAA1192115693A00695BC3 /* TLQusertionVC.m */,
+				B8CAA14B2115DE6300695BC3 /* TLhistoryListVC.h */,
+				B8CAA14C2115DE6300695BC3 /* TLhistoryListVC.m */,
+				B8D938CD2116C2AC00B2AA88 /* QiestionDetailVC.h */,
+				B8D938CE2116C2AC00B2AA88 /* QiestionDetailVC.m */,
+			);
+			path = "Feedback问题反馈";
 			sourceTree = "<group>";
 		};
 		7A8A5D0E20EA0677002D9A48 /* RedEnvelope红包 */ = {
@@ -3038,6 +3100,8 @@
 		7AEF23582154C58A00BF1DB5 /* WalletSetting钱包工具 */ = {
 			isa = PBXGroup;
 			children = (
+				7A2CC6392159E28400B27E2D /* WalletBackup钱包备份 */,
+				7A2CC6382159E14800B27E2D /* ChangeTransactionPassword修改交易密码 */,
 				B88B092B20C8F878005C2D2F /* WalletSettingVC.h */,
 				B88B092C20C8F878005C2D2F /* WalletSettingVC.m */,
 				211A34F51FB4328800FEB71F /* SettingTableView.h */,

@@ -352,7 +352,7 @@ typedef enum : NSUInteger {
             }];
         }
     }else{
-        self.totalFree.text = [LangSwitcher switchLang:@"本次划矿工费为" key:nil];
+        self.totalFree.text = [LangSwitcher switchLang:@"本次划转手续费为" key:nil];
 
         self.isLocal = YES;
         self.currencys = self.localcurrencys;

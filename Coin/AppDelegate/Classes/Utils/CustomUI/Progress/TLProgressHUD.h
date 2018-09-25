@@ -21,6 +21,7 @@
 //+ (void)showSuccessWithMask:(NSString *)msg;
 //+ (void)showErrorWithMask:(NSString *)msg;
 
++ (void)show;
 //dismiss
 + (void)dismiss;
 
