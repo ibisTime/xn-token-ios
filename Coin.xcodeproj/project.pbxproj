@@ -190,6 +190,15 @@
 		7A272662212BFFA70067E3CD /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A27265C212BFFA70067E3CD /* libWeChatSDK.a */; };
 		7A272663212BFFA70067E3CD /* read_me.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7A27265D212BFFA70067E3CD /* read_me.txt */; };
 		7A272664212BFFA70067E3CD /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7A27265E212BFFA70067E3CD /* README.txt */; };
+		7A2CC643215B5ADC00B27E2D /* MoneyAndTreasureHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC642215B5ADC00B27E2D /* MoneyAndTreasureHeadView.m */; };
+		7A2CC647215B746E00B27E2D /* TLMoneyDetailsTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC646215B746E00B27E2D /* TLMoneyDetailsTableView.m */; };
+		7A2CC64A215B74BB00B27E2D /* TLMoneyDetailsHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC649215B74BB00B27E2D /* TLMoneyDetailsHeadView.m */; };
+		7A2CC64D215B772C00B27E2D /* TLMoneyDeailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC64C215B772C00B27E2D /* TLMoneyDeailCell.m */; };
+		7A2CC650215B829F00B27E2D /* TLMoneyDetailsAttributesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC64F215B829F00B27E2D /* TLMoneyDetailsAttributesCell.m */; };
+		7A2CC654215BA06600B27E2D /* PosBuyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC653215BA06600B27E2D /* PosBuyVC.m */; };
+		7A2CC657215BA12900B27E2D /* PosBuyTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC656215BA12900B27E2D /* PosBuyTableView.m */; };
+		7A2CC65A215BA19E00B27E2D /* PosBuyBalanceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC659215BA19E00B27E2D /* PosBuyBalanceCell.m */; };
+		7A2CC65D215BA4E100B27E2D /* PosBuyIntroduceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC65C215BA4E100B27E2D /* PosBuyIntroduceCell.m */; };
 		7A3821BD20EABD1300D6B636 /* GetTheTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A3821BC20EABD1300D6B636 /* GetTheTableView.m */; };
 		7A3821C020EACD8B00D6B636 /* SendTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A3821BF20EACD8B00D6B636 /* SendTableView.m */; };
 		7A3821C320EACDA100D6B636 /* SendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A3821C220EACDA100D6B636 /* SendCell.m */; };
@@ -830,6 +839,24 @@
 		7A27265F212BFFA70067E3CD /* WechatAuthSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WechatAuthSDK.h; sourceTree = "<group>"; };
 		7A272660212BFFA70067E3CD /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
 		7A272661212BFFA70067E3CD /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
+		7A2CC641215B5ADC00B27E2D /* MoneyAndTreasureHeadView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MoneyAndTreasureHeadView.h; sourceTree = "<group>"; };
+		7A2CC642215B5ADC00B27E2D /* MoneyAndTreasureHeadView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MoneyAndTreasureHeadView.m; sourceTree = "<group>"; };
+		7A2CC645215B746E00B27E2D /* TLMoneyDetailsTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLMoneyDetailsTableView.h; sourceTree = "<group>"; };
+		7A2CC646215B746E00B27E2D /* TLMoneyDetailsTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLMoneyDetailsTableView.m; sourceTree = "<group>"; };
+		7A2CC648215B74BB00B27E2D /* TLMoneyDetailsHeadView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLMoneyDetailsHeadView.h; sourceTree = "<group>"; };
+		7A2CC649215B74BB00B27E2D /* TLMoneyDetailsHeadView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLMoneyDetailsHeadView.m; sourceTree = "<group>"; };
+		7A2CC64B215B772C00B27E2D /* TLMoneyDeailCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLMoneyDeailCell.h; sourceTree = "<group>"; };
+		7A2CC64C215B772C00B27E2D /* TLMoneyDeailCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLMoneyDeailCell.m; sourceTree = "<group>"; };
+		7A2CC64E215B829F00B27E2D /* TLMoneyDetailsAttributesCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLMoneyDetailsAttributesCell.h; sourceTree = "<group>"; };
+		7A2CC64F215B829F00B27E2D /* TLMoneyDetailsAttributesCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLMoneyDetailsAttributesCell.m; sourceTree = "<group>"; };
+		7A2CC652215BA06600B27E2D /* PosBuyVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PosBuyVC.h; sourceTree = "<group>"; };
+		7A2CC653215BA06600B27E2D /* PosBuyVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PosBuyVC.m; sourceTree = "<group>"; };
+		7A2CC655215BA12900B27E2D /* PosBuyTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PosBuyTableView.h; sourceTree = "<group>"; };
+		7A2CC656215BA12900B27E2D /* PosBuyTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PosBuyTableView.m; sourceTree = "<group>"; };
+		7A2CC658215BA19E00B27E2D /* PosBuyBalanceCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PosBuyBalanceCell.h; sourceTree = "<group>"; };
+		7A2CC659215BA19E00B27E2D /* PosBuyBalanceCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PosBuyBalanceCell.m; sourceTree = "<group>"; };
+		7A2CC65B215BA4E100B27E2D /* PosBuyIntroduceCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PosBuyIntroduceCell.h; sourceTree = "<group>"; };
+		7A2CC65C215BA4E100B27E2D /* PosBuyIntroduceCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PosBuyIntroduceCell.m; sourceTree = "<group>"; };
 		7A3821BB20EABD1300D6B636 /* GetTheTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GetTheTableView.h; sourceTree = "<group>"; };
 		7A3821BC20EABD1300D6B636 /* GetTheTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GetTheTableView.m; sourceTree = "<group>"; };
 		7A3821BE20EACD8B00D6B636 /* SendTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SendTableView.h; sourceTree = "<group>"; };
@@ -2324,8 +2351,6 @@
 				216F5B13206CD9C900F2C832 /* Detail */,
 				216F5B2C206CD9DA00F2C832 /* Stores */,
 				216F5B34206CD9DA00F2C832 /* Banner */,
-				B8DDF883211D2AD10058D19D /* MakeMoneyCell.h */,
-				B8DDF884211D2AD10058D19D /* MakeMoneyCell.m */,
 				B8A5307C2127DBD600A027C0 /* TLMyRecordVC.h */,
 				B8A5307D2127DBD600A027C0 /* TLMyRecordVC.m */,
 				B8A5307F2127DE8F00A027C0 /* TLMyRecodeTB.h */,
@@ -2402,12 +2427,16 @@
 		216F5B54206D005200F2C832 /* POS量化理财 */ = {
 			isa = PBXGroup;
 			children = (
+				7A2CC651215B9FA100B27E2D /* Buy购买 */,
+				7A2CC644215B729900B27E2D /* Details */,
 				216F5B58206D02DC00F2C832 /* PosMiningVC.h */,
 				216F5B59206D02DC00F2C832 /* PosMiningVC.m */,
 				B8DDF880211D29EE0058D19D /* TLMakeMoney.h */,
 				B8DDF881211D29EE0058D19D /* TLMakeMoney.m */,
-				B8E08BEB212594FF00348AD4 /* TLMoneyDeailVC.h */,
-				B8E08BEC212594FF00348AD4 /* TLMoneyDeailVC.m */,
+				7A2CC641215B5ADC00B27E2D /* MoneyAndTreasureHeadView.h */,
+				7A2CC642215B5ADC00B27E2D /* MoneyAndTreasureHeadView.m */,
+				B8DDF883211D2AD10058D19D /* MakeMoneyCell.h */,
+				B8DDF884211D2AD10058D19D /* MakeMoneyCell.m */,
 			);
 			path = "POS量化理财";
 			sourceTree = "<group>";
@@ -2901,6 +2930,38 @@
 				2ED651CE200F34280065A1B0 /* TLCoinWithdrawOrderCell.m */,
 			);
 			path = "MentionMoney提币";
+			sourceTree = "<group>";
+		};
+		7A2CC644215B729900B27E2D /* Details */ = {
+			isa = PBXGroup;
+			children = (
+				B8E08BEB212594FF00348AD4 /* TLMoneyDeailVC.h */,
+				B8E08BEC212594FF00348AD4 /* TLMoneyDeailVC.m */,
+				7A2CC645215B746E00B27E2D /* TLMoneyDetailsTableView.h */,
+				7A2CC646215B746E00B27E2D /* TLMoneyDetailsTableView.m */,
+				7A2CC648215B74BB00B27E2D /* TLMoneyDetailsHeadView.h */,
+				7A2CC649215B74BB00B27E2D /* TLMoneyDetailsHeadView.m */,
+				7A2CC64B215B772C00B27E2D /* TLMoneyDeailCell.h */,
+				7A2CC64C215B772C00B27E2D /* TLMoneyDeailCell.m */,
+				7A2CC64E215B829F00B27E2D /* TLMoneyDetailsAttributesCell.h */,
+				7A2CC64F215B829F00B27E2D /* TLMoneyDetailsAttributesCell.m */,
+			);
+			path = Details;
+			sourceTree = "<group>";
+		};
+		7A2CC651215B9FA100B27E2D /* Buy购买 */ = {
+			isa = PBXGroup;
+			children = (
+				7A2CC652215BA06600B27E2D /* PosBuyVC.h */,
+				7A2CC653215BA06600B27E2D /* PosBuyVC.m */,
+				7A2CC655215BA12900B27E2D /* PosBuyTableView.h */,
+				7A2CC656215BA12900B27E2D /* PosBuyTableView.m */,
+				7A2CC658215BA19E00B27E2D /* PosBuyBalanceCell.h */,
+				7A2CC659215BA19E00B27E2D /* PosBuyBalanceCell.m */,
+				7A2CC65B215BA4E100B27E2D /* PosBuyIntroduceCell.h */,
+				7A2CC65C215BA4E100B27E2D /* PosBuyIntroduceCell.m */,
+			);
+			path = "Buy购买";
 			sourceTree = "<group>";
 		};
 		7A8A5D0E20EA0677002D9A48 /* RedEnvelope红包 */ = {
@@ -3900,6 +3961,7 @@
 				B8A5308A2127EE9000A027C0 /* RecodeDetailView.m in Sources */,
 				21A7F3181FB2E2F900FAA0A2 /* TLUserRegisterVC.m in Sources */,
 				7AAF036721526977008507FF /* prng.c in Sources */,
+				7A2CC65D215BA4E100B27E2D /* PosBuyIntroduceCell.m in Sources */,
 				B82D3878211BD4A50053A2E4 /* TLQrCodeVC.m in Sources */,
 				216F5B3A206CD9DA00F2C832 /* CountInfoModel.m in Sources */,
 				4C41F84920723D6600BBA366 /* HomeCell.m in Sources */,
@@ -3907,6 +3969,7 @@
 				211CEF151FCBBF90000FB0C4 /* SortBar.m in Sources */,
 				B89F07E2211B07FA0057E781 /* TLMeSetting.m in Sources */,
 				215979761FB84CC70029F177 /* BillDetailCell.m in Sources */,
+				7A2CC64A215B74BB00B27E2D /* TLMoneyDetailsHeadView.m in Sources */,
 				B8CAA1562115FF7100695BC3 /* QuestionTB.m in Sources */,
 				B8CAA14D2115DE6300695BC3 /* TLhistoryListVC.m in Sources */,
 				7AAF036E21526977008507FF /* SSZipArchive.m in Sources */,
@@ -3966,6 +4029,7 @@
 				211D3C1B1FCFE46C00B55F9F /* HistoryRateModel.m in Sources */,
 				21D216861FB9C5750040795E /* QRCodeVC.m in Sources */,
 				211DE6B51FB58B4C002FCF3D /* UIView+Responder.m in Sources */,
+				7A2CC647215B746E00B27E2D /* TLMoneyDetailsTableView.m in Sources */,
 				211EAD901FD0FC500037FBA8 /* UIViewController+BackButtonHander.m in Sources */,
 				B88B093320C908DC005C2D2F /* ResiseTextFiled.m in Sources */,
 				B8086510211EA17D00755158 /* BTCAssetAddress.m in Sources */,
@@ -4036,6 +4100,7 @@
 				B8CAA13E21158FF200695BC3 /* UIView+HandyValue.m in Sources */,
 				211DE6AB1FB58B4C002FCF3D /* TLTableView.m in Sources */,
 				B8086519211EA17D00755158 /* BTCMerkleTree.m in Sources */,
+				7A2CC654215BA06600B27E2D /* PosBuyVC.m in Sources */,
 				B808652D211EA17D00755158 /* BTCEncryptedMessage.m in Sources */,
 				21CB94E51FDC0AFC00CAB090 /* LanguageSettingVC.m in Sources */,
 				B808650E211EA17D00755158 /* BTCEncryptedMessage+Tests.m in Sources */,
@@ -4057,6 +4122,7 @@
 				B8B15C3220CAB4DE00F13220 /* CustomLayoutWallet.m in Sources */,
 				2159795D1FB81C2B0029F177 /* BillVC.m in Sources */,
 				B8086532211EA17D00755158 /* BTCErrors.m in Sources */,
+				7A2CC643215B5ADC00B27E2D /* MoneyAndTreasureHeadView.m in Sources */,
 				211A53321FBFE4F100CC6294 /* RateDescTableView.m in Sources */,
 				B8D938CF2116C2AC00B2AA88 /* QiestionDetailVC.m in Sources */,
 				216F5B17206CD9C900F2C832 /* StorePayVC.m in Sources */,
@@ -4094,6 +4160,7 @@
 				211D4ED61FCD9B0C000E0D43 /* EditVC.m in Sources */,
 				B8086528211EA17D00755158 /* BTCPaymentMethod.m in Sources */,
 				211A34D71FB3F51400FEB71F /* MineHeaderView.m in Sources */,
+				7A2CC657215BA12900B27E2D /* PosBuyTableView.m in Sources */,
 				B8CA0D6D210822400015A19D /* TTPasswordView.m in Sources */,
 				B808651F211EA17D00755158 /* BTCPaymentMethodDetails.m in Sources */,
 				211DE6C11FB58B4C002FCF3D /* AppConfig.m in Sources */,
@@ -4119,6 +4186,7 @@
 				B80864F8211EA17D00755158 /* BTCQRCode.m in Sources */,
 				21A7F3201FB2E2F900FAA0A2 /* UserDefaultsUtil.m in Sources */,
 				B808650A211EA17D00755158 /* BTCOpcode.m in Sources */,
+				7A2CC65A215BA19E00B27E2D /* PosBuyBalanceCell.m in Sources */,
 				211A34DB1FB4083300FEB71F /* MineTableView.m in Sources */,
 				216F5B49206CDA3700F2C832 /* DetailWebView.m in Sources */,
 				211A34E11FB4247800FEB71F /* MineModel.m in Sources */,
@@ -4138,6 +4206,7 @@
 				2EA584C71FA813C900C7106C /* main.m in Sources */,
 				B8CAA1502115FC6B00695BC3 /* QuestionListTableView.m in Sources */,
 				B8086535211ED6AC00755158 /* utxoModel.m in Sources */,
+				7A2CC650215B829F00B27E2D /* TLMoneyDetailsAttributesCell.m in Sources */,
 				B8086514211EA17D00755158 /* BTCCurrencyConverter+Tests.m in Sources */,
 				7AAF036921526977008507FF /* sha1.c in Sources */,
 				B8086503211EA17D00755158 /* BTCMnemonic.m in Sources */,
@@ -4207,6 +4276,7 @@
 				21205CCF1FCCFDCF003C6C7C /* FansTableView.m in Sources */,
 				B80864F0211EA17D00755158 /* BTCEncryptedBackup.m in Sources */,
 				211DE6C31FB58B4C002FCF3D /* HttpRequestTool.m in Sources */,
+				7A2CC64D215B772C00B27E2D /* TLMoneyDeailCell.m in Sources */,
 				21A7F3121FB2E2F900FAA0A2 /* BindMobileVC.m in Sources */,
 				2EE950C31FB05B4500429257 /* TLWalletVC.m in Sources */,
 				211DE6A51FB58B4C002FCF3D /* TLProgressHUD.m in Sources */,

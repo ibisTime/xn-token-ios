@@ -998,15 +998,11 @@
             [objs enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
 
                 CurrencyModel *currencyModel = (CurrencyModel *)obj;
-                //                if ([[CoinUtil shouldDisplayCoinArray] indexOfObject:currencyModel.currency ] != NSNotFound ) {
-                
                 [shouldDisplayCoins addObject:currencyModel];
-                //                }
                 //查询总资产
             }];
 
             weakSelf.currencys = shouldDisplayCoins;
-            //                weakSelf.tableView.platforms = weakSelf.localCurrencys;
             //                获取本地存储私钥钱包
             [weakSelf saveLocalWalletData];
             //                监测是否需要更新新币种
@@ -1017,7 +1013,11 @@
             [weakSelf queryCenterTotalAmount];
             //                私钥钱包余额查询
             [weakSelf queryMyAmount];
-            weakSelf.tableView.platforms = shouldDisplayCoins;
+
+            if (weakSelf.switchTager == 1) {
+                weakSelf.tableView.platforms = shouldDisplayCoins;
+            }
+
             [weakSelf.tableView reloadData_tl];
 //            if (weakSelf.switchTager == 0) {
 //                weakSelf.currencys = shouldDisplayCoins;
@@ -1510,7 +1510,7 @@
     [http postWithSuccess:^(id responseObject) {
         weakSelf.localCurrencys = [CurrencyModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"][@"accountList"]];
 
-        if (weakSelf.isAddBack == YES && weakSelf.switchTager == 0) {
+        if (weakSelf.switchTager == 0) {
             weakSelf.tableView.platforms = weakSelf.localCurrencys;
             [weakSelf.tableView reloadData];
         }

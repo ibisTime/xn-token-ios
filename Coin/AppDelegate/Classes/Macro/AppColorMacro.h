@@ -16,6 +16,9 @@
 
 #define RGB(r, g, b) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:1]
 
+//设置字体加粗
+#define HGboldfont(s)  [UIFont fontWithName:@"Helvetica-Bold" size:s]
+
 // 主色
 #define kAppCustomMainColor [UIColor colorWithHexString:@"#108ee9"]
 

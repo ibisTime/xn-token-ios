@@ -21,6 +21,8 @@
 @interface PosMiningVC ()<RefreshDelegate>
 //
 @property (nonatomic, strong) TLPlaceholderView *placeholderView;
+
+@property (nonatomic , strong)UIButton *RightButton;
 @property (nonatomic, strong) UILabel *titleLable;
 @property (nonatomic, strong) NSMutableArray <CurrencyModel *>*currencys;
 
@@ -30,17 +32,52 @@
 @property (nonatomic, strong) TLMakeMoney *tableView;
 
 
-@property (nonatomic, strong) TLMakeMoney *tableView1;
+//@property (nonatomic, strong) TLMakeMoney *tableView1;
 @end
 
 @implementation PosMiningVC
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    //    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+    //去掉导航栏底部的黑线
+    self.navigationController.navigationBar.translucent = YES;
+    [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
+
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
+    self.navigationItem.backBarButtonItem = item;
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+
+    if ([TLUser user].isLogin) {
+        BOOL is =  [[TLUser user] chang];
+
+    }
+
+}
+
+//如果仅设置当前页导航透明，需加入下面方法
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    self.navigationController.navigationBar.translucent = NO;
+    [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setShadowImage:nil];
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    self.navigationController.navigationBar.barTintColor = kHexColor(@"#0848DF");
+    self.navigationItem.backBarButtonItem = item;
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = [LangSwitcher switchLang:@"量化理财" key:nil];
+
     //敬请期待
     [self initPlaceHolderView];
-    [self.view addSubview:self.tableView1];
+    [self.view addSubview:self.tableView];
 //    TLtakeMoneyModel *m = [TLtakeMoneyModel new];
 //    m.name = @"币币赢第一期";
 //    m.symbol = @"BTC";
@@ -64,10 +101,44 @@
 //    [self.tableView reloadData];
     [self getMyCurrencyList];
     [self getMySyspleList];
-    [UIBarButtonItem addRightItemWithTitle:[LangSwitcher switchLang:@"我的理财" key:nil] titleColor:kWhiteColor frame:CGRectMake(0, 0, 80, 40) vc:self action:@selector(myRecodeClick)];
+
+
+
     
 //    self.tableView.
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(InfoNotificationAction:) name:@"LOADDATA" object:nil];
+    [self navigativeView];
+}
+
+-(void)navigativeView
+{
+//    self.title = [LangSwitcher switchLang:@"量化理财" key:nil];
+
+    UILabel *nameLable = [[UILabel alloc]init];
+    nameLable.text = [LangSwitcher switchLang:@"币加宝" key:nil];
+    nameLable.textAlignment = NSTextAlignmentCenter;
+    nameLable.font = Font(18);
+    nameLable.textColor = [UIColor whiteColor];
+    self.navigationItem.titleView = nameLable;
+
+    UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
+    negativeSpacer.width = -10;
+    _RightButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
+//    _RightButton.frame = CGRectMake(0, 0, 44, 44);
+    _RightButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+    _RightButton.titleLabel.font = FONT(16);
+    [_RightButton setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
+    self.navigationItem.rightBarButtonItems = @[negativeSpacer, [[UIBarButtonItem alloc] initWithCustomView:self.RightButton]];
+    [_RightButton setTitle:@"我的投资" forState:(UIControlStateNormal)];
+    [_RightButton addTarget:self action:@selector(myRecodeClick) forControlEvents:(UIControlEventTouchUpInside)];
+}
+
+- (void)myRecodeClick
+{
+    TLMyRecordVC *VC = [TLMyRecordVC new];
+    VC.title = [LangSwitcher switchLang:@"我的理财" key:nil];
+    [self.navigationController pushViewController:VC animated:YES];
+
 }
 
 #pragma mark -- 接收到通知
@@ -198,10 +269,6 @@
 - (void)getMySyspleList {
     
     CoinWeakSelf;
-
-
-
-
     TLPageDataHelper *helper = [[TLPageDataHelper alloc] init];
     if (![TLUser user].isLogin) {
         return;
@@ -211,7 +278,7 @@
     helper.parameters[@"token"] = [TLUser user].token;
     helper.isList = YES;
     helper.isCurrency = YES;
-    helper.tableView = self.tableView1;
+//    helper.tableView = self.tableView1;
     [helper modelClass:[CurrencyModel class]];
     [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
 
@@ -236,116 +303,50 @@
 
 
     }];
-    
-//    [self.tableView addLoadMoreAction:^{
-//        helper.parameters[@"userId"] = [TLUser user].userId;
-//        helper.parameters[@"token"] = [TLUser user].token;
-//        [helper loadMore:^(NSMutableArray *objs, BOOL stillHave) {
-//
-//            //去除没有的币种
-//
-//
-//            NSMutableArray <CurrencyModel *> *shouldDisplayCoins = [[NSMutableArray alloc] init];
-//            [objs enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-//
-//                CurrencyModel *currencyModel = (CurrencyModel *)obj;
-//                //                if ([[CoinUtil shouldDisplayCoinArray] indexOfObject:currencyModel.currency ] != NSNotFound ) {
-//
-//                [shouldDisplayCoins addObject:currencyModel];
-//                //                }
-//                //查询总资产
-//
-//            }];
-//
-//            //
-//            weakSelf.currencys = shouldDisplayCoins;
-//
-//        } failure:^(NSError *error) {
-//
-//
-//        }];
-//
-//    }];
+
 
     
 }
 
 
-- (void)myRecodeClick
-{
-    TLMyRecordVC *VC = [TLMyRecordVC new];
-    VC.title = [LangSwitcher switchLang:@"我的理财" key:nil];
-    [self.navigationController pushViewController:VC animated:YES];
-    
-}
 
-- (TLMakeMoney *)tableView1 {
 
-    if (!_tableView1) {
 
-        _tableView1 = [[TLMakeMoney alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
-
-        //        _tableView.placeHolderView = self.placeHolderView;
-        _tableView1.refreshDelegate = self;
-        _tableView1.backgroundColor = kWhiteColor;
-        _tableView1.frame = CGRectMake(0, 0, 0, 0);
-        [self.view addSubview:_tableView1];
-//        [_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-//
-//            make.edges.mas_equalTo(UIEdgeInsetsMake(0, 15, 0, 15));
-//        }];
-
-    }
-    return _tableView1;
-}
 
 - (TLMakeMoney *)tableView {
     
     if (!_tableView) {
         
-        _tableView = [[TLMakeMoney alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
-        
-        //        _tableView.placeHolderView = self.placeHolderView;
-        _tableView.refreshDelegate = self;
-        _tableView.backgroundColor = kWhiteColor;
+        _tableView = [[TLMakeMoney alloc] initWithFrame:CGRectMake(0, -kNavigationBarHeight, SCREEN_WIDTH, SCREEN_HEIGHT) style:UITableViewStylePlain];
 
+        _tableView.refreshDelegate = self;
+        _tableView.backgroundColor = kBackgroundColor;
         [self.view addSubview:_tableView];
-        [_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-            
-            make.edges.mas_equalTo(UIEdgeInsetsMake(0, 15, 0, 15));
-        }];
-        
+
     }
     return _tableView;
 }
 
 #pragma mark - Init
 - (void)initPlaceHolderView {
-    self.view.backgroundColor = kWhiteColor;
-    UIView *topView = [[UIView alloc] init];
-    [self.view addSubview:topView];
-    topView.backgroundColor = kHexColor(@"#0848DF");
-    
-    [topView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view.mas_top);
-        
-        make.left.equalTo(self.view.mas_left);
-        make.right.equalTo(self.view.mas_right);
-        make.height.equalTo(@(kHeight(66)));
-    }];
-    
+//    self.view.backgroundColor = kWhiteColor;
+//    UIView *topView = [[UIView alloc] init];
+//    [self.view addSubview:topView];
+//    topView.backgroundColor = kHexColor(@"#0848DF");
+//    
+//    [topView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(self.view.mas_top);
+//        make.left.equalTo(self.view.mas_left);
+//        make.right.equalTo(self.view.mas_right);
+//        make.height.equalTo(@(kHeight(66)));
+//    }];
+
     
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 -(void)refreshTableView:(TLTableView *)refreshTableview didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-    
     TLMoneyDeailVC *money = [TLMoneyDeailVC new];
     money.moneyModel = self.Moneys[indexPath.row];
     money.currencys = self.currencys;
