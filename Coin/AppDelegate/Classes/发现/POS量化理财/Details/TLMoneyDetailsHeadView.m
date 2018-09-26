@@ -17,6 +17,7 @@
 
 
         UIImageView *backImage = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 235 - 64 + kNavigationBarHeight)];
+        self.backImage = backImage;
         backImage.image = kImage(@"bijiabao");
         [self addSubview:backImage];
 

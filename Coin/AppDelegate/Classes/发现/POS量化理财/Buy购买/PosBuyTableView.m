@@ -95,7 +95,9 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-
+    if (section == 1) {
+        return 100;
+    }
     return 0.01;
 }
 
@@ -108,8 +110,43 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
 
+    if (section == 1) {
+        UIView *footView = [[UIView alloc]init];
+
+        UIButton *gardenBtn =[UIButton buttonWithType:(UIButtonTypeCustom)];
+        [gardenBtn setImage:kImage(@"Combined Shape2") forState:(UIControlStateNormal)];
+        [gardenBtn setImage:kImage(@"Oval Copy2") forState:(UIControlStateSelected)];
+        gardenBtn.frame = CGRectMake(15, 0, 40, 40);
+        [gardenBtn addTarget:self action:@selector(gardenBtnClick:) forControlEvents:(UIControlEventTouchUpInside)];
+        [footView addSubview:gardenBtn];
+
+
+        UILabel *titleLbl = [[UILabel alloc]initWithFrame:CGRectMake(55, 11, SCREEN_WIDTH - 70, 0)];
+        titleLbl.font = FONT(12);
+        titleLbl.textColor = kHexColor(@"#999999");
+        titleLbl.numberOfLines = 0;
+
+        NSString *str1 = [LangSwitcher switchLang:@"我已经仔细阅读" key:nil];
+        NSString *str2 = [LangSwitcher switchLang:@"《XXXXXXXXXXXX》，" key:nil];
+        NSString *str3 = [LangSwitcher switchLang:@"同意协议中的有关条款。充分了解银行和自身的权利和义务。" key:nil];
+        NSMutableAttributedString * attriStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@%@%@",str1,str2,str3]];
+        [attriStr addAttribute:NSForegroundColorAttributeName value:kHexColor(@"#3D76FF") range:NSMakeRange(str1.length, str2.length)];
+        titleLbl.attributedText = attriStr;
+        [titleLbl sizeToFit];
+        [footView addSubview:titleLbl];
+
+
+        UIButton *titleBtn = [UIButton buttonWithType:(UIButtonTypeCustom)];
+        titleBtn.frame = titleLbl.frame;
+        [footView addSubview:titleBtn];
+        return footView;
+    }
     return [UIView new];
 }
 
+-(void)gardenBtnClick:(UIButton *)sender
+{
+    sender.selected = !sender.selected;
+}
 
 @end

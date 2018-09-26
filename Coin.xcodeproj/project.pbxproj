@@ -199,6 +199,10 @@
 		7A2CC657215BA12900B27E2D /* PosBuyTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC656215BA12900B27E2D /* PosBuyTableView.m */; };
 		7A2CC65A215BA19E00B27E2D /* PosBuyBalanceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC659215BA19E00B27E2D /* PosBuyBalanceCell.m */; };
 		7A2CC65D215BA4E100B27E2D /* PosBuyIntroduceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC65C215BA4E100B27E2D /* PosBuyIntroduceCell.m */; };
+		7A2CC664215BBC2900B27E2D /* PosMyInvestmentDetailsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC663215BBC2900B27E2D /* PosMyInvestmentDetailsVC.m */; };
+		7A2CC667215BBC6B00B27E2D /* PosMyInvestmentDetailsTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC666215BBC6B00B27E2D /* PosMyInvestmentDetailsTableView.m */; };
+		7A2CC66A215BBCEA00B27E2D /* PosMyInvestmentHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC669215BBCEA00B27E2D /* PosMyInvestmentHeadView.m */; };
+		7A2CC66D215BC5B900B27E2D /* PosMyInvestmentDetailsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC66C215BC5B900B27E2D /* PosMyInvestmentDetailsCell.m */; };
 		7A3821BD20EABD1300D6B636 /* GetTheTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A3821BC20EABD1300D6B636 /* GetTheTableView.m */; };
 		7A3821C020EACD8B00D6B636 /* SendTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A3821BF20EACD8B00D6B636 /* SendTableView.m */; };
 		7A3821C320EACDA100D6B636 /* SendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A3821C220EACDA100D6B636 /* SendCell.m */; };
@@ -857,6 +861,14 @@
 		7A2CC659215BA19E00B27E2D /* PosBuyBalanceCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PosBuyBalanceCell.m; sourceTree = "<group>"; };
 		7A2CC65B215BA4E100B27E2D /* PosBuyIntroduceCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PosBuyIntroduceCell.h; sourceTree = "<group>"; };
 		7A2CC65C215BA4E100B27E2D /* PosBuyIntroduceCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PosBuyIntroduceCell.m; sourceTree = "<group>"; };
+		7A2CC662215BBC2900B27E2D /* PosMyInvestmentDetailsVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PosMyInvestmentDetailsVC.h; sourceTree = "<group>"; };
+		7A2CC663215BBC2900B27E2D /* PosMyInvestmentDetailsVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PosMyInvestmentDetailsVC.m; sourceTree = "<group>"; };
+		7A2CC665215BBC6B00B27E2D /* PosMyInvestmentDetailsTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PosMyInvestmentDetailsTableView.h; sourceTree = "<group>"; };
+		7A2CC666215BBC6B00B27E2D /* PosMyInvestmentDetailsTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PosMyInvestmentDetailsTableView.m; sourceTree = "<group>"; };
+		7A2CC668215BBCEA00B27E2D /* PosMyInvestmentHeadView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PosMyInvestmentHeadView.h; sourceTree = "<group>"; };
+		7A2CC669215BBCEA00B27E2D /* PosMyInvestmentHeadView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PosMyInvestmentHeadView.m; sourceTree = "<group>"; };
+		7A2CC66B215BC5B900B27E2D /* PosMyInvestmentDetailsCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PosMyInvestmentDetailsCell.h; sourceTree = "<group>"; };
+		7A2CC66C215BC5B900B27E2D /* PosMyInvestmentDetailsCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PosMyInvestmentDetailsCell.m; sourceTree = "<group>"; };
 		7A3821BB20EABD1300D6B636 /* GetTheTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GetTheTableView.h; sourceTree = "<group>"; };
 		7A3821BC20EABD1300D6B636 /* GetTheTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GetTheTableView.m; sourceTree = "<group>"; };
 		7A3821BE20EACD8B00D6B636 /* SendTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SendTableView.h; sourceTree = "<group>"; };
@@ -2427,6 +2439,7 @@
 		216F5B54206D005200F2C832 /* POS量化理财 */ = {
 			isa = PBXGroup;
 			children = (
+				7A2CC65E215BBB9F00B27E2D /* MyInvestment我的投资详情 */,
 				7A2CC651215B9FA100B27E2D /* Buy购买 */,
 				7A2CC644215B729900B27E2D /* Details */,
 				216F5B58206D02DC00F2C832 /* PosMiningVC.h */,
@@ -2962,6 +2975,21 @@
 				7A2CC65C215BA4E100B27E2D /* PosBuyIntroduceCell.m */,
 			);
 			path = "Buy购买";
+			sourceTree = "<group>";
+		};
+		7A2CC65E215BBB9F00B27E2D /* MyInvestment我的投资详情 */ = {
+			isa = PBXGroup;
+			children = (
+				7A2CC662215BBC2900B27E2D /* PosMyInvestmentDetailsVC.h */,
+				7A2CC663215BBC2900B27E2D /* PosMyInvestmentDetailsVC.m */,
+				7A2CC665215BBC6B00B27E2D /* PosMyInvestmentDetailsTableView.h */,
+				7A2CC666215BBC6B00B27E2D /* PosMyInvestmentDetailsTableView.m */,
+				7A2CC668215BBCEA00B27E2D /* PosMyInvestmentHeadView.h */,
+				7A2CC669215BBCEA00B27E2D /* PosMyInvestmentHeadView.m */,
+				7A2CC66B215BC5B900B27E2D /* PosMyInvestmentDetailsCell.h */,
+				7A2CC66C215BC5B900B27E2D /* PosMyInvestmentDetailsCell.m */,
+			);
+			path = "MyInvestment我的投资详情";
 			sourceTree = "<group>";
 		};
 		7A8A5D0E20EA0677002D9A48 /* RedEnvelope红包 */ = {
@@ -4007,6 +4035,7 @@
 				B8C2057620CF9FFD00952765 /* WalletAdressTableView.m in Sources */,
 				211DE6BC1FB58B4C002FCF3D /* NSString+Extension.m in Sources */,
 				B88D6C6F20EDF39F0043832C /* TLFastvc.m in Sources */,
+				7A2CC66A215BBCEA00B27E2D /* PosMyInvestmentHeadView.m in Sources */,
 				21C91D7D1FDBCF9C006EDB16 /* ZMAuthVC.m in Sources */,
 				B808651C211EA17D00755158 /* BTCData.m in Sources */,
 				B80864FB211EA17D00755158 /* BTCTransaction.m in Sources */,
@@ -4183,6 +4212,7 @@
 				B8CAA11A2115693A00695BC3 /* TLQusertionVC.m in Sources */,
 				21205CFD1FCD61D6003C6C7C /* CustomShareView.m in Sources */,
 				B8CAA13C21158FF200695BC3 /* UIImage+MyBundle.m in Sources */,
+				7A2CC66D215BC5B900B27E2D /* PosMyInvestmentDetailsCell.m in Sources */,
 				B80864F8211EA17D00755158 /* BTCQRCode.m in Sources */,
 				21A7F3201FB2E2F900FAA0A2 /* UserDefaultsUtil.m in Sources */,
 				B808650A211EA17D00755158 /* BTCOpcode.m in Sources */,
@@ -4220,6 +4250,7 @@
 				2EB9495A1FDF6B1A00CE4B94 /* ZMChineseConvert.m in Sources */,
 				B8CAA14A21158FF200695BC3 /* NSBundle+LPDImagePicker.m in Sources */,
 				B87B1BCA20D2509E00EF7B8E /* WalletNewFeaturesVC.m in Sources */,
+				7A2CC667215BBC6B00B27E2D /* PosMyInvestmentDetailsTableView.m in Sources */,
 				B83D1E0C20CE63A2007835DB /* WalletLocalVc.m in Sources */,
 				7A8A5D1520EA076C002D9A48 /* RedEnvelopeVC.m in Sources */,
 				21A7F35E1FB2EBAA00FAA0A2 /* CurrencyModel.m in Sources */,
@@ -4293,6 +4324,7 @@
 				2EB039B51FEA0B4500589D8E /* TLUpdateVC.m in Sources */,
 				B8086506211EA17D00755158 /* BTCBase58+Tests.m in Sources */,
 				2159796D1FB831B10029F177 /* FilterView.m in Sources */,
+				7A2CC664215BBC2900B27E2D /* PosMyInvestmentDetailsVC.m in Sources */,
 				21205CDE1FCD3131003C6C7C /* CoinAddressTableView.m in Sources */,
 				B8F63EE320D397B000556150 /* WalletLocalWebVC.m in Sources */,
 				2129FE6F1FDFBAA3009DA374 /* ChangeLoginPwdVC.m in Sources */,

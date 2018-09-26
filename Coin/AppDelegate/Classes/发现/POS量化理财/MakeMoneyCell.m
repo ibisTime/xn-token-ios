@@ -50,7 +50,7 @@
     
 
     UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 10)];
-    lineView.backgroundColor = kHexColor(@"#EFEFEF");
+    lineView.backgroundColor = kBackgroundColor;
     [self addSubview:lineView];
 
 
@@ -97,85 +97,6 @@
     }
 
 
-//     self.desLab = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor2 font:14];
-//    self.timeLab = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor3 font:14];
-//    [self addSubview:self.timeLab];
-//    self.freeLable = [UILabel labelWithBackgroundColor:kClearColor textColor:kAppCustomMainColor font:16];
-//    [self addSubview:self.freeLable];
-//    UIView *bottomView = [UIView new];
-//    self.bottomView = bottomView;
-//    bottomView.backgroundColor = kHexColor(@"#EFEFEF");
-//    bottomView.layer.cornerRadius = 5;
-//    bottomView.clipsToBounds = YES;
-//
-//    [self addSubview:bottomView];
-//
-//
-//
-
-//
-//    [self addSubview:self.desLab];
-//
-//
-//    self.timeLab.numberOfLines = 0;
-//
-//
-//    [self.bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.equalTo(self.stateLab.mas_bottom).offset(17);
-//        make.left.equalTo(self.mas_left).offset(30);
-//        make.right.equalTo(self.mas_right).offset(-70);
-//        make.height.equalTo(@8);
-//
-//
-//    }];
-//
-//
-//    [self.timeLab mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.centerY.equalTo(self.stateLab.mas_centerY);
-//        make.left.equalTo(self.stateLab.mas_right).offset(10);
-//
-//    }];
-//    [self.freeLable mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.centerY.equalTo(self.bottomView.mas_centerY);
-//        make.right.equalTo(self.mas_right).offset(-5);
-//
-//    }];
-//
-//    [self.desLab mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.bottom.equalTo(self.mas_bottom).offset(-10);
-//        make.left.equalTo(self.mas_left).offset(15);
-//
-//
-//    }];
-//
-//
-//
-//    [self.desLab mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.bottom.equalTo(self.mas_bottom).offset(-10);
-//        make.left.equalTo(self.mas_left).offset(15);
-//
-//    }];
-//    [self.moreButton mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.equalTo(self.stateLab.mas_bottom).offset(8);
-//        make.right.equalTo(self.mas_right).offset(-10);
-//        make.centerY.equalTo(self.mas_centerY);
-//
-//    }];
-
-//    self.layer.borderWidth = 0.5;
-//    self.layer.borderColor = [UIColor colorWithRed:62/255.0 green:58/255.0 blue:57/255.0 alpha:0.16].CGColor;
-//    self.layer.cornerRadius = 4;
-//    self.clipsToBounds = YES;
-//
-//    UIView *drakView = [UIView new];
-//    drakView.backgroundColor = kLineColor;
-//    drakView.alpha = 0.5;
-//    self.drakView = drakView;
-//    drakView.hidden = YES;
-//    [self addSubview:drakView];
-//    [drakView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.edges.mas_equalTo(UIEdgeInsetsZero);
-//    }];
 
 
 
@@ -227,6 +148,7 @@
     _model = model;
     CoinModel *coin = [CoinUtil getCoinModel:model.symbol];
     self.nameLab.text = model.name;
+
     self.stateLab.text = [LangSwitcher switchLang:@"认购中" key:nil];
 
     [self.stateLab sizeToFit];

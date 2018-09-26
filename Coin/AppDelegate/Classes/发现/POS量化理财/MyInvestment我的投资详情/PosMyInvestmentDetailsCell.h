@@ -1,5 +1,5 @@
 //
-//  TLMoneyDetailsHeadView.h
+//  PosMyInvestmentDetailsCell.h
 //  Coin
 //
 //  Created by QinBao Zheng on 2018/9/26.
@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TLMoneyDetailsHeadView : UIView
+@interface PosMyInvestmentDetailsCell : UITableViewCell
 
-@property (nonatomic , strong)UIImageView *backImage;
 @end

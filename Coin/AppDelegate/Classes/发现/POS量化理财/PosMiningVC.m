@@ -18,6 +18,7 @@
 #import "TLMoneyDeailVC.h"
 #import "TLMyRecordVC.h"
 #import "CurrencyModel.h"
+#import "PosMyInvestmentDetailsVC.h"
 @interface PosMiningVC ()<RefreshDelegate>
 //
 @property (nonatomic, strong) TLPlaceholderView *placeholderView;
@@ -135,8 +136,8 @@
 
 - (void)myRecodeClick
 {
-    TLMyRecordVC *VC = [TLMyRecordVC new];
-    VC.title = [LangSwitcher switchLang:@"我的理财" key:nil];
+    PosMyInvestmentDetailsVC *VC = [PosMyInvestmentDetailsVC new];
+//    VC.title = [LangSwitcher switchLang:@"我的理财" key:nil];
     [self.navigationController pushViewController:VC animated:YES];
 
 }

@@ -17,14 +17,15 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.translucent = YES;
-    [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
-    [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
+//    [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
+
+//    [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
 
     UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     self.navigationController.navigationBar.tintColor = [UIColor blackColor];
-    self.navigationController.navigationBar.barTintColor = [UIColor blackColor];
+    self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
     self.navigationItem.backBarButtonItem = item;
-    self.navigationController.navigationBar.shadowImage = [UIImage new];
+//    self.navigationController.navigationBar.shadowImage = [UIImage new];
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
 
 

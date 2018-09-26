@@ -49,6 +49,7 @@
         [self addSubview:addBtn];
 
         UILabel *numberLabel = [UILabel labelWithFrame:CGRectMake(90, 155, kScreenWidth - 180, 55) textAligment:(NSTextAlignmentCenter) backgroundColor:[UIColor whiteColor] font:Font(30) textColor:kHexColor(@"#464646")];
+        self.numberLabel = numberLabel;
         numberLabel.text= @"001";
         kViewBorderRadius(numberLabel, 0, 1, kLineColor);
         [self addSubview:numberLabel];
@@ -73,16 +74,17 @@
         finalLabel.frame = CGRectMake(kScreenWidth - 35 - finalLabel.frame.size.width, 261, finalLabel.frame.size.width, 14);
 
 
-        UISlider *mySlider = [[UISlider alloc] initWithFrame:(CGRect){ sinceLabel.xx , 258 ,kScreenWidth - 30,26}];
+        UISlider *mySlider = [[UISlider alloc] initWithFrame:(CGRect){ sinceLabel.xx + 10 , 258 ,kScreenWidth  - finalLabel.frame.size.width - 35 - sinceLabel.xx - 20,26}];
         self.mySlider = mySlider;
-        [mySlider setThumbImage:[UIImage imageNamed:@"拖拽icon"] forState:UIControlStateNormal];
-        //最小边界值
 
-        mySlider.minimumValue = 0;
+//        [mySlider setThumbImage:kImage(@"拖拽icon") forState:UIControlStateNormal];
+
+        //最小边界值
+        mySlider.minimumValue = 1;
         //最大边界值
         mySlider.maximumValue = 9999;
         //这个值是介于滑块的最大值和最小值之间的，如果没有设置边界值，默认为0-1
-        mySlider.value =50;
+        mySlider.value = 1;
         //设置滑块值是否连续变化(默认为YES)
         mySlider.continuous= YES;
         //设置滑块左边（小于部分）线条的颜色
@@ -90,7 +92,7 @@
         //设置滑块右边（大于部分）线条的颜色
         mySlider.maximumTrackTintColor = [UIColor colorWithHexString:@"#D4E4F3"];
         //设置滑块颜色（影响已划过一端的颜色）
-        mySlider.thumbTintColor = [UIColor colorWithHexString:@"#3B82C5"];
+        mySlider.thumbTintColor = [UIColor colorWithHexString:@"#0064FF"];
         //加入视图
         [self addSubview:mySlider];
         //添加点击事件
@@ -98,6 +100,11 @@
 
     }
     return self;
+}
+
+-(void)sliderAction:(UISlider *)mySlider
+{
+    self.numberLabel.text = [NSString stringWithFormat:@"%.0f", mySlider.value];
 }
 
 @end

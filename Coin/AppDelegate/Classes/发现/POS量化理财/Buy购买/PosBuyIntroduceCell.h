@@ -12,4 +12,6 @@
 
 @property (nonatomic , strong)UISlider *mySlider;
 
+@property (nonatomic , strong)UILabel *numberLabel;
+
 @end
