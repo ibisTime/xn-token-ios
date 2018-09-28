@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "TLtakeMoneyModel.h"
 @interface TLMoneyDetailsAttributesCell : UITableViewCell
-
+@property (nonatomic ,strong) TLtakeMoneyModel *moneyModel;
 @end

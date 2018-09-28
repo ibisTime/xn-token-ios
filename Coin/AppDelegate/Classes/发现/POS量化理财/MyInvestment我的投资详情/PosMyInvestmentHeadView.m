@@ -36,7 +36,7 @@
             if (i == 0) {
                 peiceLabel.frame = CGRectMake(SCREEN_WIDTH/4 - peiceLabel.frame.size.width/2,  40, peiceLabel.frame.size.width, 30);
 
-                UILabel *nameLabel = [UILabel labelWithFrame:CGRectMake(peiceLabel.frame.origin.x, 15 , peiceLabel.frame.size.width, 18) textAligment:(NSTextAlignmentLeft) backgroundColor:kClearColor font:FONT(14) textColor:kWhiteColor];
+                UILabel *nameLabel = [UILabel labelWithFrame:CGRectMake(peiceLabel.frame.origin.x, 15 , peiceLabel.frame.size.width, 18) textAligment:(NSTextAlignmentLeft) backgroundColor:kClearColor font:FONT(13) textColor:kWhiteColor];
                 nameLabel.text = [LangSwitcher switchLang:@"投资总资产" key:nil];
                 nameLabel.alpha = 0.6;
                 [self addSubview:nameLabel];
@@ -46,10 +46,15 @@
             {
                 peiceLabel.frame = CGRectMake(SCREEN_WIDTH/4*3 - peiceLabel.frame.size.width/2,  40, peiceLabel.frame.size.width, 30);
 
-                UILabel *nameLabel = [UILabel labelWithFrame:CGRectMake(peiceLabel.frame.origin.x, 15 , peiceLabel.frame.size.width, 18) textAligment:(NSTextAlignmentLeft) backgroundColor:kClearColor font:FONT(14) textColor:kWhiteColor];
-                nameLabel.text = [LangSwitcher switchLang:@"累计收益" key:nil];
-                nameLabel.alpha = 0.6;
-                [self addSubview:nameLabel];
+                UIButton *earningsButton = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"累计收益" key:nil] titleColor:kWhiteColor backgroundColor:kClearColor titleFont:13];
+                self.earningsButton = earningsButton;
+                earningsButton.frame = CGRectMake(peiceLabel.frame.origin.x, 15 , peiceLabel.frame.size.width, 18);
+                [earningsButton SG_imagePositionStyle:(SGImagePositionStyleRight) spacing:2 imagePositionBlock:^(UIButton *button) {
+                    [earningsButton setImage:kImage(@"更多白色") forState:(UIControlStateNormal)];
+                }];
+                earningsButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+                earningsButton.alpha = 0.6;
+                [self addSubview:earningsButton];
             }
 
             [self addSubview:peiceLabel];

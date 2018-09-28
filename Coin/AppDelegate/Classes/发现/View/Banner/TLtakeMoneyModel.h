@@ -54,6 +54,9 @@
 
 //产品状态
 @property (nonatomic ,copy) NSString *status;
+@property (nonatomic ,copy) NSString *statusStr;
+
+
 //创建时间
 @property (nonatomic ,copy) NSString *createDatetime;
 //募集开始时间

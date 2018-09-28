@@ -10,4 +10,6 @@
 
 @interface PosMyInvestmentHeadView : UIView
 
+@property (nonatomic , strong)UIButton *earningsButton;
+
 @end

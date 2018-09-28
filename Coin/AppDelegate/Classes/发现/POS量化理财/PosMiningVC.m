@@ -52,10 +52,10 @@
     self.navigationController.navigationBar.shadowImage = [UIImage new];
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
 
-    if ([TLUser user].isLogin) {
-        BOOL is =  [[TLUser user] chang];
-
-    }
+//    if ([TLUser user].isLogin) {
+//        BOOL is =  [[TLUser user] chang];
+//
+//    }
 
 }
 
@@ -101,7 +101,6 @@
 //    self.Moneys = self.tableView.Moneys;
 //    [self.tableView reloadData];
     [self getMyCurrencyList];
-    [self getMySyspleList];
 
 
 
@@ -153,161 +152,120 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"LOADDATA" object:nil];
 }
 
-//- (void)getMyCurrencyList {
-//
+- (void)getMyCurrencyList {
+
+    CoinWeakSelf;
+
+    TLPageDataHelper *helper = [[TLPageDataHelper alloc] init];
+
+    helper.code = @"625510";
+    helper.parameters[@"userId"] = [TLUser user].userId;
+    helper.parameters[@"status"] = @"appDisplay";
+    helper.isCurrency = YES;
+    helper.tableView = self.tableView;
+    [helper modelClass:[TLtakeMoneyModel class]];
+    [self.tableView addRefreshAction:^{
+        [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
+            //去除没有的币种
+            weakSelf.Moneys = objs;
+            weakSelf.tableView.Moneys = objs;
+            [weakSelf.tableView reloadData_tl];
+
+        } failure:^(NSError *error) {
+
+
+        }];
+
+
+
+    }];
+
+    [self.tableView beginRefreshing];
+
+    [self.tableView addLoadMoreAction:^{
+        [helper loadMore:^(NSMutableArray *objs, BOOL stillHave) {
+
+            if (weakSelf.tl_placeholderView.superview != nil) {
+
+                [weakSelf removePlaceholderView];
+            }
+
+
+            weakSelf.Moneys = objs;
+            weakSelf.tableView.Moneys = objs;
+            //        weakSelf.tableView.bills = objs;
+            [weakSelf.tableView reloadData_tl];
+
+        } failure:^(NSError *error) {
+
+            [weakSelf addPlaceholderView];
+
+        }];
+    }];
+
+    [self.tableView endRefreshingWithNoMoreData_tl];
+
+}
+
+//-(void)getMyCurrencyList
+//{
 //    CoinWeakSelf;
-//
 //    TLPageDataHelper *helper = [[TLPageDataHelper alloc] init];
-//
 //    helper.code = @"625510";
 //    helper.parameters[@"userId"] = [TLUser user].userId;
 //    helper.parameters[@"status"] = @"appDisplay";
+//
+//
 //    helper.isCurrency = YES;
 //    helper.tableView = self.tableView;
 //    [helper modelClass:[TLtakeMoneyModel class]];
+//
 //    [self.tableView addRefreshAction:^{
 //        [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
-//            //去除没有的币种
-//            weakSelf.Moneys = objs;
-//            weakSelf.tableView.Moneys = objs;
-//            [weakSelf.tableView reloadData_tl];
+//            NSMutableArray <TLtakeMoneyModel *> *shouldDisplayCoins = [[NSMutableArray alloc] init];
+//            [objs enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+//                TLtakeMoneyModel *model = (TLtakeMoneyModel *)obj;
+//                [shouldDisplayCoins addObject:model];
+//            }];
+////            weakSelf.model = shouldDisplayCoins;
+////            weakSelf.tableView.model = shouldDisplayCoins;
+////            [weakSelf.tableView reloadData_tl];
 //
+//            weakSelf.Moneys = shouldDisplayCoins;
+//            [weakSelf.tableView.Moneys removeAllObjects];
+//            [weakSelf.tableView reloadData];
+//            weakSelf.tableView.Moneys = shouldDisplayCoins;
+//            //        weakSelf.tableView.bills = objs;
+//            [weakSelf.tableView reloadData_tl];
 //        } failure:^(NSError *error) {
 //
-//
 //        }];
-//
-//
-//
 //    }];
-//
-//    [self.tableView beginRefreshing];
-//
 //    [self.tableView addLoadMoreAction:^{
+//
+//        helper.parameters[@"userId"] = [TLUser user].userId;
+//        helper.parameters[@"status"] = @"appDisplay";
 //        [helper loadMore:^(NSMutableArray *objs, BOOL stillHave) {
+//            NSLog(@" ==== %@",objs);
+//            NSMutableArray <TLtakeMoneyModel *> *shouldDisplayCoins = [[NSMutableArray alloc] init];
+//            [objs enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
 //
-//            if (weakSelf.tl_placeholderView.superview != nil) {
+//                TLtakeMoneyModel *model = (TLtakeMoneyModel *)obj;
+//                [shouldDisplayCoins addObject:model];
+//            }];
+//            weakSelf.Moneys = shouldDisplayCoins;
 //
-//                [weakSelf removePlaceholderView];
-//            }
-//
-//
-//            weakSelf.Moneys = objs;
-//            weakSelf.tableView.Moneys = objs;
+//            weakSelf.tableView.Moneys = shouldDisplayCoins;
 //            //        weakSelf.tableView.bills = objs;
 //            [weakSelf.tableView reloadData_tl];
 //
 //        } failure:^(NSError *error) {
-//
-//            [weakSelf addPlaceholderView];
-//
 //        }];
 //    }];
-//
-//    [self.tableView endRefreshingWithNoMoreData_tl];
-//
+//    [self.tableView beginRefreshing];
 //}
 
--(void)getMyCurrencyList
-{
-    CoinWeakSelf;
-    TLPageDataHelper *helper = [[TLPageDataHelper alloc] init];
-    helper.code = @"625510";
-    helper.parameters[@"userId"] = [TLUser user].userId;
-    helper.parameters[@"status"] = @"appDisplay";
-   
 
-    helper.isCurrency = YES;
-    helper.tableView = self.tableView;
-    [helper modelClass:[TLtakeMoneyModel class]];
-
-    [self.tableView addRefreshAction:^{
-        [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
-            NSMutableArray <TLtakeMoneyModel *> *shouldDisplayCoins = [[NSMutableArray alloc] init];
-            [objs enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                TLtakeMoneyModel *model = (TLtakeMoneyModel *)obj;
-                [shouldDisplayCoins addObject:model];
-            }];
-//            weakSelf.model = shouldDisplayCoins;
-//            weakSelf.tableView.model = shouldDisplayCoins;
-//            [weakSelf.tableView reloadData_tl];
-
-            weakSelf.Moneys = shouldDisplayCoins;
-            [weakSelf.tableView.Moneys removeAllObjects];
-            [weakSelf.tableView reloadData];
-            weakSelf.tableView.Moneys = shouldDisplayCoins;
-            //        weakSelf.tableView.bills = objs;
-            [weakSelf.tableView reloadData_tl];
-        } failure:^(NSError *error) {
-
-        }];
-    }];
-    [self.tableView addLoadMoreAction:^{
-
-        helper.parameters[@"userId"] = [TLUser user].userId;
-        helper.parameters[@"status"] = @"appDisplay";
-        [helper loadMore:^(NSMutableArray *objs, BOOL stillHave) {
-            NSLog(@" ==== %@",objs);
-            NSMutableArray <TLtakeMoneyModel *> *shouldDisplayCoins = [[NSMutableArray alloc] init];
-            [objs enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-
-                TLtakeMoneyModel *model = (TLtakeMoneyModel *)obj;
-                [shouldDisplayCoins addObject:model];
-            }];
-            weakSelf.Moneys = shouldDisplayCoins;
-          
-            weakSelf.tableView.Moneys = shouldDisplayCoins;
-            //        weakSelf.tableView.bills = objs;
-            [weakSelf.tableView reloadData_tl];
-
-        } failure:^(NSError *error) {
-        }];
-    }];
-    [self.tableView beginRefreshing];
-}
-
-
-- (void)getMySyspleList {
-    
-    CoinWeakSelf;
-    TLPageDataHelper *helper = [[TLPageDataHelper alloc] init];
-    if (![TLUser user].isLogin) {
-        return;
-    }
-    helper.code = @"802503";
-    helper.parameters[@"userId"] = [TLUser user].userId;
-    helper.parameters[@"token"] = [TLUser user].token;
-    helper.isList = YES;
-    helper.isCurrency = YES;
-//    helper.tableView = self.tableView1;
-    [helper modelClass:[CurrencyModel class]];
-    [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
-
-        //去除没有的币种
-
-
-        NSMutableArray <CurrencyModel *> *shouldDisplayCoins = [[NSMutableArray alloc] init];
-        [objs enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-
-            CurrencyModel *currencyModel = (CurrencyModel *)obj;
-            //                if ([[CoinUtil shouldDisplayCoinArray] indexOfObject:currencyModel.currency ] != NSNotFound ) {
-
-            [shouldDisplayCoins addObject:currencyModel];
-            //                }
-            //查询总资产
-        }];
-
-        //
-        weakSelf.currencys = shouldDisplayCoins;
-
-    } failure:^(NSError *error) {
-
-
-    }];
-
-
-    
-}
 
 
 

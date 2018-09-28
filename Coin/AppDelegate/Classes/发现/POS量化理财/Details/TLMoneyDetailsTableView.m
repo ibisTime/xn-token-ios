@@ -18,7 +18,7 @@
     CGFloat webViewHeight;
 }
 
-@property (nonatomic , strong)TLMoneyDetailsHeadView *headView;
+
 
 //声明一个区号，用来记录上一个
 @property (nonatomic , assign)NSInteger selectSxtion;
@@ -45,10 +45,6 @@
 
         self.separatorStyle = UITableViewCellSeparatorStyleNone;
 
-        TLMoneyDetailsHeadView *headView = [[TLMoneyDetailsHeadView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 235 - 64 + kNavigationBarHeight)];
-        headView.backgroundColor = RGB(41, 127, 237);
-        self.tableHeaderView = headView;
-        self.headView = headView;
         //    标注区
         isOrOpen[0] = YES;
         self.selectSxtion = 0;
@@ -56,6 +52,8 @@
 
     return self;
 }
+
+
 
 #pragma mark - UITableViewDataSource
 
@@ -81,7 +79,7 @@
     if (indexPath.section == 0) {
         TLMoneyDeailCell *cell = [tableView dequeueReusableCellWithIdentifier:TLMoneyDeail forIndexPath:indexPath];
 
-        //    cell.model = self.Moneys[indexPath.row];
+            cell.moneyModel = self.moneyModel;
 
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
@@ -89,7 +87,7 @@
     if (indexPath.section == 1) {
         TLMoneyDetailsAttributesCell *cell = [tableView dequeueReusableCellWithIdentifier:TLMoneyDetailsAttributes forIndexPath:indexPath];
         //    cell.model = self.Moneys[indexPath.row];
-
+        cell.moneyModel = self.moneyModel;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
 
         return cell;
@@ -223,27 +221,19 @@
 //    [self reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationNone];
 }
 
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if ([self.refreshDelegate respondsToSelector:@selector(refreshTableView:scrollView:)]) {
+        [self.refreshDelegate refreshTableView:self scrollView:scrollView];
+    }
+}
+
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
 
     return [UIView new];
 }
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
-    CGFloat height = (235 - 64 + kNavigationBarHeight);
-    // 获取到tableView偏移量
-    CGFloat Offset_y = scrollView.contentOffset.y;
-    // 下拉 纵向偏移量变小 变成负的
-    if ( Offset_y < 0) {
-        // 拉伸后图片的高度
-        CGFloat totalOffset = height - Offset_y;
-        // 图片放大比例
-        CGFloat scale = totalOffset / height;
-        CGFloat width = SCREEN_WIDTH;
-        // 拉伸后图片位置
-        self.headView.backImage.frame = CGRectMake(-(width * scale - width) / 2, Offset_y, width * scale, totalOffset);
-    }
-}
+
 
 @end

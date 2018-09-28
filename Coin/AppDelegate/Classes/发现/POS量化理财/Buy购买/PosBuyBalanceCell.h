@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "CurrencyModel.h"
 @interface PosBuyBalanceCell : UITableViewCell
-
+@property (nonatomic , strong)UILabel *nameLabel;
+@property (nonatomic , strong)UIButton *intoButton;
+@property (nonatomic, strong)CurrencyModel *currencys;
 @end

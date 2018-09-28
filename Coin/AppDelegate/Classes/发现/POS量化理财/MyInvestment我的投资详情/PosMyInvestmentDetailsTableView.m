@@ -10,7 +10,10 @@
 #import "PosMyInvestmentHeadView.h"
 #import "PosMyInvestmentDetailsCell.h"
 #define PosMyInvestmentDetails @"PosMyInvestmentDetailsCell"
-@interface PosMyInvestmentDetailsTableView()<UITableViewDelegate, UITableViewDataSource>
+@interface PosMyInvestmentDetailsTableView()<UITableViewDelegate, UITableViewDataSource>{
+    NSInteger select;
+    NSMutableArray *selectArray;
+}
 
 @end
 @implementation PosMyInvestmentDetailsTableView
@@ -29,10 +32,11 @@
 
         self.separatorStyle = UITableViewCellSeparatorStyleNone;
 
-        PosMyInvestmentHeadView *headView = [[PosMyInvestmentHeadView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 160 - 64)];
-        headView.backgroundColor = kHexColor(@"#0848DF");
-        self.tableHeaderView = headView;
+        
 
+        selectArray = [NSMutableArray array];
+        selectArray = [NSMutableArray arrayWithArray:@[@(0),@(1),@(2)]];
+        select = 0;
     }
 
     return self;
@@ -106,17 +110,43 @@
             [button setImage:kImage(@"Oval1") forState:(UIControlStateNormal)];
             [button setImage:kImage(@"Oval2") forState:(UIControlStateSelected)];
         }];
+//        if (select == 0) {
+//            [selectArray addObject:[NSString stringWithFormat:@"%d",i]];
+//            headButton.selected = YES;
+//        }
+
+        BOOL isbool = [selectArray containsObject:@(i)];
+        if (isbool == YES) {
+            headButton.selected = YES;
+        }else
+        {
+            headButton.selected = NO;
+        }
+
+
+
         headButton.tag = i;
         [headView addSubview:headButton];
     }
-
+    select = 1;
+    NSLog(@"%@",selectArray);
 
     return headView;
 }
 
 -(void)headButtonClick:(UIButton *)sender
 {
-    sender.selected = !sender.selected;
+    BOOL isbool = [selectArray containsObject:@(sender.tag)];
+    if (isbool == YES) {
+        [selectArray removeObject:@(sender.tag)];
+    }else
+    {
+        [selectArray addObject:@(sender.tag)];
+    }
+    [self reloadData];
+    if ([self.refreshDelegate respondsToSelector:@selector(refreshTableViewButtonClick:button:selectRowAtIndex:)]) {
+        [self.refreshDelegate refreshTableViewButtonClick:self button:sender selectRowAtIndex:sender.tag];
+    }
 }
 
 

@@ -7,7 +7,9 @@
 //
 
 #import "TLBaseVC.h"
-
+#import "TLtakeMoneyModel.h"
+#import "CurrencyModel.h"
 @interface PosBuyVC : TLBaseVC
-
+@property (nonatomic ,strong) TLtakeMoneyModel *moneyModel;
+@property (nonatomic, strong) NSMutableArray <CurrencyModel *>*currencys;
 @end

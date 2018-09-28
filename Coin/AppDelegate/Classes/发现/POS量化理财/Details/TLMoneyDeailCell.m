@@ -50,4 +50,9 @@
     return self;
 }
 
+-(void)setMoneyModel:(TLtakeMoneyModel *)moneyModel
+{
+
+}
+
 @end

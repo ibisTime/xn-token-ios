@@ -55,6 +55,7 @@ static NSString *identifierCell = @"MakeMoneyCell";
     
     MakeMoneyCell *cell = [tableView dequeueReusableCellWithIdentifier:identifierCell forIndexPath:indexPath];
     cell.model = self.Moneys[indexPath.row];
+//    cell.backgroundColor = [UIColor redColor];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
@@ -78,12 +79,15 @@ static NSString *identifierCell = @"MakeMoneyCell";
     return 0.01;
 }
 
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return 0.01;
+}
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
 
-    UIView *view = [UIView new];
     
-    return view;
+    return nil;
 }
 
 - (void)clickFilter:(UIButton *)sender {
@@ -97,7 +101,8 @@ static NSString *identifierCell = @"MakeMoneyCell";
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
     
-    return [UIView new];
+    return nil;
+
 }
 /*
 // Only override drawRect: if you perform custom drawing.

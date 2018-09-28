@@ -7,8 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "TLtakeMoneyModel.h"
 @interface TLMoneyDetailsHeadView : UIView
+
+@property (nonatomic , strong)UILabel *priceLabel;
+
+@property (nonatomic , strong)TLtakeMoneyModel *moneyModel;
 
 @property (nonatomic , strong)UIImageView *backImage;
 @end

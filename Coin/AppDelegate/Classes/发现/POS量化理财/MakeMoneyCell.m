@@ -53,10 +53,6 @@
     lineView.backgroundColor = kBackgroundColor;
     [self addSubview:lineView];
 
-
-
-
-
     self.nameLab = [UILabel labelWithBackgroundColor:kClearColor textColor:kHexColor(@"#464646") font:15];
     self.nameLab.frame = CGRectMake(15, 25, 0, 15);
     [self addSubview:self.nameLab];
@@ -64,12 +60,6 @@
     self.stateLab = [UILabel labelWithBackgroundColor:kClearColor textColor:kHexColor(@"#FF6400") font:13];
     self.stateLab.frame = CGRectMake(15, 25, 0, 15);
     [self addSubview:self.stateLab];
-
-
-//    self.leaveLable = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor2 font:13];
-//    self.leaveLable.frame = CGRectMake(kScreenWidth - 100, 26, 85, 13);
-//    [self addSubview:self.leaveLable];
-
 
     UIView *lineView1 = [[UIView alloc]initWithFrame:CGRectMake(15, 55, kScreenWidth - 30, 1)];
     lineView1.backgroundColor = kLineColor;
@@ -123,13 +113,13 @@
 
 }
 
--(void)setFrame:(CGRect)frame
-{
-//    frame.origin.x = 10;//这里间距为10，可以根据自己的情况调整
-//    frame.size.width -= 2 * frame.origin.x;
-    frame.size.height -= 2 * 5;
-    [super setFrame:frame];
-}
+//-(void)setFrame:(CGRect)frame
+//{
+////    frame.origin.x = 10;//这里间距为10，可以根据自己的情况调整
+////    frame.size.width -= 2 * frame.origin.x;
+//    frame.size.height -= 2 * 5;
+//    [super setFrame:frame];
+//}
 
 - (void)loadMoneys
 {
@@ -139,22 +129,29 @@
 
 -(void)setModel:(TLtakeMoneyModel *)model
 {
-
-
-    UILabel *label1 = [self viewWithTag:1000];
-    UILabel *label2 = [self viewWithTag:1001];
-    UILabel *label3 = [self viewWithTag:1002];
-
     _model = model;
     CoinModel *coin = [CoinUtil getCoinModel:model.symbol];
     self.nameLab.text = model.name;
 
-    self.stateLab.text = [LangSwitcher switchLang:@"认购中" key:nil];
-
+    self.stateLab.text = [LangSwitcher switchLang:model.statusStr key:nil];
     [self.stateLab sizeToFit];
     self.stateLab.frame = CGRectMake(kScreenWidth - 15 - self.stateLab.frame.size.width, 26, self.stateLab.frame.size.width, 13);
     self.nameLab.frame = CGRectMake(15, 25, kScreenWidth - self.stateLab.frame.size.width - 40 , 15);
 
+    UILabel *label1 = [self viewWithTag:1000];
+    UILabel *label2 = [self viewWithTag:1001];
+    UILabel *label3 = [self viewWithTag:1002];
+    NSString *str = @"%";
+    label1.text = [NSString stringWithFormat:@"%.2f%@",[self.model.expectYield floatValue],str];
+    label2.text = [NSString stringWithFormat:@"%@%@",model.limitDays,[LangSwitcher switchLang:@"天" key:nil]];
+    NSString *avilAmount = [CoinUtil convertToRealCoin:model.avilAmount coin:coin.symbol];
+    if ([avilAmount floatValue] > 10000) {
+        label3.text = [NSString stringWithFormat:@"%.2f万",[avilAmount floatValue]/10000];
+    }
+    else
+    {
+        label3.text = [NSString stringWithFormat:@"%.2f",[avilAmount floatValue]];
+    }
 
 
 
@@ -168,107 +165,105 @@
        f =  [currentAmount floatValue]/[allAmount floatValue];
 
     }
-    label1.text = [NSString stringWithFormat:@"%.2f%%",f*100];
-    label2.text = [NSString stringWithFormat:@"%@%@",model.limitDays,[LangSwitcher switchLang:@"天" key:nil]];
-   
-    NSLog(@"比例是%f",f);
-//    [self setNeedsLayout];
-
-
-//    self.stateLab.text = [NSString stringWithFormat:@"%.2f%%",[model.expectYield floatValue]*100];
-    self.freeLable.text = [NSString stringWithFormat:@"%.2f%%",f*100];
-    NSString *minAmount = [CoinUtil convertToRealCoin:model.minAmount coin:coin.symbol];
-
-//    self.desLab.text = [NSString stringWithFormat:@"%@%@ %@",minAmount,model.symbol,[LangSwitcher switchLang:@"起购" key:nil]];
-    
-    NSString *d = [LangSwitcher switchLang:@" 起购" key:nil];
-    NSString *m2 =[NSString stringWithFormat:@"%@%@",minAmount,model.symbol];
-    
-    NSString *str1 = [NSString stringWithFormat:@"%@%@ %@",minAmount,model.symbol,[LangSwitcher switchLang:@"起购" key:nil]];
-    NSMutableAttributedString *attrStr1 = [[NSMutableAttributedString alloc] initWithString:str1];
-    [attrStr1 addAttribute:NSForegroundColorAttributeName
-                    value:kTextBlack
-                    range:NSMakeRange(0, m2.length)];
-    
-    self.desLab.attributedText = attrStr1;
-    
-    self.timeLab.text =[NSString stringWithFormat:@"%@%@",model.limitDays,[LangSwitcher switchLang:@"天" key:nil]];
-    NSString *avilAmount = [CoinUtil convertToRealCoin:model.avilAmount coin:coin.symbol];
-
-
-
-
-
-    if ([model.status isEqualToString:@"4"]) {
-         self.leaveLable.text =[LangSwitcher switchLang:@"即将开始" key:nil];
-
-
-    }else if ([model.status isEqualToString:@"5"])
-    {
-        
-        NSString *s = [LangSwitcher switchLang:@"剩余" key:nil];
-        NSString *m =[NSString stringWithFormat:@" %@%@",@(avilAmount.floatValue),model.symbol];
-
-        NSString *str = [NSString stringWithFormat:@"%@ %@%@",[LangSwitcher switchLang:@"剩余" key:nil],@(avilAmount.floatValue),model.symbol];
-        NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:str];
-            [attrStr addAttribute:NSForegroundColorAttributeName
-                            value:kTextBlack
-                            range:NSMakeRange(s.length, m.length)];
-      
-        self.leaveLable.attributedText = attrStr;
-//     self.leaveLable.text =[NSString stringWithFormat:@"%@ %@%@",[LangSwitcher switchLang:@"剩余" key:nil],avilAmount,model.symbol];
-        
-        
-        [self.desLab mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.bottom.equalTo(self.mas_bottom).offset(-10);
-            make.left.equalTo(self.mas_left).offset(15);
-            make.width.equalTo(@(kWidth(150)));
-            
-        }];
-        
-        
-    }
-    else if ([model.status isEqualToString:@"6"])
-    {
-        if ([model.avilAmount isEqualToString:@"0"]) {
-            self.leaveLable.text =[LangSwitcher switchLang:@"已售罄" key:nil];
-
-        }else{
-            self.leaveLable.text =[LangSwitcher switchLang:@"募集结束" key:nil];
-
-        }
-
-    }
-    else if ([model.status isEqualToString:@"7"])
-    {
-        self.leaveLable.text =[LangSwitcher switchLang:@"已售罄" key:nil];
-
-    }
-    else if ([model.status isEqualToString:@"8"])
-    {
-        if (self.drakView.hidden == NO) {
-            return;
-        }
-        self.drakView.hidden = NO;
-        self.leaveLable.text =[LangSwitcher switchLang:@"已到期" key:nil];
-    } else if ([model.status isEqualToString:@"9"])
-    {
-        self.leaveLable.text =[LangSwitcher switchLang:@"募集失败" key:nil];
-
-    }else{
-        
-        self.leaveLable.text =[LangSwitcher switchLang:@"敬请期待" key:nil];
-
-    }
-    
     [self.blueView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(self.mas_bottom).offset(0);
         make.left.equalTo(self.mas_left).offset(0);
         //        make.right.equalTo(self.mas_right).offset(-30);
         make.height.equalTo(@2);
         make.width.equalTo(@((kScreenWidth)*f));
-        
     }];
+   
+    NSLog(@"比例是%f",f);
+//    [self setNeedsLayout];
+
+
+//    self.stateLab.text = [NSString stringWithFormat:@"%.2f%%",[model.expectYield floatValue]*100];
+//    self.freeLable.text = [NSString stringWithFormat:@"%.2f%%",f*100];
+//    NSString *minAmount = [CoinUtil convertToRealCoin:model.minAmount coin:coin.symbol];
+
+//    self.desLab.text = [NSString stringWithFormat:@"%@%@ %@",minAmount,model.symbol,[LangSwitcher switchLang:@"起购" key:nil]];
+    
+//    NSString *d = [LangSwitcher switchLang:@" 起购" key:nil];
+//    NSString *m2 =[NSString stringWithFormat:@"%@%@",minAmount,model.symbol];
+//
+//    NSString *str1 = [NSString stringWithFormat:@"%@%@ %@",minAmount,model.symbol,[LangSwitcher switchLang:@"起购" key:nil]];
+//    NSMutableAttributedString *attrStr1 = [[NSMutableAttributedString alloc] initWithString:str1];
+//    [attrStr1 addAttribute:NSForegroundColorAttributeName
+//                    value:kTextBlack
+//                    range:NSMakeRange(0, m2.length)];
+//
+//    self.desLab.attributedText = attrStr1;
+//
+//    self.timeLab.text =[NSString stringWithFormat:@"%@%@",model.limitDays,[LangSwitcher switchLang:@"天" key:nil]];
+//    NSString *avilAmount = [CoinUtil convertToRealCoin:model.avilAmount coin:coin.symbol];
+//
+//
+//
+//
+//
+//    if ([model.status isEqualToString:@"4"]) {
+//         self.leaveLable.text =[LangSwitcher switchLang:@"即将开始" key:nil];
+//
+//
+//    }else if ([model.status isEqualToString:@"5"])
+//    {
+//
+//        NSString *s = [LangSwitcher switchLang:@"剩余" key:nil];
+//        NSString *m =[NSString stringWithFormat:@" %@%@",@(avilAmount.floatValue),model.symbol];
+//
+//        NSString *str = [NSString stringWithFormat:@"%@ %@%@",[LangSwitcher switchLang:@"剩余" key:nil],@(avilAmount.floatValue),model.symbol];
+//        NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:str];
+//            [attrStr addAttribute:NSForegroundColorAttributeName
+//                            value:kTextBlack
+//                            range:NSMakeRange(s.length, m.length)];
+//
+//        self.leaveLable.attributedText = attrStr;
+////     self.leaveLable.text =[NSString stringWithFormat:@"%@ %@%@",[LangSwitcher switchLang:@"剩余" key:nil],avilAmount,model.symbol];
+//
+//
+//        [self.desLab mas_remakeConstraints:^(MASConstraintMaker *make) {
+//            make.bottom.equalTo(self.mas_bottom).offset(-10);
+//            make.left.equalTo(self.mas_left).offset(15);
+//            make.width.equalTo(@(kWidth(150)));
+//
+//        }];
+//
+//
+//    }
+//    else if ([model.status isEqualToString:@"6"])
+//    {
+//        if ([model.avilAmount isEqualToString:@"0"]) {
+//            self.leaveLable.text =[LangSwitcher switchLang:@"已售罄" key:nil];
+//
+//        }else{
+//            self.leaveLable.text =[LangSwitcher switchLang:@"募集结束" key:nil];
+//
+//        }
+//
+//    }
+//    else if ([model.status isEqualToString:@"7"])
+//    {
+//        self.leaveLable.text =[LangSwitcher switchLang:@"已售罄" key:nil];
+//
+//    }
+//    else if ([model.status isEqualToString:@"8"])
+//    {
+//        if (self.drakView.hidden == NO) {
+//            return;
+//        }
+//        self.drakView.hidden = NO;
+//        self.leaveLable.text =[LangSwitcher switchLang:@"已到期" key:nil];
+//    } else if ([model.status isEqualToString:@"9"])
+//    {
+//        self.leaveLable.text =[LangSwitcher switchLang:@"募集失败" key:nil];
+//
+//    }else{
+//
+//        self.leaveLable.text =[LangSwitcher switchLang:@"敬请期待" key:nil];
+//
+//    }
+
+
 
     
     

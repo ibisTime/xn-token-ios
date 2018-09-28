@@ -35,6 +35,10 @@
 #import "UIButton+SGImagePosition.h"
 #import "UIButton+EnLargeEdge.h"
 #import "LangSwitcher.h"
+#import "CoinUtil.h"
+#import "TLTextField.h"
+#import "NSString+Check.h"
+#import "NSString+Date.h"
 #endif /* CoinPrefixHeader_h */
 
 #endif

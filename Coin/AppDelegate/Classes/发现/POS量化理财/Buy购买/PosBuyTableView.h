@@ -7,7 +7,12 @@
 //
 
 #import "TLTableView.h"
+#import "CurrencyModel.h"
+#import "TLtakeMoneyModel.h"
 
 @interface PosBuyTableView : TLTableView
+
+@property (nonatomic ,strong) TLtakeMoneyModel *moneyModel;
+@property (nonatomic, strong)CurrencyModel *currencys;
 
 @end

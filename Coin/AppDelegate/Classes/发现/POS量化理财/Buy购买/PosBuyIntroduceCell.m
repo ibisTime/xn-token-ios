@@ -19,6 +19,7 @@
         [self addSubview:lineView];
 
         UILabel *titleLbl = [UILabel labelWithFrame:CGRectMake(25, 20, kScreenWidth - 40, 21) textAligment:(NSTextAlignmentLeft) backgroundColor:kClearColor font:HGboldfont(15) textColor:kHexColor(@"#464646")];
+        self.titleLbl = titleLbl;
         titleLbl.text = @"蓝潮基金ETH增长型7期";
         [self addSubview:titleLbl];
 
@@ -41,16 +42,21 @@
         UIButton *reductionBtn = [UIButton buttonWithTitle:@"-" titleColor:kHexColor(@"#464646") backgroundColor:kHexColor(@"#F9F9FC") titleFont:30];
         reductionBtn.frame = CGRectMake(35, 155, 55, 55);
         kViewBorderRadius(reductionBtn, 0, 1, kLineColor);
+        [reductionBtn addTarget:self action:@selector(reductionBtnClick:) forControlEvents:(UIControlEventTouchUpInside)];
+        reductionBtn.tag = 500;
         [self addSubview:reductionBtn];
 
-        UIButton *addBtn = [UIButton buttonWithTitle:@"-" titleColor:kHexColor(@"#464646") backgroundColor:kHexColor(@"#F9F9FC") titleFont:30];
+        UIButton *addBtn = [UIButton buttonWithTitle:@"+" titleColor:kHexColor(@"#464646") backgroundColor:kHexColor(@"#F9F9FC") titleFont:30];
         addBtn.frame = CGRectMake(kScreenWidth - 90, 155, 55, 55);
         kViewBorderRadius(addBtn, 0, 1, kLineColor);
+        [addBtn addTarget:self action:@selector(reductionBtnClick:) forControlEvents:(UIControlEventTouchUpInside)];
+        addBtn.tag = 501;
         [self addSubview:addBtn];
 
         UILabel *numberLabel = [UILabel labelWithFrame:CGRectMake(90, 155, kScreenWidth - 180, 55) textAligment:(NSTextAlignmentCenter) backgroundColor:[UIColor whiteColor] font:Font(30) textColor:kHexColor(@"#464646")];
         self.numberLabel = numberLabel;
-        numberLabel.text= @"001";
+        numberLabel.text= @"1";
+        self.numberLabel.tag = 1212;
         kViewBorderRadius(numberLabel, 0, 1, kLineColor);
         [self addSubview:numberLabel];
 
@@ -104,7 +110,19 @@
 
 -(void)sliderAction:(UISlider *)mySlider
 {
-    self.numberLabel.text = [NSString stringWithFormat:@"%.0f", mySlider.value];
+//    self.numberLabel.text = [NSString stringWithFormat:@"%.0f", mySlider.value];
+    [_delegate sliderActionUISlider:mySlider];
+}
+
+-(void)reductionBtnClick:(UIButton *)sender
+{
+    [_delegate addAndreductionButton:sender];
+}
+
+-(void)setMoneyModel:(TLtakeMoneyModel *)moneyModel
+{
+    self.titleLbl.text = moneyModel.name;
+    
 }
 
 @end

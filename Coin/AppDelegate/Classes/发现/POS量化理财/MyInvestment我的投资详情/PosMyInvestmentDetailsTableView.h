@@ -7,7 +7,7 @@
 //
 
 #import "TLTableView.h"
-
+#import "PosMyInvestmentModel.h"
 @interface PosMyInvestmentDetailsTableView : TLTableView
-
+@property (nonatomic , strong)NSMutableArray <PosMyInvestmentModel *>*model;
 @end

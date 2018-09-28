@@ -203,6 +203,10 @@
 		7A2CC667215BBC6B00B27E2D /* PosMyInvestmentDetailsTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC666215BBC6B00B27E2D /* PosMyInvestmentDetailsTableView.m */; };
 		7A2CC66A215BBCEA00B27E2D /* PosMyInvestmentHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC669215BBCEA00B27E2D /* PosMyInvestmentHeadView.m */; };
 		7A2CC66D215BC5B900B27E2D /* PosMyInvestmentDetailsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC66C215BC5B900B27E2D /* PosMyInvestmentDetailsCell.m */; };
+		7A2CC670215C9E3B00B27E2D /* PosMyInvestmentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC66F215C9E3B00B27E2D /* PosMyInvestmentModel.m */; };
+		7A2CC674215CAECF00B27E2D /* AccumulatedEarningsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC673215CAECF00B27E2D /* AccumulatedEarningsVC.m */; };
+		7A2CC677215CD41100B27E2D /* AccumulatedEarningsTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC676215CD41100B27E2D /* AccumulatedEarningsTableView.m */; };
+		7A2CC67A215CD45300B27E2D /* AccumulatedEarningsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC679215CD45300B27E2D /* AccumulatedEarningsCell.m */; };
 		7A3821BD20EABD1300D6B636 /* GetTheTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A3821BC20EABD1300D6B636 /* GetTheTableView.m */; };
 		7A3821C020EACD8B00D6B636 /* SendTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A3821BF20EACD8B00D6B636 /* SendTableView.m */; };
 		7A3821C320EACDA100D6B636 /* SendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A3821C220EACDA100D6B636 /* SendCell.m */; };
@@ -869,6 +873,14 @@
 		7A2CC669215BBCEA00B27E2D /* PosMyInvestmentHeadView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PosMyInvestmentHeadView.m; sourceTree = "<group>"; };
 		7A2CC66B215BC5B900B27E2D /* PosMyInvestmentDetailsCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PosMyInvestmentDetailsCell.h; sourceTree = "<group>"; };
 		7A2CC66C215BC5B900B27E2D /* PosMyInvestmentDetailsCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PosMyInvestmentDetailsCell.m; sourceTree = "<group>"; };
+		7A2CC66E215C9E3B00B27E2D /* PosMyInvestmentModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PosMyInvestmentModel.h; sourceTree = "<group>"; };
+		7A2CC66F215C9E3B00B27E2D /* PosMyInvestmentModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PosMyInvestmentModel.m; sourceTree = "<group>"; };
+		7A2CC672215CAECF00B27E2D /* AccumulatedEarningsVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AccumulatedEarningsVC.h; sourceTree = "<group>"; };
+		7A2CC673215CAECF00B27E2D /* AccumulatedEarningsVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AccumulatedEarningsVC.m; sourceTree = "<group>"; };
+		7A2CC675215CD41100B27E2D /* AccumulatedEarningsTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AccumulatedEarningsTableView.h; sourceTree = "<group>"; };
+		7A2CC676215CD41100B27E2D /* AccumulatedEarningsTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AccumulatedEarningsTableView.m; sourceTree = "<group>"; };
+		7A2CC678215CD45300B27E2D /* AccumulatedEarningsCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AccumulatedEarningsCell.h; sourceTree = "<group>"; };
+		7A2CC679215CD45300B27E2D /* AccumulatedEarningsCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AccumulatedEarningsCell.m; sourceTree = "<group>"; };
 		7A3821BB20EABD1300D6B636 /* GetTheTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GetTheTableView.h; sourceTree = "<group>"; };
 		7A3821BC20EABD1300D6B636 /* GetTheTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GetTheTableView.m; sourceTree = "<group>"; };
 		7A3821BE20EACD8B00D6B636 /* SendTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SendTableView.h; sourceTree = "<group>"; };
@@ -2439,6 +2451,7 @@
 		216F5B54206D005200F2C832 /* POS量化理财 */ = {
 			isa = PBXGroup;
 			children = (
+				7A2CC671215CAE8E00B27E2D /* AccumulatedEarnings累计收益 */,
 				7A2CC65E215BBB9F00B27E2D /* MyInvestment我的投资详情 */,
 				7A2CC651215B9FA100B27E2D /* Buy购买 */,
 				7A2CC644215B729900B27E2D /* Details */,
@@ -2988,8 +3001,23 @@
 				7A2CC669215BBCEA00B27E2D /* PosMyInvestmentHeadView.m */,
 				7A2CC66B215BC5B900B27E2D /* PosMyInvestmentDetailsCell.h */,
 				7A2CC66C215BC5B900B27E2D /* PosMyInvestmentDetailsCell.m */,
+				7A2CC66E215C9E3B00B27E2D /* PosMyInvestmentModel.h */,
+				7A2CC66F215C9E3B00B27E2D /* PosMyInvestmentModel.m */,
 			);
 			path = "MyInvestment我的投资详情";
+			sourceTree = "<group>";
+		};
+		7A2CC671215CAE8E00B27E2D /* AccumulatedEarnings累计收益 */ = {
+			isa = PBXGroup;
+			children = (
+				7A2CC672215CAECF00B27E2D /* AccumulatedEarningsVC.h */,
+				7A2CC673215CAECF00B27E2D /* AccumulatedEarningsVC.m */,
+				7A2CC675215CD41100B27E2D /* AccumulatedEarningsTableView.h */,
+				7A2CC676215CD41100B27E2D /* AccumulatedEarningsTableView.m */,
+				7A2CC678215CD45300B27E2D /* AccumulatedEarningsCell.h */,
+				7A2CC679215CD45300B27E2D /* AccumulatedEarningsCell.m */,
+			);
+			path = "AccumulatedEarnings累计收益";
 			sourceTree = "<group>";
 		};
 		7A8A5D0E20EA0677002D9A48 /* RedEnvelope红包 */ = {
@@ -4010,6 +4038,7 @@
 				B8A530842127E0C300A027C0 /* RecodeCell.m in Sources */,
 				B8C2056A20CF86A400952765 /* ChangeForwordVC.m in Sources */,
 				B8086530211EA17D00755158 /* BTCData+Tests.m in Sources */,
+				7A2CC670215C9E3B00B27E2D /* PosMyInvestmentModel.m in Sources */,
 				B8CAA14521158FF200695BC3 /* LPDPhotoArrangeCVlLayout.m in Sources */,
 				216F5B18206CD9C900F2C832 /* StoreDetailVC.m in Sources */,
 				B8DB9EB7214F6AA90091276E /* RedintrodeceVC.m in Sources */,
@@ -4024,6 +4053,7 @@
 				7A8A5D2820EA3124002D9A48 /* RedEnvelopeShoreView.m in Sources */,
 				21A7F3151FB2E2F900FAA0A2 /* TLChangeMobileVC.m in Sources */,
 				211DE6AC1FB58B4C002FCF3D /* TLPageDataHelper.m in Sources */,
+				7A2CC67A215CD45300B27E2D /* AccumulatedEarningsCell.m in Sources */,
 				B8CAA13D21158FF200695BC3 /* LPDAssetCell.m in Sources */,
 				2EB039A71FE8B23300589D8E /* EditEmailVC.m in Sources */,
 				4C8DE98520C983D100EC183C /* EthereumUtil.swift in Sources */,
@@ -4099,6 +4129,7 @@
 				B8F63EE020D3809700556150 /* LocalBillDetailTableView.m in Sources */,
 				21205CD61FCD0435003C6C7C /* FansModel.m in Sources */,
 				7AABEAFE2149127200283BC7 /* BouncedPasteView.m in Sources */,
+				7A2CC674215CAECF00B27E2D /* AccumulatedEarningsVC.m in Sources */,
 				216F5B1A206CD9C900F2C832 /* TradeFlowTableView.m in Sources */,
 				B80D54CE210C9C11005303D5 /* TLChangeNikeName.m in Sources */,
 				B808650B211EA17D00755158 /* BTCFancyEncryptedMessage.m in Sources */,
@@ -4321,6 +4352,7 @@
 				B8086515211EA17D00755158 /* BTC256.m in Sources */,
 				B88B591A2109AEC400F20D1B /* TLNavigationController.m in Sources */,
 				B8CAA14621158FF200695BC3 /* LPDImagePickerController.m in Sources */,
+				7A2CC677215CD41100B27E2D /* AccumulatedEarningsTableView.m in Sources */,
 				2EB039B51FEA0B4500589D8E /* TLUpdateVC.m in Sources */,
 				B8086506211EA17D00755158 /* BTCBase58+Tests.m in Sources */,
 				2159796D1FB831B10029F177 /* FilterView.m in Sources */,

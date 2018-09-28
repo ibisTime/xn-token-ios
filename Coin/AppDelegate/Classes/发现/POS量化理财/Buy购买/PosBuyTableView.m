@@ -12,7 +12,7 @@
 #import "PosBuyIntroduceCell.h"
 #define PosBuyIntroduce @"PosBuyIntroduceCell"
 @interface PosBuyTableView()<UITableViewDelegate, UITableViewDataSource
->
+,AddAndreductionDelegate>
 
 @end
 @implementation PosBuyTableView
@@ -55,19 +55,44 @@
 
     if (indexPath.section == 0) {
         PosBuyBalanceCell *cell = [tableView dequeueReusableCellWithIdentifier:PosBuyBalance forIndexPath:indexPath];
-
+        [cell.intoButton addTarget:self action:@selector(intoButtonClick:) forControlEvents:(UIControlEventTouchUpInside)];
+        cell.intoButton.tag = 502;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.currencys = self.currencys;
         return cell;
     }
     PosBuyIntroduceCell *cell = [tableView dequeueReusableCellWithIdentifier:PosBuyIntroduce forIndexPath:indexPath];
-
-
+    cell.delegate = self;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.moneyModel = self.moneyModel;
     return cell;
 
 }
 
+//转入
+-(void)intoButtonClick:(UIButton *)sender{
+    if ([self.refreshDelegate respondsToSelector:@selector(refreshTableViewButtonClick:button:selectRowAtIndex:)]) {
 
+        [self.refreshDelegate refreshTableViewButtonClick:self button:sender selectRowAtIndex:sender.tag];
+    }
+}
+
+-(void)addAndreductionButton:(UIButton *)sender
+{
+    if ([self.refreshDelegate respondsToSelector:@selector(refreshTableViewButtonClick:button:selectRowAtIndex:)]) {
+
+        [self.refreshDelegate refreshTableViewButtonClick:self button:sender selectRowAtIndex:sender.tag];
+    }
+
+}
+
+-(void)sliderActionUISlider:(UISlider *)slider
+{
+    if ([self.refreshDelegate respondsToSelector:@selector(refreshTableView:Slider:)]) {
+
+        [self.refreshDelegate refreshTableView:self Slider:slider];
+    }
+}
 
 #pragma mark - UITableViewDelegate
 
