@@ -21,11 +21,13 @@
         lineView.backgroundColor = kHexColor(@"#BAC1C8");
         [self addSubview:lineView];
 
+        self.backButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
+        self.backButton.frame = CGRectMake(SCREEN_WIDTH/2, 0, SCREEN_WIDTH/2, 160 - 64);
+        [self addSubview:self.backButton];
 
         NSArray *priceArray = @[@"99.900(BTC)",@"900.00(BTC)"];
         for (int i = 0; i < 2; i ++) {
             UILabel *peiceLabel = [UILabel labelWithFrame:CGRectMake(0 + i %2 * SCREEN_WIDTH/2,  47, SCREEN_WIDTH/2, 30) textAligment:(NSTextAlignmentLeft) backgroundColor:kClearColor font:FONT(30) textColor:kWhiteColor];
-            NSString *str = priceArray[i];
 
             peiceLabel.tag = 1212 + i;
 
@@ -50,6 +52,8 @@
                 earningsButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
                 earningsButton.alpha = 0.6;
                 [self addSubview:earningsButton];
+
+
             }
 
             [self addSubview:peiceLabel];
@@ -58,6 +62,8 @@
     }
     return self;
 }
+
+
 
 -(void)setDataDic:(NSDictionary *)dataDic
 {
@@ -90,6 +96,7 @@
 
     NSNumberFormatter *numberFormatter1 = [[NSNumberFormatter alloc] init];
     NSString *totalIncome = [CoinUtil convertToRealCoin:[numberFormatter1 stringFromNumber:dataDic[@"totalIncome"]] coin:@"BTC"];
+
     UILabel *label2 = [self viewWithTag:1213];
     NSString *label2Str = [NSString stringWithFormat:@"%.2f(BTC)",[totalIncome floatValue]];
     NSMutableAttributedString *attrString1 = [[NSMutableAttributedString alloc] initWithString:label2Str];

@@ -165,7 +165,7 @@
     UILabel *label2 = [self viewWithTag:1001];
     UILabel *label3 = [self viewWithTag:1002];
     NSString *str = @"%";
-    label1.text = [NSString stringWithFormat:@"%.2f%@",[self.model.expectYield floatValue],str];
+    label1.text = [NSString stringWithFormat:@"%.2f%@",[self.model.expectYield floatValue] * 100,str];
     label2.text = [NSString stringWithFormat:@"%@%@",model.limitDays,[LangSwitcher switchLang:@"天" key:nil]];
     NSString *avilAmount = [CoinUtil convertToRealCoin:model.avilAmount coin:coin.symbol];
     if ([avilAmount floatValue] > 10000) {

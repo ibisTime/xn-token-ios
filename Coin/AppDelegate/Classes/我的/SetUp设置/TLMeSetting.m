@@ -340,8 +340,7 @@
         
         [weakSelf configUpdate];
         
-        TLAboutUsVC *aboutVc = [[TLAboutUsVC alloc] init];
-        weakSelf.aboutVc = aboutVc;
+
 //        [weakSelf.navigationController pushViewController:aboutVc animated:YES];
         
         
@@ -518,7 +517,7 @@
     
     //1:iOS 2:安卓
     TLNetworking *http = [[TLNetworking alloc] init];
-    
+    http.showView = self.view;
     http.code = @"660918";
     http.parameters[@"type"] = @"ios-c";
     
@@ -563,8 +562,8 @@
         } else {
             
 //            [TLAlert alertWithMsg:@"当前已是最新版本"];
-            
-            [self.navigationController pushViewController:self.aboutVc animated:YES];
+            TLAboutUsVC *aboutVc = [[TLAboutUsVC alloc] init];
+            [self.navigationController pushViewController:aboutVc animated:YES];
 //
             
         }

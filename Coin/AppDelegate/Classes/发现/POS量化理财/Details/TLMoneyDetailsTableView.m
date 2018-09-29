@@ -16,6 +16,9 @@
 {
     BOOL isOrOpen[5];
     CGFloat webViewHeight;
+    NSInteger NUM1;
+    NSInteger NUM2;
+
 }
 
 
@@ -186,7 +189,6 @@
 -(void)dealloc
 {
     [self.web.scrollView removeObserver:self forKeyPath:@"contentSize" context:nil];
-
 }
 
 #pragma mark - UITableViewDelegate
@@ -248,7 +250,17 @@
         UIImageView *youImage = [[UIImageView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 22, 24, 7, 12)];
         youImage.image = kImage(@"更多-灰色");
         [headView addSubview:youImage];
+        if (section == NUM1) {
+            [UIView animateWithDuration:0.5 animations:^{
+                youImage.transform=CGAffineTransformMakeRotation(0*M_PI/180);
+            }];
+        }
+        if (section == NUM2) {
+            [UIView animateWithDuration:0.5 animations:^{
 
+               youImage.transform=CGAffineTransformMakeRotation(90*M_PI/180);
+            }];
+        }
         UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(15, 59, SCREEN_WIDTH - 30, 1)];
         lineView.backgroundColor = kLineColor;
         [headView addSubview:lineView];
@@ -261,14 +273,13 @@
 
 -(void)headButtonClick:(UIButton *)sender
 {
-    //    WGLog(@"%ld",button.tag);
     isOrOpen[self.selectSxtion]=NO;
+    NUM1 = self.selectSxtion;
     isOrOpen[sender.tag] = YES;
-    //    重新标记被选中的区
+    NUM2 = sender.tag;
     self.selectSxtion = sender.tag;
     [self reloadData];
-//    NSIndexPath *indexPath=[NSIndexPath indexPathForRow:0 inSection:self.selectSxtion];
-//    [self reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationNone];
+
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView

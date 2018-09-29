@@ -12,6 +12,8 @@
 
 @property (nonatomic , strong)UIButton *earningsButton;
 
+@property (nonatomic , strong)UIButton *backButton;
+
 @property (nonatomic , strong)NSDictionary *dataDic;
 @property (nonatomic , strong)UILabel *nameLabel;
 

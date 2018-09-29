@@ -296,6 +296,7 @@
 		7AAF038121527166008507FF /* ZipArchive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AAF038021527165008507FF /* ZipArchive.framework */; };
 		7AAF039321527A5E008507FF /* YZViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AAF039221527A5E008507FF /* YZViewController.m */; };
 		7AAF039C21527FD9008507FF /* YZVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AAF039B21527FD9008507FF /* YZVC.m */; };
+		7AD659F1215F691C002F747E /* MoneyAndTreasureHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AD659F0215F691C002F747E /* MoneyAndTreasureHeadView.m */; };
 		B80864EE211EA17D00755158 /* BTCBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = B8086411211EA17C00755158 /* BTCBlock.m */; };
 		B80864EF211EA17D00755158 /* BTCBlockHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = B8086412211EA17C00755158 /* BTCBlockHeader.m */; };
 		B80864F0211EA17D00755158 /* BTCEncryptedBackup.m in Sources */ = {isa = PBXBuildFile; fileRef = B8086415211EA17C00755158 /* BTCEncryptedBackup.m */; };
@@ -1072,6 +1073,8 @@
 		7AAF039221527A5E008507FF /* YZViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZViewController.m; sourceTree = "<group>"; };
 		7AAF039A21527FD9008507FF /* YZVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZVC.h; sourceTree = "<group>"; };
 		7AAF039B21527FD9008507FF /* YZVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZVC.m; sourceTree = "<group>"; };
+		7AD659EF215F691C002F747E /* MoneyAndTreasureHeadView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MoneyAndTreasureHeadView.h; sourceTree = "<group>"; };
+		7AD659F0215F691C002F747E /* MoneyAndTreasureHeadView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MoneyAndTreasureHeadView.m; sourceTree = "<group>"; };
 		8863748C5281F9DC1DDF8EEA /* Pods-Coin.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Coin.release.xcconfig"; path = "Pods/Target Support Files/Pods-Coin/Pods-Coin.release.xcconfig"; sourceTree = "<group>"; };
 		AB34D27FC9725550E9092EC2 /* Pods-Coin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Coin.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Coin/Pods-Coin.debug.xcconfig"; sourceTree = "<group>"; };
 		B808640E211EA17C00755158 /* BTCMerkleTree+Tests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BTCMerkleTree+Tests.h"; sourceTree = "<group>"; };
@@ -2558,6 +2561,8 @@
 				7A2CC6DB215E002800B27E2D /* MoneyAndTreasureHeadCell.m */,
 				B8DDF883211D2AD10058D19D /* MakeMoneyCell.h */,
 				B8DDF884211D2AD10058D19D /* MakeMoneyCell.m */,
+				7AD659EF215F691C002F747E /* MoneyAndTreasureHeadView.h */,
+				7AD659F0215F691C002F747E /* MoneyAndTreasureHeadView.m */,
 			);
 			path = "POS量化理财";
 			sourceTree = "<group>";
@@ -4463,6 +4468,7 @@
 				B8F63ED720D362DA00556150 /* WalletLocalBillTableView.m in Sources */,
 				21635DB91FBECBDD003F48B4 /* TopLabelUtil.m in Sources */,
 				B8B15C0520CA55D600F13220 /* BuildSucessVC.m in Sources */,
+				7AD659F1215F691C002F747E /* MoneyAndTreasureHeadView.m in Sources */,
 				2EA584C71FA813C900C7106C /* main.m in Sources */,
 				7A2CC6B6215DC88B00B27E2D /* PGDatePicker+DateHourMinute.m in Sources */,
 				B8CAA1502115FC6B00695BC3 /* QuestionListTableView.m in Sources */,

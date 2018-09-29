@@ -19,7 +19,9 @@
 #import "TLMyRecordVC.h"
 #import "CurrencyModel.h"
 #import "PosMyInvestmentDetailsVC.h"
+#import "MoneyAndTreasureHeadView.h"
 @interface PosMiningVC ()<RefreshDelegate>
+
 //
 @property (nonatomic, strong) TLPlaceholderView *placeholderView;
 
@@ -31,6 +33,8 @@
 @property (nonatomic,strong) NSArray <TLtakeMoneyModel *>*Moneys;
 
 @property (nonatomic, strong) TLMakeMoney *tableView;
+
+@property (nonatomic, strong) MoneyAndTreasureHeadView *headView;
 
 
 @end
@@ -75,38 +79,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    //敬请期待
-    [self initPlaceHolderView];
     [self.view addSubview:self.tableView];
-//    TLtakeMoneyModel *m = [TLtakeMoneyModel new];
-//    m.name = @"币币赢第一期";
-//    m.symbol = @"BTC";
-//    m.expectYield = @"0.07";
-//    m.minAmount = @"100";
-//    m.limitAmount = @"500";
-//    m.limitDays = @"360";
-//    m.avilAmount = @"1000";
-//    
-//    TLtakeMoneyModel *m1 = [TLtakeMoneyModel new];
-//    m1.name = @"币币赢第二期";
-//    m1.symbol = @"BTC";
-//    m1.expectYield = @"0.12";
-//    m1.minAmount = @"1000";
-//    m1.limitAmount = @"5000";
-//
-//    m1.limitDays = @"129";
-//    m1.avilAmount = @"10000";
-//    self.tableView.Moneys = @[m,m1];
-//    self.Moneys = self.tableView.Moneys;
-//    [self.tableView reloadData];
+
     [self getMyCurrencyList];
 
-
-
-    
-//    self.tableView.
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(InfoNotificationAction:) name:@"LOADDATA" object:nil];
     [self navigativeView];
+
+    MoneyAndTreasureHeadView *headView = [[MoneyAndTreasureHeadView alloc]initWithFrame:CGRectMake(0, -kNavigationBarHeight, SCREEN_WIDTH, 160 - 64 + kNavigationBarHeight)];
+    self.headView = headView;
+    [self.view addSubview:headView];
 }
 
 -(void)navigativeView
@@ -135,7 +117,7 @@
 - (void)myRecodeClick
 {
     PosMyInvestmentDetailsVC *VC = [PosMyInvestmentDetailsVC new];
-    VC.dataDic = self.tableView.dataDic;
+    VC.dataDic = self.headView.dataDic;
     [self.navigationController pushViewController:VC animated:YES];
 
 }
@@ -164,8 +146,8 @@
 //        NSString *str = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"totalInvest"]];
 
 
-        self.tableView.dataDic = responseObject[@"data"];
-
+//        self.tableView.dataDic = responseObject[@"data"];
+        self.headView.dataDic = responseObject[@"data"];
         [self.tableView reloadData];
 
     } failure:^(NSError *error) {
@@ -298,40 +280,24 @@
     
     if (!_tableView) {
         
-        _tableView = [[TLMakeMoney alloc] initWithFrame:CGRectMake(0, -kNavigationBarHeight, SCREEN_WIDTH, SCREEN_HEIGHT) style:UITableViewStylePlain];
+        _tableView = [[TLMakeMoney alloc] initWithFrame:CGRectMake(0, -kNavigationBarHeight + 160 - 64 + kNavigationBarHeight, SCREEN_WIDTH, SCREEN_HEIGHT - (160 - 64 + kNavigationBarHeight)) style:UITableViewStylePlain];
 
         _tableView.refreshDelegate = self;
         _tableView.backgroundColor = kBackgroundColor;
-        [self.view addSubview:_tableView];
+//        [self.view addSubview:_tableView];
 
-//        MoneyAndTreasureHeadView *headView = [[MoneyAndTreasureHeadView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 160 - 64 + kNavigationBarHeight)];
-//        self.tableView.tableHeaderView = headView;
+        
 
     }
     return _tableView;
 }
 
-#pragma mark - Init
-- (void)initPlaceHolderView {
-//    self.view.backgroundColor = kWhiteColor;
-//    UIView *topView = [[UIView alloc] init];
-//    [self.view addSubview:topView];
-//    topView.backgroundColor = kHexColor(@"#0848DF");
-//    
-//    [topView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.equalTo(self.view.mas_top);
-//        make.left.equalTo(self.view.mas_left);
-//        make.right.equalTo(self.view.mas_right);
-//        make.height.equalTo(@(kHeight(66)));
-//    }];
 
-    
-}
 
 
 -(void)refreshTableView:(TLTableView *)refreshTableview didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 1) {
+    if (indexPath.section == 0) {
         TLMoneyDeailVC *money = [TLMoneyDeailVC new];
         money.moneyModel = self.Moneys[indexPath.row];
         money.currencys = self.currencys;

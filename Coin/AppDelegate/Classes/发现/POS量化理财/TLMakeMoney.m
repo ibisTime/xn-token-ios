@@ -45,27 +45,25 @@ static NSString *identifierCell = @"MakeMoneyCell";
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 2;
+    return 1;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (section == 0) {
-        return 1;
-    }
+//    if (section == 0) {
+//        return 1;
+//    }
     return self.Moneys.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    if (indexPath.section == 0) {
-        MoneyAndTreasureHeadCell *cell = [tableView dequeueReusableCellWithIdentifier:MoneyAndTreasureHead forIndexPath:indexPath];
-        cell.dataDic = self.dataDic;
-        //    cell.backgroundColor = [UIColor redColor];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        return cell;
-    }
+//    if (indexPath.section == 0) {
+//        MoneyAndTreasureHeadCell *cell = [tableView dequeueReusableCellWithIdentifier:MoneyAndTreasureHead forIndexPath:indexPath];
+//        cell.dataDic = self.dataDic;
+//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//        return cell;
+//    }
     MakeMoneyCell *cell = [tableView dequeueReusableCellWithIdentifier:identifierCell forIndexPath:indexPath];
     cell.model = self.Moneys[indexPath.row];
-    //    cell.backgroundColor = [UIColor redColor];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 
@@ -74,9 +72,9 @@ static NSString *identifierCell = @"MakeMoneyCell";
 #pragma mark - UITableViewDelegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 0) {
-        return 160 - 64 + kNavigationBarHeight;
-    }
+//    if (indexPath.section == 0) {
+//        return 160 - 64 + kNavigationBarHeight;
+//    }
     return 155;
 }
 

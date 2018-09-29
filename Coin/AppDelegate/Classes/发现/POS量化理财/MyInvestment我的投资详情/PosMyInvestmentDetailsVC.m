@@ -58,13 +58,19 @@
     headView.backgroundColor = kHexColor(@"#0848DF");
     headView.dataDic = self.dataDic;
     [headView.earningsButton addTarget:self action:@selector(earningsButtonClick) forControlEvents:(UIControlEventTouchUpInside)];
+    [headView.backButton addTarget:self action:@selector(earningsButtonClick) forControlEvents:(UIControlEventTouchUpInside)];
     self.tableView.tableHeaderView = headView;
-    
     [self.view addSubview:self.tableView];
 
+    
 
+}
 
+- (void)click:(UITapGestureRecognizer *)gesture{
 
+//    NSLog(@"====%d",gesture.view.tag);//label的tag
+    AccumulatedEarningsVC *vc = [AccumulatedEarningsVC new];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 //累计收益

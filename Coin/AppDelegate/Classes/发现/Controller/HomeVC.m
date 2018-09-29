@@ -175,15 +175,15 @@
     [self initTableView];
     self.view.backgroundColor = kWhiteColor;
 
-    [self reloadFindData];
-    [CoinUtil refreshOpenCoinList:^{
-        //获取banner列表
-        [self requestBannerList];
-    } failure:^{
-        
-        [self.tableView endRefreshHeader];
-        
-    }];
+//    [self reloadFindData];
+//    [CoinUtil refreshOpenCoinList:^{
+//        //获取banner列表
+//        [self requestBannerList];
+//    } failure:^{
+//
+//        [self.tableView endRefreshHeader];
+//
+//    }];
 
 
 }
@@ -287,17 +287,22 @@
     self.tableView.backgroundColor = kWhiteColor;
     [self.view addSubview:self.tableView];
     self.tableView.tableHeaderView = self.headerView;
-    
+
+
     [self.tableView addRefreshAction:^{
-        
+
+
+
         [CoinUtil refreshOpenCoinList:^{
             //获取banner列表
             [weakSelf requestBannerList];
             [weakSelf reloadFindData];
+
         } failure:^{
             [weakSelf.tableView endRefreshHeader];
         }];
     }];
+    [weakSelf.tableView beginRefreshing];
     
 }
 
@@ -410,30 +415,7 @@
         case HomeEventsTypeStore:
         {
             RedEnvelopeVC *redEnvelopeVC = [RedEnvelopeVC new];
-            
-//            if ([[TLUser user].tradepwdFlag isEqualToString:@"0"]) {
-//                TLPwdType pwdType = TLPwdTypeSetTrade;
-//                TLPwdRelatedVC *pwdRelatedVC = [[TLPwdRelatedVC alloc] initWithType:pwdType];
-//
-//                pwdRelatedVC.isWallet = YES;
-//                pwdRelatedVC.success = ^{
-//
-//
-//                    [self presentViewController:redEnvelopeVC animated:YES completion:nil];
-                    [self.navigationController pushViewController:redEnvelopeVC animated:YES];
-
-//                };
-//                [self.navigationController pushViewController:pwdRelatedVC animated:YES];
-//
-//
-//            }else{
-//
-//                [self.navigationController pushViewController:redEnvelopeVC animated:YES];
-//
-//
-//            }
-
-            
+            [self.navigationController pushViewController:redEnvelopeVC animated:YES];
         }break;
             
         case HomeEventsTypeGoodMall:
@@ -476,7 +458,7 @@
 //    [TLProgressHUD show];
 
     TLNetworking *http = [TLNetworking new];
-    http.showView = self.view;
+//    http.showView = self.view;
     http.isUploadToken = NO;
     http.code = @"805806";
     http.parameters[@"location"] = @"app_home";
@@ -488,6 +470,7 @@
         
         //获取官方钱包总量，已空投量
 //        [self requestCountInfo];
+        [self.tableView endRefreshHeader];
 
     } failure:^(NSError *error) {
         
