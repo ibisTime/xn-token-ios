@@ -108,10 +108,14 @@
     }
 
     [self.numberLabel sizeToFit];
-    self.nameLabel.frame = CGRectMake(25, 102, self.numberLabel.frame.size.width, 12);
-    self.line.frame = CGRectMake(self.numberLabel.xx + 38, 75, 1, 39);
-    self.shareLabel.frame = CGRectMake(self.line.xx + 22, 77, SCREEN_WIDTH - self.line.xx - 22 -15, 12);
-    self.earningsLabel.frame =  CGRectMake(self.line.xx + 22, 101, SCREEN_WIDTH -self.line.xx - 22 - 15, 12);
+
+    self.nameLabel.frame = CGRectMake(25, 101, self.numberLabel.frame.size.width, 14);
+    self.nameLabel.numberOfLines = 2;
+    [self.nameLabel sizeToFit];
+
+    self.line.frame = CGRectMake(self.numberLabel.xx + 20, 75, 1, 39);
+    self.shareLabel.frame = CGRectMake(self.line.xx + 22, 76, SCREEN_WIDTH - self.line.xx - 22 -15, 14);
+    self.earningsLabel.frame =  CGRectMake(self.line.xx + 22, 100, SCREEN_WIDTH -self.line.xx - 22 - 15, 14);
 
 
     NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
@@ -130,6 +134,10 @@
     NSMutableAttributedString * attriStr1 = [[NSMutableAttributedString alloc] initWithString:earningsLabel2];
     [attriStr1 addAttribute:NSForegroundColorAttributeName value:kHexColor(@"#999999") range:NSMakeRange(0, earningsLabel1.length)];
     self.earningsLabel.attributedText = attriStr1;
+    self.earningsLabel.numberOfLines = 2;
+    [self.earningsLabel sizeToFit];
+
+    self.line.frame = CGRectMake(self.numberLabel.xx + 20, 75, 1, 39 - 12 + self.earningsLabel.frame.size.height);
 
 }
 

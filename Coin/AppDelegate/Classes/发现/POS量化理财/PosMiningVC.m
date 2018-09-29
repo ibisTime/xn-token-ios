@@ -110,7 +110,7 @@
     _RightButton.titleLabel.font = FONT(16);
     [_RightButton setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
     self.navigationItem.rightBarButtonItems = @[negativeSpacer, [[UIBarButtonItem alloc] initWithCustomView:self.RightButton]];
-    [_RightButton setTitle:@"我的投资" forState:(UIControlStateNormal)];
+    [_RightButton setTitle:[LangSwitcher switchLang:@"我的投资" key:nil] forState:(UIControlStateNormal)];
     [_RightButton addTarget:self action:@selector(myRecodeClick) forControlEvents:(UIControlEventTouchUpInside)];
 }
 

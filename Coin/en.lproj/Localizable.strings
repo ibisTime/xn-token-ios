@@ -829,6 +829,45 @@
 "微博" = "Weibo";
 "积分抽奖" = "Wheel of fortune using points";
 "选择币种" = "Please select coin type";
+"我的投资" = "My Investment";
+"币加宝" = "Quantitative Finance";
+"投资总额" = "Total amount of investment";
+"预期年化收益" = "Anticipated annualized return";
+"剩余额度：" = "Remaining quota：";
+"剩余额度" = "Remaining quota";
+"万" = "10k";
+"认购中" = "Subscribing";
+"产品封闭期" = "Product lock-up period";
+"我的投资详情" = "My Investment details";
+"累计收益" = "Accumulated income";
+"投资总资产" = "Total amount of investment";
+"已回款" = "Closed";
+"已持有" = "Holding";
+"已回款" = "Closed";
+"到期" = "Due";
+"持有份额" = "Holding share";
+"预计收益" = "Anticipated return";
+"投资账单" = "Investment Bill";
+"余额" = "Balance";
+"预期年化收益率" = "Anticipated annualized return";
+"认购期限" = "Subscription period";
+"起购额度" = "Amount of acquisition";
+"起购日" = "Subscribing day";
+"产品起息" = "Value date";
+"产品结期" = "Due date";
+"产品属性" = "Product details";
+"认购币种：" = "Subscription currency：";
+"收益方式：年化收益" = "Income method：Annualized return";
+"年化收益：" = "Annualized return：";
+"产品总额度：" = "Product amount：";
+"购买属性" = "Purchase details";
+"赎回属性" = "Redemption details";
+"说明书" = "Instructions";
+"我已经仔细阅读" = "I have read it carefully";
+"同意协议中的有关条款。充分了解银行和自身的权利和义务。" = "Agree to the relevant terms of the agreement. Fully understand the rights and obligations of banks and myself.";
+"购买份额" = "Purchase portion";
+"份" = "Portion";
+
 
 
 

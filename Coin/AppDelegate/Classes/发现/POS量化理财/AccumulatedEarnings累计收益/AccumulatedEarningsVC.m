@@ -47,6 +47,8 @@
 {
     PGDatePickManager *datePickManager = [[PGDatePickManager alloc]init];
     datePickManager.isShadeBackgroud = true;
+    datePickManager.cancelButtonText = @"";
+    datePickManager.confirmButtonText = [LangSwitcher switchLang:@"确认" key:nil];
     PGDatePicker *datePicker = datePickManager.datePicker;
     datePicker.delegate = self;
     datePicker.datePickerType = PGPickerViewType1;

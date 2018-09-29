@@ -41,16 +41,16 @@
     UILabel *label1 = [self viewWithTag:2000];
     UILabel *label2 = [self viewWithTag:2001];
     UILabel *label3 = [self viewWithTag:2002];
-    label1.text = [NSString stringWithFormat:@"认购币种：%@",moneyModel.symbol];
+    label1.text = [NSString stringWithFormat:@"%@%@",[LangSwitcher switchLang:@"认购币种：" key:nil],moneyModel.symbol];
 //    label2.text = [NSString stringWithFormat:@"认购币种：%@",moneyModel.symbol]
 
     NSString *amount = [CoinUtil convertToRealCoin:moneyModel.amount coin:moneyModel.symbol];
     if ([amount floatValue] > 10000) {
-        label3.text = [NSString stringWithFormat:@"产品总额度：%.2f万 %@",[amount floatValue]/10000,moneyModel.symbol];
+        label3.text = [NSString stringWithFormat:@"%@%.2f万 %@",[LangSwitcher switchLang:@"产品总额度：" key:nil],[amount floatValue]/10000,moneyModel.symbol];
     }
     else
     {
-        label3.text = [NSString stringWithFormat:@"产品总额度：%.2f %@",[amount floatValue],moneyModel.symbol];
+        label3.text = [NSString stringWithFormat:@"%@%.2f %@",[LangSwitcher switchLang:@"产品总额度：" key:nil],[amount floatValue],moneyModel.symbol];
     }
 
 }

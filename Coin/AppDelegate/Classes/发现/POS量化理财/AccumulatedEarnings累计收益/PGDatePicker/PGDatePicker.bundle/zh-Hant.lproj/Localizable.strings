@@ -5,9 +5,9 @@
   Copyright © 2017年 piggybear. All rights reserved.
 */
 
-"yearString" = "年";
-"monthString" = "月";
-"dayString" = "日";
+"yearString" = " ";
+"monthString" = " ";
+"dayString" = "";
 "hourString" = "時";
 "minuteString" = "分";
 "secondString" = "秒";
@@ -18,5 +18,5 @@
 "fridayString" = "周五";
 "saturdayString" = "周六";
 "sundayString" = "周日";
-"cancelButtonText" = "取消";
-"confirmButtonText" = "確定";
+"cancelButtonText" = "";
+"confirmButtonText" = "";

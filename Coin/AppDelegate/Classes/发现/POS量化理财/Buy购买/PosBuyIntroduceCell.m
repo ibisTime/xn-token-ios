@@ -37,7 +37,7 @@
         [self addSubview:lineView1];
 
         UILabel *titleLbl1 = [UILabel labelWithFrame:CGRectMake(25, 121, kScreenWidth - 40, 21) textAligment:(NSTextAlignmentLeft) backgroundColor:kClearColor font:HGboldfont(15) textColor:kHexColor(@"#464646")];
-        titleLbl1.text = @"购买份额";
+        titleLbl1.text = [LangSwitcher switchLang:@"购买份额" key:nil];
         [self addSubview:titleLbl1];
 
         UIButton *reductionBtn = [UIButton buttonWithTitle:@"-" titleColor:kHexColor(@"#464646") backgroundColor:kHexColor(@"#F9F9FC") titleFont:30];
@@ -144,7 +144,7 @@
     NSString *increAmount = [CoinUtil convertToRealCoin:moneyModel.increAmount coin:moneyModel.symbol];
 
     UILabel *label1 = [self viewWithTag:123];
-    label1.text = [NSString stringWithFormat:@"%@：%.0f份",[LangSwitcher switchLang:@"剩余额度：" key:nil],[avilAmount floatValue]/[increAmount floatValue]];
+    label1.text = [NSString stringWithFormat:@"%@：%.0f%@",[LangSwitcher switchLang:@"剩余额度" key:nil],[avilAmount floatValue]/[increAmount floatValue],[LangSwitcher switchLang:@"份" key:nil]];
     UILabel *label2 = [self viewWithTag:124];
     label2.text = [NSString stringWithFormat:@"%@：%.2f%%",[LangSwitcher switchLang:@"预期年化收益" key:nil],[moneyModel.expectYield floatValue]*100];
 
@@ -160,8 +160,8 @@
     self.mySlider.minimumValue = [dataDic[@"min"] floatValue];
     self.mySlider.maximumValue = [dataDic[@"max"] floatValue];
     //    份额
-    self.sinceLabel.text = [NSString stringWithFormat:@"%ld份",[dataDic[@"min"]  integerValue]];
-    self.finalLabel.text = [NSString stringWithFormat:@"%ld份",[dataDic[@"max"]  integerValue]];
+    self.sinceLabel.text = [NSString stringWithFormat:@"%ld%@",[dataDic[@"min"]  integerValue],[LangSwitcher switchLang:@"份" key:nil]];
+    self.finalLabel.text = [NSString stringWithFormat:@"%ld%@",[dataDic[@"max"]  integerValue],[LangSwitcher switchLang:@"份" key:nil]];
     self.numberLabel.text = [NSString stringWithFormat:@"%ld",[dataDic[@"min"]  integerValue]];
 
     [self.sinceLabel sizeToFit];

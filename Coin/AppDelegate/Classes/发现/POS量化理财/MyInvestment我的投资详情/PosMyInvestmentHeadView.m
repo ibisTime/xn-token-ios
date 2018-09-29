@@ -25,7 +25,7 @@
         self.backButton.frame = CGRectMake(SCREEN_WIDTH/2, 0, SCREEN_WIDTH/2, 160 - 64);
         [self addSubview:self.backButton];
 
-        NSArray *priceArray = @[@"99.900(BTC)",@"900.00(BTC)"];
+//        NSArray *priceArray = @[@"99.900(BTC)",@"900.00(BTC)"];
         for (int i = 0; i < 2; i ++) {
             UILabel *peiceLabel = [UILabel labelWithFrame:CGRectMake(0 + i %2 * SCREEN_WIDTH/2,  47, SCREEN_WIDTH/2, 30) textAligment:(NSTextAlignmentLeft) backgroundColor:kClearColor font:FONT(30) textColor:kWhiteColor];
 
@@ -89,7 +89,7 @@
     }
 
 
-    self.nameLabel.frame = CGRectMake(label1.frame.origin.x, 15 , label1.frame.size.width, 18);
+    self.nameLabel.frame = CGRectMake(label1.frame.origin.x, 15 , SCREEN_WIDTH/2 - label1.frame.origin.x - 10, 18);
 
 
 
@@ -113,8 +113,8 @@
     }
 
 
-    self.earningsButton.frame = CGRectMake(label2.frame.origin.x, 15 , label2.frame.size.width, 18);
-    [self.earningsButton SG_imagePositionStyle:(SGImagePositionStyleRight) spacing:2 imagePositionBlock:^(UIButton *button) {
+    self.earningsButton.frame = CGRectMake(label2.frame.origin.x, 15 , SCREEN_WIDTH - label2.frame.origin.x - 10, 18);
+    [self.earningsButton SG_imagePositionStyle:(SGImagePositionStyleRight) spacing:4 imagePositionBlock:^(UIButton *button) {
         [button setImage:kImage(@"更多白色") forState:(UIControlStateNormal)];
     }];
 

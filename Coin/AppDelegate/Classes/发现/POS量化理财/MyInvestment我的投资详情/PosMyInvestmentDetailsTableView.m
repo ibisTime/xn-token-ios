@@ -13,6 +13,7 @@
 @interface PosMyInvestmentDetailsTableView()<UITableViewDelegate, UITableViewDataSource>{
     NSInteger select;
     NSMutableArray *selectArray;
+    PosMyInvestmentDetailsCell *cell;
 }
 
 @end
@@ -59,7 +60,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
 
-    PosMyInvestmentDetailsCell *cell = [tableView dequeueReusableCellWithIdentifier:PosMyInvestmentDetails forIndexPath:indexPath];
+    cell = [tableView dequeueReusableCellWithIdentifier:PosMyInvestmentDetails forIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     if (self.model.count > 0) {
         cell.model = self.model[indexPath.row];
@@ -74,7 +75,7 @@
 #pragma mark - UITableViewDelegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 138;
+    return cell.earningsLabel.yy + 15;
 
 }
 

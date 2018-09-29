@@ -74,7 +74,7 @@
         numberLabel.tag = 1000 + i;
         [self addSubview:numberLabel];
 
-        UILabel *contactLabel = [UILabel labelWithFrame:CGRectMake(10 + i %3 *kScreenWidth/3, 110, kScreenWidth/3 - 20, 12) textAligment:(NSTextAlignmentCenter) backgroundColor:kClearColor font:Font(12) textColor:kHexColor(@"#999999")];
+        UILabel *contactLabel = [UILabel labelWithFrame:CGRectMake(10 + i %3 *kScreenWidth/3, 112, kScreenWidth/3 - 20, 13) textAligment:(NSTextAlignmentCenter) backgroundColor:kClearColor font:Font(12) textColor:kHexColor(@"#999999")];
         NSArray *textArray = @[@"预期年化收益",@"产品期限",@"剩余额度"];
         contactLabel.text = [LangSwitcher switchLang:textArray[i] key:nil];
         [self addSubview:contactLabel];

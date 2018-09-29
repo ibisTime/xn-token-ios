@@ -85,10 +85,9 @@ static NSString *identifierCell = @"AccumulatedEarningsCell";
 
     if (![self.date isEqualToString:@""]) {
         UILabel *titleLbl = [UILabel labelWithFrame:CGRectMake(15, 0, SCREEN_WIDTH - 30, 40) textAligment:(NSTextAlignmentLeft) backgroundColor:kClearColor font:Font(12) textColor:kHexColor(@"#999999")];
-        titleLbl.text = [NSString stringWithFormat:@"%@账单",self.date];
+        titleLbl.text = [NSString stringWithFormat:@"%@%@",self.date,[LangSwitcher switchLang:@"账单" key:nil]];
         [view addSubview:titleLbl];
     }
-
     return view;
 }
 

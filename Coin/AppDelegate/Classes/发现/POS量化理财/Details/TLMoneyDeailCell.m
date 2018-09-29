@@ -28,7 +28,7 @@
             numberLabel.tag = 222 + i;
             [self addSubview:numberLabel];
 
-            UILabel *nameLabel = [UILabel labelWithFrame:CGRectMake(10 + i % 3 *kScreenWidth/3, 46, kScreenWidth/3 - 20, 12) textAligment:(NSTextAlignmentCenter) backgroundColor:kClearColor font:HGboldfont(12) textColor:kHexColor(@"#666666")];
+            UILabel *nameLabel = [UILabel labelWithFrame:CGRectMake(10 + i % 3 *kScreenWidth/3, 46, kScreenWidth/3 - 20, 13) textAligment:(NSTextAlignmentCenter) backgroundColor:kClearColor font:HGboldfont(12) textColor:kHexColor(@"#666666")];
             nameLabel.text = [LangSwitcher switchLang:nameArray[i] key:nil];
             nameLabel.tag = 333 + i;
             [self addSubview:nameLabel];

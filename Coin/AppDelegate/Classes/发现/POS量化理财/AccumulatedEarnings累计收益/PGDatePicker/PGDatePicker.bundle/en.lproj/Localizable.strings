@@ -5,18 +5,18 @@
  Copyright © 2017年 piggybear. All rights reserved.
  */
 
-"yearString" = " Y";
-"monthString" = " M";
-"dayString" = " D";
-"hourString" = " H";
-"minuteString" = " M";
-"secondString" = " S";
-"mondayString" = " Mon";
-"tuesdayString" = " Tue";
-"wednesdayString" = " Wed";
-"thursdayString" = " Thur";
-"fridayString" = " Fri";
-"saturdayString" = " Sat";
-"sundayString" = " Sun";
-"cancelButtonText" = "Cancel";
-"confirmButtonText" = "Sure";
+"yearString" = " ";
+"monthString" = " ";
+"dayString" = " ";
+"hourString" = " ";
+"minuteString" = " ";
+"secondString" = " ";
+"mondayString" = " ";
+"tuesdayString" = " ";
+"wednesdayString" = " ";
+"thursdayString" = " ";
+"fridayString" = " ";
+"saturdayString" = " ";
+"sundayString" = " ";
+"cancelButtonText" = "";
+"confirmButtonText" = "";
