@@ -87,9 +87,34 @@
 }
 
 
+-(void)LoadData
+{
+    TLNetworking *http = [[TLNetworking alloc] init];
+    http.showView = self.view;
+    http.code = @"625514";
+    http.parameters[@"code"] = self.moneyModel.code;
+    http.parameters[@"userId"] = [TLUser user].userId;
+    [http postWithSuccess:^(id responseObject) {
 
+        self.tableView.moneyModel = [TLtakeMoneyModel mj_objectWithKeyValues:responseObject[@"data"]];
+        self.moneyModel = [TLtakeMoneyModel mj_objectWithKeyValues:responseObject[@"data"]];
+        [self.tableView reloadData];
+
+    } failure:^(NSError *error) {
+
+    }];
+}
+
+
+//购买
 -(void)continBtnClick
 {
+    NSString *avilAmount = [CoinUtil convertToRealCoin:self.moneyModel.avilAmount coin:self.moneyModel.symbol];
+    NSString *increAmount = [CoinUtil convertToRealCoin:self.moneyModel.increAmount coin:self.moneyModel.symbol];
+    if ([avilAmount floatValue] / [increAmount floatValue] < 1 || [avilAmount floatValue] == 0 || [increAmount floatValue] == 0) {
+        [TLAlert alertWithInfo:@"已售罄"];
+        return;
+    }
     PosBuyVC *vc= [PosBuyVC new];
     vc.moneyModel = self.moneyModel;
     [self.navigationController pushViewController:vc animated:YES];
@@ -131,55 +156,12 @@
     [continBtn addTarget:self action:@selector(continBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
     [self.view addSubview:continBtn];
 
+    [self LoadData];
 
-    
-
-//    [self initCustomView];
-//    [self LoadData];
-//    self.tit.model = self.moneyModel;
-//
-//    self.pronameDetail.text = self.moneyModel.name;
-//
-//    self.symblename.text = self.moneyModel.symbol;
-//    self.backdetailLab.text = [LangSwitcher switchLang:@"期满自动转入个人账户" key:nil];
-//    AssetPwdView *pwdView =[[AssetPwdView alloc] init];
-//    pwdView.isPay = YES;
-//    self.pwdView = pwdView;
-//    pwdView.HiddenBlock = ^{
-//        self.pwdView.hidden = YES;
-//        [self.pwdView endEditing:YES];
-//        [self.view endEditing:YES];
-//        //        [self.pwdView removeFromSuperview];
-//    };
-//    CoinWeakSelf;
-//    self.pwdView.forgetBlock = ^{
-//        weakSelf.pwdView.hidden = YES;
-//        weakSelf.view2.hidden = YES;
-//        TLPwdRelatedVC *vc  = [[TLPwdRelatedVC alloc] initWithType:TLPwdTypeTradeReset];
-//        [weakSelf.navigationController pushViewController:vc animated:YES];
-//        vc.success = ^{
-//            weakSelf.pwdView.hidden = NO;
-//            weakSelf.view2.hidden = NO;
-//        };
-//
-//    };
-//    pwdView.hidden = YES;
-//    pwdView.frame = self.view.bounds;
-//
-//    UIWindow *keyWindow = [[[UIApplication sharedApplication] delegate] window];
-//    [keyWindow addSubview:pwdView];
-//
-    
-//
-//
     
 }
 
 
--(void)LoadData
-{
-
-}
 
 
 

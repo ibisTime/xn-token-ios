@@ -365,4 +365,17 @@ NSString *const kGoogleAuthClose = @"0";
     
 }
 
++ (BOOL) isBlankString:(NSString *)string {
+    if (string == nil || string == NULL)
+    {
+        return YES;
+    }
+    if ([string isKindOfClass:[NSNull class]])
+    {
+        return YES;
+    }
+
+    return NO;
+}
+
 @end

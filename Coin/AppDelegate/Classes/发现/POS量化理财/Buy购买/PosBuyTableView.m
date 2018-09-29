@@ -58,13 +58,21 @@
         [cell.intoButton addTarget:self action:@selector(intoButtonClick:) forControlEvents:(UIControlEventTouchUpInside)];
         cell.intoButton.tag = 502;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.currencys = self.currencys;
+        if ([TLUser isBlankString:self.currencys.currency] == NO) {
+            cell.currencys = self.currencys;
+        }
+
         return cell;
     }
     PosBuyIntroduceCell *cell = [tableView dequeueReusableCellWithIdentifier:PosBuyIntroduce forIndexPath:indexPath];
     cell.delegate = self;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.moneyModel = self.moneyModel;
+    if ([TLUser isBlankString:self.dataDic[@"code"]] == NO) {
+        cell.dataDic = self.dataDic;
+    }
+
+
     return cell;
 
 }

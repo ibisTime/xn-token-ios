@@ -12,4 +12,6 @@
 @interface MakeMoneyCell : UITableViewCell
 @property (nonatomic,strong) TLtakeMoneyModel *model;
 
+
+
 @end

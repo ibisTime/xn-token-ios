@@ -79,7 +79,7 @@
     if (indexPath.section == 0) {
         TLMoneyDeailCell *cell = [tableView dequeueReusableCellWithIdentifier:TLMoneyDeail forIndexPath:indexPath];
 
-            cell.moneyModel = self.moneyModel;
+        cell.moneyModel = self.moneyModel;
 
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
@@ -93,11 +93,7 @@
         return cell;
     }
 
-//    static NSString *identifier = @"webCell";
-//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-//    if (!cell){
-//        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
-//    }
+
 
     NSString *CellIdentifier = [NSString stringWithFormat:@"cell%ld%ld",indexPath.section,indexPath.row];
         // 通过不同标识创建cell实例
@@ -112,7 +108,64 @@
          self.web.dataDetectorTypes=UIDataDetectorTypeNone;
          [self.web.scrollView addObserver:self forKeyPath:@"contentSize" options:NSKeyValueObservingOptionNew context:nil];
          [cell addSubview:self.web];
-         [self.web loadHTMLString:self.moneyModel.Description baseURL:nil];
+
+         if (indexPath.section == 2) {
+             switch ([LangSwitcher currentLangType]) {
+                 case LangTypeEnglish:
+                     [self.web loadHTMLString:self.moneyModel.buyDescEn baseURL:nil];
+
+                     break;
+                 case LangTypeKorean:
+                     [self.web loadHTMLString:self.moneyModel.buyDescKo baseURL:nil];
+
+                     break;
+                 case LangTypeSimple:
+                     [self.web loadHTMLString:self.moneyModel.buyDescZhCn baseURL:nil];
+
+                     break;
+
+                 default:
+                     break;
+             }
+         }
+         if (indexPath.section == 3) {
+             switch ([LangSwitcher currentLangType]) {
+                 case LangTypeEnglish:
+                     [self.web loadHTMLString:self.moneyModel.redeemDescEn baseURL:nil];
+
+                     break;
+                 case LangTypeKorean:
+                     [self.web loadHTMLString:self.moneyModel.redeemDescKo baseURL:nil];
+
+                     break;
+                 case LangTypeSimple:
+                     [self.web loadHTMLString:self.moneyModel.redeemDescZhCn baseURL:nil];
+
+                     break;
+
+                 default:
+                     break;
+             }
+         }
+         if (indexPath.section == 4) {
+             switch ([LangSwitcher currentLangType]) {
+                 case LangTypeEnglish:
+                     [self.web loadHTMLString:self.moneyModel.directionsEn baseURL:nil];
+
+                     break;
+                 case LangTypeKorean:
+                     [self.web loadHTMLString:self.moneyModel.directionsKo baseURL:nil];
+
+                     break;
+                 case LangTypeSimple:
+                     [self.web loadHTMLString:self.moneyModel.directionsZhCn baseURL:nil];
+
+                     break;
+
+                 default:
+                     break;
+             }
+         }
      }
 
     return cell;
@@ -127,9 +180,6 @@
         webViewHeight = [[self.web stringByEvaluatingJavaScriptFromString:@"document.body.scrollHeight"] floatValue];
         self.web.frame = CGRectMake(0, 0, SCREEN_WIDTH, webViewHeight);
         [self reloadData];
-//        NSIndexPath *indexPath=[NSIndexPath indexPathForRow:0 inSection:self.selectSxtion];
-//        [self reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationNone];
-
     }
 }
 

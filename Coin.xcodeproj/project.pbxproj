@@ -190,7 +190,6 @@
 		7A272662212BFFA70067E3CD /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A27265C212BFFA70067E3CD /* libWeChatSDK.a */; };
 		7A272663212BFFA70067E3CD /* read_me.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7A27265D212BFFA70067E3CD /* read_me.txt */; };
 		7A272664212BFFA70067E3CD /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7A27265E212BFFA70067E3CD /* README.txt */; };
-		7A2CC643215B5ADC00B27E2D /* MoneyAndTreasureHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC642215B5ADC00B27E2D /* MoneyAndTreasureHeadView.m */; };
 		7A2CC647215B746E00B27E2D /* TLMoneyDetailsTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC646215B746E00B27E2D /* TLMoneyDetailsTableView.m */; };
 		7A2CC64A215B74BB00B27E2D /* TLMoneyDetailsHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC649215B74BB00B27E2D /* TLMoneyDetailsHeadView.m */; };
 		7A2CC64D215B772C00B27E2D /* TLMoneyDeailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC64C215B772C00B27E2D /* TLMoneyDeailCell.m */; };
@@ -207,6 +206,39 @@
 		7A2CC674215CAECF00B27E2D /* AccumulatedEarningsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC673215CAECF00B27E2D /* AccumulatedEarningsVC.m */; };
 		7A2CC677215CD41100B27E2D /* AccumulatedEarningsTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC676215CD41100B27E2D /* AccumulatedEarningsTableView.m */; };
 		7A2CC67A215CD45300B27E2D /* AccumulatedEarningsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC679215CD45300B27E2D /* AccumulatedEarningsCell.m */; };
+		7A2CC6AF215DC88B00B27E2D /* NSBundle+PGDatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC67D215DC88B00B27E2D /* NSBundle+PGDatePicker.m */; };
+		7A2CC6B0215DC88B00B27E2D /* NSCalendar+PGCurrent.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC67F215DC88B00B27E2D /* NSCalendar+PGCurrent.m */; };
+		7A2CC6B1215DC88B00B27E2D /* NSDate+PGCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC681215DC88B00B27E2D /* NSDate+PGCategory.m */; };
+		7A2CC6B2215DC88B00B27E2D /* PGDatePicker+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC683215DC88B00B27E2D /* PGDatePicker+Common.m */; };
+		7A2CC6B3215DC88B00B27E2D /* PGDatePicker+Date.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC685215DC88B00B27E2D /* PGDatePicker+Date.m */; };
+		7A2CC6B4215DC88B00B27E2D /* PGDatePicker+DateAndTime.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC687215DC88B00B27E2D /* PGDatePicker+DateAndTime.m */; };
+		7A2CC6B5215DC88B00B27E2D /* PGDatePicker+DateHour.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC689215DC88B00B27E2D /* PGDatePicker+DateHour.m */; };
+		7A2CC6B6215DC88B00B27E2D /* PGDatePicker+DateHourMinute.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC68B215DC88B00B27E2D /* PGDatePicker+DateHourMinute.m */; };
+		7A2CC6B7215DC88C00B27E2D /* PGDatePicker+DateHourMinuteSecond.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC68D215DC88B00B27E2D /* PGDatePicker+DateHourMinuteSecond.m */; };
+		7A2CC6B8215DC88C00B27E2D /* PGDatePicker+Logic.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC68F215DC88B00B27E2D /* PGDatePicker+Logic.m */; };
+		7A2CC6B9215DC88C00B27E2D /* PGDatePicker+MinuteAndSecond.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC691215DC88B00B27E2D /* PGDatePicker+MinuteAndSecond.m */; };
+		7A2CC6BA215DC88C00B27E2D /* PGDatePicker+MonthDay.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC693215DC88B00B27E2D /* PGDatePicker+MonthDay.m */; };
+		7A2CC6BB215DC88C00B27E2D /* PGDatePicker+MonthDayHour.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC695215DC88B00B27E2D /* PGDatePicker+MonthDayHour.m */; };
+		7A2CC6BC215DC88C00B27E2D /* PGDatePicker+MonthDayHourMinute.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC697215DC88B00B27E2D /* PGDatePicker+MonthDayHourMinute.m */; };
+		7A2CC6BD215DC88C00B27E2D /* PGDatePicker+MonthDayHourMinuteSecond.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC699215DC88B00B27E2D /* PGDatePicker+MonthDayHourMinuteSecond.m */; };
+		7A2CC6BE215DC88C00B27E2D /* PGDatePicker+Time.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC69B215DC88B00B27E2D /* PGDatePicker+Time.m */; };
+		7A2CC6BF215DC88C00B27E2D /* PGDatePicker+TimeAndSecond.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC69D215DC88B00B27E2D /* PGDatePicker+TimeAndSecond.m */; };
+		7A2CC6C0215DC88C00B27E2D /* PGDatePicker+Year.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC69F215DC88B00B27E2D /* PGDatePicker+Year.m */; };
+		7A2CC6C1215DC88C00B27E2D /* PGDatePicker+YearAndMonth.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC6A1215DC88B00B27E2D /* PGDatePicker+YearAndMonth.m */; };
+		7A2CC6C2215DC88C00B27E2D /* PGDatePicker.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7A2CC6A2215DC88B00B27E2D /* PGDatePicker.bundle */; };
+		7A2CC6C3215DC88C00B27E2D /* PGDatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC6A4215DC88B00B27E2D /* PGDatePicker.m */; };
+		7A2CC6C4215DC88C00B27E2D /* PGDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC6A7215DC88B00B27E2D /* PGDatePickerView.m */; };
+		7A2CC6C5215DC88C00B27E2D /* PGDatePickManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC6A9215DC88B00B27E2D /* PGDatePickManager.m */; };
+		7A2CC6C6215DC88C00B27E2D /* PGDatePickManagerHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC6AB215DC88B00B27E2D /* PGDatePickManagerHeaderView.m */; };
+		7A2CC6C7215DC88C00B27E2D /* UIColor+PGHex.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC6AE215DC88B00B27E2D /* UIColor+PGHex.m */; };
+		7A2CC6D4215DC89200B27E2D /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 7A2CC6C9215DC89200B27E2D /* LICENSE */; };
+		7A2CC6D5215DC89200B27E2D /* PGPickerColumnCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC6CC215DC89200B27E2D /* PGPickerColumnCell.m */; };
+		7A2CC6D6215DC89200B27E2D /* PGPickerColumnView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC6CE215DC89200B27E2D /* PGPickerColumnView.m */; };
+		7A2CC6D7215DC89200B27E2D /* PGPickerTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC6D0215DC89200B27E2D /* PGPickerTableView.m */; };
+		7A2CC6D8215DC89200B27E2D /* PGPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC6D2215DC89200B27E2D /* PGPickerView.m */; };
+		7A2CC6D9215DC89200B27E2D /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 7A2CC6D3215DC89200B27E2D /* README.md */; };
+		7A2CC6DC215E002800B27E2D /* MoneyAndTreasureHeadCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC6DB215E002800B27E2D /* MoneyAndTreasureHeadCell.m */; };
+		7A2CC6DF215E2B1500B27E2D /* AccumulatedEarningsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC6DE215E2B1500B27E2D /* AccumulatedEarningsModel.m */; };
 		7A3821BD20EABD1300D6B636 /* GetTheTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A3821BC20EABD1300D6B636 /* GetTheTableView.m */; };
 		7A3821C020EACD8B00D6B636 /* SendTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A3821BF20EACD8B00D6B636 /* SendTableView.m */; };
 		7A3821C320EACDA100D6B636 /* SendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A3821C220EACDA100D6B636 /* SendCell.m */; };
@@ -847,8 +879,6 @@
 		7A27265F212BFFA70067E3CD /* WechatAuthSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WechatAuthSDK.h; sourceTree = "<group>"; };
 		7A272660212BFFA70067E3CD /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
 		7A272661212BFFA70067E3CD /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
-		7A2CC641215B5ADC00B27E2D /* MoneyAndTreasureHeadView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MoneyAndTreasureHeadView.h; sourceTree = "<group>"; };
-		7A2CC642215B5ADC00B27E2D /* MoneyAndTreasureHeadView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MoneyAndTreasureHeadView.m; sourceTree = "<group>"; };
 		7A2CC645215B746E00B27E2D /* TLMoneyDetailsTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLMoneyDetailsTableView.h; sourceTree = "<group>"; };
 		7A2CC646215B746E00B27E2D /* TLMoneyDetailsTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLMoneyDetailsTableView.m; sourceTree = "<group>"; };
 		7A2CC648215B74BB00B27E2D /* TLMoneyDetailsHeadView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLMoneyDetailsHeadView.h; sourceTree = "<group>"; };
@@ -881,6 +911,71 @@
 		7A2CC676215CD41100B27E2D /* AccumulatedEarningsTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AccumulatedEarningsTableView.m; sourceTree = "<group>"; };
 		7A2CC678215CD45300B27E2D /* AccumulatedEarningsCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AccumulatedEarningsCell.h; sourceTree = "<group>"; };
 		7A2CC679215CD45300B27E2D /* AccumulatedEarningsCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AccumulatedEarningsCell.m; sourceTree = "<group>"; };
+		7A2CC67C215DC88B00B27E2D /* NSBundle+PGDatePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSBundle+PGDatePicker.h"; sourceTree = "<group>"; };
+		7A2CC67D215DC88B00B27E2D /* NSBundle+PGDatePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSBundle+PGDatePicker.m"; sourceTree = "<group>"; };
+		7A2CC67E215DC88B00B27E2D /* NSCalendar+PGCurrent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSCalendar+PGCurrent.h"; sourceTree = "<group>"; };
+		7A2CC67F215DC88B00B27E2D /* NSCalendar+PGCurrent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSCalendar+PGCurrent.m"; sourceTree = "<group>"; };
+		7A2CC680215DC88B00B27E2D /* NSDate+PGCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+PGCategory.h"; sourceTree = "<group>"; };
+		7A2CC681215DC88B00B27E2D /* NSDate+PGCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+PGCategory.m"; sourceTree = "<group>"; };
+		7A2CC682215DC88B00B27E2D /* PGDatePicker+Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PGDatePicker+Common.h"; sourceTree = "<group>"; };
+		7A2CC683215DC88B00B27E2D /* PGDatePicker+Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PGDatePicker+Common.m"; sourceTree = "<group>"; };
+		7A2CC684215DC88B00B27E2D /* PGDatePicker+Date.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PGDatePicker+Date.h"; sourceTree = "<group>"; };
+		7A2CC685215DC88B00B27E2D /* PGDatePicker+Date.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PGDatePicker+Date.m"; sourceTree = "<group>"; };
+		7A2CC686215DC88B00B27E2D /* PGDatePicker+DateAndTime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PGDatePicker+DateAndTime.h"; sourceTree = "<group>"; };
+		7A2CC687215DC88B00B27E2D /* PGDatePicker+DateAndTime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PGDatePicker+DateAndTime.m"; sourceTree = "<group>"; };
+		7A2CC688215DC88B00B27E2D /* PGDatePicker+DateHour.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PGDatePicker+DateHour.h"; sourceTree = "<group>"; };
+		7A2CC689215DC88B00B27E2D /* PGDatePicker+DateHour.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PGDatePicker+DateHour.m"; sourceTree = "<group>"; };
+		7A2CC68A215DC88B00B27E2D /* PGDatePicker+DateHourMinute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PGDatePicker+DateHourMinute.h"; sourceTree = "<group>"; };
+		7A2CC68B215DC88B00B27E2D /* PGDatePicker+DateHourMinute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PGDatePicker+DateHourMinute.m"; sourceTree = "<group>"; };
+		7A2CC68C215DC88B00B27E2D /* PGDatePicker+DateHourMinuteSecond.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PGDatePicker+DateHourMinuteSecond.h"; sourceTree = "<group>"; };
+		7A2CC68D215DC88B00B27E2D /* PGDatePicker+DateHourMinuteSecond.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PGDatePicker+DateHourMinuteSecond.m"; sourceTree = "<group>"; };
+		7A2CC68E215DC88B00B27E2D /* PGDatePicker+Logic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PGDatePicker+Logic.h"; sourceTree = "<group>"; };
+		7A2CC68F215DC88B00B27E2D /* PGDatePicker+Logic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PGDatePicker+Logic.m"; sourceTree = "<group>"; };
+		7A2CC690215DC88B00B27E2D /* PGDatePicker+MinuteAndSecond.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PGDatePicker+MinuteAndSecond.h"; sourceTree = "<group>"; };
+		7A2CC691215DC88B00B27E2D /* PGDatePicker+MinuteAndSecond.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PGDatePicker+MinuteAndSecond.m"; sourceTree = "<group>"; };
+		7A2CC692215DC88B00B27E2D /* PGDatePicker+MonthDay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PGDatePicker+MonthDay.h"; sourceTree = "<group>"; };
+		7A2CC693215DC88B00B27E2D /* PGDatePicker+MonthDay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PGDatePicker+MonthDay.m"; sourceTree = "<group>"; };
+		7A2CC694215DC88B00B27E2D /* PGDatePicker+MonthDayHour.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PGDatePicker+MonthDayHour.h"; sourceTree = "<group>"; };
+		7A2CC695215DC88B00B27E2D /* PGDatePicker+MonthDayHour.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PGDatePicker+MonthDayHour.m"; sourceTree = "<group>"; };
+		7A2CC696215DC88B00B27E2D /* PGDatePicker+MonthDayHourMinute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PGDatePicker+MonthDayHourMinute.h"; sourceTree = "<group>"; };
+		7A2CC697215DC88B00B27E2D /* PGDatePicker+MonthDayHourMinute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PGDatePicker+MonthDayHourMinute.m"; sourceTree = "<group>"; };
+		7A2CC698215DC88B00B27E2D /* PGDatePicker+MonthDayHourMinuteSecond.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PGDatePicker+MonthDayHourMinuteSecond.h"; sourceTree = "<group>"; };
+		7A2CC699215DC88B00B27E2D /* PGDatePicker+MonthDayHourMinuteSecond.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PGDatePicker+MonthDayHourMinuteSecond.m"; sourceTree = "<group>"; };
+		7A2CC69A215DC88B00B27E2D /* PGDatePicker+Time.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PGDatePicker+Time.h"; sourceTree = "<group>"; };
+		7A2CC69B215DC88B00B27E2D /* PGDatePicker+Time.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PGDatePicker+Time.m"; sourceTree = "<group>"; };
+		7A2CC69C215DC88B00B27E2D /* PGDatePicker+TimeAndSecond.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PGDatePicker+TimeAndSecond.h"; sourceTree = "<group>"; };
+		7A2CC69D215DC88B00B27E2D /* PGDatePicker+TimeAndSecond.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PGDatePicker+TimeAndSecond.m"; sourceTree = "<group>"; };
+		7A2CC69E215DC88B00B27E2D /* PGDatePicker+Year.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PGDatePicker+Year.h"; sourceTree = "<group>"; };
+		7A2CC69F215DC88B00B27E2D /* PGDatePicker+Year.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PGDatePicker+Year.m"; sourceTree = "<group>"; };
+		7A2CC6A0215DC88B00B27E2D /* PGDatePicker+YearAndMonth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PGDatePicker+YearAndMonth.h"; sourceTree = "<group>"; };
+		7A2CC6A1215DC88B00B27E2D /* PGDatePicker+YearAndMonth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PGDatePicker+YearAndMonth.m"; sourceTree = "<group>"; };
+		7A2CC6A2215DC88B00B27E2D /* PGDatePicker.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = PGDatePicker.bundle; sourceTree = "<group>"; };
+		7A2CC6A3215DC88B00B27E2D /* PGDatePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGDatePicker.h; sourceTree = "<group>"; };
+		7A2CC6A4215DC88B00B27E2D /* PGDatePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PGDatePicker.m; sourceTree = "<group>"; };
+		7A2CC6A5215DC88B00B27E2D /* PGDatePickerHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGDatePickerHeader.h; sourceTree = "<group>"; };
+		7A2CC6A6215DC88B00B27E2D /* PGDatePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGDatePickerView.h; sourceTree = "<group>"; };
+		7A2CC6A7215DC88B00B27E2D /* PGDatePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PGDatePickerView.m; sourceTree = "<group>"; };
+		7A2CC6A8215DC88B00B27E2D /* PGDatePickManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGDatePickManager.h; sourceTree = "<group>"; };
+		7A2CC6A9215DC88B00B27E2D /* PGDatePickManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PGDatePickManager.m; sourceTree = "<group>"; };
+		7A2CC6AA215DC88B00B27E2D /* PGDatePickManagerHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGDatePickManagerHeaderView.h; sourceTree = "<group>"; };
+		7A2CC6AB215DC88B00B27E2D /* PGDatePickManagerHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PGDatePickManagerHeaderView.m; sourceTree = "<group>"; };
+		7A2CC6AC215DC88B00B27E2D /* PGEnumeration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGEnumeration.h; sourceTree = "<group>"; };
+		7A2CC6AD215DC88B00B27E2D /* UIColor+PGHex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+PGHex.h"; sourceTree = "<group>"; };
+		7A2CC6AE215DC88B00B27E2D /* UIColor+PGHex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+PGHex.m"; sourceTree = "<group>"; };
+		7A2CC6C9215DC89200B27E2D /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		7A2CC6CB215DC89200B27E2D /* PGPickerColumnCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGPickerColumnCell.h; sourceTree = "<group>"; };
+		7A2CC6CC215DC89200B27E2D /* PGPickerColumnCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PGPickerColumnCell.m; sourceTree = "<group>"; };
+		7A2CC6CD215DC89200B27E2D /* PGPickerColumnView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGPickerColumnView.h; sourceTree = "<group>"; };
+		7A2CC6CE215DC89200B27E2D /* PGPickerColumnView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PGPickerColumnView.m; sourceTree = "<group>"; };
+		7A2CC6CF215DC89200B27E2D /* PGPickerTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGPickerTableView.h; sourceTree = "<group>"; };
+		7A2CC6D0215DC89200B27E2D /* PGPickerTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PGPickerTableView.m; sourceTree = "<group>"; };
+		7A2CC6D1215DC89200B27E2D /* PGPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGPickerView.h; sourceTree = "<group>"; };
+		7A2CC6D2215DC89200B27E2D /* PGPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PGPickerView.m; sourceTree = "<group>"; };
+		7A2CC6D3215DC89200B27E2D /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		7A2CC6DA215E002800B27E2D /* MoneyAndTreasureHeadCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MoneyAndTreasureHeadCell.h; sourceTree = "<group>"; };
+		7A2CC6DB215E002800B27E2D /* MoneyAndTreasureHeadCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MoneyAndTreasureHeadCell.m; sourceTree = "<group>"; };
+		7A2CC6DD215E2B1500B27E2D /* AccumulatedEarningsModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AccumulatedEarningsModel.h; sourceTree = "<group>"; };
+		7A2CC6DE215E2B1500B27E2D /* AccumulatedEarningsModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AccumulatedEarningsModel.m; sourceTree = "<group>"; };
 		7A3821BB20EABD1300D6B636 /* GetTheTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GetTheTableView.h; sourceTree = "<group>"; };
 		7A3821BC20EABD1300D6B636 /* GetTheTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GetTheTableView.m; sourceTree = "<group>"; };
 		7A3821BE20EACD8B00D6B636 /* SendTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SendTableView.h; sourceTree = "<group>"; };
@@ -2459,8 +2554,8 @@
 				216F5B59206D02DC00F2C832 /* PosMiningVC.m */,
 				B8DDF880211D29EE0058D19D /* TLMakeMoney.h */,
 				B8DDF881211D29EE0058D19D /* TLMakeMoney.m */,
-				7A2CC641215B5ADC00B27E2D /* MoneyAndTreasureHeadView.h */,
-				7A2CC642215B5ADC00B27E2D /* MoneyAndTreasureHeadView.m */,
+				7A2CC6DA215E002800B27E2D /* MoneyAndTreasureHeadCell.h */,
+				7A2CC6DB215E002800B27E2D /* MoneyAndTreasureHeadCell.m */,
 				B8DDF883211D2AD10058D19D /* MakeMoneyCell.h */,
 				B8DDF884211D2AD10058D19D /* MakeMoneyCell.m */,
 			);
@@ -2999,10 +3094,10 @@
 				7A2CC666215BBC6B00B27E2D /* PosMyInvestmentDetailsTableView.m */,
 				7A2CC668215BBCEA00B27E2D /* PosMyInvestmentHeadView.h */,
 				7A2CC669215BBCEA00B27E2D /* PosMyInvestmentHeadView.m */,
-				7A2CC66B215BC5B900B27E2D /* PosMyInvestmentDetailsCell.h */,
-				7A2CC66C215BC5B900B27E2D /* PosMyInvestmentDetailsCell.m */,
 				7A2CC66E215C9E3B00B27E2D /* PosMyInvestmentModel.h */,
 				7A2CC66F215C9E3B00B27E2D /* PosMyInvestmentModel.m */,
+				7A2CC66B215BC5B900B27E2D /* PosMyInvestmentDetailsCell.h */,
+				7A2CC66C215BC5B900B27E2D /* PosMyInvestmentDetailsCell.m */,
 			);
 			path = "MyInvestment我的投资详情";
 			sourceTree = "<group>";
@@ -3010,14 +3105,101 @@
 		7A2CC671215CAE8E00B27E2D /* AccumulatedEarnings累计收益 */ = {
 			isa = PBXGroup;
 			children = (
+				7A2CC6C8215DC89200B27E2D /* PGPickerView */,
+				7A2CC67B215DC88B00B27E2D /* PGDatePicker */,
 				7A2CC672215CAECF00B27E2D /* AccumulatedEarningsVC.h */,
 				7A2CC673215CAECF00B27E2D /* AccumulatedEarningsVC.m */,
 				7A2CC675215CD41100B27E2D /* AccumulatedEarningsTableView.h */,
 				7A2CC676215CD41100B27E2D /* AccumulatedEarningsTableView.m */,
+				7A2CC6DD215E2B1500B27E2D /* AccumulatedEarningsModel.h */,
+				7A2CC6DE215E2B1500B27E2D /* AccumulatedEarningsModel.m */,
 				7A2CC678215CD45300B27E2D /* AccumulatedEarningsCell.h */,
 				7A2CC679215CD45300B27E2D /* AccumulatedEarningsCell.m */,
 			);
 			path = "AccumulatedEarnings累计收益";
+			sourceTree = "<group>";
+		};
+		7A2CC67B215DC88B00B27E2D /* PGDatePicker */ = {
+			isa = PBXGroup;
+			children = (
+				7A2CC67C215DC88B00B27E2D /* NSBundle+PGDatePicker.h */,
+				7A2CC67D215DC88B00B27E2D /* NSBundle+PGDatePicker.m */,
+				7A2CC67E215DC88B00B27E2D /* NSCalendar+PGCurrent.h */,
+				7A2CC67F215DC88B00B27E2D /* NSCalendar+PGCurrent.m */,
+				7A2CC680215DC88B00B27E2D /* NSDate+PGCategory.h */,
+				7A2CC681215DC88B00B27E2D /* NSDate+PGCategory.m */,
+				7A2CC682215DC88B00B27E2D /* PGDatePicker+Common.h */,
+				7A2CC683215DC88B00B27E2D /* PGDatePicker+Common.m */,
+				7A2CC684215DC88B00B27E2D /* PGDatePicker+Date.h */,
+				7A2CC685215DC88B00B27E2D /* PGDatePicker+Date.m */,
+				7A2CC686215DC88B00B27E2D /* PGDatePicker+DateAndTime.h */,
+				7A2CC687215DC88B00B27E2D /* PGDatePicker+DateAndTime.m */,
+				7A2CC688215DC88B00B27E2D /* PGDatePicker+DateHour.h */,
+				7A2CC689215DC88B00B27E2D /* PGDatePicker+DateHour.m */,
+				7A2CC68A215DC88B00B27E2D /* PGDatePicker+DateHourMinute.h */,
+				7A2CC68B215DC88B00B27E2D /* PGDatePicker+DateHourMinute.m */,
+				7A2CC68C215DC88B00B27E2D /* PGDatePicker+DateHourMinuteSecond.h */,
+				7A2CC68D215DC88B00B27E2D /* PGDatePicker+DateHourMinuteSecond.m */,
+				7A2CC68E215DC88B00B27E2D /* PGDatePicker+Logic.h */,
+				7A2CC68F215DC88B00B27E2D /* PGDatePicker+Logic.m */,
+				7A2CC690215DC88B00B27E2D /* PGDatePicker+MinuteAndSecond.h */,
+				7A2CC691215DC88B00B27E2D /* PGDatePicker+MinuteAndSecond.m */,
+				7A2CC692215DC88B00B27E2D /* PGDatePicker+MonthDay.h */,
+				7A2CC693215DC88B00B27E2D /* PGDatePicker+MonthDay.m */,
+				7A2CC694215DC88B00B27E2D /* PGDatePicker+MonthDayHour.h */,
+				7A2CC695215DC88B00B27E2D /* PGDatePicker+MonthDayHour.m */,
+				7A2CC696215DC88B00B27E2D /* PGDatePicker+MonthDayHourMinute.h */,
+				7A2CC697215DC88B00B27E2D /* PGDatePicker+MonthDayHourMinute.m */,
+				7A2CC698215DC88B00B27E2D /* PGDatePicker+MonthDayHourMinuteSecond.h */,
+				7A2CC699215DC88B00B27E2D /* PGDatePicker+MonthDayHourMinuteSecond.m */,
+				7A2CC69A215DC88B00B27E2D /* PGDatePicker+Time.h */,
+				7A2CC69B215DC88B00B27E2D /* PGDatePicker+Time.m */,
+				7A2CC69C215DC88B00B27E2D /* PGDatePicker+TimeAndSecond.h */,
+				7A2CC69D215DC88B00B27E2D /* PGDatePicker+TimeAndSecond.m */,
+				7A2CC69E215DC88B00B27E2D /* PGDatePicker+Year.h */,
+				7A2CC69F215DC88B00B27E2D /* PGDatePicker+Year.m */,
+				7A2CC6A0215DC88B00B27E2D /* PGDatePicker+YearAndMonth.h */,
+				7A2CC6A1215DC88B00B27E2D /* PGDatePicker+YearAndMonth.m */,
+				7A2CC6A2215DC88B00B27E2D /* PGDatePicker.bundle */,
+				7A2CC6A3215DC88B00B27E2D /* PGDatePicker.h */,
+				7A2CC6A4215DC88B00B27E2D /* PGDatePicker.m */,
+				7A2CC6A5215DC88B00B27E2D /* PGDatePickerHeader.h */,
+				7A2CC6A6215DC88B00B27E2D /* PGDatePickerView.h */,
+				7A2CC6A7215DC88B00B27E2D /* PGDatePickerView.m */,
+				7A2CC6A8215DC88B00B27E2D /* PGDatePickManager.h */,
+				7A2CC6A9215DC88B00B27E2D /* PGDatePickManager.m */,
+				7A2CC6AA215DC88B00B27E2D /* PGDatePickManagerHeaderView.h */,
+				7A2CC6AB215DC88B00B27E2D /* PGDatePickManagerHeaderView.m */,
+				7A2CC6AC215DC88B00B27E2D /* PGEnumeration.h */,
+				7A2CC6AD215DC88B00B27E2D /* UIColor+PGHex.h */,
+				7A2CC6AE215DC88B00B27E2D /* UIColor+PGHex.m */,
+			);
+			path = PGDatePicker;
+			sourceTree = "<group>";
+		};
+		7A2CC6C8215DC89200B27E2D /* PGPickerView */ = {
+			isa = PBXGroup;
+			children = (
+				7A2CC6C9215DC89200B27E2D /* LICENSE */,
+				7A2CC6CA215DC89200B27E2D /* PGPickerView */,
+				7A2CC6D3215DC89200B27E2D /* README.md */,
+			);
+			path = PGPickerView;
+			sourceTree = "<group>";
+		};
+		7A2CC6CA215DC89200B27E2D /* PGPickerView */ = {
+			isa = PBXGroup;
+			children = (
+				7A2CC6CB215DC89200B27E2D /* PGPickerColumnCell.h */,
+				7A2CC6CC215DC89200B27E2D /* PGPickerColumnCell.m */,
+				7A2CC6CD215DC89200B27E2D /* PGPickerColumnView.h */,
+				7A2CC6CE215DC89200B27E2D /* PGPickerColumnView.m */,
+				7A2CC6CF215DC89200B27E2D /* PGPickerTableView.h */,
+				7A2CC6D0215DC89200B27E2D /* PGPickerTableView.m */,
+				7A2CC6D1215DC89200B27E2D /* PGPickerView.h */,
+				7A2CC6D2215DC89200B27E2D /* PGPickerView.m */,
+			);
+			path = PGPickerView;
 			sourceTree = "<group>";
 		};
 		7A8A5D0E20EA0677002D9A48 /* RedEnvelope红包 */ = {
@@ -3866,6 +4048,8 @@
 			files = (
 				7AAF035F21526977008507FF /* LICENSE.txt in Resources */,
 				7AAF037D21526EC4008507FF /* MSADefaultLocale.bundle in Resources */,
+				7A2CC6D9215DC89200B27E2D /* README.md in Resources */,
+				7A2CC6C2215DC88C00B27E2D /* PGDatePicker.bundle in Resources */,
 				B8CAA14321158FF200695BC3 /* LPDImagePickerController.bundle in Resources */,
 				B88B59172109AEC400F20D1B /* country.plist in Resources */,
 				7A272664212BFFA70067E3CD /* README.txt in Resources */,
@@ -3874,6 +4058,7 @@
 				7AAF036021526977008507FF /* README.md in Resources */,
 				2EFFE6AA1FF4829100BFCC40 /* Localizable.strings in Resources */,
 				7A272663212BFFA70067E3CD /* read_me.txt in Resources */,
+				7A2CC6D4215DC89200B27E2D /* LICENSE in Resources */,
 				2EA584C11FA813C900C7106C /* Assets.xcassets in Resources */,
 				7AAF032B21526956008507FF /* yw_1222_0335.jpg in Resources */,
 				2EB9495B1FDF6B1A00CE4B94 /* SimplifiedCode.txt in Resources */,
@@ -4025,9 +4210,12 @@
 				211CEF151FCBBF90000FB0C4 /* SortBar.m in Sources */,
 				B89F07E2211B07FA0057E781 /* TLMeSetting.m in Sources */,
 				215979761FB84CC70029F177 /* BillDetailCell.m in Sources */,
+				7A2CC6B8215DC88C00B27E2D /* PGDatePicker+Logic.m in Sources */,
 				7A2CC64A215B74BB00B27E2D /* TLMoneyDetailsHeadView.m in Sources */,
+				7A2CC6DC215E002800B27E2D /* MoneyAndTreasureHeadCell.m in Sources */,
 				B8CAA1562115FF7100695BC3 /* QuestionTB.m in Sources */,
 				B8CAA14D2115DE6300695BC3 /* TLhistoryListVC.m in Sources */,
+				7A2CC6BF215DC88C00B27E2D /* PGDatePicker+TimeAndSecond.m in Sources */,
 				7AAF036E21526977008507FF /* SSZipArchive.m in Sources */,
 				B80864EE211EA17D00755158 /* BTCBlock.m in Sources */,
 				21A821171FDA690700AE59F2 /* GoogleAuthVC.m in Sources */,
@@ -4071,6 +4259,7 @@
 				B80864FB211EA17D00755158 /* BTCTransaction.m in Sources */,
 				B8CA0D6A21081B850015A19D /* AssetPwdView.m in Sources */,
 				B8086511211EA17D00755158 /* BTCBitcoinURL.m in Sources */,
+				7A2CC6BC215DC88C00B27E2D /* PGDatePicker+MonthDayHourMinute.m in Sources */,
 				21A7F3161FB2E2F900FAA0A2 /* TLUserLoginVC.m in Sources */,
 				211A34EB1FB42F8100FEB71F /* SettingVC.m in Sources */,
 				211DE6C51FB58B4C002FCF3D /* HttpRequestService.m in Sources */,
@@ -4110,6 +4299,7 @@
 				B808651D211EA17D00755158 /* BTCProcessor.m in Sources */,
 				B88B092120C8E29D005C2D2F /* JoinMineVc.m in Sources */,
 				B8086516211EA17D00755158 /* BTCAddress.m in Sources */,
+				7A2CC6D8215DC89200B27E2D /* PGPickerView.m in Sources */,
 				B8D5F15620CE0F530005CF96 /* AccountMoneyCellTableViewCell.m in Sources */,
 				7AAF036521526977008507FF /* fileenc.c in Sources */,
 				B80864F6211EA17D00755158 /* BTCProtocolSerialization+Tests.m in Sources */,
@@ -4123,6 +4313,7 @@
 				B808652C211EA17D00755158 /* BTCBlockchainInfo+Tests.m in Sources */,
 				B8BBA64920C849BB00DC4D5F /* AddMoneyCell.m in Sources */,
 				21205CDA1FCD2FC8003C6C7C /* CoinAddressListVC.m in Sources */,
+				7A2CC6D7215DC89200B27E2D /* PGPickerTableView.m in Sources */,
 				B8CAA14021158FF200695BC3 /* LPDAssetModel.m in Sources */,
 				B8DDF885211D2AD10058D19D /* MakeMoneyCell.m in Sources */,
 				B8DB9EC3214F8A220091276E /* H5DrtailVC.m in Sources */,
@@ -4161,7 +4352,9 @@
 				211DE6AB1FB58B4C002FCF3D /* TLTableView.m in Sources */,
 				B8086519211EA17D00755158 /* BTCMerkleTree.m in Sources */,
 				7A2CC654215BA06600B27E2D /* PosBuyVC.m in Sources */,
+				7A2CC6B2215DC88B00B27E2D /* PGDatePicker+Common.m in Sources */,
 				B808652D211EA17D00755158 /* BTCEncryptedMessage.m in Sources */,
+				7A2CC6B5215DC88B00B27E2D /* PGDatePicker+DateHour.m in Sources */,
 				21CB94E51FDC0AFC00CAB090 /* LanguageSettingVC.m in Sources */,
 				B808650E211EA17D00755158 /* BTCEncryptedMessage+Tests.m in Sources */,
 				211DE6C21FB58B4C002FCF3D /* Foundation+Log.m in Sources */,
@@ -4174,6 +4367,7 @@
 				211A34F71FB4328800FEB71F /* SettingTableView.m in Sources */,
 				211DE6B01FB58B4C002FCF3D /* UILable+convience.m in Sources */,
 				B8CAA13F21158FF200695BC3 /* LPDVideoPlayerController.m in Sources */,
+				7A2CC6BD215DC88C00B27E2D /* PGDatePicker+MonthDayHourMinuteSecond.m in Sources */,
 				21205CFE1FCD61D6003C6C7C /* ShareView.m in Sources */,
 				B82D387B211C1BDB0053A2E4 /* HomeFindModel.m in Sources */,
 				B8BBA64620C8497000DC4D5F /* AddMoneyTableView.m in Sources */,
@@ -4182,17 +4376,19 @@
 				B8B15C3220CAB4DE00F13220 /* CustomLayoutWallet.m in Sources */,
 				2159795D1FB81C2B0029F177 /* BillVC.m in Sources */,
 				B8086532211EA17D00755158 /* BTCErrors.m in Sources */,
-				7A2CC643215B5ADC00B27E2D /* MoneyAndTreasureHeadView.m in Sources */,
 				211A53321FBFE4F100CC6294 /* RateDescTableView.m in Sources */,
 				B8D938CF2116C2AC00B2AA88 /* QiestionDetailVC.m in Sources */,
 				216F5B17206CD9C900F2C832 /* StorePayVC.m in Sources */,
 				B83D1E0F20CE7076007835DB /* WalletForwordVC.m in Sources */,
+				7A2CC6C4215DC88C00B27E2D /* PGDatePickerView.m in Sources */,
+				7A2CC6BB215DC88C00B27E2D /* PGDatePicker+MonthDayHour.m in Sources */,
 				211DE6B61FB58B4C002FCF3D /* UIView+Extension.m in Sources */,
 				21A7F3141FB2E2F900FAA0A2 /* TLPwdRelatedVC.m in Sources */,
 				B88B092720C8E371005C2D2F /* JoinMineCell.m in Sources */,
 				2120D8A31FCEE1DE00712600 /* HourPickerView.m in Sources */,
 				B80864FE211EA17D00755158 /* BTCBigNumber.m in Sources */,
 				7AAF036C21526977008507FF /* unzip.c in Sources */,
+				7A2CC6BA215DC88C00B27E2D /* PGDatePicker+MonthDay.m in Sources */,
 				B8131E94214CF12C00BEF5E0 /* TLWBManger.m in Sources */,
 				B8FDB704214A824400313EC3 /* MysugarView.m in Sources */,
 				B808650F211EA17D00755158 /* BTCChainCom.m in Sources */,
@@ -4216,6 +4412,7 @@
 				211DE6A81FB58B4C002FCF3D /* TLTextField.m in Sources */,
 				7A3821C620EAD4EA00D6B636 /* SendModel.m in Sources */,
 				7AAF039321527A5E008507FF /* YZViewController.m in Sources */,
+				7A2CC6C6215DC88C00B27E2D /* PGDatePickManagerHeaderView.m in Sources */,
 				7AAF036121526977008507FF /* aescrypt.c in Sources */,
 				211D4ED61FCD9B0C000E0D43 /* EditVC.m in Sources */,
 				B8086528211EA17D00755158 /* BTCPaymentMethod.m in Sources */,
@@ -4241,6 +4438,7 @@
 				211DE6AD1FB58B4C002FCF3D /* TLAlert.m in Sources */,
 				B8086521211EA17D00755158 /* BTCTransactionOutput.m in Sources */,
 				B8CAA11A2115693A00695BC3 /* TLQusertionVC.m in Sources */,
+				7A2CC6C1215DC88C00B27E2D /* PGDatePicker+YearAndMonth.m in Sources */,
 				21205CFD1FCD61D6003C6C7C /* CustomShareView.m in Sources */,
 				B8CAA13C21158FF200695BC3 /* UIImage+MyBundle.m in Sources */,
 				7A2CC66D215BC5B900B27E2D /* PosMyInvestmentDetailsCell.m in Sources */,
@@ -4252,6 +4450,7 @@
 				216F5B49206CDA3700F2C832 /* DetailWebView.m in Sources */,
 				211A34E11FB4247800FEB71F /* MineModel.m in Sources */,
 				7AAF036421526977008507FF /* entropy.c in Sources */,
+				7A2CC6B1215DC88B00B27E2D /* NSDate+PGCategory.m in Sources */,
 				B8D938D82116EF5900B2AA88 /* imageCell.m in Sources */,
 				7AAF036821526977008507FF /* pwd2key.c in Sources */,
 				B8DDF882211D29EE0058D19D /* TLMakeMoney.m in Sources */,
@@ -4265,6 +4464,7 @@
 				21635DB91FBECBDD003F48B4 /* TopLabelUtil.m in Sources */,
 				B8B15C0520CA55D600F13220 /* BuildSucessVC.m in Sources */,
 				2EA584C71FA813C900C7106C /* main.m in Sources */,
+				7A2CC6B6215DC88B00B27E2D /* PGDatePicker+DateHourMinute.m in Sources */,
 				B8CAA1502115FC6B00695BC3 /* QuestionListTableView.m in Sources */,
 				B8086535211ED6AC00755158 /* utxoModel.m in Sources */,
 				7A2CC650215B829F00B27E2D /* TLMoneyDetailsAttributesCell.m in Sources */,
@@ -4272,6 +4472,7 @@
 				7AAF036921526977008507FF /* sha1.c in Sources */,
 				B8086503211EA17D00755158 /* BTCMnemonic.m in Sources */,
 				B808652A211EA17D00755158 /* BTCBase58.m in Sources */,
+				7A2CC6DF215E2B1500B27E2D /* AccumulatedEarningsModel.m in Sources */,
 				B8086517211EA17D00755158 /* BTCProtocolBuffers.m in Sources */,
 				211DE6AF1FB58B4C002FCF3D /* UILabel+Extension.m in Sources */,
 				B8CAA15C211611D000695BC3 /* questionListCells.m in Sources */,
@@ -4282,6 +4483,7 @@
 				B8CAA14A21158FF200695BC3 /* NSBundle+LPDImagePicker.m in Sources */,
 				B87B1BCA20D2509E00EF7B8E /* WalletNewFeaturesVC.m in Sources */,
 				7A2CC667215BBC6B00B27E2D /* PosMyInvestmentDetailsTableView.m in Sources */,
+				7A2CC6BE215DC88C00B27E2D /* PGDatePicker+Time.m in Sources */,
 				B83D1E0C20CE63A2007835DB /* WalletLocalVc.m in Sources */,
 				7A8A5D1520EA076C002D9A48 /* RedEnvelopeVC.m in Sources */,
 				21A7F35E1FB2EBAA00FAA0A2 /* CurrencyModel.m in Sources */,
@@ -4297,6 +4499,7 @@
 				B808651E211EA17D00755158 /* BTCCurvePoint.m in Sources */,
 				B808652E211EA17D00755158 /* BTC256+Tests.m in Sources */,
 				2129A4F91FDACE87003C99C0 /* CloseGoogleAuthVC.m in Sources */,
+				7A2CC6D6215DC89200B27E2D /* PGPickerColumnView.m in Sources */,
 				B8086529211EA17D00755158 /* BTCPaymentProtocol.m in Sources */,
 				211D3C151FCFE3AB00B55F9F /* HistoryRateTableView.m in Sources */,
 				211DE6BB1FB58B4C002FCF3D /* NSString+CGSize.m in Sources */,
@@ -4316,6 +4519,7 @@
 				7A8A5DC020EA6977002D9A48 /* CustomActionSheet.m in Sources */,
 				B8CAA14221158FF200695BC3 /* LPDPhotoArrangeCell.m in Sources */,
 				B80864FC211EA17D00755158 /* BTCBigNumber+Tests.m in Sources */,
+				7A2CC6C3215DC88C00B27E2D /* PGDatePicker.m in Sources */,
 				2ED651CF200F34280065A1B0 /* TLCoinWithdrawOrderCell.m in Sources */,
 				215979601FB81CC40029F177 /* BillTableView.m in Sources */,
 				21A7F31C1FB2E2F900FAA0A2 /* TLUserExt.m in Sources */,
@@ -4337,11 +4541,13 @@
 				B8086525211EA17D00755158 /* BTCScript.m in Sources */,
 				21205CCF1FCCFDCF003C6C7C /* FansTableView.m in Sources */,
 				B80864F0211EA17D00755158 /* BTCEncryptedBackup.m in Sources */,
+				7A2CC6AF215DC88B00B27E2D /* NSBundle+PGDatePicker.m in Sources */,
 				211DE6C31FB58B4C002FCF3D /* HttpRequestTool.m in Sources */,
 				7A2CC64D215B772C00B27E2D /* TLMoneyDeailCell.m in Sources */,
 				21A7F3121FB2E2F900FAA0A2 /* BindMobileVC.m in Sources */,
 				2EE950C31FB05B4500429257 /* TLWalletVC.m in Sources */,
 				211DE6A51FB58B4C002FCF3D /* TLProgressHUD.m in Sources */,
+				7A2CC6C7215DC88C00B27E2D /* UIColor+PGHex.m in Sources */,
 				B80864FA211EA17D00755158 /* NSData+BTCData.m in Sources */,
 				B8086522211EA17D00755158 /* BTCPaymentRequest.m in Sources */,
 				B88B092D20C8F878005C2D2F /* WalletSettingVC.m in Sources */,
@@ -4375,10 +4581,12 @@
 				B8CAA13B21158FF200695BC3 /* LPDPhotoPreviewController.m in Sources */,
 				B80864F1211EA17D00755158 /* BTCKeychain.m in Sources */,
 				B88B59192109AEC400F20D1B /* TLTabBarController.m in Sources */,
+				7A2CC6C0215DC88C00B27E2D /* PGDatePicker+Year.m in Sources */,
 				B8BBA63D20C7F6FC00DC4D5F /* WallAccountVC.m in Sources */,
 				B887819920E366BC00879330 /* UIImageView+RotateImgV.m in Sources */,
 				4CC7F0ED205FBC5400BBEC4D /* CoinModel.m in Sources */,
 				B8086500211EA17D00755158 /* BTCBlockchainInfo.m in Sources */,
+				7A2CC6C5215DC88C00B27E2D /* PGDatePickManager.m in Sources */,
 				B88B59182109AEC400F20D1B /* UIColor+theme.m in Sources */,
 				211DE6B11FB58B4C002FCF3D /* UIButton+EnLargeEdge.m in Sources */,
 				B8A2436520E5E0F20074DF8F /* TLDataBase.m in Sources */,
@@ -4392,10 +4600,12 @@
 				B8D157CB213FC41400941304 /* NewHelpCentetVC.m in Sources */,
 				B891F0682101899900ED5DDF /* BuildLocalHomeView.m in Sources */,
 				B8B15C2720CA75CC00F13220 /* AddSearchBottomCell.m in Sources */,
+				7A2CC6B7215DC88C00B27E2D /* PGDatePicker+DateHourMinuteSecond.m in Sources */,
 				211DE6A21FB58B4C002FCF3D /* TLCaptchaView.m in Sources */,
 				211DE6B71FB58B4C002FCF3D /* UIBarButtonItem+convience.m in Sources */,
 				211DE6B41FB58B4C002FCF3D /* UIColor+Extension.m in Sources */,
 				B808652B211EA17D00755158 /* BTCPaymentMethodRequest.m in Sources */,
+				7A2CC6D5215DC89200B27E2D /* PGPickerColumnCell.m in Sources */,
 				2120A8FC1FD51DF800B03DB0 /* UITabBar+Badge.m in Sources */,
 				B8D7E38220D140BC00453860 /* BilllistVC.m in Sources */,
 				B80864F4211EA17D00755158 /* BTCMnemonic+Tests.m in Sources */,
@@ -4410,6 +4620,7 @@
 				211DE6B21FB58B4C002FCF3D /* UIButton+Custom.m in Sources */,
 				B8CAA1532115FD6100695BC3 /* QuestionModel.m in Sources */,
 				211DE6171FB54685002FCF3D /* WalletCell.m in Sources */,
+				7A2CC6B0215DC88B00B27E2D /* NSCalendar+PGCurrent.m in Sources */,
 				211A34F01FB430DB00FEB71F /* SettingGroup.m in Sources */,
 				B8B15C2020CA752900F13220 /* CurrencyTitleModel.m in Sources */,
 				216F5B5A206D02DC00F2C832 /* PosMiningVC.m in Sources */,
@@ -4421,12 +4632,15 @@
 				B8CF2CC821214A8800055706 /* CommentTableView.m in Sources */,
 				4C2438252066C2F1003B35F3 /* TopSegmentUtil.m in Sources */,
 				B88B592A2109B2EF00F20D1B /* ZLGestureLockViewController.m in Sources */,
+				7A2CC6B4215DC88B00B27E2D /* PGDatePicker+DateAndTime.m in Sources */,
 				2ED651D22010443D0065A1B0 /* TLAboutUsVC.m in Sources */,
 				B8C2057C20CFA3FC00952765 /* WalletAddressDetailVC.m in Sources */,
 				4CE70FE120C82EDD00F0C803 /* MnemonicUtil.m in Sources */,
 				B8086526211EA17D00755158 /* BTCHashID.m in Sources */,
 				B8B15C2C20CA8A3900F13220 /* BuildCheckVC.m in Sources */,
 				211DE6141FB5465E002FCF3D /* WalletTableView.m in Sources */,
+				7A2CC6B3215DC88B00B27E2D /* PGDatePicker+Date.m in Sources */,
+				7A2CC6B9215DC88C00B27E2D /* PGDatePicker+MinuteAndSecond.m in Sources */,
 				211DE6A31FB58B4C002FCF3D /* TLNetworking.m in Sources */,
 				211A34F41FB430F900FEB71F /* SettingCell.m in Sources */,
 				2EA2526E1FF09B52007FF9A2 /* CoinUtil.m in Sources */,

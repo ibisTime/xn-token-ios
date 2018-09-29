@@ -46,6 +46,7 @@
     TLNetworking *http = [TLNetworking new];
     
     if (self.showView) {
+
         
         http.showView = self.showView;
     }

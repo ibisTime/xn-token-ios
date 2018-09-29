@@ -10,4 +10,6 @@
 
 @interface PosMyInvestmentDetailsVC : TLBaseVC
 
+@property (nonatomic , strong)NSDictionary *dataDic;
+
 @end

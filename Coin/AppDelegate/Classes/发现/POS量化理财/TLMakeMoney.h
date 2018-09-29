@@ -19,5 +19,7 @@ typedef void(^WalletAddBlock)(void);
 
 @property (nonatomic,copy) WalletAddBlock addBlock;
 
+@property (nonatomic , strong)NSDictionary *dataDic;
+
 - (instancetype)initWithFrame:(CGRect)frame style:(UITableViewStyle)style;
 @end

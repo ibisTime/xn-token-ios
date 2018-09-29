@@ -28,7 +28,7 @@ static NSString *identifierCell = @"AccumulatedEarningsCell";
         [self registerClass:[AccumulatedEarningsCell class] forCellReuseIdentifier:identifierCell];
 
         self.separatorStyle = UITableViewCellSeparatorStyleNone;
-
+        self.date = @"";
     }
 
     return self;
@@ -42,13 +42,14 @@ static NSString *identifierCell = @"AccumulatedEarningsCell";
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
-    return 4;
+    return self.model.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
     AccumulatedEarningsCell *cell = [tableView dequeueReusableCellWithIdentifier:identifierCell forIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.model = self.model[indexPath.row];
     return cell;
 }
 
@@ -68,7 +69,13 @@ static NSString *identifierCell = @"AccumulatedEarningsCell";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
 
-    return 40;
+    if (![self.date isEqualToString:@""]) {
+        return 40;
+    }else
+    {
+        return 5;
+    }
+
 }
 
 
@@ -76,9 +83,11 @@ static NSString *identifierCell = @"AccumulatedEarningsCell";
 
     UIView *view = [UIView new];
 
-    UILabel *titleLbl = [UILabel labelWithFrame:CGRectMake(15, 0, SCREEN_WIDTH - 30, 40) textAligment:(NSTextAlignmentLeft) backgroundColor:kClearColor font:Font(12) textColor:kHexColor(@"#999999")];
-    titleLbl.text = @"2018年9月账单";
-    [view addSubview:titleLbl];
+    if (![self.date isEqualToString:@""]) {
+        UILabel *titleLbl = [UILabel labelWithFrame:CGRectMake(15, 0, SCREEN_WIDTH - 30, 40) textAligment:(NSTextAlignmentLeft) backgroundColor:kClearColor font:Font(12) textColor:kHexColor(@"#999999")];
+        titleLbl.text = [NSString stringWithFormat:@"%@账单",self.date];
+        [view addSubview:titleLbl];
+    }
 
     return view;
 }

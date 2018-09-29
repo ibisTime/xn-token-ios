@@ -131,9 +131,32 @@
 {
     _model = model;
     CoinModel *coin = [CoinUtil getCoinModel:model.symbol];
-    self.nameLab.text = model.name;
+
+    switch ([LangSwitcher currentLangType]) {
+        case LangTypeEnglish:
+            self.nameLab.text = self.model.nameEn;
+
+            break;
+        case LangTypeKorean:
+            self.nameLab.text = self.model.nameKo;
+
+            break;
+        case LangTypeSimple:
+            self.nameLab.text = self.model.nameZhCn;
+
+            break;
+
+        default:
+            break;
+    }
 
     self.stateLab.text = [LangSwitcher switchLang:model.statusStr key:nil];
+    if ([model.status isEqualToString:@"8"]) {
+        self.stateLab.textColor = [UIColor grayColor];
+    }else
+    {
+        self.stateLab.textColor = kHexColor(@"#FF6400");
+    }
     [self.stateLab sizeToFit];
     self.stateLab.frame = CGRectMake(kScreenWidth - 15 - self.stateLab.frame.size.width, 26, self.stateLab.frame.size.width, 13);
     self.nameLab.frame = CGRectMake(15, 25, kScreenWidth - self.stateLab.frame.size.width - 40 , 15);

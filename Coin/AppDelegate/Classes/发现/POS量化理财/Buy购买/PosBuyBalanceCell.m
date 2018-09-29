@@ -31,11 +31,18 @@
 
 -(void)setCurrencys:(CurrencyModel *)currencys
 {
-    NSString *text =  [CoinUtil convertToRealCoin:currencys.balance coin:currencys.symbol];
+//    NSString *text = currencys.amountString;
 
     NSString *name = [LangSwitcher switchLang:@"可用余额:" key:nil];
-    NSString *str1 = [NSString stringWithFormat:@" %.2f %@",[text floatValue],currencys.currency];
-    NSString *str = [NSString stringWithFormat:@"%@ %.2f %@",[LangSwitcher switchLang:@"可用余额:" key:nil],[text floatValue],currencys.currency];
+//    currencys.currency];
+
+    NSString *leftAmount = [CoinUtil convertToRealCoin:currencys.amountString coin:currencys.currency];
+    NSString *rightAmount = [CoinUtil convertToRealCoin:currencys.frozenAmountString coin:currencys.currency];
+    NSString *ritAmount = [leftAmount subNumber:rightAmount];
+    NSString *str1 = [NSString stringWithFormat:@" %.2f ",[ritAmount doubleValue]];
+
+
+    NSString *str = [NSString stringWithFormat:@"%@ %@ %@",[LangSwitcher switchLang:@"可用余额:" key:nil],str1,currencys.currency];
 
     NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:str];
     UIFont *font = [UIFont systemFontOfSize:20];

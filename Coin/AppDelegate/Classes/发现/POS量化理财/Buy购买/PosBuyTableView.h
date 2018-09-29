@@ -14,5 +14,8 @@
 
 @property (nonatomic ,strong) TLtakeMoneyModel *moneyModel;
 @property (nonatomic, strong)CurrencyModel *currencys;
+@property (nonatomic, strong)NSDictionary *dataDic;
+
+
 
 @end

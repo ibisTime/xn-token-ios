@@ -7,7 +7,11 @@
 //
 
 #import "TLTableView.h"
-
+#import "AccumulatedEarningsModel.h"
 @interface AccumulatedEarningsTableView : TLTableView
+
+@property (nonatomic , strong)NSMutableArray <AccumulatedEarningsModel *>*model;
+
+@property (nonatomic , copy)NSString *date;
 
 @end

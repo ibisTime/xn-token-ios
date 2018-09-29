@@ -12,4 +12,9 @@
 
 @property (nonatomic , strong)UIButton *earningsButton;
 
+@property (nonatomic , strong)NSDictionary *dataDic;
+@property (nonatomic , strong)UILabel *nameLabel;
+
+//@property (nonatomic , strong)UIButton *earningsButton;
+
 @end

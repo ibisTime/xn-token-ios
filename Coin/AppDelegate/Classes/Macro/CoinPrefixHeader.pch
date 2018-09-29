@@ -39,6 +39,7 @@
 #import "TLTextField.h"
 #import "NSString+Check.h"
 #import "NSString+Date.h"
+#import "TLProgressHUD.h"
 #endif /* CoinPrefixHeader_h */
 
 #endif

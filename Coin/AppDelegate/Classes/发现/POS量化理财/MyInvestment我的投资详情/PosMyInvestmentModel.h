@@ -10,4 +10,26 @@
 
 @interface PosMyInvestmentModel : NSObject
 
+
+@property (nonatomic , copy)NSString *status;
+@property (nonatomic , copy)NSString *incomeBtc;
+@property (nonatomic , copy)NSString *investAmountBtc;
+@property (nonatomic , copy)NSString *productCode;
+@property (nonatomic , copy)NSString *investNum;
+@property (nonatomic , copy)NSString *code;
+@property (nonatomic , copy)NSString *userId;
+@property (nonatomic , copy)NSString *income;
+@property (nonatomic , copy)NSString *leftPrincipal;
+@property (nonatomic , copy)NSString *redeemAmount;
+@property (nonatomic , copy)NSString *createDatetime;
+@property (nonatomic , copy)NSString *investAmount;
+@property (nonatomic , copy)NSString *redeemTimes;
+@property (nonatomic , copy)NSString *expectIncome;
+@property (nonatomic , copy)NSString *lastInvestDatetime;
+
+
+@property (nonatomic , strong)NSDictionary *userInfo;
+@property (nonatomic , strong)NSDictionary *productInfo;
+
+
 @end

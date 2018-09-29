@@ -26,5 +26,10 @@
 
 @property (nonatomic , strong)UILabel *numberLabel;
 @property (nonatomic , strong)UILabel *titleLbl;
+@property (nonatomic,strong) UILabel *sinceLabel;
+@property (nonatomic,strong) UILabel *finalLabel;
+@property (nonatomic,strong) UILabel *priceLabel;
+
+@property (nonatomic, strong)NSDictionary *dataDic;
 
 @end

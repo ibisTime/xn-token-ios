@@ -12,7 +12,8 @@
 #import "BillCell.h"
 #import "questionListCells.h"
 #import "MakeMoneyCell.h"
-#import "MoneyAndTreasureHeadView.h"
+#import "MoneyAndTreasureHeadCell.h"
+#define MoneyAndTreasureHead @"MoneyAndTreasureHeadCell"
 @interface TLMakeMoney()<UITableViewDelegate, UITableViewDataSource>
 
 
@@ -30,11 +31,11 @@ static NSString *identifierCell = @"MakeMoneyCell";
         self.backgroundColor = kBackgroundColor;
         
         [self registerClass:[MakeMoneyCell class] forCellReuseIdentifier:identifierCell];
-        
+        [self registerClass:[MoneyAndTreasureHeadCell class] forCellReuseIdentifier:MoneyAndTreasureHead];
+
         self.separatorStyle = UITableViewCellSeparatorStyleNone;
 
-        MoneyAndTreasureHeadView *headView = [[MoneyAndTreasureHeadView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 160 - 64 + kNavigationBarHeight)];
-        self.tableHeaderView = headView;
+        
     }
     
     return self;
@@ -42,28 +43,40 @@ static NSString *identifierCell = @"MakeMoneyCell";
 
 #pragma mark - UITableViewDataSource
 
--(NSInteger)numberOfRowsInSection:(NSInteger)section
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return 2;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    
+    if (section == 0) {
+        return 1;
+    }
     return self.Moneys.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
+    if (indexPath.section == 0) {
+        MoneyAndTreasureHeadCell *cell = [tableView dequeueReusableCellWithIdentifier:MoneyAndTreasureHead forIndexPath:indexPath];
+        cell.dataDic = self.dataDic;
+        //    cell.backgroundColor = [UIColor redColor];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        return cell;
+    }
     MakeMoneyCell *cell = [tableView dequeueReusableCellWithIdentifier:identifierCell forIndexPath:indexPath];
     cell.model = self.Moneys[indexPath.row];
-//    cell.backgroundColor = [UIColor redColor];
+    //    cell.backgroundColor = [UIColor redColor];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
+
 }
 
 #pragma mark - UITableViewDelegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+    if (indexPath.section == 0) {
+        return 160 - 64 + kNavigationBarHeight;
+    }
     return 155;
 }
 

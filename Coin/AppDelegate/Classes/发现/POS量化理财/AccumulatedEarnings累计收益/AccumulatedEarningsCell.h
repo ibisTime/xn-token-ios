@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "AccumulatedEarningsModel.h"
 @interface AccumulatedEarningsCell : UITableViewCell
+
+@property (nonatomic , strong)AccumulatedEarningsModel *model;
 
 @end

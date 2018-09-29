@@ -21,6 +21,7 @@
 @property (nonatomic,assign) BOOL isShowMsg; //是否展示警告信息
 @property (nonatomic, assign) BOOL isUploadToken; // default is yes
 
+
 @property (nonatomic,copy) NSString *url;
 @property (nonatomic, copy) NSString *isShow;
 @property (nonatomic, assign) BOOL disableLog;

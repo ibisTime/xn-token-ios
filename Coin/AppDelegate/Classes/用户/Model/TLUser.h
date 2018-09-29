@@ -134,6 +134,9 @@
 - (void)requestQiniuDomain;
 - (BOOL)chang;
 
+//字符串是否为空
++ (BOOL) isBlankString:(NSString *)string;
+
 @end
 
 FOUNDATION_EXTERN  NSString *const kUserLoginNotification;

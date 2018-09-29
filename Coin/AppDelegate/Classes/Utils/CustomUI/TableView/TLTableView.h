@@ -25,6 +25,8 @@
 
 - (void)refreshTableViewButtonClick:(TLTableView *)refreshTableview button:(UIButton *)sender selectRowAtIndex:(NSInteger)index;
 
+- (void)refreshTableViewButtonClick:(TLTableView *)refreshTableview button:(UIButton *)sender selectRowAtIndex:(NSInteger)index setArray:(NSArray *)array;
+
 -(void)refreshTableView:(TLTableView *)refreshTableview Slider:(UISlider *)slider;
 
 -(void)refreshTableView:(TLTableView *)refreshTableview scrollView:(UIScrollView *)scroll;

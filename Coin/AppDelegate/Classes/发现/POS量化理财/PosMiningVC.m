@@ -33,7 +33,6 @@
 @property (nonatomic, strong) TLMakeMoney *tableView;
 
 
-//@property (nonatomic, strong) TLMakeMoney *tableView1;
 @end
 
 @implementation PosMiningVC
@@ -136,7 +135,7 @@
 - (void)myRecodeClick
 {
     PosMyInvestmentDetailsVC *VC = [PosMyInvestmentDetailsVC new];
-//    VC.title = [LangSwitcher switchLang:@"我的理财" key:nil];
+    VC.dataDic = self.tableView.dataDic;
     [self.navigationController pushViewController:VC animated:YES];
 
 }
@@ -144,12 +143,34 @@
 #pragma mark -- 接收到通知
 - (void)InfoNotificationAction:(NSNotification *)notification{
     [self getMyCurrencyList];
+    [self totalAmount];
 }
 
 #pragma mark -- 删除通知
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"LOADDATA" object:nil];
+}
+
+-(void)totalAmount
+{
+    TLNetworking *http = [TLNetworking new];
+    http.code = @"625527";
+    http.showView = self.view;
+    http.parameters[@"userId"]  = [TLUser user].userId;
+
+    [http postWithSuccess:^(id responseObject) {
+        
+//        NSString *str = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"totalInvest"]];
+
+
+        self.tableView.dataDic = responseObject[@"data"];
+
+        [self.tableView reloadData];
+
+    } failure:^(NSError *error) {
+
+    }];
 }
 
 - (void)getMyCurrencyList {
@@ -165,6 +186,7 @@
     helper.tableView = self.tableView;
     [helper modelClass:[TLtakeMoneyModel class]];
     [self.tableView addRefreshAction:^{
+        [weakSelf totalAmount];
         [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
             //去除没有的币种
             weakSelf.Moneys = objs;
@@ -282,6 +304,9 @@
         _tableView.backgroundColor = kBackgroundColor;
         [self.view addSubview:_tableView];
 
+//        MoneyAndTreasureHeadView *headView = [[MoneyAndTreasureHeadView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 160 - 64 + kNavigationBarHeight)];
+//        self.tableView.tableHeaderView = headView;
+
     }
     return _tableView;
 }
@@ -306,11 +331,13 @@
 
 -(void)refreshTableView:(TLTableView *)refreshTableview didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    TLMoneyDeailVC *money = [TLMoneyDeailVC new];
-    money.moneyModel = self.Moneys[indexPath.row];
-    money.currencys = self.currencys;
-    money.title = [LangSwitcher switchLang:@"理财产品详情" key:nil];
-    [self.navigationController pushViewController:money animated:YES];
+    if (indexPath.section == 1) {
+        TLMoneyDeailVC *money = [TLMoneyDeailVC new];
+        money.moneyModel = self.Moneys[indexPath.row];
+        money.currencys = self.currencys;
+//        money.title = [LangSwitcher switchLang:@"理财产品详情" key:nil];
+        [self.navigationController pushViewController:money animated:YES];
+    }
     
 }
 

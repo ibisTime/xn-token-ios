@@ -53,7 +53,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
 
-    return 10;
+    return self.model.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -61,6 +61,9 @@
 
     PosMyInvestmentDetailsCell *cell = [tableView dequeueReusableCellWithIdentifier:PosMyInvestmentDetails forIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    if (self.model.count > 0) {
+        cell.model = self.model[indexPath.row];
+    }
     return cell;
 
 
@@ -144,8 +147,8 @@
         [selectArray addObject:@(sender.tag)];
     }
     [self reloadData];
-    if ([self.refreshDelegate respondsToSelector:@selector(refreshTableViewButtonClick:button:selectRowAtIndex:)]) {
-        [self.refreshDelegate refreshTableViewButtonClick:self button:sender selectRowAtIndex:sender.tag];
+    if ([self.refreshDelegate respondsToSelector:@selector(refreshTableViewButtonClick:button:selectRowAtIndex:setArray:)]) {
+        [self.refreshDelegate refreshTableViewButtonClick:self button:sender selectRowAtIndex:sender.tag setArray:selectArray];
     }
 }
 

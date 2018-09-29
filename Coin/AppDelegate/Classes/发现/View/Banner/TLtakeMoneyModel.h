@@ -18,6 +18,24 @@
 //产品详情
 @property (nonatomic ,copy) NSString *Description;
 
+@property (nonatomic ,copy) NSString *timeStatus;
+
+//购买属性
+@property (nonatomic ,copy) NSString *buyDescZhCn;
+@property (nonatomic ,copy) NSString *buyDescKo;
+@property (nonatomic ,copy) NSString *buyDescEn;
+
+//赎回属性
+@property (nonatomic ,copy) NSString *redeemDescEn;
+@property (nonatomic ,copy) NSString *redeemDescKo;
+@property (nonatomic ,copy) NSString *redeemDescZhCn;
+
+
+//说明书
+@property (nonatomic ,copy) NSString *directionsKo;
+@property (nonatomic ,copy) NSString *directionsEn;
+@property (nonatomic ,copy) NSString *directionsZhCn;
+
 @property (nonatomic ,copy) NSString *descriptionEn;
 @property (nonatomic ,copy) NSString *descriptionKo;
 @property (nonatomic ,copy) NSString *descriptionZhCn;

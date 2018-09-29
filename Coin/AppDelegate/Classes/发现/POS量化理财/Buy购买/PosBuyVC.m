@@ -41,7 +41,7 @@
 @property (nonatomic , assign)NSInteger time;
 @property (nonatomic , strong)UILabel *timeLab;
 
-
+@property (nonatomic , strong)NSDictionary *dataDic;
 
 @end
 
@@ -98,6 +98,7 @@
     [keyWindow addSubview:pwdView];
 
     [self getMySyspleList];
+    [self LoadData];
 
 
 }
@@ -117,33 +118,67 @@
 -(void)refreshTableViewButtonClick:(TLTableView *)refreshTableview button:(UIButton *)sender selectRowAtIndex:(NSInteger)index
 {
     self.numberLabel = [self.view viewWithTag:1212];
-
+    UILabel *label = [self.view viewWithTag:456];
+    UISlider *slider = [self.view viewWithTag:12345];
+    NSString *increAmount = [CoinUtil convertToRealCoin:self.moneyModel.increAmount coin:self.moneyModel.symbol];
     if (sender.tag == 500) {
 
-        if (number == 1) {
+        if (number <= [_dataDic[@"min"] integerValue]) {
             return;
         }
         number -- ;
         self.numberLabel.text = [NSString stringWithFormat:@"%d", number];
+        slider.value = number/1.00;
+        label.text = [NSString stringWithFormat:@"(%.2f%@)",[increAmount floatValue] * number,self.moneyModel.symbol];
     }else if (sender.tag == 501)
     {
+        if (number >= [_dataDic[@"max"] integerValue])
+        {
+            return;
+        }
         number ++;
         self.numberLabel.text = [NSString stringWithFormat:@"%d", number];
+        slider.value = number/1.00;
+        label.text = [NSString stringWithFormat:@"(%.2f%@)",[increAmount floatValue] * number,self.moneyModel.symbol];
+
     }else if (sender.tag == 502)
     {
         RechargeCoinVC *coinVC = [RechargeCoinVC new];
         coinVC.currency = self.currencyModel;
         [self.navigationController pushViewController:coinVC animated:YES];
     }
-    [self.tableView reloadData];
+
 }
 
 //  滑动
 -(void)refreshTableView:(TLTableView *)refreshTableview Slider:(UISlider *)slider
 {
+    UILabel *label = [self.view viewWithTag:456];
     self.numberLabel = [self.view viewWithTag:1212];
     number = slider.value;
     self.numberLabel.text = [NSString stringWithFormat:@"%d", number];
+    NSString *increAmount = [CoinUtil convertToRealCoin:self.moneyModel.increAmount coin:self.moneyModel.symbol];
+    label.text = [NSString stringWithFormat:@"(%.2f%@)",[increAmount floatValue] * number,self.moneyModel.symbol];
+}
+
+-(void)LoadData
+{
+    TLNetworking *http = [[TLNetworking alloc] init];
+    http.showView = self.view;
+    http.code = @"625513";
+    http.parameters[@"productCode"] = self.moneyModel.code;
+    http.parameters[@"userId"] = [TLUser user].userId;
+    [http postWithSuccess:^(id responseObject) {
+        
+        self.tableView.dataDic = responseObject[@"data"];
+        self.dataDic = responseObject[@"data"];
+        [self.tableView reloadData];
+
+    } failure:^(NSError *error) {
+
+
+    }];
+
 }
 
 - (void)getMySyspleList {
@@ -153,6 +188,7 @@
     if (![TLUser user].isLogin) {
         return;
     }
+    [TLProgressHUD show];
     helper.code = @"802503";
     helper.parameters[@"userId"] = [TLUser user].userId;
     helper.parameters[@"token"] = [TLUser user].token;
@@ -160,10 +196,7 @@
     helper.isCurrency = YES;
     [helper modelClass:[CurrencyModel class]];
     [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
-
         //去除没有的币种
-
-
         NSMutableArray <CurrencyModel *> *shouldDisplayCoins = [[NSMutableArray alloc] init];
         [objs enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
 
@@ -180,15 +213,15 @@
         for (int i = 0; i < self.currencys.count; i++) {
 
             if ([self.moneyModel.symbol isEqualToString:self.currencys[i].currency]) {
-
                 self.currencyModel = self.currencys[i];
             }
         }
         weakSelf.tableView.currencys = self.currencyModel;
+        [TLProgressHUD dismiss];
         [weakSelf.tableView reloadData];
 
     } failure:^(NSError *error) {
-
+        [TLProgressHUD dismiss];
 
     }];
 
@@ -201,6 +234,7 @@
 //购买
 - (void)continBtnClick
 {
+
     if ([[TLUser user].tradepwdFlag isEqualToString:@"0"]) {
         TLPwdType pwdType = TLPwdTypeSetTrade;
         TLPwdRelatedVC *pwdRelatedVC = [[TLPwdRelatedVC alloc] initWithType:pwdType];
@@ -231,66 +265,25 @@
 - (void)payMoney
 {
 
-//    //确认购买 第一步 验证
-//    if ([self.inputFiled.text isBlank]) {
-//        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入金额" key:nil]];
+//    if ([TLUser isBlankString:self.currencyModel.currency] == NO) {
+//        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"正在加载,请稍等" key:nil]];
 //        return;
 //    }
-//
-//    CoinModel *coin = [CoinUtil getCoinModel:self.moneyModel.symbol];
-//
-//    NSString *mAmount = [CoinUtil convertToRealCoin:self.moneyModel.minAmount coin:coin.symbol];
-//
-//    // 第二步 不能小于起购金额
-//    if ([self.inputFiled.text floatValue] < [mAmount floatValue]) {
-//        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"不能小于起购金额" key:nil]];
-//        return;
-//
-//    }
-//    if ([self.inputFiled.text floatValue] > [self.moneyLab.text floatValue]) {
-//        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"余额不足,请充值" key:nil]];
-//        return;
-//    }
-//
-//    //第三步 不能大于限购金额
-//    NSString *limtmount = [CoinUtil convertToRealCoin:self.moneyModel.limitAmount coin:coin.symbol];
-//    if ([self.inputFiled.text floatValue] > [limtmount floatValue]) {
-//        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"不能大于限购金额" key:nil]];
-//        return;
-//    }
-//   //第四步  不能大于可售余额
-//
-//    NSString *avmount = [CoinUtil convertToRealCoin:self.moneyModel.avilAmount coin:coin.symbol];
-//    if ([self.inputFiled.text floatValue] > [avmount floatValue]) {
-//        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"不能大于可售金额" key:nil]];
-//        return;
-//    }
-//    //第五步 递增  todo
-//   NSString *all = [CoinUtil convertToSysCoin:self.inputFiled.text coin:self.moneyModel.symbol];
-//
-//    NSString *mo = [all subNumber:self.moneyModel.minAmount];
-//
-////    long long f = [all longLongValue] -[self.moneyModel.minAmount longLongValue];
-//    NSString *mo2 = [mo divNumber:self.moneyModel.increAmount leaveNum:4];
-//
-////    long long f1 = [self.moneyModel.minAmount longLongValue];
-////    long long f2= f % f1;
-//    if ([mo2 isEqualToString:@"0"]) {
-//
-//    }else{
-//        BOOL yes = [self isPureInt:[NSString stringWithFormat:@"%@",mo2]];
-//        if (yes == 0) {
-//            [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请按递增额度购买" key:nil]];
-//            return;
-//
-//        }
-//    }
+    NSString *leftAmount = [CoinUtil convertToRealCoin:self.currencyModel.amountString coin:self.currencyModel.currency];
+    NSString *rightAmount = [CoinUtil convertToRealCoin:self.currencyModel.frozenAmountString coin:self.currencyModel.currency];
+    NSString *ritAmount = [leftAmount subNumber:rightAmount];
+    NSString *str1 = [NSString stringWithFormat:@" %.2f ",[ritAmount doubleValue]];
 
 
-//    [self.inputFiled resignFirstResponder];
-//    [self.view1 endEditing:YES];
+    NSString *increAmount1 = [CoinUtil convertToRealCoin:self.moneyModel.increAmount coin:self.moneyModel.symbol];
+
+
+    if ([increAmount1 floatValue] * number > [str1 floatValue]) {
+        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"余额不足,请充值" key:nil]];
+        return;
+    }
+
     [self.view endEditing:YES];
-//    self.view1.hidden = YES;
     //确认购买
 
     PayModel *payModel = [PayModel new];
@@ -381,20 +374,25 @@
     [whiteView addSubview:buycount];
 
 
-    UILabel *buy = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextBlack font:16];
+    UILabel *buy = [UILabel labelWithBackgroundColor:kClearColor textColor:kHexColor(@"#FF6400") font:16];
     buy.frame = CGRectMake(buycount.xx + 10, buycount.frame.origin.y, SCREEN_WIDTH - 48 - 25 - buycount.frame.size.width, 14);
     [whiteView addSubview:buy];
-    buy.text = self.payModel.count;
+    self.numberLabel = [self.view viewWithTag:1212];
 
-    UILabel *buysymbol = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextBlack font:14];
-    buysymbol.frame = CGRectMake(buycount.xx + 10, buycount.frame.origin.y + 1, SCREEN_WIDTH - 48 - 25 - buycount.frame.size.width, 14);
-    [whiteView addSubview:buysymbol];
-    buysymbol.text = self.currencyModel.currency;
+    NSString *increAmount = [CoinUtil convertToRealCoin:self.moneyModel.increAmount coin:self.moneyModel.symbol];
+
+    NSString *price = [NSString stringWithFormat:@"%.2f %@",[increAmount floatValue]* [self.numberLabel.text floatValue],self.currencyModel.currency];
+    NSString *currency = self.currencyModel.currency;
+
+    NSMutableAttributedString * attriStr = [[NSMutableAttributedString alloc] initWithString:price];
+    [attriStr addAttribute:NSForegroundColorAttributeName value:kTextBlack range:NSMakeRange(price.length - currency.length, currency.length)];
+    buy.attributedText = attriStr;
+
 
 
     UIView *line2 = [UIView new];
     line2.backgroundColor = kLineColor;
-    line2.frame = CGRectMake(15, buysymbol.yy + 15, SCREEN_WIDTH - 48 -30, 0.5);
+    line2.frame = CGRectMake(15, buy.yy + 15, SCREEN_WIDTH - 48 -30, 0.5);
     [whiteView addSubview:line2];
 
 
@@ -408,8 +406,7 @@
     UILabel *timeLab = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextBlack font:15];
     timeLab.frame = CGRectMake(freeTime.xx + 10, freeTime.frame.origin.y  + 1, SCREEN_WIDTH - 48 - 25 - freeTime.frame.size.width, 14);
     [whiteView addSubview:timeLab];
-    timeLab.text = [self.payModel.endTime convertDate];
-
+    timeLab.text = [self.moneyModel.arriveDatetime convertDate];
 
     UIView *line3 = [UIView new];
     line3.backgroundColor = kLineColor;
@@ -425,7 +422,7 @@
 
 
     UILabel *money = [UILabel labelWithBackgroundColor:kClearColor textColor:kHexColor(@"#FF6400") font:16];
-    money.text = @"123";
+    money.text = [NSString stringWithFormat:@"%.2f",[price floatValue] * [self.moneyModel.expectYield floatValue]];
     money.frame = CGRectMake(moneyMay.xx + 5, moneyMay.frame.origin.y + 1,  SCREEN_WIDTH - 48 - 25 - moneyMay.xx, 14);
     [whiteView addSubview:money];
 
@@ -452,6 +449,8 @@
     }];
 }
 
+
+
 - (void)hideSelfbuy
 {
     [UIView animateWithDuration:0.5 animations:^{
@@ -477,35 +476,32 @@
         }
         [weakSelf.pwdView.password clearText];
 
-//        TLNetworking *http = [[TLNetworking alloc] init];
-//
-//        http.code = @"625520";
-//        http.parameters[@"code"] = weakSelf.moneyModel.code;
-//        CoinModel *model = [CoinUtil getCoinModel:weakSelf.moneyModel.symbol];
-//        NSString *money = [CoinUtil convertToSysCoin:weakSelf.payModel.count coin:model.symbol];
-//
-//        http.parameters[@"investAmount"] = money;
-//        http.parameters[@"tradePwd"] = password;
-//        http.parameters[@"userId"] = [TLUser user].userId;
-//
-//        [http postWithSuccess:^(id responseObject) {
-//
-//            NSNotification *notification =[NSNotification notificationWithName:@"LOADDATA" object:nil userInfo:nil];
-//            [[NSNotificationCenter defaultCenter] postNotification:notification];
-//
-//            [weakSelf showBuySucess];
-//            weakSelf.pwdView.hidden = YES;
-//
-//        } failure:^(NSError *error) {
-//            weakSelf.pwdView.hidden = NO;
-//            [weakSelf.pwdView.password clearText];
-//
-//            return ;
-//
-//        }];
+        TLNetworking *http = [[TLNetworking alloc] init];
+        http.showView = weakSelf.view;
+        http.code = @"625520";
+        http.parameters[@"code"] = weakSelf.moneyModel.code;
 
-        [weakSelf showBuySucess];
-        weakSelf.pwdView.hidden = YES;
+        weakSelf.numberLabel = [weakSelf.view viewWithTag:1212];
+        http.parameters[@"investFen"] = @([weakSelf.numberLabel.text integerValue]);
+        http.parameters[@"tradePwd"] = password;
+        http.parameters[@"userId"] = [TLUser user].userId;
+        [http postWithSuccess:^(id responseObject) {
+
+            NSNotification *notification =[NSNotification notificationWithName:@"LOADDATA" object:nil userInfo:nil];
+            [[NSNotificationCenter defaultCenter] postNotification:notification];
+
+            [weakSelf showBuySucess];
+            weakSelf.pwdView.hidden = YES;
+
+        } failure:^(NSError *error) {
+            weakSelf.pwdView.hidden = NO;
+            [weakSelf.pwdView.password clearText];
+
+            return ;
+
+        }];
+
+
 
     };
 
