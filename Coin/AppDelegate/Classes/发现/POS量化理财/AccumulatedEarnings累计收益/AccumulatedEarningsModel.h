@@ -30,6 +30,7 @@
 @property (nonatomic , copy)NSString *type;
 @property (nonatomic , copy)NSString *userId;
 @property (nonatomic , copy)NSString *workDate;
+@property (nonatomic , copy)NSString *productName;
 
 
 

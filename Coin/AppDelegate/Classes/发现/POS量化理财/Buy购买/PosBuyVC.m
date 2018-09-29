@@ -269,6 +269,9 @@
 //        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"正在加载,请稍等" key:nil]];
 //        return;
 //    }
+    if (self.currencys.count == 0) {
+        return;
+    }
     NSString *leftAmount = [CoinUtil convertToRealCoin:self.currencyModel.amountString coin:self.currencyModel.currency];
     NSString *rightAmount = [CoinUtil convertToRealCoin:self.currencyModel.frozenAmountString coin:self.currencyModel.currency];
     NSString *ritAmount = [leftAmount subNumber:rightAmount];

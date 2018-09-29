@@ -85,6 +85,7 @@
 "提币申请提交成功" = "The successful submission of the application for the currency";
 "内部转账成功" = "Internal transfer success";
 "可用余额" = "Available balance";
+"可用余额:" = "Available balance:";
 "交易详情" = "transaction details";
 "转出" = "Turn out";
 "转入" = "To change into";

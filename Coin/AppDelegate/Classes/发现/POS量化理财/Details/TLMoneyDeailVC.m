@@ -109,12 +109,7 @@
 //购买
 -(void)continBtnClick
 {
-    NSString *avilAmount = [CoinUtil convertToRealCoin:self.moneyModel.avilAmount coin:self.moneyModel.symbol];
-    NSString *increAmount = [CoinUtil convertToRealCoin:self.moneyModel.increAmount coin:self.moneyModel.symbol];
-    if ([avilAmount floatValue] / [increAmount floatValue] < 1 || [avilAmount floatValue] == 0 || [increAmount floatValue] == 0) {
-        [TLAlert alertWithInfo:@"已售罄"];
-        return;
-    }
+
     PosBuyVC *vc= [PosBuyVC new];
     vc.moneyModel = self.moneyModel;
     [self.navigationController pushViewController:vc animated:YES];
@@ -150,11 +145,25 @@
     nameLable.textColor = [UIColor whiteColor];
     self.navigationItem.titleView = nameLable;
 
+
+
     UIButton *continBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"购买" key:nil] titleColor:kWhiteColor backgroundColor:kClearColor titleFont:18];
     [continBtn setBackgroundImage:kImage(@"Rectangle 3") forState:(UIControlStateNormal)];
     continBtn.frame = CGRectMake(0, SCREEN_HEIGHT - 50 - kNavigationBarHeight, SCREEN_WIDTH, 50);
     [continBtn addTarget:self action:@selector(continBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
+    continBtn.hidden = YES;
     [self.view addSubview:continBtn];
+
+
+    NSString *avilAmount = [CoinUtil convertToRealCoin:self.moneyModel.avilAmount coin:self.moneyModel.symbol];
+    NSString *increAmount = [CoinUtil convertToRealCoin:self.moneyModel.increAmount coin:self.moneyModel.symbol];
+    if ([avilAmount floatValue] / [increAmount floatValue] < 1 || [avilAmount floatValue] == 0 || [increAmount floatValue] == 0) {
+        continBtn.hidden = YES;
+    }else
+    {
+        continBtn.hidden = NO;
+    }
+    self.tableView.frame = CGRectMake(0, -kNavigationBarHeight, SCREEN_WIDTH, SCREEN_HEIGHT);
 
     [self LoadData];
 

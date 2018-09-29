@@ -50,7 +50,7 @@
 
 -(void)setModel:(AccumulatedEarningsModel *)model
 {
-    nameLabel.text = [NSString stringWithFormat:@"%@",model.bizNote];
+    nameLabel.text = [NSString stringWithFormat:@"%@",model.productName];
 
     NSString *transAmountString = [CoinUtil convertToRealCoin:model.transAmountString coin:model.currency];
 //    CGFloat transAmountString = [model.transAmountString floatValue];
