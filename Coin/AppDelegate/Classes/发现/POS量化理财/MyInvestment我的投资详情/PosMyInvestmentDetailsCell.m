@@ -30,6 +30,10 @@
         nameButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         [self addSubview:nameButton];
 
+        _stateLabel = [UILabel labelWithFrame:CGRectMake(0, 0, 0, 0) textAligment:(NSTextAlignmentCenter) backgroundColor:kClearColor font:FONT(9) textColor:kHexColor(@"#0848DF")];
+        kViewBorderRadius(_stateLabel, 3, 0.5, kHexColor(@"#0848DF"));
+        [self addSubview:_stateLabel];
+
         UIView *lineView1 = [[UIView alloc]initWithFrame:CGRectMake(15, 55, kScreenWidth - 30, 1)];
         lineView1.backgroundColor = kLineColor;
         [self addSubview:lineView1];
@@ -91,17 +95,56 @@
         default:
             break;
     }
+//    [self.nameButton setTitle:@"asdfasdhfjkashd qweurqwerfjsadljvcsmlaklkdjqwejfiq" forState:(UIControlStateNormal)];
     self.nameButton.frame = CGRectMake(15, 10, SCREEN_WIDTH - self.timeLabel.frame.size.width - 30 - 10, 45);
-    if ([model.status integerValue] == 1) {
-        [self.nameButton SG_imagePositionStyle:(SGImagePositionStyleRight) spacing:4 imagePositionBlock:^(UIButton *button) {
-            [button setImage:kImage(@"已持有") forState:(UIControlStateNormal)];
-        }];
+    [self.nameButton sizeToFit];
+    self.nameButton.frame = CGRectMake(15, 10, self.nameButton.frame.size.width, 45);
+
+
+    _stateLabel.frame = CGRectMake(self.nameButton.xx, 26.5, 0, 12);
+
+    if ([model.status integerValue] == 0) {
+
+        _stateLabel.text = [LangSwitcher switchLang:@"已申购" key:nil];
+        kViewBorderRadius(_stateLabel, 3, 0.5, kHexColor(@"#0848DF"));
+        _stateLabel.textColor = kHexColor(@"#0848DF");
+
+    }else if ([model.status integerValue] == 1)
+    {
+
+        _stateLabel.text = [LangSwitcher switchLang:@"已持有" key:nil];
+        kViewBorderRadius(_stateLabel, 3, 0.5, kHexColor(@"#0848DF"));
+        _stateLabel.textColor = kHexColor(@"#0848DF");
+
+
+    }else if ([model.status integerValue] == 2)
+    {
+
+        _stateLabel.text = [LangSwitcher switchLang:@"已回款" key:nil];
+        kViewBorderRadius(_stateLabel, 3, 0.5, [UIColor grayColor]);
+        _stateLabel.textColor = [UIColor grayColor];
+
+
+    }else if ([model.status integerValue] == 3)
+    {
+        _stateLabel.text = [LangSwitcher switchLang:@"募集失败" key:nil];
+        kViewBorderRadius(_stateLabel, 3, 0.5, [UIColor grayColor]);
+        _stateLabel.textColor = [UIColor grayColor];
+
     }
+    [_stateLabel sizeToFit];
+
+    if (self.nameButton.xx + 15 + _stateLabel.frame.size.width + self.timeLabel.frame.size.width + 15 > SCREEN_WIDTH) {
+        self.nameButton.frame = CGRectMake(15, 10, SCREEN_WIDTH - self.timeLabel.frame.size.width - 50 - self.stateLabel.frame.size.width, 45);
+    }
+
+    _stateLabel.frame = CGRectMake(self.nameButton.xx + 5, 25.5, _stateLabel.frame.size.width + 5, 14);
+
 
     NSString *expectIncome = [CoinUtil convertToRealCoin:model.expectIncome coin:model.productInfo[@"symbol"]];
 
     if ([expectIncome floatValue] > 10000) {
-        self.numberLabel.text = [NSString stringWithFormat:@"%.1f万%@",[expectIncome floatValue]/10000,model.productInfo[@"symbol"]];
+        self.numberLabel.text = [NSString stringWithFormat:@"%.1f%@%@",[expectIncome floatValue]/10000,model.productInfo[@"symbol"],[LangSwitcher switchLang:@"万" key:nil]];
     }else
     {
         self.numberLabel.text = [NSString stringWithFormat:@"%.1f%@",[expectIncome floatValue],model.productInfo[@"symbol"]];

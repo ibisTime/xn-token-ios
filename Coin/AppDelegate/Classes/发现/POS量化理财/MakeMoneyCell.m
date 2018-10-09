@@ -151,6 +151,18 @@
     }
 
     self.stateLab.text = [LangSwitcher switchLang:model.statusStr key:nil];
+    if ([model.status isEqualToString:@"4"]) {
+        self.stateLab.textColor = kHexColor(@"#0848DF");
+    }
+    if ([model.status isEqualToString:@"7"]) {
+        if ([model.incomeFlag isEqualToString:@"0"])
+        {
+            self.stateLab.text = [LangSwitcher switchLang:@"已售罄" key:nil];
+        }else
+        {
+            self.stateLab.text = [LangSwitcher switchLang:@"计息中" key:nil];
+        }
+    }
     if ([model.status isEqualToString:@"8"]) {
         self.stateLab.textColor = [UIColor grayColor];
     }else
@@ -168,12 +180,13 @@
     label1.text = [NSString stringWithFormat:@"%.2f%@",[self.model.expectYield floatValue] * 100,str];
     label2.text = [NSString stringWithFormat:@"%@%@",model.limitDays,[LangSwitcher switchLang:@"天" key:nil]];
     NSString *avilAmount = [CoinUtil convertToRealCoin:model.avilAmount coin:coin.symbol];
+
     if ([avilAmount floatValue] > 10000) {
-        label3.text = [NSString stringWithFormat:@"%.2f万",[avilAmount floatValue]/10000];
+        label3.text = [NSString stringWithFormat:@"%.2f%@%@",[avilAmount floatValue]/10000,model.symbol,[LangSwitcher switchLang:@"万" key:nil]];
     }
     else
     {
-        label3.text = [NSString stringWithFormat:@"%.2f",[avilAmount floatValue]];
+        label3.text = [NSString stringWithFormat:@"%.2f%@",[avilAmount floatValue],model.symbol];
     }
 
 

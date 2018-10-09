@@ -349,7 +349,7 @@
         helpCenter.title = [LangSwitcher switchLang:@"帮助中心" key:nil];
         helpCenter.uiDelegate = self;
 
-        [self.navigationController setNavigationBarHidden:YES animated:YES];
+//        [self.navigationController setNavigationBarHidden:YES animated:YES];
 
         
 

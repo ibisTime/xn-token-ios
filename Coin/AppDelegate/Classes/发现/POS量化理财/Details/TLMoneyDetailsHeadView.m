@@ -32,13 +32,9 @@
         nameLabel.text = [LangSwitcher switchLang:@"预期年化收益率" key:nil];
         [self addSubview:nameLabel];
 
-
         UILabel *priceLabel =[UILabel labelWithFrame:CGRectMake(15, kNavigationBarHeight + 25, kScreenWidth - 30, 60) textAligment:(NSTextAlignmentCenter) backgroundColor:kClearColor font:Font(45) textColor:kHexColor(@"#FFFFFF")];
         self.priceLabel = priceLabel;
-
         [self addSubview:priceLabel];
-
-
 
         NSArray *nameArray = @[@"认购期限",@"剩余额度",@"起购额度"];
         for (int i = 0; i < 3 ; i++) {

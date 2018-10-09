@@ -20,6 +20,9 @@
 
 @property (nonatomic ,copy) NSString *timeStatus;
 
+
+@property (nonatomic ,copy) NSString *incomeFlag;
+
 //购买属性
 @property (nonatomic ,copy) NSString *buyDescZhCn;
 @property (nonatomic ,copy) NSString *buyDescKo;

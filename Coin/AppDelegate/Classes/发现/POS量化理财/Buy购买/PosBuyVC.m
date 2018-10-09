@@ -664,6 +664,8 @@
     self.navigationItem.backBarButtonItem = item;
     self.navigationController.navigationBar.shadowImage = [UIImage new];
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+//    [self.pwdView.password clearText];
+    [self.pwdView.password.textField resignFirstResponder];
 
 }
 

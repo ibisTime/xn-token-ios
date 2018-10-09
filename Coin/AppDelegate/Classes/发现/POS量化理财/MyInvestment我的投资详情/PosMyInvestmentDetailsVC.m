@@ -12,6 +12,9 @@
 #import "PosMyInvestmentHeadView.h"
 #import "AccumulatedEarningsVC.h"
 @interface PosMyInvestmentDetailsVC ()<RefreshDelegate>
+{
+    PosMyInvestmentHeadView *headView;
+}
 
 @property (nonatomic , strong)PosMyInvestmentDetailsTableView *tableView;
 
@@ -46,6 +49,7 @@
     self.title = [LangSwitcher switchLang:@"我的投资详情" key:nil];
     [self initTableView];
     [self LoadData:@[@"0",@"1",@"2"]];
+    [self totalAmount];
 }
 
 - (void)initTableView {
@@ -54,7 +58,7 @@
     self.tableView.backgroundColor = kBackgroundColor;
 
 
-    PosMyInvestmentHeadView *headView = [[PosMyInvestmentHeadView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 160 - 64)];
+    headView = [[PosMyInvestmentHeadView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 160 - 64)];
     headView.backgroundColor = kHexColor(@"#0848DF");
     headView.dataDic = self.dataDic;
     [headView.earningsButton addTarget:self action:@selector(earningsButtonClick) forControlEvents:(UIControlEventTouchUpInside)];
@@ -64,6 +68,23 @@
 
     
 
+}
+
+-(void)totalAmount
+{
+    TLNetworking *http = [TLNetworking new];
+    http.code = @"625527";
+    http.showView = self.view;
+    http.parameters[@"userId"]  = [TLUser user].userId;
+
+    [http postWithSuccess:^(id responseObject) {
+
+        headView.dataDic = responseObject[@"data"];
+        [self.tableView reloadData];
+
+    } failure:^(NSError *error) {
+
+    }];
 }
 
 - (void)click:(UITapGestureRecognizer *)gesture{

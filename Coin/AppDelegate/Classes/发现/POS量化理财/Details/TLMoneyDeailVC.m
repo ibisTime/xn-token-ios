@@ -26,9 +26,6 @@
 #import "TLMoneyDetailsHeadView.h"
 @interface TLMoneyDeailVC () <RefreshDelegate,UIScrollViewDelegate>
 
-//@property (nonatomic ,strong) UIScrollView *contentView;
-//@property (nonatomic ,strong) UIView *titleView;
-//@property (nonatomic ,strong) TLTopMoneyView *tit;
 
 @property (nonatomic , strong)TLMoneyDetailsTableView *tableView;
 
@@ -164,10 +161,7 @@
         continBtn.hidden = NO;
     }
     self.tableView.frame = CGRectMake(0, -kNavigationBarHeight, SCREEN_WIDTH, SCREEN_HEIGHT);
-
     [self LoadData];
-
-    
 }
 
 

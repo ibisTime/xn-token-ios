@@ -12,8 +12,6 @@
 #import "BillCell.h"
 #import "questionListCells.h"
 #import "MakeMoneyCell.h"
-#import "MoneyAndTreasureHeadCell.h"
-#define MoneyAndTreasureHead @"MoneyAndTreasureHeadCell"
 @interface TLMakeMoney()<UITableViewDelegate, UITableViewDataSource>
 
 
@@ -27,11 +25,10 @@ static NSString *identifierCell = @"MakeMoneyCell";
         
         self.dataSource = self;
         self.delegate = self;
-//        [self setContentInset:UIEdgeInsetsMake(5, 0.0, -5, 0.0)];
         self.backgroundColor = kBackgroundColor;
         
         [self registerClass:[MakeMoneyCell class] forCellReuseIdentifier:identifierCell];
-        [self registerClass:[MoneyAndTreasureHeadCell class] forCellReuseIdentifier:MoneyAndTreasureHead];
+
 
         self.separatorStyle = UITableViewCellSeparatorStyleNone;
 
@@ -48,20 +45,12 @@ static NSString *identifierCell = @"MakeMoneyCell";
     return 1;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-//    if (section == 0) {
-//        return 1;
-//    }
+
     return self.Moneys.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-//    if (indexPath.section == 0) {
-//        MoneyAndTreasureHeadCell *cell = [tableView dequeueReusableCellWithIdentifier:MoneyAndTreasureHead forIndexPath:indexPath];
-//        cell.dataDic = self.dataDic;
-//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//        return cell;
-//    }
+
     MakeMoneyCell *cell = [tableView dequeueReusableCellWithIdentifier:identifierCell forIndexPath:indexPath];
     cell.model = self.Moneys[indexPath.row];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;

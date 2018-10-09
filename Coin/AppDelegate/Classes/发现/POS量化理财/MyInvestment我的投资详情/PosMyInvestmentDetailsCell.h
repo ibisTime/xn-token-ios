@@ -19,4 +19,7 @@
 @property (nonatomic , strong)UIView *line;
 @property (nonatomic , strong)UILabel *shareLabel;
 @property (nonatomic , strong)UILabel *earningsLabel;
+
+@property (nonatomic , strong)UILabel *stateLabel;
+
 @end

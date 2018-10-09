@@ -92,10 +92,10 @@
     {
 
         if ([totalInvest floatValue] > 10000) {
-            [self.eyesButton setTitle:[NSString stringWithFormat:@"≈ %.1f万 BTC",[totalInvest floatValue]/10000] forState:(UIControlStateNormal)];
+            [self.eyesButton setTitle:[NSString stringWithFormat:@"≈ %.2f%@ BTC",[totalInvest floatValue]/10000,[LangSwitcher switchLang:@"万" key:nil]] forState:(UIControlStateNormal)];
         }else
         {
-            [self.eyesButton setTitle:[NSString stringWithFormat:@"≈ %.1f BTC",[totalInvest floatValue]] forState:(UIControlStateNormal)];
+            [self.eyesButton setTitle:[NSString stringWithFormat:@"≈ %.2f BTC",[totalInvest floatValue]] forState:(UIControlStateNormal)];
         }
     }
 

@@ -36,6 +36,7 @@
 
 @property (nonatomic, strong) MoneyAndTreasureHeadView *headView;
 
+@property (nonatomic , strong)NSDictionary *dataDic;
 
 @end
 
@@ -55,10 +56,6 @@
     self.navigationController.navigationBar.shadowImage = [UIImage new];
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
 
-//    if ([TLUser user].isLogin) {
-//        BOOL is =  [[TLUser user] chang];
-//
-//    }
 
 }
 
@@ -117,7 +114,7 @@
 - (void)myRecodeClick
 {
     PosMyInvestmentDetailsVC *VC = [PosMyInvestmentDetailsVC new];
-    VC.dataDic = self.headView.dataDic;
+    VC.dataDic = self.dataDic;
     [self.navigationController pushViewController:VC animated:YES];
 
 }
@@ -134,6 +131,7 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"LOADDATA" object:nil];
 }
 
+//总收益
 -(void)totalAmount
 {
     TLNetworking *http = [TLNetworking new];
@@ -142,11 +140,8 @@
     http.parameters[@"userId"]  = [TLUser user].userId;
 
     [http postWithSuccess:^(id responseObject) {
-        
-//        NSString *str = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"totalInvest"]];
 
-
-//        self.tableView.dataDic = responseObject[@"data"];
+        self.dataDic = responseObject[@"data"];
         self.headView.dataDic = responseObject[@"data"];
         [self.tableView reloadData];
 

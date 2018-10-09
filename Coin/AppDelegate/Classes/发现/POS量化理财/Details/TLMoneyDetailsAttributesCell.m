@@ -46,7 +46,7 @@
 
     NSString *amount = [CoinUtil convertToRealCoin:moneyModel.amount coin:moneyModel.symbol];
     if ([amount floatValue] > 10000) {
-        label3.text = [NSString stringWithFormat:@"%@%.2f万 %@",[LangSwitcher switchLang:@"产品总额度：" key:nil],[amount floatValue]/10000,moneyModel.symbol];
+        label3.text = [NSString stringWithFormat:@"%@%.2f%@ %@",[LangSwitcher switchLang:@"产品总额度：" key:nil],[amount floatValue]/10000,[LangSwitcher switchLang:@"万" key:nil],moneyModel.symbol];
     }
     else
     {

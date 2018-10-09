@@ -20,12 +20,13 @@
         }else if ([_status isEqualToString:@"6"]) {
             _statusStr = @"已售罄";
         }else if ([_status isEqualToString:@"7"]) {
-            _statusStr = @"产品封闭期";
+            _statusStr = @"已售罄";
         }else if ([_status isEqualToString:@"8"]) {
             _statusStr = @"已到期";
-        }else
+        }
+        else
         {
-            _statusStr = @"";
+            _statusStr = @"敬请期待";
         }
 
     }

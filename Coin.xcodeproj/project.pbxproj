@@ -24,7 +24,6 @@
 		211A53321FBFE4F100CC6294 /* RateDescTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 211A53311FBFE4F100CC6294 /* RateDescTableView.m */; };
 		211A53351FBFE53100CC6294 /* RateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 211A53341FBFE53100CC6294 /* RateModel.m */; };
 		211C05081FC6714500E51FCF /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 211C05071FC6714400E51FCF /* libz.tbd */; };
-		211C050A1FC6715000E51FCF /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 211C05091FC6714F00E51FCF /* libc++.tbd */; };
 		211C050C1FC6715B00E51FCF /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 211C050B1FC6715B00E51FCF /* libsqlite3.tbd */; };
 		211C05111FC6717300E51FCF /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 211C050F1FC6717300E51FCF /* libstdc++.6.0.9.tbd */; };
 		211C05121FC6717300E51FCF /* libstdc++.6.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 211C05101FC6717300E51FCF /* libstdc++.6.tbd */; };
@@ -187,6 +186,7 @@
 		4C8DE98520C983D100EC183C /* EthereumUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C8DE98420C983D100EC183C /* EthereumUtil.swift */; };
 		4CC7F0ED205FBC5400BBEC4D /* CoinModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CC7F0EC205FBC5400BBEC4D /* CoinModel.m */; };
 		4CE70FE120C82EDD00F0C803 /* MnemonicUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CE70FE020C82EDD00F0C803 /* MnemonicUtil.m */; };
+		7A07F7D8216B6EDD0026EB7A /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 211C05091FC6714F00E51FCF /* libc++.tbd */; };
 		7A272662212BFFA70067E3CD /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A27265C212BFFA70067E3CD /* libWeChatSDK.a */; };
 		7A272663212BFFA70067E3CD /* read_me.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7A27265D212BFFA70067E3CD /* read_me.txt */; };
 		7A272664212BFFA70067E3CD /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7A27265E212BFFA70067E3CD /* README.txt */; };
@@ -236,8 +236,6 @@
 		7A2CC6D6215DC89200B27E2D /* PGPickerColumnView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC6CE215DC89200B27E2D /* PGPickerColumnView.m */; };
 		7A2CC6D7215DC89200B27E2D /* PGPickerTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC6D0215DC89200B27E2D /* PGPickerTableView.m */; };
 		7A2CC6D8215DC89200B27E2D /* PGPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC6D2215DC89200B27E2D /* PGPickerView.m */; };
-		7A2CC6D9215DC89200B27E2D /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 7A2CC6D3215DC89200B27E2D /* README.md */; };
-		7A2CC6DC215E002800B27E2D /* MoneyAndTreasureHeadCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC6DB215E002800B27E2D /* MoneyAndTreasureHeadCell.m */; };
 		7A2CC6DF215E2B1500B27E2D /* AccumulatedEarningsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC6DE215E2B1500B27E2D /* AccumulatedEarningsModel.m */; };
 		7A3821BD20EABD1300D6B636 /* GetTheTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A3821BC20EABD1300D6B636 /* GetTheTableView.m */; };
 		7A3821C020EACD8B00D6B636 /* SendTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A3821BF20EACD8B00D6B636 /* SendTableView.m */; };
@@ -267,7 +265,6 @@
 		7AAF0329215267ED008507FF /* SGSecurityBody.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AAF0324215267ED008507FF /* SGSecurityBody.framework */; };
 		7AAF032B21526956008507FF /* yw_1222_0335.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7AAF032A21526955008507FF /* yw_1222_0335.jpg */; };
 		7AAF035F21526977008507FF /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7AAF033421526977008507FF /* LICENSE.txt */; };
-		7AAF036021526977008507FF /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 7AAF033521526977008507FF /* README.md */; };
 		7AAF036121526977008507FF /* aescrypt.c in Sources */ = {isa = PBXBuildFile; fileRef = 7AAF033A21526977008507FF /* aescrypt.c */; };
 		7AAF036221526977008507FF /* aeskey.c in Sources */ = {isa = PBXBuildFile; fileRef = 7AAF033B21526977008507FF /* aeskey.c */; };
 		7AAF036321526977008507FF /* aestab.c in Sources */ = {isa = PBXBuildFile; fileRef = 7AAF033D21526977008507FF /* aestab.c */; };
@@ -972,9 +969,6 @@
 		7A2CC6D0215DC89200B27E2D /* PGPickerTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PGPickerTableView.m; sourceTree = "<group>"; };
 		7A2CC6D1215DC89200B27E2D /* PGPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGPickerView.h; sourceTree = "<group>"; };
 		7A2CC6D2215DC89200B27E2D /* PGPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PGPickerView.m; sourceTree = "<group>"; };
-		7A2CC6D3215DC89200B27E2D /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		7A2CC6DA215E002800B27E2D /* MoneyAndTreasureHeadCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MoneyAndTreasureHeadCell.h; sourceTree = "<group>"; };
-		7A2CC6DB215E002800B27E2D /* MoneyAndTreasureHeadCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MoneyAndTreasureHeadCell.m; sourceTree = "<group>"; };
 		7A2CC6DD215E2B1500B27E2D /* AccumulatedEarningsModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AccumulatedEarningsModel.h; sourceTree = "<group>"; };
 		7A2CC6DE215E2B1500B27E2D /* AccumulatedEarningsModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AccumulatedEarningsModel.m; sourceTree = "<group>"; };
 		7A3821BB20EABD1300D6B636 /* GetTheTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GetTheTableView.h; sourceTree = "<group>"; };
@@ -1027,7 +1021,6 @@
 		7AAF0324215267ED008507FF /* SGSecurityBody.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SGSecurityBody.framework; sourceTree = "<group>"; };
 		7AAF032A21526955008507FF /* yw_1222_0335.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = yw_1222_0335.jpg; sourceTree = "<group>"; };
 		7AAF033421526977008507FF /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
-		7AAF033521526977008507FF /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		7AAF033821526977008507FF /* aes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aes.h; sourceTree = "<group>"; };
 		7AAF033921526977008507FF /* aes_via_ace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aes_via_ace.h; sourceTree = "<group>"; };
 		7AAF033A21526977008507FF /* aescrypt.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = aescrypt.c; sourceTree = "<group>"; };
@@ -1594,6 +1587,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7A07F7D8216B6EDD0026EB7A /* libc++.tbd in Frameworks */,
 				7AAF037921526A39008507FF /* Foundation.framework in Frameworks */,
 				7AAF037721526A31008507FF /* UIKit.framework in Frameworks */,
 				2EFFE6B21FF6286600BFCC40 /* CoreTelephony.framework in Frameworks */,
@@ -1614,7 +1608,6 @@
 				7A272662212BFFA70067E3CD /* libWeChatSDK.a in Frameworks */,
 				7AAF038121527166008507FF /* ZipArchive.framework in Frameworks */,
 				7AAF0329215267ED008507FF /* SGSecurityBody.framework in Frameworks */,
-				211C050A1FC6715000E51FCF /* libc++.tbd in Frameworks */,
 				211C050C1FC6715B00E51FCF /* libsqlite3.tbd in Frameworks */,
 				211C05121FC6717300E51FCF /* libstdc++.6.tbd in Frameworks */,
 				211C05111FC6717300E51FCF /* libstdc++.6.0.9.tbd in Frameworks */,
@@ -2557,8 +2550,6 @@
 				216F5B59206D02DC00F2C832 /* PosMiningVC.m */,
 				B8DDF880211D29EE0058D19D /* TLMakeMoney.h */,
 				B8DDF881211D29EE0058D19D /* TLMakeMoney.m */,
-				7A2CC6DA215E002800B27E2D /* MoneyAndTreasureHeadCell.h */,
-				7A2CC6DB215E002800B27E2D /* MoneyAndTreasureHeadCell.m */,
 				B8DDF883211D2AD10058D19D /* MakeMoneyCell.h */,
 				B8DDF884211D2AD10058D19D /* MakeMoneyCell.m */,
 				7AD659EF215F691C002F747E /* MoneyAndTreasureHeadView.h */,
@@ -3187,7 +3178,6 @@
 			children = (
 				7A2CC6C9215DC89200B27E2D /* LICENSE */,
 				7A2CC6CA215DC89200B27E2D /* PGPickerView */,
-				7A2CC6D3215DC89200B27E2D /* README.md */,
 			);
 			path = PGPickerView;
 			sourceTree = "<group>";
@@ -3326,7 +3316,6 @@
 			isa = PBXGroup;
 			children = (
 				7AAF033421526977008507FF /* LICENSE.txt */,
-				7AAF033521526977008507FF /* README.md */,
 				7AAF033621526977008507FF /* SSZipArchive */,
 			);
 			path = SSZipArchive;
@@ -4053,14 +4042,12 @@
 			files = (
 				7AAF035F21526977008507FF /* LICENSE.txt in Resources */,
 				7AAF037D21526EC4008507FF /* MSADefaultLocale.bundle in Resources */,
-				7A2CC6D9215DC89200B27E2D /* README.md in Resources */,
 				7A2CC6C2215DC88C00B27E2D /* PGDatePicker.bundle in Resources */,
 				B8CAA14321158FF200695BC3 /* LPDImagePickerController.bundle in Resources */,
 				B88B59172109AEC400F20D1B /* country.plist in Resources */,
 				7A272664212BFFA70067E3CD /* README.txt in Resources */,
 				B8A483FF214FC02800450819 /* lanch-1.png in Resources */,
 				B819BAAA20C6DD7800CEEC5E /* LaunchScreen.storyboard in Resources */,
-				7AAF036021526977008507FF /* README.md in Resources */,
 				2EFFE6AA1FF4829100BFCC40 /* Localizable.strings in Resources */,
 				7A272663212BFFA70067E3CD /* read_me.txt in Resources */,
 				7A2CC6D4215DC89200B27E2D /* LICENSE in Resources */,
@@ -4217,7 +4204,6 @@
 				215979761FB84CC70029F177 /* BillDetailCell.m in Sources */,
 				7A2CC6B8215DC88C00B27E2D /* PGDatePicker+Logic.m in Sources */,
 				7A2CC64A215B74BB00B27E2D /* TLMoneyDetailsHeadView.m in Sources */,
-				7A2CC6DC215E002800B27E2D /* MoneyAndTreasureHeadCell.m in Sources */,
 				B8CAA1562115FF7100695BC3 /* QuestionTB.m in Sources */,
 				B8CAA14D2115DE6300695BC3 /* TLhistoryListVC.m in Sources */,
 				7A2CC6BF215DC88C00B27E2D /* PGDatePicker+TimeAndSecond.m in Sources */,
@@ -4819,8 +4805,8 @@
 					"$(PROJECT_DIR)/Coin/Classes/Utils/thirdparties/thirdparties_ios_1.0.5",
 					"$(PROJECT_DIR)/Coin/Classes/Utils/umcommonlog/umcommonlog_ios_1.0.0",
 					"$(PROJECT_DIR)/Coin/Classes/Utils/common/common_ios_1.5.2/normal",
-					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Coin/ValidationSDK",
+					"$(PROJECT_DIR)",
 				);
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = YES;
 				GCC_PREFIX_HEADER = /Users/qinbaozheng/Desktop/THA/Coin/AppDelegate/Classes/Macro/CoinPrefixHeader.pch;
@@ -4977,8 +4963,8 @@
 					"$(PROJECT_DIR)/Coin/Classes/Utils/thirdparties/thirdparties_ios_1.0.5",
 					"$(PROJECT_DIR)/Coin/Classes/Utils/umcommonlog/umcommonlog_ios_1.0.0",
 					"$(PROJECT_DIR)/Coin/Classes/Utils/common/common_ios_1.5.2/normal",
-					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Coin/ValidationSDK",
+					"$(PROJECT_DIR)",
 				);
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = YES;
 				GCC_PREFIX_HEADER = /Users/qinbaozheng/Desktop/THA/Coin/AppDelegate/Classes/Macro/CoinPrefixHeader.pch;
