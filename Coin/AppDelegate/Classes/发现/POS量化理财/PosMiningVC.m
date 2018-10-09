@@ -43,7 +43,6 @@
 @implementation PosMiningVC
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    //    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
     //去掉导航栏底部的黑线
     self.navigationController.navigationBar.translucent = YES;
     [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];

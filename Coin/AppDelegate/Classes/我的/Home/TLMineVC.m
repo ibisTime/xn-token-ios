@@ -54,6 +54,8 @@
 #import "NewHelpCentetVC.h"
 
 #import "IntegralVC.h"
+//我的收益
+#import "MyIncomeVC.h"
 
 @interface TLMineVC ()<MineHeaderSeletedDelegate, UINavigationControllerDelegate,ZDKHelpCenterConversationsUIDelegate,ZDKHelpCenterDelegate>
 
@@ -376,6 +378,7 @@
         [weakSelf.navigationController pushViewController:vc animated:YES];
         
     };
+
     MineModel *meSetting = [MineModel new];
     meSetting.text = [LangSwitcher switchLang:@"设置" key:nil];
     meSetting.imgName = @"设置";
@@ -389,6 +392,17 @@
         [weakSelf.navigationController pushViewController:vc animated:YES];
         
         
+    };
+
+    MineModel *MyIncome = [MineModel new];
+    MyIncome.text = [LangSwitcher switchLang:@"我的收益" key:nil];
+    MyIncome.imgName = @"设置";
+    MyIncome.action = ^{
+
+        MyIncomeVC *vc = [[MyIncomeVC alloc] init];
+        [weakSelf.navigationController pushViewController:vc animated:YES];
+
+
     };
     
     self.group = [MineGroup new];
@@ -406,7 +420,7 @@
         
         
         self.group.sections = @[ @[settingModel], @[inviteModel,questionSetting ],
-                                @[languageSetting,securityCenter,helpModel, meSetting]
+                                @[languageSetting,securityCenter,helpModel, meSetting,MyIncome]
                                 ];
         
     }
@@ -638,19 +652,7 @@
             
         }break;
             
-//        case MineHeaderSeletedTypeBuy:
-//        {
-//
-//            [[PublishService shareInstance] publishBuy:self.navigationController];
-//
-//        }break;   czy
-//
-//        case MineHeaderSeletedTypeSell:
-//        {
-//
-//            [[PublishService shareInstance] publishSell:self.navigationController];
-//
-//        }break;   czy
+
             
         default:
             break;
@@ -658,78 +660,7 @@
     }
 }
 
-// 用户重新登录需要重新，需要重新调用此方法监听
-//- (void)kvoUnReadMsgToChangeTabbar {
-//    
-//    //这里监听主要是为了，tabbar上的消息提示, 和icon上的图标
-//    // 此处有坑， [IMAPlatform sharedInstance].conversationMgr 切换账户是会销毁
-//    self.chatKVOCtrl = [FBKVOController controllerWithObserver:self];
-//    [self.chatKVOCtrl observe:[IMAPlatform sharedInstance].conversationMgr
-//                      keyPath:@"unReadMessageCount"
-//                      options:NSKeyValueObservingOptionNew
-//                        block:^(id observer, id object, NSDictionary *change) {
-//                            
-//                            NSInteger count =  [IMAPlatform sharedInstance].conversationMgr.unReadMessageCount;
-//                            
-//                            MineCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
-//                            
-//                            if (count > 0) {
-//                                
-//                                [cell showBadge];
-//                                
-//                            } else {
-//                                
-//                                [cell hideBadge];
-//                                
-//                            }
-//                            
-//                        }];
-//    
-//}
 
-#pragma mark- 添加未读消息 的 观察
-//- (void)addUnReadMsgKVO {     czy
-//
-//    CoinWeakSelf;
-//    // 这里不负责tabbar 上的改变, tabbar 在apple delegate 中处理
-//    self.KVOController = [FBKVOController controllerWithObserver:self];
-//    [self.KVOController observe:[IMAPlatform sharedInstance].conversationMgr
-//                        keyPath:@"unReadMessageCount"
-//                        options:NSKeyValueObservingOptionNew
-//                          block:^(id observer, id object, NSDictionary *change) {
-//
-//                              [weakSelf asyncHandleTopUnreadMsgHint];
-//
-//                          }];
-//
-//}
-//
-//- (void)asyncHandleTopUnreadMsgHint {     czy
-//
-//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-//
-//        NSInteger count =  [IMAPlatform sharedInstance].conversationMgr.unReadMessageCount;
-//
-//        //
-//        dispatch_async(dispatch_get_main_queue() , ^{
-//
-//             MineCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
-//
-//            if (count > 0) {
-//
-//                [cell showBadge];
-//
-//            } else {
-//
-//                [cell hideBadge];
-//
-//            }
-//
-//        });
-//
-//    });
-//
-//}
 
 
 
