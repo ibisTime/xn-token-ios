@@ -53,7 +53,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
     if (section == 2) {
-        return 5;
+        return self.topModel.count;
     }
     return 1;
 }
@@ -66,6 +66,9 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.dataDic = @{};
         cell.backgroundColor = kHexColor(@"#0848DF");
+        if ([TLUser isBlankString:self.model.userId] == NO) {
+            cell.model = self.model;
+        }
         return cell;
     }
     if (indexPath.section == 1) {
@@ -75,11 +78,17 @@
         cell.quantitativeButton.tag = 100;
         [cell.invitationButton addTarget:self action:@selector(moreButtonClick:) forControlEvents:(UIControlEventTouchUpInside)];
         cell.invitationButton.tag = 101;
+        if ([TLUser isBlankString:self.model.userId] == NO) {
+            cell.model = self.model;
+        }
         return cell;
     }
     MyInconmeCell *cell = [tableView dequeueReusableCellWithIdentifier:MyInconme forIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.numberLabel.text = [NSString stringWithFormat:@"NO.%ld",indexPath.row + 1];
+
+    if (self.topModel.count > 0) {
+        cell.topModel = self.topModel[indexPath.row];
+    }
     return cell;
 
 

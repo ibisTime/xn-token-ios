@@ -213,6 +213,7 @@
 		7A07F82E216CDAC10026EB7A /* InviteEarningsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A07F82D216CDAC10026EB7A /* InviteEarningsVC.m */; };
 		7A07F831216CDAD80026EB7A /* InviteEarningsTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A07F830216CDAD80026EB7A /* InviteEarningsTableView.m */; };
 		7A07F834216CDB000026EB7A /* InviteEarningCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A07F833216CDB000026EB7A /* InviteEarningCell.m */; };
+		7A07F837216DAA8D0026EB7A /* MyIncomeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A07F836216DAA8D0026EB7A /* MyIncomeModel.m */; };
 		7A272662212BFFA70067E3CD /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A27265C212BFFA70067E3CD /* libWeChatSDK.a */; };
 		7A272663212BFFA70067E3CD /* read_me.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7A27265D212BFFA70067E3CD /* read_me.txt */; };
 		7A272664212BFFA70067E3CD /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7A27265E212BFFA70067E3CD /* README.txt */; };
@@ -320,6 +321,7 @@
 		7AAF039321527A5E008507FF /* YZViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AAF039221527A5E008507FF /* YZViewController.m */; };
 		7AAF039C21527FD9008507FF /* YZVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AAF039B21527FD9008507FF /* YZVC.m */; };
 		7AD659F1215F691C002F747E /* MoneyAndTreasureHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AD659F0215F691C002F747E /* MoneyAndTreasureHeadView.m */; };
+		7AFBAE31216DD32A006CF464 /* MyIncomeTopModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AFBAE30216DD32A006CF464 /* MyIncomeTopModel.m */; };
 		B80864EE211EA17D00755158 /* BTCBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = B8086411211EA17C00755158 /* BTCBlock.m */; };
 		B80864EF211EA17D00755158 /* BTCBlockHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = B8086412211EA17C00755158 /* BTCBlockHeader.m */; };
 		B80864F0211EA17D00755158 /* BTCEncryptedBackup.m in Sources */ = {isa = PBXBuildFile; fileRef = B8086415211EA17C00755158 /* BTCEncryptedBackup.m */; };
@@ -950,6 +952,8 @@
 		7A07F830216CDAD80026EB7A /* InviteEarningsTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InviteEarningsTableView.m; sourceTree = "<group>"; };
 		7A07F832216CDB000026EB7A /* InviteEarningCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InviteEarningCell.h; sourceTree = "<group>"; };
 		7A07F833216CDB000026EB7A /* InviteEarningCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InviteEarningCell.m; sourceTree = "<group>"; };
+		7A07F835216DAA8D0026EB7A /* MyIncomeModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyIncomeModel.h; sourceTree = "<group>"; };
+		7A07F836216DAA8D0026EB7A /* MyIncomeModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyIncomeModel.m; sourceTree = "<group>"; };
 		7A27265C212BFFA70067E3CD /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
 		7A27265D212BFFA70067E3CD /* read_me.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = read_me.txt; sourceTree = "<group>"; };
 		7A27265E212BFFA70067E3CD /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
@@ -1147,6 +1151,8 @@
 		7AAF039B21527FD9008507FF /* YZVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZVC.m; sourceTree = "<group>"; };
 		7AD659EF215F691C002F747E /* MoneyAndTreasureHeadView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MoneyAndTreasureHeadView.h; sourceTree = "<group>"; };
 		7AD659F0215F691C002F747E /* MoneyAndTreasureHeadView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MoneyAndTreasureHeadView.m; sourceTree = "<group>"; };
+		7AFBAE2F216DD32A006CF464 /* MyIncomeTopModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyIncomeTopModel.h; sourceTree = "<group>"; };
+		7AFBAE30216DD32A006CF464 /* MyIncomeTopModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyIncomeTopModel.m; sourceTree = "<group>"; };
 		8863748C5281F9DC1DDF8EEA /* Pods-Coin.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Coin.release.xcconfig"; path = "Pods/Target Support Files/Pods-Coin/Pods-Coin.release.xcconfig"; sourceTree = "<group>"; };
 		AB34D27FC9725550E9092EC2 /* Pods-Coin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Coin.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Coin/Pods-Coin.debug.xcconfig"; sourceTree = "<group>"; };
 		B808640E211EA17C00755158 /* BTCMerkleTree+Tests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BTCMerkleTree+Tests.h"; sourceTree = "<group>"; };
@@ -3025,6 +3031,10 @@
 		7A07F7DB216C7B870026EB7A /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				7A07F835216DAA8D0026EB7A /* MyIncomeModel.h */,
+				7A07F836216DAA8D0026EB7A /* MyIncomeModel.m */,
+				7AFBAE2F216DD32A006CF464 /* MyIncomeTopModel.h */,
+				7AFBAE30216DD32A006CF464 /* MyIncomeTopModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -4823,6 +4833,7 @@
 				7A3821BD20EABD1300D6B636 /* GetTheTableView.m in Sources */,
 				211CEF141FCBBF90000FB0C4 /* SelectScrollView.m in Sources */,
 				B8E08BED212594FF00348AD4 /* TLMoneyDeailVC.m in Sources */,
+				7A07F837216DAA8D0026EB7A /* MyIncomeModel.m in Sources */,
 				B80D54CB210C84CA005303D5 /* APPLanguage.m in Sources */,
 				B8CAA14921158FF200695BC3 /* LPDPhotoPickerController.m in Sources */,
 				21CB94F01FDC0CAA00CAB090 /* LanguageSettingCell.m in Sources */,
@@ -4883,6 +4894,7 @@
 				216F5B16206CD9C900F2C832 /* TradeFlowListVC.m in Sources */,
 				B8086524211EA17D00755158 /* BTCKey+Tests.m in Sources */,
 				B80864F2211EA17D00755158 /* BTCTransactionBuilder.m in Sources */,
+				7AFBAE31216DD32A006CF464 /* MyIncomeTopModel.m in Sources */,
 				B8CF2CC821214A8800055706 /* CommentTableView.m in Sources */,
 				4C2438252066C2F1003B35F3 /* TopSegmentUtil.m in Sources */,
 				B88B592A2109B2EF00F20D1B /* ZLGestureLockViewController.m in Sources */,

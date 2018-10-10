@@ -11,9 +11,15 @@
 #import "GlobalRevenueListVC.h"
 #import "AccumulatedEarningsVC.h"
 #import "InviteEarningsVC.h"
+#import "MyIncomeModel.h"
+#import "MyIncomeTopModel.h"
 @interface MyIncomeVC ()<RefreshDelegate>
 
 @property (nonatomic , strong)MyIncomeTableView *tableView;
+
+@property (nonatomic , strong)MyIncomeModel *model;
+
+@property (nonatomic , strong)NSMutableArray <MyIncomeTopModel *>*topModel;
 
 @end
 
@@ -24,6 +30,29 @@
     // Do any additional setup after loading the view.
     self.title = [LangSwitcher switchLang:@"我的收益" key:nil];
     [self initTableView];
+    [self LoadData];
+}
+
+-(void)LoadData
+{
+    CoinWeakSelf;
+    [weakSelf.tableView addRefreshAction:^{
+        [TLNetworking POST:@"http://rap2.hichengdai.com:8080/app/mock/22/625800" parameters:nil success:^(id responseObject) {
+            NSLog(@"%@",responseObject);
+
+            weakSelf.topModel = [MyIncomeTopModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"][@"top5"]];
+            weakSelf.tableView.topModel = weakSelf.topModel;
+            
+            weakSelf.model = [MyIncomeModel mj_objectWithKeyValues:responseObject[@"data"]];
+            weakSelf.tableView.model = weakSelf.model;
+
+            [self.tableView reloadData];
+            [self.tableView endRefreshHeader];
+        } failure:^(NSError *error) {
+            [self.tableView endRefreshHeader];
+        }];
+    }];
+    [self.tableView beginRefreshing];
 }
 
 - (void)viewWillAppear:(BOOL)animated{

@@ -18,9 +18,7 @@
         [self addSubview:_numberLabel];
 
 
-        _accountLabel = [UILabel labelWithFrame:CGRectMake(66, 23, 0, 14) textAligment:(NSTextAlignmentLeft) backgroundColor:kClearColor font:FONT(14) textColor:kHexColor(@"#333333")];
-        _accountLabel.text = @"7571**@hotmail.com";
-//        _accountLabel.backgroundColor = [UIColor redColor];
+        _accountLabel = [UILabel labelWithFrame:CGRectMake(66, 22, 0, 14) textAligment:(NSTextAlignmentLeft) backgroundColor:kClearColor font:FONT(14) textColor:kHexColor(@"#333333")];
         [_accountLabel sizeToFit];
         [self addSubview:_accountLabel];
 
@@ -40,6 +38,19 @@
 
     }
     return self;
+}
+
+-(void)setTopModel:(MyIncomeTopModel *)topModel
+{
+    _numberLabel.text = [NSString stringWithFormat:@"NO.%ld",topModel.rank];
+    _accountLabel.text = topModel.mobile;
+    _accountLabel.frame = CGRectMake(66, 22, 0, 14);
+    [_accountLabel sizeToFit];
+    _priceLabel.text = [NSString stringWithFormat:@"%.4f",[topModel.incomeTotal floatValue]];
+
+    _nameLabel.frame = CGRectMake(_accountLabel.xx + 10, 11, SCREEN_WIDTH - _accountLabel.xx - 25, 17);
+    _priceLabel.frame = CGRectMake(_accountLabel.xx + 10, 28, SCREEN_WIDTH - _accountLabel.xx - 25, 20);
+
 }
 
 @end

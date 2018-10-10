@@ -187,7 +187,9 @@
     LangType type = [LangSwitcher currentLangType];
     NSString *lan;
     if (type == LangTypeSimple || type == LangTypeTraditional) {
-        
+        lan = @"zh-cn";
+        [ZDKSupport instance].helpCenterLocaleOverride = lan;
+
     }else if (type == LangTypeKorean)
     {
         lan = @"ko";
@@ -196,6 +198,7 @@
         
     }else{
         lan = @"en-us";
+
         [ZDKSupport instance].helpCenterLocaleOverride = lan;
 
     }

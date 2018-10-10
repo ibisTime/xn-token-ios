@@ -7,7 +7,9 @@
 //
 
 #import "TLTableView.h"
+#import "MyIncomeTopModel.h"
 
 @interface GlobalRevenueListTableView : TLTableView
 
+@property (nonatomic , strong)NSMutableArray <MyIncomeTopModel *>*topModel;
 @end

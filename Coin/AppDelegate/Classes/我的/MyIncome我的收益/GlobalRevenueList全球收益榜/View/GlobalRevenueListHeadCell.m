@@ -31,6 +31,11 @@
 
 -(void)oneCustomView
 {
+    UIImageView *onePhotoImage = [[UIImageView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 40 + 3, 108 - 64 + kNavigationBarHeight + 13, 74, 74)];
+    onePhotoImage.image = kImage(@"头像");
+    kViewRadius(onePhotoImage , 74/2);
+    [self addSubview:onePhotoImage];
+
     UIImageView *oneImage = [[UIImageView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 40, 108 - 64 + kNavigationBarHeight, 80, 90 + 12.5)];
     oneImage.image = kImage(@"第一名");
     [self addSubview:oneImage];
@@ -60,6 +65,12 @@
 
 -(void)tweCustomView
 {
+
+    UIImageView *twePhotoImage = [[UIImageView alloc]initWithFrame:CGRectMake(kWidth(65) - 30 + 3, 163 - 64 + kNavigationBarHeight + 3, 54, 54)];
+    twePhotoImage.image = kImage(@"头像");
+    [self addSubview:twePhotoImage];
+
+
     UIImageView *tweImage = [[UIImageView alloc]initWithFrame:CGRectMake(kWidth(65) - 30, 163 - 64 + kNavigationBarHeight, 60, 60 + 12.5)];
     tweImage.image = kImage(@"第二名");
     [self addSubview:tweImage];
@@ -88,6 +99,10 @@
 
 -(void)thereCustomView
 {
+    UIImageView *therePhotoImage = [[UIImageView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - kWidth(65)  - 30 + 3, 163 - 64 + kNavigationBarHeight + 3, 54, 54)];
+    therePhotoImage.image = kImage(@"头像");
+    [self addSubview:therePhotoImage];
+
     UIImageView *thereImage = [[UIImageView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - kWidth(65)  - 30, 163 - 64 + kNavigationBarHeight, 60, 60 + 12.5)];
     thereImage.image = kImage(@"第三名");
     [self addSubview:thereImage];

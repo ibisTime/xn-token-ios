@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "MyIncomeTopModel.h"
 @interface GlobalRevenueListCell : UITableViewCell
+
+@property (nonatomic , strong)MyIncomeTopModel *topModel;
 @property (nonatomic , strong)UILabel *numberLabel;
 
 @property (nonatomic , strong)UILabel *accountLabel;

@@ -26,7 +26,7 @@
 
         [self registerClass:[GlobalRevenueListCell class] forCellReuseIdentifier:MyInconme];
         [self registerClass:[GlobalRevenueListHeadCell class] forCellReuseIdentifier:GlobalRevenueListHead];
-
+        
         self.separatorStyle = UITableViewCellSeparatorStyleNone;
 
     }
@@ -45,7 +45,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
     if (section == 1) {
-        return 100;
+        return self.topModel.count;
     }
     return 1;
 }
@@ -59,8 +59,9 @@
     }
     GlobalRevenueListCell *cell = [tableView dequeueReusableCellWithIdentifier:MyInconme forIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.numberLabel.text = [NSString stringWithFormat:@"%ld",indexPath.row + 1];
-    cell.numberLabel.textAlignment = NSTextAlignmentCenter;
+    if (self.topModel.count > 0) {
+        cell.topModel = self.topModel[indexPath.row];
+    }
     return cell;
 
 
@@ -112,6 +113,13 @@
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
+
+//    if (scrollView.contentOffset.y <= 0) {
+//        self.bounces = YES;
+//    }else
+//    {
+//        self.bounces = NO;
+//    }
     if ([self.refreshDelegate respondsToSelector:@selector(refreshTableView:scrollView:)]) {
         [self.refreshDelegate refreshTableView:self scrollView:scrollView];
     }

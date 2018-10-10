@@ -10,4 +10,6 @@
 
 @interface InviteEarningsTableView : TLTableView
 
+@property (nonatomic , strong)NSArray *array;
+
 @end

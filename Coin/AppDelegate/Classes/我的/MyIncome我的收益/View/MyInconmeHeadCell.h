@@ -7,8 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MyIncomeModel.h"
 
 @interface MyInconmeHeadCell : UITableViewCell
+
+@property (nonatomic , strong)MyIncomeModel *model;
+
 @property (nonatomic , strong)UIButton *earningsButton;
 
 @property (nonatomic , strong)UIButton *backButton;

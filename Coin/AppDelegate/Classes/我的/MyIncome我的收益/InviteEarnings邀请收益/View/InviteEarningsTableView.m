@@ -37,11 +37,12 @@ static NSString *identifierCell = @"AccumulatedEarningsCell";
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 4;
+    return self.array.count;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
-    return 3;
+    NSArray *array = self.array[section];
+    return array.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -83,7 +84,8 @@ static NSString *identifierCell = @"AccumulatedEarningsCell";
     UIView *view = [UIView new];
 
     UILabel *titleLbl = [UILabel labelWithFrame:CGRectMake(15, 0, SCREEN_WIDTH - 30, 45) textAligment:(NSTextAlignmentLeft) backgroundColor:kClearColor font:Font(12) textColor:kHexColor(@"#999999")];
-    titleLbl.text = @"2018/09/29";
+    NSArray *array = self.array[section];
+    titleLbl.text = array[0][@"createDatetime"];
     [view addSubview:titleLbl];
 
     return view;

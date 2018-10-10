@@ -9,6 +9,9 @@
 #import "InviteEarningsVC.h"
 #import "InviteEarningsTableView.h"
 @interface InviteEarningsVC ()<RefreshDelegate>
+{
+
+}
 
 @property (nonatomic , strong)InviteEarningsTableView *tableView;
 
@@ -27,7 +30,55 @@
     [titleText setFont:[UIFont systemFontOfSize:17.0]];
     [titleText setText:[LangSwitcher switchLang:@"邀请收益" key:nil]];
     self.navigationItem.titleView=titleText;
-//    self.title = [LangSwitcher switchLang:@"邀请收益" key:nil];
+
+    NSArray *array = @[
+         @{@"bizType": @"5",
+           @"mobile": @"+86 15268501421",
+           @"income": @"10.2",
+           @"createDatetime": @"2018-10-08"},
+         @{@"bizType": @"1",
+           @"mobile": @"+86 15268501481",
+           @"income": @"10.2",
+           @"createDatetime": @"2018-10-08"},
+         @{@"bizType": @"1",
+           @"mobile": @"+86 15268501481",
+           @"income": @"10.2",
+           @"createDatetime": @"2018-10-08"},
+         @{@"bizType": @"1",
+           @"mobile": @"+86 15268501481",
+           @"income": @"10.2",
+           @"createDatetime": @"2018-10-09"},
+         @{@"bizType": @"1",
+           @"mobile": @"+86 15268501481",
+           @"income": @"10.2",
+           @"createDatetime": @"2018-10-10"},
+         @{@"bizType": @"1",
+           @"mobile": @"+86 15268501481",
+           @"income": @"10.2",
+           @"createDatetime": @"2018-10-11"}];
+
+    self.tableView.array = [InviteEarningsVC filterMaxItemsArray:array filterKey:@"createDatetime"];
+    NSLog(@"%@",self.tableView.array);
+
+
+}
+
++ (NSArray *)filterMaxItemsArray:(NSArray *)array filterKey:(NSString *)key {
+    NSMutableArray *origArray = [NSMutableArray arrayWithArray:array];
+    NSMutableArray *filerArray = [NSMutableArray array];
+
+    while (origArray.count > 0) {
+        id obj = origArray.firstObject;
+        NSPredicate *predic = nil;
+//        predic = [NSPredicate predicateWithFormat:@"self == %@",obj];
+        id value = [obj valueForKey:key];
+        predic = [NSPredicate predicateWithFormat:@"self.%@ == %@",key,value];
+
+        NSArray *pArray = [origArray filteredArrayUsingPredicate:predic];
+        [filerArray addObject:pArray];
+        [origArray removeObjectsInArray:pArray];
+    }
+    return filerArray;
 }
 
 - (void)initTableView {

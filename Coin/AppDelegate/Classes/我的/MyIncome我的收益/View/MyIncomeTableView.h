@@ -7,7 +7,10 @@
 //
 
 #import "TLTableView.h"
-
+#import "MyIncomeModel.h"
+#import "MyIncomeTopModel.h"
 @interface MyIncomeTableView : TLTableView
 
+@property (nonatomic , strong)NSMutableArray <MyIncomeTopModel *>*topModel;
+@property (nonatomic , strong)MyIncomeModel *model;
 @end
