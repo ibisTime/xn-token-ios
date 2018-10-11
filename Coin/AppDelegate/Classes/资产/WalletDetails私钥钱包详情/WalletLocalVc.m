@@ -342,20 +342,20 @@
     //        make.top.equalTo(@140);
     //
     //    }];
-    self.placeHolderView = [[UIView alloc] initWithFrame:CGRectMake(0, 240, kScreenWidth,  40)];
+//    self.placeHolderView = [[UIView alloc] initWithFrame:CGRectMake(0, 240, kScreenWidth,  40)];
 
-    UILabel *textLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor2 font:14.0];
-    
-    textLbl.text = [LangSwitcher switchLang:@"暂无明细" key:nil];
-    textLbl.textAlignment = NSTextAlignmentCenter;
-    
-    [self.placeHolderView addSubview:textLbl];
-    [textLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.top.equalTo(self.placeHolderView.mas_top).offset(150);
-        make.centerX.equalTo(self.placeHolderView.mas_centerX);
-        
-    }];
+//    UILabel *textLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor2 font:14.0];
+//    
+//    textLbl.text = [LangSwitcher switchLang:@"暂无明细" key:nil];
+//    textLbl.textAlignment = NSTextAlignmentCenter;
+//    
+//    [self.placeHolderView addSubview:textLbl];
+//    [textLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+//        
+//        make.top.equalTo(self.placeHolderView.mas_top).offset(150);
+//        make.centerX.equalTo(self.placeHolderView.mas_centerX);
+//        
+//    }];
 }
 
 - (void)initTableView {
@@ -368,6 +368,8 @@
     self.tableView.backgroundColor = kWhiteColor;
     self.tableView.refreshDelegate = self;
     self.tableView.billModel = self.currency;
+    self.tableView.defaultNoDataImage = kImage(@"暂无订单");
+    self.tableView.defaultNoDataText = [LangSwitcher switchLang:@"暂无明细" key:nil];
 //    self.tableView.sectionHeaderHeight = 22;
     [self.view addSubview:self.tableView];
     

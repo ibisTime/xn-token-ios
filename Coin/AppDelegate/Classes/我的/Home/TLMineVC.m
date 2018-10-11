@@ -59,6 +59,7 @@
 
 @interface TLMineVC ()<MineHeaderSeletedDelegate, UINavigationControllerDelegate,ZDKHelpCenterConversationsUIDelegate,ZDKHelpCenterDelegate>
 
+
 //@property (nonatomic, strong) FBKVOController *chatKVOCtrl;   czy
 
 @property (nonatomic, strong) UIScrollView *scrollView;
@@ -76,23 +77,54 @@
 @end
 
 @implementation TLMineVC
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    
-    [self.navigationController setNavigationBarHidden:NO animated:animated];
-    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+//
+//- (void)viewWillDisappear:(BOOL)animated {
+//    [super viewWillDisappear:animated];
+//
+//    [self.navigationController setNavigationBarHidden:NO animated:animated];
+//    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
 //    self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
-}
+//    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+//}
 
-- (void)viewWillAppear:(BOOL)animated {
-    
+- (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-   
-    [self.navigationController setNavigationBarHidden:YES animated:animated];
+    self.navigationController.navigationBar.translucent = NO;
+    [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setShadowImage:nil];
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-//    self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
+    self.navigationController.navigationBar.barTintColor = kHexColor(@"#0848DF");
+    self.navigationItem.backBarButtonItem = item;
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
+
+    //    self.navigationController.navigationBar.shadowImage = [UIImage new];
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+    [self.navigationController setNavigationBarHidden:YES animated:animated];
+
+
 }
+
+//如果仅设置当前页导航透明，需加入下面方法
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+
+
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
+    [self.navigationController setNavigationBarHidden:NO animated:animated];
+
+}
+
+//- (void)viewWillAppear:(BOOL)animated {
+//
+//    [super viewWillAppear:animated];
+//
+//    [self.navigationController setNavigationBarHidden:YES animated:animated];
+////    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+////    self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
+////    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+//
+//}
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
     
@@ -345,24 +377,30 @@
         }
 
         ZDKHelpCenterUiConfiguration  *  hcConfig  =  [ ZDKHelpCenterUiConfiguration  new ];
-        [ hcConfig setHideContactSupport :YES ];
+
+        self.navigationController.navigationBar.translucent = YES;
+        UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+        self.navigationController.navigationBar.tintColor = [UIColor blackColor];
+        self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
+        self.navigationItem.backBarButtonItem = item;
+        [ZDKTheme  currentTheme ].primaryColor  = [UIColor redColor];
+
+//     ZDKHelpCenterProvider *der =  [[ ZDKHelpCenterProvider  alloc ]  init ];
+//        der.getCategoryById
+
+
 
         UIViewController<ZDKHelpCenterDelegate>*helpCenter  =  [ ZDKHelpCenterUi  buildHelpCenterOverviewWithConfigs :@[hcConfig]];
-        helpCenter.title = [LangSwitcher switchLang:@"帮助中心" key:nil];
+//        UIViewController  * helpCenter  =  [ ZDKHelpCenterUi  buildHelpCenterOverviewWithConfigs :@[hcConfig]];
         helpCenter.uiDelegate = self;
+        [ self.navigationController  pushViewController:helpCenter  animated:YES ];
 
-//        [self.navigationController setNavigationBarHidden:YES animated:YES];
+//        ZDKRequestUiConfiguration  *  config  =  [[ ZDKRequestUiConfiguration  alloc ]  init ];
+//        UIViewController  * requestScreen  =  [ ZDKRequestUi  buildRequestUiWith :@ [ config ] ];
+//        [ self.navigationController pushViewController :requestScreen  animated :YES ];
+//        UIViewController  * requestScreen  =  [ ZDKRequestUi  buildRequestUiWith :@ [ config ] ];
+//        [ self.navigationController pushViewController :requestScreen  animated :YES ];
 
-        
-
-//         Set the theme properties
-//        theme.primaryColor = [UIColor colorWithRed:34.0f/255.0f green:34.0f/255.0f blue:48.0f/255.0f alpha:1.0f];
-
-//         Apply the change
-//        [theme apply];
-
-        
-        [ self.navigationController pushViewController :helpCenter  animated :YES ];
     };
     //关于我们
     MineModel *abountUs = [MineModel new];
@@ -426,6 +464,9 @@
     }
  
 }
+
+
+
 -(ZDKContactUsVisibility)active {
     return ZDKContactUsVisibilityArticleListOnly;
 }
@@ -436,6 +477,10 @@
 
     return ZDKNavBarConversationsUITypeNone;
 }
+
+//- (ZDKNavBarConversationsUIType) navBarConversationsUIType
+
+
 - (void)initTableView {
     
     self.tableView = [[MineTableView alloc] initWithFrame:CGRectMake(15, self.headerView.height, kScreenWidth-30, kScreenHeight - kTabBarHeight - self.headerView.height) style:UITableViewStyleGrouped];

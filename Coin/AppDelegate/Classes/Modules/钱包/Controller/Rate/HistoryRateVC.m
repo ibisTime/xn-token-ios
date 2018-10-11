@@ -39,33 +39,33 @@
 #pragma mark - Init
 - (void)initPlaceHolderView {
     
-    self.placeHolderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight - 40)];
-    
-    UIImageView *rateIV = [[UIImageView alloc] init];
-    
-    rateIV.image = kImage(@"暂无订单");
-    
-    [self.placeHolderView addSubview:rateIV];
-    [rateIV mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.centerX.equalTo(@0);
-        make.top.equalTo(@90);
-        
-    }];
-    
-    UILabel *textLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor2 font:14.0];
-    
-    textLbl.text = @"暂无历史汇率";
-    
-    textLbl.textAlignment = NSTextAlignmentCenter;
-    
-    [self.placeHolderView addSubview:textLbl];
-    [textLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.top.equalTo(rateIV.mas_bottom).offset(20);
-        make.centerX.equalTo(rateIV.mas_centerX);
-        
-    }];
+//    self.placeHolderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight - 40)];
+//
+//    UIImageView *rateIV = [[UIImageView alloc] init];
+//
+//    rateIV.image = kImage(@"暂无订单");
+//
+//    [self.placeHolderView addSubview:rateIV];
+//    [rateIV mas_makeConstraints:^(MASConstraintMaker *make) {
+//
+//        make.centerX.equalTo(@0);
+//        make.top.equalTo(@90);
+//
+//    }];
+//
+//    UILabel *textLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor2 font:14.0];
+//
+//    textLbl.text = @"暂无历史汇率";
+//
+//    textLbl.textAlignment = NSTextAlignmentCenter;
+//
+//    [self.placeHolderView addSubview:textLbl];
+//    [textLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+//
+//        make.top.equalTo(rateIV.mas_bottom).offset(20);
+//        make.centerX.equalTo(rateIV.mas_centerX);
+//
+//    }];
 }
 
 - (void)initTableView {
@@ -73,7 +73,8 @@
     self.tableView = [[HistoryRateTableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight)];
     
     self.tableView.placeHolderView = self.placeHolderView;
-    
+    self.tableView.defaultNoDataImage = kImage(@"暂无订单");
+    self.tableView.defaultNoDataText = [LangSwitcher switchLang:@"暂无历史汇率" key:nil];
     [self.view addSubview:self.tableView];
     
 }

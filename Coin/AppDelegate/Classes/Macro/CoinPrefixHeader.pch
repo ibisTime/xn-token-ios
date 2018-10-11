@@ -40,6 +40,8 @@
 #import "NSString+Check.h"
 #import "NSString+Date.h"
 #import "TLProgressHUD.h"
+#import "UITableView+AddForPlaceholder.h"
+
 #endif /* CoinPrefixHeader_h */
 
 #endif

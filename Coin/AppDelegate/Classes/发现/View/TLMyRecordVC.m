@@ -41,25 +41,26 @@
         //        _tableView.placeHolderView = self.placeHolderView;
         _tableView.refreshDelegate = self;
         _tableView.backgroundColor = kWhiteColor;
-        
+        self.tableView.defaultNoDataImage = kImage(@"暂无订单");
+        _tableView.defaultNoDataText = [LangSwitcher switchLang:@"暂无明细" key:nil];
         [self.view addSubview:_tableView];
 //        [self initPliceHodel];
-        self.placeHolderView = [[UIView alloc] initWithFrame:CGRectMake(0, 150, kScreenWidth,  40)];
-        
-        UILabel *textLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor2 font:14.0];
-        
-        textLbl.text = [LangSwitcher switchLang:@"暂无明细" key:nil];
-        textLbl.textAlignment = NSTextAlignmentCenter;
-        
-        [self.placeHolderView addSubview:textLbl];
-        [textLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-            
-            make.top.equalTo(self.placeHolderView.mas_top).offset(150);
-            make.centerX.equalTo(self.placeHolderView.mas_centerX);
-            
-        }];
-        [self.view addSubview:self.placeHolderView];
-        self.placeHolderView.hidden = YES;
+//        self.placeHolderView = [[UIView alloc] initWithFrame:CGRectMake(0, 150, kScreenWidth,  40)];
+
+//        UILabel *textLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor2 font:14.0];
+//
+//        textLbl.text = [LangSwitcher switchLang:@"暂无明细" key:nil];
+//        textLbl.textAlignment = NSTextAlignmentCenter;
+//
+//        [self.placeHolderView addSubview:textLbl];
+//        [textLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+//
+//            make.top.equalTo(self.placeHolderView.mas_top).offset(150);
+//            make.centerX.equalTo(self.placeHolderView.mas_centerX);
+//
+//        }];
+//        [self.view addSubview:self.placeHolderView];
+//        self.placeHolderView.hidden = YES;
         [_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
             
             make.edges.mas_equalTo(UIEdgeInsetsMake(0, 15, 0, 15));

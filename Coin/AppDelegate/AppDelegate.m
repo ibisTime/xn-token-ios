@@ -175,12 +175,13 @@
 
 - (void)configZendSdk
 {
-//    [ ZDKCoreLogger  setEnabled :YES ];
+    [ ZDKCoreLogger  setEnabled :YES ];
 //    [ ZDKCoreLogger  setLogLevel :ZDKLogLevelDebug ];
     [ZDKZendesk initializeWithAppId: @"71d2ca9aba0cccc12deebfbdd352fbae8c53cd8999dd10bc"
                            clientId: @"mobile_sdk_client_7af3526c83d0c1999bc3"
                          zendeskUrl: @"https://thachainhelp.zendesk.com"];
     id<ZDKObjCIdentity> userIdentity = [[ZDKObjCAnonymous alloc] initWithName:nil email:nil];
+
     [[ZDKZendesk instance] setIdentity:userIdentity];
 
     [ZDKSupport initializeWithZendesk: [ZDKZendesk instance]];

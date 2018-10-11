@@ -47,20 +47,20 @@
         make.height.equalTo(@(kHeight(66)));
     }];
     
-    self.placeHolderView = [[UIView alloc] initWithFrame:CGRectMake(15, kHeight(150), kScreenWidth-30,  40)];
-    
-    UILabel *textLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor2 font:14.0];
-    
-    textLbl.text = [LangSwitcher switchLang:@"暂无历史反馈" key:nil];
-    textLbl.textAlignment = NSTextAlignmentCenter;
-    
-    [self.placeHolderView addSubview:textLbl];
-    [textLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.top.equalTo(self.placeHolderView.mas_top).offset(150);
-        make.centerX.equalTo(self.placeHolderView.mas_centerX);
-        
-    }];
+//    self.placeHolderView = [[UIView alloc] initWithFrame:CGRectMake(15, kHeight(150), kScreenWidth-30,  40)];
+
+//    UILabel *textLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor2 font:14.0];
+//
+//    textLbl.text = [LangSwitcher switchLang:@"暂无历史反馈" key:nil];
+//    textLbl.textAlignment = NSTextAlignmentCenter;
+//
+//    [self.placeHolderView addSubview:textLbl];
+//    [textLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+//
+//        make.top.equalTo(self.placeHolderView.mas_top).offset(150);
+//        make.centerX.equalTo(self.placeHolderView.mas_centerX);
+//
+//    }];
     self.tableView = [[QuestionListTableView alloc]
                       initWithFrame:CGRectMake(15, 0, kScreenWidth-30, kSuperViewHeight-20)
                       style:UITableViewStyleGrouped];

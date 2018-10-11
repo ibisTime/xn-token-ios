@@ -119,32 +119,32 @@
 
 - (void)initPlaceHolderView {
     
-    self.placeHolderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight - 40)];
+//    self.placeHolderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight - 40)];
+
+//    UIImageView *billIV = [[UIImageView alloc] init];
+//    
+//    billIV.image = kImage(@"暂无订单");
+//    
+//    [self.placeHolderView addSubview:billIV];
+//    [billIV mas_makeConstraints:^(MASConstraintMaker *make) {
+//        
+//        make.centerX.equalTo(@0);
+//        make.top.equalTo(@90);
+//        
+//    }];
     
-    UIImageView *billIV = [[UIImageView alloc] init];
-    
-    billIV.image = kImage(@"暂无订单");
-    
-    [self.placeHolderView addSubview:billIV];
-    [billIV mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.centerX.equalTo(@0);
-        make.top.equalTo(@90);
-        
-    }];
-    
-    UILabel *textLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor2 font:14.0];
-    
-    textLbl.text = [LangSwitcher switchLang:@"暂无明细" key:nil];
-    textLbl.textAlignment = NSTextAlignmentCenter;
-    
-    [self.placeHolderView addSubview:textLbl];
-    [textLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.top.equalTo(billIV.mas_bottom).offset(20);
-        make.centerX.equalTo(billIV.mas_centerX);
-        
-    }];
+//    UILabel *textLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor2 font:14.0];
+//
+//    textLbl.text = [LangSwitcher switchLang:@"暂无明细" key:nil];
+//    textLbl.textAlignment = NSTextAlignmentCenter;
+//
+//    [self.placeHolderView addSubview:textLbl];
+//    [textLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+//
+//        make.top.equalTo(billIV.mas_bottom).offset(20);
+//        make.centerX.equalTo(billIV.mas_centerX);
+//
+//    }];
 }
 
 - (void)initTableView {
@@ -152,8 +152,9 @@
     self.tableView = [[BillTableView alloc]
                       initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight)
                               style:UITableViewStylePlain];
-    
-    self.tableView.placeHolderView = self.placeHolderView;
+    self.tableView.defaultNoDataImage = kImage(@"暂无订单");
+    self.tableView.defaultNoDataText = [LangSwitcher switchLang:@"暂无明细" key:nil];
+//    self.tableView.placeHolderView = self.placeHolderView;
     self.tableView.refreshDelegate = self;
     [self.view addSubview:self.tableView];
     

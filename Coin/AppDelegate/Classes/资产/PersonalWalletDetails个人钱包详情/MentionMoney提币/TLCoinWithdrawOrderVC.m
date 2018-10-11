@@ -70,8 +70,9 @@
     [self.view addSubview:tableView];
     self.orderTableView = tableView;
     self.orderTableView.allowsSelection = NO;
-    self.orderTableView.placeHolderView = [TLPlaceholderView placeholderViewWithImgAndText:[LangSwitcher switchLang:@"暂无订单" key:nil]];
-    
+    self.orderTableView.defaultNoDataText = [LangSwitcher switchLang:@"暂无订单" key:nil];
+//    self.orderTableView.placeHolderView = [TLPlaceholderView placeholderViewWithImgAndText:[LangSwitcher switchLang:@"暂无订单" key:nil]];
+
     //
     TLPageDataHelper *helper = [[TLPageDataHelper alloc] init];
     helper.code = @"802755";

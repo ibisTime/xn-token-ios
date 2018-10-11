@@ -122,28 +122,28 @@
 
 - (void)initPlaceHolderView {
     
-    self.placeHolderView = [[UIView alloc] init];
-    [self.view addSubview:self.placeHolderView];
-    
-    [self.placeHolderView mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.centerY.equalTo(self.view.mas_centerY);
-        make.centerX.equalTo(self.view.mas_centerX);
-        
-    }];
+//    self.placeHolderView = [[UIView alloc] init];
+//    [self.view addSubview:self.placeHolderView];
+//
+//    [self.placeHolderView mas_makeConstraints:^(MASConstraintMaker *make) {
+//
+//        make.centerY.equalTo(self.view.mas_centerY);
+//        make.centerX.equalTo(self.view.mas_centerX);
+//
+//    }];
 
-    UILabel *textLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor2 font:14.0];
-    
-    textLbl.text = [LangSwitcher switchLang:@"暂无明细" key:nil];
-    textLbl.textAlignment = NSTextAlignmentCenter;
-    
-    [self.placeHolderView addSubview:textLbl];
-    [textLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.top.equalTo(self.placeHolderView.mas_top).offset(150);
-        make.centerX.equalTo(self.placeHolderView.mas_centerX);
-        
-    }];
+//    UILabel *textLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor2 font:14.0];
+//    
+//    textLbl.text = [LangSwitcher switchLang:@"暂无明细" key:nil];
+//    textLbl.textAlignment = NSTextAlignmentCenter;
+//    
+//    [self.placeHolderView addSubview:textLbl];
+//    [textLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+//        
+//        make.top.equalTo(self.placeHolderView.mas_top).offset(150);
+//        make.centerX.equalTo(self.placeHolderView.mas_centerX);
+//        
+//    }];
 }
 
 - (void)initTableView {
@@ -157,6 +157,8 @@
 //    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, kTabBarHeight, 0);
 
 //    self.tableView.sectionHeaderHeight = 22;
+    self.tableView.defaultNoDataImage = kImage(@"暂无订单");
+    self.tableView.defaultNoDataText = [LangSwitcher switchLang:@"暂无明细" key:nil];
     [self.view addSubview:self.tableView];
     CoinWeakSelf;
     self.tableView.addBlock = ^{
