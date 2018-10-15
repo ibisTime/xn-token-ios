@@ -12,4 +12,7 @@
 @property (nonatomic , copy)NSString *incomeTotal;
 @property (nonatomic , copy)NSString *mobile;
 @property (nonatomic , assign)NSInteger rank;
+
+@property (nonatomic , copy)NSString *photo;
+
 @end

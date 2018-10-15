@@ -41,6 +41,7 @@
 #import "NSString+Date.h"
 #import "TLProgressHUD.h"
 #import "UITableView+AddForPlaceholder.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 #endif /* CoinPrefixHeader_h */
 

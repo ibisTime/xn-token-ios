@@ -40,7 +40,7 @@
 #import "TLUserLoginVC.h"
 #import "ZLGestureLockViewController.h"
 #import <UMMobClick/MobClick.h>
-#import <ZendeskSDK/ZendeskSDK.h>
+//#import <ZendeskSDK/ZendeskSDK.h>
 #import "TLWXManager.h"
 #import <UMMobClick/MobClick.h>
 //Extension
@@ -48,8 +48,8 @@
 #import "WXApi.h"
 #import "IQKeyboardManager.h"
 //#import <ZendeskSDK/ZendeskSDK.h>
-#import <ZendeskCoreSDK/ZendeskCoreSDK.h>
-#import <ZendeskProviderSDK/ZendeskProviderSDK.h>
+//#import <ZendeskCoreSDK/ZendeskCoreSDK.h>
+//#import <ZendeskProviderSDK/ZendeskProviderSDK.h>
 #import <WeiboSDK.h>
 //#import ""
 //#import "TLPublishInputView.h"      czy
@@ -175,35 +175,12 @@
 
 - (void)configZendSdk
 {
-    [ ZDKCoreLogger  setEnabled :YES ];
+
+    
+//    [ ZDKCoreLogger  setEnabled :YES ];
 //    [ ZDKCoreLogger  setLogLevel :ZDKLogLevelDebug ];
-    [ZDKZendesk initializeWithAppId: @"71d2ca9aba0cccc12deebfbdd352fbae8c53cd8999dd10bc"
-                           clientId: @"mobile_sdk_client_7af3526c83d0c1999bc3"
-                         zendeskUrl: @"https://thachainhelp.zendesk.com"];
-    id<ZDKObjCIdentity> userIdentity = [[ZDKObjCAnonymous alloc] initWithName:nil email:nil];
-
-    [[ZDKZendesk instance] setIdentity:userIdentity];
-
-    [ZDKSupport initializeWithZendesk: [ZDKZendesk instance]];
-    LangType type = [LangSwitcher currentLangType];
-    NSString *lan;
-    if (type == LangTypeSimple || type == LangTypeTraditional) {
-        lan = @"zh-cn";
-        [ZDKSupport instance].helpCenterLocaleOverride = lan;
-
-    }else if (type == LangTypeKorean)
-    {
-        lan = @"ko";
-        [ZDKSupport instance].helpCenterLocaleOverride = lan;
-
-        
-    }else{
-        lan = @"en-us";
-
-        [ZDKSupport instance].helpCenterLocaleOverride = lan;
-
-    }
-
+    
+    
 //    [ZDKLocalization localizedStringWithKey:@"en"];
     // //hc/en-us
 //    [ZDKSupport initializeWithZendesk: [ZDKZendesk instance]];

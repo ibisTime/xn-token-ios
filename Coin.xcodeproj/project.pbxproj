@@ -321,6 +321,7 @@
 		7AAF039321527A5E008507FF /* YZViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AAF039221527A5E008507FF /* YZViewController.m */; };
 		7AAF039C21527FD9008507FF /* YZVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AAF039B21527FD9008507FF /* YZVC.m */; };
 		7AD659F1215F691C002F747E /* MoneyAndTreasureHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AD659F0215F691C002F747E /* MoneyAndTreasureHeadView.m */; };
+		7AE970522170C4970066B66C /* InviteEarningsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AE970512170C4970066B66C /* InviteEarningsModel.m */; };
 		7AFBAE31216DD32A006CF464 /* MyIncomeTopModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AFBAE30216DD32A006CF464 /* MyIncomeTopModel.m */; };
 		B80864EE211EA17D00755158 /* BTCBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = B8086411211EA17C00755158 /* BTCBlock.m */; };
 		B80864EF211EA17D00755158 /* BTCBlockHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = B8086412211EA17C00755158 /* BTCBlockHeader.m */; };
@@ -1151,6 +1152,8 @@
 		7AAF039B21527FD9008507FF /* YZVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZVC.m; sourceTree = "<group>"; };
 		7AD659EF215F691C002F747E /* MoneyAndTreasureHeadView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MoneyAndTreasureHeadView.h; sourceTree = "<group>"; };
 		7AD659F0215F691C002F747E /* MoneyAndTreasureHeadView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MoneyAndTreasureHeadView.m; sourceTree = "<group>"; };
+		7AE970502170C4970066B66C /* InviteEarningsModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InviteEarningsModel.h; sourceTree = "<group>"; };
+		7AE970512170C4970066B66C /* InviteEarningsModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InviteEarningsModel.m; sourceTree = "<group>"; };
 		7AFBAE2F216DD32A006CF464 /* MyIncomeTopModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyIncomeTopModel.h; sourceTree = "<group>"; };
 		7AFBAE30216DD32A006CF464 /* MyIncomeTopModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyIncomeTopModel.m; sourceTree = "<group>"; };
 		8863748C5281F9DC1DDF8EEA /* Pods-Coin.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Coin.release.xcconfig"; path = "Pods/Target Support Files/Pods-Coin/Pods-Coin.release.xcconfig"; sourceTree = "<group>"; };
@@ -3145,6 +3148,8 @@
 		7A07F827216CD9690026EB7A /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				7AE970502170C4970066B66C /* InviteEarningsModel.h */,
+				7AE970512170C4970066B66C /* InviteEarningsModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -4632,6 +4637,7 @@
 				211DE6B61FB58B4C002FCF3D /* UIView+Extension.m in Sources */,
 				21A7F3141FB2E2F900FAA0A2 /* TLPwdRelatedVC.m in Sources */,
 				7A07F811216CAAEA0026EB7A /* MyInconmeCell.m in Sources */,
+				7AE970522170C4970066B66C /* InviteEarningsModel.m in Sources */,
 				B88B092720C8E371005C2D2F /* JoinMineCell.m in Sources */,
 				2120D8A31FCEE1DE00712600 /* HourPickerView.m in Sources */,
 				B80864FE211EA17D00755158 /* BTCBigNumber.m in Sources */,

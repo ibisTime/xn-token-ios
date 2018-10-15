@@ -376,30 +376,47 @@
             return ;
         }
 
-        ZDKHelpCenterUiConfiguration  *  hcConfig  =  [ ZDKHelpCenterUiConfiguration  new ];
+        LangType type = [LangSwitcher currentLangType];
+        NSString *lan;
+        if (type == LangTypeSimple || type == LangTypeTraditional) {
+            lan = @"zh-cn";
+        }else if (type == LangTypeKorean)
+        {
+            lan = @"ko";
+        }else{
+            lan = @"en-us";
+        }
+        [[NSUserDefaults standardUserDefaults] setValue:lan forKey:@"UWUserLanguageKey"];
+        [[NSUserDefaults standardUserDefaults] setValue:@[lan] forKey:@"AppleLanguages"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        [ZDKSupport instance].helpCenterLocaleOverride = lan;
+
+
+        [ZDKZendesk initializeWithAppId: @"71d2ca9aba0cccc12deebfbdd352fbae8c53cd8999dd10bc"
+                               clientId: @"mobile_sdk_client_7af3526c83d0c1999bc3"
+                             zendeskUrl: @"https://thachainhelp.zendesk.com"];
+
+        id<ZDKObjCIdentity> userIdentity = [[ZDKObjCAnonymous alloc] initWithName:nil email:nil];
+        [[ZDKZendesk instance] setIdentity:userIdentity];
+
+        [ZDKCoreLogger setEnabled:YES];
+        [ZDKSupport initializeWithZendesk: [ZDKZendesk instance]];
+
+        ZDKHelpCenterUiConfiguration *hcConfig  =  [ ZDKHelpCenterUiConfiguration  new];
+        [ZDKTheme  currentTheme].primaryColor  = [UIColor redColor];
+        UIViewController<ZDKHelpCenterDelegate>*helpCenter  =  [ ZDKHelpCenterUi  buildHelpCenterOverviewWithConfigs :@[hcConfig]];
 
         self.navigationController.navigationBar.translucent = YES;
         UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
         self.navigationController.navigationBar.tintColor = [UIColor blackColor];
         self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
         self.navigationItem.backBarButtonItem = item;
-        [ZDKTheme  currentTheme ].primaryColor  = [UIColor redColor];
-
-//     ZDKHelpCenterProvider *der =  [[ ZDKHelpCenterProvider  alloc ]  init ];
-//        der.getCategoryById
-
-
-
-        UIViewController<ZDKHelpCenterDelegate>*helpCenter  =  [ ZDKHelpCenterUi  buildHelpCenterOverviewWithConfigs :@[hcConfig]];
-//        UIViewController  * helpCenter  =  [ ZDKHelpCenterUi  buildHelpCenterOverviewWithConfigs :@[hcConfig]];
         helpCenter.uiDelegate = self;
+
+
+
         [ self.navigationController  pushViewController:helpCenter  animated:YES ];
 
-//        ZDKRequestUiConfiguration  *  config  =  [[ ZDKRequestUiConfiguration  alloc ]  init ];
-//        UIViewController  * requestScreen  =  [ ZDKRequestUi  buildRequestUiWith :@ [ config ] ];
-//        [ self.navigationController pushViewController :requestScreen  animated :YES ];
-//        UIViewController  * requestScreen  =  [ ZDKRequestUi  buildRequestUiWith :@ [ config ] ];
-//        [ self.navigationController pushViewController :requestScreen  animated :YES ];
 
     };
     //关于我们
@@ -475,7 +492,12 @@
 - (ZDKNavBarConversationsUIType) navBarConversationsUIType
 {
 
-    return ZDKNavBarConversationsUITypeNone;
+    return ZDKNavBarConversationsUITypeLocalizedLabel;
+}
+
+- (NSString *) conversationsBarButtonLocalizedLabel
+{
+    return @"123";
 }
 
 //- (ZDKNavBarConversationsUIType) navBarConversationsUIType

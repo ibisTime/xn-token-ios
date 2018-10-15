@@ -180,19 +180,19 @@
                              [ZDKSupport initializeWithZendesk: [ZDKZendesk instance]];
                              NSString *lan;
                              if (type == LangTypeSimple || type == LangTypeTraditional) {
-                                 
+                                 lan = @"zh-cn";
                              }else if (type == LangTypeKorean)
                              {
                                  lan = @"ko";
-                                 [ZDKSupport instance].helpCenterLocaleOverride = lan;
-                                 
-                                 
-                             }else{
-                                 lan = @"en-us";
-                                 [ZDKSupport instance].helpCenterLocaleOverride = lan;
-                                 
                              }
-
+                             else
+                             {
+                                 lan = @"en-us";
+                             }
+                             [ZDKSupport instance].helpCenterLocaleOverride = lan;
+                             [[NSUserDefaults standardUserDefaults] setValue:lan forKey:@"UWUserLanguageKey"];
+                             [[NSUserDefaults standardUserDefaults] setValue:@[lan] forKey:@"AppleLanguages"];
+                             [[NSUserDefaults standardUserDefaults] synchronize];
                              
                              
                              

@@ -180,15 +180,17 @@
 //          [TLProgressHUD dismiss];
 //      }
 
+        [TLProgressHUD dismiss];
       if([responseObject[@"errorCode"] isEqual:@"0"]){ //成功
           
           if(success){
-              [TLProgressHUD dismiss];
+
               success(responseObject);
           }
           
       }
       else {
+
           
           if (failure) {
               failure(responseObject);

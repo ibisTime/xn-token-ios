@@ -141,13 +141,14 @@
     _stateLabel.frame = CGRectMake(self.nameButton.xx + 5, 25.5, _stateLabel.frame.size.width + 5, 14);
 
 
-    NSString *expectIncome = [CoinUtil convertToRealCoin:model.expectIncome coin:model.productInfo[@"symbol"]];
+    NSString *expectIncome = [CoinUtil convertToRealCoin1:model.expectIncome coin:model.productInfo[@"symbol"]];
 
     if ([expectIncome floatValue] > 10000) {
         self.numberLabel.text = [NSString stringWithFormat:@"%.1f%@%@",[expectIncome floatValue]/10000,model.productInfo[@"symbol"],[LangSwitcher switchLang:@"万" key:nil]];
+
     }else
     {
-        self.numberLabel.text = [NSString stringWithFormat:@"%.1f%@",[expectIncome floatValue],model.productInfo[@"symbol"]];
+        self.numberLabel.text = [NSString stringWithFormat:@"%@%@",expectIncome,model.productInfo[@"symbol"]];
     }
 
     [self.numberLabel sizeToFit];
@@ -163,9 +164,10 @@
 
     NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
     NSString *avmountStr = [numberFormatter stringFromNumber:model.productInfo[@"saleAmount"]];
-    NSString *avmount = [CoinUtil convertToRealCoin:avmountStr coin:model.productInfo[@"symbol"]];
+    NSString *avmount = [CoinUtil convertToRealCoin1:avmountStr coin:model.productInfo[@"symbol"]];
     NSString *shareStr1 = [LangSwitcher switchLang:@"持有份额" key:nil];
-    NSString *shareStr2 = [NSString stringWithFormat:@"%@  %.1f%@",[LangSwitcher switchLang:@"持有份额" key:nil],[avmount floatValue],model.productInfo[@"symbol"]];
+    NSString *shareStr2 = [NSString stringWithFormat:@"%@  %@%@",[LangSwitcher switchLang:@"持有份额" key:nil],avmount,model.productInfo[@"symbol"]];
+
     NSMutableAttributedString * attriStr = [[NSMutableAttributedString alloc] initWithString:shareStr2];
     [attriStr addAttribute:NSForegroundColorAttributeName value:kHexColor(@"#999999") range:NSMakeRange(0, shareStr1.length)];
     self.shareLabel.attributedText = attriStr;
@@ -182,6 +184,12 @@
 
     self.line.frame = CGRectMake(self.numberLabel.xx + 20, 75, 1, 39 - 12 + self.earningsLabel.frame.size.height);
 
+//    NSLog(@"%@",[TLUser stringByNotRounding:11.990000 afterPoint:1]);
+
+
+
 }
+
+
 
 @end

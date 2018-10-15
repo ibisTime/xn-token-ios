@@ -8,10 +8,10 @@
 
 #import "InviteEarningsVC.h"
 #import "InviteEarningsTableView.h"
+#import "InviteEarningsModel.h"
 @interface InviteEarningsVC ()<RefreshDelegate>
-{
 
-}
+@property (nonatomic , strong)NSMutableArray <InviteEarningsModel *>*model;
 
 @property (nonatomic , strong)InviteEarningsTableView *tableView;
 
@@ -31,46 +31,84 @@
     [titleText setText:[LangSwitcher switchLang:@"邀请收益" key:nil]];
     self.navigationItem.titleView=titleText;
 
-    NSArray *array = @[
-         @{@"bizType": @"5",
-           @"mobile": @"+86 15268501421",
-           @"income": @"10.2",
-           @"createDatetime": @"2018-10-08"},
-         @{@"bizType": @"1",
-           @"mobile": @"+86 15268501481",
-           @"income": @"10.2",
-           @"createDatetime": @"2018-10-08"},
-         @{@"bizType": @"1",
-           @"mobile": @"+86 15268501481",
-           @"income": @"10.2",
-           @"createDatetime": @"2018-10-08"},
-         @{@"bizType": @"1",
-           @"mobile": @"+86 15268501481",
-           @"income": @"10.2",
-           @"createDatetime": @"2018-10-09"},
-         @{@"bizType": @"1",
-           @"mobile": @"+86 15268501481",
-           @"income": @"10.2",
-           @"createDatetime": @"2018-10-10"},
-         @{@"bizType": @"1",
-           @"mobile": @"+86 15268501481",
-           @"income": @"10.2",
-           @"createDatetime": @"2018-10-11"}];
-
-    self.tableView.array = [InviteEarningsVC filterMaxItemsArray:array filterKey:@"createDatetime"];
-    NSLog(@"%@",self.tableView.array);
+    [self LoadData];
 
 
 }
 
-+ (NSArray *)filterMaxItemsArray:(NSArray *)array filterKey:(NSString *)key {
+-(void)LoadData
+{
+    CoinWeakSelf;
+
+    TLPageDataHelper *helper = [[TLPageDataHelper alloc] init];
+
+    helper.code = @"625802";
+    helper.parameters[@"userId"] = [TLUser user].userId;
+    helper.isCurrency = YES;
+    helper.tableView = self.tableView;
+    [helper modelClass:[InviteEarningsModel class]];
+    [self.tableView addRefreshAction:^{
+        [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
+
+
+//            for (NSDictionary *dic in objs) {
+//
+//            }
+            NSMutableArray *array = [NSMutableArray array];
+            for (int i = 0; i < objs.count; i ++) {
+                NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+                dic = objs[i];
+//                [dic setValue:[dic[@"createDatetime"] convertDate] forkey:@"createDatetime"];
+                InviteEarningsModel *model = [InviteEarningsModel mj_objectWithKeyValues:dic];
+                [dic setValue:[model.createDatetime convertDate] forKey:@"createDatetime"];
+                [array addObject:dic];
+            }
+
+            weakSelf.tableView.array = [NSMutableArray array];
+            weakSelf.tableView.array = [InviteEarningsVC filterMaxItemsArray:array filterKey:@"createDatetime"];
+            [weakSelf.tableView reloadData_tl];
+
+        } failure:^(NSError *error) {
+
+        }];
+
+
+
+    }];
+
+    [self.tableView beginRefreshing];
+
+    [self.tableView addLoadMoreAction:^{
+        [helper loadMore:^(NSMutableArray *objs, BOOL stillHave) {
+
+            if (weakSelf.tl_placeholderView.superview != nil) {
+
+                [weakSelf removePlaceholderView];
+            }
+
+
+//            NSMutableArray <InviteEarningsModel *>*ARRAY = [InviteEarningsVC filterMaxItemsArray:objs filterKey:@"createDatetime"];
+            weakSelf.tableView.array = [InviteEarningsVC filterMaxItemsArray:objs filterKey:@"createDatetime"];
+            [weakSelf.tableView reloadData_tl];
+
+        } failure:^(NSError *error) {
+
+            [weakSelf addPlaceholderView];
+
+        }];
+    }];
+
+    [self.tableView endRefreshingWithNoMoreData_tl];
+}
+
++ (NSMutableArray *)filterMaxItemsArray:(NSArray *)array filterKey:(NSString *)key {
     NSMutableArray *origArray = [NSMutableArray arrayWithArray:array];
     NSMutableArray *filerArray = [NSMutableArray array];
 
     while (origArray.count > 0) {
         id obj = origArray.firstObject;
         NSPredicate *predic = nil;
-//        predic = [NSPredicate predicateWithFormat:@"self == %@",obj];
+
         id value = [obj valueForKey:key];
         predic = [NSPredicate predicateWithFormat:@"self.%@ == %@",key,value];
 
@@ -85,6 +123,8 @@
     self.tableView = [[InviteEarningsTableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - kNavigationBarHeight) style:(UITableViewStyleGrouped)];
     self.tableView.refreshDelegate = self;
     self.tableView.backgroundColor = kBackgroundColor;
+    self.tableView.defaultNoDataImage = kImage(@"暂无订单");
+    self.tableView.defaultNoDataText = [LangSwitcher switchLang:@"暂无明细" key:nil];
     [self.view addSubview:self.tableView];
 }
 
@@ -97,8 +137,6 @@
     self.navigationItem.backBarButtonItem = item;
     //    self.navigationController.navigationBar.shadowImage = [UIImage new];
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
-
-
 }
 
 //如果仅设置当前页导航透明，需加入下面方法

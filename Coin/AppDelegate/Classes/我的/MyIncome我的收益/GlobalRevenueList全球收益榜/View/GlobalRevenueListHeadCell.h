@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "MyIncomeTopModel.h"
 @interface GlobalRevenueListHeadCell : UITableViewCell
-
+@property (nonatomic , strong)NSMutableArray <MyIncomeTopModel *>*topModel;
 @end

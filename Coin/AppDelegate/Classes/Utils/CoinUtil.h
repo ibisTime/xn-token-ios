@@ -30,7 +30,12 @@ typedef void (^RefreshOpenCoinListFailureBlock)();
 /**
  100000.....转化为1.00000这种格式，可以指定小数位数
  */
+//八位小数
 + (NSString *)convertToRealCoin:(NSString *)count coin:(NSString *)coin scale:(NSUInteger)scale;
+//两位小数
++ (NSString *)convertToRealCoin1:(NSString *)count coin:(NSString *)coin;
+//4位小数
++ (NSString *)convertToRealCoin2:(NSString *)count setScale:(short)cale coin:(NSString *)coin;
 
 /**
  把1.000 转换为最基本单位 100000000000.....

@@ -188,7 +188,7 @@ void swizzMethod(SEL oriSel, SEL newSel) {
     UILabel *label = objc_getAssociatedObject(self, _cmd);
     if (!label) {
         label = [[UILabel alloc] init];
-        label.text = self.defaultNoDataText ? : [LangSwitcher switchLang:@"暂无数据" key:nil];
+//        label.text = self.defaultNoDataText ? : [LangSwitcher switchLang:@"暂无数据" key:nil];
         label.font = [UIFont systemFontOfSize:11];
         label.textAlignment = NSTextAlignmentCenter;
         objc_setAssociatedObject(self, _cmd, label, OBJC_ASSOCIATION_RETAIN_NONATOMIC);

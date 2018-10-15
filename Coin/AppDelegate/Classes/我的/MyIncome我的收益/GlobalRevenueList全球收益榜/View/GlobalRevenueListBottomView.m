@@ -18,6 +18,7 @@
         self.backgroundColor = kWhiteColor;
         UIImageView *headImage = [[UIImageView alloc]initWithFrame:CGRectMake(10, 10, 50, 50)];
         headImage.image = kImage(@"头像");
+        self.headImage = headImage;
         [self addSubview:headImage];
 
         UILabel *nameLabel = [UILabel labelWithFrame:CGRectMake(70, 19.5, 0, 12) textAligment:(NSTextAlignmentLeft) backgroundColor:kClearColor font:FONT(12) textColor:kHexColor(@"#999999")];
@@ -48,12 +49,19 @@
 
 -(void)setModel:(MyIncomeTopModel *)model
 {
+
+    if ([TLUser isBlankString:model.photo] == YES) {
+        _headImage.image = kImage(@"头像");
+    }else
+    {
+        [_headImage sd_setImageWithURL:[NSURL URLWithString:[model.photo convertImageUrl]] placeholderImage:kImage(@"头像")];
+    }
     _nameLabel.text = model.mobile;
     _nameLabel.frame = CGRectMake(70, 19.5, 0, 12);
     [_nameLabel sizeToFit];
 
     self.earningsLabel.frame = CGRectMake(_nameLabel.xx + 10, 17, SCREEN_WIDTH - 25 - _nameLabel.xx, 17);
-    if (model.rank > 100) {
+    if (model.rank == 0) {
         _rankingLabel.text = [LangSwitcher switchLang:@"排名100名以外，加油" key:nil];
     }else
     {
@@ -64,7 +72,9 @@
     [_rankingLabel sizeToFit];
 
     _priceLabel.frame = CGRectMake(_rankingLabel.xx + 10, 35, SCREEN_WIDTH - 25 - _rankingLabel.xx, 20);
-    _priceLabel.text = [NSString stringWithFormat:@"%.4f",[model.incomeTotal floatValue]];
+
+    NSString *incomeTotal = [CoinUtil convertToRealCoin:model.incomeTotal coin:@"BTC"];
+    _priceLabel.text = [NSString stringWithFormat:@"%@ BTC",incomeTotal];
 
 }
 

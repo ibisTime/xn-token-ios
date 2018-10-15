@@ -378,4 +378,15 @@ NSString *const kGoogleAuthClose = @"0";
     return NO;
 }
 
++ (NSString *)stringByNotRounding:(double)price afterPoint:(int)position{
+    NSDecimalNumberHandler* roundingBehavior = [NSDecimalNumberHandler decimalNumberHandlerWithRoundingMode:NSRoundUp scale:position raiseOnExactness:NO raiseOnOverflow:NO raiseOnUnderflow:NO raiseOnDivideByZero:NO];
+
+    NSDecimalNumber *ouncesDecimal;
+    NSDecimalNumber *roundedOunces;
+    ouncesDecimal = [[NSDecimalNumber alloc] initWithFloat:price];
+    roundedOunces = [ouncesDecimal decimalNumberByRoundingAccordingToBehavior:roundingBehavior];
+
+    return [NSString stringWithFormat:@"%@",roundedOunces];
+}
+
 @end

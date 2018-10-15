@@ -11,6 +11,8 @@
 @interface GlobalRevenueListBottomView : UIView
 @property (nonatomic , strong)MyIncomeTopModel *model;
 
+@property (nonatomic , strong)UIImageView *headImage;
+
 @property (nonatomic , strong)UILabel *nameLabel;
 
 @property (nonatomic , strong)UILabel *earningsLabel;

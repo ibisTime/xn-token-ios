@@ -48,18 +48,18 @@
     return self;
 }
 
+
 -(void)setModel:(AccumulatedEarningsModel *)model
 {
     nameLabel.text = [NSString stringWithFormat:@"%@",model.productName];
-
-    NSString *transAmountString = [CoinUtil convertToRealCoin:model.transAmountString coin:model.currency];
+    NSString *transAmountString = [CoinUtil convertToRealCoin1:model.transAmountString coin:model.currency];
 //    CGFloat transAmountString = [model.transAmountString floatValue];
     if ([transAmountString floatValue] >= 0) {
-        priceLabel.text = [NSString stringWithFormat:@"+%.2f %@",[transAmountString floatValue],model.currency];
+        priceLabel.text = [NSString stringWithFormat:@"+%@ %@",transAmountString,model.currency];
         priceLabel.textColor = kHexColor(@"#FF8000");
     }else
     {
-        priceLabel.text = [NSString stringWithFormat:@"%.2f %@",[transAmountString floatValue],model.currency];
+        priceLabel.text = [NSString stringWithFormat:@"%@ %@",transAmountString,model.currency];
         priceLabel.textColor = kHexColor(@"#46AAAF");
     }
     [priceLabel sizeToFit];
@@ -69,9 +69,9 @@
     timeLabel.text = [model.createDatetime convertDate];
     [timeLabel sizeToFit];
 
-    NSString *postAmountString = [CoinUtil convertToRealCoin:model.postAmountString coin:model.currency];
+    NSString *postAmountString = [CoinUtil convertToRealCoin1:model.postAmountString coin:model.currency];
 
-    balanceLabel.text = [NSString stringWithFormat:@"%@:%.2f%@",[LangSwitcher switchLang:@"余额" key:nil],[postAmountString floatValue],model.currency];
+    balanceLabel.text = [NSString stringWithFormat:@"%@:%@%@",[LangSwitcher switchLang:@"余额" key:nil],postAmountString,model.currency];
     balanceLabel.frame = CGRectMake(timeLabel.xx + 10, 41,SCREEN_WIDTH -  timeLabel.xx - 10 - 15, 20);
 }
 

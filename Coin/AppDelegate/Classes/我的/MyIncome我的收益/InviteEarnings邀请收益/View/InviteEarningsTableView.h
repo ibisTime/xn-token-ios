@@ -7,9 +7,10 @@
 //
 
 #import "TLTableView.h"
-
+#import "InviteEarningsModel.h"
 @interface InviteEarningsTableView : TLTableView
 
-@property (nonatomic , strong)NSArray *array;
+@property (nonatomic , strong)NSMutableArray <InviteEarningsModel *>*model;
+@property (nonatomic , strong)NSMutableArray *array;
 
 @end

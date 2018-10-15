@@ -60,11 +60,13 @@
 {
 //    NSLog(@"%@",dataDic);
 //    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
-    NSString *incomeYesterday = [CoinUtil convertToRealCoin:model.incomeYesterday coin:@"BTC"];
+//    NSString *incomeYesterday = [CoinUtil convertToRealCoin:model.incomeYesterday coin:@"BTC"];
+
+    NSString *incomeYesterday = [CoinUtil convertToRealCoin2:model.incomeYesterday setScale:4  coin:@"BTC"];
 
     UILabel *label1 = [self viewWithTag:1212];
 
-    NSString *label1Str = [NSString stringWithFormat:@"≈%.1f(BTC)",[model.incomeYesterday floatValue]];
+    NSString *label1Str = [NSString stringWithFormat:@"≈%@(BTC)",incomeYesterday];
     NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:label1Str];
     [attrString addAttribute:NSFontAttributeName value:FONT(15) range:NSMakeRange(label1Str.length - 5,5)];
     label1.attributedText = attrString;
@@ -83,9 +85,9 @@
 
 
 
-    NSString *totalIncome = [CoinUtil convertToRealCoin:model.incomeTotal coin:@"BTC"];
+    NSString *incomeTotal = [CoinUtil convertToRealCoin2:model.incomeTotal setScale:4  coin:@"BTC"];
     UILabel *label2 = [self viewWithTag:1213];
-    NSString *label2Str = [NSString stringWithFormat:@"≈%.1f(BTC)",[model.incomeTotal floatValue]];
+    NSString *label2Str = [NSString stringWithFormat:@"≈%@(BTC)",incomeTotal];
     NSMutableAttributedString *attrString1 = [[NSMutableAttributedString alloc] initWithString:label2Str];
     [attrString1 addAttribute:NSFontAttributeName value:FONT(15) range:NSMakeRange(label2Str.length - 5,5)];
     label2.attributedText = attrString1;

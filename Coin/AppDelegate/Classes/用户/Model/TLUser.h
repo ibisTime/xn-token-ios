@@ -137,6 +137,8 @@
 //字符串是否为空
 + (BOOL) isBlankString:(NSString *)string;
 
+//+ (NSString *)stringByNotRounding:(double)price afterPoint:(int)position;
+
 @end
 
 FOUNDATION_EXTERN  NSString *const kUserLoginNotification;

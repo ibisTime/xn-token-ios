@@ -31,6 +31,30 @@ NSString *const kCNY = @"CNY";
     
 }
 
++ (NSString *)convertToRealCoin1:(NSString *)count coin:(NSString *)coin {
+
+    if (![count valid]) {
+        return @"0.0";
+    }else if([count floatValue] == 0)
+    {
+        return @"0.0";
+    }
+    return [self convertCount:count scale:2 cardinality:[self getCardinality:coin]];
+
+}
+
++ (NSString *)convertToRealCoin2:(NSString *)count setScale:(short)cale coin:(NSString *)coin {
+
+    if (![count valid]) {
+        return @"0.0";
+    }else if([count floatValue] == 0)
+    {
+        return @"0.0";
+    }
+    return [self convertCount:count scale:cale cardinality:[self getCardinality:coin]];
+
+}
+
 + (NSString *)convertToRealCoin:(NSString *)count coin:(NSString *)coin scale:(NSUInteger)scale {
     
     return [self convertCount:count scale:scale cardinality:[self getCardinality:coin]];
@@ -102,8 +126,10 @@ NSString *const kCNY = @"CNY";
     NSDecimalNumber *n = [NSDecimalNumber decimalNumberWithString:[num stringValue]];
     NSDecimalNumber *o = [m decimalNumberByDividingBy:n];
     NSDecimalNumber *p = [o decimalNumberByRoundingAccordingToBehavior:handler];
+
+
     return [NSString stringWithFormat:@"%@",p];
-    
+
 }
 
 + (NSString *)chineseName:(NSString *)coin {

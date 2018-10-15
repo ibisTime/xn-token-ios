@@ -49,7 +49,10 @@
     _accountLabel.text = topModel.mobile;
     _accountLabel.frame = CGRectMake(66, 22, 0, 14);
     [_accountLabel sizeToFit];
-    _priceLabel.text = [NSString stringWithFormat:@"%.4f BTC",[topModel.incomeTotal floatValue]];
+
+    NSString *incomeTotal = [CoinUtil convertToRealCoin:topModel.incomeTotal coin:@"BTC"];
+
+    _priceLabel.text = [NSString stringWithFormat:@"%@ BTC",incomeTotal];
 
     _nameLabel.frame = CGRectMake(_accountLabel.xx + 10, 11, SCREEN_WIDTH - _accountLabel.xx - 25, 17);
     _priceLabel.frame = CGRectMake(_accountLabel.xx + 10, 28, SCREEN_WIDTH - _accountLabel.xx - 25, 20);

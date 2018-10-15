@@ -42,19 +42,37 @@
 {
     CoinWeakSelf;
     [weakSelf.tableView addRefreshAction:^{
-        [TLNetworking POST:@"http://rap2.hichengdai.com:8080/app/mock/22/625801" parameters:nil success:^(id responseObject) {
-            NSLog(@"%@",responseObject);
 
+        TLNetworking *http = [[TLNetworking alloc] init];
+        http.showView = self.view;
+        http.code = @"625801";
+        http.parameters[@"userId"] = [TLUser user].userId;
+        [http postWithSuccess:^(id responseObject) {
             weakSelf.topModel = [MyIncomeTopModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"][@"top100"]];
             weakSelf.tableView.topModel = weakSelf.topModel;
 
             weakSelf.bottomView.model = [MyIncomeTopModel mj_objectWithKeyValues:responseObject[@"data"]];
-
             [self.tableView reloadData];
             [self.tableView endRefreshHeader];
+
         } failure:^(NSError *error) {
             [self.tableView endRefreshHeader];
         }];
+
+
+//        [TLNetworking POST:@"http://rap2.hichengdai.com:8080/app/mock/22/625801" parameters:nil success:^(id responseObject) {
+//            NSLog(@"%@",responseObject);
+//
+//            weakSelf.topModel = [MyIncomeTopModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"][@"top100"]];
+//            weakSelf.tableView.topModel = weakSelf.topModel;
+//
+//            weakSelf.bottomView.model = [MyIncomeTopModel mj_objectWithKeyValues:responseObject[@"data"]];
+//
+//            [self.tableView reloadData];
+//            [self.tableView endRefreshHeader];
+//        } failure:^(NSError *error) {
+//            [self.tableView endRefreshHeader];
+//        }];
     }];
     [self.tableView beginRefreshing];
 }

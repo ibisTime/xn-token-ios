@@ -70,8 +70,8 @@
 -(void)setModel:(MyIncomeModel *)model
 {
     self.priceLabel.text = @"0.0";
-    NSString *incomeTotal = [CoinUtil convertToRealCoin:model.incomeYesterday coin:@"BTC"];
-    NSString *incomeTotalStr = [NSString stringWithFormat:@"%.1f",[model.incomeYesterday floatValue]];
+    NSString *incomeTotal = [CoinUtil convertToRealCoin2:model.incomeTotal setScale:4  coin:@"BTC"];
+    NSString *incomeTotalStr = incomeTotal;
     self.priceLabel.text = incomeTotalStr;
 
     [self.quantitativeButton setTitle:[NSString stringWithFormat:@"%.0f%%  详情",[model.incomeRatioPop floatValue] * 100] forState:(UIControlStateNormal)];

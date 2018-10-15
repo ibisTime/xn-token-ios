@@ -166,7 +166,8 @@
     NSString *currentLanguage = [[NSLocale preferredLanguages] objectAtIndex:0];
 
     NSLog(@"currentlanguage = %@ alllanguage%@",currentLanguage,[NSLocale preferredLanguages]);
- NSString *lan =[[NSUserDefaults standardUserDefaults] objectForKey:@"appLanguage"];
+
+    NSString *lan =[[NSUserDefaults standardUserDefaults] objectForKey:@"appLanguage"];
     NSLog(@"lan%@",lan);
     NSString *lang = [[NSUserDefaults standardUserDefaults] objectForKey:LANG];
     NSLog(@"lang%@",lang);

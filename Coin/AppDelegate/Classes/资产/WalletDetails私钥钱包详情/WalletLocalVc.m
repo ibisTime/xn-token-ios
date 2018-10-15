@@ -72,11 +72,6 @@
 //    }
     //获取账单
     // Do any additional setup after loading the view.
-}
-
--(void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
     self.title = [LangSwitcher switchLang: [NSString stringWithFormat:@"%@",self.currency.symbol] key:nil];
 
     if ([self.currency.symbol isEqualToString:@"BTC"]) {
@@ -89,6 +84,165 @@
     else
     {
         [self requestBillList];
+    }
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+
+    if ([self.currency.symbol isEqualToString:@"BTC"]) {
+        __weak typeof(self) weakSelf = self;
+
+        NSString *bizType = @"";
+
+        if (self.billType == LocalTypeRecharge) {
+
+            bizType = @"charge";
+
+        } else if (self.billType == LocalTypeWithdraw) {
+
+            bizType = @"withdraw";
+
+        } else if (self.billType == LocalTypeFrozen) {
+
+            bizType = @"";
+        }
+
+        TLPageDataHelper *helper = [[TLPageDataHelper alloc] init];
+
+        helper.tableView = self.tableView;
+        self.helper = helper;
+
+        helper.code = @"802221";
+        helper.start = 0;
+        helper.limit = 10;
+        helper.parameters[@"address"] = self.currency.address;
+        [helper modelClass:[BillModel class]];
+
+        [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
+
+            if (objs.count == 0) {
+                [weakSelf addPlaceholderView];
+
+            }
+
+            weakSelf.bills = objs;
+
+            weakSelf.tableView.billModel = weakSelf.currency;
+
+            weakSelf.tableView.bills = objs;
+            [weakSelf.tableView reloadData_tl];
+
+        } failure:^(NSError *error) {
+
+            [weakSelf addPlaceholderView];
+
+        }];
+
+    }else if ([self.currency.symbol isEqualToString:@"LXT"])
+    {
+        __weak typeof(self) weakSelf = self;
+
+        NSString *bizType = @"";
+
+        if (self.billType == LocalTypeRecharge) {
+
+            bizType = @"charge";
+
+        } else if (self.billType == LocalTypeWithdraw) {
+
+            bizType = @"withdraw";
+
+        } else if (self.billType == LocalTypeFrozen) {
+
+            bizType = @"";
+        }
+
+        TLPageDataHelper *helper = [[TLPageDataHelper alloc] init];
+
+        helper.tableView = self.tableView;
+        self.helper = helper;
+
+        helper.code = @"802308";
+        helper.start = 0;
+        helper.limit = 10;
+        helper.parameters[@"address"] = self.currency.address;
+        CoinModel *coin = [CoinUtil getCoinModel:self.currency.symbol];
+
+        helper.parameters[@"contractAddress"] = coin.contractAddress;
+
+        [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
+
+            //            if (weakSelf.tl_placeholderView.superview != nil) {
+            //
+            //                [weakSelf removePlaceholderView];
+            //            }
+            if (objs.count == 0) {
+                [weakSelf addPlaceholderView];
+
+            }
+
+            weakSelf.bills = objs;
+
+            weakSelf.tableView.billModel = weakSelf.currency;
+
+            weakSelf.tableView.bills = objs;
+            [weakSelf.tableView reloadData_tl];
+
+        } failure:^(NSError *error) {
+
+            [weakSelf addPlaceholderView];
+
+        }];
+    }
+    else
+    {
+        __weak typeof(self) weakSelf = self;
+
+        NSString *bizType = @"";
+
+        if (self.billType == LocalTypeRecharge) {
+
+            bizType = @"charge";
+
+        } else if (self.billType == LocalTypeWithdraw) {
+
+            bizType = @"withdraw";
+
+        } else if (self.billType == LocalTypeFrozen) {
+
+            bizType = @"";
+        }
+
+        TLPageDataHelper *helper = [[TLPageDataHelper alloc] init];
+
+        helper.tableView = self.tableView;
+        self.helper = helper;
+
+        helper.code = @"802271";
+        helper.start = 1;
+        helper.limit = 10;
+        helper.parameters[@"symbol"] = self.currency.symbol;
+        helper.parameters[@"address"] = self.currency.address;
+        [helper modelClass:[BillModel class]];
+        [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
+
+            if (objs.count == 0) {
+                [weakSelf addPlaceholderView];
+
+            }
+            weakSelf.bills = objs;
+            weakSelf.tableView.billModel = weakSelf.currency;
+
+            weakSelf.tableView.bills = objs;
+            [weakSelf.tableView reloadData_tl];
+
+        } failure:^(NSError *error) {
+
+            [weakSelf addPlaceholderView];
+
+        }];
     }
 }
 

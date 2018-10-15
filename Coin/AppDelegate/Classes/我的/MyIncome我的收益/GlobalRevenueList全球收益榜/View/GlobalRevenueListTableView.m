@@ -54,6 +54,9 @@
     if (indexPath.section == 0) {
         GlobalRevenueListHeadCell *cell = [tableView dequeueReusableCellWithIdentifier:GlobalRevenueListHead forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        if (self.topModel.count > 0) {
+            cell.topModel = self.topModel;
+        }
 
         return cell;
     }

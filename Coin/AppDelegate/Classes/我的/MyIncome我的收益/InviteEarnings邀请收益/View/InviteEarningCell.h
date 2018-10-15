@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "InviteEarningsModel.h"
 @interface InviteEarningCell : UITableViewCell
+
+@property (nonatomic , strong)InviteEarningsModel *model;
+@property (nonatomic , strong)UILabel *mobile;
+@property (nonatomic , strong)UILabel *priceLabel;
+//@property (nonatomic , strong)
 
 @end

@@ -179,21 +179,22 @@
     NSString *str = @"%";
     label1.text = [NSString stringWithFormat:@"%.2f%@",[self.model.expectYield floatValue] * 100,str];
     label2.text = [NSString stringWithFormat:@"%@%@",model.limitDays,[LangSwitcher switchLang:@"天" key:nil]];
-    NSString *avilAmount = [CoinUtil convertToRealCoin:model.avilAmount coin:coin.symbol];
+
+    NSString *avilAmount = [CoinUtil convertToRealCoin1:model.avilAmount coin:coin.symbol];
 
     if ([avilAmount floatValue] > 10000) {
         label3.text = [NSString stringWithFormat:@"%.2f%@%@",[avilAmount floatValue]/10000,model.symbol,[LangSwitcher switchLang:@"万" key:nil]];
     }
     else
     {
-        label3.text = [NSString stringWithFormat:@"%.2f%@",[avilAmount floatValue],model.symbol];
+        label3.text = [NSString stringWithFormat:@"%@%@",avilAmount,model.symbol];
     }
 
 
 
 
-    NSString *allAmount = [CoinUtil convertToRealCoin:model.amount coin:coin.symbol];
-    NSString *currentAmount = [CoinUtil convertToRealCoin:model.saleAmount coin:coin.symbol];
+    NSString *allAmount = [CoinUtil convertToRealCoin1:model.amount coin:coin.symbol];
+    NSString *currentAmount = [CoinUtil convertToRealCoin1:model.saleAmount coin:coin.symbol];
     CGFloat f;
     if ([allAmount isEqualToString:@"0"]) {
         f = 0;

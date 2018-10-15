@@ -60,7 +60,7 @@
 
     NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
     NSString *str = [numberFormatter stringFromNumber:dic[@"totalInvest"]];
-    NSString *totalInvest = [CoinUtil convertToRealCoin:str coin:@"BTC"];
+    NSString *totalInvest = [CoinUtil convertToRealCoin1:str coin:@"BTC"];
     //    self.eyesButton.backgroundColor = [UIColor redColor];
     NSString *eyesWhetherhide = [[NSUserDefaults standardUserDefaults] objectForKey:@"eyesWhetherhide"];
     if ([eyesWhetherhide isEqualToString:@"闭眼"]) {
@@ -68,7 +68,12 @@
     }else
     {
 
-        [self.eyesButton setTitle:[NSString stringWithFormat:@"≈ %.1f BTC",[totalInvest floatValue]] forState:(UIControlStateNormal)];
+        if ([totalInvest floatValue] > 10000) {
+            [self.eyesButton setTitle:[NSString stringWithFormat:@"≈ %.2f%@ BTC",[totalInvest floatValue]/10000,[LangSwitcher switchLang:@"万" key:nil]] forState:(UIControlStateNormal)];
+        }else
+        {
+            [self.eyesButton setTitle:[NSString stringWithFormat:@"≈ %@ BTC",totalInvest] forState:(UIControlStateNormal)];
+        }
     }
 
     [self.eyesButton SG_imagePositionStyle:(SGImagePositionStyleRight) spacing:15 imagePositionBlock:^(UIButton *button) {
@@ -82,7 +87,7 @@
     dic = dataDic;
     NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
     NSString *str = [numberFormatter stringFromNumber:dataDic[@"totalInvest"]];
-    NSString *totalInvest = [CoinUtil convertToRealCoin:str coin:@"BTC"];
+    NSString *totalInvest = [CoinUtil convertToRealCoin1:str coin:@"BTC"];
     //    self.eyesButton.backgroundColor = [UIColor redColor];
 
     NSString *eyesWhetherhide = [[NSUserDefaults standardUserDefaults] objectForKey:@"eyesWhetherhide"];
@@ -95,7 +100,7 @@
             [self.eyesButton setTitle:[NSString stringWithFormat:@"≈ %.2f%@ BTC",[totalInvest floatValue]/10000,[LangSwitcher switchLang:@"万" key:nil]] forState:(UIControlStateNormal)];
         }else
         {
-            [self.eyesButton setTitle:[NSString stringWithFormat:@"≈ %.2f BTC",[totalInvest floatValue]] forState:(UIControlStateNormal)];
+            [self.eyesButton setTitle:[NSString stringWithFormat:@"≈ %@ BTC",totalInvest] forState:(UIControlStateNormal)];
         }
     }
 
