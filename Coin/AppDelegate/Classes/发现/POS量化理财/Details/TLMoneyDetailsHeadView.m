@@ -16,9 +16,21 @@
     if (self) {
 
 
+//        CAGradientLayer *layer;
+//        layer = [CAGradientLayer new];
+//        layer.startPoint = CGPointMake(1, 0);
+//        layer.masksToBounds = YES;
+//        layer.cornerRadius = 2;
+//        layer.endPoint = CGPointMake(1, 1);
+//        [self.layer addSublayer:layer];
+//        layer.frame = CGRectMake(0, 0, SCREEN_WIDTH, 235 - 64 + kNavigationBarHeight);
+//        layer.colors=@[(__bridge id)kHexColor(@"#0848DF").CGColor,(__bridge id)kHexColor(@"#3389FF").CGColor];
+
+
         UIImageView *backImage = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 235 - 64 + kNavigationBarHeight)];
         self.backImage = backImage;
-        backImage.image = kImage(@"bijiabao");
+        backImage.backgroundColor = kHexColor(@"#0848DF");
+//        backImage.image = kImage(@"bijiabao");
         [self addSubview:backImage];
 
 

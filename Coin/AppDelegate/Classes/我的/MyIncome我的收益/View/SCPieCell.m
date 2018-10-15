@@ -32,7 +32,7 @@
 
         NSArray *colorArray = @[RGB(255, 198, 83),RGB(255, 91, 67),RGB(59, 170, 174),RGB(0, 108, 109)];
         NSArray *nameArray = @[@"量化收益",@"邀请收益"];
-        NSArray *detailsArray = @[@"0%  详情",@"0%  详情"];
+//        NSArray *detailsArray = @[@"0%",@"0%"];
         for (int i = 0; i < 2; i ++) {
             UIView *pointView = [[UIView alloc]initWithFrame:CGRectMake(218 + 33, 32 + 45 + i % 4 * 65, 8, 8)];
             pointView.backgroundColor = colorArray[i];
@@ -44,7 +44,7 @@
             [self addSubview:nameLabel];
 
 
-            UIButton *detailsBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:detailsArray[i] key:nil] titleColor:kHexColor(@"#666666") backgroundColor:kClearColor titleFont:13];
+            UIButton *detailsBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:[NSString stringWithFormat:@"0%%  %@",[LangSwitcher switchLang:@"详情" key:nil]] key:nil] titleColor:kHexColor(@"#666666") backgroundColor:kClearColor titleFont:13];
             detailsBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
 
             detailsBtn.frame = CGRectMake(218 + 33 + 16, 46 + 45 + i % 4 * 65, SCREEN_WIDTH - (218 + 33 + 16) - 8, 18);
@@ -74,12 +74,12 @@
     NSString *incomeTotalStr = incomeTotal;
     self.priceLabel.text = incomeTotalStr;
 
-    [self.quantitativeButton setTitle:[NSString stringWithFormat:@"%.0f%%  详情",[model.incomeRatioPop floatValue] * 100] forState:(UIControlStateNormal)];
+    [self.quantitativeButton setTitle:[NSString stringWithFormat:@"%.0f%%  %@",[model.incomeRatioPop floatValue] * 100,[LangSwitcher switchLang:@"详情" key:nil]] forState:(UIControlStateNormal)];
     [self.quantitativeButton SG_imagePositionStyle:(SGImagePositionStyleRight) spacing:5 imagePositionBlock:^(UIButton *button) {
         [button setImage:kImage(@"更多拷贝") forState:(UIControlStateNormal)];
     }];
 
-    [self.invitationButton setTitle:[NSString stringWithFormat:@"%.0f%%  详情",[model.incomeRatioInvite floatValue] * 100] forState:(UIControlStateNormal)];
+    [self.invitationButton setTitle:[NSString stringWithFormat:@"%.0f%%  %@",[model.incomeRatioInvite floatValue] * 100,[LangSwitcher switchLang:@"详情" key:nil]] forState:(UIControlStateNormal)];
 
     [self.invitationButton SG_imagePositionStyle:(SGImagePositionStyleRight) spacing:5 imagePositionBlock:^(UIButton *button) {
         [button setImage:kImage(@"更多拷贝") forState:(UIControlStateNormal)];

@@ -157,23 +157,8 @@
 
     NSString *countStr = [CoinUtil convertToRealCoin:_billModel.transAmountString
                                                 coin:billModel.currency];
-//    [_billModel.transAmountString convertToSimpleRealCoin];
     CGFloat money = [countStr doubleValue];
-    
-//    if (money > 0) {
-//
-//        moneyStr = [NSString stringWithFormat:@"+%@ %@",countStr , billModel.currency];
-//
-//
-//        self.iconIV.image = [UIImage imageNamed:[NSString stringWithFormat:@"账单-充币-%@",billModel.currency]];
-//
-//    } else if (money <= 0) {
-//
-//        moneyStr = [NSString stringWithFormat:@"%@ %@", countStr, billModel.currency];
-//
-//        self.iconIV.image = [UIImage imageNamed:[NSString stringWithFormat:@"账单-提币-%@",billModel.currency]];
-//
-//    }
+
 
     CoinModel *coin = [CoinUtil getCoinModel:billModel.currency];
     if (money > 0) {
@@ -206,11 +191,8 @@
     
     NSInteger num = [self.detailLbl getLinesArrayOfStringInLabel];
     _billModel.dHeightValue = num == 1 ? 0: self.detailLbl.height - 10;
-    
-    [self.timeLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.detailLbl.mas_bottom).offset(4);
-        make.left.equalTo(self.detailLbl.mas_left).offset(0);
-    }];
+    self.timeLbl.frame = CGRectMake(self.detailLbl.frame.origin.x, self.detailLbl.yy + 5, SCREEN_WIDTH - 80, 15);
+
 }
 
 @end

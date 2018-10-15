@@ -13,7 +13,7 @@
 #import "TLTabBarController.h"
 #import "LangSwitcher.h"
 #import <ZendeskSDK/ZendeskSDK.h>
-
+#import "NSBundle+Language.h"
 //#import <ZendeskSDK/ZendeskSDK.h>
 #import <ZendeskCoreSDK/ZendeskCoreSDK.h>
 #import <ZendeskProviderSDK/ZendeskProviderSDK.h>
@@ -171,6 +171,7 @@
                          cancle:^(UIAlertAction *action) {
     
                          } confirm:^(UIAlertAction *action) {
+
                              [ZDKZendesk initializeWithAppId: @"71d2ca9aba0cccc12deebfbdd352fbae8c53cd8999dd10bc"
                                                     clientId: @"mobile_sdk_client_7af3526c83d0c1999bc3"
                                                   zendeskUrl: @"https://thachainhelp.zendesk.com"];
@@ -189,10 +190,16 @@
                              {
                                  lan = @"en-us";
                              }
+                             
+//                             [NSBundle setLanguage:lan];
                              [ZDKSupport instance].helpCenterLocaleOverride = lan;
-                             [[NSUserDefaults standardUserDefaults] setValue:lan forKey:@"UWUserLanguageKey"];
+
+
                              [[NSUserDefaults standardUserDefaults] setValue:@[lan] forKey:@"AppleLanguages"];
+
                              [[NSUserDefaults standardUserDefaults] synchronize];
+
+
                              
                              
                              
@@ -208,19 +215,12 @@
                              }
                              TLTabBarController *tabBarCtrl = [[TLTabBarController alloc] init];
                       [UIApplication sharedApplication].keyWindow.rootViewController = tabBarCtrl;
-//                             [LangSwitcher startWithTraditional];
-                             //                             [v sizeToFit];
-                             
-                             
-//                             NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
-//                             dict[nil] = @"";
+
                          }];
     
 }
 
-//- (void)viewDidLayoutSubviews {
-//    self.langChooseTV.frame = self.view.bounds;
-//}
+
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     

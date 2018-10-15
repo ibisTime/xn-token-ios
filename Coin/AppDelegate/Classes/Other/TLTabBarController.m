@@ -14,6 +14,7 @@
 #import "UIColor+theme.h"
 #import "AppConfig.h"
 #import "AppColorMacro.h"
+#import "NSBundle+Language.h"
 @interface TLTabBarController ()<UITabBarControllerDelegate>
 
 @property (nonatomic, assign) NSInteger currentIndex;
@@ -25,7 +26,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     CoinWeakSelf;
-   
+
+
     self.delegate = self;
 
     NSArray *titles = @[

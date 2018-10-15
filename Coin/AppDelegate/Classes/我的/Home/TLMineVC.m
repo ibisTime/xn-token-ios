@@ -151,8 +151,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = [LangSwitcher switchLang:@"我的" key:nil];
-    
-//    self.navigationController.delegate = self;
     //顶部视图
     [self initMineHeaderView];
     //模型
@@ -163,10 +161,6 @@
     [[TLUser user] updateUserInfo];
     //通知
     [self addNotification];
-    
-
-    
-    
 }
 
 
@@ -199,10 +193,8 @@
             return ;
         }
         ChangeLocalMoneyVC *moneyVC= [[ChangeLocalMoneyVC alloc] init];
-//        moneyVC.cancelBtn.hidden = YES;
         [weakSelf.navigationController pushViewController:moneyVC animated:YES];
 
-//        [weakSelf presentViewController:moneyVC animated:YES completion:nil];
 
     };
     
@@ -240,6 +232,19 @@
         
         [weakSelf.navigationController pushViewController:settingVC animated:YES];
     };
+
+    MineModel *MyIncome = [MineModel new];
+    MyIncome.text = [LangSwitcher switchLang:@"我的收益" key:nil];
+    MyIncome.imgName = @"设置";
+    MyIncome.action = ^{
+
+        MyIncomeVC *vc = [[MyIncomeVC alloc] init];
+        [weakSelf.navigationController pushViewController:vc animated:YES];
+
+
+    };
+
+
     MineModel *language = [MineModel new];
     language.text = [LangSwitcher switchLang:@"语言" key:nil];
     language.imgName = @"语言";
@@ -321,47 +326,7 @@
         
     };
     
-    //常见问题
-    //    MineModel *problem = [MineModel new];
-    //
-    //    problem.text = [LangSwitcher switchLang:@"常见问题" key:nil];
-    //    problem.imgName = @"常见问题";
-    //    problem.action = ^{
-    //
-    //        HTMLStrVC *htmlVC = [HTMLStrVC new];
-    //
-    //        htmlVC.type = HTMLTypeCommonProblem;
-    //
-    //        [weakSelf.navigationController pushViewController:htmlVC animated:YES];
-    //
-    //    };
-    
-    //    //联系客服
-    //    MineModel *linkService = [MineModel new];
-    //    linkService.text = [LangSwitcher switchLang:@"联系客服" key:nil];
-    //    linkService.imgName = @"联系客服";
-    //    linkService.action = ^{
-    //
-    ////        HTMLStrVC *htmlVC = [HTMLStrVC new];
-    ////        htmlVC.type = HTMLTypeLinkService;
-    ////        [weakSelf.navigationController pushViewController:htmlVC animated:YES];
-    //
-    //        [IQKeyboardManager sharedManager].enableAutoToolbar = NO;
-    //        [ZDCChat updateVisitor:^(ZDCVisitorInfo *visitor) {
-    //
-    //            visitor.name = [TLUser user].nickname;
-    //            visitor.phone = [TLUser user].mobile;
-    //            visitor.email = [TLUser user].email;
-    //
-    //        }];
-    //        //
-    ////        [ZDCChat startChat:^(ZDCConfig *config) {
-    ////
-    ////        }];
-    //        [ZDCChat startChatIn:self.navigationController withConfig:nil];
-    //
-    //    };
-    
+
     //    //工单
     MineModel *helpModel = [MineModel new];
     helpModel.text = [LangSwitcher switchLang:@"帮助中心" key:nil];
@@ -375,6 +340,16 @@
             };
             return ;
         }
+        [ZDKZendesk initializeWithAppId: @"71d2ca9aba0cccc12deebfbdd352fbae8c53cd8999dd10bc"
+                               clientId: @"mobile_sdk_client_7af3526c83d0c1999bc3"
+                             zendeskUrl: @"https://thachainhelp.zendesk.com"];
+
+        id<ZDKObjCIdentity> userIdentity = [[ZDKObjCAnonymous alloc] initWithName:nil email:nil];
+        [[ZDKZendesk instance] setIdentity:userIdentity];
+
+        [ZDKCoreLogger setEnabled:YES];
+        [ZDKSupport initializeWithZendesk: [ZDKZendesk instance]];
+
 
         LangType type = [LangSwitcher currentLangType];
         NSString *lan;
@@ -386,21 +361,9 @@
         }else{
             lan = @"en-us";
         }
-        [[NSUserDefaults standardUserDefaults] setValue:lan forKey:@"UWUserLanguageKey"];
-        [[NSUserDefaults standardUserDefaults] setValue:@[lan] forKey:@"AppleLanguages"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
         [ZDKSupport instance].helpCenterLocaleOverride = lan;
+        [ZDKLocalization localizedStringWithKey:lan];
 
-
-        [ZDKZendesk initializeWithAppId: @"71d2ca9aba0cccc12deebfbdd352fbae8c53cd8999dd10bc"
-                               clientId: @"mobile_sdk_client_7af3526c83d0c1999bc3"
-                             zendeskUrl: @"https://thachainhelp.zendesk.com"];
-
-        id<ZDKObjCIdentity> userIdentity = [[ZDKObjCAnonymous alloc] initWithName:nil email:nil];
-        [[ZDKZendesk instance] setIdentity:userIdentity];
-
-        [ZDKCoreLogger setEnabled:YES];
-        [ZDKSupport initializeWithZendesk: [ZDKZendesk instance]];
 
         ZDKHelpCenterUiConfiguration *hcConfig  =  [ ZDKHelpCenterUiConfiguration  new];
         [ZDKTheme  currentTheme].primaryColor  = [UIColor redColor];
@@ -424,11 +387,6 @@
     abountUs.text = [LangSwitcher switchLang:@"关于我们" key:nil];
     abountUs.imgName = @"关于我们";
     abountUs.action = ^{
-        
-        //        HTMLStrVC *htmlVC = [HTMLStrVC new];
-        //        htmlVC.type = HTMLTypeAboutUs;
-        //        [weakSelf.navigationController pushViewController:htmlVC animated:YES];
-        
         TLAboutUsVC *vc = [[TLAboutUsVC alloc] init];
         [weakSelf.navigationController pushViewController:vc animated:YES];
         
@@ -438,27 +396,14 @@
     meSetting.text = [LangSwitcher switchLang:@"设置" key:nil];
     meSetting.imgName = @"设置";
     meSetting.action = ^{
-        
-        //        HTMLStrVC *htmlVC = [HTMLStrVC new];
-        //        htmlVC.type = HTMLTypeAboutUs;
-        //        [weakSelf.navigationController pushViewController:htmlVC animated:YES];
-        
+
         TLMeSetting *vc = [[TLMeSetting alloc] init];
         [weakSelf.navigationController pushViewController:vc animated:YES];
         
         
     };
 
-    MineModel *MyIncome = [MineModel new];
-    MyIncome.text = [LangSwitcher switchLang:@"我的收益" key:nil];
-    MyIncome.imgName = @"设置";
-    MyIncome.action = ^{
 
-        MyIncomeVC *vc = [[MyIncomeVC alloc] init];
-        [weakSelf.navigationController pushViewController:vc animated:YES];
-
-
-    };
     
     self.group = [MineGroup new];
     
@@ -474,8 +419,8 @@
     } else {
         
         
-        self.group.sections = @[ @[settingModel], @[inviteModel,questionSetting ],
-                                @[languageSetting,securityCenter,helpModel, meSetting,MyIncome]
+        self.group.sections = @[ @[settingModel], @[inviteModel,MyIncome,questionSetting ],
+                                @[languageSetting,securityCenter,helpModel, meSetting]
                                 ];
         
     }

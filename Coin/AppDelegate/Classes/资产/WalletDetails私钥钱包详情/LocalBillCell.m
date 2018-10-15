@@ -283,9 +283,9 @@
     
     [self layoutSubviews];
     
-    NSInteger num = [self.detailLbl getLinesArrayOfStringInLabel];
-    
-    _billModel.dHeightValue = num == 1 ? 0: self.detailLbl.height - 10;
+//    NSInteger num = [self.detailLbl getLinesArrayOfStringInLabel];
+
+    _billModel.dHeightValue = self.detailLbl.frame.size.height == 1 ? 0: self.detailLbl.height;
     
 }
 

@@ -70,7 +70,7 @@
 
 
 - (void)initTableView {
-    self.tableView = [[TLMoneyDetailsTableView alloc] initWithFrame:CGRectMake(0, -kNavigationBarHeight, SCREEN_WIDTH, SCREEN_HEIGHT - 50) style:(UITableViewStyleGrouped)];
+    self.tableView = [[TLMoneyDetailsTableView alloc] initWithFrame:CGRectMake(0, -kNavigationBarHeight, SCREEN_WIDTH, SCREEN_HEIGHT - 50 ) style:(UITableViewStyleGrouped)];
     self.tableView.refreshDelegate = self;
     self.tableView.backgroundColor = kBackgroundColor;
     self.tableView.moneyModel = self.moneyModel;
@@ -156,11 +156,18 @@
     NSString *increAmount = [CoinUtil convertToRealCoin:self.moneyModel.increAmount coin:self.moneyModel.symbol];
     if ([avilAmount floatValue] / [increAmount floatValue] < 1 || [avilAmount floatValue] == 0 || [increAmount floatValue] == 0) {
         continBtn.hidden = YES;
+        self.tableView.frame = CGRectMake(0, -kNavigationBarHeight, SCREEN_WIDTH, SCREEN_HEIGHT );
+    }else if(![self.moneyModel.status isEqualToString:@"5"])
+    {
+        continBtn.hidden = YES;
+        self.tableView.frame = CGRectMake(0, -kNavigationBarHeight, SCREEN_WIDTH, SCREEN_HEIGHT );
+
     }else
     {
         continBtn.hidden = NO;
+        self.tableView.frame = CGRectMake(0, -kNavigationBarHeight, SCREEN_WIDTH, SCREEN_HEIGHT - 50);
     }
-    self.tableView.frame = CGRectMake(0, -kNavigationBarHeight, SCREEN_WIDTH, SCREEN_HEIGHT);
+
     [self LoadData];
 }
 

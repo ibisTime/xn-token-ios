@@ -870,6 +870,21 @@
 "购买份额" = "Purchase portion";
 "份" = "Portion";
 
+"已申购" = "Subscribed";
+"计息中" = "Valuing";
+"我的收益" = "My Income";
+"昨日收益" = "Yesterday's income";
+"获得总收益" = "Total obtained income";
+"量化收益" = "Quantitative finance return";
+"邀请收益" = "Rewards for invitation";
+"全球收益榜" = "Global income ranking";
+"详情" = "Details";
+"预估收益" = "Anticipated return";
+"查看更多" = "View more";
+"排名" = "Rank";
+"排名100名以外，加油" = "You are not on the ranking list, keep going";
+"暂无数据" = "No data";
+"他的分享" = "His record";
 
 
 

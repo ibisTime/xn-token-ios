@@ -102,88 +102,13 @@
 - (void)viewDidLoad {
     
     
-//    self.navigationController.interactivePopGestureRecognizer.enabled = NO;
 
-    NSArray* words = [@"uniform claim drum stool evidence stage prevent quiz lunar dove record kit" componentsSeparatedByString:@" "];
-    
-//    BTCMnemonic *mnemonic =  [MnemonicUtil importMnemonic:words];
-//    if ([AppConfig config].runEnv == 0) {
-//        mnemonic.keychain.network = [BTCNetwork mainnet];
-//
-//    }else{
-//        mnemonic.keychain.network = [BTCNetwork testnet];
-//
-//    }
-// 
-//    NSLog(@"btc_privateKey=%@", [MnemonicUtil getBtcPrivateKey:mnemonic]);
-//  
-//    
-//    NSString *btc_address = [MnemonicUtil getBtcAddress:mnemonic];
-//    NSLog(@"btc_address=%@", [MnemonicUtil getBtcAddress:mnemonic]);
-    //btc_address=16kva3dw1AjrFTn9AXswebYvzq21dEeRsx
-    //  btc_address=16kva3dw1AjrFTn9AXswebYvzq21dEeRsx
-    //btc_address=mmGss6iupCB72aFkt6rKUWmFrpciaaLZuH
-    // eth_privateKey=KzGdnUHhqNVuzDBnJgWttLgFtwBtMTDqHdBT4Xgd52GRWDfo7dhk
-    // eth_publicKey=0x1PzsHPZET7uGwtwaMujpfrhaY7cX1C3NHT
-    
-//    TLNetworking *net = [TLNetworking new];
-//
-//
-//    net.code = @"802220";
-//    net.parameters[@"address"] = btc_address ;
-//
-//
-//    [net postWithSuccess:^(id responseObject) {
-//
-//
-//        [self.tableView endRefreshHeader];
-//
-//    } failure:^(NSError *error) {
-//        [self.tableView endRefreshHeader];
-//    }];
-//
-////    return;
-//    NSLog(@"%ld,%ld",mnemonic.keychain.network.isTestnet,mnemonic.keychain.network.isMainnet);
-//
-//    NSLog(@"eth_privateKey=%@", [MnemonicUtil getEthPrivateKey:mnemonic]);
-//    NSLog(@"eth_publicKey=%@", [MnemonicUtil getEthAddress:mnemonic]);
-//
-//    mnemonic =  [MnemonicUtil importMnemonic:mnemonic.words];
-//    NSLog(@"Seed=%@", BTCHexFromData(mnemonic.seed));
-//    NSLog(@"Mnemonic=%@", mnemonic.words);
-//    NSLog(@"privateKey=%@", [MnemonicUtil getBtcPrivateKey:mnemonic]);
-    
-//    [MnemonicUtil test];
-
-//    BTCMnemonic *mnemonic =  [MnemonicUtil generateNewMnemonic];
-//    NSLog(@"Seed=%@", BTCHexFromData(mnemonic.seed));
-//    NSLog(@"Mnemonic=%@", mnemonic.words);
-//    NSLog(@"btc_privateKey=%@", [MnemonicUtil getBtcPrivateKey:mnemonic]);
-//    NSLog(@"btc_publicKey=%@", [MnemonicUtil getBtcAddress:mnemonic]);
-//    NSLog(@"eth_privateKey=%@", [MnemonicUtil getEthPrivateKey:mnemonic]);
-//    NSLog(@"eth_publicKey=%@", [MnemonicUtil getEthAddress:mnemonic]);
-//
-//    mnemonic =  [MnemonicUtil importMnemonic:mnemonic.words];
-//    NSLog(@"Seed=%@", BTCHexFromData(mnemonic.seed));
-//    NSLog(@"Mnemonic=%@", mnemonic.words);
-//    NSLog(@"privateKey=%@", [MnemonicUtil getBtcPrivateKey:mnemonic]);
-//    NSLog(@"getEthTokenGasPrice=%@", [MnemonicUtil getEthTokenGasPrice]);
-//    return;
     
     [super viewDidLoad];
     [self initNavigationNar];
     [self initTableView];
     self.view.backgroundColor = kWhiteColor;
 
-//    [self reloadFindData];
-//    [CoinUtil refreshOpenCoinList:^{
-//        //获取banner列表
-//        [self requestBannerList];
-//    } failure:^{
-//
-//        [self.tableView endRefreshHeader];
-//
-//    }];
 
 
 }
@@ -221,18 +146,7 @@
 - (void)reloadFindData
 {
     
-//    AFHTTPSessionManager *sess = [AFHTTPSessionManager manager];
-//
-//    [sess POST:@"http://rap2.hichengdai.com:8080/app/mock/22/625410" parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
-//
-//    } progress:^(NSProgress * _Nonnull uploadProgress) {
-//
-//    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-//
-//    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-//        NSLog(@"%@",error);
-//    }];
-//    return;
+
     NSString *lang;
 
     LangType type = [LangSwitcher currentLangType];
@@ -276,13 +190,8 @@
 - (void)initTableView {
     
     CoinWeakSelf;
-//    UIBarButtonItem *rightBarItem = [[UIBarButtonItem alloc] initWithImage:kImage(@"消息1") style:UIBarButtonItemStyleDone target:self action:@selector(OpenMessage)];
-//
-//    self.navigationItem.rightBarButtonItem = rightBarItem;
-//    [UIBarButtonItem addRightItemWithImageName:@"消息" frame:CGRectMake(0, 0, 30, 30) vc:self action:@selector(OpenMessage)];
-    
 
-    
+
     self.tableView = [[HomeTableView alloc] initWithFrame:CGRectMake(15, kNavigationBarHeight, kScreenWidth, kScreenHeight - kNavigationBarHeight - kTabBarHeight) style:UITableViewStyleGrouped];
     self.tableView.backgroundColor = kWhiteColor;
     [self.view addSubview:self.tableView];
@@ -290,9 +199,6 @@
 
 
     [self.tableView addRefreshAction:^{
-
-
-
         [CoinUtil refreshOpenCoinList:^{
             //获取banner列表
             [weakSelf requestBannerList];
@@ -337,116 +243,101 @@
 #pragma mark - HeaderEvents
 - (void)headerViewEventsWithType:(HomeEventsType)type index:(NSInteger)index  model:(HomeFindModel *)model
 {
-    
-    if ([model.action isEqualToString:@"red_packet"]) {
-        
-        RedEnvelopeVC *redEnvelopeVC = [RedEnvelopeVC new];
-        
-//        if ([[TLUser user].tradepwdFlag isEqualToString:@"0"]) {
-//            TLPwdType pwdType = TLPwdTypeSetTrade;
-//            TLPwdRelatedVC *pwdRelatedVC = [[TLPwdRelatedVC alloc] initWithType:pwdType];
-        
-//            pwdRelatedVC.isWallet = YES;
-//            pwdRelatedVC.success = ^{
-//
-//
-//                //                    [self presentViewController:redEnvelopeVC animated:YES completion:nil];
-//                [self.navigationController pushViewController:redEnvelopeVC animated:YES];
-        //            [self.navigationController pushViewController:redEnvelopeVC animated:YES];
-            [self.navigationController pushViewController:redEnvelopeVC animated:YES];
-            return;
-
-            }
-    
-    if ([model.action isEqualToString:@"none"]) {
-            HTMLStrVC *vc = [HTMLStrVC new];
-            vc.title = model.name;
-            vc.name = model.name;
-            vc.des = model.Description;
-        
-            [self.navigationController pushViewController:vc animated:YES];
-        return;
-        
-    }else{
-         if ([model.action isEqualToString:@"money_manager"])
-         {
-             PosMiningVC *vc = [PosMiningVC new];
-             
-            
-                 [self.navigationController pushViewController:vc animated:YES];
-          
-             return;
-     
-         }else if ([model.action isEqualToString:@"invitation"])
-        {
-//            PosMiningVC *vc = [PosMiningVC new];
-            
-            TLinviteVC *settingVC = [TLinviteVC new];
-
-            [self.navigationController pushViewController:settingVC animated:YES];
-            
-            return;
-            
-        }
-    }
-    
     switch (type) {
-            
+
         case HomeEventsTypeBanner:
         {
-            
+
             NSString *url = [[self.bannerRoom objectAtIndex:index] url];
             if (url && url.length > 0) {
                 WebVC *webVC = [[WebVC alloc] init];
                 webVC.url = url;
                 [self.navigationController pushViewController:webVC animated:YES];
             }
-            
-        }break;
-            
-        case HomeEventsTypeStatistics:
-        {
-            TradeFlowListVC *flowVC = [TradeFlowListVC new];
-            
-            [self.navigationController pushViewController:flowVC animated:YES];
-            
-        }break;
-            
-        case HomeEventsTypeStore:
-        {
-            RedEnvelopeVC *redEnvelopeVC = [RedEnvelopeVC new];
-            [self.navigationController pushViewController:redEnvelopeVC animated:YES];
-        }break;
-            
-        case HomeEventsTypeGoodMall:
-        {
-            HTMLStrVC *vc = [HTMLStrVC new];
-            vc.type = HTMLTypeGlobal_master;
-            vc.des = model.Description;
-            [self.navigationController pushViewController:vc animated:YES];
-           
-        }break;
-            
-        case HomeEventsTypePosMining:
-        {
-            PosMiningVC *vc = [PosMiningVC new];
-            [self.navigationController pushViewController:vc animated:YES];
-
-        }
-            break;
-        case HomeEventsTypeRedEnvelope:
-        {
-            HTMLStrVC *vc = [HTMLStrVC new];
-            vc.des = model.Description;
-            vc.type = HTMLTypeYubibao;
-            [self.navigationController pushViewController:vc animated:YES];
-            
+            return;
 
         }break;
-            
-        default:
-            break;
+
     }
+//        case HomeEventsTypeStatistics:
+//        {
+//            TradeFlowListVC *flowVC = [TradeFlowListVC new];
+//
+//            [self.navigationController pushViewController:flowVC animated:YES];
+//            return;
+//
+//        }break;
+
+//        case HomeEventsTypeStore:
+//        {
+//            RedEnvelopeVC *redEnvelopeVC = [RedEnvelopeVC new];
+//            [self.navigationController pushViewController:redEnvelopeVC animated:YES];
+//            return;
+//        }break;
+
+//        case HomeEventsTypeGoodMall:
+//        {
+//            HTMLStrVC *vc = [HTMLStrVC new];
+//            vc.type = HTMLTypeGlobal_master;
+//            vc.des = model.Description;
+//            [self.navigationController pushViewController:vc animated:YES];
+//            return;
+//
+//        }break;
+//
+//        case HomeEventsTypePosMining:
+//        {
+//            PosMiningVC *vc = [PosMiningVC new];
+//            [self.navigationController pushViewController:vc animated:YES];
+//            return;
+//
+//        }
+//            break;
+//        case HomeEventsTypeRedEnvelope:
+//        {
+//            HTMLStrVC *vc = [HTMLStrVC new];
+//            vc.des = model.Description;
+//            vc.type = HTMLTypeYubibao;
+//            [self.navigationController pushViewController:vc animated:YES];
+//            return;
+//
+//
+//        }break;
+
+//        default:
+//            break;
+//    }
+
+    
+    if ([model.action isEqualToString:@"red_packet"]) {
+        RedEnvelopeVC *redEnvelopeVC = [RedEnvelopeVC new];
+        [self.navigationController pushViewController:redEnvelopeVC animated:YES];
+        return;
+
+    }else if ([model.action isEqualToString:@"money_manager"])
+    {
+        PosMiningVC *vc = [PosMiningVC new];
+        [self.navigationController pushViewController:vc animated:YES];
+        return;
+
+    }else if ([model.action isEqualToString:@"invitation"])
+    {
+        TLinviteVC *settingVC = [TLinviteVC new];
+        [self.navigationController pushViewController:settingVC animated:YES];
+        return;
+
+    }else if ([model.action isEqualToString:@"none"]) {
+        HTMLStrVC *vc = [HTMLStrVC new];
+        vc.title = model.name;
+        vc.name = model.name;
+        vc.des = model.Description;
+        vc.type = HTMLTypeOther;
+        [self.navigationController pushViewController:vc animated:YES];
+        return;
+        
+    }
+    
+
 
 }
 
@@ -469,56 +360,16 @@
         self.headerView.banners = self.bannerRoom;
         
         //获取官方钱包总量，已空投量
-//        [self requestCountInfo];
         [self.tableView endRefreshHeader];
 
     } failure:^(NSError *error) {
         
         [self.tableView endRefreshHeader];
-//        [TLProgressHUD dismiss];
         
     }];
     
 }
 
-/**
- 获取官方钱包总量，已空投量
- */
-//- (void)requestCountInfo {
-//
-//    NSString *symbol = @"OGC";
-//    NSArray *tokens = [CoinUtil shouldDisplayTokenCoinArray];
-//    if (tokens.count > 0) {
-//        symbol = [[CoinUtil shouldDisplayTokenCoinArray] objectAtIndex:0];
-//    }
-//
-//    TLNetworking *http = [TLNetworking new];
-//
-//    http.code = @"802906";
-//    http.parameters[@"currency"] = symbol;
-//
-//    [http postWithSuccess:^(id responseObject) {
-//
-//        CountInfoModel *countInfo = [CountInfoModel mj_objectWithKeyValues:responseObject[@"data"]];
-//
-//        self.headerView.countInfo = countInfo;
-//        [self.tableView endRefreshHeader];
-//
-//    } failure:^(NSError *error) {
-//        [self.tableView endRefreshHeader];
-//    }];
-//
-//    /*未完成功能，模拟数据*/
-////    CountInfoModel *countInfo = [[CountInfoModel alloc] init];
-////    countInfo.initialBalance = @"100000000000000";
-////    countInfo.useBalance = @"60000000000000";
-////    countInfo.useRate = @"0.6";
-//
-////    self.headerView.countInfo = countInfo;
-//
-//    [TLProgressHUD dismiss];
-//
-//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

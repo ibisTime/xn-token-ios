@@ -37,13 +37,12 @@ static NSString *identifierCell = @"AccumulatedEarningsCell";
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return self.array.count;
+    return 1;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
-    NSArray *array = self.array[section];
-    //    NSMutableArray <InviteEarningsModel *>*Array =[InviteEarningsModel mj_keyValuesWithKeys:self.model[section]];
-    return array.count;
+//    NSArray *array = self.array[section];
+    return 3;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -51,10 +50,11 @@ static NSString *identifierCell = @"AccumulatedEarningsCell";
     InviteEarningCell *cell = [tableView dequeueReusableCellWithIdentifier:InviteEarning forIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
 
-    NSArray *array = self.array[indexPath.section];
-    if (array.count > 0) {
-        cell.model = [InviteEarningsModel mj_objectWithKeyValues:array[indexPath.row]];
-    }
+//    NSArray *array = self.array[indexPath.section];
+//    if (array.count > 0) {
+//        cell.model = [InviteEarningsModel mj_objectWithKeyValues:array[indexPath.row]];
+//    }
+    cell.row = indexPath.row;
 
     return cell;
 }
@@ -90,16 +90,18 @@ static NSString *identifierCell = @"AccumulatedEarningsCell";
     UIView *view = [UIView new];
 
     UILabel *titleLbl = [UILabel labelWithFrame:CGRectMake(15, 0, SCREEN_WIDTH - 30, 45) textAligment:(NSTextAlignmentLeft) backgroundColor:kClearColor font:Font(12) textColor:kHexColor(@"#999999")];
-    NSArray *array = self.array[section];
-    if (array.count > 0) {
-        InviteEarningsModel *model = [InviteEarningsModel mj_objectWithKeyValues:array[0]];
-        titleLbl.text = model.createDatetime;
-    }
+//    NSArray *array = self.array[section];
+//    if (array.count > 0) {
+//        InviteEarningsModel *model = [InviteEarningsModel mj_objectWithKeyValues:array[0]];
+//        titleLbl.text = model.createDatetime;
+//    }
 
     [view addSubview:titleLbl];
 
     return view;
 }
+
+
 
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {

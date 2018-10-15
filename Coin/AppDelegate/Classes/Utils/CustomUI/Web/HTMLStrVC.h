@@ -19,9 +19,10 @@ typedef NS_ENUM(NSUInteger, HTMLType) {
     HTMLTypeMnemonic_backup,    //如何备份助记词
     HTMLTypeRed_packet_rule,    //红包规则
     HTMLTypePrivacy,    //隐私政策
-    HTMLTypeGlobal_master,    // 首创玩法
-    HTMLTypeQuantitative_finance,    //量化理财
-    HTMLTypeYubibao    //余币宝
+//    HTMLTypeGlobal_master,    // 首创玩法
+//    HTMLTypeYubibao,    //余币宝
+    HTMLTypeQuantitativeFinance, //量化理财
+    HTMLTypeOther //其他
 
     
 };

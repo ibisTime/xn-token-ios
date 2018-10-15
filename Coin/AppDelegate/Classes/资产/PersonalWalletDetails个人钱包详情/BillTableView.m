@@ -53,16 +53,16 @@ static NSString *identifierCell = @"BillListCell";
 
 
 
-    static NSString *CellIdentifier = @"Cell";
-    cell = [tableView cellForRowAtIndexPath:indexPath]; //根据indexPath准确地取出一行，而不是从cell重用队列中取出
-    if (cell == nil) {
-        cell = [[BillCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    }
+//    static NSString *CellIdentifier = @"Cell";
+//    cell = [tableView cellForRowAtIndexPath:indexPath]; //根据indexPath准确地取出一行，而不是从cell重用队列中取出
+//    if (cell == nil) {
+//        cell = [[BillCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//    }
 
 
-//    cell = [tableView dequeueReusableCellWithIdentifier:identifierCell forIndexPath:indexPath];
-//    if (indexPath.row == 0) {
+    cell = [tableView dequeueReusableCellWithIdentifier:identifierCell forIndexPath:indexPath];
+//    if (indexPath.row == 3) {
 //        cell.backgroundColor = [UIColor redColor];
 //    }
     cell.billModel = self.bills[indexPath.row];
@@ -76,8 +76,8 @@ static NSString *identifierCell = @"BillListCell";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    return self.bills[indexPath.row].dHeightValue + 70;
-//    return cell.timeLbl.yy + 16;
+//    return self.bills[indexPath.row].dHeightValue + 70;
+    return cell.timeLbl.yy + 16;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

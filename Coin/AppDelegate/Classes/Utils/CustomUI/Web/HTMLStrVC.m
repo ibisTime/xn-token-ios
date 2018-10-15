@@ -96,19 +96,10 @@
     self.bgImage.userInteractionEnabled = YES;
     self.bgImage.image = kImage(@"我的 背景");
     [self.view  addSubview:self.bgImage];
-    
-//    [self.bgImage mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.edges.mas_equalTo(UIEdgeInsetsZero);
-//    }];
-    //
-//    self.backButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
-//    self.backButton.frame = CGRectMake(15, kStatusBarHeight+5, 40, 40);
-//    [self.backButton setImage:kImage(@"返回1-1") forState:(UIControlStateNormal)];
-//    [self.backButton addTarget:self action:@selector(buttonClick) forControlEvents:(UIControlEventTouchUpInside)];
-//    [self.bgImage addSubview:self.backButton];
+
     
     self.nameLable = [[UILabel alloc]init];
-    self.nameLable.text = [LangSwitcher switchLang:@"帮助中心" key:nil];
+//    self.nameLable.text = [LangSwitcher switchLang:@"帮助中心" key:nil];
     self.nameLable.textAlignment = NSTextAlignmentCenter;
     self.nameLable.font = Font(16);
     self.nameLable.textColor = kTextBlack;
@@ -116,67 +107,83 @@
 //    [self.bgImage addSubview:self.nameLable];
 
     NSString *name = @"";
-    
     NSString *ckey = @"";
-    
+
+
+    if (self.type == HTMLTypeAboutUs) {
+
+    }
+
     switch (self.type) {
             
         case HTMLTypeAboutUs: {
             ckey = [NSString stringWithFormat:@"questions_%@",[APPLanguage currentLanguage].currentLange];
             name = [LangSwitcher switchLang:@"关于我们" key:nil];
-            
-        } break;
+            self.nameLable.text = name;
+            break;
+        }
             
         case HTMLTypeRegProtocol: {
             ckey = [NSString stringWithFormat:@"reg_protocol_%@",[APPLanguage currentLanguage].currentLange];
             name = [LangSwitcher switchLang:@"注册协议" key:nil];
+            self.nameLable.text = name;
+            break;
             
-        } break;
+        }
             
         case HTMLTypeCommonProblem: {
             
              ckey = [NSString stringWithFormat:@"questions_%@",[APPLanguage currentLanguage].currentLange];
             name = [LangSwitcher switchLang: @"帮助中心" key:nil];
-            
-        } break;
+            self.nameLable.text = name;
+
+            break;
+        }
             
         case HTMLTypeLinkService: {
             
             ckey = @"service";
             
             name =  [LangSwitcher switchLang:@"联系客服" key:nil];
-            
-        } break;
+            self.nameLable.text = name;
+            break;
+        }
             
         case HTMLTypeTradeRemind: {
             
             ckey = @"trade_remind";
             
             name = [LangSwitcher switchLang:@"交易提醒" key:nil];
+            self.nameLable.text = name;
+            break;
             
-        } break;
+        }
         case HTMLTypeMnemonic: {
             ckey = [NSString stringWithFormat:@"mnemonic_%@",[APPLanguage currentLanguage].currentLange];
             
             name = [LangSwitcher switchLang:@"什么是助记词" key:nil];
+            self.nameLable.text = name;
             break;
         }
         case HTMLTypeCreate_wallet: {
             ckey = [NSString stringWithFormat:@"create_wallet_%@",[APPLanguage currentLanguage].currentLange];
             
             name = [LangSwitcher switchLang:@"创建钱包流程" key:nil];
+            self.nameLable.text = name;
             break;
         }
         case HTMLTypeMnemonic_backup: {
             ckey = [NSString stringWithFormat:@"mnemonic_backup_%@",[APPLanguage currentLanguage].currentLange];
             
             name = [LangSwitcher switchLang:@"如何备份钱包" key:nil];
+            self.nameLable.text = name;
             break;
         }
         case HTMLTypeRed_packet_rule: {
             ckey = [NSString stringWithFormat:@"red_packet_rule_%@",[APPLanguage currentLanguage].currentLange];
             
             name = [LangSwitcher switchLang:@"红包规则" key:nil];
+            self.nameLable.text = name;
             break;
         }
         case HTMLTypePrivacy: {
@@ -185,43 +192,53 @@
             name = [LangSwitcher switchLang:@"隐私政策" key:nil];
             break;
         }
-        case HTMLTypeGlobal_master: {
-            ckey = [NSString stringWithFormat:@"global_master_%@",[APPLanguage currentLanguage].currentLange];
-            name = [LangSwitcher switchLang:@"首创玩法" key:nil];
-            self.htmlStr = self.des;
+//        case HTMLTypeGlobal_master: {
+//            ckey = [NSString stringWithFormat:@"global_master_%@",[APPLanguage currentLanguage].currentLange];
+//            name = [LangSwitcher switchLang:@"首创玩法" key:nil];
+//            self.htmlStr = self.des;
+//
+//            [self initWebView];
+//            self.nameLable.text = name;
+//
+//            return;
+//            break;
+//        }
+//        case HTMLTypeYubibao: {
+//            ckey = [NSString stringWithFormat:@"yubibao_%@",[APPLanguage currentLanguage].currentLange];
+//
+//            name = [LangSwitcher switchLang:@"余币宝" key:nil];
+//            self.htmlStr = self.des;
+//
+//            [self initWebView];
+//            self.nameLable.text = name;
+//
+//            return;
+//            break;
+//        }
+        case HTMLTypeQuantitativeFinance: {
+            ckey = [NSString stringWithFormat:@"pop_protocol_%@",[APPLanguage currentLanguage].currentLange];
 
-            [self initWebView];
-            self.nameLable.text = name;
-
-            return;
-
-            break;
-        }
-        case HTMLTypeQuantitative_finance: {
-            ckey = [NSString stringWithFormat:@"quantitative_finance_%@",[APPLanguage currentLanguage].currentLange];
-            
             name = [LangSwitcher switchLang:@"量化理财" key:nil];
-            self.htmlStr = self.des;
-            
-            [self initWebView];
             self.nameLable.text = name;
 
+            break;
+        }
+
+        case HTMLTypeOther: {
+            self.nameLable.text = self.name;
+            [self initWebView];
             return;
             break;
         }
-        case HTMLTypeYubibao: {
-            ckey = [NSString stringWithFormat:@"yubibao_%@",[APPLanguage currentLanguage].currentLange];
-            
-            name = [LangSwitcher switchLang:@"余币宝" key:nil];
-            self.htmlStr = self.des;
-            
-            [self initWebView];
-            self.nameLable.text = name;
 
-            return;
+
+        default:
             break;
-        }
+
     }
+
+
+
 
     self.nameLable.text = name;
 
@@ -264,7 +281,7 @@
     
     wkConfig.userContentController = wkUCC;
     
-    _webView = [[WKWebView alloc] initWithFrame:CGRectMake(15, kNavigationBarHeight + 30, kScreenWidth-30, kSuperViewHeight) configuration:wkConfig];
+    _webView = [[WKWebView alloc] initWithFrame:CGRectMake(15, kNavigationBarHeight + 15, kScreenWidth-30, kSuperViewHeight - 40) configuration:wkConfig];
     
     _webView.backgroundColor = kWhiteColor;
     
@@ -274,9 +291,7 @@
     [_webView.scrollView adjustsContentInsets];
     [self.bgImage addSubview:_webView];
     if (self.des) {
-//        self.title = self.name;
         self.nameLable.text = self.name;
-
         [_webView loadHTMLString:self.des baseURL:nil];
     }else{
         [self loadWebWithString:self.htmlStr];

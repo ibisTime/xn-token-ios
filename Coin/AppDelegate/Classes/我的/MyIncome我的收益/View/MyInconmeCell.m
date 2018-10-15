@@ -24,12 +24,11 @@
 
 
         _nameLabel = [UILabel labelWithFrame:CGRectMake(_accountLabel.xx + 10, 11, SCREEN_WIDTH - _accountLabel.xx - 25, 17) textAligment:(NSTextAlignmentRight) backgroundColor:kClearColor font:FONT(12) textColor:kHexColor(@"#999999")];
-        _nameLabel.text = @"预估收益";
+        _nameLabel.text = [LangSwitcher switchLang:@"预估收益" key:nil];
         [self addSubview:_nameLabel];
 
 
         _priceLabel = [UILabel labelWithFrame:CGRectMake(_accountLabel.xx + 10, 28, SCREEN_WIDTH - _accountLabel.xx - 25, 20) textAligment:(NSTextAlignmentRight) backgroundColor:kClearColor font:FONT(14) textColor:kHexColor(@"#333333")];
-        _priceLabel.text = @"31.0001 BTC";
         [self addSubview:_priceLabel];
 
         UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(66, 59, SCREEN_WIDTH - 66 - 15 , 1)];
@@ -47,7 +46,7 @@
     _accountLabel.frame = CGRectMake(66, 22, 0, 14);
     [_accountLabel sizeToFit];
     NSString *incomeTotal = [CoinUtil convertToRealCoin:topModel.incomeTotal coin:@"BTC"];
-    _priceLabel.text = [NSString stringWithFormat:@"%@",incomeTotal];
+    _priceLabel.text = [NSString stringWithFormat:@"%@  BTC",incomeTotal];
 
     _nameLabel.frame = CGRectMake(_accountLabel.xx + 10, 11, SCREEN_WIDTH - _accountLabel.xx - 25, 17);
     _priceLabel.frame = CGRectMake(_accountLabel.xx + 10, 28, SCREEN_WIDTH - _accountLabel.xx - 25, 20);

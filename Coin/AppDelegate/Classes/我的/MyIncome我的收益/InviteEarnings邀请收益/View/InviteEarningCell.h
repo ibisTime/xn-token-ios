@@ -13,6 +13,8 @@
 @property (nonatomic , strong)InviteEarningsModel *model;
 @property (nonatomic , strong)UILabel *mobile;
 @property (nonatomic , strong)UILabel *priceLabel;
-//@property (nonatomic , strong)
+
+@property (nonatomic , assign)NSInteger row;
+
 
 @end

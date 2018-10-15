@@ -50,15 +50,10 @@
     [self.tableView addRefreshAction:^{
         [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
 
-
-//            for (NSDictionary *dic in objs) {
-//
-//            }
             NSMutableArray *array = [NSMutableArray array];
             for (int i = 0; i < objs.count; i ++) {
                 NSMutableDictionary *dic = [NSMutableDictionary dictionary];
                 dic = objs[i];
-//                [dic setValue:[dic[@"createDatetime"] convertDate] forkey:@"createDatetime"];
                 InviteEarningsModel *model = [InviteEarningsModel mj_objectWithKeyValues:dic];
                 [dic setValue:[model.createDatetime convertDate] forKey:@"createDatetime"];
                 [array addObject:dic];
@@ -87,8 +82,17 @@
             }
 
 
-//            NSMutableArray <InviteEarningsModel *>*ARRAY = [InviteEarningsVC filterMaxItemsArray:objs filterKey:@"createDatetime"];
-            weakSelf.tableView.array = [InviteEarningsVC filterMaxItemsArray:objs filterKey:@"createDatetime"];
+            NSMutableArray *array = [NSMutableArray array];
+            for (int i = 0; i < objs.count; i ++) {
+                NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+                dic = objs[i];
+                InviteEarningsModel *model = [InviteEarningsModel mj_objectWithKeyValues:dic];
+                [dic setValue:[model.createDatetime convertDate] forKey:@"createDatetime"];
+                [array addObject:dic];
+            }
+
+            [weakSelf.tableView.array addObject:array];
+            weakSelf.tableView.array = [InviteEarningsVC filterMaxItemsArray:weakSelf.tableView.array filterKey:@"createDatetime"];
             [weakSelf.tableView reloadData_tl];
 
         } failure:^(NSError *error) {

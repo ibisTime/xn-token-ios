@@ -36,6 +36,7 @@
 #import "ChangeLocalMoneyVC.h"
 #import "TLAboutUsVC.h"
 #import "GengXinModel.h"
+
 @interface TLMeSetting ()
 @property (nonatomic, strong) SettingGroup *group;
 @property (nonatomic, strong) UIButton *loginOutBtn;

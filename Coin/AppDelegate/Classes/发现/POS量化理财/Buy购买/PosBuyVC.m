@@ -13,6 +13,7 @@
 #import "PayModel.h"
 #import "AssetPwdView.h"
 //#import "TLMyRecordVC.h"
+#import "HTMLStrVC.h"
 #import "PosMyInvestmentDetailsVC.h"
 @interface PosBuyVC ()<RefreshDelegate>
 {
@@ -146,8 +147,12 @@
         RechargeCoinVC *coinVC = [RechargeCoinVC new];
         coinVC.currency = self.currencyModel;
         [self.navigationController pushViewController:coinVC animated:YES];
+    }else if (sender.tag == 503)
+    {
+        HTMLStrVC *vc = [HTMLStrVC new];
+        vc.type = HTMLTypeQuantitativeFinance;
+        [self.navigationController pushViewController:vc animated:YES];
     }
-
 }
 
 //  滑动
@@ -281,10 +286,10 @@
     NSString *increAmount1 = [CoinUtil convertToRealCoin:self.moneyModel.increAmount coin:self.moneyModel.symbol];
 
 
-    if ([increAmount1 floatValue] * number > [str1 floatValue]) {
-        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"余额不足,请充值" key:nil]];
-        return;
-    }
+//    if ([increAmount1 floatValue] * number > [str1 floatValue]) {
+//        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"余额不足,请充值" key:nil]];
+//        return;
+//    }
 
     [self.view endEditing:YES];
     //确认购买
@@ -425,7 +430,7 @@
 
 
     UILabel *money = [UILabel labelWithBackgroundColor:kClearColor textColor:kHexColor(@"#FF6400") font:16];
-    money.text = [NSString stringWithFormat:@"%.2f",[price floatValue] * [self.moneyModel.expectYield floatValue]];
+    money.text = [NSString stringWithFormat:@"%.4f",[price floatValue] * [self.moneyModel.expectYield floatValue]/360*[self.moneyModel.limitDays floatValue]];
     money.frame = CGRectMake(moneyMay.xx + 5, moneyMay.frame.origin.y + 1,  SCREEN_WIDTH - 48 - 25 - moneyMay.xx, 14);
     [whiteView addSubview:money];
 

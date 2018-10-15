@@ -17,6 +17,18 @@
 
 
 
+//        CAGradientLayer *layer;
+//        layer = [CAGradientLayer new];
+//        layer.startPoint = CGPointMake(1, 0);
+//        layer.masksToBounds = YES;
+//        layer.cornerRadius = 2;
+//        layer.endPoint = CGPointMake(1, 1);
+//        [self.layer addSublayer:layer];
+//        layer.frame = CGRectMake(0, 0, SCREEN_WIDTH, 160 - 64);
+//        layer.colors=@[(__bridge id)kHexColor(@"#0848DF").CGColor,(__bridge id)kHexColor(@"#3389FF").CGColor];
+
+
+
         UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 0.5, 18, 1, 54)];
         lineView.backgroundColor = kHexColor(@"#BAC1C8");
         [self addSubview:lineView];

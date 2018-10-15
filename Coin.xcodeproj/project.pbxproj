@@ -322,6 +322,7 @@
 		7AAF039C21527FD9008507FF /* YZVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AAF039B21527FD9008507FF /* YZVC.m */; };
 		7AD659F1215F691C002F747E /* MoneyAndTreasureHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AD659F0215F691C002F747E /* MoneyAndTreasureHeadView.m */; };
 		7AE970522170C4970066B66C /* InviteEarningsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AE970512170C4970066B66C /* InviteEarningsModel.m */; };
+		7AE9705521742D140066B66C /* NSBundle+Language.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AE9705421742D130066B66C /* NSBundle+Language.m */; };
 		7AFBAE31216DD32A006CF464 /* MyIncomeTopModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AFBAE30216DD32A006CF464 /* MyIncomeTopModel.m */; };
 		B80864EE211EA17D00755158 /* BTCBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = B8086411211EA17C00755158 /* BTCBlock.m */; };
 		B80864EF211EA17D00755158 /* BTCBlockHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = B8086412211EA17C00755158 /* BTCBlockHeader.m */; };
@@ -1154,6 +1155,8 @@
 		7AD659F0215F691C002F747E /* MoneyAndTreasureHeadView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MoneyAndTreasureHeadView.m; sourceTree = "<group>"; };
 		7AE970502170C4970066B66C /* InviteEarningsModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InviteEarningsModel.h; sourceTree = "<group>"; };
 		7AE970512170C4970066B66C /* InviteEarningsModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InviteEarningsModel.m; sourceTree = "<group>"; };
+		7AE9705321742D130066B66C /* NSBundle+Language.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSBundle+Language.h"; sourceTree = "<group>"; };
+		7AE9705421742D130066B66C /* NSBundle+Language.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSBundle+Language.m"; sourceTree = "<group>"; };
 		7AFBAE2F216DD32A006CF464 /* MyIncomeTopModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyIncomeTopModel.h; sourceTree = "<group>"; };
 		7AFBAE30216DD32A006CF464 /* MyIncomeTopModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyIncomeTopModel.m; sourceTree = "<group>"; };
 		8863748C5281F9DC1DDF8EEA /* Pods-Coin.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Coin.release.xcconfig"; path = "Pods/Target Support Files/Pods-Coin/Pods-Coin.release.xcconfig"; sourceTree = "<group>"; };
@@ -3189,6 +3192,8 @@
 				211A34DD1FB4245D00FEB71F /* MineCell.m */,
 				B80D54CC210C9C11005303D5 /* TLChangeNikeName.h */,
 				B80D54CD210C9C11005303D5 /* TLChangeNikeName.m */,
+				7AE9705321742D130066B66C /* NSBundle+Language.h */,
+				7AE9705421742D130066B66C /* NSBundle+Language.m */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -4700,6 +4705,7 @@
 				7A2CC66D215BC5B900B27E2D /* PosMyInvestmentDetailsCell.m in Sources */,
 				B80864F8211EA17D00755158 /* BTCQRCode.m in Sources */,
 				21A7F3201FB2E2F900FAA0A2 /* UserDefaultsUtil.m in Sources */,
+				7AE9705521742D140066B66C /* NSBundle+Language.m in Sources */,
 				B808650A211EA17D00755158 /* BTCOpcode.m in Sources */,
 				7A2CC65A215BA19E00B27E2D /* PosBuyBalanceCell.m in Sources */,
 				211A34DB1FB4083300FEB71F /* MineTableView.m in Sources */,
@@ -5071,7 +5077,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = VQPS9BLJYN;
+				DEVELOPMENT_TEAM = 3ZCW993X44;
 				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = NO;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -5229,7 +5235,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = VQPS9BLJYN;
+				DEVELOPMENT_TEAM = 3ZCW993X44;
 				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = NO;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
