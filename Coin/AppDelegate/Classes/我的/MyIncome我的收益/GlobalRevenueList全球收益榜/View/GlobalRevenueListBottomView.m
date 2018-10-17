@@ -74,7 +74,7 @@
 
     _priceLabel.frame = CGRectMake(_rankingLabel.xx + 10, 35, SCREEN_WIDTH - 25 - _rankingLabel.xx, 20);
 
-    NSString *incomeTotal = [CoinUtil convertToRealCoin:model.incomeTotal coin:@"BTC"];
+    NSString *incomeTotal = [CoinUtil convertToRealCoin2:model.incomeTotal setScale:4  coin:@"BTC"];
     _priceLabel.text = [NSString stringWithFormat:@"%@ BTC",incomeTotal];
 
 }

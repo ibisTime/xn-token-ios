@@ -35,6 +35,8 @@
 #import <MSAuthSDK/MSAuthSDK.h>
 #import <SecurityGuardSDK/JAQ/SecurityVerification.h>
 #import <SVProgressHUD/SVProgressHUD.h>
+
+#import "AppConfig.h"
 //腾讯云
 //#import "ChatManager.h"   czy
 //#import "IMModel.h"
@@ -104,9 +106,48 @@
 //    NSLog(@"%@",dic);
     //腾讯云登录成功
 //    [self setUpNotification];
-    
+
+
+//    UILongPressGestureRecognizer * longPressGesture =[[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(cellLongPress:)];
+//
+//    longPressGesture.minimumPressDuration=1.5f;//设置长按 时间
+//    [self.view addGestureRecognizer:longPressGesture];
+
 
 }
+
+//-(void)cellLongPress:(UILongPressGestureRecognizer *)longRecognizer{
+//    if (longRecognizer.state==UIGestureRecognizerStateBegan) {
+//        //成为第一响应者，需重写该方法
+//        [self becomeFirstResponder];
+//
+//        UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:@"切换服务器" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+//
+//        UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"研发" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+//            //    研发
+//            [AppConfig config].runEnv = RunEnvDev;
+//
+//
+//        }];
+//        UIAlertAction *action2 = [UIAlertAction actionWithTitle:@"测试" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+//            //    测试
+//            [AppConfig config].runEnv = RunEnvTest;
+//            NSLog(@"点击了取消");
+//        }];
+//        UIAlertAction *action3 = [UIAlertAction actionWithTitle:@"正式" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+//            [AppConfig config].runEnv = RunEnvRelease;
+//        }];
+//        //把action添加到actionSheet里
+//        [actionSheet addAction:action1];
+//        [actionSheet addAction:action2];
+//        [actionSheet addAction:action3];
+//
+//        //相当于之前的[actionSheet show];
+//        [self presentViewController:actionSheet animated:YES completion:nil];
+//    }
+//}
+
+
 
 - (void)configData
 {

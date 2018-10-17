@@ -162,9 +162,7 @@
     self.earningsLabel.frame =  CGRectMake(self.line.xx + 22, 100, SCREEN_WIDTH -self.line.xx - 22 - 15, 14);
 
 
-    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
-    NSString *avmountStr = [numberFormatter stringFromNumber:model.productInfo[@"saleAmount"]];
-    NSString *avmount = [CoinUtil convertToRealCoin1:avmountStr coin:model.productInfo[@"symbol"]];
+    NSString *avmount = [CoinUtil convertToRealCoin1:model.investAmount coin:model.productInfo[@"symbol"]];
 
     NSString *shareStr1 = [LangSwitcher switchLang:@"持有份额" key:nil];
     NSString *shareStr2 = [NSString stringWithFormat:@"%@  %@%@",[LangSwitcher switchLang:@"持有份额" key:nil],avmount,model.productInfo[@"symbol"]];

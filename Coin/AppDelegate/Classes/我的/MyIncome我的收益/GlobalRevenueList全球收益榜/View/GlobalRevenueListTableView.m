@@ -45,7 +45,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
     if (section == 1) {
-        return self.topModel.count;
+        return self.topModel.count - 3;
     }
     return 1;
 }
@@ -62,8 +62,8 @@
     }
     GlobalRevenueListCell *cell = [tableView dequeueReusableCellWithIdentifier:MyInconme forIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    if (self.topModel.count > 0) {
-        cell.topModel = self.topModel[indexPath.row];
+    if (self.topModel.count > 3) {
+        cell.topModel = self.topModel[indexPath.row + 3];
     }
     return cell;
 

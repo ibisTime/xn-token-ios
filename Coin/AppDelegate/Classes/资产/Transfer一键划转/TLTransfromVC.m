@@ -1577,7 +1577,7 @@ typedef enum : NSUInteger {
     [net postWithSuccess:^(id responseObject) {
         NSLog(@"%@",responseObject);
         [MBProgressHUD hideHUDForView:self.view animated:YES];
-        [TLAlert alertWithSucces:@"广播成功"];
+        [TLAlert alertWithSucces:[LangSwitcher switchLang:@"广播成功" key:nil]];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [self.navigationController popViewControllerAnimated:YES];
             

@@ -53,7 +53,7 @@
 
 -(void)setModel:(InviteEarningsModel *)model
 {
-    NSString *transAmountString = [CoinUtil convertToRealCoin:model.transAmountString coin:model.currency];
+    NSString *transAmountString = [CoinUtil convertToRealCoin:model.transAmountString  coin:model.currency];
     if ([transAmountString floatValue] >= 0) {
         self.priceLabel.text = [NSString stringWithFormat:@"+%@ %@",transAmountString,model.currency];
     }else
@@ -113,18 +113,18 @@
         [self.mobile setTitle:model.refUserMobile forState:(UIControlStateNormal)];
         if (type == LangTypeSimple || type == LangTypeTraditional) {
             [self.mobile SG_imagePositionStyle:(SGImagePositionStyleDefault) spacing:6 imagePositionBlock:^(UIButton *button) {
-                [button setImage:kImage(@"邀请中文") forState:(UIControlStateNormal)];
+                [button setImage:kImage(@"量化中文") forState:(UIControlStateNormal)];
             }];
         }else if (type == LangTypeKorean)
         {
             [self.mobile SG_imagePositionStyle:(SGImagePositionStyleDefault) spacing:6 imagePositionBlock:^(UIButton *button) {
-                [button setImage:kImage(@"邀请韩文") forState:(UIControlStateNormal)];
+                [button setImage:kImage(@"量化韩文") forState:(UIControlStateNormal)];
             }];
 
 
         }else{
             [self.mobile SG_imagePositionStyle:(SGImagePositionStyleDefault) spacing:6 imagePositionBlock:^(UIButton *button) {
-                [button setImage:kImage(@"邀请英文") forState:(UIControlStateNormal)];
+                [button setImage:kImage(@"量化英文") forState:(UIControlStateNormal)];
             }];
         }
     }

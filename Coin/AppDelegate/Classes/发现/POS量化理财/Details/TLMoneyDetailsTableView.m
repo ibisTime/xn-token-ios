@@ -166,6 +166,7 @@
     cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     if (!cell){
         cell = [[TLMoneyDeailWebViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+        cell.backgroundColor = kWhiteColor;
 //        if (indexPath.section == 2) {
 //            switch ([LangSwitcher currentLangType]) {
 //                case LangTypeEnglish:
@@ -301,6 +302,9 @@
 {
     if (section == 1) {
         return 10;
+    }
+    if (section == 4) {
+        return 40;
     }
     return 0.01;
 }

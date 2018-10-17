@@ -47,7 +47,7 @@
     _accountLabel.frame = CGRectMake(50, 22, 0, 14);
     [_accountLabel sizeToFit];
 
-    NSString *incomeTotal = [CoinUtil convertToRealCoin:topModel.incomeTotal coin:@"BTC"];
+    NSString *incomeTotal = [CoinUtil convertToRealCoin2:topModel.incomeTotal setScale:4  coin:@"BTC"];
 
     _priceLabel.text = [NSString stringWithFormat:@"%@ BTC",incomeTotal];
 

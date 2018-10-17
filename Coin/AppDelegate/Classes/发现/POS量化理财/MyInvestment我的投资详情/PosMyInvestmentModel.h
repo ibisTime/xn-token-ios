@@ -26,7 +26,7 @@
 @property (nonatomic , copy)NSString *redeemTimes;
 @property (nonatomic , copy)NSString *expectIncome;
 @property (nonatomic , copy)NSString *lastInvestDatetime;
-
+@property (nonatomic , copy)NSString *saleAmount;
 
 @property (nonatomic , strong)NSDictionary *userInfo;
 @property (nonatomic , strong)NSDictionary *productInfo;

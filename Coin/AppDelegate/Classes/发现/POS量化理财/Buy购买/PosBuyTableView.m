@@ -183,6 +183,10 @@
 -(void)gardenBtnClick:(UIButton *)sender
 {
     sender.selected = !sender.selected;
+    if ([self.refreshDelegate respondsToSelector:@selector(refreshTableViewButtonClick:button:selectRowAtIndex:)]) {
+
+        [self.refreshDelegate refreshTableViewButtonClick:self button:sender selectRowAtIndex:sender.tag];
+    }
 }
 
 @end

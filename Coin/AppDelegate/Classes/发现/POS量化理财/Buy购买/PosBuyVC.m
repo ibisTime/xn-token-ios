@@ -18,6 +18,7 @@
 @interface PosBuyVC ()<RefreshDelegate>
 {
     int number;
+    BOOL isSelect;
     
 }
 @property (nonatomic , strong)PosBuyTableView *tableView;
@@ -101,6 +102,7 @@
     [self getMySyspleList];
     [self LoadData];
 
+    isSelect = NO;
 
 }
 
@@ -152,6 +154,9 @@
         HTMLStrVC *vc = [HTMLStrVC new];
         vc.type = HTMLTypeQuantitativeFinance;
         [self.navigationController pushViewController:vc animated:YES];
+    }else if (sender.tag == 504)
+    {
+        isSelect = sender.selected;
     }
 }
 
@@ -252,6 +257,10 @@
     }else
     {
 
+        if (isSelect == YES) {
+            [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请阅读并同意条款" key:nil]];
+            return;
+        }
         //购买
         [self payMoney];
     }
@@ -262,7 +271,7 @@
 {
     [self.inputFiled resignFirstResponder];
     if (![self.inputFiled.text isBlank]) {
-        self.coinLab.text = [NSString stringWithFormat:@"%.2f",[self.moneyModel.expectYield floatValue]* [self.inputFiled.text floatValue]/360* [self.moneyModel.limitDays floatValue]];
+        self.coinLab.text = [NSString stringWithFormat:@"%.2f",[self.moneyModel.expectYield floatValue]* [self.inputFiled.text floatValue]/365* [self.moneyModel.limitDays floatValue]];
     }
 
 }
@@ -302,9 +311,7 @@
     if (![self.inputFiled.text isBlank] ) {
 
 
-        self.coinLab.text = [NSString stringWithFormat:@"%.2f",[self.moneyModel.expectYield floatValue]* [self.inputFiled.text floatValue]/360* [self.moneyModel.limitDays floatValue]];
-
-
+        self.coinLab.text = [NSString stringWithFormat:@"%.2f",[self.moneyModel.expectYield floatValue]* [self.inputFiled.text floatValue]/365* [self.moneyModel.limitDays floatValue]];
     }
     payModel.getFree = self.coinLab.text;
 
@@ -430,7 +437,7 @@
 
 
     UILabel *money = [UILabel labelWithBackgroundColor:kClearColor textColor:kHexColor(@"#FF6400") font:16];
-    money.text = [NSString stringWithFormat:@"%.4f",[price floatValue] * [self.moneyModel.expectYield floatValue]/360*[self.moneyModel.limitDays floatValue]];
+    money.text = [NSString stringWithFormat:@"%.4f",[price floatValue] * [self.moneyModel.expectYield floatValue]/365*[self.moneyModel.limitDays floatValue]];
     money.frame = CGRectMake(moneyMay.xx + 5, moneyMay.frame.origin.y + 1,  SCREEN_WIDTH - 48 - 25 - moneyMay.xx, 14);
     [whiteView addSubview:money];
 
