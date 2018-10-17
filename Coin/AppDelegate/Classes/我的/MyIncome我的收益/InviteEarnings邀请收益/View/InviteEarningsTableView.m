@@ -37,12 +37,12 @@ static NSString *identifierCell = @"AccumulatedEarningsCell";
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return self.array.count;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
-//    NSArray *array = self.array[section];
-    return 3;
+    NSArray *array = self.array[section];
+    return array.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -50,12 +50,10 @@ static NSString *identifierCell = @"AccumulatedEarningsCell";
     InviteEarningCell *cell = [tableView dequeueReusableCellWithIdentifier:InviteEarning forIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
 
-//    NSArray *array = self.array[indexPath.section];
-//    if (array.count > 0) {
-//        cell.model = [InviteEarningsModel mj_objectWithKeyValues:array[indexPath.row]];
-//    }
-    cell.row = indexPath.row;
-
+    NSArray *array = self.array[indexPath.section];
+    if (array.count > 0) {
+        cell.model = [InviteEarningsModel mj_objectWithKeyValues:array[indexPath.row]];
+    }
     return cell;
 }
 
@@ -90,11 +88,11 @@ static NSString *identifierCell = @"AccumulatedEarningsCell";
     UIView *view = [UIView new];
 
     UILabel *titleLbl = [UILabel labelWithFrame:CGRectMake(15, 0, SCREEN_WIDTH - 30, 45) textAligment:(NSTextAlignmentLeft) backgroundColor:kClearColor font:Font(12) textColor:kHexColor(@"#999999")];
-//    NSArray *array = self.array[section];
-//    if (array.count > 0) {
-//        InviteEarningsModel *model = [InviteEarningsModel mj_objectWithKeyValues:array[0]];
-//        titleLbl.text = model.createDatetime;
-//    }
+    NSArray *array = self.array[section];
+    if (array.count > 0) {
+        InviteEarningsModel *model = [InviteEarningsModel mj_objectWithKeyValues:array[0]];
+        titleLbl.text = [model.createDatetime convertDate];
+    }
 
     [view addSubview:titleLbl];
 

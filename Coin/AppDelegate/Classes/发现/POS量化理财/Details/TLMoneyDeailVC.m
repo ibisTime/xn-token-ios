@@ -115,6 +115,14 @@
 -(void)refreshTableView:(TLTableView *)refreshTableview scrollView:(UIScrollView *)scroll
 {
     CGFloat height = (235 - 64 + kNavigationBarHeight);
+//    导航栏
+    if (self.tableView.contentOffset.y <= (235 - 64)) {
+        [self.navigationController.navigationBar setBackgroundImage:[self imageWithBgColor:[UIColor colorWithRed:9/255.0 green:90/255.0 blue:221/255.0 alpha:self.tableView.contentOffset.y / (235 - 64)]] forBarMetrics:UIBarMetricsDefault];
+    }else
+    {
+        [self.navigationController.navigationBar setBackgroundImage:[self imageWithBgColor:[UIColor colorWithRed:9/255.0 green:90/255.0 blue:221/255.0 alpha:1]] forBarMetrics:UIBarMetricsDefault];
+    }
+
     // 获取到tableView偏移量
     CGFloat Offset_y = scroll.contentOffset.y;
     // 下拉 纵向偏移量变小 变成负的
@@ -127,6 +135,19 @@
         // 拉伸后图片位置
         self.headView.backImage.frame = CGRectMake(-(width * scale - width) / 2, Offset_y, width * scale, totalOffset);
     }
+}
+
+
+-(UIImage *)imageWithBgColor:(UIColor *)color {
+
+    CGRect rect = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
+    UIGraphicsBeginImageContext(rect.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetFillColorWithColor(context, [color CGColor]);
+    CGContextFillRect(context, rect);
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return image;
 }
 
 
@@ -156,12 +177,11 @@
     NSString *increAmount = [CoinUtil convertToRealCoin:self.moneyModel.increAmount coin:self.moneyModel.symbol];
     if ([avilAmount floatValue] / [increAmount floatValue] < 1 || [avilAmount floatValue] == 0 || [increAmount floatValue] == 0) {
         continBtn.hidden = YES;
-        self.tableView.frame = CGRectMake(0, -kNavigationBarHeight, SCREEN_WIDTH, SCREEN_HEIGHT );
+        self.tableView.frame = CGRectMake(0, -kNavigationBarHeight, SCREEN_WIDTH, SCREEN_HEIGHT);
     }else if(![self.moneyModel.status isEqualToString:@"5"])
     {
         continBtn.hidden = YES;
         self.tableView.frame = CGRectMake(0, -kNavigationBarHeight, SCREEN_WIDTH, SCREEN_HEIGHT );
-
     }else
     {
         continBtn.hidden = NO;

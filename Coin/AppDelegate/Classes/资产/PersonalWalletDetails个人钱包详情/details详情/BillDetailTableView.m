@@ -57,8 +57,14 @@ static NSString *identifierCell = @"BillDetailCell";
     NSString *postAmount = [CoinUtil convertToRealCoin:_bill.postAmountString coin:_bill.currency];
     
     NSString *preAmount = [CoinUtil convertToRealCoin:_bill.preAmountString coin:_bill.currency];
-    
-    NSArray *rightArr = @[preAmount, postAmount, dateStr, _bill.getStatusName, _bill.getBizName];
+    NSString *getBizName;
+    if ([TLUser isBlankString:_bill.getBizName] == YES) {
+        getBizName = _bill.bizNote;
+    }else
+    {
+        getBizName = _bill.getBizName;
+    }
+    NSArray *rightArr = @[preAmount, postAmount, dateStr, _bill.getStatusName, getBizName];
     
     cell.titleLbl.text = textArr[indexPath.row];
 //    [LangSwitcher switchLang:textArr[indexPath.row] key:nil];

@@ -283,7 +283,7 @@ public class EthCrypto: NSObject
     static public func sendWanTransaction(mnemonic: String, to: String, amount: String, gasPrice: String, gasLimit: String) -> String? {
         
         var txHash : String!
-        //        txHash = "";
+//                txHash = "";
         do{
             
             let keystore = try! BIP32Keystore(mnemonics: mnemonic, password: "BANKEXFOUNDATION", mnemonicsPassword: "")

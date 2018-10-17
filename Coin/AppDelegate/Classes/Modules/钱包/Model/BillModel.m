@@ -67,7 +67,7 @@
                            @"lhlc_invest" : [LangSwitcher switchLang:@"量化理财投资" key:nil],
                            @"lhlc_repay" : [LangSwitcher switchLang:@"量化理财还款" key:nil],
                            @"jf_lottery_in" : [LangSwitcher switchLang:@"积分抽奖" key:nil],
-
+                           @"invite_income_pop_in" : self.bizNote
                            
                            };
     

@@ -161,7 +161,7 @@
         titleLbl.numberOfLines = 0;
 
         NSString *str1 = [LangSwitcher switchLang:@"我已经仔细阅读" key:nil];
-        NSString *str2 = [LangSwitcher switchLang:@"《XXXXXXXXXXXX》" key:nil];
+        NSString *str2 = [LangSwitcher switchLang:@"《Theia钱包理财产品服务协议》" key:nil];
         NSString *str3 = [LangSwitcher switchLang:@"同意协议中的有关条款。充分了解银行和自身的权利和义务。" key:nil];
         NSMutableAttributedString * attriStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@%@，%@",str1,str2,str3]];
         [attriStr addAttribute:NSForegroundColorAttributeName value:kHexColor(@"#3D76FF") range:NSMakeRange(str1.length, str2.length)];

@@ -87,7 +87,8 @@
 
 #define kTabBarHeight  (49 + kBottomInsetHeight)
 #define kBottomInsetHeight  (kDevice_Is_iPhoneX == YES ? 34: 0)
-#define GlobalRevenueListBottomHeight  (kDevice_Is_iPhoneX == YES ? 34: 10)
+
+#define GlobalRevenueListBottomHeight  (kDevice_Is_iPhoneX == YES ? 34: 20)
 #define kSuperViewHeight    kScreenHeight - kNavigationBarHeight
 
 #define kLeftMargin 15

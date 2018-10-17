@@ -12,12 +12,20 @@
 #define TLMoneyDeail @"TLMoneyDeailCell"
 #import "TLMoneyDetailsAttributesCell.h"
 #define TLMoneyDetailsAttributes @"TLMoneyDetailsAttributesCell"
+#import "TLMoneyDeailWebViewCell.h"
+#define TLMoneyDeailWebView @"TLMoneyDeailWebViewCell"
 @interface TLMoneyDetailsTableView()<UITableViewDelegate, UITableViewDataSource,UIWebViewDelegate>
 {
     BOOL isOrOpen[5];
-    CGFloat webViewHeight;
-    NSInteger NUM1;
-    NSInteger NUM2;
+    CGFloat webViewHeight1;
+    CGFloat webViewHeight2;
+    CGFloat webViewHeight3;
+    TLMoneyDeailWebViewCell *_cell1;
+    TLMoneyDeailWebViewCell *_cell2;
+    TLMoneyDeailWebViewCell *_cell3;
+
+    TLMoneyDeailWebViewCell *cell;
+
 
 }
 
@@ -26,7 +34,7 @@
 //声明一个区号，用来记录上一个
 @property (nonatomic , assign)NSInteger selectSxtion;
 
-@property (nonatomic , strong)UIWebView *web;
+
 
 @end
 
@@ -42,7 +50,8 @@
 
         [self registerClass:[TLMoneyDeailCell class] forCellReuseIdentifier:TLMoneyDeail];
         [self registerClass:[TLMoneyDetailsAttributesCell class] forCellReuseIdentifier:TLMoneyDetailsAttributes];
-        [self registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
+        [self registerClass:[TLMoneyDeailWebViewCell class] forCellReuseIdentifier:TLMoneyDeailWebView];
+//        [self registerClass:[TLMoneyDeailWebViewce class] forCellReuseIdentifier:@"cell"];
 
 
 
@@ -80,98 +89,138 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
     if (indexPath.section == 0) {
-        TLMoneyDeailCell *cell = [tableView dequeueReusableCellWithIdentifier:TLMoneyDeail forIndexPath:indexPath];
+        TLMoneyDeailCell *cell1 = [tableView dequeueReusableCellWithIdentifier:TLMoneyDeail forIndexPath:indexPath];
 
-        cell.moneyModel = self.moneyModel;
+        cell1.moneyModel = self.moneyModel;
 
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        return cell;
+        cell1.selectionStyle = UITableViewCellSelectionStyleNone;
+        return cell1;
     }
     if (indexPath.section == 1) {
-        TLMoneyDetailsAttributesCell *cell = [tableView dequeueReusableCellWithIdentifier:TLMoneyDetailsAttributes forIndexPath:indexPath];
-        //    cell.model = self.Moneys[indexPath.row];
-        cell.moneyModel = self.moneyModel;
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        TLMoneyDetailsAttributesCell *cell1 = [tableView dequeueReusableCellWithIdentifier:TLMoneyDetailsAttributes forIndexPath:indexPath];
+        cell1.moneyModel = self.moneyModel;
+        cell1.selectionStyle = UITableViewCellSelectionStyleNone;
 
-        return cell;
+        return cell1;
+    }
+    if (indexPath.section == 2) {
+        static NSString *identifier = @"webCell1";
+        _cell1 = [tableView dequeueReusableCellWithIdentifier:identifier];
+        if (!_cell1){
+            _cell1 = [[TLMoneyDeailWebViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+            switch ([LangSwitcher currentLangType]) {
+                case LangTypeEnglish:
+                    [_cell1.web loadHTMLString:self.moneyModel.buyDescEn baseURL:nil];
+
+                    break;
+                case LangTypeKorean:
+                    [_cell1.web loadHTMLString:self.moneyModel.buyDescKo baseURL:nil];
+
+                    break;
+                case LangTypeSimple:
+                    [_cell1.web loadHTMLString:self.moneyModel.buyDescZhCn baseURL:nil];
+
+                    break;
+
+                default:
+                    break;
+            }
+            [_cell1.web.scrollView addObserver:self forKeyPath:@"contentSize" options:NSKeyValueObservingOptionNew context:nil];
+
+            [_cell1 setSelectionStyle:UITableViewCellSelectionStyleNone];
+        }
+        return _cell1;
+    }
+
+    if (indexPath.section == 3) {
+        static NSString *identifier = @"webCell2";
+        _cell2 = [tableView dequeueReusableCellWithIdentifier:identifier];
+        if (!_cell2){
+            _cell2 = [[TLMoneyDeailWebViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+            switch ([LangSwitcher currentLangType]) {
+                case LangTypeEnglish:
+                    [_cell2.web loadHTMLString:self.moneyModel.redeemDescEn baseURL:nil];
+
+                    break;
+                case LangTypeKorean:
+                    [_cell2.web loadHTMLString:self.moneyModel.redeemDescKo baseURL:nil];
+
+                    break;
+                case LangTypeSimple:
+                    [_cell2.web loadHTMLString:self.moneyModel.redeemDescZhCn baseURL:nil];
+
+                    break;
+
+                default:
+                    break;
+            }
+            [_cell2.web.scrollView addObserver:self forKeyPath:@"contentSize" options:NSKeyValueObservingOptionNew context:nil];
+
+            [_cell2 setSelectionStyle:UITableViewCellSelectionStyleNone];
+        }
+        return _cell2;
     }
 
 
+    static NSString *identifier = @"webCell";
+    cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    if (!cell){
+        cell = [[TLMoneyDeailWebViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+//        if (indexPath.section == 2) {
+//            switch ([LangSwitcher currentLangType]) {
+//                case LangTypeEnglish:
+//                    [cell.web loadHTMLString:self.moneyModel.buyDescEn baseURL:nil];
+//
+//                    break;
+//                case LangTypeKorean:
+//                    [cell.web loadHTMLString:self.moneyModel.buyDescKo baseURL:nil];
+//
+//                    break;
+//                case LangTypeSimple:
+//                    [cell.web loadHTMLString:self.moneyModel.buyDescZhCn baseURL:nil];
+//
+//                    break;
+//
+//                default:
+//                    break;
+//            }
+//        }
+//        if (indexPath.section == 3) {
+//
+//        }
+//        if (indexPath.section == 4) {
+//
+//        }
+        switch ([LangSwitcher currentLangType]) {
+            case LangTypeEnglish:
+                [cell.web loadHTMLString:self.moneyModel.directionsEn baseURL:nil];
 
-    NSString *CellIdentifier = [NSString stringWithFormat:@"cell%ld%ld",indexPath.section,indexPath.row];
-        // 通过不同标识创建cell实例
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-     if (!cell) {
+                break;
+            case LangTypeKorean:
+                [cell.web loadHTMLString:self.moneyModel.directionsKo baseURL:nil];
 
-         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
-         self.web = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 1)];
-         self.web.delegate =self;
-         self.web.scrollView.bounces=NO;
-         self.web.backgroundColor = kWhiteColor;
-         self.web.dataDetectorTypes=UIDataDetectorTypeNone;
-         [self.web.scrollView addObserver:self forKeyPath:@"contentSize" options:NSKeyValueObservingOptionNew context:nil];
-         [cell addSubview:self.web];
+                break;
+            case LangTypeSimple:
+                [cell.web loadHTMLString:self.moneyModel.directionsZhCn baseURL:nil];
 
-         if (indexPath.section == 2) {
-             switch ([LangSwitcher currentLangType]) {
-                 case LangTypeEnglish:
-                     [self.web loadHTMLString:self.moneyModel.buyDescEn baseURL:nil];
+                break;
 
-                     break;
-                 case LangTypeKorean:
-                     [self.web loadHTMLString:self.moneyModel.buyDescKo baseURL:nil];
+            default:
+                break;
+        }
+        [cell.web.scrollView addObserver:self forKeyPath:@"contentSize" options:NSKeyValueObservingOptionNew context:nil];
 
-                     break;
-                 case LangTypeSimple:
-                     [self.web loadHTMLString:self.moneyModel.buyDescZhCn baseURL:nil];
-
-                     break;
-
-                 default:
-                     break;
-             }
-         }
-         if (indexPath.section == 3) {
-             switch ([LangSwitcher currentLangType]) {
-                 case LangTypeEnglish:
-                     [self.web loadHTMLString:self.moneyModel.redeemDescEn baseURL:nil];
-
-                     break;
-                 case LangTypeKorean:
-                     [self.web loadHTMLString:self.moneyModel.redeemDescKo baseURL:nil];
-
-                     break;
-                 case LangTypeSimple:
-                     [self.web loadHTMLString:self.moneyModel.redeemDescZhCn baseURL:nil];
-
-                     break;
-
-                 default:
-                     break;
-             }
-         }
-         if (indexPath.section == 4) {
-             switch ([LangSwitcher currentLangType]) {
-                 case LangTypeEnglish:
-                     [self.web loadHTMLString:self.moneyModel.directionsEn baseURL:nil];
-
-                     break;
-                 case LangTypeKorean:
-                     [self.web loadHTMLString:self.moneyModel.directionsKo baseURL:nil];
-
-                     break;
-                 case LangTypeSimple:
-                     [self.web loadHTMLString:self.moneyModel.directionsZhCn baseURL:nil];
-
-                     break;
-
-                 default:
-                     break;
-             }
-         }
-     }
-
+        [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+    }
     return cell;
+//        cell = [[TLMoneyDeailWebViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+
+
+
+
+
+
+//    return cell;
 
 }
 
@@ -180,15 +229,35 @@
 {
     if ([keyPath isEqualToString:@"contentSize"]) {
         //通过JS代码获取webview的内容高度
-        webViewHeight = [[self.web stringByEvaluatingJavaScriptFromString:@"document.body.scrollHeight"] floatValue];
-        self.web.frame = CGRectMake(0, 0, SCREEN_WIDTH, webViewHeight);
+        if (self.selectSxtion == 2) {
+//            if (webViewHeight1 == 0) {
+
+                webViewHeight1 = [[_cell1.web stringByEvaluatingJavaScriptFromString:@"document.body.scrollHeight"] floatValue];
+                _cell1.web.frame = CGRectMake(0, 0, SCREEN_WIDTH, webViewHeight1);
+
+//            }
+        }
+        if (self.selectSxtion == 3) {
+//            if (webViewHeight2 == 0) {
+                webViewHeight2 = [[_cell2.web stringByEvaluatingJavaScriptFromString:@"document.body.scrollHeight"] floatValue];
+                _cell2.web.frame = CGRectMake(0, 0, SCREEN_WIDTH, webViewHeight2);
+
+//            }
+        }
+        if (self.selectSxtion == 4) {
+//            if (webViewHeight3 == 0) {
+                webViewHeight3 = [[cell.web stringByEvaluatingJavaScriptFromString:@"document.body.scrollHeight"] floatValue];
+                cell.web.frame = CGRectMake(0, 0, SCREEN_WIDTH, webViewHeight3);
+
+//            }
+        }
         [self reloadData];
     }
 }
 
 -(void)dealloc
 {
-    [self.web.scrollView removeObserver:self forKeyPath:@"contentSize" context:nil];
+    [cell.web.scrollView removeObserver:self forKeyPath:@"contentSize" context:nil];
 }
 
 #pragma mark - UITableViewDelegate
@@ -200,7 +269,14 @@
     if (indexPath.section == 1) {
         return 143;
     }
-    return webViewHeight;
+    if (indexPath.section == 2) {
+        return webViewHeight1;
+    }
+    if (indexPath.section == 3) {
+        return webViewHeight2;
+    }
+
+    return webViewHeight3;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -250,17 +326,21 @@
         UIImageView *youImage = [[UIImageView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 22, 24, 7, 12)];
         youImage.image = kImage(@"更多-灰色");
         [headView addSubview:youImage];
-        if (section == NUM1) {
-            [UIView animateWithDuration:0.5 animations:^{
-                youImage.transform=CGAffineTransformMakeRotation(0*M_PI/180);
-            }];
-        }
-        if (section == NUM2) {
+        if (isOrOpen[section] == NO) {
             [UIView animateWithDuration:0.5 animations:^{
 
-               youImage.transform=CGAffineTransformMakeRotation(90*M_PI/180);
+
+                youImage.transform=CGAffineTransformMakeRotation(0*M_PI/180);
             }];
+        }else
+        {
+            [UIView animateWithDuration:0.5 animations:^{
+
+                youImage.transform=CGAffineTransformMakeRotation(90*M_PI/180);
+            }];
+
         }
+
         UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(15, 59, SCREEN_WIDTH - 30, 1)];
         lineView.backgroundColor = kLineColor;
         [headView addSubview:lineView];
@@ -271,14 +351,23 @@
     return nil;
 }
 
+
+
 -(void)headButtonClick:(UIButton *)sender
 {
-    isOrOpen[self.selectSxtion]=NO;
-    NUM1 = self.selectSxtion;
-    isOrOpen[sender.tag] = YES;
-    NUM2 = sender.tag;
-    self.selectSxtion = sender.tag;
+    if (isOrOpen[sender.tag] == YES) {
+        isOrOpen[sender.tag] = NO;
+        self.selectSxtion = 0;
+    }else
+    {
+        isOrOpen[sender.tag] = YES;
+        self.selectSxtion = sender.tag;
+
+    }
     [self reloadData];
+//    NSIndexSet *indexSet=[[NSIndexSet alloc]initWithIndex:sender.tag];
+//    [self reloadSections:indexSet withRowAnimation:UITableViewRowAnimationAutomatic];
+
 
 }
 

@@ -70,9 +70,21 @@
 -(void)setModel:(MyIncomeModel *)model
 {
     self.priceLabel.text = @"0.0";
-    NSString *incomeTotal = [CoinUtil convertToRealCoin2:model.incomeTotal setScale:4  coin:@"BTC"];
-    NSString *incomeTotalStr = incomeTotal;
-    self.priceLabel.text = incomeTotalStr;
+
+
+    NSString *incomeTotal1 = [CoinUtil convertToRealCoin2:model.incomeTotal setScale:10  coin:@"BTC"];
+    if (  [incomeTotal1 floatValue] < 0.0001 && [incomeTotal1 floatValue] > 0) {
+        self.priceLabel.text = @"＜0.0001";
+         self.priceLabel.adjustsFontSizeToFitWidth = YES;
+    }else
+    {
+        NSString *incomeTotal = [CoinUtil convertToRealCoin2:model.incomeTotal setScale:4  coin:@"BTC"];
+        self.priceLabel.text = incomeTotal;
+    }
+
+
+//    NSString *incomeTotalStr = incomeTotal;
+
 
     [self.quantitativeButton setTitle:[NSString stringWithFormat:@"%.0f%%  %@",[model.incomeRatioPop floatValue] * 100,[LangSwitcher switchLang:@"详情" key:nil]] forState:(UIControlStateNormal)];
     [self.quantitativeButton SG_imagePositionStyle:(SGImagePositionStyleRight) spacing:5 imagePositionBlock:^(UIButton *button) {

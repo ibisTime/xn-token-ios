@@ -53,7 +53,7 @@
 {
     nameLabel.text = [NSString stringWithFormat:@"%@",model.productName];
     NSString *transAmountString = [CoinUtil convertToRealCoin1:model.transAmountString coin:model.currency];
-//    CGFloat transAmountString = [model.transAmountString floatValue];
+
     if ([transAmountString floatValue] >= 0) {
         priceLabel.text = [NSString stringWithFormat:@"+%@ %@",transAmountString,model.currency];
         priceLabel.textColor = kHexColor(@"#FF8000");

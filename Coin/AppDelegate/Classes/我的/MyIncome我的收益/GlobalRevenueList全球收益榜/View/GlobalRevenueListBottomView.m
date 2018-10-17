@@ -19,6 +19,7 @@
         UIImageView *headImage = [[UIImageView alloc]initWithFrame:CGRectMake(10, 10, 50, 50)];
         headImage.image = kImage(@"头像");
         self.headImage = headImage;
+        kViewRadius(headImage, 25);
         [self addSubview:headImage];
 
         UILabel *nameLabel = [UILabel labelWithFrame:CGRectMake(70, 19.5, 0, 12) textAligment:(NSTextAlignmentLeft) backgroundColor:kClearColor font:FONT(12) textColor:kHexColor(@"#999999")];

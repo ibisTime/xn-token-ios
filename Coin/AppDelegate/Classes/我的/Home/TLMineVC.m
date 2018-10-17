@@ -235,7 +235,7 @@
 
     MineModel *MyIncome = [MineModel new];
     MyIncome.text = [LangSwitcher switchLang:@"我的收益" key:nil];
-    MyIncome.imgName = @"设置";
+    MyIncome.imgName = @"我的收益icon";
     MyIncome.action = ^{
 
         MyIncomeVC *vc = [[MyIncomeVC alloc] init];
@@ -374,6 +374,10 @@
         self.navigationController.navigationBar.tintColor = [UIColor blackColor];
         self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
         self.navigationItem.backBarButtonItem = item;
+        [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor blackColor],
+                                                                          NSFontAttributeName : [UIFont fontWithName:@"Helvetica-Bold" size:16]}];
+
+
         helpCenter.uiDelegate = self;
 
 
@@ -399,8 +403,6 @@
 
         TLMeSetting *vc = [[TLMeSetting alloc] init];
         [weakSelf.navigationController pushViewController:vc animated:YES];
-        
-        
     };
 
 

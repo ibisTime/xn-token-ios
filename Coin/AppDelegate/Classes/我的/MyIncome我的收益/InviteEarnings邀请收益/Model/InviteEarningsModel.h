@@ -31,5 +31,6 @@
 @property (nonatomic , copy)NSString *userId;
 @property (nonatomic , copy)NSString *workDate;
 @property (nonatomic , copy)NSString *productName;
+@property (nonatomic , copy)NSString *refUserMobile;
 
 @end

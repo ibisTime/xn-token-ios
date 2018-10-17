@@ -64,6 +64,8 @@
 
     NSString *incomeYesterday = [CoinUtil convertToRealCoin2:model.incomeYesterday setScale:4  coin:@"BTC"];
 
+
+
     UILabel *label1 = [self viewWithTag:1212];
 
     NSString *label1Str = [NSString stringWithFormat:@"≈%@(BTC)",incomeYesterday];

@@ -87,7 +87,7 @@
     dic = dataDic;
     NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
     NSString *str = [numberFormatter stringFromNumber:dataDic[@"totalInvest"]];
-    NSString *totalInvest = [CoinUtil convertToRealCoin1:str coin:@"BTC"];
+    NSString *totalInvest = [CoinUtil convertToRealCoin2:str setScale:4 coin:@"BTC"];
     //    self.eyesButton.backgroundColor = [UIColor redColor];
 
     NSString *eyesWhetherhide = [[NSUserDefaults standardUserDefaults] objectForKey:@"eyesWhetherhide"];

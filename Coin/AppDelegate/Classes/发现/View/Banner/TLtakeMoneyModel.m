@@ -20,7 +20,7 @@
         }else if ([_status isEqualToString:@"6"]) {
             _statusStr = @"已售罄";
         }else if ([_status isEqualToString:@"7"]) {
-            _statusStr = @"已售罄";
+//            _statusStr = @"已售罄";
         }else if ([_status isEqualToString:@"8"]) {
             _statusStr = @"已到期";
         }

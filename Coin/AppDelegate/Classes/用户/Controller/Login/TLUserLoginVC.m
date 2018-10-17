@@ -541,7 +541,7 @@
         lang = @"zh_CN";
     }else if (type == LangTypeKorean)
     {
-        lang = @"nil";
+        lang = @"ko";
 
 
     }else{

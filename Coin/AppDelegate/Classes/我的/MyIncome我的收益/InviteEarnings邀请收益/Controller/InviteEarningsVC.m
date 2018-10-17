@@ -11,10 +11,12 @@
 #import "InviteEarningsModel.h"
 @interface InviteEarningsVC ()<RefreshDelegate>
 
+
+
 @property (nonatomic , strong)NSMutableArray <InviteEarningsModel *>*model;
 
 @property (nonatomic , strong)InviteEarningsTableView *tableView;
-
+@property (nonatomic , strong)NSMutableArray *dataArray;
 @end
 
 @implementation InviteEarningsVC
@@ -50,27 +52,26 @@
     [self.tableView addRefreshAction:^{
         [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
 
-            NSMutableArray *array = [NSMutableArray array];
-            for (int i = 0; i < objs.count; i ++) {
-                NSMutableDictionary *dic = [NSMutableDictionary dictionary];
-                dic = objs[i];
-                InviteEarningsModel *model = [InviteEarningsModel mj_objectWithKeyValues:dic];
-                [dic setValue:[model.createDatetime convertDate] forKey:@"createDatetime"];
-                [array addObject:dic];
-            }
+//            NSMutableArray *array = [NSMutableArray array];
+//            for (int i = 0; i < objs.count; i ++) {
+//                NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+//                dic = objs[i];
+//                InviteEarningsModel *model = [InviteEarningsModel mj_objectWithKeyValues:dic];
+//                [dic setValue:[model.createDatetime convertDate] forKey:@"createDatetime"];
+//                [array addObject:dic];
+//            }
 
             weakSelf.tableView.array = [NSMutableArray array];
-            weakSelf.tableView.array = [InviteEarningsVC filterMaxItemsArray:array filterKey:@"createDatetime"];
+//            weakSelf.dataArray = [NSMutableArray array];
+
+//            [weakSelf.dataArray addObjectsFromArray:array];
+            weakSelf.tableView.array = [InviteEarningsVC filterMaxItemsArray:objs filterKey:@"workDate"];
             [weakSelf.tableView reloadData_tl];
 
         } failure:^(NSError *error) {
 
         }];
-
-
-
     }];
-
     [self.tableView beginRefreshing];
 
     [self.tableView addLoadMoreAction:^{
@@ -82,23 +83,24 @@
             }
 
 
-            NSMutableArray *array = [NSMutableArray array];
-            for (int i = 0; i < objs.count; i ++) {
-                NSMutableDictionary *dic = [NSMutableDictionary dictionary];
-                dic = objs[i];
-                InviteEarningsModel *model = [InviteEarningsModel mj_objectWithKeyValues:dic];
-                [dic setValue:[model.createDatetime convertDate] forKey:@"createDatetime"];
-                [array addObject:dic];
-            }
+//            NSMutableArray *array = [NSMutableArray array];
 
-            [weakSelf.tableView.array addObject:array];
-            weakSelf.tableView.array = [InviteEarningsVC filterMaxItemsArray:weakSelf.tableView.array filterKey:@"createDatetime"];
+//            for (int i = 0; i < objs.count; i ++) {
+//                NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+//                dic = objs[i];
+//                InviteEarningsModel *model = [InviteEarningsModel mj_objectWithKeyValues:dic];
+//                [dic setValue:[model.createDatetime convertDate] forKey:@"createDatetime"];
+//                [array addObject:dic];
+//            }
+
+//            [weakSelf.dataArray addObjectsFromArray:array];
+//            weakSelf.tableView.array = [NSMutableArray array];
+            weakSelf.tableView.array = [InviteEarningsVC filterMaxItemsArray:objs filterKey:@"workDate"];
             [weakSelf.tableView reloadData_tl];
 
         } failure:^(NSError *error) {
 
             [weakSelf addPlaceholderView];
-
         }];
     }];
 

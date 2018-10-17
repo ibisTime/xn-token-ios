@@ -83,6 +83,7 @@
 
     twePhotoImage = [[UIImageView alloc]initWithFrame:CGRectMake(kWidth(65) - 30 + 3, 163 - 64 + kNavigationBarHeight + 3, 54, 54)];
     twePhotoImage.image = kImage(@"头像");
+    kViewRadius(twePhotoImage, 27);
     [self addSubview:twePhotoImage];
 
 
@@ -116,6 +117,7 @@
 {
     therePhotoImage = [[UIImageView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - kWidth(65)  - 30 + 3, 163 - 64 + kNavigationBarHeight + 3, 54, 54)];
     therePhotoImage.image = kImage(@"头像");
+    kViewRadius(therePhotoImage, 27);
     [self addSubview:therePhotoImage];
 
     UIImageView *thereImage = [[UIImageView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - kWidth(65)  - 30, 163 - 64 + kNavigationBarHeight, 60, 60 + 12.5)];

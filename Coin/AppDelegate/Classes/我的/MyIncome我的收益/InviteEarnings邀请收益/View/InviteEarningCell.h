@@ -11,7 +11,7 @@
 @interface InviteEarningCell : UITableViewCell
 
 @property (nonatomic , strong)InviteEarningsModel *model;
-@property (nonatomic , strong)UILabel *mobile;
+@property (nonatomic , strong)UIButton *mobile;
 @property (nonatomic , strong)UILabel *priceLabel;
 
 @property (nonatomic , assign)NSInteger row;

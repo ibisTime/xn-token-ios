@@ -81,7 +81,7 @@
 {
     NSLog(@"%@",dataDic);
     NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
-    NSString *totalInvest = [CoinUtil convertToRealCoin1:[numberFormatter stringFromNumber:dataDic[@"totalInvest"]] coin:@"BTC"];
+    NSString *totalInvest = [CoinUtil convertToRealCoin2:  [numberFormatter stringFromNumber:dataDic[@"totalInvest"]] setScale:4 coin:@"BTC"];
 
     UILabel *label1 = [self viewWithTag:1212];
 
@@ -107,7 +107,7 @@
 
 
     NSNumberFormatter *numberFormatter1 = [[NSNumberFormatter alloc] init];
-    NSString *totalIncome = [CoinUtil convertToRealCoin1:[numberFormatter1 stringFromNumber:dataDic[@"totalIncome"]] coin:@"BTC"];
+    NSString *totalIncome = [CoinUtil convertToRealCoin2:[numberFormatter1 stringFromNumber:dataDic[@"totalIncome"]] setScale:4 coin:@"BTC"];
 
     UILabel *label2 = [self viewWithTag:1213];
     NSString *label2Str = [NSString stringWithFormat:@"%@ (BTC)",totalIncome];

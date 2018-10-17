@@ -73,7 +73,6 @@
     //获取账单
     // Do any additional setup after loading the view.
     self.title = [LangSwitcher switchLang: [NSString stringWithFormat:@"%@",self.currency.symbol] key:nil];
-
     if ([self.currency.symbol isEqualToString:@"BTC"]) {
         [self requestBtcList];
 
@@ -85,192 +84,195 @@
     {
         [self requestBillList];
     }
+
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
 
-    if ([self.currency.symbol isEqualToString:@"BTC"]) {
-        __weak typeof(self) weakSelf = self;
 
-        NSString *bizType = @"";
 
-        if (self.billType == LocalTypeRecharge) {
-
-            bizType = @"charge";
-
-        } else if (self.billType == LocalTypeWithdraw) {
-
-            bizType = @"withdraw";
-
-        } else if (self.billType == LocalTypeFrozen) {
-
-            bizType = @"";
-        }
-
-        TLPageDataHelper *helper = [[TLPageDataHelper alloc] init];
-
-        helper.tableView = self.tableView;
-        self.helper = helper;
-
-        helper.code = @"802221";
-        helper.start = 0;
-        helper.limit = 10;
-        helper.parameters[@"address"] = self.currency.address;
-        [helper modelClass:[BillModel class]];
-
-        [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
-
-            if (objs.count == 0) {
-                [weakSelf addPlaceholderView];
-
-            }
-
-            weakSelf.bills = objs;
-
-            weakSelf.tableView.billModel = weakSelf.currency;
-
-            weakSelf.tableView.bills = objs;
-            [weakSelf.tableView reloadData_tl];
-
-        } failure:^(NSError *error) {
-
-            [weakSelf addPlaceholderView];
-
-        }];
-
-    }else if ([self.currency.symbol isEqualToString:@"LXT"])
-    {
-        __weak typeof(self) weakSelf = self;
-
-        NSString *bizType = @"";
-
-        if (self.billType == LocalTypeRecharge) {
-
-            bizType = @"charge";
-
-        } else if (self.billType == LocalTypeWithdraw) {
-
-            bizType = @"withdraw";
-
-        } else if (self.billType == LocalTypeFrozen) {
-
-            bizType = @"";
-        }
-
-        TLPageDataHelper *helper = [[TLPageDataHelper alloc] init];
-
-        helper.tableView = self.tableView;
-        self.helper = helper;
-
-        helper.code = @"802308";
-        helper.start = 0;
-        helper.limit = 10;
-        helper.parameters[@"address"] = self.currency.address;
-        CoinModel *coin = [CoinUtil getCoinModel:self.currency.symbol];
-
-        helper.parameters[@"contractAddress"] = coin.contractAddress;
-
-        [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
-
-            //            if (weakSelf.tl_placeholderView.superview != nil) {
-            //
-            //                [weakSelf removePlaceholderView];
-            //            }
-            if (objs.count == 0) {
-                [weakSelf addPlaceholderView];
-
-            }
-
-            weakSelf.bills = objs;
-
-            weakSelf.tableView.billModel = weakSelf.currency;
-
-            weakSelf.tableView.bills = objs;
-            [weakSelf.tableView reloadData_tl];
-
-        } failure:^(NSError *error) {
-
-            [weakSelf addPlaceholderView];
-
-        }];
-    }
-    else
-    {
-        __weak typeof(self) weakSelf = self;
-
-        NSString *bizType = @"";
-
-        if (self.billType == LocalTypeRecharge) {
-
-            bizType = @"charge";
-
-        } else if (self.billType == LocalTypeWithdraw) {
-
-            bizType = @"withdraw";
-
-        } else if (self.billType == LocalTypeFrozen) {
-
-            bizType = @"";
-        }
-
-        TLPageDataHelper *helper = [[TLPageDataHelper alloc] init];
-
-        helper.tableView = self.tableView;
-        self.helper = helper;
-
-        helper.code = @"802271";
-        helper.start = 1;
-        helper.limit = 10;
-        helper.parameters[@"symbol"] = self.currency.symbol;
-        helper.parameters[@"address"] = self.currency.address;
-        [helper modelClass:[BillModel class]];
-        [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
-
-            if (objs.count == 0) {
-                [weakSelf addPlaceholderView];
-
-            }
-            weakSelf.bills = objs;
-            weakSelf.tableView.billModel = weakSelf.currency;
-
-            weakSelf.tableView.bills = objs;
-            [weakSelf.tableView reloadData_tl];
-
-        } failure:^(NSError *error) {
-
-            [weakSelf addPlaceholderView];
-
-        }];
-    }
+//    if ([self.currency.symbol isEqualToString:@"BTC"]) {
+//        __weak typeof(self) weakSelf = self;
+//
+//        NSString *bizType = @"";
+//
+//        if (self.billType == LocalTypeRecharge) {
+//
+//            bizType = @"charge";
+//
+//        } else if (self.billType == LocalTypeWithdraw) {
+//
+//            bizType = @"withdraw";
+//
+//        } else if (self.billType == LocalTypeFrozen) {
+//
+//            bizType = @"";
+//        }
+//
+//        TLPageDataHelper *helper = [[TLPageDataHelper alloc] init];
+//
+//        helper.tableView = self.tableView;
+//        self.helper = helper;
+//
+//        helper.code = @"802221";
+//        helper.start = 0;
+//        helper.limit = 10;
+//        helper.parameters[@"address"] = self.currency.address;
+//        [helper modelClass:[BillModel class]];
+//
+//        [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
+//
+//            if (objs.count == 0) {
+//                [weakSelf addPlaceholderView];
+//
+//            }
+//
+//            weakSelf.bills = objs;
+//
+//            weakSelf.tableView.billModel = weakSelf.currency;
+//
+//            weakSelf.tableView.bills = objs;
+//            [weakSelf.tableView reloadData_tl];
+//
+//        } failure:^(NSError *error) {
+//
+//            [weakSelf addPlaceholderView];
+//
+//        }];
+//
+//    }else if ([self.currency.symbol isEqualToString:@"LXT"])
+//    {
+//        __weak typeof(self) weakSelf = self;
+//
+//        NSString *bizType = @"";
+//
+//        if (self.billType == LocalTypeRecharge) {
+//
+//            bizType = @"charge";
+//
+//        } else if (self.billType == LocalTypeWithdraw) {
+//
+//            bizType = @"withdraw";
+//
+//        } else if (self.billType == LocalTypeFrozen) {
+//
+//            bizType = @"";
+//        }
+//
+//        TLPageDataHelper *helper = [[TLPageDataHelper alloc] init];
+//
+//        helper.tableView = self.tableView;
+//        self.helper = helper;
+//
+//        helper.code = @"802308";
+//        helper.start = 0;
+//        helper.limit = 10;
+//        helper.parameters[@"address"] = self.currency.address;
+//        CoinModel *coin = [CoinUtil getCoinModel:self.currency.symbol];
+//
+//        helper.parameters[@"contractAddress"] = coin.contractAddress;
+//
+//        [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
+//
+//            //            if (weakSelf.tl_placeholderView.superview != nil) {
+//            //
+//            //                [weakSelf removePlaceholderView];
+//            //            }
+//            if (objs.count == 0) {
+//                [weakSelf addPlaceholderView];
+//
+//            }
+//
+//            weakSelf.bills = objs;
+//
+//            weakSelf.tableView.billModel = weakSelf.currency;
+//
+//            weakSelf.tableView.bills = objs;
+//            [weakSelf.tableView reloadData_tl];
+//
+//        } failure:^(NSError *error) {
+//
+//            [weakSelf addPlaceholderView];
+//
+//        }];
+//    }
+//    else
+//    {
+//        __weak typeof(self) weakSelf = self;
+//
+//        NSString *bizType = @"";
+//
+//        if (self.billType == LocalTypeRecharge) {
+//
+//            bizType = @"charge";
+//
+//        } else if (self.billType == LocalTypeWithdraw) {
+//
+//            bizType = @"withdraw";
+//
+//        } else if (self.billType == LocalTypeFrozen) {
+//
+//            bizType = @"";
+//        }
+//
+//        TLPageDataHelper *helper = [[TLPageDataHelper alloc] init];
+//
+//        helper.tableView = self.tableView;
+//        self.helper = helper;
+//
+//        helper.code = @"802271";
+//        helper.start = 1;
+//        helper.limit = 10;
+//        helper.parameters[@"symbol"] = self.currency.symbol;
+//        helper.parameters[@"address"] = self.currency.address;
+//        [helper modelClass:[BillModel class]];
+//        [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
+//
+//            if (objs.count == 0) {
+//                [weakSelf addPlaceholderView];
+//
+//            }
+//            weakSelf.bills = objs;
+//            weakSelf.tableView.billModel = weakSelf.currency;
+//
+//            weakSelf.tableView.bills = objs;
+//            [weakSelf.tableView reloadData_tl];
+//
+//        } failure:^(NSError *error) {
+//
+//            [weakSelf addPlaceholderView];
+//
+//        }];
+//    }
 }
-
-
+//
+//
 - (void)requestLXTList
 {
     __weak typeof(self) weakSelf = self;
-    
+
     NSString *bizType = @"";
-    
+
     if (self.billType == LocalTypeRecharge) {
-        
+
         bizType = @"charge";
-        
+
     } else if (self.billType == LocalTypeWithdraw) {
-        
+
         bizType = @"withdraw";
-        
+
     } else if (self.billType == LocalTypeFrozen) {
-        
+
         bizType = @"";
     }
-    
+
     TLPageDataHelper *helper = [[TLPageDataHelper alloc] init];
-    
+
     helper.tableView = self.tableView;
     self.helper = helper;
-    
+
     helper.code = @"802308";
     helper.start = 0;
     helper.limit = 10;
@@ -281,71 +283,71 @@
 
     //    helper.parameters[@"bizType"] = bizType;
     //    helper.parameters[@"kind"] = self.billType == LocalTypeFrozen ? @"1": @"0";
-    
+
     //    helper.parameters[@"symbol"] = self.currency.symbol;
     //    helper.parameters[@"address"] = self.currency.address;
-    
+
     //    helper.parameters[@"channelType"] = @"C";
     //    helper.parameters[@"status"] = @"";
-    
+
     //0 刚生成待回调，1 已回调待对账，2 对账通过, 3 对账不通过待调账,4 已调账,9,无需对账
     //pageDataHelper.parameters[@"status"] = [ZHUser user].token;
-    
+
     [helper modelClass:[BillModel class]];
-    
+
     [self.tableView addRefreshAction:^{
-        
+
         [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
-            
+
             //            if (weakSelf.tl_placeholderView.superview != nil) {
             //
             //                [weakSelf removePlaceholderView];
             //            }
             if (objs.count == 0) {
                 [weakSelf addPlaceholderView];
-                
+
             }
-            
+
             weakSelf.bills = objs;
-            
+
             weakSelf.tableView.billModel = weakSelf.currency;
-            
+
             weakSelf.tableView.bills = objs;
             [weakSelf.tableView reloadData_tl];
-            
+
         } failure:^(NSError *error) {
-            
+
             [weakSelf addPlaceholderView];
-            
+
         }];
     }];
-    
+
     [self.tableView beginRefreshing];
-    
+
     [self.tableView addLoadMoreAction:^{
-        
+
         [helper loadMore:^(NSMutableArray *objs, BOOL stillHave) {
-            
+
             if (weakSelf.tl_placeholderView.superview != nil) {
-                
+
                 [weakSelf removePlaceholderView];
             }
-            
+
             weakSelf.bills = objs;
             weakSelf.tableView.billModel = weakSelf.currency;
             weakSelf.tableView.bills = objs;
             [weakSelf.tableView reloadData_tl];
-            
+
         } failure:^(NSError *error) {
-            
+
             [weakSelf addPlaceholderView];
-            
+
         }];
-        
+
     }];
-    
+
     [self.tableView endRefreshingWithNoMoreData_tl];
-    
+
 }
 
 - (void)requestBtcList

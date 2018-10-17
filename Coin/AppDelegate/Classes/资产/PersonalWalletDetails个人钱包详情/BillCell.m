@@ -100,7 +100,7 @@
         [self.moneyLbl mas_makeConstraints:^(MASConstraintMaker *make) {
             
             make.right.equalTo(self.mas_right).offset(-15);
-            make.top.equalTo(@(18.5));
+            make.top.equalTo(@(16));
             
         }];
         self.introduceLab = [UILabel labelWithFrame:CGRectZero textAligment:NSTextAlignmentLeft
