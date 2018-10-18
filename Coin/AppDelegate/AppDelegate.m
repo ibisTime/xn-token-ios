@@ -72,9 +72,9 @@
     
     //服务器环境
 //    研发
-    [AppConfig config].runEnv = RunEnvDev;
+//    [AppConfig config].runEnv = RunEnvDev;
 //    测试
-//    [AppConfig config].runEnv = RunEnvTest;
+    [AppConfig config].runEnv = RunEnvTest;
 //    正式
 //    [AppConfig config].runEnv = RunEnvRelease;
 
@@ -354,9 +354,16 @@
 }
 
 - (void)configIQKeyboard {
+    IQKeyboardManager *manager = [IQKeyboardManager sharedManager];
+    manager.enable = YES; // 控制整个功能是否启用。
+    manager.shouldResignOnTouchOutside =YES; // 控制点击背景是否收起键盘
+    manager.shouldToolbarUsesTextFieldTintColor =YES; // 控制键盘上的工具条文字颜色是否用户自定义
+    manager.enableAutoToolbar = NO; // 控制是否显示键盘上的工具条
+    manager.toolbarManageBehaviour =IQAutoToolbarByTag;
+
     
 //    [[IQKeyboardManager sharedManager].disabledToolbarClasses addObject:[OrderDetailVC class]];
-// czy
+//
 //    [[IQKeyboardManager sharedManager].disabledToolbarClasses addObject:[WaitingOrderVC class]];
 //
 //    [[IQKeyboardManager sharedManager].disabledToolbarClasses addObject:[RichChatViewController class]];

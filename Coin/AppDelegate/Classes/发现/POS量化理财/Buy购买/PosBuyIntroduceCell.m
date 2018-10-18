@@ -9,6 +9,10 @@
 #import "PosBuyIntroduceCell.h"
 
 @implementation PosBuyIntroduceCell
+{
+    NSDictionary *dic;
+    TLtakeMoneyModel *model;
+}
 
 -(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -54,12 +58,23 @@
         addBtn.tag = 501;
         [self addSubview:addBtn];
 
-        UILabel *numberLabel = [UILabel labelWithFrame:CGRectMake(90, 155, kScreenWidth - 180, 55) textAligment:(NSTextAlignmentCenter) backgroundColor:[UIColor whiteColor] font:Font(30) textColor:kHexColor(@"#464646")];
-        self.numberLabel = numberLabel;
-//        numberLabel.text= @"0";
-        self.numberLabel.tag = 1212;
-        kViewBorderRadius(numberLabel, 0, 1, kLineColor);
-        [self addSubview:numberLabel];
+//        UILabel *numberLabel = [UILabel labelWithFrame:CGRectMake(90, 155, kScreenWidth - 180, 55) textAligment:(NSTextAlignmentCenter) backgroundColor:[UIColor whiteColor] font:Font(30) textColor:kHexColor(@"#464646")];
+//        self.numberLabel = numberLabel;
+////        numberLabel.text= @"0";
+//        self.numberLabel.tag = 1212;
+//        kViewBorderRadius(numberLabel, 0, 1, kLineColor);
+//        [self addSubview:numberLabel];
+
+        UITextField *numberTextField = [[UITextField alloc]initWithFrame:CGRectMake(90, 155, kScreenWidth - 180, 55)];
+        numberTextField.textAlignment = NSTextAlignmentCenter;
+        numberTextField.textColor = kHexColor(@"#464646");
+        numberTextField.font = FONT(30);
+        numberTextField.keyboardType = UIKeyboardTypeNumberPad;
+        self.numberTextField = numberTextField;
+        self.numberTextField.tag = 1212;
+        numberTextField.delegate = self;
+        kViewBorderRadius(numberTextField, 0, 1, kLineColor);
+        [self addSubview:numberTextField];
 
 
         UILabel *priceLabel = [UILabel labelWithFrame:CGRectMake(0, 220, kScreenWidth, 18) textAligment:(NSTextAlignmentCenter) backgroundColor:kClearColor font:Font(14) textColor:kHexColor(@"#999999")];
@@ -122,6 +137,7 @@
 
 -(void)setMoneyModel:(TLtakeMoneyModel *)moneyModel
 {
+    model = moneyModel;
     switch ([LangSwitcher currentLangType]) {
         case LangTypeEnglish:
             self.titleLbl.text = moneyModel.nameEn;
@@ -155,6 +171,7 @@
 
 -(void)setDataDic:(NSDictionary *)dataDic
 {
+    dic = dataDic;
     self.mySlider.value = [dataDic[@"min"] floatValue];
     //最小边界值
     self.mySlider.minimumValue = [dataDic[@"min"] floatValue];
@@ -162,13 +179,65 @@
     //    份额
     self.sinceLabel.text = [NSString stringWithFormat:@"%ld%@",[dataDic[@"min"]  integerValue],[LangSwitcher switchLang:@"份" key:nil]];
     self.finalLabel.text = [NSString stringWithFormat:@"%ld%@",[dataDic[@"max"]  integerValue],[LangSwitcher switchLang:@"份" key:nil]];
-    self.numberLabel.text = [NSString stringWithFormat:@"%ld",[dataDic[@"min"]  integerValue]];
+    self.numberTextField.text = [NSString stringWithFormat:@"%ld",[dataDic[@"min"]  integerValue]];
 
     [self.sinceLabel sizeToFit];
     self.finalLabel.frame = CGRectMake(35, 261, 0, 14);
     [self.finalLabel sizeToFit];
     self.finalLabel.frame = CGRectMake(kScreenWidth - 35 - self.finalLabel.frame.size.width, 261, self.finalLabel.frame.size.width, 14);
     self.mySlider.frame = CGRectMake(self.sinceLabel.xx + 10 , 258 ,kScreenWidth  - self.finalLabel.frame.size.width - 35 - self.sinceLabel.xx - 20,26);
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    //    限制只能输入数字
+    BOOL isHaveDian = YES;
+    if ([string isEqualToString:@" "]) {
+        return NO;
+    }
+    if ([textField.text rangeOfString:@"."].location == NSNotFound) {
+        isHaveDian = NO;
+    }
+    if ([string length] > 0) {
+
+        unichar single = [string characterAtIndex:0];//当前输入的字符
+        if ((single >= '0' && single <= '9') || single == '.') {//数据格式正确
+
+            if([textField.text length] == 0){
+                if(single == '.') {
+                    [textField.text stringByReplacingCharactersInRange:range withString:@""];
+                    return NO;
+                }
+            }
+            //输入的字符是否是小数点
+            if (single == '.') {
+                return NO;
+
+            }
+            NSString * toBeString = [textField.text stringByReplacingCharactersInRange:range withString:string]; //得到输入框的内容
+            NSLog(@"00000  %@",toBeString);
+            if ([toBeString integerValue] > [dic[@"max"]  integerValue]) {
+                return NO;
+            }else
+            {
+                return YES;
+            }
+        }else{//输入的数据格式不正确
+            [textField.text stringByReplacingCharactersInRange:range withString:@""];
+            return NO;
+        }
+    }
+    else
+    {
+        return YES;
+    }
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField{
+    if ([textField.text floatValue] == 0) {
+        self.numberTextField.text = [NSString stringWithFormat:@"%ld",[dic[@"min"]  integerValue]];
+        NSString *increAmount = [CoinUtil convertToRealCoin:model.increAmount coin:model.symbol];
+        self.priceLabel.text = [NSString stringWithFormat:@"(%.2f%@)",[increAmount floatValue],model.symbol];
+    }
 }
 
 @end

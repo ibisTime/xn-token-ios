@@ -152,6 +152,7 @@
         gardenBtn.frame = CGRectMake(15, 0, 40, 40);
         [gardenBtn addTarget:self action:@selector(gardenBtnClick:) forControlEvents:(UIControlEventTouchUpInside)];
         gardenBtn.tag = 504;
+        gardenBtn.selected = YES;
         [footView addSubview:gardenBtn];
 
 

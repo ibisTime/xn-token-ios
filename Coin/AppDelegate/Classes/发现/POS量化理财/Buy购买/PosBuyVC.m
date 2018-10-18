@@ -15,7 +15,7 @@
 //#import "TLMyRecordVC.h"
 #import "HTMLStrVC.h"
 #import "PosMyInvestmentDetailsVC.h"
-@interface PosBuyVC ()<RefreshDelegate>
+@interface PosBuyVC ()<RefreshDelegate,UITextFieldDelegate>
 {
     int number;
     BOOL isSelect;
@@ -102,7 +102,7 @@
     [self getMySyspleList];
     [self LoadData];
 
-    isSelect = NO;
+    isSelect = YES;
 
 }
 
@@ -115,6 +115,29 @@
     self.tableView.moneyModel = self.moneyModel;
     [self.view addSubview:self.tableView];
 
+    UITextField *textField = [self.view viewWithTag:1212];
+//    textField.delegate = self;
+
+
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(textFieldTextDidChangeOneCI:)
+                                                name:UITextFieldTextDidChangeNotification
+                                              object:textField];
+
+}
+
+
+
+//监听输入
+-(void)textFieldTextDidChangeOneCI:(NSNotification *)notification
+{
+    UITextField *textfield=[notification object];
+    NSLog(@"ssssss %@",textfield.text);
+    number = [textfield.text intValue];
+    UILabel *label = [self.view viewWithTag:456];
+    UISlider *slider = [self.view viewWithTag:12345];
+    slider.value = number/1.00;
+    NSString *increAmount = [CoinUtil convertToRealCoin:self.moneyModel.increAmount coin:self.moneyModel.symbol];
+    label.text = [NSString stringWithFormat:@"(%.2f%@)",[increAmount floatValue] * number,self.moneyModel.symbol];
 }
 
 //  +++++++++  ------------
@@ -124,11 +147,14 @@
     UILabel *label = [self.view viewWithTag:456];
     UISlider *slider = [self.view viewWithTag:12345];
     NSString *increAmount = [CoinUtil convertToRealCoin:self.moneyModel.increAmount coin:self.moneyModel.symbol];
+
     if (sender.tag == 500) {
+
 
         if (number <= [_dataDic[@"min"] integerValue]) {
             return;
         }
+        number = [self.numberLabel.text intValue];
         number -- ;
         self.numberLabel.text = [NSString stringWithFormat:@"%d", number];
         slider.value = number/1.00;
@@ -139,6 +165,7 @@
         {
             return;
         }
+        number = [self.numberLabel.text intValue];
         number ++;
         self.numberLabel.text = [NSString stringWithFormat:@"%d", number];
         slider.value = number/1.00;
@@ -278,6 +305,8 @@
 
 - (void)payMoney
 {
+
+//    self.numberLabel = [self.view viewWithTag:1212];
 
 //    if ([TLUser isBlankString:self.currencyModel.currency] == NO) {
 //        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"正在加载,请稍等" key:nil]];

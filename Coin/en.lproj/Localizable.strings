@@ -591,7 +591,7 @@
 "每一位用户注册成功并登陆可获得奖励10积分" = "After registration and log in successfully each user will receive a reward of 10 points";
 "每一位用户成功注册并登录后可获得购买加宝收益首次翻倍奖励。" = "After registration and log in successfully, each user will get the reward of double the earning for the first time purchase of Quantitative Finance service";
 "新用户注册并登录可获得10积分奖励" = "After registration and log in, new users will gain 10 points as a reward";
-"每邀请1位好友注册并登录后获得好友币加宝收益7%额外奖励。（有效期3个月）" = "Earn 10 points for each time of inviting 1 friend to register and log in.";
+"每邀请1位好友注册并登录后获得好友币加宝收益10%额外奖励。（有效期3个月）" = "Earn 10 points for each time of inviting 1 friend to register and log in.";
 "立即付款" = "Prompt payment";
 "转入资金" = "Transfer-in funds";
 "设置手势密码" = "Set Gesture Password";
@@ -885,6 +885,9 @@
 "排名100名以外，加油" = "You are not on the ranking list, keep going";
 "暂无数据" = "No data";
 "他的分享" = "His record";
-
-
+"划转成功" = "Transfer successful";
+"划转失败" = "Transfer fail";
+"广播成功" = "Broadcast successfully";
+"广播失败" = "Broadcast failed";
+"《Theia钱包理财产品服务协议》" = "《T&C》";
 

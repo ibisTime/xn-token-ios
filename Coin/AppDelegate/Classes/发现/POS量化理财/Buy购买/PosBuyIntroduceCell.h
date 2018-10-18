@@ -16,7 +16,7 @@
 
 @end
 
-@interface PosBuyIntroduceCell : UITableViewCell
+@interface PosBuyIntroduceCell : UITableViewCell<UITextFieldDelegate>
 
 @property (nonatomic ,strong) TLtakeMoneyModel *moneyModel;
 
@@ -25,6 +25,7 @@
 @property (nonatomic , strong)UISlider *mySlider;
 
 @property (nonatomic , strong)UILabel *numberLabel;
+@property (nonatomic , strong)UITextField *numberTextField;
 @property (nonatomic , strong)UILabel *titleLbl;
 @property (nonatomic,strong) UILabel *sinceLabel;
 @property (nonatomic,strong) UILabel *finalLabel;

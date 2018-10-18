@@ -241,7 +241,7 @@
     [scrollView addSubview:numberLabel2];
 
     UILabel *introduceLabel2 = [UILabel labelWithFrame:CGRectMake(kWidth(20) + 20, introduceLabel1.yy + kHeight(10), SCREEN_WIDTH - kWidth(120) - 20, 0) textAligment:(NSTextAlignmentLeft) backgroundColor:kClearColor font:FONT(14) textColor:kHexColor(@"#FFFFFF")];
-    [introduceLabel2  setAttributedText:[self ReturnsTheDistanceBetween:[LangSwitcher switchLang:@"每邀请1位好友注册并登录后获得好友币加宝收益7%额外奖励。（有效期3个月）" key:nil]]];
+    [introduceLabel2  setAttributedText:[self ReturnsTheDistanceBetween:[LangSwitcher switchLang:@"每邀请1位好友注册并登录后获得好友币加宝收益10%额外奖励。（有效期3个月）" key:nil]]];
     introduceLabel2.numberOfLines = 0;
     [introduceLabel2 sizeToFit];
     [scrollView addSubview:introduceLabel2];
