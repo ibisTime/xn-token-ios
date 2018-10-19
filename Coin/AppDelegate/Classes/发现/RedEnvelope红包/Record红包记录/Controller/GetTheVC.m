@@ -109,10 +109,25 @@
     self.headView.closeBlock = ^(BOOL isClose) {
         weakSelf.isClose = isClose;
         if (weakSelf.isRecevied ) {
-            [weakSelf LoadData];
+//            [weakSelf LoadData];
+            weakSelf.tableView.isClose = weakSelf.isClose;
+            if (weakSelf.isClose == YES) {
+                weakSelf.headView.count.text = @"***";
+            }else{
+                weakSelf.headView.count.text = [NSString stringWithFormat:@"%ld",weakSelf.getthe.count];
 
+            }
+            [weakSelf.tableView reloadData_tl];
         }else{
-            [weakSelf LoadSendData];
+            weakSelf.tableView.isClose = weakSelf.isClose;
+            //
+            if (self.isClose == YES) {
+
+                weakSelf.headView.count.text = [NSString stringWithFormat:@"***"];
+            }else{
+                weakSelf.headView.count.text = [NSString stringWithFormat:@"%ld",weakSelf.sends.count];
+            }
+            [weakSelf.tableView reloadData_tl];
 
         }
 
@@ -173,28 +188,25 @@
                 [shouldDisplayCoins addObject:getModel];
                 
             }];
-            
+
+            weakSelf.sends = shouldDisplayCoins;
+            weakSelf.tableView.sends = shouldDisplayCoins;
+
+            weakSelf.headView.total.text = [LangSwitcher switchLang:@"共发出红包" key:nil];
+            weakSelf.tableView.isClose = weakSelf.isClose;
             //
             if (self.isClose == YES) {
-                weakSelf.headView.total.text = [LangSwitcher switchLang:@"共发出红包" key:nil];
+
                 weakSelf.headView.count.text = [NSString stringWithFormat:@"***"];
                 
-                weakSelf.sends = shouldDisplayCoins;
-                weakSelf.tableView.isClose = weakSelf.isClose;
 
-                weakSelf.tableView.sends = shouldDisplayCoins;
-                [weakSelf.tableView reloadData_tl];
             }else{
                 
-                weakSelf.headView.total.text = [LangSwitcher switchLang:@"共发出红包" key:nil];
-                weakSelf.headView.count.text = [NSString stringWithFormat:@"%ld",shouldDisplayCoins.count];
-                
-                weakSelf.sends = shouldDisplayCoins;
-                weakSelf.tableView.isClose = weakSelf.isClose;
 
-                weakSelf.tableView.sends = shouldDisplayCoins;
-                [weakSelf.tableView reloadData_tl];
+                weakSelf.headView.count.text = [NSString stringWithFormat:@"%ld",shouldDisplayCoins.count];
             }
+            [weakSelf.tableView reloadData_tl];
+
            
             
         } failure:^(NSError *error) {
@@ -280,11 +292,11 @@
             //
             weakSelf.getthe = shouldDisplayCoins;
             if (weakSelf.isClose == YES) {
-               
+
                 weakSelf.headView.count.text = @"***";
 
             }else{
-                
+
                 weakSelf.headView.count.text = [NSString stringWithFormat:@"%ld",weakSelf.getthe.count];
 
             }

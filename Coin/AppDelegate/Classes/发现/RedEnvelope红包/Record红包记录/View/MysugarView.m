@@ -42,15 +42,19 @@
     UILabel *nike =[UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:14];
     nike.text = [TLUser user].nickname;
     [self addSubview:nike];
+    
     UIButton *tameBtn = [UIButton buttonWithTitle:[NSString stringWithFormat:@"2018%@",[LangSwitcher switchLang:@"年" key:nil]] titleColor:kTextColor backgroundColor:kWhiteColor titleFont:14];
-    [tameBtn setImage:kImage(@"下拉") forState:UIControlStateNormal];
+//    [tameBtn setImage:kImage(@"下拉") forState:UIControlStateNormal];
     tameBtn.layer.borderColor = kLineColor.CGColor;
     tameBtn.layer.borderWidth = 1;
     self.tameBtn = tameBtn;
     [self addSubview:tameBtn];
     [tameBtn addTarget:self action:@selector(yearChoose) forControlEvents:UIControlEventTouchUpInside];
-    [tameBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 0, kWidth(20))];
-    [tameBtn setImageEdgeInsets:UIEdgeInsetsMake(0, kWidth(60), 0, 0)];
+
+//    [tameBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 0, kWidth(20))];
+//    [tameBtn setImageEdgeInsets:UIEdgeInsetsMake(0, kWidth(60), 0, 0)];
+
+
     UILabel *total =[UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:14];
     total.text = [LangSwitcher switchLang:@"共收到红包" key:nil];
     [self addSubview:total];
@@ -72,6 +76,8 @@
     self.eyesBtn = eyesButton;
 
     [self addSubview:eyesButton];
+
+
     [eyesButton addTarget:self action:@selector(eyesClick:) forControlEvents:UIControlEventTouchUpInside];
 
     [icon mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -98,15 +104,20 @@
         make.centerY.equalTo(count.mas_centerY);
         make.left.equalTo(count.mas_right).offset(2);
     }];
+
     [tameBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.mas_top).offset(15);
         make.right.equalTo(self.mas_right).offset(-15);
-        make.width.equalTo(@(kWidth(84)));
+        make.width.equalTo(@84);
         make.height.equalTo(@30);
     }];
+    [tameBtn SG_imagePositionStyle:(SGImagePositionStyleRight) spacing:4 imagePositionBlock:^(UIButton *button) {
+        [tameBtn setImage:kImage(@"下拉") forState:UIControlStateNormal];
+    }];
+
     [eyesButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(total.mas_centerY);
-        make.left.equalTo(count.mas_right).offset(10);
+        make.left.equalTo(ge.mas_right).offset(2);
         make.width.equalTo(@(kWidth(32)));
         make.height.equalTo(@16);
     }];

@@ -66,7 +66,7 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 
-    return 76;
+    return 70;
 }
 
 #pragma mark -- 区头高度

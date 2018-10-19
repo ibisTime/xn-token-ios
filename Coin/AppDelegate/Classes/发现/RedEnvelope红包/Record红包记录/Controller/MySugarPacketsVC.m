@@ -57,18 +57,7 @@
 {
     
     [self.filterPicker show];
-//    if ([self.filterPicker.tagNames[0] isEqualToString:@"我发出的"]) {
-//        NSArray *textArr = @[[LangSwitcher switchLang:@"我收到的" key:nil],
-//                             ];
-//        self.filterPicker.tagNames = textArr;
-//        return;
-//
-//    }
-//    NSArray *textArr = @[[LangSwitcher switchLang:@"我发出的" key:nil],
-//                         ];
-//
-//
-//    self.filterPicker.tagNames = textArr;
+
 }
 
 - (void)viewDidLoad {
@@ -85,10 +74,7 @@
     backView.backgroundColor = kWhiteColor;
     [self.view addSubview:backView];
 
-//    UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
 
-    //    negativeSpacer.width = -10;
-//    self.navigationItem.leftBarButtonItems = @[negativeSpacer, [[UIBarButtonItem alloc] initWithCustomView:self.backbButton]];self.navigationController.navigationBar.titleTextAttributes=@{NSForegroundColorAttributeName:[UIColor whiteColor],NSFontAttributeName:[UIFont systemFontOfSize:16]};
     self.navigationController.navigationBar.titleTextAttributes=
   @{NSForegroundColorAttributeName:[UIColor whiteColor],
     NSFontAttributeName:[UIFont fontWithName:@"Helvetica-Bold" size:16]};
@@ -172,11 +158,9 @@
     self.filterPicker.tagNames = textArr;
     //将视图加入ScrollView上
     [_scroll addSubview:_vc1.view];
-    //    [_scroll addSubview:_vc2.view];
     
     //设置两个控制器的尺寸
     _vc1.view.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-    //    _vc2.view.frame = CGRectMake(SCREEN_WIDTH, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
     
 }
 - (void)setupChildViewControll{

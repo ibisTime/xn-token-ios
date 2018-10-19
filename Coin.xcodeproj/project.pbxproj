@@ -181,7 +181,6 @@
 		2EFFE6B31FF6287D00BFCC40 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E5F19241FED0CDD00100420 /* UserNotifications.framework */; };
 		2EFFE6B51FF6289600BFCC40 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EFFE6B41FF6289600BFCC40 /* libsqlite3.0.tbd */; };
 		4C2438252066C2F1003B35F3 /* TopSegmentUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C2438232066C2F0003B35F3 /* TopSegmentUtil.m */; };
-		4C41F84620723CF000BBA366 /* HomeTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C41F84520723CF000BBA366 /* HomeTableView.m */; };
 		4C41F84920723D6600BBA366 /* HomeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C41F84820723D6600BBA366 /* HomeCell.m */; };
 		4C8DE98520C983D100EC183C /* EthereumUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C8DE98420C983D100EC183C /* EthereumUtil.swift */; };
 		4CC7F0ED205FBC5400BBEC4D /* CoinModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CC7F0EC205FBC5400BBEC4D /* CoinModel.m */; };
@@ -268,6 +267,7 @@
 		7A3821C020EACD8B00D6B636 /* SendTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A3821BF20EACD8B00D6B636 /* SendTableView.m */; };
 		7A3821C320EACDA100D6B636 /* SendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A3821C220EACDA100D6B636 /* SendCell.m */; };
 		7A3821C620EAD4EA00D6B636 /* SendModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A3821C520EAD4EA00D6B636 /* SendModel.m */; };
+		7A40B0FB2179C875004B9830 /* HomeTbleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A40B0FA2179C875004B9830 /* HomeTbleView.m */; };
 		7A8A5D1520EA076C002D9A48 /* RedEnvelopeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A8A5D1420EA076C002D9A48 /* RedEnvelopeVC.m */; };
 		7A8A5D1820EA0A23002D9A48 /* RedEnvelopeHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A8A5D1720EA0A23002D9A48 /* RedEnvelopeHeadView.m */; };
 		7A8A5D1B20EA131A002D9A48 /* SendRedEnvelopeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A8A5D1A20EA131A002D9A48 /* SendRedEnvelopeView.m */; };
@@ -892,8 +892,6 @@
 		2EFFE6B41FF6289600BFCC40 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		4C2438232066C2F0003B35F3 /* TopSegmentUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopSegmentUtil.m; sourceTree = "<group>"; };
 		4C2438242066C2F1003B35F3 /* TopSegmentUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopSegmentUtil.h; sourceTree = "<group>"; };
-		4C41F84420723CF000BBA366 /* HomeTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeTableView.h; sourceTree = "<group>"; };
-		4C41F84520723CF000BBA366 /* HomeTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeTableView.m; sourceTree = "<group>"; };
 		4C41F84720723D6600BBA366 /* HomeCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeCell.h; sourceTree = "<group>"; };
 		4C41F84820723D6600BBA366 /* HomeCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeCell.m; sourceTree = "<group>"; };
 		4C8DE98420C983D100EC183C /* EthereumUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EthereumUtil.swift; sourceTree = "<group>"; };
@@ -1065,6 +1063,8 @@
 		7A3821C220EACDA100D6B636 /* SendCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SendCell.m; sourceTree = "<group>"; };
 		7A3821C420EAD4EA00D6B636 /* SendModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SendModel.h; sourceTree = "<group>"; };
 		7A3821C520EAD4EA00D6B636 /* SendModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SendModel.m; sourceTree = "<group>"; };
+		7A40B0F92179C875004B9830 /* HomeTbleView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeTbleView.h; sourceTree = "<group>"; };
+		7A40B0FA2179C875004B9830 /* HomeTbleView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeTbleView.m; sourceTree = "<group>"; };
 		7A8A5D1320EA076C002D9A48 /* RedEnvelopeVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RedEnvelopeVC.h; sourceTree = "<group>"; };
 		7A8A5D1420EA076C002D9A48 /* RedEnvelopeVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RedEnvelopeVC.m; sourceTree = "<group>"; };
 		7A8A5D1620EA0A23002D9A48 /* RedEnvelopeHeadView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RedEnvelopeHeadView.h; sourceTree = "<group>"; };
@@ -2507,8 +2507,8 @@
 				216F5B1F206CD9D900F2C832 /* HomeVC.m */,
 				216F5B33206CD9DA00F2C832 /* HomeHeaderView.h */,
 				216F5B32206CD9DA00F2C832 /* HomeHeaderView.m */,
-				4C41F84420723CF000BBA366 /* HomeTableView.h */,
-				4C41F84520723CF000BBA366 /* HomeTableView.m */,
+				7A40B0F92179C875004B9830 /* HomeTbleView.h */,
+				7A40B0FA2179C875004B9830 /* HomeTbleView.m */,
 				4C41F84720723D6600BBA366 /* HomeCell.h */,
 				4C41F84820723D6600BBA366 /* HomeCell.m */,
 			);
@@ -3458,9 +3458,25 @@
 			path = PGPickerView;
 			sourceTree = "<group>";
 		};
+		7A40B0FC2179E3C2004B9830 /* Theia红包详情 */ = {
+			isa = PBXGroup;
+			children = (
+				7A8A5D3320EA3E5A002D9A48 /* SendVC.h */,
+				7A8A5D3420EA3E5A002D9A48 /* SendVC.m */,
+				B8657831214B90D400179EB1 /* DetailSugarView.h */,
+				B8657832214B90D400179EB1 /* DetailSugarView.m */,
+				7A3821BE20EACD8B00D6B636 /* SendTableView.h */,
+				7A3821BF20EACD8B00D6B636 /* SendTableView.m */,
+				B8DC39D2214BB39C002E62E7 /* DetailCell.h */,
+				B8DC39D3214BB39D002E62E7 /* DetailCell.m */,
+			);
+			path = "Theia红包详情";
+			sourceTree = "<group>";
+		};
 		7A8A5D0E20EA0677002D9A48 /* RedEnvelope红包 */ = {
 			isa = PBXGroup;
 			children = (
+				7A40B0FC2179E3C2004B9830 /* Theia红包详情 */,
 				7AEF23622154EE6300BF1DB5 /* Theia红包 */,
 				7AEF23652154F18600BF1DB5 /* Theia红包说明 */,
 				7AEF23632154EF7000BF1DB5 /* Record红包记录 */,
@@ -3529,18 +3545,12 @@
 			children = (
 				7A3821BB20EABD1300D6B636 /* GetTheTableView.h */,
 				7A3821BC20EABD1300D6B636 /* GetTheTableView.m */,
-				7A8A5DC920EA7EB8002D9A48 /* GetTheCell.h */,
-				7A8A5DCA20EA7EB8002D9A48 /* GetTheCell.m */,
-				7A3821BE20EACD8B00D6B636 /* SendTableView.h */,
-				7A3821BF20EACD8B00D6B636 /* SendTableView.m */,
-				7A3821C120EACDA100D6B636 /* SendCell.h */,
-				7A3821C220EACDA100D6B636 /* SendCell.m */,
 				B8FDB702214A824400313EC3 /* MysugarView.h */,
 				B8FDB703214A824400313EC3 /* MysugarView.m */,
-				B8657831214B90D400179EB1 /* DetailSugarView.h */,
-				B8657832214B90D400179EB1 /* DetailSugarView.m */,
-				B8DC39D2214BB39C002E62E7 /* DetailCell.h */,
-				B8DC39D3214BB39D002E62E7 /* DetailCell.m */,
+				7A8A5DC920EA7EB8002D9A48 /* GetTheCell.h */,
+				7A8A5DCA20EA7EB8002D9A48 /* GetTheCell.m */,
+				7A3821C120EACDA100D6B636 /* SendCell.h */,
+				7A3821C220EACDA100D6B636 /* SendCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3822,8 +3832,6 @@
 				7A8A5D2E20EA3C09002D9A48 /* MySugarPacketsVC.m */,
 				7A8A5D3020EA3E0E002D9A48 /* GetTheVC.h */,
 				7A8A5D3120EA3E0E002D9A48 /* GetTheVC.m */,
-				7A8A5D3320EA3E5A002D9A48 /* SendVC.h */,
-				7A8A5D3420EA3E5A002D9A48 /* SendVC.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -4747,7 +4755,6 @@
 				211DE6AF1FB58B4C002FCF3D /* UILabel+Extension.m in Sources */,
 				B8CAA15C211611D000695BC3 /* questionListCells.m in Sources */,
 				21A7F3131FB2E2F900FAA0A2 /* TLAccountSetBaseVC.m in Sources */,
-				4C41F84620723CF000BBA366 /* HomeTableView.m in Sources */,
 				B8C2056D20CF876600952765 /* CheckForwordVC.m in Sources */,
 				2EB9495A1FDF6B1A00CE4B94 /* ZMChineseConvert.m in Sources */,
 				B8CAA14A21158FF200695BC3 /* NSBundle+LPDImagePicker.m in Sources */,
@@ -4803,6 +4810,7 @@
 				7A07F824216CCA3F0026EB7A /* GlobalRevenueListBottomView.m in Sources */,
 				211DE6C01FB58B4C002FCF3D /* NSObject+Extension.m in Sources */,
 				211DE6C71FB58B4C002FCF3D /* HttpRequestObject.m in Sources */,
+				7A40B0FB2179C875004B9830 /* HomeTbleView.m in Sources */,
 				211DE6BD1FB58B4C002FCF3D /* NSString+Date.m in Sources */,
 				B8086527211EA17D00755158 /* BTCCurrencyConverter.m in Sources */,
 				B808650D211EA17D00755158 /* BTCPriceSource+Tests.m in Sources */,

@@ -29,8 +29,8 @@ typedef void(^HomeHeaderEventsBlock)(HomeEventsType type, NSInteger index, HomeF
 //轮播图
 @property (nonatomic, strong) NSMutableArray <BannerModel *>*banners;
 //统计
-@property (nonatomic, strong) CountInfoModel *countInfo;
-@property (nonatomic,strong) NSArray <HomeFindModel *>*findModels;
+//@property (nonatomic, strong) CountInfoModel *countInfo;
+//@property (nonatomic,strong) NSArray <HomeFindModel *>*findModels;
 
 
 @end

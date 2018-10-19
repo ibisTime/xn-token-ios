@@ -28,27 +28,28 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        headImage = [[UIImageView alloc]initWithFrame:CGRectMake(14, 16, 34, 34)];
+        headImage = [[UIImageView alloc]initWithFrame:CGRectMake(15, 15, 40, 40)];
         [self addSubview:headImage];
         headImage.layer.cornerRadius = 17;
         headImage.clipsToBounds = YES;
-        nameLabel = [UILabel labelWithFrame:CGRectMake(63, 16, (SCREEN_WIDTH - 79)/2, 20) textAligment:(NSTextAlignmentLeft) backgroundColor:kClearColor font:FONT(14) textColor:[UIColor blackColor]];
+        nameLabel = [UILabel labelWithFrame:CGRectMake(63, 18, (SCREEN_WIDTH - 79)/2, 20) textAligment:(NSTextAlignmentLeft) backgroundColor:kClearColor font:FONT(14) textColor:[UIColor blackColor]];
         [self addSubview:nameLabel];
 
-        timeLabel = [UILabel labelWithFrame:CGRectMake(63, 36, (SCREEN_WIDTH - 79)/2, 24) textAligment:(NSTextAlignmentLeft) backgroundColor:kClearColor font:FONT(11) textColor:kTextBlack];
+        timeLabel = [UILabel labelWithFrame:CGRectMake(63, 38, (SCREEN_WIDTH - 79)/2, 14) textAligment:(NSTextAlignmentLeft) backgroundColor:kClearColor font:FONT(11) textColor:kTextBlack];
         [self addSubview:timeLabel];
 
 
-        priceLabel = [UILabel labelWithFrame:CGRectMake(63 + (SCREEN_WIDTH - 79)/2, 10, (SCREEN_WIDTH - 79)/2, 36) textAligment:(NSTextAlignmentRight) backgroundColor:kClearColor font:FONT(14) textColor:kTextBlack];
+        priceLabel = [UILabel labelWithFrame:CGRectMake(0, 18, 0, 20) textAligment:(NSTextAlignmentRight) backgroundColor:kClearColor font:FONT(14) textColor:kTextBlack];
         [self addSubview:priceLabel];
-        sysmbolImage = [[UIImageView alloc]initWithFrame:CGRectMake( (SCREEN_WIDTH - 110), 16, 36, 36)];
+
+        sysmbolImage = [[UIImageView alloc]initWithFrame:CGRectMake( (SCREEN_WIDTH - 110), 15, 40, 40)];
         [self addSubview:sysmbolImage];
 
-        TheValueLabel = [UILabel labelWithFrame:CGRectMake(63 + (SCREEN_WIDTH - 79)/2, 46, (SCREEN_WIDTH - 79)/2 , 14) textAligment:(NSTextAlignmentRight) backgroundColor:kClearColor font:FONT(11) textColor:kTextColor2];
+        TheValueLabel = [UILabel labelWithFrame:CGRectMake(63 + (SCREEN_WIDTH - 79)/2, 38, (SCREEN_WIDTH - 79)/2 , 14) textAligment:(NSTextAlignmentRight) backgroundColor:kClearColor font:FONT(11) textColor:kTextColor2];
         [self addSubview:TheValueLabel];
 
 
-        UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(10, 65, SCREEN_WIDTH - 20, 1)];
+        UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(10, 69, SCREEN_WIDTH - 20, 1)];
         lineView.backgroundColor = kLineColor;
         [self addSubview:lineView];
 
@@ -80,7 +81,13 @@
     }else{
           priceLabel.text = [NSString stringWithFormat:@"%@ %@",sendModel.totalCount,[LangSwitcher switchLang:@"枚" key:nil]];
     }
+    [priceLabel sizeToFit];
+    priceLabel.frame = CGRectMake(kScreenWidth - priceLabel.frame.size.width - 15, 18, priceLabel.frame.size.width, 20);
+
+    sysmbolImage.frame = CGRectMake(SCREEN_WIDTH - priceLabel.frame.size.width - 15 - 10 - 40, 15, 40, 40);
   
     TheValueLabel.text = [NSString stringWithFormat:@"%@/%@个",sendModel.receivedNum,sendModel.sendNum];
+    [TheValueLabel sizeToFit];
+    TheValueLabel.frame = CGRectMake(SCREEN_WIDTH - TheValueLabel.frame.size.width - 15 - 5 - 40, 38, TheValueLabel.frame.size.width , 14);
 }
 @end

@@ -24,8 +24,7 @@
 #import "CoinUtil.h"
 #import "RedEnvelopeVC.h"
 
-#import "HomeTableView.h"
-
+#import "HomeTbleView.h"
 #import "WebVC.h"
 
 #import "MnemonicUtil.h"
@@ -59,15 +58,15 @@
 #import "BTCNetwork.h"
 #import "AppConfig.h"
 #import "TLinviteVC.h"
-@interface HomeVC ()
+@interface HomeVC ()<RefreshDelegate>
 
-@property (nonatomic, strong) HomeTableView *tableView;
+@property (nonatomic, strong) HomeTbleView *tableView;
 
 //头部
 @property (nonatomic, strong) HomeHeaderView *headerView;
 //
 @property (nonatomic,strong) NSMutableArray <BannerModel *>*bannerRoom;
-@property (nonatomic, strong) UIImageView *bgImage;
+//@property (nonatomic, strong) UIImageView *bgImage;
 
 @property (nonatomic, strong) UIButton *backButton;
 
@@ -109,78 +108,29 @@
 
 -(void)initNavigationNar
 {
-    self.bgImage = [[UIImageView alloc] init];
-    self.bgImage.contentMode = UIViewContentModeScaleToFill;
-    self.bgImage.userInteractionEnabled = YES;
-    //    self.bgImage.image = kImage(@"我的 背景");
-    [self.view  addSubview:self.bgImage];
+//    self.bgImage = [[UIImageView alloc] init];
+//    self.bgImage.contentMode = UIViewContentModeScaleToFill;
+//    self.bgImage.userInteractionEnabled = YES;
+//    //    self.bgImage.image = kImage(@"我的 背景");
+//    [self.view  addSubview:self.bgImage];
+//
+//
+//    [self.bgImage mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.edges.mas_equalTo(UIEdgeInsetsZero);
+//    }];
 
-
-    [self.bgImage mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(UIEdgeInsetsZero);
-    }];
     self.backButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
     self.backButton.frame = CGRectMake(kScreenWidth-74, kStatusBarHeight, 44, 44);
     [self.backButton setImage:kImage(@"消息") forState:(UIControlStateNormal)];
     [self.backButton addTarget:self action:@selector(OpenMessage) forControlEvents:(UIControlEventTouchUpInside)];
-    [self.bgImage addSubview:self.backButton];
+    [self.view addSubview:self.backButton];
+
     self.nameLable = [[UILabel alloc]initWithFrame:CGRectMake(54, kStatusBarHeight, kScreenWidth - 108, 44)];
     self.nameLable.text = [LangSwitcher switchLang:@"发现" key:nil];
     self.nameLable.textAlignment = NSTextAlignmentCenter;
     self.nameLable.font = Font(16);
     self.nameLable.textColor = kTextBlack;
-    [self.bgImage addSubview:self.nameLable];
-}
-
-
-#pragma mark - 获取发现列表数据
-- (void)reloadFindData
-{
-    
-
-    NSString *lang;
-
-    LangType type = [LangSwitcher currentLangType];
-    if (type == LangTypeSimple || type == LangTypeTraditional)
-    {
-        lang = @"ZH_CN";
-    }else if (type == LangTypeKorean)
-    {
-        lang = @"KO";
-    }else
-    {
-        lang = @"EN";
-
-    }
-    TLNetworking *http = [TLNetworking new];
-    
-    http.code = @"625412";
-    http.parameters[@"language"] = lang  ;
-    http.parameters[@"location"] = @"0"  ;
-    http.parameters[@"status"] = @"1"  ;
-
-    [http postWithSuccess:^(id responseObject) {
-
-
-//        NSArray <HomeFindModel *>*model;
-
-        self.findModels = [HomeFindModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
-        self.headerView.findModels = self.findModels;
-        [self.tableView endRefreshHeader];
-        self.headerView.frame = CGRectMake(0, 0, kScreenWidth - 30, self.findModels.count * 110 + 65  + kHeight(138));
-        [self.tableView reloadData];
-//        if (self.findModels.count != self.headerView.findModels.count) {
-//            NSLog(@"%@",self.findModels);
-//
-//        }
-
-//        model = [HomeFindModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
-
-        
-    } failure:^(NSError *error) {
-        [self.tableView endRefreshHeader];
-    }];
-    
+    [self.view addSubview:self.nameLable];
 }
 
 
@@ -191,8 +141,9 @@
     CoinWeakSelf;
 
 
-    self.tableView = [[HomeTableView alloc] initWithFrame:CGRectMake(15, kNavigationBarHeight, kScreenWidth, kScreenHeight - kNavigationBarHeight - kTabBarHeight) style:UITableViewStyleGrouped];
+    self.tableView = [[HomeTbleView alloc] initWithFrame:CGRectMake(0, kNavigationBarHeight, kScreenWidth, kScreenHeight - kNavigationBarHeight - kTabBarHeight) style:UITableViewStyleGrouped];
     self.tableView.backgroundColor = kWhiteColor;
+    self.tableView.refreshDelegate = self;
     [self.view addSubview:self.tableView];
     self.tableView.tableHeaderView = self.headerView;
 
@@ -211,103 +162,12 @@
     
 }
 
-#pragma mark - Init
-
-
-
-- (void)OpenMessage
+-(void)refreshTableView:(TLTableView *)refreshTableview didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    RateDescVC *vc = [RateDescVC new];
-    [self.navigationController pushViewController:vc animated:YES];
-    
-}
 
-- (HomeHeaderView *)headerView {
-    
-    if (!_headerView) {
-        
-        CoinWeakSelf;
-        //头部
-        _headerView = [[HomeHeaderView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth - 30, self.findModels.count * 110 + 65 + kHeight(138))];
-        
-        _headerView.headerBlock = ^(HomeEventsType type, NSInteger index, HomeFindModel *find) {
-            [weakSelf headerViewEventsWithType:type index:index model:find];
 
-        };
-         _headerView.scrollEnabled = NO;
-    }
-    return _headerView;
-}
+    HomeFindModel *model = self.findModels[indexPath.row];
 
-#pragma mark - HeaderEvents
-- (void)headerViewEventsWithType:(HomeEventsType)type index:(NSInteger)index  model:(HomeFindModel *)model
-{
-    switch (type) {
-
-        case HomeEventsTypeBanner:
-        {
-
-            NSString *url = [[self.bannerRoom objectAtIndex:index] url];
-            if (url && url.length > 0) {
-                WebVC *webVC = [[WebVC alloc] init];
-                webVC.url = url;
-                [self.navigationController pushViewController:webVC animated:YES];
-            }
-            return;
-
-        }break;
-
-    }
-//        case HomeEventsTypeStatistics:
-//        {
-//            TradeFlowListVC *flowVC = [TradeFlowListVC new];
-//
-//            [self.navigationController pushViewController:flowVC animated:YES];
-//            return;
-//
-//        }break;
-
-//        case HomeEventsTypeStore:
-//        {
-//            RedEnvelopeVC *redEnvelopeVC = [RedEnvelopeVC new];
-//            [self.navigationController pushViewController:redEnvelopeVC animated:YES];
-//            return;
-//        }break;
-
-//        case HomeEventsTypeGoodMall:
-//        {
-//            HTMLStrVC *vc = [HTMLStrVC new];
-//            vc.type = HTMLTypeGlobal_master;
-//            vc.des = model.Description;
-//            [self.navigationController pushViewController:vc animated:YES];
-//            return;
-//
-//        }break;
-//
-//        case HomeEventsTypePosMining:
-//        {
-//            PosMiningVC *vc = [PosMiningVC new];
-//            [self.navigationController pushViewController:vc animated:YES];
-//            return;
-//
-//        }
-//            break;
-//        case HomeEventsTypeRedEnvelope:
-//        {
-//            HTMLStrVC *vc = [HTMLStrVC new];
-//            vc.des = model.Description;
-//            vc.type = HTMLTypeYubibao;
-//            [self.navigationController pushViewController:vc animated:YES];
-//            return;
-//
-//
-//        }break;
-
-//        default:
-//            break;
-//    }
-
-    
     if ([model.action isEqualToString:@"red_packet"]) {
         RedEnvelopeVC *redEnvelopeVC = [RedEnvelopeVC new];
         [self.navigationController pushViewController:redEnvelopeVC animated:YES];
@@ -333,11 +193,58 @@
         vc.type = HTMLTypeOther;
         [self.navigationController pushViewController:vc animated:YES];
         return;
-        
+
     }
+}
+
+#pragma mark - Init
+
+
+
+- (void)OpenMessage
+{
+    RateDescVC *vc = [RateDescVC new];
+    [self.navigationController pushViewController:vc animated:YES];
     
+}
+
+- (HomeHeaderView *)headerView {
+    
+    if (!_headerView) {
+        
+        CoinWeakSelf;
+        //头部
+        _headerView = [[HomeHeaderView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 10 + kHeight(138))];
+        
+        _headerView.headerBlock = ^(HomeEventsType type, NSInteger index, HomeFindModel *find) {
+            [weakSelf headerViewEventsWithType:type index:index model:find];
+        };
+         _headerView.scrollEnabled = NO;
+    }
+    return _headerView;
+}
 
 
+
+#pragma mark - HeaderEvents
+- (void)headerViewEventsWithType:(HomeEventsType)type index:(NSInteger)index  model:(HomeFindModel *)model
+{
+    switch (type) {
+
+        case HomeEventsTypeBanner:
+        {
+
+            NSString *url = [[self.bannerRoom objectAtIndex:index] url];
+            if (url && url.length > 0) {
+                WebVC *webVC = [[WebVC alloc] init];
+                webVC.url = url;
+                [self.navigationController pushViewController:webVC animated:YES];
+            }
+            return;
+
+        }break;
+
+    }
 }
 
 #pragma mark - Data
@@ -369,10 +276,42 @@
     
 }
 
+#pragma mark - 获取发现列表数据
+- (void)reloadFindData
+{
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    NSString *lang;
+
+    LangType type = [LangSwitcher currentLangType];
+    if (type == LangTypeSimple || type == LangTypeTraditional)
+    {
+        lang = @"ZH_CN";
+    }else if (type == LangTypeKorean)
+    {
+        lang = @"KO";
+    }else
+    {
+        lang = @"EN";
+
+    }
+    TLNetworking *http = [TLNetworking new];
+
+    http.code = @"625412";
+    http.parameters[@"language"] = lang  ;
+    http.parameters[@"location"] = @"0"  ;
+    http.parameters[@"status"] = @"1"  ;
+
+    [http postWithSuccess:^(id responseObject) {
+        self.findModels = [HomeFindModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
+        self.tableView.findModels = [HomeFindModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
+        [self.tableView endRefreshHeader];
+        [self.tableView reloadData];
+    } failure:^(NSError *error) {
+        [self.tableView endRefreshHeader];
+    }];
+
 }
+
+
 
 @end

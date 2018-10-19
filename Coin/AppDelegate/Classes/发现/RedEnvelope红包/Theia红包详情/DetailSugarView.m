@@ -56,19 +56,27 @@
     UILabel *total =[UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:14];
     total.text = [LangSwitcher switchLang:@"" key:nil];
     self.total = total;
+    total.textAlignment = NSTextAlignmentCenter;
     [self addSubview:total];
     
     UILabel *alltotalnum =[UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:14];
     alltotalnum.text = [LangSwitcher switchLang:@"总额" key:nil];
+    alltotalnum.textAlignment = NSTextAlignmentCenter;
     [self addSubview:alltotalnum];
     
     UILabel *totalnum =[UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:14];
     totalnum.text = [LangSwitcher switchLang:@"数量" key:nil];
+    totalnum.textAlignment = NSTextAlignmentCenter;
     [self addSubview:totalnum];
+
+
     UILabel *alltotal =[UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:14];
     alltotal.text = [LangSwitcher switchLang:@"" key:nil];
+    alltotal.textAlignment = NSTextAlignmentCenter;
     [self addSubview:alltotal];
     self.alltotal = alltotal;
+
+
     UILabel *titleLab =[UILabel labelWithBackgroundColor:kClearColor textColor:kWhiteColor font:18];
     titleLab.text = [LangSwitcher switchLang:@"红包详情" key:nil];
     [self addSubview:titleLab];
@@ -78,7 +86,7 @@
     icon.layer.cornerRadius = 29;
     icon.clipsToBounds = YES;
     UILabel *listLab =[UILabel labelWithBackgroundColor:kHexColor(@"#F7F7F7") textColor:kTextBlack font:16];
-    listLab.text = [LangSwitcher switchLang:@"  领取列表" key:nil];
+    listLab.text = [LangSwitcher switchLang:@"领取列表" key:nil];
     [self addSubview:listLab];
     
     [back mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -101,19 +109,25 @@
         make.centerX.equalTo(self.mas_centerX);
         make.top.equalTo(self.mas_top).offset(kStatusBarHeight+20);
     }];
+
     [total mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.mas_left).offset(kWidth(80));
+        make.left.equalTo(self.mas_left).offset(15);
         make.top.equalTo(nike.mas_bottom).offset(20);
+        make.width.equalTo(@(SCREEN_WIDTH/2 - 30));;
     }];
+
     [alltotal mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.mas_right).offset(kWidth(-80));
+        make.right.equalTo(self.mas_right).offset(-15);
         make.centerY.equalTo(total.mas_centerY);
+        make.width.equalTo(@(SCREEN_WIDTH/2 - 30));;
     }];
     
     [totalnum mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.mas_left).offset(kWidth(80));
+        make.left.equalTo(self.mas_left).offset(kWidth(15));
         make.top.equalTo(total.mas_bottom).offset(5);
+        make.width.equalTo(@(SCREEN_WIDTH/2 - 30));;
     }];
+
     [alltotalnum mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(alltotal.mas_centerX);
         make.centerY.equalTo(totalnum.mas_centerY);
@@ -139,7 +153,7 @@
     [listLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(self.mas_bottom);
         make.right.equalTo(self.mas_right);
-        make.left.equalTo(self.mas_left);
+        make.left.equalTo(self.mas_left).offset(15);
         make.height.equalTo(@40);
 
     }];
