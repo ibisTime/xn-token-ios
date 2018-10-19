@@ -88,10 +88,12 @@
 
 -(void)refreshTableView:(TLTableView *)refreshTableview scrollView:(UIScrollView *)scroll
 {
-
-
-    [self.navigationController.navigationBar setBackgroundImage:[self imageWithBgColor:[UIColor colorWithRed:9/255.0 green:90/255.0 blue:221/255.0 alpha:self.tableView.contentOffset.y / (400 - 64 + kNavigationBarHeight)]] forBarMetrics:UIBarMetricsDefault];
-
+    if (self.tableView.contentOffset.y>(400 - 64)) {
+        [self.navigationController.navigationBar setBackgroundImage:[self imageWithBgColor:[UIColor colorWithRed:9/255.0 green:90/255.0 blue:221/255.0 alpha:0.99]] forBarMetrics:UIBarMetricsDefault];
+    }else
+    {
+        [self.navigationController.navigationBar setBackgroundImage:[self imageWithBgColor:[UIColor colorWithRed:9/255.0 green:90/255.0 blue:221/255.0 alpha:self.tableView.contentOffset.y / (400 - 64)]] forBarMetrics:UIBarMetricsDefault];
+    }
 
 }
 

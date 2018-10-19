@@ -417,11 +417,10 @@
 -(void)setFindModels:(NSArray<HomeFindModel *> *)findModels
 {
     _findModels = findModels;
-    
     [self initApplicationView];
-
-    
 }
+
+
 - (void)setCountInfo:(CountInfoModel *)countInfo {
     
     _countInfo = countInfo;

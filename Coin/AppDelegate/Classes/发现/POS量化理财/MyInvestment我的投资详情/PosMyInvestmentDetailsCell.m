@@ -40,7 +40,7 @@
 
 
         UILabel *numberLabel = [UILabel labelWithFrame:CGRectMake(25, 72, 0, 22) textAligment:(NSTextAlignmentLeft) backgroundColor:kClearColor font:FONT(22) textColor:kHexColor(@"#FF6400")];
-        numberLabel.text = @"9.4ETH";
+//        numberLabel.text = @"9.4ETH";
         self.numberLabel = numberLabel;
 
         [self addSubview:numberLabel];
@@ -141,10 +141,12 @@
     _stateLabel.frame = CGRectMake(self.nameButton.xx + 5, 25.5, _stateLabel.frame.size.width + 5, 14);
 
 
-    NSString *expectIncome = [CoinUtil convertToRealCoin1:model.expectIncome coin:model.productInfo[@"symbol"]];
+    NSString *expectIncome = [CoinUtil convertToRealCoin2:model.expectIncome setScale:4 coin:model.productInfo[@"symbol"]];
 
+//
     if ([expectIncome floatValue] > 10000) {
-        self.numberLabel.text = [NSString stringWithFormat:@"%.1f%@%@",[expectIncome floatValue]/10000,model.productInfo[@"symbol"],[LangSwitcher switchLang:@"万" key:nil]];
+
+        self.numberLabel.text = [NSString stringWithFormat:@"%.4f%@%@",[expectIncome floatValue]/10000,model.productInfo[@"symbol"],[LangSwitcher switchLang:@"万" key:nil]];
 
     }else
     {
@@ -182,10 +184,6 @@
     [self.earningsLabel sizeToFit];
 
     self.line.frame = CGRectMake(self.numberLabel.xx + 20, 75, 1, 39 - 12 + self.earningsLabel.frame.size.height);
-
-//    NSLog(@"%@",[TLUser stringByNotRounding:11.990000 afterPoint:1]);
-
-
 
 }
 

@@ -348,7 +348,7 @@
         [[ZDKZendesk instance] setIdentity:userIdentity];
 
         [ZDKCoreLogger setEnabled:YES];
-        [ZDKSupport initializeWithZendesk: [ZDKZendesk instance]];
+        [ZDKSupport initializeWithZendesk:[ZDKZendesk instance]];
 
 
         LangType type = [LangSwitcher currentLangType];

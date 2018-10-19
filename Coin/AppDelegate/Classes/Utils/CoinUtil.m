@@ -55,6 +55,9 @@ NSString *const kCNY = @"CNY";
 
 }
 
+
+
+
 + (NSString *)convertToRealCoin:(NSString *)count coin:(NSString *)coin scale:(NSUInteger)scale {
     
     return [self convertCount:count scale:scale cardinality:[self getCardinality:coin]];

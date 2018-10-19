@@ -465,8 +465,17 @@
     [whiteView addSubview:moneyMay];
 
 
+//    预计收益
     UILabel *money = [UILabel labelWithBackgroundColor:kClearColor textColor:kHexColor(@"#FF6400") font:16];
-    money.text = [NSString stringWithFormat:@"%.4f",[price floatValue] * [self.moneyModel.expectYield floatValue]/365*[self.moneyModel.limitDays floatValue]];
+    NSString *priceSyr = [NSString stringWithFormat:@"%.8f",[price floatValue] * [self.moneyModel.expectYield floatValue]/365*[self.moneyModel.limitDays floatValue]];
+    
+    NSString *endStr = [priceSyr substringFromIndex:priceSyr.length-4];
+    NSString *str2 = [priceSyr stringByReplacingOccurrencesOfString:endStr withString:@""];
+    money.text = str2;
+
+
+
+
     money.frame = CGRectMake(moneyMay.xx + 5, moneyMay.frame.origin.y + 1,  SCREEN_WIDTH - 48 - 25 - moneyMay.xx, 14);
     [whiteView addSubview:money];
 

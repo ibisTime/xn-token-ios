@@ -100,17 +100,10 @@
 }
 
 - (void)viewDidLoad {
-    
-    
-
-    
     [super viewDidLoad];
     [self initNavigationNar];
     [self initTableView];
     self.view.backgroundColor = kWhiteColor;
-
-
-
 }
 
 
@@ -126,8 +119,6 @@
     [self.bgImage mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(UIEdgeInsetsZero);
     }];
-
-
     self.backButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
     self.backButton.frame = CGRectMake(kScreenWidth-74, kStatusBarHeight, 44, 44);
     [self.backButton setImage:kImage(@"消息") forState:(UIControlStateNormal)];
@@ -169,14 +160,22 @@
     http.parameters[@"status"] = @"1"  ;
 
     [http postWithSuccess:^(id responseObject) {
-        
-        self.findModels = [HomeFindModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
 
-        NSLog(@"%@",self.findModels);
+
+//        NSArray <HomeFindModel *>*model;
+
+        self.findModels = [HomeFindModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
         self.headerView.findModels = self.findModels;
         [self.tableView endRefreshHeader];
         self.headerView.frame = CGRectMake(0, 0, kScreenWidth - 30, self.findModels.count * 110 + 65  + kHeight(138));
         [self.tableView reloadData];
+//        if (self.findModels.count != self.headerView.findModels.count) {
+//            NSLog(@"%@",self.findModels);
+//
+//        }
+
+//        model = [HomeFindModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
+
         
     } failure:^(NSError *error) {
         [self.tableView endRefreshHeader];

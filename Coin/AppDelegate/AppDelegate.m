@@ -70,7 +70,7 @@
     
 //    [NSThread sleepForTimeInterval:2];
     
-    //服务器环境
+    //服务器环境7
 //    研发
 //    [AppConfig config].runEnv = RunEnvDev;
 //    测试
