@@ -108,6 +108,8 @@ typedef enum : NSUInteger {
 
 @property (nonatomic, strong) BTCKey *key;
 
+@property (nonatomic , strong)NSString *btcPrompt;
+
 @end
 
 @implementation WalletForwordVC
@@ -310,6 +312,7 @@ typedef enum : NSUInteger {
 //        NSLog(@"WARNING: incorrect private key is supplied");
 //        return;
 //    }
+    self.btcPrompt = @"";
     [MBProgressHUD hideHUDForView:self.view animated:YES];
     NSError* error = nil;
     BTCTransaction* transaction;
@@ -335,6 +338,15 @@ typedef enum : NSUInteger {
     if (!transaction) {
         NSLog(@"Can't make a transaction: %@", error);
     }
+
+    if (![self.btcPrompt isEqualToString:@""]) {
+        [TLAlert alertWithInfo:self.btcPrompt];
+        return;
+    }
+
+//    if ([TLUser isBlankString:transaction] == YES) {
+//        return;
+//    }
     self.signTx = BTCHexFromData([transaction data]);
 
    
@@ -415,16 +427,7 @@ typedef enum : NSUInteger {
         *errorOut = error;
         return nil;
     }
-    
-    CoinModel *coin = [CoinUtil getCoinModel:@"BTC"];
-    
-    long long mount = [[CoinUtil convertToSysCoin:amount coin:coin.symbol] longLongValue];
-    
-    
-    BTCAmount totalAmount = mount ;
-    BTCAmount dustThreshold = 100000; // don't want less than 1mBTC in the change.
 
-    
     //通过从最低的一个扫描找到最大的txout数。
     NSMutableArray *arr = [NSMutableArray array];
     for (int i = 0; i < self.utxis.count; i++) {
@@ -433,40 +436,61 @@ typedef enum : NSUInteger {
         newut.count = [CoinUtil convertToRealCoin:self.utxis[i].count coin:@"BTC"];
         [arr addObject:newut];
     }
-//    utxos = [arr sortedArrayUsingComparator:^(utxoModel* obj1, utxoModel* obj2) {
-//        if (([obj1.count floatValue] - [obj2.count floatValue]) < 0) return NSOrderedAscending;
-//        else return NSOrderedDescending;
-//    }];
     
-    NSArray* txouts = nil;
+    CoinModel *coin = [CoinUtil getCoinModel:@"BTC"];
     
-    int intput = 0;
-    long long btcFree = 0;
-    for (utxoModel* txout in arr) {
-        intput ++;
-        BTCAmount a = [[CoinUtil convertToSysCoin:txout.count coin:@"BTC"] longLongValue];
-//                        convertToRealCoin:txout.count coin:@"BTC"] longLongValue];
+    long long mount = [[CoinUtil convertToSysCoin:amount coin:coin.symbol] longLongValue];
+    
+    BTCAmount btcValue = mount;
+    
+    BTCAmount sumIntputValue = 0;//Intput总额
+    int sumIntputCount = 0;//Intput总个数
+    BOOL isChange = NO;//是否需要找零
+    BTCAmount changeValue = 0;//找零金额
+    long long btcFree = 0;//手续费
 
-        if ( a > (totalAmount + dustThreshold)) {
-            btcFree = (148 * intput + 34 * 1 + 10) * [fee intValue];
-            if (a > (totalAmount + dustThreshold) +btcFree) {
-                btcFree = (148 * intput + 34 * 2 + 10) * [fee intValue];
-                
+
+    
+
+
+    
+    NSMutableArray *IntputUtsos = [NSMutableArray array];
+    
+
+
+
+
+
+    for (int i = 0; i < arr.count; i ++) {
+        utxoModel* txout = arr[i];
+        sumIntputCount ++;
+        sumIntputValue = sumIntputValue + [[CoinUtil convertToSysCoin:txout.count coin:@"BTC"] longLongValue];
+        [IntputUtsos addObject:txout];
+
+        btcFree = (148 * sumIntputCount + 34 * 1 + 10) * [fee intValue];
+//       Intput总额 大于手续费+转账金额
+        if (sumIntputValue >= (btcValue + btcFree)) {
+//       Intput总额 大于   手续费、找零手续费 + 转账金额
+            if (sumIntputValue > (btcValue + (148 * sumIntputCount + 34 * 2 + 10) * [fee intValue]))
+            {
+                btcFree = (148 * sumIntputCount + 34 * 2 + 10) * [fee intValue];
+                isChange = YES;
+                changeValue = sumIntputValue - btcValue - (148 * sumIntputCount + 34 * 2 + 10) * [fee intValue];
             }
-            txouts = @[ txout ];
             break;
         }
     }
     
-    
-    //计算手续费
-    
     // We support spending just one output for now. 我们目前只支持支出一项产出。
+    if (btcValue > sumIntputValue + btcFree) {
+        self.btcPrompt = [LangSwitcher switchLang:@"余额不足" key:nil];
+    }
+
+
+
     
     
-    
-    
-    if (!txouts) return nil;
+    if (!IntputUtsos) return nil;
     
     // Create a new transaction
     BTCTransaction* tx = [[BTCTransaction alloc] init];
@@ -474,7 +498,7 @@ typedef enum : NSUInteger {
     BTCAmount spentCoins = 0;
     
     // Add all outputs as inputs
-    for (utxoModel* txout in txouts) {
+    for (utxoModel* txout in IntputUtsos) {
         BTCTransactionInput* txin = [[BTCTransactionInput alloc] init];
         txin.previousHash =  BTCHashFromID(txout.txid);
         txin.previousIndex = [txout.vout intValue];
@@ -493,23 +517,25 @@ typedef enum : NSUInteger {
     
     // Add required outputs - payment and change
     BTCTransactionOutput* paymentOutput = [[BTCTransactionOutput alloc] initWithValue:mount address:destinationAddress];
-    BTCTransactionOutput* changeOutput = [[BTCTransactionOutput alloc] initWithValue:(spentCoins - (mount + btcFree)) address:changeAddress];
-    
-    // Idea: deterministically-randomly choose which output goes first to improve privacy.//想法:确定随机选择哪个输出优先用于提高隐私。
-    
-    
     [tx addOutput:paymentOutput];
-    [tx addOutput:changeOutput];
+
+    if (isChange == YES) {
+        BTCTransactionOutput *changeOutput = [[BTCTransactionOutput alloc] initWithValue:(changeValue) address:changeAddress];
+        [tx addOutput:changeOutput];
+    }
+    // Idea: deterministically-randomly choose which output goes first to improve privacy.//想法:确定随机选择哪个输出优先用于提高隐私。
+
+
     
     
     // Sign all inputs. We now have both inputs and outputs defined, so we can sign the transaction. / /所有输入信号。现在我们已经定义了输入和输出，因此可以对事务进行签名。
     
     
-    for (int i = 0; i < txouts.count; i++) {
+    for (int i = 0; i < IntputUtsos.count; i++) {
         // Normally, we have to find proper keys to sign this txin, but in this 通常情况下，我们需要找到合适的钥匙来签这个txin，example we already know that we use a single private key.但是在这个例我们已经知道我们使用的是一个私钥。
         
         
-        utxoModel* txout = txouts[i]; // output from a previous tx which is referenced by this txin. 此txin引用的前一个tx的输出。
+        utxoModel* txout = IntputUtsos[i]; // output from a previous tx which is referenced by this txin. 此txin引用的前一个tx的输出。
         
         
         BTCTransactionInput* txin = tx.inputs[i];
@@ -551,7 +577,7 @@ typedef enum : NSUInteger {
     {
         BTCScriptMachine* sm = [[BTCScriptMachine alloc] initWithTransaction:tx inputIndex:0];
         NSError* error = nil;
-        NSString *scriptPubKey = [[txouts objectAtIndex:0] scriptPubKey];
+        NSString *scriptPubKey = [[IntputUtsos objectAtIndex:0] scriptPubKey];
         BTCScript *script = [[BTCScript alloc] initWithData:BTCDataFromHex(scriptPubKey)];
         //        BTCScript *script = [[BTCScript alloc] initWithString:scriptPubKey];
         BOOL r = [sm verifyWithOutputScript:script error:&error];
@@ -585,15 +611,23 @@ typedef enum : NSUInteger {
                 
                 [net postWithSuccess:^(id responseObject) {
                     NSLog(@"%@",responseObject);
+
                     NSNumber *slow = responseObject[@"data"][@"fastestFeeMin"];
                     NSNumber *fast = responseObject[@"data"][@"fastestFeeMax"];
                     
                     int f = ([fast intValue] -[slow intValue])/2;
                     f = f + [slow intValue];
+
                     NSString *priceSlow = [NSString stringWithFormat:@"%@",slow];
                     NSString *priceFast = [NSString stringWithFormat:@"%@",fast];
+
                     self.priceSlow = priceSlow;
                     self.priceFast = priceFast;
+
+                    self.slider.maximumValue = [self.priceFast floatValue];
+                    self.slider.minimumValue = [self.priceSlow floatValue];
+                    self.slider.value = ([self.priceFast floatValue] + [self.priceSlow floatValue])/2;
+
                     NSString *price = [NSString stringWithFormat:@"%d",f];
                     self.btcPrice = f;
                     self.tempPrice = pricr;
@@ -1009,49 +1043,63 @@ typedef enum : NSUInteger {
         UISlider * slider = sender;
         CGFloat value = slider.value;
         NSLog(@"%f", value);
+
+
+
+
+
+        if ([self.currency.symbol isEqualToString:@"BTC"]) {
+            self.blanceFree.text = [NSString stringWithFormat:@"%@ %@",[NSString stringWithFormat:@"%.1f",slider.value],@"sat/b"];
+            self.btcPrice = [self.priceSlow integerValue];
+            return;
+        }else
+        {
+
+        }
+
         if (value == 0) {
-            if ([self.currency.symbol isEqualToString:@"BTC"]) {
-                self.blanceFree.text = [NSString stringWithFormat:@"%@ %@",self.priceSlow,@"sat/b"];
-                self.btcPrice = [self.priceSlow integerValue];
-            }else{
+//            if ([self.currency.symbol isEqualToString:@"BTC"]) {
+//                self.blanceFree.text = [NSString stringWithFormat:@"%@ %@",self.priceSlow,@"sat/b"];
+//                self.btcPrice = [self.priceSlow integerValue];
+//            }else{
                 self.blanceFree.text = [NSString stringWithFormat:@"%.8f %@",self.gamPrice*0.85,self.currency.symbol];
                 self.pricr = [NSString stringWithFormat:@"%f",[self.tempPrice longLongValue]*0.85];
-            }
-            
-        }else{
-            if ([self.currency.symbol isEqualToString:@"BTC"]) {
-               
-                self.blanceFree.text = [NSString stringWithFormat:@"%.0f %@", ([self.priceFast floatValue] - [self.priceSlow floatValue])*value,@"sat/b"];
-                self.btcPrice = ([self.priceFast floatValue] - [self.priceSlow floatValue]) *value;
-                if (([self.priceFast floatValue] - [self.priceSlow floatValue])*value < [self.priceSlow floatValue]) {
-                    self.blanceFree.text = [NSString stringWithFormat:@"%@ %@",self.priceSlow,@"sat/b"];
+//            }
 
-                }
-                
-                self.pricr = [NSString stringWithFormat:@"%f",[self.pricr intValue]*value];
-            }else{
-                
+        }else{
+//            if ([self.currency.symbol isEqualToString:@"BTC"]) {
+//
+//                self.blanceFree.text = [NSString stringWithFormat:@"%.0f %@", ([self.priceFast floatValue] - [self.priceSlow floatValue])*value,@"sat/b"];
+//                self.btcPrice = ([self.priceFast floatValue] - [self.priceSlow floatValue]) *value;
+//                if (([self.priceFast floatValue] - [self.priceSlow floatValue])*value < [self.priceSlow floatValue]) {
+//                    self.blanceFree.text = [NSString stringWithFormat:@"%@ %@",self.priceSlow,@"sat/b"];
+//
+//                }
+//
+//                self.pricr = [NSString stringWithFormat:@"%f",[self.pricr intValue]*value];
+//            }else{
+
                 self.blanceFree.text = [NSString stringWithFormat:@"%.8f %@", self.gamPrice *0.85 +self.gamPrice*value*1/3 ,self.currency.symbol];
                 
                 self.pricr = [NSString stringWithFormat:@"%f",[self.tempPrice longLongValue] + [self.tempPrice longLongValue] *value *1/3];
-            }
-           
+//            }
+
         }
          if (value == 1)
          {
           
-             if ([self.currency.symbol isEqualToString:@"BTC"]) {
-                 self.blanceFree.text = [NSString stringWithFormat:@"%@ %@",self.priceFast,@"sat/b"];
-                 self.btcPrice = [self.priceFast integerValue];
+//             if ([self.currency.symbol isEqualToString:@"BTC"]) {
+//                 self.blanceFree.text = [NSString stringWithFormat:@"%@ %@",self.priceFast,@"sat/b"];
+//                 self.btcPrice = [self.priceFast integerValue];
+//
+//                 self.pricr = [NSString stringWithFormat:@"%@",self.priceFast];
+//             }else{
 
-                 self.pricr = [NSString stringWithFormat:@"%@",self.priceFast];
-             }else{
-                 
                  self.blanceFree.text = [NSString stringWithFormat:@"%.8f %@",self.gamPrice*value*1.15,self.currency.symbol];
                  
                  self.pricr = [NSString stringWithFormat:@"%f",[self.tempPrice longLongValue]*value*1.15];
-             }
-          
+//             }
+
          }
         
         

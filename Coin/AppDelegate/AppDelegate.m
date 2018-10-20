@@ -114,11 +114,7 @@
     ;
     if ([[TLDataBase sharedManager].dataBase open]) {
 //        [ [TLDataBase sharedManager].dataBase executeUpdate:@"UPDATE THAWallet SET userId='China'"];
-
         NSLog(@"数据库打开成功");
-        
-        
-        
     }
     
     

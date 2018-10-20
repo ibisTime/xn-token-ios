@@ -58,7 +58,7 @@
     self.total = total;
     total.textAlignment = NSTextAlignmentCenter;
     [self addSubview:total];
-    
+
     UILabel *alltotalnum =[UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:14];
     alltotalnum.text = [LangSwitcher switchLang:@"总额" key:nil];
     alltotalnum.textAlignment = NSTextAlignmentCenter;

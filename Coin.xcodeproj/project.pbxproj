@@ -268,6 +268,7 @@
 		7A3821C320EACDA100D6B636 /* SendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A3821C220EACDA100D6B636 /* SendCell.m */; };
 		7A3821C620EAD4EA00D6B636 /* SendModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A3821C520EAD4EA00D6B636 /* SendModel.m */; };
 		7A40B0FB2179C875004B9830 /* HomeTbleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A40B0FA2179C875004B9830 /* HomeTbleView.m */; };
+		7A40B0FF217B5B7E004B9830 /* BTCTransferModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A40B0FE217B5B7E004B9830 /* BTCTransferModel.m */; };
 		7A8A5D1520EA076C002D9A48 /* RedEnvelopeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A8A5D1420EA076C002D9A48 /* RedEnvelopeVC.m */; };
 		7A8A5D1820EA0A23002D9A48 /* RedEnvelopeHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A8A5D1720EA0A23002D9A48 /* RedEnvelopeHeadView.m */; };
 		7A8A5D1B20EA131A002D9A48 /* SendRedEnvelopeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A8A5D1A20EA131A002D9A48 /* SendRedEnvelopeView.m */; };
@@ -1065,6 +1066,8 @@
 		7A3821C520EAD4EA00D6B636 /* SendModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SendModel.m; sourceTree = "<group>"; };
 		7A40B0F92179C875004B9830 /* HomeTbleView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeTbleView.h; sourceTree = "<group>"; };
 		7A40B0FA2179C875004B9830 /* HomeTbleView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeTbleView.m; sourceTree = "<group>"; };
+		7A40B0FD217B5B7E004B9830 /* BTCTransferModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTCTransferModel.h; sourceTree = "<group>"; };
+		7A40B0FE217B5B7E004B9830 /* BTCTransferModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTCTransferModel.m; sourceTree = "<group>"; };
 		7A8A5D1320EA076C002D9A48 /* RedEnvelopeVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RedEnvelopeVC.h; sourceTree = "<group>"; };
 		7A8A5D1420EA076C002D9A48 /* RedEnvelopeVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RedEnvelopeVC.m; sourceTree = "<group>"; };
 		7A8A5D1620EA0A23002D9A48 /* RedEnvelopeHeadView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RedEnvelopeHeadView.h; sourceTree = "<group>"; };
@@ -3656,6 +3659,8 @@
 				B88D6C7120EDF3B50043832C /* TLTransfromVC.m */,
 				B8F7919F2146495000F5BE45 /* THTranstionCollectionView.h */,
 				B8F791A02146495000F5BE45 /* THTranstionCollectionView.m */,
+				7A40B0FD217B5B7E004B9830 /* BTCTransferModel.h */,
+				7A40B0FE217B5B7E004B9830 /* BTCTransferModel.m */,
 			);
 			path = "Transfer一键划转";
 			sourceTree = "<group>";
@@ -4905,6 +4910,7 @@
 				216F5AFD206CD3A800F2C832 /* GengXinModel.m in Sources */,
 				21CB94F51FDC179700CAB090 /* PersonalModel.m in Sources */,
 				B8F63EDA20D3639900556150 /* LocalBillCell.m in Sources */,
+				7A40B0FF217B5B7E004B9830 /* BTCTransferModel.m in Sources */,
 				2ED651C9200F2F6F0065A1B0 /* TLCoinWithdrawOrderVC.m in Sources */,
 				7AAF036A21526977008507FF /* ioapi.c in Sources */,
 				211DE6B21FB58B4C002FCF3D /* UIButton+Custom.m in Sources */,

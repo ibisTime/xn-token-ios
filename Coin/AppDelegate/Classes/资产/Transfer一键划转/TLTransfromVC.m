@@ -83,6 +83,8 @@ typedef enum : NSUInteger {
 
 @property (nonatomic, assign) NSInteger currentIndex;
 
+@property (nonatomic, copy)NSString *btcPrompt;
+
 @end
 
 @implementation TLTransfromVC
@@ -645,14 +647,24 @@ typedef enum : NSUInteger {
         UISlider * slider = sender;
         CGFloat value = slider.value;
         NSLog(@"%f", value);
-        if (value == 0) {
-            if ([self.currentModel.symbol isEqualToString:@"BTC"]) {
-                
 
-                self.Free.text = [NSString stringWithFormat:@"%@ %@ ",self.priceSlow,@"sat/b"];
-                self.totalFree.text = [NSString stringWithFormat:@"%@ %@",[LangSwitcher switchLang:@"本次划转手续费为" key:nil],[NSString stringWithFormat:@"%@ %@ ",self.priceSlow,@"sat/b"]];
-                self.btcPrice = [self.priceSlow integerValue];
-            }else{
+        if ([self.currentModel.symbol isEqualToString:@"BTC"]) {
+
+            self.Free.text = [NSString stringWithFormat:@"%@ %@",[NSString stringWithFormat:@"%.1f",slider.value],@"sat/b"];
+            self.totalFree.text = [NSString stringWithFormat:@"%@ %@",[LangSwitcher switchLang:@"本次划转手续费为" key:nil],[NSString stringWithFormat:@"%.1f %@ ",slider.value,@"sat/b"]];
+            self.btcPrice = slider.value;
+
+            return;
+        }
+
+        if (value == 0) {
+//            if ([self.currentModel.symbol isEqualToString:@"BTC"]) {
+//
+//
+//                self.Free.text = [NSString stringWithFormat:@"%@ %@ ",self.priceSlow,@"sat/b"];
+//                self.totalFree.text = [NSString stringWithFormat:@"%@ %@",[LangSwitcher switchLang:@"本次划转手续费为" key:nil],[NSString stringWithFormat:@"%@ %@ ",self.priceSlow,@"sat/b"]];
+//                self.btcPrice = [self.priceSlow integerValue];
+//            }else{
                 if ([self.currentModel.type isEqualToString:@"0"]) {
                     self.Free.text = [NSString stringWithFormat:@"%.8f %@",self.gamPrice*0.85,self.currentModel.symbol];
                     self.totalFree.text = [NSString stringWithFormat:@"%@ %@",[LangSwitcher switchLang:@"本次划转手续费为" key:nil],[NSString stringWithFormat:@"%.8f %@",self.gamPrice*0.85,self.currentModel.symbol]];
@@ -670,24 +682,24 @@ typedef enum : NSUInteger {
                 }
                 
                 self.pricr = [NSString stringWithFormat:@"%f",[self.tempPrice longLongValue]*0.85];
-            }
-            
+//            }
+
         }else{
-            if ([self.currentModel.symbol isEqualToString:@"BTC"]) {
-                
-                self.Free.text = [NSString stringWithFormat:@"%.0f %@", ([self.priceFast floatValue] - [self.priceSlow floatValue])*value,@"sat/b"];
-
-                self.totalFree.text = [NSString stringWithFormat:@"%@ %@",[LangSwitcher switchLang:@"本次划转手续费为" key:nil],[NSString stringWithFormat:@"%.0f %@", ([self.priceFast floatValue] - [self.priceSlow floatValue])*value,@"sat/b"]];
-
-                self.btcPrice = ([self.priceFast floatValue] - [self.priceSlow floatValue]) *value;
-                if (([self.priceFast floatValue] - [self.priceSlow floatValue])*value < [self.priceSlow floatValue]) {
-                    self.Free.text = [NSString stringWithFormat:@"%@ %@",self.priceSlow,@"sat/b"];
-                    self.totalFree.text = [NSString stringWithFormat:@"%@ %@",[LangSwitcher switchLang:@"本次划转手续费为" key:nil],[NSString stringWithFormat:@"%@ %@",self.priceSlow,@"sat/b"]];
-                    
-                }
-                
-                self.pricr = [NSString stringWithFormat:@"%f",[self.pricr intValue]*value];
-            }else{
+//            if ([self.currentModel.symbol isEqualToString:@"BTC"]) {
+//
+//                self.Free.text = [NSString stringWithFormat:@"%.0f %@", ([self.priceFast floatValue] - [self.priceSlow floatValue])*value,@"sat/b"];
+//
+//                self.totalFree.text = [NSString stringWithFormat:@"%@ %@",[LangSwitcher switchLang:@"本次划转手续费为" key:nil],[NSString stringWithFormat:@"%.0f %@", ([self.priceFast floatValue] - [self.priceSlow floatValue])*value,@"sat/b"]];
+//
+//                self.btcPrice = ([self.priceFast floatValue] - [self.priceSlow floatValue]) *value;
+//                if (([self.priceFast floatValue] - [self.priceSlow floatValue])*value < [self.priceSlow floatValue]) {
+//                    self.Free.text = [NSString stringWithFormat:@"%@ %@",self.priceSlow,@"sat/b"];
+//                    self.totalFree.text = [NSString stringWithFormat:@"%@ %@",[LangSwitcher switchLang:@"本次划转手续费为" key:nil],[NSString stringWithFormat:@"%@ %@",self.priceSlow,@"sat/b"]];
+//
+//                }
+//
+//                self.pricr = [NSString stringWithFormat:@"%f",[self.pricr intValue]*value];
+//            }else{
                 if ([self.currentModel.type isEqualToString:@"0"]) {
                       self.Free.text = [NSString stringWithFormat:@"%.8f %@", self.gamPrice *0.85 +self.gamPrice*value*1/3 ,self.currentModel.symbol];
 
@@ -704,19 +716,19 @@ typedef enum : NSUInteger {
               
                 
                 self.pricr = [NSString stringWithFormat:@"%f",[self.tempPrice longLongValue] + [self.tempPrice longLongValue] *value *1/3];
-            }
-            
+//            }
+
         }
         if (value == 1)
         {
             
-            if ([self.currentModel.symbol isEqualToString:@"BTC"]) {
-                self.Free.text = [NSString stringWithFormat:@"%@ %@",self.priceFast,@"sat/b"];
-                self.totalFree.text = [NSString stringWithFormat:@"%@ %@",[LangSwitcher switchLang:@"本次划转手续费为" key:nil],[NSString stringWithFormat:@"%@ %@",self.priceFast,@"sat/b"]];
-                self.btcPrice = [self.priceFast integerValue];
-                
-                self.pricr = [NSString stringWithFormat:@"%@",self.priceFast];
-            }else{
+//            if ([self.currentModel.symbol isEqualToString:@"BTC"]) {
+//                self.Free.text = [NSString stringWithFormat:@"%@ %@",self.priceFast,@"sat/b"];
+//                self.totalFree.text = [NSString stringWithFormat:@"%@ %@",[LangSwitcher switchLang:@"本次划转手续费为" key:nil],[NSString stringWithFormat:@"%@ %@",self.priceFast,@"sat/b"]];
+//                self.btcPrice = [self.priceFast integerValue];
+//
+//                self.pricr = [NSString stringWithFormat:@"%@",self.priceFast];
+//            }else{
                 if ([self.currentModel.type isEqualToString:@"0"]) {
                     self.Free.text = [NSString stringWithFormat:@"%.8f %@",self.gamPrice*value*1.15,self.currentModel.symbol];
                     self.totalFree.text = [NSString stringWithFormat:@"%@ %@",[LangSwitcher switchLang:@"本次划转手续费为" key:nil],[NSString stringWithFormat:@"%.8f %@",self.gamPrice*value*1.15,self.currentModel.symbol]];
@@ -735,7 +747,7 @@ typedef enum : NSUInteger {
                 self.pricr = [NSString stringWithFormat:@"%f",[self.tempPrice longLongValue]*value*1.15];
             }
             
-        }
+//        }
     }
     
 }
@@ -962,6 +974,11 @@ typedef enum : NSUInteger {
                     NSLog(@"%@low@,fast%@",priceSlow,priceFast);
                     self.gamPrice = [price floatValue ] ;
                     self.slider.value = 0.5;
+
+                    self.slider.maximumValue = [self.priceFast floatValue];
+                    self.slider.minimumValue = [self.priceSlow floatValue];
+                    self.slider.value = ([self.priceFast floatValue] + [self.priceSlow floatValue])/2;
+
                     [self valueChange:self.slider];
                     [MBProgressHUD hideHUDForView:self.view animated:YES];
                 } failure:^(NSError *error) {
@@ -1077,7 +1094,13 @@ typedef enum : NSUInteger {
                     NSLog(@"%@low@,fast%@",priceSlow,priceFast);
                     self.gamPrice = [price floatValue ] ;
                     self.slider.value = 0.5;
+
+
+                    self.slider.maximumValue = [self.priceFast floatValue];
+                    self.slider.minimumValue = [self.priceSlow floatValue];
+                    self.slider.value = ([self.priceFast floatValue] + [self.priceSlow floatValue])/2;
                     [self valueChange:self.slider];
+                    
                     NSString *money = [CoinUtil convertToRealCoin:self.localcurrencys[indexPath.row].balance coin:self.currencys[indexPath.row].symbol];
                     
                     self.currentModel = self.localcurrencys[indexPath.row];
@@ -1539,6 +1562,7 @@ typedef enum : NSUInteger {
     //        NSLog(@"WARNING: incorrect private key is supplied");
     //        return;
     //    }
+    self.btcPrompt = @"";
     [MBProgressHUD hideHUDForView:self.view animated:YES];
     NSError* error = nil;
     BTCTransaction* transaction;
@@ -1564,8 +1588,12 @@ typedef enum : NSUInteger {
     if (!transaction) {
         NSLog(@"Can't make a transaction: %@", error);
     }
+    if (![self.btcPrompt isEqualToString:@""]) {
+        [TLAlert alertWithInfo:self.btcPrompt];
+        return;
+    }
+
     self.signTx = BTCHexFromData([transaction data]);
-    
     
     //    return;
     TLNetworking *net = [TLNetworking new];
@@ -1606,15 +1634,15 @@ typedef enum : NSUInteger {
     // 3. Take the smallest available outputs to combine into the inputs of new transaction
     // 4. Prepare the scripts with proper signatures for the inputs
     // 5. Broadcast the transaction
-    
+
     /// 1。获取私钥、目标地址、更改地址和金额
-    
+
     // 2。获取该键的未使用的输出(使用压缩和非压缩pubkey)
-    
+
     // 3。将最小的可用输出合并到新事务的输入中
-    
+
     // 4。为输入准备带有适当签名的脚本
-    
+
     // 5。广播事务
     //    BTCKey* key = [[BTCKey alloc] initWithPrivateKey:privateKey];
     //
@@ -1622,7 +1650,7 @@ typedef enum : NSUInteger {
     //    NSLog(@"%d",net.isTestnet);
     NSError* error = nil;
     NSArray* utxos = self.utxis;
-    
+
     //    switch (btcApi) {
     //        case BTCAPIBlockchain: {
     //            BTCBlockchainInfo* bci = [[BTCBlockchainInfo alloc] init];
@@ -1637,23 +1665,14 @@ typedef enum : NSUInteger {
     //        default:
     //            break;
     //    }
-    
+
     NSLog(@"UTXOs for %@: %@ %@", self.key.privateKeyAddressTestnet, utxos, error);
-    
+
     if (!utxos) {
         *errorOut = error;
         return nil;
     }
-    
-    CoinModel *coin = [CoinUtil getCoinModel:@"BTC"];
-    
-    long long mount = [[CoinUtil convertToSysCoin:amount coin:coin.symbol] longLongValue];
-    
-    
-    BTCAmount totalAmount = mount ;
-    BTCAmount dustThreshold = 100000; // don't want less than 1mBTC in the change.
-    
-    
+
     //通过从最低的一个扫描找到最大的txout数。
     NSMutableArray *arr = [NSMutableArray array];
     for (int i = 0; i < self.utxis.count; i++) {
@@ -1662,135 +1681,158 @@ typedef enum : NSUInteger {
         newut.count = [CoinUtil convertToRealCoin:self.utxis[i].count coin:@"BTC"];
         [arr addObject:newut];
     }
-    //    utxos = [arr sortedArrayUsingComparator:^(utxoModel* obj1, utxoModel* obj2) {
-    //        if (([obj1.count floatValue] - [obj2.count floatValue]) < 0) return NSOrderedAscending;
-    //        else return NSOrderedDescending;
-    //    }];
-    
-    NSArray* txouts = nil;
-    
-    int intput = 0;
-    long long btcFree = 0;
-    for (utxoModel* txout in arr) {
-        intput ++;
-        BTCAmount a = [[CoinUtil convertToSysCoin:txout.count coin:@"BTC"] longLongValue];
-        //                        convertToRealCoin:txout.count coin:@"BTC"] longLongValue];
-        
-        if ( a > (totalAmount + dustThreshold)) {
-            btcFree = (148 * intput + 34 * 1 + 10) * [fee intValue];
-            if (a > (totalAmount + dustThreshold) +btcFree) {
-                btcFree = (148 * intput + 34 * 2 + 10) * [fee intValue];
-                
+
+    CoinModel *coin = [CoinUtil getCoinModel:@"BTC"];
+
+    long long mount = [[CoinUtil convertToSysCoin:amount coin:coin.symbol] longLongValue];
+
+    BTCAmount btcValue = mount;
+
+    BTCAmount sumIntputValue = 0;//Intput总额
+    int sumIntputCount = 0;//Intput总个数
+    BOOL isChange = NO;//是否需要找零
+    BTCAmount changeValue = 0;//找零金额
+    long long btcFree = 0;//手续费
+
+
+
+
+
+
+    NSMutableArray *IntputUtsos = [NSMutableArray array];
+
+
+
+
+
+
+    for (int i = 0; i < arr.count; i ++) {
+        utxoModel* txout = arr[i];
+        sumIntputCount ++;
+        sumIntputValue = sumIntputValue + [[CoinUtil convertToSysCoin:txout.count coin:@"BTC"] longLongValue];
+        [IntputUtsos addObject:txout];
+
+        btcFree = (148 * sumIntputCount + 34 * 1 + 10) * [fee intValue];
+        //       Intput总额 大于手续费+转账金额
+        if (sumIntputValue >= (btcValue + btcFree)) {
+            //       Intput总额 大于   手续费、找零手续费 + 转账金额
+            if (sumIntputValue > (btcValue + (148 * sumIntputCount + 34 * 2 + 10) * [fee intValue]))
+            {
+                btcFree = (148 * sumIntputCount + 34 * 2 + 10) * [fee intValue];
+                isChange = YES;
+                changeValue = sumIntputValue - btcValue - (148 * sumIntputCount + 34 * 2 + 10) * [fee intValue];
             }
-            txouts = @[ txout ];
             break;
         }
     }
-    
-    
-    //计算手续费
-    
+
     // We support spending just one output for now. 我们目前只支持支出一项产出。
-    
-    
-    
-    
-    if (!txouts) return nil;
-    
+    if (btcValue > sumIntputValue + btcFree) {
+        self.btcPrompt = [LangSwitcher switchLang:@"余额不足" key:nil];
+    }
+
+
+
+
+
+    if (!IntputUtsos) return nil;
+
     // Create a new transaction
     BTCTransaction* tx = [[BTCTransaction alloc] init];
-    
+
     BTCAmount spentCoins = 0;
-    
+
     // Add all outputs as inputs
-    for (utxoModel* txout in txouts) {
+    for (utxoModel* txout in IntputUtsos) {
         BTCTransactionInput* txin = [[BTCTransactionInput alloc] init];
         txin.previousHash =  BTCHashFromID(txout.txid);
         txin.previousIndex = [txout.vout intValue];
         [tx addInput:txin];
-        
+
         NSLog(@"txhash: http://blockchain.info/rawtx/%@", BTCHexFromData(txin.previousHash));
         NSLog(@"txhash: http://blockchain.info/rawtx/%@ (reversed)", BTCHexFromData(BTCReversedData([txout.scriptPubKey dataUsingEncoding:NSUTF8StringEncoding])));
-        
+
         spentCoins +=  [[CoinUtil convertToSysCoin:txout.count coin:@"BTC"] longLongValue];
     }
-    
+
     NSLog(@"Total satoshis to spend:       %lld", spentCoins);
     NSLog(@"Total satoshis to destination: %lld", mount);
     NSLog(@"Total satoshis to fee:         %lld", btcFree);
     NSLog(@"Total satoshis to change:      %lld", (spentCoins - (mount + btcFree)));
-    
+
     // Add required outputs - payment and change
     BTCTransactionOutput* paymentOutput = [[BTCTransactionOutput alloc] initWithValue:mount address:destinationAddress];
-    BTCTransactionOutput* changeOutput = [[BTCTransactionOutput alloc] initWithValue:(spentCoins - (mount + btcFree)) address:changeAddress];
-    
-    // Idea: deterministically-randomly choose which output goes first to improve privacy.//想法:确定随机选择哪个输出优先用于提高隐私。
-    
-    
     [tx addOutput:paymentOutput];
-    [tx addOutput:changeOutput];
-    
-    
+
+    if (isChange == YES) {
+        BTCTransactionOutput *changeOutput = [[BTCTransactionOutput alloc] initWithValue:(changeValue) address:changeAddress];
+        [tx addOutput:changeOutput];
+    }
+    // Idea: deterministically-randomly choose which output goes first to improve privacy.//想法:确定随机选择哪个输出优先用于提高隐私。
+
+
+
+
     // Sign all inputs. We now have both inputs and outputs defined, so we can sign the transaction. / /所有输入信号。现在我们已经定义了输入和输出，因此可以对事务进行签名。
-    
-    
-    for (int i = 0; i < txouts.count; i++) {
+
+
+    for (int i = 0; i < IntputUtsos.count; i++) {
         // Normally, we have to find proper keys to sign this txin, but in this 通常情况下，我们需要找到合适的钥匙来签这个txin，example we already know that we use a single private key.但是在这个例我们已经知道我们使用的是一个私钥。
-        
-        
-        utxoModel* txout = txouts[i]; // output from a previous tx which is referenced by this txin. 此txin引用的前一个tx的输出。
-        
-        
+
+
+        utxoModel* txout = IntputUtsos[i]; // output from a previous tx which is referenced by this txin. 此txin引用的前一个tx的输出。
+
+
         BTCTransactionInput* txin = tx.inputs[i];
-        
+
         BTCScript* sigScript = [[BTCScript alloc] init];
-        
-        
+
+
         NSData* d1 = tx.data;
-        
+
         BTCSignatureHashType hashtype = BTCSignatureHashTypeAll;
         BTCScript *sc = [[BTCScript alloc] initWithData:BTCDataFromHex(txout.scriptPubKey)];
         NSData* hash = [tx signatureHashForScript:sc inputIndex:i hashType:hashtype error:errorOut];
-        
+
         NSData* d2 = tx.data;
-        
+
         NSAssert([d1 isEqual:d2], @"Transaction must not change within signatureHashForScript!");
-        
+
         // 134675e153a5df1b8e0e0f0c45db0822f8f681a2eb83a0f3492ea8f220d4d3e4
         NSLog(@"Hash for input %d: %@", i, BTCHexFromData(hash));
         NSLog(@"pubKey: %@", BTCHexFromData(self.key.publicKey));
-        
+
         if (!hash) {
             return nil;
         }
-        
+
         NSData* signatureForScript = [self.key signatureForHash:hash hashType:hashtype];
         [sigScript appendData:signatureForScript];
         [sigScript appendData:self.key.publicKey];
-        
+
         NSData* sig = [signatureForScript subdataWithRange:NSMakeRange(0, signatureForScript.length - 1)]; // trim hashtype byte to check the signature.
         NSAssert([self.key isValidSignature:sig hash:hash], @"Signature must be valid");
-        
+
         txin.signatureScript = sigScript;
     }
-    
+
     //     Validate the signatures before returning for extra measure. 在返回额外度量之前验证签名。
-    
-    
+
+
     {
         BTCScriptMachine* sm = [[BTCScriptMachine alloc] initWithTransaction:tx inputIndex:0];
         NSError* error = nil;
-        NSString *scriptPubKey = [[txouts objectAtIndex:0] scriptPubKey];
+        NSString *scriptPubKey = [[IntputUtsos objectAtIndex:0] scriptPubKey];
         BTCScript *script = [[BTCScript alloc] initWithData:BTCDataFromHex(scriptPubKey)];
         //        BTCScript *script = [[BTCScript alloc] initWithString:scriptPubKey];
         BOOL r = [sm verifyWithOutputScript:script error:&error];
         NSLog(@"Error: %@", error);
         NSAssert(r, @"should verify first output");
     }
-    
+
     //     Transaction is signed now, return it. 交易现已签署，返回
-    
-    
+
+
     return tx;
 }
 
