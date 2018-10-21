@@ -159,7 +159,6 @@
 		2E394FFD1FB059C100BA0829 /* TLBaseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E394FFA1FB059C100BA0829 /* TLBaseVC.m */; };
 		2E5F33A9202BF25F00B2F263 /* TLLeftRightView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E5F33A8202BF25F00B2F263 /* TLLeftRightView.m */; };
 		2EA2526E1FF09B52007FF9A2 /* CoinUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EA2526D1FF09B52007FF9A2 /* CoinUtil.m */; };
-		2EA584C11FA813C900C7106C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2EA584C01FA813C900C7106C /* Assets.xcassets */; };
 		2EA584C71FA813C900C7106C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EA584C61FA813C900C7106C /* main.m */; };
 		2EB039A71FE8B23300589D8E /* EditEmailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EB039A61FE8B23300589D8E /* EditEmailVC.m */; };
 		2EB039AD1FE8EDE300589D8E /* UserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EB039AC1FE8EDE300589D8E /* UserInfo.m */; };
@@ -269,6 +268,7 @@
 		7A3821C620EAD4EA00D6B636 /* SendModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A3821C520EAD4EA00D6B636 /* SendModel.m */; };
 		7A40B0FB2179C875004B9830 /* HomeTbleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A40B0FA2179C875004B9830 /* HomeTbleView.m */; };
 		7A40B0FF217B5B7E004B9830 /* BTCTransferModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A40B0FE217B5B7E004B9830 /* BTCTransferModel.m */; };
+		7A40B101217CAEA8004B9830 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7A40B100217CAEA6004B9830 /* Assets.xcassets */; };
 		7A8A5D1520EA076C002D9A48 /* RedEnvelopeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A8A5D1420EA076C002D9A48 /* RedEnvelopeVC.m */; };
 		7A8A5D1820EA0A23002D9A48 /* RedEnvelopeHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A8A5D1720EA0A23002D9A48 /* RedEnvelopeHeadView.m */; };
 		7A8A5D1B20EA131A002D9A48 /* SendRedEnvelopeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A8A5D1A20EA131A002D9A48 /* SendRedEnvelopeView.m */; };
@@ -859,7 +859,6 @@
 		2EA2526C1FF09B52007FF9A2 /* CoinUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoinUtil.h; sourceTree = "<group>"; };
 		2EA2526D1FF09B52007FF9A2 /* CoinUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoinUtil.m; sourceTree = "<group>"; };
 		2EA584B41FA813C900C7106C /* Coin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Coin.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		2EA584C01FA813C900C7106C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2EA584C51FA813C900C7106C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2EA584C61FA813C900C7106C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		2EB039A51FE8B23300589D8E /* EditEmailVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EditEmailVC.h; sourceTree = "<group>"; };
@@ -1068,6 +1067,7 @@
 		7A40B0FA2179C875004B9830 /* HomeTbleView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeTbleView.m; sourceTree = "<group>"; };
 		7A40B0FD217B5B7E004B9830 /* BTCTransferModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTCTransferModel.h; sourceTree = "<group>"; };
 		7A40B0FE217B5B7E004B9830 /* BTCTransferModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTCTransferModel.m; sourceTree = "<group>"; };
+		7A40B100217CAEA6004B9830 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7A8A5D1320EA076C002D9A48 /* RedEnvelopeVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RedEnvelopeVC.h; sourceTree = "<group>"; };
 		7A8A5D1420EA076C002D9A48 /* RedEnvelopeVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RedEnvelopeVC.m; sourceTree = "<group>"; };
 		7A8A5D1620EA0A23002D9A48 /* RedEnvelopeHeadView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RedEnvelopeHeadView.h; sourceTree = "<group>"; };
@@ -2980,7 +2980,7 @@
 				215421CF1FD708AC00FDD25C /* Coin.entitlements */,
 				216F5AEE206CC6F600F2C832 /* AppDelegate */,
 				2E394FA31FB0546E00BA0829 /* Classes */,
-				2EA584C01FA813C900C7106C /* Assets.xcassets */,
+				7A40B100217CAEA6004B9830 /* Assets.xcassets */,
 				2EA584C51FA813C900C7106C /* Info.plist */,
 				B8DAD14920E2208B00AF4CD4 /* InfoPlist.strings */,
 				2EE361351FFB7D4500A5C3EB /* README.md */,
@@ -4325,12 +4325,12 @@
 				2EFFE6AA1FF4829100BFCC40 /* Localizable.strings in Resources */,
 				7A272663212BFFA70067E3CD /* read_me.txt in Resources */,
 				7A2CC6D4215DC89200B27E2D /* LICENSE in Resources */,
-				2EA584C11FA813C900C7106C /* Assets.xcassets in Resources */,
 				7AAF032B21526956008507FF /* yw_1222_0335.jpg in Resources */,
 				2EB9495B1FDF6B1A00CE4B94 /* SimplifiedCode.txt in Resources */,
 				2EE361361FFB7D4500A5C3EB /* README.md in Resources */,
 				7AAF037C21526EC4008507FF /* MSADefaultImages.bundle in Resources */,
 				B8DAD14720E2208B00AF4CD4 /* InfoPlist.strings in Resources */,
+				7A40B101217CAEA8004B9830 /* Assets.xcassets in Resources */,
 				2EB9495C1FDF6B1A00CE4B94 /* TraditionalCode.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
