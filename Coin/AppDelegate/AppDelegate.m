@@ -73,9 +73,9 @@
 //    研发
 //    [AppConfig config].runEnv = RunEnvDev;
 //    测试
-//    [AppConfig config].runEnv = RunEnvTest;
+    [AppConfig config].runEnv = RunEnvTest;
 //    正式
-    [AppConfig config].runEnv = RunEnvRelease;
+//    [AppConfig config].runEnv = RunEnvRelease;
 
 
     [AppConfig config].isChecking = NO;
