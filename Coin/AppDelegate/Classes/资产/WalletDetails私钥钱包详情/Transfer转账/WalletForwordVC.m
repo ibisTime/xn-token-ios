@@ -406,21 +406,6 @@ typedef enum : NSUInteger {
     NSError* error = nil;
     NSArray* utxos = self.utxis;
     
-//    switch (btcApi) {
-//        case BTCAPIBlockchain: {
-//            BTCBlockchainInfo* bci = [[BTCBlockchainInfo alloc] init];
-//            utxos = [bci unspentOutputsWithAddresses:@[ key.compressedPublicKeyAddress ] error:&error];
-//            break;
-//        }
-//        case BTCAPIChain: {
-//            BTCChainCom* chain = [[BTCChainCom alloc] initWithToken:@"Free API Token form chain.com"];
-//            utxos = [chain unspentOutputsWithAddress:key.compressedPublicKeyAddress error:&error];
-//            break;
-//        }
-//        default:
-//            break;
-//    }
-    
     NSLog(@"UTXOs for %@: %@ %@", self.key.privateKeyAddressTestnet, utxos, error);
     
     if (!utxos) {
@@ -449,18 +434,7 @@ typedef enum : NSUInteger {
     BTCAmount changeValue = 0;//找零金额
     long long btcFree = 0;//手续费
 
-
-    
-
-
-    
     NSMutableArray *IntputUtsos = [NSMutableArray array];
-    
-
-
-
-
-
     for (int i = 0; i < arr.count; i ++) {
         utxoModel* txout = arr[i];
         sumIntputCount ++;

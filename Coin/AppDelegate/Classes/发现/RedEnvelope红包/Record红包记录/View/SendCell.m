@@ -75,7 +75,7 @@
     
     CoinModel *coin = [CoinUtil getCoinModel:sendModel.symbol];
     [sysmbolImage sd_setImageWithURL:[NSURL URLWithString:[coin.pic1 convertImageUrl ] ] placeholderImage:kImage(@"头像")];
-    //    [headImage sd_setImageWithURL:[NSURL URLWithString:[sendModel.sendUserPhoto convertImageUrl]] placeholderImage:kImage(@"普通红包")];
+
     if (self.isClose == YES) {
           priceLabel.text = [NSString stringWithFormat:@"**** %@",[LangSwitcher switchLang:@"枚" key:nil]];
     }else{
@@ -88,6 +88,6 @@
   
     TheValueLabel.text = [NSString stringWithFormat:@"%@/%@个",sendModel.receivedNum,sendModel.sendNum];
     [TheValueLabel sizeToFit];
-    TheValueLabel.frame = CGRectMake(SCREEN_WIDTH - TheValueLabel.frame.size.width - 15 - 5 - 40, 38, TheValueLabel.frame.size.width , 14);
+    TheValueLabel.frame = CGRectMake(SCREEN_WIDTH - TheValueLabel.frame.size.width - 15, 38, TheValueLabel.frame.size.width , 14);
 }
 @end
