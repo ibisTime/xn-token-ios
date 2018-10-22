@@ -570,6 +570,7 @@
 //            私钥1
             WalletLocalVc *accountVC= [[WalletLocalVc alloc] init];
             accountVC.currency = weakSelf.localCurrencys[inter];
+
             accountVC.billType = LocalTypeAll;
             [weakSelf.navigationController pushViewController:accountVC animated:YES];
         }

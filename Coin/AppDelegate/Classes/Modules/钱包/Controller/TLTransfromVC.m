@@ -35,7 +35,11 @@ typedef enum : NSUInteger {
     BTCAPIChain,
     BTCAPIBlockchain,
 } BTCAPI;
-@interface TLTransfromVC ()<THTranstionCollectionViewDelegate>
+@interface TLTransfromVC ()<THTranstionCollectionViewDelegate,UITableViewDelegate>
+{
+    BOOL isHaveDian;
+    NSString *symbolblance;
+}
 @property (nonatomic ,strong) TLPlaceholderView *placeholderView;
 @property (nonatomic ,strong) THTranstionCollectionView *nineView;
 @property (nonatomic ,strong) UIView *whiteView;
@@ -444,6 +448,7 @@ typedef enum : NSUInteger {
     self.inputFiled.layer.cornerRadius = 3;
     self.inputFiled.layer.borderWidth = 1;
     self.inputFiled.layer.borderColor = kLineColor.CGColor;
+    self.inputFiled.delegate = self;
     self.inputFiled.keyboardType = UIKeyboardTypeDecimalPad;
 
 
@@ -636,6 +641,51 @@ typedef enum : NSUInteger {
 
 
 }
+
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+
+    if ([textField.text rangeOfString:@"."].location==NSNotFound) {
+        isHaveDian=NO;
+    }
+    if ([string length]>0)
+    {
+        unichar single=[string characterAtIndex:0];//当前输入的字符
+        if ((single >='0' && single<='9') || single=='.')//数据格式正确
+        {
+            if([textField.text length]==0){
+                if(single == '.'){
+                    [textField.text stringByReplacingCharactersInRange:range withString:@""];
+                    return NO;
+                }
+            }
+            if (single=='.')
+            {
+                if(!isHaveDian)//text中还没有小数点
+                {
+                    isHaveDian=YES;
+                    return YES;
+                }else
+                {
+
+                    [textField.text stringByReplacingCharactersInRange:range withString:@""];
+                    return NO;
+                }
+            }
+
+            return YES;
+        }else{
+            [textField.text stringByReplacingCharactersInRange:range withString:@""];
+            return NO;
+        }
+    }
+    else
+    {
+        return YES;
+    }
+
+
+}
+
 
 - (void)valueChange:(id) sender
 {
@@ -978,6 +1028,7 @@ typedef enum : NSUInteger {
                     self.slider.maximumValue = [self.priceFast floatValue];
                     self.slider.minimumValue = [self.priceSlow floatValue];
                     self.slider.value = ([self.priceFast floatValue] + [self.priceSlow floatValue])/2;
+                    self.btcPrice = ([self.priceFast floatValue] + [self.priceSlow floatValue])/2;
 
                     [self valueChange:self.slider];
                     [MBProgressHUD hideHUDForView:self.view animated:YES];
@@ -1099,6 +1150,7 @@ typedef enum : NSUInteger {
                     self.slider.maximumValue = [self.priceFast floatValue];
                     self.slider.minimumValue = [self.priceSlow floatValue];
                     self.slider.value = ([self.priceFast floatValue] + [self.priceSlow floatValue])/2;
+                    self.btcPrice = ([self.priceFast floatValue] + [self.priceSlow floatValue])/2;
                     [self valueChange:self.slider];
 
                     NSString *money = [CoinUtil convertToRealCoin:self.localcurrencys[indexPath.row].balance coin:self.currencys[indexPath.row].symbol];
@@ -1245,6 +1297,7 @@ typedef enum : NSUInteger {
         NSString *text =  [CoinUtil convertToRealCoin:blance coin:@"BTC"];
 
         self.symbolBlance.text = [NSString stringWithFormat:@"%.8f %@",[text floatValue],self.currentModel.symbol];
+        symbolblance = text;
         NSLog(@"%@",responseObject);
 
         self.utxis = [utxoModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"][@"utxoList"]];
@@ -1308,6 +1361,8 @@ typedef enum : NSUInteger {
     NSString *gaspic =  [CoinUtil convertToSysCoin:self.inputFiled.text coin:self.currentModel.symbol];
     ;
     [dataBase.dataBase close];
+
+
     [TLAlert alertWithTitle:[LangSwitcher switchLang:@"请输入交易密码" key:nil]
                         msg:@""
                  confirmMsg:[LangSwitcher switchLang:@"确定" key:nil]
@@ -1514,6 +1569,7 @@ typedef enum : NSUInteger {
     // Dispose of any resources that can be recreated.
 }
 
+
 - (void) testSpendCoins:(NSString *)to : (NSString*)count :(NSString*)free {
     // For safety I'm not putting a private key in the source code, but copy-paste here from Keychain on each run.为了安全起见，我没有在源代码中放入私钥，而是在每次运行时从Keychain复制粘贴过来。
     TLDataBase *dataBase = [TLDataBase sharedManager];
@@ -1673,14 +1729,15 @@ typedef enum : NSUInteger {
         return nil;
     }
 
+
     //通过从最低的一个扫描找到最大的txout数。
-    NSMutableArray *arr = [NSMutableArray array];
-    for (int i = 0; i < self.utxis.count; i++) {
-        utxoModel *newut = [utxoModel new];
-        newut = self.utxis[i];
-        newut.count = [CoinUtil convertToRealCoin:self.utxis[i].count coin:@"BTC"];
-        [arr addObject:newut];
-    }
+    //    NSMutableArray *arr = [NSMutableArray array];
+    //    for (int i = 0; i < self.utxis.count; i++) {
+    //        utxoModel *newut = [utxoModel new];
+    //        newut = self.utxis[i];
+    //        newut.count = [CoinUtil convertToRealCoin:self.utxis[i].count coin:@"BTC"];
+    //        [arr addObject:newut];
+    //    }
 
     CoinModel *coin = [CoinUtil getCoinModel:@"BTC"];
 
@@ -1700,16 +1757,13 @@ typedef enum : NSUInteger {
 
 
     NSMutableArray *IntputUtsos = [NSMutableArray array];
-
-
-
-
-
-
-    for (int i = 0; i < arr.count; i ++) {
-        utxoModel* txout = arr[i];
+    for (int i = 0; i < self.utxis.count; i ++) {
+        utxoModel* txout = self.utxis[i];
         sumIntputCount ++;
-        sumIntputValue = sumIntputValue + [[CoinUtil convertToSysCoin:txout.count coin:@"BTC"] longLongValue];
+
+        NSString *txoutCount = [CoinUtil convertToRealCoin:txout.count coin:@"BTC"];
+        sumIntputValue = sumIntputValue + [[CoinUtil convertToSysCoin:txoutCount coin:@"BTC"] longLongValue];
+
         [IntputUtsos addObject:txout];
 
         btcFree = (148 * sumIntputCount + 34 * 1 + 10) * [fee intValue];
@@ -1727,15 +1781,13 @@ typedef enum : NSUInteger {
     }
 
     // We support spending just one output for now. 我们目前只支持支出一项产出。
-    if (btcValue > sumIntputValue + btcFree) {
+    if (btcValue + btcFree > sumIntputValue) {
         self.btcPrompt = [LangSwitcher switchLang:@"余额不足" key:nil];
     }
-
-
-
-
-
-    if (!IntputUtsos) return nil;
+    if (!IntputUtsos)
+    {
+        return nil;
+    }
 
     // Create a new transaction
     BTCTransaction* tx = [[BTCTransaction alloc] init];

@@ -50,7 +50,11 @@ typedef enum : NSUInteger {
     BTCAPIChain,
     BTCAPIBlockchain,
 } BTCAPI;
-@interface WalletForwordVC ()
+@interface WalletForwordVC ()<UITextFieldDelegate>
+{
+    BOOL isHaveDian;
+    NSString *symbolblance;
+}
 //可用余额
 @property (nonatomic, strong) TLTextField *balanceTF;
 //接收地址
@@ -104,7 +108,7 @@ typedef enum : NSUInteger {
 
 @property (nonatomic, copy) NSString *priceSlow ;
 @property (nonatomic, copy) NSString *priceFast;
-@property (nonatomic, assign) NSInteger btcPrice;
+@property (nonatomic, assign)CGFloat btcPrice;
 
 @property (nonatomic, strong) BTCKey *key;
 
@@ -230,7 +234,7 @@ typedef enum : NSUInteger {
         //
         //        NSString *leftAmount = [blance subNumber:currentCoin.withdrawFeeString];
         NSString *text =  [CoinUtil convertToRealCoin:blance coin:@"BTC"];
-
+        symbolblance = text;
         self.symbolBlance.text = [NSString stringWithFormat:@"%.8f %@",[text floatValue],self.currency.symbol];
         NSLog(@"%@",responseObject);
 
@@ -313,6 +317,10 @@ typedef enum : NSUInteger {
     //        return;
     //    }
     self.btcPrompt = @"";
+//    if (destinationAddress == nil) {
+//        self.btcPrompt = [LangSwitcher switchLang:@"请输入正确地址" key:nil];
+//        return nil;
+//    }
     [MBProgressHUD hideHUDForView:self.view animated:YES];
     NSError* error = nil;
     BTCTransaction* transaction;
@@ -428,14 +436,17 @@ typedef enum : NSUInteger {
         return nil;
     }
 
+
+
+
     //通过从最低的一个扫描找到最大的txout数。
-    NSMutableArray *arr = [NSMutableArray array];
-    for (int i = 0; i < self.utxis.count; i++) {
-        utxoModel *newut = [utxoModel new];
-        newut = self.utxis[i];
-        newut.count = [CoinUtil convertToRealCoin:self.utxis[i].count coin:@"BTC"];
-        [arr addObject:newut];
-    }
+//    NSMutableArray *arr = [NSMutableArray array];
+//    for (int i = 0; i < self.utxis.count; i++) {
+//        utxoModel *newut = [utxoModel new];
+//        newut = self.utxis[i];
+//        newut.count = [CoinUtil convertToRealCoin:self.utxis[i].count coin:@"BTC"];
+//        [arr addObject:newut];
+//    }
 
     CoinModel *coin = [CoinUtil getCoinModel:@"BTC"];
 
@@ -455,16 +466,13 @@ typedef enum : NSUInteger {
 
 
     NSMutableArray *IntputUtsos = [NSMutableArray array];
-
-
-
-
-
-
-    for (int i = 0; i < arr.count; i ++) {
-        utxoModel* txout = arr[i];
+    for (int i = 0; i < self.utxis.count; i ++) {
+        utxoModel* txout = self.utxis[i];
         sumIntputCount ++;
-        sumIntputValue = sumIntputValue + [[CoinUtil convertToSysCoin:txout.count coin:@"BTC"] longLongValue];
+
+        NSString *txoutCount = [CoinUtil convertToRealCoin:txout.count coin:@"BTC"];
+        sumIntputValue = sumIntputValue + [[CoinUtil convertToSysCoin:txoutCount coin:@"BTC"] longLongValue];
+
         [IntputUtsos addObject:txout];
 
         btcFree = (148 * sumIntputCount + 34 * 1 + 10) * [fee intValue];
@@ -482,15 +490,14 @@ typedef enum : NSUInteger {
     }
 
     // We support spending just one output for now. 我们目前只支持支出一项产出。
-    if (btcValue > sumIntputValue + btcFree) {
+    if (btcValue + btcFree > sumIntputValue) {
         self.btcPrompt = [LangSwitcher switchLang:@"余额不足" key:nil];
     }
 
-
-
-
-
-    if (!IntputUtsos) return nil;
+    if (!IntputUtsos)
+    {
+        return nil;
+    }
 
     // Create a new transaction
     BTCTransaction* tx = [[BTCTransaction alloc] init];
@@ -629,7 +636,7 @@ typedef enum : NSUInteger {
                     self.slider.value = ([self.priceFast floatValue] + [self.priceSlow floatValue])/2;
 
                     NSString *price = [NSString stringWithFormat:@"%d",f];
-                    self.btcPrice = f;
+                    self.btcPrice = ([self.priceFast floatValue] + [self.priceSlow floatValue])/2;
                     self.tempPrice = pricr;
                     self.pricr = pricr;
                     NSLog(@"%@low@,fast%@",priceSlow,priceFast);
@@ -920,7 +927,8 @@ typedef enum : NSUInteger {
                                                 titleWidth:80
                                                placeholder:[LangSwitcher switchLang:@"请填写付币数量" key:nil]
                          ];
-
+    self.tranAmountTF.isSecurity = YES;
+    self.tranAmountTF.delegate = self;
     [self.tranAmountTF setValue:kPlaceholderColor forKeyPath:@"_placeholderLabel.textColor"];
 
     self.tranAmountTF.keyboardType = UIKeyboardTypeDecimalPad;
@@ -1033,6 +1041,52 @@ typedef enum : NSUInteger {
 }
 
 
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+
+    if ([textField.text rangeOfString:@"."].location==NSNotFound) {
+        isHaveDian=NO;
+    }
+    if ([string length]>0)
+    {
+        unichar single=[string characterAtIndex:0];//当前输入的字符
+        if ((single >='0' && single<='9') || single=='.')//数据格式正确
+        {
+            if([textField.text length]==0){
+                if(single == '.'){
+                    [textField.text stringByReplacingCharactersInRange:range withString:@""];
+                    return NO;
+                }
+            }
+            if (single=='.')
+            {
+                if(!isHaveDian)//text中还没有小数点
+                {
+                    isHaveDian=YES;
+                    return YES;
+                }else
+                {
+
+                    [textField.text stringByReplacingCharactersInRange:range withString:@""];
+                    return NO;
+                }
+            }
+
+            return YES;
+        }else{
+            [textField.text stringByReplacingCharactersInRange:range withString:@""];
+            return NO;
+        }
+    }
+    else
+    {
+        return YES;
+    }
+
+
+}
+
+
+
 - (void)valueChange:(id) sender
 {
 
@@ -1050,7 +1104,7 @@ typedef enum : NSUInteger {
 
         if ([self.currency.symbol isEqualToString:@"BTC"]) {
             self.blanceFree.text = [NSString stringWithFormat:@"%@ %@",[NSString stringWithFormat:@"%.1f",slider.value],@"sat/b"];
-            self.btcPrice = [self.priceSlow integerValue];
+            self.btcPrice = slider.value;
             return;
         }else
         {
@@ -1268,6 +1322,42 @@ typedef enum : NSUInteger {
         return ;
     }
 
+    if ([self.currency.type isEqualToString:@"0"]) {
+        if ([self.currency.symbol isEqualToString:@"BTC"]) {
+            self.btcPrompt = @"";
+            if ([self.balanceTF.text isEqualToString:self.btcAddress]) {
+                [TLAlert alertWithInfo:[LangSwitcher switchLang:@"转入和转出地址不能相同" key:nil]];
+//                [TLAlert alertWithMsg:@"转入和转出地址不能相同"];
+//                [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入正确地址" key:nil]];
+                return;
+            }
+            if ([self.tranAmountTF.text floatValue] >= [symbolblance floatValue]) {
+                [TLAlert alertWithInfo:[LangSwitcher switchLang:@"余额不足" key:nil]];
+                return;
+            }
+
+
+            if ([AppConfig config].runEnv == 0) {
+                BTCPublicKeyAddress *ADDRESS = [BTCPublicKeyAddress addressWithString:self.balanceTF.text];
+                if (ADDRESS == nil) {
+                    [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入正确地址" key:nil]];
+                    return;
+                }
+            }
+            else
+            {
+                BTCPublicKeyAddress *ADDRESS = [BTCPublicKeyAddressTestnet addressWithString:self.balanceTF.text];
+                if (ADDRESS == nil) {
+                    [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入正确地址" key:nil]];
+                    return;
+                }
+            }
+
+        }
+        
+
+    }
+
     CGFloat amount = [self.tranAmountTF.text doubleValue];
 
     if (amount <= 0 || [self.tranAmountTF.text isBlank]) {
@@ -1335,13 +1425,10 @@ typedef enum : NSUInteger {
 
                                           //btc
 
-                                          if ([self.balanceTF.text isEqualToString:self.btcAddress]) {
-                                              [TLAlert alertWithMsg:@"转入和转出地址不能相同"];
-                                              return ;
-                                          }
 
 
-                                          [self testSpendCoins:self.balanceTF.text :self.tranAmountTF.text :[NSString stringWithFormat:@"%ld",self.btcPrice]];
+
+                                          [self testSpendCoins:self.balanceTF.text :self.tranAmountTF.text :[NSString stringWithFormat:@"%.1f",self.btcPrice]];
                                           return ;
                                       }
                                   }else{

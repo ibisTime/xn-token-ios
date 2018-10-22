@@ -24,6 +24,7 @@
 @property (nonatomic ,copy) NSString *addr;
 
 @property (nonatomic ,copy) NSString *valueSat;
+//@property (nonatomic ,copy) NSString *valueSat;
 
 @property (nonatomic ,copy) NSString *value;
 

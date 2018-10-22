@@ -75,7 +75,7 @@
 //    NSString *money = [CoinUtil convertToRealCoin:utModel.value coin:@"BTC"];
     self.titleLbl.text = utModel.addr;
     
-    self.rightLabel.text = [NSString stringWithFormat:@"%@ BTC",utModel.value];
+    self.rightLabel.text = [NSString stringWithFormat:@"%@ BTC",[CoinUtil convertToRealCoin:utModel.valueSat coin:@"BTC"]];
     if ([self.address isEqualToString:utModel.addr]) {
         self.titleLbl.textColor = kAppCustomMainColor;
 

@@ -323,8 +323,8 @@ public class EthCrypto: NSObject
             
             let keystore = try! BIP32Keystore(mnemonics: mnemonic, password: "BANKEXFOUNDATION", mnemonicsPassword: "")
             
-            let web3Rinkeby = Web3.InfuraRinkebyWeb3()
-//                          let web3Rinkeby = Web3.InfuraMainnetWeb3()
+//            let web3Rinkeby = Web3.InfuraRinkebyWeb3()
+            let web3Rinkeby = Web3.InfuraMainnetWeb3()
             let keystoreManager = KeystoreManager.init([keystore!])
             web3Rinkeby.addKeystoreManager(keystoreManager)
             
