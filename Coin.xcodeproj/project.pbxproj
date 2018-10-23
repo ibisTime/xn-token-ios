@@ -2718,6 +2718,8 @@
 		21A7F2F31FB2E2F900FAA0A2 /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				2E394FFB1FB059C100BA0829 /* TLBaseVC.h */,
+				2E394FFA1FB059C100BA0829 /* TLBaseVC.m */,
 				21A7F2F41FB2E2F900FAA0A2 /* TLAccountBaseVC.h */,
 				21A7F2F51FB2E2F900FAA0A2 /* TLAccountBaseVC.m */,
 			);
@@ -2735,6 +2737,8 @@
 				21A7F3041FB2E2F900FAA0A2 /* UserDefaultsUtil.m */,
 				2EB039AB1FE8EDE300589D8E /* UserInfo.h */,
 				2EB039AC1FE8EDE300589D8E /* UserInfo.m */,
+				2E394FF81FB059C100BA0829 /* TLBaseModel.h */,
+				2E394FF91FB059C100BA0829 /* TLBaseModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2827,7 +2831,6 @@
 				216F5B1D206CD9D900F2C832 /* 发现 */,
 				2E394FAC1FB055DE00BA0829 /* 我的 */,
 				2E394FD11FB0568F00BA0829 /* Modules */,
-				2E394FF71FB0599D00BA0829 /* Expand */,
 				211DE63B1FB58B4B002FCF3D /* Utils */,
 			);
 			name = Classes;
@@ -2940,17 +2943,6 @@
 				B88D6C6E20EDF39F0043832C /* TLFastvc.m */,
 			);
 			path = Controller;
-			sourceTree = "<group>";
-		};
-		2E394FF71FB0599D00BA0829 /* Expand */ = {
-			isa = PBXGroup;
-			children = (
-				2E394FF81FB059C100BA0829 /* TLBaseModel.h */,
-				2E394FF91FB059C100BA0829 /* TLBaseModel.m */,
-				2E394FFB1FB059C100BA0829 /* TLBaseVC.h */,
-				2E394FFA1FB059C100BA0829 /* TLBaseVC.m */,
-			);
-			path = Expand;
 			sourceTree = "<group>";
 		};
 		2EA584AB1FA813C900C7106C = {
