@@ -14,15 +14,6 @@
 /**
  显示时动画弹框样式
  */
-//  @{@"title" : @"卡片式掉落动画(从左侧)", @"style" : @6},
-//@{@"title" : @"卡片式掉落动画(从右侧)", @"style" : @7},
-//@{@"title" : @"卡片式掉落动画(往顶部平滑消失)", @"style" : @8},
-//@{@"title" : @"从顶部掉落晃动动画", @"style" : @2},
-//@{@"title" : @"从底部掉落晃动动画", @"style" : @3},
-//@{@"title" : @"从左侧掉落晃动动画", @"style" : @4},
-//@{@"title" : @"从右侧掉落晃动动画", @"style" : @5},
-//@{@"title" : @"缩放动画", @"style" : @1},
-//@{@"title" : @"无动画", @"style" : @0}
 typedef NS_ENUM(NSInteger, ZJAnimationPopStyle) {
     ZJAnimationPopStyleNO = 0,               ///< 无动画
     ZJAnimationPopStyleScale,                ///< 缩放动画，先放大，后恢复至原大小
@@ -67,7 +58,7 @@ typedef NS_ENUM(NSInteger, ZJAnimationDismissStyle) {
 @property (nullable, nonatomic, copy) void(^popComplete)();
 /** 移除完成回调 */
 @property (nullable, nonatomic, copy) void(^dismissComplete)();
-@property (nonatomic , strong) UIImageView *headImage;
+
 /**
  通过自定义视图来构造弹框视图
  
@@ -82,7 +73,6 @@ typedef NS_ENUM(NSInteger, ZJAnimationDismissStyle) {
  */
 - (void)pop;
 
-- (void)pop : (UIView *)view;
 /**
  移除弹框
  */

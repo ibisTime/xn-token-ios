@@ -160,19 +160,11 @@
 - (void)setPlatform:(CurrencyModel *)platform {
     _platform = platform;
     
-    NSLog(@"---------%@",platform);
-    //    self.coinIV.image = kImage(_currency.getImgName);
-    
+    NSLog(@"---------%@",platform);    
     CoinModel *coin = [CoinUtil getCoinModel:platform.currency];
     
     [self.presentImage sd_setImageWithURL:[NSURL URLWithString:[coin.pic1 convertImageUrl]]];
-    
-//    self.presentImage.image = [UIImage imageNamed:[platform.currency lowercaseString]];
-    
-//    platform.bgColor = kThemeColor;
-    //币种名称
-//    self.currencyNameLbl.text = [platform.symbol uppercaseString];
-//    self.presentImage.hidden = [platform.isWarn isEqualToString:@"0"];
+
    self.currencyNameLbl.text = platform.currency;
     
      NSString *leftAmount = [CoinUtil convertToRealCoin:platform.amountString coin:coin.symbol];
@@ -195,57 +187,8 @@
 
     }
     
-    //对应币种价格
-//    CGFloat t = [platform.amountString doubleValue]/1000000000000000000;
-    self.opppsitePriceLbl.text = [NSString stringWithFormat:@"%.8f",[ritAmount doubleValue]];;
 
-    //人民币价格
-   
-
-  
-
-    
-}
-
-- (void)setCurrency:(CurrencyModel *)currency {
-    
-    currency = currency;
-    
-    //币种名称
-//    self.currencyNameLbl.text = currency.coinSymbol;
-//    //一日交易量
-//    NSString *volumeStr = currency.volume;
-//    self.tradeVolumeLbl.text = [NSString stringWithFormat:@"%@ 量%@", currency.toCoinSymbol,volumeStr];
-    
-    //对应币种价格
-//    self.opppsitePriceLbl.text = [NSString stringWithFormat:@"%@", currency.lastPrice];
-//
-//    //人民币价格
-//    self.rmbPriceLbl.text = [NSString stringWithFormat:@"￥%@", currency.lastCnyPrice];
-//    self.rmbPriceLbl.textColor = currency.bgColor;
-//
-//    //涨跌情况
-//    NSString *priceFluctStr = currency.changeRate;
-//    CGFloat fluct = [priceFluctStr doubleValue];
-//
-//    if (fluct > 0) {
-//
-//        priceFluctStr = [NSString stringWithFormat:@"+%@%%", priceFluctStr];
-//
-//    } else  {
-//
-//        priceFluctStr = [NSString stringWithFormat:@"%@%%", priceFluctStr];
-//    }
-//
-//    [self.priceFluctBtn setTitle:priceFluctStr forState:UIControlStateNormal];
-//    [self.priceFluctBtn setBackgroundColor:currency.bgColor forState:UIControlStateNormal];
-//
-//    CGFloat btnW = [NSString getWidthWithString:priceFluctStr font:16.0] + 15;
-//    [self.priceFluctBtn mas_updateConstraints:^(MASConstraintMaker *make) {
-//
-//        make.width.equalTo(@(btnW > 75 ? btnW: 75));
-//    }];
-    
+    self.opppsitePriceLbl.text = [NSString stringWithFormat:@"%.8f",[ritAmount doubleValue]];
 }
 
 @end

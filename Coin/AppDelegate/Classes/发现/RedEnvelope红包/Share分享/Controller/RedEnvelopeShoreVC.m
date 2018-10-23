@@ -31,14 +31,10 @@
 -(InvitationView *)invitationView
 {
     if (!_invitationView) {
-        _invitationView = [[InvitationView alloc]initWithFrame:CGRectMake(kScreenWidth/3, SCREEN_HEIGHT, SCREEN_WIDTH - 60, SCREEN_WIDTH + 40)];
+        _invitationView = [[InvitationView alloc]initWithFrame: CGRectMake(kScreenWidth/2 - 86.5 - kWidth(20), kHeight(150), 173,173+60)];
         _invitationView.backgroundColor = kHexColor(@"#8F000000");
         _invitationView.layer.masksToBounds = YES;
         _invitationView.layer.cornerRadius = 10;
-        CoinWeakSelf;
-        _invitationView.codeblock = ^{
-          
-        };
     }
     return _invitationView;
 }
@@ -49,6 +45,7 @@
     self.view.backgroundColor = kWhiteColor;
     //kHexColor(@"#777777")
     [self getShareUrl];
+
     UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(kScreenWidth/2-75, kStatusBarHeight+5, 150, 44)];
     label.text = [LangSwitcher switchLang:@"Theia红包" key:nil];
     label.textColor = kTextBlack;
@@ -82,21 +79,8 @@
             [self.navigationController pushViewController:vc animated:YES];
         }
 
-//        UINavigationController * navigation = [[UINavigationController alloc]initWithRootViewController:vc];
-//        vc.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-//        vc.modalPresentationStyle = UIModalTransitionStyleFlipHorizontal;
-//        [self presentViewController:navigation animated:NO completion:nil];
-//        MySugarPacketsVC *vc = [[MySugarPacketsVC alloc]init];
-//        UINavigationController * navigation = [[UINavigationController alloc]initWithRootViewController:vc];
-//        vc.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-//        vc.modalPresentationStyle = UIModalTransitionStyleFlipHorizontal;
-//        [self presentViewController:navigation animated:NO completion:nil];
     };
-//    [shoreView addSubview:self.backbButton];
 
-//    shoreView.content = self.content;
-//    shoreView.detailedLabel.text = self.content;
-    [shoreView.shoreButton addTarget:self action:@selector(shoreButtonClick) forControlEvents:(UIControlEventTouchUpInside)];
     [self.view addSubview:shoreView];
 
     RedEnvelopeHeadView *headView = [[RedEnvelopeHeadView alloc]initWithFrame:CGRectMake(0, kStatusBarHeight+55, SCREEN_WIDTH, 44)];
@@ -105,7 +89,7 @@
     headView.delegate = self;
     [shoreView addSubview:headView];
 
-    [self.view addSubview:self.invitationView];
+    [self.shoreVie.backImg addSubview:self.invitationView];
    
     
 }
@@ -118,24 +102,11 @@
         {
             
             UIGraphicsBeginImageContextWithOptions(self.shoreVie.backImg.bounds.size, NO, [[UIScreen mainScreen] scale]);
-//            UIGraphicsBeginImageContextWithOptions(self.shoreVie.backImg.bounds.size), NO, [self.shoreVie.backImg scale]);
             [self.shoreVie.backImg.layer renderInContext:UIGraphicsGetCurrentContext()];
             UIImage *viewImage = UIGraphicsGetImageFromCurrentImageContext();
             UIGraphicsEndImageContext();
             [TLWXManager wxShareImgWith:@"" scene:0 desc:nil image:viewImage];
-//            [[TLWXManager manager] setWxShare:^(BOOL isSuccess, int errorCode) {
-//
-//                if (isSuccess) {
-//
-//                    [TLAlert alertWithInfo:@"分享成功"];
-//
-//                } else {
-//
-//                    [TLAlert alertWithInfo:@"分享失败"];
-//
-//                }
-//
-//            }];
+
             
         }
             break;
@@ -146,19 +117,7 @@
             UIImage *viewImage = UIGraphicsGetImageFromCurrentImageContext();
             UIGraphicsEndImageContext();
             [TLWXManager wxShareImgWith:@"" scene:1 desc:nil image:viewImage];
-//            [[TLWXManager manager] setWxShare:^(BOOL isSuccess, int errorCode) {
-//                
-//                if (isSuccess) {
-//                    
-//                    [TLAlert alertWithInfo:@"分享成功"];
-//                    
-//                } else {
-//                    
-//                    [TLAlert alertWithInfo:@"分享失败"];
-//                    
-//                }
-//                
-//            }];
+
         }
             break;
         case 2:
@@ -214,72 +173,58 @@
         NSNotification *notification =[NSNotification notificationWithName:@"InfoNotification" object:nil userInfo:dic];
         [[NSNotificationCenter defaultCenter] postNotification:notification];
         
-        [self shoreButtonClick];
+//        [self shoreButtonClick];
     } failure:^(NSError *error) {
         
     }];
     
     
 }
--(void)shoreButtonClick
-{
+//-(void)shoreButtonClick
+//{
+
     
+//    _invitationView.frame = CGRectMake(kScreenWidth/2 - 86.5, kHeight(130), 173,173+60);
+
     
-    _invitationView.frame = CGRectMake(kScreenWidth/2 - 210/2, kHeight(130), 173,173+60);
-    
-    
-    [self showPopAnimationWithAnimationStyle:2];
-    
+//    [self showPopAnimationWithAnimationStyle:1];
+
    
-}
+//}
 
 #pragma mark -- 显示弹框
-- (void)showPopAnimationWithAnimationStyle:(NSInteger)style
-{
-    ZJAnimationPopStyle popStyle = (style == 8) ? ZJAnimationPopStyleCardDropFromLeft : (ZJAnimationPopStyle)style;
-    ZJAnimationDismissStyle dismissStyle = (ZJAnimationDismissStyle)style;
-    // 1.初始化
-  ZJAnimationPopView *popView = [[ZJAnimationPopView alloc] initWithCustomView:_invitationView popStyle:popStyle dismissStyle:dismissStyle];
-    self.popView = popView;
-    // 2.设置属性，可不设置使用默认值，见注解
-    // 2.1 显示时点击背景是否移除弹框
-    popView.isClickBGDismiss = [_invitationView isKindOfClass:[ZJAnimationPopView class]];
-//    popView.isClickBGDismiss = YES;
-    // 2.2 显示时背景的透明度
-    //    popView.popBGAlpha = 0.5f;
-    // 2.3 显示时是否监听屏幕旋转
-    popView.isObserverOrientationChange = YES;
-    // 2.4 显示时动画时长
-    //    popView.popAnimationDuration = 0.8f;
-    // 2.5 移除时动画时长
-    //    popView.dismissAnimationDuration = 0.8f;
-
-    // 2.6 显示完成回调
-    CoinWeakSelf;
-    popView.popComplete = ^{
-//        [weakSelf.popView addSubview:weakSelf.shoreVie.headImage];
-        
-//        [self addIconImage];
-
-
-        NSLog(@"显示完成");
-    };
-    // 2.7 移除完成回调
-    popView.dismissComplete = ^{
-        weakSelf.shoreVie.headImage.hidden = NO;
-        weakSelf.shoreVie.detailedLabel.hidden = NO;
-        weakSelf.shoreVie.shoreButton.hidden = NO;
-        weakSelf.shoreVie.nameLabel.hidden = NO;
-        weakSelf.shoreVie.stateLabel.hidden = NO;
-
-//        [ self removeIcon];
-        NSLog(@"移除完成");
-        
-    };
-    // 4.显示弹框
-    [popView pop:self.shoreVie.backImg];
-//    [popView pop];
-}
+//- (void)showPopAnimationWithAnimationStyle:(NSInteger)style
+//{
+//    ZJAnimationPopStyle popStyle = (style == 8) ? ZJAnimationPopStyleCardDropFromLeft : (ZJAnimationPopStyle)style;
+//    ZJAnimationDismissStyle dismissStyle = (ZJAnimationDismissStyle)style;
+//    // 1.初始化
+//    _popView = [[ZJAnimationPopView alloc] initWithCustomView:_invitationView popStyle:popStyle dismissStyle:dismissStyle];
+//
+//    // 2.设置属性，可不设置使用默认值，见注解
+//    // 2.1 显示时点击背景是否移除弹框
+////    _popView.isClickBGDismiss = ![_invitationView isKindOfClass:[InvitationView class]];
+//    //    移除
+////    _popView.isClickBGDismiss = YES;
+//    // 2.2 显示时背景的透明度
+//    _popView.popBGAlpha = 0.0f;
+//    // 2.3 显示时是否监听屏幕旋转
+////    _popView.isObserverOrientationChange = YES;
+//    // 2.4 显示时动画时长
+//    //    popView.popAnimationDuration = 0.8f;
+//    // 2.5 移除时动画时长
+//    //    popView.dismissAnimationDuration = 0.8f;
+//
+//    // 2.6 显示完成回调
+//    _popView.popComplete = ^{
+//        NSLog(@"显示完成");
+//    };
+//    // 2.7 移除完成回调
+//    _popView.dismissComplete = ^{
+//        NSLog(@"移除完成");
+//    };
+//    // 4.显示弹框
+//    [_popView pop];
+//}
 
 
 - (void)shareQr

@@ -7,8 +7,10 @@
 //
 
 #import "TLBaseModel.h"
-
+#import "AddAccoutModel.h"
 @interface CurrencyModel : TLBaseModel
+@property (nonatomic,strong) NSDictionary *coin;
+@property (nonatomic,copy) NSString *isDisplay;
 
 @property (nonatomic,copy) NSString *name;
 //积分 JF

@@ -203,34 +203,6 @@
 
     }];
     
-//    self.nameLable.text = [LangSwitcher switchLang:@"请输入导入的钱包助记词 (12个英文单词)  , 按空格分离" key:nil];
-//    NSMutableParagraphStyle  *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-//
-//    // 行间距设置为30
-//    [paragraphStyle  setLineSpacing:10];
-//
-//    NSString  *testString = self.nameLable.text ;
-//    NSMutableAttributedString  *setString = [[NSMutableAttributedString alloc] initWithString:testString];
-//    [setString  addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [testString length])];
-//
-//    // 设置Label要显示的text
-//    [self.nameLable  setAttributedText:setString];
-//    self.nameLable.numberOfLines = 0;
-//
-//    [self.nameLable mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.equalTo(self.view.mas_top).offset(23);
-//        make.left.equalTo(self.view.mas_left).offset(15);
-//        make.right.equalTo(self.view.mas_right).offset(-15);
-//
-//    }];
-   
-//    [self.textView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.equalTo(self.nameLable.mas_bottom).offset(28);
-//        make.left.equalTo(@15);
-//        make.right.equalTo(@-15);
-//        make.height.equalTo(@245);
-//
-//    }];
     self.importButton = [UIButton buttonWithImageName:nil cornerRadius:6];
     NSString *text2 = [LangSwitcher switchLang:@"立即导入" key:nil];
     [self.importButton setTitle:text2 forState:UIControlStateNormal];

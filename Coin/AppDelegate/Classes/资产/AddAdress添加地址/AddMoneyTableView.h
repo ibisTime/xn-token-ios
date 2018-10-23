@@ -12,4 +12,6 @@
 @interface AddMoneyTableView : TLTableView
 @property (nonatomic, strong) NSMutableArray <CurrencyModel *>*currencys;
 
+@property (nonatomic, assign)NSInteger PersonalWallet;
+
 @end

@@ -57,6 +57,7 @@
         make.left.equalTo(self.mas_left).offset(15);
         make.right.equalTo(self.mas_right).offset(-15);
     }];
+    
     UIImageView *bgIV = [[UIImageView alloc] init];
     self.bgIV = bgIV;
     bgIV.contentMode = UIViewContentModeScaleToFill;
@@ -85,8 +86,7 @@
     }];
     
     UILabel *currentLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kBlackColor font:15.0];
-    
-    //    textLbl.text = [LangSwitcher switchLang:@"我的资产" key:nil];
+
     self.currentLbl = currentLbl;
     [self.bgImage addSubview:currentLbl];
     [currentLbl mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -106,17 +106,7 @@
         make.top.equalTo(self.textLbl.mas_bottom).offset(10);
         
     }];
-    
-//    UIView *lineView = [[UIView alloc] init];
-//    lineView.backgroundColor = [UIColor colorWithRed:248/255.0 green:248/255.0 blue:248/255.0 alpha:1.0];
-//    [self.bgImage addSubview:lineView];
-//    [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.right.equalTo(self.mas_right);
-//        make.left.equalTo(self.mas_left);
-//
-//        make.bottom.equalTo(self.mas_bottom).offset(-8);
-//        make.height.equalTo(@4);
-//    }];
+
 }
 
 -(void)setCurrency:(CurrencyModel *)currency
@@ -127,32 +117,23 @@
         CoinModel *coin = [CoinUtil getCoinModel:currency.symbol];
 
         [self.bgIV sd_setImageWithURL:[NSURL URLWithString:[coin.icon convertImageUrl]]];
-
-//        self.currentLbl.text = currency.symbol;
-        //    NSString *leftAmount = [platform.amountString subNumber:platform.frozenAmountString];
-        
-        NSString* t = [CoinUtil convertToRealCoin:currency.balance coin:currency.symbol];
-       
-        self.textLbl.text = [NSString stringWithFormat:@"%.6f%@ ",[t floatValue],currency.symbol];
-        //    NSString *rightAmount = [platform.inAmountString subNumber:platform.addAmountString];
+        self.textLbl.text = [NSString stringWithFormat:@"%@%@ ",[CoinUtil convertToRealCoin:currency.balance coin:currency.symbol],currency.symbol];
         
         //对应币种价格
         if ([[TLUser user].localMoney isEqualToString:@"USD"]) {
-            self.amountLbl.text = [NSString stringWithFormat:@"≈%.2f USD", [currency.amountUSD doubleValue]];
+            self.amountLbl.text = [NSString stringWithFormat:@"≈%@ USD", currency.amountUSD];
 
         }else if ([[TLUser user].localMoney isEqualToString:@"KRW"])
         {
-            self.amountLbl.text = [NSString stringWithFormat:@"≈%.2f KRW", [currency.amountKRW doubleValue]];
+            self.amountLbl.text = [NSString stringWithFormat:@"≈%@ KRW", currency.amountKRW];
 
         }
         else{
             
-            self.amountLbl.text = [NSString stringWithFormat:@"≈%.2f CNY", [currency.amountCNY doubleValue]];
+            self.amountLbl.text = [NSString stringWithFormat:@"≈%@ CNY", currency.amountCNY];
 
         }
-        
-        //人民币价格
-//        self.amountLbl.text = [NSString stringWithFormat:@"%.2f CNY",[currency.amountCNY doubleValue]];
+
         
     }else{
         
@@ -160,37 +141,33 @@
     CoinModel *coin = [CoinUtil getCoinModel:currency.currency];
 
     [self.bgIV sd_setImageWithURL:[NSURL URLWithString:[coin.pic1 convertImageUrl]]];
-//    self.currentLbl.text = currency.currency;
     NSString *leftAmount = [currency.amountString subNumber:currency.frozenAmountString];
 
         if ([[TLUser user].localMoney isEqualToString:@"USD"]) {
-                self.textLbl.text = [NSString stringWithFormat:@"%.4f%@",[[CoinUtil convertToRealCoin:leftAmount coin:currency.currency] doubleValue],currency.currency];
+                self.textLbl.text = [NSString stringWithFormat:@"%@%@",[CoinUtil convertToRealCoin:leftAmount coin:currency.currency],currency.currency];
            
         }else if ([[TLUser user].localMoney isEqualToString:@"KRW"])
         {
-            self.textLbl.text = [NSString stringWithFormat:@"%.4f%@",[[CoinUtil convertToRealCoin:leftAmount coin:currency.currency] doubleValue],currency.currency];
+            self.textLbl.text = [NSString stringWithFormat:@"%@%@",[CoinUtil convertToRealCoin:leftAmount coin:currency.currency],currency.currency];
             
         }
         else{
             
-              self.textLbl.text = [NSString stringWithFormat:@"%.4f%@",[[CoinUtil convertToRealCoin:leftAmount coin:currency.currency] doubleValue],currency.currency];
+              self.textLbl.text = [NSString stringWithFormat:@"%@%@",[CoinUtil convertToRealCoin:leftAmount coin:currency.currency],currency.currency];
         }
 
-    NSString *rightAmount = [currency.inAmountString subNumber:currency.addAmountString];
         if ([[TLUser user].localMoney isEqualToString:@"USD"]) {
-            self.amountLbl.text = [NSString stringWithFormat:@"≈%.2fUSD", [currency.amountUSD doubleValue]];
+            self.amountLbl.text = [NSString stringWithFormat:@"≈%@USD", currency.amountUSD];
 
         }else if ([[TLUser user].localMoney isEqualToString:@"KRW"])
-            self.amountLbl.text = [NSString stringWithFormat:@"≈%.2fKRW", [currency.amountKRW doubleValue]];
+            self.amountLbl.text = [NSString stringWithFormat:@"≈%@KRW", currency.amountKRW];
 
         else{
             
-            self.amountLbl.text = [NSString stringWithFormat:@"≈%.2fCNY", [currency.amountCNY doubleValue]];
+            self.amountLbl.text = [NSString stringWithFormat:@"≈%@CNY", currency.amountCNY];
 
         }
-    //对应币种价格
     }
-//    人民币价格
-//    self.rmbPriceLbl.text = [NSString stringWithFormat:@"≈%.2f CNY",[[CoinUtil convertToRealCoin:leftAmount coin:platform.currency] doubleValue]];
+
 }
 @end

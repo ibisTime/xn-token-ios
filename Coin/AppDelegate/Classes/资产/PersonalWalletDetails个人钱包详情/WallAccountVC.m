@@ -49,18 +49,14 @@
 - (void)viewDidLoad {
     
   
-//    [self setPlaceholderViewTitle:@"加载失败" operationTitle:@"重新加载"];
-    //暂无明细
+
     [super viewDidLoad];
     self.view.backgroundColor = kWhiteColor;
 
     [self initHeadView];
-    [self initPlaceHolderView];
     [self initTableView];
     [self initBottonView];
 
-    //筛选
-    [self addFilterItem];
     //获取账单
     [self requestBillList];
 
@@ -103,9 +99,6 @@
                              ];
         
         _filterPicker = [[FilterView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
-        
-//        _filterPicker.title =  [LangSwitcher switchLang: @"请选择交易类型" key:nil];
-        
         _filterPicker.selectBlock = ^(NSInteger index) {
             
             weakSelf.helper.parameters[@"bizType"] = typeArr[index];
@@ -120,31 +113,6 @@
     return _filterPicker;
 }
 
-- (void)initPlaceHolderView {
-    
-//    self.placeHolderView = [[UIView alloc] init];
-//    [self.view addSubview:self.placeHolderView];
-//
-//    [self.placeHolderView mas_makeConstraints:^(MASConstraintMaker *make) {
-//
-//        make.centerY.equalTo(self.view.mas_centerY);
-//        make.centerX.equalTo(self.view.mas_centerX);
-//
-//    }];
-
-//    UILabel *textLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor2 font:14.0];
-//    
-//    textLbl.text = [LangSwitcher switchLang:@"暂无明细" key:nil];
-//    textLbl.textAlignment = NSTextAlignmentCenter;
-//    
-//    [self.placeHolderView addSubview:textLbl];
-//    [textLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-//        
-//        make.top.equalTo(self.placeHolderView.mas_top).offset(150);
-//        make.centerX.equalTo(self.placeHolderView.mas_centerX);
-//        
-//    }];
-}
 
 - (void)initTableView {
     
@@ -154,9 +122,7 @@
    
     self.tableView.backgroundColor = kWhiteColor;
     self.tableView.refreshDelegate = self;
-//    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, kTabBarHeight, 0);
 
-//    self.tableView.sectionHeaderHeight = 22;
     self.tableView.defaultNoDataImage = kImage(@"暂无订单");
     self.tableView.defaultNoDataText = [LangSwitcher switchLang:@"暂无明细" key:nil];
     [self.view addSubview:self.tableView];
@@ -167,18 +133,6 @@
     
 }
 
-- (void)addFilterItem {
-//
-//    if (self.billType == CurrentTypeAll) {
-//
-//        [UIBarButtonItem addRightItemWithTitle:[LangSwitcher switchLang:@"筛选" key:nil]
-//                                    titleColor:kTextColor
-//                                         frame:CGRectMake(0, 0, 60, 30)
-//                                            vc:self
-//                                        action:@selector(clickFilter:)];
-//
-//    }
-}
 
 #pragma mark - Events
 - (void)clickFilter{
@@ -304,7 +258,7 @@
 
 - (void)initBottonView
 {
-  UIView *bottomView  = [[UIView alloc] init];
+    UIView *bottomView  = [[UIView alloc] init];
     self.bottomViw = bottomView;
     [self.view insertSubview:bottomView aboveSubview:self.tableView];
     [bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -318,7 +272,9 @@
     bottomView.layer.shadowRadius=3;// 阴影扩散的范围控制
     bottomView.layer.shadowOffset=CGSizeMake(1, 1);// 阴影的范围
     //底部操作按钮
-    
+
+
+
     NSArray *textArr = @[
                          [LangSwitcher switchLang:@"充币" key:nil],
                          [LangSwitcher switchLang:@"提币" key:nil]
@@ -339,19 +295,7 @@
         
         
         btn.tag = 201806+idx;
-//        [btn setTitleEdgeInsets:UIEdgeInsetsMake(30, -10, 0, 0)];
-//        if ([LangSwitcher currentLangType] == LangTypeSimple) {
-//
-//        }else if ([LangSwitcher currentLangType] == LangTypeEnglish)
-//        {
-//            [btn setImageEdgeInsets:UIEdgeInsetsMake(0, kWidth(50), 10, 0)];
-//
-//
-//        }else if ([LangSwitcher currentLangType] == LangTypeKorean)
-//        {
-//            [btn setImageEdgeInsets:UIEdgeInsetsMake(0, kWidth(35), 10, 0)];
-//
-//        }
+
         [btn setImageEdgeInsets:UIEdgeInsetsMake(-12, 0, 0, 0)];
 
         UILabel *lab = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:12];

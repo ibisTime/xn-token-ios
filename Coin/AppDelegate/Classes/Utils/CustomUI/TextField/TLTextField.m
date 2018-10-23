@@ -34,6 +34,9 @@
         [leftBgView addSubview:leftLbl];
         leftLbl.numberOfLines = 0;
         self.leftLbl = leftLbl;
+
+
+
         
         self.leftView = leftBgView;
 

@@ -108,16 +108,6 @@
 
 -(void)initNavigationNar
 {
-//    self.bgImage = [[UIImageView alloc] init];
-//    self.bgImage.contentMode = UIViewContentModeScaleToFill;
-//    self.bgImage.userInteractionEnabled = YES;
-//    //    self.bgImage.image = kImage(@"我的 背景");
-//    [self.view  addSubview:self.bgImage];
-//
-//
-//    [self.bgImage mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.edges.mas_equalTo(UIEdgeInsetsZero);
-//    }];
 
     self.backButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
     self.backButton.frame = CGRectMake(kScreenWidth-74, kStatusBarHeight, 44, 44);
@@ -152,7 +142,7 @@
         [CoinUtil refreshOpenCoinList:^{
             //获取banner列表
             [weakSelf requestBannerList];
-            [weakSelf reloadFindData];
+//            [weakSelf reloadFindData];
 
         } failure:^{
             [weakSelf.tableView endRefreshHeader];
@@ -264,9 +254,9 @@
         
         self.bannerRoom = [BannerModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
         self.headerView.banners = self.bannerRoom;
-        
+        [self reloadFindData];
         //获取官方钱包总量，已空投量
-        [self.tableView endRefreshHeader];
+//        [self.tableView endRefreshHeader];
 
     } failure:^(NSError *error) {
         
@@ -302,10 +292,17 @@
     http.parameters[@"status"] = @"1"  ;
 
     [http postWithSuccess:^(id responseObject) {
-        self.findModels = [HomeFindModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
+
         self.tableView.findModels = [HomeFindModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
         [self.tableView endRefreshHeader];
         [self.tableView reloadData];
+        if (self.findModels.count != self.tableView.findModels.count) {
+            [TableViewAnimationKit showWithAnimationType:6 tableView:self.tableView];
+        }
+
+
+        self.findModels = [HomeFindModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
+
     } failure:^(NSError *error) {
         [self.tableView endRefreshHeader];
     }];

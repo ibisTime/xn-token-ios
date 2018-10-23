@@ -41,14 +41,28 @@ static NSString *identifierCell = @"AddMoneyCell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     AddMoneyCell *cell = [tableView dequeueReusableCellWithIdentifier:identifierCell forIndexPath:indexPath];
-    
+    cell.PersonalWallet = _PersonalWallet;
     cell.currency = self.currencys[indexPath.section];
     
     cell.tag = 1200 + 100*indexPath.section;
 
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
+//    cell.AddMoneyDelegate = self;
+    cell.selectButton.tag = indexPath.section;
+    [cell.selectButton addTarget:self action:@selector(SelectTheButton:) forControlEvents:UIControlEventTouchUpInside];
     return cell;
+}
+
+-(void)SelectTheButton:(UIButton *)sender
+{
+    if ([self.refreshDelegate respondsToSelector:@selector(refreshTableViewButtonClick:button:selectRowAtIndex:)]) {
+        [self.refreshDelegate refreshTableViewButtonClick:self button:sender selectRowAtIndex:sender.tag];
+    }
+}
+
+-(void)setPersonalWallet:(NSInteger)PersonalWallet
+{
+    _PersonalWallet = PersonalWallet;
 }
 
 #pragma mark - UITableViewDelegate

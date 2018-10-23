@@ -26,6 +26,7 @@ static NSString *identifierCell = @"homeCell";
         self.backgroundColor = kBackgroundColor;
 
         [self registerClass:[HomeCell class] forCellReuseIdentifier:identifierCell];
+        [self registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
 
         self.separatorStyle = UITableViewCellSeparatorStyleNone;
     }
@@ -37,14 +38,33 @@ static NSString *identifierCell = @"homeCell";
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return 2;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-
+    if (section == 0) {
+        if (self.findModels.count > 0) {
+            return 1;
+        }else
+        {
+            return 0;
+        }
+    }
     return self.findModels.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+
+
+    if (indexPath.section == 0) {
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+        //商业应用
+        UILabel *textLbl = [UILabel labelWithBackgroundColor:kWhiteColor textColor:kTextBlack font:16.0];
+        textLbl.text = [LangSwitcher switchLang:@"推荐应用" key:nil];
+        [cell addSubview:textLbl];
+        textLbl.frame = CGRectMake(15, 0, SCREEN_WIDTH - 30, 50);
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        return cell;
+    }
 
     HomeCell *cell = [tableView dequeueReusableCellWithIdentifier:identifierCell forIndexPath:indexPath];
 
@@ -59,6 +79,9 @@ static NSString *identifierCell = @"homeCell";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 
+    if (indexPath.section == 0) {
+        return 50;
+    }
     return 113;
 }
 
@@ -71,7 +94,7 @@ static NSString *identifierCell = @"homeCell";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
 
-    return 50;
+    return 0.01;
 
 }
 
@@ -83,23 +106,8 @@ static NSString *identifierCell = @"homeCell";
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
 
-    UIView *view = [UIView new];
-
-    if (self.findModels.count > 0) {
-        //商业应用
-        UILabel *textLbl = [UILabel labelWithBackgroundColor:kClearColor
-                                                   textColor:kTextBlack
-                                                        font:16.0];
-        textLbl.text = [LangSwitcher switchLang:@"推荐应用" key:nil];
-        [view addSubview:textLbl];
-        textLbl.frame = CGRectMake(15, 0, SCREEN_WIDTH - 30, 50);
-    }
-
-    return view;
+    return nil;
 }
-
-
-
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
 

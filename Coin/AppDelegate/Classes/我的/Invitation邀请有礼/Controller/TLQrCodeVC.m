@@ -71,7 +71,7 @@
 //    移除
     _popView.isClickBGDismiss = YES;
     // 2.2 显示时背景的透明度
-    //    popView.popBGAlpha = 0.5f;
+    _popView.popBGAlpha = 0.5f;
     // 2.3 显示时是否监听屏幕旋转
     _popView.isObserverOrientationChange = YES;
     // 2.4 显示时动画时长
@@ -88,14 +88,10 @@
         NSLog(@"移除完成");
     };
     // 4.显示弹框
-    [_popView pop:self.view];
+    [_popView pop];
 }
 
--(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
-{
-    self.popView.hidden = YES;
-    
-}
+
 //打开微信,去粘贴
 -(void)pasteButtonClick
 {

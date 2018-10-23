@@ -407,27 +407,11 @@ typedef enum : NSUInteger {
     // 4。为输入准备带有适当签名的脚本
 
     // 5。广播事务
-    //    BTCKey* key = [[BTCKey alloc] initWithPrivateKey:privateKey];
-    //
-    //   BTCNetwork *net = [[BTCNetwork alloc] initWithName:@"testnet3"];
-    //    NSLog(@"%d",net.isTestnet);
+
     NSError* error = nil;
     NSArray* utxos = self.utxis;
 
-    //    switch (btcApi) {
-    //        case BTCAPIBlockchain: {
-    //            BTCBlockchainInfo* bci = [[BTCBlockchainInfo alloc] init];
-    //            utxos = [bci unspentOutputsWithAddresses:@[ key.compressedPublicKeyAddress ] error:&error];
-    //            break;
-    //        }
-    //        case BTCAPIChain: {
-    //            BTCChainCom* chain = [[BTCChainCom alloc] initWithToken:@"Free API Token form chain.com"];
-    //            utxos = [chain unspentOutputsWithAddress:key.compressedPublicKeyAddress error:&error];
-    //            break;
-    //        }
-    //        default:
-    //            break;
-    //    }
+
 
     NSLog(@"UTXOs for %@: %@ %@", self.key.privateKeyAddressTestnet, utxos, error);
 
@@ -437,33 +421,16 @@ typedef enum : NSUInteger {
     }
 
 
-
-
-    //通过从最低的一个扫描找到最大的txout数。
-    //    NSMutableArray *arr = [NSMutableArray array];
-    //    for (int i = 0; i < self.utxis.count; i++) {
-    //        utxoModel *newut = [utxoModel new];
-    //        newut = self.utxis[i];
-    //        newut.count = [CoinUtil convertToRealCoin:self.utxis[i].count coin:@"BTC"];
-    //        [arr addObject:newut];
-    //    }
-
     CoinModel *coin = [CoinUtil getCoinModel:@"BTC"];
 
     long long mount = [[CoinUtil convertToSysCoin:amount coin:coin.symbol] longLongValue];
 
-    BTCAmount btcValue = mount;
-
+    BTCAmount btcValue = mount;//转账金额
     BTCAmount sumIntputValue = 0;//Intput总额
     int sumIntputCount = 0;//Intput总个数
     BOOL isChange = NO;//是否需要找零
     BTCAmount changeValue = 0;//找零金额
     long long btcFree = 0;//手续费
-
-
-
-
-
 
     NSMutableArray *IntputUtsos = [NSMutableArray array];
     for (int i = 0; i < self.utxis.count; i ++) {
@@ -1327,8 +1294,7 @@ typedef enum : NSUInteger {
             self.btcPrompt = @"";
             if ([self.balanceTF.text isEqualToString:self.btcAddress]) {
                 [TLAlert alertWithInfo:[LangSwitcher switchLang:@"转入和转出地址不能相同" key:nil]];
-                //                [TLAlert alertWithMsg:@"转入和转出地址不能相同"];
-                //                [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入正确地址" key:nil]];
+
                 return;
             }
             if ([self.tranAmountTF.text floatValue] >= [symbolblance floatValue]) {
@@ -1353,6 +1319,16 @@ typedef enum : NSUInteger {
                 }
             }
 
+        }else
+        {
+            BTCMnemonic *address = [self.balanceTF.text lowercaseString];
+            if ([MnemonicUtil getEthAddress:address] == nil) {
+                [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入正确地址" key:nil]];
+                return;
+            }
+//            if (EthereumAddress(self.balanceTF.text) == nil) {
+//
+//            }
         }
 
 
@@ -1474,59 +1450,6 @@ typedef enum : NSUInteger {
                       }];
 
 
-
-
-    //    });
-
-    //    if ([TLUser user].isGoogleAuthOpen) {
-    //
-    //        if (!(self.addressType == WalletAddressTypeSelectAddress && [self.addressModel.status isEqualToString:@"1"])) {
-    //
-    //            if (![self.googleAuthTF.text valid]) {
-    //
-    //                [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入谷歌验证码" key:nil]];
-    //                return;
-    //
-    //            }
-    //
-    //            //判断谷歌验证码是否为纯数字
-    //            if (![NSString isPureNumWithString:self.googleAuthTF.text]) {
-    //
-    //                [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入正确的谷歌验证码" key:nil]];
-    //                return ;
-    //            }
-    //
-    //            //判断谷歌验证码是否为6位
-    //            if (self.googleAuthTF.text.length != 6) {
-    //
-    //                [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入正确的谷歌验证码" key:nil]];
-    //                return ;
-    //            }
-    //
-    //        }
-    //    }
-
-    //    if (self.addressType == WalletAddressTypeSelectAddress && [self.addressModel.status isEqualToString:@"1"]) {
-    //
-    //        [self confirmWithdrawalsWithPwd:nil];
-    //
-    //        return ;
-    //
-    //    }
-
-    //    [TLAlert alertWithTitle:[LangSwitcher switchLang:@"请输入资金密码" key:nil]
-    //                        msg:@""
-    //                 confirmMsg:[LangSwitcher switchLang:@"确定" key:nil]
-    //                  cancleMsg:[LangSwitcher switchLang:@"取消" key:nil]
-    //                placeHolder:[LangSwitcher switchLang:@"请输入资金密码" key:nil]
-    //                      maker:self cancle:^(UIAlertAction *action) {
-    //
-    //                      } confirm:^(UIAlertAction *action, UITextField *textField) {
-    //
-    //                          [self confirmWithdrawalsWithPwd:textField.text];
-    //
-    //                      }];
-
 }
 
 - (void)clickPaste {
@@ -1543,16 +1466,6 @@ typedef enum : NSUInteger {
     }
 }
 
-//- (void)textDidChange:(UITextField *)sender {
-
-//    NSDecimalNumber *m = [NSDecimalNumber decimalNumberWithString:self.tranAmountTF.text];
-//
-//    NSDecimalNumber *n = [NSDecimalNumber decimalNumberWithString:self.withdrawFee];
-//
-//    NSDecimalNumber *o = [m decimalNumberByMultiplyingBy:n];
-//
-//    self.minerFeeTF.text = [NSString stringWithFormat:@"%@ %@", [o stringValue], self.currency.currency];
-//}
 
 - (void)selectCoinAddress {
 
@@ -1571,29 +1484,7 @@ typedef enum : NSUInteger {
     CoinWeakSelf;
 
     switch (index) {
-            //选择地址
-            //        case 0:
-            //        {
-            //            [self.coinAddressPicker hide];
-            //
-            //            CoinAddressListVC *addressVC = [CoinAddressListVC new];
-            //            addressVC.coin = self.currency.currency;
-            //            addressVC.addressBlock = ^(CoinAddressModel *addressModel) {
-            //
-            //                weakSelf.addressModel = addressModel;
-            //
-            //                weakSelf.receiveAddressLbl.text = weakSelf.addressModel.address;
-            //
-            //                weakSelf.receiveAddressLbl.textColor = kTextColor;
-            //
-            //                weakSelf.addressType = AddressTypeSelectAddress;
-            //
-            //                [weakSelf setGoogleAuth];
-            //            };
-            //
-            //            [self.navigationController pushViewController:addressVC animated:YES];
-            //
-            //        }break;
+
             //扫描二维码
         case 0:
         {
@@ -1708,13 +1599,10 @@ typedef enum : NSUInteger {
     http.parameters[@"amount"] = [CoinUtil convertToSysCoin:self.tranAmountTF.text
                                                        coin:self.currency.currency];
     http.parameters[@"applyNote"] = [NSString stringWithFormat:@"%@提现", self.currency.currency];
-    //    http.parameters[@"applyNote"] = @"ios-提现";
     http.parameters[@"applyUser"] = [TLUser user].userId;
     http.parameters[@"payCardInfo"] = self.currency.currency;
     http.parameters[@"payCardNo"] = self.receiveAddressLbl.text;
     http.parameters[@"token"] = [TLUser user].token;
-    //    http.parameters[@"fee"] = @"-0.1";
-    //    http.parameters[@"fee"] = @"-10";
 
 
     if ([TLUser user].isGoogleAuthOpen) {

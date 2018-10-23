@@ -42,6 +42,8 @@
 #import "TLProgressHUD.h"
 #import "UITableView+AddForPlaceholder.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import "TableViewAnimationKitHeaders.h"
+#import "ZJAnimationPopView.h"
 
 #endif /* CoinPrefixHeader_h */
 

@@ -277,7 +277,14 @@ public class EthCrypto: NSObject
         return txHash;
         
     }
-    
+
+
+    //判断地址是否正确
+//    static public func getEthereumAddress(to: String) -> String?
+//    {
+//        let toaddress = EthereumAddress(to)
+//        return toaddress;
+//    }
     
     //发送WAN交易（签名并广播）
     static public func sendWanTransaction(mnemonic: String, to: String, amount: String, gasPrice: String, gasLimit: String) -> String? {

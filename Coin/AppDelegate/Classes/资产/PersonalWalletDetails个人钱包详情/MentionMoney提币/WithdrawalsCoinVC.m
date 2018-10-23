@@ -87,12 +87,7 @@ typedef NS_ENUM(NSInteger, AddressType) {
 #pragma mark -
 - (void)addRecordItem {
     
-    [UIBarButtonItem addRightItemWithTitle:[LangSwitcher switchLang:@"记录" key:nil]
-                                titleColor:kWhiteColor
-                                     frame:CGRectMake(0, 0, 60, 30)
-                                        vc:self
-                                    action:@selector(clickRecord:)];
-
+    [UIBarButtonItem addRightItemWithTitle:[LangSwitcher switchLang:@"记录" key:nil] titleColor:kWhiteColor frame:CGRectMake(0, 0, 60, 30) vc:self action:@selector(clickRecord:)];
 }
 
 - (void)initSubviews {
@@ -107,7 +102,7 @@ typedef NS_ENUM(NSInteger, AddressType) {
         
         make.left.equalTo(self.view.mas_left);
         make.right.equalTo(self.view.mas_right);
-        make.height.equalTo(@(kHeight(66)));
+        make.height.equalTo(@(kHeight(83)/2 + kHeight(10)));
     }];
     
     UIImageView *bgImage = [[UIImageView alloc] init];
@@ -116,15 +111,14 @@ typedef NS_ENUM(NSInteger, AddressType) {
     bgImage.image = kImage(@"提背景");
     bgImage.contentMode = UIViewContentModeScaleToFill;
     [self.view addSubview:bgImage];
-    
-    [bgImage mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view.mas_top);
-        make.left.equalTo(self.view.mas_left).offset(15);
-        make.right.equalTo(self.view.mas_right).offset(-15);
-        make.height.equalTo(@90);
-        
-    }];
-    
+    bgImage.layer.cornerRadius=5;
+    bgImage.layer.shadowOpacity = 0.22;// 阴影透明度
+    bgImage.layer.shadowColor = [UIColor grayColor].CGColor;// 阴影的颜色
+    bgImage.layer.shadowRadius=3;// 阴影扩散的范围控制
+    bgImage.layer.shadowOffset=CGSizeMake(1, 1);// 阴影的范围
+
+    bgImage.frame = CGRectMake(15, kHeight(10), SCREEN_WIDTH - 30, kHeight(83));
+
     UILabel *blance = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor2 font:12];
     blance.text = [LangSwitcher switchLang:@"可用余额" key:nil];
     [bgImage addSubview:blance];
@@ -133,14 +127,14 @@ typedef NS_ENUM(NSInteger, AddressType) {
         make.centerX.equalTo(bgImage.mas_centerX);
         
     }];
+    
     UILabel *symbolBlance = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextBlack font:24];
     [bgImage addSubview:symbolBlance];
     NSString *leftAmount = [self.currency.amountString subNumber:self.currency.frozenAmountString];
     
     NSString *currentCurrency = self.currency.currency;
-    symbolBlance.text = [NSString stringWithFormat:@"%.6f %@",[[CoinUtil convertToRealCoin:leftAmount coin:currentCurrency] doubleValue],currentCurrency];
-    
-//    symbolBlance.text = [NSString stringWithFormat:@"%.6f %@",[self.currency.balance doubleValue]/1000000000000000000,self.currency.symbol];
+    symbolBlance.text = [NSString stringWithFormat:@"%@ %@",[CoinUtil convertToRealCoin:leftAmount coin:currentCurrency],currentCurrency];
+
     [symbolBlance mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(blance.mas_bottom).offset(2);
         make.centerX.equalTo(bgImage.mas_centerX);
@@ -148,44 +142,9 @@ typedef NS_ENUM(NSInteger, AddressType) {
     }];
     
     CGFloat heightMargin = 50;
-//    //余额
-//    self.balanceTF = [[TLTextField alloc] initWithFrame:CGRectMake(0, 10, kScreenWidth, heightMargin)
-//                                              leftTitle:[LangSwitcher switchLang:@"可用余额" key:nil]
-//                                             titleWidth:120
-//                                            placeholder:@""];
-//
-//    self.balanceTF.textColor = kHexColor(@"#109ee9");
-//    self.balanceTF.enabled = NO;
-////    NSString *leftAmount = [self.currency.amountString subNumber:self.currency.frozenAmountString];
-////
-////    NSString *currentCurrency = self.currency.currency;
-////    self.balanceTF.text = [NSString stringWithFormat:@"%.2f %@",[[CoinUtil convertToRealCoin:leftAmount coin:currentCurrency] doubleValue],currentCurrency];
-//    
-//
-//    
-//    [self.view addSubview:self.balanceTF];
-    
-    //接受地址
-//    UIView *receiveView = [[UIView alloc] initWithFrame:CGRectMake(0, kHeight(103) + 10, kScreenWidth, heightMargin)];
-//
-//    receiveView.backgroundColor = kWhiteColor;
-//
-//    [self.view addSubview:receiveView];
-//    //更多
-//    UIImageView *rightArrowIV = [[UIImageView alloc] initWithImage:kImage(@"更多-灰色")];
-//
-//    [receiveView addSubview:rightArrowIV];
-//    [rightArrowIV mas_makeConstraints:^(MASConstraintMaker *make) {
-//
-//        make.right.equalTo(receiveView.mas_right).offset(-15);
-//        make.centerY.equalTo(receiveView.mas_centerY);
-//        make.width.equalTo(@6.5);
-//
-//    }];
-    self.balanceTF = [[TLTextField alloc] initWithFrame:CGRectMake(0, kHeight(103), kScreenWidth, heightMargin+20)
-                                              leftTitle:[LangSwitcher switchLang:@"接收地址" key:nil]
-                                             titleWidth:80
-                                            placeholder:[LangSwitcher switchLang:@"请输入付币地址或扫码" key:nil]];
+
+
+    self.balanceTF = [[TLTextField alloc] initWithFrame:CGRectMake(0, kHeight(103), kScreenWidth, heightMargin+20) leftTitle:[LangSwitcher switchLang:@"接收地址" key:nil] titleWidth:80 placeholder:[LangSwitcher switchLang:@"请输入付币地址或扫码" key:nil]];
     
     self.balanceTF.textColor = kHexColor(@"#109ee9");
     self.balanceTF.leftLbl.font = [UIFont systemFontOfSize:13];
@@ -196,59 +155,8 @@ typedef NS_ENUM(NSInteger, AddressType) {
         self.balanceTF.font = [UIFont systemFontOfSize:10];
 
     }
-    
-    //    NSString *leftAmount = [self.currency.amountString subNumber:self.currency.frozenAmountString];
-    //
-    //    NSString *currentCurrency = self.currency.currency;
-    //    self.balanceTF.text = [NSString stringWithFormat:@"%.8f %@",[self.currency.balance doubleValue]/1000000000000000000,self.currency.symbol];
-    
-    
-    
     [self.view addSubview:self.balanceTF];
-    //
-//    UILabel *receiveTextLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:15.0];
-//    
-//    receiveTextLbl.text = [LangSwitcher switchLang:@"接收地址" key:nil];
-//    
-//    [receiveView addSubview:receiveTextLbl];
-//    [receiveTextLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-//        
-//        make.left.equalTo(@15);
-//        make.centerY.equalTo(receiveView.mas_centerY);
-//        
-//    }];
-//    
-//    UIView *receiveLine = [[UIView alloc] init];
-//    
-//    receiveLine.backgroundColor = kLineColor;
-//    
-//    [receiveView addSubview:receiveLine];
-//    [receiveLine mas_makeConstraints:^(MASConstraintMaker *make) {
-//        
-//        make.left.bottom.right.equalTo(@0);
-//        make.height.equalTo(@0.5);
-//        
-//    }];
-//    
-//    //获取placeholder的颜色
-////    UIColor *placeholderColor = [[[UITextField alloc] init] valueForKeyPath:@"_placeholderLabel.textColor"];
-//    
-//    UILabel *receiveAddressLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kPlaceholderColor font:14.0];
-//    
-//    receiveAddressLbl.text = [LangSwitcher switchLang:@"请粘贴地址或扫码录入" key:nil];
-//    
-//    receiveAddressLbl.numberOfLines = 0;
-//    
-//    [receiveView addSubview:receiveAddressLbl];
-//    [receiveAddressLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-//        
-//        make.left.equalTo(receiveTextLbl.mas_right).offset(5);
-//        make.right.equalTo(rightArrowIV.mas_left).offset(-10);
-//        make.centerY.equalTo(receiveView.mas_centerY);
-//        
-//    }];
-//    
-//    self.receiveAddressLbl = receiveAddressLbl;
+
     UIImageView *rightArrow = [[UIImageView alloc] initWithImage:kImage(@"扫一扫-黑色")];
     rightArrow.contentMode = UIViewContentModeScaleToFill;
     [self.view addSubview:rightArrow];
@@ -264,74 +172,58 @@ typedef NS_ENUM(NSInteger, AddressType) {
     
     UITapGestureRecognizer *ta = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(click)];
     [rightArrow addGestureRecognizer:ta];
+
     //
     UIButton *receiveBtn = [[UIButton alloc] initWithFrame:CGRectMake(90, self.balanceTF.yy + 10, kScreenWidth, heightMargin)];
-    
+
     [receiveBtn addTarget:self action:@selector(selectCoinAddress) forControlEvents:UIControlEventTouchUpInside];
-    
+
     [self.view addSubview:receiveBtn];
-    
+
     //谷歌验证码
-    self.googleAuthTF = [[TLTextField alloc] initWithFrame:CGRectMake(0, self.balanceTF.yy, kScreenWidth, heightMargin)
-                                                 leftTitle:[LangSwitcher switchLang:@"谷歌验证码" key:nil]
-                                                titleWidth:100
-                                               placeholder:[LangSwitcher switchLang:@"请输入谷歌验证码" key:nil] ];
+    self.googleAuthTF = [[TLTextField alloc] initWithFrame:CGRectMake(0, self.balanceTF.yy, kScreenWidth, heightMargin) leftTitle:[LangSwitcher switchLang:@"谷歌验证码" key:nil] titleWidth:80 placeholder:[LangSwitcher switchLang:@"请输入谷歌验证码" key:nil] ];
     
     self.googleAuthTF.keyboardType = UIKeyboardTypeNumberPad;
-
+    self.googleAuthTF.hidden = NO;
     [self.view addSubview:self.googleAuthTF];
     
     //复制
     UIView *authView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 95, self.googleAuthTF.height)];
     
-    UIButton *pasteBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"粘贴" key:nil]
-                                        titleColor:kWhiteColor
-                                   backgroundColor:kAppCustomMainColor
-                                         titleFont:13.0
-                                      cornerRadius:5];
-    
+    UIButton *pasteBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"粘贴" key:nil] titleColor:kWhiteColor backgroundColor:kAppCustomMainColor titleFont:13.0 cornerRadius:5];
     pasteBtn.frame = CGRectMake(0, 0, 85, self.googleAuthTF.height - 15);
-    
     pasteBtn.centerY = authView.height/2.0;
-    
     [pasteBtn addTarget:self action:@selector(clickPaste) forControlEvents:UIControlEventTouchUpInside];
-    
     [authView addSubview:pasteBtn];
-    
     self.googleAuthTF.rightView = authView;
     
     //分割线
-    UIView *googleLine = [[UIView alloc] init];
-    
-    googleLine.backgroundColor = kLineColor;
-    
-    [self.googleAuthTF addSubview:googleLine];
-    [googleLine mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.left.top.right.equalTo(@0);
-        make.height.equalTo(@0.5);
-        
-    }];
-    
+//    UIView *googleLine = [[UIView alloc] init];
+//
+//    googleLine.backgroundColor = kLineColor;
+//
+//    [self.googleAuthTF addSubview:googleLine];
+//    [googleLine mas_makeConstraints:^(MASConstraintMaker *make) {
+//
+//        make.left.top.right.equalTo(@0);
+//        make.height.equalTo(@0.5);
+//
+//    }];
+
     //转账数量
-    self.tranAmountTF = [[TLTextField alloc] initWithFrame:CGRectMake(0, self.balanceTF.yy, kScreenWidth, heightMargin)
-                                                 leftTitle:[LangSwitcher switchLang:@"提币数量" key:nil]
-                                                titleWidth:150
-                                               placeholder:[LangSwitcher switchLang:@"请填写数量" key:nil]
-                         ];
+    self.tranAmountTF = [[TLTextField alloc] initWithFrame:CGRectMake(0, self.balanceTF.yy, kScreenWidth, heightMargin) leftTitle:[LangSwitcher switchLang:@"提币数量" key:nil] titleWidth:80 placeholder:[LangSwitcher switchLang:@"请填写数量" key:nil]];
     
     [self.tranAmountTF setValue:kPlaceholderColor forKeyPath:@"_placeholderLabel.textColor"];
     
     self.tranAmountTF.keyboardType = UIKeyboardTypeDecimalPad;
-    
-//    [self.tranAmountTF addTarget:self action:@selector(textDidChange:) forControlEvents:UIControlEventEditingChanged];
+
     
     [self.view addSubview:self.tranAmountTF];
     
     //矿工费
     self.minerFeeTF = [[TLTextField alloc] initWithFrame:CGRectMake(0, self.tranAmountTF.yy + 10, kScreenWidth, heightMargin)
                                                leftTitle:[LangSwitcher switchLang:@"手续费" key:nil]
-                                              titleWidth:150
+                                              titleWidth:80
                                              placeholder:@""];
     
     self.minerFeeTF.enabled = NO;
@@ -405,88 +297,7 @@ typedef NS_ENUM(NSInteger, AddressType) {
         
     }];
     
-    //内部转账
-//    UIView *interalTranView = [[UIView alloc] init];
-//
-//    interalTranView.backgroundColor = kWhiteColor;
-//
-//    [self.view addSubview:interalTranView];
-//    [interalTranView mas_makeConstraints:^(MASConstraintMaker *make) {
-//
-//        make.left.right.equalTo(@(0));
-//        make.top.equalTo(minerView.mas_bottom).offset(10);
-//        make.height.equalTo(@50);
-//
-//    }];
-//    //
-//    UILabel *tranTextLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:15.0];
-//
-//    tranTextLbl.text = @"内部转账";
-//
-//    [interalTranView addSubview:tranTextLbl];
-//    [tranTextLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-//
-//        make.left.equalTo(@15);
-//        make.centerY.equalTo(interalTranView.mas_centerY);
-//
-//    }];
-//
-//    //开关
-//    UISwitch *sw = [[UISwitch alloc] init];
-//
-//    sw.on = NO;
-//
-//    [interalTranView addSubview:sw];
-//    [sw mas_makeConstraints:^(MASConstraintMaker *make) {
-//
-//        make.right.equalTo(@(-15));
-//        make.centerY.equalTo(@0);
-//
-//    }];
-//
-//    self.sw = sw;
-//
-//    //内部转账提示
-//    UIView *tranPromptView = [[UIView alloc] init];
-//
-//    tranPromptView.backgroundColor = [UIColor colorWithHexString:@"#fdfdfd"];
-//
-//    [self.view addSubview:tranPromptView];
-//    [tranPromptView mas_makeConstraints:^(MASConstraintMaker *make) {
-//
-//        make.left.right.equalTo(@0);
-//        make.top.equalTo(interalTranView.mas_bottom).offset(0);
-//
-//    }];
-//
-//    UILabel *tranPromptLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor3 font:11.0];
-//
-//    tranPromptLbl.text = @"同意提币至bitbank进行托管, 0手续费0确认, 不走区块链接极速到账, bitbank.com";
-//
-//    tranPromptLbl.numberOfLines = 0;
-//
-//    [tranPromptView addSubview:tranPromptLbl];
-//    [tranPromptLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-//
-//        make.edges.mas_equalTo(UIEdgeInsetsMake(10, 15, 10, 15));
-//
-//        make.left.equalTo(tranPromptView.mas_left).offset(15);
-//        make.centerY.equalTo(tranPromptView.mas_centerY);
-//        make.right.equalTo(tranPromptView.mas_right).offset(-15);
-//
-//    }];
-//
-//    UIView *tranLine = [[UIView alloc] init];
-//
-//    tranLine.backgroundColor = kLineColor;
-//
-//    [tranPromptView addSubview:tranLine];
-//    [tranLine mas_makeConstraints:^(MASConstraintMaker *make) {
-//
-//        make.left.top.right.equalTo(@0);
-//        make.height.equalTo(@0.5);
-//
-//    }];
+
     
     //确认付币
     UIButton *confirmPayBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"确认提币" key:nil]

@@ -18,6 +18,8 @@ typedef void(^currenSelect)(NSMutableArray * model) ;
 
 @property (nonatomic, strong) CurrencyModel *currentModel;
 
-@property (nonatomic, assign) BOOL  isRedPage;
+@property (nonatomic, assign) BOOL isRedPage;
+
+@property (nonatomic, assign)NSInteger PersonalWallet;
 
 @end

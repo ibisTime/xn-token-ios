@@ -92,41 +92,6 @@
 
         [self layoutIfNeeded];
         [self setNeedsDisplay];
-
-//        [UIView animateWithDuration:0.5 animations:^{
-//            self.addButton.hidden = YES;
-//
-//            [self setNeedsUpdateConstraints];
-//            [self.bgIV mas_remakeConstraints:^(MASConstraintMaker *make) {
-//                make.top.equalTo(self.equivalentBtn.mas_bottom).offset(37);
-//                make.left.equalTo(self.cnyAmountLbl.mas_left);
-//                make.height.equalTo(@(kHeight(150)));
-//                make.width.equalTo(@(kWidth(325)));
-//
-//            }];
-//            [self bringSubviewToFront:self.bgIV];
-//            [self.bottomIV mas_remakeConstraints:^(MASConstraintMaker *make) {
-//                make.top.equalTo(self.equivalentBtn.mas_bottom).offset(53);
-//                make.left.equalTo(self.cnyAmountLbl.mas_left).offset((kWidth(120)));
-//                make.height.equalTo(@(kHeight(120)));
-//                make.width.equalTo(@(kWidth(220)));
-//
-//            }];
-//
-//            [self layoutIfNeeded];
-//            [self setNeedsDisplay];
-//
-//        }];
-
-//        [UIView animateWithDuration:0.5 animations:^{
-//
-//
-//
-//        } completion:^(BOOL finished) {
-//
-//
-//        }];
-
     }
 }
 #pragma mark -- 删除通知
@@ -149,29 +114,7 @@
     [addButton setImage:kImage(@"增加") forState:UIControlStateNormal];
     [addButton addTarget:self action:@selector(addCurrent) forControlEvents:UIControlEventTouchUpInside];
     addButton.backgroundColor = kClearColor;
-//    [self addSubview:addButton];
-//    [addButton mas_makeConstraints:^(MASConstraintMaker *make) {
-//
-//        make.right.equalTo(self.mas_right).offset(-10);
-//        make.bottom.equalTo(self.mas_bottom).offset(15);
-//        make.width.height.equalTo(@20);
-//
-//    }];
-//    addButton.hidden = YES;
-//    UIButton *codeButton = [UIButton buttonWithType:UIButtonTypeCustom];
-//    self.codeButton = codeButton;
-//    [codeButton setImage:kImage(@"扫一扫-黑色") forState:UIControlStateNormal];
-//    [codeButton addTarget:self action:@selector(codeChoose) forControlEvents:UIControlEventTouchUpInside];
-//    codeButton.backgroundColor = kClearColor;
-//    [self addSubview:codeButton];
-//    [codeButton mas_makeConstraints:^(MASConstraintMaker *make) {
-//        
-//        make.right.equalTo(self.addButton.mas_left).offset(-20);
-//        make.top.equalTo(self.mas_top).offset(15+kStatusBarHeight);
-//        make.width.height.equalTo(@20);
-//        
-//    }];
-    
+
     UILabel *equivalentBtn = [UILabel labelWithBackgroundColor:kClearColor textColor:kHexColor(@"#333333") font:10];
 //    equivalentBtn.text = [LangSwitcher switchLang:@"总资产(CNY" key:nil];
     

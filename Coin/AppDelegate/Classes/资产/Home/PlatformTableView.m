@@ -51,13 +51,9 @@ static NSString *platformCell1 = @"AccountMoneyCellTableViewCell";
             
             AccountMoneyCellTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:platformCell1 forIndexPath:indexPath];
             cell.platform = platform;
-            if (indexPath.row == 0) {
-                
-            }
+
             return cell;
         }else{
-            
-            
             return nil;
         }
     }else{
@@ -67,9 +63,7 @@ static NSString *platformCell1 = @"AccountMoneyCellTableViewCell";
             
             PlatformCell *cell = [tableView dequeueReusableCellWithIdentifier:platformCell forIndexPath:indexPath];
             cell.platform = platform;
-            if (indexPath.row == 0) {
-                
-            }
+            
             return cell;
         }else{
             

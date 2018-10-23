@@ -16,7 +16,6 @@
 #import <CoreLocation/CoreLocation.h>
 
 #import "CaptchaView.h"
-#import "YZVC.h"
 #import "APICodeMacro.h"
 #import "NSString+Check.h"
 #import "ChooseCountryVc.h"
