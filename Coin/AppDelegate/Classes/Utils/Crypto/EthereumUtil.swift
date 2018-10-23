@@ -10,15 +10,15 @@ import Foundation
 import BigInt
 import web3swift
 //测试
-let APPURL = "http://120.26.6.213:8546"
-let web3 = Web3.InfuraRinkebyWeb3();
-let web3Rinkeby = Web3.InfuraRinkebyWeb3()
+//let APPURL = "http://120.26.6.213:8546"
+//let web3 = Web3.InfuraRinkebyWeb3();
+//let web3Rinkeby = Web3.InfuraRinkebyWeb3()
 
-//            测试环境
-//let APPURL = "http://47.75.165.70:8546"
-//let web3 = Web3.InfuraMainnetWeb3();
-//
-//let web3Rinkeby = Web3.InfuraMainnetWeb3()
+//正式
+let APPURL = "http://47.75.165.70:8546"
+let web3 = Web3.InfuraMainnetWeb3();
+
+let web3Rinkeby = Web3.InfuraMainnetWeb3()
 
 
 
