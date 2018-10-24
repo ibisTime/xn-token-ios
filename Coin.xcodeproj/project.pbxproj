@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F816BE5218095180078B945 /* SGQRCode in Resources */ = {isa = PBXBuildFile; fileRef = 1F816BE4218095180078B945 /* SGQRCode */; };
+		1F816BF42180953D0078B945 /* SGQRCodeScanManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F816BE6218095380078B945 /* SGQRCodeScanManager.m */; };
+		1F816BF52180953D0078B945 /* SGQRCodeAlbumManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F816BE92180953A0078B945 /* SGQRCodeAlbumManager.m */; };
+		1F816BF62180953D0078B945 /* SGQRCodeGenerateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F816BEC2180953B0078B945 /* SGQRCodeGenerateManager.m */; };
+		1F816BF72180953D0078B945 /* SGQRCodeScanningView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F816BED2180953B0078B945 /* SGQRCodeScanningView.m */; };
+		1F816BF82180953D0078B945 /* UIImage+ImageSize.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F816BEE2180953B0078B945 /* UIImage+ImageSize.m */; };
+		1F816BF92180953D0078B945 /* SGQRCodeHelperTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F816BF02180953C0078B945 /* SGQRCodeHelperTool.m */; };
 		211A34D71FB3F51400FEB71F /* MineHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 211A34D61FB3F51400FEB71F /* MineHeaderView.m */; };
 		211A34DB1FB4083300FEB71F /* MineTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 211A34DA1FB4083300FEB71F /* MineTableView.m */; };
 		211A34DE1FB4245D00FEB71F /* MineCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 211A34DD1FB4245D00FEB71F /* MineCell.m */; };
@@ -543,6 +550,21 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1F816BE4218095180078B945 /* SGQRCode */ = {isa = PBXFileReference; lastKnownFileType = folder; path = SGQRCode; sourceTree = "<group>"; };
+		1F816BE6218095380078B945 /* SGQRCodeScanManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SGQRCodeScanManager.m; sourceTree = "<group>"; };
+		1F816BE7218095390078B945 /* SGQRCodeScanningView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SGQRCodeScanningView.h; sourceTree = "<group>"; };
+		1F816BE8218095390078B945 /* SGQRCode.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SGQRCode.bundle; sourceTree = "<group>"; };
+		1F816BE92180953A0078B945 /* SGQRCodeAlbumManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SGQRCodeAlbumManager.m; sourceTree = "<group>"; };
+		1F816BEA2180953A0078B945 /* UIImage+ImageSize.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageSize.h"; sourceTree = "<group>"; };
+		1F816BEB2180953A0078B945 /* SGQRCodeAlbumManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SGQRCodeAlbumManager.h; sourceTree = "<group>"; };
+		1F816BEC2180953B0078B945 /* SGQRCodeGenerateManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SGQRCodeGenerateManager.m; sourceTree = "<group>"; };
+		1F816BED2180953B0078B945 /* SGQRCodeScanningView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SGQRCodeScanningView.m; sourceTree = "<group>"; };
+		1F816BEE2180953B0078B945 /* UIImage+ImageSize.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageSize.m"; sourceTree = "<group>"; };
+		1F816BEF2180953B0078B945 /* SGQRCodeGenerateManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SGQRCodeGenerateManager.h; sourceTree = "<group>"; };
+		1F816BF02180953C0078B945 /* SGQRCodeHelperTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SGQRCodeHelperTool.m; sourceTree = "<group>"; };
+		1F816BF12180953C0078B945 /* SGQRCodeScanManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SGQRCodeScanManager.h; sourceTree = "<group>"; };
+		1F816BF22180953C0078B945 /* SGQRCodeHelperTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SGQRCodeHelperTool.h; sourceTree = "<group>"; };
+		1F816BF32180953D0078B945 /* SGQRCode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SGQRCode.h; sourceTree = "<group>"; };
 		211A34D51FB3F51400FEB71F /* MineHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MineHeaderView.h; sourceTree = "<group>"; };
 		211A34D61FB3F51400FEB71F /* MineHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MineHeaderView.m; sourceTree = "<group>"; };
 		211A34D91FB4083300FEB71F /* MineTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MineTableView.h; sourceTree = "<group>"; };
@@ -2033,6 +2055,21 @@
 		211DE63B1FB58B4B002FCF3D /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				1F816BEA2180953A0078B945 /* UIImage+ImageSize.h */,
+				1F816BEE2180953B0078B945 /* UIImage+ImageSize.m */,
+				1F816BE8218095390078B945 /* SGQRCode.bundle */,
+				1F816BF32180953D0078B945 /* SGQRCode.h */,
+				1F816BEB2180953A0078B945 /* SGQRCodeAlbumManager.h */,
+				1F816BE92180953A0078B945 /* SGQRCodeAlbumManager.m */,
+				1F816BEF2180953B0078B945 /* SGQRCodeGenerateManager.h */,
+				1F816BEC2180953B0078B945 /* SGQRCodeGenerateManager.m */,
+				1F816BF22180953C0078B945 /* SGQRCodeHelperTool.h */,
+				1F816BF02180953C0078B945 /* SGQRCodeHelperTool.m */,
+				1F816BF12180953C0078B945 /* SGQRCodeScanManager.h */,
+				1F816BE6218095380078B945 /* SGQRCodeScanManager.m */,
+				1F816BE7218095390078B945 /* SGQRCodeScanningView.h */,
+				1F816BED2180953B0078B945 /* SGQRCodeScanningView.m */,
+				1F816BE4218095180078B945 /* SGQRCode */,
 				7A40B11B217EF768004B9830 /* CustomAnimation */,
 				211CEF0E1FCBBF1B000FB0C4 /* NetworkingTool */,
 				B8086409211EA17C00755158 /* DataBtc */,
@@ -4347,6 +4384,7 @@
 				2EE361361FFB7D4500A5C3EB /* README.md in Resources */,
 				7AAF037C21526EC4008507FF /* MSADefaultImages.bundle in Resources */,
 				B8DAD14720E2208B00AF4CD4 /* InfoPlist.strings in Resources */,
+				1F816BE5218095180078B945 /* SGQRCode in Resources */,
 				7A40B101217CAEA8004B9830 /* Assets.xcassets in Resources */,
 				2EB9495C1FDF6B1A00CE4B94 /* TraditionalCode.txt in Resources */,
 			);
@@ -4381,7 +4419,6 @@
 				"${BUILT_PRODUCTS_DIR}/Qiniu/Qiniu.framework",
 				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
-				"${BUILT_PRODUCTS_DIR}/SGQRCode/SGQRCode.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SipHash/SipHash.framework",
 				"${BUILT_PRODUCTS_DIR}/UIDeviceIdentifier/UIDeviceIdentifier.framework",
@@ -4413,7 +4450,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Qiniu.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SGQRCode.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SipHash.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UIDeviceIdentifier.framework",
@@ -4681,6 +4717,7 @@
 				2120D8A31FCEE1DE00712600 /* HourPickerView.m in Sources */,
 				B80864FE211EA17D00755158 /* BTCBigNumber.m in Sources */,
 				7AAF036C21526977008507FF /* unzip.c in Sources */,
+				1F816BF92180953D0078B945 /* SGQRCodeHelperTool.m in Sources */,
 				7A2CC6BA215DC88C00B27E2D /* PGDatePicker+MonthDay.m in Sources */,
 				B8131E94214CF12C00BEF5E0 /* TLWBManger.m in Sources */,
 				B8FDB704214A824400313EC3 /* MysugarView.m in Sources */,
@@ -4725,6 +4762,7 @@
 				B88B092420C8E34F005C2D2F /* JoinMineTableView.m in Sources */,
 				B88B093020C9072B005C2D2F /* RevisePassWordVC.m in Sources */,
 				B8086508211EA17D00755158 /* BTCPriceSource.m in Sources */,
+				1F816BF62180953D0078B945 /* SGQRCodeGenerateManager.m in Sources */,
 				B80864FD211EA17D00755158 /* BTCTransaction+Tests.m in Sources */,
 				216F5B1B206CD9C900F2C832 /* TradeFlowCell.m in Sources */,
 				216F5B53206D004600F2C832 /* GoodMallVC.m in Sources */,
@@ -4762,6 +4800,7 @@
 				B8B15C0520CA55D600F13220 /* BuildSucessVC.m in Sources */,
 				7A07F807216C84F30026EB7A /* SCCircleChart.m in Sources */,
 				7AD659F1215F691C002F747E /* MoneyAndTreasureHeadView.m in Sources */,
+				1F816BF72180953D0078B945 /* SGQRCodeScanningView.m in Sources */,
 				2EA584C71FA813C900C7106C /* main.m in Sources */,
 				7A2CC6B6215DC88B00B27E2D /* PGDatePicker+DateHourMinute.m in Sources */,
 				B8CAA1502115FC6B00695BC3 /* QuestionListTableView.m in Sources */,
@@ -4783,6 +4822,7 @@
 				7A2CC667215BBC6B00B27E2D /* PosMyInvestmentDetailsTableView.m in Sources */,
 				7A2CC6BE215DC88C00B27E2D /* PGDatePicker+Time.m in Sources */,
 				B83D1E0C20CE63A2007835DB /* WalletLocalVc.m in Sources */,
+				1F816BF82180953D0078B945 /* UIImage+ImageSize.m in Sources */,
 				7A8A5D1520EA076C002D9A48 /* RedEnvelopeVC.m in Sources */,
 				21A7F35E1FB2EBAA00FAA0A2 /* CurrencyModel.m in Sources */,
 				B8C2057F20CFFE1C00952765 /* WalletLocalModel.m in Sources */,
@@ -4797,6 +4837,7 @@
 				B808651E211EA17D00755158 /* BTCCurvePoint.m in Sources */,
 				B808652E211EA17D00755158 /* BTC256+Tests.m in Sources */,
 				2129A4F91FDACE87003C99C0 /* CloseGoogleAuthVC.m in Sources */,
+				1F816BF52180953D0078B945 /* SGQRCodeAlbumManager.m in Sources */,
 				7A2CC6D6215DC89200B27E2D /* PGPickerColumnView.m in Sources */,
 				B8086529211EA17D00755158 /* BTCPaymentProtocol.m in Sources */,
 				211D3C151FCFE3AB00B55F9F /* HistoryRateTableView.m in Sources */,
@@ -4823,6 +4864,7 @@
 				7A07F81B216CB23F0026EB7A /* GlobalRevenueListTableView.m in Sources */,
 				215979601FB81CC40029F177 /* BillTableView.m in Sources */,
 				21A7F31C1FB2E2F900FAA0A2 /* TLUserExt.m in Sources */,
+				1F816BF42180953D0078B945 /* SGQRCodeScanManager.m in Sources */,
 				B80864F5211EA17D00755158 /* BTCAssetID.m in Sources */,
 				211A34FD1FB4507E00FEB71F /* IdAuthVC.m in Sources */,
 				B80864FF211EA17D00755158 /* BTCScript+Tests.m in Sources */,
@@ -5108,6 +5150,7 @@
 			baseConfigurationReference = AB34D27FC9725550E9092EC2 /* Pods-Coin.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CLANG_WARN_STRICT_PROTOTYPES = NO;
@@ -5133,7 +5176,7 @@
 					"$(PROJECT_DIR)",
 				);
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = YES;
-				GCC_PREFIX_HEADER = /Users/qinbaozheng/Desktop/THA/Coin/AppDelegate/Classes/Macro/CoinPrefixHeader.pch;
+				GCC_PREFIX_HEADER = "/Users/zqb/xn-token-ios/Coin/AppDelegate/Classes/Macro/CoinPrefixHeader.pch";
 				INFOPLIST_FILE = Coin/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -5218,8 +5261,6 @@
 					"\"Result\"",
 					"-framework",
 					"\"SDWebImage\"",
-					"-framework",
-					"\"SGQRCode\"",
 					"-framework",
 					"\"SVProgressHUD\"",
 					"-framework",
@@ -5255,7 +5296,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				WARNING_CFLAGS = "";
 			};
@@ -5266,6 +5307,7 @@
 			baseConfigurationReference = 8863748C5281F9DC1DDF8EEA /* Pods-Coin.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CLANG_WARN_STRICT_PROTOTYPES = NO;
@@ -5291,7 +5333,7 @@
 					"$(PROJECT_DIR)",
 				);
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = YES;
-				GCC_PREFIX_HEADER = /Users/qinbaozheng/Desktop/THA/Coin/AppDelegate/Classes/Macro/CoinPrefixHeader.pch;
+				GCC_PREFIX_HEADER = "/Users/zqb/xn-token-ios/Coin/AppDelegate/Classes/Macro/CoinPrefixHeader.pch";
 				INFOPLIST_FILE = Coin/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -5377,8 +5419,6 @@
 					"-framework",
 					"\"SDWebImage\"",
 					"-framework",
-					"\"SGQRCode\"",
-					"-framework",
 					"\"SVProgressHUD\"",
 					"-framework",
 					"\"Security\"",
@@ -5412,7 +5452,7 @@
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				WARNING_CFLAGS = "";
 			};

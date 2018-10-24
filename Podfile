@@ -18,7 +18,7 @@ pod 'AFNetworking',         '3.1.0'
 pod 'SDWebImage',           '3.8.1'
 pod 'IQKeyboardManager',    '5.0.2'
 pod 'MBProgressHUD',        '0.9.2’
-pod 'SGQRCode',             '2.1.8'
+#pod 'SGQRCode',             '2.1.8'
 pod 'PYPhotoBrowser',       '1.1.5'
 #pod 'FMDBMigrationManager'
 
