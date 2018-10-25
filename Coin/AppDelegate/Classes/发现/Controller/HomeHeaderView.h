@@ -11,6 +11,8 @@
 #import "BannerModel.h"
 #import "CountInfoModel.h"
 #import "HomeFindModel.h"
+#import "HW3DBannerView.h"
+
 typedef NS_ENUM(NSInteger, HomeEventsType) {
     
     HomeEventsTypeBanner = 0,   //Banner图
@@ -26,6 +28,8 @@ typedef void(^HomeHeaderEventsBlock)(HomeEventsType type, NSInteger index, HomeF
 @interface HomeHeaderView : UIScrollView
 
 @property (nonatomic, copy) HomeHeaderEventsBlock headerBlock;
+
+@property (nonatomic , strong)HW3DBannerView *scrollView;
 //轮播图
 @property (nonatomic, strong) NSMutableArray <BannerModel *>*banners;
 //统计

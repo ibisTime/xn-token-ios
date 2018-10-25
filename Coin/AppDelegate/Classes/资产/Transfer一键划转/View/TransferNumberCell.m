@@ -356,12 +356,6 @@
             self.leftAmount.frame = CGRectMake(15, 115, SCREEN_WIDTH - 60, 20);
         }
     }
-//    [self.amountlLab mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.centerY.equalTo(self.leftAmount.mas_centerY);
-//
-//        make.left.equalTo(self.leftAmount.mas_right).offset(15);
-//
-//    }];
     [self.slider mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(@15);
         make.bottom.equalTo(self.wallletView.mas_bottom).offset(-20);

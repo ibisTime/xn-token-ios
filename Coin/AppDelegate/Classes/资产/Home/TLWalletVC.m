@@ -767,12 +767,14 @@
             trans.currencys = self.currencys;
             trans.centercurrencys = self.currencys;
             trans.localcurrencys = self.allCurrencys;
-
+            trans.isLocal = NO;
         }else{
             //        私钥
             trans.currencys = self.currencys;
             trans.centercurrencys = self.currencys;
             trans.localcurrencys = self.allCurrencys;
+            trans.isLocal = YES;
+            
         }
         [self.navigationController pushViewController:trans animated:YES];
 
@@ -913,7 +915,7 @@
         return;
     }
     
-    helper.code = @"802504";
+    helper.code = @"802503";
     helper.parameters[@"userId"] = [TLUser user].userId;
     helper.parameters[@"token"] = [TLUser user].token;
     helper.isList = YES;
@@ -933,6 +935,10 @@
                 [shouldDisplayCoins addObject:currencyModel];
                 //查询总资产
             }];
+            if (self.switchTager == 1) {
+                weakSelf.tableView.platforms = shouldDisplayCoins;
+                
+            }
 
             weakSelf.currencys = shouldDisplayCoins;
             //                获取本地存储私钥钱包
@@ -946,9 +952,7 @@
             //                私钥钱包余额查询
             [weakSelf queryMyAmount];
 
-            if (weakSelf.switchTager == 1) {
-                weakSelf.tableView.platforms = shouldDisplayCoins;
-            }
+            
 
             [weakSelf.tableView reloadData_tl];
 
@@ -962,63 +966,21 @@
         
     }];
     [self.tableView beginRefreshing];
-
-//    [self.tableView addLoadMoreAction:^{
-//        helper.parameters[@"userId"] = [TLUser user].userId;
-//        helper.parameters[@"token"] = [TLUser user].token;
-//        [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
-//
-//            //去除没有的币种
-//
-//
-//            NSMutableArray <CurrencyModel *> *shouldDisplayCoins = [[NSMutableArray alloc] init];
-//            [objs enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-//
-//                CurrencyModel *currencyModel = (CurrencyModel *)obj;
-//                //                if ([[CoinUtil shouldDisplayCoinArray] indexOfObject:currencyModel.currency ] != NSNotFound ) {
-//
-//                [shouldDisplayCoins addObject:currencyModel];
-//                //                }
-//                //查询总资产
-//
-//            }];
-//
-//            if (weakSelf.switchTager == 0) {
-//                [weakSelf saveLocalWalletData];
-//                [weakSelf saveLocalWallet];
-////                [weakSelf refreshOpenCoinList];
-//                [weakSelf queryTotalAmount];
-//                [weakSelf queryCenterTotalAmount];
-//                [weakSelf queryMyAmount];
-////                [weakSelf queryTotalAmount];
-//                weakSelf.currencys = shouldDisplayCoins;
-//                weakSelf.tableView.platforms = weakSelf.localCurrencys;
-//                [weakSelf.tableView reloadData_tl];
-//            }else{
-////                [weakSelf refreshOpenCoinList];
-//                [weakSelf queryTotalAmount];
-//                [weakSelf queryCenterTotalAmount];
-//                [weakSelf queryMyAmount];
-//                weakSelf.currencys = shouldDisplayCoins;
-//                weakSelf.tableView.platforms = shouldDisplayCoins;
-//                [weakSelf.tableView reloadData_tl];
-//
-//            }
-//
-//            //
-//
-//
-//        } failure:^(NSError *error) {
-//            [weakSelf.tableView endRefreshingWithNoMoreData_tl];
-//
-//
-//        }];
-//
-//    }];
-
-    
 }
 
+-(void)HomePersonalWalletList
+{
+    TLNetworking *http = [TLNetworking new];
+    http.code = @"802504";
+    http.parameters[@"userId"] = [TLUser user].userId;
+    http.parameters[@"token"] = [TLUser user].token;
+    
+    [http postWithSuccess:^(id responseObject) {
+    } failure:^(NSError *error) {
+        
+        
+    }];
+}
 
 - (void)saveLocalWalletData
 {
@@ -1116,6 +1078,9 @@
     
     [http postWithSuccess:^(id responseObject) {
 
+        
+        
+        
         if ([[TLUser user].localMoney isEqualToString:@"USD"]) {
             NSString *cnyStr = [responseObject[@"data"][@"totalAmountUSD"] convertToSimpleRealMoney];
             if (![self.IsLocalExsit isEqualToString:@"1"]) {
@@ -1127,6 +1092,7 @@
             self.headerView.localLbl.text = [NSString stringWithFormat:@"%@(USD)", [LangSwitcher switchLang:@"私钥钱包" key:nil]];
             self.headerView.textLbl.text = [NSString stringWithFormat:@"%@(USD)", [LangSwitcher switchLang:@"个人账户" key:nil]];
             [self.headerView setNeedsDisplay];
+            
         } else if ([[TLUser user].localMoney isEqualToString:@"KRW"])
         {
             NSString *cnyStr = [responseObject[@"data"][@"totalAmountKRW"] convertToSimpleRealMoney];

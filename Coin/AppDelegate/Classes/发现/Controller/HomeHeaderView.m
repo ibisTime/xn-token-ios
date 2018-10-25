@@ -43,34 +43,53 @@
     if (self) {
         self.backgroundColor = kWhiteColor;
         //轮播图
-        [self initBannerView];
+//        [self initBannerView];
+        [self addSubview:self.scrollView];
 
     }
     return self;
 }
 
-#pragma mark - Init
-- (void)initBannerView {
-    
-    CoinWeakSelf;
-    
-    //顶部轮播
-    TLBannerView *bannerView = [[TLBannerView alloc] initWithFrame:CGRectMake(15, 5, kScreenWidth-30, kHeight(138))];
-    bannerView.layer.cornerRadius = 5;
-    bannerView.clipsToBounds = YES;
-    
-    bannerView.selected = ^(NSInteger index) {
-        
-        if (weakSelf.headerBlock) {
-            
-            weakSelf.headerBlock(HomeEventsTypeBanner, index,nil);
-        }
-    };
-    
-    [self addSubview:bannerView];
-    
-    self.bannerView = bannerView;
+-(HW3DBannerView *)scrollView
+{
+    if (!_scrollView) {
+        _scrollView = [HW3DBannerView initWithFrame:CGRectMake(15, 5, SCREEN_WIDTH - 30, SCREEN_WIDTH/2 - 15) imageSpacing:10 imageWidth:SCREEN_WIDTH - 30];
+        _scrollView.initAlpha = 0; // 设置两边卡片的透明度
+        _scrollView.imageRadius = 5; // 设置卡片圆角
+        _scrollView.imageHeightPoor = 20;// 设置占位图片
+        _scrollView.autoScrollTimeInterval = 4;
+//        _scrollView.data = @[@"banner",@"banner",@"banner"];
+        _scrollView.clickImageBlock = ^(NSInteger currentIndex) {
+            //            NSLog(@"%ld",currentIndex);
+            //            _currentIndex = currentIndex;
+        };
+        //        _scrollView.delegate = self;
+    }
+    return _scrollView;
 }
+
+#pragma mark - Init
+//- (void)initBannerView {
+//
+//    CoinWeakSelf;
+//
+//    //顶部轮播
+//    TLBannerView *bannerView = [[TLBannerView alloc] initWithFrame:CGRectMake(15, 5, kScreenWidth-30, kHeight(138))];
+//    bannerView.layer.cornerRadius = 5;
+//    bannerView.clipsToBounds = YES;
+//
+//    bannerView.selected = ^(NSInteger index) {
+//
+//        if (weakSelf.headerBlock) {
+//
+//            weakSelf.headerBlock(HomeEventsTypeBanner, index,nil);
+//        }
+//    };
+//
+//    [self addSubview:bannerView];
+//
+//    self.bannerView = bannerView;
+//}
 
 #pragma mark - Setting
 - (void)setBanners:(NSMutableArray<BannerModel *> *)banners {
@@ -86,7 +105,8 @@
             [imgUrls addObject:obj.pic];
         }
     }];
-    self.bannerView.imgUrls = imgUrls;
+    _scrollView.data = imgUrls;
+//    self.bannerView.imgUrls = imgUrls;
 
 }
 

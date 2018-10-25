@@ -11,6 +11,8 @@
 		1F709D61218162A5002D1CC4 /* TransformButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F709D60218162A5002D1CC4 /* TransformButtonCell.m */; };
 		1F709D6421817246002D1CC4 /* TransferNumberCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F709D6321817246002D1CC4 /* TransferNumberCell.m */; };
 		1F709D6A2181C4C4002D1CC4 /* WANTransfer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F709D692181C4C4002D1CC4 /* WANTransfer.m */; };
+		1F709D712181E51E002D1CC4 /* UIView+Banner.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F709D6E2181E51D002D1CC4 /* UIView+Banner.m */; };
+		1F709D722181E51E002D1CC4 /* HW3DBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F709D6F2181E51D002D1CC4 /* HW3DBannerView.m */; };
 		1F816BF42180953D0078B945 /* SGQRCodeScanManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F816BE6218095380078B945 /* SGQRCodeScanManager.m */; };
 		1F816BF52180953D0078B945 /* SGQRCodeAlbumManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F816BE92180953A0078B945 /* SGQRCodeAlbumManager.m */; };
 		1F816BF62180953D0078B945 /* SGQRCodeGenerateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F816BEC2180953B0078B945 /* SGQRCodeGenerateManager.m */; };
@@ -561,6 +563,10 @@
 		1F709D6321817246002D1CC4 /* TransferNumberCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TransferNumberCell.m; sourceTree = "<group>"; };
 		1F709D682181C4C4002D1CC4 /* WANTransfer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WANTransfer.h; sourceTree = "<group>"; };
 		1F709D692181C4C4002D1CC4 /* WANTransfer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WANTransfer.m; sourceTree = "<group>"; };
+		1F709D6D2181E51C002D1CC4 /* HW3DBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HW3DBannerView.h; sourceTree = "<group>"; };
+		1F709D6E2181E51D002D1CC4 /* UIView+Banner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Banner.m"; sourceTree = "<group>"; };
+		1F709D6F2181E51D002D1CC4 /* HW3DBannerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HW3DBannerView.m; sourceTree = "<group>"; };
+		1F709D702181E51E002D1CC4 /* UIView+Banner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Banner.h"; sourceTree = "<group>"; };
 		1F816BE6218095380078B945 /* SGQRCodeScanManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SGQRCodeScanManager.m; sourceTree = "<group>"; };
 		1F816BE7218095390078B945 /* SGQRCodeScanningView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SGQRCodeScanningView.h; sourceTree = "<group>"; };
 		1F816BE8218095390078B945 /* SGQRCode.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SGQRCode.bundle; sourceTree = "<group>"; };
@@ -2142,6 +2148,10 @@
 		211DE63C1FB58B4B002FCF3D /* CustomUI */ = {
 			isa = PBXGroup;
 			children = (
+				1F709D6D2181E51C002D1CC4 /* HW3DBannerView.h */,
+				1F709D6F2181E51D002D1CC4 /* HW3DBannerView.m */,
+				1F709D702181E51E002D1CC4 /* UIView+Banner.h */,
+				1F709D6E2181E51D002D1CC4 /* UIView+Banner.m */,
 				7A40B112217EF15E004B9830 /* TableViewAnimationKit */,
 				B8CAA11B21158FF200695BC3 /* ImagePicker */,
 				216F5B42206CDA3600F2C832 /* Web */,
@@ -4999,7 +5009,9 @@
 				21205CE51FCD31E0003C6C7C /* CoinAddressCell.m in Sources */,
 				B8D938D52116CA0800B2AA88 /* QDetailCell.m in Sources */,
 				1F709D6A2181C4C4002D1CC4 /* WANTransfer.m in Sources */,
+				1F709D712181E51E002D1CC4 /* UIView+Banner.m in Sources */,
 				B85FE46F21287D2300C9F60C /* PayModel.m in Sources */,
+				1F709D722181E51E002D1CC4 /* HW3DBannerView.m in Sources */,
 				7AABEAFB2148FEEF00283BC7 /* PoliteInstructionsVC.m in Sources */,
 				7A07F834216CDB000026EB7A /* InviteEarningCell.m in Sources */,
 				B8086505211EA17D00755158 /* BTCNetwork.m in Sources */,
