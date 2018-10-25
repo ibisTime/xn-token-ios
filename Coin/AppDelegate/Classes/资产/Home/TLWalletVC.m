@@ -584,7 +584,7 @@
 
         self.tableView.hidden = NO;
         self.tableView.isLocal = NO;
-//        self.addButton.hidden = YES;
+        self.addButton.hidden = NO;
 
         CGFloat h = self.isClear == YES ? 300 : 315;
         if (kDevice_Is_iPhoneX) {

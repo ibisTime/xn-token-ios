@@ -132,7 +132,7 @@
         NSDictionary *coin = currency.coin;
         [self.coinIV sd_setImageWithURL:[NSURL URLWithString:[coin[@"pic1"] convertImageUrl]]];
         self.currencyNameLbl.text = [NSString stringWithFormat:@"%@",coin[@"symbol"]];
-        if ([currency.isDisplay isEqualToString:@"1"]) {
+        if ([currency.isDisplay isEqualToString:@"0"]) {
 
             self.selectButton.selected = NO;
         }else
