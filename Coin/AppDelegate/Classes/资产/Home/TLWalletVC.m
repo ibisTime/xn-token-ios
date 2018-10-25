@@ -1387,20 +1387,11 @@
     NSSet *set = [NSSet setWithArray:arr];
     NSArray *resultArray = [set allObjects];
     http.parameters[@"accountList"] = resultArray;
-//    if (resultArray.count > 0) {
-//
-//
-//    }
-
-    //    http.parametArray = @[ dic];
-    
     CoinWeakSelf;
     
     [http postWithSuccess:^(id responseObject) {
        weakSelf.allCurrencys = [CurrencyModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"][@"accountList"]];
-//        if (weakSelf.isAddBack == YES || weakSelf.switchTager == 0) {
-//
-//        }
+
 
     } failure:^(NSError *error) {
         

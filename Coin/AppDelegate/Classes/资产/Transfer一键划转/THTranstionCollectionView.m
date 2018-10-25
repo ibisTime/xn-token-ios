@@ -23,9 +23,9 @@
 
 static NSString *identifierCell = @"TransformCell";
 
-- (instancetype)initWithFrame:(CGRect)frame collectionViewLayout:(UICollectionViewLayout *)layout withImage:(NSArray *)image {
+- (instancetype)initWithFrame:(CGRect)frame collectionViewLayout:(UICollectionViewLayout *)layout{
     if (self = [super initWithFrame:frame collectionViewLayout:layout]) {
-        _imageArr = image;
+//        _imageArr = image;
         //        _Layout = (UICollectionViewFlowLayout *)layout;
         self.pagingEnabled = NO;
                 
@@ -50,7 +50,7 @@ static NSString *identifierCell = @"TransformCell";
 {
     
  
-        TransformCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifierCell forIndexPath:indexPath];
+    TransformCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifierCell forIndexPath:indexPath];
     if (indexPath.row == 0) {
         cell.backgroundColor = kLineColor;
     }
@@ -65,11 +65,6 @@ static NSString *identifierCell = @"TransformCell";
     NSLog(@"%ld分区---%ldItem", indexPath.section, indexPath.row);
     
      TransformCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifierCell forIndexPath:indexPath];
-//    cell.backgroundColor = kOrangeRedColor;
-//    UIView *back = [UIView new];
-//    back.backgroundColor = kTextBlack;
-//    back.frame = cell.bounds;
-//    [cell addSubview:back];
     cell.isClick = YES;
     if ([self.refreshDelegate respondsToSelector:@selector(refreshCollectionView:didSelectRowAtIndexPath:)]) {
         [self.refreshDelegate refreshCollectionView:self didSelectRowAtIndexPath:indexPath];
@@ -80,6 +75,7 @@ static NSString *identifierCell = @"TransformCell";
     NSLog(@"%s", __FUNCTION__);
     return YES;
 }
+
 //- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 //{
 //    if (self.isRead == YES) {
@@ -163,8 +159,10 @@ static NSString *identifierCell = @"TransformCell";
 
 -(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
 {
-    return UIEdgeInsetsMake(20, 0, -20, 10);//分别为上、左、下、右
+    return UIEdgeInsetsMake(10, 20, 5, 0);//分别为上、左、下、右
 }
+
+
 -(void) collectionView:(UICollectionView *)collectionView didHighlightItemAtIndexPath:(NSIndexPath *)indexPath
 {
     if (self.inde  == nil) {
@@ -180,6 +178,7 @@ static NSString *identifierCell = @"TransformCell";
     self.inde = indexPath;
     cell.backgroundColor = kLineColor;
 }
+
 //点击放开item,cell上图片复原
 - (void)collectionView:(UICollectionView *)collectionView  didUnhighlightItemAtIndexPath:(NSIndexPath *)indexPath
 {

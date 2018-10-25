@@ -13,6 +13,10 @@
 @property (nonatomic, strong) NSMutableArray <CurrencyModel *>*centercurrencys;
 @property (nonatomic, strong) NSMutableArray <CurrencyModel *>*localcurrencys;
 
+//  NO 个人钱包。  yes 私钥钱包currentModel
 @property (nonatomic, assign) BOOL isLocal;
+
+
+
 
 @end

@@ -33,6 +33,7 @@
         self.layer.cornerRadius = 2;
         self.clipsToBounds = YES;
         self.backgroundColor = kWhiteColor;
+        
         UIImageView *photoImageView = [[UIImageView alloc] init];
         photoImageView.contentMode = UIViewContentModeScaleToFill;
         
@@ -90,13 +91,14 @@
     self.mengView.hidden = ! isClick;
     
 }
--(void)setFrame:(CGRect)frame
-{
-    //    frame.origin.x = 10;//这里间距为10，可以根据自己的情况调整
-    //    frame.size.width -= 2 * frame.origin.x;
-    frame.origin.x += 2 * 10;
-    [super setFrame:frame];
-}
+
+//-(void)setFrame:(CGRect)frame
+//{
+//    //    frame.origin.x = 10;//这里间距为10，可以根据自己的情况调整
+//    //    frame.size.width -= 2 * frame.origin.x;
+//    frame.origin.x += 2 * 10;
+//    [super setFrame:frame];
+//}
 
 - (void)choose
 {

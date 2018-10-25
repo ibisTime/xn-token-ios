@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F709D5E218161D8002D1CC4 /* keyTransferTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F709D5D218161D8002D1CC4 /* keyTransferTableView.m */; };
+		1F709D61218162A5002D1CC4 /* TransformButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F709D60218162A5002D1CC4 /* TransformButtonCell.m */; };
+		1F709D6421817246002D1CC4 /* TransferNumberCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F709D6321817246002D1CC4 /* TransferNumberCell.m */; };
+		1F709D6A2181C4C4002D1CC4 /* WANTransfer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F709D692181C4C4002D1CC4 /* WANTransfer.m */; };
 		1F816BF42180953D0078B945 /* SGQRCodeScanManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F816BE6218095380078B945 /* SGQRCodeScanManager.m */; };
 		1F816BF52180953D0078B945 /* SGQRCodeAlbumManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F816BE92180953A0078B945 /* SGQRCodeAlbumManager.m */; };
 		1F816BF62180953D0078B945 /* SGQRCodeGenerateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F816BEC2180953B0078B945 /* SGQRCodeGenerateManager.m */; };
@@ -549,6 +553,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1F709D5C218161D8002D1CC4 /* keyTransferTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = keyTransferTableView.h; sourceTree = "<group>"; };
+		1F709D5D218161D8002D1CC4 /* keyTransferTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = keyTransferTableView.m; sourceTree = "<group>"; };
+		1F709D5F218162A5002D1CC4 /* TransformButtonCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TransformButtonCell.h; sourceTree = "<group>"; };
+		1F709D60218162A5002D1CC4 /* TransformButtonCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TransformButtonCell.m; sourceTree = "<group>"; };
+		1F709D6221817246002D1CC4 /* TransferNumberCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TransferNumberCell.h; sourceTree = "<group>"; };
+		1F709D6321817246002D1CC4 /* TransferNumberCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TransferNumberCell.m; sourceTree = "<group>"; };
+		1F709D682181C4C4002D1CC4 /* WANTransfer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WANTransfer.h; sourceTree = "<group>"; };
+		1F709D692181C4C4002D1CC4 /* WANTransfer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WANTransfer.m; sourceTree = "<group>"; };
 		1F816BE6218095380078B945 /* SGQRCodeScanManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SGQRCodeScanManager.m; sourceTree = "<group>"; };
 		1F816BE7218095390078B945 /* SGQRCodeScanningView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SGQRCodeScanningView.h; sourceTree = "<group>"; };
 		1F816BE8218095390078B945 /* SGQRCode.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SGQRCode.bundle; sourceTree = "<group>"; };
@@ -1764,6 +1776,39 @@
 			path = "New Group1";
 			sourceTree = "<group>";
 		};
+		1F709D652181C467002D1CC4 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				1F709D5C218161D8002D1CC4 /* keyTransferTableView.h */,
+				1F709D5D218161D8002D1CC4 /* keyTransferTableView.m */,
+				1F709D5F218162A5002D1CC4 /* TransformButtonCell.h */,
+				1F709D60218162A5002D1CC4 /* TransformButtonCell.m */,
+				1F709D6221817246002D1CC4 /* TransferNumberCell.h */,
+				1F709D6321817246002D1CC4 /* TransferNumberCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		1F709D662181C469002D1CC4 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				7A40B0FD217B5B7E004B9830 /* BTCTransferModel.h */,
+				7A40B0FE217B5B7E004B9830 /* BTCTransferModel.m */,
+				1F709D682181C4C4002D1CC4 /* WANTransfer.h */,
+				1F709D692181C4C4002D1CC4 /* WANTransfer.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		1F709D672181C46B002D1CC4 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				B88D6C7020EDF3B50043832C /* TLTransfromVC.h */,
+				B88D6C7120EDF3B50043832C /* TLTransfromVC.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 		211A34D81FB3F55600FEB71F /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -1883,8 +1928,6 @@
 				B808653A211F1B6000755158 /* TLBTCtableView.m */,
 				B808653C211F1BCD00755158 /* TLBTCCell.h */,
 				B808653D211F1BCD00755158 /* TLBTCCell.m */,
-				B8F791A221464A3300F5BE45 /* TransformCell.h */,
-				B8F791A321464A3300F5BE45 /* TransformCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2877,13 +2920,13 @@
 			isa = PBXGroup;
 			children = (
 				7AEF235E2154DCE100BF1DB5 /* Home */,
+				2E394FA51FB055DE00BA0829 /* AddAdress添加地址 */,
 				7A40B111217EEC95004B9830 /* FlashAgainst闪兑 */,
 				7AEF23612154E5E000BF1DB5 /* Receivables收款 */,
 				7AEF235D2154D60100BF1DB5 /* PersonalWalletDetails个人钱包详情 */,
 				7AEF235C2154CB1500BF1DB5 /* WalletDetails私钥钱包详情 */,
 				7AEF235B2154C81400BF1DB5 /* AddWallet导入钱包 */,
 				7AEF23562154C3A200BF1DB5 /* Transfer一键划转 */,
-				2E394FA51FB055DE00BA0829 /* AddAdress添加地址 */,
 				211A35051FB45CB500FEB71F /* View */,
 			);
 			path = "资产";
@@ -2894,12 +2937,12 @@
 			children = (
 				B8BBA64120C843F800DC4D5F /* AddAccoutMoneyVc.h */,
 				B8BBA64220C843F800DC4D5F /* AddAccoutMoneyVc.m */,
+				7A40B11F217F2186004B9830 /* AddAccoutModel.h */,
+				7A40B120217F2186004B9830 /* AddAccoutModel.m */,
 				B8BBA64420C8497000DC4D5F /* AddMoneyTableView.h */,
 				B8BBA64520C8497000DC4D5F /* AddMoneyTableView.m */,
 				B8BBA64720C849BB00DC4D5F /* AddMoneyCell.h */,
 				B8BBA64820C849BB00DC4D5F /* AddMoneyCell.m */,
-				7A40B11F217F2186004B9830 /* AddAccoutModel.h */,
-				7A40B120217F2186004B9830 /* AddAccoutModel.m */,
 			);
 			path = "AddAdress添加地址";
 			sourceTree = "<group>";
@@ -3715,12 +3758,13 @@
 		7AEF23562154C3A200BF1DB5 /* Transfer一键划转 */ = {
 			isa = PBXGroup;
 			children = (
-				B88D6C7020EDF3B50043832C /* TLTransfromVC.h */,
-				B88D6C7120EDF3B50043832C /* TLTransfromVC.m */,
+				1F709D672181C46B002D1CC4 /* Controller */,
+				1F709D662181C469002D1CC4 /* Model */,
+				1F709D652181C467002D1CC4 /* View */,
 				B8F7919F2146495000F5BE45 /* THTranstionCollectionView.h */,
 				B8F791A02146495000F5BE45 /* THTranstionCollectionView.m */,
-				7A40B0FD217B5B7E004B9830 /* BTCTransferModel.h */,
-				7A40B0FE217B5B7E004B9830 /* BTCTransferModel.m */,
+				B8F791A221464A3300F5BE45 /* TransformCell.h */,
+				B8F791A321464A3300F5BE45 /* TransformCell.m */,
 			);
 			path = "Transfer一键划转";
 			sourceTree = "<group>";
@@ -4609,6 +4653,7 @@
 				211DE6B51FB58B4C002FCF3D /* UIView+Responder.m in Sources */,
 				7A2CC647215B746E00B27E2D /* TLMoneyDetailsTableView.m in Sources */,
 				211EAD901FD0FC500037FBA8 /* UIViewController+BackButtonHander.m in Sources */,
+				1F709D6421817246002D1CC4 /* TransferNumberCell.m in Sources */,
 				B88B093320C908DC005C2D2F /* ResiseTextFiled.m in Sources */,
 				B8086510211EA17D00755158 /* BTCAssetAddress.m in Sources */,
 				B89F07DF211B06E20057E781 /* TLinviteVC.m in Sources */,
@@ -4630,6 +4675,7 @@
 				215979701FB84B8A0029F177 /* BillDetailVC.m in Sources */,
 				B808651D211EA17D00755158 /* BTCProcessor.m in Sources */,
 				B88B092120C8E29D005C2D2F /* JoinMineVc.m in Sources */,
+				1F709D5E218161D8002D1CC4 /* keyTransferTableView.m in Sources */,
 				B8086516211EA17D00755158 /* BTCAddress.m in Sources */,
 				7A2CC6D8215DC89200B27E2D /* PGPickerView.m in Sources */,
 				B8D5F15620CE0F530005CF96 /* AccountMoneyCellTableViewCell.m in Sources */,
@@ -4952,6 +4998,7 @@
 				7A8A5D3520EA3E5A002D9A48 /* SendVC.m in Sources */,
 				21205CE51FCD31E0003C6C7C /* CoinAddressCell.m in Sources */,
 				B8D938D52116CA0800B2AA88 /* QDetailCell.m in Sources */,
+				1F709D6A2181C4C4002D1CC4 /* WANTransfer.m in Sources */,
 				B85FE46F21287D2300C9F60C /* PayModel.m in Sources */,
 				7AABEAFB2148FEEF00283BC7 /* PoliteInstructionsVC.m in Sources */,
 				7A07F834216CDB000026EB7A /* InviteEarningCell.m in Sources */,
@@ -4970,6 +5017,7 @@
 				B80864F4211EA17D00755158 /* BTCMnemonic+Tests.m in Sources */,
 				211A34E41FB4255700FEB71F /* MineGroup.m in Sources */,
 				2EB949541FDE6D6D00CE4B94 /* LangChooseVC.m in Sources */,
+				1F709D61218162A5002D1CC4 /* TransformButtonCell.m in Sources */,
 				21A7F3191FB2E2F900FAA0A2 /* TLAccountBaseVC.m in Sources */,
 				216F5AFD206CD3A800F2C832 /* GengXinModel.m in Sources */,
 				21CB94F51FDC179700CAB090 /* PersonalModel.m in Sources */,
@@ -5301,7 +5349,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				WARNING_CFLAGS = "";
 			};
@@ -5457,7 +5505,7 @@
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				WARNING_CFLAGS = "";
 			};

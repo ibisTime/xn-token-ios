@@ -144,9 +144,6 @@
     }];
 
 
-
-
-
     [self.lineView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(self.mas_bottom);
         make.left.equalTo(@0);
