@@ -40,6 +40,7 @@
 #import "BTCKeychain.h"
 #import "BTCHashID.h"
 #import "AppConfig.h"
+#import "BTCPoundage.h"
 typedef NS_ENUM(NSInteger, WalletAddressType) {
 
     WalletAddressTypeSelectAddress = 0,       //选择地址
@@ -230,7 +231,7 @@ typedef enum : NSUInteger {
     [net postWithSuccess:^(id responseObject) {
         NSString *blance = responseObject[@"data"][@"balance"];
 
-        CoinModel *currentCoin = [CoinUtil getCoinModel:@"BTC"];
+//        CoinModel *currentCoin = [CoinUtil getCoinModel:@"BTC"];
         //
         //        NSString *leftAmount = [blance subNumber:currentCoin.withdrawFeeString];
         NSString *text =  [CoinUtil convertToRealCoin:blance coin:@"BTC"];
@@ -239,12 +240,43 @@ typedef enum : NSUInteger {
         NSLog(@"%@",responseObject);
 
         self.utxis = [utxoModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"][@"utxoList"]];
-        //        [self testSpendCoins:BTCAPIChain];
-        //
-        //        [self loadHash];
 
-        NSLog(@"%@",self.utxis);
-        //        [self.tableView endRefreshHeader];
+        TLNetworking *net = [TLNetworking new];
+        
+        //获取BTCUTXO
+        
+        net.code = @"802223";
+        
+        [net postWithSuccess:^(id responseObject) {
+            NSLog(@"%@",responseObject);
+            
+            NSNumber *slow = responseObject[@"data"][@"fastestFeeMin"];
+            NSNumber *fast = responseObject[@"data"][@"fastestFeeMax"];
+            
+            int f = ([fast intValue] -[slow intValue])/2;
+            f = f + [slow intValue];
+            
+            NSString *priceSlow = [NSString stringWithFormat:@"%@",slow];
+            NSString *priceFast = [NSString stringWithFormat:@"%@",fast];
+            
+            self.priceSlow = priceSlow;
+            self.priceFast = priceFast;
+            
+            self.slider.maximumValue = [self.priceFast floatValue];
+            self.slider.minimumValue = [self.priceSlow floatValue];
+            self.slider.value = ([self.priceFast floatValue] + [self.priceSlow floatValue])/2;
+            
+            NSString *price = [NSString stringWithFormat:@"%d",f];
+            self.btcPrice = ([self.priceFast floatValue] + [self.priceSlow floatValue])/2;
+//            self.tempPrice = pricr;
+//            self.pricr = pricr;
+            NSLog(@"%@low@,fast%@",priceSlow,priceFast);
+            self.gamPrice = [price floatValue ] ;
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+            [self WorkpickerEventWithIndex:1];
+        } failure:^(NSError *error) {
+            NSLog(@"%@",error);
+        }];
 
     } failure:^(NSError *error) {
         NSLog(@"%@",error);
@@ -442,15 +474,15 @@ typedef enum : NSUInteger {
 
         [IntputUtsos addObject:txout];
 
-        btcFree = (148 * sumIntputCount + 34 * 1 + 10) * [fee intValue];
+        btcFree = (148 * sumIntputCount + 34 * 1 + 10) * [fee floatValue];
         //       Intput总额 大于手续费+转账金额
         if (sumIntputValue >= (btcValue + btcFree)) {
             //       Intput总额 大于   手续费、找零手续费 + 转账金额
-            if (sumIntputValue > (btcValue + (148 * sumIntputCount + 34 * 2 + 10) * [fee intValue]))
+            if (sumIntputValue > (btcValue + (148 * sumIntputCount + 34 * 2 + 10) * [fee floatValue]))
             {
-                btcFree = (148 * sumIntputCount + 34 * 2 + 10) * [fee intValue];
+                btcFree = (148 * sumIntputCount + 34 * 2 + 10) * [fee floatValue];
                 isChange = YES;
-                changeValue = sumIntputValue - btcValue - (148 * sumIntputCount + 34 * 2 + 10) * [fee intValue];
+                changeValue = sumIntputValue - btcValue - (148 * sumIntputCount + 34 * 2 + 10) * [fee floatValue];
             }
             break;
         }
@@ -577,42 +609,11 @@ typedef enum : NSUInteger {
         if ([self.currency.type isEqualToString:@"0"]) {
 
             if ([self.currency.symbol isEqualToString:@"BTC"]) {
-                TLNetworking *net = [TLNetworking new];
-
-                //获取BTCUTXO
+                
+                
                 [self loadUtxoList];
-                net.code = @"802223";
-
-                [net postWithSuccess:^(id responseObject) {
-                    NSLog(@"%@",responseObject);
-
-                    NSNumber *slow = responseObject[@"data"][@"fastestFeeMin"];
-                    NSNumber *fast = responseObject[@"data"][@"fastestFeeMax"];
-
-                    int f = ([fast intValue] -[slow intValue])/2;
-                    f = f + [slow intValue];
-
-                    NSString *priceSlow = [NSString stringWithFormat:@"%@",slow];
-                    NSString *priceFast = [NSString stringWithFormat:@"%@",fast];
-
-                    self.priceSlow = priceSlow;
-                    self.priceFast = priceFast;
-
-                    self.slider.maximumValue = [self.priceFast floatValue];
-                    self.slider.minimumValue = [self.priceSlow floatValue];
-                    self.slider.value = ([self.priceFast floatValue] + [self.priceSlow floatValue])/2;
-
-                    NSString *price = [NSString stringWithFormat:@"%d",f];
-                    self.btcPrice = ([self.priceFast floatValue] + [self.priceSlow floatValue])/2;
-                    self.tempPrice = pricr;
-                    self.pricr = pricr;
-                    NSLog(@"%@low@,fast%@",priceSlow,priceFast);
-                    self.gamPrice = [price floatValue ] ;
-                    [MBProgressHUD hideHUDForView:self.view animated:YES];
-                    [self WorkpickerEventWithIndex:1];
-                } failure:^(NSError *error) {
-                    NSLog(@"%@",error);
-                }];
+                
+                
 
             }else if ([self.currency.symbol isEqualToString:@"WAN"]) {
                 //                    pricr = [MnemonicUtil getWanGasPrice];
@@ -793,58 +794,7 @@ typedef enum : NSUInteger {
 
     UITapGestureRecognizer *ta = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(click)];
     [rightArrowIV addGestureRecognizer:ta];
-    //
-    //    //
-    //    UILabel *receiveTextLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:15.0];
-    //
-    //    receiveTextLbl.text = [LangSwitcher switchLang:@"接收地址" key:nil];
-    //
-    //    [receiveView addSubview:receiveTextLbl];
-    //    [receiveTextLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-    //
-    //        make.left.equalTo(@15);
-    //        make.centerY.equalTo(receiveView.mas_centerY);
-    //
-    //    }];
-    //
-    //    UIView *receiveLine = [[UIView alloc] init];
-    //
-    //    receiveLine.backgroundColor = kLineColor;
-    //
-    //    [receiveView addSubview:receiveLine];
-    //    [receiveLine mas_makeConstraints:^(MASConstraintMaker *make) {
-    //
-    //        make.left.bottom.right.equalTo(@0);
-    //        make.height.equalTo(@0.5);
-    //
-    //    }];
-    //
-    //获取placeholder的颜色
-    //    UIColor *placeholderColor = [[[UITextField alloc] init] valueForKeyPath:@"_placeholderLabel.textColor"];
 
-    //    UILabel *receiveAddressLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kPlaceholderColor font:14.0];
-    //
-    //    receiveAddressLbl.text = [LangSwitcher switchLang:@"请粘贴地址或扫码录入" key:nil];
-    //
-    //    receiveAddressLbl.numberOfLines = 0;
-    //
-    //    [receiveView addSubview:receiveAddressLbl];
-    //    [receiveAddressLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-    //
-    //        make.left.equalTo(receiveTextLbl.mas_right).offset(5);
-    //        make.right.equalTo(rightArrowIV.mas_left).offset(-10);
-    //        make.centerY.equalTo(receiveView.mas_centerY);
-    //
-    //    }];
-    //
-    //    self.receiveAddressLbl = receiveAddressLbl;
-
-    //
-    //    UIButton *receiveBtn = [[UIButton alloc] initWithFrame:CGRectMake(90, kHeight(133) + 10, kScreenWidth, heightMargin)];
-    //
-    //    [receiveBtn addTarget:self action:@selector(selectCoinAddress) forControlEvents:UIControlEventTouchUpInside];
-    //
-    //    [self.view addSubview:receiveBtn];
 
     //谷歌验证码
     self.googleAuthTF = [[TLTextField alloc] initWithFrame:CGRectMake(0, self.balanceTF.yy, kScreenWidth, heightMargin)
@@ -900,7 +850,7 @@ typedef enum : NSUInteger {
 
     self.tranAmountTF.keyboardType = UIKeyboardTypeDecimalPad;
 
-    //    [self.tranAmountTF addTarget:self action:@selector(textDidChange:) forControlEvents:UIControlEventEditingChanged];
+    [self.tranAmountTF addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
 
     [self.view addSubview:self.tranAmountTF];
 
@@ -1008,6 +958,12 @@ typedef enum : NSUInteger {
 }
 
 
+- (void)textFieldDidChange:(UITextField *)textField{
+    if ([self.currency.symbol isEqualToString:@"BTC"]) {
+        self.blanceFree.text = [NSString stringWithFormat:@"%.8fBTC",[BTCPoundage enterTheumber:textField.text setFee:[NSString stringWithFormat:@"%.1f",self.slider.value] setUtxis:self.utxis]/100000000];
+    }
+}
+
 -(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
 
     if ([textField.text rangeOfString:@"."].location==NSNotFound) {
@@ -1070,7 +1026,9 @@ typedef enum : NSUInteger {
 
 
         if ([self.currency.symbol isEqualToString:@"BTC"]) {
-            self.blanceFree.text = [NSString stringWithFormat:@"%@ %@",[NSString stringWithFormat:@"%.1f",slider.value],@"sat/b"];
+//            self.blanceFree.text = [NSString stringWithFormat:@"%@ %@",[NSString stringWithFormat:@"%.1f",slider.value],@"sat/b"];
+            self.blanceFree.text = [NSString stringWithFormat:@"%.8fBTC",[BTCPoundage enterTheumber:self.tranAmountTF.text setFee:[NSString stringWithFormat:@"%.1f",slider.value] setUtxis:self.utxis]/100000000];
+            
             self.btcPrice = slider.value;
             return;
         }else
@@ -1210,7 +1168,8 @@ typedef enum : NSUInteger {
             break;
         case 1:
             if ([self.currency.symbol isEqualToString:@"BTC"]) {
-                self.blanceFree.text = [NSString stringWithFormat:@"%.0f %@",self.gamPrice,@"sat/b"];
+//                self.blanceFree.text = [NSString stringWithFormat:@"%.0f %@",self.gamPrice,@"sat/b"];
+                self.blanceFree.text = [NSString stringWithFormat:@"%.8fBTC",[BTCPoundage enterTheumber:self.tranAmountTF.text setFee:[NSString stringWithFormat:@"%.1f",self.slider.value] setUtxis:self.utxis]/100000000];
                 //            self.choseLab.text =  [LangSwitcher switchLang:@"普通" key:nil];
                 self.pricr = [NSString stringWithFormat:@"%ld",(long)[self.tempPrice integerValue]];
 
@@ -1285,7 +1244,7 @@ typedef enum : NSUInteger {
 
     if ([self.balanceTF.text isBlank]) {
 
-        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请选择地址地址" key:nil] ];
+        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入地址" key:nil] ];
         return ;
     }
 
@@ -1321,11 +1280,11 @@ typedef enum : NSUInteger {
 
         }else
         {
-            BTCMnemonic *address = [self.balanceTF.text lowercaseString];
-            if ([MnemonicUtil getEthAddress:address] == nil) {
-                [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入正确地址" key:nil]];
-                return;
-            }
+//            BTCMnemonic *address = [self.balanceTF.text lowercaseString];
+//            if ([MnemonicUtil getEthAddress:address] == nil) {
+//                [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入正确地址" key:nil]];
+//                return;
+//            }
 //            if (EthereumAddress(self.balanceTF.text) == nil) {
 //
 //            }
@@ -1377,77 +1336,84 @@ typedef enum : NSUInteger {
                       maker:self cancle:^(UIAlertAction *action) {
 
                           return ;
-                      } confirm:^(UIAlertAction *action, UITextField *textField) {
-                          [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-                          //                               [SVProgressHUD show];
-                          dispatch_after(0.5, dispatch_get_main_queue(), ^{
-                              if ([self.word isEqualToString:textField.text]) {
-                                  NSString *result;
-                                  NSLog(@"线程2--->%d",[NSThread isMainThread]);
-                                  //                                  [SVProgressHUD show];
-
-
-                                  if ([self.currency.type isEqualToString:@"0"]) {
-                                      //公链 ETH WAN BTC
-                                      if ([self.currency.symbol isEqualToString:@"ETH"]) {
-                                          NSString *g = [NSString stringWithFormat:@"%lld",[self.pricr longLongValue]*21000];
-                                          result =[MnemonicUtil sendTransactionWithMnemonicWallet:Mnemonics address:[self.balanceTF.text lowercaseString] amount:[gaspic subNumber:g] gaspic:[NSString stringWithFormat:@"%lld",[self.pricr longLongValue]] gasLimt:@"21000"];
-
-                                      }else if ([self.currency.symbol isEqualToString:@"WAN"]){
-
-                                          NSString *g = [NSString stringWithFormat:@"%lld",[self.pricr longLongValue]*21000];
-                                          result =[MnemonicUtil sendWanTransactionWithMnemonicWallet:Mnemonics address:[self.balanceTF.text lowercaseString] amount:[gaspic subNumber:g] gaspic:[NSString stringWithFormat:@"%lld",[self.pricr longLongValue]] gasLimt:@"21000"];
-                                      }else{
-
-                                          //btc
-
-
-
-
-                                          [self testSpendCoins:self.balanceTF.text :self.tranAmountTF.text :[NSString stringWithFormat:@"%.1f",self.btcPrice]];
-                                          return ;
-                                      }
-                                  }else{
-
-
-                                      CoinModel *coin = [CoinUtil getCoinModel:self.currency.symbol];
-
-
-                                      result = [MnemonicUtil sendEthTokenTransactionWithAddress:Mnemonics contractAddress:coin.contractAddress address:[self.balanceTF.text lowercaseString] amount:self.tranAmountTF.text gaspic:self.pricr gasLimt:@"210000"];
-
-                                  }
-
-                                  //
-
-
-
-                                  if ([result isEqualToString:@"1"]) {
-                                      [MBProgressHUD hideHUDForView:self.view animated:YES];
-                                      [TLAlert alertWithSucces:[LangSwitcher switchLang:@"广播成功" key:nil]];
-                                      dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                                          [self.navigationController popViewControllerAnimated:YES];
-                                      });
-
-                                  }else
-                                  {
-                                      NSLog(@"线程3--->%d",[NSThread isMainThread]);
-
-                                      [MBProgressHUD hideHUDForView:self.view animated:YES];
-
-                                      [TLAlert alertWithError:[LangSwitcher switchLang:@"广播失败" key:nil]];
-
-
-                                  }
-                              }else{
-                                  [TLAlert alertWithError:[LangSwitcher switchLang:@"交易密码错误" key:nil]];
-                                  [MBProgressHUD hideHUDForView:self.view animated:YES];
-
-                              }
-                          });
-
-                          //                          [self confirmWithdrawalsWithPwd:textField.text];
-
-                      }];
+                      } confirm:^(UIAlertAction *action, UITextField *textField)
+    {
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        //                               [SVProgressHUD show];
+        dispatch_after(0.5, dispatch_get_main_queue(), ^{
+            if ([self.word isEqualToString:textField.text]) {
+                NSString *result;
+                NSLog(@"线程2--->%d",[NSThread isMainThread]);
+                //                                  [SVProgressHUD show];
+                
+                
+                if ([self.currency.type isEqualToString:@"0"]) {
+                    //公链 ETH WAN BTC
+                    if ([self.currency.symbol isEqualToString:@"ETH"]) {
+                        NSString *g = [NSString stringWithFormat:@"%lld",[self.pricr longLongValue]*21000];
+                        result =[MnemonicUtil sendTransactionWithMnemonicWallet:Mnemonics address:[self.balanceTF.text lowercaseString] amount:[gaspic subNumber:g] gaspic:[NSString stringWithFormat:@"%lld",[self.pricr longLongValue]] gasLimt:@"21000"];
+                        if ([result isEqualToString:@"请输入正确地址"]) {
+                            [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入正确地址" key:nil]];
+                            [MBProgressHUD hideHUDForView:self.view animated:YES];
+                            return;
+                        }
+                        
+                        
+                    }else if ([self.currency.symbol isEqualToString:@"WAN"]){
+                        
+                        NSString *g = [NSString stringWithFormat:@"%lld",[self.pricr longLongValue]*21000];
+                        result =[MnemonicUtil sendWanTransactionWithMnemonicWallet:Mnemonics address:[self.balanceTF.text lowercaseString] amount:[gaspic subNumber:g] gaspic:[NSString stringWithFormat:@"%lld",[self.pricr longLongValue]] gasLimt:@"21000"];
+                        if ([result isEqualToString:@"请输入正确地址"]) {
+                            [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入正确地址" key:nil]];
+                            [MBProgressHUD hideHUDForView:self.view animated:YES];
+                            return;
+                        }
+                    }else{
+                        
+                        //btc
+                        
+                        
+                        
+                        
+                        [self testSpendCoins:self.balanceTF.text :self.tranAmountTF.text :[NSString stringWithFormat:@"%.1f",self.btcPrice]];
+                        return ;
+                    }
+                }else{
+                    
+                    
+                    CoinModel *coin = [CoinUtil getCoinModel:self.currency.symbol];
+                    
+                    
+                    result = [MnemonicUtil sendEthTokenTransactionWithAddress:Mnemonics contractAddress:coin.contractAddress address:[self.balanceTF.text lowercaseString] amount:self.tranAmountTF.text gaspic:self.pricr gasLimt:@"210000"];
+                    if ([result isEqualToString:@"请输入正确地址"]) {
+                        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入正确地址" key:nil]];
+                        [MBProgressHUD hideHUDForView:self.view animated:YES];
+                        return;
+                    }
+                    
+                    
+                }
+                if ([result isEqualToString:@"1"]) {
+                    [MBProgressHUD hideHUDForView:self.view animated:YES];
+                    [TLAlert alertWithSucces:[LangSwitcher switchLang:@"广播成功" key:nil]];
+                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                        [self.navigationController popViewControllerAnimated:YES];
+                    });
+                    
+                }else
+                {
+                    NSLog(@"线程3--->%d",[NSThread isMainThread]);
+                    [MBProgressHUD hideHUDForView:self.view animated:YES];
+                    [TLAlert alertWithError:[LangSwitcher switchLang:@"广播失败" key:nil]];
+                    
+                }
+            }else{
+                [TLAlert alertWithError:[LangSwitcher switchLang:@"交易密码错误" key:nil]];
+                [MBProgressHUD hideHUDForView:self.view animated:YES];
+                
+            }
+        });
+    }];
 
 
 }

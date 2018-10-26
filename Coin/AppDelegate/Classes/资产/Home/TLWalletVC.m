@@ -64,6 +64,8 @@
 
 @property (nonatomic, strong) TLAccountTableView *currentTableView;
 
+@property (nonatomic, strong) NSMutableArray <CurrencyModel *>*AssetsListModel;
+
 @property (nonatomic, strong) NSMutableArray <CurrencyModel *>*currencys;
 
 @property (nonatomic, strong) NSMutableArray <CurrencyModel *>*localCurrencys;
@@ -263,7 +265,7 @@
     [self queryTotalAmount];
     //获取公告列表
     [self requestRateList];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(InfoNotificationAction:) name:@"LOADDATAPAGE" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(InfoNotificationAction:) name:@"LOADDATAPAGE2" object:nil];
 }
 
 #pragma mark -- 接收到通知
@@ -274,7 +276,7 @@
 #pragma mark -- 删除通知
 - (void)dealloc
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"LOADDATAPAGE" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"LOADDATAPAGE2" object:nil];
 }
 
 #pragma mark - Init
@@ -338,7 +340,7 @@
         
         _headerView.addBlock = ^{
             AddAccoutMoneyVc *monyVc = [[AddAccoutMoneyVc alloc] init];
-            monyVc.currentModels = weakSelf.currencys;
+            monyVc.currentModels = weakSelf.AssetsListModel;
             [weakSelf.navigationController pushViewController:monyVc animated:YES];
             
             weakSelf.tempcurrencys = [NSMutableArray array];
@@ -509,7 +511,7 @@
         if (weakSelf.switchTager == 1) {
 //            个人
             WallAccountVC *accountVC= [[WallAccountVC alloc] init];
-            accountVC.currency = weakSelf.currencys[inter];
+            accountVC.currency = weakSelf.AssetsListModel[inter];
             accountVC.title = accountVC.currency.currency;
             accountVC.billType = CurrentTypeAll;
             [weakSelf.navigationController pushViewController:accountVC animated:YES];
@@ -609,7 +611,7 @@
         self.titleView.hidden = NO;
 
         [self.view setNeedsLayout];
-        self.tableView.platforms = self.currencys;
+        self.tableView.platforms = self.AssetsListModel;
         [self.tableView reloadData];
         self.tableView.scrollEnabled = YES;
         self.switchTager = 1;
@@ -795,7 +797,7 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userlogin) name:kUserLoginNotification object:nil];
      [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userloginOut) name:kUserLoginOutNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(withDrawCoinSuccess) name:kWithDrawCoinSuccess object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(withDrawCoinSuccess) name:kWithDrawCoinSuccess object:nil];
 }
 
 //更新数据库
@@ -915,7 +917,7 @@
         return;
     }
     
-    helper.code = @"802503";
+    helper.code = @"802504";
     helper.parameters[@"userId"] = [TLUser user].userId;
     helper.parameters[@"token"] = [TLUser user].token;
     helper.isList = YES;
@@ -923,6 +925,20 @@
     helper.tableView = self.tableView;
     [helper modelClass:[CurrencyModel class]];
     [self.tableView addRefreshAction:^{
+        
+        
+        //                获取本地存储私钥钱包
+        [weakSelf saveLocalWalletData];
+        //                监测是否需要更新新币种
+        [weakSelf saveLocalWallet];
+        //                获取私钥钱包列表
+        [weakSelf queryTotalAmount];
+        //                个人钱包余额查询
+        [weakSelf queryCenterTotalAmount];
+        //                私钥钱包余额查询
+        [weakSelf queryMyAmount];
+        
+        
         [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
             
             //去除没有的币种
@@ -937,23 +953,10 @@
             }];
             if (self.switchTager == 1) {
                 weakSelf.tableView.platforms = shouldDisplayCoins;
-                
             }
-
-            weakSelf.currencys = shouldDisplayCoins;
-            //                获取本地存储私钥钱包
-            [weakSelf saveLocalWalletData];
-            //                监测是否需要更新新币种
-            [weakSelf saveLocalWallet];
-            //                获取私钥钱包列表
-            [weakSelf queryTotalAmount];
-            //                个人钱包余额查询
-            [weakSelf queryCenterTotalAmount];
-            //                私钥钱包余额查询
-            [weakSelf queryMyAmount];
-
+            weakSelf.AssetsListModel = shouldDisplayCoins;
             
-
+//            [weakSelf HomePersonalWalletList];
             [weakSelf.tableView reloadData_tl];
 
         } failure:^(NSError *error) {
@@ -968,19 +971,31 @@
     [self.tableView beginRefreshing];
 }
 
--(void)HomePersonalWalletList
-{
-    TLNetworking *http = [TLNetworking new];
-    http.code = @"802504";
-    http.parameters[@"userId"] = [TLUser user].userId;
-    http.parameters[@"token"] = [TLUser user].token;
-    
-    [http postWithSuccess:^(id responseObject) {
-    } failure:^(NSError *error) {
-        
-        
-    }];
-}
+//-(void)HomePersonalWalletList
+//{
+//    TLNetworking *http = [TLNetworking new];
+//    http.code = @"802503";
+//    http.parameters[@"userId"] = [TLUser user].userId;
+//    http.parameters[@"token"] = [TLUser user].token;
+//
+//    [http postWithSuccess:^(id responseObject) {
+//
+////        NSMutableArray <CurrencyModel *> *shouldDisplayCoins = [[NSMutableArray alloc] init];
+////        [responseObject[@"data"][@"accountList"] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+////
+////            CurrencyModel *currencyModel = (CurrencyModel *)obj;
+////            [shouldDisplayCoins addObject:currencyModel];
+////            //查询总资产
+////        }];
+//        self.currencys = [CurrencyModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"][@"accountList"]];
+////        self.currencys = shouldDisplayCoins;
+////        [self.tableView reloadData];
+//
+//    } failure:^(NSError *error) {
+//
+//
+//    }];
+//}
 
 - (void)saveLocalWalletData
 {
@@ -1064,11 +1079,12 @@
     }
     
 }
-- (void)withDrawCoinSuccess {
-    
-//    [self getMyCurrencyList];
-    
-}
+//- (void)withDrawCoinSuccess {
+//
+////    [self getMyCurrencyList];
+//
+//}
+
 - (void)queryCenterTotalAmount {
     
     TLNetworking *http = [TLNetworking new];
@@ -1077,10 +1093,8 @@
     http.parameters[@"token"] = [TLUser user].token;
     
     [http postWithSuccess:^(id responseObject) {
+        self.currencys = [CurrencyModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"][@"accountList"]];
 
-        
-        
-        
         if ([[TLUser user].localMoney isEqualToString:@"USD"]) {
             NSString *cnyStr = [responseObject[@"data"][@"totalAmountUSD"] convertToSimpleRealMoney];
             if (![self.IsLocalExsit isEqualToString:@"1"]) {
@@ -1129,6 +1143,8 @@
         
     }];
 }
+
+
 - (void)queryMyAmount
 {
     TLNetworking *http = [TLNetworking new];
@@ -1366,7 +1382,6 @@
 }
 
 
-
 - (void)searchRateWithCurrency:(NSString *)currency {
     
     TLNetworking *http = [TLNetworking new];
@@ -1433,7 +1448,7 @@
     
     NSInteger tag = (sender.tag - 1200)%100;
     
-    CurrencyModel *currencyModel = self.currencys[index];
+    CurrencyModel *currencyModel = self.AssetsListModel[index];
     
     switch (tag) {
         case 0:

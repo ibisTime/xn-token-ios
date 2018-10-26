@@ -34,6 +34,8 @@
 
 #import "keyTransferTableView.h"
 
+#import "BTCPoundage.h"
+
 typedef enum : NSUInteger {
     BTCAPIChain,
     BTCAPIBlockchain,
@@ -454,31 +456,19 @@ typedef enum : NSUInteger {
     self.googleTextField = [self.view viewWithTag:1001];
     self.poundageSlider = [self.view viewWithTag:1002];
     self.totalFree = [self.view viewWithTag:1212];
+    [self.numberTextField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+//    self.numberTextField
     __block  NSString *pricr;
     
     if ([self.currentModel.type isEqualToString:@"0"]) {
         
         if ([self.currentModel.symbol isEqualToString:@"BTC"]) {
-            TLNetworking *net = [TLNetworking new];
+           
             
             //获取BTCUTXO
             [self loadUtxoList];
-            net.showView = self.view;
-            net.code = @"802223";
-            [net postWithSuccess:^(id responseObject) {
-                NSLog(@"%@",responseObject);
-                
-                NSNumber *Min = responseObject[@"data"][@"fastestFeeMin"];
-                NSNumber *Max = responseObject[@"data"][@"fastestFeeMax"];
-                self.poundageSlider.maximumValue = [Max floatValue];
-                self.poundageSlider.minimumValue = [Min floatValue];
-                self.poundageSlider.value = ([Max floatValue] + [Min floatValue])/2;
-                self.totalFree.text = [NSString stringWithFormat:@"%@ %@",[LangSwitcher switchLang:@"本次划转手续费为" key:nil],[NSString stringWithFormat:@"%.1f %@ ",self.poundageSlider.value,@"sat/b"]];
-
-            } failure:^(NSError *error) {
-                NSLog(@"%@",error);
-
-            }];
+            
+            
             
         }else if ([self.currentModel.symbol isEqualToString:@"WAN"]) {
 
@@ -557,6 +547,12 @@ typedef enum : NSUInteger {
     }
 }
 
+- (void)textFieldDidChange:(UITextField *)textField{
+    if ([self.currentModel.symbol isEqualToString:@"BTC"]) {
+        self.totalFree.text = [NSString stringWithFormat:@"%@ %.8fBTC",[LangSwitcher switchLang:@"本次划转手续费为" key:nil],[BTCPoundage enterTheumber:self.numberTextField.text setFee:[NSString stringWithFormat:@"%.1f",self.poundageSlider.value] setUtxis:self.utxis]/100000000];
+    }
+}
+
 
 - (void)valueChange:(id) sender
 {
@@ -566,7 +562,10 @@ typedef enum : NSUInteger {
         NSLog(@"%f", value);
         
         if ([self.currentModel.symbol isEqualToString:@"BTC"]) {
-            self.totalFree.text = [NSString stringWithFormat:@"%@ %@",[LangSwitcher switchLang:@"本次划转手续费为" key:nil],[NSString stringWithFormat:@"%.1f %@ ",slider.value,@"sat/b"]];
+            
+            
+//            NSLog(@"%f",[BTCPoundage enterTheumber:self.numberTextField.text setFee:[NSString stringWithFormat:@"%.1f",slider.value] setUtxis:self.utxis]);
+            self.totalFree.text = [NSString stringWithFormat:@"%@ %.8fBTC",[LangSwitcher switchLang:@"本次划转手续费为" key:nil],[BTCPoundage enterTheumber:self.numberTextField.text setFee:[NSString stringWithFormat:@"%.1f",slider.value] setUtxis:self.utxis]/100000000];
             self.btcPrice = slider.value;
             
             return;
@@ -667,6 +666,7 @@ typedef enum : NSUInteger {
     [dataBase.dataBase close];
     self.btcAddress = btcaddress;
     self.btcPrivate = btcprivate;
+    
     TLNetworking *net = [TLNetworking new];
     net.code = @"802220";
     net.parameters[@"address"] = btcaddress;
@@ -678,6 +678,27 @@ typedef enum : NSUInteger {
         NSLog(@"%@",responseObject);
         
         self.utxis = [utxoModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"][@"utxoList"]];
+        
+        TLNetworking *net = [TLNetworking new];
+        net.showView = self.view;
+        net.code = @"802223";
+        [net postWithSuccess:^(id responseObject) {
+            NSLog(@"%@",responseObject);
+            
+            NSNumber *Min = responseObject[@"data"][@"fastestFeeMin"];
+            NSNumber *Max = responseObject[@"data"][@"fastestFeeMax"];
+            self.poundageSlider.maximumValue = [Max floatValue];
+            self.poundageSlider.minimumValue = [Min floatValue];
+            self.poundageSlider.value = ([Max floatValue] + [Min floatValue])/2;
+            
+//            int num = ;
+            self.totalFree.text = [NSString stringWithFormat:@"%@ %.8fBTC",[LangSwitcher switchLang:@"本次划转手续费为" key:nil],[BTCPoundage enterTheumber:self.numberTextField.text setFee:[NSString stringWithFormat:@"%f",self.poundageSlider.value] setUtxis:self.utxis]/100000000];
+            
+        } failure:^(NSError *error) {
+            NSLog(@"%@",error);
+            
+        }];
+        
         
     } failure:^(NSError *error) {
         NSLog(@"%@",error);
@@ -819,15 +840,15 @@ typedef enum : NSUInteger {
         NSString *txoutCount = [CoinUtil convertToRealCoin:txout.count coin:@"BTC"];
         sumIntputValue = sumIntputValue + [[CoinUtil convertToSysCoin:txoutCount coin:@"BTC"] longLongValue];
         [IntputUtsos addObject:txout];
-        btcFree = (148 * sumIntputCount + 34 * 1 + 10) * [fee intValue];
+        btcFree = (148 * sumIntputCount + 34 * 1 + 10) * [fee floatValue];
         //       Intput总额 大于手续费+转账金额
         if (sumIntputValue >= (btcValue + btcFree)) {
             //       Intput总额 大于   手续费、找零手续费 + 转账金额
-            if (sumIntputValue > (btcValue + (148 * sumIntputCount + 34 * 2 + 10) * [fee intValue]))
+            if (sumIntputValue > (btcValue + (148 * sumIntputCount + 34 * 2 + 10) * [fee floatValue]))
             {
-                btcFree = (148 * sumIntputCount + 34 * 2 + 10) * [fee intValue];
+                btcFree = (148 * sumIntputCount + 34 * 2 + 10) * [fee floatValue];
                 isChange = YES;
-                changeValue = sumIntputValue - btcValue - (148 * sumIntputCount + 34 * 2 + 10) * [fee intValue];
+                changeValue = sumIntputValue - btcValue - (148 * sumIntputCount + 34 * 2 + 10) * [fee floatValue];
             }
             break;
         }

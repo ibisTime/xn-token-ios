@@ -288,7 +288,7 @@
 
     http.code = @"625412";
     http.parameters[@"language"] = lang  ;
-    http.parameters[@"location"] = @"0"  ;
+    http.parameters[@"location"] = @"0";
     http.parameters[@"status"] = @"1"  ;
 
     [http postWithSuccess:^(id responseObject) {

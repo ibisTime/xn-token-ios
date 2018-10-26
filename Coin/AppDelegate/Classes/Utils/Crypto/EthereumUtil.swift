@@ -207,6 +207,9 @@ public class EthCrypto: NSObject
             let am = BigUInt.init(amount)
             options.value = am
             let toaddress = EthereumAddress(to)
+            if toaddress == nil {
+                return "请输入正确地址"
+            }
            
            
             let intermediateSend = web3Rinkeby.contract(Web3.Utils.coldWalletABI, at: toaddress, abiVersion: 2)!.method(options: options)!
@@ -249,6 +252,12 @@ public class EthCrypto: NSObject
 
             convenienceTransferOptions.gasPrice = BigUInt(gasPrice)
 //            let contractAddress = EthereumAddress("0x45245bc59219eeaaf6cd3f382e078a461ff9de7b")!
+            let toaddress = EthereumAddress(to)
+            if toaddress == nil {
+                return "请输入正确地址"
+            }
+
+            
             let convenienceTokenTransfer = web3Rinkeby.eth.sendERC20tokensWithNaturalUnits(tokenAddress: EthereumAddress(con)!, from: (keystore?.addresses?.first!)!, to: EthereumAddress(to)!, amount: amount, options: convenienceTransferOptions) // there are also convenience functions to send ETH and ERC20 under the .eth structure
 
 //            let gasEstimateResult = convenienceTokenTransfer!.estimateGas(options: nil)
@@ -280,11 +289,15 @@ public class EthCrypto: NSObject
 
 
     //判断地址是否正确
-//    static public func getEthereumAddress(to: String) -> String?
-//    {
-//        let toaddress = EthereumAddress(to)
-//        return toaddress;
-//    }
+    static public func getEthereumAddress(to: String) -> String?
+    {
+        var txHash : String!
+        let toaddress = EthereumAddress(to);
+        if toaddress == nil {
+            return "请输入正确地址"
+        }
+        return txHash;
+    }
     
     //发送WAN交易（签名并广播）
     static public func sendWanTransaction(mnemonic: String, to: String, amount: String, gasPrice: String, gasLimit: String) -> String? {
@@ -310,6 +323,9 @@ public class EthCrypto: NSObject
             let am = BigUInt.init(amount)
             options.value = am
             let toaddress = EthereumAddress(to)
+            if toaddress == nil {
+                return "请输入正确地址"
+            }
             
             
             let intermediateSend = web3wan?.contract(Web3.Utils.coldWalletABI, at: toaddress, abiVersion: 2)!.method(options: options)!
@@ -366,6 +382,9 @@ public class EthCrypto: NSObject
             let am = BigUInt.init(amount)
             options.value = am
             let toaddress = EthereumAddress(to)
+            if toaddress == nil {
+                return "请输入正确地址"
+            }
             let convenienceTokenTransfer = web3Rinkeby.eth.sendERC20tokensWithNaturalUnits(tokenAddress: EthereumAddress(con)!, from: (keystore?.addresses?.first!)!, to: EthereumAddress(to)!, amount: amount, options: options)
 //
 //            let intermediateSend = web3Rinkeby?.contract(Web3.Utils.coldWalletABI, at: toaddress, abiVersion: 2)!.method(options: options)!

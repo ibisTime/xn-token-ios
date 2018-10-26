@@ -13,6 +13,8 @@
 		1F709D6A2181C4C4002D1CC4 /* WANTransfer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F709D692181C4C4002D1CC4 /* WANTransfer.m */; };
 		1F709D712181E51E002D1CC4 /* UIView+Banner.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F709D6E2181E51D002D1CC4 /* UIView+Banner.m */; };
 		1F709D722181E51E002D1CC4 /* HW3DBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F709D6F2181E51D002D1CC4 /* HW3DBannerView.m */; };
+		1F709D752182C317002D1CC4 /* BTCPoundage.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F709D742182C317002D1CC4 /* BTCPoundage.m */; };
+		1F709D782182FF09002D1CC4 /* CustomRefreshGifHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F709D772182FF09002D1CC4 /* CustomRefreshGifHeader.m */; };
 		1F816BF42180953D0078B945 /* SGQRCodeScanManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F816BE6218095380078B945 /* SGQRCodeScanManager.m */; };
 		1F816BF52180953D0078B945 /* SGQRCodeAlbumManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F816BE92180953A0078B945 /* SGQRCodeAlbumManager.m */; };
 		1F816BF62180953D0078B945 /* SGQRCodeGenerateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F816BEC2180953B0078B945 /* SGQRCodeGenerateManager.m */; };
@@ -567,6 +569,10 @@
 		1F709D6E2181E51D002D1CC4 /* UIView+Banner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Banner.m"; sourceTree = "<group>"; };
 		1F709D6F2181E51D002D1CC4 /* HW3DBannerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HW3DBannerView.m; sourceTree = "<group>"; };
 		1F709D702181E51E002D1CC4 /* UIView+Banner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Banner.h"; sourceTree = "<group>"; };
+		1F709D732182C317002D1CC4 /* BTCPoundage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTCPoundage.h; sourceTree = "<group>"; };
+		1F709D742182C317002D1CC4 /* BTCPoundage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTCPoundage.m; sourceTree = "<group>"; };
+		1F709D762182FF09002D1CC4 /* CustomRefreshGifHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomRefreshGifHeader.h; sourceTree = "<group>"; };
+		1F709D772182FF09002D1CC4 /* CustomRefreshGifHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomRefreshGifHeader.m; sourceTree = "<group>"; };
 		1F816BE6218095380078B945 /* SGQRCodeScanManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SGQRCodeScanManager.m; sourceTree = "<group>"; };
 		1F816BE7218095390078B945 /* SGQRCodeScanningView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SGQRCodeScanningView.h; sourceTree = "<group>"; };
 		1F816BE8218095390078B945 /* SGQRCode.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SGQRCode.bundle; sourceTree = "<group>"; };
@@ -1802,6 +1808,8 @@
 				7A40B0FE217B5B7E004B9830 /* BTCTransferModel.m */,
 				1F709D682181C4C4002D1CC4 /* WANTransfer.h */,
 				1F709D692181C4C4002D1CC4 /* WANTransfer.m */,
+				1F709D732182C317002D1CC4 /* BTCPoundage.h */,
+				1F709D742182C317002D1CC4 /* BTCPoundage.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2045,6 +2053,8 @@
 		211CEF0E1FCBBF1B000FB0C4 /* NetworkingTool */ = {
 			isa = PBXGroup;
 			children = (
+				1F709D762182FF09002D1CC4 /* CustomRefreshGifHeader.h */,
+				1F709D772182FF09002D1CC4 /* CustomRefreshGifHeader.m */,
 				2EE361531FFE182500A5C3EB /* RespHandler.h */,
 				2EE361541FFE182700A5C3EB /* RespHandler.m */,
 				211DE64E1FB58B4B002FCF3D /* TLNetworking.h */,
@@ -4627,6 +4637,7 @@
 				2EB039A71FE8B23300589D8E /* EditEmailVC.m in Sources */,
 				7A07F808216C84F30026EB7A /* SCColor.m in Sources */,
 				4C8DE98520C983D100EC183C /* EthereumUtil.swift in Sources */,
+				1F709D782182FF09002D1CC4 /* CustomRefreshGifHeader.m in Sources */,
 				7AAF0312214F8C35008507FF /* IntegralVC.m in Sources */,
 				B80864F3211EA17D00755158 /* BTCAssetType.m in Sources */,
 				7A8A5D2520EA301E002D9A48 /* RedEnvelopeShoreVC.m in Sources */,
@@ -4660,6 +4671,7 @@
 				211D3C1B1FCFE46C00B55F9F /* HistoryRateModel.m in Sources */,
 				21D216861FB9C5750040795E /* QRCodeVC.m in Sources */,
 				7A07F7E2216C7BFB0026EB7A /* MyIncomeTableView.m in Sources */,
+				1F709D752182C317002D1CC4 /* BTCPoundage.m in Sources */,
 				211DE6B51FB58B4C002FCF3D /* UIView+Responder.m in Sources */,
 				7A2CC647215B746E00B27E2D /* TLMoneyDetailsTableView.m in Sources */,
 				211EAD901FD0FC500037FBA8 /* UIViewController+BackButtonHander.m in Sources */,

@@ -9,7 +9,7 @@
 #import "TLTableView.h"
 #import "UIScrollView+TLAdd.h"
 #import <CDCommon/UIScrollView+TLAdd.h>
-
+#import "CustomRefreshGifHeader.h"
 
 #define  adjustsContentInsets(scrollView)\
 do { \
@@ -122,9 +122,14 @@ _Pragma("clang diagnostic pop") \
 - (void)addRefreshAction:(void (^)())refresh
 {
     self.refresh = refresh;
-    
-    
-    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingBlock:self.refresh];
+
+//    CoinWeakSelf;
+    CustomRefreshGifHeader *header = [CustomRefreshGifHeader headerWithRefreshingBlock:self.refresh];
+    NSArray *imageArr = @[[UIImage imageNamed:@"refresh1"], [UIImage imageNamed:@"refresh2"], [UIImage imageNamed:@"refresh3"], [UIImage imageNamed:@"refresh4"]];
+    [header setImages:imageArr duration:0.5 forState:MJRefreshStateIdle];
+    [header setImages:imageArr duration:0.5 forState:MJRefreshStatePulling];
+    [header setImages:imageArr duration:0.5 forState:MJRefreshStateRefreshing];
+    [header setImages:imageArr duration:0.5 forState:MJRefreshStateWillRefresh];
     self.mj_header = header;
 }
 
