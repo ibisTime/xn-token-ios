@@ -2940,7 +2940,7 @@
 			isa = PBXGroup;
 			children = (
 				7AEF235E2154DCE100BF1DB5 /* Home */,
-				2E394FA51FB055DE00BA0829 /* AddAdress添加地址 */,
+				2E394FA51FB055DE00BA0829 /* AddAdress添加 */,
 				7A40B111217EEC95004B9830 /* FlashAgainst闪兑 */,
 				7AEF23612154E5E000BF1DB5 /* Receivables收款 */,
 				7AEF235D2154D60100BF1DB5 /* PersonalWalletDetails个人钱包详情 */,
@@ -2952,7 +2952,7 @@
 			path = "资产";
 			sourceTree = "<group>";
 		};
-		2E394FA51FB055DE00BA0829 /* AddAdress添加地址 */ = {
+		2E394FA51FB055DE00BA0829 /* AddAdress添加 */ = {
 			isa = PBXGroup;
 			children = (
 				B8BBA64120C843F800DC4D5F /* AddAccoutMoneyVc.h */,
@@ -2964,7 +2964,7 @@
 				B8BBA64720C849BB00DC4D5F /* AddMoneyCell.h */,
 				B8BBA64820C849BB00DC4D5F /* AddMoneyCell.m */,
 			);
-			path = "AddAdress添加地址";
+			path = "AddAdress添加";
 			sourceTree = "<group>";
 		};
 		2E394FAC1FB055DE00BA0829 /* 我的 */ = {

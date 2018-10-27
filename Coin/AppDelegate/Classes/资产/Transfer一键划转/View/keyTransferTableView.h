@@ -8,6 +8,7 @@
 
 #import "TLTableView.h"
 #import "CurrencyModel.h"
+#import "TransferNumberCell.h"
 @interface keyTransferTableView : TLTableView
 
 @property (nonatomic, strong) NSMutableArray <CurrencyModel *>*models;
@@ -15,5 +16,10 @@
 @property (nonatomic, strong)CurrencyModel *model;
 
 @property (nonatomic, assign) BOOL isLocal;
+
+@property (nonatomic , copy)NSString *poundage;
+
+@property (nonatomic, strong)TransferNumberCell *cell;
+
 
 @end

@@ -27,7 +27,7 @@
 
 +(CGFloat)enterTheumber:(NSString *)number setFee:(NSString *)fee setUtxis:(NSMutableArray <utxoModel *>*)utxis
 {
-    if ([number isEqualToString:@""]) {
+    if ([TLUser isBlankString:number] == YES) {
         number = @"0";
     }
     CoinModel *coin = [CoinUtil getCoinModel:@"BTC"];

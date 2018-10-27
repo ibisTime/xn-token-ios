@@ -66,6 +66,14 @@ NSString *const kCNY = @"CNY";
 
 + (NSString *)convertToSysCoin:(NSString *)count coin:(NSString *)coin {
     
+//    if (![count valid]) {
+//        count = @"";
+//    }
+//    if (![coin valid]) {
+//        coin = @"";
+//    }
+
+    
     return [self mult1:count mult2:[[self getCardinality:coin] stringValue]];
     
 }

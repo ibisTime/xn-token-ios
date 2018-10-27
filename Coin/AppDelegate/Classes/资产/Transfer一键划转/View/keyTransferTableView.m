@@ -57,23 +57,27 @@
         return cell;
     }
     
-    TransferNumberCell *cell = [tableView dequeueReusableCellWithIdentifier:TransferNumber forIndexPath:indexPath];
+    _cell = [tableView dequeueReusableCellWithIdentifier:TransferNumber forIndexPath:indexPath];
 //    cell.models = self.models;
-    cell.isLocal = self.isLocal;
-    cell.model = self.model;
+    _cell.isLocal = self.isLocal;
+    _cell.model = self.model;
     
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    [cell.slider addTarget:self action:@selector(valueChange:) forControlEvents:UIControlEventValueChanged];
+    _cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    [_cell.slider addTarget:self action:@selector(valueChange:) forControlEvents:UIControlEventValueChanged];
     
-    [cell.changebut addTarget:self action:@selector(allTransform:) forControlEvents:UIControlEventTouchUpInside];
-    cell.changebut.tag = 100;
-    [cell.allLab addTarget:self action:@selector(allTransform:) forControlEvents:UIControlEventTouchUpInside];
-    cell.allLab.tag = 101;
-    [cell.importButton addTarget:self action:@selector(allTransform:) forControlEvents:UIControlEventTouchUpInside];
-    cell.importButton.tag = 102;
+    [_cell.changebut addTarget:self action:@selector(allTransform:) forControlEvents:UIControlEventTouchUpInside];
+    _cell.changebut.tag = 100;
+    [_cell.allLab addTarget:self action:@selector(allTransform:) forControlEvents:UIControlEventTouchUpInside];
+    _cell.allLab.tag = 101;
+    [_cell.importButton addTarget:self action:@selector(allTransform:) forControlEvents:UIControlEventTouchUpInside];
+    _cell.importButton.tag = 102;
+    
+    if ([TLUser isBlankString:self.poundage] == NO) {
+        _cell.totalFree.text = self.poundage;
+    }
     
     
-    return cell;
+    return _cell;
     
 }
 

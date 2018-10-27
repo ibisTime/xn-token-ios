@@ -548,6 +548,10 @@ typedef enum : NSUInteger {
 }
 
 - (void)textFieldDidChange:(UITextField *)textField{
+    self.numberTextField = [self.view viewWithTag:1000];
+    self.googleTextField = [self.view viewWithTag:1001];
+    self.poundageSlider = [self.view viewWithTag:1002];
+    self.totalFree = [self.view viewWithTag:1212];
     if ([self.currentModel.symbol isEqualToString:@"BTC"]) {
         self.totalFree.text = [NSString stringWithFormat:@"%@ %.8fBTC",[LangSwitcher switchLang:@"本次划转手续费为" key:nil],[BTCPoundage enterTheumber:self.numberTextField.text setFee:[NSString stringWithFormat:@"%.1f",self.poundageSlider.value] setUtxis:self.utxis]/100000000];
     }
@@ -556,6 +560,10 @@ typedef enum : NSUInteger {
 
 - (void)valueChange:(id) sender
 {
+    self.numberTextField = [self.view viewWithTag:1000];
+    self.googleTextField = [self.view viewWithTag:1001];
+    self.poundageSlider = [self.view viewWithTag:1002];
+    self.totalFree = [self.view viewWithTag:1212];
     if ([sender isKindOfClass:[UISlider class]]) {
         UISlider *slider = sender;
         CGFloat value = slider.value;
@@ -647,6 +655,7 @@ typedef enum : NSUInteger {
 #pragma mark -- BTC手续费
 - (void)loadUtxoList
 {
+    self.totalFree = [self.view viewWithTag:1212];
     TLDataBase *dataBase = [TLDataBase sharedManager];
     NSString *btcaddress;
     NSString *btcprivate;
@@ -671,6 +680,7 @@ typedef enum : NSUInteger {
     net.code = @"802220";
     net.parameters[@"address"] = btcaddress;
     [net postWithSuccess:^(id responseObject) {
+        [self.tableView reloadData];
         NSString *blance = responseObject[@"data"][@"balance"];
         NSString *text =  [CoinUtil convertToRealCoin:blance coin:@"BTC"];
         self.symbolBlance.text = [NSString stringWithFormat:@"%.8f %@",[text floatValue],self.currentModel.symbol];
@@ -687,13 +697,17 @@ typedef enum : NSUInteger {
             
             NSNumber *Min = responseObject[@"data"][@"fastestFeeMin"];
             NSNumber *Max = responseObject[@"data"][@"fastestFeeMax"];
-            self.poundageSlider.maximumValue = [Max floatValue];
-            self.poundageSlider.minimumValue = [Min floatValue];
-            self.poundageSlider.value = ([Max floatValue] + [Min floatValue])/2;
+            self.tableView.cell.slider.maximumValue = [Max floatValue];
+            self.tableView.cell.slider.minimumValue = [Min floatValue];
+            self.tableView.cell.slider.value = ([Max floatValue] + [Min floatValue])/2;
             
-//            int num = ;
-            self.totalFree.text = [NSString stringWithFormat:@"%@ %.8fBTC",[LangSwitcher switchLang:@"本次划转手续费为" key:nil],[BTCPoundage enterTheumber:self.numberTextField.text setFee:[NSString stringWithFormat:@"%f",self.poundageSlider.value] setUtxis:self.utxis]/100000000];
+
+//            self.totalFree.text = ;
             
+//            self.totalFree.backgroundColor = [UIColor redColor];
+//            [self.tableView reloadData];
+            self.tableView.poundage = [NSString stringWithFormat:@"%@ %.8fBTC",[LangSwitcher switchLang:@"本次划转手续费为" key:nil],[BTCPoundage enterTheumber:self.numberTextField.text setFee:[NSString stringWithFormat:@"%f",([Max floatValue] + [Min floatValue])/2] setUtxis:self.utxis]/100000000];
+            [self.tableView reloadData];
         } failure:^(NSError *error) {
             NSLog(@"%@",error);
             

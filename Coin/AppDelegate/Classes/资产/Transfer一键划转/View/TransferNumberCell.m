@@ -82,7 +82,7 @@
         
         [myprviate mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.equalTo(from.mas_centerY);
-            make.left.equalTo(to.mas_right).offset(10);
+            make.left.equalTo(from.mas_right).offset(10);
             
         }];
         [prviatekey mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -310,6 +310,44 @@
 //            totalFree.text = [NSString stringWithFormat:@"%@ %@",[LangSwitcher switchLang:@"本次划转手续费为" key:nil],[NSString stringWithFormat:@"%@ %@",money1,self.currencys[0].currency]];
 //
 //        }
+        self.org.backgroundColor =kAppCustomMainColor;
+        self.blue.backgroundColor =kOrangeRedColor;
+        
+        self.myprivate.text = [LangSwitcher switchLang:@"私钥账户" key:nil];
+        self.privateKey.text = [LangSwitcher switchLang:@"个人账户" key:nil];
+        self.slider.hidden = NO;
+        
+        if ([TLUser user].isGoogleAuthOpen == YES) {
+            
+            self.wallletView.frame = CGRectMake(15, _lineView.yy + 10, SCREEN_WIDTH - 30, 250);
+            self.leftAmount.frame = CGRectMake(15, 165, SCREEN_WIDTH - 60, 20);
+            
+        }else
+        {
+            
+            self.wallletView.frame = CGRectMake(15, _lineView.yy + 10, SCREEN_WIDTH - 30, 200);
+            self.leftAmount.frame = CGRectMake(15, 115, SCREEN_WIDTH - 60, 20);
+        }
+        [self.slider mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(@15);
+            make.bottom.equalTo(self.wallletView.mas_bottom).offset(-20);
+            make.width.equalTo(@(kScreenWidth-60));
+            make.height.equalTo(@(20));
+        }];
+        [self.importButton mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.wallletView.mas_bottom).offset(60);
+            make.right.equalTo(self.mas_right).offset(-35);
+            make.left.equalTo(self.mas_left).offset(35);
+            make.height.equalTo(@48);
+            
+        }];
+        
+        [self.totalFree mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.bottom.equalTo(self.importButton.mas_top).offset(-10);
+            make.left.equalTo(self.importButton.mas_left).offset(0);
+            make.right.equalTo(self.importButton.mas_right).offset(0);
+            
+        }];
 
     }
     return self;

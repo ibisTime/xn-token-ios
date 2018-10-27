@@ -366,6 +366,9 @@ NSString *const kGoogleAuthClose = @"0";
 }
 
 + (BOOL) isBlankString:(NSString *)string {
+    if ([string isEqualToString:@""]) {
+        return YES;
+    }
     if (string == nil || string == NULL)
     {
         return YES;

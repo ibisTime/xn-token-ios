@@ -75,8 +75,8 @@ void TLLog(NSString *format, ...) {
         case RunEnvRelease: {
             
             self.qiniuDomain = @"http://pajvine9a.bkt.clouddn.com";
-            self.addr = @"http://47.75.165.70:2101";
-//            self.addr = @"https://app.tha.hichengdai.com/api";
+//            self.addr = @"http://47.75.165.70:2101";
+            self.addr = @"https://app.tha.hichengdai.com/api";
 
             self.ethHash = @"https://etherscan.io/tx";
             self.wanHash = @"https://www.wanscan.org/tx";
