@@ -53,13 +53,13 @@
     //
     //    };
 }
-- (void)refreshOpenCoinList {
-    [CoinUtil refreshOpenCoinList:^{
-        
-    } failure:^{
-        
-    }];
-}
+//- (void)refreshOpenCoinList {
+//    [CoinUtil refreshOpenCoinList:^{
+//
+//    } failure:^{
+//
+//    }];
+//}
 
 - (void)queryTotalAmount {
     [self.tableView beginRefreshing];
@@ -158,7 +158,7 @@
     [helper modelClass:[CurrencyModel class]];
     [self.tableView addRefreshAction:^{
         
-        [weakSelf refreshOpenCoinList];
+//        [weakSelf refreshOpenCoinList];
         
         [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
             

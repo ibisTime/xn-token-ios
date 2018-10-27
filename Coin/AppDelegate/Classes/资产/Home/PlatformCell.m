@@ -164,8 +164,8 @@
 
    self.currencyNameLbl.text = platform.currency;
     
-     NSString *leftAmount = [CoinUtil convertToRealCoin:platform.amountString coin:coin.symbol];
-    NSString *rightAmount = [CoinUtil convertToRealCoin:platform.frozenAmountString coin:coin.symbol];
+     NSString *leftAmount = [CoinUtil convertToRealCoin:platform.amountString coin:platform.currency];
+    NSString *rightAmount = [CoinUtil convertToRealCoin:platform.frozenAmountString coin:platform.currency];
     NSString *ritAmount = [leftAmount subNumber:rightAmount];
 
     if ([[TLUser user].localMoney isEqualToString:@"USD"]) {
@@ -183,8 +183,6 @@
         self.rmbPriceLbl.text = [NSString stringWithFormat:@"%.2f CNY",[platform.amountCNY doubleValue]];
 
     }
-    
-
     self.opppsitePriceLbl.text = [NSString stringWithFormat:@"%.8f",[ritAmount doubleValue]];
 }
 

@@ -164,8 +164,6 @@
             //            判断是否更新
             [self saveLocalWallet];
             [[NSUserDefaults standardUserDefaults] setBool:NO forKey:KISBuild];
-
-
         }
         //        [self getMyCurrencyList];
         //1.7.0版本升级适配
@@ -249,7 +247,7 @@
     [super viewDidLoad];
 //    self.title = @"钱包";
     self.view.backgroundColor = kWhiteColor;
-
+//    [self PageDisplayLoading];
     [self initTableView];
     self.switchTager = 1;
     //数据库查询一键划转私钥钱包的币种
@@ -257,12 +255,7 @@
     [self addNotification];
     //列表查询个人账户币种列表
     [self getMyCurrencyList];
-    //列表查询个人账户总余额
-    [self queryCenterTotalAmount];
-    //列表查询私钥钱包总余额
-    [self queryMyAmount];
-    //列表查询私钥钱包币种列表
-    [self queryTotalAmount];
+    
     //获取公告列表
     [self requestRateList];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(InfoNotificationAction:) name:@"LOADDATAPAGE2" object:nil];
@@ -926,45 +919,51 @@
     [helper modelClass:[CurrencyModel class]];
     [self.tableView addRefreshAction:^{
         
-        
-        //                获取本地存储私钥钱包
-        [weakSelf saveLocalWalletData];
-        //                监测是否需要更新新币种
-        [weakSelf saveLocalWallet];
-        //                获取私钥钱包列表
-        [weakSelf queryTotalAmount];
-        //                个人钱包余额查询
-        [weakSelf queryCenterTotalAmount];
-        //                私钥钱包余额查询
-        [weakSelf queryMyAmount];
-        
-        
-        [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
+        [CoinUtil refreshOpenCoinList:^{
             
-            //去除没有的币种
+            //                获取本地存储私钥钱包
+            [weakSelf saveLocalWalletData];
+            //                监测是否需要更新新币种
+            [weakSelf saveLocalWallet];
+            //                获取私钥钱包列表
+            [weakSelf queryTotalAmount];
+            //                个人钱包余额查询
+            [weakSelf queryCenterTotalAmount];
+            //                私钥钱包余额查询
+            [weakSelf queryMyAmount];
             
             
-            NSMutableArray <CurrencyModel *> *shouldDisplayCoins = [[NSMutableArray alloc] init];
-            [objs enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-
-                CurrencyModel *currencyModel = (CurrencyModel *)obj;
-                [shouldDisplayCoins addObject:currencyModel];
-                //查询总资产
+            
+            
+            
+            [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
+                
+                //去除没有的币种
+                
+                
+                NSMutableArray <CurrencyModel *> *shouldDisplayCoins = [[NSMutableArray alloc] init];
+                [objs enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                    
+                    CurrencyModel *currencyModel = (CurrencyModel *)obj;
+                    [shouldDisplayCoins addObject:currencyModel];
+                    //查询总资产
+                }];
+                if (self.switchTager == 1) {
+                    weakSelf.tableView.platforms = shouldDisplayCoins;
+                }
+                weakSelf.AssetsListModel = shouldDisplayCoins;
+                
+                //            [weakSelf HomePersonalWalletList];
+                [weakSelf.tableView reloadData_tl];
+                
+            } failure:^(NSError *error) {
+                
+                [weakSelf.tableView endRefreshingWithNoMoreData_tl];
+                
             }];
-            if (self.switchTager == 1) {
-                weakSelf.tableView.platforms = shouldDisplayCoins;
-            }
-            weakSelf.AssetsListModel = shouldDisplayCoins;
-            
-//            [weakSelf HomePersonalWalletList];
-            [weakSelf.tableView reloadData_tl];
-
-        } failure:^(NSError *error) {
-            
-            [weakSelf.tableView endRefreshingWithNoMoreData_tl];
-
+        } failure:^{
+            [weakSelf.tableView endRefreshHeader];
         }];
-      
        
         
     }];
@@ -1014,7 +1013,6 @@
         }else if ([model.type isEqualToString:@"1"])
         {
             symbol = @"eth";
-
         }else{
             
             symbol = @"wan";

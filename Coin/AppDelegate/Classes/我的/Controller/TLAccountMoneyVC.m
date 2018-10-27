@@ -81,13 +81,13 @@
     
 }
 
-- (void)refreshOpenCoinList {
-    [CoinUtil refreshOpenCoinList:^{
-        
-    } failure:^{
-        
-    }];
-}
+//- (void)refreshOpenCoinList {
+//    [CoinUtil refreshOpenCoinList:^{
+//        
+//    } failure:^{
+//        
+//    }];
+//}
 
 #pragma mark - Init
 
@@ -204,7 +204,7 @@
     [helper modelClass:[CurrencyModel class]];
     [self.currentTableView addRefreshAction:^{
         
-        [weakSelf refreshOpenCoinList];
+//        [weakSelf refreshOpenCoinList];
         
         [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
             

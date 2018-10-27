@@ -89,7 +89,6 @@ NSString *const kCNY = @"CNY";
             result = [[NSNumber alloc] initWithDouble:pow(10, coinModel.unit.doubleValue)];
         }
     }
-    
 //    if ([coin isEqualToString:kETH]) {
 //        
 //        return @(1.0e+18);
@@ -261,20 +260,11 @@ NSString *const kCNY = @"CNY";
                     failure:(RefreshOpenCoinListFailureBlock)failure{
     TLNetworking *http = [TLNetworking new];
     http.code = @"802267";
-    
     http.parameters[@"status"] = @"0";
-    
     http.isUploadToken = NO;
-    
     [http postWithSuccess:^(id responseObject) {
-        
         NSMutableArray *coinList = responseObject[@"data"];
-        
         [[CoinModel coin] saveOpenCoinList:coinList];
-       
-
-    
-        
         if (block) {
             block();
         }
