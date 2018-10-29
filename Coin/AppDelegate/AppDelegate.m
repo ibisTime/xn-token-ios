@@ -21,7 +21,6 @@
 #import "TLUpdateVC.h"
 
 #import "LangSwitcher.h"
-//#import <ZDCChat/ZDCChat.h>
 #import "CoinUtil.h"
 #import "RespHandler.h"
 #import <NBHTTP/NBNetwork.h>
