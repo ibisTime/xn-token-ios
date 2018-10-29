@@ -11,9 +11,7 @@
 #import "CoinHeader.h"
 #import "APICodeMacro.h"
 #import <SDWebImage/UIButton+WebCache.h>
-//#import "PublishService.h"    czy
 #import "MineGroup.h"
-//#import "AdvertiseModel.h"    czy
 
 #import "MineTableView.h"
 #import "MineHeaderView.h"
@@ -596,28 +594,9 @@
     [self.imagePicker picker];
 }
 
-#pragma mark - Data
 
-//查询用户统计信息  czy
-//- (void)requestUserStatistInfo {
-//
-//    TLNetworking *http = [TLNetworking new];
-//    http.code = @"625256";
-//    http.parameters[@"master"] = [TLUser user].userId;
-//    [http postWithSuccess:^(id responseObject) {
-//
-//        UserStatistics *userStatist = [UserStatistics mj_objectWithKeyValues:responseObject[@"data"]];
-//
-//        NSString *data = [NSString stringWithFormat:@"交易 %ld · 好评 %@ · 信任 %ld", userStatist.jiaoYiCount, userStatist.goodCommentRate, userStatist.beiXinRenCount];
-//
-//        self.headerView.dataLbl.text = [LangSwitcher switchLang:data key:nil];
-//
-//
-//    } failure:^(NSError *error) {
-//
-//
-//    }];
-//}
+
+
 
 - (void)changeHeadIconWithKey:(NSString *)key imgData:(NSData *)imgData {
     

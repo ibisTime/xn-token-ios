@@ -122,7 +122,7 @@ _Pragma("clang diagnostic pop") \
 //刷新
 - (void)addRefreshAction:(void (^)())refresh
 {
-//    self.refresh = refresh;
+    self.refresh = refresh;
 //
 //    CoinWeakSelf;
     CustomRefreshGifHeader *header = [CustomRefreshGifHeader headerWithRefreshingBlock:self.refresh];

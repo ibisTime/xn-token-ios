@@ -2290,7 +2290,6 @@
 				7A8A5D0E20EA0677002D9A48 /* RedEnvelope红包 */,
 				216F5B54206D005200F2C832 /* POS量化理财 */,
 				216F5B50206D002400F2C832 /* Mall余币宝 */,
-				216F5B4C206CE77B00F2C832 /* Store首创玩法 */,
 				216F5B03206CD9C900F2C832 /* Pay确认支付 */,
 			);
 			path = "发现";
@@ -2331,13 +2330,6 @@
 				216F5B43206CDA3600F2C832 /* DetailWebView.m */,
 			);
 			path = Web;
-			sourceTree = "<group>";
-		};
-		216F5B4C206CE77B00F2C832 /* Store首创玩法 */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "Store首创玩法";
 			sourceTree = "<group>";
 		};
 		216F5B50206D002400F2C832 /* Mall余币宝 */ = {

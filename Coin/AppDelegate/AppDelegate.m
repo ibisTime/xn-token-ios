@@ -13,20 +13,13 @@
 #import "TLNetworking.h"
 #import "UITabBar+Badge.h"
 #import "AppConfig.h"
-//#import "IMALoginParam.h"         czy
-//#import "TLAlipayManager.h"
-//#import "ChatManager.h"           czy
-//#import "ChatViewController.h"    czy
+
 #import "IQKeyboardManager.h"
-//#import "RichChatViewController.h"czy
-//#import "OrderDetailVC.h"         czy
-//#import "WaitingOrderVC.h"        czy
+
 #import "ZMChineseConvert.h"
 #import "SettingModel.h"
 #import "TLUpdateVC.h"
-//#import <ZendeskSDK/ZendeskSDK.h>
-//#import <ZendeskCoreSDK/ZendeskCoreSDK.h>
-//#import "ZDKConfig.h"
+
 #import "LangSwitcher.h"
 //#import <ZDCChat/ZDCChat.h>
 #import "CoinUtil.h"
@@ -354,11 +347,7 @@
     manager.toolbarManageBehaviour =IQAutoToolbarByTag;
 
     
-//    [[IQKeyboardManager sharedManager].disabledToolbarClasses addObject:[OrderDetailVC class]];
-//
-//    [[IQKeyboardManager sharedManager].disabledToolbarClasses addObject:[WaitingOrderVC class]];
-//
-//    [[IQKeyboardManager sharedManager].disabledToolbarClasses addObject:[RichChatViewController class]];
+
 
 }
 
