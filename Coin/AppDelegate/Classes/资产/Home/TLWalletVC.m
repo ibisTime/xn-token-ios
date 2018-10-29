@@ -11,7 +11,6 @@
 #import "CoinHeader.h"
 
 #import "WalletHeaderView.h"
-#import "WalletTableView.h"
 
 #import "CurrencyModel.h"
 
@@ -30,10 +29,8 @@
 #import "PlatformTableView.h"
 #import "WallAccountVC.h"
 #import "AddAccoutMoneyVc.h"
-#import "TLAccountTableView.h"
 #import <MJExtension/MJExtension.h>
 #import "WalletLocalVc.h"
-#import "WalletLocalModel.h"
 #import "AppConfig.h"
 #import "RateModel.h"
 #import "WallAccountVC.h"
@@ -43,7 +40,7 @@
 #import "TLFastvc.h"
 #import "TLTransfromVC.h"
 #import "BuildLocalHomeView.h"
-#import "RevisePassWordVC.h"
+
 #import "WalletImportVC.h"
 #import "HTMLStrVC.h"
 #import "BuildSucessVC.h"
@@ -63,7 +60,7 @@
 
 @property (nonatomic, strong) PlatformTableView *tableView;
 
-@property (nonatomic, strong) TLAccountTableView *currentTableView;
+//@property (nonatomic, strong) TLAccountTableView *currentTableView;
 
 @property (nonatomic, strong) NSMutableArray <CurrencyModel *>*AssetsListModel;
 
@@ -440,9 +437,9 @@
 - (void)initTableView {
     [self.titleView removeFromSuperview];
 
-    self.currentTableView = [[TLAccountTableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
-    
-    [self.view addSubview:self.currentTableView];
+//    self.currentTableView = [[TLAccountTableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
+//
+//    [self.view addSubview:self.currentTableView];
 
     self.tableView = [[PlatformTableView alloc] initWithFrame:CGRectMake(0, kStatusBarHeight, kScreenWidth, kScreenHeight-kStatusBarHeight ) style:UITableViewStyleGrouped];
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, kTabBarHeight, 0);

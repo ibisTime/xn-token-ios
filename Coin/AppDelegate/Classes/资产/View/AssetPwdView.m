@@ -113,70 +113,8 @@
         make.left.equalTo(whiteView.mas_left).offset(15);
         make.height.equalTo(@56);
     }];
-//    UILabel *money = [UILabel labelWithBackgroundColor:kClearColor textColor:kHexColor(@"#A75E02") font:17];
-//    CoinModel *coin = [CoinUtil getCoinModel:plat.currency];
-//
-//    NSString *leftAmount = [CoinUtil convertToRealCoin:plat.amountString coin:coin.symbol];
-//    NSString *rightAmount = [CoinUtil convertToRealCoin:plat.frozenAmountString coin:coin.symbol];
-//    NSString *ritAmount = [leftAmount subNumber:rightAmount];
-//    money.text = [NSString stringWithFormat:@"%@%@",_count,plat.currency];
-//    [whiteView addSubview:money];
-//    [money mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.equalTo(sureLab.mas_bottom).offset(16);
-//        make.centerX.equalTo(whiteView.mas_centerX);
-//    }];
-//
-//    UIView *buttonView =[UIView new];
-//    buttonView.backgroundColor = kWhiteColor;
-//    buttonView.layer.borderWidth = 0.5;
-//    buttonView.layer.borderColor = kLineColor.CGColor;
-//    //    buttonView.layer.cornerRadius = 5.0;
-//    //    buttonView.clipsToBounds = YES;
-//    [whiteView addSubview:buttonView];
-//
-//    [buttonView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.equalTo(money.mas_bottom).offset(16);
-//        make.left.equalTo(whiteView.mas_left).offset(25);
-//        make.right.equalTo(whiteView.mas_right).offset(-25);
-//        make.height.equalTo(@48);
-//    }];
-//
-//    UILabel *blanceMoney = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor3 font:15];
-//    blanceMoney.text = [LangSwitcher switchLang:@"账户余额" key:nil];
-//    [buttonView addSubview:blanceMoney];
-//    [blanceMoney mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.equalTo(buttonView.mas_top).offset(13);
-//        make.left.equalTo(buttonView.mas_left).offset(10);
-//
-//    }];
-//
-//    UILabel *blance = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:15];
-//    blance.text = [LangSwitcher switchLang:[NSString stringWithFormat:@"%.3f%@",[ritAmount floatValue],plat.currency] key:nil];
-//    [buttonView addSubview:blance];
-//    [blance mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.equalTo(buttonView.mas_top).offset(13);
-//        make.left.equalTo(blanceMoney.mas_right).offset(16);
-//
-//    }];
-    UIImageView *im = [[UIImageView alloc] init];
-//    im.image = kImage(@"注意");
-//    [whiteView addSubview:im];
-//    [im mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.equalTo(self.password.mas_bottom).offset(10);
-//        make.left.equalTo(whiteView.mas_left).offset(70);
-//        make.height.equalTo(@20);
-//        make.width.equalTo(@20);
-//
-//    }];
+    
     UILabel *sure = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor2 font:12];
-//    [whiteView addSubview:sure];
-//    [sure mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.equalTo(self.password.mas_bottom).offset(10);
-//        make.left.equalTo(whiteView.mas_left).offset(100);
-//        make.right.equalTo(whiteView.mas_right).offset(-20);
-//        make.height.equalTo(@20);
-//
-//    }];
     sure.text = [LangSwitcher switchLang:@"连续5次密码错误我们将暂时锁定您的账号" key:nil];
     UIButton *sureButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [sureButton setBackgroundColor:kClearColor forState:UIControlStateNormal];

@@ -19,7 +19,7 @@
 #import "TLTextField.h"
 #import "FilterView.h"
 #import "QRCodeVC.h"
-#import "CoinAddressListVC.h"
+#import "CoinAddressModel.h"
 #import "CoinUtil.h"
 
 typedef NS_ENUM(NSInteger, AddressType) {
@@ -486,28 +486,7 @@ typedef NS_ENUM(NSInteger, AddressType) {
     
     switch (index) {
         //选择地址
-//        case 0:
-//        {
-//            [self.coinAddressPicker hide];
-//
-//            CoinAddressListVC *addressVC = [CoinAddressListVC new];
-//            addressVC.coin = self.currency.currency;
-//            addressVC.addressBlock = ^(CoinAddressModel *addressModel) {
-//
-//                weakSelf.addressModel = addressModel;
-//
-//                weakSelf.receiveAddressLbl.text = weakSelf.addressModel.address;
-//
-//                weakSelf.receiveAddressLbl.textColor = kTextColor;
-//
-//                weakSelf.addressType = AddressTypeSelectAddress;
-//
-//                [weakSelf setGoogleAuth];
-//            };
-//
-//            [self.navigationController pushViewController:addressVC animated:YES];
-//
-//        }break;
+
         //扫描二维码
         case 0:
         {

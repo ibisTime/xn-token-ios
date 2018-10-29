@@ -12,7 +12,7 @@
 #import "UILable+convience.h"
 #import "TLTextView.h"
 #import "TLAlert.h"
-#import "RevisePassWordVC.h"
+
 #import "TLTextField.h"
 #import "CaptchaView.h"
 #import "WalletNewFeaturesVC.h"
@@ -361,9 +361,7 @@
             WalletNewFeaturesVC *newVC = [WalletNewFeaturesVC new];
             newVC.isimport = YES;
             [UIApplication sharedApplication].keyWindow.rootViewController = newVC;
-//            RevisePassWordVC *vc = [[RevisePassWordVC alloc] init];
-//            vc.IsImport = YES;
-//            [self.navigationController pushViewController:vc animated:YES];
+
         }else{
             
             //储存导入的钱包
@@ -405,9 +403,7 @@
         self.importButton.selected = NO;
         return;
 
-//        RevisePassWordVC *vc = [[RevisePassWordVC alloc] init];
-//        vc.IsImport = YES;
-//        [self.navigationController pushViewController:vc animated:YES];
+
     }
     
     //

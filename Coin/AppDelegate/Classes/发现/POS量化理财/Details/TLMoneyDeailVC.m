@@ -7,7 +7,6 @@
 //
 
 #import "TLMoneyDeailVC.h"
-#import "TLTopMoneyView.h"
 #import "TLUIHeader.h"
 #import "CoinUtil.h"
 #import "CurrencyModel.h"
@@ -17,8 +16,6 @@
 #import "TLPwdRelatedVC.h"
 #import "NSString+Check.h"
 #import "PayModel.h"
-//#import "NSString+Date.h"
-#import "TLMyRecordVC.h"
 
 #import "TLMoneyDetailsTableView.h"
 #import "PosBuyVC.h"

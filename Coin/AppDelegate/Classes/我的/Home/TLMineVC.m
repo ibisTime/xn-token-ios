@@ -19,30 +19,20 @@
 #import "MineHeaderView.h"
 #import "TLAboutUsVC.h"
 #import "SettingVC.h"
-#import "PersonalitySettingVC.h"
 #import "HTMLStrVC.h"
-//#import "MyAdvertiseVC.h"     czy
-//#import "FansVC.h"
-//#import "CoinAddressListVC.h" czy
-//#import "InviteFriendVC.h"    czy
-//#import "UserStatistics.h"    czy
+
 #import "TLImagePicker.h"
 #import "TLUploadManager.h"
 #import "AppConfig.h"
-//#import <ZendeskSDK/ZendeskSDK.h>
-//#import <ZendeskCoreSDK/ZendeskCoreSDK.h>
-//#import <ZendeskProviderSDK/ZendeskProviderSDK.h>
 
 //#import <ZDCChat/ZDCChat.h>
 #import <IQKeyboardManager/IQKeyboardManager.h>
 #import <CDCommon/UIScrollView+TLAdd.h>
-#import "CoinService.h"
-//#import "TLOrderVC.h"         czy
+
 #import "MineCell.h"
 #import "LangChooseVC.h"
 #import "JoinMineVc.h"
 #import "WalletSettingVC.h"
-#import "TLAccountMoneyVC.h"
 #import "TLUserLoginVC.h"
 #import "ChooseCountryVc.h"
 #import "ChangeLocalMoneyVC.h"

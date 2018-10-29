@@ -7,7 +7,7 @@
 //
 
 #import "BuildWalletMineVC.h"
-#import "RevisePassWordVC.h"
+
 #import "WalletImportVC.h"
 #import "HTMLStrVC.h"
 #import "TLTextField.h"
@@ -401,32 +401,13 @@
     sucess.PWD = self.rePwdTf.text;
     [self.navigationController pushViewController:sucess animated:YES];
     
-//    创建钱包
-    
-//    self.navigationController.navigationBar.hidden = NO;
-//
-//    RevisePassWordVC *vc = [[RevisePassWordVC alloc] init];
-//     vc.title =  [LangSwitcher switchLang:@"创建钱包" key:nil];
-//
-////    vc.title =  NSLocalizedString(@"创建钱包", nil);
-//    [self.navigationController pushViewController:vc animated:YES];
-//    [self presentViewController:vc animated:YES completion:nil];
+
     
 }
-//-(void)viewWillAppear:(BOOL)animated
-//{
-//    [super viewWillAppear:animated];
-//    self.navigationController.navigationBar.hidden = YES;
-//
-//}
 //导入钱包
 - (void)importWallet
 {
     self.navigationController.navigationBar.hidden = NO;
-
-//    RevisePassWordVC *vc = [[RevisePassWordVC alloc] init];
-//    vc.title =  [LangSwitcher switchLang:@"创建钱包" key:nil];
-//    [self.navigationController pushViewController:vc animated:YES];
     WalletImportVC *vc = [[WalletImportVC alloc] init];
     vc.title =  [LangSwitcher switchLang:@"导入钱包" key:nil];
 

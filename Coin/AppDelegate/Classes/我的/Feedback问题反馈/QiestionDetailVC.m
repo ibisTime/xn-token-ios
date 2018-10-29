@@ -10,7 +10,6 @@
 #import "QuestionDetail.h"
 #import <MJRefresh/MJRefresh.h>
 #import "NSString+Date.h"
-#import "CustomImageView.h"
 #import "TLUIHeader.h"
 #import "CoinUtil.h"
 #import "NSString+Check.h"
@@ -354,17 +353,7 @@
     [self.contentView addSubview:self.sureLab2];
     
     
-//    [self.sureLab mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.equalTo(line5.mas_bottom).offset(20);
-//        make.left.equalTo(self.view.mas_left).offset(10);
-//        
-//    }];
-//    [self.sureLab2 mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.centerY.equalTo(self.sureLab.mas_centerY);
-//        make.left.equalTo(self.sureLab.mas_right).offset(20);
-////        make.right.equalTo(self.view.mas_right).offset(-10);
-//        
-//    }];
+
     
     UIView *line6 = [UIView new];
     self.line6 = line6;
@@ -380,27 +369,7 @@
         
     }];
     
-//    self.tableView = [[QuestionDetail alloc]
-//                      initWithFrame:CGRectZero
-//                      style:UITableViewStyleGrouped];
-//    //    self.tableView.placeHolderView = self.placeHolderView;
-//    self.tableView.backgroundColor = kWhiteColor;
-////    self.tableView.refreshDelegate = self;
-//    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, kTabBarHeight, 0);
-//
-//    self.tableView.sectionHeaderHeight = 22;
-//    [self.view addSubview:self.tableView];
-//    self.tableView.mj_header = [MJRefreshHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadmore)];
-//    self.tableView.mj_footer = [MJRefreshFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadNew)];
-    
-//    WallAccountHeadView *headView = [[WallAccountHeadView alloc] initWithFrame:CGRectMake(15, 0, kScreenWidth-30, 90)];
-//    self.headView = headView;
-//    [self.view addSubview:headView];
-//    
-//    if (self.currency) {
-//        headView.currency  = self.currency;
-//    }
-//    
+
 }
 
 -(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView

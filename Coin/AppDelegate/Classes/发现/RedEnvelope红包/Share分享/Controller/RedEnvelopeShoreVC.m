@@ -13,7 +13,6 @@
 #import "ZJAnimationPopView.h"
 #import "UIImageView+WebCache.h"
 #import "MySugarPacketsVC.h"
-#import "TLMyRecordVC.h"
 @interface RedEnvelopeShoreVC ()<RedEnvelopeHeadDelegate>
 {
 }

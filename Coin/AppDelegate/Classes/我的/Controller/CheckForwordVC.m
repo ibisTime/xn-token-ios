@@ -219,10 +219,6 @@
                         self.blackView.hidden = YES;
                     }
                     [self chooseNextVC];
-//                    ChangeForwordVC *changeVC= [[ChangeForwordVC alloc] init];
-//                    changeVC.Type = CheckWprdTypeFirst;
-//
-//                    [self.navigationController pushViewController:changeVC animated:YES];
                 }else{
                     
                     [TLAlert alertWithMsg:[LangSwitcher switchLang:@"密码输入错误" key:nil]];

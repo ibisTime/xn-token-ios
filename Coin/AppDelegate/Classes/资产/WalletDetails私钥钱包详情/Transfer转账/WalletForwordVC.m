@@ -18,7 +18,6 @@
 #import "TLTextField.h"
 #import "FilterView.h"
 #import "QRCodeVC.h"
-#import "CoinAddressListVC.h"
 #import "CoinUtil.h"
 #import "MnemonicUtil.h"
 #import <MBProgressHUD/MBProgressHUD.h>
@@ -41,6 +40,8 @@
 #import "BTCHashID.h"
 #import "AppConfig.h"
 #import "BTCPoundage.h"
+#import "CoinAddressModel.h"
+
 typedef NS_ENUM(NSInteger, WalletAddressType) {
 
     WalletAddressTypeSelectAddress = 0,       //选择地址

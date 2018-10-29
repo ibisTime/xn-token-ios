@@ -9,15 +9,12 @@
 #import "HomeVC.h"
 
 //M
-#import "StoreModel.h"
+
 #import "CountInfoModel.h"
 //V
-#import "StoreTableView.h"
 #import "HomeHeaderView.h"
 #import "TLProgressHUD.h"
 //C
-#import "TradeFlowListVC.h"
-#import "StoreListVC.h"
 #import "GoodMallVC.h"
 #import "PosMiningVC.h"
 #import "RateDescVC.h"

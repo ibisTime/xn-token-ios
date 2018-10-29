@@ -30,7 +30,6 @@
 #import "TLProgressHUD.h"
 #import "LangChooseVC.h"
 #import "TLUserLoginVC.h"
-#import "TLGestureVC.h"
 #import "ZLGestureLockViewController.h"
 #import "LocalSettingTableView.h"
 #import "ChangeLocalMoneyVC.h"

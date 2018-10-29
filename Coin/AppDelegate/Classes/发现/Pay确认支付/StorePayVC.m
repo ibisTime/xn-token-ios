@@ -18,13 +18,13 @@
 #import "UIViewController+BackButtonHander.h"
 //M
 #import "CurrencyModel.h"
+#import "CoinAddressModel.h"
 //V
 #import "TLTextField.h"
 #import "FilterView.h"
 #import "TLAlert.h"
 //C
 #import "QRCodeVC.h"
-#import "CoinAddressListVC.h"
 #import "BillVC.h"
 #import "TLCoinWithdrawOrderVC.h"
 

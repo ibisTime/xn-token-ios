@@ -12,7 +12,7 @@
 #import "UILable+convience.h"
 #import "TLTextView.h"
 #import "TLAlert.h"
-#import "RevisePassWordVC.h"
+
 #import "BuildWalletMineVC.h"
 #import "TLTabBarController.h"
 #import "MnemonicUtil.h"
@@ -229,37 +229,11 @@
             //验证通过
         }
         
-     
-//
-//        [[NSUserDefaults standardUserDefaults] setObject:word forKey:KWalletWord];
-//
-//
-//        [[NSUserDefaults standardUserDefaults] setObject:prikey forKey:KWalletPrivateKey];
-//        [[NSUserDefaults standardUserDefaults] setObject:address forKey:KWalletAddress];
-//        //验证正确
-//        RevisePassWordVC *vc = [[RevisePassWordVC alloc] init];
-//        vc.IsImport = YES;
-//        [self.navigationController pushViewController:vc animated:YES];
         
         //设置交易密码
     }else{
-        
-        //        NSString *str = [MnemonicUtil getPrivateKeyWithMnemonics:self.textView.text];
-        
-        
-        //验证失败
-        //        [self.navigationController pushViewController:vc animated:YES];
-        //
-        //       NSString *str = [MnemonicUtil getPrivateKeyWithMnemonics:self.textView.text];
-        //        NSLog(@"%@",str);
-        //        [TLAlert alertWithMsg:@"助记词验证成功"];
         [TLAlert alertWithMsg:@"助记词不存在,请检测备份"];
         self.importButton.selected = NO;
-        
-        
-        //        RevisePassWordVC *vc = [[RevisePassWordVC alloc] init];
-        //        vc.IsImport = YES;
-        //        [self.navigationController pushViewController:vc animated:YES];
     }
     
     //

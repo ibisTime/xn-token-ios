@@ -152,17 +152,7 @@
 
         
     }
-//    [walletName setAction:^{
-//
-//
-//        CheckForwordVC *pwdAboutVC = [[CheckForwordVC alloc] init];
-//        pwdAboutVC.title = [LangSwitcher switchLang:@"修改交易密码" key:nil];
-//
-//        pwdAboutVC.Type = PassWprdTypeFirst;
-//        pwdAboutVC.WalletType = WalletWordTypeFirst;
-//        [weakSelf.navigationController pushViewController:pwdAboutVC animated:YES];
-//
-//    }];
+
     
     SettingModel *changeTradePwd = [SettingModel new];
     changeTradePwd.text = [LangSwitcher switchLang:@"修改密码" key:nil];
@@ -171,11 +161,6 @@
         TLNewPwdVC *new = [[TLNewPwdVC alloc] init];
         new.title = [LangSwitcher switchLang:@"修改交易密码" key:nil];
 
-//        CheckForwordVC *pwdAboutVC = [[CheckForwordVC alloc] init];
-//        pwdAboutVC.title = [LangSwitcher switchLang:@"修改交易密码" key:nil];
-//
-//        pwdAboutVC.Type = PassWprdTypeFirst;
-//        pwdAboutVC.WalletType = WalletWordTypeFirst;
         [weakSelf.navigationController pushViewController:new animated:YES];
         
     }];
@@ -269,30 +254,11 @@
 
         editVC.title = [LangSwitcher switchLang:@"导出私钥" key:nil];
 
-//        [editVC setDone:^(NSString *content){
-        
-//            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:1 inSection:1];
-//            SettingCell *cell = [weakSelf.tableView cellForRowAtIndexPath:indexPath];
-//
-//            cell.rightLabel.text = [[TLUser user].email valid] ? [TLUser user].email: [LangSwitcher switchLang:@"" key:nil];
-//
-//            [weakSelf.tableView reloadData];
-            
-//        }];
-        //
+
         [weakSelf.navigationController pushViewController:editVC animated:YES];
     }];
     
-    //修改手机号
-    //    SettingModel *changeMobile = [SettingModel new];
-    //    changeMobile.text = [LangSwitcher switchLang:@"手机号" key:nil];
-    //    changeMobile.subText = [TLUser user].mobile;
-    //    [changeMobile setAction:^{
-    //
-    //        TLChangeMobileVC *changeMobileVC = [[TLChangeMobileVC alloc] init];
-    //        [weakSelf.navigationController pushViewController:changeMobileVC animated:YES];
-    //
-    //    }];
+
     
     //修改登录密码
     SettingModel *changeLoginPwd = [SettingModel new];
@@ -301,15 +267,6 @@
         
         WalletDelectVC *changeLoginPwdVC = [WalletDelectVC new];
         
-//        changeLoginPwdVC.success = ^{
-//
-//            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//
-//                [weakSelf.navigationController popViewControllerAnimated:YES];
-//
-//            });
-//        };
-//        WalletDelectVC *changeLoginPwdVC = [WalletDelectVC new];
 
 
         [weakSelf.navigationController pushViewController:changeLoginPwdVC animated:YES];
