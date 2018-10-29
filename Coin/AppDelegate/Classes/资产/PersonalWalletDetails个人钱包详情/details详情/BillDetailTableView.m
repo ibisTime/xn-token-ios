@@ -14,7 +14,9 @@
 #import "CoinUtil.h"
 
 @interface BillDetailTableView ()<UITableViewDataSource, UITableViewDelegate>
-
+{
+    BillDetailCell *cell;
+}
 @end
 
 @implementation BillDetailTableView
@@ -43,7 +45,7 @@ static NSString *identifierCell = @"BillDetailCell";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    BillDetailCell *cell = [tableView dequeueReusableCellWithIdentifier:identifierCell];
+    cell = [tableView dequeueReusableCellWithIdentifier:identifierCell];
     NSArray *textArr = @[
                          [LangSwitcher switchLang:@"变动前金额" key:nil],
                           [LangSwitcher switchLang:@"变动后金额" key:nil],
@@ -66,12 +68,16 @@ static NSString *identifierCell = @"BillDetailCell";
     }
     NSArray *rightArr = @[preAmount, postAmount, dateStr, _bill.getStatusName, getBizName];
     
-    cell.titleLbl.text = textArr[indexPath.row];
+    cell.titleLbl.text = [NSString stringWithFormat:@"%@",textArr[indexPath.row]];
 //    [LangSwitcher switchLang:textArr[indexPath.row] key:nil];
     
     cell.rightLabel.text = rightArr[indexPath.row];
 //    [LangSwitcher switchLang:rightArr[indexPath.row] key:nil] ;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.titleLbl.frame = CGRectMake(15, 18, 0, 14);
+    [cell.titleLbl sizeToFit];
+    cell.rightLabel.frame = CGRectMake(cell.titleLbl.xx + 10, 18, SCREEN_WIDTH - cell.titleLbl.xx - 25, 0);
+    [cell.rightLabel sizeToFit];
     return cell;
     
 }
@@ -86,7 +92,7 @@ static NSString *identifierCell = @"BillDetailCell";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    return 40;
+    return cell.rightLabel.yy + 18;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {

@@ -105,6 +105,7 @@ _Pragma("clang diagnostic pop") \
         self.estimatedRowHeight = 0;
         self.estimatedSectionHeaderHeight = 0;
         self.estimatedSectionFooterHeight = 0;
+//        self.tableHeaderView = [UIView new];
         
         //        [self adjustsContentInsets];
         
@@ -126,6 +127,13 @@ _Pragma("clang diagnostic pop") \
 //    CoinWeakSelf;
     CustomRefreshGifHeader *header = [CustomRefreshGifHeader headerWithRefreshingBlock:self.refresh];
     NSArray *imageArr = @[[UIImage imageNamed:@"refresh1"], [UIImage imageNamed:@"refresh2"], [UIImage imageNamed:@"refresh3"], [UIImage imageNamed:@"refresh4"]];
+    
+//    [header setImages:imageArr forState:MJRefreshStateIdle];
+//    [header setImages:imageArr forState:MJRefreshStatePulling];
+//    [header setImages:imageArr forState:MJRefreshStateRefreshing];
+//    [header setImages:imageArr forState:MJRefreshStateWillRefresh];
+    
+    
     [header setImages:imageArr duration:0.5 forState:MJRefreshStateIdle];
     [header setImages:imageArr duration:0.5 forState:MJRefreshStatePulling];
     [header setImages:imageArr duration:0.5 forState:MJRefreshStateRefreshing];

@@ -51,25 +51,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initHeadView];
-    [self initPlaceHolderView];
     [self initTableView];
     [self initBottonView];
     [self addPlaceholderView];
 
-    //筛选
-    [self addFilterItem];
-
-//    if ([self.currency.symbol isEqualToString:@"BTC"]) {
-//        [self requestBtcList];
-//
-//    }else if ([self.currency.symbol isEqualToString:@"LXT"])
-//    {
-//        [self requestLXTList];
-//    }
-//    else
-//    {
-//        [self requestBillList];
-//    }
     //获取账单
     // Do any additional setup after loading the view.
     self.title = [LangSwitcher switchLang: [NSString stringWithFormat:@"%@",self.currency.symbol] key:nil];
@@ -118,16 +103,6 @@
     CoinModel *coin = [CoinUtil getCoinModel:self.currency.symbol];
 
     helper.parameters[@"contractAddress"] = coin.contractAddress;
-
-    //    helper.parameters[@"bizType"] = bizType;
-    //    helper.parameters[@"kind"] = self.billType == LocalTypeFrozen ? @"1": @"0";
-
-    //    helper.parameters[@"symbol"] = self.currency.symbol;
-    //    helper.parameters[@"address"] = self.currency.address;
-
-    //    helper.parameters[@"channelType"] = @"C";
-    //    helper.parameters[@"status"] = @"";
-
     //0 刚生成待回调，1 已回调待对账，2 对账通过, 3 对账不通过待调账,4 已调账,9,无需对账
     //pageDataHelper.parameters[@"status"] = [ZHUser user].token;
 
@@ -322,35 +297,6 @@
     return _filterPicker;
 }
 
-- (void)initPlaceHolderView {
-    
-    
-    //    UIImageView *billIV = [[UIImageView alloc] init];
-    //
-    //    billIV.image = kImage(@"暂无订单");
-    //
-    //    [self.placeHolderView addSubview:billIV];
-    //    [billIV mas_makeConstraints:^(MASConstraintMaker *make) {
-    //
-    //        make.centerX.equalTo(@0);
-    //        make.top.equalTo(@140);
-    //
-    //    }];
-//    self.placeHolderView = [[UIView alloc] initWithFrame:CGRectMake(0, 240, kScreenWidth,  40)];
-
-//    UILabel *textLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor2 font:14.0];
-//    
-//    textLbl.text = [LangSwitcher switchLang:@"暂无明细" key:nil];
-//    textLbl.textAlignment = NSTextAlignmentCenter;
-//    
-//    [self.placeHolderView addSubview:textLbl];
-//    [textLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-//        
-//        make.top.equalTo(self.placeHolderView.mas_top).offset(150);
-//        make.centerX.equalTo(self.placeHolderView.mas_centerX);
-//        
-//    }];
-}
 
 - (void)initTableView {
     
@@ -369,18 +315,7 @@
     
 }
 
-- (void)addFilterItem {
-    
-//    if (self.billType == LocalTypeAll) {
-//
-//        [UIBarButtonItem addRightItemWithTitle:[LangSwitcher switchLang:@"筛选" key:nil]
-//                                    titleColor:kTextColor
-//                                         frame:CGRectMake(0, 0, 40, 30)
-//                                            vc:self
-//                                        action:@selector(clickFilter:)];
-//
-//    }
-}
+//- (void)addFilterItem
 
 #pragma mark - Events
 - (void)clickFilter:(UIButton *)sender {
@@ -646,51 +581,6 @@
 
 - (void)clickWithdrawWithCurrency:(CurrencyModel *)currencyModel {
     
-    CoinWeakSelf;
-    
-    //判断是否认证身份
-    //    if (![[TLUser user].realName valid]) {
-    //
-    //        ZMAuthVC *zmAuthVC = [ZMAuthVC new];
-    //
-    //        zmAuthVC.title = [LangSwitcher switchLang:@"实名认证" key:nil];
-    //
-    //        zmAuthVC.success = ^{
-    //
-    //            //实名认证成功后，判断是否设置资金密码
-    //            if ([[TLUser user].tradepwdFlag isEqualToString:@"0"]) {
-    //
-    //                [TLAlert alertWithInfo:[LangSwitcher switchLang:@"实名认证成功, 请设置资金密码" key:nil]];
-    //
-    //            } else {
-    //
-    //                [TLAlert alertWithInfo:[LangSwitcher switchLang:@"实名认证成功" key:nil]];
-    //            }
-    //
-    //            [weakSelf clickWithdrawWithCurrency:currencyModel];
-    //
-    //        };
-    //
-    //        [self.navigationController pushViewController:zmAuthVC animated:YES];
-    //
-    //        return ;
-    //    }
-    
-    //实名认证成功后，判断是否设置资金密码
-    //    if ([[TLUser user].tradepwdFlag isEqualToString:@"0"]) {
-    //
-    //        TLPwdType pwdType = TLPwdTypeSetTrade;
-    //        TLPwdRelatedVC *pwdRelatedVC = [[TLPwdRelatedVC alloc] initWithType:pwdType];
-    //        pwdRelatedVC.isWallet = YES;
-    //        pwdRelatedVC.success = ^{
-    //
-    //            [weakSelf clickWithdrawWithCurrency:currencyModel];
-    //        };
-    //        [self.navigationController pushViewController:pwdRelatedVC animated:YES];
-    //        return ;
-    //
-    //    }
-    
     WalletForwordVC *coinVC = [WalletForwordVC new];
     coinVC.currency = currencyModel;
     [self.navigationController pushViewController:coinVC animated:YES];
@@ -700,29 +590,21 @@
 -(void)refreshTableView:(TLTableView *)refreshTableview didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    LocalBillDetailVC *detailVc  =  [LocalBillDetailVC new];
-    detailVc.bill = self.bills[indexPath.row];
-    detailVc.currentModel = self.currency;
+    
     if ([self.currency.symbol isEqualToString:@"BTC"]) {
         TLBillBTCVC *vc = [TLBillBTCVC  new];
         vc.bill = self.bills[indexPath.row];
         vc.currentModel = self.currency;
         vc.address = self.currency.address;
         [self.navigationController pushViewController:vc animated:YES];
-        return;
-
+    }else
+    {
+        LocalBillDetailVC *detailVc  =  [LocalBillDetailVC new];
+        detailVc.bill = self.bills[indexPath.row];
+        detailVc.currentModel = self.currency;
+        [self.navigationController pushViewController:detailVc animated:YES];
     }
-//    if ([self.currency.symbol isEqualToString:@"LXT"]) {
-//        TLBillBTCVC *vc = [TLBillBTCVC  new];
-//        vc.bill = self.bills[indexPath.row];
-//        vc.currentModel = self.currency;
-//        vc.address = self.currency.address;
-//        [self.navigationController pushViewController:vc animated:YES];
-//        return;
-//        
-//    }
     
-    [self.navigationController pushViewController:detailVc animated:YES];
     
 }
 - (void)didReceiveMemoryWarning {

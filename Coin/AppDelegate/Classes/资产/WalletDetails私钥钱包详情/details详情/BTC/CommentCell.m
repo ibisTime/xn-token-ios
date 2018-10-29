@@ -40,22 +40,12 @@
         [self.rightLabel mas_makeConstraints:^(MASConstraintMaker *make) {
 
             make.left.equalTo(self.titleLbl.mas_left);
-//            make.right.equalTo(self.mas_right).offset(-15);
-            make.top.equalTo(self.titleLbl.mas_bottom).offset(5);
+
+            make.top.equalTo(self.titleLbl.mas_bottom).offset(4);
 
         }];
 
     }
-    UIView *lineView = [UIView new];
-    [self.contentView addSubview:lineView];
-    lineView.backgroundColor = kBackgroundColor;
-    [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.mas_left).offset(15);
-        make.right.equalTo(self.mas_right).offset(-15);
-        make.height.equalTo(@2);
-        
-        
-    }];
     
     return self;
 }

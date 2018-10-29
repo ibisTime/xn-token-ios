@@ -79,10 +79,6 @@
                              [LangSwitcher switchLang:@"量化理财投资" key:nil],
                              [LangSwitcher switchLang:@"量化理财还款" key:nil],
                              [LangSwitcher switchLang:@"积分抽奖" key:nil]
-
-
-
-
                              ];
         
         NSArray *typeArr = @[@"",
@@ -97,6 +93,7 @@
                              @"jf_lottery_in"
 
                              ];
+        
         
         _filterPicker = [[FilterView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
         _filterPicker.selectBlock = ^(NSInteger index) {

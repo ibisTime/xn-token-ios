@@ -22,29 +22,30 @@
         
        
         //
-        self.titleLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:14.0];
-        
+        self.titleLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:13.0];
+        self.titleLbl.frame = CGRectMake(15, 18, 0, 14);
         [self.contentView addSubview:self.titleLbl];
-        [self.titleLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-            
-            make.left.equalTo(self.mas_left).offset(15);
-//            make.width.equalTo(@60);
-            make.centerY.equalTo(self.contentView.mas_centerY);
-            
-        }];
+//        [self.titleLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+//
+//            make.left.equalTo(self.mas_left).offset(15);
+////            make.width.equalTo(@60);
+//            make.centerY.equalTo(self.contentView.mas_centerY);
+//
+//        }];
         
-        self.rightLabel = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:14.0];
+        self.rightLabel = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:13.0];
         
         self.rightLabel.textAlignment = NSTextAlignmentLeft;
         self.rightLabel.numberOfLines = 0;
+        self.rightLabel.frame = CGRectMake(self.titleLbl.xx + 10, 18, SCREEN_WIDTH - self.titleLbl.xx - 25, 0);
         [self.contentView addSubview:self.rightLabel];
-        [self.rightLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            
-            make.left.equalTo(self.titleLbl.mas_right).offset(15);
-            make.right.equalTo(self.mas_right).offset(-15);
-            make.top.equalTo(self.titleLbl.mas_top);
-            
-        }];
+//        [self.rightLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+//
+//            make.left.equalTo(self.titleLbl.mas_right).offset(15);
+//            make.right.equalTo(self.mas_right).offset(-15);
+//            make.top.equalTo(self.titleLbl.mas_top);
+//
+//        }];
         
     }
     UIView *lineView = [UIView new];
@@ -53,7 +54,7 @@
     [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.mas_left).offset(15);
         make.right.equalTo(self.mas_right).offset(-15);
-        make.height.equalTo(@2);
+        make.height.equalTo(@1);
 
         
     }];

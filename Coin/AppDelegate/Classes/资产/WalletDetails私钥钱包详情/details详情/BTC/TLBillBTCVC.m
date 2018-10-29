@@ -1,51 +1,37 @@
 //
-//  LocalBillDetailVC.m
+//  TLBillBTCVC.m
 //  Coin
 //
-//  Created by shaojianfei on 2018/6/15.
+//  Created by shaojianfei on 2018/8/11.
 //  Copyright © 2018年 chengdai. All rights reserved.
 //
 
-#import "LocalBillDetailVC.h"
+#import "TLBillBTCVC.h"
 #import "BillDetailTableView.h"
 #import "TLUIHeader.h"
 #import "CoinUtil.h"
 #import "LocalBillDetailTableView.h"
 #import "WalletLocalWebVC.h"
-@interface LocalBillDetailVC ()<RefreshDelegate>
+#import "TLBTCtableView.h"
+#import "NSString+Check.h"
+@interface TLBillBTCVC ()<RefreshDelegate>
 @property (nonatomic, strong) UIView *headerView;
 
-@property (nonatomic, strong) LocalBillDetailTableView *tableView;
+@property (nonatomic, strong) TLBTCtableView *tableView;
+
 
 @end
 
-@implementation LocalBillDetailVC
+@implementation TLBillBTCVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title = [LangSwitcher switchLang:@"交易详情" key:nil];
     self.view.backgroundColor = kWhiteColor;
-    TLDataBase *dataBase = [TLDataBase sharedManager];
-    NSString *type;
-    
-    if ([dataBase.dataBase open]) {
-        NSString *sql = [NSString stringWithFormat:@"SELECT type from THALocal where symbol = '%@'",self.currentModel.symbol];
-        //        [sql appendString:[TLUser user].userId];
-        FMResultSet *set = [dataBase.dataBase executeQuery:sql];
-        while ([set next])
-        {
-            type = [set stringForColumn:@"type"];
-            
-        }
-        [set close];
-    }
-    [dataBase.dataBase close];
-    self.currentModel.type = type;
     [self initTableView];
     //
     [self initHeaderView];
-    
     
 }
 
@@ -60,9 +46,10 @@
         
         make.left.equalTo(self.view.mas_left);
         make.right.equalTo(self.view.mas_right);
-        make.height.equalTo(@(kHeight(66)));
+        make.height.equalTo(@45);
     }];
-
+    
+    self.headerView = [[UIView alloc] init];
     self.headerView = [[UIView alloc] init];
     self.headerView.layer.cornerRadius=5;
     self.headerView.layer.shadowOpacity = 0.22;// 阴影透明度
@@ -72,25 +59,18 @@
     self.headerView.backgroundColor = kWhiteColor;
     [self.view addSubview:self.headerView];
     [self.headerView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view.mas_top).offset(10);
+        make.top.equalTo(self.view.mas_top);
         make.left.equalTo(self.view.mas_left).offset(15);
         make.right.equalTo(self.view.mas_right).offset(-15);
-        make.height.equalTo(@(kHeight(90)));
+        make.height.equalTo(@90);
     }];
     //    self.tableView.tableHeaderView = self.headerView;
     UIImageView *icImage = [[UIImageView alloc] init];
     icImage.contentMode = UIViewContentModeScaleToFill;
-//    icImage.layer.cornerRadius = 25;
-//    icImage.clipsToBounds = YES;
+    //    icImage.layer.cornerRadius = 25;
+    //    icImage.clipsToBounds = YES;
     [self.headerView addSubview:icImage];
     icImage.image = kImage(@"提背景");
-//    if ([self.currentModel.symbol isEqualToString:@"ETH"]) {
-//        icImage.image = kImage(@"eth");
-//    }else if ([self.currentModel.symbol isEqualToString:@"WAN"])
-//    {
-//        icImage.image = kImage(@"wan");
-//
-//    }
     
     [icImage mas_makeConstraints:^(MASConstraintMaker *make) {
         
@@ -98,7 +78,7 @@
         make.left.equalTo(self.headerView.mas_left);
         make.right.equalTo(self.headerView.mas_right);
         make.bottom.equalTo(self.headerView.mas_bottom);
-
+        
     }];
     
     //账单类型
@@ -108,20 +88,39 @@
     textLbl.textAlignment = NSTextAlignmentCenter;
     textLbl.numberOfLines = 0;
     [icImage addSubview:textLbl];
-//    textLbl.text = _bill.bizNote;
+    //    textLbl.text = _bill.bizNote;
     
-    
-    NSString *onlyCountStr = [CoinUtil convertToRealCoin:_bill.value coin:_currentModel.symbol];
-    CGFloat money = [onlyCountStr doubleValue];
+    NSString *onlyCountStr;
+    if (![_bill.value valid]) {
+       onlyCountStr = @"正在打包中,即将到账";
+
+    }else{
+        onlyCountStr = [CoinUtil convertToRealCoin:_bill.value coin:_currentModel.symbol];
+
+        
+    }
     NSString *moneyStr = @"";
     //
     if ([_bill.direction isEqualToString:@"1"]) {
+        if (![_bill.value valid]) {
+            onlyCountStr = @"正在打包中,即将到账";
+            moneyStr = [NSString stringWithFormat:@"%@", onlyCountStr];
+
+        }else{
+            moneyStr = [NSString stringWithFormat:@"+%@ %@", onlyCountStr, _currentModel.symbol];
+
+        }
         
-        moneyStr = [NSString stringWithFormat:@"+%@ %@", onlyCountStr, _currentModel.symbol];
         
     } else  {
-        
-        moneyStr = [NSString stringWithFormat:@"-%@ %@", onlyCountStr, _currentModel.symbol];
+        if (![_bill.value valid]) {
+            onlyCountStr = @"正在打包中,即将到账";
+            moneyStr = [NSString stringWithFormat:@"%@", onlyCountStr];
+
+        }else{
+            moneyStr = [NSString stringWithFormat:@"-%@ %@", onlyCountStr, _currentModel.symbol];
+
+        }
         
     }
     
@@ -134,27 +133,27 @@
     [icImage addSubview:amountLbl];
     
     //分割线
-//    UIView *line = [[UIView alloc] init];
-//    line.backgroundColor = kLineColor;
-//    [self.headerView addSubview:line];
+    //    UIView *line = [[UIView alloc] init];
+    //    line.backgroundColor = kLineColor;
+    //    [self.headerView addSubview:line];
     
     
     [textLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-
-        make.top.equalTo(icImage.mas_top).offset(19);
+        
+        make.top.equalTo(icImage.mas_top).offset(20);
         make.centerX.equalTo(icImage.mas_centerX);
-
+        
     }];
     if ([_bill.direction isEqualToString:@"0"]) {
         textLbl.text = [LangSwitcher switchLang:@"转出" key:nil];
         
-            self.title =  [LangSwitcher switchLang:@"转出" key:nil];
-     } else
-        {
-           
-            textLbl.text = [LangSwitcher switchLang:@"转入" key:nil];
-            self.title =  [LangSwitcher switchLang:@"转入" key:nil];
-
+        self.title =  [LangSwitcher switchLang:@"转出" key:nil];
+    } else
+    {
+        
+        textLbl.text = [LangSwitcher switchLang:@"转入" key:nil];
+        self.title =  [LangSwitcher switchLang:@"转入" key:nil];
+        
     }
     //
     [amountLbl mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -164,40 +163,33 @@
         
     }];
     
-//    [line mas_makeConstraints:^(MASConstraintMaker *make) {
-//
-//        make.top.equalTo(amountLbl.mas_bottom).offset(10);
-//        make.left.right.equalTo(self.headerView);
-//        make.height.mas_equalTo(0.5);
-//
-//    }];
+    //    [line mas_makeConstraints:^(MASConstraintMaker *make) {
+    //
+    //        make.top.equalTo(amountLbl.mas_bottom).offset(10);
+    //        make.left.right.equalTo(self.headerView);
+    //        make.height.mas_equalTo(0.5);
+    //
+    //    }];
     
     //    [self.headerView mas_makeConstraints:^(MASConstraintMaker *make) {
     //        make.width.mas_equalTo(SCREEN_WIDTH);
     //    }];
     
     [self.headerView layoutIfNeeded];
-   
-//    self.tableView.tableHeaderView = self.headerView;
+    
+    //    self.tableView.tableHeaderView = self.headerView;
     
 }
 
 - (void)initTableView {
     
-    self.tableView = [[LocalBillDetailTableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+    self.tableView = [[TLBTCtableView alloc] initWithFrame:CGRectMake(0, 110, kScreenWidth, SCREEN_HEIGHT - 110 - kNavigationBarHeight) style:UITableViewStylePlain];
     self.tableView.bill = self.bill;
+    self.tableView.address = self.address;
+//    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, kNavigationBarHeight, 0);
     self.tableView.refreshDelegate = self;
     self.tableView.currentModel = self.currentModel;
-    self.tableView.frame = CGRectMake(0, kHeight(110), SCREEN_WIDTH, SCREEN_HEIGHT - kHeight(110) - kNavigationBarHeight);
-//    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, -130, 0);
     [self.view addSubview:self.tableView];
-//    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.edges.mas_equalTo(UIEdgeInsetsMake(90, 0, -0, 0));
-//
-//    }];
-
-//     self.tableView.contentSize = [self.tableView sizeThatFits:CGSizeMake(CGRectGetWidth(self.tableView.bounds), CGFLOAT_MAX)];
-//    [self.tableView sizeThatFits:CGSizeMake(CGRectGetWidth(self.tableView.bounds), CGFLOAT_MAX)];
 }
 
 -(void)refreshTableView:(TLTableView *)refreshTableview didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -210,11 +202,7 @@
     webVC.urlString = self.bill.txHash;
     webVC.currentModel = self.currentModel;
     [self.navigationController pushViewController:webVC animated:YES];
-    
-    
 }
-
-
 
 /*
 #pragma mark - Navigation
@@ -225,6 +213,5 @@
     // Pass the selected object to the new view controller.
 }
 */
-
 
 @end

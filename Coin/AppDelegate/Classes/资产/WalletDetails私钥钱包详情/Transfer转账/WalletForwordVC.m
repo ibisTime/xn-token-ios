@@ -1012,80 +1012,33 @@ typedef enum : NSUInteger {
 
 - (void)valueChange:(id) sender
 {
-
-    //    self.minerFeeTF.text = [NSString stringWithFormat:@"%.6f %@",self.gamPrice/2,self.currency.symbol];
-    //    self.choseLab.text =  [LangSwitcher switchLang:@"经济" key:nil];
-
     if ([sender isKindOfClass:[UISlider class]]) {
         UISlider * slider = sender;
         CGFloat value = slider.value;
-        NSLog(@"%f", value);
-
-
-
-
-
         if ([self.currency.symbol isEqualToString:@"BTC"]) {
-//            self.blanceFree.text = [NSString stringWithFormat:@"%@ %@",[NSString stringWithFormat:@"%.1f",slider.value],@"sat/b"];
             self.blanceFree.text = [NSString stringWithFormat:@"%.8fBTC",[BTCPoundage enterTheumber:self.tranAmountTF.text setFee:[NSString stringWithFormat:@"%.1f",slider.value] setUtxis:self.utxis]/100000000];
             
             self.btcPrice = slider.value;
             return;
-        }else
-        {
-
         }
-
         if (value == 0) {
-            //            if ([self.currency.symbol isEqualToString:@"BTC"]) {
-            //                self.blanceFree.text = [NSString stringWithFormat:@"%@ %@",self.priceSlow,@"sat/b"];
-            //                self.btcPrice = [self.priceSlow integerValue];
-            //            }else{
             self.blanceFree.text = [NSString stringWithFormat:@"%.8f %@",self.gamPrice*0.85,self.currency.symbol];
             self.pricr = [NSString stringWithFormat:@"%f",[self.tempPrice longLongValue]*0.85];
-            //            }
-
+            
         }else{
-            //            if ([self.currency.symbol isEqualToString:@"BTC"]) {
-            //
-            //                self.blanceFree.text = [NSString stringWithFormat:@"%.0f %@", ([self.priceFast floatValue] - [self.priceSlow floatValue])*value,@"sat/b"];
-            //                self.btcPrice = ([self.priceFast floatValue] - [self.priceSlow floatValue]) *value;
-            //                if (([self.priceFast floatValue] - [self.priceSlow floatValue])*value < [self.priceSlow floatValue]) {
-            //                    self.blanceFree.text = [NSString stringWithFormat:@"%@ %@",self.priceSlow,@"sat/b"];
-            //
-            //                }
-            //
-            //                self.pricr = [NSString stringWithFormat:@"%f",[self.pricr intValue]*value];
-            //            }else{
 
             self.blanceFree.text = [NSString stringWithFormat:@"%.8f %@", self.gamPrice *0.85 +self.gamPrice*value*1/3 ,self.currency.symbol];
 
             self.pricr = [NSString stringWithFormat:@"%f",[self.tempPrice longLongValue] + [self.tempPrice longLongValue] *value *1/3];
-            //            }
-
         }
         if (value == 1)
         {
 
-            //             if ([self.currency.symbol isEqualToString:@"BTC"]) {
-            //                 self.blanceFree.text = [NSString stringWithFormat:@"%@ %@",self.priceFast,@"sat/b"];
-            //                 self.btcPrice = [self.priceFast integerValue];
-            //
-            //                 self.pricr = [NSString stringWithFormat:@"%@",self.priceFast];
-            //             }else{
-
             self.blanceFree.text = [NSString stringWithFormat:@"%.8f %@",self.gamPrice*value*1.15,self.currency.symbol];
 
             self.pricr = [NSString stringWithFormat:@"%f",[self.tempPrice longLongValue]*value*1.15];
-            //             }
-
         }
-
-
-
-
     }
-
 }
 
 - (FilterView *)coinAddressPicker {
@@ -1108,7 +1061,6 @@ typedef enum : NSUInteger {
 
             [weakSelf pickerEventWithIndex:index];
         };
-
         _coinAddressPicker.tagNames = textArr;
 
     }
@@ -1168,15 +1120,12 @@ typedef enum : NSUInteger {
             break;
         case 1:
             if ([self.currency.symbol isEqualToString:@"BTC"]) {
-//                self.blanceFree.text = [NSString stringWithFormat:@"%.0f %@",self.gamPrice,@"sat/b"];
                 self.blanceFree.text = [NSString stringWithFormat:@"%.8fBTC",[BTCPoundage enterTheumber:self.tranAmountTF.text setFee:[NSString stringWithFormat:@"%.1f",self.slider.value] setUtxis:self.utxis]/100000000];
-                //            self.choseLab.text =  [LangSwitcher switchLang:@"普通" key:nil];
                 self.pricr = [NSString stringWithFormat:@"%ld",(long)[self.tempPrice integerValue]];
 
             }else{
 
                 self.blanceFree.text = [NSString stringWithFormat:@"%.8f %@",self.gamPrice,self.currency.symbol];
-                //            self.choseLab.text =  [LangSwitcher switchLang:@"普通" key:nil];
                 self.pricr = [NSString stringWithFormat:@"%lld",[self.tempPrice longLongValue]];
 
             }
@@ -1188,7 +1137,6 @@ typedef enum : NSUInteger {
             if ([self.currency.symbol isEqualToString:@"BTC"]) {
                 self.minerFeeTF.text = [NSString stringWithFormat:@"%@ %@",self.priceSlow,@"sat/b"];
                 self.choseLab.text =  [LangSwitcher switchLang:@"优先" key:nil];
-                //                self.pricr = [NSString stringWithFormat:@"%lld",[self.pricr longLongValue]*2];
             }else{
 
                 self.minerFeeTF.text = [NSString stringWithFormat:@"%.8f %@",self.gamPrice*2,self.currency.symbol];
@@ -1197,7 +1145,6 @@ typedef enum : NSUInteger {
             }
 
 
-            //            self.pricr = [NSString stringWithFormat:@"%f",[self.pricr floatValue]];
             break;
 
         default:
@@ -1208,13 +1155,7 @@ typedef enum : NSUInteger {
 
 #pragma mark - 查看提现订单
 - (void)clickRecord:(UIButton *)sender {
-
-    //    BillVC *billVC = [BillVC new];
-    //    billVC.accountNumber = self.currency.accountNumber;
-    //    billVC.billType = BillTypeWithdraw;
-    //    [self.navigationController pushViewController:billVC animated:YES];
-
-    //
+    
     TLCoinWithdrawOrderVC *withdrawOrderVC = [[TLCoinWithdrawOrderVC alloc] init];
     withdrawOrderVC.coin = self.currency.currency;
     [self.navigationController pushViewController:withdrawOrderVC animated:YES];
@@ -1228,9 +1169,7 @@ typedef enum : NSUInteger {
     qrCodeVC.scanSuccess = ^(NSString *result) {
 
         weakSelf.balanceTF.text = result;
-        //        weakSelf.receiveAddressLbl.textColor = kTextColor;
         weakSelf.addressType = WalletAddressTypeScan;
-        //                [weakSelf setGoogleAuth];
 
     };
 
@@ -1278,18 +1217,7 @@ typedef enum : NSUInteger {
                 }
             }
 
-        }else
-        {
-//            BTCMnemonic *address = [self.balanceTF.text lowercaseString];
-//            if ([MnemonicUtil getEthAddress:address] == nil) {
-//                [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入正确地址" key:nil]];
-//                return;
-//            }
-//            if (EthereumAddress(self.balanceTF.text) == nil) {
-//
-//            }
         }
-
 
     }
 
@@ -1351,7 +1279,10 @@ typedef enum : NSUInteger {
                     //公链 ETH WAN BTC
                     if ([self.currency.symbol isEqualToString:@"ETH"]) {
                         NSString *g = [NSString stringWithFormat:@"%lld",[self.pricr longLongValue]*21000];
-                        result =[MnemonicUtil sendTransactionWithMnemonicWallet:Mnemonics address:[self.balanceTF.text lowercaseString] amount:[gaspic subNumber:g] gaspic:[NSString stringWithFormat:@"%lld",[self.pricr longLongValue]] gasLimt:@"21000"];
+//                        result =[MnemonicUtil sendTransactionWithMnemonicWallet:Mnemonics address:[self.balanceTF.text lowercaseString] amount:[gaspic subNumber:g] gaspic:[NSString stringWithFormat:@"%lld",[self.pricr longLongValue]] gasLimt:@"21000"];
+                        
+                        result =[MnemonicUtil sendTransactionWithMnemonicWallet:Mnemonics address:[self.balanceTF.text lowercaseString] amount:gaspic gaspic:[NSString stringWithFormat:@"%lld",[self.pricr longLongValue]] gasLimt:@"21000"];
+                        
                         if ([result isEqualToString:@"请输入正确地址"]) {
                             [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入正确地址" key:nil]];
                             [MBProgressHUD hideHUDForView:self.view animated:YES];
@@ -1362,7 +1293,7 @@ typedef enum : NSUInteger {
                     }else if ([self.currency.symbol isEqualToString:@"WAN"]){
                         
                         NSString *g = [NSString stringWithFormat:@"%lld",[self.pricr longLongValue]*21000];
-                        result =[MnemonicUtil sendWanTransactionWithMnemonicWallet:Mnemonics address:[self.balanceTF.text lowercaseString] amount:[gaspic subNumber:g] gaspic:[NSString stringWithFormat:@"%lld",[self.pricr longLongValue]] gasLimt:@"21000"];
+                        result =[MnemonicUtil sendWanTransactionWithMnemonicWallet:Mnemonics address:[self.balanceTF.text lowercaseString] amount:gaspic gaspic:[NSString stringWithFormat:@"%lld",[self.pricr longLongValue]] gasLimt:@"21000"];
                         if ([result isEqualToString:@"请输入正确地址"]) {
                             [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入正确地址" key:nil]];
                             [MBProgressHUD hideHUDForView:self.view animated:YES];
@@ -1371,10 +1302,6 @@ typedef enum : NSUInteger {
                     }else{
                         
                         //btc
-                        
-                        
-                        
-                        
                         [self testSpendCoins:self.balanceTF.text :self.tranAmountTF.text :[NSString stringWithFormat:@"%.1f",self.btcPrice]];
                         return ;
                     }

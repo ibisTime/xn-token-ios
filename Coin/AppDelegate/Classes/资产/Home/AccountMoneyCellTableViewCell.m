@@ -60,7 +60,7 @@
     
     self.currencyNameLbl = [UILabel labelWithBackgroundColor:kClearColor
                                                    textColor:kBlackColor
-                                                        font:17.0];
+                                                        font:14.0];
     [self addSubview:self.currencyNameLbl];
     //24H交易量
     self.tradeVolumeLbl = [UILabel labelWithBackgroundColor:kClearColor
@@ -68,28 +68,36 @@
                                                        font:12.0];
     
     [self addSubview:self.tradeVolumeLbl];
-
+    //涨跌情况
+    //    self.priceFluctBtn = [UIButton buttonWithTitle:@""
+    //                                        titleColor:kWhiteColor
+    //                                   backgroundColor:kClearColor
+    //                                         titleFont:17.0 cornerRadius:5];
+    //
+    //    [self addSubview:self.priceFluctBtn];
     
     //当前对应币种价格
     self.opppsitePriceLbl = [UILabel labelWithBackgroundColor:kClearColor
                                                     textColor:kHexColor(@"#484848")
-                                                         font:17.0];
-    
+                                                         font:14.0];
+    self.opppsitePriceLbl.textAlignment = NSTextAlignmentRight;
     [self addSubview:self.opppsitePriceLbl];
     
     //当前人民币价格
     self.rmbPriceLbl = [UILabel labelWithBackgroundColor:kClearColor
                                                textColor:kHexColor(@"#999999")
                                                     font:12.0];
-    
+    self.opppsitePriceLbl.textAlignment = NSTextAlignmentRight;
     [self addSubview:self.rmbPriceLbl];
     
+    
     self.lineView = [UIView new];
-    
+    self.lineView.backgroundColor = kLineColor;
     [self addSubview:self.lineView];
-    
     //布局
     [self setSubviewLayout];
+    
+    
 }
 
 - (void)setSubviewLayout {
@@ -98,46 +106,48 @@
         
         make.top.equalTo(@15);
         make.left.equalTo(@15);
-        make.width.equalTo(@49);
-        make.height.equalTo(@49);
+        make.width.equalTo(@40);
+        make.height.equalTo(@40);
         
     }];
     //币种名称
     [self.currencyNameLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.top.equalTo(@15);
-        make.left.equalTo(self.presentImage.mas_right).offset(20);
+        make.left.equalTo(self.presentImage.mas_right).offset(15);
         //        make.left.equalTo(@30);
         
     }];
     //一日交易量
     [self.tradeVolumeLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.top.equalTo(self.currencyNameLbl.mas_bottom).offset(20);
-        make.left.equalTo(self.presentImage.mas_right).offset(20);
+        make.bottom.equalTo(self.mas_bottom).offset(-15);
+        //        make.top.equalTo(self.currencyNameLbl.mas_bottom).offset(20);
+        make.left.equalTo(self.presentImage.mas_right).offset(15);
         
     }];
-
+    
     //rmb价格
     [self.rmbPriceLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-        
+        make.left.equalTo(self.tradeVolumeLbl.mas_right).offset(10);
         make.right.equalTo(self.mas_right).offset(-15);
         make.top.equalTo(self.tradeVolumeLbl.mas_top);
     }];
     //对应币种
     [self.opppsitePriceLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
+        make.left.equalTo(self.currencyNameLbl.mas_right).offset(10);
         make.right.equalTo(self.mas_right).offset(-15);
         make.top.equalTo(self.currencyNameLbl.mas_top);
     }];
+    //    self.rmbPriceLbl.backgroundColor = [UIColor redColor];
     
     [self.lineView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(self.mas_bottom);
-        make.left.equalTo(@0);
-        make.right.equalTo(@0);
-        make.height.equalTo(@1);
+        make.left.equalTo(@15);
+        make.right.equalTo(@-15);
+        make.height.equalTo(@0.5);
     }];
-    self.lineView.backgroundColor = kHexColor(@"#eeeeee");
+    self.lineView.backgroundColor = kLineColor;
 }
 
 #pragma mark - Setting
@@ -153,29 +163,58 @@
 
     self.currencyNameLbl.text = platform.symbol;
 
-    
-    if ([[TLUser user].localMoney isEqualToString:@"USD"]) {
-        self.tradeVolumeLbl.text = [NSString stringWithFormat:@"≈%.2f USD",[platform.priceUSD doubleValue]];
-        self.rmbPriceLbl.text = [NSString stringWithFormat:@"%.2f USD",[platform.amountUSD doubleValue]];
+    NSString *eyes = [[NSUserDefaults standardUserDefaults] objectForKey:@"eyes"];
+    if ([eyes isEqualToString:@"1"]) {
+        if ([[TLUser user].localMoney isEqualToString:@"USD"]) {
+            self.tradeVolumeLbl.text = [NSString stringWithFormat:@"≈%.2f USD",[platform.priceUSD doubleValue]];
+            self.rmbPriceLbl.text = @"%**** USD";
+            
+        }else if ([[TLUser user].localMoney isEqualToString:@"KRW"])
+        {
+            self.tradeVolumeLbl.text = [NSString stringWithFormat:@"≈%.2f KRW",[platform.priceKRW doubleValue]];
+            self.rmbPriceLbl.text = @"**** KRW";
+            
+        }
+        else{
+            
+            self.tradeVolumeLbl.text = [NSString stringWithFormat:@"≈%.2f CNY",[platform.priceCNY doubleValue]];
+            self.rmbPriceLbl.text = @"**** CNY";
+            
+            
+        }
+//        NSString *text =  [CoinUtil convertToRealCoin:platform.balance coin:platform.symbol];
+        
+        self.opppsitePriceLbl.text = @"****";
+        
 
-    }else if ([[TLUser user].localMoney isEqualToString:@"KRW"])
+
+    }else
     {
-        self.tradeVolumeLbl.text = [NSString stringWithFormat:@"≈%.2f KRW",[platform.priceKRW doubleValue]];
-        self.rmbPriceLbl.text = [NSString stringWithFormat:@"%.2f KRW",[platform.amountKRW doubleValue]];
+        if ([[TLUser user].localMoney isEqualToString:@"USD"]) {
+            self.tradeVolumeLbl.text = [NSString stringWithFormat:@"≈%.2f USD",[platform.priceUSD doubleValue]];
+            self.rmbPriceLbl.text = [NSString stringWithFormat:@"%.2f USD",[platform.amountUSD doubleValue]];
+            
+        }else if ([[TLUser user].localMoney isEqualToString:@"KRW"])
+        {
+            self.tradeVolumeLbl.text = [NSString stringWithFormat:@"≈%.2f KRW",[platform.priceKRW doubleValue]];
+            self.rmbPriceLbl.text = [NSString stringWithFormat:@"%.2f KRW",[platform.amountKRW doubleValue]];
+            
+        }
+        else{
+            
+            self.tradeVolumeLbl.text = [NSString stringWithFormat:@"≈%.2f CNY",[platform.priceCNY doubleValue]];
+            self.rmbPriceLbl.text = [NSString stringWithFormat:@"%.2f CNY",[platform.amountCNY doubleValue]];
+            
+            
+        }
+        NSString *text =  [CoinUtil convertToRealCoin:platform.balance coin:platform.symbol];
         
-    }
-    else{
+        self.opppsitePriceLbl.text = [NSString stringWithFormat:@"%.8f", [text floatValue]];
         
-        self.tradeVolumeLbl.text = [NSString stringWithFormat:@"≈%.2f CNY",[platform.priceCNY doubleValue]];
-        self.rmbPriceLbl.text = [NSString stringWithFormat:@"%.2f CNY",[platform.amountCNY doubleValue]];
 
         
     }
-    NSString *text =  [CoinUtil convertToRealCoin:platform.balance coin:platform.symbol];
-
-    self.opppsitePriceLbl.text = [NSString stringWithFormat:@"%.8f", [text floatValue]];
     
-
 }
 
 @end

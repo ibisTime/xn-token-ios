@@ -14,7 +14,9 @@
 #import "BTCDetailModel.h"
 #import "CommentTableView.h"
 @interface TLBTCtableView()<UITableViewDataSource, UITableViewDelegate>
-
+{
+    BTCDetailModel *cell;
+}
 @property (nonatomic ,strong) CommentTableView *tableView;
 
 @property (nonatomic ,strong) CommentTableView *outTableView;
@@ -50,7 +52,7 @@ static NSString *identifierCell = @"BTCDetailModel";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    BTCDetailModel *cell = [tableView dequeueReusableCellWithIdentifier:identifierCell];
+    cell = [tableView dequeueReusableCellWithIdentifier:identifierCell];
     NSArray *textArr = @[
                          [LangSwitcher switchLang:@"收款地址" key:nil],
                          [LangSwitcher switchLang:@"转出地址" key:nil],
@@ -58,14 +60,13 @@ static NSString *identifierCell = @"BTCDetailModel";
                          [LangSwitcher switchLang:@"区块高度" key:nil],
                          [LangSwitcher switchLang:@"交易号" key:nil],
                          [LangSwitcher switchLang:@"交易时间" key:nil],
-                         [LangSwitcher switchLang:@"" key:nil]
-                         
+                         [LangSwitcher switchLang:@"查看更多详情" key:nil]
                          ];
     
     NSString *dateStr = [_bill.transDatetime convertToDetailDate];
     
-    NSString *toAdress = @"";
-    NSString *formAdress = @"";
+    NSString *toAdress = @"  ";
+    NSString *formAdress = @"  ";
     NSString *charge = _bill.txFee;
     NSString *height = _bill.height;
 
@@ -83,12 +84,12 @@ static NSString *identifierCell = @"BTCDetailModel";
     if (indexPath.row == 0) {
         [cell localInfoWithData:textArr index:indexPath.row];
 
-        CGFloat h = _bill.vout.count *44;
-        
-        self.tableView = [[CommentTableView alloc] initWithFrame:CGRectMake(0, 44, kScreenWidth -30, h) style:UITableViewStylePlain];
+        CGFloat h = _bill.vout.count *40;
+        cell.titleLbl.frame = CGRectMake(15, 15, SCREEN_WIDTH - 30, 14);
+        self.tableView = [[CommentTableView alloc] initWithFrame:CGRectMake(0, 30, kScreenWidth, h) style:UITableViewStylePlain];
         self.tableView.address = self.address;
         [cell addSubview:self.tableView];
-        self.tableView.owHeight = 44;
+        self.tableView.owHeight = 40;
         self.tableView.utxis = _bill.vout;
         [self.tableView reloadData];
         [cell setNeedsLayout];
@@ -98,13 +99,13 @@ static NSString *identifierCell = @"BTCDetailModel";
         
         [cell localInfoWithData:textArr index:indexPath.row];
         
-        CGFloat h = _bill.vin.count *44;
-        
-        self.outTableView = [[CommentTableView alloc] initWithFrame:CGRectMake(0, 44, kScreenWidth -30, h) style:UITableViewStylePlain];
+        CGFloat h = _bill.vin.count *40;
+        cell.titleLbl.frame = CGRectMake(15, 15, SCREEN_WIDTH - 30, 14);
+        self.outTableView = [[CommentTableView alloc] initWithFrame:CGRectMake(0, 30, kScreenWidth , h) style:UITableViewStylePlain];
         [cell addSubview:self.outTableView];
         self.outTableView.address = self.address;
 
-        self.outTableView.owHeight = 44;
+        self.outTableView.owHeight = 40;
         self.outTableView.utxis = _bill.vin;
         [self.outTableView reloadData];
         [cell setNeedsLayout];
@@ -113,20 +114,18 @@ static NSString *identifierCell = @"BTCDetailModel";
     else{
         NSString *postAmount = [CoinUtil convertToRealCoin:_bill.txFee coin:_currentModel.symbol];
         
-        //    NSString *preAmount = [CoinUtil convertToRealCoin:_bill.preAmountString coin:_bill.currency];
         
-        NSArray *rightArr = @[toAdress, formAdress, postAmount, height,texthash,dateStr,@"查看更多详情"];
+        NSArray *rightArr = @[toAdress, formAdress, postAmount, height,texthash,dateStr,@"  "];
         
-        //    cell.titleLbl.text = textArr[indexPath.row];
         [cell localInfoWithData:textArr index:indexPath.row];
-        //    cell.localInfo = textArr;
-        //    [LangSwitcher switchLang:textArr[indexPath.row] key:nil];
         [cell localInfoWithRightData:rightArr index:indexPath.row];
+        cell.titleLbl.frame = CGRectMake(15, 18, 0, 14);
+        [cell.titleLbl sizeToFit];
+        cell.rightLabel.frame = CGRectMake(cell.titleLbl.xx + 10, 18, SCREEN_WIDTH - cell.titleLbl.xx - 25, 0);
+        [cell.rightLabel sizeToFit];
     }
     
-   
-//    cell.rightLabel.text = rightArr[indexPath.row];
-    //    [LangSwitcher switchLang:rightArr[indexPath.row] key:nil] ;
+
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
     
@@ -145,22 +144,22 @@ static NSString *identifierCell = @"BTCDetailModel";
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if (indexPath.row == 0) {
-        return _bill.vout.count*44+70;
+        return _bill.vout.count*40+45;
     }else if (indexPath.row == 1)
     {
         
-        return _bill.vin.count*44+70;
+        return _bill.vin.count*40+45;
 
     }
     
     else{
-        return 70;
+        return cell.rightLabel.yy + 18;
     }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     
-    return 6;
+    return 0.01;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
@@ -170,7 +169,7 @@ static NSString *identifierCell = @"BTCDetailModel";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     
-    return 0.1;
+    return 0.01;
 }
 
 

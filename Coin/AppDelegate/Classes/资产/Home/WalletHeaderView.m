@@ -522,6 +522,10 @@
         self.personalLabel.hidden = YES;
         [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:@"eyes"];
     }
+    
+    if (self.selectBlock) {
+        self.selectBlock();
+    }
 
 }
 

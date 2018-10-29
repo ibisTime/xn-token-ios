@@ -146,10 +146,10 @@
     
     [self.filterPicker mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.top.equalTo(line.mas_bottom).offset(5);
+        make.top.equalTo(line.mas_bottom).offset(0);
         make.left.equalTo(@0);
         make.right.equalTo(@0);
-        make.height.equalTo(@200);
+        make.height.equalTo(@300);
         
     }];
     
@@ -182,7 +182,7 @@
         
         self.alpha = 1;
 
-        self.pickerView.transform = CGAffineTransformMakeTranslation(0, -250);
+        self.pickerView.transform = CGAffineTransformMakeTranslation(0, - 300 - 50);
         
     } completion:^(BOOL finished) {
         //默认选中第一个
@@ -190,24 +190,17 @@
             
             if (self.autoSelectOne) {
                 
-                _selectBlock( 0);
+                _selectBlock(0);
 
             }
             
         }
         
         if (_selectBlock2) {
-            
             if (self.autoSelectOne) {
-                
-                _selectBlock2( 0,self.tagNames[0]);
-                
+                _selectBlock2(0,self.tagNames[0]);
             }
-            
         }
-        
-        
-        
     }];
 }
 
@@ -287,7 +280,7 @@
 //        pickerLabel.adjustsFontSizeToFitWidth = YES;
         [pickerLabel setTextAlignment:NSTextAlignmentCenter];
         [pickerLabel setBackgroundColor:[UIColor clearColor]];
-        [pickerLabel setFont:Font(20.0)];
+        [pickerLabel setFont:Font(14)];
     }
     
     pickerLabel.text = [self pickerView:pickerView
@@ -306,5 +299,12 @@
         
     }
 }
+
+- (CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component
+
+{
+    return 50.0;
+}
+
 
 @end

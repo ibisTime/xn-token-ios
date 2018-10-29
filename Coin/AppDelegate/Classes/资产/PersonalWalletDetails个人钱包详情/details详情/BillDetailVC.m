@@ -94,12 +94,7 @@
     amountLbl.text = moneyStr;
     [self.headerView addSubview:amountLbl];
     
-    //分割线
-    UIView *line = [[UIView alloc] init];
-    line.backgroundColor = kLineColor;
-    [self.headerView addSubview:line];
-    
-    //
+
     [textLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.top.equalTo(self.headerView.mas_top).offset(22.5);
@@ -117,21 +112,8 @@
         
     }];
     
-    [line mas_makeConstraints:^(MASConstraintMaker *make) {
-
-        make.top.equalTo(amountLbl.mas_bottom).offset(10);
-        make.left.right.equalTo(self.headerView);
-        make.height.mas_equalTo(0.5);
-
-    }];
-    
-//    [self.headerView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.width.mas_equalTo(SCREEN_WIDTH);
-//    }];
     
     [self.headerView layoutIfNeeded];
-//    self.headerView.frame = CGRectMake(0, 0, SCREEN_WIDTH, line.bottom);
-//    self.tableView.tableHeaderView = self.headerView;
     
 }
 

@@ -12,8 +12,11 @@
 #import "NSString+Extension.h"
 #import "CoinUtil.h"
 
-@interface LocalBillDetailTableView()<UITableViewDataSource, UITableViewDelegate>
 
+@interface LocalBillDetailTableView()<UITableViewDataSource, UITableViewDelegate>
+{
+    BillDetailCell *cell;
+}
 @end
 @implementation LocalBillDetailTableView
 static NSString *identifierCell = @"BillDetailCell";
@@ -41,7 +44,7 @@ static NSString *identifierCell = @"BillDetailCell";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    BillDetailCell *cell = [tableView dequeueReusableCellWithIdentifier:identifierCell];
+    cell = [tableView dequeueReusableCellWithIdentifier:identifierCell];
     NSArray *textArr = @[
                          [LangSwitcher switchLang:@"收款地址" key:nil],
                          [LangSwitcher switchLang:@"转出地址" key:nil],
@@ -78,10 +81,16 @@ static NSString *identifierCell = @"BillDetailCell";
         texthash = _bill.txHash;
         postAmount  = [CoinUtil convertToRealCoin:_bill.txFee coin:_currentModel.symbol];
     }
-    NSArray *rightArr = @[toAdress, formAdress, postAmount, height,texthash,dateStr,@""];
+    NSArray *rightArr = @[toAdress, formAdress, postAmount, height,texthash,dateStr,@"  "];
     
-    cell.titleLbl.text = textArr[indexPath.row];
+//    cell.titleLbl.text = textArr[indexPath.row];
+    cell.titleLbl.text = [NSString stringWithFormat:@"%@",textArr[indexPath.row]];
+
     cell.rightLabel.text = rightArr[indexPath.row];
+    cell.titleLbl.frame = CGRectMake(15, 18, 0, 14);
+    [cell.titleLbl sizeToFit];
+    cell.rightLabel.frame = CGRectMake(cell.titleLbl.xx + 10, 18, SCREEN_WIDTH - cell.titleLbl.xx - 25, 0);
+    [cell.rightLabel sizeToFit];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
     
@@ -99,12 +108,12 @@ static NSString *identifierCell = @"BillDetailCell";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    return 70;
+    return cell.rightLabel.yy + 18;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     
-    return 6;
+    return 0.01;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
@@ -114,7 +123,7 @@ static NSString *identifierCell = @"BillDetailCell";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     
-    return 0.1;
+    return 0.01;
 }
 
 @end

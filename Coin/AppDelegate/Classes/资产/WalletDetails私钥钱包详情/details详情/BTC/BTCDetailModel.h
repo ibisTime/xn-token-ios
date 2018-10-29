@@ -16,6 +16,7 @@
 
 @property (nonatomic, strong) UILabel *titleLbl;
 
+
 - (void)localInfoWithData : (NSArray *)arr index :(NSInteger)inter;
 
 - (void)localInfoWithRightData : (NSArray *)arr index :(NSInteger)inter;

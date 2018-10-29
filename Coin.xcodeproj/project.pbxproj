@@ -413,7 +413,6 @@
 		B8086535211ED6AC00755158 /* utxoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B8086534211ED6AC00755158 /* utxoModel.m */; };
 		B8086538211F19BF00755158 /* TLBillBTCVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B8086537211F19BF00755158 /* TLBillBTCVC.m */; };
 		B808653B211F1B6000755158 /* TLBTCtableView.m in Sources */ = {isa = PBXBuildFile; fileRef = B808653A211F1B6000755158 /* TLBTCtableView.m */; };
-		B808653E211F1BCD00755158 /* TLBTCCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B808653D211F1BCD00755158 /* TLBTCCell.m */; };
 		B80D54CB210C84CA005303D5 /* APPLanguage.m in Sources */ = {isa = PBXBuildFile; fileRef = B80D54CA210C84CA005303D5 /* APPLanguage.m */; };
 		B80D54CE210C9C11005303D5 /* TLChangeNikeName.m in Sources */ = {isa = PBXBuildFile; fileRef = B80D54CD210C9C11005303D5 /* TLChangeNikeName.m */; };
 		B8131E94214CF12C00BEF5E0 /* TLWBManger.m in Sources */ = {isa = PBXBuildFile; fileRef = B8131E93214CF12C00BEF5E0 /* TLWBManger.m */; };
@@ -1442,8 +1441,6 @@
 		B8086537211F19BF00755158 /* TLBillBTCVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLBillBTCVC.m; sourceTree = "<group>"; };
 		B8086539211F1B6000755158 /* TLBTCtableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLBTCtableView.h; sourceTree = "<group>"; };
 		B808653A211F1B6000755158 /* TLBTCtableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLBTCtableView.m; sourceTree = "<group>"; };
-		B808653C211F1BCD00755158 /* TLBTCCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLBTCCell.h; sourceTree = "<group>"; };
-		B808653D211F1BCD00755158 /* TLBTCCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLBTCCell.m; sourceTree = "<group>"; };
 		B80D54C9210C84CA005303D5 /* APPLanguage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = APPLanguage.h; sourceTree = "<group>"; };
 		B80D54CA210C84CA005303D5 /* APPLanguage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = APPLanguage.m; sourceTree = "<group>"; };
 		B80D54CC210C9C11005303D5 /* TLChangeNikeName.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLChangeNikeName.h; sourceTree = "<group>"; };
@@ -1766,6 +1763,36 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1F35825D2186D43300F1665B /* BTC */ = {
+			isa = PBXGroup;
+			children = (
+				B8086536211F19BF00755158 /* TLBillBTCVC.h */,
+				B8086537211F19BF00755158 /* TLBillBTCVC.m */,
+				B8086539211F1B6000755158 /* TLBTCtableView.h */,
+				B808653A211F1B6000755158 /* TLBTCtableView.m */,
+				B8CF2CC32121375800055706 /* BTCDetailModel.h */,
+				B8CF2CC42121375800055706 /* BTCDetailModel.m */,
+				B8CF2CC621214A8800055706 /* CommentTableView.h */,
+				B8CF2CC721214A8800055706 /* CommentTableView.m */,
+				B8CF2CC921214AB500055706 /* CommentCell.h */,
+				B8CF2CCA21214AB500055706 /* CommentCell.m */,
+			);
+			path = BTC;
+			sourceTree = "<group>";
+		};
+		1F35825E2186D44800F1665B /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				B8F63EDB20D37FE700556150 /* LocalBillDetailVC.h */,
+				B8F63EDC20D37FE700556150 /* LocalBillDetailVC.m */,
+				B8F63EDE20D3809700556150 /* LocalBillDetailTableView.h */,
+				B8F63EDF20D3809700556150 /* LocalBillDetailTableView.m */,
+				B8F63EE120D397B000556150 /* WalletLocalWebVC.h */,
+				B8F63EE220D397B000556150 /* WalletLocalWebVC.m */,
+			);
+			path = Other;
+			sourceTree = "<group>";
+		};
 		1F709D5B2180A7FC002D1CC4 /* SGQRCode */ = {
 			isa = PBXGroup;
 			children = (
@@ -1804,6 +1831,8 @@
 		1F709D662181C469002D1CC4 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				B8086533211ED6AC00755158 /* utxoModel.h */,
+				B8086534211ED6AC00755158 /* utxoModel.m */,
 				7A40B0FD217B5B7E004B9830 /* BTCTransferModel.h */,
 				7A40B0FE217B5B7E004B9830 /* BTCTransferModel.m */,
 				1F709D682181C4C4002D1CC4 /* WANTransfer.h */,
@@ -1907,10 +1936,6 @@
 				211A53291FBFE49B00CC6294 /* Rate */,
 				211A53281FBFE47800CC6294 /* Filter */,
 				211A53231FBFE41B00CC6294 /* Bill */,
-				B8CF2CC621214A8800055706 /* CommentTableView.h */,
-				B8CF2CC721214A8800055706 /* CommentTableView.m */,
-				B8CF2CC921214AB500055706 /* CommentCell.h */,
-				B8CF2CCA21214AB500055706 /* CommentCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1918,8 +1943,6 @@
 		211A35051FB45CB500FEB71F /* View */ = {
 			isa = PBXGroup;
 			children = (
-				B8086536211F19BF00755158 /* TLBillBTCVC.h */,
-				B8086537211F19BF00755158 /* TLBillBTCVC.m */,
 				B8CA0D6B2108223F0015A19D /* TTPasswordView.h */,
 				B8CA0D6C2108223F0015A19D /* TTPasswordView.m */,
 				211DE6121FB5465E002FCF3D /* WalletTableView.h */,
@@ -1936,12 +1959,6 @@
 				B891F0672101899900ED5DDF /* BuildLocalHomeView.m */,
 				B8CA0D6821081B850015A19D /* AssetPwdView.h */,
 				B8CA0D6921081B850015A19D /* AssetPwdView.m */,
-				B8086533211ED6AC00755158 /* utxoModel.h */,
-				B8086534211ED6AC00755158 /* utxoModel.m */,
-				B8086539211F1B6000755158 /* TLBTCtableView.h */,
-				B808653A211F1B6000755158 /* TLBTCtableView.m */,
-				B808653C211F1BCD00755158 /* TLBTCCell.h */,
-				B808653D211F1BCD00755158 /* TLBTCCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2477,8 +2494,6 @@
 				2ED651CB200F32BC0065A1B0 /* TLCoinWithdrawModel.m */,
 				4CC7F0EB205FBC5400BBEC4D /* CoinModel.h */,
 				4CC7F0EC205FBC5400BBEC4D /* CoinModel.m */,
-				B8CF2CC32121375800055706 /* BTCDetailModel.h */,
-				B8CF2CC42121375800055706 /* BTCDetailModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -3914,12 +3929,8 @@
 		7AEF23602154E35A00BF1DB5 /* details详情 */ = {
 			isa = PBXGroup;
 			children = (
-				B8F63EDB20D37FE700556150 /* LocalBillDetailVC.h */,
-				B8F63EDC20D37FE700556150 /* LocalBillDetailVC.m */,
-				B8F63EDE20D3809700556150 /* LocalBillDetailTableView.h */,
-				B8F63EDF20D3809700556150 /* LocalBillDetailTableView.m */,
-				B8F63EE120D397B000556150 /* WalletLocalWebVC.h */,
-				B8F63EE220D397B000556150 /* WalletLocalWebVC.m */,
+				1F35825E2186D44800F1665B /* Other */,
+				1F35825D2186D43300F1665B /* BTC */,
 			);
 			path = "details详情";
 			sourceTree = "<group>";
@@ -4926,7 +4937,6 @@
 				B8086513211EA17D00755158 /* BTCTransactionInput.m in Sources */,
 				216F5AF6206CCED300F2C832 /* TLNotficationService.m in Sources */,
 				B8D9290F20EA58290026A3DF /* ChangeLocalMoneyVC.m in Sources */,
-				B808653E211F1BCD00755158 /* TLBTCCell.m in Sources */,
 				211A35041FB45A6A00FEB71F /* WalletHeaderView.m in Sources */,
 				7A8A5DC020EA6977002D9A48 /* CustomActionSheet.m in Sources */,
 				B8CAA14221158FF200695BC3 /* LPDPhotoArrangeCell.m in Sources */,

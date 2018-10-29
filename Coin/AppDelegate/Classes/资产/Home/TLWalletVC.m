@@ -18,6 +18,7 @@
 #import "NSString+Extension.h"
 #import "NSString+Check.h"
 
+
 #import "RechargeCoinVC.h"
 #import "WithdrawalsCoinVC.h"
 #import "BillVC.h"
@@ -312,8 +313,11 @@
 
         };
 
-        //点击二维码事件
+        _headerView.selectBlock = ^{
+            [weakSelf.tableView reloadData];
+        };
         
+        //点击二维码事件
         _headerView.codeBlock = ^{
             QRCodeVC *qrCodeVC = [QRCodeVC new];
             

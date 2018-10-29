@@ -179,29 +179,6 @@
         make.width.height.equalTo(@200);
         
     }];
-    
-//    NSString *text = [LangSwitcher switchLang:@"点击复制地址" key:nil];
-//    CGFloat btnW = [NSString getWidthWithString:text font:12.0];
-//    //复制
-//    UIButton *copyBtn = [UIButton buttonWithTitle:text titleColor:kAppCustomMainColor backgroundColor:kClearColor titleFont:12.0];
-//
-//    [copyBtn setEnlargeEdge:10];
-//
-//    [copyBtn addTarget:self action:@selector(clickCopyAddress) forControlEvents:UIControlEventTouchUpInside];
-//
-//    [self.qrView addSubview:copyBtn];
-//    [copyBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-//
-//        make.top.equalTo(qrIV.mas_bottom).offset(25);
-//        make.centerX.equalTo(self.qrView.mas_centerX);
-//        make.width.equalTo(@(btnW));
-//
-//    }];
-//
-//    [copyBtn.titleLabel labelWithString:text
-//                                  title:[LangSwitcher switchLang:@" " key:nil]
-//                                   font:Font(12.0)
-//                                  color:kAppCustomMainColor];
 
 }
 

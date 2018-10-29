@@ -46,8 +46,9 @@ static NSString *identifierCell = @"CommentCell";
     if (!cell) {
         cell = [[CommentCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifierCell];
     }
-    cell.address = self.address;
 
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.address = self.address;
     cell.utModel = self.utxis[indexPath.section];
     
     
@@ -70,12 +71,12 @@ static NSString *identifierCell = @"CommentCell";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    return self.owHeight;
+    return 40;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     
-    return 0.1;
+    return 0.001;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
@@ -85,7 +86,7 @@ static NSString *identifierCell = @"CommentCell";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     
-    return 0.1;
+    return 0.001;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {

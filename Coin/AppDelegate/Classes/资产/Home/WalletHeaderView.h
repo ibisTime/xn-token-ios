@@ -13,6 +13,7 @@ typedef void(^WalletAddBlock)(void);
 typedef void(^SwitchSelectBlock)(NSInteger teger);
 typedef void(^WalletCodeBlock)(void);
 typedef void(^WalletclearBlock)(void);
+typedef void(^WalletSelectEyesBlock)(void);
 
 typedef void(^WalletcenterBlock)(void);
 typedef void(^WalletlocalBlock)(void);
@@ -25,6 +26,7 @@ typedef void(^WalletlocalBlock)(void);
 @property (nonatomic, copy) WalletclearBlock clearBlock;
 @property (nonatomic, copy) WalletcenterBlock centerBlock;
 @property (nonatomic, copy) WalletlocalBlock localBlock;
+@property (nonatomic, copy) WalletSelectEyesBlock selectBlock;
 
 //背景
 @property (nonatomic, strong) UIImageView *bgIV;

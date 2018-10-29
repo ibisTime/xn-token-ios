@@ -38,8 +38,8 @@
 
 - (UIImageView *)topImage {
     if (!_topImage) {
-        [self addSubview:_topImage =[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"顶部图片"]]];
-        _topImage.frame = CGRectMake(0, -360, WIDTH, 360);
+        [self addSubview:_topImage =[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"theia 大图"]]];
+        _topImage.frame = CGRectMake(SCREEN_WIDTH/2 - 85, -50, 170, 40);
         _topImage.contentMode = UIViewContentModeScaleAspectFit;
     }
     return _topImage;
@@ -159,8 +159,8 @@
     if (state == MJRefreshStatePulling || state == MJRefreshStateRefreshing) {
         NSArray *images = self.stateImages[@(state)];
         if (images.count == 0) return;
-        
         [self.customImageV stopAnimating];
+        
         if (images.count == 1) { // 单张图片
             self.customImageV.image = [images lastObject];
         } else { // 多张图片

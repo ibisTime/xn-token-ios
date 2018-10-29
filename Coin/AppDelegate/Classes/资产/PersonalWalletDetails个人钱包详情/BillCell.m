@@ -36,35 +36,33 @@
     
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         
-        self.iconIV = [[UIImageView alloc] init];
+        self.iconIV = [[UIImageView alloc] initWithFrame:CGRectMake(15, 15, 30, 30)];
         self.iconIV.contentMode = UIViewContentModeScaleAspectFill;
         self.iconIV.layer.cornerRadius = 15;
         self.iconIV.clipsToBounds = YES;
         [self addSubview:self.iconIV];
-        [self.iconIV mas_makeConstraints:^(MASConstraintMaker *make) {
-            
-            make.top.equalTo(self.mas_top).offset(20);
-            make.left.equalTo(self.mas_left).offset(15);
-            
-            make.width.height.equalTo(@30);
-            
-        }];
+//        [self.iconIV mas_makeConstraints:^(MASConstraintMaker *make) {
+//
+//            make.top.equalTo(self.mas_top).offset(20);
+//            make.left.equalTo(self.mas_left).offset(15);
+//            make.width.height.equalTo(@30);
+//        }];
         
         //备注
         self.detailLbl = [UILabel labelWithFrame:CGRectZero textAligment:NSTextAlignmentLeft
                                  backgroundColor:[UIColor clearColor]
-                                            font:Font(14)
+                                            font:Font(13)
                                        textColor:kTextBlack];
         self.detailLbl.numberOfLines = 0;
-        self.detailLbl.height = [FONT(14) lineHeight];
+//        self.detailLbl.height = [FONT(14) lineHeight];
         [self addSubview:self.detailLbl];
         
-        [self.detailLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.mas_top).offset(17);
-            make.left.equalTo(self.iconIV.mas_right).offset(15);
-            make.right.equalTo(self.mas_right).offset(-100);
-            
-        }];
+//        [self.detailLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.top.equalTo(self.mas_top).offset(17);
+//            make.left.equalTo(self.iconIV.mas_right).offset(15);
+//            make.right.equalTo(self.mas_right).offset(-100);
+//
+//        }];
         CGFloat left = 15;
         CGFloat timeW = 100;
         
@@ -93,31 +91,32 @@
         //钱
         self.moneyLbl = [UILabel labelWithFrame:CGRectZero textAligment:NSTextAlignmentLeft
                                 backgroundColor:[UIColor clearColor]
-                                           font:Font(17.0)
+                                           font:Font(16.0)
                                       textColor:kTextColor];
-        self.moneyLbl.height = [Font(17.0) lineHeight];
+        self.moneyLbl.frame = CGRectMake(SCREEN_WIDTH - 115, 15, 100, 15);
+//        self.moneyLbl.height = [Font(17.0) lineHeight];
         [self addSubview:self.moneyLbl];
-        [self.moneyLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-            
-            make.right.equalTo(self.mas_right).offset(-15);
-            make.top.equalTo(@(16));
-            
-        }];
-        self.introduceLab = [UILabel labelWithFrame:CGRectZero textAligment:NSTextAlignmentLeft
-                                    backgroundColor:[UIColor clearColor]
-                                               font:Font(11)
-                                          textColor:kTextColor3];
-        self.introduceLab.numberOfLines = 0;
-        self.introduceLab.height = [FONT(14) lineHeight];
-        [self addSubview:self.introduceLab];
-        
-        [self.introduceLab mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.dayLbl.mas_bottom).offset(4);
-            make.left.equalTo(self.iconIV.mas_right).offset(15);
-            
-            //            make.right.equalTo(rightArrowIV.mas_left).offset(-15);
-            
-        }];
+//        [self.moneyLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+//
+//            make.right.equalTo(self.mas_right).offset(-15);
+//            make.top.equalTo(@(16));
+//
+//        }];
+//        self.introduceLab = [UILabel labelWithFrame:CGRectZero textAligment:NSTextAlignmentLeft
+//                                    backgroundColor:[UIColor clearColor]
+//                                               font:Font(11)
+//                                          textColor:kTextColor3];
+//        self.introduceLab.numberOfLines = 0;
+//        self.introduceLab.height = [FONT(14) lineHeight];
+//        [self addSubview:self.introduceLab];
+//
+//        [self.introduceLab mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.top.equalTo(self.dayLbl.mas_bottom).offset(4);
+//            make.left.equalTo(self.iconIV.mas_right).offset(15);
+//
+//            //            make.right.equalTo(rightArrowIV.mas_left).offset(-15);
+//
+//        }];
         //右箭头
         //        UIImageView *rightArrowIV = [[UIImageView alloc] initWithImage:kImage(@"更多-灰色")];
         //
@@ -178,20 +177,28 @@
         self.iconIV.image = kImage(@"转入");
 
     }
+    self.moneyLbl.text = moneyStr;
 
+    
+    [self.moneyLbl sizeToFit];
+    self.moneyLbl.frame = CGRectMake(SCREEN_WIDTH - 15 - self.moneyLbl.frame.size.width, 15, self.moneyLbl.frame.size.width, 15);
+    
+    self.detailLbl.text = [LangSwitcher switchLang:_billModel.bizNote key:nil];
+    self.detailLbl.frame = CGRectMake(60, 15, SCREEN_WIDTH - 60 - 22 - self.moneyLbl.frame.size.width, 0);
+//    self.detailLbl.backgroundColor = [UIColor redColor];
+    [self.detailLbl sizeToFit];
 
 //    self.dayLbl.text = [_billModel.createDatetime convertDateWithFormat:[NSString stringWithFormat:@"dd%@",[LangSwitcher switchLang:[NSString stringWithFormat:@"日"] key:nil]]];
     self.timeLbl.text = [_billModel.createDatetime convertRedDate];
 
-    self.moneyLbl.text = moneyStr;
-
-    self.detailLbl.text = [LangSwitcher switchLang:_billModel.bizNote key:nil]; ;
     
-    [self layoutSubviews];
+    
+    
+//    [self layoutSubviews];
     
     NSInteger num = [self.detailLbl getLinesArrayOfStringInLabel];
     _billModel.dHeightValue = num == 1 ? 0: self.detailLbl.height - 10;
-    self.timeLbl.frame = CGRectMake(self.detailLbl.frame.origin.x, self.detailLbl.yy + 5, SCREEN_WIDTH - 80, 15);
+    self.timeLbl.frame = CGRectMake(self.detailLbl.frame.origin.x, self.detailLbl.yy, SCREEN_WIDTH - 80, 15);
 
 }
 
