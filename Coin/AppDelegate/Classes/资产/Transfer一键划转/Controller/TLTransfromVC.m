@@ -35,6 +35,7 @@
 #import "keyTransferTableView.h"
 
 #import "BTCPoundage.h"
+#import "UsdtClient.h"
 
 typedef enum : NSUInteger {
     BTCAPIChain,
@@ -71,10 +72,6 @@ typedef enum : NSUInteger {
 @property (nonatomic, copy) NSString *btcPrivate;
 @property (nonatomic, strong) NSMutableArray <utxoModel *>*utxis;
 
-@property (nonatomic, copy) NSString *signTx;
-
-//@property (nonatomic, copy) NSString *priceSlow ;
-//@property (nonatomic, copy) NSString *priceFast;
 @property (nonatomic, assign) NSInteger btcPrice;
 @property (nonatomic, strong) UILabel *totalFree;
 @property (nonatomic, strong) BTCKey *key;
@@ -346,7 +343,7 @@ typedef enum : NSUInteger {
 #pragma mark -- 私钥划转
 - (void)sendExcange
 {
-    if (![self.currentModel.symbol isEqualToString:@"BTC"]) {
+    if (![self.currentModel.symbol isEqualToString:@"BTC"] || [self.currentModel.symbol isEqualToString:@"USDT"]) {
         NSString *intputMoney = [CoinUtil convertToSysCoin:self.numberTextField.text coin:self.currentModel.symbol];
 
         NSString *g1 = [NSString stringWithFormat:@"%lld",[self.pricr longLongValue]*21000];
@@ -387,7 +384,7 @@ typedef enum : NSUInteger {
                           
                       } confirm:^(UIAlertAction *action, UITextField *textField)
     {
-        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+//        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         dispatch_after(0.5, dispatch_get_main_queue(), ^{
             if ([self.word isEqualToString:textField.text])
             {
@@ -408,12 +405,20 @@ typedef enum : NSUInteger {
                         
                     }else if ([self.currentModel.symbol isEqualToString:@"WAN"]){
                         result =[MnemonicUtil sendWanTransactionWithMnemonicWallet:Mnemonics address:add amount:gaspic gaspic:[NSString stringWithFormat:@"%lld",[self.tempPrice longLongValue]] gasLimt:@"21000"];
-                    }else{
+                    }else if([self.currentModel.symbol isEqualToString:@"BTC"])
+                    {
                         if ([add isEqualToString:self.btcAddress]) {
                             [TLAlert alertWithMsg:@"转入和转出地址不能相同"];
                             return ;
                         }
                         [self testSpendCoins:add :self.numberTextField.text :[NSString stringWithFormat:@"%ld",(long)self.btcPrice]];
+                        return ;
+                    }else if([self.currentModel.symbol isEqualToString:@"USDT"]){
+                        if ([add isEqualToString:self.btcAddress]) {
+                            [TLAlert alertWithMsg:@"转入和转出地址不能相同"];
+                            return ;
+                        }
+                        [self utxoTransfer];
                         return ;
                     }
                 }else{
@@ -422,7 +427,7 @@ typedef enum : NSUInteger {
                     
                 }
                 if ([result isEqualToString:@"1"]) {
-                    [MBProgressHUD hideHUDForView:self.view animated:YES];
+//                    [MBProgressHUD hideHUDForView:self.view animated:YES];
                     [TLAlert alertWithSucces:[LangSwitcher switchLang:@"划转成功" key:nil]];
                     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                         [self.navigationController popViewControllerAnimated:YES];
@@ -431,13 +436,13 @@ typedef enum : NSUInteger {
                 }else
                 {
                     NSLog(@"线程3--->%d",[NSThread isMainThread]);
-                    [MBProgressHUD hideHUDForView:self.view animated:YES];
+//                    [MBProgressHUD hideHUDForView:self.view animated:YES];
                     [TLAlert alertWithError:[LangSwitcher switchLang:@"划转失败" key:nil]];
                 }
             }else
             {
                 [TLAlert alertWithError:[LangSwitcher switchLang:@"交易密码错误" key:nil]];
-                [MBProgressHUD hideHUDForView:self.view animated:YES];
+//                [MBProgressHUD hideHUDForView:self.view animated:YES];
                 
             }
             
@@ -445,6 +450,9 @@ typedef enum : NSUInteger {
         
     }];
 }
+
+
+
 
 
 
@@ -462,7 +470,7 @@ typedef enum : NSUInteger {
     
     if ([self.currentModel.type isEqualToString:@"0"]) {
         
-        if ([self.currentModel.symbol isEqualToString:@"BTC"]) {
+        if ([self.currentModel.symbol isEqualToString:@"BTC"] || [self.currentModel.symbol isEqualToString:@"USDT"]) {
            
             
             //获取BTCUTXO
@@ -514,7 +522,7 @@ typedef enum : NSUInteger {
                 self.poundageSlider.minimumValue = 0;
                 self.poundageSlider.value = 0.5;
                 [self valueChange:self.poundageSlider];
-                [MBProgressHUD hideHUDForView:self.view animated:YES];
+//                [MBProgressHUD hideHUDForView:self.view animated:YES];
                 
             } failure:^(NSError *error) {
                 
@@ -539,7 +547,7 @@ typedef enum : NSUInteger {
             self.poundageSlider.minimumValue = 0;
             self.poundageSlider.value = 0.5;
             [self valueChange:self.poundageSlider];
-            [MBProgressHUD hideHUDForView:self.view animated:YES];
+//            [MBProgressHUD hideHUDForView:self.view animated:YES];
             
         } failure:^(NSError *error) {
             
@@ -555,6 +563,10 @@ typedef enum : NSUInteger {
     if ([self.currentModel.symbol isEqualToString:@"BTC"]) {
         self.totalFree.text = [NSString stringWithFormat:@"%@ %.8fBTC",[LangSwitcher switchLang:@"本次划转手续费为" key:nil],[BTCPoundage enterTheumber:self.numberTextField.text setFee:[NSString stringWithFormat:@"%.1f",self.poundageSlider.value] setUtxis:self.utxis]/100000000];
     }
+    if ([self.currentModel.symbol isEqualToString:@"USDT"]) {
+        self.totalFree.text = [NSString stringWithFormat:@"%@ %.8fBTC",[LangSwitcher switchLang:@"本次划转手续费为" key:nil],[BTCPoundage usdtPoundage:self.numberTextField.text setFee:[NSString stringWithFormat:@"%.1f",self.poundageSlider.value] setUtxis:self.utxis]/100000000];
+    }
+    
 }
 
 
@@ -570,12 +582,13 @@ typedef enum : NSUInteger {
         NSLog(@"%f", value);
         
         if ([self.currentModel.symbol isEqualToString:@"BTC"]) {
-            
-            
-//            NSLog(@"%f",[BTCPoundage enterTheumber:self.numberTextField.text setFee:[NSString stringWithFormat:@"%.1f",slider.value] setUtxis:self.utxis]);
+
             self.totalFree.text = [NSString stringWithFormat:@"%@ %.8fBTC",[LangSwitcher switchLang:@"本次划转手续费为" key:nil],[BTCPoundage enterTheumber:self.numberTextField.text setFee:[NSString stringWithFormat:@"%.1f",slider.value] setUtxis:self.utxis]/100000000];
             self.btcPrice = slider.value;
-            
+            return;
+        }
+        if ([self.currentModel.symbol isEqualToString:@"USDT"]) {
+            self.totalFree.text = [NSString stringWithFormat:@"%@ %.8fBTC",[LangSwitcher switchLang:@"本次划转手续费为" key:nil],[BTCPoundage usdtPoundage:self.numberTextField.text setFee:[NSString stringWithFormat:@"%.1f",slider.value] setUtxis:self.utxis]/100000000];
             return;
         }
         
@@ -706,7 +719,14 @@ typedef enum : NSUInteger {
             
 //            self.totalFree.backgroundColor = [UIColor redColor];
 //            [self.tableView reloadData];
-            self.tableView.poundage = [NSString stringWithFormat:@"%@ %.8fBTC",[LangSwitcher switchLang:@"本次划转手续费为" key:nil],[BTCPoundage enterTheumber:self.numberTextField.text setFee:[NSString stringWithFormat:@"%f",([Max floatValue] + [Min floatValue])/2] setUtxis:self.utxis]/100000000];
+            if ([self.currentModel.symbol isEqualToString:@"BTC"]) {
+                self.tableView.poundage = [NSString stringWithFormat:@"%@ %.8fBTC",[LangSwitcher switchLang:@"本次划转手续费为" key:nil],[BTCPoundage enterTheumber:self.numberTextField.text setFee:[NSString stringWithFormat:@"%f",([Max floatValue] + [Min floatValue])/2] setUtxis:self.utxis]/100000000];
+            }
+            
+            if ([self.currentModel.symbol isEqualToString:@"USDT"]) {
+                self.tableView.poundage = [NSString stringWithFormat:@"%@ %.8fBTC",[LangSwitcher switchLang:@"本次划转手续费为" key:nil],[BTCPoundage usdtPoundage:self.numberTextField.text setFee:[NSString stringWithFormat:@"%.1f",([Max floatValue] + [Min floatValue])/2] setUtxis:self.utxis]/100000000];
+            }
+            
             [self.tableView reloadData];
         } failure:^(NSError *error) {
             NSLog(@"%@",error);
@@ -766,7 +786,7 @@ typedef enum : NSUInteger {
     NSLog(@"Private key: %@", privateKey);
     
     self.btcPrompt = @"";
-    [MBProgressHUD hideHUDForView:self.view animated:YES];
+//    [MBProgressHUD hideHUDForView:self.view animated:YES];
     NSError* error = nil;
     BTCTransaction* transaction;
     if ([AppConfig config].runEnv == 0) {
@@ -791,29 +811,32 @@ typedef enum : NSUInteger {
         [TLAlert alertWithInfo:self.btcPrompt];
         return;
     }
+
+    [self validationSignTx:BTCHexFromData([transaction data])];
+    //    return;
     
-    self.signTx = BTCHexFromData([transaction data]);
     
+}
+
+-(void)validationSignTx:(NSString *)signTx
+{
     //    return;
     TLNetworking *net = [TLNetworking new];
-    
-    
     net.code = @"802222";
-    net.parameters[@"signTx"] = self.signTx;
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    net.showView = self.view;
+    net.parameters[@"signTx"] = signTx;
+    //    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [net postWithSuccess:^(id responseObject) {
         NSLog(@"%@",responseObject);
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
-        [TLAlert alertWithSucces:[LangSwitcher switchLang:@"广播成功" key:nil]];
+        //        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        [TLAlert alertWithSucces:@"广播成功"];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [self.navigationController popViewControllerAnimated:YES];
-            
         });
     } failure:^(NSError *error) {
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        //        [MBProgressHUD hideHUDForView:self.view animated:YES];
         
     }];
-    
 }
 
 
@@ -951,7 +974,60 @@ typedef enum : NSUInteger {
     return tx;
 }
 
-
+-(void)utxoTransfer
+{
+    TLDataBase *dataBase = [TLDataBase sharedManager];
+    NSString *word;
+    if ([dataBase.dataBase open]) {
+        NSString *sql = [NSString stringWithFormat:@"SELECT Mnemonics from THAUser where userId = '%@'",[TLUser user].userId];
+        //        [sql appendString:[TLUser user].userId];
+        FMResultSet *set = [dataBase.dataBase executeQuery:sql];
+        while ([set next])
+        {
+            word = [set stringForColumn:@"Mnemonics"];
+            
+        }
+        [set close];
+    }
+    [dataBase.dataBase close];
+    //    [self queryTotalAmount];
+    
+    
+    NSArray *words = [word componentsSeparatedByString:@" "];
+    
+    BTCMnemonic *mnemonic =  [MnemonicUtil importMnemonic:words];
+    BTCKeychain *keychain = [mnemonic keychain];
+    
+    if ([AppConfig config].runEnv == 0) {
+        keychain.network = [BTCNetwork mainnet];
+        
+    }else{
+        keychain.network = [BTCNetwork testnet];
+        
+    }
+    BTCKey *key = keychain.key;
+    self.key = key;
+    BTCTransaction* transaction;
+    NSString *add;
+    for (int i = 0; i < self.localcurrencys.count; i++) {
+        if ([self.currentModel.symbol isEqualToString:self.centercurrencys[i].currency]) {
+            add = self.centercurrencys[i].coinAddress;
+        }
+    }
+    if ([AppConfig config].runEnv == 0) {
+        transaction = [UsdtClient createSignedSimpleSend:key.address privateKey:key to:[BTCPublicKeyAddress addressWithString:add] currencyID:@"31" amount:self.numberTextField.text utxoList:self.utxis setFee:[NSString stringWithFormat:@"%ld",self.btcPrice] btcValue:self.numberTextField.text];
+    }else
+    {
+        transaction = [UsdtClient createSignedSimpleSend:key.addressTestnet privateKey:key to:[BTCPublicKeyAddressTestnet addressWithString:add] currencyID:@"2" amount:self.numberTextField.text utxoList:self.utxis setFee:[NSString stringWithFormat:@"%ld",self.btcPrice] btcValue:self.numberTextField.text];
+    }
+    
+    if (transaction == nil) {
+        return;
+    }
+    [self validationSignTx:BTCHexFromData([transaction data])];
+    
+    
+}
 
 
 @end

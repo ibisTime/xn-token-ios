@@ -15,9 +15,7 @@
 - (void)saveOpenCoinList:(NSMutableArray *)coinList {
     
     [[NSUserDefaults standardUserDefaults] setObject:coinList forKey:COIN_LIST_KEY];
-    
     [[NSUserDefaults standardUserDefaults] synchronize];
-    
 }
 
 - (NSMutableArray<CoinModel *> *)getOpenCoinList {

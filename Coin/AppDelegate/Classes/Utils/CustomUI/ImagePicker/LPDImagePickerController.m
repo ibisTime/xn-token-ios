@@ -374,20 +374,20 @@
     [LPDImageManager manager].sortAscendingByModificationDate = sortAscendingByModificationDate;
 }
 
-- (void)settingBtnClick {
-    if (iOS8Later) {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
-    } else {
-        NSURL *privacyUrl = [NSURL URLWithString:@"prefs:root=Privacy&path=PHOTOS"];
-        if ([[UIApplication sharedApplication] canOpenURL:privacyUrl]) {
-            [[UIApplication sharedApplication] openURL:privacyUrl];
-        } else {
-            NSString *message = [NSBundle lpd_localizedStringForKey:@"Can not jump to the privacy settings page, please go to the settings page by self, thank you"];
-            UIAlertView * alert = [[UIAlertView alloc]initWithTitle:[NSBundle lpd_localizedStringForKey:@"Sorry"] message:message delegate:nil cancelButtonTitle:[NSBundle lpd_localizedStringForKey:@"OK"] otherButtonTitles: nil];
-            [alert show];
-        }
-    }
-}
+//- (void)settingBtnClick {
+//    if (iOS8Later) {
+//        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
+//    } else {
+//        NSURL *privacyUrl = [NSURL URLWithString:@"prefs:root=Privacy&path=PHOTOS"];
+//        if ([[UIApplication sharedApplication] canOpenURL:privacyUrl]) {
+//            [[UIApplication sharedApplication] openURL:privacyUrl];
+//        } else {
+//            NSString *message = [NSBundle lpd_localizedStringForKey:@"Can not jump to the privacy settings page, please go to the settings page by self, thank you"];
+//            UIAlertView * alert = [[UIAlertView alloc]initWithTitle:[NSBundle lpd_localizedStringForKey:@"Sorry"] message:message delegate:nil cancelButtonTitle:[NSBundle lpd_localizedStringForKey:@"OK"] otherButtonTitles: nil];
+//            [alert show];
+//        }
+//    }
+//}
 
 - (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated {
     if (iOS7Later) viewController.automaticallyAdjustsScrollViewInsets = NO;

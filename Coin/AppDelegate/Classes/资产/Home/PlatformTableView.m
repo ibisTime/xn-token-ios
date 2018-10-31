@@ -11,7 +11,9 @@
 #import "PlatformCell.h"
 #import "AccountMoneyCellTableViewCell.h"
 @interface PlatformTableView()<UITableViewDelegate, UITableViewDataSource>
-
+{
+    NSMutableArray *arr;
+}
 @end
 
 @implementation PlatformTableView
@@ -35,44 +37,80 @@ static NSString *platformCell1 = @"AccountMoneyCellTableViewCell";
     return self;
 }
 
+
+-(void)WhetherOrNotShown
+{
+    TLDataBase *dataBase = [TLDataBase sharedManager];
+    NSString *symbol;
+    NSString *address;
+    arr = [NSMutableArray array];
+    if ([dataBase.dataBase open]) {
+        NSString *sql = [NSString stringWithFormat:@"SELECT symbol,address from THALocal lo, THAUser th where lo.walletId = th.walletId  and th.userId = '%@' and lo.IsSelect = 1",[TLUser user].userId];
+        //        [sql appendString:[TLUser user].userId];
+        FMResultSet *set = [dataBase.dataBase executeQuery:sql];
+        while ([set next])
+        {
+            NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+            
+            symbol = [set stringForColumn:@"symbol"];
+            address = [set stringForColumn:@"address"];
+            
+            [dic setObject:symbol forKey:@"symbol"];
+            [arr addObject:dic];
+        }
+        [set close];
+    }
+    [dataBase.dataBase close];
+}
+
 #pragma mark - UITableViewDataSource;
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    
+    [self WhetherOrNotShown];
+    if (self.isLocal == YES) {
+        return arr.count;
+    }
     return self.platforms.count;
+    
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
-    if (self.isLocal == YES) {
-        if (self.platforms.count >0) {
-            CurrencyModel *platform = self.platforms[indexPath.row];
-            
-            
-            AccountMoneyCellTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:platformCell1 forIndexPath:indexPath];
-            cell.platform = platform;
-
-            return cell;
-        }else{
-            return nil;
-        }
-    }else{
-        if (self.platforms.count >0) {
-            CurrencyModel *platform = self.platforms[indexPath.row];
-            
-            
-            PlatformCell *cell = [tableView dequeueReusableCellWithIdentifier:platformCell forIndexPath:indexPath];
-            cell.platform = platform;
-            
-            return cell;
-        }else{
-            
-            
-            return nil;
-        }
-        
-    }
     
+    [self WhetherOrNotShown];
+    AccountMoneyCellTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:platformCell1 forIndexPath:indexPath];
+    
+    
+    if (self.isLocal == YES) {
+        [self WhetherOrNotShown];
+        for (int j = 0; j<self.platforms.count; j++) {
+            if ([arr[indexPath.row][@"symbol"] isEqualToString:self.platforms[j].symbol]) {
+                cell.platform = self.platforms[j];
+            }
+        }
+    }else
+    {
+        cell.platform1 = self.platforms[indexPath.row];
+    }
+    return cell;
+//    if (self.platforms.count > 0) {
+//
+//
+//
+//    }
+    
+    
+//    if (self.isLocal == YES) {
+//
+//
+//    }else
+//    {
+//        PlatformCell *cell = [tableView dequeueReusableCellWithIdentifier:platformCell forIndexPath:indexPath];
+//        cell.platform = self.platforms[indexPath.row];
+//        return cell;
+//    }
+//
+//    return nil;
     
     
 }

@@ -217,4 +217,65 @@
     
 }
 
+
+#pragma mark - Setting
+
+
+
+- (void)setPlatform1:(CurrencyModel *)platform1 {
+    
+    CurrencyModel *platform = platform1;
+//    _platform1 = platform;
+    
+    NSLog(@"---------%@",platform);
+    CoinModel *coin = [CoinUtil getCoinModel:platform.currency];
+    
+    [self.presentImage sd_setImageWithURL:[NSURL URLWithString:[coin.pic1 convertImageUrl]]];
+    
+    self.currencyNameLbl.text = platform.currency;
+    
+    NSString *leftAmount = [CoinUtil convertToRealCoin:platform.amountString coin:platform.currency];
+    NSString *rightAmount = [CoinUtil convertToRealCoin:platform.frozenAmountString coin:platform.currency];
+    NSString *ritAmount = [leftAmount subNumber:rightAmount];
+    
+    
+    NSString *eyes = [[NSUserDefaults standardUserDefaults] objectForKey:@"eyes"];
+    if ([eyes isEqualToString:@"1"]) {
+        if ([[TLUser user].localMoney isEqualToString:@"USD"]) {
+            self.tradeVolumeLbl.text = [NSString stringWithFormat:@"≈%.2f USD",[platform.priceUSD doubleValue]];
+            self.rmbPriceLbl.text = @"**** USD";
+            
+        } else if ([[TLUser user].localMoney isEqualToString:@"KRW"])
+        {
+            self.tradeVolumeLbl.text = [NSString stringWithFormat:@"≈%.2f KRW",[platform.priceKRW doubleValue]];
+            self.rmbPriceLbl.text = @"%**** KRW";
+            
+        }
+        else{
+            self.tradeVolumeLbl.text = [NSString stringWithFormat:@"≈%.2f CNY",[platform.priceCNY doubleValue]];
+            self.rmbPriceLbl.text = @"**** CNY";
+        }
+        self.opppsitePriceLbl.text = @"****";
+    }else
+    {
+        if ([[TLUser user].localMoney isEqualToString:@"USD"]) {
+            self.tradeVolumeLbl.text = [NSString stringWithFormat:@"≈%.2f USD",[platform.priceUSD doubleValue]];
+            self.rmbPriceLbl.text = [NSString stringWithFormat:@"%.2f USD",[platform.amountUSD doubleValue]];
+            
+        } else if ([[TLUser user].localMoney isEqualToString:@"KRW"])
+        {
+            self.tradeVolumeLbl.text = [NSString stringWithFormat:@"≈%.2f KRW",[platform.priceKRW doubleValue]];
+            self.rmbPriceLbl.text = [NSString stringWithFormat:@"%.2f KRW",[platform.amountKRW doubleValue]];
+            
+        }
+        else{
+            self.tradeVolumeLbl.text = [NSString stringWithFormat:@"≈%.2f CNY",[platform.priceCNY doubleValue]];
+            self.rmbPriceLbl.text = [NSString stringWithFormat:@"%.2f CNY",[platform.amountCNY doubleValue]];
+        }
+        self.opppsitePriceLbl.text = [NSString stringWithFormat:@"%.8f",[ritAmount doubleValue]];
+    }
+    
+    
+}
+
 @end

@@ -20,7 +20,10 @@
 #import "TLBannerView.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 
-@interface HomeHeaderView()
+@interface HomeHeaderView()<HW3DBannerViewDelegate>
+{
+    NSInteger selectNum;
+}
 
 //轮播图
 @property (nonatomic,strong) TLBannerView *bannerView;
@@ -53,20 +56,34 @@
 -(HW3DBannerView *)scrollView
 {
     if (!_scrollView) {
+//        CoinWeakSelf;
         _scrollView = [HW3DBannerView initWithFrame:CGRectMake(15, 5, SCREEN_WIDTH - 30, SCREEN_WIDTH/2 - 15) imageSpacing:10 imageWidth:SCREEN_WIDTH - 30];
         _scrollView.initAlpha = 0; // 设置两边卡片的透明度
         _scrollView.imageRadius = 5; // 设置卡片圆角
         _scrollView.imageHeightPoor = 20;// 设置占位图片
+        _scrollView.delegate = self;
         _scrollView.autoScrollTimeInterval = 4;
 //        _scrollView.data = @[@"banner",@"banner",@"banner"];
         _scrollView.clickImageBlock = ^(NSInteger currentIndex) {
-            //            NSLog(@"%ld",currentIndex);
-            //            _currentIndex = currentIndex;
+            
+            selectNum = currentIndex;
         };
-        //        _scrollView.delegate = self;
     }
     return _scrollView;
 }
+
+-(void)HW3DBannerViewClick
+{
+    CoinWeakSelf;
+    if (weakSelf.headerBlock) {
+        weakSelf.headerBlock(HomeEventsTypeBanner, selectNum,nil);
+    }
+}
+
+//-(void)click1:(UITapGestureRecognizer *)sender{
+//
+//}
+
 
 #pragma mark - Init
 //- (void)initBannerView {

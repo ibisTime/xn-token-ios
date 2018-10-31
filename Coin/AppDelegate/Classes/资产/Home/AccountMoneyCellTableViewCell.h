@@ -13,4 +13,6 @@
 @interface AccountMoneyCellTableViewCell : UITableViewCell
 @property (nonatomic, strong) CurrencyModel *platform;
 
+@property (nonatomic, strong) CurrencyModel *platform1;
+
 @end

@@ -117,7 +117,7 @@
         CoinModel *coin = [CoinUtil getCoinModel:currency.symbol];
 
         [self.bgIV sd_setImageWithURL:[NSURL URLWithString:[coin.icon convertImageUrl]]];
-        self.textLbl.text = [NSString stringWithFormat:@"%@%@ ",[CoinUtil convertToRealCoin:currency.balance coin:currency.symbol],currency.symbol];
+        self.textLbl.text = [NSString stringWithFormat:@"%.8f%@",[[CoinUtil convertToRealCoin:currency.balance coin:currency.symbol] floatValue],currency.symbol];
         
         //对应币种价格
         if ([[TLUser user].localMoney isEqualToString:@"USD"]) {

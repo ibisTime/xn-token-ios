@@ -10,6 +10,8 @@
 #import "utxoModel.h"
 @interface BTCPoundage : NSObject
 
-+(CGFloat)enterTheumber:(NSString *)number setFee:(NSString *)fee setUtxis:(NSMutableArray <utxoModel *>*)Utxis;
++(CGFloat)enterTheumber:(NSString *)number setFee:(NSString *)fee setUtxis:(NSMutableArray <utxoModel *>*)utxis;
+
++(CGFloat)usdtPoundage:(NSString *)number setFee:(NSString *)fee setUtxis:(NSMutableArray <utxoModel *>*)utxis;
 
 @end

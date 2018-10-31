@@ -43,6 +43,7 @@ NSString *const dbName = @"THAWallet.db";
     });
     return _instance;
 }
+
 - (instancetype)init {
     if (self = [super init]) {
        
@@ -100,6 +101,8 @@ NSString *const dbName = @"THAWallet.db";
     NSString *document = [path objectAtIndex:0];
     return[document stringByAppendingPathComponent:@"LocalWallet.sqlite"];
 }
+
+
 - (void)createTable
 {
     NSFileManager *fileManager = [NSFileManager defaultManager];

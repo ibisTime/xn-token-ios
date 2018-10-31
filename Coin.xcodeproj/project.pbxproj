@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1F35826621870D8F00F1665B /* NewHelpCentetVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F35826421870D8C00F1665B /* NewHelpCentetVC.m */; };
+		1F358B3921880B4C00F1665B /* UsdtClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F358B3821880B4C00F1665B /* UsdtClient.m */; };
 		1F709D5E218161D8002D1CC4 /* keyTransferTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F709D5D218161D8002D1CC4 /* keyTransferTableView.m */; };
 		1F709D61218162A5002D1CC4 /* TransformButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F709D60218162A5002D1CC4 /* TransformButtonCell.m */; };
 		1F709D6421817246002D1CC4 /* TransferNumberCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F709D6321817246002D1CC4 /* TransferNumberCell.m */; };
@@ -249,7 +250,6 @@
 		7A3821C320EACDA100D6B636 /* SendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A3821C220EACDA100D6B636 /* SendCell.m */; };
 		7A3821C620EAD4EA00D6B636 /* SendModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A3821C520EAD4EA00D6B636 /* SendModel.m */; };
 		7A40B0FB2179C875004B9830 /* HomeTbleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A40B0FA2179C875004B9830 /* HomeTbleView.m */; };
-		7A40B0FF217B5B7E004B9830 /* BTCTransferModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A40B0FE217B5B7E004B9830 /* BTCTransferModel.m */; };
 		7A40B101217CAEA8004B9830 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7A40B100217CAEA6004B9830 /* Assets.xcassets */; };
 		7A40B119217EF15F004B9830 /* TableViewAnimationKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A40B114217EF15E004B9830 /* TableViewAnimationKit.m */; };
 		7A40B11A217EF15F004B9830 /* UITableView+XSAnimationKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A40B118217EF15E004B9830 /* UITableView+XSAnimationKit.m */; };
@@ -510,6 +510,8 @@
 /* Begin PBXFileReference section */
 		1F35826421870D8C00F1665B /* NewHelpCentetVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewHelpCentetVC.m; sourceTree = "<group>"; };
 		1F35826521870D8E00F1665B /* NewHelpCentetVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewHelpCentetVC.h; sourceTree = "<group>"; };
+		1F358B3721880B4B00F1665B /* UsdtClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UsdtClient.h; sourceTree = "<group>"; };
+		1F358B3821880B4C00F1665B /* UsdtClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UsdtClient.m; sourceTree = "<group>"; };
 		1F709D5C218161D8002D1CC4 /* keyTransferTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = keyTransferTableView.h; sourceTree = "<group>"; };
 		1F709D5D218161D8002D1CC4 /* keyTransferTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = keyTransferTableView.m; sourceTree = "<group>"; };
 		1F709D5F218162A5002D1CC4 /* TransformButtonCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TransformButtonCell.h; sourceTree = "<group>"; };
@@ -997,8 +999,6 @@
 		7A3821C520EAD4EA00D6B636 /* SendModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SendModel.m; sourceTree = "<group>"; };
 		7A40B0F92179C875004B9830 /* HomeTbleView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeTbleView.h; sourceTree = "<group>"; };
 		7A40B0FA2179C875004B9830 /* HomeTbleView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeTbleView.m; sourceTree = "<group>"; };
-		7A40B0FD217B5B7E004B9830 /* BTCTransferModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTCTransferModel.h; sourceTree = "<group>"; };
-		7A40B0FE217B5B7E004B9830 /* BTCTransferModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTCTransferModel.m; sourceTree = "<group>"; };
 		7A40B100217CAEA6004B9830 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7A40B113217EF15E004B9830 /* TableViewAnimationKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewAnimationKit.h; sourceTree = "<group>"; };
 		7A40B114217EF15E004B9830 /* TableViewAnimationKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewAnimationKit.m; sourceTree = "<group>"; };
@@ -1736,6 +1736,10 @@
 				211A53341FBFE53100CC6294 /* RateModel.m */,
 				215979621FB81CED0029F177 /* BillModel.h */,
 				215979631FB81CED0029F177 /* BillModel.m */,
+				1F358B3721880B4B00F1665B /* UsdtClient.h */,
+				1F358B3821880B4C00F1665B /* UsdtClient.m */,
+				1F709D732182C317002D1CC4 /* BTCPoundage.h */,
+				1F709D742182C317002D1CC4 /* BTCPoundage.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1780,12 +1784,8 @@
 			children = (
 				B8086533211ED6AC00755158 /* utxoModel.h */,
 				B8086534211ED6AC00755158 /* utxoModel.m */,
-				7A40B0FD217B5B7E004B9830 /* BTCTransferModel.h */,
-				7A40B0FE217B5B7E004B9830 /* BTCTransferModel.m */,
 				1F709D682181C4C4002D1CC4 /* WANTransfer.h */,
 				1F709D692181C4C4002D1CC4 /* WANTransfer.m */,
-				1F709D732182C317002D1CC4 /* BTCPoundage.h */,
-				1F709D742182C317002D1CC4 /* BTCPoundage.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2258,8 +2258,6 @@
 				2EB039B31FEA0B4500589D8E /* TLUpdateVC.m */,
 				216F5AFB206CD3A800F2C832 /* GengXinModel.h */,
 				216F5AFC206CD3A800F2C832 /* GengXinModel.m */,
-				B8B15C0020CA312100F13220 /* BuildWalletMineVC.h */,
-				B8B15C0120CA312100F13220 /* BuildWalletMineVC.m */,
 				B8B15C0320CA55D600F13220 /* BuildSucessVC.h */,
 				B8B15C0420CA55D600F13220 /* BuildSucessVC.m */,
 				B8B15C3020CAB4DE00F13220 /* CustomLayoutWallet.h */,
@@ -3371,6 +3369,8 @@
 			children = (
 				B8CA7D4720CBA22800A0E93C /* WalletImportVC.h */,
 				B8CA7D4820CBA22800A0E93C /* WalletImportVC.m */,
+				B8B15C0020CA312100F13220 /* BuildWalletMineVC.h */,
+				B8B15C0120CA312100F13220 /* BuildWalletMineVC.m */,
 			);
 			path = "AddWallet导入钱包";
 			sourceTree = "<group>";
@@ -4497,6 +4497,7 @@
 				7A2CC6C5215DC88C00B27E2D /* PGDatePickManager.m in Sources */,
 				B88B59182109AEC400F20D1B /* UIColor+theme.m in Sources */,
 				211DE6B11FB58B4C002FCF3D /* UIButton+EnLargeEdge.m in Sources */,
+				1F358B3921880B4C00F1665B /* UsdtClient.m in Sources */,
 				B8A2436520E5E0F20074DF8F /* TLDataBase.m in Sources */,
 				7A07F809216C84F30026EB7A /* SCGenericChart.m in Sources */,
 				7A07F7E5216C7C200026EB7A /* MyInconmeHeadCell.m in Sources */,
@@ -4526,7 +4527,6 @@
 				21A7F3191FB2E2F900FAA0A2 /* TLAccountBaseVC.m in Sources */,
 				216F5AFD206CD3A800F2C832 /* GengXinModel.m in Sources */,
 				B8F63EDA20D3639900556150 /* LocalBillCell.m in Sources */,
-				7A40B0FF217B5B7E004B9830 /* BTCTransferModel.m in Sources */,
 				2ED651C9200F2F6F0065A1B0 /* TLCoinWithdrawOrderVC.m in Sources */,
 				7AAF036A21526977008507FF /* ioapi.c in Sources */,
 				211DE6B21FB58B4C002FCF3D /* UIButton+Custom.m in Sources */,

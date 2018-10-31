@@ -216,21 +216,11 @@
 #pragma mark - HeaderEvents
 - (void)headerViewEventsWithType:(HomeEventsType)type index:(NSInteger)index  model:(HomeFindModel *)model
 {
-    switch (type) {
-
-        case HomeEventsTypeBanner:
-        {
-
-            NSString *url = [[self.bannerRoom objectAtIndex:index] url];
-            if (url && url.length > 0) {
-                WebVC *webVC = [[WebVC alloc] init];
-                webVC.url = url;
-                [self.navigationController pushViewController:webVC animated:YES];
-            }
-            return;
-
-        }break;
-
+    NSString *url = [[self.bannerRoom objectAtIndex:index] url];
+    if (url && url.length > 0) {
+        WebVC *webVC = [[WebVC alloc] init];
+        webVC.url = url;
+        [self.navigationController pushViewController:webVC animated:YES];
     }
 }
 

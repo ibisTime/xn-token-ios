@@ -243,7 +243,7 @@
 
 -(void)centerTapGes{
 //    WGLog(@"123");
-//    [_delegate HW3DBannerViewClick];
+    [_delegate HW3DBannerViewClick];
 }
 
 -(void)createTimer {

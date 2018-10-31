@@ -552,18 +552,19 @@ static CGSize AssetGridThumbnailSize;
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (buttonIndex == 1) { // 去设置界面，开启相机访问权限
-        if (iOS8Later) {
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
-        } else {
-            NSURL *privacyUrl = [NSURL URLWithString:@"prefs:root=Privacy&path=CAMERA"];
-            if ([[UIApplication sharedApplication] canOpenURL:privacyUrl]) {
-                [[UIApplication sharedApplication] openURL:privacyUrl];
-            } else {
-                NSString *message = [NSBundle lpd_localizedStringForKey:@"Can not jump to the privacy settings page, please go to the settings page by self, thank you"];
-                UIAlertView * alert = [[UIAlertView alloc]initWithTitle:[NSBundle lpd_localizedStringForKey:@"Sorry"] message:message delegate:nil cancelButtonTitle:[NSBundle lpd_localizedStringForKey:@"OK"] otherButtonTitles: nil];
-                [alert show];
-            }
-        }
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
+//        if (iOS8Later) {
+//
+//        } else {
+//            NSURL *privacyUrl = [NSURL URLWithString:@"prefs:root=Privacy&path=CAMERA"];
+//            if ([[UIApplication sharedApplication] canOpenURL:privacyUrl]) {
+//                [[UIApplication sharedApplication] openURL:privacyUrl];
+//            } else {
+//                NSString *message = [NSBundle lpd_localizedStringForKey:@"Can not jump to the privacy settings page, please go to the settings page by self, thank you"];
+//                UIAlertView * alert = [[UIAlertView alloc]initWithTitle:[NSBundle lpd_localizedStringForKey:@"Sorry"] message:message delegate:nil cancelButtonTitle:[NSBundle lpd_localizedStringForKey:@"OK"] otherButtonTitles: nil];
+//                [alert show];
+//            }
+//        }
     }
 }
 

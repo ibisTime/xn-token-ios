@@ -220,27 +220,21 @@
     if (self.isRedPage) {
         return;
     }
-//    self.currencys = self.tableView.currencys;
-//    [self SaveStatusSymbol];
-//    NSMutableArray *a = [NSMutableArray array];
-//    for (int i = 0; i < self.currencys.count; i++) {
-//        CurrencyModel *model = self.currencys[i];
-//        if (model.IsSelected == YES) {
-//            [a addObject:model];
-//        }
-//    }
-//
-//    [super viewWillDisappear:animated];
-////    CoinWeakSelf;
-//
-//
-//    if ([self.navigationController.viewControllers indexOfObject:self]==NSNotFound) {
-//
-//   NSLog(@"clicked navigationbar back button");
-//            if (self.select) {
-//                self.select(self.currencys);
-//            }
-//    }
+    self.currencys = self.tableView.currencys;
+    [self SaveStatusSymbol];
+    NSMutableArray *a = [NSMutableArray array];
+    for (int i = 0; i < self.currencys.count; i++) {
+        CurrencyModel *model = self.currencys[i];
+        if (model.IsSelected == YES) {
+            [a addObject:model];
+        }
+    }
+ 
+
+
+    if (self.select) {
+        self.select(self.currencys);
+    }
 }
 
 -(void)refreshTableViewButtonClick:(TLTableView *)refreshTableview button:(UIButton *)sender selectRowAtIndex:(NSInteger)index
@@ -267,28 +261,7 @@
         }];
     }else
     {
-        self.currencys = self.tableView.currencys;
-        [self SaveStatusSymbol];
-        NSMutableArray *a = [NSMutableArray array];
-        for (int i = 0; i < self.currencys.count; i++) {
-            CurrencyModel *model = self.currencys[i];
-            if (model.IsSelected == YES) {
-                [a addObject:model];
-            }
-        }
-        NSNotification *notification =[NSNotification notificationWithName:@"LOADDATAPAGE2" object:nil userInfo:nil];
-        [[NSNotificationCenter defaultCenter] postNotification:notification];
-//        [super viewWillDisappear:animated];
-        //    CoinWeakSelf;
         
-        
-//        if ([self.navigationController.viewControllers indexOfObject:self]==NSNotFound) {
-//
-//            NSLog(@"clicked navigationbar back button");
-//            if (self.select) {
-//                self.select(self.currencys);
-//            }
-//        }
     }
 
 
