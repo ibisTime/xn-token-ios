@@ -47,15 +47,27 @@ static NSString *identifierLocalBillCell = @"LocalBillCell";
     return 1;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    if (self.ustds.count > 0) {
+        return self.ustds.count;
+    }else
+    {
+        return self.bills.count;
+    }
     
-    return self.bills.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     LocalBillCell *cell = [tableView dequeueReusableCellWithIdentifier:identifierLocalBillCell forIndexPath:indexPath];
     cell.currencyModel = self.billModel;
-    cell.billModel = self.bills[indexPath.row];
+    if (self.ustds.count > 0) {
+        cell.usdtModel = self.ustds[indexPath.row];
+    }else
+    {
+        cell.billModel = self.bills[indexPath.row];
+    }
+    
+    
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     return cell;
@@ -73,6 +85,12 @@ static NSString *identifierLocalBillCell = @"LocalBillCell";
     if ([self.refreshDelegate respondsToSelector:@selector(refreshTableView:didSelectRowAtIndexPath:)]) {
         [self.refreshDelegate refreshTableView:self didSelectRowAtIndexPath:indexPath];
     }
+}
+
+
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return 0.01;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
@@ -107,11 +125,6 @@ static NSString *identifierLocalBillCell = @"LocalBillCell";
     UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(15, 39, SCREEN_WIDTH - 30, 1)];
     lineView.backgroundColor = kLineColor;
     [backView addSubview:lineView];
-
-
-//    UIView *lineView1 = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 0.5)];
-//    lineView1.backgroundColor = kLineColor;
-//    [backView addSubview:lineView1];
 
     return contentView;
 }

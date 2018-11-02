@@ -23,10 +23,12 @@
 #import "LocalBillDetailVC.h"
 #import "TLBillBTCVC.h"
 #import "CoinUtil.h"
+#import "USDTRecordModel.h"
 @interface WalletLocalVc ()<RefreshDelegate>
 @property (nonatomic, strong) WalletLocalBillTableView *tableView;
 
 @property (nonatomic,strong) NSMutableArray <BillModel *>*bills;
+@property (nonatomic,strong) NSMutableArray <USDTRecordModel *>*ustds;
 
 @property (nonatomic, strong) TLPageDataHelper *helper;
 //筛选
@@ -81,20 +83,6 @@
 {
     __weak typeof(self) weakSelf = self;
     
-    NSString *bizType = @"";
-    
-    if (self.billType == LocalTypeRecharge) {
-        
-        bizType = @"charge";
-        
-    } else if (self.billType == LocalTypeWithdraw) {
-        
-        bizType = @"withdraw";
-        
-    } else if (self.billType == LocalTypeFrozen) {
-        
-        bizType = @"";
-    }
     
     TLPageDataHelper *helper = [[TLPageDataHelper alloc] init];
     
@@ -104,12 +92,9 @@
     helper.code = @"802505";
     helper.start = 0;
     helper.limit = 10;
-//    helper.parameters[@"address"] = @"3McM1uHvpdzMiQYrjbPqk2M814TdkuRtGU";
-    helper.parameters[@"address"] = self.currency.address;
-//    CoinModel *coin = [CoinUtil getCoinModel:self.currency.symbol];
-//    helper.parameters[@"contractAddress"] = coin.contractAddress;
-    
-    [helper modelClass:[BillModel class]];
+    helper.parameters[@"address"] = @"1x6YnuBVeeE65dQRZztRWgUPwyBjHCA5g";
+//    helper.parameters[@"address"] = self.currency.address;
+    [helper modelClass:[USDTRecordModel class]];
     
     [self.tableView addRefreshAction:^{
         
@@ -119,11 +104,11 @@
                 
             }
             
-            weakSelf.bills = objs;
+            weakSelf.ustds = objs;
             
             weakSelf.tableView.billModel = weakSelf.currency;
             
-            weakSelf.tableView.bills = objs;
+            weakSelf.tableView.ustds = objs;
             [weakSelf.tableView reloadData_tl];
             
         } failure:^(NSError *error) {
@@ -146,7 +131,7 @@
             
             weakSelf.bills = objs;
             weakSelf.tableView.billModel = weakSelf.currency;
-            weakSelf.tableView.bills = objs;
+            weakSelf.tableView.ustds = objs;
             [weakSelf.tableView reloadData_tl];
             
         } failure:^(NSError *error) {
@@ -165,20 +150,6 @@
 {
     __weak typeof(self) weakSelf = self;
 
-    NSString *bizType = @"";
-
-    if (self.billType == LocalTypeRecharge) {
-
-        bizType = @"charge";
-
-    } else if (self.billType == LocalTypeWithdraw) {
-
-        bizType = @"withdraw";
-
-    } else if (self.billType == LocalTypeFrozen) {
-
-        bizType = @"";
-    }
 
     TLPageDataHelper *helper = [[TLPageDataHelper alloc] init];
 
@@ -256,22 +227,7 @@
 {
     //--//
     __weak typeof(self) weakSelf = self;
-    
-    NSString *bizType = @"";
-    
-    if (self.billType == LocalTypeRecharge) {
-        
-        bizType = @"charge";
-        
-    } else if (self.billType == LocalTypeWithdraw) {
-        
-        bizType = @"withdraw";
-        
-    } else if (self.billType == LocalTypeFrozen) {
-        
-        bizType = @"";
-    }
-    
+//
     TLPageDataHelper *helper = [[TLPageDataHelper alloc] init];
     
     helper.tableView = self.tableView;
@@ -332,47 +288,13 @@
     
     
 }
-#pragma mark - Init
-- (FilterView *)filterPicker {
-    
-    if (!_filterPicker) {
-        
-        CoinWeakSelf;
-        
-        NSArray *textArr = @[[LangSwitcher switchLang:@"全部" key:nil],
-                             [LangSwitcher switchLang:@"充币" key:nil],
-                             [LangSwitcher switchLang:@"提币" key:nil],
-                             [LangSwitcher switchLang:@"取现手续费" key:nil]
-                             ];
-        
-        NSArray *typeArr = @[@"",
-                             @"charge",
-                             @"withdraw",
-                             @"withdrawfee"];
-        
-        _filterPicker = [[FilterView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
-        
-        _filterPicker.title =  [LangSwitcher switchLang: @"请选择交易类型" key:nil];
-        
-        _filterPicker.selectBlock = ^(NSInteger index) {
-            
-            weakSelf.helper.parameters[@"bizType"] = typeArr[index];
-            
-            [weakSelf.tableView beginRefreshing];
-        };
-        
-        _filterPicker.tagNames = textArr;
-        
-    }
-    
-    return _filterPicker;
-}
+
 
 
 - (void)initTableView {
     
     self.tableView = [[WalletLocalBillTableView alloc]
-                      initWithFrame:CGRectMake(0, 110, kScreenWidth, SCREEN_HEIGHT - 170 - kStatusBarHeight)
+                      initWithFrame:CGRectMake(0, 110, kScreenWidth, SCREEN_HEIGHT - 170 - kNavigationBarHeight)
                       style:UITableViewStyleGrouped];
     
     self.tableView.placeHolderView = self.placeHolderView;
@@ -389,32 +311,17 @@
 //- (void)addFilterItem
 
 #pragma mark - Events
-- (void)clickFilter:(UIButton *)sender {
-    
-    [self.filterPicker show];
-    
-}
+//- (void)clickFilter:(UIButton *)sender {
+//
+//    [self.filterPicker show];
+//
+//}
 
 #pragma mark - Data
 - (void)requestBillList {
     
     //--//
     __weak typeof(self) weakSelf = self;
-    
-    NSString *bizType = @"";
-    
-    if (self.billType == LocalTypeRecharge) {
-        
-        bizType = @"charge";
-        
-    } else if (self.billType == LocalTypeWithdraw) {
-        
-        bizType = @"withdraw";
-        
-    } else if (self.billType == LocalTypeFrozen) {
-        
-        bizType = @"";
-    }
     
     TLPageDataHelper *helper = [[TLPageDataHelper alloc] init];
     
@@ -424,10 +331,6 @@
     helper.code = @"802271";
     helper.start = 1;
     helper.limit = 10;
-    
-//    helper.parameters[@"bizType"] = bizType;
-//    helper.parameters[@"kind"] = self.billType == LocalTypeFrozen ? @"1": @"0";
-    
     helper.parameters[@"symbol"] = self.currency.symbol;
     helper.parameters[@"address"] = self.currency.address;
     [helper modelClass:[BillModel class]];
@@ -515,12 +418,11 @@
 {
     UIView *bottomView  = [[UIView alloc] init];
     self.bottomViw = bottomView;
-    [self.view insertSubview:bottomView aboveSubview:self.tableView];
-    [bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.left.equalTo(@0);
-        make.bottom.equalTo(@(0));
-        make.height.equalTo(@60);
-    }];
+    bottomView.backgroundColor = [UIColor redColor];
+    bottomView.frame = CGRectMake(0, SCREEN_HEIGHT - 60 - kNavigationBarHeight, SCREEN_WIDTH, 60);
+    [self.view addSubview:bottomView];
+
+    bottomView.backgroundColor = kWhiteColor;
     bottomView.layer.cornerRadius=5;
     bottomView.layer.shadowOpacity = 0.22;// 阴影透明度
     bottomView.layer.shadowColor = [UIColor grayColor].CGColor;// 阴影的颜色
@@ -532,92 +434,26 @@
                          [LangSwitcher switchLang:@"收款" key:nil],
                          [LangSwitcher switchLang:@"转账" key:nil]
                          ];
-    
     NSArray *imgArr = @[@"充币", @"提币"];
     
-    CGFloat btnW = (kScreenWidth - 2*0)/2.0;
     
-    [textArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        
-        UIButton *btn = [UIButton buttonWithTitle:nil titleColor:kTextColor backgroundColor:kClearColor titleFont:12.0];
+    for (int i = 0; i < 2; i ++) {
+        UIButton *btn = [UIButton buttonWithTitle:textArr[i] titleColor:kTextColor backgroundColor:kClearColor titleFont:12.0];
         [btn addTarget:self action:@selector(btnClickCurreny:) forControlEvents:UIControlEventTouchUpInside];
-        [btn setTitleColor:kHexColor(@"#ffffff") forState:UIControlStateNormal];
-        
-        [btn setImage:kImage(imgArr[idx]) forState:UIControlStateNormal];
-        
-        
-        
-        btn.tag = 201806+idx;
-        //        [btn setTitleEdgeInsets:UIEdgeInsetsMake(30, -10, 0, 0)];
-        //        if ([LangSwitcher currentLangType] == LangTypeSimple) {
-        //
-        //        }else if ([LangSwitcher currentLangType] == LangTypeEnglish)
-        //        {
-        //            [btn setImageEdgeInsets:UIEdgeInsetsMake(0, kWidth(50), 10, 0)];
-        //
-        //
-        //        }else if ([LangSwitcher currentLangType] == LangTypeKorean)
-        //        {
-        //            [btn setImageEdgeInsets:UIEdgeInsetsMake(0, kWidth(35), 10, 0)];
-        //
-        //        }
-        [btn setImageEdgeInsets:UIEdgeInsetsMake(-12, 0, 0, 0)];
-        
-        UILabel *lab = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:12];
-        lab.text = [LangSwitcher switchLang:textArr[idx] key:nil];
-        [btn addSubview:lab];
-        [self.bottomViw addSubview:btn];
-        [btn mas_makeConstraints:^(MASConstraintMaker *make) {
-            
-            make.left.equalTo(@(idx*btnW));
-            make.bottom.equalTo(self.bottomViw.mas_bottom);
-            make.width.equalTo(@(btnW));
-            make.height.equalTo(@(50));
-            
+        btn.frame = CGRectMake(i % 2 * SCREEN_WIDTH/2, 0, SCREEN_WIDTH/2, 60);
+        [btn SG_imagePositionStyle:(SGImagePositionStyleTop) spacing:3 imagePositionBlock:^(UIButton *button) {
+            [button setImage:kImage(imgArr[i]) forState:UIControlStateNormal];
         }];
-        [lab mas_makeConstraints:^(MASConstraintMaker *make) {
-            
-            make.centerX.equalTo(btn.mas_centerX).offset(2);
-            make.top.equalTo(btn.mas_centerY).offset(5);
-            
-            
-        }];
-        if (idx != 1) {
-            [btn setBackgroundColor:kWhiteColor forState:UIControlStateNormal];
-            //            [btn setTitleColor:kTextColor forState:UIControlStateNormal];
-            lab.textColor = kTextColor;
-            UIView *vLine = [[UIView alloc] init];
-            
-            vLine.backgroundColor = kLineColor;
-            
-            [self.bottomViw addSubview:vLine];
-            [vLine mas_makeConstraints:^(MASConstraintMaker *make) {
-                
-                make.left.equalTo(btn.mas_right);
-                make.centerY.equalTo(btn.mas_centerY);
-                make.width.equalTo(@0.5);
-                make.height.equalTo(@20);
-                
-            }];
-        }
-        else{
-            lab.textColor = kTextColor;
-            
-            //            [btn setTitleColor:kTextColor forState:UIControlStateNormal];
-            [btn setBackgroundColor:kWhiteColor forState:UIControlStateNormal];
-            
-        }
-        if (idx == 0) {
-            
-            self.rechargeBtn = btn;
-            
-        } else{
-            
-            self.withdrawalsBtn = btn;
-            
-        }
-        
-    }];
+        btn.tag = 201806+i;
+        [bottomView addSubview:btn];
+    }
+    
+    UIView *vLine = [[UIView alloc] init];
+    
+    vLine.backgroundColor = kLineColor;
+    
+    [self.bottomViw addSubview:vLine];
+    vLine.frame =CGRectMake(SCREEN_WIDTH/2, 0, 0.5, 60);
     
 }
 
@@ -651,9 +487,7 @@
 
 
 -(void)refreshTableView:(TLTableView *)refreshTableview didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    
-    
+{    
     if ([self.currency.symbol isEqualToString:@"BTC"]) {
         TLBillBTCVC *vc = [TLBillBTCVC  new];
         vc.bill = self.bills[indexPath.row];
@@ -663,26 +497,18 @@
     }else
     {
         LocalBillDetailVC *detailVc  =  [LocalBillDetailVC new];
-        detailVc.bill = self.bills[indexPath.row];
+        if ([self.currency.symbol isEqualToString:@"USDT"]) {
+            detailVc.usdtModel = self.ustds[indexPath.row];
+        }else
+        {
+            detailVc.bill = self.bills[indexPath.row];
+        }
         detailVc.currentModel = self.currency;
         [self.navigationController pushViewController:detailVc animated:YES];
     }
     
     
 }
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

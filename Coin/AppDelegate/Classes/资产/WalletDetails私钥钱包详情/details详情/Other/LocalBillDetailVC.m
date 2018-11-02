@@ -102,23 +102,13 @@
 //    textLbl.text = _bill.bizNote;
     
     
-    NSString *onlyCountStr = [CoinUtil convertToRealCoin:_bill.value coin:_currentModel.symbol];
-    NSString *moneyStr = @"";
-    //
-    if ([_bill.direction isEqualToString:@"1"]) {
-        
-        moneyStr = [NSString stringWithFormat:@"+%@ %@", onlyCountStr, _currentModel.symbol];
-        
-    } else  {
-        
-        moneyStr = [NSString stringWithFormat:@"-%@ %@", onlyCountStr, _currentModel.symbol];
-        
-    }
+    
+    
     //金额
     UILabel *amountLbl = [UILabel labelWithBackgroundColor:kClearColor
                                                  textColor:kAppCustomMainColor
                                                       font:20.0];
-    amountLbl.text = moneyStr;
+    
     [icImage addSubview:amountLbl];
     
     [textLbl mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -127,17 +117,40 @@
         make.centerX.equalTo(icImage.mas_centerX);
 
     }];
-    if ([_bill.direction isEqualToString:@"0"]) {
-        textLbl.text = [LangSwitcher switchLang:@"转出" key:nil];
-        
-            self.title =  [LangSwitcher switchLang:@"转出" key:nil];
-     } else
-        {
-           
+    
+    
+    
+    NSString *onlyCountStr;
+    NSString *moneyStr = @"";
+    //
+    if ([_currentModel.symbol isEqualToString:@"USDT"]) {
+        onlyCountStr = [CoinUtil convertToRealCoin:_usdtModel.amount
+                                              coin:self.currentModel.symbol];
+        if ([@"1x6YnuBVeeE65dQRZztRWgUPwyBjHCA5g" isEqualToString:_usdtModel.sendingAddress]) {
+            moneyStr = [NSString stringWithFormat:@"%@ %@", onlyCountStr, self.currentModel.symbol];
             textLbl.text = [LangSwitcher switchLang:@"转入" key:nil];
             self.title =  [LangSwitcher switchLang:@"转入" key:nil];
-
+        }else
+        {
+            moneyStr = [NSString stringWithFormat:@"-%@ %@", onlyCountStr, self.currentModel.symbol];
+            textLbl.text = [LangSwitcher switchLang:@"转出" key:nil];
+            self.title =  [LangSwitcher switchLang:@"转出" key:nil];
+        }
+    }else
+    {
+        onlyCountStr = [CoinUtil convertToRealCoin:_bill.value coin:_currentModel.symbol];
+        if ([_bill.direction isEqualToString:@"1"]) {
+            moneyStr = [NSString stringWithFormat:@"+%@ %@", onlyCountStr, _currentModel.symbol];
+            textLbl.text = [LangSwitcher switchLang:@"转入" key:nil];
+            self.title =  [LangSwitcher switchLang:@"转入" key:nil];
+        } else  {
+            moneyStr = [NSString stringWithFormat:@"-%@ %@", onlyCountStr, _currentModel.symbol];
+            textLbl.text = [LangSwitcher switchLang:@"转出" key:nil];
+            self.title =  [LangSwitcher switchLang:@"转出" key:nil];
+        }
     }
+    amountLbl.text = moneyStr;
+    
     //
     [amountLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
@@ -149,12 +162,17 @@
     [self.headerView layoutIfNeeded];
 }
 
+
+
 - (void)initTableView {
     
     self.tableView = [[LocalBillDetailTableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+    
     self.tableView.bill = self.bill;
+    self.tableView.usdtModel = self.usdtModel;
     self.tableView.refreshDelegate = self;
     self.tableView.currentModel = self.currentModel;
+    
     self.tableView.frame = CGRectMake(0, 110, SCREEN_WIDTH, SCREEN_HEIGHT - 110 - kNavigationBarHeight);
     [self.view addSubview:self.tableView];
 }
@@ -166,24 +184,18 @@
         return;
     }
     WalletLocalWebVC *webVC = [WalletLocalWebVC new];
-    webVC.urlString = self.bill.txHash;
+    if ([self.currentModel.symbol isEqualToString:@"USDT"]) {
+        webVC.urlString = self.usdtModel.txid;
+    }else
+    {
+        webVC.urlString = self.bill.txHash;
+    }
+    
     webVC.currentModel = self.currentModel;
     [self.navigationController pushViewController:webVC animated:YES];
     
     
 }
-
-
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 
 @end

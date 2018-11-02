@@ -9,9 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "BillModel.h"
 #import "CurrencyModel.h"
+#import "USDTRecordModel.h"
 @interface LocalBillCell : UITableViewCell
 
 @property (nonatomic,strong) BillModel *billModel;
+
+@property (nonatomic,strong) USDTRecordModel *usdtModel;
 
 @property (nonatomic,strong) CurrencyModel *currencyModel;
 

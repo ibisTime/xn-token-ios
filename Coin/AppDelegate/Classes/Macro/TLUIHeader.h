@@ -21,7 +21,7 @@
 #import "TLPlaceholderView.h"
 
 //基类
-#import "TLBaseLabel.h"
+//#import "TLBaseLabel.h"
 
 //
 #define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width

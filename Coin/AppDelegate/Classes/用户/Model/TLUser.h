@@ -136,6 +136,7 @@
 
 //字符串是否为空
 + (BOOL) isBlankString:(NSString *)string;
++ (NSString*)convertNull:(id)object;
 
 //+ (NSString *)stringByNotRounding:(double)price afterPoint:(int)position;
 

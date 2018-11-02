@@ -30,7 +30,6 @@
     self.title = [LangSwitcher switchLang:@"交易详情" key:nil];
     self.view.backgroundColor = kWhiteColor;
     [self initTableView];
-    //
     [self initHeaderView];
     
 }

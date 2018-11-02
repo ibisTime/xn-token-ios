@@ -21,25 +21,20 @@
 @implementation LocalBillDetailTableView
 static NSString *identifierCell = @"BillDetailCell";
 - (instancetype)initWithFrame:(CGRect)frame style:(UITableViewStyle)style {
-    
-    if (self = [super initWithFrame:frame style:style]) {
-        
+    if (self = [super initWithFrame:frame style:style])
+    {
         self.dataSource = self;
         self.delegate = self;
         self.backgroundColor = kBackgroundColor;
-        
         [self registerClass:[BillDetailCell class] forCellReuseIdentifier:identifierCell];
     }
-    
     return self;
 }
 
 #pragma mark - UITableViewDataSource
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
     return 7;
-    
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -62,7 +57,22 @@ static NSString *identifierCell = @"BillDetailCell";
     NSString *height;
     NSString *texthash;
     NSString *postAmount;
-    if ([_bill.tokenSymbol isEqualToString:@"LXT"]) {
+    if ([_currentModel.symbol isEqualToString:@"USDT"]) {
+        dateStr = [self UTCchangeDate:_usdtModel.blockTime];
+        if ([_usdtModel.typeInt isEqualToString:@"0"]) {
+            toAdress = _usdtModel.referenceAddress;
+        }else
+        {
+            toAdress = _usdtModel.sendingAddress;
+        }
+        formAdress = _usdtModel.sendingAddress;
+        charge = [CoinUtil convertToRealCoin:_usdtModel.fee coin:self.currentModel.symbol];;
+        height = self.usdtModel.block;
+        texthash = _usdtModel.txid;
+        CoinModel *co = [CoinUtil getCoinModel:_currentModel.symbol];
+        postAmount  = [CoinUtil convertToRealCoin:_usdtModel.fee coin:co.symbol];
+        
+    }else if ([_bill.tokenSymbol isEqualToString:@"LXT"]) {
         dateStr = [_bill.createDatetime convertToDetailDate];
         toAdress = _bill.to;
         formAdress = _bill.from;
@@ -81,9 +91,12 @@ static NSString *identifierCell = @"BillDetailCell";
         texthash = _bill.txHash;
         postAmount  = [CoinUtil convertToRealCoin:_bill.txFee coin:_currentModel.symbol];
     }
-    NSArray *rightArr = @[toAdress, formAdress, postAmount, height,texthash,dateStr,@"  "];
     
-//    cell.titleLbl.text = textArr[indexPath.row];
+    
+    
+    
+    NSArray *rightArr = @[[TLUser convertNull:toAdress], [TLUser convertNull:formAdress], [TLUser convertNull:postAmount], [TLUser convertNull:height],[TLUser convertNull:texthash],[TLUser convertNull:dateStr],@"  "];
+
     cell.titleLbl.text = [NSString stringWithFormat:@"%@",textArr[indexPath.row]];
 
     cell.rightLabel.text = rightArr[indexPath.row];
@@ -96,18 +109,35 @@ static NSString *identifierCell = @"BillDetailCell";
     
 }
 
+-(NSString *)UTCchangeDate:(NSString *)utc{
+    
+    NSTimeInterval time = [utc doubleValue];
+    
+    NSDate *date=[NSDate dateWithTimeIntervalSince1970:time];
+    
+    NSDateFormatter *dateformatter=[[NSDateFormatter alloc] init];
+    
+    [dateformatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    
+    NSString *staartstr=[dateformatter stringFromDate:date];
+    
+    return staartstr;
+    
+}
+
 #pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-
     if ([self.refreshDelegate respondsToSelector:@selector(refreshTableView:didSelectRowAtIndexPath:)]) {
         [self.refreshDelegate refreshTableView:self didSelectRowAtIndexPath:indexPath];
     }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+    if (cell.rightLabel.yy + 18 < 50) {
+        return 50;
+    }
     return cell.rightLabel.yy + 18;
 }
 

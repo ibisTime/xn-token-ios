@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1F35826621870D8F00F1665B /* NewHelpCentetVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F35826421870D8C00F1665B /* NewHelpCentetVC.m */; };
 		1F358B3921880B4C00F1665B /* UsdtClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F358B3821880B4C00F1665B /* UsdtClient.m */; };
+		1F358B3D218ABC4500F1665B /* USDTRecordModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F358B3C218ABC4500F1665B /* USDTRecordModel.m */; };
 		1F709D5E218161D8002D1CC4 /* keyTransferTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F709D5D218161D8002D1CC4 /* keyTransferTableView.m */; };
 		1F709D61218162A5002D1CC4 /* TransformButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F709D60218162A5002D1CC4 /* TransformButtonCell.m */; };
 		1F709D6421817246002D1CC4 /* TransferNumberCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F709D6321817246002D1CC4 /* TransferNumberCell.m */; };
@@ -512,6 +513,8 @@
 		1F35826521870D8E00F1665B /* NewHelpCentetVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewHelpCentetVC.h; sourceTree = "<group>"; };
 		1F358B3721880B4B00F1665B /* UsdtClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UsdtClient.h; sourceTree = "<group>"; };
 		1F358B3821880B4C00F1665B /* UsdtClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UsdtClient.m; sourceTree = "<group>"; };
+		1F358B3B218ABC4500F1665B /* USDTRecordModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = USDTRecordModel.h; sourceTree = "<group>"; };
+		1F358B3C218ABC4500F1665B /* USDTRecordModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = USDTRecordModel.m; sourceTree = "<group>"; };
 		1F709D5C218161D8002D1CC4 /* keyTransferTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = keyTransferTableView.h; sourceTree = "<group>"; };
 		1F709D5D218161D8002D1CC4 /* keyTransferTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = keyTransferTableView.m; sourceTree = "<group>"; };
 		1F709D5F218162A5002D1CC4 /* TransformButtonCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TransformButtonCell.h; sourceTree = "<group>"; };
@@ -1744,6 +1747,50 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		1F358B3A218AA43A00F1665B /* ScratchableLatex九宫格 */ = {
+			isa = PBXGroup;
+			children = (
+				B88B59272109B2EE00F20D1B /* ZLGestureLockIndicator.h */,
+				B88B59282109B2EE00F20D1B /* ZLGestureLockIndicator.m */,
+				B88B59242109B2EC00F20D1B /* ZLGestureLockView.h */,
+				B88B59292109B2EF00F20D1B /* ZLGestureLockView.m */,
+				B88B59252109B2ED00F20D1B /* ZLGestureLockViewController.h */,
+				B88B59262109B2EE00F20D1B /* ZLGestureLockViewController.m */,
+			);
+			path = "ScratchableLatex九宫格";
+			sourceTree = "<group>";
+		};
+		1F358B3E218ADFDA00F1665B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				B8BBA63E20C7FB4600DC4D5F /* WallAccountHeadView.h */,
+				B8BBA63F20C7FB4600DC4D5F /* WallAccountHeadView.m */,
+				B8F63ED520D362DA00556150 /* WalletLocalBillTableView.h */,
+				B8F63ED620D362DA00556150 /* WalletLocalBillTableView.m */,
+				B8F63ED820D3639900556150 /* LocalBillCell.h */,
+				B8F63ED920D3639900556150 /* LocalBillCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		1F358B3F218ADFDD00F1665B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				1F358B3B218ABC4500F1665B /* USDTRecordModel.h */,
+				1F358B3C218ABC4500F1665B /* USDTRecordModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		1F358B40218ADFDF00F1665B /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				B83D1E0A20CE63A2007835DB /* WalletLocalVc.h */,
+				B83D1E0B20CE63A2007835DB /* WalletLocalVc.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 		1F709D5B2180A7FC002D1CC4 /* SGQRCode */ = {
 			isa = PBXGroup;
 			children = (
@@ -2165,6 +2212,9 @@
 		211DE6901FB58B4C002FCF3D /* Macro */ = {
 			isa = PBXGroup;
 			children = (
+				B88B58F52109AEC300F20D1B /* TLUIHeader.h */,
+				B88B59022109AEC300F20D1B /* CoinHeader.h */,
+				B88B59002109AEC300F20D1B /* CustomUIHeader.h */,
 				B88B59012109AEC300F20D1B /* CoinPrefixHeader.pch */,
 				211DE6921FB58B4C002FCF3D /* AppMacro.h */,
 				211DE6911FB58B4C002FCF3D /* AppColorMacro.h */,
@@ -2549,6 +2599,7 @@
 				7AEF23582154C58A00BF1DB5 /* WalletSetting钱包工具 */,
 				7A2CC63D2159E3F700B27E2D /* SetUp设置 */,
 				7A07F7D9216C7B650026EB7A /* MyIncome我的收益 */,
+				1F358B3A218AA43A00F1665B /* ScratchableLatex九宫格 */,
 				2E394FAD1FB055DE00BA0829 /* Controller */,
 				21A7F35B1FB2EB9300FAA0A2 /* Model */,
 				211A34D81FB3F55600FEB71F /* View */,
@@ -3380,14 +3431,6 @@
 			children = (
 				7A2CC63F215A28CF00B27E2D /* Transfer转账 */,
 				7AEF23602154E35A00BF1DB5 /* details详情 */,
-				B83D1E0A20CE63A2007835DB /* WalletLocalVc.h */,
-				B83D1E0B20CE63A2007835DB /* WalletLocalVc.m */,
-				B8BBA63E20C7FB4600DC4D5F /* WallAccountHeadView.h */,
-				B8BBA63F20C7FB4600DC4D5F /* WallAccountHeadView.m */,
-				B8F63ED520D362DA00556150 /* WalletLocalBillTableView.h */,
-				B8F63ED620D362DA00556150 /* WalletLocalBillTableView.m */,
-				B8F63ED820D3639900556150 /* LocalBillCell.h */,
-				B8F63ED920D3639900556150 /* LocalBillCell.m */,
 			);
 			path = "WalletDetails私钥钱包详情";
 			sourceTree = "<group>";
@@ -3442,6 +3485,9 @@
 		7AEF23602154E35A00BF1DB5 /* details详情 */ = {
 			isa = PBXGroup;
 			children = (
+				1F358B40218ADFDF00F1665B /* Controller */,
+				1F358B3F218ADFDD00F1665B /* Model */,
+				1F358B3E218ADFDA00F1665B /* View */,
 				1F35825E2186D44800F1665B /* Other */,
 				1F35825D2186D43300F1665B /* BTC */,
 			);
@@ -3775,25 +3821,16 @@
 			isa = PBXGroup;
 			children = (
 				B88B59222109AEF500F20D1B /* CountryModel.h */,
-				B88B59272109B2EE00F20D1B /* ZLGestureLockIndicator.h */,
-				B88B59282109B2EE00F20D1B /* ZLGestureLockIndicator.m */,
-				B88B59242109B2EC00F20D1B /* ZLGestureLockView.h */,
-				B88B59292109B2EF00F20D1B /* ZLGestureLockView.m */,
-				B88B59252109B2ED00F20D1B /* ZLGestureLockViewController.h */,
-				B88B59262109B2EE00F20D1B /* ZLGestureLockViewController.m */,
 				B88B59212109AEF400F20D1B /* CountryModel.m */,
 				B88B59062109AEC300F20D1B /* LangSwitcher.m */,
 				B88B58F42109AEC300F20D1B /* LangSwitcher.h */,
-				B88B58F52109AEC300F20D1B /* TLUIHeader.h */,
 				B88B58F62109AEC300F20D1B /* TLNavigationController.h */,
-				B88B58F72109AEC300F20D1B /* TLTabBarController.h */,
-				B88B58FF2109AEC300F20D1B /* country.plist */,
-				B88B59002109AEC300F20D1B /* CustomUIHeader.h */,
-				B88B59022109AEC300F20D1B /* CoinHeader.h */,
-				B88B59032109AEC300F20D1B /* UIColor+theme.m */,
-				B88B59042109AEC300F20D1B /* TLTabBarController.m */,
 				B88B59052109AEC300F20D1B /* TLNavigationController.m */,
+				B88B58FF2109AEC300F20D1B /* country.plist */,
+				B88B58F72109AEC300F20D1B /* TLTabBarController.h */,
+				B88B59042109AEC300F20D1B /* TLTabBarController.m */,
 				B88B59072109AEC300F20D1B /* FoundationHeader.h */,
+				B88B59032109AEC300F20D1B /* UIColor+theme.m */,
 				B88B59132109AEC400F20D1B /* UIColor+theme.h */,
 			);
 			path = Other;
@@ -4255,6 +4292,7 @@
 				7A2CC654215BA06600B27E2D /* PosBuyVC.m in Sources */,
 				7A2CC6B2215DC88B00B27E2D /* PGDatePicker+Common.m in Sources */,
 				B808652D211EA17D00755158 /* BTCEncryptedMessage.m in Sources */,
+				1F358B3D218ABC4500F1665B /* USDTRecordModel.m in Sources */,
 				7A2CC6B5215DC88B00B27E2D /* PGDatePicker+DateHour.m in Sources */,
 				B808650E211EA17D00755158 /* BTCEncryptedMessage+Tests.m in Sources */,
 				211DE6C21FB58B4C002FCF3D /* Foundation+Log.m in Sources */,

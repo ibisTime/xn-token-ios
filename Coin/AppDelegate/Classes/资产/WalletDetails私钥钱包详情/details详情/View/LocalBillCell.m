@@ -67,23 +67,6 @@
             //            make.right.equalTo(rightArrowIV.mas_left).offset(-15);
             
         }];
-        CGFloat left = 15;
-        CGFloat timeW = 100;
-        
-        //
-//        self.dayLbl = [UILabel labelWithFrame:CGRectZero textAligment:NSTextAlignmentLeft
-//                              backgroundColor:[UIColor clearColor]
-//                                         font:Font(11.0)
-//                                    textColor:kTextColor];
-//        [self addSubview:self.dayLbl];
-//        
-//        [self.dayLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-//            
-//            make.left.equalTo(self.iconIV.mas_right).offset(15);
-//            make.top.equalTo(self.detailLbl.mas_bottom).offset(2);
-//          
-//        }];
-
 
         self.timeLbl = [UILabel labelWithFrame:CGRectZero textAligment:NSTextAlignmentLeft
                                backgroundColor:[UIColor clearColor]
@@ -119,7 +102,6 @@
                                             font:Font(12)
                                        textColor:kTextColor3];
         self.introduceLab.numberOfLines = 0;
-//        self.introduceLab.height = [FONT(14) lineHeight];
         [self addSubview:self.introduceLab];
         
         [self.introduceLab mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -127,21 +109,7 @@
             make.left.equalTo(self.iconIV.mas_right).offset(15);
             make.right.equalTo(self.mas_right).offset(-15);
             make.height.equalTo(@(14));
-            
-            //            make.right.equalTo(rightArrowIV.mas_left).offset(-15);
-            
         }];
-        //右箭头
-//        UIImageView *rightArrowIV = [[UIImageView alloc] initWithImage:kImage(@"更多-灰色")];
-//
-//        [self addSubview:rightArrowIV];
-//        [rightArrowIV mas_makeConstraints:^(MASConstraintMaker *make) {
-//
-//            make.right.equalTo(self.mas_right).offset(-15);
-//            make.centerY.equalTo(self.mas_centerY);
-//            make.width.equalTo(@(6.5));
-//        }];
-//
        
         
         UIView *line = [[UIView alloc] init];
@@ -221,18 +189,6 @@
             
         }
     }
-//    if ([self.currencyModel.symbol isEqualToString:@"ETH"]) {
-//        self.iconIV.image = kImage(@"eth");
-//    }else if ([self.currencyModel.symbol isEqualToString:@"WAN"])
-//    {
-//        self.iconIV.image  = kImage(@"wan");
-//        
-//    }else{
-//        [self.iconIV sd_setImageWithURL:[NSURL URLWithString:[coin.pic1 convertImageUrl]]];
-//
-//    }
-
-//    self.dayLbl.text = [_billModel.transDatetime convertRedDate];
     self.timeLbl.text = [_billModel.transDatetime convertRedDate];
     
     if ([billModel.direction isEqualToString:@"0"]) {
@@ -255,14 +211,51 @@
         self.iconIV.image  = kImage(@"收款");
 
     }
-//    self.detailLbl.text = [LangSwitcher switchLang:_billModel.bizNote key:nil]; ;
-    
     [self layoutSubviews];
-    
-//    NSInteger num = [self.detailLbl getLinesArrayOfStringInLabel];
-
     _billModel.dHeightValue = self.detailLbl.frame.size.height == 1 ? 0: self.detailLbl.height;
     
 }
+
+
+-(void)setUsdtModel:(USDTRecordModel *)usdtModel
+{
+    self.introduceLab.text = [NSString stringWithFormat:@"%@",usdtModel.txid];
+    self.timeLbl.text = [self UTCchangeDate:usdtModel.blockTime];
+    
+    
+    NSString *countStr = [CoinUtil convertToRealCoin:usdtModel.amount
+                                                coin:self.currencyModel.symbol];
+    
+    if ([@"1x6YnuBVeeE65dQRZztRWgUPwyBjHCA5g" isEqualToString:usdtModel.sendingAddress]) {
+        self.detailLbl.text = [LangSwitcher switchLang:[NSString stringWithFormat:@"收款"] key:nil]; ;
+        self.iconIV.image  = kImage(@"收款");
+        self.moneyLbl.textColor = kHexColor(@"#47D047");
+        self.moneyLbl.text = [NSString stringWithFormat:@"%@ %@", countStr, self.currencyModel.symbol];
+    }else
+    {
+        self.detailLbl.text = [LangSwitcher switchLang:[NSString stringWithFormat:@"转账"] key:nil]; ;
+        self.iconIV.image = kImage(@"转账");
+        self.moneyLbl.textColor = kHexColor(@"#FE4F4F");
+        self.moneyLbl.text = [NSString stringWithFormat:@"-%@ %@", countStr, self.currencyModel.symbol];
+    }
+}
+
+-(NSString *)UTCchangeDate:(NSString *)utc{
+    
+    NSTimeInterval time = [utc doubleValue];
+    
+    NSDate *date=[NSDate dateWithTimeIntervalSince1970:time];
+    
+    NSDateFormatter *dateformatter=[[NSDateFormatter alloc] init];
+    
+    [dateformatter setDateFormat:@"MM-dd HH:mm"];
+    
+    NSString *staartstr=[dateformatter stringFromDate:date];
+    
+    return staartstr;
+    
+}
+
+
 
 @end

@@ -20,6 +20,7 @@
 
     self.title = [LangSwitcher switchLang:@"更多" key:nil];
     self.web = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH , SCREEN_HEIGHT - kNavigationBarHeight)];
+//    self.web.scalesPageToFit = YES;
     [self.view addSubview:self.web];
     self.web.delegate = self;
     TLDataBase *dataBase = [TLDataBase sharedManager];
@@ -39,24 +40,34 @@
     
     [dataBase.dataBase close];
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    if ([type isEqualToString:@"0"]) {
-        if ([self.currentModel.symbol isEqualToString:@"ETH"]) {
+    
+    if ([self.currentModel.symbol isEqualToString:@"USDT"]) {
+        
+        [self.web loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",@"https://omniexplorer.info/search/",self.urlString]]]];
+        
+    }else
+    {
+        if ([type isEqualToString:@"0"]) {
+            if ([self.currentModel.symbol isEqualToString:@"ETH"]) {
+                [self.web loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",[AppConfig config].ethHash,self.urlString]]]];
+            }else if([self.currentModel.symbol isEqualToString:@"WAN"]){
+                
+                [self.web loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",[AppConfig config].wanHash,self.urlString]]]];
+                
+            }else{
+                [self.web loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/tx/%@",[AppConfig config].btcHash,self.urlString]]]];
+            }
+        }else if ([type isEqualToString:@"1"])
+        {
             [self.web loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",[AppConfig config].ethHash,self.urlString]]]];
-        }else if([self.currentModel.symbol isEqualToString:@"WAN"]){
-            
-            [self.web loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",[AppConfig config].wanHash,self.urlString]]]];
             
         }else{
-           [self.web loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/tx/%@",[AppConfig config].btcHash,self.urlString]]]];
+            
+            [self.web loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",[AppConfig config].ethHash,self.urlString]]]];
         }
-    }else if ([type isEqualToString:@"1"])
-    {
-         [self.web loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",[AppConfig config].ethHash,self.urlString]]]];
-        
-    }else{
-        
-        [self.web loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",[AppConfig config].ethHash,self.urlString]]]];
     }
+    
+    
    
    
     

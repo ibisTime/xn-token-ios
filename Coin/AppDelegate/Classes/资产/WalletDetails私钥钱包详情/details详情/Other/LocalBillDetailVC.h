@@ -9,7 +9,10 @@
 #import "TLBaseVC.h"
 #import "BillModel.h"
 #import "CurrencyModel.h"
+#import "USDTRecordModel.h"
 @interface LocalBillDetailVC : TLBaseVC
+
+@property (nonatomic , strong)USDTRecordModel *usdtModel;
 
 @property (nonatomic, strong) BillModel *bill;
 

@@ -381,6 +381,36 @@ NSString *const kGoogleAuthClose = @"0";
     return NO;
 }
 
+
++ (NSString*)convertNull:(id)object{
+    
+    //    // 转换空串
+    //    if ([[BaseModel user]deptNumInputShouldNumber:object] == YES) {
+    //        return object;
+    //    }
+    
+    if ([object isEqual:[NSNull null]]) {
+        return @"";
+    }
+    //    else if ([object isEqualToString:@""])
+    //    {
+    //        return @"";
+    //    }
+    else if ([object isKindOfClass:[NSNull class]])
+    {
+        return @"";
+    }
+    else if ([object isEqualToString:@"(null)"])
+    {
+        return @"";
+    }
+    else if (object==nil){
+        return @"";
+    }
+    return object;
+    
+}
+
 + (NSString *)stringByNotRounding:(double)price afterPoint:(int)position{
     NSDecimalNumberHandler* roundingBehavior = [NSDecimalNumberHandler decimalNumberHandlerWithRoundingMode:NSRoundUp scale:position raiseOnExactness:NO raiseOnOverflow:NO raiseOnUnderflow:NO raiseOnDivideByZero:NO];
 
