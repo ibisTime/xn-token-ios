@@ -18,6 +18,7 @@
 		1F709D722181E51E002D1CC4 /* HW3DBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F709D6F2181E51D002D1CC4 /* HW3DBannerView.m */; };
 		1F709D752182C317002D1CC4 /* BTCPoundage.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F709D742182C317002D1CC4 /* BTCPoundage.m */; };
 		1F709D782182FF09002D1CC4 /* CustomRefreshGifHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F709D772182FF09002D1CC4 /* CustomRefreshGifHeader.m */; };
+		1F770ED721904D7D00E2889F /* lanch-1的副本 11.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F770ED621904D7D00E2889F /* lanch-1的副本 11.png */; };
 		1F816BF42180953D0078B945 /* SGQRCodeScanManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F816BE6218095380078B945 /* SGQRCodeScanManager.m */; };
 		1F816BF52180953D0078B945 /* SGQRCodeAlbumManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F816BE92180953A0078B945 /* SGQRCodeAlbumManager.m */; };
 		1F816BF62180953D0078B945 /* SGQRCodeGenerateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F816BEC2180953B0078B945 /* SGQRCodeGenerateManager.m */; };
@@ -424,7 +425,6 @@
 		B89F07DF211B06E20057E781 /* TLinviteVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B89F07DE211B06E20057E781 /* TLinviteVC.m */; };
 		B89F07E2211B07FA0057E781 /* TLMeSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = B89F07E1211B07FA0057E781 /* TLMeSetting.m */; };
 		B8A2436520E5E0F20074DF8F /* TLDataBase.m in Sources */ = {isa = PBXBuildFile; fileRef = B8A2436420E5E0F20074DF8F /* TLDataBase.m */; };
-		B8A483FF214FC02800450819 /* lanch-1.png in Resources */ = {isa = PBXBuildFile; fileRef = B8A483FE214FC02800450819 /* lanch-1.png */; };
 		B8B15C0220CA312100F13220 /* BuildWalletMineVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B8B15C0120CA312100F13220 /* BuildWalletMineVC.m */; };
 		B8B15C0520CA55D600F13220 /* BuildSucessVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B8B15C0420CA55D600F13220 /* BuildSucessVC.m */; };
 		B8B15C0820CA5B1800F13220 /* BuildBackUpVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B8B15C0720CA5B1800F13220 /* BuildBackUpVC.m */; };
@@ -531,6 +531,7 @@
 		1F709D742182C317002D1CC4 /* BTCPoundage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTCPoundage.m; sourceTree = "<group>"; };
 		1F709D762182FF09002D1CC4 /* CustomRefreshGifHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomRefreshGifHeader.h; sourceTree = "<group>"; };
 		1F709D772182FF09002D1CC4 /* CustomRefreshGifHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomRefreshGifHeader.m; sourceTree = "<group>"; };
+		1F770ED621904D7D00E2889F /* lanch-1的副本 11.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lanch-1的副本 11.png"; sourceTree = "<group>"; };
 		1F816BE6218095380078B945 /* SGQRCodeScanManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SGQRCodeScanManager.m; sourceTree = "<group>"; };
 		1F816BE7218095390078B945 /* SGQRCodeScanningView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SGQRCodeScanningView.h; sourceTree = "<group>"; };
 		1F816BE8218095390078B945 /* SGQRCode.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SGQRCode.bundle; sourceTree = "<group>"; };
@@ -1419,7 +1420,6 @@
 		B89F07E1211B07FA0057E781 /* TLMeSetting.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLMeSetting.m; sourceTree = "<group>"; };
 		B8A2436320E5E0F20074DF8F /* TLDataBase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLDataBase.h; sourceTree = "<group>"; };
 		B8A2436420E5E0F20074DF8F /* TLDataBase.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLDataBase.m; sourceTree = "<group>"; };
-		B8A483FE214FC02800450819 /* lanch-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lanch-1.png"; sourceTree = "<group>"; };
 		B8B15C0020CA312100F13220 /* BuildWalletMineVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BuildWalletMineVC.h; sourceTree = "<group>"; };
 		B8B15C0120CA312100F13220 /* BuildWalletMineVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BuildWalletMineVC.m; sourceTree = "<group>"; };
 		B8B15C0320CA55D600F13220 /* BuildSucessVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BuildSucessVC.h; sourceTree = "<group>"; };
@@ -2652,7 +2652,6 @@
 			isa = PBXGroup;
 			children = (
 				7AAF031F215267B7008507FF /* ValidationSDK */,
-				B8A483FE214FC02800450819 /* lanch-1.png */,
 				7A27265B212BFFA70067E3CD /* WechatSDK1.8.2 */,
 				215421CF1FD708AC00FDD25C /* Coin.entitlements */,
 				216F5AEE206CC6F600F2C832 /* AppDelegate */,
@@ -2661,6 +2660,7 @@
 				2EA584C51FA813C900C7106C /* Info.plist */,
 				B8DAD14920E2208B00AF4CD4 /* InfoPlist.strings */,
 				2EE361351FFB7D4500A5C3EB /* README.md */,
+				1F770ED621904D7D00E2889F /* lanch-1的副本 11.png */,
 				B819BAA920C6DD7700CEEC5E /* LaunchScreen.storyboard */,
 				2EA584C61FA813C900C7106C /* main.m */,
 				2EFFE6AC1FF4829100BFCC40 /* Localizable.strings */,
@@ -4005,7 +4005,6 @@
 				B8CAA14321158FF200695BC3 /* LPDImagePickerController.bundle in Resources */,
 				B88B59172109AEC400F20D1B /* country.plist in Resources */,
 				7A272664212BFFA70067E3CD /* README.txt in Resources */,
-				B8A483FF214FC02800450819 /* lanch-1.png in Resources */,
 				B819BAAA20C6DD7800CEEC5E /* LaunchScreen.storyboard in Resources */,
 				2EFFE6AA1FF4829100BFCC40 /* Localizable.strings in Resources */,
 				7A272663212BFFA70067E3CD /* read_me.txt in Resources */,
@@ -4013,6 +4012,7 @@
 				7AAF032B21526956008507FF /* yw_1222_0335.jpg in Resources */,
 				2EB9495B1FDF6B1A00CE4B94 /* SimplifiedCode.txt in Resources */,
 				2EE361361FFB7D4500A5C3EB /* README.md in Resources */,
+				1F770ED721904D7D00E2889F /* lanch-1的副本 11.png in Resources */,
 				7AAF037C21526EC4008507FF /* MSADefaultImages.bundle in Resources */,
 				B8DAD14720E2208B00AF4CD4 /* InfoPlist.strings in Resources */,
 				7A40B101217CAEA8004B9830 /* Assets.xcassets in Resources */,

@@ -18,16 +18,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lanch-1.png" translatesAutoresizingMaskIntoConstraints="NO" id="uvP-KW-mJf">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lanch-1的副本 11.png" translatesAutoresizingMaskIntoConstraints="NO" id="JOD-91-G5E">
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="N9z-HA-c7K" firstAttribute="trailing" secondItem="uvP-KW-mJf" secondAttribute="trailing" id="0Ai-TM-q51"/>
-                            <constraint firstItem="uvP-KW-mJf" firstAttribute="top" secondItem="N9z-HA-c7K" secondAttribute="top" id="aMk-mu-545"/>
-                            <constraint firstItem="N9z-HA-c7K" firstAttribute="bottom" secondItem="uvP-KW-mJf" secondAttribute="bottom" id="n6c-XL-FdD"/>
-                            <constraint firstItem="uvP-KW-mJf" firstAttribute="leading" secondItem="N9z-HA-c7K" secondAttribute="leading" id="ruw-fA-JiO"/>
+                            <constraint firstItem="JOD-91-G5E" firstAttribute="leading" secondItem="N9z-HA-c7K" secondAttribute="leading" id="B9x-52-cmT"/>
+                            <constraint firstItem="N9z-HA-c7K" firstAttribute="bottom" secondItem="JOD-91-G5E" secondAttribute="bottom" id="BdH-Xp-qh9"/>
+                            <constraint firstItem="JOD-91-G5E" firstAttribute="top" secondItem="N9z-HA-c7K" secondAttribute="top" id="XuK-zF-1kF"/>
+                            <constraint firstItem="N9z-HA-c7K" firstAttribute="trailing" secondItem="JOD-91-G5E" secondAttribute="trailing" id="eCC-KX-nEb"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="N9z-HA-c7K"/>
                     </view>
@@ -38,6 +38,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="lanch-1.png" width="1242" height="2208"/>
+        <image name="lanch-1的副本 11.png" width="1125" height="2436"/>
     </resources>
 </document>
