@@ -9,9 +9,6 @@
 #import "BillDetailTableView.h"
 
 #import "BillDetailCell.h"
-#import "NSString+Date.h"
-#import "NSString+Extension.h"
-#import "CoinUtil.h"
 
 @interface BillDetailTableView ()<UITableViewDataSource, UITableViewDelegate>
 {

@@ -7,15 +7,7 @@
 //
 
 #import "questionListCells.h"
-#import "UILable+convience.h"
-#import "AppColorMacro.h"
-#import "UIButton+Custom.h"
-#import <Masonry/Masonry.h>
-#import "NSString+Date.h"
-#import "TLUser.h"
-#import "CoinModel.h"
-#import "CoinUtil.h"
-#import "NSString+Extension.h"
+
 @interface questionListCells ()
 @property (nonatomic ,strong) UILabel *nameLab;
 @property (nonatomic ,strong) UILabel *stateLab;

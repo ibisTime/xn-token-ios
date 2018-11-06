@@ -8,8 +8,6 @@
 
 #import "LocalBillDetailVC.h"
 #import "BillDetailTableView.h"
-#import "TLUIHeader.h"
-#import "CoinUtil.h"
 #import "LocalBillDetailTableView.h"
 #import "WalletLocalWebVC.h"
 @interface LocalBillDetailVC ()<RefreshDelegate>

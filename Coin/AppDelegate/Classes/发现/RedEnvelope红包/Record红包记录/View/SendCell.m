@@ -7,12 +7,7 @@
 //
 
 #import "SendCell.h"
-#import "TLUIHeader.h"
-#import "AppColorMacro.h"
-#import "UIImageView+WebCache.h"
-#import "NSString+Extension.h"
-#import "NSString+Date.h"
-#import "CoinUtil.h"
+
 @implementation SendCell
 {
     UIImageView *headImage;

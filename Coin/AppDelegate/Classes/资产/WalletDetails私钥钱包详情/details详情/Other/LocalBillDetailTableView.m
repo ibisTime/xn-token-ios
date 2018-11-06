@@ -8,9 +8,6 @@
 
 #import "LocalBillDetailTableView.h"
 #import "BillDetailCell.h"
-#import "NSString+Date.h"
-#import "NSString+Extension.h"
-#import "CoinUtil.h"
 
 
 @interface LocalBillDetailTableView()<UITableViewDataSource, UITableViewDelegate>

@@ -7,14 +7,6 @@
 //
 
 #import "BuildLocalHomeView.h"
-#import "UILabel+Extension.h"
-#import "UILable+convience.h"
-#import "AppColorMacro.h"
-#import "LangSwitcher.h"
-#import <Masonry/Masonry.h>
-#import "UIButton+Custom.h"
-#import "UIButton+EnLargeEdge.h"
-
 
 
 @interface BuildLocalHomeView()

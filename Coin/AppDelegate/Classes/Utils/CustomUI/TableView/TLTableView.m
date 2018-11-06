@@ -9,7 +9,6 @@
 #import "TLTableView.h"
 #import "UIScrollView+TLAdd.h"
 #import <CDCommon/UIScrollView+TLAdd.h>
-#import "CustomRefreshGifHeader.h"
 
 #define  adjustsContentInsets(scrollView)\
 do { \
@@ -28,11 +27,6 @@ _Pragma("clang diagnostic pop") \
  * 上拉加载更多
  */
 @property (nonatomic, copy) void(^loadMore)();
-//@property (nonatomic, copy) UIView *(^placeholderView)();
-///*can scroll when placeholderView is exists default yes*/
-//@property (nonatomic, copy) BOOL (^scrollEnabled_ac)();
-///*can scroll when placeholderView is notExists default yes*/
-//@property (nonatomic, copy)   BOOL (^scrollWasEnabled_ac)();
 
 
 @end
@@ -59,11 +53,6 @@ _Pragma("clang diagnostic pop") \
     
     [tableView adjustsContentInsets];
     
-    //    if (@available(iOS 11.0, *)) {
-    //
-    //        tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-    //    }
-    
     return tableView;
     
 }
@@ -79,19 +68,11 @@ _Pragma("clang diagnostic pop") \
     TLTableView *tableView = [[TLTableView alloc] initWithFrame:frame style:UITableViewStylePlain];
     tableView.delegate = delegate;
     tableView.dataSource = dataSource;
-//    tableView.backgroundColor = [UIColor clearColor];
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     tableView.estimatedRowHeight = 0;
     tableView.estimatedSectionHeaderHeight = 0;
     tableView.estimatedSectionFooterHeight = 0;
-    
-//    [tableView adjustsContentInsets];
-    
-    //    if (@available(iOS 11.0, *)) {
-    //
-    //        tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-    //    }
-    //
+
     return tableView;
     
 }
@@ -105,10 +86,7 @@ _Pragma("clang diagnostic pop") \
         self.estimatedRowHeight = 0;
         self.estimatedSectionHeaderHeight = 0;
         self.estimatedSectionFooterHeight = 0;
-//        self.tableHeaderView = [UIView new];
-        
-        //        [self adjustsContentInsets];
-        
+
         if (@available(iOS 11.0, *)) {
             
             self.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
@@ -123,25 +101,11 @@ _Pragma("clang diagnostic pop") \
 - (void)addRefreshAction:(void (^)())refresh
 {
     
-//    self.refresh = refresh;
-//    CustomRefreshGifHeader *header = [CustomRefreshGifHeader headerWithRefreshingBlock:self.refresh];
-//    NSArray *imageArr = @[[UIImage imageNamed:@"refresh1"], [UIImage imageNamed:@"refresh2"], [UIImage imageNamed:@"refresh3"], [UIImage imageNamed:@"refresh4"]];
-//    [header setImages:imageArr duration:0.5 forState:MJRefreshStateIdle];
-//    [header setImages:imageArr duration:0.5 forState:MJRefreshStatePulling];
-//    [header setImages:imageArr duration:0.5 forState:MJRefreshStateRefreshing];
-//    [header setImages:imageArr duration:0.5 forState:MJRefreshStateWillRefresh];
-//    self.mj_header = header;
     
     self.refresh = refresh;
     MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingBlock:self.refresh];
     header.lastUpdatedTimeLabel.hidden = YES;
     header.stateLabel.hidden = YES;
-//    header.arrowView
-//    header.arrowView = kImage(@"icon圆角");
-//    header.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhiteLarge;
-//    UIActivityIndicatorViewStyleWhiteLarge,
-//    UIActivityIndicatorViewStyleWhite,
-//    UIActivityIndicatorViewStyleGray
     self.mj_header = header;
 }
 
@@ -259,21 +223,9 @@ _Pragma("clang diagnostic pop") \
         
     }
     
-    //没有实现方法抛出异常
-    //    if (!self.placeholderView) {
-    //
-    //        @throw [NSException exceptionWithName:@"this unException the ACTableView object" reason:@"please achieve createPlaceholderView: scrollEnabled: scrollWasEnabled:" userInfo:nil];
-    //    }
-    
+
     if (isEmpty == YES) {
-        
-        //        [_placeholderV removeFromSuperview];
-        //        _placeholderV = nil;
-        //        [[_placeholderV subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
-        //
-        //        _placeholderV = _placeholderView();
-        //        [self addSubview:_placeholderV];
-        
+
         if ( ABS((CGRectGetMinY(self.placeHolderView.frame) - CGRectGetHeight(self.tableHeaderView.frame))) > 1 ) {
             
             CGRect frame = self.placeHolderView.frame;
@@ -286,10 +238,7 @@ _Pragma("clang diagnostic pop") \
     }else{
         
         [self.placeHolderView removeFromSuperview];
-        //        [_placeholderV removeFromSuperview];
-        //        _placeholderV = nil;
-        //        [[_placeholderV subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
-        
+
     }
     
     

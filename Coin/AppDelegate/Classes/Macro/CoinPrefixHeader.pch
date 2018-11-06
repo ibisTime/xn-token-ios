@@ -21,29 +21,60 @@
 #import <MSAuthSDK/MSAuthVCFactory.h>
 #import <MSAuthSDK/MSAuthSDK.h>
 #import <SecurityGuardSDK/JAQ/SecurityVerification.h>
+
 #import "AppMacro.h"
 #import "AppColorMacro.h"
 #import "APICodeMacro.h"
-#import "CoinHeader.h"
+
+
+#import "AppConfig.h"
+#import "AppColorMacro.h"
+
+
 #import "TLUser.h"
+#import "TLAlert.h"
+#import "TLUIHeader.h"
 #import "TLDataBase.h"
 #import "TLWXManager.h"
 #import "TLWBManger.h"
+#import "TLTextField.h"
+
+#import "UserModel.h"
+#import "LangSwitcher.h"
+
+#import "CoinHeader.h"
+#import "CoinUtil.h"
+#import "CoinModel.h"
+
 #import "UILabel+Extension.h"
 #import "UILable+convience.h"
+
 #import "UIButton+Custom.h"
 #import "UIButton+SGImagePosition.h"
 #import "UIButton+EnLargeEdge.h"
-#import "LangSwitcher.h"
-#import "CoinUtil.h"
-#import "TLTextField.h"
+
 #import "NSString+Check.h"
 #import "NSString+Date.h"
+#import "NSString+Extension.h"
+
 #import "TLProgressHUD.h"
+
 #import "UITableView+AddForPlaceholder.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import <MJRefresh/MJRefresh.h>
+#import <MJExtension/MJExtension.h>
 #import "TableViewAnimationKitHeaders.h"
+
 #import "ZJAnimationPopView.h"
+
+
+
+
+
+
+
+
+
 
 #endif /* CoinPrefixHeader_h */
 

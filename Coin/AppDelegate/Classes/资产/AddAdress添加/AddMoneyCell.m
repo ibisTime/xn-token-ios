@@ -12,7 +12,6 @@
 
 #import "NSString+Extension.h"
 #import "UIButton+EnLargeEdge.h"
-#import "CoinUtil.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "NSString+Check.h"
 @interface AddMoneyCell()

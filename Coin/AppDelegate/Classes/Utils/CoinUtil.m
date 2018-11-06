@@ -8,7 +8,6 @@
 
 #import "CoinUtil.h"
 #import "TLNetworking.h"
-#import "NSString+Check.h"
 NSString *const kETH = @"ETH";
 NSString *const kSC = @"SC";
 NSString *const kBTC = @"BTC";

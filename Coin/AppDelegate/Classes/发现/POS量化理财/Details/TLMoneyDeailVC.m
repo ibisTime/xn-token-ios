@@ -7,8 +7,7 @@
 //
 
 #import "TLMoneyDeailVC.h"
-#import "TLUIHeader.h"
-#import "CoinUtil.h"
+
 #import "CurrencyModel.h"
 #import "RechargeCoinVC.h"
 //#import "TLTextField.h"

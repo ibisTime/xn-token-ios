@@ -7,18 +7,7 @@
 //
 
 #import "QDetailCell.h"
-#import "UILable+convience.h"
-#import "AppColorMacro.h"
-#import "UIButton+Custom.h"
-#import <Masonry/Masonry.h>
-#import "NSString+Date.h"
-#import "TLUser.h"
-#import "TLUIHeader.h"
-#import "NSString+Date.h"
-#import "NSString+Extension.h"
-#import "UILabel+Extension.h"
-#import "CoinUtil.h"
-#import <SDWebImage/UIImageView+WebCache.h>
+
 
 @interface QDetailCell ()
 

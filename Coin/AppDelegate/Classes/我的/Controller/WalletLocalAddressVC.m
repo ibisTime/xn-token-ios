@@ -9,10 +9,7 @@
 #import "WalletLocalAddressVC.h"
 #import "AddMoneyTableView.h"
 #import "CurrencyModel.h"
-#import "CoinUtil.h"
 #import "WalletAdressTableView.h"
-#import "NSString+Extension.h"
-#import "NSString+Check.h"
 #import "WalletAddressDetailVC.h"
 @interface WalletLocalAddressVC ()<RefreshDelegate>
 @property (nonatomic ,strong) WalletAdressTableView *tableView;

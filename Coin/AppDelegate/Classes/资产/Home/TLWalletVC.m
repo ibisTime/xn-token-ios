@@ -7,18 +7,9 @@
 //
 
 #import "TLWalletVC.h"
-
-#import "CoinHeader.h"
-
 #import "WalletHeaderView.h"
-
 #import "CurrencyModel.h"
-
-#import "NSString+Extension.h"
-#import "NSString+Check.h"
-
 #import "FMDBMigrationManager.h"
-
 #import "RechargeCoinVC.h"
 #import "WithdrawalsCoinVC.h"
 #import "BillVC.h"
@@ -26,13 +17,10 @@
 #import "RateDescVC.h"
 #import "ZMAuthVC.h"
 #import <CDCommon/UIScrollView+TLAdd.h>
-#import "CoinUtil.h"
 #import "PlatformTableView.h"
 #import "WallAccountVC.h"
 #import "AddAccoutMoneyVc.h"
-#import <MJExtension/MJExtension.h>
 #import "WalletLocalVc.h"
-#import "AppConfig.h"
 #import "RateModel.h"
 #import "WallAccountVC.h"
 #import "QRCodeVC.h"
@@ -41,7 +29,6 @@
 #import "TLFastvc.h"
 #import "TLTransfromVC.h"
 #import "BuildLocalHomeView.h"
-
 #import "WalletImportVC.h"
 #import "HTMLStrVC.h"
 #import "BuildSucessVC.h"
@@ -54,18 +41,12 @@
 #import "BillModel.h"
 
 @interface TLWalletVC ()<RefreshDelegate>
-{
-    
-}
+
 @property (nonatomic, strong) NSMutableArray *arr;
 
 @property (nonatomic, strong) WalletHeaderView *headerView;
 
-@property (nonatomic , strong)ZJAnimationPopView *popView;
-
 @property (nonatomic, strong) PlatformTableView *tableView;
-
-//@property (nonatomic, strong) TLAccountTableView *currentTableView;
 
 @property (nonatomic, strong) NSMutableArray <CurrencyModel *>*AssetsListModel;
 
@@ -254,7 +235,6 @@
     }
     [dataBase.dataBase close];
 
-
     NSString *usdtadd;
     if ([dataBase.dataBase open]) {
         NSString *sql = [NSString stringWithFormat:@"SELECT address  from THALocal where userId = '%@ and symbol = '%@''",[TLUser user].userId,@"USDT"];
@@ -273,13 +253,8 @@
         if ([data.dataBase open]) {
 
             NSString *sql2 = [NSString stringWithFormat:@"UPDATE THALocal SET address = '%@' WHERE walletId = (SELECT walletId from THAUser where userId='%@') and symbol = '%@' ",btcadd,[TLUser user].userId,@"USDT"];
-            //                BOOL sucess = [data.dataBase executeUpdate:sql];
             BOOL sucess2 = [data.dataBase executeUpdate:sql2];
             NSLog(@"%d",sucess2);
-            //                NSLog(@"更新自选状态%d",sucess);
-            //                NSLog(@"更新自选状态%d",sucess1);
-//            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:KIS170];
-//            [[NSUserDefaults standardUserDefaults] synchronize];
         }
         [data.dataBase close];
     }
@@ -296,17 +271,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    self.title = @"钱包";
     self.view.backgroundColor = kWhiteColor;
     [self initTableView];
     self.switchTager = 1;
-    //数据库查询一键划转私钥钱包的币种
     //登录退出通知
     [self addNotification];
     //列表查询个人账户币种列表
     [self getMyCurrencyList];
-    
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(InfoNotificationAction:) name:@"LOADDATAPAGE2" object:nil];
 }
 
@@ -350,7 +321,6 @@
             if (self.switchTager == 0) {
                 [weakSelf switchWithTager:weakSelf.switchTager];
             }
-
             [weakSelf.tableView reloadData];
 
             
@@ -365,38 +335,13 @@
             [weakSelf.tableView reloadData];
         };
         
-        //点击二维码事件
-        _headerView.codeBlock = ^{
-            QRCodeVC *qrCodeVC = [QRCodeVC new];
-            
-            qrCodeVC.scanSuccess = ^(NSString *result) {
-                
-
-            };
-            
-            [weakSelf.navigationController pushViewController:qrCodeVC animated:YES];
-        };
         //点击公告事件
         _headerView.headerBlock = ^{
             
             RateDescVC *descVC = [RateDescVC new];
             [weakSelf.navigationController pushViewController:descVC animated:YES];
         };
-        
-//        _headerView.addBlock = ^{
-//            AddAccoutMoneyVc *monyVc = [[AddAccoutMoneyVc alloc] init];
-//            monyVc.currentModels = weakSelf.AssetsListModel;
-//            [weakSelf.navigationController pushViewController:monyVc animated:YES];
-//
-//            weakSelf.tempcurrencys = [NSMutableArray array];
-//            monyVc.select = ^(NSMutableArray *model) {
-//
-//                [weakSelf switchWithTager:0];
-//                NSLog(@"%@",model);
-//            };
-//
-//            NSLog(@"点击添加");
-//        };
+
         
     }
     return _headerView;
@@ -423,7 +368,7 @@
     UILabel *content = [UILabel labelWithBackgroundColor:kClearColor textColor:[UIColor grayColor] font:14];
     content.numberOfLines = 0;
     content.frame = CGRectMake(20, 70, SCREEN_WIDTH - 100 - 40, 0);
-    content.attributedText = [self ReturnsTheDistanceBetween:[LangSwitcher switchLang:contents key:nil]];
+    content.attributedText = [UserModel ReturnsTheDistanceBetween:[LangSwitcher switchLang:contents key:nil]];
     [content sizeToFit];
     [contentText addSubview:content];
     
@@ -435,51 +380,12 @@
     [sureButton addTarget:self action:@selector(sureClick) forControlEvents:UIControlEventTouchUpInside];
     sureButton.frame = CGRectMake(30, content.yy + 30, SCREEN_WIDTH - 100 - 60, 50);
     contentText.frame = CGRectMake(50, SCREEN_HEIGHT/2 - (sureButton.yy + 30)/2, SCREEN_WIDTH - 100, (sureButton.yy + 30));
-    [self showPopAnimationWithAnimationStyle:2];
-}
-
-//设置行间距
--(NSMutableAttributedString *)ReturnsTheDistanceBetween:(NSString *)str
-{
-    NSMutableParagraphStyle  *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-    // 行间距设置为30
-    [paragraphStyle  setLineSpacing:8];
-    NSMutableAttributedString  *setString = [[NSMutableAttributedString alloc] initWithString:str];
-    [setString  addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [str length])];
-    return setString;
-}
-
-#pragma mark 显示弹框
-- (void)showPopAnimationWithAnimationStyle:(NSInteger)style
-{
-    ZJAnimationPopStyle popStyle = (style == 8) ? ZJAnimationPopStyleCardDropFromLeft : (ZJAnimationPopStyle)style;
-    ZJAnimationDismissStyle dismissStyle = (ZJAnimationDismissStyle)style;
-    // 1.初始化
-    _popView = [[ZJAnimationPopView alloc] initWithCustomView:self.contentView popStyle:popStyle dismissStyle:dismissStyle];
-    _popView.isClickBGDismiss = ![self.contentView isKindOfClass:[UIView class]];
-    //    移除
-    _popView.isClickBGDismiss = YES;
-    // 2.2 显示时背景的透明度
-    _popView.popBGAlpha = 0.5f;
-    // 2.3 显示时是否监听屏幕旋转
-    _popView.isObserverOrientationChange = YES;
-    // 2.6 显示完成回调
-    _popView.popComplete = ^{
-        NSLog(@"显示完成");
-    };
-    // 2.7 移除完成回调
-    _popView.dismissComplete = ^{
-        NSLog(@"移除完成");
-    };
-    // 4.显示弹框
-    [_popView pop];
+    [[UserModel user] showPopAnimationWithAnimationStyle:2 showView:contentText];
 }
 
 - (void)sureClick
 {
-    
-    [_popView dismiss];
-    
+    [[UserModel user].cusPopView dismiss];
 }
 
 - (void)initTableView {
@@ -1493,68 +1399,5 @@
     }];
 }
 
-
-#pragma mark - RefreshDelegate
-- (void)refreshTableViewButtonClick:(TLTableView *)refreshTableview button:(UIButton *)sender selectRowAtIndex:(NSInteger)index {
-    NSInteger tag = (sender.tag - 1200)%100;
-    CurrencyModel *currencyModel = self.AssetsListModel[index];
-    switch (tag) {
-        case 0:
-        {
-            RechargeCoinVC *coinVC = [RechargeCoinVC new];
-            coinVC.currency = currencyModel;
-            [self.navigationController pushViewController:coinVC animated:YES];
-            
-        }break;
-            
-        case 1:
-        {
-//            [self clickWithdrawWithCurrency:currencyModel];
-
-        }break;
-            
-        case 2:
-        {
-            
-            BillVC *billVC = [BillVC new];
-            billVC.accountNumber = currencyModel.accountNumber;
-            billVC.billType = BillTypeAll;
-            [self.navigationController pushViewController:billVC animated:YES];
-            
-        }break;
-            
-        case 3:
-        {
-            
-            BillVC *billVC = [BillVC new];
-            billVC.accountNumber = currencyModel.accountNumber;
-            billVC.billType = BillTypeFrozen;
-            [self.navigationController pushViewController:billVC animated:YES];
-            
-        }break;
-            
-        default:
-            break;
-    }
-}
-
-- (void)clickWithdrawWithCurrency:(CurrencyModel *)currencyModel {
-    
-    CoinWeakSelf;
-    //实名认证成功后，判断是否设置资金密码
-    if ([[TLUser user].tradepwdFlag isEqualToString:@"0"]) {
-        TLPwdType pwdType = TLPwdTypeSetTrade;
-        TLPwdRelatedVC *pwdRelatedVC = [[TLPwdRelatedVC alloc] initWithType:pwdType];
-        pwdRelatedVC.isWallet = YES;
-        pwdRelatedVC.success = ^{
-            [weakSelf clickWithdrawWithCurrency:currencyModel];
-        };
-        [self.navigationController pushViewController:pwdRelatedVC animated:YES];
-        return ;
-    }
-    WithdrawalsCoinVC *coinVC = [WithdrawalsCoinVC new];
-    coinVC.currency = currencyModel;
-    [self.navigationController pushViewController:coinVC animated:YES];
-}
 
 @end

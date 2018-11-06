@@ -7,15 +7,7 @@
 //
 
 #import "WallAccountHeadView.h"
-#import "Masonry.h"
-#import "UILable+convience.h"
-#import "AppColorMacro.h"
-#import "UILabel+Extension.h"
-#import "NSString+Extension.h"
 
-#import "LangSwitcher.h"
-#import "CoinUtil.h"
-#import <SDWebImage/UIImageView+WebCache.h>
 @interface WallAccountHeadView()
 @property (nonatomic ,strong) UIImageView *bgIV;
 @property (nonatomic ,strong) UILabel *textLbl;

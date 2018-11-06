@@ -16,7 +16,6 @@
 #import "UILable+convience.h"
 #import "AppColorMacro.h"
 #import "Masonry.h"
-#import "CoinUtil.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "TLUser.h"
 

@@ -8,12 +8,8 @@
 
 #import "QiestionDetailVC.h"
 #import "QuestionDetail.h"
-#import <MJRefresh/MJRefresh.h>
-#import "NSString+Date.h"
-#import "TLUIHeader.h"
-#import "CoinUtil.h"
-#import "NSString+Check.h"
-#import <SDWebImage/UIImageView+WebCache.h>
+
+
 @interface QiestionDetailVC () <UIScrollViewDelegate>
 
 @property (nonatomic ,strong) UIImageView *bgImage;

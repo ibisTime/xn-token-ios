@@ -20,7 +20,6 @@
 #import "FilterView.h"
 #import "QRCodeVC.h"
 #import "CoinAddressModel.h"
-#import "CoinUtil.h"
 
 typedef NS_ENUM(NSInteger, AddressType) {
     

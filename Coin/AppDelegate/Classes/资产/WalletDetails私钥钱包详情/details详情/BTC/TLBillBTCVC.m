@@ -8,12 +8,10 @@
 
 #import "TLBillBTCVC.h"
 #import "BillDetailTableView.h"
-#import "TLUIHeader.h"
-#import "CoinUtil.h"
 #import "LocalBillDetailTableView.h"
 #import "WalletLocalWebVC.h"
 #import "TLBTCtableView.h"
-#import "NSString+Check.h"
+
 @interface TLBillBTCVC ()<RefreshDelegate>
 @property (nonatomic, strong) UIView *headerView;
 

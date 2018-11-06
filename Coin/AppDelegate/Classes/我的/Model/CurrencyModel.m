@@ -7,8 +7,7 @@
 //
 
 #import "CurrencyModel.h"
-#import "CoinUtil.h"
-#import "LangSwitcher.h"
+
 
 //NSString *const kCNY = @"CNY";
 

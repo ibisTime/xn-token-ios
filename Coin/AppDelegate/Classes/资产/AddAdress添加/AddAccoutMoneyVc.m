@@ -9,7 +9,6 @@
 #import "AddAccoutMoneyVc.h"
 #import "AddMoneyTableView.h"
 #import "CurrencyModel.h"
-#import "CoinUtil.h"
 
 #import "NSString+Extension.h"
 #import "NSString+Check.h"

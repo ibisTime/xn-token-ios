@@ -7,9 +7,7 @@
 //
 
 #import "WalletHeaderView.h"
-#import "TLUIHeader.h"
-#import "AppColorMacro.h"
-#import "TLUser.h"
+
 
 @interface WalletHeaderView ()
 

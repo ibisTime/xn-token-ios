@@ -10,7 +10,6 @@
 #import "UILable+convience.h"
 #import "UIColor+theme.h"
 #import "TLUIHeader.h"
-#import "CoinUtil.h"
 #import "TLCoinWithdrawModel.h"
 #import "NSString+Extension.h"
 #import "NSString+Date.h"

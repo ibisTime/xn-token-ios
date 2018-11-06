@@ -8,13 +8,7 @@
 
 #import "StorePayVC.h"
 
-//Manager
-#import "CoinUtil.h"
-//Macro
-#import "APICodeMacro.h"
-//Category
 #import "UIBarButtonItem+convience.h"
-#import "NSString+Check.h"
 #import "UIViewController+BackButtonHander.h"
 //M
 #import "CurrencyModel.h"

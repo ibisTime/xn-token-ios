@@ -7,13 +7,7 @@
 //
 
 #import "TransformCell.h"
-#import "AppColorMacro.h"
-#import "TLAlert.h"
-#import "Masonry.h"
-#import "UIButton+Custom.h"
-#import <SDWebImage/UIImageView+WebCache.h>
-#import "CoinUtil.h"
-#import "NSString+Extension.h"
+
 
 @interface TransformCell()
 

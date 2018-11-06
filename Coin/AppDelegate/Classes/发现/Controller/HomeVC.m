@@ -18,7 +18,6 @@
 #import "GoodMallVC.h"
 #import "PosMiningVC.h"
 #import "RateDescVC.h"
-#import "CoinUtil.h"
 #import "RedEnvelopeVC.h"
 
 #import "HomeTbleView.h"
@@ -29,6 +28,7 @@
 #import "TLPwdRelatedVC.h"
 #import "HTMLStrVC.h"
 #import "HomeFindModel.h"
+
 #import "BTC256+Tests.h"
 #import "BTCData+Tests.h"
 #import "BTCMnemonic+Tests.h"
@@ -50,10 +50,10 @@
 #import "BTCMerkleTree+Tests.h"
 #import "BTCBitcoinURL+Tests.h"
 #import "BTCCurrencyConverter+Tests.h"
+
 #import "MnemonicUtil.h"
 #import "BTCData.h"
 #import "BTCNetwork.h"
-#import "AppConfig.h"
 #import "TLinviteVC.h"
 @interface HomeVC ()<RefreshDelegate>
 

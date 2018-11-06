@@ -17,8 +17,8 @@
 		1F709D712181E51E002D1CC4 /* UIView+Banner.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F709D6E2181E51D002D1CC4 /* UIView+Banner.m */; };
 		1F709D722181E51E002D1CC4 /* HW3DBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F709D6F2181E51D002D1CC4 /* HW3DBannerView.m */; };
 		1F709D752182C317002D1CC4 /* BTCPoundage.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F709D742182C317002D1CC4 /* BTCPoundage.m */; };
-		1F709D782182FF09002D1CC4 /* CustomRefreshGifHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F709D772182FF09002D1CC4 /* CustomRefreshGifHeader.m */; };
 		1F770ED721904D7D00E2889F /* lanch-1的副本 11.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F770ED621904D7D00E2889F /* lanch-1的副本 11.png */; };
+		1F770EDA21913CC000E2889F /* UserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F770ED921913CC000E2889F /* UserModel.m */; };
 		1F816BF42180953D0078B945 /* SGQRCodeScanManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F816BE6218095380078B945 /* SGQRCodeScanManager.m */; };
 		1F816BF52180953D0078B945 /* SGQRCodeAlbumManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F816BE92180953A0078B945 /* SGQRCodeAlbumManager.m */; };
 		1F816BF62180953D0078B945 /* SGQRCodeGenerateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F816BEC2180953B0078B945 /* SGQRCodeGenerateManager.m */; };
@@ -529,9 +529,9 @@
 		1F709D702181E51E002D1CC4 /* UIView+Banner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Banner.h"; sourceTree = "<group>"; };
 		1F709D732182C317002D1CC4 /* BTCPoundage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTCPoundage.h; sourceTree = "<group>"; };
 		1F709D742182C317002D1CC4 /* BTCPoundage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTCPoundage.m; sourceTree = "<group>"; };
-		1F709D762182FF09002D1CC4 /* CustomRefreshGifHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomRefreshGifHeader.h; sourceTree = "<group>"; };
-		1F709D772182FF09002D1CC4 /* CustomRefreshGifHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomRefreshGifHeader.m; sourceTree = "<group>"; };
 		1F770ED621904D7D00E2889F /* lanch-1的副本 11.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lanch-1的副本 11.png"; sourceTree = "<group>"; };
+		1F770ED821913CC000E2889F /* UserModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserModel.h; sourceTree = "<group>"; };
+		1F770ED921913CC000E2889F /* UserModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserModel.m; sourceTree = "<group>"; };
 		1F816BE6218095380078B945 /* SGQRCodeScanManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SGQRCodeScanManager.m; sourceTree = "<group>"; };
 		1F816BE7218095390078B945 /* SGQRCodeScanningView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SGQRCodeScanningView.h; sourceTree = "<group>"; };
 		1F816BE8218095390078B945 /* SGQRCode.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SGQRCode.bundle; sourceTree = "<group>"; };
@@ -1924,8 +1924,6 @@
 		211CEF0E1FCBBF1B000FB0C4 /* NetworkingTool */ = {
 			isa = PBXGroup;
 			children = (
-				1F709D762182FF09002D1CC4 /* CustomRefreshGifHeader.h */,
-				1F709D772182FF09002D1CC4 /* CustomRefreshGifHeader.m */,
 				2EE361531FFE182500A5C3EB /* RespHandler.h */,
 				2EE361541FFE182700A5C3EB /* RespHandler.m */,
 				211DE64E1FB58B4B002FCF3D /* TLNetworking.h */,
@@ -2212,13 +2210,13 @@
 		211DE6901FB58B4C002FCF3D /* Macro */ = {
 			isa = PBXGroup;
 			children = (
-				B88B58F52109AEC300F20D1B /* TLUIHeader.h */,
+				B88B59012109AEC300F20D1B /* CoinPrefixHeader.pch */,
 				B88B59022109AEC300F20D1B /* CoinHeader.h */,
 				B88B59002109AEC300F20D1B /* CustomUIHeader.h */,
-				B88B59012109AEC300F20D1B /* CoinPrefixHeader.pch */,
 				211DE6921FB58B4C002FCF3D /* AppMacro.h */,
 				211DE6911FB58B4C002FCF3D /* AppColorMacro.h */,
 				211DE6931FB58B4C002FCF3D /* APICodeMacro.h */,
+				B88B58F52109AEC300F20D1B /* TLUIHeader.h */,
 			);
 			path = Macro;
 			sourceTree = "<group>";
@@ -2481,6 +2479,8 @@
 				2EB039AC1FE8EDE300589D8E /* UserInfo.m */,
 				2E394FF81FB059C100BA0829 /* TLBaseModel.h */,
 				2E394FF91FB059C100BA0829 /* TLBaseModel.m */,
+				1F770ED821913CC000E2889F /* UserModel.h */,
+				1F770ED921913CC000E2889F /* UserModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -4189,7 +4189,6 @@
 				2EB039A71FE8B23300589D8E /* EditEmailVC.m in Sources */,
 				7A07F808216C84F30026EB7A /* SCColor.m in Sources */,
 				4C8DE98520C983D100EC183C /* EthereumUtil.swift in Sources */,
-				1F709D782182FF09002D1CC4 /* CustomRefreshGifHeader.m in Sources */,
 				7AAF0312214F8C35008507FF /* IntegralVC.m in Sources */,
 				B80864F3211EA17D00755158 /* BTCAssetType.m in Sources */,
 				7A8A5D2520EA301E002D9A48 /* RedEnvelopeShoreVC.m in Sources */,
@@ -4226,6 +4225,7 @@
 				B8086510211EA17D00755158 /* BTCAssetAddress.m in Sources */,
 				B89F07DF211B06E20057E781 /* TLinviteVC.m in Sources */,
 				7A8A5D1820EA0A23002D9A48 /* RedEnvelopeHeadView.m in Sources */,
+				1F770EDA21913CC000E2889F /* UserModel.m in Sources */,
 				7A3821C320EACDA100D6B636 /* SendCell.m in Sources */,
 				21223CB71FBDB2D200057444 /* WebVC.m in Sources */,
 				2E394FFD1FB059C100BA0829 /* TLBaseVC.m in Sources */,

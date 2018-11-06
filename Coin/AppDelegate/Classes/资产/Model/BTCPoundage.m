@@ -20,7 +20,7 @@
 #import "BTCNetwork.h"
 #import "BTCKeychain.h"
 #import "BTCHashID.h"
-#import "CoinUtil.h"
+
 
 @implementation BTCPoundage
 

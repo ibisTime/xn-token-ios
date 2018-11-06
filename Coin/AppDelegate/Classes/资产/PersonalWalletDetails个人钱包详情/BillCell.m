@@ -9,10 +9,7 @@
 #import "BillCell.h"
 #import "AppColorMacro.h"
 #import "TLUIHeader.h"
-#import "NSString+Date.h"
-#import "NSString+Extension.h"
-#import "UILabel+Extension.h"
-#import "CoinUtil.h"
+
 #import <SDWebImage/UIImageView+WebCache.h>
 
 @interface BillCell ()

@@ -18,7 +18,6 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 
 #import "BillVC.h"
-#import "CoinUtil.h"
 @interface RechargeCoinVC ()
 
 @property (nonatomic, strong) UIView *topView;

@@ -7,11 +7,7 @@
 //
 
 #import "WalletAddressDetailVC.h"
-#import "CoinUtil.h"
 #import "WalletAdressTableView.h"
-#import "NSString+Extension.h"
-#import "NSString+Check.h"
-#import <Masonry/Masonry.h>
 @interface WalletAddressDetailVC ()
 @property (nonatomic , strong) UILabel *titleLable;
 

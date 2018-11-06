@@ -18,12 +18,8 @@
 #import "TLTextField.h"
 #import "FilterView.h"
 #import "QRCodeVC.h"
-#import "CoinUtil.h"
 #import "MnemonicUtil.h"
-#import <MBProgressHUD/MBProgressHUD.h>
 #import "MnemonicUtil.h"
-#import "CoinUtil.h"
-#import <SVProgressHUD/SVProgressHUD.h>
 #import "utxoModel.h"
 #import "BTCBlockchainInfo.h"
 #import "BTCTransactionOutput.h"
@@ -38,7 +34,6 @@
 #import "BTCNetwork.h"
 #import "BTCKeychain.h"
 #import "BTCHashID.h"
-#import "AppConfig.h"
 #import "BTCPoundage.h"
 #import "CoinAddressModel.h"
 #import "UsdtClient.h"

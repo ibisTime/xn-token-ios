@@ -8,8 +8,6 @@
 
 #import "RespHandler.h"
 #import "NBNetwork.h"
-#import "TLAlert.h"
-#import "TLUser.h"
 
 @interface RespHandler()
 

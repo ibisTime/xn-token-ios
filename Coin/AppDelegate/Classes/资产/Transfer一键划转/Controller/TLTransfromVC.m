@@ -9,13 +9,10 @@
 #import "TLTransfromVC.h"
 #import "CustomLayoutWallet.h"
 #import "THTranstionCollectionView.h"
-#import "TLTextField.h"
-#import "CoinUtil.h"
-#import "NSString+Check.h"
 #import "TLPwdRelatedVC.h"
-#import <MBProgressHUD/MBProgressHUD.h>
 #import "MnemonicUtil.h"
 #import "utxoModel.h"
+
 #import "BTCBlockchainInfo.h"
 #import "BTCTransactionOutput.h"
 #import "BTCData.h"
@@ -29,11 +26,8 @@
 #import "BTCNetwork.h"
 #import "BTCKeychain.h"
 #import "BTCHashID.h"
-#import "AppConfig.h"
-#import "NSString+Extension.h"
 
 #import "keyTransferTableView.h"
-
 #import "BTCPoundage.h"
 #import "UsdtClient.h"
 

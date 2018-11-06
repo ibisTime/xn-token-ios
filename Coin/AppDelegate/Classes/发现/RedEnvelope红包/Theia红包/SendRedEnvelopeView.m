@@ -7,14 +7,10 @@
 //
 
 #import "SendRedEnvelopeView.h"
-#import "AppColorMacro.h"
-#import "TLUIHeader.h"
 #import "CoinModel.h"
-#import "CoinUtil.h"
 #import "NSString+Extension.h"
-#import "TLUser.h"
 #import "TLNetworking.h"
-#import "TLAlert.h"
+
 #import "UIImageView+WebCache.h"
 
 #import "NSString+Date.h"

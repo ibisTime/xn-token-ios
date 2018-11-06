@@ -8,17 +8,11 @@
 
 #import "HomeHeaderView.h"
 
-//Macro
-#import "TLUIHeader.h"
-#import "AppColorMacro.h"
 #import "UIColor+theme.h"
 //Category
 #import "UIButton+EnLargeEdge.h"
-#import "NSString+Extension.h"
-#import "CoinUtil.h"
 //V
 #import "TLBannerView.h"
-#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface HomeHeaderView()<HW3DBannerViewDelegate>
 {

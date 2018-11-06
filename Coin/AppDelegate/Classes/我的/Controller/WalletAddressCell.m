@@ -7,13 +7,7 @@
 //
 
 #import "WalletAddressCell.h"
-#import "TLUIHeader.h"
-#import "AppColorMacro.h"
 
-#import "NSString+Extension.h"
-#import "UIButton+EnLargeEdge.h"
-#import "CoinUtil.h"
-#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface  WalletAddressCell()
 //币种图标

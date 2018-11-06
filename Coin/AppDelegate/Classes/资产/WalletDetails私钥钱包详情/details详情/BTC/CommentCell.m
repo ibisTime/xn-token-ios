@@ -6,10 +6,7 @@
 //  Copyright © 2018年 chengdai. All rights reserved.
 //
 #import "TLUIHeader.h"
-#import "AppColorMacro.h"
 #import "CommentCell.h"
-#import "CoinUtil.h"
-#import "NSString+Check.h"
 @implementation CommentCell
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {

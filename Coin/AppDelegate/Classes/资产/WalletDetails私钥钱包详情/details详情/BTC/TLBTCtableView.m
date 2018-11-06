@@ -8,9 +8,6 @@
 
 #import "TLBTCtableView.h"
 #import "BillDetailCell.h"
-#import "NSString+Date.h"
-#import "NSString+Extension.h"
-#import "CoinUtil.h"
 #import "BTCDetailModel.h"
 #import "CommentTableView.h"
 @interface TLBTCtableView()<UITableViewDataSource, UITableViewDelegate>

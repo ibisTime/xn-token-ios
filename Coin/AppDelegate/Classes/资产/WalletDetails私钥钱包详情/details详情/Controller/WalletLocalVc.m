@@ -22,7 +22,6 @@
 #import "WalletLocalBillTableView.h"
 #import "LocalBillDetailVC.h"
 #import "TLBillBTCVC.h"
-#import "CoinUtil.h"
 #import "USDTRecordModel.h"
 @interface WalletLocalVc ()<RefreshDelegate>
 @property (nonatomic, strong) WalletLocalBillTableView *tableView;

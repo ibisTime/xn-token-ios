@@ -8,8 +8,6 @@
 
 #import "BillDetailVC.h"
 #import "BillDetailTableView.h"
-#import "TLUIHeader.h"
-#import "CoinUtil.h"
 
 @interface BillDetailVC ()
 

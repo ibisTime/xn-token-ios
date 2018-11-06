@@ -21,7 +21,6 @@
 #import "TLUpdateVC.h"
 
 #import "LangSwitcher.h"
-#import "CoinUtil.h"
 #import "RespHandler.h"
 #import <NBHTTP/NBNetwork.h>
 #import "CoinModel.h"

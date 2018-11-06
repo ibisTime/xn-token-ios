@@ -7,12 +7,10 @@
 //
 
 #import "TLNetworking.h"
-#import "SVProgressHUD.h"
-#import "AppConfig.h"
+
 #import "HttpLogger.h"
 #import "TLProgressHUD.h"
-#import "TLUser.h"
-#import "TLAlert.h"
+
 #import <SVProgressHUD/SVProgressHUD.h>
 
 @implementation TLNetworking
