@@ -92,6 +92,8 @@ static NSString *platformCell1 = @"AccountMoneyCellTableViewCell";
     {
         cell.platform1 = self.platforms[indexPath.row];
     }
+    
+    
     return cell;
 //    if (self.platforms.count > 0) {
 //

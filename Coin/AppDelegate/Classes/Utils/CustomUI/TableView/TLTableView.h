@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-#import "TLUIHeader.h"
-#import "AppColorMacro.h"
 #import "MJRefresh.h"
 
 @class TLTableView;

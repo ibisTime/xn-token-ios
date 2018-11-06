@@ -8,7 +8,7 @@
 
 #import "HomeTbleView.h"
 #import "HomeCell.h"
-@interface HomeTbleView()<UITableViewDelegate, UITableViewDataSource>
+@interface HomeTbleView()<UITableViewDelegate, UITableViewDataSource,UIViewControllerPreviewingDelegate>
 
 
 
@@ -63,6 +63,7 @@ static NSString *identifierCell = @"homeCell";
         [cell addSubview:textLbl];
         textLbl.frame = CGRectMake(15, 0, SCREEN_WIDTH - 30, 50);
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
         return cell;
     }
 

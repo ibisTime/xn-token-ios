@@ -602,49 +602,49 @@ typedef enum : NSUInteger {
     }
 }
 
--(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
-
-    if ([textField.text rangeOfString:@"."].location==NSNotFound) {
-        isHaveDian=NO;
-    }
-    if ([string length]>0)
-    {
-        unichar single=[string characterAtIndex:0];//当前输入的字符
-        if ((single >='0' && single<='9') || single=='.')//数据格式正确
-        {
-            if([textField.text length]==0){
-                if(single == '.'){
-                    [textField.text stringByReplacingCharactersInRange:range withString:@""];
-                    return NO;
-                }
-            }
-            if (single=='.')
-            {
-                if(!isHaveDian)//text中还没有小数点
-                {
-                    isHaveDian=YES;
-                    return YES;
-                }else
-                {
-
-                    [textField.text stringByReplacingCharactersInRange:range withString:@""];
-                    return NO;
-                }
-            }
-
-            return YES;
-        }else{
-            [textField.text stringByReplacingCharactersInRange:range withString:@""];
-            return NO;
-        }
-    }
-    else
-    {
-        return YES;
-    }
-
-
-}
+//-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+//
+//    if ([textField.text rangeOfString:@"."].location==NSNotFound) {
+//        isHaveDian=NO;
+//    }
+//    if ([string length]>0)
+//    {
+//        unichar single=[string characterAtIndex:0];//当前输入的字符
+//        if ((single >='0' && single<='9') || single=='.')//数据格式正确
+//        {
+//            if([textField.text length]==0){
+//                if(single == '.'){
+//                    [textField.text stringByReplacingCharactersInRange:range withString:@""];
+//                    return NO;
+//                }
+//            }
+//            if (single=='.')
+//            {
+//                if(!isHaveDian)//text中还没有小数点
+//                {
+//                    isHaveDian=YES;
+//                    return YES;
+//                }else
+//                {
+//
+//                    [textField.text stringByReplacingCharactersInRange:range withString:@""];
+//                    return NO;
+//                }
+//            }
+//
+//            return YES;
+//        }else{
+//            [textField.text stringByReplacingCharactersInRange:range withString:@""];
+//            return NO;
+//        }
+//    }
+//    else
+//    {
+//        return YES;
+//    }
+//
+//
+//}
 
 
 

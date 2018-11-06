@@ -34,21 +34,16 @@
 #import <ZendeskSDK/ZendeskSDK.h>
 #import "TLWXManager.h"
 #import <UMMobClick/MobClick.h>
-//Extension
 
 #import "WXApi.h"
 #import "IQKeyboardManager.h"
-//#import <ZendeskSDK/ZendeskSDK.h>
 #import <ZendeskCoreSDK/ZendeskCoreSDK.h>
 #import <ZendeskProviderSDK/ZendeskProviderSDK.h>
 #import <WeiboSDK.h>
 #import "NSBundle+Language.h"
-//#import ""
-//#import "TLPublishInputView.h"      czy
 
 @interface AppDelegate ()<WeiboSDKDelegate>
 
-//@property (nonatomic, strong) FBKVOController *chatKVOCtrl;   czy
 @property (nonatomic, strong) RespHandler *respHandler;
 @property (nonatomic ,assign) BOOL IsEnterBack;
 @property (nonatomic, strong) NSMutableArray <DataBaseModel *>*dataBaseModels;

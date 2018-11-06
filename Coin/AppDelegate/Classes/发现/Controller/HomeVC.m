@@ -8,13 +8,11 @@
 
 #import "HomeVC.h"
 
-//M
-
 #import "CountInfoModel.h"
-//V
+
 #import "HomeHeaderView.h"
 #import "TLProgressHUD.h"
-//C
+
 #import "GoodMallVC.h"
 #import "PosMiningVC.h"
 #import "RateDescVC.h"
@@ -55,7 +53,7 @@
 #import "BTCData.h"
 #import "BTCNetwork.h"
 #import "TLinviteVC.h"
-@interface HomeVC ()<RefreshDelegate>
+@interface HomeVC ()<RefreshDelegate,UIViewControllerPreviewingDelegate>
 
 @property (nonatomic, strong) HomeTbleView *tableView;
 
@@ -89,7 +87,8 @@
 }
 
 //如果仅设置当前页导航透明，需加入下面方法
-- (void)viewWillDisappear:(BOOL)animated{
+- (void)viewWillDisappear:(BOOL)animated
+{
     [super viewWillDisappear:animated];
     self.navigationController.navigationBarHidden = NO;
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
@@ -102,10 +101,8 @@
     self.view.backgroundColor = kWhiteColor;
 }
 
-
 -(void)initNavigationNar
 {
-
     self.backButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
     self.backButton.frame = CGRectMake(kScreenWidth-74, kStatusBarHeight, 44, 44);
     [self.backButton setImage:kImage(@"消息") forState:(UIControlStateNormal)];
@@ -126,15 +123,11 @@
 - (void)initTableView {
     
     CoinWeakSelf;
-
-
     self.tableView = [[HomeTbleView alloc] initWithFrame:CGRectMake(0, kNavigationBarHeight, kScreenWidth, kScreenHeight - kNavigationBarHeight - kTabBarHeight) style:UITableViewStyleGrouped];
     self.tableView.backgroundColor = kWhiteColor;
     self.tableView.refreshDelegate = self;
     [self.view addSubview:self.tableView];
     self.tableView.tableHeaderView = self.headerView;
-
-
     [self.tableView addRefreshAction:^{
         [CoinUtil refreshOpenCoinList:^{
             //获取banner列表
@@ -146,30 +139,29 @@
         }];
     }];
     [weakSelf.tableView beginRefreshing];
-    
 }
+
+
 
 -(void)refreshTableView:(TLTableView *)refreshTableview didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 
-
     HomeFindModel *model = self.findModels[indexPath.row];
-
     if ([model.action isEqualToString:@"red_packet"]) {
         RedEnvelopeVC *redEnvelopeVC = [RedEnvelopeVC new];
-        [self.navigationController pushViewController:redEnvelopeVC animated:YES];
+        [self showViewController:redEnvelopeVC sender:self];;
         return;
 
     }else if ([model.action isEqualToString:@"money_manager"])
     {
         PosMiningVC *vc = [PosMiningVC new];
-        [self.navigationController pushViewController:vc animated:YES];
+        [self showViewController:vc sender:self];;
         return;
 
     }else if ([model.action isEqualToString:@"invitation"])
     {
         TLinviteVC *settingVC = [TLinviteVC new];
-        [self.navigationController pushViewController:settingVC animated:YES];
+        [self showViewController:settingVC sender:self];;
         return;
 
     }else if ([model.action isEqualToString:@"none"]) {
@@ -178,11 +170,13 @@
         vc.name = model.name;
         vc.des = model.Description;
         vc.type = HTMLTypeOther;
-        [self.navigationController pushViewController:vc animated:YES];
+        [self showViewController:vc sender:self];
+//        [self.navigationController pushViewController:vc animated:YES];
         return;
-
     }
 }
+
+
 
 #pragma mark - Init
 
@@ -286,14 +280,11 @@
         if (self.findModels.count != self.tableView.findModels.count) {
             [TableViewAnimationKit showWithAnimationType:6 tableView:self.tableView];
         }
-
-
         self.findModels = [HomeFindModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
 
     } failure:^(NSError *error) {
         [self.tableView endRefreshHeader];
     }];
-
 }
 
 

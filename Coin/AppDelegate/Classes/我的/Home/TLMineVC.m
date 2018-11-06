@@ -10,7 +10,7 @@
 
 #import "CoinHeader.h"
 #import "APICodeMacro.h"
-#import <SDWebImage/UIButton+WebCache.h>
+
 #import "MineGroup.h"
 
 #import "MineTableView.h"
@@ -47,9 +47,6 @@
 
 @interface TLMineVC ()<MineHeaderSeletedDelegate, UINavigationControllerDelegate,ZDKHelpCenterConversationsUIDelegate,ZDKHelpCenterDelegate>
 
-
-//@property (nonatomic, strong) FBKVOController *chatKVOCtrl;   czy
-
 @property (nonatomic, strong) UIScrollView *scrollView;
 //头部
 @property (nonatomic, strong) MineHeaderView *headerView;
@@ -60,20 +57,10 @@
 
 @property (nonatomic, strong) TLImagePicker *imagePicker;
 
-//@property (nonatomic, assign) id <ZDKHelpCenterConversationsUIDelegate> helpDelegate;
 
 @end
 
 @implementation TLMineVC
-//
-//- (void)viewWillDisappear:(BOOL)animated {
-//    [super viewWillDisappear:animated];
-//
-//    [self.navigationController setNavigationBarHidden:NO animated:animated];
-//    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-//    self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
-//    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-//}
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -103,37 +90,12 @@
 
 }
 
-//- (void)viewWillAppear:(BOOL)animated {
-//
-//    [super viewWillAppear:animated];
-//
-//    [self.navigationController setNavigationBarHidden:YES animated:animated];
-////    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-////    self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
-////    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-//
-//}
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
     
     return UIStatusBarStyleLightContent;
 }
 
-#pragma mark - UINavigationControllerDelegate
-- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
-    // 判断要显示的控制器是否是自己
-//    if ([viewController isKindOfClass:[ZDCChatViewController class]]) {
-//
-//        [[IQKeyboardManager sharedManager] setEnable:NO];
-//        ZDCChatViewController *chatVC = (ZDCChatViewController *)viewController;
-//        ZDCChatUI *chatUI = chatVC.chatUI;
-//        ZDCChatView *chatView = chatUI.chatView;
-//        [chatView.table adjustsContentInsets];
-//        [[ZDCChat instance].overlay setEnabled:NO];
-//
-//    }
-
-}
 
 
 - (void)viewDidLoad {
@@ -370,7 +332,7 @@
 
 
 
-        [ self.navigationController  pushViewController:helpCenter  animated:YES ];
+        [self.navigationController  pushViewController:helpCenter animated:YES];
 
 
     };
@@ -402,8 +364,7 @@
         
         
         self.group.sections = @[
-                                //                                @[advertisement, address, trust],
-                                //                                @[securityCenter, personalSetting,helpModel, linkService, abountUs]
+
                                 ];
         
     } else {
@@ -445,14 +406,8 @@
     self.tableView.showsHorizontalScrollIndicator = YES;
 
     self.tableView.mineGroup = self.group;
-    
-//    self.tableView.tableHeaderView = self.headerView;
     [self.view addSubview:self.headerView];
-    
-//    if (@available(iOS 11.0, *)) {
-//        
-//        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-//    }
+
     
     [self.view addSubview:self.tableView];
 }
@@ -504,15 +459,10 @@
 - (void)loginOut {    
 
     [[TLUser user] loginOut];
-//    self.headerView.photoBtn = [UIButton buttonWithImageName:@"头像" cornerRadius:imgWidth/2.0];
     [self.headerView.photoBtn setImage:kImage(@"头像") forState:UIControlStateNormal];
     self.headerView.nameLbl.text = nil;
     
     self.headerView.mobileLbl.text = nil;
-    
-//    self.headerView.levelBtn.hidden = [[TLUser user].level isEqualToString:kLevelOrdinaryTraders] ? YES : NO;
-//    MineCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
-//    [cell hideBadge];
 
 }
 
@@ -521,19 +471,8 @@
     [[TLUser user] changLoginTime];
     //
     if ([TLUser user].photo) {
-        
-//        [self.headerView.photoBtn setTitle:nil forState:UIControlStateNormal];
-        
         [self.headerView.photoBtn sd_setImageWithURL:[NSURL URLWithString:[[TLUser user].photo convertImageUrl]] forState:UIControlStateNormal];
-        
     } else {
-        
-        NSString *nickName = [TLUser user].nickname;
-        
-        NSString *title = [nickName substringToIndex:1];
-        
-//        [self.headerView.photoBtn setTitle:title forState:UIControlStateNormal];
-        
         [self.headerView.photoBtn setImage:nil forState:UIControlStateNormal];
         
     }
@@ -559,8 +498,6 @@
 
     }];
     [self.headerView.integralBtn addTarget:self action:@selector(integralBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
-
-//    [self addUnReadMsgKVO];   czy
     
 }
 //信用积分
@@ -577,9 +514,7 @@
     if ([TLUser user].isLogin == YES) {
         name.text = [TLUser user].nickname;
         [self.navigationController pushViewController:name animated:YES];
-
     }
-    
 }
 
 - (void)changeHeadIcon {
@@ -594,31 +529,20 @@
     [self.imagePicker picker];
 }
 
-
-
-
-
 - (void)changeHeadIconWithKey:(NSString *)key imgData:(NSData *)imgData {
     
     TLNetworking *http = [TLNetworking new];
-    
     http.showView = self.view;
     http.code = USER_CHANGE_USER_PHOTO;
     http.parameters[@"userId"] = [TLUser user].userId;
     http.parameters[@"photo"] = key;
     http.parameters[@"token"] = [TLUser user].token;
     [http postWithSuccess:^(id responseObject) {
-        
         [TLAlert alertWithSucces:[LangSwitcher switchLang:@"修改头像成功" key:nil]];
-        
         [TLUser user].photo = key;
-        
         [[TLUser user] updateUserInfoWithNotification:NO];
         [[NSNotificationCenter defaultCenter] postNotificationName:kUserInfoChange object:nil];
-        
     } failure:^(NSError *error) {
-        
-        
     }];
     
 }
@@ -626,20 +550,13 @@
 #pragma mark - MineHeaderSeletedDelegate
 
 - (void)didSelectedWithType:(MineHeaderSeletedType)type {
-    
     switch (type) {
-            
         case MineHeaderSeletedTypePhoto:
         {
             [self changeHeadIcon];
-            
         }break;
-            
-
-            
         default:
             break;
-            
     }
 }
 
