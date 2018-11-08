@@ -39,35 +39,6 @@
         self.selectedBtn.layer.borderColor = kLineColor.CGColor;
         self.selectedBtn.layer.borderWidth=1;
         self.selectedBtn.frame = self.bounds;
-        //        [self.selectedBtn setImage:[UIImage imageNamed:@"金"] forState:UIControlStateNormal];
-        //        [self.selectedBtn setImage:[UIImage imageNamed:@"银"] forState:UIControlStateSelected];
-//        [self.selectedBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-//
-//            make.top.left.right.bottom.equalTo(@0);
-//
-////            make.top.equalTo(self.contentView.mas_top);
-////            make.left.equalTo(self.contentView.mas_left);
-////            make.right.mas_equalTo(self.contentView.mas_right);
-////            make.bottom.mas_equalTo(self.contentView.mas_bottom);
-//
-//        }];
-        
-//        [self.selectedBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            //            make.edges.mas_equalTo(UIEdgeInsetsMake(15, 15, 15, 15));
-//        }];
-        
-//        self.photoImageView = [[UIImageView alloc] init];
-//        [self.contentView addSubview:self.photoImageView];
-//        self.photoImageView.clipsToBounds = YES;
-//        self.photoImageView.contentMode = UIViewContentModeScaleAspectFill;
-//        self.photoImageView.image = [UIImage imageNamed:@"打勾"];
-//        [self.photoImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.right.equalTo(self.mas_right);
-//            make.bottom.equalTo(self.selectedBtn.mas_bottom);
-//            make.height.equalTo(@21);
-//            make.width.equalTo(@21);
-//
-//        }];
         
     }
     return self;

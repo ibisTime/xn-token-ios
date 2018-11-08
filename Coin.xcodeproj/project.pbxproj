@@ -110,7 +110,6 @@
 		215979791FB947730029F177 /* WithdrawalsCoinVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 215979781FB947730029F177 /* WithdrawalsCoinVC.m */; };
 		21635DB91FBECBDD003F48B4 /* TopLabelUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 21635DB81FBECBDD003F48B4 /* TopLabelUtil.m */; };
 		216F5AFD206CD3A800F2C832 /* GengXinModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 216F5AFC206CD3A800F2C832 /* GengXinModel.m */; };
-		216F5B17206CD9C900F2C832 /* StorePayVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 216F5B04206CD9C900F2C832 /* StorePayVC.m */; };
 		216F5B39206CD9DA00F2C832 /* HomeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 216F5B1F206CD9D900F2C832 /* HomeVC.m */; };
 		216F5B3A206CD9DA00F2C832 /* CountInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 216F5B24206CD9D900F2C832 /* CountInfoModel.m */; };
 		216F5B3C206CD9DA00F2C832 /* BannerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 216F5B29206CD9D900F2C832 /* BannerModel.m */; };
@@ -118,7 +117,6 @@
 		216F5B40206CD9DA00F2C832 /* TLBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 216F5B35206CD9DA00F2C832 /* TLBannerView.m */; };
 		216F5B41206CD9DA00F2C832 /* TLBannerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 216F5B36206CD9DA00F2C832 /* TLBannerCell.m */; };
 		216F5B49206CDA3700F2C832 /* DetailWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 216F5B43206CDA3600F2C832 /* DetailWebView.m */; };
-		216F5B53206D004600F2C832 /* GoodMallVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 216F5B52206D004600F2C832 /* GoodMallVC.m */; };
 		216F5B5A206D02DC00F2C832 /* PosMiningVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 216F5B59206D02DC00F2C832 /* PosMiningVC.m */; };
 		21A7F3121FB2E2F900FAA0A2 /* BindMobileVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A7F2E41FB2E2F900FAA0A2 /* BindMobileVC.m */; };
 		21A7F3131FB2E2F900FAA0A2 /* TLAccountSetBaseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A7F2E51FB2E2F900FAA0A2 /* TLAccountSetBaseVC.m */; };
@@ -718,8 +716,6 @@
 		21635DB81FBECBDD003F48B4 /* TopLabelUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopLabelUtil.m; sourceTree = "<group>"; };
 		216F5AFB206CD3A800F2C832 /* GengXinModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GengXinModel.h; sourceTree = "<group>"; };
 		216F5AFC206CD3A800F2C832 /* GengXinModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GengXinModel.m; sourceTree = "<group>"; };
-		216F5B04206CD9C900F2C832 /* StorePayVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StorePayVC.m; sourceTree = "<group>"; };
-		216F5B05206CD9C900F2C832 /* StorePayVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StorePayVC.h; sourceTree = "<group>"; };
 		216F5B1F206CD9D900F2C832 /* HomeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeVC.m; sourceTree = "<group>"; };
 		216F5B20206CD9D900F2C832 /* HomeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeVC.h; sourceTree = "<group>"; };
 		216F5B23206CD9D900F2C832 /* CountInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CountInfoModel.h; sourceTree = "<group>"; };
@@ -734,8 +730,6 @@
 		216F5B38206CD9DA00F2C832 /* TLBannerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLBannerCell.h; sourceTree = "<group>"; };
 		216F5B43206CDA3600F2C832 /* DetailWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailWebView.m; sourceTree = "<group>"; };
 		216F5B47206CDA3600F2C832 /* DetailWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailWebView.h; sourceTree = "<group>"; };
-		216F5B51206D004600F2C832 /* GoodMallVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GoodMallVC.h; sourceTree = "<group>"; };
-		216F5B52206D004600F2C832 /* GoodMallVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GoodMallVC.m; sourceTree = "<group>"; };
 		216F5B58206D02DC00F2C832 /* PosMiningVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PosMiningVC.h; sourceTree = "<group>"; };
 		216F5B59206D02DC00F2C832 /* PosMiningVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PosMiningVC.m; sourceTree = "<group>"; };
 		21A7F2E31FB2E2F900FAA0A2 /* TLChangeMobileVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLChangeMobileVC.h; sourceTree = "<group>"; };
@@ -2215,6 +2209,7 @@
 		211DE6901FB58B4C002FCF3D /* Macro */ = {
 			isa = PBXGroup;
 			children = (
+				B88B59072109AEC300F20D1B /* FoundationHeader.h */,
 				B88B59012109AEC300F20D1B /* CoinPrefixHeader.pch */,
 				B88B59022109AEC300F20D1B /* CoinHeader.h */,
 				B88B59002109AEC300F20D1B /* CustomUIHeader.h */,
@@ -2323,15 +2318,6 @@
 			path = Update;
 			sourceTree = "<group>";
 		};
-		216F5B03206CD9C900F2C832 /* Pay确认支付 */ = {
-			isa = PBXGroup;
-			children = (
-				216F5B05206CD9C900F2C832 /* StorePayVC.h */,
-				216F5B04206CD9C900F2C832 /* StorePayVC.m */,
-			);
-			path = "Pay确认支付";
-			sourceTree = "<group>";
-		};
 		216F5B1D206CD9D900F2C832 /* 发现 */ = {
 			isa = PBXGroup;
 			children = (
@@ -2340,8 +2326,6 @@
 				1F35826221870B1400F1665B /* View */,
 				7A8A5D0E20EA0677002D9A48 /* RedEnvelope红包 */,
 				216F5B54206D005200F2C832 /* POS量化理财 */,
-				216F5B50206D002400F2C832 /* Mall余币宝 */,
-				216F5B03206CD9C900F2C832 /* Pay确认支付 */,
 			);
 			path = "发现";
 			sourceTree = "<group>";
@@ -2381,15 +2365,6 @@
 				216F5B43206CDA3600F2C832 /* DetailWebView.m */,
 			);
 			path = Web;
-			sourceTree = "<group>";
-		};
-		216F5B50206D002400F2C832 /* Mall余币宝 */ = {
-			isa = PBXGroup;
-			children = (
-				216F5B51206D004600F2C832 /* GoodMallVC.h */,
-				216F5B52206D004600F2C832 /* GoodMallVC.m */,
-			);
-			path = "Mall余币宝";
 			sourceTree = "<group>";
 		};
 		216F5B54206D005200F2C832 /* POS量化理财 */ = {
@@ -3834,7 +3809,6 @@
 				B88B58FF2109AEC300F20D1B /* country.plist */,
 				B88B58F72109AEC300F20D1B /* TLTabBarController.h */,
 				B88B59042109AEC300F20D1B /* TLTabBarController.m */,
-				B88B59072109AEC300F20D1B /* FoundationHeader.h */,
 				B88B59032109AEC300F20D1B /* UIColor+theme.m */,
 				B88B59132109AEC400F20D1B /* UIColor+theme.h */,
 			);
@@ -4322,7 +4296,6 @@
 				B8086532211EA17D00755158 /* BTCErrors.m in Sources */,
 				211A53321FBFE4F100CC6294 /* RateDescTableView.m in Sources */,
 				B8D938CF2116C2AC00B2AA88 /* QiestionDetailVC.m in Sources */,
-				216F5B17206CD9C900F2C832 /* StorePayVC.m in Sources */,
 				1F35826621870D8F00F1665B /* NewHelpCentetVC.m in Sources */,
 				B83D1E0F20CE7076007835DB /* WalletForwordVC.m in Sources */,
 				7A2CC6C4215DC88C00B27E2D /* PGDatePickerView.m in Sources */,
@@ -4379,7 +4352,6 @@
 				B8086508211EA17D00755158 /* BTCPriceSource.m in Sources */,
 				1F816BF62180953D0078B945 /* SGQRCodeGenerateManager.m in Sources */,
 				B80864FD211EA17D00755158 /* BTCTransaction+Tests.m in Sources */,
-				216F5B53206D004600F2C832 /* GoodMallVC.m in Sources */,
 				7A8A5D1B20EA131A002D9A48 /* SendRedEnvelopeView.m in Sources */,
 				B8C2057020CF984900952765 /* WalletDelectVC.m in Sources */,
 				211DE6AD1FB58B4C002FCF3D /* TLAlert.m in Sources */,

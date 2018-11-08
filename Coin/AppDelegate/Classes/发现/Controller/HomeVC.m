@@ -13,7 +13,6 @@
 #import "HomeHeaderView.h"
 #import "TLProgressHUD.h"
 
-#import "GoodMallVC.h"
 #import "PosMiningVC.h"
 #import "RateDescVC.h"
 #import "RedEnvelopeVC.h"

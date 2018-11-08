@@ -144,16 +144,19 @@
     BTCKeychain *keychain = [mnemonic keychain];
 
     switch ([AppConfig config].runEnv) {
-
         case 0:
+            keychain = [keychain derivedKeychainWithPath:@"m/44'/0'/0'/0/0"];;
             return keychain.key.privateKeyAddress.string;
 
             break;
         case 1:
+            keychain = [keychain derivedKeychainWithPath:@"m/44'/1'/0'/0/0"];;
             return keychain.key.privateKeyAddressTestnet.string;
 
             break;
         case 2:
+            
+            keychain = [keychain derivedKeychainWithPath:@"m/44'/1'/0'/0/0"];;
             return keychain.key.privateKeyAddressTestnet.string;
 
             break;
@@ -168,14 +171,17 @@
     switch ([AppConfig config].runEnv) {
             
         case 0:
+            keychain = [keychain derivedKeychainWithPath:@"m/44'/0'/0'/0/0"];
             return keychain.key.address.string;
-            
             break;
         case 1:
+            
+            keychain = [keychain derivedKeychainWithPath:@"m/44'/1'/0'/0/0"];
             return keychain.key.addressTestnet.string;
             
             break;
         case 2:
+            keychain = [keychain derivedKeychainWithPath:@"m/44'/1'/0'/0/0"];
             return keychain.key.addressTestnet.string;
             
             break;

@@ -96,39 +96,26 @@ NSString *const kGoogleAuthClose = @"0";
     NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
     NSString *userId = [userDefault objectForKey:USER_ID_KEY];
     NSString *token = [userDefault objectForKey:TOKEN_ID_KEY];
-    
     //
     self.userId = userId;
     self.token = token;
     self.localMoney = [[NSUserDefaults standardUserDefaults] objectForKey:KLocalMoney];
-    
-   
-    
     //
     NSDictionary *dict = [userDefault objectForKey:USER_INFO_DICT_KEY];
     [self setUserInfoWithDict:dict];
-    
 }
 
 - (BOOL)isLogin {
-    
     if ([self checkLogin]) {
-        
         [self loadUserInfoFromDB];
         return YES;
-        
-    } else {
-        
+    }else{
         return NO;
     }
-
-
 }
 
 - (void)reLogin {
-    
     self.userName = [UserDefaultsUtil getUserDefaultName];
-    
     self.userPassward = [UserDefaultsUtil getUserDefaultPassword];
     
     TLNetworking *http = [TLNetworking new];
