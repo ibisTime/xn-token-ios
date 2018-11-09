@@ -95,27 +95,69 @@ static NSString *platformCell1 = @"AccountMoneyCellTableViewCell";
     
     
     return cell;
-//    if (self.platforms.count > 0) {
-//
-//
-//
-//    }
-    
-    
-//    if (self.isLocal == YES) {
-//
-//
-//    }else
-//    {
-//        PlatformCell *cell = [tableView dequeueReusableCellWithIdentifier:platformCell forIndexPath:indexPath];
-//        cell.platform = self.platforms[indexPath.row];
-//        return cell;
-//    }
-//
-//    return nil;
-    
     
 }
+
+
+//设置cell可编辑状态
+-(BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
+    return YES;
+}
+
+//定义编辑样式为删除样式
+-(UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return UITableViewCellEditingStyleNone;
+}
+
+//设置返回存放侧滑按钮数组
+-(NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    //这是iOS8以后的方法
+    UITableViewRowAction *transferBtn = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:[LangSwitcher switchLang:@"转账" key:nil] handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
+        
+        if ([self.refreshDelegate respondsToSelector:@selector(refreshTableView:setCurrencyModel:setTitle:)]) {
+            if (self.isLocal == YES) {
+                [self WhetherOrNotShown];
+                for (int j = 0; j<self.platforms.count; j++) {
+                    if ([arr[indexPath.row][@"symbol"] isEqualToString:self.platforms[j].symbol]) {
+                        [self.refreshDelegate refreshTableView:self setCurrencyModel:self.platforms[j] setTitle:@"转账"];
+                    }
+                }
+            }else
+            {
+                [self.refreshDelegate refreshTableView:self setCurrencyModel:self.platforms[indexPath.row] setTitle:@"转账"];
+            }
+            
+        }
+    }];
+    
+    
+    UITableViewRowAction *collectionBtn = [UITableViewRowAction  rowActionWithStyle:UITableViewRowActionStyleNormal title:[LangSwitcher switchLang:@"收款" key:nil] handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
+        
+        if ([self.refreshDelegate respondsToSelector:@selector(refreshTableView:setCurrencyModel:setTitle:)]) {
+            if (self.isLocal == YES) {
+                [self WhetherOrNotShown];
+                for (int j = 0; j<self.platforms.count; j++) {
+                    if ([arr[indexPath.row][@"symbol"] isEqualToString:self.platforms[j].symbol]) {
+                        [self.refreshDelegate refreshTableView:self setCurrencyModel:self.platforms[j] setTitle:@"收款"];
+                    }
+                }
+            }else
+            {
+                [self.refreshDelegate refreshTableView:self setCurrencyModel:self.platforms[indexPath.row] setTitle:@"收款"];
+            }
+            
+        }
+        
+    }];
+//    transferBtn.backgroundColor = [UIColor blueColor];
+//
+//    collectionBtn.backgroundColor = [UIColor orangeColor];
+    return @[transferBtn,collectionBtn];
+    
+}
+
+
 
 #pragma mark - UITableViewDelegate
 

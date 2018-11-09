@@ -50,13 +50,13 @@
 }
 
 - (void)setPlaceHolder:(NSString *)placeHolder {
-    
+
     _placeHolder = [placeHolder copy];
     NSAttributedString *attrStr = [[NSAttributedString alloc] initWithString:_placeHolder attributes:@{
-                                                                                                          NSForegroundColorAttributeName:[UIColor colorWithHexString:@"#bbbbbb"]
+                                                                                                          NSForegroundColorAttributeName:RGB(208, 208, 211)
                                                                                                           }];
     self.attributedPlaceholder = attrStr;
-    
+
 }
 
 

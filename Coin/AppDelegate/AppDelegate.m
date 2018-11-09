@@ -163,7 +163,7 @@
 //                           clientId: @"mobile_sdk_client_7af3526c83d0c1999bc3"
 //                         zendeskUrl: @"https://thachainhelp.zendesk.com"];
 //    id<ZDKObjCIdentity> userIdentity = [[ZDKObjCAnonymous alloc] initWithName:nil email:nil];
-//    [[ZDKZendesk instance] setIdentity:userIdentity];
+//    [[ZDKZendesk instance] setIdentity:userIdentity];8
 //
 //    [ZDKSupport initializeWithZendesk: [ZDKZendesk instance]];
     

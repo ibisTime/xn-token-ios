@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 #import "MJRefresh.h"
-
+#import "CurrencyModel.h"
 @class TLTableView;
 @protocol RefreshDelegate <NSObject>
 
@@ -28,6 +28,8 @@
 -(void)refreshTableView:(TLTableView *)refreshTableview Slider:(UISlider *)slider;
 
 -(void)refreshTableView:(TLTableView *)refreshTableview scrollView:(UIScrollView *)scroll;
+
+-(void)refreshTableView:(TLTableView *)refreshTableview setCurrencyModel:(CurrencyModel *)model setTitle:(NSString *)title;
 
 @end
 

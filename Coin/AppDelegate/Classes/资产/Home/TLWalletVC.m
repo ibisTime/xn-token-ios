@@ -39,6 +39,7 @@
 #import "MnemonicUtil.h"
 #import "BTCKeychain.h"
 #import "BillModel.h"
+#import "WalletForwordVC.h"
 
 @interface TLWalletVC ()<RefreshDelegate>
 
@@ -148,9 +149,9 @@
         }
         //        [self getMyCeurrencyList];
         //1.7.0版本升级适配
-//        if (btcadd != nil && btcadd.length > 0 && pwd !=nil) {
-//            return;
-//        }
+        if (btcadd != nil && btcadd.length > 0 && pwd !=nil) {
+            return;
+        }
 
         NSArray *words = [word componentsSeparatedByString:@" "];
         //这里第一次进行BTC的私钥和地址创建 存到用户表里面 和币种表
@@ -468,6 +469,51 @@
             [weakSelf.navigationController pushViewController:accountVC animated:YES];
         }
     };
+}
+
+-(void)refreshTableView:(TLTableView *)refreshTableview setCurrencyModel:(CurrencyModel *)model setTitle:(NSString *)title
+{
+    if ([title isEqualToString:@"转账"]) {
+        if (self.switchTager == 1) {
+            [self clickWithdrawWithCurrency:model];
+            
+
+        }else
+        {
+            WalletForwordVC *coinVC = [WalletForwordVC new];
+            coinVC.currency = model;
+            [self.navigationController pushViewController:coinVC animated:YES];
+        }
+        
+    }else
+    {
+        RechargeCoinVC *coinVC = [RechargeCoinVC new];
+        coinVC.currency = model;
+        [self.navigationController pushViewController:coinVC animated:YES];
+    }
+}
+
+- (void)clickWithdrawWithCurrency:(CurrencyModel *)currencyModel {
+    
+    CoinWeakSelf;
+    //    实名认证成功后，判断是否设置资金密码
+    if ([[TLUser user].tradepwdFlag isEqualToString:@"0"]) {
+        
+        TLPwdType pwdType = TLPwdTypeSetTrade;
+        TLPwdRelatedVC *pwdRelatedVC = [[TLPwdRelatedVC alloc] initWithType:pwdType];
+        pwdRelatedVC.isWallet = YES;
+        pwdRelatedVC.success = ^{
+            
+            [weakSelf clickWithdrawWithCurrency:currencyModel];
+        };
+        [self.navigationController pushViewController:pwdRelatedVC animated:YES];
+        return ;
+        
+    }
+    
+    WithdrawalsCoinVC *coinVC = [WithdrawalsCoinVC new];
+    coinVC.currency = currencyModel;
+    [self.navigationController pushViewController:coinVC animated:YES];
 }
 
 

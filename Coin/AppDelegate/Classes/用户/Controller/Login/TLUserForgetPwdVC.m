@@ -154,51 +154,16 @@
     CGFloat h = ACCOUNT_HEIGHT;
     
     CGFloat btnMargin = 15;
-//    UILabel *lab = [UILabel labelWithBackgroundColor:kWhiteColor textColor:kBlackColor font:30];
-//    lab.text = @"找回密码!";
-//    [self.view addSubview:lab];
-//    [lab mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.equalTo(@40);
-//        make.left.equalTo(@30);
-//
-//
-//    }];
-    //账号
-//    UILabel *titlePhone = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:14];
-//    [self.view addSubview:titlePhone];
-//    titlePhone.text = [LangSwitcher switchLang:@"中国" key:nil];
-//    self.titlePhpne = titlePhone;
-//    [titlePhone mas_makeConstraints:^(MASConstraintMaker *make) {
-//
-//        make.top.equalTo(lab.mas_bottom).offset(20);
-//        make.left.mas_equalTo(20);
-//    }];
-//    //账号
-//    UILabel *sureLab = [UILabel labelWithTitle:@"手机号" frame:CGRectMake(20, kHeight(122), w, 22)];
-//    sureLab.font = [UIFont systemFontOfSize:14];
-//    sureLab.textAlignment = NSTextAlignmentLeft;
-//    sureLab.textColor = kTextColor;
-//    [self.view addSubview:sureLab];
-//
-    
-    
+
     UIImageView *pic = [[UIImageView alloc] init];
     self.pic = pic;
     pic.image = kImage(@"中国国旗");
-//    pic.userInteractionEnabled = YES;
-  
-    //    UITapGestureRecognizer *tap3 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(chooseCountry)];
-//
-//    [pic addGestureRecognizer:tap3];
     pic.contentMode = UIViewContentModeScaleToFill;
     pic.frame = CGRectMake(17, 30, 24, 16);
     [self.view addSubview:pic];
+    
     UILabel *PhoneCode = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:14];
     [self.view addSubview:PhoneCode];
-//    PhoneCode.userInteractionEnabled = YES;
-//    UITapGestureRecognizer *tap2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(chooseCountry)];
-//
-//    [PhoneCode addGestureRecognizer:tap2];
     PhoneCode.text = [LangSwitcher switchLang:@"+86" key:nil];
     self.PhoneCode = PhoneCode;
     [PhoneCode mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -444,13 +409,11 @@
         
     } failure:^(NSError *error) {
 
-        
     }];
-    
 }
+
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
-    
     [self.view endEditing:YES];
 }
 

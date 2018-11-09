@@ -91,61 +91,7 @@
     [self loadData];
 
     [self changeCodeLogin];
-    
- 
-//    if ([dic hasPrefix:@"CN"]) {
-//
-//
-//    }else{
-//
-//        self.pic.image = kImage(@"中国国旗");
-//
-//        self.PhoneCode.text = [LangSwitcher switchLang:@"+60" key:nil];
-//
-//    }
-//    NSLog(@"%@",dic);
-    //腾讯云登录成功
-//    [self setUpNotification];
-
-
-//    UILongPressGestureRecognizer * longPressGesture =[[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(cellLongPress:)];
-//
-//    longPressGesture.minimumPressDuration=1.5f;//设置长按 时间
-//    [self.view addGestureRecognizer:longPressGesture];
-
-
 }
-
-//-(void)cellLongPress:(UILongPressGestureRecognizer *)longRecognizer{
-//    if (longRecognizer.state==UIGestureRecognizerStateBegan) {
-//        //成为第一响应者，需重写该方法
-//        [self becomeFirstResponder];
-//
-//        UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:@"切换服务器" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
-//
-//        UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"研发" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-//            //    研发
-//            [AppConfig config].runEnv = RunEnvDev;
-//
-//
-//        }];
-//        UIAlertAction *action2 = [UIAlertAction actionWithTitle:@"测试" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-//            //    测试
-//            [AppConfig config].runEnv = RunEnvTest;
-//            NSLog(@"点击了取消");
-//        }];
-//        UIAlertAction *action3 = [UIAlertAction actionWithTitle:@"正式" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-//            [AppConfig config].runEnv = RunEnvRelease;
-//        }];
-//        //把action添加到actionSheet里
-//        [actionSheet addAction:action1];
-//        [actionSheet addAction:action2];
-//        [actionSheet addAction:action3];
-//
-//        //相当于之前的[actionSheet show];
-//        [self presentViewController:actionSheet animated:YES completion:nil];
-//    }
-//}
 
 
 
@@ -334,6 +280,8 @@
     UIImageView *logoView = [[UIImageView alloc] init];
     logoView.contentMode = UIViewContentModeScaleToFill;
     [imageView addSubview:logoView];
+    
+    
     logoView.image = kImage(@"logo");
     [logoView mas_makeConstraints:^(MASConstraintMaker *make) {
         
@@ -469,15 +417,20 @@
     UIView *lineView = [[UIView alloc] init];
     lineView.backgroundColor = kLineColor;
     [bgView addSubview:lineView];
-    lineView.frame = CGRectMake(20, phone.yy, w-40-40, 2);
+    lineView.frame = CGRectMake(20, phone.yy, w-40-40, 1);
     
     
     //密码
-    AccountTf *pwdTf = [[AccountTf alloc] initWithFrame:CGRectMake(15, phone.yy + 3, w-180, h)];
+    AccountTf *pwdTf = [[AccountTf alloc] initWithFrame:CGRectMake(0, phone.yy + 1, w-180, h - 2)];
     pwdTf.secureTextEntry = YES;
 //    pwdTf.leftIconView.image = [UIImage imageNamed:@"密码"];
     pwdTf.placeHolder = [LangSwitcher switchLang:@"请输入密码" key:nil];
+    pwdTf.font = Font(13.0);
+//    pwdTf.textColor = [UIColor colorWithHexString:@"#484848"];
     [bgView addSubview:pwdTf];
+    
+    
+    
 //    pwdTf.keyboardType = UIKeyboardTypePhonePad;
     pwdTf.returnKeyType = UIReturnKeyDone;
     pwdTf.delegate =self;
@@ -485,7 +438,7 @@
     UIView *line = [[UIView alloc] init];
     line.backgroundColor = kLineColor;
     [bgView addSubview:line];
-    line.frame = CGRectMake(20, pwdTf.yy, w-40-40, 2);
+    line.frame = CGRectMake(20, pwdTf.yy, w-40-40, 1);
     
     UILabel *forgetLab = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor2 font:14];
     forgetLab.textAlignment = NSTextAlignmentCenter;
@@ -499,7 +452,7 @@
     
     [forgetLab addGestureRecognizer:tap1];
     //验证码
-    TLCaptchaView *captchaView = [[TLCaptchaView alloc] initWithFrame:CGRectMake(-70, phone.yy + 1, w-30+50, phone.height)];
+    TLCaptchaView *captchaView = [[TLCaptchaView alloc] initWithFrame:CGRectMake(-70, phone.yy + 1, w-30+50, phone.height - 2)];
     captchaView.captchaTf.leftLbl.text = @"";
     captchaView.captchaTf.leftLbl.frame = CGRectZero;
     captchaView.captchaBtn.frame = CGRectMake(0, 7, 85, h - 15);
@@ -511,34 +464,7 @@
 
     captchaView.hidden = YES;
     [captchaView.captchaBtn addTarget:self action:@selector(sendCaptcha) forControlEvents:UIControlEventTouchUpInside];
-//    UIButton *codeButton = [UIButton buttonWithTitle:@"获取验证码" titleColor:kAppCustomMainColor backgroundColor:kClearColor titleFont:14 cornerRadius:3.0];
-//    self.codeButton = codeButton;
-//    codeButton.layer.borderWidth = 1.0;
-//    codeButton.layer.borderColor = kAppCustomMainColor.CGColor;
-////    [bgView addSubview:codeButton];
-//    codeButton.frame = CGRectMake(w-180, phone.yy+7, 120, h-10);;
-//    codeButton.hidden = YES;
-//    
-//    [codeButton addTarget:self action:@selector(getCode) forControlEvents:UIControlEventTouchUpInside];
-//    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(findPwd)];
-//    [forgetLab addGestureRecognizer:tap];
-    
-//    for (int i = 0; i < 2; i++) {
-//
-//        UIView *line = [[UIView alloc] init];
-//
-//        line.backgroundColor = kLineColor;
-//
-//        [bgView addSubview:line];
-//        [line mas_makeConstraints:^(MASConstraintMaker *make) {
-//
-//            make.left.mas_equalTo(0);
-//            make.right.mas_equalTo(0);
-//            make.height.mas_equalTo(0.5);
-//            make.top.mas_equalTo((i+1)*h);
-//
-//        }];
-//    }
+
     //登录
     UIButton *loginBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"登录" key:nil] titleColor:kWhiteColor backgroundColor:kAppCustomMainColor titleFont:17.0 cornerRadius:5];
     [loginBtn addTarget:self action:@selector(goLogin) forControlEvents:UIControlEventTouchUpInside];
