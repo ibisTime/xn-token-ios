@@ -41,6 +41,7 @@
 #import <ZendeskProviderSDK/ZendeskProviderSDK.h>
 #import <WeiboSDK.h>
 #import "NSBundle+Language.h"
+#import "TheInitialVC.h"
 
 @interface AppDelegate ()<WeiboSDKDelegate>
 
@@ -349,20 +350,34 @@
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
-    if (![AppConfig config].isChecking) {
-        TLUpdateVC *updateVC = [[TLUpdateVC alloc] init];
-        TLNavigationController *na = [[TLNavigationController alloc] initWithRootViewController:updateVC];
-        na.isLanch = YES;
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isLanch"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-        if ([TLUser user].checkLogin == NO) {
-            
+    
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"BOOLFORKEY"])
+    {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"BOOLFORKEY"];
+        TheInitialVC *initialVC = [[TheInitialVC alloc] init];
+        UINavigationController *na = [[UINavigationController alloc] initWithRootViewController:initialVC];
+//        na.isLanch = YES;
+        self.window.rootViewController = na;
+    }else
+    {
+        if (![AppConfig config].isChecking) {
+            TLUpdateVC *updateVC = [[TLUpdateVC alloc] init];
+            TLNavigationController *na = [[TLNavigationController alloc] initWithRootViewController:updateVC];
+            na.isLanch = YES;
+            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isLanch"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            if ([TLUser user].checkLogin == NO) {
+                
+            }
+            self.window.rootViewController = updateVC;
+        }else{
+            TLTabBarController *tabBarCtrl = [[TLTabBarController alloc] init];
+            self.window.rootViewController = tabBarCtrl;
         }
-        self.window.rootViewController = updateVC;
-    }else{
-        TLTabBarController *tabBarCtrl = [[TLTabBarController alloc] init];
-        self.window.rootViewController = tabBarCtrl;
     }
+    
+    
+    
 }
 
 

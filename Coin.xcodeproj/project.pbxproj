@@ -10,6 +10,9 @@
 		1F35826621870D8F00F1665B /* NewHelpCentetVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F35826421870D8C00F1665B /* NewHelpCentetVC.m */; };
 		1F358B3921880B4C00F1665B /* UsdtClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F358B3821880B4C00F1665B /* UsdtClient.m */; };
 		1F358B3D218ABC4500F1665B /* USDTRecordModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F358B3C218ABC4500F1665B /* USDTRecordModel.m */; };
+		1F4E896121996EDE007B3015 /* TheInitialVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4E896021996EDE007B3015 /* TheInitialVC.m */; };
+		1F4E89642199816E007B3015 /* TheInitialView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4E89632199816E007B3015 /* TheInitialView.m */; };
+		1F4E896C21998572007B3015 /* RegisterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4E896B21998572007B3015 /* RegisterVC.m */; };
 		1F709D5E218161D8002D1CC4 /* keyTransferTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F709D5D218161D8002D1CC4 /* keyTransferTableView.m */; };
 		1F709D61218162A5002D1CC4 /* TransformButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F709D60218162A5002D1CC4 /* TransformButtonCell.m */; };
 		1F709D6421817246002D1CC4 /* TransferNumberCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F709D6321817246002D1CC4 /* TransferNumberCell.m */; };
@@ -514,6 +517,12 @@
 		1F358B3821880B4C00F1665B /* UsdtClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UsdtClient.m; sourceTree = "<group>"; };
 		1F358B3B218ABC4500F1665B /* USDTRecordModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = USDTRecordModel.h; sourceTree = "<group>"; };
 		1F358B3C218ABC4500F1665B /* USDTRecordModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = USDTRecordModel.m; sourceTree = "<group>"; };
+		1F4E895F21996EDE007B3015 /* TheInitialVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TheInitialVC.h; sourceTree = "<group>"; };
+		1F4E896021996EDE007B3015 /* TheInitialVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TheInitialVC.m; sourceTree = "<group>"; };
+		1F4E89622199816E007B3015 /* TheInitialView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TheInitialView.h; sourceTree = "<group>"; };
+		1F4E89632199816E007B3015 /* TheInitialView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TheInitialView.m; sourceTree = "<group>"; };
+		1F4E896A21998572007B3015 /* RegisterVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RegisterVC.h; sourceTree = "<group>"; };
+		1F4E896B21998572007B3015 /* RegisterVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RegisterVC.m; sourceTree = "<group>"; };
 		1F709D5C218161D8002D1CC4 /* keyTransferTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = keyTransferTableView.h; sourceTree = "<group>"; };
 		1F709D5D218161D8002D1CC4 /* keyTransferTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = keyTransferTableView.m; sourceTree = "<group>"; };
 		1F709D5F218162A5002D1CC4 /* TransformButtonCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TransformButtonCell.h; sourceTree = "<group>"; };
@@ -1786,6 +1795,35 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
+		1F4E896521998510007B3015 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				1F4E896E219985A5007B3015 /* 注册 */,
+				1F4E896D21998592007B3015 /* 起始业 */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		1F4E896D21998592007B3015 /* 起始业 */ = {
+			isa = PBXGroup;
+			children = (
+				1F4E895F21996EDE007B3015 /* TheInitialVC.h */,
+				1F4E896021996EDE007B3015 /* TheInitialVC.m */,
+				1F4E89622199816E007B3015 /* TheInitialView.h */,
+				1F4E89632199816E007B3015 /* TheInitialView.m */,
+			);
+			path = "起始业";
+			sourceTree = "<group>";
+		};
+		1F4E896E219985A5007B3015 /* 注册 */ = {
+			isa = PBXGroup;
+			children = (
+				1F4E896A21998572007B3015 /* RegisterVC.h */,
+				1F4E896B21998572007B3015 /* RegisterVC.m */,
+			);
+			path = "注册";
+			sourceTree = "<group>";
+		};
 		1F709D5B2180A7FC002D1CC4 /* SGQRCode */ = {
 			isa = PBXGroup;
 			children = (
@@ -2521,6 +2559,7 @@
 				211DE6901FB58B4C002FCF3D /* Macro */,
 				B88B58F32109AEC300F20D1B /* Other */,
 				216F5AF0206CC73D00F2C832 /* Update */,
+				1F4E896521998510007B3015 /* Login */,
 				21A7F2D81FB2E2F900FAA0A2 /* 用户 */,
 				2E394FA41FB055DE00BA0829 /* 资产 */,
 				216F5B1D206CD9D900F2C832 /* 发现 */,
@@ -2749,7 +2788,6 @@
 			isa = PBXGroup;
 			children = (
 				7A07F815216CB2170026EB7A /* Controller */,
-				7A07F814216CB2150026EB7A /* Model */,
 				7A07F813216CB2130026EB7A /* View */,
 			);
 			path = "GlobalRevenueList全球收益榜";
@@ -2768,13 +2806,6 @@
 				7A07F823216CCA3F0026EB7A /* GlobalRevenueListBottomView.m */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		7A07F814216CB2150026EB7A /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		7A07F815216CB2170026EB7A /* Controller */ = {
@@ -4168,6 +4199,7 @@
 				B80864F3211EA17D00755158 /* BTCAssetType.m in Sources */,
 				7A8A5D2520EA301E002D9A48 /* RedEnvelopeShoreVC.m in Sources */,
 				B8C2057620CF9FFD00952765 /* WalletAdressTableView.m in Sources */,
+				1F4E89642199816E007B3015 /* TheInitialView.m in Sources */,
 				211DE6BC1FB58B4C002FCF3D /* NSString+Extension.m in Sources */,
 				B88D6C6F20EDF39F0043832C /* TLFastvc.m in Sources */,
 				7A2CC66A215BBCEA00B27E2D /* PosMyInvestmentHeadView.m in Sources */,
@@ -4519,6 +4551,7 @@
 				1F709D6A2181C4C4002D1CC4 /* WANTransfer.m in Sources */,
 				1F709D712181E51E002D1CC4 /* UIView+Banner.m in Sources */,
 				B85FE46F21287D2300C9F60C /* PayModel.m in Sources */,
+				1F4E896C21998572007B3015 /* RegisterVC.m in Sources */,
 				1F709D722181E51E002D1CC4 /* HW3DBannerView.m in Sources */,
 				7AABEAFB2148FEEF00283BC7 /* PoliteInstructionsVC.m in Sources */,
 				7A07F834216CDB000026EB7A /* InviteEarningCell.m in Sources */,
@@ -4554,6 +4587,7 @@
 				7AFBAE31216DD32A006CF464 /* MyIncomeTopModel.m in Sources */,
 				B8CF2CC821214A8800055706 /* CommentTableView.m in Sources */,
 				4C2438252066C2F1003B35F3 /* TopSegmentUtil.m in Sources */,
+				1F4E896121996EDE007B3015 /* TheInitialVC.m in Sources */,
 				B88B592A2109B2EF00F20D1B /* ZLGestureLockViewController.m in Sources */,
 				7A2CC6B4215DC88B00B27E2D /* PGDatePicker+DateAndTime.m in Sources */,
 				2ED651D22010443D0065A1B0 /* TLAboutUsVC.m in Sources */,
