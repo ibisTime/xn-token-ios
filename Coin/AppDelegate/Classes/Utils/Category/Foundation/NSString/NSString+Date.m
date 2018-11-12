@@ -7,8 +7,7 @@
 //
 
 #import "NSString+Date.h"
-#import "CoinHeader.h"
-#import "AppMacro.h"
+
 
 NSString  * const kCDSysTimeFormat = @"MMM dd, yyyy hh:mm:ss aa";
 

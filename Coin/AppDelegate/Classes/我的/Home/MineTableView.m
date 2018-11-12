@@ -7,7 +7,6 @@
 //
 
 #import "MineTableView.h"
-#import "CoinHeader.h"
 #import "MineCell.h"
 
 @interface MineTableView ()<UITableViewDataSource, UITableViewDelegate>

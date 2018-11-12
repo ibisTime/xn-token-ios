@@ -7,8 +7,6 @@
 //
 
 #import "MineHeaderView.h"
-#import "CoinHeader.h"
-
 @interface MineHeaderView()
 
 //背景

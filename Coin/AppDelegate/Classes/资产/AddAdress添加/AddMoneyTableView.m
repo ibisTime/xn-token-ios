@@ -7,7 +7,6 @@
 //
 
 #import "AddMoneyTableView.h"
-#import "CoinHeader.h"
 #import "AddMoneyCell.h"
 @interface AddMoneyTableView()<UITableViewDataSource, UITableViewDelegate>
 

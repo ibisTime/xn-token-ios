@@ -7,12 +7,7 @@
 //
 
 #import "IdAuthVC.h"
-#import "CoinHeader.h"
-
 #import "TLTextField.h"
-#import "NSString+Check.h"
-
-#import "AppMacro.h"
 
 @interface IdAuthVC ()
 //真实姓名

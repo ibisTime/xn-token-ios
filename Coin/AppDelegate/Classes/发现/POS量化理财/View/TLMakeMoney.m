@@ -7,8 +7,6 @@
 //
 
 #import "TLMakeMoney.h"
-#import "CoinHeader.h"
-#import "AppColorMacro.h"
 #import "BillCell.h"
 #import "questionListCells.h"
 #import "MakeMoneyCell.h"

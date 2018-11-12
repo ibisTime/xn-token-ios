@@ -8,7 +8,6 @@
 
 #import "TLPlaceholderView.h"
 
-#import "CoinHeader.h"
 #import <CDCommon/DeviceUtil.h>
 //#import "MyUIDefine.h"    czy
 

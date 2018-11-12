@@ -8,7 +8,6 @@
 
 #import "EditVC.h"
 
-#import "CoinHeader.h"
 
 #import "TLTextField.h"
 

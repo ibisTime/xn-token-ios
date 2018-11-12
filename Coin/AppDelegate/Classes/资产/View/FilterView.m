@@ -7,7 +7,6 @@
 //
 
 #import "FilterView.h"
-#import "CoinHeader.h"
 #import "UIColor+Extension.h"
 
 @interface FilterView ()<UIPickerViewDataSource,UIPickerViewDelegate>

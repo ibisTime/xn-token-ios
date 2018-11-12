@@ -98,14 +98,10 @@
 - (void)configData
 {
     NSString *money ;
-   
-    
     //获取缓存的国家
     NSData *data   =  [[NSUserDefaults standardUserDefaults] objectForKey:@"chooseModel"];
-    
     //有缓存加载缓存国家
     if (data) {
-        
         CountryModel *model = [NSKeyedUnarchiver unarchiveObjectWithData:data];
         
         //如果国家编号不为空，说明是1.7.0之后缓存的，直接设置即可
@@ -498,7 +494,6 @@
 - (void)sendCaptcha
 {
     if (![self.phoneTf.text isPhoneNum]) {
-        
         [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入正确的手机号" key:nil]];
         return;
     }
@@ -506,14 +501,14 @@
     NSString *lang;
     if (type == LangTypeSimple || type == LangTypeTraditional) {
         lang = @"zh_CN";
-    }else if (type == LangTypeKorean)
+    }
+    else if (type == LangTypeKorean)
     {
         lang = @"ko";
-
-
-    }else{
+    }
+    else
+    {
         lang = @"en";
-
     }
     UIViewController *vc = [MSAuthVCFactory simapleVerifyWithType:(MSAuthTypeSlide) language:lang Delegate:self authCode:@"0335" appKey:nil];
     [self.navigationController pushViewController:vc animated:YES];
@@ -625,6 +620,9 @@
 //    }
 //
 //}
+
+
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 
 {

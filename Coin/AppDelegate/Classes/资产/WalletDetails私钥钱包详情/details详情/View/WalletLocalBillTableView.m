@@ -7,8 +7,6 @@
 //
 
 #import "WalletLocalBillTableView.h"
-#import "CoinHeader.h"
-#import "AppColorMacro.h"
 #import "BillCell.h"
 #import "LocalBillCell.h"
 @interface  WalletLocalBillTableView()<UITableViewDelegate, UITableViewDataSource>

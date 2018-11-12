@@ -8,7 +8,6 @@
 
 #import "HourPickerView.h"
 
-#import "CoinHeader.h"
 #import "UIColor+Extension.h"
 
 @interface HourPickerView ()<UIPickerViewDataSource,UIPickerViewDelegate>

@@ -8,7 +8,6 @@
 
 #import "TLMineVC.h"
 
-#import "CoinHeader.h"
 #import "APICodeMacro.h"
 
 #import "MineGroup.h"
@@ -21,9 +20,7 @@
 
 #import "TLImagePicker.h"
 #import "TLUploadManager.h"
-#import "AppConfig.h"
 
-//#import <ZDCChat/ZDCChat.h>
 #import <IQKeyboardManager/IQKeyboardManager.h>
 #import <CDCommon/UIScrollView+TLAdd.h>
 

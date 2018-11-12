@@ -7,7 +7,6 @@
 //
 
 #import "LocalSettingTableView.h"
-#import "CoinHeader.h"
 #import "SettingCell.h"
 #import "ZLGestureLockViewController.h"
 

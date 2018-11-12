@@ -7,8 +7,6 @@
 //
 
 #import "BillTableView.h"
-#import "CoinHeader.h"
-#import "AppColorMacro.h"
 #import "BillCell.h"
 
 @interface BillTableView ()<UITableViewDelegate, UITableViewDataSource>

@@ -8,7 +8,6 @@
 
 #import "LangChooseVC.h"
 #import "SettingModel.h"
-#import "CoinHeader.h"
 #import <CDCommon/UIScrollView+TLAdd.h>
 #import "TLTabBarController.h"
 #import "LangSwitcher.h"

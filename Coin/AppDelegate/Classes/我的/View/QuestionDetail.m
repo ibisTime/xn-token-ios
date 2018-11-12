@@ -7,8 +7,6 @@
 //
 
 #import "QuestionDetail.h"
-#import "CoinHeader.h"
-#import "AppColorMacro.h"
 #import "QDetailCell.h"
 #import "NSString+Date.h"
 @interface   QuestionDetail()<UITableViewDelegate, UITableViewDataSource>

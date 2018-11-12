@@ -349,51 +349,22 @@
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
-   
-//    if (![AppConfig config].isChecking) {
-//        //先配置到，检查更新的VC,开启更新检查
-//        BuildWalletMineVC *MineVC = [[BuildWalletMineVC alloc] init];
-//        TLNavigationController *na = [[TLNavigationController alloc] initWithRootViewController:MineVC];
-//        NSString *name;
-//        TLDataBase *db = [TLDataBase sharedManager];
-//        if ([db.dataBase open]) {
-//            FMResultSet *set = [db.dataBase executeQuery:@"SELECT Mnemonics from THAWallet"];
-//            while ([set next])
-//            {
-//                name = [set stringForColumn:@"Mnemonics"];
-//
-//            }
-//            [set close];
-//
-//        }
-//
-//        [db.dataBase close];
-////        NSString *word = [[NSUserDefaults standardUserDefaults] objectForKey:KWalletWord];
-//
-//    }
-        if (![AppConfig config].isChecking) {
-            TLUpdateVC *updateVC = [[TLUpdateVC alloc] init];
-            TLNavigationController *na = [[TLNavigationController alloc] initWithRootViewController:updateVC];
-            na.isLanch = YES;
-            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isLanch"];
-            [[NSUserDefaults standardUserDefaults] synchronize];
-            if ([TLUser user].checkLogin == NO) {
-                
-            }
-            self.window.rootViewController = updateVC;
-        }else{
-            TLTabBarController *tabBarCtrl = [[TLTabBarController alloc] init];
-            self.window.rootViewController = tabBarCtrl;
+    if (![AppConfig config].isChecking) {
+        TLUpdateVC *updateVC = [[TLUpdateVC alloc] init];
+        TLNavigationController *na = [[TLNavigationController alloc] initWithRootViewController:updateVC];
+        na.isLanch = YES;
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isLanch"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        if ([TLUser user].checkLogin == NO) {
+            
         }
-    
+        self.window.rootViewController = updateVC;
+    }else{
+        TLTabBarController *tabBarCtrl = [[TLTabBarController alloc] init];
+        self.window.rootViewController = tabBarCtrl;
+    }
 }
 
-//- (void)pushToChatViewControllerWith:(IMAUser *)user {
-//    
-//    TLTabBarController *tab = (TLTabBarController *)self.window.rootViewController;
-//    [tab pushToChatViewControllerWith:user];
-//    
-//}
 
 + (id)sharedAppDelegate {
     
@@ -438,49 +409,9 @@
 #pragma mark - 微信和芝麻认证回调
 // iOS9 NS_AVAILABLE_IOS
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
-    
-//    if ([url.host isEqualToString:@"certi.back"]) {
-//
-//        //查询是否认证成功
-//        TLNetworking *http = [TLNetworking new];
-//        http.showView = [UIApplication sharedApplication].keyWindow;
-//        http.code = @"805196";
-//        http.parameters[@"bizNo"] = [TLUser user].tempBizNo;
-//        http.parameters[@"userId"] = [TLUser user].userId;
-//        [http postWithSuccess:^(id responseObject) {
-//
-//            NSString *str = [NSString stringWithFormat:@"%@", responseObject[@"data"][@"isSuccess"]];
-//            [[NSNotificationCenter defaultCenter] postNotificationName:@"RealNameAuthResult" object:str];
-//
-//        } failure:^(NSError *error) {
-//
-//
-//        }];
-//
-//        return YES;
-//    }
-    
-//    if ([url.host isEqualToString:@"safepay"]) {
-//
-//        [TLAlipayManager hadleCallBackWithUrl:url];
-//        return YES;
-//
-//    } else {
-    
-//        return [WXApi handleOpenURL:url delegate:[TLWXManager manager]];
-//    }
-   
-        
-        //    BOOL isQQ = [QQApiInterface handleOpenURL:url delegate:[QQManager manager]];
-        
+
         if ([url.host containsString:@"response"]) {
             [WeiboSDK handleOpenURL:url delegate:self];
-
-//            if(response.statusCode == WeiboSDKResponseStatusCodeSuccess){
-//                [TLAlert alertWithSucces:[LangSwitcher switchLang:@"分享成功" key:nil]];
-//            }else{
-//                [TLAlert alertWithSucces:[LangSwitcher switchLang:@"分享失败" key:nil]];
-            
             }
          else {
             

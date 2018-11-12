@@ -7,8 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "CoinHeader.h"
-
 //
 typedef NS_ENUM(NSInteger, ImageType) {
 

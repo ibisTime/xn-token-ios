@@ -7,7 +7,6 @@
 //
 
 #import "WalletAdressTableView.h"
-#import "CoinHeader.h"
 #import "WalletAddressCell.h"
 
 @interface  WalletAdressTableView()<UITableViewDataSource, UITableViewDelegate>

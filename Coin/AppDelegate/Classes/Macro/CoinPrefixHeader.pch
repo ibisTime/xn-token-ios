@@ -38,11 +38,12 @@
 #import "TLWXManager.h"
 #import "TLWBManger.h"
 #import "TLTextField.h"
+#import "TLNetworking.h"
+#import "TLPageDataHelper.h"
 
 #import "UserModel.h"
 #import "LangSwitcher.h"
 
-#import "CoinHeader.h"
 #import "CoinUtil.h"
 #import "CoinModel.h"
 
@@ -56,6 +57,7 @@
 #import "NSString+Check.h"
 #import "NSString+Date.h"
 #import "NSString+Extension.h"
+#import "NSNumber+Extension.h"
 
 #import "ToolTextField.h"
 
@@ -70,6 +72,7 @@
 
 #import "ZJAnimationPopView.h"
 
+#import "FoundationHeader.h"
 
 
 

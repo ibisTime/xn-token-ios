@@ -9,10 +9,8 @@
 #import "ChangeLocalMoneyVC.h"
 #import "LangChooseVC.h"
 #import "SettingModel.h"
-#import "CoinHeader.h"
 #import <CDCommon/UIScrollView+TLAdd.h>
 #import "TLTabBarController.h"
-#import "LangSwitcher.h"
 @interface ChangeLocalMoneyVC ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) UITableView *langChooseTV;

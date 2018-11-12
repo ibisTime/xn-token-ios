@@ -7,12 +7,7 @@
 //
 
 #import "EditEmailVC.h"
-
-#import "CoinHeader.h"
-
 #import "TLTextField.h"
-
-#import "NSString+Check.h"
 #import "UIBarButtonItem+convience.h"
 #import "CaptchaView.h"
 //#import "TLCaptchaView.h"

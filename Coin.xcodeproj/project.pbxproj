@@ -1386,9 +1386,7 @@
 		B88B58F62109AEC300F20D1B /* TLNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLNavigationController.h; sourceTree = "<group>"; };
 		B88B58F72109AEC300F20D1B /* TLTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLTabBarController.h; sourceTree = "<group>"; };
 		B88B58FF2109AEC300F20D1B /* country.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = country.plist; sourceTree = "<group>"; };
-		B88B59002109AEC300F20D1B /* CustomUIHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomUIHeader.h; sourceTree = "<group>"; };
 		B88B59012109AEC300F20D1B /* CoinPrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoinPrefixHeader.pch; sourceTree = "<group>"; };
-		B88B59022109AEC300F20D1B /* CoinHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoinHeader.h; sourceTree = "<group>"; };
 		B88B59032109AEC300F20D1B /* UIColor+theme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+theme.m"; sourceTree = "<group>"; };
 		B88B59042109AEC300F20D1B /* TLTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLTabBarController.m; sourceTree = "<group>"; };
 		B88B59052109AEC300F20D1B /* TLNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLNavigationController.m; sourceTree = "<group>"; };
@@ -2209,13 +2207,11 @@
 		211DE6901FB58B4C002FCF3D /* Macro */ = {
 			isa = PBXGroup;
 			children = (
-				B88B59072109AEC300F20D1B /* FoundationHeader.h */,
 				B88B59012109AEC300F20D1B /* CoinPrefixHeader.pch */,
-				B88B59022109AEC300F20D1B /* CoinHeader.h */,
-				B88B59002109AEC300F20D1B /* CustomUIHeader.h */,
 				211DE6921FB58B4C002FCF3D /* AppMacro.h */,
 				211DE6911FB58B4C002FCF3D /* AppColorMacro.h */,
 				211DE6931FB58B4C002FCF3D /* APICodeMacro.h */,
+				B88B59072109AEC300F20D1B /* FoundationHeader.h */,
 				B88B58F52109AEC300F20D1B /* TLUIHeader.h */,
 			);
 			path = Macro;

@@ -7,8 +7,6 @@
 //
 
 #import "QuestionListTableView.h"
-#import "CoinHeader.h"
-#import "AppColorMacro.h"
 #import "BillCell.h"
 #import "questionListCells.h"
 @interface QuestionListTableView ()<UITableViewDelegate, UITableViewDataSource>

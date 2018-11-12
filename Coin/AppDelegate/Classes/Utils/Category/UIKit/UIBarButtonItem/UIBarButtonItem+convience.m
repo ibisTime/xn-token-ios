@@ -7,8 +7,6 @@
 //
 
 #import "UIBarButtonItem+convience.h"
-#import "CoinHeader.h"
-
 @implementation UIBarButtonItem (convience)
 
 + (instancetype)itemWithImage:(NSString *)image highImage:(NSString *)highImage target:(id)target action:(SEL)action

@@ -7,7 +7,6 @@
 //
 
 #import "RechargeCoinVC.h"
-#import "CoinHeader.h"
 
 #import "UIButton+EnLargeEdge.h"
 #import "NSString+CGSize.h"
