@@ -72,30 +72,35 @@
         [helper modelClass:[CurrencyModel class]];
         [self.tableView addRefreshAction:^{
 
-            [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
-
-                //去除没有的币种
-
-
-                NSMutableArray <CurrencyModel *> *shouldDisplayCoins = [[NSMutableArray alloc] init];
-                [objs enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-
-                    CurrencyModel *currencyModel = (CurrencyModel *)obj;
-                    [shouldDisplayCoins addObject:currencyModel];
-                    //查询总资产
+            [CoinUtil refreshOpenCoinList:^{
+                [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
+                    
+                    //去除没有的币种
+                    
+                    
+                    NSMutableArray <CurrencyModel *> *shouldDisplayCoins = [[NSMutableArray alloc] init];
+                    [objs enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                        
+                        CurrencyModel *currencyModel = (CurrencyModel *)obj;
+                        [shouldDisplayCoins addObject:currencyModel];
+                        //查询总资产
+                    }];
+                    
+                    weakSelf.currencys = shouldDisplayCoins;
+                    weakSelf.tableView.currencys = weakSelf.currencys;
+                    
+                    [weakSelf.tableView reloadData_tl];
+                    [weakSelf.tableView endRefreshingWithNoMoreData_tl];
+                    
+                } failure:^(NSError *error) {
+                    
+                    [weakSelf.tableView endRefreshingWithNoMoreData_tl];
+                    
                 }];
-
-                weakSelf.currencys = shouldDisplayCoins;
-                weakSelf.tableView.currencys = weakSelf.currencys;
-
-                [weakSelf.tableView reloadData_tl];
-                [weakSelf.tableView endRefreshingWithNoMoreData_tl];
-
-            } failure:^(NSError *error) {
-
-                [weakSelf.tableView endRefreshingWithNoMoreData_tl];
-
+            } failure:^{
+                
             }];
+            
 
 
 

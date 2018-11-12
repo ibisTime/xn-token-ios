@@ -58,9 +58,9 @@
     
     //服务器环境7
 //    研发
-    [AppConfig config].runEnv = RunEnvDev;
+//    [AppConfig config].runEnv = RunEnvDev;
 //    测试
-//    [AppConfig config].runEnv = RunEnvTest;
+    [AppConfig config].runEnv = RunEnvTest;
 //    正式
 //    [AppConfig config].runEnv = RunEnvRelease;
 
@@ -96,8 +96,6 @@
     [LangSwitcher startWithTraditional];
     //初始化为繁体
     //初始化数据库
-    
-    ;
     if ([[TLDataBase sharedManager].dataBase open]) {
 //        [ [TLDataBase sharedManager].dataBase executeUpdate:@"UPDATE THAWallet SET userId='China'"];
         NSLog(@"数据库打开成功");
