@@ -41,14 +41,13 @@
     switch (tag) {
         case 0:
         {
-            RegisterVC *vc = [[RegisterVC alloc]init];
-//            UINavigationController *naV = [[UINavigationController alloc]initWithRootViewController:vc];
-            [self.navigationController pushViewController:vc animated:YES];
+            
         }
             break;
         case 1:
-            
         {
+            RegisterVC *vc = [[RegisterVC alloc]init];
+            [self.navigationController pushViewController:vc animated:YES];
             
         }
             break;

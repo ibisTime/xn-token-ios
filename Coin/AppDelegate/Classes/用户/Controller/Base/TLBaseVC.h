@@ -21,6 +21,10 @@
 
 - (void)tl_placeholderOperation;
 
+//导航栏设为透明
+-(void)navigationTransparentClearColor;
+//导航栏设为默认
+-(void)navigationSetDefault;
 
 - (void)removePlaceholderView; //移除
 - (void)addPlaceholderView; // 添加

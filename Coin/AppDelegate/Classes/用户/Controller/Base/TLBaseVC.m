@@ -29,20 +29,14 @@
 
     self.view.backgroundColor = [UIColor colorWithHexString:@"#f8f8f8"];
 
-//    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStyleBordered target:nil action:nil];
-//    self.navigationItem.backBarButtonItem = backItem;
-//    self.view.backgroundColor = [UIColor backgroundColor];
+
+    self.navigationController.navigationBar.titleTextAttributes=@{NSForegroundColorAttributeName:[UIColor whiteColor],NSFontAttributeName:[UIFont boldSystemFontOfSize:18]};
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    //    HGColor(255, 58, 0)
+    self.navigationController.navigationBar.barTintColor = kHexColor(@"#0848DF");
     
-//    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
-//    self.navigationItem.backBarButtonItem = backItem;
-    //navigation底部分割线
-//    self.navigationController.navigationBar.shadowImage = [kLineColor convertToImage];
-
-//    self.view.backgroundColor  =[UIColor whiteColor];
-
-
-
-//    self.navigationController.interactivePopGestureRecognizer.delegate = self;
+    self.navigationItem.backBarButtonItem = item;
 //
     self.navigationController.navigationBar.backIndicatorImage = [UIImage imageNamed:@"返回 白色"];
     self.navigationController.navigationBar.backIndicatorTransitionMaskImage = [UIImage imageNamed:@"返回 白色"];
@@ -50,7 +44,33 @@
 
 }
 
+-(void)navigationTransparentClearColor
+{
+    self.navigationController.navigationBar.translucent = YES;
+    [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
+    
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    //    self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
+    self.navigationItem.backBarButtonItem = item;
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
 
+}
+
+-(void)navigationSetDefault
+{
+    self.navigationController.navigationBar.translucent = NO;
+    [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setShadowImage:nil];
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    //    self.navigationController.navigationBar.barTintColor = kHexColor(@"#0848DF");
+    self.navigationItem.backBarButtonItem = item;
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
+}
 
 
 //-(void)handleNavigationTransition:(UIPanGestureRecognizer *)pan
