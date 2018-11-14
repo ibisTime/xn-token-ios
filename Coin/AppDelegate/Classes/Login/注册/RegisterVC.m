@@ -92,6 +92,18 @@
     phoneAreaCodeBtn.titleLabel.font = HGboldfont(14);
     [phoneAreaCodeBtn sizeToFit];
     phoneAreaCodeBtn.frame = CGRectMake(46, registerLineView.yy + 50, phoneAreaCodeBtn.frame.size.width, 15);
+    [phoneAreaCodeBtn setImage:kImage(@"矩形4") forState:(UIControlStateNormal)];
+    CGFloat imageW = phoneAreaCodeBtn.imageView.image.size.width;
+    CGFloat titleW = phoneAreaCodeBtn.titleLabel.frame.size.width;
+    CGFloat imageOffset = titleW + 0.5 * 3;
+    CGFloat titleOffset = imageW + 0.5 * 3;
+    
+    phoneAreaCodeBtn.imageEdgeInsets = UIEdgeInsetsMake(6.5, imageOffset, 0, - imageOffset);
+    phoneAreaCodeBtn.titleEdgeInsets = UIEdgeInsetsMake(0, - titleOffset, 0, titleOffset);
+//    [phoneAreaCodeBtn SG_imagePositionStyle:(SGImagePositionStyleRight) spacing:3 imagePositionBlock:^(UIButton *button) {
+//
+//    }];
+    
     [scrollView addSubview:phoneAreaCodeBtn];
     
     UITextField *phoneTextFid = [[UITextField alloc]initWithFrame:CGRectMake(phoneAreaCodeBtn.xx + 25, registerLineView.yy + 50, SCREEN_WIDTH - phoneAreaCodeBtn.xx - 75, 15)];
