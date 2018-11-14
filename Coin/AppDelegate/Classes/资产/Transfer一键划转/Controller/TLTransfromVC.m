@@ -500,6 +500,10 @@ typedef enum : NSUInteger {
     NSString *gaspic =  [CoinUtil convertToSysCoin:self.numberTextField.text coin:self.currentModel.symbol];
     ;
     [dataBase.dataBase close];
+    
+//    [TLAlert alertWithTitle:<#(NSString *)#> msg:<#(NSString *)#> confirmMsg:<#(NSString *)#> cancleMsg:<#(NSString *)#> placeHolder:<#(NSString *)#> maker:<#(UIViewController *)#> cancle:<#^(UIAlertAction *action)cancle#> confirm:<#^(UIAlertAction *action, UITextField *textField)confirm#>]
+    
+    
     [TLAlert alertWithTitle:[LangSwitcher switchLang:@"请输入交易密码" key:nil]
                         msg:@""
                  confirmMsg:[LangSwitcher switchLang:@"确定" key:nil]
@@ -512,10 +516,11 @@ typedef enum : NSUInteger {
     {
         
 //        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+//        [SVProgressHUD show];
 //        dispatch_after(0.5, dispatch_get_main_queue(), ^{
             if ([self.word isEqualToString:textField.text])
             {
-                [SVProgressHUD show];
+                
 //                [TLProgressHUD show];
 //                [MBProgressHUD showHUDAddedTo:self.view animated:YES];
                 NSString *result;
@@ -530,12 +535,12 @@ typedef enum : NSUInteger {
                 if ([self.currentModel.type isEqualToString:@"0"]) {
                     //公链 ETH WAN BTC
                     if ([self.currentModel.symbol isEqualToString:@"ETH"]) {
-                        [TLProgressHUD show];
+//                        [MBProgressHUD hideHUDForView:self.view animated:YES];
                         result =[MnemonicUtil sendTransactionWithMnemonicWallet:Mnemonics address:add amount:gaspic gaspic:[NSString stringWithFormat:@"%lld",[self.tempPrice longLongValue]] gasLimt:@"21000"];
                         
                         
                     }else if ([self.currentModel.symbol isEqualToString:@"WAN"]){
-                        [TLProgressHUD show];
+//                        [MBProgressHUD hideHUDForView:self.view animated:YES];
                         result =[MnemonicUtil sendWanTransactionWithMnemonicWallet:Mnemonics address:add amount:gaspic gaspic:[NSString stringWithFormat:@"%lld",[self.tempPrice longLongValue]] gasLimt:@"21000"];
                     }else if([self.currentModel.symbol isEqualToString:@"BTC"])
                     {
@@ -547,6 +552,7 @@ typedef enum : NSUInteger {
                         [self testSpendCoins:add :self.numberTextField.text :[NSString stringWithFormat:@"%ld",(long)self.btcPrice]];
                         return ;
                     }else if([self.currentModel.symbol isEqualToString:@"USDT"]){
+                        
                         [MBProgressHUD hideHUDForView:self.view animated:YES];
                         if ([add isEqualToString:self.btcAddress]) {
                             [TLAlert alertWithMsg:@"转入和转出地址不能相同"];
@@ -556,7 +562,8 @@ typedef enum : NSUInteger {
                         return ;
                     }
                 }else{
-                    [TLProgressHUD show];
+//                    [TLProgressHUD show];
+//                    [MBProgressHUD hideHUDForView:self.view animated:YES];
                     CoinModel *coin = [CoinUtil getCoinModel:self.currentModel.symbol];
                     result = [MnemonicUtil sendEthTokenTransactionWithAddress:Mnemonics contractAddress:coin.contractAddress address:add amount:self.numberTextField.text gaspic:[NSString stringWithFormat:@"%lld",[self.tempPrice longLongValue]] gasLimt:@"210000"];
                     
@@ -582,7 +589,7 @@ typedef enum : NSUInteger {
             }
             
 //        });
-        
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
     }];
 }
 
