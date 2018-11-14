@@ -60,6 +60,9 @@
             break;
         }
     }
+    if (utxis.count == 0) {
+        btcFree = (148 + 34 + 10) * [fee floatValue];
+    }
     return btcFree;
 }
 
@@ -99,6 +102,9 @@
             }
             break;
         }
+    }
+    if (utxis.count == 0) {
+        btcFree = (148 * 1 + 34 * 2 + 10) * [fee floatValue] + 546;
     }
     return btcFree;
 }

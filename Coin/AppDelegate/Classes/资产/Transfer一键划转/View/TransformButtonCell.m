@@ -22,7 +22,7 @@
     if (self) {
         
         self.backgroundColor = RGB(241, 242, 245);
-        selectRow = 0;
+//        selectRow = 0;
         
     }
     return self;
@@ -40,7 +40,7 @@
         
         [backButton setBackgroundColor:kWhiteColor forState:(UIControlStateNormal)];
         [backButton setBackgroundColor:RGB(241, 242, 245) forState:(UIControlStateSelected)];
-        if (i == selectRow) {
+        if (i == 0) {
             backButton.selected = YES;
             selectButton = backButton;
         }
@@ -63,12 +63,12 @@
 
 -(void)backButtonClick:(UIButton *)sender
 {
-    selectRow = sender.tag;
+//    selectRow = sender.tag;
     
     [_SelectDelegate SelectTheButton:sender];
-//    selectButton.selected = NO;
-//    sender.selected = !sender.selected;
-//    selectButton = sender;
+    selectButton.selected = NO;
+    sender.selected = !sender.selected;
+    selectButton = sender;
     
     
 

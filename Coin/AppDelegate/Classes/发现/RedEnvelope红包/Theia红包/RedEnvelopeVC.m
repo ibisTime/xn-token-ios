@@ -236,6 +236,7 @@
         return;
     }
     TLNetworking *http = [TLNetworking new];
+    http.showView = self.view;
     http.code = @"802503";
     http.parameters[@"userId"] = [TLUser user].userId;
     http.parameters[@"token"] = [TLUser user].token;
@@ -267,7 +268,6 @@
         return;
     }else{
         [self GiveAnyRequestAndCurrency:currency type:type count:count sendNum:sendNum greeting:greeting];
-
     }
 
 }
@@ -286,6 +286,7 @@
         }
         
         TLNetworking *http = [TLNetworking new];
+        http.showView = self.view;
         http.code = @"623000";
         http.parameters[@"userId"] = [TLUser user].userId;
         http.parameters[@"symbol"] = currency;

@@ -117,7 +117,7 @@
 
 - (void)initTableView {
     
-    self.tableView = [[BillDetailTableView alloc] initWithFrame:CGRectMake(0, kHeight(110), kScreenWidth, SCREEN_HEIGHT - kHeight(110)) style:UITableViewStylePlain];
+    self.tableView = [[BillDetailTableView alloc] initWithFrame:CGRectMake(0, kHeight(110), kScreenWidth, SCREEN_HEIGHT - kHeight(110) - kNavigationBarHeight) style:UITableViewStylePlain];
     self.tableView.bill = self.bill;
     [self.view addSubview:self.tableView];
 }

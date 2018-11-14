@@ -59,6 +59,10 @@
 
 @property (nonatomic, assign) BOOL IsSelected;
 
+
+@property (nonatomic, copy) NSString *AvailableBalance;
+
+
 - (NSString *)getTypeName;
 
 - (NSString *)getImgName;
