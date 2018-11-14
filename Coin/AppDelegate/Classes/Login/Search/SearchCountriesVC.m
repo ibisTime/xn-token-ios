@@ -34,10 +34,6 @@ UISearchBarDelegate,UISearchDisplayDelegate>
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.translucent = YES;
-    //    [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
-    
-    //    [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
-    
     UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     self.navigationController.navigationBar.tintColor = [UIColor blackColor];
     self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
@@ -65,20 +61,9 @@ UISearchBarDelegate,UISearchDisplayDelegate>
 }
 
 
-
-#pragma mark - dataArr(模拟从服务器获取到的数据)
-- (NSArray *)serverDataArr{
-    if (!_serverDataArr) {
-        _serverDataArr=@[@{@"portrait":@"1",@"chineseName":@"chineseName"},@{@"portrait":@"2",@"chineseName":@"花无缺"},@{@"portrait":@"3",@"chineseName":@"东方不败"},@{@"portrait":@"4",@"chineseName":@"任我行"},@{@"portrait":@"5",@"chineseName":@"逍遥王"},@{@"portrait":@"6",@"chineseName":@"阿离"},@{@"portrait":@"13",@"chineseName":@"百草堂"},@{@"portrait":@"8",@"chineseName":@"三味书屋"},@{@"portrait":@"9",@"chineseName":@"彩彩"},@{@"portrait":@"10",@"chineseName":@"陈晨"},@{@"portrait":@"11",@"chineseName":@"多多"},@{@"portrait":@"12",@"chineseName":@"峨嵋山"},@{@"portrait":@"7",@"chineseName":@"哥哥"},@{@"portrait":@"14",@"chineseName":@"林俊杰"},@{@"portrait":@"15",@"chineseName":@"足球"},@{@"portrait":@"16",@"chineseName":@"58赶集"},@{@"portrait":@"17",@"chineseName":@"搜房网"},@{@"portrait":@"18",@"chineseName":@"欧弟"}];
-    }
-    return _serverDataArr;
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    
-    
     UILabel *titleText = [[UILabel alloc] initWithFrame: CGRectMake(kScreenWidth/2-60, 0, 120, 50)];
     titleText.textAlignment = NSTextAlignmentCenter;
     titleText.backgroundColor = [UIColor clearColor];
@@ -256,10 +241,8 @@ UISearchBarDelegate,UISearchDisplayDelegate>
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     
     if (tableView==_searchDisplayController.searchResultsTableView){
-//        [cell.headImageView setImage:[UIImage imageNamed:[_searchResultArr[indexPath.row] valueForKey:@"chineseName"]]];
         [cell.nameLabel setText:[NSString stringWithFormat:@"%@ (+%@)",[LangSwitcher switchLang:[_searchResultArr[indexPath.row] valueForKey:@"chineseName"] key:nil],[[_searchResultArr[indexPath.row] valueForKey:@"interCode"] substringFromIndex:2]]];
-        
-//        [self.countrys[indexPath.row].interCode substringFromIndex:2]
+
     }else{
         ContactModel *model=_rowArr[indexPath.section][indexPath.row];
 //        [cell.headImageView setImage:[UIImage imageNamed:model.chineseName]];
