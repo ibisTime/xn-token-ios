@@ -7,7 +7,7 @@
 //
 
 #import "RegisterVC.h"
-
+#import "SearchCountriesVC.h"
 @interface RegisterVC ()<UIScrollViewDelegate>
 {
     UIButton *isSelectBtn;
@@ -100,9 +100,7 @@
     
     phoneAreaCodeBtn.imageEdgeInsets = UIEdgeInsetsMake(6.5, imageOffset, 0, - imageOffset);
     phoneAreaCodeBtn.titleEdgeInsets = UIEdgeInsetsMake(0, - titleOffset, 0, titleOffset);
-//    [phoneAreaCodeBtn SG_imagePositionStyle:(SGImagePositionStyleRight) spacing:3 imagePositionBlock:^(UIButton *button) {
-//
-//    }];
+    [phoneAreaCodeBtn addTarget:self action:@selector(phoneAreaCodeBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
     
     [scrollView addSubview:phoneAreaCodeBtn];
     
@@ -153,6 +151,12 @@
     [confirmBtn setBackgroundImage:kImage(@"矩形3拷贝") forState:(UIControlStateNormal)];
     [self.view addSubview:confirmBtn];
     
+}
+
+-(void)phoneAreaCodeBtnClick
+{
+    SearchCountriesVC *vc = [SearchCountriesVC new];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 -(void)phoneAndEmailRegisterClick:(UIButton *)sender
