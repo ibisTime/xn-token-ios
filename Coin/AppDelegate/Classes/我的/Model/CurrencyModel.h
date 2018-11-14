@@ -59,6 +59,8 @@
 
 @property (nonatomic, assign) BOOL IsSelected;
 
+
+@property (nonatomic, copy) NSString *chineseName;
 - (NSString *)getTypeName;
 
 - (NSString *)getImgName;

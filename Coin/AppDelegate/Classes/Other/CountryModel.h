@@ -28,4 +28,6 @@
 
 @property (nonatomic , copy) NSString *code;
 
+//@property (nonatomic,strong) NSString <Ignore>*pinyin;
+
 @end

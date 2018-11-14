@@ -26,10 +26,10 @@
 }
 
 //如果仅设置当前页导航透明，需加入下面方法
-- (void)viewWillDisappear:(BOOL)animated{
-    [super viewWillDisappear:animated];
-    [self navigationSetDefault];
-}
+//- (void)viewWillDisappear:(BOOL)animated{
+//    [super viewWillDisappear:animated];
+//    [self navigationSetDefault];
+//}
 
 - (void)viewDidLoad {
     [super viewDidLoad];

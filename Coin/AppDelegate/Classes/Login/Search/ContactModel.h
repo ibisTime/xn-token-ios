@@ -10,8 +10,8 @@
 
 @interface ContactModel : JSONModel
 
-@property (nonatomic,strong) NSString <Optional>*portrait;
-@property (nonatomic,strong) NSString <Optional>*name;
+@property (nonatomic,strong) NSString <Optional>*chineseName;
+@property (nonatomic,strong) NSString <Optional>*interCode;
 @property (nonatomic,strong) NSString <Ignore>*pinyin;//拼音
 
 - (instancetype)initWithDic:(NSDictionary *)dic;

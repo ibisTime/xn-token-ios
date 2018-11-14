@@ -11,10 +11,15 @@
 
 @implementation ContactModel
 
-- (void)setName:(NSString<Optional> *)name{
-    if (name) {
-        _name=name;
-        _pinyin=_name.pinyin;
+//- (void)setName:(NSString<Optional> *)name{
+//
+//}
+
+-(void)setChineseName:(NSString<Optional> *)chineseName
+{
+    if (chineseName) {
+        _chineseName = chineseName;
+        _pinyin=_chineseName.pinyin;
     }
 }
 

@@ -10,7 +10,6 @@
 #import "ContactModel.h"
 #import "ContactTableViewCell.h"
 #import "ContactDataHelper.h"//根据拼音A~Z~#进行排序的tool
-
 @interface SearchCountriesVC ()<UITableViewDelegate,UITableViewDataSource,
 UISearchBarDelegate,UISearchDisplayDelegate>
 {
@@ -23,7 +22,6 @@ UISearchBarDelegate,UISearchDisplayDelegate>
 @property (nonatomic,strong) NSMutableArray *dataArr;
 @property (nonatomic,strong) UISearchBar *searchBar;//搜索框
 @property (nonatomic,strong) UISearchDisplayController *searchDisplayController;//搜索VC
-@property (nonatomic,strong) UIView *headView;
 
 
 @end
@@ -71,7 +69,7 @@ UISearchBarDelegate,UISearchDisplayDelegate>
 #pragma mark - dataArr(模拟从服务器获取到的数据)
 - (NSArray *)serverDataArr{
     if (!_serverDataArr) {
-        _serverDataArr=@[@{@"portrait":@"1",@"name":@"1"},@{@"portrait":@"2",@"name":@"花无缺"},@{@"portrait":@"3",@"name":@"东方不败"},@{@"portrait":@"4",@"name":@"任我行"},@{@"portrait":@"5",@"name":@"逍遥王"},@{@"portrait":@"6",@"name":@"阿离"},@{@"portrait":@"13",@"name":@"百草堂"},@{@"portrait":@"8",@"name":@"三味书屋"},@{@"portrait":@"9",@"name":@"彩彩"},@{@"portrait":@"10",@"name":@"陈晨"},@{@"portrait":@"11",@"name":@"多多"},@{@"portrait":@"12",@"name":@"峨嵋山"},@{@"portrait":@"7",@"name":@"哥哥"},@{@"portrait":@"14",@"name":@"林俊杰"},@{@"portrait":@"15",@"name":@"足球"},@{@"portrait":@"16",@"name":@"58赶集"},@{@"portrait":@"17",@"name":@"搜房网"},@{@"portrait":@"18",@"name":@"欧弟"}];
+        _serverDataArr=@[@{@"portrait":@"1",@"chineseName":@"chineseName"},@{@"portrait":@"2",@"chineseName":@"花无缺"},@{@"portrait":@"3",@"chineseName":@"东方不败"},@{@"portrait":@"4",@"chineseName":@"任我行"},@{@"portrait":@"5",@"chineseName":@"逍遥王"},@{@"portrait":@"6",@"chineseName":@"阿离"},@{@"portrait":@"13",@"chineseName":@"百草堂"},@{@"portrait":@"8",@"chineseName":@"三味书屋"},@{@"portrait":@"9",@"chineseName":@"彩彩"},@{@"portrait":@"10",@"chineseName":@"陈晨"},@{@"portrait":@"11",@"chineseName":@"多多"},@{@"portrait":@"12",@"chineseName":@"峨嵋山"},@{@"portrait":@"7",@"chineseName":@"哥哥"},@{@"portrait":@"14",@"chineseName":@"林俊杰"},@{@"portrait":@"15",@"chineseName":@"足球"},@{@"portrait":@"16",@"chineseName":@"58赶集"},@{@"portrait":@"17",@"chineseName":@"搜房网"},@{@"portrait":@"18",@"chineseName":@"欧弟"}];
     }
     return _serverDataArr;
 }
@@ -89,45 +87,72 @@ UISearchBarDelegate,UISearchDisplayDelegate>
     [titleText setText:[LangSwitcher switchLang:@"选择国家和地区" key:nil]];
     self.navigationItem.titleView=titleText;
     
-    self.dataArr=[NSMutableArray array];
-    for (NSDictionary *subDic in self.serverDataArr) {
-        ContactModel *model=[[ContactModel alloc]initWithDic:subDic];
-        [self.dataArr addObject:model];
-    }
-    
-    _rowArr=[ContactDataHelper getFriendListDataBy:self.dataArr];
-    _sectionArr=[ContactDataHelper getFriendListSectionBy:[_rowArr mutableCopy]];
-    
-    [self.headView addSubview:self.searchBar];
-    [self.view addSubview:self.tableView];
-    
-    _searchDisplayController=[[UISearchDisplayController alloc]initWithSearchBar:self.searchBar contentsController:self];
-    [_searchDisplayController setDelegate:self];
-    [_searchDisplayController setSearchResultsDataSource:self];
-    [_searchDisplayController setSearchResultsDelegate:self];
-    
-    _searchResultArr=[NSMutableArray array];
-    
-    
-    
+    [self loadData];
 }
 
--(UIView *)headView
+- (void)loadData
 {
-    if (!_headView) {
-        _headView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, kNavigationBarHeight)];
-        _headView.backgroundColor = [UIColor whiteColor];
-        _searchBar=[[UISearchBar alloc]initWithFrame:CGRectMake(15, kStatusBarHeight, kScreenWidth - 30, kNavigationBarHeight)];
+    
+    
+    TLNetworking *net = [TLNetworking new];
+    net.showView = self.view;
+    net.code = @"801120";
+    net.isLocal = YES;
+    net.ISparametArray = YES;
+    net.parameters[@"status"] = @"1";
+    [net postWithSuccess:^(id responseObject) {
+        
+        NSLog(@"%@",responseObject);
+        self.serverDataArr = responseObject[@"data"];
+//        self.countrys = [CountryModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
+        
+        //        NSString *str = [NSString stringWithFormat:@"%@", responseObject[@"data"]];
+        //        [[NSNotificationCenter defaultCenter] postNotificationName:@"RealNameAuthResult" object:str];
+        
+        self.dataArr=[NSMutableArray array];
+        for (NSDictionary *subDic in self.serverDataArr) {
+            ContactModel *model=[[ContactModel alloc]initWithDic:subDic];
+            [self.dataArr addObject:model];
+        }
+        
+        _rowArr=[ContactDataHelper getFriendListDataBy:self.dataArr];
+        _sectionArr=[ContactDataHelper getFriendListSectionBy:[_rowArr mutableCopy]];
+        
+        [self.view addSubview:self.tableView];
+        
+        _searchDisplayController=[[UISearchDisplayController alloc]initWithSearchBar:self.searchBar contentsController:self];
+        [_searchDisplayController setDelegate:self];
+        [_searchDisplayController setSearchResultsDataSource:self];
+        [_searchDisplayController setSearchResultsDelegate:self];
+        
+        _searchResultArr=[NSMutableArray array];
+        
+        [self.tableView reloadData];
+        
+    } failure:^(NSError *error) {
+        
+        
+    }];
+}
+
+-(UISearchBar *)searchBar
+{
+    if (!_searchBar) {
+        _searchBar=[[UISearchBar alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 44)];
         _searchBar.backgroundColor = [UIColor whiteColor];
         [_searchBar setPlaceholder:[LangSwitcher switchLang:@"搜索" key:nil]];
         [_searchBar setDelegate:self];
         [[[[_searchBar.subviews objectAtIndex:0] subviews] objectAtIndex:0] removeFromSuperview];
         [_searchBar setBackgroundColor:[UIColor whiteColor]];
         
-        
+        UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(15, 43, SCREEN_WIDTH - 30, 1)];
+        lineView.backgroundColor = kLineColor;
+        [_searchBar addSubview:lineView];
     }
-    return _headView;
+    return _searchBar;
 }
+
+
 
 
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
@@ -161,7 +186,7 @@ UISearchBarDelegate,UISearchDisplayDelegate>
         [_tableView setSectionIndexBackgroundColor:[UIColor clearColor]];
         [_tableView setSectionIndexColor:[UIColor darkGrayColor]];
         [_tableView setBackgroundColor:[UIColor colorWithRed:240.0/255 green:240.0/255 blue:240.0/255 alpha:1]];
-        _tableView.tableHeaderView=self.headView;
+        _tableView.tableHeaderView=self.searchBar;
         //cell无数据时，不显示间隔线
         UIView *v = [[UIView alloc] initWithFrame:CGRectZero];
         [_tableView setTableFooterView:v];
@@ -194,7 +219,7 @@ UISearchBarDelegate,UISearchDisplayDelegate>
     UIView *view = [UIView new];
     view.backgroundColor = [UIColor whiteColor];
     
-    UILabel *label = [UILabel labelWithFrame:CGRectMake(12, 0, SCREEN_WIDTH - 24, 30) textAligment:(NSTextAlignmentLeft) backgroundColor:RGB(247, 247, 247) font:FONT(14) textColor:kHexColor(@"#acacac")];
+    UILabel *label = [UILabel labelWithFrame:CGRectMake(12, 5, SCREEN_WIDTH - 24, 30) textAligment:(NSTextAlignmentLeft) backgroundColor:RGB(247, 247, 247) font:FONT(14) textColor:kHexColor(@"#acacac")];
     [label setText:[NSString stringWithFormat:@"      %@",_sectionArr[section+1]]];
     kViewRadius(label, 5);
     [view addSubview:label];
@@ -217,7 +242,7 @@ UISearchBarDelegate,UISearchDisplayDelegate>
     if (tableView==_searchDisplayController.searchResultsTableView) {
         return 0;
     }else{
-        return 30.0;
+        return 40;
     }
 }
 
@@ -231,32 +256,18 @@ UISearchBarDelegate,UISearchDisplayDelegate>
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     
     if (tableView==_searchDisplayController.searchResultsTableView){
-        [cell.headImageView setImage:[UIImage imageNamed:[_searchResultArr[indexPath.row] valueForKey:@"portrait"]]];
-        [cell.nameLabel setText:[_searchResultArr[indexPath.row] valueForKey:@"name"]];
+//        [cell.headImageView setImage:[UIImage imageNamed:[_searchResultArr[indexPath.row] valueForKey:@"chineseName"]]];
+        [cell.nameLabel setText:[NSString stringWithFormat:@"%@ (+%@)",[LangSwitcher switchLang:[_searchResultArr[indexPath.row] valueForKey:@"chineseName"] key:nil],[[_searchResultArr[indexPath.row] valueForKey:@"interCode"] substringFromIndex:2]]];
+        
+//        [self.countrys[indexPath.row].interCode substringFromIndex:2]
     }else{
         ContactModel *model=_rowArr[indexPath.section][indexPath.row];
-        
-        [cell.headImageView setImage:[UIImage imageNamed:model.portrait]];
-        [cell.nameLabel setText:model.name];
+//        [cell.headImageView setImage:[UIImage imageNamed:model.chineseName]];
+        [cell.nameLabel setText:[NSString stringWithFormat:@"%@ (+%@)",[LangSwitcher switchLang:model.chineseName key:nil],[model.interCode substringFromIndex:2]]];
     }
-    
     return cell;
 }
 
-#pragma mark searchBar delegate
-//searchBar开始编辑时改变取消按钮的文字
-//- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar{
-//    NSArray *subViews;
-//    subViews = [(searchBar.subviews[0]) subviews];
-//    for (id view in subViews) {
-//        if ([view isKindOfClass:[UIButton class]]) {
-//            UIButton* cancelbutton = (UIButton* )view;
-//            [cancelbutton setTitle:@"取消" forState:UIControlStateNormal];
-//            break;
-//        }
-//    }
-//    searchBar.showsCancelButton = YES;
-//}
 - (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar{
     return YES;
 }
@@ -294,14 +305,14 @@ UISearchBarDelegate,UISearchDisplayDelegate>
     NSUInteger searchOptions = NSCaseInsensitiveSearch | NSDiacriticInsensitiveSearch;
     
     for (int i = 0; i < self.dataArr.count; i++) {
-        NSString *storeString = [(ContactModel *)self.dataArr[i] name];
-        NSString *storeImageString=[(ContactModel *)self.dataArr[i] portrait]?[(ContactModel *)self.dataArr[i] portrait]:@"";
+        NSString *storeString = [(ContactModel *)self.dataArr[i] chineseName];
+        NSString *storeImageString=[(ContactModel *)self.dataArr[i] interCode];
         
         NSRange storeRange = NSMakeRange(0, storeString.length);
         
         NSRange foundRange = [storeString rangeOfString:searchText options:searchOptions range:storeRange];
         if (foundRange.length) {
-            NSDictionary *dic=@{@"name":storeString,@"portrait":storeImageString};
+            NSDictionary *dic=@{@"chineseName":storeString,@"interCode":storeImageString};
             
             [tempResults addObject:dic];
         }

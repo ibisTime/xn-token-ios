@@ -38,7 +38,8 @@
 }
 - (UILabel *)nameLabel{
     if (!_nameLabel) {
-        _nameLabel=[[UILabel alloc]initWithFrame:CGRectMake(50.0, 5.0, kScreenWidth-60.0, 40.0)];\
+        _nameLabel=[[UILabel alloc]initWithFrame:CGRectMake(30, 5.0, kScreenWidth-60.0, 40.0)];
+        _nameLabel.textColor = kHexColor(@"#000000");
         [_nameLabel setFont:[UIFont systemFontOfSize:16.0]];
     }
     return _nameLabel;
