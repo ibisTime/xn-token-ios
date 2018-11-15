@@ -549,7 +549,7 @@ typedef enum : NSUInteger {
                             [TLAlert alertWithMsg:@"转入和转出地址不能相同"];
                             return ;
                         }
-                        [self testSpendCoins:add :self.numberTextField.text :[NSString stringWithFormat:@"%ld",(long)self.btcPrice]];
+                        [self testSpendCoins:add :self.numberTextField.text :[NSString stringWithFormat:@"%f",self.poundageSlider.value]];
                         return ;
                     }else if([self.currentModel.symbol isEqualToString:@"USDT"]){
                         
