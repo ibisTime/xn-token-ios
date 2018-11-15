@@ -942,9 +942,9 @@
 
 - (void)saveLocalWalletData
 {
-    if (self.coins.count > 0) {
-        return;
-    }
+//    if (self.coins.count > 0) {
+//        return;
+//    }
     NSMutableArray *arr = [[CoinModel coin] getOpenCoinList];
     NSMutableArray *temp = arr.mutableCopy;
     TLDataBase *db = [TLDataBase sharedManager];

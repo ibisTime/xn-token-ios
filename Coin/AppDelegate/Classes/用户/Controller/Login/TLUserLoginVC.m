@@ -11,15 +11,12 @@
 #import "BindMobileVC.h"
 #import "TLUserRegisterVC.h"
 #import "TLUserForgetPwdVC.h"
-
 #import "APICodeMacro.h"
 #import "AppMacro.h"
 #import "NSString+Check.h"
 #import "UIBarButtonItem+convience.h"
 #import "UILabel+Extension.h"
-
 #import "CurrencyModel.h"
-
 #import "AccountTf.h"
 #import "ChooseCountryVc.h"
 #import "TLTabBarController.h"
@@ -27,20 +24,17 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "NSString+Extension.h"
 #import "TLUserFindPwdVC.h"
-
 #import <UMMobClick/MobClick.h>
-
 #import <SecurityGuardSDK/JAQ/SecurityVerification.h>
 #import <MSAuthSDK/MSAuthVCFactory.h>
 #import <MSAuthSDK/MSAuthSDK.h>
 #import <SecurityGuardSDK/JAQ/SecurityVerification.h>
 #import <SVProgressHUD/SVProgressHUD.h>
-
 #import "AppConfig.h"
+
 //腾讯云
 //#import "ChatManager.h"   czy
 //#import "IMModel.h"
-//
 //#import <ImSDK/TIMManager.h>
 
 @interface TLUserLoginVC ()<UITextFieldDelegate,MSAuthProtocol>
@@ -127,16 +121,11 @@
             self.PhoneCode.text = [NSString stringWithFormat:@"+%@",[defaultCountry.interCode substringFromIndex:2]];
             if ([defaultCountry.interSimpleCode isEqualToString:@"CN"] ||[defaultCountry.interSimpleCode isEqualToString:@"HK"] ||[model.interSimpleCode isEqualToString:@"TW"] || [defaultCountry.interSimpleCode isEqualToString:@"MO"]) {
                 [LangSwitcher changLangType:LangTypeSimple];
-                
-                    money = @"CNY";
-               
-                    
-            
+                money = @"CNY";
             }else if ([defaultCountry.interSimpleCode isEqualToString:@"KR"] || [defaultCountry.interSimpleCode isEqualToString:@"KO"] )
             {
                 [LangSwitcher changLangType:LangTypeKorean];
                 money = @"KRW";
-
             }else{
                 
                 [LangSwitcher changLangType:LangTypeEnglish];
@@ -159,21 +148,14 @@
         self.PhoneCode.text = [NSString stringWithFormat:@"+%@",[defaultCountry.interCode substringFromIndex:2]];
         if ([defaultCountry.interSimpleCode isEqualToString:@"CN"] ||[defaultCountry.interSimpleCode isEqualToString:@"HK"] ||[defaultCountry.interSimpleCode isEqualToString:@"TW"] || [defaultCountry.interSimpleCode isEqualToString:@"MO"]) {
             [LangSwitcher changLangType:LangTypeSimple];
-            
             money = @"CNY";
-            
-            
-            
         }else if ([defaultCountry.interSimpleCode isEqualToString:@"KR"] || [defaultCountry.interSimpleCode isEqualToString:@"KO"] )
         {
             [LangSwitcher changLangType:LangTypeKorean];
             money = @"KRW";
-            
         }else{
-            
             [LangSwitcher changLangType:LangTypeEnglish];
             money = @"USD";
-            
         }
     }
     [[NSUserDefaults standardUserDefaults] setObject:money forKey:KLocalMoney];
@@ -253,7 +235,6 @@
 - (void)setUpUI {
     
     self.view.backgroundColor = kBackgroundColor;
-    
     CGFloat w = kScreenWidth;
     CGFloat h = ACCOUNT_HEIGHT;
     
