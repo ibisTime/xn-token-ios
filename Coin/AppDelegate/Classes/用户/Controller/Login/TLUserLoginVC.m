@@ -764,7 +764,7 @@
              [[NSNotificationCenter defaultCenter] postNotificationName:kUserLoginNotification object:nil];
             self.NeedLogin = NO;
             [self.navigationController popToRootViewControllerAnimated:YES];
-         TLTabBarController*tab   = [[TLTabBarController alloc] init];
+         TLTabBarController*tab = [[TLTabBarController alloc] init];
         [UIApplication sharedApplication].keyWindow.rootViewController = tab;
             
             return ;

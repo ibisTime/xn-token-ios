@@ -81,7 +81,7 @@
             phoneAndEmailRegister.selected = YES;
             isSelectBtn = phoneAndEmailRegister;
             
-            registerLineView = [[UIView alloc]initWithFrame:CGRectMake(35, 160 - 64 + kNavigationBarHeight + 30, (SCREEN_WIDTH - 70)/2, 1.5)];
+            registerLineView = [[UIView alloc]initWithFrame:CGRectMake(35, 160 - 64 + kNavigationBarHeight + 30, (SCREEN_WIDTH - 70)/2, 1)];
             registerLineView.backgroundColor = kWhiteColor;
             [scrollView addSubview:registerLineView];
         }
@@ -116,7 +116,7 @@
     [scrollView addSubview:phoneAreaCodeBtn];
     
     UITextField *phoneTextFid = [[UITextField alloc]initWithFrame:CGRectMake(phoneAreaCodeBtn.xx + 15, registerLineView.yy + 50, SCREEN_WIDTH - phoneAreaCodeBtn.xx - 60, 15)];
-    phoneTextFid.placeholder = @"请输入您的手机号码";
+    phoneTextFid.placeholder = [LangSwitcher switchLang:@"请输入您的手机号码" key:nil];
 //    phoneTextFid.keyboardType = UIKeyboardTypeEmailAddress;
     [phoneTextFid setValue:FONT(12) forKeyPath:@"_placeholderLabel.font"];
     phoneTextFid.font = FONT(12);
@@ -126,7 +126,7 @@
     phoneTextFid.clearButtonMode = UITextFieldViewModeWhileEditing;
     [scrollView addSubview:phoneTextFid];
     
-    UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(35, phoneTextFid.yy + 13, SCREEN_WIDTH - 70, 1.5)];
+    UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(35, phoneTextFid.yy + 13, SCREEN_WIDTH - 70, 1)];
     lineView.backgroundColor = kWhiteColor;
     [scrollView addSubview:lineView];
     
@@ -149,7 +149,7 @@
     [scrollView addSubview:codeBtn];
     
     UITextField *codeTextFid = [[UITextField alloc]initWithFrame:CGRectMake(codeLabel.xx + 15, lineView.yy + 29, SCREEN_WIDTH - codeLabel.xx - 15 - codeBtn.width - 45, 15)];
-    codeTextFid.placeholder = @"请输入验证码";
+    codeTextFid.placeholder = [LangSwitcher switchLang:@"请输入验证码" key:nil];
 //    codeTextFid.keyboardType = UIKeyboardTypeEmailAddress;
     [codeTextFid setValue:FONT(12) forKeyPath:@"_placeholderLabel.font"];
     codeTextFid.font = FONT(12);
@@ -159,7 +159,7 @@
     codeTextFid.clearButtonMode = UITextFieldViewModeWhileEditing;
     [scrollView addSubview:codeTextFid];
     
-    UIView *lineView1 = [[UIView alloc]initWithFrame:CGRectMake(35, codeLabel.yy + 13, SCREEN_WIDTH - 70, 1.5)];
+    UIView *lineView1 = [[UIView alloc]initWithFrame:CGRectMake(35, codeLabel.yy + 13, SCREEN_WIDTH - 70, 1)];
     lineView1.backgroundColor = kWhiteColor;
     [scrollView addSubview:lineView1];
     
@@ -179,7 +179,7 @@
 -(void)phoneAndEmailRegisterClick:(UIButton *)sender
 {
     [UIView animateWithDuration:0.3 animations:^{
-        registerLineView.frame = CGRectMake(35 + (sender.tag - 100)*(SCREEN_WIDTH - 70)/2, 160 - 64 + kNavigationBarHeight + 30, (SCREEN_WIDTH - 70)/2, 1.5);
+        registerLineView.frame = CGRectMake(35 + (sender.tag - 100)*(SCREEN_WIDTH - 70)/2, 160 - 64 + kNavigationBarHeight + 30, (SCREEN_WIDTH - 70)/2, 1);
     }];
     sender.selected = !sender.selected;
     isSelectBtn.selected = !isSelectBtn.selected;

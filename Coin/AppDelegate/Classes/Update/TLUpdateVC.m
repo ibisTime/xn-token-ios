@@ -317,9 +317,6 @@
         loginVC.loginSuccess = ^{
             
             [UIApplication sharedApplication].keyWindow.rootViewController = tabBarCtrl;
-
-            
-
         };
         CoinWeakSelf;
         loginVC.NeedLogin = YES;

@@ -278,16 +278,16 @@
 //    tabbarContrl.selectedIndex = 2;
 //    [tabbarContrl.tabBar hideBadgeOnItemIndex:4];
     //应用外数量为0
-    TLUserLoginVC *login = [TLUserLoginVC new];
+    TheInitialVC *login = [TheInitialVC new];
     
 //
-    TLNavigationController *na = [[TLNavigationController alloc] initWithRootViewController:login];
+    UINavigationController *na = [[UINavigationController alloc] initWithRootViewController:login];
     self.window.rootViewController = na;
 
-    login.loginSuccess = ^{
-        self.window.rootViewController = tab;
-
-    };
+//    login.loginSuccess = ^{
+//        self.window.rootViewController = tab;
+//
+//    };
 //    TLTabBarController *tab = [TLTabBarController new];
 //    [UIApplication sharedApplication].keyWindow.rootViewController = na;
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
@@ -351,30 +351,32 @@
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"BOOLFORKEY"] == NO)
-    {
-//        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"BOOLFORKEY"];
-        TheInitialVC *initialVC = [[TheInitialVC alloc] init];
-        UINavigationController *na = [[UINavigationController alloc] initWithRootViewController:initialVC];
-//        na.isLanch = YES;
-        self.window.rootViewController = na;
-    }else
-    {
-        if (![AppConfig config].isChecking) {
-            TLUpdateVC *updateVC = [[TLUpdateVC alloc] init];
-            TLNavigationController *na = [[TLNavigationController alloc] initWithRootViewController:updateVC];
-            na.isLanch = YES;
+//    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"BOOLFORKEY"] == NO)
+//    {
+////        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"BOOLFORKEY"];
+//        TheInitialVC *initialVC = [[TheInitialVC alloc] init];
+//        UINavigationController *na = [[UINavigationController alloc] initWithRootViewController:initialVC];
+////        na.isLanch = YES;
+//        self.window.rootViewController = na;
+//    }else
+//    {
+    
+    
+    NSDictionary *dataDic = [[NSUserDefaults standardUserDefaults] objectForKey:@"user_info_dict_key"];
+    
+        if ([TLUser isBlankString:dataDic[@"mobile"]] == YES) {
+            TheInitialVC *initialVC = [[TheInitialVC alloc] init];
+            UINavigationController *na = [[UINavigationController alloc] initWithRootViewController:initialVC];
+            
             [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isLanch"];
             [[NSUserDefaults standardUserDefaults] synchronize];
-            if ([TLUser user].checkLogin == NO) {
-                
-            }
-            self.window.rootViewController = updateVC;
+            self.window.rootViewController = na;
+//            self.window.rootViewController = initialVC;
         }else{
             TLTabBarController *tabBarCtrl = [[TLTabBarController alloc] init];
             self.window.rootViewController = tabBarCtrl;
         }
-    }
+//    }
     
     
     

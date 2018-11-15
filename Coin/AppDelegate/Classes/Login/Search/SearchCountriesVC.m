@@ -258,19 +258,18 @@ UISearchBarDelegate,UISearchDisplayDelegate>
     ContactModel *model;
     if (tableView==_searchDisplayController.searchResultsTableView){
         model = _searchResultArr[indexPath.row];
-        
-        
+//        ContactModel *model=_rowArr[indexPath.section][indexPath.row];
+        for ( int i = 0 ; i < self.serverDataArr.count ; i ++) {
+            if ([[_searchResultArr[indexPath.row] valueForKey:@"chineseName"] isEqual:self.serverDataArr[i][@"chineseName"]]) {
+                model = [ContactModel mj_objectWithKeyValues:self.serverDataArr[i]];
+            }
+        }
     }else{
         model=_rowArr[indexPath.section][indexPath.row];
     }
-//    ContactModel *model=_rowArr[indexPath.section][indexPath.row];
-    for ( int i = 0 ; i < self.serverDataArr.count ; i ++) {
-        if ([model.chineseName isEqualToString:self.serverDataArr[i][@"chineseName"]]) {
-            model = self.serverDataArr[i];
-        }
-    }
-    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:model];
     
+    
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:model];
     [[NSUserDefaults standardUserDefaults] setObject:data forKey:@"chooseModel"];
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"chooseCoutry"];
     [[NSUserDefaults standardUserDefaults] synchronize];

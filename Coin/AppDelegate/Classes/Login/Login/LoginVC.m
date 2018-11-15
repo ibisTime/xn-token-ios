@@ -8,11 +8,17 @@
 
 #import "LoginVC.h"
 #import "SearchCountriesVC.h"
+#import "RegisterVC.h"
+#import <UMMobClick/MobClick.h>
+#import "TLTabBarController.h"
 @interface LoginVC ()
 {
     UIButton *isSelectBtn;
     UIView *registerLineView;
 }
+@property (nonatomic , strong)UITextField *phoneTextFid;
+@property (nonatomic , strong)UITextField *codeTextFid;
+
 @end
 
 @implementation LoginVC
@@ -45,7 +51,7 @@
     self.navigationItem.titleView = nameLable;
     
 
-    NSArray *array = @[[LangSwitcher switchLang:@"手机注册" key:nil],[LangSwitcher switchLang:@"邮箱注册" key:nil]];
+    NSArray *array = @[[LangSwitcher switchLang:@"手机登录" key:nil],[LangSwitcher switchLang:@"邮箱登录" key:nil]];
     for (int i = 0; i < 2; i ++) {
         UIButton *phoneAndEmailRegister = [UIButton buttonWithTitle:array[i] titleColor:kHexColor(@"d6d5d5") backgroundColor:kClearColor titleFont:16];
         [phoneAndEmailRegister setTitleColor:kWhiteColor forState:(UIControlStateSelected)];
@@ -54,7 +60,7 @@
             phoneAndEmailRegister.selected = YES;
             isSelectBtn = phoneAndEmailRegister;
             
-            registerLineView = [[UIView alloc]initWithFrame:CGRectMake(35, 160 - 64 + kNavigationBarHeight + 30, (SCREEN_WIDTH - 70)/2, 1.5)];
+            registerLineView = [[UIView alloc]initWithFrame:CGRectMake(35, 160 - 64 + kNavigationBarHeight + 30, (SCREEN_WIDTH - 70)/2, 1)];
             registerLineView.backgroundColor = kWhiteColor;
             [backView addSubview:registerLineView];
         }
@@ -68,43 +74,37 @@
     
     phoneAreaCodeBtn.frame = CGRectMake(46, registerLineView.yy + 50, 0, 15);
     phoneAreaCodeBtn.titleLabel.font = HGboldfont(14);
-    
-    
-    
-    
     [phoneAreaCodeBtn sizeToFit];
     phoneAreaCodeBtn.frame = CGRectMake(46, registerLineView.yy + 50, phoneAreaCodeBtn.frame.size.width + 6.5, 15);
     [phoneAreaCodeBtn setImage:kImage(@"矩形4") forState:(UIControlStateNormal)];
-    
     CGFloat imageW = phoneAreaCodeBtn.imageView.image.size.width;
     CGFloat titleW = phoneAreaCodeBtn.titleLabel.frame.size.width;
     CGFloat imageOffset = titleW + 0.5 * 3;
     CGFloat titleOffset = imageW + 0.5 * 3;
-    
     phoneAreaCodeBtn.imageEdgeInsets = UIEdgeInsetsMake(6.5, imageOffset, 0, - imageOffset);
     phoneAreaCodeBtn.titleEdgeInsets = UIEdgeInsetsMake(0, - titleOffset, 0, titleOffset);
-    
     [phoneAreaCodeBtn addTarget:self action:@selector(phoneAreaCodeBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
-    
     [backView addSubview:phoneAreaCodeBtn];
     
-    UITextField *phoneTextFid = [[UITextField alloc]initWithFrame:CGRectMake(phoneAreaCodeBtn.xx + 15, registerLineView.yy + 50, SCREEN_WIDTH - phoneAreaCodeBtn.xx - 60, 15)];
-    phoneTextFid.placeholder = @"请输入您的手机号码";
-    //    phoneTextFid.keyboardType = UIKeyboardTypeEmailAddress;
-    [phoneTextFid setValue:FONT(12) forKeyPath:@"_placeholderLabel.font"];
-    phoneTextFid.font = FONT(12);
-    phoneTextFid.textColor = [UIColor whiteColor];
-    [phoneTextFid setValue:[UIColor whiteColor]  forKeyPath:@"_placeholderLabel.textColor"];
-    phoneTextFid.clearsOnBeginEditing = NO;
-    phoneTextFid.clearButtonMode = UITextFieldViewModeWhileEditing;
-    [backView addSubview:phoneTextFid];
     
-    UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(35, phoneTextFid.yy + 13, SCREEN_WIDTH - 70, 1.5)];
+    
+    _phoneTextFid = [[UITextField alloc]initWithFrame:CGRectMake(phoneAreaCodeBtn.xx + 15, registerLineView.yy + 50, SCREEN_WIDTH - phoneAreaCodeBtn.xx - 60, 15)];
+    _phoneTextFid.placeholder = [LangSwitcher switchLang:@"请输入您的手机号码" key:nil];
+    //    phoneTextFid.keyboardType = UIKeyboardTypeEmailAddress;
+    [_phoneTextFid setValue:FONT(12) forKeyPath:@"_placeholderLabel.font"];
+    _phoneTextFid.font = FONT(12);
+    _phoneTextFid.textColor = [UIColor whiteColor];
+    [_phoneTextFid setValue:[UIColor whiteColor]  forKeyPath:@"_placeholderLabel.textColor"];
+    _phoneTextFid.clearsOnBeginEditing = NO;
+    _phoneTextFid.clearButtonMode = UITextFieldViewModeWhileEditing;
+    [backView addSubview:_phoneTextFid];
+    
+    UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(35, _phoneTextFid.yy + 13, SCREEN_WIDTH - 70, 1)];
     lineView.backgroundColor = kWhiteColor;
     [backView addSubview:lineView];
     
     UILabel *codeLabel = [UILabel labelWithFrame:CGRectMake(46, lineView.yy + 29, 0, 15) textAligment:(NSTextAlignmentCenter) backgroundColor:kClearColor font:HGboldfont(14) textColor:kWhiteColor];
-    codeLabel.text = [LangSwitcher switchLang:@"验证码" key:nil];
+    codeLabel.text = [LangSwitcher switchLang:@"密码" key:nil];
     [codeLabel sizeToFit];
     if (codeLabel.width >= 100) {
         codeLabel.frame = CGRectMake(46, lineView.yy + 29, 100, 15);
@@ -114,32 +114,59 @@
     }
     
     [backView addSubview:codeLabel];
+
     
-    UIButton *codeBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"获取验证码" key:nil] titleColor:kWhiteColor backgroundColor:kClearColor titleFont:14];
-    [codeBtn sizeToFit];
-    codeBtn.frame = CGRectMake(SCREEN_WIDTH - 35 - codeBtn.width - 26, lineView.yy + 16, codeBtn.width + 26, 31);
-    [codeBtn setBackgroundImage:kImage(@"圆角矩形2拷贝2") forState:(UIControlStateNormal)];
-    [backView addSubview:codeBtn];
-    
-    UITextField *codeTextFid = [[UITextField alloc]initWithFrame:CGRectMake(codeLabel.xx + 15, lineView.yy + 29, SCREEN_WIDTH - codeLabel.xx - 15 - codeBtn.width - 45, 15)];
-    codeTextFid.placeholder = @"请输入验证码";
+    _codeTextFid = [[UITextField alloc]initWithFrame:CGRectMake(codeLabel.xx + 15, lineView.yy + 29, SCREEN_WIDTH - codeLabel.xx - 15 - 45, 15)];
+    _codeTextFid.placeholder = [LangSwitcher switchLang:@"请输入密码" key:nil];
     //    codeTextFid.keyboardType = UIKeyboardTypeEmailAddress;
-    [codeTextFid setValue:FONT(12) forKeyPath:@"_placeholderLabel.font"];
-    codeTextFid.font = FONT(12);
-    codeTextFid.textColor = [UIColor whiteColor];
-    [codeTextFid setValue:[UIColor whiteColor]  forKeyPath:@"_placeholderLabel.textColor"];
-    codeTextFid.clearsOnBeginEditing = NO;
-    codeTextFid.clearButtonMode = UITextFieldViewModeWhileEditing;
-    [backView addSubview:codeTextFid];
+    [_codeTextFid setValue:FONT(12) forKeyPath:@"_placeholderLabel.font"];
+    _codeTextFid.font = FONT(12);
+    _codeTextFid.textColor = [UIColor whiteColor];
+    [_codeTextFid setValue:[UIColor whiteColor]  forKeyPath:@"_placeholderLabel.textColor"];
+    _codeTextFid.clearsOnBeginEditing = NO;
+    _codeTextFid.clearButtonMode = UITextFieldViewModeWhileEditing;
+    _codeTextFid.secureTextEntry = YES;
+    [backView addSubview:_codeTextFid];
     
-    UIView *lineView1 = [[UIView alloc]initWithFrame:CGRectMake(35, codeLabel.yy + 13, SCREEN_WIDTH - 70, 1.5)];
+    
+    UIView *lineView1 = [[UIView alloc]initWithFrame:CGRectMake(35, codeLabel.yy + 13, SCREEN_WIDTH - 70, 1)];
     lineView1.backgroundColor = kWhiteColor;
     [backView addSubview:lineView1];
-//
-//    UIButton *confirmBtn = [UIButton buttonWithTitle:@"" titleColor:kClearColor backgroundColor:kClearColor titleFont:0];
-//    confirmBtn.frame = CGRectMake(SCREEN_WIDTH - 85, lineView1.yy + 100 - kNavigationBarHeight, 50, 50);
-//    [confirmBtn setBackgroundImage:kImage(@"矩形3拷贝") forState:(UIControlStateNormal)];
-//    [self.view addSubview:confirmBtn];
+
+    UIButton *confirmBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"登录" key:nil] titleColor:kWhiteColor backgroundColor:kClearColor titleFont:18];
+    confirmBtn.frame = CGRectMake(35, lineView1.yy + 45, SCREEN_WIDTH - 70, 50);
+    kViewRadius(confirmBtn, 10);
+    [confirmBtn setBackgroundImage:kImage(@"矩形5-1") forState:(UIControlStateNormal)];
+    [confirmBtn addTarget:self action:@selector(BtnClick:) forControlEvents:(UIControlEventTouchUpInside)];
+    confirmBtn.tag = 100;
+    [backView addSubview:confirmBtn];
+    
+    
+    UIButton *registeredBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"立即注册" key:nil] titleColor:kWhiteColor backgroundColor:kClearColor titleFont:15];
+    registeredBtn.frame = CGRectMake(0, confirmBtn.yy + 10, SCREEN_WIDTH/2 - 15, 30);
+    registeredBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+    [registeredBtn SG_imagePositionStyle:(SGImagePositionStyleRight) spacing:3.5 imagePositionBlock:^(UIButton *button) {
+        [button setImage:kImage(@"矩形5-2") forState:(UIControlStateNormal)];
+    }];
+    [registeredBtn addTarget:self action:@selector(BtnClick:) forControlEvents:(UIControlEventTouchUpInside)];
+    registeredBtn.tag = 101;
+    [backView addSubview:registeredBtn];
+    
+    
+    UIView *lineView2 = [[UIView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 0.5, confirmBtn.yy + 10 + 7.5, 1, 15)];
+    lineView2.backgroundColor = kWhiteColor;
+    [backView addSubview:lineView2];
+    
+    
+    UIButton *forgotPasswordBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"忘记密码" key:nil] titleColor:kWhiteColor backgroundColor:kClearColor titleFont:15];
+    [forgotPasswordBtn addTarget:self action:@selector(BtnClick:) forControlEvents:(UIControlEventTouchUpInside)];
+    forgotPasswordBtn.tag = 102;
+    forgotPasswordBtn.frame = CGRectMake(SCREEN_WIDTH/2 + 15, confirmBtn.yy + 10, SCREEN_WIDTH/2 - 15, 30);
+    forgotPasswordBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    [forgotPasswordBtn SG_imagePositionStyle:(SGImagePositionStyleRight) spacing:3.5 imagePositionBlock:^(UIButton *button) {
+        [button setImage:kImage(@"矩形5-2") forState:(UIControlStateNormal)];
+    }];
+    [backView addSubview:forgotPasswordBtn];
     
 }
 
@@ -152,11 +179,118 @@
 -(void)phoneAndEmailRegisterClick:(UIButton *)sender
 {
     [UIView animateWithDuration:0.3 animations:^{
-        registerLineView.frame = CGRectMake(35 + (sender.tag - 100)*(SCREEN_WIDTH - 70)/2, 160 - 64 + kNavigationBarHeight + 30, (SCREEN_WIDTH - 70)/2, 1.5);
+        registerLineView.frame = CGRectMake(35 + (sender.tag - 100)*(SCREEN_WIDTH - 70)/2, 160 - 64 + kNavigationBarHeight + 30, (SCREEN_WIDTH - 70)/2, 1);
     }];
     sender.selected = !sender.selected;
     isSelectBtn.selected = !isSelectBtn.selected;
     isSelectBtn = sender;
+}
+
+-(void)BtnClick:(UIButton *)sender
+{
+    switch (sender.tag - 100) {
+        case 0:
+        {
+            if ([_phoneTextFid.text isEqualToString:@""]) {
+                [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入正确的手机号" key:nil]];
+                return;
+            }
+            if ([_codeTextFid.text isEqualToString:@""]) {
+                [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入密码" key:nil]];
+                return;
+            }
+            TLNetworking *http = [TLNetworking new];
+            http.showView = self.view;
+            NSData *data   =  [[NSUserDefaults standardUserDefaults] objectForKey:@"chooseModel"];
+            CountryModel *model = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+            http.code = USER_LOGIN_CODE;
+            http.parameters[@"countryCode"] = model.code;
+            http.parameters[@"loginName"] = self.phoneTextFid.text;
+            http.parameters[@"loginPwd"] = self.codeTextFid.text;
+            http.parameters[@"kind"] = APP_KIND;
+            http.parameters[@"client"] = @"ios";
+            
+            [http postWithSuccess:^(id responseObject) {
+                NSLog(@"%@",responseObject[@"data"][@"userId"]);
+                [self requesUserInfoWithResponseObject:responseObject];
+                [MobClick profileSignInWithPUID:responseObject[@"data"][@"userId"]];
+            } failure:^(NSError *error) {
+                
+            }];
+        }
+            break;
+        case 1:
+        {
+            RegisterVC *vc = [RegisterVC new];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+            break;
+        case 2:
+        {
+            
+            
+        }
+            break;
+            
+        default:
+            break;
+    }
+}
+
+- (void)requesUserInfoWithResponseObject:(id)responseObject {
+    
+    NSString *token = responseObject[@"data"][@"token"];
+    NSString *userId = responseObject[@"data"][@"userId"];
+    
+    //保存用户账号和密码
+    //    [[TLUser user] saveUserName:self.phoneTf.text pwd:self.pwdTf.text];
+    
+    //1.获取用户信息
+    TLNetworking *http = [TLNetworking new];
+    http.showView = self.view;
+    http.code = USER_INFO;
+    http.parameters[@"userId"] = userId;
+    http.parameters[@"token"] = token;
+    [http postWithSuccess:^(id responseObject) {
+        
+        NSDictionary *userInfo = responseObject[@"data"];
+        
+        [TLUser user].userId = userId;
+        [TLUser user].token = token;
+        
+        //保存用户信息
+        [[TLUser user] saveUserInfo:userInfo];
+        //初始化用户信息
+        [[TLUser user] setUserInfoWithDict:userInfo];
+        
+//        [[NSUserDefaults standardUserDefaults] setObject:@"isChecking" forKey:@"isChecking"];
+        
+        //
+//        [self dismissViewControllerAnimated:YES completion:nil];
+        
+//        if (self.loginSuccess) {
+//
+//            self.loginSuccess();
+//        }
+//
+//        if (self.IsAPPJoin == YES) {
+//            [[NSNotificationCenter defaultCenter] postNotificationName:kUserLoginNotification object:nil];
+//            self.NeedLogin = NO;
+//            [self.navigationController popToRootViewControllerAnimated:YES];
+            TLTabBarController*tab   = [[TLTabBarController alloc] init];
+            [UIApplication sharedApplication].keyWindow.rootViewController = tab;
+            
+//            return ;
+//        }
+//        self.NeedLogin = NO;
+//        [[NSNotificationCenter defaultCenter] postNotificationName:kUserLoginNotification object:nil];
+//        [self.navigationController popToRootViewControllerAnimated:YES];
+        
+    } failure:^(NSError *error) {
+        
+        
+    }];
+    
 }
 
 - (void)viewDidLoad {
