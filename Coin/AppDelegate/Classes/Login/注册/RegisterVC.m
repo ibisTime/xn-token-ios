@@ -8,6 +8,7 @@
 
 #import "RegisterVC.h"
 #import "SearchCountriesVC.h"
+#import "CompleteTheRegistrationVC.h"
 @interface RegisterVC ()<UIScrollViewDelegate>
 {
     UIButton *isSelectBtn;
@@ -75,10 +76,12 @@
     self.scrollView.showsHorizontalScrollIndicator = NO;
     self.scrollView.pagingEnabled = YES;
     self.scrollView.delegate = self;
+    self.scrollView.scrollEnabled = NO;
     [self.view addSubview:self.scrollView];
     
     [self registrationWayUI];
     [self setThePassword];
+    [self moneyPasswordUI];
     
 }
 
@@ -99,6 +102,14 @@
     sender.selected = !sender.selected;
     isSelectBtn.selected = !isSelectBtn.selected;
     isSelectBtn = sender;
+}
+
+#pragma mark -- 完成注册
+-(void)completeTheRegistration
+{
+    CompleteTheRegistrationVC *vc = [CompleteTheRegistrationVC new];
+    
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark -- scrollView代理方法
@@ -275,27 +286,93 @@
         
     }
     
-    
+    NSArray *securityArray = @[[LangSwitcher switchLang:@"密码位数为8~25个字符(字符+字母)" key:nil],[LangSwitcher switchLang:@"密码中包含小写字母" key:nil],[LangSwitcher switchLang:@"密码中包含大写字母" key:nil],[LangSwitcher switchLang:@"密码中包含数字" key:nil]];
     for (int i = 0; i < 4; i ++) {
-        UIView *pointView = [[UIView alloc]initWithFrame:CGRectMake(35, 160 - 64 + kNavigationBarHeight + 108 * 2 - 35 +i%4 * 20, 8, 8)];
+        UIView *pointView = [[UIView alloc]initWithFrame:CGRectMake(35, 160 - 64 + kNavigationBarHeight + 108 * 2 - 30 +i%4 * 20, 8, 8)];
         pointView.backgroundColor = kWhiteColor;
         kViewRadius(pointView, 4);
         [passwordView addSubview:pointView];
         
-//        UILabel *securityLbl = [UILabel labelWithFrameCGRectMake(49, 160 - 64 + kNavigationBarHeight + 108 * 2 - 35 +i%4 * 20 - 2, SCREEN_WIDTH - 49 - 35, 8) textAligment:<#(NSTextAlignment)#> backgroundColor:<#(UIColor *)#> font:<#(UIFont *)#> textColor:<#(UIColor *)#>]
+        UILabel *securityLbl = [UILabel labelWithFrame:CGRectMake(49, 160 - 64 + kNavigationBarHeight + 108 * 2 - 30 +i%4 * 20 - 2, SCREEN_WIDTH - 49 - 35, 12) textAligment:(NSTextAlignmentLeft) backgroundColor:kClearColor font:FONT(12) textColor:kWhiteColor];
+        securityLbl.text = securityArray[i];
+        securityLbl.tag = 200 + i;
+        [passwordView addSubview:securityLbl];
     }
     
     
+    UILabel *label = [self.view viewWithTag:203];
+    UILabel *levelStateLbl = [UILabel labelWithFrame:CGRectMake(SCREEN_WIDTH - 35, label.y - 4, 0, 18) textAligment:(NSTextAlignmentRight) backgroundColor:kClearColor font:FONT(12) textColor:kWhiteColor];
+    NSString *level = [LangSwitcher switchLang:@"安全级别" key:nil];
+    NSString *State = [LangSwitcher switchLang:@"高" key:nil];
+    NSString *str = [NSString stringWithFormat:@"%@ %@",level,State];
+    NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc]      initWithString:str];
+    [attrStr addAttribute:NSFontAttributeName value:HGboldfont(18) range:NSMakeRange(str.length - State.length,State.length)];
+//    [attrStr addAttribute:NSFontAttributeNamevalue:HGboldfont(18) range:NSMakeRange(0,3)];
+    //字体大小为20.0f[attrStr addAttribute:NSFontAttributeNamevalue:  [UIFont boldSystemFontOfSize:20.0f] range:NSMakeRange(0,3)];//字体大小为20.0f并且加粗
+    levelStateLbl.attributedText = attrStr;
+    [levelStateLbl sizeToFit];
+    levelStateLbl.frame = CGRectMake(SCREEN_WIDTH - 35 - levelStateLbl.width, label.y - 6, levelStateLbl.width, 18);
+    [passwordView addSubview:levelStateLbl];
     
     
-    
-    
-    
-    
-    
+    UIButton *confirmBtn = [UIButton buttonWithTitle:@"" titleColor:kClearColor backgroundColor:kClearColor titleFont:0];
+    confirmBtn.frame = CGRectMake(SCREEN_WIDTH - 85, levelStateLbl.yy + 20, 50, 50);
+    [confirmBtn setBackgroundImage:kImage(@"矩形3拷贝") forState:(UIControlStateNormal)];
+    [confirmBtn addTarget:self action:@selector(nextBtn) forControlEvents:(UIControlEventTouchUpInside)];
+    [passwordView addSubview:confirmBtn];
 }
 
 
+-(void)moneyPasswordUI
+{
+    UIView *passwordView = [[UIView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH * 2, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    [self.scrollView addSubview:passwordView];
+    
+    NSArray *passWordArray = @[[LangSwitcher switchLang:@"输入资金密码" key:nil],[LangSwitcher switchLang:@"确认资金密码" key:nil]];
+    NSArray *placArray = @[[LangSwitcher switchLang:@"请输入账号资金密码" key:nil],[LangSwitcher switchLang:@"请确认账号资金密码" key:nil]];
+    
+    
+    UIView *bottomView;
+    for (int i = 0; i < 2; i ++) {
+        UILabel *passWordLbl = [UILabel labelWithFrame:CGRectMake(35, 160 - 64 + kNavigationBarHeight + i % 2 * 108, SCREEN_WIDTH - 70, 16) textAligment:(NSTextAlignmentLeft) backgroundColor:kClearColor font:HGboldfont(16) textColor:kWhiteColor];
+        passWordLbl.text = passWordArray[i];
+        [passwordView addSubview:passWordLbl];
+        
+        
+        UIImageView *iconImage = [[UIImageView alloc] initWithFrame:CGRectMake(40, passWordLbl.yy + 21 - 1.5, 10, 15)];
+        iconImage.image = kImage(@"安全组拷贝");
+        [passwordView addSubview:iconImage];
+        
+        UITextField *passWordFid = [[UITextField alloc]initWithFrame:CGRectMake(iconImage.xx + 15, passWordLbl.yy + 21 - 1.5, SCREEN_WIDTH - iconImage.xx - 40 , 15)];
+        passWordFid.placeholder = placArray[i];
+        passWordFid.secureTextEntry = YES;
+        [passWordFid setValue:FONT(12) forKeyPath:@"_placeholderLabel.font"];
+        passWordFid.font = FONT(12);
+        passWordFid.textColor = [UIColor whiteColor];
+        [passWordFid setValue:[UIColor whiteColor]  forKeyPath:@"_placeholderLabel.textColor"];
+        passWordFid.clearsOnBeginEditing = NO;
+        passWordFid.clearButtonMode = UITextFieldViewModeWhileEditing;
+        [passwordView addSubview:passWordFid];
+        
+        
+        UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(35, passWordFid.yy + 8.5, SCREEN_WIDTH - 70, 1)];
+        lineView.backgroundColor = kLineColor;
+        [passwordView addSubview:lineView];
+        if (i == 1) {
+            bottomView =lineView;
+        }
+    }
+    
+    
+    UIButton *confirmBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"完成注册" key:nil] titleColor:kWhiteColor backgroundColor:kClearColor titleFont:18];
+    confirmBtn.frame = CGRectMake(50, bottomView.yy + 75, SCREEN_WIDTH - 100, 50);
+    kViewRadius(confirmBtn, 10);
+    [confirmBtn setBackgroundImage:kImage(@"矩形5-1") forState:(UIControlStateNormal)];
+    [confirmBtn addTarget:self action:@selector(completeTheRegistration) forControlEvents:(UIControlEventTouchUpInside)];
+    [passwordView addSubview:confirmBtn];
+    
+    
+}
 
 
 - (void)didReceiveMemoryWarning {

@@ -352,7 +352,6 @@ typedef enum : NSUInteger {
             [TLAlert alertWithError:[LangSwitcher switchLang:@"可用余额不足" key:nil]];
             return;
         }
-        
     }
     TLDataBase *dataBase = [TLDataBase sharedManager];
     NSString *Mnemonics;

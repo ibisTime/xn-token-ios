@@ -29,6 +29,7 @@
 		1F4E89D4219C1D7D007B3015 /* NSString+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4E89D2219C1D7D007B3015 /* NSString+Utils.m */; };
 		1F4E89D5219C1D7D007B3015 /* ContactDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4E89D3219C1D7D007B3015 /* ContactDataHelper.m */; };
 		1F4E89D9219D144E007B3015 /* LoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4E89D8219D144E007B3015 /* LoginVC.m */; };
+		1F4E89DF219DA2D4007B3015 /* CompleteTheRegistrationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4E89DE219DA2D4007B3015 /* CompleteTheRegistrationVC.m */; };
 		1F709D5E218161D8002D1CC4 /* keyTransferTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F709D5D218161D8002D1CC4 /* keyTransferTableView.m */; };
 		1F709D61218162A5002D1CC4 /* TransformButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F709D60218162A5002D1CC4 /* TransformButtonCell.m */; };
 		1F709D6421817246002D1CC4 /* TransferNumberCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F709D6321817246002D1CC4 /* TransferNumberCell.m */; };
@@ -572,6 +573,8 @@
 		1F4E89D3219C1D7D007B3015 /* ContactDataHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactDataHelper.m; sourceTree = "<group>"; };
 		1F4E89D7219D144E007B3015 /* LoginVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginVC.h; sourceTree = "<group>"; };
 		1F4E89D8219D144E007B3015 /* LoginVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginVC.m; sourceTree = "<group>"; };
+		1F4E89DD219DA2D4007B3015 /* CompleteTheRegistrationVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CompleteTheRegistrationVC.h; sourceTree = "<group>"; };
+		1F4E89DE219DA2D4007B3015 /* CompleteTheRegistrationVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CompleteTheRegistrationVC.m; sourceTree = "<group>"; };
 		1F709D5C218161D8002D1CC4 /* keyTransferTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = keyTransferTableView.h; sourceTree = "<group>"; };
 		1F709D5D218161D8002D1CC4 /* keyTransferTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = keyTransferTableView.m; sourceTree = "<group>"; };
 		1F709D5F218162A5002D1CC4 /* TransformButtonCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TransformButtonCell.h; sourceTree = "<group>"; };
@@ -1871,6 +1874,8 @@
 			children = (
 				1F4E896A21998572007B3015 /* RegisterVC.h */,
 				1F4E896B21998572007B3015 /* RegisterVC.m */,
+				1F4E89DD219DA2D4007B3015 /* CompleteTheRegistrationVC.h */,
+				1F4E89DE219DA2D4007B3015 /* CompleteTheRegistrationVC.m */,
 			);
 			path = "注册";
 			sourceTree = "<group>";
@@ -4725,6 +4730,7 @@
 				7A8A5D3520EA3E5A002D9A48 /* SendVC.m in Sources */,
 				B8D938D52116CA0800B2AA88 /* QDetailCell.m in Sources */,
 				1F709D6A2181C4C4002D1CC4 /* WANTransfer.m in Sources */,
+				1F4E89DF219DA2D4007B3015 /* CompleteTheRegistrationVC.m in Sources */,
 				1F709D712181E51E002D1CC4 /* UIView+Banner.m in Sources */,
 				B85FE46F21287D2300C9F60C /* PayModel.m in Sources */,
 				1F4E896C21998572007B3015 /* RegisterVC.m in Sources */,
