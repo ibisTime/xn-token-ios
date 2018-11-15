@@ -604,13 +604,13 @@ typedef enum : NSUInteger {
         UISlider * slider = sender;
         CGFloat value = slider.value;
         if ([self.currency.symbol isEqualToString:@"BTC"]) {
-            self.blanceFree.text = [NSString stringWithFormat:@"%.8fBTC",[BTCPoundage enterTheumber:self.tranAmountTF.text setFee:[NSString stringWithFormat:@"%.1f",slider.value] setUtxis:self.utxis]/100000000];
+            self.blanceFree.text = [NSString stringWithFormat:@"%@sat/b(≈%.8fBTC)",[NSString stringWithFormat:@"%.1f",slider.value],[BTCPoundage enterTheumber:self.tranAmountTF.text setFee:[NSString stringWithFormat:@"%.1f",slider.value] setUtxis:self.utxis]/100000000];
             
             self.btcPrice = slider.value;
             return;
         }
         if ([self.currency.symbol isEqualToString:@"USDT"]) {
-            self.blanceFree.text = [NSString stringWithFormat:@"%.8fBTC",[BTCPoundage usdtPoundage:self.tranAmountTF.text setFee:[NSString stringWithFormat:@"%.1f",self.slider.value] setUtxis:self.utxis]/100000000];
+            self.blanceFree.text = [NSString stringWithFormat:@"%@sat/b(≈%.8fBTC)",[NSString stringWithFormat:@"%.1f",self.slider.value],[BTCPoundage usdtPoundage:self.tranAmountTF.text setFee:[NSString stringWithFormat:@"%.1f",self.slider.value] setUtxis:self.utxis]/100000000];
             return;
         }
         
@@ -624,23 +624,18 @@ typedef enum : NSUInteger {
         }else{
             symbolStr = @"WAN";
         }
-        if (value == 0) {
+        if (value > 0.5) {
             
-            self.blanceFree.text = [NSString stringWithFormat:@"%.8f %@",self.gamPrice*0.85,symbolStr];
-            self.pricr = [NSString stringWithFormat:@"%.8f",[self.tempPrice longLongValue]*0.85];
+            self.blanceFree.text = [NSString stringWithFormat:@"%.8f %@",self.gamPrice + self.gamPrice*(slider.value - 0.5),symbolStr];
+            self.pricr = [NSString stringWithFormat:@"%.8f",[self.tempPrice longLongValue] + [self.tempPrice longLongValue]*(slider.value - 0.5)];
             
         }else{
 
-            self.blanceFree.text = [NSString stringWithFormat:@"%.8f %@", self.gamPrice *0.85 +self.gamPrice*value*1/3 ,symbolStr];
+            self.blanceFree.text = [NSString stringWithFormat:@"%.8f %@", self.gamPrice  - self.gamPrice* ( - slider.value + 0.5),symbolStr];
 
-            self.pricr = [NSString stringWithFormat:@"%.8f",[self.tempPrice longLongValue] + [self.tempPrice longLongValue] *value *1/3];
+            self.pricr = [NSString stringWithFormat:@"%.8f",[self.tempPrice longLongValue] - [self.tempPrice longLongValue] * ( - slider.value + 0.5)];
         }
-        if (value == 1)
-        {
-            self.blanceFree.text = [NSString stringWithFormat:@"%.8f %@",self.gamPrice*value*1.15,symbolStr];
 
-            self.pricr = [NSString stringWithFormat:@"%.8f",[self.tempPrice longLongValue]*value*1.15];
-        }
     }
 }
 

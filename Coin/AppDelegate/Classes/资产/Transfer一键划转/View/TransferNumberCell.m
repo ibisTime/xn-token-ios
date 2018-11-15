@@ -344,8 +344,8 @@
         
         [self.totalFree mas_makeConstraints:^(MASConstraintMaker *make) {
             make.bottom.equalTo(self.importButton.mas_top).offset(-10);
-            make.left.equalTo(self.importButton.mas_left).offset(0);
-            make.right.equalTo(self.importButton.mas_right).offset(0);
+            make.left.equalTo(self.mas_left).offset(0);
+            make.right.equalTo(self.mas_right).offset(0);
             
         }];
         self.leftAmount.tag = 1122;
