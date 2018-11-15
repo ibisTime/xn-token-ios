@@ -44,7 +44,7 @@
     [self.view addSubview:backView];
     
     UILabel *nameLable = [[UILabel alloc]init];
-    nameLable.text = [LangSwitcher switchLang:@"新用户注册" key:nil];
+    nameLable.text = [LangSwitcher switchLang:@"登录Theia个人账户" key:nil];
     nameLable.textAlignment = NSTextAlignmentCenter;
     nameLable.font = Font(16);
     nameLable.textColor = [UIColor whiteColor];

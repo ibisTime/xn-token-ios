@@ -12,7 +12,10 @@
 {
     UIButton *isSelectBtn;
     UIView *registerLineView;
+    NSInteger w;
 }
+
+@property (nonatomic , strong)UIScrollView *scrollView;
 
 
 @end
@@ -41,15 +44,14 @@
 -(void)initView
 {
     
-    NSData *data   =  [[NSUserDefaults standardUserDefaults] objectForKey:@"chooseModel"];
-    CountryModel *model = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    
     
     UIImageView *backImage = [[UIImageView alloc]initWithFrame:CGRectMake(0, -kNavigationBarHeight, SCREEN_WIDTH, SCREEN_HEIGHT)];
     backImage.image = kImage(@"起始业背景");
     [self.view addSubview:backImage];
     
     UILabel *nameLable = [[UILabel alloc]init];
-    nameLable.text = [LangSwitcher switchLang:@"新用户注册" key:nil];
+    nameLable.text = [LangSwitcher switchLang:@"注册Theia个人账户" key:nil];
     nameLable.textAlignment = NSTextAlignmentCenter;
     nameLable.font = Font(16);
     nameLable.textColor = [UIColor whiteColor];
@@ -60,19 +62,89 @@
         UIView *bottomView = [[UIView alloc]initWithFrame:CGRectMake(12 + i % 3 * (SCREEN_WIDTH - 24)/3, SCREEN_HEIGHT - kNavigationBarHeight - 45 - 7.5, (SCREEN_WIDTH - 30)/3, 7.5)];
         bottomView.backgroundColor = kWhiteColor;
         [self.view addSubview:bottomView];
+        bottomView.tag = 123 + i;
+        if (i == 0) {
+            bottomView.backgroundColor = kHexColor(@"68c5ca");
+        }
     }
     
     
-    UIScrollView *scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, -kNavigationBarHeight, SCREEN_WIDTH, SCREEN_HEIGHT + kStatusBarHeight)];
-    scrollView.contentSize = CGSizeMake(SCREEN_WIDTH * 3, 0);
-    scrollView.bounces = NO;
-    scrollView.showsHorizontalScrollIndicator = NO;
-    scrollView.pagingEnabled = YES;
-    scrollView.delegate = self;
-    [self.view addSubview:scrollView];
+    self.scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, -kNavigationBarHeight, SCREEN_WIDTH, SCREEN_HEIGHT + kStatusBarHeight)];
+    self.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH * 3, 0);
+    self.scrollView.bounces = NO;
+    self.scrollView.showsHorizontalScrollIndicator = NO;
+    self.scrollView.pagingEnabled = YES;
+    self.scrollView.delegate = self;
+    [self.view addSubview:self.scrollView];
     
+    [self registrationWayUI];
+    [self setThePassword];
     
+}
+
+
+#pragma mark -- 搜索
+-(void)phoneAreaCodeBtnClick
+{
+    SearchCountriesVC *vc = [SearchCountriesVC new];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+#pragma mark -- 选择注册方式
+-(void)phoneAndEmailRegisterClick:(UIButton *)sender
+{
+    [UIView animateWithDuration:0.3 animations:^{
+        registerLineView.frame = CGRectMake(35 + (sender.tag - 100)*(SCREEN_WIDTH - 70)/2, 160 - 64 + kNavigationBarHeight + 30, (SCREEN_WIDTH - 70)/2, 1);
+    }];
+    sender.selected = !sender.selected;
+    isSelectBtn.selected = !isSelectBtn.selected;
+    isSelectBtn = sender;
+}
+
+#pragma mark -- scrollView代理方法
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    UIView *lineView1 = [self.view viewWithTag:123];
+    UIView *lineView2 = [self.view viewWithTag:124];
+    UIView *lineView3 = [self.view viewWithTag:125];
+    
+    w = scrollView.contentOffset.x/SCREEN_WIDTH;
+    
+    if (w == 0) {
+        lineView1.backgroundColor = kHexColor(@"68c5ca");
+        lineView2.backgroundColor = kWhiteColor;
+        lineView3.backgroundColor = kWhiteColor;
+    }
+    if (w == 1) {
+        lineView1.backgroundColor = kHexColor(@"68c5ca");
+        lineView2.backgroundColor = kHexColor(@"68c5ca");
+        lineView3.backgroundColor = kWhiteColor;
+    }
+    if (w == 2) {
+        lineView1.backgroundColor = kHexColor(@"68c5ca");
+        lineView2.backgroundColor = kHexColor(@"68c5ca");
+        lineView3.backgroundColor = kHexColor(@"68c5ca");
+    }
+    
+    NSLog(@"%.2f",scrollView.contentOffset.x);
+    NSLog(@"%ld",w);
+    
+}
+
+#pragma mark -- 下一步
+-(void)nextBtn
+{
+    w ++;
+    [self.scrollView setContentOffset:CGPointMake(SCREEN_WIDTH * w, 0) animated:YES];
+}
+
+
+-(void)registrationWayUI
+{
+    NSData *data   =  [[NSUserDefaults standardUserDefaults] objectForKey:@"chooseModel"];
+    CountryModel *model = [NSKeyedUnarchiver unarchiveObjectWithData:data];
     NSArray *array = @[[LangSwitcher switchLang:@"手机注册" key:nil],[LangSwitcher switchLang:@"邮箱注册" key:nil]];
+    
     for (int i = 0; i < 2; i ++) {
         UIButton *phoneAndEmailRegister = [UIButton buttonWithTitle:array[i] titleColor:kHexColor(@"d6d5d5") backgroundColor:kClearColor titleFont:16];
         [phoneAndEmailRegister setTitleColor:kWhiteColor forState:(UIControlStateSelected)];
@@ -83,22 +155,18 @@
             
             registerLineView = [[UIView alloc]initWithFrame:CGRectMake(35, 160 - 64 + kNavigationBarHeight + 30, (SCREEN_WIDTH - 70)/2, 1)];
             registerLineView.backgroundColor = kWhiteColor;
-            [scrollView addSubview:registerLineView];
+            [self.scrollView addSubview:registerLineView];
         }
         phoneAndEmailRegister.titleLabel.font = HGboldfont(16);
         [phoneAndEmailRegister addTarget:self action:@selector(phoneAndEmailRegisterClick:) forControlEvents:(UIControlEventTouchUpInside)];
         phoneAndEmailRegister.tag = 100 + i;
-        [scrollView addSubview:phoneAndEmailRegister];
+        [self.scrollView addSubview:phoneAndEmailRegister];
     }
     
     UIButton *phoneAreaCodeBtn = [UIButton buttonWithTitle:[NSString stringWithFormat:@"+%@",[model.interCode substringFromIndex:2]] titleColor:kWhiteColor backgroundColor:kClearColor titleFont:14];
     
     phoneAreaCodeBtn.frame = CGRectMake(46, registerLineView.yy + 50, 0, 15);
     phoneAreaCodeBtn.titleLabel.font = HGboldfont(14);
-    
-    
-    
-    
     [phoneAreaCodeBtn sizeToFit];
     phoneAreaCodeBtn.frame = CGRectMake(46, registerLineView.yy + 50, phoneAreaCodeBtn.frame.size.width + 6.5, 15);
     [phoneAreaCodeBtn setImage:kImage(@"矩形4") forState:(UIControlStateNormal)];
@@ -113,22 +181,22 @@
     
     [phoneAreaCodeBtn addTarget:self action:@selector(phoneAreaCodeBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
     
-    [scrollView addSubview:phoneAreaCodeBtn];
+    [self.scrollView addSubview:phoneAreaCodeBtn];
     
     UITextField *phoneTextFid = [[UITextField alloc]initWithFrame:CGRectMake(phoneAreaCodeBtn.xx + 15, registerLineView.yy + 50, SCREEN_WIDTH - phoneAreaCodeBtn.xx - 60, 15)];
     phoneTextFid.placeholder = [LangSwitcher switchLang:@"请输入您的手机号码" key:nil];
-//    phoneTextFid.keyboardType = UIKeyboardTypeEmailAddress;
+    //    phoneTextFid.keyboardType = UIKeyboardTypeEmailAddress;
     [phoneTextFid setValue:FONT(12) forKeyPath:@"_placeholderLabel.font"];
     phoneTextFid.font = FONT(12);
     phoneTextFid.textColor = [UIColor whiteColor];
     [phoneTextFid setValue:[UIColor whiteColor]  forKeyPath:@"_placeholderLabel.textColor"];
     phoneTextFid.clearsOnBeginEditing = NO;
     phoneTextFid.clearButtonMode = UITextFieldViewModeWhileEditing;
-    [scrollView addSubview:phoneTextFid];
+    [self.scrollView addSubview:phoneTextFid];
     
     UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(35, phoneTextFid.yy + 13, SCREEN_WIDTH - 70, 1)];
     lineView.backgroundColor = kWhiteColor;
-    [scrollView addSubview:lineView];
+    [self.scrollView addSubview:lineView];
     
     UILabel *codeLabel = [UILabel labelWithFrame:CGRectMake(46, lineView.yy + 29, 0, 15) textAligment:(NSTextAlignmentCenter) backgroundColor:kClearColor font:HGboldfont(14) textColor:kWhiteColor];
     codeLabel.text = [LangSwitcher switchLang:@"验证码" key:nil];
@@ -140,51 +208,95 @@
         codeLabel.frame = CGRectMake(46, lineView.yy + 29, codeLabel.width, 15);
     }
     
-    [scrollView addSubview:codeLabel];
+    [self.scrollView addSubview:codeLabel];
     
     UIButton *codeBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"获取验证码" key:nil] titleColor:kWhiteColor backgroundColor:kClearColor titleFont:14];
     [codeBtn sizeToFit];
     codeBtn.frame = CGRectMake(SCREEN_WIDTH - 35 - codeBtn.width - 26, lineView.yy + 16, codeBtn.width + 26, 31);
     [codeBtn setBackgroundImage:kImage(@"圆角矩形2拷贝2") forState:(UIControlStateNormal)];
-    [scrollView addSubview:codeBtn];
+    [self.scrollView addSubview:codeBtn];
     
     UITextField *codeTextFid = [[UITextField alloc]initWithFrame:CGRectMake(codeLabel.xx + 15, lineView.yy + 29, SCREEN_WIDTH - codeLabel.xx - 15 - codeBtn.width - 45, 15)];
     codeTextFid.placeholder = [LangSwitcher switchLang:@"请输入验证码" key:nil];
-//    codeTextFid.keyboardType = UIKeyboardTypeEmailAddress;
+    //    codeTextFid.keyboardType = UIKeyboardTypeEmailAddress;
     [codeTextFid setValue:FONT(12) forKeyPath:@"_placeholderLabel.font"];
     codeTextFid.font = FONT(12);
     codeTextFid.textColor = [UIColor whiteColor];
     [codeTextFid setValue:[UIColor whiteColor]  forKeyPath:@"_placeholderLabel.textColor"];
     codeTextFid.clearsOnBeginEditing = NO;
     codeTextFid.clearButtonMode = UITextFieldViewModeWhileEditing;
-    [scrollView addSubview:codeTextFid];
+    [self.scrollView addSubview:codeTextFid];
     
     UIView *lineView1 = [[UIView alloc]initWithFrame:CGRectMake(35, codeLabel.yy + 13, SCREEN_WIDTH - 70, 1)];
     lineView1.backgroundColor = kWhiteColor;
-    [scrollView addSubview:lineView1];
+    [self.scrollView addSubview:lineView1];
     
     UIButton *confirmBtn = [UIButton buttonWithTitle:@"" titleColor:kClearColor backgroundColor:kClearColor titleFont:0];
-    confirmBtn.frame = CGRectMake(SCREEN_WIDTH - 85, lineView1.yy + 100 - kNavigationBarHeight, 50, 50);
+    confirmBtn.frame = CGRectMake(SCREEN_WIDTH - 85, lineView1.yy + 100, 50, 50);
     [confirmBtn setBackgroundImage:kImage(@"矩形3拷贝") forState:(UIControlStateNormal)];
-    [self.view addSubview:confirmBtn];
+    [confirmBtn addTarget:self action:@selector(nextBtn) forControlEvents:(UIControlEventTouchUpInside)];
+    [self.scrollView addSubview:confirmBtn];
+}
+
+
+-(void)setThePassword
+{
+    UIView *passwordView = [[UIView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    [self.scrollView addSubview:passwordView];
+    
+    NSArray *passWordArray = @[[LangSwitcher switchLang:@"输入登录密码" key:nil],[LangSwitcher switchLang:@"确认登录密码" key:nil]];
+    NSArray *placArray = @[[LangSwitcher switchLang:@"请输入账号登录密码" key:nil],[LangSwitcher switchLang:@"请确认账号登录密码" key:nil]];
+    
+    for (int i = 0; i < 2; i ++) {
+        UILabel *passWordLbl = [UILabel labelWithFrame:CGRectMake(35, 160 - 64 + kNavigationBarHeight + i % 2 * 108, SCREEN_WIDTH - 70, 16) textAligment:(NSTextAlignmentLeft) backgroundColor:kClearColor font:HGboldfont(16) textColor:kWhiteColor];
+        passWordLbl.text = passWordArray[i];
+        [passwordView addSubview:passWordLbl];
+        
+        
+        UIImageView *iconImage = [[UIImageView alloc] initWithFrame:CGRectMake(40, passWordLbl.yy + 21 - 1.5, 10, 15)];
+        iconImage.image = kImage(@"安全组拷贝");
+        [passwordView addSubview:iconImage];
+        
+        UITextField *passWordFid = [[UITextField alloc]initWithFrame:CGRectMake(iconImage.xx + 15, passWordLbl.yy + 21 - 1.5, SCREEN_WIDTH - iconImage.xx - 40 , 15)];
+        passWordFid.placeholder = placArray[i];
+        passWordFid.secureTextEntry = YES;
+        [passWordFid setValue:FONT(12) forKeyPath:@"_placeholderLabel.font"];
+        passWordFid.font = FONT(12);
+        passWordFid.textColor = [UIColor whiteColor];
+        [passWordFid setValue:[UIColor whiteColor]  forKeyPath:@"_placeholderLabel.textColor"];
+        passWordFid.clearsOnBeginEditing = NO;
+        passWordFid.clearButtonMode = UITextFieldViewModeWhileEditing;
+        [passwordView addSubview:passWordFid];
+        
+        
+        UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(35, passWordFid.yy + 8.5, SCREEN_WIDTH - 70, 1)];
+        lineView.backgroundColor = kLineColor;
+        [passwordView addSubview:lineView];
+        
+    }
+    
+    
+    for (int i = 0; i < 4; i ++) {
+        UIView *pointView = [[UIView alloc]initWithFrame:CGRectMake(35, 160 - 64 + kNavigationBarHeight + 108 * 2 - 35 +i%4 * 20, 8, 8)];
+        pointView.backgroundColor = kWhiteColor;
+        kViewRadius(pointView, 4);
+        [passwordView addSubview:pointView];
+        
+//        UILabel *securityLbl = [UILabel labelWithFrameCGRectMake(49, 160 - 64 + kNavigationBarHeight + 108 * 2 - 35 +i%4 * 20 - 2, SCREEN_WIDTH - 49 - 35, 8) textAligment:<#(NSTextAlignment)#> backgroundColor:<#(UIColor *)#> font:<#(UIFont *)#> textColor:<#(UIColor *)#>]
+    }
+    
+    
+    
+    
+    
+    
+    
+    
     
 }
 
--(void)phoneAreaCodeBtnClick
-{
-    SearchCountriesVC *vc = [SearchCountriesVC new];
-    [self.navigationController pushViewController:vc animated:YES];
-}
 
--(void)phoneAndEmailRegisterClick:(UIButton *)sender
-{
-    [UIView animateWithDuration:0.3 animations:^{
-        registerLineView.frame = CGRectMake(35 + (sender.tag - 100)*(SCREEN_WIDTH - 70)/2, 160 - 64 + kNavigationBarHeight + 30, (SCREEN_WIDTH - 70)/2, 1);
-    }];
-    sender.selected = !sender.selected;
-    isSelectBtn.selected = !isSelectBtn.selected;
-    isSelectBtn = sender;
-}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
