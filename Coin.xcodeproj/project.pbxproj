@@ -28,6 +28,7 @@
 		1F4E89CE219C1D32007B3015 /* JSONModel+networking.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4E89AD219C1D31007B3015 /* JSONModel+networking.m */; };
 		1F4E89D4219C1D7D007B3015 /* NSString+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4E89D2219C1D7D007B3015 /* NSString+Utils.m */; };
 		1F4E89D5219C1D7D007B3015 /* ContactDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4E89D3219C1D7D007B3015 /* ContactDataHelper.m */; };
+		1F4E89D9219D144E007B3015 /* LoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4E89D8219D144E007B3015 /* LoginVC.m */; };
 		1F709D5E218161D8002D1CC4 /* keyTransferTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F709D5D218161D8002D1CC4 /* keyTransferTableView.m */; };
 		1F709D61218162A5002D1CC4 /* TransformButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F709D60218162A5002D1CC4 /* TransformButtonCell.m */; };
 		1F709D6421817246002D1CC4 /* TransferNumberCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F709D6321817246002D1CC4 /* TransferNumberCell.m */; };
@@ -569,6 +570,8 @@
 		1F4E89D1219C1D7D007B3015 /* ContactDataHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactDataHelper.h; sourceTree = "<group>"; };
 		1F4E89D2219C1D7D007B3015 /* NSString+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Utils.m"; sourceTree = "<group>"; };
 		1F4E89D3219C1D7D007B3015 /* ContactDataHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactDataHelper.m; sourceTree = "<group>"; };
+		1F4E89D7219D144E007B3015 /* LoginVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginVC.h; sourceTree = "<group>"; };
+		1F4E89D8219D144E007B3015 /* LoginVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginVC.m; sourceTree = "<group>"; };
 		1F709D5C218161D8002D1CC4 /* keyTransferTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = keyTransferTableView.h; sourceTree = "<group>"; };
 		1F709D5D218161D8002D1CC4 /* keyTransferTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = keyTransferTableView.m; sourceTree = "<group>"; };
 		1F709D5F218162A5002D1CC4 /* TransformButtonCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TransformButtonCell.h; sourceTree = "<group>"; };
@@ -1844,6 +1847,7 @@
 		1F4E896521998510007B3015 /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				1F4E89D6219D1434007B3015 /* Login */,
 				1F4E896F219C1AAA007B3015 /* Search */,
 				1F4E896E219985A5007B3015 /* 注册 */,
 				1F4E896D21998592007B3015 /* 起始业 */,
@@ -1971,6 +1975,15 @@
 				1F4E89D3219C1D7D007B3015 /* ContactDataHelper.m */,
 			);
 			path = libs;
+			sourceTree = "<group>";
+		};
+		1F4E89D6219D1434007B3015 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				1F4E89D7219D144E007B3015 /* LoginVC.h */,
+				1F4E89D8219D144E007B3015 /* LoginVC.m */,
+			);
+			path = Login;
 			sourceTree = "<group>";
 		};
 		1F709D5B2180A7FC002D1CC4 /* SGQRCode */ = {
@@ -4485,6 +4498,7 @@
 				211DE6B61FB58B4C002FCF3D /* UIView+Extension.m in Sources */,
 				21A7F3141FB2E2F900FAA0A2 /* TLPwdRelatedVC.m in Sources */,
 				7A07F811216CAAEA0026EB7A /* MyInconmeCell.m in Sources */,
+				1F4E89D9219D144E007B3015 /* LoginVC.m in Sources */,
 				7AE970522170C4970066B66C /* InviteEarningsModel.m in Sources */,
 				B88B092720C8E371005C2D2F /* JoinMineCell.m in Sources */,
 				2120D8A31FCEE1DE00712600 /* HourPickerView.m in Sources */,

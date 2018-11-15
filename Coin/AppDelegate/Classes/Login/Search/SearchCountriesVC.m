@@ -10,6 +10,7 @@
 #import "ContactModel.h"
 #import "ContactTableViewCell.h"
 #import "ContactDataHelper.h"//根据拼音A~Z~#进行排序的tool
+#import "TheInitialVC.h"
 @interface SearchCountriesVC ()<UITableViewDelegate,UITableViewDataSource,
 UISearchBarDelegate,UISearchDisplayDelegate>
 {
@@ -250,6 +251,57 @@ UISearchBarDelegate,UISearchDisplayDelegate>
     }
     return cell;
 }
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    ContactModel *model;
+    if (tableView==_searchDisplayController.searchResultsTableView){
+        model = _searchResultArr[indexPath.row];
+        
+        
+    }else{
+        model=_rowArr[indexPath.section][indexPath.row];
+    }
+//    ContactModel *model=_rowArr[indexPath.section][indexPath.row];
+    for ( int i = 0 ; i < self.serverDataArr.count ; i ++) {
+        if ([model.chineseName isEqualToString:self.serverDataArr[i][@"chineseName"]]) {
+            model = self.serverDataArr[i];
+        }
+    }
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:model];
+    
+    [[NSUserDefaults standardUserDefaults] setObject:data forKey:@"chooseModel"];
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"chooseCoutry"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    NSString *money ;
+    
+    if ([TLUser user].isLogin == NO) {
+        TheInitialVC *log = [TheInitialVC new];
+        TLNavigationController *na = [[TLNavigationController alloc] initWithRootViewController:log];
+        //            log.IsAPPJoin = YES;
+        if ([model.interSimpleCode isEqualToString:@"CN"] ||[model.interSimpleCode isEqualToString:@"HK"] ||[model.interSimpleCode isEqualToString:@"TW"] || [model.interSimpleCode isEqualToString:@"MO"]) {
+            [LangSwitcher changLangType:LangTypeSimple];
+            money = @"CNY";
+            
+            [UIApplication sharedApplication].keyWindow.rootViewController = na;
+        }else if ([model.interSimpleCode isEqualToString:@"KR"])
+        {
+            [LangSwitcher changLangType:LangTypeKorean];
+            money = @"KRW";
+            
+            [UIApplication sharedApplication].keyWindow.rootViewController = na;
+            
+        }else{
+            
+            [LangSwitcher changLangType:LangTypeEnglish];
+            money = @"USD";
+            [UIApplication sharedApplication].keyWindow.rootViewController = na;
+        }
+        [[NSUserDefaults standardUserDefaults] setObject:money forKey:KLocalMoney];
+    }
+}
+
 
 - (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar{
     return YES;

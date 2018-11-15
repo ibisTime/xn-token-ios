@@ -14,6 +14,8 @@
 @property (nonatomic,strong) NSString <Optional>*interCode;
 @property (nonatomic,strong) NSString <Ignore>*pinyin;//拼音
 
+@property (nonatomic,strong) NSString *interSimpleCode;
+
 - (instancetype)initWithDic:(NSDictionary *)dic;
 
 @end

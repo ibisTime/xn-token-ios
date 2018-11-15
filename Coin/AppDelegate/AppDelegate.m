@@ -351,9 +351,9 @@
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"BOOLFORKEY"])
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"BOOLFORKEY"] == NO)
     {
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"BOOLFORKEY"];
+//        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"BOOLFORKEY"];
         TheInitialVC *initialVC = [[TheInitialVC alloc] init];
         UINavigationController *na = [[UINavigationController alloc] initWithRootViewController:initialVC];
 //        na.isLanch = YES;

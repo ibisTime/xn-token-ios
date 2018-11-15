@@ -219,11 +219,10 @@
 
             [self.pic sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:kImage(@"中国国旗")];
             self.PhoneCode.text = [NSString stringWithFormat:@"+%@",[model.interCode substringFromIndex:2]];
-            
-            
-      
     }
 }
+
+
 #pragma mark - Init
 
 - (void)loadData {
