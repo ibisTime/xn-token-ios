@@ -250,7 +250,6 @@ typedef enum : NSUInteger {
             } confirm:^(UIAlertAction *action, UITextField *textField) {
                 [self  requestTransform:textField.text];
             }];
-            
         }
     }else
     {
