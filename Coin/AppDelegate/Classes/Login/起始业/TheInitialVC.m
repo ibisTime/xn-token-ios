@@ -13,6 +13,7 @@
 #import "LoginVC.h"
 #import "CreateWalletVC.h"
 #import "ImportWalletVC.h"
+#import "TradePasswordVC.h"
 @interface TheInitialVC ()<TheInitialViewBtnDelegate>
 
 @property (nonatomic , strong)NSMutableArray <CountryModel*>*countrys;
@@ -188,13 +189,15 @@
             break;
         case 2:
         {
-            CreateWalletVC *vc = [[CreateWalletVC alloc]init];
+            TradePasswordVC *vc = [[TradePasswordVC alloc]init];
+            vc.state = @"1";
             [self.navigationController pushViewController:vc animated:YES];
         }
             break;
         case 3:
         {
-            ImportWalletVC *vc = [[ImportWalletVC alloc]init];
+            TradePasswordVC *vc = [[TradePasswordVC alloc]init];
+            vc.state = @"2";
             [self.navigationController pushViewController:vc animated:YES];
         }
             break;

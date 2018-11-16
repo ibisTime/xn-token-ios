@@ -32,6 +32,8 @@
 		1F4E89DF219DA2D4007B3015 /* CompleteTheRegistrationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4E89DE219DA2D4007B3015 /* CompleteTheRegistrationVC.m */; };
 		1F4E89E4219E91CA007B3015 /* ImportWalletVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4E89E3219E91CA007B3015 /* ImportWalletVC.m */; };
 		1F4E89E7219E9215007B3015 /* CreateWalletVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4E89E6219E9215007B3015 /* CreateWalletVC.m */; };
+		1F4E89EA219EA251007B3015 /* TradePasswordVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4E89E9219EA251007B3015 /* TradePasswordVC.m */; };
+		1F4E89ED219EA87E007B3015 /* WhetherBackupVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4E89EC219EA87E007B3015 /* WhetherBackupVC.m */; };
 		1F709D5E218161D8002D1CC4 /* keyTransferTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F709D5D218161D8002D1CC4 /* keyTransferTableView.m */; };
 		1F709D61218162A5002D1CC4 /* TransformButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F709D60218162A5002D1CC4 /* TransformButtonCell.m */; };
 		1F709D6421817246002D1CC4 /* TransferNumberCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F709D6321817246002D1CC4 /* TransferNumberCell.m */; };
@@ -581,6 +583,10 @@
 		1F4E89E3219E91CA007B3015 /* ImportWalletVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImportWalletVC.m; sourceTree = "<group>"; };
 		1F4E89E5219E9215007B3015 /* CreateWalletVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CreateWalletVC.h; sourceTree = "<group>"; };
 		1F4E89E6219E9215007B3015 /* CreateWalletVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CreateWalletVC.m; sourceTree = "<group>"; };
+		1F4E89E8219EA251007B3015 /* TradePasswordVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TradePasswordVC.h; sourceTree = "<group>"; };
+		1F4E89E9219EA251007B3015 /* TradePasswordVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TradePasswordVC.m; sourceTree = "<group>"; };
+		1F4E89EB219EA87E007B3015 /* WhetherBackupVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WhetherBackupVC.h; sourceTree = "<group>"; };
+		1F4E89EC219EA87E007B3015 /* WhetherBackupVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WhetherBackupVC.m; sourceTree = "<group>"; };
 		1F709D5C218161D8002D1CC4 /* keyTransferTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = keyTransferTableView.h; sourceTree = "<group>"; };
 		1F709D5D218161D8002D1CC4 /* keyTransferTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = keyTransferTableView.m; sourceTree = "<group>"; };
 		1F709D5F218162A5002D1CC4 /* TransformButtonCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TransformButtonCell.h; sourceTree = "<group>"; };
@@ -2002,8 +2008,12 @@
 		1F4E89E0219E9166007B3015 /* Create */ = {
 			isa = PBXGroup;
 			children = (
+				1F4E89E8219EA251007B3015 /* TradePasswordVC.h */,
+				1F4E89E9219EA251007B3015 /* TradePasswordVC.m */,
 				1F4E89E5219E9215007B3015 /* CreateWalletVC.h */,
 				1F4E89E6219E9215007B3015 /* CreateWalletVC.m */,
+				1F4E89EB219EA87E007B3015 /* WhetherBackupVC.h */,
+				1F4E89EC219EA87E007B3015 /* WhetherBackupVC.m */,
 			);
 			path = Create;
 			sourceTree = "<group>";
@@ -4459,6 +4469,7 @@
 				B8BBA5FA20C780FA00DC4D5F /* PlatformTableView.m in Sources */,
 				2EE950C61FB05B5900429257 /* TLMineVC.m in Sources */,
 				7A3821C020EACD8B00D6B636 /* SendTableView.m in Sources */,
+				1F4E89EA219EA251007B3015 /* TradePasswordVC.m in Sources */,
 				B808652C211EA17D00755158 /* BTCBlockchainInfo+Tests.m in Sources */,
 				B8BBA64920C849BB00DC4D5F /* AddMoneyCell.m in Sources */,
 				7A2CC6D7215DC89200B27E2D /* PGPickerTableView.m in Sources */,
@@ -4612,6 +4623,7 @@
 				7A8A5DCE20EA9CD5002D9A48 /* GetTheModel.m in Sources */,
 				1F4E89CC219C1D32007B3015 /* JSONHTTPClient.m in Sources */,
 				21A7F31E1FB2E2F900FAA0A2 /* TLUser.m in Sources */,
+				1F4E89ED219EA87E007B3015 /* WhetherBackupVC.m in Sources */,
 				2E394FFC1FB059C100BA0829 /* TLBaseModel.m in Sources */,
 				B8F63ED720D362DA00556150 /* WalletLocalBillTableView.m in Sources */,
 				21635DB91FBECBDD003F48B4 /* TopLabelUtil.m in Sources */,

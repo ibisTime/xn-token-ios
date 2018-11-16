@@ -42,8 +42,6 @@
     [introduceLbl sizeToFit];
     [backImage addSubview:introduceLbl];
     
-    
-    
     for (int i = 0; i < 12; i ++) {
         UITextField *textFid = [[UITextField alloc]initWithFrame:CGRectMake(13  + i%3 * ((SCREEN_WIDTH - 41 )/3 + 7.5), - kNavigationBarHeight + introduceLbl.yy + 48 + i/3* (52), (SCREEN_WIDTH - 41)/3, 45)];
         textFid.font = FONT(14);
@@ -58,62 +56,32 @@
         textFid.tag = 100 + i;
         [self.view addSubview:textFid];
     }
+    
+    UITextField *textField = [self.view viewWithTag:111];
+
+    
+    UIButton *confirmBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"开始恢复" key:nil] titleColor:kWhiteColor backgroundColor:kClearColor titleFont:18];
+    confirmBtn.frame = CGRectMake(35, textField.yy + 62, SCREEN_WIDTH - 70, 50);
+    kViewRadius(confirmBtn, 10);
+    [confirmBtn setBackgroundImage:kImage(@"矩形5-1") forState:(UIControlStateNormal)];
+    [confirmBtn addTarget:self action:@selector(BtnClick) forControlEvents:(UIControlEventTouchUpInside)];
+    [self.view addSubview:confirmBtn];
+}
+
+-(void)BtnClick
+{
+    
 }
 
 -(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
     if ([string isEqualToString:@" "]) {
-        
         if (textField.tag != 111) {
-            if ([textField.text isEqualToString:@""]) {
-                [TLAlert alertWithInfo:@""]
-            }
             UITextField *textFid = [self.view viewWithTag:textField.tag + 1];
             [textFid becomeFirstResponder];
         }
-        
         return NO;
     }
     return YES;
-//    if ([textField.text rangeOfString:@"."].location==NSNotFound) {
-//        isHaveDian=NO;
-//    }
-//    if ([string length]>0)
-//    {
-//        unichar single=[string characterAtIndex:0];//当前输入的字符
-//        if ((single >='0' && single<='9') || single=='.')//数据格式正确
-//        {
-//            if([textField.text length]==0){
-//                if(single == '.'){
-//                    [textField.text stringByReplacingCharactersInRange:range withString:@""];
-//                    return NO;
-//                }
-//            }
-//            if (single=='.')
-//            {
-//                if(!isHaveDian)//text中还没有小数点
-//                {
-//                    isHaveDian=YES;
-//                    return YES;
-//                }else
-//                {
-//
-//                    [textField.text stringByReplacingCharactersInRange:range withString:@""];
-//                    return NO;
-//                }
-//            }
-//
-//            return YES;
-//        }else{
-//            [textField.text stringByReplacingCharactersInRange:range withString:@""];
-//            return NO;
-//        }
-//    }
-//    else
-//    {
-//        return YES;
-//    }
-    
-    
 }
 
 
