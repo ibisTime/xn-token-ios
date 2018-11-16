@@ -706,13 +706,13 @@ typedef enum : NSUInteger {
     if ([self.currentModel.symbol isEqualToString:@"BTC"]) {
         
         self.poundage = [NSString stringWithFormat:@"%.8f",[BTCPoundage enterTheumber:self.numberTextField.text setFee:[NSString stringWithFormat:@"%.1f",self.poundageSlider.value] setUtxis:self.utxis]/100000000];
-        self.totalFree.text = [NSString stringWithFormat:@"%@ %.8fBTC",[LangSwitcher switchLang:@"本次划转手续费为" key:nil],[self.poundage floatValue]];
+        self.totalFree.text = [NSString stringWithFormat:@"%@ %@sat/b(≈%.8fBTC)",[LangSwitcher switchLang:@"本次划转手续费为" key:nil],[NSString stringWithFormat:@"%.1f",self.poundageSlider.value],[self.poundage floatValue]];
     }
     if ([self.currentModel.symbol isEqualToString:@"USDT"]) {
         self.poundage = [NSString stringWithFormat:@"%.8f",[BTCPoundage usdtPoundage:self.numberTextField.text setFee:[NSString stringWithFormat:@"%.1f",self.poundageSlider.value] setUtxis:self.utxis]/100000000];
-        self.totalFree.text = [NSString stringWithFormat:@"%@ %.8fBTC",[LangSwitcher switchLang:@"本次划转手续费为" key:nil],[self.poundage floatValue]];
+        self.totalFree.text = [NSString stringWithFormat:@"%@ %@sat/b(≈%.8fBTC)",[LangSwitcher switchLang:@"本次划转手续费为" key:nil],[NSString stringWithFormat:@"%.1f",self.poundageSlider.value],[self.poundage floatValue]];
     }
-    
+
 }
 
 

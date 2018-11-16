@@ -591,10 +591,10 @@ typedef enum : NSUInteger {
 
 - (void)textFieldDidChange:(UITextField *)textField{
     if ([self.currency.symbol isEqualToString:@"BTC"]) {
-        self.blanceFree.text = [NSString stringWithFormat:@"%.8fBTC",[BTCPoundage enterTheumber:textField.text setFee:[NSString stringWithFormat:@"%.1f",self.slider.value] setUtxis:self.utxis]/100000000];
+        self.blanceFree.text = [NSString stringWithFormat:@"%@sat/b(≈%.8fBTC)",[NSString stringWithFormat:@"%.1f",self.slider.value],[BTCPoundage enterTheumber:textField.text setFee:[NSString stringWithFormat:@"%.1f",self.slider.value] setUtxis:self.utxis]/100000000];
     }
     if ([self.currency.symbol isEqualToString:@"USDT"]) {
-        self.blanceFree.text = [NSString stringWithFormat:@"%.8fBTC",[BTCPoundage usdtPoundage:textField.text setFee:[NSString stringWithFormat:@"%.1f",self.slider.value] setUtxis:self.utxis]/100000000];
+        self.blanceFree.text = [NSString stringWithFormat:@"%@sat/b(≈%.8fBTC)",[NSString stringWithFormat:@"%.1f",self.slider.value],[BTCPoundage usdtPoundage:textField.text setFee:[NSString stringWithFormat:@"%.1f",self.slider.value] setUtxis:self.utxis]/100000000];
     }
 }
 
