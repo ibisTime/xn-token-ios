@@ -79,16 +79,16 @@
     [backView1 addSubview:privateWalletIntroduceLb];
     
     UIButton *loginPrivateBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"创建私钥钱包" key:nil] titleColor:kHexColor(@"#0064ff") backgroundColor:kWhiteColor titleFont:16 cornerRadius:10];
-    loginPrivateBtn.frame = CGRectMake(50, backView1.yy - 90, SCREEN_WIDTH/2 - 57.5, 40);
+    loginPrivateBtn.frame = CGRectMake(SCREEN_WIDTH + 50, backView1.yy - 90, SCREEN_WIDTH/2 - 57.5, 40);
     [loginPrivateBtn addTarget:self action:@selector(btnClick:) forControlEvents:(UIControlEventTouchUpInside)];
     loginPrivateBtn.tag = 102;
-    [backView1 addSubview:loginPrivateBtn];
+    [scrollView addSubview:loginPrivateBtn];
     
     UIButton *createPrivateBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"导入助记词" key:nil] titleColor:kHexColor(@"#a7a7a7") backgroundColor:kWhiteColor titleFont:16 cornerRadius:10];
-    createPrivateBtn.frame = CGRectMake(SCREEN_WIDTH/2 + 7.5, backView1.yy - 90, SCREEN_WIDTH/2 - 57.5, 40);
+    createPrivateBtn.frame = CGRectMake( SCREEN_WIDTH+ SCREEN_WIDTH/2 + 7.5, backView1.yy - 90, SCREEN_WIDTH/2 - 57.5, 40);
     [createPrivateBtn addTarget:self action:@selector(btnClick:) forControlEvents:(UIControlEventTouchUpInside)];
     createPrivateBtn.tag = 103;
-    [backView1 addSubview:createPrivateBtn];
+    [scrollView addSubview:createPrivateBtn];
     
     UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 40, SCREEN_HEIGHT  - 90 - 30, 80, 4)];
     lineView.backgroundColor = kHexColor(@"#489fff");

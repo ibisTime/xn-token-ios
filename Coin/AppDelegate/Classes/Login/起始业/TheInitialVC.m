@@ -11,6 +11,8 @@
 #import "RegisterVC.h"
 #import "CountryModel.h"
 #import "LoginVC.h"
+#import "CreateWalletVC.h"
+#import "ImportWalletVC.h"
 @interface TheInitialVC ()<TheInitialViewBtnDelegate>
 
 @property (nonatomic , strong)NSMutableArray <CountryModel*>*countrys;
@@ -186,12 +188,14 @@
             break;
         case 2:
         {
-            
+            CreateWalletVC *vc = [[CreateWalletVC alloc]init];
+            [self.navigationController pushViewController:vc animated:YES];
         }
             break;
         case 3:
         {
-            
+            ImportWalletVC *vc = [[ImportWalletVC alloc]init];
+            [self.navigationController pushViewController:vc animated:YES];
         }
             break;
             

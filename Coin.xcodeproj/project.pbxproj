@@ -30,6 +30,8 @@
 		1F4E89D5219C1D7D007B3015 /* ContactDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4E89D3219C1D7D007B3015 /* ContactDataHelper.m */; };
 		1F4E89D9219D144E007B3015 /* LoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4E89D8219D144E007B3015 /* LoginVC.m */; };
 		1F4E89DF219DA2D4007B3015 /* CompleteTheRegistrationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4E89DE219DA2D4007B3015 /* CompleteTheRegistrationVC.m */; };
+		1F4E89E4219E91CA007B3015 /* ImportWalletVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4E89E3219E91CA007B3015 /* ImportWalletVC.m */; };
+		1F4E89E7219E9215007B3015 /* CreateWalletVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4E89E6219E9215007B3015 /* CreateWalletVC.m */; };
 		1F709D5E218161D8002D1CC4 /* keyTransferTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F709D5D218161D8002D1CC4 /* keyTransferTableView.m */; };
 		1F709D61218162A5002D1CC4 /* TransformButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F709D60218162A5002D1CC4 /* TransformButtonCell.m */; };
 		1F709D6421817246002D1CC4 /* TransferNumberCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F709D6321817246002D1CC4 /* TransferNumberCell.m */; };
@@ -575,6 +577,10 @@
 		1F4E89D8219D144E007B3015 /* LoginVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginVC.m; sourceTree = "<group>"; };
 		1F4E89DD219DA2D4007B3015 /* CompleteTheRegistrationVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CompleteTheRegistrationVC.h; sourceTree = "<group>"; };
 		1F4E89DE219DA2D4007B3015 /* CompleteTheRegistrationVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CompleteTheRegistrationVC.m; sourceTree = "<group>"; };
+		1F4E89E2219E91CA007B3015 /* ImportWalletVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImportWalletVC.h; sourceTree = "<group>"; };
+		1F4E89E3219E91CA007B3015 /* ImportWalletVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImportWalletVC.m; sourceTree = "<group>"; };
+		1F4E89E5219E9215007B3015 /* CreateWalletVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CreateWalletVC.h; sourceTree = "<group>"; };
+		1F4E89E6219E9215007B3015 /* CreateWalletVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CreateWalletVC.m; sourceTree = "<group>"; };
 		1F709D5C218161D8002D1CC4 /* keyTransferTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = keyTransferTableView.h; sourceTree = "<group>"; };
 		1F709D5D218161D8002D1CC4 /* keyTransferTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = keyTransferTableView.m; sourceTree = "<group>"; };
 		1F709D5F218162A5002D1CC4 /* TransformButtonCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TransformButtonCell.h; sourceTree = "<group>"; };
@@ -1850,10 +1856,12 @@
 		1F4E896521998510007B3015 /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				1F4E896D21998592007B3015 /* 起始业 */,
 				1F4E89D6219D1434007B3015 /* Login */,
 				1F4E896F219C1AAA007B3015 /* Search */,
-				1F4E896E219985A5007B3015 /* 注册 */,
-				1F4E896D21998592007B3015 /* 起始业 */,
+				1F4E896E219985A5007B3015 /* Register */,
+				1F4E89E0219E9166007B3015 /* Create */,
+				1F4E89E1219E9184007B3015 /* Import */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -1869,7 +1877,7 @@
 			path = "起始业";
 			sourceTree = "<group>";
 		};
-		1F4E896E219985A5007B3015 /* 注册 */ = {
+		1F4E896E219985A5007B3015 /* Register */ = {
 			isa = PBXGroup;
 			children = (
 				1F4E896A21998572007B3015 /* RegisterVC.h */,
@@ -1877,7 +1885,7 @@
 				1F4E89DD219DA2D4007B3015 /* CompleteTheRegistrationVC.h */,
 				1F4E89DE219DA2D4007B3015 /* CompleteTheRegistrationVC.m */,
 			);
-			path = "注册";
+			path = Register;
 			sourceTree = "<group>";
 		};
 		1F4E896F219C1AAA007B3015 /* Search */ = {
@@ -1989,6 +1997,24 @@
 				1F4E89D8219D144E007B3015 /* LoginVC.m */,
 			);
 			path = Login;
+			sourceTree = "<group>";
+		};
+		1F4E89E0219E9166007B3015 /* Create */ = {
+			isa = PBXGroup;
+			children = (
+				1F4E89E5219E9215007B3015 /* CreateWalletVC.h */,
+				1F4E89E6219E9215007B3015 /* CreateWalletVC.m */,
+			);
+			path = Create;
+			sourceTree = "<group>";
+		};
+		1F4E89E1219E9184007B3015 /* Import */ = {
+			isa = PBXGroup;
+			children = (
+				1F4E89E2219E91CA007B3015 /* ImportWalletVC.h */,
+				1F4E89E3219E91CA007B3015 /* ImportWalletVC.m */,
+			);
+			path = Import;
 			sourceTree = "<group>";
 		};
 		1F709D5B2180A7FC002D1CC4 /* SGQRCode */ = {
@@ -4363,6 +4389,7 @@
 				B8CAA13D21158FF200695BC3 /* LPDAssetCell.m in Sources */,
 				2EB039A71FE8B23300589D8E /* EditEmailVC.m in Sources */,
 				7A07F808216C84F30026EB7A /* SCColor.m in Sources */,
+				1F4E89E7219E9215007B3015 /* CreateWalletVC.m in Sources */,
 				4C8DE98520C983D100EC183C /* EthereumUtil.swift in Sources */,
 				7AAF0312214F8C35008507FF /* IntegralVC.m in Sources */,
 				B80864F3211EA17D00755158 /* BTCAssetType.m in Sources */,
@@ -4651,6 +4678,7 @@
 				215979601FB81CC40029F177 /* BillTableView.m in Sources */,
 				21A7F31C1FB2E2F900FAA0A2 /* TLUserExt.m in Sources */,
 				1F816BF42180953D0078B945 /* SGQRCodeScanManager.m in Sources */,
+				1F4E89E4219E91CA007B3015 /* ImportWalletVC.m in Sources */,
 				B80864F5211EA17D00755158 /* BTCAssetID.m in Sources */,
 				211A34FD1FB4507E00FEB71F /* IdAuthVC.m in Sources */,
 				B80864FF211EA17D00755158 /* BTCScript+Tests.m in Sources */,

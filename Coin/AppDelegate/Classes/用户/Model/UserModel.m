@@ -29,7 +29,7 @@
 {
     NSMutableParagraphStyle  *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     // 行间距设置
-    [paragraphStyle  setLineSpacing:8];
+    [paragraphStyle  setLineSpacing:6];
     NSMutableAttributedString  *setString = [[NSMutableAttributedString alloc] initWithString:str];
     [setString  addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [str length])];
     return setString;
