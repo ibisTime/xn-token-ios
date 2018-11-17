@@ -1168,7 +1168,11 @@ typedef enum : NSUInteger {
     // 4。为输入准备带有适当签名的脚本
     
     // 5。广播事务
-    
+    if (self.utxis.count == 0) {
+        self.btcPrompt = [NSString stringWithFormat:@"BTC%@",[LangSwitcher switchLang:@"余额不足" key:nil]];
+//        [TLAlert alertWithInfo:[NSString stringWithFormat:@"BTC%@",[LangSwitcher switchLang:@"余额不足" key:nil]]];
+        return nil;
+    }
     NSError* error = nil;
     NSArray* utxos = self.utxis;
     
@@ -1329,6 +1333,11 @@ typedef enum : NSUInteger {
 
 -(void)utxoTransfer
 {
+    
+    if (self.utxis.count == 0) {
+        [TLAlert alertWithInfo:[NSString stringWithFormat:@"BTC%@",[LangSwitcher switchLang:@"余额不足" key:nil]]];
+        return;
+    }
     TLDataBase *dataBase = [TLDataBase sharedManager];
     NSString *word;
     if ([dataBase.dataBase open]) {

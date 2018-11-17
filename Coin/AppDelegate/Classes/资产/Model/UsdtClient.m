@@ -77,14 +77,14 @@
         sumIntputValue = sumIntputValue + [[CoinUtil convertToSysCoin:txoutCount coin:@"BTC"] longLongValue];
         [IntputUtsos addObject:txout];
         
-        btcFree = (148 * sumIntputCount + 34 * 2 + 10) * [sat floatValue] + 546;
+        btcFree = (148 * sumIntputCount + 34 * 2 + 10) * [sat floatValue];
         
         //       Intput总额 大于手续费+转账金额
         if (sumIntputValue >= btcFree) {
             //       Intput总额 大于   手续费、找零手续费 + 转账金额
-            if (sumIntputValue > (148 * sumIntputCount + 34 * 3 + 10) * [sat floatValue]+ 546)
+            if (sumIntputValue > (148 * sumIntputCount + 34 * 3 + 10) * [sat floatValue])
             {
-                btcFree = (148 * sumIntputCount + 34 * 3 + 10) * [sat floatValue] + 546;
+                btcFree = (148 * sumIntputCount + 34 * 3 + 10) * [sat floatValue];
                 isChange = YES;
                 changeValue = sumIntputValue - btcFree;
             }
