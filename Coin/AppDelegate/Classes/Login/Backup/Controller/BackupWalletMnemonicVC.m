@@ -192,12 +192,20 @@
         [_SelectArray addObject:_BackupArray[indexPath.row]];
         [_BackupArray removeObjectAtIndex:indexPath.row];
         
-        [CATransaction setDisableActions:YES];
+//        [CATransaction setDisableActions:YES];
         [_BackupCollectionView reloadData];
         
-
-        [_SelectCollectionView reloadData];
-        [CATransaction commit];
+        [_SelectCollectionView performBatchUpdates:^{
+            
+            
+            
+        } completion:^(BOOL finished) {
+            
+            
+            
+        }];
+//        [_SelectCollectionView reloadData];
+//        [CATransaction commit];
 //        [_BackupCollectionView reloadData];
 //        [_SelectCollectionView reloadData];
 //        [UIView animateWithDuration:0.5 animations:^{
