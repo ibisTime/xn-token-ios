@@ -51,7 +51,7 @@
 {
     if (!_scrollView) {
 //        CoinWeakSelf;
-        _scrollView = [HW3DBannerView initWithFrame:CGRectMake(15, 5, SCREEN_WIDTH - 30, SCREEN_WIDTH/3 - 15) imageSpacing:10 imageWidth:SCREEN_WIDTH - 30];
+        _scrollView = [HW3DBannerView initWithFrame:CGRectMake(15, 5, SCREEN_WIDTH - 30, SCREEN_WIDTH/2.5 - 15) imageSpacing:10 imageWidth:SCREEN_WIDTH - 30];
         _scrollView.initAlpha = 0; // 设置两边卡片的透明度
         _scrollView.imageRadius = 5; // 设置卡片圆角
         _scrollView.imageHeightPoor = 20;// 设置占位图片
