@@ -58,9 +58,9 @@
     
     //服务器环境7
 //    研发
-    [AppConfig config].runEnv = RunEnvDev;
+//    [AppConfig config].runEnv = RunEnvDev;
 //    测试
-//    [AppConfig config].runEnv = RunEnvTest;
+    [AppConfig config].runEnv = RunEnvTest;
 //    正式
 //    [AppConfig config].runEnv = RunEnvRelease;
 
@@ -160,7 +160,7 @@
         
         [[NSUserDefaults standardUserDefaults]setObject:[NSString stringWithFormat:@"http://%@", responseObject[@"data"][@"cvalue"]] forKey:Get_Seven_Cattle_Address];
         
-//        [AppConfig config].qiniuDomain = [NSString stringWithFormat:@"http://%@", responseObject[@"data"][@"cvalue"]];
+        [AppConfig config].qiniuDomain = [NSString stringWithFormat:@"http://%@", responseObject[@"data"][@"cvalue"]];
         
     } failure:^(NSError *error) {
         
