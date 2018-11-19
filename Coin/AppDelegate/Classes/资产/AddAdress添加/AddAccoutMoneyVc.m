@@ -233,13 +233,12 @@
             [a addObject:model];
         }
     }
- 
-
-
     if (self.select) {
         self.select(self.currencys);
     }
 }
+
+
 
 -(void)refreshTableViewButtonClick:(TLTableView *)refreshTableview button:(UIButton *)sender selectRowAtIndex:(NSInteger)index
 {
@@ -253,29 +252,53 @@
         http.parameters[@"symbol"] = coin[@"symbol"];
         http.parameters[@"type"] = @(1);
         http.parameters[@"orderNo"] = @(1);
-
+        
         [http postWithSuccess:^(id responseObject) {
-
+            
             NSNotification *notification =[NSNotification notificationWithName:@"LOADDATAPAGE2" object:nil userInfo:nil];
             [[NSNotificationCenter defaultCenter] postNotification:notification];
-
+            
         } failure:^(NSError *error) {
-
-
+            sender.selected = !sender.selected;
         }];
-    }else
-    {
         
     }
-
-
-
-
+    
+    
+    
 }
 
 
 -(void)refreshTableView:(TLTableView *)refreshTableview didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
+    if (self.PersonalWallet == 100) {
+        UIButton *sender = [self.view viewWithTag:indexPath.section];
+        sender.selected = !sender.selected;
+        TLNetworking *http = [TLNetworking new];
+        http.code = @"802280";
+        http.showView = self.view;
+        NSDictionary *coin = self.currencys[indexPath.section].coin;
+        http.parameters[@"userId"] = [TLUser user].userId;
+        http.parameters[@"symbol"] = coin[@"symbol"];
+        http.parameters[@"type"] = @(1);
+        http.parameters[@"orderNo"] = @(1);
+        
+        [http postWithSuccess:^(id responseObject) {
+            
+            NSNotification *notification =[NSNotification notificationWithName:@"LOADDATAPAGE2" object:nil userInfo:nil];
+            [[NSNotificationCenter defaultCenter] postNotification:notification];
+            
+        } failure:^(NSError *error) {
+            
+            sender.selected = !sender.selected;
+        }];
+    }
+    if (self.isRedPage != YES) {
+        UIButton *sender = [self.view viewWithTag:indexPath.section];
+        sender.selected = !sender.selected;
+        self.currentModels[indexPath.section].IsSelected = sender.selected;
+    }
     if (self.isRedPage == YES) {
         if (self.curreryBlock) {
             self.curreryBlock(self.currentModels[indexPath.section]);

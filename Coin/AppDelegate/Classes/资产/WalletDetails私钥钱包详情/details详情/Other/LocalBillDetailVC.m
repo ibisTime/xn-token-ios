@@ -124,7 +124,7 @@
     if ([_currentModel.symbol isEqualToString:@"USDT"]) {
         onlyCountStr = [CoinUtil convertToRealCoin:_usdtModel.amount
                                               coin:self.currentModel.symbol];
-        if ([@"1x6YnuBVeeE65dQRZztRWgUPwyBjHCA5g" isEqualToString:_usdtModel.sendingAddress]) {
+        if ([self.currentModel.address isEqualToString:_usdtModel.referenceAddress]) {
             moneyStr = [NSString stringWithFormat:@"%@ %@", onlyCountStr, self.currentModel.symbol];
             textLbl.text = [LangSwitcher switchLang:@"转入" key:nil];
             self.title =  [LangSwitcher switchLang:@"转入" key:nil];

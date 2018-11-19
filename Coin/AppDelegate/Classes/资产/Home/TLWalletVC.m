@@ -471,6 +471,8 @@
     };
 }
 
+
+
 -(void)refreshTableView:(TLTableView *)refreshTableview setCurrencyModel:(CurrencyModel *)model setTitle:(NSString *)title
 {
     if ([title isEqualToString:@"转账"]) {
