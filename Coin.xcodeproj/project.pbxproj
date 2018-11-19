@@ -34,6 +34,8 @@
 		1F4E89E7219E9215007B3015 /* CreateWalletVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4E89E6219E9215007B3015 /* CreateWalletVC.m */; };
 		1F4E89EA219EA251007B3015 /* TradePasswordVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4E89E9219EA251007B3015 /* TradePasswordVC.m */; };
 		1F4E89ED219EA87E007B3015 /* WhetherBackupVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4E89EC219EA87E007B3015 /* WhetherBackupVC.m */; };
+		1F693AEE21A297B7004818D8 /* BackupPromptView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F693AED21A297B7004818D8 /* BackupPromptView.m */; };
+		1F693AF121A2A660004818D8 /* BackupWalletMnemonicVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F693AF021A2A660004818D8 /* BackupWalletMnemonicVC.m */; };
 		1F709D5E218161D8002D1CC4 /* keyTransferTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F709D5D218161D8002D1CC4 /* keyTransferTableView.m */; };
 		1F709D61218162A5002D1CC4 /* TransformButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F709D60218162A5002D1CC4 /* TransformButtonCell.m */; };
 		1F709D6421817246002D1CC4 /* TransferNumberCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F709D6321817246002D1CC4 /* TransferNumberCell.m */; };
@@ -587,6 +589,10 @@
 		1F4E89E9219EA251007B3015 /* TradePasswordVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TradePasswordVC.m; sourceTree = "<group>"; };
 		1F4E89EB219EA87E007B3015 /* WhetherBackupVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WhetherBackupVC.h; sourceTree = "<group>"; };
 		1F4E89EC219EA87E007B3015 /* WhetherBackupVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WhetherBackupVC.m; sourceTree = "<group>"; };
+		1F693AEC21A297B7004818D8 /* BackupPromptView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BackupPromptView.h; sourceTree = "<group>"; };
+		1F693AED21A297B7004818D8 /* BackupPromptView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BackupPromptView.m; sourceTree = "<group>"; };
+		1F693AEF21A2A660004818D8 /* BackupWalletMnemonicVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BackupWalletMnemonicVC.h; sourceTree = "<group>"; };
+		1F693AF021A2A660004818D8 /* BackupWalletMnemonicVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BackupWalletMnemonicVC.m; sourceTree = "<group>"; };
 		1F709D5C218161D8002D1CC4 /* keyTransferTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = keyTransferTableView.h; sourceTree = "<group>"; };
 		1F709D5D218161D8002D1CC4 /* keyTransferTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = keyTransferTableView.m; sourceTree = "<group>"; };
 		1F709D5F218162A5002D1CC4 /* TransformButtonCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TransformButtonCell.h; sourceTree = "<group>"; };
@@ -1868,6 +1874,7 @@
 				1F4E896E219985A5007B3015 /* Register */,
 				1F4E89E0219E9166007B3015 /* Create */,
 				1F4E89E1219E9184007B3015 /* Import */,
+				1F693AEB21A29763004818D8 /* Backup */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -2010,10 +2017,6 @@
 			children = (
 				1F4E89E8219EA251007B3015 /* TradePasswordVC.h */,
 				1F4E89E9219EA251007B3015 /* TradePasswordVC.m */,
-				1F4E89E5219E9215007B3015 /* CreateWalletVC.h */,
-				1F4E89E6219E9215007B3015 /* CreateWalletVC.m */,
-				1F4E89EB219EA87E007B3015 /* WhetherBackupVC.h */,
-				1F4E89EC219EA87E007B3015 /* WhetherBackupVC.m */,
 			);
 			path = Create;
 			sourceTree = "<group>";
@@ -2025,6 +2028,45 @@
 				1F4E89E3219E91CA007B3015 /* ImportWalletVC.m */,
 			);
 			path = Import;
+			sourceTree = "<group>";
+		};
+		1F693AEB21A29763004818D8 /* Backup */ = {
+			isa = PBXGroup;
+			children = (
+				1F693AF221A2A66A004818D8 /* Controller */,
+				1F693AF421A2A675004818D8 /* Model */,
+				1F693AF321A2A672004818D8 /* View */,
+			);
+			path = Backup;
+			sourceTree = "<group>";
+		};
+		1F693AF221A2A66A004818D8 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				1F4E89EB219EA87E007B3015 /* WhetherBackupVC.h */,
+				1F4E89EC219EA87E007B3015 /* WhetherBackupVC.m */,
+				1F4E89E5219E9215007B3015 /* CreateWalletVC.h */,
+				1F4E89E6219E9215007B3015 /* CreateWalletVC.m */,
+				1F693AEF21A2A660004818D8 /* BackupWalletMnemonicVC.h */,
+				1F693AF021A2A660004818D8 /* BackupWalletMnemonicVC.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		1F693AF321A2A672004818D8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				1F693AEC21A297B7004818D8 /* BackupPromptView.h */,
+				1F693AED21A297B7004818D8 /* BackupPromptView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		1F693AF421A2A675004818D8 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		1F709D5B2180A7FC002D1CC4 /* SGQRCode */ = {
@@ -4349,6 +4391,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F693AEE21A297B7004818D8 /* BackupPromptView.m in Sources */,
 				7AAF036621526977008507FF /* hmac.c in Sources */,
 				B8086509211EA17D00755158 /* BTCSecretSharing.m in Sources */,
 				21205D0C1FCD6512003C6C7C /* TLWXManager.m in Sources */,
@@ -4806,6 +4849,7 @@
 				1F4E89D4219C1D7D007B3015 /* NSString+Utils.m in Sources */,
 				B8CAA14821158FF200695BC3 /* LPDQuoteImagesView.m in Sources */,
 				B8086524211EA17D00755158 /* BTCKey+Tests.m in Sources */,
+				1F693AF121A2A660004818D8 /* BackupWalletMnemonicVC.m in Sources */,
 				7A40B11E217EF884004B9830 /* ZJAnimationPopView.m in Sources */,
 				B80864F2211EA17D00755158 /* BTCTransactionBuilder.m in Sources */,
 				7AFBAE31216DD32A006CF464 /* MyIncomeTopModel.m in Sources */,

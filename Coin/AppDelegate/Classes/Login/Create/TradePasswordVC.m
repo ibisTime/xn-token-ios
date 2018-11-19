@@ -9,6 +9,7 @@
 #import "TradePasswordVC.h"
 #import "ImportWalletVC.h"
 #import "CreateWalletVC.h"
+#import "WhetherBackupVC.h"
 @interface TradePasswordVC ()
 
 @end
@@ -112,7 +113,7 @@
 -(void)nextBtn
 {
     if ([_state isEqualToString:@"1"]) {
-        CreateWalletVC *vc = [CreateWalletVC new];
+        WhetherBackupVC *vc = [WhetherBackupVC new];
         [self.navigationController pushViewController:vc animated:YES];
     }else
     {
