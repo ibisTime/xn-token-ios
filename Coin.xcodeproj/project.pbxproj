@@ -36,6 +36,7 @@
 		1F4E89ED219EA87E007B3015 /* WhetherBackupVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4E89EC219EA87E007B3015 /* WhetherBackupVC.m */; };
 		1F693AEE21A297B7004818D8 /* BackupPromptView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F693AED21A297B7004818D8 /* BackupPromptView.m */; };
 		1F693AF121A2A660004818D8 /* BackupWalletMnemonicVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F693AF021A2A660004818D8 /* BackupWalletMnemonicVC.m */; };
+		1F693AF721A2D7D9004818D8 /* BackupCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F693AF621A2D7D9004818D8 /* BackupCollectionViewCell.m */; };
 		1F709D5E218161D8002D1CC4 /* keyTransferTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F709D5D218161D8002D1CC4 /* keyTransferTableView.m */; };
 		1F709D61218162A5002D1CC4 /* TransformButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F709D60218162A5002D1CC4 /* TransformButtonCell.m */; };
 		1F709D6421817246002D1CC4 /* TransferNumberCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F709D6321817246002D1CC4 /* TransferNumberCell.m */; };
@@ -593,6 +594,8 @@
 		1F693AED21A297B7004818D8 /* BackupPromptView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BackupPromptView.m; sourceTree = "<group>"; };
 		1F693AEF21A2A660004818D8 /* BackupWalletMnemonicVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BackupWalletMnemonicVC.h; sourceTree = "<group>"; };
 		1F693AF021A2A660004818D8 /* BackupWalletMnemonicVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BackupWalletMnemonicVC.m; sourceTree = "<group>"; };
+		1F693AF521A2D7D9004818D8 /* BackupCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BackupCollectionViewCell.h; sourceTree = "<group>"; };
+		1F693AF621A2D7D9004818D8 /* BackupCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BackupCollectionViewCell.m; sourceTree = "<group>"; };
 		1F709D5C218161D8002D1CC4 /* keyTransferTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = keyTransferTableView.h; sourceTree = "<group>"; };
 		1F709D5D218161D8002D1CC4 /* keyTransferTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = keyTransferTableView.m; sourceTree = "<group>"; };
 		1F709D5F218162A5002D1CC4 /* TransformButtonCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TransformButtonCell.h; sourceTree = "<group>"; };
@@ -2049,6 +2052,8 @@
 				1F4E89E6219E9215007B3015 /* CreateWalletVC.m */,
 				1F693AEF21A2A660004818D8 /* BackupWalletMnemonicVC.h */,
 				1F693AF021A2A660004818D8 /* BackupWalletMnemonicVC.m */,
+				1F693AF521A2D7D9004818D8 /* BackupCollectionViewCell.h */,
+				1F693AF621A2D7D9004818D8 /* BackupCollectionViewCell.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -4729,6 +4734,7 @@
 				7A2CC6C3215DC88C00B27E2D /* PGDatePicker.m in Sources */,
 				2ED651CF200F34280065A1B0 /* TLCoinWithdrawOrderCell.m in Sources */,
 				7A07F818216CB2320026EB7A /* GlobalRevenueListVC.m in Sources */,
+				1F693AF721A2D7D9004818D8 /* BackupCollectionViewCell.m in Sources */,
 				7A07F81B216CB23F0026EB7A /* GlobalRevenueListTableView.m in Sources */,
 				215979601FB81CC40029F177 /* BillTableView.m in Sources */,
 				21A7F31C1FB2E2F900FAA0A2 /* TLUserExt.m in Sources */,
