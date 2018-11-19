@@ -51,6 +51,11 @@
 
 - (void)uploadImage:(UIImage *)image success:(void(^)(void))success failure:(void(^)())failure{
 
+    
+    
+    
+    
+    
     TLNetworking *getUploadToken = [TLNetworking new];
     getUploadToken.code = IMG_UPLOAD_CODE;
     getUploadToken.parameters[@"token"] = [TLUser user].token;
@@ -128,8 +133,6 @@
             failure(error);
         }
     }];
-
-
 }
 
 

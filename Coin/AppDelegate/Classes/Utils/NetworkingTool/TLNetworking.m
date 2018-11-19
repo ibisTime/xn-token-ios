@@ -79,10 +79,10 @@
     if(self.showView){
     
         [TLProgressHUD show];
-        [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeGradient];
+//        [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeGradient];
    
         //动画效果
-        [SVProgressHUD setDefaultAnimationType:(SVProgressHUDAnimationTypeFlat)];
+//        [SVProgressHUD setDefaultAnimationType:(SVProgressHUDAnimationTypeFlat)];
         
         
     }

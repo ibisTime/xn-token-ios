@@ -194,7 +194,7 @@
         
         CoinWeakSelf;
         //头部
-        _headerView = [[HomeHeaderView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 10 + SCREEN_WIDTH/2 - 15)];
+        _headerView = [[HomeHeaderView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 10 + SCREEN_WIDTH/3 - 15)];
         
         _headerView.headerBlock = ^(HomeEventsType type, NSInteger index, HomeFindModel *find) {
             [weakSelf headerViewEventsWithType:type index:index model:find];

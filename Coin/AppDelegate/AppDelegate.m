@@ -94,6 +94,7 @@
     //配置根控制器
     [self configRootViewController];
     [LangSwitcher startWithTraditional];
+    [self GetSevenCattleAddress];
     //初始化为繁体
     //初始化数据库
     if ([[TLDataBase sharedManager].dataBase open]) {
@@ -145,6 +146,25 @@
     return YES;
     
     
+}
+
+
+//获取七牛地址
+-(void)GetSevenCattleAddress
+{
+    TLNetworking *http = [TLNetworking new];
+    http.code = USER_CKEY_CVALUE;
+    http.parameters[SYS_KEY] = @"qiniu_domain";
+    [http postWithSuccess:^(id responseObject) {
+        
+        
+        [[NSUserDefaults standardUserDefaults]setObject:[NSString stringWithFormat:@"http://%@", responseObject[@"data"][@"cvalue"]] forKey:Get_Seven_Cattle_Address];
+        
+//        [AppConfig config].qiniuDomain = [NSString stringWithFormat:@"http://%@", responseObject[@"data"][@"cvalue"]];
+        
+    } failure:^(NSError *error) {
+        
+    }];
 }
 
 - (void)configWeibo

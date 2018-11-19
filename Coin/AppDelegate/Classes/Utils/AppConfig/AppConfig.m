@@ -42,28 +42,21 @@ void TLLog(NSString *format, ...) {
     
     self.companyCode = @"CD-TOKEN00018";
     self.systemCode = @"CD-TOKEN00018";
-    
+    self.qiniuDomain = [[NSUserDefaults standardUserDefaults]objectForKey:Get_Seven_Cattle_Address];
     switch (_runEnv) {
             
         case RunEnvTest: {
-            self.qiniuDomain = @"http://pajvine9a.bkt.clouddn.com";
-
-//            self.qiniuDomain = @"http://p5k7690z2.bkt.clouddn.com";
+//            self.qiniuDomain = @"http://pajvine9a.bkt.clouddn.com";
 //            http://m.thatest.hichengdai.com/api
             self.addr = @"http://m.thatest.hichengdai.com/api";
-
-//            self.addr = @"http://47.254.69.142:3306";
             self.ethHash = @"https://rinkeby.etherscan.io/tx";
             self.wanHash = @"http://47.104.61.26/block/trans";
             self.btcHash = @"https://testnet.blockchain.info";
         }break;
             
         case RunEnvDev: {
-            self.qiniuDomain = @"http://pajvine9a.bkt.clouddn.com";
-//            self.addr = @"http://120.26.6.213:2101";
+//            self.qiniuDomain = @"http://pajvine9a.bkt.clouddn.com";
             self.addr = @"http://47.254.69.142:3101";
-
-            //交易hash
             self.ethHash = @"https://rinkeby.etherscan.io/tx";
             self.wanHash = @"http://47.104.61.26/block/trans";
             self.btcHash = @"https://testnet.blockchain.info/";
@@ -74,7 +67,7 @@ void TLLog(NSString *format, ...) {
             
         case RunEnvRelease: {
             
-            self.qiniuDomain = @"http://pajvine9a.bkt.clouddn.com";
+//            self.qiniuDomain = @"http://pajvine9a.bkt.clouddn.com";
 //            self.addr = @"http://47.75.165.70:2101";
             self.addr = @"https://app.tha.hichengdai.com/api";
 

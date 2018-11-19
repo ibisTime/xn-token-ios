@@ -254,8 +254,8 @@ typedef enum : NSUInteger {
     {
         if (index < 100) {
             [TLProgressHUD show];
-            [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeGradient];
-            [SVProgressHUD setDefaultAnimationType:(SVProgressHUDAnimationTypeFlat)];
+//            [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeGradient];
+//            [SVProgressHUD setDefaultAnimationType:(SVProgressHUDAnimationTypeFlat)];
             
             self.tableView.model = self.localcurrencys[index];
             self.numberTextField.text = @"";

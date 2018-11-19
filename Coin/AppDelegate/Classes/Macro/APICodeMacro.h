@@ -31,6 +31,7 @@
 
 //七牛图片上传
 #define IMG_UPLOAD_CODE @"805951"
+#define Get_Seven_Cattle_Address @"Get_Seven_Cattle_Address"
 
 //用户信息
 #define USER_INFO @"805121"
