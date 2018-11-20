@@ -114,7 +114,7 @@
 - (void)initTableView {
     
     self.tableView = [[BillTableView alloc]
-                      initWithFrame:CGRectMake(0, 110, kScreenWidth, SCREEN_HEIGHT - 170 - kStatusBarHeight)
+                      initWithFrame:CGRectMake(0, 110, kScreenWidth, SCREEN_HEIGHT - 170 - kNavigationBarHeight)
                       style:UITableViewStyleGrouped];
    
     self.tableView.backgroundColor = kWhiteColor;

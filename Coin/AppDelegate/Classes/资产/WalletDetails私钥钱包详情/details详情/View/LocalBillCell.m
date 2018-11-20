@@ -219,7 +219,7 @@
     NSString *countStr = [CoinUtil convertToRealCoin:usdtModel.amount
                                                 coin:self.currencyModel.symbol];
     
-    if ([@"1x6YnuBVeeE65dQRZztRWgUPwyBjHCA5g" isEqualToString:usdtModel.sendingAddress]) {
+    if ([self.currencyModel.address isEqualToString:usdtModel.referenceAddress]) {
         self.detailLbl.text = [LangSwitcher switchLang:[NSString stringWithFormat:@"收款"] key:nil]; ;
         self.iconIV.image  = kImage(@"收款");
         self.moneyLbl.textColor = kHexColor(@"#47D047");

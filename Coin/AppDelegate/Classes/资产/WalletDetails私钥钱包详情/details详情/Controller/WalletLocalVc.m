@@ -91,8 +91,8 @@
     helper.code = @"802505";
     helper.start = 0;
     helper.limit = 10;
-    helper.parameters[@"address"] = @"1x6YnuBVeeE65dQRZztRWgUPwyBjHCA5g";
-//    helper.parameters[@"address"] = self.currency.address;
+//    helper.parameters[@"address"] = @"1x6YnuBVeeE65dQRZztRWgUPwyBjHCA5g";
+    helper.parameters[@"address"] = self.currency.address;
     [helper modelClass:[USDTRecordModel class]];
     
     [self.tableView addRefreshAction:^{

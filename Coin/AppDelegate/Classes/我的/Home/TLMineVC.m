@@ -420,21 +420,32 @@
         _imagePicker.allowsEditing = YES;
         _imagePicker.pickFinish = ^(NSDictionary *info){
             
-            UIImage *image = info[@"UIImagePickerControllerOriginalImage"];
-            NSData *imgData = UIImageJPEGRepresentation(image, 0.1);
             
-            //进行上传
-            TLUploadManager *manager = [TLUploadManager manager];
             
-            manager.imgData = imgData;
-            manager.image = image;
-            [manager getTokenShowView:weakSelf.view succes:^(NSString *key) {
                 
-                [weakSelf changeHeadIconWithKey:key imgData:imgData];
                 
-            } failure:^(NSError *error) {
                 
-            }];
+                UIImage *image = info[@"UIImagePickerControllerOriginalImage"];
+                NSData *imgData = UIImageJPEGRepresentation(image, 0.1);
+                
+                //进行上传
+                TLUploadManager *manager = [TLUploadManager manager];
+                
+                manager.imgData = imgData;
+                manager.image = image;
+                [manager getTokenShowView:weakSelf.view succes:^(NSString *key) {
+                    
+                    [weakSelf changeHeadIconWithKey:key imgData:imgData];
+                    
+                } failure:^(NSError *error) {
+                    
+                }];
+                
+                
+            
+            
+            
+            
         };
     }
     

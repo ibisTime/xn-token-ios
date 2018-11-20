@@ -77,14 +77,14 @@
         sumIntputValue = sumIntputValue + [[CoinUtil convertToSysCoin:txoutCount coin:@"BTC"] longLongValue];
         [IntputUtsos addObject:txout];
         
-        btcFree = (148 * sumIntputCount + 34 * 2 + 10) * [sat floatValue] + 546;
+        btcFree = (148 * sumIntputCount + 34 * 2 + 10) * [sat floatValue];
         
         //       Intput总额 大于手续费+转账金额
         if (sumIntputValue >= btcFree) {
             //       Intput总额 大于   手续费、找零手续费 + 转账金额
-            if (sumIntputValue > (148 * sumIntputCount + 34 * 3 + 10) * [sat floatValue]+ 546)
+            if (sumIntputValue > (148 * sumIntputCount + 34 * 3 + 10) * [sat floatValue])
             {
-                btcFree = (148 * sumIntputCount + 34 * 3 + 10) * [sat floatValue] + 546;
+                btcFree = (148 * sumIntputCount + 34 * 3 + 10) * [sat floatValue];
                 isChange = YES;
                 changeValue = sumIntputValue - btcFree;
             }
@@ -92,10 +92,10 @@
         }
     }
     
-    if (btcFree > sumIntputValue) {
-        [TLProgressHUD showInfoWithStatus:[NSString stringWithFormat:@"BTC%@",[LangSwitcher switchLang:@"余额不足" key:nil]]];
-        return nil;
-    }
+//    if (btcFree > sumIntputValue) {
+//        [TLProgressHUD showInfoWithStatus:[NSString stringWithFormat:@"BTC%@",[LangSwitcher switchLang:@"余额不足" key:nil]]];
+//        return nil;
+//    }
 
     //构造交易
     BTCTransaction* tx = [[BTCTransaction alloc] init];
@@ -113,6 +113,7 @@
     
     
     NSString *txHex = [self createSimpleSendHex:currencyID amount:[CoinUtil convertToSysCoin:number coin:coin.symbol]];
+    NSLog(@"%@",[CoinUtil convertToSysCoin:number coin:coin.symbol]);
     [omniScript appendOpcode:BTCOpcodeForName(@"OP_RETURN")];
     [omniScript appendData:BTCDataFromHex(txHex)];
     
@@ -160,7 +161,8 @@
 }
 
 + (NSString *)createSimpleSendHex:(NSString *)currencyId amount:(NSString *)amount {
-    NSString *rawTxHex = [NSString stringWithFormat:@"6f6d6e6900000000%08o%016x", [currencyId intValue], [amount intValue]];
+    NSString *rawTxHex = [NSString stringWithFormat:@"6f6d6e69%016x%016x", [currencyId intValue], [amount intValue]];
+    
     return rawTxHex;
 }
 

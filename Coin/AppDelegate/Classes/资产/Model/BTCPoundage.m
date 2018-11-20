@@ -60,6 +60,9 @@
             break;
         }
     }
+    if (utxis.count == 0) {
+        btcFree = (148 + 34 + 10) * [fee floatValue];
+    }
     return btcFree;
 }
 
@@ -86,19 +89,22 @@
         sumIntputValue = sumIntputValue + [[CoinUtil convertToSysCoin:txoutCount coin:@"BTC"] longLongValue];
         [IntputUtsos addObject:txout];
         
-        btcFree = (148 * sumIntputCount + 34 * 2 + 10) * [fee floatValue] + 546;
+        btcFree = (148 * sumIntputCount + 34 * 2 + 10) * [fee floatValue];
         
         //       Intput总额 大于手续费+转账金额
         if (sumIntputValue >= btcFree) {
             //       Intput总额 大于   手续费、找零手续费 + 转账金额
             if (sumIntputValue > (148 * sumIntputCount + 34 * 3 + 10) * [fee floatValue]+ 546)
             {
-                btcFree = (148 * sumIntputCount + 34 * 3 + 10) * [fee floatValue] + 546;
+                btcFree = (148 * sumIntputCount + 34 * 3 + 10) * [fee floatValue];
                 isChange = YES;
                 changeValue = sumIntputValue - btcFree;
             }
             break;
         }
+    }
+    if (utxis.count == 0) {
+        btcFree = (148 * 1 + 34 * 2 + 10) * [fee floatValue];
     }
     return btcFree;
 }

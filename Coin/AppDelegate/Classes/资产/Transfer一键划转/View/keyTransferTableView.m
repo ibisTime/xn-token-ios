@@ -14,7 +14,9 @@
 //@implementation keyTransferTableView
 
 @interface keyTransferTableView()<UITableViewDelegate, UITableViewDataSource,TransformButtonDelegate>
-
+{
+    NSInteger num;
+}
 
 @end
 @implementation keyTransferTableView
@@ -51,7 +53,10 @@
     
     if (indexPath.section == 0) {
         TransformButtonCell *cell = [tableView dequeueReusableCellWithIdentifier:TransformButton forIndexPath:indexPath];
-        cell.models = self.models;
+        if (num != self.models.count) {
+            num = self.models.count;
+            cell.models = self.models;
+        }
         cell.SelectDelegate = self;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;

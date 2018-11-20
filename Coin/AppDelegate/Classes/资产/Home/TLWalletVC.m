@@ -149,9 +149,9 @@
         }
         //        [self getMyCeurrencyList];
         //1.7.0版本升级适配
-        if (btcadd != nil && btcadd.length > 0 && pwd !=nil) {
-            return;
-        }
+//        if (btcadd != nil && btcadd.length > 0 && pwd !=nil) {
+//            return;
+//        }
 
         NSArray *words = [word componentsSeparatedByString:@" "];
         //这里第一次进行BTC的私钥和地址创建 存到用户表里面 和币种表
@@ -470,6 +470,8 @@
         }
     };
 }
+
+
 
 -(void)refreshTableView:(TLTableView *)refreshTableview setCurrencyModel:(CurrencyModel *)model setTitle:(NSString *)title
 {
@@ -942,9 +944,9 @@
 
 - (void)saveLocalWalletData
 {
-    if (self.coins.count > 0) {
-        return;
-    }
+//    if (self.coins.count > 0) {
+//        return;
+//    }
     NSMutableArray *arr = [[CoinModel coin] getOpenCoinList];
     NSMutableArray *temp = arr.mutableCopy;
     TLDataBase *db = [TLDataBase sharedManager];
@@ -994,8 +996,7 @@
 - (void)loadSum
 {
     if ([[TLUser user].localMoney isEqualToString:@"USD"]) {
-  self.headerView.cnyAmountLbl.text = [NSString stringWithFormat:@"￥ %.2f",[self.headerView.LocalMoney.text doubleValue] + [self.headerView.privateMoney.text doubleValue]] ;
-        
+        self.headerView.cnyAmountLbl.text = [NSString stringWithFormat:@"￥ %.2f",[self.headerView.LocalMoney.text doubleValue] + [self.headerView.privateMoney.text doubleValue]] ;
     }else if ([[TLUser user].localMoney isEqualToString:@"KRW"])
     {
   self.headerView.cnyAmountLbl.text = [NSString stringWithFormat:@"₩ %.2f",[self.headerView.LocalMoney.text doubleValue] + [self.headerView.privateMoney.text doubleValue]] ;
@@ -1011,10 +1012,9 @@
 
 #pragma mark - Events
 
-- (void)userlogin {
-  
+- (void)userlogin
+{
     [self getMyCurrencyList];
-    
 }
 
 - (void)userloginOut
@@ -1028,7 +1028,6 @@
     else{
         self.headerView.cnyAmountLbl.text = [NSString stringWithFormat:@"¥ %@", @"0.00"];
     }
-    
 }
 
 //   个人钱包余额查询
@@ -1041,10 +1040,6 @@
     
     [http postWithSuccess:^(id responseObject) {
         self.currencys = [CurrencyModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"][@"accountList"]];
-
-        
-        
-        
         
         if ([[TLUser user].localMoney isEqualToString:@"USD"]) {
             NSString *cnyStr = [responseObject[@"data"][@"totalAmountUSD"] convertToSimpleRealMoney];

@@ -72,30 +72,35 @@
         [helper modelClass:[CurrencyModel class]];
         [self.tableView addRefreshAction:^{
 
-            [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
-
-                //去除没有的币种
-
-
-                NSMutableArray <CurrencyModel *> *shouldDisplayCoins = [[NSMutableArray alloc] init];
-                [objs enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-
-                    CurrencyModel *currencyModel = (CurrencyModel *)obj;
-                    [shouldDisplayCoins addObject:currencyModel];
-                    //查询总资产
+            [CoinUtil refreshOpenCoinList:^{
+                [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
+                    
+                    //去除没有的币种
+                    
+                    
+                    NSMutableArray <CurrencyModel *> *shouldDisplayCoins = [[NSMutableArray alloc] init];
+                    [objs enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                        
+                        CurrencyModel *currencyModel = (CurrencyModel *)obj;
+                        [shouldDisplayCoins addObject:currencyModel];
+                        //查询总资产
+                    }];
+                    
+                    weakSelf.currencys = shouldDisplayCoins;
+                    weakSelf.tableView.currencys = weakSelf.currencys;
+                    
+                    [weakSelf.tableView reloadData_tl];
+                    [weakSelf.tableView endRefreshingWithNoMoreData_tl];
+                    
+                } failure:^(NSError *error) {
+                    
+                    [weakSelf.tableView endRefreshingWithNoMoreData_tl];
+                    
                 }];
-
-                weakSelf.currencys = shouldDisplayCoins;
-                weakSelf.tableView.currencys = weakSelf.currencys;
-
-                [weakSelf.tableView reloadData_tl];
-                [weakSelf.tableView endRefreshingWithNoMoreData_tl];
-
-            } failure:^(NSError *error) {
-
-                [weakSelf.tableView endRefreshingWithNoMoreData_tl];
-
+            } failure:^{
+                
             }];
+            
 
 
 
@@ -228,13 +233,12 @@
             [a addObject:model];
         }
     }
- 
-
-
     if (self.select) {
         self.select(self.currencys);
     }
 }
+
+
 
 -(void)refreshTableViewButtonClick:(TLTableView *)refreshTableview button:(UIButton *)sender selectRowAtIndex:(NSInteger)index
 {
@@ -248,29 +252,53 @@
         http.parameters[@"symbol"] = coin[@"symbol"];
         http.parameters[@"type"] = @(1);
         http.parameters[@"orderNo"] = @(1);
-
+        
         [http postWithSuccess:^(id responseObject) {
-
+            
             NSNotification *notification =[NSNotification notificationWithName:@"LOADDATAPAGE2" object:nil userInfo:nil];
             [[NSNotificationCenter defaultCenter] postNotification:notification];
-
+            
         } failure:^(NSError *error) {
-
-
+            sender.selected = !sender.selected;
         }];
-    }else
-    {
         
     }
-
-
-
-
+    
+    
+    
 }
 
 
 -(void)refreshTableView:(TLTableView *)refreshTableview didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
+    if (self.PersonalWallet == 100) {
+        
+        TLNetworking *http = [TLNetworking new];
+        http.code = @"802280";
+        http.showView = self.view;
+        NSDictionary *coin = self.currencys[indexPath.section].coin;
+        http.parameters[@"userId"] = [TLUser user].userId;
+        http.parameters[@"symbol"] = coin[@"symbol"];
+        http.parameters[@"type"] = @(1);
+        http.parameters[@"orderNo"] = @(1);
+        
+        [http postWithSuccess:^(id responseObject) {
+            
+            NSNotification *notification =[NSNotification notificationWithName:@"LOADDATAPAGE2" object:nil userInfo:nil];
+            [[NSNotificationCenter defaultCenter] postNotification:notification];
+            
+//            sender.selected = !sender.selected;
+        } failure:^(NSError *error) {
+            UIButton *sender = [self.view viewWithTag:indexPath.section + 200];
+            sender.selected = !sender.selected;
+        }];
+    }
+    if (self.isRedPage != YES) {
+        UIButton *sender = [self.view viewWithTag:indexPath.section + 200];
+        sender.selected = !sender.selected;
+        self.currentModels[indexPath.section].IsSelected = sender.selected;
+    }
     if (self.isRedPage == YES) {
         if (self.curreryBlock) {
             self.curreryBlock(self.currentModels[indexPath.section]);

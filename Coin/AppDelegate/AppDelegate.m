@@ -55,15 +55,17 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-//    [NSThread sleepForTimeInterval:2];
+    //    [NSThread sleepForTimeInterval:2];
     
+
+
     //服务器环境7
 //    研发
-    [AppConfig config].runEnv = RunEnvDev;
+//    [AppConfig config].runEnv = RunEnvDev;
 //    测试
 //    [AppConfig config].runEnv = RunEnvTest;
 //    正式
-//    [AppConfig config].runEnv = RunEnvRelease;
+    [AppConfig config].runEnv = RunEnvRelease;
 
     [AppConfig config].isChecking = NO;
 #warning  //pods 更新后会导致wan币转账失败
@@ -76,6 +78,8 @@
     //2.新版本请求
     [NBNetworkConfig config].baseUrl = [AppConfig config].apiUrl;
     
+    //    配置七牛地址
+    [self GetSevenCattleAddress];
     //配置键盘
     [self configIQKeyboard];
 
@@ -95,18 +99,14 @@
     //配置根控制器
     [self configRootViewController];
     [LangSwitcher startWithTraditional];
+    
     //初始化为繁体
     //初始化数据库
-    
-    ;
     if ([[TLDataBase sharedManager].dataBase open]) {
 //        [ [TLDataBase sharedManager].dataBase executeUpdate:@"UPDATE THAWallet SET userId='China'"];
         NSLog(@"数据库打开成功");
     }
     
-    
-   
-
     //退出登录消息通知
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(loginOut)
@@ -148,6 +148,25 @@
     return YES;
     
     
+}
+
+
+//获取七牛地址
+-(void)GetSevenCattleAddress
+{
+    TLNetworking *http = [TLNetworking new];
+    http.code = USER_CKEY_CVALUE;
+    http.parameters[SYS_KEY] = @"qiniu_domain";
+    [http postWithSuccess:^(id responseObject) {
+        
+        
+        [[NSUserDefaults standardUserDefaults]setObject:[NSString stringWithFormat:@"http://%@", responseObject[@"data"][@"cvalue"]] forKey:Get_Seven_Cattle_Address];
+        
+        [AppConfig config].qiniuDomain = [NSString stringWithFormat:@"http://%@", responseObject[@"data"][@"cvalue"]];
+        
+    } failure:^(NSError *error) {
+        
+    }];
 }
 
 - (void)configWeibo

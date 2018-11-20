@@ -61,6 +61,9 @@
 
 
 @property (nonatomic, copy) NSString *chineseName;
+@property (nonatomic, copy) NSString *AvailableBalance;
+
+
 - (NSString *)getTypeName;
 
 - (NSString *)getImgName;

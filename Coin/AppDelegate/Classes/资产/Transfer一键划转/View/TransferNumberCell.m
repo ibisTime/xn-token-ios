@@ -344,10 +344,11 @@
         
         [self.totalFree mas_makeConstraints:^(MASConstraintMaker *make) {
             make.bottom.equalTo(self.importButton.mas_top).offset(-10);
-            make.left.equalTo(self.importButton.mas_left).offset(0);
-            make.right.equalTo(self.importButton.mas_right).offset(0);
+            make.left.equalTo(self.mas_left).offset(0);
+            make.right.equalTo(self.mas_right).offset(0);
             
         }];
+        self.leftAmount.tag = 1122;
 
     }
     return self;
@@ -419,18 +420,20 @@
 {
     if (isLocalCell == YES) {
         NSString *money = [CoinUtil convertToRealCoin:model.balance coin:model.symbol];
-        self.leftAmount.text= [NSString stringWithFormat:@"%@:  %@ %@",[LangSwitcher switchLang:@"可用余额" key:nil],money,model.symbol];
+        self.leftAmount.text= [NSString stringWithFormat:@"%@:  %.8f %@",[LangSwitcher switchLang:@"可用余额" key:nil],[money floatValue],model.symbol];
         _symbolLab.text = model.currency;
         
     }
     else
     {
+        
         NSString *leftAmount = [model.amountString subNumber:model.frozenAmountString];
         NSString *money = [CoinUtil convertToRealCoin:leftAmount coin:model.currency];
         self.leftAmount.text = [NSString stringWithFormat:@"%@:  %@ %@",[LangSwitcher switchLang:@"可用余额" key:nil],money,model.currency];
         
         CoinModel *currentCoin = [CoinUtil getCoinModel:model.currency];
         self.totalFree.text = [NSString stringWithFormat:@"%@ %@",[LangSwitcher switchLang:@"本次划转手续费为" key:nil],[NSString stringWithFormat:@"%@ %@", [CoinUtil convertToRealCoin:currentCoin.withdrawFeeString coin:model.currency], model.currency]];
+//        NSLog(@"====== %@",[NSString stringWithFormat:@"%@ %@",[LangSwitcher switchLang:@"本次划转手续费为" key:nil],[NSString stringWithFormat:@"%@ %@", [CoinUtil convertToRealCoin:currentCoin.withdrawFeeString coin:model.currency], model.currency]]);
 //        self.amountlLab.text = [NSString stringWithFormat:@"%@ %@",money,model.currency];
     }
     
