@@ -37,6 +37,8 @@
 		1F693AEE21A297B7004818D8 /* BackupPromptView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F693AED21A297B7004818D8 /* BackupPromptView.m */; };
 		1F693AF121A2A660004818D8 /* BackupWalletMnemonicVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F693AF021A2A660004818D8 /* BackupWalletMnemonicVC.m */; };
 		1F693AF721A2D7D9004818D8 /* BackupCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F693AF621A2D7D9004818D8 /* BackupCollectionViewCell.m */; };
+		1F693AFA21A3E3C8004818D8 /* UIScrollView+Touch.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F693AF921A3E3C8004818D8 /* UIScrollView+Touch.m */; };
+		1F693AFD21A3F36E004818D8 /* ConfirmBackupVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F693AFC21A3F36E004818D8 /* ConfirmBackupVC.m */; };
 		1F709D5E218161D8002D1CC4 /* keyTransferTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F709D5D218161D8002D1CC4 /* keyTransferTableView.m */; };
 		1F709D61218162A5002D1CC4 /* TransformButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F709D60218162A5002D1CC4 /* TransformButtonCell.m */; };
 		1F709D6421817246002D1CC4 /* TransferNumberCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F709D6321817246002D1CC4 /* TransferNumberCell.m */; };
@@ -596,6 +598,10 @@
 		1F693AF021A2A660004818D8 /* BackupWalletMnemonicVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BackupWalletMnemonicVC.m; sourceTree = "<group>"; };
 		1F693AF521A2D7D9004818D8 /* BackupCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BackupCollectionViewCell.h; sourceTree = "<group>"; };
 		1F693AF621A2D7D9004818D8 /* BackupCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BackupCollectionViewCell.m; sourceTree = "<group>"; };
+		1F693AF821A3E3C8004818D8 /* UIScrollView+Touch.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+Touch.h"; sourceTree = "<group>"; };
+		1F693AF921A3E3C8004818D8 /* UIScrollView+Touch.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+Touch.m"; sourceTree = "<group>"; };
+		1F693AFB21A3F36E004818D8 /* ConfirmBackupVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ConfirmBackupVC.h; sourceTree = "<group>"; };
+		1F693AFC21A3F36E004818D8 /* ConfirmBackupVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ConfirmBackupVC.m; sourceTree = "<group>"; };
 		1F709D5C218161D8002D1CC4 /* keyTransferTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = keyTransferTableView.h; sourceTree = "<group>"; };
 		1F709D5D218161D8002D1CC4 /* keyTransferTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = keyTransferTableView.m; sourceTree = "<group>"; };
 		1F709D5F218162A5002D1CC4 /* TransformButtonCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TransformButtonCell.h; sourceTree = "<group>"; };
@@ -1889,6 +1895,8 @@
 				1F4E896021996EDE007B3015 /* TheInitialVC.m */,
 				1F4E89622199816E007B3015 /* TheInitialView.h */,
 				1F4E89632199816E007B3015 /* TheInitialView.m */,
+				1F693AF821A3E3C8004818D8 /* UIScrollView+Touch.h */,
+				1F693AF921A3E3C8004818D8 /* UIScrollView+Touch.m */,
 			);
 			path = "起始业";
 			sourceTree = "<group>";
@@ -2054,6 +2062,8 @@
 				1F693AF021A2A660004818D8 /* BackupWalletMnemonicVC.m */,
 				1F693AF521A2D7D9004818D8 /* BackupCollectionViewCell.h */,
 				1F693AF621A2D7D9004818D8 /* BackupCollectionViewCell.m */,
+				1F693AFB21A3F36E004818D8 /* ConfirmBackupVC.h */,
+				1F693AFC21A3F36E004818D8 /* ConfirmBackupVC.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -4431,6 +4441,7 @@
 				B8C2056A20CF86A400952765 /* ChangeForwordVC.m in Sources */,
 				7A07F7DF216C7BD00026EB7A /* MyIncomeVC.m in Sources */,
 				B8086530211EA17D00755158 /* BTCData+Tests.m in Sources */,
+				1F693AFD21A3F36E004818D8 /* ConfirmBackupVC.m in Sources */,
 				7A2CC670215C9E3B00B27E2D /* PosMyInvestmentModel.m in Sources */,
 				B8CAA14521158FF200695BC3 /* LPDPhotoArrangeCVlLayout.m in Sources */,
 				B8DB9EB7214F6AA90091276E /* RedintrodeceVC.m in Sources */,
@@ -4442,6 +4453,7 @@
 				7A8A5D2820EA3124002D9A48 /* RedEnvelopeShoreView.m in Sources */,
 				21A7F3151FB2E2F900FAA0A2 /* TLChangeMobileVC.m in Sources */,
 				7A07F804216C84F30026EB7A /* SCBarChart.m in Sources */,
+				1F693AFA21A3E3C8004818D8 /* UIScrollView+Touch.m in Sources */,
 				211DE6AC1FB58B4C002FCF3D /* TLPageDataHelper.m in Sources */,
 				7A2CC67A215CD45300B27E2D /* AccumulatedEarningsCell.m in Sources */,
 				B8CAA13D21158FF200695BC3 /* LPDAssetCell.m in Sources */,

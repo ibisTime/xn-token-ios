@@ -149,6 +149,7 @@
 }
 
 
+
 #pragma mark - Init
 - (void)loadData {
     
@@ -191,10 +192,10 @@
         case 2:
         {
             
-//            BackupWalletMnemonicVC *vc = [BackupWalletMnemonicVC new];
+            BackupWalletMnemonicVC *vc = [BackupWalletMnemonicVC new];
             
-            TradePasswordVC *vc = [[TradePasswordVC alloc]init];
-            vc.state = @"1";
+//            TradePasswordVC *vc = [[TradePasswordVC alloc]init];
+//            vc.state = @"1";
             [self.navigationController pushViewController:vc animated:YES];
         }
             break;

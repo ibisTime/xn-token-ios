@@ -18,4 +18,10 @@
 
 @property (nonatomic , strong)UIView *dynamicLineView;
 
+//视图数组
+@property(nonatomic,strong) NSArray *viewArray;
+
+//当前页
+@property(nonatomic,assign) NSInteger currentPage;
+
 @end

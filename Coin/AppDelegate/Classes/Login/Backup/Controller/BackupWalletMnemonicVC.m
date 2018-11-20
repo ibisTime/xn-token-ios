@@ -8,10 +8,13 @@
 
 #import "BackupWalletMnemonicVC.h"
 #import "BackupCollectionViewCell.h"
+#import "ConfirmBackupVC.h"
 @interface BackupWalletMnemonicVC ()<UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 {
-    NSInteger selectNum;
     UIView *topView;
+    
+    UIButton *animBtn;
+    
 }
 
 @property (nonatomic , strong)UICollectionView *SelectCollectionView;
@@ -32,7 +35,7 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    self.navigationItem.hidesBackButton = NO;
+//    self.navigationItem.hidesBackButton = NO;
 }
 
 - (void)viewDidLoad {
@@ -41,7 +44,7 @@
     
     _SelectArray = [NSMutableArray array];
     _BackupArray = [NSMutableArray array];
-    [_BackupArray addObjectsFromArray:@[@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"10",@"11",@"12"]];
+    [_BackupArray addObjectsFromArray:@[@"bind",@"extra",@"abuse",@"west",@"property" ,@"drive" ,@"today" ,@"water",@"hidden" ,@"harsh" ,@"change",@"source"]];
     
     UILabel *nameLable = [[UILabel alloc]init];
     nameLable.text = [LangSwitcher switchLang:@"备份钱包助记词" key:nil];
@@ -49,8 +52,6 @@
     nameLable.font = Font(16);
     nameLable.textColor = [UIColor whiteColor];
     self.navigationItem.titleView = nameLable;
-    selectNum = 0;
-//    [self initView];
     
     UIImageView *backImage = [[UIImageView alloc]initWithFrame:CGRectMake(0, -kNavigationBarHeight, SCREEN_WIDTH, SCREEN_HEIGHT)];
     backImage.image = kImage(@"起始业背景");
@@ -89,6 +90,31 @@
     _BackupCollectionView.tag = 1001;
     [self.view addSubview:_BackupCollectionView];
     
+    UIButton *confirmBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"完成" key:nil] titleColor:kWhiteColor backgroundColor:kClearColor titleFont:16];
+    confirmBtn.frame = CGRectMake(SCREEN_WIDTH/2 - 65, _BackupCollectionView.yy + 35, 130, 50);
+    kViewRadius(confirmBtn, 10);
+    [confirmBtn setBackgroundImage:kImage(@"矩形5-1") forState:(UIControlStateNormal)];
+    [confirmBtn addTarget:self action:@selector(confirmBtn) forControlEvents:(UIControlEventTouchUpInside)];
+    [self.view addSubview:confirmBtn];
+    
+    
+    
+    animBtn = [UIButton buttonWithTitle:@"" titleColor:kWhiteColor backgroundColor:kClearColor titleFont:14];
+    [animBtn setBackgroundImage:kImage(@"圆角矩形2拷贝2") forState:(UIControlStateNormal)];
+    animBtn.frame = CGRectMake(SCREEN_WIDTH, SCREEN_HEIGHT, (SCREEN_WIDTH - 70)/3, 40);
+    [self.view addSubview:animBtn];
+    
+    
+    
+    
+    
+    
+}
+
+-(void)confirmBtn
+{
+    ConfirmBackupVC *vc = [ConfirmBackupVC new];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark -- Collection delegate
@@ -182,118 +208,61 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     NSLog(@"点击了 %ld ", indexPath.row);
     if (collectionView.tag == 1000) {
+        
+        
+        animBtn.hidden = NO;
+        animBtn.frame = CGRectMake(_SelectCollectionView.x + 5 + indexPath.row %3* ((SCREEN_WIDTH - 70)/3 + 5), _SelectCollectionView.y + 5 + indexPath.row / 3* (135/4 + 5), (SCREEN_WIDTH - 70)/3, 135/4);
+        [animBtn setBackgroundImage:kImage(@"圆角矩形2拷贝2") forState:(UIControlStateNormal)];
+        kViewBorderRadius(animBtn, 5, 0, kClearColor);
+        [animBtn setTitle:_SelectArray[indexPath.row] forState:(UIControlStateNormal)];
+        
         [_BackupArray addObject:_SelectArray[indexPath.row]];
-        [_SelectArray removeObjectAtIndex:indexPath.row];
-        [_SelectCollectionView reloadData];
-        [_BackupCollectionView reloadData];
         
-    }else
-    {
-        [_SelectArray addObject:_BackupArray[indexPath.row]];
-        [_BackupArray removeObjectAtIndex:indexPath.row];
-        
-//        [CATransaction setDisableActions:YES];
-        [_BackupCollectionView reloadData];
-        
-//        [_SelectCollectionView performBatchUpdates:^{
-//
-//
-//
-//        } completion:^(BOOL finished) {
-//
-//
-//
-//        }];
-//        [_SelectCollectionView reloadData];
-//        [CATransaction commit];
-//        [_BackupCollectionView reloadData];
-//        [_SelectCollectionView reloadData];
-//        [UIView animateWithDuration:0.5 animations:^{
-//
-//            UIImageView *image = [self.view viewWithTag:indexPath.row + 100];
-//            image.frame = CGRectMake(-5 + _SelectArray.count%3*((SCREEN_WIDTH - 70)/3 + 5) ,  60 + 5 + _SelectArray.count/3*(135/4 + 5) - 160 - 22, (SCREEN_WIDTH - 70)/3, 135/4);
-//
-//        } completion:^(BOOL finished) {
-//            [_SelectCollectionView reloadData];
-//        }];
-        
-        
-        
-        
-        
-        
-        
-        
-        
-    }
-}
-
-
--(void)initView
-{
-    
-    UIImageView *backImage = [[UIImageView alloc]initWithFrame:CGRectMake(0, -kNavigationBarHeight, SCREEN_WIDTH, SCREEN_HEIGHT)];
-    backImage.image = kImage(@"起始业背景");
-    [self.view addSubview:backImage];
-    
-    topView = [[UIView alloc]initWithFrame:CGRectMake(25, 60, SCREEN_WIDTH - 50, 160)];
-    topView.backgroundColor = RGB(133, 202, 207);
-    topView.layer.cornerRadius=5;
-    topView.layer.shadowOpacity = 0.22;// 阴影透明度
-    topView.layer.shadowColor = [UIColor grayColor].CGColor;// 阴影的颜色
-    topView.layer.shadowRadius=3;// 阴影扩散的范围控制
-    topView.layer.shadowOffset = CGSizeMake(1, 1);// 阴
-    [self.view addSubview:topView];
-    
-    
-    
-    
-    for (int i = 0; i < 12; i ++) {
-        
-        
-        UIView *backupView = [[UIView alloc]initWithFrame:CGRectMake(30 + i%3*((SCREEN_WIDTH - 70)/3 + 5),  60 + 5 + i/3*(135/4 + 5), (SCREEN_WIDTH - 70)/3, 135/4)];
-//        backupView.backgroundColor = kWhiteColor;
-        backupView.tag = i + 10;
-        [self.view addSubview:backupView];
-        
-        UIButton *backupBtn = [UIButton buttonWithTitle:@"buy" titleColor:kWhiteColor backgroundColor:kClearColor titleFont:14];
-        backupBtn.frame = CGRectMake(25 + i%3*((SCREEN_WIDTH - 70)/3 + 10), topView.yy + 27 + i/3*50, (SCREEN_WIDTH - 70)/3, 40);
-        
-        [backupBtn setBackgroundImage:kImage(@"圆角矩形2拷贝2") forState:(UIControlStateNormal)];
-        [backupBtn setBackgroundImage:kImage(@"") forState:(UIControlStateSelected)];
-        
-        
-        [backupBtn addTarget:self action:@selector(backupBtnClick:) forControlEvents:(UIControlEventTouchUpInside)];
-        backupBtn.tag = 100 + i;
-        [self.view addSubview:backupBtn];
-    }
-}
-
--(void)backupBtnClick:(UIButton *)sender
-{
-    sender.selected = !sender.selected;
-
-    if (sender.selected == YES) {
-        UIView *selectView = [self.view viewWithTag:selectNum + 10];
-        [UIView animateWithDuration:0.5 animations:^{
-            sender.frame = selectView.frame;
-            kViewBorderRadius(sender, 5, 1, kWhiteColor);
-            [sender setBackgroundImage:kImage(@"") forState:(UIControlStateNormal)];
+        [self.SelectCollectionView  performBatchUpdates:^{
+            [_SelectArray removeObjectAtIndex:indexPath.row];
+            [self.SelectCollectionView  deleteItemsAtIndexPaths:@[indexPath]];
+        } completion:^(BOOL finished) {
+            [self.SelectCollectionView  reloadData];
         }];
-        selectNum ++;
-    }else
-    {
+        
         [UIView animateWithDuration:0.5 animations:^{
-            sender.frame = CGRectMake(25 + (sender.tag - 100)%3*((SCREEN_WIDTH - 70)/3 + 10), topView.yy + 27 + (sender.tag - 100)/3*50, (SCREEN_WIDTH - 70)/3, 40);
-            kViewBorderRadius(sender, 5, 0, kClearColor);
-            [sender setBackgroundImage:kImage(@"圆角矩形2拷贝2") forState:(UIControlStateNormal)];
             
+            animBtn.frame = CGRectMake(25 + (_BackupArray.count - 1) % 3 * ((SCREEN_WIDTH - 70)/3 + 10), _BackupCollectionView.y + 10 + (_BackupArray.count - 1) / 3 * (40 + 10), (SCREEN_WIDTH - 70)/3, 40);
+            
+        } completion:^(BOOL finished) {
+            animBtn.hidden = YES;
+            [_BackupCollectionView reloadData];
         }];
-        selectNum --;
+
+    }else
+    {
+        animBtn.hidden = NO;
+        animBtn.frame = CGRectMake(25 + indexPath.row % 3 * ((SCREEN_WIDTH - 70)/3 + 10), _BackupCollectionView.y + 10 + indexPath.row / 3 * (40 + 10), (SCREEN_WIDTH - 70)/3, 40);
+        [animBtn setBackgroundImage:kImage(@"") forState:(UIControlStateNormal)];
+        [animBtn setTitle:_BackupArray[indexPath.row] forState:(UIControlStateNormal)];
+        kViewBorderRadius(animBtn, 5, 1, kWhiteColor);
         
+        [_SelectArray addObject:_BackupArray[indexPath.row]];
+        [self.BackupCollectionView performBatchUpdates:^{
+            [_BackupArray removeObjectAtIndex:indexPath.row];
+            [self.BackupCollectionView deleteItemsAtIndexPaths:@[indexPath]];
+        } completion:^(BOOL finished) {
+            [self.BackupCollectionView reloadData];
+        }];
+        
+        [UIView animateWithDuration:0.5 animations:^{
+            
+            animBtn.frame = CGRectMake(_SelectCollectionView.x + 5 + (_SelectArray.count - 1) %3* ((SCREEN_WIDTH - 70)/3 + 5), _SelectCollectionView.y + 5 + (_SelectArray.count - 1) / 3* (135/4 + 5), (SCREEN_WIDTH - 70)/3, 135/4);
+            
+        } completion:^(BOOL finished) {
+            animBtn.hidden = YES;
+            [_SelectCollectionView reloadData];
+        }];
     }
-    
 }
+
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
