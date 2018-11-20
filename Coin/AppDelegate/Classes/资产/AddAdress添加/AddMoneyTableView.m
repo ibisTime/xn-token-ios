@@ -47,7 +47,7 @@ static NSString *identifierCell = @"AddMoneyCell";
 
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
 //    cell.AddMoneyDelegate = self;
-    cell.selectButton.tag = indexPath.section;
+    cell.selectButton.tag = indexPath.section + 200;
     [cell.selectButton addTarget:self action:@selector(SelectTheButton:) forControlEvents:UIControlEventTouchUpInside];
     return cell;
 }
@@ -55,7 +55,7 @@ static NSString *identifierCell = @"AddMoneyCell";
 -(void)SelectTheButton:(UIButton *)sender
 {
     if ([self.refreshDelegate respondsToSelector:@selector(refreshTableViewButtonClick:button:selectRowAtIndex:)]) {
-        [self.refreshDelegate refreshTableViewButtonClick:self button:sender selectRowAtIndex:sender.tag];
+        [self.refreshDelegate refreshTableViewButtonClick:self button:sender selectRowAtIndex:sender.tag - 200];
     }
 }
 

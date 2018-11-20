@@ -54,15 +54,18 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-//    [NSThread sleepForTimeInterval:2];
+    //    [NSThread sleepForTimeInterval:2];
     
+
+//    配置七牛地址
+    [self GetSevenCattleAddress];
     //服务器环境7
 //    研发
-    [AppConfig config].runEnv = RunEnvDev;
+//    [AppConfig config].runEnv = RunEnvDev;
 //    测试
 //    [AppConfig config].runEnv = RunEnvTest;
 //    正式
-//    [AppConfig config].runEnv = RunEnvRelease;
+    [AppConfig config].runEnv = RunEnvRelease;
 
     [AppConfig config].isChecking = NO;
 #warning  //pods 更新后会导致wan币转账失败
@@ -94,7 +97,7 @@
     //配置根控制器
     [self configRootViewController];
     [LangSwitcher startWithTraditional];
-    [self GetSevenCattleAddress];
+    
     //初始化为繁体
     //初始化数据库
     if ([[TLDataBase sharedManager].dataBase open]) {

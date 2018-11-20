@@ -64,7 +64,18 @@ static NSString *identifierCell = @"BillDetailCell";
         }
         formAdress = _usdtModel.sendingAddress;
         charge = [CoinUtil convertToRealCoin:_usdtModel.fee coin:self.currentModel.symbol];;
-        height = self.usdtModel.block;
+        if ([TLUser isBlankString:self.usdtModel.block] == YES) {
+            if ([self.currentModel.address isEqualToString:self.usdtModel.sendingAddress]) {
+                height = [LangSwitcher switchLang:@"同步打包中" key:nil];
+            }else
+            {
+                height = [LangSwitcher switchLang:@"即将到账" key:nil];
+            }
+            
+        }else
+        {
+            height = self.usdtModel.block;
+        }
         texthash = _usdtModel.txid;
         CoinModel *co = [CoinUtil getCoinModel:_currentModel.symbol];
         postAmount  = [CoinUtil convertToRealCoin:_usdtModel.fee coin:co.symbol];

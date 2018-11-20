@@ -273,8 +273,7 @@
 {
     
     if (self.PersonalWallet == 100) {
-        UIButton *sender = [self.view viewWithTag:indexPath.section];
-        sender.selected = !sender.selected;
+        
         TLNetworking *http = [TLNetworking new];
         http.code = @"802280";
         http.showView = self.view;
@@ -289,13 +288,14 @@
             NSNotification *notification =[NSNotification notificationWithName:@"LOADDATAPAGE2" object:nil userInfo:nil];
             [[NSNotificationCenter defaultCenter] postNotification:notification];
             
+//            sender.selected = !sender.selected;
         } failure:^(NSError *error) {
-            
+            UIButton *sender = [self.view viewWithTag:indexPath.section + 200];
             sender.selected = !sender.selected;
         }];
     }
     if (self.isRedPage != YES) {
-        UIButton *sender = [self.view viewWithTag:indexPath.section];
+        UIButton *sender = [self.view viewWithTag:indexPath.section + 200];
         sender.selected = !sender.selected;
         self.currentModels[indexPath.section].IsSelected = sender.selected;
     }
