@@ -57,8 +57,7 @@
     //    [NSThread sleepForTimeInterval:2];
     
 
-//    配置七牛地址
-    [self GetSevenCattleAddress];
+
     //服务器环境7
 //    研发
 //    [AppConfig config].runEnv = RunEnvDev;
@@ -78,6 +77,8 @@
     //2.新版本请求
     [NBNetworkConfig config].baseUrl = [AppConfig config].apiUrl;
     
+    //    配置七牛地址
+    [self GetSevenCattleAddress];
     //配置键盘
     [self configIQKeyboard];
 
@@ -105,9 +106,6 @@
         NSLog(@"数据库打开成功");
     }
     
-    
-   
-
     //退出登录消息通知
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(loginOut)
