@@ -93,7 +93,7 @@
     UIButton *confirmBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"完成" key:nil] titleColor:kWhiteColor backgroundColor:kClearColor titleFont:16];
     confirmBtn.frame = CGRectMake(SCREEN_WIDTH/2 - 65, _BackupCollectionView.yy + 35, 130, 50);
     kViewRadius(confirmBtn, 10);
-    [confirmBtn setBackgroundImage:kImage(@"矩形5-1") forState:(UIControlStateNormal)];
+    confirmBtn.backgroundColor = RGB(94, 164, 226);
     [confirmBtn addTarget:self action:@selector(confirmBtn) forControlEvents:(UIControlEventTouchUpInside)];
     [self.view addSubview:confirmBtn];
     

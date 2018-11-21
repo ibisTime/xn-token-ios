@@ -16,9 +16,11 @@
     UIButton *isSelectBtn;
     UIView *registerLineView;
 }
+@property (nonatomic , strong)UIButton *phoneAreaCodeBtn;
 @property (nonatomic , strong)UITextField *phoneTextFid;
 @property (nonatomic , strong)UITextField *codeTextFid;
-
+@property (nonatomic , strong)UILabel *codeLabel;
+@property (nonatomic , strong)UIView *lineView;
 @end
 
 @implementation LoginVC
@@ -70,25 +72,25 @@
         [backView addSubview:phoneAndEmailRegister];
     }
     
-    UIButton *phoneAreaCodeBtn = [UIButton buttonWithTitle:[NSString stringWithFormat:@"+%@",[model.interCode substringFromIndex:2]] titleColor:kWhiteColor backgroundColor:kClearColor titleFont:14];
+    _phoneAreaCodeBtn = [UIButton buttonWithTitle:[NSString stringWithFormat:@"+%@",[model.interCode substringFromIndex:2]] titleColor:kWhiteColor backgroundColor:kClearColor titleFont:14];
     
-    phoneAreaCodeBtn.frame = CGRectMake(46, registerLineView.yy + 50, 0, 15);
-    phoneAreaCodeBtn.titleLabel.font = HGboldfont(14);
-    [phoneAreaCodeBtn sizeToFit];
-    phoneAreaCodeBtn.frame = CGRectMake(46, registerLineView.yy + 50, phoneAreaCodeBtn.frame.size.width + 6.5, 15);
-    [phoneAreaCodeBtn setImage:kImage(@"矩形4") forState:(UIControlStateNormal)];
-    CGFloat imageW = phoneAreaCodeBtn.imageView.image.size.width;
-    CGFloat titleW = phoneAreaCodeBtn.titleLabel.frame.size.width;
+    _phoneAreaCodeBtn.frame = CGRectMake(46, registerLineView.yy + 50, 0, 15);
+    _phoneAreaCodeBtn.titleLabel.font = HGboldfont(14);
+    [_phoneAreaCodeBtn sizeToFit];
+    _phoneAreaCodeBtn.frame = CGRectMake(46, registerLineView.yy + 50, _phoneAreaCodeBtn.frame.size.width + 6.5, 15);
+    [_phoneAreaCodeBtn setImage:kImage(@"矩形4") forState:(UIControlStateNormal)];
+    CGFloat imageW = _phoneAreaCodeBtn.imageView.image.size.width;
+    CGFloat titleW = _phoneAreaCodeBtn.titleLabel.frame.size.width;
     CGFloat imageOffset = titleW + 0.5 * 3;
     CGFloat titleOffset = imageW + 0.5 * 3;
-    phoneAreaCodeBtn.imageEdgeInsets = UIEdgeInsetsMake(6.5, imageOffset, 0, - imageOffset);
-    phoneAreaCodeBtn.titleEdgeInsets = UIEdgeInsetsMake(0, - titleOffset, 0, titleOffset);
-    [phoneAreaCodeBtn addTarget:self action:@selector(phoneAreaCodeBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
-    [backView addSubview:phoneAreaCodeBtn];
+    _phoneAreaCodeBtn.imageEdgeInsets = UIEdgeInsetsMake(6.5, imageOffset, 0, - imageOffset);
+    _phoneAreaCodeBtn.titleEdgeInsets = UIEdgeInsetsMake(0, - titleOffset, 0, titleOffset);
+    [_phoneAreaCodeBtn addTarget:self action:@selector(phoneAreaCodeBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
+    [backView addSubview:_phoneAreaCodeBtn];
     
     
     
-    _phoneTextFid = [[UITextField alloc]initWithFrame:CGRectMake(phoneAreaCodeBtn.xx + 15, registerLineView.yy + 50, SCREEN_WIDTH - phoneAreaCodeBtn.xx - 60, 15)];
+    _phoneTextFid = [[UITextField alloc]initWithFrame:CGRectMake(_phoneAreaCodeBtn.xx + 15, registerLineView.yy + 50, SCREEN_WIDTH - _phoneAreaCodeBtn.xx - 60, 15)];
     _phoneTextFid.placeholder = [LangSwitcher switchLang:@"请输入您的手机号码" key:nil];
     //    phoneTextFid.keyboardType = UIKeyboardTypeEmailAddress;
     [_phoneTextFid setValue:FONT(12) forKeyPath:@"_placeholderLabel.font"];
@@ -170,11 +172,16 @@
     
 }
 
+
 -(void)phoneAreaCodeBtnClick
 {
+    if (isSelectBtn.tag == 101) {
+        return;
+    }
     SearchCountriesVC *vc = [SearchCountriesVC new];
     [self.navigationController pushViewController:vc animated:YES];
 }
+
 
 -(void)phoneAndEmailRegisterClick:(UIButton *)sender
 {
@@ -184,6 +191,42 @@
     sender.selected = !sender.selected;
     isSelectBtn.selected = !isSelectBtn.selected;
     isSelectBtn = sender;
+    [self PageShowsUI:sender];
+}
+
+
+-(void)PageShowsUI:(UIButton *)sender
+{
+    if (sender.tag == 100) {
+        NSData *data   =  [[NSUserDefaults standardUserDefaults] objectForKey:@"chooseModel"];
+        CountryModel *model = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        [_phoneAreaCodeBtn setTitle:[NSString stringWithFormat:@"+%@",[model.interCode substringFromIndex:2]] forState:(UIControlStateNormal)];
+        [_phoneAreaCodeBtn sizeToFit];
+        _phoneAreaCodeBtn.frame = CGRectMake(46, registerLineView.yy + 50, _phoneAreaCodeBtn.frame.size.width + 6.5, 15);
+        [_phoneAreaCodeBtn setImage:kImage(@"矩形4") forState:(UIControlStateNormal)];
+        CGFloat imageW = _phoneAreaCodeBtn.imageView.image.size.width;
+        CGFloat titleW = _phoneAreaCodeBtn.titleLabel.frame.size.width;
+        CGFloat imageOffset = titleW + 0.5 * 3;
+        CGFloat titleOffset = imageW + 0.5 * 3;
+        _phoneAreaCodeBtn.imageEdgeInsets = UIEdgeInsetsMake(6.5, imageOffset, 0, - imageOffset);
+        _phoneAreaCodeBtn.titleEdgeInsets = UIEdgeInsetsMake(0, - titleOffset, 0, titleOffset);
+        _phoneTextFid.frame = CGRectMake(_phoneAreaCodeBtn.xx + 15, registerLineView.yy + 50, SCREEN_WIDTH - _phoneAreaCodeBtn.xx - 60, 15);
+        _phoneTextFid.placeholder = [LangSwitcher switchLang:@"请输入您的手机号码" key:nil];
+        
+    }else
+    {
+        
+        [_phoneAreaCodeBtn setTitle:[LangSwitcher switchLang:@"邮箱" key:nil] forState:(UIControlStateNormal)];
+        [_phoneAreaCodeBtn sizeToFit];
+        
+        [_phoneAreaCodeBtn setImage:kImage(@"") forState:(UIControlStateNormal)];
+        _phoneAreaCodeBtn.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 0);
+        _phoneAreaCodeBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 0);
+        _phoneAreaCodeBtn.frame = CGRectMake(46, registerLineView.yy + 50, _phoneAreaCodeBtn.width, 15);
+        
+        _phoneTextFid.frame = CGRectMake(_phoneAreaCodeBtn.xx + 10, registerLineView.yy + 50, SCREEN_WIDTH - _phoneAreaCodeBtn.xx - 60, 15);
+        _phoneTextFid.placeholder = [LangSwitcher switchLang:@"请输入您的邮箱账号" key:nil];
+    }
 }
 
 -(void)BtnClick:(UIButton *)sender

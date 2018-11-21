@@ -63,4 +63,93 @@
     [_popView pop];
 }
 
+-(void)phoneCode:(UIButton *)sender
+{
+    __block NSInteger time = 59;
+    
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_source_t _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, queue);
+    
+    dispatch_source_set_timer(_timer,dispatch_walltime(NULL, 0),1.0*NSEC_PER_SEC, 0);
+    dispatch_source_set_event_handler(_timer, ^{
+        if(time <= 0){
+            dispatch_source_cancel(_timer);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                [sender setTitle:@"重发" forState:UIControlStateNormal];
+                sender.userInteractionEnabled = YES;
+            });
+        }else{
+            int seconds = time % 60;
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                [sender setTitle:[NSString stringWithFormat:@"重发(%.2d)", seconds] forState:UIControlStateNormal];
+                sender.userInteractionEnabled = NO;
+            });
+            time--;
+        }
+    });
+    dispatch_resume(_timer);
+}
+
+
+- (BOOL)isStringContainNumberWith:(NSString *)str {
+    
+    NSRegularExpression *numberRegular = [NSRegularExpression regularExpressionWithPattern:@"[0-9]" options:NSRegularExpressionCaseInsensitive error:nil];
+    
+    NSInteger count = [numberRegular numberOfMatchesInString:str options:NSMatchingReportProgress range:NSMakeRange(0, str.length)];
+    
+    //count是str中包含[0-9]数字的个数，只要count>0，说明str中包含数字
+    
+    if (count > 0) {
+        
+        return YES;
+        
+    }
+    
+    return NO;
+    
+}
+
+
+
+- (BOOL)isStringTheCapitalLettersWith:(NSString *)str {
+    
+    NSRegularExpression *numberRegular = [NSRegularExpression regularExpressionWithPattern:@"[A-Z]" options:NSRegularExpressionCaseInsensitive error:nil];
+    
+    NSInteger count = [numberRegular numberOfMatchesInString:str options:NSMatchingReportProgress range:NSMakeRange(0, str.length)];
+    
+    //count是str中包含[A-Za-z]数字的个数，只要count>0，说明str中包含数字
+    
+    if (count > 0) {
+        
+        return YES;
+        
+    }
+    
+    return NO;
+    
+}
+
+
+
+- (BOOL)isStringLowercaseLettersWith:(NSString *)str {
+    
+    NSRegularExpression *numberRegular = [NSRegularExpression regularExpressionWithPattern:@"[a-z]" options:NSRegularExpressionCaseInsensitive error:nil];
+    
+    NSInteger count = [numberRegular numberOfMatchesInString:str options:NSMatchingReportProgress range:NSMakeRange(0, str.length)];
+    
+    //count是str中包含[A-Za-z]数字的个数，只要count>0，说明str中包含数字
+    
+    if (count > 0) {
+        
+        return YES;
+        
+    }
+    
+    return NO;
+    
+}
+
+
 @end

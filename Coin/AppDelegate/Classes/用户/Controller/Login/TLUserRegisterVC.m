@@ -25,10 +25,7 @@
 #import <UMMobClick/MobClick.h>
 
 #import "TLTabBarController.h"
-#import <SecurityGuardSDK/JAQ/SecurityVerification.h>
-#import <MSAuthSDK/MSAuthVCFactory.h>
-#import <MSAuthSDK/MSAuthSDK.h>
-#import <SecurityGuardSDK/JAQ/SecurityVerification.h>
+
 
 
 @interface TLUserRegisterVC ()<CLLocationManagerDelegate,MSAuthProtocol>
