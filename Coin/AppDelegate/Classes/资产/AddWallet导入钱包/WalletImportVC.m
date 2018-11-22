@@ -334,7 +334,6 @@
         word = [wordsArray componentsJoinedByString:@" "];
 
         NSString *prikey   =[MnemonicUtil getPrivateKeyWithMnemonics:word];
-        
         NSString *address = [MnemonicUtil getAddressWithPrivateKey:prikey];
         
         //储存用户导入的钱包
@@ -363,7 +362,6 @@
             [UIApplication sharedApplication].keyWindow.rootViewController = newVC;
 
         }else{
-            
             //储存导入的钱包
             TLDataBase *dateBase = [TLDataBase sharedManager];
             if ([dateBase.dataBase open]) {

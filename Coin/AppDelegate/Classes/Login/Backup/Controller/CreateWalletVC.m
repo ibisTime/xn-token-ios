@@ -14,6 +14,9 @@
     NSInteger w;
 }
 @property (nonatomic , strong)UIScrollView *scrollView;
+
+@property (nonatomic , strong)
+
 @end
 
 @implementation CreateWalletVC

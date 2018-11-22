@@ -12,6 +12,9 @@
 #import "WhetherBackupVC.h"
 @interface TradePasswordVC ()
 
+@property (nonatomic , strong)UITextField *passWord;
+@property (nonatomic , strong)UITextField *conPassWord;
+
 @end
 
 @implementation TradePasswordVC
@@ -68,6 +71,12 @@
         passWordFid.clearButtonMode = UITextFieldViewModeWhileEditing;
         [passwordView addSubview:passWordFid];
         
+        if (i == 0) {
+            _passWord = passWordFid;
+        }else
+        {
+            _conPassWord = passWordFid;
+        }
         
         UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(35, passWordFid.yy + 8.5, SCREEN_WIDTH - 70, 1)];
         lineView.backgroundColor = kLineColor;
@@ -112,9 +121,44 @@
 
 -(void)nextBtn
 {
+    if (![_passWord.text isPhoneNum]) {
+        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入交易密码" key:nil]];
+        return;
+    }
+    if (![_conPassWord.text isPhoneNum]) {
+        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请确认交易密码" key:nil]];
+        return;
+    }
+    if (![_conPassWord.text isEqualToString:_passWord.text]) {
+        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"密码不一致" key:nil]];
+        return;
+    }
+    if (_passWord.text.length < 6) {
+        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"密码至少为6位以上的数字或字母" key:nil]];
+        return;
+    }
+    
+    
     if ([_state isEqualToString:@"1"]) {
+        
+        NSString *mnemonics = [MnemonicUtil getGenerateMnemonics];
+        
+        NSArray *words = [mnemonics componentsSeparatedByString:@" "];
+        NSMutableArray *categoryArray = [[NSMutableArray alloc] init];
+        
+        for (unsigned i = 0; i < [words count]; i++){
+            
+            if ([categoryArray containsObject:[words objectAtIndex:i]] == NO){
+                
+                [categoryArray addObject:[words objectAtIndex:i]];
+                
+            }
+        }
+        [[NSUserDefaults standardUserDefaults]setObject:categoryArray forKey:MNEMONIC];
         WhetherBackupVC *vc = [WhetherBackupVC new];
         [self.navigationController pushViewController:vc animated:YES];
+        
+        
     }else
     {
         ImportWalletVC *vc = [ImportWalletVC new];

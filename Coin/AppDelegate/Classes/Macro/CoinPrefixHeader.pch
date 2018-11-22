@@ -11,6 +11,11 @@
 #ifndef CoinPrefixHeader_h
 #define CoinPrefixHeader_h
 
+#define BTCADDRESS @"BTCADDRESS"
+#define ETHADDRESS @"ETHADDRESS"
+#define MNEMONIC @"MNEMONIC"
+#define MNEMONICPASSWORD @"MNEMONICPASSWORD"
+
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
 
@@ -75,7 +80,7 @@
 
 #import "FoundationHeader.h"
 
-
+#import "MnemonicUtil.h"
 
 #import "CountryModel.h"
 
