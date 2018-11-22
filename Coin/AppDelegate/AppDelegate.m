@@ -465,21 +465,9 @@
     if([TLUser user].isLogin) {
 
       [[TLUser user] changLoginTime];
-//czy      [[IMAPlatform sharedInstance] configOnAppDidBecomeActive];
 
     }
-//    if (self.IsEnterBack == YES) {
-//        if ([TLUser user].isLogin==NO) {
-//            
-//            TLUserLoginVC *login = [TLUserLoginVC new];
-//            TLNavigationController *na = [[TLNavigationController alloc] initWithRootViewController:login];
-//            self.IsEnterBack = NO;
-//            login.IsAPPJoin = YES;
-//            self.window.rootViewController = na;
-//            
-//        }
-//    }
-    
+
     
     
     if ([TLUser user].isLogin == YES) {

@@ -7,7 +7,7 @@
 //
 
 #import "ImportWalletVC.h"
-
+#import "TLTabBarController.h"
 @interface ImportWalletVC ()<UITextFieldDelegate>
 
 @end
@@ -70,7 +70,60 @@
 
 -(void)BtnClick
 {
+    UITextField *textField1 = [self.view viewWithTag:100];
+    UITextField *textField2 = [self.view viewWithTag:101];
+    UITextField *textField3 = [self.view viewWithTag:102];
+    UITextField *textField4 = [self.view viewWithTag:103];
+    UITextField *textField5 = [self.view viewWithTag:104];
+    UITextField *textField6 = [self.view viewWithTag:105];
+    UITextField *textField7 = [self.view viewWithTag:106];
+    UITextField *textField8 = [self.view viewWithTag:107];
+    UITextField *textField9 = [self.view viewWithTag:108];
+    UITextField *textField10 = [self.view viewWithTag:109];
+    UITextField *textField11 = [self.view viewWithTag:110];
+    UITextField *textField12 = [self.view viewWithTag:111];
     
+    if ([textField1.text isEqualToString:@""] ||
+        [textField2.text isEqualToString:@""] ||
+        [textField3.text isEqualToString:@""] ||
+        [textField4.text isEqualToString:@""] ||
+        [textField5.text isEqualToString:@""] ||
+        [textField6.text isEqualToString:@""] ||
+        [textField7.text isEqualToString:@""] ||
+        [textField8.text isEqualToString:@""] ||
+        [textField9.text isEqualToString:@""] ||
+        [textField10.text isEqualToString:@""] ||
+        [textField11.text isEqualToString:@""] ||
+        [textField12.text isEqualToString:@""]
+        ) {
+        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"助记词不能为空" key:nil]];
+        return;
+    }
+    NSString *mnemonic = [NSString stringWithFormat:@"%@ %@ %@ %@ %@ %@ %@ %@ %@ %@ %@ %@",
+                          [textField1.text stringByReplacingOccurrencesOfString:@" " withString:@""],
+                          [textField2.text stringByReplacingOccurrencesOfString:@" " withString:@""],
+                          [textField3.text stringByReplacingOccurrencesOfString:@" " withString:@""],
+                          [textField4.text stringByReplacingOccurrencesOfString:@" " withString:@""],
+                          [textField5.text stringByReplacingOccurrencesOfString:@" " withString:@""],
+                          [textField6.text stringByReplacingOccurrencesOfString:@" " withString:@""],
+                          [textField7.text stringByReplacingOccurrencesOfString:@" " withString:@""],
+                          [textField8.text stringByReplacingOccurrencesOfString:@" " withString:@""],
+                          [textField9.text stringByReplacingOccurrencesOfString:@" " withString:@""],
+                          [textField10.text stringByReplacingOccurrencesOfString:@" " withString:@""],
+                          [textField11.text stringByReplacingOccurrencesOfString:@" " withString:@""],
+                          [textField12.text stringByReplacingOccurrencesOfString:@" " withString:@""]
+                          ];
+    if ([[MnemonicUtil getMnemonicsISRight:mnemonic] isEqualToString:@"1"]) {
+        [[NSUserDefaults standardUserDefaults]setObject:[mnemonic componentsSeparatedByString:@","] forKey:MNEMONIC];
+        TLTabBarController *tab = [[TLTabBarController alloc] init];
+        [UIApplication sharedApplication].keyWindow.rootViewController = tab;
+    }else
+    {
+        [TLAlert alertWithMsg:@"助记词不存在,请检测备份"];
+//        self.importButton.selected = NO;
+    }
+    
+
 }
 
 -(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{

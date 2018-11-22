@@ -9,12 +9,13 @@
 #import "BackupWalletMnemonicVC.h"
 #import "BackupCollectionViewCell.h"
 #import "ConfirmBackupVC.h"
+#import "TLTabBarController.h"
 @interface BackupWalletMnemonicVC ()<UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 {
     UIView *topView;
     
     UIButton *animBtn;
-    
+    NSArray *arr;
 }
 
 @property (nonatomic , strong)UICollectionView *SelectCollectionView;
@@ -44,7 +45,18 @@
     
     _SelectArray = [NSMutableArray array];
     _BackupArray = [NSMutableArray array];
-    [_BackupArray addObjectsFromArray:@[@"bind",@"extra",@"abuse",@"west",@"property" ,@"drive" ,@"today" ,@"water",@"hidden" ,@"harsh" ,@"change",@"source"]];
+//    [_BackupArray addObjectsFromArray:];
+    arr = [[NSUserDefaults standardUserDefaults]objectForKey:MNEMONIC];
+//    NSMutableArray *newArr = [NSMutableArray new];
+    while (_BackupArray.count != arr.count) {
+        //生成随机数
+        int x = arc4random() % arr.count;
+        id obj = arr[x];
+        if (![_BackupArray containsObject:obj]) {
+            [_BackupArray addObject:obj];
+        }
+    }
+    
     
     UILabel *nameLable = [[UILabel alloc]init];
     nameLable.text = [LangSwitcher switchLang:@"备份钱包助记词" key:nil];
@@ -102,17 +114,36 @@
     animBtn = [UIButton buttonWithTitle:@"" titleColor:kWhiteColor backgroundColor:kClearColor titleFont:14];
     [animBtn setBackgroundImage:kImage(@"圆角矩形2拷贝2") forState:(UIControlStateNormal)];
     animBtn.frame = CGRectMake(SCREEN_WIDTH, SCREEN_HEIGHT, (SCREEN_WIDTH - 70)/3, 40);
+    [animBtn addTarget:self action:@selector(animBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
     [self.view addSubview:animBtn];
     
+}
+
+-(void)animBtnClick
+{
     
     
-    
-    
-    
+//    [TLAlert alertWithSucces:[LangSwitcher switchLang:@"验证成功" key:nil]];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
+        
+//        [self.navigationController popViewControllerAnimated:YES];
+        
+    });
 }
 
 -(void)confirmBtn
 {
+    if (_SelectArray.count != 12) {
+        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"选择全部助记词" key:nil]];
+        return;
+    }
+    for (int i = 0; i < _SelectArray.count; i ++) {
+        if (![_SelectArray[i] isEqualToString:arr[i]]) {
+            [TLAlert alertWithInfo:[LangSwitcher switchLang:@"顺序有误" key:nil]];
+            return;
+        }
+    }
     ConfirmBackupVC *vc = [ConfirmBackupVC new];
     [self.navigationController pushViewController:vc animated:YES];
 }

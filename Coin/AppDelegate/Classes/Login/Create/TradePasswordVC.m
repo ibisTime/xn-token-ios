@@ -154,6 +154,9 @@
                 
             }
         }
+        
+        
+        
         [[NSUserDefaults standardUserDefaults]setObject:categoryArray forKey:MNEMONIC];
         WhetherBackupVC *vc = [WhetherBackupVC new];
         [self.navigationController pushViewController:vc animated:YES];

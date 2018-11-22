@@ -15,7 +15,7 @@
 }
 @property (nonatomic , strong)UIScrollView *scrollView;
 
-@property (nonatomic , strong)
+@property (nonatomic , strong)NSArray *mnemonicsArray;
 
 @end
 
@@ -28,6 +28,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.mnemonicsArray = [[NSUserDefaults standardUserDefaults]objectForKey:MNEMONIC];
     // Do any additional setup after loading the view.
     UIImageView *backImage = [[UIImageView alloc]initWithFrame:CGRectMake(0, -kNavigationBarHeight, SCREEN_WIDTH, SCREEN_HEIGHT)];
     backImage.image = kImage(@"起始业背景");
@@ -122,7 +124,10 @@
     
     for (int i = 0; i < 4; i ++) {
         UILabel *mnemonicLabel = [UILabel labelWithFrame:CGRectMake(SCREEN_WIDTH/2 - 75, totalLabel.yy + 30 + i%4*65 , 150, 50) textAligment:(NSTextAlignmentCenter) backgroundColor:kClearColor font:FONT(14) textColor:kWhiteColor];
-        mnemonicLabel.text = @"boy";
+        
+        
+        
+        mnemonicLabel.text = self.mnemonicsArray[i];
         kViewBorderRadius(mnemonicLabel, 10, 1, kWhiteColor);
         [backView addSubview:mnemonicLabel];
         
@@ -159,7 +164,7 @@
     
     for (int i = 0; i < 4; i ++) {
         UILabel *mnemonicLabel = [UILabel labelWithFrame:CGRectMake(SCREEN_WIDTH/2 - 75, totalLabel.yy + 30 + i%4*65 , 150, 50) textAligment:(NSTextAlignmentCenter) backgroundColor:kClearColor font:FONT(14) textColor:kWhiteColor];
-        mnemonicLabel.text = @"boy";
+        mnemonicLabel.text = self.mnemonicsArray[i + 4];
         kViewBorderRadius(mnemonicLabel, 10, 1, kWhiteColor);
         [backView addSubview:mnemonicLabel];
         
@@ -195,7 +200,7 @@
     
     for (int i = 0; i < 4; i ++) {
         UILabel *mnemonicLabel = [UILabel labelWithFrame:CGRectMake(SCREEN_WIDTH/2 - 75, totalLabel.yy + 30 + i%4*65 , 150, 50) textAligment:(NSTextAlignmentCenter) backgroundColor:kClearColor font:FONT(14) textColor:kWhiteColor];
-        mnemonicLabel.text = @"boy";
+        mnemonicLabel.text = self.mnemonicsArray[i + 8];;
         kViewBorderRadius(mnemonicLabel, 10, 1, kWhiteColor);
         [backView addSubview:mnemonicLabel];
         

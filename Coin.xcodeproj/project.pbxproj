@@ -39,6 +39,18 @@
 		1F693AF721A2D7D9004818D8 /* BackupCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F693AF621A2D7D9004818D8 /* BackupCollectionViewCell.m */; };
 		1F693AFA21A3E3C8004818D8 /* UIScrollView+Touch.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F693AF921A3E3C8004818D8 /* UIScrollView+Touch.m */; };
 		1F693AFD21A3F36E004818D8 /* ConfirmBackupVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F693AFC21A3F36E004818D8 /* ConfirmBackupVC.m */; };
+		1F693B0121A682F9004818D8 /* ForgotPasswordVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F693B0021A682F9004818D8 /* ForgotPasswordVC.m */; };
+		1F693B0C21A695DB004818D8 /* libZQPlusFaceu.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F693B0921A695DB004818D8 /* libZQPlusFaceu.a */; };
+		1F693B1121A695F7004818D8 /* Resource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1F693B0E21A695F6004818D8 /* Resource.bundle */; };
+		1F693B1221A695F7004818D8 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F693B0F21A695F6004818D8 /* opencv2.framework */; };
+		1F693B1321A695F7004818D8 /* libjpeg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F693B1021A695F6004818D8 /* libjpeg.a */; };
+		1F693B1421A69630004818D8 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21C91D921FDBD775006EDB16 /* CoreMedia.framework */; };
+		1F693B1621A6963A004818D8 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F693B1521A6963A004818D8 /* ImageIO.framework */; };
+		1F693B1821A69655004818D8 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F693B1721A69654004818D8 /* AudioToolbox.framework */; };
+		1F693B1921A6965E004818D8 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21C91D901FDBD763006EDB16 /* AVFoundation.framework */; };
+		1F693B1B21A69667004818D8 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F693B1A21A69667004818D8 /* MobileCoreServices.framework */; };
+		1F693B1D21A69676004818D8 /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F693B1C21A69676004818D8 /* libicucore.tbd */; };
+		1F693B2021A6A803004818D8 /* AssetsHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F693B1F21A6A803004818D8 /* AssetsHeadView.m */; };
 		1F709D5E218161D8002D1CC4 /* keyTransferTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F709D5D218161D8002D1CC4 /* keyTransferTableView.m */; };
 		1F709D61218162A5002D1CC4 /* TransformButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F709D60218162A5002D1CC4 /* TransformButtonCell.m */; };
 		1F709D6421817246002D1CC4 /* TransferNumberCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F709D6321817246002D1CC4 /* TransferNumberCell.m */; };
@@ -602,6 +614,21 @@
 		1F693AF921A3E3C8004818D8 /* UIScrollView+Touch.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+Touch.m"; sourceTree = "<group>"; };
 		1F693AFB21A3F36E004818D8 /* ConfirmBackupVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ConfirmBackupVC.h; sourceTree = "<group>"; };
 		1F693AFC21A3F36E004818D8 /* ConfirmBackupVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ConfirmBackupVC.m; sourceTree = "<group>"; };
+		1F693AFF21A682F9004818D8 /* ForgotPasswordVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ForgotPasswordVC.h; sourceTree = "<group>"; };
+		1F693B0021A682F9004818D8 /* ForgotPasswordVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ForgotPasswordVC.m; sourceTree = "<group>"; };
+		1F693B0821A695DB004818D8 /* ZQFaceAuthEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZQFaceAuthEngine.h; sourceTree = "<group>"; };
+		1F693B0921A695DB004818D8 /* libZQPlusFaceu.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libZQPlusFaceu.a; sourceTree = "<group>"; };
+		1F693B0A21A695DB004818D8 /* ZQFaceDataDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZQFaceDataDefine.h; sourceTree = "<group>"; };
+		1F693B0B21A695DB004818D8 /* ZQOCRScanEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZQOCRScanEngine.h; sourceTree = "<group>"; };
+		1F693B0E21A695F6004818D8 /* Resource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Resource.bundle; sourceTree = "<group>"; };
+		1F693B0F21A695F6004818D8 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = opencv2.framework; sourceTree = "<group>"; };
+		1F693B1021A695F6004818D8 /* libjpeg.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libjpeg.a; sourceTree = "<group>"; };
+		1F693B1521A6963A004818D8 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		1F693B1721A69654004818D8 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		1F693B1A21A69667004818D8 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		1F693B1C21A69676004818D8 /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
+		1F693B1E21A6A803004818D8 /* AssetsHeadView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AssetsHeadView.h; sourceTree = "<group>"; };
+		1F693B1F21A6A803004818D8 /* AssetsHeadView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AssetsHeadView.m; sourceTree = "<group>"; };
 		1F709D5C218161D8002D1CC4 /* keyTransferTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = keyTransferTableView.h; sourceTree = "<group>"; };
 		1F709D5D218161D8002D1CC4 /* keyTransferTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = keyTransferTableView.m; sourceTree = "<group>"; };
 		1F709D5F218162A5002D1CC4 /* TransformButtonCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TransformButtonCell.h; sourceTree = "<group>"; };
@@ -1672,13 +1699,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F693B1D21A69676004818D8 /* libicucore.tbd in Frameworks */,
+				1F693B1B21A69667004818D8 /* MobileCoreServices.framework in Frameworks */,
+				1F693B1921A6965E004818D8 /* AVFoundation.framework in Frameworks */,
+				1F693B1821A69655004818D8 /* AudioToolbox.framework in Frameworks */,
+				2EFFE6B21FF6286600BFCC40 /* CoreTelephony.framework in Frameworks */,
+				7AAF0373215269F6008507FF /* SystemConfiguration.framework in Frameworks */,
+				1F693B1621A6963A004818D8 /* ImageIO.framework in Frameworks */,
+				1F693B1421A69630004818D8 /* CoreMedia.framework in Frameworks */,
 				7A07F7D8216B6EDD0026EB7A /* libc++.tbd in Frameworks */,
+				1F693B0C21A695DB004818D8 /* libZQPlusFaceu.a in Frameworks */,
 				7AAF037921526A39008507FF /* Foundation.framework in Frameworks */,
 				7AAF037721526A31008507FF /* UIKit.framework in Frameworks */,
-				2EFFE6B21FF6286600BFCC40 /* CoreTelephony.framework in Frameworks */,
+				1F693B1221A695F7004818D8 /* opencv2.framework in Frameworks */,
 				7AAF037521526A07008507FF /* CoreGraphics.framework in Frameworks */,
 				7AAF037421526A00008507FF /* CoreFoundation.framework in Frameworks */,
-				7AAF0373215269F6008507FF /* SystemConfiguration.framework in Frameworks */,
 				7AAF0372215269ED008507FF /* CoreLocation.framework in Frameworks */,
 				21C91D981FDBD7E4006EDB16 /* CoreMotion.framework in Frameworks */,
 				7AAF0370215269D8008507FF /* CFNetwork.framework in Frameworks */,
@@ -1693,6 +1728,7 @@
 				7A272662212BFFA70067E3CD /* libWeChatSDK.a in Frameworks */,
 				7AAF038121527166008507FF /* ZipArchive.framework in Frameworks */,
 				7AAF0329215267ED008507FF /* SGSecurityBody.framework in Frameworks */,
+				1F693B1321A695F7004818D8 /* libjpeg.a in Frameworks */,
 				211C050C1FC6715B00E51FCF /* libsqlite3.tbd in Frameworks */,
 				211C05121FC6717300E51FCF /* libstdc++.6.tbd in Frameworks */,
 				211C05111FC6717300E51FCF /* libstdc++.6.0.9.tbd in Frameworks */,
@@ -1796,7 +1832,7 @@
 			path = "New Group1";
 			sourceTree = "<group>";
 		};
-		1F35826721870EE900F1665B /* Announcement公告 */ = {
+		1F35826721870EE900F1665B /* Announcement */ = {
 			isa = PBXGroup;
 			children = (
 				211A53201FBFE3A100CC6294 /* RateDescVC.h */,
@@ -1806,7 +1842,7 @@
 				211A532D1FBFE4CF00CC6294 /* RateDescCell.h */,
 				211A532E1FBFE4CF00CC6294 /* RateDescCell.m */,
 			);
-			path = "Announcement公告";
+			path = Announcement;
 			sourceTree = "<group>";
 		};
 		1F35826821870FCA00F1665B /* Model */ = {
@@ -1884,6 +1920,7 @@
 				1F4E89E0219E9166007B3015 /* Create */,
 				1F693AEB21A29763004818D8 /* Backup */,
 				1F4E89E1219E9184007B3015 /* Import */,
+				1F693AFE21A682D1004818D8 /* ForgotPassword */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -2082,6 +2119,45 @@
 			children = (
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		1F693AFE21A682D1004818D8 /* ForgotPassword */ = {
+			isa = PBXGroup;
+			children = (
+				1F693AFF21A682F9004818D8 /* ForgotPasswordVC.h */,
+				1F693B0021A682F9004818D8 /* ForgotPasswordVC.m */,
+			);
+			path = ForgotPassword;
+			sourceTree = "<group>";
+		};
+		1F693B0621A695CF004818D8 /* OCR */ = {
+			isa = PBXGroup;
+			children = (
+				1F693B0D21A695F6004818D8 /* OpenCV */,
+				1F693B0721A695DB004818D8 /* Lib */,
+			);
+			path = OCR;
+			sourceTree = "<group>";
+		};
+		1F693B0721A695DB004818D8 /* Lib */ = {
+			isa = PBXGroup;
+			children = (
+				1F693B0821A695DB004818D8 /* ZQFaceAuthEngine.h */,
+				1F693B0921A695DB004818D8 /* libZQPlusFaceu.a */,
+				1F693B0A21A695DB004818D8 /* ZQFaceDataDefine.h */,
+				1F693B0B21A695DB004818D8 /* ZQOCRScanEngine.h */,
+			);
+			path = Lib;
+			sourceTree = "<group>";
+		};
+		1F693B0D21A695F6004818D8 /* OpenCV */ = {
+			isa = PBXGroup;
+			children = (
+				1F693B0E21A695F6004818D8 /* Resource.bundle */,
+				1F693B0F21A695F6004818D8 /* opencv2.framework */,
+				1F693B1021A695F6004818D8 /* libjpeg.a */,
+			);
+			path = OpenCV;
 			sourceTree = "<group>";
 		};
 		1F709D5B2180A7FC002D1CC4 /* SGQRCode */ = {
@@ -2612,16 +2688,16 @@
 			path = Update;
 			sourceTree = "<group>";
 		};
-		216F5B1D206CD9D900F2C832 /* 发现 */ = {
+		216F5B1D206CD9D900F2C832 /* Found */ = {
 			isa = PBXGroup;
 			children = (
 				216F5B1E206CD9D900F2C832 /* Controller */,
 				1F35826321870B1700F1665B /* Model */,
 				1F35826221870B1400F1665B /* View */,
-				7A8A5D0E20EA0677002D9A48 /* RedEnvelope红包 */,
-				216F5B54206D005200F2C832 /* POS量化理财 */,
+				7A8A5D0E20EA0677002D9A48 /* RedEnvelope */,
+				216F5B54206D005200F2C832 /* POS */,
 			);
-			path = "发现";
+			path = Found;
 			sourceTree = "<group>";
 		};
 		216F5B1E206CD9D900F2C832 /* Controller */ = {
@@ -2661,7 +2737,7 @@
 			path = Web;
 			sourceTree = "<group>";
 		};
-		216F5B54206D005200F2C832 /* POS量化理财 */ = {
+		216F5B54206D005200F2C832 /* POS */ = {
 			isa = PBXGroup;
 			children = (
 				1F3582612187071E00F1665B /* Controller */,
@@ -2672,17 +2748,17 @@
 				7A2CC651215B9FA100B27E2D /* Buy购买 */,
 				7A2CC644215B729900B27E2D /* Details */,
 			);
-			path = "POS量化理财";
+			path = POS;
 			sourceTree = "<group>";
 		};
-		21A7F2D81FB2E2F900FAA0A2 /* 用户 */ = {
+		21A7F2D81FB2E2F900FAA0A2 /* User */ = {
 			isa = PBXGroup;
 			children = (
 				21A7F2D91FB2E2F900FAA0A2 /* Controller */,
 				21A7F2F61FB2E2F900FAA0A2 /* Model */,
 				21A7F3051FB2E2F900FAA0A2 /* View */,
 			);
-			path = "用户";
+			path = User;
 			sourceTree = "<group>";
 		};
 		21A7F2D91FB2E2F900FAA0A2 /* Controller */ = {
@@ -2820,35 +2896,35 @@
 				B88B58F32109AEC300F20D1B /* Other */,
 				216F5AF0206CC73D00F2C832 /* Update */,
 				1F4E896521998510007B3015 /* Login */,
-				21A7F2D81FB2E2F900FAA0A2 /* 用户 */,
-				2E394FA41FB055DE00BA0829 /* 资产 */,
-				216F5B1D206CD9D900F2C832 /* 发现 */,
-				2E394FAC1FB055DE00BA0829 /* 我的 */,
+				21A7F2D81FB2E2F900FAA0A2 /* User */,
+				2E394FA41FB055DE00BA0829 /* Assets */,
+				216F5B1D206CD9D900F2C832 /* Found */,
+				2E394FAC1FB055DE00BA0829 /* My */,
 				211DE63B1FB58B4B002FCF3D /* Utils */,
 			);
 			name = Classes;
 			path = AppDelegate/Classes;
 			sourceTree = "<group>";
 		};
-		2E394FA41FB055DE00BA0829 /* 资产 */ = {
+		2E394FA41FB055DE00BA0829 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
 				7AEF235E2154DCE100BF1DB5 /* Home */,
 				1F35826821870FCA00F1665B /* Model */,
 				211A35051FB45CB500FEB71F /* View */,
-				1F35826721870EE900F1665B /* Announcement公告 */,
-				2E394FA51FB055DE00BA0829 /* AddAdress添加 */,
-				7A40B111217EEC95004B9830 /* FlashAgainst闪兑 */,
-				7AEF23612154E5E000BF1DB5 /* Receivables收款 */,
-				7AEF235D2154D60100BF1DB5 /* PersonalWalletDetails个人钱包详情 */,
-				7AEF235C2154CB1500BF1DB5 /* WalletDetails私钥钱包详情 */,
-				7AEF235B2154C81400BF1DB5 /* AddWallet导入钱包 */,
-				7AEF23562154C3A200BF1DB5 /* Transfer一键划转 */,
+				1F35826721870EE900F1665B /* Announcement */,
+				2E394FA51FB055DE00BA0829 /* AddAdress */,
+				7A40B111217EEC95004B9830 /* FlashAgainst */,
+				7AEF23612154E5E000BF1DB5 /* Receivables */,
+				7AEF235D2154D60100BF1DB5 /* PersonalWalletDetails */,
+				7AEF235C2154CB1500BF1DB5 /* WalletDetails */,
+				7AEF235B2154C81400BF1DB5 /* AddWallet */,
+				7AEF23562154C3A200BF1DB5 /* Transfer */,
 			);
-			path = "资产";
+			path = Assets;
 			sourceTree = "<group>";
 		};
-		2E394FA51FB055DE00BA0829 /* AddAdress添加 */ = {
+		2E394FA51FB055DE00BA0829 /* AddAdress */ = {
 			isa = PBXGroup;
 			children = (
 				B8BBA64120C843F800DC4D5F /* AddAccoutMoneyVc.h */,
@@ -2860,26 +2936,26 @@
 				B8BBA64720C849BB00DC4D5F /* AddMoneyCell.h */,
 				B8BBA64820C849BB00DC4D5F /* AddMoneyCell.m */,
 			);
-			path = "AddAdress添加";
+			path = AddAdress;
 			sourceTree = "<group>";
 		};
-		2E394FAC1FB055DE00BA0829 /* 我的 */ = {
+		2E394FAC1FB055DE00BA0829 /* My */ = {
 			isa = PBXGroup;
 			children = (
 				7A2CC6372159E0E900B27E2D /* Home */,
-				7AEF23592154C67F00BF1DB5 /* AccountsAndSecurity账户与安全 */,
-				7A2CC63A2159E35000B27E2D /* Invitation邀请有礼 */,
-				7A2CC63E2159E42600B27E2D /* Feedback问题反馈 */,
-				7AEF23572154C51D00BF1DB5 /* JoinMine加入社群 */,
-				7AEF23582154C58A00BF1DB5 /* WalletSetting钱包工具 */,
-				7A2CC63D2159E3F700B27E2D /* SetUp设置 */,
-				7A07F7D9216C7B650026EB7A /* MyIncome我的收益 */,
+				7AEF23592154C67F00BF1DB5 /* AccountsAndSecurity */,
+				7A2CC63A2159E35000B27E2D /* Invitation */,
+				7A2CC63E2159E42600B27E2D /* Feedback */,
+				7AEF23572154C51D00BF1DB5 /* JoinMine */,
+				7AEF23582154C58A00BF1DB5 /* WalletSetting */,
+				7A2CC63D2159E3F700B27E2D /* SetUp */,
+				7A07F7D9216C7B650026EB7A /* MyIncome */,
 				1F358B3A218AA43A00F1665B /* ScratchableLatex九宫格 */,
 				2E394FAD1FB055DE00BA0829 /* Controller */,
 				21A7F35B1FB2EB9300FAA0A2 /* Model */,
 				211A34D81FB3F55600FEB71F /* View */,
 			);
-			path = "我的";
+			path = My;
 			sourceTree = "<group>";
 		};
 		2E394FAD1FB055DE00BA0829 /* Controller */ = {
@@ -2926,6 +3002,7 @@
 		2EA584B61FA813C900C7106C /* Coin */ = {
 			isa = PBXGroup;
 			children = (
+				1F693B0621A695CF004818D8 /* OCR */,
 				7AAF031F215267B7008507FF /* ValidationSDK */,
 				7A27265B212BFFA70067E3CD /* WechatSDK1.8.2 */,
 				215421CF1FD708AC00FDD25C /* Coin.entitlements */,
@@ -2964,7 +3041,7 @@
 			path = Crypto;
 			sourceTree = "<group>";
 		};
-		7A07F7D9216C7B650026EB7A /* MyIncome我的收益 */ = {
+		7A07F7D9216C7B650026EB7A /* MyIncome */ = {
 			isa = PBXGroup;
 			children = (
 				7A07F825216CD94F0026EB7A /* InviteEarnings邀请收益 */,
@@ -2973,7 +3050,7 @@
 				7A07F7DB216C7B870026EB7A /* Model */,
 				7A07F7DA216C7B850026EB7A /* View */,
 			);
-			path = "MyIncome我的收益";
+			path = MyIncome;
 			sourceTree = "<group>";
 		};
 		7A07F7DA216C7B850026EB7A /* View */ = {
@@ -3168,13 +3245,13 @@
 			path = "WalletBackup钱包备份";
 			sourceTree = "<group>";
 		};
-		7A2CC63A2159E35000B27E2D /* Invitation邀请有礼 */ = {
+		7A2CC63A2159E35000B27E2D /* Invitation */ = {
 			isa = PBXGroup;
 			children = (
 				7A2CC63B2159E39B00B27E2D /* Controller */,
 				7A2CC63C2159E3A200B27E2D /* View */,
 			);
-			path = "Invitation邀请有礼";
+			path = Invitation;
 			sourceTree = "<group>";
 		};
 		7A2CC63B2159E39B00B27E2D /* Controller */ = {
@@ -3203,7 +3280,7 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		7A2CC63D2159E3F700B27E2D /* SetUp设置 */ = {
+		7A2CC63D2159E3F700B27E2D /* SetUp */ = {
 			isa = PBXGroup;
 			children = (
 				B89F07E0211B07FA0057E781 /* TLMeSetting.h */,
@@ -3215,10 +3292,10 @@
 				2ED651D02010443C0065A1B0 /* TLAboutUsVC.h */,
 				2ED651D12010443C0065A1B0 /* TLAboutUsVC.m */,
 			);
-			path = "SetUp设置";
+			path = SetUp;
 			sourceTree = "<group>";
 		};
-		7A2CC63E2159E42600B27E2D /* Feedback问题反馈 */ = {
+		7A2CC63E2159E42600B27E2D /* Feedback */ = {
 			isa = PBXGroup;
 			children = (
 				B8CAA1182115693A00695BC3 /* TLQusertionVC.h */,
@@ -3228,7 +3305,7 @@
 				B8D938CD2116C2AC00B2AA88 /* QiestionDetailVC.h */,
 				B8D938CE2116C2AC00B2AA88 /* QiestionDetailVC.m */,
 			);
-			path = "Feedback问题反馈";
+			path = Feedback;
 			sourceTree = "<group>";
 		};
 		7A2CC63F215A28CF00B27E2D /* Transfer转账 */ = {
@@ -3418,13 +3495,13 @@
 			path = "Theia红包详情";
 			sourceTree = "<group>";
 		};
-		7A40B111217EEC95004B9830 /* FlashAgainst闪兑 */ = {
+		7A40B111217EEC95004B9830 /* FlashAgainst */ = {
 			isa = PBXGroup;
 			children = (
 				B88D6C6D20EDF39F0043832C /* TLFastvc.h */,
 				B88D6C6E20EDF39F0043832C /* TLFastvc.m */,
 			);
-			path = "FlashAgainst闪兑";
+			path = FlashAgainst;
 			sourceTree = "<group>";
 		};
 		7A40B112217EF15E004B9830 /* TableViewAnimationKit */ = {
@@ -3449,7 +3526,7 @@
 			path = CustomAnimation;
 			sourceTree = "<group>";
 		};
-		7A8A5D0E20EA0677002D9A48 /* RedEnvelope红包 */ = {
+		7A8A5D0E20EA0677002D9A48 /* RedEnvelope */ = {
 			isa = PBXGroup;
 			children = (
 				7A40B0FC2179E3C2004B9830 /* Theia红包详情 */,
@@ -3459,7 +3536,7 @@
 				7A8A5D1C20EA2F44002D9A48 /* Share分享 */,
 				7A8A5D1020EA06A1002D9A48 /* View */,
 			);
-			path = "RedEnvelope红包";
+			path = RedEnvelope;
 			sourceTree = "<group>";
 		};
 		7A8A5D1020EA06A1002D9A48 /* View */ = {
@@ -3617,7 +3694,7 @@
 			path = minizip;
 			sourceTree = "<group>";
 		};
-		7AEF23562154C3A200BF1DB5 /* Transfer一键划转 */ = {
+		7AEF23562154C3A200BF1DB5 /* Transfer */ = {
 			isa = PBXGroup;
 			children = (
 				1F709D672181C46B002D1CC4 /* Controller */,
@@ -3628,10 +3705,10 @@
 				B8F791A221464A3300F5BE45 /* TransformCell.h */,
 				B8F791A321464A3300F5BE45 /* TransformCell.m */,
 			);
-			path = "Transfer一键划转";
+			path = Transfer;
 			sourceTree = "<group>";
 		};
-		7AEF23572154C51D00BF1DB5 /* JoinMine加入社群 */ = {
+		7AEF23572154C51D00BF1DB5 /* JoinMine */ = {
 			isa = PBXGroup;
 			children = (
 				B88B091F20C8E29D005C2D2F /* JoinMineVc.h */,
@@ -3643,10 +3720,10 @@
 				B88B092820C8ED77005C2D2F /* JoinModel.h */,
 				B88B092920C8ED77005C2D2F /* JoinModel.m */,
 			);
-			path = "JoinMine加入社群";
+			path = JoinMine;
 			sourceTree = "<group>";
 		};
-		7AEF23582154C58A00BF1DB5 /* WalletSetting钱包工具 */ = {
+		7AEF23582154C58A00BF1DB5 /* WalletSetting */ = {
 			isa = PBXGroup;
 			children = (
 				7A2CC6392159E28400B27E2D /* WalletBackup钱包备份 */,
@@ -3658,10 +3735,10 @@
 				211A34F21FB430F900FEB71F /* SettingCell.h */,
 				211A34F31FB430F900FEB71F /* SettingCell.m */,
 			);
-			path = "WalletSetting钱包工具";
+			path = WalletSetting;
 			sourceTree = "<group>";
 		};
-		7AEF23592154C67F00BF1DB5 /* AccountsAndSecurity账户与安全 */ = {
+		7AEF23592154C67F00BF1DB5 /* AccountsAndSecurity */ = {
 			isa = PBXGroup;
 			children = (
 				21C91D7A1FDBCF6B006EDB16 /* Google */,
@@ -3670,7 +3747,7 @@
 				211A34E91FB42F8100FEB71F /* SettingVC.h */,
 				211A34EA1FB42F8100FEB71F /* SettingVC.m */,
 			);
-			path = "AccountsAndSecurity账户与安全";
+			path = AccountsAndSecurity;
 			sourceTree = "<group>";
 		};
 		7AEF235A2154C70400BF1DB5 /* Email */ = {
@@ -3682,7 +3759,7 @@
 			path = Email;
 			sourceTree = "<group>";
 		};
-		7AEF235B2154C81400BF1DB5 /* AddWallet导入钱包 */ = {
+		7AEF235B2154C81400BF1DB5 /* AddWallet */ = {
 			isa = PBXGroup;
 			children = (
 				B8CA7D4720CBA22800A0E93C /* WalletImportVC.h */,
@@ -3690,19 +3767,19 @@
 				B8B15C0020CA312100F13220 /* BuildWalletMineVC.h */,
 				B8B15C0120CA312100F13220 /* BuildWalletMineVC.m */,
 			);
-			path = "AddWallet导入钱包";
+			path = AddWallet;
 			sourceTree = "<group>";
 		};
-		7AEF235C2154CB1500BF1DB5 /* WalletDetails私钥钱包详情 */ = {
+		7AEF235C2154CB1500BF1DB5 /* WalletDetails */ = {
 			isa = PBXGroup;
 			children = (
 				7A2CC63F215A28CF00B27E2D /* Transfer转账 */,
 				7AEF23602154E35A00BF1DB5 /* details详情 */,
 			);
-			path = "WalletDetails私钥钱包详情";
+			path = WalletDetails;
 			sourceTree = "<group>";
 		};
-		7AEF235D2154D60100BF1DB5 /* PersonalWalletDetails个人钱包详情 */ = {
+		7AEF235D2154D60100BF1DB5 /* PersonalWalletDetails */ = {
 			isa = PBXGroup;
 			children = (
 				7A2CC640215A29C800B27E2D /* MentionMoney提币 */,
@@ -3714,7 +3791,7 @@
 				215979651FB81D230029F177 /* BillCell.h */,
 				215979661FB81D230029F177 /* BillCell.m */,
 			);
-			path = "PersonalWalletDetails个人钱包详情";
+			path = PersonalWalletDetails;
 			sourceTree = "<group>";
 		};
 		7AEF235E2154DCE100BF1DB5 /* Home */ = {
@@ -3722,6 +3799,8 @@
 			children = (
 				2EE950C11FB05B4500429257 /* TLWalletVC.h */,
 				2EE950C21FB05B4500429257 /* TLWalletVC.m */,
+				1F693B1E21A6A803004818D8 /* AssetsHeadView.h */,
+				1F693B1F21A6A803004818D8 /* AssetsHeadView.m */,
 				211A35021FB45A6A00FEB71F /* WalletHeaderView.h */,
 				211A35031FB45A6A00FEB71F /* WalletHeaderView.m */,
 				B891F0662101899900ED5DDF /* BuildLocalHomeView.h */,
@@ -3761,13 +3840,13 @@
 			path = "details详情";
 			sourceTree = "<group>";
 		};
-		7AEF23612154E5E000BF1DB5 /* Receivables收款 */ = {
+		7AEF23612154E5E000BF1DB5 /* Receivables */ = {
 			isa = PBXGroup;
 			children = (
 				211DE6C81FB5A586002FCF3D /* RechargeCoinVC.h */,
 				211DE6C91FB5A586002FCF3D /* RechargeCoinVC.m */,
 			);
-			path = "Receivables收款";
+			path = Receivables;
 			sourceTree = "<group>";
 		};
 		7AEF23622154EE6300BF1DB5 /* Theia红包 */ = {
@@ -4152,6 +4231,10 @@
 		C678617F8B7C3B3F2F7DE44F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1F693B1C21A69676004818D8 /* libicucore.tbd */,
+				1F693B1A21A69667004818D8 /* MobileCoreServices.framework */,
+				1F693B1721A69654004818D8 /* AudioToolbox.framework */,
+				1F693B1521A6963A004818D8 /* ImageIO.framework */,
 				7AAF037821526A38008507FF /* Foundation.framework */,
 				7AAF037621526A31008507FF /* UIKit.framework */,
 				7AAF0371215269ED008507FF /* CoreLocation.framework */,
@@ -4281,6 +4364,7 @@
 				1F770ED721904D7D00E2889F /* langImg.png in Resources */,
 				7AAF037C21526EC4008507FF /* MSADefaultImages.bundle in Resources */,
 				B8DAD14720E2208B00AF4CD4 /* InfoPlist.strings in Resources */,
+				1F693B1121A695F7004818D8 /* Resource.bundle in Resources */,
 				7A40B101217CAEA8004B9830 /* Assets.xcassets in Resources */,
 				2EB9495C1FDF6B1A00CE4B94 /* TraditionalCode.txt in Resources */,
 			);
@@ -4794,6 +4878,7 @@
 				B8086506211EA17D00755158 /* BTCBase58+Tests.m in Sources */,
 				2159796D1FB831B10029F177 /* FilterView.m in Sources */,
 				7A40B11A217EF15F004B9830 /* UITableView+XSAnimationKit.m in Sources */,
+				1F693B0121A682F9004818D8 /* ForgotPasswordVC.m in Sources */,
 				7A2CC664215BBC2900B27E2D /* PosMyInvestmentDetailsVC.m in Sources */,
 				B8F63EE320D397B000556150 /* WalletLocalWebVC.m in Sources */,
 				2129FE6F1FDFBAA3009DA374 /* ChangeLoginPwdVC.m in Sources */,
@@ -4876,6 +4961,7 @@
 				1F4E896121996EDE007B3015 /* TheInitialVC.m in Sources */,
 				B88B592A2109B2EF00F20D1B /* ZLGestureLockViewController.m in Sources */,
 				7A2CC6B4215DC88B00B27E2D /* PGDatePicker+DateAndTime.m in Sources */,
+				1F693B2021A6A803004818D8 /* AssetsHeadView.m in Sources */,
 				2ED651D22010443D0065A1B0 /* TLAboutUsVC.m in Sources */,
 				B8C2057C20CFA3FC00952765 /* WalletAddressDetailVC.m in Sources */,
 				4CE70FE120C82EDD00F0C803 /* MnemonicUtil.m in Sources */,
@@ -5058,6 +5144,7 @@
 					"$(PROJECT_DIR)/Coin/Classes/Utils/common/common_ios_1.5.2/normal",
 					"$(PROJECT_DIR)/Coin/ValidationSDK",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Coin/OCR/OpenCV",
 				);
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = YES;
 				GCC_PREFIX_HEADER = "/Users/zqb/xn-token-ios/Coin/AppDelegate/Classes/Macro/CoinPrefixHeader.pch";
@@ -5075,6 +5162,8 @@
 					"$(PROJECT_DIR)/Coin/Classes/Utils/DataBtc/lib-ios",
 					"$(PROJECT_DIR)/Coin/WechatSDK1.8.2",
 					"$(PROJECT_DIR)/Coin/AppDelegate/Classes/Utils/DataBtc/include-ios/lib-ios",
+					"$(PROJECT_DIR)/Coin/OCR/Lib",
+					"$(PROJECT_DIR)/Coin/OCR/OpenCV",
 				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -5215,6 +5304,7 @@
 					"$(PROJECT_DIR)/Coin/Classes/Utils/common/common_ios_1.5.2/normal",
 					"$(PROJECT_DIR)/Coin/ValidationSDK",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Coin/OCR/OpenCV",
 				);
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = YES;
 				GCC_PREFIX_HEADER = "/Users/zqb/xn-token-ios/Coin/AppDelegate/Classes/Macro/CoinPrefixHeader.pch";
@@ -5232,6 +5322,8 @@
 					"$(PROJECT_DIR)/Coin/Classes/Utils/DataBtc/lib-ios",
 					"$(PROJECT_DIR)/Coin/WechatSDK1.8.2",
 					"$(PROJECT_DIR)/Coin/AppDelegate/Classes/Utils/DataBtc/include-ios/lib-ios",
+					"$(PROJECT_DIR)/Coin/OCR/Lib",
+					"$(PROJECT_DIR)/Coin/OCR/OpenCV",
 				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",

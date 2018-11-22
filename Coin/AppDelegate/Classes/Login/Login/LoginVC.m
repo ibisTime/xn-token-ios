@@ -11,6 +11,8 @@
 #import "RegisterVC.h"
 #import <UMMobClick/MobClick.h>
 #import "TLTabBarController.h"
+
+#import "ForgotPasswordVC.h"
 @interface LoginVC ()
 {
     UIButton *isSelectBtn;
@@ -271,7 +273,8 @@
         case 2:
         {
             
-            
+            ForgotPasswordVC *vc = [ForgotPasswordVC new];
+            [self.navigationController pushViewController:vc animated:YES];
         }
             break;
             
@@ -306,28 +309,9 @@
         //初始化用户信息
         [[TLUser user] setUserInfoWithDict:userInfo];
         
-//        [[NSUserDefaults standardUserDefaults] setObject:@"isChecking" forKey:@"isChecking"];
-        
-        //
-//        [self dismissViewControllerAnimated:YES completion:nil];
-        
-//        if (self.loginSuccess) {
-//
-//            self.loginSuccess();
-//        }
-//
-//        if (self.IsAPPJoin == YES) {
-//            [[NSNotificationCenter defaultCenter] postNotificationName:kUserLoginNotification object:nil];
-//            self.NeedLogin = NO;
-//            [self.navigationController popToRootViewControllerAnimated:YES];
-            TLTabBarController*tab   = [[TLTabBarController alloc] init];
-            [UIApplication sharedApplication].keyWindow.rootViewController = tab;
+        TLTabBarController*tab   = [[TLTabBarController alloc] init];
+        [UIApplication sharedApplication].keyWindow.rootViewController = tab;
             
-//            return ;
-//        }
-//        self.NeedLogin = NO;
-//        [[NSNotificationCenter defaultCenter] postNotificationName:kUserLoginNotification object:nil];
-//        [self.navigationController popToRootViewControllerAnimated:YES];
         
     } failure:^(NSError *error) {
         

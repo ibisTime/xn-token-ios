@@ -7,7 +7,7 @@
 //
 
 #import "ConfirmBackupVC.h"
-
+#import "TLTabBarController.h"
 @interface ConfirmBackupVC ()
 
 @end
@@ -74,7 +74,9 @@
 
 -(void)confirmBtn
 {
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    TLTabBarController *tab = [[TLTabBarController alloc] init];
+    [UIApplication sharedApplication].keyWindow.rootViewController = tab;
+//    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

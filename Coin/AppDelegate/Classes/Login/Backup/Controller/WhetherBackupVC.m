@@ -8,6 +8,7 @@
 
 #import "WhetherBackupVC.h"
 #import "CreateWalletVC.h"
+#import "TLTabBarController.h"
 @interface WhetherBackupVC ()
 
 @end
@@ -58,7 +59,8 @@
 
 -(void)JustMoment
 {
-    
+    TLTabBarController *tab = [[TLTabBarController alloc] init];
+    [UIApplication sharedApplication].keyWindow.rootViewController = tab;
 }
 
 -(void)start
