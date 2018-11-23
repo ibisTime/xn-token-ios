@@ -520,6 +520,8 @@
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isLanch"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
+
+
 - (NSString *) dataFilePath//应用程序的沙盒路径
 {
     NSArray *path = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);

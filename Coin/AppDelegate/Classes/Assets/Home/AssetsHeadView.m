@@ -28,6 +28,8 @@
     UIButton *announcementBackBtn = [UIButton buttonWithType:(UIButtonTypeCustom)];
     [announcementBackBtn setBackgroundColor:RGB(243, 243, 243) forState:(UIControlStateNormal)];
     announcementBackBtn.frame = CGRectMake(0, 0, SCREEN_WIDTH, 50);
+    [announcementBackBtn addTarget:self action:@selector(btnClick:) forControlEvents:(UIControlEventTouchUpInside)];
+    announcementBackBtn.tag = 100;
     [self addSubview:announcementBackBtn];
     
     
@@ -40,21 +42,30 @@
     }];
     
     
-    [announcementBackBtn addSubview:iconBtn];
+    
+    [self addSubview:iconBtn];
     
     UIImageView *youImg = [[UIImageView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 12 - 7.5, 17.5, 7.5, 15)];
     youImg.image = kImage(@"更多");
-    [announcementBackBtn addSubview:youImg];
+    [self addSubview:youImg];
     
+//    UIButton *announcementBtn = [UIButton buttonWithTitle:@"" titleColor:[UIColor grayColor] backgroundColor:kClearColor titleFont:12];
+//    announcementBtn.frame = CGRectMake(iconBtn.xx + 10, 0, SCREEN_WIDTH - iconBtn.xx - 30, 50);
+//    [self addSubview:announcementBtn];
     UILabel *announcementlbl = [UILabel labelWithFrame:CGRectMake(iconBtn.xx + 10, 0, SCREEN_WIDTH - iconBtn.xx - 30, 50) textAligment:(NSTextAlignmentLeft) backgroundColor:kClearColor font:FONT(12) textColor:[UIColor grayColor]];
-    [announcementBackBtn addSubview:announcementlbl];
+    self.announcementlbl = announcementlbl;
+    [self addSubview:announcementlbl];
+    
+    UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(15, (SCREEN_WIDTH - 40)/2.3 + 61 + 12 + 11 + 30 - 1, SCREEN_WIDTH - 30, 1)];
+    lineView.backgroundColor = kLineColor;
+    [self addSubview:lineView];
 }
 
 
 -(void)initView
 {
     
-    UIImageView *bottomIV = [[UIImageView alloc] initWithFrame:CGRectMake(24, 61, SCREEN_WIDTH - 40, CardWidth)];
+    UIImageView *bottomIV = [[UIImageView alloc] initWithFrame:CGRectMake(26, 61, SCREEN_WIDTH - 40, CardWidth)];
     bottomIV.image = kImage(@"私钥钱包背景");
     bottomIV.contentMode = UIViewContentModeScaleToFill;
     self.bottomIV = bottomIV;
@@ -91,13 +102,33 @@
     for (int i = 0; i < 3; i ++) {
         UIButton *iconBtn = [UIButton buttonWithType:(UIButtonTypeCustom)];
         [iconBtn setImage:kImage(array[i]) forState:(UIControlStateNormal)];
+        iconBtn.frame = CGRectMake(31 + i % 3 * (40 + 30), 61 + CardWidth + 11, 30, 30);
+        [iconBtn addTarget:self action:@selector(btnClick:) forControlEvents:(UIControlEventTouchUpInside)];
+        iconBtn.tag = 101 + i;
+        [self addSubview:iconBtn];
+//        iconBtn.backgroundColor = [UIColor redColor];
+        
     }
     
+    UIButton *addButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
+    [addButton setImage:kImage(@"+") forState:(UIControlStateNormal)];
+    addButton.frame = CGRectMake(SCREEN_WIDTH - 30 - 12, 61 + CardWidth + 11, 30, 30);
+    [addButton addTarget:self action:@selector(btnClick:) forControlEvents:(UIControlEventTouchUpInside)];
+    addButton.tag = 104;
+    [self addSubview:addButton];
     
 }
 
 
+-(void)btnClick:(UIButton *)sender
+{
+    [_delegate AssetsHeadViewDelegateSelectBtn:sender.tag - 100];
+}
+
 -(void)swipeRightTopClick:(UISwipeGestureRecognizer *)swpie{
+    
+    
+    
     
     NSLog(@"swipe right");
     [self setNeedsUpdateConstraints];
@@ -114,18 +145,17 @@
     } completion:^(BOOL finished) {
 
         [self setNeedsUpdateConstraints];
-//        self.addButton.hidden = NO;
+
         
         [UIView animateWithDuration:0.5 animations:^{
             
             self.bottomIV.frame =  CGRectMake(12, 61, SCREEN_WIDTH - 40, CardWidth);
             [self bringSubviewToFront:self.bottomIV];
 
-            self.topIV.frame = CGRectMake(24, 61, SCREEN_WIDTH - 40, CardWidth);
-
+            self.topIV.frame = CGRectMake(26, 61, SCREEN_WIDTH - 40, CardWidth);
+            [_delegate SlidingIsWallet:@"私钥钱包"];
             [self layoutIfNeeded];
             [self setNeedsDisplay];
-            
             
         }];
         
@@ -143,60 +173,21 @@
     [self setNeedsUpdateConstraints];
     
     [UIView animateWithDuration:0.5 animations:^{
-//        [self.topIV mas_remakeConstraints:^(MASConstraintMaker *make) {
-//            make.top.equalTo(self.equivalentBtn.mas_bottom).offset(37);
-//            make.right.equalTo(self.mas_left).offset(-30);
-//            make.height.equalTo(@(kHeight(150)));
-//            make.width.equalTo(@(kWidth(kScreenWidth-80)));
-//        }];
+
         self.topIV.frame =  CGRectMake(-SCREEN_WIDTH, 61, SCREEN_WIDTH - 40, CardWidth);
         
         [self layoutIfNeeded];
         
         
     } completion:^(BOOL finished) {
-//        if (self.switchBlock) {
-//            self.switchBlock(0);
-//        }
         [self setNeedsUpdateConstraints];
-//        self.addButton.hidden = NO;
         
         [UIView animateWithDuration:0.5 animations:^{
             
             self.bottomIV.frame = CGRectMake(12, 61, SCREEN_WIDTH - 40, CardWidth);
             [self bringSubviewToFront:self.bottomIV];
-            self.topIV.frame = CGRectMake(24, 61, SCREEN_WIDTH - 40, CardWidth);
-//            [self.bottomIV mas_remakeConstraints:^(MASConstraintMaker *make) {
-//                make.top.equalTo(self.equivalentBtn.mas_bottom).offset(37);
-//                make.left.equalTo(self.cnyAmountLbl.mas_left);
-//                make.height.equalTo(@(kHeight(150)));
-//                make.width.equalTo(@(kWidth(325)));
-//
-//            }];
-//
-//            [self.bgIV mas_remakeConstraints:^(MASConstraintMaker *make) {
-//                make.top.equalTo(self.equivalentBtn.mas_bottom).offset(53);
-//                make.left.equalTo(self.cnyAmountLbl.mas_left).offset(kWidth(120));
-//                make.height.equalTo(@(kHeight(120)));
-//                make.width.equalTo(@(kWidth(225)));
-//
-//            }];
-            //            [self.segmentRight mas_remakeConstraints:^(MASConstraintMaker *make) {
-            //                make.right.equalTo(self.mas_centerX).offset(-5);
-            //                make.bottom.equalTo(self.mas_bottom).offset(-5);
-            //                make.width.equalTo(@8);
-            //                make.height.equalTo(@8);
-            //
-            //            }];
-            //
-            //
-            //            [self.segmentLeft mas_remakeConstraints:^(MASConstraintMaker *make) {
-            //                make.left.equalTo(self.mas_centerX).offset(5);
-            //                make.bottom.equalTo(self.mas_bottom).offset(-5);
-            //                make.width.equalTo(@16);
-            //                make.height.equalTo(@8);
-            //
-            //            }];
+            self.topIV.frame = CGRectMake(26, 61, SCREEN_WIDTH - 40, CardWidth);
+            [_delegate SlidingIsWallet:@"私钥钱包"];
             [self layoutIfNeeded];
             [self setNeedsDisplay];
             
@@ -207,7 +198,14 @@
     
 }
 
+
+-(void)setUsdRate:(NSString *)usdRate
+{
+    self.announcementlbl.text = usdRate;
+}
+
 -(void)swipeRightBottomClick:(UISwipeGestureRecognizer *)swpie{
+    
     
     [UIView animateWithDuration:0.5 animations:^{
         [self setNeedsUpdateConstraints];
@@ -222,8 +220,9 @@
             
             self.topIV.frame = CGRectMake(12, 61, SCREEN_WIDTH - 40, CardWidth);
             [self bringSubviewToFront:self.topIV];
-            self.bottomIV.frame = CGRectMake(24, 61, SCREEN_WIDTH - 36, CardWidth);
+            self.bottomIV.frame = CGRectMake(26, 61, SCREEN_WIDTH - 36, CardWidth);
 
+            [_delegate SlidingIsWallet:@"个人钱包"];
             [self layoutIfNeeded];
             [self setNeedsDisplay];
             
@@ -236,6 +235,7 @@
 }
 -(void)swipeBottomClick:(UISwipeGestureRecognizer *)swpie{
     
+    
     [UIView animateWithDuration:0.5 animations:^{
         [self setNeedsUpdateConstraints];
         self.bottomIV.frame = CGRectMake(-SCREEN_WIDTH, 61, SCREEN_WIDTH - 40, CardWidth);
@@ -245,9 +245,9 @@
             [self setNeedsUpdateConstraints];
             self.topIV.frame = CGRectMake(12, 61, SCREEN_WIDTH - 40, CardWidth);
             [self bringSubviewToFront:self.topIV];
-            self.bottomIV.frame = CGRectMake(24, 61, SCREEN_WIDTH - 40, CardWidth);
+            self.bottomIV.frame = CGRectMake(26, 61, SCREEN_WIDTH - 40, CardWidth);
 
-
+            [_delegate SlidingIsWallet:@"个人钱包"];
             [self layoutIfNeeded];
             [self setNeedsDisplay];
             

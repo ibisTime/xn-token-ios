@@ -90,6 +90,10 @@
 #import <SecurityGuardSDK/JAQ/SecurityVerification.h>
 
 
+#define BTCADDRESS @"BTCADDRESS"
+
+
+
 
 #endif /* CoinPrefixHeader_h */
 

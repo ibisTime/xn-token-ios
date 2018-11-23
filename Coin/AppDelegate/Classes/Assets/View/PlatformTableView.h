@@ -28,4 +28,6 @@ typedef void(^selectCurrent)(NSInteger );
 
 @property (nonatomic, assign) BOOL isLocal;
 
+@property (nonatomic , copy)NSString *btcOldAddress;
+
 @end

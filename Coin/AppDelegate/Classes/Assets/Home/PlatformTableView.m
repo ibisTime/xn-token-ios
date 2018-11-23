@@ -38,38 +38,61 @@ static NSString *platformCell1 = @"AccountMoneyCellTableViewCell";
 }
 
 
--(void)WhetherOrNotShown
-{
-    TLDataBase *dataBase = [TLDataBase sharedManager];
-    NSString *symbol;
-    NSString *address;
-    arr = [NSMutableArray array];
-    if ([dataBase.dataBase open]) {
-        NSString *sql = [NSString stringWithFormat:@"SELECT symbol,address from THALocal lo, THAUser th where lo.walletId = th.walletId  and th.userId = '%@' and lo.IsSelect = 1",[TLUser user].userId];
-        //        [sql appendString:[TLUser user].userId];
-        FMResultSet *set = [dataBase.dataBase executeQuery:sql];
-        while ([set next])
-        {
-            NSMutableDictionary *dic = [NSMutableDictionary dictionary];
-            
-            symbol = [set stringForColumn:@"symbol"];
-            address = [set stringForColumn:@"address"];
-            
-            [dic setObject:symbol forKey:@"symbol"];
-            [arr addObject:dic];
-        }
-        [set close];
-    }
-    [dataBase.dataBase close];
-}
+//-(void)WhetherOrNotShown
+//{
+//    TLDataBase *dataBase = [TLDataBase sharedManager];
+//    NSString *symbol;
+//    NSString *address;
+//    arr = [NSMutableArray array];
+//    if ([dataBase.dataBase open]) {
+//        NSString *sql = [NSString stringWithFormat:@"SELECT symbol,address from THALocal lo, THAUser th where lo.walletId = th.walletId  and th.userId = '%@' and lo.IsSelect = 1",[TLUser user].userId];
+//        //        [sql appendString:[TLUser user].userId];
+//        FMResultSet *set = [dataBase.dataBase executeQuery:sql];
+//        while ([set next])
+//        {
+//            NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+//
+//            symbol = [set stringForColumn:@"symbol"];
+//            address = [set stringForColumn:@"address"];
+//
+//            [dic setObject:symbol forKey:@"symbol"];
+//            [arr addObject:dic];
+//        }
+//        [set close];
+//    }
+//    [dataBase.dataBase close];
+//
+//
+//
+//    if ([TLUser isBlankString:self.btcOldAddress] == NO) {
+//        for (int i = 0; i < arr.count; i ++) {
+//
+//            if ([arr[i][@"symbol"] isEqualToString:@"BTC"]) {
+//                NSDictionary *dic = @{@"address":self.btcOldAddress,
+//                                      @"symbol":@"BTC"
+//                                      };
+//                [arr insertObject:dic atIndex:i];
+//
+//            }
+//        }
+//    }
+//
+//
+//}
 
 #pragma mark - UITableViewDataSource;
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    [self WhetherOrNotShown];
-    if (self.isLocal == YES) {
-        return arr.count;
-    }
+//    [self WhetherOrNotShown];
+//    if (self.isLocal == YES) {
+////        if ([TLUser isBlankString:self.btcOldAddress] == NO) {
+////            return arr.count + 1;
+////        }else
+////        {
+////            return arr.count;
+////        }
+//        return platforms;
+//    }
     return self.platforms.count;
     
 }
@@ -77,17 +100,19 @@ static NSString *platformCell1 = @"AccountMoneyCellTableViewCell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
     
-    [self WhetherOrNotShown];
+//    [self WhetherOrNotShown];
     AccountMoneyCellTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:platformCell1 forIndexPath:indexPath];
     
     
     if (self.isLocal == YES) {
-        [self WhetherOrNotShown];
-        for (int j = 0; j<self.platforms.count; j++) {
-            if ([arr[indexPath.row][@"symbol"] isEqualToString:self.platforms[j].symbol]) {
-                cell.platform = self.platforms[j];
-            }
-        }
+//        [self WhetherOrNotShown];
+//        for (int j = 0; j<self.platforms.count; j++) {
+//            if ([arr[indexPath.row][@"address"] isEqualToString:self.platforms[j].address]) {
+//
+//                cell.platform = self.platforms[j];
+//            }
+//        }
+        cell.platform = self.platforms[indexPath.row];
     }else
     {
         cell.platform1 = self.platforms[indexPath.row];
@@ -117,12 +142,13 @@ static NSString *platformCell1 = @"AccountMoneyCellTableViewCell";
         
         if ([self.refreshDelegate respondsToSelector:@selector(refreshTableView:setCurrencyModel:setTitle:)]) {
             if (self.isLocal == YES) {
-                [self WhetherOrNotShown];
-                for (int j = 0; j<self.platforms.count; j++) {
-                    if ([arr[indexPath.row][@"symbol"] isEqualToString:self.platforms[j].symbol]) {
-                        [self.refreshDelegate refreshTableView:self setCurrencyModel:self.platforms[j] setTitle:@"转账"];
-                    }
-                }
+                [self.refreshDelegate refreshTableView:self setCurrencyModel:self.platforms[indexPath.row] setTitle:@"转账"];
+//                [self WhetherOrNotShown];
+//                for (int j = 0; j<self.platforms.count; j++) {
+//                    if ([arr[indexPath.row][@"symbol"] isEqualToString:self.platforms[j].symbol]) {
+//                        [self.refreshDelegate refreshTableView:self setCurrencyModel:self.platforms[j] setTitle:@"转账"];
+//                    }
+//                }
             }else
             {
                 [self.refreshDelegate refreshTableView:self setCurrencyModel:self.platforms[indexPath.row] setTitle:@"转账"];
@@ -136,12 +162,13 @@ static NSString *platformCell1 = @"AccountMoneyCellTableViewCell";
         
         if ([self.refreshDelegate respondsToSelector:@selector(refreshTableView:setCurrencyModel:setTitle:)]) {
             if (self.isLocal == YES) {
-                [self WhetherOrNotShown];
-                for (int j = 0; j<self.platforms.count; j++) {
-                    if ([arr[indexPath.row][@"symbol"] isEqualToString:self.platforms[j].symbol]) {
-                        [self.refreshDelegate refreshTableView:self setCurrencyModel:self.platforms[j] setTitle:@"收款"];
-                    }
-                }
+                [self.refreshDelegate refreshTableView:self setCurrencyModel:self.platforms[indexPath.row] setTitle:@"收款"];
+//                [self WhetherOrNotShown];
+//                for (int j = 0; j<self.platforms.count; j++) {
+//                    if ([arr[indexPath.row][@"symbol"] isEqualToString:self.platforms[j].symbol]) {
+//                        [self.refreshDelegate refreshTableView:self setCurrencyModel:self.platforms[j] setTitle:@"收款"];
+//                    }
+//                }
             }else
             {
                 [self.refreshDelegate refreshTableView:self setCurrencyModel:self.platforms[indexPath.row] setTitle:@"收款"];
@@ -170,7 +197,7 @@ static NSString *platformCell1 = @"AccountMoneyCellTableViewCell";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    return 70;
+    return 73.5;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {

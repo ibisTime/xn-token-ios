@@ -190,6 +190,33 @@
     }
 }
 
+
+
++ (NSString *)getBtcTheOldAddress:(BTCMnemonic *)mnemonic {
+    BTCKeychain *keychain = [mnemonic keychain];
+    
+    switch ([AppConfig config].runEnv) {
+            
+        case 0:
+            return keychain.key.address.string;
+            break;
+        case 1:
+
+            return keychain.key.addressTestnet.string;
+            
+            break;
+        case 2:
+//            keychain = [keychain derivedKeychainWithPath:@"m/44'/1'/0'/0/0"];
+            return keychain.key.addressTestnet.string;
+            
+            break;
+        default:
+            break;
+    }
+}
+
+
+
 + (NSString *)getEthPrivateKey:(BTCMnemonic *)mnemonic {
     BTCKeychain *keychain = [mnemonic keychain];
     keychain = [keychain derivedKeychainWithPath:@"m/44'/1'/2'"];

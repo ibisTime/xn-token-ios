@@ -8,8 +8,23 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AssetsHeadView : UIView
+@protocol AssetsHeadViewDelegate <NSObject>
 
+-(void)AssetsHeadViewDelegateSelectBtn:(NSInteger)tag;
+
+-(void)SlidingIsWallet:(NSString *)WalletName;
+
+
+@end
+
+
+@interface AssetsHeadView : UIView
+@property (nonatomic, assign) id <AssetsHeadViewDelegate> delegate;
+
+@property (nonatomic , copy)NSString *usdRate;
+
+
+@property (nonatomic , strong)UILabel *announcementlbl;
 @property (nonatomic , strong)UIImageView *bottomIV;
 @property (nonatomic , strong)UIImageView *topIV;
 

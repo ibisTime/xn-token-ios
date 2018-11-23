@@ -951,10 +951,17 @@ typedef enum : NSUInteger {
     BTCMnemonic *mnemonic =  [MnemonicUtil importMnemonic:words];
     BTCKeychain *keychain = [mnemonic keychain];
     if ([AppConfig config].runEnv == 0) {
-        keychain = [keychain derivedKeychainWithPath:@"m/44'/0'/0'/0/0"];
+        if (![_currentModel.address isEqualToString:[[NSUserDefaults standardUserDefaults] objectForKey:BTCADDRESS]]) {
+            keychain = [keychain derivedKeychainWithPath:@"m/44'/0'/0'/0/0"];
+        }
+        
         keychain.network = [BTCNetwork mainnet];
     }else{
-        keychain = [keychain derivedKeychainWithPath:@"m/44'/1'/0'/0/0"];
+        
+        if (![_currentModel.address isEqualToString:[[NSUserDefaults standardUserDefaults] objectForKey:BTCADDRESS]]) {
+            keychain = [keychain derivedKeychainWithPath:@"m/44'/1'/0'/0/0"];
+        }
+        
         keychain.network = [BTCNetwork testnet];
     }
     BTCKey *key = keychain.key;
@@ -1187,11 +1194,18 @@ typedef enum : NSUInteger {
     BTCKeychain *keychain = [mnemonic keychain];
     
     if ([AppConfig config].runEnv == 0) {
-        keychain = [keychain derivedKeychainWithPath:@"m/44'/0'/0'/0/0"];
+        if (![_currentModel.address isEqualToString:[[NSUserDefaults standardUserDefaults] objectForKey:BTCADDRESS]]) {
+            keychain = [keychain derivedKeychainWithPath:@"m/44'/0'/0'/0/0"];
+        }
+        
         keychain.network = [BTCNetwork mainnet];
         
     }else{
-        keychain = [keychain derivedKeychainWithPath:@"m/44'/1'/0'/0/0"];
+        
+        if (![_currentModel.address isEqualToString:[[NSUserDefaults standardUserDefaults] objectForKey:BTCADDRESS]]) {
+            keychain = [keychain derivedKeychainWithPath:@"m/44'/1'/0'/0/0"];
+        }
+        
         keychain.network = [BTCNetwork testnet];
         
     }
