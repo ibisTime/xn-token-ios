@@ -62,9 +62,9 @@
 //    研发
 //    [AppConfig config].runEnv = RunEnvDev;
 //    测试
-//    [AppConfig config].runEnv = RunEnvTest;
+    [AppConfig config].runEnv = RunEnvTest;
 //    正式
-    [AppConfig config].runEnv = RunEnvRelease;
+//    [AppConfig config].runEnv = RunEnvRelease;
 
     [AppConfig config].isChecking = NO;
 #warning  //pods 更新后会导致wan币转账失败
@@ -515,6 +515,8 @@
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isLanch"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
+
+
 - (NSString *) dataFilePath//应用程序的沙盒路径
 {
     NSArray *path = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);

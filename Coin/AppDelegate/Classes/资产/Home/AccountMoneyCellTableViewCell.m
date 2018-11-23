@@ -159,8 +159,13 @@
     CoinModel *coin = [CoinUtil getCoinModel:platform.symbol];
     
     [self.presentImage sd_setImageWithURL:[NSURL URLWithString:[coin.pic1 convertImageUrl]]];
-
-    self.currencyNameLbl.text = platform.symbol;
+    if ([platform.address isEqualToString:[[NSUserDefaults standardUserDefaults] objectForKey:BTCADDRESS]]) {
+        self.currencyNameLbl.text = @"BTC(old version)";
+    }else
+    {
+        self.currencyNameLbl.text = platform.symbol;
+    }
+    
 
     NSString *eyes = [[NSUserDefaults standardUserDefaults] objectForKey:@"eyes"];
     if ([eyes isEqualToString:@"1"]) {
@@ -231,7 +236,11 @@
     
     [self.presentImage sd_setImageWithURL:[NSURL URLWithString:[coin.pic1 convertImageUrl]]];
     
+    
+    
     self.currencyNameLbl.text = platform.currency;
+//    }
+    
     
     NSString *leftAmount = [CoinUtil convertToRealCoin:platform.amountString coin:platform.currency];
     NSString *rightAmount = [CoinUtil convertToRealCoin:platform.frozenAmountString coin:platform.currency];

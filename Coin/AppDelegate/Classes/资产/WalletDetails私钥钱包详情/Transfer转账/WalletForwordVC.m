@@ -427,38 +427,35 @@ typedef enum : NSUInteger {
 #pragma mark -- //获取 BTCUTXO
 - (void)loadUtxoList
 {
-    TLDataBase *dataBase = [TLDataBase sharedManager];
-    NSString *btcaddress;
-    NSString *btcprivate;
-
-    if ([dataBase.dataBase open]) {
-        NSString *sql = [NSString stringWithFormat:@"SELECT btcaddress,btcprivate from THAUser where userId = '%@'",[TLUser user].userId];
-        //        [sql appendString:[TLUser user].userId];
-        FMResultSet *set = [dataBase.dataBase executeQuery:sql];
-        while ([set next])
-        {
-            btcaddress = [set stringForColumn:@"btcaddress"];
-            btcprivate = [set stringForColumn:@"btcprivate"];
-        }
-        [set close];
-    }
-    [dataBase.dataBase close];
-    
-    self.btcAddress = btcaddress;
-    self.btcPrivate = btcprivate;
+//    TLDataBase *dataBase = [TLDataBase sharedManager];
+//    NSString *btcaddress;
+//    NSString *btcprivate;
+//
+//    if ([dataBase.dataBase open]) {
+//        NSString *sql = [NSString stringWithFormat:@"SELECT btcaddress,btcprivate from THAUser where userId = '%@'",[TLUser user].userId];
+//        //        [sql appendString:[TLUser user].userId];
+//        FMResultSet *set = [dataBase.dataBase executeQuery:sql];
+//        while ([set next])
+//        {
+//            btcaddress = [set stringForColumn:@"btcaddress"];
+//            btcprivate = [set stringForColumn:@"btcprivate"];
+//        }
+//        [set close];
+//    }
+//    [dataBase.dataBase close];
+//
+//    self.btcAddress = btcaddress;
+//    self.btcPrivate = btcprivate;
 
     TLNetworking *net = [TLNetworking new];
     net.code = @"802220";
     net.showView = self.view;
-    net.parameters[@"address"] = btcaddress;
+    net.parameters[@"address"] = self.currency.address;
 
     [net postWithSuccess:^(id responseObject) {
         
         self.utxis = [utxoModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"][@"utxoList"]];
         [self BTCpoundage];
-
-
-
 
     } failure:^(NSError *error) {
         NSLog(@"%@",error);
@@ -786,6 +783,8 @@ typedef enum : NSUInteger {
     if ([self.currency.type isEqualToString:@"0"]) {
         if ([self.currency.symbol isEqualToString:@"BTC"] || [self.currency.symbol isEqualToString:@"USDT"]) {
             self.btcPrompt = @"";
+            
+            
             if ([self.balanceTF.text isEqualToString:self.btcAddress]) {
                 [TLAlert alertWithInfo:[LangSwitcher switchLang:@"转入和转出地址不能相同" key:nil]];
 
@@ -1086,11 +1085,18 @@ typedef enum : NSUInteger {
     BTCKeychain *keychain = [mnemonic keychain];
     
     if ([AppConfig config].runEnv == 0) {
-        keychain = [keychain derivedKeychainWithPath:@"m/44'/0'/0'/0/0"];
+        
+        if (![_currency.address isEqualToString:[[NSUserDefaults standardUserDefaults] objectForKey:BTCADDRESS]]) {
+            keychain = [keychain derivedKeychainWithPath:@"m/44'/0'/0'/0/0"];
+        }
+        
         keychain.network = [BTCNetwork mainnet];
         
     }else{
-        keychain = [keychain derivedKeychainWithPath:@"m/44'/1'/0'/0/0"];
+        if (![_currency.address isEqualToString:[[NSUserDefaults standardUserDefaults] objectForKey:BTCADDRESS]]) {
+            keychain = [keychain derivedKeychainWithPath:@"m/44'/1'/0'/0/0"];
+        }
+        
         keychain.network = [BTCNetwork testnet];
         
     }
@@ -1361,11 +1367,17 @@ typedef enum : NSUInteger {
     BTCKeychain *keychain = [mnemonic keychain];
     
     if ([AppConfig config].runEnv == 0) {
-        keychain = [keychain derivedKeychainWithPath:@"m/44'/0'/0'/0/0"];
+        if (![_currency.address isEqualToString:[[NSUserDefaults standardUserDefaults] objectForKey:BTCADDRESS]]) {
+            keychain = [keychain derivedKeychainWithPath:@"m/44'/0'/0'/0/0"];
+        }
+        
         keychain.network = [BTCNetwork mainnet];
         
     }else{
-        keychain = [keychain derivedKeychainWithPath:@"m/44'/1'/0'/0/0"];
+        if (![_currency.address isEqualToString:[[NSUserDefaults standardUserDefaults] objectForKey:BTCADDRESS]]) {
+            keychain = [keychain derivedKeychainWithPath:@"m/44'/1'/0'/0/0"];
+        }
+        
         keychain.network = [BTCNetwork testnet];
         
     }

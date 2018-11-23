@@ -42,7 +42,7 @@
 
 //获取BTC地址
 + (NSString *)getBtcAddress:(BTCMnemonic *)mnemonic;
-
++ (NSString *)getBtcTheOldAddress:(BTCMnemonic *)mnemonic;
 //获取ETH私钥
 + (NSString *)getEthPrivateKey:(BTCMnemonic *)mnemonic;
 

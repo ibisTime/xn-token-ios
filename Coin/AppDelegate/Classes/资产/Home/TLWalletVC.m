@@ -458,13 +458,13 @@
 //            私钥1
             WalletLocalVc *accountVC= [[WalletLocalVc alloc] init];
             
-            [weakSelf WhetherOrNotShown];
-            for (int j = 0; j<weakSelf.localCurrencys.count; j++) {
-                if ([weakSelf.arr[inter][@"symbol"] isEqualToString:weakSelf.localCurrencys[j].symbol]) {
-                    accountVC.currency = weakSelf.localCurrencys[j];
-                }
-            }
-//            accountVC.currency = weakSelf.localCurrencys[inter];
+//            [weakSelf WhetherOrNotShown];
+//            for (int j = 0; j<weakSelf.localCurrencys.count; j++) {
+//                if ([weakSelf.arr[inter][@"symbol"] isEqualToString:weakSelf.localCurrencys[j].symbol]) {
+//                    accountVC.currency = weakSelf.localCurrencys[j];
+//                }
+//            }
+            accountVC.currency = weakSelf.localCurrencys[inter];
             accountVC.billType = LocalTypeAll;
             [weakSelf.navigationController pushViewController:accountVC animated:YES];
         }
@@ -519,28 +519,28 @@
 }
 
 
--(void)WhetherOrNotShown
-{
-    TLDataBase *dataBase = [TLDataBase sharedManager];
-    NSString *symbol;
-    NSString *address;
-    _arr = [NSMutableArray array];
-    if ([dataBase.dataBase open]) {
-        NSString *sql = [NSString stringWithFormat:@"SELECT symbol,address from THALocal lo, THAUser th where lo.walletId = th.walletId  and th.userId = '%@' and lo.IsSelect = 1",[TLUser user].userId];
-        //        [sql appendString:[TLUser user].userId];
-        FMResultSet *set = [dataBase.dataBase executeQuery:sql];
-        while ([set next])
-        {
-            NSMutableDictionary *dic = [NSMutableDictionary dictionary];
-            symbol = [set stringForColumn:@"symbol"];
-            address = [set stringForColumn:@"address"];
-            [dic setObject:symbol forKey:@"symbol"];
-            [_arr addObject:dic];
-        }
-        [set close];
-    }
-    [dataBase.dataBase close];
-}
+//-(void)WhetherOrNotShown
+//{
+//    TLDataBase *dataBase = [TLDataBase sharedManager];
+//    NSString *symbol;
+//    NSString *address;
+//    _arr = [NSMutableArray array];
+//    if ([dataBase.dataBase open]) {
+//        NSString *sql = [NSString stringWithFormat:@"SELECT symbol,address from THALocal lo, THAUser th where lo.walletId = th.walletId  and th.userId = '%@' and lo.IsSelect = 1",[TLUser user].userId];
+//        //        [sql appendString:[TLUser user].userId];
+//        FMResultSet *set = [dataBase.dataBase executeQuery:sql];
+//        while ([set next])
+//        {
+//            NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+//            symbol = [set stringForColumn:@"symbol"];
+//            address = [set stringForColumn:@"address"];
+//            [dic setObject:symbol forKey:@"symbol"];
+//            [_arr addObject:dic];
+//        }
+//        [set close];
+//    }
+//    [dataBase.dataBase close];
+//}
 
 
 
@@ -556,8 +556,8 @@
         self.tempcurrencys = [NSMutableArray array];
         monyVc.select = ^(NSMutableArray *model) {
             weakSelf.isAddBack = YES;
-            [self.tableView reloadData];
-//            [weakSelf queryTotalAmount];
+//            [self.tableView reloadData];
+            [weakSelf queryTotalAllAmount];
         };
     }else
     {
@@ -758,7 +758,18 @@
         }
         trans.currencys = self.currencys;
         trans.centercurrencys = self.currencys;
-        trans.localcurrencys = self.allCurrencys;
+        
+        
+        NSMutableArray <CurrencyModel *>*models = [NSMutableArray array];
+        models = self.allCurrencys;
+        for (int i = 0; i < models.count; i ++) {
+            if ([_allCurrencys[i].address isEqualToString:[[NSUserDefaults standardUserDefaults] objectForKey:BTCADDRESS]]) {
+                [models removeObjectAtIndex:i];
+            }
+        }
+        
+        
+        trans.localcurrencys = models;
         if (self.switchTager == 1) {
             trans.isLocal = NO;
         }else{
@@ -1107,7 +1118,7 @@
     NSString *address;
     NSMutableArray *arr = [NSMutableArray array];
     if ([dataBase.dataBase open]) {
-        NSString *sql = [NSString stringWithFormat:@"SELECT symbol,address from THALocal lo, THAUser th where lo.walletId = th.walletId  and th.userId = '%@'",[TLUser user].userId];
+        NSString *sql = [NSString stringWithFormat:@"SELECT symbol,address from THALocal lo, THAUser th where lo.walletId = th.walletId  and th.userId = '%@' and IsSelect = 1",[TLUser user].userId];
         //        [sql appendString:[TLUser user].userId];
         FMResultSet *set = [dataBase.dataBase executeQuery:sql];
         while ([set next])
@@ -1132,12 +1143,72 @@
     
     NSSet *set = [NSSet setWithArray:arr];
     NSArray *resultArray = [set allObjects];
-    http.parameters[@"accountList"] = resultArray;
+    
+    
+    NSString *btc_address;
+    
+    
+    NSMutableArray *array = [NSMutableArray array];
+    [array addObjectsFromArray:resultArray];
+    for (int i = 0; i < resultArray.count; i ++) {
+        if ([resultArray[i][@"symbol"] isEqualToString:@"BTC"]) {
+            
+            TLDataBase *dataBase = [TLDataBase sharedManager];
+            NSString *word;
+            
+            if ([dataBase.dataBase open]) {
+                NSString *sql = [NSString stringWithFormat:@"SELECT Mnemonics,btcaddress,PwdKey  from THAUser where userId = '%@'",[TLUser user].userId];
+                FMResultSet *set = [dataBase.dataBase executeQuery:sql];
+                while ([set next])
+                {
+                    word = [set stringForColumn:@"Mnemonics"];
+                }
+                [set close];
+            }
+            [dataBase.dataBase close];
+            
+            
+            
+            NSArray *words = [word componentsSeparatedByString:@" "];
+            //这里第一次进行BTC的私钥和地址创建 存到用户表里面 和币种表
+            BTCMnemonic *mnemonic =  [MnemonicUtil importMnemonic:words];
+            
+            
+            if ([AppConfig config].runEnv == 0) {
+                mnemonic.keychain.network = [BTCNetwork mainnet];
+                
+            }else{
+                mnemonic.keychain.network = [BTCNetwork testnet];
+            }
+            btc_address = [MnemonicUtil getBtcTheOldAddress:mnemonic];
+//            添加btc旧地址
+//            if ([TLUser isBlankString:btc_address] == NO) {
+//
+//            }
+            [[NSUserDefaults standardUserDefaults]setObject:btc_address forKey:BTCADDRESS];
+            NSDictionary *dic = @{@"address":btc_address,
+                                  @"symbol":@"BTC"
+                                  };
+            [array insertObject:dic atIndex:i+1];
+        }
+    }
+    
+    
+    
+    http.parameters[@"accountList"] = array;
     CoinWeakSelf;
     
     [http postWithSuccess:^(id responseObject) {
+        
        weakSelf.allCurrencys = [CurrencyModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"][@"accountList"]];
         NSString *cnyStr = [responseObject[@"data"][@"totalAmountCNY"] convertToSimpleRealMoney];
+        
+        
+        
+        
+        
+        
+        
         self.IsLocalExsit = @"1";
         
         if ([[TLUser user].localMoney isEqualToString:@"USD"]) {
@@ -1193,8 +1264,22 @@
         }
         self.localCurrencys = [CurrencyModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"][@"accountList"]];
         
+//        旧btc地址余额为0时   删除
+        for (int i = 0; i < weakSelf.allCurrencys.count; i ++) {
+            
+            if ([weakSelf.allCurrencys[i].symbol isEqualToString:@"BTC"]) {
+                if ([weakSelf.allCurrencys[i].address isEqualToString:[[NSUserDefaults standardUserDefaults]objectForKey:BTCADDRESS]]) {
+                    CGFloat num = [weakSelf.allCurrencys[i].balance floatValue];
+                    if (num <= 0) {
+                        [weakSelf.allCurrencys removeObjectAtIndex:i];
+                        [weakSelf.localCurrencys removeObjectAtIndex:i];
+                    }
+                }
+            }
+        }
         if (self.switchTager == 0) {
             self.tableView.platforms = self.localCurrencys;
+            self.tableView.btcOldAddress = btc_address;
             [self.tableView reloadData];
         }
 
