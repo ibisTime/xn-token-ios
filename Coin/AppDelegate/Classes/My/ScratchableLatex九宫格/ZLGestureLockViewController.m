@@ -411,8 +411,8 @@
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         
         if ([TLUser user].isLogin == NO) {
-            TLUserLoginVC *lg = [TLUserLoginVC new];
-            lg.IsAPPJoin = YES;
+            TheInitialVC *lg = [TheInitialVC new];
+//            lg.IsAPPJoin = YES;
             TLNavigationController *na = [[TLNavigationController alloc] initWithRootViewController:lg];
             
             [UIApplication sharedApplication].keyWindow.rootViewController = na;
@@ -471,8 +471,8 @@
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         
         if ([TLUser user].isLogin == NO) {
-            TLUserLoginVC *lg = [TLUserLoginVC new];
-            lg.IsAPPJoin = YES;
+            TheInitialVC *lg = [TheInitialVC new];
+//            lg.IsAPPJoin = YES;
             TLNavigationController *na = [[TLNavigationController alloc] initWithRootViewController:lg];
             
             [UIApplication sharedApplication].keyWindow.rootViewController = na;

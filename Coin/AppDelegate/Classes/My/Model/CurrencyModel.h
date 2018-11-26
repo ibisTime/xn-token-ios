@@ -63,6 +63,8 @@
 @property (nonatomic, copy) NSString *chineseName;
 @property (nonatomic, copy) NSString *AvailableBalance;
 
+@property (nonatomic, copy) NSString *percentChange24h;
+
 
 - (NSString *)getTypeName;
 

@@ -37,26 +37,16 @@ CATransform3D CATransform3DPerspect(CATransform3D t, CGPoint center, float disZ)
     self = [super initWithFrame:frame];
     if (self) {
         [self initView];
+        
+//        if ([TLUser isBlankString:[TLUser user].userId] == YES) {
+//            scrollView.bounces = YES;
+//            [scrollView setContentOffset:CGPointMake(SCREEN_WIDTH , 0) animated:YES];
+//        }
+        
     }
     return self;
 }
 
-//-(BOOL)touchesShouldCancelInContentView:(UIView *)view{
-//    if ([view isKindOfClass:[UIButton class]]) {
-//
-//        return YES;
-//    }
-//    return [super touchesShouldCancelInContentView:view];
-//}
-////在触摸事件开始相应前调用
-//- (BOOL)touchesShouldBegin:(NSSet *)touches withEvent:(UIEvent *)event inContentView:(UIView *)view
-//{
-//
-//    if ([view isKindOfClass:[HBSignView class]]||[view isKindOfClass:[UIButton class]]) {
-//        return YES;
-//    }
-//    return NO;
-//}
 
 
 

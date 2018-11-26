@@ -313,14 +313,14 @@
     accounrModel.imgName = @"本地货币";
     accounrModel.isSetting = YES;
     accounrModel.action = ^{
-        if (![TLUser user].isLogin) {
-            TLUserLoginVC *loginVC= [TLUserLoginVC new];
-            [weakSelf.navigationController pushViewController:loginVC animated:YES];
-            loginVC.loginSuccess = ^{
-
-            };
-            return ;
-        }
+//        if (![TLUser user].isLogin) {
+//            TLUserLoginVC *loginVC= [TLUserLoginVC new];
+//            [weakSelf.navigationController pushViewController:loginVC animated:YES];
+//            loginVC.loginSuccess = ^{
+//
+//            };
+//            return ;
+//        }
         ChangeLocalMoneyVC *moneyVC= [[ChangeLocalMoneyVC alloc] init];
         //        moneyVC.cancelBtn.hidden = YES;
         [weakSelf.navigationController pushViewController:moneyVC animated:YES];

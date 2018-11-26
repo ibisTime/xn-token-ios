@@ -93,6 +93,7 @@
 //                                         placeholder:[LangSwitcher switchLang:@"请输入验证码"    key:nil]];
 //    self.codeTf.keyboardType = UIKeyboardTypeNumberPad;
 //    [self.view addSubview:self.codeTf];
+    
     [self.captchaView.captchaBtn addTarget:self action:@selector(sendCaptcha) forControlEvents:UIControlEventTouchUpInside];
     
     

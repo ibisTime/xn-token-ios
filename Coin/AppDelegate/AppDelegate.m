@@ -383,7 +383,7 @@
     
     NSDictionary *dataDic = [[NSUserDefaults standardUserDefaults] objectForKey:@"user_info_dict_key"];
     
-        if ([TLUser isBlankString:dataDic[@"mobile"]] == YES) {
+        if ([TLUser isBlankString:dataDic[@"userId"]] == YES) {
             TheInitialVC *initialVC = [[TheInitialVC alloc] init];
             UINavigationController *na = [[UINavigationController alloc] initWithRootViewController:initialVC];
             
@@ -480,16 +480,13 @@
         ZLGestureLockViewController *vc = [ZLGestureLockViewController new];
         vc.isCheck = YES;
         TLNavigationController *na = [[TLNavigationController alloc] initWithRootViewController:vc];
-        BOOL isLanch  = [[NSUserDefaults standardUserDefaults] boolForKey:@"isLanch"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-        if (isLanch == YES) {
-            return;
-        }
+//        BOOL isLanch  = [[NSUserDefaults standardUserDefaults] boolForKey:@"isLanch"];
+//        [[NSUserDefaults standardUserDefaults] synchronize];
+//        if (isLanch == YES) {
+//            return;
+//        }
         [self.window.rootViewController presentViewController:na animated:YES completion:nil];
-        
     }
-    
-    
 }
 
 #pragma mark- 应用切后台

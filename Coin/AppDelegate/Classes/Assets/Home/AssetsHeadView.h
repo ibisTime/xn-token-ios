@@ -15,6 +15,7 @@
 -(void)SlidingIsWallet:(NSString *)WalletName;
 
 
+
 @end
 
 
@@ -23,9 +24,12 @@
 
 @property (nonatomic , copy)NSString *usdRate;
 
+@property (nonatomic , strong)NSDictionary *dataDic;
 
 @property (nonatomic , strong)UILabel *announcementlbl;
 @property (nonatomic , strong)UIImageView *bottomIV;
 @property (nonatomic , strong)UIImageView *topIV;
+
+
 
 @end

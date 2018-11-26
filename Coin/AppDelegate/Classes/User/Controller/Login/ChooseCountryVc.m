@@ -244,9 +244,9 @@
         NSString *money ;
 
         if ([TLUser user].isLogin == NO) {
-            TLUserLoginVC *log = [TLUserLoginVC new];
+            TheInitialVC *log = [TheInitialVC new];
             TLNavigationController *na = [[TLNavigationController alloc] initWithRootViewController:log];
-            log.IsAPPJoin = YES;
+//            log.IsAPPJoin = YES;
             if ([model.interSimpleCode isEqualToString:@"CN"] ||[model.interSimpleCode isEqualToString:@"HK"] ||[model.interSimpleCode isEqualToString:@"TW"] || [model.interSimpleCode isEqualToString:@"MO"]) {
                 [LangSwitcher changLangType:LangTypeSimple];
                 money = @"CNY";

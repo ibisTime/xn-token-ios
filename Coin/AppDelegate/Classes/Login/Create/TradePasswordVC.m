@@ -24,6 +24,7 @@
     [self navigationTransparentClearColor];
 }
 
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -154,7 +155,6 @@
                 
             }
         }
-        
         
         
         [[NSUserDefaults standardUserDefaults]setObject:categoryArray forKey:MNEMONIC];

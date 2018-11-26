@@ -41,6 +41,10 @@
     [self.view addSubview:initialView];
     
     [self configData];
+    
+    
+    
+    
 }
 
 - (void)configData

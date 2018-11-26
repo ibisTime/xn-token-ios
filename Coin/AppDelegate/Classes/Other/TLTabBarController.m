@@ -123,76 +123,110 @@
 }
 
 #pragma mark 判断是否登录若没登录跳转到登录页面
-- (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(nonnull UIViewController *)viewController {
-    
-    //赋值更改前的index
-    self.currentIndex = tabBarController.selectedIndex;
+//- (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(nonnull UIViewController *)viewController {
+//
+//    //赋值更改前的index
+//    self.currentIndex = tabBarController.selectedIndex;
+//    return YES;
+//
+//}
+
+
+- (BOOL)tabBarController:(UITabBarController*)tabBarController shouldSelectViewController:(UIViewController*)viewController
+
+{
+    if (viewController ==self.viewControllers[2]) {
+        if([TLUser user].isLogin == NO) {
+            
+            [TLAlert alertWithTitle:[LangSwitcher switchLang:@"提示" key:nil] msg:[LangSwitcher switchLang:@"您还未登录，是否前去登录" key:nil] confirmMsg:[LangSwitcher switchLang:@"确认" key:nil] cancleMsg:[LangSwitcher switchLang:@"取消" key:nil] cancle:^(UIAlertAction *action) {
+                
+            } confirm:^(UIAlertAction *action) {
+                TheInitialVC *vc = [[TheInitialVC alloc]init];
+                UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+                UIViewController *rootViewController = [[[UIApplication sharedApplication] keyWindow] rootViewController];
+                [rootViewController presentViewController:nav animated:YES completion:nil];
+            }];
+            
+            
+            return NO;
+        }else
+        {
+            return YES;
+        }
+    }
     return YES;
     
+    
 }
 
-- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
-    
-    CoinWeakSelf;
-    
-    NSInteger idx = tabBarController.selectedIndex;
-    
-    if ([AppConfig config].isUploadCheck) {
-        
+
+//- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
+//
+//    CoinWeakSelf;
+//
+//    NSInteger idx = tabBarController.selectedIndex;
+//
+//    if ([AppConfig config].isUploadCheck) {
+//
+//
+//
+//
+//
+//
+////        //判断点击的Controller是不是需要登录，如果是，那就登录
+////        if((idx == 0) && ![TLUser user].isLogin) {
+////
+////            TLUserLoginVC *loginVC = [TLUserLoginVC new];
+////
+////            loginVC.loginSuccess = ^{
+////
+////                weakSelf.selectedIndex = idx;
+////
+////            };
+////
+////            TLNavigationController *nav = [[TLNavigationController alloc] initWithRootViewController:loginVC];
+////            [self presentViewController:nav animated:YES completion:nil];
+////            self.selectedIndex = idx;
+////
+////        }
+//
+//    } else {
+//
 //        //判断点击的Controller是不是需要登录，如果是，那就登录
-        if((idx == 0) && ![TLUser user].isLogin) {
-
-            TLUserLoginVC *loginVC = [TLUserLoginVC new];
-
-            loginVC.loginSuccess = ^{
-
-                weakSelf.selectedIndex = idx;
-
-            };
-
-            TLNavigationController *nav = [[TLNavigationController alloc] initWithRootViewController:loginVC];
-            [self presentViewController:nav animated:YES completion:nil];
-            self.selectedIndex = idx;
-            
-        }
-        
-    } else {
-        
-        //判断点击的Controller是不是需要登录，如果是，那就登录
-//        if((idx == 1 || idx == 2) && ![TLUser user].isLogin) {
+////        if((idx == 1 || idx == 2) && ![TLUser user].isLogin) {
+////
+////            TLUserLoginVC *loginVC = [TLUserLoginVC new];
+////
+////            loginVC.loginSuccess = ^{
+////
+////                weakSelf.selectedIndex = idx;
+////
+////            };
+////
+////            TLNavigationController *nav = [[TLNavigationController alloc] initWithRootViewController:loginVC];
+////            [self presentViewController:nav animated:YES completion:nil];
 //
-//            TLUserLoginVC *loginVC = [TLUserLoginVC new];
+////        if((idx == 0) && ![TLUser user].isLogin) {
+////
+////            TLUserLoginVC *loginVC = [TLUserLoginVC new];
+////
+////            loginVC.loginSuccess = ^{
+////
+////                weakSelf.selectedIndex = idx;
+////
+////            };
+////
+////            TLNavigationController *nav = [[TLNavigationController alloc] initWithRootViewController:loginVC];
+////            [self presentViewController:nav animated:YES completion:nil];
+////            self.selectedIndex = idx;
+////
+////        }
 //
-//            loginVC.loginSuccess = ^{
+////        }
 //
-//                weakSelf.selectedIndex = idx;
+//    }
 //
-//            };
-//
-//            TLNavigationController *nav = [[TLNavigationController alloc] initWithRootViewController:loginVC];
-//            [self presentViewController:nav animated:YES completion:nil];
-        
-        if((idx == 0) && ![TLUser user].isLogin) {
-            
-            TLUserLoginVC *loginVC = [TLUserLoginVC new];
-            
-            loginVC.loginSuccess = ^{
-                
-                weakSelf.selectedIndex = idx;
-                
-            };
-            
-            TLNavigationController *nav = [[TLNavigationController alloc] initWithRootViewController:loginVC];
-            [self presentViewController:nav animated:YES completion:nil];
-            self.selectedIndex = idx;
-            
-        }
-            
-//        }
-        
-    }
-    
-}
+//}
 
 #pragma mark - IM
 //- (void)pushToChatViewControllerWith:(IMAUser *)user

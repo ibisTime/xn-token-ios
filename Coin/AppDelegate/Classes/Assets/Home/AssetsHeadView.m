@@ -9,6 +9,12 @@
 #import "AssetsHeadView.h"
 #define CardWidth (SCREEN_WIDTH - 40)/2.3
 @implementation AssetsHeadView
+{
+    UILabel *personalLbl;
+    UILabel *personalPriceLbl;
+    UILabel *privateLbl;
+    UILabel *privatePriceLbl;
+}
 
 -(instancetype)initWithFrame:(CGRect)frame
 {
@@ -83,6 +89,14 @@
     
     
     
+    privateLbl = [UILabel labelWithFrame:CGRectMake(46, 41, SCREEN_WIDTH - 46 - 60, 14) textAligment:(NSTextAlignmentLeft) backgroundColor:kClearColor font:FONT(14) textColor:kWhiteColor];
+    [bottomIV addSubview:privateLbl];
+    
+    privatePriceLbl = [UILabel labelWithFrame:CGRectMake(46, 65, SCREEN_WIDTH - 46 - 60, 30) textAligment:(NSTextAlignmentLeft) backgroundColor:kClearColor font:HGboldfont(18) textColor:kWhiteColor];
+    [bottomIV addSubview:privatePriceLbl];
+    
+    
+    
     UIImageView *topIV = [[UIImageView alloc] initWithFrame:CGRectMake(12, 61, SCREEN_WIDTH - 40, CardWidth)];
     topIV.image = kImage(@"个人钱包背景");
     topIV.contentMode = UIViewContentModeScaleToFill;
@@ -97,6 +111,15 @@
     righttopSwipe.direction = UISwipeGestureRecognizerDirectionRight;
     [topIV addGestureRecognizer:righttopSwipe];
     topIV.userInteractionEnabled = YES;
+    
+    
+    
+    personalLbl = [UILabel labelWithFrame:CGRectMake(46, 41, SCREEN_WIDTH - 46 - 60, 14) textAligment:(NSTextAlignmentLeft) backgroundColor:kClearColor font:FONT(14) textColor:kWhiteColor];
+    [topIV addSubview:personalLbl];
+    
+    personalPriceLbl = [UILabel labelWithFrame:CGRectMake(46, 65, SCREEN_WIDTH - 46 - 60, 30) textAligment:(NSTextAlignmentLeft) backgroundColor:kClearColor font:HGboldfont(18) textColor:kWhiteColor];
+    [topIV addSubview:personalPriceLbl];
+    
     
     NSArray *array = @[@"通讯录",@"转账(1)",@"快速登录"];
     for (int i = 0; i < 3; i ++) {
@@ -117,6 +140,77 @@
     addButton.tag = 104;
     [self addSubview:addButton];
     
+    
+    NSString *cnyStr;
+    if ([[TLUser user].localMoney isEqualToString:@"USD"]) {
+        
+        personalLbl.text = [NSString stringWithFormat:@"%@(USD)", [LangSwitcher switchLang:@"个人账户" key:nil]];
+        privateLbl.text = [NSString stringWithFormat:@"%@(USD)", [LangSwitcher switchLang:@"私钥账户" key:nil]];
+        cnyStr = @"$ 0.00";
+    } else if ([[TLUser user].localMoney isEqualToString:@"KRW"])
+    {
+        personalLbl.text = [NSString stringWithFormat:@"%@(KRW)", [LangSwitcher switchLang:@"个人账户" key:nil]];
+        privateLbl.text = [NSString stringWithFormat:@"%@(KRW)", [LangSwitcher switchLang:@"私钥账户" key:nil]];
+        cnyStr = @"₩ 0.00";
+    }
+    else{
+        personalLbl.text = [NSString stringWithFormat:@"%@(CNY)", [LangSwitcher switchLang:@"个人账户" key:nil]];
+        privateLbl.text = [NSString stringWithFormat:@"%@(CNY)", [LangSwitcher switchLang:@"私钥账户" key:nil]];
+        cnyStr = @"¥ 0.00";
+    }
+    
+    
+    
+    [self setNSMutableAttributedStringLbl:personalPriceLbl setText:cnyStr];
+    [self setNSMutableAttributedStringLbl:privatePriceLbl setText:cnyStr];
+    
+    
+}
+
+
+-(void)setNSMutableAttributedStringLbl:(UILabel *)label setText:(NSString *)text
+{
+    NSArray *strarray = [text componentsSeparatedByString:@"."];
+    
+    
+    NSMutableAttributedString *fontAttributeNameStr = [[NSMutableAttributedString alloc]initWithString:text];
+    // 2.添加属性
+    
+    if ([text containsString:@"."]) {
+        if (strarray.count > 1) {
+            NSString *XS = strarray[1];
+            [fontAttributeNameStr addAttribute:NSFontAttributeName value:HGboldfont(30) range:NSMakeRange(0, text.length - XS.length - 1)];
+        }else
+        {
+            [fontAttributeNameStr addAttribute:NSFontAttributeName value:HGboldfont(30) range:NSMakeRange(0, text.length)];
+        }
+        
+    }else
+    {
+        [fontAttributeNameStr addAttribute:NSFontAttributeName value:HGboldfont(30) range:NSMakeRange(0, text.length)];
+    }
+    label.attributedText = fontAttributeNameStr;
+}
+
+
+-(void)setDataDic:(NSDictionary *)dataDic
+{
+    NSString *cnyStr;
+    if ([[TLUser user].localMoney isEqualToString:@"USD"]) {
+        cnyStr = [NSString stringWithFormat:@"$ %.2f", [[dataDic[@"totalAmountUSD"] convertToSimpleRealMoney] doubleValue]];
+        
+        personalPriceLbl.text = [NSString stringWithFormat:@"$ %.2f", [cnyStr doubleValue]];
+        
+    } else if ([[TLUser user].localMoney isEqualToString:@"KRW"])
+    {
+        cnyStr = [NSString stringWithFormat:@"₩ %.2f", [[dataDic[@"totalAmountKRW"] convertToSimpleRealMoney] doubleValue]];
+    }
+    
+    else{
+        cnyStr = [NSString stringWithFormat:@"¥ %.2f", [[dataDic[@"totalAmountCNY"] convertToSimpleRealMoney] doubleValue]];
+    }
+    [self setNSMutableAttributedStringLbl:personalPriceLbl setText:cnyStr];
+
 }
 
 

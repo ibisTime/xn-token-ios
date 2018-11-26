@@ -182,14 +182,14 @@
     accounrModel.text = [LangSwitcher switchLang:@"本地货币" key:nil];
     accounrModel.imgName = @"本地货币";
     accounrModel.action = ^{
-        if (![TLUser user].isLogin) {
-            TLUserLoginVC *loginVC= [TLUserLoginVC new];
-            [weakSelf.navigationController pushViewController:loginVC animated:YES];
-            loginVC.loginSuccess = ^{
-                
-            };
-            return ;
-        }
+//        if (![TLUser user].isLogin) {
+//            TheInitialVC *loginVC= [TheInitialVC new];
+//            [weakSelf.navigationController pushViewController:loginVC animated:YES];
+////            loginVC.loginSuccess = ^{
+////
+////            };
+//            return ;
+//        }
         ChangeLocalMoneyVC *moneyVC= [[ChangeLocalMoneyVC alloc] init];
         [weakSelf.navigationController pushViewController:moneyVC animated:YES];
 
@@ -200,14 +200,14 @@
     settingModel.text = [LangSwitcher switchLang:@"账户与安全" key:nil];
     settingModel.imgName = @"账户与安全";
     settingModel.action = ^{
-        if (![TLUser user].isLogin) {
-            TLUserLoginVC *loginVC= [TLUserLoginVC new];
-            [weakSelf.navigationController pushViewController:loginVC animated:YES];
-            loginVC.loginSuccess = ^{
-                
-            };
-            return ;
-        }
+//        if (![TLUser user].isLogin) {
+//            TheInitialVC *loginVC= [TheInitialVC new];
+//            [weakSelf.navigationController pushViewController:loginVC animated:YES];
+////            loginVC.loginSuccess = ^{
+////
+////            };
+//            return ;
+//        }
         SettingVC *settingVC = [SettingVC new];
 
         [weakSelf.navigationController pushViewController:settingVC animated:YES];
@@ -218,14 +218,14 @@
     inviteModel.text = [LangSwitcher switchLang:@"邀请有礼" key:nil];
     inviteModel.imgName = @"邀请有礼";
     inviteModel.action = ^{
-        if (![TLUser user].isLogin) {
-            TLUserLoginVC *loginVC= [TLUserLoginVC new];
-            [weakSelf.navigationController pushViewController:loginVC animated:YES];
-            loginVC.loginSuccess = ^{
-                
-            };
-            return ;
-        }
+//        if (![TLUser user].isLogin) {
+//            TheInitialVC *loginVC= [TheInitialVC new];
+//            [weakSelf.navigationController pushViewController:loginVC animated:YES];
+////            loginVC.loginSuccess = ^{
+////
+////            };
+//            return ;
+//        }
         TLinviteVC *settingVC = [TLinviteVC new];
         
         [weakSelf.navigationController pushViewController:settingVC animated:YES];
@@ -257,14 +257,14 @@
     securityCenter.text = [LangSwitcher switchLang:@"钱包工具" key:nil];
     securityCenter.imgName = @"钱包工具";
     securityCenter.action = ^{
-        if (![TLUser user].isLogin) {
-            TLUserLoginVC *loginVC= [TLUserLoginVC new];
-            [weakSelf.navigationController pushViewController:loginVC animated:YES];
-            loginVC.loginSuccess = ^{
-                
-            };
-            return ;
-        }
+//        if (![TLUser user].isLogin) {
+//            TLUserLoginVC *loginVC= [TLUserLoginVC new];
+//            [weakSelf.navigationController pushViewController:loginVC animated:YES];
+//            loginVC.loginSuccess = ^{
+//
+//            };
+//            return ;
+//        }
         
         TLDataBase *dataBase = [TLDataBase sharedManager];
         NSString *word;
@@ -299,14 +299,14 @@
     languageSetting.text = [LangSwitcher switchLang:@"加入社群" key:nil];
     languageSetting.imgName = @"加入社群";
     languageSetting.action = ^{
-        if (![TLUser user].isLogin) {
-            TLUserLoginVC *loginVC= [TLUserLoginVC new];
-            [weakSelf.navigationController pushViewController:loginVC animated:YES];
-            loginVC.loginSuccess = ^{
-                
-            };
-            return ;
-        }
+//        if (![TLUser user].isLogin) {
+//            TLUserLoginVC *loginVC= [TLUserLoginVC new];
+//            [weakSelf.navigationController pushViewController:loginVC animated:YES];
+//            loginVC.loginSuccess = ^{
+//
+//            };
+//            return ;
+//        }
         JoinMineVc *vc = [[JoinMineVc alloc] init];
         [weakSelf.navigationController pushViewController:vc animated:YES];
         
@@ -330,14 +330,14 @@
     helpModel.text = [LangSwitcher switchLang:@"帮助中心" key:nil];
     helpModel.imgName = @"帮助中心-1";
     helpModel.action = ^{
-        if (![TLUser user].isLogin) {
-            TLUserLoginVC *loginVC= [TLUserLoginVC new];
-            [weakSelf.navigationController pushViewController:loginVC animated:YES];
-            loginVC.loginSuccess = ^{
-                
-            };
-            return ;
-        }
+//        if (![TLUser user].isLogin) {
+//            TLUserLoginVC *loginVC= [TLUserLoginVC new];
+//            [weakSelf.navigationController pushViewController:loginVC animated:YES];
+//            loginVC.loginSuccess = ^{
+//
+//            };
+//            return ;
+//        }
         [ZDKZendesk initializeWithAppId: @"71d2ca9aba0cccc12deebfbdd352fbae8c53cd8999dd10bc"
                                clientId: @"mobile_sdk_client_7af3526c83d0c1999bc3"
                              zendeskUrl: @"https://thachainhelp.zendesk.com"];
@@ -541,8 +541,13 @@
     UITapGestureRecognizer *ta = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(changeNickName)];
     [self.headerView.nameLbl addGestureRecognizer:ta];
     
-    self.headerView.mobileLbl.text = [NSString stringWithFormat:@"+%@ %@",[[TLUser user].interCode substringFromIndex:2], [[TLUser user].mobile stringByReplacingCharactersInRange:rang withString:@"****"]];
-   ;
+    if ([TLUser isBlankString:[TLUser user].mobile] == NO) {
+        self.headerView.mobileLbl.text = [NSString stringWithFormat:@"+%@ %@",[[TLUser user].interCode substringFromIndex:2], [[TLUser user].mobile stringByReplacingCharactersInRange:rang withString:@"****"]];
+    }else
+    {
+        self.headerView.mobileLbl.text = [NSString stringWithFormat:@"%@", [[TLUser user].email stringByReplacingCharactersInRange:rang withString:@"****"]];
+    }
+
 
     
     self.headerView.levelBtn.hidden = [[TLUser user].level isEqualToString:kLevelOrdinaryTraders] ? YES : NO;
@@ -577,14 +582,14 @@
 }
 
 - (void)changeHeadIcon {
-    if (![TLUser user].isLogin) {
-        TLUserLoginVC *loginVC= [TLUserLoginVC new];
-        [self.navigationController pushViewController:loginVC animated:YES];
-        loginVC.loginSuccess = ^{
-            
-        };
-        return ;
-    }
+//    if (![TLUser user].isLogin) {
+//        TLUserLoginVC *loginVC= [TLUserLoginVC new];
+//        [self.navigationController pushViewController:loginVC animated:YES];
+//        loginVC.loginSuccess = ^{
+//            
+//        };
+//        return ;
+//    }
     [self.imagePicker picker];
 }
 

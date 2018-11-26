@@ -236,8 +236,15 @@
     switch (sender.tag - 100) {
         case 0:
         {
+            
             if ([_phoneTextFid.text isEqualToString:@""]) {
-                [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入正确的手机号" key:nil]];
+                if (isSelectBtn.tag == 100) {
+                    [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入正确的手机号" key:nil]];
+                }else
+                {
+                    [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入正确的邮箱账号" key:nil]];
+                }
+                
                 return;
             }
             if ([_codeTextFid.text isEqualToString:@""]) {
@@ -248,15 +255,22 @@
             http.showView = self.view;
             NSData *data   =  [[NSUserDefaults standardUserDefaults] objectForKey:@"chooseModel"];
             CountryModel *model = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-            http.code = USER_LOGIN_CODE;
-            http.parameters[@"countryCode"] = model.code;
-            http.parameters[@"loginName"] = self.phoneTextFid.text;
+            http.code = @"805051";
+//            http.parameters[@"countryCode"] = model.code;
+            if (isSelectBtn.tag == 100) {
+                http.parameters[@"loginName"] = [NSString stringWithFormat:@"%@%@",model.code,self.phoneTextFid.text];
+            }else
+            {
+                http.parameters[@"loginName"] = self.phoneTextFid.text;
+            }
+            
             http.parameters[@"loginPwd"] = self.codeTextFid.text;
             http.parameters[@"kind"] = APP_KIND;
             http.parameters[@"client"] = @"ios";
             
             [http postWithSuccess:^(id responseObject) {
-                NSLog(@"%@",responseObject[@"data"][@"userId"]);
+                NSLog(@"========== %@",responseObject[@"data"]);
+                
                 [self requesUserInfoWithResponseObject:responseObject];
                 [MobClick profileSignInWithPUID:responseObject[@"data"][@"userId"]];
             } failure:^(NSError *error) {
@@ -272,7 +286,7 @@
             break;
         case 2:
         {
-            
+
             ForgotPasswordVC *vc = [ForgotPasswordVC new];
             [self.navigationController pushViewController:vc animated:YES];
         }
@@ -287,7 +301,8 @@
     
     NSString *token = responseObject[@"data"][@"token"];
     NSString *userId = responseObject[@"data"][@"userId"];
-    
+    [TLUser user].userId = userId;
+    [TLUser user].token = token;
     //保存用户账号和密码
     //    [[TLUser user] saveUserName:self.phoneTf.text pwd:self.pwdTf.text];
     

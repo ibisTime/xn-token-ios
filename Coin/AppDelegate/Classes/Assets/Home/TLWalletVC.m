@@ -42,6 +42,7 @@
 #import "WalletForwordVC.h"
 
 #import "AssetsHeadView.h"
+#import "TradePasswordVC.h"
 
 @interface TLWalletVC ()<RefreshDelegate,AssetsHeadViewDelegate>
 
@@ -115,6 +116,24 @@
         self.homeView = [[BuildLocalHomeView alloc] initWithFrame:CGRectMake(0, (SCREEN_WIDTH - 40)/2.3 + 61 + 12 + 11 + 30 , SCREEN_WIDTH, 340)];
         self.homeView.hidden = YES;
         [self.headView addSubview:self.homeView];
+        
+        CoinWeakSelf;
+        self.homeView.buildBlock = ^{
+
+            TradePasswordVC *vc = [[TradePasswordVC alloc]init];
+            vc.state = @"1";
+            [weakSelf.navigationController pushViewController:vc animated:YES];
+            
+        };
+        
+        self.homeView.importBlock = ^{
+            TradePasswordVC *vc = [[TradePasswordVC alloc]init];
+            vc.state = @"2";
+            [weakSelf.navigationController pushViewController:vc animated:YES];
+        };
+            
+        
+        
     }
     return _headView;
 }
@@ -210,6 +229,7 @@
 - (void)viewWillAppear:(BOOL)animated {
   
     [super viewWillAppear:animated];
+    [self navigationSetDefault];
     [self.navigationController setNavigationBarHidden:YES animated:animated];
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
 }
@@ -936,12 +956,12 @@
             //    获取公告列表
             [weakSelf requestRateList];
             //    获取本地存储私钥钱包
-            [weakSelf saveLocalWalletData];
+//            [weakSelf saveLocalWalletData];
             //   监测是否需要更新新币种
             //            [weakSelf saveLocalWallet];
-            //   个人钱包余额查询
+            //   个人钱包
             [weakSelf queryCenterTotalAmount];
-            //   获取私钥钱包
+            //   私钥钱包
             [weakSelf queryTotalAllAmount];
             
             
@@ -966,12 +986,18 @@
     
     [http postWithSuccess:^(id responseObject) {
         
-        
+//        NSArray <CurrencyModel *>*models;
         if ([self.isWallet isEqualToString:@"个人钱包"]) {
+            
             weakSelf.tableView.platforms = [CurrencyModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"][@"accountList"]];
             weakSelf.AssetsListModel = [CurrencyModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"][@"accountList"]];
-            
             [weakSelf.tableView reloadData];
+            [TableViewAnimationKit showWithAnimationType:2 tableView:self.tableView];
+//            if (models.count == 0) {
+//                ;
+//            }
+//            models = weakSelf.AssetsListModel;
+            
         }
         
         [weakSelf.tableView endRefreshHeader];
@@ -1037,56 +1063,55 @@
 }
 
 
-- (void)saveLocalWalletData
-{
-//    if (self.coins.count > 0) {
-//        return;
-//    }
-    NSMutableArray *arr = [[CoinModel coin] getOpenCoinList];
-    NSMutableArray *temp = arr.mutableCopy;
-    TLDataBase *db = [TLDataBase sharedManager];
-    for (int i = 0; i < temp.count; i++) {
-        NSString *symbol;
-
-        CoinModel *model = temp[i];
-//        symbol = model.symbol;
+//- (void)saveLocalWalletData{
+////    if (self.coins.count > 0) {
+////        return;
+////    }
+//    NSMutableArray *arr = [[CoinModel coin] getOpenCoinList];
+//    NSMutableArray *temp = arr.mutableCopy;
+//    TLDataBase *db = [TLDataBase sharedManager];
+//    for (int i = 0; i < temp.count; i++) {
+//        NSString *symbol;
 //
-        if ([model.type isEqualToString:@"0"]) {
-            if ([model.symbol isEqualToString:@"BTC"] || [model.symbol isEqualToString:@"USDT"]) {
-                symbol = @"btc";
-            }
-            if ([model.symbol isEqualToString:@"ETH"]) {
-                symbol = @"eth";
-            }
-            if ([model.symbol isEqualToString:@"WAN"]) {
-                symbol = @"wan";
-            }
-        }else if ([model.type isEqualToString:@"1"])
-        {
-            
-            symbol = @"eth";
-        }
-        else
-        {
-            symbol = @"wan";
-        }
-   
-    if ([db.dataBase open]) {
-        
-        NSString *sql = [NSString stringWithFormat:@"SELECT %@address,walletId from THAUser where userId = '%@'",symbol,[TLUser user].userId];
-        FMResultSet *set =  [db.dataBase executeQuery:sql];
-        
-        while ([set next]) {
-        CoinModel *coin  = arr[i];
-        coin.address = [set stringForColumn:[NSString stringWithFormat:@"%@address",symbol]];
-        coin.walletId = [NSString stringWithFormat:@"%d",[set intForColumn:@"walletId"]];
-        }
-        [set close];
-    }
-    [db.dataBase close];
-    }
-    self.coins = arr;
-}
+//        CoinModel *model = temp[i];
+////        symbol = model.symbol;
+////
+//        if ([model.type isEqualToString:@"0"]) {
+//            if ([model.symbol isEqualToString:@"BTC"] || [model.symbol isEqualToString:@"USDT"]) {
+//                symbol = @"btc";
+//            }
+//            if ([model.symbol isEqualToString:@"ETH"]) {
+//                symbol = @"eth";
+//            }
+//            if ([model.symbol isEqualToString:@"WAN"]) {
+//                symbol = @"wan";
+//            }
+//        }else if ([model.type isEqualToString:@"1"])
+//        {
+//
+//            symbol = @"eth";
+//        }
+//        else
+//        {
+//            symbol = @"wan";
+//        }
+//
+//    if ([db.dataBase open]) {
+//
+//        NSString *sql = [NSString stringWithFormat:@"SELECT %@address,walletId from THAUser where userId = '%@'",symbol,[TLUser user].userId];
+//        FMResultSet *set =  [db.dataBase executeQuery:sql];
+//
+//        while ([set next]) {
+//        CoinModel *coin  = arr[i];
+//        coin.address = [set stringForColumn:[NSString stringWithFormat:@"%@address",symbol]];
+//        coin.walletId = [NSString stringWithFormat:@"%d",[set intForColumn:@"walletId"]];
+//        }
+//        [set close];
+//    }
+//    [db.dataBase close];
+//    }
+//    self.coins = arr;
+//}
 
 //- (void)loadSum{
 //    if ([[TLUser user].localMoney isEqualToString:@"USD"]) {
@@ -1134,7 +1159,7 @@
     
     [http postWithSuccess:^(id responseObject) {
         self.currencys = [CurrencyModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"][@"accountList"]];
-        
+        self.headView.dataDic = responseObject[@"data"];
 //        if ([[TLUser user].localMoney isEqualToString:@"USD"]) {
 //            NSString *cnyStr = [responseObject[@"data"][@"totalAmountUSD"] convertToSimpleRealMoney];
 //            if (![self.IsLocalExsit isEqualToString:@"1"]) {
@@ -1196,36 +1221,37 @@
     http.code = @"802270";
     http.isLocal = YES;
     http.isUploadToken = NO;
-    TLDataBase *dataBase = [TLDataBase sharedManager];
-    NSString *symbol;
-    NSString *address;
-    NSMutableArray *arr = [NSMutableArray array];
-    if ([dataBase.dataBase open]) {
-        NSString *sql = [NSString stringWithFormat:@"SELECT symbol,address from THALocal lo, THAUser th where lo.walletId = th.walletId  and th.userId = '%@'",[TLUser user].userId];
-        //        [sql appendString:[TLUser user].userId];
-        FMResultSet *set = [dataBase.dataBase executeQuery:sql];
-        while ([set next])
-        {
-            NSMutableDictionary *dic = [NSMutableDictionary dictionary];
-            
-            symbol = [set stringForColumn:@"symbol"];
-            address = [set stringForColumn:@"address"];
-            
-            if (!address) {
-                [dic setObject:@"" forKey:@"address"];
-                
-            }else{
-                [dic setObject:address forKey:@"address"];
-            }
-            [dic setObject:symbol forKey:@"symbol"];
-            [arr addObject:dic];
-        }
-        [set close];
-    }
-    [dataBase.dataBase close];
+//    TLDataBase *dataBase = [TLDataBase sharedManager];
+//    NSString *symbol;
+//    NSString *address;
+//    NSMutableArray *arr = [NSMutableArray array];
+//    if ([dataBase.dataBase open]) {
+//        NSString *sql = [NSString stringWithFormat:@"SELECT symbol,address from THALocal lo, THAUser th where lo.walletId = th.walletId  and th.userId = '%@'",[TLUser user].userId];
+//        //        [sql appendString:[TLUser user].userId];
+//        FMResultSet *set = [dataBase.dataBase executeQuery:sql];
+//        while ([set next])
+//        {
+//            NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+//
+//            symbol = [set stringForColumn:@"symbol"];
+//            address = [set stringForColumn:@"address"];
+//
+//            if (!address) {
+//                [dic setObject:@"" forKey:@"address"];
+//
+//            }else{
+//                [dic setObject:address forKey:@"address"];
+//            }
+//            [dic setObject:symbol forKey:@"symbol"];
+//            [arr addObject:dic];
+//        }
+//        [set close];
+//    }
+//    [dataBase.dataBase close];
     
-    NSSet *set = [NSSet setWithArray:arr];
-    NSArray *resultArray = [set allObjects];
+//    NSSet *set = [NSSet setWithArray:arr];
+//    NSArray *resultArray = [set allObjects];
+    NSArray *resultArray;
     http.parameters[@"accountList"] = resultArray;
     CoinWeakSelf;
     

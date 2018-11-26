@@ -10,6 +10,6 @@
 
 @interface TradePasswordVC : TLBaseVC
 
-@property (nonatomic , strong)NSString *state;
+@property (nonatomic , copy)NSString *state;
 
 @end

@@ -18,11 +18,20 @@
 }
 
 @property (nonatomic , strong)UIScrollView *scrollView;
+//+86
+@property (nonatomic , strong)UIButton *phoneAreaCodeBtn;
 @property (nonatomic , strong)UITextField *phoneTextFid;
 @property (nonatomic , strong)UITextField *codeTextFid;
 @property (nonatomic , strong)UIButton *codeBtn;
+//密码  确认密码
 @property (nonatomic , strong)UITextField *passFid;
 @property (nonatomic , strong)UITextField *conPassFid;
+
+//资金密码   确认资金密码
+@property (nonatomic , strong)UITextField *moneyFid;
+@property (nonatomic , strong)UITextField *conMoneyFid;
+
+
 @property (nonatomic , strong)UILabel *levelStateLbl;
 @end
 
@@ -63,13 +72,40 @@
     sender.selected = !sender.selected;
     isSelectBtn.selected = !isSelectBtn.selected;
     isSelectBtn = sender;
-}
-
-#pragma mark -- 完成注册
--(void)completeTheRegistration
-{
-    CompleteTheRegistrationVC *vc = [CompleteTheRegistrationVC new];
-    [self.navigationController pushViewController:vc animated:YES];
+    
+    if (sender.tag == 100) {
+        NSData *data   =  [[NSUserDefaults standardUserDefaults] objectForKey:@"chooseModel"];
+        CountryModel *model = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        [_phoneAreaCodeBtn setTitle:[NSString stringWithFormat:@"+%@",[model.interCode substringFromIndex:2]] forState:(UIControlStateNormal)];
+        [_phoneAreaCodeBtn sizeToFit];
+        _phoneAreaCodeBtn.frame = CGRectMake(46, registerLineView.yy + 50, _phoneAreaCodeBtn.frame.size.width + 6.5, 15);
+        [_phoneAreaCodeBtn setImage:kImage(@"矩形4") forState:(UIControlStateNormal)];
+        CGFloat imageW = _phoneAreaCodeBtn.imageView.image.size.width;
+        CGFloat titleW = _phoneAreaCodeBtn.titleLabel.frame.size.width;
+        CGFloat imageOffset = titleW + 0.5 * 3;
+        CGFloat titleOffset = imageW + 0.5 * 3;
+        _phoneAreaCodeBtn.imageEdgeInsets = UIEdgeInsetsMake(6.5, imageOffset, 0, - imageOffset);
+        _phoneAreaCodeBtn.titleEdgeInsets = UIEdgeInsetsMake(0, - titleOffset, 0, titleOffset);
+        _phoneTextFid.frame = CGRectMake(_phoneAreaCodeBtn.xx + 15, registerLineView.yy + 50, SCREEN_WIDTH - _phoneAreaCodeBtn.xx - 60, 15);
+        _phoneTextFid.placeholder = [LangSwitcher switchLang:@"请输入您的手机号码" key:nil];
+        
+    }else
+    {
+        
+        [_phoneAreaCodeBtn setTitle:[LangSwitcher switchLang:@"邮箱" key:nil] forState:(UIControlStateNormal)];
+        [_phoneAreaCodeBtn sizeToFit];
+        
+        [_phoneAreaCodeBtn setImage:kImage(@"") forState:(UIControlStateNormal)];
+        _phoneAreaCodeBtn.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 0);
+        _phoneAreaCodeBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 0);
+        _phoneAreaCodeBtn.frame = CGRectMake(46, registerLineView.yy + 50, _phoneAreaCodeBtn.width, 15);
+        
+        _phoneTextFid.frame = CGRectMake(_phoneAreaCodeBtn.xx + 10, registerLineView.yy + 50, SCREEN_WIDTH - _phoneAreaCodeBtn.xx - 60, 15);
+        _phoneTextFid.placeholder = [LangSwitcher switchLang:@"请输入您的邮箱账号" key:nil];
+    }
+    
+    
+    
 }
 
 #pragma mark -- scrollView代理方法
@@ -100,6 +136,16 @@
     NSLog(@"%.2f",scrollView.contentOffset.x);
     NSLog(@"%ld",w);
     
+    //禁止左划
+    static float newx = 0;
+    static float oldx = 0;
+    newx= scrollView.contentOffset.x ;
+    if (newx > oldx) {
+        scrollView.scrollEnabled = NO;
+        scrollView.scrollEnabled = YES;
+   }
+   oldx = newx;
+
 }
 
 #pragma mark -- 下一步
@@ -121,8 +167,7 @@
             [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入验证码" key:nil]];
             return;
         }
-        w ++;
-        [self.scrollView setContentOffset:CGPointMake(SCREEN_WIDTH * w, 0) animated:YES];
+        [self.scrollView setContentOffset:CGPointMake(SCREEN_WIDTH, 0) animated:YES];
     }
     if (w == 1) {
         if (![_passFid.text isPhoneNum]) {
@@ -130,10 +175,35 @@
             return;
         }
         if (![_conPassFid.text isPhoneNum]) {
-            [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入确认账号登录密码" key:nil]];
+            [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请确认账号登录密码" key:nil]];
             return;
         }
+        
         if (![_passFid.text isEqualToString:_conPassFid.text]) {
+            [TLAlert alertWithInfo:[LangSwitcher switchLang:@"密码不一致" key:nil]];
+            return;
+        }
+        if (_passFid.text.length < 8) {
+            [TLAlert alertWithInfo:[LangSwitcher switchLang:@"密码位数至少为8数" key:nil]];
+            return;
+        }
+        
+        [self.scrollView setContentOffset:CGPointMake(SCREEN_WIDTH * 2, 0) animated:YES];
+        [self.view endEditing:YES];
+        
+    }
+    
+    if (w == 2) {
+        
+        if (![_moneyFid.text isPhoneNum]) {
+            [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入资金密码" key:nil]];
+            return;
+        }
+        if (![_conMoneyFid.text isPhoneNum]) {
+            [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请确认资金密码" key:nil]];
+            return;
+        }
+        if (![_moneyFid.text isEqualToString:_conMoneyFid.text]) {
             [TLAlert alertWithInfo:[LangSwitcher switchLang:@"密码不一致" key:nil]];
             return;
         }
@@ -141,15 +211,26 @@
         [self.view endEditing:YES];
         TLNetworking *http = [TLNetworking new];
         http.showView = self.view;
-        http.code = USER_REG_CODE;
-        http.parameters[@"mobile"] = self.phoneTextFid.text;
-        NSData *data   =  [[NSUserDefaults standardUserDefaults] objectForKey:@"chooseModel"];
-        CountryModel *model = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-        http.parameters[@"countryCode"] = model.code;
-        http.parameters[@"loginPwd"] = self.passFid.text;
+        if (isSelectBtn.tag == 100) {
+            http.code = @"805045";
+            http.parameters[@"mobile"] = self.phoneTextFid.text;
+            NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:@"chooseModel"];
+            CountryModel *model = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+            http.parameters[@"countryCode"] = model.code;
+        }else
+        {
+            http.code = @"805046";
+            http.parameters[@"email"] = self.phoneTextFid.text;
+        }
+        
+        
         http.parameters[@"smsCaptcha"] = self.codeTextFid.text;
+        http.parameters[@"loginPwd"] = self.passFid.text;
+        http.parameters[@"tradePwd"] = self.moneyFid.text;
+        
         http.parameters[@"kind"] = APP_KIND;
         http.parameters[@"client"] = @"ios";
+        
         [http postWithSuccess:^(id responseObject) {
             NSString *token = responseObject[@"data"][@"token"];
             NSString *userId = responseObject[@"data"][@"userId"];
@@ -162,26 +243,18 @@
             http.parameters[@"token"] = token;
             [http postWithSuccess:^(id responseObject) {
                 
-                [TLAlert alertWithSucces:[LangSwitcher switchLang:@"注册成功" key:nil]];
-                NSDictionary *userInfo = responseObject[@"data"];
-                [TLUser user].userId = userId;
-                [TLUser user].token = token;
+
+                CompleteTheRegistrationVC *vc = [CompleteTheRegistrationVC new];
+                [self.navigationController pushViewController:vc animated:YES];
                 
-                //保存信息
-                [[TLUser user] saveUserInfo:userInfo];
-                [[TLUser user] setUserInfoWithDict:userInfo];
-                w ++;
-                [self.scrollView setContentOffset:CGPointMake(SCREEN_WIDTH * w, 0) animated:YES];
                 
             } failure:^(NSError *error) {
-    
+                
             }];
         } failure:^(NSError *error) {
             
         }];
-    }
-    
-    if (w == 1) {
+        
         
     }
 }
@@ -286,29 +359,60 @@
             [TLAlert alertWithSucces:[LangSwitcher switchLang:@"验证失败" key:nil]];
         } else {
             NSLog(@"验证通过 %@", sessionId);
-            TLNetworking *http = [TLNetworking new];
-            http.showView = self.view;
-            http.code = CAPTCHA_CODE;
-            http.parameters[@"client"] = @"ios";
-            http.parameters[@"sessionId"] = sessionId;
-            http.parameters[@"bizType"] = USER_REG_CODE;
-            http.parameters[@"mobile"] = self.phoneTextFid.text;
-            NSData *data   =  [[NSUserDefaults standardUserDefaults] objectForKey:@"chooseModel"];
-            CountryModel *model = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-            http.parameters[@"interCode"] = model.interCode;
-            http.parameters[@"sessionId"] = sessionId;
             
-            [http postWithSuccess:^(id responseObject) {
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+
+            if (isSelectBtn.tag == 100) {
+                TLNetworking *http = [TLNetworking new];
+                http.showView = self.view;
+                http.code = CAPTCHA_CODE;
+                http.parameters[@"client"] = @"ios";
+                http.parameters[@"sessionId"] = sessionId;
+                http.parameters[@"bizType"] = USER_REG_CODE;
+                http.parameters[@"mobile"] = self.phoneTextFid.text;
+                NSData *data   =  [[NSUserDefaults standardUserDefaults] objectForKey:@"chooseModel"];
+                CountryModel *model = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+                http.parameters[@"interCode"] = model.interCode;
+                http.parameters[@"sessionId"] = sessionId;
                 
-                [TLAlert alertWithSucces:[LangSwitcher switchLang:@"验证码已发送,请注意查收" key:nil]];
-                [[UserModel user] phoneCode:self.codeBtn];
-//                [self.captchaView.captchaBtn begin];
+                [http postWithSuccess:^(id responseObject) {
+                    
+                    [TLAlert alertWithSucces:[LangSwitcher switchLang:@"验证码已发送,请注意查收" key:nil]];
+                    [[UserModel user] phoneCode:self.codeBtn];
+                    //                [MBProgressHUD hideHUDForView:self.view animated:YES];
+                } failure:^(NSError *error) {
+                    
+                    [TLAlert alertWithError:[LangSwitcher switchLang:@"发送失败,请检查手机号" key:nil]];
+                    //                [MBProgressHUD hideHUDForView:self.view animated:YES];
+                }];
+            }else
+            {
+                TLNetworking *http = [TLNetworking new];
+                http.showView = self.view;
+                http.code = @"805954";
+                //    http.parameters[@"companyCode"] = @"";
+                http.parameters[@"email"] = self.phoneTextFid.text;
+                http.parameters[@"bizType"] = @"805081";
+                http.parameters[@"client"] = @"ios";
+                http.parameters[@"sessionId"] = sessionId;
                 
-            } failure:^(NSError *error) {
-                
-                [TLAlert alertWithError:[LangSwitcher switchLang:@"发送失败,请检查手机号" key:nil]];
-                
-            }];
+                [http postWithSuccess:^(id responseObject) {
+                    //
+                    [TLAlert alertWithSucces:[LangSwitcher switchLang:@"验证码已发送,请注意查收" key:nil]];
+                    [[UserModel user] phoneCode:self.codeBtn];
+                    
+                } failure:^(NSError *error) {
+                    [TLAlert alertWithError:[LangSwitcher switchLang:@"发送失败,请检查手机号" key:nil]];
+                }];
+            }
+            
+            
+            
+            
+            
+            
+            
+            
             
         }
         [self.navigationController popViewControllerAnimated:YES];
@@ -389,27 +493,27 @@
         [self.scrollView addSubview:phoneAndEmailRegister];
     }
     
-    UIButton *phoneAreaCodeBtn = [UIButton buttonWithTitle:[NSString stringWithFormat:@"+%@",[model.interCode substringFromIndex:2]] titleColor:kWhiteColor backgroundColor:kClearColor titleFont:14];
+    _phoneAreaCodeBtn = [UIButton buttonWithTitle:[NSString stringWithFormat:@"+%@",[model.interCode substringFromIndex:2]] titleColor:kWhiteColor backgroundColor:kClearColor titleFont:14];
     
-    phoneAreaCodeBtn.frame = CGRectMake(46, registerLineView.yy + 50, 0, 15);
-    phoneAreaCodeBtn.titleLabel.font = HGboldfont(14);
-    [phoneAreaCodeBtn sizeToFit];
-    phoneAreaCodeBtn.frame = CGRectMake(46, registerLineView.yy + 50, phoneAreaCodeBtn.frame.size.width + 6.5, 15);
-    [phoneAreaCodeBtn setImage:kImage(@"矩形4") forState:(UIControlStateNormal)];
+    _phoneAreaCodeBtn.frame = CGRectMake(46, registerLineView.yy + 50, 0, 15);
+    _phoneAreaCodeBtn.titleLabel.font = HGboldfont(14);
+    [_phoneAreaCodeBtn sizeToFit];
+    _phoneAreaCodeBtn.frame = CGRectMake(46, registerLineView.yy + 50, _phoneAreaCodeBtn.frame.size.width + 6.5, 15);
+    [_phoneAreaCodeBtn setImage:kImage(@"矩形4") forState:(UIControlStateNormal)];
     
-    CGFloat imageW = phoneAreaCodeBtn.imageView.image.size.width;
-    CGFloat titleW = phoneAreaCodeBtn.titleLabel.frame.size.width;
+    CGFloat imageW = _phoneAreaCodeBtn.imageView.image.size.width;
+    CGFloat titleW = _phoneAreaCodeBtn.titleLabel.frame.size.width;
     CGFloat imageOffset = titleW + 0.5 * 3;
     CGFloat titleOffset = imageW + 0.5 * 3;
     
-    phoneAreaCodeBtn.imageEdgeInsets = UIEdgeInsetsMake(6.5, imageOffset, 0, - imageOffset);
-    phoneAreaCodeBtn.titleEdgeInsets = UIEdgeInsetsMake(0, - titleOffset, 0, titleOffset);
+    _phoneAreaCodeBtn.imageEdgeInsets = UIEdgeInsetsMake(6.5, imageOffset, 0, - imageOffset);
+    _phoneAreaCodeBtn.titleEdgeInsets = UIEdgeInsetsMake(0, - titleOffset, 0, titleOffset);
     
-    [phoneAreaCodeBtn addTarget:self action:@selector(phoneAreaCodeBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
+    [_phoneAreaCodeBtn addTarget:self action:@selector(phoneAreaCodeBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
     
-    [self.scrollView addSubview:phoneAreaCodeBtn];
+    [self.scrollView addSubview:_phoneAreaCodeBtn];
     
-    UITextField *phoneTextFid = [[UITextField alloc]initWithFrame:CGRectMake(phoneAreaCodeBtn.xx + 15, registerLineView.yy + 50, SCREEN_WIDTH - phoneAreaCodeBtn.xx - 60, 15)];
+    UITextField *phoneTextFid = [[UITextField alloc]initWithFrame:CGRectMake(_phoneAreaCodeBtn.xx + 15, registerLineView.yy + 50, SCREEN_WIDTH - _phoneAreaCodeBtn.xx - 60, 15)];
     phoneTextFid.placeholder = [LangSwitcher switchLang:@"请输入您的手机号码" key:nil];
     //    phoneTextFid.keyboardType = UIKeyboardTypeEmailAddress;
     [phoneTextFid setValue:FONT(12) forKeyPath:@"_placeholderLabel.font"];
@@ -586,7 +690,12 @@
         passWordFid.clearsOnBeginEditing = NO;
         passWordFid.clearButtonMode = UITextFieldViewModeWhileEditing;
         [passwordView addSubview:passWordFid];
-        
+        if (i == 0) {
+            self.moneyFid = passWordFid;
+        }else
+        {
+            self.conMoneyFid = passWordFid;
+        }
         
         UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(35, passWordFid.yy + 8.5, SCREEN_WIDTH - 70, 1)];
         lineView.backgroundColor = kLineColor;
@@ -601,7 +710,7 @@
     confirmBtn.frame = CGRectMake(50, bottomView.yy + 75, SCREEN_WIDTH - 100, 50);
     kViewRadius(confirmBtn, 10);
     [confirmBtn setBackgroundImage:kImage(@"矩形5-1") forState:(UIControlStateNormal)];
-    [confirmBtn addTarget:self action:@selector(completeTheRegistration) forControlEvents:(UIControlEventTouchUpInside)];
+    [confirmBtn addTarget:self action:@selector(nextBtn) forControlEvents:(UIControlEventTouchUpInside)];
     [passwordView addSubview:confirmBtn];
     
     
