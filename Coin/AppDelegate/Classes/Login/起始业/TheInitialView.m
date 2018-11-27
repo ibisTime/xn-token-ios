@@ -47,14 +47,8 @@ CATransform3D CATransform3DPerspect(CATransform3D t, CGPoint center, float disZ)
     return self;
 }
 
-
-
-
-
 -(void)initView
 {
-    
-    
     scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT + kStatusBarHeight)];
     scrollView.contentSize = CGSizeMake(SCREEN_WIDTH * 2, 0);
     scrollView.bounces = NO;
@@ -65,9 +59,15 @@ CATransform3D CATransform3DPerspect(CATransform3D t, CGPoint center, float disZ)
 //    scrollView.delaysContentTouches = NO;
     [self addSubview:scrollView];
     
-    backView =[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
-    backView.image = kImage(@"安全组");
+    backView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    backView.image = kImage(@"起始业背景");
     [scrollView addSubview:backView];
+    
+    UIImageView *iconImage = [[UIImageView alloc]initWithFrame:CGRectMake(20, SCREEN_HEIGHT/2 - ((SCREEN_WIDTH - 40)/670*720)/2, SCREEN_WIDTH - 40, (SCREEN_WIDTH - 40)/670*720)];
+    iconImage.image = kImage(@"安全组-1");
+    [backView addSubview:iconImage];
+    
+    
     
     UILabel *personalWalletLb = [UILabel labelWithFrame:CGRectMake(0, kNavigationBarHeight + 4.5, SCREEN_WIDTH, 30) textAligment:(NSTextAlignmentCenter) backgroundColor:kClearColor font:HGboldfont(18) textColor:kHexColor(@"#ffffff")];
     personalWalletLb.text = [LangSwitcher switchLang:@"个人钱包" key:nil];
@@ -98,8 +98,12 @@ CATransform3D CATransform3DPerspect(CATransform3D t, CGPoint center, float disZ)
     
     //    私钥
     backView1 =[[UIImageView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
-    backView1.image = kImage(@"安全组");
+    backView1.image = kImage(@"起始业背景");
     [scrollView addSubview:backView1];
+    
+    UIImageView *iconImage1 = [[UIImageView alloc]initWithFrame:CGRectMake(25, SCREEN_HEIGHT/2 - ((SCREEN_WIDTH - 50)/610*650)/2, SCREEN_WIDTH - 50, ((SCREEN_WIDTH - 50)/610*650))];
+    iconImage1.image = kImage(@"椭圆4");
+    [backView1 addSubview:iconImage1];
     
     UILabel *privateWalletLb = [UILabel labelWithFrame:CGRectMake(0, kNavigationBarHeight + 4.5, SCREEN_WIDTH, 30) textAligment:(NSTextAlignmentCenter) backgroundColor:kClearColor font:HGboldfont(18) textColor:kHexColor(@"#ffffff")];
     privateWalletLb.text = [LangSwitcher switchLang:@"私钥钱包" key:nil];

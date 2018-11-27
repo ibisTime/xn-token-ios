@@ -114,10 +114,11 @@
     }];
     UIImageView *phone = [[UIImageView alloc] init];
     phone.image = kImage(@"手机");
+    self.phone = phone;
     [titleView addSubview:phone];
     [phone mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.nameLbl.mas_left);
-        make.top.equalTo(@(kHeight(75)));
+        make.top.equalTo(@(75));
         make.width.equalTo(@10);
         make.height.equalTo(@14);
 
@@ -126,38 +127,40 @@
     self.mobileLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kHexColor(@"#666666") font:14.0];
     
     [titleView addSubview:self.mobileLbl];
-    [self.mobileLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.left.equalTo(phone.mas_right).offset(5);
-        make.top.equalTo(@(kHeight(75)));
-        make.height.equalTo(@14);
-
-    }];
+    [self.mobileLbl sizeToFit];
+    self.mobileLbl.frame = CGRectMake(86 + 5 + 30, 75, self.mobileLbl.width, 14);
+//    [self.mobileLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+//
+//        make.left.equalTo(phone.mas_right).offset(5);
+//        make.top.equalTo(@(kHeight(75)));
+//        make.height.equalTo(@14);
+//
+//    }];
 
     //用户等级
-    self.levelBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"代理人" key:nil]
-                                   titleColor:kWhiteColor
-                              backgroundColor:kClearColor
-                                    titleFont:10.0
-                                 cornerRadius:1.5];
-    
-    self.levelBtn.layer.borderWidth = 0.5;
-    self.levelBtn.layer.borderColor = kWhiteColor.CGColor;
-    [self.levelBtn setImage:kImage(@"代理人") forState:UIControlStateNormal];
-    [self.levelBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, 2, 0, 0)];
-    [self.levelBtn setImageEdgeInsets:UIEdgeInsetsMake(0, -4, 0, 0)];
-    [self addSubview:self.levelBtn];
-    
-    [self.levelBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.left.equalTo(self.nameLbl.mas_right).offset(5);
-        make.centerY.equalTo(self.nameLbl.mas_centerY);
-        make.height.equalTo(@15);
-        make.width.equalTo(@53);
-        
-    }];
-    
-    self.levelBtn.hidden = YES;
+//    self.levelBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"代理人" key:nil]
+//                                   titleColor:kWhiteColor
+//                              backgroundColor:kClearColor
+//                                    titleFont:10.0
+//                                 cornerRadius:1.5];
+//
+//    self.levelBtn.layer.borderWidth = 0.5;
+//    self.levelBtn.layer.borderColor = kWhiteColor.CGColor;
+//    [self.levelBtn setImage:kImage(@"代理人") forState:UIControlStateNormal];
+//    [self.levelBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, 2, 0, 0)];
+//    [self.levelBtn setImageEdgeInsets:UIEdgeInsetsMake(0, -4, 0, 0)];
+//    [self addSubview:self.levelBtn];
+//
+//    [self.levelBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+//
+//        make.left.equalTo(self.nameLbl.mas_right).offset(5);
+//        make.centerY.equalTo(self.nameLbl.mas_centerY);
+//        make.height.equalTo(@15);
+//        make.width.equalTo(@53);
+//
+//    }];
+//
+//    self.levelBtn.hidden = YES;
     
     //交易、好评跟信任
     //    self.dataLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kWhiteColor font:12.0];
@@ -190,59 +193,59 @@
 
 }
 
-- (void)initBuyAndSell {
-    
-    NSArray *textArr = @[[LangSwitcher switchLang:@"我要购买" key:nil],
-                         [LangSwitcher switchLang:@"我要出售" key:nil]];
-    
-    NSArray *imgArr = @[@"我要购买", @"我要出售"];
-    
-    CGFloat btnW = kScreenWidth/2.0;
-    
-    __block UIButton *lastBtn;
-    
-    [textArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        
-        UIButton *btn = [UIButton buttonWithTitle:textArr[idx] titleColor:kTextColor backgroundColor:kWhiteColor titleFont:13.0];
-        
-        [btn setImage:kImage(imgArr[idx]) forState:UIControlStateNormal];
-        
-        btn.tag = 1100 + idx;
-        
-        [btn addTarget:self action:@selector(clickButton:) forControlEvents:UIControlEventTouchUpInside];
-        
-        [self addSubview:btn];
-        [btn mas_makeConstraints:^(MASConstraintMaker *make) {
-            
-            make.top.equalTo(self.bgIV.mas_bottom);
-            make.left.equalTo(@(idx*btnW));
-            make.width.equalTo(@(btnW));
-            make.height.equalTo(@55);
-            
-        }];
-        
-        
-        [btn setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 0, -30)];
-        
-        lastBtn = btn;
-        
-    }];
-    
-    UIView *lineView = [[UIView alloc] init];
-    
-    lineView.backgroundColor = kLineColor;
-    
-    [self addSubview:lineView];
-    [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.centerX.equalTo(@0);
-        make.height.equalTo(@24);
-        make.width.equalTo(@0.5);
-        make.centerY.equalTo(lastBtn.mas_centerY);
-        
-    }];
-    
-}
+//- (void)initBuyAndSell {
+//
+//    NSArray *textArr = @[[LangSwitcher switchLang:@"我要购买" key:nil],
+//                         [LangSwitcher switchLang:@"我要出售" key:nil]];
+//
+//    NSArray *imgArr = @[@"我要购买", @"我要出售"];
+//
+//    CGFloat btnW = kScreenWidth/2.0;
+//
+//    __block UIButton *lastBtn;
+//
+//    [textArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+//
+//        UIButton *btn = [UIButton buttonWithTitle:textArr[idx] titleColor:kTextColor backgroundColor:kWhiteColor titleFont:13.0];
+//
+//        [btn setImage:kImage(imgArr[idx]) forState:UIControlStateNormal];
+//
+//        btn.tag = 1100 + idx;
+//
+//        [btn addTarget:self action:@selector(clickButton:) forControlEvents:UIControlEventTouchUpInside];
+//
+//        [self addSubview:btn];
+//        [btn mas_makeConstraints:^(MASConstraintMaker *make) {
+//
+//            make.top.equalTo(self.bgIV.mas_bottom);
+//            make.left.equalTo(@(idx*btnW));
+//            make.width.equalTo(@(btnW));
+//            make.height.equalTo(@55);
+//
+//        }];
+//
+//
+//        [btn setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 0, -30)];
+//
+//        lastBtn = btn;
+//
+//    }];
+//
+//    UIView *lineView = [[UIView alloc] init];
+//
+//    lineView.backgroundColor = kLineColor;
+//
+//    [self addSubview:lineView];
+//    [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+//
+//        make.centerX.equalTo(@0);
+//        make.height.equalTo(@24);
+//        make.width.equalTo(@0.5);
+//        make.centerY.equalTo(lastBtn.mas_centerY);
+//
+//    }];
+//
+//}
 
 #pragma mark - Events
 - (void)clickButton:(UIButton *)sender {

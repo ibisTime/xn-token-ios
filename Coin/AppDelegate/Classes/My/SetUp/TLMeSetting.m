@@ -7,14 +7,11 @@
 //
 
 #import "TLMeSetting.h"
-#import "IdAuthVC.h"
-#import "ZMAuthVC.h"
 #import "TLChangeMobileVC.h"
 #import "TLPwdRelatedVC.h"
 #import "TLUserForgetPwdVC.h"
 #import "HTMLStrVC.h"
 #import "TLTabBarController.h"
-#import "EditVC.h"
 #import "GoogleAuthVC.h"
 #import "CloseGoogleAuthVC.h"
 #import "ChangeLoginPwdVC.h"
@@ -72,7 +69,7 @@
     self.navigationController.navigationBar.shadowImage = [UIImage new];
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
     [self.tableView reloadData];
-    [self requestUserInfo];
+//    [self requestUserInfo];
 }
 
 
@@ -190,26 +187,26 @@
     
     
     //实名认证
-    SettingModel *idAuth = [SettingModel new];
-    idAuth.text = [LangSwitcher switchLang:@"实名认证" key:nil];
-    self.realNameSettingModel = idAuth;
-    [idAuth setAction:^{
-        
-        ZMAuthVC *authVC = [ZMAuthVC new];
-        authVC.title = [LangSwitcher switchLang:@"实名认证" key:nil];
-        authVC.success = ^{
-            
-            [TLAlert alertWithSucces:[LangSwitcher switchLang:@"实名认证成功" key:nil]];
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                
-                [weakSelf.navigationController popViewControllerAnimated:YES];
-                
-            });
-        };
-        
-        [weakSelf.navigationController pushViewController:authVC animated:YES];
-        
-    }];
+//    SettingModel *idAuth = [SettingModel new];
+//    idAuth.text = [LangSwitcher switchLang:@"实名认证" key:nil];
+//    self.realNameSettingModel = idAuth;
+//    [idAuth setAction:^{
+//        
+//        ZMAuthVC *authVC = [ZMAuthVC new];
+//        authVC.title = [LangSwitcher switchLang:@"实名认证" key:nil];
+//        authVC.success = ^{
+//            
+//            [TLAlert alertWithSucces:[LangSwitcher switchLang:@"实名认证成功" key:nil]];
+//            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//                
+//                [weakSelf.navigationController popViewControllerAnimated:YES];
+//                
+//            });
+//        };
+//        
+//        [weakSelf.navigationController pushViewController:authVC animated:YES];
+//        
+//    }];
     
     //绑定邮箱
     SettingModel *bindEmail = [SettingModel new];
@@ -290,13 +287,13 @@
     
     
     //语言设置
-    SettingModel *languageSetting = [SettingModel new];
-    languageSetting.text = [LangSwitcher switchLang:@"手势密码" key:nil];
-    [languageSetting setAction:^{
-        
-        
-        
-    }];
+//    SettingModel *languageSetting = [SettingModel new];
+//    languageSetting.text = [LangSwitcher switchLang:@"手势密码" key:nil];
+//    [languageSetting setAction:^{
+//
+//
+//
+//    }];
     SettingModel *language = [SettingModel new];
     language.text = [LangSwitcher switchLang:@"语言" key:nil];
     language.imgName = @"语言";
@@ -402,9 +399,15 @@
         
     } confirm:^(UIAlertAction *action) {
         [[NSNotificationCenter defaultCenter] postNotificationName:kUserLoginOutNotification object:nil];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            TheInitialVC *loginVC= [TheInitialVC new];
-            [self.navigationController pushViewController:loginVC animated:YES];
+//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            if ([TLUser isBlankString:[[NSUserDefaults standardUserDefaults] objectForKey:MNEMONIC]] == NO) {
+                TLTabBarController*tab   = [[TLTabBarController alloc] init];
+                [UIApplication sharedApplication].keyWindow.rootViewController = tab;
+            }else
+            {
+                TheInitialVC *loginVC= [TheInitialVC new];
+                [self.navigationController pushViewController:loginVC animated:YES];
+            }
 //            TLUserLoginVC *loginVC= [TLUserLoginVC new];
 //            [self.navigationController pushViewController:loginVC animated:YES];
             
@@ -414,7 +417,7 @@
             
             
             
-        });
+//        });
     }];
     
 }
@@ -454,27 +457,30 @@
 }
 
 #pragma mark - Init
-- (void)requestUserInfo {
-    
-    //获取用户信息
-    TLNetworking *http = [TLNetworking new];
-    
-    http.code = USER_INFO;
-    http.parameters[@"userId"] = [TLUser user].userId;
-    [http postWithSuccess:^(id responseObject) {
-        
-        NSDictionary *userInfo = responseObject[@"data"];
-        
-        //保存信息
-        [[TLUser user] saveUserInfo:userInfo];
-        [[TLUser user] setUserInfoWithDict:userInfo];
-        
-        [self reloadUserInfo];
-        
-    } failure:^(NSError *error) {
-        
-    }];
-}
+//- (void)requestUserInfo {
+//
+//
+//
+//
+//    //获取用户信息
+//    TLNetworking *http = [TLNetworking new];
+//
+//    http.code = USER_INFO;
+//    http.parameters[@"userId"] = [TLUser user].userId;
+//    [http postWithSuccess:^(id responseObject) {
+//
+//        NSDictionary *userInfo = responseObject[@"data"];
+//
+//        //保存信息
+//        [[TLUser user] saveUserInfo:userInfo];
+//        [[TLUser user] setUserInfoWithDict:userInfo];
+//
+//        [self reloadUserInfo];
+//
+//    } failure:^(NSError *error) {
+//
+//    }];
+//}
 
 #pragma mark- 更新设置状态
 - (void)reloadUserInfo {

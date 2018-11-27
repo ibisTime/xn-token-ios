@@ -31,4 +31,6 @@
 //更新placeholderView
 - (void)setPlaceholderViewTitle:(NSString *)title  operationTitle:(NSString *)optitle;
 
+-(void)loginTheWhether;
+
 @end

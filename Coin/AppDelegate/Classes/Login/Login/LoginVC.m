@@ -233,6 +233,7 @@
 
 -(void)BtnClick:(UIButton *)sender
 {
+    [self.view endEditing:YES];
     switch (sender.tag - 100) {
         case 0:
         {
@@ -251,6 +252,8 @@
                 [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入密码" key:nil]];
                 return;
             }
+            
+            
             TLNetworking *http = [TLNetworking new];
             http.showView = self.view;
             NSData *data   =  [[NSUserDefaults standardUserDefaults] objectForKey:@"chooseModel"];
@@ -258,7 +261,7 @@
             http.code = @"805051";
 //            http.parameters[@"countryCode"] = model.code;
             if (isSelectBtn.tag == 100) {
-                http.parameters[@"loginName"] = [NSString stringWithFormat:@"%@%@",model.code,self.phoneTextFid.text];
+                http.parameters[@"loginName"] = [NSString stringWithFormat:@"%@%@",model.interCode,self.phoneTextFid.text];
             }else
             {
                 http.parameters[@"loginName"] = self.phoneTextFid.text;

@@ -375,23 +375,24 @@ typedef enum : NSUInteger {
     //矿工费
 }
 
-- (void)loadPwd
-{
+- (void)loadPwd{
 
-    TLDataBase *dataBase = [TLDataBase sharedManager];
-    //    NSString *word;
-    if ([dataBase.dataBase open]) {
-        NSString *sql = [NSString stringWithFormat:@"SELECT PwdKey from THAUser where userId = '%@'",[TLUser user].userId];
-        //        [sql appendString:[TLUser user].userId];
-        FMResultSet *set = [dataBase.dataBase executeQuery:sql];
-        while ([set next])
-        {
-            self.word = [set stringForColumn:@"PwdKey"];
-
-        }
-        [set close];
-    }
-    [dataBase.dataBase close];
+//    TLDataBase *dataBase = [TLDataBase sharedManager];
+//    //    NSString *word;
+//    if ([dataBase.dataBase open]) {
+//        NSString *sql = [NSString stringWithFormat:@"SELECT PwdKey from THAUser where userId = '%@'",[TLUser user].userId];
+//        //        [sql appendString:[TLUser user].userId];
+//        FMResultSet *set = [dataBase.dataBase executeQuery:sql];
+//        while ([set next])
+//        {
+//            self.word = [set stringForColumn:@"PwdKey"];
+//
+//        }
+//        [set close];
+//    }
+//    [dataBase.dataBase close];
+    
+    self.word = [[NSUserDefaults standardUserDefaults] objectForKey:MNEMONICPASSWORD];
 
 }
 
@@ -406,22 +407,28 @@ typedef enum : NSUInteger {
 
 -(void)loadtype
 {
-    TLDataBase *dataBase = [TLDataBase sharedManager];
-    NSString *type;
-
-    if ([dataBase.dataBase open]) {
-        NSString *sql = [NSString stringWithFormat:@"SELECT type from THALocal where symbol = '%@'",self.currency.symbol];
-        //        [sql appendString:[TLUser user].userId];
-        FMResultSet *set = [dataBase.dataBase executeQuery:sql];
-        while ([set next])
-        {
-            type = [set stringForColumn:@"type"];
-
+//    TLDataBase *dataBase = [TLDataBase sharedManager];
+//    NSString *type;
+//
+//    if ([dataBase.dataBase open]) {
+//        NSString *sql = [NSString stringWithFormat:@"SELECT type from THALocal where symbol = '%@'",self.currency.symbol];
+//        //        [sql appendString:[TLUser user].userId];
+//        FMResultSet *set = [dataBase.dataBase executeQuery:sql];
+//        while ([set next])
+//        {
+//            type = [set stringForColumn:@"type"];
+//
+//        }
+//        [set close];
+//    }
+//    [dataBase.dataBase close];
+    NSArray *array = [[NSUserDefaults standardUserDefaults]objectForKey:COINARRAY];
+    for (int i = 0; i < array.count; i ++) {
+        if ([array[i][@"symbol"] isEqualToString:self.currency.symbol]) {
+            self.currency.type = array[i][@"type"];
         }
-        [set close];
     }
-    [dataBase.dataBase close];
-    self.currency.type = type;
+    
 }
 
 #pragma mark -- //获取 BTCUTXO
@@ -477,7 +484,7 @@ typedef enum : NSUInteger {
         NSNumber *slow = responseObject[@"data"][@"fastestFeeMin"];
         NSNumber *fast = responseObject[@"data"][@"fastestFeeMax"];
         
-        int f = ([fast intValue] -[slow intValue])/2;
+        int f = ([fast intValue] - [slow intValue])/2;
         f = f + [slow intValue];
         
         NSString *priceSlow = [NSString stringWithFormat:@"%@",slow];
@@ -664,88 +671,6 @@ typedef enum : NSUInteger {
 }
 
 
-//- (void)WorkpickerEventWithIndex: (NSInteger)index
-//{
-//    if ([self.currency.symbol isEqualToString:@"BTC"]) {
-//        self.blanceFree.text = [NSString stringWithFormat:@"%.8fBTC",[BTCPoundage enterTheumber:self.tranAmountTF.text setFee:[NSString stringWithFormat:@"%.1f",self.slider.value] setUtxis:self.utxis]/100000000];
-//        self.pricr = [NSString stringWithFormat:@"%ld",(long)[self.tempPrice integerValue]];
-//
-//    }else if([self.currency.symbol isEqualToString:@"USDT"])
-//    {
-//        self.blanceFree.text = [NSString stringWithFormat:@"%.8fBTC",[BTCPoundage usdtPoundage:self.tranAmountTF.text setFee:[NSString stringWithFormat:@"%.1f",self.slider.value] setUtxis:self.utxis]/100000000];
-//        self.pricr = [NSString stringWithFormat:@"%ld",(long)[self.tempPrice integerValue]];
-//    }else{
-//        NSString *symbolStr;
-//        if ([self.currency.type isEqualToString:@"0"]) {
-//            symbolStr = self.currency.symbol;
-//        }else if ([self.currency.type isEqualToString:@"1"])
-//        {
-//            symbolStr = @"ETH";
-//        }else{
-//            symbolStr = @"WAN";
-//        }
-//        self.blanceFree.text = [NSString stringWithFormat:@"%@",[NSString stringWithFormat:@"%.8f %@",self.gamPrice *0.85 +self.gamPrice*self.slider.value*1/3,symbolStr]];
-//        self.pricr = [NSString stringWithFormat:@"%lld",[self.tempPrice longLongValue]];
-//
-//    }
-//    switch (index) {
-//        case 2:
-//            //优先
-//
-//
-//
-//            if ([self.currency.symbol isEqualToString:@"BTC"]) {
-//                self.minerFeeTF.text = [NSString stringWithFormat:@"%@ %@",self.priceFast,@"sat/b"];
-//                self.choseLab.text =  [LangSwitcher switchLang:@"经济" key:nil];
-//                //                self.pricr = [NSString stringWithFormat:@"%lld",[self.pricr longLongValue]/2];
-//                self.slider.value = 0.5;
-//            }else{
-//                self.minerFeeTF.text = [NSString stringWithFormat:@"%.8f %@",self.gamPrice/2,self.currency.symbol];
-//                self.choseLab.text =  [LangSwitcher switchLang:@"经济" key:nil];
-//                self.pricr = [NSString stringWithFormat:@"%lld",[self.tempPrice longLongValue]/2];
-//                self.slider.value = 0.5;
-//            }
-//
-//            break;
-//        case 1:
-//            if ([self.currency.symbol isEqualToString:@"BTC"]) {
-//                self.blanceFree.text = [NSString stringWithFormat:@"%.8fBTC",[BTCPoundage enterTheumber:self.tranAmountTF.text setFee:[NSString stringWithFormat:@"%.1f",self.slider.value] setUtxis:self.utxis]/100000000];
-//                self.pricr = [NSString stringWithFormat:@"%ld",(long)[self.tempPrice integerValue]];
-//
-//            }else if([self.currency.symbol isEqualToString:@"USDT"])
-//            {
-//                self.blanceFree.text = [NSString stringWithFormat:@"%.8fBTC",[BTCPoundage usdtPoundage:self.tranAmountTF.text setFee:[NSString stringWithFormat:@"%.1f",self.slider.value] setUtxis:self.utxis]/100000000];
-//                self.pricr = [NSString stringWithFormat:@"%ld",(long)[self.tempPrice integerValue]];
-//            }else{
-//
-//                self.blanceFree.text = [NSString stringWithFormat:@"%.8f %@",self.gamPrice,self.currency.symbol];
-//                self.pricr = [NSString stringWithFormat:@"%lld",[self.tempPrice longLongValue]];
-//
-//            }
-//            //普通
-//
-//            break;
-//        case 0:
-//            //经济
-//            if ([self.currency.symbol isEqualToString:@"BTC"]) {
-//                self.minerFeeTF.text = [NSString stringWithFormat:@"%@ %@",self.priceSlow,@"sat/b"];
-//                self.choseLab.text =  [LangSwitcher switchLang:@"优先" key:nil];
-//            }else{
-//
-//                self.minerFeeTF.text = [NSString stringWithFormat:@"%.8f %@",self.gamPrice*2,self.currency.symbol];
-//                self.choseLab.text =  [LangSwitcher switchLang:@"优先" key:nil];
-//                self.pricr = [NSString stringWithFormat:@"%lld",[self.pricr longLongValue]*2];
-//            }
-//
-//
-//            break;
-//
-//        default:
-//            break;
-//    }
-
-//}
-
 #pragma mark - 查看提现订单
 - (void)clickRecord:(UIButton *)sender {
     
@@ -823,20 +748,20 @@ typedef enum : NSUInteger {
     //      去除字符串空格
     self.balanceTF.text = [self.balanceTF.text stringByReplacingOccurrencesOfString:@" " withString:@""];
 
-    TLDataBase *dataBase = [TLDataBase sharedManager];
-    NSString *Mnemonics;
-    if ([dataBase.dataBase open]) {
-        NSString *sql = [NSString stringWithFormat:@"SELECT Mnemonics from THAUser where userId = '%@'",[TLUser user].userId];
-        //        [sql appendString:[TLUser user].userId];
-        FMResultSet *set = [dataBase.dataBase executeQuery:sql];
-        while ([set next])
-        {
-            Mnemonics = [set stringForColumn:@"Mnemonics"];
-        }
-        
-        [set close];
-    }
-    [dataBase.dataBase close];
+//    TLDataBase *dataBase = [TLDataBase sharedManager];
+    NSString *Mnemonics = [[NSUserDefaults standardUserDefaults]objectForKey:MNEMONIC];
+//    if ([dataBase.dataBase open]) {
+//        NSString *sql = [NSString stringWithFormat:@"SELECT Mnemonics from THAUser where userId = '%@'",[TLUser user].userId];
+//        //        [sql appendString:[TLUser user].userId];
+//        FMResultSet *set = [dataBase.dataBase executeQuery:sql];
+//        while ([set next])
+//        {
+//            Mnemonics = [set stringForColumn:@"Mnemonics"];
+//        }
+//
+//        [set close];
+//    }
+//    [dataBase.dataBase close];
 
     //
     CGFloat f =  [self.tranAmountTF.text floatValue];

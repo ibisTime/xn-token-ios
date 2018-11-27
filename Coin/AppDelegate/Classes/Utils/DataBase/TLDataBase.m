@@ -151,6 +151,8 @@ NSString *const dbName = @"THAWallet.db";
                 dbModel.ethprivate = [set stringForColumn:@"ethprivate"];
                 dbModel.btcaddress = [set stringForColumn:@"btcaddress"];
                 dbModel.btcprivate = [set stringForColumn:@"btcprivate"];
+                dbModel.usdtaddress = [set stringForColumn:@"usdtaddress"];
+                dbModel.usdtprivate = [set stringForColumn:@"usdtprivate"];
                 dbModel.PwdKey = [set stringForColumn:@"PwdKey"];
 //                dbModel.name = [set stringForColumn:@"name"];
                 [self.dataBaseModels addObject:dbModel];
@@ -164,7 +166,7 @@ NSString *const dbName = @"THAWallet.db";
             DataBaseModel *model = self.dataBaseModels[i];
             
             if ([self.dataBase open]) {
-                BOOL sucess = [self.dataBase executeUpdate:@"insert into THAUser(userId,Mnemonics,wanAddress,wanPrivate,ethPrivate,ethAddress,PwdKey) values(?,?,?,?,?,?,?)",model.userId,model.Mnemonics,model.wanaddress,model.wanprivate,model.ethprivate,model.ethaddress,model.PwdKey];
+                BOOL sucess = [self.dataBase executeUpdate:@"insert into THAUser(userId,Mnemonics,wanAddress,wanPrivate,ethPrivate,ethAddress,usdtprivate,usdtaddress,PwdKey) values(?,?,?,?,?,?,?,?,?)",model.userId,model.Mnemonics,model.wanaddress,model.wanprivate,model.ethprivate,model.ethaddress,model.usdtprivate,model.usdtaddress,model.PwdKey];
                
                 NSLog(@"钱包表迁移%d",sucess);
             }
@@ -271,6 +273,8 @@ NSString *const dbName = @"THAWallet.db";
             dbModel.ethprivate = [set stringForColumn:@"ethprivate"];
             dbModel.btcaddress = [set stringForColumn:@"btcaddress"];
             dbModel.btcprivate = [set stringForColumn:@"btcprivate"];
+            dbModel.usdtaddress = [set stringForColumn:@"usdtaddress"];
+            dbModel.usdtprivate = [set stringForColumn:@"usdtprivate"];
             dbModel.PwdKey = [set stringForColumn:@"PwdKey"];
             //                dbModel.name = [set stringForColumn:@"name"];
             [self.dataBaseModels addObject:dbModel];
@@ -286,7 +290,7 @@ NSString *const dbName = @"THAWallet.db";
     
     FMDBMigrationManager * manager=[FMDBMigrationManager managerWithDatabaseAtPath:self.dataStr migrationsBundle:[NSBundle mainBundle]];
     
-    Migration * migration_1=[[Migration alloc]initWithName:@"新增THAUser表" andVersion:1 andExecuteUpdateArray:@[@"create table if not exists THAUser(walletId INTEGER PRIMARY KEY AUTOINCREMENT,userId text, Mnemonics text, wanaddress text,wanprivate text,ethaddress text,ethprivate text,btcaddress text,btcprivate text,PwdKey text,name text)",@"create table if not exists THALocal(id INTEGER PRIMARY KEY AUTOINCREMENT,walletId text, symbol text, type text ,status text,cname text,unit text,pic1 text,withdrawFeeString text,withfrawFee text,orderNo text,ename text,icon text,pic2 text,pic3 text,address text,IsSelect INTEGER,next text)"]];
+    Migration * migration_1=[[Migration alloc]initWithName:@"新增THAUser表" andVersion:1 andExecuteUpdateArray:@[@"create table if not exists THAUser(walletId INTEGER PRIMARY KEY AUTOINCREMENT,userId text, Mnemonics text, wanaddress text,wanprivate text,ethaddress text,ethprivate text,btcaddress text,btcprivate text,usdtaddress text,usdtprivate text,PwdKey text,name text)",@"create table if not exists THALocal(id INTEGER PRIMARY KEY AUTOINCREMENT,walletId text, symbol text, type text ,status text,cname text,unit text,pic1 text,withdrawFeeString text,withfrawFee text,orderNo text,ename text,icon text,pic2 text,pic3 text,address text,IsSelect INTEGER,next text)"]];
     
 //    Migration * migration_2=[[Migration alloc]initWithName:@"新增THALocal表" andVersion:1 andExecuteUpdateArray:@[]];
     
@@ -313,7 +317,7 @@ NSString *const dbName = @"THAWallet.db";
     
     FMDBMigrationManager * manager=[FMDBMigrationManager managerWithDatabaseAtPath:self.dataStr migrationsBundle:[NSBundle mainBundle]];
     
-    Migration * migration_1=[[Migration alloc]initWithName:@"新增THAUser表" andVersion:1 andExecuteUpdateArray:@[@"create table if not exists THAUser(walletId INTEGER PRIMARY KEY AUTOINCREMENT,userId text, Mnemonics text, wanaddress text,wanprivate text,ethaddress text,ethprivate text,btcaddress text,btcprivate text,PwdKey text,name text)",@"create table if not exists THALocal(id INTEGER PRIMARY KEY AUTOINCREMENT,walletId text, symbol text, type text ,status text,cname text,unit text,pic1 text,withdrawFeeString text,withfrawFee text,orderNo text,ename text,icon text,pic2 text,pic3 text,address text,IsSelect INTEGER,next text)"]];
+    Migration * migration_1=[[Migration alloc]initWithName:@"新增THAUser表" andVersion:1 andExecuteUpdateArray:@[@"create table if not exists THAUser(walletId INTEGER PRIMARY KEY AUTOINCREMENT,userId text, Mnemonics text, wanaddress text,wanprivate text,ethaddress text,ethprivate text,btcaddress text,btcprivate text,usdtaddress text,usdtprivate text,PwdKey text,name text)",@"create table if not exists THALocal(id INTEGER PRIMARY KEY AUTOINCREMENT,walletId text, symbol text, type text ,status text,cname text,unit text,pic1 text,withdrawFeeString text,withfrawFee text,orderNo text,ename text,icon text,pic2 text,pic3 text,address text,IsSelect INTEGER,next text)"]];
     
     
     [manager addMigration:migration_1];

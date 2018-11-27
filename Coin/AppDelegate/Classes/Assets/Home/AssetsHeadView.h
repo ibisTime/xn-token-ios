@@ -25,6 +25,7 @@
 @property (nonatomic , copy)NSString *usdRate;
 
 @property (nonatomic , strong)NSDictionary *dataDic;
+@property (nonatomic , strong)NSDictionary *privateDataDic;
 
 @property (nonatomic , strong)UILabel *announcementlbl;
 @property (nonatomic , strong)UIImageView *bottomIV;

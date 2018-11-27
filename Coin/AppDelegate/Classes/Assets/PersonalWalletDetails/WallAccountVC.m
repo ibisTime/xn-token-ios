@@ -8,7 +8,6 @@
 
 #import "WallAccountVC.h"
 #import "RechargeCoinVC.h"
-#import "ZMAuthVC.h"
 #import "TLPwdRelatedVC.h"
 #import "WallAccountHeadView.h"
 #import "WithdrawalsCoinVC.h"

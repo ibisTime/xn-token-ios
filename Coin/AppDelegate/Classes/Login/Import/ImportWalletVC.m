@@ -8,6 +8,10 @@
 
 #import "ImportWalletVC.h"
 #import "TLTabBarController.h"
+#import "BTCMnemonic.h"
+#import "BTCNetwork.h"
+#import "BTCData.h"
+#import "BTCKeychain.h"
 @interface ImportWalletVC ()<UITextFieldDelegate>
 
 @end
@@ -132,9 +136,44 @@
                           [textField12.text stringByReplacingOccurrencesOfString:@" " withString:@""]
                           ];
     if ([[MnemonicUtil getMnemonicsISRight:mnemonic] isEqualToString:@"1"]) {
-        [[NSUserDefaults standardUserDefaults]setObject:[mnemonic componentsSeparatedByString:@","] forKey:MNEMONIC];
+        
+        [[NSUserDefaults standardUserDefaults]setObject:mnemonic forKey:MNEMONIC];
+        [[NSUserDefaults standardUserDefaults]setObject:self.passWord forKey:MNEMONICPASSWORD];
+        
         TLTabBarController *tab = [[TLTabBarController alloc] init];
         [UIApplication sharedApplication].keyWindow.rootViewController = tab;
+//        NSString *prikey   =[MnemonicUtil getPrivateKeyWithMnemonics:mnemonic];
+        
+//        BTCMnemonic *mnemonic1 =  [MnemonicUtil importMnemonic:[mnemonic componentsSeparatedByString:@","]];
+        
+        
+        BTCMnemonic *mnemonic1 =  [MnemonicUtil importMnemonic:[mnemonic componentsSeparatedByString:@" "]];
+        if ([AppConfig config].runEnv == 0) {
+            mnemonic1.keychain.network = [BTCNetwork mainnet];
+            
+        }else{
+            mnemonic1.keychain.network = [BTCNetwork testnet];
+        }
+//        if ([AppConfig config].runEnv == 0) {
+//            mnemonic1.keychain.network = [BTCNetwork mainnet];
+//
+//        }else{
+//            mnemonic1.keychain.network = [BTCNetwork testnet];
+//        }
+
+//        NSString *address = [MnemonicUtil getEthAddress:mnemonic1];
+//        NSString *btcAddress = [MnemonicUtil getBtcAddress:mnemonic1];
+        
+//        TLDataBase *dateBase = [TLDataBase sharedManager];
+//
+//
+//        if ([dateBase.dataBase open]) {
+//            BOOL sucess = [dateBase.dataBase executeUpdate:@"insert into THAUser(Mnemonics,PwdKey) values(?,?)",mnemonic,self.passWord];
+//
+//            NSLog(@"插入地址私钥%d",sucess);
+//        }
+        
+        
     }else
     {
         [TLAlert alertWithMsg:@"助记词不存在,请检测备份"];

@@ -11,10 +11,9 @@
 #ifndef CoinPrefixHeader_h
 #define CoinPrefixHeader_h
 
-#define BTCADDRESS @"BTCADDRESS"
-#define ETHADDRESS @"ETHADDRESS"
 #define MNEMONIC @"MNEMONIC"
 #define MNEMONICPASSWORD @"MNEMONICPASSWORD"
+#define COINARRAY @"COINARRAY"
 
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
@@ -36,6 +35,8 @@
 #import "AppConfig.h"
 #import "AppColorMacro.h"
 
+
+//#import "CustomDatabase.h"
 
 #import "TLUser.h"
 #import "TLAlert.h"

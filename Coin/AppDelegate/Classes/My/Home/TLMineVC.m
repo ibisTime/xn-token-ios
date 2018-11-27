@@ -110,7 +110,7 @@
     [[TLUser user] updateUserInfo];
     //通知
     [self addNotification];
-    
+    [self changeInfo];
 //    ZQOCRScanEngine *engine = [[ZQOCRScanEngine alloc] init];
 //    engine.delegate = self;
 //    engine.appKey = @"nJXnQp568zYcnBdPQxC7TANqakUUCjRZqZK8TrwGt7";
@@ -200,6 +200,7 @@
     settingModel.text = [LangSwitcher switchLang:@"账户与安全" key:nil];
     settingModel.imgName = @"账户与安全";
     settingModel.action = ^{
+        [self loginTheWhether];
 //        if (![TLUser user].isLogin) {
 //            TheInitialVC *loginVC= [TheInitialVC new];
 //            [weakSelf.navigationController pushViewController:loginVC animated:YES];
@@ -218,6 +219,7 @@
     inviteModel.text = [LangSwitcher switchLang:@"邀请有礼" key:nil];
     inviteModel.imgName = @"邀请有礼";
     inviteModel.action = ^{
+        [self loginTheWhether];
 //        if (![TLUser user].isLogin) {
 //            TheInitialVC *loginVC= [TheInitialVC new];
 //            [weakSelf.navigationController pushViewController:loginVC animated:YES];
@@ -235,7 +237,7 @@
     MyIncome.text = [LangSwitcher switchLang:@"我的收益" key:nil];
     MyIncome.imgName = @"我的收益icon";
     MyIncome.action = ^{
-
+        [self loginTheWhether];
         MyIncomeVC *vc = [[MyIncomeVC alloc] init];
         [weakSelf.navigationController pushViewController:vc animated:YES];
 
@@ -243,20 +245,28 @@
     };
 
 
-    MineModel *language = [MineModel new];
-    language.text = [LangSwitcher switchLang:@"语言" key:nil];
-    language.imgName = @"语言";
-    language.action =^{
-        
-        LangChooseVC *vc = [[LangChooseVC alloc] init];
-        [weakSelf.navigationController pushViewController:vc animated:YES];
-        
-    };
+//    MineModel *language = [MineModel new];
+//    language.text = [LangSwitcher switchLang:@"语言" key:nil];
+//    language.imgName = @"语言";
+//    language.action =^{
+//
+//        LangChooseVC *vc = [[LangChooseVC alloc] init];
+//        [weakSelf.navigationController pushViewController:vc animated:YES];
+//
+//    };
     //安全中心
+    
+    
+    
     MineModel *securityCenter = [MineModel new];
     securityCenter.text = [LangSwitcher switchLang:@"钱包工具" key:nil];
     securityCenter.imgName = @"钱包工具";
     securityCenter.action = ^{
+        
+        WalletSettingVC *settingVC = [WalletSettingVC new];
+        
+        [weakSelf.navigationController pushViewController:settingVC animated:YES];
+        
 //        if (![TLUser user].isLogin) {
 //            TLUserLoginVC *loginVC= [TLUserLoginVC new];
 //            [weakSelf.navigationController pushViewController:loginVC animated:YES];
@@ -266,30 +276,28 @@
 //            return ;
 //        }
         
-        TLDataBase *dataBase = [TLDataBase sharedManager];
-        NSString *word;
-        if ([dataBase.dataBase open]) {
-            NSString *sql = [NSString stringWithFormat:@"SELECT Mnemonics from THAUser where userId = '%@'",[TLUser user].userId];
-            //        [sql appendString:[TLUser user].userId];
-            FMResultSet *set = [dataBase.dataBase executeQuery:sql];
-            while ([set next])
-            {
-                word = [set stringForColumn:@"Mnemonics"];
-                
-            }
-            [set close];
-        }
-        [dataBase.dataBase close];
-        if (word.length > 0) {
-            WalletSettingVC *settingVC = [WalletSettingVC new];
-            
-            [weakSelf.navigationController pushViewController:settingVC animated:YES];
-        }else{
-            
-            BuildWalletMineVC *settingVC = [BuildWalletMineVC new];
-            
-            [weakSelf.navigationController pushViewController:settingVC animated:YES];
-        }
+//        TLDataBase *dataBase = [TLDataBase sharedManager];
+//        NSString *word;
+//        if ([dataBase.dataBase open]) {
+//            NSString *sql = [NSString stringWithFormat:@"SELECT Mnemonics from THAUser where userId = '%@'",[TLUser user].userId];
+//            //        [sql appendString:[TLUser user].userId];
+//            FMResultSet *set = [dataBase.dataBase executeQuery:sql];
+//            while ([set next])
+//            {
+//                word = [set stringForColumn:@"Mnemonics"];
+//
+//            }
+//            [set close];
+//        }
+//        [dataBase.dataBase close];
+//        if (word.length > 0) {
+        
+//        }else{
+        
+//            BuildWalletMineVC *settingVC = [BuildWalletMineVC new];
+//
+//            [weakSelf.navigationController pushViewController:settingVC animated:YES];
+//        }
        
     };
     
@@ -318,7 +326,7 @@
     questionSetting.text = [LangSwitcher switchLang:@"问题反馈" key:nil];
     questionSetting.imgName = @"问题反馈";
     questionSetting.action = ^{
-       
+       [self loginTheWhether];
         TLQusertionVC *personalSettingVC = [TLQusertionVC new];
         [weakSelf.navigationController pushViewController:personalSettingVC animated:YES];
         
@@ -417,10 +425,18 @@
         
     } else {
         
+        if ([TLUser isBlankString:[[NSUserDefaults standardUserDefaults] objectForKey:MNEMONIC]] == YES) {
+            self.group.sections = @[ @[settingModel], @[inviteModel,MyIncome,questionSetting ],
+                                     @[languageSetting,helpModel, meSetting]
+                                     ];
+        }else
+        {
+            self.group.sections = @[ @[settingModel], @[inviteModel,MyIncome,questionSetting ],
+                                     @[languageSetting,securityCenter,helpModel, meSetting]
+                                     ];
+        }
         
-        self.group.sections = @[ @[settingModel], @[inviteModel,MyIncome,questionSetting ],
-                                @[languageSetting,securityCenter,helpModel, meSetting]
-                                ];
+        
         
     }
  
@@ -470,33 +486,23 @@
         
         _imagePicker.allowsEditing = YES;
         _imagePicker.pickFinish = ^(NSDictionary *info){
+
             
+            UIImage *image = info[@"UIImagePickerControllerOriginalImage"];
+            NSData *imgData = UIImageJPEGRepresentation(image, 0.1);
             
+            //进行上传
+            TLUploadManager *manager = [TLUploadManager manager];
             
+            manager.imgData = imgData;
+            manager.image = image;
+            [manager getTokenShowView:weakSelf.view succes:^(NSString *key) {
                 
+                [weakSelf changeHeadIconWithKey:key imgData:imgData];
                 
+            } failure:^(NSError *error) {
                 
-                UIImage *image = info[@"UIImagePickerControllerOriginalImage"];
-                NSData *imgData = UIImageJPEGRepresentation(image, 0.1);
-                
-                //进行上传
-                TLUploadManager *manager = [TLUploadManager manager];
-                
-                manager.imgData = imgData;
-                manager.image = image;
-                [manager getTokenShowView:weakSelf.view succes:^(NSString *key) {
-                    
-                    [weakSelf changeHeadIconWithKey:key imgData:imgData];
-                    
-                } failure:^(NSError *error) {
-                    
-                }];
-                
-                
-            
-            
-            
-            
+            }];
         };
     }
     
@@ -533,13 +539,24 @@
         [self.headerView.photoBtn sd_setImageWithURL:[NSURL URLWithString:[[TLUser user].photo convertImageUrl]] forState:UIControlStateNormal];
     } else {
         [self.headerView.photoBtn setImage:nil forState:UIControlStateNormal];
-        
     }
+    
+    
+    if ([TLUser user].isLogin == NO) {
+        self.headerView.nameLbl.text = [LangSwitcher switchLang:@"未登录" key:nil];
+//        self.headerView.mobileLbl.text = [LangSwitcher switchLang:@"" key:<#(NSString *)#>]
+        self.headerView.phone.hidden = YES;
+        return;
+    }
+    
     
     self.headerView.nameLbl.text = [TLUser user].nickname;
     NSRange rang = NSMakeRange(3, 4);
     UITapGestureRecognizer *ta = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(changeNickName)];
     [self.headerView.nameLbl addGestureRecognizer:ta];
+    
+    
+    
     
     if ([TLUser isBlankString:[TLUser user].mobile] == NO) {
         self.headerView.mobileLbl.text = [NSString stringWithFormat:@"+%@ %@",[[TLUser user].interCode substringFromIndex:2], [[TLUser user].mobile stringByReplacingCharactersInRange:rang withString:@"****"]];
@@ -547,17 +564,18 @@
     {
         self.headerView.mobileLbl.text = [NSString stringWithFormat:@"%@", [[TLUser user].email stringByReplacingCharactersInRange:rang withString:@"****"]];
     }
-
+//    self.headerView.mobileLbl.backgroundColor = [UIColor redColor];
 
     
     self.headerView.levelBtn.hidden = [[TLUser user].level isEqualToString:kLevelOrdinaryTraders] ? YES : NO;
     [self.headerView.mobileLbl sizeToFit];
-
+    self.headerView.mobileLbl.frame = CGRectMake(86 + 5 + 30, 75, self.headerView.mobileLbl.width, 14);
+//    self.headerView.integralBtn.backgroundColor = [UIColor redColor];
     [self.headerView.integralBtn mas_makeConstraints:^(MASConstraintMaker *make) {
 
        make.left.equalTo(self.headerView.mobileLbl.mas_right).offset(20);
         make.right.equalTo(self.headerView.mas_right).offset(-20);
-        make.top.equalTo(@(kHeight(75)));
+        make.top.equalTo(@(75));
         make.height.equalTo(@14);
 
     }];
@@ -582,14 +600,15 @@
 }
 
 - (void)changeHeadIcon {
-//    if (![TLUser user].isLogin) {
+    if (![TLUser user].isLogin) {
 //        TLUserLoginVC *loginVC= [TLUserLoginVC new];
 //        [self.navigationController pushViewController:loginVC animated:YES];
 //        loginVC.loginSuccess = ^{
 //            
 //        };
-//        return ;
-//    }
+        return ;
+    }
+    
     [self.imagePicker picker];
 }
 

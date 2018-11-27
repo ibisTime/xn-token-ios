@@ -28,8 +28,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    self.mnemonicsArray = [[NSUserDefaults standardUserDefaults]objectForKey:MNEMONIC];
+//    [[[NSUserDefaults standardUserDefaults]objectForKey:MNEMONIC] componentsSeparatedByString:@" "];
+    self.mnemonicsArray = [[[NSUserDefaults standardUserDefaults]objectForKey:MNEMONIC] componentsSeparatedByString:@" "];
     // Do any additional setup after loading the view.
     UIImageView *backImage = [[UIImageView alloc]initWithFrame:CGRectMake(0, -kNavigationBarHeight, SCREEN_WIDTH, SCREEN_HEIGHT)];
     backImage.image = kImage(@"起始业背景");

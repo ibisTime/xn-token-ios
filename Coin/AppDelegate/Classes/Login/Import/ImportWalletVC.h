@@ -10,4 +10,6 @@
 
 @interface ImportWalletVC : TLBaseVC
 
+@property (nonatomic , copy)NSString *passWord;
+
 @end

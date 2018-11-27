@@ -842,66 +842,10 @@
     }];
 }
 
-- (void)tapClick: (UITapGestureRecognizer* )tap
+- (void)tapClick:(UITapGestureRecognizer* )tap
 {
-//    [self.whiteView mas_remakeConstraints:^(MASConstraintMaker *make) {
-//
-//        make.left.right.top.bottom.equalTo(0);
-//    }];
-//     [self.whiteView removeFromSuperview];
-//     self.whiteView.frame = CGRectMake(0, 0, SCREEN_WIDTH, 0);
     self.whiteView.hidden = YES;
-//    [_equivalentBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-//
-//        make.top.equalTo(self.mas_bottom).offset(11);
-//        make.left.equalTo(self.mas_left).offset(19);
-//        //        make.width.greaterThanOrEqualTo(@115);
-//
-//    }];
-//    [self.cnyAmountLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-//
-//        make.top.equalTo(_equivalentBtn.mas_bottom).offset(5);
-//        make.left.equalTo(_equivalentBtn.mas_left);
-//        make.height.equalTo(@25);
-//
-//    }];
-//    [self.allLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-//
-//        make.top.equalTo(_equivalentBtn.mas_bottom).offset(5);
-//        make.left.equalTo(_equivalentBtn.mas_left);
-//        make.height.equalTo(@25);
-//
-//    }];
-//    [_eyesButton mas_makeConstraints:^(MASConstraintMaker *make) {
-//
-//        make.top.equalTo(_equivalentBtn.mas_bottom).offset(-10);
-//        make.right.equalTo(self.mas_right).offset(0);
-//        make.width.equalTo(@30);
-//        make.height.equalTo(@30);
-//
-//    }];
-//    [_bottomIV mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.equalTo(self.equivalentBtn.mas_bottom).offset(53);
-//        make.left.equalTo(self.cnyAmountLbl.mas_left).offset(kWidth(120));
-//        make.height.equalTo(@(kHeight(120)));
-//        make.width.equalTo(@(kWidth(226)));
-//
-//    }];
-//    [_bgIV mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.equalTo(self.equivalentBtn.mas_bottom).offset(37);
-//        make.left.equalTo(self.cnyAmountLbl.mas_left);
-//        make.height.equalTo(@(kHeight(150)));
-//        make.width.equalTo(@(kWidth(325)));
-//
-//    }];
 
-//    [whiteView mas_makeConstraints:^(MASConstraintMaker *make) {
-//
-//        make.left.right.equalTo(@0);
-//        make.top.equalTo(@(0));
-//        make.height.equalTo(@(kHeight(40)));
-//
-//    }];
     [self.equivalentBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(@(11));
         make.left.equalTo(self.mas_left).offset(19);

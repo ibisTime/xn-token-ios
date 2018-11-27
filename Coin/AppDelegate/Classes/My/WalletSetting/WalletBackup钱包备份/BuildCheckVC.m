@@ -373,6 +373,7 @@
                 return ;
             });
         }
+        
         NSString *prikey   =[MnemonicUtil getPrivateKeyWithMnemonics:self.titleWord];
 
         NSString *address = [MnemonicUtil getAddressWithPrivateKey:prikey];

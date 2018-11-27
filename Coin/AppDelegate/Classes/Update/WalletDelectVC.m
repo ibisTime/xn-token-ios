@@ -206,12 +206,18 @@
 //                [[NSUserDefaults standardUserDefaults] removeObjectForKey:KWalletPrivateKey];
 //                [[NSUserDefaults standardUserDefaults] synchronize];
                 [TLAlert alertWithMsg:@"删除成功"];
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    
-                    TLTabBarController *MineVC = [[TLTabBarController alloc] init];
-                   
-                    [UIApplication sharedApplication].keyWindow.rootViewController = MineVC;
-                });
+//                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                
+                    if ([TLUser user].isLogin == NO) {
+                        TLTabBarController *tab = [[TLTabBarController alloc] init];
+                        [UIApplication sharedApplication].keyWindow.rootViewController = tab;
+                    }
+                    else
+                    {
+                        TheInitialVC *loginVC= [TheInitialVC new];
+                        [self.navigationController pushViewController:loginVC animated:YES];
+                    }
+//                });
             }];
            
 

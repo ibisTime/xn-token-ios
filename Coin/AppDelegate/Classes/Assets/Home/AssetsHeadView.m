@@ -165,6 +165,19 @@
     [self setNSMutableAttributedStringLbl:privatePriceLbl setText:cnyStr];
     
     
+    
+    if (([TLUser user].isLogin == NO)) {
+        self.topIV.frame = CGRectMake(SCREEN_WIDTH, 61, SCREEN_WIDTH - 40, CardWidth);
+        [self layoutIfNeeded];
+        [self setNeedsUpdateConstraints];
+        self.bottomIV.frame =  CGRectMake(12, 61, SCREEN_WIDTH - 40, CardWidth);
+        [self bringSubviewToFront:self.bottomIV];
+        
+        self.topIV.frame = CGRectMake(26, 61, SCREEN_WIDTH - 40, CardWidth);
+        [_delegate SlidingIsWallet:@"私钥钱包"];
+        [self layoutIfNeeded];
+        [self setNeedsDisplay];
+    }
 }
 
 
@@ -211,6 +224,25 @@
     }
     [self setNSMutableAttributedStringLbl:personalPriceLbl setText:cnyStr];
 
+}
+
+-(void)setPrivateDataDic:(NSDictionary *)privateDataDic
+{
+    NSString *cnyStr;
+    if ([[TLUser user].localMoney isEqualToString:@"USD"]) {
+        cnyStr = [NSString stringWithFormat:@"$ %.2f", [[privateDataDic[@"totalAmountUSD"] convertToSimpleRealMoney] doubleValue]];
+        
+        personalPriceLbl.text = [NSString stringWithFormat:@"$ %.2f", [cnyStr doubleValue]];
+        
+    } else if ([[TLUser user].localMoney isEqualToString:@"KRW"])
+    {
+        cnyStr = [NSString stringWithFormat:@"₩ %.2f", [[privateDataDic[@"totalAmountKRW"] convertToSimpleRealMoney] doubleValue]];
+    }
+    
+    else{
+        cnyStr = [NSString stringWithFormat:@"¥ %.2f", [[privateDataDic[@"totalAmountCNY"] convertToSimpleRealMoney] doubleValue]];
+    }
+    [self setNSMutableAttributedStringLbl:privatePriceLbl setText:cnyStr];
 }
 
 
@@ -301,6 +333,22 @@
 -(void)swipeRightBottomClick:(UISwipeGestureRecognizer *)swpie{
     
     
+    if ([TLUser isBlankString:[TLUser user].userId] == YES)
+        
+    {
+        [TLAlert alertWithTitle:[LangSwitcher switchLang:@"提示" key:nil] msg:[LangSwitcher switchLang:@"您还未登录，是否前去登录" key:nil] confirmMsg:[LangSwitcher switchLang:@"确认" key:nil] cancleMsg:[LangSwitcher switchLang:@"取消" key:nil] cancle:^(UIAlertAction *action) {
+            
+        } confirm:^(UIAlertAction *action) {
+            TheInitialVC *vc = [[TheInitialVC alloc]init];
+            UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+            UIViewController *rootViewController = [[[UIApplication sharedApplication] keyWindow] rootViewController];
+            [rootViewController presentViewController:nav animated:YES completion:nil];
+        }];
+        
+        return;
+    }
+    
+    
     [UIView animateWithDuration:0.5 animations:^{
         [self setNeedsUpdateConstraints];
         
@@ -329,6 +377,20 @@
 }
 -(void)swipeBottomClick:(UISwipeGestureRecognizer *)swpie{
     
+    if ([TLUser isBlankString:[TLUser user].userId] == YES)
+        
+    {
+        [TLAlert alertWithTitle:[LangSwitcher switchLang:@"提示" key:nil] msg:[LangSwitcher switchLang:@"您还未登录，是否前去登录" key:nil] confirmMsg:[LangSwitcher switchLang:@"确认" key:nil] cancleMsg:[LangSwitcher switchLang:@"取消" key:nil] cancle:^(UIAlertAction *action) {
+            
+        } confirm:^(UIAlertAction *action) {
+            TheInitialVC *vc = [[TheInitialVC alloc]init];
+            UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+            UIViewController *rootViewController = [[[UIApplication sharedApplication] keyWindow] rootViewController];
+            [rootViewController presentViewController:nav animated:YES completion:nil];
+        }];
+        
+        return;
+    }
     
     [UIView animateWithDuration:0.5 animations:^{
         [self setNeedsUpdateConstraints];

@@ -384,13 +384,19 @@
     NSDictionary *dataDic = [[NSUserDefaults standardUserDefaults] objectForKey:@"user_info_dict_key"];
     
         if ([TLUser isBlankString:dataDic[@"userId"]] == YES) {
-            TheInitialVC *initialVC = [[TheInitialVC alloc] init];
-            UINavigationController *na = [[UINavigationController alloc] initWithRootViewController:initialVC];
-            
-            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isLanch"];
-            [[NSUserDefaults standardUserDefaults] synchronize];
-            self.window.rootViewController = na;
-//            self.window.rootViewController = initialVC;
+            if ([TLUser isBlankString:[[NSUserDefaults standardUserDefaults] objectForKey:MNEMONIC]] == YES) {
+                TheInitialVC *initialVC = [[TheInitialVC alloc] init];
+                UINavigationController *na = [[UINavigationController alloc] initWithRootViewController:initialVC];
+                
+                [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isLanch"];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+                self.window.rootViewController = na;
+            }else
+            {
+                TLTabBarController *tabBarCtrl = [[TLTabBarController alloc] init];
+                self.window.rootViewController = tabBarCtrl;
+            }
+
         }else{
             TLTabBarController *tabBarCtrl = [[TLTabBarController alloc] init];
             self.window.rootViewController = tabBarCtrl;

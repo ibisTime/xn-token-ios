@@ -159,12 +159,14 @@
         
         [[NSUserDefaults standardUserDefaults]setObject:categoryArray forKey:MNEMONIC];
         WhetherBackupVC *vc = [WhetherBackupVC new];
+        
         [self.navigationController pushViewController:vc animated:YES];
         
         
     }else
     {
         ImportWalletVC *vc = [ImportWalletVC new];
+        vc.passWord = _passWord.text;
         [self.navigationController pushViewController:vc animated:YES];
     }
 }

@@ -46,7 +46,8 @@
     _SelectArray = [NSMutableArray array];
     _BackupArray = [NSMutableArray array];
 //    [_BackupArray addObjectsFromArray:];
-    arr = [[NSUserDefaults standardUserDefaults]objectForKey:MNEMONIC];
+    ;
+    arr = [[[NSUserDefaults standardUserDefaults]objectForKey:MNEMONIC] componentsSeparatedByString:@" "];
 //    NSMutableArray *newArr = [NSMutableArray new];
     while (_BackupArray.count != arr.count) {
         //生成随机数

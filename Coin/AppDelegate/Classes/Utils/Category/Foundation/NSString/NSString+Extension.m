@@ -255,7 +255,9 @@ raiseOnOverflow:NO raiseOnUnderflow:NO raiseOnDivideByZero:YES];
 
 //减法
 - (NSString *)subNumber:(NSString *)number {
-    
+    if ([number isEqualToString:@""]) {
+        return @"";
+    }
     //保留8位小数,第九位舍去
     NSDecimalNumberHandler *handler = [NSDecimalNumberHandler decimalNumberHandlerWithRoundingMode:NSRoundDown
                                                                                              scale:8

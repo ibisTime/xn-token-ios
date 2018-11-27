@@ -95,23 +95,15 @@ typedef enum : NSUInteger {
     [titleText setFont:[UIFont systemFontOfSize:17.0]];
     [titleText setText:[LangSwitcher switchLang:@"一键划转" key:nil]];
     self.navigationItem.titleView=titleText;
-    [self.view addSubview:self.tableView];
-
-    self.numberTextField = [self.view viewWithTag:1000];
-    self.googleTextField = [self.view viewWithTag:1001];
-    self.poundageSlider = [self.view viewWithTag:1002];
-    self.totalFree = [self.view viewWithTag:1212];
     
-    if (self.isLocal == YES) {
-        self.currentModel = self.localcurrencys[0];
-        [self loadtype];
-        [self loadGas];
-    }else
-    {
-        self.currentModel = self.currencys[0];
-    }
-    _tableView.models = _currencys;
-    _tableView.model = self.currentModel;
+    
+    
+    [self getMyCurrencyList];
+    [self LoadData];
+    
+    
+//    _tableView.models = _currencys;
+    
     
 }
 
@@ -491,20 +483,22 @@ typedef enum : NSUInteger {
             return;
         }
     }
-    TLDataBase *dataBase = [TLDataBase sharedManager];
-    NSString *Mnemonics;
-    if ([dataBase.dataBase open]) {
-        NSString *sql = [NSString stringWithFormat:@"SELECT Mnemonics from THAUser where userId = '%@'",[TLUser user].userId];
-        FMResultSet *set = [dataBase.dataBase executeQuery:sql];
-        while ([set next])
-        {
-            Mnemonics = [set stringForColumn:@"Mnemonics"];
-        }
-        [set close];
-    }
+//    TLDataBase *dataBase = [TLDataBase sharedManager];
+//    NSString *Mnemonics;
+//    if ([dataBase.dataBase open]) {
+//        NSString *sql = [NSString stringWithFormat:@"SELECT Mnemonics from THAUser where userId = '%@'",[TLUser user].userId];
+//        FMResultSet *set = [dataBase.dataBase executeQuery:sql];
+//        while ([set next])
+//        {
+//            Mnemonics = [set stringForColumn:@"Mnemonics"];
+//        }
+//        [set close];
+//    }
+    
+    NSString *Mnemonics = [[NSUserDefaults standardUserDefaults]objectForKey:MNEMONIC];
     NSString *gaspic =  [CoinUtil convertToSysCoin:self.numberTextField.text coin:self.currentModel.symbol];
     ;
-    [dataBase.dataBase close];
+//    [dataBase.dataBase close];
     
 //    [TLAlert alertWithTitle:<#(NSString *)#> msg:<#(NSString *)#> confirmMsg:<#(NSString *)#> cancleMsg:<#(NSString *)#> placeHolder:<#(NSString *)#> maker:<#(UIViewController *)#> cancle:<#^(UIAlertAction *action)cancle#> confirm:<#^(UIAlertAction *action, UITextField *textField)confirm#>]
     
@@ -744,16 +738,12 @@ typedef enum : NSUInteger {
             self.poundage = [NSString stringWithFormat:@"%.8f",[BTCPoundage enterTheumber:self.numberTextField.text setFee:[NSString stringWithFormat:@"%.1f",slider.value] setUtxis:self.utxis]/100000000];
             self.tableView.poundage =  [NSString stringWithFormat:@"%@ %@sat/b(≈%.8fBTC)",[LangSwitcher switchLang:@"本次划转手续费为" key:nil],[NSString stringWithFormat:@"%.1f",slider.value],[self.poundage floatValue]];
             [self.tableView reloadData];
-//            self.totalFree.text = [NSString stringWithFormat:@"%@ %@sat/b(≈%.8fBTC)",[LangSwitcher switchLang:@"本次划转手续费为" key:nil],[NSString stringWithFormat:@"%.1f",slider.value],[self.poundage floatValue]];
             self.btcPrice = slider.value;
             
             return;
         }
         if ([self.currentModel.symbol isEqualToString:@"USDT"]) {
             self.poundage = [NSString stringWithFormat:@"%.8f",[BTCPoundage usdtPoundage:self.numberTextField.text setFee:[NSString stringWithFormat:@"%.1f",slider.value] setUtxis:self.utxis]/100000000];
-//            self.tableView.poundage = self.poundage;
-//            [self.tableView reloadData];
-//            self.totalFree.text = [NSString stringWithFormat:@"%@ %@sat/b(≈%.8fBTC)",[LangSwitcher switchLang:@"本次划转手续费为" key:nil],[NSString stringWithFormat:@"%.1f",slider.value],[self.poundage floatValue]];
             self.tableView.poundage =  [NSString stringWithFormat:@"%@ %@sat/b(≈%.8fBTC)",[LangSwitcher switchLang:@"本次划转手续费为" key:nil],[NSString stringWithFormat:@"%.1f",slider.value],[self.poundage floatValue]];
             [self.tableView reloadData];
             self.btcPrice = slider.value;
@@ -819,22 +809,29 @@ typedef enum : NSUInteger {
 
 -(void)loadtype
 {
-    TLDataBase *dataBase = [TLDataBase sharedManager];
-    NSString *type;
+//    TLDataBase *dataBase = [TLDataBase sharedManager];
+//    NSString *type;
+//
+//    if ([dataBase.dataBase open]) {
+//        NSString *sql = [NSString stringWithFormat:@"SELECT type from THALocal where symbol = '%@'",self.currentModel.symbol];
+//        //        [sql appendString:[TLUser user].userId];
+//        FMResultSet *set = [dataBase.dataBase executeQuery:sql];
+//        while ([set next])
+//        {
+//            type = [set stringForColumn:@"type"];
+//
+//        }
+//        [set close];
+//    }
+//    [dataBase.dataBase close];
+//    self.currentModel.type = type;
     
-    if ([dataBase.dataBase open]) {
-        NSString *sql = [NSString stringWithFormat:@"SELECT type from THALocal where symbol = '%@'",self.currentModel.symbol];
-        //        [sql appendString:[TLUser user].userId];
-        FMResultSet *set = [dataBase.dataBase executeQuery:sql];
-        while ([set next])
-        {
-            type = [set stringForColumn:@"type"];
-            
+    NSArray *array = [[NSUserDefaults standardUserDefaults]objectForKey:COINARRAY];
+    for (int i = 0; i < array.count; i ++) {
+        if ([array[i][@"symbol"] isEqualToString:self.currentModel.symbol]) {
+            self.currentModel.type = array[i][@"type"];
         }
-        [set close];
     }
-    [dataBase.dataBase close];
-    self.currentModel.type = type;
 }
 
 
@@ -845,29 +842,36 @@ typedef enum : NSUInteger {
         return;
     }
     self.totalFree = [self.view viewWithTag:1212];
-    TLDataBase *dataBase = [TLDataBase sharedManager];
-    NSString *btcaddress;
-    NSString *btcprivate;
+//    TLDataBase *dataBase = [TLDataBase sharedManager];
+//    NSString *btcaddress;
+//    NSString *btcprivate;
+//
+//    if ([dataBase.dataBase open]) {
+//        NSString *sql = [NSString stringWithFormat:@"SELECT btcaddress,btcprivate from THAUser where userId = '%@'",[TLUser user].userId];
+//        //        [sql appendString:[TLUser user].userId];
+//        FMResultSet *set = [dataBase.dataBase executeQuery:sql];
+//        while ([set next])
+//        {
+//            btcaddress = [set stringForColumn:@"btcaddress"];
+//            btcprivate = [set stringForColumn:@"btcprivate"];
+//
+//        }
+//        [set close];
+//    }
+//    [dataBase.dataBase close];
+//    self.btcAddress = btcaddress;
+//    self.btcPrivate = btcprivate;
     
-    if ([dataBase.dataBase open]) {
-        NSString *sql = [NSString stringWithFormat:@"SELECT btcaddress,btcprivate from THAUser where userId = '%@'",[TLUser user].userId];
-        //        [sql appendString:[TLUser user].userId];
-        FMResultSet *set = [dataBase.dataBase executeQuery:sql];
-        while ([set next])
-        {
-            btcaddress = [set stringForColumn:@"btcaddress"];
-            btcprivate = [set stringForColumn:@"btcprivate"];
-            
+    
+    for (int i = 0; i < self.localcurrencys.count; i ++) {
+        if ([self.localcurrencys[i].symbol isEqualToString:@"BTC"]) {
+            self.btcAddress = self.localcurrencys[i].address;
         }
-        [set close];
     }
-    [dataBase.dataBase close];
-    self.btcAddress = btcaddress;
-    self.btcPrivate = btcprivate;
     
     TLNetworking *net = [TLNetworking new];
     net.code = @"802220";
-    net.parameters[@"address"] = btcaddress;
+    net.parameters[@"address"] = self.btcAddress;
     [net postWithSuccess:^(id responseObject) {
         [self.tableView reloadData];
         NSString *blance = responseObject[@"data"][@"balance"];
@@ -916,37 +920,40 @@ typedef enum : NSUInteger {
 
 - (void)loadPwd
 {
-    TLDataBase *dataBase = [TLDataBase sharedManager];
-    if ([dataBase.dataBase open]) {
-        NSString *sql = [NSString stringWithFormat:@"SELECT PwdKey from THAUser where userId = '%@'",[TLUser user].userId];
-        FMResultSet *set = [dataBase.dataBase executeQuery:sql];
-        while ([set next])
-        {
-            self.word = [set stringForColumn:@"PwdKey"];
-        }
-        [set close];
-    }
-    [dataBase.dataBase close];
+//    TLDataBase *dataBase = [TLDataBase sharedManager];
+//    if ([dataBase.dataBase open]) {
+//        NSString *sql = [NSString stringWithFormat:@"SELECT PwdKey from THAUser where userId = '%@'",[TLUser user].userId];
+//        FMResultSet *set = [dataBase.dataBase executeQuery:sql];
+//        while ([set next])
+//        {
+//            self.word = [set stringForColumn:@"PwdKey"];
+//        }
+//        [set close];
+//    }
+//    [dataBase.dataBase close];
+    
+    self.word = [[NSUserDefaults standardUserDefaults] objectForKey:MNEMONICPASSWORD];
 }
 
 
 
 #pragma mark -- btc转账
 - (void) testSpendCoins:(NSString *)to : (NSString*)count :(NSString*)free {
-    TLDataBase *dataBase = [TLDataBase sharedManager];
-    NSString *word;
-    if ([dataBase.dataBase open]) {
-        NSString *sql = [NSString stringWithFormat:@"SELECT Mnemonics from THAUser where userId = '%@'",[TLUser user].userId];
-        //        [sql appendString:[TLUser user].userId];
-        FMResultSet *set = [dataBase.dataBase executeQuery:sql];
-        while ([set next])
-        {
-            word = [set stringForColumn:@"Mnemonics"];
-            
-        }
-        [set close];
-    }
-    [dataBase.dataBase close];
+//    TLDataBase *dataBase = [TLDataBase sharedManager];
+//    NSString *word;
+//    if ([dataBase.dataBase open]) {
+//        NSString *sql = [NSString stringWithFormat:@"SELECT Mnemonics from THAUser where userId = '%@'",[TLUser user].userId];
+//        //        [sql appendString:[TLUser user].userId];
+//        FMResultSet *set = [dataBase.dataBase executeQuery:sql];
+//        while ([set next])
+//        {
+//            word = [set stringForColumn:@"Mnemonics"];
+//
+//        }
+//        [set close];
+//    }
+//    [dataBase.dataBase close];
+    NSString *word = [[NSUserDefaults standardUserDefaults] objectForKey:MNEMONIC];
     NSArray *words = [word componentsSeparatedByString:@" "];
     BTCMnemonic *mnemonic =  [MnemonicUtil importMnemonic:words];
     BTCKeychain *keychain = [mnemonic keychain];
@@ -1171,21 +1178,22 @@ typedef enum : NSUInteger {
         return;
     }
     
-    TLDataBase *dataBase = [TLDataBase sharedManager];
-    NSString *word;
-    if ([dataBase.dataBase open]) {
-        NSString *sql = [NSString stringWithFormat:@"SELECT Mnemonics from THAUser where userId = '%@'",[TLUser user].userId];
-        //        [sql appendString:[TLUser user].userId];
-        FMResultSet *set = [dataBase.dataBase executeQuery:sql];
-        while ([set next])
-        {
-            word = [set stringForColumn:@"Mnemonics"];
-            
-        }
-        [set close];
-    }
-    [dataBase.dataBase close];
+//    TLDataBase *dataBase = [TLDataBase sharedManager];
+//    NSString *word;
+//    if ([dataBase.dataBase open]) {
+//        NSString *sql = [NSString stringWithFormat:@"SELECT Mnemonics from THAUser where userId = '%@'",[TLUser user].userId];
+//        //        [sql appendString:[TLUser user].userId];
+//        FMResultSet *set = [dataBase.dataBase executeQuery:sql];
+//        while ([set next])
+//        {
+//            word = [set stringForColumn:@"Mnemonics"];
+//
+//        }
+//        [set close];
+//    }
+//    [dataBase.dataBase close];
     //    [self queryTotalAmount];
+    NSString *word = [[NSUserDefaults standardUserDefaults]objectForKey:MNEMONIC];
     
     
     NSArray *words = [word componentsSeparatedByString:@" "];
@@ -1232,6 +1240,120 @@ typedef enum : NSUInteger {
     
     
 }
+
+
+
+#pragma mark -- 个人钱包列表网络请求
+- (void)getMyCurrencyList {
+    
+    if (([TLUser user].isLogin == NO)){
+        return;
+    }
+    CoinWeakSelf;
+    TLNetworking *http = [TLNetworking new];
+    http.code = @"802503";
+    http.showView = self.view;
+    http.parameters[@"userId"] = [TLUser user].userId;
+    http.parameters[@"token"] = [TLUser user].token;
+    
+    [http postWithSuccess:^(id responseObject) {
+        
+        
+        
+        weakSelf.tableView.models = [CurrencyModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"][@"accountList"]];
+        weakSelf.currencys = [CurrencyModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"][@"accountList"]];
+        weakSelf.centercurrencys = weakSelf.currencys;
+        
+        
+        [self.view addSubview:self.tableView];
+        
+        self.numberTextField = [self.view viewWithTag:1000];
+        self.googleTextField = [self.view viewWithTag:1001];
+        self.poundageSlider = [self.view viewWithTag:1002];
+        self.totalFree = [self.view viewWithTag:1212];
+        
+        
+        if (self.isLocal == YES) {
+            self.currentModel = self.localcurrencys[0];
+            [self loadtype];
+            [self loadGas];
+        }else
+        {
+            self.currentModel = self.currencys[0];
+        }
+        _tableView.model = self.currentModel;
+        [weakSelf.tableView reloadData];
+//        [weakSelf.tableView endRefreshHeader];
+    } failure:^(NSError *error) {
+//        [weakSelf.tableView endRefreshHeader];
+        
+    }];
+    
+    
+    
+    
+    
+}
+
+-(void)LoadData{
+    
+    
+//    NSString *audioFile = [[NSBundle mainBundle] pathForResource:@"QSount.caf" ofType:nil];
+//
+//    NSLog(@"%@",audioFile);
+    //    [self.currentTableView beginRefreshing];
+    TLNetworking *http = [TLNetworking new];
+    http.code = @"802270";
+    http.isLocal = YES;
+    http.isUploadToken = NO;
+    //    TLDataBase *dataBase = [TLDataBase sharedManager];
+    NSString *symbol;
+    NSString *address;
+    NSMutableArray *arr = [NSMutableArray array];
+    NSMutableArray *muArray = [[NSUserDefaults standardUserDefaults]objectForKey:COINARRAY];
+    for (int i = 0; i < muArray.count; i ++) {
+        symbol = muArray[i][@"symbol"];
+        address = muArray[i][@"address"];
+        //            NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+        if (!address) {
+            address = @"";
+            
+        }
+        NSDictionary *dic = @{@"symbol":symbol,
+                              @"address":address
+                              };
+        //            [dic setObject:symbol forKey:@"symbol"];
+        [arr addObject:dic];
+    }
+
+    http.parameters[@"accountList"] = arr;
+    CoinWeakSelf;
+    
+    [http postWithSuccess:^(id responseObject) {
+        weakSelf.localcurrencys = [CurrencyModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"][@"accountList"]];
+            self.tableView.models = self.localcurrencys;
+        if (self.isLocal == YES) {
+            self.currentModel = self.localcurrencys[0];
+            [self loadtype];
+            [self loadGas];
+        }else
+        {
+            self.currentModel = self.currencys[0];
+        }
+        _tableView.model = self.currentModel;
+//        [weakSelf.tableView reloadData];
+        [self.tableView reloadData];
+        
+    } failure:^(NSError *error) {
+    
+    }];
+}
+
+
+
+
+
+
 
 
 @end

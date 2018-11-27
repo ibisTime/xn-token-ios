@@ -71,6 +71,24 @@
     self.navigationController.navigationBar.shadowImage = [UIImage new];
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
 }
+-(void)loginTheWhether
+{
+    if ([TLUser isBlankString:[TLUser user].userId] == YES)
+        
+    {
+        [TLAlert alertWithTitle:[LangSwitcher switchLang:@"提示" key:nil] msg:[LangSwitcher switchLang:@"您还未登录，是否前去登录" key:nil] confirmMsg:[LangSwitcher switchLang:@"确认" key:nil] cancleMsg:[LangSwitcher switchLang:@"取消" key:nil] cancle:^(UIAlertAction *action) {
+            
+        } confirm:^(UIAlertAction *action) {
+            TheInitialVC *vc = [[TheInitialVC alloc]init];
+            UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+            UIViewController *rootViewController = [[[UIApplication sharedApplication] keyWindow] rootViewController];
+            [rootViewController presentViewController:nav animated:YES completion:nil];
+        }];
+        
+        return;
+    }
+}
+
 
 
 //-(void)handleNavigationTransition:(UIPanGestureRecognizer *)pan

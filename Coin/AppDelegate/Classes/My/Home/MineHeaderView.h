@@ -38,6 +38,8 @@ typedef NS_ENUM(NSUInteger, MineHeaderSeletedType) {
 //交易、好评跟信任
 @property (nonatomic, strong) UILabel *dataLbl;
 
+@property (nonatomic, strong) UIImageView *phone;
+
 @property (nonatomic, strong)UIButton *integralBtn;
 
 @end

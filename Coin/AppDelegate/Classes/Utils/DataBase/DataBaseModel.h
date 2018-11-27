@@ -21,6 +21,8 @@
 @property (nonatomic ,copy) NSString* ethprivate;
 @property (nonatomic ,copy) NSString* btcaddress;
 @property (nonatomic ,copy) NSString* btcprivate;
+@property (nonatomic ,copy) NSString* usdtaddress;
+@property (nonatomic ,copy) NSString* usdtprivate;
 @property (nonatomic ,copy) NSString* PwdKey;
 @property (nonatomic ,copy) NSString* name;
 

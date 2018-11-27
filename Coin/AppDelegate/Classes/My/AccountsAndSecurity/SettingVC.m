@@ -8,14 +8,11 @@
 
 #import "SettingVC.h"
 #import "TheInitialVC.h"
-#import "IdAuthVC.h"
-#import "ZMAuthVC.h"
 #import "TLChangeMobileVC.h"
 #import "TLPwdRelatedVC.h"
 #import "TLUserForgetPwdVC.h"
 #import "HTMLStrVC.h"
 #import "TLTabBarController.h"
-#import "EditVC.h"
 #import "GoogleAuthVC.h"
 #import "CloseGoogleAuthVC.h"
 #import "ChangeLoginPwdVC.h"
@@ -172,47 +169,47 @@
     
     
     //实名认证
-    SettingModel *idAuth = [SettingModel new];
-    idAuth.text = [LangSwitcher switchLang:@"实名认证" key:nil];
-    self.realNameSettingModel = idAuth;
-    [idAuth setAction:^{
-        
-        ZMAuthVC *authVC = [ZMAuthVC new];
-        authVC.title = [LangSwitcher switchLang:@"实名认证" key:nil];
-        authVC.success = ^{
-            
-            [TLAlert alertWithSucces:[LangSwitcher switchLang:@"实名认证成功" key:nil]];
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                
-                [weakSelf.navigationController popViewControllerAnimated:YES];
-                
-            });
-        };
-        
-        [weakSelf.navigationController pushViewController:authVC animated:YES];
-        
-    }];
+//    SettingModel *idAuth = [SettingModel new];
+//    idAuth.text = [LangSwitcher switchLang:@"实名认证" key:nil];
+//    self.realNameSettingModel = idAuth;
+//    [idAuth setAction:^{
+//
+//        ZMAuthVC *authVC = [ZMAuthVC new];
+//        authVC.title = [LangSwitcher switchLang:@"实名认证" key:nil];
+//        authVC.success = ^{
+//
+//            [TLAlert alertWithSucces:[LangSwitcher switchLang:@"实名认证成功" key:nil]];
+//            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//
+//                [weakSelf.navigationController popViewControllerAnimated:YES];
+//
+//            });
+//        };
+//
+//        [weakSelf.navigationController pushViewController:authVC animated:YES];
+//
+//    }];
     
     //绑定邮箱
-    SettingModel *bindEmail = [SettingModel new];
-    bindEmail.text = [LangSwitcher switchLang:@"绑定邮箱" key:nil];
-    self.emailSettingModel = bindEmail;
-    [bindEmail setAction:^{
-        
-        EditEmailVC *editVC = [[EditEmailVC alloc] init];
-        [editVC setDone:^(NSString *content){
-            
-            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:1 inSection:1];
-            SettingCell *cell = [weakSelf.tableView cellForRowAtIndexPath:indexPath];
-            
-            cell.rightLabel.text = [[TLUser user].email valid] ? [TLUser user].email: [LangSwitcher switchLang:@"" key:nil];
-            
-            [weakSelf.tableView reloadData];
-            
-        }];
-        //
-        [weakSelf.navigationController pushViewController:editVC animated:YES];
-    }];
+//    SettingModel *bindEmail = [SettingModel new];
+//    bindEmail.text = [LangSwitcher switchLang:@"绑定邮箱" key:nil];
+//    self.emailSettingModel = bindEmail;
+//    [bindEmail setAction:^{
+//
+//        EditEmailVC *editVC = [[EditEmailVC alloc] init];
+//        [editVC setDone:^(NSString *content){
+//
+//            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:1 inSection:1];
+//            SettingCell *cell = [weakSelf.tableView cellForRowAtIndexPath:indexPath];
+//
+//            cell.rightLabel.text = [[TLUser user].email valid] ? [TLUser user].email: [LangSwitcher switchLang:@"" key:nil];
+//
+//            [weakSelf.tableView reloadData];
+//
+//        }];
+//        //
+//        [weakSelf.navigationController pushViewController:editVC animated:YES];
+//    }];
     
     //修改手机号
 //    SettingModel *changeMobile = [SettingModel new];
@@ -335,9 +332,17 @@
         
     } confirm:^(UIAlertAction *action) {
         [[NSNotificationCenter defaultCenter] postNotificationName:kUserLoginOutNotification object:nil];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-          
-            
+//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
+            if ([TLUser isBlankString:[[NSUserDefaults standardUserDefaults] objectForKey:MNEMONIC]] == NO) {
+                TLTabBarController *tab = [[TLTabBarController alloc] init];
+                [UIApplication sharedApplication].keyWindow.rootViewController = tab;
+            }
+            else
+            {
+                TheInitialVC *loginVC= [TheInitialVC new];
+                [self.navigationController pushViewController:loginVC animated:YES];
+            }
 //            TheInitialVC *initialVC = [[TheInitialVC alloc] init];
 //            UINavigationController *na = [[UINavigationController alloc] initWithRootViewController:initialVC];
 //
@@ -345,8 +350,7 @@
 //            [[NSUserDefaults standardUserDefaults] synchronize];
 //            self.window.rootViewController = na;
             
-                TheInitialVC *loginVC= [TheInitialVC new];
-                [self.navigationController pushViewController:loginVC animated:YES];
+            
           
 //            tabbarVC.selectedIndex = 0;
 //            [self.navigationController popViewControllerAnimated:NO];
@@ -354,7 +358,7 @@
             
             
             
-        });
+//        });
     }];
    
 }

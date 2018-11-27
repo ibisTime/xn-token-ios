@@ -35,7 +35,7 @@ static NSString *identifierCell = @"SettingCell";
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     
-    return self.group.sections.count;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -61,23 +61,23 @@ static NSString *identifierCell = @"SettingCell";
         }
     };
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    if (indexPath.section == 0 && indexPath.row == 0) {
-        cell.switchHidden = YES;
-        cell.arrowHidden = YES;
-        settingModel.imgName = @"钱包";
-//        cell.iconImageView.image = kImage(@"钱包");
-    }else{
+//    if (indexPath.section == 0 && indexPath.row == 0) {
+//        cell.switchHidden = YES;
+//        cell.arrowHidden = YES;
+//        settingModel.imgName = @"钱包";
+////        cell.iconImageView.image = kImage(@"钱包");
+//    }else{
         cell.switchHidden = YES;
         cell.textLabel.text = settingModel.text;
         cell.textLabel.textColor = kTextColor;
         cell.textLabel.font = Font(15.0);
         
-    }
-    if (settingModel.subText) {
-        
-        cell.rightLabel.text = settingModel.subText;
-
-    }
+//    }
+//    if (settingModel.subText) {
+//
+//        cell.rightLabel.text = settingModel.subText;
+//
+//    }
     if (indexPath.section == 1 & indexPath.row == 1) {
         if ([settingModel.text isEqualToString:@"删除钱包"]) {
             

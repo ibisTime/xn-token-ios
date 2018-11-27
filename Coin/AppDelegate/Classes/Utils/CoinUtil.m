@@ -106,6 +106,9 @@ NSString *const kCNY = @"CNY";
 
 + (NSString *)mult1:(NSString *)mult1 mult2:(NSString *)mult2 {
     
+    if ([mult1 isEqualToString:@""] || [mult2 isEqualToString:@""]) {
+        return @"0";
+    }
     NSDecimalNumber *mult1Num = [[NSDecimalNumber alloc] initWithString:mult1];
     NSDecimalNumber *mult2Num = [[NSDecimalNumber alloc] initWithString:mult2];
     NSDecimalNumber *result = [mult1Num decimalNumberByMultiplyingBy:mult2Num];

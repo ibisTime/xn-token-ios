@@ -216,9 +216,16 @@
         return;
     }
     
+    
     if (!self.rePwdTf.text || [self.rePwdTf.text isBlank]) {
         
         [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入新密码" key:nil]];
+        return;
+    }
+    
+    if (self.rePwdTf.text.length < 6) {
+        
+        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"密码不得小于6位数" key:nil]];
         return;
     }
     
@@ -235,39 +242,39 @@
         
     }
     
-    TLDataBase *dataBase = [TLDataBase sharedManager];
-    NSString *word;
-    if ([dataBase.dataBase open]) {
-        NSString *sql = [NSString stringWithFormat:@"SELECT PwdKey from THAUser where userId = '%@'",[TLUser user].userId];
-        //        [sql appendString:[TLUser user].userId];
-        FMResultSet *set = [dataBase.dataBase executeQuery:sql];
-        while ([set next])
-        {
-            word = [set stringForColumn:@"PwdKey"];
-            if ([word isEqualToString:@""]) {
-                word = @"111111";
-            }
-            
-        }
-        [set close];
-    }
-    [dataBase.dataBase close];
+//    TLDataBase *dataBase = [TLDataBase sharedManager];
+//    NSString *word;
+//    if ([dataBase.dataBase open]) {
+//        NSString *sql = [NSString stringWithFormat:@"SELECT PwdKey from THAUser where userId = '%@'",[TLUser user].userId];
+//        //        [sql appendString:[TLUser user].userId];
+//        FMResultSet *set = [dataBase.dataBase executeQuery:sql];
+//        while ([set next])
+//        {
+//            word = [set stringForColumn:@"PwdKey"];
+//            if ([word isEqualToString:@""]) {
+//                word = @"111111";
+//            }
+//
+//        }
+//        [set close];
+//    }
+//    [dataBase.dataBase close];
     
-    if (![word isEqualToString:self.pwdTf.text]) {
+    if (![[[NSUserDefaults standardUserDefaults]objectForKey:MNEMONICPASSWORD] isEqualToString:self.rePwdTf.text]) {
         [TLAlert alertWithError:[LangSwitcher switchLang:@"交易密码错误" key:nil]];
         return;
     }
     
-    TLDataBase *db = [TLDataBase sharedManager];
-    if ([db.dataBase open]) {
-        NSString *sql = [NSString stringWithFormat:@"UPDATE THAUser SET PwdKey = '%@' WHERE userId = '%@'",self.rePwdTf.text,[TLUser user].userId];
-        BOOL sucess = [db.dataBase executeUpdate:sql];
-        
-//        NSLog(@"导入钱包交易密码%d",sucess);
-        
-    }
-    [db.dataBase close];
-    
+//    TLDataBase *db = [TLDataBase sharedManager];
+//    if ([db.dataBase open]) {
+//        NSString *sql = [NSString stringWithFormat:@"UPDATE THAUser SET PwdKey = '%@' WHERE userId = '%@'",self.rePwdTf.text,[TLUser user].userId];
+//        BOOL sucess = [db.dataBase executeUpdate:sql];
+//
+////        NSLog(@"导入钱包交易密码%d",sucess);
+//
+//    }
+//    [db.dataBase close];
+    [[NSUserDefaults standardUserDefaults] setObject:self.pwdTf.text forKey:MNEMONICPASSWORD];
     [self.view endEditing:YES];
     [TLAlert alertWithSucces:[LangSwitcher switchLang:@"修改成功" key:nil]];
 

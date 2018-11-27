@@ -77,7 +77,6 @@
 		211A34F11FB430DB00FEB71F /* SettingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 211A34EE1FB430DB00FEB71F /* SettingModel.m */; };
 		211A34F41FB430F900FEB71F /* SettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 211A34F31FB430F900FEB71F /* SettingCell.m */; };
 		211A34F71FB4328800FEB71F /* SettingTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 211A34F61FB4328800FEB71F /* SettingTableView.m */; };
-		211A34FD1FB4507E00FEB71F /* IdAuthVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 211A34FC1FB4507E00FEB71F /* IdAuthVC.m */; };
 		211A35041FB45A6A00FEB71F /* WalletHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 211A35031FB45A6A00FEB71F /* WalletHeaderView.m */; };
 		211A53221FBFE3A100CC6294 /* RateDescVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 211A53211FBFE3A100CC6294 /* RateDescVC.m */; };
 		211A532F1FBFE4CF00CC6294 /* RateDescCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 211A532E1FBFE4CF00CC6294 /* RateDescCell.m */; };
@@ -89,7 +88,6 @@
 		211C05121FC6717300E51FCF /* libstdc++.6.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 211C05101FC6717300E51FCF /* libstdc++.6.tbd */; };
 		211CEF141FCBBF90000FB0C4 /* SelectScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 211CEF121FCBBF90000FB0C4 /* SelectScrollView.m */; };
 		211CEF151FCBBF90000FB0C4 /* SortBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 211CEF131FCBBF90000FB0C4 /* SortBar.m */; };
-		211D4ED61FCD9B0C000E0D43 /* EditVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 211D4ED51FCD9B0C000E0D43 /* EditVC.m */; };
 		211DE6A01FB58B4C002FCF3D /* TLDatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 211DE63E1FB58B4B002FCF3D /* TLDatePicker.m */; };
 		211DE6A11FB58B4C002FCF3D /* TLTimeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 211DE63F1FB58B4B002FCF3D /* TLTimeButton.m */; };
 		211DE6A21FB58B4C002FCF3D /* TLCaptchaView.m in Sources */ = {isa = PBXBuildFile; fileRef = 211DE6401FB58B4B002FCF3D /* TLCaptchaView.m */; };
@@ -175,8 +173,6 @@
 		21A7F35E1FB2EBAA00FAA0A2 /* CurrencyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A7F35C1FB2EBA900FAA0A2 /* CurrencyModel.m */; };
 		21A7F3631FB2F16C00FAA0A2 /* HTMLStrVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A7F3621FB2F16B00FAA0A2 /* HTMLStrVC.m */; };
 		21A821171FDA690700AE59F2 /* GoogleAuthVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A821161FDA690700AE59F2 /* GoogleAuthVC.m */; };
-		21C91D7D1FDBCF9C006EDB16 /* ZMAuthVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21C91D7C1FDBCF9B006EDB16 /* ZMAuthVC.m */; };
-		21C91D801FDBCFB6006EDB16 /* ZMAuthResultVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21C91D7E1FDBCFB6006EDB16 /* ZMAuthResultVC.m */; };
 		21C91D881FDBD604006EDB16 /* TLAlipayManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 21C91D871FDBD604006EDB16 /* TLAlipayManager.m */; };
 		21C91D981FDBD7E4006EDB16 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21C91D971FDBD7DE006EDB16 /* CoreMotion.framework */; };
 		21D216861FB9C5750040795E /* QRCodeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21D216851FB9C5750040795E /* QRCodeVC.m */; };
@@ -682,8 +678,6 @@
 		211A34F31FB430F900FEB71F /* SettingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingCell.m; sourceTree = "<group>"; };
 		211A34F51FB4328800FEB71F /* SettingTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingTableView.h; sourceTree = "<group>"; };
 		211A34F61FB4328800FEB71F /* SettingTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingTableView.m; sourceTree = "<group>"; };
-		211A34FB1FB4507E00FEB71F /* IdAuthVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IdAuthVC.h; sourceTree = "<group>"; };
-		211A34FC1FB4507E00FEB71F /* IdAuthVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IdAuthVC.m; sourceTree = "<group>"; };
 		211A35021FB45A6A00FEB71F /* WalletHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WalletHeaderView.h; sourceTree = "<group>"; };
 		211A35031FB45A6A00FEB71F /* WalletHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WalletHeaderView.m; sourceTree = "<group>"; };
 		211A53201FBFE3A100CC6294 /* RateDescVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RateDescVC.h; sourceTree = "<group>"; };
@@ -704,8 +698,6 @@
 		211CEF111FCBBF8F000FB0C4 /* SelectScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectScrollView.h; sourceTree = "<group>"; };
 		211CEF121FCBBF90000FB0C4 /* SelectScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectScrollView.m; sourceTree = "<group>"; };
 		211CEF131FCBBF90000FB0C4 /* SortBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SortBar.m; sourceTree = "<group>"; };
-		211D4ED41FCD9B0C000E0D43 /* EditVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditVC.h; sourceTree = "<group>"; };
-		211D4ED51FCD9B0C000E0D43 /* EditVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditVC.m; sourceTree = "<group>"; };
 		211DE63D1FB58B4B002FCF3D /* TLImagePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLImagePicker.h; sourceTree = "<group>"; };
 		211DE63E1FB58B4B002FCF3D /* TLDatePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLDatePicker.m; sourceTree = "<group>"; };
 		211DE63F1FB58B4B002FCF3D /* TLTimeButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLTimeButton.m; sourceTree = "<group>"; };
@@ -879,10 +871,6 @@
 		21A7F3621FB2F16B00FAA0A2 /* HTMLStrVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTMLStrVC.m; sourceTree = "<group>"; };
 		21A821151FDA690700AE59F2 /* GoogleAuthVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GoogleAuthVC.h; sourceTree = "<group>"; };
 		21A821161FDA690700AE59F2 /* GoogleAuthVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GoogleAuthVC.m; sourceTree = "<group>"; };
-		21C91D7B1FDBCF9B006EDB16 /* ZMAuthVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZMAuthVC.h; sourceTree = "<group>"; };
-		21C91D7C1FDBCF9B006EDB16 /* ZMAuthVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZMAuthVC.m; sourceTree = "<group>"; };
-		21C91D7E1FDBCFB6006EDB16 /* ZMAuthResultVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZMAuthResultVC.m; sourceTree = "<group>"; };
-		21C91D7F1FDBCFB6006EDB16 /* ZMAuthResultVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZMAuthResultVC.h; sourceTree = "<group>"; };
 		21C91D861FDBD604006EDB16 /* TLAlipayManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLAlipayManager.h; sourceTree = "<group>"; };
 		21C91D871FDBD604006EDB16 /* TLAlipayManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLAlipayManager.m; sourceTree = "<group>"; };
 		21C91D8E1FDBD74A006EDB16 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
@@ -2865,19 +2853,6 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		21C91D791FDBCF5B006EDB16 /* Auth实名认证 */ = {
-			isa = PBXGroup;
-			children = (
-				211A34FB1FB4507E00FEB71F /* IdAuthVC.h */,
-				211A34FC1FB4507E00FEB71F /* IdAuthVC.m */,
-				21C91D7B1FDBCF9B006EDB16 /* ZMAuthVC.h */,
-				21C91D7C1FDBCF9B006EDB16 /* ZMAuthVC.m */,
-				21C91D7F1FDBCFB6006EDB16 /* ZMAuthResultVC.h */,
-				21C91D7E1FDBCFB6006EDB16 /* ZMAuthResultVC.m */,
-			);
-			path = "Auth实名认证";
-			sourceTree = "<group>";
-		};
 		21C91D7A1FDBCF6B006EDB16 /* Google */ = {
 			isa = PBXGroup;
 			children = (
@@ -2950,7 +2925,6 @@
 				7AEF23582154C58A00BF1DB5 /* WalletSetting */,
 				7A2CC63D2159E3F700B27E2D /* SetUp */,
 				7A07F7D9216C7B650026EB7A /* MyIncome */,
-				1F358B3A218AA43A00F1665B /* ScratchableLatex九宫格 */,
 				2E394FAD1FB055DE00BA0829 /* Controller */,
 				21A7F35B1FB2EB9300FAA0A2 /* Model */,
 				211A34D81FB3F55600FEB71F /* View */,
@@ -3741,22 +3715,12 @@
 		7AEF23592154C67F00BF1DB5 /* AccountsAndSecurity */ = {
 			isa = PBXGroup;
 			children = (
+				1F358B3A218AA43A00F1665B /* ScratchableLatex九宫格 */,
 				21C91D7A1FDBCF6B006EDB16 /* Google */,
-				7AEF235A2154C70400BF1DB5 /* Email */,
-				21C91D791FDBCF5B006EDB16 /* Auth实名认证 */,
 				211A34E91FB42F8100FEB71F /* SettingVC.h */,
 				211A34EA1FB42F8100FEB71F /* SettingVC.m */,
 			);
 			path = AccountsAndSecurity;
-			sourceTree = "<group>";
-		};
-		7AEF235A2154C70400BF1DB5 /* Email */ = {
-			isa = PBXGroup;
-			children = (
-				211D4ED41FCD9B0C000E0D43 /* EditVC.h */,
-				211D4ED51FCD9B0C000E0D43 /* EditVC.m */,
-			);
-			path = Email;
 			sourceTree = "<group>";
 		};
 		7AEF235B2154C81400BF1DB5 /* AddWallet */ = {
@@ -4553,7 +4517,6 @@
 				211DE6BC1FB58B4C002FCF3D /* NSString+Extension.m in Sources */,
 				B88D6C6F20EDF39F0043832C /* TLFastvc.m in Sources */,
 				7A2CC66A215BBCEA00B27E2D /* PosMyInvestmentHeadView.m in Sources */,
-				21C91D7D1FDBCF9C006EDB16 /* ZMAuthVC.m in Sources */,
 				B808651C211EA17D00755158 /* BTCData.m in Sources */,
 				B80864FB211EA17D00755158 /* BTCTransaction.m in Sources */,
 				B8CA0D6A21081B850015A19D /* AssetPwdView.m in Sources */,
@@ -4719,7 +4682,6 @@
 				7A3821C620EAD4EA00D6B636 /* SendModel.m in Sources */,
 				7A2CC6C6215DC88C00B27E2D /* PGDatePickManagerHeaderView.m in Sources */,
 				7AAF036121526977008507FF /* aescrypt.c in Sources */,
-				211D4ED61FCD9B0C000E0D43 /* EditVC.m in Sources */,
 				B8086528211EA17D00755158 /* BTCPaymentMethod.m in Sources */,
 				7A40B119217EF15F004B9830 /* TableViewAnimationKit.m in Sources */,
 				211A34D71FB3F51400FEB71F /* MineHeaderView.m in Sources */,
@@ -4729,7 +4691,6 @@
 				211DE6C11FB58B4C002FCF3D /* AppConfig.m in Sources */,
 				B8DB9EBA214F6AF10091276E /* RedIntroduce.m in Sources */,
 				B83604132125581A0089CC17 /* TLtakeMoneyModel.m in Sources */,
-				21C91D801FDBCFB6006EDB16 /* ZMAuthResultVC.m in Sources */,
 				211DE6A41FB58B4C002FCF3D /* TLPickerTextField.m in Sources */,
 				7A07F821216CB4910026EB7A /* GlobalRevenueListCell.m in Sources */,
 				1F4E89D5219C1D7D007B3015 /* ContactDataHelper.m in Sources */,
@@ -4837,7 +4798,6 @@
 				1F816BF42180953D0078B945 /* SGQRCodeScanManager.m in Sources */,
 				1F4E89E4219E91CA007B3015 /* ImportWalletVC.m in Sources */,
 				B80864F5211EA17D00755158 /* BTCAssetID.m in Sources */,
-				211A34FD1FB4507E00FEB71F /* IdAuthVC.m in Sources */,
 				B80864FF211EA17D00755158 /* BTCScript+Tests.m in Sources */,
 				7AAF036B21526977008507FF /* mztools.c in Sources */,
 				215979731FB84CB10029F177 /* BillDetailTableView.m in Sources */,

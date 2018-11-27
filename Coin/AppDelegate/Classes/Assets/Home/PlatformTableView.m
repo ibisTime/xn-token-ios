@@ -104,14 +104,8 @@ static NSString *platformCell1 = @"AccountMoneyCellTableViewCell";
     AccountMoneyCellTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:platformCell1 forIndexPath:indexPath];
     
     
-    if (self.isLocal == YES) {
-//        [self WhetherOrNotShown];
-//        for (int j = 0; j<self.platforms.count; j++) {
-//            if ([arr[indexPath.row][@"address"] isEqualToString:self.platforms[j].address]) {
-//
-//                cell.platform = self.platforms[j];
-//            }
-//        }
+    if ([self.isWallet isEqualToString:@"私钥钱包"]) {
+
         cell.platform = self.platforms[indexPath.row];
     }else
     {
@@ -141,7 +135,7 @@ static NSString *platformCell1 = @"AccountMoneyCellTableViewCell";
     UITableViewRowAction *transferBtn = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:[LangSwitcher switchLang:@"转账" key:nil] handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
         
         if ([self.refreshDelegate respondsToSelector:@selector(refreshTableView:setCurrencyModel:setTitle:)]) {
-            if (self.isLocal == YES) {
+            if ([self.isWallet isEqualToString:@"个人钱包"]) {
                 [self.refreshDelegate refreshTableView:self setCurrencyModel:self.platforms[indexPath.row] setTitle:@"转账"];
 //                [self WhetherOrNotShown];
 //                for (int j = 0; j<self.platforms.count; j++) {
@@ -161,7 +155,7 @@ static NSString *platformCell1 = @"AccountMoneyCellTableViewCell";
     UITableViewRowAction *collectionBtn = [UITableViewRowAction  rowActionWithStyle:UITableViewRowActionStyleNormal title:[LangSwitcher switchLang:@"收款" key:nil] handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
         
         if ([self.refreshDelegate respondsToSelector:@selector(refreshTableView:setCurrencyModel:setTitle:)]) {
-            if (self.isLocal == YES) {
+            if ([self.isWallet isEqualToString:@"个人钱包"]) {
                 [self.refreshDelegate refreshTableView:self setCurrencyModel:self.platforms[indexPath.row] setTitle:@"收款"];
 //                [self WhetherOrNotShown];
 //                for (int j = 0; j<self.platforms.count; j++) {
