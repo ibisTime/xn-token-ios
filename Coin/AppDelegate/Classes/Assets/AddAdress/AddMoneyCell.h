@@ -24,4 +24,6 @@
 
 @property (nonatomic , strong)AddAccoutModel *model;
 @property (nonatomic, assign)NSInteger PersonalWallet;
+
+@property (nonatomic , strong)NSDictionary *dataDic;
 @end

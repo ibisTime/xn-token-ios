@@ -67,6 +67,7 @@
 		1F816BF72180953D0078B945 /* SGQRCodeScanningView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F816BED2180953B0078B945 /* SGQRCodeScanningView.m */; };
 		1F816BF82180953D0078B945 /* UIImage+ImageSize.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F816BEE2180953B0078B945 /* UIImage+ImageSize.m */; };
 		1F816BF92180953D0078B945 /* SGQRCodeHelperTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F816BF02180953C0078B945 /* SGQRCodeHelperTool.m */; };
+		1FC1C35321AE33FF00FA94E3 /* MoneyPasswordVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FC1C35221AE33FF00FA94E3 /* MoneyPasswordVC.m */; };
 		211A34D71FB3F51400FEB71F /* MineHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 211A34D61FB3F51400FEB71F /* MineHeaderView.m */; };
 		211A34DB1FB4083300FEB71F /* MineTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 211A34DA1FB4083300FEB71F /* MineTableView.m */; };
 		211A34DE1FB4245D00FEB71F /* MineCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 211A34DD1FB4245D00FEB71F /* MineCell.m */; };
@@ -658,6 +659,8 @@
 		1F816BF12180953C0078B945 /* SGQRCodeScanManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SGQRCodeScanManager.h; sourceTree = "<group>"; };
 		1F816BF22180953C0078B945 /* SGQRCodeHelperTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SGQRCodeHelperTool.h; sourceTree = "<group>"; };
 		1F816BF32180953D0078B945 /* SGQRCode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SGQRCode.h; sourceTree = "<group>"; };
+		1FC1C35121AE33FF00FA94E3 /* MoneyPasswordVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MoneyPasswordVC.h; sourceTree = "<group>"; };
+		1FC1C35221AE33FF00FA94E3 /* MoneyPasswordVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MoneyPasswordVC.m; sourceTree = "<group>"; };
 		211A34D51FB3F51400FEB71F /* MineHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MineHeaderView.h; sourceTree = "<group>"; };
 		211A34D61FB3F51400FEB71F /* MineHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MineHeaderView.m; sourceTree = "<group>"; };
 		211A34D91FB4083300FEB71F /* MineTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MineTableView.h; sourceTree = "<group>"; };
@@ -2203,6 +2206,41 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
+		1FC1C34D21AE336A00FA94E3 /* Account账户 */ = {
+			isa = PBXGroup;
+			children = (
+				1FC1C35021AE338200FA94E3 /* Controller */,
+				1FC1C34F21AE337F00FA94E3 /* Model */,
+				1FC1C34E21AE337D00FA94E3 /* View */,
+			);
+			path = "Account账户";
+			sourceTree = "<group>";
+		};
+		1FC1C34E21AE337D00FA94E3 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		1FC1C34F21AE337F00FA94E3 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		1FC1C35021AE338200FA94E3 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				211A34E91FB42F8100FEB71F /* SettingVC.h */,
+				211A34EA1FB42F8100FEB71F /* SettingVC.m */,
+				1FC1C35121AE33FF00FA94E3 /* MoneyPasswordVC.h */,
+				1FC1C35221AE33FF00FA94E3 /* MoneyPasswordVC.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 		211A34D81FB3F55600FEB71F /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -2918,6 +2956,7 @@
 			isa = PBXGroup;
 			children = (
 				7A2CC6372159E0E900B27E2D /* Home */,
+				1FC1C34D21AE336A00FA94E3 /* Account账户 */,
 				7AEF23592154C67F00BF1DB5 /* AccountsAndSecurity */,
 				7A2CC63A2159E35000B27E2D /* Invitation */,
 				7A2CC63E2159E42600B27E2D /* Feedback */,
@@ -3717,8 +3756,6 @@
 			children = (
 				1F358B3A218AA43A00F1665B /* ScratchableLatex九宫格 */,
 				21C91D7A1FDBCF6B006EDB16 /* Google */,
-				211A34E91FB42F8100FEB71F /* SettingVC.h */,
-				211A34EA1FB42F8100FEB71F /* SettingVC.m */,
 			);
 			path = AccountsAndSecurity;
 			sourceTree = "<group>";
@@ -4563,6 +4600,7 @@
 				215979701FB84B8A0029F177 /* BillDetailVC.m in Sources */,
 				B808651D211EA17D00755158 /* BTCProcessor.m in Sources */,
 				B88B092120C8E29D005C2D2F /* JoinMineVc.m in Sources */,
+				1FC1C35321AE33FF00FA94E3 /* MoneyPasswordVC.m in Sources */,
 				1F709D5E218161D8002D1CC4 /* keyTransferTableView.m in Sources */,
 				B8086516211EA17D00755158 /* BTCAddress.m in Sources */,
 				7A2CC6D8215DC89200B27E2D /* PGPickerView.m in Sources */,

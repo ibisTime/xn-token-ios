@@ -340,6 +340,7 @@
             
         } confirm:^(UIAlertAction *action) {
             TheInitialVC *vc = [[TheInitialVC alloc]init];
+            vc.isBack = @"1";
             UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
             UIViewController *rootViewController = [[[UIApplication sharedApplication] keyWindow] rootViewController];
             [rootViewController presentViewController:nav animated:YES completion:nil];
@@ -386,6 +387,7 @@
             TheInitialVC *vc = [[TheInitialVC alloc]init];
             UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
             UIViewController *rootViewController = [[[UIApplication sharedApplication] keyWindow] rootViewController];
+            vc.isBack = @"1";
             [rootViewController presentViewController:nav animated:YES completion:nil];
         }];
         

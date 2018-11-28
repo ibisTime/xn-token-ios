@@ -28,8 +28,14 @@ static NSString *identifierCell = @"AddMoneyCell";
     return self;
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    if (self.PersonalWallet == 101) {
+        NSArray *array = [[NSUserDefaults standardUserDefaults]objectForKey:COINARRAY];
+        return array.count;
+    }else
+    {
+        return self.currencys.count;
+    }
     
-    return self.currencys.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -40,8 +46,17 @@ static NSString *identifierCell = @"AddMoneyCell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     AddMoneyCell *cell = [tableView dequeueReusableCellWithIdentifier:identifierCell forIndexPath:indexPath];
-    cell.PersonalWallet = _PersonalWallet;
-    cell.currency = self.currencys[indexPath.section];
+    cell.PersonalWallet = self.PersonalWallet;
+    if (self.PersonalWallet == 101) {
+        NSArray *array = [[NSUserDefaults standardUserDefaults]objectForKey:COINARRAY];
+//        return array.count;
+        cell.dataDic = array[indexPath.section];
+    }else
+    {
+        cell.currency = self.currencys[indexPath.section];
+    }
+    
+    
     
     cell.tag = 1200 + 100*indexPath.section;
 

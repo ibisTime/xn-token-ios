@@ -55,23 +55,14 @@
 
 @property (nonatomic, strong) NSMutableArray <CurrencyModel *>*AssetsListModel;
 
-//@property (nonatomic, strong) NSMutableArray <CurrencyModel *>*currencys;
-//
-//@property (nonatomic, strong) NSMutableArray <CurrencyModel *>*localCurrencys;
 
 @property (nonatomic, strong) NSMutableArray <CurrencyModel *>*allCurrencys;
-
-//@property (nonatomic, strong) NSMutableArray <CurrencyModel *>*tempcurrencys;
 
 @property (nonatomic, strong) NSMutableArray <RateModel *>*rates;
 
 @property (nonatomic, strong) TLNetworking *helper;
 
 @property (nonatomic,strong) NSMutableArray <BillModel *>*bills;
-
-//@property (nonatomic, strong) UIButton *leftButton;
-//
-//@property (nonatomic, strong) UIButton *rightButton;
 
 @property (nonatomic,strong) NSMutableArray <CoinModel *>*coins;
 
@@ -80,16 +71,10 @@
 @property (nonatomic, strong) TLNetworking *http;
 
 #pragma mark -- switchTager   0 私钥    1 个人钱包
-//@property (nonatomic, assign) NSInteger switchTager;
-
-//清除公告 更新UI
-//@property (nonatomic, assign) BOOL isClear;
 
 @property (nonatomic, copy) NSString *IsLocalExsit;
 
 @property (nonatomic, strong) UIView *titleView;
-
-//@property (nonatomic, strong) UIButton *addButton;
 
 @property (nonatomic, strong) UIView *contentView;
 
@@ -122,7 +107,6 @@
             TradePasswordVC *vc = [[TradePasswordVC alloc]init];
             vc.state = @"1";
             [weakSelf.navigationController pushViewController:vc animated:YES];
-            
         };
         
         self.homeView.importBlock = ^{
@@ -189,16 +173,10 @@
 //            点击加号
             if ([self.isWallet isEqualToString:@"私钥钱包"]) {
                 AddAccoutMoneyVc *monyVc = [[AddAccoutMoneyVc alloc] init];
-//                monyVc.currentModels = self.currencys;
-                //        monyVc.isRedPage = YES;
+                monyVc.PersonalWallet = 101;
                 [self.navigationController pushViewController:monyVc animated:YES];
-                CoinWeakSelf;
-//                self.tempcurrencys = [NSMutableArray array];
-                monyVc.select = ^(NSMutableArray *model) {
-                    weakSelf.isAddBack = YES;
-                    [self.tableView reloadData];
 
-                };
+               
             }else
             {
                 AddAccoutMoneyVc *monyVc = [[AddAccoutMoneyVc alloc] init];
@@ -277,18 +255,24 @@
     
     [self loadData];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(InfoNotificationAction:) name:@"LOADDATAPAGE2" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(InfoNotificationAction1:) name:@"LOADDATAPAGE3" object:nil];
 }
 
 
 #pragma mark -- 接收到通知
 - (void)InfoNotificationAction:(NSNotification *)notification{
-    [self loadData];
+    [self getMyCurrencyList];
+}
+
+- (void)InfoNotificationAction1:(NSNotification *)notification{
+    [self saveLocalWalletData];
 }
 
 #pragma mark -- 删除通知
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"LOADDATAPAGE2" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"LOADDATAPAGE1" object:nil];
 }
 
 
@@ -520,86 +504,9 @@
 }
 
 
-
-
-#pragma mark -- 点击加号按钮
-//- (void)addCurrent
-//{
-//    if (self.switchTager == 0) {
-//        AddAccoutMoneyVc *monyVc = [[AddAccoutMoneyVc alloc] init];
-//        monyVc.currentModels = self.currencys;
-////        monyVc.isRedPage = YES;
-//        [self.navigationController pushViewController:monyVc animated:YES];
-//        CoinWeakSelf;
-//        self.tempcurrencys = [NSMutableArray array];
-//        monyVc.select = ^(NSMutableArray *model) {
-//            weakSelf.isAddBack = YES;
-//            [self.tableView reloadData];
-////            [weakSelf queryTotalAmount];
-//        };
-//    }else
-//    {
-//        AddAccoutMoneyVc *monyVc = [[AddAccoutMoneyVc alloc] init];
-//        monyVc.PersonalWallet = 100;
-//        [self.navigationController pushViewController:monyVc animated:YES];
-//    }
-//}
-
-
-
-//闪兑
-//- (void)fast{
-//    TLFastvc *fast = [TLFastvc new];
-//    [self.navigationController pushViewController:fast animated:YES];
-//}
-
-//一键划转
-//- (void)transNext{
-//    TLDataBase *dataBase = [TLDataBase sharedManager];
-//    NSString *word;
-//    if ([dataBase.dataBase open]) {
-//        NSString *sql = [NSString stringWithFormat:@"SELECT Mnemonics from THAUser where userId = '%@'",[TLUser user].userId];
-//        //        [sql appendString:[TLUser user].userId];
-//        FMResultSet *set = [dataBase.dataBase executeQuery:sql];
-//        while ([set next])
-//        {
-//            word = [set stringForColumn:@"Mnemonics"];
-//
-//        }
-//        [set close];
-//    }
-//    [dataBase.dataBase close];
-//    if (word.length > 0) {
-////        一键划转
-//        TLTransfromVC *trans = [TLTransfromVC new];
-//        trans.isLocal = self.switchTager == 0 ? YES : NO;
-//        //    个人
-//        if (self.currencys.count == 0 || self.currencys.count == 0 || self.allCurrencys == 0) {
-//            return;
-//        }
-//        trans.currencys = self.currencys;
-//        trans.centercurrencys = self.currencys;
-//        trans.localcurrencys = self.allCurrencys;
-//        if (self.switchTager == 1) {
-//            trans.isLocal = NO;
-//        }else{
-//            //        私钥
-//            trans.isLocal = YES;
-//        }
-//        [self.navigationController pushViewController:trans animated:YES];
-//
-//    }else{
-//
-////        导入钱包
-//        BuildWalletMineVC *settingVC = [BuildWalletMineVC new];
-//        [self.navigationController pushViewController:settingVC animated:YES];
-//    }
-//}
-
 - (void)addNotification {
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userlogin) name:kUserLoginNotification object:nil];
-//     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userloginOut) name:kUserLoginOutNotification object:nil];
 }
 
 //更新数据库
@@ -702,22 +609,13 @@
     [self.tableView addRefreshAction:^{
         
         [CoinUtil refreshOpenCoinList:^{
-            
+            //    个人钱包
             [weakSelf getMyCurrencyList];
             //    获取公告列表
             [weakSelf requestRateList];
+            //    私钥钱包
             [weakSelf saveLocalWalletData];
-//            [weakSelf saveLocalWallet];
-            //    获取本地存储私钥钱包
-            
-            //   监测是否需要更新新币种
-            
-            //   个人钱包
-//            [weakSelf queryCenterTotalAmount];
-            
-            
-            
-            
+
         } failure:^{
             [weakSelf.tableView endRefreshHeader];
         }];
@@ -740,32 +638,29 @@
     http.parameters[@"token"] = [TLUser user].token;
     
     [http postWithSuccess:^(id responseObject) {
-        
+        NSMutableArray <CurrencyModel *>*modes;
 //        NSArray <CurrencyModel *>*models;
+        weakSelf.AssetsListModel = [CurrencyModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"][@"accountList"]];
+        
         if ([self.isWallet isEqualToString:@"个人钱包"]) {
             
             weakSelf.tableView.platforms = [CurrencyModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"][@"accountList"]];
-            weakSelf.AssetsListModel = [CurrencyModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"][@"accountList"]];
-            [TableViewAnimationKit showWithAnimationType:2 tableView:self.tableView];
-//            if (models.count == 0) {
-//                ;
-//            }
-//            models = weakSelf.AssetsListModel;
+            
+//            [weakSelf.tableView reloadData];
             
         }
         self.headView.dataDic = responseObject[@"data"];
-        [weakSelf.tableView reloadData];
         
+        [weakSelf.tableView reloadData];
+        if (modes.count != weakSelf.AssetsListModel.count) {
+            [TableViewAnimationKit showWithAnimationType:2 tableView:self.tableView];
+        }
+        modes = weakSelf.AssetsListModel;
         [weakSelf.tableView endRefreshHeader];
     } failure:^(NSError *error) {
         [weakSelf.tableView endRefreshHeader];
         
     }];
-    
-    
-    
-    
-
 }
 
 
@@ -779,15 +674,17 @@
     }
     
     NSMutableArray *arr = [[CoinModel coin] getOpenCoinList];
-//    NSMutableArray *temp = arr.mutableCopy;
     NSMutableArray *muArray = [NSMutableArray array];
-//    TLDataBase *db = [TLDataBase sharedManager];
+    
+    NSString *isAccording;
+    
+    NSArray *CoinArray = [[NSUserDefaults standardUserDefaults]objectForKey:COINARRAY];
+    
+//        本地未存私钥列表
+    
     for (int i = 0; i < arr.count; i++) {
-        
-        NSString *symbol;
-
         CoinModel *model = arr[i];
-//        symbol = model.symbol;
+        //        symbol = model.symbol;
         NSArray *array = [[[NSUserDefaults standardUserDefaults]objectForKey:MNEMONIC] componentsSeparatedByString:@" "];
         BTCMnemonic *mnemonic1 =  [MnemonicUtil importMnemonic:array];
         if ([AppConfig config].runEnv == 0) {
@@ -797,60 +694,82 @@
             mnemonic1.keychain.network = [BTCNetwork testnet];
         }
         NSString *address;
-//
         if ([model.type isEqualToString:@"0"]) {
             if ([model.symbol isEqualToString:@"BTC"] || [model.symbol isEqualToString:@"USDT"]) {
-                symbol = @"btc";
+                if (CoinArray.count > 0) {
+                    isAccording = [self judgeIsAccording:model.symbol setCoinArray:CoinArray];
+                }else
+                {
+                    isAccording = @"是";
+                }
                 address = [MnemonicUtil getBtcAddress:mnemonic1];
             }
             if ([model.symbol isEqualToString:@"ETH"]) {
                 address = [MnemonicUtil getEthAddress:mnemonic1];
-                symbol = @"eth";
+                if (CoinArray.count > 0) {
+                    isAccording = [self judgeIsAccording:model.symbol setCoinArray:CoinArray];
+                }else
+                {
+                    isAccording = @"是";
+                }
             }
             if ([model.symbol isEqualToString:@"WAN"]) {
                 address = [MnemonicUtil getEthAddress:mnemonic1];
-                symbol = @"wan";
+                if (CoinArray.count > 0) {
+                    isAccording = [self judgeIsAccording:model.symbol setCoinArray:CoinArray];
+                }else
+                {
+                    isAccording = @"是";
+                }
             }
         }else if ([model.type isEqualToString:@"1"])
         {
             address = [MnemonicUtil getEthAddress:mnemonic1];
-            symbol = @"eth";
+            if (CoinArray.count > 0) {
+                isAccording = [self judgeIsAccording:model.symbol setCoinArray:CoinArray];
+            }else
+            {
+                isAccording = @"否";
+            }
         }
         else
         {
             address = [MnemonicUtil getEthAddress:mnemonic1];
-            symbol = @"wan";
+            if (CoinArray.count > 0) {
+                isAccording = [self judgeIsAccording:model.symbol setCoinArray:CoinArray];
+            }else
+            {
+                isAccording = @"否";
+            }
         }
-
+        
         [arr[i] setValue:address forKey:@"address"];
         
         NSDictionary *coinDic = @{@"symbol":model.symbol,
                                   @"type":model.type,
                                   @"address":address,
-                                  @"Select":@"是"
+                                  @"Select":isAccording
                                   };
         [muArray addObject:coinDic];
         
-//        CoinModel *model = self.coins[i];
-//        TLDataBase *dateBase = [TLDataBase sharedManager];
-//        if ([dateBase.dataBase open]) {
-//
-//            BOOL sucess = [dateBase.dataBase executeUpdate:@"INSERT INTO  THALocal(Mnemonics,symbol,type,status,cname,unit,pic1,withdrawFeeString,withfrawFee,orderNo,ename,icon,pic2,pic3,address,IsSelect,next) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",[[NSUserDefaults standardUserDefaults] objectForKey:MNEMONIC],model.symbol,model.type,model.status,model.cname,model.unit,model.pic1,model.withdrawFeeString,model.withfrawFee,model.orderNo,model.ename,model.icon,model.pic2,model.pic3,address,[NSNumber numberWithBool:YES],[NSString stringWithFormat:@"%ld",self.coins.count]];
-//
-//
-//
-//
-//
-//            NSLog(@"插入币种表%d",sucess);
-//        }
-//        [dateBase.dataBase close];
     }
-    self.coins = arr;
-    
+        self.coins = arr;
+
     [[NSUserDefaults standardUserDefaults] setObject:muArray forKey:COINARRAY];
-    
     //   私钥钱包
     [self queryTotalAllAmount];
+}
+
+
+-(NSString *)judgeIsAccording:(NSString *)symbol setCoinArray:(NSArray *)array
+{
+
+    for (int i = 0; i < array.count; i ++) {
+        if ([array[i][@"symbol"] isEqualToString:symbol]) {
+            return array[i][@"Select"];
+        }
+    }
+    return @"否";
 }
 
 //- (void)loadSum{
@@ -915,12 +834,10 @@
     NSString *audioFile = [[NSBundle mainBundle] pathForResource:@"QSount.caf" ofType:nil];
     
     NSLog(@"%@",audioFile);
-    //    [self.currentTableView beginRefreshing];
     TLNetworking *http = [TLNetworking new];
     http.code = @"802270";
     http.isLocal = YES;
     http.isUploadToken = NO;
-//    TLDataBase *dataBase = [TLDataBase sharedManager];
     NSString *symbol;
     NSString *address;
     NSMutableArray *arr = [NSMutableArray array];
@@ -929,7 +846,6 @@
         if ([muArray[i][@"Select"] isEqualToString:@"是"]) {
             symbol = muArray[i][@"symbol"];
             address = muArray[i][@"address"];
-//            NSMutableDictionary *dic = [NSMutableDictionary dictionary];
             if (!address) {
                 address = @"";
                 
@@ -937,44 +853,14 @@
             NSDictionary *dic = @{@"symbol":symbol,
                                   @"address":address
                                   };
-//            [dic setObject:symbol forKey:@"symbol"];
             [arr addObject:dic];
-            
         }
     }
-    
-//    if ([dataBase.dataBase open]) {
-//
-//        NSString *sql = [NSString stringWithFormat:@"SELECT symbol,address from THALocal lo, THAUser th where th.Mnemonics = '%@'",[[NSUserDefaults standardUserDefaults] objectForKey:MNEMONIC]];
-//        //        [sql appendString:[TLUser user].userId];
-//        FMResultSet *set = [dataBase.dataBase executeQuery:sql];
-//        while ([set next])
-//        {
-//            NSMutableDictionary *dic = [NSMutableDictionary dictionary];
-//
-//            symbol = [set stringForColumn:@"symbol"];
-//            address = [set stringForColumn:@"address"];
-//
-//            if (!address) {
-//                [dic setObject:@"" forKey:@"address"];
-//
-//            }else{
-//                [dic setObject:address forKey:@"address"];
-//            }
-//            [dic setObject:symbol forKey:@"symbol"];
-//            [arr addObject:dic];
-//        }
-//        [set close];
-//    }
-//    [dataBase.dataBase close];
-    
-//    NSSet *set = [NSSet setWithArray:arr];
-//    NSArray *resultArray = [set allObjects];
-//    NSArray *resultArray;
     http.parameters[@"accountList"] = arr;
     CoinWeakSelf;
     
     [http postWithSuccess:^(id responseObject) {
+        NSMutableArray <CurrencyModel *>*modes;
         self.headView.privateDataDic = responseObject[@"data"];
         [self.tableView reloadData];
        weakSelf.allCurrencys = [CurrencyModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"][@"accountList"]];
@@ -982,65 +868,12 @@
             self.tableView.platforms = self.allCurrencys;
             self.tableView.isWallet = self.isWallet;
             [self.tableView reloadData];
-            [TableViewAnimationKit showWithAnimationType:2 tableView:self.tableView];
+            if (modes.count != weakSelf.allCurrencys.count) {
+                [TableViewAnimationKit showWithAnimationType:2 tableView:self.tableView];
+            }
+            
         }
-//        NSString *cnyStr = [responseObject[@"data"][@"totalAmountCNY"] convertToSimpleRealMoney];
-//        self.IsLocalExsit = @"1";
-        
-//        if ([[TLUser user].localMoney isEqualToString:@"USD"]) {
-//            cnyStr = [responseObject[@"data"][@"totalAmountUSD"] convertToSimpleRealMoney];
-//            double f =  [cnyStr doubleValue] +[[self.headerView.privateMoney.text substringFromIndex:1] doubleValue] ;
-//            self.headerView.cnyAmountLbl.text = [NSString stringWithFormat:@"$ %.2f", f] ;
-//            self.headerView.LocalMoney.text = [NSString stringWithFormat:@"$ %.2f", [cnyStr doubleValue]];
-//            self.headerView.localLbl.text = [NSString stringWithFormat:@"%@(USD)", [LangSwitcher switchLang:@"私钥钱包" key:nil]];;
-//            self.headerView.textLbl.text = [NSString stringWithFormat:@"%@(USD)", [LangSwitcher switchLang:@"个人账户" key:nil]];;
-//
-//            NSArray *usdStr = responseObject[@"data"][@"accountList"];
-//            self.headerView.usdAmountLbl.text = [NSString stringWithFormat:@"%@USD", usdStr];
-//            self.headerView.equivalentBtn.text = [NSString stringWithFormat:@"%@(USD)", [LangSwitcher switchLang:@"总资产" key:nil]];;
-//            [self.headerView setNeedsDisplay];
-//
-//        } else if ([[TLUser user].localMoney isEqualToString:@"KRW"])
-//        {
-//            NSString *cnyStr = [responseObject[@"data"][@"totalAmountKRW"] convertToSimpleRealMoney];
-//            if (![self.IsLocalExsit isEqualToString:@"1"]) {
-//                self.headerView.cnyAmountLbl.text = [NSString stringWithFormat:@"₩ %.2f", [cnyStr doubleValue]];
-//
-//
-//            }
-//            self.headerView.cnyAmountLbl.text = [NSString stringWithFormat:@"₩ %.2f", [cnyStr doubleValue]];
-//
-//            double f =  [cnyStr doubleValue] +[[self.headerView.privateMoney.text substringFromIndex:1] doubleValue] ;
-//            self.headerView.cnyAmountLbl.text = [NSString stringWithFormat:@"₩ %.2f", f] ;
-//            self.headerView.LocalMoney.text = [NSString stringWithFormat:@"₩ %.2f", [cnyStr doubleValue]];
-//            self.headerView.equivalentBtn.text = [NSString stringWithFormat:@"%@(KRW)", [LangSwitcher switchLang:@"总资产" key:nil]];
-//            self.headerView.localLbl.text = [NSString stringWithFormat:@"%@(KRW)", [LangSwitcher switchLang:@"私钥钱包" key:nil]];
-//            self.headerView.textLbl.text = [NSString stringWithFormat:@"%@(KRW)", [LangSwitcher switchLang:@"个人账户" key:nil]];
-//            [self.headerView setNeedsDisplay];
-//
-//        }
-//        else
-//        {
-//            double f =  [cnyStr doubleValue]+[[self.headerView.privateMoney.text substringFromIndex:1] doubleValue] ;
-//            self.headerView.cnyAmountLbl.text = [NSString stringWithFormat:@"¥ %.2f", f];
-//            self.headerView.LocalMoney.text = [NSString stringWithFormat:@"¥ %.2f", [cnyStr doubleValue]];
-//            self.headerView.equivalentBtn.text = [NSString stringWithFormat:@"%@(CNY)", [LangSwitcher switchLang:@"总资产" key:nil]];
-//
-//            NSArray *usdStr = responseObject[@"data"][@"accountList"];
-//            self.headerView.localLbl.text = [NSString stringWithFormat:@"%@(CNY)", [LangSwitcher switchLang:@"私钥钱包" key:nil]];
-//            self.headerView.textLbl.text = [NSString stringWithFormat:@"%@(CNY)", [LangSwitcher switchLang:@"个人账户" key:nil]];
-//            self.headerView.usdAmountLbl.text = [NSString stringWithFormat:@"%@USD", usdStr];
-//
-//            NSString *hkdStr = [responseObject[@"data"][@"totalAmountHKD"] convertToSimpleRealMoney];
-//
-//            self.headerView.hkdAmountLbl.text = [NSString stringWithFormat:@"%@HKD", hkdStr];
-//            [self.headerView setNeedsDisplay];
-//
-//
-//        }
-//        self.localCurrencys = [CurrencyModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"][@"accountList"]];
-//
-        
+        modes = weakSelf.allCurrencys;
 
         [weakSelf.tableView endRefreshHeader];
 

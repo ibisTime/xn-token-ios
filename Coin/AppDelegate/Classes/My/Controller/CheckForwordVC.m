@@ -377,7 +377,7 @@
             
             //导入钱包 设置的交易密码
             TLUpdateVC *up = [[TLUpdateVC alloc] init];
-            TLTabBarController *tabBarCtrl = [[TLTabBarController alloc] init];
+//            TLTabBarController *tabBarCtrl = [[TLTabBarController alloc] init];
             
             [UIApplication sharedApplication].keyWindow.rootViewController = up;
             

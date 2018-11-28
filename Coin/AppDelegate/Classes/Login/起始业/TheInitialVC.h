@@ -10,4 +10,6 @@
 
 @interface TheInitialVC : TLBaseVC
 
+@property (nonatomic , strong)NSString *isBack;
+
 @end

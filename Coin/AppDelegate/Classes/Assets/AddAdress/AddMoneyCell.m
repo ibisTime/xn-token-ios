@@ -42,7 +42,7 @@
     
     self.backgroundColor = kClearColor;
     
-    CGFloat leftMargin = 15;
+//    CGFloat leftMargin = 15;
     
     //背景
     UIView *whiteView = [[UIView alloc] init];
@@ -107,8 +107,13 @@
 }
 - (void)ChoseClick: (UIButton *)btn
 {
-    btn.selected =! btn.selected;
-    _currency.IsSelected = btn.selected;
+//    btn.selected =! btn.selected;
+//    _currency.IsSelected = btn.selected;
+    
+//    if (_PersonalWallet == 101) {
+//
+//    }
+    
 //    [_AddMoneyDelegate SelectTheButton:btn];
 
 }
@@ -121,6 +126,21 @@
 -(void)setPersonalWallet:(NSInteger)PersonalWallet
 {
     _PersonalWallet = PersonalWallet;
+}
+
+-(void)setDataDic:(NSDictionary *)dataDic
+{
+    CoinModel *coin = [CoinUtil getCoinModel:dataDic[@"symbol"]];
+    [self.coinIV sd_setImageWithURL:[NSURL URLWithString:[coin.pic1 convertImageUrl]]];
+    self.currencyNameLbl.text = [NSString stringWithFormat:@"%@",dataDic[@"symbol"]];
+    
+    if ([dataDic[@"Select"] isEqualToString:@"是"]) {
+        
+        self.selectButton.selected = YES;
+    }else
+    {
+        self.selectButton.selected = NO;
+    }
 }
 
 - (void)setCurrency:(CurrencyModel *)currency {
@@ -138,25 +158,26 @@
         {
             self.selectButton.selected = YES;
         }
-    }else
-    {
-        CoinModel *coin ;
-
-        if (currency.currency) {
-            coin = [CoinUtil getCoinModel:currency.currency];
-            self.currencyNameLbl.text = [NSString stringWithFormat:@"%@",currency.currency];
-            self.selectButton.selected = currency.IsSelected;
-            [self.selectButton setImage:kImage(@"more") forState:UIControlStateNormal];
-            [self.selectButton setImage:kImage(@"more") forState:UIControlStateSelected];
-
-            [self.coinIV sd_setImageWithURL:[NSURL URLWithString:[coin.pic1 convertImageUrl]]];
-        }else{
-            coin = [CoinUtil getCoinModel:currency.symbol];
-            self.currencyNameLbl.text = [NSString stringWithFormat:@"%@",currency.symbol];
-            self.selectButton.selected = currency.IsSelected;
-            [self.coinIV sd_setImageWithURL:[NSURL URLWithString:[coin.pic1 convertImageUrl]]];
-        }
     }
+//    else
+//    {
+//        CoinModel *coin ;
+//
+//        if (currency.currency) {
+//            coin = [CoinUtil getCoinModel:currency.currency];
+//            self.currencyNameLbl.text = [NSString stringWithFormat:@"%@",currency.currency];
+//            self.selectButton.selected = currency.IsSelected;
+//            [self.selectButton setImage:kImage(@"more") forState:UIControlStateNormal];
+//            [self.selectButton setImage:kImage(@"more") forState:UIControlStateSelected];
+//
+//            [self.coinIV sd_setImageWithURL:[NSURL URLWithString:[coin.pic1 convertImageUrl]]];
+//        }else{
+//            coin = [CoinUtil getCoinModel:currency.symbol];
+//            self.currencyNameLbl.text = [NSString stringWithFormat:@"%@",currency.symbol];
+//            self.selectButton.selected = currency.IsSelected;
+//            [self.coinIV sd_setImageWithURL:[NSURL URLWithString:[coin.pic1 convertImageUrl]]];
+//        }
+//    }
 
     //    self.coinIV.image = kImage(_currency.getImgName);
 

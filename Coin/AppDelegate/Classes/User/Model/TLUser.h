@@ -19,8 +19,6 @@
 @property (nonatomic, copy) NSString *userId;
 @property (nonatomic, copy) NSString *secretUserId;
 
-
-
 //Token
 @property (nonatomic, copy) NSString *token;
 //手机号

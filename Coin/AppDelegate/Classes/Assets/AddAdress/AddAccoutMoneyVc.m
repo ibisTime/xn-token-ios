@@ -20,6 +20,20 @@
 
 @implementation AddAccoutMoneyVc
 
+-(void)viewWillDisappear:(BOOL)animated
+
+{
+    if (self.PersonalWallet == 100) {
+        NSNotification *notification =[NSNotification notificationWithName:@"LOADDATAPAGE2" object:nil userInfo:nil];
+        [[NSNotificationCenter defaultCenter] postNotification:notification];
+    }
+    if (self.PersonalWallet == 101) {
+        NSNotification *notification =[NSNotification notificationWithName:@"LOADDATAPAGE3" object:nil userInfo:nil];
+        [[NSNotificationCenter defaultCenter] postNotification:notification];
+    }
+    
+    
+}
 
 - (void)viewDidLoad {
 
@@ -146,104 +160,47 @@
 
 
     }
-    else
+    else if (self.PersonalWallet == 101)
     {
-        if (self.isRedPage == YES) {
-            self.tableView.currencys = self.currentModels;
-            self.currentModels = self.currentModels;
-            [self.tableView reloadData];
 
-
-        }else{
-            self.currentModels = [NSMutableArray array];
-            NSString *totalcount;
-            TLDataBase *data = [TLDataBase sharedManager];
-
-            if ([data.dataBase open]) {
-                NSString *sql;
-                if (self.isRedPage == YES) {
-                    sql = [NSString stringWithFormat:@"SELECT * from THALocal lo, THAUser th where lo.walletId = th.walletId  and th.userId = '%@'",[TLUser user].userId];
-                }else{
-                    sql = [NSString stringWithFormat:@"SELECT * from THALocal lo, THAUser th where lo.walletId = th.walletId  and th.userId = '%@'",[TLUser user].userId];
-                }
-
-                FMResultSet *set = [data.dataBase executeQuery:sql];
-                while ([set next]) {
-                    CurrencyModel *model =[CurrencyModel new];
-                    if (self.isRedPage == YES) {
-                        model.symbol = [set stringForColumn:@"symbol"];
-                        [self.currentModels addObject:model];
-                    }else{
-                        totalcount = [set stringForColumn:@"IsSelect"];
-                        model.IsSelected = [totalcount boolValue];
-                        model.symbol = [set stringForColumn:@"symbol"];
-                        [self.currentModels addObject:model];
-
-                    }
-
-                }
-                [set close];
-            }
-            [data.dataBase close];
-
-            self.tableView.currencys = self.currentModels;
-            self.currentModels = self.currentModels;
-            [self.tableView reloadData];
-            
-            
-        }
+    }else
+    {
+        self.tableView.currencys = self.currentModels;
+        self.currentModels = self.currentModels;
+        [self.tableView reloadData];
+        
+        
     }
 
 }
 
-- (void)SaveStatusSymbol
-{
-    self.currencys = self.currentModels.mutableCopy;
-    for (int i = 0; i < self.tableView.currencys.count; i++) {
-        TLDataBase *data = [TLDataBase sharedManager];
-        CurrencyModel *model = self.tableView.currencys[i];
-        if ([data.dataBase open]) {
-            
-            NSString *sql = [NSString stringWithFormat:@"UPDATE THALocal SET IsSelect = '%@' WHERE walletId = (SELECT walletId from THAUser where userId='%@') and symbol = '%@' ",[NSNumber numberWithBool:model.IsSelected],[TLUser user].userId,model.symbol];
-            BOOL sucess = [data.dataBase executeUpdate:sql];
-            NSLog(@"更新自选状态%d",sucess);
-        }
-        [data.dataBase close];
-    }
-    
-    
-    self.tableView.currencys = self.currencys;
-    self.currentModels = self.currentModels;
-    [self.tableView reloadData];
-    
-}
-- (void)viewWillDisappear:(BOOL)animated{
-    if (self.PersonalWallet == 100) {
-        return;
-    }
-    if (self.isRedPage) {
-        return;
-    }
-    self.currencys = self.tableView.currencys;
-    [self SaveStatusSymbol];
-    NSMutableArray *a = [NSMutableArray array];
-    for (int i = 0; i < self.currencys.count; i++) {
-        CurrencyModel *model = self.currencys[i];
-        if (model.IsSelected == YES) {
-            [a addObject:model];
-        }
-    }
-    if (self.select) {
-        self.select(self.currencys);
-    }
-}
-
-
+//- (void)SaveStatusSymbol{
+//    self.currencys = self.currentModels.mutableCopy;
+//    for (int i = 0; i < self.tableView.currencys.count; i++) {
+//        TLDataBase *data = [TLDataBase sharedManager];
+//        CurrencyModel *model = self.tableView.currencys[i];
+//        if ([data.dataBase open]) {
+//
+//            NSString *sql = [NSString stringWithFormat:@"UPDATE THALocal SET IsSelect = '%@' WHERE walletId = (SELECT walletId from THAUser where userId='%@') and symbol = '%@' ",[NSNumber numberWithBool:model.IsSelected],[TLUser user].userId,model.symbol];
+//            BOOL sucess = [data.dataBase executeUpdate:sql];
+//            NSLog(@"更新自选状态%d",sucess);
+//        }
+//        [data.dataBase close];
+//    }
+//
+//
+//    self.tableView.currencys = self.currencys;
+//    self.currentModels = self.currentModels;
+//    [self.tableView reloadData];
+//
+//}
 
 -(void)refreshTableViewButtonClick:(TLTableView *)refreshTableview button:(UIButton *)sender selectRowAtIndex:(NSInteger)index
 {
 
     if (self.PersonalWallet == 100) {
+//        UIButton *sender = [self.view viewWithTag:index];
+        sender.selected = !sender.selected;
         TLNetworking *http = [TLNetworking new];
         http.code = @"802280";
         http.showView = self.view;
@@ -255,12 +212,42 @@
         
         [http postWithSuccess:^(id responseObject) {
             
-            NSNotification *notification =[NSNotification notificationWithName:@"LOADDATAPAGE2" object:nil userInfo:nil];
-            [[NSNotificationCenter defaultCenter] postNotification:notification];
+            
             
         } failure:^(NSError *error) {
             sender.selected = !sender.selected;
         }];
+        
+    }
+    
+    if (self.PersonalWallet == 101) {
+//        UIButton *sender = [self.view viewWithTag:sender.tag + 200];
+        sender.selected = !sender.selected;
+        NSArray *dataArray = [[NSUserDefaults standardUserDefaults]objectForKey:COINARRAY];
+        NSLog(@"%@",dataArray);
+        
+        NSMutableArray *ary = [NSMutableArray array];
+        for (int i = 0; i < dataArray.count; i ++) {
+            if (i  ==  index) {
+                NSDictionary *item = [dataArray objectAtIndex:i];
+                
+                NSMutableDictionary *mutableItem = [NSMutableDictionary dictionaryWithDictionary:item];
+                
+                if ([item[@"Select"] isEqualToString:@"是"]) {
+                    [mutableItem setObject:@"否" forKey:@"Select"];
+                }else
+                {
+                    
+                    [mutableItem setValue:@"是" forKey:@"Select"];
+                }
+                [ary addObject:mutableItem];
+            }else
+            {
+                [ary addObject:dataArray[i]];
+            }
+            
+        }
+        [[NSUserDefaults standardUserDefaults] setObject:ary forKey:COINARRAY];
         
     }
     
@@ -273,7 +260,8 @@
 {
     
     if (self.PersonalWallet == 100) {
-        
+        UIButton *sender = [self.view viewWithTag:indexPath.section + 200];
+        sender.selected = !sender.selected;
         TLNetworking *http = [TLNetworking new];
         http.code = @"802280";
         http.showView = self.view;
@@ -285,19 +273,44 @@
         
         [http postWithSuccess:^(id responseObject) {
             
-            NSNotification *notification =[NSNotification notificationWithName:@"LOADDATAPAGE2" object:nil userInfo:nil];
-            [[NSNotificationCenter defaultCenter] postNotification:notification];
             
-//            sender.selected = !sender.selected;
         } failure:^(NSError *error) {
             UIButton *sender = [self.view viewWithTag:indexPath.section + 200];
             sender.selected = !sender.selected;
         }];
     }
-    if (self.isRedPage != YES) {
+    if (self.PersonalWallet == 101) {
         UIButton *sender = [self.view viewWithTag:indexPath.section + 200];
         sender.selected = !sender.selected;
-        self.currentModels[indexPath.section].IsSelected = sender.selected;
+        NSArray *dataArray = [[NSUserDefaults standardUserDefaults]objectForKey:COINARRAY];
+        NSLog(@"%@",dataArray);
+        
+        NSMutableArray *ary = [NSMutableArray array];
+        for (int i = 0; i < dataArray.count; i ++) {
+            if (i  ==  indexPath.section) {
+                NSDictionary *item = [dataArray objectAtIndex:i];
+                
+                NSMutableDictionary *mutableItem = [NSMutableDictionary dictionaryWithDictionary:item];
+
+                if ([item[@"Select"] isEqualToString:@"是"]) {
+                    [mutableItem setObject:@"否" forKey:@"Select"];
+                }else
+                {
+                    
+                    [mutableItem setValue:@"是" forKey:@"Select"];
+                }
+                [ary addObject:mutableItem];
+            }else
+            {
+                [ary addObject:dataArray[i]];
+            }
+            
+        }
+        [[NSUserDefaults standardUserDefaults] setObject:ary forKey:COINARRAY];
+
+        
+        
+        
     }
     if (self.isRedPage == YES) {
         if (self.curreryBlock) {

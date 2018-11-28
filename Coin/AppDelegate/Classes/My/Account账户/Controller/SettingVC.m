@@ -30,6 +30,7 @@
 #import "TLUserLoginVC.h"
 #import "ZLGestureLockViewController.h"
 #import "LocalSettingTableView.h"
+#import "MoneyPasswordVC.h"
 @interface SettingVC ()
 
 @property (nonatomic, strong) SettingGroup *group;
@@ -159,12 +160,14 @@
     changeTradePwd.text = [LangSwitcher switchLang:@"资金密码" key:nil];
     [changeTradePwd setAction:^{
         
-        TLPwdType pwdType = [[TLUser user].tradepwdFlag isEqualToString:@"0"] ? TLPwdTypeSetTrade: TLPwdTypeTradeReset;
+//        TLPwdType pwdType = [[TLUser user].tradepwdFlag isEqualToString:@"0"] ? TLPwdTypeSetTrade: TLPwdTypeTradeReset;
         
-        TLPwdRelatedVC *pwdAboutVC = [[TLPwdRelatedVC alloc] initWithType:pwdType];
-        
-        [weakSelf.navigationController pushViewController:pwdAboutVC animated:YES];
-        
+//        TLPwdRelatedVC *pwdAboutVC = [[TLPwdRelatedVC alloc] initWithType:pwdType];
+//
+//        [weakSelf.navigationController pushViewController:pwdAboutVC animated:YES];
+        MoneyPasswordVC *vc = [MoneyPasswordVC new];
+        vc.titleNameStr = @"修改资金密码";
+        [self.navigationController pushViewController:vc animated:YES];
     }];
     
     
@@ -234,7 +237,7 @@
     }
     [changeLoginPwd setAction:^{
         
-        TLUserForgetPwdVC *changeLoginPwdVC = [TLUserForgetPwdVC new];
+//        TLUserForgetPwdVC *changeLoginPwdVC = [TLUserForgetPwdVC new];
         
 //        changeLoginPwdVC.success = ^{
 //            
@@ -244,8 +247,10 @@
 //                
 //            });
 //        };
-        
-        [weakSelf.navigationController pushViewController:changeLoginPwdVC animated:YES];
+        MoneyPasswordVC *vc = [MoneyPasswordVC new];
+        vc.titleNameStr = @"修改登录密码";
+        [self.navigationController pushViewController:vc animated:YES];
+//        [weakSelf.navigationController pushViewController:changeLoginPwdVC animated:YES];
         
     }];
     

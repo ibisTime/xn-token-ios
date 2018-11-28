@@ -183,8 +183,10 @@
             [TLAlert alertWithInfo:[LangSwitcher switchLang:@"密码不一致" key:nil]];
             return;
         }
-        if (_passFid.text.length < 8) {
-            [TLAlert alertWithInfo:[LangSwitcher switchLang:@"密码位数至少为8数" key:nil]];
+        UIView *pointView1 = [self.view viewWithTag:300];
+
+        if (pointView1.backgroundColor != [UIColor greenColor]) {
+            [TLAlert alertWithInfo:[LangSwitcher switchLang:@"密码位数为8~25位数(字母+数字)" key:nil]];
             return;
         }
         
@@ -194,7 +196,9 @@
     }
     
     if (w == 2) {
-        
+        if (_moneyFid.text.length != 6) {
+            [TLAlert alertWithInfo:[LangSwitcher switchLang:@"资金密码为6位数" key:nil]];
+        }
         if (![_moneyFid.text isPhoneNum]) {
             [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入资金密码" key:nil]];
             return;
@@ -243,10 +247,12 @@
             http.parameters[@"token"] = token;
             [http postWithSuccess:^(id responseObject) {
                 
-
-                CompleteTheRegistrationVC *vc = [CompleteTheRegistrationVC new];
-                [self.navigationController pushViewController:vc animated:YES];
                 
+                dispatch_time_t delayTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC));
+                dispatch_after(delayTime, dispatch_get_main_queue(), ^{
+                    CompleteTheRegistrationVC *vc = [CompleteTheRegistrationVC new];
+                    [self.navigationController pushViewController:vc animated:YES];
+                });
                 
             } failure:^(NSError *error) {
                 
@@ -262,6 +268,9 @@
 
 - (void)textFieldDidChange:(UITextField *)textField {
     NSLog(@"%@",textField.text);
+    if (textField.tag != 12345) {
+        return;
+    }
     NSString *level;
     NSString *State;
     NSString *str;
@@ -271,15 +280,15 @@
     UIView *pointView1 = [self.view viewWithTag:300];
     UIView *pointView2 = [self.view viewWithTag:301];
     UIView *pointView3 = [self.view viewWithTag:302];
-    UIView *pointView4 = [self.view viewWithTag:303];
+//    UIView *pointView4 = [self.view viewWithTag:303];
     pointView1.backgroundColor = kWhiteColor;
     pointView2.backgroundColor = kWhiteColor;
     pointView3.backgroundColor = kWhiteColor;
-    pointView4.backgroundColor = kWhiteColor;
+//    pointView4.backgroundColor = kWhiteColor;
     
     NSString *testString = textField.text;
     NSInteger alength = [testString length];
-    if (textField.text.length >= 8) {
+    if (textField.text.length >= 8 && [[UserModel user]isStringTheCapitalLettersWith:textField.text] == YES && [[UserModel user]isStringContainNumberWith:textField.text] == YES) {
         pointView1.backgroundColor = [UIColor greenColor];
         State = [LangSwitcher switchLang:@"低" key:nil];
         
@@ -291,11 +300,11 @@
                 pointView2.backgroundColor = [UIColor greenColor];
                 State = [LangSwitcher switchLang:@"中" key:nil];
             }
-            if((commitChar>47)&&(commitChar<58)){
-                
-                pointView4.backgroundColor = [UIColor greenColor];
-                State = [LangSwitcher switchLang:@"中" key:nil];
-            }
+//            if((commitChar>47)&&(commitChar<58)){
+////                包含数字
+//                pointView4.backgroundColor = [UIColor greenColor];
+//                State = [LangSwitcher switchLang:@"中" key:nil];
+//            }
             
             if((commitChar>64)&&(commitChar<91)){
                 
@@ -305,7 +314,7 @@
                 
             }
             
-            if (textField.text.length >= 8 && pointView3.backgroundColor == [UIColor greenColor] && pointView2.backgroundColor == [UIColor greenColor] && pointView1.backgroundColor == [UIColor greenColor]) {
+            if (pointView3.backgroundColor == [UIColor greenColor] && pointView2.backgroundColor == [UIColor greenColor] && pointView1.backgroundColor == [UIColor greenColor]) {
                 State = [LangSwitcher switchLang:@"高" key:nil];
             }
         }
@@ -314,7 +323,7 @@
         pointView1.backgroundColor = kWhiteColor;
         pointView2.backgroundColor = kWhiteColor;
         pointView3.backgroundColor = kWhiteColor;
-        pointView4.backgroundColor = kWhiteColor;
+//        pointView4.backgroundColor = kWhiteColor;
     }
     if ([TLUser isBlankString:State] == YES) {
         State = [LangSwitcher switchLang:@"低" key:nil];
@@ -594,13 +603,16 @@
         UITextField *passWordFid = [[UITextField alloc]initWithFrame:CGRectMake(iconImage.xx + 15, passWordLbl.yy + 21 - 1.5, SCREEN_WIDTH - iconImage.xx - 40 , 15)];
         passWordFid.placeholder = placArray[i];
         passWordFid.secureTextEntry = YES;
-        passWordFid.delegate = self;
+        if (i == 0) {
+            passWordFid.delegate = self;
+        }
+        passWordFid.tag = 12345 + i;
         [passWordFid addTarget:self action:@selector(textFieldDidChange:) forControlEvents:(UIControlEventEditingChanged)];
         [passWordFid setValue:FONT(12) forKeyPath:@"_placeholderLabel.font"];
         passWordFid.font = FONT(12);
         passWordFid.textColor = [UIColor whiteColor];
         [passWordFid setValue:[UIColor whiteColor]  forKeyPath:@"_placeholderLabel.textColor"];
-        passWordFid.clearsOnBeginEditing = NO;
+//        passWordFid.clearsOnBeginEditing = NO;
         if (i == 0) {
             _passFid = passWordFid;
         }else
@@ -617,8 +629,8 @@
         
     }
     
-    NSArray *securityArray = @[[LangSwitcher switchLang:@"密码位数为8~25个字符(字符+字母)" key:nil],[LangSwitcher switchLang:@"密码中包含小写字母" key:nil],[LangSwitcher switchLang:@"密码中包含大写字母" key:nil],[LangSwitcher switchLang:@"密码中包含数字" key:nil]];
-    for (int i = 0; i < 4; i ++) {
+    NSArray *securityArray = @[[LangSwitcher switchLang:@"密码位数为8~25位(字母+数字)" key:nil],[LangSwitcher switchLang:@"密码中包含小写字母" key:nil],[LangSwitcher switchLang:@"密码中包含大写字母" key:nil]];
+    for (int i = 0; i < 3; i ++) {
         UIView *pointView = [[UIView alloc]initWithFrame:CGRectMake(35, 160 - 64 + kNavigationBarHeight + 108 * 2 - 30 +i%4 * 20, 8, 8)];
         pointView.backgroundColor = kWhiteColor;
         kViewRadius(pointView, 4);
@@ -632,7 +644,7 @@
     }
     
     
-    UILabel *label = [self.view viewWithTag:203];
+    UILabel *label = [self.view viewWithTag:202];
     UILabel *levelStateLbl = [UILabel labelWithFrame:CGRectMake(SCREEN_WIDTH - 35, label.y - 4, 0, 18) textAligment:(NSTextAlignmentRight) backgroundColor:kClearColor font:FONT(12) textColor:kWhiteColor];
     NSString *level = [LangSwitcher switchLang:@"安全级别" key:nil];
     NSString *State = [LangSwitcher switchLang:@"低" key:nil];
@@ -651,7 +663,7 @@
 
 -(void)LabelSecurityLevelLevel:(NSString *)level setState:(NSString *)State setStr:(NSString *)str
 {
-    UILabel *label = [self.view viewWithTag:203];
+    UILabel *label = [self.view viewWithTag:202];
     NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc]      initWithString:str];
     [attrStr addAttribute:NSFontAttributeName value:HGboldfont(18) range:NSMakeRange(str.length - State.length,State.length)];
     _levelStateLbl.attributedText = attrStr;

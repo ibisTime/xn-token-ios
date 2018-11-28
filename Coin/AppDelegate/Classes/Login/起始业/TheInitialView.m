@@ -94,6 +94,15 @@ CATransform3D CATransform3DPerspect(CATransform3D t, CGPoint center, float disZ)
     [scrollView addSubview:createPersonalBtn];
     
     
+    if ([TLUser user].isLogin == YES) {
+        loginPersonalBtn.hidden = YES;
+        createPersonalBtn.hidden = YES;
+    }else
+    {
+        loginPersonalBtn.hidden = NO;
+        createPersonalBtn.hidden = NO;
+    }
+
     
     
     //    私钥
@@ -129,6 +138,14 @@ CATransform3D CATransform3DPerspect(CATransform3D t, CGPoint center, float disZ)
     [scrollView addSubview:createPrivateBtn];
     
     
+    if ([TLUser isBlankString:[[NSUserDefaults standardUserDefaults]objectForKey:MNEMONIC]] == NO) {
+        loginPrivateBtn.hidden = YES;
+        createPrivateBtn.hidden = YES;
+    }else
+    {
+        loginPrivateBtn.hidden = NO;
+        createPrivateBtn.hidden = NO;
+    }
     
     
     UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 40, SCREEN_HEIGHT  - 90 - 30, 80, 4)];

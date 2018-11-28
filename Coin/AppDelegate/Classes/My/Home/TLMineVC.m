@@ -45,6 +45,12 @@
 #import "ZQOCRScanEngine.h"
 
 @interface TLMineVC ()<MineHeaderSeletedDelegate, UINavigationControllerDelegate,ZDKHelpCenterConversationsUIDelegate,ZDKHelpCenterDelegate,ZQFaceAuthDelegate,ZQOcrScanDelegate>
+{
+    NSString *str1;
+    NSString *str2;
+    NSString *str3;
+    
+}
 //<ZQFaceAuthDelegate,ZQOcrScanDelegate>
 @property (nonatomic, strong) UIScrollView *scrollView;
 //头部
@@ -111,29 +117,73 @@
     //通知
     [self addNotification];
     [self changeInfo];
-//    ZQOCRScanEngine *engine = [[ZQOCRScanEngine alloc] init];
-//    engine.delegate = self;
-//    engine.appKey = @"nJXnQp568zYcnBdPQxC7TANqakUUCjRZqZK8TrwGt7";
-//    engine.secretKey = @"887DE27B914988C9CF7B2DEE15E3EDF8";
-//    [engine startOcrScanIdCardInViewController:self];
     
-//    ZQFaceAuthEngine * engine = [[ZQFaceAuthEngine alloc]init];
-//    engine.delegate = self;
-//    engine.appKey = @"nJXnQp568zYcnBdPQxC7TANqakUUCjRZqZK8TrwGt7";
-//    engine.secretKey = @"887DE27B914988C9CF7B2DEE15E3EDF8";
-//    [engine startFaceAuthInViewController:self];
+    
+    
+    
+    
+    
+    
+//    NSArray *array = @[@"开始检测"];
+//    for (int i = 0; i < 1; i ++) {
+//        UIButton *button = [UIButton buttonWithTitle:array[i] titleColor:[UIColor blackColor] backgroundColor:kClearColor titleFont:14];
+//        button.frame = CGRectMake(SCREEN_WIDTH/2 - 50, 100 + i%2 * 100, 100, 50);
+//        [button addTarget:self action:@selector(buttonClick:) forControlEvents:(UIControlEventTouchUpInside)];
+//        button.tag = 100 + i;
+//        [self.view addSubview:button];
+//    }
+    
 }
 
-#pragma mark - ZQFaceAuthDelegate
+-(void)buttonClick:(UIButton *)sender
+{
+    if (sender.tag == 100) {
+        ZQOCRScanEngine *engine = [[ZQOCRScanEngine alloc] init];
+        engine.delegate = self;
+        engine.appKey = @"nJXnQp568zYcnBdPQxC7TANqakUUCjRZqZK8TrwGt7";
+        engine.secretKey = @"887DE27B914988C9CF7B2DEE15E3EDF8";
+        [engine startOcrScanIdCardInViewController:self];
+    }
+}
+
+#pragma mark - ZQFaceAuthDelegate  
 
 - (void)faceAuthFinishedWithResult:(ZQFaceAuthResult)result UserInfo:(id)userInfo{
     
     NSLog(@"OC authFinish");
     UIImage * livingPhoto = [userInfo objectForKey:@"livingPhoto"];
+    
     if(result  == ZQFaceAuthResult_Done && livingPhoto !=nil){
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"恭喜您，已完成活体检测！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+//        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"恭喜您，已完成活体检测！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
         
-        [alertView show];
+//        [alertView show];
+        TLUploadManager *manager = [TLUploadManager manager];
+        NSData *imgData = UIImageJPEGRepresentation(livingPhoto, 0.1);
+        manager.imgData = imgData;
+        manager.image = livingPhoto;
+        [manager getTokenShowView:self.view succes:^(NSString *key) {
+            
+            str3 = key;
+            
+            
+            TLNetworking *http = [TLNetworking new];
+            http.showView = self.view;
+            http.code = @"805197";
+            http.parameters[@"userId"] = [TLUser user].userId;
+            http.parameters[@"frontImage"] = str1;
+            http.parameters[@"backImage"] = str2;
+            http.parameters[@"faceImage"] = str3;
+//            QUERY
+            [http postWithSuccess:^(id responseObject) {
+                
+                [TLAlert alertWithSucces:@"成功"];
+                
+            } failure:^(NSError *error) {
+            }];
+            
+        } failure:^(NSError *error) {
+            
+        }];
     }
     
 }
@@ -150,16 +200,41 @@
     UIImage *portrait = [userInfo objectForKey:@"portrait"];
     UIImage *backcard = [userInfo objectForKey:@"backcard"];
     if(result  == ZQFaceAuthResult_Done && frontcard != nil && portrait != nil && backcard !=nil){
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"恭喜您，已完成身份证检测！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
         
-        [alertView show];
         
+        NSData *imgData = UIImageJPEGRepresentation(frontcard, 0.1);
+        NSData *imgData1 = UIImageJPEGRepresentation(backcard, 0.1);
+        //进行上传
+        TLUploadManager *manager = [TLUploadManager manager];
+        
+        manager.imgData = imgData;
+        manager.image = frontcard;
+        [manager getTokenShowView:self.view succes:^(NSString *key) {
+            
+            str1 = key;
+//            [weakSelf changeHeadIconWithKey:key imgData:imgData];
+            TLUploadManager *manager1 = [TLUploadManager manager];
+            
+            manager1.imgData = imgData1;
+            manager1.image = backcard;
+            [manager1 getTokenShowView:self.view succes:^(NSString *key) {
+                
+                str2 = key;
+                ZQFaceAuthEngine * engine = [[ZQFaceAuthEngine alloc]init];
+                engine.delegate = self;
+                engine.appKey = @"nJXnQp568zYcnBdPQxC7TANqakUUCjRZqZK8TrwGt7";
+                engine.secretKey = @"887DE27B914988C9CF7B2DEE15E3EDF8";
+                [engine startFaceAuthInViewController:self];
+                //            [weakSelf changeHeadIconWithKey:key imgData:imgData];
+                
+            } failure:^(NSError *error) {
+                
+            }];
+        } failure:^(NSError *error) {
+            
+        }];
     }
     
-}
-
-- (void)idCardOcrScanFinishedWithResult:(NSInteger)result UserInfo:(id)userInfo{
-    NSLog(@"Swift OCR Finish");
 }
 
 

@@ -10,4 +10,7 @@
 
 @interface SettingVC : TLBaseVC
 
+
+@property (nonatomic , copy)NSString *titleNameStr;
+
 @end

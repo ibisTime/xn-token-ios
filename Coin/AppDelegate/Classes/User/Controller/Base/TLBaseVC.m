@@ -81,6 +81,7 @@
         } confirm:^(UIAlertAction *action) {
             TheInitialVC *vc = [[TheInitialVC alloc]init];
             UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+//            vc.isBack = @"1";
             UIViewController *rootViewController = [[[UIApplication sharedApplication] keyWindow] rootViewController];
             [rootViewController presentViewController:nav animated:YES completion:nil];
         }];
