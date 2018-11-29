@@ -157,7 +157,11 @@
         }
         
         
-        [[NSUserDefaults standardUserDefaults]setObject:categoryArray forKey:MNEMONIC];
+//        [[NSUserDefaults standardUserDefaults]setObject:categoryArray forKey:MNEMONIC];
+        
+        [[NSUserDefaults standardUserDefaults]setObject:mnemonics forKey:MNEMONIC];
+        [[NSUserDefaults standardUserDefaults]setObject:_passWord.text forKey:MNEMONICPASSWORD];
+        
         WhetherBackupVC *vc = [WhetherBackupVC new];
         
         [self.navigationController pushViewController:vc animated:YES];

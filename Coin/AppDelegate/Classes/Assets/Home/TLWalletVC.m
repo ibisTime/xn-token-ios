@@ -21,7 +21,7 @@
 #import "AddAccoutMoneyVc.h"
 #import "WalletLocalVc.h"
 #import "RateModel.h"
-#import "WallAccountVC.h"
+//#import "WallAccountVC.h"
 #import "QRCodeVC.h"
 #import "BuildWalletMineVC.h"
 #import "CountryModel.h"
@@ -154,7 +154,7 @@
                 [self.navigationController pushViewController:trans animated:YES];
             }else{
                 
-                [TLAlert alertWithTitle:[LangSwitcher switchLang:@"提示" key:nil] message:@"您还为创建私钥钱包,无法使用一键划转功能" confirmAction:^{
+                [TLAlert alertWithTitle:[LangSwitcher switchLang:@"提示" key:nil] message:@"您还未创建私钥钱包,无法使用一键划转功能" confirmAction:^{
                     
                 }];
             }
@@ -669,9 +669,37 @@
 //        return;
 //    }
     
+//    兼容2.0以下私钥数据库
+    TLDataBase *dataBase = [TLDataBase sharedManager];
+    NSString *word;
+    NSString *pwd;
+    //   获取一键划转币种列表
+    if ([dataBase.dataBase open]) {
+        NSString *sql = [NSString stringWithFormat:@"SELECT Mnemonics,btcaddress,PwdKey  from THAUser where userId = '%@'",[TLUser user].userId];
+        //        [sql appendString:[TLUser user].userId];
+        FMResultSet *set = [dataBase.dataBase executeQuery:sql];
+        while ([set next])
+        {
+            word = [set stringForColumn:@"Mnemonics"];
+            pwd = [set stringForColumn:@"PwdKey"];
+        }
+        [set close];
+    }
+    [dataBase.dataBase close];
+    
+    if ([TLUser isBlankString:word] == NO && [TLUser isBlankString:pwd] == NO) {
+        if ([TLUser isBlankString:[[NSUserDefaults standardUserDefaults]objectForKey:MNEMONIC]] == YES) {
+            [[NSUserDefaults standardUserDefaults]setObject:word forKey:MNEMONIC];
+            [[NSUserDefaults standardUserDefaults]setObject:pwd forKey:MNEMONICPASSWORD];
+        }
+    }
+    
     if ([TLUser isBlankString:[[NSUserDefaults standardUserDefaults]objectForKey:MNEMONIC]] == YES) {
         return;
     }
+    
+    
+    
     
     NSMutableArray *arr = [[CoinModel coin] getOpenCoinList];
     NSMutableArray *muArray = [NSMutableArray array];

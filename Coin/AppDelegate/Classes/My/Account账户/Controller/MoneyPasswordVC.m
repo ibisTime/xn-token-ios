@@ -405,6 +405,9 @@
         
         TLNetworking *http = [TLNetworking new];
         http.showView = self.view;
+        if ([self.titleNameStr isEqualToString:@"修改资金密码"]) {
+            http.code = @"805077";
+        }
         http.code = @"805076";
         //        http.parameters[@"mobile"] = self.phoneTf.text;
         http.parameters[@"smsCaptcha"] = self.codeTextFid.text;

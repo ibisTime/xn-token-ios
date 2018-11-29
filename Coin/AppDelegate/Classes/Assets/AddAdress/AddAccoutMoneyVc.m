@@ -13,6 +13,9 @@
 #import "NSString+Extension.h"
 #import "NSString+Check.h"
 @interface AddAccoutMoneyVc ()<RefreshDelegate>
+{
+    NSInteger isSelect;
+}
 @property (nonatomic ,strong) AddMoneyTableView *tableView;
 @property (nonatomic, strong) NSMutableArray <CurrencyModel *>*shouldDisplayCoins;
 
@@ -23,7 +26,11 @@
 -(void)viewWillDisappear:(BOOL)animated
 
 {
+    if (isSelect != 100) {
+        return;
+    }
     if (self.PersonalWallet == 100) {
+        
         NSNotification *notification =[NSNotification notificationWithName:@"LOADDATAPAGE2" object:nil userInfo:nil];
         [[NSNotificationCenter defaultCenter] postNotification:notification];
     }
@@ -198,6 +205,8 @@
 -(void)refreshTableViewButtonClick:(TLTableView *)refreshTableview button:(UIButton *)sender selectRowAtIndex:(NSInteger)index
 {
 
+    
+    isSelect = 100;
     if (self.PersonalWallet == 100) {
 //        UIButton *sender = [self.view viewWithTag:index];
         sender.selected = !sender.selected;
@@ -259,6 +268,7 @@
 -(void)refreshTableView:(TLTableView *)refreshTableview didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
+    isSelect = 100;
     if (self.PersonalWallet == 100) {
         UIButton *sender = [self.view viewWithTag:indexPath.section + 200];
         sender.selected = !sender.selected;

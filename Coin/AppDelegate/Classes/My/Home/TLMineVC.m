@@ -106,7 +106,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = [LangSwitcher switchLang:@"我的" key:nil];
-//    //顶部视图
+    //顶部视图
     [self initMineHeaderView];
     //模
     [self initGroup];
@@ -146,8 +146,7 @@
     }
 }
 
-#pragma mark - ZQFaceAuthDelegate  
-
+#pragma mark - ZQFaceAuthDelegate
 - (void)faceAuthFinishedWithResult:(ZQFaceAuthResult)result UserInfo:(id)userInfo{
     
     NSLog(@"OC authFinish");
@@ -158,7 +157,7 @@
         
 //        [alertView show];
         TLUploadManager *manager = [TLUploadManager manager];
-        NSData *imgData = UIImageJPEGRepresentation(livingPhoto, 0.1);
+        NSData *imgData = UIImageJPEGRepresentation(livingPhoto, 0.6);
         manager.imgData = imgData;
         manager.image = livingPhoto;
         [manager getTokenShowView:self.view succes:^(NSString *key) {
@@ -202,8 +201,8 @@
     if(result  == ZQFaceAuthResult_Done && frontcard != nil && portrait != nil && backcard !=nil){
         
         
-        NSData *imgData = UIImageJPEGRepresentation(frontcard, 0.1);
-        NSData *imgData1 = UIImageJPEGRepresentation(backcard, 0.1);
+        NSData *imgData = UIImageJPEGRepresentation(frontcard, 0.6);
+        NSData *imgData1 = UIImageJPEGRepresentation(backcard, 0.6);
         //进行上传
         TLUploadManager *manager = [TLUploadManager manager];
         

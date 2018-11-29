@@ -166,7 +166,8 @@
     helper.code = @"802524";
     helper.start = 1;
     helper.limit = 10;
-    
+//    helper.parameters[@"userid"]
+    helper.parameters[@"userId"] = [TLUser user].userId;
     helper.parameters[@"bizType"] = bizType;
     helper.parameters[@"kind"] = self.billType == CurrentTypeFrozen ? @"1": @"0";
     

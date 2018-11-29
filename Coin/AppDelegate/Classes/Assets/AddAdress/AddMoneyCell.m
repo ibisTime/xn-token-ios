@@ -158,26 +158,29 @@
         {
             self.selectButton.selected = YES;
         }
+    }else
+    if (_PersonalWallet == 101) {
+        
     }
-//    else
-//    {
-//        CoinModel *coin ;
-//
-//        if (currency.currency) {
-//            coin = [CoinUtil getCoinModel:currency.currency];
-//            self.currencyNameLbl.text = [NSString stringWithFormat:@"%@",currency.currency];
-//            self.selectButton.selected = currency.IsSelected;
-//            [self.selectButton setImage:kImage(@"more") forState:UIControlStateNormal];
-//            [self.selectButton setImage:kImage(@"more") forState:UIControlStateSelected];
-//
-//            [self.coinIV sd_setImageWithURL:[NSURL URLWithString:[coin.pic1 convertImageUrl]]];
-//        }else{
-//            coin = [CoinUtil getCoinModel:currency.symbol];
-//            self.currencyNameLbl.text = [NSString stringWithFormat:@"%@",currency.symbol];
-//            self.selectButton.selected = currency.IsSelected;
-//            [self.coinIV sd_setImageWithURL:[NSURL URLWithString:[coin.pic1 convertImageUrl]]];
-//        }
-//    }
+    else
+    {
+        CoinModel *coin ;
+
+        if (currency.currency) {
+            coin = [CoinUtil getCoinModel:currency.currency];
+            self.currencyNameLbl.text = [NSString stringWithFormat:@"%@",currency.currency];
+            self.selectButton.selected = currency.IsSelected;
+            [self.selectButton setImage:kImage(@"more") forState:UIControlStateNormal];
+            [self.selectButton setImage:kImage(@"more") forState:UIControlStateSelected];
+
+            [self.coinIV sd_setImageWithURL:[NSURL URLWithString:[coin.pic1 convertImageUrl]]];
+        }else{
+            coin = [CoinUtil getCoinModel:currency.symbol];
+            self.currencyNameLbl.text = [NSString stringWithFormat:@"%@",currency.symbol];
+            self.selectButton.selected = currency.IsSelected;
+            [self.coinIV sd_setImageWithURL:[NSURL URLWithString:[coin.pic1 convertImageUrl]]];
+        }
+    }
 
     //    self.coinIV.image = kImage(_currency.getImgName);
 
