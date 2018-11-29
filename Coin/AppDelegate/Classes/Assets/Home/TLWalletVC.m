@@ -859,9 +859,9 @@
 - (void)queryTotalAllAmount {
     
     
-    NSString *audioFile = [[NSBundle mainBundle] pathForResource:@"QSount.caf" ofType:nil];
+//    NSString *audioFile = [[NSBundle mainBundle] pathForResource:@"QSount.caf" ofType:nil];
     
-    NSLog(@"%@",audioFile);
+//    NSLog(@"%@",audioFile);
     TLNetworking *http = [TLNetworking new];
     http.code = @"802270";
     http.isLocal = YES;
@@ -884,6 +884,35 @@
             [arr addObject:dic];
         }
     }
+    
+    
+    NSString *btc_address;
+    for (int i = 0; i < arr.count; i ++) {
+        if ([arr[i][@"symbol"] isEqualToString:@"BTC"]) {
+            
+            NSString *word = [[NSUserDefaults standardUserDefaults]objectForKey:MNEMONIC];
+            NSArray *words = [word componentsSeparatedByString:@" "];
+            //这里第一次进行BTC的私钥和地址创建 存到用户表里面 和币种表
+            BTCMnemonic *mnemonic =  [MnemonicUtil importMnemonic:words];
+            if ([AppConfig config].runEnv == 0) {
+                mnemonic.keychain.network = [BTCNetwork mainnet];
+                
+            }else{
+                mnemonic.keychain.network = [BTCNetwork testnet];
+            }
+            btc_address = [MnemonicUtil getBtcTheOldAddress:mnemonic];
+
+            [[NSUserDefaults standardUserDefaults]setObject:btc_address forKey:BTCADDRESS];
+            NSDictionary *dic = @{@"address":btc_address,
+                                  @"symbol":@"BTC"
+                                  };
+            [arr insertObject:dic atIndex:i+1];
+//            [arr addObject:dic];
+            break;
+        }
+    }
+    
+    
     http.parameters[@"accountList"] = arr;
     CoinWeakSelf;
     
