@@ -44,7 +44,7 @@
 #import "ZQFaceAuthEngine.h"
 #import "ZQOCRScanEngine.h"
 
-@interface TLMineVC ()<MineHeaderSeletedDelegate, UINavigationControllerDelegate,ZDKHelpCenterConversationsUIDelegate,ZDKHelpCenterDelegate,ZQFaceAuthDelegate,ZQOcrScanDelegate>
+@interface TLMineVC ()<MineHeaderSeletedDelegate, UINavigationControllerDelegate,ZDKHelpCenterConversationsUIDelegate,ZDKHelpCenterDelegate,ZQFaceAuthDelegate,ZQOcrScanDelegate,RefreshDelegate>
 {
     NSString *str1;
     NSString *str2;
@@ -135,27 +135,19 @@
     
 }
 
--(void)buttonClick:(UIButton *)sender
-{
-    if (sender.tag == 100) {
-        ZQOCRScanEngine *engine = [[ZQOCRScanEngine alloc] init];
-        engine.delegate = self;
-        engine.appKey = @"nJXnQp568zYcnBdPQxC7TANqakUUCjRZqZK8TrwGt7";
-        engine.secretKey = @"887DE27B914988C9CF7B2DEE15E3EDF8";
-        [engine startOcrScanIdCardInViewController:self];
-    }
-}
+//-(void)buttonClick:(UIButton *)sender
+//{
+//    if (sender.tag == 100) {
+//
+//    }
+//}
 
 #pragma mark - ZQFaceAuthDelegate
 - (void)faceAuthFinishedWithResult:(ZQFaceAuthResult)result UserInfo:(id)userInfo{
     
-    NSLog(@"OC authFinish");
     UIImage * livingPhoto = [userInfo objectForKey:@"livingPhoto"];
     
     if(result  == ZQFaceAuthResult_Done && livingPhoto !=nil){
-//        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"恭喜您，已完成活体检测！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-        
-//        [alertView show];
         TLUploadManager *manager = [TLUploadManager manager];
         NSData *imgData = UIImageJPEGRepresentation(livingPhoto, 0.6);
         manager.imgData = imgData;
@@ -175,7 +167,7 @@
 //            QUERY
             [http postWithSuccess:^(id responseObject) {
                 
-                [TLAlert alertWithSucces:@"成功"];
+                [TLAlert alertWithSucces:[LangSwitcher switchLang:@"实名认证成功" key:nil]];
                 
             } failure:^(NSError *error) {
             }];
@@ -243,10 +235,156 @@
 
 - (void)initMineHeaderView {
     
-    MineHeaderView *mineHeaderView = [[MineHeaderView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 160 + kStatusBarHeight)];
+    MineHeaderView *mineHeaderView = [[MineHeaderView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 188 + kStatusBarHeight)];
     mineHeaderView.delegate = self;
     self.headerView = mineHeaderView;
     
+}
+
+
+- (void)initTableView {
+    
+    self.tableView = [[MineTableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight) style:UITableViewStyleGrouped];
+    self.tableView.showsVerticalScrollIndicator = YES;
+    self.tableView.showsHorizontalScrollIndicator = YES;
+    self.tableView.refreshDelegate = self;
+    self.tableView.mineGroup = self.group;
+    //    [self.view addSubview:self.headerView];
+    self.tableView.tableHeaderView = self.headerView;
+    [self.view addSubview:self.tableView];
+}
+
+-(void)refreshTableView:(TLTableView *)refreshTableview scrollView:(UIScrollView *)scroll
+{
+    CGFloat height = (188 + kStatusBarHeight);
+    ////    导航栏
+    //    if (self.tableView.contentOffset.y <= (235 - 64)) {
+    //        [self.navigationController.navigationBar setBackgroundImage:[self imageWithBgColor:[UIColor colorWithRed:9/255.0 green:90/255.0 blue:221/255.0 alpha:self.tableView.contentOffset.y / (235 - 64)]] forBarMetrics:UIBarMetricsDefault];
+    //    }else
+    //    {
+    //        [self.navigationController.navigationBar setBackgroundImage:[self imageWithBgColor:[UIColor colorWithRed:9/255.0 green:90/255.0 blue:221/255.0 alpha:1]] forBarMetrics:UIBarMetricsDefault];
+    //    }
+    //
+    //    // 获取到tableView偏移量
+    CGFloat Offset_y = scroll.contentOffset.y;
+    // 下拉 纵向偏移量变小 变成负的
+    if ( Offset_y < 0) {
+        // 拉伸后图片的高度
+        CGFloat totalOffset = height - Offset_y;
+        // 图片放大比例
+        CGFloat scale = totalOffset / height;
+        CGFloat width = SCREEN_WIDTH;
+        // 拉伸后图片位置
+        self.headerView.bgIV.frame = CGRectMake(-(width * scale - width) / 2, Offset_y, width * scale, totalOffset);
+    }
+}
+
+-(void)refreshTableView:(TLTableView *)refreshTableview didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == 1) {
+        switch (indexPath.row) {
+            case 0:
+            {
+                [self loginTheWhether];
+                MyIncomeVC *vc = [[MyIncomeVC alloc] init];
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+                break;
+            case 1:
+            {
+                [self loginTheWhether];
+                ZQOCRScanEngine *engine = [[ZQOCRScanEngine alloc] init];
+                engine.delegate = self;
+                engine.appKey = @"nJXnQp568zYcnBdPQxC7TANqakUUCjRZqZK8TrwGt7";
+                engine.secretKey = @"887DE27B914988C9CF7B2DEE15E3EDF8";
+                [engine startOcrScanIdCardInViewController:self];
+            }
+                break;
+            case 2:
+            {
+                [self loginTheWhether];
+                SettingVC *settingVC = [SettingVC new];
+                [self.navigationController pushViewController:settingVC animated:YES];
+            }
+                break;
+            case 3:
+            {
+                WalletSettingVC *settingVC = [WalletSettingVC new];
+                [self.navigationController pushViewController:settingVC animated:YES];
+            }
+                break;
+            case 4:
+            {
+                
+                JoinMineVc *vc = [[JoinMineVc alloc] init];
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+                break;
+            case 5:
+            {
+                [self loginTheWhether];
+                TLQusertionVC *personalSettingVC = [TLQusertionVC new];
+                [self.navigationController pushViewController:personalSettingVC animated:YES];
+            }
+                break;
+            case 6:
+            {
+                [ZDKZendesk initializeWithAppId: @"71d2ca9aba0cccc12deebfbdd352fbae8c53cd8999dd10bc"
+                                       clientId: @"mobile_sdk_client_7af3526c83d0c1999bc3"
+                                     zendeskUrl: @"https://thachainhelp.zendesk.com"];
+                
+                id<ZDKObjCIdentity> userIdentity = [[ZDKObjCAnonymous alloc] initWithName:nil email:nil];
+                [[ZDKZendesk instance] setIdentity:userIdentity];
+                
+                [ZDKCoreLogger setEnabled:YES];
+                [ZDKSupport initializeWithZendesk:[ZDKZendesk instance]];
+                
+                
+                LangType type = [LangSwitcher currentLangType];
+                NSString *lan;
+                if (type == LangTypeSimple || type == LangTypeTraditional) {
+                    lan = @"zh-cn";
+                }else if (type == LangTypeKorean)
+                {
+                    lan = @"ko";
+                }else{
+                    lan = @"en-us";
+                }
+                [ZDKSupport instance].helpCenterLocaleOverride = lan;
+                [ZDKLocalization localizedStringWithKey:lan];
+                
+                
+                ZDKHelpCenterUiConfiguration *hcConfig  =  [ ZDKHelpCenterUiConfiguration  new];
+                [ZDKTheme  currentTheme].primaryColor  = [UIColor redColor];
+                UIViewController<ZDKHelpCenterDelegate>*helpCenter  =  [ ZDKHelpCenterUi  buildHelpCenterOverviewWithConfigs :@[hcConfig]];
+                
+                self.navigationController.navigationBar.translucent = YES;
+                UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+                self.navigationController.navigationBar.tintColor = [UIColor blackColor];
+                self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
+                self.navigationItem.backBarButtonItem = item;
+                [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor blackColor],
+                                                                                  NSFontAttributeName : [UIFont fontWithName:@"Helvetica-Bold" size:16]}];
+                
+                
+                helpCenter.uiDelegate = self;
+                
+                
+                
+                [self.navigationController  pushViewController:helpCenter animated:YES];
+            }
+                break;
+            case 7:
+            {
+                TLMeSetting *vc = [[TLMeSetting alloc] init];
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+                break;
+                
+            default:
+                break;
+        }
+    }
 }
 
 - (void)initGroup {
@@ -537,18 +675,7 @@
 //- (ZDKNavBarConversationsUIType) navBarConversationsUIType
 
 
-- (void)initTableView {
-    
-    self.tableView = [[MineTableView alloc] initWithFrame:CGRectMake(15, self.headerView.height, kScreenWidth-30, kScreenHeight - kTabBarHeight - self.headerView.height) style:UITableViewStyleGrouped];
-    self.tableView.showsVerticalScrollIndicator = YES;
-    self.tableView.showsHorizontalScrollIndicator = YES;
 
-    self.tableView.mineGroup = self.group;
-    [self.view addSubview:self.headerView];
-
-    
-    [self.view addSubview:self.tableView];
-}
 
 - (TLImagePicker *)imagePicker {
     
@@ -622,37 +749,17 @@
         self.headerView.phone.hidden = YES;
         return;
     }
-    
-    
     self.headerView.nameLbl.text = [TLUser user].nickname;
     NSRange rang = NSMakeRange(3, 4);
     UITapGestureRecognizer *ta = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(changeNickName)];
     [self.headerView.nameLbl addGestureRecognizer:ta];
-    
-    
-    
-    
     if ([TLUser isBlankString:[TLUser user].mobile] == NO) {
         self.headerView.mobileLbl.text = [NSString stringWithFormat:@"+%@ %@",[[TLUser user].interCode substringFromIndex:2], [[TLUser user].mobile stringByReplacingCharactersInRange:rang withString:@"****"]];
     }else
     {
         self.headerView.mobileLbl.text = [NSString stringWithFormat:@"%@", [[TLUser user].email stringByReplacingCharactersInRange:rang withString:@"****"]];
     }
-//    self.headerView.mobileLbl.backgroundColor = [UIColor redColor];
-
-    
     self.headerView.levelBtn.hidden = [[TLUser user].level isEqualToString:kLevelOrdinaryTraders] ? YES : NO;
-    [self.headerView.mobileLbl sizeToFit];
-    self.headerView.mobileLbl.frame = CGRectMake(86 + 5 + 30, 75, self.headerView.mobileLbl.width, 14);
-//    self.headerView.integralBtn.backgroundColor = [UIColor redColor];
-    [self.headerView.integralBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-
-       make.left.equalTo(self.headerView.mobileLbl.mas_right).offset(20);
-        make.right.equalTo(self.headerView.mas_right).offset(-20);
-        make.top.equalTo(@(75));
-        make.height.equalTo(@14);
-
-    }];
     [self.headerView.integralBtn addTarget:self action:@selector(integralBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
     
 }

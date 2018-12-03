@@ -252,7 +252,12 @@
                 http.code = CAPTCHA_CODE;
                 http.parameters[@"client"] = @"ios";
                 http.parameters[@"sessionId"] = sessionId;
-                http.parameters[@"bizType"] = USER_CHANGE_PWD_CODE;
+                if ([self.titleNameStr isEqualToString:@"修改资金密码"]) {
+                    http.parameters[@"bizType"] = @"805077";
+                }else
+                {
+                    http.parameters[@"bizType"] = @"805076";
+                }
                 http.parameters[@"mobile"] = self.phoneTextFid.text;
                 NSData *data   =  [[NSUserDefaults standardUserDefaults] objectForKey:@"chooseModel"];
                 CountryModel *model = [NSKeyedUnarchiver unarchiveObjectWithData:data];
@@ -276,7 +281,16 @@
                 http.code = @"805954";
                 //    http.parameters[@"companyCode"] = @"";
                 http.parameters[@"email"] = self.phoneTextFid.text;
-                http.parameters[@"bizType"] = USER_FIND_PWD_CODE;
+                
+                if ([self.titleNameStr isEqualToString:@"修改资金密码"]) {
+                    http.parameters[@"bizType"] = @"805077";
+                }else
+                {
+                    http.parameters[@"bizType"] = @"805076";
+                }
+                
+                
+                
                 http.parameters[@"client"] = @"ios";
                 http.parameters[@"sessionId"] = sessionId;
                 

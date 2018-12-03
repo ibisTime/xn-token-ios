@@ -140,6 +140,8 @@
     [self.centerIV addProjectionWithShadowOpacity:0.4];
     [self.rightIV addProjectionWithShadowOpacity:0.4];
 }
+
+
 - (void)setData:(NSArray *)data {
     if (data.count < _data.count) {
         [_mainScrollView setContentOffset:CGPointMake(ZXMainScrollViewWidth, 0) animated:NO];

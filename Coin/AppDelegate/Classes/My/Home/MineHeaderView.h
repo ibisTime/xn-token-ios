@@ -27,6 +27,8 @@ typedef NS_ENUM(NSUInteger, MineHeaderSeletedType) {
 @interface MineHeaderView : UIView
 
 @property (nonatomic, weak) id<MineHeaderSeletedDelegate> delegate;
+
+@property (nonatomic, strong)UIImageView *bgIV;
 //头像
 @property (nonatomic, strong) UIButton *photoBtn;
 //昵称

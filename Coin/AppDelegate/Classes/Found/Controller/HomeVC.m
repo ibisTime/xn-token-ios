@@ -26,35 +26,22 @@
 #import "HTMLStrVC.h"
 #import "HomeFindModel.h"
 
-#import "BTC256+Tests.h"
-#import "BTCData+Tests.h"
-#import "BTCMnemonic+Tests.h"
-#import "BTCBigNumber+Tests.h"
-#import "BTCBase58+Tests.h"
-#import "BTCAddress+Tests.h"
-#import "BTCProtocolSerialization+Tests.h"
-#import "BTCKey+Tests.h"
-#import "BTCKeychain+Tests.h"
-#import "BTCCurvePoint+Tests.h"
-#import "BTCBlindSignature+Tests.h"
-#import "BTCEncryptedBackup+Tests.h"
-#import "BTCEncryptedMessage+Tests.h"
-#import "BTCFancyEncryptedMessage+Tests.h"
-#import "BTCScript+Tests.h"
-#import "BTCTransaction+Tests.h"
-#import "BTCBlockchainInfo+Tests.h"
-#import "BTCPriceSource+Tests.h"
-#import "BTCMerkleTree+Tests.h"
-#import "BTCBitcoinURL+Tests.h"
-#import "BTCCurrencyConverter+Tests.h"
-
 #import "MnemonicUtil.h"
 #import "BTCData.h"
 #import "BTCNetwork.h"
 #import "TLinviteVC.h"
-@interface HomeVC ()<RefreshDelegate,UIViewControllerPreviewingDelegate>
+
+
+#import "IconCollCell.h"
+#import "TheGameCollCell.h"
+#import "ClassificationCollCell.h"
+@interface HomeVC ()<RefreshDelegate,UIViewControllerPreviewingDelegate,UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
+
 
 @property (nonatomic, strong) HomeTbleView *tableView;
+
+
+@property (nonatomic , strong)UICollectionView *collectionView;
 
 //头部
 @property (nonatomic, strong) HomeHeaderView *headerView;
@@ -93,20 +80,69 @@
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
 }
 
+
+-(UICollectionView *)collectionView{
+    if (_collectionView==nil) {
+        UICollectionViewFlowLayout *flowayout = [[UICollectionViewFlowLayout alloc]init];
+        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, kNavigationBarHeight, SCREEN_WIDTH, SCREEN_HEIGHT - kNavigationBarHeight - kTabBarHeight) collectionViewLayout:flowayout];
+//        flowayout.minimumInteritemSpacing = 0;
+//        flowayout.minimumLineSpacing = 0;
+        _collectionView.showsVerticalScrollIndicator = NO;
+        _collectionView.showsHorizontalScrollIndicator = NO;
+        _collectionView.backgroundColor = kWhiteColor;
+        _collectionView.delegate = self;
+        _collectionView.dataSource = self;
+        
+        [_collectionView registerClass:[IconCollCell class] forCellWithReuseIdentifier:@"IconCollCell"];
+        [_collectionView registerClass:[ClassificationCollCell class] forCellWithReuseIdentifier:@"ClassificationCollCell"];
+        [_collectionView registerClass:[TheGameCollCell class] forCellWithReuseIdentifier:@"TheGameCollCell"];
+        
+        [_collectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HeaderView"];
+        
+        [_collectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HeaderView1"];
+        
+        
+    }
+    return _collectionView;
+}
+
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initNavigationNar];
-    [self initTableView];
+//    [self initTableView];
+    [self.view addSubview:self.collectionView];
+//    self.collectionView.
     self.view.backgroundColor = kWhiteColor;
+    
+    
+    
+    CoinWeakSelf;
+    
+//    [self.tableView addRefreshAction:^{
+//
+//    }];
+//
+//    [self.tableView beginRefreshing];
+    [self requestBannerList];
+//    [CoinUtil refreshOpenCoinList:^{
+//        //获取banner列表
+//        [weakSelf requestBannerList];
+//        //            [weakSelf reloadFindData];
+//
+//    } failure:^{
+//        [weakSelf.collectionView end];
+//    }];
 }
 
 -(void)initNavigationNar
 {
-    self.backButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
-    self.backButton.frame = CGRectMake(kScreenWidth-74, kStatusBarHeight, 44, 44);
-    [self.backButton setImage:kImage(@"消息") forState:(UIControlStateNormal)];
-    [self.backButton addTarget:self action:@selector(OpenMessage) forControlEvents:(UIControlEventTouchUpInside)];
-    [self.view addSubview:self.backButton];
+//    self.backButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
+//    self.backButton.frame = CGRectMake(kScreenWidth-74, kStatusBarHeight, 44, 44);
+//    [self.backButton setImage:kImage(@"消息") forState:(UIControlStateNormal)];
+//    [self.backButton addTarget:self action:@selector(OpenMessage) forControlEvents:(UIControlEventTouchUpInside)];
+//    [self.view addSubview:self.backButton];
 
     self.nameLable = [[UILabel alloc]initWithFrame:CGRectMake(54, kStatusBarHeight, kScreenWidth - 108, 44)];
     self.nameLable.text = [LangSwitcher switchLang:@"发现" key:nil];
@@ -115,30 +151,139 @@
     self.nameLable.textColor = kTextBlack;
     [self.view addSubview:self.nameLable];
 }
-
-
-
-
-- (void)initTableView {
-    
-    CoinWeakSelf;
-    self.tableView = [[HomeTbleView alloc] initWithFrame:CGRectMake(0, kNavigationBarHeight, kScreenWidth, kScreenHeight - kNavigationBarHeight - kTabBarHeight) style:UITableViewStyleGrouped];
-    self.tableView.backgroundColor = kWhiteColor;
-    self.tableView.refreshDelegate = self;
-    [self.view addSubview:self.tableView];
-    self.tableView.tableHeaderView = self.headerView;
-    [self.tableView addRefreshAction:^{
-        [CoinUtil refreshOpenCoinList:^{
-            //获取banner列表
-            [weakSelf requestBannerList];
-//            [weakSelf reloadFindData];
-
-        } failure:^{
-            [weakSelf.tableView endRefreshHeader];
-        }];
-    }];
-    [weakSelf.tableView beginRefreshing];
+-(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
+{
+    return 3;
 }
+
+#pragma mark------CollectionView的代理方法
+-(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    if (section == 0) {
+        return 4;
+    }
+    if (section == 1) {
+        return 1;
+    }
+    return 10;
+}
+-(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    if (indexPath.section == 0) {
+        IconCollCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"IconCollCell" forIndexPath:indexPath];
+        //    cell.backgroundColor = [UIColor redColor];
+        NSArray *imgArray = @[@"发现-红包",@"发现-收益",@"发现-邀请",@"发现-礼品"];
+        NSArray *array = @[@"发红包",@"量化理财",@"邀请好友",@"更多精彩"];
+        [cell.iconButton setTitle:[LangSwitcher switchLang:array[indexPath.row] key:nil] forState:(UIControlStateNormal)];
+        [cell.iconButton SG_imagePositionStyle:(SGImagePositionStyleTop) spacing:9 imagePositionBlock:^(UIButton *button) {
+            [button setImage:kImage(imgArray[indexPath.row]) forState:(UIControlStateNormal)];
+        }];
+        return cell;
+    }
+    
+    if (indexPath.section == 1) {
+        ClassificationCollCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"ClassificationCollCell" forIndexPath:indexPath];
+        
+        return cell;
+    }
+    
+    TheGameCollCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"TheGameCollCell" forIndexPath:indexPath];
+
+    return cell;
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
+{
+    if (section == 2) {
+        return 10;
+    }
+    return 0.01;
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
+{
+    if (section == 2) {
+        return 10;
+    }
+    return 0.01;
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == 0) {
+        return CGSizeMake((SCREEN_WIDTH - 25)/4, (SCREEN_WIDTH - 25)/4);
+    }
+    if (indexPath.section == 1) {
+        return CGSizeMake(SCREEN_WIDTH, 50);
+    }
+    return CGSizeMake((SCREEN_WIDTH - 30)/2, (SCREEN_WIDTH - 30)/2/340 * 220);
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
+{
+    
+    if (section == 0) {
+        return CGSizeMake(SCREEN_WIDTH, (SCREEN_WIDTH - 20)/702 * 310 + 10);
+    }
+    return CGSizeMake(SCREEN_WIDTH, 0.001);
+}
+
+- (UICollectionReusableView *) collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == 0) {
+        UICollectionReusableView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HeaderView" forIndexPath:indexPath];
+        [headerView addSubview:self.headerView];
+        return headerView;
+    }
+    UICollectionReusableView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HeaderView1" forIndexPath:indexPath];
+    return headerView;
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section
+{
+    return CGSizeMake(SCREEN_WIDTH, 0.001);
+}
+
+-(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
+{
+    if (section == 0) {
+        return UIEdgeInsetsMake(5, 5, 5, 5);
+    }
+    if (section == 1) {
+        return UIEdgeInsetsMake(0, 0, 0, 0);
+    }
+    return UIEdgeInsetsMake(10, 10, 10, 10);
+}
+
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+//    GoodsDetailsViewController *vc= [[GoodsDetailsViewController alloc]init];
+//    vc.goodsid = dataArray[indexPath.row][@"goods_id"];
+//    [self.navigationController pushViewController:vc animated:YES];
+}
+
+
+//- (void)initTableView {
+//
+//    CoinWeakSelf;
+//    self.tableView = [[HomeTbleView alloc] initWithFrame:CGRectMake(0, kNavigationBarHeight, kScreenWidth, kScreenHeight - kNavigationBarHeight - kTabBarHeight) style:UITableViewStyleGrouped];
+//    self.tableView.backgroundColor = kWhiteColor;
+//    self.tableView.refreshDelegate = self;
+//    [self.view addSubview:self.tableView];
+//    self.tableView.tableHeaderView = self.headerView;
+//    [self.tableView addRefreshAction:^{
+//        [CoinUtil refreshOpenCoinList:^{
+//            //获取banner列表
+//            [weakSelf requestBannerList];
+////            [weakSelf reloadFindData];
+//
+//        } failure:^{
+//            [weakSelf.tableView endRefreshHeader];
+//        }];
+//    }];
+//    [weakSelf.tableView beginRefreshing];
+//}
 
 
 
@@ -221,7 +366,7 @@
         
         CoinWeakSelf;
         //头部
-        _headerView = [[HomeHeaderView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 10 + SCREEN_WIDTH/2.5 - 15)];
+        _headerView = [[HomeHeaderView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 10 + (SCREEN_WIDTH - 20)/702 * 310 + 10)];
         
         _headerView.headerBlock = ^(HomeEventsType type, NSInteger index, HomeFindModel *find) {
             [weakSelf headerViewEventsWithType:type index:index model:find];

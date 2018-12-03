@@ -209,7 +209,7 @@
                 http.code = CAPTCHA_CODE;
                 http.parameters[@"client"] = @"ios";
                 http.parameters[@"sessionId"] = sessionId;
-                http.parameters[@"bizType"] = USER_CHANGE_PWD_CODE;
+                http.parameters[@"bizType"] = @"805076";
                 http.parameters[@"mobile"] = self.phoneTextFid.text;
                 NSData *data   =  [[NSUserDefaults standardUserDefaults] objectForKey:@"chooseModel"];
                 CountryModel *model = [NSKeyedUnarchiver unarchiveObjectWithData:data];
@@ -233,7 +233,7 @@
                 http.code = @"805954";
                 //    http.parameters[@"companyCode"] = @"";
                 http.parameters[@"email"] = self.phoneTextFid.text;
-                http.parameters[@"bizType"] = USER_FIND_PWD_CODE;
+                http.parameters[@"bizType"] = @"805076";
                 http.parameters[@"client"] = @"ios";
                 http.parameters[@"sessionId"] = sessionId;
                 
@@ -246,15 +246,6 @@
                     [TLAlert alertWithError:[LangSwitcher switchLang:@"发送失败,请检查手机号" key:nil]];
                 }];
             }
-            
-            
-            
-            
-            
-            
-            
-            
-            
         }
         [self.navigationController popViewControllerAnimated:YES];
         //将sessionid传到经过app服务器做二次验证
@@ -432,6 +423,7 @@
     nameLable.font = Font(16);
     nameLable.textColor = [UIColor whiteColor];
     [passwordView addSubview:nameLable];
+    
     
     
     NSArray *passWordArray = @[[LangSwitcher switchLang:@"密码" key:nil],[LangSwitcher switchLang:@"确认密码" key:nil]];

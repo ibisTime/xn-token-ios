@@ -97,14 +97,6 @@
 -(void)refreshTableView:(TLTableView *)refreshTableview scrollView:(UIScrollView *)scroll
 {
     CGFloat height = (235 - 64 + kNavigationBarHeight);
-////    导航栏
-//    if (self.tableView.contentOffset.y <= (235 - 64)) {
-//        [self.navigationController.navigationBar setBackgroundImage:[self imageWithBgColor:[UIColor colorWithRed:9/255.0 green:90/255.0 blue:221/255.0 alpha:self.tableView.contentOffset.y / (235 - 64)]] forBarMetrics:UIBarMetricsDefault];
-//    }else
-//    {
-//        [self.navigationController.navigationBar setBackgroundImage:[self imageWithBgColor:[UIColor colorWithRed:9/255.0 green:90/255.0 blue:221/255.0 alpha:1]] forBarMetrics:UIBarMetricsDefault];
-//    }
-//
 //    // 获取到tableView偏移量
     CGFloat Offset_y = scroll.contentOffset.y;
     // 下拉 纵向偏移量变小 变成负的

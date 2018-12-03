@@ -74,7 +74,12 @@
     
     self.googleAuthTF.rightView = authView;
     self.captchaView = [[CaptchaView alloc] initWithFrame:CGRectMake(leftMargin, self.googleAuthTF.yy, kScreenWidth - 2*leftMargin, height) leftTitleWidth:100];
-    self.captchaView.captchaTf.leftLbl.text = [LangSwitcher switchLang:@"短信验证码" key:nil];
+    if ([TLUser isBlankString:[TLUser user].mobile] == YES) {
+        self.captchaView.captchaTf.leftLbl.text = [LangSwitcher switchLang:@"邮箱验证码" key:nil];
+    }else
+    {
+        self.captchaView.captchaTf.leftLbl.text = [LangSwitcher switchLang:@"短信验证码" key:nil];
+    }
     [self.captchaView.captchaBtn addTarget:self action:@selector(sendCaptcha) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.captchaView];
     //短信验证码
@@ -148,26 +153,51 @@
             NSLog(@"验证失败 %@", error);
             [TLAlert alertWithSucces:[LangSwitcher switchLang:@"验证失败" key:nil]];
         } else {
-            //发送验证码
-            TLNetworking *http = [TLNetworking new];
-            http.showView = self.view;
-            http.code = CAPTCHA_CODE;
-            http.parameters[@"client"] = @"ios";
-            http.parameters[@"sessionId"] = sessionId;
-            http.parameters[@"bizType"] = @"805072";
-            http.parameters[@"mobile"] = [TLUser user].mobile;
-            http.parameters[@"interCode"] = [TLUser user].interCode;
-            http.parameters[@"sessionId"] = sessionId;
-
-            [http postWithSuccess:^(id responseObject) {
-
-                [TLAlert alertWithSucces:[LangSwitcher switchLang:@"验证码已发送,请注意查收" key:nil]];
-
-                [self.captchaView.captchaBtn begin];
-
-            } failure:^(NSError *error) {
-
-            }];
+            
+            
+            
+            if ([TLUser isBlankString:[TLUser user].mobile] == NO) {
+                //发送验证码
+                TLNetworking *http = [TLNetworking new];
+                http.showView = self.view;
+                http.code = CAPTCHA_CODE;
+                http.parameters[@"client"] = @"ios";
+                http.parameters[@"sessionId"] = sessionId;
+                http.parameters[@"bizType"] = @"805079";
+                http.parameters[@"mobile"] = [TLUser user].mobile;
+                http.parameters[@"interCode"] = [TLUser user].interCode;
+                http.parameters[@"sessionId"] = sessionId;
+                [http postWithSuccess:^(id responseObject) {
+                    
+                    [TLAlert alertWithSucces:[LangSwitcher switchLang:@"验证码已发送,请注意查收" key:nil]];
+                    
+                    [self.captchaView.captchaBtn begin];
+                    
+                } failure:^(NSError *error) {
+                    
+                }];
+            }else
+            {
+                TLNetworking *http = [TLNetworking new];
+                http.showView = self.view;
+                http.code = @"805954";
+                http.parameters[@"email"] = [TLUser user].email;
+                http.parameters[@"bizType"] = @"805079";
+                http.parameters[@"client"] = @"ios";
+                http.parameters[@"sessionId"] = sessionId;
+                
+                [http postWithSuccess:^(id responseObject) {
+                    //
+                    [TLAlert alertWithSucces:[LangSwitcher switchLang:@"验证码已发送,请注意查收" key:nil]];
+                    [self.captchaView.captchaBtn begin];
+                    
+                } failure:^(NSError *error) {
+                    //                    [TLAlert alertWithError:[LangSwitcher switchLang:@"发送失败,请检查手机号" key:nil]];
+                }];
+            }
+            
+            
+            
         }
         [self.navigationController popViewControllerAnimated:YES];
         //将sessionid传到经过app服务器做二次验证
@@ -203,15 +233,37 @@
         return ;
     }
     
-    TLNetworking *http = [TLNetworking new];
+//    TLNetworking *http = [TLNetworking new];
+//
+//    http.code = @"805072";
+//    http.showView = self.view;
+//
+//    http.parameters[@"googleCaptcha"] = self.googleAuthTF.text;
+//    http.parameters[@"smsCaptcha"] = self.captchaView.captchaTf.text;
+//    http.parameters[@"userId"] = [TLUser user].userId;
+//    http.parameters[@"interCode"] = [TLUser user].interCode;
+
     
-    http.code = @"805072";
+    TLNetworking *http = [TLNetworking new];
+    http.code = @"805079";
     http.showView = self.view;
     
     http.parameters[@"googleCaptcha"] = self.googleAuthTF.text;
+//    http.parameters[@"secret"] = self.secretTF.text;
     http.parameters[@"smsCaptcha"] = self.captchaView.captchaTf.text;
     http.parameters[@"userId"] = [TLUser user].userId;
-    http.parameters[@"interCode"] = [TLUser user].interCode;
+    
+    //    http.parameters[@"loginName"] = [TLUser user].interCode;
+    if ([TLUser isBlankString:[TLUser user].mobile] == NO) {
+        
+        NSData *data   =  [[NSUserDefaults standardUserDefaults] objectForKey:@"chooseModel"];
+        CountryModel *model = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        http.parameters[@"loginName"] = [NSString stringWithFormat:@"%@%@",model.interCode,[TLUser user].mobile];
+        //            http.parameters[@"interCode"] = model.interCode;
+    }else
+    {
+        http.parameters[@"loginName"] = [TLUser user].email;
+    }
 
     [http postWithSuccess:^(id responseObject) {
         

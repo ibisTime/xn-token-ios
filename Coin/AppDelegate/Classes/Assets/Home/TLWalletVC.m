@@ -641,19 +641,16 @@
         NSMutableArray <CurrencyModel *>*modes;
 //        NSArray <CurrencyModel *>*models;
         weakSelf.AssetsListModel = [CurrencyModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"][@"accountList"]];
-        
+        self.headView.dataDic = responseObject[@"data"];
+        [weakSelf.tableView reloadData];
         if ([self.isWallet isEqualToString:@"个人钱包"]) {
             
             weakSelf.tableView.platforms = [CurrencyModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"][@"accountList"]];
             
-//            [weakSelf.tableView reloadData];
-            
-        }
-        self.headView.dataDic = responseObject[@"data"];
-        
-        [weakSelf.tableView reloadData];
-        if (modes.count != weakSelf.AssetsListModel.count) {
-            [TableViewAnimationKit showWithAnimationType:2 tableView:self.tableView];
+            [weakSelf.tableView reloadData];
+            if (modes.count != weakSelf.AssetsListModel.count) {
+                [TableViewAnimationKit showWithAnimationType:2 tableView:self.tableView];
+            }
         }
         modes = weakSelf.AssetsListModel;
         [weakSelf.tableView endRefreshHeader];

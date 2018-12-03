@@ -97,14 +97,14 @@
     }else
     {
         if ([model.interSimpleCode isEqualToString:@"CN"] ||[model.interSimpleCode isEqualToString:@"HK"] ||[model.interSimpleCode isEqualToString:@"TW"] || [model.interSimpleCode isEqualToString:@"MO"]) {
-            [LangSwitcher changLangType:LangTypeSimple];
+//            [LangSwitcher changLangType:LangTypeSimple];
             money = @"CNY";
         }else if ([model.interSimpleCode isEqualToString:@"KR"] || [model.interSimpleCode isEqualToString:@"KO"] )
         {
-            [LangSwitcher changLangType:LangTypeKorean];
+//            [LangSwitcher changLangType:LangTypeKorean];
             money = @"KRW";
         }else{
-            [LangSwitcher changLangType:LangTypeEnglish];
+//            [LangSwitcher changLangType:LangTypeEnglish];
             money = @"USD";
         }
         [[NSUserDefaults standardUserDefaults] setObject:money forKey:KLocalMoney];

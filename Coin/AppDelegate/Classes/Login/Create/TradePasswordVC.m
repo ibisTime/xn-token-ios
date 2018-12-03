@@ -10,14 +10,33 @@
 #import "ImportWalletVC.h"
 #import "CreateWalletVC.h"
 #import "WhetherBackupVC.h"
+#import "PrivacyPolicyView.h"
 @interface TradePasswordVC ()
 
 @property (nonatomic , strong)UITextField *passWord;
 @property (nonatomic , strong)UITextField *conPassWord;
-
+@property (nonatomic ,strong)PrivacyPolicyView *privacyView;
 @end
 
 @implementation TradePasswordVC
+
+-(PrivacyPolicyView *)privacyView
+{
+    if (!_privacyView) {
+        _privacyView = [[PrivacyPolicyView alloc]initWithFrame:CGRectMake(50, SCREEN_HEIGHT, SCREEN_WIDTH - 100, 60 + SCREEN_WIDTH - 160 + 64)];
+        _privacyView.backgroundColor = kWhiteColor;
+        kViewRadius(_privacyView, 6.5);
+        [_privacyView.confirmBtn addTarget:self action:@selector(confirmBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
+//        [[UserModel user]showPopAnimationWithAnimationStyle:1 showView:self.privacyView];
+    }
+    return _privacyView;
+}
+
+
+-(void)confirmBtnClick
+{
+    [[UserModel user].cusPopView dismiss];
+}
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -35,8 +54,16 @@
     nameLable.textColor = [UIColor whiteColor];
     self.navigationItem.titleView = nameLable;
     
+    [self.view addSubview:self.privacyView];
+    
+    _privacyView.frame = CGRectMake(50, SCREEN_HEIGHT/2 - (60 + SCREEN_WIDTH - 160 + 64)/2, SCREEN_WIDTH - 100, 60 + SCREEN_WIDTH - 160 + 64);
+    [[UserModel user]showPopAnimationWithAnimationStyle:1 showView:self.privacyView];
+    
+    
+    
     [self initView];
 }
+
 
 -(void)initView
 {

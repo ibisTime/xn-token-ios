@@ -8,7 +8,7 @@
 
 #import "MineTableView.h"
 #import "MineCell.h"
-
+#import "MyAssetsTableViewCell.h"
 @interface MineTableView ()<UITableViewDataSource, UITableViewDelegate>
 
 @end
@@ -16,6 +16,7 @@
 @implementation MineTableView
 
 static NSString *identifierCell = @"MineCell";
+static NSString *MyAssetsTableView = @"MyAssetsTableViewCell";
 
 - (instancetype)initWithFrame:(CGRect)frame style:(UITableViewStyle)style {
     
@@ -25,6 +26,7 @@ static NSString *identifierCell = @"MineCell";
         self.delegate = self;
         
         [self registerClass:[MineCell class] forCellReuseIdentifier:identifierCell];
+        [self registerClass:[MyAssetsTableViewCell class] forCellReuseIdentifier:MyAssetsTableView];
     }
     
     return self;
@@ -32,27 +34,48 @@ static NSString *identifierCell = @"MineCell";
 
 #pragma mark - UITableViewDataSource;
 
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     
-    return self.mineGroup.sections.count;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    self.mineGroup.items = self.mineGroup.sections[section];
-    
-    return self.mineGroup.items.count;
+    if (section == 0) {
+        return 1;
+    }
+    return 8;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
+    if (indexPath.section == 0) {
+        MyAssetsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MyAssetsTableView forIndexPath:indexPath];
+        
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        return cell;
+    }
     MineCell *cell = [tableView dequeueReusableCellWithIdentifier:identifierCell forIndexPath:indexPath];
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
-    self.mineGroup.items = self.mineGroup.sections[indexPath.section];
     
-    cell.mineModel = self.mineGroup.items[indexPath.row];
+    if ([TLUser isBlankString:[[NSUserDefaults standardUserDefaults] objectForKey:MNEMONIC]] == YES) {
+
+        if (indexPath.row == 3) {
+            cell.iconImageView.hidden = YES;
+            cell.titleLbl.hidden = YES;
+            cell.line.hidden = YES;
+        }
+    }
+    
+    NSArray *imgArray = @[@"收益",@"身份验证",@"账号安全",@"账号安全",@"my通讯录",@"反馈",@"帮助(4)",@"设置"];
+    NSArray *textArray = @[@"我的收益",@"身份验证",@"账号安全",@"钱包工具",@"加入社群",@"问题反馈",@"帮助中心",@"设置",];
+    
+    [cell.iconImageView setImage:kImage(imgArray[indexPath.row]) forState:(UIControlStateNormal)];
+    cell.titleLbl.text = [LangSwitcher switchLang:textArray[indexPath.row] key:nil];
+
     
     return cell;
 }
@@ -61,25 +84,42 @@ static NSString *identifierCell = @"MineCell";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-
-    self.mineGroup.items = self.mineGroup.sections[indexPath.section];
-    
-    if (self.mineGroup.items[indexPath.row].action) {
-        
-        self.mineGroup.items[indexPath.row].action();
+    if ([self.refreshDelegate respondsToSelector:@selector(refreshTableView:didSelectRowAtIndexPath:)]) {
+        [self.refreshDelegate refreshTableView:self didSelectRowAtIndexPath:indexPath];
     }
     
 }
 
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if ([self.refreshDelegate respondsToSelector:@selector(refreshTableView:scrollView:)]) {
+        [self.refreshDelegate refreshTableView:self scrollView:scrollView];
+    }
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    return kHeight(60);
+    if (indexPath.section == 0) {
+        return 76;
+    }
+    if ([TLUser isBlankString:[[NSUserDefaults standardUserDefaults] objectForKey:MNEMONIC]] == YES) {
+        if (indexPath.row == 3) {
+            return 0;
+        }else
+        {
+            return 50;
+            
+        }
+    }else
+    {
+        return 50;
+    }
+    
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     
-    return 10;
+    return 0.01;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
@@ -89,7 +129,7 @@ static NSString *identifierCell = @"MineCell";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     
-    return 0.1;
+    return 0.01;
 }
 
 @end

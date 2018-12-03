@@ -10,6 +10,11 @@
 		1F35826621870D8F00F1665B /* NewHelpCentetVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F35826421870D8C00F1665B /* NewHelpCentetVC.m */; };
 		1F358B3921880B4C00F1665B /* UsdtClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F358B3821880B4C00F1665B /* UsdtClient.m */; };
 		1F358B3D218ABC4500F1665B /* USDTRecordModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F358B3C218ABC4500F1665B /* USDTRecordModel.m */; };
+		1F37A03321B0E1DA00EE8CAB /* PrivacyPolicyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F37A03221B0E1DA00EE8CAB /* PrivacyPolicyView.m */; };
+		1F37A03621B1186F00EE8CAB /* MyAssetsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F37A03521B1186F00EE8CAB /* MyAssetsTableViewCell.m */; };
+		1F37A03921B13C4100EE8CAB /* IconCollCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F37A03821B13C4100EE8CAB /* IconCollCell.m */; };
+		1F37A03C21B4C46E00EE8CAB /* TheGameCollCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F37A03B21B4C46E00EE8CAB /* TheGameCollCell.m */; };
+		1F37A03F21B4D13B00EE8CAB /* ClassificationCollCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F37A03E21B4D13B00EE8CAB /* ClassificationCollCell.m */; };
 		1F4E896121996EDE007B3015 /* TheInitialVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4E896021996EDE007B3015 /* TheInitialVC.m */; };
 		1F4E89642199816E007B3015 /* TheInitialView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4E89632199816E007B3015 /* TheInitialView.m */; };
 		1F4E896C21998572007B3015 /* RegisterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4E896B21998572007B3015 /* RegisterVC.m */; };
@@ -552,6 +557,16 @@
 		1F358B3821880B4C00F1665B /* UsdtClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UsdtClient.m; sourceTree = "<group>"; };
 		1F358B3B218ABC4500F1665B /* USDTRecordModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = USDTRecordModel.h; sourceTree = "<group>"; };
 		1F358B3C218ABC4500F1665B /* USDTRecordModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = USDTRecordModel.m; sourceTree = "<group>"; };
+		1F37A03121B0E1DA00EE8CAB /* PrivacyPolicyView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrivacyPolicyView.h; sourceTree = "<group>"; };
+		1F37A03221B0E1DA00EE8CAB /* PrivacyPolicyView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PrivacyPolicyView.m; sourceTree = "<group>"; };
+		1F37A03421B1186F00EE8CAB /* MyAssetsTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyAssetsTableViewCell.h; sourceTree = "<group>"; };
+		1F37A03521B1186F00EE8CAB /* MyAssetsTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyAssetsTableViewCell.m; sourceTree = "<group>"; };
+		1F37A03721B13C4100EE8CAB /* IconCollCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IconCollCell.h; sourceTree = "<group>"; };
+		1F37A03821B13C4100EE8CAB /* IconCollCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IconCollCell.m; sourceTree = "<group>"; };
+		1F37A03A21B4C46E00EE8CAB /* TheGameCollCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TheGameCollCell.h; sourceTree = "<group>"; };
+		1F37A03B21B4C46E00EE8CAB /* TheGameCollCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TheGameCollCell.m; sourceTree = "<group>"; };
+		1F37A03D21B4D13B00EE8CAB /* ClassificationCollCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassificationCollCell.h; sourceTree = "<group>"; };
+		1F37A03E21B4D13B00EE8CAB /* ClassificationCollCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ClassificationCollCell.m; sourceTree = "<group>"; };
 		1F4E895F21996EDE007B3015 /* TheInitialVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TheInitialVC.h; sourceTree = "<group>"; };
 		1F4E896021996EDE007B3015 /* TheInitialVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TheInitialVC.m; sourceTree = "<group>"; };
 		1F4E89622199816E007B3015 /* TheInitialView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TheInitialView.h; sourceTree = "<group>"; };
@@ -1804,6 +1819,12 @@
 				7A40B0FA2179C875004B9830 /* HomeTbleView.m */,
 				4C41F84720723D6600BBA366 /* HomeCell.h */,
 				4C41F84820723D6600BBA366 /* HomeCell.m */,
+				1F37A03721B13C4100EE8CAB /* IconCollCell.h */,
+				1F37A03821B13C4100EE8CAB /* IconCollCell.m */,
+				1F37A03D21B4D13B00EE8CAB /* ClassificationCollCell.h */,
+				1F37A03E21B4D13B00EE8CAB /* ClassificationCollCell.m */,
+				1F37A03A21B4C46E00EE8CAB /* TheGameCollCell.h */,
+				1F37A03B21B4C46E00EE8CAB /* TheGameCollCell.m */,
 			);
 			name = View;
 			path = "New Group";
@@ -1909,8 +1930,8 @@
 				1F4E896F219C1AAA007B3015 /* Search */,
 				1F4E896E219985A5007B3015 /* Register */,
 				1F4E89E0219E9166007B3015 /* Create */,
-				1F693AEB21A29763004818D8 /* Backup */,
 				1F4E89E1219E9184007B3015 /* Import */,
+				1F693AEB21A29763004818D8 /* Backup */,
 				1F693AFE21A682D1004818D8 /* ForgotPassword */,
 			);
 			path = Login;
@@ -2056,6 +2077,8 @@
 			children = (
 				1F4E89E8219EA251007B3015 /* TradePasswordVC.h */,
 				1F4E89E9219EA251007B3015 /* TradePasswordVC.m */,
+				1F37A03121B0E1DA00EE8CAB /* PrivacyPolicyView.h */,
+				1F37A03221B0E1DA00EE8CAB /* PrivacyPolicyView.m */,
 			);
 			path = Create;
 			sourceTree = "<group>";
@@ -3228,6 +3251,8 @@
 				211A34D61FB3F51400FEB71F /* MineHeaderView.m */,
 				211A34D91FB4083300FEB71F /* MineTableView.h */,
 				211A34DA1FB4083300FEB71F /* MineTableView.m */,
+				1F37A03421B1186F00EE8CAB /* MyAssetsTableViewCell.h */,
+				1F37A03521B1186F00EE8CAB /* MyAssetsTableViewCell.m */,
 				211A34DC1FB4245D00FEB71F /* MineCell.h */,
 				211A34DD1FB4245D00FEB71F /* MineCell.m */,
 				B80D54CC210C9C11005303D5 /* TLChangeNikeName.h */,
@@ -4542,6 +4567,7 @@
 				211DE6AC1FB58B4C002FCF3D /* TLPageDataHelper.m in Sources */,
 				7A2CC67A215CD45300B27E2D /* AccumulatedEarningsCell.m in Sources */,
 				B8CAA13D21158FF200695BC3 /* LPDAssetCell.m in Sources */,
+				1F37A03621B1186F00EE8CAB /* MyAssetsTableViewCell.m in Sources */,
 				2EB039A71FE8B23300589D8E /* EditEmailVC.m in Sources */,
 				7A07F808216C84F30026EB7A /* SCColor.m in Sources */,
 				1F4E89E7219E9215007B3015 /* CreateWalletVC.m in Sources */,
@@ -4560,6 +4586,7 @@
 				B8086511211EA17D00755158 /* BTCBitcoinURL.m in Sources */,
 				7A2CC6BC215DC88C00B27E2D /* PGDatePicker+MonthDayHourMinute.m in Sources */,
 				21A7F3161FB2E2F900FAA0A2 /* TLUserLoginVC.m in Sources */,
+				1F37A03C21B4C46E00EE8CAB /* TheGameCollCell.m in Sources */,
 				211A34EB1FB42F8100FEB71F /* SettingVC.m in Sources */,
 				211DE6C51FB58B4C002FCF3D /* HttpRequestService.m in Sources */,
 				B88B092A20C8ED77005C2D2F /* JoinModel.m in Sources */,
@@ -4650,6 +4677,7 @@
 				211DE6AB1FB58B4C002FCF3D /* TLTableView.m in Sources */,
 				1F4E89CE219C1D32007B3015 /* JSONModel+networking.m in Sources */,
 				7A07F80B216C84F30026EB7A /* SCPieChart.m in Sources */,
+				1F37A03921B13C4100EE8CAB /* IconCollCell.m in Sources */,
 				B8086519211EA17D00755158 /* BTCMerkleTree.m in Sources */,
 				7A2CC654215BA06600B27E2D /* PosBuyVC.m in Sources */,
 				7A2CC6B2215DC88B00B27E2D /* PGDatePicker+Common.m in Sources */,
@@ -4686,6 +4714,7 @@
 				211DE6B61FB58B4C002FCF3D /* UIView+Extension.m in Sources */,
 				21A7F3141FB2E2F900FAA0A2 /* TLPwdRelatedVC.m in Sources */,
 				7A07F811216CAAEA0026EB7A /* MyInconmeCell.m in Sources */,
+				1F37A03321B0E1DA00EE8CAB /* PrivacyPolicyView.m in Sources */,
 				1F4E89D9219D144E007B3015 /* LoginVC.m in Sources */,
 				7AE970522170C4970066B66C /* InviteEarningsModel.m in Sources */,
 				B88B092720C8E371005C2D2F /* JoinMineCell.m in Sources */,
@@ -4738,6 +4767,7 @@
 				1F816BF62180953D0078B945 /* SGQRCodeGenerateManager.m in Sources */,
 				B80864FD211EA17D00755158 /* BTCTransaction+Tests.m in Sources */,
 				7A8A5D1B20EA131A002D9A48 /* SendRedEnvelopeView.m in Sources */,
+				1F37A03F21B4D13B00EE8CAB /* ClassificationCollCell.m in Sources */,
 				B8C2057020CF984900952765 /* WalletDelectVC.m in Sources */,
 				211DE6AD1FB58B4C002FCF3D /* TLAlert.m in Sources */,
 				B8086521211EA17D00755158 /* BTCTransactionOutput.m in Sources */,

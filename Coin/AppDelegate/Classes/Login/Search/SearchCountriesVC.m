@@ -347,7 +347,6 @@ UISearchBarDelegate,UISearchDisplayDelegate>
         NSRange foundRange = [storeString rangeOfString:searchText options:searchOptions range:storeRange];
         if (foundRange.length) {
             NSDictionary *dic=@{@"chineseName":storeString,@"interCode":storeImageString};
-            
             [tempResults addObject:dic];
         }
         
