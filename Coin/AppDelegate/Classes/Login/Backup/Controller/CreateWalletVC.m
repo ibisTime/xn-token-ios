@@ -53,6 +53,16 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     w = scrollView.contentOffset.x/SCREEN_WIDTH;
+    
+    //禁止左划
+    static float newx = 0;
+    static float oldx = 0;
+    newx= scrollView.contentOffset.x ;
+    if (newx > oldx) {
+        scrollView.scrollEnabled = NO;
+        scrollView.scrollEnabled = YES;
+    }
+    oldx = newx;
 }
 
 
@@ -94,13 +104,15 @@
     self.scrollView.showsHorizontalScrollIndicator = NO;
     self.scrollView.pagingEnabled = YES;
     self.scrollView.delegate = self;
-    self.scrollView.scrollEnabled = NO;
+//    self.scrollView.scrollEnabled = NO;
     [self.view addSubview:self.scrollView];
     
     [self MnemonicFirstPage];
     [self MnemonicWordPageTwe];
     [self MnemonicWordPageThere];
 }
+
+
 
 -(void)MnemonicFirstPage
 {

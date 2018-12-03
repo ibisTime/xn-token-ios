@@ -26,11 +26,10 @@
 //密码  确认密码
 @property (nonatomic , strong)UITextField *passFid;
 @property (nonatomic , strong)UITextField *conPassFid;
-
 //资金密码   确认资金密码
 @property (nonatomic , strong)UITextField *moneyFid;
-@property (nonatomic , strong)UITextField *conMoneyFid;
 
+@property (nonatomic , strong)UITextField *conMoneyFid;
 
 @property (nonatomic , strong)UILabel *levelStateLbl;
 @end
@@ -377,7 +376,7 @@
                 http.code = CAPTCHA_CODE;
                 http.parameters[@"client"] = @"ios";
                 http.parameters[@"sessionId"] = sessionId;
-                http.parameters[@"bizType"] = USER_REG_CODE;
+                http.parameters[@"bizType"] = @"805045";
                 http.parameters[@"mobile"] = self.phoneTextFid.text;
                 NSData *data   =  [[NSUserDefaults standardUserDefaults] objectForKey:@"chooseModel"];
                 CountryModel *model = [NSKeyedUnarchiver unarchiveObjectWithData:data];
@@ -394,6 +393,9 @@
                     [TLAlert alertWithError:[LangSwitcher switchLang:@"发送失败,请检查手机号" key:nil]];
                     //                [MBProgressHUD hideHUDForView:self.view animated:YES];
                 }];
+                
+                
+
             }else
             {
                 TLNetworking *http = [TLNetworking new];
@@ -401,7 +403,7 @@
                 http.code = @"805954";
                 //    http.parameters[@"companyCode"] = @"";
                 http.parameters[@"email"] = self.phoneTextFid.text;
-                http.parameters[@"bizType"] = @"805081";
+                http.parameters[@"bizType"] = @"805046";
                 http.parameters[@"client"] = @"ios";
                 http.parameters[@"sessionId"] = sessionId;
                 
@@ -453,7 +455,6 @@
         }
     }
     
-    
     self.scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, -kNavigationBarHeight, SCREEN_WIDTH, SCREEN_HEIGHT + kStatusBarHeight)];
     self.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH * 3, 0);
     self.scrollView.bounces = NO;
@@ -468,15 +469,6 @@
     [self moneyPasswordUI];
     
 }
-
-
-
-
-
-
-
-
-
 
 -(void)registrationWayUI
 {

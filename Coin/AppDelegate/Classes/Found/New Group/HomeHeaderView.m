@@ -53,8 +53,8 @@
 //        CoinWeakSelf;
         _scrollView = [HW3DBannerView initWithFrame:CGRectMake(10, 5, SCREEN_WIDTH - 20, (SCREEN_WIDTH - 20)/702 * 310) imageSpacing:10 imageWidth:SCREEN_WIDTH - 30];
         _scrollView.initAlpha = 0; // 设置两边卡片的透明度
-        _scrollView.imageRadius = 5; // 设置卡片圆角
-        _scrollView.imageHeightPoor = 20;// 设置占位图片
+        _scrollView.imageRadius = 6.5; // 设置卡片圆角
+//        _scrollView.imageHeightPoor = 20;// 设置占位图片
         _scrollView.delegate = self;
         _scrollView.autoScrollTimeInterval = 4;
 //        _scrollView.data = @[@"banner",@"banner",@"banner"];

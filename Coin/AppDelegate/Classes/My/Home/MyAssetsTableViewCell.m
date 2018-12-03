@@ -18,14 +18,29 @@
 //        NSString *localMoney;
         
         
-        array = @[[NSString stringWithFormat:@"%@%@",[LangSwitcher switchLang:@"总资产" key:nil],[TLUser user].localMoney],[NSString stringWithFormat:@"%@%@",[LangSwitcher switchLang:@"总收益" key:nil],[TLUser user].localMoney]];
+        
+        NSString *cnyStr;
+        if ([[TLUser user].localMoney isEqualToString:@"USD"]) {
+            cnyStr = @"（USD）";
+        } else if ([[TLUser user].localMoney isEqualToString:@"KRW"])
+        {
+            cnyStr = @"（KRW）";
+        }
+        else{
+
+            cnyStr = @"（CNY）";
+        }
+        
+        
+        
+        array = @[[NSString stringWithFormat:@"%@%@",[LangSwitcher switchLang:@"总资产" key:nil],cnyStr],[NSString stringWithFormat:@"%@%@",[LangSwitcher switchLang:@"总收益" key:nil],cnyStr]];
         for (int i = 0; i < 2; i ++) {
             
             UILabel *priceLabel = [UILabel labelWithFrame:CGRectMake(i % 2 * SCREEN_WIDTH/2, 20, SCREEN_WIDTH/2, 16) textAligment:(NSTextAlignmentCenter) backgroundColor:kClearColor font:FONT(16) textColor:[UIColor blackColor]];
             priceLabel.text = @"≈0.00";
             [self addSubview:priceLabel];
             
-            UILabel *nameLabel = [UILabel labelWithFrame:CGRectMake(i % 2 * SCREEN_WIDTH/2, priceLabel.yy + 7.5, SCREEN_WIDTH/2, 12) textAligment:(NSTextAlignmentCenter) backgroundColor:kClearColor font:FONT(12) textColor:kHexColor(@"#bfbfbf")];
+            UILabel *nameLabel = [UILabel labelWithFrame:CGRectMake(i % 2 * SCREEN_WIDTH/2, priceLabel.yy + 7.5, SCREEN_WIDTH/2, 13) textAligment:(NSTextAlignmentCenter) backgroundColor:kClearColor font:FONT(12) textColor:kHexColor(@"#bfbfbf")];
             nameLabel.text = array[i];
             [self addSubview:nameLabel];
             

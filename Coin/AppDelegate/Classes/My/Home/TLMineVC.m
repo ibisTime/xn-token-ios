@@ -244,7 +244,7 @@
 
 - (void)initTableView {
     
-    self.tableView = [[MineTableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight) style:UITableViewStyleGrouped];
+    self.tableView = [[MineTableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, SCREEN_HEIGHT - kTabBarHeight) style:UITableViewStyleGrouped];
     self.tableView.showsVerticalScrollIndicator = YES;
     self.tableView.showsHorizontalScrollIndicator = YES;
     self.tableView.refreshDelegate = self;

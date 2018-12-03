@@ -50,7 +50,6 @@
     CGFloat leftMargin = 0;
     CGFloat leftW = 100;
     CGFloat height = 45;
-    
     //密钥
     self.secretTF = [[TLTextField alloc] initWithFrame:CGRectMake(leftMargin, 10, kScreenWidth - 2*leftMargin, height)
                                                     leftTitle:[LangSwitcher switchLang:@"密钥" key:nil]
@@ -188,9 +187,6 @@
             NSLog(@"验证失败 %@", error);
             [TLAlert alertWithSucces:[LangSwitcher switchLang:@"验证失败" key:nil]];
         } else {
-            
-            
-            
             if ([TLUser isBlankString:[TLUser user].mobile] == NO) {
                 //发送验证码
                 TLNetworking *http = [TLNetworking new];

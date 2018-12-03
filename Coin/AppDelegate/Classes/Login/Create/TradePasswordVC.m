@@ -125,7 +125,7 @@
     [note sizeToFit];
     [passwordView addSubview:note];
     
-    NSArray *securityArray = @[[LangSwitcher switchLang:@"密码，用户解锁全币和法币" key:nil],[LangSwitcher switchLang:@"交易密码为本地密码，请妥善保管，丢失将无法找回" key:nil],[LangSwitcher switchLang:@"可退货删除钱包重新导入助记词设置新密码" key:nil]];
+    NSArray *securityArray = @[[LangSwitcher switchLang:@"密码，用户解锁全币和法币" key:nil],[LangSwitcher switchLang:@"交易密码为本地密码，请妥善保管，丢失将无法找回" key:nil],[LangSwitcher switchLang:@"可通过删除私钥钱包重新导入助记词设置新密码" key:nil]];
     
     for (int i = 0; i < 3; i ++) {
         UIView *pointView = [[UIView alloc]initWithFrame:CGRectMake(note.xx, note.yy + 8 + i%3 * 20, 4, 4)];

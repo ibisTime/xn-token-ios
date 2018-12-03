@@ -39,7 +39,7 @@
     [self addSubview:announcementBackBtn];
     
     
-    UIButton *iconBtn = [UIButton buttonWithTitle:@"公告" titleColor:kHexColor(@"#0165ff") backgroundColor:kClearColor titleFont:12];
+    UIButton *iconBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"公告" key:nil] titleColor:kHexColor(@"#0165ff") backgroundColor:kClearColor titleFont:12];
     iconBtn.frame = CGRectMake(12, 0, iconBtn.width, 50);
     [iconBtn sizeToFit];
     iconBtn.frame = CGRectMake(12, 0, iconBtn.width + 10, 50);

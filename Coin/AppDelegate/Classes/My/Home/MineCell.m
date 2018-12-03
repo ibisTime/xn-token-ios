@@ -47,7 +47,7 @@
 //        }];
         
         //右边箭头
-        self.accessoryImageView = [[UIImageView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 19 - 7, 24, 7, 15)];
+        self.accessoryImageView = [[UIImageView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 19 - 7, 19, 7, 15)];
         [self.contentView addSubview:self.accessoryImageView];
 
         self.accessoryImageView.image = [UIImage imageNamed:@"矩形7拷贝2"];

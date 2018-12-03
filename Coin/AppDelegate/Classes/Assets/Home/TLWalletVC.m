@@ -463,15 +463,12 @@
     if ([title isEqualToString:@"转账"]) {
         if ([self.isWallet isEqualToString:@"个人钱包"]) {
             [self clickWithdrawWithCurrency:model];
-            
-
         }else
         {
             WalletForwordVC *coinVC = [WalletForwordVC new];
             coinVC.currency = model;
             [self.navigationController pushViewController:coinVC animated:YES];
         }
-        
     }else
     {
         RechargeCoinVC *coinVC = [RechargeCoinVC new];
@@ -925,7 +922,6 @@
             if (modes.count != weakSelf.allCurrencys.count) {
                 [TableViewAnimationKit showWithAnimationType:2 tableView:self.tableView];
             }
-            
         }
         modes = weakSelf.allCurrencys;
 
