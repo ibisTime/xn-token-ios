@@ -35,6 +35,8 @@
 #import "IconCollCell.h"
 #import "TheGameCollCell.h"
 #import "ClassificationCollCell.h"
+
+#import "FindTheGameVC.h"
 @interface HomeVC ()<RefreshDelegate,UIViewControllerPreviewingDelegate,UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
 
 
@@ -85,8 +87,6 @@
     if (_collectionView==nil) {
         UICollectionViewFlowLayout *flowayout = [[UICollectionViewFlowLayout alloc]init];
         _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, kNavigationBarHeight, SCREEN_WIDTH, SCREEN_HEIGHT - kNavigationBarHeight - kTabBarHeight) collectionViewLayout:flowayout];
-//        flowayout.minimumInteritemSpacing = 0;
-//        flowayout.minimumLineSpacing = 0;
         _collectionView.showsVerticalScrollIndicator = NO;
         _collectionView.showsHorizontalScrollIndicator = NO;
         _collectionView.backgroundColor = kWhiteColor;
@@ -179,6 +179,8 @@
         [cell.iconButton SG_imagePositionStyle:(SGImagePositionStyleTop) spacing:9 imagePositionBlock:^(UIButton *button) {
             [button setImage:kImage(imgArray[indexPath.row]) forState:(UIControlStateNormal)];
         }];
+        [cell.iconButton addTarget:self action:@selector(iconButtonClick:) forControlEvents:(UIControlEventTouchUpInside)];
+        cell.iconButton.tag = 300 + indexPath.row;
         return cell;
     }
     
@@ -189,8 +191,44 @@
     }
     
     TheGameCollCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"TheGameCollCell" forIndexPath:indexPath];
-
+    [cell.actionBtn addTarget:self action:@selector(iconButtonClick:) forControlEvents:(UIControlEventTouchUpInside)];
+    cell.actionBtn.tag = 400 + indexPath.row;
     return cell;
+}
+
+-(void)iconButtonClick:(UIButton *)sender
+{
+    [self loginTheWhether];
+    
+    switch (sender.tag - 300) {
+        case 0:
+        {
+            RedEnvelopeVC *redEnvelopeVC = [RedEnvelopeVC new];
+            [self showViewController:redEnvelopeVC sender:self];
+        }
+            break;
+        case 1:
+        {
+            PosMiningVC *vc = [PosMiningVC new];
+            [self showViewController:vc sender:self];
+        }
+            break;
+        case 2:
+        {
+            TLinviteVC *settingVC = [TLinviteVC new];
+            [self showViewController:settingVC sender:self];
+        }
+            break;
+            
+        default:
+            break;
+    }
+    
+    
+    if (sender.tag >= 400) {
+        FindTheGameVC *vc = [FindTheGameVC new];
+        [self showViewController:vc sender:self];
+    }
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
@@ -256,34 +294,19 @@
     return UIEdgeInsetsMake(10, 10, 10, 10);
 }
 
+
+
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    
+    
+    
 //    GoodsDetailsViewController *vc= [[GoodsDetailsViewController alloc]init];
 //    vc.goodsid = dataArray[indexPath.row][@"goods_id"];
 //    [self.navigationController pushViewController:vc animated:YES];
 }
 
 
-//- (void)initTableView {
-//
-//    CoinWeakSelf;
-//    self.tableView = [[HomeTbleView alloc] initWithFrame:CGRectMake(0, kNavigationBarHeight, kScreenWidth, kScreenHeight - kNavigationBarHeight - kTabBarHeight) style:UITableViewStyleGrouped];
-//    self.tableView.backgroundColor = kWhiteColor;
-//    self.tableView.refreshDelegate = self;
-//    [self.view addSubview:self.tableView];
-//    self.tableView.tableHeaderView = self.headerView;
-//    [self.tableView addRefreshAction:^{
-//        [CoinUtil refreshOpenCoinList:^{
-//            //获取banner列表
-//            [weakSelf requestBannerList];
-////            [weakSelf reloadFindData];
-//
-//        } failure:^{
-//            [weakSelf.tableView endRefreshHeader];
-//        }];
-//    }];
-//    [weakSelf.tableView beginRefreshing];
-//}
 
 
 

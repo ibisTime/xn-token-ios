@@ -10,4 +10,6 @@
 
 @interface TheGameCollCell : UICollectionViewCell
 
+@property (nonatomic , strong)UIButton *actionBtn;
+
 @end

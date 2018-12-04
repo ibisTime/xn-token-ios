@@ -118,7 +118,7 @@
     [self addNotification];
     [self changeInfo];
     
-    
+    [self requesUserInfoWithResponseObject];
     
     
     
@@ -168,7 +168,7 @@
             [http postWithSuccess:^(id responseObject) {
                 
                 [TLAlert alertWithSucces:[LangSwitcher switchLang:@"实名认证成功" key:nil]];
-                
+                [self requesUserInfoWithResponseObject];
             } failure:^(NSError *error) {
             }];
             
@@ -176,7 +176,6 @@
             
         }];
     }
-    
 }
 
 - (void)faceAuthFinishedWithResult:(NSInteger)result userInfo:(id)userInfo{
@@ -225,6 +224,42 @@
             
         }];
     }
+    
+}
+
+
+- (void)requesUserInfoWithResponseObject {
+    
+//    NSString *token = responseObject[@"data"][@"token"];
+//    NSString *userId = responseObject[@"data"][@"userId"];
+//    [TLUser user].userId = userId;
+//    [TLUser user].token = token;
+    //保存用户账号和密码
+    //    [[TLUser user] saveUserName:self.phoneTf.text pwd:self.pwdTf.text];
+    
+    //1.获取用户信息
+    TLNetworking *http = [TLNetworking new];
+    http.showView = self.view;
+    http.code = USER_INFO;
+    http.parameters[@"userId"] = [TLUser user].userId;
+    http.parameters[@"token"] = [TLUser user].token;
+    [http postWithSuccess:^(id responseObject) {
+        
+        NSDictionary *userInfo = responseObject[@"data"];
+        
+//        [TLUser user].userId = userId;
+//        [TLUser user].token = token;
+        
+        //保存用户信息
+        [[TLUser user] saveUserInfo:userInfo];
+        //初始化用户信息
+        [[TLUser user] setUserInfoWithDict:userInfo];
+        
+        
+    } failure:^(NSError *error) {
+        
+        
+    }];
     
 }
 

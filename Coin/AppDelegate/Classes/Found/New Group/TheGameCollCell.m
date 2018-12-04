@@ -53,6 +53,7 @@
         
         UIButton *actionBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"开始" key:nil] titleColor:kHexColor(@"#0064ff") backgroundColor:kClearColor titleFont:12];
         kViewBorderRadius(actionBtn, 15, 1, kHexColor(@"#0064ff"));
+        self.actionBtn = actionBtn;
         actionBtn.frame = CGRectMake(gameImg.width + ((SCREEN_WIDTH - 30)/2 - gameImg.width)/2 - 40, nameLbl.yy + 10 + 18, 80, 30);
         [self addSubview:actionBtn];
         

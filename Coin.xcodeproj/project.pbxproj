@@ -7,6 +7,35 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F0EDEA221B64F9B0044C4A2 /* FindTheGameVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F0EDEA121B64F9B0044C4A2 /* FindTheGameVC.m */; };
+		1F0EDEA521B6500F0044C4A2 /* FindTheGameTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F0EDEA421B6500F0044C4A2 /* FindTheGameTableView.m */; };
+		1F0EDEA821B6507F0044C4A2 /* FindTheGameHeadCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F0EDEA721B6507F0044C4A2 /* FindTheGameHeadCell.m */; };
+		1F0EDEAB21B660730044C4A2 /* GameIntroducedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F0EDEAA21B660730044C4A2 /* GameIntroducedCell.m */; };
+		1F0EDEE121B662160044C4A2 /* YYTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F0EDEAE21B662160044C4A2 /* YYTextView.m */; };
+		1F0EDEE221B662160044C4A2 /* YYTextMagnifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F0EDEB221B662160044C4A2 /* YYTextMagnifier.m */; };
+		1F0EDEE321B662160044C4A2 /* YYTextContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F0EDEB521B662160044C4A2 /* YYTextContainerView.m */; };
+		1F0EDEE421B662160044C4A2 /* YYTextEffectWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F0EDEB621B662160044C4A2 /* YYTextEffectWindow.m */; };
+		1F0EDEE521B662160044C4A2 /* YYTextInput.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F0EDEB821B662160044C4A2 /* YYTextInput.m */; };
+		1F0EDEE621B662160044C4A2 /* YYTextLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F0EDEB921B662160044C4A2 /* YYTextLayout.m */; };
+		1F0EDEE721B662160044C4A2 /* YYTextLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F0EDEBB21B662160044C4A2 /* YYTextLine.m */; };
+		1F0EDEE821B662160044C4A2 /* YYTextSelectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F0EDEBC21B662160044C4A2 /* YYTextSelectionView.m */; };
+		1F0EDEE921B662160044C4A2 /* YYTextKeyboardManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F0EDEBF21B662160044C4A2 /* YYTextKeyboardManager.m */; };
+		1F0EDEEA21B662160044C4A2 /* YYTextDebugOption.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F0EDEC121B662160044C4A2 /* YYTextDebugOption.m */; };
+		1F0EDEEB21B662160044C4A2 /* YYLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F0EDEC221B662160044C4A2 /* YYLabel.m */; };
+		1F0EDEEC21B662160044C4A2 /* YYTextRunDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F0EDEC621B662160044C4A2 /* YYTextRunDelegate.m */; };
+		1F0EDEED21B662160044C4A2 /* YYTextParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F0EDEC721B662160044C4A2 /* YYTextParser.m */; };
+		1F0EDEEE21B662160044C4A2 /* YYTextAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F0EDECB21B662160044C4A2 /* YYTextAttribute.m */; };
+		1F0EDEEF21B662160044C4A2 /* YYTextArchiver.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F0EDECD21B662160044C4A2 /* YYTextArchiver.m */; };
+		1F0EDEF021B662160044C4A2 /* YYTextRubyAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F0EDECE21B662160044C4A2 /* YYTextRubyAnnotation.m */; };
+		1F0EDEF121B662160044C4A2 /* YYTextUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F0EDED121B662160044C4A2 /* YYTextUtilities.m */; };
+		1F0EDEF221B662160044C4A2 /* NSParagraphStyle+YYText.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F0EDED221B662160044C4A2 /* NSParagraphStyle+YYText.m */; };
+		1F0EDEF321B662160044C4A2 /* NSAttributedString+YYText.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F0EDED321B662160044C4A2 /* NSAttributedString+YYText.m */; };
+		1F0EDEF421B662160044C4A2 /* UIPasteboard+YYText.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F0EDED621B662160044C4A2 /* UIPasteboard+YYText.m */; };
+		1F0EDEF521B662160044C4A2 /* YYTextTransaction.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F0EDEDA21B662160044C4A2 /* YYTextTransaction.m */; };
+		1F0EDEF621B662160044C4A2 /* UIView+YYText.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F0EDEDB21B662160044C4A2 /* UIView+YYText.m */; };
+		1F0EDEF721B662160044C4A2 /* YYTextAsyncLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F0EDEDE21B662160044C4A2 /* YYTextAsyncLayer.m */; };
+		1F0EDEF821B662160044C4A2 /* YYTextWeakProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F0EDEDF21B662160044C4A2 /* YYTextWeakProxy.m */; };
+		1F0EDEFB21B684750044C4A2 /* StrategyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F0EDEFA21B684750044C4A2 /* StrategyCell.m */; };
 		1F35826621870D8F00F1665B /* NewHelpCentetVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F35826421870D8C00F1665B /* NewHelpCentetVC.m */; };
 		1F358B3921880B4C00F1665B /* UsdtClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F358B3821880B4C00F1665B /* UsdtClient.m */; };
 		1F358B3D218ABC4500F1665B /* USDTRecordModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F358B3C218ABC4500F1665B /* USDTRecordModel.m */; };
@@ -551,6 +580,65 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1F0EDEA021B64F9B0044C4A2 /* FindTheGameVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FindTheGameVC.h; sourceTree = "<group>"; };
+		1F0EDEA121B64F9B0044C4A2 /* FindTheGameVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FindTheGameVC.m; sourceTree = "<group>"; };
+		1F0EDEA321B6500F0044C4A2 /* FindTheGameTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FindTheGameTableView.h; sourceTree = "<group>"; };
+		1F0EDEA421B6500F0044C4A2 /* FindTheGameTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FindTheGameTableView.m; sourceTree = "<group>"; };
+		1F0EDEA621B6507F0044C4A2 /* FindTheGameHeadCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FindTheGameHeadCell.h; sourceTree = "<group>"; };
+		1F0EDEA721B6507F0044C4A2 /* FindTheGameHeadCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FindTheGameHeadCell.m; sourceTree = "<group>"; };
+		1F0EDEA921B660730044C4A2 /* GameIntroducedCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameIntroducedCell.h; sourceTree = "<group>"; };
+		1F0EDEAA21B660730044C4A2 /* GameIntroducedCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameIntroducedCell.m; sourceTree = "<group>"; };
+		1F0EDEAD21B662160044C4A2 /* YYText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYText.h; sourceTree = "<group>"; };
+		1F0EDEAE21B662160044C4A2 /* YYTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYTextView.m; sourceTree = "<group>"; };
+		1F0EDEB021B662160044C4A2 /* YYTextSelectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYTextSelectionView.h; sourceTree = "<group>"; };
+		1F0EDEB121B662160044C4A2 /* YYTextLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYTextLine.h; sourceTree = "<group>"; };
+		1F0EDEB221B662160044C4A2 /* YYTextMagnifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYTextMagnifier.m; sourceTree = "<group>"; };
+		1F0EDEB321B662160044C4A2 /* YYTextLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYTextLayout.h; sourceTree = "<group>"; };
+		1F0EDEB421B662160044C4A2 /* YYTextKeyboardManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYTextKeyboardManager.h; sourceTree = "<group>"; };
+		1F0EDEB521B662160044C4A2 /* YYTextContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYTextContainerView.m; sourceTree = "<group>"; };
+		1F0EDEB621B662160044C4A2 /* YYTextEffectWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYTextEffectWindow.m; sourceTree = "<group>"; };
+		1F0EDEB721B662160044C4A2 /* YYTextDebugOption.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYTextDebugOption.h; sourceTree = "<group>"; };
+		1F0EDEB821B662160044C4A2 /* YYTextInput.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYTextInput.m; sourceTree = "<group>"; };
+		1F0EDEB921B662160044C4A2 /* YYTextLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYTextLayout.m; sourceTree = "<group>"; };
+		1F0EDEBA21B662160044C4A2 /* YYTextMagnifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYTextMagnifier.h; sourceTree = "<group>"; };
+		1F0EDEBB21B662160044C4A2 /* YYTextLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYTextLine.m; sourceTree = "<group>"; };
+		1F0EDEBC21B662160044C4A2 /* YYTextSelectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYTextSelectionView.m; sourceTree = "<group>"; };
+		1F0EDEBD21B662160044C4A2 /* YYTextEffectWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYTextEffectWindow.h; sourceTree = "<group>"; };
+		1F0EDEBE21B662160044C4A2 /* YYTextContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYTextContainerView.h; sourceTree = "<group>"; };
+		1F0EDEBF21B662160044C4A2 /* YYTextKeyboardManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYTextKeyboardManager.m; sourceTree = "<group>"; };
+		1F0EDEC021B662160044C4A2 /* YYTextInput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYTextInput.h; sourceTree = "<group>"; };
+		1F0EDEC121B662160044C4A2 /* YYTextDebugOption.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYTextDebugOption.m; sourceTree = "<group>"; };
+		1F0EDEC221B662160044C4A2 /* YYLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYLabel.m; sourceTree = "<group>"; };
+		1F0EDEC321B662160044C4A2 /* YYTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYTextView.h; sourceTree = "<group>"; };
+		1F0EDEC521B662160044C4A2 /* YYTextAttribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYTextAttribute.h; sourceTree = "<group>"; };
+		1F0EDEC621B662160044C4A2 /* YYTextRunDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYTextRunDelegate.m; sourceTree = "<group>"; };
+		1F0EDEC721B662160044C4A2 /* YYTextParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYTextParser.m; sourceTree = "<group>"; };
+		1F0EDEC821B662160044C4A2 /* YYTextRubyAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYTextRubyAnnotation.h; sourceTree = "<group>"; };
+		1F0EDEC921B662160044C4A2 /* YYTextArchiver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYTextArchiver.h; sourceTree = "<group>"; };
+		1F0EDECA21B662160044C4A2 /* YYTextRunDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYTextRunDelegate.h; sourceTree = "<group>"; };
+		1F0EDECB21B662160044C4A2 /* YYTextAttribute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYTextAttribute.m; sourceTree = "<group>"; };
+		1F0EDECC21B662160044C4A2 /* YYTextParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYTextParser.h; sourceTree = "<group>"; };
+		1F0EDECD21B662160044C4A2 /* YYTextArchiver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYTextArchiver.m; sourceTree = "<group>"; };
+		1F0EDECE21B662160044C4A2 /* YYTextRubyAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYTextRubyAnnotation.m; sourceTree = "<group>"; };
+		1F0EDECF21B662160044C4A2 /* YYLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYLabel.h; sourceTree = "<group>"; };
+		1F0EDED121B662160044C4A2 /* YYTextUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYTextUtilities.m; sourceTree = "<group>"; };
+		1F0EDED221B662160044C4A2 /* NSParagraphStyle+YYText.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSParagraphStyle+YYText.m"; sourceTree = "<group>"; };
+		1F0EDED321B662160044C4A2 /* NSAttributedString+YYText.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSAttributedString+YYText.m"; sourceTree = "<group>"; };
+		1F0EDED421B662160044C4A2 /* UIView+YYText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+YYText.h"; sourceTree = "<group>"; };
+		1F0EDED521B662160044C4A2 /* YYTextTransaction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYTextTransaction.h; sourceTree = "<group>"; };
+		1F0EDED621B662160044C4A2 /* UIPasteboard+YYText.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIPasteboard+YYText.m"; sourceTree = "<group>"; };
+		1F0EDED721B662160044C4A2 /* YYTextWeakProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYTextWeakProxy.h; sourceTree = "<group>"; };
+		1F0EDED821B662160044C4A2 /* YYTextAsyncLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYTextAsyncLayer.h; sourceTree = "<group>"; };
+		1F0EDED921B662160044C4A2 /* YYTextUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYTextUtilities.h; sourceTree = "<group>"; };
+		1F0EDEDA21B662160044C4A2 /* YYTextTransaction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYTextTransaction.m; sourceTree = "<group>"; };
+		1F0EDEDB21B662160044C4A2 /* UIView+YYText.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+YYText.m"; sourceTree = "<group>"; };
+		1F0EDEDC21B662160044C4A2 /* NSAttributedString+YYText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSAttributedString+YYText.h"; sourceTree = "<group>"; };
+		1F0EDEDD21B662160044C4A2 /* NSParagraphStyle+YYText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSParagraphStyle+YYText.h"; sourceTree = "<group>"; };
+		1F0EDEDE21B662160044C4A2 /* YYTextAsyncLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYTextAsyncLayer.m; sourceTree = "<group>"; };
+		1F0EDEDF21B662160044C4A2 /* YYTextWeakProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYTextWeakProxy.m; sourceTree = "<group>"; };
+		1F0EDEE021B662160044C4A2 /* UIPasteboard+YYText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIPasteboard+YYText.h"; sourceTree = "<group>"; };
+		1F0EDEF921B684750044C4A2 /* StrategyCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StrategyCell.h; sourceTree = "<group>"; };
+		1F0EDEFA21B684750044C4A2 /* StrategyCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StrategyCell.m; sourceTree = "<group>"; };
 		1F35826421870D8C00F1665B /* NewHelpCentetVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewHelpCentetVC.m; sourceTree = "<group>"; };
 		1F35826521870D8E00F1665B /* NewHelpCentetVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewHelpCentetVC.h; sourceTree = "<group>"; };
 		1F358B3721880B4B00F1665B /* UsdtClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UsdtClient.h; sourceTree = "<group>"; };
@@ -1747,6 +1835,118 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1F0EDE9D21B64F700044C4A2 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				1F0EDEA321B6500F0044C4A2 /* FindTheGameTableView.h */,
+				1F0EDEA421B6500F0044C4A2 /* FindTheGameTableView.m */,
+				1F0EDEA621B6507F0044C4A2 /* FindTheGameHeadCell.h */,
+				1F0EDEA721B6507F0044C4A2 /* FindTheGameHeadCell.m */,
+				1F0EDEA921B660730044C4A2 /* GameIntroducedCell.h */,
+				1F0EDEAA21B660730044C4A2 /* GameIntroducedCell.m */,
+				1F0EDEAC21B662160044C4A2 /* YYText */,
+				1F0EDEF921B684750044C4A2 /* StrategyCell.h */,
+				1F0EDEFA21B684750044C4A2 /* StrategyCell.m */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		1F0EDE9E21B64F730044C4A2 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		1F0EDE9F21B64F740044C4A2 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				1F0EDEA021B64F9B0044C4A2 /* FindTheGameVC.h */,
+				1F0EDEA121B64F9B0044C4A2 /* FindTheGameVC.m */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		1F0EDEAC21B662160044C4A2 /* YYText */ = {
+			isa = PBXGroup;
+			children = (
+				1F0EDEAD21B662160044C4A2 /* YYText.h */,
+				1F0EDEAE21B662160044C4A2 /* YYTextView.m */,
+				1F0EDEAF21B662160044C4A2 /* Component */,
+				1F0EDEC221B662160044C4A2 /* YYLabel.m */,
+				1F0EDEC321B662160044C4A2 /* YYTextView.h */,
+				1F0EDEC421B662160044C4A2 /* String */,
+				1F0EDECF21B662160044C4A2 /* YYLabel.h */,
+				1F0EDED021B662160044C4A2 /* Utility */,
+			);
+			path = YYText;
+			sourceTree = "<group>";
+		};
+		1F0EDEAF21B662160044C4A2 /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				1F0EDEB021B662160044C4A2 /* YYTextSelectionView.h */,
+				1F0EDEB121B662160044C4A2 /* YYTextLine.h */,
+				1F0EDEB221B662160044C4A2 /* YYTextMagnifier.m */,
+				1F0EDEB321B662160044C4A2 /* YYTextLayout.h */,
+				1F0EDEB421B662160044C4A2 /* YYTextKeyboardManager.h */,
+				1F0EDEB521B662160044C4A2 /* YYTextContainerView.m */,
+				1F0EDEB621B662160044C4A2 /* YYTextEffectWindow.m */,
+				1F0EDEB721B662160044C4A2 /* YYTextDebugOption.h */,
+				1F0EDEB821B662160044C4A2 /* YYTextInput.m */,
+				1F0EDEB921B662160044C4A2 /* YYTextLayout.m */,
+				1F0EDEBA21B662160044C4A2 /* YYTextMagnifier.h */,
+				1F0EDEBB21B662160044C4A2 /* YYTextLine.m */,
+				1F0EDEBC21B662160044C4A2 /* YYTextSelectionView.m */,
+				1F0EDEBD21B662160044C4A2 /* YYTextEffectWindow.h */,
+				1F0EDEBE21B662160044C4A2 /* YYTextContainerView.h */,
+				1F0EDEBF21B662160044C4A2 /* YYTextKeyboardManager.m */,
+				1F0EDEC021B662160044C4A2 /* YYTextInput.h */,
+				1F0EDEC121B662160044C4A2 /* YYTextDebugOption.m */,
+			);
+			path = Component;
+			sourceTree = "<group>";
+		};
+		1F0EDEC421B662160044C4A2 /* String */ = {
+			isa = PBXGroup;
+			children = (
+				1F0EDEC521B662160044C4A2 /* YYTextAttribute.h */,
+				1F0EDEC621B662160044C4A2 /* YYTextRunDelegate.m */,
+				1F0EDEC721B662160044C4A2 /* YYTextParser.m */,
+				1F0EDEC821B662160044C4A2 /* YYTextRubyAnnotation.h */,
+				1F0EDEC921B662160044C4A2 /* YYTextArchiver.h */,
+				1F0EDECA21B662160044C4A2 /* YYTextRunDelegate.h */,
+				1F0EDECB21B662160044C4A2 /* YYTextAttribute.m */,
+				1F0EDECC21B662160044C4A2 /* YYTextParser.h */,
+				1F0EDECD21B662160044C4A2 /* YYTextArchiver.m */,
+				1F0EDECE21B662160044C4A2 /* YYTextRubyAnnotation.m */,
+			);
+			path = String;
+			sourceTree = "<group>";
+		};
+		1F0EDED021B662160044C4A2 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				1F0EDED121B662160044C4A2 /* YYTextUtilities.m */,
+				1F0EDED221B662160044C4A2 /* NSParagraphStyle+YYText.m */,
+				1F0EDED321B662160044C4A2 /* NSAttributedString+YYText.m */,
+				1F0EDED421B662160044C4A2 /* UIView+YYText.h */,
+				1F0EDED521B662160044C4A2 /* YYTextTransaction.h */,
+				1F0EDED621B662160044C4A2 /* UIPasteboard+YYText.m */,
+				1F0EDED721B662160044C4A2 /* YYTextWeakProxy.h */,
+				1F0EDED821B662160044C4A2 /* YYTextAsyncLayer.h */,
+				1F0EDED921B662160044C4A2 /* YYTextUtilities.h */,
+				1F0EDEDA21B662160044C4A2 /* YYTextTransaction.m */,
+				1F0EDEDB21B662160044C4A2 /* UIView+YYText.m */,
+				1F0EDEDC21B662160044C4A2 /* NSAttributedString+YYText.h */,
+				1F0EDEDD21B662160044C4A2 /* NSParagraphStyle+YYText.h */,
+				1F0EDEDE21B662160044C4A2 /* YYTextAsyncLayer.m */,
+				1F0EDEDF21B662160044C4A2 /* YYTextWeakProxy.m */,
+				1F0EDEE021B662160044C4A2 /* UIPasteboard+YYText.h */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
 		1F35825D2186D43300F1665B /* BTC */ = {
 			isa = PBXGroup;
 			children = (
@@ -1920,6 +2120,16 @@
 				B83D1E0B20CE63A2007835DB /* WalletLocalVc.m */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		1F37A04021B64F2700EE8CAB /* FindTheGame */ = {
+			isa = PBXGroup;
+			children = (
+				1F0EDE9F21B64F740044C4A2 /* Controller */,
+				1F0EDE9E21B64F730044C4A2 /* Model */,
+				1F0EDE9D21B64F700044C4A2 /* View */,
+			);
+			name = FindTheGame;
 			sourceTree = "<group>";
 		};
 		1F4E896521998510007B3015 /* Login */ = {
@@ -2743,6 +2953,7 @@
 				216F5B1E206CD9D900F2C832 /* Controller */,
 				1F35826321870B1700F1665B /* Model */,
 				1F35826221870B1400F1665B /* View */,
+				1F37A04021B64F2700EE8CAB /* FindTheGame */,
 				7A8A5D0E20EA0677002D9A48 /* RedEnvelope */,
 				216F5B54206D005200F2C832 /* POS */,
 			);
@@ -4553,6 +4764,7 @@
 				B8086530211EA17D00755158 /* BTCData+Tests.m in Sources */,
 				1F693AFD21A3F36E004818D8 /* ConfirmBackupVC.m in Sources */,
 				7A2CC670215C9E3B00B27E2D /* PosMyInvestmentModel.m in Sources */,
+				1F0EDEE221B662160044C4A2 /* YYTextMagnifier.m in Sources */,
 				B8CAA14521158FF200695BC3 /* LPDPhotoArrangeCVlLayout.m in Sources */,
 				B8DB9EB7214F6AA90091276E /* RedintrodeceVC.m in Sources */,
 				B8BBA5FB20C780FA00DC4D5F /* PlatformCell.m in Sources */,
@@ -4570,6 +4782,7 @@
 				1F37A03621B1186F00EE8CAB /* MyAssetsTableViewCell.m in Sources */,
 				2EB039A71FE8B23300589D8E /* EditEmailVC.m in Sources */,
 				7A07F808216C84F30026EB7A /* SCColor.m in Sources */,
+				1F0EDEF421B662160044C4A2 /* UIPasteboard+YYText.m in Sources */,
 				1F4E89E7219E9215007B3015 /* CreateWalletVC.m in Sources */,
 				4C8DE98520C983D100EC183C /* EthereumUtil.swift in Sources */,
 				7AAF0312214F8C35008507FF /* IntegralVC.m in Sources */,
@@ -4580,6 +4793,7 @@
 				211DE6BC1FB58B4C002FCF3D /* NSString+Extension.m in Sources */,
 				B88D6C6F20EDF39F0043832C /* TLFastvc.m in Sources */,
 				7A2CC66A215BBCEA00B27E2D /* PosMyInvestmentHeadView.m in Sources */,
+				1F0EDEF021B662160044C4A2 /* YYTextRubyAnnotation.m in Sources */,
 				B808651C211EA17D00755158 /* BTCData.m in Sources */,
 				B80864FB211EA17D00755158 /* BTCTransaction.m in Sources */,
 				B8CA0D6A21081B850015A19D /* AssetPwdView.m in Sources */,
@@ -4613,6 +4827,8 @@
 				1F770EDA21913CC000E2889F /* UserModel.m in Sources */,
 				7A3821C320EACDA100D6B636 /* SendCell.m in Sources */,
 				21223CB71FBDB2D200057444 /* WebVC.m in Sources */,
+				1F0EDEE721B662160044C4A2 /* YYTextLine.m in Sources */,
+				1F0EDEF621B662160044C4A2 /* UIView+YYText.m in Sources */,
 				2E394FFD1FB059C100BA0829 /* TLBaseVC.m in Sources */,
 				7A07F806216C84F30026EB7A /* SCChartLabel.m in Sources */,
 				215979641FB81CED0029F177 /* BillModel.m in Sources */,
@@ -4626,6 +4842,7 @@
 				B80864EF211EA17D00755158 /* BTCBlockHeader.m in Sources */,
 				215979701FB84B8A0029F177 /* BillDetailVC.m in Sources */,
 				B808651D211EA17D00755158 /* BTCProcessor.m in Sources */,
+				1F0EDEA821B6507F0044C4A2 /* FindTheGameHeadCell.m in Sources */,
 				B88B092120C8E29D005C2D2F /* JoinMineVc.m in Sources */,
 				1FC1C35321AE33FF00FA94E3 /* MoneyPasswordVC.m in Sources */,
 				1F709D5E218161D8002D1CC4 /* keyTransferTableView.m in Sources */,
@@ -4647,11 +4864,13 @@
 				7A2CC6D7215DC89200B27E2D /* PGPickerTableView.m in Sources */,
 				B8CAA14021158FF200695BC3 /* LPDAssetModel.m in Sources */,
 				B8DDF885211D2AD10058D19D /* MakeMoneyCell.m in Sources */,
+				1F0EDEAB21B660730044C4A2 /* GameIntroducedCell.m in Sources */,
 				B8DB9EC3214F8A220091276E /* H5DrtailVC.m in Sources */,
 				B8F63EE020D3809700556150 /* LocalBillDetailTableView.m in Sources */,
 				7AABEAFE2149127200283BC7 /* BouncedPasteView.m in Sources */,
 				7A2CC674215CAECF00B27E2D /* AccumulatedEarningsVC.m in Sources */,
 				B80D54CE210C9C11005303D5 /* TLChangeNikeName.m in Sources */,
+				1F0EDEA521B6500F0044C4A2 /* FindTheGameTableView.m in Sources */,
 				B808650B211EA17D00755158 /* BTCFancyEncryptedMessage.m in Sources */,
 				B87BF1D02114251800DD5C05 /* FMDBMigrationManager.m in Sources */,
 				B8B15C1F20CA752900F13220 /* QHCollectionViewNine.m in Sources */,
@@ -4660,6 +4879,7 @@
 				7AABEAF82148ED4D00283BC7 /* UIButton+SGImagePosition.m in Sources */,
 				7A8A5D2F20EA3C09002D9A48 /* MySugarPacketsVC.m in Sources */,
 				B87BF1D3211426C300DD5C05 /* Migration.m in Sources */,
+				1F0EDEF321B662160044C4A2 /* NSAttributedString+YYText.m in Sources */,
 				2ED651CC200F32BC0065A1B0 /* TLCoinWithdrawModel.m in Sources */,
 				7AAF036221526977008507FF /* aeskey.c in Sources */,
 				21205CE21FCD3163003C6C7C /* CoinAddressModel.m in Sources */,
@@ -4672,12 +4892,14 @@
 				2159796A1FB82BC10029F177 /* CustomPickerView.m in Sources */,
 				B83666F3210EAF480065DF18 /* LocalSettingTableView.m in Sources */,
 				211A34DE1FB4245D00FEB71F /* MineCell.m in Sources */,
+				1F0EDEFB21B684750044C4A2 /* StrategyCell.m in Sources */,
 				B8086518211EA17D00755158 /* BTCOutpoint.m in Sources */,
 				B8CAA13E21158FF200695BC3 /* UIView+HandyValue.m in Sources */,
 				211DE6AB1FB58B4C002FCF3D /* TLTableView.m in Sources */,
 				1F4E89CE219C1D32007B3015 /* JSONModel+networking.m in Sources */,
 				7A07F80B216C84F30026EB7A /* SCPieChart.m in Sources */,
 				1F37A03921B13C4100EE8CAB /* IconCollCell.m in Sources */,
+				1F0EDEF121B662160044C4A2 /* YYTextUtilities.m in Sources */,
 				B8086519211EA17D00755158 /* BTCMerkleTree.m in Sources */,
 				7A2CC654215BA06600B27E2D /* PosBuyVC.m in Sources */,
 				7A2CC6B2215DC88B00B27E2D /* PGDatePicker+Common.m in Sources */,
@@ -4699,12 +4921,14 @@
 				21205CFE1FCD61D6003C6C7C /* ShareView.m in Sources */,
 				B82D387B211C1BDB0053A2E4 /* HomeFindModel.m in Sources */,
 				B8BBA64620C8497000DC4D5F /* AddMoneyTableView.m in Sources */,
+				1F0EDEF221B662160044C4A2 /* NSParagraphStyle+YYText.m in Sources */,
 				B8F44025212C81E700809522 /* TLNewPwdVC.m in Sources */,
 				B8086507211EA17D00755158 /* BTCBlindSignature+Tests.m in Sources */,
 				B8B15C3220CAB4DE00F13220 /* CustomLayoutWallet.m in Sources */,
 				2159795D1FB81C2B0029F177 /* BillVC.m in Sources */,
 				B8086532211EA17D00755158 /* BTCErrors.m in Sources */,
 				211A53321FBFE4F100CC6294 /* RateDescTableView.m in Sources */,
+				1F0EDEEB21B662160044C4A2 /* YYLabel.m in Sources */,
 				B8D938CF2116C2AC00B2AA88 /* QiestionDetailVC.m in Sources */,
 				1F4E89CA219C1D32007B3015 /* JSONModelArray.m in Sources */,
 				1F35826621870D8F00F1665B /* NewHelpCentetVC.m in Sources */,
@@ -4723,12 +4947,14 @@
 				7AAF036C21526977008507FF /* unzip.c in Sources */,
 				1F816BF92180953D0078B945 /* SGQRCodeHelperTool.m in Sources */,
 				7A2CC6BA215DC88C00B27E2D /* PGDatePicker+MonthDay.m in Sources */,
+				1F0EDEEC21B662160044C4A2 /* YYTextRunDelegate.m in Sources */,
 				B8131E94214CF12C00BEF5E0 /* TLWBManger.m in Sources */,
 				1F4E89C8219C1D32007B3015 /* JSONModel.m in Sources */,
 				1F4E89CB219C1D32007B3015 /* JSONModelClassProperty.m in Sources */,
 				B8FDB704214A824400313EC3 /* MysugarView.m in Sources */,
 				B808650F211EA17D00755158 /* BTCChainCom.m in Sources */,
 				211DE6A01FB58B4C002FCF3D /* TLDatePicker.m in Sources */,
+				1F0EDEF521B662160044C4A2 /* YYTextTransaction.m in Sources */,
 				B8CAA14721158FF200695BC3 /* LPDPhotoPreviewCell.m in Sources */,
 				B8F791A12146495000F5BE45 /* THTranstionCollectionView.m in Sources */,
 				211DE6AA1FB58B4C002FCF3D /* TLImagePicker.m in Sources */,
@@ -4758,6 +4984,7 @@
 				211DE6C11FB58B4C002FCF3D /* AppConfig.m in Sources */,
 				B8DB9EBA214F6AF10091276E /* RedIntroduce.m in Sources */,
 				B83604132125581A0089CC17 /* TLtakeMoneyModel.m in Sources */,
+				1F0EDEE921B662160044C4A2 /* YYTextKeyboardManager.m in Sources */,
 				211DE6A41FB58B4C002FCF3D /* TLPickerTextField.m in Sources */,
 				7A07F821216CB4910026EB7A /* GlobalRevenueListCell.m in Sources */,
 				1F4E89D5219C1D7D007B3015 /* ContactDataHelper.m in Sources */,
@@ -4814,6 +5041,8 @@
 				7AAF036921526977008507FF /* sha1.c in Sources */,
 				B8086503211EA17D00755158 /* BTCMnemonic.m in Sources */,
 				B808652A211EA17D00755158 /* BTCBase58.m in Sources */,
+				1F0EDEE621B662160044C4A2 /* YYTextLayout.m in Sources */,
+				1F0EDEE821B662160044C4A2 /* YYTextSelectionView.m in Sources */,
 				7A2CC6DF215E2B1500B27E2D /* AccumulatedEarningsModel.m in Sources */,
 				B8086517211EA17D00755158 /* BTCProtocolBuffers.m in Sources */,
 				211DE6AF1FB58B4C002FCF3D /* UILabel+Extension.m in Sources */,
@@ -4840,6 +5069,7 @@
 				2129A4F91FDACE87003C99C0 /* CloseGoogleAuthVC.m in Sources */,
 				1F816BF52180953D0078B945 /* SGQRCodeAlbumManager.m in Sources */,
 				7A2CC6D6215DC89200B27E2D /* PGPickerColumnView.m in Sources */,
+				1F0EDEF821B662160044C4A2 /* YYTextWeakProxy.m in Sources */,
 				B8086529211EA17D00755158 /* BTCPaymentProtocol.m in Sources */,
 				211DE6BB1FB58B4C002FCF3D /* NSString+CGSize.m in Sources */,
 				B8CF2CC52121375800055706 /* BTCDetailModel.m in Sources */,
@@ -4852,6 +5082,7 @@
 				B8086513211EA17D00755158 /* BTCTransactionInput.m in Sources */,
 				B8D9290F20EA58290026A3DF /* ChangeLocalMoneyVC.m in Sources */,
 				211A35041FB45A6A00FEB71F /* WalletHeaderView.m in Sources */,
+				1F0EDEE521B662160044C4A2 /* YYTextInput.m in Sources */,
 				1F4E89C9219C1D32007B3015 /* JSONModelError.m in Sources */,
 				7A8A5DC020EA6977002D9A48 /* CustomActionSheet.m in Sources */,
 				B8CAA14221158FF200695BC3 /* LPDPhotoArrangeCell.m in Sources */,
@@ -4862,6 +5093,7 @@
 				1F693AF721A2D7D9004818D8 /* BackupCollectionViewCell.m in Sources */,
 				7A07F81B216CB23F0026EB7A /* GlobalRevenueListTableView.m in Sources */,
 				215979601FB81CC40029F177 /* BillTableView.m in Sources */,
+				1F0EDEE321B662160044C4A2 /* YYTextContainerView.m in Sources */,
 				21A7F31C1FB2E2F900FAA0A2 /* TLUserExt.m in Sources */,
 				1F816BF42180953D0078B945 /* SGQRCodeScanManager.m in Sources */,
 				1F4E89E4219E91CA007B3015 /* ImportWalletVC.m in Sources */,
@@ -4872,6 +5104,7 @@
 				7A07F824216CCA3F0026EB7A /* GlobalRevenueListBottomView.m in Sources */,
 				211DE6C01FB58B4C002FCF3D /* NSObject+Extension.m in Sources */,
 				211DE6C71FB58B4C002FCF3D /* HttpRequestObject.m in Sources */,
+				1F0EDEE421B662160044C4A2 /* YYTextEffectWindow.m in Sources */,
 				7A40B0FB2179C875004B9830 /* HomeTbleView.m in Sources */,
 				211DE6BD1FB58B4C002FCF3D /* NSString+Date.m in Sources */,
 				B8086527211EA17D00755158 /* BTCCurrencyConverter.m in Sources */,
@@ -4900,6 +5133,7 @@
 				B808652F211EA17D00755158 /* BTCKey.m in Sources */,
 				B8086515211EA17D00755158 /* BTC256.m in Sources */,
 				B88B591A2109AEC400F20D1B /* TLNavigationController.m in Sources */,
+				1F0EDEA221B64F9B0044C4A2 /* FindTheGameVC.m in Sources */,
 				B8CAA14621158FF200695BC3 /* LPDImagePickerController.m in Sources */,
 				7A2CC677215CD41100B27E2D /* AccumulatedEarningsTableView.m in Sources */,
 				2EB039B51FEA0B4500589D8E /* TLUpdateVC.m in Sources */,
@@ -4909,6 +5143,7 @@
 				1F693B0121A682F9004818D8 /* ForgotPasswordVC.m in Sources */,
 				7A2CC664215BBC2900B27E2D /* PosMyInvestmentDetailsVC.m in Sources */,
 				B8F63EE320D397B000556150 /* WalletLocalWebVC.m in Sources */,
+				1F0EDEEE21B662160044C4A2 /* YYTextAttribute.m in Sources */,
 				2129FE6F1FDFBAA3009DA374 /* ChangeLoginPwdVC.m in Sources */,
 				211A532F1FBFE4CF00CC6294 /* RateDescCell.m in Sources */,
 				B8DB9EB1214F68E70091276E /* TLRedintroduceVC.m in Sources */,
@@ -4928,6 +5163,7 @@
 				7A2CC6C0215DC88C00B27E2D /* PGDatePicker+Year.m in Sources */,
 				B8BBA63D20C7F6FC00DC4D5F /* WallAccountVC.m in Sources */,
 				7A07F831216CDAD80026EB7A /* InviteEarningsTableView.m in Sources */,
+				1F0EDEE121B662160044C4A2 /* YYTextView.m in Sources */,
 				7A07F7E8216C84ED0026EB7A /* SCPieCell.m in Sources */,
 				B887819920E366BC00879330 /* UIImageView+RotateImgV.m in Sources */,
 				4CC7F0ED205FBC5400BBEC4D /* CoinModel.m in Sources */,
@@ -4947,6 +5183,7 @@
 				1F4E89DF219DA2D4007B3015 /* CompleteTheRegistrationVC.m in Sources */,
 				1F709D712181E51E002D1CC4 /* UIView+Banner.m in Sources */,
 				B85FE46F21287D2300C9F60C /* PayModel.m in Sources */,
+				1F0EDEF721B662160044C4A2 /* YYTextAsyncLayer.m in Sources */,
 				1F4E896C21998572007B3015 /* RegisterVC.m in Sources */,
 				1F709D722181E51E002D1CC4 /* HW3DBannerView.m in Sources */,
 				7AABEAFB2148FEEF00283BC7 /* PoliteInstructionsVC.m in Sources */,
@@ -4968,6 +5205,7 @@
 				1F709D61218162A5002D1CC4 /* TransformButtonCell.m in Sources */,
 				21A7F3191FB2E2F900FAA0A2 /* TLAccountBaseVC.m in Sources */,
 				216F5AFD206CD3A800F2C832 /* GengXinModel.m in Sources */,
+				1F0EDEEA21B662160044C4A2 /* YYTextDebugOption.m in Sources */,
 				B8F63EDA20D3639900556150 /* LocalBillCell.m in Sources */,
 				2ED651C9200F2F6F0065A1B0 /* TLCoinWithdrawOrderVC.m in Sources */,
 				7AAF036A21526977008507FF /* ioapi.c in Sources */,
@@ -4983,6 +5221,7 @@
 				1F693AF121A2A660004818D8 /* BackupWalletMnemonicVC.m in Sources */,
 				7A40B11E217EF884004B9830 /* ZJAnimationPopView.m in Sources */,
 				B80864F2211EA17D00755158 /* BTCTransactionBuilder.m in Sources */,
+				1F0EDEEF21B662160044C4A2 /* YYTextArchiver.m in Sources */,
 				7AFBAE31216DD32A006CF464 /* MyIncomeTopModel.m in Sources */,
 				B8CF2CC821214A8800055706 /* CommentTableView.m in Sources */,
 				4C2438252066C2F1003B35F3 /* TopSegmentUtil.m in Sources */,
@@ -5002,6 +5241,7 @@
 				211A34F41FB430F900FEB71F /* SettingCell.m in Sources */,
 				2EA2526E1FF09B52007FF9A2 /* CoinUtil.m in Sources */,
 				7A8A5D3220EA3E0E002D9A48 /* GetTheVC.m in Sources */,
+				1F0EDEED21B662160044C4A2 /* YYTextParser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

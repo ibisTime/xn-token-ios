@@ -269,7 +269,7 @@ NSString *const kGoogleAuthClose = @"0";
     http.code = USER_INFO;
     http.parameters[@"userId"] = self.userId;
     http.parameters[@"token"] = self.token;
-    CoinWeakSelf;
+//    CoinWeakSelf;
     [http postWithSuccess:^(id responseObject) {
     
         [self setUserInfoWithDict:responseObject[@"data"]];
