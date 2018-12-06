@@ -37,10 +37,14 @@
 #import "ClassificationCollCell.h"
 
 #import "FindTheGameVC.h"
+#import "FindTheGameModel.h"
+
 @interface HomeVC ()<RefreshDelegate,UIViewControllerPreviewingDelegate,UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
+{
+    NSInteger start;
+}
 
-
-@property (nonatomic, strong) HomeTbleView *tableView;
+//@property (nonatomic, strong) HomeTbleView *tableView;
 
 
 @property (nonatomic , strong)UICollectionView *collectionView;
@@ -56,6 +60,9 @@
 @property (nonatomic, strong) UILabel *nameLable;
 
 @property (nonatomic,strong) NSArray <HomeFindModel *>*findModels;
+@property (nonatomic , strong)NSMutableArray <FindTheGameModel *>*GameModel;
+
+@property (nonatomic , strong)NSMutableArray *GameModelArray;
 
 @end
 
@@ -106,7 +113,87 @@
     return _collectionView;
 }
 
+#pragma mark -- 下拉刷新
+- (void)DownRefresh
+{
+    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
+    header.automaticallyChangeAlpha = YES;
+    header.lastUpdatedTimeLabel.hidden = YES;
+    header.stateLabel.hidden = YES;
+    _collectionView.mj_header = header;
+    [_collectionView.mj_header beginRefreshing];
+    
+    
+    
+    MJRefreshBackNormalFooter *footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadNewDataFooter)];
+    footer.arrowView.hidden = YES;
+    footer.stateLabel.hidden = YES;
+    _collectionView.mj_footer = footer;
+}
 
+-(void)loadNewData
+{
+    start = 1;
+    self.GameModelArray = [NSMutableArray array];
+    [self requestBannerList];
+    [self loadData];
+}
+
+-(void)loadNewDataFooter
+{
+    start ++;
+    [self loadData];
+}
+
+-(void)loadData
+{
+    
+    NSString *lang;
+    
+    LangType type = [LangSwitcher currentLangType];
+    if (type == LangTypeSimple || type == LangTypeTraditional)
+    {
+        lang = @"ZH_CN";
+    }else if (type == LangTypeKorean)
+    {
+        lang = @"KO";
+    }else
+    {
+        lang = @"EN";
+        
+    }
+    TLNetworking *http = [TLNetworking new];
+    
+    http.code = @"625456";
+    http.parameters[@"language"] = lang;
+    http.parameters[@"start"] = [NSString stringWithFormat:@"%ld",start];
+    http.parameters[@"limit"] = @"10"  ;
+    
+    [http postWithSuccess:^(id responseObject) {
+        
+//        self.tableView.findModels = [HomeFindModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
+//        [self.tableView endRefreshHeader];
+//        [self.tableView reloadData];
+//        if (self.findModels.count != self.tableView.findModels.count) {
+//            [TableViewAnimationKit showWithAnimationType:6 tableView:self.tableView];
+//        }
+//        if (start > 1) {
+//            self.GameModel = [NSMutableArray array];
+//        }
+        
+        [self.GameModelArray addObjectsFromArray:responseObject[@"data"][@"list"]];
+        self.GameModel = [FindTheGameModel mj_objectArrayWithKeyValuesArray:self.GameModelArray];
+        
+        [_collectionView reloadData];
+        [_collectionView.mj_footer endRefreshing];
+        [_collectionView.mj_header endRefreshing];
+        
+        
+    } failure:^(NSError *error) {
+        [_collectionView.mj_footer endRefreshing];
+        [_collectionView.mj_header endRefreshing];
+    }];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -115,35 +202,12 @@
     [self.view addSubview:self.collectionView];
 //    self.collectionView.
     self.view.backgroundColor = kWhiteColor;
-    
-    
-    
-    CoinWeakSelf;
-    
-//    [self.tableView addRefreshAction:^{
-//
-//    }];
-//
-//    [self.tableView beginRefreshing];
-    [self requestBannerList];
-//    [CoinUtil refreshOpenCoinList:^{
-//        //获取banner列表
-//        [weakSelf requestBannerList];
-//        //            [weakSelf reloadFindData];
-//
-//    } failure:^{
-//        [weakSelf.collectionView end];
-//    }];
+    [self DownRefresh];
+
 }
 
 -(void)initNavigationNar
 {
-//    self.backButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
-//    self.backButton.frame = CGRectMake(kScreenWidth-74, kStatusBarHeight, 44, 44);
-//    [self.backButton setImage:kImage(@"消息") forState:(UIControlStateNormal)];
-//    [self.backButton addTarget:self action:@selector(OpenMessage) forControlEvents:(UIControlEventTouchUpInside)];
-//    [self.view addSubview:self.backButton];
-
     self.nameLable = [[UILabel alloc]initWithFrame:CGRectMake(54, kStatusBarHeight, kScreenWidth - 108, 44)];
     self.nameLable.text = [LangSwitcher switchLang:@"发现" key:nil];
     self.nameLable.textAlignment = NSTextAlignmentCenter;
@@ -165,7 +229,7 @@
     if (section == 1) {
         return 1;
     }
-    return 10;
+    return self.GameModel.count;
 }
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -193,6 +257,7 @@
     TheGameCollCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"TheGameCollCell" forIndexPath:indexPath];
     [cell.actionBtn addTarget:self action:@selector(iconButtonClick:) forControlEvents:(UIControlEventTouchUpInside)];
     cell.actionBtn.tag = 400 + indexPath.row;
+    cell.GameModel = self.GameModel[indexPath.row];
     return cell;
 }
 
@@ -227,6 +292,7 @@
     
     if (sender.tag >= 400) {
         FindTheGameVC *vc = [FindTheGameVC new];
+        vc.GameModel = self.GameModel[sender.tag - 400];
         [self showViewController:vc sender:self];
     }
 }
@@ -298,63 +364,58 @@
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-    
-    
-//    GoodsDetailsViewController *vc= [[GoodsDetailsViewController alloc]init];
-//    vc.goodsid = dataArray[indexPath.row][@"goods_id"];
-//    [self.navigationController pushViewController:vc animated:YES];
+
 }
 
 
 
 
 
--(void)refreshTableView:(TLTableView *)refreshTableview didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if ([TLUser isBlankString:[TLUser user].userId] == YES)
-        
-    {
-        [TLAlert alertWithTitle:[LangSwitcher switchLang:@"提示" key:nil] msg:[LangSwitcher switchLang:@"您还未登录，是否前去登录" key:nil] confirmMsg:[LangSwitcher switchLang:@"确认" key:nil] cancleMsg:[LangSwitcher switchLang:@"取消" key:nil] cancle:^(UIAlertAction *action) {
-            
-        } confirm:^(UIAlertAction *action) {
-            TheInitialVC *vc = [[TheInitialVC alloc]init];
-            UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
-            UIViewController *rootViewController = [[[UIApplication sharedApplication] keyWindow] rootViewController];
-            [rootViewController presentViewController:nav animated:YES completion:nil];
-        }];
-        
-        return;
-    }
-    HomeFindModel *model = self.findModels[indexPath.row];
-    if ([model.action isEqualToString:@"red_packet"]) {
-        RedEnvelopeVC *redEnvelopeVC = [RedEnvelopeVC new];
-        [self showViewController:redEnvelopeVC sender:self];;
-        return;
-
-    }else if ([model.action isEqualToString:@"money_manager"])
-    {
-        PosMiningVC *vc = [PosMiningVC new];
-        [self showViewController:vc sender:self];;
-        return;
-
-    }else if ([model.action isEqualToString:@"invitation"])
-    {
-        TLinviteVC *settingVC = [TLinviteVC new];
-        [self showViewController:settingVC sender:self];;
-        return;
-
-    }else if ([model.action isEqualToString:@"none"]) {
-        HTMLStrVC *vc = [HTMLStrVC new];
-        vc.title = model.name;
-        vc.name = model.name;
-        vc.des = model.Description;
-        vc.type = HTMLTypeOther;
-        [self showViewController:vc sender:self];
-//        [self.navigationController pushViewController:vc animated:YES];
-        return;
-    }
-}
+//-(void)refreshTableView:(TLTableView *)refreshTableview didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    if ([TLUser isBlankString:[TLUser user].userId] == YES)
+//
+//    {
+//        [TLAlert alertWithTitle:[LangSwitcher switchLang:@"提示" key:nil] msg:[LangSwitcher switchLang:@"您还未登录，是否前去登录" key:nil] confirmMsg:[LangSwitcher switchLang:@"确认" key:nil] cancleMsg:[LangSwitcher switchLang:@"取消" key:nil] cancle:^(UIAlertAction *action) {
+//
+//        } confirm:^(UIAlertAction *action) {
+//            TheInitialVC *vc = [[TheInitialVC alloc]init];
+//            UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+//            UIViewController *rootViewController = [[[UIApplication sharedApplication] keyWindow] rootViewController];
+//            [rootViewController presentViewController:nav animated:YES completion:nil];
+//        }];
+//
+//        return;
+//    }
+//    HomeFindModel *model = self.findModels[indexPath.row];
+//    if ([model.action isEqualToString:@"red_packet"]) {
+//        RedEnvelopeVC *redEnvelopeVC = [RedEnvelopeVC new];
+//        [self showViewController:redEnvelopeVC sender:self];;
+//        return;
+//
+//    }else if ([model.action isEqualToString:@"money_manager"])
+//    {
+//        PosMiningVC *vc = [PosMiningVC new];
+//        [self showViewController:vc sender:self];;
+//        return;
+//
+//    }else if ([model.action isEqualToString:@"invitation"])
+//    {
+//        TLinviteVC *settingVC = [TLinviteVC new];
+//        [self showViewController:settingVC sender:self];;
+//        return;
+//
+//    }else if ([model.action isEqualToString:@"none"]) {
+//        HTMLStrVC *vc = [HTMLStrVC new];
+//        vc.title = model.name;
+//        vc.name = model.name;
+//        vc.des = model.Description;
+//        vc.type = HTMLTypeOther;
+//        [self showViewController:vc sender:self];
+////        [self.navigationController pushViewController:vc animated:YES];
+//        return;
+//    }
+//}
 
 
 
@@ -420,15 +481,16 @@
     }
     NSString *url = [[self.bannerRoom objectAtIndex:index] url];
     if (url && url.length > 0) {
-        WebVC *webVC = [[WebVC alloc] init];
-        webVC.url = url;
-        [self.navigationController pushViewController:webVC animated:YES];
+        GeneralWebView *vc = [GeneralWebView new];
+        vc.URL = url;
+        [self showViewController:vc sender:self];
+//        WebVC *webVC = [[WebVC alloc] init];
+//        webVC.url = url;
+//        [self.navigationController pushViewController:webVC animated:YES];
     }
 }
 
 #pragma mark - Data
-
-
 - (void)requestBannerList {
     
 //    [TLProgressHUD show];
@@ -443,57 +505,58 @@
         
         self.bannerRoom = [BannerModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
         self.headerView.banners = self.bannerRoom;
-        [self reloadFindData];
+//        [self reloadFindData];
         //获取官方钱包总量，已空投量
-//        [self.tableView endRefreshHeader];
+//        [_collectionView.mj_footer endRefreshing];
+//        [_collectionView.mj_header endRefreshing];
 
     } failure:^(NSError *error) {
         
-        [self.tableView endRefreshHeader];
+//        [_collectionView.mj_footer endRefreshing];
+//        [_collectionView.mj_header endRefreshing];
         
     }];
     
 }
 
 #pragma mark - 获取发现列表数据
-- (void)reloadFindData
-{
-
-    NSString *lang;
-
-    LangType type = [LangSwitcher currentLangType];
-    if (type == LangTypeSimple || type == LangTypeTraditional)
-    {
-        lang = @"ZH_CN";
-    }else if (type == LangTypeKorean)
-    {
-        lang = @"KO";
-    }else
-    {
-        lang = @"EN";
-
-    }
-    TLNetworking *http = [TLNetworking new];
-
-    http.code = @"625412";
-    http.parameters[@"language"] = lang  ;
-    http.parameters[@"location"] = @"0";
-    http.parameters[@"status"] = @"1"  ;
-
-    [http postWithSuccess:^(id responseObject) {
-
-        self.tableView.findModels = [HomeFindModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
-        [self.tableView endRefreshHeader];
-        [self.tableView reloadData];
-        if (self.findModels.count != self.tableView.findModels.count) {
-            [TableViewAnimationKit showWithAnimationType:6 tableView:self.tableView];
-        }
-        self.findModels = [HomeFindModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
-
-    } failure:^(NSError *error) {
-        [self.tableView endRefreshHeader];
-    }];
-}
+//- (void)reloadFindData{
+//
+//    NSString *lang;
+//
+//    LangType type = [LangSwitcher currentLangType];
+//    if (type == LangTypeSimple || type == LangTypeTraditional)
+//    {
+//        lang = @"ZH_CN";
+//    }else if (type == LangTypeKorean)
+//    {
+//        lang = @"KO";
+//    }else
+//    {
+//        lang = @"EN";
+//
+//    }
+//    TLNetworking *http = [TLNetworking new];
+//
+//    http.code = @"625412";
+//    http.parameters[@"language"] = lang  ;
+//    http.parameters[@"location"] = @"0";
+//    http.parameters[@"status"] = @"1"  ;
+//
+//    [http postWithSuccess:^(id responseObject) {
+//
+//        self.tableView.findModels = [HomeFindModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
+//        [self.tableView endRefreshHeader];
+//        [self.tableView reloadData];
+//        if (self.findModels.count != self.tableView.findModels.count) {
+//            [TableViewAnimationKit showWithAnimationType:6 tableView:self.tableView];
+//        }
+//        self.findModels = [HomeFindModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
+//
+//    } failure:^(NSError *error) {
+//        [self.tableView endRefreshHeader];
+//    }];
+//}
 
 
 

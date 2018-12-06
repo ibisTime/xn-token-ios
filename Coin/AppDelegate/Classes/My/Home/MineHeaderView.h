@@ -44,4 +44,6 @@ typedef NS_ENUM(NSUInteger, MineHeaderSeletedType) {
 
 @property (nonatomic, strong)UIButton *integralBtn;
 
+@property (nonatomic, strong) UIButton *realnameBtn;
+
 @end

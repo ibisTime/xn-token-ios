@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "FindTheGameModel.h"
 @interface TheGameCollCell : UICollectionViewCell
 
 @property (nonatomic , strong)UIButton *actionBtn;
+
+
+@property (nonatomic , strong)FindTheGameModel *GameModel;
 
 @end

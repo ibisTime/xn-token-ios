@@ -15,7 +15,6 @@ MJCodingImplementation
     if ([propertyName isEqualToString:@"Description"]) {
         return @"description";
     }
-    
     return propertyName;
 }
 @end

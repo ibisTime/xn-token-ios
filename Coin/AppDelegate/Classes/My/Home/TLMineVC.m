@@ -51,7 +51,6 @@
     NSString *str3;
     
 }
-//<ZQFaceAuthDelegate,ZQOcrScanDelegate>
 @property (nonatomic, strong) UIScrollView *scrollView;
 //头部
 @property (nonatomic, strong) MineHeaderView *headerView;
@@ -77,8 +76,6 @@
     self.navigationController.navigationBar.barTintColor = kHexColor(@"#0848DF");
     self.navigationItem.backBarButtonItem = item;
     self.navigationController.navigationBar.shadowImage = [UIImage new];
-
-    //    self.navigationController.navigationBar.shadowImage = [UIImage new];
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     [self.navigationController setNavigationBarHidden:YES animated:animated];
 
@@ -88,8 +85,6 @@
 //如果仅设置当前页导航透明，需加入下面方法
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-
-
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
     [self.navigationController setNavigationBarHidden:NO animated:animated];
 
@@ -108,9 +103,7 @@
     self.title = [LangSwitcher switchLang:@"我的" key:nil];
     //顶部视图
     [self initMineHeaderView];
-    //模
-    [self initGroup];
-    //
+
     [self initTableView];
     //初始化用户信息
     [[TLUser user] updateUserInfo];
@@ -121,26 +114,7 @@
     [self requesUserInfoWithResponseObject];
     
     
-    
-    
-    
-//    NSArray *array = @[@"开始检测"];
-//    for (int i = 0; i < 1; i ++) {
-//        UIButton *button = [UIButton buttonWithTitle:array[i] titleColor:[UIColor blackColor] backgroundColor:kClearColor titleFont:14];
-//        button.frame = CGRectMake(SCREEN_WIDTH/2 - 50, 100 + i%2 * 100, 100, 50);
-//        [button addTarget:self action:@selector(buttonClick:) forControlEvents:(UIControlEventTouchUpInside)];
-//        button.tag = 100 + i;
-//        [self.view addSubview:button];
-//    }
-    
 }
-
-//-(void)buttonClick:(UIButton *)sender
-//{
-//    if (sender.tag == 100) {
-//
-//    }
-//}
 
 #pragma mark - ZQFaceAuthDelegate
 - (void)faceAuthFinishedWithResult:(ZQFaceAuthResult)result UserInfo:(id)userInfo{
@@ -167,7 +141,7 @@
 //            QUERY
             [http postWithSuccess:^(id responseObject) {
                 
-                [TLAlert alertWithSucces:[LangSwitcher switchLang:@"实名认证成功" key:nil]];
+                [TLAlert alertWithMsg:[LangSwitcher switchLang:@"实名认证成功" key:nil]];
                 [self requesUserInfoWithResponseObject];
             } failure:^(NSError *error) {
             }];
@@ -230,31 +204,23 @@
 
 - (void)requesUserInfoWithResponseObject {
     
-//    NSString *token = responseObject[@"data"][@"token"];
-//    NSString *userId = responseObject[@"data"][@"userId"];
-//    [TLUser user].userId = userId;
-//    [TLUser user].token = token;
-    //保存用户账号和密码
-    //    [[TLUser user] saveUserName:self.phoneTf.text pwd:self.pwdTf.text];
-    
     //1.获取用户信息
+    if ([TLUser user].isLogin == NO) {
+        return;
+    }
     TLNetworking *http = [TLNetworking new];
-    http.showView = self.view;
+//    http.showView = self.view;
     http.code = USER_INFO;
     http.parameters[@"userId"] = [TLUser user].userId;
     http.parameters[@"token"] = [TLUser user].token;
     [http postWithSuccess:^(id responseObject) {
         
         NSDictionary *userInfo = responseObject[@"data"];
-        
-//        [TLUser user].userId = userId;
-//        [TLUser user].token = token;
-        
         //保存用户信息
         [[TLUser user] saveUserInfo:userInfo];
         //初始化用户信息
         [[TLUser user] setUserInfoWithDict:userInfo];
-        
+        [self changeInfo];
         
     } failure:^(NSError *error) {
         
@@ -292,15 +258,7 @@
 -(void)refreshTableView:(TLTableView *)refreshTableview scrollView:(UIScrollView *)scroll
 {
     CGFloat height = (188 + kStatusBarHeight);
-    ////    导航栏
-    //    if (self.tableView.contentOffset.y <= (235 - 64)) {
-    //        [self.navigationController.navigationBar setBackgroundImage:[self imageWithBgColor:[UIColor colorWithRed:9/255.0 green:90/255.0 blue:221/255.0 alpha:self.tableView.contentOffset.y / (235 - 64)]] forBarMetrics:UIBarMetricsDefault];
-    //    }else
-    //    {
-    //        [self.navigationController.navigationBar setBackgroundImage:[self imageWithBgColor:[UIColor colorWithRed:9/255.0 green:90/255.0 blue:221/255.0 alpha:1]] forBarMetrics:UIBarMetricsDefault];
-    //    }
-    //
-    //    // 获取到tableView偏移量
+
     CGFloat Offset_y = scroll.contentOffset.y;
     // 下拉 纵向偏移量变小 变成负的
     if ( Offset_y < 0) {
@@ -422,272 +380,6 @@
     }
 }
 
-- (void)initGroup {
-    
-    CoinWeakSelf;
-    MineModel *accounrModel = [MineModel new];
-    accounrModel.text = [LangSwitcher switchLang:@"本地货币" key:nil];
-    accounrModel.imgName = @"本地货币";
-    accounrModel.action = ^{
-//        if (![TLUser user].isLogin) {
-//            TheInitialVC *loginVC= [TheInitialVC new];
-//            [weakSelf.navigationController pushViewController:loginVC animated:YES];
-////            loginVC.loginSuccess = ^{
-////
-////            };
-//            return ;
-//        }
-        ChangeLocalMoneyVC *moneyVC= [[ChangeLocalMoneyVC alloc] init];
-        [weakSelf.navigationController pushViewController:moneyVC animated:YES];
-
-
-    };
-    
-    MineModel *settingModel = [MineModel new];
-    settingModel.text = [LangSwitcher switchLang:@"账户与安全" key:nil];
-    settingModel.imgName = @"账户与安全";
-    settingModel.action = ^{
-        [self loginTheWhether];
-//        if (![TLUser user].isLogin) {
-//            TheInitialVC *loginVC= [TheInitialVC new];
-//            [weakSelf.navigationController pushViewController:loginVC animated:YES];
-////            loginVC.loginSuccess = ^{
-////
-////            };
-//            return ;
-//        }
-        SettingVC *settingVC = [SettingVC new];
-
-        [weakSelf.navigationController pushViewController:settingVC animated:YES];
-    };
-    
-    
-    MineModel *inviteModel = [MineModel new];
-    inviteModel.text = [LangSwitcher switchLang:@"邀请有礼" key:nil];
-    inviteModel.imgName = @"邀请有礼";
-    inviteModel.action = ^{
-        [self loginTheWhether];
-//        if (![TLUser user].isLogin) {
-//            TheInitialVC *loginVC= [TheInitialVC new];
-//            [weakSelf.navigationController pushViewController:loginVC animated:YES];
-////            loginVC.loginSuccess = ^{
-////
-////            };
-//            return ;
-//        }
-        TLinviteVC *settingVC = [TLinviteVC new];
-        
-        [weakSelf.navigationController pushViewController:settingVC animated:YES];
-    };
-
-    MineModel *MyIncome = [MineModel new];
-    MyIncome.text = [LangSwitcher switchLang:@"我的收益" key:nil];
-    MyIncome.imgName = @"我的收益icon";
-    MyIncome.action = ^{
-        [self loginTheWhether];
-        MyIncomeVC *vc = [[MyIncomeVC alloc] init];
-        [weakSelf.navigationController pushViewController:vc animated:YES];
-
-
-    };
-
-
-//    MineModel *language = [MineModel new];
-//    language.text = [LangSwitcher switchLang:@"语言" key:nil];
-//    language.imgName = @"语言";
-//    language.action =^{
-//
-//        LangChooseVC *vc = [[LangChooseVC alloc] init];
-//        [weakSelf.navigationController pushViewController:vc animated:YES];
-//
-//    };
-    //安全中心
-    
-    
-    
-    MineModel *securityCenter = [MineModel new];
-    securityCenter.text = [LangSwitcher switchLang:@"钱包工具" key:nil];
-    securityCenter.imgName = @"钱包工具";
-    securityCenter.action = ^{
-        
-        WalletSettingVC *settingVC = [WalletSettingVC new];
-        
-        [weakSelf.navigationController pushViewController:settingVC animated:YES];
-        
-//        if (![TLUser user].isLogin) {
-//            TLUserLoginVC *loginVC= [TLUserLoginVC new];
-//            [weakSelf.navigationController pushViewController:loginVC animated:YES];
-//            loginVC.loginSuccess = ^{
-//
-//            };
-//            return ;
-//        }
-        
-//        TLDataBase *dataBase = [TLDataBase sharedManager];
-//        NSString *word;
-//        if ([dataBase.dataBase open]) {
-//            NSString *sql = [NSString stringWithFormat:@"SELECT Mnemonics from THAUser where userId = '%@'",[TLUser user].userId];
-//            //        [sql appendString:[TLUser user].userId];
-//            FMResultSet *set = [dataBase.dataBase executeQuery:sql];
-//            while ([set next])
-//            {
-//                word = [set stringForColumn:@"Mnemonics"];
-//
-//            }
-//            [set close];
-//        }
-//        [dataBase.dataBase close];
-//        if (word.length > 0) {
-        
-//        }else{
-        
-//            BuildWalletMineVC *settingVC = [BuildWalletMineVC new];
-//
-//            [weakSelf.navigationController pushViewController:settingVC animated:YES];
-//        }
-       
-    };
-    
-    //语言设置
-    MineModel *languageSetting = [MineModel new];
-    
-    languageSetting.text = [LangSwitcher switchLang:@"加入社群" key:nil];
-    languageSetting.imgName = @"加入社群";
-    languageSetting.action = ^{
-//        if (![TLUser user].isLogin) {
-//            TLUserLoginVC *loginVC= [TLUserLoginVC new];
-//            [weakSelf.navigationController pushViewController:loginVC animated:YES];
-//            loginVC.loginSuccess = ^{
-//
-//            };
-//            return ;
-//        }
-        JoinMineVc *vc = [[JoinMineVc alloc] init];
-        [weakSelf.navigationController pushViewController:vc animated:YES];
-        
-    };
-    
-    //个性设置
-    MineModel *questionSetting = [MineModel new];
-    
-    questionSetting.text = [LangSwitcher switchLang:@"问题反馈" key:nil];
-    questionSetting.imgName = @"问题反馈";
-    questionSetting.action = ^{
-       [self loginTheWhether];
-        TLQusertionVC *personalSettingVC = [TLQusertionVC new];
-        [weakSelf.navigationController pushViewController:personalSettingVC animated:YES];
-        
-    };
-    
-
-    //    //工单
-    MineModel *helpModel = [MineModel new];
-    helpModel.text = [LangSwitcher switchLang:@"帮助中心" key:nil];
-    helpModel.imgName = @"帮助中心-1";
-    helpModel.action = ^{
-//        if (![TLUser user].isLogin) {
-//            TLUserLoginVC *loginVC= [TLUserLoginVC new];
-//            [weakSelf.navigationController pushViewController:loginVC animated:YES];
-//            loginVC.loginSuccess = ^{
-//
-//            };
-//            return ;
-//        }
-        [ZDKZendesk initializeWithAppId: @"71d2ca9aba0cccc12deebfbdd352fbae8c53cd8999dd10bc"
-                               clientId: @"mobile_sdk_client_7af3526c83d0c1999bc3"
-                             zendeskUrl: @"https://thachainhelp.zendesk.com"];
-
-        id<ZDKObjCIdentity> userIdentity = [[ZDKObjCAnonymous alloc] initWithName:nil email:nil];
-        [[ZDKZendesk instance] setIdentity:userIdentity];
-
-        [ZDKCoreLogger setEnabled:YES];
-        [ZDKSupport initializeWithZendesk:[ZDKZendesk instance]];
-
-
-        LangType type = [LangSwitcher currentLangType];
-        NSString *lan;
-        if (type == LangTypeSimple || type == LangTypeTraditional) {
-            lan = @"zh-cn";
-        }else if (type == LangTypeKorean)
-        {
-            lan = @"ko";
-        }else{
-            lan = @"en-us";
-        }
-        [ZDKSupport instance].helpCenterLocaleOverride = lan;
-        [ZDKLocalization localizedStringWithKey:lan];
-
-
-        ZDKHelpCenterUiConfiguration *hcConfig  =  [ ZDKHelpCenterUiConfiguration  new];
-        [ZDKTheme  currentTheme].primaryColor  = [UIColor redColor];
-        UIViewController<ZDKHelpCenterDelegate>*helpCenter  =  [ ZDKHelpCenterUi  buildHelpCenterOverviewWithConfigs :@[hcConfig]];
-
-        self.navigationController.navigationBar.translucent = YES;
-        UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
-        self.navigationController.navigationBar.tintColor = [UIColor blackColor];
-        self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
-        self.navigationItem.backBarButtonItem = item;
-        [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor blackColor],
-                                                                          NSFontAttributeName : [UIFont fontWithName:@"Helvetica-Bold" size:16]}];
-
-
-        helpCenter.uiDelegate = self;
-
-
-
-        [self.navigationController  pushViewController:helpCenter animated:YES];
-
-
-    };
-    //关于我们
-    MineModel *abountUs = [MineModel new];
-    abountUs.text = [LangSwitcher switchLang:@"关于我们" key:nil];
-    abountUs.imgName = @"关于我们";
-    abountUs.action = ^{
-        TLAboutUsVC *vc = [[TLAboutUsVC alloc] init];
-        [weakSelf.navigationController pushViewController:vc animated:YES];
-        
-    };
-
-    MineModel *meSetting = [MineModel new];
-    meSetting.text = [LangSwitcher switchLang:@"设置" key:nil];
-    meSetting.imgName = @"设置";
-    meSetting.action = ^{
-
-        TLMeSetting *vc = [[TLMeSetting alloc] init];
-        [weakSelf.navigationController pushViewController:vc animated:YES];
-    };
-
-
-    
-    self.group = [MineGroup new];
-    
-    
-    if ([AppConfig config].isUploadCheck) {
-        
-        
-        self.group.sections = @[
-
-                                ];
-        
-    } else {
-        
-        if ([TLUser isBlankString:[[NSUserDefaults standardUserDefaults] objectForKey:MNEMONIC]] == YES) {
-            self.group.sections = @[ @[settingModel], @[inviteModel,MyIncome,questionSetting ],
-                                     @[languageSetting,helpModel, meSetting]
-                                     ];
-        }else
-        {
-            self.group.sections = @[ @[settingModel], @[inviteModel,MyIncome,questionSetting ],
-                                     @[languageSetting,securityCenter,helpModel, meSetting]
-                                     ];
-        }
-        
-        
-        
-    }
- 
-}
 
 
 
@@ -701,14 +393,6 @@
 
     return ZDKNavBarConversationsUITypeLocalizedLabel;
 }
-
-- (NSString *) conversationsBarButtonLocalizedLabel
-{
-    return @"123";
-}
-
-//- (ZDKNavBarConversationsUIType) navBarConversationsUIType
-
 
 
 
@@ -784,6 +468,19 @@
         self.headerView.phone.hidden = YES;
         return;
     }
+    if ([TLUser isBlankString:[TLUser user].realName] == YES) {
+        [self.headerView.realnameBtn setTitle:[LangSwitcher switchLang:@"身份认证未完成" key:nil] forState:(UIControlStateNormal)];
+        [self.headerView.realnameBtn SG_imagePositionStyle:(SGImagePositionStyleDefault) spacing:3.5 imagePositionBlock:^(UIButton *button) {
+            [button setImage:kImage(@"提示1") forState:(UIControlStateNormal)];
+        }];
+    }else
+    {
+        [self.headerView.realnameBtn setTitle:[LangSwitcher switchLang:@"身份认证已完成" key:nil] forState:(UIControlStateNormal)];
+        [self.headerView.realnameBtn SG_imagePositionStyle:(SGImagePositionStyleDefault) spacing:3.5 imagePositionBlock:^(UIButton *button) {
+            [button setImage:kImage(@"已完成") forState:(UIControlStateNormal)];
+        }];
+        
+    }
     self.headerView.nameLbl.text = [TLUser user].nickname;
     NSRange rang = NSMakeRange(3, 4);
     UITapGestureRecognizer *ta = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(changeNickName)];
@@ -817,14 +514,8 @@
 
 - (void)changeHeadIcon {
     if (![TLUser user].isLogin) {
-//        TLUserLoginVC *loginVC= [TLUserLoginVC new];
-//        [self.navigationController pushViewController:loginVC animated:YES];
-//        loginVC.loginSuccess = ^{
-//            
-//        };
         return ;
     }
-    
     [self.imagePicker picker];
 }
 

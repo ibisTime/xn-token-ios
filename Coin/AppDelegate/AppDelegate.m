@@ -163,7 +163,7 @@
         [[NSUserDefaults standardUserDefaults]setObject:[NSString stringWithFormat:@"http://%@", responseObject[@"data"][@"cvalue"]] forKey:Get_Seven_Cattle_Address];
         
         [AppConfig config].qiniuDomain = [NSString stringWithFormat:@"http://%@", responseObject[@"data"][@"cvalue"]];
-        
+//        http:// qn.tha.hichengdai.com
     } failure:^(NSError *error) {
         
     }];

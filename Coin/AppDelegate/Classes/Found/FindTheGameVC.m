@@ -8,11 +8,13 @@
 
 #import "FindTheGameVC.h"
 #import "FindTheGameTableView.h"
-
+#import "StrategyModel.h"
+#import "HTMLStrVC.h"
+#import "GeneralWebView.h"
 @interface FindTheGameVC ()<RefreshDelegate>
 
 @property (nonatomic , strong)FindTheGameTableView *tableView;
-
+@property (nonatomic , strong)NSMutableArray <StrategyModel *>*model;
 @end
 
 @implementation FindTheGameVC
@@ -50,30 +52,90 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self initTableView];
+    [self loadData];
+    self.view.backgroundColor = kWhiteColor;
 }
 
 -(void)initTableView
 {
-    
     self.tableView = [[FindTheGameTableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight-kNavigationBarHeight ) style:UITableViewStyleGrouped];
     self.tableView.refreshDelegate = self;
+    self.tableView.GameModel = self.GameModel;
     [self.view addSubview:self.tableView];
 }
 
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+-(void)refreshTableViewButtonClick:(TLTableView *)refreshTableview button:(UIButton *)sender selectRowAtIndex:(NSInteger)index
+{
+    GeneralWebView *vc = [GeneralWebView new];
+    vc.URL = _GameModel.url;
+    [self showViewController:vc sender:self];
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+
+-(void)loadData
+{
+    __weak typeof(self) weakSelf = self;
+    
+    
+    TLPageDataHelper *helper = [[TLPageDataHelper alloc] init];
+    
+    helper.tableView = self.tableView;
+    
+    helper.code = @"625466";
+    helper.parameters[@"dappId"] = _GameModel.ID;
+//    helper.parameters[@"address"] = self.currency.address;
+    [helper modelClass:[StrategyModel class]];
+    
+    [self.tableView addRefreshAction:^{
+        
+        [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
+            if (objs.count == 0) {
+                [weakSelf addPlaceholderView];
+                
+            }
+            
+            weakSelf.model = objs;
+            
+            weakSelf.tableView.model = weakSelf.model;
+            
+//            weakSelf.tableView.ustds = objs;
+            [weakSelf.tableView reloadData_tl];
+            
+        } failure:^(NSError *error) {
+            
+            [weakSelf addPlaceholderView];
+            
+        }];
+    }];
+    
+    [self.tableView beginRefreshing];
+    
+    [self.tableView addLoadMoreAction:^{
+        
+        [helper loadMore:^(NSMutableArray *objs, BOOL stillHave) {
+            
+            if (weakSelf.tl_placeholderView.superview != nil) {
+                
+                [weakSelf removePlaceholderView];
+            }
+            
+            weakSelf.model = objs;
+            
+            weakSelf.tableView.model = weakSelf.model;
+            [weakSelf.tableView reloadData_tl];
+            
+        } failure:^(NSError *error) {
+            
+            [weakSelf addPlaceholderView];
+            
+        }];
+        
+    }];
+    
+    [self.tableView endRefreshingWithNoMoreData_tl];
+    
 }
-*/
+
 
 @end

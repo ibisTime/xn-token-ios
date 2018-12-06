@@ -8,7 +8,11 @@
 
 #import "TLTableView.h"
 #import "HomeFindModel.h"
+
 @interface HomeTbleView : TLTableView
 
 @property (nonatomic,strong) NSArray <HomeFindModel *>*findModels;
+
+
+
 @end

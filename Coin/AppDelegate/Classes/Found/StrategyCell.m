@@ -9,13 +9,16 @@
 #import "StrategyCell.h"
 
 @implementation StrategyCell
+{
+    UILabel *nameLabel;
+}
 
 -(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         
-        UILabel *nameLabel = [UILabel labelWithFrame:CGRectMake(25, 0, SCREEN_WIDTH - 32.5 - 10 - 25, 40) textAligment:(NSTextAlignmentLeft) backgroundColor:kClearColor font:FONT(14) textColor:kHexColor(@"#000000")];
+        nameLabel = [UILabel labelWithFrame:CGRectMake(25, 0, SCREEN_WIDTH - 32.5 - 10 - 25, 40) textAligment:(NSTextAlignmentLeft) backgroundColor:kClearColor font:FONT(14) textColor:kHexColor(@"#000000")];
         nameLabel.text = @"攻略攻略攻略攻略攻略攻略攻略攻略攻略攻略攻略攻略攻略攻略攻略攻略";
         [self addSubview:nameLabel];
         
@@ -31,6 +34,13 @@
     }
     return self;
 }
+
+-(void)setModel:(StrategyModel *)model
+{
+    nameLabel.text = model.title;
+}
+
+
 
 
 @end

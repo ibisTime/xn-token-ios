@@ -34,7 +34,7 @@
 
 #import "AppConfig.h"
 #import "AppColorMacro.h"
-
+#import "GeneralWebView.h"
 
 //#import "CustomDatabase.h"
 

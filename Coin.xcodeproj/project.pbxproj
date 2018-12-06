@@ -102,6 +102,16 @@
 		1F816BF82180953D0078B945 /* UIImage+ImageSize.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F816BEE2180953B0078B945 /* UIImage+ImageSize.m */; };
 		1F816BF92180953D0078B945 /* SGQRCodeHelperTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F816BF02180953C0078B945 /* SGQRCodeHelperTool.m */; };
 		1FC1C35321AE33FF00FA94E3 /* MoneyPasswordVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FC1C35221AE33FF00FA94E3 /* MoneyPasswordVC.m */; };
+		1FF5DB7721B77A0A0019EF69 /* GuideTheFigureView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FF5DB7621B77A0A0019EF69 /* GuideTheFigureView.m */; };
+		1FF5DB7D21B7D1250019EF69 /* ImageBrowserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FF5DB7921B7D1240019EF69 /* ImageBrowserViewController.m */; };
+		1FF5DB7E21B7D1250019EF69 /* PhotoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FF5DB7C21B7D1240019EF69 /* PhotoView.m */; };
+		1FF5DB8121B8CE8C0019EF69 /* FindTheGameModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FF5DB8021B8CE8C0019EF69 /* FindTheGameModel.m */; };
+		1FF5DB8421B8E5800019EF69 /* StrategyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FF5DB8321B8E5800019EF69 /* StrategyModel.m */; };
+		1FF5DB8821B8EDAE0019EF69 /* GeneralWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FF5DB8721B8EDAE0019EF69 /* GeneralWebView.m */; };
+		1FF5DB9221B8EDFA0019EF69 /* UIView+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FF5DB8B21B8EDF90019EF69 /* UIView+Frame.m */; };
+		1FF5DB9321B8EDFA0019EF69 /* WLWebProgressLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FF5DB8C21B8EDF90019EF69 /* WLWebProgressLayer.m */; };
+		1FF5DB9421B8EDFA0019EF69 /* NSTimer+addition.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FF5DB8E21B8EDF90019EF69 /* NSTimer+addition.m */; };
+		1FF5DB9521B8EDFA0019EF69 /* WYWebProgressLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FF5DB9121B8EDF90019EF69 /* WYWebProgressLayer.m */; };
 		211A34D71FB3F51400FEB71F /* MineHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 211A34D61FB3F51400FEB71F /* MineHeaderView.m */; };
 		211A34DB1FB4083300FEB71F /* MineTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 211A34DA1FB4083300FEB71F /* MineTableView.m */; };
 		211A34DE1FB4245D00FEB71F /* MineCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 211A34DD1FB4245D00FEB71F /* MineCell.m */; };
@@ -764,6 +774,26 @@
 		1F816BF32180953D0078B945 /* SGQRCode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SGQRCode.h; sourceTree = "<group>"; };
 		1FC1C35121AE33FF00FA94E3 /* MoneyPasswordVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MoneyPasswordVC.h; sourceTree = "<group>"; };
 		1FC1C35221AE33FF00FA94E3 /* MoneyPasswordVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MoneyPasswordVC.m; sourceTree = "<group>"; };
+		1FF5DB7521B77A0A0019EF69 /* GuideTheFigureView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GuideTheFigureView.h; sourceTree = "<group>"; };
+		1FF5DB7621B77A0A0019EF69 /* GuideTheFigureView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GuideTheFigureView.m; sourceTree = "<group>"; };
+		1FF5DB7921B7D1240019EF69 /* ImageBrowserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageBrowserViewController.m; sourceTree = "<group>"; };
+		1FF5DB7A21B7D1240019EF69 /* PhotoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoView.h; sourceTree = "<group>"; };
+		1FF5DB7B21B7D1240019EF69 /* ImageBrowserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageBrowserViewController.h; sourceTree = "<group>"; };
+		1FF5DB7C21B7D1240019EF69 /* PhotoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoView.m; sourceTree = "<group>"; };
+		1FF5DB7F21B8CE8C0019EF69 /* FindTheGameModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FindTheGameModel.h; sourceTree = "<group>"; };
+		1FF5DB8021B8CE8C0019EF69 /* FindTheGameModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FindTheGameModel.m; sourceTree = "<group>"; };
+		1FF5DB8221B8E5800019EF69 /* StrategyModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StrategyModel.h; sourceTree = "<group>"; };
+		1FF5DB8321B8E5800019EF69 /* StrategyModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StrategyModel.m; sourceTree = "<group>"; };
+		1FF5DB8621B8EDAE0019EF69 /* GeneralWebView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GeneralWebView.h; sourceTree = "<group>"; };
+		1FF5DB8721B8EDAE0019EF69 /* GeneralWebView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GeneralWebView.m; sourceTree = "<group>"; };
+		1FF5DB8A21B8EDF90019EF69 /* NSTimer+addition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTimer+addition.h"; sourceTree = "<group>"; };
+		1FF5DB8B21B8EDF90019EF69 /* UIView+Frame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Frame.m"; sourceTree = "<group>"; };
+		1FF5DB8C21B8EDF90019EF69 /* WLWebProgressLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WLWebProgressLayer.m; sourceTree = "<group>"; };
+		1FF5DB8D21B8EDF90019EF69 /* WYWebProgressLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYWebProgressLayer.h; sourceTree = "<group>"; };
+		1FF5DB8E21B8EDF90019EF69 /* NSTimer+addition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTimer+addition.m"; sourceTree = "<group>"; };
+		1FF5DB8F21B8EDF90019EF69 /* WLWebProgressLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WLWebProgressLayer.h; sourceTree = "<group>"; };
+		1FF5DB9021B8EDF90019EF69 /* UIView+Frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Frame.h"; sourceTree = "<group>"; };
+		1FF5DB9121B8EDF90019EF69 /* WYWebProgressLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYWebProgressLayer.m; sourceTree = "<group>"; };
 		211A34D51FB3F51400FEB71F /* MineHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MineHeaderView.h; sourceTree = "<group>"; };
 		211A34D61FB3F51400FEB71F /* MineHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MineHeaderView.m; sourceTree = "<group>"; };
 		211A34D91FB4083300FEB71F /* MineTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MineTableView.h; sourceTree = "<group>"; };
@@ -1844,9 +1874,10 @@
 				1F0EDEA721B6507F0044C4A2 /* FindTheGameHeadCell.m */,
 				1F0EDEA921B660730044C4A2 /* GameIntroducedCell.h */,
 				1F0EDEAA21B660730044C4A2 /* GameIntroducedCell.m */,
-				1F0EDEAC21B662160044C4A2 /* YYText */,
 				1F0EDEF921B684750044C4A2 /* StrategyCell.h */,
 				1F0EDEFA21B684750044C4A2 /* StrategyCell.m */,
+				1FF5DB7821B7D1240019EF69 /* SJChartVeiw */,
+				1F0EDEAC21B662160044C4A2 /* YYText */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -1854,6 +1885,8 @@
 		1F0EDE9E21B64F730044C4A2 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				1FF5DB8221B8E5800019EF69 /* StrategyModel.h */,
+				1FF5DB8321B8E5800019EF69 /* StrategyModel.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -2039,6 +2072,8 @@
 				216F5B24206CD9D900F2C832 /* CountInfoModel.m */,
 				216F5B2A206CD9D900F2C832 /* BannerModel.h */,
 				216F5B29206CD9D900F2C832 /* BannerModel.m */,
+				1FF5DB7F21B8CE8C0019EF69 /* FindTheGameModel.h */,
+				1FF5DB8021B8CE8C0019EF69 /* FindTheGameModel.m */,
 			);
 			name = Model;
 			path = "New Group1";
@@ -2474,6 +2509,42 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
+		1FF5DB7821B7D1240019EF69 /* SJChartVeiw */ = {
+			isa = PBXGroup;
+			children = (
+				1FF5DB7B21B7D1240019EF69 /* ImageBrowserViewController.h */,
+				1FF5DB7921B7D1240019EF69 /* ImageBrowserViewController.m */,
+				1FF5DB7A21B7D1240019EF69 /* PhotoView.h */,
+				1FF5DB7C21B7D1240019EF69 /* PhotoView.m */,
+			);
+			path = SJChartVeiw;
+			sourceTree = "<group>";
+		};
+		1FF5DB8521B8ED750019EF69 /* Web */ = {
+			isa = PBXGroup;
+			children = (
+				1FF5DB8921B8EDF90019EF69 /* Web */,
+				1FF5DB8621B8EDAE0019EF69 /* GeneralWebView.h */,
+				1FF5DB8721B8EDAE0019EF69 /* GeneralWebView.m */,
+			);
+			path = Web;
+			sourceTree = "<group>";
+		};
+		1FF5DB8921B8EDF90019EF69 /* Web */ = {
+			isa = PBXGroup;
+			children = (
+				1FF5DB8A21B8EDF90019EF69 /* NSTimer+addition.h */,
+				1FF5DB8B21B8EDF90019EF69 /* UIView+Frame.m */,
+				1FF5DB8C21B8EDF90019EF69 /* WLWebProgressLayer.m */,
+				1FF5DB8D21B8EDF90019EF69 /* WYWebProgressLayer.h */,
+				1FF5DB8E21B8EDF90019EF69 /* NSTimer+addition.m */,
+				1FF5DB8F21B8EDF90019EF69 /* WLWebProgressLayer.h */,
+				1FF5DB9021B8EDF90019EF69 /* UIView+Frame.h */,
+				1FF5DB9121B8EDF90019EF69 /* WYWebProgressLayer.m */,
+			);
+			path = Web;
+			sourceTree = "<group>";
+		};
 		211A34D81FB3F55600FEB71F /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -2633,6 +2704,7 @@
 		211DE63B1FB58B4B002FCF3D /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				1FF5DB8521B8ED750019EF69 /* Web */,
 				1F709D5B2180A7FC002D1CC4 /* SGQRCode */,
 				7A40B11B217EF768004B9830 /* CustomAnimation */,
 				211CEF0E1FCBBF1B000FB0C4 /* NetworkingTool */,
@@ -4048,6 +4120,8 @@
 				B8D5F15520CE0F530005CF96 /* AccountMoneyCellTableViewCell.m */,
 				B8BBA5F920C780FA00DC4D5F /* PlatformCell.h */,
 				B8BBA5F720C780F900DC4D5F /* PlatformCell.m */,
+				1FF5DB7521B77A0A0019EF69 /* GuideTheFigureView.h */,
+				1FF5DB7621B77A0A0019EF69 /* GuideTheFigureView.m */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -4763,6 +4837,7 @@
 				7A07F7DF216C7BD00026EB7A /* MyIncomeVC.m in Sources */,
 				B8086530211EA17D00755158 /* BTCData+Tests.m in Sources */,
 				1F693AFD21A3F36E004818D8 /* ConfirmBackupVC.m in Sources */,
+				1FF5DB8121B8CE8C0019EF69 /* FindTheGameModel.m in Sources */,
 				7A2CC670215C9E3B00B27E2D /* PosMyInvestmentModel.m in Sources */,
 				1F0EDEE221B662160044C4A2 /* YYTextMagnifier.m in Sources */,
 				B8CAA14521158FF200695BC3 /* LPDPhotoArrangeCVlLayout.m in Sources */,
@@ -4781,6 +4856,7 @@
 				B8CAA13D21158FF200695BC3 /* LPDAssetCell.m in Sources */,
 				1F37A03621B1186F00EE8CAB /* MyAssetsTableViewCell.m in Sources */,
 				2EB039A71FE8B23300589D8E /* EditEmailVC.m in Sources */,
+				1FF5DB7D21B7D1250019EF69 /* ImageBrowserViewController.m in Sources */,
 				7A07F808216C84F30026EB7A /* SCColor.m in Sources */,
 				1F0EDEF421B662160044C4A2 /* UIPasteboard+YYText.m in Sources */,
 				1F4E89E7219E9215007B3015 /* CreateWalletVC.m in Sources */,
@@ -4819,6 +4895,7 @@
 				7A2CC647215B746E00B27E2D /* TLMoneyDetailsTableView.m in Sources */,
 				211EAD901FD0FC500037FBA8 /* UIViewController+BackButtonHander.m in Sources */,
 				1F709D6421817246002D1CC4 /* TransferNumberCell.m in Sources */,
+				1FF5DB9421B8EDFA0019EF69 /* NSTimer+addition.m in Sources */,
 				1F770EDD2191738400E2889F /* ToolTextField.m in Sources */,
 				B88B093320C908DC005C2D2F /* ResiseTextFiled.m in Sources */,
 				B8086510211EA17D00755158 /* BTCAssetAddress.m in Sources */,
@@ -4842,6 +4919,8 @@
 				B80864EF211EA17D00755158 /* BTCBlockHeader.m in Sources */,
 				215979701FB84B8A0029F177 /* BillDetailVC.m in Sources */,
 				B808651D211EA17D00755158 /* BTCProcessor.m in Sources */,
+				1FF5DB7721B77A0A0019EF69 /* GuideTheFigureView.m in Sources */,
+				1FF5DB8821B8EDAE0019EF69 /* GeneralWebView.m in Sources */,
 				1F0EDEA821B6507F0044C4A2 /* FindTheGameHeadCell.m in Sources */,
 				B88B092120C8E29D005C2D2F /* JoinMineVc.m in Sources */,
 				1FC1C35321AE33FF00FA94E3 /* MoneyPasswordVC.m in Sources */,
@@ -4906,6 +4985,7 @@
 				B808652D211EA17D00755158 /* BTCEncryptedMessage.m in Sources */,
 				1F358B3D218ABC4500F1665B /* USDTRecordModel.m in Sources */,
 				7A2CC6B5215DC88B00B27E2D /* PGDatePicker+DateHour.m in Sources */,
+				1FF5DB9521B8EDFA0019EF69 /* WYWebProgressLayer.m in Sources */,
 				B808650E211EA17D00755158 /* BTCEncryptedMessage+Tests.m in Sources */,
 				211DE6C21FB58B4C002FCF3D /* Foundation+Log.m in Sources */,
 				B808651A211EA17D00755158 /* BTCAddress+Tests.m in Sources */,
@@ -4938,6 +5018,7 @@
 				211DE6B61FB58B4C002FCF3D /* UIView+Extension.m in Sources */,
 				21A7F3141FB2E2F900FAA0A2 /* TLPwdRelatedVC.m in Sources */,
 				7A07F811216CAAEA0026EB7A /* MyInconmeCell.m in Sources */,
+				1FF5DB8421B8E5800019EF69 /* StrategyModel.m in Sources */,
 				1F37A03321B0E1DA00EE8CAB /* PrivacyPolicyView.m in Sources */,
 				1F4E89D9219D144E007B3015 /* LoginVC.m in Sources */,
 				7AE970522170C4970066B66C /* InviteEarningsModel.m in Sources */,
@@ -5042,6 +5123,7 @@
 				B8086503211EA17D00755158 /* BTCMnemonic.m in Sources */,
 				B808652A211EA17D00755158 /* BTCBase58.m in Sources */,
 				1F0EDEE621B662160044C4A2 /* YYTextLayout.m in Sources */,
+				1FF5DB7E21B7D1250019EF69 /* PhotoView.m in Sources */,
 				1F0EDEE821B662160044C4A2 /* YYTextSelectionView.m in Sources */,
 				7A2CC6DF215E2B1500B27E2D /* AccumulatedEarningsModel.m in Sources */,
 				B8086517211EA17D00755158 /* BTCProtocolBuffers.m in Sources */,
@@ -5093,6 +5175,7 @@
 				1F693AF721A2D7D9004818D8 /* BackupCollectionViewCell.m in Sources */,
 				7A07F81B216CB23F0026EB7A /* GlobalRevenueListTableView.m in Sources */,
 				215979601FB81CC40029F177 /* BillTableView.m in Sources */,
+				1FF5DB9221B8EDFA0019EF69 /* UIView+Frame.m in Sources */,
 				1F0EDEE321B662160044C4A2 /* YYTextContainerView.m in Sources */,
 				21A7F31C1FB2E2F900FAA0A2 /* TLUserExt.m in Sources */,
 				1F816BF42180953D0078B945 /* SGQRCodeScanManager.m in Sources */,
@@ -5175,6 +5258,7 @@
 				B8A2436520E5E0F20074DF8F /* TLDataBase.m in Sources */,
 				1F4E89C6219C1D32007B3015 /* JSONValueTransformer.m in Sources */,
 				7A07F809216C84F30026EB7A /* SCGenericChart.m in Sources */,
+				1FF5DB9321B8EDFA0019EF69 /* WLWebProgressLayer.m in Sources */,
 				7A07F7E5216C7C200026EB7A /* MyInconmeHeadCell.m in Sources */,
 				2EE361551FFE182800A5C3EB /* RespHandler.m in Sources */,
 				7A8A5D3520EA3E5A002D9A48 /* SendVC.m in Sources */,

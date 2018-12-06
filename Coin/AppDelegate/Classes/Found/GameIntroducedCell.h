@@ -10,6 +10,7 @@
 #import "YYLabel.h"
 #import "NSAttributedString+YYText.h"
 #import <UIKit/UIKit.h>
+#import "FindTheGameModel.h"
 
 @protocol GameIntroducedCellDelegate <NSObject>
 
@@ -18,6 +19,7 @@
 @end
 
 @interface GameIntroducedCell : UITableViewCell
+@property (nonatomic , strong)FindTheGameModel *GameModel;
 @property (nonatomic, assign) id <GameIntroducedCellDelegate> delegate;
 @property (nonatomic , strong)YYLabel *introduceLbl;
 

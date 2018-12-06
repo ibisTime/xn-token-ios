@@ -53,18 +53,17 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    self.navigationController.navigationBar.translucent = YES;
-    [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
-    [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
-
     UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     self.navigationController.navigationBar.tintColor = [UIColor blackColor];
-    self.navigationController.navigationBar.barTintColor = [UIColor blackColor];
+    self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
+    
     self.navigationItem.backBarButtonItem = item;
     self.navigationController.navigationBar.shadowImage = [UIImage new];
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
     
 }
+
+
 //如果仅设置当前页导航透明，需加入下面方法
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
@@ -85,6 +84,7 @@
     TLNetworking *http = [[TLNetworking alloc] init];
     
     http.code = @"660919";
+    http.showView = self.view;
     http.parameters[@"type"] = @"followUs";
     
     [http postWithSuccess:^(id responseObject) {
@@ -140,11 +140,11 @@
 
 - (void)initTableView {
     
-    self.bgImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, -kNavigationBarHeight, SCREEN_WIDTH, SCREEN_HEIGHT)];
-    self.bgImage.contentMode = UIViewContentModeScaleToFill;
-    self.bgImage.userInteractionEnabled = YES;
-    self.bgImage.image = kImage(@"我的 背景");
-    [self.view  addSubview:self.bgImage];
+//    self.bgImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, -kNavigationBarHeight, SCREEN_WIDTH, SCREEN_HEIGHT)];
+//    self.bgImage.contentMode = UIViewContentModeScaleToFill;
+//    self.bgImage.userInteractionEnabled = YES;
+//    self.bgImage.image = kImage(@"我的 背景");
+//    [self.view  addSubview:self.bgImage];
     
 //    [self.bgImage mas_makeConstraints:^(MASConstraintMaker *make) {
 //        make.edges.mas_equalTo(UIEdgeInsetsZero);
@@ -162,17 +162,17 @@
 //    self.nameLable.textColor = kTextBlack;
 //    [self.bgImage addSubview:self.nameLable];
 
-    self.tableView = [[JoinMineTableView alloc] initWithFrame:CGRectMake(15, 30 + kNavigationBarHeight, kScreenWidth-30, kHeight(293)) style:UITableViewStylePlain];
+    self.tableView = [[JoinMineTableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, SCREEN_HEIGHT - kNavigationBarHeight) style:UITableViewStylePlain];
     
     //    self.tableView.tableHeaderView = self.headerView;
     self.tableView.refreshDelegate = self;
     self.tableView.backgroundColor = kWhiteColor;
     //    [self.tableView adjustsContentInsets];
-    [self.bgImage addSubview:self.tableView];
+    [self.view addSubview:self.tableView];
     //    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
     //        make.top.equalTo(self.headerView.mas_bottom);
     //    }];
-    CoinWeakSelf;
+//    CoinWeakSelf;
     //    self.tableView.selectBlock = ^(NSInteger inter) {
     //        NSLog(@"%ld",inter);
     //        WallAccountVC *accountVC= [[WallAccountVC alloc] init];

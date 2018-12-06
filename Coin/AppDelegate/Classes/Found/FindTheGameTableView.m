@@ -56,19 +56,19 @@
             return 1;
         }else
         {
-            return 10;
+            return self.model.count;
         }
     }
     return 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    
-    
     if (indexPath.section==0) {
         FindTheGameHeadCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FindTheGameHeadCell" forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.GameModel = self.GameModel;
+        [cell.actionBtn addTarget:self action:@selector(actionBtnClick:) forControlEvents:(UIControlEventTouchUpInside)];
+        
         return cell;
     }
     if (select == 0) {
@@ -76,13 +76,20 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         _cell = cell;
         _cell.delegate = self;
+        cell.GameModel = self.GameModel;
         return cell;
     }else
     {
         StrategyCell *cell = [tableView dequeueReusableCellWithIdentifier:@"StrategyCell" forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.model = self.model[indexPath.row];
         return cell;
     }
+}
+
+-(void)actionBtnClick:(UIButton *)sender
+{
+    [self.refreshDelegate refreshTableViewButtonClick:self button:sender selectRowAtIndex:0];
 }
 
 #pragma mark - UITableViewDelegate

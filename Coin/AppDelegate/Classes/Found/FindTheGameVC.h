@@ -7,7 +7,8 @@
 //
 
 #import "TLBaseVC.h"
-
+#import "FindTheGameModel.h"
 @interface FindTheGameVC : TLBaseVC
 
+@property (nonatomic , strong)FindTheGameModel *GameModel;
 @end

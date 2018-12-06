@@ -63,6 +63,37 @@
     [_popView pop];
 }
 
+
+
+- (void)showPopAnimationWithAnimationStyle1:(NSInteger)style showView:(UIView *)showView
+{
+    ZJAnimationPopStyle popStyle = (style == 8) ? ZJAnimationPopStyleCardDropFromLeft : (ZJAnimationPopStyle)style;
+    ZJAnimationDismissStyle dismissStyle = (ZJAnimationDismissStyle)style;
+    // 1.初始化
+    ZJAnimationPopView *_popView = [[ZJAnimationPopView alloc] initWithCustomView:showView popStyle:popStyle dismissStyle:dismissStyle];
+    self.cusPopView = _popView;
+    _popView.isClickBGDismiss = ![showView isKindOfClass:[UIView class]];
+    //    移除
+    _popView.isClickBGDismiss = YES;
+    // 2.2 显示时背景的透明度
+    _popView.popBGAlpha = 0;
+    
+    // 2.3 显示时是否监听屏幕旋转
+    _popView.isObserverOrientationChange = YES;
+    _popView.popAnimationDuration = 0.5;
+    // 2.6 显示完成回调
+    _popView.popComplete = ^{
+        NSLog(@"显示完成");
+    };
+    // 2.7 移除完成回调
+    _popView.dismissComplete = ^{
+        NSLog(@"移除完成");
+    };
+    // 4.显示弹框
+    [_popView pop];
+}
+
+
 -(void)phoneCode:(UIButton *)sender
 {
     __block NSInteger time = 59;

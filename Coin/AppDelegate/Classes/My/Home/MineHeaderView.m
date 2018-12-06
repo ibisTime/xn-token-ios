@@ -125,13 +125,30 @@
     [self addSubview:self.mobileLbl];
     
     
-    UIButton *realnameBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"身份认证未完成" key:nil] titleColor:kWhiteColor backgroundColor:kClearColor titleFont:10];
-    realnameBtn.frame = CGRectMake(15, self.mobileLbl.yy + 7.5, SCREEN_WIDTH - 30, 10);
-    realnameBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
-    [realnameBtn SG_imagePositionStyle:(SGImagePositionStyleDefault) spacing:3.5 imagePositionBlock:^(UIButton *button) {
-        [button setImage:kImage(@"提示1") forState:(UIControlStateNormal)];
-    }];
-    [self addSubview:realnameBtn];
+    _realnameBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"身份认证未完成" key:nil] titleColor:kWhiteColor backgroundColor:kClearColor titleFont:10];
+    
+    
+    
+    _realnameBtn.frame = CGRectMake(15, self.mobileLbl.yy + 7.5, SCREEN_WIDTH - 30, 10);
+    _realnameBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+    
+    if ([TLUser isBlankString:[TLUser user].realName] == YES) {
+        [_realnameBtn setTitle:[LangSwitcher switchLang:@"身份认证未完成" key:nil] forState:(UIControlStateNormal)];
+        [_realnameBtn SG_imagePositionStyle:(SGImagePositionStyleDefault) spacing:3.5 imagePositionBlock:^(UIButton *button) {
+            [button setImage:kImage(@"提示1") forState:(UIControlStateNormal)];
+        }];
+    }else
+    {
+        [_realnameBtn setTitle:[LangSwitcher switchLang:@"身份认证已完成" key:nil] forState:(UIControlStateNormal)];
+        [_realnameBtn SG_imagePositionStyle:(SGImagePositionStyleDefault) spacing:3.5 imagePositionBlock:^(UIButton *button) {
+            [button setImage:kImage(@"已完成") forState:(UIControlStateNormal)];
+        }];
+        
+    }
+    
+    
+    
+    [self addSubview:_realnameBtn];
     
 //    [self.mobileLbl sizeToFit];
     

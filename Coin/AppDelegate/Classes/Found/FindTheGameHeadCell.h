@@ -7,12 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FindTheGameModel.h"
 
 @interface FindTheGameHeadCell : UITableViewCell
 
+@property (nonatomic , strong)FindTheGameModel *GameModel;
 
 
-
-
+@property (nonatomic , strong)UIButton *actionBtn;
 
 @end

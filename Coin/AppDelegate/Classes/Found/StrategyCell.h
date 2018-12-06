@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "FindTheGameModel.h"
+#import "StrategyModel.h"
 @interface StrategyCell : UITableViewCell
+
+@property (nonatomic , strong)StrategyModel *model;
 
 @end

@@ -36,28 +36,30 @@
 - (void)initSubviews {
     
     self.backgroundColor = kWhiteColor;
-    self.nameLab = [UILabel labelWithBackgroundColor:kWhiteColor textColor:kTextColor font:15];
+    self.nameLab = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:15];
     [self addSubview:self.nameLab];
     [self.nameLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.equalTo(@15);
-        make.left.equalTo(@15);
-
+        make.top.bottom.equalTo(@0);
+        make.left.equalTo(@21);
+//        make.bottom.equalTo(@0);
     }];
     
-    self.contentLab = [UILabel labelWithBackgroundColor:kWhiteColor textColor:kTextColor2 font:15];
+    self.contentLab = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor2 font:15];
     [self addSubview:self.contentLab];
     [self.contentLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(@15);
-        make.right.equalTo(@-15);
-
+        make.top.bottom.equalTo(@0);
+        make.right.equalTo(@-21);
+//make.bottom.equalTo(@0);
     }];
+    
     UIView *line = [UIView new];
     line.backgroundColor = kLineColor;
     [self addSubview:line];
     
     [line mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(self.mas_bottom).offset(-1);
-        make.right.left.equalTo(@0);
+        make.left.equalTo(@15);
+        make.right.equalTo(@-15);
         make.height.equalTo(@1);
     }];
     

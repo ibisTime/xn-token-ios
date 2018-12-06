@@ -55,18 +55,13 @@
 
 
 - (void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    self.navigationController.navigationBar.translucent = YES;
-    [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
-    [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
-
     UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     self.navigationController.navigationBar.tintColor = [UIColor blackColor];
-    self.navigationController.navigationBar.barTintColor = [UIColor blackColor];
+    self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
+    
     self.navigationItem.backBarButtonItem = item;
     self.navigationController.navigationBar.shadowImage = [UIImage new];
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
-    [self.tableView reloadData];
     [self requestUserInfo];
 
 }
@@ -108,18 +103,18 @@
 
 - (void)initTableView {
     
-    self.bgImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, -kNavigationBarHeight, SCREEN_WIDTH, kNavigationBarHeight + SCREEN_HEIGHT)];
-    self.bgImage.contentMode = UIViewContentModeScaleToFill;
-    self.bgImage.userInteractionEnabled = YES;
-    self.bgImage.image = kImage(@"我的 背景");
-    [self.view addSubview:self.bgImage];
+//    self.bgImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, -kNavigationBarHeight, SCREEN_WIDTH, kNavigationBarHeight + SCREEN_HEIGHT)];
+//    self.bgImage.contentMode = UIViewContentModeScaleToFill;
+//    self.bgImage.userInteractionEnabled = YES;
+//    self.bgImage.image = kImage(@"我的 背景");
+//    [self.view addSubview:self.bgImage];
 
 
-    self.tableView = [[LocalSettingTableView alloc] initWithFrame:CGRectMake(15, kHeight(90), kScreenWidth-30, kHeight(400)) style:UITableViewStyleGrouped];
+    self.tableView = [[LocalSettingTableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, SCREEN_HEIGHT - kNavigationBarHeight) style:UITableViewStyleGrouped];
     
     self.tableView.group = self.group;
     self.tableView.backgroundColor = kWhiteColor;
-    [self.bgImage addSubview:self.tableView];
+    [self.view addSubview:self.tableView];
     CoinWeakSelf;
     self.tableView.SwitchBlock = ^(NSInteger switchBlock) {
         if (switchBlock ==1) {
@@ -136,7 +131,7 @@
         
         
     };
-    UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth - 30 - 30, 150)];
+    UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 150)];
     
     [footerView addSubview:self.loginOutBtn];
     
@@ -294,14 +289,15 @@
     
     if (!_loginOutBtn) {
         
-        _loginOutBtn = [[UIButton alloc] initWithFrame:CGRectMake(15, 55, kScreenWidth - 30-30, 50)];
-        _loginOutBtn.backgroundColor = kClearColor;
+        _loginOutBtn = [[UIButton alloc] initWithFrame:CGRectMake(40, 55, kScreenWidth - 80, 50)];
+        _loginOutBtn.backgroundColor = kHexColor(@"#007AFF");
         [_loginOutBtn setTitle:[LangSwitcher switchLang:@"退出登录" key:nil] forState:UIControlStateNormal];
-        [_loginOutBtn setTitleColor:kHexColor(@"#007AFF") forState:UIControlStateNormal];
-        _loginOutBtn.layer.cornerRadius = 5;
-        _loginOutBtn.layer.borderWidth = 1;
-        _loginOutBtn.layer.borderColor = kHexColor(@"#007AFF").CGColor;
-        _loginOutBtn.clipsToBounds = YES;
+        [_loginOutBtn setTitleColor:kWhiteColor forState:UIControlStateNormal];
+        kViewRadius(_loginOutBtn, 6.5);
+//        _loginOutBtn.layer.cornerRadius = 5;
+//        _loginOutBtn.layer.borderWidth = 1;
+//        _loginOutBtn.layer.borderColor = kHexColor(@"#007AFF").CGColor;
+//        _loginOutBtn.clipsToBounds = YES;
         _loginOutBtn.titleLabel.font = FONT(15);
         [_loginOutBtn addTarget:self action:@selector(logout) forControlEvents:UIControlEventTouchUpInside];
     }
