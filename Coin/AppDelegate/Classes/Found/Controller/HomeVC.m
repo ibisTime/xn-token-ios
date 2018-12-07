@@ -105,10 +105,7 @@
         [_collectionView registerClass:[TheGameCollCell class] forCellWithReuseIdentifier:@"TheGameCollCell"];
         
         [_collectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HeaderView"];
-        
         [_collectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HeaderView1"];
-        
-        
     }
     return _collectionView;
 }
@@ -122,8 +119,6 @@
     header.stateLabel.hidden = YES;
     _collectionView.mj_header = header;
     [_collectionView.mj_header beginRefreshing];
-    
-    
     
     MJRefreshBackNormalFooter *footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadNewDataFooter)];
     footer.arrowView.hidden = YES;
@@ -147,9 +142,7 @@
 
 -(void)loadData
 {
-    
     NSString *lang;
-    
     LangType type = [LangSwitcher currentLangType];
     if (type == LangTypeSimple || type == LangTypeTraditional)
     {
@@ -160,7 +153,6 @@
     }else
     {
         lang = @"EN";
-        
     }
     TLNetworking *http = [TLNetworking new];
     
@@ -171,23 +163,12 @@
     
     [http postWithSuccess:^(id responseObject) {
         
-//        self.tableView.findModels = [HomeFindModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
-//        [self.tableView endRefreshHeader];
-//        [self.tableView reloadData];
-//        if (self.findModels.count != self.tableView.findModels.count) {
-//            [TableViewAnimationKit showWithAnimationType:6 tableView:self.tableView];
-//        }
-//        if (start > 1) {
-//            self.GameModel = [NSMutableArray array];
-//        }
-        
         [self.GameModelArray addObjectsFromArray:responseObject[@"data"][@"list"]];
         self.GameModel = [FindTheGameModel mj_objectArrayWithKeyValuesArray:self.GameModelArray];
         
         [_collectionView reloadData];
         [_collectionView.mj_footer endRefreshing];
         [_collectionView.mj_header endRefreshing];
-        
         
     } failure:^(NSError *error) {
         [_collectionView.mj_footer endRefreshing];
@@ -200,10 +181,8 @@
     [self initNavigationNar];
 //    [self initTableView];
     [self.view addSubview:self.collectionView];
-//    self.collectionView.
     self.view.backgroundColor = kWhiteColor;
     [self DownRefresh];
-
 }
 
 -(void)initNavigationNar
@@ -215,6 +194,7 @@
     self.nameLable.textColor = kTextBlack;
     [self.view addSubview:self.nameLable];
 }
+
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
     return 3;
@@ -231,6 +211,7 @@
     }
     return self.GameModel.count;
 }
+
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     

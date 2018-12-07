@@ -82,7 +82,6 @@
         
         CoinWeakSelf;
         self.homeView.buildBlock = ^{
-
             TradePasswordVC *vc = [[TradePasswordVC alloc]init];
             vc.state = @"1";
             [weakSelf.navigationController pushViewController:vc animated:YES];
@@ -182,7 +181,6 @@
         _headView.frame = CGRectMake(0, 0, SCREEN_WIDTH, (SCREEN_WIDTH - 40)/2.3 + 61 + 12 + 11 + 30);
         self.tableView.platforms = self.AssetsListModel;
     }
-    
     self.tableView.isWallet = self.isWallet;
     [self.tableView reloadData];
     [TableViewAnimationKit showWithAnimationType:2 tableView:self.tableView];
@@ -218,8 +216,6 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(InfoNotificationAction1:) name:@"LOADDATAPAGE3" object:nil];
 }
 
-
-
 #pragma mark -- 接收到通知
 - (void)InfoNotificationAction:(NSNotification *)notification{
     [self getMyCurrencyList];
@@ -233,7 +229,7 @@
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"LOADDATAPAGE2" object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"LOADDATAPAGE1" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"LOADDATAPAGE3" object:nil];
 }
 
 //-(void)PageDisplayLoading
@@ -380,7 +376,6 @@
     [super viewWillDisappear:animated];
     [self.navigationController setNavigationBarHidden:NO animated:animated];
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
-
 }
 
 - (void)initTableView {
@@ -395,7 +390,6 @@
 //    cell点击方法
     CoinWeakSelf;
     self.tableView.selectBlock = ^(NSInteger inter) {
-
         if ([weakSelf.isWallet isEqualToString:@"个人钱包"]) {
             WallAccountVC *accountVC= [[WallAccountVC alloc] init];
             accountVC.currency = weakSelf.AssetsListModel[inter];
@@ -412,8 +406,6 @@
         }
     };
 }
-
-
 
 -(void)refreshTableView:(TLTableView *)refreshTableview setCurrencyModel:(CurrencyModel *)model setTitle:(NSString *)title
 {
@@ -435,23 +427,18 @@
 }
 
 - (void)clickWithdrawWithCurrency:(CurrencyModel *)currencyModel {
-
     CoinWeakSelf;
     //    实名认证成功后，判断是否设置资金密码
     if ([[TLUser user].tradepwdFlag isEqualToString:@"0"]) {
-
         TLPwdType pwdType = TLPwdTypeSetTrade;
         TLPwdRelatedVC *pwdRelatedVC = [[TLPwdRelatedVC alloc] initWithType:pwdType];
         pwdRelatedVC.isWallet = YES;
         pwdRelatedVC.success = ^{
-
             [weakSelf clickWithdrawWithCurrency:currencyModel];
         };
         [self.navigationController pushViewController:pwdRelatedVC animated:YES];
-        return ;
-
+        return;
     }
-
     WithdrawalsCoinVC *coinVC = [WithdrawalsCoinVC new];
     coinVC.currency = currencyModel;
     [self.navigationController pushViewController:coinVC animated:YES];
@@ -459,7 +446,6 @@
 
 
 - (void)addNotification {
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userlogin) name:kUserLoginNotification object:nil];
 }
 
@@ -687,10 +673,12 @@
             NSArray *words = [word componentsSeparatedByString:@" "];
             //这里第一次进行BTC的私钥和地址创建 存到用户表里面 和币种表
             BTCMnemonic *mnemonic =  [MnemonicUtil importMnemonic:words];
-            if ([AppConfig config].runEnv == 0) {
+            if ([AppConfig config].runEnv == 0)
+            {
                 mnemonic.keychain.network = [BTCNetwork mainnet];
-                
-            }else{
+            }
+            else
+            {
                 mnemonic.keychain.network = [BTCNetwork testnet];
             }
             btc_address = [MnemonicUtil getBtcTheOldAddress:mnemonic];
@@ -744,7 +732,6 @@
 
 //获取公告列表
 - (void)requestRateList {
-    
     CoinWeakSelf;
     TLPageDataHelper *help = [[TLPageDataHelper alloc] init];
     help.parameters[@"channelType"] = @4;
