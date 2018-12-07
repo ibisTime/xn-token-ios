@@ -114,6 +114,20 @@
     [self requesUserInfoWithResponseObject];
     
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(InfoNotificationAction:) name:@"ALLPRICE" object:nil];
+    
+}
+#pragma mark -- 接收到通知
+- (void)InfoNotificationAction:(NSNotification *)notification{
+    self.tableView.priceStr = [NSString stringWithFormat:@"≈%.2f",[notification.userInfo[@"allprice"] floatValue]];
+    [self.tableView reloadData];
+}
+
+
+#pragma mark -- 删除通知
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"ALLPRICE" object:nil];
 }
 
 #pragma mark - ZQFaceAuthDelegate
@@ -468,7 +482,7 @@
         self.headerView.phone.hidden = YES;
         return;
     }
-    if ([TLUser isBlankString:[TLUser user].realName] == YES) {
+    if ([TLUser isBlankString:[TLUser user].idNo] == YES) {
         [self.headerView.realnameBtn setTitle:[LangSwitcher switchLang:@"身份认证未完成" key:nil] forState:(UIControlStateNormal)];
         [self.headerView.realnameBtn SG_imagePositionStyle:(SGImagePositionStyleDefault) spacing:3.5 imagePositionBlock:^(UIButton *button) {
             [button setImage:kImage(@"提示1") forState:(UIControlStateNormal)];

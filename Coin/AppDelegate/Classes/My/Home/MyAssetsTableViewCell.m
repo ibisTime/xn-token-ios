@@ -38,6 +38,9 @@
             
             UILabel *priceLabel = [UILabel labelWithFrame:CGRectMake(i % 2 * SCREEN_WIDTH/2, 20, SCREEN_WIDTH/2, 16) textAligment:(NSTextAlignmentCenter) backgroundColor:kClearColor font:FONT(16) textColor:[UIColor blackColor]];
             priceLabel.text = @"≈0.00";
+            if (i == 0) {
+                self.allAssetsLabel = priceLabel;
+            }
             [self addSubview:priceLabel];
             
             UILabel *nameLabel = [UILabel labelWithFrame:CGRectMake(i % 2 * SCREEN_WIDTH/2, priceLabel.yy + 7.5, SCREEN_WIDTH/2, 13) textAligment:(NSTextAlignmentCenter) backgroundColor:kClearColor font:FONT(12) textColor:kHexColor(@"#bfbfbf")];

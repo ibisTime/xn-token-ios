@@ -97,12 +97,12 @@
     UIImageView *image4 = [self viewWithTag:1003];
     UIImageView *image5 = [self viewWithTag:1004];
     
-    for (int i = 0; i < GameModel.labelArray.count; i ++) {
+    for (int i = 0; i < GameModel.labelList.count; i ++) {
         if (i == 8) {
             return;
         }
         UILabel *theLabel = [UILabel labelWithFrame:CGRectMake(headImage.xx + 15 + i % 4 * (SCREEN_WIDTH - headImage.xx - 15 - 15)/4 , provenance.yy + 8  + i / 4 * (28), (SCREEN_WIDTH - headImage.xx - 15 - 15 - 9)/4, 24) textAligment:(NSTextAlignmentCenter) backgroundColor:RGB(247, 201, 84) font:FONT(12) textColor:kWhiteColor];
-        theLabel.text = GameModel.labelArray[i];
+        theLabel.text = GameModel.labelList[i];
         kViewRadius(theLabel, 12);
         [self addSubview:theLabel];
     }

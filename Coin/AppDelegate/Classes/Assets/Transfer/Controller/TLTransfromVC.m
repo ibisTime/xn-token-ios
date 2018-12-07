@@ -294,22 +294,25 @@ typedef enum : NSUInteger {
                 }
             }
             
-            TLDataBase *dataBase = [TLDataBase sharedManager];
-            NSString *address;
-            if ([dataBase.dataBase open]) {
-                NSString *sql = [NSString stringWithFormat:@"SELECT symbol,address from THALocal lo, THAUser th where lo.walletId = th.walletId  and th.userId = '%@' and th.symbol = '%@' and lo.IsSelect = 1",[TLUser user].userId,self.currentModel.symbol];
-                //        [sql appendString:[TLUser user].userId];
-                FMResultSet *set = [dataBase.dataBase executeQuery:sql];
-                while ([set next])
-                {
-                    
-                    address = [set stringForColumn:@"address"];
-                    
-                    self.currentModel.address = address;
-                }
-                [set close];
-            }
-            [dataBase.dataBase close];
+//            TLDataBase *dataBase = [TLDataBase sharedManager];
+//            NSString *address;
+//            if ([dataBase.dataBase open]) {
+//                NSString *sql = [NSString stringWithFormat:@"SELECT symbol,address from THALocal lo, THAUser th where lo.walletId = th.walletId  and th.userId = '%@' and th.symbol = '%@' and lo.IsSelect = 1",[TLUser user].userId,self.currentModel.symbol];
+//                //        [sql appendString:[TLUser user].userId];
+//                FMResultSet *set = [dataBase.dataBase executeQuery:sql];
+//                while ([set next])
+//                {
+//
+//                    address = [set stringForColumn:@"address"];
+//
+//                    self.currentModel.address = address;
+//                }
+//                [set close];
+//            }
+//            [dataBase.dataBase close];
+            
+            
+            
             [self loadtype];
             [self loadPwd];
 
@@ -343,14 +346,10 @@ typedef enum : NSUInteger {
     }else if ([symbol isEqualToString:@"BTC"])
     {
         self.poundage = [NSString stringWithFormat:@"%.8f",[BTCPoundage enterTheumber:allMoney setFee:[NSString stringWithFormat:@"%.1f",self.poundageSlider.value] setUtxis:self.utxis]/100000000];
-        
-//        self.poundage = [NSString stringWithFormat:@"%.8f",[BTCPoundage enterTheumber:self.numberTextField.text setFee:[NSString stringWithFormat:@"%.1f",slider.value] setUtxis:self.utxis]/100000000];
         self.tableView.poundage =  [NSString stringWithFormat:@"%@ %@sat/b(≈%.8fBTC)",[LangSwitcher switchLang:@"本次划转手续费为" key:nil],[NSString stringWithFormat:@"%.1f",self.poundageSlider.value],[self.poundage floatValue]];
         [self.tableView reloadData];
-//        [self valueChange:self.poundageSlider];
         if ([allMoney floatValue] > [self.poundage floatValue]) {
             NSString *money = [NSString stringWithFormat:@"%.8f",[allMoney floatValue] - [self.poundage floatValue]];
-            //            NSString *str = [CoinUtil mult1:money mult2:@"1" scale:8];
             self.numberTextField.text = money;
         }else
         {
@@ -379,7 +378,6 @@ typedef enum : NSUInteger {
     {
         if ([allMoney floatValue] > [self.poundage floatValue]) {
             NSString *money = [NSString stringWithFormat:@"%.8f",[allMoney floatValue] - [self.poundage floatValue]];
-//                        NSString *str = [CoinUtil mult1:money mult2:@"1" scale:8];
             self.numberTextField.text = money;
         }else
         {
@@ -399,8 +397,6 @@ typedef enum : NSUInteger {
         {
             [TLAlert alertWithInfo:[NSString stringWithFormat:@"ETH%@",[LangSwitcher switchLang:@"余额不足" key:nil]]];
         }
-//        self.totalFree.text = [NSString stringWithFormat:@"%@ %@",[LangSwitcher switchLang:@"本次划转手续费为" key:nil],[NSString stringWithFormat:@"%.8f %@", self.poundage ,@"ETH"]];
-//        self.currencyStr = @"ETH";
     }else{
         
         for (int i = 0; i < self.localcurrencys.count; i ++) {
@@ -415,8 +411,6 @@ typedef enum : NSUInteger {
         {
             [TLAlert alertWithInfo:[NSString stringWithFormat:@"WAN%@",[LangSwitcher switchLang:@"余额不足" key:nil]]];
         }
-//        self.totalFree.text = [NSString stringWithFormat:@"%@ %@",[LangSwitcher switchLang:@"本次划转手续费为" key:nil],[NSString stringWithFormat:@"%.8f %@", self.poundage,@"WAN" ]];
-//        self.currencyStr = @"WAN";
     }
     
     
@@ -497,12 +491,6 @@ typedef enum : NSUInteger {
     
     NSString *Mnemonics = [[NSUserDefaults standardUserDefaults]objectForKey:MNEMONIC];
     NSString *gaspic =  [CoinUtil convertToSysCoin:self.numberTextField.text coin:self.currentModel.symbol];
-    ;
-//    [dataBase.dataBase close];
-    
-//    [TLAlert alertWithTitle:<#(NSString *)#> msg:<#(NSString *)#> confirmMsg:<#(NSString *)#> cancleMsg:<#(NSString *)#> placeHolder:<#(NSString *)#> maker:<#(UIViewController *)#> cancle:<#^(UIAlertAction *action)cancle#> confirm:<#^(UIAlertAction *action, UITextField *textField)confirm#>]
-    
-    
     [TLAlert alertWithTitle:[LangSwitcher switchLang:@"请输入交易密码" key:nil]
                         msg:@""
                  confirmMsg:[LangSwitcher switchLang:@"确定" key:nil]
@@ -920,18 +908,6 @@ typedef enum : NSUInteger {
 
 - (void)loadPwd
 {
-//    TLDataBase *dataBase = [TLDataBase sharedManager];
-//    if ([dataBase.dataBase open]) {
-//        NSString *sql = [NSString stringWithFormat:@"SELECT PwdKey from THAUser where userId = '%@'",[TLUser user].userId];
-//        FMResultSet *set = [dataBase.dataBase executeQuery:sql];
-//        while ([set next])
-//        {
-//            self.word = [set stringForColumn:@"PwdKey"];
-//        }
-//        [set close];
-//    }
-//    [dataBase.dataBase close];
-    
     self.word = [[NSUserDefaults standardUserDefaults] objectForKey:MNEMONICPASSWORD];
 }
 
@@ -1215,7 +1191,6 @@ typedef enum : NSUInteger {
         }
         
         keychain.network = [BTCNetwork testnet];
-        
     }
     BTCKey *key = keychain.key;
     self.key = key;

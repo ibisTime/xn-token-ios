@@ -10,4 +10,6 @@
 
 @interface MyAssetsTableViewCell : UITableViewCell
 
+@property (nonatomic , strong)UILabel *allAssetsLabel;
+
 @end

@@ -30,7 +30,7 @@
 @property (nonatomic , copy)NSString *desc;
 @property (nonatomic , copy)NSString *download;
 @property (nonatomic , copy)NSString *picScreenshot;
-
+@property (nonatomic , copy)NSArray *labelList;
 @property (nonatomic , strong)NSArray *picListArray;
 @property (nonatomic , strong)NSArray *labelArray;
 //"location" : "0",

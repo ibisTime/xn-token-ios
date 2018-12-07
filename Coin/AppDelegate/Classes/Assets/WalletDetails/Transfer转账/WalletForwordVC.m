@@ -987,24 +987,24 @@ typedef enum : NSUInteger {
 #pragma mark -- btc转账
 - (void) testSpendCoins:(NSString *)to : (NSString*)count :(NSString*)free {
     // For safety I'm not putting a private key in the source code, but copy-paste here from Keychain on each run.为了安全起见，我没有在源代码中放入私钥，而是在每次运行时从Keychain复制粘贴过来。
-    TLDataBase *dataBase = [TLDataBase sharedManager];
-    NSString *word;
-    if ([dataBase.dataBase open]) {
-        NSString *sql = [NSString stringWithFormat:@"SELECT Mnemonics from THAUser where userId = '%@'",[TLUser user].userId];
-        //        [sql appendString:[TLUser user].userId];
-        FMResultSet *set = [dataBase.dataBase executeQuery:sql];
-        while ([set next])
-        {
-            word = [set stringForColumn:@"Mnemonics"];
-            
-        }
-        [set close];
-    }
-    [dataBase.dataBase close];
+//    TLDataBase *dataBase = [TLDataBase sharedManager];
+//    NSString *word;
+//    if ([dataBase.dataBase open]) {
+//        NSString *sql = [NSString stringWithFormat:@"SELECT Mnemonics from THAUser where userId = '%@'",[TLUser user].userId];
+//        //        [sql appendString:[TLUser user].userId];
+//        FMResultSet *set = [dataBase.dataBase executeQuery:sql];
+//        while ([set next])
+//        {
+//            word = [set stringForColumn:@"Mnemonics"];
+//
+//        }
+//        [set close];
+//    }
+//    [dataBase.dataBase close];
     //    [self queryTotalAmount];
     
     
-    NSArray *words = [word componentsSeparatedByString:@" "];
+    NSArray *words = [[[NSUserDefaults standardUserDefaults] objectForKey:MNEMONIC] componentsSeparatedByString:@" "];
     
     BTCMnemonic *mnemonic =  [MnemonicUtil importMnemonic:words];
     BTCKeychain *keychain = [mnemonic keychain];
@@ -1269,24 +1269,24 @@ typedef enum : NSUInteger {
         [TLAlert alertWithInfo:[NSString stringWithFormat:@"BTC%@",[LangSwitcher switchLang:@"余额不足" key:nil]]];
         return;
     }
-    TLDataBase *dataBase = [TLDataBase sharedManager];
-    NSString *word;
-    if ([dataBase.dataBase open]) {
-        NSString *sql = [NSString stringWithFormat:@"SELECT Mnemonics from THAUser where userId = '%@'",[TLUser user].userId];
-        //        [sql appendString:[TLUser user].userId];
-        FMResultSet *set = [dataBase.dataBase executeQuery:sql];
-        while ([set next])
-        {
-            word = [set stringForColumn:@"Mnemonics"];
-            
-        }
-        [set close];
-    }
-    [dataBase.dataBase close];
+//    TLDataBase *dataBase = [TLDataBase sharedManager];
+//    NSString *word;
+//    if ([dataBase.dataBase open]) {
+//        NSString *sql = [NSString stringWithFormat:@"SELECT Mnemonics from THAUser where userId = '%@'",[TLUser user].userId];
+//        //        [sql appendString:[TLUser user].userId];
+//        FMResultSet *set = [dataBase.dataBase executeQuery:sql];
+//        while ([set next])
+//        {
+//            word = [set stringForColumn:@"Mnemonics"];
+//
+//        }
+//        [set close];
+//    }
+//    [dataBase.dataBase close];
     //    [self queryTotalAmount];
     
     
-    NSArray *words = [word componentsSeparatedByString:@" "];
+    NSArray *words = [[[NSUserDefaults standardUserDefaults] objectForKey:MNEMONIC] componentsSeparatedByString:@" "];
     
     BTCMnemonic *mnemonic =  [MnemonicUtil importMnemonic:words];
     BTCKeychain *keychain = [mnemonic keychain];

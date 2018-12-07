@@ -14,6 +14,8 @@
     UILabel *personalPriceLbl;
     UILabel *privateLbl;
     UILabel *privatePriceLbl;
+    CGFloat personalAllPrice;
+    CGFloat privateAllPrice;
 }
 
 -(instancetype)initWithFrame:(CGRect)frame
@@ -213,17 +215,19 @@
         cnyStr = [NSString stringWithFormat:@"$ %.2f", [[dataDic[@"totalAmountUSD"] convertToSimpleRealMoney] doubleValue]];
         
         personalPriceLbl.text = [NSString stringWithFormat:@"$ %.2f", [cnyStr doubleValue]];
-        
+        personalAllPrice = [[dataDic[@"totalAmountUSD"] convertToSimpleRealMoney] doubleValue];
     } else if ([[TLUser user].localMoney isEqualToString:@"KRW"])
     {
         cnyStr = [NSString stringWithFormat:@"₩ %.2f", [[dataDic[@"totalAmountKRW"] convertToSimpleRealMoney] doubleValue]];
+        personalAllPrice = [[dataDic[@"totalAmountKRW"] convertToSimpleRealMoney] doubleValue];
     }
     
     else{
         cnyStr = [NSString stringWithFormat:@"¥ %.2f", [[dataDic[@"totalAmountCNY"] convertToSimpleRealMoney] doubleValue]];
+        personalAllPrice = [[dataDic[@"totalAmountKRW"] convertToSimpleRealMoney] doubleValue];
     }
     [self setNSMutableAttributedStringLbl:personalPriceLbl setText:cnyStr];
-
+    [self notice];
 }
 
 -(void)setPrivateDataDic:(NSDictionary *)privateDataDic
@@ -232,17 +236,30 @@
     if ([[TLUser user].localMoney isEqualToString:@"USD"]) {
         cnyStr = [NSString stringWithFormat:@"$ %.2f", [[privateDataDic[@"totalAmountUSD"] convertToSimpleRealMoney] doubleValue]];
         
-        personalPriceLbl.text = [NSString stringWithFormat:@"$ %.2f", [cnyStr doubleValue]];
-        
+//        personalPriceLbl.text = [NSString stringWithFormat:@"$ %.2f", [cnyStr doubleValue]];
+        privateAllPrice = [[privateDataDic[@"totalAmountUSD"] convertToSimpleRealMoney] doubleValue];
     } else if ([[TLUser user].localMoney isEqualToString:@"KRW"])
     {
         cnyStr = [NSString stringWithFormat:@"₩ %.2f", [[privateDataDic[@"totalAmountKRW"] convertToSimpleRealMoney] doubleValue]];
+        privateAllPrice = [[privateDataDic[@"totalAmountKRW"] convertToSimpleRealMoney] doubleValue];
     }
     
     else{
         cnyStr = [NSString stringWithFormat:@"¥ %.2f", [[privateDataDic[@"totalAmountCNY"] convertToSimpleRealMoney] doubleValue]];
+        privateAllPrice = [[privateDataDic[@"totalAmountCNY"] convertToSimpleRealMoney] doubleValue];
     }
     [self setNSMutableAttributedStringLbl:privatePriceLbl setText:cnyStr];
+    
+    [self notice];
+    
+}
+
+
+-(void)notice
+{
+    NSDictionary *dic = @{@"allprice":@(privateAllPrice + personalAllPrice)};
+    NSNotification *notification =[NSNotification notificationWithName:@"ALLPRICE" object:nil userInfo:dic];
+    [[NSNotificationCenter defaultCenter] postNotification:notification];
 }
 
 

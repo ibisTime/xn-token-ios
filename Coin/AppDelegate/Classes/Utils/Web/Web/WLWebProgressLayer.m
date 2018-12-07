@@ -39,7 +39,7 @@ static NSTimeInterval const kFastTimeInterval = 0.0001;
     
     self.anchorPoint = CGPointMake(0, 0.5);
     self.lineWidth = 2;
-    self.strokeColor = [UIColor orangeColor].CGColor;
+    self.strokeColor = [UIColor redColor].CGColor;
     
     _timer = [NSTimer scheduledTimerWithTimeInterval:kFastTimeInterval target:self selector:@selector(pathChanged:) userInfo:nil repeats:YES];
     [_timer pause];

@@ -732,7 +732,7 @@
 -(void)GuideTheFigure
 {
     if (self.tableView.platforms.count > 0
-//        && [TLUser isBlankString:[[NSUserDefaults standardUserDefaults]objectForKey:@"GUIDETHEDFIGURE"]] == NO
+        && [TLUser isBlankString:[[NSUserDefaults standardUserDefaults]objectForKey:@"GUIDETHEDFIGURE"]] == YES
         ) {
         GuideTheFigureView *figureView = [[GuideTheFigureView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
         self.figureView = figureView;

@@ -88,7 +88,7 @@
     [helper modelClass:[StrategyModel class]];
     
     [self.tableView addRefreshAction:^{
-        
+        [weakSelf details];
         [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
             if (objs.count == 0) {
                 [weakSelf addPlaceholderView];
@@ -137,5 +137,23 @@
     
 }
 
+-(void)details
+{
+    TLNetworking *http = [TLNetworking new];
+    
+    http.code = @"625457";
+    http.parameters[@"id"] = self.GameModel.ID;
+//    http.parameters[@"start"] = [NSString stringWithFormat:@"%ld",start];
+//    http.parameters[@"limit"] = @"10"  ;
+    http.showView = self.view;
+    [http postWithSuccess:^(id responseObject) {
+        
+        self.GameModel = [FindTheGameModel mj_objectWithKeyValues:responseObject[@"data"]];
+        self.tableView.GameModel = self.GameModel;
+        [self.tableView reloadData];
+    } failure:^(NSError *error) {
+        
+    }];
+}
 
 @end

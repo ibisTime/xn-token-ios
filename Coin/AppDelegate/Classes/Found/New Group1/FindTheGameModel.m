@@ -14,11 +14,12 @@
 {
     if (!_picListArray) {
         
-        NSArray *imgs = [self.picList componentsSeparatedByString:@"||"];
+        NSArray *imgs = [self.picScreenshot componentsSeparatedByString:@"||"];
         NSMutableArray *newImgs = [NSMutableArray arrayWithCapacity:imgs.count];
         [imgs enumerateObjectsUsingBlock:^(NSString *  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             
             if ([obj convertImageUrl]) {
+                
                 
                 [newImgs addObject:[obj convertImageUrl]];
             }

@@ -13,4 +13,6 @@
 
 @property (nonatomic, strong) MineGroup *mineGroup;
 
+@property (nonatomic , strong)NSString *priceStr;
+
 @end

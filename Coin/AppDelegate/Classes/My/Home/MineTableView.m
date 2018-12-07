@@ -52,6 +52,9 @@ static NSString *MyAssetsTableView = @"MyAssetsTableViewCell";
     
     if (indexPath.section == 0) {
         MyAssetsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MyAssetsTableView forIndexPath:indexPath];
+        if ([TLUser isBlankString:self.priceStr] == NO) {
+            cell.allAssetsLabel.text = self.priceStr;
+        }
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
@@ -60,7 +63,13 @@ static NSString *MyAssetsTableView = @"MyAssetsTableViewCell";
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
-    
+    if ([TLUser isBlankString:[TLUser user].idNo] == NO) {
+        if (indexPath.row == 1) {
+            cell.iconImageView.hidden = YES;
+            cell.titleLbl.hidden = YES;
+            cell.line.hidden = YES;
+        }
+    }
     if ([TLUser isBlankString:[[NSUserDefaults standardUserDefaults] objectForKey:MNEMONIC]] == YES) {
 
         if (indexPath.row == 3) {
@@ -69,6 +78,7 @@ static NSString *MyAssetsTableView = @"MyAssetsTableViewCell";
             cell.line.hidden = YES;
         }
     }
+    
     
     NSArray *imgArray = @[@"收益",@"身份验证",@"账号安全",@"账号安全",@"my通讯录",@"反馈",@"帮助(4)",@"设置"];
     NSArray *textArray = @[@"我的收益",@"身份验证",@"账号安全",@"钱包工具",@"加入社群",@"问题反馈",@"帮助中心",@"设置",];
@@ -102,18 +112,20 @@ static NSString *MyAssetsTableView = @"MyAssetsTableViewCell";
     if (indexPath.section == 0) {
         return 76;
     }
+    
+    if([TLUser isBlankString:[TLUser user].idNo] == NO)
+    {
+        if (indexPath.row == 1) {
+            return 0;
+        }
+    }
+    
     if ([TLUser isBlankString:[[NSUserDefaults standardUserDefaults] objectForKey:MNEMONIC]] == YES) {
         if (indexPath.row == 3) {
             return 0;
-        }else
-        {
-            return 50;
-            
         }
-    }else
-    {
-        return 50;
     }
+    return 50;
     
 }
 
