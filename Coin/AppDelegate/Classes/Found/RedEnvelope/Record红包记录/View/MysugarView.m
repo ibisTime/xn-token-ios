@@ -129,7 +129,7 @@
     btn.selected = !btn.selected;
 
     if (self.closeBlock) {
-        self.closeBlock(btn.selected);
+        self.closeBlock();
     }
 //    if (btn.isSelected == YES) {
 //        

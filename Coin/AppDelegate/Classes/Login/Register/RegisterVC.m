@@ -197,6 +197,7 @@
     if (w == 2) {
         if (_moneyFid.text.length != 6) {
             [TLAlert alertWithInfo:[LangSwitcher switchLang:@"资金密码为6位数" key:nil]];
+            return;
         }
         if (![_moneyFid.text isPhoneNum]) {
             [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入资金密码" key:nil]];
@@ -693,6 +694,8 @@
         [passWordFid setValue:[UIColor whiteColor]  forKeyPath:@"_placeholderLabel.textColor"];
         passWordFid.clearsOnBeginEditing = NO;
         passWordFid.clearButtonMode = UITextFieldViewModeWhileEditing;
+        passWordFid.delegate = self;
+        passWordFid.tag = 10000 + i;
         [passwordView addSubview:passWordFid];
         if (i == 0) {
             self.moneyFid = passWordFid;
@@ -720,6 +723,26 @@
     
 }
 
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+
+    if (textField.tag == 10000 || textField.tag == 10001) {
+        if ([string length]>0)
+        {
+            unichar single=[string characterAtIndex:0];//当前输入的字符
+            if ((single >='0' && single<='9'))//数据格式正确
+            {
+                return YES;
+            }else{
+                [TLAlert alertWithInfo:[LangSwitcher switchLang:@"密码为6位数数字" key:nil]];
+                return NO;
+            }
+        }else
+        {
+            return YES;
+        }
+    }
+    return YES;
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

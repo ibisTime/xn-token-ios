@@ -116,6 +116,9 @@
     priceLabel.frame = CGRectMake(kScreenWidth - priceLabel.frame.size.width - 15, 17, priceLabel.frame.size.width, 36);
 
     [sysmbolImage sd_setImageWithURL:[NSURL URLWithString:[coin.pic1 convertImageUrl ]] placeholderImage:kImage(@"")];
+//    if (priceLabel.width < ) {
+//        <#statements#>
+//    }
     sysmbolImage.frame = CGRectMake(SCREEN_WIDTH - priceLabel.frame.size.width - 15 - 5 - 36, 17, 36, 36);
 
 

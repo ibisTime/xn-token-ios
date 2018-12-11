@@ -362,8 +362,8 @@
             [TLAlert alertWithInfo:[LangSwitcher switchLang:@"密码不一致" key:nil]];
             return;
         }
-        if (_passFid.text.length < 8) {
-            [TLAlert alertWithInfo:[LangSwitcher switchLang:@"密码位数至少为8数" key:nil]];
+        if (_passFid.text.length < 8 || [[UserModel user]isStringTheCapitalLettersWith:_passFid.text] == NO || [[UserModel user]isStringContainNumberWith:_passFid.text] == NO || _passFid.text.length > 25) {
+            [TLAlert alertWithInfo:[LangSwitcher switchLang:@"密码位数为8~25位数(字母+数字)" key:nil]];
             return;
         }
         

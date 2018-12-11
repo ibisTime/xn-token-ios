@@ -64,10 +64,7 @@
     }else{
         //普通
         headImage.image = kImage(@"普通红包-1");
-        
-        
     }
-    
     CoinModel *coin = [CoinUtil getCoinModel:sendModel.symbol];
     [sysmbolImage sd_setImageWithURL:[NSURL URLWithString:[coin.pic1 convertImageUrl ] ] placeholderImage:kImage(@"头像")];
 
@@ -77,12 +74,22 @@
           priceLabel.text = [NSString stringWithFormat:@"%@ %@",sendModel.totalCount,[LangSwitcher switchLang:@"枚" key:nil]];
     }
     [priceLabel sizeToFit];
-    priceLabel.frame = CGRectMake(kScreenWidth - priceLabel.frame.size.width - 15, 18, priceLabel.frame.size.width, 20);
+    priceLabel.frame = CGRectMake(kScreenWidth - priceLabel.width - 15, 18, priceLabel.frame.size.width, 20);
 
-    sysmbolImage.frame = CGRectMake(SCREEN_WIDTH - priceLabel.frame.size.width - 15 - 10 - 40, 15, 40, 40);
-  
     TheValueLabel.text = [NSString stringWithFormat:@"%@/%@个",sendModel.receivedNum,sendModel.sendNum];
     [TheValueLabel sizeToFit];
-    TheValueLabel.frame = CGRectMake(SCREEN_WIDTH - TheValueLabel.frame.size.width - 15, 38, TheValueLabel.frame.size.width , 14);
+    TheValueLabel.frame = CGRectMake(SCREEN_WIDTH - TheValueLabel.width - 15, 38, TheValueLabel.frame.size.width , 14);
+    
+    if (priceLabel.width > TheValueLabel.width) {
+        sysmbolImage.frame = CGRectMake(SCREEN_WIDTH - priceLabel.width - 15 - 10 - 40, 15, 40, 40);
+    }else
+    {
+        sysmbolImage.frame = CGRectMake(SCREEN_WIDTH - TheValueLabel.width - 15 - 10 - 40, 15, 40, 40);
+    }
+    
+    
+    
+  
+    
 }
 @end

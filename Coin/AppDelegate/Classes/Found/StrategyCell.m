@@ -19,7 +19,7 @@
     if (self) {
         
         nameLabel = [UILabel labelWithFrame:CGRectMake(25, 0, SCREEN_WIDTH - 32.5 - 10 - 25, 40) textAligment:(NSTextAlignmentLeft) backgroundColor:kClearColor font:FONT(14) textColor:kHexColor(@"#000000")];
-        nameLabel.text = @"攻略攻略攻略攻略攻略攻略攻略攻略攻略攻略攻略攻略攻略攻略攻略攻略";
+//        nameLabel.text = @"攻略攻略攻略攻略攻略攻略攻略攻略攻略攻略攻略攻略攻略攻略攻略攻略";
         [self addSubview:nameLabel];
         
         UIImageView *youImage = [[UIImageView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 32.5, 12.5, 7.5, 15)];

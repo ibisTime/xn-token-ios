@@ -41,6 +41,8 @@
     sender.selected = !sender.selected;
     selectBtn.selected = !selectBtn.selected;
     selectBtn = sender;
+    [_delegate ClassificationDelegateSelectBtn:sender.tag - 200];
+    
 }
 
 @end

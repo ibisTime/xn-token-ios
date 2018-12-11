@@ -224,7 +224,7 @@
     
     else{
         cnyStr = [NSString stringWithFormat:@"¥ %.2f", [[dataDic[@"totalAmountCNY"] convertToSimpleRealMoney] doubleValue]];
-        personalAllPrice = [[dataDic[@"totalAmountKRW"] convertToSimpleRealMoney] doubleValue];
+        personalAllPrice = [[dataDic[@"totalAmountCNY"] convertToSimpleRealMoney] doubleValue];
     }
     [self setNSMutableAttributedStringLbl:personalPriceLbl setText:cnyStr];
     [self notice];
@@ -259,6 +259,7 @@
 {
     NSDictionary *dic = @{@"allprice":@(privateAllPrice + personalAllPrice)};
     NSNotification *notification =[NSNotification notificationWithName:@"ALLPRICE" object:nil userInfo:dic];
+    [[NSUserDefaults standardUserDefaults] setObject:dic forKey:@"ALLPRICE"];
     [[NSNotificationCenter defaultCenter] postNotification:notification];
 }
 

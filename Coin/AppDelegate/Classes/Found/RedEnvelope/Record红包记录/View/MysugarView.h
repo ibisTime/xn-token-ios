@@ -15,6 +15,6 @@
 @property (nonatomic ,strong)  UIButton *eyesBtn;
 @property (nonatomic ,strong) UIImageView *icon;
 @property (nonatomic ,copy) void (^clickBlock) ();
-@property (nonatomic ,copy) void (^closeBlock) (BOOL isClose);
+@property (nonatomic ,copy) void (^closeBlock) ();
 
 @end

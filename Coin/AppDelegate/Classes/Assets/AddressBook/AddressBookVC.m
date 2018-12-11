@@ -1,40 +1,42 @@
 //
-//  TLFastvc.m
+//  AddressBookVC.m
 //  Coin
 //
-//  Created by shaojianfei on 2018/7/5.
-//  Copyright © 2018年 chengdai. All rights reserved.
+//  Created by 郑勤宝 on 2018/12/10.
+//  Copyright © 2018 chengdai. All rights reserved.
 //
 
-#import "TLFastvc.h"
+#import "AddressBookVC.h"
 
-@interface TLFastvc ()
-@property (nonatomic ,strong) TLPlaceholderView *placeholderView;
+@interface AddressBookVC ()
 
 @end
 
-@implementation TLFastvc
+@implementation AddressBookVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = kWhiteColor;
-
     
-    UILabel *nameLabel = [UILabel labelWithFrame:CGRectMake(0, 12, SCREEN_WIDTH, 28) textAligment:(NSTextAlignmentCenter) backgroundColor:kClearColor font:HGboldfont(24) textColor:kHexColor(@"#0054ff")];
-    nameLabel.text = [LangSwitcher switchLang:@"闪兑" key:nil];
-    [self.view addSubview:nameLabel];
+    UILabel *titleText = [[UILabel alloc] init];
+    titleText.textAlignment = NSTextAlignmentCenter;
+    titleText.backgroundColor = [UIColor clearColor];
+    titleText.textColor=kTextColor;
+    [titleText setFont:[UIFont systemFontOfSize:17.0]];
+    [titleText setText:[LangSwitcher switchLang:@"通讯录" key:nil]];
+    self.navigationItem.titleView=titleText;
     
-    UILabel *promptLabel = [UILabel labelWithFrame:CGRectMake(0, nameLabel.yy + 22, SCREEN_WIDTH, 28) textAligment:(NSTextAlignmentCenter) backgroundColor:kClearColor font:HGboldfont(24) textColor:kHexColor(@"#0054ff")];
-    promptLabel.text = [LangSwitcher switchLang:@"敬请期待!" key:nil];
-    [self.view addSubview:promptLabel];
-    
-    
-    UIImageView *iconImage = [[UIImageView alloc]initWithFrame:CGRectMake(35, promptLabel.yy + 35, SCREEN_WIDTH - 70, SCREEN_WIDTH - 70)];
-    iconImage.image = kImage(@"闪兑icon");
+    UIImageView *iconImage = [[UIImageView alloc]initWithFrame:CGRectMake(35, 106 - 64, SCREEN_WIDTH - 70, (SCREEN_WIDTH - 70)/640*430)];
+    iconImage.image = kImage(@"通讯录icon");
     [self.view addSubview:iconImage];
     
+    UILabel *nameLabel = [UILabel labelWithFrame:CGRectMake(0, iconImage.yy + 43, SCREEN_WIDTH, 18) textAligment:(NSTextAlignmentCenter) backgroundColor:kClearColor font:FONT(16) textColor:[UIColor blackColor]];
+    nameLabel.text = [LangSwitcher switchLang:@"正在紧张开发中..." key:nil];
+    [self.view addSubview:nameLabel];
     
-    
+    UILabel *promptLabel = [UILabel labelWithFrame:CGRectMake(0, nameLabel.yy + 10, SCREEN_WIDTH, 28) textAligment:(NSTextAlignmentCenter) backgroundColor:kClearColor font:HGboldfont(24) textColor:kHexColor(@"#0054ff")];
+    promptLabel.text = [LangSwitcher switchLang:@"敬请期待!" key:nil];
+    [self.view addSubview:promptLabel];
 }
 
 

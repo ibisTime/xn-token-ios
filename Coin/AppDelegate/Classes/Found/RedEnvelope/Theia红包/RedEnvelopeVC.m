@@ -11,7 +11,7 @@
 #import "SendRedEnvelopeView.h"
 
 #import "RedEnvelopeShoreVC.h"
-#import "MySugarPacketsVC.h"
+#import "GetTheVC.h"
 
 #import "CurrencyModel.h"
 #import "TLPwdRelatedVC.h"
@@ -204,8 +204,8 @@
 - (void)pickerChoose :(NSInteger)integer
 {
     if (integer == 0) {
-            MySugarPacketsVC *vc = [[MySugarPacketsVC alloc]init];
-            [self.navigationController pushViewController:vc animated:YES];
+        GetTheVC *vc = [[GetTheVC alloc]init];
+        [self.navigationController pushViewController:vc animated:YES];
     }
     else
     {

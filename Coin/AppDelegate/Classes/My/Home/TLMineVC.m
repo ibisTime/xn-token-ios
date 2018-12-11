@@ -79,7 +79,11 @@
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     [self.navigationController setNavigationBarHidden:YES animated:animated];
 
-
+    if ([TLUser isBlankString:[[NSUserDefaults standardUserDefaults] objectForKey:@"ALLPRICE"][@"allprice"]] == NO) {
+        self.tableView.priceStr = [NSString stringWithFormat:@"≈%.2f",[[[NSUserDefaults standardUserDefaults] objectForKey:@"ALLPRICE"][@"allprice"] floatValue]];
+        [self.tableView reloadData];
+    }
+    
 }
 
 //如果仅设置当前页导航透明，需加入下面方法

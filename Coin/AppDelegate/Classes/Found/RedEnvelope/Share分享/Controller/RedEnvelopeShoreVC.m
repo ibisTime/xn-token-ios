@@ -12,7 +12,7 @@
 #import "InvitationView.h"
 #import "ZJAnimationPopView.h"
 #import "UIImageView+WebCache.h"
-#import "MySugarPacketsVC.h"
+#import "GetTheVC.h"
 @interface RedEnvelopeShoreVC ()<RedEnvelopeHeadDelegate>
 {
 }
@@ -30,10 +30,7 @@
 -(InvitationView *)invitationView
 {
     if (!_invitationView) {
-        _invitationView = [[InvitationView alloc]initWithFrame: CGRectMake(kScreenWidth/2 - 86.5 - kWidth(20), kHeight(150), 173,173+60)];
-        _invitationView.backgroundColor = kHexColor(@"#8F000000");
-        _invitationView.layer.masksToBounds = YES;
-        _invitationView.layer.cornerRadius = 10;
+        _invitationView = [[InvitationView alloc]initWithFrame: CGRectMake(kScreenWidth/2 - 75 - 20, 60 + 16 + 27.5, 150, 150)];
     }
     return _invitationView;
 }
@@ -73,8 +70,7 @@
 
         }else
         {
-            MySugarPacketsVC *vc = [[MySugarPacketsVC alloc]init];
-            vc.isSend = YES;
+            GetTheVC *vc = [[GetTheVC alloc]init];
             [self.navigationController pushViewController:vc animated:YES];
         }
 
@@ -179,51 +175,7 @@
     
     
 }
-//-(void)shoreButtonClick
-//{
 
-    
-//    _invitationView.frame = CGRectMake(kScreenWidth/2 - 86.5, kHeight(130), 173,173+60);
-
-    
-//    [self showPopAnimationWithAnimationStyle:1];
-
-   
-//}
-
-#pragma mark -- 显示弹框
-//- (void)showPopAnimationWithAnimationStyle:(NSInteger)style
-//{
-//    ZJAnimationPopStyle popStyle = (style == 8) ? ZJAnimationPopStyleCardDropFromLeft : (ZJAnimationPopStyle)style;
-//    ZJAnimationDismissStyle dismissStyle = (ZJAnimationDismissStyle)style;
-//    // 1.初始化
-//    _popView = [[ZJAnimationPopView alloc] initWithCustomView:_invitationView popStyle:popStyle dismissStyle:dismissStyle];
-//
-//    // 2.设置属性，可不设置使用默认值，见注解
-//    // 2.1 显示时点击背景是否移除弹框
-////    _popView.isClickBGDismiss = ![_invitationView isKindOfClass:[InvitationView class]];
-//    //    移除
-////    _popView.isClickBGDismiss = YES;
-//    // 2.2 显示时背景的透明度
-//    _popView.popBGAlpha = 0.0f;
-//    // 2.3 显示时是否监听屏幕旋转
-////    _popView.isObserverOrientationChange = YES;
-//    // 2.4 显示时动画时长
-//    //    popView.popAnimationDuration = 0.8f;
-//    // 2.5 移除时动画时长
-//    //    popView.dismissAnimationDuration = 0.8f;
-//
-//    // 2.6 显示完成回调
-//    _popView.popComplete = ^{
-//        NSLog(@"显示完成");
-//    };
-//    // 2.7 移除完成回调
-//    _popView.dismissComplete = ^{
-//        NSLog(@"移除完成");
-//    };
-//    // 4.显示弹框
-//    [_popView pop];
-//}
 
 
 - (void)shareQr
@@ -257,18 +209,15 @@
 
     self.shoreVie.content = self.content;
     self.shoreVie.detailedLabel.text = self.content;
-    [super viewWillAppear:animated];
-    self.navigationController.navigationBar.translucent = YES;
     [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
     [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
-
+    self.navigationController.navigationBar.translucent = YES;
     UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     self.navigationController.navigationBar.tintColor = [UIColor blackColor];
-    self.navigationController.navigationBar.barTintColor = [UIColor blackColor];
+    self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
     self.navigationItem.backBarButtonItem = item;
-    self.navigationController.navigationBar.shadowImage = [UIImage new];
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
-
+//    [self navigationTransparentClearColor];
 
 }
 

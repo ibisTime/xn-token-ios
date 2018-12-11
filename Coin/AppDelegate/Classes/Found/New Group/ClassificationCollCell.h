@@ -8,6 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol ClassificationDelegate <NSObject>
+
+-(void)ClassificationDelegateSelectBtn:(NSInteger)tag;
+
+
+@end
 @interface ClassificationCollCell : UICollectionViewCell
+
+
+@property (nonatomic, assign) id <ClassificationDelegate> delegate;
 
 @end

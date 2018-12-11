@@ -1,17 +1,9 @@
-//
-//  FindTheGameTableView.m
-//  Coin
-//
-//  Created by 郑勤宝 on 2018/12/4.
-//  Copyright © 2018 chengdai. All rights reserved.
-//
 
 #import "FindTheGameTableView.h"
 #import "FindTheGameHeadCell.h"
 #import "GameIntroducedCell.h"
 #import "StrategyCell.h"
 @interface FindTheGameTableView()<UITableViewDelegate, UITableViewDataSource,GameIntroducedCellDelegate>
-
 {
     GameIntroducedCell *_cell;
     NSInteger select;

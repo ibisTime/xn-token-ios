@@ -37,8 +37,8 @@
                         ];
     NSArray *VCNames = @[@"TLWalletVC", @"HomeVC", @"TLMineVC"];
     
-    NSArray *imageNames = @[@"icon_wallet_48", @"发现", @"我的"];
-    NSArray *selectedImageNames = @[@"资产点击", @"发现点击", @"我的点击"];
+    NSArray *imageNames = @[@"tabbar1", @"tabbar2", @"tabbar3"];
+    NSArray *selectedImageNames = @[@"tabbar11", @"tabbar21", @"tabbar31"];
     
     for (int i = 0; i < imageNames.count; i++) {
         
@@ -47,7 +47,7 @@
             continue;
         }
        
-        [self addChildVCWithTitle:titles[i]
+        [self addChildVCWithTitle:nil
                        controller:VCNames[i]
                       normalImage:imageNames[i]
                     selectedImage:selectedImageNames[i]];
@@ -95,20 +95,28 @@
     //获得原始图片
     UIImage *normalImage = [self getOrgImage:[UIImage imageNamed:normalImageName]];
     UIImage *selectedImage = [self getOrgImage:[UIImage imageNamed:selectedImageName]];
-    
-    UITabBarItem *tabBarItem = [[UITabBarItem alloc] initWithTitle:title
+//    normalImage = [normalImage imageWithRenderingMode:(UIImageRenderingModeAlwaysTemplate)];
+//    selectedImage = [selectedImage imageWithRenderingMode:(UIImageRenderingModeAlwaysTemplate)];
+    UITabBarItem *tabBarItem = [[UITabBarItem alloc] initWithTitle:nil
                                                              image:normalImage
                                                      selectedImage:selectedImage];
-//    tabBarItem.imageInsets = UIEdgeInsetsMake(5, 0, -5, 0);
-//    tabBarItem.titlePositionAdjustment = UIOffsetMake(0, 100);
+//    tabBarItem.ima
+//    tabBarItem.
+    CGFloat offset = 5.0;
+//    for (UITabBarItem *item in tabBarItem.items) {
+        tabBarItem.imageInsets = UIEdgeInsetsMake(offset, 0, -offset, 0);
+//    }
+//    self.tabBar.titlePositionAdjustment = UIOffsetMake(0, 0);
+//    self.tabBar.imageInsets = UIEdgeInsetsMake(0, 0, 0, 0);
+    
     
     //title颜色
-    [tabBarItem setTitleTextAttributes:@{
-                                         NSForegroundColorAttributeName : kAppCustomMainColor
-                                         } forState:UIControlStateSelected];
-    [tabBarItem setTitleTextAttributes:@{
-                                         NSForegroundColorAttributeName : [UIColor textColor]
-                                         } forState:UIControlStateNormal];
+//    [tabBarItem setTitleTextAttributes:@{
+//                                         NSForegroundColorAttributeName : kAppCustomMainColor
+//                                         } forState:UIControlStateSelected];
+//    [tabBarItem setTitleTextAttributes:@{
+//                                         NSForegroundColorAttributeName : [UIColor textColor]
+//                                         } forState:UIControlStateNormal];
     vc.tabBarItem = tabBarItem;
     TLNavigationController *navigationController = [[TLNavigationController alloc] initWithRootViewController:vc];
     

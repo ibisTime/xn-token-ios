@@ -39,9 +39,10 @@
 #import "FindTheGameVC.h"
 #import "FindTheGameModel.h"
 
-@interface HomeVC ()<RefreshDelegate,UIViewControllerPreviewingDelegate,UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
+@interface HomeVC ()<RefreshDelegate,UIViewControllerPreviewingDelegate,UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout,ClassificationDelegate>
 {
     NSInteger start;
+    NSInteger category;
 }
 
 //@property (nonatomic, strong) HomeTbleView *tableView;
@@ -160,6 +161,7 @@
     http.parameters[@"language"] = lang;
     http.parameters[@"start"] = [NSString stringWithFormat:@"%ld",start];
     http.parameters[@"limit"] = @"10"  ;
+    http.parameters[@"category"] = @(category);
     
     [http postWithSuccess:^(id responseObject) {
         
@@ -183,6 +185,7 @@
     [self.view addSubview:self.collectionView];
     self.view.backgroundColor = kWhiteColor;
     [self DownRefresh];
+    category = 0;
 }
 
 -(void)initNavigationNar
@@ -231,7 +234,7 @@
     
     if (indexPath.section == 1) {
         ClassificationCollCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"ClassificationCollCell" forIndexPath:indexPath];
-        
+        cell.delegate = self;
         return cell;
     }
     
@@ -240,6 +243,13 @@
     cell.actionBtn.tag = 400 + indexPath.row;
     cell.GameModel = self.GameModel[indexPath.row];
     return cell;
+}
+
+-(void)ClassificationDelegateSelectBtn:(NSInteger)tag
+{
+    [TLProgressHUD show];
+    category = tag;
+    [self loadNewData];
 }
 
 -(void)iconButtonClick:(UIButton *)sender
@@ -269,8 +279,7 @@
         default:
             break;
     }
-    
-    
+
     if (sender.tag >= 400) {
         FindTheGameVC *vc = [FindTheGameVC new];
         vc.GameModel = self.GameModel[sender.tag - 400];

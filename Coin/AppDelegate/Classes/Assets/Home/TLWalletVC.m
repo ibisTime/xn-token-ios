@@ -30,6 +30,7 @@
 #import "TradePasswordVC.h"
 //引导图
 #import "GuideTheFigureView.h"
+#import "AddressBookVC.h"
 
 @interface TLWalletVC ()<RefreshDelegate,AssetsHeadViewDelegate>
 
@@ -107,7 +108,8 @@
             break;
         case 1:
         {
-            
+            AddressBookVC *descVC = [AddressBookVC new];
+            [self.navigationController pushViewController:descVC animated:YES];
         }
             break;
         case 2:

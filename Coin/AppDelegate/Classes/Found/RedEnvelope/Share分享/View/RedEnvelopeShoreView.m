@@ -27,14 +27,14 @@
 @end
 @implementation RedEnvelopeShoreView
 
--(UIImageView *)headImage
-{
-    if (!_headImage) {
-        _headImage = [[UIImageView alloc]initWithFrame:CGRectMake(kScreenWidth/2 - kHeight(70)/2, kHeight(116), kHeight(27), kHeight(27))];
-        _headImage.image = kImage(@"红包-关闭");
-    }
-    return _headImage;
-}
+//-(UIImageView *)headImage
+//{
+//    if (!_headImage) {
+//        _headImage = [[UIImageView alloc]initWithFrame:CGRectMake(kScreenWidth/2 - kHeight(70)/2, kHeight(116), kHeight(27), kHeight(27))];
+//        _headImage.image = kImage(@"红包-关闭");
+//    }
+//    return _headImage;
+//}
 
 -(instancetype)initWithFrame:(CGRect)frame
 {
@@ -43,27 +43,33 @@
         
        
 
-        UIImageView *backImg = [[UIImageView alloc]initWithFrame:CGRectMake(kWidth(20), kHeight(20), kWidth(335), kHeight(434))];
-        backImg.image = kImage(@"红 包");
+        UIImageView *backImg = [[UIImageView alloc]initWithFrame:CGRectMake(20, 20, SCREEN_WIDTH - 40, (SCREEN_WIDTH - 40)/520*760)];
+        backImg.image = kImage(@"红包背景1");
         self.backImg = backImg;
         [self addSubview:backImg];
+        
+        UILabel *stateLabel = [UILabel labelWithFrame:CGRectMake(0, 60, SCREEN_WIDTH - 40, 16) textAligment:(NSTextAlignmentCenter) backgroundColor:kClearColor font:HGboldfont(16) textColor:kHexColor(@"#f8aa73")];
+        [self.backImg addSubview:stateLabel];
+        self.stateLabel = stateLabel;
+        stateLabel.text = [LangSwitcher switchLang:@"扫码领红包" key:nil];
 
-        UIImageView *headImage = [[UIImageView alloc]initWithFrame:CGRectMake(backImg.xx-50, kHeight(42), kHeight(17), kHeight(17))];
-        headImage.userInteractionEnabled = YES;
-        UITapGestureRecognizer *ta = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(diss)];
-        [headImage addGestureRecognizer:ta];
         
-        headImage.image = kImage(@"红包-关闭");
-        [self addSubview:headImage];
+//        UIImageView *headImage = [[UIImageView alloc]initWithFrame:CGRectMake(backImg.xx-50, kHeight(42), kHeight(17), kHeight(17))];
+//        headImage.userInteractionEnabled = YES;
+//        UITapGestureRecognizer *ta = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(diss)];
+//        [headImage addGestureRecognizer:ta];
+//
+//        headImage.image = kImage(@"红包-关闭");
+//        [self addSubview:headImage];
         
-        UIImageView *backImage = [[UIImageView alloc]initWithFrame:self.frame];
-        backImage.image = kImage(@"logo 白");
-        
-        [backImg addSubview:backImage];
-        [backImage mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerX.equalTo(self.mas_centerX);
-            make.top.equalTo(backImg.mas_top).offset(20);
-        }];
+//        UIImageView *backImage = [[UIImageView alloc]initWithFrame:self.frame];
+//        backImage.image = kImage(@"logo 白");
+//
+//        [backImg addSubview:backImage];
+//        [backImage mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.centerX.equalTo(self.mas_centerX);
+//            make.top.equalTo(backImg.mas_top).offset(20);
+//        }];
         
         UILabel *share = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:16];
         
@@ -71,7 +77,7 @@
         share.text = [NSString stringWithFormat:@"-  %@  -",[LangSwitcher switchLang:@"分享到" key:nil]];
         [share mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.equalTo(self.mas_centerX);
-            make.top.equalTo(@(backImg.yy +10));
+            make.top.equalTo(@(backImg.yy + 10));
         }];
         self.shareWeichat = [UIButton buttonWithImageName:@"微信" selectedImageName:@"微信 亮色"];
         [self.shareWeichat setBackgroundColor:kHexColor(@"#F5F5F5") forState:UIControlStateNormal];
@@ -143,25 +149,12 @@
 
          [self.downBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
         [self.downBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.sharewweibo.mas_bottom).offset(14);
+            make.top.equalTo(self.sharewweibo.mas_bottom).offset(20);
             make.right.equalTo(self.mas_right).offset(kWidth(-30));
             make.width.height.equalTo(@30);
         }];
 
-        UILabel *stateLabel;
-
-        stateLabel = [UILabel new];
-        [self.backImg addSubview:stateLabel];
-
-        [stateLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(@(kHeight(150)));
-            make.centerX.equalTo(self.mas_centerX);
-        }];
-        self.stateLabel = stateLabel;
-        stateLabel.text = [LangSwitcher switchLang:@"扫码领红包" key:nil];
-        stateLabel.textAlignment = NSTextAlignmentCenter;
-        stateLabel.font = Font(24);
-        stateLabel.textColor = [UIColor whiteColor];
+        
 
 
 

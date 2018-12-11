@@ -39,6 +39,9 @@
             UILabel *priceLabel = [UILabel labelWithFrame:CGRectMake(i % 2 * SCREEN_WIDTH/2, 20, SCREEN_WIDTH/2, 16) textAligment:(NSTextAlignmentCenter) backgroundColor:kClearColor font:FONT(16) textColor:[UIColor blackColor]];
             priceLabel.text = @"≈0.00";
             if (i == 0) {
+                if ([TLUser isBlankString:[[NSUserDefaults standardUserDefaults] objectForKey:@"ALLPRICE"][@"allprice"]] == NO) {
+                    priceLabel.text = [NSString stringWithFormat:@"≈%.2f",[[[NSUserDefaults standardUserDefaults] objectForKey:@"ALLPRICE"][@"allprice"] floatValue]];
+                }
                 self.allAssetsLabel = priceLabel;
             }
             [self addSubview:priceLabel];

@@ -112,6 +112,7 @@
 		1FF5DB9321B8EDFA0019EF69 /* WLWebProgressLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FF5DB8C21B8EDF90019EF69 /* WLWebProgressLayer.m */; };
 		1FF5DB9421B8EDFA0019EF69 /* NSTimer+addition.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FF5DB8E21B8EDF90019EF69 /* NSTimer+addition.m */; };
 		1FF5DB9521B8EDFA0019EF69 /* WYWebProgressLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FF5DB9121B8EDF90019EF69 /* WYWebProgressLayer.m */; };
+		1FF5DB9921BE2A890019EF69 /* AddressBookVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FF5DB9821BE2A890019EF69 /* AddressBookVC.m */; };
 		211A34D71FB3F51400FEB71F /* MineHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 211A34D61FB3F51400FEB71F /* MineHeaderView.m */; };
 		211A34DB1FB4083300FEB71F /* MineTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 211A34DA1FB4083300FEB71F /* MineTableView.m */; };
 		211A34DE1FB4245D00FEB71F /* MineCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 211A34DD1FB4245D00FEB71F /* MineCell.m */; };
@@ -343,7 +344,6 @@
 		7A8A5D1B20EA131A002D9A48 /* SendRedEnvelopeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A8A5D1A20EA131A002D9A48 /* SendRedEnvelopeView.m */; };
 		7A8A5D2520EA301E002D9A48 /* RedEnvelopeShoreVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A8A5D2420EA301E002D9A48 /* RedEnvelopeShoreVC.m */; };
 		7A8A5D2820EA3124002D9A48 /* RedEnvelopeShoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A8A5D2720EA3124002D9A48 /* RedEnvelopeShoreView.m */; };
-		7A8A5D2F20EA3C09002D9A48 /* MySugarPacketsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A8A5D2E20EA3C09002D9A48 /* MySugarPacketsVC.m */; };
 		7A8A5D3220EA3E0E002D9A48 /* GetTheVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A8A5D3120EA3E0E002D9A48 /* GetTheVC.m */; };
 		7A8A5D3520EA3E5A002D9A48 /* SendVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A8A5D3420EA3E5A002D9A48 /* SendVC.m */; };
 		7A8A5DC020EA6977002D9A48 /* CustomActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A8A5DBF20EA6977002D9A48 /* CustomActionSheet.m */; };
@@ -794,6 +794,8 @@
 		1FF5DB8F21B8EDF90019EF69 /* WLWebProgressLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WLWebProgressLayer.h; sourceTree = "<group>"; };
 		1FF5DB9021B8EDF90019EF69 /* UIView+Frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Frame.h"; sourceTree = "<group>"; };
 		1FF5DB9121B8EDF90019EF69 /* WYWebProgressLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYWebProgressLayer.m; sourceTree = "<group>"; };
+		1FF5DB9721BE2A890019EF69 /* AddressBookVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddressBookVC.h; sourceTree = "<group>"; };
+		1FF5DB9821BE2A890019EF69 /* AddressBookVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddressBookVC.m; sourceTree = "<group>"; };
 		211A34D51FB3F51400FEB71F /* MineHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MineHeaderView.h; sourceTree = "<group>"; };
 		211A34D61FB3F51400FEB71F /* MineHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MineHeaderView.m; sourceTree = "<group>"; };
 		211A34D91FB4083300FEB71F /* MineTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MineTableView.h; sourceTree = "<group>"; };
@@ -1260,8 +1262,6 @@
 		7A8A5D2420EA301E002D9A48 /* RedEnvelopeShoreVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RedEnvelopeShoreVC.m; sourceTree = "<group>"; };
 		7A8A5D2620EA3124002D9A48 /* RedEnvelopeShoreView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RedEnvelopeShoreView.h; sourceTree = "<group>"; };
 		7A8A5D2720EA3124002D9A48 /* RedEnvelopeShoreView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RedEnvelopeShoreView.m; sourceTree = "<group>"; };
-		7A8A5D2D20EA3C09002D9A48 /* MySugarPacketsVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MySugarPacketsVC.h; sourceTree = "<group>"; };
-		7A8A5D2E20EA3C09002D9A48 /* MySugarPacketsVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MySugarPacketsVC.m; sourceTree = "<group>"; };
 		7A8A5D3020EA3E0E002D9A48 /* GetTheVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GetTheVC.h; sourceTree = "<group>"; };
 		7A8A5D3120EA3E0E002D9A48 /* GetTheVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GetTheVC.m; sourceTree = "<group>"; };
 		7A8A5D3320EA3E5A002D9A48 /* SendVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SendVC.h; sourceTree = "<group>"; };
@@ -2545,6 +2545,15 @@
 			path = Web;
 			sourceTree = "<group>";
 		};
+		1FF5DB9621BE2A540019EF69 /* AddressBook */ = {
+			isa = PBXGroup;
+			children = (
+				1FF5DB9721BE2A890019EF69 /* AddressBookVC.h */,
+				1FF5DB9821BE2A890019EF69 /* AddressBookVC.m */,
+			);
+			path = AddressBook;
+			sourceTree = "<group>";
+		};
 		211A34D81FB3F55600FEB71F /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -3232,6 +3241,7 @@
 				1F35826821870FCA00F1665B /* Model */,
 				211A35051FB45CB500FEB71F /* View */,
 				1F35826721870EE900F1665B /* Announcement */,
+				1FF5DB9621BE2A540019EF69 /* AddressBook */,
 				2E394FA51FB055DE00BA0829 /* AddAdress */,
 				7A40B111217EEC95004B9830 /* FlashAgainst */,
 				7AEF23612154E5E000BF1DB5 /* Receivables */,
@@ -4184,8 +4194,6 @@
 		7AEF23642154EFBF00BF1DB5 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				7A8A5D2D20EA3C09002D9A48 /* MySugarPacketsVC.h */,
-				7A8A5D2E20EA3C09002D9A48 /* MySugarPacketsVC.m */,
 				7A8A5D3020EA3E0E002D9A48 /* GetTheVC.h */,
 				7A8A5D3120EA3E0E002D9A48 /* GetTheVC.m */,
 			);
@@ -4925,6 +4933,7 @@
 				B88B092120C8E29D005C2D2F /* JoinMineVc.m in Sources */,
 				1FC1C35321AE33FF00FA94E3 /* MoneyPasswordVC.m in Sources */,
 				1F709D5E218161D8002D1CC4 /* keyTransferTableView.m in Sources */,
+				1FF5DB9921BE2A890019EF69 /* AddressBookVC.m in Sources */,
 				B8086516211EA17D00755158 /* BTCAddress.m in Sources */,
 				7A2CC6D8215DC89200B27E2D /* PGPickerView.m in Sources */,
 				B8D5F15620CE0F530005CF96 /* AccountMoneyCellTableViewCell.m in Sources */,
@@ -4956,7 +4965,6 @@
 				B8DB9EBD214F6BE60091276E /* RedModel.m in Sources */,
 				216F5B3C206CD9DA00F2C832 /* BannerModel.m in Sources */,
 				7AABEAF82148ED4D00283BC7 /* UIButton+SGImagePosition.m in Sources */,
-				7A8A5D2F20EA3C09002D9A48 /* MySugarPacketsVC.m in Sources */,
 				B87BF1D3211426C300DD5C05 /* Migration.m in Sources */,
 				1F0EDEF321B662160044C4A2 /* NSAttributedString+YYText.m in Sources */,
 				2ED651CC200F32BC0065A1B0 /* TLCoinWithdrawModel.m in Sources */,

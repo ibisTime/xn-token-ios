@@ -76,16 +76,16 @@
     pickCtrl.allowsEditing = self.allowsEditing;
     
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
-    UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
+    UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:[LangSwitcher switchLang:@"取消" key:nil] style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
         [action setValue:RGB(138, 138, 138) forKey:@"titleTextColor"];
     }];
-    UIAlertAction* fromPhotoAction = [UIAlertAction actionWithTitle:@"拍照" style:UIAlertActionStyleDefault                                                                 handler:^(UIAlertAction * action) {
+    UIAlertAction* fromPhotoAction = [UIAlertAction actionWithTitle:[LangSwitcher switchLang:@"拍照" key:nil] style:UIAlertActionStyleDefault                                                                 handler:^(UIAlertAction * action) {
         
         pickCtrl.sourceType = UIImagePickerControllerSourceTypeCamera;
         [self.vc presentViewController:pickCtrl animated:YES completion:nil];
         
     }];
-    UIAlertAction* fromPhotoAction1 = [UIAlertAction actionWithTitle:@"选择照片" style:UIAlertActionStyleDefault                                                                 handler:^(UIAlertAction * action) {
+    UIAlertAction* fromPhotoAction1 = [UIAlertAction actionWithTitle:[LangSwitcher switchLang:@"选择照片" key:nil] style:UIAlertActionStyleDefault                                                                 handler:^(UIAlertAction * action) {
         
         pickCtrl.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
         [self.vc presentViewController:pickCtrl animated:YES completion:nil];
