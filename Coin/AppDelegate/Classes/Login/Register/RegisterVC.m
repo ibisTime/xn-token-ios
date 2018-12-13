@@ -248,11 +248,11 @@
             [http postWithSuccess:^(id responseObject) {
                 
                 
-                dispatch_time_t delayTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC));
-                dispatch_after(delayTime, dispatch_get_main_queue(), ^{
-                    CompleteTheRegistrationVC *vc = [CompleteTheRegistrationVC new];
-                    [self.navigationController pushViewController:vc animated:YES];
-                });
+                CompleteTheRegistrationVC *vc = [CompleteTheRegistrationVC new];
+                vc.userInfo = responseObject[@"data"];
+                vc.token = token;
+                vc.userid = userId;
+                [self.navigationController pushViewController:vc animated:YES];
                 
             } failure:^(NSError *error) {
                 

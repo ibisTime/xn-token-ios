@@ -13,5 +13,6 @@
 @property (nonatomic, copy) NSString *pic;
 @property (nonatomic, copy) NSString *url;
 @property (nonatomic,copy) NSString *name;
+@property (nonatomic, copy) NSString *action;
 
 @end

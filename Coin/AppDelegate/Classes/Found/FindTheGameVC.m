@@ -68,7 +68,10 @@
 {
     self.tableView = [[FindTheGameTableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight-kNavigationBarHeight ) style:UITableViewStyleGrouped];
     self.tableView.refreshDelegate = self;
-    self.tableView.GameModel = self.GameModel;
+    if ([TLUser isBlankString:self.url] == YES) {
+        self.tableView.GameModel = self.GameModel;
+    }
+    
     [self.view addSubview:self.tableView];
 }
 
@@ -101,7 +104,13 @@
     helper.tableView = self.tableView;
     
     helper.code = @"625466";
-    helper.parameters[@"dappId"] = _GameModel.ID;
+    if ([TLUser isBlankString:self.url] == NO) {
+        helper.parameters[@"dappId"] = self.url;
+    }else
+    {
+        helper.parameters[@"dappId"] = _GameModel.ID;
+    }
+    
 //    helper.parameters[@"address"] = self.currency.address;
     [helper modelClass:[StrategyModel class]];
     

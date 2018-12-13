@@ -60,7 +60,7 @@
             
             
             NSDictionary *dic = [contentArray objectAtIndex:i];
-            NSString *name = dic[@"name"];
+            NSString *name = [LangSwitcher switchLang:dic[@"name"] key:nil];
             NSString *icon = dic[@"icon"];
             YSActionSheetButton *btn = [YSActionSheetButton buttonWithType:UIButtonTypeCustom];
             
@@ -69,8 +69,8 @@
             [btn setImage:[UIImage imageNamed:icon] forState:UIControlStateNormal];
             
             
-            CGFloat marginX = (SCREENWIDTH-20 - 4 * btnW) / (4 + 1);
-            int col = i % 4;
+            CGFloat marginX = (SCREENWIDTH-20 - 3 * btnW) / (3 + 1);
+            int col = i % 3;
             
             CGFloat btnX = marginX + (marginX + btnW) * col;
             

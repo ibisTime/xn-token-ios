@@ -147,14 +147,18 @@
     http.showView = self.view;
     if ([self.titleNameStr isEqualToString:@"修改资金密码"]) {
         http.code = @"805077";
+        http.parameters[@"newTradePwd"] = self.passFid.text;
+        
     }else
     {
         http.code = @"805076";
+        http.parameters[@"newLoginPwd"] = self.passFid.text;
     }
     
     //        http.parameters[@"mobile"] = self.phoneTf.text;
     http.parameters[@"smsCaptcha"] = self.code;
-    http.parameters[@"newLoginPwd"] = self.passFid.text;
+    
+    
     http.parameters[@"kind"] = APP_KIND;
     
     

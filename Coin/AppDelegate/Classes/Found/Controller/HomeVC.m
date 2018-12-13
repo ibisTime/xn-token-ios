@@ -461,15 +461,32 @@
         }];
         return;
     }
-    NSString *url = [[self.bannerRoom objectAtIndex:index] url];
-    if (url && url.length > 0) {
-        GeneralWebView *vc = [GeneralWebView new];
-        vc.URL = url;
+    
+    if ([self.bannerRoom[index].action isEqualToString:@"0"]) {
+        return;
+    }else if ([self.bannerRoom[index].action isEqualToString:@"1"]) {
+        NSString *url = [[self.bannerRoom objectAtIndex:index] url];
+        if (url && url.length > 0) {
+            GeneralWebView *vc = [GeneralWebView new];
+            vc.URL = url;
+            [self showViewController:vc sender:self];
+        }
+    }if ([self.bannerRoom[index].action isEqualToString:@"2"]) {
+        FindTheGameVC *vc = [FindTheGameVC new];
+        vc.url = [[self.bannerRoom objectAtIndex:index] url];
         [self showViewController:vc sender:self];
-//        WebVC *webVC = [[WebVC alloc] init];
-//        webVC.url = url;
-//        [self.navigationController pushViewController:webVC animated:YES];
     }
+    
+    
+//    if ([url hasPrefix:@"http"]) {
+//
+//    }
+//    if (url && url.length > 0) {
+//        GeneralWebView *vc = [GeneralWebView new];
+//        vc.URL = url;
+//        [self showViewController:vc sender:self];
+//
+//    }
 }
 
 #pragma mark - Data

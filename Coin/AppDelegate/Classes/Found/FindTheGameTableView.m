@@ -58,7 +58,9 @@
     if (indexPath.section==0) {
         FindTheGameHeadCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FindTheGameHeadCell" forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.GameModel = self.GameModel;
+        if ([TLUser isBlankString:self.GameModel.ID] == NO) {
+            cell.GameModel = self.GameModel;
+        }
         [cell.actionBtn addTarget:self action:@selector(actionBtnClick:) forControlEvents:(UIControlEventTouchUpInside)];
         
         return cell;
@@ -68,7 +70,10 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         _cell = cell;
         _cell.delegate = self;
-        cell.GameModel = self.GameModel;
+        if ([TLUser isBlankString:self.GameModel.ID] == NO) {
+            cell.GameModel = self.GameModel;
+        }
+        
         return cell;
     }else
     {

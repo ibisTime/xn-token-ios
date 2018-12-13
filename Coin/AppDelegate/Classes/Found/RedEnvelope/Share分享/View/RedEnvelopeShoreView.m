@@ -41,12 +41,13 @@
     self = [super initWithFrame:frame];
     if (self) {
         
-       
-
+        UIScrollView *scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+        
+        [self addSubview:scrollView];
         UIImageView *backImg = [[UIImageView alloc]initWithFrame:CGRectMake(20, 20, SCREEN_WIDTH - 40, (SCREEN_WIDTH - 40)/520*760)];
         backImg.image = kImage(@"红包背景1");
         self.backImg = backImg;
-        [self addSubview:backImg];
+        [scrollView addSubview:backImg];
         
         UILabel *stateLabel = [UILabel labelWithFrame:CGRectMake(0, 60, SCREEN_WIDTH - 40, 16) textAligment:(NSTextAlignmentCenter) backgroundColor:kClearColor font:HGboldfont(16) textColor:kHexColor(@"#f8aa73")];
         [self.backImg addSubview:stateLabel];
@@ -73,7 +74,7 @@
         
         UILabel *share = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:16];
         
-        [self addSubview:share];
+        [scrollView addSubview:share];
         share.text = [NSString stringWithFormat:@"-  %@  -",[LangSwitcher switchLang:@"分享到" key:nil]];
         [share mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.equalTo(self.mas_centerX);
@@ -82,7 +83,7 @@
         self.shareWeichat = [UIButton buttonWithImageName:@"微信" selectedImageName:@"微信 亮色"];
         [self.shareWeichat setBackgroundColor:kHexColor(@"#F5F5F5") forState:UIControlStateNormal];
         self.shareWeichat.tag = 10000;
-        [self addSubview:self.shareWeichat];
+        [scrollView addSubview:self.shareWeichat];
         [self.shareWeichat addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
         self.shareWeichat.layer.cornerRadius = 24;
         self.shareWeichat.clipsToBounds = YES;
@@ -94,7 +95,7 @@
         
         UILabel *wei = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextBlack font:13];
         wei.text = [LangSwitcher switchLang:@"微信" key:nil];
-        [self addSubview:wei];
+        [scrollView addSubview:wei];
         
         [wei mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.shareWeichat.mas_bottom).offset(5);
@@ -102,7 +103,7 @@
         }];
         self.shareWcFriend = [UIButton buttonWithImageName:@"朋友圈" selectedImageName:@"朋友圈 亮色"];
         [self.shareWcFriend setBackgroundColor:kHexColor(@"#F5F5F5") forState:UIControlStateNormal];
-        [self addSubview:self.shareWcFriend];
+        [scrollView addSubview:self.shareWcFriend];
         self.shareWcFriend.tag = 10001;
 
          [self.shareWcFriend addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
@@ -115,7 +116,7 @@
         }];
         UILabel *weiF = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextBlack font:13];
         weiF.text = [LangSwitcher switchLang:@"朋友圈" key:nil];
-        [self addSubview:weiF];
+        [scrollView addSubview:weiF];
         
         [weiF mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.shareWcFriend.mas_bottom).offset(5);
@@ -123,7 +124,7 @@
         }];
         self.sharewweibo = [UIButton buttonWithImageName:@"微博" selectedImageName:@"微博 亮色"];
         [self.sharewweibo setBackgroundColor:kHexColor(@"#F5F5F5") forState:UIControlStateNormal];
-        [self addSubview:self.sharewweibo];
+        [scrollView addSubview:self.sharewweibo];
         self.sharewweibo.tag = 10002;
 
           [self.sharewweibo addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
@@ -149,15 +150,15 @@
 
          [self.downBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
         [self.downBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.sharewweibo.mas_bottom).offset(20);
+            make.top.equalTo(self.sharewweibo.mas_bottom).offset(30);
             make.right.equalTo(self.mas_right).offset(kWidth(-30));
             make.width.height.equalTo(@30);
         }];
 
         
 
-
-
+        scrollView.contentSize = CGSizeMake(0, (SCREEN_WIDTH - 40)/520*760 + 250);
+//        scrollView.backgroundColor = [UIColor redColor];
     }
     return self;
 }

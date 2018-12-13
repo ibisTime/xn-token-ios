@@ -63,7 +63,7 @@
     [self registrationWayUI];
 //    [self moneyPasswxordUI];
     
-    height = 160 - 64 + kNavigationBarHeight + 30;
+//    height = 160 - 64 + kNavigationBarHeight + 30;
 }
 
 -(void)registrationWayUI
@@ -86,7 +86,7 @@
         isModify = 0;
     }else if([TLUser isBlankString:[TLUser user].mobile] == NO && [TLUser isBlankString:[TLUser user].email] == YES )
     {
-        height = 100 - 64 ;
+        height = 100 - 64;
         isModify = 0;
     }else if ([TLUser isBlankString:[TLUser user].mobile] == YES && [TLUser isBlankString:[TLUser user].email] == NO)
     {
@@ -121,11 +121,9 @@
         {
             [phoneAndEmailRegister addTarget:self action:@selector(phoneAndEmailRegisterClick:) forControlEvents:(UIControlEventTouchUpInside)];
         }
-        
+        phoneAndEmailRegister.tag = 100 + i;
         [self.view addSubview:phoneAndEmailRegister];
     }
-    
-    
     
     UIButton *phoneAreaCodeBtn = [UIButton buttonWithTitle:[NSString stringWithFormat:@"+%@",[model.interCode substringFromIndex:2]] titleColor:kWhiteColor backgroundColor:kClearColor titleFont:14];
     phoneAreaCodeBtn.frame = CGRectMake(46,  + 50, 0, 15);
@@ -255,8 +253,10 @@
                 http.code = CAPTCHA_CODE;
                 http.parameters[@"client"] = @"ios";
                 http.parameters[@"sessionId"] = sessionId;
-                if ([self.titleNameStr isEqualToString:@"修改资金密码"]) {
+                if ([self.titleNameStr isEqualToString:@"修改资金密码"])
+                {
                     http.parameters[@"bizType"] = @"805077";
+                    
                 }else
                 {
                     http.parameters[@"bizType"] = @"805076";
@@ -335,7 +335,7 @@
 {
     isModify = sender.tag - 100;
     [UIView animateWithDuration:0.3 animations:^{
-        registerLineView.frame = CGRectMake(35 + (sender.tag - 100)*(SCREEN_WIDTH - 70)/2, height, (SCREEN_WIDTH - 70)/2, 1);
+        registerLineView.frame = CGRectMake(35 + (sender.tag - 100)*(SCREEN_WIDTH - 70)/2, 160 - 64  + 30, (SCREEN_WIDTH - 70)/2, 1);
     }];
     sender.selected = !sender.selected;
     isSelectBtn.selected = !isSelectBtn.selected;

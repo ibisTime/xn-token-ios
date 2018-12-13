@@ -344,22 +344,7 @@
                 TheInitialVC *loginVC= [TheInitialVC new];
                 [self.navigationController pushViewController:loginVC animated:YES];
             }
-//            TheInitialVC *initialVC = [[TheInitialVC alloc] init];
-//            UINavigationController *na = [[UINavigationController alloc] initWithRootViewController:initialVC];
-//
-//            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isLanch"];
-//            [[NSUserDefaults standardUserDefaults] synchronize];
-//            self.window.rootViewController = na;
-            
-            
-          
-//            tabbarVC.selectedIndex = 0;
-//            [self.navigationController popViewControllerAnimated:NO];
-//            [self popoverPresentationController];
-            
-            
-            
-//        });
+
     }];
    
 }

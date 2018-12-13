@@ -30,7 +30,7 @@
 -(InvitationView *)invitationView
 {
     if (!_invitationView) {
-        _invitationView = [[InvitationView alloc]initWithFrame: CGRectMake(kScreenWidth/2 - 75 - 20, 60 + 16 + 27.5, 150, 150)];
+        _invitationView = [[InvitationView alloc]initWithFrame: CGRectMake(kScreenWidth/2 - (SCREEN_WIDTH - 40)/520*760/2/2/3*2 - 20, 60 + 16 + 27.5, (SCREEN_WIDTH - 40)/520*760/2/3*2 , (SCREEN_WIDTH - 40)/520*760/2/3*2 )];
     }
     return _invitationView;
 }

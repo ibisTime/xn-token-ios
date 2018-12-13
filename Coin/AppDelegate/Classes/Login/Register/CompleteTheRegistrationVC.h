@@ -10,4 +10,9 @@
 
 @interface CompleteTheRegistrationVC : TLBaseVC
 
+@property (nonatomic , strong)NSDictionary *userInfo;
+@property (nonatomic , copy)NSString *userid;
+
+@property (nonatomic , copy)NSString *token;
+
 @end

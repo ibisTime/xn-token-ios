@@ -11,4 +11,6 @@
 @interface FindTheGameVC : TLBaseVC
 
 @property (nonatomic , strong)FindTheGameModel *GameModel;
+
+@property (nonatomic , copy)NSString *url;
 @end

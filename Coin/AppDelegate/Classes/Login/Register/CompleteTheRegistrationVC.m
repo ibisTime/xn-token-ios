@@ -7,7 +7,7 @@
 //
 
 #import "CompleteTheRegistrationVC.h"
-
+#import "TLTabBarController.h"
 @interface CompleteTheRegistrationVC ()
 
 @end
@@ -57,12 +57,24 @@
 
 -(void)confirm
 {
-    NSInteger index = (NSInteger)[[self.navigationController viewControllers] indexOfObject:self];
-    if (index > 2) {
-        [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:(index-2)] animated:YES];
-    }else{
-        [self.navigationController popToRootViewControllerAnimated:YES];
-    }
+//    NSInteger index = (NSInteger)[[self.navigationController viewControllers] indexOfObject:self];
+//    if (index > 2) {
+//        [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:(index-2)] animated:YES];
+//    }else{
+//        [self.navigationController popToRootViewControllerAnimated:YES];
+//    }
+    
+    NSDictionary *userInfo = _userInfo;
+    [TLUser user].userId = _userid;
+    [TLUser user].token = _token;
+    
+    //保存用户信息
+    [[TLUser user] saveUserInfo:userInfo];
+    //初始化用户信息
+    [[TLUser user] setUserInfoWithDict:userInfo];
+    
+    TLTabBarController*tab   = [[TLTabBarController alloc] init];
+    [UIApplication sharedApplication].keyWindow.rootViewController = tab;
 
 }
 
