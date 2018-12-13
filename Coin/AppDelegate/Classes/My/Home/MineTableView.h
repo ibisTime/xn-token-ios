@@ -15,4 +15,6 @@
 
 @property (nonatomic , strong)NSString *priceStr;
 
+@property (nonatomic , strong)NSString *earningsStr;
+
 @end

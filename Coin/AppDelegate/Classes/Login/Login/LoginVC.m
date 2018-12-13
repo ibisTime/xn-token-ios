@@ -17,6 +17,8 @@
 {
     UIButton *isSelectBtn;
     UIView *registerLineView;
+    NSString *phone;
+    NSString *email;
 }
 @property (nonatomic , strong)UIButton *phoneAreaCodeBtn;
 @property (nonatomic , strong)UITextField *phoneTextFid;
@@ -37,8 +39,6 @@
     
     NSData *data   =  [[NSUserDefaults standardUserDefaults] objectForKey:@"chooseModel"];
     CountryModel *model = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-    
-    
     
     UIImageView *backImage = [[UIImageView alloc]initWithFrame:CGRectMake(0, -kNavigationBarHeight, SCREEN_WIDTH, SCREEN_HEIGHT)];
     backImage.image = kImage(@"起始业背景");
@@ -215,7 +215,10 @@
         _phoneTextFid.frame = CGRectMake(_phoneAreaCodeBtn.xx + 15, registerLineView.yy + 50, SCREEN_WIDTH - _phoneAreaCodeBtn.xx - 60, 15);
         _phoneTextFid.placeholder = [LangSwitcher switchLang:@"请输入您的手机号码" key:nil];
         
-    }else
+        email = _phoneTextFid.text;
+        _phoneTextFid.text = phone;
+    }
+    else
     {
         
         [_phoneAreaCodeBtn setTitle:[LangSwitcher switchLang:@"邮箱" key:nil] forState:(UIControlStateNormal)];
@@ -228,6 +231,8 @@
         
         _phoneTextFid.frame = CGRectMake(_phoneAreaCodeBtn.xx + 10, registerLineView.yy + 50, SCREEN_WIDTH - _phoneAreaCodeBtn.xx - 60, 15);
         _phoneTextFid.placeholder = [LangSwitcher switchLang:@"请输入您的邮箱账号" key:nil];
+        phone = _phoneTextFid.text;
+        _phoneTextFid.text = email;
     }
 }
 
@@ -243,11 +248,20 @@
                     [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入正确的手机号" key:nil]];
                 }else
                 {
+                    
                     [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入正确的邮箱账号" key:nil]];
                 }
                 
                 return;
             }
+            
+            if (isSelectBtn.tag != 100) {
+                if ([self isValidateEmail:_phoneTextFid.text] == NO) {
+                    [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入正确的邮箱账号" key:nil]];
+                    return;
+                }
+            }
+            
             if ([_codeTextFid.text isEqualToString:@""]) {
                 [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入密码" key:nil]];
                 return;
@@ -299,6 +313,14 @@
             break;
     }
 }
+
+//邮箱地址的正则表达式
+- (BOOL)isValidateEmail:(NSString *)email{
+    NSString *emailRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
+    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
+    return [emailTest evaluateWithObject:email];
+}
+
 
 - (void)requesUserInfoWithResponseObject:(id)responseObject {
     

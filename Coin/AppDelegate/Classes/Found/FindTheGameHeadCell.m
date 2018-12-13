@@ -87,7 +87,7 @@
 -(void)setGameModel:(FindTheGameModel *)GameModel
 {
     nameLabel.text = GameModel.name;
-    [headImage sd_setImageWithURL:[NSURL URLWithString:[GameModel.picIcon convertImageUrl]]];
+    [headImage sd_setImageWithURL:[NSURL URLWithString:[GameModel.picList convertImageUrl]]];
     provenance.text = GameModel.company;
     
     

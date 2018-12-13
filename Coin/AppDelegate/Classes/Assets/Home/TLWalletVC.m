@@ -539,9 +539,11 @@
             [[NSUserDefaults standardUserDefaults]setObject:pwd forKey:MNEMONICPASSWORD];
         }
     }
+    NSLog(@"%@",[[NSUserDefaults standardUserDefaults]objectForKey:MNEMONIC]);
     if ([TLUser isBlankString:[[NSUserDefaults standardUserDefaults]objectForKey:MNEMONIC]] == YES) {
         return;
     }
+    
     NSMutableArray *arr = [[CoinModel coin] getOpenCoinList];
     NSMutableArray *muArray = [NSMutableArray array];
     NSString *isAccording;

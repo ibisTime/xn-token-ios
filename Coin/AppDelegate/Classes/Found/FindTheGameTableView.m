@@ -109,10 +109,12 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    if ([self.refreshDelegate respondsToSelector:@selector(refreshTableView:didSelectRowAtIndexPath:)]) {
-        [self.refreshDelegate refreshTableView:self didSelectRowAtIndexPath:indexPath];
+    if (select == 1) {
+        if ([self.refreshDelegate respondsToSelector:@selector(refreshTableView:didSelectRowAtIndexPath:)]) {
+            [self.refreshDelegate refreshTableView:self didSelectRowAtIndexPath:indexPath];
+        }
     }
+    
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {

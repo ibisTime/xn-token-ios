@@ -65,6 +65,7 @@
 
 -(void)setGameModel:(FindTheGameModel *)GameModel
 {
+    nameLbl.frame =  CGRectMake(gameImg.xx + 10 , 11, (SCREEN_WIDTH - 30)/2 - gameImg.width - 20, 0);
     nameLbl.text = GameModel.name;
     [nameLbl sizeToFit];
     [gameImg sd_setImageWithURL:[NSURL URLWithString:[GameModel.picIcon convertImageUrl]]];

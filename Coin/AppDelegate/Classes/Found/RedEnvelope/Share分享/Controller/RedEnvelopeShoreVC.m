@@ -41,7 +41,10 @@
     self.view.backgroundColor = kWhiteColor;
     //kHexColor(@"#777777")
     [self getShareUrl];
-
+    UIView *backView = [[UIView alloc]initWithFrame:CGRectMake(0, -kNavigationBarHeight, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    backView.backgroundColor = kWhiteColor;
+    [self.view addSubview:backView];
+    
     UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(kScreenWidth/2-75, kStatusBarHeight+5, 150, 44)];
     label.text = [LangSwitcher switchLang:@"Theia红包" key:nil];
     label.textColor = kTextBlack;
@@ -61,6 +64,7 @@
         if ([_state isEqualToString:@"100"]) {
             NSInteger index = (NSInteger)[[self.navigationController viewControllers] indexOfObject:self];
             if (index > 2) {
+                
 //                返回到红包记录页面
                 [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:(index-2)] animated:YES];
             }else{
@@ -88,6 +92,8 @@
    
     
 }
+
+
 - (void)shareWithTag: (NSInteger)inter
 {
 //    (kWidth(20), kHeight(116-30), kWidth(335), kHeight(434))

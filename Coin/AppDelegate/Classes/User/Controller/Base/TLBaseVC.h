@@ -25,6 +25,9 @@
 -(void)navigationTransparentClearColor;
 //导航栏设为默认
 -(void)navigationSetDefault;
+//导航栏设为白色
+-(void)navigationwhiteColor;
+
 
 - (void)removePlaceholderView; //移除
 - (void)addPlaceholderView; // 添加

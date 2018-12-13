@@ -12,4 +12,6 @@
 
 @property (nonatomic , strong)UILabel *allAssetsLabel;
 
+
+@property (nonatomic , strong)UILabel *earningsLabel;
 @end

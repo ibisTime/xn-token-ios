@@ -10,4 +10,6 @@
 
 @interface TLWBManger : NSObject
 + (void)sinaShareWithImage: (UIImage *)image;
+
++ (void)sinaShareWithUrl: (NSString *)url;
 @end

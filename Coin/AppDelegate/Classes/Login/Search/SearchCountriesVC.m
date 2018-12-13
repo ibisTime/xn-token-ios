@@ -73,6 +73,11 @@ UISearchBarDelegate,UISearchDisplayDelegate>
     [titleText setText:[LangSwitcher switchLang:@"选择国家和地区" key:nil]];
     self.navigationItem.titleView=titleText;
     
+    UIView *backView = [[UIView alloc]initWithFrame:CGRectMake(0, -kNavigationBarHeight, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    backView.backgroundColor = kWhiteColor;
+    [self.view addSubview:backView];
+    
+    
     [self loadData];
 }
 
@@ -242,14 +247,15 @@ UISearchBarDelegate,UISearchDisplayDelegate>
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     
     if (tableView==_searchDisplayController.searchResultsTableView){
-        [cell.nameLabel setText:[NSString stringWithFormat:@"%@ (+%@)",[LangSwitcher switchLang:[_searchResultArr[indexPath.row] valueForKey:@"chineseName"] key:nil],[[_searchResultArr[indexPath.row] valueForKey:@"interCode"] substringFromIndex:2]]];
+        [cell.nameLabel setText:[NSString stringWithFormat:@"%@ (+%@)",[_searchResultArr[indexPath.row] valueForKey:@"chineseName"],[[_searchResultArr[indexPath.row] valueForKey:@"interCode"] substringFromIndex:2]]];
 
     }else{
         ContactModel *model=_rowArr[indexPath.section][indexPath.row];
 //        [cell.headImageView setImage:[UIImage imageNamed:model.chineseName]];
-        [cell.nameLabel setText:[NSString stringWithFormat:@"%@ (+%@)",[LangSwitcher switchLang:model.chineseName key:nil],[model.interCode substringFromIndex:2]]];
+        [cell.nameLabel setText:[NSString stringWithFormat:@"%@ (+%@)",model.chineseName,[model.interCode substringFromIndex:2]]];
     }
     return cell;
+    
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

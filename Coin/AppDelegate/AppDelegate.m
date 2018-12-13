@@ -274,7 +274,7 @@
     //退出登录
 //    [[IMAPlatform sharedInstance] logout:^{
 //
-//czy
+//
 //    } fail:^(int code, NSString *msg) {
 //
 //

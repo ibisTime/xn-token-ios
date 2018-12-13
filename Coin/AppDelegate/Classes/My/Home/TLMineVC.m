@@ -43,7 +43,7 @@
 #import "MyIncomeVC.h"
 #import "ZQFaceAuthEngine.h"
 #import "ZQOCRScanEngine.h"
-
+#import "MyIncomeModel.h"
 @interface TLMineVC ()<MineHeaderSeletedDelegate, UINavigationControllerDelegate,ZDKHelpCenterConversationsUIDelegate,ZDKHelpCenterDelegate,ZQFaceAuthDelegate,ZQOcrScanDelegate,RefreshDelegate>
 {
     NSString *str1;
@@ -60,7 +60,7 @@
 @property (nonatomic, strong) MineTableView *tableView;
 
 @property (nonatomic, strong) TLImagePicker *imagePicker;
-
+@property (nonatomic , strong)MyIncomeModel *model;
 
 @end
 
@@ -83,7 +83,8 @@
         self.tableView.priceStr = [NSString stringWithFormat:@"≈%.2f",[[[NSUserDefaults standardUserDefaults] objectForKey:@"ALLPRICE"][@"allprice"] floatValue]];
         [self.tableView reloadData];
     }
-    
+    [self requesUserInfoWithResponseObject];
+    [self changeInfo];
 }
 
 //如果仅设置当前页导航透明，需加入下面方法
@@ -121,6 +122,31 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(InfoNotificationAction:) name:@"ALLPRICE" object:nil];
     
 }
+
+//-(void)loadData{
+//    TLNetworking *http = [[TLNetworking alloc] init];
+////    http.showView = self.view;
+//    http.code = @"625800";
+//    http.parameters[@"userId"] = [TLUser user].userId;
+//    [http postWithSuccess:^(id responseObject) {
+//
+//
+//
+////        weakSelf.topModel = [MyIncomeTopModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"][@"top5"]];
+////        weakSelf.tableView.topModel = weakSelf.topModel;
+////
+//        weakSelf.model = [MyIncomeModel mj_objectWithKeyValues:responseObject[@"data"]];
+////        weakSelf.tableView.model = weakSelf.model;
+//        self.tableView.earningsStr =
+//        [self.tableView reloadData];
+////        [self.tableView endRefreshHeader];
+//
+//    } failure:^(NSError *error) {
+////        [self.tableView endRefreshHeader];
+//    }];
+//}
+
+
 #pragma mark -- 接收到通知
 - (void)InfoNotificationAction:(NSNotification *)notification{
     self.tableView.priceStr = [NSString stringWithFormat:@"≈%.2f",[notification.userInfo[@"allprice"] floatValue]];
@@ -161,7 +187,9 @@
                 
                 [TLAlert alertWithMsg:[LangSwitcher switchLang:@"实名认证成功" key:nil]];
                 [self requesUserInfoWithResponseObject];
+                
             } failure:^(NSError *error) {
+                
             }];
             
         } failure:^(NSError *error) {
@@ -239,6 +267,9 @@
         //初始化用户信息
         [[TLUser user] setUserInfoWithDict:userInfo];
         [self changeInfo];
+        
+        self.tableView.earningsStr = [NSString stringWithFormat:@"≈%.2f",[responseObject[@"data"][@"incomeTotal"] floatValue]];
+        [self.tableView reloadData];
         
     } failure:^(NSError *error) {
         
@@ -511,6 +542,7 @@
     }
     self.headerView.levelBtn.hidden = [[TLUser user].level isEqualToString:kLevelOrdinaryTraders] ? YES : NO;
     [self.headerView.integralBtn addTarget:self action:@selector(integralBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
+    [self.tableView reloadData];
     
 }
 //信用积分
@@ -531,9 +563,7 @@
 }
 
 - (void)changeHeadIcon {
-    if (![TLUser user].isLogin) {
-        return ;
-    }
+    [self loginTheWhether];
     [self.imagePicker picker];
 }
 

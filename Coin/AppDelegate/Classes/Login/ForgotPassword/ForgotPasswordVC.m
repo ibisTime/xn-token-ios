@@ -171,8 +171,15 @@
 {
     
     if (![self.phoneTextFid.text isPhoneNum]) {
-        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入正确的手机号" key:nil]];
-        return;
+        if (isSelectBtn.tag == 100) {
+            [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入手机号" key:nil]];
+            return;
+        }else
+        {
+            [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入邮箱号" key:nil]];
+            return;
+        }
+        
     }
     LangType type = [LangSwitcher currentLangType];
     NSString *lang;

@@ -263,7 +263,7 @@ typedef enum : NSUInteger {
             self.tableView.isLocal = self.isLocal;
             self.tableView.model = _currencys[SelectTheButtonTag];
             self.currentModel = _currencys[SelectTheButtonTag];
-//            [self.tableView reloadData];
+            [self.tableView reloadData];
             
             CoinModel *currentCoin = [CoinUtil getCoinModel:self.tableView.model.currency];
             self.totalFree.text = [NSString stringWithFormat:@"%@ %@",[LangSwitcher switchLang:@"本次划转手续费为" key:nil],[NSString stringWithFormat:@"%@ %@", [CoinUtil convertToRealCoin:currentCoin.withdrawFeeString coin:self.tableView.model.currency], self.tableView.model.currency]];

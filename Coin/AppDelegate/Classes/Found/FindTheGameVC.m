@@ -11,6 +11,7 @@
 #import "StrategyModel.h"
 #import "HTMLStrVC.h"
 #import "GeneralWebView.h"
+#import "StrategyVC.h"
 @interface FindTheGameVC ()<RefreshDelegate>
 
 @property (nonatomic , strong)FindTheGameTableView *tableView;
@@ -37,7 +38,7 @@
 //如果仅设置当前页导航透明，需加入下面方法
 //- (void)viewWillDisappear:(BOOL)animated{
 //    [super viewWillDisappear:animated];
-//    
+//
 //    self.navigationController.navigationBar.translucent = NO;
 //    [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
 //    [self.navigationController.navigationBar setShadowImage:nil];
@@ -47,12 +48,17 @@
 //    self.navigationItem.backBarButtonItem = item;
 //    self.navigationController.navigationBar.shadowImage = [UIImage new];
 //    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
-//    
+//
 //}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    UIView *backView = [[UIView alloc]initWithFrame:CGRectMake(0, -kNavigationBarHeight, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    backView.backgroundColor = kWhiteColor;
+    [self.view addSubview:backView];
+    
     [self initTableView];
     [self loadData];
     self.view.backgroundColor = kWhiteColor;
@@ -73,7 +79,17 @@
     [self showViewController:vc sender:self];
 }
 
-
+-(void)refreshTableView:(TLTableView *)refreshTableview didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == 1) {
+        
+        
+        StrategyVC *vc = [StrategyVC new];
+        vc.strategyID = self.model[indexPath.row].ID;
+//        vc.URL = ;
+        [self showViewController:vc sender:self];
+    }
+}
 
 -(void)loadData
 {

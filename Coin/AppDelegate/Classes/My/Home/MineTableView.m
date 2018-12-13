@@ -55,7 +55,9 @@ static NSString *MyAssetsTableView = @"MyAssetsTableViewCell";
         if ([TLUser isBlankString:self.priceStr] == NO) {
             cell.allAssetsLabel.text = self.priceStr;
         }
-        
+        if ([TLUser isBlankString:self.earningsStr] == NO) {
+            cell.earningsLabel.text = self.earningsStr;
+        }
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }

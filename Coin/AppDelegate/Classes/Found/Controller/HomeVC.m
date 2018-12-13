@@ -45,24 +45,15 @@
     NSInteger category;
 }
 
-//@property (nonatomic, strong) HomeTbleView *tableView;
-
-
 @property (nonatomic , strong)UICollectionView *collectionView;
-
 //头部
 @property (nonatomic, strong) HomeHeaderView *headerView;
-//
 @property (nonatomic,strong) NSMutableArray <BannerModel *>*bannerRoom;
 //@property (nonatomic, strong) UIImageView *bgImage;
-
 @property (nonatomic, strong) UIButton *backButton;
-
 @property (nonatomic, strong) UILabel *nameLable;
-
 @property (nonatomic,strong) NSArray <HomeFindModel *>*findModels;
 @property (nonatomic , strong)NSMutableArray <FindTheGameModel *>*GameModel;
-
 @property (nonatomic , strong)NSMutableArray *GameModelArray;
 
 @end
@@ -160,7 +151,7 @@
     http.code = @"625456";
     http.parameters[@"language"] = lang;
     http.parameters[@"start"] = [NSString stringWithFormat:@"%ld",start];
-    http.parameters[@"limit"] = @"10"  ;
+    http.parameters[@"limit"] = @"10";
     http.parameters[@"category"] = @(category);
     
     [http postWithSuccess:^(id responseObject) {
@@ -217,7 +208,6 @@
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    
     if (indexPath.section == 0) {
         IconCollCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"IconCollCell" forIndexPath:indexPath];
         //    cell.backgroundColor = [UIColor redColor];
@@ -231,13 +221,11 @@
         cell.iconButton.tag = 300 + indexPath.row;
         return cell;
     }
-    
     if (indexPath.section == 1) {
         ClassificationCollCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"ClassificationCollCell" forIndexPath:indexPath];
         cell.delegate = self;
         return cell;
     }
-    
     TheGameCollCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"TheGameCollCell" forIndexPath:indexPath];
     [cell.actionBtn addTarget:self action:@selector(iconButtonClick:) forControlEvents:(UIControlEventTouchUpInside)];
     cell.actionBtn.tag = 400 + indexPath.row;
@@ -255,7 +243,6 @@
 -(void)iconButtonClick:(UIButton *)sender
 {
     [self loginTheWhether];
-    
     switch (sender.tag - 300) {
         case 0:
         {
@@ -279,7 +266,6 @@
         default:
             break;
     }
-
     if (sender.tag >= 400) {
         FindTheGameVC *vc = [FindTheGameVC new];
         vc.GameModel = self.GameModel[sender.tag - 400];
@@ -316,7 +302,6 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
 {
-    
     if (section == 0) {
         return CGSizeMake(SCREEN_WIDTH, (SCREEN_WIDTH - 20)/702 * 310 + 10);
     }
@@ -332,6 +317,16 @@
     }
     UICollectionReusableView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HeaderView1" forIndexPath:indexPath];
     return headerView;
+}
+
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == 2) {
+        
+        FindTheGameVC *vc = [FindTheGameVC new];
+        vc.GameModel = self.GameModel[indexPath.row];
+        [self showViewController:vc sender:self];
+    }
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section
@@ -350,12 +345,10 @@
     return UIEdgeInsetsMake(10, 10, 10, 10);
 }
 
-
-
--(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
-{
-
-}
+//-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+//{
+//
+//}
 
 
 
@@ -466,7 +459,6 @@
             UIViewController *rootViewController = [[[UIApplication sharedApplication] keyWindow] rootViewController];
             [rootViewController presentViewController:nav animated:YES completion:nil];
         }];
-        
         return;
     }
     NSString *url = [[self.bannerRoom objectAtIndex:index] url];

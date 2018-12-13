@@ -43,6 +43,9 @@
                     priceLabel.text = [NSString stringWithFormat:@"≈%.2f",[[[NSUserDefaults standardUserDefaults] objectForKey:@"ALLPRICE"][@"allprice"] floatValue]];
                 }
                 self.allAssetsLabel = priceLabel;
+            }else
+            {
+                self.earningsLabel = priceLabel;
             }
             [self addSubview:priceLabel];
             

@@ -137,7 +137,7 @@
     }
     
     if ([platform1.percentChange24h floatValue] > 0) {
-        [self.priceFluctBtn setTitle:[NSString stringWithFormat:@"+%@",platform1.percentChange24h] forState:(UIControlStateNormal)];
+        [self.priceFluctBtn setTitle:[NSString stringWithFormat:@"+%@%%",platform1.percentChange24h] forState:(UIControlStateNormal)];
         [self.priceFluctBtn sizeToFit];
         self.priceFluctBtn.frame = CGRectMake(self.currencyNameLbl.xx + 10, 40, self.priceFluctBtn.width + 10, 22);
         [self.priceFluctBtn SG_imagePositionStyle:(SGImagePositionStyleRight) spacing:3 imagePositionBlock:^(UIButton *button) {
@@ -145,7 +145,7 @@
         }];
     }else if ([platform1.percentChange24h floatValue] == 0)
     {
-        [self.priceFluctBtn setTitle:[NSString stringWithFormat:@"%@",platform1.percentChange24h] forState:(UIControlStateNormal)];
+        [self.priceFluctBtn setTitle:[NSString stringWithFormat:@"%@%%",platform1.percentChange24h] forState:(UIControlStateNormal)];
         [self.priceFluctBtn sizeToFit];
         self.priceFluctBtn.frame = CGRectMake(self.currencyNameLbl.xx + 10, 40, self.priceFluctBtn.width, 22);
         [self.priceFluctBtn SG_imagePositionStyle:(SGImagePositionStyleRight) spacing:3 imagePositionBlock:^(UIButton *button) {
@@ -153,7 +153,7 @@
         }];
     }else
     {
-        [self.priceFluctBtn setTitle:[NSString stringWithFormat:@"%@",platform1.percentChange24h] forState:(UIControlStateNormal)];
+        [self.priceFluctBtn setTitle:[NSString stringWithFormat:@"%@%%",platform1.percentChange24h] forState:(UIControlStateNormal)];
         [self.priceFluctBtn sizeToFit];
         self.priceFluctBtn.frame = CGRectMake(self.currencyNameLbl.xx + 10, 40, self.priceFluctBtn.width + 10, 22);
         [self.priceFluctBtn SG_imagePositionStyle:(SGImagePositionStyleRight) spacing:3 imagePositionBlock:^(UIButton *button) {
@@ -242,7 +242,7 @@
     self.priceFluctBtn.frame = CGRectMake(self.currencyNameLbl.xx + 10, 40, 0, 22);
     
     if ([platform1.percentChange24h floatValue] > 0) {
-        [self.priceFluctBtn setTitle:[NSString stringWithFormat:@"+%@",platform1.percentChange24h] forState:(UIControlStateNormal)];
+        [self.priceFluctBtn setTitle:[NSString stringWithFormat:@"+%@%%",platform1.percentChange24h] forState:(UIControlStateNormal)];
         [self.priceFluctBtn sizeToFit];
         self.priceFluctBtn.frame = CGRectMake(self.currencyNameLbl.xx + 10, 40, self.priceFluctBtn.width + 10, 22);
         [self.priceFluctBtn SG_imagePositionStyle:(SGImagePositionStyleRight) spacing:3 imagePositionBlock:^(UIButton *button) {
@@ -250,7 +250,7 @@
         }];
     }else if ([platform1.percentChange24h floatValue] == 0)
     {
-        [self.priceFluctBtn setTitle:[NSString stringWithFormat:@"%@",platform1.percentChange24h] forState:(UIControlStateNormal)];
+        [self.priceFluctBtn setTitle:[NSString stringWithFormat:@"%@%%",platform1.percentChange24h] forState:(UIControlStateNormal)];
         [self.priceFluctBtn sizeToFit];
         self.priceFluctBtn.frame = CGRectMake(self.currencyNameLbl.xx + 10, 40, self.priceFluctBtn.width, 22);
         [self.priceFluctBtn SG_imagePositionStyle:(SGImagePositionStyleRight) spacing:3 imagePositionBlock:^(UIButton *button) {
@@ -258,7 +258,7 @@
         }];
     }else
     {
-        [self.priceFluctBtn setTitle:[NSString stringWithFormat:@"%@",platform1.percentChange24h] forState:(UIControlStateNormal)];
+        [self.priceFluctBtn setTitle:[NSString stringWithFormat:@"%@%%",platform1.percentChange24h] forState:(UIControlStateNormal)];
         [self.priceFluctBtn sizeToFit];
         self.priceFluctBtn.frame = CGRectMake(self.currencyNameLbl.xx + 10, 40, self.priceFluctBtn.width + 10, 22);
         [self.priceFluctBtn SG_imagePositionStyle:(SGImagePositionStyleRight) spacing:3 imagePositionBlock:^(UIButton *button) {

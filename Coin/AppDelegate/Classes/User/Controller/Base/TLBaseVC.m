@@ -41,7 +41,21 @@
     self.navigationController.navigationBar.backIndicatorImage = [UIImage imageNamed:@"返回 白色"];
     self.navigationController.navigationBar.backIndicatorTransitionMaskImage = [UIImage imageNamed:@"返回 白色"];
 
+    
+//    UIView *backView = [[UIView alloc]initWithFrame:CGRectMake(0, -kNavigationBarHeight, SCREEN_WIDTH, SCREEN_HEIGHT)];
+//    backView.backgroundColor = kWhiteColor;
+//    [self.view addSubview:backView];
 
+}
+
+-(void)navigationwhiteColor
+{
+    self.navigationController.navigationBar.translucent = YES;
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+    self.navigationController.navigationBar.tintColor = [UIColor blackColor];
+    self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
+    self.navigationItem.backBarButtonItem = item;
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
 }
 
 -(void)navigationTransparentClearColor
@@ -70,6 +84,7 @@
     self.navigationItem.backBarButtonItem = item;
     self.navigationController.navigationBar.shadowImage = [UIImage new];
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
+    
 }
 -(void)loginTheWhether
 {

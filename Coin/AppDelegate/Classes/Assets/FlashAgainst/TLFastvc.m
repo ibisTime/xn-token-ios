@@ -19,6 +19,9 @@
     [super viewDidLoad];
     self.view.backgroundColor = kWhiteColor;
 
+    UIView *backView = [[UIView alloc]initWithFrame:CGRectMake(0, -kNavigationBarHeight, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    backView.backgroundColor = kWhiteColor;
+    [self.view addSubview:backView];
     
     UILabel *nameLabel = [UILabel labelWithFrame:CGRectMake(0, 12, SCREEN_WIDTH, 28) textAligment:(NSTextAlignmentCenter) backgroundColor:kClearColor font:HGboldfont(24) textColor:kHexColor(@"#0054ff")];
     nameLabel.text = [LangSwitcher switchLang:@"闪兑" key:nil];
@@ -28,27 +31,15 @@
     promptLabel.text = [LangSwitcher switchLang:@"敬请期待!" key:nil];
     [self.view addSubview:promptLabel];
     
-    
     UIImageView *iconImage = [[UIImageView alloc]initWithFrame:CGRectMake(35, promptLabel.yy + 35, SCREEN_WIDTH - 70, SCREEN_WIDTH - 70)];
     iconImage.image = kImage(@"闪兑icon");
     [self.view addSubview:iconImage];
-    
-    
-    
 }
-
 
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    self.navigationController.navigationBar.translucent = YES;
-    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
-    self.navigationController.navigationBar.tintColor = [UIColor blackColor];
-    self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
-    self.navigationItem.backBarButtonItem = item;
-    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
-    
-    
+    [self navigationwhiteColor];
 }
 
 //如果仅设置当前页导航透明，需加入下面方法

@@ -79,12 +79,8 @@ NSString *const kGoogleAuthClose = @"0";
     NSString *userId = [userDefault objectForKey:USER_ID_KEY];
     NSString *token = [userDefault objectForKey:TOKEN_ID_KEY];
     if (userId && token) {
-    
         return YES;
-        
     } else {
-        
-        
         return NO;
     }
     
