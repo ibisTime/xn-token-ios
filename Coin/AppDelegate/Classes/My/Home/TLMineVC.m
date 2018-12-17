@@ -268,6 +268,7 @@
         [[TLUser user] setUserInfoWithDict:userInfo];
         [self changeInfo];
         
+        
         self.tableView.earningsStr = [NSString stringWithFormat:@"≈%.2f",[responseObject[@"data"][@"incomeTotal"] floatValue]];
         [self.tableView reloadData];
         

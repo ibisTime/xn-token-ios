@@ -15,6 +15,8 @@
     UIButton *isSelectBtn;
     UIView *registerLineView;
     NSInteger w;
+    NSString *phone;
+    NSString *email;
 }
 
 @property (nonatomic , strong)UIScrollView *scrollView;
@@ -87,7 +89,8 @@
         _phoneAreaCodeBtn.titleEdgeInsets = UIEdgeInsetsMake(0, - titleOffset, 0, titleOffset);
         _phoneTextFid.frame = CGRectMake(_phoneAreaCodeBtn.xx + 15, registerLineView.yy + 50, SCREEN_WIDTH - _phoneAreaCodeBtn.xx - 60, 15);
         _phoneTextFid.placeholder = [LangSwitcher switchLang:@"请输入您的手机号码" key:nil];
-        
+        email = _phoneTextFid.text;
+        _phoneTextFid.text = phone;
     }else
     {
         
@@ -101,6 +104,8 @@
         
         _phoneTextFid.frame = CGRectMake(_phoneAreaCodeBtn.xx + 10, registerLineView.yy + 50, SCREEN_WIDTH - _phoneAreaCodeBtn.xx - 60, 15);
         _phoneTextFid.placeholder = [LangSwitcher switchLang:@"请输入您的邮箱账号" key:nil];
+        phone = _phoneTextFid.text;
+        _phoneTextFid.text = email;
     }
     
     

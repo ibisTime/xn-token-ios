@@ -55,6 +55,7 @@
         
 
         self.titleLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:15.0];
+        self.titleLbl.font = HGboldfont(15);
         self.titleLbl.frame = CGRectMake(self.iconImageView.xx + 8, 0, SCREEN_WIDTH - self.iconImageView.xx - 16 - 31, 50);
         [self.contentView addSubview:self.titleLbl];
 //        [self.titleLbl mas_makeConstraints:^(MASConstraintMaker *make) {

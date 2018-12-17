@@ -56,6 +56,8 @@ static NSString *MyAssetsTableView = @"MyAssetsTableViewCell";
             cell.allAssetsLabel.text = self.priceStr;
         }
         if ([TLUser isBlankString:self.earningsStr] == NO) {
+            
+//            NSString *incomeTotal = [CoinUtil convertToRealCoin2:self.earningsStr setScale:4  coin:@"BTC"];
             cell.earningsLabel.text = self.earningsStr;
         }
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
