@@ -75,13 +75,10 @@
     negativeSpacer.width = -10;
     self.navigationItem.rightBarButtonItems = @[negativeSpacer, [[UIBarButtonItem alloc] initWithCustomView:button]];
     
-    
     TLNetworking *http = [TLNetworking new];
     http.showView = self.view;
     http.code = @"660917";
-    
     http.parameters[@"ckey"] = @"redPacketShareUrl";
-    
     [http postWithSuccess:^(id responseObject) {
 //        self.h5String = responseObject[@"data"][@"cvalue"];
         NSString *lang;
@@ -115,11 +112,8 @@
 {
     YSActionSheetView * ysSheet=[[YSActionSheetView alloc]initNYSView];
     ysSheet.delegate=self;
-    
-    
     UIWindow *window = [[UIApplication sharedApplication] keyWindow];
-    
-    
+
     [window addSubview:ysSheet];
 }
 
@@ -129,25 +123,19 @@
     {
         case 0:
         {
-
             [TLWXManager wxShareWebPageWithScene:0 title:[LangSwitcher switchLang:@"分享" key:NSInternalInconsistencyException] desc:nil url:url];
-
         }
             break;
         case 1:
         {
-
             [TLWXManager wxShareWebPageWithScene:1 title:[LangSwitcher switchLang:@"分享" key:NSInternalInconsistencyException] desc:nil url:url];
-
         }
             break;
         case 2:
         {
-
             [TLWBManger sinaShareWithUrl:url];
         }
             break;
-            
     }
     
     

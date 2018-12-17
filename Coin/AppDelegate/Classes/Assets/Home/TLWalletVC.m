@@ -149,7 +149,8 @@
                 AddAccoutMoneyVc *monyVc = [[AddAccoutMoneyVc alloc] init];
                 monyVc.PersonalWallet = 101;
                 [self.navigationController pushViewController:monyVc animated:YES];
-            }else
+            }
+            else
             {
                 AddAccoutMoneyVc *monyVc = [[AddAccoutMoneyVc alloc] init];
                 monyVc.PersonalWallet = 100;
@@ -223,7 +224,8 @@
     [self getMyCurrencyList];
 }
 
-- (void)InfoNotificationAction1:(NSNotification *)notification{
+- (void)InfoNotificationAction1:(NSNotification *)notification
+{
     [self saveLocalWalletData];
 }
 
@@ -382,7 +384,6 @@
 
 - (void)initTableView {
     [self.titleView removeFromSuperview];
-
     self.tableView = [[PlatformTableView alloc] initWithFrame:CGRectMake(0, kStatusBarHeight, kScreenWidth, kScreenHeight-kStatusBarHeight ) style:UITableViewStyleGrouped];
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, kTabBarHeight, 0);
     self.tableView.backgroundColor = kWhiteColor;
@@ -446,7 +447,6 @@
     [self.navigationController pushViewController:coinVC animated:YES];
 }
 
-
 - (void)addNotification {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userlogin) name:kUserLoginNotification object:nil];
 }
@@ -454,9 +454,7 @@
 -(void)loadData
 {
     CoinWeakSelf;
-    
     [self.tableView addRefreshAction:^{
-        
         [CoinUtil refreshOpenCoinList:^{
             //    个人钱包
             [weakSelf getMyCurrencyList];
@@ -464,13 +462,10 @@
             [weakSelf requestRateList];
             //    私钥钱包
             [weakSelf saveLocalWalletData];
-
         } failure:^{
             [weakSelf.tableView endRefreshHeader];
         }];
-        
     }];
-    
     [self.tableView beginRefreshing];
 }
 
@@ -485,7 +480,6 @@
     http.code = @"802504";
     http.parameters[@"userId"] = [TLUser user].userId;
     http.parameters[@"token"] = [TLUser user].token;
-    
     [http postWithSuccess:^(id responseObject) {
         NSMutableArray <CurrencyModel *>*modes;
 //        NSArray <CurrencyModel *>*models;
@@ -513,7 +507,6 @@
     }];
 }
 
-
 - (void)saveLocalWalletData{
 //    兼容2.0以下私钥数据库
     TLDataBase *dataBase = [TLDataBase sharedManager];
@@ -532,7 +525,6 @@
         [set close];
     }
     [dataBase.dataBase close];
-    
     if ([TLUser isBlankString:word] == NO && [TLUser isBlankString:pwd] == NO) {
         if ([TLUser isBlankString:[[NSUserDefaults standardUserDefaults]objectForKey:MNEMONIC]] == YES) {
             [[NSUserDefaults standardUserDefaults]setObject:word forKey:MNEMONIC];
@@ -621,16 +613,13 @@
         
     }
         self.coins = arr;
-
     [[NSUserDefaults standardUserDefaults] setObject:muArray forKey:COINARRAY];
     //   私钥钱包
     [self queryTotalAllAmount];
 }
 
-
 -(NSString *)judgeIsAccording:(NSString *)symbol setCoinArray:(NSArray *)array
 {
-
     for (int i = 0; i < array.count; i ++) {
         if ([array[i][@"symbol"] isEqualToString:symbol]) {
             return array[i][@"Select"];
@@ -646,7 +635,8 @@
     [self getMyCurrencyList];
 }
 
-- (void)queryTotalAllAmount {
+- (void)queryTotalAllAmount
+{
     TLNetworking *http = [TLNetworking new];
     http.code = @"802270";
     http.isLocal = YES;

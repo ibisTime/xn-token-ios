@@ -57,9 +57,7 @@
     
     //    [NSThread sleepForTimeInterval:2];
     
-
-
-    //服务器环境7
+//    服务器环境
 //    研发
     [AppConfig config].runEnv = RunEnvDev;
 //    测试
@@ -99,14 +97,12 @@
     //配置根控制器
     [self configRootViewController];
     [LangSwitcher startWithTraditional];
-    
     //初始化为繁体
     //初始化数据库
     if ([[TLDataBase sharedManager].dataBase open]) {
 //        [ [TLDataBase sharedManager].dataBase executeUpdate:@"UPDATE THAWallet SET userId='China'"];
         NSLog(@"数据库打开成功");
     }
-    
     //退出登录消息通知
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(loginOut)
@@ -116,27 +112,16 @@
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(userLogin) name:kUserLoginNotification
                                                object:nil];
-    
-
-        
-        
-        [[TLUser user] updateUserInfo];
-        // 登录时间变更到，didBecomeActive中
-        [[NSNotificationCenter defaultCenter] postNotificationName:kUserLoginNotification
+    [[TLUser user] updateUserInfo];
+    // 登录时间变更到，didBecomeActive中
+    [[NSNotificationCenter defaultCenter] postNotificationName:kUserLoginNotification
                                                             object:nil];
-        
+//    [[IMAPlatform sharedInstance] configOnAppLaunchWithOptions:launchOptions];
 
-    
-   
-    
-//czy    [[IMAPlatform sharedInstance] configOnAppLaunchWithOptions:launchOptions];
-    
-    
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-
         [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
-
     });
+    
 //    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 //
 //        [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
@@ -158,10 +143,7 @@
     http.code = USER_CKEY_CVALUE;
     http.parameters[SYS_KEY] = @"qiniu_domain";
     [http postWithSuccess:^(id responseObject) {
-        
-        
         [[NSUserDefaults standardUserDefaults]setObject:[NSString stringWithFormat:@"http://%@", responseObject[@"data"][@"cvalue"]] forKey:Get_Seven_Cattle_Address];
-        
         [AppConfig config].qiniuDomain = [NSString stringWithFormat:@"http://%@", responseObject[@"data"][@"cvalue"]];
 //        http:// qn.tha.hichengdai.com
     } failure:^(NSError *error) {
@@ -171,7 +153,6 @@
 
 - (void)configWeibo
 {
-    
     
 }
 
@@ -183,8 +164,7 @@
 //                           clientId: @"mobile_sdk_client_7af3526c83d0c1999bc3"
 //                         zendeskUrl: @"https://thachainhelp.zendesk.com"];
 //    id<ZDKObjCIdentity> userIdentity = [[ZDKObjCAnonymous alloc] initWithName:nil email:nil];
-//    [[ZDKZendesk instance] setIdentity:userIdentity];8
-//
+//    [[ZDKZendesk instance] setIdentity:userIdentity];
 //    [ZDKSupport initializeWithZendesk: [ZDKZendesk instance]];
     
 //    [ZDKLocalization localizedStringWithKey:@"en"];
@@ -222,6 +202,8 @@
     }
 
 }
+
+
 #pragma mark- 上传推送 token
 //- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
 //
