@@ -341,22 +341,21 @@
         //                [[NSUserDefaults standardUserDefaults] removeObjectForKey:KWalletAddress];
         //                [[NSUserDefaults standardUserDefaults] removeObjectForKey:KWalletPrivateKey];
         //                [[NSUserDefaults standardUserDefaults] synchronize];
-//        [TLAlert alertWithMsg:[LangSwitcher switchLang:@"删除成功" key:nil]];
-//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [TLAlert alertWithMsg:[LangSwitcher switchLang:@"删除成功" key:nil]];
         
-//            [[NSUserDefaults standardUserDefaults] setBool:NO forKey:KISBuild];
-//            [[NSUserDefaults standardUserDefaults] synchronize];
-            
-        if ([TLUser user].isLogin == YES) {
-            TLTabBarController *tab = [[TLTabBarController alloc] init];
-            [UIApplication sharedApplication].keyWindow.rootViewController = tab;
-        }
-        else
-        {
-            TheInitialVC *loginVC= [TheInitialVC new];
-            [self.navigationController pushViewController:loginVC animated:YES];
-        }
-//        });
+        
+        [TLAlert alertWithTitle:[LangSwitcher switchLang:@"提示" key:nil] message:[LangSwitcher switchLang:@"删除成功" key:nil] confirmAction:^{
+            if ([TLUser user].isLogin == YES)
+            {
+                TLTabBarController *tab = [[TLTabBarController alloc] init];
+                [UIApplication sharedApplication].keyWindow.rootViewController = tab;
+            }
+            else
+            {
+                TheInitialVC *loginVC= [TheInitialVC new];
+                [self.navigationController pushViewController:loginVC animated:YES];
+            }
+        }];
     }];
     
     

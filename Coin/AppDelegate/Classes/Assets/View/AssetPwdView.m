@@ -54,12 +54,12 @@
 //    self.view1 = view1;
 //    view1.frame =CGRectMake(0, 0, kScreenWidth, kScreenHeight);
 //    view1.backgroundColor =
-    self.backgroundColor = [UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0.45];
+//    self.backgroundColor = [UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0.45];
     
     //    view.alpha = 0.5;
 //    [self addSubview:view1];
     UIView *whiteView = [UIView new];
-    
+    kViewRadius(whiteView, 6.5);
     [self addSubview:whiteView];
     
     whiteView.frame = CGRectMake(24, kHeight(194), kScreenWidth - 48, kHeight(240));
@@ -92,6 +92,7 @@
     self.password = [[TTPasswordView alloc] initWithFrame:CGRectZero];
     self.password.textField.keyboardType=UIKeyboardTypePhonePad;
     self.password.elementCount = 6;
+    
     self.password.textField.secureTextEntry=YES;
     self.password.textField.enabled = NO;
     self.password.elementColor=kLineColor;

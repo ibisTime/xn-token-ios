@@ -23,6 +23,7 @@
 #import "AddAccoutMoneyVc.h"
 #import "FilterView.h"
 #import "TLRedintroduceVC.h"
+#import "MoneyPasswordVC.h"
 @interface RedEnvelopeVC ()<SendRedEnvelopeDelegate,RedEnvelopeHeadDelegate>
 
 @property (nonatomic, strong) NSMutableArray <CurrencyModel *>*currencys;
@@ -48,7 +49,7 @@
     self.navigationController.navigationBar.shadowImage = [UIImage new];
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
   
-    
+//    [[UserModel user].cusPopView dismiss];
 }
 
 //如果仅设置当前页导航透明，需加入下面方法
@@ -64,7 +65,6 @@
     self.navigationItem.backBarButtonItem = item;
     self.navigationController.navigationBar.shadowImage = [UIImage new];
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
-    
 }
 
 - (void)viewDidLoad {
@@ -142,27 +142,29 @@
     AssetPwdView *pwdView =[[AssetPwdView alloc] init];
     self.pwdView = pwdView;
     pwdView.HiddenBlock = ^{
-        self.pwdView.hidden = YES;
-//        [self.pwdView removeFromSuperview];
+        [[UserModel user].cusPopView dismiss];
     };
     self.pwdView.forgetBlock = ^{
-        
-        weakSelf.pwdView.hidden = YES;
 
-        TLPwdRelatedVC *vc  = [[TLPwdRelatedVC alloc] initWithType:TLPwdTypeTradeReset];
-
+        [[UserModel user].cusPopView dismiss];
+        MoneyPasswordVC *vc = [MoneyPasswordVC new];
+        vc.titleNameStr = @"修改资金密码";
         [weakSelf.navigationController pushViewController:vc animated:YES];
-        
-        
     };
-    pwdView.hidden = YES;
+//    pwdView.hidden = YES;
     pwdView.frame = self.view.bounds;
-    [self.view addSubview:pwdView];
+    
+//    UIWindow *window = [UIApplication sharedApplication].keyWindow;
+//    [window addSubview:pwdView];
+    
+    
     RedEnvelopeHeadView *headView = [[RedEnvelopeHeadView alloc]initWithFrame:CGRectMake(0, kStatusBarHeight, SCREEN_WIDTH, 44)];
     headView.delegate = self;
     [_sendView addSubview:headView];
     [self LoadData];
 }
+
+
 
 - (void)backbuttonClick
 {
@@ -276,7 +278,8 @@
 -(void)GiveAnyRequestAndCurrency:(NSString *)currency type:(NSString *)type count:(NSString *)count sendNum:(NSString *)sendNum greeting:(NSString *)greeting
 {
     
-    self.pwdView.hidden = NO;
+//    self.pwdView.hidden = NO;
+    [[UserModel user] showPopAnimationWithAnimationStyle:1 showView:self.pwdView];
     self.pwdView.password.textField.enabled = YES;
     CoinWeakSelf;
     self.pwdView.passwordBlock = ^(NSString *password) {
@@ -286,7 +289,7 @@
         }
         
         TLNetworking *http = [TLNetworking new];
-        http.showView = self.view;
+        http.showView = weakSelf.view;
         http.code = @"623000";
         http.parameters[@"userId"] = [TLUser user].userId;
         http.parameters[@"symbol"] = currency;
@@ -296,8 +299,9 @@
         http.parameters[@"greeting"] = greeting;
         http.parameters[@"tradePwd"] = password;
         [http postWithSuccess:^(id responseObject) {
-            weakSelf.pwdView.hidden = YES;
-            [weakSelf.pwdView.password clearText];
+//            weakSelf.pwdView.hidden = YES;
+//            [weakSelf.pwdView.password clearText];
+            [[UserModel user].cusPopView dismiss];
             RedEnvelopeShoreVC *vc = [RedEnvelopeShoreVC new];
             vc.code = responseObject[@"data"][@"code"];
             vc.content = greeting;
@@ -352,9 +356,10 @@
             }
             
             
-            weakSelf.pwdView.hidden = YES;
-
-            [weakSelf.pwdView.password clearText];
+//            weakSelf.pwdView.hidden = YES;
+//
+//            [weakSelf.pwdView.password clearText];
+            [[UserModel user].cusPopView dismiss];
 
         }];
     };

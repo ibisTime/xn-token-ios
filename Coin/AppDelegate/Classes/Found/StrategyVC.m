@@ -113,7 +113,6 @@
     YSActionSheetView * ysSheet=[[YSActionSheetView alloc]initNYSView];
     ysSheet.delegate=self;
     UIWindow *window = [[UIApplication sharedApplication] keyWindow];
-
     [window addSubview:ysSheet];
 }
 
