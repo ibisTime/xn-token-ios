@@ -62,6 +62,8 @@
     [self initTableView];
     [self loadData];
     self.view.backgroundColor = kWhiteColor;
+    
+    
 }
 
 -(void)initTableView

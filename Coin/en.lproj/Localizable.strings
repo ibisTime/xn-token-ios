@@ -909,11 +909,12 @@
 "身份验证已完成" = "Identity card is complete";
 "个人钱包" = "Personal wallet";
 "回到首页" = "Back to the homepage";
-"创建私钥钱包" = "Create a private key wallet";
-"登录个人账号" = "Login to a personal account";
-"创建个人账号" = "Create a personal account";
 
-"导入助记词" = "Import mnemonic";
+"创建私钥钱包" = " Create a private key wallet ";
+"登录个人账号" = " Login to a personal account ";
+"创建个人账号" = " Create a personal account ";
+
+"导入助记词" = " Import mnemonic ";
 "手机登录" = "Login by phone number";
 "邮箱登录" = "Email Login";
 "请输入您的手机号码" = "Please enter your phone number";

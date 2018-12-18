@@ -11,9 +11,13 @@
 #import "WYWebProgressLayer.h"
 #import "UIView+Frame.h"
 #import "WLWebProgressLayer.h"
-@interface GeneralWebView ()<UIWebViewDelegate,UIWebViewDelegate>
+#import "NSURLRequest+NSURLRequestSSLY.h"
+//@implementation NSURLRequest (NSURLRequestWithIgnoreSSL)
+
+@interface GeneralWebView ()<UIWebViewDelegate,NSURLConnectionDelegate>
 {
     WYWebProgressLayer *_progressLayer; // 网页加载进度条
+    
 }
 
 @property (nonatomic,strong) JSContext *jsContext;
@@ -27,12 +31,35 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.webView = [[UIWebView alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height - 64)];
     self.webView.delegate = self;
+    NSURLRequest *request=[NSURLRequest requestWithURL:[NSURL URLWithString:_URL]];
     
-    [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"https://www.cryptokitties.co"]]];
+//    [NSURLRequest setAllowsAnyHTTPSCertificate:YES forHost:[[NSURL URLWithString:_URL] host]];
+    [NSURLConnection connectionWithRequest:request delegate:self];
+    
+    [_webView loadRequest:request];
     [self.view addSubview:self.webView];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:(UIBarButtonSystemItemRefresh) target:self action:@selector(rightBtnClick)];
     
+//    [ NSURLRequest setAllowsAnyHTTPSCertificate:YES forHost:_URL];
+    
+//    [NSURLRequest allowsAnyHTTPSCertificateForHost:_URL];
 }
+
+
+-(BOOL)connection:(NSURLConnection*)connection canAuthenticateAgainstProtectionSpace:(NSURLProtectionSpace*)protectionSpace {
+    return[protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust];
+    
+}
+
+-(void)connection:(NSURLConnection*)connection didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge*)challenge {
+//    if([challenge.protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust])
+//        if([trustedHosts containsObject:challenge.protectionSpace.host])
+    [challenge.sender useCredential:[NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust] forAuthenticationChallenge:challenge];
+    [challenge.sender continueWithoutCredentialForAuthenticationChallenge:challenge];
+}
+//如果使用web view来请求网页的话，添加这么一句
+
+
 
 #pragma mark - UIWebViewDelegate
 - (void)webViewDidStartLoad:(UIWebView *)webView
@@ -53,16 +80,6 @@
     self.title = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];
 }
 
-//-(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{
-//
-//    return YES;
-//}
-
-//对JS传来的值进行调用
-//- (void)doSomeThingWithParamA:(id)paramA andParamB:(id)paramB{
-//
-//    NSLog(@"%@    %@", paramA, paramB);
-//}
 
 -(void)rightBtnClick
 {

@@ -85,6 +85,7 @@
 		1F693B1B21A69667004818D8 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F693B1A21A69667004818D8 /* MobileCoreServices.framework */; };
 		1F693B1D21A69676004818D8 /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F693B1C21A69676004818D8 /* libicucore.tbd */; };
 		1F693B2021A6A803004818D8 /* AssetsHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F693B1F21A6A803004818D8 /* AssetsHeadView.m */; };
+		1F6CD93B21C918AA008CFF71 /* NSURLRequest+NSURLRequestSSLY.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F6CD93A21C918AA008CFF71 /* NSURLRequest+NSURLRequestSSLY.m */; };
 		1F709D5E218161D8002D1CC4 /* keyTransferTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F709D5D218161D8002D1CC4 /* keyTransferTableView.m */; };
 		1F709D61218162A5002D1CC4 /* TransformButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F709D60218162A5002D1CC4 /* TransformButtonCell.m */; };
 		1F709D6421817246002D1CC4 /* TransferNumberCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F709D6321817246002D1CC4 /* TransferNumberCell.m */; };
@@ -745,6 +746,8 @@
 		1F693B1C21A69676004818D8 /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
 		1F693B1E21A6A803004818D8 /* AssetsHeadView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AssetsHeadView.h; sourceTree = "<group>"; };
 		1F693B1F21A6A803004818D8 /* AssetsHeadView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AssetsHeadView.m; sourceTree = "<group>"; };
+		1F6CD93921C918AA008CFF71 /* NSURLRequest+NSURLRequestSSLY.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSURLRequest+NSURLRequestSSLY.h"; sourceTree = "<group>"; };
+		1F6CD93A21C918AA008CFF71 /* NSURLRequest+NSURLRequestSSLY.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSURLRequest+NSURLRequestSSLY.m"; sourceTree = "<group>"; };
 		1F709D5C218161D8002D1CC4 /* keyTransferTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = keyTransferTableView.h; sourceTree = "<group>"; };
 		1F709D5D218161D8002D1CC4 /* keyTransferTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = keyTransferTableView.m; sourceTree = "<group>"; };
 		1F709D5F218162A5002D1CC4 /* TransformButtonCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TransformButtonCell.h; sourceTree = "<group>"; };
@@ -2548,6 +2551,8 @@
 				1FF5DB8921B8EDF90019EF69 /* Web */,
 				1FF5DB8621B8EDAE0019EF69 /* GeneralWebView.h */,
 				1FF5DB8721B8EDAE0019EF69 /* GeneralWebView.m */,
+				1F6CD93921C918AA008CFF71 /* NSURLRequest+NSURLRequestSSLY.h */,
+				1F6CD93A21C918AA008CFF71 /* NSURLRequest+NSURLRequestSSLY.m */,
 			);
 			path = Web;
 			sourceTree = "<group>";
@@ -4996,6 +5001,7 @@
 				7AABEAFE2149127200283BC7 /* BouncedPasteView.m in Sources */,
 				7A2CC674215CAECF00B27E2D /* AccumulatedEarningsVC.m in Sources */,
 				B80D54CE210C9C11005303D5 /* TLChangeNikeName.m in Sources */,
+				1F6CD93B21C918AA008CFF71 /* NSURLRequest+NSURLRequestSSLY.m in Sources */,
 				1F0EDEA521B6500F0044C4A2 /* FindTheGameTableView.m in Sources */,
 				B808650B211EA17D00755158 /* BTCFancyEncryptedMessage.m in Sources */,
 				B87BF1D02114251800DD5C05 /* FMDBMigrationManager.m in Sources */,

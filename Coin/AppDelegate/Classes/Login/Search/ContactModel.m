@@ -19,9 +19,36 @@
 {
     if (chineseName) {
         _chineseName = chineseName;
-        _pinyin=_chineseName.pinyin;
+    }
+    if ([LangSwitcher currentLangType] == LangTypeSimple || [LangSwitcher currentLangType] == LangTypeTraditional) {
+        
+            _pinyin=_chineseName.pinyin;
+        
+//        [cell.nameLabel setText:[NSString stringWithFormat:@"%@ (+%@)",[_searchResultArr[indexPath.row] valueForKey:@"chineseName"],[[_searchResultArr[indexPath.row] valueForKey:@"interCode"] substringFromIndex:2]]];
+    }
+    
+//        [cell.nameLabel setText:[NSString stringWithFormat:@"%@ (+%@)",[_searchResultArr[indexPath.row] valueForKey:@"interName"],[[_searchResultArr[indexPath.row] valueForKey:@"interCode"] substringFromIndex:2]]];
+        
+    
+    
+}
+
+-(void)setInterName:(NSString<Optional> *)interName
+{
+    if (interName) {
+        _interName = interName;
+        
+    }
+    
+    if ([LangSwitcher currentLangType] == LangTypeSimple || [LangSwitcher currentLangType] == LangTypeTraditional) {
+        
+    }else
+    {
+        _pinyin=_interName.pinyin;
     }
 }
+
+
 
 - (instancetype)initWithDic:(NSDictionary *)dic{
     NSError *error = nil;

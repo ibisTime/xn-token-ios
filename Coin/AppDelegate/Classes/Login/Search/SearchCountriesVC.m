@@ -247,12 +247,29 @@ UISearchBarDelegate,UISearchDisplayDelegate>
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     
     if (tableView==_searchDisplayController.searchResultsTableView){
-        [cell.nameLabel setText:[NSString stringWithFormat:@"%@ (+%@)",[_searchResultArr[indexPath.row] valueForKey:@"chineseName"],[[_searchResultArr[indexPath.row] valueForKey:@"interCode"] substringFromIndex:2]]];
+        
+        
+        if ([LangSwitcher currentLangType] == LangTypeSimple || [LangSwitcher currentLangType] == LangTypeTraditional) {
 
+            [cell.nameLabel setText:[NSString stringWithFormat:@"%@ (+%@)",[_searchResultArr[indexPath.row] valueForKey:@"chineseName"],[[_searchResultArr[indexPath.row] valueForKey:@"interCode"] substringFromIndex:2]]];
+        }else{
+            [cell.nameLabel setText:[NSString stringWithFormat:@"%@ (+%@)",[_searchResultArr[indexPath.row] valueForKey:@"interName"],[[_searchResultArr[indexPath.row] valueForKey:@"interCode"] substringFromIndex:2]]];
+            
+        }
     }else{
-        ContactModel *model=_rowArr[indexPath.section][indexPath.row];
-//        [cell.headImageView setImage:[UIImage imageNamed:model.chineseName]];
-        [cell.nameLabel setText:[NSString stringWithFormat:@"%@ (+%@)",model.chineseName,[model.interCode substringFromIndex:2]]];
+        if ([LangSwitcher currentLangType] == LangTypeSimple || [LangSwitcher currentLangType] == LangTypeTraditional) {
+            ContactModel *model=_rowArr[indexPath.section][indexPath.row];
+            [cell.nameLabel setText:[NSString stringWithFormat:@"%@ (+%@)",model.chineseName,[model.interCode substringFromIndex:2]]];
+
+        }else{
+            
+            ContactModel *model=_rowArr[indexPath.section][indexPath.row];
+            [cell.nameLabel setText:[NSString stringWithFormat:@"%@ (+%@)",model.interName,[model.interCode substringFromIndex:2]]];
+            
+        }
+        
+        
+        
     }
     return cell;
     
@@ -266,9 +283,19 @@ UISearchBarDelegate,UISearchDisplayDelegate>
         model = _searchResultArr[indexPath.row];
 //        ContactModel *model=_rowArr[indexPath.section][indexPath.row];
         for ( int i = 0 ; i < self.serverDataArr.count ; i ++) {
-            if ([[_searchResultArr[indexPath.row] valueForKey:@"chineseName"] isEqual:self.serverDataArr[i][@"chineseName"]]) {
-                model = [ContactModel mj_objectWithKeyValues:self.serverDataArr[i]];
+            
+            if ([LangSwitcher currentLangType] == LangTypeSimple || [LangSwitcher currentLangType] == LangTypeTraditional) {
+                if ([[_searchResultArr[indexPath.row] valueForKey:@"chineseName"] isEqual:self.serverDataArr[i][@"chineseName"]]) {
+                    model = [ContactModel mj_objectWithKeyValues:self.serverDataArr[i]];
+                }
+            }else
+            {
+                if ([[_searchResultArr[indexPath.row] valueForKey:@"interName"] isEqual:self.serverDataArr[i][@"interName"]]) {
+                    model = [ContactModel mj_objectWithKeyValues:self.serverDataArr[i]];
+                }
             }
+            
+            
         }
     }else{
         model=_rowArr[indexPath.section][indexPath.row];
@@ -345,14 +372,31 @@ UISearchBarDelegate,UISearchDisplayDelegate>
     NSUInteger searchOptions = NSCaseInsensitiveSearch | NSDiacriticInsensitiveSearch;
     
     for (int i = 0; i < self.dataArr.count; i++) {
-        NSString *storeString = [(ContactModel *)self.dataArr[i] chineseName];
+        NSString *storeString;
+        if ([LangSwitcher currentLangType] == LangTypeSimple || [LangSwitcher currentLangType] == LangTypeTraditional) {
+            storeString = [(ContactModel *)self.dataArr[i] chineseName];
+        }else
+        {
+            
+            storeString = [(ContactModel *)self.dataArr[i] interName];
+        }
+        
+//         = [(ContactModel *)self.dataArr[i] chineseName];
         NSString *storeImageString=[(ContactModel *)self.dataArr[i] interCode];
         
-        NSRange storeRange = NSMakeRange(0, storeString.length);
+        NSRange storeRange = NSMakeRange(0, [NSString stringWithFormat:@"%@%@",storeString,storeImageString].length);
         
-        NSRange foundRange = [storeString rangeOfString:searchText options:searchOptions range:storeRange];
+        NSRange foundRange = [[NSString stringWithFormat:@"%@%@",storeString,storeImageString] rangeOfString:searchText options:searchOptions range:storeRange];
         if (foundRange.length) {
-            NSDictionary *dic=@{@"chineseName":storeString,@"interCode":storeImageString};
+            NSDictionary *dic;
+            if ([LangSwitcher currentLangType] == LangTypeSimple || [LangSwitcher currentLangType] == LangTypeTraditional) {
+                dic = @{@"chineseName":storeString,@"interCode":storeImageString};
+            }else
+            {
+                dic = @{@"interName":storeString,@"interCode":storeImageString};
+            }
+            
+//            =@{@"chineseName":storeString,@"interCode":storeImageString};
             [tempResults addObject:dic];
         }
         

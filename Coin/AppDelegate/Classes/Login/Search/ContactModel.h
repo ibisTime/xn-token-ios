@@ -11,6 +11,7 @@
 @interface ContactModel : JSONModel
 
 @property (nonatomic,strong) NSString <Optional>*chineseName;
+@property (nonatomic,strong) NSString <Optional>*interName;
 @property (nonatomic,strong) NSString <Optional>*interCode;
 @property (nonatomic,strong) NSString <Ignore>*pinyin;//拼音
 
@@ -19,7 +20,7 @@
 //国际编码
 //@property (nonatomic , copy) NSString *interCode;
 //国际名称
-@property (nonatomic , copy) NSString *interName;
+//@property (nonatomic , copy) NSString *interName;
 //中文名称
 //@property (nonatomic , copy) NSString *chineseName;
 //国际简码
