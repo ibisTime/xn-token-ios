@@ -267,9 +267,14 @@
             break;
     }
     if (sender.tag >= 400) {
-        FindTheGameVC *vc = [FindTheGameVC new];
-        vc.GameModel = self.GameModel[sender.tag - 400];
+        
+        GeneralWebView *vc = [GeneralWebView new];
+        vc.URL = self.GameModel[sender.tag - 400].url;
         [self showViewController:vc sender:self];
+        
+//        FindTheGameVC *vc = [FindTheGameVC new];
+//        vc.GameModel = self.GameModel[sender.tag - 400];
+//        [self showViewController:vc sender:self];
     }
 }
 
@@ -322,6 +327,7 @@
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 2) {
+        
         
         FindTheGameVC *vc = [FindTheGameVC new];
         vc.GameModel = self.GameModel[indexPath.row];

@@ -17,6 +17,12 @@
     NSInteger w;
     NSString *phone;
     NSString *email;
+    
+    
+    UIView *pointView;
+    UIView *pointView1;
+    UIView *pointView2;
+    
 }
 
 @property (nonatomic , strong)UIScrollView *scrollView;
@@ -187,10 +193,10 @@
             [TLAlert alertWithInfo:[LangSwitcher switchLang:@"密码不一致" key:nil]];
             return;
         }
-        UIView *pointView1 = [self.view viewWithTag:300];
+//        UIView *pointView1 = [self.view viewWithTag:300];
 
-        if (pointView1.backgroundColor != [UIColor greenColor]) {
-            [TLAlert alertWithInfo:[LangSwitcher switchLang:@"密码位数为8~25位数(字母+数字)" key:nil]];
+        if (pointView.backgroundColor != [UIColor greenColor]) {
+            [TLAlert alertWithInfo:[LangSwitcher switchLang:@"密码位数为8~25位(字母+数字)" key:nil]];
             return;
         }
         
@@ -282,19 +288,20 @@
     level = [LangSwitcher switchLang:@"安全级别" key:nil];
 //    NSString *State = [LangSwitcher switchLang:@"底" key:nil];
 //    NSString *str = [NSString stringWithFormat:@"%@ %@",level,State];
-    UIView *pointView1 = [self.view viewWithTag:300];
-    UIView *pointView2 = [self.view viewWithTag:301];
-    UIView *pointView3 = [self.view viewWithTag:302];
+//    UIView *pointView1 = [self.view viewWithTag:300];
+//    UIView *pointView2 = [self.view viewWithTag:301];
+//    UIView *pointView3 = [self.view viewWithTag:302];
 //    UIView *pointView4 = [self.view viewWithTag:303];
+    pointView.backgroundColor = kWhiteColor;
     pointView1.backgroundColor = kWhiteColor;
     pointView2.backgroundColor = kWhiteColor;
-    pointView3.backgroundColor = kWhiteColor;
+    
 //    pointView4.backgroundColor = kWhiteColor;
     
     NSString *testString = textField.text;
     NSInteger alength = [testString length];
     if (textField.text.length >= 8 && [[UserModel user]isStringTheCapitalLettersWith:textField.text] == YES && [[UserModel user]isStringContainNumberWith:textField.text] == YES) {
-        pointView1.backgroundColor = [UIColor greenColor];
+        pointView.backgroundColor = [UIColor greenColor];
         State = [LangSwitcher switchLang:@"低" key:nil];
         
         
@@ -302,24 +309,15 @@
             char commitChar = [testString characterAtIndex:i];
             if((commitChar>96)&&(commitChar<123)){
                 NSLog(@"字符串中含有小写英文字母");
+                pointView1.backgroundColor = [UIColor greenColor];
+                State = [LangSwitcher switchLang:@"中" key:nil];
+            }
+            if((commitChar>64)&&(commitChar<91)){
+                NSLog(@"字符串中含有大写英文字母");
                 pointView2.backgroundColor = [UIColor greenColor];
                 State = [LangSwitcher switchLang:@"中" key:nil];
             }
-//            if((commitChar>47)&&(commitChar<58)){
-////                包含数字
-//                pointView4.backgroundColor = [UIColor greenColor];
-//                State = [LangSwitcher switchLang:@"中" key:nil];
-//            }
-            
-            if((commitChar>64)&&(commitChar<91)){
-                
-                NSLog(@"字符串中含有大写英文字母");
-                pointView3.backgroundColor = [UIColor greenColor];
-                State = [LangSwitcher switchLang:@"中" key:nil];
-                
-            }
-            
-            if (pointView3.backgroundColor == [UIColor greenColor] && pointView2.backgroundColor == [UIColor greenColor] && pointView1.backgroundColor == [UIColor greenColor]) {
+            if (pointView2.backgroundColor == [UIColor greenColor] && pointView1.backgroundColor == [UIColor greenColor] && pointView1.backgroundColor == [UIColor greenColor]) {
                 State = [LangSwitcher switchLang:@"高" key:nil];
             }
         }
@@ -327,7 +325,7 @@
     {
         pointView1.backgroundColor = kWhiteColor;
         pointView2.backgroundColor = kWhiteColor;
-        pointView3.backgroundColor = kWhiteColor;
+        pointView.backgroundColor = kWhiteColor;
 //        pointView4.backgroundColor = kWhiteColor;
     }
     if ([TLUser isBlankString:State] == YES) {
@@ -628,22 +626,68 @@
     }
     
     NSArray *securityArray = @[[LangSwitcher switchLang:@"密码位数为8~25位(字母+数字)" key:nil],[LangSwitcher switchLang:@"密码中包含小写字母" key:nil],[LangSwitcher switchLang:@"密码中包含大写字母" key:nil]];
-    for (int i = 0; i < 3; i ++) {
-        UIView *pointView = [[UIView alloc]initWithFrame:CGRectMake(35, 160 - 64 + kNavigationBarHeight + 108 * 2 - 30 +i%4 * 20, 8, 8)];
-        pointView.backgroundColor = kWhiteColor;
-        kViewRadius(pointView, 4);
-        pointView.tag = 300 + i;
-        [passwordView addSubview:pointView];
-        
-        UILabel *securityLbl = [UILabel labelWithFrame:CGRectMake(49, 160 - 64 + kNavigationBarHeight + 108 * 2 - 30 +i%4 * 20 - 2, SCREEN_WIDTH - 49 - 35, 12) textAligment:(NSTextAlignmentLeft) backgroundColor:kClearColor font:FONT(12) textColor:kWhiteColor];
-        securityLbl.text = securityArray[i];
-        securityLbl.tag = 200 + i;
-        [passwordView addSubview:securityLbl];
-    }
+//    for (int i = 0; i < 3; i ++) {
+//        UIView *pointView = [[UIView alloc]initWithFrame:CGRectMake(35, 160 - 64 + kNavigationBarHeight + 108 * 2 - 30 +i%4 * 20, 8, 8)];
+//        pointView.backgroundColor = kWhiteColor;
+//        kViewRadius(pointView, 4);
+//        pointView.tag = 300 + i;
+//        [passwordView addSubview:pointView];
+//
+//        UILabel *securityLbl = [UILabel labelWithFrame:CGRectMake(49, 160 - 64 + kNavigationBarHeight + 108 * 2 - 30 +i%4 * 20 - 2, SCREEN_WIDTH - 49 - 35, 12) textAligment:(NSTextAlignmentLeft) backgroundColor:kClearColor font:FONT(12) textColor:kWhiteColor];
+//        securityLbl.text = securityArray[i];
+//        securityLbl.tag = 200 + i;
+//        [passwordView addSubview:securityLbl];
+//    }
     
     
-    UILabel *label = [self.view viewWithTag:202];
-    UILabel *levelStateLbl = [UILabel labelWithFrame:CGRectMake(SCREEN_WIDTH - 35, label.y - 4, 0, 18) textAligment:(NSTextAlignmentRight) backgroundColor:kClearColor font:FONT(12) textColor:kWhiteColor];
+    
+    pointView = [[UIView alloc]initWithFrame:CGRectMake(35, 160 - 64 + kNavigationBarHeight + 108 * 2 - 30 - 2, 8, 8)];
+    pointView.backgroundColor = kWhiteColor;
+    kViewRadius(pointView, 4);
+//    pointView.tag = 300;
+    [passwordView addSubview:pointView];
+    
+    UILabel *securityLbl = [UILabel labelWithFrame:CGRectMake(pointView.xx + 6, pointView.y - 2, SCREEN_WIDTH - pointView.xx - 6 - 10, 12) textAligment:(NSTextAlignmentLeft) backgroundColor:kClearColor font:FONT(12) textColor:kWhiteColor];
+    securityLbl.text = securityArray[0];
+//    securityLbl.tag = 200;
+    securityLbl.numberOfLines = 0;
+    [securityLbl sizeToFit];
+    [passwordView addSubview:securityLbl];
+    
+    
+    
+    
+    pointView1 = [[UIView alloc]initWithFrame:CGRectMake(35, securityLbl.yy + 10, 8, 8)];
+    pointView1.backgroundColor = kWhiteColor;
+    kViewRadius(pointView1, 4);
+//    pointView.tag = 301;
+    [passwordView addSubview:pointView1];
+    
+    UILabel *securityLbl1 = [UILabel labelWithFrame:CGRectMake(pointView1.xx + 6, pointView1.y - 2, SCREEN_WIDTH - pointView1.xx - 6 - 10, 12) textAligment:(NSTextAlignmentLeft) backgroundColor:kClearColor font:FONT(12) textColor:kWhiteColor];
+    securityLbl1.text = securityArray[1];
+//    securityLbl1.tag = 201;
+    securityLbl1.numberOfLines = 0;
+    [securityLbl1 sizeToFit];
+    [passwordView addSubview:securityLbl1];
+    
+    pointView2 = [[UIView alloc]initWithFrame:CGRectMake(35, securityLbl1.yy + 10, 8, 8)];
+    pointView2.backgroundColor = kWhiteColor;
+    kViewRadius(pointView2, 4);
+//    pointView.tag = 302;
+    [passwordView addSubview:pointView2];
+    
+    UILabel *securityLbl2 = [UILabel labelWithFrame:CGRectMake(pointView2.xx + 6, pointView2.y - 2, SCREEN_WIDTH - pointView2.xx - 6 - 10, 12) textAligment:(NSTextAlignmentLeft) backgroundColor:kClearColor font:FONT(12) textColor:kWhiteColor];
+    securityLbl2.text = securityArray[2];
+    securityLbl2.tag = 202;
+    securityLbl2.numberOfLines = 0;
+    [securityLbl2 sizeToFit];
+    [passwordView addSubview:securityLbl2];
+    
+    
+    
+    
+//    UILabel *label = [self.view viewWithTag:202];
+    UILabel *levelStateLbl = [UILabel labelWithFrame:CGRectMake(SCREEN_WIDTH - 35, securityLbl2.yy + 4, 0, 18) textAligment:(NSTextAlignmentRight) backgroundColor:kClearColor font:FONT(12) textColor:kWhiteColor];
     NSString *level = [LangSwitcher switchLang:@"安全级别" key:nil];
     NSString *State = [LangSwitcher switchLang:@"低" key:nil];
     NSString *str = [NSString stringWithFormat:@"%@ %@",level,State];
@@ -666,7 +710,7 @@
     [attrStr addAttribute:NSFontAttributeName value:HGboldfont(18) range:NSMakeRange(str.length - State.length,State.length)];
     _levelStateLbl.attributedText = attrStr;
     [_levelStateLbl sizeToFit];
-    _levelStateLbl.frame = CGRectMake(SCREEN_WIDTH - 35 - _levelStateLbl.width, label.y - 6, _levelStateLbl.width, 18);
+    _levelStateLbl.frame = CGRectMake(SCREEN_WIDTH - 35 - _levelStateLbl.width, label.yy + 4, _levelStateLbl.width, 18);
 }
 
 

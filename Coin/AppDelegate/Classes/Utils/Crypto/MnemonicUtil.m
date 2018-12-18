@@ -220,7 +220,6 @@
 + (NSString *)getEthPrivateKey:(BTCMnemonic *)mnemonic {
     BTCKeychain *keychain = [mnemonic keychain];
     keychain = [keychain derivedKeychainWithPath:@"m/44'/1'/2'"];
-    
     return keychain.key.privateKeyAddress.string;
 }
 

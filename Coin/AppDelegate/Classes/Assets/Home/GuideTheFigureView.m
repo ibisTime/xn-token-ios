@@ -79,7 +79,7 @@
     iKonwBtn.hidden = YES;
     directionImg.hidden = YES;
     
-//    iconBtn.frame = CGRectMake(31 + i % 3 * (40 + 30), 61 + CardWidth + 11 + kStatusBarHeight - 5, 40, 40);
+//    iconBtn.frame = CGRectMake(31 + i % 3 * (40 + 30), 61  + CardWidth + 11 + kStatusBarHeight - 5, 40, 40);
     
     UIImageView *squareBoxImg = [[UIImageView alloc]initWithFrame:CGRectMake(31 + 0 % 3 * (40 + 30) - 10, 61 + CardWidth + 11 + kStatusBarHeight - 10, 50, 50)];
     squareBoxImg.backgroundColor = kWhiteColor;

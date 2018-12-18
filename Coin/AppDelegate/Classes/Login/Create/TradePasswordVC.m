@@ -127,20 +127,47 @@
     
     NSArray *securityArray = @[[LangSwitcher switchLang:@"密码，用户解锁全币和法币" key:nil],[LangSwitcher switchLang:@"交易密码为本地密码，请妥善保管，丢失将无法找回" key:nil],[LangSwitcher switchLang:@"可通过删除私钥钱包重新导入助记词设置新密码" key:nil]];
     
-    for (int i = 0; i < 3; i ++) {
-        UIView *pointView = [[UIView alloc]initWithFrame:CGRectMake(note.xx, note.yy + 8 + i%3 * 20, 4, 4)];
-        pointView.backgroundColor = kWhiteColor;
-        kViewRadius(pointView, 2);
-        [passwordView addSubview:pointView];
-        
-        UILabel *securityLbl = [UILabel labelWithFrame:CGRectMake(pointView.xx + 6, pointView.y - 4, SCREEN_WIDTH - pointView.xx - 6 - 10, 12) textAligment:(NSTextAlignmentLeft) backgroundColor:kClearColor font:FONT(12) textColor:kWhiteColor];
-        securityLbl.text = securityArray[i];
-        securityLbl.tag = 200 + i;
-        [passwordView addSubview:securityLbl];
-    }
+    UIView *pointView = [[UIView alloc]initWithFrame:CGRectMake(note.xx, note.yy + 8, 4, 4)];
+    pointView.backgroundColor = kWhiteColor;
+    kViewRadius(pointView, 2);
+    [passwordView addSubview:pointView];
+    
+    UILabel *securityLbl = [UILabel labelWithFrame:CGRectMake(pointView.xx + 6, pointView.y - 4, SCREEN_WIDTH - pointView.xx - 6 - 10, 12) textAligment:(NSTextAlignmentLeft) backgroundColor:kClearColor font:FONT(12) textColor:kWhiteColor];
+    securityLbl.text = securityArray[0];
+    securityLbl.tag = 200;
+    securityLbl.numberOfLines = 0;
+    [securityLbl sizeToFit];
+    [passwordView addSubview:securityLbl];
+    
+    
+    
+    
+    UIView *pointView1 = [[UIView alloc]initWithFrame:CGRectMake(note.xx, securityLbl.yy + 10, 4, 4)];
+    pointView1.backgroundColor = kWhiteColor;
+    kViewRadius(pointView1, 2);
+    [passwordView addSubview:pointView1];
+    
+    UILabel *securityLbl1 = [UILabel labelWithFrame:CGRectMake(pointView1.xx + 6, pointView1.y - 4, SCREEN_WIDTH - pointView1.xx - 6 - 10, 12) textAligment:(NSTextAlignmentLeft) backgroundColor:kClearColor font:FONT(12) textColor:kWhiteColor];
+    securityLbl1.text = securityArray[1];
+    securityLbl1.tag = 201;
+    securityLbl1.numberOfLines = 0;
+    [securityLbl1 sizeToFit];
+    [passwordView addSubview:securityLbl1];
+    
+    UIView *pointView2 = [[UIView alloc]initWithFrame:CGRectMake(note.xx, securityLbl1.yy + 10, 4, 4)];
+    pointView2.backgroundColor = kWhiteColor;
+    kViewRadius(pointView2, 2);
+    [passwordView addSubview:pointView2];
+
+    UILabel *securityLbl2 = [UILabel labelWithFrame:CGRectMake(pointView2.xx + 6, pointView2.y - 4, SCREEN_WIDTH - pointView2.xx - 6 - 10, 12) textAligment:(NSTextAlignmentLeft) backgroundColor:kClearColor font:FONT(12) textColor:kWhiteColor];
+    securityLbl2.text = securityArray[2];
+    securityLbl2.tag = 202;
+    securityLbl2.numberOfLines = 0;
+    [securityLbl2 sizeToFit];
+    [passwordView addSubview:securityLbl2];
     
     UIButton *confirmBtn = [UIButton buttonWithTitle:@"" titleColor:kClearColor backgroundColor:kClearColor titleFont:0];
-    confirmBtn.frame = CGRectMake(SCREEN_WIDTH - 85, 160 - 64 + kNavigationBarHeight + 108 * 2 - 40 + 100, 50, 50);
+    confirmBtn.frame = CGRectMake(SCREEN_WIDTH - 85, securityLbl2.yy + 30, 50, 50);
     [confirmBtn setBackgroundImage:kImage(@"矩形3拷贝") forState:(UIControlStateNormal)];
     [confirmBtn addTarget:self action:@selector(nextBtn) forControlEvents:(UIControlEventTouchUpInside)];
     [passwordView addSubview:confirmBtn];

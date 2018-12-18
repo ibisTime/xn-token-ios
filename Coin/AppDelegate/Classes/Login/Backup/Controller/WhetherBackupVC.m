@@ -34,12 +34,12 @@
     [self.view addSubview:nameLabel];
     
     UILabel *contentLabel = [UILabel labelWithFrame:CGRectMake(22.5, nameLabel.yy + 25, SCREEN_WIDTH - 45, 0) textAligment:(NSTextAlignmentLeft) backgroundColor:kClearColor font:FONT(14) textColor:kWhiteColor];
-    contentLabel.attributedText= [UserModel ReturnsTheDistanceBetween:[LangSwitcher switchLang:@"已为您创建BTC,ETH,WAN等N个主链币种钱包地址\nTheia钱包支持一套助记词管理多个主链币种钱包地址" key:nil]];
+    contentLabel.attributedText= [UserModel ReturnsTheDistanceBetween:[NSString stringWithFormat:@"%@\n%@",[LangSwitcher switchLang:@"已为您创建BTC,ETH,WAN等N个主链币种钱包地址" key:nil],[LangSwitcher switchLang:@"Theia钱包支持一套助记词管理多个主链币种钱包地址" key:nil]]];
+//    [LangSwitcher switchLang:@"已为您创建BTC,ETH,WAN等N个主链币种钱包地址\nTheia钱包支持一套助记词管理多个主链币种钱包地址" key:nil]
     contentLabel.numberOfLines = 0;
     [contentLabel sizeToFit];
     contentLabel.frame = CGRectMake(22.5, nameLabel.yy + 20, SCREEN_WIDTH - 45, contentLabel.height);
     [self.view addSubview:contentLabel];
-    
     
     UIButton *JustMomentBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"稍候备份" key:nil] titleColor:kHexColor(@"d6d5d5") backgroundColor:kClearColor titleFont:16];
     JustMomentBtn.frame = CGRectMake(40, contentLabel.yy + 81, SCREEN_WIDTH/2 - 50, 50);

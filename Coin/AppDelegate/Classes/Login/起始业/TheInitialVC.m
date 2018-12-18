@@ -48,7 +48,7 @@
 //        [backnBtn setImage:kImage(@"返回 白色") forState:(UIControlStateNormal)];
         [backnBtn setTitle:[LangSwitcher switchLang:@"回到首页" key:nil] forState:(UIControlStateNormal)];
         [backnBtn setTitleColor:kWhiteColor forState:(UIControlStateNormal)];
-        backnBtn.frame = CGRectMake(20, kStatusBarHeight, 100, 44);
+        backnBtn.frame = CGRectMake(20, kStatusBarHeight, SCREEN_WIDTH - 40, 44);
         backnBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         backnBtn.titleLabel.font = Font(16);
         [backnBtn addTarget:self action:@selector(backnBtnClick) forControlEvents:(UIControlEventTouchUpInside)];

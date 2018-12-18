@@ -131,7 +131,7 @@
                 [self.navigationController pushViewController:trans animated:YES];
             }else{
                 
-                [TLAlert alertWithTitle:[LangSwitcher switchLang:@"提示" key:nil] message:@"您还未创建私钥钱包,无法使用一键划转功能" confirmAction:^{
+                [TLAlert alertWithTitle:[LangSwitcher switchLang:@"提示" key:nil] message:[LangSwitcher switchLang:@"您还未创建私钥钱包,无法使用一键划转功能" key:nil] confirmAction:^{
                 }];
             }
         }
@@ -543,7 +543,6 @@
 //        本地未存私钥列表
     for (int i = 0; i < arr.count; i++) {
         CoinModel *model = arr[i];
-        //        symbol = model.symbol;
         NSArray *array = [[[NSUserDefaults standardUserDefaults]objectForKey:MNEMONIC] componentsSeparatedByString:@" "];
         BTCMnemonic *mnemonic1 =  [MnemonicUtil importMnemonic:array];
         if ([AppConfig config].runEnv == 0) {

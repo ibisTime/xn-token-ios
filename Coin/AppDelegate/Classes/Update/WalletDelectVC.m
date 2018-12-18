@@ -238,7 +238,7 @@
         
         //设置交易密码
     }else{
-        [TLAlert alertWithMsg:@"助记词不存在,请检测备份"];
+        [TLAlert alertWithMsg:[LangSwitcher switchLang:@"助记词不存在,请检测备份" key:nil]];
         self.importButton.selected = NO;
     }
     

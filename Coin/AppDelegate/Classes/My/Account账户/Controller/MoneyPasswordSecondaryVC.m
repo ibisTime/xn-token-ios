@@ -138,7 +138,7 @@
     }else
     {
         if (_passFid.text.length >= 8 && [[UserModel user]isStringTheCapitalLettersWith:_passFid.text] == YES && [[UserModel user]isStringContainNumberWith:_passFid.text] == YES) {
-            [TLAlert alertWithInfo:[LangSwitcher switchLang:@"密码位数为8~25位数(字母+数字)" key:nil]];
+            [TLAlert alertWithInfo:[LangSwitcher switchLang:@"密码位数为8~25位(字母+数字)" key:nil]];
         }
     }
     

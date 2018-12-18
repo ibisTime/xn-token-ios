@@ -107,7 +107,7 @@
 - (void)addSeeMoreButton {
     __weak __typeof(self) weakSelf = self;
     
-    NSMutableAttributedString *text = [UserModel ReturnsTheDistanceBetween:@"... 展开"];
+    NSMutableAttributedString *text = [UserModel ReturnsTheDistanceBetween:[NSString stringWithFormat:@"... %@",[LangSwitcher switchLang:@"展开" key:nil]]];
     
     YYTextHighlight *hi = [YYTextHighlight new];
     [hi setColor:[UIColor colorWithRed:0.578 green:0.790 blue:1.000 alpha:1.000]];
@@ -125,8 +125,8 @@
     };
     
     
-    [text yy_setColor:[UIColor colorWithRed:0.000 green:0.449 blue:1.000 alpha:1.000] range:[text.string rangeOfString:@"展开"]];
-    [text yy_setTextHighlight:hi range:[text.string rangeOfString:@"展开"]];
+    [text yy_setColor:[UIColor colorWithRed:0.000 green:0.449 blue:1.000 alpha:1.000] range:[text.string rangeOfString:[LangSwitcher switchLang:@"展开" key:nil]]];
+    [text yy_setTextHighlight:hi range:[text.string rangeOfString:[LangSwitcher switchLang:@"展开" key:nil]]];
     text.yy_font =_introduceLbl.font;
     
     

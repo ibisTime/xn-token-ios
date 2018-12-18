@@ -145,7 +145,7 @@
         [textField11.text isEqualToString:@""] ||
         [textField12.text isEqualToString:@""]
         ) {
-        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"助记词不能为空" key:nil]];
+        [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入助记词" key:nil]];
         return;
     }
     NSString *mnemonic = [NSString stringWithFormat:@"%@ %@ %@ %@ %@ %@ %@ %@ %@ %@ %@ %@",
@@ -203,7 +203,7 @@
         
     }else
     {
-        [TLAlert alertWithMsg:@"助记词不存在,请检测备份"];
+        [TLAlert alertWithMsg:[LangSwitcher switchLang:@"助记词不存在,请检测备份" key:nil]];
 //        self.importButton.selected = NO;
     }
     

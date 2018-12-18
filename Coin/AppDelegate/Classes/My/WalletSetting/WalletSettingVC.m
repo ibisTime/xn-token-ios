@@ -341,7 +341,7 @@
         //                [[NSUserDefaults standardUserDefaults] removeObjectForKey:KWalletAddress];
         //                [[NSUserDefaults standardUserDefaults] removeObjectForKey:KWalletPrivateKey];
         //                [[NSUserDefaults standardUserDefaults] synchronize];
-        [TLAlert alertWithMsg:[LangSwitcher switchLang:@"删除成功" key:nil]];
+//        [TLAlert alertWithMsg:[LangSwitcher switchLang:@"删除成功" key:nil]];
         
         
         [TLAlert alertWithTitle:[LangSwitcher switchLang:@"提示" key:nil] message:[LangSwitcher switchLang:@"删除成功" key:nil] confirmAction:^{

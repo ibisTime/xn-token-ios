@@ -33,7 +33,7 @@
         
         //分享到
         UILabel *titleLabel = [[UILabel alloc] init];
-        titleLabel.text = [LangSwitcher switchLang:@"分 享" key:nil];
+        titleLabel.text = [LangSwitcher switchLang:@"分享" key:nil];
         titleLabel.font = [UIFont boldSystemFontOfSize:16];
         titleLabel.textAlignment = NSTextAlignmentCenter;
         titleLabel.textColor =[UIColor colorWithRed:40/255.0 green:40/255.0 blue:40/255.0 alpha:1.0];
