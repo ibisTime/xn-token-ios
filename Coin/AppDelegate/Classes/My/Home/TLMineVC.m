@@ -85,6 +85,7 @@
     }
     [self requesUserInfoWithResponseObject];
     [self changeInfo];
+    [self loadData];
 }
 
 //如果仅设置当前页导航透明，需加入下面方法
@@ -122,6 +123,25 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(InfoNotificationAction:) name:@"ALLPRICE" object:nil];
     
 }
+
+
+
+//总收益
+-(void)loadData
+{
+    
+    TLNetworking *http = [[TLNetworking alloc] init];
+    http.code = @"625800";
+    http.parameters[@"userId"] = [TLUser user].userId;
+    [http postWithSuccess:^(id responseObject) {
+        self.tableView.model = [MyIncomeModel mj_objectWithKeyValues:responseObject[@"data"]];
+        [self.tableView reloadData];
+//        [self.tableView endRefreshHeader];
+    } failure:^(NSError *error) {
+//        [self.tableView endRefreshHeader];
+    }];
+}
+
 
 //-(void)loadData{
 //    TLNetworking *http = [[TLNetworking alloc] init];

@@ -28,7 +28,7 @@
     self.webView = [[UIWebView alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height - 64)];
     self.webView.delegate = self;
     
-    [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",_URL]]]];
+    [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"https://www.cryptokitties.co"]]];
     [self.view addSubview:self.webView];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:(UIBarButtonSystemItemRefresh) target:self action:@selector(rightBtnClick)];
     

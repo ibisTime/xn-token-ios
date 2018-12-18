@@ -52,13 +52,26 @@ static NSString *MyAssetsTableView = @"MyAssetsTableViewCell";
     
     if (indexPath.section == 0) {
         MyAssetsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MyAssetsTableView forIndexPath:indexPath];
+        
+        
+        
         if ([TLUser isBlankString:self.priceStr] == NO) {
             cell.allAssetsLabel.text = self.priceStr;
         }
-        if ([TLUser isBlankString:self.earningsStr] == NO) {
+        
+        NSString *incomeTotal = [CoinUtil convertToRealCoin2:self.model.incomeTotal setScale:4  coin:@"BTC"];
+        NSString *label2Str = [NSString stringWithFormat:@"≈%@",incomeTotal];
+        
+        if ([TLUser isBlankString:label2Str] == NO) {
             
 //            NSString *incomeTotal = [CoinUtil convertToRealCoin2:self.earningsStr setScale:4  coin:@"BTC"];
-            cell.earningsLabel.text = self.earningsStr;
+            if ([label2Str floatValue] == 0) {
+                cell.earningsLabel.text = @"≈0.00";
+            }else
+            {
+                cell.earningsLabel.text = label2Str;
+            }
+            
         }
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
@@ -84,8 +97,8 @@ static NSString *MyAssetsTableView = @"MyAssetsTableViewCell";
     }
     
     
-    NSArray *imgArray = @[@"收益",@"身份验证",@"账号安全",@"账号安全",@"my通讯录",@"反馈",@"帮助(4)",@"设置"];
-    NSArray *textArray = @[@"我的收益",@"身份验证",@"账号安全",@"钱包工具",@"加入社群",@"问题反馈",@"帮助中心",@"设置",];
+    NSArray *imgArray = @[@"收益",@"身份验证",@"账号安全",@"钱包工具",@"关于我们",@"反馈",@"帮助(4)",@"设置"];
+    NSArray *textArray = @[@"我的收益",@"身份验证",@"账号安全",@"钱包工具",@"加入社群",@"问题反馈",@"帮助中心",@"设置"];
     
     [cell.iconImageView setImage:kImage(imgArray[indexPath.row]) forState:(UIControlStateNormal)];
     cell.titleLbl.text = [LangSwitcher switchLang:textArray[indexPath.row] key:nil];

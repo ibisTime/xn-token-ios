@@ -551,6 +551,10 @@
         }else{
             mnemonic1.keychain.network = [BTCNetwork testnet];
         }
+        
+        NSString *prikey   =[MnemonicUtil getPrivateKeyWithMnemonics:[[NSUserDefaults standardUserDefaults]objectForKey:MNEMONIC]];
+        
+//        NSString *address = [MnemonicUtil getAddressWithPrivateKey:prikey];
         NSString *address;
         if ([model.type isEqualToString:@"0"]) {
             if ([model.symbol isEqualToString:@"BTC"] || [model.symbol isEqualToString:@"USDT"]) {
@@ -563,7 +567,7 @@
                 address = [MnemonicUtil getBtcAddress:mnemonic1];
             }
             if ([model.symbol isEqualToString:@"ETH"]) {
-                address = [MnemonicUtil getEthAddress:mnemonic1];
+                address = [MnemonicUtil getAddressWithPrivateKey:prikey];
                 if (CoinArray.count > 0) {
                     isAccording = [self judgeIsAccording:model.symbol setCoinArray:CoinArray];
                 }else
@@ -572,7 +576,7 @@
                 }
             }
             if ([model.symbol isEqualToString:@"WAN"]) {
-                address = [MnemonicUtil getEthAddress:mnemonic1];
+                address = [MnemonicUtil getAddressWithPrivateKey:prikey];
                 if (CoinArray.count > 0) {
                     isAccording = [self judgeIsAccording:model.symbol setCoinArray:CoinArray];
                 }else
@@ -582,7 +586,7 @@
             }
         }else if ([model.type isEqualToString:@"1"])
         {
-            address = [MnemonicUtil getEthAddress:mnemonic1];
+            address = [MnemonicUtil getAddressWithPrivateKey:prikey];
             if (CoinArray.count > 0) {
                 isAccording = [self judgeIsAccording:model.symbol setCoinArray:CoinArray];
             }else
@@ -592,7 +596,7 @@
         }
         else
         {
-            address = [MnemonicUtil getEthAddress:mnemonic1];
+            address = [MnemonicUtil getAddressWithPrivateKey:prikey];
             if (CoinArray.count > 0) {
                 isAccording = [self judgeIsAccording:model.symbol setCoinArray:CoinArray];
             }else

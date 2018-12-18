@@ -8,8 +8,10 @@
 
 #import "TLTableView.h"
 #import "MineGroup.h"
-
+#import "MyIncomeModel.h"
 @interface MineTableView : TLTableView
+
+@property (nonatomic , strong)MyIncomeModel *model;
 
 @property (nonatomic, strong) MineGroup *mineGroup;
 
