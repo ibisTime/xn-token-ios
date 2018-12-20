@@ -61,10 +61,9 @@
     self.navigationItem.titleView = nameLable;
     
     self.view.backgroundColor = [UIColor whiteColor];
-    self.webView = [[UIWebView alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height - 64)];
+    self.webView = [[UIWebView alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, SCREEN_HEIGHT - kNavigationBarHeight - 2)];
     self.webView.delegate = self;
-//    self.title = [LangSwitcher switchLang:@"攻略" key:nil];
-    
+    self.webView.backgroundColor = kWhiteColor;
     [self.view addSubview:self.webView];
     
     UIButton *button = [UIButton buttonWithType:(UIButtonTypeCustom)];

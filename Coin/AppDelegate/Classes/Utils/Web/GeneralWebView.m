@@ -17,6 +17,7 @@
 @interface GeneralWebView ()<UIWebViewDelegate,NSURLConnectionDelegate>
 {
     WYWebProgressLayer *_progressLayer; // 网页加载进度条
+    UILabel *nameLable;
     
 }
 
@@ -26,12 +27,58 @@
 
 @implementation GeneralWebView
 
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBar.translucent = YES;
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+    self.navigationController.navigationBar.tintColor = [UIColor blackColor];
+    self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
+    self.navigationItem.backBarButtonItem = item;
+    //    self.navigationController.navigationBar.shadowImage = [UIImage new];
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
+    
+    
+    
+    
+}
+
+//如果仅设置当前页导航透明，需加入下面方法
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    
+    self.navigationController.navigationBar.translucent = NO;
+    [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setShadowImage:nil];
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    self.navigationController.navigationBar.barTintColor = kHexColor(@"#0848DF");
+    self.navigationItem.backBarButtonItem = item;
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+    
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    UIView *backView = [[UIView alloc]initWithFrame:CGRectMake(0, -kNavigationBarHeight, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    backView.backgroundColor = kWhiteColor;
+    [self.view addSubview:backView];
+    
+    nameLable = [[UILabel alloc]initWithFrame:CGRectMake(54, kStatusBarHeight, kScreenWidth - 108, 44)];
+//    nameLable.text = [LangSwitcher switchLang:@"攻略" key:nil];
+    nameLable.textAlignment = NSTextAlignmentCenter;
+    nameLable.font = Font(16);
+    nameLable.textColor = kTextBlack;
+    self.navigationItem.titleView = nameLable;
+    
     self.view.backgroundColor = [UIColor whiteColor];
-    self.webView = [[UIWebView alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height - 64)];
+    self.webView = [[UIWebView alloc]initWithFrame:CGRectMake(0, 2, SCREEN_WIDTH, SCREEN_HEIGHT - kNavigationBarHeight - 2)];
     self.webView.delegate = self;
+    self.webView.backgroundColor = kWhiteColor;
     NSURLRequest *request=[NSURLRequest requestWithURL:[NSURL URLWithString:_URL]];
+    
+    nameLable.text = self.name;
     
 //    [NSURLRequest setAllowsAnyHTTPSCertificate:YES forHost:[[NSURL URLWithString:_URL] host]];
     [NSURLConnection connectionWithRequest:request delegate:self];
@@ -77,7 +124,7 @@
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
     [_progressLayer finishedLoad];
-    self.title = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];
+//    nameLable.text = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];
 }
 
 

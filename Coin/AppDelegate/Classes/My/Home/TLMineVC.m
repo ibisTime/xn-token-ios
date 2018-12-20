@@ -93,43 +93,34 @@
     [super viewWillDisappear:animated];
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
     [self.navigationController setNavigationBarHidden:NO animated:animated];
-
 }
 
-
-- (UIStatusBarStyle)preferredStatusBarStyle {
-    
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
     return UIStatusBarStyleLightContent;
 }
-
-
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = [LangSwitcher switchLang:@"我的" key:nil];
     //顶部视图
     [self initMineHeaderView];
-
     [self initTableView];
     //初始化用户信息
     [[TLUser user] updateUserInfo];
     //通知
     [self addNotification];
     [self changeInfo];
-    
     [self requesUserInfoWithResponseObject];
-    
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(InfoNotificationAction:) name:@"ALLPRICE" object:nil];
-    
 }
-
-
 
 //总收益
 -(void)loadData
 {
-    
+    if ([TLUser user].isLogin == NO) {
+        return;
+    }
     TLNetworking *http = [[TLNetworking alloc] init];
     http.code = @"625800";
     http.parameters[@"userId"] = [TLUser user].userId;
@@ -142,16 +133,12 @@
     }];
 }
 
-
 //-(void)loadData{
 //    TLNetworking *http = [[TLNetworking alloc] init];
 ////    http.showView = self.view;
 //    http.code = @"625800";
 //    http.parameters[@"userId"] = [TLUser user].userId;
 //    [http postWithSuccess:^(id responseObject) {
-//
-//
-//
 ////        weakSelf.topModel = [MyIncomeTopModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"][@"top5"]];
 ////        weakSelf.tableView.topModel = weakSelf.topModel;
 ////
@@ -166,13 +153,11 @@
 //    }];
 //}
 
-
 #pragma mark -- 接收到通知
 - (void)InfoNotificationAction:(NSNotification *)notification{
     self.tableView.priceStr = [NSString stringWithFormat:@"≈%.2f",[notification.userInfo[@"allprice"] floatValue]];
     [self.tableView reloadData];
 }
-
 
 #pragma mark -- 删除通知
 - (void)dealloc
@@ -191,10 +176,7 @@
         manager.imgData = imgData;
         manager.image = livingPhoto;
         [manager getTokenShowView:self.view succes:^(NSString *key) {
-            
             str3 = key;
-            
-            
             TLNetworking *http = [TLNetworking new];
             http.showView = self.view;
             http.code = @"805197";
@@ -202,12 +184,10 @@
             http.parameters[@"frontImage"] = str1;
             http.parameters[@"backImage"] = str2;
             http.parameters[@"faceImage"] = str3;
-//            QUERY
+//
             [http postWithSuccess:^(id responseObject) {
-                
                 [TLAlert alertWithMsg:[LangSwitcher switchLang:@"实名认证成功" key:nil]];
                 [self requesUserInfoWithResponseObject];
-                
             } failure:^(NSError *error) {
                 
             }];
@@ -218,20 +198,19 @@
     }
 }
 
-- (void)faceAuthFinishedWithResult:(NSInteger)result userInfo:(id)userInfo{
-    
+- (void)faceAuthFinishedWithResult:(NSInteger)result userInfo:(id)userInfo
+{
     NSLog(@"Swift authFinish");
 }
 
-- (void)idCardOcrScanFinishedWithResult:(ZQFaceAuthResult)result userInfo:(id)userInfo{
+- (void)idCardOcrScanFinishedWithResult:(ZQFaceAuthResult)result userInfo:(id)userInfo
+{
     NSLog(@"OC OCR Finish");
-    
     UIImage *frontcard = [userInfo objectForKey:@"frontcard"];
     UIImage *portrait = [userInfo objectForKey:@"portrait"];
     UIImage *backcard = [userInfo objectForKey:@"backcard"];
-    if(result  == ZQFaceAuthResult_Done && frontcard != nil && portrait != nil && backcard !=nil){
-        
-        
+    if(result  == ZQFaceAuthResult_Done && frontcard != nil && portrait != nil && backcard !=nil)
+    {
         NSData *imgData = UIImageJPEGRepresentation(frontcard, 0.6);
         NSData *imgData1 = UIImageJPEGRepresentation(backcard, 0.6);
         //进行上传
@@ -280,41 +259,28 @@
     http.parameters[@"userId"] = [TLUser user].userId;
     http.parameters[@"token"] = [TLUser user].token;
     [http postWithSuccess:^(id responseObject) {
-        
         NSDictionary *userInfo = responseObject[@"data"];
         //保存用户信息
         [[TLUser user] saveUserInfo:userInfo];
         //初始化用户信息
         [[TLUser user] setUserInfoWithDict:userInfo];
         [self changeInfo];
-        
-        
         self.tableView.earningsStr = [NSString stringWithFormat:@"≈%.2f",[responseObject[@"data"][@"incomeTotal"] floatValue]];
         [self.tableView reloadData];
-        
     } failure:^(NSError *error) {
         
-        
     }];
-    
 }
 
-
 #pragma mark- overly-delegate
-
 #pragma mark - Init
-
 - (void)initMineHeaderView {
-    
     MineHeaderView *mineHeaderView = [[MineHeaderView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 188 + kStatusBarHeight)];
     mineHeaderView.delegate = self;
     self.headerView = mineHeaderView;
-    
 }
 
-
 - (void)initTableView {
-    
     self.tableView = [[MineTableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, SCREEN_HEIGHT - kTabBarHeight) style:UITableViewStyleGrouped];
     self.tableView.showsVerticalScrollIndicator = YES;
     self.tableView.showsHorizontalScrollIndicator = YES;
@@ -428,12 +394,7 @@
                 self.navigationItem.backBarButtonItem = item;
                 [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor blackColor],
                                                                                   NSFontAttributeName : [UIFont fontWithName:@"Helvetica-Bold" size:16]}];
-                
-                
                 helpCenter.uiDelegate = self;
-                
-                
-                
                 [self.navigationController  pushViewController:helpCenter animated:YES];
             }
                 break;
@@ -443,15 +404,11 @@
                 [self.navigationController pushViewController:vc animated:YES];
             }
                 break;
-                
             default:
                 break;
         }
     }
 }
-
-
-
 
 -(ZDKContactUsVisibility)active {
     return ZDKContactUsVisibilityArticleListOnly;
@@ -460,20 +417,13 @@
 
 - (ZDKNavBarConversationsUIType) navBarConversationsUIType
 {
-
     return ZDKNavBarConversationsUITypeLocalizedLabel;
 }
 
-
-
 - (TLImagePicker *)imagePicker {
-    
     if (!_imagePicker) {
-        
         CoinWeakSelf;
-        
         _imagePicker = [[TLImagePicker alloc] initWithVC:self];
-        
         _imagePicker.allowsEditing = YES;
         _imagePicker.pickFinish = ^(NSDictionary *info){
 
@@ -500,14 +450,9 @@
 }
 
 - (void)addNotification {
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeInfo) name:kUserLoginNotification object:nil];
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeInfo) name:kUserInfoChange object:nil];
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginOut) name:kUserLoginOutNotification object:nil];
-
-
 }
 
 //#pragma mark - Events
@@ -516,9 +461,7 @@
     [[TLUser user] loginOut];
     [self.headerView.photoBtn setImage:kImage(@"头像") forState:UIControlStateNormal];
     self.headerView.nameLbl.text = nil;
-    
     self.headerView.mobileLbl.text = nil;
-
 }
 
 - (void)changeInfo {
@@ -531,10 +474,9 @@
         [self.headerView.photoBtn setImage:nil forState:UIControlStateNormal];
     }
     
-    
     if ([TLUser user].isLogin == NO) {
         self.headerView.nameLbl.text = [LangSwitcher switchLang:@"未登录" key:nil];
-//        self.headerView.mobileLbl.text = [LangSwitcher switchLang:@"" key:<#(NSString *)#>]
+//        self.headerView.mobileLbl.text = [LangSwitcher switchLang:@"" key:(NSString *)]
         self.headerView.phone.hidden = YES;
         return;
     }
@@ -549,7 +491,6 @@
         [self.headerView.realnameBtn SG_imagePositionStyle:(SGImagePositionStyleDefault) spacing:3.5 imagePositionBlock:^(UIButton *button) {
             [button setImage:kImage(@"已完成") forState:(UIControlStateNormal)];
         }];
-        
     }
     self.headerView.nameLbl.text = [TLUser user].nickname;
     NSRange rang = NSMakeRange(3, 4);
@@ -564,8 +505,8 @@
     self.headerView.levelBtn.hidden = [[TLUser user].level isEqualToString:kLevelOrdinaryTraders] ? YES : NO;
     [self.headerView.integralBtn addTarget:self action:@selector(integralBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
     [self.tableView reloadData];
-    
 }
+
 //信用积分
 -(void)integralBtnClick
 {
@@ -589,7 +530,6 @@
 }
 
 - (void)changeHeadIconWithKey:(NSString *)key imgData:(NSData *)imgData {
-    
     TLNetworking *http = [TLNetworking new];
     http.showView = self.view;
     http.code = USER_CHANGE_USER_PHOTO;
@@ -602,12 +542,11 @@
         [[TLUser user] updateUserInfoWithNotification:NO];
         [[NSNotificationCenter defaultCenter] postNotificationName:kUserInfoChange object:nil];
     } failure:^(NSError *error) {
+        
     }];
-    
 }
 
 #pragma mark - MineHeaderSeletedDelegate
-
 - (void)didSelectedWithType:(MineHeaderSeletedType)type {
     switch (type) {
         case MineHeaderSeletedTypePhoto:
@@ -618,9 +557,6 @@
             break;
     }
 }
-
-
-
 
 
 @end

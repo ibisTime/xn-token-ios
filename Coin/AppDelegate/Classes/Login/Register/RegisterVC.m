@@ -417,7 +417,7 @@
                     [[UserModel user] phoneCode:self.codeBtn];
                     
                 } failure:^(NSError *error) {
-                    [TLAlert alertWithError:[LangSwitcher switchLang:@"发送失败,请检查手机号" key:nil]];
+                    [TLAlert alertWithError:[LangSwitcher switchLang:@"邮箱验证码发送失败" key:nil]];
                 }];
             }
             

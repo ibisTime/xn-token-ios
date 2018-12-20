@@ -11,8 +11,11 @@
 #import "ContactTableViewCell.h"
 #import "ContactDataHelper.h"//根据拼音A~Z~#进行排序的tool
 #import "TheInitialVC.h"
-@interface SearchCountriesVC ()<UITableViewDelegate,UITableViewDataSource,
-UISearchBarDelegate,UISearchDisplayDelegate>
+#import "LoginVC.h"
+#import "RegisterVC.h"
+#import "ForgotPasswordVC.h"
+#import "TheInitialVC.h"
+@interface SearchCountriesVC ()<UITableViewDelegate,UITableViewDataSource,UISearchBarDelegate,UISearchDisplayDelegate>
 {
     NSArray *_rowArr;//row arr
     NSArray *_sectionArr;//section arr
@@ -42,8 +45,10 @@ UISearchBarDelegate,UISearchDisplayDelegate>
     //    self.navigationController.navigationBar.shadowImage = [UIImage new];
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
     
-    
+//    self.navigationController.delegate=self;
 }
+
+
 
 //如果仅设置当前页导航透明，需加入下面方法
 - (void)viewWillDisappear:(BOOL)animated{
@@ -60,6 +65,20 @@ UISearchBarDelegate,UISearchDisplayDelegate>
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     
 }
+
+//- (void)navigationController:(UINavigationController*)navigationController willShowViewController:(UIViewController*)viewController animated:(BOOL)animated{
+//    if([[viewController class]isSubclassOfClass:[LoginVC class]]) {
+//        ///执行刷新操作
+//        LoginVC r
+//
+//    }
+//    ///删除代理，防止该controller销毁后引起navigationController.delegate指向野指针造成崩溃
+//
+//    if(![[viewController class]isSubclassOfClass:[self class]]) {
+//        self.navigationController.delegate=nil;
+//    }
+//}
+
 
 
 - (void)viewDidLoad {
@@ -321,15 +340,13 @@ UISearchBarDelegate,UISearchDisplayDelegate>
         {
             [LangSwitcher changLangType:LangTypeKorean];
             money = @"KRW";
-            
             [UIApplication sharedApplication].keyWindow.rootViewController = na;
-            
         }else{
-            
             [LangSwitcher changLangType:LangTypeEnglish];
             money = @"USD";
             [UIApplication sharedApplication].keyWindow.rootViewController = na;
         }
+        [self.navigationController popViewControllerAnimated:YES];
         [[NSUserDefaults standardUserDefaults] setObject:money forKey:KLocalMoney];
     }
 }
@@ -338,6 +355,7 @@ UISearchBarDelegate,UISearchDisplayDelegate>
 - (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar{
     return YES;
 }
+
 - (BOOL)searchBarShouldEndEditing:(UISearchBar *)searchBar{
     return YES;
 }

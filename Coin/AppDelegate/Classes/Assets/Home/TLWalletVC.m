@@ -495,11 +495,11 @@
                 [TableViewAnimationKit showWithAnimationType:2 tableView:self.tableView];
             }
             [self GuideTheFigure];
-            [weakSelf.tableView endRefreshHeader];
+            
         }
         modes = weakSelf.AssetsListModel;
         
-        
+        [weakSelf.tableView endRefreshHeader];
         
     } failure:^(NSError *error) {
         [weakSelf.tableView endRefreshHeader];

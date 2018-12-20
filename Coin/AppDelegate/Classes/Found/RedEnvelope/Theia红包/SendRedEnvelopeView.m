@@ -560,36 +560,23 @@
     
     [UIView animateWithDuration:0.5 animations:^{
         self.view1.hidden = YES;
-//        self.view1.frame = CGRectZero;
-//        [self.view1 removeFromSuperview];
-        
     }];
 }
 
 - (void)payMoney
 {
-    
-    
-    
-    
     self.view1.hidden = YES;
-//    self.view1.frame = CGRectZero;
-//    [self.view1 removeFromSuperview];
     [UIView animateWithDuration:0.5 animations:^{
-        
         [_delegate SendRedEnvelopeButton:102 currency:_currency type:_type count:_count sendNum:_sendNum greeting:_greeting];
-        
     }];
-    
-    
 }
+
 -(void)setPlatforms:(NSMutableArray<CurrencyModel *> *)platforms
 {
     _platforms = platforms;
     CurrencyModel *platform = platforms[index];
     NSLog(@"%@",platform);
     [self Platform:platform];
-
 }
 
 -(void)Platform:(CurrencyModel *)platform

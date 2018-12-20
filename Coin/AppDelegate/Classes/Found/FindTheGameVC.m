@@ -81,6 +81,7 @@
 {
     GeneralWebView *vc = [GeneralWebView new];
     vc.URL = _GameModel.url;
+    vc.name = _GameModel.name;
     [self showViewController:vc sender:self];
 }
 

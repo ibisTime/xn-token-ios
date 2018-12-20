@@ -270,6 +270,7 @@
         
         GeneralWebView *vc = [GeneralWebView new];
         vc.URL = self.GameModel[sender.tag - 400].url;
+        vc.name = self.GameModel[sender.tag - 400].name;
         [self showViewController:vc sender:self];
         
 //        FindTheGameVC *vc = [FindTheGameVC new];

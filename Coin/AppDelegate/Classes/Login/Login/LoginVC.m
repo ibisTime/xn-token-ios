@@ -27,6 +27,7 @@
 @property (nonatomic , strong)UIView *lineView;
 @end
 
+
 @implementation LoginVC
 
 - (void)viewWillAppear:(BOOL)animated{

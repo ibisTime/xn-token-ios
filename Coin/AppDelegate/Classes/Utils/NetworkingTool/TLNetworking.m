@@ -65,6 +65,8 @@
         _isShowMsg = YES;
         self.parameters = [NSMutableDictionary dictionary];
         self.isUploadToken = YES;
+//        _manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"t ext/html", nil];
+
         
     }
     return self;
