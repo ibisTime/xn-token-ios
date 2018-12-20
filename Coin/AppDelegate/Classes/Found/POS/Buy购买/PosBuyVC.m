@@ -12,7 +12,7 @@
 #import "RechargeCoinVC.h"
 #import "PayModel.h"
 #import "AssetPwdView.h"
-//#import "TLMyRecordVC.h"
+#import "MoneyPasswordVC.h"
 #import "HTMLStrVC.h"
 #import "PosMyInvestmentDetailsVC.h"
 @interface PosBuyVC ()<RefreshDelegate,UITextFieldDelegate>
@@ -81,17 +81,24 @@
         [self.pwdView endEditing:YES];
         [self.view endEditing:YES];
         //        [self.pwdView removeFromSuperview];
+        [[UserModel user].cusPopView dismiss];
     };
     CoinWeakSelf;
     self.pwdView.forgetBlock = ^{
         weakSelf.pwdView.hidden = YES;
         weakSelf.view2.hidden = YES;
-        TLPwdRelatedVC *vc  = [[TLPwdRelatedVC alloc] initWithType:TLPwdTypeTradeReset];
+        
+//        TLPwdRelatedVC *vc  = [[TLPwdRelatedVC alloc] initWithType:TLPwdTypeTradeReset];
+//        [weakSelf.navigationController pushViewController:vc animated:YES];
+        MoneyPasswordVC *vc = [MoneyPasswordVC new];
+        vc.titleNameStr = @"修改资金密码";
         [weakSelf.navigationController pushViewController:vc animated:YES];
-        vc.success = ^{
-            weakSelf.pwdView.hidden = NO;
-            weakSelf.view2.hidden = NO;
-        };
+        weakSelf.pwdView.hidden = NO;
+        weakSelf.view2.hidden = NO;
+        [[UserModel user].cusPopView dismiss];
+//        vc.success = ^{
+//
+//        };
 
     };
     pwdView.hidden = YES;
@@ -317,11 +324,11 @@
     }
     NSString *leftAmount = [CoinUtil convertToRealCoin:self.currencyModel.amountString coin:self.currencyModel.currency];
     NSString *rightAmount = [CoinUtil convertToRealCoin:self.currencyModel.frozenAmountString coin:self.currencyModel.currency];
-    NSString *ritAmount = [leftAmount subNumber:rightAmount];
-    NSString *str1 = [NSString stringWithFormat:@" %.2f ",[ritAmount doubleValue]];
+//    NSString *ritAmount = [leftAmount subNumber:rightAmount];
+//    NSString *str1 = [NSString stringWithFormat:@" %.2f ",[ritAmount doubleValue]];
 
 
-    NSString *increAmount1 = [CoinUtil convertToRealCoin:self.moneyModel.increAmount coin:self.moneyModel.symbol];
+//    NSString *increAmount1 = [CoinUtil convertToRealCoin:self.moneyModel.increAmount coin:self.moneyModel.symbol];
 
 
 //    if ([increAmount1 floatValue] * number > [str1 floatValue]) {
@@ -345,16 +352,17 @@
     payModel.getFree = self.coinLab.text;
 
 
-    UIView * view2 = [UIView new];
-    self.view2 = view2;
-    self.view2.hidden = NO;
+//    UIView * view2 = [UIView new];
+//    self.view2 = view2;
+//    self.view2.hidden = NO;
 
-    view2.frame =CGRectMake(0, 0, kScreenWidth, kScreenHeight);
-    view2.backgroundColor = [UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0.45];
+//    view2.frame =CGRectMake(0, 0, kScreenWidth, kScreenHeight);
+//    view2.backgroundColor = [UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0.45];
 
     //    view.alpha = 0.5;
-    UIWindow *keyWindow = [[[UIApplication sharedApplication] delegate] window];
-    [keyWindow addSubview:view2];
+//    UIWindow *keyWindow = [[[UIApplication sharedApplication] delegate] window];
+//    [keyWindow addSubview:view2];
+    
     UIView *whiteView = [UIView new];
     whiteView.layer.cornerRadius=5;
     whiteView.layer.shadowOpacity = 0.22;// 阴影透明度
@@ -363,8 +371,9 @@
     whiteView.layer.shadowOffset=CGSizeMake(1, 1);// 阴影的范围
     whiteView.frame = CGRectMake(24, SCREEN_HEIGHT/2 - 175, kScreenWidth - 48, 350);
     whiteView.backgroundColor = kWhiteColor;
-    [view2 addSubview:whiteView];
+//    [sel addSubview:whiteView];
 
+    [[UserModel user] showPopAnimationWithAnimationStyle:1 showView:whiteView];
 
     UIButton *exitBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [exitBtn setBackgroundImage:kImage(@"红包 删除") forState:UIControlStateNormal];
@@ -488,7 +497,7 @@
     UIButton *sureButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [sureButton setBackgroundColor:kAppCustomMainColor forState:UIControlStateNormal];
     [sureButton setTitleColor:kWhiteColor forState:UIControlStateNormal];
-    [view2 addSubview:sureButton];
+    [whiteView addSubview:sureButton];
 
     [sureButton setTitle:[LangSwitcher switchLang:@"确认付款" key:nil] forState:UIControlStateNormal];
     [sureButton addTarget:self action:@selector(payMoneyNow) forControlEvents:UIControlEventTouchUpInside];
@@ -500,25 +509,30 @@
         make.height.equalTo(@50);
 
     }];
+    
+    
+    
 }
 
 
 
 - (void)hideSelfbuy
 {
-    [UIView animateWithDuration:0.5 animations:^{
-        self.view2.hidden = YES;
-    }];
+//    [UIView animateWithDuration:0.5 animations:^{
+//        self.view2.hidden = YES;
+//    }];
+    [[UserModel user].cusPopView dismiss];
 
 }
 
 
 - (void)payMoneyNow
 {
-
+    [[UserModel user].cusPopView dismiss];
     //确认付款
     self.view2.hidden = YES;
     self.pwdView.hidden = NO;
+    [[UserModel user] showPopAnimationWithAnimationStyle:1 showView:self.pwdView];
     self.pwdView.password.textField.enabled = YES;
     CoinWeakSelf;
 
@@ -543,13 +557,14 @@
             NSNotification *notification =[NSNotification notificationWithName:@"LOADDATA" object:nil userInfo:nil];
             [[NSNotificationCenter defaultCenter] postNotification:notification];
 
+            [[UserModel user].cusPopView dismiss];
             [weakSelf showBuySucess];
             weakSelf.pwdView.hidden = YES;
 
         } failure:^(NSError *error) {
             weakSelf.pwdView.hidden = NO;
             [weakSelf.pwdView.password clearText];
-
+            [[UserModel user].cusPopView dismiss];
             return ;
 
         }];

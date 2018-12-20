@@ -80,7 +80,13 @@
     [self.navigationController setNavigationBarHidden:YES animated:animated];
 
     if ([TLUser isBlankString:[[NSUserDefaults standardUserDefaults] objectForKey:@"ALLPRICE"][@"allprice"]] == NO) {
-        self.tableView.priceStr = [NSString stringWithFormat:@"≈%.2f",[[[NSUserDefaults standardUserDefaults] objectForKey:@"ALLPRICE"][@"allprice"] floatValue]];
+        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"ALLPRICE"][@"allprice"] floatValue] == 0) {
+            self.tableView.priceStr = @"≈0.00";
+        }else
+        {
+            self.tableView.priceStr = [NSString stringWithFormat:@"≈%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"ALLPRICE"][@"allprice"]];
+        }
+        
         [self.tableView reloadData];
     }
     [self requesUserInfoWithResponseObject];

@@ -97,7 +97,7 @@
     //昵称
     self.nameLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kWhiteColor font:30.0];
     self.nameLbl.userInteractionEnabled = YES;
-    self.nameLbl.frame = CGRectMake(0, self.photoBtn.yy + 15, SCREEN_WIDTH, 22);
+    self.nameLbl.frame = CGRectMake(0, self.photoBtn.yy + 13, SCREEN_WIDTH, 26);
     self.nameLbl.textAlignment = NSTextAlignmentCenter;
     self.nameLbl.font = HGboldfont(22);
     [self addSubview:self.nameLbl];

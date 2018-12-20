@@ -260,7 +260,7 @@
 //    }
 //    [dataBase.dataBase close];
     
-    if (![[[NSUserDefaults standardUserDefaults]objectForKey:MNEMONICPASSWORD] isEqualToString:self.rePwdTf.text]) {
+    if (![[[NSUserDefaults standardUserDefaults]objectForKey:MNEMONICPASSWORD] isEqualToString:self.pwdTf.text]) {
         [TLAlert alertWithError:[LangSwitcher switchLang:@"交易密码错误" key:nil]];
         return;
     }

@@ -49,7 +49,7 @@ static NSString *MyAssetsTableView = @"MyAssetsTableViewCell";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+     
     if (indexPath.section == 0) {
         MyAssetsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MyAssetsTableView forIndexPath:indexPath];
         
