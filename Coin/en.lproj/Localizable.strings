@@ -235,7 +235,7 @@
 "未开启" = "Not open";
 "完成" = "complete";
 "身份认证" = "The identity authentication";
-"姓名" = "The name"; 
+"姓名" = "The name";
 "请输入姓名" = "Please enter your name";
 "身份证号码" = "Id card number";
 "请输入身份证号码" = "Please enter your id number";
@@ -900,7 +900,7 @@
 "更多精彩" = "More exciting";
 "游戏类" = "Games";
 "工具类" = "Tools";
-"咨询类" = "Consulting class";
+"资讯类" = "Consulting class";
 "开始" = "Start";
 "身份验证" = "Please type identity card";
 "账号安全" = "Account security";

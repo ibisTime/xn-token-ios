@@ -16,7 +16,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        NSArray *array = @[@"游戏类",@"工具类",@"咨询类"];
+        NSArray *array = @[@"游戏类",@"工具类",@"资讯类"];
         for (int i = 0; i < 3; i ++) {
             UIButton *ClassificationBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:array[i] key:nil] titleColor:kHexColor(@"#acacac") backgroundColor:kClearColor titleFont:16];
             ClassificationBtn.frame = CGRectMake(10 + i % 3 * 106, 5, 100, 40);
