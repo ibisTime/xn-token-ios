@@ -254,31 +254,31 @@
     }];
     
     //绑定邮箱
-    SettingModel *bindEmail = [SettingModel new];
-    bindEmail.text = [LangSwitcher switchLang:@"导出私钥" key:nil];
-    [bindEmail setAction:^{
-        
-        CheckForwordVC *editVC = [[CheckForwordVC alloc] init];
-        editVC.WalletType = WalletWordTypeThree;
-
-        editVC.title = [LangSwitcher switchLang:@"导出私钥" key:nil];
-
-
-        [weakSelf.navigationController pushViewController:editVC animated:YES];
-    }];
+//    SettingModel *bindEmail = [SettingModel new];
+//    bindEmail.text = [LangSwitcher switchLang:@"导出私钥" key:nil];
+//    [bindEmail setAction:^{
+//
+//        CheckForwordVC *editVC = [[CheckForwordVC alloc] init];
+//        editVC.WalletType = WalletWordTypeThree;
+//
+//        editVC.title = [LangSwitcher switchLang:@"导出私钥" key:nil];
+//
+//
+//        [weakSelf.navigationController pushViewController:editVC animated:YES];
+//    }];
     
 
     
     //修改登录密码
-    SettingModel *changeLoginPwd = [SettingModel new];
-    changeLoginPwd.text = [LangSwitcher switchLang:@"删除钱包" key:nil];
-    [changeLoginPwd setAction:^{
-        
-        WalletDelectVC *changeLoginPwdVC = [WalletDelectVC new];
-
-        [weakSelf.navigationController pushViewController:changeLoginPwdVC animated:YES];
-        
-    }];
+//    SettingModel *changeLoginPwd = [SettingModel new];
+//    changeLoginPwd.text = [LangSwitcher switchLang:@"删除钱包" key:nil];
+//    [changeLoginPwd setAction:^{
+//
+//        WalletDelectVC *changeLoginPwdVC = [WalletDelectVC new];
+//
+//        [weakSelf.navigationController pushViewController:changeLoginPwdVC animated:YES];
+//
+//    }];
     
   
     
@@ -318,25 +318,24 @@
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:MNEMONIC];
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:MNEMONICPASSWORD];
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:COINARRAY];
+        [[NSUserDefaults standardUserDefaults] synchronize];
         
-//        TLDataBase *db = [TLDataBase sharedManager];
-//
-//        if ([db.dataBase open]) {
-//            NSString *Sql2 =[NSString stringWithFormat:@"delete from THALocal WHERE walletId = (SELECT walletId from THAUser where userId='%@')",[TLUser user].userId];
-//
-//            BOOL sucess2  = [db.dataBase executeUpdate:Sql2];
-//            NSLog(@"删除自选表%d",sucess2);
-//
-//            NSString *Sql =[NSString stringWithFormat:@"delete from THAUser WHERE userId = '%@'",[TLUser user].userId];
-//
-//            BOOL sucess  = [db.dataBase executeUpdate:Sql];
-//
-//            NSLog(@"删除钱包表%d",sucess);
-//
-//
-//        }
-//
-//        [db.dataBase close];
+        if ([TLUser user].isLogin == YES)
+        {
+            TLDataBase *db = [TLDataBase sharedManager];
+            
+            if ([db.dataBase open]) {
+                NSString *Sql2 =[NSString stringWithFormat:@"delete from THALocal WHERE walletId = (SELECT walletId from THAUser where userId='%@')",[TLUser user].userId];
+                BOOL sucess2  = [db.dataBase executeUpdate:Sql2];
+                NSLog(@"删除自选表%d",sucess2);
+                NSString *Sql =[NSString stringWithFormat:@"delete from THAUser WHERE userId = '%@'",[TLUser user].userId];
+                BOOL sucess  = [db.dataBase executeUpdate:Sql];
+                NSLog(@"删除钱包表%d",sucess);
+            }
+            [db.dataBase close];
+        }
+        
+        
         //                [[NSUserDefaults standardUserDefaults] removeObjectForKey:KWalletWord];
         //                [[NSUserDefaults standardUserDefaults] removeObjectForKey:KWalletAddress];
         //                [[NSUserDefaults standardUserDefaults] removeObjectForKey:KWalletPrivateKey];

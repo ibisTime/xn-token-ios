@@ -60,7 +60,7 @@ static NSString *MyAssetsTableView = @"MyAssetsTableViewCell";
         }
         
         NSString *incomeTotal = [CoinUtil convertToRealCoin2:self.model.incomeTotal setScale:4  coin:@"BTC"];
-        NSString *label2Str = [NSString stringWithFormat:@"≈%@",incomeTotal];
+        NSString *label2Str = [NSString stringWithFormat:@"%@",incomeTotal];
         
         if ([TLUser isBlankString:label2Str] == NO) {
             
@@ -69,7 +69,7 @@ static NSString *MyAssetsTableView = @"MyAssetsTableViewCell";
                 cell.earningsLabel.text = @"≈0.00";
             }else
             {
-                cell.earningsLabel.text = label2Str;
+                cell.earningsLabel.text = [NSString stringWithFormat:@"≈%@",label2Str];
             }
             
         }

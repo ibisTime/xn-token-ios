@@ -447,15 +447,15 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     
     
-    UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
-    NSLog(@"%@",pasteboard.string);
-    NSArray  *array = [pasteboard.string componentsSeparatedByString:@" "];
-    if (array.count == 12) {
-        
-        NSNotification *notification =[NSNotification notificationWithName:@"DetectionOfThePrivateKey" object:nil userInfo:nil];
-        [[NSNotificationCenter defaultCenter] postNotification:notification];
-        
-    }
+//    UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+//    NSLog(@"%@",pasteboard.string);
+//    NSArray  *array = [pasteboard.string componentsSeparatedByString:@" "];
+//    if (array.count == 12) {
+//        
+//        NSNotification *notification =[NSNotification notificationWithName:@"DetectionOfThePrivateKey" object:nil userInfo:nil];
+//        [[NSNotificationCenter defaultCenter] postNotification:notification];
+//        
+//    }
     
     
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;

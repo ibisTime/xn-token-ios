@@ -52,11 +52,10 @@
         
         promptLbl1 = [UILabel labelWithFrame:CGRectMake(lineImg.xx + 10, lineImg.yy - 11, SCREEN_WIDTH - lineImg.xx - 10, 16) textAligment:(NSTextAlignmentLeft) backgroundColor:kClearColor font:HGboldfont(16) textColor:kWhiteColor];
 //        promptLbl1.text = [LangSwitcher switchLang:@"向左滑动，迅速打开/n充币、提币功能" key:nil];
-        promptLbl1.attributedText = [UserModel ReturnsTheDistanceBetween:[LangSwitcher switchLang:@"向左滑动，迅速打开\n充币、提币功能" key:nil]];
+        promptLbl1.attributedText = [UserModel ReturnsTheDistanceBetween:[NSString stringWithFormat:@"%@\n%@",[LangSwitcher switchLang:@"向左滑动，迅速打开" key:nil],[LangSwitcher switchLang:@"充币、提币功能" key:nil]]];
         promptLbl1.numberOfLines = 2;
         [promptLbl1 sizeToFit];
         [self addSubview:promptLbl1];
-        
         
         iKonwBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"知道了" key:nil] titleColor:kWhiteColor backgroundColor:kClearColor titleFont:16];
         iKonwBtn.frame = CGRectMake(kWidth(115), promptLbl1.yy + 13, kWidth(90), kHeight(35));
