@@ -76,8 +76,8 @@
         UITextField *passWordFid = [[UITextField alloc]initWithFrame:CGRectMake(iconImage.xx + 15, passWordLbl.yy + 21 - 1.5, SCREEN_WIDTH - iconImage.xx - 40 , 15)];
         passWordFid.placeholder = placArray[i];
         passWordFid.secureTextEntry = YES;
-        [passWordFid setValue:FONT(12) forKeyPath:@"_placeholderLabel.font"];
-        passWordFid.font = FONT(12);
+        [passWordFid setValue:FONT(14) forKeyPath:@"_placeholderLabel.font"];
+        passWordFid.font = FONT(14);
         passWordFid.textColor = [UIColor whiteColor];
         [passWordFid setValue:[UIColor whiteColor]  forKeyPath:@"_placeholderLabel.textColor"];
         passWordFid.clearsOnBeginEditing = NO;

@@ -91,8 +91,8 @@
         UITextField *passWordFid = [[UITextField alloc]initWithFrame:CGRectMake(iconImage.xx + 15, passWordLbl.yy + 21 - 1.5, SCREEN_WIDTH - iconImage.xx - 40 , 15)];
         passWordFid.placeholder = placArray[i];
         passWordFid.secureTextEntry = YES;
-        [passWordFid setValue:FONT(12) forKeyPath:@"_placeholderLabel.font"];
-        passWordFid.font = FONT(12);
+        [passWordFid setValue:FONT(14) forKeyPath:@"_placeholderLabel.font"];
+        passWordFid.font = FONT(14);
         passWordFid.textColor = [UIColor whiteColor];
         [passWordFid setValue:[UIColor whiteColor]  forKeyPath:@"_placeholderLabel.textColor"];
         passWordFid.clearsOnBeginEditing = NO;
@@ -125,7 +125,7 @@
     [note sizeToFit];
     [passwordView addSubview:note];
     
-    NSArray *securityArray = @[[LangSwitcher switchLang:@"密码，用户解锁全币和法币" key:nil],[LangSwitcher switchLang:@"交易密码为本地密码，请妥善保管，丢失将无法找回" key:nil],[LangSwitcher switchLang:@"可通过删除私钥钱包重新导入助记词设置新密码" key:nil]];
+    NSArray *securityArray = @[[LangSwitcher switchLang:@"密码，用户解锁钱包和法币" key:nil],[LangSwitcher switchLang:@"交易密码为本地密码，请妥善保管，丢失将无法找回" key:nil],[LangSwitcher switchLang:@"可通过删除私钥钱包重新导入助记词设置新密码" key:nil]];
     
     UIView *pointView = [[UIView alloc]initWithFrame:CGRectMake(note.xx, note.yy + 8, 4, 4)];
     pointView.backgroundColor = kWhiteColor;

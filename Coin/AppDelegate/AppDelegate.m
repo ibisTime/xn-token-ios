@@ -19,7 +19,6 @@
 #import "ZMChineseConvert.h"
 #import "SettingModel.h"
 #import "TLUpdateVC.h"
-
 #import "LangSwitcher.h"
 #import "RespHandler.h"
 #import <NBHTTP/NBNetwork.h>
@@ -34,7 +33,6 @@
 #import <ZendeskSDK/ZendeskSDK.h>
 #import "TLWXManager.h"
 #import <UMMobClick/MobClick.h>
-
 #import "WXApi.h"
 #import "IQKeyboardManager.h"
 #import <ZendeskCoreSDK/ZendeskCoreSDK.h>
@@ -56,7 +54,6 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     //    [NSThread sleepForTimeInterval:2];
-    
 //    服务器环境
 //    研发
 //    [AppConfig config].runEnv = RunEnvDev;

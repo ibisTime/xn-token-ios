@@ -121,17 +121,21 @@
     [self.scrollView addSubview:backView];
     
     
-    UILabel *nameLabel = [UILabel labelWithFrame:CGRectMake(0, kNavigationBarHeight + 40, SCREEN_WIDTH, 18) textAligment:(NSTextAlignmentCenter) backgroundColor:kClearColor font:FONT(14) textColor:kWhiteColor];
+    UILabel *nameLabel = [UILabel labelWithFrame:CGRectMake(10, kNavigationBarHeight + 40, SCREEN_WIDTH - 20, 20
+                                                            ) textAligment:(NSTextAlignmentCenter) backgroundColor:kClearColor font:FONT(14) textColor:kWhiteColor];
     NSString *attStr = [LangSwitcher switchLang:@"请按顺序 " key:nil];
     NSString *str =[LangSwitcher switchLang:@"请按顺序 抄写下方四个助记词" key:nil];
     
     NSMutableAttributedString *AttributedStr = [[NSMutableAttributedString alloc]initWithString:str];
-    [AttributedStr addAttribute:NSFontAttributeName value:HGboldfont(18) range:NSMakeRange(0, attStr.length)];
+    [AttributedStr addAttribute:NSFontAttributeName value:HGboldfont(18) range:NSMakeRange(0, attStr.length + 1)];
     nameLabel.attributedText = AttributedStr;
+//    nameLabel.numberOfLines = 0;
+//    [nameLabel sizeToFit];
     [backView addSubview:nameLabel];
     
+    
     UILabel *totalLabel = [UILabel labelWithFrame:CGRectMake(0, nameLabel.yy + 13, SCREEN_WIDTH, 12) textAligment:(NSTextAlignmentCenter) backgroundColor:kClearColor font:FONT(12) textColor:kWhiteColor];
-    totalLabel.text = [LangSwitcher switchLang:@"1/3(共三页)" key:nil];
+    totalLabel.text = [NSString stringWithFormat:@"1/3%@",[LangSwitcher switchLang:@"(共三页)" key:nil]];
     [backView addSubview:totalLabel];
     
     for (int i = 0; i < 4; i ++) {
@@ -161,17 +165,19 @@
     [self.scrollView addSubview:backView];
     
     
-    UILabel *nameLabel = [UILabel labelWithFrame:CGRectMake(0, kNavigationBarHeight + 40, SCREEN_WIDTH, 18) textAligment:(NSTextAlignmentCenter) backgroundColor:kClearColor font:FONT(14) textColor:kWhiteColor];
+    UILabel *nameLabel = [UILabel labelWithFrame:CGRectMake(10, kNavigationBarHeight + 40, SCREEN_WIDTH - 20, 20) textAligment:(NSTextAlignmentCenter) backgroundColor:kClearColor font:FONT(14) textColor:kWhiteColor];
     NSString *attStr = [LangSwitcher switchLang:@"请按顺序 " key:nil];
     NSString *str =[LangSwitcher switchLang:@"请按顺序 抄写下方四个助记词" key:nil];
     
     NSMutableAttributedString *AttributedStr = [[NSMutableAttributedString alloc]initWithString:str];
-    [AttributedStr addAttribute:NSFontAttributeName value:HGboldfont(18) range:NSMakeRange(0, attStr.length)];
+    [AttributedStr addAttribute:NSFontAttributeName value:HGboldfont(18) range:NSMakeRange(0, attStr.length + 1)];
     nameLabel.attributedText = AttributedStr;
+//    nameLabel.numberOfLines = 0;
+//    [nameLabel sizeToFit];
     [backView addSubview:nameLabel];
     
     UILabel *totalLabel = [UILabel labelWithFrame:CGRectMake(0, nameLabel.yy + 13, SCREEN_WIDTH, 12) textAligment:(NSTextAlignmentCenter) backgroundColor:kClearColor font:FONT(12) textColor:kWhiteColor];
-    totalLabel.text = [LangSwitcher switchLang:@"2/3(共三页)" key:nil];
+    totalLabel.text = [NSString stringWithFormat:@"2/3%@",[LangSwitcher switchLang:@"(共三页)" key:nil]];
     [backView addSubview:totalLabel];
     
     for (int i = 0; i < 4; i ++) {
@@ -197,17 +203,20 @@
     [self.scrollView addSubview:backView];
     
     
-    UILabel *nameLabel = [UILabel labelWithFrame:CGRectMake(0, kNavigationBarHeight + 40, SCREEN_WIDTH, 18) textAligment:(NSTextAlignmentCenter) backgroundColor:kClearColor font:FONT(14) textColor:kWhiteColor];
+    UILabel *nameLabel = [UILabel labelWithFrame:CGRectMake(10, kNavigationBarHeight + 40, SCREEN_WIDTH - 20, 20) textAligment:(NSTextAlignmentCenter) backgroundColor:kClearColor font:FONT(14) textColor:kWhiteColor];
     NSString *attStr = [LangSwitcher switchLang:@"请按顺序 " key:nil];
     NSString *str =[LangSwitcher switchLang:@"请按顺序 抄写下方四个助记词" key:nil];
     
     NSMutableAttributedString *AttributedStr = [[NSMutableAttributedString alloc]initWithString:str];
-    [AttributedStr addAttribute:NSFontAttributeName value:HGboldfont(18) range:NSMakeRange(0, attStr.length)];
+    [AttributedStr addAttribute:NSFontAttributeName value:HGboldfont(18) range:NSMakeRange(0, attStr.length + 1)];
     nameLabel.attributedText = AttributedStr;
+//    nameLabel.numberOfLines = 0;
+//    [nameLabel sizeToFit];
     [backView addSubview:nameLabel];
     
+    
     UILabel *totalLabel = [UILabel labelWithFrame:CGRectMake(0, nameLabel.yy + 13, SCREEN_WIDTH, 12) textAligment:(NSTextAlignmentCenter) backgroundColor:kClearColor font:FONT(12) textColor:kWhiteColor];
-    totalLabel.text = [LangSwitcher switchLang:@"3/3(共三页)" key:nil];
+    totalLabel.text = [NSString stringWithFormat:@"3/3%@",[LangSwitcher switchLang:@"(共三页)" key:nil]];
     [backView addSubview:totalLabel];
     
     for (int i = 0; i < 4; i ++) {

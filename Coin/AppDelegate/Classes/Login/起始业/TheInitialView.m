@@ -100,7 +100,7 @@ CATransform3D CATransform3DPerspect(CATransform3D t, CGPoint center, float disZ)
     loginPersonalBtn.tag = 100;
     [scrollView addSubview:loginPersonalBtn];
     
-    UIButton *createPersonalBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"创建个人账号" key:nil] titleColor:kHexColor(@"#a7a7a7") backgroundColor:kWhiteColor titleFont:16 cornerRadius:10];
+    UIButton *createPersonalBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"创建个人账号" key:nil] titleColor:[UIColor blackColor] backgroundColor:kWhiteColor titleFont:16 cornerRadius:10];
     createPersonalBtn.frame = CGRectMake(SCREEN_WIDTH/2 + 7.5, lineView.yy + 10, SCREEN_WIDTH/2 - 57.5, 40);
     [createPersonalBtn addTarget:self action:@selector(btnClick:) forControlEvents:(UIControlEventTouchUpInside)];
     createPersonalBtn.tag = 101;
@@ -124,7 +124,7 @@ CATransform3D CATransform3DPerspect(CATransform3D t, CGPoint center, float disZ)
     [scrollView addSubview:backView1];
     
     UIImageView *iconImage1 = [[UIImageView alloc]initWithFrame:CGRectMake(25, SCREEN_HEIGHT/2 - ((SCREEN_WIDTH - 50)/610*650)/2, SCREEN_WIDTH - 50, ((SCREEN_WIDTH - 50)/610*650))];
-    iconImage1.image = kImage(@"椭圆4");
+    iconImage1.image = kImage(@"起始业icon");
     [backView1 addSubview:iconImage1];
     
     UILabel *privateWalletLb = [UILabel labelWithFrame:CGRectMake(0, kNavigationBarHeight + 4.5, SCREEN_WIDTH, 30) textAligment:(NSTextAlignmentCenter) backgroundColor:kClearColor font:HGboldfont(18) textColor:kHexColor(@"#ffffff")];
@@ -144,7 +144,7 @@ CATransform3D CATransform3DPerspect(CATransform3D t, CGPoint center, float disZ)
     loginPrivateBtn.tag = 102;
     [scrollView addSubview:loginPrivateBtn];
     
-    UIButton *createPrivateBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"导入助记词" key:nil] titleColor:kHexColor(@"#a7a7a7") backgroundColor:kWhiteColor titleFont:16 cornerRadius:10];
+    UIButton *createPrivateBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"导入助记词" key:nil] titleColor:[UIColor blackColor] backgroundColor:kWhiteColor titleFont:16 cornerRadius:10];
     createPrivateBtn.frame = CGRectMake(SCREEN_WIDTH +  SCREEN_WIDTH/2 + 7.5, lineView.yy + 10, SCREEN_WIDTH/2 - 57.5, 40);
     [createPrivateBtn addTarget:self action:@selector(btnClick:) forControlEvents:(UIControlEventTouchUpInside)];
     createPrivateBtn.tag = 103;

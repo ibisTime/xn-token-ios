@@ -177,7 +177,7 @@
 
     UILabel *introduceLabel = [UILabel labelWithFrame:CGRectMake(kWidth(23), kHeight(2), SCREEN_WIDTH - kWidth(186), kHeight(36)) textAligment:(NSTextAlignmentCenter) backgroundColor:kClearColor font:FONT(16) textColor:kHexColor(@"#FFFFFF")];
 
-    introduceLabel.text = [LangSwitcher switchLang:@"全球首款跨链生态钱包" key:nil];
+    introduceLabel.text = [LangSwitcher switchLang:@"一站式数字资产管理平台" key:nil];
     [titleBackImage addSubview:introduceLabel];
 
 

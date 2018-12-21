@@ -93,7 +93,7 @@
     UIButton *phoneAreaCodeBtn = [UIButton buttonWithTitle:[NSString stringWithFormat:@"+%@",[model.interCode substringFromIndex:2]] titleColor:kWhiteColor backgroundColor:kClearColor titleFont:14];
     
     phoneAreaCodeBtn.frame = CGRectMake(46, registerLineView.yy + 50, 0, 15);
-    phoneAreaCodeBtn.titleLabel.font = HGboldfont(14);
+    phoneAreaCodeBtn.titleLabel.font = HGboldfont(15);
     [phoneAreaCodeBtn sizeToFit];
     phoneAreaCodeBtn.frame = CGRectMake(46, registerLineView.yy + 50, phoneAreaCodeBtn.frame.size.width + 6.5, 15);
     [phoneAreaCodeBtn setImage:kImage(@"矩形4") forState:(UIControlStateNormal)];
@@ -113,8 +113,8 @@
     UITextField *phoneTextFid = [[UITextField alloc]initWithFrame:CGRectMake(phoneAreaCodeBtn.xx + 15, registerLineView.yy + 50, SCREEN_WIDTH - phoneAreaCodeBtn.xx - 60, 15)];
     phoneTextFid.placeholder = [LangSwitcher switchLang:@"请输入您的手机号码" key:nil];
     //    phoneTextFid.keyboardType = UIKeyboardTypeEmailAddress;
-    [phoneTextFid setValue:FONT(12) forKeyPath:@"_placeholderLabel.font"];
-    phoneTextFid.font = FONT(12);
+    [phoneTextFid setValue:FONT(14) forKeyPath:@"_placeholderLabel.font"];
+    phoneTextFid.font = FONT(14);
     self.phoneTextFid = phoneTextFid;
     phoneTextFid.textColor = [UIColor whiteColor];
     [phoneTextFid setValue:[UIColor whiteColor]  forKeyPath:@"_placeholderLabel.textColor"];
@@ -126,7 +126,7 @@
     lineView.backgroundColor = kWhiteColor;
     [self.scrollView addSubview:lineView];
     
-    UILabel *codeLabel = [UILabel labelWithFrame:CGRectMake(46, lineView.yy + 29, 0, 15) textAligment:(NSTextAlignmentCenter) backgroundColor:kClearColor font:HGboldfont(14) textColor:kWhiteColor];
+    UILabel *codeLabel = [UILabel labelWithFrame:CGRectMake(46, lineView.yy + 29, 0, 15) textAligment:(NSTextAlignmentCenter) backgroundColor:kClearColor font:HGboldfont(15) textColor:kWhiteColor];
     codeLabel.text = [LangSwitcher switchLang:@"验证码" key:nil];
     [codeLabel sizeToFit];
     if (codeLabel.width >= 100) {
@@ -150,8 +150,8 @@
     self.codeTextFid = codeTextFid;
     codeTextFid.placeholder = [LangSwitcher switchLang:@"请输入验证码" key:nil];
     //    codeTextFid.keyboardType = UIKeyboardTypeEmailAddress;
-    [codeTextFid setValue:FONT(12) forKeyPath:@"_placeholderLabel.font"];
-    codeTextFid.font = FONT(12);
+    [codeTextFid setValue:FONT(14) forKeyPath:@"_placeholderLabel.font"];
+    codeTextFid.font = FONT(14);
     codeTextFid.textColor = [UIColor whiteColor];
     [codeTextFid setValue:[UIColor whiteColor]  forKeyPath:@"_placeholderLabel.textColor"];
     codeTextFid.clearsOnBeginEditing = NO;
@@ -456,8 +456,8 @@
         UITextField *passWordFid = [[UITextField alloc]initWithFrame:CGRectMake(iconImage.xx + 15, passWordLbl.yy + 21 - 1.5, SCREEN_WIDTH - iconImage.xx - 40 , 15)];
         passWordFid.placeholder = placArray[i];
         passWordFid.secureTextEntry = YES;
-        [passWordFid setValue:FONT(12) forKeyPath:@"_placeholderLabel.font"];
-        passWordFid.font = FONT(12);
+        [passWordFid setValue:FONT(14) forKeyPath:@"_placeholderLabel.font"];
+        passWordFid.font = FONT(14);
         passWordFid.textColor = [UIColor whiteColor];
         [passWordFid setValue:[UIColor whiteColor]  forKeyPath:@"_placeholderLabel.textColor"];
         passWordFid.clearsOnBeginEditing = NO;

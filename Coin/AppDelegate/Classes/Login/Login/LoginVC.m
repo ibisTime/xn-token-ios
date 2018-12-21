@@ -78,7 +78,7 @@
     _phoneAreaCodeBtn = [UIButton buttonWithTitle:[NSString stringWithFormat:@"+%@",[model.interCode substringFromIndex:2]] titleColor:kWhiteColor backgroundColor:kClearColor titleFont:14];
     
     _phoneAreaCodeBtn.frame = CGRectMake(46, registerLineView.yy + 50, 0, 15);
-    _phoneAreaCodeBtn.titleLabel.font = HGboldfont(14);
+    _phoneAreaCodeBtn.titleLabel.font = HGboldfont(15);
     [_phoneAreaCodeBtn sizeToFit];
     _phoneAreaCodeBtn.frame = CGRectMake(46, registerLineView.yy + 50, _phoneAreaCodeBtn.frame.size.width + 6.5, 15);
     [_phoneAreaCodeBtn setImage:kImage(@"矩形4") forState:(UIControlStateNormal)];
@@ -96,8 +96,8 @@
     _phoneTextFid = [[UITextField alloc]initWithFrame:CGRectMake(_phoneAreaCodeBtn.xx + 15, registerLineView.yy + 50, SCREEN_WIDTH - _phoneAreaCodeBtn.xx - 60, 15)];
     _phoneTextFid.placeholder = [LangSwitcher switchLang:@"请输入您的手机号码" key:nil];
     //    phoneTextFid.keyboardType = UIKeyboardTypeEmailAddress;
-    [_phoneTextFid setValue:FONT(12) forKeyPath:@"_placeholderLabel.font"];
-    _phoneTextFid.font = FONT(12);
+    [_phoneTextFid setValue:FONT(14) forKeyPath:@"_placeholderLabel.font"];
+    _phoneTextFid.font = FONT(14);
     _phoneTextFid.textColor = [UIColor whiteColor];
     [_phoneTextFid setValue:[UIColor whiteColor]  forKeyPath:@"_placeholderLabel.textColor"];
     _phoneTextFid.clearsOnBeginEditing = NO;
@@ -108,7 +108,7 @@
     lineView.backgroundColor = kWhiteColor;
     [backView addSubview:lineView];
     
-    UILabel *codeLabel = [UILabel labelWithFrame:CGRectMake(46, lineView.yy + 29, 0, 15) textAligment:(NSTextAlignmentCenter) backgroundColor:kClearColor font:HGboldfont(14) textColor:kWhiteColor];
+    UILabel *codeLabel = [UILabel labelWithFrame:CGRectMake(46, lineView.yy + 29, 0, 15) textAligment:(NSTextAlignmentCenter) backgroundColor:kClearColor font:HGboldfont(15) textColor:kWhiteColor];
     codeLabel.text = [LangSwitcher switchLang:@"密码" key:nil];
     [codeLabel sizeToFit];
     if (codeLabel.width >= 100) {
@@ -124,8 +124,8 @@
     _codeTextFid = [[UITextField alloc]initWithFrame:CGRectMake(codeLabel.xx + 15, lineView.yy + 29, SCREEN_WIDTH - codeLabel.xx - 15 - 45, 15)];
     _codeTextFid.placeholder = [LangSwitcher switchLang:@"请输入密码" key:nil];
     //    codeTextFid.keyboardType = UIKeyboardTypeEmailAddress;
-    [_codeTextFid setValue:FONT(12) forKeyPath:@"_placeholderLabel.font"];
-    _codeTextFid.font = FONT(12);
+    [_codeTextFid setValue:FONT(14) forKeyPath:@"_placeholderLabel.font"];
+    _codeTextFid.font = FONT(14);
     _codeTextFid.textColor = [UIColor whiteColor];
     [_codeTextFid setValue:[UIColor whiteColor]  forKeyPath:@"_placeholderLabel.textColor"];
     _codeTextFid.clearsOnBeginEditing = NO;

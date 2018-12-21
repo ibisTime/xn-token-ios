@@ -209,7 +209,7 @@
 
     UILabel *introduceLabel = [UILabel labelWithFrame:CGRectMake(kWidth(23), kHeight(2), SCREEN_WIDTH - kWidth(186), kHeight(36)) textAligment:(NSTextAlignmentCenter) backgroundColor:kClearColor font:FONT(16) textColor:kHexColor(@"#FFFFFF")];
 
-    introduceLabel.text = [LangSwitcher switchLang:@"全球首款跨链生态钱包" key:nil];
+    introduceLabel.text = [LangSwitcher switchLang:@"一站式数字资产管理平台" key:nil];
     [titleBackImage addSubview:introduceLabel];
 
 
@@ -283,7 +283,7 @@
     http://m.thadev.hichengdai.com/user/register.html?inviteCode=U201807030441369491006&lang=ZH_CN
      address = [NSString stringWithFormat:@"%@/user/register.html?inviteCode=%@&lang=%@",self.h5String,[TLUser user].secretUserId,lang];
 
-    self.bouncedView.informationLabel.attributedText = [self ReturnsTheDistanceBetween:[NSString stringWithFormat:@"%@%@",[LangSwitcher switchLang:@"【Theia是全球首款跨链生态钱包，同时支持BTC、ETH、TUSD等多币数字货币储存。注册即送10积分，千万BTC/ETH/WAN矿山，等您来挖】" key:nil],address]];
+    self.bouncedView.informationLabel.attributedText = [self ReturnsTheDistanceBetween:[NSString stringWithFormat:@"%@%@",[LangSwitcher switchLang:@"【Theia是一站式数字资产管理平台，同时支持BTC、ETH、TUSD等多币数字货币储存。注册即送10积分，千万BTC/ETH/WAN矿山，等您来挖】" key:nil],address]];
 
 
 
@@ -333,7 +333,7 @@
 
     UILabel *introduceLabel = [UILabel labelWithFrame:CGRectMake(kWidth(23), kHeight(2), SCREEN_WIDTH - kWidth(186), kHeight(36)) textAligment:(NSTextAlignmentCenter) backgroundColor:kClearColor font:FONT(16) textColor:kHexColor(@"#FFFFFF")];
 
-    introduceLabel.text = [LangSwitcher switchLang:@"全球首款跨链生态钱包" key:nil];
+    introduceLabel.text = [LangSwitcher switchLang:@"一站式数字资产管理平台" key:nil];
     [titleBackImage addSubview:introduceLabel];
 
 

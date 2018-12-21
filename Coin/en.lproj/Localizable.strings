@@ -697,7 +697,7 @@
 "邀请您使用Theia钱包" = "inviting you to try out Theia Wallet";
 "购买成功" = "Purchase successful";
 "购买" = "Purchase";
-
+"注：" = "note：";
 "合约编号" = "Contract number";
 "交易时间" = "Trasaction time";
 "产品期限" = "Subscription period";
@@ -775,7 +775,7 @@
 "加载完成" = "Load completed";
 "加载失败" = "Load failed";
 "全部加载完成" = "No more data to be loaded";
-"【Theia是全球首款跨链生态钱包，同时支持BTC、ETH、TUSD等多币数字货币储存。注册即送10积分，千万BTC/ETH/WAN矿山，等您来挖】" = "Theia is the world’s first cross-chain profit sharing wallet, which supports multi-crypto-asset management, including BTC, ETH and TUSD. Register and get 10 points, and you’ll have chance to draw a prize from ¥10,000,000 RMB worth of prize pool (BTC, ETH and WAN).";
+"【Theia是一站式数字资产管理平台，同时支持BTC、ETH、TUSD等多币数字货币储存。注册即送10积分，千万BTC/ETH/WAN矿山，等您来挖】" = "Theia is the world’s first cross-chain profit sharing wallet, which supports multi-crypto-asset management, including BTC, ETH and TUSD. Register and get 10 points, and you’ll have chance to draw a prize from ¥10,000,000 RMB worth of prize pool (BTC, ETH and WAN).";
 "请留下您的联系方式（推荐邮箱)" = "Please leave your contact info (email address is highly recommended)";
 "保存二维码" = "Save QR code";
 "信用积分" = "Credit";
@@ -789,7 +789,7 @@
 "不存在的红包类型" = "Nonexistent gift type";
 "红包错误，请联系管理员" = "Gift error, please contact admin";
 "红包已过期，下次记得早点来" = "Gift has expired, remember to open it sooner next time";
-"全球首款跨链生态钱包" = "THEIA CROSS-CHAIN PROFIT SHARING WALLET";
+"一站式数字资产管理平台" = "THEIA CROSS-CHAIN PROFIT SHARING WALLET";
 "您已成功邀请" = "You have successfully welcomed";
 "名用户" = "users";
 "感谢您的付出!" = "Thank you for your effort!";
@@ -959,7 +959,7 @@
 "输入交易密码" = "Enter the trading password";
 "密码为6位以上数字或字母" = "Password is more than 6 digits or letters";
 "确认交易密码" = "Confirm Transaction Password";
-"密码，用户解锁全币和法币" = "Password, user unlocks all currency and  Crypto currency";
+"密码，用户解锁钱包和法币" = "Password, user unlocks all currency and  Crypto currency";
 "交易密码为本地密码，请妥善保管，丢失将无法找回" = "The transaction password is a local password, please keep it in a safe place. If you lose it, you will not be able to retrieve it.";
 "可通过删除私钥钱包重新导入助记词设置新密码" = "You can re-import the mnemonic by deleting the private key wallet to set a new password.";
 "隐私服务协议及条款" = "Privacy Service Agreement and Terms";
