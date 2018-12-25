@@ -3040,6 +3040,8 @@
 			children = (
 				2E394FEC1FB0575A00BA0829 /* AppDelegate.h */,
 				2E394FEB1FB0575A00BA0829 /* AppDelegate.m */,
+				2EB039B41FEA0B4500589D8E /* TLUpdateVC.h */,
+				2EB039B31FEA0B4500589D8E /* TLUpdateVC.m */,
 			);
 			path = AppDelegate;
 			sourceTree = "<group>";
@@ -3057,8 +3059,6 @@
 				B8B15C1E20CA752800F13220 /* CurrencyTitleModel.m */,
 				B8B15C1B20CA752700F13220 /* QHCollectionViewNine.h */,
 				B8B15C1C20CA752800F13220 /* QHCollectionViewNine.m */,
-				2EB039B41FEA0B4500589D8E /* TLUpdateVC.h */,
-				2EB039B31FEA0B4500589D8E /* TLUpdateVC.m */,
 				216F5AFB206CD3A800F2C832 /* GengXinModel.h */,
 				216F5AFC206CD3A800F2C832 /* GengXinModel.m */,
 				B8B15C0320CA55D600F13220 /* BuildSucessVC.h */,

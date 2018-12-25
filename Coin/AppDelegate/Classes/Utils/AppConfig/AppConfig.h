@@ -33,6 +33,7 @@ FOUNDATION_EXPORT void TLLog(NSString *format, ...);
 //@property (nonatomic,copy) NSString *aliPayKey;
 @property (nonatomic, copy) NSString *qiniuDomain;
 @property (nonatomic,strong) NSString *shareBaseUrl;
+
 @property (nonatomic, assign) BOOL isChecking;
 
 @property (nonatomic,strong) NSString *wanHash;

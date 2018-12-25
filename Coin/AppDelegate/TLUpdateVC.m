@@ -296,6 +296,8 @@
 
 }
 
+
+//  本地更新
 - (void)goBcoinWeb:(NSString *)var{
     
     NSString *urlStr = [var stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
@@ -305,11 +307,11 @@
 
 
 
-//
+//  app store
 //- (void)goBcoinWeb:(NSString *)var{
 //    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://itunes.apple.com/cn/app/m-help/id1436959010?mt=8"]];
 //    [[UIApplication sharedApplication]openURL:url];
-
+//}
 
 
 
@@ -318,27 +320,47 @@
     //检查更新过后再
 //    BuildWalletMineVC * mineVC = [[BuildWalletMineVC alloc] init];
     
+    
+//
+//    if ([TLUser isBlankString:dataDic[@"userId"]] == YES) {
+//        if ([TLUser isBlankString:[[NSUserDefaults standardUserDefaults] objectForKey:MNEMONIC]] == YES) {
+//            TheInitialVC *initialVC = [[TheInitialVC alloc] init];
+//            UINavigationController *na = [[UINavigationController alloc] initWithRootViewController:initialVC];
+//
+//            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isLanch"];
+//            [[NSUserDefaults standardUserDefaults] synchronize];
+//            self.window.rootViewController = na;
+//        }else
+//        {
+//            TLTabBarController *tabBarCtrl = [[TLTabBarController alloc] init];
+//            self.window.rootViewController = tabBarCtrl;
+//        }
+//
+//    }else{
+//        TLTabBarController *tabBarCtrl = [[TLTabBarController alloc] init];
+//        self.window.rootViewController = tabBarCtrl;
+    
+    
+    
     TLTabBarController *tabBarCtrl = [[TLTabBarController alloc] init];
 //    TLNavigationController *na = [[TLNavigationController alloc] initWithRootViewController:mineVC];
-    if( ![TLUser user].isLogin) {
+    
+    
+    
+    if([TLUser isBlankString:[TLUser user].userId] == YES) {
         
-        TLUserLoginVC *loginVC = [TLUserLoginVC new];
         
-        loginVC.loginSuccess = ^{
+        if ([TLUser isBlankString:[[NSUserDefaults standardUserDefaults] objectForKey:MNEMONIC]] == YES) {
+            TheInitialVC *initialVC = [[TheInitialVC alloc] init];
+            UINavigationController *na = [[UINavigationController alloc] initWithRootViewController:initialVC];
             
+            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isLanch"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            [UIApplication sharedApplication].keyWindow.rootViewController = na;
+        }else
+        {
             [UIApplication sharedApplication].keyWindow.rootViewController = tabBarCtrl;
-        };
-        CoinWeakSelf;
-        loginVC.NeedLogin = YES;
-        loginVC.loginFailed = ^{
-            [weakSelf setRootVC];
-
-        };
-
-        TLNavigationController *nav = [[TLNavigationController alloc] initWithRootViewController:loginVC];
-        [UIApplication sharedApplication].keyWindow.rootViewController = nav;
-//        [self.navigationController pushViewController:loginVC animated:YES];
-//        [self presentViewController:nav animated:YES completion:nil];
+        }
         return;
     }
     ZLGestureLockViewController *vc = [ZLGestureLockViewController new];

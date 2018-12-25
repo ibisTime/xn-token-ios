@@ -361,7 +361,17 @@
     
     
     NSDictionary *dataDic = [[NSUserDefaults standardUserDefaults] objectForKey:@"user_info_dict_key"];
-    
+    if (![AppConfig config].isChecking) {
+        TLUpdateVC *updateVC = [[TLUpdateVC alloc] init];
+        TLNavigationController *na = [[TLNavigationController alloc] initWithRootViewController:updateVC];
+        na.isLanch = YES;
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isLanch"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        if ([TLUser user].checkLogin == NO) {
+            
+        }
+        self.window.rootViewController = updateVC;
+    }else{
         if ([TLUser isBlankString:dataDic[@"userId"]] == YES) {
             if ([TLUser isBlankString:[[NSUserDefaults standardUserDefaults] objectForKey:MNEMONIC]] == YES) {
                 TheInitialVC *initialVC = [[TheInitialVC alloc] init];
@@ -380,7 +390,7 @@
             TLTabBarController *tabBarCtrl = [[TLTabBarController alloc] init];
             self.window.rootViewController = tabBarCtrl;
         }
-//    }
+    }
     
     
     
