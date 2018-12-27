@@ -324,12 +324,14 @@
 
 }
 
-
+//微信
 - (void)configWeChat {
     
     [[TLWXManager manager] registerApp];
 }
 
+
+//配置键盘
 - (void)configIQKeyboard {
     IQKeyboardManager *manager = [IQKeyboardManager sharedManager];
     manager.enable = YES; // 控制整个功能是否启用。
@@ -337,27 +339,37 @@
     manager.shouldToolbarUsesTextFieldTintColor =YES; // 控制键盘上的工具条文字颜色是否用户自定义
     manager.enableAutoToolbar = NO; // 控制是否显示键盘上的工具条
     manager.toolbarManageBehaviour =IQAutoToolbarByTag;
-
-    
-
-
 }
 
+
+//控制器
 - (void)configRootViewController {
     
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
+
     
-//    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"BOOLFORKEY"] == NO)
-//    {
-////        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"BOOLFORKEY"];
-//        TheInitialVC *initialVC = [[TheInitialVC alloc] init];
-//        UINavigationController *na = [[UINavigationController alloc] initWithRootViewController:initialVC];
-////        na.isLanch = YES;
-//        self.window.rootViewController = na;
-//    }else
-//    {
+    
+//    第一次安装配置语言
+//    NSData *data   =  [[NSUserDefaults standardUserDefaults] objectForKey:@"chooseModel"];
+//    CountryModel *model = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+//    if ([TLUser isBlankString:model.chineseName] == YES) {
+//        NSArray *appLanguages = [[NSUserDefaults standardUserDefaults] objectForKey:@"AppleLanguages"];
+//        NSString *languageName = [appLanguages objectAtIndex:0];
+//
+//        if ([languageName hasPrefix:@"zh-Hans"]) {
+//            [LangSwitcher changLangType:LangTypeSimple];
+//        }else if ([languageName hasPrefix:@"ko"])
+//        {
+//            [LangSwitcher changLangType:LangTypeKorean];
+//        }
+//        else
+//        {
+//            [LangSwitcher changLangType:LangTypeEnglish];
+//        }
+//
+//    }
     
     
     NSDictionary *dataDic = [[NSUserDefaults standardUserDefaults] objectForKey:@"user_info_dict_key"];

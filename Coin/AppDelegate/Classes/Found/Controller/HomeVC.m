@@ -211,7 +211,7 @@
     if (indexPath.section == 0) {
         IconCollCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"IconCollCell" forIndexPath:indexPath];
         //    cell.backgroundColor = [UIColor redColor];
-        NSArray *imgArray = @[@"发现-红包",@"发现-收益",@"发现-邀请",@"发现-礼品"];
+        NSArray *imgArray = @[@"红包(3)",@"发现收益",@"邀请好友(1)",@"礼品"];
         NSArray *array = @[@"发红包",@"量化理财",@"邀请好友",@"更多精彩"];
         [cell.iconButton setTitle:[LangSwitcher switchLang:array[indexPath.row] key:nil] forState:(UIControlStateNormal)];
         [cell.iconButton SG_imagePositionStyle:(SGImagePositionStyleTop) spacing:9 imagePositionBlock:^(UIButton *button) {
@@ -303,7 +303,7 @@
     if (indexPath.section == 1) {
         return CGSizeMake(SCREEN_WIDTH, 50);
     }
-    return CGSizeMake((SCREEN_WIDTH - 30)/2, (SCREEN_WIDTH - 30)/2/340 * 220);
+    return CGSizeMake((SCREEN_WIDTH - 30)/2, (SCREEN_WIDTH - 30)/2/336 * 160);
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section

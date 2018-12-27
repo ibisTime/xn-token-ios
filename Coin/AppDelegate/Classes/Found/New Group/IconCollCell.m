@@ -18,7 +18,7 @@
         iconButton.frame = CGRectMake(0, 0, (SCREEN_WIDTH - 25)/4, (SCREEN_WIDTH - 25)/4);
         self.iconButton=iconButton;
         [iconButton setTitleColor:[UIColor blackColor] forState:(UIControlStateNormal)];
-        iconButton.titleLabel.font = HGboldfont(14);
+        iconButton.titleLabel.font = FONT(14);
 //        iconButton.titleLabel.numberOfLines = 2;
         [self addSubview:iconButton];
     }

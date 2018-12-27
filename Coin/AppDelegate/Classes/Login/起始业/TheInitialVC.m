@@ -71,6 +71,7 @@
     CountryModel *model = [NSKeyedUnarchiver unarchiveObjectWithData:data];
     //有缓存加载缓存国家
     if ([TLUser isBlankString:model.chineseName] == YES) {
+        
         if (self.countrys.count == 0) {
             [self loadData];
         }else
@@ -96,7 +97,7 @@
         }
     }else
     {
-        if ([model.interSimpleCode isEqualToString:@"CN"] ||[model.interSimpleCode isEqualToString:@"HK"] ||[model.interSimpleCode isEqualToString:@"TW"] || [model.interSimpleCode isEqualToString:@"MO"]) {
+        if ([model.interSimpleCode isEqualToString:@"CN"] ||[model.interSimpleCode isEqualToString:@"HK"] || [model.interSimpleCode isEqualToString:@"TW"] || [model.interSimpleCode isEqualToString:@"MO"]) {
 //            [LangSwitcher changLangType:LangTypeSimple];
             money = @"CNY";
         }else if ([model.interSimpleCode isEqualToString:@"KR"] || [model.interSimpleCode isEqualToString:@"KO"] )

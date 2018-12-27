@@ -95,6 +95,9 @@ static NSString *identifierCell = @"homeCell";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
 
+    if (section == 0) {
+        return 10;
+    }
     return 0.01;
 
 }

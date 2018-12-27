@@ -115,7 +115,7 @@
 		1FF5DB9421B8EDFA0019EF69 /* NSTimer+addition.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FF5DB8E21B8EDF90019EF69 /* NSTimer+addition.m */; };
 		1FF5DB9521B8EDFA0019EF69 /* WYWebProgressLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FF5DB9121B8EDF90019EF69 /* WYWebProgressLayer.m */; };
 		1FF5DB9921BE2A890019EF69 /* AddressBookVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FF5DB9821BE2A890019EF69 /* AddressBookVC.m */; };
-		1FF5DB9B21BFAA980019EF69 /* splash screen page.png in Resources */ = {isa = PBXBuildFile; fileRef = 1FF5DB9A21BFAA970019EF69 /* splash screen page.png */; };
+		1FF5DB9B21BFAA980019EF69 /* splash screen.png in Resources */ = {isa = PBXBuildFile; fileRef = 1FF5DB9A21BFAA970019EF69 /* splash screen.png */; };
 		1FF5DB9E21C1103C0019EF69 /* MoneyPasswordSecondaryVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FF5DB9D21C110390019EF69 /* MoneyPasswordSecondaryVC.m */; };
 		1FF5DBA121C1F6160019EF69 /* StrategyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FF5DBA021C1F6150019EF69 /* StrategyVC.m */; };
 		1FF5DBAF21C20ADA0019EF69 /* YSActionSheetView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FF5DBAC21C20ADA0019EF69 /* YSActionSheetView.m */; };
@@ -808,7 +808,7 @@
 		1FF5DB9121B8EDF90019EF69 /* WYWebProgressLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYWebProgressLayer.m; sourceTree = "<group>"; };
 		1FF5DB9721BE2A890019EF69 /* AddressBookVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddressBookVC.h; sourceTree = "<group>"; };
 		1FF5DB9821BE2A890019EF69 /* AddressBookVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddressBookVC.m; sourceTree = "<group>"; };
-		1FF5DB9A21BFAA970019EF69 /* splash screen page.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "splash screen page.png"; sourceTree = "<group>"; };
+		1FF5DB9A21BFAA970019EF69 /* splash screen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "splash screen.png"; sourceTree = "<group>"; };
 		1FF5DB9C21C110390019EF69 /* MoneyPasswordSecondaryVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MoneyPasswordSecondaryVC.h; sourceTree = "<group>"; };
 		1FF5DB9D21C110390019EF69 /* MoneyPasswordSecondaryVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MoneyPasswordSecondaryVC.m; sourceTree = "<group>"; };
 		1FF5DB9F21C1F6150019EF69 /* StrategyVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StrategyVC.h; sourceTree = "<group>"; };
@@ -3390,7 +3390,7 @@
 				B819BAA920C6DD7700CEEC5E /* LaunchScreen.storyboard */,
 				2EA584C61FA813C900C7106C /* main.m */,
 				2EFFE6AC1FF4829100BFCC40 /* Localizable.strings */,
-				1FF5DB9A21BFAA970019EF69 /* splash screen page.png */,
+				1FF5DB9A21BFAA970019EF69 /* splash screen.png */,
 			);
 			path = Coin;
 			sourceTree = "<group>";
@@ -4727,7 +4727,7 @@
 				2EB9495B1FDF6B1A00CE4B94 /* SimplifiedCode.txt in Resources */,
 				2EE361361FFB7D4500A5C3EB /* README.md in Resources */,
 				1F770ED721904D7D00E2889F /* langImg.png in Resources */,
-				1FF5DB9B21BFAA980019EF69 /* splash screen page.png in Resources */,
+				1FF5DB9B21BFAA980019EF69 /* splash screen.png in Resources */,
 				7AAF037C21526EC4008507FF /* MSADefaultImages.bundle in Resources */,
 				B8DAD14720E2208B00AF4CD4 /* InfoPlist.strings in Resources */,
 				1F693B1121A695F7004818D8 /* Resource.bundle in Resources */,
