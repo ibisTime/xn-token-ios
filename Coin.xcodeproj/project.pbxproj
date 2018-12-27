@@ -94,7 +94,6 @@
 		1F709D712181E51E002D1CC4 /* UIView+Banner.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F709D6E2181E51D002D1CC4 /* UIView+Banner.m */; };
 		1F709D722181E51E002D1CC4 /* HW3DBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F709D6F2181E51D002D1CC4 /* HW3DBannerView.m */; };
 		1F709D752182C317002D1CC4 /* BTCPoundage.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F709D742182C317002D1CC4 /* BTCPoundage.m */; };
-		1F770ED721904D7D00E2889F /* langImg.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F770ED621904D7D00E2889F /* langImg.png */; };
 		1F770EDA21913CC000E2889F /* UserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F770ED921913CC000E2889F /* UserModel.m */; };
 		1F770EDD2191738400E2889F /* ToolTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F770EDC2191738400E2889F /* ToolTextField.m */; };
 		1F816BF42180953D0078B945 /* SGQRCodeScanManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F816BE6218095380078B945 /* SGQRCodeScanManager.m */; };
@@ -765,7 +764,6 @@
 		1F709D702181E51E002D1CC4 /* UIView+Banner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Banner.h"; sourceTree = "<group>"; };
 		1F709D732182C317002D1CC4 /* BTCPoundage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTCPoundage.h; sourceTree = "<group>"; };
 		1F709D742182C317002D1CC4 /* BTCPoundage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTCPoundage.m; sourceTree = "<group>"; };
-		1F770ED621904D7D00E2889F /* langImg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = langImg.png; sourceTree = "<group>"; };
 		1F770ED821913CC000E2889F /* UserModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserModel.h; sourceTree = "<group>"; };
 		1F770ED921913CC000E2889F /* UserModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserModel.m; sourceTree = "<group>"; };
 		1F770EDB2191738400E2889F /* ToolTextField.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ToolTextField.h; sourceTree = "<group>"; };
@@ -3386,7 +3384,6 @@
 				2EA584C51FA813C900C7106C /* Info.plist */,
 				B8DAD14920E2208B00AF4CD4 /* InfoPlist.strings */,
 				2EE361351FFB7D4500A5C3EB /* README.md */,
-				1F770ED621904D7D00E2889F /* langImg.png */,
 				B819BAA920C6DD7700CEEC5E /* LaunchScreen.storyboard */,
 				2EA584C61FA813C900C7106C /* main.m */,
 				2EFFE6AC1FF4829100BFCC40 /* Localizable.strings */,
@@ -4726,7 +4723,6 @@
 				7AAF032B21526956008507FF /* yw_1222_0335.jpg in Resources */,
 				2EB9495B1FDF6B1A00CE4B94 /* SimplifiedCode.txt in Resources */,
 				2EE361361FFB7D4500A5C3EB /* README.md in Resources */,
-				1F770ED721904D7D00E2889F /* langImg.png in Resources */,
 				1FF5DB9B21BFAA980019EF69 /* splash screen.png in Resources */,
 				7AAF037C21526EC4008507FF /* MSADefaultImages.bundle in Resources */,
 				B8DAD14720E2208B00AF4CD4 /* InfoPlist.strings in Resources */,

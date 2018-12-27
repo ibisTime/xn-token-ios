@@ -56,15 +56,33 @@
         }
         
         
+        
+        
+        
         UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 0.5, 20, 1, 36)];
         lineView.backgroundColor = kLineColor;
         [self addSubview:lineView];
         
-        UIView *lineView1 = [[UIView alloc]initWithFrame:CGRectMake(15, 75, SCREEN_WIDTH - 30, 1)];
+        
+        UILabel *promptLbl = [UILabel labelWithFrame:CGRectMake(0, lineView.yy + 10, SCREEN_WIDTH, 15) textAligment:(NSTextAlignmentCenter) backgroundColor:kClearColor font:FONT(12) textColor:kHexColor(@"#0064ff")];
+        promptLbl.text = [LangSwitcher switchLang:@"私钥账户未创建，显示部分资产" key:nil];
+        [self addSubview:promptLbl];
+        
+        
+        
+        UIView *lineView1 = [[UIView alloc]init];
         lineView1.backgroundColor = kLineColor;
         [self addSubview:lineView1];
         
-        
+        if ([TLUser isBlankString:[[NSUserDefaults standardUserDefaults] objectForKey:MNEMONIC]] == YES) {
+            promptLbl.hidden = NO;
+            lineView1.frame = CGRectMake(15, 90, SCREEN_WIDTH - 30, 1);
+        }
+        else
+        {
+            promptLbl.hidden = YES;
+            lineView1.frame = CGRectMake(15, 75, SCREEN_WIDTH - 30, 1);
+        }
         
     }
     return self;

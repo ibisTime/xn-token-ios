@@ -127,7 +127,13 @@ static NSString *MyAssetsTableView = @"MyAssetsTableViewCell";
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if (indexPath.section == 0) {
-        return 76;
+        
+        if ([TLUser isBlankString:[[NSUserDefaults standardUserDefaults] objectForKey:MNEMONIC]] == YES) {
+            return 91;
+        }else
+        {
+            return 76;
+        }
     }
     
     if([TLUser isBlankString:[TLUser user].idNo] == NO)

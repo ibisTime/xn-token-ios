@@ -107,14 +107,14 @@
             dispatch_source_cancel(_timer);
             dispatch_async(dispatch_get_main_queue(), ^{
                 
-                [sender setTitle:@"重发" forState:UIControlStateNormal];
+                [sender setTitle:[LangSwitcher switchLang:@"重新发送" key:nil] forState:UIControlStateNormal];
                 sender.userInteractionEnabled = YES;
             });
         }else{
             int seconds = time % 60;
             dispatch_async(dispatch_get_main_queue(), ^{
                 
-                [sender setTitle:[NSString stringWithFormat:@"重发(%.2d)", seconds] forState:UIControlStateNormal];
+                [sender setTitle:[NSString stringWithFormat:@"%@(%.2d)",[LangSwitcher switchLang:@"重新发送" key:nil], seconds] forState:UIControlStateNormal];
                 sender.userInteractionEnabled = NO;
             });
             time--;

@@ -329,6 +329,7 @@
 {
     if (indexPath.section == 2) {
         
+        [self loginTheWhether];
         
         FindTheGameVC *vc = [FindTheGameVC new];
         vc.GameModel = self.GameModel[indexPath.row];

@@ -22,7 +22,7 @@
 @property (nonatomic , strong)NSMutableArray *SelectArray;
 @property (nonatomic , strong)UICollectionView *BackupCollectionView;
 @property (nonatomic , strong)NSMutableArray *BackupArray;
-
+@property (nonatomic , strong)UILabel *promptLbl;
 @end
 
 @implementation BackupWalletMnemonicVC
@@ -79,6 +79,14 @@
     topView.layer.shadowRadius=3;// 阴影扩散的范围控制
     topView.layer.shadowOffset = CGSizeMake(1, 1);// 阴
     [self.view addSubview:topView];
+    
+    
+    UILabel *promptLbl = [UILabel labelWithFrame:CGRectMake(20, 20, SCREEN_WIDTH - 90, 0) textAligment:(NSTextAlignmentLeft) backgroundColor:kClearColor font:FONT(14) textColor:kHexColor(@"#ffffff")];
+    promptLbl.text = [LangSwitcher switchLang:@"请将您抄下的12个助记词按照正确的顺序输入" key:nil];
+    [promptLbl sizeToFit];
+    self.promptLbl = promptLbl;
+    [topView addSubview:promptLbl];
+    
     
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
     _SelectCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(25, 60, SCREEN_WIDTH - 50, 160) collectionViewLayout:layout];
@@ -242,6 +250,7 @@
     if (collectionView.tag == 1000) {
         
         
+        
         animBtn.hidden = NO;
         animBtn.frame = CGRectMake(_SelectCollectionView.x + 5 + indexPath.row %3* ((SCREEN_WIDTH - 70)/3 + 5), _SelectCollectionView.y + 5 + indexPath.row / 3* (135/4 + 5), (SCREEN_WIDTH - 70)/3, 135/4);
         [animBtn setBackgroundImage:kImage(@"圆角矩形2拷贝2") forState:(UIControlStateNormal)];
@@ -265,6 +274,8 @@
             animBtn.hidden = YES;
             [_BackupCollectionView reloadData];
         }];
+        
+        
 
     }else
     {
@@ -290,6 +301,13 @@
             animBtn.hidden = YES;
             [_SelectCollectionView reloadData];
         }];
+    }
+    
+    if (_SelectArray.count != 0) {
+        _promptLbl.hidden=  YES;
+    }else
+    {
+        _promptLbl.hidden=  NO;
     }
 }
 
