@@ -53,6 +53,15 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
+    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    self.window.backgroundColor = [UIColor whiteColor];
+    [self.window makeKeyAndVisible];
+    
+//    UILabel *label = [UILabel labelWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 40) textAligment:(NSTextAlignmentCenter) backgroundColor:kClearColor font:FONT(30) textColor:[UIColor blackColor]];
+//    label.text = @"撒地方环境萨克的复活节奥斯卡的粉红色";
+//    [self.window addSubview:label];
+    
+    
     //    [NSThread sleepForTimeInterval:2];
 //    服务器环境
 //    研发
@@ -345,9 +354,7 @@
 //控制器
 - (void)configRootViewController {
     
-    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    self.window.backgroundColor = [UIColor whiteColor];
-    [self.window makeKeyAndVisible];
+    
 
     
     
