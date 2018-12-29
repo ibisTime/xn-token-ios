@@ -17,12 +17,16 @@
 {
     UIButton *isSelectBtn;
     UIView *registerLineView;
-    NSString *phone;
-    NSString *email;
 }
+
+@property (nonatomic , strong)WSTextField *phone;
+@property (nonatomic , strong)WSTextField *email;
+@property (nonatomic , strong)WSTextField *code;
+
 @property (nonatomic , strong)UIButton *phoneAreaCodeBtn;
-@property (nonatomic , strong)UITextField *phoneTextFid;
-@property (nonatomic , strong)UITextField *codeTextFid;
+//@property (nonatomic , strong)UITextField *phoneTextFid;
+//@property (nonatomic , strong)UITextField *codeTextFid;
+//@property (nonatomic , strong)UITextField *codeTextFid;
 @property (nonatomic , strong)UILabel *codeLabel;
 @property (nonatomic , strong)UIView *lineView;
 @end
@@ -93,18 +97,44 @@
     
     
     
-    _phoneTextFid = [[UITextField alloc]initWithFrame:CGRectMake(_phoneAreaCodeBtn.xx + 15, registerLineView.yy + 50, SCREEN_WIDTH - _phoneAreaCodeBtn.xx - 60, 15)];
-    _phoneTextFid.placeholder = [LangSwitcher switchLang:@"请输入您的手机号码" key:nil];
-    //    phoneTextFid.keyboardType = UIKeyboardTypeEmailAddress;
-    [_phoneTextFid setValue:FONT(14) forKeyPath:@"_placeholderLabel.font"];
-    _phoneTextFid.font = FONT(14);
-    _phoneTextFid.textColor = [UIColor whiteColor];
-    [_phoneTextFid setValue:[UIColor whiteColor]  forKeyPath:@"_placeholderLabel.textColor"];
-    _phoneTextFid.clearsOnBeginEditing = NO;
-    _phoneTextFid.clearButtonMode = UITextFieldViewModeWhileEditing;
-    [backView addSubview:_phoneTextFid];
+    WSTextField *phone = [[WSTextField alloc]initWithFrame:CGRectMake(_phoneAreaCodeBtn.xx + 15, registerLineView.yy + 40, SCREEN_WIDTH - _phoneAreaCodeBtn.xx - 60, 35)];
+    phone.ly_placeholder = [LangSwitcher switchLang:@"请输入您的手机号码" key:nil];
+    //改输入框placeholder的颜色
+    self.phone = phone;
+    phone.placeholderSelectStateColor = [UIColor whiteColor];
+    phone.placeholderNormalStateColor = [UIColor whiteColor];
+    phone.textField.clearsOnBeginEditing = NO;
+    [phone.textField setValue:FONT(14) forKeyPath:@"_placeholderLabel.font"];
+    phone.textField.font = FONT(14);
+    phone.textField.clearButtonMode = UITextFieldViewModeWhileEditing;
+    [backView addSubview:phone];
     
-    UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(35, _phoneTextFid.yy + 13, SCREEN_WIDTH - 70, 1)];
+    WSTextField *emali = [[WSTextField alloc]initWithFrame:CGRectMake(_phoneAreaCodeBtn.xx + 15, registerLineView.yy + 40, SCREEN_WIDTH - _phoneAreaCodeBtn.xx - 60, 35)];
+    emali.ly_placeholder = [LangSwitcher switchLang:@"请输入您的手机号码" key:nil];
+    //改输入框placeholder的颜色
+    self.email = emali;
+    emali.placeholderSelectStateColor = [UIColor whiteColor];
+    emali.placeholderNormalStateColor = [UIColor whiteColor];
+    emali.textField.clearsOnBeginEditing = NO;
+    [emali.textField setValue:FONT(14) forKeyPath:@"_placeholderLabel.font"];
+    emali.textField.font = FONT(14);
+    emali.textField.clearButtonMode = UITextFieldViewModeWhileEditing;
+    emali.hidden = YES;
+    [backView addSubview:emali];
+    
+    
+//    _phoneTextFid = [[UITextField alloc]initWithFrame:CGRectMake(_phoneAreaCodeBtn.xx + 15, registerLineView.yy + 50, SCREEN_WIDTH - _phoneAreaCodeBtn.xx - 60, 15)];
+//    _phoneTextFid.placeholder = [LangSwitcher switchLang:@"请输入您的手机号码" key:nil];
+//    //    phoneTextFid.keyboardType = UIKeyboardTypeEmailAddress;
+//    [_phoneTextFid setValue:FONT(14) forKeyPath:@"_placeholderLabel.font"];
+//    _phoneTextFid.font = FONT(14);
+//    _phoneTextFid.textColor = [UIColor whiteColor];
+//    [_phoneTextFid setValue:[UIColor whiteColor]  forKeyPath:@"_placeholderLabel.textColor"];
+//    _phoneTextFid.clearsOnBeginEditing = NO;
+//    _phoneTextFid.clearButtonMode = UITextFieldViewModeWhileEditing;
+//    [backView addSubview:_phoneTextFid];
+    
+    UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(35, phone.yy + 3, SCREEN_WIDTH - 70, 1)];
     lineView.backgroundColor = kWhiteColor;
     [backView addSubview:lineView];
     
@@ -121,17 +151,29 @@
     [backView addSubview:codeLabel];
 
     
-    _codeTextFid = [[UITextField alloc]initWithFrame:CGRectMake(codeLabel.xx + 15, lineView.yy + 29, SCREEN_WIDTH - codeLabel.xx - 15 - 45, 15)];
-    _codeTextFid.placeholder = [LangSwitcher switchLang:@"请输入密码" key:nil];
-    //    codeTextFid.keyboardType = UIKeyboardTypeEmailAddress;
-    [_codeTextFid setValue:FONT(14) forKeyPath:@"_placeholderLabel.font"];
-    _codeTextFid.font = FONT(14);
-    _codeTextFid.textColor = [UIColor whiteColor];
-    [_codeTextFid setValue:[UIColor whiteColor]  forKeyPath:@"_placeholderLabel.textColor"];
-    _codeTextFid.clearsOnBeginEditing = NO;
-    _codeTextFid.clearButtonMode = UITextFieldViewModeWhileEditing;
-    _codeTextFid.secureTextEntry = YES;
-    [backView addSubview:_codeTextFid];
+    
+    WSTextField *code = [[WSTextField alloc]initWithFrame:CGRectMake(codeLabel.xx + 15, lineView.yy + 19, SCREEN_WIDTH - codeLabel.xx - 60, 35)];
+    code.ly_placeholder = [LangSwitcher switchLang:@"请输入密码" key:nil];
+    //改输入框placeholder的颜色
+    self.code = code;
+    code.placeholderSelectStateColor = [UIColor whiteColor];
+    code.placeholderNormalStateColor = [UIColor whiteColor];
+    [code.textField setValue:FONT(14) forKeyPath:@"_placeholderLabel.font"];
+    code.textField.font = FONT(14);
+//    code.textField.textColor = [UIColor whiteColor];
+//    [code.textField setValue:[UIColor whiteColor]  forKeyPath:@"_placeholderLabel.textColor"];
+    code.textField.clearsOnBeginEditing = NO;
+    code.textField.clearButtonMode = UITextFieldViewModeWhileEditing;
+    code.textField.secureTextEntry = YES;
+    code.textField.keyboardType = UIKeyboardTypeEmailAddress;
+    [backView addSubview:code];
+    
+    
+//    _codeTextFid = [[UITextField alloc]initWithFrame:CGRectMake(codeLabel.xx + 15, lineView.yy + 29, SCREEN_WIDTH - codeLabel.xx - 15 - 45, 15)];
+//    _codeTextFid.placeholder = [LangSwitcher switchLang:@"请输入密码" key:nil];
+//    //    codeTextFid.keyboardType = UIKeyboardTypeEmailAddress;
+//
+//    [backView addSubview:_codeTextFid];
     
     
     UIView *lineView1 = [[UIView alloc]initWithFrame:CGRectMake(35, codeLabel.yy + 13, SCREEN_WIDTH - 70, 1)];
@@ -213,11 +255,12 @@
         CGFloat titleOffset = imageW + 0.5 * 3;
         _phoneAreaCodeBtn.imageEdgeInsets = UIEdgeInsetsMake(6.5, imageOffset, 0, - imageOffset);
         _phoneAreaCodeBtn.titleEdgeInsets = UIEdgeInsetsMake(0, - titleOffset, 0, titleOffset);
-        _phoneTextFid.frame = CGRectMake(_phoneAreaCodeBtn.xx + 15, registerLineView.yy + 50, SCREEN_WIDTH - _phoneAreaCodeBtn.xx - 60, 15);
-        _phoneTextFid.placeholder = [LangSwitcher switchLang:@"请输入您的手机号码" key:nil];
-        
-        email = _phoneTextFid.text;
-        _phoneTextFid.text = phone;
+        _phone.frame = CGRectMake(_phoneAreaCodeBtn.xx + 15, registerLineView.yy + 40, SCREEN_WIDTH - _phoneAreaCodeBtn.xx - 60, 35);
+        _phone.ly_placeholder = [LangSwitcher switchLang:@"请输入您的手机号码" key:nil];
+        _email.hidden = YES;
+        _phone.hidden = NO;
+//        _phone.textField.hidden = NO;
+//        _email.textField.hidden = YES;
     }
     else
     {
@@ -230,10 +273,10 @@
         _phoneAreaCodeBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 0);
         _phoneAreaCodeBtn.frame = CGRectMake(46, registerLineView.yy + 50, _phoneAreaCodeBtn.width, 15);
         
-        _phoneTextFid.frame = CGRectMake(_phoneAreaCodeBtn.xx + 10, registerLineView.yy + 50, SCREEN_WIDTH - _phoneAreaCodeBtn.xx - 60, 15);
-        _phoneTextFid.placeholder = [LangSwitcher switchLang:@"请输入您的邮箱账号" key:nil];
-        phone = _phoneTextFid.text;
-        _phoneTextFid.text = email;
+        _email.frame = CGRectMake(_phoneAreaCodeBtn.xx + 10, registerLineView.yy + 40, SCREEN_WIDTH - _phoneAreaCodeBtn.xx - 60, 35);
+        _email.ly_placeholder = [LangSwitcher switchLang:@"请输入您的邮箱账号" key:nil];
+        _phone.hidden = YES;
+        _email.hidden = NO;
     }
 }
 
@@ -244,26 +287,33 @@
         case 0:
         {
             
-            if ([_phoneTextFid.text isEqualToString:@""]) {
-                if (isSelectBtn.tag == 100) {
+            if (isSelectBtn.tag == 100) {
+                
+                if ([_phone.textField.text isEqualToString:@""]) {
                     [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入正确的手机号" key:nil]];
-                }else
-                {
                     
+                    return;
+                }
+               
+            }else
+            {
+                if ([_email.textField.text isEqualToString:@""]) {
                     [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入正确的邮箱账号" key:nil]];
+                    return;
                 }
                 
-                return;
             }
             
+            
+            
             if (isSelectBtn.tag != 100) {
-                if ([self isValidateEmail:_phoneTextFid.text] == NO) {
+                if ([self isValidateEmail:_email.textField.text] == NO) {
                     [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入正确的邮箱账号" key:nil]];
                     return;
                 }
             }
             
-            if ([_codeTextFid.text isEqualToString:@""]) {
+            if ([_code.textField.text isEqualToString:@""]) {
                 [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入密码" key:nil]];
                 return;
             }
@@ -276,13 +326,13 @@
             http.code = @"805051";
 //            http.parameters[@"countryCode"] = model.code;
             if (isSelectBtn.tag == 100) {
-                http.parameters[@"loginName"] = [NSString stringWithFormat:@"%@%@",model.interCode,self.phoneTextFid.text];
+                http.parameters[@"loginName"] = [NSString stringWithFormat:@"%@%@",model.interCode,self.phone.textField.text];
             }else
             {
-                http.parameters[@"loginName"] = self.phoneTextFid.text;
+                http.parameters[@"loginName"] = self.email.textField.text;
             }
             
-            http.parameters[@"loginPwd"] = self.codeTextFid.text;
+            http.parameters[@"loginPwd"] = self.code.textField.text;
             http.parameters[@"kind"] = APP_KIND;
             http.parameters[@"client"] = @"ios";
             

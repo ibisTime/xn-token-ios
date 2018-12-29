@@ -13,8 +13,8 @@
 #import "PrivacyPolicyView.h"
 @interface TradePasswordVC ()
 
-@property (nonatomic , strong)UITextField *passWord;
-@property (nonatomic , strong)UITextField *conPassWord;
+@property (nonatomic , strong)WSTextField *passWordWSText;
+@property (nonatomic , strong)WSTextField *conPassWordWSText;
 @property (nonatomic ,strong)PrivacyPolicyView *privacyView;
 @end
 
@@ -84,29 +84,54 @@
         [passwordView addSubview:passWordLbl];
         
         
-        UIImageView *iconImage = [[UIImageView alloc] initWithFrame:CGRectMake(40, passWordLbl.yy + 21 - 1.5, 10, 15)];
+        UIImageView *iconImage = [[UIImageView alloc] initWithFrame:CGRectMake(40, passWordLbl.yy + 31 - 1.5, 10, 15)];
         iconImage.image = kImage(@"安全组拷贝");
         [passwordView addSubview:iconImage];
         
-        UITextField *passWordFid = [[UITextField alloc]initWithFrame:CGRectMake(iconImage.xx + 15, passWordLbl.yy + 21 - 1.5, SCREEN_WIDTH - iconImage.xx - 40 , 15)];
-        passWordFid.placeholder = placArray[i];
-        passWordFid.secureTextEntry = YES;
-        [passWordFid setValue:FONT(14) forKeyPath:@"_placeholderLabel.font"];
-        passWordFid.font = FONT(14);
-        passWordFid.textColor = [UIColor whiteColor];
-        [passWordFid setValue:[UIColor whiteColor]  forKeyPath:@"_placeholderLabel.textColor"];
-        passWordFid.clearsOnBeginEditing = NO;
-        passWordFid.clearButtonMode = UITextFieldViewModeWhileEditing;
-        [passwordView addSubview:passWordFid];
+//        UITextField *passWordFid = [[UITextField alloc]initWithFrame:CGRectMake(iconImage.xx + 15, passWordLbl.yy + 21 - 1.5, SCREEN_WIDTH - iconImage.xx - 40 , 15)];
+//        passWordFid.placeholder = placArray[i];
+//        passWordFid.secureTextEntry = YES;
+//        [passWordFid setValue:FONT(14) forKeyPath:@"_placeholderLabel.font"];
+//        passWordFid.font = FONT(14);
+//        passWordFid.textColor = [UIColor whiteColor];
+//        [passWordFid setValue:[UIColor whiteColor]  forKeyPath:@"_placeholderLabel.textColor"];
+//        passWordFid.clearsOnBeginEditing = NO;
+//        passWordFid.clearButtonMode = UITextFieldViewModeWhileEditing;
+//        [passwordView addSubview:passWordFid];
+//
+//        if (i == 0) {
+//            _passWord = passWordFid;
+//        }else
+//        {
+//            _conPassWord = passWordFid;
+//        }
         
+        
+        WSTextField *passWordFid = [[WSTextField alloc]initWithFrame:CGRectMake(iconImage.xx + 15, passWordLbl.yy + 31 - 1.5 - 10, SCREEN_WIDTH - iconImage.xx - 40 , 35)];
+        passWordFid.ly_placeholder = placArray[i];
+//        passWordFid.textField.tag = 10000 + i;
+//        passWordFid.textField.delegate = self;
+        //        [passWordFid.textField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:(UIControlEventEditingChanged)];
+        passWordFid.placeholderSelectStateColor = [UIColor whiteColor];
+        passWordFid.placeholderNormalStateColor = [UIColor whiteColor];
+        [passWordFid.textField setValue:FONT(14) forKeyPath:@"_placeholderLabel.font"];
+        passWordFid.textField.font = FONT(14);
+        passWordFid.textField.clearsOnBeginEditing = NO;
+        passWordFid.textField.clearButtonMode = UITextFieldViewModeWhileEditing;
+        passWordFid.textField.secureTextEntry = YES;
+        passWordFid.textField.keyboardType = UIKeyboardTypeEmailAddress;
         if (i == 0) {
-            _passWord = passWordFid;
+            _passWordWSText = passWordFid;
         }else
         {
-            _conPassWord = passWordFid;
+            _conPassWordWSText = passWordFid;
         }
+        [passwordView addSubview:passWordFid];
         
-        UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(35, passWordFid.yy + 8.5, SCREEN_WIDTH - 70, 1)];
+        
+        
+        
+        UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(35, passWordFid.yy + 8.5 - 10, SCREEN_WIDTH - 70, 1)];
         lineView.backgroundColor = kLineColor;
         [passwordView addSubview:lineView];
         
@@ -120,7 +145,7 @@
     }
     
     
-    UILabel *note = [UILabel labelWithFrame:CGRectMake(35, 160 - 64 + kNavigationBarHeight + 108 * 2 - 40, 0, 12) textAligment:(NSTextAlignmentLeft) backgroundColor:kClearColor font:FONT(12) textColor:kWhiteColor];
+    UILabel *note = [UILabel labelWithFrame:CGRectMake(35, _conPassWordWSText.yy + 10, 0, 12) textAligment:(NSTextAlignmentLeft) backgroundColor:kClearColor font:FONT(12) textColor:kWhiteColor];
     note.text = [LangSwitcher switchLang:@"注：" key:nil];
     [note sizeToFit];
     [passwordView addSubview:note];
@@ -176,19 +201,19 @@
 
 -(void)nextBtn
 {
-    if (![_passWord.text isPhoneNum]) {
+    if (![_passWordWSText.textField.text isPhoneNum]) {
         [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入交易密码" key:nil]];
         return;
     }
-    if (![_conPassWord.text isPhoneNum]) {
+    if (![_conPassWordWSText.textField.text isPhoneNum]) {
         [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请确认交易密码" key:nil]];
         return;
     }
-    if (![_conPassWord.text isEqualToString:_passWord.text]) {
+    if (![_conPassWordWSText.textField.text isEqualToString:_passWordWSText.textField.text]) {
         [TLAlert alertWithInfo:[LangSwitcher switchLang:@"密码不一致" key:nil]];
         return;
     }
-    if (_passWord.text.length < 6) {
+    if (_passWordWSText.textField.text.length < 6) {
         [TLAlert alertWithInfo:[LangSwitcher switchLang:@"密码至少为6位以上的数字或字母" key:nil]];
         return;
     }
@@ -214,7 +239,7 @@
 //        [[NSUserDefaults standardUserDefaults]setObject:categoryArray forKey:MNEMONIC];
         
         [[NSUserDefaults standardUserDefaults]setObject:mnemonics forKey:MNEMONIC];
-        [[NSUserDefaults standardUserDefaults]setObject:_passWord.text forKey:MNEMONICPASSWORD];
+        [[NSUserDefaults standardUserDefaults]setObject:_passWordWSText.textField.text forKey:MNEMONICPASSWORD];
         
         WhetherBackupVC *vc = [WhetherBackupVC new];
         
@@ -224,7 +249,7 @@
     }else
     {
         ImportWalletVC *vc = [ImportWalletVC new];
-        vc.passWord = _passWord.text;
+        vc.passWord = _passWordWSText.textField.text;
         [self.navigationController pushViewController:vc animated:YES];
     }
 }

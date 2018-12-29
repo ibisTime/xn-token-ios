@@ -359,24 +359,23 @@
     
     
 //    第一次安装配置语言
-//    NSData *data   =  [[NSUserDefaults standardUserDefaults] objectForKey:@"chooseModel"];
-//    CountryModel *model = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-//    if ([TLUser isBlankString:model.chineseName] == YES) {
-//        NSArray *appLanguages = [[NSUserDefaults standardUserDefaults] objectForKey:@"AppleLanguages"];
-//        NSString *languageName = [appLanguages objectAtIndex:0];
-//
-//        if ([languageName hasPrefix:@"zh-Hans"]) {
-//            [LangSwitcher changLangType:LangTypeSimple];
-//        }else if ([languageName hasPrefix:@"ko"])
-//        {
-//            [LangSwitcher changLangType:LangTypeKorean];
-//        }
-//        else
-//        {
-//            [LangSwitcher changLangType:LangTypeEnglish];
-//        }
-//
-//    }
+    NSData *data   =  [[NSUserDefaults standardUserDefaults] objectForKey:@"chooseModel"];
+    CountryModel *model = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    if ([TLUser isBlankString:model.chineseName] == YES) {
+        NSArray *appLanguages = [[NSUserDefaults standardUserDefaults] objectForKey:@"AppleLanguages"];
+        NSString *languageName = [appLanguages objectAtIndex:0];
+
+        if ([languageName hasPrefix:@"zh-Hans"]) {
+            [LangSwitcher changLangType:LangTypeSimple];
+        }else if ([languageName hasPrefix:@"ko"])
+        {
+            [LangSwitcher changLangType:LangTypeKorean];
+        }
+        else
+        {
+            [LangSwitcher changLangType:LangTypeEnglish];
+        }
+    }
     
     
     NSDictionary *dataDic = [[NSUserDefaults standardUserDefaults] objectForKey:@"user_info_dict_key"];

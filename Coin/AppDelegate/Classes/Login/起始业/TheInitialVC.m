@@ -26,18 +26,19 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:YES animated:animated];
+//    [self.navigationController setNavigationBarHidden:YES animated:animated];
+    [self navigationTransparentClearColor];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    [self.navigationController setNavigationBarHidden:NO animated:animated];
+//    [self.navigationController setNavigationBarHidden:NO animated:animated];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    TheInitialView * initialView = [[TheInitialView alloc]initWithFrame:CGRectMake(0, -kStatusBarHeight, SCREEN_WIDTH, SCREEN_HEIGHT +  kStatusBarHeight)];
+    TheInitialView * initialView = [[TheInitialView alloc]initWithFrame:CGRectMake(0, -kNavigationBarHeight, SCREEN_WIDTH, SCREEN_HEIGHT)];
     initialView.delegate = self;
     [self.view addSubview:initialView];
     
@@ -48,7 +49,7 @@
 //        [backnBtn setImage:kImage(@"返回 白色") forState:(UIControlStateNormal)];
         [backnBtn setTitle:[LangSwitcher switchLang:@"回到首页" key:nil] forState:(UIControlStateNormal)];
         [backnBtn setTitleColor:kWhiteColor forState:(UIControlStateNormal)];
-        backnBtn.frame = CGRectMake(20, kStatusBarHeight, SCREEN_WIDTH - 40, 44);
+        backnBtn.frame = CGRectMake(20, kStatusBarHeight - kNavigationBarHeight, SCREEN_WIDTH - 40, 44);
         backnBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         backnBtn.titleLabel.font = Font(16);
         [backnBtn addTarget:self action:@selector(backnBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
@@ -76,10 +77,53 @@
             [self loadData];
         }else
         {
-            model = [self.countrys objectAtIndex:0];
-            data = [NSKeyedArchiver archivedDataWithRootObject:model];
-            [[NSUserDefaults standardUserDefaults] setObject:data forKey:@"chooseModel"];
-            [[NSUserDefaults standardUserDefaults] synchronize];
+            NSArray *appLanguages = [[NSUserDefaults standardUserDefaults] objectForKey:@"AppleLanguages"];
+            NSString *languageName = [appLanguages objectAtIndex:0];
+            
+            
+            
+            
+            
+            if ([languageName hasPrefix:@"zh-Hans"]) {
+                
+                for (int i = 0; i < self.countrys.count; i ++) {
+                    if ([self.countrys[i].chineseName isEqualToString:@"中国"]) {
+                        model = [self.countrys objectAtIndex:i];
+                    }
+                }
+                data = [NSKeyedArchiver archivedDataWithRootObject:model];
+                [[NSUserDefaults standardUserDefaults] setObject:data forKey:@"chooseModel"];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+                [LangSwitcher changLangType:LangTypeSimple];
+                
+            }else if ([languageName hasPrefix:@"ko"])
+            {
+                for (int i = 0; i < self.countrys.count; i ++) {
+                    if ([self.countrys[i].chineseName isEqualToString:@"韩国"]) {
+                        model = [self.countrys objectAtIndex:i];
+                    }
+                }
+                data = [NSKeyedArchiver archivedDataWithRootObject:model];
+                [[NSUserDefaults standardUserDefaults] setObject:data forKey:@"chooseModel"];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+                [LangSwitcher changLangType:LangTypeKorean];
+            }
+            else
+            {
+                for (int i = 0; i < self.countrys.count; i ++) {
+                    if ([self.countrys[i].chineseName isEqualToString:@"美国"]) {
+                        model = [self.countrys objectAtIndex:i];
+                    }
+                }
+                data = [NSKeyedArchiver archivedDataWithRootObject:model];
+                [[NSUserDefaults standardUserDefaults] setObject:data forKey:@"chooseModel"];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+                [LangSwitcher changLangType:LangTypeEnglish];
+            }
+            
+            
+            
+            
             
             if ([model.interSimpleCode isEqualToString:@"CN"] ||[model.interSimpleCode isEqualToString:@"HK"] ||[model.interSimpleCode isEqualToString:@"TW"] || [model.interSimpleCode isEqualToString:@"MO"]) {
                 [LangSwitcher changLangType:LangTypeSimple];

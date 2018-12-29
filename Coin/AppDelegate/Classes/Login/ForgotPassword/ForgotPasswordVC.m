@@ -18,11 +18,22 @@
 }
 
 @property (nonatomic , strong)UIScrollView *scrollView;
-@property (nonatomic , strong)UITextField *phoneTextFid;
-@property (nonatomic , strong)UITextField *codeTextFid;
+//@property (nonatomic , strong)UITextField *phoneTextFid;
+//@property (nonatomic , strong)UITextField *codeTextFid;
+
+@property (nonatomic , strong)WSTextField *phoneWSTextFid;
+@property (nonatomic , strong)WSTextField *emailWSTextFid;
+@property (nonatomic , strong)WSTextField *codeWSTextFid;
+
+
 @property (nonatomic , strong)UIButton *codeBtn;
-@property (nonatomic , strong)UITextField *passFid;
-@property (nonatomic , strong)UITextField *conPassFid;
+
+@property (nonatomic , strong)WSTextField *passWSTextFid;
+@property (nonatomic , strong)WSTextField *conPassWSTextFid;
+
+
+//@property (nonatomic , strong)UITextField *passFid;
+//@property (nonatomic , strong)UITextField *conPassFid;
 @property (nonatomic , strong)UIButton *phoneAreaCodeBtn;
 
 @end
@@ -90,43 +101,70 @@
         [self.scrollView addSubview:phoneAndEmailRegister];
     }
     
-    UIButton *phoneAreaCodeBtn = [UIButton buttonWithTitle:[NSString stringWithFormat:@"+%@",[model.interCode substringFromIndex:2]] titleColor:kWhiteColor backgroundColor:kClearColor titleFont:14];
+    _phoneAreaCodeBtn = [UIButton buttonWithTitle:[NSString stringWithFormat:@"+%@",[model.interCode substringFromIndex:2]] titleColor:kWhiteColor backgroundColor:kClearColor titleFont:14];
     
-    phoneAreaCodeBtn.frame = CGRectMake(46, registerLineView.yy + 50, 0, 15);
-    phoneAreaCodeBtn.titleLabel.font = HGboldfont(15);
-    [phoneAreaCodeBtn sizeToFit];
-    phoneAreaCodeBtn.frame = CGRectMake(46, registerLineView.yy + 50, phoneAreaCodeBtn.frame.size.width + 6.5, 15);
-    [phoneAreaCodeBtn setImage:kImage(@"矩形4") forState:(UIControlStateNormal)];
+    _phoneAreaCodeBtn.frame = CGRectMake(46, registerLineView.yy + 50, 0, 15);
+    _phoneAreaCodeBtn.titleLabel.font = HGboldfont(15);
+    [_phoneAreaCodeBtn sizeToFit];
+    _phoneAreaCodeBtn.frame = CGRectMake(46, registerLineView.yy + 50, _phoneAreaCodeBtn.frame.size.width + 6.5, 15);
+    [_phoneAreaCodeBtn setImage:kImage(@"矩形4") forState:(UIControlStateNormal)];
     
-    CGFloat imageW = phoneAreaCodeBtn.imageView.image.size.width;
-    CGFloat titleW = phoneAreaCodeBtn.titleLabel.frame.size.width;
+    CGFloat imageW = _phoneAreaCodeBtn.imageView.image.size.width;
+    CGFloat titleW = _phoneAreaCodeBtn.titleLabel.frame.size.width;
     CGFloat imageOffset = titleW + 0.5 * 3;
     CGFloat titleOffset = imageW + 0.5 * 3;
     
-    phoneAreaCodeBtn.imageEdgeInsets = UIEdgeInsetsMake(6.5, imageOffset, 0, - imageOffset);
-    phoneAreaCodeBtn.titleEdgeInsets = UIEdgeInsetsMake(0, - titleOffset, 0, titleOffset);
+    _phoneAreaCodeBtn.imageEdgeInsets = UIEdgeInsetsMake(6.5, imageOffset, 0, - imageOffset);
+    _phoneAreaCodeBtn.titleEdgeInsets = UIEdgeInsetsMake(0, - titleOffset, 0, titleOffset);
     
-    [phoneAreaCodeBtn addTarget:self action:@selector(phoneAreaCodeBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
-    self.phoneAreaCodeBtn =  phoneAreaCodeBtn;
-    [self.scrollView addSubview:phoneAreaCodeBtn];
+    [_phoneAreaCodeBtn addTarget:self action:@selector(phoneAreaCodeBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
     
-    UITextField *phoneTextFid = [[UITextField alloc]initWithFrame:CGRectMake(phoneAreaCodeBtn.xx + 15, registerLineView.yy + 50, SCREEN_WIDTH - phoneAreaCodeBtn.xx - 60, 15)];
-    phoneTextFid.placeholder = [LangSwitcher switchLang:@"请输入您的手机号码" key:nil];
-    //    phoneTextFid.keyboardType = UIKeyboardTypeEmailAddress;
-    [phoneTextFid setValue:FONT(14) forKeyPath:@"_placeholderLabel.font"];
-    phoneTextFid.font = FONT(14);
-    self.phoneTextFid = phoneTextFid;
-    phoneTextFid.textColor = [UIColor whiteColor];
-    [phoneTextFid setValue:[UIColor whiteColor]  forKeyPath:@"_placeholderLabel.textColor"];
-    phoneTextFid.clearsOnBeginEditing = NO;
-    phoneTextFid.clearButtonMode = UITextFieldViewModeWhileEditing;
-    [self.scrollView addSubview:phoneTextFid];
+    [self.scrollView addSubview:_phoneAreaCodeBtn];
     
-    UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(35, phoneTextFid.yy + 13, SCREEN_WIDTH - 70, 1)];
+    //    UITextField *phoneTextFid = [[UITextField alloc]initWithFrame:CGRectMake(_phoneAreaCodeBtn.xx + 15, registerLineView.yy + 50, SCREEN_WIDTH - _phoneAreaCodeBtn.xx - 60, 15)];
+    //    phoneTextFid.placeholder = [LangSwitcher switchLang:@"请输入您的手机号码" key:nil];
+    //    //    phoneTextFid.keyboardType = UIKeyboardTypeEmailAddress;
+    //    [phoneTextFid setValue:FONT(14) forKeyPath:@"_placeholderLabel.font"];
+    //    phoneTextFid.font = FONT(14);
+    //    self.phoneTextFid = phoneTextFid;
+    //    phoneTextFid.textColor = [UIColor whiteColor];
+    //    [phoneTextFid setValue:[UIColor whiteColor]  forKeyPath:@"_placeholderLabel.textColor"];
+    //    phoneTextFid.clearsOnBeginEditing = NO;
+    //    phoneTextFid.clearButtonMode = UITextFieldViewModeWhileEditing;
+    //    [self.scrollView addSubview:phoneTextFid];
+    
+    
+    WSTextField *phone = [[WSTextField alloc]initWithFrame:CGRectMake(_phoneAreaCodeBtn.xx + 15, registerLineView.yy + 40, SCREEN_WIDTH - _phoneAreaCodeBtn.xx - 60, 35)];
+    phone.ly_placeholder = [LangSwitcher switchLang:@"请输入您的手机号码" key:nil];
+    //改输入框placeholder的颜色
+    self.phoneWSTextFid = phone;
+    phone.placeholderSelectStateColor = [UIColor whiteColor];
+    phone.placeholderNormalStateColor = [UIColor whiteColor];
+    phone.textField.clearsOnBeginEditing = NO;
+    [phone.textField setValue:FONT(14) forKeyPath:@"_placeholderLabel.font"];
+    phone.textField.font = FONT(14);
+    phone.textField.clearButtonMode = UITextFieldViewModeWhileEditing;
+    [self.scrollView addSubview:phone];
+    
+    
+    WSTextField *emali = [[WSTextField alloc]initWithFrame:CGRectMake(_phoneAreaCodeBtn.xx + 15, registerLineView.yy + 40, SCREEN_WIDTH - _phoneAreaCodeBtn.xx - 60, 35)];
+    emali.ly_placeholder = [LangSwitcher switchLang:@"请输入您的手机号码" key:nil];
+    //改输入框placeholder的颜色
+    self.emailWSTextFid = emali;
+    emali.placeholderSelectStateColor = [UIColor whiteColor];
+    emali.placeholderNormalStateColor = [UIColor whiteColor];
+    emali.textField.clearsOnBeginEditing = NO;
+    [emali.textField setValue:FONT(14) forKeyPath:@"_placeholderLabel.font"];
+    emali.textField.font = FONT(14);
+    emali.textField.clearButtonMode = UITextFieldViewModeWhileEditing;
+    emali.hidden = YES;
+    [self.scrollView addSubview:emali];
+    
+    UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(35, phone.yy + 3, SCREEN_WIDTH - 70, 1)];
     lineView.backgroundColor = kWhiteColor;
     [self.scrollView addSubview:lineView];
     
-    UILabel *codeLabel = [UILabel labelWithFrame:CGRectMake(46, lineView.yy + 29, 0, 15) textAligment:(NSTextAlignmentCenter) backgroundColor:kClearColor font:HGboldfont(15) textColor:kWhiteColor];
+    UILabel *codeLabel = [UILabel labelWithFrame:CGRectMake(46, lineView.yy + 29, 0, 15) textAligment:(NSTextAlignmentCenter) backgroundColor:kClearColor font:HGboldfont(14) textColor:kWhiteColor];
     codeLabel.text = [LangSwitcher switchLang:@"验证码" key:nil];
     [codeLabel sizeToFit];
     if (codeLabel.width >= 100) {
@@ -146,17 +184,32 @@
     self.codeBtn = codeBtn;
     [self.scrollView addSubview:codeBtn];
     
-    UITextField *codeTextFid = [[UITextField alloc]initWithFrame:CGRectMake(codeLabel.xx + 15, lineView.yy + 29, SCREEN_WIDTH - codeLabel.xx - 15 - codeBtn.width - 45, 15)];
-    self.codeTextFid = codeTextFid;
-    codeTextFid.placeholder = [LangSwitcher switchLang:@"请输入验证码" key:nil];
-    //    codeTextFid.keyboardType = UIKeyboardTypeEmailAddress;
-    [codeTextFid setValue:FONT(14) forKeyPath:@"_placeholderLabel.font"];
-    codeTextFid.font = FONT(14);
-    codeTextFid.textColor = [UIColor whiteColor];
-    [codeTextFid setValue:[UIColor whiteColor]  forKeyPath:@"_placeholderLabel.textColor"];
-    codeTextFid.clearsOnBeginEditing = NO;
-    codeTextFid.clearButtonMode = UITextFieldViewModeWhileEditing;
-    [self.scrollView addSubview:codeTextFid];
+    //    UITextField *codeTextFid = [[UITextField alloc]initWithFrame:CGRectMake(codeLabel.xx + 15, lineView.yy + 29, SCREEN_WIDTH - codeLabel.xx - 15 - codeBtn.width - 45, 15)];
+    //    self.codeTextFid = codeTextFid;
+    //    codeTextFid.placeholder = [LangSwitcher switchLang:@"请输入验证码" key:nil];
+    //    //    codeTextFid.keyboardType = UIKeyboardTypeEmailAddress;
+    //    [codeTextFid setValue:FONT(14) forKeyPath:@"_placeholderLabel.font"];
+    //    codeTextFid.font = FONT(14);
+    //    codeTextFid.textColor = [UIColor whiteColor];
+    //    [codeTextFid setValue:[UIColor whiteColor]  forKeyPath:@"_placeholderLabel.textColor"];
+    //    codeTextFid.clearsOnBeginEditing = NO;
+    //    codeTextFid.clearButtonMode = UITextFieldViewModeWhileEditing;
+    //    [self.scrollView addSubview:codeTextFid];
+    
+    WSTextField *code = [[WSTextField alloc]initWithFrame:CGRectMake(codeLabel.xx + 15, lineView.yy + 19, SCREEN_WIDTH - codeLabel.xx - 15 - codeBtn.width - 45, 35)];
+    code.ly_placeholder = [LangSwitcher switchLang:@"请输入验证码" key:nil];
+    self.codeWSTextFid = code;
+    code.placeholderSelectStateColor = [UIColor whiteColor];
+    code.placeholderNormalStateColor = [UIColor whiteColor];
+    [code.textField setValue:FONT(14) forKeyPath:@"_placeholderLabel.font"];
+    code.textField.font = FONT(14);
+    code.textField.clearsOnBeginEditing = NO;
+    code.textField.clearButtonMode = UITextFieldViewModeWhileEditing;
+    //    code.textField.secureTextEntry = YES;
+    code.textField.keyboardType = UIKeyboardTypeEmailAddress;
+    [self.scrollView addSubview:code];
+    
+    
     
     UIView *lineView1 = [[UIView alloc]initWithFrame:CGRectMake(35, codeLabel.yy + 13, SCREEN_WIDTH - 70, 1)];
     lineView1.backgroundColor = kWhiteColor;
@@ -172,7 +225,7 @@
 -(void)codeBtnClick
 {
     
-    if (![self.phoneTextFid.text isPhoneNum]) {
+    if (![self.phoneWSTextFid.textField.text isPhoneNum]) {
         if (isSelectBtn.tag == 100) {
             [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入手机号" key:nil]];
             return;
@@ -219,7 +272,7 @@
                 http.parameters[@"client"] = @"ios";
                 http.parameters[@"sessionId"] = sessionId;
                 http.parameters[@"bizType"] = @"805076";
-                http.parameters[@"mobile"] = self.phoneTextFid.text;
+                http.parameters[@"mobile"] = self.phoneWSTextFid.textField.text;
                 NSData *data   =  [[NSUserDefaults standardUserDefaults] objectForKey:@"chooseModel"];
                 CountryModel *model = [NSKeyedUnarchiver unarchiveObjectWithData:data];
                 http.parameters[@"interCode"] = model.interCode;
@@ -241,7 +294,7 @@
                 http.showView = self.view;
                 http.code = @"805954";
                 //    http.parameters[@"companyCode"] = @"";
-                http.parameters[@"email"] = self.phoneTextFid.text;
+                http.parameters[@"email"] = self.emailWSTextFid.textField.text;
                 http.parameters[@"bizType"] = @"805076";
                 http.parameters[@"client"] = @"ios";
                 http.parameters[@"sessionId"] = sessionId;
@@ -316,10 +369,10 @@
         CGFloat titleOffset = imageW + 0.5 * 3;
         _phoneAreaCodeBtn.imageEdgeInsets = UIEdgeInsetsMake(6.5, imageOffset, 0, - imageOffset);
         _phoneAreaCodeBtn.titleEdgeInsets = UIEdgeInsetsMake(0, - titleOffset, 0, titleOffset);
-        _phoneTextFid.frame = CGRectMake(_phoneAreaCodeBtn.xx + 15, registerLineView.yy + 50, SCREEN_WIDTH - _phoneAreaCodeBtn.xx - 60, 15);
-        _phoneTextFid.placeholder = [LangSwitcher switchLang:@"请输入您的手机号码" key:nil];
-        email = _phoneTextFid.text;
-        _phoneTextFid.text = phone;
+        _phoneWSTextFid.frame = CGRectMake(_phoneAreaCodeBtn.xx + 15, registerLineView.yy + 40, SCREEN_WIDTH - _phoneAreaCodeBtn.xx - 60, 35);
+        _phoneWSTextFid.ly_placeholder = [LangSwitcher switchLang:@"请输入您的手机号码" key:nil];
+        _emailWSTextFid.hidden = YES;
+        _phoneWSTextFid.hidden = NO;
     }else
     {
         
@@ -331,10 +384,10 @@
         _phoneAreaCodeBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 0);
         _phoneAreaCodeBtn.frame = CGRectMake(46, registerLineView.yy + 50, _phoneAreaCodeBtn.width, 15);
         
-        _phoneTextFid.frame = CGRectMake(_phoneAreaCodeBtn.xx + 10, registerLineView.yy + 50, SCREEN_WIDTH - _phoneAreaCodeBtn.xx - 60, 15);
-        _phoneTextFid.placeholder = [LangSwitcher switchLang:@"请输入您的邮箱账号" key:nil];
-        phone = _phoneTextFid.text;
-        _phoneTextFid.text = email;
+        _emailWSTextFid.frame = CGRectMake(_phoneAreaCodeBtn.xx + 10, registerLineView.yy + 40, SCREEN_WIDTH - _phoneAreaCodeBtn.xx - 60, 35);
+        _emailWSTextFid.ly_placeholder = [LangSwitcher switchLang:@"请输入您的邮箱账号" key:nil];
+        _phoneWSTextFid.hidden = YES;
+        _emailWSTextFid.hidden = NO;
     }
 }
 
@@ -342,18 +395,23 @@
 -(void)nextBtn
 {
     if (w == 0) {
-        if (![self.phoneTextFid.text isPhoneNum]) {
-            if (isSelectBtn.tag == 100) {
-                [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入手机号" key:nil]];
+        if (isSelectBtn.tag == 100) {
+            
+            if ([_phoneWSTextFid.textField.text isEqualToString:@""]) {
+                [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入正确的手机号" key:nil]];
+                
                 return;
-            }else
-            {
-                [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入邮箱号" key:nil]];
+            }
+            
+        }else
+        {
+            if ([_emailWSTextFid.textField.text isEqualToString:@""]) {
+                [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入正确的邮箱账号" key:nil]];
                 return;
             }
             
         }
-        if (![self.codeTextFid.text isPhoneNum]) {
+        if (![self.codeWSTextFid.textField.text isPhoneNum]) {
             [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入验证码" key:nil]];
             return;
         }
@@ -361,20 +419,20 @@
     }
     if (w == 1) {
         
-        if (![_passFid.text isPhoneNum]) {
+        if (![_passWSTextFid.textField.text isPhoneNum]) {
             [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入账号登录密码" key:nil]];
             return;
         }
-        if (![_conPassFid.text isPhoneNum]) {
+        if (![_conPassWSTextFid.textField.text isPhoneNum]) {
             [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请确认账号登录密码" key:nil]];
             return;
         }
         
-        if (![_passFid.text isEqualToString:_conPassFid.text]) {
+        if (![_passWSTextFid.textField.text isEqualToString:_conPassWSTextFid.textField.text]) {
             [TLAlert alertWithInfo:[LangSwitcher switchLang:@"密码不一致" key:nil]];
             return;
         }
-        if (_passFid.text.length < 8 || [[UserModel user]isStringTheCapitalLettersWith:_passFid.text] == NO || [[UserModel user]isStringContainNumberWith:_passFid.text] == NO || _passFid.text.length > 25) {
+        if (_passWSTextFid.textField.text.length < 8 || [[UserModel user]isStringTheCapitalLettersWith:_passWSTextFid.textField.text] == NO || [[UserModel user]isStringContainNumberWith:_passWSTextFid.textField.text] == NO || _passWSTextFid.textField.text.length > 25) {
             [TLAlert alertWithInfo:[LangSwitcher switchLang:@"密码位数为8~25位(字母+数字)" key:nil]];
             return;
         }
@@ -384,8 +442,8 @@
         http.showView = self.view;
         http.code = @"805076";
 //        http.parameters[@"mobile"] = self.phoneTf.text;
-        http.parameters[@"smsCaptcha"] = self.codeTextFid.text;
-        http.parameters[@"newLoginPwd"] = self.passFid.text;
+        http.parameters[@"smsCaptcha"] = self.codeWSTextFid.textField.text;
+        http.parameters[@"newLoginPwd"] = self.passWSTextFid.textField.text;
         http.parameters[@"kind"] = APP_KIND;
 
         
@@ -393,11 +451,11 @@
             
             NSData *data   =  [[NSUserDefaults standardUserDefaults] objectForKey:@"chooseModel"];
             CountryModel *model = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-            http.parameters[@"loginName"] = [NSString stringWithFormat:@"%@%@",model.interCode,self.phoneTextFid.text];
+            http.parameters[@"loginName"] = [NSString stringWithFormat:@"%@%@",model.interCode,self.phoneWSTextFid.textField.text];
 //            http.parameters[@"interCode"] = model.interCode;
         }else
         {
-            http.parameters[@"loginName"] = self.phoneTextFid.text;
+            http.parameters[@"loginName"] = self.emailWSTextFid.textField.text;
         }
         
         [http postWithSuccess:^(id responseObject) {
@@ -441,47 +499,70 @@
     NSArray *passWordArray = @[[LangSwitcher switchLang:@"密码" key:nil],[LangSwitcher switchLang:@"确认密码" key:nil]];
     NSArray *placArray = @[[LangSwitcher switchLang:@"密码为8~25为数字加字母" key:nil],[LangSwitcher switchLang:@"两次输入密码必须一致" key:nil]];
     
-    
-    UIView *bottomView;
     for (int i = 0; i < 2; i ++) {
         UILabel *passWordLbl = [UILabel labelWithFrame:CGRectMake(35, 160 - 64 + kNavigationBarHeight + i % 2 * 108, SCREEN_WIDTH - 70, 16) textAligment:(NSTextAlignmentLeft) backgroundColor:kClearColor font:HGboldfont(16) textColor:kWhiteColor];
         passWordLbl.text = passWordArray[i];
         [passwordView addSubview:passWordLbl];
         
         
-        UIImageView *iconImage = [[UIImageView alloc] initWithFrame:CGRectMake(40, passWordLbl.yy + 21 - 1.5, 10, 15)];
+        UIImageView *iconImage = [[UIImageView alloc] initWithFrame:CGRectMake(40, passWordLbl.yy + 31 - 1.5, 10, 15)];
         iconImage.image = kImage(@"安全组拷贝");
         [passwordView addSubview:iconImage];
         
-        UITextField *passWordFid = [[UITextField alloc]initWithFrame:CGRectMake(iconImage.xx + 15, passWordLbl.yy + 21 - 1.5, SCREEN_WIDTH - iconImage.xx - 40 , 15)];
-        passWordFid.placeholder = placArray[i];
-        passWordFid.secureTextEntry = YES;
-        [passWordFid setValue:FONT(14) forKeyPath:@"_placeholderLabel.font"];
-        passWordFid.font = FONT(14);
-        passWordFid.textColor = [UIColor whiteColor];
-        [passWordFid setValue:[UIColor whiteColor]  forKeyPath:@"_placeholderLabel.textColor"];
-        passWordFid.clearsOnBeginEditing = NO;
-        passWordFid.clearButtonMode = UITextFieldViewModeWhileEditing;
-        [passwordView addSubview:passWordFid];
+        //        UITextField *passWordFid = [[UITextField alloc]initWithFrame:CGRectMake(iconImage.xx + 15, passWordLbl.yy + 21 - 1.5, SCREEN_WIDTH - iconImage.xx - 40 , 15)];
+        //        passWordFid.placeholder = placArray[i];
+        //        passWordFid.secureTextEntry = YES;
+        //        if (i == 0) {
+        //            passWordFid.delegate = self;
+        //        }
+        //        passWordFid.tag = 12345 + i;
+        //        [passWordFid addTarget:self action:@selector(textFieldDidChange:) forControlEvents:(UIControlEventEditingChanged)];
+        //        [passWordFid setValue:FONT(14) forKeyPath:@"_placeholderLabel.font"];
+        //        passWordFid.font = FONT(14);
+        //        passWordFid.textColor = [UIColor whiteColor];
+        //        [passWordFid setValue:[UIColor whiteColor]  forKeyPath:@"_placeholderLabel.textColor"];
+        //        passWordFid.clearsOnBeginEditing = NO;
+        //        if (i == 0) {
+        //            _passFid = passWordFid;
+        //        }else
+        //        {
+        //            _conPassFid = passWordFid;
+        //        }
+        //        passWordFid.clearButtonMode = UITextFieldViewModeWhileEditing;
+        //        [passwordView addSubview:passWordFid];
         
-        
-        UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(35, passWordFid.yy + 8.5, SCREEN_WIDTH - 70, 1)];
-        lineView.backgroundColor = kLineColor;
-        [passwordView addSubview:lineView];
-        if (i == 1) {
-            bottomView =lineView;
-        }
+        WSTextField *passWordFid = [[WSTextField alloc]initWithFrame:CGRectMake(iconImage.xx + 15, passWordLbl.yy + 31 - 1.5 - 10, SCREEN_WIDTH - iconImage.xx - 40 , 35)];
+        passWordFid.ly_placeholder = placArray[i];
+        passWordFid.textField.tag = 12345 + i;
+//        if (i == 0) {
+//            passWordFid.textField.delegate = self;
+//        }
+//        [passWordFid.textField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:(UIControlEventEditingChanged)];
+        passWordFid.placeholderSelectStateColor = [UIColor whiteColor];
+        passWordFid.placeholderNormalStateColor = [UIColor whiteColor];
+        [passWordFid.textField setValue:FONT(14) forKeyPath:@"_placeholderLabel.font"];
+        passWordFid.textField.font = FONT(14);
+        passWordFid.textField.clearsOnBeginEditing = NO;
+        passWordFid.textField.clearButtonMode = UITextFieldViewModeWhileEditing;
+        passWordFid.textField.secureTextEntry = YES;
+        passWordFid.textField.keyboardType = UIKeyboardTypeEmailAddress;
         if (i == 0) {
-            self.passFid = passWordFid;
+            _passWSTextFid = passWordFid;
         }else
         {
-            self.conPassFid = passWordFid;
+            _conPassWSTextFid = passWordFid;
         }
+        [passwordView addSubview:passWordFid];
+        
+        UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(35, passWordFid.yy + 8.5 - 10, SCREEN_WIDTH - 70, 1)];
+        lineView.backgroundColor = kLineColor;
+        [passwordView addSubview:lineView];
+        
     }
     
     
     UIButton *confirmBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"完成" key:nil] titleColor:kWhiteColor backgroundColor:kClearColor titleFont:18];
-    confirmBtn.frame = CGRectMake(50, bottomView.yy + 75, SCREEN_WIDTH - 100, 50);
+    confirmBtn.frame = CGRectMake(50, _conPassWSTextFid.yy + 75, SCREEN_WIDTH - 100, 50);
     kViewRadius(confirmBtn, 10);
     [confirmBtn setBackgroundImage:kImage(@"矩形5-1") forState:(UIControlStateNormal)];
     [confirmBtn addTarget:self action:@selector(nextBtn) forControlEvents:(UIControlEventTouchUpInside)];

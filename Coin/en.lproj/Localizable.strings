@@ -285,7 +285,7 @@
 "交易记录" = "Transactions";
 "重新获取" = "Retrieved";
 "加载失败" = "Load error";
-"发红包" = "Gift sent";
+"发红包" = "Send";
 "塞进红包" = "PREPARE RED PACKET";
 "红包个数" = "Quantity";
 "red_package_sub_total" = "Token amount";
@@ -318,7 +318,7 @@
 "个人账户" = "Platform Account";
 "私钥钱包" = "Private Key Wallet ";
 "首创玩法" = "Global Master and Apprentice Initiative";
-"量化理财" = "Quantitative Finance";
+"量化理财" = "Wealth";
 "账户与安全" = "Account and Security";
 "本地货币" = "Local currency";
 "切换货币" = "Switch currency";
@@ -335,13 +335,10 @@
 "忘记密码?" = "Forget your password?";
 "还没账号?" = "No account yet?";
 "立即注册" = "Register now";
-"发红包" = "Send red packet";
 "不能为空" = "must not be null";
 "请输入数量" = "Enter number";
-"不能为空" = "must not be null";
 "改为普通红包" = "changed to ordinary red packets";
 "改为拼手气红包" = "changed to a lucky red packetsl";
-"不能为空" = "must not be null";
 "个" = "";
 "常见问题帮助" = "FAQ help";
 "年" = "";
@@ -390,7 +387,7 @@
 "注册失败" = "registration failed";
 "提币地址" = "withdraw address";
 "短信验证码" = "verification code";
-"验证码" = "verification code";
+"验证码" = "Code";
 "密码" = "Password";
 "注册!" = "Registered!";
 "谷歌验证码" = "Verification code";
@@ -500,7 +497,6 @@
 "暂无发送记录" = "No record sent";
 "来自" = "from";
 "发送成功,请扫描二维码抢红包" = "Successfully sent, please scan the QR code to get the red packet";
-"发红包" = "Red package";
 "认证成功" = "authentication success";
 "是否下载并安装支付宝完成认证?" = "Download and Install Alipay to complete the certification?";
 "好的" = "confirm";
@@ -686,7 +682,7 @@
 "发红包邀请好友" = "Send out gifts to invite friends";
 "点击生成邀请海报并截图给好友" = "Click to generate invitation, take a screenshot and sent it to your friends";
 "扫描二维码领取奖励" = "Scan QR code to get rewards";
-"邀请好友" = "Invite friend";
+"邀请好友" = "Invite";
 "注册Theia钱包" = "Register for Theia Wallet";
 "我的理财" = "My finance";
 "购买金额" = "Purchase amount";
@@ -829,8 +825,8 @@
 "选择币种" = "Please select coin type";
 
 
-"我的投资" = "My Investment";
-"币加宝" = "Quantitative Finance";
+"我的投资" = "My Record";
+"币加宝" = "Theia Wealth";
 "投资总额" = "Total amount of investment";
 "预期年化收益" = "Anticipated annualized return";
 "剩余额度：" = "Remaining quota：";
@@ -909,11 +905,11 @@
 "个人钱包" = "Personal wallet";
 "回到首页" = "Back to home";
 
-"创建私钥钱包" = " Create private key wallet ";
-"登录个人账号" = " Log in ";
-"创建个人账号" = " Create ";
+"创建私钥钱包" = "Create";
+"登录个人账号" = "Log in";
+"创建个人账号" = "Create";
 
-"导入助记词" = " Import mnemonic ";
+"导入助记词" = "Import";
 "手机登录" = "Log in via phone";
 "邮箱登录" = "Log in via Email";
 "请输入您的手机号码" = "Please enter your phone number";
@@ -947,8 +943,8 @@
 "请输入账号资金密码" = "Please enter fund password";
 "请确认账号资金密码" = "Please confirm fund password";
 "完成注册" = "Complete registration";
-"手机找回" = "Retrieve phone password";
-"邮箱找回" = "Retrieve email password";
+"手机找回" = "Retrieve phone";
+"邮箱找回" = "Retrieve email";
 "请输入您的邮箱账号" = "Please enter your email address";
 "请输入邮箱号" = "Please enter your email address";
 "密码位数至少为8数" = "Password must be at least 8 digits long";
@@ -970,7 +966,7 @@
 "Theia钱包支持一套助记词管理多个主链币种钱包地址" = "Theia wallet supports managing multiple wallet addresses of different public chain tokens with one set of mnemonic";
 "稍候备份" = "Backup later";
 "开始备份" = "Start backup";
-"请按顺序" = "Please follow the order";
+"请按顺序 " = "Please follow the order ";
 "抄写下方四个助记词" = "Copy the four mnemonics below";
 
 "请按顺序 抄写下方四个助记词" = "Please follow the order Copy the four mnemonics below";
@@ -1021,7 +1017,6 @@
 "注册新用户" = "Register";
 "忘记密码" = "Forgot your password";
 "确认密码" = "Confirm Password";
-"验证码" = "Authentication Code";
 "密码不一致，请重新输入" = "Inconsistent password, please re-enter";
 "重置密码成功" = "Reset password successfully";
 "用户不存在，请先注册" = "The user does not exist, please register first";

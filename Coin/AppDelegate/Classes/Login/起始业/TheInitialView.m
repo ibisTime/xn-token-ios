@@ -49,7 +49,7 @@ CATransform3D CATransform3DPerspect(CATransform3D t, CGPoint center, float disZ)
 
 -(void)initView
 {
-    scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT + kStatusBarHeight)];
+    scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
     scrollView.contentSize = CGSizeMake(SCREEN_WIDTH * 2, 0);
     scrollView.bounces = NO;
     scrollView.showsHorizontalScrollIndicator = NO;
@@ -60,19 +60,19 @@ CATransform3D CATransform3DPerspect(CATransform3D t, CGPoint center, float disZ)
     [self addSubview:scrollView];
     
     
-    UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 40, SCREEN_HEIGHT  - 90 - 30, 80, 4)];
+    UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 40, SCREEN_HEIGHT  - 90 - 30 - kBottomInsetHeight, 80, 4)];
     lineView.backgroundColor = kHexColor(@"#489fff");
     kViewRadius(lineView, 2);
     [self addSubview:lineView];
     
-    UIView *dynamicLineView = [[UIView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 40, SCREEN_HEIGHT - 90 - 30, 40, 4)];
+    UIView *dynamicLineView = [[UIView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 40, SCREEN_HEIGHT - 90 - 30 - kBottomInsetHeight, 40, 4)];
     self.dynamicLineView = dynamicLineView;
     dynamicLineView.backgroundColor = kHexColor(@"#ffffff");
     kViewRadius(dynamicLineView, 2);
     [self addSubview:dynamicLineView];
     
     
-    backView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT +  kStatusBarHeight)];
+    backView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
     backView.image = kImage(@"起始业背景");
     [scrollView addSubview:backView];
     
@@ -95,13 +95,13 @@ CATransform3D CATransform3DPerspect(CATransform3D t, CGPoint center, float disZ)
     
     
     UIButton *loginPersonalBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"登录个人账号" key:nil] titleColor:kHexColor(@"#0064ff") backgroundColor:kWhiteColor titleFont:16 cornerRadius:10];
-    loginPersonalBtn.frame = CGRectMake(50, lineView.yy + 10, SCREEN_WIDTH/2 - 57.5, 40);
+    loginPersonalBtn.frame = CGRectMake(50, SCREEN_HEIGHT - 90 , SCREEN_WIDTH/2 - 57.5, 40);
     [loginPersonalBtn addTarget:self action:@selector(btnClick:) forControlEvents:(UIControlEventTouchUpInside)];
     loginPersonalBtn.tag = 100;
     [scrollView addSubview:loginPersonalBtn];
     
     UIButton *createPersonalBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"创建个人账号" key:nil] titleColor:[UIColor blackColor] backgroundColor:kWhiteColor titleFont:16 cornerRadius:10];
-    createPersonalBtn.frame = CGRectMake(SCREEN_WIDTH/2 + 7.5, lineView.yy + 10, SCREEN_WIDTH/2 - 57.5, 40);
+    createPersonalBtn.frame = CGRectMake(SCREEN_WIDTH/2 + 7.5, SCREEN_HEIGHT - 90 , SCREEN_WIDTH/2 - 57.5, 40);
     [createPersonalBtn addTarget:self action:@selector(btnClick:) forControlEvents:(UIControlEventTouchUpInside)];
     createPersonalBtn.tag = 101;
     [scrollView addSubview:createPersonalBtn];
@@ -119,7 +119,7 @@ CATransform3D CATransform3DPerspect(CATransform3D t, CGPoint center, float disZ)
     
     
     //    私钥
-    backView1 =[[UIImageView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH, 0, SCREEN_WIDTH, SCREEN_HEIGHT +  kStatusBarHeight)];
+    backView1 =[[UIImageView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
     backView1.image = kImage(@"起始业背景");
     [scrollView addSubview:backView1];
     
@@ -139,13 +139,13 @@ CATransform3D CATransform3DPerspect(CATransform3D t, CGPoint center, float disZ)
     [backView1 addSubview:privateWalletIntroduceLb];
     
     UIButton *loginPrivateBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"创建私钥钱包" key:nil] titleColor:kHexColor(@"#0064ff") backgroundColor:kWhiteColor titleFont:16 cornerRadius:10];
-    loginPrivateBtn.frame = CGRectMake(SCREEN_WIDTH +  50,lineView.yy + 10, SCREEN_WIDTH/2 - 57.5, 40);
+    loginPrivateBtn.frame = CGRectMake(SCREEN_WIDTH +  50,SCREEN_HEIGHT - 90, SCREEN_WIDTH/2 - 57.5, 40);
     [loginPrivateBtn addTarget:self action:@selector(btnClick:) forControlEvents:(UIControlEventTouchUpInside)];
     loginPrivateBtn.tag = 102;
     [scrollView addSubview:loginPrivateBtn];
     
     UIButton *createPrivateBtn = [UIButton buttonWithTitle:[LangSwitcher switchLang:@"导入助记词" key:nil] titleColor:[UIColor blackColor] backgroundColor:kWhiteColor titleFont:16 cornerRadius:10];
-    createPrivateBtn.frame = CGRectMake(SCREEN_WIDTH +  SCREEN_WIDTH/2 + 7.5, lineView.yy + 10, SCREEN_WIDTH/2 - 57.5, 40);
+    createPrivateBtn.frame = CGRectMake(SCREEN_WIDTH +  SCREEN_WIDTH/2 + 7.5, SCREEN_HEIGHT - 90, SCREEN_WIDTH/2 - 57.5, 40);
     [createPrivateBtn addTarget:self action:@selector(btnClick:) forControlEvents:(UIControlEventTouchUpInside)];
     createPrivateBtn.tag = 103;
     [scrollView addSubview:createPrivateBtn];
@@ -184,7 +184,7 @@ CATransform3D CATransform3DPerspect(CATransform3D t, CGPoint center, float disZ)
     
     
     [UIView animateWithDuration:0.1 animations:^{
-        self.dynamicLineView.frame = CGRectMake(SCREEN_WIDTH/2 - 40 + w * 40, SCREEN_HEIGHT - 90 - 30, 40, 4);
+        self.dynamicLineView.frame = CGRectMake(SCREEN_WIDTH/2 - 40 + w * 40, SCREEN_HEIGHT - 90 - 30 - kBottomInsetHeight, 40, 4);
     }];
     
     

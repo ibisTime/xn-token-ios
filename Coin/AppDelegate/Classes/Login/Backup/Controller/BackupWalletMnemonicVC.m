@@ -10,6 +10,7 @@
 #import "BackupCollectionViewCell.h"
 #import "ConfirmBackupVC.h"
 #import "TLTabBarController.h"
+#import <AudioToolbox/AudioToolbox.h>
 @interface BackupWalletMnemonicVC ()<UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 {
     UIView *topView;
@@ -247,6 +248,8 @@
 #pragma mark -- Collection delegate
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     NSLog(@"点击了 %ld ", indexPath.row);
+    
+    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
     if (collectionView.tag == 1000) {
         
         

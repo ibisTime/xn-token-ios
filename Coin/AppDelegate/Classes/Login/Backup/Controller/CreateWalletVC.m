@@ -127,7 +127,7 @@
     NSString *str =[LangSwitcher switchLang:@"请按顺序 抄写下方四个助记词" key:nil];
     
     NSMutableAttributedString *AttributedStr = [[NSMutableAttributedString alloc]initWithString:str];
-    [AttributedStr addAttribute:NSFontAttributeName value:HGboldfont(18) range:NSMakeRange(0, attStr.length + 1)];
+    [AttributedStr addAttribute:NSFontAttributeName value:HGboldfont(18) range:NSMakeRange(0, attStr.length)];
     nameLabel.attributedText = AttributedStr;
 //    nameLabel.numberOfLines = 0;
 //    [nameLabel sizeToFit];
@@ -170,7 +170,7 @@
     NSString *str =[LangSwitcher switchLang:@"请按顺序 抄写下方四个助记词" key:nil];
     
     NSMutableAttributedString *AttributedStr = [[NSMutableAttributedString alloc]initWithString:str];
-    [AttributedStr addAttribute:NSFontAttributeName value:HGboldfont(18) range:NSMakeRange(0, attStr.length + 1)];
+    [AttributedStr addAttribute:NSFontAttributeName value:HGboldfont(18) range:NSMakeRange(0, attStr.length)];
     nameLabel.attributedText = AttributedStr;
 //    nameLabel.numberOfLines = 0;
 //    [nameLabel sizeToFit];
@@ -208,7 +208,7 @@
     NSString *str =[LangSwitcher switchLang:@"请按顺序 抄写下方四个助记词" key:nil];
     
     NSMutableAttributedString *AttributedStr = [[NSMutableAttributedString alloc]initWithString:str];
-    [AttributedStr addAttribute:NSFontAttributeName value:HGboldfont(18) range:NSMakeRange(0, attStr.length + 1)];
+    [AttributedStr addAttribute:NSFontAttributeName value:HGboldfont(18) range:NSMakeRange(0, attStr.length)];
     nameLabel.attributedText = AttributedStr;
 //    nameLabel.numberOfLines = 0;
 //    [nameLabel sizeToFit];
