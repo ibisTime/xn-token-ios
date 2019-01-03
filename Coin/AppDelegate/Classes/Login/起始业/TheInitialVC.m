@@ -44,23 +44,34 @@
     
     [self configData];
     
-    if ([TLUser user].isLogin == YES || [TLUser isBlankString:[[NSUserDefaults standardUserDefaults]objectForKey:MNEMONIC]] == NO) {
-        UIButton *backnBtn = [UIButton buttonWithType:(UIButtonTypeCustom)];
-//        [backnBtn setImage:kImage(@"返回 白色") forState:(UIControlStateNormal)];
-        [backnBtn setTitle:[LangSwitcher switchLang:@"回到首页" key:nil] forState:(UIControlStateNormal)];
-        [backnBtn setTitleColor:kWhiteColor forState:(UIControlStateNormal)];
-        backnBtn.frame = CGRectMake(20, kStatusBarHeight - kNavigationBarHeight, SCREEN_WIDTH - 40, 44);
-        backnBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-        backnBtn.titleLabel.font = Font(16);
-        [backnBtn addTarget:self action:@selector(backnBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
-        [self.view addSubview:backnBtn];
+    
+    
+    UIButton *backnBtn = [UIButton buttonWithType:(UIButtonTypeCustom)];
+    //        [backnBtn setImage:kImage(@"返回 白色") forState:(UIControlStateNormal)];
+    [backnBtn setTitle:[LangSwitcher switchLang:@"回到首页" key:nil] forState:(UIControlStateNormal)];
+    [backnBtn setTitleColor:kWhiteColor forState:(UIControlStateNormal)];
+//    backnBtn.frame = CGRectMake(20, kStatusBarHeight - kNavigationBarHeight, SCREEN_WIDTH - 40, 44);
+    backnBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    backnBtn.titleLabel.font = Font(16);
+    [backnBtn addTarget:self action:@selector(backnBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
+//    [self.view addSubview:backnBtn];
+    
+    UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
+    negativeSpacer.width = -10;
+    self.navigationItem.leftBarButtonItems = @[negativeSpacer, [[UIBarButtonItem alloc] initWithCustomView:backnBtn]];
+    
+    if ([TLUser user].isLogin == YES || [TLUser isBlankString:[[NSUserDefaults standardUserDefaults]objectForKey:MNEMONIC]] == NO)
+    {
+        backnBtn.hidden = NO;
+    }else
+    {
+        backnBtn.hidden = YES;
     }
 }
 
 -(void)backnBtnClick
 {
     TLTabBarController *tabBarCtrl = [[TLTabBarController alloc] init];
-//    TLNavigationController *nav = [[TLNavigationController alloc] initWithRootViewController:tabBarCtrl];
     [UIApplication sharedApplication].keyWindow.rootViewController = tabBarCtrl;
 }
 

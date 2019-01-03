@@ -84,6 +84,7 @@
     
     UILabel *promptLbl = [UILabel labelWithFrame:CGRectMake(20, 20, SCREEN_WIDTH - 90, 0) textAligment:(NSTextAlignmentLeft) backgroundColor:kClearColor font:FONT(14) textColor:kHexColor(@"#ffffff")];
     promptLbl.text = [LangSwitcher switchLang:@"请将您抄下的12个助记词按照正确的顺序输入" key:nil];
+    promptLbl.numberOfLines = 0;
     [promptLbl sizeToFit];
     self.promptLbl = promptLbl;
     [topView addSubview:promptLbl];
