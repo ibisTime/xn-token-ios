@@ -66,8 +66,7 @@
     
     self.currencyNameLbl = [UILabel labelWithBackgroundColor:kClearColor
                                                    textColor:[UIColor blackColor]
-                                                        font:0];
-    self.currencyNameLbl.font = FONT(14);
+                                                        font:14];
     self.currencyNameLbl.frame = CGRectMake(self.presentImage.x - 10, self.presentImage.yy + 5.5, 50, 14);
     self.currencyNameLbl.textAlignment = NSTextAlignmentCenter;
     [self addSubview:self.currencyNameLbl];
@@ -76,7 +75,7 @@
     self.tradeVolumeLbl = [UILabel labelWithBackgroundColor:kClearColor
                                                   textColor:kHexColor(@"#999999")
                                                        font:13.0];
-    self.tradeVolumeLbl.frame = CGRectMake(self.presentImage.xx + 10 ,  18.5, 0, 13);
+    self.tradeVolumeLbl.frame = CGRectMake(65 ,  18.5, 0, 13);
     [self addSubview:self.tradeVolumeLbl];
     
     
@@ -91,15 +90,15 @@
     
     
     self.priceFluctBtn = [UIButton buttonWithTitle:@"0.00%" titleColor:kHexColor(@"#999999") backgroundColor:kClearColor titleFont:13];
-    self.priceFluctBtn.frame = CGRectMake(self.presentImage.xx + 10, 40, 0, 22);
-
+    self.priceFluctBtn.frame = CGRectMake(65, self.presentImage.yy + 5.5 - 4, 0, 22);
+    self.priceFluctBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     [self addSubview:self.priceFluctBtn];
     
     //当前人民币价格
     self.rmbPriceLbl = [UILabel labelWithBackgroundColor:kClearColor
                                                textColor:kHexColor(@"#999999")
                                                     font:13.0];
-    self.rmbPriceLbl.frame = CGRectMake(self.priceFluctBtn.xx + 10, 44, SCREEN_WIDTH - 30 - self.priceFluctBtn.xx, 14);
+    self.rmbPriceLbl.frame = CGRectMake(self.priceFluctBtn.xx + 10, self.presentImage.yy + 5.5, SCREEN_WIDTH - 30 - self.priceFluctBtn.xx, 14);
     self.rmbPriceLbl.textAlignment = NSTextAlignmentRight;
     
     [self addSubview:self.rmbPriceLbl];
@@ -126,39 +125,78 @@
     if ([platform.address isEqualToString:[[NSUserDefaults standardUserDefaults] objectForKey:BTCADDRESS]]) {
         self.currencyNameLbl.text = @"BTC(old version)";
         [self.currencyNameLbl sizeToFit];
-        self.currencyNameLbl.frame = CGRectMake(self.presentImage.x, self.presentImage.yy + 5.5, self.currencyNameLbl.width, 14);
-        self.priceFluctBtn.frame = CGRectMake(self.currencyNameLbl.xx + 10, 40, 0, 22);
+        self.currencyNameLbl.frame = CGRectMake(10, self.presentImage.yy + 5.5, self.currencyNameLbl.width, 14);
+        self.priceFluctBtn.frame = CGRectMake(self.currencyNameLbl.xx + 10, self.presentImage.yy + 5.5 - 4, 0, 22);
     }else
     {
         self.currencyNameLbl.text = platform.symbol;
-        [self.currencyNameLbl sizeToFit];
-        self.currencyNameLbl.frame = CGRectMake(self.presentImage.x, self.presentImage.yy + 5.5, self.currencyNameLbl.width, 14);
-        self.priceFluctBtn.frame = CGRectMake(self.currencyNameLbl.xx + 10, 40, 0, 22);
+//        [self.currencyNameLbl sizeToFit];
+        self.currencyNameLbl.frame = CGRectMake(10, self.presentImage.yy + 5.5, 50, 14);
+        self.priceFluctBtn.frame = CGRectMake(65, self.presentImage.yy + 5.5, 0, 22);
     }
     
     if ([platform1.percentChange24h floatValue] > 0) {
-        [self.priceFluctBtn setTitle:[NSString stringWithFormat:@"+%@%%",platform1.percentChange24h] forState:(UIControlStateNormal)];
-        [self.priceFluctBtn sizeToFit];
-        self.priceFluctBtn.frame = CGRectMake(self.currencyNameLbl.xx + 10, 40, self.priceFluctBtn.width + 10, 22);
-        [self.priceFluctBtn SG_imagePositionStyle:(SGImagePositionStyleRight) spacing:3 imagePositionBlock:^(UIButton *button) {
-            [button setImage:kImage(@"上升") forState:(UIControlStateNormal)];
-        }];
+        
+        if ([platform.address isEqualToString:[[NSUserDefaults standardUserDefaults] objectForKey:BTCADDRESS]]) {
+            [self.priceFluctBtn setTitle:[NSString stringWithFormat:@"+%@%%",platform1.percentChange24h] forState:(UIControlStateNormal)];
+            [self.priceFluctBtn sizeToFit];
+            self.priceFluctBtn.frame = CGRectMake(self.currencyNameLbl.xx + 10, self.presentImage.yy + 5.5 - 4, self.priceFluctBtn.width + 10, 22);
+            [self.priceFluctBtn SG_imagePositionStyle:(SGImagePositionStyleRight) spacing:3 imagePositionBlock:^(UIButton *button) {
+                [button setImage:kImage(@"上升") forState:(UIControlStateNormal)];
+            }];
+        }
+        else
+        {
+            [self.priceFluctBtn setTitle:[NSString stringWithFormat:@"+%@%%",platform1.percentChange24h] forState:(UIControlStateNormal)];
+            [self.priceFluctBtn sizeToFit];
+            self.priceFluctBtn.frame = CGRectMake(65, self.presentImage.yy + 5.5 - 4, self.priceFluctBtn.width + 10, 22);
+            [self.priceFluctBtn SG_imagePositionStyle:(SGImagePositionStyleRight) spacing:3 imagePositionBlock:^(UIButton *button) {
+                [button setImage:kImage(@"上升") forState:(UIControlStateNormal)];
+            }];
+        }
+        
+        
     }else if ([platform1.percentChange24h floatValue] == 0)
     {
-        [self.priceFluctBtn setTitle:[NSString stringWithFormat:@"%@%%",platform1.percentChange24h] forState:(UIControlStateNormal)];
-        [self.priceFluctBtn sizeToFit];
-        self.priceFluctBtn.frame = CGRectMake(self.currencyNameLbl.xx + 10, 40, self.priceFluctBtn.width, 22);
-        [self.priceFluctBtn SG_imagePositionStyle:(SGImagePositionStyleRight) spacing:3 imagePositionBlock:^(UIButton *button) {
-            [button setImage:kImage(@"") forState:(UIControlStateNormal)];
-        }];
+        
+        if ([platform.address isEqualToString:[[NSUserDefaults standardUserDefaults] objectForKey:BTCADDRESS]]) {
+            [self.priceFluctBtn setTitle:[NSString stringWithFormat:@"%@%%",platform1.percentChange24h] forState:(UIControlStateNormal)];
+            [self.priceFluctBtn sizeToFit];
+            self.priceFluctBtn.frame = CGRectMake(self.currencyNameLbl.xx + 10, self.presentImage.yy + 5.5 - 4, self.priceFluctBtn.width, 22);
+            [self.priceFluctBtn SG_imagePositionStyle:(SGImagePositionStyleRight) spacing:3 imagePositionBlock:^(UIButton *button) {
+                [button setImage:kImage(@"") forState:(UIControlStateNormal)];
+            }];
+            
+        }else
+        {
+            [self.priceFluctBtn setTitle:[NSString stringWithFormat:@"%@%%",platform1.percentChange24h] forState:(UIControlStateNormal)];
+            [self.priceFluctBtn sizeToFit];
+            self.priceFluctBtn.frame = CGRectMake(65, self.presentImage.yy + 5.5 - 4, self.priceFluctBtn.width, 22);
+            [self.priceFluctBtn SG_imagePositionStyle:(SGImagePositionStyleRight) spacing:3 imagePositionBlock:^(UIButton *button) {
+                [button setImage:kImage(@"") forState:(UIControlStateNormal)];
+            }];
+        }
+        
     }else
     {
-        [self.priceFluctBtn setTitle:[NSString stringWithFormat:@"%@%%",platform1.percentChange24h] forState:(UIControlStateNormal)];
-        [self.priceFluctBtn sizeToFit];
-        self.priceFluctBtn.frame = CGRectMake(self.currencyNameLbl.xx + 10, 40, self.priceFluctBtn.width + 10, 22);
-        [self.priceFluctBtn SG_imagePositionStyle:(SGImagePositionStyleRight) spacing:3 imagePositionBlock:^(UIButton *button) {
-            [button setImage:kImage(@"下降") forState:(UIControlStateNormal)];
-        }];
+        
+         if ([platform.address isEqualToString:[[NSUserDefaults standardUserDefaults] objectForKey:BTCADDRESS]]) {
+             [self.priceFluctBtn setTitle:[NSString stringWithFormat:@"%@%%",platform1.percentChange24h] forState:(UIControlStateNormal)];
+             [self.priceFluctBtn sizeToFit];
+             self.priceFluctBtn.frame = CGRectMake(self.currencyNameLbl.xx + 10, self.presentImage.yy + 5.5 -4, self.priceFluctBtn.width + 10, 22);
+             [self.priceFluctBtn SG_imagePositionStyle:(SGImagePositionStyleRight) spacing:3 imagePositionBlock:^(UIButton *button) {
+                 [button setImage:kImage(@"下降") forState:(UIControlStateNormal)];
+             }];
+         }else
+         {
+             [self.priceFluctBtn setTitle:[NSString stringWithFormat:@"%@%%",platform1.percentChange24h] forState:(UIControlStateNormal)];
+             [self.priceFluctBtn sizeToFit];
+             self.priceFluctBtn.frame = CGRectMake(65, self.presentImage.yy + 5.5 -4, self.priceFluctBtn.width + 10, 22);
+             [self.priceFluctBtn SG_imagePositionStyle:(SGImagePositionStyleRight) spacing:3 imagePositionBlock:^(UIButton *button) {
+                 [button setImage:kImage(@"下降") forState:(UIControlStateNormal)];
+             }];
+         }
+        
     }
     
     
@@ -166,53 +204,32 @@
     
 //    NSString *leftAmount = [CoinUtil convertToRealCoin:platform.amountString coin:platform.symbol];
     NSString *ritAmount = [CoinUtil convertToRealCoin:platform.balance coin:platform.symbol];
-//    NSString *ritAmount = [leftAmount subNumber:rightAmount];
+
+    if ([[TLUser user].localMoney isEqualToString:@"USD"]) {
+        self.tradeVolumeLbl.text = [NSString stringWithFormat:@"≈%.2f USD",[platform.priceUSD doubleValue]];
+        self.rmbPriceLbl.text = [NSString stringWithFormat:@"≈%.2f USD",[platform.amountUSD doubleValue]];
+        
+    } else if ([[TLUser user].localMoney isEqualToString:@"KRW"])
+    {
+        self.tradeVolumeLbl.text = [NSString stringWithFormat:@"≈%.2f KRW",[platform.priceKRW doubleValue]];
+        self.rmbPriceLbl.text = [NSString stringWithFormat:@"≈%.2f KRW",[platform.amountKRW doubleValue]];
+        
+    }
+    else{
+        self.tradeVolumeLbl.text = [NSString stringWithFormat:@"≈%.2f CNY",[platform.priceCNY doubleValue]];
+        self.rmbPriceLbl.text = [NSString stringWithFormat:@"≈%.2f CNY",[platform.amountCNY doubleValue]];
+    }
     
+    NSString *text = [NSString stringWithFormat:@"%.8f %@",[ritAmount doubleValue],platform.symbol];
     
-//    NSString *eyes = [[NSUserDefaults standardUserDefaults] objectForKey:@"eyes"];
-//    if ([eyes isEqualToString:@"1"]) {
-//        if ([[TLUser user].localMoney isEqualToString:@"USD"]) {
-//            self.tradeVolumeLbl.text = [NSString stringWithFormat:@"≈%.2f USD",[platform.priceUSD doubleValue]];
-//            self.rmbPriceLbl.text = @"**** USD";
-//
-//        } else if ([[TLUser user].localMoney isEqualToString:@"KRW"])
-//        {
-//            self.tradeVolumeLbl.text = [NSString stringWithFormat:@"≈%.2f KRW",[platform.priceKRW doubleValue]];
-//            self.rmbPriceLbl.text = @"%**** KRW";
-//
-//        }
-//        else{
-//            self.tradeVolumeLbl.text = [NSString stringWithFormat:@"≈%.2f CNY",[platform.priceCNY doubleValue]];
-//            self.rmbPriceLbl.text = @"**** CNY";
-//        }
-//        self.opppsitePriceLbl.text = @"****";
-//    }else
-//    {
-        if ([[TLUser user].localMoney isEqualToString:@"USD"]) {
-            self.tradeVolumeLbl.text = [NSString stringWithFormat:@"≈%.2f USD",[platform.priceUSD doubleValue]];
-            self.rmbPriceLbl.text = [NSString stringWithFormat:@"≈%.2f USD",[platform.amountUSD doubleValue]];
-            
-        } else if ([[TLUser user].localMoney isEqualToString:@"KRW"])
-        {
-            self.tradeVolumeLbl.text = [NSString stringWithFormat:@"≈%.2f KRW",[platform.priceKRW doubleValue]];
-            self.rmbPriceLbl.text = [NSString stringWithFormat:@"≈%.2f KRW",[platform.amountKRW doubleValue]];
-            
-        }
-        else{
-            self.tradeVolumeLbl.text = [NSString stringWithFormat:@"≈%.2f CNY",[platform.priceCNY doubleValue]];
-            self.rmbPriceLbl.text = [NSString stringWithFormat:@"≈%.2f CNY",[platform.amountCNY doubleValue]];
-        }
-        
-        NSString *text = [NSString stringWithFormat:@"%.8f %@",[ritAmount doubleValue],platform.symbol];
-        
-        NSMutableAttributedString *fontAttributeNameStr = [[NSMutableAttributedString alloc]initWithString:text];
-        // 2.添加属性
-        [fontAttributeNameStr addAttribute:NSFontAttributeName value:HGboldfont(22) range:NSMakeRange(0, text.length - platform.symbol.length)];
-        [fontAttributeNameStr addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:NSMakeRange(0, text.length - platform.symbol.length)];
-        
-        self.opppsitePriceLbl.attributedText = fontAttributeNameStr;
-        
-//    }
+    NSMutableAttributedString *fontAttributeNameStr = [[NSMutableAttributedString alloc]initWithString:text];
+    // 2.添加属性
+    [fontAttributeNameStr addAttribute:NSFontAttributeName value:FONT(22) range:NSMakeRange(0, text.length - platform.symbol.length)];
+    [fontAttributeNameStr addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:NSMakeRange(0, text.length - platform.symbol.length)];
+    
+    self.opppsitePriceLbl.attributedText = fontAttributeNameStr;
+    
+
     [self.tradeVolumeLbl sizeToFit];
     self.opppsitePriceLbl.frame = CGRectMake(self.tradeVolumeLbl.xx + 10, 15.5, SCREEN_WIDTH - self.tradeVolumeLbl.xx - 30, 22);
     
@@ -237,14 +254,14 @@
     
     self.currencyNameLbl.text = platform.currency;
 //    }
-    [self.currencyNameLbl sizeToFit];
-    self.currencyNameLbl.frame = CGRectMake(self.presentImage.x, self.presentImage.yy + 5.5, self.currencyNameLbl.width, 14);
-    self.priceFluctBtn.frame = CGRectMake(self.currencyNameLbl.xx + 10, 40, 0, 22);
+//    [self.currencyNameLbl sizeToFit];
+    self.currencyNameLbl.frame = CGRectMake(10, self.presentImage.yy + 5.5, 50, 14);
+    self.priceFluctBtn.frame = CGRectMake(self.presentImage.xx + 10, self.presentImage.yy + 5.5 - 4, 0, 22);
     
     if ([platform1.percentChange24h floatValue] > 0) {
         [self.priceFluctBtn setTitle:[NSString stringWithFormat:@"+%@%%",platform1.percentChange24h] forState:(UIControlStateNormal)];
         [self.priceFluctBtn sizeToFit];
-        self.priceFluctBtn.frame = CGRectMake(self.currencyNameLbl.xx + 10, 40, self.priceFluctBtn.width + 10, 22);
+        self.priceFluctBtn.frame = CGRectMake(65, self.presentImage.yy + 5.5 - 4, self.priceFluctBtn.width + 10, 22);
         [self.priceFluctBtn SG_imagePositionStyle:(SGImagePositionStyleRight) spacing:3 imagePositionBlock:^(UIButton *button) {
             [button setImage:kImage(@"上升") forState:(UIControlStateNormal)];
         }];
@@ -252,7 +269,7 @@
     {
         [self.priceFluctBtn setTitle:[NSString stringWithFormat:@"%@%%",platform1.percentChange24h] forState:(UIControlStateNormal)];
         [self.priceFluctBtn sizeToFit];
-        self.priceFluctBtn.frame = CGRectMake(self.currencyNameLbl.xx + 10, 40, self.priceFluctBtn.width, 22);
+        self.priceFluctBtn.frame = CGRectMake(65, self.presentImage.yy + 5.5 - 4, self.priceFluctBtn.width, 22);
         [self.priceFluctBtn SG_imagePositionStyle:(SGImagePositionStyleRight) spacing:3 imagePositionBlock:^(UIButton *button) {
             [button setImage:kImage(@"") forState:(UIControlStateNormal)];
         }];
@@ -260,7 +277,7 @@
     {
         [self.priceFluctBtn setTitle:[NSString stringWithFormat:@"%@%%",platform1.percentChange24h] forState:(UIControlStateNormal)];
         [self.priceFluctBtn sizeToFit];
-        self.priceFluctBtn.frame = CGRectMake(self.currencyNameLbl.xx + 10, 40, self.priceFluctBtn.width + 10, 22);
+        self.priceFluctBtn.frame = CGRectMake(65, self.presentImage.yy + 5.5 - 4, self.priceFluctBtn.width + 10, 22);
         [self.priceFluctBtn SG_imagePositionStyle:(SGImagePositionStyleRight) spacing:3 imagePositionBlock:^(UIButton *button) {
             [button setImage:kImage(@"下降") forState:(UIControlStateNormal)];
         }];
@@ -273,51 +290,31 @@
     NSString *rightAmount = [CoinUtil convertToRealCoin:platform.frozenAmountString coin:platform.currency];
     NSString *ritAmount = [leftAmount subNumber:rightAmount];
     
+    if ([[TLUser user].localMoney isEqualToString:@"USD"]) {
+        self.tradeVolumeLbl.text = [NSString stringWithFormat:@"≈%.2f USD",[platform.priceUSD doubleValue]];
+        self.rmbPriceLbl.text = [NSString stringWithFormat:@"≈%.2f USD",[platform.amountUSD doubleValue]];
+        
+    } else if ([[TLUser user].localMoney isEqualToString:@"KRW"])
+    {
+        self.tradeVolumeLbl.text = [NSString stringWithFormat:@"≈%.2f KRW",[platform.priceKRW doubleValue]];
+        self.rmbPriceLbl.text = [NSString stringWithFormat:@"≈%.2f KRW",[platform.amountKRW doubleValue]];
+        
+    }
+    else{
+        self.tradeVolumeLbl.text = [NSString stringWithFormat:@"≈%.2f CNY",[platform.priceCNY doubleValue]];
+        self.rmbPriceLbl.text = [NSString stringWithFormat:@"≈%.2f CNY",[platform.amountCNY doubleValue]];
+    }
     
-//    NSString *eyes = [[NSUserDefaults standardUserDefaults] objectForKey:@"eyes"];
-//    if ([eyes isEqualToString:@"1"]) {
-//        if ([[TLUser user].localMoney isEqualToString:@"USD"]) {
-//            self.tradeVolumeLbl.text = [NSString stringWithFormat:@"≈%.2f USD",[platform.priceUSD doubleValue]];
-//            self.rmbPriceLbl.text = @"**** USD";
-//
-//        } else if ([[TLUser user].localMoney isEqualToString:@"KRW"])
-//        {
-//            self.tradeVolumeLbl.text = [NSString stringWithFormat:@"≈%.2f KRW",[platform.priceKRW doubleValue]];
-//            self.rmbPriceLbl.text = @"%**** KRW";
-//
-//        }
-//        else{
-//            self.tradeVolumeLbl.text = [NSString stringWithFormat:@"≈%.2f CNY",[platform.priceCNY doubleValue]];
-//            self.rmbPriceLbl.text = @"**** CNY";
-//        }
-//        self.opppsitePriceLbl.text = @"****";
-//    }else
-//    {
-        if ([[TLUser user].localMoney isEqualToString:@"USD"]) {
-            self.tradeVolumeLbl.text = [NSString stringWithFormat:@"≈%.2f USD",[platform.priceUSD doubleValue]];
-            self.rmbPriceLbl.text = [NSString stringWithFormat:@"≈%.2f USD",[platform.amountUSD doubleValue]];
-            
-        } else if ([[TLUser user].localMoney isEqualToString:@"KRW"])
-        {
-            self.tradeVolumeLbl.text = [NSString stringWithFormat:@"≈%.2f KRW",[platform.priceKRW doubleValue]];
-            self.rmbPriceLbl.text = [NSString stringWithFormat:@"≈%.2f KRW",[platform.amountKRW doubleValue]];
-            
-        }
-        else{
-            self.tradeVolumeLbl.text = [NSString stringWithFormat:@"≈%.2f CNY",[platform.priceCNY doubleValue]];
-            self.rmbPriceLbl.text = [NSString stringWithFormat:@"≈%.2f CNY",[platform.amountCNY doubleValue]];
-        }
-        
-        NSString *text = [NSString stringWithFormat:@"%.8f %@",[ritAmount doubleValue],platform.currency];
-        
-        NSMutableAttributedString *fontAttributeNameStr = [[NSMutableAttributedString alloc]initWithString:text];
-        // 2.添加属性
-        [fontAttributeNameStr addAttribute:NSFontAttributeName value:HGboldfont(22) range:NSMakeRange(0, text.length - platform.currency.length)];
-        [fontAttributeNameStr addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:NSMakeRange(0, text.length - platform.currency.length)];
-        
-        self.opppsitePriceLbl.attributedText = fontAttributeNameStr;
+    NSString *text = [NSString stringWithFormat:@"%.8f %@",[ritAmount doubleValue],platform.currency];
+    
+    NSMutableAttributedString *fontAttributeNameStr = [[NSMutableAttributedString alloc]initWithString:text];
+    // 2.添加属性
+    [fontAttributeNameStr addAttribute:NSFontAttributeName value:FONT(22) range:NSMakeRange(0, text.length - platform.currency.length)];
+    [fontAttributeNameStr addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:NSMakeRange(0, text.length - platform.currency.length)];
+    
+    self.opppsitePriceLbl.attributedText = fontAttributeNameStr;
 
-//    }
+    
     [self.tradeVolumeLbl sizeToFit];
     self.opppsitePriceLbl.frame = CGRectMake(self.tradeVolumeLbl.xx + 10, 15.5, SCREEN_WIDTH - self.tradeVolumeLbl.xx - 30, 22);
     

@@ -36,15 +36,40 @@ static NSString *platformCell1 = @"AccountMoneyCellTableViewCell";
 
 #pragma mark - UITableViewDataSource;
 
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    if ([self.isWallet isEqualToString:@"私钥钱包"])
+    {
+        
+        for (int i = 0; i < self.platforms.count; i ++) {
+            if ([self.platforms[i].address isEqualToString:[[NSUserDefaults standardUserDefaults] objectForKey:BTCADDRESS]]) {
+                NSString *ritAmount = [CoinUtil convertToRealCoin:self.platforms[i].balance coin:self.platforms[i].symbol];
+                
+                if ([ritAmount floatValue] == 0) {
+                    return self.platforms.count - 1;
+                }else
+                {
+                    return self.platforms.count;
+                }
+            }
+        }
+    }
+    
     return self.platforms.count;
+    
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     AccountMoneyCellTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:platformCell1 forIndexPath:indexPath];
     if ([self.isWallet isEqualToString:@"私钥钱包"])
     {
+        if ([self.platforms[indexPath.row].address isEqualToString:[[NSUserDefaults standardUserDefaults] objectForKey:BTCADDRESS]]) {
+            NSString *ritAmount = [CoinUtil convertToRealCoin:self.platforms[indexPath.row].balance coin:self.platforms[indexPath.row].symbol];
+            if ([ritAmount floatValue] == 0) {
+                [self.platforms removeObjectAtIndex:indexPath.row];
+            }
+        }
         cell.platform = self.platforms[indexPath.row];
     }else
     {
