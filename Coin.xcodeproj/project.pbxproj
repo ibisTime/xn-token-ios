@@ -36,6 +36,10 @@
 		1F0EDEF721B662160044C4A2 /* YYTextAsyncLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F0EDEDE21B662160044C4A2 /* YYTextAsyncLayer.m */; };
 		1F0EDEF821B662160044C4A2 /* YYTextWeakProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F0EDEDF21B662160044C4A2 /* YYTextWeakProxy.m */; };
 		1F0EDEFB21B684750044C4A2 /* StrategyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F0EDEFA21B684750044C4A2 /* StrategyCell.m */; };
+		1F1BFFF721E49360000BEBD3 /* Resource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1F1BFFEF21E4935F000BEBD3 /* Resource.bundle */; };
+		1F1BFFF821E49360000BEBD3 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F1BFFF021E4935F000BEBD3 /* opencv2.framework */; };
+		1F1BFFF921E49360000BEBD3 /* libjpeg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F1BFFF121E4935F000BEBD3 /* libjpeg.a */; };
+		1F1BFFFA21E49360000BEBD3 /* libZQPlusFaceu.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F1BFFF421E4935F000BEBD3 /* libZQPlusFaceu.a */; };
 		1F35826621870D8F00F1665B /* NewHelpCentetVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F35826421870D8C00F1665B /* NewHelpCentetVC.m */; };
 		1F358B3921880B4C00F1665B /* UsdtClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F358B3821880B4C00F1665B /* UsdtClient.m */; };
 		1F358B3D218ABC4500F1665B /* USDTRecordModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F358B3C218ABC4500F1665B /* USDTRecordModel.m */; };
@@ -75,10 +79,6 @@
 		1F693AFA21A3E3C8004818D8 /* UIScrollView+Touch.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F693AF921A3E3C8004818D8 /* UIScrollView+Touch.m */; };
 		1F693AFD21A3F36E004818D8 /* ConfirmBackupVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F693AFC21A3F36E004818D8 /* ConfirmBackupVC.m */; };
 		1F693B0121A682F9004818D8 /* ForgotPasswordVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F693B0021A682F9004818D8 /* ForgotPasswordVC.m */; };
-		1F693B0C21A695DB004818D8 /* libZQPlusFaceu.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F693B0921A695DB004818D8 /* libZQPlusFaceu.a */; };
-		1F693B1121A695F7004818D8 /* Resource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1F693B0E21A695F6004818D8 /* Resource.bundle */; };
-		1F693B1221A695F7004818D8 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F693B0F21A695F6004818D8 /* opencv2.framework */; };
-		1F693B1321A695F7004818D8 /* libjpeg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F693B1021A695F6004818D8 /* libjpeg.a */; };
 		1F693B1421A69630004818D8 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21C91D921FDBD775006EDB16 /* CoreMedia.framework */; };
 		1F693B1621A6963A004818D8 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F693B1521A6963A004818D8 /* ImageIO.framework */; };
 		1F693B1821A69655004818D8 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F693B1721A69654004818D8 /* AudioToolbox.framework */; };
@@ -656,6 +656,13 @@
 		1F0EDEE021B662160044C4A2 /* UIPasteboard+YYText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIPasteboard+YYText.h"; sourceTree = "<group>"; };
 		1F0EDEF921B684750044C4A2 /* StrategyCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StrategyCell.h; sourceTree = "<group>"; };
 		1F0EDEFA21B684750044C4A2 /* StrategyCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StrategyCell.m; sourceTree = "<group>"; };
+		1F1BFFEF21E4935F000BEBD3 /* Resource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Resource.bundle; sourceTree = "<group>"; };
+		1F1BFFF021E4935F000BEBD3 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = opencv2.framework; sourceTree = "<group>"; };
+		1F1BFFF121E4935F000BEBD3 /* libjpeg.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libjpeg.a; sourceTree = "<group>"; };
+		1F1BFFF321E4935F000BEBD3 /* ZQFaceAuthEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZQFaceAuthEngine.h; sourceTree = "<group>"; };
+		1F1BFFF421E4935F000BEBD3 /* libZQPlusFaceu.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libZQPlusFaceu.a; sourceTree = "<group>"; };
+		1F1BFFF521E4935F000BEBD3 /* ZQFaceDataDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZQFaceDataDefine.h; sourceTree = "<group>"; };
+		1F1BFFF621E4935F000BEBD3 /* ZQOCRScanEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZQOCRScanEngine.h; sourceTree = "<group>"; };
 		1F35826421870D8C00F1665B /* NewHelpCentetVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewHelpCentetVC.m; sourceTree = "<group>"; };
 		1F35826521870D8E00F1665B /* NewHelpCentetVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewHelpCentetVC.h; sourceTree = "<group>"; };
 		1F358B3721880B4B00F1665B /* UsdtClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UsdtClient.h; sourceTree = "<group>"; };
@@ -735,13 +742,6 @@
 		1F693AFC21A3F36E004818D8 /* ConfirmBackupVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ConfirmBackupVC.m; sourceTree = "<group>"; };
 		1F693AFF21A682F9004818D8 /* ForgotPasswordVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ForgotPasswordVC.h; sourceTree = "<group>"; };
 		1F693B0021A682F9004818D8 /* ForgotPasswordVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ForgotPasswordVC.m; sourceTree = "<group>"; };
-		1F693B0821A695DB004818D8 /* ZQFaceAuthEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZQFaceAuthEngine.h; sourceTree = "<group>"; };
-		1F693B0921A695DB004818D8 /* libZQPlusFaceu.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libZQPlusFaceu.a; sourceTree = "<group>"; };
-		1F693B0A21A695DB004818D8 /* ZQFaceDataDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZQFaceDataDefine.h; sourceTree = "<group>"; };
-		1F693B0B21A695DB004818D8 /* ZQOCRScanEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZQOCRScanEngine.h; sourceTree = "<group>"; };
-		1F693B0E21A695F6004818D8 /* Resource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Resource.bundle; sourceTree = "<group>"; };
-		1F693B0F21A695F6004818D8 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = opencv2.framework; sourceTree = "<group>"; };
-		1F693B1021A695F6004818D8 /* libjpeg.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libjpeg.a; sourceTree = "<group>"; };
 		1F693B1521A6963A004818D8 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		1F693B1721A69654004818D8 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		1F693B1A21A69667004818D8 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
@@ -1844,6 +1844,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F1BFFF821E49360000BEBD3 /* opencv2.framework in Frameworks */,
 				1F693B1821A69655004818D8 /* AudioToolbox.framework in Frameworks */,
 				1F693B1D21A69676004818D8 /* libicucore.tbd in Frameworks */,
 				1F693B1B21A69667004818D8 /* MobileCoreServices.framework in Frameworks */,
@@ -1852,11 +1853,10 @@
 				7AAF0373215269F6008507FF /* SystemConfiguration.framework in Frameworks */,
 				1F693B1621A6963A004818D8 /* ImageIO.framework in Frameworks */,
 				1F693B1421A69630004818D8 /* CoreMedia.framework in Frameworks */,
+				1F1BFFFA21E49360000BEBD3 /* libZQPlusFaceu.a in Frameworks */,
 				7A07F7D8216B6EDD0026EB7A /* libc++.tbd in Frameworks */,
-				1F693B0C21A695DB004818D8 /* libZQPlusFaceu.a in Frameworks */,
 				7AAF037921526A39008507FF /* Foundation.framework in Frameworks */,
 				7AAF037721526A31008507FF /* UIKit.framework in Frameworks */,
-				1F693B1221A695F7004818D8 /* opencv2.framework in Frameworks */,
 				7AAF037521526A07008507FF /* CoreGraphics.framework in Frameworks */,
 				7AAF037421526A00008507FF /* CoreFoundation.framework in Frameworks */,
 				7AAF0372215269ED008507FF /* CoreLocation.framework in Frameworks */,
@@ -1868,12 +1868,12 @@
 				2EFFE6B31FF6287D00BFCC40 /* UserNotifications.framework in Frameworks */,
 				7AAF0326215267ED008507FF /* SGNoCaptcha.framework in Frameworks */,
 				7AAF0328215267ED008507FF /* SGMain.framework in Frameworks */,
+				1F1BFFF921E49360000BEBD3 /* libjpeg.a in Frameworks */,
 				7AAF0327215267ED008507FF /* SecurityGuardSDK.framework in Frameworks */,
 				B8F44029212C851C00809522 /* libcrypto.a in Frameworks */,
 				7A272662212BFFA70067E3CD /* libWeChatSDK.a in Frameworks */,
 				7AAF038121527166008507FF /* ZipArchive.framework in Frameworks */,
 				7AAF0329215267ED008507FF /* SGSecurityBody.framework in Frameworks */,
-				1F693B1321A695F7004818D8 /* libjpeg.a in Frameworks */,
 				211C050C1FC6715B00E51FCF /* libsqlite3.tbd in Frameworks */,
 				211C05121FC6717300E51FCF /* libstdc++.6.tbd in Frameworks */,
 				211C05111FC6717300E51FCF /* libstdc++.6.0.9.tbd in Frameworks */,
@@ -2002,6 +2002,36 @@
 				1F0EDEE021B662160044C4A2 /* UIPasteboard+YYText.h */,
 			);
 			path = Utility;
+			sourceTree = "<group>";
+		};
+		1F1BFFED21E4935F000BEBD3 /* OCR */ = {
+			isa = PBXGroup;
+			children = (
+				1F1BFFEE21E4935F000BEBD3 /* OpenCV */,
+				1F1BFFF221E4935F000BEBD3 /* Lib */,
+			);
+			path = OCR;
+			sourceTree = "<group>";
+		};
+		1F1BFFEE21E4935F000BEBD3 /* OpenCV */ = {
+			isa = PBXGroup;
+			children = (
+				1F1BFFEF21E4935F000BEBD3 /* Resource.bundle */,
+				1F1BFFF021E4935F000BEBD3 /* opencv2.framework */,
+				1F1BFFF121E4935F000BEBD3 /* libjpeg.a */,
+			);
+			path = OpenCV;
+			sourceTree = "<group>";
+		};
+		1F1BFFF221E4935F000BEBD3 /* Lib */ = {
+			isa = PBXGroup;
+			children = (
+				1F1BFFF321E4935F000BEBD3 /* ZQFaceAuthEngine.h */,
+				1F1BFFF421E4935F000BEBD3 /* libZQPlusFaceu.a */,
+				1F1BFFF521E4935F000BEBD3 /* ZQFaceDataDefine.h */,
+				1F1BFFF621E4935F000BEBD3 /* ZQOCRScanEngine.h */,
+			);
+			path = Lib;
 			sourceTree = "<group>";
 		};
 		1F35825D2186D43300F1665B /* BTC */ = {
@@ -2411,36 +2441,6 @@
 				1F693B0021A682F9004818D8 /* ForgotPasswordVC.m */,
 			);
 			path = ForgotPassword;
-			sourceTree = "<group>";
-		};
-		1F693B0621A695CF004818D8 /* OCR */ = {
-			isa = PBXGroup;
-			children = (
-				1F693B0D21A695F6004818D8 /* OpenCV */,
-				1F693B0721A695DB004818D8 /* Lib */,
-			);
-			path = OCR;
-			sourceTree = "<group>";
-		};
-		1F693B0721A695DB004818D8 /* Lib */ = {
-			isa = PBXGroup;
-			children = (
-				1F693B0821A695DB004818D8 /* ZQFaceAuthEngine.h */,
-				1F693B0921A695DB004818D8 /* libZQPlusFaceu.a */,
-				1F693B0A21A695DB004818D8 /* ZQFaceDataDefine.h */,
-				1F693B0B21A695DB004818D8 /* ZQOCRScanEngine.h */,
-			);
-			path = Lib;
-			sourceTree = "<group>";
-		};
-		1F693B0D21A695F6004818D8 /* OpenCV */ = {
-			isa = PBXGroup;
-			children = (
-				1F693B0E21A695F6004818D8 /* Resource.bundle */,
-				1F693B0F21A695F6004818D8 /* opencv2.framework */,
-				1F693B1021A695F6004818D8 /* libjpeg.a */,
-			);
-			path = OpenCV;
 			sourceTree = "<group>";
 		};
 		1F709D5B2180A7FC002D1CC4 /* SGQRCode */ = {
@@ -3374,7 +3374,7 @@
 		2EA584B61FA813C900C7106C /* Coin */ = {
 			isa = PBXGroup;
 			children = (
-				1F693B0621A695CF004818D8 /* OCR */,
+				1F1BFFED21E4935F000BEBD3 /* OCR */,
 				7AAF031F215267B7008507FF /* ValidationSDK */,
 				7A27265B212BFFA70067E3CD /* WechatSDK1.8.2 */,
 				215421CF1FD708AC00FDD25C /* Coin.entitlements */,
@@ -4726,7 +4726,7 @@
 				1FF5DB9B21BFAA980019EF69 /* splash.png in Resources */,
 				7AAF037C21526EC4008507FF /* MSADefaultImages.bundle in Resources */,
 				B8DAD14720E2208B00AF4CD4 /* InfoPlist.strings in Resources */,
-				1F693B1121A695F7004818D8 /* Resource.bundle in Resources */,
+				1F1BFFF721E49360000BEBD3 /* Resource.bundle in Resources */,
 				7A40B101217CAEA8004B9830 /* Assets.xcassets in Resources */,
 				2EB9495C1FDF6B1A00CE4B94 /* TraditionalCode.txt in Resources */,
 			);
