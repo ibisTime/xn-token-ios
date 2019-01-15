@@ -898,7 +898,7 @@
 "工具类" = "Tools";
 "资讯类" = "News";
 "开始" = "Start";
-"身份验证" = "ID authentication";
+"身份认证" = "ID authentication";
 "账号安全" = "Account security";
 "身份验证未完成" = "ID authentication not compelete";
 "身份验证已完成" = "ID authentication is compelete";

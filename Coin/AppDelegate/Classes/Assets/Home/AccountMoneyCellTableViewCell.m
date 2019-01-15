@@ -220,11 +220,11 @@
         self.rmbPriceLbl.text = [NSString stringWithFormat:@"≈%.2f CNY",[platform.amountCNY doubleValue]];
     }
     
-    NSString *text = [NSString stringWithFormat:@"%.8f %@",[ritAmount doubleValue],platform.symbol];
+    NSString *text = [NSString stringWithFormat:@"%@ %@",ritAmount,platform.symbol];
     
     NSMutableAttributedString *fontAttributeNameStr = [[NSMutableAttributedString alloc]initWithString:text];
     // 2.添加属性
-    [fontAttributeNameStr addAttribute:NSFontAttributeName value:FONT(22) range:NSMakeRange(0, text.length - platform.symbol.length)];
+    [fontAttributeNameStr addAttribute:NSFontAttributeName value:FONT(18) range:NSMakeRange(0, text.length - platform.symbol.length)];
     [fontAttributeNameStr addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:NSMakeRange(0, text.length - platform.symbol.length)];
     
     self.opppsitePriceLbl.attributedText = fontAttributeNameStr;
@@ -305,11 +305,11 @@
         self.rmbPriceLbl.text = [NSString stringWithFormat:@"≈%.2f CNY",[platform.amountCNY doubleValue]];
     }
     
-    NSString *text = [NSString stringWithFormat:@"%.8f %@",[ritAmount doubleValue],platform.currency];
+    NSString *text = [NSString stringWithFormat:@"%@ %@",ritAmount,platform.currency];
     
     NSMutableAttributedString *fontAttributeNameStr = [[NSMutableAttributedString alloc]initWithString:text];
     // 2.添加属性
-    [fontAttributeNameStr addAttribute:NSFontAttributeName value:FONT(22) range:NSMakeRange(0, text.length - platform.currency.length)];
+    [fontAttributeNameStr addAttribute:NSFontAttributeName value:FONT(18) range:NSMakeRange(0, text.length - platform.currency.length)];
     [fontAttributeNameStr addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:NSMakeRange(0, text.length - platform.currency.length)];
     
     self.opppsitePriceLbl.attributedText = fontAttributeNameStr;

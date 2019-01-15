@@ -439,7 +439,6 @@
             
             //进行上传
             TLUploadManager *manager = [TLUploadManager manager];
-            
             manager.imgData = imgData;
             manager.image = image;
             [manager getTokenShowView:weakSelf.view succes:^(NSString *key) {

@@ -97,8 +97,8 @@ static NSString *MyAssetsTableView = @"MyAssetsTableViewCell";
     }
     
     
-    NSArray *imgArray = @[@"收益",@"身份验证",@"账号安全",@"钱包工具",@"关于我们",@"反馈",@"帮助(4)",@"设置"];
-    NSArray *textArray = @[@"我的收益",@"身份验证",@"账号安全",@"钱包工具",@"加入社群",@"问题反馈",@"帮助中心",@"设置"];
+    NSArray *imgArray = @[@"收益",@"身份认证",@"账号安全",@"钱包工具",@"关于我们",@"反馈",@"帮助(4)",@"设置"];
+    NSArray *textArray = @[@"我的收益",@"身份认证",@"账号安全",@"钱包工具",@"加入社群",@"问题反馈",@"帮助中心",@"设置"];
     
     [cell.iconImageView setImage:kImage(imgArray[indexPath.row]) forState:(UIControlStateNormal)];
     cell.titleLbl.text = [LangSwitcher switchLang:textArray[indexPath.row] key:nil];
