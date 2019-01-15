@@ -297,21 +297,6 @@
 }
 
 
-//  本地更新
-- (void)goBcoinWeb:(NSString *)var{
-    
-    NSString *urlStr = [var stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
-    NSURL *url = [NSURL URLWithString:urlStr];
-    [[UIApplication sharedApplication] openURL:url];
-}
-
-
-
-//  app store
-//- (void)goBcoinWeb:(NSString *)var{
-//    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://itunes.apple.com/cn/app/m-help/id1436959010?mt=8"]];
-//    [[UIApplication sharedApplication]openURL:url];
-//}
 
 
 
@@ -367,7 +352,7 @@
     vc.isCheck = YES;
     
     TLNavigationController *na = [[TLNavigationController alloc] initWithRootViewController:vc];
-    BOOL isLanch  = [[NSUserDefaults standardUserDefaults] boolForKey:@"isLanch"];
+//    TLNavigationController *na = [[TLNavigationController alloc] initWithRootViewController:vc];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
     NSString *word = [ZLGestureLockViewController gesturesPassword];
@@ -382,12 +367,26 @@
         [UIApplication sharedApplication].keyWindow.rootViewController = tabBarCtrl;
 
     }
+}
+
+
+//  本地更新
+////  本地更新
+//- (void)goBcoinWeb:(NSString *)var{
     
-    
+  //  NSString *urlStr = [var stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+    //NSURL *url = [NSURL URLWithString:urlStr];
+  //  [[UIApplication sharedApplication] openURL:url];
+//}
+
+
+//  app storeapp store
+- (void)goBcoinWeb:(NSString *)var{
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://itunes.apple.com/cn/app/m-help/id1436959010?mt=8"]];
+    [[UIApplication sharedApplication]openURL:url];
 
 
 }
-
 
 
 @end
