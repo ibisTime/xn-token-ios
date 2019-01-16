@@ -30,11 +30,16 @@
 
     [super viewWillAppear:animated];
 //    [self updateApp];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillEnterForeground) name:UIApplicationWillEnterForegroundNotification object:nil];
+//    BOOL isChoose = [[NSUserDefaults standardUserDefaults] boolForKey:@"chooseCoutry"];
+    
+    [self loadData];
 
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.view.backgroundColor = [UIColor whiteColor];
     UIImageView *bgIV = [[UIImageView alloc] initWithFrame:self.view.bounds];
     [self.view addSubview:bgIV];
     bgIV.contentMode = UIViewContentModeScaleAspectFill;
@@ -44,17 +49,17 @@
 
 //    [self setPlaceholderViewTitle:@"加载失败" operationTitle:@"重新加载"];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillEnterForeground) name:UIApplicationWillEnterForegroundNotification object:nil];
-    BOOL isChoose = [[NSUserDefaults standardUserDefaults] boolForKey:@"chooseCoutry"];
-
-    if (isChoose == YES) {
-        [self configUpdate];
-
-    }else{
-        
-        [self loadData];
-
-    }
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillEnterForeground) name:UIApplicationWillEnterForegroundNotification object:nil];
+//    BOOL isChoose = [[NSUserDefaults standardUserDefaults] boolForKey:@"chooseCoutry"];
+//
+//    if (isChoose == YES) {
+//        [self configUpdate];
+//
+//    }else{
+//
+//        [self loadData];
+//
+//    }
 
     // 由于无法通过，审核。如果为强制更新
 }
@@ -357,11 +362,13 @@
     
     NSString *word = [ZLGestureLockViewController gesturesPassword];
     if (word.length >0) {
+        [UIApplication sharedApplication].keyWindow.rootViewController = tabBarCtrl;
         [self presentViewController:na animated:YES completion:nil];
-        vc.CheckSucessBlock = ^{
-            [UIApplication sharedApplication].keyWindow.rootViewController = tabBarCtrl;
+        
+//        [UIApplication sharedApplication].keyWindow.rootViewController = tabBarCtrl;
+        
 
-        };
+//
     }else{
         
         [UIApplication sharedApplication].keyWindow.rootViewController = tabBarCtrl;
@@ -372,21 +379,21 @@
 
 //  本地更新
 ////  本地更新
-//- (void)goBcoinWeb:(NSString *)var{
+- (void)goBcoinWeb:(NSString *)var{
     
-  //  NSString *urlStr = [var stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
-    //NSURL *url = [NSURL URLWithString:urlStr];
-  //  [[UIApplication sharedApplication] openURL:url];
-//}
+    NSString *urlStr = [var stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+    NSURL *url = [NSURL URLWithString:urlStr];
+    [[UIApplication sharedApplication] openURL:url];
+}
 
 
 //  app storeapp store
-- (void)goBcoinWeb:(NSString *)var{
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://itunes.apple.com/cn/app/m-help/id1436959010?mt=8"]];
-    [[UIApplication sharedApplication]openURL:url];
+//- (void)goBcoinWeb:(NSString *)var{
+//    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://itunes.apple.com/cn/app/m-help/id1436959010?mt=8"]];
+//    [[UIApplication sharedApplication]openURL:url];
 
 
-}
+//}
 
 
 @end
