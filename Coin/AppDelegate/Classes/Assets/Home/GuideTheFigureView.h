@@ -8,7 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol GuideTheFigureDelegate <NSObject>
+
+-(void)GuideTheFigureButton;
+
+@end
+
+
 @interface GuideTheFigureView : UIView
+
+@property (nonatomic, assign) id <GuideTheFigureDelegate> delegate;
 
 @property (nonatomic , strong)UIButton *iKonwBtn1;
 

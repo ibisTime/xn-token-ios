@@ -32,7 +32,7 @@
 #import "GuideTheFigureView.h"
 #import "AddressBookVC.h"
 
-@interface TLWalletVC ()<RefreshDelegate,AssetsHeadViewDelegate>
+@interface TLWalletVC ()<RefreshDelegate,AssetsHeadViewDelegate,GuideTheFigureDelegate>
 
 @property (nonatomic , copy)NSString *isWallet;
 
@@ -214,10 +214,33 @@
     [self initTableView];
     //登录退出通知
     [self addNotification];
-    [self loadData];
+    
+    if ([TLUser isBlankString:[[NSUserDefaults standardUserDefaults]objectForKey:@"GUIDETHEDFIGURE"]] == YES) {
+        
+        
+        GuideTheFigureView *figureView = [[GuideTheFigureView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+        self.figureView = figureView;
+        figureView.delegate = self;
+        UIWindow *window = [UIApplication sharedApplication].keyWindow;
+        [window addSubview:figureView];
+        [[UserModel user] showPopAnimationWithAnimationStyle1:1 showView:figureView];
+        
+    }else
+    {
+        [self loadData];
+    }
+    
+    
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(InfoNotificationAction:) name:@"LOADDATAPAGE2" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(InfoNotificationAction1:) name:@"LOADDATAPAGE3" object:nil];
 }
+
+-(void)GuideTheFigureButton
+{
+    [self loadData];
+}
+
 
 #pragma mark -- 接收到通知
 - (void)InfoNotificationAction:(NSNotification *)notification{
@@ -494,7 +517,7 @@
             if (modes.count != weakSelf.AssetsListModel.count) {
                 [TableViewAnimationKit showWithAnimationType:2 tableView:self.tableView];
             }
-            [self GuideTheFigure];
+            
             
         }
         modes = weakSelf.AssetsListModel;
@@ -704,7 +727,7 @@
             if (modes.count != weakSelf.allCurrencys.count) {
                 [TableViewAnimationKit showWithAnimationType:2 tableView:self.tableView];
             }
-            [self GuideTheFigure];
+            
             [weakSelf.tableView endRefreshHeader];
         }
         modes = weakSelf.allCurrencys;
@@ -714,18 +737,7 @@
     }];
 }
 
--(void)GuideTheFigure
-{
-    if (self.tableView.platforms.count > 0
-        && [TLUser isBlankString:[[NSUserDefaults standardUserDefaults]objectForKey:@"GUIDETHEDFIGURE"]] == YES
-        ) {
-        GuideTheFigureView *figureView = [[GuideTheFigureView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
-        self.figureView = figureView;
-        UIWindow *window = [UIApplication sharedApplication].keyWindow;
-        [window addSubview:figureView];
-        [[UserModel user] showPopAnimationWithAnimationStyle1:1 showView:figureView];
-    }
-}
+
 
 //获取公告列表
 - (void)requestRateList {

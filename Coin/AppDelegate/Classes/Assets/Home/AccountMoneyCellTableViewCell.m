@@ -100,8 +100,48 @@
                                                     font:13.0];
     self.rmbPriceLbl.frame = CGRectMake(self.priceFluctBtn.xx + 10, self.presentImage.yy + 5.5, SCREEN_WIDTH - 30 - self.priceFluctBtn.xx, 14);
     self.rmbPriceLbl.textAlignment = NSTextAlignmentRight;
-    
     [self addSubview:self.rmbPriceLbl];
+    self.presentImage.image = kImage(@"btc");
+    self.currencyNameLbl.text = @"BTC";
+    self.currencyNameLbl.frame = CGRectMake(10, self.presentImage.yy + 5.5, 50, 14);
+    self.priceFluctBtn.frame = CGRectMake(65, self.presentImage.yy + 5.5, 0, 22);
+    [self.priceFluctBtn setTitle:@"+0.01" forState:(UIControlStateNormal)];
+    [self.priceFluctBtn sizeToFit];
+    self.priceFluctBtn.frame = CGRectMake(self.currencyNameLbl.xx + 10, self.presentImage.yy + 5.5 - 4, self.priceFluctBtn.width + 10, 22);
+    [self.priceFluctBtn SG_imagePositionStyle:(SGImagePositionStyleRight) spacing:3 imagePositionBlock:^(UIButton *button) {
+        [button setImage:kImage(@"上升") forState:(UIControlStateNormal)];
+    }];
+    //    NSString *leftAmount = [CoinUtil convertToRealCoin:platform.amountString coin:platform.symbol];
+//    NSString *ritAmount = [CoinUtil convertToRealCoin:platform.balance coin:platform.symbol];
+    if ([[TLUser user].localMoney isEqualToString:@"USD"]) {
+        self.tradeVolumeLbl.text = @"≈0.00 USD";
+        self.rmbPriceLbl.text = @"≈0.00 USD";
+        
+    } else if ([[TLUser user].localMoney isEqualToString:@"KRW"])
+    {
+        self.tradeVolumeLbl.text = @"≈0.00 KRW";
+        self.rmbPriceLbl.text = @"≈0.00 KRW";
+        
+    }
+    else{
+        self.tradeVolumeLbl.text = @"≈0.00 CNY";
+        self.rmbPriceLbl.text = @"≈0.00 CNY";
+    }
+    
+    NSString *text = @"0.00 BTC";
+    
+    NSMutableAttributedString *fontAttributeNameStr = [[NSMutableAttributedString alloc]initWithString:text];
+    // 2.添加属性
+    [fontAttributeNameStr addAttribute:NSFontAttributeName value:FONT(18) range:NSMakeRange(0, text.length - 3)];
+    [fontAttributeNameStr addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:NSMakeRange(0, text.length - 3)];
+    
+    self.opppsitePriceLbl.attributedText = fontAttributeNameStr;
+    
+    
+    [self.tradeVolumeLbl sizeToFit];
+    self.opppsitePriceLbl.frame = CGRectMake(self.tradeVolumeLbl.xx + 10, 15.5, SCREEN_WIDTH - self.tradeVolumeLbl.xx - 30, 22);
+    
+    
     
 }
 

@@ -39,6 +39,11 @@ static NSString *platformCell1 = @"AccountMoneyCellTableViewCell";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    
+    if ([TLUser isBlankString:[[NSUserDefaults standardUserDefaults]objectForKey:@"GUIDETHEDFIGURE"]] == YES) {
+        return 1;
+    }
+    
     if ([self.isWallet isEqualToString:@"私钥钱包"])
     {
         
@@ -62,19 +67,26 @@ static NSString *platformCell1 = @"AccountMoneyCellTableViewCell";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     AccountMoneyCellTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:platformCell1 forIndexPath:indexPath];
-    if ([self.isWallet isEqualToString:@"私钥钱包"])
-    {
-        if ([self.platforms[indexPath.row].address isEqualToString:[[NSUserDefaults standardUserDefaults] objectForKey:BTCADDRESS]]) {
-            NSString *ritAmount = [CoinUtil convertToRealCoin:self.platforms[indexPath.row].balance coin:self.platforms[indexPath.row].symbol];
-            if ([ritAmount floatValue] == 0) {
-                [self.platforms removeObjectAtIndex:indexPath.row];
+    
+    
+    if ([TLUser isBlankString:[[NSUserDefaults standardUserDefaults]objectForKey:@"GUIDETHEDFIGURE"]] != YES) {
+        if ([self.isWallet isEqualToString:@"私钥钱包"])
+        {
+            if ([self.platforms[indexPath.row].address isEqualToString:[[NSUserDefaults standardUserDefaults] objectForKey:BTCADDRESS]]) {
+                NSString *ritAmount = [CoinUtil convertToRealCoin:self.platforms[indexPath.row].balance coin:self.platforms[indexPath.row].symbol];
+                if ([ritAmount floatValue] == 0) {
+                    [self.platforms removeObjectAtIndex:indexPath.row];
+                }
             }
+            cell.platform = self.platforms[indexPath.row];
+        }else
+        {
+            cell.platform1 = self.platforms[indexPath.row];
         }
-        cell.platform = self.platforms[indexPath.row];
-    }else
-    {
-        cell.platform1 = self.platforms[indexPath.row];
     }
+    
+    
+    
     return cell;
 }
 
@@ -90,27 +102,39 @@ static NSString *platformCell1 = @"AccountMoneyCellTableViewCell";
 
 //设置返回存放侧滑按钮数组
 -(NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    
     //这是iOS8以后的方法
     UITableViewRowAction *transferBtn = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:[LangSwitcher switchLang:@"提币" key:nil] handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
-        if ([self.refreshDelegate respondsToSelector:@selector(refreshTableView:setCurrencyModel:setTitle:)]) {
-            if ([self.isWallet isEqualToString:@"个人钱包"]) {
-                [self.refreshDelegate refreshTableView:self setCurrencyModel:self.platforms[indexPath.row] setTitle:@"转账"];
-            }else
-            {
-                [self.refreshDelegate refreshTableView:self setCurrencyModel:self.platforms[indexPath.row] setTitle:@"转账"];
+        
+        if (self.platforms.count != 0) {
+            if ([self.refreshDelegate respondsToSelector:@selector(refreshTableView:setCurrencyModel:setTitle:)]) {
+                
+                if ([self.isWallet isEqualToString:@"个人钱包"]) {
+                    [self.refreshDelegate refreshTableView:self setCurrencyModel:self.platforms[indexPath.row] setTitle:@"转账"];
+                }else
+                {
+                    [self.refreshDelegate refreshTableView:self setCurrencyModel:self.platforms[indexPath.row] setTitle:@"转账"];
+                }
             }
         }
+        
     }];
     
     UITableViewRowAction *collectionBtn = [UITableViewRowAction  rowActionWithStyle:UITableViewRowActionStyleNormal title:[LangSwitcher switchLang:@"充币" key:nil] handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
-        if ([self.refreshDelegate respondsToSelector:@selector(refreshTableView:setCurrencyModel:setTitle:)]) {
-            if ([self.isWallet isEqualToString:@"个人钱包"]) {
-                [self.refreshDelegate refreshTableView:self setCurrencyModel:self.platforms[indexPath.row] setTitle:@"收款"];
-            }else
-            {
-                [self.refreshDelegate refreshTableView:self setCurrencyModel:self.platforms[indexPath.row] setTitle:@"收款"];
+        
+        if (self.platforms.count != 0) {
+            if ([self.refreshDelegate respondsToSelector:@selector(refreshTableView:setCurrencyModel:setTitle:)]) {
+                if ([self.isWallet isEqualToString:@"个人钱包"]) {
+                    [self.refreshDelegate refreshTableView:self setCurrencyModel:self.platforms[indexPath.row] setTitle:@"收款"];
+                }else
+                {
+                    [self.refreshDelegate refreshTableView:self setCurrencyModel:self.platforms[indexPath.row] setTitle:@"收款"];
+                }
             }
         }
+        
+        
     }];
     return @[transferBtn,collectionBtn];
 }
@@ -118,8 +142,11 @@ static NSString *platformCell1 = @"AccountMoneyCellTableViewCell";
 #pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    self.selectBlock(indexPath.row);
+    if (self.platforms.count != 0) {
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+        self.selectBlock(indexPath.row);
+    }
+    
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

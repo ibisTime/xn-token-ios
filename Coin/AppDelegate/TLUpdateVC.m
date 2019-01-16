@@ -19,6 +19,9 @@
 #import "ZLGestureLockViewController.h"
 #import "NSString+Check.h"
 @interface TLUpdateVC ()
+{
+    NSInteger select;
+}
 @property (nonatomic,strong) NSMutableArray <CountryModel *>*countrys;
 
 @end
@@ -29,17 +32,16 @@
 - (void)viewWillAppear:(BOOL)animated {
 
     [super viewWillAppear:animated];
-//    [self updateApp];
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillEnterForeground) name:UIApplicationWillEnterForegroundNotification object:nil];
-//    BOOL isChoose = [[NSUserDefaults standardUserDefaults] boolForKey:@"chooseCoutry"];
-    
-    [self loadData];
+    if (select == 100) {
+        TLTabBarController *tabBarCtrl = [[TLTabBarController alloc] init];
+        [UIApplication sharedApplication].keyWindow.rootViewController = tabBarCtrl;
+    }
 
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
+//    self.view.backgroundColor = [UIColor redColor];
     UIImageView *bgIV = [[UIImageView alloc] initWithFrame:self.view.bounds];
     [self.view addSubview:bgIV];
     bgIV.contentMode = UIViewContentModeScaleAspectFill;
@@ -47,6 +49,9 @@
     bgIV.image = [UIImage imageNamed:@"Launch"];
     [self setPlaceholderViewTitle:[LangSwitcher switchLang:@"加载失败" key:nil] operationTitle:[LangSwitcher switchLang:@"加载失败" key:nil]];
 
+    
+    [self configUpdate];
+    
 //    [self setPlaceholderViewTitle:@"加载失败" operationTitle:@"重新加载"];
     
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillEnterForeground) name:UIApplicationWillEnterForegroundNotification object:nil];
@@ -196,7 +201,7 @@
 //        //审核通过
 //        [AppConfig config].isChecking = false;
 //        [self setRootVC];
-
+                  
         // CFBundleVersion 构建版本号
         // CFBundleShortVersionString
         // CFBundleDisplayName
@@ -362,11 +367,8 @@
     
     NSString *word = [ZLGestureLockViewController gesturesPassword];
     if (word.length >0) {
-        [UIApplication sharedApplication].keyWindow.rootViewController = tabBarCtrl;
+        select = 100;
         [self presentViewController:na animated:YES completion:nil];
-        
-//        [UIApplication sharedApplication].keyWindow.rootViewController = tabBarCtrl;
-        
 
 //
     }else{

@@ -155,6 +155,7 @@
 //    [self removeFromSuperview];
     [[UserModel user].cusPopView dismiss];
     [[NSUserDefaults standardUserDefaults]setObject:@"1" forKey:@"GUIDETHEDFIGURE"];
+    [_delegate GuideTheFigureButton];
 }
 
 @end
