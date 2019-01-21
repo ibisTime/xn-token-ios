@@ -42,7 +42,7 @@
         [self addSubview:gameImg];
         
         
-        nameLbl = [UILabel labelWithFrame:CGRectMake(11 , (SCREEN_WIDTH - 30)/2/336 * 160 / 2 - 17.5, (SCREEN_WIDTH - 30)/2 - gameImg.width - 20, 16) textAligment:(NSTextAlignmentLeft) backgroundColor:kClearColor font:HGboldfont(16) textColor:kHexColor(@"#000000")];
+        nameLbl = [UILabel labelWithFrame:CGRectMake(11 , (SCREEN_WIDTH - 30)/2/336 * 160 / 2 - 17.5, (SCREEN_WIDTH - 30)/2 - gameImg.width - 20, 16) textAligment:(NSTextAlignmentLeft) backgroundColor:kClearColor font:HGboldfont(14) textColor:kHexColor(@"#000000")];
         [self addSubview:nameLbl];
         
         IntroductionLabel = [UILabel labelWithFrame:CGRectMake(11 , nameLbl.yy + 7, (SCREEN_WIDTH - 30)/2 - gameImg.width - 20, 16) textAligment:(NSTextAlignmentLeft) backgroundColor:kClearColor font:FONT(12) textColor:kHexColor(@"#acacac")];
