@@ -49,13 +49,13 @@
         NSArray *array = @[@"评分",@"下载量",@"成交量"];
 //        NSArray *numberArray = @[@"",@"6856",@"88553ETH/天"];
         for (int i = 0; i < 3 ; i ++) {
-            UILabel *attributeLabel = [UILabel labelWithFrame:CGRectMake(i % 3 * SCREEN_WIDTH/3, headImage.yy + 26, SCREEN_WIDTH/3, 14) textAligment:(NSTextAlignmentCenter) backgroundColor:kClearColor font:FONT(12) textColor:RGB(146, 146, 146)];
+            UILabel *attributeLabel = [UILabel labelWithFrame:CGRectMake(i % 3 * SCREEN_WIDTH/3, headImage.yy + 26 + 20, SCREEN_WIDTH/3, 14) textAligment:(NSTextAlignmentCenter) backgroundColor:kClearColor font:FONT(12) textColor:RGB(146, 146, 146)];
             attributeLabel.text = [LangSwitcher switchLang:array[i] key:nil];
             [self addSubview:attributeLabel];
             
             
             if (i != 0) {
-                UILabel *Label = [UILabel labelWithFrame:CGRectMake(i % 3 * SCREEN_WIDTH/3, headImage.yy + 50, SCREEN_WIDTH/3, 14) textAligment:(NSTextAlignmentCenter) backgroundColor:kClearColor font:FONT(14) textColor:kHexColor(@"#000000")];
+                UILabel *Label = [UILabel labelWithFrame:CGRectMake(i % 3 * SCREEN_WIDTH/3, headImage.yy + 50  + 20, SCREEN_WIDTH/3, 14) textAligment:(NSTextAlignmentCenter) backgroundColor:kClearColor font:FONT(14) textColor:kHexColor(@"#000000")];
 //                Label.text = numberArray[i];
                 if (i == 1) {
                     downloadLabel = Label;
@@ -68,14 +68,14 @@
         }
         
         for (int i = 0; i < 5; i ++) {
-            UIImageView *garyImg = [[UIImageView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH/3/2 - 50 + 10 + i % 5 * 12, headImage.yy + 50 + 2, 10, 10)];
+            UIImageView *garyImg = [[UIImageView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH/3/2 - 50 + 10 + i % 5 * 12, headImage.yy + 50 + 2  + 20, 10, 10)];
             
             garyImg.image = kImage(@"多边形灰色");
             garyImg.tag = 1000 + i;
             [self addSubview:garyImg];
             
             if (i == 4) {
-                numberLabel = [UILabel labelWithFrame:CGRectMake(garyImg.xx + 4, headImage.yy + 50, 40, 14) textAligment:(NSTextAlignmentLeft) backgroundColor:kClearColor font:FONT(14) textColor:kHexColor(@"#000000")];
+                numberLabel = [UILabel labelWithFrame:CGRectMake(garyImg.xx + 4, headImage.yy + 50  + 20, 40, 14) textAligment:(NSTextAlignmentLeft) backgroundColor:kClearColor font:FONT(14) textColor:kHexColor(@"#000000")];
                 numberLabel.text = @"(0.0)";
                 [self addSubview:numberLabel];
             }
@@ -97,14 +97,45 @@
     UIImageView *image4 = [self viewWithTag:1003];
     UIImageView *image5 = [self viewWithTag:1004];
     
+    
+    UILabel *label;
+    
+    UIView *backView = [[UIView alloc]initWithFrame:CGRectMake(headImage.xx + 15, provenance.yy + 8, SCREEN_WIDTH - headImage.xx - 15, 56)];
+    backView.backgroundColor = kWhiteColor;
+    [self addSubview:backView];
+    
+//    NSArray *nameArray = @[@"菠菜类",@"雅安成产第三节课",@"哈施法速度发生的",@"全微分",@"安慰和飞机都是服务器和父亲为范围防火墙伍尔夫"];
     for (int i = 0; i < GameModel.labelList.count; i ++) {
-        if (i == 8) {
-            return;
-        }
-        UILabel *theLabel = [UILabel labelWithFrame:CGRectMake(headImage.xx + 15 + i % 4 * (SCREEN_WIDTH - headImage.xx - 15 - 15)/4 , provenance.yy + 8  + i / 4 * (28), (SCREEN_WIDTH - headImage.xx - 15 - 15 - 9)/4, 24) textAligment:(NSTextAlignmentCenter) backgroundColor:RGB(247, 201, 84) font:FONT(12) textColor:kWhiteColor];
+//        if (i == 8) {
+//            return;
+//        }
+        UILabel *theLabel = [UILabel labelWithFrame:CGRectZero textAligment:(NSTextAlignmentCenter) backgroundColor:RGB(247, 201, 84) font:FONT(12) textColor:kWhiteColor];
         theLabel.text = GameModel.labelList[i];
+        if (i == 0) {
+            [theLabel sizeToFit];
+            theLabel.frame = CGRectMake(headImage.xx + 15 , provenance.yy + 8  + i / 4 * (28) + 5, theLabel.width + 15, 24);
+        }
+        else
+        {
+            [theLabel sizeToFit];
+            theLabel.frame = CGRectMake(label.xx + 5  , label.y , theLabel.width + 15, 24);
+            
+            
+            
+            
+            if (label.xx + 5 + theLabel.width + 15 > SCREEN_WIDTH) {
+                theLabel.frame = CGRectMake(headImage.xx + 15 , provenance.yy + 13 + 28 , theLabel.width, 24);
+            }
+    
+            
+            if (label.y == provenance.yy + 13 + 28 && label.xx + 5 + theLabel.width > SCREEN_WIDTH) {
+                return;
+            }
+        }
+        
         kViewRadius(theLabel, 12);
         [self addSubview:theLabel];
+        label = theLabel;
     }
     
     
