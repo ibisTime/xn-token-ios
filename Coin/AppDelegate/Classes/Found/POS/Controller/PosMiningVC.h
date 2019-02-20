@@ -13,4 +13,6 @@
  */
 @interface PosMiningVC : TLBaseVC
 
+@property (nonatomic , copy)NSString *url;
+
 @end

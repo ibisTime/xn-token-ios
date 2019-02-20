@@ -700,21 +700,7 @@ typedef enum : NSUInteger {
     
     if ([self.currency.type isEqualToString:@"0"]) {
         if ([self.currency.symbol isEqualToString:@"BTC"] || [self.currency.symbol isEqualToString:@"USDT"]) {
-            TLNetworking *net = [TLNetworking new];
-            net.code = @"802203";
-            net.showView = self.view;
-            net.parameters[@"address"] = self.balanceTF.text;
-            //    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-            [net postWithSuccess:^(id responseObject) {
-                NSLog(@"%@",responseObject);
-                
-                [self transfer];
-                
-                
-            } failure:^(NSError *error) {
-                //        [MBProgressHUD hideHUDForView:self.view animated:YES];
-                
-            }];
+            [self transfer];
         }else
         {
             [self transfer];
@@ -756,21 +742,21 @@ typedef enum : NSUInteger {
             
             
             
-//            if ([AppConfig config].runEnv == 0) {
-//                BTCPublicKeyAddress *ADDRESS = [BTCPublicKeyAddress addressWithString:self.balanceTF.text];
-//                if (ADDRESS == nil) {
-//                    [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入正确地址" key:nil]];
-//                    return;
-//                }
-//            }
-//            else
-//            {
-//                BTCPublicKeyAddress *ADDRESS = [BTCPublicKeyAddressTestnet addressWithString:self.balanceTF.text];
-//                if (ADDRESS == nil) {
-//                    [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入正确地址" key:nil]];
-//                    return;
-//                }
-//            }
+            if ([AppConfig config].runEnv == 0) {
+                BTCPublicKeyAddress *ADDRESS = [BTCPublicKeyAddress addressWithString:self.balanceTF.text];
+                if (ADDRESS == nil) {
+                    [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入正确地址" key:nil]];
+                    return;
+                }
+            }
+            else
+            {
+                BTCPublicKeyAddress *ADDRESS = [BTCPublicKeyAddressTestnet addressWithString:self.balanceTF.text];
+                if (ADDRESS == nil) {
+                    [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入正确地址" key:nil]];
+                    return;
+                }
+            }
         }
     }
     CGFloat amount = [self.tranAmountTF.text doubleValue];

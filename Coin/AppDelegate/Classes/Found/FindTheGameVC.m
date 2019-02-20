@@ -88,11 +88,8 @@
 -(void)refreshTableView:(TLTableView *)refreshTableview didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 1) {
-        
-        
         StrategyVC *vc = [StrategyVC new];
         vc.strategyID = self.model[indexPath.row].ID;
-//        vc.URL = ;
         [self showViewController:vc sender:self];
     }
 }
@@ -114,7 +111,6 @@
         helper.parameters[@"dappId"] = _GameModel.ID;
     }
     
-//    helper.parameters[@"address"] = self.currency.address;
     [helper modelClass:[StrategyModel class]];
     
     [self.tableView addRefreshAction:^{
@@ -172,7 +168,14 @@
     TLNetworking *http = [TLNetworking new];
     
     http.code = @"625457";
-    http.parameters[@"id"] = self.GameModel.ID;
+//    http.parameters[@"id"] = self.GameModel.ID;
+    
+    if ([TLUser isBlankString:self.url] == NO) {
+        http.parameters[@"id"] = self.url;
+    }else
+    {
+        http.parameters[@"id"] = _GameModel.ID;
+    }
 //    http.parameters[@"start"] = [NSString stringWithFormat:@"%ld",start];
 //    http.parameters[@"limit"] = @"10"  ;
     http.showView = self.view;

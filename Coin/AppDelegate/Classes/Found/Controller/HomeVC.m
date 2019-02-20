@@ -211,8 +211,8 @@
     if (indexPath.section == 0) {
         IconCollCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"IconCollCell" forIndexPath:indexPath];
         //    cell.backgroundColor = [UIColor redColor];
-        NSArray *imgArray = @[@"红包(3)",@"发现收益",@"邀请好友(1)",@"礼品"];
-        NSArray *array = @[@"发红包",@"量化理财",@"邀请好友",@"更多精彩"];
+        NSArray *imgArray = @[@"红包(3)",@"发现收益",@"邀请好友(1)",@"节点奖励"];
+        NSArray *array = @[@"发红包",@"量化理财",@"邀请好友",@"节点奖励"];
         [cell.iconButton setTitle:[LangSwitcher switchLang:array[indexPath.row] key:nil] forState:(UIControlStateNormal)];
         [cell.iconButton SG_imagePositionStyle:(SGImagePositionStyleTop) spacing:9 imagePositionBlock:^(UIButton *button) {
             [button setImage:kImage(imgArray[indexPath.row]) forState:(UIControlStateNormal)];
@@ -260,6 +260,13 @@
         {
             TLinviteVC *settingVC = [TLinviteVC new];
             [self showViewController:settingVC sender:self];
+        }
+            break;
+        case 3:
+        {
+            PosMiningVC *vc = [PosMiningVC new];
+            vc.url = @"WAN";
+            [self showViewController:vc sender:self];
         }
             break;
             
@@ -472,15 +479,23 @@
     
     if ([self.bannerRoom[index].action isEqualToString:@"0"]) {
         return;
-    }else if ([self.bannerRoom[index].action isEqualToString:@"1"]) {
+    }
+    
+    if ([self.bannerRoom[index].action isEqualToString:@"1"]) {
         NSString *url = [[self.bannerRoom objectAtIndex:index] url];
         if (url && url.length > 0) {
             GeneralWebView *vc = [GeneralWebView new];
             vc.URL = url;
             [self showViewController:vc sender:self];
         }
-    }if ([self.bannerRoom[index].action isEqualToString:@"2"]) {
+    }
+    if ([self.bannerRoom[index].action isEqualToString:@"2"]) {
         FindTheGameVC *vc = [FindTheGameVC new];
+        vc.url = [[self.bannerRoom objectAtIndex:index] url];
+        [self showViewController:vc sender:self];
+    }
+    if ([self.bannerRoom[index].action isEqualToString:@"3"]) {
+        PosMiningVC *vc = [PosMiningVC new];
         vc.url = [[self.bannerRoom objectAtIndex:index] url];
         [self showViewController:vc sender:self];
     }
