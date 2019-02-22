@@ -377,21 +377,6 @@ typedef enum : NSUInteger {
 
 - (void)loadPwd{
 
-//    TLDataBase *dataBase = [TLDataBase sharedManager];
-//    //    NSString *word;
-//    if ([dataBase.dataBase open]) {
-//        NSString *sql = [NSString stringWithFormat:@"SELECT PwdKey from THAUser where userId = '%@'",[TLUser user].userId];
-//        //        [sql appendString:[TLUser user].userId];
-//        FMResultSet *set = [dataBase.dataBase executeQuery:sql];
-//        while ([set next])
-//        {
-//            self.word = [set stringForColumn:@"PwdKey"];
-//
-//        }
-//        [set close];
-//    }
-//    [dataBase.dataBase close];
-    
     self.word = [[NSUserDefaults standardUserDefaults] objectForKey:MNEMONICPASSWORD];
 
 }
@@ -407,21 +392,7 @@ typedef enum : NSUInteger {
 
 -(void)loadtype
 {
-//    TLDataBase *dataBase = [TLDataBase sharedManager];
-//    NSString *type;
-//
-//    if ([dataBase.dataBase open]) {
-//        NSString *sql = [NSString stringWithFormat:@"SELECT type from THALocal where symbol = '%@'",self.currency.symbol];
-//        //        [sql appendString:[TLUser user].userId];
-//        FMResultSet *set = [dataBase.dataBase executeQuery:sql];
-//        while ([set next])
-//        {
-//            type = [set stringForColumn:@"type"];
-//
-//        }
-//        [set close];
-//    }
-//    [dataBase.dataBase close];
+
     NSArray *array = [[NSUserDefaults standardUserDefaults]objectForKey:COINARRAY];
     for (int i = 0; i < array.count; i ++) {
         if ([array[i][@"symbol"] isEqualToString:self.currency.symbol]) {
@@ -530,12 +501,15 @@ typedef enum : NSUInteger {
                     
                     pricr   = responseObject[@"data"][@"gasPrice"];
                     self.pricr = pricr;
-                    self.tempPrice = pricr;
+//                    self.tempPrice = pricr;
 
-                    CGFloat p = [pricr doubleValue]/1000000000000000000;
-                    p = p *21000;
+                    CGFloat p = [pricr doubleValue]/1000000000000000000.0;
+                    p = p * 21000;
                     NSLog(@"%.8f",p);
                     self.gamPrice = p;
+                    self.slider.minimumValue = 181000000000.0/1000000000000000000.0*21000.0;
+                    self.slider.maximumValue = p + (p - 181000000000.0/1000000000000000000.0*21000.0);
+                    self.slider.value = (self.slider.maximumValue + self.slider.minimumValue)/2;
                     [self valueChange:self.slider];
 
                 } failure:^(NSError *error) {
@@ -552,11 +526,16 @@ typedef enum : NSUInteger {
                     pricr  = responseObject[@"data"][@"gasPrice"];
 
                     self.pricr = pricr;
-                    self.tempPrice = pricr;
+//                    self.tempPrice = pricr;
 
-                    CGFloat p = [pricr doubleValue]/1000000000000000000;
+                    CGFloat p = [pricr doubleValue]/1000000000000000000.0;
+                    
                     p = p *21000;
                     NSLog(@"%.8f",p);
+                    
+                    self.slider.maximumValue = p*1.15;
+                    self.slider.minimumValue = p*0.85;
+                    self.slider.value = (self.slider.maximumValue + self.slider.minimumValue)/2;
                     self.gamPrice = p;
 //                    [MBProgressHUD hideHUDForView:self.view animated:YES];
 
@@ -573,11 +552,15 @@ typedef enum : NSUInteger {
             net.code = @"802117";
             [net postWithSuccess:^(id responseObject) {
                 pricr   = responseObject[@"data"][@"gasPrice"];
-                self.tempPrice = pricr;
-
+//                self.tempPrice = pricr;
                 self.pricr = pricr;
+                
                 CGFloat p = [pricr doubleValue]/1000000000000000000;
                 p = p *21000;
+                
+                self.slider.minimumValue = p*0.85;
+                self.slider.maximumValue = p*1.15;
+                self.slider.value = (self.slider.maximumValue + self.slider.minimumValue)/2;
                 NSLog(@"%.8f",p);
                 self.gamPrice = p;
                 [self valueChange:self.slider];
@@ -628,17 +611,23 @@ typedef enum : NSUInteger {
         }else{
             symbolStr = @"WAN";
         }
-        if (value > 0.5) {
-            
-            self.blanceFree.text = [NSString stringWithFormat:@"%.8f %@",self.gamPrice + self.gamPrice*(slider.value - 0.5),symbolStr];
-            self.pricr = [NSString stringWithFormat:@"%.8f",[self.tempPrice longLongValue] + [self.tempPrice longLongValue]*(slider.value - 0.5)];
-            
-        }else{
-
-            self.blanceFree.text = [NSString stringWithFormat:@"%.8f %@", self.gamPrice  - self.gamPrice* ( - slider.value + 0.5),symbolStr];
-
-            self.pricr = [NSString stringWithFormat:@"%.8f",[self.tempPrice longLongValue] - [self.tempPrice longLongValue] * ( - slider.value + 0.5)];
-        }
+        
+        
+        self.blanceFree.text = [NSString stringWithFormat:@"%.8f %@",slider.value,symbolStr];
+        self.pricr = [NSString stringWithFormat:@"%.8f",slider.value * 1000000000000000000/21000];
+        self.tempPrice = [NSString stringWithFormat:@"%.8f",slider.value * 1000000000000000000/21000];
+        self.gamPrice = slider.value * 1000000000000000000/21000;
+//        if (value > 0.5) {
+//
+//            self.blanceFree.text = [NSString stringWithFormat:@"%.8f %@",self.gamPrice + self.gamPrice*(slider.value - 0.5),symbolStr];
+//            self.pricr = [NSString stringWithFormat:@"%.8f",[self.tempPrice longLongValue] + [self.tempPrice longLongValue] * (slider.value - 0.5)];
+//
+//        }else{
+//
+//            self.blanceFree.text = [NSString stringWithFormat:@"%.8f %@", self.gamPrice  - self.gamPrice* ( - slider.value + 0.5),symbolStr];
+//
+//            self.pricr = [NSString stringWithFormat:@"%.8f",[self.tempPrice longLongValue] - [self.tempPrice longLongValue] * ( - slider.value + 0.5)];
+//        }
 
     }
 }
@@ -771,8 +760,8 @@ typedef enum : NSUInteger {
     
     NSString *Mnemonics = [[NSUserDefaults standardUserDefaults]objectForKey:MNEMONIC];
     
-    CGFloat f =  [self.tranAmountTF.text floatValue];
-    f = f *1000000000000000000;
+//    CGFloat f =  [self.tranAmountTF.text floatValue];
+//    f = f *1000000000000000000;
     //    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     NSLog(@"线程1--->%d",[NSThread isMainThread]);
     
@@ -790,10 +779,25 @@ typedef enum : NSUInteger {
                           return ;
                       } confirm:^(UIAlertAction *action, UITextField *textField)
      {
-         //        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-         [SVProgressHUD show];
+
+         
+         
+         
+         
          //        dispatch_after(0.5, dispatch_get_main_queue(), ^{
          if ([self.word isEqualToString:textField.text]) {
+             
+             
+             dispatch_queue_t  queue= dispatch_queue_create("wendingding", NULL);
+             //2.添加任务到队列中，就可以执行任务
+             //异步函数：具备开启新线程的能力
+             dispatch_async(queue, ^{
+                 NSLog(@"下载图片1----%@",[NSThread currentThread]);
+                 [SVProgressHUD show];
+             });
+             dispatch_async(queue, ^{
+             
+             
              NSString *result;
              NSLog(@"线程2--->%d",[NSThread isMainThread]);
              [SVProgressHUD show];
@@ -807,7 +811,7 @@ typedef enum : NSUInteger {
                      
                      if ([result isEqualToString:@"请输入正确地址"]) {
                          [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入正确地址" key:nil]];
-                         [MBProgressHUD hideHUDForView:self.view animated:YES];
+//                         [MBProgressHUD hideHUDForView:self.view animated:YES];
                          return;
                      }
                      
@@ -817,7 +821,7 @@ typedef enum : NSUInteger {
                      result =[MnemonicUtil sendWanTransactionWithMnemonicWallet:Mnemonics address:[self.balanceTF.text lowercaseString] amount:gaspic gaspic:[NSString stringWithFormat:@"%lld",[self.pricr longLongValue]] gasLimt:@"21000"];
                      if ([result isEqualToString:@"请输入正确地址"]) {
                          [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入正确地址" key:nil]];
-                         [MBProgressHUD hideHUDForView:self.view animated:YES];
+//                         [MBProgressHUD hideHUDForView:self.view animated:YES];
                          return;
                      }
                  }else if ([self.currency.symbol isEqualToString:@"BTC"]){
@@ -838,14 +842,14 @@ typedef enum : NSUInteger {
                  result = [MnemonicUtil sendEthTokenTransactionWithAddress:Mnemonics contractAddress:coin.contractAddress address:[self.balanceTF.text lowercaseString] amount:self.tranAmountTF.text gaspic:self.pricr gasLimt:@"210000"];
                  if ([result isEqualToString:@"请输入正确地址"]) {
                      [TLAlert alertWithInfo:[LangSwitcher switchLang:@"请输入正确地址" key:nil]];
-                     [MBProgressHUD hideHUDForView:self.view animated:YES];
+//                     [MBProgressHUD hideHUDForView:self.view animated:YES];
                      return;
                  }
                  
                  
              }
              if ([result isEqualToString:@"1"]) {
-                 [MBProgressHUD hideHUDForView:self.view animated:YES];
+//                 [MBProgressHUD hideHUDForView:self.view animated:YES];
                  [TLAlert alertWithSucces:[LangSwitcher switchLang:@"广播成功" key:nil]];
                  dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                      [self.navigationController popViewControllerAnimated:YES];
@@ -854,13 +858,13 @@ typedef enum : NSUInteger {
              }else
              {
                  NSLog(@"线程3--->%d",[NSThread isMainThread]);
-                 [MBProgressHUD hideHUDForView:self.view animated:YES];
                  [TLAlert alertWithError:[LangSwitcher switchLang:@"广播失败" key:nil]];
                  
              }
+                 
+                 });
          }else{
              [TLAlert alertWithError:[LangSwitcher switchLang:@"交易密码错误" key:nil]];
-             [MBProgressHUD hideHUDForView:self.view animated:YES];
              
          }
          //        });

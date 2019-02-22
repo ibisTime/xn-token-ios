@@ -62,9 +62,9 @@
     //    [NSThread sleepForTimeInterval:2];
 //    服务器环境
 //    研发
-//    [AppConfig config].runEnv = RunEnvDev;
+    [AppConfig config].runEnv = RunEnvDev;
 //    测试
-    [AppConfig config].runEnv = RunEnvTest;
+//    [AppConfig config].runEn、v = RunEnvTest;
 //    正式
 //    [AppConfig config].runEnv = RunEnvRelease;
 

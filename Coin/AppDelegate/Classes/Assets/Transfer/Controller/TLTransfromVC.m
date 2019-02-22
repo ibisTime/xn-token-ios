@@ -502,14 +502,20 @@ typedef enum : NSUInteger {
                       } confirm:^(UIAlertAction *action, UITextField *textField)
     {
         
-//        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-//        [SVProgressHUD show];
-//        dispatch_after(0.5, dispatch_get_main_queue(), ^{
-            if ([self.word isEqualToString:textField.text])
-            {
+        if ([self.word isEqualToString:textField.text])
+        {
+        dispatch_queue_t  queue= dispatch_queue_create("wendingding", NULL);
+             //2.添加任务到队列中，就可以执行任务
+             //异步函数：具备开启新线程的能力
+        dispatch_async(queue, ^{
+            NSLog(@"下载图片1----%@",[NSThread currentThread]);
+            [SVProgressHUD show];
+        });
+        dispatch_async(queue, ^{
+            
                 
-//                [TLProgressHUD show];
-//                [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+                //                [TLProgressHUD show];
+                //                [MBProgressHUD showHUDAddedTo:[[UIApplication sharedApplication] keyWindow] animated:YES];
                 NSString *result;
                 NSLog(@"线程2--->%d",[NSThread isMainThread]);
                 NSString *add;
@@ -522,16 +528,17 @@ typedef enum : NSUInteger {
                 if ([self.currentModel.type isEqualToString:@"0"]) {
                     //公链 ETH WAN BTC
                     if ([self.currentModel.symbol isEqualToString:@"ETH"]) {
-//                        [MBProgressHUD hideHUDForView:self.view animated:YES];
+                        //                        [MBProgressHUD hideHUDForView:self.view animated:YES];
                         result =[MnemonicUtil sendTransactionWithMnemonicWallet:Mnemonics address:add amount:gaspic gaspic:[NSString stringWithFormat:@"%lld",[self.tempPrice longLongValue]] gasLimt:@"21000"];
                         
                         
                     }else if ([self.currentModel.symbol isEqualToString:@"WAN"]){
-//                        [MBProgressHUD hideHUDForView:self.view animated:YES];
+                        //                        [MBProgressHUD hideHUDForView:self.view animated:YES];
+                        
                         result =[MnemonicUtil sendWanTransactionWithMnemonicWallet:Mnemonics address:add amount:gaspic gaspic:[NSString stringWithFormat:@"%lld",[self.tempPrice longLongValue]] gasLimt:@"21000"];
                     }else if([self.currentModel.symbol isEqualToString:@"BTC"])
                     {
-                        [MBProgressHUD hideHUDForView:self.view animated:YES];
+                        [MBProgressHUD hideHUDForView:[[UIApplication sharedApplication] keyWindow] animated:YES];
                         if ([add isEqualToString:self.btcAddress]) {
                             [TLAlert alertWithMsg:@"转入和转出地址不能相同"];
                             return ;
@@ -549,14 +556,13 @@ typedef enum : NSUInteger {
                         return ;
                     }
                 }else{
-//                    [TLProgressHUD show];
-//                    [MBProgressHUD hideHUDForView:self.view animated:YES];
+
                     CoinModel *coin = [CoinUtil getCoinModel:self.currentModel.symbol];
                     result = [MnemonicUtil sendEthTokenTransactionWithAddress:Mnemonics contractAddress:coin.contractAddress address:add amount:self.numberTextField.text gaspic:[NSString stringWithFormat:@"%lld",[self.tempPrice longLongValue]] gasLimt:@"210000"];
                     
                 }
                 if ([result isEqualToString:@"1"]) {
-                    [MBProgressHUD hideHUDForView:self.view animated:YES];
+
                     [TLAlert alertWithSucces:[LangSwitcher switchLang:@"划转成功" key:nil]];
                     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                         [self.navigationController popViewControllerAnimated:YES];
@@ -565,18 +571,17 @@ typedef enum : NSUInteger {
                 }else
                 {
                     NSLog(@"线程3--->%d",[NSThread isMainThread]);
-                    [MBProgressHUD hideHUDForView:self.view animated:YES];
+
                     [TLAlert alertWithError:[LangSwitcher switchLang:@"划转失败" key:nil]];
                 }
-            }else
-            {
-                [TLAlert alertWithError:[LangSwitcher switchLang:@"交易密码错误" key:nil]];
-                [MBProgressHUD hideHUDForView:self.view animated:YES];
-                
-            }
             
-//        });
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        });
+
+        }else
+        {
+            [TLAlert alertWithError:[LangSwitcher switchLang:@"交易密码错误" key:nil]];
+        }
+
     }];
 }
 
@@ -622,14 +627,21 @@ typedef enum : NSUInteger {
                 self.pricr = pricr;
                 self.tempPrice = pricr;
                 
-                CGFloat p = [pricr doubleValue]/1000000000000000000;
-                p = p *21000;
+                
+                CGFloat p = [pricr doubleValue]/1000000000000000000.0;
+                p = p * 21000;
                 NSLog(@"%.8f",p);
                 self.gamPrice = p;
-                self.poundageSlider.maximumValue = 1;
-                self.poundageSlider.minimumValue = 0;
-                self.poundageSlider.value = 0.5;
+                self.poundageSlider.minimumValue = 181000000000.0/1000000000000000000.0*21000.0;
+                self.poundageSlider.maximumValue = p + (p - 181000000000.0/1000000000000000000.0*21000.0);
+                self.poundageSlider.value = (self.poundageSlider.maximumValue + self.poundageSlider.minimumValue)/2;
                 [self valueChange:self.poundageSlider];
+                
+                
+//                self.poundageSlider.maximumValue = 1;
+//                self.poundageSlider.minimumValue = 0;
+//                self.poundageSlider.value = 0.5;
+//                [self valueChange:self.poundageSlider];
 
                 
             } failure:^(NSError *error) {
@@ -651,10 +663,19 @@ typedef enum : NSUInteger {
                 p = p *21000;
                 NSLog(@"====== %.8f",p);
                 self.gamPrice = p;
-                self.poundageSlider.maximumValue = 1;
-                self.poundageSlider.minimumValue = 0;
-                self.poundageSlider.value = 0.5;
+                
+                self.poundageSlider.maximumValue = p*1.15;
+                self.poundageSlider.minimumValue = p*0.85;
+                self.poundageSlider.value = (self.poundageSlider.maximumValue + self.poundageSlider.minimumValue)/2;
+              
+                //                    [MBProgressHUD hideHUDForView:self.view animated:YES];
+                
                 [self valueChange:self.poundageSlider];
+                
+//                self.poundageSlider.maximumValue = 1;
+//                self.poundageSlider.minimumValue = 0;
+//                self.poundageSlider.value = 0.5;
+//                [self valueChange:self.poundageSlider];
 //                [MBProgressHUD hideHUDForView:self.view animated:YES];
                 
             } failure:^(NSError *error) {
@@ -676,9 +697,13 @@ typedef enum : NSUInteger {
             p = p *21000;
             NSLog(@"%.8f",p);
             self.gamPrice = p;
-            self.poundageSlider.maximumValue = 1;
-            self.poundageSlider.minimumValue = 0;
-            self.poundageSlider.value = 0.5;
+            
+            self.poundageSlider.maximumValue = p*1.15;
+            self.poundageSlider.minimumValue = p*0.85;
+            self.poundageSlider.value = (self.poundageSlider.maximumValue + self.poundageSlider.minimumValue)/2;
+            
+            //                    [MBProgressHUD hideHUDForView:self.view animated:YES];
+            
             [self valueChange:self.poundageSlider];
 //            [MBProgressHUD hideHUDForView:self.view animated:YES];
             
@@ -737,53 +762,67 @@ typedef enum : NSUInteger {
             self.btcPrice = slider.value;
             return;
         }
-        
-        if (value >= 0.5) {
-            
-            self.poundage = [NSString stringWithFormat:@"%.8f",self.gamPrice + self.gamPrice*(slider.value - 0.5)];
-            self.pricr = [NSString stringWithFormat:@"%.8f",[self.tempPrice longLongValue] + [self.tempPrice longLongValue] * (slider.value - 0.5)];
-            if ([self.currentModel.type isEqualToString:@"0"]) {
-                self.totalFree.text = [NSString stringWithFormat:@"%@ %@",[LangSwitcher switchLang:@"本次划转手续费为" key:nil],[NSString stringWithFormat:@"%.8f %@",[self.poundage floatValue],self.currentModel.symbol]];
-//                self.poundage = self.gamPrice*0.85;
-                self.currencyStr = self.currentModel.symbol;
-                
-            }else if ([self.currentModel.type isEqualToString:@"1"])
-            {
-                self.totalFree.text = [NSString stringWithFormat:@"%@ %@",[LangSwitcher switchLang:@"本次划转手续费为" key:nil],[NSString stringWithFormat:@"%.8f %@",[self.poundage floatValue],@"ETH"]];
-//                self.poundage = self.gamPrice*0.85;
-                self.currencyStr = @"ETH";
-                
-            }else{
-                self.totalFree.text = [NSString stringWithFormat:@"%@ %@",[LangSwitcher switchLang:@"本次划转手续费为" key:nil],[NSString stringWithFormat:@"%.8f %@",[self.poundage floatValue],@"WAN"]];
-                
-                self.currencyStr = @"WAN";
-                
-            }
-            
-            
-            //            }
-            
+        NSString *symbolStr;
+        if ([self.currentModel.type isEqualToString:@"0"]) {
+            symbolStr = self.currentModel.symbol;
+        }else if ([self.currentModel.type isEqualToString:@"1"])
+        {
+            symbolStr = @"ETH";
         }else{
-            
-            self.poundage = [NSString stringWithFormat:@"%.8f",self.gamPrice - self.gamPrice*(0.5 - slider.value)];
-            self.pricr = [NSString stringWithFormat:@"%.8f",[self.tempPrice longLongValue] + [self.tempPrice longLongValue] - [self.tempPrice longLongValue] * (0.5 - slider.value)];
-            
-            if ([self.currentModel.type isEqualToString:@"0"])
-            {
-                self.totalFree.text = [NSString stringWithFormat:@"%@ %@",[LangSwitcher switchLang:@"本次划转手续费为" key:nil],[NSString stringWithFormat:@"%.8f %@", [self.poundage floatValue] ,self.currentModel.symbol]];
-                self.currencyStr = self.currentModel.symbol;
-                
-            }else if ([self.currentModel.type isEqualToString:@"1"])
-            {
-                self.totalFree.text = [NSString stringWithFormat:@"%@ %@",[LangSwitcher switchLang:@"本次划转手续费为" key:nil],[NSString stringWithFormat:@"%.8f %@", [self.poundage floatValue] ,@"ETH"]];
-                self.currencyStr = @"ETH";
-            }else{
-                
-                self.totalFree.text = [NSString stringWithFormat:@"%@ %@",[LangSwitcher switchLang:@"本次划转手续费为" key:nil],[NSString stringWithFormat:@"%.8f %@", [self.poundage floatValue],@"WAN" ]];
-                self.currencyStr = @"WAN";
-            }
-            
+            symbolStr = @"WAN";
         }
+        
+        
+        self.totalFree.text = [NSString stringWithFormat:@"%@ %.8f %@",[LangSwitcher switchLang:@"本次划转手续费为" key:nil],slider.value,symbolStr];
+        self.pricr = [NSString stringWithFormat:@"%.8f",slider.value * 1000000000000000000/21000];
+        self.gamPrice = slider.value * 1000000000000000000/21000;
+        self.tempPrice =  self.pricr;
+//        if (value >= 0.5) {
+//
+//            self.poundage = [NSString stringWithFormat:@"%.8f",self.gamPrice + self.gamPrice*(slider.value - 0.5)];
+//            self.pricr = [NSString stringWithFormat:@"%.8f",[self.tempPrice longLongValue] + [self.tempPrice longLongValue] * (slider.value - 0.5)];
+//            if ([self.currentModel.type isEqualToString:@"0"]) {
+//                self.totalFree.text = [NSString stringWithFormat:@"%@ %@",[LangSwitcher switchLang:@"本次划转手续费为" key:nil],[NSString stringWithFormat:@"%.8f %@",[self.poundage floatValue],self.currentModel.symbol]];
+////                self.poundage = self.gamPrice*0.85;
+//                self.currencyStr = self.currentModel.symbol;
+//
+//            }else if ([self.currentModel.type isEqualToString:@"1"])
+//            {
+//                self.totalFree.text = [NSString stringWithFormat:@"%@ %@",[LangSwitcher switchLang:@"本次划转手续费为" key:nil],[NSString stringWithFormat:@"%.8f %@",[self.poundage floatValue],@"ETH"]];
+////                self.poundage = self.gamPrice*0.85;
+//                self.currencyStr = @"ETH";
+//
+//            }else{
+//                self.totalFree.text = [NSString stringWithFormat:@"%@ %@",[LangSwitcher switchLang:@"本次划转手续费为" key:nil],[NSString stringWithFormat:@"%.8f %@",[self.poundage floatValue],@"WAN"]];
+//
+//                self.currencyStr = @"WAN";
+//
+//            }
+//
+//
+//            //            }
+//
+//        }else{
+        
+//            self.poundage = [NSString stringWithFormat:@"%.8f",self.gamPrice - self.gamPrice*(0.5 - slider.value)];
+//            self.pricr = [NSString stringWithFormat:@"%.8f",[self.tempPrice longLongValue] + [self.tempPrice longLongValue] - [self.tempPrice longLongValue] * (0.5 - slider.value)];
+//
+//            if ([self.currentModel.type isEqualToString:@"0"])
+//            {
+//                self.totalFree.text = [NSString stringWithFormat:@"%@ %@",[LangSwitcher switchLang:@"本次划转手续费为" key:nil],[NSString stringWithFormat:@"%.8f %@", [self.poundage floatValue] ,self.currentModel.symbol]];
+//                self.currencyStr = self.currentModel.symbol;
+//
+//            }else if ([self.currentModel.type isEqualToString:@"1"])
+//            {
+//                self.totalFree.text = [NSString stringWithFormat:@"%@ %@",[LangSwitcher switchLang:@"本次划转手续费为" key:nil],[NSString stringWithFormat:@"%.8f %@", [self.poundage floatValue] ,@"ETH"]];
+//                self.currencyStr = @"ETH";
+//            }else{
+//
+//                self.totalFree.text = [NSString stringWithFormat:@"%@ %@",[LangSwitcher switchLang:@"本次划转手续费为" key:nil],[NSString stringWithFormat:@"%.8f %@", [self.poundage floatValue],@"WAN" ]];
+//                self.currencyStr = @"WAN";
+//            }
+//
+//        }
     }
     else
     {
