@@ -26,16 +26,23 @@
     TLDataBase *dataBase = [TLDataBase sharedManager];
     NSString *type;
     
-    if ([dataBase.dataBase open]) {
-        NSString *sql = [NSString stringWithFormat:@"SELECT type from THALocal where symbol = '%@'",self.currentModel.symbol];
-        //        [sql appendString:[TLUser user].userId];
-        FMResultSet *set = [dataBase.dataBase executeQuery:sql];
-        while ([set next])
-        {
-            type = [set stringForColumn:@"type"];
-            
+//    if ([dataBase.dataBase open]) {
+//        NSString *sql = [NSString stringWithFormat:@"SELECT type from THALocal where symbol = '%@'",self.currentModel.symbol];
+//        //        [sql appendString:[TLUser user].userId];
+//        FMResultSet *set = [dataBase.dataBase executeQuery:sql];
+//        while ([set next])
+//        {
+//            type = [set stringForColumn:@"type"];
+//            
+//        }
+//        [set close];
+//    }
+    
+    NSArray *muArray = [[NSUserDefaults standardUserDefaults]objectForKey:COINARRAY];
+    for (int i = 0; i < muArray.count; i ++) {
+        if ([self.currentModel.symbol isEqualToString:muArray[i][@"symbol"]]) {
+            type = muArray[i][@"type"];
         }
-        [set close];
     }
     
     [dataBase.dataBase close];

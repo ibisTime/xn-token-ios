@@ -381,17 +381,17 @@
 
 //  本地更新
 ////  本地更新
-//- (void)goBcoinWeb:(NSString *)var{
+// - (void)goBcoinWeb:(NSString *)var{
     
-//    NSString *urlStr = [var stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
-//    NSURL *url = [NSURL URLWithString:urlStr];
-//    [[UIApplication sharedApplication] openURL:url];
-//}
+//     NSString *urlStr = [var stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+//     NSURL *url = [NSURL URLWithString:urlStr];
+//     [[UIApplication sharedApplication] openURL:url];
+// }
 
 
 //  app storeapp store
 - (void)goBcoinWeb:(NSString *)var{
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://itunes.apple.com/cn/app/m-help/id1436959010?mt=8"]];
+   NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://itunes.apple.com/cn/app/m-help/id1436959010?mt=8"]];
     [[UIApplication sharedApplication]openURL:url];
 
 

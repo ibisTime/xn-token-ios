@@ -80,8 +80,8 @@
 
 #define kWidth(x) (x)*(kScreenWidth)/375.0
 #define kHeight(y) (y)*(kScreenHeight)/667.0
-
-#define kDevice_Is_iPhoneX (kScreenHeight == 812 ? YES : NO)
+#define Height_StatusBar [[UIApplication sharedApplication] statusBarFrame].size.height
+#define kDevice_Is_iPhoneX (Height_StatusBar == 44 ? YES : NO)
 #define kNavigationBarHeight  (kDevice_Is_iPhoneX == YES ? 88: 64)
 #define kStatusBarHeight (kDevice_Is_iPhoneX == YES ? 44: 20)
 

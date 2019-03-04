@@ -191,7 +191,14 @@
 
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    return 3;
+//测试账号判断
+    if ([[TLUser user].mobile isEqualToString:@"15268501481"]) {
+        return 1;
+    }
+    else
+    {
+        return 3;
+    }
 }
 
 #pragma mark------CollectionView的代理方法

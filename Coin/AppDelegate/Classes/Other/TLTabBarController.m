@@ -35,7 +35,14 @@
                         [LangSwitcher switchLang:@"发现" key:nil],
                         [LangSwitcher switchLang:@"我的" key:nil]
                         ];
-    NSArray *VCNames = @[@"TLWalletVC", @"HomeVC", @"TLMineVC"];
+    NSArray *VCNames;
+    if ([[TLUser user].mobile isEqualToString:@"15268501481"]) {
+        VCNames = @[@"TLWalletVC", @"PosMiningVC", @"TLMineVC"];
+    }else
+    {
+        VCNames = @[@"TLWalletVC", @"HomeVC", @"TLMineVC"];
+    }
+//    NSArray *VCNames = @[@"TLWalletVC", @"HomeVC", @"TLMineVC"];
     
     NSArray *imageNames = @[@"tabbar1", @"tabbar2", @"tabbar3"];
     NSArray *selectedImageNames = @[@"tabbar11", @"tabbar21", @"tabbar31"];
