@@ -60,7 +60,7 @@
             }else if([self.currentModel.symbol isEqualToString:@"WAN"]){
                 
                 [self.web loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",[AppConfig config].wanHash,self.urlString]]]];
-                
+                NSLog(@"====== %@",[NSString stringWithFormat:@"%@/%@",[AppConfig config].wanHash,self.urlString]);
             }else{
                 [self.web loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/tx/%@",[AppConfig config].btcHash,self.urlString]]]];
             }

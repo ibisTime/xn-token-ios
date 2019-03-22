@@ -183,6 +183,54 @@ public class EthCrypto: NSObject
         
     }
     
+//    static public func contractaddress(address: String) -> String? {
+//
+//        var contractaddress : String!
+//        //        txHash = "";
+//        do{
+////            let keystore = try! BIP32Keystore(mnemonics: mnemonic, password: "BANKEXFOUNDATION", mnemonicsPassword: "")
+////            //            正式环境
+////            //            let web3Rinkeby = Web3.InfuraMainnetWeb3()
+////
+////            //            测试环境
+////            //             let web3Rinkeby = Web3.InfuraRinkebyWeb3()
+////            let keystoreManager = KeystoreManager.init([keystore!])
+////            web3Rinkeby.addKeystoreManager(keystoreManager)
+////
+////            var options = Web3Options.defaultOptions()
+////            options.gasLimit = BigUInt(21000)
+////            options.gasPrice = BigUInt(gasPrice)
+////            options.from = keystore?.addresses?.first!
+////            let am = BigUInt.init(amount)
+////            options.value = am
+////            let toaddress = EthereumAddress(to)
+////            if toaddress == nil {
+////                return "请输入正确地址"
+////            }
+////
+////
+////            let intermediateSend = web3Rinkeby.contract(Web3.Utils.coldWalletABI, at: toaddress, abiVersion: 2)!.method(options: options)!
+////            let sendResult = intermediateSend.send(password: "BANKEXFOUNDATION")
+////            switch sendResult {
+////            case .success(let r):
+////                print("Sucess",r.values.first as Any)
+////                txHash=r.values.first as Any as! String
+////            //todo 返回交易hash
+////            case .failure(let err):
+////                print("Eroor",err)
+////            }
+////            if txHash != nil {
+////                txHash =  "1"
+////            } else {
+////                txHash = "0"
+////            }
+//
+//        }
+//
+//        return txHash;
+//
+//    }
+    
     //发送ETH交易（签名并广播）
     static public func sendTransaction(mnemonic: String, to: String, amount: String, gasPrice: String, gasLimit: String) -> String? {
         
@@ -200,7 +248,7 @@ public class EthCrypto: NSObject
             web3Rinkeby.addKeystoreManager(keystoreManager)
             
             var options = Web3Options.defaultOptions()
-            options.gasLimit = BigUInt(21000)
+            options.gasLimit = BigUInt(gasLimit)
             options.gasPrice = BigUInt(gasPrice)
             options.from = keystore?.addresses?.first!
             let am = BigUInt.init(amount)
@@ -316,7 +364,7 @@ public class EthCrypto: NSObject
             
             var options = Web3Options.defaultOptions()
             options.Txtype = BigUInt(1)
-            options.gasLimit = BigUInt(21000)
+            options.gasLimit = BigUInt(gasLimit)
             options.gasPrice = BigUInt(gasPrice)
             options.from = keystore?.addresses?.first!
             let am = BigUInt.init(amount)
@@ -325,8 +373,6 @@ public class EthCrypto: NSObject
             if toaddress == nil {
                 return "请输入正确地址"
             }
-            
-            
             let intermediateSend = web3wan?.contract(Web3.Utils.coldWalletABI, at: toaddress, abiVersion: 2)!.method(options: options)!
             let sendResult = intermediateSend?.send(password: "BANKEXFOUNDATION")
             switch sendResult {
@@ -375,7 +421,7 @@ public class EthCrypto: NSObject
             
             var options = Web3Options.defaultOptions()
 //            options.Txtype = BigUInt(1)
-            options.gasLimit = BigUInt(21000)
+            options.gasLimit = BigUInt(gasLimit)
             options.gasPrice = BigUInt(gasPrice)
             options.from = keystore?.addresses?.first!
             let am = BigUInt.init(amount)

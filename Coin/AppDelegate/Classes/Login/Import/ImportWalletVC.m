@@ -75,19 +75,19 @@
     [self.view addSubview:confirmBtn];
     
     
-//    UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
-//    NSLog(@"%@",pasteboard.string);
-//    NSArray  *array = [pasteboard.string componentsSeparatedByString:@" "];
-//    if (array.count == 12) {
-//        [TLAlert alertWithTitle:[LangSwitcher switchLang:@"提示" key:nil] msg:[LangSwitcher switchLang:@"检测到您的剪切板内包含助记词,是否导入" key:nil] confirmMsg:[LangSwitcher switchLang:@"是" key:nil] cancleMsg:[LangSwitcher switchLang:@"否" key:nil] cancle:^(UIAlertAction *action) {
-//
-//        } confirm:^(UIAlertAction *action) {
-//            for (int i =0; i < array.count; i ++) {
-//                UITextField *textField1 = [self.view viewWithTag:100 + i];
-//                textField1.text = [NSString stringWithFormat:@"%@",array[i]];
-//            }
-//        }];
-//    }
+    UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+    NSLog(@"%@",pasteboard.string);
+    NSArray  *array = [pasteboard.string componentsSeparatedByString:@" "];
+    if (array.count == 12) {
+        [TLAlert alertWithTitle:[LangSwitcher switchLang:@"提示" key:nil] msg:[LangSwitcher switchLang:@"检测到您的剪切板内包含助记词,是否导入" key:nil] confirmMsg:[LangSwitcher switchLang:@"是" key:nil] cancleMsg:[LangSwitcher switchLang:@"否" key:nil] cancle:^(UIAlertAction *action) {
+
+        } confirm:^(UIAlertAction *action) {
+            for (int i =0; i < array.count; i ++) {
+                UITextField *textField1 = [self.view viewWithTag:100 + i];
+                textField1.text = [NSString stringWithFormat:@"%@",array[i]];
+            }
+        }];
+    }
     
 }
 

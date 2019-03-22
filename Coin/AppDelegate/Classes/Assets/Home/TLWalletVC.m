@@ -593,7 +593,8 @@
                 address = [MnemonicUtil getAddressWithPrivateKey:prikey];
                 if (CoinArray.count > 0) {
                     isAccording = [self judgeIsAccording:model.symbol setCoinArray:CoinArray];
-                }else
+                }
+                else
                 {
                     isAccording = @"是";
                 }
