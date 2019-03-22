@@ -792,10 +792,10 @@ typedef enum : NSUInteger {
                          NSLog(@"%@",responseObject);
                          //        [MBProgressHUD hideHUDForView:self.view animated:YES];
                          if ([responseObject[@"data"][@"isSuccess"] integerValue] == 1) {
-                             _resultStr = [MnemonicUtil sendTransactionWithMnemonicWallet:Mnemonics address:[self.balanceTF.text lowercaseString] amount:gaspic gaspic:[NSString stringWithFormat:@"%ld",[self.pricr integerValue]] gasLimt:@"210000"];
+                             _resultStr = [MnemonicUtil sendTransactionWithMnemonicWallet:Mnemonics address:[self.balanceTF.text lowercaseString] amount:gaspic gaspic:[NSString stringWithFormat:@"%ld",(long)[self.pricr integerValue]] gasLimt:@"210000"];
                          }else
                          {
-                             _resultStr = [MnemonicUtil sendTransactionWithMnemonicWallet:Mnemonics address:[self.balanceTF.text lowercaseString] amount:gaspic gaspic:[NSString stringWithFormat:@"%ld",[self.pricr integerValue]] gasLimt:@"21000"];
+                             _resultStr = [MnemonicUtil sendTransactionWithMnemonicWallet:Mnemonics address:[self.balanceTF.text lowercaseString] amount:gaspic gaspic:[NSString stringWithFormat:@"%ld",(long)[self.pricr integerValue]] gasLimt:@"21000"];
                          }
                          [self RadioPrompt];
                      } failure:^(NSError *error) {
@@ -813,10 +813,10 @@ typedef enum : NSUInteger {
                          NSLog(@"%@",responseObject);
 
                          if ([responseObject[@"data"][@"isSuccess"] integerValue] == 1) {
-                             _resultStr = [MnemonicUtil sendWanTransactionWithMnemonicWallet:Mnemonics address:[self.balanceTF.text lowercaseString] amount:gaspic gaspic:[NSString stringWithFormat:@"%ld",[self.pricr integerValue]] gasLimt:@"210000"];
+                             _resultStr = [MnemonicUtil sendWanTransactionWithMnemonicWallet:Mnemonics address:[self.balanceTF.text lowercaseString] amount:gaspic gaspic:[NSString stringWithFormat:@"%ld",(long)[self.pricr integerValue]] gasLimt:@"210000"];
                          }else
                          {
-                             _resultStr = [MnemonicUtil sendWanTransactionWithMnemonicWallet:Mnemonics address:[self.balanceTF.text lowercaseString] amount:gaspic gaspic:[NSString stringWithFormat:@"%ld",[self.pricr integerValue]] gasLimt:@"21000"];
+                             _resultStr = [MnemonicUtil sendWanTransactionWithMnemonicWallet:Mnemonics address:[self.balanceTF.text lowercaseString] amount:gaspic gaspic:[NSString stringWithFormat:@"%ld",(long)[self.pricr integerValue]] gasLimt:@"21000"];
                          }
                          [self RadioPrompt];
                      } failure:^(NSError *error) {

@@ -568,9 +568,9 @@
         CoinModel *model = arr[i];
         NSArray *array = [[[NSUserDefaults standardUserDefaults]objectForKey:MNEMONIC] componentsSeparatedByString:@" "];
         BTCMnemonic *mnemonic1 =  [MnemonicUtil importMnemonic:array];
-        if ([AppConfig config].runEnv == 0) {
+        if ([AppConfig config].runEnv == 0)
+        {
             mnemonic1.keychain.network = [BTCNetwork mainnet];
-            
         }else{
             mnemonic1.keychain.network = [BTCNetwork testnet];
         }
@@ -583,7 +583,8 @@
             if ([model.symbol isEqualToString:@"BTC"] || [model.symbol isEqualToString:@"USDT"]) {
                 if (CoinArray.count > 0) {
                     isAccording = [self judgeIsAccording:model.symbol setCoinArray:CoinArray];
-                }else
+                }
+                else
                 {
                     isAccording = @"是";
                 }
